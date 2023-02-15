@@ -1,7 +1,5 @@
-package com.example.mango.restservice
+package com.example.mango.api
 
-import com.example.mango.api.Greeting
-import com.example.mango.api.GreetingController
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
