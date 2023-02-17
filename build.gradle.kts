@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.plugin.spring)
     alias(libs.plugins.spotless)
+    alias(libs.plugins.testLogger)
 }
 
 group = "com.example"
