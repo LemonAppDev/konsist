@@ -1,0 +1,5 @@
+# Mango
+
+Run spotless:
+- `./gradlew spotlessApply` - apply formatting
+- `./gradlew spotlessCheck` - check formatting

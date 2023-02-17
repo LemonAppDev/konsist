@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.spring.dependencyManagement)
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.plugin.spring)
+    alias(libs.plugins.spotless)
 }
 
 group = "com.example"
@@ -35,4 +36,13 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+spotless {
+    kotlin {
+        ktlint()
+
+        indentWithSpaces()
+        endWithNewline()
+    }
 }
