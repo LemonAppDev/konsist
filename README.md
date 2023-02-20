@@ -6,4 +6,4 @@ Run spotless:
 
 Run detekt:
 - `./gradlew detektCheck` - checks that sourcecode satisfies detekt rules.
-- `./gradlew detektApply` - applies detket code formatting rules to sourcecode in-place.
+- `./gradlew detektApply` - applies detekt code formatting rules to sourcecode in-place.
