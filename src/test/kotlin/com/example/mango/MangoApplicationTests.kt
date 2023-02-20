@@ -8,5 +8,6 @@ class MangoApplicationTests {
 
     @Test
     fun contextLoads() {
+        // Check DI config
     }
 }

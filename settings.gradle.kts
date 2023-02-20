@@ -11,6 +11,7 @@ dependencyResolutionManagement {
             plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").version(kotlinVersion)
             plugin("spotless", "com.diffplug.spotless").version("6.15.0")
             plugin("testLogger", "com.adarshr.test-logger").version("3.2.0")
+            plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.22.0")
 
             library("kotlin-reflect", "org.jetbrains.kotlin", "kotlin-reflect").withoutVersion()
             library("kotlin-stdlib-jdk8", "org.jetbrains.kotlin", "kotlin-stdlib-jdk8").withoutVersion()

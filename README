@@ -1,5 +1,9 @@
 # Mango
 
 Run spotless:
-- `./gradlew spotlessApply` - apply formatting
-- `./gradlew spotlessCheck` - check formatting
+- `./gradlew spotlessCheck` - checks that sourcecode satisfies formatting steps.
+- `./gradlew spotlessApply` - applies code formatting steps to sourcecode in-place.
+
+Run detekt:
+- `./gradlew detektCheck` - checks that sourcecode satisfies detekt rules.
+- `./gradlew detektApply` - applies detket code formatting rules to sourcecode in-place.

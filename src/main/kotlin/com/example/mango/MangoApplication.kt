@@ -7,5 +7,6 @@ import org.springframework.boot.runApplication
 class MangoApplication
 
 fun main(args: Array<String>) {
+    @Suppress("detekt.SpreadOperator")
     runApplication<MangoApplication>(*args)
 }
