@@ -3,12 +3,12 @@ rootProject.name = "mango"
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            val kotlinVersion = "1.8.10"
+            version("kotlinVersion", "1.8.10")
 
             plugin("springframework-boot", "org.springframework.boot").version("3.0.2")
             plugin("spring-dependencyManagement", "io.spring.dependency-management").version("1.1.0")
-            plugin("kotlin-plugin-spring", "org.jetbrains.kotlin.plugin.spring").version(kotlinVersion)
-            plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").version(kotlinVersion)
+            plugin("kotlin-plugin-spring", "org.jetbrains.kotlin.plugin.spring").versionRef("kotlinVersion")
+            plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").versionRef("kotlinVersion")
             plugin("spotless", "com.diffplug.spotless").version("6.15.0")
             plugin("testLogger", "com.adarshr.test-logger").version("3.2.0")
             plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.22.0")
