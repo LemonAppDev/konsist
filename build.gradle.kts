@@ -29,6 +29,7 @@ dependencies {
     testImplementation(libs.spring.boot.starter.test)
     testImplementation(libs.junitJupiterEngine)
     testImplementation(libs.kluent)
+    testImplementation(libs.mockk)
 }
 
 tasks.withType<KotlinCompile> {
