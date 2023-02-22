@@ -10,14 +10,10 @@ enum class Priority(private val value: Int) {
     ;
 
     companion object {
-        fun getByValue(value: Int?): Priority? {
-            return if (value != null) {
-                Priority.values().firstOrNull {
-                    it.value == value
-                } ?: throw IllegalArgumentException("Invalid priority value: $value ")
-            } else {
-                null
-            }
+        fun getByValue(value: Int?): Priority {
+            return Priority.values().firstOrNull {
+                it.value == value
+            } ?: throw IllegalArgumentException("Invalid priority value: $value ")
         }
     }
 }

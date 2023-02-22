@@ -1,9 +1,19 @@
 package com.example.mango.data.repository
 
 import com.example.mango.data.factory.LocalDateTimeFactory
+import com.example.mango.data.factory.TaskActivityItemFactory
 import com.example.mango.data.model.Priority
 import com.example.mango.data.model.Task
 import com.example.mango.data.model.User
+import com.example.mango.data.model.activity.CompleteTaskLog
+import com.example.mango.data.model.activity.UpdateTaskAssigneeIdLog
+import com.example.mango.data.model.activity.UpdateTaskDescriptionLog
+import com.example.mango.data.model.activity.UpdateTaskDueDateLog
+import com.example.mango.data.model.activity.UpdateTaskNameLog
+import com.example.mango.data.model.activity.UpdateTaskParentIdLog
+import com.example.mango.data.model.activity.UpdateTaskPriorityLog
+import com.example.mango.data.model.activity.UpdateTaskProjectIdLog
+import com.example.mango.data.model.activity.UpdateTaskTargetDateLog
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -17,10 +27,12 @@ import java.time.Month
 
 internal class TaskRepositoryTest {
     private val localDateTimeFactory = mockk<LocalDateTimeFactory>()
+    private val taskActivityItemFactory = mockk<TaskActivityItemFactory>()
     private val userRepository = mockk<UserRepository>()
 
     private val sut = TaskRepository(
         localDateTimeFactory,
+        taskActivityItemFactory,
         userRepository,
     )
 
@@ -38,14 +50,15 @@ internal class TaskRepositoryTest {
         assigneeId: Int? = 6,
         completeDate: LocalDateTime? = null,
     ): Task {
-        val creationDate = null
-
         val user = mockk<User>()
         every { user.id } returns userId
-
         every { userRepository.getUser(userId) } returns user
 
-        sut.addTask(
+        val creationDate = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+        every { localDateTimeFactory.create() } returns creationDate
+        every { taskActivityItemFactory.createCreateTaskLog(userId, creationDate) } returns mockk()
+
+        sut.createTask(
             userId,
             name,
             description,
@@ -74,23 +87,26 @@ internal class TaskRepositoryTest {
     }
 
     @Test
-    fun `addTask() add new task to tasks`() {
+    fun `createTask() add new task to tasks`() {
         // given
         val taskId = 1
         val userId = 2
-        val creationDate = null
         val name = "name"
         val description = "description"
         val dueDate = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
         val targetDate = LocalDateTime.of(2022, Month.APRIL, 17, 10, 55)
         val priorityId = 3
         val projectId = 4
-        val parentId = null
+        val parentTaskId = null
         val assigneeId = 6
 
         val user = mockk<User>()
         every { user.id } returns userId
         every { userRepository.getUser(userId) } returns user
+
+        val creationDate = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+        every { localDateTimeFactory.create() } returns creationDate
+        every { taskActivityItemFactory.createCreateTaskLog(userId, creationDate) } returns mockk()
 
         val task = Task(
             taskId,
@@ -102,12 +118,12 @@ internal class TaskRepositoryTest {
             targetDate,
             Priority.getByValue(priorityId),
             projectId,
-            parentId,
+            parentTaskId,
             assigneeId,
         )
 
         // when
-        sut.addTask(
+        sut.createTask(
             userId,
             name,
             description,
@@ -115,7 +131,7 @@ internal class TaskRepositoryTest {
             targetDate,
             priorityId,
             projectId,
-            parentId,
+            parentTaskId,
             assigneeId,
         )
 
@@ -165,12 +181,17 @@ internal class TaskRepositoryTest {
             name = oldName,
         )
 
+        val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+        every { taskActivityItemFactory.createUpdateTaskNameLog(userId, date, oldName, updName) } returns mockk()
+
         // when
         sut.updateTask(userId = userId, taskId = taskId, name = updName)
 
         // then
-        val updatedTask = sut.getTasks(userId).first { it.id == taskId }
-        updatedTask.name shouldBeEqualTo updName
+        val actual = sut.getTasks(userId)
+            .first { it.id == taskId }
+            .name
+        actual shouldBeEqualTo updName
     }
 
     @Test
@@ -187,12 +208,327 @@ internal class TaskRepositoryTest {
             projectId = firstProjectId,
         )
 
+        val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+        every {
+            taskActivityItemFactory.createUpdateTaskProjectIdLog(userId, date, firstProjectId, updProjectId)
+        } returns mockk()
+
         // when
         sut.updateTask(userId = userId, taskId = taskId, projectId = updProjectId)
 
         // then
-        val updatedTask = sut.getTasks(userId).first { it.id == taskId }
-        updatedTask.projectId shouldBeEqualTo updProjectId
+        val actual = sut.getTasks(userId)
+            .first { it.id == taskId }
+            .projectId
+        actual shouldBeEqualTo updProjectId
+    }
+
+    @Test
+    fun `updateTask() add log when name is updated`() {
+        // given
+        val oldName = "old name"
+        val updName = "new name"
+        val taskId = 1
+        val userId = 2
+
+        givenTaskIsAdded(
+            taskId = taskId,
+            userId = userId,
+            name = oldName,
+        )
+
+        val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+        val updateTaskNameLog = UpdateTaskNameLog(userId, date, oldName, updName)
+        every {
+            taskActivityItemFactory.createUpdateTaskNameLog(userId, date, oldName, updName)
+        } returns updateTaskNameLog
+
+        // when
+        sut.updateTask(userId = userId, taskId = taskId, name = updName)
+
+        // then
+        val actual = sut.getTasks(userId)
+            .first { it.id == taskId }
+            .allLogs
+        actual shouldContain updateTaskNameLog
+    }
+
+    @Test
+    fun `updateTask() add log when description is updated`() {
+        // given
+        val oldDescription = "old description"
+        val updDescription = "new description"
+        val taskId = 1
+        val userId = 2
+
+        givenTaskIsAdded(
+            taskId = taskId,
+            userId = userId,
+            description = oldDescription,
+        )
+
+        val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+        val updateTaskDescriptionLog = UpdateTaskDescriptionLog(userId, date, oldDescription, updDescription)
+        every {
+            taskActivityItemFactory.createUpdateTaskDescriptionLog(userId, date, oldDescription, updDescription)
+        } returns updateTaskDescriptionLog
+
+        // when
+        sut.updateTask(userId = userId, taskId = taskId, description = updDescription)
+
+        // then
+        val actual = sut.getTasks(userId)
+            .first { it.id == taskId }
+            .allLogs
+        actual shouldContain updateTaskDescriptionLog
+    }
+
+    @Test
+    fun `updateTask() add log when dueData is updated`() {
+        // given
+        val oldDueDate = LocalDateTime.of(2022, Month.APRIL, 14, 10, 55)
+        val updDueDate = LocalDateTime.of(2022, Month.APRIL, 20, 10, 55)
+        val taskId = 1
+        val userId = 2
+
+        givenTaskIsAdded(
+            taskId = taskId,
+            userId = userId,
+            dueDate = oldDueDate,
+        )
+
+        val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+
+        val updateTaskDueDateLog = UpdateTaskDueDateLog(userId, oldDueDate, oldDueDate, updDueDate)
+        every {
+            taskActivityItemFactory.createUpdateTaskDueDateLog(userId, date, oldDueDate, updDueDate)
+        } returns updateTaskDueDateLog
+
+        // when
+        sut.updateTask(userId = userId, taskId = taskId, dueDate = updDueDate)
+
+        // then
+        val actual = sut.getTasks(userId)
+            .first { it.id == taskId }
+            .allLogs
+        actual shouldContain updateTaskDueDateLog
+    }
+
+    @Test
+    fun `updateTask() add log when targetData is updated`() {
+        // given
+        val oldTargetDate = LocalDateTime.of(2022, Month.APRIL, 14, 10, 55)
+        val updTargetDate = LocalDateTime.of(2022, Month.APRIL, 20, 10, 55)
+        val taskId = 1
+        val userId = 2
+
+        givenTaskIsAdded(
+            taskId = taskId,
+            userId = userId,
+            targetDate = oldTargetDate,
+        )
+
+        val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+
+        val updateTaskTargetDateLog = UpdateTaskTargetDateLog(userId, oldTargetDate, oldTargetDate, updTargetDate)
+        every {
+            taskActivityItemFactory.createUpdateTaskTargetDateLog(userId, date, oldTargetDate, updTargetDate)
+        } returns updateTaskTargetDateLog
+
+        // when
+        sut.updateTask(userId = userId, taskId = taskId, targetDate = updTargetDate)
+
+        // then
+        val actual = sut.getTasks(userId)
+            .first { it.id == taskId }
+            .allLogs
+        actual shouldContain updateTaskTargetDateLog
+    }
+
+    @Test
+    fun `updateTask() add log when priority is updated`() {
+        // given
+        val oldPriorityId = 1
+        val oldPriority = Priority.getByValue(oldPriorityId)
+        val updPriorityId = 2
+        val updPriority = Priority.getByValue(updPriorityId)
+        val taskId = 1
+        val userId = 2
+
+        givenTaskIsAdded(
+            taskId = taskId,
+            userId = userId,
+            priorityId = oldPriorityId,
+        )
+
+        val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+        val updateTaskPriorityLog = UpdateTaskPriorityLog(userId, date, oldPriority, updPriority)
+        every {
+            taskActivityItemFactory.createUpdateTaskPriorityLog(userId, date, oldPriority, updPriority)
+        } returns updateTaskPriorityLog
+
+        // when
+        sut.updateTask(userId = userId, taskId = taskId, priorityId = updPriorityId)
+
+        // then
+        val actual = sut.getTasks(userId)
+            .first { it.id == taskId }
+            .allLogs
+        actual shouldContain updateTaskPriorityLog
+    }
+
+    @Test
+    fun `updateTask() add log when projectId is updated`() {
+        // given
+        val oldProjectId = 1
+        val updProjectId = 2
+        val taskId = 1
+        val userId = 2
+
+        givenTaskIsAdded(
+            taskId = taskId,
+            userId = userId,
+            projectId = oldProjectId,
+        )
+
+        val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+        val updateTaskProjectIdLog = UpdateTaskProjectIdLog(userId, date, oldProjectId, updProjectId)
+        every {
+            taskActivityItemFactory.createUpdateTaskProjectIdLog(userId, date, oldProjectId, updProjectId)
+        } returns updateTaskProjectIdLog
+
+        // when
+        sut.updateTask(userId = userId, taskId = taskId, projectId = updProjectId)
+
+        // then
+        val actual = sut.getTasks(userId)
+            .first { it.id == taskId }
+            .allLogs
+        actual shouldContain updateTaskProjectIdLog
+    }
+
+    @Test
+    fun `updateTask() add log when parentId is updated`() {
+        // given
+        val oldParentId = null
+        val updParentId = 1
+        val taskId = 1
+        val userId = 2
+
+        givenTaskIsAdded(
+            taskId = taskId,
+            userId = userId,
+            parentId = oldParentId,
+        )
+
+        val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+        val updateTaskParentIdLog = UpdateTaskParentIdLog(userId, date, oldParentId, updParentId)
+        every {
+            taskActivityItemFactory.createUpdateTaskParentIdLog(userId, date, oldParentId, updParentId)
+        } returns updateTaskParentIdLog
+
+        // when
+        sut.updateTask(userId = userId, taskId = taskId, parentTaskId = updParentId)
+
+        // then
+        val actual = sut.getTasks(userId)
+            .first { it.id == taskId }
+            .allLogs
+        actual shouldContain updateTaskParentIdLog
+    }
+
+    @Test
+    fun `updateTask() add log when assigneeId is updated`() {
+        // given
+        val oldAssigneeId = null
+        val updAssigneeId = 1
+        val taskId = 1
+        val userId = 2
+
+        givenTaskIsAdded(
+            taskId = taskId,
+            userId = userId,
+            assigneeId = oldAssigneeId,
+        )
+
+        val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+        val updateTaskAssigneeIdLog = UpdateTaskAssigneeIdLog(userId, date, oldAssigneeId, updAssigneeId)
+        every {
+            taskActivityItemFactory.createUpdateTaskAssigneeIdLog(userId, date, oldAssigneeId, updAssigneeId)
+        } returns updateTaskAssigneeIdLog
+
+        // when
+        sut.updateTask(userId = userId, taskId = taskId, assigneeId = updAssigneeId)
+
+        // then
+        val actual = sut.getTasks(userId)
+            .first { it.id == taskId }
+            .allLogs
+        actual shouldContain updateTaskAssigneeIdLog
+    }
+
+    @Test
+    fun `updateTask() add log when task is marked as complete`() {
+        // given
+        val isCompleted = true
+        val taskId = 1
+        val userId = 2
+        val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+
+        givenTaskIsAdded(
+            taskId = taskId,
+            userId = userId,
+            completeDate = date,
+        )
+
+        val completeTaskLog = CompleteTaskLog(userId, date)
+        every {
+            taskActivityItemFactory.createCompleteTaskLog(userId, date)
+        } returns completeTaskLog
+
+        // when
+        sut.updateTask(userId = userId, taskId = taskId, isCompleted = isCompleted)
+
+        // then
+        val actual = sut.getTasks(userId)
+            .first { it.id == taskId }
+            .allLogs
+        actual shouldContain completeTaskLog
+    }
+
+    @Test
+    fun `updateTask() add two logs when name and project are updated`() {
+        // given
+        val oldName = "old name"
+        val updName = "new name"
+        val taskId = 1
+        val userId = 2
+        val firstProjectId = 3
+        val updProjectId = 4
+
+        givenTaskIsAdded(
+            taskId = taskId,
+            userId = userId,
+            name = oldName,
+            projectId = firstProjectId,
+        )
+
+        val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
+        val updateTaskNameLog = UpdateTaskNameLog(userId, date, oldName, updName)
+        every {
+            taskActivityItemFactory.createUpdateTaskNameLog(userId, date, oldName, updName)
+        } returns updateTaskNameLog
+        val updateTaskProjectIdLog = UpdateTaskProjectIdLog(userId, date, firstProjectId, updProjectId)
+        every {
+            taskActivityItemFactory.createUpdateTaskProjectIdLog(userId, date, firstProjectId, updProjectId)
+        } returns updateTaskProjectIdLog
+
+        // when
+        sut.updateTask(userId = userId, taskId = taskId, name = updName, projectId = updProjectId)
+
+        // then
+        val actual = sut.getTasks(userId).first { it.id == taskId }.allLogs
+        actual shouldContain updateTaskNameLog shouldContain updateTaskProjectIdLog
     }
 
     @Test
@@ -208,7 +544,7 @@ internal class TaskRepositoryTest {
         val actual = { sut.updateTask(userId = userId, taskId = taskId) }
 
         // then
-        actual shouldThrow Exception::class withMessage "Task with id: $taskId doesn't exist"
+        actual shouldThrow Exception::class withMessage "Task not found, taskId: $taskId"
     }
 
     @Test
@@ -310,7 +646,7 @@ internal class TaskRepositoryTest {
             firstTask.targetDate,
             firstTask.priority,
             firstTask.projectId,
-            firstTask.parentId,
+            firstTask.parentTaskId,
             firstTask.assigneeId,
             firstTask.completeDate,
         )
@@ -344,7 +680,7 @@ internal class TaskRepositoryTest {
             firstTask.targetDate,
             firstTask.priority,
             firstTask.projectId,
-            firstTask.parentId,
+            firstTask.parentTaskId,
             firstTask.assigneeId,
             firstTask.completeDate,
         )

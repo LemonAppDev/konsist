@@ -38,7 +38,7 @@ internal class TaskControllerTest {
         every { userRepository.getUser(authToken) } returns user
 
         justRun {
-            taskRepository.addTask(
+            taskRepository.createTask(
                 userId,
                 name,
                 description,
@@ -59,14 +59,14 @@ internal class TaskControllerTest {
             targetDate = targetDate,
             priorityId = priorityId,
             projectId = projectId,
-            parentId = parentId,
+            parentTaskId = parentId,
             assigneeId = assigneeId,
             authToken = authToken,
         )
 
         // then
         verify {
-            taskRepository.addTask(
+            taskRepository.createTask(
                 userId,
                 name,
                 description,
@@ -130,7 +130,7 @@ internal class TaskControllerTest {
         val projectId = 1
         val parentId = 2
         val assigneeId = 3
-        val completeDate = LocalDateTime.of(2022, Month.APRIL, 12, 10, 55)
+        val isCompleted = true
         val authToken = "authToken"
 
         val user = mockk<User>()
@@ -149,7 +149,7 @@ internal class TaskControllerTest {
                 projectId,
                 parentId,
                 assigneeId,
-                completeDate,
+                isCompleted,
             )
         }
 
@@ -164,7 +164,7 @@ internal class TaskControllerTest {
             projectId,
             parentId,
             assigneeId,
-            completeDate,
+            isCompleted,
             authToken,
         )
 
@@ -181,7 +181,7 @@ internal class TaskControllerTest {
                 projectId,
                 parentId,
                 assigneeId,
-                completeDate,
+                isCompleted,
             )
         }
     }

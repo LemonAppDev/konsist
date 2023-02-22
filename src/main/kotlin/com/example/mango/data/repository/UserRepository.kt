@@ -5,10 +5,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class UserRepository {
-    private val users = mutableListOf(
-        User(1, "Natalia", "abcd"),
-        User(2, "Lukasz", "abc"),
-    )
+    private val users = mutableListOf<User>()
 
     fun getUser(authToken: String): User = users.first {
         it.authToken == authToken

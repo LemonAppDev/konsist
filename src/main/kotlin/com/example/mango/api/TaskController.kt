@@ -22,14 +22,14 @@ class TaskController(
         @RequestParam(value = "targetdate") targetDate: LocalDateTime? = null,
         @RequestParam(value = "priority") priorityId: Int? = null,
         @RequestParam(value = "projectid") projectId: Int?,
-        @RequestParam(value = "parentid") parentId: Int? = null,
+        @RequestParam(value = "parenttaskid") parentTaskId: Int? = null,
         @RequestParam(value = "assigneeid") assigneeId: Int? = null,
         @RequestParam(value = "authToken", required = true) authToken: String,
     ) {
         val user = userRepository.getUser(authToken)
 
-        taskRepository.addTask(
-            user.id, name, description, dueDate, targetDate, priorityId, projectId, parentId, assigneeId,
+        taskRepository.createTask(
+            user.id, name, description, dueDate, targetDate, priorityId, projectId, parentTaskId, assigneeId,
         )
     }
 
@@ -55,30 +55,30 @@ class TaskController(
     @Suppress("detekt.LongParameterList")
     @GetMapping("/update-task")
     fun updateTask(
-        @RequestParam(value = "id", required = true) id: Int,
+        @RequestParam(value = "id", required = true) taskId: Int,
         @RequestParam(value = "name") name: String? = null,
         @RequestParam(value = "description") description: String? = null,
         @RequestParam(value = "duedata") dueDate: LocalDateTime? = null,
         @RequestParam(value = "targetdate") targetDate: LocalDateTime? = null,
         @RequestParam(value = "priority") priorityId: Int? = null,
         @RequestParam(value = "projectid") projectId: Int? = null,
-        @RequestParam(value = "parentid") parentId: Int? = null,
+        @RequestParam(value = "parenttaskid") parentTaskId: Int? = null,
         @RequestParam(value = "assigneeid") assigneeId: Int? = null,
-        @RequestParam(value = "completedate") completeDate: LocalDateTime? = null,
+        @RequestParam(value = "completedate") completeDate: Boolean = false,
         @RequestParam(value = "authtoken", required = true) authToken: String,
     ) {
         val user = userRepository.getUser(authToken)
 
         taskRepository.updateTask(
             user.id,
-            id,
+            taskId,
             name,
             description,
             dueDate,
             targetDate,
             priorityId,
             projectId,
-            parentId,
+            parentTaskId,
             assigneeId,
             completeDate,
         )
