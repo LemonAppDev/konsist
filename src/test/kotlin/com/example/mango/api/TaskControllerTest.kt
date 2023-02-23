@@ -29,7 +29,7 @@ internal class TaskControllerTest {
         val targetDate = LocalDateTime.of(2022, Month.APRIL, 17, 10, 55)
         val priorityId = 3
         val projectId = 4
-        val parentId = 5
+        val parentTaskId = 5
         val assigneeId = 6
         val authToken = "authToken"
 
@@ -46,7 +46,7 @@ internal class TaskControllerTest {
                 targetDate,
                 priorityId,
                 projectId,
-                parentId,
+                parentTaskId,
                 assigneeId,
             )
         }
@@ -59,7 +59,7 @@ internal class TaskControllerTest {
             targetDate = targetDate,
             priorityId = priorityId,
             projectId = projectId,
-            parentTaskId = parentId,
+            parentTaskId = parentTaskId,
             assigneeId = assigneeId,
             authToken = authToken,
         )
@@ -74,7 +74,7 @@ internal class TaskControllerTest {
                 targetDate,
                 priorityId,
                 projectId,
-                parentId,
+                parentTaskId,
                 assigneeId,
             )
         }
@@ -128,7 +128,7 @@ internal class TaskControllerTest {
         val targetDate = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
         val priorityId = 5
         val projectId = 1
-        val parentId = 2
+        val parentTaskId = 2
         val assigneeId = 3
         val isCompleted = true
         val authToken = "authToken"
@@ -147,7 +147,7 @@ internal class TaskControllerTest {
                 targetDate,
                 priorityId,
                 projectId,
-                parentId,
+                parentTaskId,
                 assigneeId,
                 isCompleted,
             )
@@ -162,7 +162,7 @@ internal class TaskControllerTest {
             targetDate,
             priorityId,
             projectId,
-            parentId,
+            parentTaskId,
             assigneeId,
             isCompleted,
             authToken,
@@ -179,7 +179,7 @@ internal class TaskControllerTest {
                 targetDate,
                 priorityId,
                 projectId,
-                parentId,
+                parentTaskId,
                 assigneeId,
                 isCompleted,
             )

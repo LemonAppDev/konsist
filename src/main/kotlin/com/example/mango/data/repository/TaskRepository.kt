@@ -315,8 +315,8 @@ class TaskRepository(
 
         val parentTask = tasks.firstOrNull { it.id == parentTaskId }
 
-        requireNotNull(parentTask) { "Incorrect parentId $parentTaskId" }
+        requireNotNull(parentTask) { "Incorrect parentTaskId $parentTaskId" }
 
-        parentTask.addSubtask(taskId)
+        parentTask.addChild(taskId)
     }
 }

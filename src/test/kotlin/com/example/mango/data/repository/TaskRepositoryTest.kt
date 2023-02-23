@@ -46,7 +46,7 @@ internal class TaskRepositoryTest {
         targetDate: LocalDateTime? = LocalDateTime.of(2022, Month.APRIL, 17, 10, 55),
         priorityId: Int? = 3,
         projectId: Int? = 4,
-        parentId: Int? = null,
+        parentTaskId: Int? = null,
         assigneeId: Int? = 6,
         completeDate: LocalDateTime? = null,
     ): Task {
@@ -66,7 +66,7 @@ internal class TaskRepositoryTest {
             targetDate,
             priorityId,
             projectId,
-            parentId,
+            parentTaskId,
             assigneeId,
         )
 
@@ -80,7 +80,7 @@ internal class TaskRepositoryTest {
             targetDate,
             Priority.getByValue(priorityId),
             projectId,
-            parentId,
+            parentTaskId,
             assigneeId,
             completeDate,
         )
@@ -408,27 +408,27 @@ internal class TaskRepositoryTest {
     }
 
     @Test
-    fun `updateTask() add log when parentId is updated`() {
+    fun `updateTask() add log when parentTaskId is updated`() {
         // given
-        val oldParentId = null
-        val updParentId = 1
+        val oldParentTaskId = null
+        val updParentTaskId = 1
         val taskId = 1
         val userId = 2
 
         givenTaskIsAdded(
             taskId = taskId,
             userId = userId,
-            parentId = oldParentId,
+            parentTaskId = oldParentTaskId,
         )
 
         val date = LocalDateTime.of(2022, Month.APRIL, 16, 10, 55)
-        val updateTaskParentIdLog = UpdateTaskParentIdLog(userId, date, oldParentId, updParentId)
+        val updateTaskParentIdLog = UpdateTaskParentIdLog(userId, date, oldParentTaskId, updParentTaskId)
         every {
-            taskActivityItemFactory.createUpdateTaskParentIdLog(userId, date, oldParentId, updParentId)
+            taskActivityItemFactory.createUpdateTaskParentIdLog(userId, date, oldParentTaskId, updParentTaskId)
         } returns updateTaskParentIdLog
 
         // when
-        sut.updateTask(userId = userId, taskId = taskId, parentTaskId = updParentId)
+        sut.updateTask(userId = userId, taskId = taskId, parentTaskId = updParentTaskId)
 
         // then
         val actual = sut.getTasks(userId)
@@ -693,7 +693,7 @@ internal class TaskRepositoryTest {
     }
 
     @Test
-    fun `copyTask() throw exception when parentId is incorrect`() {
+    fun `copyTask() throw exception when parentTaskId is incorrect`() {
         // given
         val userId = 0
         val firstTaskId = 1
@@ -715,15 +715,15 @@ internal class TaskRepositoryTest {
     fun `setParentTask() throw exception when parentTask doesn't exist`() {
         // given
         val userId = 1
-        val parentId = 2
+        val parentTaskId = 2
         val taskId = 3
 
         givenTaskIsAdded(taskId = taskId, userId = userId)
 
         // when
-        val actual = { sut.setParentTask(userId, parentId, taskId) }
+        val actual = { sut.setParentTask(userId, parentTaskId, taskId) }
 
         // then
-        actual shouldThrow Exception::class withMessage "Incorrect parentId $parentId"
+        actual shouldThrow Exception::class withMessage "Incorrect parentTaskId $parentTaskId"
     }
 }

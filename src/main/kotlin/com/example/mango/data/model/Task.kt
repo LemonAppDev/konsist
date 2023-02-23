@@ -17,14 +17,14 @@ data class Task(
     var assigneeId: Int? = null,
     var completeDate: LocalDateTime? = null,
 ) {
-    private val subtasks = mutableListOf<Int>()
+    private val children = mutableListOf<Int>()
     private val logs: MutableList<TaskActivityItem> = mutableListOf()
 
-    val allSubtasks get() = subtasks.toList()
+    val allChildren get() = children.toList()
     val allLogs get() = logs.toList()
 
-    fun addSubtask(subtaskId: Int) {
-        subtasks.add(subtaskId)
+    fun addChild(childTaskId: Int) {
+        children.add(childTaskId)
     }
 
     fun addLog(log: TaskActivityItem) {

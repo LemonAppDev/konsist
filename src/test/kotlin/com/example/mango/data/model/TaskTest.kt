@@ -7,39 +7,39 @@ import org.junit.jupiter.api.Test
 
 internal class TaskTest {
     @Test
-    fun `addSubtask() add subtask to list`() {
+    fun `addChild() add child to list`() {
         // given
-        val parentId = 1
-        val subtaskId = 2
+        val parentTaskId = 1
+        val childTaskId = 2
         val creator = mockk<User>()
         val name = "name"
         val projectId = 3
 
         val sut = Task(
-            id = parentId,
+            id = parentTaskId,
             creator = creator,
             name = name,
             projectId = projectId,
         )
 
         // when
-        sut.addSubtask(subtaskId)
+        sut.addChild(childTaskId)
 
         // then
-        sut.allSubtasks shouldContain subtaskId
+        sut.allChildren shouldContain childTaskId
     }
 
     @Test
     fun `addLog() add log to list`() {
         // given
-        val parentId = 1
+        val parentTaskId = 1
         val creator = mockk<User>()
         val name = "name"
         val projectId = 3
         val log = mockk<TaskActivityItem>()
 
         val sut = Task(
-            id = parentId,
+            id = parentTaskId,
             creator = creator,
             name = name,
             projectId = projectId,
