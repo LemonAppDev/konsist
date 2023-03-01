@@ -1,6 +1,5 @@
-package com.mango.persistence.model
+package com.mango.business.model
 
-import com.mango.business.model.Priority
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -10,18 +9,19 @@ import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class PriorityTest {
+    private val sut = Priority.Companion
 
     @ParameterizedTest(name = "given {1} returns {2}")
     @MethodSource("provideValues")
-    fun `execute`(
+    fun `given value return Priority`(
         value: Int,
         priority: Priority,
     ) {
         // when
-        val sut = Priority.getByValue(value)
+        val actual = sut.getByValue(value)
 
         // then
-        sut shouldBeEqualTo priority
+        actual shouldBeEqualTo priority
     }
 
     companion object {
@@ -42,7 +42,7 @@ class PriorityTest {
         val value = 6
 
         // when
-        val actual = { Priority.getByValue(value) }
+        val actual = { sut.getByValue(value) }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Invalid priority value: $value "
@@ -54,7 +54,7 @@ class PriorityTest {
         val value = null
 
         // when
-        val actual = Priority.getByValue(value)
+        val actual = sut.getByValue(value)
 
         // then
         actual shouldBeEqualTo null

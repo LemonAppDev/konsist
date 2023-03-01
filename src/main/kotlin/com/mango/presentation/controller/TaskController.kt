@@ -1,4 +1,4 @@
-package com.mango.presentation
+package com.mango.presentation.controller
 
 import com.mango.business.model.request.CreateTaskRequestModel
 import com.mango.business.model.request.UpdateTaskRequestModel
@@ -26,8 +26,7 @@ class TaskController(
     private val getTaskActivitiesUseCase: GetTaskActivitiesUseCase,
 ) {
     @PostMapping("/v1/task/create")
-    fun createTask(@RequestBody createTaskRequestModel: CreateTaskRequestModel) =
-        createTaskUseCase(createTaskRequestModel)
+    fun createTask(@RequestBody createTaskRequestModel: CreateTaskRequestModel) = createTaskUseCase(createTaskRequestModel)
 
     @DeleteMapping("/v1/task/delete")
     fun deleteTask(@RequestParam taskId: TaskId) = deleteTaskUseCase(taskId)
@@ -41,7 +40,7 @@ class TaskController(
     }
 
     @PostMapping("/v1/task/duplicate")
-    fun duplicateTask(@RequestParam(name = "taskId") taskId: TaskId) = duplicateTaskUseCase(taskId)
+    fun duplicateTask(@RequestParam(name = "taskId") taskId: TaskId) = duplicateTaskUseCase.invoke(taskId)
 
     @GetMapping("/v1/task/activity")
     fun getTaskActivity(@RequestParam(name = "taskId") taskId: TaskId) = getTaskActivitiesUseCase(taskId)

@@ -18,6 +18,7 @@ dependencyResolutionManagement {
             library("spring-boot-devtools", "org.springframework.boot", "spring-boot-devtools").withoutVersion()
             library("spring-boot-starter-web", "org.springframework.boot", "spring-boot-starter-web").withoutVersion()
             library("jackson", "com.fasterxml.jackson.module", "jackson-module-kotlin").withoutVersion()
+            library("archunit", "com.tngtech.archunit", "archunit-junit5").version("1.0.1")
 
             library("spring-boot-starter-test", "org.springframework.boot", "spring-boot-starter-test").withoutVersion()
             library("junitJupiterEngine", "org.junit.jupiter", "junit-jupiter-engine").version("5.9.2")

@@ -32,6 +32,7 @@ dependencies {
     testImplementation(libs.junitJupiterEngine)
     testImplementation(libs.kluent)
     testImplementation(libs.mockk)
+    testImplementation(libs.archunit)
 }
 
 tasks.withType<KotlinCompile> {
