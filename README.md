@@ -12,6 +12,11 @@ Run detekt:
 - `./gradlew detektCheck` - checks that sourcecode satisfies detekt rules.
 - `./gradlew detektApply` - applies detekt code formatting rules to sourcecode in-place.
 
+
+Run tests (including arch-unit):
+
+- `./gradlew test` - run all tests.
+
 ## Architecture
 
 [Diagram](https://www.figma.com/file/NiWGr0P77zPfTxJGlDxngQ/Mango-Architecture?node-id=0%3A1&t=ThfL1SACFRYtODpq-1)
