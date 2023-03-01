@@ -1,4 +1,4 @@
-name: run unit test
+name: run unit tests and arch-unit tests
 
 on:
   push:
