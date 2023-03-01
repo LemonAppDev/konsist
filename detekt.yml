@@ -526,7 +526,6 @@ style:
     active: true
     values:
       - 'FIXME:'
-      - 'STOPSHIP:'
       - 'TODO:'
     allowedPatterns: ''
     customMessage: ''

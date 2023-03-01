@@ -26,6 +26,8 @@ dependencies {
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.stdlib.jdk8)
 
+    compileOnly(libs.spring.boot.devtools)
+
     testImplementation(libs.spring.boot.starter.test)
     testImplementation(libs.junitJupiterEngine)
     testImplementation(libs.kluent)

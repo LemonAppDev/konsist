@@ -15,6 +15,7 @@ dependencyResolutionManagement {
 
             library("kotlin-reflect", "org.jetbrains.kotlin", "kotlin-reflect").withoutVersion()
             library("kotlin-stdlib-jdk8", "org.jetbrains.kotlin", "kotlin-stdlib-jdk8").withoutVersion()
+            library("spring-boot-devtools", "org.springframework.boot", "spring-boot-devtools").withoutVersion()
             library("spring-boot-starter-web", "org.springframework.boot", "spring-boot-starter-web").withoutVersion()
             library("jackson", "com.fasterxml.jackson.module", "jackson-module-kotlin").withoutVersion()
 
