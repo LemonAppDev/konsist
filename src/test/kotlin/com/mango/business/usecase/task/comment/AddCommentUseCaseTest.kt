@@ -68,13 +68,7 @@ class AddCommentUseCaseTest {
         val text = "comment"
         every { comment.text } returns text
         every { comment.creationDate } returns date
-        every {
-            commentFactory(
-                text,
-                taskId,
-                userId,
-            )
-        } returns comment
+        every { commentFactory(addCommentRequestModel, userId) } returns comment
 
         justRun { commentRepository.addComment(comment) }
         val activity: AddCommentActivity = mockk()
@@ -103,13 +97,7 @@ class AddCommentUseCaseTest {
         val text = "comment"
         every { comment.text } returns text
         every { comment.creationDate } returns date
-        every {
-            commentFactory(
-                text,
-                taskId,
-                userId,
-            )
-        } returns comment
+        every { commentFactory(addCommentRequestModel, userId) } returns comment
 
         justRun { commentRepository.addComment(comment) }
         val activity: AddCommentActivity = mockk()

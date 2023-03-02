@@ -25,8 +25,7 @@ class AddCommentUseCase(
         requireNotNull(task) { "Task doesn't exist id: ${addCommentRequestModel.taskId}" }
 
         val comment = commentFactory(
-            addCommentRequestModel.text,
-            task.id,
+            addCommentRequestModel,
             userRepository.getCurrentUser().id,
         )
 

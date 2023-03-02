@@ -1,7 +1,6 @@
 package com.mango.business.usecase.task
 
 import com.mango.business.factory.TaskFactory
-import com.mango.business.model.Priority
 import com.mango.business.model.Task
 import com.mango.business.model.activity.task.CreateTaskActivity
 import com.mango.business.model.activity.task.CreateTaskActivityFactory
@@ -43,7 +42,7 @@ class CreateTaskUseCaseTest {
         val parentId = TaskId("parentId")
         val createTaskRequestModel: CreateTaskRequestModel = mockk()
         every { createTaskRequestModel.parentTaskId } returns parentId
-        every { taskRepository.containsTask(TaskId("parentId")) } returns false
+        every { taskRepository.containsTask(parentId) } returns false
 
         // when
         val actual = { sut(createTaskRequestModel) }
@@ -55,39 +54,30 @@ class CreateTaskUseCaseTest {
     @Test
     fun `creates and adds new task to tasks list`() {
         // given
-        val date: LocalDateTime = mockk()
-        val createTaskRequestModel =
-            CreateTaskRequestModel(
-                "name",
-                "description",
-                date,
-                date,
-                1,
-                ProjectId("projectId"),
-                null,
-                UserId("assigneeId"),
-            )
-        every { userRepository.getCurrentUser().id } returns UserId("ownerId")
+        val taskId = TaskId("id")
+        val userId = UserId("id")
+        val creationDate: LocalDateTime = mockk()
+        val dueDate: LocalDateTime = mockk()
+        val targetDate: LocalDateTime = mockk()
+        val createTaskRequestModel = CreateTaskRequestModel(
+            "name",
+            "description",
+            dueDate,
+            targetDate,
+            1,
+            ProjectId("projectId"),
+            null,
+            UserId("assigneeId"),
+        )
+        every { userRepository.getCurrentUser().id } returns userId
 
         val task: Task = mockk()
-        every {
-            taskFactory(
-                "name",
-                UserId("ownerId"),
-                ProjectId("projectId"),
-                "description",
-                date,
-                date,
-                Priority.getByValue(1),
-                null,
-                UserId("assigneeId"),
-            )
-        } returns task
+        every { taskFactory(createTaskRequestModel, userId) } returns task
 
         justRun { taskRepository.addTask(task) }
-        every { task.id } returns TaskId("id")
-        every { task.creationDate } returns date
-        every { createTaskActivityFactory(TaskId("id"), date) } returns mockk()
+        every { task.id } returns taskId
+        every { task.creationDate } returns creationDate
+        every { createTaskActivityFactory(taskId, creationDate) } returns mockk()
         justRun { activityRepository.addActivity(any()) }
 
         // when
@@ -100,39 +90,28 @@ class CreateTaskUseCaseTest {
     @Test
     fun `calls addActivity() method in ActivityRepository`() {
         // given
-        val date: LocalDateTime = mockk()
-        val createTaskRequestModel =
-            CreateTaskRequestModel(
-                "name",
-                "description",
-                date,
-                date,
-                1,
-                ProjectId("projectId"),
-                null,
-                UserId("assigneeId"),
-            )
+        val creationDate: LocalDateTime = mockk()
+        val dueDate: LocalDateTime = mockk()
+        val targetDate: LocalDateTime = mockk()
+        val createTaskRequestModel = CreateTaskRequestModel(
+            "name",
+            "description",
+            dueDate,
+            targetDate,
+            1,
+            ProjectId("projectId"),
+            null,
+            UserId("assigneeId"),
+        )
         every { userRepository.getCurrentUser().id } returns UserId("ownerId")
 
         val task: Task = mockk()
-        every {
-            taskFactory(
-                "name",
-                UserId("ownerId"),
-                ProjectId("projectId"),
-                "description",
-                date,
-                date,
-                Priority.getByValue(1),
-                null,
-                UserId("assigneeId"),
-            )
-        } returns task
+        every { taskFactory(createTaskRequestModel, UserId("ownerId")) } returns task
         justRun { taskRepository.addTask(task) }
         every { task.id } returns TaskId("id")
-        every { task.creationDate } returns date
+        every { task.creationDate } returns creationDate
         val activity: CreateTaskActivity = mockk()
-        every { createTaskActivityFactory(TaskId("id"), date) } returns activity
+        every { createTaskActivityFactory(TaskId("id"), creationDate) } returns activity
         justRun { activityRepository.addActivity(any()) }
 
         // when
@@ -145,41 +124,30 @@ class CreateTaskUseCaseTest {
     @Test
     fun `calls all instructions when parentTaskId is not null and this parent exist`() {
         // given
-        val date: LocalDateTime = mockk()
-        val createTaskRequestModel =
-            CreateTaskRequestModel(
-                "name",
-                "description",
-                date,
-                date,
-                1,
-                ProjectId("projectId"),
-                TaskId("parentId"),
-                UserId("assigneeId"),
-            )
+        val creationDate: LocalDateTime = mockk()
+        val dueDate: LocalDateTime = mockk()
+        val targetDate: LocalDateTime = mockk()
+        val createTaskRequestModel = CreateTaskRequestModel(
+            "name",
+            "description",
+            dueDate,
+            targetDate,
+            1,
+            ProjectId("projectId"),
+            TaskId("parentId"),
+            UserId("assigneeId"),
+        )
         every { userRepository.getCurrentUser().id } returns UserId("ownerId")
         every { taskRepository.containsTask(TaskId("parentId")) } returns true
 
         val task: Task = mockk()
-        every {
-            taskFactory(
-                "name",
-                UserId("ownerId"),
-                ProjectId("projectId"),
-                "description",
-                date,
-                date,
-                Priority.getByValue(1),
-                TaskId("parentId"),
-                UserId("assigneeId"),
-            )
-        } returns task
+        every { taskFactory(createTaskRequestModel, UserId("ownerId")) } returns task
 
         justRun { taskRepository.addTask(task) }
         every { task.id } returns TaskId("id")
-        every { task.creationDate } returns date
+        every { task.creationDate } returns creationDate
         val activity: CreateTaskActivity = mockk()
-        every { createTaskActivityFactory(TaskId("id"), date) } returns activity
+        every { createTaskActivityFactory(TaskId("id"), creationDate) } returns activity
         justRun { activityRepository.addActivity(any()) }
 
         // when

@@ -72,7 +72,8 @@ class UpdateTaskUseCaseTest {
         val updDate: LocalDateTime = mockk()
         val newName = "new name"
         val newDescription = "new description"
-        val newDate: LocalDateTime = mockk()
+        val newDueDate: LocalDateTime = mockk()
+        val newTargetDate: LocalDateTime = mockk()
         val newPriority = Priority.PRIORITY_5
         val newProjectId = ProjectId("new projectId")
         val newParentTaskId = TaskId("new parentTaskId")
@@ -82,8 +83,8 @@ class UpdateTaskUseCaseTest {
             taskId = TaskId("id"),
             name = newName,
             description = newDescription,
-            dueDate = newDate,
-            targetDate = newDate,
+            dueDate = newDueDate,
+            targetDate = newTargetDate,
             priority = newPriority,
             projectId = newProjectId,
             parentTaskId = newParentTaskId,
@@ -94,8 +95,8 @@ class UpdateTaskUseCaseTest {
         every { localDateTimeFactory() } returns updDate
         justRun { updateTaskNameUseCase(taskId, newName, updDate) }
         justRun { updateTaskDescriptionUseCase(taskId, newDescription, updDate) }
-        justRun { updateTaskDueDateUseCase(taskId, newDate, updDate) }
-        justRun { updateTaskTargetDateUseCase(taskId, newDate, updDate) }
+        justRun { updateTaskDueDateUseCase(taskId, newDueDate, updDate) }
+        justRun { updateTaskTargetDateUseCase(taskId, newTargetDate, updDate) }
         justRun { updateTaskPriorityUseCase(taskId, newPriority, updDate) }
         justRun { updateTaskProjectUseCase(taskId, newProjectId, updDate) }
         justRun { updateTaskParentTaskUseCase(taskId, newParentTaskId, updDate) }
@@ -109,8 +110,8 @@ class UpdateTaskUseCaseTest {
         verifyAll {
             updateTaskNameUseCase(taskId, newName, updDate)
             updateTaskDescriptionUseCase(taskId, newDescription, updDate)
-            updateTaskDueDateUseCase(taskId, newDate, updDate)
-            updateTaskTargetDateUseCase(taskId, newDate, updDate)
+            updateTaskDueDateUseCase(taskId, newDueDate, updDate)
+            updateTaskTargetDateUseCase(taskId, newTargetDate, updDate)
             updateTaskPriorityUseCase(taskId, newPriority, updDate)
             updateTaskProjectUseCase(taskId, newProjectId, updDate)
             updateTaskParentTaskUseCase(taskId, newParentTaskId, updDate)

@@ -1,7 +1,6 @@
 package com.mango.business.usecase.task
 
 import com.mango.business.factory.TaskFactory
-import com.mango.business.model.Priority
 import com.mango.business.model.Task
 import com.mango.business.model.activity.task.CreateTaskActivityFactory
 import com.mango.business.model.request.CreateTaskRequestModel
@@ -11,7 +10,6 @@ import com.mango.persistence.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
-@Suppress("detekt.LongParameterList")
 class CreateTaskUseCase(
     private val userRepository: UserRepository,
     private val taskRepository: TaskRepository,
@@ -26,15 +24,8 @@ class CreateTaskUseCase(
         }
 
         val task = taskFactory(
-            createTaskRequestModel.name,
+            createTaskRequestModel,
             userRepository.getCurrentUser().id,
-            projectId = createTaskRequestModel.projectId,
-            description = createTaskRequestModel.description,
-            dueDate = createTaskRequestModel.dueDate,
-            targetDate = createTaskRequestModel.targetDate,
-            priority = Priority.getByValue(createTaskRequestModel.priority),
-            parentTaskId = createTaskRequestModel.parentTaskId,
-            assigneeId = createTaskRequestModel.assigneeId,
         )
 
         taskRepository.addTask(task)

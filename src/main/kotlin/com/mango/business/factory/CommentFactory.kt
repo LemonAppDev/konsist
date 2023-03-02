@@ -1,7 +1,7 @@
 package com.mango.business.factory
 
 import com.mango.business.model.Comment
-import com.mango.business.model.value.TaskId
+import com.mango.business.model.request.AddCommentRequestModel
 import com.mango.business.model.value.UserId
 import org.springframework.stereotype.Service
 
@@ -11,13 +11,12 @@ class CommentFactory(
     private val localDateTimeFactory: LocalDateTimeFactory,
 ) {
     operator fun invoke(
-        comment: String,
-        taskId: TaskId,
+        addCommentRequestModel: AddCommentRequestModel,
         creatorId: UserId,
     ) = Comment(
         uuidFactory.createCommentId(),
-        comment,
-        taskId,
+        addCommentRequestModel.text,
+        addCommentRequestModel.taskId,
         creatorId,
         localDateTimeFactory(),
     )

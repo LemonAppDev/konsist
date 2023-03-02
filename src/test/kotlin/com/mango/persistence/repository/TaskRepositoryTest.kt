@@ -14,7 +14,6 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
-import java.time.Month
 
 class TaskRepositoryTest {
     private val userRepository: UserRepository = mockk()
@@ -50,32 +49,43 @@ class TaskRepositoryTest {
     @Test
     fun `updateTask() adds updated task to tasks`() {
         // given
-        val oldTask: Task = mockk()
-        every { oldTask.id } returns TaskId("id")
-        every { oldTask.name } returns "old name"
-        every { oldTask.projectId } returns ProjectId("old project id")
-        every { oldTask.description } returns "old description"
-        every { oldTask.dueDate } returns mockk()
-        every { oldTask.targetDate } returns mockk()
-        every { oldTask.priority } returns Priority.PRIORITY_1
-        every { oldTask.parentTaskId } returns TaskId("old parent task id")
-        every { oldTask.assigneeId } returns UserId("old assignee id")
-        every { oldTask.completeDate } returns null
+        val creationDate: LocalDateTime = mockk()
+        val oldDueDateDate: LocalDateTime = mockk()
+        val newDueDate: LocalDateTime = mockk()
+        val oldTargetDateDate: LocalDateTime = mockk()
+        val newTargetDate: LocalDateTime = mockk()
+        val completeDate: LocalDateTime = mockk()
+
+        val oldTask = Task(
+            TaskId("id"),
+            "old name",
+            UserId("id"),
+            creationDate,
+            ProjectId("old project id"),
+            "old description",
+            oldDueDateDate,
+            oldTargetDateDate,
+            Priority.PRIORITY_1,
+            TaskId("old parent task id"),
+            UserId("old assignee id"),
+        )
 
         sut.addTask(oldTask)
 
-        val newTask: Task = mockk()
-        every { newTask.id } returns TaskId("id")
-        every { oldTask.name } returns "new name"
-        every { newTask.projectId } returns ProjectId("new project id")
-        every { newTask.description } returns "new description"
-        every { newTask.dueDate } returns mockk()
-        every { newTask.targetDate } returns mockk()
-        every { newTask.priority } returns Priority.PRIORITY_5
-        every { newTask.parentTaskId } returns TaskId("new parent task id")
-        every { newTask.assigneeId } returns UserId("new assignee id")
-        val date = LocalDateTime.of(2023, Month.JUNE, 14, 15, 23)
-        every { newTask.completeDate } returns date
+        val newTask = Task(
+            TaskId("id"),
+            "new name",
+            UserId("id"),
+            creationDate,
+            ProjectId("new project id"),
+            "new description",
+            newDueDate,
+            newTargetDate,
+            Priority.PRIORITY_5,
+            TaskId("new parent task id"),
+            UserId("new assignee id"),
+            completeDate,
+        )
 
         // when
         sut.updateTask(newTask)
@@ -87,32 +97,43 @@ class TaskRepositoryTest {
     @Test
     fun `updateTask() replace old task with new task `() {
         // given
-        val oldTask: Task = mockk()
-        every { oldTask.id } returns TaskId("id")
-        every { oldTask.name } returns "old name"
-        every { oldTask.projectId } returns ProjectId("old project id")
-        every { oldTask.description } returns "old description"
-        every { oldTask.dueDate } returns mockk()
-        every { oldTask.targetDate } returns mockk()
-        every { oldTask.priority } returns Priority.PRIORITY_1
-        every { oldTask.parentTaskId } returns TaskId("old parent task id")
-        every { oldTask.assigneeId } returns UserId("old assignee id")
-        every { oldTask.completeDate } returns null
+        val creationDate: LocalDateTime = mockk()
+        val oldDueDateDate: LocalDateTime = mockk()
+        val newDueDate: LocalDateTime = mockk()
+        val oldTargetDateDate: LocalDateTime = mockk()
+        val newTargetDate: LocalDateTime = mockk()
+        val completeDate: LocalDateTime = mockk()
+
+        val oldTask = Task(
+            TaskId("id"),
+            "old name",
+            UserId("id"),
+            creationDate,
+            ProjectId("old project id"),
+            "old description",
+            oldDueDateDate,
+            oldTargetDateDate,
+            Priority.PRIORITY_1,
+            TaskId("old parent task id"),
+            UserId("old assignee id"),
+        )
 
         sut.addTask(oldTask)
 
-        val newTask: Task = mockk()
-        every { newTask.id } returns TaskId("id")
-        every { oldTask.name } returns "new name"
-        every { newTask.projectId } returns ProjectId("new project id")
-        every { newTask.description } returns "new description"
-        every { newTask.dueDate } returns mockk()
-        every { newTask.targetDate } returns mockk()
-        every { newTask.priority } returns Priority.PRIORITY_5
-        every { newTask.parentTaskId } returns TaskId("new parent task id")
-        every { newTask.assigneeId } returns UserId("new assignee id")
-        val date = LocalDateTime.of(2023, Month.JUNE, 14, 15, 23)
-        every { newTask.completeDate } returns date
+        val newTask = Task(
+            TaskId("id"),
+            "new name",
+            UserId("id"),
+            creationDate,
+            ProjectId("new project id"),
+            "new description",
+            newDueDate,
+            newTargetDate,
+            Priority.PRIORITY_5,
+            TaskId("new parent task id"),
+            UserId("new assignee id"),
+            completeDate,
+        )
 
         // when
         sut.updateTask(newTask)
