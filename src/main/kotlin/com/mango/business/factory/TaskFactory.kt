@@ -10,12 +10,13 @@ import java.time.LocalDateTime
 
 @Service
 @Suppress("detekt.LongParameterList")
-class TaskFactory {
+class TaskFactory(
+    private val uuidFactory: UUIDFactory,
+    private val localDateTimeFactory: LocalDateTimeFactory,
+) {
     operator fun invoke(
-        id: TaskId,
         name: String,
         ownerId: UserId,
-        creationDate: LocalDateTime,
         projectId: ProjectId? = null,
         description: String? = null,
         dueDate: LocalDateTime? = null,
@@ -25,10 +26,10 @@ class TaskFactory {
         assigneeId: UserId? = null,
         completeDate: LocalDateTime? = null,
     ) = Task(
-        id,
+        uuidFactory.createTaskId(),
         name,
         ownerId,
-        creationDate,
+        localDateTimeFactory(),
         projectId,
         description,
         dueDate,

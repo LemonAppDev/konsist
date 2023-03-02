@@ -1,8 +1,6 @@
 package com.mango.business.usecase.task
 
-import com.mango.business.factory.LocalDateTimeFactory
 import com.mango.business.factory.TaskFactory
-import com.mango.business.factory.UUIDFactory
 import com.mango.business.model.Priority
 import com.mango.business.model.Task
 import com.mango.business.model.activity.task.CreateTaskActivityFactory
@@ -15,10 +13,8 @@ import org.springframework.stereotype.Service
 @Service
 @Suppress("detekt.LongParameterList")
 class CreateTaskUseCase(
-    private val uuidFactory: UUIDFactory,
     private val userRepository: UserRepository,
     private val taskRepository: TaskRepository,
-    private val localDateTimeFactory: LocalDateTimeFactory,
     private val createTaskActivityFactory: CreateTaskActivityFactory,
     private val activityRepository: ActivityRepository,
     private val taskFactory: TaskFactory,
@@ -30,10 +26,8 @@ class CreateTaskUseCase(
         }
 
         val task = taskFactory(
-            uuidFactory.createTaskId(),
             createTaskRequestModel.name,
             userRepository.getCurrentUser().id,
-            localDateTimeFactory(),
             projectId = createTaskRequestModel.projectId,
             description = createTaskRequestModel.description,
             dueDate = createTaskRequestModel.dueDate,
