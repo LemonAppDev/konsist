@@ -15,7 +15,7 @@ class TaskRepository {
     }
 
     fun deleteTask(task: Task) {
-        _tasks.remove(task)
+        _tasks.removeIf { it.id == task.id }
     }
 
     fun updateTask(task: Task) {

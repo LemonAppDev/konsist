@@ -1,5 +1,6 @@
 package com.mango.presentation.controller
 
+import com.mango.business.model.Task
 import com.mango.business.model.request.AddCommentRequestModel
 import com.mango.business.model.request.CreateTaskRequestModel
 import com.mango.business.model.request.UpdateCommentRequestModel
@@ -11,6 +12,7 @@ import com.mango.business.usecase.task.DeleteTaskUseCase
 import com.mango.business.usecase.task.DuplicateTaskUseCase
 import com.mango.business.usecase.task.GetAllTasksUseCase
 import com.mango.business.usecase.task.GetTaskActivitiesUseCase
+import com.mango.business.usecase.task.GetTasksUseCase
 import com.mango.business.usecase.task.comment.AddCommentUseCase
 import com.mango.business.usecase.task.comment.DeleteCommentUseCase
 import com.mango.business.usecase.task.comment.GetAllCommentsUseCase
@@ -24,10 +26,10 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-@Suppress("LongParameterList")
 @RestController
 class TaskController(
     private val createTaskUseCase: CreateTaskUseCase,
+    private val getTasksUseCase: GetTasksUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
     private val getAllTasksUseCase: GetAllTasksUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
@@ -42,15 +44,19 @@ class TaskController(
     fun createTask(@RequestBody createTaskRequestModel: CreateTaskRequestModel) =
         createTaskUseCase(createTaskRequestModel)
 
+    @GetMapping("/v1/task/get")
+    fun getTask(taskId: TaskId) = getTasksUseCase(taskId)
+
     @DeleteMapping("/v1/task/delete")
     fun deleteTask(@RequestParam taskId: TaskId) = deleteTaskUseCase(taskId)
 
     @GetMapping("/v1/task/all")
     fun getAllTasks() = getAllTasksUseCase()
 
-    @PatchMapping("/v1/task/update")
-    fun updateTask(@RequestBody updateTaskRequestModel: UpdateTaskRequestModel) {
+    @PostMapping("/v1/task/update")
+    fun updateTask(@RequestBody updateTaskRequestModel: UpdateTaskRequestModel): Task {
         updateTaskUseCase(updateTaskRequestModel)
+        return getTasksUseCase(updateTaskRequestModel.taskId)
     }
 
     @PostMapping("/v1/task/duplicate")

@@ -1,6 +1,6 @@
 package com.mango.archunit.business
 
-import com.mango.archunit.utils.CustomArchCondition.haveExactlyOneMethodWithPrefix
+import com.mango.archunit.utils.CustomArchCondition.haveExactlyOneMethodStartingWith
 import com.mango.archunit.utils.PackageIdentifier
 import com.mango.archunit.utils.ProjectClassesProvider.allClasses
 import com.tngtech.archunit.core.domain.JavaModifier
@@ -20,7 +20,7 @@ class UseCaseClassRulesTest {
     fun `classes with UseCase should have single method name invoke`() {
         classes()
             .that().haveSimpleNameEndingWith("UseCase")
-            .should(haveExactlyOneMethodWithPrefix("invoke", JavaModifier.PUBLIC))
+            .should(haveExactlyOneMethodStartingWith("invoke", JavaModifier.PUBLIC))
             .check(allClasses)
     }
 }

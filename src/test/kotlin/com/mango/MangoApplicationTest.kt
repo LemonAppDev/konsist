@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class MangoApplicationTests {
+class MangoApplicationTest {
 
     @Test
     fun contextLoads() {
-        // Check DI config
+        // A simple sanity check test that will fail if the application context cannot start
     }
 }

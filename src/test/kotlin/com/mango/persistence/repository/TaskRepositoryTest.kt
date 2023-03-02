@@ -37,6 +37,7 @@ class TaskRepositoryTest {
     fun `deleteTask() delete task from tasks`() {
         // given
         val task: Task = mockk()
+        every { task.id } returns TaskId("taskId")
         sut.addTask(task)
 
         // when

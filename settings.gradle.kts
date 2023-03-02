@@ -17,7 +17,8 @@ dependencyResolutionManagement {
             library("kotlin-stdlib-jdk8", "org.jetbrains.kotlin", "kotlin-stdlib-jdk8").withoutVersion()
             library("spring-boot-devtools", "org.springframework.boot", "spring-boot-devtools").withoutVersion()
             library("spring-boot-starter-web", "org.springframework.boot", "spring-boot-starter-web").withoutVersion()
-            library("jackson", "com.fasterxml.jackson.module", "jackson-module-kotlin").withoutVersion()
+            library("jacksonKotlin", "com.fasterxml.jackson.module", "jackson-module-kotlin").withoutVersion()
+            library("jacksonJsr310", "com.fasterxml.jackson.datatype", "jackson-datatype-jsr310").withoutVersion()
             library("archunit", "com.tngtech.archunit", "archunit-junit5").version("1.0.1")
 
             library("spring-boot-starter-test", "org.springframework.boot", "spring-boot-starter-test").withoutVersion()
