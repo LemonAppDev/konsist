@@ -2,13 +2,12 @@ package com.mango.business.usecase.task.update
 
 import com.mango.business.factory.LocalDateTimeFactory
 import com.mango.business.model.request.task.UpdateTaskRequestModel
-import com.mango.persistence.repository.TaskRepository
+import com.mango.business.usecase.task.GetTaskUseCase
 import org.springframework.stereotype.Service
 
 @Service
 @Suppress("detekt.LongParameterList")
 class UpdateTaskUseCase(
-    private val taskRepository: TaskRepository,
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val updateTaskNameUseCase: UpdateTaskNameUseCase,
     private val updateTaskDescriptionUseCase: UpdateTaskDescriptionUseCase,
@@ -19,10 +18,10 @@ class UpdateTaskUseCase(
     private val updateTaskParentTaskUseCase: UpdateTaskParentTaskUseCase,
     private val updateTaskAssigneeUseCase: UpdateTaskAssigneeUseCase,
     private val updateTaskCompleteDateUseCase: UpdateTaskCompleteDateUseCase,
+    private val getTaskUseCase: GetTaskUseCase,
 ) {
     operator fun invoke(updateTaskRequestModel: UpdateTaskRequestModel) {
-        val task = taskRepository.getTask(updateTaskRequestModel.taskId)
-        requireNotNull(task) { "Task with taskId: ${updateTaskRequestModel.taskId} doesn't exist" }
+        val task = getTaskUseCase(updateTaskRequestModel.taskId)
 
         val date = localDateTimeFactory()
 

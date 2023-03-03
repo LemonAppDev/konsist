@@ -5,14 +5,13 @@ import com.mango.business.model.Priority
 import com.mango.business.model.activity.task.UpdateTaskPriorityActivity
 import com.mango.business.model.activity.task.UpdateTaskPriorityActivityFactory
 import com.mango.business.model.value.TaskId
+import com.mango.business.usecase.task.GetTaskUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -20,25 +19,14 @@ class UpdateTaskPriorityUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
     private val activityRepository: ActivityRepository = mockk()
     private val updateTaskPriorityActivityFactory: UpdateTaskPriorityActivityFactory = mockk()
+    private val getTaskUseCase: GetTaskUseCase = mockk()
 
     private val sut = UpdateTaskPriorityUseCase(
         taskRepository,
         activityRepository,
         updateTaskPriorityActivityFactory,
+        getTaskUseCase,
     )
-
-    @Test
-    fun `throws exception when task doesn't exist`() {
-        // given
-        val taskId = TaskId("id")
-        every { taskRepository.getTask(taskId) } returns null
-
-        // when
-        val actual = { sut(taskId, mockk(), mockk()) }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Task with id: $taskId doesn't exist"
-    }
 
     @Test
     fun `add task to repository`() {
@@ -49,6 +37,7 @@ class UpdateTaskPriorityUseCaseTest {
         val date: LocalDateTime = mockk()
 
         val oldTask = BusinessTestModel.getTask(id = taskId, priority = oldPriority)
+        every { getTaskUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(priority = newPriority)
         every { taskRepository.getTask(taskId) } returns oldTask
 
@@ -73,8 +62,8 @@ class UpdateTaskPriorityUseCaseTest {
         val date: LocalDateTime = mockk()
 
         val oldTask = BusinessTestModel.getTask(id = taskId, priority = oldPriority)
+        every { getTaskUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(priority = newPriority)
-        every { taskRepository.getTask(taskId) } returns oldTask
         justRun { taskRepository.updateTask(newTask) }
 
         val activity: UpdateTaskPriorityActivity = mockk()

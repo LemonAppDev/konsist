@@ -16,10 +16,10 @@ class DuplicateTaskUseCase(
     private val createTaskActivityFactory: CreateTaskActivityFactory,
     private val activityRepository: ActivityRepository,
     private val localDateTimeFactory: LocalDateTimeFactory,
+    private val getTaskUseCase: GetTaskUseCase,
 ) {
     operator fun invoke(taskId: TaskId): Task {
-        val oldTask = taskRepository.getTask(taskId)
-        requireNotNull(oldTask) { "Task with id: $taskId doesn't exist" }
+        val oldTask = getTaskUseCase(taskId)
 
         val newTaskId = uuidFactory.createTaskId()
         val creationDate = localDateTimeFactory()

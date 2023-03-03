@@ -10,15 +10,18 @@ import org.junit.jupiter.api.Test
 
 class GetChildTasksUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
+    private val getTaskUseCase: GetTaskUseCase = mockk()
 
     private val sut = GetChildTasksUseCase(
         taskRepository,
+        getTaskUseCase,
     )
 
     @Test
     fun `get childTasks for given task`() {
         // given
         val taskId = TaskId("id")
+        every { getTaskUseCase(taskId) } returns mockk()
         val task1: Task = mockk()
         every { task1.parentTaskId } returns taskId
         val task2: Task = mockk()

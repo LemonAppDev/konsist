@@ -5,15 +5,13 @@ import com.mango.business.model.Task
 import com.mango.business.model.activity.task.UpdateTaskCompleteDateActivity
 import com.mango.business.model.activity.task.UpdateTaskCompleteDateActivityFactory
 import com.mango.business.model.value.TaskId
+import com.mango.business.usecase.task.GetTaskUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -23,25 +21,14 @@ class UpdateTaskCompleteDateUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
     private val updateTaskCompleteDateActivityFactory: UpdateTaskCompleteDateActivityFactory = mockk()
     private val activityRepository: ActivityRepository = mockk()
+    private val getTaskUseCase: GetTaskUseCase = mockk()
 
     private val sut = UpdateTaskCompleteDateUseCase(
         taskRepository,
         updateTaskCompleteDateActivityFactory,
         activityRepository,
+        getTaskUseCase,
     )
-
-    @Test
-    fun `throws exception when task doesn't exist`() {
-        // given
-        val taskId = TaskId("taskId")
-        every { taskRepository.getTask(taskId) } returns null
-
-        // when
-        val actual = { sut(taskId, true, mockk()) }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Task with id: $taskId doesn't exist"
-    }
 
     @ParameterizedTest
     @MethodSource("getData")
@@ -54,9 +41,9 @@ class UpdateTaskCompleteDateUseCaseTest {
         val taskId = TaskId("taskId")
         val date: LocalDateTime = mockk()
         val oldTask: Task = BusinessTestModel.getTask(completeDate = currentCompleteDate)
+        every { getTaskUseCase(taskId) } returns oldTask
         every { updateTaskCompleteDateActivityFactory(taskId, date) } returns mockk()
 
-        every { taskRepository.getTask(taskId) } returns oldTask
         justRun { taskRepository.updateTask(any()) }
         val activity: UpdateTaskCompleteDateActivity = mockk()
         every { updateTaskCompleteDateActivityFactory(taskId, date) } returns activity
@@ -84,10 +71,10 @@ class UpdateTaskCompleteDateUseCaseTest {
         val taskId = TaskId("taskId")
         val date: LocalDateTime = mockk()
         val oldTask: Task = BusinessTestModel.getTask(completeDate = currentCompleteDate)
+        every { getTaskUseCase(taskId) } returns oldTask
         val activity: UpdateTaskCompleteDateActivity = mockk()
         every { updateTaskCompleteDateActivityFactory(taskId, date) } returns activity
 
-        every { taskRepository.getTask(taskId) } returns oldTask
         justRun { taskRepository.updateTask(any()) }
         justRun { activityRepository.addActivity(activity) }
 

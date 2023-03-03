@@ -14,10 +14,10 @@ import com.mango.business.usecase.comment.UpdateCommentUseCase
 import com.mango.business.usecase.task.CreateTaskUseCase
 import com.mango.business.usecase.task.DeleteTaskUseCase
 import com.mango.business.usecase.task.DuplicateTaskUseCase
+import com.mango.business.usecase.task.GetAllTasksUseCase
 import com.mango.business.usecase.task.GetChildTasksUseCase
 import com.mango.business.usecase.task.GetTaskActivitiesUseCase
 import com.mango.business.usecase.task.GetTaskUseCase
-import com.mango.business.usecase.task.GetTasksUseCase
 import com.mango.business.usecase.task.update.UpdateTaskUseCase
 import io.mockk.every
 import io.mockk.justRun
@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test
 class TaskControllerTest {
     private val createTaskUseCase: CreateTaskUseCase = mockk()
     private val deleteTaskUseCase: DeleteTaskUseCase = mockk()
-    private val getTasksUseCase: GetTasksUseCase = mockk()
+    private val getAllTasksUseCase: GetAllTasksUseCase = mockk()
     private val updateTaskUseCase: UpdateTaskUseCase = mockk()
     private val duplicateTaskUseCase: DuplicateTaskUseCase = mockk()
     private val getTaskActivitiesUseCase: GetTaskActivitiesUseCase = mockk()
@@ -43,7 +43,7 @@ class TaskControllerTest {
         createTaskUseCase,
         getTaskUseCase,
         deleteTaskUseCase,
-        getTasksUseCase,
+        getAllTasksUseCase,
         updateTaskUseCase,
         duplicateTaskUseCase,
         getTaskActivitiesUseCase,
@@ -96,13 +96,13 @@ class TaskControllerTest {
     @Test
     fun `getAllTasks() calls getAllTasksUseCase()`() {
         // given
-        every { getTasksUseCase() } returns mockk()
+        every { getAllTasksUseCase() } returns mockk()
 
         // when
         sut.getTasks()
 
         // then
-        verify { getTasksUseCase() }
+        verify { getAllTasksUseCase() }
     }
 
     @Test

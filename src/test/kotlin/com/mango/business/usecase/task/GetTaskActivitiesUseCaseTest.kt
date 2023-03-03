@@ -10,9 +10,11 @@ import org.junit.jupiter.api.Test
 
 class GetTaskActivitiesUseCaseTest {
     private val activityRepository: ActivityRepository = mockk()
+    private val getTaskUseCase: GetTaskUseCase = mockk()
 
     private val sut = GetTaskActivitiesUseCase(
         activityRepository,
+        getTaskUseCase,
     )
 
     @Test
@@ -20,6 +22,7 @@ class GetTaskActivitiesUseCaseTest {
         // given
         val taskId1 = TaskId("id1")
         val taskId2 = TaskId("id2")
+        every { getTaskUseCase(taskId1) } returns mockk()
 
         val createTaskActivity1: CreateTaskActivity = mockk()
         every { createTaskActivity1.taskId } returns taskId1

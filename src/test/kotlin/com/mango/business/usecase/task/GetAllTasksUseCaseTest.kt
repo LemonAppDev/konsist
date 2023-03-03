@@ -6,10 +6,10 @@ import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
 
-class GetTasksUseCaseTest {
+class GetAllTasksUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
 
-    private val sut = GetTasksUseCase(
+    private val sut = GetAllTasksUseCase(
         taskRepository,
     )
 

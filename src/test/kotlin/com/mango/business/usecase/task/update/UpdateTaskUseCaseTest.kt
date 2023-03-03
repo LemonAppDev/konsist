@@ -7,21 +7,18 @@ import com.mango.business.model.request.task.UpdateTaskRequestModel
 import com.mango.business.model.value.ProjectId
 import com.mango.business.model.value.TaskId
 import com.mango.business.model.value.UserId
-import com.mango.persistence.repository.TaskRepository
+import com.mango.business.usecase.task.GetTaskUseCase
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import io.mockk.verifyAll
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import java.time.LocalDateTime
 
 class UpdateTaskUseCaseTest {
-    private val taskRepository: TaskRepository = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val updateTaskNameUseCase: UpdateTaskNameUseCase = mockk()
     private val updateTaskDescriptionUseCase: UpdateTaskDescriptionUseCase = mockk()
@@ -32,9 +29,9 @@ class UpdateTaskUseCaseTest {
     private val updateTaskParentTaskUseCase: UpdateTaskParentTaskUseCase = mockk()
     private val updateTaskAssigneeUseCase: UpdateTaskAssigneeUseCase = mockk()
     private val updateTaskCompleteDateUseCase: UpdateTaskCompleteDateUseCase = mockk()
+    private val getTaskUseCase: GetTaskUseCase = mockk()
 
     private val sut = UpdateTaskUseCase(
-        taskRepository,
         localDateTimeFactory,
         updateTaskNameUseCase,
         updateTaskDescriptionUseCase,
@@ -45,22 +42,8 @@ class UpdateTaskUseCaseTest {
         updateTaskParentTaskUseCase,
         updateTaskAssigneeUseCase,
         updateTaskCompleteDateUseCase,
+        getTaskUseCase,
     )
-
-    @Test
-    fun `throws exception when task doesn't exist`() {
-        // given
-        val updateTaskRequestModel: UpdateTaskRequestModel = mockk()
-        val taskId = TaskId("id")
-        every { updateTaskRequestModel.taskId } returns taskId
-        every { taskRepository.getTask(taskId) } returns null
-
-        // when
-        val actual = { sut(updateTaskRequestModel) }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Task with taskId: $taskId doesn't exist"
-    }
 
     @Test
     fun `calls all update tasks use cases()`() {
@@ -68,7 +51,6 @@ class UpdateTaskUseCaseTest {
         val task: Task = mockk()
         val taskId = TaskId("id")
         every { task.id } returns taskId
-        every { taskRepository.getTask(taskId) } returns task
         val updDate: LocalDateTime = mockk()
         val newName = "new name"
         val newDescription = "new description"
@@ -92,6 +74,7 @@ class UpdateTaskUseCaseTest {
             isCompleted = true,
         )
 
+        every { getTaskUseCase(taskId) } returns task
         every { localDateTimeFactory() } returns updDate
         justRun { updateTaskNameUseCase(taskId, newName, updDate) }
         justRun { updateTaskDescriptionUseCase(taskId, newDescription, updDate) }
@@ -127,7 +110,6 @@ class UpdateTaskUseCaseTest {
         val task: Task = mockk()
         val taskId = TaskId("id")
         every { task.id } returns taskId
-        every { taskRepository.getTask(taskId) } returns task
 
         val updDate: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns updDate
@@ -144,7 +126,7 @@ class UpdateTaskUseCaseTest {
             assigneeId = null,
             isCompleted = isCompleted,
         )
-
+        every { getTaskUseCase(taskId) } returns task
         justRun { updateTaskCompleteDateUseCase(taskId, isCompleted, updDate) }
 
         // when

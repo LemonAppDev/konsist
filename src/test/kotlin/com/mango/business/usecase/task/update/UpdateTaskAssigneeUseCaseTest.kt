@@ -5,14 +5,13 @@ import com.mango.business.model.activity.task.UpdateTaskAssigneeActivity
 import com.mango.business.model.activity.task.UpdateTaskAssigneeActivityFactory
 import com.mango.business.model.value.TaskId
 import com.mango.business.model.value.UserId
+import com.mango.business.usecase.task.GetTaskUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -20,25 +19,14 @@ class UpdateTaskAssigneeUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
     private val activityRepository: ActivityRepository = mockk()
     private val updateTaskAssigneeActivityFactory: UpdateTaskAssigneeActivityFactory = mockk()
+    private val getTaskUseCase: GetTaskUseCase = mockk()
 
     private val sut = UpdateTaskAssigneeUseCase(
         taskRepository,
         activityRepository,
         updateTaskAssigneeActivityFactory,
+        getTaskUseCase,
     )
-
-    @Test
-    fun `throws exception when task doesn't exist`() {
-        // given
-        val taskId = TaskId("taskId")
-        every { taskRepository.getTask(taskId) } returns null
-
-        // when
-        val actual = { sut(taskId, UserId("userId"), mockk()) }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Task with id: $taskId doesn't exist"
-    }
 
     @Test
     fun `add task to repository`() {
@@ -48,8 +36,8 @@ class UpdateTaskAssigneeUseCaseTest {
 
         val taskId = TaskId("1")
         val oldTask = BusinessTestModel.getTask(id = taskId, assigneeId = oldAssigneeId)
+        every { getTaskUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(assigneeId = newAssigneeId)
-        every { taskRepository.getTask(taskId) } returns oldTask
 
         justRun { taskRepository.updateTask(newTask) }
         val date: LocalDateTime = mockk()
@@ -72,8 +60,8 @@ class UpdateTaskAssigneeUseCaseTest {
 
         val taskId = TaskId("1")
         val oldTask = BusinessTestModel.getTask(id = taskId, assigneeId = oldAssigneeId)
+        every { getTaskUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(assigneeId = newAssigneeId)
-        every { taskRepository.getTask(taskId) } returns oldTask
         justRun { taskRepository.updateTask(newTask) }
         val date: LocalDateTime = mockk()
         every { updateTaskAssigneeActivityFactory(taskId, date, oldAssigneeId, newAssigneeId) } returns mockk()
