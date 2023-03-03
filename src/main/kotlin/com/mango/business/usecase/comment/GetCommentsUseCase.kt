@@ -7,7 +7,7 @@ import com.mango.persistence.repository.TaskRepository
 import org.springframework.stereotype.Service
 
 @Service
-class GetAllCommentsUseCase(
+class GetCommentsUseCase(
     private val taskRepository: TaskRepository,
     private val commentRepository: CommentRepository,
 ) {

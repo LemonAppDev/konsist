@@ -9,13 +9,14 @@ import com.mango.business.model.value.CommentId
 import com.mango.business.model.value.TaskId
 import com.mango.business.usecase.comment.AddCommentUseCase
 import com.mango.business.usecase.comment.DeleteCommentUseCase
-import com.mango.business.usecase.comment.GetAllCommentsUseCase
+import com.mango.business.usecase.comment.GetCommentsUseCase
 import com.mango.business.usecase.comment.UpdateCommentUseCase
 import com.mango.business.usecase.task.CreateTaskUseCase
 import com.mango.business.usecase.task.DeleteTaskUseCase
 import com.mango.business.usecase.task.DuplicateTaskUseCase
-import com.mango.business.usecase.task.GetAllTasksUseCase
+import com.mango.business.usecase.task.GetChildTasksUseCase
 import com.mango.business.usecase.task.GetTaskActivitiesUseCase
+import com.mango.business.usecase.task.GetTaskUseCase
 import com.mango.business.usecase.task.GetTasksUseCase
 import com.mango.business.usecase.task.update.UpdateTaskUseCase
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -30,34 +31,35 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class TaskController(
     private val createTaskUseCase: CreateTaskUseCase,
-    private val getTasksUseCase: GetTasksUseCase,
+    private val getTaskUseCase: GetTaskUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
-    private val getAllTasksUseCase: GetAllTasksUseCase,
+    private val getTasksUseCase: GetTasksUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
     private val duplicateTaskUseCase: DuplicateTaskUseCase,
     private val getTaskActivitiesUseCase: GetTaskActivitiesUseCase,
     private val addCommentUseCase: AddCommentUseCase,
     private val deleteCommentUseCase: DeleteCommentUseCase,
     private val updateCommentUseCase: UpdateCommentUseCase,
-    private val getAllCommentsUseCase: GetAllCommentsUseCase,
+    private val getCommentsUseCase: GetCommentsUseCase,
+    private val getChildTasksUseCase: GetChildTasksUseCase,
 ) {
     @PostMapping("/v1/task/create")
     fun createTask(@RequestBody createTaskRequestModel: CreateTaskRequestModel) =
         createTaskUseCase(createTaskRequestModel)
 
     @GetMapping("/v1/task/get")
-    fun getTask(taskId: TaskId) = getTasksUseCase(taskId)
+    fun getTask(taskId: TaskId) = getTaskUseCase(taskId)
 
     @DeleteMapping("/v1/task/delete")
     fun deleteTask(@RequestParam taskId: TaskId) = deleteTaskUseCase(taskId)
 
     @GetMapping("/v1/task/all")
-    fun getAllTasks() = getAllTasksUseCase()
+    fun getTasks() = getTasksUseCase()
 
     @PostMapping("/v1/task/update")
     fun updateTask(@RequestBody updateTaskRequestModel: UpdateTaskRequestModel): Task {
         updateTaskUseCase(updateTaskRequestModel)
-        return getTasksUseCase(updateTaskRequestModel.taskId)
+        return getTaskUseCase(updateTaskRequestModel.taskId)
     }
 
     @PostMapping("/v1/task/duplicate")
@@ -68,20 +70,24 @@ class TaskController(
     fun getTaskActivity(@RequestParam(name = "taskId") taskId: TaskId) =
         getTaskActivitiesUseCase(taskId)
 
-    @PostMapping("/v1/task/addComment")
+    @PostMapping("/v1/task/add-comment")
     fun addComment(@RequestBody addCommentRequestModel: AddCommentRequestModel) =
         addCommentUseCase(addCommentRequestModel)
 
-    @DeleteMapping("/v1/task/deleteComment")
+    @DeleteMapping("/v1/task/delete-comment")
     fun deleteComment(@RequestParam(name = "commentId") commentId: CommentId) =
         deleteCommentUseCase(commentId)
 
-    @PatchMapping("/v1/task/updateComment")
+    @PatchMapping("/v1/task/update-comment")
     fun updateComment(@RequestBody updateCommentRequestModel: UpdateCommentRequestModel) {
         updateCommentUseCase(updateCommentRequestModel)
     }
 
-    @GetMapping("/v1/task/allComments")
-    fun getAllComments(@RequestParam(name = "taskId") taskId: TaskId) =
-        getAllCommentsUseCase(taskId)
+    @GetMapping("/v1/task/comments")
+    fun getComments(@RequestParam(name = "taskId") taskId: TaskId) =
+        getCommentsUseCase(taskId)
+
+    @GetMapping("/v1/task/childtasks")
+    fun getChildTasks(@RequestParam(name = "taskId") taskId: TaskId) =
+        getChildTasksUseCase(taskId)
 }
