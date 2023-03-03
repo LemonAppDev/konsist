@@ -31,7 +31,7 @@ class GetTaskUseCaseTest {
     }
 
     @Test
-    fun `returns tasks from taskRepository`() {
+    fun `returns task`() {
         // given
         val taskId = TaskId("taskId")
         val task: Task = mockk()

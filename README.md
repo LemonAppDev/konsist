@@ -18,7 +18,7 @@ Run tests (unit and arch-unit tests):
 
 Run integration tests (including arch-unit):
 
-- `./gradlew test` - run all tests.
+- `./gradlew integrationTest` - run all tests.
 
 ## Architecture
 
