@@ -18,8 +18,7 @@ class UpdateTaskParentTaskUseCase(
     operator fun invoke(taskId: TaskId, newParentTaskId: TaskId, date: LocalDateTime) {
         val task = getTaskUseCase(taskId)
 
-        val newParentTaskExists = taskRepository.containsTask(newParentTaskId)
-        require(newParentTaskExists) { "Parent task with id: $newParentTaskId doesn't exist" }
+        getTaskUseCase(newParentTaskId)
 
         val oldParentTaskId = task.parentTaskId
         val newTask = task.copy(parentTaskId = newParentTaskId)

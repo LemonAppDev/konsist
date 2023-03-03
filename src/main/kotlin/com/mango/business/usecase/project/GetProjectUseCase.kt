@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 class GetProjectUseCase(
     private val projectRepository: ProjectRepository,
 ) {
-    operator fun invoke(projectId: ProjectId): Project? {
+    operator fun invoke(projectId: ProjectId): Project {
         val project = projectRepository.getProject(projectId)
         requireNotNull(project) { "Project with id: $projectId doesn't exist" }
 

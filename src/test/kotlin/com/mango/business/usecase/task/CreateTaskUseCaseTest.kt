@@ -9,17 +9,15 @@ import com.mango.business.model.request.task.CreateTaskRequestModel
 import com.mango.business.model.value.ProjectId
 import com.mango.business.model.value.TaskId
 import com.mango.business.model.value.UserId
+import com.mango.business.usecase.project.GetProjectUseCase
+import com.mango.business.usecase.user.GetUserUseCase
 import com.mango.persistence.repository.ActivityRepository
-import com.mango.persistence.repository.ProjectRepository
 import com.mango.persistence.repository.TaskRepository
-import com.mango.persistence.repository.UserRepository
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.spyk
 import io.mockk.verify
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -28,65 +26,19 @@ class CreateTaskUseCaseTest {
     private val createTaskActivityFactory: CreateTaskActivityFactory = spyk()
     private val activityRepository: ActivityRepository = mockk()
     private val taskFactory: TaskFactory = mockk()
-    private val projectRepository: ProjectRepository = mockk()
-    private val userRepository: UserRepository = mockk()
+    private val getProjectUseCase: GetProjectUseCase = mockk()
+    private val getTaskUseCase: GetTaskUseCase = mockk()
+    private val getUserUseCase: GetUserUseCase = mockk()
 
     private val sut = CreateTaskUseCase(
         taskRepository,
         createTaskActivityFactory,
         activityRepository,
         taskFactory,
-        projectRepository,
-        userRepository,
+        getProjectUseCase,
+        getTaskUseCase,
+        getUserUseCase,
     )
-
-    @Test
-    fun `throws exception when projectId is not null and this project doesn't exist`() {
-        // given
-        val projectId = ProjectId("projectId")
-        val createTaskRequestModel: CreateTaskRequestModel = mockk()
-        every { createTaskRequestModel.projectId } returns projectId
-        every { projectRepository.containsProject(projectId) } returns false
-
-        // when
-        val actual = { sut(createTaskRequestModel) }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Project with id: $projectId doesn't exist"
-    }
-
-    @Test
-    fun `throws exception when parentTaskId is not null and parent doesn't exist`() {
-        // given
-        val parentId = TaskId("parentId")
-        val createTaskRequestModel: CreateTaskRequestModel = mockk()
-        every { createTaskRequestModel.parentTaskId } returns parentId
-        every { createTaskRequestModel.projectId } returns null
-        every { taskRepository.containsTask(parentId) } returns false
-
-        // when
-        val actual = { sut(createTaskRequestModel) }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Parent task with id: $parentId doesn't exist"
-    }
-
-    @Test
-    fun `throws exception when assigneeId is not null and this user doesn't exist`() {
-        // given
-        val assigneeId = UserId("userId")
-        val createTaskRequestModel: CreateTaskRequestModel = mockk()
-        every { createTaskRequestModel.assigneeId } returns assigneeId
-        every { createTaskRequestModel.projectId } returns null
-        every { createTaskRequestModel.parentTaskId } returns null
-        every { userRepository.containsUser(assigneeId) } returns false
-
-        // when
-        val actual = { sut(createTaskRequestModel) }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Assignee with id: $assigneeId doesn't exist"
-    }
 
     @Test
     fun `creates and adds new task to tasks list`() {
@@ -108,9 +60,9 @@ class CreateTaskUseCaseTest {
             parentTaskId,
             assigneeId,
         )
-        every { projectRepository.containsProject(projectId) } returns true
-        every { taskRepository.containsTask(parentTaskId) } returns true
-        every { userRepository.containsUser(assigneeId) } returns true
+        every { getProjectUseCase(projectId) } returns mockk()
+        every { getTaskUseCase(parentTaskId) } returns mockk()
+        every { getUserUseCase(assigneeId) } returns mockk()
 
         val task: Task = mockk()
         every { taskFactory(createTaskRequestModel) } returns task
@@ -147,9 +99,9 @@ class CreateTaskUseCaseTest {
             parentTaskId,
             assigneeId,
         )
-        every { projectRepository.containsProject(projectId) } returns true
-        every { taskRepository.containsTask(parentTaskId) } returns true
-        every { userRepository.containsUser(assigneeId) } returns true
+        every { getProjectUseCase(projectId) } returns mockk()
+        every { getTaskUseCase(parentTaskId) } returns mockk()
+        every { getUserUseCase(assigneeId) } returns mockk()
 
         val task: Task = mockk()
         every { taskFactory(createTaskRequestModel) } returns task
