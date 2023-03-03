@@ -9,6 +9,6 @@ class GetTaskActivitiesUseCase(
     private val activityRepository: ActivityRepository,
 ) {
     operator fun invoke(taskId: TaskId) = activityRepository
-        .activities
+        .taskActivities
         .filter { it.taskId == taskId }
 }

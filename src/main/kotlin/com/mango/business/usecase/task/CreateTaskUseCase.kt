@@ -3,15 +3,13 @@ package com.mango.business.usecase.task
 import com.mango.business.factory.TaskFactory
 import com.mango.business.model.Task
 import com.mango.business.model.activity.task.CreateTaskActivityFactory
-import com.mango.business.model.request.CreateTaskRequestModel
+import com.mango.business.model.request.task.CreateTaskRequestModel
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
-import com.mango.persistence.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
 class CreateTaskUseCase(
-    private val userRepository: UserRepository,
     private val taskRepository: TaskRepository,
     private val createTaskActivityFactory: CreateTaskActivityFactory,
     private val activityRepository: ActivityRepository,
@@ -23,10 +21,7 @@ class CreateTaskUseCase(
             require(parentTaskExists) { "Parent task with id: $it doesn't exist" }
         }
 
-        val task = taskFactory(
-            createTaskRequestModel,
-            userRepository.getCurrentUser().id,
-        )
+        val task = taskFactory(createTaskRequestModel)
 
         taskRepository.addTask(task)
 

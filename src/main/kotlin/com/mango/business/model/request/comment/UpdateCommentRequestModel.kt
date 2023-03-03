@@ -1,4 +1,4 @@
-package com.mango.business.model.request
+package com.mango.business.model.request.comment
 
 import com.mango.business.model.value.CommentId
 

@@ -1,5 +1,6 @@
 package com.mango.persistence.repository
 
+import com.mango.business.model.activity.project.ProjectActivity
 import com.mango.business.model.activity.task.TaskActivity
 import io.mockk.mockk
 import org.amshove.kluent.shouldContain
@@ -9,7 +10,7 @@ class ActivityRepositoryTest {
     private val sut = ActivityRepository()
 
     @Test
-    fun `addActivity() method add new activity to activity list`() {
+    fun `addActivity() add new TaskActivity to taskActivities`() {
         // given
         val activity: TaskActivity = mockk()
 
@@ -17,6 +18,18 @@ class ActivityRepositoryTest {
         sut.addActivity(activity)
 
         // then
-        sut.activities shouldContain activity
+        sut.taskActivities shouldContain activity
+    }
+
+    @Test
+    fun `addActivity() add new ProjectActivity to projectActivities`() {
+        // given
+        val activity: ProjectActivity = mockk()
+
+        // when
+        sut.addActivity(activity)
+
+        // then
+        sut.projectActivities shouldContain activity
     }
 }

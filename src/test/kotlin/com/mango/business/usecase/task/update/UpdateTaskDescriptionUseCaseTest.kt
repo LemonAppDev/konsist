@@ -52,8 +52,9 @@ class UpdateTaskDescriptionUseCaseTest {
         every { taskRepository.getTask(taskId) } returns oldTask
 
         justRun { taskRepository.updateTask(newTask) }
-        justRun { activityRepository.addActivity(any()) }
-        every { updateTaskDescriptionActivityFactory(taskId, date, oldDescription, newDescription) } returns mockk()
+        val activity: UpdateTaskDescriptionActivity = mockk()
+        every { updateTaskDescriptionActivityFactory(taskId, date, oldDescription, newDescription) } returns activity
+        justRun { activityRepository.addActivity(activity) }
 
         // when
         sut(taskId, newDescription, date)
@@ -75,11 +76,11 @@ class UpdateTaskDescriptionUseCaseTest {
         every { taskRepository.getTask(taskId) } returns oldTask
 
         justRun { taskRepository.updateTask(newTask) }
-        justRun { activityRepository.addActivity(any()) }
         every { updateTaskDescriptionActivityFactory(taskId, date, oldDescription, newDescription) } returns mockk()
 
         val activity: UpdateTaskDescriptionActivity = mockk()
         every { updateTaskDescriptionActivityFactory(taskId, date, oldDescription, newDescription) } returns activity
+        justRun { activityRepository.addActivity(activity) }
 
         // when
         sut(taskId, newDescription, date)

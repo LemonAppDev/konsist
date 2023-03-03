@@ -51,10 +51,10 @@ class UpdateTaskProjectUseCaseTest {
         val oldTask = BusinessTestModel.getTask(id = taskId, projectId = oldProjectId)
         val newTask = oldTask.copy(projectId = newProjectId)
         every { taskRepository.getTask(taskId) } returns oldTask
-
         justRun { taskRepository.updateTask(newTask) }
-        justRun { activityRepository.addActivity(any()) }
-        every { updateTaskProjectActivityFactory(taskId, date, oldProjectId, newProjectId) } returns mockk()
+        val activity: UpdateTaskProjectActivity = mockk()
+        every { updateTaskProjectActivityFactory(taskId, date, oldProjectId, newProjectId) } returns activity
+        justRun { activityRepository.addActivity(activity) }
 
         // when
         sut(taskId, newProjectId, date)
@@ -74,12 +74,11 @@ class UpdateTaskProjectUseCaseTest {
         val oldTask = BusinessTestModel.getTask(id = taskId, projectId = oldProjectId)
         val newTask = oldTask.copy(projectId = newProjectId)
         every { taskRepository.getTask(taskId) } returns oldTask
-
         justRun { taskRepository.updateTask(newTask) }
-        justRun { activityRepository.addActivity(any()) }
 
         val activity: UpdateTaskProjectActivity = mockk()
         every { updateTaskProjectActivityFactory(taskId, date, oldProjectId, newProjectId) } returns activity
+        justRun { activityRepository.addActivity(activity) }
 
         // when
         sut(taskId, newProjectId, date)

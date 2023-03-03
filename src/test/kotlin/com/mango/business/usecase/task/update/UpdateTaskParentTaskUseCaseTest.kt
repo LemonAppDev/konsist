@@ -52,8 +52,9 @@ class UpdateTaskParentTaskUseCaseTest {
         every { taskRepository.getTask(taskId) } returns oldTask
 
         justRun { taskRepository.updateTask(newTask) }
-        justRun { activityRepository.addActivity(any()) }
-        every { updateTaskParentTaskIdActivityFactory(taskId, date, oldParentTaskId, newParentTaskId) } returns mockk()
+        val activity: UpdateTaskParentTaskActivity = mockk()
+        every { updateTaskParentTaskIdActivityFactory(taskId, date, oldParentTaskId, newParentTaskId) } returns activity
+        justRun { activityRepository.addActivity(activity) }
 
         // when
         sut(taskId, newParentTaskId, date)
@@ -73,12 +74,11 @@ class UpdateTaskParentTaskUseCaseTest {
         val oldTask = BusinessTestModel.getTask(id = taskId, parentTaskId = oldParentTaskId)
         val newTask = oldTask.copy(parentTaskId = newParentTaskId)
         every { taskRepository.getTask(taskId) } returns oldTask
-
         justRun { taskRepository.updateTask(newTask) }
-        justRun { activityRepository.addActivity(any()) }
 
         val activity: UpdateTaskParentTaskActivity = mockk()
         every { updateTaskParentTaskIdActivityFactory(taskId, date, oldParentTaskId, newParentTaskId) } returns activity
+        justRun { activityRepository.addActivity(activity) }
 
         // when
         sut(taskId, newParentTaskId, date)

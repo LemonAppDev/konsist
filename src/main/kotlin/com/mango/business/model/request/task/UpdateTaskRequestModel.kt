@@ -1,4 +1,4 @@
-package com.mango.business.model.request
+package com.mango.business.model.request.task
 
 import com.mango.business.model.Priority
 import com.mango.business.model.value.ProjectId

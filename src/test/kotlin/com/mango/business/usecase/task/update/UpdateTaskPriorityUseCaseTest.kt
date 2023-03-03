@@ -53,8 +53,9 @@ class UpdateTaskPriorityUseCaseTest {
         every { taskRepository.getTask(taskId) } returns oldTask
 
         justRun { taskRepository.updateTask(newTask) }
-        justRun { activityRepository.addActivity(any()) }
-        every { updateTaskPriorityActivityFactory(taskId, date, oldPriority, newPriority) } returns mockk()
+        val activity: UpdateTaskPriorityActivity = mockk()
+        every { updateTaskPriorityActivityFactory(taskId, date, oldPriority, newPriority) } returns activity
+        justRun { activityRepository.addActivity(activity) }
 
         // when
         sut(taskId, newPriority, date)
@@ -74,12 +75,11 @@ class UpdateTaskPriorityUseCaseTest {
         val oldTask = BusinessTestModel.getTask(id = taskId, priority = oldPriority)
         val newTask = oldTask.copy(priority = newPriority)
         every { taskRepository.getTask(taskId) } returns oldTask
-
         justRun { taskRepository.updateTask(newTask) }
-        justRun { activityRepository.addActivity(any()) }
 
         val activity: UpdateTaskPriorityActivity = mockk()
         every { updateTaskPriorityActivityFactory(taskId, date, oldPriority, newPriority) } returns activity
+        justRun { activityRepository.addActivity(activity) }
 
         // when
         sut(taskId, newPriority, date)

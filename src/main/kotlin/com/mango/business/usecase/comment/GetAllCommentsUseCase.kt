@@ -1,4 +1,4 @@
-package com.mango.business.usecase.task.comment
+package com.mango.business.usecase.comment
 
 import com.mango.business.model.Comment
 import com.mango.business.model.value.TaskId

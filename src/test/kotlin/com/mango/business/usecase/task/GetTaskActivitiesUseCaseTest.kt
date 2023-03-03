@@ -28,7 +28,7 @@ class GetTaskActivitiesUseCaseTest {
         every { createTaskActivity2.taskId } returns taskId2
 
         val activities = listOf(createTaskActivity1, createTaskActivity2)
-        every { activityRepository.activities } returns activities
+        every { activityRepository.taskActivities } returns activities
 
         // when
         val actual = sut(taskId1)

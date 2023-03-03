@@ -1,7 +1,7 @@
 package com.mango.business.usecase.task.update
 
 import com.mango.business.factory.LocalDateTimeFactory
-import com.mango.business.model.request.UpdateTaskRequestModel
+import com.mango.business.model.request.task.UpdateTaskRequestModel
 import com.mango.persistence.repository.TaskRepository
 import org.springframework.stereotype.Service
 

@@ -3,7 +3,7 @@ package com.mango.business.usecase.task.update
 import com.mango.business.factory.LocalDateTimeFactory
 import com.mango.business.model.Priority
 import com.mango.business.model.Task
-import com.mango.business.model.request.UpdateTaskRequestModel
+import com.mango.business.model.request.task.UpdateTaskRequestModel
 import com.mango.business.model.value.ProjectId
 import com.mango.business.model.value.TaskId
 import com.mango.business.model.value.UserId

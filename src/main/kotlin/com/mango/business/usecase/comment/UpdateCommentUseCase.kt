@@ -1,8 +1,8 @@
-package com.mango.business.usecase.task.comment
+package com.mango.business.usecase.comment
 
 import com.mango.business.factory.LocalDateTimeFactory
 import com.mango.business.model.activity.task.UpdateCommentActivityFactory
-import com.mango.business.model.request.UpdateCommentRequestModel
+import com.mango.business.model.request.comment.UpdateCommentRequestModel
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.CommentRepository
 import org.springframework.stereotype.Service

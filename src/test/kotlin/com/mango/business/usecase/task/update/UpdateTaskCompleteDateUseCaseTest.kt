@@ -58,7 +58,9 @@ class UpdateTaskCompleteDateUseCaseTest {
 
         every { taskRepository.getTask(taskId) } returns oldTask
         justRun { taskRepository.updateTask(any()) }
-        justRun { activityRepository.addActivity(any()) }
+        val activity: UpdateTaskCompleteDateActivity = mockk()
+        every { updateTaskCompleteDateActivityFactory(taskId, date) } returns activity
+        justRun { activityRepository.addActivity(activity) }
 
         // when
         sut(taskId, isComplete, date)
@@ -87,7 +89,7 @@ class UpdateTaskCompleteDateUseCaseTest {
 
         every { taskRepository.getTask(taskId) } returns oldTask
         justRun { taskRepository.updateTask(any()) }
-        justRun { activityRepository.addActivity(any()) }
+        justRun { activityRepository.addActivity(activity) }
 
         // when
         sut(taskId, isComplete, date)
