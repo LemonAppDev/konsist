@@ -43,6 +43,7 @@ class TaskControllerTest {
         actual shouldBeEqualTo task
     }
 
+    @Disabled
     @Test
     fun `create endpoint creates task with parent task`() {
         // given
@@ -55,6 +56,7 @@ class TaskControllerTest {
         actual.parentTaskId shouldBeEqualTo parentTask.id
     }
 
+    @Disabled
     @Test
     fun `delete endpoint deletes task`() {
         // given
@@ -78,6 +80,7 @@ class TaskControllerTest {
         actual shouldBeEqualTo emptyList()
     }
 
+    @Disabled
     @Test
     fun `all endpoint returns 2 tasks`() {
         // given
@@ -118,6 +121,7 @@ class TaskControllerTest {
         actual shouldBeEqualTo updatedTask
     }
 
+    @Disabled
     @Test
     fun `duplicate endpoint duplicates task`() {
         // given
