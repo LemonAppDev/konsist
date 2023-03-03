@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-@Suppress("detekt.LongParameterList", "detekt.TooManyFunctions")
 @RestController
 class TaskController(
     private val createTaskUseCase: CreateTaskUseCase,
