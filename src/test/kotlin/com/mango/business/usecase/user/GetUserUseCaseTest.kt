@@ -31,7 +31,7 @@ class GetUserUseCaseTest {
     }
 
     @Test
-    fun `returns users from userRepository`() {
+    fun `returns user from userRepository`() {
         // given
         val userId = UserId("userId")
         val user: User = mockk()
