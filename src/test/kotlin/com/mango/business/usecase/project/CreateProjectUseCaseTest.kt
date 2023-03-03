@@ -1,11 +1,11 @@
 package com.mango.business.usecase.project
 
 import com.mango.business.factory.ProjectFactory
-import com.mango.business.model.Color
 import com.mango.business.model.Project
 import com.mango.business.model.activity.project.CreateProjectActivity
 import com.mango.business.model.activity.project.CreateProjectActivityFactory
 import com.mango.business.model.request.project.CreateProjectRequestModel
+import com.mango.business.model.value.Color
 import com.mango.business.model.value.ProjectId
 import com.mango.business.model.value.UserId
 import com.mango.persistence.repository.ActivityRepository
@@ -38,7 +38,7 @@ class CreateProjectUseCaseTest {
             "name",
             collaborators,
             false,
-            Color.GREY,
+            Color("0xFF0000"),
         )
         val projectId = ProjectId("id")
         val project: Project = mockk()
@@ -66,7 +66,7 @@ class CreateProjectUseCaseTest {
             "name",
             collaborators,
             false,
-            Color.GREY,
+            Color("0xFF0000"),
         )
         val projectId = ProjectId("id")
         val project: Project = mockk()
