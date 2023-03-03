@@ -86,7 +86,7 @@ class TaskController(
     fun getComments(@RequestParam(name = "taskId") taskId: TaskId) =
         getCommentsUseCase(taskId)
 
-    @GetMapping("/v1/task/childtasks")
+    @GetMapping("/v1/task/child-tasks")
     fun getChildTasks(@RequestParam(name = "taskId") taskId: TaskId) =
         getChildTasksUseCase(taskId)
 }

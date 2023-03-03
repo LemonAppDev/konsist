@@ -126,6 +126,33 @@ class TaskControllerTest {
         // then
         actual shouldBeEqualTo listOf(task1, task2)
     }
+
+    @Test
+    fun `child tasks endpoint return child tasks`() {
+        // given
+        val parentTask = taskEndpointHelper.callCreateEndpoint()
+
+        var childTask = taskEndpointHelper.callCreateEndpoint()
+        childTask = taskEndpointHelper.callUpdateEndpoint(
+            UpdateTaskRequestModel(
+                taskId = childTask.id,
+                name = childTask.name,
+                description = childTask.description,
+                dueDate = childTask.dueDate,
+                targetDate = childTask.targetDate,
+                priority = childTask.priority,
+                projectId = childTask.projectId,
+                parentTaskId = parentTask.id,
+                assigneeId = childTask.assigneeId,
+            ),
+        )
+
+        // when
+        val actual = taskEndpointHelper.callChildTasksEndpoint(parentTask.id)
+
+        // then
+        actual shouldBeEqualTo listOf(childTask)
+    }
 }
 
 @Service
@@ -189,7 +216,13 @@ class TaskEndpointHelper(
         this,
         endpointName = "duplicate",
         method = HttpMethod.POST,
-        null,
+        queryParams = mapOf("taskId" to taskId.id),
+    )
+
+    fun callChildTasksEndpoint(taskId: TaskId) = controllerEndpointCaller.call<List<Task>>(
+        this,
+        endpointName = "child-tasks",
+        method = HttpMethod.GET,
         queryParams = mapOf("taskId" to taskId.id),
     )
 }
