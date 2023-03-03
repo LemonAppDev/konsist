@@ -56,7 +56,7 @@ class TaskController(
     @GetMapping("/v1/task/all")
     fun getTasks() = getAllTasksUseCase()
 
-    @PostMapping("/v1/task/update")
+    @PatchMapping("/v1/task/update")
     fun updateTask(@RequestBody updateTaskRequestModel: UpdateTaskRequestModel): Task {
         updateTaskUseCase(updateTaskRequestModel)
         return getTaskUseCase(updateTaskRequestModel.taskId)

@@ -1,6 +1,7 @@
 package com.mango.business.usecase.task.update
 
 import com.mango.business.common.BusinessTestModel
+import com.mango.business.model.Task
 import com.mango.business.model.activity.task.UpdateTaskParentTaskActivity
 import com.mango.business.model.activity.task.UpdateTaskParentTaskActivityFactory
 import com.mango.business.model.value.TaskId
@@ -11,6 +12,8 @@ import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -28,6 +31,23 @@ class UpdateTaskParentTaskUseCaseTest {
     )
 
     @Test
+    fun `throws exception when parentTask doesn't exist`() {
+        // given
+        val taskId = TaskId("1")
+        val newParentTaskId = TaskId("new parentTaskId")
+        val date: LocalDateTime = mockk()
+        every { taskRepository.containsTask(newParentTaskId) } returns false
+        val task: Task = mockk()
+        every { getTaskUseCase(taskId) } returns task
+
+        // when
+        val actual = { sut(taskId, newParentTaskId, date) }
+
+        // then
+        actual shouldThrow IllegalArgumentException::class withMessage "Parent task with id: $newParentTaskId doesn't exist"
+    }
+
+    @Test
     fun `add task to repository`() {
         // given
         val taskId = TaskId("1")
@@ -37,6 +57,7 @@ class UpdateTaskParentTaskUseCaseTest {
 
         val oldTask = BusinessTestModel.getTask(id = taskId, parentTaskId = oldParentTaskId)
         every { getTaskUseCase(taskId) } returns oldTask
+        every { taskRepository.containsTask(newParentTaskId) } returns true
         val newTask = oldTask.copy(parentTaskId = newParentTaskId)
         every { taskRepository.getTask(taskId) } returns oldTask
 
@@ -62,6 +83,7 @@ class UpdateTaskParentTaskUseCaseTest {
 
         val oldTask = BusinessTestModel.getTask(id = taskId, parentTaskId = oldParentTaskId)
         every { getTaskUseCase(taskId) } returns oldTask
+        every { taskRepository.containsTask(newParentTaskId) } returns true
         val newTask = oldTask.copy(parentTaskId = newParentTaskId)
         justRun { taskRepository.updateTask(newTask) }
 
