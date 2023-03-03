@@ -10,12 +10,11 @@ import com.mango.business.model.value.UserId
 import com.mango.util.ControllerEndpointCaller
 import com.mango.util.Json
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpMethod
+import org.springframework.stereotype.Service
 import org.springframework.test.annotation.DirtiesContext
 import java.time.LocalDateTime
 
@@ -24,46 +23,42 @@ import java.time.LocalDateTime
 class TaskControllerTest {
 
     @Autowired
-    private lateinit var controllerEndpointCaller: ControllerEndpointCaller
+    private lateinit var taskEndpointHelper: TaskEndpointHelper
 
     @Autowired
-    private lateinit var testRestTemplate: TestRestTemplate
+    private lateinit var projectEndpointHelper: ProjectEndpointHelper
+
+    @Autowired
+    private lateinit var userEndpointHelper: UserEndpointHelper
 
     @Test
     fun `create endpoint creates task`() {
         // given
-        val task = callCreateEndpoint()
+        val parentTask = taskEndpointHelper.callCreateEndpoint(name = "parent task")
+        val project = projectEndpointHelper.callCreateEndpoint()
+        val assignee = userEndpointHelper.callCurrentEndpoint()
 
         // when
-        val actual = callGetEndpoint(task.id)
-
-        // then
-        actual shouldBeEqualTo task
-    }
-
-    @Disabled
-    @Test
-    fun `create endpoint creates task with parent task`() {
-        // given
-        val parentTask = callCreateEndpoint(name = "parent task")
-
-        // when
-        val actual = callCreateEndpoint(name = "child task", parentTaskId = parentTask.id)
+        val actual = taskEndpointHelper.callCreateEndpoint(
+            name = "child task",
+            parentTaskId = parentTask.id,
+            projectId = project.id,
+            assigneeId = assignee.id,
+        )
 
         // then
         actual.parentTaskId shouldBeEqualTo parentTask.id
     }
 
-    @Disabled
     @Test
     fun `delete endpoint deletes task`() {
         // given
-        val task1 = callCreateEndpoint()
-        val task2 = callCreateEndpoint()
-        callDeleteEndpoint(task1.id)
+        val task1 = taskEndpointHelper.callCreateEndpoint()
+        val task2 = taskEndpointHelper.callCreateEndpoint()
+        taskEndpointHelper.callDeleteEndpoint(task1.id)
 
         // when
-        val actual = callAllEndpoint()
+        val actual = taskEndpointHelper.callAllEndpoint()
 
         // then
         actual shouldBeEqualTo listOf(task2)
@@ -72,21 +67,20 @@ class TaskControllerTest {
     @Test
     fun `all endpoint returns empty list`() {
         // when
-        val actual = callAllEndpoint()
+        val actual = taskEndpointHelper.callAllEndpoint()
 
         // then
         actual shouldBeEqualTo emptyList()
     }
 
-    @Disabled
     @Test
     fun `all endpoint returns 2 tasks`() {
         // given
-        val task1 = callCreateEndpoint()
-        val task2 = callCreateEndpoint()
+        val task1 = taskEndpointHelper.callCreateEndpoint()
+        val task2 = taskEndpointHelper.callCreateEndpoint()
 
         // when
-        val actual = callAllEndpoint()
+        val actual = taskEndpointHelper.callAllEndpoint()
 
         // then
         actual shouldBeEqualTo listOf(task1, task2)
@@ -95,9 +89,13 @@ class TaskControllerTest {
     @Test
     fun `update endpoint updates task`() {
         // given
-        val parentTask = callCreateEndpoint()
-        val task = callCreateEndpoint()
-        val updatedTask = callUpdateEndpoint(
+        val parentTask = taskEndpointHelper.callCreateEndpoint()
+        val project = projectEndpointHelper.callCreateEndpoint()
+        val assignee = userEndpointHelper.callCurrentEndpoint()
+        val task = taskEndpointHelper.callCreateEndpoint()
+
+        // when
+        val actual = taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
                 taskId = task.id,
                 name = "updated name",
@@ -105,94 +103,93 @@ class TaskControllerTest {
                 dueDate = LocalDateTime.now().plusDays(10),
                 targetDate = LocalDateTime.now().plusDays(20),
                 priority = Priority.PRIORITY_5,
-                projectId = ProjectId("updatedProjectId"),
+                projectId = project.id,
                 parentTaskId = parentTask.id,
-                assigneeId = UserId("updatedAssigneeId"),
+                assigneeId = assignee.id,
             ),
         )
 
-        // when
-        val actual = callGetEndpoint(task.id)
-
         // then
-        actual shouldBeEqualTo updatedTask
+        val expected = taskEndpointHelper.callGetEndpoint(task.id)
+        actual shouldBeEqualTo expected
     }
 
-    @Disabled
     @Test
     fun `duplicate endpoint duplicates task`() {
         // given
-        val task1 = callCreateEndpoint()
-        val task2 = callDuplicateEndpoint(task1.id)
+        val task1 = taskEndpointHelper.callCreateEndpoint()
+        val task2 = taskEndpointHelper.callDuplicateEndpoint(task1.id)
 
-        // whenTask
-        val actual = callAllEndpoint()
+        // when
+        val actual = taskEndpointHelper.callAllEndpoint()
 
         // then
         actual shouldBeEqualTo listOf(task1, task2)
     }
+}
 
-    private fun callCreateEndpoint(name: String? = "task", parentTaskId: TaskId? = null): Task {
+@Service
+class TaskEndpointHelper(
+    private var controllerEndpointCaller: ControllerEndpointCaller,
+) {
+    fun callCreateEndpoint(
+        name: String? = "task",
+        parentTaskId: TaskId? = null,
+        projectId: ProjectId? = null,
+        assigneeId: UserId? = null,
+    ): Task {
         val requestModel = CreateTaskRequestModel(
             name = name ?: "name",
             description = "description",
             dueDate = LocalDateTime.now().plusDays(1),
             targetDate = LocalDateTime.now().plusDays(2),
             priority = 1,
-            projectId = ProjectId("projectId"),
+            projectId = projectId,
             parentTaskId = parentTaskId,
-            assigneeId = UserId("assigneeId"),
+            assigneeId = assigneeId,
         )
 
         val jsonBody = Json.encodeToString(requestModel)
-        return callController(
+        return controllerEndpointCaller.call(
+            this,
             endpointName = "create",
             method = HttpMethod.POST,
             jsonBody = jsonBody,
         )
     }
 
-    private fun callGetEndpoint(taskId: TaskId) = callController<Task>(
+    fun callGetEndpoint(taskId: TaskId) = controllerEndpointCaller.call<Task>(
+        this,
         endpointName = "get",
         method = HttpMethod.GET,
         queryParams = mapOf("taskId" to taskId.id),
     )
 
-    private fun callDeleteEndpoint(taskId: TaskId) = callController<Any?>(
+    fun callDeleteEndpoint(taskId: TaskId) = controllerEndpointCaller.call<Any?>(
+        this,
         endpointName = "delete",
         method = HttpMethod.DELETE,
         queryParams = mapOf("taskId" to taskId.id),
     )
 
-    private fun callAllEndpoint() = callController<List<Task>>(
+    fun callAllEndpoint() = controllerEndpointCaller.call<List<Task>>(
+        this,
         endpointName = "all",
         method = HttpMethod.GET,
     )
 
-    private fun callUpdateEndpoint(requestModel: UpdateTaskRequestModel) = callController<Task>(
+    fun callUpdateEndpoint(requestModel: UpdateTaskRequestModel) = controllerEndpointCaller.call<Task>(
+        this,
         endpointName = "update",
         method = HttpMethod.POST,
         jsonBody = Json.encodeToString(requestModel),
     )
 
-    private fun callDuplicateEndpoint(taskId: TaskId) = callController<Task>(
+    fun callDuplicateEndpoint(taskId: TaskId) = controllerEndpointCaller.call<Task>(
+        this,
         endpointName = "duplicate",
         method = HttpMethod.POST,
         null,
         queryParams = mapOf("taskId" to taskId.id),
-    )
-
-    private inline fun <reified T : Any?> callController(
-        endpointName: String,
-        method: HttpMethod,
-        jsonBody: String? = null,
-        queryParams: Map<String, String> = emptyMap(),
-    ) = controllerEndpointCaller.call<T>(
-        this,
-        testRestTemplate,
-        endpointName = endpointName,
-        method = method,
-        jsonBody = jsonBody,
-        queryParams = queryParams,
     )
 }

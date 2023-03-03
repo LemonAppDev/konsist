@@ -10,8 +10,8 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpMethod
+import org.springframework.stereotype.Service
 import org.springframework.test.annotation.DirtiesContext
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -19,24 +19,27 @@ import org.springframework.test.annotation.DirtiesContext
 class ProjectControllerTest {
 
     @Autowired
-    private lateinit var controllerEndpointCaller: ControllerEndpointCaller
-
-    @Autowired
-    private lateinit var testRestTemplate: TestRestTemplate
+    private lateinit var projectEndpointHelper: ProjectEndpointHelper
 
     @Test
     fun `create endpoint creates project`() {
         // given
-        val project = callCreateEndpoint()
+        val project = projectEndpointHelper.callCreateEndpoint()
 
         // when
-        val actual = callGetEndpoint(project.id)
+        val actual = projectEndpointHelper.callGetEndpoint(project.id)
 
         // then
         actual shouldBeEqualTo project
     }
+}
 
-    private fun callCreateEndpoint(name: String? = "project"): Project {
+@Service
+class ProjectEndpointHelper(
+    private var controllerEndpointCaller: ControllerEndpointCaller,
+) {
+
+    fun callCreateEndpoint(name: String? = "project"): Project {
         val requestModel = CreateProjectRequestModel(
             name = name ?: "name",
             collaborators = null,
@@ -45,30 +48,18 @@ class ProjectControllerTest {
         )
 
         val jsonBody = Json.encodeToString(requestModel)
-        return callController(
+        return controllerEndpointCaller.call(
+            this,
             endpointName = "create",
             method = HttpMethod.POST,
             jsonBody = jsonBody,
         )
     }
 
-    private fun callGetEndpoint(projectId: ProjectId) = callController<Project>(
+    fun callGetEndpoint(projectId: ProjectId) = controllerEndpointCaller.call<Project>(
+        this,
         endpointName = "get",
         method = HttpMethod.GET,
         queryParams = mapOf("projectId" to projectId.id),
-    )
-
-    private inline fun <reified T : Any?> callController(
-        endpointName: String,
-        method: HttpMethod,
-        jsonBody: String? = null,
-        queryParams: Map<String, String> = emptyMap(),
-    ) = controllerEndpointCaller.call<T>(
-        this,
-        testRestTemplate,
-        endpointName = endpointName,
-        method = method,
-        jsonBody = jsonBody,
-        queryParams = queryParams,
     )
 }

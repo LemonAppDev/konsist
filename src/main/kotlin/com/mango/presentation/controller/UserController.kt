@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RestController
 class UserController(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
 ) {
-    @GetMapping("/v1/user/get")
+    @GetMapping("/v1/user/current")
     fun getCurrentUser() = getCurrentUserUseCase()
 }
