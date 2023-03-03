@@ -24,5 +24,5 @@ class TaskRepository {
         _tasks.add(task)
     }
 
-    fun containsTask(parentTaskId: TaskId) = getTask(parentTaskId) != null
+    fun containsTask(taskId: TaskId) = getTask(taskId) != null
 }

@@ -10,6 +10,5 @@ class UserRepository {
         User(UserId("1"), "Natalia"),
         User(UserId("2"), "Lukasz"),
     )
-
     fun getCurrentUser(): User = _users.first()
 }

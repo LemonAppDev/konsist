@@ -185,7 +185,7 @@ class TaskRepositoryTest {
     }
 
     @Test
-    fun `getTasks() return owners tasks`() {
+    fun `tasks property return owners tasks`() {
         // given
         val ownerId = UserId("id")
         every { userRepository.getCurrentUser().id } returns ownerId
@@ -209,13 +209,13 @@ class TaskRepositoryTest {
     @Test
     fun `containsTask() return true when task exist`() {
         // given
-        val parentTaskId = TaskId("id")
+        val taskId = TaskId("id")
         val task: Task = mockk()
-        every { task.id } returns parentTaskId
+        every { task.id } returns taskId
         sut.addTask(task)
 
         // when
-        val actual = sut.containsTask(parentTaskId)
+        val actual = sut.containsTask(taskId)
 
         // then
         actual shouldBeEqualTo true
@@ -224,10 +224,10 @@ class TaskRepositoryTest {
     @Test
     fun `containsTask() return false when task doesn't exist`() {
         // given
-        val parentTaskId = TaskId("id")
+        val taskId = TaskId("id")
 
         // when
-        val actual = sut.containsTask(parentTaskId)
+        val actual = sut.containsTask(taskId)
 
         // then
         actual shouldBeEqualTo false

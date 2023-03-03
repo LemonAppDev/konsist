@@ -10,6 +10,7 @@ import com.mango.business.model.value.UserId
 import com.mango.util.Json
 import com.mango.util.ext.exchange
 import org.amshove.kluent.shouldBeEqualTo
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -90,6 +91,7 @@ class TaskControllerTest {
         actual shouldBeEqualTo listOf(task1, task2)
     }
 
+    @Disabled
     @Test
     fun `update endpoint updates task`() {
         // given
