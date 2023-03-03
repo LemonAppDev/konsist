@@ -2,7 +2,7 @@
 
 ## Linters
 
-Run spotless:
+Run spotless (ktlint):
 
 - `./gradlew spotlessCheck` - checks that sourcecode satisfies formatting steps.
 - `./gradlew spotlessApply` - applies code formatting steps to sourcecode in-place.
@@ -12,8 +12,11 @@ Run detekt:
 - `./gradlew detektCheck` - checks that sourcecode satisfies detekt rules.
 - `./gradlew detektApply` - applies detekt code formatting rules to sourcecode in-place.
 
+Run tests (unit and arch-unit tests):
 
-Run tests (including arch-unit):
+- `./gradlew test` - run all tests.
+
+Run integration tests (including arch-unit):
 
 - `./gradlew test` - run all tests.
 
