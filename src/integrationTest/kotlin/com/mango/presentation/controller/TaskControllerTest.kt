@@ -7,13 +7,12 @@ import com.mango.business.model.request.task.UpdateTaskRequestModel
 import com.mango.business.model.value.ProjectId
 import com.mango.business.model.value.TaskId
 import com.mango.business.model.value.UserId
+import com.mango.util.ControllerEndpointCaller
 import com.mango.util.Json
-import com.mango.util.ext.exchange
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpMethod
@@ -24,12 +23,11 @@ import java.time.LocalDateTime
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class TaskControllerTest {
 
-    @Value(value = "\${local.server.port}")
-    private val port = 0
-    private val controllerUrl get() = "http://localhost:$port/v1/task/"
+    @Autowired
+    private lateinit var controllerEndpointCaller: ControllerEndpointCaller
 
     @Autowired
-    private lateinit var restTemplate: TestRestTemplate
+    private lateinit var testRestTemplate: TestRestTemplate
 
     @Test
     fun `create endpoint creates task`() {
@@ -94,7 +92,6 @@ class TaskControllerTest {
         actual shouldBeEqualTo listOf(task1, task2)
     }
 
-    @Disabled
     @Test
     fun `update endpoint updates task`() {
         // given
@@ -148,50 +145,52 @@ class TaskControllerTest {
         )
 
         val jsonBody = Json.encodeToString(requestModel)
-        return callTaskController(
+        return callController(
             endpointName = "create",
             method = HttpMethod.POST,
             jsonBody = jsonBody,
         )
     }
 
-    private fun callGetEndpoint(taskId: TaskId) = callTaskController<Task>(
+    private fun callGetEndpoint(taskId: TaskId) = callController<Task>(
         endpointName = "get",
         method = HttpMethod.GET,
         queryParams = mapOf("taskId" to taskId.id),
     )
 
-    private fun callDeleteEndpoint(taskId: TaskId) = callTaskController<Any?>(
+    private fun callDeleteEndpoint(taskId: TaskId) = callController<Any?>(
         endpointName = "delete",
         method = HttpMethod.DELETE,
         queryParams = mapOf("taskId" to taskId.id),
     )
 
-    private fun callAllEndpoint() = callTaskController<List<Task>>(
+    private fun callAllEndpoint() = callController<List<Task>>(
         endpointName = "all",
         method = HttpMethod.GET,
     )
 
-    private fun callUpdateEndpoint(requestModel: UpdateTaskRequestModel) = callTaskController<Task>(
+    private fun callUpdateEndpoint(requestModel: UpdateTaskRequestModel) = callController<Task>(
         endpointName = "update",
         method = HttpMethod.POST,
         jsonBody = Json.encodeToString(requestModel),
     )
 
-    private fun callDuplicateEndpoint(taskId: TaskId) = callTaskController<Task>(
+    private fun callDuplicateEndpoint(taskId: TaskId) = callController<Task>(
         endpointName = "duplicate",
         method = HttpMethod.POST,
         null,
         queryParams = mapOf("taskId" to taskId.id),
     )
 
-    private inline fun <reified T : Any?> callTaskController(
+    private inline fun <reified T : Any?> callController(
         endpointName: String,
         method: HttpMethod,
         jsonBody: String? = null,
-        queryParams: Map<String, String>? = null,
-    ): T = restTemplate.exchange(
-        url = "$controllerUrl/$endpointName",
+        queryParams: Map<String, String> = emptyMap(),
+    ) = controllerEndpointCaller.call<T>(
+        this,
+        testRestTemplate,
+        endpointName = endpointName,
         method = method,
         jsonBody = jsonBody,
         queryParams = queryParams,
