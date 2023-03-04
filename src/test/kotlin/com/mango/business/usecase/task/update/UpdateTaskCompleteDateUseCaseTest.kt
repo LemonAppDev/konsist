@@ -1,6 +1,6 @@
 package com.mango.business.usecase.task.update
 
-import com.mango.business.common.BusinessTestModel
+import com.mango.business.common.model.BusinessTestModel
 import com.mango.business.model.Task
 import com.mango.business.model.activity.task.UpdateTaskCompleteDateActivity
 import com.mango.business.model.activity.task.UpdateTaskCompleteDateActivityFactory

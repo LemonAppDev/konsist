@@ -74,7 +74,7 @@ class CreateTaskUseCaseTest {
         justRun { activityRepository.addActivity(any<TaskActivity>()) }
 
         // when
-        sut(createTaskRequestModel)
+        sut.invoke(createTaskRequestModel)
 
         // then
         verify { taskRepository.addTask(task) }
@@ -113,7 +113,7 @@ class CreateTaskUseCaseTest {
         justRun { activityRepository.addActivity(activity) }
 
         // when
-        sut(createTaskRequestModel)
+        sut.invoke(createTaskRequestModel)
 
         // then
         verify { activityRepository.addActivity(activity) }

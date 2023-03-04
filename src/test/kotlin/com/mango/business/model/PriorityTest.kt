@@ -9,8 +9,6 @@ import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class PriorityTest {
-    private val sut = Priority.Companion
-
     @ParameterizedTest(name = "given {1} returns {2}")
     @MethodSource("provideValues")
     fun `given value return Priority`(
@@ -18,7 +16,7 @@ class PriorityTest {
         priority: Priority,
     ) {
         // when
-        val actual = sut.getByValue(value)
+        val actual = Priority.getByValue(value)
 
         // then
         actual shouldBeEqualTo priority
@@ -42,7 +40,7 @@ class PriorityTest {
         val value = 6
 
         // when
-        val actual = { sut.getByValue(value) }
+        val actual = { Priority.getByValue(value) }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Invalid priority value: $value "
@@ -54,7 +52,7 @@ class PriorityTest {
         val value = null
 
         // when
-        val actual = sut.getByValue(value)
+        val actual = Priority.getByValue(value)
 
         // then
         actual shouldBeEqualTo null

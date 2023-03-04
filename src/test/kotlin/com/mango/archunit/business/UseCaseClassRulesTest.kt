@@ -1,9 +1,8 @@
 package com.mango.archunit.business
 
-import com.mango.archunit.utils.CustomArchCondition.haveExactlyOneMethodStartingWith
 import com.mango.archunit.utils.PackageIdentifier
 import com.mango.archunit.utils.ProjectClassesProvider.allClasses
-import com.tngtech.archunit.core.domain.JavaModifier
+import com.mango.archunit.utils.haveOnePublicMethodWithName
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes
 import org.junit.jupiter.api.Test
 
@@ -20,7 +19,7 @@ class UseCaseClassRulesTest {
     fun `classes with UseCase should have single method name invoke`() {
         classes()
             .that().haveSimpleNameEndingWith("UseCase")
-            .should(haveExactlyOneMethodStartingWith("invoke", JavaModifier.PUBLIC))
+            .should(haveOnePublicMethodWithName("invoke"))
             .check(allClasses)
     }
 }

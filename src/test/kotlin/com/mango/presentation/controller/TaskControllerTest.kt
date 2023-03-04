@@ -63,13 +63,13 @@ class TaskControllerTest {
     fun `createTask() calls createTaskUseCase()`() {
         // given
         val createTaskRequestModel: CreateTaskRequestModel = mockk()
-        every { createTaskUseCase(createTaskRequestModel) } returns mockk()
+        every { createTaskUseCase.invoke(createTaskRequestModel) } returns mockk()
 
         // when
         sut.createTask(createTaskRequestModel)
 
         // then
-        verify { createTaskUseCase(createTaskRequestModel) }
+        verify { createTaskUseCase.invoke(createTaskRequestModel) }
     }
 
     @Test

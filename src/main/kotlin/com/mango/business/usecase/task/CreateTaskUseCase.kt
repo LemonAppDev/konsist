@@ -20,7 +20,7 @@ class CreateTaskUseCase(
     private val getTaskUseCase: GetTaskUseCase,
     private val getUserUseCase: GetUserUseCase,
 ) {
-    operator fun invoke(createTaskRequestModel: CreateTaskRequestModel): Task {
+    fun invoke(createTaskRequestModel: CreateTaskRequestModel): Task {
         createTaskRequestModel.projectId?.let {
             getProjectUseCase(it)
         }

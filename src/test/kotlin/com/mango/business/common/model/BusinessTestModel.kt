@@ -1,4 +1,4 @@
-package com.mango.business.common
+package com.mango.business.common.model
 
 import com.mango.business.model.Priority
 import com.mango.business.model.Task

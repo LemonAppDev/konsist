@@ -46,7 +46,7 @@ class TaskController(
 ) {
     @PostMapping("/v1/task/create")
     fun createTask(@RequestBody createTaskRequestModel: CreateTaskRequestModel) =
-        createTaskUseCase(createTaskRequestModel)
+        createTaskUseCase.invoke(createTaskRequestModel)
 
     @GetMapping("/v1/task/get")
     fun getTask(taskId: TaskId) = getTaskUseCase(taskId)

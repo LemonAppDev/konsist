@@ -1,6 +1,6 @@
 package com.mango.business.usecase.task.update
 
-import com.mango.business.common.BusinessTestModel
+import com.mango.business.common.model.BusinessTestModel
 import com.mango.business.model.activity.task.UpdateTaskAssigneeActivity
 import com.mango.business.model.activity.task.UpdateTaskAssigneeActivityFactory
 import com.mango.business.model.value.TaskId
