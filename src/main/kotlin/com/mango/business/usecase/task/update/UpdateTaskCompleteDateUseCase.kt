@@ -27,11 +27,13 @@ class UpdateTaskCompleteDateUseCase(
         }
     }
 
-    private fun updateCompleteDate(task: Task, activityDate: LocalDateTime, completeDate: LocalDateTime?) {
-        val completedTask = task.copy(completeDate = completeDate)
-        taskRepository.updateTask(completedTask)
+    private fun updateCompleteDate(task: Task, date: LocalDateTime, completeDate: LocalDateTime?) {
+        val oldDate = task.completeDate
+        val newTask = task.copy(completeDate = completeDate)
 
-        val activity = updateTaskCompleteDateActivityFactory(completedTask.id, activityDate)
+        taskRepository.updateTask(newTask)
+
+        val activity = updateTaskCompleteDateActivityFactory(newTask.id, date, oldDate, newTask.completeDate)
         activityRepository.addActivity(activity)
     }
 }

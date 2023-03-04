@@ -42,11 +42,12 @@ class UpdateTaskCompleteDateUseCaseTest {
         val date: LocalDateTime = mockk()
         val oldTask: Task = BusinessTestModel.getTask(completeDate = currentCompleteDate)
         every { getTaskUseCase(taskId) } returns oldTask
-        every { updateTaskCompleteDateActivityFactory(taskId, date) } returns mockk()
+        val newCompleteDate = if (isComplete) date else null
+        every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns mockk()
 
         justRun { taskRepository.updateTask(any()) }
         val activity: UpdateTaskCompleteDateActivity = mockk()
-        every { updateTaskCompleteDateActivityFactory(taskId, date) } returns activity
+        every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns activity
         justRun { activityRepository.addActivity(activity) }
 
         // when
@@ -55,7 +56,6 @@ class UpdateTaskCompleteDateUseCaseTest {
         // then
 
         if (shouldUpdateCompleteDate) {
-            val newCompleteDate = if (isComplete) date else null
             verify { taskRepository.updateTask(oldTask.copy(completeDate = newCompleteDate)) }
         }
     }
@@ -72,10 +72,12 @@ class UpdateTaskCompleteDateUseCaseTest {
         val date: LocalDateTime = mockk()
         val oldTask: Task = BusinessTestModel.getTask(completeDate = currentCompleteDate)
         every { getTaskUseCase(taskId) } returns oldTask
-        val activity: UpdateTaskCompleteDateActivity = mockk()
-        every { updateTaskCompleteDateActivityFactory(taskId, date) } returns activity
+        val newCompleteDate = if (isComplete) date else null
+        every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns mockk()
 
         justRun { taskRepository.updateTask(any()) }
+        val activity: UpdateTaskCompleteDateActivity = mockk()
+        every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns activity
         justRun { activityRepository.addActivity(activity) }
 
         // when
