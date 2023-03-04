@@ -67,8 +67,8 @@ class TaskController(
     fun duplicateTask(@RequestParam(name = "taskId") taskId: TaskId) =
         duplicateTaskUseCase.invoke(taskId)
 
-    @GetMapping("/v1/task/activity")
-    fun getTaskActivity(@RequestParam(name = "taskId") taskId: TaskId) =
+    @GetMapping("/v1/task/activities")
+    fun getActivities(@RequestParam(name = "taskId") taskId: TaskId) =
         getTaskActivitiesUseCase(taskId)
 
     @PostMapping("/v1/task/add-comment")

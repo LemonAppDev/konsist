@@ -159,13 +159,13 @@ class TaskControllerTest {
     }
 
     @Test
-    fun `getTaskActivities() calls getTaskActivityUseCase()`() {
+    fun `getActivities() calls getTaskActivityUseCase()`() {
         // given
         val taskId = TaskId("id")
         every { getTaskActivitiesUseCase(taskId) } returns mockk()
 
         // when
-        sut.getTaskActivity(taskId)
+        sut.getActivities(taskId)
 
         // then
         verify { getTaskActivitiesUseCase(taskId) }
