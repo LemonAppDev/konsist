@@ -13,10 +13,10 @@ class UpdateCommentUseCase(
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val updateCommentActivityFactory: UpdateCommentActivityFactory,
     private val activityRepository: ActivityRepository,
+    private val getCommentUseCase: GetCommentUseCase,
 ) {
     operator fun invoke(updateCommentRequestModel: UpdateCommentRequestModel) {
-        val comment = commentRepository.getComment(updateCommentRequestModel.commentId)
-        requireNotNull(comment) { "Comment doesn't exist: commentId: ${updateCommentRequestModel.commentId}" }
+        val comment = getCommentUseCase(updateCommentRequestModel.commentId)
 
         updateCommentRequestModel.text?.let {
             if (updateCommentRequestModel.text != comment.text) {

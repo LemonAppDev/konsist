@@ -1,9 +1,13 @@
 package com.mango.presentation.controller
 
+import com.mango.business.model.Comment
 import com.mango.business.model.Priority
 import com.mango.business.model.Task
+import com.mango.business.model.request.comment.AddCommentRequestModel
+import com.mango.business.model.request.comment.UpdateCommentRequestModel
 import com.mango.business.model.request.task.CreateTaskRequestModel
 import com.mango.business.model.request.task.UpdateTaskRequestModel
+import com.mango.business.model.value.CommentId
 import com.mango.business.model.value.ProjectId
 import com.mango.business.model.value.TaskId
 import com.mango.business.model.value.UserId
@@ -128,6 +132,103 @@ class TaskControllerTest {
     }
 
     @Test
+    fun `add task comment endpoint adds comment`() {
+        // given
+        val task = taskEndpointHelper.callCreateEndpoint()
+
+        // when
+        val actual = taskEndpointHelper.callAddCommentEndpoint(
+            AddCommentRequestModel(
+                taskId = task.id,
+                text = "comment",
+            ),
+        )
+
+        // then
+        val expected = taskEndpointHelper.callGetCommentsEndpoint(task.id)
+        listOf(actual) shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `delete comment endpoint deletes comment`() {
+        // given
+        val task = taskEndpointHelper.callCreateEndpoint()
+        val comment1 = taskEndpointHelper.callAddCommentEndpoint(
+            AddCommentRequestModel(
+                taskId = task.id,
+                text = "comment",
+            ),
+        )
+        val comment2 = taskEndpointHelper.callAddCommentEndpoint(
+            AddCommentRequestModel(
+                taskId = task.id,
+                text = "comment",
+            ),
+        )
+
+        // when
+        taskEndpointHelper.callDeleteCommentEndpoint(comment1.id)
+
+        // then
+        val expected = taskEndpointHelper.callGetCommentsEndpoint(task.id)
+        listOf(comment2) shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `comments all endpoint returns all comments`() {
+        // given
+        val task = taskEndpointHelper.callCreateEndpoint()
+        val comment1 = taskEndpointHelper.callAddCommentEndpoint(
+            AddCommentRequestModel(
+                taskId = task.id,
+                text = "comment",
+            ),
+        )
+        val comment2 = taskEndpointHelper.callAddCommentEndpoint(
+            AddCommentRequestModel(
+                taskId = task.id,
+                text = "comment",
+            ),
+        )
+
+        // when
+        val actual = taskEndpointHelper.callGetCommentsEndpoint(task.id)
+
+        // then
+        actual shouldBeEqualTo listOf(comment1, comment2)
+    }
+
+    @Test
+    fun `update comment endpoint updates comment`() {
+        // given
+        val task = taskEndpointHelper.callCreateEndpoint()
+        val comment1 = taskEndpointHelper.callAddCommentEndpoint(
+            AddCommentRequestModel(
+                taskId = task.id,
+                text = "comment",
+            ),
+        )
+        val comment2 = taskEndpointHelper.callAddCommentEndpoint(
+            AddCommentRequestModel(
+                taskId = task.id,
+                text = "comment",
+            ),
+        )
+
+        // when
+        val actual = taskEndpointHelper.callUpdateCommentEndpoint(
+            UpdateCommentRequestModel(
+                commentId = comment1.id,
+                text = "updated comment",
+            ),
+        )
+
+        // then
+        val expected = taskEndpointHelper.callGetCommentsEndpoint(task.id)
+        listOf(comment2, actual) shouldBeEqualTo expected
+    }
+
+    @Test
     fun `child tasks endpoint return child tasks`() {
         // given
         val parentTask = taskEndpointHelper.callCreateEndpoint()
@@ -216,6 +317,34 @@ class TaskEndpointHelper(
         this,
         endpointName = "duplicate",
         method = HttpMethod.POST,
+        queryParams = mapOf("taskId" to taskId.id),
+    )
+
+    fun callAddCommentEndpoint(requestModel: AddCommentRequestModel) = controllerEndpointCaller.call<Comment>(
+        this,
+        endpointName = "add-comment",
+        method = HttpMethod.POST,
+        jsonBody = Json.encodeToString(requestModel),
+    )
+
+    fun callDeleteCommentEndpoint(commentId: CommentId) = controllerEndpointCaller.call<Any?>(
+        this,
+        endpointName = "delete-comment",
+        method = HttpMethod.DELETE,
+        queryParams = mapOf("commentId" to commentId.id),
+    )
+
+    fun callUpdateCommentEndpoint(requestModel: UpdateCommentRequestModel) = controllerEndpointCaller.call<Comment>(
+        this,
+        endpointName = "update-comment",
+        method = HttpMethod.POST,
+        jsonBody = Json.encodeToString(requestModel),
+    )
+
+    fun callGetCommentsEndpoint(taskId: TaskId) = controllerEndpointCaller.call<List<Comment>>(
+        this,
+        endpointName = "comments-all",
+        method = HttpMethod.GET,
         queryParams = mapOf("taskId" to taskId.id),
     )
 

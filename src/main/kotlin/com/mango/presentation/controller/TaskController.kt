@@ -1,5 +1,6 @@
 package com.mango.presentation.controller
 
+import com.mango.business.model.Comment
 import com.mango.business.model.Task
 import com.mango.business.model.request.comment.AddCommentRequestModel
 import com.mango.business.model.request.comment.UpdateCommentRequestModel
@@ -9,6 +10,7 @@ import com.mango.business.model.value.CommentId
 import com.mango.business.model.value.TaskId
 import com.mango.business.usecase.comment.AddCommentUseCase
 import com.mango.business.usecase.comment.DeleteCommentUseCase
+import com.mango.business.usecase.comment.GetCommentUseCase
 import com.mango.business.usecase.comment.GetCommentsUseCase
 import com.mango.business.usecase.comment.UpdateCommentUseCase
 import com.mango.business.usecase.task.CreateTaskUseCase
@@ -21,7 +23,6 @@ import com.mango.business.usecase.task.GetTaskUseCase
 import com.mango.business.usecase.task.update.UpdateTaskUseCase
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
@@ -39,6 +40,7 @@ class TaskController(
     private val addCommentUseCase: AddCommentUseCase,
     private val deleteCommentUseCase: DeleteCommentUseCase,
     private val updateCommentUseCase: UpdateCommentUseCase,
+    private val getCommentUseCase: GetCommentUseCase,
     private val getCommentsUseCase: GetCommentsUseCase,
     private val getChildTasksUseCase: GetChildTasksUseCase,
 ) {
@@ -77,12 +79,13 @@ class TaskController(
     fun deleteComment(@RequestParam(name = "commentId") commentId: CommentId) =
         deleteCommentUseCase(commentId)
 
-    @PatchMapping("/v1/task/update-comment")
-    fun updateComment(@RequestBody updateCommentRequestModel: UpdateCommentRequestModel) {
+    @PostMapping("/v1/task/update-comment")
+    fun updateComment(@RequestBody updateCommentRequestModel: UpdateCommentRequestModel): Comment {
         updateCommentUseCase(updateCommentRequestModel)
+        return getCommentUseCase(updateCommentRequestModel.commentId)
     }
 
-    @GetMapping("/v1/task/comments")
+    @GetMapping("/v1/task/comments-all")
     fun getComments(@RequestParam(name = "taskId") taskId: TaskId) =
         getCommentsUseCase(taskId)
 

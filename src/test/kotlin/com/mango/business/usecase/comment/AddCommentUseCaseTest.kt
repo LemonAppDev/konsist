@@ -7,47 +7,30 @@ import com.mango.business.model.activity.task.AddCommentActivity
 import com.mango.business.model.activity.task.AddCommentActivityFactory
 import com.mango.business.model.request.comment.AddCommentRequestModel
 import com.mango.business.model.value.TaskId
+import com.mango.business.usecase.task.GetTaskUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.CommentRepository
-import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class AddCommentUseCaseTest {
     private val commentFactory: CommentFactory = mockk()
-    private val taskRepository: TaskRepository = mockk()
     private val commentRepository: CommentRepository = mockk()
     private val activityRepository: ActivityRepository = mockk()
     private val addCommentActivityFactory: AddCommentActivityFactory = mockk()
+    private val getTaskUseCase: GetTaskUseCase = mockk()
 
     private val sut = AddCommentUseCase(
         commentFactory,
-        taskRepository,
         commentRepository,
         activityRepository,
         addCommentActivityFactory,
+        getTaskUseCase,
     )
-
-    @Test
-    fun `throws exception when task doesn't exist`() {
-        // given
-        val taskId = TaskId("id")
-        val addCommentRequestModel: AddCommentRequestModel = mockk()
-        every { addCommentRequestModel.taskId } returns taskId
-        every { taskRepository.getTask(taskId) } returns null
-
-        // when
-        val actual = { sut(addCommentRequestModel) }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Task doesn't exist id: $taskId"
-    }
 
     @Test
     fun `add comment to repository`() {
@@ -56,7 +39,7 @@ class AddCommentUseCaseTest {
         val addCommentRequestModel = AddCommentRequestModel(taskId, "comment")
         val task: Task = mockk()
         every { task.id } returns taskId
-        every { taskRepository.getTask(taskId) } returns task
+        every { getTaskUseCase(taskId) } returns task
         val date: LocalDateTime = mockk()
         val comment: Comment = mockk()
         val text = "comment"
@@ -83,7 +66,7 @@ class AddCommentUseCaseTest {
         val addCommentRequestModel = AddCommentRequestModel(taskId, "comment")
         val task: Task = mockk()
         every { task.id } returns taskId
-        every { taskRepository.getTask(TaskId("id")) } returns task
+        every { getTaskUseCase(TaskId("id")) } returns task
         val date: LocalDateTime = mockk()
         val comment: Comment = mockk()
         val text = "comment"

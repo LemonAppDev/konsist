@@ -13,8 +13,6 @@ import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -23,27 +21,15 @@ class UpdateCommentUseCaseTest {
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val updateCommentActivityFactory: UpdateCommentActivityFactory = mockk()
     private val activityRepository: ActivityRepository = mockk()
+    private val getCommentUseCase: GetCommentUseCase = mockk()
 
     private val sut = UpdateCommentUseCase(
         commentRepository,
         localDateTimeFactory,
         updateCommentActivityFactory,
         activityRepository,
+        getCommentUseCase,
     )
-
-    @Test
-    fun `throws exception when comment doesn't exist`() {
-        // given
-        val updateCommentRequestModel = UpdateCommentRequestModel(CommentId("id"), "text")
-        val commentId = updateCommentRequestModel.commentId
-        every { commentRepository.getComment(CommentId("id")) } returns null
-
-        // when
-        val actual = { sut(updateCommentRequestModel) }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Comment doesn't exist: commentId: $commentId"
-    }
 
     @Test
     fun `add comment to repository`() {
@@ -56,7 +42,7 @@ class UpdateCommentUseCaseTest {
         val oldComment: Comment = mockk()
         every { oldComment.text } returns oldText
         every { oldComment.taskId } returns taskId
-        every { commentRepository.getComment(commentId) } returns oldComment
+        every { getCommentUseCase(commentId) } returns oldComment
         val newComment: Comment = mockk()
         every { newComment.text } returns newText
         every { oldComment.copy(text = newText) } returns newComment
@@ -85,7 +71,7 @@ class UpdateCommentUseCaseTest {
         val oldComment: Comment = mockk()
         every { oldComment.text } returns oldText
         every { oldComment.taskId } returns taskId
-        every { commentRepository.getComment(commentId) } returns oldComment
+        every { getCommentUseCase(commentId) } returns oldComment
         val newComment: Comment = mockk()
         every { newComment.text } returns newText
         every { oldComment.copy(text = newText) } returns newComment

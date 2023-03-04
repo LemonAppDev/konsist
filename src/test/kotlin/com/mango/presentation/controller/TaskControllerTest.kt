@@ -1,5 +1,6 @@
 package com.mango.presentation.controller
 
+import com.mango.business.model.Comment
 import com.mango.business.model.Task
 import com.mango.business.model.request.comment.AddCommentRequestModel
 import com.mango.business.model.request.comment.UpdateCommentRequestModel
@@ -9,6 +10,7 @@ import com.mango.business.model.value.CommentId
 import com.mango.business.model.value.TaskId
 import com.mango.business.usecase.comment.AddCommentUseCase
 import com.mango.business.usecase.comment.DeleteCommentUseCase
+import com.mango.business.usecase.comment.GetCommentUseCase
 import com.mango.business.usecase.comment.GetCommentsUseCase
 import com.mango.business.usecase.comment.UpdateCommentUseCase
 import com.mango.business.usecase.task.CreateTaskUseCase
@@ -23,6 +25,7 @@ import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
+import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class TaskControllerTest {
@@ -35,6 +38,7 @@ class TaskControllerTest {
     private val addCommentUseCase: AddCommentUseCase = mockk()
     private val deleteCommentUseCase: DeleteCommentUseCase = mockk()
     private val updateCommentUseCase: UpdateCommentUseCase = mockk()
+    private val getCommentUseCase: GetCommentUseCase = mockk()
     private val getCommentsUseCase: GetCommentsUseCase = mockk()
     private val getTaskUseCase: GetTaskUseCase = mockk()
     private val getChildTasksUseCase: GetChildTasksUseCase = mockk()
@@ -50,6 +54,7 @@ class TaskControllerTest {
         addCommentUseCase,
         deleteCommentUseCase,
         updateCommentUseCase,
+        getCommentUseCase,
         getCommentsUseCase,
         getChildTasksUseCase,
     )
@@ -124,7 +129,7 @@ class TaskControllerTest {
     }
 
     @Test
-    fun `updateTask() calls getTasksUseCase() method`() {
+    fun `updateTask() calls returns updated task`() {
         // given
         val taskId = TaskId("id")
         val task: Task = mockk()
@@ -134,10 +139,10 @@ class TaskControllerTest {
         every { getTaskUseCase(taskId) } returns task
 
         // when
-        sut.updateTask(updateTaskRequestModel)
+        val actual = sut.updateTask(updateTaskRequestModel)
 
         // then
-        verify { getTaskUseCase(taskId) }
+        actual shouldBeEqualTo task
     }
 
     @Test
@@ -197,12 +202,33 @@ class TaskControllerTest {
         // given
         val updateCommentRequestModel: UpdateCommentRequestModel = mockk()
         justRun { updateCommentUseCase(updateCommentRequestModel) }
+        val commentId = CommentId("id")
+        val comment: Comment = mockk()
+        every { updateCommentRequestModel.commentId } returns commentId
+        every { getCommentUseCase(commentId) } returns comment
 
         // when
         sut.updateComment(updateCommentRequestModel)
 
         // then
         verify { updateCommentUseCase(updateCommentRequestModel) }
+    }
+
+    @Test
+    fun `updateComment() calls returns updated comment`() {
+        // given
+        val commentId = CommentId("id")
+        val comment: Comment = mockk()
+        val updateCommentRequestModel: UpdateCommentRequestModel = mockk()
+        every { updateCommentRequestModel.commentId } returns commentId
+        justRun { updateCommentUseCase(updateCommentRequestModel) }
+        every { getCommentUseCase(commentId) } returns comment
+
+        // when
+        val actual = sut.updateComment(updateCommentRequestModel)
+
+        // then
+        actual shouldBeEqualTo comment
     }
 
     @Test
