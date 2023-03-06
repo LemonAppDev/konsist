@@ -16,14 +16,18 @@ class UpdateTaskDueDateUseCase(
     private val getTaskUseCase: GetTaskUseCase,
 ) {
     operator fun invoke(taskId: TaskId, newDueDate: LocalDateTime, date: LocalDateTime) {
+        require(newDueDate > date) { "Given date is in the past: $newDueDate" }
         val task = getTaskUseCase(taskId)
 
         val oldDueDate = task.dueDate
-        val newTask = task.copy(dueDate = newDueDate)
 
-        taskRepository.updateTask(newTask)
+        if (newDueDate != oldDueDate) {
+            val newTask = task.copy(dueDate = newDueDate)
 
-        val activity = updateTaskDueDateActivityFactory(newTask.id, date, oldDueDate, newDueDate)
-        activityRepository.addActivity(activity)
+            taskRepository.updateTask(newTask)
+
+            val activity = updateTaskDueDateActivityFactory(newTask.id, date, oldDueDate, newDueDate)
+            activityRepository.addActivity(activity)
+        }
     }
 }
