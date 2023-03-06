@@ -14,6 +14,8 @@ import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -31,6 +33,22 @@ class AddCommentUseCaseTest {
         addCommentActivityFactory,
         getTaskUseCase,
     )
+
+    @Test
+    fun `throws exception when comment has no text`() {
+        // given
+        val taskId = TaskId("id")
+        val addCommentRequestModel = AddCommentRequestModel(taskId, "")
+        val task: Task = mockk()
+        every { task.id } returns taskId
+        every { getTaskUseCase(taskId) } returns task
+
+        // when
+        val actual = { sut(addCommentRequestModel) }
+
+        // then
+        actual shouldThrow IllegalArgumentException::class withMessage "Comment text is blank"
+    }
 
     @Test
     fun `add comment to repository`() {

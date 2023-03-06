@@ -20,6 +20,8 @@ class AddCommentUseCase(
 ) {
     operator fun invoke(addCommentRequestModel: AddCommentRequestModel): Comment {
         val task = getTaskUseCase(addCommentRequestModel.taskId)
+        require(addCommentRequestModel.text.isNotBlank()) { "Comment text is blank" }
+
         val comment = commentFactory(addCommentRequestModel)
 
         commentRepository.addComment(comment)
