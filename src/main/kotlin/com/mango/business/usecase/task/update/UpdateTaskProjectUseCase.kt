@@ -24,11 +24,14 @@ class UpdateTaskProjectUseCase(
         getProjectUseCase(newProjectId)
 
         val oldProjectId = task.projectId
-        val newTask = task.copy(projectId = newProjectId)
 
-        taskRepository.updateTask(newTask)
+        if (newProjectId != oldProjectId) {
+            val newTask = task.copy(projectId = newProjectId)
 
-        val activity = updateTaskProjectActivityFactory(newTask.id, date, oldProjectId, newProjectId)
-        activityRepository.addActivity(activity)
+            taskRepository.updateTask(newTask)
+
+            val activity = updateTaskProjectActivityFactory(newTask.id, date, oldProjectId, newProjectId)
+            activityRepository.addActivity(activity)
+        }
     }
 }

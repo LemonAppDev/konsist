@@ -19,11 +19,14 @@ class UpdateTaskNameUseCase(
         val task = getTaskUseCase(taskId)
 
         val oldName = task.name
-        val newTask = task.copy(name = newName)
 
-        taskRepository.updateTask(newTask)
+        if (newName != oldName) {
+            val newTask = task.copy(name = newName)
 
-        val activity = updateTaskNameActivityFactory(newTask.id, date, oldName, newName)
-        activityRepository.addActivity(activity)
+            taskRepository.updateTask(newTask)
+
+            val activity = updateTaskNameActivityFactory(newTask.id, date, oldName, newName)
+            activityRepository.addActivity(activity)
+        }
     }
 }

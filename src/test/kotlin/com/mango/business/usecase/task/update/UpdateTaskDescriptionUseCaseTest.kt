@@ -76,4 +76,33 @@ class UpdateTaskDescriptionUseCaseTest {
         // then
         verify { activityRepository.addActivity(activity) }
     }
+
+    @Test
+    fun `do nothing when old value is the same as new value`() {
+        // given
+        val taskId = TaskId("1")
+        val oldDescription = "description"
+        val newDescription = "description"
+        val date: LocalDateTime = mockk()
+
+        val oldTask = BusinessTestModel.getTask(id = taskId, description = oldDescription)
+        every { getTaskUseCase(taskId) } returns oldTask
+        val newTask = oldTask.copy(description = newDescription)
+
+        justRun { taskRepository.updateTask(newTask) }
+        every { updateTaskDescriptionActivityFactory(taskId, date, oldDescription, newDescription) } returns mockk()
+
+        val activity: UpdateTaskDescriptionActivity = mockk()
+        every { updateTaskDescriptionActivityFactory(taskId, date, oldDescription, newDescription) } returns activity
+        justRun { activityRepository.addActivity(activity) }
+
+        // when
+        sut(taskId, newDescription, date)
+
+        // then
+        verify(exactly = 0) {
+            activityRepository.addActivity(activity)
+            taskRepository.updateTask(newTask)
+        }
+    }
 }

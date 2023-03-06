@@ -24,11 +24,14 @@ class UpdateTaskAssigneeUseCase(
         getUserUseCase(newAssigneeId)
 
         val oldAssigneeId = task.assigneeId
-        val newTask = task.copy(assigneeId = newAssigneeId)
 
-        taskRepository.updateTask(newTask)
+        if (newAssigneeId != oldAssigneeId) {
+            val newTask = task.copy(assigneeId = newAssigneeId)
 
-        val activity = updateTaskAssigneeActivityFactory(newTask.id, date, oldAssigneeId, newAssigneeId)
-        activityRepository.addActivity(activity)
+            taskRepository.updateTask(newTask)
+
+            val activity = updateTaskAssigneeActivityFactory(newTask.id, date, oldAssigneeId, newAssigneeId)
+            activityRepository.addActivity(activity)
+        }
     }
 }

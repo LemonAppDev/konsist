@@ -21,11 +21,14 @@ class UpdateTaskParentTaskUseCase(
         getTaskUseCase(newParentTaskId)
 
         val oldParentTaskId = task.parentTaskId
-        val newTask = task.copy(parentTaskId = newParentTaskId)
 
-        taskRepository.updateTask(newTask)
+        if (newParentTaskId != oldParentTaskId) {
+            val newTask = task.copy(parentTaskId = newParentTaskId)
 
-        val activity = updateTaskParentTaskActivityFactory(newTask.id, date, oldParentTaskId, newParentTaskId)
-        activityRepository.addActivity(activity)
+            taskRepository.updateTask(newTask)
+
+            val activity = updateTaskParentTaskActivityFactory(newTask.id, date, oldParentTaskId, newParentTaskId)
+            activityRepository.addActivity(activity)
+        }
     }
 }

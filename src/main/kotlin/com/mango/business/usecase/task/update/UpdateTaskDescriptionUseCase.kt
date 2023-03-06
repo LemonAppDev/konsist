@@ -19,11 +19,14 @@ class UpdateTaskDescriptionUseCase(
         val task = getTaskUseCase(taskId)
 
         val oldDescription = task.description
-        val newTask = task.copy(description = newDescription)
 
-        taskRepository.updateTask(newTask)
+        if (newDescription != oldDescription) {
+            val newTask = task.copy(description = newDescription)
 
-        val activity = updateTaskDescriptionActivityFactory(newTask.id, date, oldDescription, newDescription)
-        activityRepository.addActivity(activity)
+            taskRepository.updateTask(newTask)
+
+            val activity = updateTaskDescriptionActivityFactory(newTask.id, date, oldDescription, newDescription)
+            activityRepository.addActivity(activity)
+        }
     }
 }
