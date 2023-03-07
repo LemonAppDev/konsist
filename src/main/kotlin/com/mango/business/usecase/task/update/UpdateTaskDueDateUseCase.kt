@@ -2,6 +2,7 @@ package com.mango.business.usecase.task.update
 
 import com.mango.business.model.activity.task.UpdateTaskDueDateActivityFactory
 import com.mango.business.model.value.TaskId
+import com.mango.business.usecase.common.RequireDateIsNowOrLaterUseCase
 import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
@@ -14,9 +15,10 @@ class UpdateTaskDueDateUseCase(
     private val activityRepository: ActivityRepository,
     private val updateTaskDueDateActivityFactory: UpdateTaskDueDateActivityFactory,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
+    private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase,
 ) {
     operator fun invoke(taskId: TaskId, newDueDate: LocalDateTime, date: LocalDateTime) {
-        require(newDueDate > date) { "Given date is in the past: $newDueDate" }
+        requireDateIsNowOrLaterUseCase(newDueDate, date)
         val task = getTaskOrThrowUseCase(taskId)
 
         val oldDueDate = task.dueDate

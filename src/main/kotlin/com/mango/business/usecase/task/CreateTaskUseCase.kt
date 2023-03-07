@@ -1,9 +1,11 @@
 package com.mango.business.usecase.task
 
+import com.mango.business.factory.LocalDateTimeFactory
 import com.mango.business.factory.TaskFactory
 import com.mango.business.model.Task
 import com.mango.business.model.activity.task.CreateTaskActivityFactory
 import com.mango.business.model.request.task.CreateTaskRequestModel
+import com.mango.business.usecase.common.RequireDateIsNowOrLaterUseCase
 import com.mango.business.usecase.project.CheckProjectIdUseCase
 import com.mango.business.usecase.user.CheckUserIdUseCase
 import com.mango.persistence.repository.ActivityRepository
@@ -19,17 +21,25 @@ class CreateTaskUseCase(
     private val checkTaskIdUseCase: CheckTaskIdUseCase,
     private val checkUserIdUseCase: CheckUserIdUseCase,
     private val checkProjectIdUseCase: CheckProjectIdUseCase,
+    private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase,
+    private val localDateTimeFactory: LocalDateTimeFactory,
 ) {
     fun invoke(createTaskRequestModel: CreateTaskRequestModel): Task {
-        createTaskRequestModel.projectId?.let { checkProjectIdUseCase(it) }
-        createTaskRequestModel.parentTaskId?.let { checkTaskIdUseCase(it) }
-        createTaskRequestModel.assigneeId?.let { checkUserIdUseCase(it) }
+        val creationDate = localDateTimeFactory()
 
-        val task = taskFactory(createTaskRequestModel)
+        with(createTaskRequestModel) {
+            dueDate?.let { requireDateIsNowOrLaterUseCase(it, creationDate) }
+            targetDate?.let { requireDateIsNowOrLaterUseCase(it, creationDate) }
+            projectId?.let { checkProjectIdUseCase(it) }
+            parentTaskId?.let { checkTaskIdUseCase(it) }
+            assigneeId?.let { checkUserIdUseCase(it) }
+        }
+
+        val task = taskFactory(createTaskRequestModel, creationDate)
 
         taskRepository.addTask(task)
 
-        val activity = createTaskActivityFactory(task.id, task.creationDate)
+        val activity = createTaskActivityFactory(task.id, creationDate)
         activityRepository.addActivity(activity)
 
         return task

@@ -15,12 +15,13 @@ class TaskFactory(
 ) {
     operator fun invoke(
         createTaskRequestModel: CreateTaskRequestModel,
+        creationDate: LocalDateTime = localDateTimeFactory(),
         completeDate: LocalDateTime? = null,
     ) = Task(
         uuidFactory.createTaskId(),
         createTaskRequestModel.name,
         userRepository.getCurrentUser().id,
-        localDateTimeFactory(),
+        creationDate,
         createTaskRequestModel.projectId,
         createTaskRequestModel.description,
         createTaskRequestModel.dueDate,

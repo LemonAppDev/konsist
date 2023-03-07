@@ -4,6 +4,7 @@ import com.mango.business.common.model.BusinessTestModel
 import com.mango.business.model.activity.task.UpdateTaskTargetDateActivity
 import com.mango.business.model.activity.task.UpdateTaskTargetDateActivityFactory
 import com.mango.business.model.value.TaskId
+import com.mango.business.usecase.common.RequireDateIsNowOrLaterUseCase
 import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
@@ -11,8 +12,6 @@ import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 import java.time.Month
@@ -22,27 +21,15 @@ class UpdateTaskTargetDateUseCaseTest {
     private val activityRepository: ActivityRepository = mockk()
     private val updateTaskTargetDateActivityFactory: UpdateTaskTargetDateActivityFactory = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
+    private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase = mockk()
 
     private val sut = UpdateTaskTargetDateUseCase(
         taskRepository,
         activityRepository,
         updateTaskTargetDateActivityFactory,
         getTaskOrThrowUseCase,
+        requireDateIsNowOrLaterUseCase,
     )
-
-    @Test
-    fun `throws exception when target date is in the past`() {
-        // given
-        val taskId = TaskId("1")
-        val newTargetDate = LocalDateTime.of(2023, Month.FEBRUARY, 20, 21, 0, 0, 0)
-        val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
-
-        // when
-        val actual = { sut(taskId, newTargetDate, date) }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Given date is in the past: $newTargetDate"
-    }
 
     @Test
     fun `add task to repository if new target date is in the future`() {
@@ -51,6 +38,7 @@ class UpdateTaskTargetDateUseCaseTest {
         val oldTargetDate: LocalDateTime = mockk()
         val newTargetDate = LocalDateTime.of(2023, Month.MARCH, 30, 21, 0, 0, 0)
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
+        justRun { requireDateIsNowOrLaterUseCase(newTargetDate, date) }
 
         val oldTask = BusinessTestModel.getTask(id = taskId, targetDate = oldTargetDate)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
@@ -75,6 +63,7 @@ class UpdateTaskTargetDateUseCaseTest {
         val oldTargetDate: LocalDateTime = mockk()
         val newTargetDate = LocalDateTime.of(2023, Month.MARCH, 30, 21, 0, 0, 0)
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
+        justRun { requireDateIsNowOrLaterUseCase(newTargetDate, date) }
 
         val oldTask = BusinessTestModel.getTask(id = taskId, targetDate = oldTargetDate)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
@@ -99,6 +88,7 @@ class UpdateTaskTargetDateUseCaseTest {
         val oldTargetDate: LocalDateTime = LocalDateTime.of(2023, Month.MARCH, 20, 21, 0, 0, 0)
         val newTargetDate = LocalDateTime.of(2023, Month.MARCH, 20, 21, 0, 0, 0)
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
+        justRun { requireDateIsNowOrLaterUseCase(newTargetDate, date) }
 
         val oldTask = BusinessTestModel.getTask(id = taskId, targetDate = oldTargetDate)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
