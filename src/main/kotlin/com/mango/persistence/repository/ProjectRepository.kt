@@ -17,4 +17,9 @@ class ProjectRepository {
     fun addProject(project: Project) {
         _projects.add(project)
     }
+
+    fun deleteProject(project: Project) {
+        project
+        TODO("not implemented")
+    }
 }
