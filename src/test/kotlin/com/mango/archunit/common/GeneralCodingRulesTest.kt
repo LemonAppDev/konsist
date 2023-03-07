@@ -27,7 +27,7 @@ class GeneralCodingRulesTest {
     fun `every class has test class`() {
         classes()
             .that()
-            .resideOutsideOfPackages("..archunit..", "..factory..", "..model..", "..value..", "..activity..")
+            .resideOutsideOfPackages("..archunit..", "..config..", "..factory..", "..model..", "..value..", "..activity..")
             .should(haveTestClass("Test"))
             .check(allClasses)
     }

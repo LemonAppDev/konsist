@@ -1,5 +1,6 @@
 package com.mango.util
 
+import com.mango.presentation.config.ApiConfig
 import com.mango.util.ext.exchange
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.client.TestRestTemplate
@@ -42,6 +43,6 @@ class ControllerEndpointCaller {
         val controllerName = simpleName?.substringBefore(suffix)?.lowercase()
 
         requireNotNull(controllerName) { "Controller name must not be null" }
-        return "http://localhost:$port/v1/$controllerName/$endpointName"
+        return "http://localhost:$port${ApiConfig.API_V1_URL}/$controllerName/$endpointName"
     }
 }

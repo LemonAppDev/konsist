@@ -21,14 +21,17 @@ import com.mango.business.usecase.task.GetChildTasksUseCase
 import com.mango.business.usecase.task.GetTaskActivitiesUseCase
 import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.business.usecase.task.update.UpdateTaskUseCase
+import com.mango.presentation.config.ApiConfig
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@RequestMapping(ApiConfig.API_V1_URL + "/task")
 class TaskController(
     private val createTaskUseCase: CreateTaskUseCase,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
@@ -44,52 +47,52 @@ class TaskController(
     private val getCommentsUseCase: GetCommentsUseCase,
     private val getChildTasksUseCase: GetChildTasksUseCase,
 ) {
-    @PostMapping("/v1/task/create")
+    @PostMapping("/create")
     fun createTask(@RequestBody createTaskRequestModel: CreateTaskRequestModel) =
         createTaskUseCase.invoke(createTaskRequestModel)
 
-    @GetMapping("/v1/task/get")
+    @GetMapping("/get")
     fun getTask(taskId: TaskId) = getTaskOrThrowUseCase(taskId)
 
-    @DeleteMapping("/v1/task/delete")
+    @DeleteMapping("/delete")
     fun deleteTask(@RequestParam taskId: TaskId) = deleteTaskUseCase(taskId)
 
-    @GetMapping("/v1/task/all")
+    @GetMapping("/all")
     fun getTasks() = getAllTasksUseCase()
 
-    @PostMapping("/v1/task/update")
+    @PostMapping("/update")
     fun updateTask(@RequestBody updateTaskRequestModel: UpdateTaskRequestModel): Task {
         updateTaskUseCase(updateTaskRequestModel)
         return getTaskOrThrowUseCase(updateTaskRequestModel.taskId)
     }
 
-    @PostMapping("/v1/task/duplicate")
+    @PostMapping("/duplicate")
     fun duplicateTask(@RequestParam(name = "taskId") taskId: TaskId) =
         duplicateTaskUseCase.invoke(taskId)
 
-    @GetMapping("/v1/task/activities")
+    @GetMapping("/activities")
     fun getActivities(@RequestParam(name = "taskId") taskId: TaskId) =
         getTaskActivitiesUseCase(taskId)
 
-    @PostMapping("/v1/task/add-comment")
+    @PostMapping("/add-comment")
     fun addComment(@RequestBody addCommentRequestModel: AddCommentRequestModel) =
         addCommentUseCase(addCommentRequestModel)
 
-    @DeleteMapping("/v1/task/delete-comment")
+    @DeleteMapping("/delete-comment")
     fun deleteComment(@RequestParam(name = "commentId") commentId: CommentId) =
         deleteCommentUseCase(commentId)
 
-    @PostMapping("/v1/task/update-comment")
+    @PostMapping("/update-comment")
     fun updateComment(@RequestBody updateCommentRequestModel: UpdateCommentRequestModel): Comment {
         updateCommentUseCase(updateCommentRequestModel)
         return getCommentUseCase(updateCommentRequestModel.commentId)
     }
 
-    @GetMapping("/v1/task/comments-all")
+    @GetMapping("/comments-all")
     fun getComments(@RequestParam(name = "taskId") taskId: TaskId) =
         getCommentsUseCase(taskId)
 
-    @GetMapping("/v1/task/child-tasks")
+    @GetMapping("/child-tasks")
     fun getChildTasks(@RequestParam(name = "taskId") taskId: TaskId) =
         getChildTasksUseCase(taskId)
 }
