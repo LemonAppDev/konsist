@@ -19,7 +19,7 @@ import com.mango.business.usecase.task.DuplicateTaskUseCase
 import com.mango.business.usecase.task.GetAllTasksUseCase
 import com.mango.business.usecase.task.GetChildTasksUseCase
 import com.mango.business.usecase.task.GetTaskActivitiesUseCase
-import com.mango.business.usecase.task.GetTaskUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.business.usecase.task.update.UpdateTaskUseCase
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class TaskController(
     private val createTaskUseCase: CreateTaskUseCase,
-    private val getTaskUseCase: GetTaskUseCase,
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
     private val getAllTasksUseCase: GetAllTasksUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
@@ -49,7 +49,7 @@ class TaskController(
         createTaskUseCase.invoke(createTaskRequestModel)
 
     @GetMapping("/v1/task/get")
-    fun getTask(taskId: TaskId) = getTaskUseCase(taskId)
+    fun getTask(taskId: TaskId) = getTaskOrThrowUseCase(taskId)
 
     @DeleteMapping("/v1/task/delete")
     fun deleteTask(@RequestParam taskId: TaskId) = deleteTaskUseCase(taskId)
@@ -60,7 +60,7 @@ class TaskController(
     @PostMapping("/v1/task/update")
     fun updateTask(@RequestBody updateTaskRequestModel: UpdateTaskRequestModel): Task {
         updateTaskUseCase(updateTaskRequestModel)
-        return getTaskUseCase(updateTaskRequestModel.taskId)
+        return getTaskOrThrowUseCase(updateTaskRequestModel.taskId)
     }
 
     @PostMapping("/v1/task/duplicate")

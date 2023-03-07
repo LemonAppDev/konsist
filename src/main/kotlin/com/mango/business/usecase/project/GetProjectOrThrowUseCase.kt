@@ -6,13 +6,12 @@ import com.mango.persistence.repository.ProjectRepository
 import org.springframework.stereotype.Service
 
 @Service
-class GetProjectUseCase(
+class GetProjectOrThrowUseCase(
     private val projectRepository: ProjectRepository,
 ) {
     operator fun invoke(projectId: ProjectId): Project {
         val project = projectRepository.getProject(projectId)
         requireNotNull(project) { "Project with id: $projectId doesn't exist" }
-
         return project
     }
 }

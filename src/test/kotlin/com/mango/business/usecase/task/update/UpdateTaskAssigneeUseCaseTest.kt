@@ -5,8 +5,8 @@ import com.mango.business.model.activity.task.UpdateTaskAssigneeActivity
 import com.mango.business.model.activity.task.UpdateTaskAssigneeActivityFactory
 import com.mango.business.model.value.TaskId
 import com.mango.business.model.value.UserId
-import com.mango.business.usecase.task.GetTaskUseCase
-import com.mango.business.usecase.user.GetUserUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
+import com.mango.business.usecase.user.CheckUserIdUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
@@ -20,14 +20,15 @@ class UpdateTaskAssigneeUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
     private val activityRepository: ActivityRepository = mockk()
     private val updateTaskAssigneeActivityFactory: UpdateTaskAssigneeActivityFactory = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
-    private val getUserUseCase: GetUserUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
+    private val checkUserIdUseCase: CheckUserIdUseCase = mockk()
+
     private val sut = UpdateTaskAssigneeUseCase(
         taskRepository,
         activityRepository,
         updateTaskAssigneeActivityFactory,
-        getTaskUseCase,
-        getUserUseCase,
+        getTaskOrThrowUseCase,
+        checkUserIdUseCase,
     )
 
     @Test
@@ -38,9 +39,9 @@ class UpdateTaskAssigneeUseCaseTest {
 
         val taskId = TaskId("1")
         val oldTask = BusinessTestModel.getTask(id = taskId, assigneeId = oldAssigneeId)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(assigneeId = newAssigneeId)
-        every { getUserUseCase(newAssigneeId) } returns mockk()
+        justRun { checkUserIdUseCase(newAssigneeId) }
         justRun { taskRepository.updateTask(newTask) }
         val date: LocalDateTime = mockk()
         val activity: UpdateTaskAssigneeActivity = mockk()
@@ -62,9 +63,9 @@ class UpdateTaskAssigneeUseCaseTest {
 
         val taskId = TaskId("1")
         val oldTask = BusinessTestModel.getTask(id = taskId, assigneeId = oldAssigneeId)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(assigneeId = newAssigneeId)
-        every { getUserUseCase(newAssigneeId) } returns mockk()
+        justRun { checkUserIdUseCase(newAssigneeId) }
         justRun { taskRepository.updateTask(newTask) }
         val date: LocalDateTime = mockk()
         every { updateTaskAssigneeActivityFactory(taskId, date, oldAssigneeId, newAssigneeId) } returns mockk()
@@ -88,9 +89,9 @@ class UpdateTaskAssigneeUseCaseTest {
 
         val taskId = TaskId("1")
         val oldTask = BusinessTestModel.getTask(id = taskId, assigneeId = oldAssigneeId)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(assigneeId = newAssigneeId)
-        every { getUserUseCase(newAssigneeId) } returns mockk()
+        justRun { checkUserIdUseCase(newAssigneeId) }
         justRun { taskRepository.updateTask(newTask) }
         val date: LocalDateTime = mockk()
         every { updateTaskAssigneeActivityFactory(taskId, date, oldAssigneeId, newAssigneeId) } returns mockk()

@@ -6,13 +6,12 @@ import com.mango.persistence.repository.TaskRepository
 import org.springframework.stereotype.Service
 
 @Service
-class GetTaskUseCase(
+class GetTaskOrThrowUseCase(
     private val taskRepository: TaskRepository,
 ) {
     operator fun invoke(taskId: TaskId): Task {
         val task = taskRepository.getTask(taskId)
         requireNotNull(task) { "Task with id: $taskId doesn't exist" }
-
         return task
     }
 }

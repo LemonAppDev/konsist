@@ -19,7 +19,7 @@ import com.mango.business.usecase.task.DuplicateTaskUseCase
 import com.mango.business.usecase.task.GetAllTasksUseCase
 import com.mango.business.usecase.task.GetChildTasksUseCase
 import com.mango.business.usecase.task.GetTaskActivitiesUseCase
-import com.mango.business.usecase.task.GetTaskUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.business.usecase.task.update.UpdateTaskUseCase
 import io.mockk.every
 import io.mockk.justRun
@@ -40,12 +40,12 @@ class TaskControllerTest {
     private val updateCommentUseCase: UpdateCommentUseCase = mockk()
     private val getCommentUseCase: GetCommentUseCase = mockk()
     private val getCommentsUseCase: GetCommentsUseCase = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val getChildTasksUseCase: GetChildTasksUseCase = mockk()
 
     private val sut = TaskController(
         createTaskUseCase,
-        getTaskUseCase,
+        getTaskOrThrowUseCase,
         deleteTaskUseCase,
         getAllTasksUseCase,
         updateTaskUseCase,
@@ -76,13 +76,13 @@ class TaskControllerTest {
     fun `getTask() calls getTaskUseCase() method`() {
         // given
         val taskId = TaskId("id")
-        every { getTaskUseCase(taskId) } returns mockk()
+        every { getTaskOrThrowUseCase(taskId) } returns mockk()
 
         // when
         sut.getTask(taskId)
 
         // then
-        verify { getTaskUseCase(taskId) }
+        verify { getTaskOrThrowUseCase(taskId) }
     }
 
     @Test
@@ -119,7 +119,7 @@ class TaskControllerTest {
         every { updateTaskRequestModel.taskId } returns taskId
 
         justRun { updateTaskUseCase(updateTaskRequestModel) }
-        every { getTaskUseCase(taskId) } returns task
+        every { getTaskOrThrowUseCase(taskId) } returns task
 
         // when
         sut.updateTask(updateTaskRequestModel)
@@ -136,7 +136,7 @@ class TaskControllerTest {
         val updateTaskRequestModel: UpdateTaskRequestModel = mockk()
         every { updateTaskRequestModel.taskId } returns taskId
         justRun { updateTaskUseCase(updateTaskRequestModel) }
-        every { getTaskUseCase(taskId) } returns task
+        every { getTaskOrThrowUseCase(taskId) } returns task
 
         // when
         val actual = sut.updateTask(updateTaskRequestModel)

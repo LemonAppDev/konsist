@@ -3,8 +3,8 @@ package com.mango.business.usecase.task.update
 import com.mango.business.model.activity.task.UpdateTaskProjectActivityFactory
 import com.mango.business.model.value.ProjectId
 import com.mango.business.model.value.TaskId
-import com.mango.business.usecase.project.GetProjectUseCase
-import com.mango.business.usecase.task.GetTaskUseCase
+import com.mango.business.usecase.project.GetProjectOrThrowUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import org.springframework.stereotype.Service
@@ -15,13 +15,13 @@ class UpdateTaskProjectUseCase(
     private val taskRepository: TaskRepository,
     private val activityRepository: ActivityRepository,
     private val updateTaskProjectActivityFactory: UpdateTaskProjectActivityFactory,
-    private val getTaskUseCase: GetTaskUseCase,
-    private val getProjectUseCase: GetProjectUseCase,
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
+    private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase,
 ) {
     operator fun invoke(taskId: TaskId, newProjectId: ProjectId, date: LocalDateTime) {
-        val task = getTaskUseCase(taskId)
+        val task = getTaskOrThrowUseCase(taskId)
 
-        getProjectUseCase(newProjectId)
+        getProjectOrThrowUseCase(newProjectId)
 
         val oldProjectId = task.projectId
 

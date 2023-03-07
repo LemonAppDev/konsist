@@ -10,10 +10,10 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class GetUserUseCaseTest {
+class GetUserOrThrowUseCaseTest {
     private val userRepository: UserRepository = mockk()
 
-    private val sut = GetUserUseCase(
+    private val sut = GetUserOrThrowUseCase(
         userRepository,
     )
 

@@ -5,7 +5,7 @@ import com.mango.business.model.Task
 import com.mango.business.model.activity.task.UpdateTaskCompleteDateActivity
 import com.mango.business.model.activity.task.UpdateTaskCompleteDateActivityFactory
 import com.mango.business.model.value.TaskId
-import com.mango.business.usecase.task.GetTaskUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
@@ -21,13 +21,13 @@ class UpdateTaskCompleteDateUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
     private val updateTaskCompleteDateActivityFactory: UpdateTaskCompleteDateActivityFactory = mockk()
     private val activityRepository: ActivityRepository = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
 
     private val sut = UpdateTaskCompleteDateUseCase(
         taskRepository,
         updateTaskCompleteDateActivityFactory,
         activityRepository,
-        getTaskUseCase,
+        getTaskOrThrowUseCase,
     )
 
     @ParameterizedTest
@@ -41,7 +41,7 @@ class UpdateTaskCompleteDateUseCaseTest {
         val taskId = TaskId("taskId")
         val date: LocalDateTime = mockk()
         val oldTask: Task = BusinessTestModel.getTask(completeDate = currentCompleteDate)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newCompleteDate = if (isComplete) date else null
         every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns mockk()
 
@@ -71,7 +71,7 @@ class UpdateTaskCompleteDateUseCaseTest {
         val taskId = TaskId("taskId")
         val date: LocalDateTime = mockk()
         val oldTask: Task = BusinessTestModel.getTask(completeDate = currentCompleteDate)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newCompleteDate = if (isComplete) date else null
         every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns mockk()
 

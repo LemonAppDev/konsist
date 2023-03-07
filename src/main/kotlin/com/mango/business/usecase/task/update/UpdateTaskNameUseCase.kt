@@ -2,7 +2,7 @@ package com.mango.business.usecase.task.update
 
 import com.mango.business.model.activity.task.UpdateTaskNameActivityFactory
 import com.mango.business.model.value.TaskId
-import com.mango.business.usecase.task.GetTaskUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import org.springframework.stereotype.Service
@@ -13,10 +13,10 @@ class UpdateTaskNameUseCase(
     private val taskRepository: TaskRepository,
     private val activityRepository: ActivityRepository,
     private val updateTaskNameActivityFactory: UpdateTaskNameActivityFactory,
-    private val getTaskUseCase: GetTaskUseCase,
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
 ) {
     operator fun invoke(taskId: TaskId, newName: String, date: LocalDateTime) {
-        val task = getTaskUseCase(taskId)
+        val task = getTaskOrThrowUseCase(taskId)
 
         val oldName = task.name
 

@@ -4,24 +4,25 @@ import com.mango.business.model.Task
 import com.mango.business.model.value.TaskId
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
+import io.mockk.justRun
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class GetChildTasksUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
+    private val checkTaskIdUseCase: CheckTaskIdUseCase = mockk()
 
     private val sut = GetChildTasksUseCase(
         taskRepository,
-        getTaskUseCase,
+        checkTaskIdUseCase,
     )
 
     @Test
     fun `get childTasks for given task`() {
         // given
         val taskId = TaskId("id")
-        every { getTaskUseCase(taskId) } returns mockk()
+        justRun { checkTaskIdUseCase(taskId) }
         val task1: Task = mockk()
         every { task1.parentTaskId } returns taskId
         val task2: Task = mockk()

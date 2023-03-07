@@ -2,7 +2,7 @@ package com.mango.business.usecase.task.update
 
 import com.mango.business.factory.LocalDateTimeFactory
 import com.mango.business.model.request.task.UpdateTaskRequestModel
-import com.mango.business.usecase.task.GetTaskUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import org.springframework.stereotype.Service
 
 @Service
@@ -18,10 +18,10 @@ class UpdateTaskUseCase(
     private val updateTaskParentTaskUseCase: UpdateTaskParentTaskUseCase,
     private val updateTaskAssigneeUseCase: UpdateTaskAssigneeUseCase,
     private val updateTaskCompleteDateUseCase: UpdateTaskCompleteDateUseCase,
-    private val getTaskUseCase: GetTaskUseCase,
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
 ) {
     operator fun invoke(updateTaskRequestModel: UpdateTaskRequestModel) {
-        val task = getTaskUseCase(updateTaskRequestModel.taskId)
+        val task = getTaskOrThrowUseCase(updateTaskRequestModel.taskId)
 
         val date = localDateTimeFactory()
 

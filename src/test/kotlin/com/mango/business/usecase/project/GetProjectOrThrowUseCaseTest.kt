@@ -10,10 +10,10 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class GetProjectUseCaseTest {
+class GetProjectOrThrowUseCaseTest {
     private val projectRepository: ProjectRepository = mockk()
 
-    private val sut = GetProjectUseCase(
+    private val sut = GetProjectOrThrowUseCase(
         projectRepository,
     )
 

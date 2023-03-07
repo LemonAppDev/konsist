@@ -4,17 +4,18 @@ import com.mango.business.model.activity.task.CreateTaskActivity
 import com.mango.business.model.value.TaskId
 import com.mango.persistence.repository.ActivityRepository
 import io.mockk.every
+import io.mockk.justRun
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class GetTaskActivitiesUseCaseTest {
     private val activityRepository: ActivityRepository = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
+    private val checkTaskIdUseCase: CheckTaskIdUseCase = mockk()
 
     private val sut = GetTaskActivitiesUseCase(
         activityRepository,
-        getTaskUseCase,
+        checkTaskIdUseCase,
     )
 
     @Test
@@ -22,7 +23,7 @@ class GetTaskActivitiesUseCaseTest {
         // given
         val taskId1 = TaskId("id1")
         val taskId2 = TaskId("id2")
-        every { getTaskUseCase(taskId1) } returns mockk()
+        justRun { checkTaskIdUseCase(taskId1) }
 
         val createTaskActivity1: CreateTaskActivity = mockk()
         every { createTaskActivity1.taskId } returns taskId1

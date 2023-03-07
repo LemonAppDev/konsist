@@ -4,7 +4,7 @@ import com.mango.business.common.model.BusinessTestModel
 import com.mango.business.model.activity.task.UpdateTaskTargetDateActivity
 import com.mango.business.model.activity.task.UpdateTaskTargetDateActivityFactory
 import com.mango.business.model.value.TaskId
-import com.mango.business.usecase.task.GetTaskUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
@@ -21,13 +21,13 @@ class UpdateTaskTargetDateUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
     private val activityRepository: ActivityRepository = mockk()
     private val updateTaskTargetDateActivityFactory: UpdateTaskTargetDateActivityFactory = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
 
     private val sut = UpdateTaskTargetDateUseCase(
         taskRepository,
         activityRepository,
         updateTaskTargetDateActivityFactory,
-        getTaskUseCase,
+        getTaskOrThrowUseCase,
     )
 
     @Test
@@ -53,7 +53,7 @@ class UpdateTaskTargetDateUseCaseTest {
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
 
         val oldTask = BusinessTestModel.getTask(id = taskId, targetDate = oldTargetDate)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(targetDate = newTargetDate)
 
         justRun { taskRepository.updateTask(newTask) }
@@ -77,7 +77,7 @@ class UpdateTaskTargetDateUseCaseTest {
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
 
         val oldTask = BusinessTestModel.getTask(id = taskId, targetDate = oldTargetDate)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(targetDate = newTargetDate)
         justRun { taskRepository.updateTask(newTask) }
 
@@ -101,7 +101,7 @@ class UpdateTaskTargetDateUseCaseTest {
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
 
         val oldTask = BusinessTestModel.getTask(id = taskId, targetDate = oldTargetDate)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(targetDate = newTargetDate)
         justRun { taskRepository.updateTask(newTask) }
 

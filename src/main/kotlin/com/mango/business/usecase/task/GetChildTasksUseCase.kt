@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service
 @Service
 class GetChildTasksUseCase(
     private val taskRepository: TaskRepository,
-    private val getTaskUseCase: GetTaskUseCase,
+    private val checkTaskIdUseCase: CheckTaskIdUseCase,
 ) {
     operator fun invoke(taskId: TaskId): List<Task> {
-        getTaskUseCase(taskId)
+        checkTaskIdUseCase(taskId)
 
         return taskRepository
             .tasks

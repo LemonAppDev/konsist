@@ -7,7 +7,7 @@ import com.mango.business.model.request.task.UpdateTaskRequestModel
 import com.mango.business.model.value.ProjectId
 import com.mango.business.model.value.TaskId
 import com.mango.business.model.value.UserId
-import com.mango.business.usecase.task.GetTaskUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
@@ -29,7 +29,7 @@ class UpdateTaskUseCaseTest {
     private val updateTaskParentTaskUseCase: UpdateTaskParentTaskUseCase = mockk()
     private val updateTaskAssigneeUseCase: UpdateTaskAssigneeUseCase = mockk()
     private val updateTaskCompleteDateUseCase: UpdateTaskCompleteDateUseCase = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
 
     private val sut = UpdateTaskUseCase(
         localDateTimeFactory,
@@ -42,7 +42,7 @@ class UpdateTaskUseCaseTest {
         updateTaskParentTaskUseCase,
         updateTaskAssigneeUseCase,
         updateTaskCompleteDateUseCase,
-        getTaskUseCase,
+        getTaskOrThrowUseCase,
     )
 
     @Test
@@ -74,7 +74,7 @@ class UpdateTaskUseCaseTest {
             isCompleted = true,
         )
 
-        every { getTaskUseCase(taskId) } returns task
+        every { getTaskOrThrowUseCase(taskId) } returns task
         every { localDateTimeFactory() } returns updDate
         justRun { updateTaskNameUseCase(taskId, newName, updDate) }
         justRun { updateTaskDescriptionUseCase(taskId, newDescription, updDate) }
@@ -126,7 +126,7 @@ class UpdateTaskUseCaseTest {
             assigneeId = null,
             isCompleted = isCompleted,
         )
-        every { getTaskUseCase(taskId) } returns task
+        every { getTaskOrThrowUseCase(taskId) } returns task
         justRun { updateTaskCompleteDateUseCase(taskId, isCompleted, updDate) }
 
         // when

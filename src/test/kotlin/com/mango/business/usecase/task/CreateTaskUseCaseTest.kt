@@ -9,8 +9,8 @@ import com.mango.business.model.request.task.CreateTaskRequestModel
 import com.mango.business.model.value.ProjectId
 import com.mango.business.model.value.TaskId
 import com.mango.business.model.value.UserId
-import com.mango.business.usecase.project.GetProjectUseCase
-import com.mango.business.usecase.user.GetUserUseCase
+import com.mango.business.usecase.project.CheckProjectIdUseCase
+import com.mango.business.usecase.user.CheckUserIdUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
@@ -26,18 +26,18 @@ class CreateTaskUseCaseTest {
     private val createTaskActivityFactory: CreateTaskActivityFactory = spyk()
     private val activityRepository: ActivityRepository = mockk()
     private val taskFactory: TaskFactory = mockk()
-    private val getProjectUseCase: GetProjectUseCase = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
-    private val getUserUseCase: GetUserUseCase = mockk()
+    private val checkTaskIdUseCase: CheckTaskIdUseCase = mockk()
+    private val checkUserIdUseCase: CheckUserIdUseCase = mockk()
+    private val checkProjectIdUseCase: CheckProjectIdUseCase = mockk()
 
     private val sut = CreateTaskUseCase(
         taskRepository,
         createTaskActivityFactory,
         activityRepository,
         taskFactory,
-        getProjectUseCase,
-        getTaskUseCase,
-        getUserUseCase,
+        checkTaskIdUseCase,
+        checkUserIdUseCase,
+        checkProjectIdUseCase,
     )
 
     @Test
@@ -60,9 +60,9 @@ class CreateTaskUseCaseTest {
             parentTaskId,
             assigneeId,
         )
-        every { getProjectUseCase(projectId) } returns mockk()
-        every { getTaskUseCase(parentTaskId) } returns mockk()
-        every { getUserUseCase(assigneeId) } returns mockk()
+        justRun { checkProjectIdUseCase(projectId) }
+        justRun { checkTaskIdUseCase(parentTaskId) }
+        justRun { checkUserIdUseCase(assigneeId) }
 
         val task: Task = mockk()
         every { taskFactory(createTaskRequestModel) } returns task
@@ -99,9 +99,9 @@ class CreateTaskUseCaseTest {
             parentTaskId,
             assigneeId,
         )
-        every { getProjectUseCase(projectId) } returns mockk()
-        every { getTaskUseCase(parentTaskId) } returns mockk()
-        every { getUserUseCase(assigneeId) } returns mockk()
+        justRun { checkProjectIdUseCase(projectId) }
+        justRun { checkTaskIdUseCase(parentTaskId) }
+        justRun { checkUserIdUseCase(assigneeId) }
 
         val task: Task = mockk()
         every { taskFactory(createTaskRequestModel) } returns task

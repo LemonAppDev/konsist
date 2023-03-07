@@ -6,13 +6,12 @@ import com.mango.persistence.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
-class GetUserUseCase(
+class GetUserOrThrowUseCase(
     private val userRepository: UserRepository,
 ) {
     operator fun invoke(userId: UserId): User {
         val user = userRepository.getUser(userId)
         requireNotNull(user) { "User with id: $userId doesn't exist" }
-
         return user
     }
 }

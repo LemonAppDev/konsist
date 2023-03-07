@@ -4,8 +4,8 @@ import com.mango.business.factory.TaskFactory
 import com.mango.business.model.Task
 import com.mango.business.model.activity.task.CreateTaskActivityFactory
 import com.mango.business.model.request.task.CreateTaskRequestModel
-import com.mango.business.usecase.project.GetProjectUseCase
-import com.mango.business.usecase.user.GetUserUseCase
+import com.mango.business.usecase.project.CheckProjectIdUseCase
+import com.mango.business.usecase.user.CheckUserIdUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import org.springframework.stereotype.Service
@@ -16,22 +16,14 @@ class CreateTaskUseCase(
     private val createTaskActivityFactory: CreateTaskActivityFactory,
     private val activityRepository: ActivityRepository,
     private val taskFactory: TaskFactory,
-    private val getProjectUseCase: GetProjectUseCase,
-    private val getTaskUseCase: GetTaskUseCase,
-    private val getUserUseCase: GetUserUseCase,
+    private val checkTaskIdUseCase: CheckTaskIdUseCase,
+    private val checkUserIdUseCase: CheckUserIdUseCase,
+    private val checkProjectIdUseCase: CheckProjectIdUseCase,
 ) {
     fun invoke(createTaskRequestModel: CreateTaskRequestModel): Task {
-        createTaskRequestModel.projectId?.let {
-            getProjectUseCase(it)
-        }
-
-        createTaskRequestModel.parentTaskId?.let {
-            getTaskUseCase(it)
-        }
-
-        createTaskRequestModel.assigneeId?.let {
-            getUserUseCase(it)
-        }
+        createTaskRequestModel.projectId?.let { checkProjectIdUseCase(it) }
+        createTaskRequestModel.parentTaskId?.let { checkTaskIdUseCase(it) }
+        createTaskRequestModel.assigneeId?.let { checkUserIdUseCase(it) }
 
         val task = taskFactory(createTaskRequestModel)
 

@@ -21,7 +21,7 @@ class DuplicateTaskUseCaseTest {
     private val createTaskActivityFactory: CreateTaskActivityFactory = mockk()
     private val activityRepository: ActivityRepository = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
 
     private val sut = DuplicateTaskUseCase(
         taskRepository,
@@ -29,7 +29,7 @@ class DuplicateTaskUseCaseTest {
         createTaskActivityFactory,
         activityRepository,
         localDateTimeFactory,
-        getTaskUseCase,
+        getTaskOrThrowUseCase,
     )
 
     @Test
@@ -38,7 +38,7 @@ class DuplicateTaskUseCaseTest {
         val oldId = TaskId("oldId")
         val oldTask: Task = mockk()
         every { oldTask.id } returns oldId
-        every { getTaskUseCase(oldId) } returns oldTask
+        every { getTaskOrThrowUseCase(oldId) } returns oldTask
         val newId = TaskId("newId")
         every { uuidFactory.createTaskId() } returns newId
         val newTask: Task = mockk()
@@ -65,7 +65,7 @@ class DuplicateTaskUseCaseTest {
         val oldId = TaskId("oldId")
         val oldTask: Task = mockk()
         every { oldTask.id } returns oldId
-        every { getTaskUseCase(oldId) } returns oldTask
+        every { getTaskOrThrowUseCase(oldId) } returns oldTask
         val newId = TaskId("newId")
         every { uuidFactory.createTaskId() } returns newId
         val newTask: Task = mockk()

@@ -4,7 +4,7 @@ import com.mango.business.common.model.BusinessTestModel
 import com.mango.business.model.activity.task.UpdateTaskNameActivity
 import com.mango.business.model.activity.task.UpdateTaskNameActivityFactory
 import com.mango.business.model.value.TaskId
-import com.mango.business.usecase.task.GetTaskUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
@@ -18,13 +18,13 @@ class UpdateTaskNameUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
     private val activityRepository: ActivityRepository = mockk()
     private val updateTaskNameActivityFactory: UpdateTaskNameActivityFactory = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
 
     private val sut = UpdateTaskNameUseCase(
         taskRepository,
         activityRepository,
         updateTaskNameActivityFactory,
-        getTaskUseCase,
+        getTaskOrThrowUseCase,
     )
 
     @Test
@@ -36,7 +36,7 @@ class UpdateTaskNameUseCaseTest {
         val date: LocalDateTime = mockk()
 
         val oldTask = BusinessTestModel.getTask(id = taskId, name = oldName)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(name = newName)
 
         justRun { taskRepository.updateTask(newTask) }
@@ -60,7 +60,7 @@ class UpdateTaskNameUseCaseTest {
         val date: LocalDateTime = mockk()
 
         val oldTask = BusinessTestModel.getTask(id = taskId, name = oldName)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(name = newName)
 
         justRun { taskRepository.updateTask(newTask) }
@@ -85,7 +85,7 @@ class UpdateTaskNameUseCaseTest {
         val date: LocalDateTime = mockk()
 
         val oldTask = BusinessTestModel.getTask(id = taskId, name = oldName)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(name = newName)
 
         justRun { taskRepository.updateTask(newTask) }

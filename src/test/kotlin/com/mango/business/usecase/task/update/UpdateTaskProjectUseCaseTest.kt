@@ -5,8 +5,8 @@ import com.mango.business.model.activity.task.UpdateTaskProjectActivity
 import com.mango.business.model.activity.task.UpdateTaskProjectActivityFactory
 import com.mango.business.model.value.ProjectId
 import com.mango.business.model.value.TaskId
-import com.mango.business.usecase.project.GetProjectUseCase
-import com.mango.business.usecase.task.GetTaskUseCase
+import com.mango.business.usecase.project.GetProjectOrThrowUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
@@ -20,15 +20,15 @@ class UpdateTaskProjectUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
     private val activityRepository: ActivityRepository = mockk()
     private val updateTaskProjectActivityFactory: UpdateTaskProjectActivityFactory = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
-    private val getProjectUseCase: GetProjectUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
+    private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase = mockk()
 
     private val sut = UpdateTaskProjectUseCase(
         taskRepository,
         activityRepository,
         updateTaskProjectActivityFactory,
-        getTaskUseCase,
-        getProjectUseCase,
+        getTaskOrThrowUseCase,
+        getProjectOrThrowUseCase,
     )
 
     @Test
@@ -40,8 +40,8 @@ class UpdateTaskProjectUseCaseTest {
         val date: LocalDateTime = mockk()
 
         val oldTask = BusinessTestModel.getTask(id = taskId, projectId = oldProjectId)
-        every { getTaskUseCase(taskId) } returns oldTask
-        every { getProjectUseCase(newProjectId) } returns mockk()
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
+        every { getProjectOrThrowUseCase(newProjectId) } returns mockk()
         val newTask = oldTask.copy(projectId = newProjectId)
         justRun { taskRepository.updateTask(newTask) }
         val activity: UpdateTaskProjectActivity = mockk()
@@ -64,8 +64,8 @@ class UpdateTaskProjectUseCaseTest {
         val date: LocalDateTime = mockk()
 
         val oldTask = BusinessTestModel.getTask(id = taskId, projectId = oldProjectId)
-        every { getTaskUseCase(taskId) } returns oldTask
-        every { getProjectUseCase(newProjectId) } returns mockk()
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
+        every { getProjectOrThrowUseCase(newProjectId) } returns mockk()
         val newTask = oldTask.copy(projectId = newProjectId)
         justRun { taskRepository.updateTask(newTask) }
 
@@ -89,8 +89,8 @@ class UpdateTaskProjectUseCaseTest {
         val date: LocalDateTime = mockk()
 
         val oldTask = BusinessTestModel.getTask(id = taskId, projectId = oldProjectId)
-        every { getTaskUseCase(taskId) } returns oldTask
-        every { getProjectUseCase(newProjectId) } returns mockk()
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
+        every { getProjectOrThrowUseCase(newProjectId) } returns mockk()
         val newTask = oldTask.copy(projectId = newProjectId)
         justRun { taskRepository.updateTask(newTask) }
         val activity: UpdateTaskProjectActivity = mockk()

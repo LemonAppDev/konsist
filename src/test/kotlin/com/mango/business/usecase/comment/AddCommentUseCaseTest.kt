@@ -7,7 +7,7 @@ import com.mango.business.model.activity.task.AddCommentActivity
 import com.mango.business.model.activity.task.AddCommentActivityFactory
 import com.mango.business.model.request.comment.AddCommentRequestModel
 import com.mango.business.model.value.TaskId
-import com.mango.business.usecase.task.GetTaskUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.CommentRepository
 import io.mockk.every
@@ -24,14 +24,14 @@ class AddCommentUseCaseTest {
     private val commentRepository: CommentRepository = mockk()
     private val activityRepository: ActivityRepository = mockk()
     private val addCommentActivityFactory: AddCommentActivityFactory = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
 
     private val sut = AddCommentUseCase(
         commentFactory,
         commentRepository,
         activityRepository,
         addCommentActivityFactory,
-        getTaskUseCase,
+        getTaskOrThrowUseCase,
     )
 
     @Test
@@ -41,7 +41,7 @@ class AddCommentUseCaseTest {
         val addCommentRequestModel = AddCommentRequestModel(taskId, "")
         val task: Task = mockk()
         every { task.id } returns taskId
-        every { getTaskUseCase(taskId) } returns task
+        every { getTaskOrThrowUseCase(taskId) } returns task
 
         // when
         val actual = { sut(addCommentRequestModel) }
@@ -57,7 +57,7 @@ class AddCommentUseCaseTest {
         val addCommentRequestModel = AddCommentRequestModel(taskId, "comment")
         val task: Task = mockk()
         every { task.id } returns taskId
-        every { getTaskUseCase(taskId) } returns task
+        every { getTaskOrThrowUseCase(taskId) } returns task
         val date: LocalDateTime = mockk()
         val comment: Comment = mockk()
         val text = "comment"
@@ -84,7 +84,7 @@ class AddCommentUseCaseTest {
         val addCommentRequestModel = AddCommentRequestModel(taskId, "comment")
         val task: Task = mockk()
         every { task.id } returns taskId
-        every { getTaskUseCase(TaskId("id")) } returns task
+        every { getTaskOrThrowUseCase(TaskId("id")) } returns task
         val date: LocalDateTime = mockk()
         val comment: Comment = mockk()
         val text = "comment"

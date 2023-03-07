@@ -5,7 +5,7 @@ import com.mango.business.model.Priority
 import com.mango.business.model.activity.task.UpdateTaskPriorityActivity
 import com.mango.business.model.activity.task.UpdateTaskPriorityActivityFactory
 import com.mango.business.model.value.TaskId
-import com.mango.business.usecase.task.GetTaskUseCase
+import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
@@ -19,13 +19,13 @@ class UpdateTaskPriorityUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
     private val activityRepository: ActivityRepository = mockk()
     private val updateTaskPriorityActivityFactory: UpdateTaskPriorityActivityFactory = mockk()
-    private val getTaskUseCase: GetTaskUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
 
     private val sut = UpdateTaskPriorityUseCase(
         taskRepository,
         activityRepository,
         updateTaskPriorityActivityFactory,
-        getTaskUseCase,
+        getTaskOrThrowUseCase,
     )
 
     @Test
@@ -37,7 +37,7 @@ class UpdateTaskPriorityUseCaseTest {
         val date: LocalDateTime = mockk()
 
         val oldTask = BusinessTestModel.getTask(id = taskId, priority = oldPriority)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(priority = newPriority)
         every { taskRepository.getTask(taskId) } returns oldTask
 
@@ -62,7 +62,7 @@ class UpdateTaskPriorityUseCaseTest {
         val date: LocalDateTime = mockk()
 
         val oldTask = BusinessTestModel.getTask(id = taskId, priority = oldPriority)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(priority = newPriority)
         justRun { taskRepository.updateTask(newTask) }
 
@@ -86,7 +86,7 @@ class UpdateTaskPriorityUseCaseTest {
         val date: LocalDateTime = mockk()
 
         val oldTask = BusinessTestModel.getTask(id = taskId, priority = oldPriority)
-        every { getTaskUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(priority = newPriority)
         justRun { taskRepository.updateTask(newTask) }
 
