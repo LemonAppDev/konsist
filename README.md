@@ -43,9 +43,12 @@ Layers:
 
 ## Enable Live Reload
 
-1. Install
-   chrome [Live Reload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en)
-   plugin
-2. IntelliJ IDEA
-   1. Update run configuration - add `On frame deactivation` option with `Updated classes and resources`
-   2. `Advanced Settings` → select `Allow auto-make to start even if developed application is currently running`
+The [spring-boot-devtools](https://www.baeldung.com/spring-boot-devtools) module includes an embedded LiveReload server 
+that is used to trigger a browser refresh when a resource is changed.
+
+For this to happen in the browser we need to: install the LiveReload plugin one such implementation is Remote Live Reload for Chrome.
+
+1. Install chrome plugin ([RemoteLiveReload](https://chrome.google.com/webstore/detail/remotelivereload/jlppknnillhjgiengoigajegdpieppei?hl=en-GB) or [Live Reload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en))
+2. Configure IntelliJ IDEA
+   1. Update existing run configuration - add `On frame deactivation` option with `Updated classes and resources`
+   2. Go to `Preferences` -> `Advanced Settings` → select `Allow auto-make to start even if developed application is currently running`
