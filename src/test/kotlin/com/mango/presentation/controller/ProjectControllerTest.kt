@@ -4,6 +4,7 @@ import com.mango.business.model.request.project.CreateProjectRequestModel
 import com.mango.business.model.value.ProjectId
 import com.mango.business.usecase.project.CreateProjectUseCase
 import com.mango.business.usecase.project.DeleteProjectUseCase
+import com.mango.business.usecase.project.GetAllProjectsUseCase
 import com.mango.business.usecase.project.GetProjectOrThrowUseCase
 import io.mockk.every
 import io.mockk.justRun
@@ -15,11 +16,13 @@ class ProjectControllerTest {
     private val createProjectUseCase: CreateProjectUseCase = mockk()
     private val deleteProjectUseCase: DeleteProjectUseCase = mockk()
     private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase = mockk()
+    private val getAllProjectsUseCase: GetAllProjectsUseCase = mockk()
 
     private val sut = ProjectController(
         createProjectUseCase,
         deleteProjectUseCase,
         getProjectOrThrowUseCase,
+        getAllProjectsUseCase,
     )
 
     @Test
@@ -59,5 +62,17 @@ class ProjectControllerTest {
 
         // then
         verify { getProjectOrThrowUseCase(projectId) }
+    }
+
+    @Test
+    fun `getProjects() calls getAllProjectsUseCase()`() {
+        // given
+        every { getAllProjectsUseCase() } returns mockk()
+
+        // when
+        sut.getProjects()
+
+        // then
+        verify { getAllProjectsUseCase() }
     }
 }
