@@ -42,7 +42,7 @@ class UpdateTaskDueDateUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(dueDate = newDueDate)
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
-        justRun { requireDateIsNowOrLaterUseCase(newDueDate, date) }
+        justRun { requireDateIsNowOrLaterUseCase(newDueDate) }
         justRun { taskRepository.updateTask(newTask) }
         val activity: UpdateTaskDueDateActivity = mockk()
         every { updateTaskDueDateActivityFactory(taskId, date, oldDueDate, newDueDate) } returns activity
@@ -66,7 +66,7 @@ class UpdateTaskDueDateUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(dueDate = newDueDate)
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
-        justRun { requireDateIsNowOrLaterUseCase(newDueDate, date) }
+        justRun { requireDateIsNowOrLaterUseCase(newDueDate) }
         justRun { taskRepository.updateTask(newTask) }
 
         val activity: UpdateTaskDueDateActivity = mockk()
@@ -91,7 +91,7 @@ class UpdateTaskDueDateUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(dueDate = newDueDate)
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
-        justRun { requireDateIsNowOrLaterUseCase(newDueDate, date) }
+        justRun { requireDateIsNowOrLaterUseCase(newDueDate) }
         justRun { taskRepository.updateTask(newTask) }
 
         val activity: UpdateTaskDueDateActivity = mockk()

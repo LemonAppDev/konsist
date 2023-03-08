@@ -28,8 +28,8 @@ class CreateTaskUseCase(
         val creationDate = localDateTimeFactory()
 
         with(createTaskRequestModel) {
-            dueDate?.let { requireDateIsNowOrLaterUseCase(it, creationDate) }
-            targetDate?.let { requireDateIsNowOrLaterUseCase(it, creationDate) }
+            dueDate?.let { requireDateIsNowOrLaterUseCase(it) }
+            targetDate?.let { requireDateIsNowOrLaterUseCase(it) }
             projectId?.let { checkProjectIdUseCase(it) }
             parentTaskId?.let { checkTaskIdUseCase(it) }
             assigneeId?.let { checkUserIdUseCase(it) }

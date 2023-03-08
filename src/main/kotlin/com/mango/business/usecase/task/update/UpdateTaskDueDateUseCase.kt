@@ -18,7 +18,7 @@ class UpdateTaskDueDateUseCase(
     private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase,
 ) {
     operator fun invoke(taskId: TaskId, newDueDate: LocalDateTime, date: LocalDateTime) {
-        requireDateIsNowOrLaterUseCase(newDueDate, date)
+        requireDateIsNowOrLaterUseCase(newDueDate)
         val task = getTaskOrThrowUseCase(taskId)
 
         val oldDueDate = task.dueDate

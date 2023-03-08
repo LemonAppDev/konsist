@@ -70,7 +70,7 @@ class CreateTaskUseCaseTest {
         justRun { checkProjectIdUseCase(projectId) }
         justRun { checkTaskIdUseCase(parentTaskId) }
         justRun { checkUserIdUseCase(assigneeId) }
-        justRun { requireDateIsNowOrLaterUseCase(any(), creationDate) }
+        justRun { requireDateIsNowOrLaterUseCase(any()) }
 
         val task: Task = mockk()
         every { taskFactory(createTaskRequestModel, creationDate) } returns task
@@ -111,7 +111,7 @@ class CreateTaskUseCaseTest {
         justRun { checkProjectIdUseCase(projectId) }
         justRun { checkTaskIdUseCase(parentTaskId) }
         justRun { checkUserIdUseCase(assigneeId) }
-        justRun { requireDateIsNowOrLaterUseCase(any(), creationDate) }
+        justRun { requireDateIsNowOrLaterUseCase(any()) }
 
         val task: Task = mockk()
         every { taskFactory(createTaskRequestModel, creationDate) } returns task
