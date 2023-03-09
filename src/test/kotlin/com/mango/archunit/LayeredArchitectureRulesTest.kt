@@ -1,12 +1,13 @@
 package com.mango.archunit
 
-import com.mango.archunit.utils.PackageIdentifier.ANY_BUSINESS_ANY
-import com.mango.archunit.utils.PackageIdentifier.ANY_PERSISTENCE_ANY
-import com.mango.archunit.utils.PackageIdentifier.ANY_PRESENTATION_ANY
-import com.mango.archunit.utils.PackageIdentifier.COM_MANGO_BUSINESS
-import com.mango.archunit.utils.PackageIdentifier.COM_MANGO_COMMON
-import com.mango.archunit.utils.PackageIdentifier.COM_MANGO_PERSISTENCE
-import com.mango.archunit.utils.PackageIdentifier.COM_MANGO_PRESENTATION
+import com.mango.archunit.utils.PackageIdentifier.ANY_APPLICATION_ANY
+import com.mango.archunit.utils.PackageIdentifier.ANY_DATA_ANY
+import com.mango.archunit.utils.PackageIdentifier.ANY_DOMAIN_ANY
+import com.mango.archunit.utils.PackageIdentifier.COM_MANGO
+import com.mango.archunit.utils.PackageIdentifier.COM_MANGO_APPLICATION_ANY
+import com.mango.archunit.utils.PackageIdentifier.COM_MANGO_COMMON_ANY
+import com.mango.archunit.utils.PackageIdentifier.COM_MANGO_DATA_ANY
+import com.mango.archunit.utils.PackageIdentifier.COM_MANGO_DOMAIN_ANY
 import com.mango.archunit.utils.ProjectClassesProvider
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes
 import com.tngtech.archunit.library.Architectures.layeredArchitecture
@@ -17,27 +18,27 @@ class LayeredArchitectureRulesTest {
 
     @Test
     fun `layer dependencies are respected`() {
-        val presentationLayer = "Presentation"
-        val businessLayer = "Business"
-        val persistenceLayer = "Persistence"
+        val applicationLayer = "Application"
+        val domainLayer = "Domain"
+        val dataLayer = "Data"
 
         layeredArchitecture().consideringAllDependencies()
-            .layer(presentationLayer).definedBy(ANY_PRESENTATION_ANY)
-            .layer(businessLayer).definedBy(ANY_BUSINESS_ANY)
-            .layer(persistenceLayer).definedBy(ANY_PERSISTENCE_ANY)
-            .whereLayer(presentationLayer).mayNotBeAccessedByAnyLayer()
-            .whereLayer(businessLayer).mayOnlyBeAccessedByLayers(presentationLayer, persistenceLayer)
-            .whereLayer(persistenceLayer).mayOnlyBeAccessedByLayers(businessLayer)
+            .layer(applicationLayer).definedBy(ANY_APPLICATION_ANY)
+            .layer(domainLayer).definedBy(ANY_DOMAIN_ANY)
+            .layer(dataLayer).definedBy(ANY_DATA_ANY)
+            .whereLayer(applicationLayer).mayNotBeAccessedByAnyLayer()
+            .whereLayer(domainLayer).mayOnlyBeAccessedByLayers(applicationLayer, dataLayer)
+            .whereLayer(dataLayer).mayOnlyBeAccessedByLayers(domainLayer)
             .check(importedClasses)
     }
 
     @Test
     fun `every class should reside in one of the specified packages`() {
-        classes().should().resideInAnyPackage(
-            COM_MANGO_PRESENTATION,
-            COM_MANGO_BUSINESS,
-            COM_MANGO_PERSISTENCE,
-            COM_MANGO_COMMON,
-        )
+        classes()
+            .that()
+            .resideOutsideOfPackages(COM_MANGO, "..archunit..")
+            .should()
+            .resideInAnyPackage(COM_MANGO_APPLICATION_ANY, COM_MANGO_DOMAIN_ANY, COM_MANGO_DATA_ANY, COM_MANGO_COMMON_ANY)
+            .check(importedClasses)
     }
 }

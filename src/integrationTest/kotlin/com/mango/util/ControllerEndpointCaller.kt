@@ -1,6 +1,6 @@
 package com.mango.util
 
-import com.mango.presentation.config.ApiConfig
+import com.mango.application.config.ApiConfig
 import com.mango.util.ext.exchange
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.client.TestRestTemplate

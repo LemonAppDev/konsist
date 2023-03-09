@@ -28,13 +28,17 @@ class GeneralCodingRulesTest {
     fun `every class has test class`() {
         classes()
             .that()
-            .resideOutsideOfPackages("..archunit..", "..config..", "..factory..", "..model..", "..value..", "..activity..")
+            .resideOutsideOfPackages("..archunit..", "..config..", "..model..", "..activity..")
             .and()
             .areNotMetaAnnotatedWith(Entity::class.java)
+            .and()
+            .areNotInterfaces()
             .and()
             .haveSimpleNameNotEndingWith("JpaEntity")
             .and()
             .haveSimpleNameNotEndingWith("JpaRepository")
+            .and()
+            .haveSimpleNameNotEndingWith("Factory")
             .should(haveTestClass("Test"))
             .check(allClasses)
     }

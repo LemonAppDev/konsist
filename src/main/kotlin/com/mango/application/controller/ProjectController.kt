@@ -1,0 +1,38 @@
+package com.mango.application.controller
+
+import com.mango.application.config.ApiConfig
+import com.mango.domain.project.model.ProjectId
+import com.mango.domain.project.model.request.CreateProjectRequestModel
+import com.mango.domain.project.usecase.CreateProjectUseCase
+import com.mango.domain.project.usecase.DeleteProjectUseCase
+import com.mango.domain.project.usecase.GetAllProjectsUseCase
+import com.mango.domain.project.usecase.GetProjectOrThrowUseCase
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
+
+@RestController
+@RequestMapping(ApiConfig.API_V1_URL + "/project")
+class ProjectController(
+    private val createProjectUseCase: CreateProjectUseCase,
+    private val deleteProjectUseCase: DeleteProjectUseCase,
+    private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase,
+    private val getAllProjectsUseCase: GetAllProjectsUseCase,
+) {
+    @PostMapping("/create")
+    fun createProject(@RequestBody createProjectRequestModel: CreateProjectRequestModel) =
+        createProjectUseCase(createProjectRequestModel)
+
+    @GetMapping("/get")
+    fun getProject(@RequestParam projectId: ProjectId) = getProjectOrThrowUseCase(projectId)
+
+    @GetMapping("/all")
+    fun getProjects() = getAllProjectsUseCase()
+
+    @DeleteMapping("/delete")
+    fun deleteProject(@RequestParam projectId: ProjectId) = deleteProjectUseCase(projectId)
+}
