@@ -1,6 +1,6 @@
 package com.mango.domain.task.usecase
 
-import com.mango.data.task.TaskRepository
+import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.task.model.Task
 import io.mockk.every
@@ -11,7 +11,7 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class GetTaskOrThrowUseCaseTest {
-    private val taskRepository: TaskRepository = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
 
     private val sut = GetTaskOrThrowUseCase(
         taskRepository,

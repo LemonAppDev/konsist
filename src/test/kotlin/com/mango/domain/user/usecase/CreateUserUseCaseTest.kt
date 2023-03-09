@@ -1,6 +1,6 @@
 package com.mango.domain.user.usecase
 
-import com.mango.data.user.UserRepository
+import com.mango.data.user.UserRepositoryImpl
 import com.mango.domain.user.UserFactory
 import com.mango.domain.user.model.User
 import io.mockk.every
@@ -11,7 +11,7 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class CreateUserUseCaseTest {
-    private val userRepository: UserRepository = mockk()
+    private val userRepository: UserRepositoryImpl = mockk()
     private val userFactory: UserFactory = mockk()
 
     private val sut = CreateUserUseCase(

@@ -1,6 +1,6 @@
 package com.mango.domain.comment.usecase
 
-import com.mango.data.activity.ActivityRepository
+import com.mango.data.activity.ActivityRepositoryImpl
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.comment.model.request.AddCommentRequestModel
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 
 class AddCommentUseCaseTest {
     private val createCommentUseCase: CreateCommentUseCase = mockk()
-    private val activityRepository: ActivityRepository = mockk()
+    private val activityRepository: ActivityRepositoryImpl = mockk()
     private val addCommentActivityFactory: com.mango.domain.task.activity.AddCommentActivityFactory = mockk()
 
     private val sut = AddCommentUseCase(

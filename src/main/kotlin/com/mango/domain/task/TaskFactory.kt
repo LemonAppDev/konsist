@@ -1,11 +1,11 @@
 package com.mango.domain.task
 
-import com.mango.data.user.UserRepository
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
 import com.mango.domain.task.model.Priority
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.request.CreateTaskRequestModel
+import com.mango.domain.user.UserRepository
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 

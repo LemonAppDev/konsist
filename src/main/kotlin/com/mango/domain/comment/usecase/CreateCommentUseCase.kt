@@ -1,7 +1,7 @@
 package com.mango.domain.comment.usecase
 
-import com.mango.data.comment.CommentRepository
 import com.mango.domain.comment.CommentFactory
+import com.mango.domain.comment.CommentRepository
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.task.usecase.CheckTaskIdUseCase

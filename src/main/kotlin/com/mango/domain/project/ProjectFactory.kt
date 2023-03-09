@@ -1,11 +1,11 @@
 package com.mango.domain.project
 
-import com.mango.data.user.UserRepository
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
 import com.mango.domain.common.model.Color
 import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.request.CreateProjectRequestModel
+import com.mango.domain.user.UserRepository
 import org.springframework.stereotype.Service
 
 @Service

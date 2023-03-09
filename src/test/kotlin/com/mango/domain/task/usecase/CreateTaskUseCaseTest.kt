@@ -1,7 +1,7 @@
 package com.mango.domain.task.usecase
 
-import com.mango.data.activity.ActivityRepository
-import com.mango.data.task.TaskRepository
+import com.mango.data.activity.ActivityRepositoryImpl
+import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
@@ -23,9 +23,9 @@ import java.time.LocalDateTime
 import java.time.Month
 
 class CreateTaskUseCaseTest {
-    private val taskRepository: TaskRepository = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
     private val createTaskActivityFactory: com.mango.domain.task.activity.CreateTaskActivityFactory = spyk()
-    private val activityRepository: ActivityRepository = mockk()
+    private val activityRepository: ActivityRepositoryImpl = mockk()
     private val taskFactory: com.mango.domain.task.TaskFactory = mockk()
     private val checkTaskIdUseCase: CheckTaskIdUseCase = mockk()
     private val checkUserIdUseCase: CheckUserIdUseCase = mockk()

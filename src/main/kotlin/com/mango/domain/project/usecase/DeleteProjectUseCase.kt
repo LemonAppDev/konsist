@@ -1,8 +1,8 @@
 package com.mango.domain.project.usecase
 
-import com.mango.data.activity.ActivityRepository
-import com.mango.data.project.ProjectRepository
+import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.common.LocalDateTimeFactory
+import com.mango.domain.project.ProjectRepository
 import com.mango.domain.project.activity.DeleteProjectActivityFactory
 import com.mango.domain.project.model.ProjectId
 import org.springframework.stereotype.Service

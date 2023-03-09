@@ -1,6 +1,6 @@
 package com.mango.domain.task.usecase
 
-import com.mango.data.task.TaskRepository
+import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.task.model.TaskId
 import io.mockk.every
 import io.mockk.mockk
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 import java.util.UUID
 
 class CheckTaskIdUseCaseTest {
-    private val taskRepository: TaskRepository = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
 
     private val sut = CheckTaskIdUseCase(
         taskRepository,

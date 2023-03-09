@@ -1,6 +1,6 @@
 package com.mango.domain.comment.usecase
 
-import com.mango.data.comment.CommentRepository
+import com.mango.domain.comment.CommentRepository
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.comment.model.CommentId
 import org.springframework.stereotype.Service

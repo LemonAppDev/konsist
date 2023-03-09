@@ -1,7 +1,7 @@
 package com.mango.domain.task.usecase.update
 
-import com.mango.data.activity.ActivityRepository
-import com.mango.data.task.TaskRepository
+import com.mango.data.activity.ActivityRepositoryImpl
+import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.common.model.BusinessTestModel
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.usecase.RequireDateIsNowOrLaterUseCase
@@ -15,8 +15,8 @@ import java.time.LocalDateTime
 import java.time.Month
 
 class UpdateTaskDueDateUseCaseTest {
-    private val taskRepository: TaskRepository = mockk()
-    private val activityRepository: ActivityRepository = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
+    private val activityRepository: ActivityRepositoryImpl = mockk()
     private val updateTaskDueDateActivityFactory: com.mango.domain.task.activity.UpdateTaskDueDateActivityFactory = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase = mockk()

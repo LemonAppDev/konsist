@@ -1,6 +1,6 @@
 package com.mango.domain.project.usecase
 
-import com.mango.data.project.ProjectRepository
+import com.mango.data.project.ProjectRepositoryImpl
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import io.mockk.every
 import io.mockk.mockk
@@ -9,7 +9,7 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class CheckProjectIdUseCaseTest {
-    private val projectRepository: ProjectRepository = mockk()
+    private val projectRepository: ProjectRepositoryImpl = mockk()
 
     private val sut = CheckProjectIdUseCase(
         projectRepository,

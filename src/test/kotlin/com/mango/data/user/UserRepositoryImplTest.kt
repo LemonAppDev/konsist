@@ -9,12 +9,12 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import kotlin.jvm.optionals.getOrNull
 
-class UserRepositoryTest {
+class UserRepositoryImplTest {
     private val userJpaRepository: UserJpaRepository = mockk()
     private val userToUserJpaEntityMapper: UserToUserJpaEntityMapper = mockk()
     private val userJpaEntityToUserMapper: UserJpaEntityToUserMapper = mockk()
 
-    private val sut = UserRepository(
+    private val sut = UserRepositoryImpl(
         userJpaRepository,
         userToUserJpaEntityMapper,
         userJpaEntityToUserMapper,

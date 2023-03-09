@@ -1,7 +1,7 @@
 package com.mango.domain.project.usecase
 
-import com.mango.data.activity.ActivityRepository
-import com.mango.data.project.ProjectRepository
+import com.mango.data.activity.ActivityRepositoryImpl
+import com.mango.data.project.ProjectRepositoryImpl
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.Color
 import com.mango.domain.project.ProjectFactory
@@ -19,9 +19,9 @@ import java.time.LocalDateTime
 
 class CreateProjectUseCaseTest {
     private val projectFactory: ProjectFactory = mockk()
-    private val projectRepository: ProjectRepository = mockk()
+    private val projectRepository: ProjectRepositoryImpl = mockk()
     private val createProjectActivityFactory: CreateProjectActivityFactory = mockk()
-    private val activityRepository: ActivityRepository = mockk()
+    private val activityRepository: ActivityRepositoryImpl = mockk()
 
     private val sut = CreateProjectUseCase(
         projectFactory,

@@ -1,6 +1,6 @@
 package com.mango.domain.comment.usecase
 
-import com.mango.data.activity.ActivityRepository
+import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.comment.model.request.AddCommentRequestModel
 import com.mango.domain.task.activity.AddCommentActivityFactory

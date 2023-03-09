@@ -1,6 +1,6 @@
 package com.mango.domain.task.usecase
 
-import com.mango.data.task.TaskRepository
+import com.mango.domain.task.TaskRepository
 import com.mango.domain.task.model.TaskId
 import org.springframework.stereotype.Service
 

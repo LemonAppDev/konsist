@@ -5,8 +5,8 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldContain
 import org.junit.jupiter.api.Test
 
-class ActivityRepositoryTest {
-    private val sut = ActivityRepository()
+class ActivityRepositoryImplTest {
+    private val sut = ActivityRepositoryImpl()
 
     @Test
     fun `addActivity() add new TaskActivity to taskActivities`() {

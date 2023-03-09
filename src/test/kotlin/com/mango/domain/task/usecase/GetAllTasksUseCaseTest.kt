@@ -1,13 +1,13 @@
 package com.mango.domain.task.usecase
 
-import com.mango.data.task.TaskRepository
+import com.mango.data.task.TaskRepositoryImpl
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
 
 class GetAllTasksUseCaseTest {
-    private val taskRepository: TaskRepository = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
 
     private val sut = GetAllTasksUseCase(
         taskRepository,

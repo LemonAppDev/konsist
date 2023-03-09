@@ -1,8 +1,8 @@
 package com.mango.domain.comment.usecase
 
-import com.mango.data.comment.CommentRepository
-import com.mango.data.task.TaskRepository
+import com.mango.domain.comment.CommentRepository
 import com.mango.domain.comment.model.Comment
+import com.mango.domain.task.TaskRepository
 import com.mango.domain.task.model.TaskId
 import org.springframework.stereotype.Service
 

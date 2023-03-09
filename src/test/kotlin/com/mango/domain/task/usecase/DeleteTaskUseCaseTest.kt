@@ -1,7 +1,7 @@
 package com.mango.domain.task.usecase
 
-import com.mango.data.activity.ActivityRepository
-import com.mango.data.task.TaskRepository
+import com.mango.data.activity.ActivityRepositoryImpl
+import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.task.model.Task
@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class DeleteTaskUseCaseTest {
-    private val taskRepository: TaskRepository = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
     private val deleteTaskActivityFactory: com.mango.domain.task.activity.DeleteTaskActivityFactory = mockk()
-    private val activityRepository: ActivityRepository = mockk()
+    private val activityRepository: ActivityRepositoryImpl = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
 
     private val sut = DeleteTaskUseCase(

@@ -1,6 +1,6 @@
 package com.mango.domain.project.usecase
 
-import com.mango.data.project.ProjectRepository
+import com.mango.data.project.ProjectRepositoryImpl
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.project.model.Project
 import io.mockk.every
@@ -11,7 +11,7 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class GetProjectOrThrowUseCaseTest {
-    private val projectRepository: ProjectRepository = mockk()
+    private val projectRepository: ProjectRepositoryImpl = mockk()
 
     private val sut = GetProjectOrThrowUseCase(
         projectRepository,

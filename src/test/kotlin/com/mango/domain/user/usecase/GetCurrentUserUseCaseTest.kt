@@ -1,6 +1,6 @@
 package com.mango.domain.user.usecase
 
-import com.mango.data.user.UserRepository
+import com.mango.data.user.UserRepositoryImpl
 import com.mango.domain.user.model.User
 import io.mockk.every
 import io.mockk.mockk
@@ -8,7 +8,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class GetCurrentUserUseCaseTest {
-    private val userRepository: UserRepository = mockk()
+    private val userRepository: UserRepositoryImpl = mockk()
 
     private val sut = GetCurrentUserUseCase(
         userRepository,

@@ -1,7 +1,7 @@
 package com.mango.domain.task.usecase.update
 
-import com.mango.data.activity.ActivityRepository
-import com.mango.data.task.TaskRepository
+import com.mango.data.activity.ActivityRepositoryImpl
+import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.common.model.BusinessTestModel
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId2
@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class UpdateTaskParentTaskUseCaseTest {
-    private val taskRepository: TaskRepository = mockk()
-    private val activityRepository: ActivityRepository = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
+    private val activityRepository: ActivityRepositoryImpl = mockk()
     private val updateTaskParentTaskIdActivityFactory: com.mango.domain.task.activity.UpdateTaskParentTaskActivityFactory = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
 

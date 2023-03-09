@@ -1,8 +1,8 @@
 package com.mango.domain.task.usecase.update
 
-import com.mango.data.activity.ActivityRepository
-import com.mango.data.task.TaskRepository
+import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.common.usecase.RequireDateIsNowOrLaterUseCase
+import com.mango.domain.task.TaskRepository
 import com.mango.domain.task.activity.UpdateTaskDueDateActivityFactory
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase

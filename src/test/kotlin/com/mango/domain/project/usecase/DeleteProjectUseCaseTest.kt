@@ -1,7 +1,7 @@
 package com.mango.domain.project.usecase
 
-import com.mango.data.activity.ActivityRepository
-import com.mango.data.project.ProjectRepository
+import com.mango.data.activity.ActivityRepositoryImpl
+import com.mango.data.project.ProjectRepositoryImpl
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.project.activity.DeleteProjectActivity
 import com.mango.domain.project.activity.DeleteProjectActivityFactory
@@ -16,9 +16,9 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 class DeleteProjectUseCaseTest {
-    private val projectRepository: ProjectRepository = mockk()
+    private val projectRepository: ProjectRepositoryImpl = mockk()
     private val deleteProjectActivityFactory: DeleteProjectActivityFactory = mockk()
-    private val activityRepository: ActivityRepository = mockk()
+    private val activityRepository: ActivityRepositoryImpl = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
 
     private val sut = DeleteProjectUseCase(

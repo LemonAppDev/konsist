@@ -10,12 +10,12 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import kotlin.jvm.optionals.getOrNull
 
-class CommentRepositoryTest {
+class CommentRepositoryImplTest {
     private val commentJpaRepository: CommentJpaRepository = mockk()
     private val commentToCommentJpaEntityMapper: CommentToCommentJpaEntityMapper = mockk()
     private val commentJpaEntityToCommentMapper: CommentJpaEntityToCommentMapper = mockk()
 
-    private val sut = CommentRepository(
+    private val sut = CommentRepositoryImpl(
         commentJpaRepository,
         commentToCommentJpaEntityMapper,
         commentJpaEntityToCommentMapper,

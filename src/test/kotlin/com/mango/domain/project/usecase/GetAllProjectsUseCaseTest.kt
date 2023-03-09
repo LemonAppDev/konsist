@@ -1,13 +1,13 @@
 package com.mango.domain.project.usecase
 
-import com.mango.data.project.ProjectRepository
+import com.mango.data.project.ProjectRepositoryImpl
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
 
 class GetAllProjectsUseCaseTest {
-    private val projectRepository: ProjectRepository = mockk()
+    private val projectRepository: ProjectRepositoryImpl = mockk()
 
     private val sut = GetAllProjectsUseCase(
         projectRepository,

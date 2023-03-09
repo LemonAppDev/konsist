@@ -1,7 +1,7 @@
 package com.mango.domain.comment.usecase
 
-import com.mango.data.activity.ActivityRepository
-import com.mango.data.comment.CommentRepository
+import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.comment.CommentRepository
 import com.mango.domain.comment.model.CommentId
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.task.activity.DeleteCommentActivityFactory

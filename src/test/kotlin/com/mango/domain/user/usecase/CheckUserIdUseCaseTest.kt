@@ -1,6 +1,6 @@
 package com.mango.domain.user.usecase
 
-import com.mango.data.user.UserRepository
+import com.mango.data.user.UserRepositoryImpl
 import com.mango.domain.common.model.BusinessTestModel.getUserId1
 import io.mockk.every
 import io.mockk.mockk
@@ -9,7 +9,7 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class CheckUserIdUseCaseTest {
-    private val userRepository: UserRepository = mockk()
+    private val userRepository: UserRepositoryImpl = mockk()
 
     private val sut = CheckUserIdUseCase(
         userRepository,

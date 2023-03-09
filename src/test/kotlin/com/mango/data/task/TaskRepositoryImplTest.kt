@@ -10,12 +10,12 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import kotlin.jvm.optionals.getOrNull
 
-class TaskRepositoryTest {
+class TaskRepositoryImplTest {
     private val taskJpaRepository: TaskJpaRepository = mockk()
     private val taskToTaskJpaEntityMapper: TaskToTaskJpaEntityMapper = mockk()
     private val taskJpaEntityToTaskMapper: TaskJpaEntityToTaskMapper = mockk()
 
-    private val sut = TaskRepository(
+    private val sut = TaskRepositoryImpl(
         taskJpaRepository,
         taskToTaskJpaEntityMapper,
         taskJpaEntityToTaskMapper,

@@ -1,7 +1,7 @@
 package com.mango.domain.comment.usecase
 
-import com.mango.data.activity.ActivityRepository
-import com.mango.data.comment.CommentRepository
+import com.mango.data.activity.ActivityRepositoryImpl
+import com.mango.data.comment.CommentRepositoryImpl
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.comment.model.request.UpdateCommentRequestModel
 import com.mango.domain.common.LocalDateTimeFactory
@@ -15,10 +15,10 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class UpdateCommentUseCaseTest {
-    private val commentRepository: CommentRepository = mockk()
+    private val commentRepository: CommentRepositoryImpl = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val updateCommentActivityFactory: com.mango.domain.task.activity.UpdateCommentActivityFactory = mockk()
-    private val activityRepository: ActivityRepository = mockk()
+    private val activityRepository: ActivityRepositoryImpl = mockk()
     private val getCommentOrThrowUseCase: GetCommentOrThrowUseCase = mockk()
 
     private val sut = UpdateCommentUseCase(

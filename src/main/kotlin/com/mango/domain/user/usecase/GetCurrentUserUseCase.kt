@@ -1,6 +1,6 @@
 package com.mango.domain.user.usecase
 
-import com.mango.data.user.UserRepository
+import com.mango.domain.user.UserRepository
 import org.springframework.stereotype.Service
 
 @Service

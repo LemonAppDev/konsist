@@ -1,6 +1,6 @@
 package com.mango.domain.comment.usecase
 
-import com.mango.data.comment.CommentRepository
+import com.mango.data.comment.CommentRepositoryImpl
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.common.model.BusinessTestModel.getCommentId1
 import io.mockk.every
@@ -11,7 +11,7 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class GetCommentOrThrowUseCaseTest {
-    private val commentRepository: CommentRepository = mockk()
+    private val commentRepository: CommentRepositoryImpl = mockk()
 
     private val sut = GetCommentOrThrowUseCase(
         commentRepository,

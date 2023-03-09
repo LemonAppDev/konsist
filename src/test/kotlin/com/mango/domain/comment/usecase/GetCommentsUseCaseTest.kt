@@ -1,7 +1,7 @@
 package com.mango.domain.comment.usecase
 
-import com.mango.data.comment.CommentRepository
-import com.mango.data.task.TaskRepository
+import com.mango.data.comment.CommentRepositoryImpl
+import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.task.model.Task
@@ -13,8 +13,8 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class GetCommentsUseCaseTest {
-    private val taskRepository: TaskRepository = mockk()
-    private val commentRepository: CommentRepository = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
+    private val commentRepository: CommentRepositoryImpl = mockk()
 
     private val sut = GetCommentsUseCase(
         taskRepository,

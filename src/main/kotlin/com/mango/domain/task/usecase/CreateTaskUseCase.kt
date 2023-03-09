@@ -1,11 +1,11 @@
 package com.mango.domain.task.usecase
 
-import com.mango.data.activity.ActivityRepository
-import com.mango.data.task.TaskRepository
+import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.usecase.RequireDateIsNowOrLaterUseCase
 import com.mango.domain.project.usecase.CheckProjectIdUseCase
 import com.mango.domain.task.TaskFactory
+import com.mango.domain.task.TaskRepository
 import com.mango.domain.task.activity.CreateTaskActivityFactory
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.request.CreateTaskRequestModel

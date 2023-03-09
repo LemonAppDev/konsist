@@ -1,8 +1,8 @@
 package com.mango.domain.project.usecase
 
-import com.mango.data.activity.ActivityRepository
-import com.mango.data.project.ProjectRepository
+import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.project.ProjectFactory
+import com.mango.domain.project.ProjectRepository
 import com.mango.domain.project.activity.CreateProjectActivityFactory
 import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.request.CreateProjectRequestModel
