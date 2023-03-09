@@ -1,6 +1,6 @@
 package com.mango.business.usecase.user
 
-import com.mango.business.model.value.UserId
+import com.mango.business.common.model.BusinessTestModel.getUserId1
 import com.mango.persistence.repository.UserRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -18,7 +18,7 @@ class CheckUserIdUseCaseTest {
     @Test
     fun `throw exception when user doesn't exist`() {
         // given
-        val userId = UserId("id")
+        val userId = getUserId1()
         every { userRepository.containsUser(userId) } returns false
 
         // when

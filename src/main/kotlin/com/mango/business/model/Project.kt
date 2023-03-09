@@ -7,10 +7,10 @@ import java.time.LocalDateTime
 
 data class Project(
     val id: ProjectId,
-    val creator: UserId,
+    val owner: UserId,
     val creationDate: LocalDateTime,
     val name: String,
     val color: Color,
     val isFavourite: Boolean = false,
-    val collaborators: List<UserId>? = null,
+    val collaborators: List<User>? = null,
 )

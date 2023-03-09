@@ -1,7 +1,7 @@
 package com.mango.business.factory
 
 import com.mango.business.model.Comment
-import com.mango.business.model.request.comment.AddCommentRequestModel
+import com.mango.business.model.value.TaskId
 import com.mango.persistence.repository.UserRepository
 import org.springframework.stereotype.Service
 
@@ -12,11 +12,12 @@ class CommentFactory(
     private val userRepository: UserRepository,
 ) {
     operator fun invoke(
-        addCommentRequestModel: AddCommentRequestModel,
+        taskId: TaskId,
+        text: String,
     ) = Comment(
         uuidFactory.createCommentId(),
-        addCommentRequestModel.text,
-        addCommentRequestModel.taskId,
+        text,
+        taskId,
         userRepository.getCurrentUser().id,
         localDateTimeFactory(),
     )

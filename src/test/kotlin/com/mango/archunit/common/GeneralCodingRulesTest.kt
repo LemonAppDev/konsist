@@ -5,6 +5,7 @@ import com.mango.archunit.utils.haveTestClass
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noFields
 import com.tngtech.archunit.library.GeneralCodingRules
+import jakarta.persistence.Entity
 import org.junit.jupiter.api.Test
 
 class GeneralCodingRulesTest {
@@ -28,6 +29,12 @@ class GeneralCodingRulesTest {
         classes()
             .that()
             .resideOutsideOfPackages("..archunit..", "..config..", "..factory..", "..model..", "..value..", "..activity..")
+            .and()
+            .areNotMetaAnnotatedWith(Entity::class.java)
+            .and()
+            .haveSimpleNameNotEndingWith("JpaEntity")
+            .and()
+            .haveSimpleNameNotEndingWith("JpaRepository")
             .should(haveTestClass("Test"))
             .check(allClasses)
     }

@@ -1,37 +1,86 @@
 package com.mango.persistence.repository
 
+import com.mango.business.common.model.BusinessTestModel.getCommentId1
 import com.mango.business.model.Comment
-import com.mango.business.model.value.CommentId
+import com.mango.persistence.datasource.CommentJpaRepository
+import com.mango.persistence.entity.CommentJpaEntity
+import com.mango.persistence.entity.mapper.CommentJpaEntityToCommentMapper
+import com.mango.persistence.entity.mapper.CommentToCommentJpaEntityMapper
 import io.mockk.every
+import io.mockk.justRun
 import io.mockk.mockk
+import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldContain
-import org.amshove.kluent.shouldNotContain
 import org.junit.jupiter.api.Test
+import kotlin.jvm.optionals.getOrNull
 
 class CommentRepositoryTest {
-    private val sut = CommentRepository()
+    private val commentJpaRepository: CommentJpaRepository = mockk()
+    private val commentToCommentJpaEntityMapper: CommentToCommentJpaEntityMapper = mockk()
+    private val commentJpaEntityToCommentMapper: CommentJpaEntityToCommentMapper = mockk()
+
+    private val sut = CommentRepository(
+        commentJpaRepository,
+        commentToCommentJpaEntityMapper,
+        commentJpaEntityToCommentMapper,
+    )
 
     @Test
-    fun `addComment() adds new comment to comments`() {
+    fun `saveComment() saves comment`() {
         // given
         val comment: Comment = mockk()
-        val actual = sut.comments
+        val commentJpaEntity: CommentJpaEntity = mockk()
+        every { commentToCommentJpaEntityMapper(comment) } returns commentJpaEntity
+        every { commentJpaRepository.save(commentJpaEntity) } returns commentJpaEntity
+        every { commentJpaEntityToCommentMapper(commentJpaEntity) } returns comment
 
         // when
-        sut.addComment(comment)
+        sut.saveComment(comment)
 
         // then
-        actual shouldContain comment
+        verify { commentJpaRepository.save(commentJpaEntity) }
     }
 
     @Test
-    fun `getComment() returns comment when it exist`() {
+    fun `saveComment() returns comment`() {
         // given
-        val commentId = CommentId("id")
         val comment: Comment = mockk()
-        every { comment.id } returns commentId
-        sut.addComment(comment)
+        val commentJpaEntity: CommentJpaEntity = mockk()
+        every { commentToCommentJpaEntityMapper(comment) } returns commentJpaEntity
+        every { commentJpaRepository.save(commentJpaEntity) } returns commentJpaEntity
+        every { commentJpaEntityToCommentMapper(commentJpaEntity) } returns comment
+
+        // when
+        val actual = sut.saveComment(comment)
+
+        // then
+        actual shouldBeEqualTo comment
+    }
+
+    @Test
+    fun `deleteComment() deletes comment`() {
+        // given
+        val comment: Comment = mockk()
+        val commentJpaEntity: CommentJpaEntity = mockk()
+        every { commentToCommentJpaEntityMapper(comment) } returns commentJpaEntity
+        justRun { commentJpaRepository.delete(commentJpaEntity) }
+        every { commentJpaEntityToCommentMapper(commentJpaEntity) } returns comment
+
+        // when
+        sut.deleteComment(comment)
+
+        // then
+        verify { commentJpaRepository.delete(commentJpaEntity) }
+    }
+
+    @Test
+    fun `getComment() return comment when it exist`() {
+        // given
+        val commentId = getCommentId1()
+        val comment: Comment = mockk()
+        val commentJpaEntity: CommentJpaEntity = mockk()
+        every { commentJpaRepository.findById(commentId.value).getOrNull() } returns commentJpaEntity
+        every { commentJpaEntityToCommentMapper(commentJpaEntity) } returns comment
 
         // when
         val actual = sut.getComment(commentId)
@@ -41,72 +90,15 @@ class CommentRepositoryTest {
     }
 
     @Test
-    fun `getComment() returns null when it doesn't exist`() {
+    fun `getComment() return null when it doesn't exist`() {
         // given
-        val commentId = CommentId("id")
+        val commentId = getCommentId1()
+        every { commentJpaRepository.findById(commentId.value).getOrNull() } returns null
 
         // when
         val actual = sut.getComment(commentId)
 
         // then
         actual shouldBeEqualTo null
-    }
-
-    @Test
-    fun `deleteComment() deletes comment from comments`() {
-        // given
-        val comment: Comment = mockk()
-        sut.addComment(comment)
-        val actual = sut.comments
-
-        // when
-        sut.deleteComment(comment)
-
-        // then
-        actual shouldNotContain comment
-    }
-
-    @Test
-    fun `updateComment() adds updated comment to comments`() {
-        // given
-        val commentId = CommentId("id")
-        val oldComment: Comment = mockk()
-        every { oldComment.id } returns commentId
-        every { oldComment.text } returns "old text"
-        sut.addComment(oldComment)
-
-        val newComment: Comment = mockk()
-        every { newComment.id } returns commentId
-        every { newComment.text } returns "new text"
-
-        val actual = sut.comments
-
-        // when
-        sut.updateComment(newComment)
-
-        // then
-        actual shouldContain newComment
-    }
-
-    @Test
-    fun `updateComment() replace old comment with new comment`() {
-        // given
-        val commentId = CommentId("id")
-        val oldComment: Comment = mockk()
-        every { oldComment.id } returns commentId
-        every { oldComment.text } returns "old text"
-        sut.addComment(oldComment)
-
-        val newComment: Comment = mockk()
-        every { newComment.id } returns commentId
-        every { newComment.text } returns "new text"
-
-        val actual = sut.comments
-
-        // when
-        sut.updateComment(newComment)
-
-        // then
-        actual shouldNotContain oldComment
     }
 }

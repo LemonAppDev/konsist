@@ -1,7 +1,7 @@
 package com.mango.business.usecase.project
 
+import com.mango.business.common.model.BusinessTestModel.getProjectId1
 import com.mango.business.model.Project
-import com.mango.business.model.value.ProjectId
 import com.mango.persistence.repository.ProjectRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -20,7 +20,7 @@ class GetProjectOrThrowUseCaseTest {
     @Test
     fun `throws exception when project doesn't exist`() {
         // given
-        val projectId = ProjectId("id")
+        val projectId = getProjectId1()
         every { projectRepository.getProject(projectId) } returns null
 
         // when
@@ -33,7 +33,7 @@ class GetProjectOrThrowUseCaseTest {
     @Test
     fun `returns projects from projectRepository`() {
         // given
-        val projectId = ProjectId("projectId")
+        val projectId = getProjectId1()
         val project: Project = mockk()
         every { projectRepository.getProject(projectId) } returns project
 

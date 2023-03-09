@@ -4,7 +4,6 @@ import com.mango.business.common.model.BusinessTestModel
 import com.mango.business.model.Task
 import com.mango.business.model.activity.task.UpdateTaskCompleteDateActivity
 import com.mango.business.model.activity.task.UpdateTaskCompleteDateActivityFactory
-import com.mango.business.model.value.TaskId
 import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
@@ -38,14 +37,14 @@ class UpdateTaskCompleteDateUseCaseTest {
         shouldUpdateCompleteDate: Boolean,
     ) {
         // given
-        val taskId = TaskId("taskId")
         val date: LocalDateTime = mockk()
         val oldTask: Task = BusinessTestModel.getTask(completeDate = currentCompleteDate)
+        val taskId = oldTask.id
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newCompleteDate = if (isComplete) date else null
         every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns mockk()
 
-        justRun { taskRepository.updateTask(any()) }
+        every { taskRepository.saveTask(any()) } returns mockk()
         val activity: UpdateTaskCompleteDateActivity = mockk()
         every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns activity
         justRun { activityRepository.addActivity(activity) }
@@ -56,7 +55,7 @@ class UpdateTaskCompleteDateUseCaseTest {
         // then
 
         if (shouldUpdateCompleteDate) {
-            verify { taskRepository.updateTask(oldTask.copy(completeDate = newCompleteDate)) }
+            verify { taskRepository.saveTask(oldTask.copy(completeDate = newCompleteDate)) }
         }
     }
 
@@ -68,14 +67,14 @@ class UpdateTaskCompleteDateUseCaseTest {
         shouldUpdateCompleteDate: Boolean,
     ) {
         // given
-        val taskId = TaskId("taskId")
         val date: LocalDateTime = mockk()
         val oldTask: Task = BusinessTestModel.getTask(completeDate = currentCompleteDate)
+        val taskId = oldTask.id
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newCompleteDate = if (isComplete) date else null
         every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns mockk()
 
-        justRun { taskRepository.updateTask(any()) }
+        every { taskRepository.saveTask(any()) } returns mockk()
         val activity: UpdateTaskCompleteDateActivity = mockk()
         every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns activity
         justRun { activityRepository.addActivity(activity) }

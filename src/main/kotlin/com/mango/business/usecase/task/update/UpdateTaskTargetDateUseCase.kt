@@ -26,7 +26,7 @@ class UpdateTaskTargetDateUseCase(
         if (newTargetDate != oldTargetDate) {
             val newTask = task.copy(targetDate = newTargetDate)
 
-            taskRepository.updateTask(newTask)
+            taskRepository.saveTask(newTask)
 
             val activity = updateTaskTargetDateActivityFactory(newTask.id, date, oldTargetDate, newTargetDate)
             activityRepository.addActivity(activity)

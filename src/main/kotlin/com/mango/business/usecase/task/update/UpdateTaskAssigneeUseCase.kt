@@ -28,7 +28,7 @@ class UpdateTaskAssigneeUseCase(
         if (newAssigneeId != oldAssigneeId) {
             val newTask = task.copy(assigneeId = newAssigneeId)
 
-            taskRepository.updateTask(newTask)
+            taskRepository.saveTask(newTask)
 
             val activity = updateTaskAssigneeActivityFactory(newTask.id, date, oldAssigneeId, newAssigneeId)
             activityRepository.addActivity(activity)

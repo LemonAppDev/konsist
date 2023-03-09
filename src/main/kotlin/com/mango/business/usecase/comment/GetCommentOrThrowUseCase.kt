@@ -6,7 +6,7 @@ import com.mango.persistence.repository.CommentRepository
 import org.springframework.stereotype.Service
 
 @Service
-class GetCommentUseCase(
+class GetCommentOrThrowUseCase(
     private val commentRepository: CommentRepository,
 ) {
     operator fun invoke(commentId: CommentId): Comment {

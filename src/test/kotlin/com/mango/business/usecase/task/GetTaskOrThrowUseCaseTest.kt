@@ -1,7 +1,7 @@
 package com.mango.business.usecase.task
 
+import com.mango.business.common.model.BusinessTestModel.getTaskId1
 import com.mango.business.model.Task
-import com.mango.business.model.value.TaskId
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -20,7 +20,7 @@ class GetTaskOrThrowUseCaseTest {
     @Test
     fun `throws exception when task doesn't exist`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         every { taskRepository.getTask(taskId) } returns null
 
         // when
@@ -33,7 +33,7 @@ class GetTaskOrThrowUseCaseTest {
     @Test
     fun `returns task`() {
         // given
-        val taskId = TaskId("taskId")
+        val taskId = getTaskId1()
         val task: Task = mockk()
         every { taskRepository.getTask(taskId) } returns task
 

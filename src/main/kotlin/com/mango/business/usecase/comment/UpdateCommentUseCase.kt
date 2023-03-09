@@ -13,16 +13,16 @@ class UpdateCommentUseCase(
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val updateCommentActivityFactory: UpdateCommentActivityFactory,
     private val activityRepository: ActivityRepository,
-    private val getCommentUseCase: GetCommentUseCase,
+    private val getCommentOrThrowUseCase: GetCommentOrThrowUseCase,
 ) {
     operator fun invoke(updateCommentRequestModel: UpdateCommentRequestModel) {
-        val comment = getCommentUseCase(updateCommentRequestModel.commentId)
+        val comment = getCommentOrThrowUseCase(updateCommentRequestModel.commentId)
 
         updateCommentRequestModel.text?.let {
             if (updateCommentRequestModel.text != comment.text) {
                 val newComment = comment.copy(text = it)
 
-                commentRepository.updateComment(newComment)
+                commentRepository.saveComment(newComment)
 
                 val date = localDateTimeFactory()
                 val activity = updateCommentActivityFactory(comment.taskId, date, comment.text, newComment.text)

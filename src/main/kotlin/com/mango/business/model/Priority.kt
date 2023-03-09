@@ -1,7 +1,7 @@
 package com.mango.business.model
 
 @Suppress("detekt.MagicNumber")
-enum class Priority(private val value: Int) {
+enum class Priority(val value: Int) {
     PRIORITY_1(1),
     PRIORITY_2(2),
     PRIORITY_3(3),

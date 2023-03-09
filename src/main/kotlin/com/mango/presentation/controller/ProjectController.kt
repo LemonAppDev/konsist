@@ -27,12 +27,12 @@ class ProjectController(
     fun createProject(@RequestBody createProjectRequestModel: CreateProjectRequestModel) =
         createProjectUseCase(createProjectRequestModel)
 
-    @DeleteMapping("/delete")
-    fun deleteProject(@RequestParam projectId: ProjectId) = deleteProjectUseCase(projectId)
-
     @GetMapping("/get")
     fun getProject(@RequestParam projectId: ProjectId) = getProjectOrThrowUseCase(projectId)
 
     @GetMapping("/all")
     fun getProjects() = getAllProjectsUseCase()
+
+    @DeleteMapping("/delete")
+    fun deleteProject(@RequestParam projectId: ProjectId) = deleteProjectUseCase(projectId)
 }

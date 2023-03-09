@@ -2,24 +2,42 @@ package com.mango.persistence.repository
 
 import com.mango.business.model.User
 import com.mango.business.model.value.UserId
-import org.springframework.stereotype.Repository
+import com.mango.persistence.datasource.UserJpaRepository
+import com.mango.persistence.entity.mapper.UserJpaEntityToUserMapper
+import com.mango.persistence.entity.mapper.UserToUserJpaEntityMapper
+import org.springframework.stereotype.Service
+import java.util.UUID
+import kotlin.jvm.optionals.getOrNull
 
-@Repository
-class UserRepository {
-    private val _users = mutableListOf(
-        User(UserId("1"), "Natalia"),
-        User(UserId("2"), "Lukasz"),
-    )
+@Service
+class UserRepository(
+    private val userJpaRepository: UserJpaRepository,
+    private val userToUserJpaEntityMapper: UserToUserJpaEntityMapper,
+    private val userJpaEntityToUserMapper: UserJpaEntityToUserMapper,
+) {
+    val users
+        get() = userJpaRepository
+            .findAll()
+            .map { userJpaEntityToUserMapper(it) }
 
-    val users get() = _users.toList()
+    fun saveUser(user: User): User = userJpaRepository
+        .save(userToUserJpaEntityMapper(user))
+        .let { userJpaEntityToUserMapper(it) }
 
-    fun getCurrentUser(): User = _users.first()
+    fun getUser(userId: UserId) = userJpaRepository
+        .findById(userId.value)
+        .getOrNull()
+        ?.let { userJpaEntityToUserMapper(it) }
 
-    fun getUser(userId: UserId) = _users.firstOrNull { it.id == userId }
+    fun getCurrentUser(): User {
+        saveUser(User(UserId(UUID.randomUUID()), "John"))
 
-    fun containsUser(userId: UserId) = getUser(userId) != null
-
-    fun addUser(user: User) {
-        _users.add(user)
+        return userJpaRepository
+            .findAll()
+            .first()
+            .let { userJpaEntityToUserMapper(it) }
     }
+
+    fun containsUser(userId: UserId) = userJpaRepository
+        .existsById(userId.value)
 }

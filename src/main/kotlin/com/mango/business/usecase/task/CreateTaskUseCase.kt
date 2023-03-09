@@ -24,7 +24,7 @@ class CreateTaskUseCase(
     private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase,
     private val localDateTimeFactory: LocalDateTimeFactory,
 ) {
-    fun invoke(createTaskRequestModel: CreateTaskRequestModel): Task {
+    operator fun invoke(createTaskRequestModel: CreateTaskRequestModel): Task {
         val creationDate = localDateTimeFactory()
 
         with(createTaskRequestModel) {
@@ -37,11 +37,9 @@ class CreateTaskUseCase(
 
         val task = taskFactory(createTaskRequestModel, creationDate)
 
-        taskRepository.addTask(task)
-
-        val activity = createTaskActivityFactory(task.id, creationDate)
-        activityRepository.addActivity(activity)
-
-        return task
+        return taskRepository.saveTask(task).also {
+            val activity = createTaskActivityFactory(task.id, creationDate)
+            activityRepository.addActivity(activity)
+        }
     }
 }

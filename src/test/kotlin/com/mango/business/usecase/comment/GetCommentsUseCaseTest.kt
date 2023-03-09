@@ -1,8 +1,8 @@
 package com.mango.business.usecase.comment
 
+import com.mango.business.common.model.BusinessTestModel.getTaskId1
 import com.mango.business.model.Comment
 import com.mango.business.model.Task
-import com.mango.business.model.value.TaskId
 import com.mango.persistence.repository.CommentRepository
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
@@ -24,7 +24,7 @@ class GetCommentsUseCaseTest {
     @Test
     fun `throws exception when task doesn't exist`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         every { taskRepository.getTask(taskId) } returns null
 
         // when
@@ -37,7 +37,7 @@ class GetCommentsUseCaseTest {
     @Test
     fun `returns list of comments for given task`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         val task: Task = mockk()
         val comments = listOf<Comment>()
         every { task.id } returns taskId

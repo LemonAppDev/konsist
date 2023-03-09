@@ -23,7 +23,7 @@ class UpdateTaskDescriptionUseCase(
         if (newDescription != oldDescription) {
             val newTask = task.copy(description = newDescription)
 
-            taskRepository.updateTask(newTask)
+            taskRepository.saveTask(newTask)
 
             val activity = updateTaskDescriptionActivityFactory(newTask.id, date, oldDescription, newDescription)
             activityRepository.addActivity(activity)

@@ -1,7 +1,8 @@
 package com.mango.business.usecase.task
 
+import com.mango.business.common.model.BusinessTestModel.getTaskId1
+import com.mango.business.common.model.BusinessTestModel.getTaskId2
 import com.mango.business.model.activity.task.CreateTaskActivity
-import com.mango.business.model.value.TaskId
 import com.mango.persistence.repository.ActivityRepository
 import io.mockk.every
 import io.mockk.justRun
@@ -21,8 +22,8 @@ class GetTaskActivitiesUseCaseTest {
     @Test
     fun `get task activities for given user`() {
         // given
-        val taskId1 = TaskId("id1")
-        val taskId2 = TaskId("id2")
+        val taskId1 = getTaskId1()
+        val taskId2 = getTaskId2()
         justRun { checkTaskIdUseCase(taskId1) }
 
         val createTaskActivity1: CreateTaskActivity = mockk()

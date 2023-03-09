@@ -1,29 +1,43 @@
 package com.mango.presentation.controller
 
-import com.mango.business.model.User
+import com.mango.business.usecase.user.CreateUserUseCase
 import com.mango.business.usecase.user.GetCurrentUserUseCase
 import io.mockk.every
 import io.mockk.mockk
-import org.amshove.kluent.shouldBeEqualTo
+import io.mockk.verify
 import org.junit.jupiter.api.Test
 
 class UserControllerTest {
+    private val createUserUseCase: CreateUserUseCase = mockk()
     private val getCurrentUserUseCase: GetCurrentUserUseCase = mockk()
 
     private val sut = UserController(
+        createUserUseCase,
         getCurrentUserUseCase,
     )
 
     @Test
-    fun `should return current user`() {
+    fun `createUser() calls createUserUseCase()`() {
         // given
-        val user: User = mockk()
-        every { getCurrentUserUseCase() } returns user
+        val userName = "userName"
+        every { createUserUseCase.invoke(userName) } returns mockk()
 
         // when
-        val actual = sut.getCurrentUser()
+        sut.createUser(userName)
 
         // then
-        actual shouldBeEqualTo user
+        verify { createUserUseCase.invoke(userName) }
+    }
+
+    @Test
+    fun `getCurrentUser() calls getCurrentUserUseCase()`() {
+        // given
+        every { getCurrentUserUseCase.invoke() } returns mockk()
+
+        // when
+        sut.getCurrentUser()
+
+        // then
+        verify { getCurrentUserUseCase.invoke() }
     }
 }

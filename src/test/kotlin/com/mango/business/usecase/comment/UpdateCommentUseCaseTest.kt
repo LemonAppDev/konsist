@@ -1,12 +1,12 @@
 package com.mango.business.usecase.comment
 
+import com.mango.business.common.model.BusinessTestModel.getCommentId1
+import com.mango.business.common.model.BusinessTestModel.getTaskId1
 import com.mango.business.factory.LocalDateTimeFactory
 import com.mango.business.model.Comment
 import com.mango.business.model.activity.task.UpdateCommentActivity
 import com.mango.business.model.activity.task.UpdateCommentActivityFactory
 import com.mango.business.model.request.comment.UpdateCommentRequestModel
-import com.mango.business.model.value.CommentId
-import com.mango.business.model.value.TaskId
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.CommentRepository
 import io.mockk.every
@@ -21,14 +21,14 @@ class UpdateCommentUseCaseTest {
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val updateCommentActivityFactory: UpdateCommentActivityFactory = mockk()
     private val activityRepository: ActivityRepository = mockk()
-    private val getCommentUseCase: GetCommentUseCase = mockk()
+    private val getCommentOrThrowUseCase: GetCommentOrThrowUseCase = mockk()
 
     private val sut = UpdateCommentUseCase(
         commentRepository,
         localDateTimeFactory,
         updateCommentActivityFactory,
         activityRepository,
-        getCommentUseCase,
+        getCommentOrThrowUseCase,
     )
 
     @Test
@@ -36,19 +36,19 @@ class UpdateCommentUseCaseTest {
         // given
         val newText = "new text"
         val oldText = "old text"
-        val taskId = TaskId("id")
-        val commentId = CommentId("id")
+        val taskId = getTaskId1()
+        val commentId = getCommentId1()
         val updateCommentRequestModel = UpdateCommentRequestModel(commentId, newText)
         val oldComment: Comment = mockk()
         every { oldComment.text } returns oldText
         every { oldComment.taskId } returns taskId
-        every { getCommentUseCase(commentId) } returns oldComment
+        every { getCommentOrThrowUseCase(commentId) } returns oldComment
         val newComment: Comment = mockk()
         every { newComment.text } returns newText
         every { oldComment.copy(text = newText) } returns newComment
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
-        justRun { commentRepository.updateComment(newComment) }
+        every { commentRepository.saveComment(newComment) } returns mockk()
         val activity: UpdateCommentActivity = mockk()
         every { updateCommentActivityFactory(taskId, date, oldText, newText) } returns activity
         justRun { activityRepository.addActivity(activity) }
@@ -57,7 +57,7 @@ class UpdateCommentUseCaseTest {
         sut(updateCommentRequestModel)
 
         // then
-        verify { commentRepository.updateComment(newComment) }
+        verify { commentRepository.saveComment(newComment) }
     }
 
     @Test
@@ -65,19 +65,19 @@ class UpdateCommentUseCaseTest {
         // given
         val newText = "new text"
         val oldText = "old text"
-        val taskId = TaskId("id")
-        val commentId = CommentId("id")
+        val taskId = getTaskId1()
+        val commentId = getCommentId1()
         val updateCommentRequestModel = UpdateCommentRequestModel(commentId, newText)
         val oldComment: Comment = mockk()
         every { oldComment.text } returns oldText
         every { oldComment.taskId } returns taskId
-        every { getCommentUseCase(commentId) } returns oldComment
+        every { getCommentOrThrowUseCase(commentId) } returns oldComment
         val newComment: Comment = mockk()
         every { newComment.text } returns newText
         every { oldComment.copy(text = newText) } returns newComment
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
-        justRun { commentRepository.updateComment(newComment) }
+        every { commentRepository.saveComment(newComment) } returns mockk()
         val activity: UpdateCommentActivity = mockk()
         every { updateCommentActivityFactory(taskId, date, oldText, newText) } returns activity
         justRun { activityRepository.addActivity(activity) }

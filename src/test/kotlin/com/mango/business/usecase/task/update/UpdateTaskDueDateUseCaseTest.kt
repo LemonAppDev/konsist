@@ -1,9 +1,9 @@
 package com.mango.business.usecase.task.update
 
 import com.mango.business.common.model.BusinessTestModel
+import com.mango.business.common.model.BusinessTestModel.getTaskId1
 import com.mango.business.model.activity.task.UpdateTaskDueDateActivity
 import com.mango.business.model.activity.task.UpdateTaskDueDateActivityFactory
-import com.mango.business.model.value.TaskId
 import com.mango.business.usecase.common.RequireDateIsNowOrLaterUseCase
 import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
@@ -34,16 +34,16 @@ class UpdateTaskDueDateUseCaseTest {
     @Test
     fun `add task to repository if new due date is in the future`() {
         // given
-        val taskId = TaskId("1")
+        val taskId = getTaskId1()
         val oldDueDate: LocalDateTime = mockk()
         val newDueDate = LocalDateTime.of(2023, Month.MARCH, 30, 21, 0, 0, 0)
 
+        justRun { requireDateIsNowOrLaterUseCase(newDueDate) }
         val oldTask = BusinessTestModel.getTask(id = taskId, dueDate = oldDueDate)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(dueDate = newDueDate)
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
-        justRun { requireDateIsNowOrLaterUseCase(newDueDate) }
-        justRun { taskRepository.updateTask(newTask) }
+        every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: UpdateTaskDueDateActivity = mockk()
         every { updateTaskDueDateActivityFactory(taskId, date, oldDueDate, newDueDate) } returns activity
         justRun { activityRepository.addActivity(activity) }
@@ -52,22 +52,22 @@ class UpdateTaskDueDateUseCaseTest {
         sut(taskId, newDueDate, date)
 
         // then
-        verify { taskRepository.updateTask(newTask) }
+        verify { taskRepository.saveTask(newTask) }
     }
 
     @Test
     fun `add activity to activity repository if new due date is in the future`() {
         // given
-        val taskId = TaskId("1")
+        val taskId = getTaskId1()
         val oldDueDate: LocalDateTime = mockk()
         val newDueDate = LocalDateTime.of(2023, Month.MARCH, 30, 21, 0, 0, 0)
 
+        justRun { requireDateIsNowOrLaterUseCase(newDueDate) }
         val oldTask = BusinessTestModel.getTask(id = taskId, dueDate = oldDueDate)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(dueDate = newDueDate)
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
-        justRun { requireDateIsNowOrLaterUseCase(newDueDate) }
-        justRun { taskRepository.updateTask(newTask) }
+        every { taskRepository.saveTask(newTask) } returns mockk()
 
         val activity: UpdateTaskDueDateActivity = mockk()
         every { updateTaskDueDateActivityFactory(taskId, date, oldDueDate, newDueDate) } returns activity
@@ -83,16 +83,16 @@ class UpdateTaskDueDateUseCaseTest {
     @Test
     fun `do nothing when old value is the same as new value`() {
         // given
-        val taskId = TaskId("1")
+        val taskId = getTaskId1()
         val oldDueDate: LocalDateTime = LocalDateTime.of(2023, Month.MARCH, 30, 21, 0, 0, 0)
         val newDueDate = LocalDateTime.of(2023, Month.MARCH, 30, 21, 0, 0, 0)
 
+        justRun { requireDateIsNowOrLaterUseCase(newDueDate) }
         val oldTask = BusinessTestModel.getTask(id = taskId, dueDate = oldDueDate)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(dueDate = newDueDate)
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
-        justRun { requireDateIsNowOrLaterUseCase(newDueDate) }
-        justRun { taskRepository.updateTask(newTask) }
+        every { taskRepository.saveTask(newTask) } returns mockk()
 
         val activity: UpdateTaskDueDateActivity = mockk()
         every { updateTaskDueDateActivityFactory(taskId, date, oldDueDate, newDueDate) } returns activity
@@ -103,7 +103,7 @@ class UpdateTaskDueDateUseCaseTest {
 
         // then
         verify(exactly = 0) {
-            taskRepository.updateTask(newTask)
+            taskRepository.saveTask(newTask)
             activityRepository.addActivity(activity)
         }
     }

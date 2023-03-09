@@ -31,7 +31,7 @@ class UpdateTaskCompleteDateUseCase(
         val oldDate = task.completeDate
         val newTask = task.copy(completeDate = completeDate)
 
-        taskRepository.updateTask(newTask)
+        taskRepository.saveTask(newTask)
 
         val activity = updateTaskCompleteDateActivityFactory(newTask.id, date, oldDate, newTask.completeDate)
         activityRepository.addActivity(activity)

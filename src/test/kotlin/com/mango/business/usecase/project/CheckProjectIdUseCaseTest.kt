@@ -1,6 +1,6 @@
 package com.mango.business.usecase.project
 
-import com.mango.business.model.value.ProjectId
+import com.mango.business.common.model.BusinessTestModel.getProjectId1
 import com.mango.persistence.repository.ProjectRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -18,7 +18,7 @@ class CheckProjectIdUseCaseTest {
     @Test
     fun `throw exception when project doesn't exist`() {
         // given
-        val projectId = ProjectId("id")
+        val projectId = getProjectId1()
         every { projectRepository.containsProject(projectId) } returns false
 
         // when

@@ -26,7 +26,7 @@ class UpdateTaskDueDateUseCase(
         if (newDueDate != oldDueDate) {
             val newTask = task.copy(dueDate = newDueDate)
 
-            taskRepository.updateTask(newTask)
+            taskRepository.saveTask(newTask)
 
             val activity = updateTaskDueDateActivityFactory(newTask.id, date, oldDueDate, newDueDate)
             activityRepository.addActivity(activity)

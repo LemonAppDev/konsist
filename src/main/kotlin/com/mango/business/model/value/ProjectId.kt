@@ -1,4 +1,5 @@
 package com.mango.business.model.value
+import java.util.UUID
 
 @JvmInline
-value class ProjectId(val id: String)
+value class ProjectId(val value: UUID)

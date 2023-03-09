@@ -1,9 +1,9 @@
 package com.mango.business.usecase.task.update
 
 import com.mango.business.common.model.BusinessTestModel
+import com.mango.business.common.model.BusinessTestModel.getTaskId1
 import com.mango.business.model.activity.task.UpdateTaskDescriptionActivity
 import com.mango.business.model.activity.task.UpdateTaskDescriptionActivityFactory
-import com.mango.business.model.value.TaskId
 import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
@@ -30,7 +30,7 @@ class UpdateTaskDescriptionUseCaseTest {
     @Test
     fun `add task to repository`() {
         // given
-        val taskId = TaskId("1")
+        val taskId = getTaskId1()
         val oldDescription = "old description"
         val newDescription = "new description"
         val date: LocalDateTime = mockk()
@@ -39,7 +39,7 @@ class UpdateTaskDescriptionUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(description = newDescription)
 
-        justRun { taskRepository.updateTask(newTask) }
+        every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: UpdateTaskDescriptionActivity = mockk()
         every { updateTaskDescriptionActivityFactory(taskId, date, oldDescription, newDescription) } returns activity
         justRun { activityRepository.addActivity(activity) }
@@ -48,13 +48,13 @@ class UpdateTaskDescriptionUseCaseTest {
         sut(taskId, newDescription, date)
 
         // then
-        verify { taskRepository.updateTask(newTask) }
+        verify { taskRepository.saveTask(newTask) }
     }
 
     @Test
     fun `add activity to activity repository`() {
         // given
-        val taskId = TaskId("1")
+        val taskId = getTaskId1()
         val oldDescription = "old description"
         val newDescription = "new description"
         val date: LocalDateTime = mockk()
@@ -63,7 +63,7 @@ class UpdateTaskDescriptionUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(description = newDescription)
 
-        justRun { taskRepository.updateTask(newTask) }
+        every { taskRepository.saveTask(newTask) } returns mockk()
         every { updateTaskDescriptionActivityFactory(taskId, date, oldDescription, newDescription) } returns mockk()
 
         val activity: UpdateTaskDescriptionActivity = mockk()
@@ -80,7 +80,7 @@ class UpdateTaskDescriptionUseCaseTest {
     @Test
     fun `do nothing when old value is the same as new value`() {
         // given
-        val taskId = TaskId("1")
+        val taskId = getTaskId1()
         val oldDescription = "description"
         val newDescription = "description"
         val date: LocalDateTime = mockk()
@@ -89,7 +89,7 @@ class UpdateTaskDescriptionUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(description = newDescription)
 
-        justRun { taskRepository.updateTask(newTask) }
+        every { taskRepository.saveTask(newTask) } returns mockk()
         every { updateTaskDescriptionActivityFactory(taskId, date, oldDescription, newDescription) } returns mockk()
 
         val activity: UpdateTaskDescriptionActivity = mockk()
@@ -102,7 +102,7 @@ class UpdateTaskDescriptionUseCaseTest {
         // then
         verify(exactly = 0) {
             activityRepository.addActivity(activity)
-            taskRepository.updateTask(newTask)
+            taskRepository.saveTask(newTask)
         }
     }
 }

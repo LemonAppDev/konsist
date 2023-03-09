@@ -1,35 +1,86 @@
 package com.mango.persistence.repository
 
+import com.mango.business.common.model.BusinessTestModel.getProjectId1
 import com.mango.business.model.Project
-import com.mango.business.model.value.ProjectId
+import com.mango.persistence.datasource.ProjectJpaRepository
+import com.mango.persistence.entity.ProjectJpaEntity
+import com.mango.persistence.entity.mapper.ProjectJpaEntityToProjectMapper
+import com.mango.persistence.entity.mapper.ProjectToProjectJpaEntityMapper
 import io.mockk.every
+import io.mockk.justRun
 import io.mockk.mockk
+import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldContain
 import org.junit.jupiter.api.Test
+import kotlin.jvm.optionals.getOrNull
 
 class ProjectRepositoryTest {
-    private val sut = ProjectRepository()
+    private val projectJpaRepository: ProjectJpaRepository = mockk()
+    private val projectToProjectJpaEntityMapper: ProjectToProjectJpaEntityMapper = mockk()
+    private val projectJpaEntityToProjectMapper: ProjectJpaEntityToProjectMapper = mockk()
+
+    private val sut = ProjectRepository(
+        projectJpaRepository,
+        projectToProjectJpaEntityMapper,
+        projectJpaEntityToProjectMapper,
+    )
 
     @Test
-    fun `addProject() adds project to projects`() {
+    fun `saveProject() saves project`() {
         // given
         val project: Project = mockk()
+        val projectJpaEntity: ProjectJpaEntity = mockk()
+        every { projectToProjectJpaEntityMapper(project) } returns projectJpaEntity
+        every { projectJpaRepository.save(projectJpaEntity) } returns projectJpaEntity
+        every { projectJpaEntityToProjectMapper(projectJpaEntity) } returns project
 
         // when
-        sut.addProject(project)
+        sut.saveProject(project)
 
         // then
-        sut.projects shouldContain project
+        verify { projectJpaRepository.save(projectJpaEntity) }
+    }
+
+    @Test
+    fun `saveProject() returns project`() {
+        // given
+        val project: Project = mockk()
+        val projectJpaEntity: ProjectJpaEntity = mockk()
+        every { projectToProjectJpaEntityMapper(project) } returns projectJpaEntity
+        every { projectJpaRepository.save(projectJpaEntity) } returns projectJpaEntity
+        every { projectJpaEntityToProjectMapper(projectJpaEntity) } returns project
+
+        // when
+        val actual = sut.saveProject(project)
+
+        // then
+        actual shouldBeEqualTo project
+    }
+
+    @Test
+    fun `deleteProject() deletes project`() {
+        // given
+        val project: Project = mockk()
+        val projectJpaEntity: ProjectJpaEntity = mockk()
+        every { projectToProjectJpaEntityMapper(project) } returns projectJpaEntity
+        justRun { projectJpaRepository.delete(projectJpaEntity) }
+        every { projectJpaEntityToProjectMapper(projectJpaEntity) } returns project
+
+        // when
+        sut.deleteProject(project)
+
+        // then
+        verify { projectJpaRepository.delete(projectJpaEntity) }
     }
 
     @Test
     fun `getProject() return project when it exist`() {
         // given
-        val projectId = ProjectId("id")
+        val projectId = getProjectId1()
         val project: Project = mockk()
-        every { project.id } returns projectId
-        sut.addProject(project)
+        val projectJpaEntity: ProjectJpaEntity = mockk()
+        every { projectJpaRepository.findById(projectId.value).getOrNull() } returns projectJpaEntity
+        every { projectJpaEntityToProjectMapper(projectJpaEntity) } returns project
 
         // when
         val actual = sut.getProject(projectId)
@@ -41,9 +92,8 @@ class ProjectRepositoryTest {
     @Test
     fun `getProject() return null when it doesn't exist`() {
         // given
-        val projectId = ProjectId("id")
-        val project: Project = mockk()
-        every { project.id } returns projectId
+        val projectId = getProjectId1()
+        every { projectJpaRepository.findById(projectId.value).getOrNull() } returns null
 
         // when
         val actual = sut.getProject(projectId)
@@ -55,10 +105,8 @@ class ProjectRepositoryTest {
     @Test
     fun `containsProject() return true when project exist`() {
         // given
-        val projectId = ProjectId("id")
-        val project: Project = mockk()
-        every { project.id } returns projectId
-        sut.addProject(project)
+        val projectId = getProjectId1()
+        every { projectJpaRepository.existsById(projectId.value) } returns true
 
         // when
         val actual = sut.containsProject(projectId)
@@ -70,7 +118,8 @@ class ProjectRepositoryTest {
     @Test
     fun `containsProject() return false when project doesn't exist`() {
         // given
-        val projectId = ProjectId("id")
+        val projectId = getProjectId1()
+        every { projectJpaRepository.existsById(projectId.value) } returns false
 
         // when
         val actual = sut.containsProject(projectId)

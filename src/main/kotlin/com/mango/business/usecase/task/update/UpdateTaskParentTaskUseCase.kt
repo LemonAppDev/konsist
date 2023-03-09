@@ -25,7 +25,7 @@ class UpdateTaskParentTaskUseCase(
         if (newParentTaskId != oldParentTaskId) {
             val newTask = task.copy(parentTaskId = newParentTaskId)
 
-            taskRepository.updateTask(newTask)
+            taskRepository.saveTask(newTask)
 
             val activity = updateTaskParentTaskActivityFactory(newTask.id, date, oldParentTaskId, newParentTaskId)
             activityRepository.addActivity(activity)

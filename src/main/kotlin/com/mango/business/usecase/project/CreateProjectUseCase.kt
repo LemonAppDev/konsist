@@ -18,11 +18,9 @@ class CreateProjectUseCase(
     operator fun invoke(createProjectRequestModel: CreateProjectRequestModel): Project {
         val project = projectFactory(createProjectRequestModel)
 
-        projectRepository.addProject(project)
-
-        val activity = createProjectActivityFactory(project.id, project.creationDate)
-        activityRepository.addActivity(activity)
-
-        return project
+        return projectRepository.saveProject(project).also {
+            val activity = createProjectActivityFactory(project.id, project.creationDate)
+            activityRepository.addActivity(activity)
+        }
     }
 }

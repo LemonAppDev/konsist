@@ -10,6 +10,6 @@ object PackageIdentifier {
     const val ANY_BUSINESS_ANY = "..business.."
     const val ANY_PERSISTENCE_ANY = "..persistence.."
     const val ANY_PRESENTATION_ANY_CONTROLLER_ANY = "..presentation..controller.."
-    const val ANY_PERSISTENCE_ANY_REPOSITORY_ANY = "..persistence..repository.."
+    const val ANY_PERSISTENCE_ANY_DATASOURCE_ANY = "..persistence..datasource.."
     const val ANY_BUSINESS_ANY_USECASE_ANY = "..business..usecase.."
 }

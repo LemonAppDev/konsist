@@ -1,7 +1,7 @@
 package com.mango.business.usecase.comment
 
+import com.mango.business.common.model.BusinessTestModel.getCommentId1
 import com.mango.business.model.Comment
-import com.mango.business.model.value.CommentId
 import com.mango.persistence.repository.CommentRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -10,17 +10,17 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class GetCommentUseCaseTest {
+class GetCommentOrThrowUseCaseTest {
     private val commentRepository: CommentRepository = mockk()
 
-    private val sut = GetCommentUseCase(
+    private val sut = GetCommentOrThrowUseCase(
         commentRepository,
     )
 
     @Test
     fun `throws exception when comment doesn't exist`() {
         // given
-        val commentId = CommentId("id")
+        val commentId = getCommentId1()
         every { commentRepository.getComment(commentId) } returns null
 
         // when
@@ -33,7 +33,7 @@ class GetCommentUseCaseTest {
     @Test
     fun `returns task`() {
         // given
-        val commentId = CommentId("commentId")
+        val commentId = getCommentId1()
         val comment: Comment = mockk()
         every { commentRepository.getComment(commentId) } returns comment
 

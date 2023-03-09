@@ -1,10 +1,10 @@
 package com.mango.business.usecase.task
 
+import com.mango.business.common.model.BusinessTestModel.getTaskId1
 import com.mango.business.factory.LocalDateTimeFactory
 import com.mango.business.model.Task
 import com.mango.business.model.activity.task.DeleteTaskActivity
 import com.mango.business.model.activity.task.DeleteTaskActivityFactory
-import com.mango.business.model.value.TaskId
 import com.mango.persistence.repository.ActivityRepository
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
@@ -30,7 +30,7 @@ class DeleteTaskUseCaseTest {
     @Test
     fun `delete task in TaskRepository`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         val task: Task = mockk()
         every { task.id } returns taskId
         val date: LocalDateTime = mockk()
@@ -53,7 +53,7 @@ class DeleteTaskUseCaseTest {
     @Test
     fun `add activity to activity repository`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         val task: Task = mockk()
         every { task.id } returns taskId
         val date: LocalDateTime = mockk()

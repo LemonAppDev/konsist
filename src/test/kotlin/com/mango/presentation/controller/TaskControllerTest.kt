@@ -1,16 +1,16 @@
 package com.mango.presentation.controller
 
+import com.mango.business.common.model.BusinessTestModel.getCommentId1
+import com.mango.business.common.model.BusinessTestModel.getTaskId1
 import com.mango.business.model.Comment
 import com.mango.business.model.Task
 import com.mango.business.model.request.comment.AddCommentRequestModel
 import com.mango.business.model.request.comment.UpdateCommentRequestModel
 import com.mango.business.model.request.task.CreateTaskRequestModel
 import com.mango.business.model.request.task.UpdateTaskRequestModel
-import com.mango.business.model.value.CommentId
-import com.mango.business.model.value.TaskId
 import com.mango.business.usecase.comment.AddCommentUseCase
 import com.mango.business.usecase.comment.DeleteCommentUseCase
-import com.mango.business.usecase.comment.GetCommentUseCase
+import com.mango.business.usecase.comment.GetCommentOrThrowUseCase
 import com.mango.business.usecase.comment.GetCommentsUseCase
 import com.mango.business.usecase.comment.UpdateCommentUseCase
 import com.mango.business.usecase.task.CreateTaskUseCase
@@ -38,7 +38,7 @@ class TaskControllerTest {
     private val addCommentUseCase: AddCommentUseCase = mockk()
     private val deleteCommentUseCase: DeleteCommentUseCase = mockk()
     private val updateCommentUseCase: UpdateCommentUseCase = mockk()
-    private val getCommentUseCase: GetCommentUseCase = mockk()
+    private val getCommentOrThrowUseCase: GetCommentOrThrowUseCase = mockk()
     private val getCommentsUseCase: GetCommentsUseCase = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val getChildTasksUseCase: GetChildTasksUseCase = mockk()
@@ -54,7 +54,7 @@ class TaskControllerTest {
         addCommentUseCase,
         deleteCommentUseCase,
         updateCommentUseCase,
-        getCommentUseCase,
+        getCommentOrThrowUseCase,
         getCommentsUseCase,
         getChildTasksUseCase,
     )
@@ -75,7 +75,7 @@ class TaskControllerTest {
     @Test
     fun `getTask() calls getTaskUseCase() method`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         every { getTaskOrThrowUseCase(taskId) } returns mockk()
 
         // when
@@ -88,7 +88,7 @@ class TaskControllerTest {
     @Test
     fun `deleteTask() calls deleteTaskUseCase()`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         justRun { deleteTaskUseCase(taskId) }
 
         // when
@@ -113,7 +113,7 @@ class TaskControllerTest {
     @Test
     fun `updateTask() calls updateTaskUseCase()`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         val task: Task = mockk()
         val updateTaskRequestModel: UpdateTaskRequestModel = mockk()
         every { updateTaskRequestModel.taskId } returns taskId
@@ -131,7 +131,7 @@ class TaskControllerTest {
     @Test
     fun `updateTask() calls returns updated task`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         val task: Task = mockk()
         val updateTaskRequestModel: UpdateTaskRequestModel = mockk()
         every { updateTaskRequestModel.taskId } returns taskId
@@ -148,7 +148,7 @@ class TaskControllerTest {
     @Test
     fun `duplicateTask() calls duplicateTaskUseCase()`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         every { duplicateTaskUseCase(taskId) } returns mockk()
 
         // when
@@ -161,7 +161,7 @@ class TaskControllerTest {
     @Test
     fun `getActivities() calls getTaskActivityUseCase()`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         every { getTaskActivitiesUseCase(taskId) } returns mockk()
 
         // when
@@ -187,7 +187,7 @@ class TaskControllerTest {
     @Test
     fun `deleteComment() calls deleteCommentUseCase()`() {
         // given
-        val commentId = CommentId("id")
+        val commentId = getCommentId1()
         justRun { deleteCommentUseCase(commentId) }
 
         // when
@@ -202,10 +202,10 @@ class TaskControllerTest {
         // given
         val updateCommentRequestModel: UpdateCommentRequestModel = mockk()
         justRun { updateCommentUseCase(updateCommentRequestModel) }
-        val commentId = CommentId("id")
+        val commentId = getCommentId1()
         val comment: Comment = mockk()
         every { updateCommentRequestModel.commentId } returns commentId
-        every { getCommentUseCase(commentId) } returns comment
+        every { getCommentOrThrowUseCase(commentId) } returns comment
 
         // when
         sut.updateComment(updateCommentRequestModel)
@@ -217,12 +217,12 @@ class TaskControllerTest {
     @Test
     fun `updateComment() calls returns updated comment`() {
         // given
-        val commentId = CommentId("id")
+        val commentId = getCommentId1()
         val comment: Comment = mockk()
         val updateCommentRequestModel: UpdateCommentRequestModel = mockk()
         every { updateCommentRequestModel.commentId } returns commentId
         justRun { updateCommentUseCase(updateCommentRequestModel) }
-        every { getCommentUseCase(commentId) } returns comment
+        every { getCommentOrThrowUseCase(commentId) } returns comment
 
         // when
         val actual = sut.updateComment(updateCommentRequestModel)
@@ -234,7 +234,7 @@ class TaskControllerTest {
     @Test
     fun `getAllComments() calls getAllCommentsUseCase()`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         every { getCommentsUseCase(taskId) } returns mockk()
 
         // when
@@ -246,7 +246,7 @@ class TaskControllerTest {
 
     @Test
     fun `getChildTasks() calls getChildTasksUseCase()`() {
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         every { getChildTasksUseCase(taskId) } returns mockk()
 
         // when

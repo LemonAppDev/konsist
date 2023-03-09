@@ -28,7 +28,7 @@ class UpdateTaskProjectUseCase(
         if (newProjectId != oldProjectId) {
             val newTask = task.copy(projectId = newProjectId)
 
-            taskRepository.updateTask(newTask)
+            taskRepository.saveTask(newTask)
 
             val activity = updateTaskProjectActivityFactory(newTask.id, date, oldProjectId, newProjectId)
             activityRepository.addActivity(activity)

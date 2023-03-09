@@ -23,7 +23,7 @@ class UpdateTaskNameUseCase(
         if (newName != oldName) {
             val newTask = task.copy(name = newName)
 
-            taskRepository.updateTask(newTask)
+            taskRepository.saveTask(newTask)
 
             val activity = updateTaskNameActivityFactory(newTask.id, date, oldName, newName)
             activityRepository.addActivity(activity)

@@ -7,6 +7,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
+import java.util.UUID
 
 class CheckTaskIdUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
@@ -18,7 +19,7 @@ class CheckTaskIdUseCaseTest {
     @Test
     fun `throw exception when task doesn't exist`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = TaskId(UUID.fromString("00000000-0000-0000-0000-000000000000"))
         every { taskRepository.containsTask(taskId) } returns false
 
         // when

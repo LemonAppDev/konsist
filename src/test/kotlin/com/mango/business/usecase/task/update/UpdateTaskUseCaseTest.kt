@@ -1,12 +1,13 @@
 package com.mango.business.usecase.task.update
 
+import com.mango.business.common.model.BusinessTestModel.getProjectId1
+import com.mango.business.common.model.BusinessTestModel.getTaskId1
+import com.mango.business.common.model.BusinessTestModel.getTaskId2
+import com.mango.business.common.model.BusinessTestModel.getUserId1
 import com.mango.business.factory.LocalDateTimeFactory
 import com.mango.business.model.Priority
 import com.mango.business.model.Task
 import com.mango.business.model.request.task.UpdateTaskRequestModel
-import com.mango.business.model.value.ProjectId
-import com.mango.business.model.value.TaskId
-import com.mango.business.model.value.UserId
 import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import io.mockk.every
 import io.mockk.justRun
@@ -49,7 +50,7 @@ class UpdateTaskUseCaseTest {
     fun `calls all update tasks use cases()`() {
         // given
         val task: Task = mockk()
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         every { task.id } returns taskId
         val updDate: LocalDateTime = mockk()
         val newName = "new name"
@@ -57,12 +58,12 @@ class UpdateTaskUseCaseTest {
         val newDueDate: LocalDateTime = mockk()
         val newTargetDate: LocalDateTime = mockk()
         val newPriority = Priority.PRIORITY_5
-        val newProjectId = ProjectId("new projectId")
-        val newParentTaskId = TaskId("new parentTaskId")
-        val newAssigneeId = UserId("new assigneeId")
+        val newProjectId = getProjectId1()
+        val newParentTaskId = getTaskId2()
+        val newAssigneeId = getUserId1()
 
         val updateTaskRequestModel = UpdateTaskRequestModel(
-            taskId = TaskId("id"),
+            taskId = taskId,
             name = newName,
             description = newDescription,
             dueDate = newDueDate,
@@ -108,14 +109,14 @@ class UpdateTaskUseCaseTest {
     fun `calls updateTaskCompleteDateUseCase()`(isCompleted: Boolean) {
         // given
         val task: Task = mockk()
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         every { task.id } returns taskId
 
         val updDate: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns updDate
 
         val updateTaskRequestModel = UpdateTaskRequestModel(
-            taskId = TaskId("id"),
+            taskId = taskId,
             name = null,
             description = null,
             dueDate = null,

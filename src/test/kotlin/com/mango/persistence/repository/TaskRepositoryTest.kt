@@ -1,167 +1,86 @@
 package com.mango.persistence.repository
 
-import com.mango.business.model.Priority
+import com.mango.business.common.model.BusinessTestModel
 import com.mango.business.model.Task
-import com.mango.business.model.value.ProjectId
-import com.mango.business.model.value.TaskId
-import com.mango.business.model.value.UserId
+import com.mango.persistence.datasource.TaskJpaRepository
+import com.mango.persistence.entity.TaskJpaEntity
+import com.mango.persistence.entity.mapper.TaskJpaEntityToTaskMapper
+import com.mango.persistence.entity.mapper.TaskToTaskJpaEntityMapper
 import io.mockk.every
+import io.mockk.justRun
 import io.mockk.mockk
+import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldContain
-import org.amshove.kluent.shouldNotContain
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
-import java.time.LocalDateTime
+import kotlin.jvm.optionals.getOrNull
 
 class TaskRepositoryTest {
-    private val userRepository: UserRepository = mockk()
+    private val taskJpaRepository: TaskJpaRepository = mockk()
+    private val taskToTaskJpaEntityMapper: TaskToTaskJpaEntityMapper = mockk()
+    private val taskJpaEntityToTaskMapper: TaskJpaEntityToTaskMapper = mockk()
 
-    private val sut = TaskRepository()
+    private val sut = TaskRepository(
+        taskJpaRepository,
+        taskToTaskJpaEntityMapper,
+        taskJpaEntityToTaskMapper,
+    )
 
     @Test
-    fun `addTask() add task to tasks`() {
+    fun `saveTask() saves task`() {
         // given
         val task: Task = mockk()
+        val taskJpaEntity: TaskJpaEntity = mockk()
+        every { taskToTaskJpaEntityMapper(task) } returns taskJpaEntity
+        every { taskJpaRepository.save(taskJpaEntity) } returns taskJpaEntity
+        every { taskJpaEntityToTaskMapper(taskJpaEntity) } returns task
 
         // when
-        sut.addTask(task)
+        sut.saveTask(task)
 
         // then
-        sut.tasks shouldContain task
+        verify { taskJpaRepository.save(taskJpaEntity) }
     }
 
     @Test
-    fun `deleteTask() delete task from tasks`() {
+    fun `saveTask() returns task`() {
         // given
         val task: Task = mockk()
-        every { task.id } returns TaskId("taskId")
-        sut.addTask(task)
+        val taskJpaEntity: TaskJpaEntity = mockk()
+        every { taskToTaskJpaEntityMapper(task) } returns taskJpaEntity
+        every { taskJpaRepository.save(taskJpaEntity) } returns taskJpaEntity
+        every { taskJpaEntityToTaskMapper(taskJpaEntity) } returns task
+
+        // when
+        val actual = sut.saveTask(task)
+
+        // then
+        actual shouldBeEqualTo task
+    }
+
+    @Test
+    fun `deleteTask() deletes task`() {
+        // given
+        val task: Task = mockk()
+        val taskJpaEntity: TaskJpaEntity = mockk()
+        every { taskToTaskJpaEntityMapper(task) } returns taskJpaEntity
+        justRun { taskJpaRepository.delete(taskJpaEntity) }
+        every { taskJpaEntityToTaskMapper(taskJpaEntity) } returns task
 
         // when
         sut.deleteTask(task)
 
         // then
-        sut.tasks shouldNotContain task
-    }
-
-    @Test
-    fun `updateTask() adds updated task to tasks`() {
-        // given
-        val creationDate: LocalDateTime = mockk()
-        val oldDueDateDate: LocalDateTime = mockk()
-        val newDueDate: LocalDateTime = mockk()
-        val oldTargetDateDate: LocalDateTime = mockk()
-        val newTargetDate: LocalDateTime = mockk()
-        val completeDate: LocalDateTime = mockk()
-
-        val oldTask = Task(
-            TaskId("id"),
-            "old name",
-            UserId("id"),
-            creationDate,
-            ProjectId("old project id"),
-            "old description",
-            oldDueDateDate,
-            oldTargetDateDate,
-            Priority.PRIORITY_1,
-            TaskId("old parent task id"),
-            UserId("old assignee id"),
-        )
-
-        sut.addTask(oldTask)
-
-        val newTask = Task(
-            TaskId("id"),
-            "new name",
-            UserId("id"),
-            creationDate,
-            ProjectId("new project id"),
-            "new description",
-            newDueDate,
-            newTargetDate,
-            Priority.PRIORITY_5,
-            TaskId("new parent task id"),
-            UserId("new assignee id"),
-            completeDate,
-        )
-
-        // when
-        sut.updateTask(newTask)
-
-        // then
-        sut.tasks shouldContain newTask
-    }
-
-    @Test
-    fun `updateTask() replace old task with new task `() {
-        // given
-        val creationDate: LocalDateTime = mockk()
-        val oldDueDateDate: LocalDateTime = mockk()
-        val newDueDate: LocalDateTime = mockk()
-        val oldTargetDateDate: LocalDateTime = mockk()
-        val newTargetDate: LocalDateTime = mockk()
-        val completeDate: LocalDateTime = mockk()
-
-        val oldTask = Task(
-            TaskId("id"),
-            "old name",
-            UserId("id"),
-            creationDate,
-            ProjectId("old project id"),
-            "old description",
-            oldDueDateDate,
-            oldTargetDateDate,
-            Priority.PRIORITY_1,
-            TaskId("old parent task id"),
-            UserId("old assignee id"),
-        )
-
-        sut.addTask(oldTask)
-
-        val newTask = Task(
-            TaskId("id"),
-            "new name",
-            UserId("id"),
-            creationDate,
-            ProjectId("new project id"),
-            "new description",
-            newDueDate,
-            newTargetDate,
-            Priority.PRIORITY_5,
-            TaskId("new parent task id"),
-            UserId("new assignee id"),
-            completeDate,
-        )
-
-        // when
-        sut.updateTask(newTask)
-
-        // then
-        sut.tasks shouldNotContain oldTask
-    }
-
-    @Test
-    fun `updateTask() throws exception when task doesn't exist`() {
-        // given
-        val task: Task = mockk()
-        every { task.id } returns TaskId("id")
-
-        // when
-        val actual = { sut.updateTask(task) }
-
-        // then
-        actual shouldThrow IllegalArgumentException::class withMessage "Task not found, taskId: ${task.id}"
+        verify { taskJpaRepository.delete(taskJpaEntity) }
     }
 
     @Test
     fun `getTask() return task when it exist`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = BusinessTestModel.getTaskId1()
         val task: Task = mockk()
-        every { task.id } returns taskId
-        sut.addTask(task)
+        val taskJpaEntity: TaskJpaEntity = mockk()
+        every { taskJpaRepository.findById(taskId.value).getOrNull() } returns taskJpaEntity
+        every { taskJpaEntityToTaskMapper(taskJpaEntity) } returns task
 
         // when
         val actual = sut.getTask(taskId)
@@ -173,9 +92,8 @@ class TaskRepositoryTest {
     @Test
     fun `getTask() return null when it doesn't exist`() {
         // given
-        val taskId = TaskId("id")
-        val task: Task = mockk()
-        every { task.id } returns taskId
+        val taskId = BusinessTestModel.getTaskId1()
+        every { taskJpaRepository.findById(taskId.value).getOrNull() } returns null
 
         // when
         val actual = sut.getTask(taskId)
@@ -185,34 +103,10 @@ class TaskRepositoryTest {
     }
 
     @Test
-    fun `tasks property return owners tasks`() {
-        // given
-        val ownerId = UserId("id")
-        every { userRepository.getCurrentUser().id } returns ownerId
-        val task1: Task = mockk()
-        every { task1.ownerId } returns ownerId
-        val task2: Task = mockk()
-        every { task2.ownerId } returns ownerId
-
-        sut.apply {
-            addTask(task1)
-            addTask(task2)
-        }
-
-        // when
-        val actual = sut.tasks
-
-        // then
-        actual shouldBeEqualTo listOf(task1, task2)
-    }
-
-    @Test
     fun `containsTask() return true when task exist`() {
         // given
-        val taskId = TaskId("id")
-        val task: Task = mockk()
-        every { task.id } returns taskId
-        sut.addTask(task)
+        val taskId = BusinessTestModel.getTaskId1()
+        every { taskJpaRepository.existsById(taskId.value) } returns true
 
         // when
         val actual = sut.containsTask(taskId)
@@ -224,7 +118,8 @@ class TaskRepositoryTest {
     @Test
     fun `containsTask() return false when task doesn't exist`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = BusinessTestModel.getTaskId1()
+        every { taskJpaRepository.existsById(taskId.value) } returns false
 
         // when
         val actual = sut.containsTask(taskId)

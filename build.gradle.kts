@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.spring.dependencyManagement)
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.plugin.spring)
+    alias(libs.plugins.kotlin.plugin.jpa)
     alias(libs.plugins.spotless)
     alias(libs.plugins.testLogger)
     alias(libs.plugins.detekt)
@@ -23,12 +24,15 @@ repositories {
 
 dependencies {
     implementation(libs.spring.boot.starter.web)
+    implementation(libs.spring.boot.starter.jpa)
     implementation(libs.jacksonKotlin)
     implementation(libs.jacksonJsr310)
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.stdlib.jdk8)
 
     compileOnly(libs.spring.boot.devtools)
+
+    runtimeOnly(libs.h2)
 
     testImplementation(libs.spring.boot.starter.test)
     testImplementation(libs.junitJupiterEngine)
@@ -52,6 +56,7 @@ testing {
             dependencies {
                 implementation(project())
                 implementation(libs.kluent)
+
                 implementation(libs.jacksonJsr310)
                 implementation(libs.spring.boot.starter.test)
                 implementation(libs.spring.boot.starter.web)

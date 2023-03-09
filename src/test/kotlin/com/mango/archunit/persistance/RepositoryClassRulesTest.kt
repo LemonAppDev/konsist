@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository
 
 class RepositoryClassRulesTest {
     @Test
-    fun `classes with Repository annotation should reside in persistence and repository packages`() {
+    fun `classes with Repository annotation should reside in persistence and datasource packages`() {
         classes()
             .that().areAnnotatedWith(Repository::class.java)
-            .should().resideInAPackage(PackageIdentifier.ANY_PERSISTENCE_ANY_REPOSITORY_ANY)
+            .should().resideInAPackage(PackageIdentifier.ANY_PERSISTENCE_ANY_DATASOURCE_ANY)
             .check(allClasses)
     }
 

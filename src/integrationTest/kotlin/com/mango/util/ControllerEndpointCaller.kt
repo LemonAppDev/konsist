@@ -21,16 +21,14 @@ class ControllerEndpointCaller {
         controllerTestInstance: Any,
         endpointName: String,
         method: HttpMethod,
-        jsonBody: String? = null,
+        body: String? = null,
         queryParams: Map<String, String>? = null,
-    ): T {
-        return testRestTemplate.exchange(
-            url = getEndpointUrl(controllerTestInstance::class, endpointName),
-            method = method,
-            jsonBody = jsonBody,
-            queryParams = queryParams,
-        )
-    }
+    ) = testRestTemplate.exchange<T>(
+        url = getEndpointUrl(controllerTestInstance::class, endpointName),
+        method = method,
+        queryParams = queryParams,
+        body = body,
+    )
 
     fun getEndpointUrl(controllerTestHelperKClass: KClass<out Any>, endpointName: String): String {
         val port = servletWebServerApplicationContext.webServer.port

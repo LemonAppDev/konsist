@@ -1,7 +1,7 @@
 package com.mango.business.usecase.task
 
+import com.mango.business.common.model.BusinessTestModel.getTaskId1
 import com.mango.business.model.Task
-import com.mango.business.model.value.TaskId
 import com.mango.persistence.repository.TaskRepository
 import io.mockk.every
 import io.mockk.justRun
@@ -21,7 +21,7 @@ class GetChildTasksUseCaseTest {
     @Test
     fun `get childTasks for given task`() {
         // given
-        val taskId = TaskId("id")
+        val taskId = getTaskId1()
         justRun { checkTaskIdUseCase(taskId) }
         val task1: Task = mockk()
         every { task1.parentTaskId } returns taskId

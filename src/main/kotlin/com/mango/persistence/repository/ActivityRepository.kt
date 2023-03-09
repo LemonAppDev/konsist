@@ -2,9 +2,9 @@ package com.mango.persistence.repository
 
 import com.mango.business.model.activity.project.ProjectActivity
 import com.mango.business.model.activity.task.TaskActivity
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Service
 
-@Repository
+@Service
 class ActivityRepository {
     private val _taskActivities = mutableListOf<TaskActivity>()
     private val _projectActivities = mutableListOf<ProjectActivity>()

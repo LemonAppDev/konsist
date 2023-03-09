@@ -24,7 +24,7 @@ class UpdateTaskPriorityUseCase(
         if (newPriority != oldPriority) {
             val newTask = task.copy(priority = newPriority)
 
-            taskRepository.updateTask(newTask)
+            taskRepository.saveTask(newTask)
 
             val activity = updateTaskPriorityActivityFactory(newTask.id, date, oldPriority, newPriority)
             activityRepository.addActivity(activity)

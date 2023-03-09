@@ -10,7 +10,7 @@ import com.mango.business.model.value.CommentId
 import com.mango.business.model.value.TaskId
 import com.mango.business.usecase.comment.AddCommentUseCase
 import com.mango.business.usecase.comment.DeleteCommentUseCase
-import com.mango.business.usecase.comment.GetCommentUseCase
+import com.mango.business.usecase.comment.GetCommentOrThrowUseCase
 import com.mango.business.usecase.comment.GetCommentsUseCase
 import com.mango.business.usecase.comment.UpdateCommentUseCase
 import com.mango.business.usecase.task.CreateTaskUseCase
@@ -43,19 +43,15 @@ class TaskController(
     private val addCommentUseCase: AddCommentUseCase,
     private val deleteCommentUseCase: DeleteCommentUseCase,
     private val updateCommentUseCase: UpdateCommentUseCase,
-    private val getCommentUseCase: GetCommentUseCase,
+    private val getCommentOrThrowUseCase: GetCommentOrThrowUseCase,
     private val getCommentsUseCase: GetCommentsUseCase,
     private val getChildTasksUseCase: GetChildTasksUseCase,
 ) {
     @PostMapping("/create")
-    fun createTask(@RequestBody createTaskRequestModel: CreateTaskRequestModel) =
-        createTaskUseCase.invoke(createTaskRequestModel)
+    fun createTask(@RequestBody createTaskRequestModel: CreateTaskRequestModel) = createTaskUseCase(createTaskRequestModel)
 
     @GetMapping("/get")
-    fun getTask(taskId: TaskId) = getTaskOrThrowUseCase(taskId)
-
-    @DeleteMapping("/delete")
-    fun deleteTask(@RequestParam taskId: TaskId) = deleteTaskUseCase(taskId)
+    fun getTask(@RequestParam(name = "taskId") taskId: TaskId) = getTaskOrThrowUseCase(taskId)
 
     @GetMapping("/all")
     fun getTasks() = getAllTasksUseCase()
@@ -66,33 +62,33 @@ class TaskController(
         return getTaskOrThrowUseCase(updateTaskRequestModel.taskId)
     }
 
+    @DeleteMapping("/delete")
+    fun deleteTask(@RequestParam(name = "taskId") taskId: TaskId) = deleteTaskUseCase(taskId)
+
     @PostMapping("/duplicate")
-    fun duplicateTask(@RequestParam(name = "taskId") taskId: TaskId) =
-        duplicateTaskUseCase.invoke(taskId)
+    fun duplicateTask(@RequestParam(name = "taskId") taskId: TaskId) = duplicateTaskUseCase.invoke(taskId)
 
     @GetMapping("/activities")
-    fun getActivities(@RequestParam(name = "taskId") taskId: TaskId) =
-        getTaskActivitiesUseCase(taskId)
+    fun getActivities(@RequestParam(name = "taskId") taskId: TaskId) = getTaskActivitiesUseCase(taskId)
+
+    @GetMapping("/child-tasks")
+    fun getChildTasks(@RequestParam(name = "taskId") taskId: TaskId) = getChildTasksUseCase(taskId)
 
     @PostMapping("/add-comment")
-    fun addComment(@RequestBody addCommentRequestModel: AddCommentRequestModel) =
-        addCommentUseCase(addCommentRequestModel)
+    fun addComment(@RequestBody addCommentRequestModel: AddCommentRequestModel) = addCommentUseCase(addCommentRequestModel)
 
-    @DeleteMapping("/delete-comment")
-    fun deleteComment(@RequestParam(name = "commentId") commentId: CommentId) =
-        deleteCommentUseCase(commentId)
+    @GetMapping("/comment")
+    fun getComment(@RequestParam(name = "commentId") commentId: CommentId) = getCommentOrThrowUseCase(commentId)
 
     @PostMapping("/update-comment")
     fun updateComment(@RequestBody updateCommentRequestModel: UpdateCommentRequestModel): Comment {
         updateCommentUseCase(updateCommentRequestModel)
-        return getCommentUseCase(updateCommentRequestModel.commentId)
+        return getCommentOrThrowUseCase(updateCommentRequestModel.commentId)
     }
 
     @GetMapping("/comments-all")
-    fun getComments(@RequestParam(name = "taskId") taskId: TaskId) =
-        getCommentsUseCase(taskId)
+    fun getComments(@RequestParam(name = "taskId") taskId: TaskId) = getCommentsUseCase(taskId)
 
-    @GetMapping("/child-tasks")
-    fun getChildTasks(@RequestParam(name = "taskId") taskId: TaskId) =
-        getChildTasksUseCase(taskId)
+    @DeleteMapping("/delete-comment")
+    fun deleteComment(@RequestParam(name = "commentId") commentId: CommentId) = deleteCommentUseCase(commentId)
 }

@@ -2,27 +2,36 @@ package com.mango.persistence.repository
 
 import com.mango.business.model.Task
 import com.mango.business.model.value.TaskId
-import org.springframework.stereotype.Repository
+import com.mango.persistence.datasource.TaskJpaRepository
+import com.mango.persistence.entity.mapper.TaskJpaEntityToTaskMapper
+import com.mango.persistence.entity.mapper.TaskToTaskJpaEntityMapper
+import org.springframework.stereotype.Service
+import kotlin.jvm.optionals.getOrNull
 
-@Repository
-class TaskRepository {
-    private val _tasks = mutableListOf<Task>()
-    val tasks get() = _tasks.toList()
-    fun getTask(taskId: TaskId) = _tasks.firstOrNull { it.id == taskId }
+@Service
+class TaskRepository(
+    private val taskJpaRepository: TaskJpaRepository,
+    private val taskToTaskJpaEntityMapper: TaskToTaskJpaEntityMapper,
+    private val taskJpaEntityToTaskMapper: TaskJpaEntityToTaskMapper,
+) {
+    val tasks
+        get() = taskJpaRepository
+            .findAll()
+            .map { taskJpaEntityToTaskMapper(it) }
 
-    fun addTask(task: Task) {
-        _tasks.add(task)
-    }
+    fun saveTask(task: Task) = taskJpaRepository
+        .save(taskToTaskJpaEntityMapper(task))
+        .let { taskJpaEntityToTaskMapper(it) }
+
+    fun getTask(taskId: TaskId) = taskJpaRepository
+        .findById(taskId.value)
+        .getOrNull()
+        ?.let { taskJpaEntityToTaskMapper(it) }
 
     fun deleteTask(task: Task) {
-        _tasks.removeIf { it.id == task.id }
+        taskJpaRepository.delete(taskToTaskJpaEntityMapper(task))
     }
 
-    fun updateTask(task: Task) {
-        require(containsTask(task.id)) { "Task not found, taskId: ${task.id}" }
-        _tasks.removeIf { it.id == task.id }
-        _tasks.add(task)
-    }
-
-    fun containsTask(taskId: TaskId) = getTask(taskId) != null
+    fun containsTask(taskId: TaskId) = taskJpaRepository
+        .existsById(taskId.value)
 }

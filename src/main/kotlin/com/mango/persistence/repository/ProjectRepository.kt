@@ -2,24 +2,35 @@ package com.mango.persistence.repository
 
 import com.mango.business.model.Project
 import com.mango.business.model.value.ProjectId
-import org.springframework.stereotype.Repository
+import com.mango.persistence.datasource.ProjectJpaRepository
+import com.mango.persistence.entity.mapper.ProjectJpaEntityToProjectMapper
+import com.mango.persistence.entity.mapper.ProjectToProjectJpaEntityMapper
+import org.springframework.stereotype.Service
+import kotlin.jvm.optionals.getOrNull
 
-@Repository
-class ProjectRepository {
-    private val _projects = mutableListOf<Project>()
+@Service
+class ProjectRepository(
+    private val projectJpaRepository: ProjectJpaRepository,
+    private val projectToProjectJpaEntityMapper: ProjectToProjectJpaEntityMapper,
+    private val projectJpaEntityToProjectMapper: ProjectJpaEntityToProjectMapper,
+) {
+    val projects
+        get() = projectJpaRepository
+            .findAll()
+            .map { projectJpaEntityToProjectMapper(it) }
 
-    val projects get() = _projects.toList()
+    fun getProject(projectId: ProjectId) = projectJpaRepository
+        .findById(projectId.value)
+        .getOrNull()
+        ?.let { projectJpaEntityToProjectMapper(it) }
 
-    fun getProject(projectId: ProjectId) = _projects.firstOrNull { it.id == projectId }
+    fun saveProject(project: Project) = projectJpaRepository
+        .save(projectToProjectJpaEntityMapper(project))
+        .let { projectJpaEntityToProjectMapper(it) }
 
-    fun containsProject(projectId: ProjectId) = getProject(projectId) != null
+    fun deleteProject(project: Project) = projectJpaRepository
+        .delete(projectToProjectJpaEntityMapper(project))
 
-    fun addProject(project: Project) {
-        _projects.add(project)
-    }
-
-    fun deleteProject(project: Project) {
-        project
-        TODO("not implemented")
-    }
+    fun containsProject(projectId: ProjectId) = projectJpaRepository
+        .existsById(projectId.value)
 }

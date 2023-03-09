@@ -23,7 +23,6 @@ class ProjectFactory(
             createProjectRequestModel.name,
             createProjectRequestModel.color ?: DEFAULT_PROJECT_COLOR,
             createProjectRequestModel.isFavourite ?: false,
-            createProjectRequestModel.collaborators,
         )
     }
 

@@ -1,9 +1,9 @@
 package com.mango.business.usecase.task.update
 
 import com.mango.business.common.model.BusinessTestModel
+import com.mango.business.common.model.BusinessTestModel.getTaskId1
 import com.mango.business.model.activity.task.UpdateTaskTargetDateActivity
 import com.mango.business.model.activity.task.UpdateTaskTargetDateActivityFactory
-import com.mango.business.model.value.TaskId
 import com.mango.business.usecase.common.RequireDateIsNowOrLaterUseCase
 import com.mango.business.usecase.task.GetTaskOrThrowUseCase
 import com.mango.persistence.repository.ActivityRepository
@@ -34,7 +34,7 @@ class UpdateTaskTargetDateUseCaseTest {
     @Test
     fun `add task to repository if new target date is in the future`() {
         // given
-        val taskId = TaskId("1")
+        val taskId = getTaskId1()
         val oldTargetDate: LocalDateTime = mockk()
         val newTargetDate = LocalDateTime.of(2023, Month.MARCH, 30, 21, 0, 0, 0)
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
@@ -44,7 +44,7 @@ class UpdateTaskTargetDateUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(targetDate = newTargetDate)
 
-        justRun { taskRepository.updateTask(newTask) }
+        every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: UpdateTaskTargetDateActivity = mockk()
         every { updateTaskTargetDateActivityFactory(taskId, date, oldTargetDate, newTargetDate) } returns activity
         justRun { activityRepository.addActivity(activity) }
@@ -53,13 +53,13 @@ class UpdateTaskTargetDateUseCaseTest {
         sut(taskId, newTargetDate, date)
 
         // then
-        verify { taskRepository.updateTask(newTask) }
+        verify { taskRepository.saveTask(newTask) }
     }
 
     @Test
     fun `add activity to activity repository if new target date is in the future`() {
         // given
-        val taskId = TaskId("1")
+        val taskId = getTaskId1()
         val oldTargetDate: LocalDateTime = mockk()
         val newTargetDate = LocalDateTime.of(2023, Month.MARCH, 30, 21, 0, 0, 0)
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
@@ -68,7 +68,7 @@ class UpdateTaskTargetDateUseCaseTest {
         val oldTask = BusinessTestModel.getTask(id = taskId, targetDate = oldTargetDate)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(targetDate = newTargetDate)
-        justRun { taskRepository.updateTask(newTask) }
+        every { taskRepository.saveTask(newTask) } returns mockk()
 
         val activity: UpdateTaskTargetDateActivity = mockk()
         every { updateTaskTargetDateActivityFactory(taskId, date, oldTargetDate, newTargetDate) } returns activity
@@ -84,7 +84,7 @@ class UpdateTaskTargetDateUseCaseTest {
     @Test
     fun `do nothing when old value is the same as new value`() {
         // given
-        val taskId = TaskId("1")
+        val taskId = getTaskId1()
         val oldTargetDate: LocalDateTime = LocalDateTime.of(2023, Month.MARCH, 20, 21, 0, 0, 0)
         val newTargetDate = LocalDateTime.of(2023, Month.MARCH, 20, 21, 0, 0, 0)
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
@@ -93,7 +93,7 @@ class UpdateTaskTargetDateUseCaseTest {
         val oldTask = BusinessTestModel.getTask(id = taskId, targetDate = oldTargetDate)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(targetDate = newTargetDate)
-        justRun { taskRepository.updateTask(newTask) }
+        every { taskRepository.saveTask(newTask) } returns mockk()
 
         val activity: UpdateTaskTargetDateActivity = mockk()
         every { updateTaskTargetDateActivityFactory(taskId, date, oldTargetDate, newTargetDate) } returns activity
@@ -104,7 +104,7 @@ class UpdateTaskTargetDateUseCaseTest {
 
         // then
         verify(exactly = 0) {
-            taskRepository.updateTask(newTask)
+            taskRepository.saveTask(newTask)
             activityRepository.addActivity(activity)
         }
     }
