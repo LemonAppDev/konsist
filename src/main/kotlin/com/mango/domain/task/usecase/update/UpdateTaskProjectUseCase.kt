@@ -4,6 +4,7 @@ import com.mango.data.activity.ActivityRepository
 import com.mango.data.task.TaskRepository
 import com.mango.domain.project.model.ProjectId
 import com.mango.domain.project.usecase.GetProjectOrThrowUseCase
+import com.mango.domain.task.activity.UpdateTaskProjectActivityFactory
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import org.springframework.stereotype.Service
@@ -13,7 +14,7 @@ import java.time.LocalDateTime
 class UpdateTaskProjectUseCase(
     private val taskRepository: TaskRepository,
     private val activityRepository: ActivityRepository,
-    private val updateTaskProjectActivityFactory: com.mango.domain.task.activity.UpdateTaskProjectActivityFactory,
+    private val updateTaskProjectActivityFactory: UpdateTaskProjectActivityFactory,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase,
 ) {

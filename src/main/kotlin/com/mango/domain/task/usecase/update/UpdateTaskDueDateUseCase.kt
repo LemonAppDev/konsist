@@ -3,6 +3,7 @@ package com.mango.domain.task.usecase.update
 import com.mango.data.activity.ActivityRepository
 import com.mango.data.task.TaskRepository
 import com.mango.domain.common.usecase.RequireDateIsNowOrLaterUseCase
+import com.mango.domain.task.activity.UpdateTaskDueDateActivityFactory
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import org.springframework.stereotype.Service
@@ -12,7 +13,7 @@ import java.time.LocalDateTime
 class UpdateTaskDueDateUseCase(
     private val taskRepository: TaskRepository,
     private val activityRepository: ActivityRepository,
-    private val updateTaskDueDateActivityFactory: com.mango.domain.task.activity.UpdateTaskDueDateActivityFactory,
+    private val updateTaskDueDateActivityFactory: UpdateTaskDueDateActivityFactory,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase,
 ) {

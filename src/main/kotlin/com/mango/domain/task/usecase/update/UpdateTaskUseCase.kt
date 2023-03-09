@@ -34,7 +34,7 @@ class UpdateTaskUseCase(
             projectId?.let { updateTaskProjectUseCase(task.id, it, date) }
             parentTaskId?.let { updateTaskParentTaskUseCase(task.id, it, date) }
             assigneeId?.let { updateTaskAssigneeUseCase(task.id, it, date) }
-            updateTaskCompleteDateUseCase(task.id, isCompleted, date)
+            isCompleted?.let { updateTaskCompleteDateUseCase(task.id, it, date) }
         }
     }
 }

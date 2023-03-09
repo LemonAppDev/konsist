@@ -5,6 +5,8 @@ import com.mango.data.task.TaskRepository
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.usecase.RequireDateIsNowOrLaterUseCase
 import com.mango.domain.project.usecase.CheckProjectIdUseCase
+import com.mango.domain.task.TaskFactory
+import com.mango.domain.task.activity.CreateTaskActivityFactory
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.request.CreateTaskRequestModel
 import com.mango.domain.user.usecase.CheckUserIdUseCase
@@ -13,9 +15,9 @@ import org.springframework.stereotype.Service
 @Service
 class CreateTaskUseCase(
     private val taskRepository: TaskRepository,
-    private val createTaskActivityFactory: com.mango.domain.task.activity.CreateTaskActivityFactory,
+    private val createTaskActivityFactory: CreateTaskActivityFactory,
     private val activityRepository: ActivityRepository,
-    private val taskFactory: com.mango.domain.task.TaskFactory,
+    private val taskFactory: TaskFactory,
     private val checkTaskIdUseCase: CheckTaskIdUseCase,
     private val checkUserIdUseCase: CheckUserIdUseCase,
     private val checkProjectIdUseCase: CheckProjectIdUseCase,

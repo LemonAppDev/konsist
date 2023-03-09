@@ -3,13 +3,14 @@ package com.mango.domain.task.usecase
 import com.mango.data.activity.ActivityRepository
 import com.mango.data.task.TaskRepository
 import com.mango.domain.common.LocalDateTimeFactory
+import com.mango.domain.task.activity.DeleteTaskActivityFactory
 import com.mango.domain.task.model.TaskId
 import org.springframework.stereotype.Service
 
 @Service
 class DeleteTaskUseCase(
     private val taskRepository: TaskRepository,
-    private val deleteTaskActivityFactory: com.mango.domain.task.activity.DeleteTaskActivityFactory,
+    private val deleteTaskActivityFactory: DeleteTaskActivityFactory,
     private val activityRepository: ActivityRepository,
     private val localDateTimeFactory: LocalDateTimeFactory,
 ) {

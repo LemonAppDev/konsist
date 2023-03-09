@@ -112,6 +112,7 @@ class TaskControllerTest {
                 projectId = project.id,
                 parentTaskId = parentTask.id,
                 assigneeId = assignee.id,
+                isCompleted = null,
             ),
         )
 
@@ -241,6 +242,7 @@ class TaskControllerTest {
                 projectId = childTask.projectId,
                 parentTaskId = parentTask.id,
                 assigneeId = childTask.assigneeId,
+                isCompleted = null,
             ),
         )
 

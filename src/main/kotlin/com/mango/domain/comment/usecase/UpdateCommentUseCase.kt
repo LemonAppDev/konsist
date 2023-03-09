@@ -4,13 +4,14 @@ import com.mango.data.activity.ActivityRepository
 import com.mango.data.comment.CommentRepository
 import com.mango.domain.comment.model.request.UpdateCommentRequestModel
 import com.mango.domain.common.LocalDateTimeFactory
+import com.mango.domain.task.activity.UpdateCommentActivityFactory
 import org.springframework.stereotype.Service
 
 @Service
 class UpdateCommentUseCase(
     private val commentRepository: CommentRepository,
     private val localDateTimeFactory: LocalDateTimeFactory,
-    private val updateCommentActivityFactory: com.mango.domain.task.activity.UpdateCommentActivityFactory,
+    private val updateCommentActivityFactory: UpdateCommentActivityFactory,
     private val activityRepository: ActivityRepository,
     private val getCommentOrThrowUseCase: GetCommentOrThrowUseCase,
 ) {

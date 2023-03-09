@@ -7,8 +7,8 @@ import java.time.LocalDateTime
 class UpdateTaskCompleteDateActivity(
     taskId: TaskId,
     date: LocalDateTime,
-    oldValue: LocalDateTime?,
-    newValue: LocalDateTime?,
+    val oldValue: LocalDateTime?,
+    val newValue: LocalDateTime?,
 ) : TaskActivity(taskId, date)
 
 @Service
