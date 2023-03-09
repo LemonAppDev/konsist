@@ -1,6 +1,7 @@
 package com.mango.application.controller
 
 import com.mango.application.config.ApiConfig
+import com.mango.domain.user.model.User
 import com.mango.domain.user.usecase.CreateUserUseCase
 import com.mango.domain.user.usecase.GetCurrentUserUseCase
 import org.springframework.web.bind.annotation.GetMapping
@@ -16,8 +17,8 @@ class UserController(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
 ) {
     @PostMapping("/create")
-    fun createUser(@RequestParam(name = "userName") userName: String) = createUserUseCase(userName)
+    fun createUser(@RequestParam(name = "userName") userName: String): User = createUserUseCase(userName)
 
     @GetMapping("/current")
-    fun getCurrentUser() = getCurrentUserUseCase()
+    fun getCurrentUser(): User = getCurrentUserUseCase()
 }

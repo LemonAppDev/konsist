@@ -1,6 +1,7 @@
 package com.mango.application.controller
 
 import com.mango.application.config.ApiConfig
+import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.ProjectId
 import com.mango.domain.project.model.request.CreateProjectRequestModel
 import com.mango.domain.project.usecase.CreateProjectUseCase
@@ -24,15 +25,15 @@ class ProjectController(
     private val getAllProjectsUseCase: GetAllProjectsUseCase,
 ) {
     @PostMapping("/create")
-    fun createProject(@RequestBody createProjectRequestModel: CreateProjectRequestModel) =
+    fun createProject(@RequestBody createProjectRequestModel: CreateProjectRequestModel): Project =
         createProjectUseCase(createProjectRequestModel)
 
     @GetMapping("/get")
-    fun getProject(@RequestParam projectId: ProjectId) = getProjectOrThrowUseCase(projectId)
+    fun getProject(@RequestParam projectId: ProjectId): Project = getProjectOrThrowUseCase(projectId)
 
     @GetMapping("/all")
-    fun getProjects() = getAllProjectsUseCase()
+    fun getProjects(): List<Project> = getAllProjectsUseCase()
 
     @DeleteMapping("/delete")
-    fun deleteProject(@RequestParam projectId: ProjectId) = deleteProjectUseCase(projectId)
+    fun deleteProject(@RequestParam projectId: ProjectId): Unit = deleteProjectUseCase(projectId)
 }
