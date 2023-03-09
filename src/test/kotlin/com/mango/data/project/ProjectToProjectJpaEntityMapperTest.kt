@@ -4,7 +4,6 @@ import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.BusinessTestModel.getUserId1
 import com.mango.domain.common.model.Color
 import com.mango.domain.project.model.Project
-import com.mango.domain.user.model.User
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -22,7 +21,6 @@ class ProjectToProjectJpaEntityMapperTest {
         val name = "name"
         val color = Color("color")
         val isFavourite = true
-        val collaborators = listOf<User>()
 
         val project = Project(
             projectId,
@@ -31,7 +29,6 @@ class ProjectToProjectJpaEntityMapperTest {
             name,
             color,
             isFavourite,
-            collaborators,
         )
 
         // when

@@ -43,7 +43,6 @@ class ProjectJpaEntityToProjectMapperTest {
             this.name shouldBeEqualTo name
             this.color shouldBeEqualTo color
             this.isFavourite shouldBeEqualTo true
-            this.collaborators shouldBeEqualTo null
         }
     }
 }

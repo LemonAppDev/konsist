@@ -44,7 +44,6 @@ class ProjectEndpointHelper(
     fun callCreateEndpoint(name: String? = "project"): Project {
         val requestModel = CreateProjectRequestModel(
             name = name ?: "name",
-            collaborators = null,
             isFavourite = true,
             color = Color("0xFF0000"),
         )

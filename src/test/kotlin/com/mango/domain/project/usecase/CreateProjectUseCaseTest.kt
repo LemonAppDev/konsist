@@ -9,7 +9,6 @@ import com.mango.domain.project.activity.CreateProjectActivity
 import com.mango.domain.project.activity.CreateProjectActivityFactory
 import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.request.CreateProjectRequestModel
-import com.mango.domain.user.model.UserId
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
@@ -34,10 +33,8 @@ class CreateProjectUseCaseTest {
     @Test
     fun `creates and adds new project to projects list`() {
         // given
-        val collaborators: List<UserId> = mockk()
         val createProjectRequestModel = CreateProjectRequestModel(
             "name",
-            collaborators,
             false,
             Color("0xFF0000"),
         )
@@ -62,10 +59,8 @@ class CreateProjectUseCaseTest {
     @Test
     fun `calls addActivity() method in ActivityRepository`() {
         // given
-        val collaborators: List<UserId> = mockk()
         val createProjectRequestModel = CreateProjectRequestModel(
             "name",
-            collaborators,
             false,
             Color("0xFF0000"),
         )
@@ -90,10 +85,8 @@ class CreateProjectUseCaseTest {
     @Test
     fun `returns project`() {
         // given
-        val collaborators: List<UserId> = mockk()
         val createProjectRequestModel = CreateProjectRequestModel(
             "name",
-            collaborators,
             false,
             Color("0xFF0000"),
         )
