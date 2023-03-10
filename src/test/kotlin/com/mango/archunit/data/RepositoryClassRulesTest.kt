@@ -16,7 +16,7 @@ class RepositoryClassRulesTest {
     }
 
     @Test
-    fun `classes with Repository annotation should have Repository suffix`() {
+    fun `classes with Repository annotation should have  have name suffixed with Repository`() {
         classes()
             .that()
             .areAnnotatedWith(Repository::class.java)

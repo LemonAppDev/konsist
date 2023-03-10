@@ -16,7 +16,7 @@ class ControllerClassRulesTest {
     }
 
     @Test
-    fun `classes with RestController annotation should have Controller suffix`() {
+    fun `classes with RestController annotation should have name suffixed with Controller`() {
         classes()
             .that().areAnnotatedWith(RestController::class.java)
             .should().haveSimpleNameEndingWith("Controller")
