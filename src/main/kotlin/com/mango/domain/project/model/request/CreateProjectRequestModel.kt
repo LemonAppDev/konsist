@@ -4,6 +4,6 @@ import com.mango.domain.common.model.Color
 
 data class CreateProjectRequestModel(
     val name: String,
-    val isFavourite: Boolean? = null,
-    val color: Color? = null,
+    val isFavourite: Boolean?,
+    val color: Color?,
 )

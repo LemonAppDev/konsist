@@ -43,6 +43,6 @@ class TaskJpaEntity(
     @Column(name = "assigneeId")
     val assigneeId: UUID? = null,
 
-    @Column(name = "completeDate")
+    @Column(name = "completeDate", columnDefinition = "TIMESTAMP(9)")
     val completeDate: LocalDateTime? = null,
 )

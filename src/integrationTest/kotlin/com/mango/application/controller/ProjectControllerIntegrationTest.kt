@@ -32,6 +32,42 @@ class ProjectControllerTest {
         // then
         actual shouldBeEqualTo project
     }
+
+    @Test
+    fun `delete endpoint deletes project`() {
+        // given
+        val project1 = projectEndpointHelper.callCreateEndpoint()
+        val project2 = projectEndpointHelper.callCreateEndpoint()
+        projectEndpointHelper.callDeleteEndpoint(project1.id)
+
+        // when
+        val actual = projectEndpointHelper.calAllEndpoint()
+
+        // then
+        actual shouldBeEqualTo listOf(project2)
+    }
+
+    @Test
+    fun `all endpoint returns empty list`() {
+        // when
+        val actual = projectEndpointHelper.calAllEndpoint()
+
+        // then
+        actual shouldBeEqualTo emptyList()
+    }
+
+    @Test
+    fun `all endpoint returns 2 projects`() {
+        // given
+        val project1 = projectEndpointHelper.callCreateEndpoint()
+        val project2 = projectEndpointHelper.callCreateEndpoint()
+
+        // when
+        val actual = projectEndpointHelper.calAllEndpoint()
+
+        // then
+        actual shouldBeEqualTo listOf(project1, project2)
+    }
 }
 
 @Service
@@ -60,5 +96,18 @@ class ProjectEndpointHelper(
         endpointName = "get",
         method = HttpMethod.GET,
         queryParams = mapOf("projectId" to projectId.value.toString()),
+    )
+
+    fun callDeleteEndpoint(projectId: ProjectId) = controllerEndpointCaller.call<Any?>(
+        this,
+        endpointName = "delete",
+        method = HttpMethod.DELETE,
+        queryParams = mapOf("projectId" to projectId.value.toString()),
+    )
+
+    fun calAllEndpoint() = controllerEndpointCaller.call<List<Project>>(
+        this,
+        endpointName = "all",
+        method = HttpMethod.GET,
     )
 }
