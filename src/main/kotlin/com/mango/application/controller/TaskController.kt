@@ -1,6 +1,7 @@
 package com.mango.application.controller
 
 import com.mango.application.config.ApiConfig
+import com.mango.domain.activity.TaskActivity
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.comment.model.CommentId
 import com.mango.domain.comment.model.request.AddCommentRequestModel
@@ -10,7 +11,6 @@ import com.mango.domain.comment.usecase.DeleteCommentUseCase
 import com.mango.domain.comment.usecase.GetCommentOrThrowUseCase
 import com.mango.domain.comment.usecase.GetCommentsUseCase
 import com.mango.domain.comment.usecase.UpdateCommentUseCase
-import com.mango.domain.task.activity.TaskActivity
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.task.model.request.CreateTaskRequestModel
@@ -70,7 +70,7 @@ class TaskController(
     fun duplicateTask(@RequestParam(name = "taskId") taskId: TaskId): Task = duplicateTaskUseCase.invoke(taskId)
 
     @GetMapping("/activities")
-    fun getActivities(@RequestParam(name = "taskId") taskId: TaskId): List<TaskActivity> = getTaskActivitiesUseCase(taskId)
+    fun getTaskActivities(@RequestParam(name = "taskId") taskId: TaskId): List<TaskActivity> = getTaskActivitiesUseCase(taskId)
 
     @GetMapping("/child-tasks")
     fun getChildTasks(@RequestParam(name = "taskId") taskId: TaskId): List<Task> = getChildTasksUseCase(taskId)

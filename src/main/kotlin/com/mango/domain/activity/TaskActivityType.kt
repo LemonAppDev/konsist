@@ -1,0 +1,15 @@
+package com.mango.domain.activity
+
+enum class TaskActivityType {
+    CREATE,
+    DELETE,
+    UPDATE_DESCRIPTION,
+    UPDATE_ASSIGNEE,
+    UPDATE_COMPLETE_DATE,
+    UPDATE_DUE_DATE,
+    UPDATE_NAME,
+    UPDATE_PARENT_TASK,
+    UPDATE_PRIORITY,
+    UPDATE_PROJECT,
+    UPDATE_TARGET_DATE,
+}

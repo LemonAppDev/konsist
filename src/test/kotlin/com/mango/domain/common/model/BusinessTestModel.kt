@@ -25,7 +25,7 @@ object BusinessTestModel {
         assigneeId: UserId? = null,
         completeDate: LocalDateTime? = null,
     ) = Task(
-        id = id,
+        value = id,
         name = name,
         ownerId = ownerId,
         creationDate = creationDate,

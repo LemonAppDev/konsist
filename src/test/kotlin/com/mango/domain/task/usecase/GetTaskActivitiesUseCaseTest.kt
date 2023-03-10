@@ -1,6 +1,7 @@
 package com.mango.domain.task.usecase
 
 import com.mango.data.activity.ActivityRepositoryImpl
+import com.mango.domain.activity.TaskActivity
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId2
 import io.mockk.every
@@ -25,10 +26,10 @@ class GetTaskActivitiesUseCaseTest {
         val taskId2 = getTaskId2()
         justRun { checkTaskIdUseCase(taskId1) }
 
-        val createTaskActivity1: com.mango.domain.task.activity.CreateTaskActivity = mockk()
+        val createTaskActivity1: TaskActivity = mockk()
         every { createTaskActivity1.taskId } returns taskId1
 
-        val createTaskActivity2: com.mango.domain.task.activity.CreateTaskActivity = mockk()
+        val createTaskActivity2: TaskActivity = mockk()
         every { createTaskActivity2.taskId } returns taskId2
 
         val activities = listOf(createTaskActivity1, createTaskActivity2)

@@ -1,6 +1,7 @@
 package com.mango.data.activity
 
-import com.mango.domain.project.activity.ProjectActivity
+import com.mango.domain.activity.ProjectActivity
+import com.mango.domain.activity.TaskActivity
 import io.mockk.mockk
 import org.amshove.kluent.shouldContain
 import org.junit.jupiter.api.Test
@@ -11,10 +12,10 @@ class ActivityRepositoryImplTest {
     @Test
     fun `addActivity() add new TaskActivity to taskActivities`() {
         // given
-        val activity: com.mango.domain.task.activity.TaskActivity = mockk()
+        val activity: TaskActivity = mockk()
 
         // when
-        sut.addActivity(activity)
+        sut.addTaskActivity(activity)
 
         // then
         sut.taskActivities shouldContain activity
@@ -26,7 +27,7 @@ class ActivityRepositoryImplTest {
         val activity: ProjectActivity = mockk()
 
         // when
-        sut.addActivity(activity)
+        sut.addProjectActivity(activity)
 
         // then
         sut.projectActivities shouldContain activity

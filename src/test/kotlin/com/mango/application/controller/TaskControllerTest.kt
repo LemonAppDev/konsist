@@ -165,7 +165,7 @@ class TaskControllerTest {
         every { getTaskActivitiesUseCase(taskId) } returns mockk()
 
         // when
-        sut.getActivities(taskId)
+        sut.getTaskActivities(taskId)
 
         // then
         verify { getTaskActivitiesUseCase(taskId) }

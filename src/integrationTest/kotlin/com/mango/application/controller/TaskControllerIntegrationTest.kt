@@ -44,13 +44,13 @@ class TaskControllerTest {
         // when
         val actual = taskEndpointHelper.callCreateEndpoint(
             name = "task",
-            parentTaskId = parentTask.id,
+            parentTaskId = parentTask.value,
             projectId = project.id,
             assigneeId = assignee.id,
         )
 
         // then
-        val expected = taskEndpointHelper.callGetEndpoint(taskId = actual.id)
+        val expected = taskEndpointHelper.callGetEndpoint(taskId = actual.value)
         actual shouldBeEqualTo expected
     }
 
@@ -59,7 +59,7 @@ class TaskControllerTest {
         // given
         val task1 = taskEndpointHelper.callCreateEndpoint()
         val task2 = taskEndpointHelper.callCreateEndpoint()
-        taskEndpointHelper.callDeleteEndpoint(task1.id)
+        taskEndpointHelper.callDeleteEndpoint(task1.value)
 
         // when
         val actual = taskEndpointHelper.callAllEndpoint()
@@ -101,21 +101,21 @@ class TaskControllerTest {
         // when
         val actual = taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
-                taskId = task.id,
+                taskId = task.value,
                 name = "updated name",
                 description = "updated description",
                 dueDate = LocalDateTime.now().plusDays(10),
                 targetDate = LocalDateTime.now().plusDays(20),
                 priority = com.mango.domain.task.model.Priority.PRIORITY_5,
                 projectId = project.id,
-                parentTaskId = parentTask.id,
+                parentTaskId = parentTask.value,
                 assigneeId = assignee.id,
                 isCompleted = true,
             ),
         )
 
         // then
-        val expected = taskEndpointHelper.callGetEndpoint(task.id)
+        val expected = taskEndpointHelper.callGetEndpoint(task.value)
         actual shouldBeEqualTo expected
     }
 
@@ -123,7 +123,7 @@ class TaskControllerTest {
     fun `duplicate endpoint duplicates task`() {
         // given
         val task1 = taskEndpointHelper.callCreateEndpoint()
-        val task2 = taskEndpointHelper.callDuplicateEndpoint(task1.id)
+        val task2 = taskEndpointHelper.callDuplicateEndpoint(task1.value)
 
         // when
         val actual = taskEndpointHelper.callAllEndpoint()
@@ -140,13 +140,13 @@ class TaskControllerTest {
         // when
         val actual = taskEndpointHelper.callAddCommentEndpoint(
             AddCommentRequestModel(
-                taskId = task.id,
+                taskId = task.value,
                 text = "comment",
             ),
         )
 
         // then
-        val expected = taskEndpointHelper.callGetCommentsEndpoint(task.id)
+        val expected = taskEndpointHelper.callGetCommentsEndpoint(task.value)
         listOf(actual) shouldBeEqualTo expected
     }
 
@@ -156,13 +156,13 @@ class TaskControllerTest {
         val task = taskEndpointHelper.callCreateEndpoint()
         val comment1 = taskEndpointHelper.callAddCommentEndpoint(
             AddCommentRequestModel(
-                taskId = task.id,
+                taskId = task.value,
                 text = "comment",
             ),
         )
         val comment2 = taskEndpointHelper.callAddCommentEndpoint(
             AddCommentRequestModel(
-                taskId = task.id,
+                taskId = task.value,
                 text = "comment",
             ),
         )
@@ -171,7 +171,7 @@ class TaskControllerTest {
         taskEndpointHelper.callDeleteCommentEndpoint(comment1.id)
 
         // then
-        val expected = taskEndpointHelper.callGetCommentsEndpoint(task.id)
+        val expected = taskEndpointHelper.callGetCommentsEndpoint(task.value)
         listOf(comment2) shouldBeEqualTo expected
     }
 
@@ -181,19 +181,19 @@ class TaskControllerTest {
         val task = taskEndpointHelper.callCreateEndpoint()
         val comment1 = taskEndpointHelper.callAddCommentEndpoint(
             AddCommentRequestModel(
-                taskId = task.id,
+                taskId = task.value,
                 text = "comment",
             ),
         )
         val comment2 = taskEndpointHelper.callAddCommentEndpoint(
             AddCommentRequestModel(
-                taskId = task.id,
+                taskId = task.value,
                 text = "comment",
             ),
         )
 
         // when
-        val actual = taskEndpointHelper.callGetCommentsEndpoint(task.id)
+        val actual = taskEndpointHelper.callGetCommentsEndpoint(task.value)
 
         // then
         actual shouldBeEqualTo listOf(comment1, comment2)
@@ -205,7 +205,7 @@ class TaskControllerTest {
         val task = taskEndpointHelper.callCreateEndpoint()
         val comment = taskEndpointHelper.callAddCommentEndpoint(
             AddCommentRequestModel(
-                taskId = task.id,
+                taskId = task.value,
                 text = "comment",
             ),
         )
@@ -231,21 +231,21 @@ class TaskControllerTest {
         var childTask = taskEndpointHelper.callCreateEndpoint()
         childTask = taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
-                taskId = childTask.id,
+                taskId = childTask.value,
                 name = childTask.name,
                 description = childTask.description,
                 dueDate = childTask.dueDate,
                 targetDate = childTask.targetDate,
                 priority = childTask.priority,
                 projectId = childTask.projectId,
-                parentTaskId = parentTask.id,
+                parentTaskId = parentTask.value,
                 assigneeId = childTask.assigneeId,
                 isCompleted = true,
             ),
         )
 
         // when
-        val actual = taskEndpointHelper.callChildTasksEndpoint(parentTask.id)
+        val actual = taskEndpointHelper.callChildTasksEndpoint(parentTask.value)
 
         // then
         actual shouldBeEqualTo listOf(childTask)

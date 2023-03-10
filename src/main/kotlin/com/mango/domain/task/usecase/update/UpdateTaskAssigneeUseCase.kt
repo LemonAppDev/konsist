@@ -1,8 +1,8 @@
 package com.mango.domain.task.usecase.update
 
-import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.TaskActivityType
+import com.mango.domain.activity.usecase.UpdateTaskActivityUseCase
 import com.mango.domain.task.TaskRepository
-import com.mango.domain.task.activity.UpdateTaskAssigneeActivityFactory
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import com.mango.domain.user.model.UserId
@@ -13,10 +13,9 @@ import java.time.LocalDateTime
 @Service
 class UpdateTaskAssigneeUseCase(
     private val taskRepository: TaskRepository,
-    private val activityRepository: ActivityRepository,
-    private val updateTaskAssigneeActivityFactory: UpdateTaskAssigneeActivityFactory,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val checkUserIdUseCase: CheckUserIdUseCase,
+    private val updateTaskActivityUseCase: UpdateTaskActivityUseCase,
 ) {
     operator fun invoke(taskId: TaskId, newAssigneeId: UserId, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)
@@ -30,8 +29,13 @@ class UpdateTaskAssigneeUseCase(
 
             taskRepository.saveTask(newTask)
 
-            val activity = updateTaskAssigneeActivityFactory(newTask.id, date, oldAssigneeId, newAssigneeId)
-            activityRepository.addActivity(activity)
+            updateTaskActivityUseCase(
+                newTask.value,
+                date,
+                newAssigneeId.toString(),
+                oldAssigneeId.toString(),
+                TaskActivityType.UPDATE_ASSIGNEE,
+            )
         }
     }
 }

@@ -1,12 +1,12 @@
 package com.mango.domain.task.usecase.update
 
-import com.mango.data.activity.ActivityRepositoryImpl
 import com.mango.data.task.TaskRepositoryImpl
-import com.mango.domain.common.model.BusinessTestModel
+import com.mango.domain.activity.TaskActivityType
+import com.mango.domain.activity.usecase.UpdateTaskActivityUseCase
+import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import io.mockk.every
-import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.params.ParameterizedTest
@@ -16,15 +16,13 @@ import java.time.LocalDateTime
 
 class UpdateTaskCompleteDateUseCaseTest {
     private val taskRepository: TaskRepositoryImpl = mockk()
-    private val updateTaskCompleteDateActivityFactory: com.mango.domain.task.activity.UpdateTaskCompleteDateActivityFactory = mockk()
-    private val activityRepository: ActivityRepositoryImpl = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
+    private val updateTaskActivityUseCase: UpdateTaskActivityUseCase = mockk()
 
     private val sut = UpdateTaskCompleteDateUseCase(
         taskRepository,
-        updateTaskCompleteDateActivityFactory,
-        activityRepository,
         getTaskOrThrowUseCase,
+        updateTaskActivityUseCase,
     )
 
     @ParameterizedTest
@@ -36,16 +34,20 @@ class UpdateTaskCompleteDateUseCaseTest {
     ) {
         // given
         val date: LocalDateTime = mockk()
-        val oldTask: Task = BusinessTestModel.getTask(completeDate = currentCompleteDate)
-        val taskId = oldTask.id
+        val oldTask: Task = getTask(completeDate = currentCompleteDate)
+        val taskId = oldTask.value
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newCompleteDate = if (isComplete) date else null
-        every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns mockk()
-
+        every {
+            updateTaskActivityUseCase(
+                taskId,
+                date,
+                newCompleteDate.toString(),
+                currentCompleteDate.toString(),
+                TaskActivityType.UPDATE_COMPLETE_DATE,
+            )
+        } returns mockk()
         every { taskRepository.saveTask(any()) } returns mockk()
-        val activity: com.mango.domain.task.activity.UpdateTaskCompleteDateActivity = mockk()
-        every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns activity
-        justRun { activityRepository.addActivity(activity) }
 
         // when
         sut(taskId, isComplete, date)
@@ -59,23 +61,27 @@ class UpdateTaskCompleteDateUseCaseTest {
 
     @ParameterizedTest
     @MethodSource("getData")
-    fun `add activity to activity repository`(
+    fun `calls updateTaskActivityUseCase`(
         isComplete: Boolean,
         currentCompleteDate: LocalDateTime?,
         shouldUpdateCompleteDate: Boolean,
     ) {
         // given
         val date: LocalDateTime = mockk()
-        val oldTask: Task = BusinessTestModel.getTask(completeDate = currentCompleteDate)
-        val taskId = oldTask.id
+        val oldTask: Task = getTask(completeDate = currentCompleteDate)
+        val taskId = oldTask.value
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newCompleteDate = if (isComplete) date else null
-        every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns mockk()
-
+        every {
+            updateTaskActivityUseCase(
+                taskId,
+                date,
+                newCompleteDate.toString(),
+                currentCompleteDate.toString(),
+                TaskActivityType.UPDATE_COMPLETE_DATE,
+            )
+        } returns mockk()
         every { taskRepository.saveTask(any()) } returns mockk()
-        val activity: com.mango.domain.task.activity.UpdateTaskCompleteDateActivity = mockk()
-        every { updateTaskCompleteDateActivityFactory(taskId, date, currentCompleteDate, newCompleteDate) } returns activity
-        justRun { activityRepository.addActivity(activity) }
 
         // when
         sut(taskId, isComplete, date)
@@ -83,7 +89,15 @@ class UpdateTaskCompleteDateUseCaseTest {
         // then
 
         if (shouldUpdateCompleteDate) {
-            verify { activityRepository.addActivity(activity) }
+            verify {
+                updateTaskActivityUseCase(
+                    taskId,
+                    date,
+                    newCompleteDate.toString(),
+                    currentCompleteDate.toString(),
+                    TaskActivityType.UPDATE_COMPLETE_DATE,
+                )
+            }
         }
     }
 

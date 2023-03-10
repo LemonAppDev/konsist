@@ -1,6 +1,6 @@
 package com.mango.data.task
 
-import com.mango.domain.common.model.BusinessTestModel
+import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.task.model.Task
 import io.mockk.every
 import io.mockk.justRun
@@ -72,7 +72,7 @@ class TaskRepositoryImplTest {
     @Test
     fun `getTask() return task when it exist`() {
         // given
-        val taskId = BusinessTestModel.getTaskId1()
+        val taskId = getTaskId1()
         val task: Task = mockk()
         val taskJpaEntity: TaskJpaEntity = mockk()
         every { taskJpaRepository.findById(taskId.value).getOrNull() } returns taskJpaEntity
@@ -88,7 +88,7 @@ class TaskRepositoryImplTest {
     @Test
     fun `getTask() return null when it doesn't exist`() {
         // given
-        val taskId = BusinessTestModel.getTaskId1()
+        val taskId = getTaskId1()
         every { taskJpaRepository.findById(taskId.value).getOrNull() } returns null
 
         // when
@@ -101,7 +101,7 @@ class TaskRepositoryImplTest {
     @Test
     fun `containsTask() return true when task exist`() {
         // given
-        val taskId = BusinessTestModel.getTaskId1()
+        val taskId = getTaskId1()
         every { taskJpaRepository.existsById(taskId.value) } returns true
 
         // when
@@ -114,7 +114,7 @@ class TaskRepositoryImplTest {
     @Test
     fun `containsTask() return false when task doesn't exist`() {
         // given
-        val taskId = BusinessTestModel.getTaskId1()
+        val taskId = getTaskId1()
         every { taskJpaRepository.existsById(taskId.value) } returns false
 
         // when

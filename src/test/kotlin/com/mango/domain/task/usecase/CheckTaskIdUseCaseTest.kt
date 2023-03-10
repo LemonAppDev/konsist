@@ -1,13 +1,12 @@
 package com.mango.domain.task.usecase
 
 import com.mango.data.task.TaskRepositoryImpl
-import com.mango.domain.task.model.TaskId
+import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
-import java.util.UUID
 
 class CheckTaskIdUseCaseTest {
     private val taskRepository: TaskRepositoryImpl = mockk()
@@ -19,7 +18,7 @@ class CheckTaskIdUseCaseTest {
     @Test
     fun `throw exception when task doesn't exist`() {
         // given
-        val taskId = TaskId(UUID.fromString("00000000-0000-0000-0000-000000000000"))
+        val taskId = getTaskId1()
         every { taskRepository.containsTask(taskId) } returns false
 
         // when

@@ -1,8 +1,9 @@
 package com.mango.domain.task.usecase.update
 
-import com.mango.data.activity.ActivityRepositoryImpl
 import com.mango.data.task.TaskRepositoryImpl
-import com.mango.domain.common.model.BusinessTestModel
+import com.mango.domain.activity.TaskActivityType
+import com.mango.domain.activity.usecase.UpdateTaskActivityUseCase
+import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.usecase.RequireDateIsNowOrLaterUseCase
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
@@ -16,17 +17,15 @@ import java.time.Month
 
 class UpdateTaskTargetDateUseCaseTest {
     private val taskRepository: TaskRepositoryImpl = mockk()
-    private val activityRepository: ActivityRepositoryImpl = mockk()
-    private val updateTaskTargetDateActivityFactory: com.mango.domain.task.activity.UpdateTaskTargetDateActivityFactory = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase = mockk()
+    private val updateTaskActivityUseCase: UpdateTaskActivityUseCase = mockk()
 
     private val sut = UpdateTaskTargetDateUseCase(
         taskRepository,
-        activityRepository,
-        updateTaskTargetDateActivityFactory,
         getTaskOrThrowUseCase,
         requireDateIsNowOrLaterUseCase,
+        updateTaskActivityUseCase,
     )
 
     @Test
@@ -38,14 +37,19 @@ class UpdateTaskTargetDateUseCaseTest {
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
         justRun { requireDateIsNowOrLaterUseCase(newTargetDate) }
 
-        val oldTask = BusinessTestModel.getTask(id = taskId, targetDate = oldTargetDate)
+        val oldTask = getTask(id = taskId, targetDate = oldTargetDate)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(targetDate = newTargetDate)
-
         every { taskRepository.saveTask(newTask) } returns mockk()
-        val activity: com.mango.domain.task.activity.UpdateTaskTargetDateActivity = mockk()
-        every { updateTaskTargetDateActivityFactory(taskId, date, oldTargetDate, newTargetDate) } returns activity
-        justRun { activityRepository.addActivity(activity) }
+        every {
+            updateTaskActivityUseCase(
+                taskId,
+                date,
+                newTargetDate.toString(),
+                oldTargetDate.toString(),
+                TaskActivityType.UPDATE_TARGET_DATE,
+            )
+        } returns mockk()
 
         // when
         sut(taskId, newTargetDate, date)
@@ -55,7 +59,7 @@ class UpdateTaskTargetDateUseCaseTest {
     }
 
     @Test
-    fun `add activity to activity repository if new target date is in the future`() {
+    fun `calls updateTaskActivityUseCase if new target date is in the future`() {
         // given
         val taskId = getTaskId1()
         val oldTargetDate: LocalDateTime = mockk()
@@ -63,20 +67,33 @@ class UpdateTaskTargetDateUseCaseTest {
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
         justRun { requireDateIsNowOrLaterUseCase(newTargetDate) }
 
-        val oldTask = BusinessTestModel.getTask(id = taskId, targetDate = oldTargetDate)
+        val oldTask = getTask(id = taskId, targetDate = oldTargetDate)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(targetDate = newTargetDate)
         every { taskRepository.saveTask(newTask) } returns mockk()
-
-        val activity: com.mango.domain.task.activity.UpdateTaskTargetDateActivity = mockk()
-        every { updateTaskTargetDateActivityFactory(taskId, date, oldTargetDate, newTargetDate) } returns activity
-        justRun { activityRepository.addActivity(activity) }
+        every {
+            updateTaskActivityUseCase(
+                taskId,
+                date,
+                newTargetDate.toString(),
+                oldTargetDate.toString(),
+                TaskActivityType.UPDATE_TARGET_DATE,
+            )
+        } returns mockk()
 
         // when
         sut(taskId, newTargetDate, date)
 
         // then
-        verify { activityRepository.addActivity(activity) }
+        verify {
+            updateTaskActivityUseCase(
+                taskId,
+                date,
+                newTargetDate.toString(),
+                oldTargetDate.toString(),
+                TaskActivityType.UPDATE_TARGET_DATE,
+            )
+        }
     }
 
     @Test
@@ -88,14 +105,19 @@ class UpdateTaskTargetDateUseCaseTest {
         val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
         justRun { requireDateIsNowOrLaterUseCase(newTargetDate) }
 
-        val oldTask = BusinessTestModel.getTask(id = taskId, targetDate = oldTargetDate)
+        val oldTask = getTask(id = taskId, targetDate = oldTargetDate)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(targetDate = newTargetDate)
         every { taskRepository.saveTask(newTask) } returns mockk()
-
-        val activity: com.mango.domain.task.activity.UpdateTaskTargetDateActivity = mockk()
-        every { updateTaskTargetDateActivityFactory(taskId, date, oldTargetDate, newTargetDate) } returns activity
-        justRun { activityRepository.addActivity(activity) }
+        every {
+            updateTaskActivityUseCase(
+                taskId,
+                date,
+                newTargetDate.toString(),
+                oldTargetDate.toString(),
+                TaskActivityType.UPDATE_TARGET_DATE,
+            )
+        } returns mockk()
 
         // when
         sut(taskId, newTargetDate, date)
@@ -103,7 +125,13 @@ class UpdateTaskTargetDateUseCaseTest {
         // then
         verify(exactly = 0) {
             taskRepository.saveTask(newTask)
-            activityRepository.addActivity(activity)
+            updateTaskActivityUseCase(
+                taskId,
+                date,
+                newTargetDate.toString(),
+                oldTargetDate.toString(),
+                TaskActivityType.UPDATE_TARGET_DATE,
+            )
         }
     }
 }

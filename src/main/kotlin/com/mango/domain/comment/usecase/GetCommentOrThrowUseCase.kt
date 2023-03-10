@@ -12,7 +12,6 @@ class GetCommentOrThrowUseCase(
     operator fun invoke(commentId: CommentId): Comment {
         val comment = commentRepository.getComment(commentId)
         requireNotNull(comment) { "Comment with id: $commentId doesn't exist" }
-
         return comment
     }
 }

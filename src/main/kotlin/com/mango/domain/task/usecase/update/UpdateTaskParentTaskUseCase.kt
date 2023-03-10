@@ -1,8 +1,8 @@
 package com.mango.domain.task.usecase.update
 
-import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.TaskActivityType
+import com.mango.domain.activity.usecase.UpdateTaskActivityUseCase
 import com.mango.domain.task.TaskRepository
-import com.mango.domain.task.activity.UpdateTaskParentTaskActivityFactory
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import org.springframework.stereotype.Service
@@ -11,9 +11,8 @@ import java.time.LocalDateTime
 @Service
 class UpdateTaskParentTaskUseCase(
     private val taskRepository: TaskRepository,
-    private val activityRepository: ActivityRepository,
-    private val updateTaskParentTaskActivityFactory: UpdateTaskParentTaskActivityFactory,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
+    private val updateTaskActivityUseCase: UpdateTaskActivityUseCase,
 ) {
     operator fun invoke(taskId: TaskId, newParentTaskId: TaskId, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)
@@ -27,8 +26,13 @@ class UpdateTaskParentTaskUseCase(
 
             taskRepository.saveTask(newTask)
 
-            val activity = updateTaskParentTaskActivityFactory(newTask.id, date, oldParentTaskId, newParentTaskId)
-            activityRepository.addActivity(activity)
+            updateTaskActivityUseCase(
+                newTask.value,
+                date,
+                newParentTaskId.value.toString(),
+                oldParentTaskId?.value.toString(),
+                TaskActivityType.UPDATE_PARENT_TASK,
+            )
         }
     }
 }

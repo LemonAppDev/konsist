@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 @Service
 class TaskJpaEntityToTaskMapper {
     operator fun invoke(taskJpaEntity: TaskJpaEntity) = Task(
-        id = TaskId(taskJpaEntity.id),
+        value = TaskId(taskJpaEntity.id),
         name = taskJpaEntity.name,
         ownerId = UserId(taskJpaEntity.ownerId),
         creationDate = taskJpaEntity.creationDate,
