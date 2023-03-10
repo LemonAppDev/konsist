@@ -13,7 +13,6 @@ import com.mango.domain.user.model.UserId
 import com.mango.util.ControllerEndpointCaller
 import com.mango.util.Json.encodeToString
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -24,7 +23,6 @@ import java.time.LocalDateTime
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@Disabled
 class TaskControllerTest {
 
     @Autowired

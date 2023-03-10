@@ -13,7 +13,7 @@ class CommentJpaEntity(
     @Id
     val id: UUID,
 
-    @Column(name = "creationDate", nullable = false)
+    @Column(name = "creationDate", nullable = false, columnDefinition = "TIMESTAMP(9)")
     val creationDate: LocalDateTime,
 
     @Column(name = "creatorId", nullable = false)

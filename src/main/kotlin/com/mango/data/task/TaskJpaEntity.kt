@@ -19,7 +19,7 @@ class TaskJpaEntity(
     @Column(name = "ownerId", nullable = false)
     val ownerId: UUID,
 
-    @Column(name = "creationDate", nullable = false, columnDefinition = "TIMESTAMP")
+    @Column(name = "creationDate", nullable = false, columnDefinition = "TIMESTAMP(9)")
     val creationDate: LocalDateTime,
 
     @Column(name = "projectId")
@@ -28,10 +28,10 @@ class TaskJpaEntity(
     @Column(name = "description")
     val description: String? = null,
 
-    @Column(name = "dueDate", columnDefinition = "TIMESTAMP")
+    @Column(name = "dueDate", columnDefinition = "TIMESTAMP(9)")
     val dueDate: LocalDateTime? = null,
 
-    @Column(name = "targetDate", columnDefinition = "TIMESTAMP")
+    @Column(name = "targetDate", columnDefinition = "TIMESTAMP(9)")
     val targetDate: LocalDateTime? = null,
 
     @Column(name = "priority")

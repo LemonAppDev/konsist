@@ -17,7 +17,7 @@ class ProjectJpaEntity(
     @Column(name = "ownerId", nullable = false)
     val ownerId: UUID,
 
-    @Column(name = "creationDate", nullable = false, columnDefinition = "TIMESTAMP")
+    @Column(name = "creationDate", nullable = false, columnDefinition = "TIMESTAMP(9)")
     val creationDate: LocalDateTime,
 
     @Column(name = "name", nullable = false)
