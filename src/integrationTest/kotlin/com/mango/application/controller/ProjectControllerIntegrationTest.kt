@@ -21,6 +21,9 @@ class ProjectControllerTest {
     @Autowired
     private lateinit var projectEndpointHelper: ProjectEndpointHelper
 
+    @Autowired
+    private lateinit var taskEndpointHelper: TaskEndpointHelper
+
     @Test
     fun `create endpoint project`() {
         // given
@@ -45,6 +48,21 @@ class ProjectControllerTest {
 
         // then
         actual shouldBeEqualTo listOf(project2)
+    }
+
+    @Test
+    fun `delete endpoint deletes project tasks`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint()
+        taskEndpointHelper.callCreateEndpoint(projectId = project.id)
+        val task = taskEndpointHelper.callCreateEndpoint()
+        projectEndpointHelper.callDeleteEndpoint(project.id)
+
+        // when
+        val actual = taskEndpointHelper.callAllEndpoint()
+
+        // then
+        actual shouldBeEqualTo listOf(task)
     }
 
     @Test
