@@ -5,7 +5,7 @@ import com.mango.domain.user.model.UserId
 import java.time.LocalDateTime
 
 data class Task(
-    val value: TaskId,
+    val id: TaskId,
     val name: String,
     val ownerId: UserId,
     val creationDate: LocalDateTime,

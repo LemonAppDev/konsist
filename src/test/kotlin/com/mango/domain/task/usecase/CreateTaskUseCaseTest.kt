@@ -81,7 +81,7 @@ class CreateTaskUseCaseTest {
 
         val repositoryTask: Task = mockk()
         every { taskRepository.saveTask(task) } returns repositoryTask
-        every { task.value } returns taskId
+        every { task.id } returns taskId
         every { task.creationDate } returns creationDate
         val creatorId = getUserId2()
         every { task.ownerId } returns creatorId
@@ -127,7 +127,7 @@ class CreateTaskUseCaseTest {
         every { taskFactory(createTaskRequestModel, creationDate) } returns task
         val repositoryTask: Task = mockk()
         every { taskRepository.saveTask(task) } returns repositoryTask
-        every { task.value } returns taskId
+        every { task.id } returns taskId
         every { task.creationDate } returns creationDate
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, creationDate, TaskActivityType.CREATE) } returns activity
@@ -172,7 +172,7 @@ class CreateTaskUseCaseTest {
 
         val expected: Task = mockk()
         every { taskRepository.saveTask(task) } returns expected
-        every { task.value } returns taskId
+        every { task.id } returns taskId
         every { task.creationDate } returns creationDate
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, creationDate, TaskActivityType.CREATE) } returns activity

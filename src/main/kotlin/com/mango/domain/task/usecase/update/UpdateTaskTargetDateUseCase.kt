@@ -30,7 +30,7 @@ class UpdateTaskTargetDateUseCase(
             taskRepository.saveTask(newTask)
 
             val activity = taskActivityFactory(
-                newTask.value,
+                newTask.id,
                 date,
                 TaskActivityType.UPDATE_TARGET_DATE,
                 newTargetDate.toString(),

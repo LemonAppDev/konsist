@@ -32,7 +32,7 @@ class UpdateTaskProjectUseCase(
             taskRepository.saveTask(newTask)
 
             val activity = taskActivityFactory(
-                newTask.value,
+                newTask.id,
                 date,
                 TaskActivityType.UPDATE_PROJECT,
                 newProjectId.value.toString(),

@@ -26,15 +26,15 @@ class UpdateTaskUseCase(
         val date = localDateTimeFactory()
 
         with(updateTaskRequestModel) {
-            name?.let { updateTaskNameUseCase(task.value, it, date) }
-            description?.let { updateTaskDescriptionUseCase(task.value, it, date) }
-            dueDate?.let { updateTaskDueDateUseCase(task.value, it, date) }
-            targetDate?.let { updateTaskTargetDateUseCase(task.value, it, date) }
-            priority?.let { updateTaskPriorityUseCase(task.value, it, date) }
-            projectId?.let { updateTaskProjectUseCase(task.value, it, date) }
-            parentTaskId?.let { updateTaskParentTaskUseCase(task.value, it, date) }
-            assigneeId?.let { updateTaskAssigneeUseCase(task.value, it, date) }
-            isCompleted?.let { updateTaskCompleteDateUseCase(task.value, it, date) }
+            name?.let { updateTaskNameUseCase(task.id, it, date) }
+            description?.let { updateTaskDescriptionUseCase(task.id, it, date) }
+            dueDate?.let { updateTaskDueDateUseCase(task.id, it, date) }
+            targetDate?.let { updateTaskTargetDateUseCase(task.id, it, date) }
+            priority?.let { updateTaskPriorityUseCase(task.id, it, date) }
+            projectId?.let { updateTaskProjectUseCase(task.id, it, date) }
+            parentTaskId?.let { updateTaskParentTaskUseCase(task.id, it, date) }
+            assigneeId?.let { updateTaskAssigneeUseCase(task.id, it, date) }
+            isCompleted?.let { updateTaskCompleteDateUseCase(task.id, it, date) }
         }
     }
 }

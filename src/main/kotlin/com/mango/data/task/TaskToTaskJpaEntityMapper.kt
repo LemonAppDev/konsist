@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 @Service
 class TaskToTaskJpaEntityMapper {
     operator fun invoke(task: Task) = TaskJpaEntity(
-        id = task.value.value,
+        id = task.id.value,
         name = task.name,
         ownerId = task.ownerId.value,
         creationDate = task.creationDate,

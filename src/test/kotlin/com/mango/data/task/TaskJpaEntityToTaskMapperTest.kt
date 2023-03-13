@@ -53,7 +53,7 @@ class TaskJpaEntityToTaskMapperTest {
 
         // then
         actual.apply {
-            this.value shouldBeEqualTo TaskId(taskUUID)
+            this.id shouldBeEqualTo TaskId(taskUUID)
             this.name shouldBeEqualTo name
             this.ownerId shouldBeEqualTo UserId(ownerUUID)
             this.creationDate shouldBeEqualTo creationDate

@@ -40,7 +40,7 @@ class UpdateTaskCompleteDateUseCaseTest {
         // given
         val date: LocalDateTime = mockk()
         val oldTask: Task = getTask(completeDate = currentCompleteDate)
-        val taskId = oldTask.value
+        val taskId = oldTask.id
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newCompleteDate = if (isComplete) date else null
         val activity: TaskActivity = mockk()
@@ -76,7 +76,7 @@ class UpdateTaskCompleteDateUseCaseTest {
         // given
         val date: LocalDateTime = mockk()
         val oldTask: Task = getTask(completeDate = currentCompleteDate)
-        val taskId = oldTask.value
+        val taskId = oldTask.id
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newCompleteDate = if (isComplete) date else null
         val activity: TaskActivity = mockk()

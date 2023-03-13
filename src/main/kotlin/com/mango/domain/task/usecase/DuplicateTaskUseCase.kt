@@ -24,11 +24,11 @@ class DuplicateTaskUseCase(
 
         val newTaskId = uuidFactory.createTaskId()
         val creationDate = localDateTimeFactory()
-        val newTask = oldTask.copy(value = newTaskId, creationDate = creationDate)
+        val newTask = oldTask.copy(id = newTaskId, creationDate = creationDate)
 
         taskRepository.saveTask(newTask)
 
-        val activity = taskActivityFactory(newTask.value, newTask.creationDate, TaskActivityType.CREATE)
+        val activity = taskActivityFactory(newTask.id, newTask.creationDate, TaskActivityType.CREATE)
         activityRepository.addTaskActivity(activity)
 
         return newTask

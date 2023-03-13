@@ -29,7 +29,7 @@ class UpdateTaskParentTaskUseCase(
             taskRepository.saveTask(newTask)
 
             val activity = taskActivityFactory(
-                newTask.value,
+                newTask.id,
                 date,
                 TaskActivityType.UPDATE_PARENT_TASK,
                 newParentTaskId.value.toString(),

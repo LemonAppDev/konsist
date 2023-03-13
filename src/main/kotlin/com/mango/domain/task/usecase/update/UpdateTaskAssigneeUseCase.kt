@@ -32,7 +32,7 @@ class UpdateTaskAssigneeUseCase(
             taskRepository.saveTask(newTask)
 
             val activity = taskActivityFactory(
-                newTask.value,
+                newTask.id,
                 date,
                 TaskActivityType.UPDATE_ASSIGNEE,
                 newAssigneeId.value.toString(),

@@ -22,7 +22,7 @@ class DeleteTaskUseCase(
             taskRepository.deleteTask(it)
 
             val date = localDateTimeFactory()
-            val activity = taskActivityFactory(it.value, date, TaskActivityType.DELETE)
+            val activity = taskActivityFactory(it.id, date, TaskActivityType.DELETE)
             activityRepository.addTaskActivity(activity)
         }
     }

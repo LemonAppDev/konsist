@@ -26,7 +26,7 @@ class UpdateTaskNameUseCase(
 
             taskRepository.saveTask(newTask)
 
-            val activity = taskActivityFactory(newTask.value, date, TaskActivityType.UPDATE_NAME, newName, oldName)
+            val activity = taskActivityFactory(newTask.id, date, TaskActivityType.UPDATE_NAME, newName, oldName)
             activityRepository.addTaskActivity(activity)
         }
     }

@@ -50,7 +50,7 @@ class UpdateTaskUseCaseTest {
         // given
         val task: Task = mockk()
         val taskId = getTaskId1()
-        every { task.value } returns taskId
+        every { task.id } returns taskId
         val updDate: LocalDateTime = mockk()
         val newName = "new name"
         val newDescription = "new description"
@@ -109,7 +109,7 @@ class UpdateTaskUseCaseTest {
         // given
         val task: Task = mockk()
         val taskId = getTaskId1()
-        every { task.value } returns taskId
+        every { task.id } returns taskId
 
         val updDate: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns updDate

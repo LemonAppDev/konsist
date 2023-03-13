@@ -34,7 +34,7 @@ class UpdateTaskCompleteDateUseCase(
         taskRepository.saveTask(newTask)
 
         val activity = taskActivityFactory(
-            newTask.value,
+            newTask.id,
             date,
             TaskActivityType.UPDATE_COMPLETE_DATE,
             newTask.completeDate.toString(),

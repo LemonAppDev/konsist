@@ -40,7 +40,7 @@ class GetCommentsUseCaseTest {
         val taskId = getTaskId1()
         val task: Task = mockk()
         val comments = listOf<Comment>()
-        every { task.value } returns taskId
+        every { task.id } returns taskId
         every { taskRepository.getTask(taskId) } returns task
         every { commentRepository.comments } returns comments
 

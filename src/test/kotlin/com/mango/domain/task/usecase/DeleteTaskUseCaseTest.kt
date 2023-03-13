@@ -33,7 +33,7 @@ class DeleteTaskUseCaseTest {
         // given
         val taskId = getTaskId1()
         val task: Task = mockk()
-        every { task.value } returns taskId
+        every { task.id } returns taskId
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
         every { taskRepository.getTask(taskId) } returns task
@@ -54,7 +54,7 @@ class DeleteTaskUseCaseTest {
         // given
         val taskId = getTaskId1()
         val task: Task = mockk()
-        every { task.value } returns taskId
+        every { task.id } returns taskId
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
         every { taskRepository.getTask(taskId) } returns task

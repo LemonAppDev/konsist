@@ -39,7 +39,7 @@ class CreateTaskUseCase(
         val task = taskFactory(createTaskRequestModel, creationDate)
 
         return taskRepository.saveTask(task).also {
-            val activity = taskActivityFactory(task.value, creationDate, TaskActivityType.CREATE)
+            val activity = taskActivityFactory(task.id, creationDate, TaskActivityType.CREATE)
             activityRepository.addTaskActivity(activity)
         }
     }
