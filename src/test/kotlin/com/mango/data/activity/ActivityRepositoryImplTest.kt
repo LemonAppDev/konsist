@@ -4,6 +4,10 @@ import com.mango.data.activity.comment.CommentActivityJpaEntity
 import com.mango.data.activity.comment.CommentActivityJpaEntityToCommentActivityMapper
 import com.mango.data.activity.comment.CommentActivityJpaRepository
 import com.mango.data.activity.comment.CommentActivityToCommentActivityJpaEntityMapper
+import com.mango.data.activity.project.ProjectActivityJpaEntity
+import com.mango.data.activity.project.ProjectActivityJpaEntityToProjectActivityMapper
+import com.mango.data.activity.project.ProjectActivityJpaRepository
+import com.mango.data.activity.project.ProjectActivityToProjectActivityJpaEntityMapper
 import com.mango.domain.activity.model.CommentActivity
 import com.mango.domain.activity.model.ProjectActivity
 import com.mango.domain.activity.model.TaskActivity
@@ -18,11 +22,17 @@ class ActivityRepositoryImplTest {
     private val commentActivityJpaRepository: CommentActivityJpaRepository = mockk()
     private val commentActivityJpaEntityToCommentActivityMapper: CommentActivityJpaEntityToCommentActivityMapper = mockk()
     private val commentActivityToCommentActivityJpaEntityMapper: CommentActivityToCommentActivityJpaEntityMapper = mockk()
+    private val projectActivityJpaRepository: ProjectActivityJpaRepository = mockk()
+    private val projectActivityJpaEntityToProjectActivityMapper: ProjectActivityJpaEntityToProjectActivityMapper = mockk()
+    private val projectActivityToProjectActivityJpaEntityMapper: ProjectActivityToProjectActivityJpaEntityMapper = mockk()
 
     private val sut = ActivityRepositoryImpl(
         commentActivityJpaRepository,
         commentActivityJpaEntityToCommentActivityMapper,
         commentActivityToCommentActivityJpaEntityMapper,
+        projectActivityJpaRepository,
+        projectActivityJpaEntityToProjectActivityMapper,
+        projectActivityToProjectActivityJpaEntityMapper,
     )
 
     @Test
@@ -58,6 +68,38 @@ class ActivityRepositoryImplTest {
     }
 
     @Test
+    fun `addProjectActivity() saves activity`() {
+        // given
+        val projectActivity: ProjectActivity = mockk()
+        val projectActivityJpaEntity: ProjectActivityJpaEntity = mockk()
+        every { projectActivityToProjectActivityJpaEntityMapper(projectActivity) } returns projectActivityJpaEntity
+        every { projectActivityJpaRepository.save(projectActivityJpaEntity) } returns projectActivityJpaEntity
+        every { projectActivityJpaEntityToProjectActivityMapper(projectActivityJpaEntity) } returns projectActivity
+
+        // when
+        sut.addProjectActivity(projectActivity)
+
+        // then
+        verify { projectActivityJpaRepository.save(projectActivityJpaEntity) }
+    }
+
+    @Test
+    fun `addProjectActivity() returns activity`() {
+        // given
+        val projectActivity: ProjectActivity = mockk()
+        val projectActivityJpaEntity: ProjectActivityJpaEntity = mockk()
+        every { projectActivityToProjectActivityJpaEntityMapper(projectActivity) } returns projectActivityJpaEntity
+        every { projectActivityJpaRepository.save(projectActivityJpaEntity) } returns projectActivityJpaEntity
+        every { projectActivityJpaEntityToProjectActivityMapper(projectActivityJpaEntity) } returns projectActivity
+
+        // when
+        val actual = sut.addProjectActivity(projectActivity)
+
+        // then
+        actual shouldBeEqualTo projectActivity
+    }
+
+    @Test
     fun `addActivity() add new TaskActivity to taskActivities`() {
         // given
         val activity: TaskActivity = mockk()
@@ -67,17 +109,5 @@ class ActivityRepositoryImplTest {
 
         // then
         sut.taskActivities shouldContain activity
-    }
-
-    @Test
-    fun `addActivity() add new ProjectActivity to projectActivities`() {
-        // given
-        val activity: ProjectActivity = mockk()
-
-        // when
-        sut.addProjectActivity(activity)
-
-        // then
-        sut.projectActivities shouldContain activity
     }
 }

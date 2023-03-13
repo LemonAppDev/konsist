@@ -3,6 +3,9 @@ package com.mango.data.activity
 import com.mango.data.activity.comment.CommentActivityJpaEntityToCommentActivityMapper
 import com.mango.data.activity.comment.CommentActivityJpaRepository
 import com.mango.data.activity.comment.CommentActivityToCommentActivityJpaEntityMapper
+import com.mango.data.activity.project.ProjectActivityJpaEntityToProjectActivityMapper
+import com.mango.data.activity.project.ProjectActivityJpaRepository
+import com.mango.data.activity.project.ProjectActivityToProjectActivityJpaEntityMapper
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.model.CommentActivity
 import com.mango.domain.activity.model.ProjectActivity
@@ -14,11 +17,12 @@ class ActivityRepositoryImpl(
     private val commentActivityJpaRepository: CommentActivityJpaRepository,
     private val commentActivityJpaEntityToCommentActivityMapper: CommentActivityJpaEntityToCommentActivityMapper,
     private val commentActivityToCommentActivityJpaEntityMapper: CommentActivityToCommentActivityJpaEntityMapper,
+    private val projectActivityJpaRepository: ProjectActivityJpaRepository,
+    private val projectActivityJpaEntityToProjectActivityMapper: ProjectActivityJpaEntityToProjectActivityMapper,
+    private val projectActivityToProjectActivityJpaEntityMapper: ProjectActivityToProjectActivityJpaEntityMapper,
 ) : ActivityRepository {
     private val _taskActivities = mutableListOf<TaskActivity>()
-    private val _projectActivities = mutableListOf<ProjectActivity>()
     override val taskActivities: List<TaskActivity> get() = _taskActivities
-    override val projectActivities: List<ProjectActivity> get() = _projectActivities
 
     override val commentActivities: List<CommentActivity>
         get() = commentActivityJpaRepository
@@ -29,11 +33,16 @@ class ActivityRepositoryImpl(
         .save(commentActivityToCommentActivityJpaEntityMapper(activity))
         .let { commentActivityJpaEntityToCommentActivityMapper(it) }
 
+    override val projectActivities: List<ProjectActivity>
+        get() = projectActivityJpaRepository
+            .findAll()
+            .map { projectActivityJpaEntityToProjectActivityMapper(it) }
+
+    override fun addProjectActivity(activity: ProjectActivity) = projectActivityJpaRepository
+        .save(projectActivityToProjectActivityJpaEntityMapper(activity))
+        .let { projectActivityJpaEntityToProjectActivityMapper(it) }
+
     override fun addTaskActivity(activity: TaskActivity) {
         _taskActivities.add(activity)
-    }
-
-    override fun addProjectActivity(activity: ProjectActivity) {
-        _projectActivities.add(activity)
     }
 }

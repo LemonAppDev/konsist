@@ -9,6 +9,6 @@ interface ActivityRepository {
     val projectActivities: List<ProjectActivity>
     val commentActivities: List<CommentActivity>
     fun addTaskActivity(activity: TaskActivity)
-    fun addProjectActivity(activity: ProjectActivity)
+    fun addProjectActivity(activity: ProjectActivity): ProjectActivity
     fun addCommentActivity(activity: CommentActivity): CommentActivity
 }

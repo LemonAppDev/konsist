@@ -46,7 +46,7 @@ class DeleteProjectUseCaseTest {
         every { localDateTimeFactory() } returns date
         val activity: ProjectActivity = mockk()
         every { projectActivityFactory(projectId, date, ProjectActivityType.DELETE) } returns activity
-        justRun { activityRepository.addProjectActivity(activity) }
+        every { activityRepository.addProjectActivity(activity) } returns mockk()
 
         // when
         sut(projectId)
@@ -72,7 +72,7 @@ class DeleteProjectUseCaseTest {
         every { localDateTimeFactory() } returns date
         val activity: ProjectActivity = mockk()
         every { projectActivityFactory(projectId, date, ProjectActivityType.DELETE) } returns activity
-        justRun { activityRepository.addProjectActivity(activity) }
+        every { activityRepository.addProjectActivity(activity) } returns mockk()
         justRun { taskRepository.deleteTask(task1) }
         justRun { taskRepository.deleteTask(task2) }
 
@@ -99,7 +99,8 @@ class DeleteProjectUseCaseTest {
         every { localDateTimeFactory() } returns date
         val activity: ProjectActivity = mockk()
         every { projectActivityFactory(projectId, date, ProjectActivityType.DELETE) } returns activity
-        justRun { activityRepository.addProjectActivity(activity) }
+        every { activityRepository.addProjectActivity(activity) } returns mockk()
+
         // when
         sut(projectId)
 

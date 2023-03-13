@@ -11,7 +11,6 @@ import com.mango.domain.project.ProjectFactory
 import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.request.CreateProjectRequestModel
 import io.mockk.every
-import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.amshove.kluent.shouldBe
@@ -48,7 +47,7 @@ class CreateProjectUseCaseTest {
         every { project.creationDate } returns date
         val activity: ProjectActivity = mockk()
         every { projectActivityFactory(projectId, date, ProjectActivityType.CREATE) } returns activity
-        justRun { activityRepository.addProjectActivity(activity) }
+        every { activityRepository.addProjectActivity(activity) } returns mockk()
 
         // when
         sut(createProjectRequestModel)
@@ -74,7 +73,7 @@ class CreateProjectUseCaseTest {
         every { project.creationDate } returns date
         val activity: ProjectActivity = mockk()
         every { projectActivityFactory(projectId, date, ProjectActivityType.CREATE) } returns activity
-        justRun { activityRepository.addProjectActivity(activity) }
+        every { activityRepository.addProjectActivity(activity) } returns mockk()
 
         // when
         sut(createProjectRequestModel)
@@ -103,7 +102,7 @@ class CreateProjectUseCaseTest {
         every { project.creationDate } returns date
         val activity: ProjectActivity = mockk()
         every { projectActivityFactory(projectId, date, ProjectActivityType.CREATE) } returns activity
-        justRun { activityRepository.addProjectActivity(activity) }
+        every { activityRepository.addProjectActivity(activity) } returns mockk()
 
         // when
         val actual = sut(createProjectRequestModel)
