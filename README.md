@@ -22,9 +22,10 @@ Run integration tests (including arch-unit):
 
 ## Architecture
 
-[Diagram](https://www.figma.com/file/NiWGr0P77zPfTxJGlDxngQ/Mango-Architecture?node-id=0%3A1&t=ThfL1SACFRYtODpq-1)
+[Architecture Diagram](https://www.figma.com/file/NiWGr0P77zPfTxJGlDxngQ/Mango-Architecture?
+node-id=0%3A1&t=ThfL1SACFRYtODpq-1)
 
-Layers:
+### Layers:
 
 1. Presentation Layer (we will rename Api Layer)
    The presentation layer is the top layer of the spring boot architecture. It consists of Views. i.e., the front-end
