@@ -5,7 +5,7 @@ import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.ProjectId
 import com.mango.domain.project.model.request.CreateProjectRequestModel
 import com.mango.util.ControllerEndpointCaller
-import com.mango.util.Json.encodeToString
+import com.mango.util.Json.serialize
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -100,7 +100,7 @@ class ProjectEndpointHelper(
             color = Color("0xFF0000"),
         )
 
-        val jsonBody = encodeToString(requestModel)
+        val jsonBody = serialize(requestModel)
         return controllerEndpointCaller.call(
             this,
             endpointName = "create",
@@ -116,7 +116,7 @@ class ProjectEndpointHelper(
         queryParams = mapOf("projectId" to projectId.value.toString()),
     )
 
-    fun callDeleteEndpoint(projectId: ProjectId) = controllerEndpointCaller.call<Any?>(
+    fun callDeleteEndpoint(projectId: ProjectId) = controllerEndpointCaller.call<Unit?>(
         this,
         endpointName = "delete",
         method = HttpMethod.DELETE,

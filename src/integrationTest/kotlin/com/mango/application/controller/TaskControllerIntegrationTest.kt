@@ -11,7 +11,7 @@ import com.mango.domain.task.model.request.CreateTaskRequestModel
 import com.mango.domain.task.model.request.UpdateTaskRequestModel
 import com.mango.domain.user.model.UserId
 import com.mango.util.ControllerEndpointCaller
-import com.mango.util.Json.encodeToString
+import com.mango.util.Json.serialize
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -272,7 +272,7 @@ class TaskEndpointHelper(
             assigneeId = assigneeId,
         )
 
-        val jsonBody = encodeToString(requestModel)
+        val jsonBody = serialize(requestModel)
         return controllerEndpointCaller.call(
             this,
             endpointName = "create",
@@ -305,7 +305,7 @@ class TaskEndpointHelper(
         this,
         endpointName = "update",
         method = HttpMethod.POST,
-        body = encodeToString(requestModel),
+        body = serialize(requestModel),
     )
 
     fun callDuplicateEndpoint(taskId: TaskId) = controllerEndpointCaller.call<Task>(
@@ -319,7 +319,7 @@ class TaskEndpointHelper(
         this,
         endpointName = "add-comment",
         method = HttpMethod.POST,
-        body = encodeToString(requestModel),
+        body = serialize(requestModel),
     )
 
     fun callDeleteCommentEndpoint(commentId: CommentId) = controllerEndpointCaller.call<Any?>(
@@ -333,7 +333,7 @@ class TaskEndpointHelper(
         this,
         endpointName = "update-comment",
         method = HttpMethod.POST,
-        body = encodeToString(requestModel),
+        body = serialize(requestModel),
     )
 
     fun callGetCommentEndpoint(commentId: CommentId) = controllerEndpointCaller.call<Comment>(

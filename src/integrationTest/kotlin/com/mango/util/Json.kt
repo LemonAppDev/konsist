@@ -1,10 +1,11 @@
 package com.mango.util
 
+import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 
 object Json {
-    private val objectMapper = ObjectMapper().apply {
+    val objectMapper = ObjectMapper().apply {
         // Register required modules to enable serialisation for various data types e.g. LocalDateTime, Kotlin Value Class...
         findAndRegisterModules()
 
@@ -14,5 +15,11 @@ object Json {
         disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
     }
 
-    fun encodeToString(jsonBody: Any?): String? = objectMapper.writeValueAsString(jsonBody)
+    fun serialize(jsonBody: Any?): String? = objectMapper.writeValueAsString(jsonBody)
+    inline fun <reified T> deserialize(jsonBody: String?, typeReference: TypeReference<T>): T = if (jsonBody == null) {
+        Unit as T
+    } else {
+        val readValue = objectMapper.readValue(jsonBody, typeReference)
+        readValue
+    }
 }
