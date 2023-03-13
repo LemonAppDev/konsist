@@ -9,7 +9,6 @@ import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import io.mockk.every
-import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.params.ParameterizedTest
@@ -53,7 +52,7 @@ class UpdateTaskCompleteDateUseCaseTest {
                 currentCompleteDate.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
         every { taskRepository.saveTask(any()) } returns mockk()
 
         // when
@@ -89,7 +88,7 @@ class UpdateTaskCompleteDateUseCaseTest {
                 currentCompleteDate.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
         every { taskRepository.saveTask(any()) } returns mockk()
 
         // when

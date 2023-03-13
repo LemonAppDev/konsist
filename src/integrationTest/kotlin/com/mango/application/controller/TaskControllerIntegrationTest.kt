@@ -1,5 +1,16 @@
 package com.mango.application.controller
 
+import com.mango.domain.activity.model.TaskActivity
+import com.mango.domain.activity.model.TaskActivityType.CREATE
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_ASSIGNEE
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_COMPLETE_DATE
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_DESCRIPTION
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_DUE_DATE
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_NAME
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_PARENT_TASK
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_PRIORITY
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_PROJECT
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_TARGET_DATE
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.comment.model.CommentId
 import com.mango.domain.comment.model.request.AddCommentRequestModel
@@ -249,6 +260,60 @@ class TaskControllerTest {
         // then
         actual shouldBeEqualTo listOf(childTask)
     }
+
+    @Test
+    fun `task activities endpoint return task activities after creating task`() {
+        // given
+        val task = taskEndpointHelper.callCreateEndpoint()
+
+        // when
+        val actual = taskEndpointHelper.callGetTaskActivitiesEndPoint(task.id)
+            .map { it.type }
+
+        // then
+        actual shouldBeEqualTo listOf(CREATE)
+    }
+
+    @Test
+    fun `task activities endpoint return task activities after updating task`() {
+        // given
+        val task = taskEndpointHelper.callCreateEndpoint()
+        val parentTask = taskEndpointHelper.callCreateEndpoint()
+        val project = projectEndpointHelper.callCreateEndpoint()
+        val assignee = userEndpointHelper.callCurrentEndpoint()
+        taskEndpointHelper.callUpdateEndpoint(
+            UpdateTaskRequestModel(
+                taskId = task.id,
+                name = "updated name",
+                description = "updated description",
+                dueDate = LocalDateTime.now().plusDays(10),
+                targetDate = LocalDateTime.now().plusDays(20),
+                priority = com.mango.domain.task.model.Priority.PRIORITY_5,
+                projectId = project.id,
+                parentTaskId = parentTask.id,
+                assigneeId = assignee.id,
+                isCompleted = true,
+            ),
+        )
+
+        // when
+        val actual = taskEndpointHelper.callGetTaskActivitiesEndPoint(task.id)
+            .map { it.type }
+
+        // then
+        actual shouldBeEqualTo listOf(
+            CREATE,
+            UPDATE_NAME,
+            UPDATE_DESCRIPTION,
+            UPDATE_DUE_DATE,
+            UPDATE_TARGET_DATE,
+            UPDATE_PRIORITY,
+            UPDATE_PROJECT,
+            UPDATE_PARENT_TASK,
+            UPDATE_ASSIGNEE,
+            UPDATE_COMPLETE_DATE,
+        )
+    }
 }
 
 @Service
@@ -353,6 +418,13 @@ class TaskEndpointHelper(
     fun callChildTasksEndpoint(taskId: TaskId) = controllerEndpointCaller.call<List<Task>>(
         this,
         endpointName = "child-tasks",
+        method = HttpMethod.GET,
+        queryParams = mapOf("taskId" to taskId.value.toString()),
+    )
+
+    fun callGetTaskActivitiesEndPoint(taskId: TaskId) = controllerEndpointCaller.call<List<TaskActivity>>(
+        this,
+        endpointName = "activities",
         method = HttpMethod.GET,
         queryParams = mapOf("taskId" to taskId.value.toString()),
     )

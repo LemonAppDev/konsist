@@ -50,7 +50,7 @@ class TaskToTaskJpaEntityMapperTest {
         val actual = sut(task)
 
         // then
-        actual.apply {
+        with(actual) {
             this.id shouldBeEqualTo taskId.value
             this.name shouldBeEqualTo name
             this.ownerId shouldBeEqualTo ownerId.value

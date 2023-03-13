@@ -35,7 +35,7 @@ class ProjectToProjectJpaEntityMapperTest {
         val actual = sut(project)
 
         // then
-        actual.apply {
+        with(actual) {
             this.id shouldBeEqualTo projectId.value
             this.ownerId shouldBeEqualTo ownerId.value
             this.creationDate shouldBeEqualTo creationDate

@@ -1,9 +1,8 @@
-package com.mango.data.activity.comment
+package com.mango.data.activity.task
 
-import com.mango.domain.activity.model.CommentActivity
-import com.mango.domain.activity.model.CommentActivityType
-import com.mango.domain.common.model.BusinessTestModel.getCommentActivityId1
-import com.mango.domain.common.model.BusinessTestModel.getCommentId1
+import com.mango.domain.activity.model.TaskActivity
+import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.common.model.BusinessTestModel.getTaskActivityId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getUserId1
 import io.mockk.mockk
@@ -11,26 +10,24 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
-class CommentActivityToCommentActivityJpaEntityMapperTest {
-    private val sut = CommentActivityToCommentActivityJpaEntityMapper()
+class TaskActivityToTaskActivityJpaEntityMapperTest {
+    private val sut = TaskActivityToTaskActivityJpaEntityMapper()
 
     @Test
-    fun `map commentActivity to commentActivityJpaEntity`() {
+    fun `map taskActivity to taskActivityJpaEntity`() {
         // given
-        val id = getCommentActivityId1()
-        val ownerId = getUserId1()
-        val type = CommentActivityType.ADD_COMMENT
-        val commentId = getCommentId1()
+        val id = getTaskActivityId1()
+        val userId = getUserId1()
+        val type = TaskActivityType.CREATE
         val taskId = getTaskId1()
         val date: LocalDateTime = mockk()
         val newValue = "newValue"
         val oldValue = "oldValue"
 
-        val commentActivity = CommentActivity(
+        val taskActivity = TaskActivity(
             id,
-            ownerId,
+            userId,
             type,
-            commentId,
             taskId,
             date,
             newValue,
@@ -38,14 +35,13 @@ class CommentActivityToCommentActivityJpaEntityMapperTest {
         )
 
         // when
-        val actual = sut(commentActivity)
+        val actual = sut(taskActivity)
 
         // then
         with(actual) {
             this.id shouldBeEqualTo id.value
-            this.ownerId shouldBeEqualTo ownerId.value
+            this.userId shouldBeEqualTo userId.value
             this.type shouldBeEqualTo type.value
-            this.commentId shouldBeEqualTo commentId.value
             this.taskId shouldBeEqualTo taskId.value
             this.date shouldBeEqualTo date
             this.newValue shouldBeEqualTo newValue

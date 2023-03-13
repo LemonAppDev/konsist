@@ -55,7 +55,7 @@ class UpdateTaskDueDateUseCaseTest {
                 oldDueDate.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
         // when
         sut(taskId, newDueDate, date)
 
@@ -86,7 +86,7 @@ class UpdateTaskDueDateUseCaseTest {
                 oldDueDate.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newDueDate, date)
@@ -118,7 +118,7 @@ class UpdateTaskDueDateUseCaseTest {
                 oldDueDate.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newDueDate, date)

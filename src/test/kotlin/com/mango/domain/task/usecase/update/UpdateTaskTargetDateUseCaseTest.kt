@@ -55,7 +55,7 @@ class UpdateTaskTargetDateUseCaseTest {
                 oldTargetDate.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newTargetDate, date)
@@ -87,7 +87,7 @@ class UpdateTaskTargetDateUseCaseTest {
                 oldTargetDate.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newTargetDate, date)
@@ -119,7 +119,7 @@ class UpdateTaskTargetDateUseCaseTest {
                 oldTargetDate.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newTargetDate, date)

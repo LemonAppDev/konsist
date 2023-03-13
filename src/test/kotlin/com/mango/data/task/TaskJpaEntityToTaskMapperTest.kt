@@ -6,6 +6,7 @@ import com.mango.domain.common.model.BusinessTestModel.getUUID3
 import com.mango.domain.common.model.BusinessTestModel.getUUID4
 import com.mango.domain.common.model.BusinessTestModel.getUUID5
 import com.mango.domain.project.model.ProjectId
+import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.user.model.UserId
 import io.mockk.mockk
@@ -52,19 +53,19 @@ class TaskJpaEntityToTaskMapperTest {
         val actual = sut(taskJpaEntity)
 
         // then
-        actual.apply {
-            this.id shouldBeEqualTo TaskId(taskUUID)
-            this.name shouldBeEqualTo name
-            this.ownerId shouldBeEqualTo UserId(ownerUUID)
-            this.creationDate shouldBeEqualTo creationDate
-            this.projectId shouldBeEqualTo ProjectId(projectUUID)
-            this.description shouldBeEqualTo description
-            this.dueDate shouldBeEqualTo dueDate
-            this.targetDate shouldBeEqualTo targetDate
-            this.priority shouldBeEqualTo com.mango.domain.task.model.Priority.PRIORITY_1
-            this.parentTaskId shouldBeEqualTo TaskId(parentTaskUUID)
-            this.assigneeId shouldBeEqualTo UserId(assigneeUUID)
-            this.completeDate shouldBeEqualTo completeDate
-        }
+        actual shouldBeEqualTo Task(
+            TaskId(taskUUID),
+            name,
+            UserId(ownerUUID),
+            creationDate,
+            ProjectId(projectUUID),
+            description,
+            dueDate,
+            targetDate,
+            com.mango.domain.task.model.Priority.PRIORITY_1,
+            TaskId(parentTaskUUID),
+            UserId(assigneeUUID),
+            completeDate,
+        )
     }
 }

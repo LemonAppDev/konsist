@@ -21,7 +21,7 @@ class UserToUserJpaEntityMapperTest {
         val actual = sut(user)
 
         // then
-        actual.apply {
+        with(actual) {
             this.name shouldBeEqualTo "name"
             this.id shouldBeEqualTo userId.value
         }

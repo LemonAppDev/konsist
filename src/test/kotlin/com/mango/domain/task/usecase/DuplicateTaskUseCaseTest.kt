@@ -11,7 +11,6 @@ import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId2
 import com.mango.domain.task.model.Task
 import io.mockk.every
-import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
@@ -53,7 +52,7 @@ class DuplicateTaskUseCaseTest {
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(newTaskId, date, TaskActivityType.CREATE) } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(oldTaskId)
@@ -81,7 +80,7 @@ class DuplicateTaskUseCaseTest {
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(newTaskId, date, TaskActivityType.CREATE) } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(oldTaskId)
@@ -109,7 +108,7 @@ class DuplicateTaskUseCaseTest {
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(newTaskId, date, TaskActivityType.CREATE) } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         val actual = sut(oldTaskId)

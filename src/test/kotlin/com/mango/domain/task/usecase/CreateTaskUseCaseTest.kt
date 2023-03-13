@@ -87,7 +87,7 @@ class CreateTaskUseCaseTest {
         every { task.ownerId } returns creatorId
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, creationDate, TaskActivityType.CREATE) } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut.invoke(createTaskRequestModel)
@@ -131,7 +131,7 @@ class CreateTaskUseCaseTest {
         every { task.creationDate } returns creationDate
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, creationDate, TaskActivityType.CREATE) } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut.invoke(createTaskRequestModel)
@@ -176,7 +176,7 @@ class CreateTaskUseCaseTest {
         every { task.creationDate } returns creationDate
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, creationDate, TaskActivityType.CREATE) } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         val actual = sut.invoke(createTaskRequestModel)

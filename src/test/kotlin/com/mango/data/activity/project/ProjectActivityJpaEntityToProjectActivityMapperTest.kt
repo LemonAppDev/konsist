@@ -1,5 +1,6 @@
 package com.mango.data.activity.project
 
+import com.mango.domain.activity.model.ProjectActivity
 import com.mango.domain.activity.model.ProjectActivityId
 import com.mango.domain.activity.model.ProjectActivityType
 import com.mango.domain.common.model.BusinessTestModel.getUUID1
@@ -36,12 +37,12 @@ class ProjectActivityJpaEntityToProjectActivityMapperTest {
         val actual = sut(projectActivityJpaEntity)
 
         // then
-        actual.apply {
-            this.id shouldBeEqualTo ProjectActivityId(id)
-            this.userId shouldBeEqualTo UserId(userId)
-            this.type shouldBeEqualTo ProjectActivityType.getByValue(type)
-            this.projectId shouldBeEqualTo ProjectId(projectId)
-            this.date shouldBeEqualTo date
-        }
+        actual shouldBeEqualTo ProjectActivity(
+            ProjectActivityId(id),
+            UserId(userId),
+            ProjectActivityType.getByValue(type),
+            ProjectId(projectId),
+            date,
+        )
     }
 }

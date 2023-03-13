@@ -1,5 +1,6 @@
 package com.mango.data.comment
 
+import com.mango.domain.comment.model.Comment
 import com.mango.domain.comment.model.CommentId
 import com.mango.domain.common.model.BusinessTestModel.getUUID1
 import com.mango.domain.common.model.BusinessTestModel.getUUID2
@@ -35,12 +36,12 @@ class CommentJpaEntityToCommentMapperTest {
         val actual = sut(commentJpaEntity)
 
         // then
-        actual.apply {
-            this.id shouldBeEqualTo CommentId(commentId)
-            this.text shouldBeEqualTo text
-            this.taskId shouldBeEqualTo TaskId(taskId)
-            this.creatorId shouldBeEqualTo UserId(ownerId)
-            this.creationDate shouldBeEqualTo creationDate
-        }
+        actual shouldBeEqualTo Comment(
+            CommentId(commentId),
+            text,
+            TaskId(taskId),
+            UserId(ownerId),
+            creationDate,
+        )
     }
 }

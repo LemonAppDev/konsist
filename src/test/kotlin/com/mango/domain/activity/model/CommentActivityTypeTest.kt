@@ -1,5 +1,8 @@
 package com.mango.domain.activity.model
 
+import com.mango.domain.activity.model.CommentActivityType.ADD_COMMENT
+import com.mango.domain.activity.model.CommentActivityType.DELETE_COMMENT
+import com.mango.domain.activity.model.CommentActivityType.UPDATE_COMMENT
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -26,9 +29,9 @@ class CommentActivityTypeTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("add", CommentActivityType.ADD_COMMENT),
-            arguments("delete", CommentActivityType.DELETE_COMMENT),
-            arguments("update", CommentActivityType.UPDATE_COMMENT),
+            arguments("add", ADD_COMMENT),
+            arguments("delete", DELETE_COMMENT),
+            arguments("update", UPDATE_COMMENT),
         )
     }
 

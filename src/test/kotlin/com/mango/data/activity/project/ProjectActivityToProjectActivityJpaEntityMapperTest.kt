@@ -34,7 +34,7 @@ class ProjectActivityToProjectActivityJpaEntityMapperTest {
         val actual = sut(projectActivity)
 
         // then
-        actual.apply {
+        with(actual) {
             this.id shouldBeEqualTo id.value
             this.userId shouldBeEqualTo userId.value
             this.type shouldBeEqualTo type.value

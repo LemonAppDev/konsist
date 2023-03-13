@@ -6,6 +6,9 @@ import com.mango.data.activity.comment.CommentActivityToCommentActivityJpaEntity
 import com.mango.data.activity.project.ProjectActivityJpaEntityToProjectActivityMapper
 import com.mango.data.activity.project.ProjectActivityJpaRepository
 import com.mango.data.activity.project.ProjectActivityToProjectActivityJpaEntityMapper
+import com.mango.data.activity.task.TaskActivityJpaEntityToTaskActivityMapper
+import com.mango.data.activity.task.TaskActivityJpaRepository
+import com.mango.data.activity.task.TaskActivityToTaskActivityJpaEntityMapper
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.model.CommentActivity
 import com.mango.domain.activity.model.ProjectActivity
@@ -20,29 +23,34 @@ class ActivityRepositoryImpl(
     private val projectActivityJpaRepository: ProjectActivityJpaRepository,
     private val projectActivityJpaEntityToProjectActivityMapper: ProjectActivityJpaEntityToProjectActivityMapper,
     private val projectActivityToProjectActivityJpaEntityMapper: ProjectActivityToProjectActivityJpaEntityMapper,
+    private val taskActivityJpaRepository: TaskActivityJpaRepository,
+    private val taskActivityJpaEntityToTaskActivityMapper: TaskActivityJpaEntityToTaskActivityMapper,
+    private val taskActivityToTaskActivityJpaEntityMapper: TaskActivityToTaskActivityJpaEntityMapper,
 ) : ActivityRepository {
-    private val _taskActivities = mutableListOf<TaskActivity>()
-    override val taskActivities: List<TaskActivity> get() = _taskActivities
-
     override val commentActivities: List<CommentActivity>
         get() = commentActivityJpaRepository
             .findAll()
             .map { commentActivityJpaEntityToCommentActivityMapper(it) }
-
-    override fun addCommentActivity(activity: CommentActivity) = commentActivityJpaRepository
-        .save(commentActivityToCommentActivityJpaEntityMapper(activity))
-        .let { commentActivityJpaEntityToCommentActivityMapper(it) }
 
     override val projectActivities: List<ProjectActivity>
         get() = projectActivityJpaRepository
             .findAll()
             .map { projectActivityJpaEntityToProjectActivityMapper(it) }
 
+    override val taskActivities: List<TaskActivity>
+        get() = taskActivityJpaRepository
+            .findAll()
+            .map { taskActivityJpaEntityToTaskActivityMapper(it) }
+
+    override fun addCommentActivity(activity: CommentActivity) = commentActivityJpaRepository
+        .save(commentActivityToCommentActivityJpaEntityMapper(activity))
+        .let { commentActivityJpaEntityToCommentActivityMapper(it) }
+
     override fun addProjectActivity(activity: ProjectActivity) = projectActivityJpaRepository
         .save(projectActivityToProjectActivityJpaEntityMapper(activity))
         .let { projectActivityJpaEntityToProjectActivityMapper(it) }
 
-    override fun addTaskActivity(activity: TaskActivity) {
-        _taskActivities.add(activity)
-    }
+    override fun addTaskActivity(activity: TaskActivity) = taskActivityJpaRepository
+        .save(taskActivityToTaskActivityJpaEntityMapper(activity))
+        .let { taskActivityJpaEntityToTaskActivityMapper(it) }
 }

@@ -1,5 +1,7 @@
 package com.mango.domain.activity.model
 
+import com.mango.domain.activity.model.ProjectActivityType.CREATE
+import com.mango.domain.activity.model.ProjectActivityType.DELETE
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -26,8 +28,8 @@ class ProjectActivityTypeTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("create", ProjectActivityType.CREATE),
-            arguments("delete", ProjectActivityType.DELETE),
+            arguments("create", CREATE),
+            arguments("delete", DELETE),
         )
     }
 

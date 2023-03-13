@@ -1,6 +1,7 @@
 package com.mango.data.user
 
 import com.mango.domain.common.model.BusinessTestModel.getUUID1
+import com.mango.domain.user.model.User
 import com.mango.domain.user.model.UserId
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -21,9 +22,9 @@ class UserJpaEntityToUserMapperTest {
         val actual = sut(userJpaEntity)
 
         // then
-        actual.apply {
-            this.name shouldBeEqualTo "name"
-            this.id shouldBeEqualTo UserId(uuid)
-        }
+        actual shouldBeEqualTo User(
+            UserId(uuid),
+            "name",
+        )
     }
 }

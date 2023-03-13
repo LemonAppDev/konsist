@@ -11,7 +11,6 @@ import com.mango.domain.common.model.BusinessTestModel.getTaskId2
 import com.mango.domain.common.model.BusinessTestModel.getTaskId3
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import io.mockk.every
-import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
@@ -54,7 +53,7 @@ class UpdateTaskParentTaskUseCaseTest {
                 oldParentTaskId.value.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newParentTaskId, date)
@@ -86,7 +85,7 @@ class UpdateTaskParentTaskUseCaseTest {
                 oldParentTaskId.value.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newParentTaskId, date)
@@ -118,7 +117,7 @@ class UpdateTaskParentTaskUseCaseTest {
                 oldParentTaskId.value.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newParentTaskId, date)

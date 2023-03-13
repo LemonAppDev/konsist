@@ -33,7 +33,7 @@ class CommentToCommentJpaEntityMapperTest {
         val actual = sut(comment)
 
         // then
-        actual.apply {
+        with(actual) {
             this.id shouldBeEqualTo commentId.value
             this.creationDate shouldBeEqualTo creationDate
             this.ownerId shouldBeEqualTo creatorId.value

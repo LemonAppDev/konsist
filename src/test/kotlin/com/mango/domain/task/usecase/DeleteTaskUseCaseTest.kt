@@ -40,7 +40,7 @@ class DeleteTaskUseCaseTest {
         justRun { taskRepository.deleteTask(task) }
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, date, TaskActivityType.DELETE) } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId)
@@ -61,7 +61,7 @@ class DeleteTaskUseCaseTest {
         justRun { taskRepository.deleteTask(task) }
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, date, TaskActivityType.DELETE) } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId)

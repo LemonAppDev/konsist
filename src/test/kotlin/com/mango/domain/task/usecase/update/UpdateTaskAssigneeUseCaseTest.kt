@@ -56,7 +56,7 @@ class UpdateTaskAssigneeUseCaseTest {
                 oldAssigneeId.value.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newAssigneeId, date)
@@ -88,7 +88,7 @@ class UpdateTaskAssigneeUseCaseTest {
                 oldAssigneeId.value.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newAssigneeId, date)
@@ -120,7 +120,7 @@ class UpdateTaskAssigneeUseCaseTest {
                 oldAssigneeId.value.toString(),
             )
         } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newAssigneeId, date)

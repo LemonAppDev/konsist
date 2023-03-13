@@ -8,6 +8,10 @@ import com.mango.data.activity.project.ProjectActivityJpaEntity
 import com.mango.data.activity.project.ProjectActivityJpaEntityToProjectActivityMapper
 import com.mango.data.activity.project.ProjectActivityJpaRepository
 import com.mango.data.activity.project.ProjectActivityToProjectActivityJpaEntityMapper
+import com.mango.data.activity.task.TaskActivityJpaEntity
+import com.mango.data.activity.task.TaskActivityJpaEntityToTaskActivityMapper
+import com.mango.data.activity.task.TaskActivityJpaRepository
+import com.mango.data.activity.task.TaskActivityToTaskActivityJpaEntityMapper
 import com.mango.domain.activity.model.CommentActivity
 import com.mango.domain.activity.model.ProjectActivity
 import com.mango.domain.activity.model.TaskActivity
@@ -15,7 +19,6 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldContain
 import org.junit.jupiter.api.Test
 
 class ActivityRepositoryImplTest {
@@ -25,6 +28,9 @@ class ActivityRepositoryImplTest {
     private val projectActivityJpaRepository: ProjectActivityJpaRepository = mockk()
     private val projectActivityJpaEntityToProjectActivityMapper: ProjectActivityJpaEntityToProjectActivityMapper = mockk()
     private val projectActivityToProjectActivityJpaEntityMapper: ProjectActivityToProjectActivityJpaEntityMapper = mockk()
+    private val taskActivityJpaRepository: TaskActivityJpaRepository = mockk()
+    private val taskActivityJpaEntityToTaskActivityMapper: TaskActivityJpaEntityToTaskActivityMapper = mockk()
+    private val taskActivityToTaskActivityJpaEntityMapper: TaskActivityToTaskActivityJpaEntityMapper = mockk()
 
     private val sut = ActivityRepositoryImpl(
         commentActivityJpaRepository,
@@ -33,6 +39,9 @@ class ActivityRepositoryImplTest {
         projectActivityJpaRepository,
         projectActivityJpaEntityToProjectActivityMapper,
         projectActivityToProjectActivityJpaEntityMapper,
+        taskActivityJpaRepository,
+        taskActivityJpaEntityToTaskActivityMapper,
+        taskActivityToTaskActivityJpaEntityMapper,
     )
 
     @Test
@@ -100,14 +109,34 @@ class ActivityRepositoryImplTest {
     }
 
     @Test
-    fun `addActivity() add new TaskActivity to taskActivities`() {
+    fun `addTaskActivity() saves activity`() {
         // given
-        val activity: TaskActivity = mockk()
+        val taskActivity: TaskActivity = mockk()
+        val taskActivityJpaEntity: TaskActivityJpaEntity = mockk()
+        every { taskActivityToTaskActivityJpaEntityMapper(taskActivity) } returns taskActivityJpaEntity
+        every { taskActivityJpaRepository.save(taskActivityJpaEntity) } returns taskActivityJpaEntity
+        every { taskActivityJpaEntityToTaskActivityMapper(taskActivityJpaEntity) } returns taskActivity
 
         // when
-        sut.addTaskActivity(activity)
+        sut.addTaskActivity(taskActivity)
 
         // then
-        sut.taskActivities shouldContain activity
+        verify { taskActivityJpaRepository.save(taskActivityJpaEntity) }
+    }
+
+    @Test
+    fun `addTaskActivity() returns activity`() {
+        // given
+        val taskActivity: TaskActivity = mockk()
+        val taskActivityJpaEntity: TaskActivityJpaEntity = mockk()
+        every { taskActivityToTaskActivityJpaEntityMapper(taskActivity) } returns taskActivityJpaEntity
+        every { taskActivityJpaRepository.save(taskActivityJpaEntity) } returns taskActivityJpaEntity
+        every { taskActivityJpaEntityToTaskActivityMapper(taskActivityJpaEntity) } returns taskActivity
+
+        // when
+        val actual = sut.addTaskActivity(taskActivity)
+
+        // then
+        actual shouldBeEqualTo taskActivity
     }
 }

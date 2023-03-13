@@ -1,5 +1,6 @@
 package com.mango.data.activity.comment
 
+import com.mango.domain.activity.model.CommentActivity
 import com.mango.domain.activity.model.CommentActivityId
 import com.mango.domain.activity.model.CommentActivityType
 import com.mango.domain.comment.model.CommentId
@@ -44,15 +45,15 @@ class CommentActivityJpaEntityToCommentActivityMapperTest {
         val actual = sut(commentActivityJpaEntity)
 
         // then
-        actual.apply {
-            this.id shouldBeEqualTo CommentActivityId(id)
-            this.ownerId shouldBeEqualTo UserId(ownerId)
-            this.type shouldBeEqualTo CommentActivityType.getByValue(type)
-            this.commentId shouldBeEqualTo CommentId(commentId)
-            this.taskId shouldBeEqualTo TaskId(taskId)
-            this.date shouldBeEqualTo date
-            this.newValue shouldBeEqualTo newValue
-            this.oldValue shouldBeEqualTo oldValue
-        }
+        actual shouldBeEqualTo CommentActivity(
+            CommentActivityId(id),
+            UserId(ownerId),
+            CommentActivityType.getByValue(type),
+            CommentId(commentId),
+            TaskId(taskId),
+            date,
+            newValue,
+            oldValue,
+        )
     }
 }

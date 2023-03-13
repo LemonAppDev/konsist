@@ -9,7 +9,6 @@ import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import io.mockk.every
-import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
@@ -42,7 +41,7 @@ class UpdateTaskNameUseCaseTest {
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, date, TaskActivityType.UPDATE_NAME, newName, oldName) } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newName, date)
@@ -65,7 +64,7 @@ class UpdateTaskNameUseCaseTest {
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, date, TaskActivityType.UPDATE_NAME, newName, oldName) } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newName, date)
@@ -88,7 +87,7 @@ class UpdateTaskNameUseCaseTest {
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, date, TaskActivityType.UPDATE_NAME, newName, oldName) } returns activity
-        justRun { activityRepository.addTaskActivity(activity) }
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newName, date)
