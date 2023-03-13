@@ -1,7 +1,7 @@
 package com.mango.application.controller
 
 import com.mango.application.config.ApiConfig
-import com.mango.domain.activity.TaskActivity
+import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.comment.model.CommentId
 import com.mango.domain.comment.model.request.AddCommentRequestModel

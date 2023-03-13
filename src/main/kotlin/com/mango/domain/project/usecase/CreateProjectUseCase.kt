@@ -2,7 +2,7 @@ package com.mango.domain.project.usecase
 
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.ProjectActivityFactory
-import com.mango.domain.activity.ProjectActivityType
+import com.mango.domain.activity.model.ProjectActivityType
 import com.mango.domain.project.ProjectFactory
 import com.mango.domain.project.ProjectRepository
 import com.mango.domain.project.model.Project

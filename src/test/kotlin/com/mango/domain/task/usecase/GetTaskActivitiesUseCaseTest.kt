@@ -1,7 +1,7 @@
 package com.mango.domain.task.usecase
 
 import com.mango.data.activity.ActivityRepositoryImpl
-import com.mango.domain.activity.TaskActivity
+import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId2
 import io.mockk.every

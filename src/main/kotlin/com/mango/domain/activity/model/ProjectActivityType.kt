@@ -1,4 +1,4 @@
-package com.mango.domain.activity
+package com.mango.domain.activity.model
 
 enum class ProjectActivityType {
     CREATE,

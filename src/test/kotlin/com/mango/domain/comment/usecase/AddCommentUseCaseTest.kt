@@ -1,9 +1,9 @@
 package com.mango.domain.comment.usecase
 
 import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.CommentActivity
 import com.mango.domain.activity.CommentActivityFactory
-import com.mango.domain.activity.CommentActivityType
+import com.mango.domain.activity.model.CommentActivity
+import com.mango.domain.activity.model.CommentActivityType
 import com.mango.domain.comment.CommentFactory
 import com.mango.domain.comment.CommentRepository
 import com.mango.domain.comment.model.Comment
@@ -54,7 +54,7 @@ class AddCommentUseCaseTest {
         every { commentRepository.saveComment(comment) } returns comment
         val activity: CommentActivity = mockk()
         every { commentActivityFactory(comment, date, CommentActivityType.ADD_COMMENT, text) } returns activity
-        justRun { activityRepository.addCommentActivity(activity) }
+        every { activityRepository.addCommentActivity(activity) } returns mockk()
 
         // when
         sut(addCommentRequestModel)
@@ -81,7 +81,7 @@ class AddCommentUseCaseTest {
         every { commentRepository.saveComment(comment) } returns comment
         val activity: CommentActivity = mockk()
         every { commentActivityFactory(comment, date, CommentActivityType.ADD_COMMENT, text) } returns activity
-        justRun { activityRepository.addCommentActivity(activity) }
+        every { activityRepository.addCommentActivity(activity) } returns mockk()
 
         // when
         sut(addCommentRequestModel)
@@ -108,7 +108,7 @@ class AddCommentUseCaseTest {
         every { commentRepository.saveComment(comment) } returns comment
         val activity: CommentActivity = mockk()
         every { commentActivityFactory(comment, date, CommentActivityType.ADD_COMMENT, text) } returns activity
-        justRun { activityRepository.addCommentActivity(activity) }
+        every { activityRepository.addCommentActivity(activity) } returns mockk()
 
         // when
         val actual = sut(addCommentRequestModel)

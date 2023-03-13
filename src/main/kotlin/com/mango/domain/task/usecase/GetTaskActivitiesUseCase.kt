@@ -1,7 +1,7 @@
 package com.mango.domain.task.usecase
 
 import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.TaskActivity
+import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.task.model.TaskId
 import org.springframework.stereotype.Service
 

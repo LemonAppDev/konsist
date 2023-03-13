@@ -2,7 +2,7 @@ package com.mango.domain.task.usecase
 
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
-import com.mango.domain.activity.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
 import com.mango.domain.task.TaskRepository

@@ -2,9 +2,9 @@ package com.mango.domain.project.usecase
 
 import com.mango.data.project.ProjectRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.ProjectActivity
 import com.mango.domain.activity.ProjectActivityFactory
-import com.mango.domain.activity.ProjectActivityType
+import com.mango.domain.activity.model.ProjectActivity
+import com.mango.domain.activity.model.ProjectActivityType
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.Color
 import com.mango.domain.project.ProjectFactory

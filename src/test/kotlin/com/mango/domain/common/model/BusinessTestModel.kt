@@ -1,5 +1,8 @@
 package com.mango.domain.common.model
 
+import com.mango.domain.activity.model.CommentActivityId
+import com.mango.domain.activity.model.ProjectActivityId
+import com.mango.domain.activity.model.TaskActivityId
 import com.mango.domain.comment.model.CommentId
 import com.mango.domain.project.model.ProjectId
 import com.mango.domain.task.model.Task
@@ -56,4 +59,8 @@ object BusinessTestModel {
     fun getTaskId3() = TaskId(UUID.fromString("a64fdc2f-511e-45aa-a6ab-f6dce41ff911"))
 
     fun getCommentId1() = CommentId(UUID.fromString("1f5a1251-1f2e-4f46-b59e-2da71dc3324f"))
+
+    fun getCommentActivityId1() = CommentActivityId(UUID.fromString("dbf93f46-ea98-4cfe-bb40-efb08c8da433"))
+    fun getProjectActivityId1() = ProjectActivityId(UUID.fromString("f35e5fb9-5f99-4ddb-93b5-f7c0ed9d59a7"))
+    fun getTaskActivityId1() = TaskActivityId(UUID.fromString("526b54fc-66e2-4363-b27b-3c44f08deb8c"))
 }

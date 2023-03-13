@@ -1,4 +1,4 @@
-package com.mango.domain.activity
+package com.mango.domain.activity.model
 
 import com.mango.domain.comment.model.CommentId
 import com.mango.domain.task.model.TaskId
@@ -6,6 +6,7 @@ import com.mango.domain.user.model.UserId
 import java.time.LocalDateTime
 
 data class CommentActivity(
+    val id: CommentActivityId,
     val ownerId: UserId,
     val type: CommentActivityType,
     val commentId: CommentId,

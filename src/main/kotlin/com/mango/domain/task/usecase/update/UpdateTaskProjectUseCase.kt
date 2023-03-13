@@ -2,7 +2,7 @@ package com.mango.domain.task.usecase.update
 
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
-import com.mango.domain.activity.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType
 import com.mango.domain.project.model.ProjectId
 import com.mango.domain.project.usecase.GetProjectOrThrowUseCase
 import com.mango.domain.task.TaskRepository

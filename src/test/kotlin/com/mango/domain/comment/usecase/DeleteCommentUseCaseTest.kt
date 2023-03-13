@@ -2,9 +2,9 @@ package com.mango.domain.comment.usecase
 
 import com.mango.data.comment.CommentRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.CommentActivity
 import com.mango.domain.activity.CommentActivityFactory
-import com.mango.domain.activity.CommentActivityType
+import com.mango.domain.activity.model.CommentActivity
+import com.mango.domain.activity.model.CommentActivityType
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.model.BusinessTestModel.getCommentId1
@@ -40,7 +40,7 @@ class DeleteCommentUseCaseTest {
         every { localDateTimeFactory() } returns date
         val activity: CommentActivity = mockk()
         every { commentActivityFactory(comment, date, CommentActivityType.DELETE_COMMENT) } returns activity
-        justRun { activityRepository.addCommentActivity(activity) }
+        every { activityRepository.addCommentActivity(activity) } returns mockk()
 
         // when
         sut(commentId)
@@ -61,7 +61,7 @@ class DeleteCommentUseCaseTest {
         every { localDateTimeFactory() } returns date
         val activity: CommentActivity = mockk()
         every { commentActivityFactory(comment, date, CommentActivityType.DELETE_COMMENT) } returns activity
-        justRun { activityRepository.addCommentActivity(activity) }
+        every { activityRepository.addCommentActivity(activity) } returns mockk()
 
         // when
         sut(commentId)

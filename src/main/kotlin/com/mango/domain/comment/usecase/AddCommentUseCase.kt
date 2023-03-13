@@ -2,7 +2,7 @@ package com.mango.domain.comment.usecase
 
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.CommentActivityFactory
-import com.mango.domain.activity.CommentActivityType
+import com.mango.domain.activity.model.CommentActivityType
 import com.mango.domain.comment.CommentFactory
 import com.mango.domain.comment.CommentRepository
 import com.mango.domain.comment.model.Comment
