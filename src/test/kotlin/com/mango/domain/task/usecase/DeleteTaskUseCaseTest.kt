@@ -1,7 +1,10 @@
 package com.mango.domain.task.usecase
 
 import com.mango.data.task.TaskRepositoryImpl
-import com.mango.domain.activity.usecase.DeleteTaskActivityUseCase
+import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.TaskActivity
+import com.mango.domain.activity.TaskActivityFactory
+import com.mango.domain.activity.TaskActivityType
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.task.model.Task
@@ -15,12 +18,14 @@ import java.time.LocalDateTime
 class DeleteTaskUseCaseTest {
     private val taskRepository: TaskRepositoryImpl = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
-    private val deleteTaskActivityUseCase: DeleteTaskActivityUseCase = mockk()
+    private val taskActivityFactory: TaskActivityFactory = mockk()
+    private val activityRepository: ActivityRepository = mockk()
 
     private val sut = DeleteTaskUseCase(
         taskRepository,
         localDateTimeFactory,
-        deleteTaskActivityUseCase,
+        taskActivityFactory,
+        activityRepository,
     )
 
     @Test
@@ -33,7 +38,9 @@ class DeleteTaskUseCaseTest {
         every { localDateTimeFactory() } returns date
         every { taskRepository.getTask(taskId) } returns task
         justRun { taskRepository.deleteTask(task) }
-        every { deleteTaskActivityUseCase(taskId, date) } returns mockk()
+        val activity: TaskActivity = mockk()
+        every { taskActivityFactory(taskId, date, TaskActivityType.DELETE) } returns activity
+        justRun { activityRepository.addTaskActivity(activity) }
 
         // when
         sut(taskId)
@@ -43,7 +50,7 @@ class DeleteTaskUseCaseTest {
     }
 
     @Test
-    fun `calls deleteTaskActivityUseCase method`() {
+    fun `adds activity to repository`() {
         // given
         val taskId = getTaskId1()
         val task: Task = mockk()
@@ -52,12 +59,14 @@ class DeleteTaskUseCaseTest {
         every { localDateTimeFactory() } returns date
         every { taskRepository.getTask(taskId) } returns task
         justRun { taskRepository.deleteTask(task) }
-        every { deleteTaskActivityUseCase(taskId, date) } returns mockk()
+        val activity: TaskActivity = mockk()
+        every { taskActivityFactory(taskId, date, TaskActivityType.DELETE) } returns activity
+        justRun { activityRepository.addTaskActivity(activity) }
 
         // when
         sut(taskId)
 
         // then
-        verify { deleteTaskActivityUseCase(taskId, date) }
+        verify { activityRepository.addTaskActivity(activity) }
     }
 }

@@ -1,14 +1,17 @@
 package com.mango.domain.task.usecase.update
 
 import com.mango.data.task.TaskRepositoryImpl
+import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.TaskActivity
+import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.TaskActivityType
-import com.mango.domain.activity.usecase.UpdateTaskActivityUseCase
 import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId2
 import com.mango.domain.common.model.BusinessTestModel.getTaskId3
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import io.mockk.every
+import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
@@ -17,12 +20,14 @@ import java.time.LocalDateTime
 class UpdateTaskParentTaskUseCaseTest {
     private val taskRepository: TaskRepositoryImpl = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
-    private val updateTaskActivityUseCase: UpdateTaskActivityUseCase = mockk()
+    private val taskActivityFactory: TaskActivityFactory = mockk()
+    private val activityRepository: ActivityRepository = mockk()
 
     private val sut = UpdateTaskParentTaskUseCase(
         taskRepository,
         getTaskOrThrowUseCase,
-        updateTaskActivityUseCase,
+        taskActivityFactory,
+        activityRepository,
     )
 
     @Test
@@ -39,15 +44,17 @@ class UpdateTaskParentTaskUseCaseTest {
         val newTask = oldTask.copy(parentTaskId = newParentTaskId)
         every { taskRepository.getTask(taskId) } returns oldTask
         every { taskRepository.saveTask(newTask) } returns mockk()
+        val activity: TaskActivity = mockk()
         every {
-            updateTaskActivityUseCase(
+            taskActivityFactory(
                 taskId,
                 date,
+                TaskActivityType.UPDATE_PARENT_TASK,
                 newParentTaskId.value.toString(),
                 oldParentTaskId.value.toString(),
-                TaskActivityType.UPDATE_PARENT_TASK,
             )
-        } returns mockk()
+        } returns activity
+        justRun { activityRepository.addTaskActivity(activity) }
 
         // when
         sut(taskId, newParentTaskId, date)
@@ -57,7 +64,7 @@ class UpdateTaskParentTaskUseCaseTest {
     }
 
     @Test
-    fun `calls updateTaskActivityUseCase`() {
+    fun `add activity to repository`() {
         // given
         val taskId = getTaskId1()
         val oldParentTaskId = getTaskId2()
@@ -69,29 +76,23 @@ class UpdateTaskParentTaskUseCaseTest {
         every { getTaskOrThrowUseCase(newParentTaskId) } returns mockk()
         val newTask = oldTask.copy(parentTaskId = newParentTaskId)
         every { taskRepository.saveTask(newTask) } returns mockk()
+        val activity: TaskActivity = mockk()
         every {
-            updateTaskActivityUseCase(
+            taskActivityFactory(
                 taskId,
                 date,
+                TaskActivityType.UPDATE_PARENT_TASK,
                 newParentTaskId.value.toString(),
                 oldParentTaskId.value.toString(),
-                TaskActivityType.UPDATE_PARENT_TASK,
             )
-        } returns mockk()
+        } returns activity
+        justRun { activityRepository.addTaskActivity(activity) }
 
         // when
         sut(taskId, newParentTaskId, date)
 
         // then
-        verify {
-            updateTaskActivityUseCase(
-                taskId,
-                date,
-                newParentTaskId.value.toString(),
-                oldParentTaskId.value.toString(),
-                TaskActivityType.UPDATE_PARENT_TASK,
-            )
-        }
+        verify { activityRepository.addTaskActivity(activity) }
     }
 
     @Test
@@ -107,15 +108,17 @@ class UpdateTaskParentTaskUseCaseTest {
         every { getTaskOrThrowUseCase(newParentTaskId) } returns mockk()
         val newTask = oldTask.copy(parentTaskId = newParentTaskId)
         every { taskRepository.saveTask(newTask) } returns mockk()
+        val activity: TaskActivity = mockk()
         every {
-            updateTaskActivityUseCase(
+            taskActivityFactory(
                 taskId,
                 date,
+                TaskActivityType.UPDATE_PARENT_TASK,
                 newParentTaskId.value.toString(),
                 oldParentTaskId.value.toString(),
-                TaskActivityType.UPDATE_PARENT_TASK,
             )
-        } returns mockk()
+        } returns activity
+        justRun { activityRepository.addTaskActivity(activity) }
 
         // when
         sut(taskId, newParentTaskId, date)
@@ -123,13 +126,7 @@ class UpdateTaskParentTaskUseCaseTest {
         // then
         verify(exactly = 0) {
             taskRepository.saveTask(newTask)
-            updateTaskActivityUseCase(
-                taskId,
-                date,
-                newParentTaskId.value.toString(),
-                oldParentTaskId.value.toString(),
-                TaskActivityType.UPDATE_PARENT_TASK,
-            )
+            activityRepository.addTaskActivity(activity)
         }
     }
 }

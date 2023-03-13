@@ -1,7 +1,10 @@
 package com.mango.domain.project.usecase
 
 import com.mango.data.project.ProjectRepositoryImpl
-import com.mango.domain.activity.usecase.DeleteProjectActivityUseCase
+import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.ProjectActivity
+import com.mango.domain.activity.ProjectActivityFactory
+import com.mango.domain.activity.ProjectActivityType
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.project.model.Project
@@ -15,12 +18,14 @@ import java.time.LocalDateTime
 class DeleteProjectUseCaseTest {
     private val projectRepository: ProjectRepositoryImpl = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
-    private val deleteProjectActivityUseCase: DeleteProjectActivityUseCase = mockk()
+    private val projectActivityFactory: ProjectActivityFactory = mockk()
+    private val activityRepository: ActivityRepository = mockk()
 
     private val sut = DeleteProjectUseCase(
         projectRepository,
         localDateTimeFactory,
-        deleteProjectActivityUseCase,
+        projectActivityFactory,
+        activityRepository,
     )
 
     @Test
@@ -33,7 +38,9 @@ class DeleteProjectUseCaseTest {
         justRun { projectRepository.deleteProject(project) }
         val date = mockk<LocalDateTime>()
         every { localDateTimeFactory() } returns date
-        every { deleteProjectActivityUseCase(projectId, date) } returns mockk()
+        val activity: ProjectActivity = mockk()
+        every { projectActivityFactory(projectId, date, ProjectActivityType.DELETE) } returns activity
+        justRun { activityRepository.addProjectActivity(activity) }
 
         // when
         sut(projectId)
@@ -43,7 +50,7 @@ class DeleteProjectUseCaseTest {
     }
 
     @Test
-    fun `calls deleteProjectActivityUseCase`() {
+    fun `adds activity to repository`() {
         // given
         val projectId = getProjectId1()
         val project: Project = mockk()
@@ -52,12 +59,14 @@ class DeleteProjectUseCaseTest {
         justRun { projectRepository.deleteProject(project) }
         val date = mockk<LocalDateTime>()
         every { localDateTimeFactory() } returns date
-        every { deleteProjectActivityUseCase(projectId, date) } returns mockk()
+        val activity: ProjectActivity = mockk()
+        every { projectActivityFactory(projectId, date, ProjectActivityType.DELETE) } returns activity
+        justRun { activityRepository.addProjectActivity(activity) }
 
         // when
         sut(projectId)
 
         // then
-        verify { deleteProjectActivityUseCase(projectId, date) }
+        verify { activityRepository.addProjectActivity(activity) }
     }
 }

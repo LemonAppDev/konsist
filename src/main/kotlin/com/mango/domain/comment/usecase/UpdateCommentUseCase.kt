@@ -1,6 +1,8 @@
 package com.mango.domain.comment.usecase
 
-import com.mango.domain.activity.usecase.UpdateCommentActivityUseCase
+import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.CommentActivityFactory
+import com.mango.domain.activity.CommentActivityType
 import com.mango.domain.comment.CommentRepository
 import com.mango.domain.comment.model.request.UpdateCommentRequestModel
 import com.mango.domain.common.LocalDateTimeFactory
@@ -11,7 +13,8 @@ class UpdateCommentUseCase(
     private val commentRepository: CommentRepository,
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val getCommentOrThrowUseCase: GetCommentOrThrowUseCase,
-    private val updateCommentActivityUseCase: UpdateCommentActivityUseCase,
+    private val commentActivityFactory: CommentActivityFactory,
+    private val activityRepository: ActivityRepository,
 ) {
     operator fun invoke(updateCommentRequestModel: UpdateCommentRequestModel) {
         val comment = getCommentOrThrowUseCase(updateCommentRequestModel.commentId)
@@ -23,7 +26,8 @@ class UpdateCommentUseCase(
                 commentRepository.saveComment(newComment)
 
                 val date = localDateTimeFactory()
-                updateCommentActivityUseCase(newComment, date, newComment.text, comment.text)
+                val activity = commentActivityFactory(newComment, date, CommentActivityType.UPDATE_COMMENT, newComment.text, comment.text)
+                activityRepository.addCommentActivity(activity)
             }
         }
     }

@@ -1,12 +1,16 @@
 package com.mango.domain.comment.usecase
 
 import com.mango.data.comment.CommentRepositoryImpl
-import com.mango.domain.activity.usecase.UpdateCommentActivityUseCase
+import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.CommentActivity
+import com.mango.domain.activity.CommentActivityFactory
+import com.mango.domain.activity.CommentActivityType
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.comment.model.request.UpdateCommentRequestModel
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.model.BusinessTestModel.getCommentId1
 import io.mockk.every
+import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
@@ -16,13 +20,15 @@ class UpdateCommentUseCaseTest {
     private val commentRepository: CommentRepositoryImpl = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val getCommentOrThrowUseCase: GetCommentOrThrowUseCase = mockk()
-    private val updateCommentActivityUseCase: UpdateCommentActivityUseCase = mockk()
+    private val commentActivityFactory: CommentActivityFactory = mockk()
+    private val activityRepository: ActivityRepository = mockk()
 
     private val sut = UpdateCommentUseCase(
         commentRepository,
         localDateTimeFactory,
         getCommentOrThrowUseCase,
-        updateCommentActivityUseCase,
+        commentActivityFactory,
+        activityRepository,
     )
 
     @Test
@@ -42,7 +48,9 @@ class UpdateCommentUseCaseTest {
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
         every { commentRepository.saveComment(newComment) } returns mockk()
-        every { updateCommentActivityUseCase(newComment, date, newText, oldText) } returns mockk()
+        val activity: CommentActivity = mockk()
+        every { commentActivityFactory(newComment, date, CommentActivityType.UPDATE_COMMENT, newText, oldText) } returns activity
+        justRun { activityRepository.addCommentActivity(activity) }
 
         // when
         sut(updateCommentRequestModel)
@@ -52,7 +60,7 @@ class UpdateCommentUseCaseTest {
     }
 
     @Test
-    fun `calls updateCommentActivityUseCase`() {
+    fun `adds activity to repository`() {
         // given
         val newText = "new text"
         val oldText = "old text"
@@ -68,12 +76,14 @@ class UpdateCommentUseCaseTest {
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
         every { commentRepository.saveComment(newComment) } returns mockk()
-        every { updateCommentActivityUseCase(newComment, date, newText, oldText) } returns mockk()
+        val activity: CommentActivity = mockk()
+        every { commentActivityFactory(newComment, date, CommentActivityType.UPDATE_COMMENT, newText, oldText) } returns activity
+        justRun { activityRepository.addCommentActivity(activity) }
 
         // when
         sut(updateCommentRequestModel)
 
         // then
-        verify { updateCommentActivityUseCase(newComment, date, newText, oldText) }
+        verify { activityRepository.addCommentActivity(activity) }
     }
 }

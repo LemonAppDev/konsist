@@ -1,8 +1,10 @@
 package com.mango.domain.task.usecase.update
 
 import com.mango.data.task.TaskRepositoryImpl
+import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.TaskActivity
+import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.TaskActivityType
-import com.mango.domain.activity.usecase.UpdateTaskActivityUseCase
 import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.usecase.RequireDateIsNowOrLaterUseCase
@@ -19,13 +21,15 @@ class UpdateTaskTargetDateUseCaseTest {
     private val taskRepository: TaskRepositoryImpl = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase = mockk()
-    private val updateTaskActivityUseCase: UpdateTaskActivityUseCase = mockk()
+    private val taskActivityFactory: TaskActivityFactory = mockk()
+    private val activityRepository: ActivityRepository = mockk()
 
     private val sut = UpdateTaskTargetDateUseCase(
         taskRepository,
         getTaskOrThrowUseCase,
         requireDateIsNowOrLaterUseCase,
-        updateTaskActivityUseCase,
+        taskActivityFactory,
+        activityRepository,
     )
 
     @Test
@@ -41,15 +45,17 @@ class UpdateTaskTargetDateUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(targetDate = newTargetDate)
         every { taskRepository.saveTask(newTask) } returns mockk()
+        val activity: TaskActivity = mockk()
         every {
-            updateTaskActivityUseCase(
+            taskActivityFactory(
                 taskId,
                 date,
+                TaskActivityType.UPDATE_TARGET_DATE,
                 newTargetDate.toString(),
                 oldTargetDate.toString(),
-                TaskActivityType.UPDATE_TARGET_DATE,
             )
-        } returns mockk()
+        } returns activity
+        justRun { activityRepository.addTaskActivity(activity) }
 
         // when
         sut(taskId, newTargetDate, date)
@@ -59,7 +65,7 @@ class UpdateTaskTargetDateUseCaseTest {
     }
 
     @Test
-    fun `calls updateTaskActivityUseCase if new target date is in the future`() {
+    fun `add activity to repository if new target date is in the future`() {
         // given
         val taskId = getTaskId1()
         val oldTargetDate: LocalDateTime = mockk()
@@ -71,29 +77,23 @@ class UpdateTaskTargetDateUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(targetDate = newTargetDate)
         every { taskRepository.saveTask(newTask) } returns mockk()
+        val activity: TaskActivity = mockk()
         every {
-            updateTaskActivityUseCase(
+            taskActivityFactory(
                 taskId,
                 date,
+                TaskActivityType.UPDATE_TARGET_DATE,
                 newTargetDate.toString(),
                 oldTargetDate.toString(),
-                TaskActivityType.UPDATE_TARGET_DATE,
             )
-        } returns mockk()
+        } returns activity
+        justRun { activityRepository.addTaskActivity(activity) }
 
         // when
         sut(taskId, newTargetDate, date)
 
         // then
-        verify {
-            updateTaskActivityUseCase(
-                taskId,
-                date,
-                newTargetDate.toString(),
-                oldTargetDate.toString(),
-                TaskActivityType.UPDATE_TARGET_DATE,
-            )
-        }
+        verify { activityRepository.addTaskActivity(activity) }
     }
 
     @Test
@@ -109,15 +109,17 @@ class UpdateTaskTargetDateUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         val newTask = oldTask.copy(targetDate = newTargetDate)
         every { taskRepository.saveTask(newTask) } returns mockk()
+        val activity: TaskActivity = mockk()
         every {
-            updateTaskActivityUseCase(
+            taskActivityFactory(
                 taskId,
                 date,
+                TaskActivityType.UPDATE_TARGET_DATE,
                 newTargetDate.toString(),
                 oldTargetDate.toString(),
-                TaskActivityType.UPDATE_TARGET_DATE,
             )
-        } returns mockk()
+        } returns activity
+        justRun { activityRepository.addTaskActivity(activity) }
 
         // when
         sut(taskId, newTargetDate, date)
@@ -125,13 +127,7 @@ class UpdateTaskTargetDateUseCaseTest {
         // then
         verify(exactly = 0) {
             taskRepository.saveTask(newTask)
-            updateTaskActivityUseCase(
-                taskId,
-                date,
-                newTargetDate.toString(),
-                oldTargetDate.toString(),
-                TaskActivityType.UPDATE_TARGET_DATE,
-            )
+            activityRepository.addTaskActivity(activity)
         }
     }
 }

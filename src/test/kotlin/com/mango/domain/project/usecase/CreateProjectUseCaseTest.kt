@@ -1,13 +1,17 @@
 package com.mango.domain.project.usecase
 
 import com.mango.data.project.ProjectRepositoryImpl
-import com.mango.domain.activity.usecase.CreateProjectActivityUseCase
+import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.ProjectActivity
+import com.mango.domain.activity.ProjectActivityFactory
+import com.mango.domain.activity.ProjectActivityType
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.Color
 import com.mango.domain.project.ProjectFactory
 import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.request.CreateProjectRequestModel
 import io.mockk.every
+import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.amshove.kluent.shouldBe
@@ -17,12 +21,14 @@ import java.time.LocalDateTime
 class CreateProjectUseCaseTest {
     private val projectFactory: ProjectFactory = mockk()
     private val projectRepository: ProjectRepositoryImpl = mockk()
-    private val createProjectActivityUseCase: CreateProjectActivityUseCase = mockk()
+    private val projectActivityFactory: ProjectActivityFactory = mockk()
+    private val activityRepository: ActivityRepository = mockk()
 
     private val sut = CreateProjectUseCase(
         projectFactory,
         projectRepository,
-        createProjectActivityUseCase,
+        projectActivityFactory,
+        activityRepository,
     )
 
     @Test
@@ -40,7 +46,9 @@ class CreateProjectUseCaseTest {
         val date: LocalDateTime = mockk()
         every { project.id } returns projectId
         every { project.creationDate } returns date
-        every { createProjectActivityUseCase(projectId, date) } returns mockk()
+        val activity: ProjectActivity = mockk()
+        every { projectActivityFactory(projectId, date, ProjectActivityType.CREATE) } returns activity
+        justRun { activityRepository.addProjectActivity(activity) }
 
         // when
         sut(createProjectRequestModel)
@@ -50,7 +58,7 @@ class CreateProjectUseCaseTest {
     }
 
     @Test
-    fun `calls createProjectActivityUseCase`() {
+    fun `adds activity to repository`() {
         // given
         val createProjectRequestModel = CreateProjectRequestModel(
             "name",
@@ -64,13 +72,15 @@ class CreateProjectUseCaseTest {
         val date: LocalDateTime = mockk()
         every { project.id } returns projectId
         every { project.creationDate } returns date
-        every { createProjectActivityUseCase(projectId, date) } returns mockk()
+        val activity: ProjectActivity = mockk()
+        every { projectActivityFactory(projectId, date, ProjectActivityType.CREATE) } returns activity
+        justRun { activityRepository.addProjectActivity(activity) }
 
         // when
         sut(createProjectRequestModel)
 
         // then
-        verify { createProjectActivityUseCase(projectId, date) }
+        verify { activityRepository.addProjectActivity(activity) }
     }
 
     @Test
@@ -91,7 +101,9 @@ class CreateProjectUseCaseTest {
         every { project.creationDate } returns date
         every { project.id } returns projectId
         every { project.creationDate } returns date
-        every { createProjectActivityUseCase(projectId, date) } returns mockk()
+        val activity: ProjectActivity = mockk()
+        every { projectActivityFactory(projectId, date, ProjectActivityType.CREATE) } returns activity
+        justRun { activityRepository.addProjectActivity(activity) }
 
         // when
         val actual = sut(createProjectRequestModel)

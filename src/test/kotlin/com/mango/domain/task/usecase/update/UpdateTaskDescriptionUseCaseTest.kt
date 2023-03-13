@@ -1,12 +1,15 @@
 package com.mango.domain.task.usecase.update
 
 import com.mango.data.task.TaskRepositoryImpl
+import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.TaskActivity
+import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.TaskActivityType
-import com.mango.domain.activity.usecase.UpdateTaskActivityUseCase
 import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import io.mockk.every
+import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
@@ -15,12 +18,14 @@ import java.time.LocalDateTime
 class UpdateTaskDescriptionUseCaseTest {
     private val taskRepository: TaskRepositoryImpl = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
-    private val updateTaskActivityUseCase: UpdateTaskActivityUseCase = mockk()
+    private val taskActivityFactory: TaskActivityFactory = mockk()
+    private val activityRepository: ActivityRepository = mockk()
 
     private val sut = UpdateTaskDescriptionUseCase(
         taskRepository,
         getTaskOrThrowUseCase,
-        updateTaskActivityUseCase,
+        taskActivityFactory,
+        activityRepository,
     )
 
     @Test
@@ -36,15 +41,17 @@ class UpdateTaskDescriptionUseCaseTest {
         val newTask = oldTask.copy(description = newDescription)
 
         every { taskRepository.saveTask(newTask) } returns mockk()
+        val activity: TaskActivity = mockk()
         every {
-            updateTaskActivityUseCase(
+            taskActivityFactory(
                 taskId,
                 date,
+                TaskActivityType.UPDATE_DESCRIPTION,
                 newDescription,
                 oldDescription,
-                TaskActivityType.UPDATE_DESCRIPTION,
             )
-        } returns mockk()
+        } returns activity
+        justRun { activityRepository.addTaskActivity(activity) }
 
         // when
         sut(taskId, newDescription, date)
@@ -54,7 +61,7 @@ class UpdateTaskDescriptionUseCaseTest {
     }
 
     @Test
-    fun `calls updateTaskActivityUseCase`() {
+    fun `add activity to repository`() {
         // given
         val taskId = getTaskId1()
         val oldDescription = "old description"
@@ -66,21 +73,23 @@ class UpdateTaskDescriptionUseCaseTest {
         val newTask = oldTask.copy(description = newDescription)
 
         every { taskRepository.saveTask(newTask) } returns mockk()
+        val activity: TaskActivity = mockk()
         every {
-            updateTaskActivityUseCase(
+            taskActivityFactory(
                 taskId,
                 date,
+                TaskActivityType.UPDATE_DESCRIPTION,
                 newDescription,
                 oldDescription,
-                TaskActivityType.UPDATE_DESCRIPTION,
             )
-        } returns mockk()
+        } returns activity
+        justRun { activityRepository.addTaskActivity(activity) }
 
         // when
         sut(taskId, newDescription, date)
 
         // then
-        verify { updateTaskActivityUseCase(taskId, date, newDescription, oldDescription, TaskActivityType.UPDATE_DESCRIPTION) }
+        verify { activityRepository.addTaskActivity(activity) }
     }
 
     @Test
@@ -96,15 +105,17 @@ class UpdateTaskDescriptionUseCaseTest {
         val newTask = oldTask.copy(description = newDescription)
 
         every { taskRepository.saveTask(newTask) } returns mockk()
+        val activity: TaskActivity = mockk()
         every {
-            updateTaskActivityUseCase(
+            taskActivityFactory(
                 taskId,
                 date,
+                TaskActivityType.UPDATE_DESCRIPTION,
                 newDescription,
                 oldDescription,
-                TaskActivityType.UPDATE_DESCRIPTION,
             )
-        } returns mockk()
+        } returns activity
+        justRun { activityRepository.addTaskActivity(activity) }
 
         // when
         sut(taskId, newDescription, date)
@@ -112,7 +123,7 @@ class UpdateTaskDescriptionUseCaseTest {
         // then
         verify(exactly = 0) {
             taskRepository.saveTask(newTask)
-            updateTaskActivityUseCase(taskId, date, newDescription, oldDescription, TaskActivityType.UPDATE_DESCRIPTION)
+            activityRepository.addTaskActivity(activity)
         }
     }
 }

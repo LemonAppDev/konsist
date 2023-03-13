@@ -1,6 +1,9 @@
 package com.mango.domain.comment.usecase
 
-import com.mango.domain.activity.usecase.AddCommentActivityUseCase
+import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.CommentActivity
+import com.mango.domain.activity.CommentActivityFactory
+import com.mango.domain.activity.CommentActivityType
 import com.mango.domain.comment.CommentFactory
 import com.mango.domain.comment.CommentRepository
 import com.mango.domain.comment.model.Comment
@@ -17,18 +20,20 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class AddCommentUseCaseTest {
-    private val addCommentActivityUseCase: AddCommentActivityUseCase = mockk()
     private val checkTaskIdUseCase: CheckTaskIdUseCase = mockk()
     private val commentFactory: CommentFactory = mockk()
     private val commentRepository: CommentRepository = mockk()
     private val checkCommentTextUseCase: CheckCommentTextUseCase = mockk()
+    private val commentActivityFactory: CommentActivityFactory = mockk()
+    private val activityRepository: ActivityRepository = mockk()
 
     private val sut = AddCommentUseCase(
-        addCommentActivityUseCase,
         checkTaskIdUseCase,
         commentFactory,
         commentRepository,
         checkCommentTextUseCase,
+        commentActivityFactory,
+        activityRepository,
     )
 
     @Test
@@ -47,7 +52,9 @@ class AddCommentUseCaseTest {
         justRun { checkCommentTextUseCase(text) }
         every { commentFactory(taskId, text) } returns comment
         every { commentRepository.saveComment(comment) } returns comment
-        every { addCommentActivityUseCase(comment, date, text) } returns mockk()
+        val activity: CommentActivity = mockk()
+        every { commentActivityFactory(comment, date, CommentActivityType.ADD_COMMENT, text) } returns activity
+        justRun { activityRepository.addCommentActivity(activity) }
 
         // when
         sut(addCommentRequestModel)
@@ -57,7 +64,7 @@ class AddCommentUseCaseTest {
     }
 
     @Test
-    fun `calls addCommentActivityUseCase`() {
+    fun `adds activity to repository`() {
         // given
         val taskId = getTaskId1()
         val commentId = getCommentId1()
@@ -72,13 +79,15 @@ class AddCommentUseCaseTest {
         justRun { checkCommentTextUseCase(text) }
         every { commentFactory(taskId, text) } returns comment
         every { commentRepository.saveComment(comment) } returns comment
-        every { addCommentActivityUseCase(comment, date, text) } returns mockk()
+        val activity: CommentActivity = mockk()
+        every { commentActivityFactory(comment, date, CommentActivityType.ADD_COMMENT, text) } returns activity
+        justRun { activityRepository.addCommentActivity(activity) }
 
         // when
         sut(addCommentRequestModel)
 
         // then
-        verify { addCommentActivityUseCase(comment, date, text) }
+        verify { activityRepository.addCommentActivity(activity) }
     }
 
     @Test
@@ -97,7 +106,9 @@ class AddCommentUseCaseTest {
         justRun { checkCommentTextUseCase(text) }
         every { commentFactory(taskId, text) } returns comment
         every { commentRepository.saveComment(comment) } returns comment
-        every { addCommentActivityUseCase(comment, date, text) } returns mockk()
+        val activity: CommentActivity = mockk()
+        every { commentActivityFactory(comment, date, CommentActivityType.ADD_COMMENT, text) } returns activity
+        justRun { activityRepository.addCommentActivity(activity) }
 
         // when
         val actual = sut(addCommentRequestModel)

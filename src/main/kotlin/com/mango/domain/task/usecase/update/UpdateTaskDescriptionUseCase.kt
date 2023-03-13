@@ -1,7 +1,8 @@
 package com.mango.domain.task.usecase.update
 
+import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.TaskActivityType
-import com.mango.domain.activity.usecase.UpdateTaskActivityUseCase
 import com.mango.domain.task.TaskRepository
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
@@ -12,7 +13,9 @@ import java.time.LocalDateTime
 class UpdateTaskDescriptionUseCase(
     private val taskRepository: TaskRepository,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
-    private val updateTaskActivityUseCase: UpdateTaskActivityUseCase,
+    private val taskActivityFactory: TaskActivityFactory,
+    private val activityRepository: ActivityRepository,
+
 ) {
     operator fun invoke(taskId: TaskId, newDescription: String, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)
@@ -24,7 +27,14 @@ class UpdateTaskDescriptionUseCase(
 
             taskRepository.saveTask(newTask)
 
-            updateTaskActivityUseCase(newTask.value, date, newDescription, oldDescription, TaskActivityType.UPDATE_DESCRIPTION)
+            val activity = taskActivityFactory(
+                newTask.value,
+                date,
+                TaskActivityType.UPDATE_DESCRIPTION,
+                newDescription,
+                oldDescription,
+            )
+            activityRepository.addTaskActivity(activity)
         }
     }
 }

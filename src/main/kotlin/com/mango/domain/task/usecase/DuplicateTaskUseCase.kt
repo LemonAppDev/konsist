@@ -1,6 +1,8 @@
 package com.mango.domain.task.usecase
 
-import com.mango.domain.activity.usecase.CreateTaskActivityUseCase
+import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.TaskActivityFactory
+import com.mango.domain.activity.TaskActivityType
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
 import com.mango.domain.task.TaskRepository
@@ -14,7 +16,8 @@ class DuplicateTaskUseCase(
     private val uuidFactory: UUIDFactory,
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
-    private val createTaskActivityUseCase: CreateTaskActivityUseCase,
+    private val taskActivityFactory: TaskActivityFactory,
+    private val activityRepository: ActivityRepository,
 ) {
     operator fun invoke(taskId: TaskId): Task {
         val oldTask = getTaskOrThrowUseCase(taskId)
@@ -25,7 +28,8 @@ class DuplicateTaskUseCase(
 
         taskRepository.saveTask(newTask)
 
-        createTaskActivityUseCase(newTask.value, newTask.creationDate)
+        val activity = taskActivityFactory(newTask.value, newTask.creationDate, TaskActivityType.CREATE)
+        activityRepository.addTaskActivity(activity)
 
         return newTask
     }
