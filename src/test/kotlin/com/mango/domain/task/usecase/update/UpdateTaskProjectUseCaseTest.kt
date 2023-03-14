@@ -2,7 +2,10 @@ package com.mango.domain.task.usecase.update
 
 import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
+import com.mango.domain.activity.ProjectActivityFactory
 import com.mango.domain.activity.TaskActivityFactory
+import com.mango.domain.activity.model.ProjectActivity
+import com.mango.domain.activity.model.ProjectActivityType.TASK_ADDED
 import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityType.UPDATE_PROJECT
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
@@ -22,6 +25,7 @@ class UpdateTaskProjectUseCaseTest {
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase = mockk()
     private val taskActivityFactory: TaskActivityFactory = mockk()
+    private val projectActivityFactory: ProjectActivityFactory = mockk()
     private val activityRepository: ActivityRepository = mockk()
 
     private val sut = UpdateTaskProjectUseCase(
@@ -29,6 +33,7 @@ class UpdateTaskProjectUseCaseTest {
         getTaskOrThrowUseCase,
         getProjectOrThrowUseCase,
         taskActivityFactory,
+        projectActivityFactory,
         activityRepository,
     )
 
@@ -56,6 +61,9 @@ class UpdateTaskProjectUseCaseTest {
             )
         } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
+        val projectActivity: ProjectActivity = mockk()
+        every { projectActivityFactory(newProjectId, date, TASK_ADDED) } returns projectActivity
+        every { activityRepository.addProjectActivity(projectActivity) } returns mockk()
 
         // when
         sut(taskId, newProjectId, date)
@@ -65,7 +73,7 @@ class UpdateTaskProjectUseCaseTest {
     }
 
     @Test
-    fun `add activity to repository`() {
+    fun `add task create activity to repository`() {
         // given
         val taskId = getTaskId1()
         val oldProjectId = getProjectId1()
@@ -88,12 +96,50 @@ class UpdateTaskProjectUseCaseTest {
             )
         } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
+        val projectActivity: ProjectActivity = mockk()
+        every { projectActivityFactory(newProjectId, date, TASK_ADDED) } returns projectActivity
+        every { activityRepository.addProjectActivity(projectActivity) } returns mockk()
 
         // when
         sut(taskId, newProjectId, date)
 
         // then
         verify { activityRepository.addTaskActivity(activity) }
+    }
+
+    @Test
+    fun `add project task_added activity to repository`() {
+        // given
+        val taskId = getTaskId1()
+        val oldProjectId = getProjectId1()
+        val newProjectId = getProjectId2()
+        val date: LocalDateTime = mockk()
+
+        val oldTask = getTask(id = taskId, projectId = oldProjectId)
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
+        every { getProjectOrThrowUseCase(newProjectId) } returns mockk()
+        val newTask = oldTask.copy(projectId = newProjectId)
+        every { taskRepository.saveTask(newTask) } returns mockk()
+        val activity: TaskActivity = mockk()
+        every {
+            taskActivityFactory(
+                taskId,
+                date,
+                UPDATE_PROJECT,
+                newProjectId.value.toString(),
+                oldProjectId.value.toString(),
+            )
+        } returns activity
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        val projectActivity: ProjectActivity = mockk()
+        every { projectActivityFactory(newProjectId, date, TASK_ADDED) } returns projectActivity
+        every { activityRepository.addProjectActivity(projectActivity) } returns mockk()
+
+        // when
+        sut(taskId, newProjectId, date)
+
+        // then
+        verify { activityRepository.addProjectActivity(projectActivity) }
     }
 
     @Test

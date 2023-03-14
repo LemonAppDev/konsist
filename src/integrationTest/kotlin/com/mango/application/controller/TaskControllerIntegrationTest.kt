@@ -1,5 +1,6 @@
 package com.mango.application.controller
 
+import com.mango.domain.activity.model.ProjectActivityType
 import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityType.CREATE
 import com.mango.domain.activity.model.TaskActivityType.UPDATE_ASSIGNEE
@@ -67,7 +68,7 @@ class TaskControllerTest {
     }
 
     @Test
-    fun `create endpoint return error when parent task and task is not in the same project`() {
+    fun `create endpoint returns error when parent task and task is not in the same project`() {
         // given
         val project1 = projectEndpointHelper.callCreateEndpoint()
         val project2 = projectEndpointHelper.callCreateEndpoint()
@@ -84,6 +85,22 @@ class TaskControllerTest {
 
         // then
         actual shouldThrow RuntimeException::class
+    }
+
+    @Test
+    fun `create endpoint adds task_added project activity when project is provided`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint()
+
+        // when
+        taskEndpointHelper.callCreateEndpoint(name = "task", projectId = project.id)
+
+        // then
+        val actual = projectEndpointHelper
+            .callGetProjectActivitiesEndPoint(project.id)
+            .map { it.type }
+
+        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, ProjectActivityType.TASK_ADDED)
     }
 
     @Test
@@ -169,7 +186,27 @@ class TaskControllerTest {
     }
 
     @Test
-    fun `update endpoint return error when parent task and task is not in the same project`() {
+    fun `update endpoint adds task_added project activity when project is changed`() {
+        // given
+        val oldProject = projectEndpointHelper.callCreateEndpoint()
+        val newProject = projectEndpointHelper.callCreateEndpoint()
+        val task = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id)
+
+        // when
+        taskEndpointHelper.callUpdateEndpoint(
+            UpdateTaskRequestModel(
+                taskId = task.id,
+                projectId = newProject.id,
+            ),
+        )
+
+        // then
+        val actual = projectEndpointHelper.callGetProjectActivitiesEndPoint(newProject.id).map { it.type }
+        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, ProjectActivityType.TASK_ADDED)
+    }
+
+    @Test
+    fun `update endpoint returns error when parent task and task is not in the same project`() {
         // given
         val project1 = projectEndpointHelper.callCreateEndpoint()
         val project2 = projectEndpointHelper.callCreateEndpoint()
@@ -210,6 +247,37 @@ class TaskControllerTest {
 
         // then
         actual shouldBeEqualTo listOf(task1, task2)
+    }
+
+    @Test
+    fun `duplicate endpoint adds create task activity`() {
+        // given
+        val task1 = taskEndpointHelper.callCreateEndpoint()
+
+        // when
+        val task2 = taskEndpointHelper.callDuplicateEndpoint(task1.id)
+
+        // then
+        val actual = taskEndpointHelper
+            .callGetTaskActivitiesEndPoint(task2.id)
+            .map { it.type }
+        actual shouldBeEqualTo listOf(CREATE)
+    }
+
+    @Test
+    fun `duplicate endpoint adds task_added project activity when project is provided`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint()
+        val task = taskEndpointHelper.callCreateEndpoint(projectId = project.id)
+
+        // when
+        taskEndpointHelper.callDuplicateEndpoint(task.id)
+
+        // then
+        val actual = projectEndpointHelper
+            .callGetProjectActivitiesEndPoint(project.id)
+            .map { it.type }
+        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, ProjectActivityType.TASK_ADDED, ProjectActivityType.TASK_ADDED)
     }
 
     @Test
@@ -337,7 +405,8 @@ class TaskControllerTest {
         val task = taskEndpointHelper.callCreateEndpoint()
 
         // when
-        val actual = taskEndpointHelper.callGetTaskActivitiesEndPoint(task.id)
+        val actual = taskEndpointHelper
+            .callGetTaskActivitiesEndPoint(task.id)
             .map { it.type }
 
         // then
@@ -367,7 +436,8 @@ class TaskControllerTest {
         )
 
         // when
-        val actual = taskEndpointHelper.callGetTaskActivitiesEndPoint(task.id)
+        val actual = taskEndpointHelper
+            .callGetTaskActivitiesEndPoint(task.id)
             .map { it.type }
 
         // then
