@@ -53,18 +53,18 @@ class ProjectControllerTest {
     }
 
     @Test
-    fun `delete endpoint deletes project tasks`() {
+    fun `delete endpoint deletes all tasks from project`() {
         // given
         val project = projectEndpointHelper.callCreateEndpoint()
         taskEndpointHelper.callCreateEndpoint(projectId = project.id)
-        val task = taskEndpointHelper.callCreateEndpoint()
+        val otherTask = taskEndpointHelper.callCreateEndpoint()
         projectEndpointHelper.callDeleteEndpoint(project.id)
 
         // when
         val actual = taskEndpointHelper.callAllEndpoint()
 
         // then
-        actual shouldBeEqualTo listOf(task)
+        actual shouldBeEqualTo listOf(otherTask)
     }
 
     @Test

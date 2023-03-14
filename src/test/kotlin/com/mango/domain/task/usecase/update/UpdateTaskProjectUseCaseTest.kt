@@ -12,11 +12,15 @@ import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.BusinessTestModel.getProjectId2
 import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
+import com.mango.domain.common.model.BusinessTestModel.getTaskId2
+import com.mango.domain.common.model.BusinessTestModel.getTaskId3
 import com.mango.domain.project.usecase.GetProjectOrThrowUseCase
+import com.mango.domain.task.model.Task
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import io.mockk.verifyOrder
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -49,6 +53,7 @@ class UpdateTaskProjectUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         every { getProjectOrThrowUseCase(newProjectId) } returns mockk()
         val newTask = oldTask.copy(projectId = newProjectId)
+        every { taskRepository.tasks } returns mockk(relaxed = true)
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
         every {
@@ -73,7 +78,7 @@ class UpdateTaskProjectUseCaseTest {
     }
 
     @Test
-    fun `add task create activity to repository`() {
+    fun `adds child tasks with changed projectId to repository`() {
         // given
         val taskId = getTaskId1()
         val oldProjectId = getProjectId1()
@@ -84,16 +89,32 @@ class UpdateTaskProjectUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         every { getProjectOrThrowUseCase(newProjectId) } returns mockk()
         val newTask = oldTask.copy(projectId = newProjectId)
+        every { taskRepository.tasks } returns mockk(relaxed = true)
         every { taskRepository.saveTask(newTask) } returns mockk()
+
+        val task1: Task = mockk()
+        val id1 = getTaskId2()
+        every { task1.id } returns id1
+        every { task1.parentTaskId } returns taskId
+        val task2: Task = mockk()
+        val id2 = getTaskId3()
+        every { task2.id } returns id2
+        every { task2.parentTaskId } returns taskId
+        every { taskRepository.tasks } returns listOf(task1, task2)
+        every { task1.copy(projectId = newProjectId) } returns task1
+        every { taskRepository.saveTask(task1) } returns mockk()
+        every { task2.copy(projectId = newProjectId) } returns task2
+        every { taskRepository.saveTask(task2) } returns mockk()
+
         val activity: TaskActivity = mockk()
         every {
-            taskActivityFactory(
-                taskId,
-                date,
-                UPDATE_PROJECT,
-                newProjectId.value.toString(),
-                oldProjectId.value.toString(),
-            )
+            taskActivityFactory(taskId, date, UPDATE_PROJECT, newProjectId.value.toString(), oldProjectId.value.toString())
+        } returns activity
+        every {
+            taskActivityFactory(id1, date, UPDATE_PROJECT, newProjectId.value.toString(), oldProjectId.value.toString())
+        } returns activity
+        every {
+            taskActivityFactory(id2, date, UPDATE_PROJECT, newProjectId.value.toString(), oldProjectId.value.toString())
         } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
         val projectActivity: ProjectActivity = mockk()
@@ -104,7 +125,10 @@ class UpdateTaskProjectUseCaseTest {
         sut(taskId, newProjectId, date)
 
         // then
-        verify { activityRepository.addTaskActivity(activity) }
+        verifyOrder {
+            taskRepository.saveTask(task1)
+            taskRepository.saveTask(task2)
+        }
     }
 
     @Test
@@ -119,6 +143,7 @@ class UpdateTaskProjectUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         every { getProjectOrThrowUseCase(newProjectId) } returns mockk()
         val newTask = oldTask.copy(projectId = newProjectId)
+        every { taskRepository.tasks } returns mockk(relaxed = true)
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
         every {
@@ -143,6 +168,57 @@ class UpdateTaskProjectUseCaseTest {
     }
 
     @Test
+    fun `add three update activities to repository`() {
+        // given
+        val taskId = getTaskId1()
+        val oldProjectId = getProjectId1()
+        val newProjectId = getProjectId2()
+        val date: LocalDateTime = mockk()
+
+        val oldTask = getTask(id = taskId, projectId = oldProjectId)
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
+        every { getProjectOrThrowUseCase(newProjectId) } returns mockk()
+        val newTask = oldTask.copy(projectId = newProjectId)
+        every { taskRepository.tasks } returns mockk(relaxed = true)
+        every { taskRepository.saveTask(newTask) } returns mockk()
+
+        val task1: Task = mockk()
+        val id1 = getTaskId2()
+        every { task1.id } returns id1
+        every { task1.parentTaskId } returns taskId
+        val task2: Task = mockk()
+        val id2 = getTaskId3()
+        every { task2.id } returns id2
+        every { task2.parentTaskId } returns taskId
+        every { taskRepository.tasks } returns listOf(task1, task2)
+        every { task1.copy(projectId = newProjectId) } returns task1
+        every { taskRepository.saveTask(task1) } returns mockk()
+        every { task2.copy(projectId = newProjectId) } returns task2
+        every { taskRepository.saveTask(task2) } returns mockk()
+
+        val activity: TaskActivity = mockk()
+        every {
+            taskActivityFactory(taskId, date, UPDATE_PROJECT, newProjectId.value.toString(), oldProjectId.value.toString())
+        } returns activity
+        every {
+            taskActivityFactory(id1, date, UPDATE_PROJECT, newProjectId.value.toString(), oldProjectId.value.toString())
+        } returns activity
+        every {
+            taskActivityFactory(id2, date, UPDATE_PROJECT, newProjectId.value.toString(), oldProjectId.value.toString())
+        } returns activity
+        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        val projectActivity: ProjectActivity = mockk()
+        every { projectActivityFactory(newProjectId, date, TASK_ADDED) } returns projectActivity
+        every { activityRepository.addProjectActivity(projectActivity) } returns mockk()
+
+        // when
+        sut(taskId, newProjectId, date)
+
+        // then
+        verify(exactly = 3) { activityRepository.addTaskActivity(activity) }
+    }
+
+    @Test
     fun `do nothing when old value is the same as new value`() {
         // given
         val taskId = getTaskId1()
@@ -154,18 +230,7 @@ class UpdateTaskProjectUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         every { getProjectOrThrowUseCase(newProjectId) } returns mockk()
         val newTask = oldTask.copy(projectId = newProjectId)
-        every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
-        every {
-            taskActivityFactory(
-                taskId,
-                date,
-                UPDATE_PROJECT,
-                newProjectId.value.toString(),
-                oldProjectId.value.toString(),
-            )
-        } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
         sut(taskId, newProjectId, date)

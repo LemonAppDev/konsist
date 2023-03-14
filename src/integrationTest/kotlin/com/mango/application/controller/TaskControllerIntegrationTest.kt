@@ -26,6 +26,7 @@ import com.mango.domain.user.model.UserId
 import com.mango.util.ControllerEndpointCaller
 import com.mango.util.Json.serialize
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -183,6 +184,33 @@ class TaskControllerTest {
         // then
         val expected = taskEndpointHelper.callGetEndpoint(task.id)
         actual shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `update endpoint updates project in all subtasks`() {
+        // given
+        val oldProject = projectEndpointHelper.callCreateEndpoint()
+        val newProject = projectEndpointHelper.callCreateEndpoint()
+        val parentTask = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id)
+        val childTask1 = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id, parentTaskId = parentTask.id)
+        val childTask2 = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id, parentTaskId = parentTask.id)
+
+        // when
+        taskEndpointHelper.callUpdateEndpoint(
+            UpdateTaskRequestModel(
+                taskId = parentTask.id,
+                projectId = newProject.id,
+                isCompleted = true,
+            ),
+        )
+
+        // then
+        val updatedParentTask = taskEndpointHelper.callGetEndpoint(parentTask.id)
+        val updatedChildTask1 = taskEndpointHelper.callGetEndpoint(childTask1.id)
+        val updatedChildTask2 = taskEndpointHelper.callGetEndpoint(childTask2.id)
+        val actual = taskEndpointHelper.callAllEndpoint()
+            .filter { it.projectId == newProject.id }
+        actual shouldBeEqualTo listOf(updatedParentTask, updatedChildTask1, updatedChildTask2)
     }
 
     @Test
@@ -453,6 +481,36 @@ class TaskControllerTest {
             UPDATE_ASSIGNEE,
             UPDATE_COMPLETE_DATE,
         )
+    }
+
+    @Test
+    fun `task activities endpoint contains update project activity after project updating by its parent task`() {
+        // given
+        val oldProject = projectEndpointHelper.callCreateEndpoint()
+        val newProject = projectEndpointHelper.callCreateEndpoint()
+        val parentTask = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id)
+        val task = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id, parentTaskId = parentTask.id)
+        taskEndpointHelper.callUpdateEndpoint(
+            UpdateTaskRequestModel(
+                taskId = parentTask.id,
+                projectId = newProject.id,
+            ),
+        )
+
+        // when
+        taskEndpointHelper.callUpdateEndpoint(
+            UpdateTaskRequestModel(
+                taskId = parentTask.id,
+                projectId = newProject.id,
+            ),
+        )
+
+        // then
+        val actual = taskEndpointHelper
+            .callGetTaskActivitiesEndPoint(task.id)
+            .map { it.type }
+
+        actual shouldContain UPDATE_PROJECT
     }
 }
 

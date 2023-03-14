@@ -42,6 +42,21 @@ class UpdateTaskProjectUseCase(
             )
             activityRepository.addTaskActivity(activity)
 
+            taskRepository.tasks
+                .filter { it.parentTaskId == taskId }
+                .forEach {
+                    taskRepository.saveTask(it.copy(projectId = newProjectId))
+
+                    val childTaskActivity = taskActivityFactory(
+                        it.id,
+                        date,
+                        TaskActivityType.UPDATE_PROJECT,
+                        newProjectId.value.toString(),
+                        oldProjectId?.value.toString(),
+                    )
+                    activityRepository.addTaskActivity(childTaskActivity)
+                }
+
             val projectActivity = projectActivityFactory(newProjectId, date, ProjectActivityType.TASK_ADDED)
             activityRepository.addProjectActivity(projectActivity)
         }
