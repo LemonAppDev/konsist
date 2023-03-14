@@ -4,7 +4,7 @@ import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.TaskActivity
-import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType.CREATE
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
@@ -51,7 +51,7 @@ class DuplicateTaskUseCaseTest {
         every { oldTask.copy(newTaskId, creationDate = date) } returns newTask
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
-        every { taskActivityFactory(newTaskId, date, TaskActivityType.CREATE) } returns activity
+        every { taskActivityFactory(newTaskId, date, CREATE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
@@ -79,7 +79,7 @@ class DuplicateTaskUseCaseTest {
         every { oldTask.copy(newTaskId) } returns newTask
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
-        every { taskActivityFactory(newTaskId, date, TaskActivityType.CREATE) } returns activity
+        every { taskActivityFactory(newTaskId, date, CREATE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
@@ -107,7 +107,7 @@ class DuplicateTaskUseCaseTest {
         every { oldTask.copy(newTaskId) } returns newTask
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
-        every { taskActivityFactory(newTaskId, date, TaskActivityType.CREATE) } returns activity
+        every { taskActivityFactory(newTaskId, date, CREATE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when

@@ -4,7 +4,10 @@ import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.TaskActivity
-import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_TARGET_DATE
+import com.mango.domain.common.model.BusinessTestModel.getCurrentDate
+import com.mango.domain.common.model.BusinessTestModel.getFutureDate1
+import com.mango.domain.common.model.BusinessTestModel.getFutureDate2
 import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.usecase.RequireDateIsNowOrLaterUseCase
@@ -14,8 +17,6 @@ import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
-import java.time.LocalDateTime
-import java.time.Month
 
 class UpdateTaskTargetDateUseCaseTest {
     private val taskRepository: TaskRepositoryImpl = mockk()
@@ -36,9 +37,9 @@ class UpdateTaskTargetDateUseCaseTest {
     fun `add task to repository if new target date is in the future`() {
         // given
         val taskId = getTaskId1()
-        val oldTargetDate: LocalDateTime = mockk()
-        val newTargetDate = LocalDateTime.of(2023, Month.MARCH, 30, 21, 0, 0, 0)
-        val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
+        val oldTargetDate = getFutureDate1()
+        val newTargetDate = getFutureDate2()
+        val date = getCurrentDate()
         justRun { requireDateIsNowOrLaterUseCase(newTargetDate) }
 
         val oldTask = getTask(id = taskId, targetDate = oldTargetDate)
@@ -50,7 +51,7 @@ class UpdateTaskTargetDateUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_TARGET_DATE,
+                UPDATE_TARGET_DATE,
                 newTargetDate.toString(),
                 oldTargetDate.toString(),
             )
@@ -68,9 +69,9 @@ class UpdateTaskTargetDateUseCaseTest {
     fun `add activity to repository if new target date is in the future`() {
         // given
         val taskId = getTaskId1()
-        val oldTargetDate: LocalDateTime = mockk()
-        val newTargetDate = LocalDateTime.of(2023, Month.MARCH, 30, 21, 0, 0, 0)
-        val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
+        val oldTargetDate = getFutureDate1()
+        val newTargetDate = getFutureDate2()
+        val date = getCurrentDate()
         justRun { requireDateIsNowOrLaterUseCase(newTargetDate) }
 
         val oldTask = getTask(id = taskId, targetDate = oldTargetDate)
@@ -82,7 +83,7 @@ class UpdateTaskTargetDateUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_TARGET_DATE,
+                UPDATE_TARGET_DATE,
                 newTargetDate.toString(),
                 oldTargetDate.toString(),
             )
@@ -100,9 +101,9 @@ class UpdateTaskTargetDateUseCaseTest {
     fun `do nothing when old value is the same as new value`() {
         // given
         val taskId = getTaskId1()
-        val oldTargetDate: LocalDateTime = LocalDateTime.of(2023, Month.MARCH, 20, 21, 0, 0, 0)
-        val newTargetDate = LocalDateTime.of(2023, Month.MARCH, 20, 21, 0, 0, 0)
-        val date = LocalDateTime.of(2023, Month.MARCH, 1, 21, 0, 0, 0)
+        val oldTargetDate = getFutureDate1()
+        val newTargetDate = getFutureDate1()
+        val date = getCurrentDate()
         justRun { requireDateIsNowOrLaterUseCase(newTargetDate) }
 
         val oldTask = getTask(id = taskId, targetDate = oldTargetDate)
@@ -114,7 +115,7 @@ class UpdateTaskTargetDateUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_TARGET_DATE,
+                UPDATE_TARGET_DATE,
                 newTargetDate.toString(),
                 oldTargetDate.toString(),
             )

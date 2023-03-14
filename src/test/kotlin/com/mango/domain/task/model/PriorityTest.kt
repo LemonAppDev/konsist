@@ -1,5 +1,10 @@
 package com.mango.domain.task.model
 
+import com.mango.domain.task.model.Priority.PRIORITY_1
+import com.mango.domain.task.model.Priority.PRIORITY_2
+import com.mango.domain.task.model.Priority.PRIORITY_3
+import com.mango.domain.task.model.Priority.PRIORITY_4
+import com.mango.domain.task.model.Priority.PRIORITY_5
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -26,11 +31,11 @@ class PriorityTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments(1, Priority.PRIORITY_1),
-            arguments(2, Priority.PRIORITY_2),
-            arguments(3, Priority.PRIORITY_3),
-            arguments(4, Priority.PRIORITY_4),
-            arguments(5, Priority.PRIORITY_5),
+            arguments(1, PRIORITY_1),
+            arguments(2, PRIORITY_2),
+            arguments(3, PRIORITY_3),
+            arguments(4, PRIORITY_4),
+            arguments(5, PRIORITY_5),
         )
     }
 

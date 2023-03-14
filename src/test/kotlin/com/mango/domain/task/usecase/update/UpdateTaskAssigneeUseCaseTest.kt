@@ -4,7 +4,7 @@ import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.TaskActivity
-import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_ASSIGNEE
 import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getUserId1
@@ -51,7 +51,7 @@ class UpdateTaskAssigneeUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_ASSIGNEE,
+                UPDATE_ASSIGNEE,
                 newAssigneeId.value.toString(),
                 oldAssigneeId.value.toString(),
             )
@@ -83,7 +83,7 @@ class UpdateTaskAssigneeUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_ASSIGNEE,
+                UPDATE_ASSIGNEE,
                 newAssigneeId.value.toString(),
                 oldAssigneeId.value.toString(),
             )
@@ -115,7 +115,7 @@ class UpdateTaskAssigneeUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_ASSIGNEE,
+                UPDATE_ASSIGNEE,
                 newAssigneeId.value.toString(),
                 oldAssigneeId.value.toString(),
             )

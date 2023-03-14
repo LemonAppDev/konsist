@@ -1,7 +1,6 @@
 package com.mango.application.controller
 
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
-import com.mango.domain.project.model.ProjectId
 import com.mango.domain.project.model.request.CreateProjectRequestModel
 import com.mango.domain.project.usecase.CreateProjectUseCase
 import com.mango.domain.project.usecase.DeleteProjectUseCase
@@ -12,7 +11,6 @@ import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
-import java.util.UUID
 
 class ProjectControllerTest {
     private val createProjectUseCase: CreateProjectUseCase = mockk()
@@ -43,7 +41,7 @@ class ProjectControllerTest {
     @Test
     fun `deleteProject() calls deleteProjectUseCase()`() {
         // given
-        val projectId = ProjectId(UUID.fromString("00000000-0000-0000-0000-000000000000"))
+        val projectId = getProjectId1()
         justRun { deleteProjectUseCase(projectId) }
 
         // when

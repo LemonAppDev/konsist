@@ -4,7 +4,7 @@ import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.TaskActivity
-import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_DESCRIPTION
 import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
@@ -45,7 +45,7 @@ class UpdateTaskDescriptionUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_DESCRIPTION,
+                UPDATE_DESCRIPTION,
                 newDescription,
                 oldDescription,
             )
@@ -77,7 +77,7 @@ class UpdateTaskDescriptionUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_DESCRIPTION,
+                UPDATE_DESCRIPTION,
                 newDescription,
                 oldDescription,
             )
@@ -109,7 +109,7 @@ class UpdateTaskDescriptionUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_DESCRIPTION,
+                UPDATE_DESCRIPTION,
                 newDescription,
                 oldDescription,
             )

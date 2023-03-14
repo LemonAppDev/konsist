@@ -4,7 +4,7 @@ import com.mango.data.comment.CommentRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.CommentActivityFactory
 import com.mango.domain.activity.model.CommentActivity
-import com.mango.domain.activity.model.CommentActivityType
+import com.mango.domain.activity.model.CommentActivityType.UPDATE_COMMENT
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.comment.model.request.UpdateCommentRequestModel
 import com.mango.domain.common.LocalDateTimeFactory
@@ -48,7 +48,7 @@ class UpdateCommentUseCaseTest {
         every { localDateTimeFactory() } returns date
         every { commentRepository.saveComment(newComment) } returns mockk()
         val activity: CommentActivity = mockk()
-        every { commentActivityFactory(newComment, date, CommentActivityType.UPDATE_COMMENT, newText, oldText) } returns activity
+        every { commentActivityFactory(newComment, date, UPDATE_COMMENT, newText, oldText) } returns activity
         every { activityRepository.addCommentActivity(activity) } returns mockk()
 
         // when
@@ -76,7 +76,7 @@ class UpdateCommentUseCaseTest {
         every { localDateTimeFactory() } returns date
         every { commentRepository.saveComment(newComment) } returns mockk()
         val activity: CommentActivity = mockk()
-        every { commentActivityFactory(newComment, date, CommentActivityType.UPDATE_COMMENT, newText, oldText) } returns activity
+        every { commentActivityFactory(newComment, date, UPDATE_COMMENT, newText, oldText) } returns activity
         every { activityRepository.addCommentActivity(activity) } returns mockk()
 
         // when

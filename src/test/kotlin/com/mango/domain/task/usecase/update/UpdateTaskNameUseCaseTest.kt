@@ -4,7 +4,7 @@ import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.TaskActivity
-import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_NAME
 import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
@@ -40,7 +40,7 @@ class UpdateTaskNameUseCaseTest {
         val newTask = oldTask.copy(name = newName)
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
-        every { taskActivityFactory(taskId, date, TaskActivityType.UPDATE_NAME, newName, oldName) } returns activity
+        every { taskActivityFactory(taskId, date, UPDATE_NAME, newName, oldName) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
@@ -63,7 +63,7 @@ class UpdateTaskNameUseCaseTest {
         val newTask = oldTask.copy(name = newName)
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
-        every { taskActivityFactory(taskId, date, TaskActivityType.UPDATE_NAME, newName, oldName) } returns activity
+        every { taskActivityFactory(taskId, date, UPDATE_NAME, newName, oldName) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
@@ -86,7 +86,7 @@ class UpdateTaskNameUseCaseTest {
         val newTask = oldTask.copy(name = newName)
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
-        every { taskActivityFactory(taskId, date, TaskActivityType.UPDATE_NAME, newName, oldName) } returns activity
+        every { taskActivityFactory(taskId, date, UPDATE_NAME, newName, oldName) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when

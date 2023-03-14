@@ -4,7 +4,7 @@ import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.TaskActivity
-import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType.DELETE
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.task.model.Task
@@ -39,7 +39,7 @@ class DeleteTaskUseCaseTest {
         every { taskRepository.getTask(taskId) } returns task
         justRun { taskRepository.deleteTask(task) }
         val activity: TaskActivity = mockk()
-        every { taskActivityFactory(taskId, date, TaskActivityType.DELETE) } returns activity
+        every { taskActivityFactory(taskId, date, DELETE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
@@ -60,7 +60,7 @@ class DeleteTaskUseCaseTest {
         every { taskRepository.getTask(taskId) } returns task
         justRun { taskRepository.deleteTask(task) }
         val activity: TaskActivity = mockk()
-        every { taskActivityFactory(taskId, date, TaskActivityType.DELETE) } returns activity
+        every { taskActivityFactory(taskId, date, DELETE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when

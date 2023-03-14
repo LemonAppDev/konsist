@@ -1,6 +1,7 @@
 package com.mango.domain.activity.model
 
 import com.mango.domain.activity.model.ProjectActivityType.CREATE
+import com.mango.domain.activity.model.ProjectActivityType.Companion.getByValue
 import com.mango.domain.activity.model.ProjectActivityType.DELETE
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
@@ -18,7 +19,7 @@ class ProjectActivityTypeTest {
         projectActivityType: ProjectActivityType,
     ) {
         // when
-        val actual = ProjectActivityType.getByValue(value)
+        val actual = getByValue(value)
 
         // then
         actual shouldBeEqualTo projectActivityType
@@ -39,7 +40,7 @@ class ProjectActivityTypeTest {
         val value = "incorrectValue"
 
         // when
-        val actual = { ProjectActivityType.getByValue(value) }
+        val actual = { getByValue(value) }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Invalid project activity type value: $value "

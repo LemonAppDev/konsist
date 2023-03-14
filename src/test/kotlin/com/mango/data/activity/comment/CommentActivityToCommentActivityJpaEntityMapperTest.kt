@@ -1,7 +1,7 @@
 package com.mango.data.activity.comment
 
 import com.mango.domain.activity.model.CommentActivity
-import com.mango.domain.activity.model.CommentActivityType
+import com.mango.domain.activity.model.CommentActivityType.ADD_COMMENT
 import com.mango.domain.common.model.BusinessTestModel.getCommentActivityId1
 import com.mango.domain.common.model.BusinessTestModel.getCommentId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
@@ -19,7 +19,7 @@ class CommentActivityToCommentActivityJpaEntityMapperTest {
         // given
         val id = getCommentActivityId1()
         val ownerId = getUserId1()
-        val type = CommentActivityType.ADD_COMMENT
+        val type = ADD_COMMENT
         val commentId = getCommentId1()
         val taskId = getTaskId1()
         val date: LocalDateTime = mockk()

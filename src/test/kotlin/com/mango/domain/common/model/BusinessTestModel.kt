@@ -9,6 +9,7 @@ import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.user.model.UserId
 import java.time.LocalDateTime
+import java.time.Month
 import java.util.UUID
 
 @Suppress("LongParameterList")
@@ -63,4 +64,9 @@ object BusinessTestModel {
     fun getCommentActivityId1() = CommentActivityId(UUID.fromString("dbf93f46-ea98-4cfe-bb40-efb08c8da433"))
     fun getProjectActivityId1() = ProjectActivityId(UUID.fromString("f35e5fb9-5f99-4ddb-93b5-f7c0ed9d59a7"))
     fun getTaskActivityId1() = TaskActivityId(UUID.fromString("526b54fc-66e2-4363-b27b-3c44f08deb8c"))
+
+    fun getCurrentDate(): LocalDateTime = LocalDateTime.of(2023, Month.MARCH, 1, 10, 0, 0)
+    fun getFutureDate1(): LocalDateTime = LocalDateTime.of(2023, Month.MARCH, 2, 10, 0, 0)
+    fun getFutureDate2(): LocalDateTime = LocalDateTime.of(2023, Month.MARCH, 3, 10, 0, 0)
+    fun getPastDate(): LocalDateTime = LocalDateTime.of(2023, Month.FEBRUARY, 1, 10, 0, 0)
 }

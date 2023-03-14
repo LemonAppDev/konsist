@@ -1,6 +1,7 @@
 package com.mango.domain.activity.model
 
 import com.mango.domain.activity.model.TaskActivityType.CREATE
+import com.mango.domain.activity.model.TaskActivityType.Companion.getByValue
 import com.mango.domain.activity.model.TaskActivityType.DELETE
 import com.mango.domain.activity.model.TaskActivityType.UPDATE_ASSIGNEE
 import com.mango.domain.activity.model.TaskActivityType.UPDATE_COMPLETE_DATE
@@ -27,7 +28,7 @@ class TaskActivityTypeTest {
         taskActivityType: TaskActivityType,
     ) {
         // when
-        val actual = TaskActivityType.getByValue(value)
+        val actual = getByValue(value)
 
         // then
         actual shouldBeEqualTo taskActivityType
@@ -57,7 +58,7 @@ class TaskActivityTypeTest {
         val value = "incorrectValue"
 
         // when
-        val actual = { TaskActivityType.getByValue(value) }
+        val actual = { getByValue(value) }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Invalid task activity type value: $value "

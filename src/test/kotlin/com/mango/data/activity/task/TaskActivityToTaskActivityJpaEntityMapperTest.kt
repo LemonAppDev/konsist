@@ -1,7 +1,7 @@
 package com.mango.data.activity.task
 
 import com.mango.domain.activity.model.TaskActivity
-import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType.CREATE
 import com.mango.domain.common.model.BusinessTestModel.getTaskActivityId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getUserId1
@@ -18,7 +18,7 @@ class TaskActivityToTaskActivityJpaEntityMapperTest {
         // given
         val id = getTaskActivityId1()
         val userId = getUserId1()
-        val type = TaskActivityType.CREATE
+        val type = CREATE
         val taskId = getTaskId1()
         val date: LocalDateTime = mockk()
         val newValue = "newValue"

@@ -1,16 +1,19 @@
 package com.mango.data.task
 
+import com.mango.domain.common.model.BusinessTestModel.getCurrentDate
+import com.mango.domain.common.model.BusinessTestModel.getFutureDate1
+import com.mango.domain.common.model.BusinessTestModel.getFutureDate2
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId2
 import com.mango.domain.common.model.BusinessTestModel.getUserId1
 import com.mango.domain.common.model.BusinessTestModel.getUserId2
+import com.mango.domain.task.model.Priority.PRIORITY_1
 import com.mango.domain.task.model.Task
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
-import java.time.Month
 
 class TaskToTaskJpaEntityMapperTest {
     private val sut = TaskToTaskJpaEntityMapper()
@@ -21,12 +24,12 @@ class TaskToTaskJpaEntityMapperTest {
         val taskId = getTaskId1()
         val name = "name"
         val ownerId = getUserId1()
-        val creationDate = LocalDateTime.of(2023, Month.MARCH, 1, 10, 0, 0)
+        val creationDate = getCurrentDate()
         val projectId = getProjectId1()
         val description = "description"
-        val dueDate = LocalDateTime.of(2023, Month.MARCH, 2, 10, 0, 0)
-        val targetDate = LocalDateTime.of(2023, Month.MARCH, 3, 10, 0, 0)
-        val priority = com.mango.domain.task.model.Priority.PRIORITY_1
+        val dueDate = getFutureDate1()
+        val targetDate = getFutureDate2()
+        val priority = PRIORITY_1
         val parentTaskId = getTaskId2()
         val assigneeId = getUserId2()
         val completeDate: LocalDateTime = mockk()

@@ -1,7 +1,7 @@
 package com.mango.data.activity.project
 
 import com.mango.domain.activity.model.ProjectActivity
-import com.mango.domain.activity.model.ProjectActivityType
+import com.mango.domain.activity.model.ProjectActivityType.CREATE
 import com.mango.domain.common.model.BusinessTestModel.getProjectActivityId1
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.BusinessTestModel.getUserId1
@@ -18,7 +18,7 @@ class ProjectActivityToProjectActivityJpaEntityMapperTest {
         // given
         val id = getProjectActivityId1()
         val userId = getUserId1()
-        val type = ProjectActivityType.CREATE
+        val type = CREATE
         val projectId = getProjectId1()
         val date: LocalDateTime = mockk()
 

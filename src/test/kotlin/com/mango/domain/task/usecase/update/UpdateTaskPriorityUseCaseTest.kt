@@ -4,9 +4,11 @@ import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.TaskActivity
-import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_PRIORITY
 import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
+import com.mango.domain.task.model.Priority
+import com.mango.domain.task.model.Priority.PRIORITY_1
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import io.mockk.every
 import io.mockk.mockk
@@ -31,8 +33,8 @@ class UpdateTaskPriorityUseCaseTest {
     fun `add task to repository`() {
         // given
         val taskId = getTaskId1()
-        val oldPriority: com.mango.domain.task.model.Priority = mockk()
-        val newPriority: com.mango.domain.task.model.Priority = mockk()
+        val oldPriority: Priority = mockk()
+        val newPriority: Priority = mockk()
         val date: LocalDateTime = mockk()
 
         val oldTask = getTask(id = taskId, priority = oldPriority)
@@ -45,7 +47,7 @@ class UpdateTaskPriorityUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_PRIORITY,
+                UPDATE_PRIORITY,
                 newPriority.toString(),
                 oldPriority.toString(),
             )
@@ -63,8 +65,8 @@ class UpdateTaskPriorityUseCaseTest {
     fun `add activity to repository`() {
         // given
         val taskId = getTaskId1()
-        val oldPriority: com.mango.domain.task.model.Priority = mockk()
-        val newPriority: com.mango.domain.task.model.Priority = mockk()
+        val oldPriority: Priority = mockk()
+        val newPriority: Priority = mockk()
         val date: LocalDateTime = mockk()
 
         val oldTask = getTask(id = taskId, priority = oldPriority)
@@ -76,7 +78,7 @@ class UpdateTaskPriorityUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_PRIORITY,
+                UPDATE_PRIORITY,
                 newPriority.toString(),
                 oldPriority.toString(),
             )
@@ -94,8 +96,8 @@ class UpdateTaskPriorityUseCaseTest {
     fun `do nothing when old value is the same as new value`() {
         // given
         val taskId = getTaskId1()
-        val oldPriority = com.mango.domain.task.model.Priority.PRIORITY_1
-        val newPriority = com.mango.domain.task.model.Priority.PRIORITY_1
+        val oldPriority = PRIORITY_1
+        val newPriority = PRIORITY_1
         val date: LocalDateTime = mockk()
 
         val oldTask = getTask(id = taskId, priority = oldPriority)
@@ -107,7 +109,7 @@ class UpdateTaskPriorityUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_PRIORITY,
+                UPDATE_PRIORITY,
                 newPriority.toString(),
                 oldPriority.toString(),
             )

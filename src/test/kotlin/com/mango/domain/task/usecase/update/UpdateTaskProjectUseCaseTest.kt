@@ -4,7 +4,7 @@ import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.TaskActivity
-import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_PROJECT
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.BusinessTestModel.getProjectId2
 import com.mango.domain.common.model.BusinessTestModel.getTask
@@ -50,7 +50,7 @@ class UpdateTaskProjectUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_PROJECT,
+                UPDATE_PROJECT,
                 newProjectId.value.toString(),
                 oldProjectId.value.toString(),
             )
@@ -82,7 +82,7 @@ class UpdateTaskProjectUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_PROJECT,
+                UPDATE_PROJECT,
                 newProjectId.value.toString(),
                 oldProjectId.value.toString(),
             )
@@ -114,7 +114,7 @@ class UpdateTaskProjectUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_PROJECT,
+                UPDATE_PROJECT,
                 newProjectId.value.toString(),
                 oldProjectId.value.toString(),
             )

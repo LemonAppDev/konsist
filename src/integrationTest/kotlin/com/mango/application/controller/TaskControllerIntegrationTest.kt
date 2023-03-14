@@ -16,7 +16,7 @@ import com.mango.domain.comment.model.CommentId
 import com.mango.domain.comment.model.request.AddCommentRequestModel
 import com.mango.domain.comment.model.request.UpdateCommentRequestModel
 import com.mango.domain.project.model.ProjectId
-import com.mango.domain.task.model.Priority
+import com.mango.domain.task.model.Priority.PRIORITY_5
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.task.model.request.CreateTaskRequestModel
@@ -138,7 +138,7 @@ class TaskControllerTest {
                 description = "updated description",
                 dueDate = LocalDateTime.now().plusDays(10),
                 targetDate = LocalDateTime.now().plusDays(20),
-                priority = Priority.PRIORITY_5,
+                priority = PRIORITY_5,
                 projectId = project.id,
                 parentTaskId = parentTask.id,
                 assigneeId = assignee.id,
@@ -169,7 +169,7 @@ class TaskControllerTest {
                     description = "updated description",
                     dueDate = LocalDateTime.now().plusDays(10),
                     targetDate = LocalDateTime.now().plusDays(20),
-                    priority = Priority.PRIORITY_5,
+                    priority = PRIORITY_5,
                     projectId = project2.id,
                     parentTaskId = parentTaskInProject1.id,
                     assigneeId = assignee.id,
@@ -341,7 +341,7 @@ class TaskControllerTest {
                 description = "updated description",
                 dueDate = LocalDateTime.now().plusDays(10),
                 targetDate = LocalDateTime.now().plusDays(20),
-                priority = Priority.PRIORITY_5,
+                priority = PRIORITY_5,
                 projectId = project.id,
                 parentTaskId = parentTask.id,
                 assigneeId = assignee.id,

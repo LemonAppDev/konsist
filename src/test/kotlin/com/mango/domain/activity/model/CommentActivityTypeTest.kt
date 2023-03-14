@@ -1,6 +1,7 @@
 package com.mango.domain.activity.model
 
 import com.mango.domain.activity.model.CommentActivityType.ADD_COMMENT
+import com.mango.domain.activity.model.CommentActivityType.Companion.getByValue
 import com.mango.domain.activity.model.CommentActivityType.DELETE_COMMENT
 import com.mango.domain.activity.model.CommentActivityType.UPDATE_COMMENT
 import org.amshove.kluent.shouldBeEqualTo
@@ -19,7 +20,7 @@ class CommentActivityTypeTest {
         commentActivityType: CommentActivityType,
     ) {
         // when
-        val actual = CommentActivityType.getByValue(value)
+        val actual = getByValue(value)
 
         // then
         actual shouldBeEqualTo commentActivityType
@@ -41,7 +42,7 @@ class CommentActivityTypeTest {
         val value = "incorrectValue"
 
         // when
-        val actual = { CommentActivityType.getByValue(value) }
+        val actual = { getByValue(value) }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Invalid comment activity type value: $value "

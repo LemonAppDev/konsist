@@ -2,7 +2,7 @@ package com.mango.data.activity.project
 
 import com.mango.domain.activity.model.ProjectActivity
 import com.mango.domain.activity.model.ProjectActivityId
-import com.mango.domain.activity.model.ProjectActivityType
+import com.mango.domain.activity.model.ProjectActivityType.Companion.getByValue
 import com.mango.domain.common.model.BusinessTestModel.getUUID1
 import com.mango.domain.common.model.BusinessTestModel.getUUID2
 import com.mango.domain.common.model.BusinessTestModel.getUUID3
@@ -40,7 +40,7 @@ class ProjectActivityJpaEntityToProjectActivityMapperTest {
         actual shouldBeEqualTo ProjectActivity(
             ProjectActivityId(id),
             UserId(userId),
-            ProjectActivityType.getByValue(type),
+            getByValue(type),
             ProjectId(projectId),
             date,
         )

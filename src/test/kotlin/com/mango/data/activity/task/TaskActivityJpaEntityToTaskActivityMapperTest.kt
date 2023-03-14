@@ -2,7 +2,7 @@ package com.mango.data.activity.task
 
 import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityId
-import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType.Companion.getByValue
 import com.mango.domain.common.model.BusinessTestModel.getUUID1
 import com.mango.domain.common.model.BusinessTestModel.getUUID2
 import com.mango.domain.common.model.BusinessTestModel.getUUID3
@@ -44,7 +44,7 @@ class TaskActivityJpaEntityToTaskActivityMapperTest {
         actual shouldBeEqualTo TaskActivity(
             TaskActivityId(id),
             UserId(userId),
-            TaskActivityType.getByValue(type),
+            getByValue(type),
             TaskId(taskId),
             date,
             newValue,

@@ -4,7 +4,7 @@ import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.TaskActivity
-import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType.UPDATE_COMPLETE_DATE
 import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
@@ -47,7 +47,7 @@ class UpdateTaskCompleteDateUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_COMPLETE_DATE,
+                UPDATE_COMPLETE_DATE,
                 newCompleteDate.toString(),
                 currentCompleteDate.toString(),
             )
@@ -83,7 +83,7 @@ class UpdateTaskCompleteDateUseCaseTest {
             taskActivityFactory(
                 taskId,
                 date,
-                TaskActivityType.UPDATE_COMPLETE_DATE,
+                UPDATE_COMPLETE_DATE,
                 newCompleteDate.toString(),
                 currentCompleteDate.toString(),
             )

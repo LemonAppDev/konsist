@@ -4,7 +4,7 @@ import com.mango.data.project.ProjectRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.ProjectActivityFactory
 import com.mango.domain.activity.model.ProjectActivity
-import com.mango.domain.activity.model.ProjectActivityType
+import com.mango.domain.activity.model.ProjectActivityType.CREATE
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.Color
 import com.mango.domain.project.ProjectFactory
@@ -46,7 +46,7 @@ class CreateProjectUseCaseTest {
         every { project.id } returns projectId
         every { project.creationDate } returns date
         val activity: ProjectActivity = mockk()
-        every { projectActivityFactory(projectId, date, ProjectActivityType.CREATE) } returns activity
+        every { projectActivityFactory(projectId, date, CREATE) } returns activity
         every { activityRepository.addProjectActivity(activity) } returns mockk()
 
         // when
@@ -72,7 +72,7 @@ class CreateProjectUseCaseTest {
         every { project.id } returns projectId
         every { project.creationDate } returns date
         val activity: ProjectActivity = mockk()
-        every { projectActivityFactory(projectId, date, ProjectActivityType.CREATE) } returns activity
+        every { projectActivityFactory(projectId, date, CREATE) } returns activity
         every { activityRepository.addProjectActivity(activity) } returns mockk()
 
         // when
@@ -101,7 +101,7 @@ class CreateProjectUseCaseTest {
         every { project.id } returns projectId
         every { project.creationDate } returns date
         val activity: ProjectActivity = mockk()
-        every { projectActivityFactory(projectId, date, ProjectActivityType.CREATE) } returns activity
+        every { projectActivityFactory(projectId, date, CREATE) } returns activity
         every { activityRepository.addProjectActivity(activity) } returns mockk()
 
         // when

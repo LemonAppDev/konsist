@@ -1,10 +1,14 @@
 package com.mango.domain.task.usecase.update
 
 import com.mango.domain.common.LocalDateTimeFactory
+import com.mango.domain.common.model.BusinessTestModel.getCurrentDate
+import com.mango.domain.common.model.BusinessTestModel.getFutureDate1
+import com.mango.domain.common.model.BusinessTestModel.getFutureDate2
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId2
 import com.mango.domain.common.model.BusinessTestModel.getUserId1
+import com.mango.domain.task.model.Priority.PRIORITY_5
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.request.UpdateTaskRequestModel
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
@@ -16,7 +20,6 @@ import io.mockk.verifyAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
-import java.time.LocalDateTime
 
 class UpdateTaskUseCaseTest {
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
@@ -51,12 +54,12 @@ class UpdateTaskUseCaseTest {
         val task: Task = mockk()
         val taskId = getTaskId1()
         every { task.id } returns taskId
-        val updDate: LocalDateTime = mockk()
+        val updDate = getCurrentDate()
         val newName = "new name"
         val newDescription = "new description"
-        val newDueDate: LocalDateTime = mockk()
-        val newTargetDate: LocalDateTime = mockk()
-        val newPriority = com.mango.domain.task.model.Priority.PRIORITY_5
+        val newDueDate = getFutureDate1()
+        val newTargetDate = getFutureDate2()
+        val newPriority = PRIORITY_5
         val newProjectId = getProjectId1()
         val newParentTaskId = getTaskId2()
         val newAssigneeId = getUserId1()
@@ -111,7 +114,7 @@ class UpdateTaskUseCaseTest {
         val taskId = getTaskId1()
         every { task.id } returns taskId
 
-        val updDate: LocalDateTime = mockk()
+        val updDate = getCurrentDate()
         every { localDateTimeFactory() } returns updDate
 
         val updateTaskRequestModel = UpdateTaskRequestModel(

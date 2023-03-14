@@ -3,8 +3,11 @@ package com.mango.domain.task.usecase
 import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.TaskActivity
-import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.model.TaskActivityType.CREATE
 import com.mango.domain.common.LocalDateTimeFactory
+import com.mango.domain.common.model.BusinessTestModel.getCurrentDate
+import com.mango.domain.common.model.BusinessTestModel.getFutureDate1
+import com.mango.domain.common.model.BusinessTestModel.getFutureDate2
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.BusinessTestModel.getProjectId2
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
@@ -26,8 +29,6 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
-import java.time.LocalDateTime
-import java.time.Month
 
 class CreateTaskUseCaseTest {
     private val taskRepository: TaskRepository = mockk()
@@ -54,7 +55,7 @@ class CreateTaskUseCaseTest {
 
     @Test
     fun `throws exception when task and parent task are not in the same project`() {
-        val creationDate: LocalDateTime = mockk()
+        val creationDate = getCurrentDate()
         every { localDateTimeFactory() } returns creationDate
         val taskProjectId = getProjectId1()
         val parentTaskProjectId = getProjectId2()
@@ -63,8 +64,8 @@ class CreateTaskUseCaseTest {
         every { parentTask.parentTaskId } returns parentTaskId
         every { parentTask.projectId } returns parentTaskProjectId
         val assigneeId = getUserId1()
-        val dueDate = LocalDateTime.of(2023, Month.MARCH, 1, 20, 0, 0)
-        val targetDate = LocalDateTime.of(2023, Month.MARCH, 10, 20, 0, 0)
+        val dueDate = getFutureDate1()
+        val targetDate = getFutureDate2()
         val createTaskRequestModel = CreateTaskRequestModel(
             "name",
             "description",
@@ -92,7 +93,7 @@ class CreateTaskUseCaseTest {
     fun `creates and adds new task to tasks list`() {
         // given
         val taskId = getTaskId1()
-        val creationDate: LocalDateTime = mockk()
+        val creationDate = getCurrentDate()
         every { localDateTimeFactory() } returns creationDate
         val projectId = getProjectId1()
         val parentTask: Task = mockk()
@@ -100,8 +101,8 @@ class CreateTaskUseCaseTest {
         every { parentTask.parentTaskId } returns parentTaskId
         every { parentTask.projectId } returns projectId
         val assigneeId = getUserId1()
-        val dueDate = LocalDateTime.of(2023, Month.MARCH, 1, 20, 0, 0)
-        val targetDate = LocalDateTime.of(2023, Month.MARCH, 10, 20, 0, 0)
+        val dueDate = getFutureDate1()
+        val targetDate = getFutureDate2()
         val createTaskRequestModel = CreateTaskRequestModel(
             "name",
             "description",
@@ -128,7 +129,7 @@ class CreateTaskUseCaseTest {
         val creatorId = getUserId2()
         every { task.ownerId } returns creatorId
         val activity: TaskActivity = mockk()
-        every { taskActivityFactory(taskId, creationDate, TaskActivityType.CREATE) } returns activity
+        every { taskActivityFactory(taskId, creationDate, CREATE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
@@ -142,7 +143,7 @@ class CreateTaskUseCaseTest {
     fun `adds activity to repository`() {
         // given
         val taskId = getTaskId1()
-        val creationDate: LocalDateTime = mockk()
+        val creationDate = getCurrentDate()
         every { localDateTimeFactory() } returns creationDate
         val projectId = getProjectId1()
         val parentTask: Task = mockk()
@@ -150,8 +151,8 @@ class CreateTaskUseCaseTest {
         every { parentTask.parentTaskId } returns parentTaskId
         every { parentTask.projectId } returns projectId
         val assigneeId = getUserId1()
-        val dueDate = LocalDateTime.of(2023, Month.MARCH, 1, 20, 0, 0)
-        val targetDate = LocalDateTime.of(2023, Month.MARCH, 10, 20, 0, 0)
+        val dueDate = getFutureDate1()
+        val targetDate = getFutureDate2()
         val createTaskRequestModel = CreateTaskRequestModel(
             "name",
             "description",
@@ -175,7 +176,7 @@ class CreateTaskUseCaseTest {
         every { task.id } returns taskId
         every { task.creationDate } returns creationDate
         val activity: TaskActivity = mockk()
-        every { taskActivityFactory(taskId, creationDate, TaskActivityType.CREATE) } returns activity
+        every { taskActivityFactory(taskId, creationDate, CREATE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when
@@ -189,7 +190,7 @@ class CreateTaskUseCaseTest {
     fun `returns task`() {
         // given
         val taskId = getTaskId1()
-        val creationDate: LocalDateTime = mockk()
+        val creationDate = getCurrentDate()
         every { localDateTimeFactory() } returns creationDate
         val projectId = getProjectId1()
         val parentTask: Task = mockk()
@@ -197,8 +198,8 @@ class CreateTaskUseCaseTest {
         every { parentTask.parentTaskId } returns parentTaskId
         every { parentTask.projectId } returns projectId
         val assigneeId = getUserId1()
-        val dueDate = LocalDateTime.of(2023, Month.MARCH, 1, 20, 0, 0)
-        val targetDate = LocalDateTime.of(2023, Month.MARCH, 10, 20, 0, 0)
+        val dueDate = getFutureDate1()
+        val targetDate = getFutureDate2()
         val createTaskRequestModel = CreateTaskRequestModel(
             "name",
             "description",
@@ -223,7 +224,7 @@ class CreateTaskUseCaseTest {
         every { task.id } returns taskId
         every { task.creationDate } returns creationDate
         val activity: TaskActivity = mockk()
-        every { taskActivityFactory(taskId, creationDate, TaskActivityType.CREATE) } returns activity
+        every { taskActivityFactory(taskId, creationDate, CREATE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
 
         // when

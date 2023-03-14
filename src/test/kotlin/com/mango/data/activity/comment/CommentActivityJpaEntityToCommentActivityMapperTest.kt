@@ -2,7 +2,7 @@ package com.mango.data.activity.comment
 
 import com.mango.domain.activity.model.CommentActivity
 import com.mango.domain.activity.model.CommentActivityId
-import com.mango.domain.activity.model.CommentActivityType
+import com.mango.domain.activity.model.CommentActivityType.Companion.getByValue
 import com.mango.domain.comment.model.CommentId
 import com.mango.domain.common.model.BusinessTestModel.getUUID1
 import com.mango.domain.common.model.BusinessTestModel.getUUID2
@@ -48,7 +48,7 @@ class CommentActivityJpaEntityToCommentActivityMapperTest {
         actual shouldBeEqualTo CommentActivity(
             CommentActivityId(id),
             UserId(ownerId),
-            CommentActivityType.getByValue(type),
+            getByValue(type),
             CommentId(commentId),
             TaskId(taskId),
             date,
