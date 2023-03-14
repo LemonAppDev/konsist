@@ -5,14 +5,19 @@ import com.mango.domain.activity.ActivityRepository
 import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.common.model.BusinessTestModel.getProjectId1
+import com.mango.domain.common.model.BusinessTestModel.getProjectId2
 import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId2
 import com.mango.domain.common.model.BusinessTestModel.getTaskId3
+import com.mango.domain.task.model.Task
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -30,16 +35,40 @@ class UpdateTaskParentTaskUseCaseTest {
     )
 
     @Test
+    fun `throws exception when task and new parent task are not in the same project`() {
+        // given
+        val taskId = getTaskId1()
+        val oldParentTaskId = getTaskId2()
+        val newParentTaskId = getTaskId3()
+        val newParentTask: Task = mockk()
+        val parentTaskProjectId = getProjectId1()
+        every { newParentTask.projectId } returns parentTaskProjectId
+        val taskProjectId = getProjectId2()
+        val date: LocalDateTime = mockk()
+        val oldTask = getTask(id = taskId, parentTaskId = oldParentTaskId, projectId = taskProjectId)
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
+        every { getTaskOrThrowUseCase(newParentTaskId) } returns newParentTask
+
+        // when
+        val actual = { sut(taskId, newParentTaskId, date) }
+
+        // then
+        actual shouldThrow IllegalArgumentException::class withMessage "Task and parent task are not in the same project"
+    }
+
+    @Test
     fun `add task to repository`() {
         // given
         val taskId = getTaskId1()
         val oldParentTaskId = getTaskId2()
         val newParentTaskId = getTaskId3()
+        val newParentTask: Task = mockk()
+        val projectId = getProjectId1()
+        every { newParentTask.projectId } returns projectId
         val date: LocalDateTime = mockk()
-
-        val oldTask = getTask(id = taskId, parentTaskId = oldParentTaskId)
+        val oldTask = getTask(id = taskId, parentTaskId = oldParentTaskId, projectId = projectId)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
-        every { getTaskOrThrowUseCase(newParentTaskId) } returns mockk()
+        every { getTaskOrThrowUseCase(newParentTaskId) } returns newParentTask
         val newTask = oldTask.copy(parentTaskId = newParentTaskId)
         every { taskRepository.getTask(taskId) } returns oldTask
         every { taskRepository.saveTask(newTask) } returns mockk()
@@ -68,11 +97,13 @@ class UpdateTaskParentTaskUseCaseTest {
         val taskId = getTaskId1()
         val oldParentTaskId = getTaskId2()
         val newParentTaskId = getTaskId3()
+        val newParentTask: Task = mockk()
+        val projectId = getProjectId1()
+        every { newParentTask.projectId } returns projectId
         val date: LocalDateTime = mockk()
-
-        val oldTask = getTask(id = taskId, parentTaskId = oldParentTaskId)
+        val oldTask = getTask(id = taskId, parentTaskId = oldParentTaskId, projectId = projectId)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
-        every { getTaskOrThrowUseCase(newParentTaskId) } returns mockk()
+        every { getTaskOrThrowUseCase(newParentTaskId) } returns newParentTask
         val newTask = oldTask.copy(parentTaskId = newParentTaskId)
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()
@@ -100,11 +131,13 @@ class UpdateTaskParentTaskUseCaseTest {
         val taskId = getTaskId1()
         val oldParentTaskId = getTaskId2()
         val newParentTaskId = getTaskId2()
+        val newParentTask: Task = mockk()
+        val projectId = getProjectId1()
+        every { newParentTask.projectId } returns projectId
         val date: LocalDateTime = mockk()
-
-        val oldTask = getTask(id = taskId, parentTaskId = oldParentTaskId)
+        val oldTask = getTask(id = taskId, parentTaskId = oldParentTaskId, projectId = projectId)
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
-        every { getTaskOrThrowUseCase(newParentTaskId) } returns mockk()
+        every { getTaskOrThrowUseCase(newParentTaskId) } returns newParentTask
         val newTask = oldTask.copy(parentTaskId = newParentTaskId)
         every { taskRepository.saveTask(newTask) } returns mockk()
         val activity: TaskActivity = mockk()

@@ -16,6 +16,7 @@ import com.mango.domain.comment.model.CommentId
 import com.mango.domain.comment.model.request.AddCommentRequestModel
 import com.mango.domain.comment.model.request.UpdateCommentRequestModel
 import com.mango.domain.project.model.ProjectId
+import com.mango.domain.task.model.Priority
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.task.model.request.CreateTaskRequestModel
@@ -24,6 +25,7 @@ import com.mango.domain.user.model.UserId
 import com.mango.util.ControllerEndpointCaller
 import com.mango.util.Json.serialize
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -47,8 +49,8 @@ class TaskControllerTest {
     @Test
     fun `create endpoint creates task`() {
         // given
-        val parentTask = taskEndpointHelper.callCreateEndpoint(name = "parent task")
         val project = projectEndpointHelper.callCreateEndpoint()
+        val parentTask = taskEndpointHelper.callCreateEndpoint(name = "parent task", projectId = project.id)
         val assignee = userEndpointHelper.callCreateEndpoint("assignee")
 
         // when
@@ -62,6 +64,26 @@ class TaskControllerTest {
         // then
         val expected = taskEndpointHelper.callGetEndpoint(taskId = actual.id)
         actual shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `create endpoint return error when parent task and task is not in the same project`() {
+        // given
+        val project1 = projectEndpointHelper.callCreateEndpoint()
+        val project2 = projectEndpointHelper.callCreateEndpoint()
+        val parentTaskInProject1 = taskEndpointHelper.callCreateEndpoint(name = "parent task", projectId = project1.id)
+
+        // when
+        val actual = {
+            taskEndpointHelper.callCreateEndpoint(
+                name = "task",
+                parentTaskId = parentTaskInProject1.id,
+                projectId = project2.id,
+            )
+        }
+
+        // then
+        actual shouldThrow RuntimeException::class
     }
 
     @Test
@@ -103,8 +125,8 @@ class TaskControllerTest {
     @Test
     fun `update endpoint updates task`() {
         // given
-        val parentTask = taskEndpointHelper.callCreateEndpoint()
         val project = projectEndpointHelper.callCreateEndpoint()
+        val parentTask = taskEndpointHelper.callCreateEndpoint(projectId = project.id)
         val assignee = userEndpointHelper.callCurrentEndpoint()
         val task = taskEndpointHelper.callCreateEndpoint()
 
@@ -116,7 +138,7 @@ class TaskControllerTest {
                 description = "updated description",
                 dueDate = LocalDateTime.now().plusDays(10),
                 targetDate = LocalDateTime.now().plusDays(20),
-                priority = com.mango.domain.task.model.Priority.PRIORITY_5,
+                priority = Priority.PRIORITY_5,
                 projectId = project.id,
                 parentTaskId = parentTask.id,
                 assigneeId = assignee.id,
@@ -127,6 +149,37 @@ class TaskControllerTest {
         // then
         val expected = taskEndpointHelper.callGetEndpoint(task.id)
         actual shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `update endpoint return error when parent task and task is not in the same project`() {
+        // given
+        val project1 = projectEndpointHelper.callCreateEndpoint()
+        val project2 = projectEndpointHelper.callCreateEndpoint()
+        val parentTaskInProject1 = taskEndpointHelper.callCreateEndpoint(projectId = project1.id)
+        val assignee = userEndpointHelper.callCurrentEndpoint()
+        val task = taskEndpointHelper.callCreateEndpoint()
+
+        // when
+        val actual = {
+            taskEndpointHelper.callUpdateEndpoint(
+                UpdateTaskRequestModel(
+                    taskId = task.id,
+                    name = "updated name",
+                    description = "updated description",
+                    dueDate = LocalDateTime.now().plusDays(10),
+                    targetDate = LocalDateTime.now().plusDays(20),
+                    priority = Priority.PRIORITY_5,
+                    projectId = project2.id,
+                    parentTaskId = parentTaskInProject1.id,
+                    assigneeId = assignee.id,
+                    isCompleted = true,
+                ),
+            )
+        }
+
+        // then
+        actual shouldThrow RuntimeException::class
     }
 
     @Test
@@ -278,8 +331,8 @@ class TaskControllerTest {
     fun `task activities endpoint return task activities after updating task`() {
         // given
         val task = taskEndpointHelper.callCreateEndpoint()
-        val parentTask = taskEndpointHelper.callCreateEndpoint()
         val project = projectEndpointHelper.callCreateEndpoint()
+        val parentTask = taskEndpointHelper.callCreateEndpoint(projectId = project.id)
         val assignee = userEndpointHelper.callCurrentEndpoint()
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
@@ -288,7 +341,7 @@ class TaskControllerTest {
                 description = "updated description",
                 dueDate = LocalDateTime.now().plusDays(10),
                 targetDate = LocalDateTime.now().plusDays(20),
-                priority = com.mango.domain.task.model.Priority.PRIORITY_5,
+                priority = Priority.PRIORITY_5,
                 projectId = project.id,
                 parentTaskId = parentTask.id,
                 assigneeId = assignee.id,

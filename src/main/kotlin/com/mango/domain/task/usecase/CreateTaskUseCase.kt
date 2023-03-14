@@ -17,13 +17,13 @@ import org.springframework.stereotype.Service
 class CreateTaskUseCase(
     private val taskRepository: TaskRepository,
     private val taskFactory: TaskFactory,
-    private val checkTaskIdUseCase: CheckTaskIdUseCase,
     private val checkUserIdUseCase: CheckUserIdUseCase,
     private val checkProjectIdUseCase: CheckProjectIdUseCase,
     private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase,
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val taskActivityFactory: TaskActivityFactory,
     private val activityRepository: ActivityRepository,
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
 ) {
     operator fun invoke(createTaskRequestModel: CreateTaskRequestModel): Task {
         val creationDate = localDateTimeFactory()
@@ -32,7 +32,10 @@ class CreateTaskUseCase(
             dueDate?.let { requireDateIsNowOrLaterUseCase(it) }
             targetDate?.let { requireDateIsNowOrLaterUseCase(it) }
             projectId?.let { checkProjectIdUseCase(it) }
-            parentTaskId?.let { checkTaskIdUseCase(it) }
+            parentTaskId?.let {
+                val parentTask = getTaskOrThrowUseCase(it)
+                require(parentTask.projectId == projectId) { "Task and parent task are not in the same project" }
+            }
             assigneeId?.let { checkUserIdUseCase(it) }
         }
 
