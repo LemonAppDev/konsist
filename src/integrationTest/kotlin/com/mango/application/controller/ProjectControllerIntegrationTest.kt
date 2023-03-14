@@ -1,5 +1,7 @@
 package com.mango.application.controller
 
+import com.mango.domain.activity.model.ProjectActivity
+import com.mango.domain.activity.model.ProjectActivityType.CREATE
 import com.mango.domain.common.model.Color
 import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.ProjectId
@@ -86,6 +88,20 @@ class ProjectControllerTest {
         // then
         actual shouldBeEqualTo listOf(project1, project2)
     }
+
+    @Test
+    fun `project activities endpoint return project create activity after creating project`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint()
+
+        // when
+        val actual = projectEndpointHelper
+            .callGetProjectActivitiesEndPoint(project.id)
+            .map { it.type }
+
+        // then
+        actual shouldBeEqualTo listOf(CREATE)
+    }
 }
 
 @Service
@@ -127,5 +143,12 @@ class ProjectEndpointHelper(
         this,
         endpointName = "all",
         method = HttpMethod.GET,
+    )
+
+    fun callGetProjectActivitiesEndPoint(projectId: ProjectId) = controllerEndpointCaller.call<List<ProjectActivity>>(
+        this,
+        endpointName = "activities",
+        method = HttpMethod.GET,
+        queryParams = mapOf("projectId" to projectId.value.toString()),
     )
 }

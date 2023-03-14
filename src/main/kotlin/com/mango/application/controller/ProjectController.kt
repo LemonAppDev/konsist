@@ -1,12 +1,14 @@
 package com.mango.application.controller
 
 import com.mango.application.config.ApiConfig
+import com.mango.domain.activity.model.ProjectActivity
 import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.ProjectId
 import com.mango.domain.project.model.request.CreateProjectRequestModel
 import com.mango.domain.project.usecase.CreateProjectUseCase
 import com.mango.domain.project.usecase.DeleteProjectUseCase
 import com.mango.domain.project.usecase.GetAllProjectsUseCase
+import com.mango.domain.project.usecase.GetProjectActivitiesUseCase
 import com.mango.domain.project.usecase.GetProjectOrThrowUseCase
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -23,6 +25,7 @@ class ProjectController(
     private val deleteProjectUseCase: DeleteProjectUseCase,
     private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase,
     private val getAllProjectsUseCase: GetAllProjectsUseCase,
+    private val getProjectActivitiesUseCase: GetProjectActivitiesUseCase,
 ) {
     @PostMapping("/create")
     fun createProject(@RequestBody createProjectRequestModel: CreateProjectRequestModel): Project =
@@ -36,4 +39,8 @@ class ProjectController(
 
     @DeleteMapping("/delete")
     fun deleteProject(@RequestParam projectId: ProjectId): Unit = deleteProjectUseCase(projectId)
+
+    @GetMapping("/activities")
+    fun getProjectActivities(@RequestParam(name = "projectId") projectId: ProjectId): List<ProjectActivity> =
+        getProjectActivitiesUseCase(projectId)
 }
