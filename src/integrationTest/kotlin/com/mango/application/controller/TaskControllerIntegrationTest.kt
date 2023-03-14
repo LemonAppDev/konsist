@@ -101,6 +101,23 @@ class TaskControllerTest {
     }
 
     @Test
+    fun `delete endpoint deletes task with its child tasks`() {
+        // given
+        val parentTask = taskEndpointHelper.callCreateEndpoint()
+        taskEndpointHelper.callCreateEndpoint(parentTaskId = parentTask.id)
+        taskEndpointHelper.callCreateEndpoint(parentTaskId = parentTask.id)
+
+        val otherTask = taskEndpointHelper.callCreateEndpoint()
+        taskEndpointHelper.callDeleteEndpoint(parentTask.id)
+
+        // when
+        val actual = taskEndpointHelper.callAllEndpoint()
+
+        // then
+        actual shouldBeEqualTo listOf(otherTask)
+    }
+
+    @Test
     fun `all endpoint returns empty list`() {
         // when
         val actual = taskEndpointHelper.callAllEndpoint()

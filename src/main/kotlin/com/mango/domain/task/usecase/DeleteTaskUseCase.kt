@@ -24,6 +24,14 @@ class DeleteTaskUseCase(
             val date = localDateTimeFactory()
             val activity = taskActivityFactory(it.id, date, TaskActivityType.DELETE)
             activityRepository.addTaskActivity(activity)
+
+            taskRepository.tasks
+                .filter { task -> task.parentTaskId == taskId }
+                .forEach { task ->
+                    taskRepository.deleteTask(task)
+                    val childActivity = taskActivityFactory(task.id, date, TaskActivityType.DELETE)
+                    activityRepository.addTaskActivity(childActivity)
+                }
         }
     }
 }
