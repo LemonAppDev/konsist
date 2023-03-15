@@ -1,31 +1,23 @@
 package com.mango.domain.comment.usecase
 
 import com.mango.data.comment.CommentRepositoryImpl
-import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.CommentActivityFactory
-import com.mango.domain.activity.model.CommentActivity
 import com.mango.domain.activity.model.CommentActivityType.DELETE_COMMENT
+import com.mango.domain.activity.usecase.AddCommentActivityUseCase
 import com.mango.domain.comment.model.Comment
-import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.model.BusinessTestModel.getCommentId1
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
-import java.time.LocalDateTime
 
 class DeleteCommentUseCaseTest {
     private val commentRepository: CommentRepositoryImpl = mockk()
-    private val localDateTimeFactory: LocalDateTimeFactory = mockk()
-    private val commentActivityFactory: CommentActivityFactory = mockk()
-    private val activityRepository: ActivityRepository = mockk()
+    private val addCommentActivityUseCase: AddCommentActivityUseCase = mockk()
 
     private val sut = DeleteCommentUseCase(
         commentRepository,
-        localDateTimeFactory,
-        commentActivityFactory,
-        activityRepository,
+        addCommentActivityUseCase,
     )
 
     @Test
@@ -36,11 +28,7 @@ class DeleteCommentUseCaseTest {
         every { comment.id } returns commentId
         every { commentRepository.getComment(commentId) } returns comment
         justRun { commentRepository.deleteComment(comment) }
-        val date: LocalDateTime = mockk()
-        every { localDateTimeFactory() } returns date
-        val activity: CommentActivity = mockk()
-        every { commentActivityFactory(comment, date, DELETE_COMMENT) } returns activity
-        every { activityRepository.addCommentActivity(activity) } returns mockk()
+        justRun { addCommentActivityUseCase(comment, DELETE_COMMENT) }
 
         // when
         sut(commentId)
@@ -50,23 +38,19 @@ class DeleteCommentUseCaseTest {
     }
 
     @Test
-    fun `adds activity to repository`() {
+    fun `adds comment activity to repository`() {
         // given
         val commentId = getCommentId1()
         val comment: Comment = mockk()
         every { comment.id } returns commentId
         every { commentRepository.getComment(commentId) } returns comment
         justRun { commentRepository.deleteComment(comment) }
-        val date: LocalDateTime = mockk()
-        every { localDateTimeFactory() } returns date
-        val activity: CommentActivity = mockk()
-        every { commentActivityFactory(comment, date, DELETE_COMMENT) } returns activity
-        every { activityRepository.addCommentActivity(activity) } returns mockk()
+        justRun { addCommentActivityUseCase(comment, DELETE_COMMENT) }
 
         // when
         sut(commentId)
 
         // then
-        verify { activityRepository.addCommentActivity(activity) }
+        verify { addCommentActivityUseCase(comment, DELETE_COMMENT) }
     }
 }

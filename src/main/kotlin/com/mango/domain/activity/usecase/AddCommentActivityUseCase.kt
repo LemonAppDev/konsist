@@ -1,34 +1,39 @@
 package com.mango.domain.activity.usecase
 
 import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.model.ProjectActivity
-import com.mango.domain.activity.model.ProjectActivityType
+import com.mango.domain.activity.model.CommentActivity
+import com.mango.domain.activity.model.CommentActivityType
+import com.mango.domain.comment.model.Comment
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
-import com.mango.domain.project.model.ProjectId
 import com.mango.domain.user.UserRepository
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
 @Service
-class AddProjectActivityUseCase(
+class AddCommentActivityUseCase(
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val activityRepository: ActivityRepository,
     private val userRepository: UserRepository,
     private val uuidFactory: UUIDFactory,
 ) {
     operator fun invoke(
-        projectId: ProjectId,
-        type: ProjectActivityType,
+        comment: Comment,
+        type: CommentActivityType,
         date: LocalDateTime? = null,
+        newValue: String? = null,
+        oldValue: String? = null,
     ) {
-        val activity = ProjectActivity(
-            uuidFactory.createProjectActivityId(),
+        val activity = CommentActivity(
+            uuidFactory.createCommentActivityId(),
             userRepository.getCurrentUser().id,
             type,
-            projectId,
+            comment.id,
+            comment.taskId,
             date ?: localDateTimeFactory(),
+            newValue,
+            oldValue,
         )
-        activityRepository.addProjectActivity(activity)
+        activityRepository.addCommentActivity(activity)
     }
 }

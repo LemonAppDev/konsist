@@ -1,8 +1,7 @@
 package com.mango.domain.comment.usecase
 
-import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.CommentActivityFactory
 import com.mango.domain.activity.model.CommentActivityType
+import com.mango.domain.activity.usecase.AddCommentActivityUseCase
 import com.mango.domain.comment.CommentFactory
 import com.mango.domain.comment.CommentRepository
 import com.mango.domain.comment.model.Comment
@@ -16,8 +15,7 @@ class AddCommentUseCase(
     private val commentFactory: CommentFactory,
     private val commentRepository: CommentRepository,
     private val checkCommentTextUseCase: CheckCommentTextUseCase,
-    private val commentActivityFactory: CommentActivityFactory,
-    private val activityRepository: ActivityRepository,
+    private val addCommentActivityUseCase: AddCommentActivityUseCase,
 ) {
     operator fun invoke(addCommentRequestModel: AddCommentRequestModel): Comment {
         checkTaskIdUseCase(addCommentRequestModel.taskId)
@@ -26,8 +24,7 @@ class AddCommentUseCase(
         val comment = commentFactory(addCommentRequestModel.taskId, addCommentRequestModel.text)
 
         return commentRepository.saveComment(comment).also {
-            val activity = commentActivityFactory(comment, comment.creationDate, CommentActivityType.ADD_COMMENT, comment.text)
-            activityRepository.addCommentActivity(activity)
+            addCommentActivityUseCase(comment, CommentActivityType.ADD_COMMENT, comment.creationDate, comment.text)
         }
     }
 }
