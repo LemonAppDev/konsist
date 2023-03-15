@@ -68,5 +68,6 @@ object BusinessTestModel {
     fun getCurrentDate(): LocalDateTime = LocalDateTime.of(2023, Month.MARCH, 1, 10, 0, 0)
     fun getFutureDate1(): LocalDateTime = LocalDateTime.of(2023, Month.MARCH, 2, 10, 0, 0)
     fun getFutureDate2(): LocalDateTime = LocalDateTime.of(2023, Month.MARCH, 3, 10, 0, 0)
+    fun getFutureDate3(): LocalDateTime = LocalDateTime.of(2023, Month.MARCH, 4, 10, 0, 0)
     fun getPastDate(): LocalDateTime = LocalDateTime.of(2023, Month.FEBRUARY, 1, 10, 0, 0)
 }
