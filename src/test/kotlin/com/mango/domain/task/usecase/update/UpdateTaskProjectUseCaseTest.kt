@@ -1,12 +1,10 @@
 package com.mango.domain.task.usecase.update
 
 import com.mango.data.task.TaskRepositoryImpl
-import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.ProjectActivityType.TASK_ADDED
-import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityType.UPDATE_PROJECT
 import com.mango.domain.activity.usecase.AddProjectActivityUseCase
+import com.mango.domain.activity.usecase.AddTaskActivityUseCase
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.BusinessTestModel.getProjectId2
 import com.mango.domain.common.model.BusinessTestModel.getTask
@@ -28,17 +26,15 @@ class UpdateTaskProjectUseCaseTest {
     private val taskRepository: TaskRepositoryImpl = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase = mockk()
-    private val taskActivityFactory: TaskActivityFactory = mockk()
     private val addProjectActivityUseCase: AddProjectActivityUseCase = mockk()
-    private val activityRepository: ActivityRepository = mockk()
+    private val addTaskActivityUseCase: AddTaskActivityUseCase = mockk()
 
     private val sut = UpdateTaskProjectUseCase(
         taskRepository,
         getTaskOrThrowUseCase,
         getProjectOrThrowUseCase,
-        taskActivityFactory,
+        addTaskActivityUseCase,
         addProjectActivityUseCase,
-        activityRepository,
     )
 
     @Test
@@ -55,17 +51,15 @@ class UpdateTaskProjectUseCaseTest {
         val newTask = oldTask.copy(projectId = newProjectId)
         every { taskRepository.tasks } returns mockk(relaxed = true)
         every { taskRepository.saveTask(newTask) } returns mockk()
-        val activity: TaskActivity = mockk()
-        every {
-            taskActivityFactory(
+        justRun {
+            addTaskActivityUseCase(
                 taskId,
-                date,
                 UPDATE_PROJECT,
+                date,
                 newProjectId.value.toString(),
                 oldProjectId.value.toString(),
             )
-        } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        }
         justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
 
         // when
@@ -103,18 +97,15 @@ class UpdateTaskProjectUseCaseTest {
         every { taskRepository.saveTask(task1) } returns mockk()
         every { task2.copy(projectId = newProjectId) } returns task2
         every { taskRepository.saveTask(task2) } returns mockk()
-
-        val activity: TaskActivity = mockk()
-        every {
-            taskActivityFactory(taskId, date, UPDATE_PROJECT, newProjectId.value.toString(), oldProjectId.value.toString())
-        } returns activity
-        every {
-            taskActivityFactory(id1, date, UPDATE_PROJECT, newProjectId.value.toString(), oldProjectId.value.toString())
-        } returns activity
-        every {
-            taskActivityFactory(id2, date, UPDATE_PROJECT, newProjectId.value.toString(), oldProjectId.value.toString())
-        } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        justRun {
+            addTaskActivityUseCase(taskId, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
+        }
+        justRun {
+            addTaskActivityUseCase(id1, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
+        }
+        justRun {
+            addTaskActivityUseCase(id2, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
+        }
         justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
 
         // when
@@ -141,17 +132,15 @@ class UpdateTaskProjectUseCaseTest {
         val newTask = oldTask.copy(projectId = newProjectId)
         every { taskRepository.tasks } returns mockk(relaxed = true)
         every { taskRepository.saveTask(newTask) } returns mockk()
-        val activity: TaskActivity = mockk()
-        every {
-            taskActivityFactory(
+        justRun {
+            addTaskActivityUseCase(
                 taskId,
-                date,
                 UPDATE_PROJECT,
+                date,
                 newProjectId.value.toString(),
                 oldProjectId.value.toString(),
             )
-        } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        }
         justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
 
         // when
@@ -189,25 +178,26 @@ class UpdateTaskProjectUseCaseTest {
         every { taskRepository.saveTask(task1) } returns mockk()
         every { task2.copy(projectId = newProjectId) } returns task2
         every { taskRepository.saveTask(task2) } returns mockk()
-
-        val activity: TaskActivity = mockk()
-        every {
-            taskActivityFactory(taskId, date, UPDATE_PROJECT, newProjectId.value.toString(), oldProjectId.value.toString())
-        } returns activity
-        every {
-            taskActivityFactory(id1, date, UPDATE_PROJECT, newProjectId.value.toString(), oldProjectId.value.toString())
-        } returns activity
-        every {
-            taskActivityFactory(id2, date, UPDATE_PROJECT, newProjectId.value.toString(), oldProjectId.value.toString())
-        } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        justRun {
+            addTaskActivityUseCase(taskId, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
+        }
+        justRun {
+            addTaskActivityUseCase(id1, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
+        }
+        justRun {
+            addTaskActivityUseCase(id2, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
+        }
         justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
 
         // when
         sut(taskId, newProjectId, date)
 
         // then
-        verify(exactly = 3) { activityRepository.addTaskActivity(activity) }
+        verifyOrder {
+            addTaskActivityUseCase(taskId, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
+            addTaskActivityUseCase(id1, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
+            addTaskActivityUseCase(id2, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
+        }
     }
 
     @Test
@@ -222,7 +212,6 @@ class UpdateTaskProjectUseCaseTest {
         every { getTaskOrThrowUseCase(taskId) } returns oldTask
         every { getProjectOrThrowUseCase(newProjectId) } returns mockk()
         val newTask = oldTask.copy(projectId = newProjectId)
-        val activity: TaskActivity = mockk()
 
         // when
         sut(taskId, newProjectId, date)
@@ -230,7 +219,7 @@ class UpdateTaskProjectUseCaseTest {
         // then
         verify(exactly = 0) {
             taskRepository.saveTask(newTask)
-            activityRepository.addTaskActivity(activity)
+            addTaskActivityUseCase(taskId, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
         }
     }
 }

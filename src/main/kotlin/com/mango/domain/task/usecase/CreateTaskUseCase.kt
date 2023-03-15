@@ -1,10 +1,9 @@
 package com.mango.domain.task.usecase
 
-import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.ProjectActivityType
 import com.mango.domain.activity.model.TaskActivityType
 import com.mango.domain.activity.usecase.AddProjectActivityUseCase
+import com.mango.domain.activity.usecase.AddTaskActivityUseCase
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.usecase.RequireDateIsNowOrLaterUseCase
 import com.mango.domain.project.usecase.CheckProjectIdUseCase
@@ -23,9 +22,8 @@ class CreateTaskUseCase(
     private val checkProjectIdUseCase: CheckProjectIdUseCase,
     private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase,
     private val localDateTimeFactory: LocalDateTimeFactory,
-    private val taskActivityFactory: TaskActivityFactory,
+    private val addTaskActivityUseCase: AddTaskActivityUseCase,
     private val addProjectActivityUseCase: AddProjectActivityUseCase,
-    private val activityRepository: ActivityRepository,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
 ) {
     operator fun invoke(createTaskRequestModel: CreateTaskRequestModel): Task {
@@ -45,8 +43,7 @@ class CreateTaskUseCase(
         val task = taskFactory(createTaskRequestModel, creationDate)
 
         return taskRepository.saveTask(task).also {
-            val activity = taskActivityFactory(it.id, creationDate, TaskActivityType.CREATE)
-            activityRepository.addTaskActivity(activity)
+            addTaskActivityUseCase(it.id, TaskActivityType.CREATE, creationDate)
 
             it.projectId?.let { projectId ->
                 addProjectActivityUseCase(projectId, ProjectActivityType.TASK_ADDED, creationDate)

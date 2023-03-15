@@ -1,10 +1,8 @@
 package com.mango.domain.task.usecase.update
 
 import com.mango.data.task.TaskRepositoryImpl
-import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.TaskActivityFactory
-import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityType.UPDATE_ASSIGNEE
+import com.mango.domain.activity.usecase.AddTaskActivityUseCase
 import com.mango.domain.common.model.BusinessTestModel.getTask
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getUserId1
@@ -22,15 +20,13 @@ class UpdateTaskAssigneeUseCaseTest {
     private val taskRepository: TaskRepositoryImpl = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val checkUserIdUseCase: CheckUserIdUseCase = mockk()
-    private val taskActivityFactory: TaskActivityFactory = mockk()
-    private val activityRepository: ActivityRepository = mockk()
+    private val addTaskActivityUseCase: AddTaskActivityUseCase = mockk()
 
     private val sut = UpdateTaskAssigneeUseCase(
         taskRepository,
         getTaskOrThrowUseCase,
         checkUserIdUseCase,
-        taskActivityFactory,
-        activityRepository,
+        addTaskActivityUseCase,
     )
 
     @Test
@@ -46,17 +42,15 @@ class UpdateTaskAssigneeUseCaseTest {
         justRun { checkUserIdUseCase(newAssigneeId) }
         every { taskRepository.saveTask(newTask) } returns mockk()
         val date: LocalDateTime = mockk()
-        val activity: TaskActivity = mockk()
-        every {
-            taskActivityFactory(
+        justRun {
+            addTaskActivityUseCase(
                 taskId,
-                date,
                 UPDATE_ASSIGNEE,
+                date,
                 newAssigneeId.value.toString(),
                 oldAssigneeId.value.toString(),
             )
-        } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        }
 
         // when
         sut(taskId, newAssigneeId, date)
@@ -66,7 +60,7 @@ class UpdateTaskAssigneeUseCaseTest {
     }
 
     @Test
-    fun `add activity to repository`() {
+    fun `add task activity to repository`() {
         // given
         val oldAssigneeId = getUserId1()
         val newAssigneeId = getUserId2()
@@ -78,23 +72,29 @@ class UpdateTaskAssigneeUseCaseTest {
         justRun { checkUserIdUseCase(newAssigneeId) }
         every { taskRepository.saveTask(newTask) } returns mockk()
         val date: LocalDateTime = mockk()
-        val activity: TaskActivity = mockk()
-        every {
-            taskActivityFactory(
+        justRun {
+            addTaskActivityUseCase(
                 taskId,
-                date,
                 UPDATE_ASSIGNEE,
+                date,
                 newAssigneeId.value.toString(),
                 oldAssigneeId.value.toString(),
             )
-        } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        }
 
         // when
         sut(taskId, newAssigneeId, date)
 
         // then
-        verify { activityRepository.addTaskActivity(activity) }
+        verify {
+            addTaskActivityUseCase(
+                taskId,
+                UPDATE_ASSIGNEE,
+                date,
+                newAssigneeId.value.toString(),
+                oldAssigneeId.value.toString(),
+            )
+        }
     }
 
     @Test
@@ -110,17 +110,15 @@ class UpdateTaskAssigneeUseCaseTest {
         justRun { checkUserIdUseCase(newAssigneeId) }
         every { taskRepository.saveTask(newTask) } returns mockk()
         val date: LocalDateTime = mockk()
-        val activity: TaskActivity = mockk()
-        every {
-            taskActivityFactory(
+        justRun {
+            addTaskActivityUseCase(
                 taskId,
-                date,
                 UPDATE_ASSIGNEE,
+                date,
                 newAssigneeId.value.toString(),
                 oldAssigneeId.value.toString(),
             )
-        } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        }
 
         // when
         sut(taskId, newAssigneeId, date)
@@ -128,7 +126,13 @@ class UpdateTaskAssigneeUseCaseTest {
         // then
         verify(exactly = 0) {
             taskRepository.saveTask(newTask)
-            activityRepository.addTaskActivity(activity)
+            addTaskActivityUseCase(
+                taskId,
+                UPDATE_ASSIGNEE,
+                date,
+                newAssigneeId.value.toString(),
+                oldAssigneeId.value.toString(),
+            )
         }
     }
 }

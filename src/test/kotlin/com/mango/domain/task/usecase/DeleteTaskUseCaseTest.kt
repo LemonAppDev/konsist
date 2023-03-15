@@ -1,10 +1,8 @@
 package com.mango.domain.task.usecase
 
 import com.mango.data.task.TaskRepositoryImpl
-import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.TaskActivityFactory
-import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityType.DELETE
+import com.mango.domain.activity.usecase.AddTaskActivityUseCase
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId2
@@ -20,14 +18,12 @@ import java.time.LocalDateTime
 class DeleteTaskUseCaseTest {
     private val taskRepository: TaskRepositoryImpl = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
-    private val taskActivityFactory: TaskActivityFactory = mockk()
-    private val activityRepository: ActivityRepository = mockk()
+    private val addTaskActivityUseCase: AddTaskActivityUseCase = mockk()
 
     private val sut = DeleteTaskUseCase(
         taskRepository,
         localDateTimeFactory,
-        taskActivityFactory,
-        activityRepository,
+        addTaskActivityUseCase,
     )
 
     @Test
@@ -41,9 +37,7 @@ class DeleteTaskUseCaseTest {
         every { taskRepository.getTask(taskId) } returns task
         justRun { taskRepository.deleteTask(task) }
         every { taskRepository.tasks } returns mockk(relaxed = true)
-        val activity: TaskActivity = mockk()
-        every { taskActivityFactory(taskId, date, DELETE) } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        justRun { addTaskActivityUseCase(taskId, DELETE, date) }
 
         // when
         sut(taskId)
@@ -73,11 +67,9 @@ class DeleteTaskUseCaseTest {
         every { taskRepository.tasks } returns listOf(childTask1, childTask2)
         justRun { taskRepository.deleteTask(childTask1) }
         justRun { taskRepository.deleteTask(childTask2) }
-        val activity: TaskActivity = mockk()
-        every { taskActivityFactory(taskId, date, DELETE) } returns activity
-        every { taskActivityFactory(id1, date, DELETE) } returns activity
-        every { taskActivityFactory(id2, date, DELETE) } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        justRun { addTaskActivityUseCase(taskId, DELETE, date) }
+        justRun { addTaskActivityUseCase(id1, DELETE, date) }
+        justRun { addTaskActivityUseCase(id2, DELETE, date) }
 
         // when
         sut(taskId)
@@ -110,16 +102,18 @@ class DeleteTaskUseCaseTest {
         every { taskRepository.tasks } returns listOf(childTask1, childTask2)
         justRun { taskRepository.deleteTask(childTask1) }
         justRun { taskRepository.deleteTask(childTask2) }
-        val activity: TaskActivity = mockk()
-        every { taskActivityFactory(taskId, date, DELETE) } returns activity
-        every { taskActivityFactory(id1, date, DELETE) } returns activity
-        every { taskActivityFactory(id2, date, DELETE) } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        justRun { addTaskActivityUseCase(taskId, DELETE, date) }
+        justRun { addTaskActivityUseCase(id1, DELETE, date) }
+        justRun { addTaskActivityUseCase(id2, DELETE, date) }
 
         // when
         sut(taskId)
 
         // then
-        verify(exactly = 3) { activityRepository.addTaskActivity(activity) }
+        verifyOrder {
+            addTaskActivityUseCase(taskId, DELETE, date)
+            addTaskActivityUseCase(id1, DELETE, date)
+            addTaskActivityUseCase(id2, DELETE, date)
+        }
     }
 }

@@ -1,10 +1,9 @@
 package com.mango.domain.task.usecase
 
-import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.ProjectActivityType
 import com.mango.domain.activity.model.TaskActivityType
 import com.mango.domain.activity.usecase.AddProjectActivityUseCase
+import com.mango.domain.activity.usecase.AddTaskActivityUseCase
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
 import com.mango.domain.task.TaskRepository
@@ -18,9 +17,8 @@ class DuplicateTaskUseCase(
     private val uuidFactory: UUIDFactory,
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
-    private val taskActivityFactory: TaskActivityFactory,
+    private val addTaskActivityUseCase: AddTaskActivityUseCase,
     private val addProjectActivityUseCase: AddProjectActivityUseCase,
-    private val activityRepository: ActivityRepository,
 ) {
     operator fun invoke(taskId: TaskId): Task {
         val oldTask = getTaskOrThrowUseCase(taskId)
@@ -30,8 +28,7 @@ class DuplicateTaskUseCase(
         val newTask = oldTask.copy(id = newTaskId, creationDate = creationDate)
 
         return taskRepository.saveTask(newTask).also {
-            val activity = taskActivityFactory(newTask.id, newTask.creationDate, TaskActivityType.CREATE)
-            activityRepository.addTaskActivity(activity)
+            addTaskActivityUseCase(newTask.id, TaskActivityType.CREATE, newTask.creationDate)
 
             it.projectId?.let { projectId ->
                 addProjectActivityUseCase(projectId, ProjectActivityType.TASK_ADDED, creationDate)

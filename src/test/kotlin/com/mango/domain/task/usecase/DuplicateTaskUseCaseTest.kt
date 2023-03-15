@@ -1,12 +1,10 @@
 package com.mango.domain.task.usecase
 
 import com.mango.data.task.TaskRepositoryImpl
-import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.ProjectActivityType.TASK_ADDED
-import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityType.CREATE
 import com.mango.domain.activity.usecase.AddProjectActivityUseCase
+import com.mango.domain.activity.usecase.AddTaskActivityUseCase
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
@@ -26,18 +24,16 @@ class DuplicateTaskUseCaseTest {
     private val uuidFactory: UUIDFactory = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
-    private val taskActivityFactory: TaskActivityFactory = mockk()
+    private val addTaskActivityUseCase: AddTaskActivityUseCase = mockk()
     private val addProjectActivityUseCase: AddProjectActivityUseCase = mockk()
-    private val activityRepository: ActivityRepository = mockk()
 
     private val sut = DuplicateTaskUseCase(
         taskRepository,
         uuidFactory,
         localDateTimeFactory,
         getTaskOrThrowUseCase,
-        taskActivityFactory,
+        addTaskActivityUseCase,
         addProjectActivityUseCase,
-        activityRepository,
     )
 
     @Test
@@ -58,9 +54,7 @@ class DuplicateTaskUseCaseTest {
         val repositoryTask: Task = mockk()
         every { taskRepository.saveTask(newTask) } returns repositoryTask
         every { repositoryTask.projectId } returns null
-        val activity: TaskActivity = mockk()
-        every { taskActivityFactory(newTaskId, date, CREATE) } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        justRun { addTaskActivityUseCase(newTaskId, CREATE, date) }
 
         // when
         sut(oldTaskId)
@@ -88,15 +82,13 @@ class DuplicateTaskUseCaseTest {
         val repositoryTask: Task = mockk()
         every { taskRepository.saveTask(newTask) } returns repositoryTask
         every { repositoryTask.projectId } returns null
-        val activity: TaskActivity = mockk()
-        every { taskActivityFactory(newTaskId, date, CREATE) } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        justRun { addTaskActivityUseCase(newTaskId, CREATE, date) }
 
         // when
         sut(oldTaskId)
 
         // then
-        verify { activityRepository.addTaskActivity(activity) }
+        verify { addTaskActivityUseCase(newTaskId, CREATE, date) }
     }
 
     @Test
@@ -119,9 +111,7 @@ class DuplicateTaskUseCaseTest {
         every { taskRepository.saveTask(newTask) } returns repositoryTask
         val projectId = getProjectId1()
         every { repositoryTask.projectId } returns projectId
-        val activity: TaskActivity = mockk()
-        every { taskActivityFactory(newTaskId, date, CREATE) } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        justRun { addTaskActivityUseCase(newTaskId, CREATE, date) }
         justRun { addProjectActivityUseCase(projectId, TASK_ADDED, date) }
 
         // when
@@ -150,9 +140,7 @@ class DuplicateTaskUseCaseTest {
         val repositoryTask: Task = mockk()
         every { taskRepository.saveTask(newTask) } returns repositoryTask
         every { repositoryTask.projectId } returns null
-        val activity: TaskActivity = mockk()
-        every { taskActivityFactory(newTaskId, date, CREATE) } returns activity
-        every { activityRepository.addTaskActivity(activity) } returns mockk()
+        justRun { addTaskActivityUseCase(newTaskId, CREATE, date) }
 
         // when
         val actual = sut(oldTaskId)
