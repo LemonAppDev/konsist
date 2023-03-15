@@ -1,10 +1,10 @@
 package com.mango.domain.task.usecase.update
 
 import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.ProjectActivityFactory
 import com.mango.domain.activity.TaskActivityFactory
 import com.mango.domain.activity.model.ProjectActivityType
 import com.mango.domain.activity.model.TaskActivityType
+import com.mango.domain.activity.usecase.AddProjectActivityUseCase
 import com.mango.domain.project.model.ProjectId
 import com.mango.domain.project.usecase.GetProjectOrThrowUseCase
 import com.mango.domain.task.TaskRepository
@@ -19,7 +19,7 @@ class UpdateTaskProjectUseCase(
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase,
     private val taskActivityFactory: TaskActivityFactory,
-    private val projectActivityFactory: ProjectActivityFactory,
+    private val addProjectActivityUseCase: AddProjectActivityUseCase,
     private val activityRepository: ActivityRepository,
 ) {
     operator fun invoke(taskId: TaskId, newProjectId: ProjectId, date: LocalDateTime) {
@@ -57,8 +57,7 @@ class UpdateTaskProjectUseCase(
                     activityRepository.addTaskActivity(childTaskActivity)
                 }
 
-            val projectActivity = projectActivityFactory(newProjectId, date, ProjectActivityType.TASK_ADDED)
-            activityRepository.addProjectActivity(projectActivity)
+            addProjectActivityUseCase(newProjectId, ProjectActivityType.TASK_ADDED, date)
         }
     }
 }

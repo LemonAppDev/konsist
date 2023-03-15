@@ -1,12 +1,11 @@
 package com.mango.domain.task.usecase
 
 import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.ProjectActivityFactory
 import com.mango.domain.activity.TaskActivityFactory
-import com.mango.domain.activity.model.ProjectActivity
 import com.mango.domain.activity.model.ProjectActivityType.TASK_ADDED
 import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityType.CREATE
+import com.mango.domain.activity.usecase.AddProjectActivityUseCase
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.model.BusinessTestModel.getCurrentDate
 import com.mango.domain.common.model.BusinessTestModel.getFutureDate1
@@ -41,7 +40,7 @@ class CreateTaskUseCaseTest {
     private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val taskActivityFactory: TaskActivityFactory = mockk()
-    private val projectActivityFactory: ProjectActivityFactory = mockk()
+    private val addProjectActivityUseCase: AddProjectActivityUseCase = mockk()
     private val activityRepository: ActivityRepository = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
 
@@ -53,7 +52,7 @@ class CreateTaskUseCaseTest {
         requireDateIsNowOrLaterUseCase,
         localDateTimeFactory,
         taskActivityFactory,
-        projectActivityFactory,
+        addProjectActivityUseCase,
         activityRepository,
         getTaskOrThrowUseCase,
     )
@@ -135,9 +134,7 @@ class CreateTaskUseCaseTest {
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, creationDate, CREATE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
-        val projectActivity: ProjectActivity = mockk()
-        every { projectActivityFactory(projectId, creationDate, TASK_ADDED) } returns projectActivity
-        every { activityRepository.addProjectActivity(projectActivity) } returns mockk()
+        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
 
         // when
         sut.invoke(createTaskRequestModel)
@@ -185,9 +182,7 @@ class CreateTaskUseCaseTest {
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, creationDate, CREATE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
-        val projectActivity: ProjectActivity = mockk()
-        every { projectActivityFactory(projectId, creationDate, TASK_ADDED) } returns projectActivity
-        every { activityRepository.addProjectActivity(projectActivity) } returns mockk()
+        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
 
         // when
         sut.invoke(createTaskRequestModel)
@@ -235,15 +230,13 @@ class CreateTaskUseCaseTest {
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, creationDate, CREATE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
-        val projectActivity: ProjectActivity = mockk()
-        every { projectActivityFactory(projectId, creationDate, TASK_ADDED) } returns projectActivity
-        every { activityRepository.addProjectActivity(projectActivity) } returns mockk()
+        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
 
         // when
         sut.invoke(createTaskRequestModel)
 
         // then
-        verify { activityRepository.addProjectActivity(projectActivity) }
+        verify { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
     }
 
     @Test
@@ -286,9 +279,7 @@ class CreateTaskUseCaseTest {
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(taskId, creationDate, CREATE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
-        val projectActivity: ProjectActivity = mockk()
-        every { projectActivityFactory(projectId, creationDate, TASK_ADDED) } returns projectActivity
-        every { activityRepository.addProjectActivity(projectActivity) } returns mockk()
+        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
 
         // when
         val actual = sut.invoke(createTaskRequestModel)

@@ -2,12 +2,11 @@ package com.mango.domain.task.usecase
 
 import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.ProjectActivityFactory
 import com.mango.domain.activity.TaskActivityFactory
-import com.mango.domain.activity.model.ProjectActivity
 import com.mango.domain.activity.model.ProjectActivityType.TASK_ADDED
 import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityType.CREATE
+import com.mango.domain.activity.usecase.AddProjectActivityUseCase
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
@@ -15,6 +14,7 @@ import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId2
 import com.mango.domain.task.model.Task
 import io.mockk.every
+import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
@@ -27,7 +27,7 @@ class DuplicateTaskUseCaseTest {
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val taskActivityFactory: TaskActivityFactory = mockk()
-    private val projectActivityFactory: ProjectActivityFactory = mockk()
+    private val addProjectActivityUseCase: AddProjectActivityUseCase = mockk()
     private val activityRepository: ActivityRepository = mockk()
 
     private val sut = DuplicateTaskUseCase(
@@ -36,7 +36,7 @@ class DuplicateTaskUseCaseTest {
         localDateTimeFactory,
         getTaskOrThrowUseCase,
         taskActivityFactory,
-        projectActivityFactory,
+        addProjectActivityUseCase,
         activityRepository,
     )
 
@@ -122,15 +122,13 @@ class DuplicateTaskUseCaseTest {
         val activity: TaskActivity = mockk()
         every { taskActivityFactory(newTaskId, date, CREATE) } returns activity
         every { activityRepository.addTaskActivity(activity) } returns mockk()
-        val projectActivity: ProjectActivity = mockk()
-        every { projectActivityFactory(projectId, date, TASK_ADDED) } returns projectActivity
-        every { activityRepository.addProjectActivity(projectActivity) } returns mockk()
+        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, date) }
 
         // when
         sut(oldTaskId)
 
         // then
-        verify { activityRepository.addProjectActivity(projectActivity) }
+        verify { addProjectActivityUseCase(projectId, TASK_ADDED, date) }
     }
 
     @Test

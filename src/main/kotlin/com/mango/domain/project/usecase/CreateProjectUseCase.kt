@@ -1,8 +1,7 @@
 package com.mango.domain.project.usecase
 
-import com.mango.domain.activity.ActivityRepository
-import com.mango.domain.activity.ProjectActivityFactory
 import com.mango.domain.activity.model.ProjectActivityType
+import com.mango.domain.activity.usecase.AddProjectActivityUseCase
 import com.mango.domain.project.ProjectFactory
 import com.mango.domain.project.ProjectRepository
 import com.mango.domain.project.model.Project
@@ -13,15 +12,13 @@ import org.springframework.stereotype.Service
 class CreateProjectUseCase(
     private val projectFactory: ProjectFactory,
     private val projectRepository: ProjectRepository,
-    private val projectActivityFactory: ProjectActivityFactory,
-    private val activityRepository: ActivityRepository,
+    private val addProjectActivityUseCase: AddProjectActivityUseCase,
 ) {
     operator fun invoke(createProjectRequestModel: CreateProjectRequestModel): Project {
         val project = projectFactory(createProjectRequestModel)
 
         return projectRepository.saveProject(project).also {
-            val activity = projectActivityFactory(project.id, project.creationDate, ProjectActivityType.CREATE)
-            activityRepository.addProjectActivity(activity)
+            addProjectActivityUseCase(project.id, ProjectActivityType.CREATE, project.creationDate)
         }
     }
 }

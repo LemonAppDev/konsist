@@ -9,37 +9,6 @@ import com.tngtech.archunit.lang.SimpleConditionEvent.violated
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 
-fun haveOnePublicMethodWithName(methodName: String) =
-    object : ArchCondition<JavaClass>("have exactly one public method named '$methodName'") {
-        override fun check(javaClass: JavaClass, conditionEvents: ConditionEvents) {
-            val publicMethods = javaClass
-                .methods
-                .filter { it.modifiers.contains(JavaModifier.PUBLIC) }
-
-            if (publicMethods.size == 1) {
-                val method = publicMethods[0]
-
-                // When method accepts Kotlin value class then Kotlin will generate
-                // a random suffix to the method name e.g. methodName-suffix
-                val methodExists = method.name == methodName || method.name.startsWith("$methodName-")
-
-                if (!methodExists) {
-                    val message: String = createMessage(
-                        javaClass,
-                        "contains does not have method named '${method.name}' ${method.sourceCodeLocation}",
-                    )
-                    conditionEvents.add(violated(javaClass, message))
-                }
-            } else {
-                val message: String = createMessage(
-                    javaClass,
-                    "contains multiple public methods",
-                )
-                conditionEvents.add(violated(javaClass, message))
-            }
-        }
-    }
-
 fun haveOnlyTestsMarkedAsPublic() = object : ArchCondition<JavaClass>("have only tests marked as public") {
     override fun check(javaClass: JavaClass, conditionEvents: ConditionEvents) {
         val publicMethods = javaClass
