@@ -241,6 +241,89 @@ class TaskControllerTest {
     }
 
     @Test
+    fun `update endpoint updates complete date in all subtasks`() {
+        // given
+        val parentTask = taskEndpointHelper.callCreateEndpoint()
+        val childTask1 = taskEndpointHelper.callCreateEndpoint(parentTaskId = parentTask.id)
+        val childTask2 = taskEndpointHelper.callCreateEndpoint(parentTaskId = parentTask.id)
+
+        // when
+        taskEndpointHelper.callUpdateEndpoint(
+            UpdateTaskRequestModel(
+                taskId = parentTask.id,
+                isCompleted = true,
+            ),
+        )
+
+        // then
+        val updatedParentTask = taskEndpointHelper.callGetEndpoint(parentTask.id)
+        val updatedChildTask1 = taskEndpointHelper.callGetEndpoint(childTask1.id)
+        val updatedChildTask2 = taskEndpointHelper.callGetEndpoint(childTask2.id)
+        val completeDate = updatedParentTask.completeDate
+
+        val actual = taskEndpointHelper.callAllEndpoint()
+            .filter { it.completeDate == completeDate }
+        actual shouldBeEqualTo listOf(updatedParentTask, updatedChildTask1, updatedChildTask2)
+    }
+
+    @Test
+    fun `update endpoint updates complete date in subtasks recursively if they haven't been completed earlier`() {
+        // given
+        val parentTask = taskEndpointHelper.callCreateEndpoint()
+        val childTask = taskEndpointHelper.callCreateEndpoint(parentTaskId = parentTask.id)
+        val childChildTask = taskEndpointHelper.callCreateEndpoint(parentTaskId = childTask.id)
+
+        // when
+        taskEndpointHelper.callUpdateEndpoint(
+            UpdateTaskRequestModel(
+                taskId = parentTask.id,
+                isCompleted = true,
+            ),
+        )
+
+        // then
+        val updatedParentTask = taskEndpointHelper.callGetEndpoint(parentTask.id)
+        val updatedChildTask1 = taskEndpointHelper.callGetEndpoint(childTask.id)
+        val updatedChildTask2 = taskEndpointHelper.callGetEndpoint(childChildTask.id)
+        val completeDate = updatedParentTask.completeDate
+
+        val actual = taskEndpointHelper.callAllEndpoint()
+            .filter { it.completeDate == completeDate }
+        actual shouldBeEqualTo listOf(updatedParentTask, updatedChildTask1, updatedChildTask2)
+    }
+
+    @Test
+    fun `update endpoint not updates complete date in subtasks if they have been completed earlier`() {
+        // given
+        val parentTask = taskEndpointHelper.callCreateEndpoint()
+        val childTask = taskEndpointHelper.callCreateEndpoint(parentTaskId = parentTask.id)
+        val childChildTask = taskEndpointHelper.callCreateEndpoint(parentTaskId = childTask.id)
+        taskEndpointHelper.callUpdateEndpoint(
+            UpdateTaskRequestModel(
+                childChildTask.id,
+                isCompleted = true,
+            ),
+        )
+
+        // when
+        taskEndpointHelper.callUpdateEndpoint(
+            UpdateTaskRequestModel(
+                taskId = parentTask.id,
+                isCompleted = true,
+            ),
+        )
+
+        // then
+        val updatedParentTask = taskEndpointHelper.callGetEndpoint(parentTask.id)
+        val updatedChildTask1 = taskEndpointHelper.callGetEndpoint(childTask.id)
+        val completeDate = updatedParentTask.completeDate
+
+        val actual = taskEndpointHelper.callAllEndpoint()
+            .filter { it.completeDate == completeDate }
+        actual shouldBeEqualTo listOf(updatedParentTask, updatedChildTask1)
+    }
+
+    @Test
     fun `update endpoint adds task_added project activity when project is changed`() {
         // given
         val oldProject = projectEndpointHelper.callCreateEndpoint()

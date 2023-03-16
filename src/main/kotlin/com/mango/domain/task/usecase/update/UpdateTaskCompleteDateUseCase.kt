@@ -18,14 +18,16 @@ class UpdateTaskCompleteDateUseCase(
     operator fun invoke(taskId: TaskId, isComplete: Boolean, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)
 
-        if (isComplete && task.completeDate == null) {
-            updateCompleteDate(task, date, date)
-        } else if (!isComplete && task.completeDate != null) {
-            updateCompleteDate(task, date, null)
-        }
+        updateCompleteDate(task, isComplete, date)
     }
 
-    private fun updateCompleteDate(task: Task, date: LocalDateTime, completeDate: LocalDateTime?) {
+    private fun updateCompleteDate(task: Task, isComplete: Boolean, date: LocalDateTime?) {
+        val completeDate = when {
+            isComplete && task.completeDate == null -> date
+            !isComplete && task.completeDate != null -> null
+            else -> return
+        }
+
         val oldDate = task.completeDate
         val newTask = task.copy(completeDate = completeDate)
 
@@ -38,5 +40,9 @@ class UpdateTaskCompleteDateUseCase(
             newTask.completeDate.toString(),
             oldDate.toString(),
         )
+
+        taskRepository.tasks
+            .filter { childTask -> childTask.parentTaskId == task.id }
+            .forEach { childTask -> updateCompleteDate(childTask, isComplete, date) }
     }
 }
