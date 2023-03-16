@@ -23,6 +23,7 @@ class UpdateTaskUseCase(
     operator fun invoke(updateTaskRequestModel: UpdateTaskRequestModel) {
         val task = getTaskOrThrowUseCase(updateTaskRequestModel.taskId)
 
+        // Single date allows to potentially group changes performed at the same time
         val date = localDateTimeFactory()
 
         with(updateTaskRequestModel) {
