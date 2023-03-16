@@ -38,7 +38,7 @@ class UpdateTaskProjectUseCaseTest {
     )
 
     @Test
-    fun `add task to repository`() {
+    fun `add task with changed project id`() {
         // given
         val taskId = getTaskId1()
         val oldProjectId = getProjectId1()
@@ -70,7 +70,7 @@ class UpdateTaskProjectUseCaseTest {
     }
 
     @Test
-    fun `adds child tasks with changed projectId to repository`() {
+    fun `adds child tasks with changed project id`() {
         // given
         val taskId = getTaskId1()
         val oldProjectId = getProjectId1()
@@ -88,10 +88,12 @@ class UpdateTaskProjectUseCaseTest {
         val id1 = getTaskId2()
         every { task1.id } returns id1
         every { task1.parentTaskId } returns taskId
+        every { task1.projectId } returns oldProjectId
         val task2: Task = mockk()
         val id2 = getTaskId3()
         every { task2.id } returns id2
         every { task2.parentTaskId } returns taskId
+        every { task2.projectId } returns oldProjectId
         every { taskRepository.tasks } returns listOf(task1, task2)
         every { task1.copy(projectId = newProjectId) } returns task1
         every { taskRepository.saveTask(task1) } returns mockk()
@@ -119,7 +121,7 @@ class UpdateTaskProjectUseCaseTest {
     }
 
     @Test
-    fun `add project task_added activity to repository`() {
+    fun `add 'project task_added activity'`() {
         // given
         val taskId = getTaskId1()
         val oldProjectId = getProjectId1()
@@ -151,7 +153,7 @@ class UpdateTaskProjectUseCaseTest {
     }
 
     @Test
-    fun `add three update activities to repository`() {
+    fun `add 'project task_added activity' two times when task has a child task`() {
         // given
         val taskId = getTaskId1()
         val oldProjectId = getProjectId1()
@@ -169,23 +171,85 @@ class UpdateTaskProjectUseCaseTest {
         val id1 = getTaskId2()
         every { task1.id } returns id1
         every { task1.parentTaskId } returns taskId
-        val task2: Task = mockk()
-        val id2 = getTaskId3()
-        every { task2.id } returns id2
-        every { task2.parentTaskId } returns taskId
-        every { taskRepository.tasks } returns listOf(task1, task2)
+        every { task1.projectId } returns oldProjectId
+        every { taskRepository.tasks } returns listOf(task1)
         every { task1.copy(projectId = newProjectId) } returns task1
         every { taskRepository.saveTask(task1) } returns mockk()
-        every { task2.copy(projectId = newProjectId) } returns task2
-        every { taskRepository.saveTask(task2) } returns mockk()
         justRun {
             addTaskActivityUseCase(taskId, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
         }
         justRun {
             addTaskActivityUseCase(id1, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
         }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
+
+        // when
+        sut(taskId, newProjectId, date)
+
+        // then
+        verify(exactly = 2) { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
+    }
+
+    @Test
+    fun `add 'task update activity'`() {
+        // given
+        val taskId = getTaskId1()
+        val oldProjectId = getProjectId1()
+        val newProjectId = getProjectId2()
+        val date: LocalDateTime = mockk()
+
+        val oldTask = getTask(id = taskId, projectId = oldProjectId)
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
+        every { getProjectOrThrowUseCase(newProjectId) } returns mockk()
+        val newTask = oldTask.copy(projectId = newProjectId)
+        every { taskRepository.tasks } returns mockk(relaxed = true)
+        every { taskRepository.saveTask(newTask) } returns mockk()
         justRun {
-            addTaskActivityUseCase(id2, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
+            addTaskActivityUseCase(
+                taskId,
+                UPDATE_PROJECT,
+                date,
+                newProjectId.value.toString(),
+                oldProjectId.value.toString(),
+            )
+        }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
+
+        // when
+        sut(taskId, newProjectId, date)
+
+        // then
+        verify { addTaskActivityUseCase(taskId, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString()) }
+    }
+
+    @Test
+    fun `add two 'task update activities' when task has a child task`() {
+        // given
+        val taskId = getTaskId1()
+        val oldProjectId = getProjectId1()
+        val newProjectId = getProjectId2()
+        val date: LocalDateTime = mockk()
+
+        val oldTask = getTask(id = taskId, projectId = oldProjectId)
+        every { getTaskOrThrowUseCase(taskId) } returns oldTask
+        every { getProjectOrThrowUseCase(newProjectId) } returns mockk()
+        val newTask = oldTask.copy(projectId = newProjectId)
+        every { taskRepository.tasks } returns mockk(relaxed = true)
+        every { taskRepository.saveTask(newTask) } returns mockk()
+
+        val task1: Task = mockk()
+        val id1 = getTaskId2()
+        every { task1.id } returns id1
+        every { task1.parentTaskId } returns taskId
+        every { task1.projectId } returns oldProjectId
+        every { taskRepository.tasks } returns listOf(task1)
+        every { task1.copy(projectId = newProjectId) } returns task1
+        every { taskRepository.saveTask(task1) } returns mockk()
+        justRun {
+            addTaskActivityUseCase(taskId, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
+        }
+        justRun {
+            addTaskActivityUseCase(id1, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
         }
         justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
 
@@ -196,7 +260,6 @@ class UpdateTaskProjectUseCaseTest {
         verifyOrder {
             addTaskActivityUseCase(taskId, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
             addTaskActivityUseCase(id1, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
-            addTaskActivityUseCase(id2, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
         }
     }
 

@@ -214,6 +214,33 @@ class TaskControllerTest {
     }
 
     @Test
+    fun `update endpoint updates project in all subtasks recursively`() {
+        // given
+        val oldProject = projectEndpointHelper.callCreateEndpoint()
+        val newProject = projectEndpointHelper.callCreateEndpoint()
+        val parentTask = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id)
+        val childTask = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id, parentTaskId = parentTask.id)
+        val childChildTask = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id, parentTaskId = childTask.id)
+
+        // when
+        taskEndpointHelper.callUpdateEndpoint(
+            UpdateTaskRequestModel(
+                taskId = parentTask.id,
+                projectId = newProject.id,
+                isCompleted = true,
+            ),
+        )
+
+        // then
+        val updatedParentTask = taskEndpointHelper.callGetEndpoint(parentTask.id)
+        val updatedChildTask1 = taskEndpointHelper.callGetEndpoint(childTask.id)
+        val updatedChildTask2 = taskEndpointHelper.callGetEndpoint(childChildTask.id)
+        val actual = taskEndpointHelper.callAllEndpoint()
+            .filter { it.projectId == newProject.id }
+        actual shouldBeEqualTo listOf(updatedParentTask, updatedChildTask1, updatedChildTask2)
+    }
+
+    @Test
     fun `update endpoint adds task_added project activity when project is changed`() {
         // given
         val oldProject = projectEndpointHelper.callCreateEndpoint()

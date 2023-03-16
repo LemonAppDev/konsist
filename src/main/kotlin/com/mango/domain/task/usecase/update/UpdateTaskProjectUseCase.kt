@@ -7,6 +7,7 @@ import com.mango.domain.activity.usecase.AddTaskActivityUseCase
 import com.mango.domain.project.model.ProjectId
 import com.mango.domain.project.usecase.GetProjectOrThrowUseCase
 import com.mango.domain.task.TaskRepository
+import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.TaskId
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import org.springframework.stereotype.Service
@@ -24,6 +25,10 @@ class UpdateTaskProjectUseCase(
         val task = getTaskOrThrowUseCase(taskId)
         getProjectOrThrowUseCase(newProjectId)
 
+        updateTaskProject(task, newProjectId, date)
+    }
+
+    private fun updateTaskProject(task: Task, newProjectId: ProjectId, date: LocalDateTime) {
         val oldProjectId = task.projectId
 
         if (newProjectId != oldProjectId) {
@@ -38,22 +43,11 @@ class UpdateTaskProjectUseCase(
                 newProjectId.value.toString(),
                 oldProjectId?.value.toString(),
             )
+            addProjectActivityUseCase(newProjectId, ProjectActivityType.TASK_ADDED, date)
 
             taskRepository.tasks
-                .filter { it.parentTaskId == taskId }
-                .forEach {
-                    taskRepository.saveTask(it.copy(projectId = newProjectId))
-
-                    addTaskActivityUseCase(
-                        it.id,
-                        TaskActivityType.UPDATE_PROJECT,
-                        date,
-                        newProjectId.value.toString(),
-                        oldProjectId?.value.toString(),
-                    )
-                }
-
-            addProjectActivityUseCase(newProjectId, ProjectActivityType.TASK_ADDED, date)
+                .filter { it.parentTaskId == task.id }
+                .forEach { updateTaskProject(it, newProjectId, date) }
         }
     }
 }
