@@ -10,7 +10,7 @@ dependencyResolutionManagement {
             plugin("kotlin-plugin-spring", "org.jetbrains.kotlin.plugin.spring").versionRef("kotlinVersion")
             plugin("kotlin-plugin-jpa", "org.jetbrains.kotlin.plugin.jpa").versionRef("kotlinVersion")
             plugin("kotlin-jvm", "org.jetbrains.kotlin.jvm").versionRef("kotlinVersion")
-            plugin("spotless", "com.diffplug.spotless").version("6.15.0")
+            plugin("spotless", "com.diffplug.spotless").version("6.17.0")
             plugin("testLogger", "com.adarshr.test-logger").version("3.2.0")
             plugin("detekt", "io.gitlab.arturbosch.detekt").version("1.22.0")
 
