@@ -199,6 +199,7 @@ class TaskControllerTest {
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
                 taskId = parentTask.id,
+                name = parentTask.name,
                 projectId = newProject.id,
                 isCompleted = true,
             ),
@@ -226,6 +227,7 @@ class TaskControllerTest {
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
                 taskId = parentTask.id,
+                name = "name",
                 projectId = newProject.id,
                 isCompleted = true,
             ),
@@ -251,6 +253,7 @@ class TaskControllerTest {
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
                 taskId = parentTask.id,
+                name = "name",
                 isCompleted = true,
             ),
         )
@@ -277,6 +280,7 @@ class TaskControllerTest {
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
                 taskId = parentTask.id,
+                name = "name",
                 isCompleted = true,
             ),
         )
@@ -301,6 +305,7 @@ class TaskControllerTest {
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
                 childChildTask.id,
+                name = "name",
                 isCompleted = true,
             ),
         )
@@ -309,6 +314,7 @@ class TaskControllerTest {
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
                 taskId = parentTask.id,
+                name = "name",
                 isCompleted = true,
             ),
         )
@@ -334,6 +340,7 @@ class TaskControllerTest {
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
                 taskId = task.id,
+                name = task.name,
                 projectId = newProject.id,
             ),
         )
@@ -602,6 +609,7 @@ class TaskControllerTest {
         val task = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id, parentTaskId = parentTask.id)
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
+                name = parentTask.name,
                 taskId = parentTask.id,
                 projectId = newProject.id,
             ),
@@ -610,6 +618,7 @@ class TaskControllerTest {
         // when
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
+                name = parentTask.name,
                 taskId = parentTask.id,
                 projectId = newProject.id,
             ),

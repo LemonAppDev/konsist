@@ -21,14 +21,14 @@ class UpdateTaskProjectUseCase(
     private val addTaskActivityUseCase: AddTaskActivityUseCase,
     private val addProjectActivityUseCase: AddProjectActivityUseCase,
 ) {
-    operator fun invoke(taskId: TaskId, newProjectId: ProjectId, date: LocalDateTime) {
+    operator fun invoke(taskId: TaskId, newProjectId: ProjectId?, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)
-        getProjectOrThrowUseCase(newProjectId)
+        newProjectId?.let { getProjectOrThrowUseCase(it) }
 
         updateTaskProject(task, newProjectId, date)
     }
 
-    private fun updateTaskProject(task: Task, newProjectId: ProjectId, date: LocalDateTime) {
+    private fun updateTaskProject(task: Task, newProjectId: ProjectId?, date: LocalDateTime) {
         val oldProjectId = task.projectId
 
         if (newProjectId != oldProjectId) {
@@ -40,10 +40,10 @@ class UpdateTaskProjectUseCase(
                 newTask.id,
                 TaskActivityType.UPDATE_PROJECT,
                 date,
-                newProjectId.value.toString(),
+                newProjectId?.value.toString(),
                 oldProjectId?.value.toString(),
             )
-            addProjectActivityUseCase(newProjectId, ProjectActivityType.TASK_ADDED, date)
+            newProjectId?.let { addProjectActivityUseCase(newProjectId, ProjectActivityType.TASK_ADDED, date) }
 
             taskRepository.tasks
                 .filter { it.parentTaskId == task.id }

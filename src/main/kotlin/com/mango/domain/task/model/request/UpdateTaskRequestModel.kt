@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 
 data class UpdateTaskRequestModel(
     val taskId: TaskId,
-    val name: String? = null,
+    val name: String,
     val description: String? = null,
     val dueDate: LocalDateTime? = null,
     val targetDate: LocalDateTime? = null,
@@ -16,5 +16,5 @@ data class UpdateTaskRequestModel(
     val projectId: ProjectId? = null,
     val parentTaskId: TaskId? = null,
     val assigneeId: UserId? = null,
-    val isCompleted: Boolean? = null,
+    val isCompleted: Boolean = false,
 )

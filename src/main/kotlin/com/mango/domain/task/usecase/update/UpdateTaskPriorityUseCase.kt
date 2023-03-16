@@ -15,7 +15,7 @@ class UpdateTaskPriorityUseCase(
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val addTaskActivityUseCase: AddTaskActivityUseCase,
 ) {
-    operator fun invoke(taskId: TaskId, newPriority: Priority, date: LocalDateTime) {
+    operator fun invoke(taskId: TaskId, newPriority: Priority?, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)
 
         val oldPriority = task.priority

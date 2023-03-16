@@ -14,14 +14,14 @@ class UpdateTaskParentTaskUseCase(
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val addTaskActivityUseCase: AddTaskActivityUseCase,
 ) {
-    operator fun invoke(taskId: TaskId, newParentTaskId: TaskId, date: LocalDateTime) {
+    operator fun invoke(taskId: TaskId, newParentTaskId: TaskId?, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)
-        val parentTask = getTaskOrThrowUseCase(newParentTaskId)
+        val parentTask = newParentTaskId?.let { getTaskOrThrowUseCase(it) }
 
         val oldParentTaskId = task.parentTaskId
 
         if (newParentTaskId != oldParentTaskId) {
-            require(parentTask.projectId == task.projectId) { "Task and parent task are not in the same project" }
+            require(parentTask?.projectId == task.projectId) { "Task and parent task are not in the same project" }
             val newTask = task.copy(parentTaskId = newParentTaskId)
 
             taskRepository.saveTask(newTask)
@@ -30,7 +30,7 @@ class UpdateTaskParentTaskUseCase(
                 newTask.id,
                 TaskActivityType.UPDATE_PARENT_TASK,
                 date,
-                newParentTaskId.value.toString(),
+                newParentTaskId?.value.toString(),
                 oldParentTaskId?.value.toString(),
             )
         }

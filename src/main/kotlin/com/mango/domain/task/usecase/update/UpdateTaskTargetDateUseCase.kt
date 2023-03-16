@@ -16,8 +16,8 @@ class UpdateTaskTargetDateUseCase(
     private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase,
     private val addTaskActivityUseCase: AddTaskActivityUseCase,
 ) {
-    operator fun invoke(taskId: TaskId, newTargetDate: LocalDateTime, date: LocalDateTime) {
-        requireDateIsNowOrLaterUseCase(newTargetDate)
+    operator fun invoke(taskId: TaskId, newTargetDate: LocalDateTime?, date: LocalDateTime) {
+        newTargetDate?.let { requireDateIsNowOrLaterUseCase(it) }
         val task = getTaskOrThrowUseCase(taskId)
 
         val oldTargetDate = task.targetDate

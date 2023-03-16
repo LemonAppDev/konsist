@@ -17,10 +17,10 @@ class UpdateTaskAssigneeUseCase(
     private val checkUserIdUseCase: CheckUserIdUseCase,
     private val addTaskActivityUseCase: AddTaskActivityUseCase,
 ) {
-    operator fun invoke(taskId: TaskId, newAssigneeId: UserId, date: LocalDateTime) {
+    operator fun invoke(taskId: TaskId, newAssigneeId: UserId?, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)
 
-        checkUserIdUseCase(newAssigneeId)
+        newAssigneeId?.let { checkUserIdUseCase(it) }
 
         val oldAssigneeId = task.assigneeId
 
@@ -33,7 +33,7 @@ class UpdateTaskAssigneeUseCase(
                 newTask.id,
                 TaskActivityType.UPDATE_ASSIGNEE,
                 date,
-                newAssigneeId.value.toString(),
+                newAssigneeId?.value.toString(),
                 oldAssigneeId?.value.toString(),
             )
         }

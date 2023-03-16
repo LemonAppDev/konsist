@@ -14,7 +14,7 @@ class UpdateTaskDescriptionUseCase(
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val addTaskActivityUseCase: AddTaskActivityUseCase,
 ) {
-    operator fun invoke(taskId: TaskId, newDescription: String, date: LocalDateTime) {
+    operator fun invoke(taskId: TaskId, newDescription: String?, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)
 
         val oldDescription = task.description

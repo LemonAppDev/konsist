@@ -113,13 +113,14 @@ class UpdateTaskUseCaseTest {
         val task: Task = mockk()
         val taskId = getTaskId1()
         every { task.id } returns taskId
+        every { task.name } returns "name"
 
         val updDate = getCurrentDate()
         every { localDateTimeFactory() } returns updDate
 
         val updateTaskRequestModel = UpdateTaskRequestModel(
             taskId = taskId,
-            name = null,
+            name = "name",
             description = null,
             dueDate = null,
             targetDate = null,
@@ -130,6 +131,14 @@ class UpdateTaskUseCaseTest {
             isCompleted = isCompleted,
         )
         every { getTaskOrThrowUseCase(taskId) } returns task
+        justRun { updateTaskNameUseCase(taskId, "name", updDate) }
+        justRun { updateTaskDescriptionUseCase(taskId, null, updDate) }
+        justRun { updateTaskDueDateUseCase(taskId, null, updDate) }
+        justRun { updateTaskTargetDateUseCase(taskId, null, updDate) }
+        justRun { updateTaskPriorityUseCase(taskId, null, updDate) }
+        justRun { updateTaskProjectUseCase(taskId, null, updDate) }
+        justRun { updateTaskParentTaskUseCase(taskId, null, updDate) }
+        justRun { updateTaskAssigneeUseCase(taskId, null, updDate) }
         justRun { updateTaskCompleteDateUseCase(taskId, isCompleted, updDate) }
 
         // when
