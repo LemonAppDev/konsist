@@ -1,11 +1,11 @@
 package com.mango.application.controller
 
+import com.mango.application.model.project.CreateProjectRequestModel
 import com.mango.domain.activity.model.ProjectActivity
 import com.mango.domain.activity.model.ProjectActivityType.CREATE
 import com.mango.domain.common.model.Color
 import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.ProjectId
-import com.mango.domain.project.model.request.CreateProjectRequestModel
 import com.mango.util.ControllerEndpointCaller
 import com.mango.util.Json.serialize
 import org.amshove.kluent.shouldBeEqualTo

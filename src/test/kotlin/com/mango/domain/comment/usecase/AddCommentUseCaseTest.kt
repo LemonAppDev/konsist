@@ -5,7 +5,6 @@ import com.mango.domain.activity.usecase.AddCommentActivityUseCase
 import com.mango.domain.comment.CommentFactory
 import com.mango.domain.comment.CommentRepository
 import com.mango.domain.comment.model.Comment
-import com.mango.domain.comment.model.request.AddCommentRequestModel
 import com.mango.domain.common.model.BusinessTestModel.getCommentId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.task.usecase.CheckTaskIdUseCase
@@ -38,7 +37,6 @@ class AddCommentUseCaseTest {
         val taskId = getTaskId1()
         val commentId = getCommentId1()
         val text = "comment"
-        val addCommentRequestModel = AddCommentRequestModel(taskId, text)
         val date: LocalDateTime = mockk()
         val comment: Comment = mockk()
         every { comment.id } returns commentId
@@ -51,7 +49,7 @@ class AddCommentUseCaseTest {
         justRun { addCommentActivityUseCase(comment, ADD_COMMENT, date, text) }
 
         // when
-        sut(addCommentRequestModel)
+        sut(taskId, text)
 
         // then
         verify { commentRepository.saveComment(comment) }
@@ -63,7 +61,6 @@ class AddCommentUseCaseTest {
         val taskId = getTaskId1()
         val commentId = getCommentId1()
         val text = "comment"
-        val addCommentRequestModel = AddCommentRequestModel(taskId, text)
         val date: LocalDateTime = mockk()
         val comment: Comment = mockk()
         every { comment.id } returns commentId
@@ -76,7 +73,7 @@ class AddCommentUseCaseTest {
         justRun { addCommentActivityUseCase(comment, ADD_COMMENT, date, text) }
 
         // when
-        sut(addCommentRequestModel)
+        sut(taskId, text)
 
         // then
         verify { addCommentActivityUseCase(comment, ADD_COMMENT, date, text) }
@@ -88,7 +85,6 @@ class AddCommentUseCaseTest {
         val commentId = getCommentId1()
         val taskId = getTaskId1()
         val text = "comment"
-        val addCommentRequestModel = AddCommentRequestModel(taskId, text)
         val date: LocalDateTime = mockk()
         val comment: Comment = mockk()
         every { comment.id } returns commentId
@@ -101,7 +97,7 @@ class AddCommentUseCaseTest {
         justRun { addCommentActivityUseCase(comment, ADD_COMMENT, date, text) }
 
         // when
-        val actual = sut(addCommentRequestModel)
+        val actual = sut(taskId, text)
 
         // then
         actual shouldBeEqualTo comment

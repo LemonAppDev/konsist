@@ -1,5 +1,6 @@
 package com.mango.domain.project.usecase
 
+import com.mango.application.model.project.CreateProjectRequestModel
 import com.mango.data.project.ProjectRepositoryImpl
 import com.mango.domain.activity.model.ProjectActivityType.CREATE
 import com.mango.domain.activity.usecase.AddProjectActivityUseCase
@@ -7,7 +8,6 @@ import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.Color
 import com.mango.domain.project.ProjectFactory
 import com.mango.domain.project.model.Project
-import com.mango.domain.project.model.request.CreateProjectRequestModel
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
@@ -32,12 +32,18 @@ class CreateProjectUseCaseTest {
         // given
         val createProjectRequestModel = CreateProjectRequestModel(
             "name",
-            false,
             Color("0xFF0000"),
+            false,
         )
         val projectId = getProjectId1()
         val project: Project = mockk()
-        every { projectFactory(createProjectRequestModel) } returns project
+        every {
+            projectFactory(
+                createProjectRequestModel.name,
+                createProjectRequestModel.color,
+                createProjectRequestModel.isFavourite,
+            )
+        } returns project
         every { projectRepository.saveProject(project) } returns mockk()
         val date: LocalDateTime = mockk()
         every { project.id } returns projectId
@@ -45,7 +51,11 @@ class CreateProjectUseCaseTest {
         justRun { addProjectActivityUseCase(projectId, CREATE, date) }
 
         // when
-        sut(createProjectRequestModel)
+        sut(
+            createProjectRequestModel.name,
+            createProjectRequestModel.color,
+            createProjectRequestModel.isFavourite,
+        )
 
         // then
         verify { projectRepository.saveProject(project) }
@@ -56,12 +66,18 @@ class CreateProjectUseCaseTest {
         // given
         val createProjectRequestModel = CreateProjectRequestModel(
             "name",
-            false,
             Color("0xFF0000"),
+            false,
         )
         val projectId = getProjectId1()
         val project: Project = mockk()
-        every { projectFactory(createProjectRequestModel) } returns project
+        every {
+            projectFactory(
+                createProjectRequestModel.name,
+                createProjectRequestModel.color,
+                createProjectRequestModel.isFavourite,
+            )
+        } returns project
         every { projectRepository.saveProject(project) } returns mockk()
         val date: LocalDateTime = mockk()
         every { project.id } returns projectId
@@ -69,7 +85,11 @@ class CreateProjectUseCaseTest {
         justRun { addProjectActivityUseCase(projectId, CREATE, date) }
 
         // when
-        sut(createProjectRequestModel)
+        sut(
+            createProjectRequestModel.name,
+            createProjectRequestModel.color,
+            createProjectRequestModel.isFavourite,
+        )
 
         // then
         verify { addProjectActivityUseCase(projectId, CREATE, date) }
@@ -80,12 +100,18 @@ class CreateProjectUseCaseTest {
         // given
         val createProjectRequestModel = CreateProjectRequestModel(
             "name",
-            false,
             Color("0xFF0000"),
+            false,
         )
         val projectId = getProjectId1()
         val project: Project = mockk()
-        every { projectFactory(createProjectRequestModel) } returns project
+        every {
+            projectFactory(
+                createProjectRequestModel.name,
+                createProjectRequestModel.color,
+                createProjectRequestModel.isFavourite,
+            )
+        } returns project
         val repositoryProject: Project = mockk()
         every { projectRepository.saveProject(project) } returns repositoryProject
         val date: LocalDateTime = mockk()
@@ -96,7 +122,11 @@ class CreateProjectUseCaseTest {
         justRun { addProjectActivityUseCase(projectId, CREATE, date) }
 
         // when
-        val actual = sut(createProjectRequestModel)
+        val actual = sut(
+            createProjectRequestModel.name,
+            createProjectRequestModel.color,
+            createProjectRequestModel.isFavourite,
+        )
 
         // then
         actual shouldBe repositoryProject

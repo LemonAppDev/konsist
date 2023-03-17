@@ -13,7 +13,6 @@ import com.mango.domain.common.model.BusinessTestModel.getUserId1
 import com.mango.domain.common.model.BusinessTestModel.getUserId2
 import com.mango.domain.task.model.Priority.PRIORITY_2
 import com.mango.domain.task.model.Task
-import com.mango.domain.task.model.request.CreateTaskRequestModel
 import com.mango.domain.user.UserRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -49,7 +48,9 @@ class TaskFactoryTest {
         val parentTaskId = getTaskId2()
         val assigneeId = getUserId2()
         val completeDate = getFutureDate3()
-        val createTaskRequestModel = CreateTaskRequestModel(
+
+        // when
+        val actual = sut(
             name,
             description,
             dueDate,
@@ -58,10 +59,8 @@ class TaskFactoryTest {
             projectId,
             parentTaskId,
             assigneeId,
+            completeDate = completeDate,
         )
-
-        // when
-        val actual = sut(createTaskRequestModel, completeDate = completeDate)
 
         // then
         actual shouldBeEqualTo Task(

@@ -6,13 +6,16 @@ import com.mango.domain.activity.usecase.AddProjectActivityUseCase
 import com.mango.domain.activity.usecase.AddTaskActivityUseCase
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.usecase.RequireDateIsNowOrLaterUseCase
+import com.mango.domain.project.model.ProjectId
 import com.mango.domain.project.usecase.CheckProjectIdUseCase
 import com.mango.domain.task.TaskFactory
 import com.mango.domain.task.TaskRepository
 import com.mango.domain.task.model.Task
-import com.mango.domain.task.model.request.CreateTaskRequestModel
+import com.mango.domain.task.model.TaskId
+import com.mango.domain.user.model.UserId
 import com.mango.domain.user.usecase.CheckUserIdUseCase
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 @Service
 class CreateTaskUseCase(
@@ -26,21 +29,39 @@ class CreateTaskUseCase(
     private val addProjectActivityUseCase: AddProjectActivityUseCase,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
 ) {
-    operator fun invoke(createTaskRequestModel: CreateTaskRequestModel): Task {
+    @Suppress("detekt.LongParameterList")
+    operator fun invoke(
+        name: String,
+        description: String?,
+        dueDate: LocalDateTime?,
+        targetDate: LocalDateTime?,
+        priority: Int?,
+        projectId: ProjectId?,
+        parentTaskId: TaskId?,
+        assigneeId: UserId?,
+    ): Task {
         val creationDate = localDateTimeFactory()
 
-        with(createTaskRequestModel) {
-            dueDate?.let { requireDateIsNowOrLaterUseCase(it) }
-            targetDate?.let { requireDateIsNowOrLaterUseCase(it) }
-            projectId?.let { checkProjectIdUseCase(it) }
-            parentTaskId?.let {
-                val parentTask = getTaskOrThrowUseCase(it)
-                require(parentTask.projectId == projectId) { "Task and parent task are not in the same project" }
-            }
-            assigneeId?.let { checkUserIdUseCase(it) }
+        dueDate?.let { requireDateIsNowOrLaterUseCase(it) }
+        targetDate?.let { requireDateIsNowOrLaterUseCase(it) }
+        projectId?.let { checkProjectIdUseCase(it) }
+        parentTaskId?.let {
+            val parentTask = getTaskOrThrowUseCase(it)
+            require(parentTask.projectId == projectId) { "Task and parent task are not in the same project" }
         }
+        assigneeId?.let { checkUserIdUseCase(it) }
 
-        val task = taskFactory(createTaskRequestModel, creationDate)
+        val task = taskFactory(
+            name,
+            description,
+            dueDate,
+            targetDate,
+            priority,
+            projectId,
+            parentTaskId,
+            assigneeId,
+            creationDate,
+        )
 
         return taskRepository.saveTask(task).also {
             addTaskActivityUseCase(it.id, TaskActivityType.CREATE, creationDate)

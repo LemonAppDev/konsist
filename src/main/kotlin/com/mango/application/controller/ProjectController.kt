@@ -1,10 +1,10 @@
 package com.mango.application.controller
 
 import com.mango.application.config.ApiConfig
+import com.mango.application.model.project.CreateProjectRequestModel
 import com.mango.domain.activity.model.ProjectActivity
 import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.ProjectId
-import com.mango.domain.project.model.request.CreateProjectRequestModel
 import com.mango.domain.project.usecase.CreateProjectUseCase
 import com.mango.domain.project.usecase.DeleteProjectUseCase
 import com.mango.domain.project.usecase.GetAllProjectsUseCase
@@ -28,8 +28,12 @@ class ProjectController(
     private val getProjectActivitiesUseCase: GetProjectActivitiesUseCase,
 ) {
     @PostMapping("/create")
-    fun createProject(@RequestBody createProjectRequestModel: CreateProjectRequestModel): Project =
-        createProjectUseCase(createProjectRequestModel)
+    fun createProject(@RequestBody requestModel: CreateProjectRequestModel): Project =
+        createProjectUseCase(
+            requestModel.name,
+            requestModel.color,
+            requestModel.isFavourite,
+        )
 
     @GetMapping("/get")
     fun getProject(@RequestParam projectId: ProjectId): Project = getProjectOrThrowUseCase(projectId)

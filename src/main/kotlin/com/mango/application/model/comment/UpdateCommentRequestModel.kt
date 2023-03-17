@@ -1,4 +1,4 @@
-package com.mango.domain.comment.model.request
+package com.mango.application.model.comment
 
 import com.mango.domain.comment.model.CommentId
 

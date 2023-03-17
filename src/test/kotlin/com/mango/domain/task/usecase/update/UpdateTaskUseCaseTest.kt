@@ -10,7 +10,6 @@ import com.mango.domain.common.model.BusinessTestModel.getTaskId2
 import com.mango.domain.common.model.BusinessTestModel.getUserId1
 import com.mango.domain.task.model.Priority.PRIORITY_5
 import com.mango.domain.task.model.Task
-import com.mango.domain.task.model.request.UpdateTaskRequestModel
 import com.mango.domain.task.usecase.GetTaskOrThrowUseCase
 import io.mockk.every
 import io.mockk.justRun
@@ -64,19 +63,6 @@ class UpdateTaskUseCaseTest {
         val newParentTaskId = getTaskId2()
         val newAssigneeId = getUserId1()
 
-        val updateTaskRequestModel = UpdateTaskRequestModel(
-            taskId = taskId,
-            name = newName,
-            description = newDescription,
-            dueDate = newDueDate,
-            targetDate = newTargetDate,
-            priority = newPriority,
-            projectId = newProjectId,
-            parentTaskId = newParentTaskId,
-            assigneeId = newAssigneeId,
-            isCompleted = true,
-        )
-
         every { getTaskOrThrowUseCase(taskId) } returns task
         every { localDateTimeFactory() } returns updDate
         justRun { updateTaskNameUseCase(taskId, newName, updDate) }
@@ -90,7 +76,7 @@ class UpdateTaskUseCaseTest {
         justRun { updateTaskCompleteDateUseCase(taskId, true, updDate) }
 
         // when
-        sut(updateTaskRequestModel)
+        sut(taskId, newName, newDescription, newDueDate, newTargetDate, newPriority, newProjectId, newParentTaskId, newAssigneeId, true)
 
         // then
         verifyAll {
@@ -118,18 +104,6 @@ class UpdateTaskUseCaseTest {
         val updDate = getCurrentDate()
         every { localDateTimeFactory() } returns updDate
 
-        val updateTaskRequestModel = UpdateTaskRequestModel(
-            taskId = taskId,
-            name = "name",
-            description = null,
-            dueDate = null,
-            targetDate = null,
-            priority = null,
-            projectId = null,
-            parentTaskId = null,
-            assigneeId = null,
-            isCompleted = isCompleted,
-        )
         every { getTaskOrThrowUseCase(taskId) } returns task
         justRun { updateTaskNameUseCase(taskId, "name", updDate) }
         justRun { updateTaskDescriptionUseCase(taskId, null, updDate) }
@@ -142,7 +116,7 @@ class UpdateTaskUseCaseTest {
         justRun { updateTaskCompleteDateUseCase(taskId, isCompleted, updDate) }
 
         // when
-        sut(updateTaskRequestModel)
+        sut(taskId, "name", null, null, null, null, null, null, null, isCompleted)
 
         // then
         verify { updateTaskCompleteDateUseCase(taskId, isCompleted, updDate) }

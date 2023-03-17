@@ -1,18 +1,24 @@
 package com.mango.application.controller
 
+import com.mango.application.model.comment.AddCommentRequestModel
+import com.mango.application.model.comment.UpdateCommentRequestModel
+import com.mango.application.model.task.CreateTaskRequestModel
+import com.mango.application.model.task.UpdateTaskRequestModel
 import com.mango.domain.comment.model.Comment
-import com.mango.domain.comment.model.request.AddCommentRequestModel
-import com.mango.domain.comment.model.request.UpdateCommentRequestModel
 import com.mango.domain.comment.usecase.AddCommentUseCase
 import com.mango.domain.comment.usecase.DeleteCommentUseCase
 import com.mango.domain.comment.usecase.GetCommentOrThrowUseCase
 import com.mango.domain.comment.usecase.GetCommentsUseCase
 import com.mango.domain.comment.usecase.UpdateCommentUseCase
 import com.mango.domain.common.model.BusinessTestModel.getCommentId1
+import com.mango.domain.common.model.BusinessTestModel.getFutureDate1
+import com.mango.domain.common.model.BusinessTestModel.getFutureDate2
+import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
+import com.mango.domain.common.model.BusinessTestModel.getTaskId2
+import com.mango.domain.common.model.BusinessTestModel.getUserId1
+import com.mango.domain.task.model.Priority
 import com.mango.domain.task.model.Task
-import com.mango.domain.task.model.request.CreateTaskRequestModel
-import com.mango.domain.task.model.request.UpdateTaskRequestModel
 import com.mango.domain.task.usecase.CreateTaskUseCase
 import com.mango.domain.task.usecase.DeleteTaskUseCase
 import com.mango.domain.task.usecase.DuplicateTaskUseCase
@@ -62,14 +68,23 @@ class TaskControllerTest {
     @Test
     fun `createTask() calls createTaskUseCase()`() {
         // given
-        val createTaskRequestModel: CreateTaskRequestModel = mockk()
-        every { createTaskUseCase.invoke(createTaskRequestModel) } returns mockk()
+        val name = "name"
+        val desc = "desc"
+        val dueDate = getFutureDate1()
+        val targetDate = getFutureDate2()
+        val priority = 4
+        val projectId = getProjectId1()
+        val parentTaskId = getTaskId1()
+        val assigneeId = getUserId1()
+
+        val createTaskRequestModel = CreateTaskRequestModel(name, desc, dueDate, targetDate, priority, projectId, parentTaskId, assigneeId)
+        every { createTaskUseCase(name, desc, dueDate, targetDate, priority, projectId, parentTaskId, assigneeId) } returns mockk()
 
         // when
         sut.createTask(createTaskRequestModel)
 
         // then
-        verify { createTaskUseCase.invoke(createTaskRequestModel) }
+        verify { createTaskUseCase(name, desc, dueDate, targetDate, priority, projectId, parentTaskId, assigneeId) }
     }
 
     @Test
@@ -114,28 +129,103 @@ class TaskControllerTest {
     fun `updateTask() calls updateTaskUseCase()`() {
         // given
         val taskId = getTaskId1()
+        val name = "name"
+        val desc = "desc"
+        val dueDate = getFutureDate1()
+        val targetDate = getFutureDate2()
+        val priority = Priority.PRIORITY_4
+        val projectId = getProjectId1()
+        val parentTaskId = getTaskId2()
+        val assigneeId = getUserId1()
         val task: Task = mockk()
-        val updateTaskRequestModel: UpdateTaskRequestModel = mockk()
-        every { updateTaskRequestModel.taskId } returns taskId
+        val updateTaskRequestModel = UpdateTaskRequestModel(
+            taskId,
+            name,
+            desc,
+            dueDate,
+            targetDate,
+            priority,
+            projectId,
+            parentTaskId,
+            assigneeId,
+            true,
+        )
 
-        justRun { updateTaskUseCase(updateTaskRequestModel) }
+        justRun {
+            updateTaskUseCase(
+                taskId,
+                name,
+                desc,
+                dueDate,
+                targetDate,
+                priority,
+                projectId,
+                parentTaskId,
+                assigneeId,
+                true,
+            )
+        }
         every { getTaskOrThrowUseCase(taskId) } returns task
 
         // when
         sut.updateTask(updateTaskRequestModel)
 
         // then
-        verify { updateTaskUseCase(updateTaskRequestModel) }
+        verify {
+            updateTaskUseCase(
+                taskId,
+                name,
+                desc,
+                dueDate,
+                targetDate,
+                priority,
+                projectId,
+                parentTaskId,
+                assigneeId,
+                true,
+            )
+        }
     }
 
     @Test
-    fun `updateTask() calls returns updated task`() {
+    fun `updateTask() returns updated task`() {
         // given
         val taskId = getTaskId1()
+        val name = "name"
+        val desc = "desc"
+        val dueDate = getFutureDate1()
+        val targetDate = getFutureDate2()
+        val priority = Priority.PRIORITY_4
+        val projectId = getProjectId1()
+        val parentTaskId = getTaskId2()
+        val assigneeId = getUserId1()
         val task: Task = mockk()
-        val updateTaskRequestModel: UpdateTaskRequestModel = mockk()
-        every { updateTaskRequestModel.taskId } returns taskId
-        justRun { updateTaskUseCase(updateTaskRequestModel) }
+        val updateTaskRequestModel = UpdateTaskRequestModel(
+            taskId,
+            name,
+            desc,
+            dueDate,
+            targetDate,
+            priority,
+            projectId,
+            parentTaskId,
+            assigneeId,
+            true,
+        )
+        justRun {
+            updateTaskUseCase(
+                taskId,
+                name,
+                desc,
+                dueDate,
+                targetDate,
+                priority,
+                projectId,
+                parentTaskId,
+                assigneeId,
+                true,
+            )
+        }
         every { getTaskOrThrowUseCase(taskId) } returns task
 
         // when
@@ -174,14 +264,16 @@ class TaskControllerTest {
     @Test
     fun `addComment() calls addCommentUseCase()`() {
         // given
-        val addCommentRequestModel: AddCommentRequestModel = mockk()
-        every { addCommentUseCase(addCommentRequestModel) } returns mockk()
+        val taskId = getTaskId1()
+        val text = "text"
+        val addCommentRequestModel = AddCommentRequestModel(taskId, text)
+        every { addCommentUseCase(taskId, text) } returns mockk()
 
         // when
         sut.addComment(addCommentRequestModel)
 
         // then
-        verify { addCommentUseCase(addCommentRequestModel) }
+        verify { addCommentUseCase(taskId, text) }
     }
 
     @Test
@@ -200,28 +292,28 @@ class TaskControllerTest {
     @Test
     fun `updateComment() calls updateCommentUseCase()`() {
         // given
-        val updateCommentRequestModel: UpdateCommentRequestModel = mockk()
-        justRun { updateCommentUseCase(updateCommentRequestModel) }
         val commentId = getCommentId1()
+        val text = "text"
+        val updateCommentRequestModel = UpdateCommentRequestModel(commentId, text)
         val comment: Comment = mockk()
-        every { updateCommentRequestModel.commentId } returns commentId
+        every { updateCommentUseCase(commentId, text) } returns mockk()
         every { getCommentOrThrowUseCase(commentId) } returns comment
 
         // when
         sut.updateComment(updateCommentRequestModel)
 
         // then
-        verify { updateCommentUseCase(updateCommentRequestModel) }
+        verify { updateCommentUseCase(commentId, text) }
     }
 
     @Test
-    fun `updateComment() calls returns updated comment`() {
+    fun `updateComment() returns updated comment`() {
         // given
         val commentId = getCommentId1()
+        val text = "text"
+        val updateCommentRequestModel = UpdateCommentRequestModel(commentId, text)
         val comment: Comment = mockk()
-        val updateCommentRequestModel: UpdateCommentRequestModel = mockk()
-        every { updateCommentRequestModel.commentId } returns commentId
-        justRun { updateCommentUseCase(updateCommentRequestModel) }
+        every { updateCommentUseCase(commentId, text) } returns mockk()
         every { getCommentOrThrowUseCase(commentId) } returns comment
 
         // when

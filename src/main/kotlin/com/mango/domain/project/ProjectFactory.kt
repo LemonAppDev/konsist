@@ -4,7 +4,6 @@ import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
 import com.mango.domain.common.model.Color
 import com.mango.domain.project.model.Project
-import com.mango.domain.project.model.request.CreateProjectRequestModel
 import com.mango.domain.user.UserRepository
 import org.springframework.stereotype.Service
 
@@ -16,15 +15,17 @@ class ProjectFactory(
 
 ) {
     operator fun invoke(
-        createProjectRequestModel: CreateProjectRequestModel,
+        name: String,
+        color: Color? = null,
+        isFavourite: Boolean? = null,
     ): Project {
         return Project(
             uuidFactory.createProjectId(),
             userRepository.getCurrentUser().id,
             localDateTimeFactory(),
-            createProjectRequestModel.name,
-            createProjectRequestModel.color ?: DEFAULT_PROJECT_COLOR,
-            createProjectRequestModel.isFavourite ?: false,
+            name,
+            color ?: DEFAULT_PROJECT_COLOR,
+            isFavourite ?: false,
         )
     }
 

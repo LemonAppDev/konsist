@@ -1,5 +1,9 @@
 package com.mango.application.controller
 
+import com.mango.application.model.comment.AddCommentRequestModel
+import com.mango.application.model.comment.UpdateCommentRequestModel
+import com.mango.application.model.task.CreateTaskRequestModel
+import com.mango.application.model.task.UpdateTaskRequestModel
 import com.mango.domain.activity.model.ProjectActivityType
 import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityType.CREATE
@@ -14,14 +18,10 @@ import com.mango.domain.activity.model.TaskActivityType.UPDATE_PROJECT
 import com.mango.domain.activity.model.TaskActivityType.UPDATE_TARGET_DATE
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.comment.model.CommentId
-import com.mango.domain.comment.model.request.AddCommentRequestModel
-import com.mango.domain.comment.model.request.UpdateCommentRequestModel
 import com.mango.domain.project.model.ProjectId
 import com.mango.domain.task.model.Priority.PRIORITY_5
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.TaskId
-import com.mango.domain.task.model.request.CreateTaskRequestModel
-import com.mango.domain.task.model.request.UpdateTaskRequestModel
 import com.mango.domain.user.model.UserId
 import com.mango.util.ControllerEndpointCaller
 import com.mango.util.Json.serialize
@@ -200,7 +200,13 @@ class TaskControllerTest {
             UpdateTaskRequestModel(
                 taskId = parentTask.id,
                 name = parentTask.name,
+                description = parentTask.description,
+                dueDate = parentTask.dueDate,
+                targetDate = parentTask.targetDate,
+                priority = parentTask.priority,
                 projectId = newProject.id,
+                parentTaskId = parentTask.parentTaskId,
+                assigneeId = parentTask.assigneeId,
                 isCompleted = true,
             ),
         )
@@ -227,8 +233,14 @@ class TaskControllerTest {
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
                 taskId = parentTask.id,
-                name = "name",
+                name = parentTask.name,
+                description = parentTask.description,
+                dueDate = parentTask.dueDate,
+                targetDate = parentTask.targetDate,
+                priority = parentTask.priority,
                 projectId = newProject.id,
+                parentTaskId = parentTask.parentTaskId,
+                assigneeId = parentTask.assigneeId,
                 isCompleted = true,
             ),
         )
@@ -253,7 +265,14 @@ class TaskControllerTest {
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
                 taskId = parentTask.id,
-                name = "name",
+                name = parentTask.name,
+                description = parentTask.description,
+                dueDate = parentTask.dueDate,
+                targetDate = parentTask.targetDate,
+                priority = parentTask.priority,
+                projectId = parentTask.projectId,
+                parentTaskId = parentTask.parentTaskId,
+                assigneeId = parentTask.assigneeId,
                 isCompleted = true,
             ),
         )
@@ -280,7 +299,14 @@ class TaskControllerTest {
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
                 taskId = parentTask.id,
-                name = "name",
+                name = parentTask.name,
+                description = parentTask.description,
+                dueDate = parentTask.dueDate,
+                targetDate = parentTask.targetDate,
+                priority = parentTask.priority,
+                projectId = parentTask.projectId,
+                parentTaskId = parentTask.parentTaskId,
+                assigneeId = parentTask.assigneeId,
                 isCompleted = true,
             ),
         )
@@ -304,8 +330,15 @@ class TaskControllerTest {
         val childChildTask = taskEndpointHelper.callCreateEndpoint(parentTaskId = childTask.id)
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
-                childChildTask.id,
-                name = "name",
+                taskId = childChildTask.id,
+                name = childChildTask.name,
+                description = childChildTask.description,
+                dueDate = childChildTask.dueDate,
+                targetDate = childChildTask.targetDate,
+                priority = childChildTask.priority,
+                projectId = childChildTask.projectId,
+                parentTaskId = childChildTask.parentTaskId,
+                assigneeId = childChildTask.assigneeId,
                 isCompleted = true,
             ),
         )
@@ -314,7 +347,14 @@ class TaskControllerTest {
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
                 taskId = parentTask.id,
-                name = "name",
+                name = parentTask.name,
+                description = parentTask.description,
+                dueDate = parentTask.dueDate,
+                targetDate = parentTask.targetDate,
+                priority = parentTask.priority,
+                projectId = parentTask.projectId,
+                parentTaskId = parentTask.parentTaskId,
+                assigneeId = parentTask.assigneeId,
                 isCompleted = true,
             ),
         )
@@ -341,7 +381,14 @@ class TaskControllerTest {
             UpdateTaskRequestModel(
                 taskId = task.id,
                 name = task.name,
+                description = task.description,
+                dueDate = task.dueDate,
+                targetDate = task.targetDate,
+                priority = task.priority,
                 projectId = newProject.id,
+                parentTaskId = task.parentTaskId,
+                assigneeId = task.assigneeId,
+                isCompleted = false,
             ),
         )
 
@@ -609,18 +656,32 @@ class TaskControllerTest {
         val task = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id, parentTaskId = parentTask.id)
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
-                name = parentTask.name,
                 taskId = parentTask.id,
+                name = parentTask.name,
+                description = parentTask.description,
+                dueDate = parentTask.dueDate,
+                targetDate = parentTask.targetDate,
+                priority = parentTask.priority,
                 projectId = newProject.id,
+                parentTaskId = parentTask.parentTaskId,
+                assigneeId = parentTask.assigneeId,
+                isCompleted = true,
             ),
         )
 
         // when
         taskEndpointHelper.callUpdateEndpoint(
             UpdateTaskRequestModel(
-                name = parentTask.name,
                 taskId = parentTask.id,
+                name = parentTask.name,
+                description = parentTask.description,
+                dueDate = parentTask.dueDate,
+                targetDate = parentTask.targetDate,
+                priority = parentTask.priority,
                 projectId = newProject.id,
+                parentTaskId = parentTask.parentTaskId,
+                assigneeId = parentTask.assigneeId,
+                isCompleted = true,
             ),
         )
 

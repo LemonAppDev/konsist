@@ -1,7 +1,8 @@
 package com.mango.application.controller
 
+import com.mango.application.model.project.CreateProjectRequestModel
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
-import com.mango.domain.project.model.request.CreateProjectRequestModel
+import com.mango.domain.common.model.Color
 import com.mango.domain.project.usecase.CreateProjectUseCase
 import com.mango.domain.project.usecase.DeleteProjectUseCase
 import com.mango.domain.project.usecase.GetAllProjectsUseCase
@@ -31,14 +32,30 @@ class ProjectControllerTest {
     @Test
     fun `createProject() calls createProjectUseCase()`() {
         // given
-        val createProjectRequestModel: CreateProjectRequestModel = mockk()
-        every { createProjectUseCase(createProjectRequestModel) } returns mockk()
+        val createProjectRequestModel = CreateProjectRequestModel(
+            "name",
+            Color("0xFFFFFF"),
+            true,
+        )
+        every {
+            createProjectUseCase(
+                createProjectRequestModel.name,
+                createProjectRequestModel.color,
+                createProjectRequestModel.isFavourite,
+            )
+        } returns mockk()
 
         // when
         sut.createProject(createProjectRequestModel)
 
         // then
-        verify { createProjectUseCase(createProjectRequestModel) }
+        verify {
+            createProjectUseCase(
+                createProjectRequestModel.name,
+                createProjectRequestModel.color,
+                createProjectRequestModel.isFavourite,
+            )
+        }
     }
 
     @Test

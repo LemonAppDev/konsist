@@ -4,7 +4,6 @@ import com.mango.data.comment.CommentRepositoryImpl
 import com.mango.domain.activity.model.CommentActivityType.UPDATE_COMMENT
 import com.mango.domain.activity.usecase.AddCommentActivityUseCase
 import com.mango.domain.comment.model.Comment
-import com.mango.domain.comment.model.request.UpdateCommentRequestModel
 import com.mango.domain.common.model.BusinessTestModel.getCommentId1
 import io.mockk.every
 import io.mockk.justRun
@@ -29,7 +28,6 @@ class UpdateCommentUseCaseTest {
         val newText = "new text"
         val oldText = "old text"
         val commentId = getCommentId1()
-        val updateCommentRequestModel = UpdateCommentRequestModel(commentId, newText)
         val oldComment: Comment = mockk()
         every { oldComment.text } returns oldText
         every { oldComment.id } returns commentId
@@ -41,7 +39,7 @@ class UpdateCommentUseCaseTest {
         justRun { addCommentActivityUseCase(newComment, UPDATE_COMMENT, newValue = newText, oldValue = oldText) }
 
         // when
-        sut(updateCommentRequestModel)
+        sut(commentId, newText)
 
         // then
         verify { commentRepository.saveComment(newComment) }
@@ -53,7 +51,6 @@ class UpdateCommentUseCaseTest {
         val newText = "new text"
         val oldText = "old text"
         val commentId = getCommentId1()
-        val updateCommentRequestModel = UpdateCommentRequestModel(commentId, newText)
         val oldComment: Comment = mockk()
         every { oldComment.text } returns oldText
         every { oldComment.id } returns commentId
@@ -65,7 +62,7 @@ class UpdateCommentUseCaseTest {
         justRun { addCommentActivityUseCase(newComment, UPDATE_COMMENT, newValue = newText, oldValue = oldText) }
 
         // when
-        sut(updateCommentRequestModel)
+        sut(commentId, newText)
 
         // then
         verify { addCommentActivityUseCase(newComment, UPDATE_COMMENT, newValue = newText, oldValue = oldText) }

@@ -19,7 +19,6 @@ import com.mango.domain.project.usecase.CheckProjectIdUseCase
 import com.mango.domain.task.TaskFactory
 import com.mango.domain.task.TaskRepository
 import com.mango.domain.task.model.Task
-import com.mango.domain.task.model.request.CreateTaskRequestModel
 import com.mango.domain.user.usecase.CheckUserIdUseCase
 import io.mockk.every
 import io.mockk.justRun
@@ -56,6 +55,8 @@ class CreateTaskUseCaseTest {
     @Test
     fun `throws exception when task and parent task are not in the same project`() {
         val creationDate = getCurrentDate()
+        val name = "name"
+        val desc = "description"
         every { localDateTimeFactory() } returns creationDate
         val taskProjectId = getProjectId1()
         val parentTaskProjectId = getProjectId2()
@@ -66,16 +67,6 @@ class CreateTaskUseCaseTest {
         val assigneeId = getUserId1()
         val dueDate = getFutureDate1()
         val targetDate = getFutureDate2()
-        val createTaskRequestModel = CreateTaskRequestModel(
-            "name",
-            "description",
-            dueDate,
-            targetDate,
-            1,
-            taskProjectId,
-            parentTaskId,
-            assigneeId,
-        )
         justRun { checkProjectIdUseCase(taskProjectId) }
         every { getTaskOrThrowUseCase(parentTaskId) } returns parentTask
         justRun { checkUserIdUseCase(assigneeId) }
@@ -83,7 +74,7 @@ class CreateTaskUseCaseTest {
         justRun { requireDateIsNowOrLaterUseCase(targetDate) }
 
         // when
-        val actual = { sut.invoke(createTaskRequestModel) }
+        val actual = { sut(name, desc, dueDate, targetDate, 3, taskProjectId, parentTaskId, assigneeId) }
 
         // then
         actual shouldThrow IllegalArgumentException::class withMessage "Task and parent task are not in the same project"
@@ -92,6 +83,8 @@ class CreateTaskUseCaseTest {
     @Test
     fun `creates and adds new task to tasks list`() {
         // given
+        val name = "name"
+        val desc = "description"
         val taskId = getTaskId1()
         val creationDate = getCurrentDate()
         every { localDateTimeFactory() } returns creationDate
@@ -103,16 +96,6 @@ class CreateTaskUseCaseTest {
         val assigneeId = getUserId1()
         val dueDate = getFutureDate1()
         val targetDate = getFutureDate2()
-        val createTaskRequestModel = CreateTaskRequestModel(
-            "name",
-            "description",
-            dueDate,
-            targetDate,
-            1,
-            projectId,
-            parentTaskId,
-            assigneeId,
-        )
         justRun { checkProjectIdUseCase(projectId) }
         every { getTaskOrThrowUseCase(parentTaskId) } returns parentTask
         justRun { checkUserIdUseCase(assigneeId) }
@@ -120,7 +103,7 @@ class CreateTaskUseCaseTest {
         justRun { requireDateIsNowOrLaterUseCase(targetDate) }
 
         val task: Task = mockk()
-        every { taskFactory(createTaskRequestModel, creationDate) } returns task
+        every { taskFactory(name, desc, dueDate, targetDate, 3, projectId, parentTaskId, assigneeId, creationDate) } returns task
         val repositoryTask: Task = mockk()
         every { taskRepository.saveTask(task) } returns repositoryTask
         every { repositoryTask.projectId } returns projectId
@@ -131,7 +114,7 @@ class CreateTaskUseCaseTest {
         justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
 
         // when
-        sut.invoke(createTaskRequestModel)
+        sut(name, desc, dueDate, targetDate, 3, projectId, parentTaskId, assigneeId)
 
         // then
         verify { taskRepository.saveTask(task) }
@@ -140,6 +123,8 @@ class CreateTaskUseCaseTest {
     @Test
     fun `adds task create activity to repository`() {
         // given
+        val name = "name"
+        val desc = "description"
         val taskId = getTaskId1()
         val creationDate = getCurrentDate()
         every { localDateTimeFactory() } returns creationDate
@@ -151,16 +136,6 @@ class CreateTaskUseCaseTest {
         val assigneeId = getUserId1()
         val dueDate = getFutureDate1()
         val targetDate = getFutureDate2()
-        val createTaskRequestModel = CreateTaskRequestModel(
-            "name",
-            "description",
-            dueDate,
-            targetDate,
-            1,
-            projectId,
-            parentTaskId,
-            assigneeId,
-        )
         justRun { checkProjectIdUseCase(projectId) }
         every { getTaskOrThrowUseCase(parentTaskId) } returns parentTask
         justRun { checkUserIdUseCase(assigneeId) }
@@ -168,7 +143,7 @@ class CreateTaskUseCaseTest {
         justRun { requireDateIsNowOrLaterUseCase(targetDate) }
 
         val task: Task = mockk()
-        every { taskFactory(createTaskRequestModel, creationDate) } returns task
+        every { taskFactory(name, desc, dueDate, targetDate, 3, projectId, parentTaskId, assigneeId, creationDate) } returns task
         val repositoryTask: Task = mockk()
         every { repositoryTask.projectId } returns projectId
         every { taskRepository.saveTask(task) } returns repositoryTask
@@ -177,7 +152,7 @@ class CreateTaskUseCaseTest {
         justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
 
         // when
-        sut.invoke(createTaskRequestModel)
+        sut(name, desc, dueDate, targetDate, 3, projectId, parentTaskId, assigneeId)
 
         // then
         verify { addTaskActivityUseCase(taskId, CREATE, creationDate) }
@@ -186,6 +161,8 @@ class CreateTaskUseCaseTest {
     @Test
     fun `adds project activity to repository`() {
         // given
+        val name = "name"
+        val desc = "description"
         val taskId = getTaskId1()
         val creationDate = getCurrentDate()
         every { localDateTimeFactory() } returns creationDate
@@ -197,16 +174,6 @@ class CreateTaskUseCaseTest {
         val assigneeId = getUserId1()
         val dueDate = getFutureDate1()
         val targetDate = getFutureDate2()
-        val createTaskRequestModel = CreateTaskRequestModel(
-            "name",
-            "description",
-            dueDate,
-            targetDate,
-            1,
-            projectId,
-            parentTaskId,
-            assigneeId,
-        )
         justRun { checkProjectIdUseCase(projectId) }
         every { getTaskOrThrowUseCase(parentTaskId) } returns parentTask
         justRun { checkUserIdUseCase(assigneeId) }
@@ -214,7 +181,7 @@ class CreateTaskUseCaseTest {
         justRun { requireDateIsNowOrLaterUseCase(targetDate) }
 
         val task: Task = mockk()
-        every { taskFactory(createTaskRequestModel, creationDate) } returns task
+        every { taskFactory(name, desc, dueDate, targetDate, 3, projectId, parentTaskId, assigneeId, creationDate) } returns task
         val repositoryTask: Task = mockk()
         every { repositoryTask.projectId } returns projectId
         every { taskRepository.saveTask(task) } returns repositoryTask
@@ -223,7 +190,7 @@ class CreateTaskUseCaseTest {
         justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
 
         // when
-        sut.invoke(createTaskRequestModel)
+        sut(name, desc, dueDate, targetDate, 3, projectId, parentTaskId, assigneeId)
 
         // then
         verify { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
@@ -232,6 +199,8 @@ class CreateTaskUseCaseTest {
     @Test
     fun `returns task`() {
         // given
+        val name = "name"
+        val desc = "description"
         val taskId = getTaskId1()
         val creationDate = getCurrentDate()
         every { localDateTimeFactory() } returns creationDate
@@ -243,16 +212,6 @@ class CreateTaskUseCaseTest {
         val assigneeId = getUserId1()
         val dueDate = getFutureDate1()
         val targetDate = getFutureDate2()
-        val createTaskRequestModel = CreateTaskRequestModel(
-            "name",
-            "description",
-            dueDate,
-            targetDate,
-            1,
-            projectId,
-            parentTaskId,
-            assigneeId,
-        )
         justRun { checkProjectIdUseCase(projectId) }
         every { getTaskOrThrowUseCase(parentTaskId) } returns parentTask
         justRun { checkUserIdUseCase(assigneeId) }
@@ -260,7 +219,7 @@ class CreateTaskUseCaseTest {
         justRun { requireDateIsNowOrLaterUseCase(targetDate) }
 
         val task: Task = mockk()
-        every { taskFactory(createTaskRequestModel, creationDate) } returns task
+        every { taskFactory(name, desc, dueDate, targetDate, 3, projectId, parentTaskId, assigneeId, creationDate) } returns task
 
         val expected: Task = mockk()
         every { taskRepository.saveTask(task) } returns expected
@@ -270,7 +229,7 @@ class CreateTaskUseCaseTest {
         justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
 
         // when
-        val actual = sut.invoke(createTaskRequestModel)
+        val actual = sut(name, desc, dueDate, targetDate, 3, projectId, parentTaskId, assigneeId)
 
         // then
         actual shouldBeEqualTo expected

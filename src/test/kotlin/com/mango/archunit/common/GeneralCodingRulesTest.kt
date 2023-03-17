@@ -28,7 +28,7 @@ class GeneralCodingRulesTest {
     fun `every class has test class`() {
         classes()
             .that()
-            .resideOutsideOfPackages("..archunit..", "..config..", "..model..", "..activity..")
+            .resideOutsideOfPackages("..archunit..", "..config..", "..model..")
             .and()
             .areNotMetaAnnotatedWith(Entity::class.java)
             .and()

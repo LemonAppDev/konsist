@@ -2,13 +2,16 @@ package com.mango.domain.task
 
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
+import com.mango.domain.project.model.ProjectId
 import com.mango.domain.task.model.Priority
 import com.mango.domain.task.model.Task
-import com.mango.domain.task.model.request.CreateTaskRequestModel
+import com.mango.domain.task.model.TaskId
 import com.mango.domain.user.UserRepository
+import com.mango.domain.user.model.UserId
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
+@Suppress("detekt.LongParameterList")
 @Service
 class TaskFactory(
     private val uuidFactory: UUIDFactory,
@@ -16,21 +19,28 @@ class TaskFactory(
     private val userRepository: UserRepository,
 ) {
     operator fun invoke(
-        createTaskRequestModel: CreateTaskRequestModel,
+        name: String,
+        description: String?,
+        dueDate: LocalDateTime?,
+        targetDate: LocalDateTime?,
+        priority: Int?,
+        projectId: ProjectId?,
+        parentTaskId: TaskId?,
+        assigneeId: UserId?,
         creationDate: LocalDateTime = localDateTimeFactory(),
         completeDate: LocalDateTime? = null,
     ) = Task(
         uuidFactory.createTaskId(),
-        createTaskRequestModel.name,
+        name,
         userRepository.getCurrentUser().id,
         creationDate,
-        createTaskRequestModel.projectId,
-        createTaskRequestModel.description,
-        createTaskRequestModel.dueDate,
-        createTaskRequestModel.targetDate,
-        Priority.getByValue(createTaskRequestModel.priority),
-        createTaskRequestModel.parentTaskId,
-        createTaskRequestModel.assigneeId,
+        projectId,
+        description,
+        dueDate,
+        targetDate,
+        Priority.getByValue(priority),
+        parentTaskId,
+        assigneeId,
         completeDate,
     )
 }

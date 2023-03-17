@@ -1,11 +1,13 @@
 package com.mango.application.controller
 
 import com.mango.application.config.ApiConfig
+import com.mango.application.model.comment.AddCommentRequestModel
+import com.mango.application.model.comment.UpdateCommentRequestModel
+import com.mango.application.model.task.CreateTaskRequestModel
+import com.mango.application.model.task.UpdateTaskRequestModel
 import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.comment.model.Comment
 import com.mango.domain.comment.model.CommentId
-import com.mango.domain.comment.model.request.AddCommentRequestModel
-import com.mango.domain.comment.model.request.UpdateCommentRequestModel
 import com.mango.domain.comment.usecase.AddCommentUseCase
 import com.mango.domain.comment.usecase.DeleteCommentUseCase
 import com.mango.domain.comment.usecase.GetCommentOrThrowUseCase
@@ -13,8 +15,6 @@ import com.mango.domain.comment.usecase.GetCommentsUseCase
 import com.mango.domain.comment.usecase.UpdateCommentUseCase
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.TaskId
-import com.mango.domain.task.model.request.CreateTaskRequestModel
-import com.mango.domain.task.model.request.UpdateTaskRequestModel
 import com.mango.domain.task.usecase.CreateTaskUseCase
 import com.mango.domain.task.usecase.DeleteTaskUseCase
 import com.mango.domain.task.usecase.DuplicateTaskUseCase
@@ -49,7 +49,17 @@ class TaskController(
     private val getChildTasksUseCase: GetChildTasksUseCase,
 ) {
     @PostMapping("/create")
-    fun createTask(@RequestBody createTaskRequestModel: CreateTaskRequestModel): Task = createTaskUseCase(createTaskRequestModel)
+    fun createTask(@RequestBody requestModel: CreateTaskRequestModel): Task =
+        createTaskUseCase(
+            requestModel.name,
+            requestModel.description,
+            requestModel.dueDate,
+            requestModel.targetDate,
+            requestModel.priority,
+            requestModel.projectId,
+            requestModel.parentTaskId,
+            requestModel.assigneeId,
+        )
 
     @GetMapping("/get")
     fun getTask(@RequestParam(name = "taskId") taskId: TaskId): Task = getTaskOrThrowUseCase(taskId)
@@ -58,9 +68,20 @@ class TaskController(
     fun getTasks(): List<Task> = getAllTasksUseCase()
 
     @PostMapping("/update")
-    fun updateTask(@RequestBody updateTaskRequestModel: UpdateTaskRequestModel): Task {
-        updateTaskUseCase(updateTaskRequestModel)
-        return getTaskOrThrowUseCase(updateTaskRequestModel.taskId)
+    fun updateTask(@RequestBody requestModel: UpdateTaskRequestModel): Task {
+        updateTaskUseCase(
+            requestModel.taskId,
+            requestModel.name,
+            requestModel.description,
+            requestModel.dueDate,
+            requestModel.targetDate,
+            requestModel.priority,
+            requestModel.projectId,
+            requestModel.parentTaskId,
+            requestModel.assigneeId,
+            requestModel.isCompleted,
+        )
+        return getTaskOrThrowUseCase(requestModel.taskId)
     }
 
     @DeleteMapping("/delete")
@@ -76,14 +97,15 @@ class TaskController(
     fun getChildTasks(@RequestParam(name = "taskId") taskId: TaskId): List<Task> = getChildTasksUseCase(taskId)
 
     @PostMapping("/add-comment")
-    fun addComment(@RequestBody addCommentRequestModel: AddCommentRequestModel): Comment = addCommentUseCase(addCommentRequestModel)
+    fun addComment(@RequestBody addCommentRequestModel: AddCommentRequestModel): Comment =
+        addCommentUseCase(addCommentRequestModel.taskId, addCommentRequestModel.text)
 
     @GetMapping("/comment")
     fun getComment(@RequestParam(name = "commentId") commentId: CommentId): Comment = getCommentOrThrowUseCase(commentId)
 
     @PostMapping("/update-comment")
     fun updateComment(@RequestBody updateCommentRequestModel: UpdateCommentRequestModel): Comment {
-        updateCommentUseCase(updateCommentRequestModel)
+        updateCommentUseCase(updateCommentRequestModel.commentId, updateCommentRequestModel.text)
         return getCommentOrThrowUseCase(updateCommentRequestModel.commentId)
     }
 

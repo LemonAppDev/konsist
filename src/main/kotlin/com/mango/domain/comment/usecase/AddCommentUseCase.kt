@@ -5,7 +5,7 @@ import com.mango.domain.activity.usecase.AddCommentActivityUseCase
 import com.mango.domain.comment.CommentFactory
 import com.mango.domain.comment.CommentRepository
 import com.mango.domain.comment.model.Comment
-import com.mango.domain.comment.model.request.AddCommentRequestModel
+import com.mango.domain.task.model.TaskId
 import com.mango.domain.task.usecase.CheckTaskIdUseCase
 import org.springframework.stereotype.Service
 
@@ -17,11 +17,11 @@ class AddCommentUseCase(
     private val checkCommentTextUseCase: CheckCommentTextUseCase,
     private val addCommentActivityUseCase: AddCommentActivityUseCase,
 ) {
-    operator fun invoke(addCommentRequestModel: AddCommentRequestModel): Comment {
-        checkTaskIdUseCase(addCommentRequestModel.taskId)
-        checkCommentTextUseCase(addCommentRequestModel.text)
+    operator fun invoke(taskId: TaskId, text: String): Comment {
+        checkTaskIdUseCase(taskId)
+        checkCommentTextUseCase(text)
 
-        val comment = commentFactory(addCommentRequestModel.taskId, addCommentRequestModel.text)
+        val comment = commentFactory(taskId, text)
 
         return commentRepository.saveComment(comment).also {
             addCommentActivityUseCase(comment, CommentActivityType.ADD_COMMENT, comment.creationDate, comment.text)
