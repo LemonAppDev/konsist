@@ -22,10 +22,13 @@ class DuplicateTaskUseCase(
 ) {
     operator fun invoke(taskId: TaskId): Task {
         val oldTask = getTaskOrThrowUseCase(taskId)
+        return duplicate(oldTask, oldTask.parentTaskId)
+    }
 
+    private fun duplicate(oldTask: Task, parentTaskId: TaskId?): Task {
         val newTaskId = uuidFactory.createTaskId()
         val creationDate = localDateTimeFactory()
-        val newTask = oldTask.copy(id = newTaskId, creationDate = creationDate)
+        val newTask = oldTask.copy(id = newTaskId, creationDate = creationDate, parentTaskId = parentTaskId)
 
         return taskRepository.saveTask(newTask).also {
             addTaskActivityUseCase(newTask.id, TaskActivityType.CREATE, newTask.creationDate)
@@ -33,6 +36,10 @@ class DuplicateTaskUseCase(
             it.projectId?.let { projectId ->
                 addProjectActivityUseCase(projectId, ProjectActivityType.TASK_ADDED, creationDate)
             }
+
+            taskRepository.tasks
+                .filter { task -> task.parentTaskId == oldTask.id }
+                .forEach { task -> duplicate(task, it.id) }
         }
     }
 }

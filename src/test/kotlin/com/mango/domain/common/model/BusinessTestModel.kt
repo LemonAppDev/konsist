@@ -58,6 +58,8 @@ object BusinessTestModel {
     fun getTaskId1() = TaskId(UUID.fromString("35852e37-6ad9-4a5c-b349-e4f9710394f1"))
     fun getTaskId2() = TaskId(UUID.fromString("3a0d173c-92de-4eac-876a-934d383d7b1e"))
     fun getTaskId3() = TaskId(UUID.fromString("a64fdc2f-511e-45aa-a6ab-f6dce41ff911"))
+    fun getTaskId4() = TaskId(UUID.fromString("99560f62-463f-4579-8879-8e1ec136f644"))
+    fun getTaskId5() = TaskId(UUID.fromString("75b496eb-3231-40a0-849f-ba9082a1b034"))
 
     fun getCommentId1() = CommentId(UUID.fromString("1f5a1251-1f2e-4f46-b59e-2da71dc3324f"))
 

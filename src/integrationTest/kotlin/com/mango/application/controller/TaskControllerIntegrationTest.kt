@@ -457,6 +457,42 @@ class TaskControllerTest {
     }
 
     @Test
+    fun `duplicate endpoint duplicates all subtasks`() {
+        // given
+        val parentTask = taskEndpointHelper.callCreateEndpoint()
+        taskEndpointHelper.callCreateEndpoint(parentTaskId = parentTask.id)
+        taskEndpointHelper.callCreateEndpoint(parentTaskId = parentTask.id)
+
+        // when
+        taskEndpointHelper.callDuplicateEndpoint(
+            taskId = parentTask.id,
+        )
+
+        // then
+        val actual = taskEndpointHelper.callAllEndpoint()
+        actual.size shouldBeEqualTo 6
+    }
+
+    @Test
+    fun `duplicate endpoint duplicates subtasks recursively`() {
+        // given
+        val parentTask = taskEndpointHelper.callCreateEndpoint()
+        val childTask1 = taskEndpointHelper.callCreateEndpoint(parentTaskId = parentTask.id)
+        taskEndpointHelper.callCreateEndpoint(parentTaskId = childTask1.id)
+        val childTask2 = taskEndpointHelper.callCreateEndpoint(parentTaskId = parentTask.id)
+        taskEndpointHelper.callCreateEndpoint(parentTaskId = childTask2.id)
+
+        // when
+        taskEndpointHelper.callDuplicateEndpoint(
+            taskId = parentTask.id,
+        )
+
+        // then
+        val actual = taskEndpointHelper.callAllEndpoint()
+        actual.size shouldBeEqualTo 10
+    }
+
+    @Test
     fun `duplicate endpoint adds task_added project activity when project is provided`() {
         // given
         val project = projectEndpointHelper.callCreateEndpoint()
@@ -470,6 +506,25 @@ class TaskControllerTest {
             .callGetProjectActivitiesEndPoint(project.id)
             .map { it.type }
         actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, ProjectActivityType.TASK_ADDED, ProjectActivityType.TASK_ADDED)
+    }
+
+    @Test
+    fun `duplicate endpoint sets new parent task to duplicated child tasks`() {
+        // given
+        val parentTask = taskEndpointHelper.callCreateEndpoint()
+        val childTask = taskEndpointHelper.callCreateEndpoint(parentTaskId = parentTask.id)
+        taskEndpointHelper.callCreateEndpoint(parentTaskId = childTask.id)
+
+        // when
+        val newParentTask = taskEndpointHelper.callDuplicateEndpoint(
+            taskId = parentTask.id,
+        )
+
+        // then
+        val actual = taskEndpointHelper
+            .callAllEndpoint()
+            .filter { it.parentTaskId == newParentTask.id }
+        actual.size shouldBeEqualTo 1
     }
 
     @Test
