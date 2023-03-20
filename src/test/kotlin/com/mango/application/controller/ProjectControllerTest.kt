@@ -5,6 +5,7 @@ import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.Color
 import com.mango.domain.project.usecase.CreateProjectUseCase
 import com.mango.domain.project.usecase.DeleteProjectUseCase
+import com.mango.domain.project.usecase.DuplicateProjectUseCase
 import com.mango.domain.project.usecase.GetAllProjectsUseCase
 import com.mango.domain.project.usecase.GetProjectActivitiesUseCase
 import com.mango.domain.project.usecase.GetProjectOrThrowUseCase
@@ -20,6 +21,7 @@ class ProjectControllerTest {
     private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase = mockk()
     private val getAllProjectsUseCase: GetAllProjectsUseCase = mockk()
     private val getProjectActivitiesUseCase: GetProjectActivitiesUseCase = mockk()
+    private val duplicateProjectUseCase: DuplicateProjectUseCase = mockk()
 
     private val sut = ProjectController(
         createProjectUseCase,
@@ -27,6 +29,7 @@ class ProjectControllerTest {
         getProjectOrThrowUseCase,
         getAllProjectsUseCase,
         getProjectActivitiesUseCase,
+        duplicateProjectUseCase,
     )
 
     @Test
@@ -107,5 +110,18 @@ class ProjectControllerTest {
 
         // then
         verify { getProjectActivitiesUseCase(projectId) }
+    }
+
+    @Test
+    fun `duplicateProject() calls duplicateProjectUseCase()`() {
+        // given
+        val projectId = getProjectId1()
+        every { duplicateProjectUseCase(projectId) } returns mockk()
+
+        // when
+        sut.duplicateProject(projectId)
+
+        // then
+        verify { duplicateProjectUseCase(projectId) }
     }
 }

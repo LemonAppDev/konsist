@@ -7,6 +7,7 @@ import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.ProjectId
 import com.mango.domain.project.usecase.CreateProjectUseCase
 import com.mango.domain.project.usecase.DeleteProjectUseCase
+import com.mango.domain.project.usecase.DuplicateProjectUseCase
 import com.mango.domain.project.usecase.GetAllProjectsUseCase
 import com.mango.domain.project.usecase.GetProjectActivitiesUseCase
 import com.mango.domain.project.usecase.GetProjectOrThrowUseCase
@@ -26,6 +27,7 @@ class ProjectController(
     private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase,
     private val getAllProjectsUseCase: GetAllProjectsUseCase,
     private val getProjectActivitiesUseCase: GetProjectActivitiesUseCase,
+    private val duplicateProjectUseCase: DuplicateProjectUseCase,
 ) {
     @PostMapping("/create")
     fun createProject(@RequestBody requestModel: CreateProjectRequestModel): Project =
@@ -47,4 +49,7 @@ class ProjectController(
     @GetMapping("/activities")
     fun getProjectActivities(@RequestParam(name = "projectId") projectId: ProjectId): List<ProjectActivity> =
         getProjectActivitiesUseCase(projectId)
+
+    @PostMapping("/duplicate")
+    fun duplicateProject(@RequestParam(name = "projectId") projectId: ProjectId): Project = duplicateProjectUseCase(projectId)
 }

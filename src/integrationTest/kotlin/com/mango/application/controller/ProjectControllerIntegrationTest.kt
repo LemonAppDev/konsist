@@ -90,6 +90,54 @@ class ProjectControllerTest {
     }
 
     @Test
+    fun `duplicate endpoint duplicates project`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint()
+
+        // when
+        val duplicatedProject = projectEndpointHelper.callDuplicateProjectEndPoint(project.id)
+
+        // then
+        val actual = projectEndpointHelper.calAllEndpoint()
+        actual shouldBeEqualTo listOf(project, duplicatedProject)
+    }
+
+    @Test
+    fun `duplicate endpoint duplicates all tasks from old project`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint()
+        val task1 = taskEndpointHelper.callCreateEndpoint(projectId = project.id)
+        val task2 = taskEndpointHelper.callCreateEndpoint(projectId = project.id)
+
+        // when
+        val duplicatedProject = projectEndpointHelper.callDuplicateProjectEndPoint(project.id)
+
+        // then
+        val actual = taskEndpointHelper
+            .callAllEndpoint()
+            .filter { it.projectId == duplicatedProject.id }
+            .map { it.name }
+
+        actual shouldBeEqualTo listOf(task1.name, task2.name)
+    }
+
+    @Test
+    fun `duplicate endpoint adds 'project create activity'`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint()
+
+        // when
+        val duplicatedProject = projectEndpointHelper.callDuplicateProjectEndPoint(project.id)
+
+        // then
+        val actual = projectEndpointHelper
+            .callGetProjectActivitiesEndPoint(duplicatedProject.id)
+            .map { it.type }
+
+        actual shouldBeEqualTo listOf(CREATE)
+    }
+
+    @Test
     fun `project activities endpoint return project create activity after creating project`() {
         // given
         val project = projectEndpointHelper.callCreateEndpoint()
@@ -149,6 +197,13 @@ class ProjectEndpointHelper(
         this,
         endpointName = "activities",
         method = HttpMethod.GET,
+        queryParams = mapOf("projectId" to projectId.value.toString()),
+    )
+
+    fun callDuplicateProjectEndPoint(projectId: ProjectId) = controllerEndpointCaller.call<Project>(
+        this,
+        endpointName = "duplicate",
+        method = HttpMethod.POST,
         queryParams = mapOf("projectId" to projectId.value.toString()),
     )
 }

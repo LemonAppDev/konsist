@@ -3,6 +3,7 @@ package com.mango.domain.task.usecase
 import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
+import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.mango.domain.common.model.BusinessTestModel.getTaskId2
 import com.mango.domain.common.model.BusinessTestModel.getTaskId3
@@ -39,6 +40,7 @@ class DuplicateTaskUseCaseTest {
         val oldTask: Task = mockk()
         every { oldTask.id } returns oldTaskId
         every { oldTask.parentTaskId } returns null
+        every { oldTask.projectId } returns null
         every { getTaskOrThrowUseCase(oldTaskId) } returns oldTask
         val newTaskId = getTaskId2()
         every { uuidFactory.createTaskId() } returns newTaskId
@@ -65,6 +67,7 @@ class DuplicateTaskUseCaseTest {
         val oldTask: Task = mockk()
         every { oldTask.id } returns oldTaskId
         every { oldTask.parentTaskId } returns null
+        every { oldTask.projectId } returns null
         every { getTaskOrThrowUseCase(oldTaskId) } returns oldTask
         val newTaskId = getTaskId2()
         val newChildTaskId = getTaskId3()
@@ -78,6 +81,7 @@ class DuplicateTaskUseCaseTest {
         val repositoryTask: Task = mockk()
         val repositoryTaskId = getTaskId4()
         every { repositoryTask.id } returns repositoryTaskId
+        every { repositoryTask.projectId } returns null
         every { saveTaskUseCase(newTask, date) } returns repositoryTask
 
         val childTask: Task = mockk()
@@ -102,12 +106,13 @@ class DuplicateTaskUseCaseTest {
     }
 
     @Test
-    fun `returns new task`() {
+    fun `returns new task when project id is null`() {
         // given
         val oldTaskId = getTaskId1()
         val oldTask: Task = mockk()
         every { oldTask.id } returns oldTaskId
         every { oldTask.parentTaskId } returns null
+        every { oldTask.projectId } returns null
         every { getTaskOrThrowUseCase(oldTaskId) } returns oldTask
         val newTaskId = getTaskId2()
         every { uuidFactory.createTaskId() } returns newTaskId
@@ -124,6 +129,36 @@ class DuplicateTaskUseCaseTest {
 
         // when
         val actual = sut(oldTaskId)
+
+        // then
+        actual shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `returns new task when project id is not null`() {
+        // given
+        val projectId = getProjectId1()
+        val oldTaskId = getTaskId1()
+        val oldTask: Task = mockk()
+        every { oldTask.id } returns oldTaskId
+        every { oldTask.parentTaskId } returns null
+        every { oldTask.projectId } returns projectId
+        every { getTaskOrThrowUseCase(oldTaskId) } returns oldTask
+        val newTaskId = getTaskId2()
+        every { uuidFactory.createTaskId() } returns newTaskId
+        val newTask: Task = mockk()
+        val date: LocalDateTime = mockk()
+        every { localDateTimeFactory() } returns date
+        every { oldTask.copy(newTaskId, creationDate = date) } returns newTask
+        every { newTask.id } returns newTaskId
+        every { newTask.creationDate } returns date
+        every { oldTask.copy(id = newTaskId, creationDate = date, parentTaskId = null, projectId = projectId) } returns newTask
+        val expected: Task = mockk()
+        every { saveTaskUseCase(newTask, date) } returns expected
+        every { taskRepository.tasks } returns mockk(relaxed = true)
+
+        // when
+        val actual = sut(oldTaskId, projectId)
 
         // then
         actual shouldBeEqualTo expected
