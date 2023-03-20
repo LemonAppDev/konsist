@@ -4,6 +4,7 @@ enum class ProjectActivityType(val value: String) {
     CREATE("create"),
     DELETE("delete"),
     TASK_ADDED("task_added"),
+    TASK_REMOVED("task_removed"),
     ;
 
     companion object {

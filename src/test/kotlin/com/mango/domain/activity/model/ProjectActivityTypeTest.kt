@@ -3,6 +3,8 @@ package com.mango.domain.activity.model
 import com.mango.domain.activity.model.ProjectActivityType.CREATE
 import com.mango.domain.activity.model.ProjectActivityType.Companion.getByValue
 import com.mango.domain.activity.model.ProjectActivityType.DELETE
+import com.mango.domain.activity.model.ProjectActivityType.TASK_ADDED
+import com.mango.domain.activity.model.ProjectActivityType.TASK_REMOVED
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -31,6 +33,8 @@ class ProjectActivityTypeTest {
         fun provideValues() = listOf(
             arguments("create", CREATE),
             arguments("delete", DELETE),
+            arguments("task_added", TASK_ADDED),
+            arguments("task_removed", TASK_REMOVED),
         )
     }
 

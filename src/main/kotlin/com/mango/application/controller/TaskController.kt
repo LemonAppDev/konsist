@@ -88,7 +88,7 @@ class TaskController(
     fun deleteTask(@RequestParam(name = "taskId") taskId: TaskId): Unit = deleteTaskUseCase(taskId)
 
     @PostMapping("/duplicate")
-    fun duplicateTask(@RequestParam(name = "taskId") taskId: TaskId): Task = duplicateTaskUseCase.invoke(taskId)
+    fun duplicateTask(@RequestParam(name = "taskId") taskId: TaskId): Task = duplicateTaskUseCase(taskId)
 
     @GetMapping("/activities")
     fun getTaskActivities(@RequestParam(name = "taskId") taskId: TaskId): List<TaskActivity> = getTaskActivitiesUseCase(taskId)

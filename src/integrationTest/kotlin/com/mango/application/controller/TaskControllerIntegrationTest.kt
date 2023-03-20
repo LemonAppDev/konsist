@@ -5,6 +5,8 @@ import com.mango.application.model.comment.UpdateCommentRequestModel
 import com.mango.application.model.task.CreateTaskRequestModel
 import com.mango.application.model.task.UpdateTaskRequestModel
 import com.mango.domain.activity.model.ProjectActivityType
+import com.mango.domain.activity.model.ProjectActivityType.TASK_ADDED
+import com.mango.domain.activity.model.ProjectActivityType.TASK_REMOVED
 import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityType.CREATE
 import com.mango.domain.activity.model.TaskActivityType.UPDATE_ASSIGNEE
@@ -101,7 +103,7 @@ class TaskControllerTest {
             .callGetProjectActivitiesEndPoint(project.id)
             .map { it.type }
 
-        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, ProjectActivityType.TASK_ADDED)
+        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, TASK_ADDED)
     }
 
     @Test
@@ -133,6 +135,23 @@ class TaskControllerTest {
 
         // then
         actual shouldBeEqualTo listOf(otherTask)
+    }
+
+    @Test
+    fun `delete endpoint adds task_removed project activity when task has a project`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint()
+        val task = taskEndpointHelper.callCreateEndpoint(name = "task", projectId = project.id)
+
+        // when
+        taskEndpointHelper.callDeleteEndpoint(task.id)
+
+        // then
+        val actual = projectEndpointHelper
+            .callGetProjectActivitiesEndPoint(project.id)
+            .map { it.type }
+
+        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, TASK_ADDED, TASK_REMOVED)
     }
 
     @Test
@@ -394,7 +413,35 @@ class TaskControllerTest {
 
         // then
         val actual = projectEndpointHelper.callGetProjectActivitiesEndPoint(newProject.id).map { it.type }
-        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, ProjectActivityType.TASK_ADDED)
+        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, TASK_ADDED)
+    }
+
+    @Test
+    fun `update endpoint adds task_removed project activity to old project after changing task project`() {
+        // given
+        val oldProject = projectEndpointHelper.callCreateEndpoint()
+        val newProject = projectEndpointHelper.callCreateEndpoint()
+        val task = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id)
+
+        // when
+        taskEndpointHelper.callUpdateEndpoint(
+            UpdateTaskRequestModel(
+                taskId = task.id,
+                name = task.name,
+                description = task.description,
+                dueDate = task.dueDate,
+                targetDate = task.targetDate,
+                priority = task.priority,
+                projectId = newProject.id,
+                parentTaskId = task.parentTaskId,
+                assigneeId = task.assigneeId,
+                isCompleted = false,
+            ),
+        )
+
+        // then
+        val actual = projectEndpointHelper.callGetProjectActivitiesEndPoint(oldProject.id).map { it.type }
+        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, TASK_ADDED, TASK_REMOVED)
     }
 
     @Test
@@ -505,7 +552,7 @@ class TaskControllerTest {
         val actual = projectEndpointHelper
             .callGetProjectActivitiesEndPoint(project.id)
             .map { it.type }
-        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, ProjectActivityType.TASK_ADDED, ProjectActivityType.TASK_ADDED)
+        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, TASK_ADDED, TASK_ADDED)
     }
 
     @Test

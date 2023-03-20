@@ -43,7 +43,8 @@ class UpdateTaskProjectUseCase(
                 newProjectId?.value.toString(),
                 oldProjectId?.value.toString(),
             )
-            newProjectId?.let { addProjectActivityUseCase(newProjectId, ProjectActivityType.TASK_ADDED, date) }
+            oldProjectId?.let { addProjectActivityUseCase(it, ProjectActivityType.TASK_REMOVED, date) }
+            newProjectId?.let { addProjectActivityUseCase(it, ProjectActivityType.TASK_ADDED, date) }
 
             taskRepository.tasks
                 .filter { it.parentTaskId == task.id }
