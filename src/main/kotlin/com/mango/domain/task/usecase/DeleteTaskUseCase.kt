@@ -6,8 +6,10 @@ import com.mango.domain.activity.usecase.AddProjectActivityUseCase
 import com.mango.domain.activity.usecase.AddTaskActivityUseCase
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.task.TaskRepository
+import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.TaskId
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 @Service
 class DeleteTaskUseCase(
@@ -16,32 +18,24 @@ class DeleteTaskUseCase(
     private val addTaskActivityUseCase: AddTaskActivityUseCase,
     private val addProjectActivityUseCase: AddProjectActivityUseCase,
 ) {
-    operator fun invoke(taskId: TaskId) {
+    operator fun invoke(taskId: TaskId, date: LocalDateTime? = null) {
         val task = taskRepository.getTask(taskId)
 
         task?.let {
-            taskRepository.deleteTask(it)
-
-            val date = localDateTimeFactory()
-            addTaskActivityUseCase(it.id, TaskActivityType.DELETE, date)
-            it.projectId?.let { projectId ->
-                addProjectActivityUseCase(
-                    projectId,
-                    ProjectActivityType.TASK_REMOVED,
-                    date,
-                    it.id.toString(),
-                )
-            }
-
-            taskRepository.tasks
-                .filter { task -> task.parentTaskId == taskId }
-                .forEach { task ->
-                    taskRepository.deleteTask(task)
-                    addTaskActivityUseCase(task.id, TaskActivityType.DELETE, date)
-                    task.projectId?.let { projectId ->
-                        addProjectActivityUseCase(projectId, ProjectActivityType.TASK_REMOVED, date, task.id.toString())
-                    }
-                }
+            val deletingDate = date ?: localDateTimeFactory()
+            delete(it, deletingDate)
         }
+    }
+
+    private fun delete(task: Task, date: LocalDateTime? = null) {
+        taskRepository.deleteTask(task)
+
+        addTaskActivityUseCase(task.id, TaskActivityType.DELETE, date)
+
+        task.projectId?.let { addProjectActivityUseCase(it, ProjectActivityType.TASK_REMOVED, date, task.id.toString()) }
+
+        taskRepository.tasks
+            .filter { newTask -> newTask.parentTaskId == task.id }
+            .forEach { newTask -> delete(newTask, date) }
     }
 }

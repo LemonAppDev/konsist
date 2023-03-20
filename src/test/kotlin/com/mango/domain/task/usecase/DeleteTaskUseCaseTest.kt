@@ -32,7 +32,7 @@ class DeleteTaskUseCaseTest {
     )
 
     @Test
-    fun `deletes task from repository`() {
+    fun `deletes task`() {
         // given
         val taskId = getTaskId1()
         val task: Task = mockk()
@@ -41,9 +41,9 @@ class DeleteTaskUseCaseTest {
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
         every { taskRepository.getTask(taskId) } returns task
-        justRun { taskRepository.deleteTask(task) }
         every { taskRepository.tasks } returns mockk(relaxed = true)
-        justRun { addTaskActivityUseCase(taskId, DELETE, date) }
+        justRun { taskRepository.deleteTask(task) }
+        every { addTaskActivityUseCase(taskId, DELETE, date) } returns mockk()
 
         // when
         sut(taskId)
@@ -53,7 +53,28 @@ class DeleteTaskUseCaseTest {
     }
 
     @Test
-    fun `deletes child tasks from repository`() {
+    fun `adds 'task delete activity'`() {
+        // given
+        val taskId = getTaskId1()
+        val task: Task = mockk()
+        every { task.id } returns taskId
+        every { task.projectId } returns null
+        val date: LocalDateTime = mockk()
+        every { localDateTimeFactory() } returns date
+        every { taskRepository.getTask(taskId) } returns task
+        every { taskRepository.tasks } returns mockk(relaxed = true)
+        justRun { taskRepository.deleteTask(task) }
+        every { addTaskActivityUseCase(taskId, DELETE, date) } returns mockk()
+
+        // when
+        sut(taskId)
+
+        // then
+        verify { addTaskActivityUseCase(taskId, DELETE, date) }
+    }
+
+    @Test
+    fun `deletes task and its child tasks`() {
         // given
         val taskId = getTaskId1()
         val task: Task = mockk()
@@ -63,6 +84,7 @@ class DeleteTaskUseCaseTest {
         every { localDateTimeFactory() } returns date
         every { taskRepository.getTask(taskId) } returns task
         justRun { taskRepository.deleteTask(task) }
+        every { addTaskActivityUseCase(taskId, DELETE, date) } returns mockk()
         val childTask1: Task = mockk()
         val id1 = getTaskId2()
         every { childTask1.id } returns id1
@@ -73,25 +95,25 @@ class DeleteTaskUseCaseTest {
         every { childTask2.id } returns id2
         every { childTask2.projectId } returns null
         every { childTask2.parentTaskId } returns taskId
-        every { taskRepository.tasks } returns listOf(childTask1, childTask2)
+        every { taskRepository.tasks } returns listOf(childTask1, childTask2) andThen listOf()
         justRun { taskRepository.deleteTask(childTask1) }
+        every { addTaskActivityUseCase(id1, DELETE, date) } returns mockk()
         justRun { taskRepository.deleteTask(childTask2) }
-        justRun { addTaskActivityUseCase(taskId, DELETE, date) }
-        justRun { addTaskActivityUseCase(id1, DELETE, date) }
-        justRun { addTaskActivityUseCase(id2, DELETE, date) }
+        every { addTaskActivityUseCase(id2, DELETE, date) } returns mockk()
 
         // when
         sut(taskId)
 
         // then
         verifyOrder {
+            taskRepository.deleteTask(task)
             taskRepository.deleteTask(childTask1)
             taskRepository.deleteTask(childTask2)
         }
     }
 
     @Test
-    fun `adds activity for the task and its child tasks`() {
+    fun `adds 'task delete activity' for task and its child tasks`() {
         // given
         val taskId = getTaskId1()
         val task: Task = mockk()
@@ -101,22 +123,22 @@ class DeleteTaskUseCaseTest {
         every { localDateTimeFactory() } returns date
         every { taskRepository.getTask(taskId) } returns task
         justRun { taskRepository.deleteTask(task) }
+        every { addTaskActivityUseCase(taskId, DELETE, date) } returns mockk()
         val childTask1: Task = mockk()
         val id1 = getTaskId2()
         every { childTask1.id } returns id1
-        every { childTask1.parentTaskId } returns taskId
         every { childTask1.projectId } returns null
+        every { childTask1.parentTaskId } returns taskId
         val childTask2: Task = mockk()
         val id2 = getTaskId2()
         every { childTask2.id } returns id2
-        every { childTask2.parentTaskId } returns taskId
         every { childTask2.projectId } returns null
-        every { taskRepository.tasks } returns listOf(childTask1, childTask2)
+        every { childTask2.parentTaskId } returns taskId
+        every { taskRepository.tasks } returns listOf(childTask1, childTask2) andThen listOf()
         justRun { taskRepository.deleteTask(childTask1) }
+        every { addTaskActivityUseCase(id1, DELETE, date) } returns mockk()
         justRun { taskRepository.deleteTask(childTask2) }
-        justRun { addTaskActivityUseCase(taskId, DELETE, date) }
-        justRun { addTaskActivityUseCase(id1, DELETE, date) }
-        justRun { addTaskActivityUseCase(id2, DELETE, date) }
+        every { addTaskActivityUseCase(id2, DELETE, date) } returns mockk()
 
         // when
         sut(taskId)
@@ -130,10 +152,33 @@ class DeleteTaskUseCaseTest {
     }
 
     @Test
-    fun `adds 'project task removed' activity for the task and its child tasks`() {
+    fun `adds 'project task removed activity' when project is not null`() {
         // given
-        val projectId = getProjectId1()
         val taskId = getTaskId1()
+        val task: Task = mockk()
+        every { task.id } returns taskId
+        val projectId = getProjectId1()
+        every { task.projectId } returns projectId
+        val date: LocalDateTime = mockk()
+        every { localDateTimeFactory() } returns date
+        every { taskRepository.getTask(taskId) } returns task
+        every { taskRepository.tasks } returns mockk(relaxed = true)
+        justRun { taskRepository.deleteTask(task) }
+        every { addTaskActivityUseCase(taskId, DELETE, date) } returns mockk()
+        every { addProjectActivityUseCase(projectId, TASK_REMOVED, date, taskId.toString()) } returns mockk()
+
+        // when
+        sut(taskId)
+
+        // then
+        verify { addProjectActivityUseCase(projectId, TASK_REMOVED, date, taskId.toString()) }
+    }
+
+    @Test
+    fun `adds 'project task removed activity' for task and its child tasks when project is not null`() {
+        // given
+        val taskId = getTaskId1()
+        val projectId = getProjectId1()
         val task: Task = mockk()
         every { task.id } returns taskId
         every { task.projectId } returns projectId
@@ -141,6 +186,8 @@ class DeleteTaskUseCaseTest {
         every { localDateTimeFactory() } returns date
         every { taskRepository.getTask(taskId) } returns task
         justRun { taskRepository.deleteTask(task) }
+        every { addTaskActivityUseCase(taskId, DELETE, date) } returns mockk()
+        every { addProjectActivityUseCase(projectId, TASK_REMOVED, date, taskId.toString()) } returns mockk()
         val childTask1: Task = mockk()
         val id1 = getTaskId2()
         every { childTask1.id } returns id1
@@ -151,15 +198,13 @@ class DeleteTaskUseCaseTest {
         every { childTask2.id } returns id2
         every { childTask2.projectId } returns projectId
         every { childTask2.parentTaskId } returns taskId
-        every { taskRepository.tasks } returns listOf(childTask1, childTask2)
+        every { taskRepository.tasks } returns listOf(childTask1, childTask2) andThen listOf()
         justRun { taskRepository.deleteTask(childTask1) }
+        every { addTaskActivityUseCase(id1, DELETE, date) } returns mockk()
+        every { addProjectActivityUseCase(projectId, TASK_REMOVED, date, id1.toString()) } returns mockk()
         justRun { taskRepository.deleteTask(childTask2) }
-        justRun { addTaskActivityUseCase(taskId, DELETE, date) }
-        justRun { addTaskActivityUseCase(id1, DELETE, date) }
-        justRun { addTaskActivityUseCase(id2, DELETE, date) }
-        justRun { addProjectActivityUseCase(projectId, TASK_REMOVED, date, taskId.toString()) }
-        justRun { addProjectActivityUseCase(projectId, TASK_REMOVED, date, id1.toString()) }
-        justRun { addProjectActivityUseCase(projectId, TASK_REMOVED, date, id2.toString()) }
+        every { addTaskActivityUseCase(id2, DELETE, date) } returns mockk()
+        every { addProjectActivityUseCase(projectId, TASK_REMOVED, date, id2.toString()) } returns mockk()
 
         // when
         sut(taskId)
