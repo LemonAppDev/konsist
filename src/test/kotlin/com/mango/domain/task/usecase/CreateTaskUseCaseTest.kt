@@ -111,7 +111,7 @@ class CreateTaskUseCaseTest {
         val creatorId = getUserId2()
         every { task.ownerId } returns creatorId
         justRun { addTaskActivityUseCase(taskId, CREATE, creationDate) }
-        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
+        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate, taskId.toString()) }
 
         // when
         sut(name, desc, dueDate, targetDate, 3, projectId, parentTaskId, assigneeId)
@@ -149,7 +149,7 @@ class CreateTaskUseCaseTest {
         every { taskRepository.saveTask(task) } returns repositoryTask
         every { repositoryTask.id } returns taskId
         justRun { addTaskActivityUseCase(taskId, CREATE, creationDate) }
-        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
+        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate, taskId.toString()) }
 
         // when
         sut(name, desc, dueDate, targetDate, 3, projectId, parentTaskId, assigneeId)
@@ -187,13 +187,13 @@ class CreateTaskUseCaseTest {
         every { taskRepository.saveTask(task) } returns repositoryTask
         every { repositoryTask.id } returns taskId
         justRun { addTaskActivityUseCase(taskId, CREATE, creationDate) }
-        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
+        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate, taskId.toString()) }
 
         // when
         sut(name, desc, dueDate, targetDate, 3, projectId, parentTaskId, assigneeId)
 
         // then
-        verify { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
+        verify { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate, taskId.toString()) }
     }
 
     @Test
@@ -226,7 +226,7 @@ class CreateTaskUseCaseTest {
         every { expected.projectId } returns projectId
         every { expected.id } returns taskId
         justRun { addTaskActivityUseCase(taskId, CREATE, creationDate) }
-        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate) }
+        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, creationDate, taskId.toString()) }
 
         // when
         val actual = sut(name, desc, dueDate, targetDate, 3, projectId, parentTaskId, assigneeId)

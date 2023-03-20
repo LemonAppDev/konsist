@@ -67,7 +67,7 @@ class CreateTaskUseCase(
             addTaskActivityUseCase(it.id, TaskActivityType.CREATE, creationDate)
 
             it.projectId?.let { projectId ->
-                addProjectActivityUseCase(projectId, ProjectActivityType.TASK_ADDED, creationDate)
+                addProjectActivityUseCase(projectId, ProjectActivityType.TASK_ADDED, creationDate, it.id.toString())
             }
         }
     }

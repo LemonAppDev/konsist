@@ -11,5 +11,7 @@ class ProjectActivityToProjectActivityJpaEntityMapper {
         type = projectActivity.type.value,
         projectId = projectActivity.projectId.value,
         date = projectActivity.date,
+        newValue = projectActivity.newValue,
+        oldValue = projectActivity.oldValue,
     )
 }

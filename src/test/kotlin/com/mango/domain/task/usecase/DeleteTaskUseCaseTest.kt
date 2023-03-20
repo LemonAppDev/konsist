@@ -157,14 +157,18 @@ class DeleteTaskUseCaseTest {
         justRun { addTaskActivityUseCase(taskId, DELETE, date) }
         justRun { addTaskActivityUseCase(id1, DELETE, date) }
         justRun { addTaskActivityUseCase(id2, DELETE, date) }
-        justRun { addProjectActivityUseCase(projectId, TASK_REMOVED, date) }
+        justRun { addProjectActivityUseCase(projectId, TASK_REMOVED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(projectId, TASK_REMOVED, date, id1.toString()) }
+        justRun { addProjectActivityUseCase(projectId, TASK_REMOVED, date, id2.toString()) }
 
         // when
         sut(taskId)
 
         // then
-        verify(exactly = 3) {
-            addProjectActivityUseCase(projectId, TASK_REMOVED, date)
+        verifyOrder {
+            addProjectActivityUseCase(projectId, TASK_REMOVED, date, taskId.toString())
+            addProjectActivityUseCase(projectId, TASK_REMOVED, date, id1.toString())
+            addProjectActivityUseCase(projectId, TASK_REMOVED, date, id2.toString())
         }
     }
 }

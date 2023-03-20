@@ -10,4 +10,6 @@ data class ProjectActivity(
     val type: ProjectActivityType,
     val projectId: ProjectId,
     val date: LocalDateTime,
+    val newValue: String?,
+    val oldValue: String?,
 )

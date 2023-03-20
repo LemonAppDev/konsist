@@ -2,7 +2,7 @@ package com.mango.domain.task.usecase.update
 
 import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.activity.model.ProjectActivityType.TASK_ADDED
-import com.mango.domain.activity.model.ProjectActivityType.TASK_REMOVED
+import com.mango.domain.activity.model.ProjectActivityType.TASK_MOVED
 import com.mango.domain.activity.model.TaskActivityType.UPDATE_PROJECT
 import com.mango.domain.activity.usecase.AddProjectActivityUseCase
 import com.mango.domain.activity.usecase.AddTaskActivityUseCase
@@ -61,8 +61,8 @@ class UpdateTaskProjectUseCaseTest {
                 oldProjectId.value.toString(),
             )
         }
-        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
-        justRun { addProjectActivityUseCase(oldProjectId, TASK_REMOVED, date) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, taskId.toString()) }
 
         // when
         sut(taskId, newProjectId, date)
@@ -110,8 +110,12 @@ class UpdateTaskProjectUseCaseTest {
         justRun {
             addTaskActivityUseCase(id2, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
         }
-        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
-        justRun { addProjectActivityUseCase(oldProjectId, TASK_REMOVED, date) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, id1.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, id1.toString()) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, id2.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, id2.toString()) }
 
         // when
         sut(taskId, newProjectId, date)
@@ -146,18 +150,18 @@ class UpdateTaskProjectUseCaseTest {
                 oldProjectId.value.toString(),
             )
         }
-        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
-        justRun { addProjectActivityUseCase(oldProjectId, TASK_REMOVED, date) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, taskId.toString()) }
 
         // when
         sut(taskId, newProjectId, date)
 
         // then
-        verify { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
+        verify { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, taskId.toString()) }
     }
 
     @Test
-    fun `add 'project task_removed activity'`() {
+    fun `add 'project task_moved activity'`() {
         // given
         val taskId = getTaskId1()
         val oldProjectId = getProjectId1()
@@ -179,14 +183,14 @@ class UpdateTaskProjectUseCaseTest {
                 oldProjectId.value.toString(),
             )
         }
-        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
-        justRun { addProjectActivityUseCase(oldProjectId, TASK_REMOVED, date) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, taskId.toString()) }
 
         // when
         sut(taskId, newProjectId, date)
 
         // then
-        verify { addProjectActivityUseCase(oldProjectId, TASK_REMOVED, date) }
+        verify { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, taskId.toString()) }
     }
 
     @Test
@@ -218,18 +222,23 @@ class UpdateTaskProjectUseCaseTest {
         justRun {
             addTaskActivityUseCase(id1, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
         }
-        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
-        justRun { addProjectActivityUseCase(oldProjectId, TASK_REMOVED, date) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, id1.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, id1.toString()) }
 
         // when
         sut(taskId, newProjectId, date)
 
         // then
-        verify(exactly = 2) { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
+        verifyOrder {
+            addProjectActivityUseCase(newProjectId, TASK_ADDED, date, taskId.toString())
+            addProjectActivityUseCase(newProjectId, TASK_ADDED, date, id1.toString())
+        }
     }
 
     @Test
-    fun `add 'project task_removed activity' two times when task has a child task`() {
+    fun `add 'project task_moved activity' two times when task has a child task`() {
         // given
         val taskId = getTaskId1()
         val oldProjectId = getProjectId1()
@@ -257,14 +266,19 @@ class UpdateTaskProjectUseCaseTest {
         justRun {
             addTaskActivityUseCase(id1, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
         }
-        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
-        justRun { addProjectActivityUseCase(oldProjectId, TASK_REMOVED, date) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, id1.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, id1.toString()) }
 
         // when
         sut(taskId, newProjectId, date)
 
         // then
-        verify(exactly = 2) { addProjectActivityUseCase(oldProjectId, TASK_REMOVED, date) }
+        verifyOrder {
+            addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, taskId.toString())
+            addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, id1.toString())
+        }
     }
 
     @Test
@@ -290,8 +304,8 @@ class UpdateTaskProjectUseCaseTest {
                 oldProjectId.value.toString(),
             )
         }
-        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
-        justRun { addProjectActivityUseCase(oldProjectId, TASK_REMOVED, date) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, taskId.toString()) }
 
         // when
         sut(taskId, newProjectId, date)
@@ -329,8 +343,10 @@ class UpdateTaskProjectUseCaseTest {
         justRun {
             addTaskActivityUseCase(id1, UPDATE_PROJECT, date, newProjectId.value.toString(), oldProjectId.value.toString())
         }
-        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date) }
-        justRun { addProjectActivityUseCase(oldProjectId, TASK_REMOVED, date) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, taskId.toString()) }
+        justRun { addProjectActivityUseCase(newProjectId, TASK_ADDED, date, id1.toString()) }
+        justRun { addProjectActivityUseCase(oldProjectId, TASK_MOVED, date, id1.toString()) }
 
         // when
         sut(taskId, newProjectId, date)

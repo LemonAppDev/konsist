@@ -24,4 +24,10 @@ class ProjectActivityJpaEntity(
 
     @Column(name = "date", nullable = false, columnDefinition = "TIMESTAMP(9)")
     val date: LocalDateTime,
+
+    @Column(name = "newValue", nullable = true)
+    val newValue: String?,
+
+    @Column(name = "oldValue", nullable = true)
+    val oldValue: String?,
 )

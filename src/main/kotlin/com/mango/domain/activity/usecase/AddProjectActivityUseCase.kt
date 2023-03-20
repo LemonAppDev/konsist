@@ -21,6 +21,8 @@ class AddProjectActivityUseCase(
         projectId: ProjectId,
         type: ProjectActivityType,
         date: LocalDateTime? = null,
+        newValue: String? = null,
+        oldValue: String? = null,
     ) {
         val activity = ProjectActivity(
             uuidFactory.createProjectActivityId(),
@@ -28,6 +30,8 @@ class AddProjectActivityUseCase(
             type,
             projectId,
             date ?: localDateTimeFactory(),
+            newValue,
+            oldValue,
         )
         activityRepository.addProjectActivity(activity)
     }

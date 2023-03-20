@@ -29,27 +29,29 @@ class AddProjectActivityUseCaseTest {
     )
 
     @Test
-    fun `adds project activity when date is provided`() {
+    fun `adds project activity when date, new value and old value are not null`() {
         // given
         val projectId = getProjectId1()
         val type: ProjectActivityType = mockk()
         val date: LocalDateTime = mockk()
+        val newValue = "newValue"
+        val oldValue = "oldValue"
         val projectActivityId = getProjectActivityId1()
         every { uuidFactory.createProjectActivityId() } returns projectActivityId
         val userId = getUserId1()
         every { userRepository.getCurrentUser().id } returns userId
-        val projectActivity = ProjectActivity(projectActivityId, userId, type, projectId, date)
+        val projectActivity = ProjectActivity(projectActivityId, userId, type, projectId, date, newValue, oldValue)
         every { activityRepository.addProjectActivity(projectActivity) } returns mockk()
 
         // when
-        sut(projectId, type, date)
+        sut(projectId, type, date, newValue, oldValue)
 
         // then
         verify { activityRepository.addProjectActivity(projectActivity) }
     }
 
     @Test
-    fun `adds project activity when date is not provided`() {
+    fun `adds project activity when date is null`() {
         // given
         val projectId = getProjectId1()
         val type: ProjectActivityType = mockk()
@@ -59,7 +61,7 @@ class AddProjectActivityUseCaseTest {
         every { uuidFactory.createProjectActivityId() } returns projectActivityId
         val userId = getUserId1()
         every { userRepository.getCurrentUser().id } returns userId
-        val projectActivity = ProjectActivity(projectActivityId, userId, type, projectId, date)
+        val projectActivity = ProjectActivity(projectActivityId, userId, type, projectId, date, null, null)
         every { activityRepository.addProjectActivity(projectActivity) } returns mockk()
 
         // when

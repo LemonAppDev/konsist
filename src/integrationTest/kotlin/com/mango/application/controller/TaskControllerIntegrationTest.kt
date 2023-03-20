@@ -6,6 +6,7 @@ import com.mango.application.model.task.CreateTaskRequestModel
 import com.mango.application.model.task.UpdateTaskRequestModel
 import com.mango.domain.activity.model.ProjectActivityType
 import com.mango.domain.activity.model.ProjectActivityType.TASK_ADDED
+import com.mango.domain.activity.model.ProjectActivityType.TASK_MOVED
 import com.mango.domain.activity.model.ProjectActivityType.TASK_REMOVED
 import com.mango.domain.activity.model.TaskActivity
 import com.mango.domain.activity.model.TaskActivityType.CREATE
@@ -417,7 +418,7 @@ class TaskControllerTest {
     }
 
     @Test
-    fun `update endpoint adds task_removed project activity to old project after changing task project`() {
+    fun `update endpoint adds task_moved project activity to old project after project update`() {
         // given
         val oldProject = projectEndpointHelper.callCreateEndpoint()
         val newProject = projectEndpointHelper.callCreateEndpoint()
@@ -441,7 +442,7 @@ class TaskControllerTest {
 
         // then
         val actual = projectEndpointHelper.callGetProjectActivitiesEndPoint(oldProject.id).map { it.type }
-        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, TASK_ADDED, TASK_REMOVED)
+        actual shouldBeEqualTo listOf(ProjectActivityType.CREATE, TASK_ADDED, TASK_MOVED)
     }
 
     @Test

@@ -24,7 +24,14 @@ class DeleteTaskUseCase(
 
             val date = localDateTimeFactory()
             addTaskActivityUseCase(it.id, TaskActivityType.DELETE, date)
-            it.projectId?.let { projectId -> addProjectActivityUseCase(projectId, ProjectActivityType.TASK_REMOVED, date) }
+            it.projectId?.let { projectId ->
+                addProjectActivityUseCase(
+                    projectId,
+                    ProjectActivityType.TASK_REMOVED,
+                    date,
+                    it.id.toString(),
+                )
+            }
 
             taskRepository.tasks
                 .filter { task -> task.parentTaskId == taskId }
@@ -32,7 +39,7 @@ class DeleteTaskUseCase(
                     taskRepository.deleteTask(task)
                     addTaskActivityUseCase(task.id, TaskActivityType.DELETE, date)
                     task.projectId?.let { projectId ->
-                        addProjectActivityUseCase(projectId, ProjectActivityType.TASK_REMOVED, date)
+                        addProjectActivityUseCase(projectId, ProjectActivityType.TASK_REMOVED, date, task.id.toString())
                     }
                 }
         }

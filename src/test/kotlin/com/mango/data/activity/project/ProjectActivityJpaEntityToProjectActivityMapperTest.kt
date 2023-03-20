@@ -24,6 +24,8 @@ class ProjectActivityJpaEntityToProjectActivityMapperTest {
         val type = "create"
         val projectId = getUUID3()
         val date: LocalDateTime = mockk()
+        val newValue = "newValue"
+        val oldValue = "oldValue"
 
         val projectActivityJpaEntity = ProjectActivityJpaEntity(
             id,
@@ -31,6 +33,8 @@ class ProjectActivityJpaEntityToProjectActivityMapperTest {
             type,
             projectId,
             date,
+            newValue,
+            oldValue,
         )
 
         // when
@@ -43,6 +47,8 @@ class ProjectActivityJpaEntityToProjectActivityMapperTest {
             getByValue(type),
             ProjectId(projectId),
             date,
+            newValue,
+            oldValue,
         )
     }
 }

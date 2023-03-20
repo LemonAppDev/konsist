@@ -18,6 +18,7 @@ import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
+import io.mockk.verifyOrder
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
@@ -209,16 +210,17 @@ class DuplicateTaskUseCaseTest {
         val repositoryTask: Task = mockk()
         every { taskRepository.saveTask(newTask) } returns repositoryTask
         val projectId = getProjectId1()
+        every { repositoryTask.id } returns newTaskId
         every { repositoryTask.projectId } returns projectId
         justRun { addTaskActivityUseCase(newTaskId, CREATE, date) }
-        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, date) }
+        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, date, newTaskId.toString()) }
         every { taskRepository.tasks } returns mockk(relaxed = true)
 
         // when
         sut(oldTaskId)
 
         // then
-        verify { addProjectActivityUseCase(projectId, TASK_ADDED, date) }
+        verify { addProjectActivityUseCase(projectId, TASK_ADDED, date, newTaskId.toString()) }
     }
 
     @Test
@@ -246,7 +248,6 @@ class DuplicateTaskUseCaseTest {
         justRun { addTaskActivityUseCase(newTaskId, CREATE, date) }
         val projectId = getProjectId1()
         every { repositoryTask.projectId } returns projectId
-        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, date) }
 
         val childTask: Task = mockk()
         val childTaskId = getTaskId5()
@@ -262,12 +263,17 @@ class DuplicateTaskUseCaseTest {
         every { newRepositoryTask.projectId } returns projectId
         every { taskRepository.saveTask(newChildTask) } returns newRepositoryTask
         justRun { addTaskActivityUseCase(newChildTaskId, CREATE, date) }
+        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, date, newTaskId.toString()) }
+        justRun { addProjectActivityUseCase(projectId, TASK_ADDED, date, newChildTaskId.toString()) }
 
         // when
         sut(oldTaskId)
 
         // then
-        verify(exactly = 2) { addProjectActivityUseCase(projectId, TASK_ADDED, date) }
+        verifyOrder {
+            addProjectActivityUseCase(projectId, TASK_ADDED, date, newTaskId.toString())
+            addProjectActivityUseCase(projectId, TASK_ADDED, date, newChildTaskId.toString())
+        }
     }
 
     @Test
