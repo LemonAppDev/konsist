@@ -1,5 +1,10 @@
 rootProject.name = "mango"
 
+include(
+    ":app",
+    ":konsist",
+)
+
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
@@ -20,7 +25,6 @@ dependencyResolutionManagement {
             library("spring-boot-starter-web", "org.springframework.boot", "spring-boot-starter-web").withoutVersion()
             library("jacksonKotlin", "com.fasterxml.jackson.module", "jackson-module-kotlin").withoutVersion()
             library("jacksonJsr310", "com.fasterxml.jackson.datatype", "jackson-datatype-jsr310").withoutVersion()
-            library("archunit", "com.tngtech.archunit", "archunit-junit5").version("1.0.1")
             library("h2", "com.h2database", "h2").version("2.1.214")
 
             library("spring-boot-starter-test", "org.springframework.boot", "spring-boot-starter-test").withoutVersion()

@@ -66,8 +66,7 @@ comments:
     endOfSentenceFormat: '([.?!][ \t\n\r\f<])|([.?!:]$)'
   KDocReferencesNonPublicProperty:
     active: false
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
   OutdatedDocumentation:
     active: false
     matchTypeParameters: true
@@ -75,8 +74,7 @@ comments:
     allowParamOnConstructorProperties: false
   UndocumentedPublicClass:
     active: false
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
     searchInNestedClass: true
     searchInInnerClass: true
     searchInInnerObject: true
@@ -84,13 +82,11 @@ comments:
     searchInProtectedClass: false
   UndocumentedPublicFunction:
     active: false
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
     searchProtectedFunction: false
   UndocumentedPublicProperty:
     active: false
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
     searchProtectedProperty: false
 
 complexity:
@@ -159,16 +155,14 @@ complexity:
     active: false
   StringLiteralDuplication:
     active: false
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
     threshold: 3
     ignoreAnnotation: true
     excludeStringsWithLessThan5Characters: true
     ignoreStringsRegex: '$^'
   TooManyFunctions:
     active: true
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
     thresholdInFiles: 15
     thresholdInClasses: 15
     thresholdInInterfaces: 15
@@ -243,8 +237,7 @@ exceptions:
       - 'toString'
   InstanceOfCheckForException:
     active: true
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
   NotImplementedDeclaration:
     active: false
   ObjectExtendsThrowable:
@@ -270,8 +263,7 @@ exceptions:
     active: false
   ThrowingExceptionsWithoutMessageOrCause:
     active: true
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
     exceptions:
       - 'ArrayIndexOutOfBoundsException'
       - 'Exception'
@@ -286,8 +278,7 @@ exceptions:
     active: true
   TooGenericExceptionCaught:
     active: true
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
     exceptionNames:
       - 'ArrayIndexOutOfBoundsException'
       - 'Error'
@@ -335,8 +326,7 @@ naming:
     minimumFunctionNameLength: 3
   FunctionNaming:
     active: true
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
     functionPattern: '[a-z][a-zA-Z0-9]*'
     excludeClassPattern: '$^'
     ignoreOverridden: true
@@ -398,12 +388,10 @@ performance:
     threshold: 3
   ForEachOnRange:
     active: true
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
   SpreadOperator:
     active: true
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
   UnnecessaryPartOfBinaryExpression:
     active: false
   UnnecessaryTemporaryInstantiation:
@@ -470,8 +458,7 @@ potential-bugs:
     active: true
   LateinitUsage:
     active: false
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
     ignoreOnClassesPattern: ''
   MapGetWithNotNullAssertionOperator:
     active: true
@@ -494,8 +481,7 @@ potential-bugs:
     active: true
   UnsafeCallOnNullableType:
     active: true
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
   UnsafeCast:
     active: true
   UnusedUnaryOperator:
@@ -571,9 +557,7 @@ style:
     maxJumpCount: 1
   MagicNumber:
     active: true
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**',
-                '**/iosTest/**',
-                '**/*.kts' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**', '**/*.kts' ]
     ignoreNumbers:
       - '-1'
       - '0'
