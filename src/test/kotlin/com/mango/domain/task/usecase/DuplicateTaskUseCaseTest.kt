@@ -9,7 +9,9 @@ import com.mango.domain.common.model.BusinessTestModel.getTaskId2
 import com.mango.domain.common.model.BusinessTestModel.getTaskId3
 import com.mango.domain.common.model.BusinessTestModel.getTaskId4
 import com.mango.domain.common.model.BusinessTestModel.getTaskId5
+import com.mango.domain.common.model.BusinessTestModel.getUserId1
 import com.mango.domain.task.model.Task
+import com.mango.domain.user.UserRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -24,6 +26,7 @@ class DuplicateTaskUseCaseTest {
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val saveTaskUseCase: SaveTaskUseCase = mockk()
+    private val userRepository: UserRepository = mockk()
 
     private val sut = DuplicateTaskUseCase(
         taskRepository,
@@ -31,6 +34,7 @@ class DuplicateTaskUseCaseTest {
         localDateTimeFactory,
         getTaskOrThrowUseCase,
         saveTaskUseCase,
+        userRepository,
     )
 
     @Test
@@ -49,7 +53,9 @@ class DuplicateTaskUseCaseTest {
         every { localDateTimeFactory() } returns date
         every { newTask.id } returns newTaskId
         every { newTask.creationDate } returns date
-        every { oldTask.copy(newTaskId, creationDate = date) } returns newTask
+        val userId = getUserId1()
+        every { userRepository.getCurrentUser().id } returns userId
+        every { oldTask.copy(newTaskId, creationDate = date, ownerId = userId) } returns newTask
         every { saveTaskUseCase(newTask, date) } returns mockk()
         every { taskRepository.tasks } returns mockk(relaxed = true)
 
@@ -75,7 +81,9 @@ class DuplicateTaskUseCaseTest {
         val newTask: Task = mockk()
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
-        every { oldTask.copy(newTaskId, creationDate = date) } returns newTask
+        val userId = getUserId1()
+        every { userRepository.getCurrentUser().id } returns userId
+        every { oldTask.copy(newTaskId, creationDate = date, ownerId = userId) } returns newTask
         every { newTask.id } returns newTaskId
         every { newTask.creationDate } returns date
         val repositoryTask: Task = mockk()
@@ -92,7 +100,14 @@ class DuplicateTaskUseCaseTest {
         every { childTask.id } returns childTaskId
         every { childTask.parentTaskId } returns oldTaskId
         every { taskRepository.tasks } returns listOf(childTask) andThen listOf()
-        every { childTask.copy(newChildTaskId, creationDate = date, parentTaskId = repositoryTaskId) } returns newChildTask
+        every {
+            childTask.copy(
+                newChildTaskId,
+                creationDate = date,
+                parentTaskId = repositoryTaskId,
+                ownerId = userId,
+            )
+        } returns newChildTask
         every { saveTaskUseCase(newChildTask, date) } returns mockk()
 
         // when
@@ -119,7 +134,9 @@ class DuplicateTaskUseCaseTest {
         val newTask: Task = mockk()
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
-        every { oldTask.copy(newTaskId, creationDate = date) } returns newTask
+        val userId = getUserId1()
+        every { userRepository.getCurrentUser().id } returns userId
+        every { oldTask.copy(newTaskId, creationDate = date, ownerId = userId) } returns newTask
         every { newTask.id } returns newTaskId
         every { newTask.creationDate } returns date
         every { oldTask.copy(newTaskId) } returns newTask
@@ -149,10 +166,20 @@ class DuplicateTaskUseCaseTest {
         val newTask: Task = mockk()
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
-        every { oldTask.copy(newTaskId, creationDate = date) } returns newTask
+        val userId = getUserId1()
+        every { userRepository.getCurrentUser().id } returns userId
+        every { oldTask.copy(newTaskId, creationDate = date, ownerId = userId) } returns newTask
         every { newTask.id } returns newTaskId
         every { newTask.creationDate } returns date
-        every { oldTask.copy(id = newTaskId, creationDate = date, parentTaskId = null, projectId = projectId) } returns newTask
+        every {
+            oldTask.copy(
+                id = newTaskId,
+                creationDate = date,
+                parentTaskId = null,
+                projectId = projectId,
+                ownerId = userId,
+            )
+        } returns newTask
         val expected: Task = mockk()
         every { saveTaskUseCase(newTask, date) } returns expected
         every { taskRepository.tasks } returns mockk(relaxed = true)

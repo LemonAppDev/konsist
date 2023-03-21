@@ -7,11 +7,13 @@ import com.mango.domain.common.UUIDFactory
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.BusinessTestModel.getProjectId2
 import com.mango.domain.common.model.BusinessTestModel.getTaskId1
+import com.mango.domain.common.model.BusinessTestModel.getUserId1
 import com.mango.domain.project.ProjectRepository
 import com.mango.domain.project.model.Project
 import com.mango.domain.task.TaskRepository
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.usecase.DuplicateTaskUseCase
+import com.mango.domain.user.UserRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -27,6 +29,7 @@ class DuplicateProjectUseCaseTest {
     private val addProjectActivityUseCase: AddProjectActivityUseCase = mockk()
     private val taskRepository: TaskRepository = mockk()
     private val duplicateTaskUseCase: DuplicateTaskUseCase = mockk()
+    private val userRepository: UserRepository = mockk()
 
     private val sut = DuplicateProjectUseCase(
         getProjectOrThrowUseCase,
@@ -36,6 +39,7 @@ class DuplicateProjectUseCaseTest {
         addProjectActivityUseCase,
         taskRepository,
         duplicateTaskUseCase,
+        userRepository,
     )
 
     @Test
@@ -49,7 +53,9 @@ class DuplicateProjectUseCaseTest {
         every { uuidFactory.createProjectId() } returns newProjectId
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
-        every { oldProject.copy(id = newProjectId, creationDate = date) } returns newProject
+        val userId = getUserId1()
+        every { userRepository.getCurrentUser().id } returns userId
+        every { oldProject.copy(id = newProjectId, creationDate = date, owner = userId) } returns newProject
         every { projectRepository.saveProject(newProject) } returns newProject
         every { addProjectActivityUseCase(newProjectId, CREATE, date) } returns mockk()
         every { taskRepository.tasks } returns mockk(relaxed = true)
@@ -72,7 +78,9 @@ class DuplicateProjectUseCaseTest {
         every { uuidFactory.createProjectId() } returns newProjectId
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
-        every { oldProject.copy(id = newProjectId, creationDate = date) } returns newProject
+        val userId = getUserId1()
+        every { userRepository.getCurrentUser().id } returns userId
+        every { oldProject.copy(id = newProjectId, creationDate = date, owner = userId) } returns newProject
         every { projectRepository.saveProject(newProject) } returns newProject
         every { addProjectActivityUseCase(newProjectId, CREATE, date) } returns mockk()
         every { taskRepository.tasks } returns mockk(relaxed = true)
@@ -95,7 +103,9 @@ class DuplicateProjectUseCaseTest {
         every { uuidFactory.createProjectId() } returns newProjectId
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
-        every { oldProject.copy(id = newProjectId, creationDate = date) } returns newProject
+        val userId = getUserId1()
+        every { userRepository.getCurrentUser().id } returns userId
+        every { oldProject.copy(id = newProjectId, creationDate = date, owner = userId) } returns newProject
         every { projectRepository.saveProject(newProject) } returns newProject
         every { addProjectActivityUseCase(newProjectId, CREATE, date) } returns mockk()
         every { taskRepository.tasks } returns mockk(relaxed = true)
@@ -118,7 +128,9 @@ class DuplicateProjectUseCaseTest {
         every { uuidFactory.createProjectId() } returns newProjectId
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
-        every { oldProject.copy(id = newProjectId, creationDate = date) } returns newProject
+        val userId = getUserId1()
+        every { userRepository.getCurrentUser().id } returns userId
+        every { oldProject.copy(id = newProjectId, creationDate = date, owner = userId) } returns newProject
         every { projectRepository.saveProject(newProject) } returns newProject
         every { addProjectActivityUseCase(newProjectId, CREATE, date) } returns mockk()
         val task: Task = mockk()

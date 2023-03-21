@@ -9,6 +9,7 @@ import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.ProjectId
 import com.mango.domain.task.TaskRepository
 import com.mango.domain.task.usecase.DuplicateTaskUseCase
+import com.mango.domain.user.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
@@ -20,13 +21,18 @@ class DuplicateProjectUseCase(
     private val addProjectActivityUseCase: AddProjectActivityUseCase,
     private val taskRepository: TaskRepository,
     private val duplicateTaskUseCase: DuplicateTaskUseCase,
+    private val userRepository: UserRepository,
 ) {
     operator fun invoke(projectId: ProjectId): Project {
         val oldProject = getProjectOrThrowUseCase(projectId)
 
         val newProjectId = uuidFactory.createProjectId()
         val creationDate = localDateTimeFactory()
-        val newProject = oldProject.copy(id = newProjectId, creationDate = creationDate)
+        val newProject = oldProject.copy(
+            id = newProjectId,
+            creationDate = creationDate,
+            owner = userRepository.getCurrentUser().id,
+        )
 
         return projectRepository.saveProject(newProject).also {
             addProjectActivityUseCase(newProjectId, ProjectActivityType.CREATE, creationDate)

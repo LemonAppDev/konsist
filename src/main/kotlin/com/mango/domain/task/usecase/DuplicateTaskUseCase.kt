@@ -6,6 +6,7 @@ import com.mango.domain.project.model.ProjectId
 import com.mango.domain.task.TaskRepository
 import com.mango.domain.task.model.Task
 import com.mango.domain.task.model.TaskId
+import com.mango.domain.user.UserRepository
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -16,6 +17,7 @@ class DuplicateTaskUseCase(
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val saveTaskUseCase: SaveTaskUseCase,
+    private val userRepository: UserRepository,
 ) {
     operator fun invoke(taskId: TaskId, projectId: ProjectId? = null, date: LocalDateTime? = null): Task {
         val oldTask = getTaskOrThrowUseCase(taskId)
@@ -26,7 +28,13 @@ class DuplicateTaskUseCase(
     private fun duplicate(oldTask: Task, parentTaskId: TaskId?, projectId: ProjectId?, date: LocalDateTime? = null): Task {
         val newTaskId = uuidFactory.createTaskId()
         val creationDate = date ?: localDateTimeFactory()
-        val newTask = oldTask.copy(id = newTaskId, creationDate = creationDate, parentTaskId = parentTaskId, projectId = projectId)
+        val newTask = oldTask.copy(
+            id = newTaskId,
+            creationDate = creationDate,
+            parentTaskId = parentTaskId,
+            projectId = projectId,
+            ownerId = userRepository.getCurrentUser().id,
+        )
 
         return saveTaskUseCase(newTask, creationDate).also {
             taskRepository.tasks
