@@ -6,7 +6,6 @@ import com.konsistcore.ext.getKoFunctions
 import com.konsistcore.ext.getKoInterfaces
 import com.konsistcore.ext.getKoObjects
 import com.konsistcore.ext.getKoProperties
-import com.mango.MangoApplication
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import kotlin.reflect.KClass
 
@@ -95,5 +94,5 @@ open class KoComplexDeclaration(private val ktClassOrObject: KtClassOrObject) : 
         return false
     }
 
-    fun representsType(kClass: KClass<MangoApplication>) = kClass.qualifiedName == fullyQualifiedName
+    fun representsType(kClass: KClass<*>) = kClass.qualifiedName == fullyQualifiedName
 }

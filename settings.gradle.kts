@@ -1,11 +1,5 @@
 rootProject.name = "mango"
 
-include(
-    ":app",
-    ":konsist-core",
-    ":konsist-core",
-)
-
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
