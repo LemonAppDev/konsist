@@ -24,7 +24,7 @@ class GeneralCodingKonsistTest {
         mangoScope
             .classes()
             .flatMap { it.properties() }
-            .check { !it.hasAnnotation(Inject::class) }
+            .checkNot { it.hasAnnotation(Inject::class) }
     }
 
     @Test

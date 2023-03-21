@@ -32,8 +32,6 @@ dependencyResolutionManagement {
             library("junitJupiterEngine", "org.junit.jupiter", "junit-jupiter-engine").version("5.9.2")
             library("kluent", "org.amshove.kluent", "kluent").version("1.72")
             library("mockk", "io.mockk", "mockk").version("1.13.4")
-
-            // konsist
             library("kotlin-compiler", "org.jetbrains.kotlin", "kotlin-compiler").withoutVersion()
         }
     }
