@@ -23,18 +23,20 @@ class DuplicateProjectUseCase(
     private val duplicateTaskUseCase: DuplicateTaskUseCase,
     private val userRepository: UserRepository,
     private val getNewProjectNameUseCase: GetNewProjectNameUseCase,
+    private val checkNewProjectNameUseCase: CheckNewProjectNameUseCase,
 ) {
     operator fun invoke(projectId: ProjectId, duplicatedProjectName: String? = null): Project {
         val oldProject = getProjectOrThrowUseCase(projectId)
 
         val newProjectId = uuidFactory.createProjectId()
         val creationDate = localDateTimeFactory()
-        val newName =
-            if (duplicatedProjectName?.isNotBlank() == true) {
-                duplicatedProjectName
-            } else {
-                getNewProjectNameUseCase(oldProject.name)
-            }
+
+        val newName = if (duplicatedProjectName != null) {
+            checkNewProjectNameUseCase(duplicatedProjectName)
+            duplicatedProjectName
+        } else {
+            getNewProjectNameUseCase(oldProject.name)
+        }
 
         val newProject = oldProject.copy(
             id = newProjectId,

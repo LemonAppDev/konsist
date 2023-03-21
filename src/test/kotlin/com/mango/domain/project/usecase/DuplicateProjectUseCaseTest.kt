@@ -15,6 +15,7 @@ import com.mango.domain.task.model.Task
 import com.mango.domain.task.usecase.DuplicateTaskUseCase
 import com.mango.domain.user.UserRepository
 import io.mockk.every
+import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
@@ -31,6 +32,7 @@ class DuplicateProjectUseCaseTest {
     private val duplicateTaskUseCase: DuplicateTaskUseCase = mockk()
     private val userRepository: UserRepository = mockk()
     private val getNewProjectNameUseCase: GetNewProjectNameUseCase = mockk()
+    private val checkNewProjectNameUseCase: CheckNewProjectNameUseCase = mockk()
 
     private val sut = DuplicateProjectUseCase(
         getProjectOrThrowUseCase,
@@ -42,10 +44,11 @@ class DuplicateProjectUseCaseTest {
         duplicateTaskUseCase,
         userRepository,
         getNewProjectNameUseCase,
+        checkNewProjectNameUseCase,
     )
 
     @Test
-    fun `saves duplicated project when name is null`() {
+    fun `saves duplicated project with default name because name is null`() {
         // given
         val oldProjectId = getProjectId1()
         val newProjectId = getProjectId2()
@@ -74,7 +77,7 @@ class DuplicateProjectUseCaseTest {
     }
 
     @Test
-    fun `saves duplicated project when name is not null`() {
+    fun `saves duplicated project with given name which is not null`() {
         // given
         val oldProjectId = getProjectId1()
         val newProjectId = getProjectId2()
@@ -85,6 +88,7 @@ class DuplicateProjectUseCaseTest {
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
         val name = "name"
+        justRun { checkNewProjectNameUseCase(name) }
         val userId = getUserId1()
         every { userRepository.getCurrentUser().id } returns userId
         every { oldProject.copy(id = newProjectId, name = name, creationDate = date, owner = userId) } returns newProject
@@ -129,7 +133,7 @@ class DuplicateProjectUseCaseTest {
     }
 
     @Test
-    fun `adds 'project create activity' when name is not null`() {
+    fun `adds 'project create activity' when given name is not null`() {
         // given
         val oldProjectId = getProjectId1()
         val newProjectId = getProjectId2()
@@ -140,6 +144,7 @@ class DuplicateProjectUseCaseTest {
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
         val name = "name"
+        justRun { checkNewProjectNameUseCase(name) }
         val userId = getUserId1()
         every { userRepository.getCurrentUser().id } returns userId
         every { oldProject.copy(id = newProjectId, name = name, creationDate = date, owner = userId) } returns newProject
@@ -166,6 +171,7 @@ class DuplicateProjectUseCaseTest {
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
         val name = "name"
+        justRun { checkNewProjectNameUseCase(name) }
         every { oldProject.name } returns name
         val newName = "name copy"
         every { getNewProjectNameUseCase(name) } returns newName
@@ -195,6 +201,7 @@ class DuplicateProjectUseCaseTest {
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
         val name = "name"
+        justRun { checkNewProjectNameUseCase(name) }
         val userId = getUserId1()
         every { userRepository.getCurrentUser().id } returns userId
         every { oldProject.copy(id = newProjectId, name = name, creationDate = date, owner = userId) } returns newProject
@@ -255,6 +262,7 @@ class DuplicateProjectUseCaseTest {
         val date: LocalDateTime = mockk()
         every { localDateTimeFactory() } returns date
         val name = "name"
+        justRun { checkNewProjectNameUseCase(name) }
         val userId = getUserId1()
         every { userRepository.getCurrentUser().id } returns userId
         every { oldProject.copy(id = newProjectId, name = name, creationDate = date, owner = userId) } returns newProject

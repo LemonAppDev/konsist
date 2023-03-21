@@ -1,6 +1,5 @@
 package com.mango.domain.project.usecase
 
-import com.mango.application.model.project.CreateProjectRequestModel
 import com.mango.data.project.ProjectRepositoryImpl
 import com.mango.domain.activity.model.ProjectActivityType.CREATE
 import com.mango.domain.activity.usecase.AddProjectActivityUseCase
@@ -20,30 +19,25 @@ class CreateProjectUseCaseTest {
     private val projectFactory: ProjectFactory = mockk()
     private val projectRepository: ProjectRepositoryImpl = mockk()
     private val addProjectActivityUseCase: AddProjectActivityUseCase = mockk()
+    private val checkNewProjectNameUseCase: CheckNewProjectNameUseCase = mockk()
 
     private val sut = CreateProjectUseCase(
         projectFactory,
         projectRepository,
         addProjectActivityUseCase,
+        checkNewProjectNameUseCase,
     )
 
     @Test
     fun `creates and adds new project to projects list`() {
         // given
-        val createProjectRequestModel = CreateProjectRequestModel(
-            "name",
-            Color("0xFF0000"),
-            false,
-        )
+        val name = "name"
+        val color = Color("0xFF0000")
+        val isFavourite = false
         val projectId = getProjectId1()
         val project: Project = mockk()
-        every {
-            projectFactory(
-                createProjectRequestModel.name,
-                createProjectRequestModel.color,
-                createProjectRequestModel.isFavourite,
-            )
-        } returns project
+        justRun { checkNewProjectNameUseCase(name) }
+        every { projectFactory(name, color, isFavourite) } returns project
         every { projectRepository.saveProject(project) } returns mockk()
         val date: LocalDateTime = mockk()
         every { project.id } returns projectId
@@ -51,11 +45,7 @@ class CreateProjectUseCaseTest {
         justRun { addProjectActivityUseCase(projectId, CREATE, date) }
 
         // when
-        sut(
-            createProjectRequestModel.name,
-            createProjectRequestModel.color,
-            createProjectRequestModel.isFavourite,
-        )
+        sut(name, color, isFavourite)
 
         // then
         verify { projectRepository.saveProject(project) }
@@ -64,20 +54,13 @@ class CreateProjectUseCaseTest {
     @Test
     fun `calls addProjectActivityUseCase()`() {
         // given
-        val createProjectRequestModel = CreateProjectRequestModel(
-            "name",
-            Color("0xFF0000"),
-            false,
-        )
+        val name = "name"
+        val color = Color("0xFF0000")
+        val isFavourite = false
         val projectId = getProjectId1()
         val project: Project = mockk()
-        every {
-            projectFactory(
-                createProjectRequestModel.name,
-                createProjectRequestModel.color,
-                createProjectRequestModel.isFavourite,
-            )
-        } returns project
+        justRun { checkNewProjectNameUseCase(name) }
+        every { projectFactory(name, color, isFavourite) } returns project
         every { projectRepository.saveProject(project) } returns mockk()
         val date: LocalDateTime = mockk()
         every { project.id } returns projectId
@@ -85,11 +68,7 @@ class CreateProjectUseCaseTest {
         justRun { addProjectActivityUseCase(projectId, CREATE, date) }
 
         // when
-        sut(
-            createProjectRequestModel.name,
-            createProjectRequestModel.color,
-            createProjectRequestModel.isFavourite,
-        )
+        sut(name, color, isFavourite)
 
         // then
         verify { addProjectActivityUseCase(projectId, CREATE, date) }
@@ -98,20 +77,13 @@ class CreateProjectUseCaseTest {
     @Test
     fun `returns project`() {
         // given
-        val createProjectRequestModel = CreateProjectRequestModel(
-            "name",
-            Color("0xFF0000"),
-            false,
-        )
+        val name = "name"
+        val color = Color("0xFF0000")
+        val isFavourite = false
         val projectId = getProjectId1()
         val project: Project = mockk()
-        every {
-            projectFactory(
-                createProjectRequestModel.name,
-                createProjectRequestModel.color,
-                createProjectRequestModel.isFavourite,
-            )
-        } returns project
+        justRun { checkNewProjectNameUseCase(name) }
+        every { projectFactory(name, color, isFavourite) } returns project
         val repositoryProject: Project = mockk()
         every { projectRepository.saveProject(project) } returns repositoryProject
         val date: LocalDateTime = mockk()
@@ -122,11 +94,7 @@ class CreateProjectUseCaseTest {
         justRun { addProjectActivityUseCase(projectId, CREATE, date) }
 
         // when
-        val actual = sut(
-            createProjectRequestModel.name,
-            createProjectRequestModel.color,
-            createProjectRequestModel.isFavourite,
-        )
+        val actual = sut(name, color, isFavourite)
 
         // then
         actual shouldBe repositoryProject

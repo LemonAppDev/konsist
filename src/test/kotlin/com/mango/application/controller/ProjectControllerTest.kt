@@ -1,6 +1,7 @@
 package com.mango.application.controller
 
 import com.mango.application.model.project.CreateProjectRequestModel
+import com.mango.application.model.project.DuplicateProjectRequestModel
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.mango.domain.common.model.Color
 import com.mango.domain.project.usecase.CreateProjectUseCase
@@ -116,10 +117,11 @@ class ProjectControllerTest {
     fun `duplicateProject() calls duplicateProjectUseCase()`() {
         // given
         val projectId = getProjectId1()
+        val requestModel = DuplicateProjectRequestModel(projectId)
         every { duplicateProjectUseCase(projectId) } returns mockk()
 
         // when
-        sut.duplicateProject(projectId)
+        sut.duplicateProject(requestModel)
 
         // then
         verify { duplicateProjectUseCase(projectId) }

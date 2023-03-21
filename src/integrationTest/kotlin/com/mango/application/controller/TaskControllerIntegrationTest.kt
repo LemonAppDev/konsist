@@ -74,8 +74,8 @@ class TaskControllerTest {
     @Test
     fun `create endpoint returns error when parent task and task is not in the same project`() {
         // given
-        val project1 = projectEndpointHelper.callCreateEndpoint()
-        val project2 = projectEndpointHelper.callCreateEndpoint()
+        val project1 = projectEndpointHelper.callCreateEndpoint(name = "name1")
+        val project2 = projectEndpointHelper.callCreateEndpoint(name = "name2")
         val parentTaskInProject1 = taskEndpointHelper.callCreateEndpoint(name = "parent task", projectId = project1.id)
 
         // when
@@ -209,8 +209,8 @@ class TaskControllerTest {
     @Test
     fun `update endpoint updates project in all subtasks`() {
         // given
-        val oldProject = projectEndpointHelper.callCreateEndpoint()
-        val newProject = projectEndpointHelper.callCreateEndpoint()
+        val oldProject = projectEndpointHelper.callCreateEndpoint(name = "old project")
+        val newProject = projectEndpointHelper.callCreateEndpoint(name = "new project")
         val parentTask = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id)
         val childTask1 = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id, parentTaskId = parentTask.id)
         val childTask2 = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id, parentTaskId = parentTask.id)
@@ -243,8 +243,8 @@ class TaskControllerTest {
     @Test
     fun `update endpoint updates project in all subtasks recursively`() {
         // given
-        val oldProject = projectEndpointHelper.callCreateEndpoint()
-        val newProject = projectEndpointHelper.callCreateEndpoint()
+        val oldProject = projectEndpointHelper.callCreateEndpoint(name = "old project")
+        val newProject = projectEndpointHelper.callCreateEndpoint(name = "new project")
         val parentTask = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id)
         val childTask = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id, parentTaskId = parentTask.id)
         val childChildTask = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id, parentTaskId = childTask.id)
@@ -392,8 +392,8 @@ class TaskControllerTest {
     @Test
     fun `update endpoint adds task_added project activity when project is changed`() {
         // given
-        val oldProject = projectEndpointHelper.callCreateEndpoint()
-        val newProject = projectEndpointHelper.callCreateEndpoint()
+        val oldProject = projectEndpointHelper.callCreateEndpoint(name = "old project")
+        val newProject = projectEndpointHelper.callCreateEndpoint(name = "new project")
         val task = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id)
 
         // when
@@ -420,8 +420,8 @@ class TaskControllerTest {
     @Test
     fun `update endpoint adds task_moved project activity to old project after project update`() {
         // given
-        val oldProject = projectEndpointHelper.callCreateEndpoint()
-        val newProject = projectEndpointHelper.callCreateEndpoint()
+        val oldProject = projectEndpointHelper.callCreateEndpoint(name = "old project")
+        val newProject = projectEndpointHelper.callCreateEndpoint(name = "new project")
         val task = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id)
 
         // when
@@ -448,8 +448,8 @@ class TaskControllerTest {
     @Test
     fun `update endpoint returns error when parent task and task is not in the same project`() {
         // given
-        val project1 = projectEndpointHelper.callCreateEndpoint()
-        val project2 = projectEndpointHelper.callCreateEndpoint()
+        val project1 = projectEndpointHelper.callCreateEndpoint(name = "project1")
+        val project2 = projectEndpointHelper.callCreateEndpoint(name = "project2")
         val parentTaskInProject1 = taskEndpointHelper.callCreateEndpoint(projectId = project1.id)
         val assignee = userEndpointHelper.callCurrentEndpoint()
         val task = taskEndpointHelper.callCreateEndpoint()
@@ -753,8 +753,8 @@ class TaskControllerTest {
     @Test
     fun `task activities endpoint contains update project activity after project updating by its parent task`() {
         // given
-        val oldProject = projectEndpointHelper.callCreateEndpoint()
-        val newProject = projectEndpointHelper.callCreateEndpoint()
+        val oldProject = projectEndpointHelper.callCreateEndpoint(name = "oldProject")
+        val newProject = projectEndpointHelper.callCreateEndpoint(name = "newProject")
         val parentTask = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id)
         val task = taskEndpointHelper.callCreateEndpoint(projectId = oldProject.id, parentTaskId = parentTask.id)
         taskEndpointHelper.callUpdateEndpoint(

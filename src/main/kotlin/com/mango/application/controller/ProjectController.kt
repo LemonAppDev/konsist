@@ -2,6 +2,7 @@ package com.mango.application.controller
 
 import com.mango.application.config.ApiConfig
 import com.mango.application.model.project.CreateProjectRequestModel
+import com.mango.application.model.project.DuplicateProjectRequestModel
 import com.mango.domain.activity.model.ProjectActivity
 import com.mango.domain.project.model.Project
 import com.mango.domain.project.model.ProjectId
@@ -51,5 +52,6 @@ class ProjectController(
         getProjectActivitiesUseCase(projectId)
 
     @PostMapping("/duplicate")
-    fun duplicateProject(@RequestParam(name = "projectId") projectId: ProjectId): Project = duplicateProjectUseCase(projectId)
+    fun duplicateProject(@RequestBody requestModel: DuplicateProjectRequestModel): Project =
+        duplicateProjectUseCase(requestModel.projectId, requestModel.name)
 }

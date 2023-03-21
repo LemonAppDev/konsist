@@ -13,8 +13,10 @@ class CreateProjectUseCase(
     private val projectFactory: ProjectFactory,
     private val projectRepository: ProjectRepository,
     private val addProjectActivityUseCase: AddProjectActivityUseCase,
+    private val checkNewProjectNameUseCase: CheckNewProjectNameUseCase,
 ) {
     operator fun invoke(name: String, color: Color?, isFavourite: Boolean?): Project {
+        checkNewProjectNameUseCase(name)
         val project = projectFactory(name, color, isFavourite)
 
         return projectRepository.saveProject(project).also {

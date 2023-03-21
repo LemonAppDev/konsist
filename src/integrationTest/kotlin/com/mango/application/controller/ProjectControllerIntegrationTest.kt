@@ -1,6 +1,7 @@
 package com.mango.application.controller
 
 import com.mango.application.model.project.CreateProjectRequestModel
+import com.mango.application.model.project.DuplicateProjectRequestModel
 import com.mango.domain.activity.model.ProjectActivity
 import com.mango.domain.activity.model.ProjectActivityType.CREATE
 import com.mango.domain.common.model.Color
@@ -41,8 +42,8 @@ class ProjectControllerTest {
     @Test
     fun `delete endpoint deletes project`() {
         // given
-        val project1 = projectEndpointHelper.callCreateEndpoint()
-        val project2 = projectEndpointHelper.callCreateEndpoint()
+        val project1 = projectEndpointHelper.callCreateEndpoint(name = "name1")
+        val project2 = projectEndpointHelper.callCreateEndpoint(name = "name2")
         projectEndpointHelper.callDeleteEndpoint(project1.id)
 
         // when
@@ -79,8 +80,8 @@ class ProjectControllerTest {
     @Test
     fun `all endpoint returns 2 projects`() {
         // given
-        val project1 = projectEndpointHelper.callCreateEndpoint()
-        val project2 = projectEndpointHelper.callCreateEndpoint()
+        val project1 = projectEndpointHelper.callCreateEndpoint(name = "name1")
+        val project2 = projectEndpointHelper.callCreateEndpoint(name = "name2")
 
         // when
         val actual = projectEndpointHelper.calAllEndpoint()
@@ -103,6 +104,31 @@ class ProjectControllerTest {
     }
 
     @Test
+    fun `duplicate endpoint duplicates project with default name`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint(name = "name copy 1")
+
+        // when
+        val actual = projectEndpointHelper.callDuplicateProjectEndPoint(project.id)
+
+        // then
+        actual.name shouldBeEqualTo "name copy 2"
+    }
+
+    @Test
+    fun `duplicate endpoint duplicates project with provided name`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint()
+        val name = "new name"
+
+        // when
+        val actual = projectEndpointHelper.callDuplicateProjectEndPoint(project.id, name)
+
+        // then
+        actual.name shouldBeEqualTo name
+    }
+
+    @Test
     fun `duplicate endpoint duplicates all tasks from old project`() {
         // given
         val project = projectEndpointHelper.callCreateEndpoint()
@@ -113,10 +139,7 @@ class ProjectControllerTest {
         val duplicatedProject = projectEndpointHelper.callDuplicateProjectEndPoint(project.id)
 
         // then
-        val actual = taskEndpointHelper
-            .callAllEndpoint()
-            .filter { it.projectId == duplicatedProject.id }
-            .map { it.name }
+        val actual = taskEndpointHelper.callAllEndpoint().filter { it.projectId == duplicatedProject.id }.map { it.name }
 
         actual shouldBeEqualTo listOf(task1.name, task2.name)
     }
@@ -130,9 +153,7 @@ class ProjectControllerTest {
         val duplicatedProject = projectEndpointHelper.callDuplicateProjectEndPoint(project.id)
 
         // then
-        val actual = projectEndpointHelper
-            .callGetProjectActivitiesEndPoint(duplicatedProject.id)
-            .map { it.type }
+        val actual = projectEndpointHelper.callGetProjectActivitiesEndPoint(duplicatedProject.id).map { it.type }
 
         actual shouldBeEqualTo listOf(CREATE)
     }
@@ -143,9 +164,7 @@ class ProjectControllerTest {
         val project = projectEndpointHelper.callCreateEndpoint()
 
         // when
-        val actual = projectEndpointHelper
-            .callGetProjectActivitiesEndPoint(project.id)
-            .map { it.type }
+        val actual = projectEndpointHelper.callGetProjectActivitiesEndPoint(project.id).map { it.type }
 
         // then
         actual shouldBeEqualTo listOf(CREATE)
@@ -200,10 +219,18 @@ class ProjectEndpointHelper(
         queryParams = mapOf("projectId" to projectId.value.toString()),
     )
 
-    fun callDuplicateProjectEndPoint(projectId: ProjectId) = controllerEndpointCaller.call<Project>(
-        this,
-        endpointName = "duplicate",
-        method = HttpMethod.POST,
-        queryParams = mapOf("projectId" to projectId.value.toString()),
-    )
+    fun callDuplicateProjectEndPoint(projectId: ProjectId, name: String? = null): Project {
+        val requestModel = DuplicateProjectRequestModel(
+            projectId = projectId,
+            name = name,
+        )
+
+        val jsonBody = serialize(requestModel)
+        return controllerEndpointCaller.call(
+            this,
+            endpointName = "duplicate",
+            method = HttpMethod.POST,
+            body = jsonBody,
+        )
+    }
 }
