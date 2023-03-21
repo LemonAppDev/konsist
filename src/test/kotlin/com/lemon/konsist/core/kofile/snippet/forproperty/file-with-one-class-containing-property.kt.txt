@@ -1,0 +1,3 @@
+class SampleClass {
+    val sampleProperty: Boolean = true
+}

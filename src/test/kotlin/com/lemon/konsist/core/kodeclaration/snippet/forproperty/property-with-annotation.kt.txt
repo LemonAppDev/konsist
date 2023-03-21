@@ -1,0 +1,2 @@
+@SampleAnnotation
+val sampleProperty: Boolean = true
