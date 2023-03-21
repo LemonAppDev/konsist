@@ -1,0 +1,7 @@
+class SampleClass {
+    constructor() {
+    }
+
+    constructor(name: String) {
+    }
+}

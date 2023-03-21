@@ -1,0 +1,3 @@
+@SampleAnnotation
+interface SampleClass {
+}

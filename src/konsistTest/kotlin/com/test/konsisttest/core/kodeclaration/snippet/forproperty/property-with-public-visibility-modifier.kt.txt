@@ -1,0 +1,1 @@
+public val sampleProperty: Boolean = true

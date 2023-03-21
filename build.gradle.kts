@@ -70,6 +70,25 @@ testing {
                 }
             }
         }
+
+        register("konsistTest", JvmTestSuite::class) {
+            dependencies {
+                implementation(project())
+                implementation(libs.kotlin.compiler)
+                implementation(libs.spring.boot.starter.jpa)
+                implementation(libs.spring.boot.starter.web)
+
+                implementation(libs.kluent)
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
     }
 }
 
