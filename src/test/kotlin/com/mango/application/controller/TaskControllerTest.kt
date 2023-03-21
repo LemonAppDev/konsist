@@ -35,34 +35,34 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class TaskControllerTest {
-    private val createTaskUseCase: CreateTaskUseCase = mockk()
-    private val deleteTaskUseCase: DeleteTaskUseCase = mockk()
-    private val getAllTasksUseCase: GetAllTasksUseCase = mockk()
-    private val updateTaskUseCase: UpdateTaskUseCase = mockk()
-    private val duplicateTaskUseCase: DuplicateTaskUseCase = mockk()
-    private val getTaskActivitiesUseCase: GetTaskActivitiesUseCase = mockk()
     private val addCommentUseCase: AddCommentUseCase = mockk()
+    private val createTaskUseCase: CreateTaskUseCase = mockk()
     private val deleteCommentUseCase: DeleteCommentUseCase = mockk()
-    private val updateCommentUseCase: UpdateCommentUseCase = mockk()
+    private val deleteTaskUseCase: DeleteTaskUseCase = mockk()
+    private val duplicateTaskUseCase: DuplicateTaskUseCase = mockk()
+    private val getAllTasksUseCase: GetAllTasksUseCase = mockk()
+    private val getChildTasksUseCase: GetChildTasksUseCase = mockk()
     private val getCommentOrThrowUseCase: GetCommentOrThrowUseCase = mockk()
     private val getCommentsUseCase: GetCommentsUseCase = mockk()
+    private val getTaskActivitiesUseCase: GetTaskActivitiesUseCase = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
-    private val getChildTasksUseCase: GetChildTasksUseCase = mockk()
+    private val updateCommentUseCase: UpdateCommentUseCase = mockk()
+    private val updateTaskUseCase: UpdateTaskUseCase = mockk()
 
     private val sut = TaskController(
-        createTaskUseCase,
-        getTaskOrThrowUseCase,
-        deleteTaskUseCase,
-        getAllTasksUseCase,
-        updateTaskUseCase,
-        duplicateTaskUseCase,
-        getTaskActivitiesUseCase,
         addCommentUseCase,
+        createTaskUseCase,
         deleteCommentUseCase,
-        updateCommentUseCase,
+        deleteTaskUseCase,
+        duplicateTaskUseCase,
+        getAllTasksUseCase,
+        getChildTasksUseCase,
         getCommentOrThrowUseCase,
         getCommentsUseCase,
-        getChildTasksUseCase,
+        getTaskActivitiesUseCase,
+        getTaskOrThrowUseCase,
+        updateCommentUseCase,
+        updateTaskUseCase,
     )
 
     @Test

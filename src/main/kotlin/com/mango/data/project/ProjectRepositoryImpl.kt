@@ -8,9 +8,9 @@ import kotlin.jvm.optionals.getOrNull
 
 @Service
 class ProjectRepositoryImpl(
+    private val projectJpaEntityToProjectMapper: ProjectJpaEntityToProjectMapper,
     private val projectJpaRepository: ProjectJpaRepository,
     private val projectToProjectJpaEntityMapper: ProjectToProjectJpaEntityMapper,
-    private val projectJpaEntityToProjectMapper: ProjectJpaEntityToProjectMapper,
 ) : ProjectRepository {
     override val projects
         get() = projectJpaRepository

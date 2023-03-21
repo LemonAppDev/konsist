@@ -10,14 +10,14 @@ import org.junit.jupiter.api.Test
 import kotlin.jvm.optionals.getOrNull
 
 class UserRepositoryImplTest {
+    private val userJpaEntityToUserMapper: UserJpaEntityToUserMapper = mockk()
     private val userJpaRepository: UserJpaRepository = mockk()
     private val userToUserJpaEntityMapper: UserToUserJpaEntityMapper = mockk()
-    private val userJpaEntityToUserMapper: UserJpaEntityToUserMapper = mockk()
 
     private val sut = UserRepositoryImpl(
+        userJpaEntityToUserMapper,
         userJpaRepository,
         userToUserJpaEntityMapper,
-        userJpaEntityToUserMapper,
     )
 
     @Test

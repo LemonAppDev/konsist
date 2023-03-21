@@ -11,14 +11,14 @@ import org.junit.jupiter.api.Test
 import kotlin.jvm.optionals.getOrNull
 
 class CommentRepositoryImplTest {
+    private val commentJpaEntityToCommentMapper: CommentJpaEntityToCommentMapper = mockk()
     private val commentJpaRepository: CommentJpaRepository = mockk()
     private val commentToCommentJpaEntityMapper: CommentToCommentJpaEntityMapper = mockk()
-    private val commentJpaEntityToCommentMapper: CommentJpaEntityToCommentMapper = mockk()
 
     private val sut = CommentRepositoryImpl(
+        commentJpaEntityToCommentMapper,
         commentJpaRepository,
         commentToCommentJpaEntityMapper,
-        commentJpaEntityToCommentMapper,
     )
 
     @Test

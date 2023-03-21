@@ -12,12 +12,12 @@ import io.mockk.verify
 import org.junit.jupiter.api.Test
 
 class DeleteCommentUseCaseTest {
-    private val commentRepository: CommentRepositoryImpl = mockk()
     private val addCommentActivityUseCase: AddCommentActivityUseCase = mockk()
+    private val commentRepository: CommentRepositoryImpl = mockk()
 
     private val sut = DeleteCommentUseCase(
-        commentRepository,
         addCommentActivityUseCase,
+        commentRepository,
     )
 
     @Test

@@ -8,9 +8,9 @@ import kotlin.jvm.optionals.getOrNull
 
 @Service
 class TaskRepositoryImpl(
+    private val taskJpaEntityToTaskMapper: TaskJpaEntityToTaskMapper,
     private val taskJpaRepository: TaskJpaRepository,
     private val taskToTaskJpaEntityMapper: TaskToTaskJpaEntityMapper,
-    private val taskJpaEntityToTaskMapper: TaskJpaEntityToTaskMapper,
 ) : TaskRepository {
     override val tasks
         get() = taskJpaRepository

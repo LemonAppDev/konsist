@@ -14,14 +14,14 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class CommentFactoryTest {
-    private val uuidFactory: UUIDFactory = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val userRepository: UserRepository = mockk()
+    private val uuidFactory: UUIDFactory = mockk()
 
     private val sut = CommentFactory(
-        uuidFactory,
         localDateTimeFactory,
         userRepository,
+        uuidFactory,
     )
 
     @Test

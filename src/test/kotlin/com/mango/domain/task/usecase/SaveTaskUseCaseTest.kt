@@ -16,16 +16,16 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class SaveTaskUseCaseTest {
-    private val taskRepository: TaskRepository = mockk()
-    private val addTaskActivityUseCase: AddTaskActivityUseCase = mockk()
     private val addProjectActivityUseCase: AddProjectActivityUseCase = mockk()
+    private val addTaskActivityUseCase: AddTaskActivityUseCase = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
+    private val taskRepository: TaskRepository = mockk()
 
     private val sut = SaveTaskUseCase(
-        taskRepository,
-        addTaskActivityUseCase,
         addProjectActivityUseCase,
+        addTaskActivityUseCase,
         localDateTimeFactory,
+        taskRepository,
     )
 
     @Test

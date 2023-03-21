@@ -11,12 +11,12 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class CreateUserUseCaseTest {
-    private val userRepository: UserRepositoryImpl = mockk()
     private val userFactory: UserFactory = mockk()
+    private val userRepository: UserRepositoryImpl = mockk()
 
     private val sut = CreateUserUseCase(
-        userRepository,
         userFactory,
+        userRepository,
     )
 
     @Test

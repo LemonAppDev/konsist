@@ -15,11 +15,11 @@ import java.time.LocalDateTime
 
 @Service
 class UpdateTaskProjectUseCase(
-    private val taskRepository: TaskRepository,
-    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
-    private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase,
-    private val addTaskActivityUseCase: AddTaskActivityUseCase,
     private val addProjectActivityUseCase: AddProjectActivityUseCase,
+    private val addTaskActivityUseCase: AddTaskActivityUseCase,
+    private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase,
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
+    private val taskRepository: TaskRepository,
 ) {
     operator fun invoke(taskId: TaskId, newProjectId: ProjectId?, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)

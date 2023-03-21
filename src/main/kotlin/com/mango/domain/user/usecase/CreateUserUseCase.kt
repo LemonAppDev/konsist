@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class CreateUserUseCase(
-    private val userRepository: UserRepository,
     private val userFactory: UserFactory,
+    private val userRepository: UserRepository,
 ) {
     operator fun invoke(userName: String): User {
         require(userName.isNotBlank()) { "userName is blank" }

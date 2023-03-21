@@ -11,14 +11,14 @@ import org.junit.jupiter.api.Test
 import kotlin.jvm.optionals.getOrNull
 
 class ProjectRepositoryImplTest {
+    private val projectJpaEntityToProjectMapper: ProjectJpaEntityToProjectMapper = mockk()
     private val projectJpaRepository: ProjectJpaRepository = mockk()
     private val projectToProjectJpaEntityMapper: ProjectToProjectJpaEntityMapper = mockk()
-    private val projectJpaEntityToProjectMapper: ProjectJpaEntityToProjectMapper = mockk()
 
     private val sut = ProjectRepositoryImpl(
+        projectJpaEntityToProjectMapper,
         projectJpaRepository,
         projectToProjectJpaEntityMapper,
-        projectJpaEntityToProjectMapper,
     )
 
     @Test

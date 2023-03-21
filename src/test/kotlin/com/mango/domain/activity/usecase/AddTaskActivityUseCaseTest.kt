@@ -16,14 +16,14 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class AddTaskActivityUseCaseTest {
-    private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val activityRepository: ActivityRepository = mockk()
+    private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val userRepository: UserRepository = mockk()
     private val uuidFactory: UUIDFactory = mockk()
 
     private val sut = AddTaskActivityUseCase(
-        localDateTimeFactory,
         activityRepository,
+        localDateTimeFactory,
         userRepository,
         uuidFactory,
     )

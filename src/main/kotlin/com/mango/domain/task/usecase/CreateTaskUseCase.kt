@@ -14,13 +14,13 @@ import java.time.LocalDateTime
 
 @Service
 class CreateTaskUseCase(
-    private val taskFactory: TaskFactory,
-    private val checkUserIdUseCase: CheckUserIdUseCase,
     private val checkProjectIdUseCase: CheckProjectIdUseCase,
-    private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase,
-    private val localDateTimeFactory: LocalDateTimeFactory,
+    private val checkUserIdUseCase: CheckUserIdUseCase,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
+    private val localDateTimeFactory: LocalDateTimeFactory,
+    private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase,
     private val saveTaskUseCase: SaveTaskUseCase,
+    private val taskFactory: TaskFactory,
 ) {
     @Suppress("detekt.LongParameterList")
     operator fun invoke(

@@ -12,12 +12,12 @@ import java.time.LocalDateTime
 
 @Service
 class DuplicateTaskUseCase(
-    private val taskRepository: TaskRepository,
-    private val uuidFactory: UUIDFactory,
-    private val localDateTimeFactory: LocalDateTimeFactory,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
+    private val localDateTimeFactory: LocalDateTimeFactory,
     private val saveTaskUseCase: SaveTaskUseCase,
+    private val taskRepository: TaskRepository,
     private val userRepository: UserRepository,
+    private val uuidFactory: UUIDFactory,
 ) {
     operator fun invoke(taskId: TaskId, projectId: ProjectId? = null, date: LocalDateTime? = null): Task {
         val oldTask = getTaskOrThrowUseCase(taskId)

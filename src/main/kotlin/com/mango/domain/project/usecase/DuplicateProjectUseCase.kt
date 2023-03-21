@@ -14,16 +14,16 @@ import org.springframework.stereotype.Service
 
 @Service
 class DuplicateProjectUseCase(
+    private val addProjectActivityUseCase: AddProjectActivityUseCase,
+    private val checkNewProjectNameUseCase: CheckNewProjectNameUseCase,
+    private val duplicateTaskUseCase: DuplicateTaskUseCase,
+    private val getNewProjectNameUseCase: GetNewProjectNameUseCase,
     private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase,
-    private val uuidFactory: UUIDFactory,
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val projectRepository: ProjectRepository,
-    private val addProjectActivityUseCase: AddProjectActivityUseCase,
     private val taskRepository: TaskRepository,
-    private val duplicateTaskUseCase: DuplicateTaskUseCase,
     private val userRepository: UserRepository,
-    private val getNewProjectNameUseCase: GetNewProjectNameUseCase,
-    private val checkNewProjectNameUseCase: CheckNewProjectNameUseCase,
+    private val uuidFactory: UUIDFactory,
 ) {
     operator fun invoke(projectId: ProjectId, duplicatedProjectName: String? = null): Project {
         val oldProject = getProjectOrThrowUseCase(projectId)

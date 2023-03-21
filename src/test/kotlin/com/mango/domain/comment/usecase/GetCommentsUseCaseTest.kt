@@ -13,12 +13,12 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class GetCommentsUseCaseTest {
-    private val taskRepository: TaskRepositoryImpl = mockk()
     private val commentRepository: CommentRepositoryImpl = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
 
     private val sut = GetCommentsUseCase(
-        taskRepository,
         commentRepository,
+        taskRepository,
     )
 
     @Test

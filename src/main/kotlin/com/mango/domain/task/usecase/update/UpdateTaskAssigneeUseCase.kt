@@ -12,10 +12,10 @@ import java.time.LocalDateTime
 
 @Service
 class UpdateTaskAssigneeUseCase(
-    private val taskRepository: TaskRepository,
-    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
-    private val checkUserIdUseCase: CheckUserIdUseCase,
     private val addTaskActivityUseCase: AddTaskActivityUseCase,
+    private val checkUserIdUseCase: CheckUserIdUseCase,
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
+    private val taskRepository: TaskRepository,
 ) {
     operator fun invoke(taskId: TaskId, newAssigneeId: UserId?, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)

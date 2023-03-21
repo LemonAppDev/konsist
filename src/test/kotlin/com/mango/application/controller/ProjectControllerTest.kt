@@ -19,18 +19,18 @@ import org.junit.jupiter.api.Test
 class ProjectControllerTest {
     private val createProjectUseCase: CreateProjectUseCase = mockk()
     private val deleteProjectUseCase: DeleteProjectUseCase = mockk()
-    private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase = mockk()
+    private val duplicateProjectUseCase: DuplicateProjectUseCase = mockk()
     private val getAllProjectsUseCase: GetAllProjectsUseCase = mockk()
     private val getProjectActivitiesUseCase: GetProjectActivitiesUseCase = mockk()
-    private val duplicateProjectUseCase: DuplicateProjectUseCase = mockk()
+    private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase = mockk()
 
     private val sut = ProjectController(
         createProjectUseCase,
         deleteProjectUseCase,
-        getProjectOrThrowUseCase,
+        duplicateProjectUseCase,
         getAllProjectsUseCase,
         getProjectActivitiesUseCase,
-        duplicateProjectUseCase,
+        getProjectOrThrowUseCase,
     )
 
     @Test

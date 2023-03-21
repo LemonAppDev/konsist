@@ -10,9 +10,9 @@ import java.time.LocalDateTime
 
 @Service
 class UpdateTaskParentTaskUseCase(
-    private val taskRepository: TaskRepository,
-    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val addTaskActivityUseCase: AddTaskActivityUseCase,
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
+    private val taskRepository: TaskRepository,
 ) {
     operator fun invoke(taskId: TaskId, newParentTaskId: TaskId?, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)

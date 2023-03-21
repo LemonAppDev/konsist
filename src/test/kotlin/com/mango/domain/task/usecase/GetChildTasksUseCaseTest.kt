@@ -10,12 +10,12 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class GetChildTasksUseCaseTest {
-    private val taskRepository: TaskRepositoryImpl = mockk()
     private val checkTaskIdUseCase: CheckTaskIdUseCase = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
 
     private val sut = GetChildTasksUseCase(
-        taskRepository,
         checkTaskIdUseCase,
+        taskRepository,
     )
 
     @Test

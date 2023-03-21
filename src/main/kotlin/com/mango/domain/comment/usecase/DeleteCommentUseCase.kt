@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class DeleteCommentUseCase(
-    private val commentRepository: CommentRepository,
     private val addCommentActivityUseCase: AddCommentActivityUseCase,
+    private val commentRepository: CommentRepository,
 ) {
     operator fun invoke(commentId: CommentId) {
         val comment = commentRepository.getComment(commentId)

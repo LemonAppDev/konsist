@@ -9,9 +9,9 @@ import kotlin.jvm.optionals.getOrNull
 
 @Service
 class UserRepositoryImpl(
+    private val userJpaEntityToUserMapper: UserJpaEntityToUserMapper,
     private val userJpaRepository: UserJpaRepository,
     private val userToUserJpaEntityMapper: UserToUserJpaEntityMapper,
-    private val userJpaEntityToUserMapper: UserJpaEntityToUserMapper,
 ) : UserRepository {
     override fun saveUser(user: User): User = userJpaRepository
         .save(userToUserJpaEntityMapper(user))

@@ -14,9 +14,9 @@ import java.time.LocalDateTime
 @Suppress("detekt.LongParameterList")
 @Service
 class TaskFactory(
-    private val uuidFactory: UUIDFactory,
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val userRepository: UserRepository,
+    private val uuidFactory: UUIDFactory,
 ) {
     operator fun invoke(
         name: String,

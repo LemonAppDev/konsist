@@ -20,18 +20,18 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class DeleteProjectUseCaseTest {
-    private val projectRepository: ProjectRepositoryImpl = mockk()
-    private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val addProjectActivityUseCase: AddProjectActivityUseCase = mockk()
     private val deleteTaskUseCase: DeleteTaskUseCase = mockk()
+    private val localDateTimeFactory: LocalDateTimeFactory = mockk()
+    private val projectRepository: ProjectRepositoryImpl = mockk()
     private val taskRepository: TaskRepository = mockk()
 
     private val sut = DeleteProjectUseCase(
-        projectRepository,
-        localDateTimeFactory,
-        taskRepository,
         addProjectActivityUseCase,
         deleteTaskUseCase,
+        localDateTimeFactory,
+        projectRepository,
+        taskRepository,
     )
 
     @Test

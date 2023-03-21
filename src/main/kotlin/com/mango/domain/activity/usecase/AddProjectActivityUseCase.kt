@@ -12,8 +12,8 @@ import java.time.LocalDateTime
 
 @Service
 class AddProjectActivityUseCase(
-    private val localDateTimeFactory: LocalDateTimeFactory,
     private val activityRepository: ActivityRepository,
+    private val localDateTimeFactory: LocalDateTimeFactory,
     private val userRepository: UserRepository,
     private val uuidFactory: UUIDFactory,
 ) {

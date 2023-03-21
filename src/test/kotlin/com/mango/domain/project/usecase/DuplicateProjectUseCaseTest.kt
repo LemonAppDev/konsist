@@ -23,28 +23,28 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class DuplicateProjectUseCaseTest {
+    private val addProjectActivityUseCase: AddProjectActivityUseCase = mockk()
+    private val checkNewProjectNameUseCase: CheckNewProjectNameUseCase = mockk()
+    private val duplicateTaskUseCase: DuplicateTaskUseCase = mockk()
+    private val getNewProjectNameUseCase: GetNewProjectNameUseCase = mockk()
     private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase = mockk()
-    private val uuidFactory: UUIDFactory = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val projectRepository: ProjectRepository = mockk()
-    private val addProjectActivityUseCase: AddProjectActivityUseCase = mockk()
     private val taskRepository: TaskRepository = mockk()
-    private val duplicateTaskUseCase: DuplicateTaskUseCase = mockk()
     private val userRepository: UserRepository = mockk()
-    private val getNewProjectNameUseCase: GetNewProjectNameUseCase = mockk()
-    private val checkNewProjectNameUseCase: CheckNewProjectNameUseCase = mockk()
+    private val uuidFactory: UUIDFactory = mockk()
 
     private val sut = DuplicateProjectUseCase(
+        addProjectActivityUseCase,
+        checkNewProjectNameUseCase,
+        duplicateTaskUseCase,
+        getNewProjectNameUseCase,
         getProjectOrThrowUseCase,
-        uuidFactory,
         localDateTimeFactory,
         projectRepository,
-        addProjectActivityUseCase,
         taskRepository,
-        duplicateTaskUseCase,
         userRepository,
-        getNewProjectNameUseCase,
-        checkNewProjectNameUseCase,
+        uuidFactory,
     )
 
     @Test

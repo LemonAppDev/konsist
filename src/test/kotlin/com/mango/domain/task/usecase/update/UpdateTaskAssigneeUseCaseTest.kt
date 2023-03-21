@@ -17,16 +17,16 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class UpdateTaskAssigneeUseCaseTest {
-    private val taskRepository: TaskRepositoryImpl = mockk()
-    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
-    private val checkUserIdUseCase: CheckUserIdUseCase = mockk()
     private val addTaskActivityUseCase: AddTaskActivityUseCase = mockk()
+    private val checkUserIdUseCase: CheckUserIdUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
 
     private val sut = UpdateTaskAssigneeUseCase(
-        taskRepository,
-        getTaskOrThrowUseCase,
-        checkUserIdUseCase,
         addTaskActivityUseCase,
+        checkUserIdUseCase,
+        getTaskOrThrowUseCase,
+        taskRepository,
     )
 
     @Test

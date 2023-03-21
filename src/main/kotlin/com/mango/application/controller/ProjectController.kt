@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RestController
 class ProjectController(
     private val createProjectUseCase: CreateProjectUseCase,
     private val deleteProjectUseCase: DeleteProjectUseCase,
-    private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase,
+    private val duplicateProjectUseCase: DuplicateProjectUseCase,
     private val getAllProjectsUseCase: GetAllProjectsUseCase,
     private val getProjectActivitiesUseCase: GetProjectActivitiesUseCase,
-    private val duplicateProjectUseCase: DuplicateProjectUseCase,
+    private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase,
 ) {
     @PostMapping("/create")
     fun createProject(@RequestBody requestModel: CreateProjectRequestModel): Project =

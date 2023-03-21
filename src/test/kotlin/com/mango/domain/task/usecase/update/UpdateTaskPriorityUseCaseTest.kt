@@ -16,14 +16,14 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class UpdateTaskPriorityUseCaseTest {
-    private val taskRepository: TaskRepositoryImpl = mockk()
-    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val addTaskActivityUseCase: AddTaskActivityUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
 
     private val sut = UpdateTaskPriorityUseCase(
-        taskRepository,
-        getTaskOrThrowUseCase,
         addTaskActivityUseCase,
+        getTaskOrThrowUseCase,
+        taskRepository,
     )
 
     @Test

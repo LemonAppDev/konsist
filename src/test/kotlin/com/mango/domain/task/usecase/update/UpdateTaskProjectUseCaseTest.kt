@@ -24,18 +24,18 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class UpdateTaskProjectUseCaseTest {
-    private val taskRepository: TaskRepositoryImpl = mockk()
-    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
-    private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase = mockk()
     private val addProjectActivityUseCase: AddProjectActivityUseCase = mockk()
     private val addTaskActivityUseCase: AddTaskActivityUseCase = mockk()
+    private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
 
     private val sut = UpdateTaskProjectUseCase(
-        taskRepository,
-        getTaskOrThrowUseCase,
-        getProjectOrThrowUseCase,
-        addTaskActivityUseCase,
         addProjectActivityUseCase,
+        addTaskActivityUseCase,
+        getProjectOrThrowUseCase,
+        getTaskOrThrowUseCase,
+        taskRepository,
     )
 
     @Test

@@ -18,14 +18,14 @@ import org.junit.jupiter.params.provider.MethodSource
 import java.time.LocalDateTime
 
 class UpdateTaskCompleteDateUseCaseTest {
-    private val taskRepository: TaskRepositoryImpl = mockk()
-    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val addTaskActivityUseCase: AddTaskActivityUseCase = mockk()
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
 
     private val sut = UpdateTaskCompleteDateUseCase(
-        taskRepository,
-        getTaskOrThrowUseCase,
         addTaskActivityUseCase,
+        getTaskOrThrowUseCase,
+        taskRepository,
     )
 
     @ParameterizedTest

@@ -17,14 +17,14 @@ import org.springframework.stereotype.Service
 
 @Service
 class ActivityRepositoryImpl(
-    private val commentActivityJpaRepository: CommentActivityJpaRepository,
     private val commentActivityJpaEntityToCommentActivityMapper: CommentActivityJpaEntityToCommentActivityMapper,
+    private val commentActivityJpaRepository: CommentActivityJpaRepository,
     private val commentActivityToCommentActivityJpaEntityMapper: CommentActivityToCommentActivityJpaEntityMapper,
-    private val projectActivityJpaRepository: ProjectActivityJpaRepository,
     private val projectActivityJpaEntityToProjectActivityMapper: ProjectActivityJpaEntityToProjectActivityMapper,
+    private val projectActivityJpaRepository: ProjectActivityJpaRepository,
     private val projectActivityToProjectActivityJpaEntityMapper: ProjectActivityToProjectActivityJpaEntityMapper,
-    private val taskActivityJpaRepository: TaskActivityJpaRepository,
     private val taskActivityJpaEntityToTaskActivityMapper: TaskActivityJpaEntityToTaskActivityMapper,
+    private val taskActivityJpaRepository: TaskActivityJpaRepository,
     private val taskActivityToTaskActivityJpaEntityMapper: TaskActivityToTaskActivityJpaEntityMapper,
 ) : ActivityRepository {
     override val commentActivities: List<CommentActivity>

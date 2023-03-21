@@ -17,18 +17,18 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class AddCommentUseCaseTest {
+    private val addCommentActivityUseCase: AddCommentActivityUseCase = mockk()
+    private val checkCommentTextUseCase: CheckCommentTextUseCase = mockk()
     private val checkTaskIdUseCase: CheckTaskIdUseCase = mockk()
     private val commentFactory: CommentFactory = mockk()
     private val commentRepository: CommentRepository = mockk()
-    private val checkCommentTextUseCase: CheckCommentTextUseCase = mockk()
-    private val addCommentActivityUseCase: AddCommentActivityUseCase = mockk()
 
     private val sut = AddCommentUseCase(
+        addCommentActivityUseCase,
+        checkCommentTextUseCase,
         checkTaskIdUseCase,
         commentFactory,
         commentRepository,
-        checkCommentTextUseCase,
-        addCommentActivityUseCase,
     )
 
     @Test

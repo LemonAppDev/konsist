@@ -8,9 +8,9 @@ import kotlin.jvm.optionals.getOrNull
 
 @Service
 class CommentRepositoryImpl(
+    private val commentJpaEntityToCommentMapper: CommentJpaEntityToCommentMapper,
     private val commentJpaRepository: CommentJpaRepository,
     private val commentToCommentJpaEntityMapper: CommentToCommentJpaEntityMapper,
-    private val commentJpaEntityToCommentMapper: CommentJpaEntityToCommentMapper,
 ) : CommentRepository {
     override val comments: List<Comment>
         get() = commentJpaRepository

@@ -13,10 +13,10 @@ import java.time.LocalDateTime
 
 @Service
 class DeleteTaskUseCase(
-    private val taskRepository: TaskRepository,
-    private val localDateTimeFactory: LocalDateTimeFactory,
-    private val addTaskActivityUseCase: AddTaskActivityUseCase,
     private val addProjectActivityUseCase: AddProjectActivityUseCase,
+    private val addTaskActivityUseCase: AddTaskActivityUseCase,
+    private val localDateTimeFactory: LocalDateTimeFactory,
+    private val taskRepository: TaskRepository,
 ) {
     operator fun invoke(taskId: TaskId, date: LocalDateTime? = null) {
         val task = taskRepository.getTask(taskId)

@@ -20,14 +20,14 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class TaskFactoryTest {
-    private val uuidFactory: UUIDFactory = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val userRepository: UserRepository = mockk()
+    private val uuidFactory: UUIDFactory = mockk()
 
     private val sut = TaskFactory(
-        uuidFactory,
         localDateTimeFactory,
         userRepository,
+        uuidFactory,
     )
 
     @Test

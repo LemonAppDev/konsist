@@ -24,22 +24,22 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class CreateTaskUseCaseTest {
-    private val taskFactory: TaskFactory = mockk()
-    private val checkUserIdUseCase: CheckUserIdUseCase = mockk()
     private val checkProjectIdUseCase: CheckProjectIdUseCase = mockk()
-    private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase = mockk()
-    private val localDateTimeFactory: LocalDateTimeFactory = mockk()
+    private val checkUserIdUseCase: CheckUserIdUseCase = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
+    private val localDateTimeFactory: LocalDateTimeFactory = mockk()
+    private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase = mockk()
     private val saveTaskUseCase: SaveTaskUseCase = mockk()
+    private val taskFactory: TaskFactory = mockk()
 
     private val sut = CreateTaskUseCase(
-        taskFactory,
-        checkUserIdUseCase,
         checkProjectIdUseCase,
-        requireDateIsNowOrLaterUseCase,
-        localDateTimeFactory,
+        checkUserIdUseCase,
         getTaskOrThrowUseCase,
+        localDateTimeFactory,
+        requireDateIsNowOrLaterUseCase,
         saveTaskUseCase,
+        taskFactory,
     )
 
     @Test

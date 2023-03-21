@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service
 
 @Service
 class DeleteProjectUseCase(
-    private val projectRepository: ProjectRepository,
-    private val localDateTimeFactory: LocalDateTimeFactory,
-    private val taskRepository: TaskRepository,
     private val addProjectActivityUseCase: AddProjectActivityUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
+    private val localDateTimeFactory: LocalDateTimeFactory,
+    private val projectRepository: ProjectRepository,
+    private val taskRepository: TaskRepository,
 ) {
     operator fun invoke(projectId: ProjectId) {
         val project = projectRepository.getProject(projectId)

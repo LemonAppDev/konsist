@@ -16,16 +16,16 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class CreateProjectUseCaseTest {
-    private val projectFactory: ProjectFactory = mockk()
-    private val projectRepository: ProjectRepositoryImpl = mockk()
     private val addProjectActivityUseCase: AddProjectActivityUseCase = mockk()
     private val checkNewProjectNameUseCase: CheckNewProjectNameUseCase = mockk()
+    private val projectFactory: ProjectFactory = mockk()
+    private val projectRepository: ProjectRepositoryImpl = mockk()
 
     private val sut = CreateProjectUseCase(
-        projectFactory,
-        projectRepository,
         addProjectActivityUseCase,
         checkNewProjectNameUseCase,
+        projectFactory,
+        projectRepository,
     )
 
     @Test

@@ -11,14 +11,14 @@ import org.junit.jupiter.api.Test
 import kotlin.jvm.optionals.getOrNull
 
 class TaskRepositoryImplTest {
+    private val taskJpaEntityToTaskMapper: TaskJpaEntityToTaskMapper = mockk()
     private val taskJpaRepository: TaskJpaRepository = mockk()
     private val taskToTaskJpaEntityMapper: TaskToTaskJpaEntityMapper = mockk()
-    private val taskJpaEntityToTaskMapper: TaskJpaEntityToTaskMapper = mockk()
 
     private val sut = TaskRepositoryImpl(
+        taskJpaEntityToTaskMapper,
         taskJpaRepository,
         taskToTaskJpaEntityMapper,
-        taskJpaEntityToTaskMapper,
     )
 
     @Test

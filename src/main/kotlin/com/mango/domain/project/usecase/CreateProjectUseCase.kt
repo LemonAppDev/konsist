@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service
 
 @Service
 class CreateProjectUseCase(
-    private val projectFactory: ProjectFactory,
-    private val projectRepository: ProjectRepository,
     private val addProjectActivityUseCase: AddProjectActivityUseCase,
     private val checkNewProjectNameUseCase: CheckNewProjectNameUseCase,
+    private val projectFactory: ProjectFactory,
+    private val projectRepository: ProjectRepository,
 ) {
     operator fun invoke(name: String, color: Color?, isFavourite: Boolean?): Project {
         checkNewProjectNameUseCase(name)

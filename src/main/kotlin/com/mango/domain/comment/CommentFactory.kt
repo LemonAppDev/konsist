@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service
 
 @Service
 class CommentFactory(
-    private val uuidFactory: UUIDFactory,
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val userRepository: UserRepository,
+    private val uuidFactory: UUIDFactory,
 ) {
     operator fun invoke(
         taskId: TaskId,

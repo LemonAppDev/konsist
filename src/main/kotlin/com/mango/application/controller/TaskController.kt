@@ -34,19 +34,19 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping(ApiConfig.API_V1_URL + "/task")
 class TaskController(
-    private val createTaskUseCase: CreateTaskUseCase,
-    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
-    private val deleteTaskUseCase: DeleteTaskUseCase,
-    private val getAllTasksUseCase: GetAllTasksUseCase,
-    private val updateTaskUseCase: UpdateTaskUseCase,
-    private val duplicateTaskUseCase: DuplicateTaskUseCase,
-    private val getTaskActivitiesUseCase: GetTaskActivitiesUseCase,
     private val addCommentUseCase: AddCommentUseCase,
+    private val createTaskUseCase: CreateTaskUseCase,
     private val deleteCommentUseCase: DeleteCommentUseCase,
-    private val updateCommentUseCase: UpdateCommentUseCase,
+    private val deleteTaskUseCase: DeleteTaskUseCase,
+    private val duplicateTaskUseCase: DuplicateTaskUseCase,
+    private val getAllTasksUseCase: GetAllTasksUseCase,
+    private val getChildTasksUseCase: GetChildTasksUseCase,
     private val getCommentOrThrowUseCase: GetCommentOrThrowUseCase,
     private val getCommentsUseCase: GetCommentsUseCase,
-    private val getChildTasksUseCase: GetChildTasksUseCase,
+    private val getTaskActivitiesUseCase: GetTaskActivitiesUseCase,
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
+    private val updateCommentUseCase: UpdateCommentUseCase,
+    private val updateTaskUseCase: UpdateTaskUseCase,
 ) {
     @PostMapping("/create")
     fun createTask(@RequestBody requestModel: CreateTaskRequestModel): Task =

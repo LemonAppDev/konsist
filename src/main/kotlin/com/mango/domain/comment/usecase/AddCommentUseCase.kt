@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service
 
 @Service
 class AddCommentUseCase(
+    private val addCommentActivityUseCase: AddCommentActivityUseCase,
+    private val checkCommentTextUseCase: CheckCommentTextUseCase,
     private val checkTaskIdUseCase: CheckTaskIdUseCase,
     private val commentFactory: CommentFactory,
     private val commentRepository: CommentRepository,
-    private val checkCommentTextUseCase: CheckCommentTextUseCase,
-    private val addCommentActivityUseCase: AddCommentActivityUseCase,
 ) {
     operator fun invoke(taskId: TaskId, text: String): Comment {
         checkTaskIdUseCase(taskId)

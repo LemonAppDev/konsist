@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class GetCommentsUseCase(
-    private val taskRepository: TaskRepository,
     private val commentRepository: CommentRepository,
+    private val taskRepository: TaskRepository,
 ) {
     operator fun invoke(taskId: TaskId): List<Comment> {
         val task = taskRepository.getTask(taskId)

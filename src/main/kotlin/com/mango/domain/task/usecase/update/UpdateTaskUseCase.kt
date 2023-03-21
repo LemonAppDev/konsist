@@ -12,17 +12,17 @@ import java.time.LocalDateTime
 @Service
 @Suppress("detekt.LongParameterList")
 class UpdateTaskUseCase(
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val localDateTimeFactory: LocalDateTimeFactory,
-    private val updateTaskNameUseCase: UpdateTaskNameUseCase,
-    private val updateTaskDescriptionUseCase: UpdateTaskDescriptionUseCase,
-    private val updateTaskDueDateUseCase: UpdateTaskDueDateUseCase,
-    private val updateTaskTargetDateUseCase: UpdateTaskTargetDateUseCase,
-    private val updateTaskPriorityUseCase: UpdateTaskPriorityUseCase,
-    private val updateTaskProjectUseCase: UpdateTaskProjectUseCase,
-    private val updateTaskParentTaskUseCase: UpdateTaskParentTaskUseCase,
     private val updateTaskAssigneeUseCase: UpdateTaskAssigneeUseCase,
     private val updateTaskCompleteDateUseCase: UpdateTaskCompleteDateUseCase,
-    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
+    private val updateTaskDescriptionUseCase: UpdateTaskDescriptionUseCase,
+    private val updateTaskDueDateUseCase: UpdateTaskDueDateUseCase,
+    private val updateTaskNameUseCase: UpdateTaskNameUseCase,
+    private val updateTaskParentTaskUseCase: UpdateTaskParentTaskUseCase,
+    private val updateTaskPriorityUseCase: UpdateTaskPriorityUseCase,
+    private val updateTaskProjectUseCase: UpdateTaskProjectUseCase,
+    private val updateTaskTargetDateUseCase: UpdateTaskTargetDateUseCase,
 ) {
     operator fun invoke(
         taskId: TaskId,

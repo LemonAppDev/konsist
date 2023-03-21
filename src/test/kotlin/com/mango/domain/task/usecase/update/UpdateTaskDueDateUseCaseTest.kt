@@ -17,16 +17,16 @@ import io.mockk.verify
 import org.junit.jupiter.api.Test
 
 class UpdateTaskDueDateUseCaseTest {
-    private val taskRepository: TaskRepositoryImpl = mockk()
+    private val addTaskActivityUseCase: AddTaskActivityUseCase = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase = mockk()
-    private val addTaskActivityUseCase: AddTaskActivityUseCase = mockk()
+    private val taskRepository: TaskRepositoryImpl = mockk()
 
     private val sut = UpdateTaskDueDateUseCase(
-        taskRepository,
+        addTaskActivityUseCase,
         getTaskOrThrowUseCase,
         requireDateIsNowOrLaterUseCase,
-        addTaskActivityUseCase,
+        taskRepository,
     )
 
     @Test

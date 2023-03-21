@@ -12,10 +12,10 @@ import java.time.LocalDateTime
 
 @Service
 class SaveTaskUseCase(
-    private val taskRepository: TaskRepository,
-    private val addTaskActivityUseCase: AddTaskActivityUseCase,
     private val addProjectActivityUseCase: AddProjectActivityUseCase,
+    private val addTaskActivityUseCase: AddTaskActivityUseCase,
     private val localDateTimeFactory: LocalDateTimeFactory,
+    private val taskRepository: TaskRepository,
 ) {
     operator fun invoke(task: Task, date: LocalDateTime? = null) =
         taskRepository.saveTask(task).also {

@@ -21,30 +21,30 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 class UpdateTaskUseCaseTest {
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
-    private val updateTaskNameUseCase: UpdateTaskNameUseCase = mockk()
-    private val updateTaskDescriptionUseCase: UpdateTaskDescriptionUseCase = mockk()
-    private val updateTaskDueDateUseCase: UpdateTaskDueDateUseCase = mockk()
-    private val updateTaskTargetDateUseCase: UpdateTaskTargetDateUseCase = mockk()
-    private val updateTaskPriorityUseCase: UpdateTaskPriorityUseCase = mockk()
-    private val updateTaskProjectUseCase: UpdateTaskProjectUseCase = mockk()
-    private val updateTaskParentTaskUseCase: UpdateTaskParentTaskUseCase = mockk()
     private val updateTaskAssigneeUseCase: UpdateTaskAssigneeUseCase = mockk()
     private val updateTaskCompleteDateUseCase: UpdateTaskCompleteDateUseCase = mockk()
-    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
+    private val updateTaskDescriptionUseCase: UpdateTaskDescriptionUseCase = mockk()
+    private val updateTaskDueDateUseCase: UpdateTaskDueDateUseCase = mockk()
+    private val updateTaskNameUseCase: UpdateTaskNameUseCase = mockk()
+    private val updateTaskParentTaskUseCase: UpdateTaskParentTaskUseCase = mockk()
+    private val updateTaskPriorityUseCase: UpdateTaskPriorityUseCase = mockk()
+    private val updateTaskProjectUseCase: UpdateTaskProjectUseCase = mockk()
+    private val updateTaskTargetDateUseCase: UpdateTaskTargetDateUseCase = mockk()
 
     private val sut = UpdateTaskUseCase(
+        getTaskOrThrowUseCase,
         localDateTimeFactory,
-        updateTaskNameUseCase,
-        updateTaskDescriptionUseCase,
-        updateTaskDueDateUseCase,
-        updateTaskTargetDateUseCase,
-        updateTaskPriorityUseCase,
-        updateTaskProjectUseCase,
-        updateTaskParentTaskUseCase,
         updateTaskAssigneeUseCase,
         updateTaskCompleteDateUseCase,
-        getTaskOrThrowUseCase,
+        updateTaskDescriptionUseCase,
+        updateTaskDueDateUseCase,
+        updateTaskNameUseCase,
+        updateTaskParentTaskUseCase,
+        updateTaskPriorityUseCase,
+        updateTaskProjectUseCase,
+        updateTaskTargetDateUseCase,
     )
 
     @Test

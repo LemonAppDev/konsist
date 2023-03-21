@@ -1,6 +1,5 @@
 package com.mango.domain.task.usecase
 
-import com.mango.data.task.TaskRepositoryImpl
 import com.mango.domain.common.LocalDateTimeFactory
 import com.mango.domain.common.UUIDFactory
 import com.mango.domain.common.model.BusinessTestModel.getProjectId1
@@ -10,6 +9,7 @@ import com.mango.domain.common.model.BusinessTestModel.getTaskId3
 import com.mango.domain.common.model.BusinessTestModel.getTaskId4
 import com.mango.domain.common.model.BusinessTestModel.getTaskId5
 import com.mango.domain.common.model.BusinessTestModel.getUserId1
+import com.mango.domain.task.TaskRepository
 import com.mango.domain.task.model.Task
 import com.mango.domain.user.UserRepository
 import io.mockk.every
@@ -21,20 +21,20 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class DuplicateTaskUseCaseTest {
-    private val taskRepository: TaskRepositoryImpl = mockk()
-    private val uuidFactory: UUIDFactory = mockk()
-    private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase = mockk()
+    private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val saveTaskUseCase: SaveTaskUseCase = mockk()
+    private val taskRepository: TaskRepository = mockk()
     private val userRepository: UserRepository = mockk()
+    private val uuidFactory: UUIDFactory = mockk()
 
     private val sut = DuplicateTaskUseCase(
-        taskRepository,
-        uuidFactory,
-        localDateTimeFactory,
         getTaskOrThrowUseCase,
+        localDateTimeFactory,
         saveTaskUseCase,
+        taskRepository,
         userRepository,
+        uuidFactory,
     )
 
     @Test

@@ -11,10 +11,10 @@ import java.time.LocalDateTime
 
 @Service
 class UpdateTaskTargetDateUseCase(
-    private val taskRepository: TaskRepository,
+    private val addTaskActivityUseCase: AddTaskActivityUseCase,
     private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val requireDateIsNowOrLaterUseCase: RequireDateIsNowOrLaterUseCase,
-    private val addTaskActivityUseCase: AddTaskActivityUseCase,
+    private val taskRepository: TaskRepository,
 ) {
     operator fun invoke(taskId: TaskId, newTargetDate: LocalDateTime?, date: LocalDateTime) {
         newTargetDate?.let { requireDateIsNowOrLaterUseCase(it) }

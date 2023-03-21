@@ -22,25 +22,25 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class ActivityRepositoryImplTest {
-    private val commentActivityJpaRepository: CommentActivityJpaRepository = mockk()
     private val commentActivityJpaEntityToCommentActivityMapper: CommentActivityJpaEntityToCommentActivityMapper = mockk()
+    private val commentActivityJpaRepository: CommentActivityJpaRepository = mockk()
     private val commentActivityToCommentActivityJpaEntityMapper: CommentActivityToCommentActivityJpaEntityMapper = mockk()
-    private val projectActivityJpaRepository: ProjectActivityJpaRepository = mockk()
     private val projectActivityJpaEntityToProjectActivityMapper: ProjectActivityJpaEntityToProjectActivityMapper = mockk()
+    private val projectActivityJpaRepository: ProjectActivityJpaRepository = mockk()
     private val projectActivityToProjectActivityJpaEntityMapper: ProjectActivityToProjectActivityJpaEntityMapper = mockk()
-    private val taskActivityJpaRepository: TaskActivityJpaRepository = mockk()
     private val taskActivityJpaEntityToTaskActivityMapper: TaskActivityJpaEntityToTaskActivityMapper = mockk()
+    private val taskActivityJpaRepository: TaskActivityJpaRepository = mockk()
     private val taskActivityToTaskActivityJpaEntityMapper: TaskActivityToTaskActivityJpaEntityMapper = mockk()
 
     private val sut = ActivityRepositoryImpl(
-        commentActivityJpaRepository,
         commentActivityJpaEntityToCommentActivityMapper,
+        commentActivityJpaRepository,
         commentActivityToCommentActivityJpaEntityMapper,
-        projectActivityJpaRepository,
         projectActivityJpaEntityToProjectActivityMapper,
+        projectActivityJpaRepository,
         projectActivityToProjectActivityJpaEntityMapper,
-        taskActivityJpaRepository,
         taskActivityJpaEntityToTaskActivityMapper,
+        taskActivityJpaRepository,
         taskActivityToTaskActivityJpaEntityMapper,
     )
 

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service
 
 @Service
 class UpdateCommentUseCase(
+    private val addCommentActivityUseCase: AddCommentActivityUseCase,
     private val commentRepository: CommentRepository,
     private val getCommentOrThrowUseCase: GetCommentOrThrowUseCase,
-    private val addCommentActivityUseCase: AddCommentActivityUseCase,
 ) {
     operator fun invoke(commentId: CommentId, text: String?) {
         val comment = getCommentOrThrowUseCase(commentId)

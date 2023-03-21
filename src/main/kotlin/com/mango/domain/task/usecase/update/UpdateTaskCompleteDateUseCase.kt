@@ -11,9 +11,9 @@ import java.time.LocalDateTime
 
 @Service
 class UpdateTaskCompleteDateUseCase(
-    private val taskRepository: TaskRepository,
-    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
     private val addTaskActivityUseCase: AddTaskActivityUseCase,
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
+    private val taskRepository: TaskRepository,
 ) {
     operator fun invoke(taskId: TaskId, isComplete: Boolean, date: LocalDateTime) {
         val task = getTaskOrThrowUseCase(taskId)

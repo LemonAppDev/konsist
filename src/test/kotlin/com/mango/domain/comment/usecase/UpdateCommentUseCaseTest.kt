@@ -12,14 +12,14 @@ import io.mockk.verify
 import org.junit.jupiter.api.Test
 
 class UpdateCommentUseCaseTest {
+    private val addCommentActivityUseCase: AddCommentActivityUseCase = mockk()
     private val commentRepository: CommentRepositoryImpl = mockk()
     private val getCommentOrThrowUseCase: GetCommentOrThrowUseCase = mockk()
-    private val addCommentActivityUseCase: AddCommentActivityUseCase = mockk()
 
     private val sut = UpdateCommentUseCase(
+        addCommentActivityUseCase,
         commentRepository,
         getCommentOrThrowUseCase,
-        addCommentActivityUseCase,
     )
 
     @Test
