@@ -64,15 +64,6 @@ open class KoComplexDeclaration(private val ktClassOrObject: KtClassOrObject) : 
         properties
     }
 
-    fun localFunctions(includeNested: Boolean = false) = if (includeNested) {
-        declarations
-            .filterIsInstance<KoComplexDeclaration>()
-            .flatMap { it.declarations(true) }
-            .filterIsInstance<KoFunction>()
-    } else {
-        functions
-    }
-
     fun declarations(includeNested: Boolean = false): List<KoDeclaration> = if (includeNested) {
         nestedDeclarations + properties + functions
     } else {
