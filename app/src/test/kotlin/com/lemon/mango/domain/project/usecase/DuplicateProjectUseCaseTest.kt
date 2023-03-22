@@ -240,6 +240,7 @@ class DuplicateProjectUseCaseTest {
         val taskId = getTaskId1()
         every { task.projectId } returns oldProjectId
         every { task.id } returns taskId
+        every { task.parentTaskId } returns null
         every { duplicateTaskUseCase(taskId, newProjectId, date) } returns mockk()
         every { taskRepository.tasks } returns listOf(task)
 
@@ -272,6 +273,7 @@ class DuplicateProjectUseCaseTest {
         val taskId = getTaskId1()
         every { task.projectId } returns oldProjectId
         every { task.id } returns taskId
+        every { task.parentTaskId } returns null
         every { duplicateTaskUseCase(taskId, newProjectId, date) } returns mockk()
         every { taskRepository.tasks } returns listOf(task)
 

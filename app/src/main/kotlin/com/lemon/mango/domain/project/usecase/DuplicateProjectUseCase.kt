@@ -49,7 +49,7 @@ class DuplicateProjectUseCase(
             addProjectActivityUseCase(newProjectId, ProjectActivityType.CREATE, creationDate)
 
             taskRepository.tasks
-                .filter { task -> task.projectId == projectId }
+                .filter { task -> task.projectId == projectId && task.parentTaskId == null }
                 .forEach { task -> duplicateTaskUseCase(task.id, newProjectId, creationDate) }
         }
     }

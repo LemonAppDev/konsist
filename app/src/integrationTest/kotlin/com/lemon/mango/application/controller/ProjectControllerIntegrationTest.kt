@@ -139,9 +139,31 @@ class ProjectControllerTest {
         val duplicatedProject = projectEndpointHelper.callDuplicateProjectEndPoint(project.id)
 
         // then
-        val actual = taskEndpointHelper.callAllEndpoint().filter { it.projectId == duplicatedProject.id }.map { it.name }
+        val actual = taskEndpointHelper
+            .callAllEndpoint()
+            .filter { it.projectId == duplicatedProject.id }
+            .map { it.name }
 
         actual shouldBeEqualTo listOf(task1.name, task2.name)
+    }
+
+    @Test
+    fun `duplicate endpoint duplicates task and its child from old project`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint()
+        val parentTask = taskEndpointHelper.callCreateEndpoint(projectId = project.id)
+        val childTask = taskEndpointHelper.callCreateEndpoint(projectId = project.id, parentTaskId = parentTask.id)
+
+        // when
+        val duplicatedProject = projectEndpointHelper.callDuplicateProjectEndPoint(project.id)
+
+        // then
+        val actual = taskEndpointHelper
+            .callAllEndpoint()
+            .filter { it.projectId == duplicatedProject.id }
+            .map { it.name }
+
+        actual shouldBeEqualTo listOf(parentTask.name, childTask.name)
     }
 
     @Test
@@ -153,7 +175,9 @@ class ProjectControllerTest {
         val duplicatedProject = projectEndpointHelper.callDuplicateProjectEndPoint(project.id)
 
         // then
-        val actual = projectEndpointHelper.callGetProjectActivitiesEndPoint(duplicatedProject.id).map { it.type }
+        val actual = projectEndpointHelper
+            .callGetProjectActivitiesEndPoint(duplicatedProject.id)
+            .map { it.type }
 
         actual shouldBeEqualTo listOf(CREATE)
     }
@@ -164,7 +188,9 @@ class ProjectControllerTest {
         val project = projectEndpointHelper.callCreateEndpoint()
 
         // when
-        val actual = projectEndpointHelper.callGetProjectActivitiesEndPoint(project.id).map { it.type }
+        val actual = projectEndpointHelper
+            .callGetProjectActivitiesEndPoint(project.id)
+            .map { it.type }
 
         // then
         actual shouldBeEqualTo listOf(CREATE)
