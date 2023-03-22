@@ -10,16 +10,18 @@ import org.jetbrains.kotlin.psi.KtPrimaryConstructor
 
 class KoPrimaryConstructor(
     private val ktPrimaryConstructor: KtPrimaryConstructor,
-    private val parameters: List<KtParameter>,
-    private val modifierList: KtModifierList?,
+    private val ktParameters: List<KtParameter>,
+    private val ktModifierList: KtModifierList?,
 ) : KoBaseDeclaration(ktPrimaryConstructor) {
-    val isPublic by lazy { modifierList.isPublic() }
+    val isPublic by lazy { ktModifierList.isPublic() }
 
-    val isPrivate by lazy { modifierList.isPrivate() }
+    val isPrivate by lazy { ktModifierList.isPrivate() }
 
-    val isProtected by lazy { modifierList.isProtected() }
+    val isProtected by lazy { ktModifierList.isProtected() }
 
-    val isInternal by lazy { modifierList.isInternal() }
+    val isInternal by lazy { ktModifierList.isInternal() }
 
-    fun hasParameterNamed(name: String) = parameters.firstOrNull()?.name == name
+    val parameters by lazy { ktParameters.map { KoParameter(it) } }
+
+    fun hasParameterNamed(name: String) = ktParameters.firstOrNull()?.name == name
 }
