@@ -1,0 +1,4 @@
+class SampleClass(
+    val sampleParameter1: SampleParameter1,
+    val sampleParameter2: SampleParameter2
+)
