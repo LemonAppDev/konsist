@@ -41,4 +41,19 @@ class GeneralCodingKonsistTest {
                 mangoScope.classes().any { testClass -> testClass.fullyQualifiedName == "${it.fullyQualifiedName}Test" }
             }
     }
+
+    @Test
+    fun `every class constructor has alphabetically ordered parameters`() {
+        mangoScope
+            .classes()
+            .filterNot { it.hasAnnotation(Entity::class) }
+            .filterNot { it.isData }
+            .filterNot { it.isValue }
+            .mapNotNull { it.primaryConstructor }
+            .check {
+                val names = it.parameters.map { parameter -> parameter.name }
+                val sortedNames = it.parameters.map { parameter -> parameter.name }.sorted()
+                names == sortedNames
+            }
+    }
 }
