@@ -3,6 +3,7 @@ package com.lemon.mango.application.controller
 import com.lemon.mango.application.config.ApiConfig
 import com.lemon.mango.application.model.project.CreateProjectRequestModel
 import com.lemon.mango.application.model.project.DuplicateProjectRequestModel
+import com.lemon.mango.application.model.project.UpdateProjectRequestModel
 import com.lemon.mango.domain.activity.model.ProjectActivity
 import com.lemon.mango.domain.project.model.Project
 import com.lemon.mango.domain.project.model.ProjectId
@@ -12,6 +13,7 @@ import com.lemon.mango.domain.project.usecase.DuplicateProjectUseCase
 import com.lemon.mango.domain.project.usecase.GetAllProjectsUseCase
 import com.lemon.mango.domain.project.usecase.GetProjectActivitiesUseCase
 import com.lemon.mango.domain.project.usecase.GetProjectOrThrowUseCase
+import com.lemon.mango.domain.project.usecase.update.UpdateProjectUseCase
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -29,6 +31,7 @@ class ProjectController(
     private val getAllProjectsUseCase: GetAllProjectsUseCase,
     private val getProjectActivitiesUseCase: GetProjectActivitiesUseCase,
     private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase,
+    private val updateProjectUseCase: UpdateProjectUseCase,
 ) {
     @PostMapping("/create")
     fun createProject(@RequestBody requestModel: CreateProjectRequestModel): Project =
@@ -54,4 +57,15 @@ class ProjectController(
     @PostMapping("/duplicate")
     fun duplicateProject(@RequestBody requestModel: DuplicateProjectRequestModel): Project =
         duplicateProjectUseCase(requestModel.projectId, requestModel.name)
+
+    @PostMapping("/update")
+    fun updateProject(@RequestBody requestModel: UpdateProjectRequestModel): Project {
+        updateProjectUseCase(
+            requestModel.projectId,
+            requestModel.name,
+            requestModel.color,
+            requestModel.isFavourite,
+        )
+        return getProjectOrThrowUseCase(requestModel.projectId)
+    }
 }

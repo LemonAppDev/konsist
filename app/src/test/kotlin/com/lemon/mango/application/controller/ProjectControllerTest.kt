@@ -2,18 +2,22 @@ package com.lemon.mango.application.controller
 
 import com.lemon.mango.application.model.project.CreateProjectRequestModel
 import com.lemon.mango.application.model.project.DuplicateProjectRequestModel
+import com.lemon.mango.application.model.project.UpdateProjectRequestModel
 import com.lemon.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.lemon.mango.domain.common.model.Color
+import com.lemon.mango.domain.project.model.Project
 import com.lemon.mango.domain.project.usecase.CreateProjectUseCase
 import com.lemon.mango.domain.project.usecase.DeleteProjectUseCase
 import com.lemon.mango.domain.project.usecase.DuplicateProjectUseCase
 import com.lemon.mango.domain.project.usecase.GetAllProjectsUseCase
 import com.lemon.mango.domain.project.usecase.GetProjectActivitiesUseCase
 import com.lemon.mango.domain.project.usecase.GetProjectOrThrowUseCase
+import com.lemon.mango.domain.project.usecase.update.UpdateProjectUseCase
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
 import io.mockk.verify
+import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class ProjectControllerTest {
@@ -23,6 +27,7 @@ class ProjectControllerTest {
     private val getAllProjectsUseCase: GetAllProjectsUseCase = mockk()
     private val getProjectActivitiesUseCase: GetProjectActivitiesUseCase = mockk()
     private val getProjectOrThrowUseCase: GetProjectOrThrowUseCase = mockk()
+    private val updateProjectUseCase: UpdateProjectUseCase = mockk()
 
     private val sut = ProjectController(
         createProjectUseCase,
@@ -31,6 +36,7 @@ class ProjectControllerTest {
         getAllProjectsUseCase,
         getProjectActivitiesUseCase,
         getProjectOrThrowUseCase,
+        updateProjectUseCase,
     )
 
     @Test
@@ -125,5 +131,45 @@ class ProjectControllerTest {
 
         // then
         verify { duplicateProjectUseCase(projectId) }
+    }
+
+    @Test
+    fun `updateProject() calls updateProjectUseCase()`() {
+        // given
+        val projectId = getProjectId1()
+        val name = "name"
+        val color = Color("0xFFFFFF")
+        val isFavourite = true
+        val requestModel = UpdateProjectRequestModel(projectId, name, color, isFavourite)
+        val project: Project = mockk()
+        every { updateProjectUseCase(projectId, name, color, isFavourite) } returns mockk()
+        justRun { updateProjectUseCase(projectId, name, color, isFavourite) }
+        every { getProjectOrThrowUseCase(projectId) } returns project
+
+        // when
+        sut.updateProject(requestModel)
+
+        // then
+        verify { updateProjectUseCase(projectId, name, color, isFavourite) }
+    }
+
+    @Test
+    fun `updateProject() returns updated project`() {
+        // given
+        val projectId = getProjectId1()
+        val name = "name"
+        val color = Color("0xFFFFFF")
+        val isFavourite = true
+        val requestModel = UpdateProjectRequestModel(projectId, name, color, isFavourite)
+        val project: Project = mockk()
+        every { updateProjectUseCase(projectId, name, color, isFavourite) } returns mockk()
+        justRun { updateProjectUseCase(projectId, name, color, isFavourite) }
+        every { getProjectOrThrowUseCase(projectId) } returns project
+
+        // when
+        val actual = sut.updateProject(requestModel)
+
+        // then
+        actual shouldBeEqualTo project
     }
 }

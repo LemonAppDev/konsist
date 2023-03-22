@@ -48,7 +48,7 @@ class UpdateTaskUseCaseTest {
     )
 
     @Test
-    fun `calls all update tasks use cases()`() {
+    fun `calls all update tasks use cases`() {
         // given
         val task: Task = mockk()
         val taskId = getTaskId1()

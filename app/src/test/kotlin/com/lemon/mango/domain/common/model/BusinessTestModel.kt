@@ -4,6 +4,7 @@ import com.lemon.mango.domain.activity.model.CommentActivityId
 import com.lemon.mango.domain.activity.model.ProjectActivityId
 import com.lemon.mango.domain.activity.model.TaskActivityId
 import com.lemon.mango.domain.comment.model.CommentId
+import com.lemon.mango.domain.project.model.Project
 import com.lemon.mango.domain.project.model.ProjectId
 import com.lemon.mango.domain.task.model.Priority
 import com.lemon.mango.domain.task.model.Task
@@ -42,6 +43,22 @@ object BusinessTestModel {
         parentTaskId,
         assigneeId,
         completeDate,
+    )
+
+    fun getProject(
+        id: ProjectId = ProjectId(UUID.fromString("a13a3124-be57-4702-bb19-f736f5292da8")),
+        ownerId: UserId = UserId(UUID.fromString("5f0654bf-caee-4b64-8f41-7c1bbdfe3169")),
+        creationDate: LocalDateTime = LocalDateTime.now(),
+        name: String = "name",
+        color: Color = Color("0xFFFFFF"),
+        isFavourite: Boolean = false,
+    ) = Project(
+        id = id,
+        owner = ownerId,
+        creationDate = creationDate,
+        name = name,
+        color = color,
+        isFavourite = isFavourite,
     )
 
     fun getUUID1(): UUID = UUID.fromString("55e7f2a3-c46a-4d79-876e-ec6010a48af1")

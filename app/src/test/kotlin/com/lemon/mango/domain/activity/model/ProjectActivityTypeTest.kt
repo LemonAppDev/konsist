@@ -6,6 +6,9 @@ import com.lemon.mango.domain.activity.model.ProjectActivityType.DELETE
 import com.lemon.mango.domain.activity.model.ProjectActivityType.TASK_ADDED
 import com.lemon.mango.domain.activity.model.ProjectActivityType.TASK_MOVED
 import com.lemon.mango.domain.activity.model.ProjectActivityType.TASK_REMOVED
+import com.lemon.mango.domain.activity.model.ProjectActivityType.UPDATE_COLOR
+import com.lemon.mango.domain.activity.model.ProjectActivityType.UPDATE_IS_FAVOURITE
+import com.lemon.mango.domain.activity.model.ProjectActivityType.UPDATE_NAME
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -34,6 +37,9 @@ class ProjectActivityTypeTest {
         fun provideValues() = listOf(
             arguments("create", CREATE),
             arguments("delete", DELETE),
+            arguments("update_name", UPDATE_NAME),
+            arguments("update_color", UPDATE_COLOR),
+            arguments("update_is_favourite", UPDATE_IS_FAVOURITE),
             arguments("task_added", TASK_ADDED),
             arguments("task_removed", TASK_REMOVED),
             arguments("task_moved", TASK_MOVED),

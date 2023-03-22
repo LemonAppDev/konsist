@@ -2,8 +2,12 @@ package com.lemon.mango.application.controller
 
 import com.lemon.mango.application.model.project.CreateProjectRequestModel
 import com.lemon.mango.application.model.project.DuplicateProjectRequestModel
+import com.lemon.mango.application.model.project.UpdateProjectRequestModel
 import com.lemon.mango.domain.activity.model.ProjectActivity
 import com.lemon.mango.domain.activity.model.ProjectActivityType.CREATE
+import com.lemon.mango.domain.activity.model.ProjectActivityType.UPDATE_COLOR
+import com.lemon.mango.domain.activity.model.ProjectActivityType.UPDATE_IS_FAVOURITE
+import com.lemon.mango.domain.activity.model.ProjectActivityType.UPDATE_NAME
 import com.lemon.mango.domain.common.model.Color
 import com.lemon.mango.domain.project.model.Project
 import com.lemon.mango.domain.project.model.ProjectId
@@ -195,6 +199,49 @@ class ProjectControllerTest {
         // then
         actual shouldBeEqualTo listOf(CREATE)
     }
+
+    @Test
+    fun `update endpoint updates project`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint()
+
+        // when
+        val actual = projectEndpointHelper.callUpdateEndpoint(
+            UpdateProjectRequestModel(
+                projectId = project.id,
+                name = "updated name",
+                color = Color("new color"),
+                isFavourite = true,
+            ),
+        )
+
+        // then
+        val expected = projectEndpointHelper.callGetEndpoint(project.id)
+        actual shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `update endpoint adds project update activities`() {
+        // given
+        val project = projectEndpointHelper.callCreateEndpoint()
+
+        // when
+        projectEndpointHelper.callUpdateEndpoint(
+            UpdateProjectRequestModel(
+                projectId = project.id,
+                name = "updated name",
+                color = Color("new color"),
+                isFavourite = true,
+            ),
+        )
+
+        // then
+        val actual = projectEndpointHelper
+            .callGetProjectActivitiesEndPoint(project.id)
+            .map { it.type }
+
+        actual shouldBeEqualTo listOf(CREATE, UPDATE_NAME, UPDATE_COLOR, UPDATE_IS_FAVOURITE)
+    }
 }
 
 @Service
@@ -205,7 +252,7 @@ class ProjectEndpointHelper(
     fun callCreateEndpoint(name: String? = "project"): Project {
         val requestModel = CreateProjectRequestModel(
             name = name ?: "name",
-            isFavourite = true,
+            isFavourite = false,
             color = Color("0xFF0000"),
         )
 
@@ -259,4 +306,11 @@ class ProjectEndpointHelper(
             body = jsonBody,
         )
     }
+
+    fun callUpdateEndpoint(requestModel: UpdateProjectRequestModel) = controllerEndpointCaller.call<Project>(
+        this,
+        endpointName = "update",
+        method = HttpMethod.POST,
+        body = serialize(requestModel),
+    )
 }
