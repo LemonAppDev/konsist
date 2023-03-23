@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.spotless)
     alias(libs.plugins.testLogger)
     alias(libs.plugins.detekt)
+    idea
 }
 
 repositories {
@@ -28,6 +29,13 @@ spotless {
 
         indentWithSpaces()
         endWithNewline()
+    }
+}
+
+idea {
+    module {
+        isDownloadJavadoc = true
+        isDownloadSources = true
     }
 }
 
