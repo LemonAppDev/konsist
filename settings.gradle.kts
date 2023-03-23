@@ -10,7 +10,7 @@ dependencyResolutionManagement {
         create("libs") {
             version("kotlinVersion", "1.8.10")
 
-            plugin("springframework-boot", "org.springframework.boot").version("3.0.4")
+            plugin("springframework-boot", "org.springframework.boot").version("3.0.5")
             plugin("spring-dependencyManagement", "io.spring.dependency-management").version("1.1.0")
             plugin("kotlin-plugin-spring", "org.jetbrains.kotlin.plugin.spring").versionRef("kotlinVersion")
             plugin("kotlin-plugin-jpa", "org.jetbrains.kotlin.plugin.jpa").versionRef("kotlinVersion")
