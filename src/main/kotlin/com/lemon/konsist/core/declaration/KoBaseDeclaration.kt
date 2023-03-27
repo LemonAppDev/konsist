@@ -9,4 +9,6 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
     val textWithLocation by lazy { ktElement.getTextWithLocation() }
 
     val containingFile by lazy { KoFile(ktElement.containingKtFile) }
+
+    override fun toString() = textWithLocation
 }

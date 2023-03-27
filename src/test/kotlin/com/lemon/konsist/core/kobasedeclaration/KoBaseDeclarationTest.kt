@@ -2,6 +2,7 @@ package com.lemon.konsist.core.kobasedeclaration
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBe
+import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoBaseDeclarationTest {
@@ -31,6 +32,17 @@ class KoBaseDeclarationTest {
 
         // then
         sut.files().first().containingFile.name.endsWith("file.kt") shouldBe true
+    }
+
+    @Test
+    fun `to-string`() {
+        // given
+        val sut = getSut("to-string")
+
+        // then
+        val actual = sut.functions().first().toString()
+        val expected = sut.functions().first().textWithLocation
+        actual shouldBeEqualTo expected
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kobasedeclaration/snippet/$fileName.kt.txt")
