@@ -1,0 +1,5 @@
+fun SampleFunction() {
+    fun LocalSampleFunction1()
+
+    fun LocalSampleFunction2()
+}

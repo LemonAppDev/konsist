@@ -6,6 +6,7 @@ import com.lemon.mango.mangoScope
 import jakarta.persistence.Entity
 import org.junit.jupiter.api.Test
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.web.bind.annotation.RestController
 import java.util.Locale
 import javax.inject.Inject
 
@@ -55,22 +56,28 @@ class GeneralCodingKonsistTest {
     }
 
     @Test
-    fun `every class has parameter names derived from parameter type`() {
+    fun `every constructor parameter has name derived from parameter type`() {
         mangoScope
             .classes()
             .filterNot { it.isData }
             .filterNot { it.isValue }
             .filterNot { it.isEnum }
-            .filterNot { it.name.endsWith("Controller") }
             .filterNot { it.hasAnnotation(Entity::class) }
             .mapNotNull { it.primaryConstructor }
             .flatMap { it.parameters }
             .check {
-                val nameWithTitleCase = it.name.replaceFirstChar { firstChar ->
-                    firstChar.titlecase(Locale.getDefault())
-                }
-
-                nameWithTitleCase == it.type
+                it.name.toTitleCase() == it.type
             }
     }
+
+    @Test
+    fun `every controller method has explicit return type`() {
+        mangoScope
+            .classes()
+            .filter { it.hasAnnotation(RestController::class) }
+            .flatMap { it.functions() }
+            .check { it.hasDeclaredReturnType }
+    }
 }
+
+private fun String.toTitleCase() = replaceFirstChar { it.titlecase(Locale.getDefault()) }

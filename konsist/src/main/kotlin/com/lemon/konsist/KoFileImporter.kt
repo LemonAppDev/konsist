@@ -37,7 +37,6 @@ object KoFileImporter {
         val koFiles = kotlinFiles
             .filter { it.packageName.startsWith(packageNameStart) }
             .toList()
-
         return KoScope(koFiles)
     }
 
