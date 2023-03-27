@@ -1,7 +1,7 @@
 package com.lemon.mango.domain.task.usecase
 
 import com.lemon.mango.domain.common.LocalDateTimeFactory
-import com.lemon.mango.domain.common.UUIDFactory
+import com.lemon.mango.domain.common.UuidFactory
 import com.lemon.mango.domain.project.model.ProjectId
 import com.lemon.mango.domain.task.TaskRepository
 import com.lemon.mango.domain.task.model.Task
@@ -17,7 +17,7 @@ class DuplicateTaskUseCase(
     private val saveTaskUseCase: SaveTaskUseCase,
     private val taskRepository: TaskRepository,
     private val userRepository: UserRepository,
-    private val uuidFactory: UUIDFactory,
+    private val uuidFactory: UuidFactory,
 ) {
     operator fun invoke(taskId: TaskId, projectId: ProjectId? = null, date: LocalDateTime? = null): Task {
         val oldTask = getTaskOrThrowUseCase(taskId)

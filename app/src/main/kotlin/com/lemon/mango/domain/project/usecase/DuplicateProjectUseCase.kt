@@ -3,7 +3,7 @@ package com.lemon.mango.domain.project.usecase
 import com.lemon.mango.domain.activity.model.ProjectActivityType
 import com.lemon.mango.domain.activity.usecase.AddProjectActivityUseCase
 import com.lemon.mango.domain.common.LocalDateTimeFactory
-import com.lemon.mango.domain.common.UUIDFactory
+import com.lemon.mango.domain.common.UuidFactory
 import com.lemon.mango.domain.project.ProjectRepository
 import com.lemon.mango.domain.project.model.Project
 import com.lemon.mango.domain.project.model.ProjectId
@@ -23,7 +23,7 @@ class DuplicateProjectUseCase(
     private val projectRepository: ProjectRepository,
     private val taskRepository: TaskRepository,
     private val userRepository: UserRepository,
-    private val uuidFactory: UUIDFactory,
+    private val uuidFactory: UuidFactory,
 ) {
     operator fun invoke(projectId: ProjectId, duplicatedProjectName: String? = null): Project {
         val oldProject = getProjectOrThrowUseCase(projectId)

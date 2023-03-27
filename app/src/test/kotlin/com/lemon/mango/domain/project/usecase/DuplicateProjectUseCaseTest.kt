@@ -3,7 +3,7 @@ package com.lemon.mango.domain.project.usecase
 import com.lemon.mango.domain.activity.model.ProjectActivityType.CREATE
 import com.lemon.mango.domain.activity.usecase.AddProjectActivityUseCase
 import com.lemon.mango.domain.common.LocalDateTimeFactory
-import com.lemon.mango.domain.common.UUIDFactory
+import com.lemon.mango.domain.common.UuidFactory
 import com.lemon.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.lemon.mango.domain.common.model.BusinessTestModel.getProjectId2
 import com.lemon.mango.domain.common.model.BusinessTestModel.getTaskId1
@@ -32,7 +32,7 @@ class DuplicateProjectUseCaseTest {
     private val projectRepository: ProjectRepository = mockk()
     private val taskRepository: TaskRepository = mockk()
     private val userRepository: UserRepository = mockk()
-    private val uuidFactory: UUIDFactory = mockk()
+    private val uuidFactory: UuidFactory = mockk()
 
     private val sut = DuplicateProjectUseCase(
         addProjectActivityUseCase,

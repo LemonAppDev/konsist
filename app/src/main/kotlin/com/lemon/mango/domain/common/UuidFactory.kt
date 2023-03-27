@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 import java.util.UUID
 
 @Service
-class UUIDFactory {
+class UuidFactory {
     fun createUserId() = UserId(UUID.randomUUID())
     fun createTaskId() = TaskId(UUID.randomUUID())
     fun createProjectId() = ProjectId(UUID.randomUUID())

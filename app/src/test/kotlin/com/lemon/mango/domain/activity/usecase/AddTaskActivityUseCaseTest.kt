@@ -4,7 +4,7 @@ import com.lemon.mango.domain.activity.ActivityRepository
 import com.lemon.mango.domain.activity.model.TaskActivity
 import com.lemon.mango.domain.activity.model.TaskActivityType
 import com.lemon.mango.domain.common.LocalDateTimeFactory
-import com.lemon.mango.domain.common.UUIDFactory
+import com.lemon.mango.domain.common.UuidFactory
 import com.lemon.mango.domain.common.model.BusinessTestModel.getTaskActivityId1
 import com.lemon.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.lemon.mango.domain.common.model.BusinessTestModel.getUserId1
@@ -19,7 +19,7 @@ class AddTaskActivityUseCaseTest {
     private val activityRepository: ActivityRepository = mockk()
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val userRepository: UserRepository = mockk()
-    private val uuidFactory: UUIDFactory = mockk()
+    private val uuidFactory: UuidFactory = mockk()
 
     private val sut = AddTaskActivityUseCase(
         activityRepository,

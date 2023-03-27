@@ -4,7 +4,7 @@ import com.lemon.mango.domain.activity.ActivityRepository
 import com.lemon.mango.domain.activity.model.TaskActivity
 import com.lemon.mango.domain.activity.model.TaskActivityType
 import com.lemon.mango.domain.common.LocalDateTimeFactory
-import com.lemon.mango.domain.common.UUIDFactory
+import com.lemon.mango.domain.common.UuidFactory
 import com.lemon.mango.domain.task.model.TaskId
 import com.lemon.mango.domain.user.UserRepository
 import org.springframework.stereotype.Service
@@ -15,7 +15,7 @@ class AddTaskActivityUseCase(
     private val activityRepository: ActivityRepository,
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val userRepository: UserRepository,
-    private val uuidFactory: UUIDFactory,
+    private val uuidFactory: UuidFactory,
 ) {
     operator fun invoke(
         taskId: TaskId,

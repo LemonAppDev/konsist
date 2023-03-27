@@ -1,7 +1,7 @@
 package com.lemon.mango.domain.task
 
 import com.lemon.mango.domain.common.LocalDateTimeFactory
-import com.lemon.mango.domain.common.UUIDFactory
+import com.lemon.mango.domain.common.UuidFactory
 import com.lemon.mango.domain.project.model.ProjectId
 import com.lemon.mango.domain.task.model.Priority
 import com.lemon.mango.domain.task.model.Task
@@ -16,7 +16,7 @@ import java.time.LocalDateTime
 class TaskFactory(
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val userRepository: UserRepository,
-    private val uuidFactory: UUIDFactory,
+    private val uuidFactory: UuidFactory,
 ) {
     operator fun invoke(
         name: String,

@@ -1,7 +1,7 @@
 package com.lemon.mango.domain.project
 
 import com.lemon.mango.domain.common.LocalDateTimeFactory
-import com.lemon.mango.domain.common.UUIDFactory
+import com.lemon.mango.domain.common.UuidFactory
 import com.lemon.mango.domain.common.model.BusinessTestModel.getCurrentDate
 import com.lemon.mango.domain.common.model.BusinessTestModel.getProjectId1
 import com.lemon.mango.domain.common.model.BusinessTestModel.getUserId1
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test
 class ProjectFactoryTest {
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val userRepository: UserRepository = mockk()
-    private val uuidFactory: UUIDFactory = mockk()
+    private val uuidFactory: UuidFactory = mockk()
 
     private val sut = ProjectFactory(
         localDateTimeFactory,

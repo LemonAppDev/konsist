@@ -2,7 +2,7 @@ package com.lemon.mango.domain.comment
 
 import com.lemon.mango.domain.comment.model.Comment
 import com.lemon.mango.domain.common.LocalDateTimeFactory
-import com.lemon.mango.domain.common.UUIDFactory
+import com.lemon.mango.domain.common.UuidFactory
 import com.lemon.mango.domain.common.model.BusinessTestModel.getCommentId1
 import com.lemon.mango.domain.common.model.BusinessTestModel.getTaskId1
 import com.lemon.mango.domain.common.model.BusinessTestModel.getUserId1
@@ -16,7 +16,7 @@ import java.time.LocalDateTime
 class CommentFactoryTest {
     private val localDateTimeFactory: LocalDateTimeFactory = mockk()
     private val userRepository: UserRepository = mockk()
-    private val uuidFactory: UUIDFactory = mockk()
+    private val uuidFactory: UuidFactory = mockk()
 
     private val sut = CommentFactory(
         localDateTimeFactory,

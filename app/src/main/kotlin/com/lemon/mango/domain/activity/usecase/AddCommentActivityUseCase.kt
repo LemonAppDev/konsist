@@ -5,7 +5,7 @@ import com.lemon.mango.domain.activity.model.CommentActivity
 import com.lemon.mango.domain.activity.model.CommentActivityType
 import com.lemon.mango.domain.comment.model.Comment
 import com.lemon.mango.domain.common.LocalDateTimeFactory
-import com.lemon.mango.domain.common.UUIDFactory
+import com.lemon.mango.domain.common.UuidFactory
 import com.lemon.mango.domain.user.UserRepository
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
@@ -15,7 +15,7 @@ class AddCommentActivityUseCase(
     private val activityRepository: ActivityRepository,
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val userRepository: UserRepository,
-    private val uuidFactory: UUIDFactory,
+    private val uuidFactory: UuidFactory,
 ) {
     operator fun invoke(
         comment: Comment,

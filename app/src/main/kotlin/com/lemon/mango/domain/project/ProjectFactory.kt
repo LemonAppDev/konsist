@@ -1,7 +1,7 @@
 package com.lemon.mango.domain.project
 
 import com.lemon.mango.domain.common.LocalDateTimeFactory
-import com.lemon.mango.domain.common.UUIDFactory
+import com.lemon.mango.domain.common.UuidFactory
 import com.lemon.mango.domain.common.model.Color
 import com.lemon.mango.domain.project.model.Project
 import com.lemon.mango.domain.user.UserRepository
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 class ProjectFactory(
     private val localDateTimeFactory: LocalDateTimeFactory,
     private val userRepository: UserRepository,
-    private val uuidFactory: UUIDFactory,
+    private val uuidFactory: UuidFactory,
 
 ) {
     operator fun invoke(
