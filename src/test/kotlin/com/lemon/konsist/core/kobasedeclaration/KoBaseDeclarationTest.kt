@@ -35,6 +35,26 @@ class KoBaseDeclarationTest {
     }
 
     @Test
+    fun `location`() {
+        // given
+        val sut = getSut("location")
+
+        // then
+        val actual = sut.functions().first()
+        actual.location shouldBeEqualTo "${actual.filePath}:3:1"
+    }
+
+    @Test
+    fun `text`() {
+        // given
+        val sut = getSut("text")
+
+        // then
+        val actual = sut.functions().first()
+        actual.text shouldBeEqualTo "fun sampleFunction()"
+    }
+
+    @Test
     fun `to-string`() {
         // given
         val sut = getSut("to-string")

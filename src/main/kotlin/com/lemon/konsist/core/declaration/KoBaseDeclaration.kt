@@ -11,4 +11,24 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
     val containingFile by lazy { KoFile(ktElement.containingKtFile) }
 
     override fun toString() = textWithLocation
+
+    val location by lazy {
+        val lineAndColumn =
+            textWithLocation
+                .substringAfter("at")
+                .substringBefore("in")
+                .toMutableList()
+
+        lineAndColumn.removeIf { !it.isDigit() }
+
+        val line = lineAndColumn[0]
+        val column = lineAndColumn[1]
+        "$filePath:$line:$column"
+    }
+
+    val text by lazy {
+        textWithLocation
+            .substringBefore(" {\n}")
+            .substringAfter("'")
+    }
 }
