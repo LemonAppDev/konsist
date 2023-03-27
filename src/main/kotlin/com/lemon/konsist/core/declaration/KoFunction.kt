@@ -9,6 +9,8 @@ class KoFunction(private val ktFunction: KtFunction) : KoDeclaration(ktFunction)
 
     val isInline by lazy { ktFunction.modifierList?.hasModifier(KtTokens.INLINE_KEYWORD) ?: false }
 
+    val hasDeclaredReturnType by lazy { ktFunction.hasDeclaredReturnType() }
+
     fun getLocalFunctions(includeNested: Boolean = false): List<KoFunction> {
         val koFunctions = (
             ktFunction

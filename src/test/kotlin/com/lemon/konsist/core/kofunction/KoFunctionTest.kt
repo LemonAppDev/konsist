@@ -2,6 +2,7 @@ package com.lemon.konsist.core.kofunction
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBe
+import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoFunctionTest {
@@ -39,6 +40,78 @@ class KoFunctionTest {
 
         // then
         sut.functions().first().isInline shouldBe false
+    }
+
+    @Test
+    fun `function-with-return-type`() {
+        // given
+        val sut = getSut("function-with-return-type")
+
+        // then
+        sut.functions().first().hasDeclaredReturnType shouldBe true
+    }
+
+    @Test
+    fun `function-without-return-type`() {
+        // given
+        val sut = getSut("function-without-return-type")
+
+        // then
+        sut.functions().first().hasDeclaredReturnType shouldBe false
+    }
+
+    @Test
+    fun `function-without-local-functions`() {
+        // given
+        val sut = getSut("function-without-local-functions")
+
+        // then
+        sut.functions().first().getLocalFunctions() shouldBeEqualTo listOf()
+    }
+
+    @Test
+    fun `function-with-one-local-function`() {
+        // given
+        val sut = getSut("function-with-one-local-function")
+
+        // then
+        val actual = sut
+            .functions()
+            .first()
+            .getLocalFunctions()
+            .map { it.name }
+
+        actual shouldBeEqualTo listOf("LocalSampleFunction")
+    }
+
+    @Test
+    fun `function-with-two-local-functions`() {
+        // given
+        val sut = getSut("function-with-two-local-functions")
+
+        // then
+        val actual = sut
+            .functions()
+            .first()
+            .getLocalFunctions()
+            .map { it.name }
+
+        actual shouldBeEqualTo listOf("LocalSampleFunction1", "LocalSampleFunction2")
+    }
+
+    @Test
+    fun `function-with-nested-local-functions`() {
+        // given
+        val sut = getSut("function-with-nested-local-functions")
+
+        // then
+        val actual = sut
+            .functions()
+            .first()
+            .getLocalFunctions(includeNested = true)
+            .map { it.name }
+
+        actual shouldBeEqualTo listOf("LocalSampleFunction1", "LocalSampleFunction2")
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofunction/snippet/$fileName.kt.txt")

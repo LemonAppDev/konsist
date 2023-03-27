@@ -70,6 +70,12 @@ open class KoComplexDeclaration(private val ktClassOrObject: KtClassOrObject) : 
         declarations
     }
 
+    fun functions(includeNested: Boolean = false) = if (includeNested) {
+        nestedDeclarations.filterIsInstance<KoFunction>()
+    } else {
+        functions
+    }
+
     fun hasFunction(name: String, vararg modifiers: Modifier): Boolean {
         functions.firstOrNull { it.name == name }?.let {
             return it.hasModifiers(*modifiers)
