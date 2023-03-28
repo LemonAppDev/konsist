@@ -2,6 +2,9 @@ package com.lemon.konsist.core.declaration
 
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtFunction
+import org.jetbrains.kotlin.psi.KtParameter
+import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 class KoFunction(private val ktFunction: KtFunction) : KoDeclaration(ktFunction) {
 
@@ -9,7 +12,23 @@ class KoFunction(private val ktFunction: KtFunction) : KoDeclaration(ktFunction)
 
     val isInline by lazy { ktFunction.modifierList?.hasModifier(KtTokens.INLINE_KEYWORD) ?: false }
 
-    val hasDeclaredReturnType by lazy { ktFunction.hasDeclaredReturnType() }
+    val getParameters by lazy {
+        ktFunction
+            .children
+            .first()
+            .children
+            .filterIsInstance<KtParameter>()
+            .map { KoParameter(it) }
+    }
+
+    val hasExplicitReturnType by lazy { ktFunction.hasDeclaredReturnType() }
+
+    val getExplicitReturnType by lazy {
+        ktFunction
+            .children
+            .firstIsInstanceOrNull<KtTypeReference>()
+            ?.text
+    }
 
     fun getLocalFunctions(includeNested: Boolean = false): List<KoFunction> {
         val koFunctions = (

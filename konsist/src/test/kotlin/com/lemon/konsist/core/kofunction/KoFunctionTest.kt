@@ -1,7 +1,6 @@
 package com.lemon.konsist.core.kofunction
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
-import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -12,7 +11,7 @@ class KoFunctionTest {
         val sut = getSut("function-with-operator-modifier")
 
         // then
-        sut.functions().first().isOperator shouldBe true
+        sut.functions().first().isOperator shouldBeEqualTo true
     }
 
     @Test
@@ -21,7 +20,7 @@ class KoFunctionTest {
         val sut = getSut("function-without-operator-modifier")
 
         // then
-        sut.functions().first().isOperator shouldBe false
+        sut.functions().first().isOperator shouldBeEqualTo false
     }
 
     @Test
@@ -30,7 +29,7 @@ class KoFunctionTest {
         val sut = getSut("function-with-inline-modifier")
 
         // then
-        sut.functions().first().isInline shouldBe true
+        sut.functions().first().isInline shouldBeEqualTo true
     }
 
     @Test
@@ -39,7 +38,7 @@ class KoFunctionTest {
         val sut = getSut("function-without-inline-modifier")
 
         // then
-        sut.functions().first().isInline shouldBe false
+        sut.functions().first().isInline shouldBeEqualTo false
     }
 
     @Test
@@ -78,7 +77,7 @@ class KoFunctionTest {
         sut.functions()
             .first()
             .getLocalFunctions()
-            .isEmpty() shouldBe true
+            .isEmpty() shouldBeEqualTo true
     }
 
     @Test
@@ -87,7 +86,8 @@ class KoFunctionTest {
         val sut = getSut("function-with-return-type")
 
         // then
-        sut.functions().first().hasDeclaredReturnType shouldBe true
+        sut.functions().first().hasExplicitReturnType shouldBeEqualTo true
+        sut.functions().first().getExplicitReturnType shouldBeEqualTo "SampleType"
     }
 
     @Test
@@ -96,7 +96,26 @@ class KoFunctionTest {
         val sut = getSut("function-without-return-type")
 
         // then
-        sut.functions().first().hasDeclaredReturnType shouldBe false
+        sut.functions().first().hasExplicitReturnType shouldBeEqualTo false
+    }
+
+    @Test
+    fun `function-with-two-parameters-and-return-type`() {
+        // given
+        val sut = getSut("function-with-two-parameters-and-return-type")
+
+        // then
+        sut.functions().first().getParameters.size shouldBeEqualTo 2
+        sut.functions().first().getExplicitReturnType shouldBeEqualTo "Boolean"
+    }
+
+    @Test
+    fun `function-with-parameter`() {
+        // given
+        val sut = getSut("function-with-parameter")
+
+        // then
+        sut.functions().first().getParameters.size shouldBeEqualTo 1
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofunction/snippet/$fileName.kt.txt")

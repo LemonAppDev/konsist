@@ -76,7 +76,7 @@ class GeneralCodingKonsistTest {
             .classes()
             .filter { it.hasAnnotation(RestController::class) }
             .flatMap { it.functions() }
-            .check { it.hasDeclaredReturnType }
+            .check { it.hasExplicitReturnType }
     }
 }
 
