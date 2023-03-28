@@ -2,6 +2,7 @@ package com.lemon.konsist.core.koparameter
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemon.konsist.core.assertion.check.check
+import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoParameterTest {
@@ -62,11 +63,45 @@ class KoParameterTest {
         val sut = getSut("class-with-empty-primary-constructor")
 
         // then
-        sut.classes()
-            .mapNotNull { it.primaryConstructor }
-            .check {
-                it.parameters.isEmpty()
-            }
+        sut.classes().mapNotNull { it.primaryConstructor }.check {
+            it.parameters.isEmpty()
+        }
+    }
+
+    @Test
+    fun `function-with-primitive-default-parameter-value`() {
+        // given
+        val sut = getSut("function-with-primitive-default-parameter-value")
+
+        // then
+        sut.functions().first().getParameters.first().defaultValue shouldBeEqualTo "2"
+    }
+
+    @Test
+    fun `function-with-complex-default-parameter-value`() {
+        // given
+        val sut = getSut("function-with-complex-default-parameter-value")
+
+        // then
+        sut.functions().first().getParameters.first().defaultValue shouldBeEqualTo "SampleFunction2()"
+    }
+
+    @Test
+    fun `function-with-null-default-parameter-value`() {
+        // given
+        val sut = getSut("function-with-null-default-parameter-value")
+
+        // then
+        sut.functions().first().getParameters.first().defaultValue shouldBeEqualTo "null"
+    }
+
+    @Test
+    fun `function-without-default-parameter-value`() {
+        // given
+        val sut = getSut("function-without-default-parameter-value")
+
+        // then
+        sut.functions().first().getParameters.first().defaultValue shouldBeEqualTo null
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/koparameter/snippet/$fileName.kt.txt")

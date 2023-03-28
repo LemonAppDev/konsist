@@ -1,0 +1,2 @@
+fun SampleFunction(sampleParameter: Int = 2) {
+}
