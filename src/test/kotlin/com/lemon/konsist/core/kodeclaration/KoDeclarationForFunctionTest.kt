@@ -5,7 +5,9 @@ import SampleAnnotation
 import SampleAnnotation1
 import SampleAnnotation2
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemon.konsist.core.const.Modifier
 import org.amshove.kluent.shouldBe
+import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
@@ -132,6 +134,86 @@ class KoDeclarationForFunctionTest {
             isProtected shouldBe false
             isInternal shouldBe true
         }
+    }
+
+    @Test
+    fun `function-with-fully-qualified-name`() {
+        // given
+        val sut = getSut("function-with-fully-qualified-name")
+
+        // then
+        sut.functions()
+            .first()
+            .fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleFunction"
+    }
+
+    @Test
+    fun `function-with-package`() {
+        // given
+        val sut = getSut("function-with-package")
+
+        // then
+        sut.functions()
+            .first()
+            .packageDirective shouldBeEqualTo "com.samplepackage"
+    }
+
+    @Test
+    fun `function-without-package`() {
+        // given
+        val sut = getSut("function-without-package")
+
+        // then
+        sut.functions()
+            .first()
+            .packageDirective shouldBeEqualTo ""
+    }
+
+    @Test
+    fun `function-with-protected-modifier`() {
+        // given
+        val sut = getSut("function-with-protected-modifier")
+
+        // then
+        sut.functions()
+            .first()
+            .hasModifiers() shouldBe true
+    }
+
+    @Test
+    fun `function-with-public-modifier`() {
+        // given
+        val sut = getSut("function-with-public-modifier")
+
+        // then
+        sut.functions()
+            .first()
+            .apply {
+                hasModifiers(Modifier.PUBLIC) shouldBe true
+                hasModifiers(Modifier.PRIVATE) shouldBe false
+            }
+    }
+
+    @Test
+    fun `function-reside-in-package`() {
+        // given
+        val sut = getSut("function-reside-in-package")
+
+        // then
+        sut.functions()
+            .first()
+            .resideInAPackages("samplepackage") shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-not-reside-in-package`() {
+        // given
+        val sut = getSut("function-not-reside-in-package")
+
+        // then
+        sut.functions()
+            .first()
+            .resideInAPackages("otherpackage") shouldBe false
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kodeclaration/snippet/forfunction/$fileName.kt.txt")

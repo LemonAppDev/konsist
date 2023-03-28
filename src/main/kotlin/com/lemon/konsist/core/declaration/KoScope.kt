@@ -18,4 +18,8 @@ class KoScope(
     fun declarations(includeNested: Boolean = false) = koFiles.flatMap { it.declarations(includeNested) }
 
     fun properties(includeNested: Boolean = false) = koFiles.flatMap { it.properties(includeNested) }
+
+    fun imports() = koFiles.flatMap { it.imports }
+
+    fun packages() = koFiles.map { it.packageDirective }
 }

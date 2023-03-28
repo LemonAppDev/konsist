@@ -1,0 +1,8 @@
+interface SampleInterface1 {
+    interface NestedSampleInterface {
+
+    }
+}
+
+interface SampleInterface2 {
+}

@@ -41,23 +41,5 @@ class KoFileForInterfaceTest {
         sut.interfaces(includeNested = false).map { it.name } shouldBeEqualTo listOf("SampleInterface")
     }
 
-    @Test
-    fun `file-with-two-interfaces includeNested true`() {
-        // given
-        val sut = getSut("file-with-two-interfaces")
-
-        // then
-        sut.interfaces(includeNested = true).map { it.name } shouldBeEqualTo listOf("SampleInterface1", "SampleInterface2")
-    }
-
-    @Test
-    fun `file-with-two-interfaces includeNested false`() {
-        // given
-        val sut = getSut("file-with-two-interfaces")
-
-        // then
-        sut.interfaces(includeNested = false).map { it.name } shouldBeEqualTo listOf("SampleInterface1", "SampleInterface2")
-    }
-
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofile/snippet/forinterface/$fileName.kt.txt")
 }

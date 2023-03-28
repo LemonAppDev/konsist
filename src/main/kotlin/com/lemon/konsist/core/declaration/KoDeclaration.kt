@@ -13,12 +13,16 @@ import kotlin.reflect.KClass
 
 open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterListOwner) : KoNamedDeclaration(ktTypeParameterListOwner) {
 
-    val fullyQualifiedName by lazy { ktTypeParameterListOwner.fqName.toString() }
+    val fullyQualifiedName by lazy {
+        if (ktTypeParameterListOwner.fqName != null) {
+            ktTypeParameterListOwner.fqName.toString()
+        } else {
+            ""
+        }
+    }
 
-    val packageName by lazy {
-        ktTypeParameterListOwner
-            .fqName
-            .toString()
+    val packageDirective by lazy {
+        fullyQualifiedName
             .split(".")
             .toMutableList()
             .apply { removeLast() }
@@ -54,8 +58,6 @@ open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterLi
             ?: false
     }
 
-    fun getFullyQualifiedClassName(annotationTypes: List<String>) = annotationTypes.map { getFullyQualifiedClassName(it) }
-
     private fun getFullyQualifiedClassName(className: String) =
         (ktTypeParameterListOwner.containingFile as KtFile)
             .importDirectives
@@ -67,7 +69,7 @@ open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterLi
     fun resideInAPackages(vararg packages: String) = packages.toList().any { resideInAPackages(it) }
 
     private fun resideInAPackages(packages: String): Boolean {
-        val declarationPackages = this.packageName
+        val declarationPackages = this.packageDirective
             .split(".")
             .filter { it.isNotBlank() }
 

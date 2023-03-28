@@ -3,7 +3,7 @@ package com.lemon.konsist.core.koclass
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBe
+import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
 class KoClassTest {
@@ -85,19 +85,58 @@ class KoClassTest {
         val sut = getSut("class-with-primary-constructor")
 
         // then
-        sut.classes().first().primaryConstructor shouldNotBe null
+        sut.classes().first().apply {
+            primaryConstructor?.name shouldBeEqualTo "SampleClass"
+            hasExplicitPrimaryConstructor shouldBe true
+        }
     }
 
     @Test
-    fun `class-with-primary-and-secondary-constructors`() {
+    fun `class-without-primary-constructor`() {
         // given
-        val sut = getSut("class-with-primary-and-secondary-constructors")
+        val sut = getSut("class-without-primary-constructor")
 
         // then
         sut.classes().first().apply {
-            primaryConstructor shouldNotBe null
-            secondaryConstructors.size shouldBeEqualTo 1
-            allConstructors.size shouldBeEqualTo 2
+            primaryConstructor?.name shouldBeEqualTo null
+            hasExplicitPrimaryConstructor shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-with-secondary-constructor`() {
+        // given
+        val sut = getSut("class-with-secondary-constructor")
+
+        // then
+        sut.classes().first().apply {
+            secondaryConstructors.first().name shouldBeEqualTo "SampleClass"
+            hasSecondaryConstructors shouldBe true
+        }
+    }
+
+    @Test
+    fun `class-without-secondary-constructor`() {
+        // given
+        val sut = getSut("class-without-secondary-constructor")
+
+        // then
+        sut.classes().first().apply {
+            secondaryConstructors.isEmpty()
+            hasSecondaryConstructors shouldBe false
+        }
+    }
+
+    @Test
+    fun `class-with-primary-and-secondary-constructor`() {
+        // given
+        val sut = getSut("class-with-primary-and-secondary-constructor")
+
+        // then
+        sut.classes().first().apply {
+            primaryConstructor?.name shouldBeEqualTo "SampleClass"
+            secondaryConstructors shouldHaveSize 1
+            allConstructors shouldHaveSize 2
         }
     }
 

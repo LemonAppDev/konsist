@@ -5,7 +5,9 @@ import SampleAnnotation
 import SampleAnnotation1
 import SampleAnnotation2
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemon.konsist.core.const.Modifier
 import org.amshove.kluent.shouldBe
+import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
@@ -132,6 +134,86 @@ class KoDeclarationForPropertyTest {
             isProtected shouldBe false
             isInternal shouldBe true
         }
+    }
+
+    @Test
+    fun `property-with-fully-qualified-name`() {
+        // given
+        val sut = getSut("property-with-fully-qualified-name")
+
+        // then
+        sut.properties()
+            .first()
+            .fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleProperty"
+    }
+
+    @Test
+    fun `property-with-package`() {
+        // given
+        val sut = getSut("property-with-package")
+
+        // then
+        sut.properties()
+            .first()
+            .packageDirective shouldBeEqualTo "com.samplepackage"
+    }
+
+    @Test
+    fun `property-without-package`() {
+        // given
+        val sut = getSut("property-without-package")
+
+        // then
+        sut.properties()
+            .first()
+            .packageDirective shouldBeEqualTo ""
+    }
+
+    @Test
+    fun `property-with-protected-modifier`() {
+        // given
+        val sut = getSut("property-with-protected-modifier")
+
+        // then
+        sut.properties()
+            .first()
+            .hasModifiers() shouldBe true
+    }
+
+    @Test
+    fun `property-with-public-modifier`() {
+        // given
+        val sut = getSut("property-with-public-modifier")
+
+        // then
+        sut.properties()
+            .first()
+            .apply {
+                hasModifiers(Modifier.PUBLIC) shouldBe true
+                hasModifiers(Modifier.PRIVATE) shouldBe false
+            }
+    }
+
+    @Test
+    fun `property-reside-in-package`() {
+        // given
+        val sut = getSut("property-reside-in-package")
+
+        // then
+        sut.properties()
+            .first()
+            .resideInAPackages("samplepackage") shouldBe true
+    }
+
+    @Test
+    fun `property-not-reside-in-package`() {
+        // given
+        val sut = getSut("property-not-reside-in-package")
+
+        // then
+        sut.properties()
+            .first()
+            .resideInAPackages("otherpackage") shouldBe false
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kodeclaration/snippet/forproperty/$fileName.kt.txt")

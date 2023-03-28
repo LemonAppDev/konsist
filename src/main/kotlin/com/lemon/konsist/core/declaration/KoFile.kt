@@ -6,9 +6,28 @@ import com.lemon.konsist.ext.getKoInterfaces
 import com.lemon.konsist.ext.getKoObjects
 import com.lemon.konsist.ext.getKoProperties
 import org.jetbrains.kotlin.psi.KtFile
+import org.jetbrains.kotlin.psi.KtImportDirective
+import org.jetbrains.kotlin.psi.KtImportList
 
 class KoFile(private val ktFile: KtFile) : KoNamedDeclaration(ktFile) {
-    val packageName by lazy { ktFile.packageFqName.asString() }
+    val imports by lazy {
+        val ktImportDirectives = ktFile
+            .children
+            .filterIsInstance<KtImportList>()
+            .first()
+            .children
+            .filterIsInstance<KtImportDirective>()
+
+        ktImportDirectives.map { KoImport(it) }
+    }
+
+    val packageDirective by lazy {
+        if (ktFile.packageDirective?.qualifiedName == "") {
+            null
+        } else {
+            ktFile.packageDirective?.let { KoPackage(it) }
+        }
+    }
 
     private val classes by lazy {
         ktFile.getKoClasses()
@@ -37,10 +56,18 @@ class KoFile(private val ktFile: KtFile) : KoNamedDeclaration(ktFile) {
     private val nestedDeclarations by lazy {
         declarations
             .flatMap {
-                if (it is KoComplexDeclaration) {
-                    it.declarations(true)
-                } else {
-                    listOf(it)
+                when (it) {
+                    is KoComplexDeclaration -> {
+                        it.declarations(true)
+                    }
+
+                    is KoFunction -> {
+                        listOf(it) + it.getLocalFunctions(true)
+                    }
+
+                    else -> {
+                        listOf(it)
+                    }
                 }
             }
     }

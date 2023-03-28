@@ -1,0 +1,8 @@
+fun SampleFunction1() {
+    fun NestedSampleFunction() {
+
+    }
+}
+
+fun SampleFunction2() {
+}

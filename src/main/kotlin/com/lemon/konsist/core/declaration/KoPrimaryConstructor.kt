@@ -13,6 +13,8 @@ class KoPrimaryConstructor(
     private val ktParameters: List<KtParameter>,
     private val ktModifierList: KtModifierList?,
 ) : KoBaseDeclaration(ktPrimaryConstructor) {
+    val name by lazy { ktPrimaryConstructor.name }
+
     val isPublic by lazy { ktModifierList.isPublic() }
 
     val isPrivate by lazy { ktModifierList.isPrivate() }

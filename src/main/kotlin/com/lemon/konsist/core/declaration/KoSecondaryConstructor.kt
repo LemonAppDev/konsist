@@ -16,4 +16,6 @@ class KoSecondaryConstructor(
     val isProtected by lazy { ktSecondaryConstructor.modifierList.isProtected() }
 
     val isInternal by lazy { ktSecondaryConstructor.modifierList.isInternal() }
+
+    val name by lazy { ktSecondaryConstructor.name }
 }
