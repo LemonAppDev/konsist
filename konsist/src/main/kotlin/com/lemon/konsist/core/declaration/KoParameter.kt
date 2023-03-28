@@ -1,16 +1,39 @@
 package com.lemon.konsist.core.declaration
 
+import org.jetbrains.kotlin.psi.KtCallExpression
+import org.jetbrains.kotlin.psi.KtConstantExpression
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
+import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 class KoParameter(private val ktParameter: KtParameter) : KoDeclaration(ktParameter) {
     val type by lazy {
         ktParameter
             .children
-            .filterIsInstance<KtTypeReference>()
-            .first()
-            .nameForReceiverLabel()
+            .firstIsInstance<KtTypeReference>()
+            .text
     }
 
     val hasDefaultValue by lazy { ktParameter.hasDefaultValue() }
+
+    val defaultValue by lazy {
+        // eg. primitive value as default parameter value
+        val constantExpressionText = ktParameter
+            .children
+            .firstIsInstanceOrNull<KtConstantExpression>()
+            ?.text
+
+        if (constantExpressionText != null) {
+            return@lazy constantExpressionText
+        }
+
+        // eg. function call as default parameter value
+        val callExpressionText = ktParameter
+            .children
+            .firstIsInstanceOrNull<KtCallExpression>()
+            ?.text
+
+        callExpressionText
+    }
 }
