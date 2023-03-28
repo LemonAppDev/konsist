@@ -1,0 +1,4 @@
+class SampleFunction() {
+    public constructor(name: String) {
+    }
+}

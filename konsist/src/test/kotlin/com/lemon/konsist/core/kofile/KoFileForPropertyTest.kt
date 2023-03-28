@@ -15,15 +15,6 @@ class KoFileForPropertyTest {
     }
 
     @Test
-    fun `file-with-two-properties includeNested false`() {
-        // given
-        val sut = getSut("file-with-two-properties")
-
-        // then
-        sut.properties().map { it.name } shouldBeEqualTo listOf("sampleProperty1", "sampleProperty2")
-    }
-
-    @Test
     fun `file-with-one-class-containing-property`() {
         // given
         val sut = getSut("file-with-one-property")

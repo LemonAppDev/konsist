@@ -1,0 +1,2 @@
+class SampleClass private constructor () {
+}

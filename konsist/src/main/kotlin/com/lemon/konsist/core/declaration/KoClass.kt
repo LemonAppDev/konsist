@@ -28,7 +28,7 @@ class KoClass(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
         )
     }
 
-    val hasPrimaryConstructor = ktClass.hasPrimaryConstructor()
+    val hasExplicitPrimaryConstructor = ktClass.hasExplicitPrimaryConstructor()
 
     val secondaryConstructors by lazy {
         ktClass

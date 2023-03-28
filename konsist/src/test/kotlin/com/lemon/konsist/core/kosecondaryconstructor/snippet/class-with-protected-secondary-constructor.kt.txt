@@ -1,0 +1,4 @@
+class SampleFunction() {
+    protected constructor(name: String) {
+    }
+}

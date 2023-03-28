@@ -43,60 +43,15 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-return-type`() {
+    fun `function-with-local-function`() {
         // given
-        val sut = getSut("function-with-return-type")
+        val sut = getSut("function-with-local-function")
 
         // then
-        sut.functions().first().hasDeclaredReturnType shouldBe true
-    }
-
-    @Test
-    fun `function-without-return-type`() {
-        // given
-        val sut = getSut("function-without-return-type")
-
-        // then
-        sut.functions().first().hasDeclaredReturnType shouldBe false
-    }
-
-    @Test
-    fun `function-without-local-functions`() {
-        // given
-        val sut = getSut("function-without-local-functions")
-
-        // then
-        sut.functions().first().getLocalFunctions() shouldBeEqualTo listOf()
-    }
-
-    @Test
-    fun `function-with-one-local-function`() {
-        // given
-        val sut = getSut("function-with-one-local-function")
-
-        // then
-        val actual = sut
-            .functions()
+        sut.functions()
             .first()
             .getLocalFunctions()
-            .map { it.name }
-
-        actual shouldBeEqualTo listOf("LocalSampleFunction")
-    }
-
-    @Test
-    fun `function-with-two-local-functions`() {
-        // given
-        val sut = getSut("function-with-two-local-functions")
-
-        // then
-        val actual = sut
-            .functions()
-            .first()
-            .getLocalFunctions()
-            .map { it.name }
-
-        actual shouldBeEqualTo listOf("LocalSampleFunction1", "LocalSampleFunction2")
+            .map { it.name } shouldBeEqualTo listOf("localFunction")
     }
 
     @Test
@@ -112,6 +67,36 @@ class KoFunctionTest {
             .map { it.name }
 
         actual shouldBeEqualTo listOf("LocalSampleFunction1", "LocalSampleFunction2")
+    }
+
+    @Test
+    fun `function-without-local-functions`() {
+        // given
+        val sut = getSut("function-without-local-functions")
+
+        // then
+        sut.functions()
+            .first()
+            .getLocalFunctions()
+            .isEmpty() shouldBe true
+    }
+
+    @Test
+    fun `function-with-return-type`() {
+        // given
+        val sut = getSut("function-with-return-type")
+
+        // then
+        sut.functions().first().hasDeclaredReturnType shouldBe true
+    }
+
+    @Test
+    fun `function-without-return-type`() {
+        // given
+        val sut = getSut("function-without-return-type")
+
+        // then
+        sut.functions().first().hasDeclaredReturnType shouldBe false
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofunction/snippet/$fileName.kt.txt")

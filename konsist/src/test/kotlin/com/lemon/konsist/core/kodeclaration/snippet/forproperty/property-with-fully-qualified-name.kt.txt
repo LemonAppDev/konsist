@@ -1,0 +1,4 @@
+package com.samplepackage
+
+val sampleProperty: Boolean = true
+class-with-fully-qualified-name

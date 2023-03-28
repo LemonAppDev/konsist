@@ -1,0 +1,4 @@
+class SampleFunction() {
+    internal constructor(name: String) {
+    }
+}

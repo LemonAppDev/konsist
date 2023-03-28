@@ -1,0 +1,3 @@
+class SampleClass(val name: String) {
+    constructor()
+}

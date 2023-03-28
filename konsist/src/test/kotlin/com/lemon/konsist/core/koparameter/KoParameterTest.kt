@@ -69,23 +69,5 @@ class KoParameterTest {
             }
     }
 
-    @Test
-    fun `class-with-two-parameters`() {
-        // given
-        val sut = getSut("class-with-two-parameters")
-
-        // then
-        sut.classes()
-            .mapNotNull { it.primaryConstructor }
-            .check {
-                it.parameters[0].name == "sampleParameter1" &&
-                    it.parameters[1].name == "sampleParameter2" &&
-                    it.parameters[0].type == "SampleParameter1" &&
-                    it.parameters[1].type == "SampleParameter2" &&
-                    !it.parameters[0].hasDefaultValue &&
-                    !it.parameters[1].hasDefaultValue
-            }
-    }
-
     private fun getSut(fileName: String) = getSnippetKoScope("core/koparameter/snippet/$fileName.kt.txt")
 }

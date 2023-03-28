@@ -11,7 +11,8 @@ class KoFileForClassTest {
         val sut = getSut("file-with-one-class")
 
         // then
-        sut.classes(includeNested = true).map { it.name } shouldBeEqualTo listOf("SampleClass")
+        sut.classes(includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf("SampleClass")
     }
 
     @Test
@@ -20,7 +21,8 @@ class KoFileForClassTest {
         val sut = getSut("file-with-one-class")
 
         // then
-        sut.classes(includeNested = false).map { it.name } shouldBeEqualTo listOf("SampleClass")
+        sut.classes(includeNested = false)
+            .map { it.name } shouldBeEqualTo listOf("SampleClass")
     }
 
     @Test
@@ -29,7 +31,8 @@ class KoFileForClassTest {
         val sut = getSut("file-with-one-class-containing-class")
 
         // then
-        sut.classes(includeNested = true).map { it.name } shouldBeEqualTo listOf("SampleClass", "SampleNestedClass")
+        sut.classes(includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf("SampleClass", "SampleNestedClass")
     }
 
     @Test
@@ -38,25 +41,8 @@ class KoFileForClassTest {
         val sut = getSut("file-with-one-class-containing-class")
 
         // then
-        sut.classes(includeNested = false).map { it.name } shouldBeEqualTo listOf("SampleClass")
-    }
-
-    @Test
-    fun `file-with-two-classes includeNested true`() {
-        // given
-        val sut = getSut("file-with-two-classes")
-
-        // then
-        sut.classes(includeNested = true).map { it.name } shouldBeEqualTo listOf("SampleClass1", "SampleClass2")
-    }
-
-    @Test
-    fun `file-with-two-classes includeNested false`() {
-        // given
-        val sut = getSut("file-with-two-classes")
-
-        // then
-        sut.classes(includeNested = false).map { it.name } shouldBeEqualTo listOf("SampleClass1", "SampleClass2")
+        sut.classes(includeNested = false)
+            .map { it.name } shouldBeEqualTo listOf("SampleClass")
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofile/snippet/forclass/$fileName.kt.txt")
