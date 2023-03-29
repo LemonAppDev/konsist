@@ -42,18 +42,6 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-local-function`() {
-        // given
-        val sut = getSut("function-with-local-function")
-
-        // then
-        sut.functions()
-            .first()
-            .getLocalFunctions()
-            .map { it.name } shouldBeEqualTo listOf("localFunction")
-    }
-
-    @Test
     fun `function-with-nested-local-functions`() {
         // given
         val sut = getSut("function-with-nested-local-functions")
@@ -66,6 +54,18 @@ class KoFunctionTest {
             .map { it.name }
 
         actual shouldBeEqualTo listOf("LocalSampleFunction1", "LocalSampleFunction2")
+    }
+
+    @Test
+    fun `function-with-local-function`() {
+        // given
+        val sut = getSut("function-with-local-function")
+
+        // then
+        sut.functions()
+            .first()
+            .getLocalFunctions()
+            .map { it.name } shouldBeEqualTo listOf("localFunction")
     }
 
     @Test

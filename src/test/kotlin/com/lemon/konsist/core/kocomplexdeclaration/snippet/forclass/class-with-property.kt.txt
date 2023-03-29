@@ -1,0 +1,3 @@
+class SampleClass {
+    val sampleNestedProperty: Boolean = true
+}

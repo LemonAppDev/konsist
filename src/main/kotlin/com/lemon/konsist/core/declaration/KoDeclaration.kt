@@ -13,7 +13,7 @@ import kotlin.reflect.KClass
 
 open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterListOwner) : KoNamedDeclaration(ktTypeParameterListOwner) {
 
-    val fullyQualifiedName by lazy {
+    open val fullyQualifiedName by lazy {
         if (ktTypeParameterListOwner.fqName != null) {
             ktTypeParameterListOwner.fqName.toString()
         } else {

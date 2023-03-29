@@ -1,0 +1,9 @@
+class SampleClass {
+    fun sampleNestedFunction1 {
+        fun sampleLocalFunction()
+    }
+
+    class SampleClass {
+        fun sampleNestedFunction2()
+    }
+}

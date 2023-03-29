@@ -1,4 +1,4 @@
-class SampleClass {
+interface SampleInterface {
     fun sampleNestedFunction {
     }
 }

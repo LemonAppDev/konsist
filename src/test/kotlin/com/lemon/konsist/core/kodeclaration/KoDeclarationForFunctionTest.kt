@@ -27,7 +27,7 @@ class KoDeclarationForFunctionTest {
         val sut = getSut("function-is-not-top-level")
 
         // then
-        sut.functions(includeNested = true).first { it.name == "SampleNestedFunction" }.isTopLevel shouldBe false
+        sut.functions(includeNested = true).first { it.name == "sampleNestedFunction" }.isTopLevel shouldBe false
     }
 
     @Test

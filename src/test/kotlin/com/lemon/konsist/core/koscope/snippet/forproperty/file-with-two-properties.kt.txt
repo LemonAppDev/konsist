@@ -1,0 +1,3 @@
+val sampleProperty1: Boolean = true
+
+val sampleProperty2: Boolean = false
