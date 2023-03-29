@@ -23,12 +23,5 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - uses: actions/cache@v3
-        with:
-          path: ~/.gradle
-          key: gradle-${{ hashFiles('gradle-checksums.txt') }}-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-          restore-keys: |
-            gradle-${{ hashFiles('gradle-checksums.txt') }}-
-
       - name: All - Spotless
         run: ./gradlew spotlessCheck
