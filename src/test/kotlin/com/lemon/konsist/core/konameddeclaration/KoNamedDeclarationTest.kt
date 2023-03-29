@@ -8,10 +8,9 @@ class KoNamedDeclarationTest {
     @Test
     fun `class`() {
         // given
-        val sut =
-            getSut("class")
-                .classes()
-                .first()
+        val sut = getSut("class")
+            .classes()
+            .first()
 
         // then
         sut.name shouldBeEqualTo "SampleClass"
@@ -20,10 +19,9 @@ class KoNamedDeclarationTest {
     @Test
     fun `interface`() {
         // given
-        val sut =
-            getSut("interface")
-                .interfaces()
-                .first()
+        val sut = getSut("interface")
+            .interfaces()
+            .first()
 
         // then
         sut.name shouldBeEqualTo "SampleInterface"
@@ -32,10 +30,9 @@ class KoNamedDeclarationTest {
     @Test
     fun `object`() {
         // given
-        val sut =
-            getSut("object")
-                .objects()
-                .first()
+        val sut = getSut("object")
+            .objects()
+            .first()
 
         // then
         sut.name shouldBeEqualTo "SampleObject"
@@ -44,10 +41,9 @@ class KoNamedDeclarationTest {
     @Test
     fun `function`() {
         // given
-        val sut =
-            getSut("function")
-                .functions()
-                .first()
+        val sut = getSut("function")
+            .functions()
+            .first()
 
         // then
         sut.name shouldBeEqualTo "SampleFunction"
@@ -56,10 +52,9 @@ class KoNamedDeclarationTest {
     @Test
     fun `property`() {
         // given
-        val sut =
-            getSut("property")
-                .properties()
-                .first()
+        val sut = getSut("property")
+            .properties()
+            .first()
 
         // then
         sut.name shouldBeEqualTo "sampleProperty"

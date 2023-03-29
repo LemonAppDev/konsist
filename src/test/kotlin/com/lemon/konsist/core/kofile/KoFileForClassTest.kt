@@ -8,9 +8,8 @@ class KoFileForClassTest {
     @Test
     fun `file-with-one-class includeNested true`() {
         // given
-        val sut =
-            getSut("file-with-one-class")
-                .classes(includeNested = true)
+        val sut = getSut("file-with-one-class")
+            .classes(includeNested = true)
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("SampleClass")
@@ -19,9 +18,8 @@ class KoFileForClassTest {
     @Test
     fun `file-with-one-class includeNested false`() {
         // given
-        val sut =
-            getSut("file-with-one-class")
-                .classes(includeNested = false)
+        val sut = getSut("file-with-one-class")
+            .classes(includeNested = false)
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("SampleClass")
@@ -30,9 +28,8 @@ class KoFileForClassTest {
     @Test
     fun `file-with-one-class-containing-class includeNested true`() {
         // given
-        val sut =
-            getSut("file-with-one-class-containing-class")
-                .classes(includeNested = true)
+        val sut = getSut("file-with-one-class-containing-class")
+            .classes(includeNested = true)
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("SampleClass", "SampleNestedClass")
@@ -41,9 +38,8 @@ class KoFileForClassTest {
     @Test
     fun `file-with-one-class-containing-class includeNested false`() {
         // given
-        val sut =
-            getSut("file-with-one-class-containing-class")
-                .classes(includeNested = false)
+        val sut = getSut("file-with-one-class-containing-class")
+            .classes(includeNested = false)
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("SampleClass")
@@ -52,10 +48,9 @@ class KoFileForClassTest {
     @Test
     fun `class-with-class-inside`() {
         // given
-        val sut =
-            getSut("class-with-class-inside")
-                .files()
-                .first()
+        val sut = getSut("class-with-class-inside")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -68,10 +63,9 @@ class KoFileForClassTest {
     @Test
     fun `class-with-property-inside`() {
         // given
-        val sut =
-            getSut("class-with-property-inside")
-                .files()
-                .first()
+        val sut = getSut("class-with-property-inside")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -83,10 +77,9 @@ class KoFileForClassTest {
     @Test
     fun `class-with-function-inside`() {
         // given
-        val sut =
-            getSut("class-with-function-inside")
-                .files()
-                .first()
+        val sut = getSut("class-with-function-inside")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -98,10 +91,9 @@ class KoFileForClassTest {
     @Test
     fun `class-with-object-inside`() {
         // given
-        val sut =
-            getSut("class-with-object-inside")
-                .files()
-                .first()
+        val sut = getSut("class-with-object-inside")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -113,10 +105,9 @@ class KoFileForClassTest {
     @Test
     fun `class-with-interface-inside`() {
         // given
-        val sut =
-            getSut("class-with-interface-inside")
-                .files()
-                .first()
+        val sut = getSut("class-with-interface-inside")
+            .files()
+            .first()
 
         // then
         sut.apply {

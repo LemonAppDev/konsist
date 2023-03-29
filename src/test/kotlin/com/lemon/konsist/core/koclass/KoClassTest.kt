@@ -9,10 +9,9 @@ class KoClassTest {
     @Test
     fun `abstract-class`() {
         // given
-        val sut =
-            getSut("abstract-class")
-                .classes()
-                .first()
+        val sut = getSut("abstract-class")
+            .classes()
+            .first()
 
         // then
         sut.isAbstract shouldBeEqualTo true
@@ -21,10 +20,9 @@ class KoClassTest {
     @Test
     fun `annotation-class`() {
         // given
-        val sut =
-            getSut("annotation-class")
-                .classes()
-                .first()
+        val sut = getSut("annotation-class")
+            .classes()
+            .first()
 
         // then
         sut.isAnnotation shouldBeEqualTo true
@@ -33,10 +31,9 @@ class KoClassTest {
     @Test
     fun `class`() {
         // given
-        val sut =
-            getSut("class")
-                .classes()
-                .first()
+        val sut = getSut("class")
+            .classes()
+            .first()
 
         // then
         sut.name shouldBeEqualTo "SampleClass"
@@ -45,10 +42,9 @@ class KoClassTest {
     @Test
     fun `data-class`() {
         // given
-        val sut =
-            getSut("data-class")
-                .classes()
-                .first()
+        val sut = getSut("data-class")
+            .classes()
+            .first()
 
         // then
         sut.isData shouldBeEqualTo true
@@ -57,10 +53,9 @@ class KoClassTest {
     @Test
     fun `enum-class`() {
         // given
-        val sut =
-            getSut("enum-class")
-                .classes()
-                .first()
+        val sut = getSut("enum-class")
+            .classes()
+            .first()
 
         // then
         sut.isEnum shouldBeEqualTo true
@@ -69,10 +64,9 @@ class KoClassTest {
     @Test
     fun `sealed-class`() {
         // given
-        val sut =
-            getSut("sealed-class")
-                .classes()
-                .first()
+        val sut = getSut("sealed-class")
+            .classes()
+            .first()
 
         // then
         sut.isSealed shouldBeEqualTo true
@@ -81,10 +75,9 @@ class KoClassTest {
     @Test
     fun `value-class`() {
         // given
-        val sut =
-            getSut("value-class")
-                .classes()
-                .first()
+        val sut = getSut("value-class")
+            .classes()
+            .first()
 
         // then
         sut.isValue shouldBeEqualTo true
@@ -93,10 +86,9 @@ class KoClassTest {
     @Test
     fun `nested-inner-class`() {
         // given
-        val sut =
-            getSut("nested-inner-class")
-                .classes(includeNested = true)
-                .first { it.name == "InnerClass" }
+        val sut = getSut("nested-inner-class")
+            .classes(includeNested = true)
+            .first { it.name == "InnerClass" }
 
         // then
         sut.isInner shouldBeEqualTo true
@@ -105,10 +97,9 @@ class KoClassTest {
     @Test
     fun `class-with-primary-constructor`() {
         // given
-        val sut =
-            getSut("class-with-primary-constructor")
-                .classes()
-                .first()
+        val sut = getSut("class-with-primary-constructor")
+            .classes()
+            .first()
 
         // then
         sut.apply {
@@ -120,10 +111,9 @@ class KoClassTest {
     @Test
     fun `class-without-primary-constructor`() {
         // given
-        val sut =
-            getSut("class-without-primary-constructor")
-                .classes()
-                .first()
+        val sut = getSut("class-without-primary-constructor")
+            .classes()
+            .first()
 
         // then
         sut.apply {
@@ -135,10 +125,9 @@ class KoClassTest {
     @Test
     fun `class-with-secondary-constructor`() {
         // given
-        val sut =
-            getSut("class-with-secondary-constructor")
-                .classes()
-                .first()
+        val sut = getSut("class-with-secondary-constructor")
+            .classes()
+            .first()
 
         // then
         sut.apply {
@@ -150,10 +139,9 @@ class KoClassTest {
     @Test
     fun `class-without-secondary-constructor`() {
         // given
-        val sut =
-            getSut("class-without-secondary-constructor")
-                .classes()
-                .first()
+        val sut = getSut("class-without-secondary-constructor")
+            .classes()
+            .first()
 
         // then
         sut.apply {
@@ -165,10 +153,9 @@ class KoClassTest {
     @Test
     fun `class-with-primary-and-secondary-constructor`() {
         // given
-        val sut =
-            getSut("class-with-primary-and-secondary-constructor")
-                .classes()
-                .first()
+        val sut = getSut("class-with-primary-and-secondary-constructor")
+            .classes()
+            .first()
 
         // then
         sut.apply {

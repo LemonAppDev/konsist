@@ -8,10 +8,9 @@ class KoFunctionTest {
     @Test
     fun `function-with-operator-modifier`() {
         // given
-        val sut =
-            getSut("function-with-operator-modifier")
-                .functions()
-                .first()
+        val sut = getSut("function-with-operator-modifier")
+            .functions()
+            .first()
 
         // then
         sut.isOperator shouldBeEqualTo true
@@ -20,10 +19,9 @@ class KoFunctionTest {
     @Test
     fun `function-without-operator-modifier`() {
         // given
-        val sut =
-            getSut("function-without-operator-modifier")
-                .functions()
-                .first()
+        val sut = getSut("function-without-operator-modifier")
+            .functions()
+            .first()
 
         // then
         sut.isOperator shouldBeEqualTo false
@@ -32,10 +30,9 @@ class KoFunctionTest {
     @Test
     fun `function-with-inline-modifier`() {
         // given
-        val sut =
-            getSut("function-with-inline-modifier")
-                .functions()
-                .first()
+        val sut = getSut("function-with-inline-modifier")
+            .functions()
+            .first()
 
         // then
         sut.isInline shouldBeEqualTo true
@@ -44,10 +41,9 @@ class KoFunctionTest {
     @Test
     fun `function-without-inline-modifier`() {
         // given
-        val sut =
-            getSut("function-without-inline-modifier")
-                .functions()
-                .first()
+        val sut = getSut("function-without-inline-modifier")
+            .functions()
+            .first()
 
         // then
         sut.isInline shouldBeEqualTo false
@@ -56,10 +52,9 @@ class KoFunctionTest {
     @Test
     fun `function-with-nested-local-functions`() {
         // given
-        val sut =
-            getSut("function-with-nested-local-functions")
-                .functions()
-                .first()
+        val sut = getSut("function-with-nested-local-functions")
+            .functions()
+            .first()
 
         // then
         sut
@@ -70,10 +65,9 @@ class KoFunctionTest {
     @Test
     fun `function-with-local-function`() {
         // given
-        val sut =
-            getSut("function-with-local-function")
-                .functions()
-                .first()
+        val sut = getSut("function-with-local-function")
+            .functions()
+            .first()
 
         // then
         sut
@@ -84,10 +78,9 @@ class KoFunctionTest {
     @Test
     fun `function-without-local-functions`() {
         // given
-        val sut =
-            getSut("function-without-local-functions")
-                .functions()
-                .first()
+        val sut = getSut("function-without-local-functions")
+            .functions()
+            .first()
 
         // then
         sut
@@ -98,10 +91,9 @@ class KoFunctionTest {
     @Test
     fun `function-with-return-type`() {
         // given
-        val sut =
-            getSut("function-with-return-type")
-                .functions()
-                .first()
+        val sut = getSut("function-with-return-type")
+            .functions()
+            .first()
 
         // then
         sut.apply {
@@ -113,10 +105,9 @@ class KoFunctionTest {
     @Test
     fun `function-without-return-type`() {
         // given
-        val sut =
-            getSut("function-without-return-type")
-                .functions()
-                .first()
+        val sut = getSut("function-without-return-type")
+            .functions()
+            .first()
 
         // then
         sut.hasExplicitReturnType shouldBeEqualTo false
@@ -125,10 +116,9 @@ class KoFunctionTest {
     @Test
     fun `function-with-two-parameters-and-return-type`() {
         // given
-        val sut =
-            getSut("function-with-two-parameters-and-return-type")
-                .functions()
-                .first()
+        val sut = getSut("function-with-two-parameters-and-return-type")
+            .functions()
+            .first()
 
         // then
         sut.apply {
@@ -140,10 +130,9 @@ class KoFunctionTest {
     @Test
     fun `function-with-parameter`() {
         // given
-        val sut =
-            getSut("function-with-parameter")
-                .functions()
-                .first()
+        val sut = getSut("function-with-parameter")
+            .functions()
+            .first()
 
         // then
         sut

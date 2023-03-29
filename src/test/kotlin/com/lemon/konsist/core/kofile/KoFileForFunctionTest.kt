@@ -48,10 +48,9 @@ class KoFileForFunctionTest {
     @Test
     fun `one-function includeNested true`() {
         // given
-        val sut =
-            getSut("one-function")
-                .files()
-                .first()
+        val sut = getSut("one-function")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -63,10 +62,9 @@ class KoFileForFunctionTest {
     @Test
     fun `one-function includeNested false`() {
         // given
-        val sut =
-            getSut("one-function")
-                .files()
-                .first()
+        val sut = getSut("one-function")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -78,10 +76,9 @@ class KoFileForFunctionTest {
     @Test
     fun `function-with-function-inside`() {
         // given
-        val sut =
-            getSut("function-with-function-inside")
-                .files()
-                .first()
+        val sut = getSut("function-with-function-inside")
+            .files()
+            .first()
 
         // then
         sut.apply {

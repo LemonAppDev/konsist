@@ -15,10 +15,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-is-top-level`() {
         // given
-        val sut =
-            getSut("class-is-top-level")
-                .classes(includeNested = true)
-                .first()
+        val sut = getSut("class-is-top-level")
+            .classes(includeNested = true)
+            .first()
 
         // then
         sut.isTopLevel shouldBeEqualTo true
@@ -27,10 +26,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-is-not-top-level`() {
         // given
-        val sut =
-            getSut("class-is-not-top-level")
-                .classes(includeNested = true)
-                .first { it.name == "SampleNestedClass" }
+        val sut = getSut("class-is-not-top-level")
+            .classes(includeNested = true)
+            .first { it.name == "SampleNestedClass" }
 
         // then
         sut.isTopLevel shouldBeEqualTo false
@@ -39,10 +37,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-without-annotation`() {
         // given
-        val sut =
-            getSut("class-without-annotation")
-                .classes()
-                .first()
+        val sut = getSut("class-without-annotation")
+            .classes()
+            .first()
 
         // then
         sut.annotations shouldHaveSize 0
@@ -51,10 +48,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-with-annotation`() {
         // given
-        val sut =
-            getSut("class-with-annotation")
-                .classes()
-                .first()
+        val sut = getSut("class-with-annotation")
+            .classes()
+            .first()
 
         // then
         sut.apply {
@@ -67,10 +63,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-with-two-annotations`() {
         // given
-        val sut =
-            getSut("class-with-two-annotations")
-                .classes()
-                .first()
+        val sut = getSut("class-with-two-annotations")
+            .classes()
+            .first()
 
         // then
         sut.apply {
@@ -84,10 +79,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-without-visibility-modifier`() {
         // given
-        val sut =
-            getSut("class-without-visibility-modifier")
-                .classes()
-                .first()
+        val sut = getSut("class-without-visibility-modifier")
+            .classes()
+            .first()
 
         // then
         sut.apply {
@@ -101,10 +95,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-with-public-visibility-modifier`() {
         // given
-        val sut =
-            getSut("class-with-public-visibility-modifier")
-                .classes()
-                .first()
+        val sut = getSut("class-with-public-visibility-modifier")
+            .classes()
+            .first()
 
         // then
         sut.apply {
@@ -118,10 +111,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-with-private-visibility-modifier`() {
         // given
-        val sut =
-            getSut("class-with-private-visibility-modifier")
-                .classes()
-                .first()
+        val sut = getSut("class-with-private-visibility-modifier")
+            .classes()
+            .first()
 
         // then
         sut.apply {
@@ -135,10 +127,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-with-protected-visibility-modifier`() {
         // given
-        val sut =
-            getSut("class-with-protected-visibility-modifier")
-                .classes()
-                .first()
+        val sut = getSut("class-with-protected-visibility-modifier")
+            .classes()
+            .first()
 
         // then
         sut.apply {
@@ -152,10 +143,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-with-internal-visibility-modifier`() {
         // given
-        val sut =
-            getSut("class-with-internal-visibility-modifier")
-                .classes()
-                .first()
+        val sut = getSut("class-with-internal-visibility-modifier")
+            .classes()
+            .first()
 
         // then
         sut.apply {
@@ -169,10 +159,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-with-fully-qualified-name`() {
         // given
-        val sut =
-            getSut("class-with-fully-qualified-name")
-                .classes()
-                .first()
+        val sut = getSut("class-with-fully-qualified-name")
+            .classes()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass"
@@ -181,10 +170,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-with-package`() {
         // given
-        val sut =
-            getSut("class-with-package")
-                .classes()
-                .first()
+        val sut = getSut("class-with-package")
+            .classes()
+            .first()
 
         // then
         sut.packageDirective shouldBeEqualTo "com.samplepackage"
@@ -193,10 +181,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-without-package`() {
         // given
-        val sut =
-            getSut("class-without-package")
-                .classes()
-                .first()
+        val sut = getSut("class-without-package")
+            .classes()
+            .first()
 
         // then
         sut.packageDirective shouldBeEqualTo ""
@@ -205,10 +192,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-with-protected-modifier`() {
         // given
-        val sut =
-            getSut("class-with-protected-modifier")
-                .classes()
-                .first()
+        val sut = getSut("class-with-protected-modifier")
+            .classes()
+            .first()
 
         // then
         sut.hasModifiers() shouldBeEqualTo true
@@ -217,10 +203,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-with-public-modifier`() {
         // given
-        val sut =
-            getSut("class-with-public-modifier")
-                .classes()
-                .first()
+        val sut = getSut("class-with-public-modifier")
+            .classes()
+            .first()
 
         // then
         sut.apply {
@@ -232,10 +217,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-reside-in-package`() {
         // given
-        val sut =
-            getSut("class-reside-in-package")
-                .classes()
-                .first()
+        val sut = getSut("class-reside-in-package")
+            .classes()
+            .first()
 
         // then
         sut.resideInAPackages("samplepackage") shouldBeEqualTo true
@@ -244,10 +228,9 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-not-reside-in-package`() {
         // given
-        val sut =
-            getSut("class-not-reside-in-package")
-                .classes()
-                .first()
+        val sut = getSut("class-not-reside-in-package")
+            .classes()
+            .first()
 
         // then
         sut.resideInAPackages("otherpackage") shouldBeEqualTo false

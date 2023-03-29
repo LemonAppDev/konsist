@@ -8,9 +8,8 @@ class KoFileForImportTest {
     @Test
     fun `file-with-one-import`() {
         // given
-        val sut =
-            getSut("file-with-one-import")
-                .imports()
+        val sut = getSut("file-with-one-import")
+            .imports()
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("com.sampleimport")
@@ -19,9 +18,8 @@ class KoFileForImportTest {
     @Test
     fun `file-without-imports`() {
         // given
-        val sut =
-            getSut("file-without-imports")
-                .imports()
+        val sut = getSut("file-without-imports")
+            .imports()
 
         // then
         sut.isEmpty()

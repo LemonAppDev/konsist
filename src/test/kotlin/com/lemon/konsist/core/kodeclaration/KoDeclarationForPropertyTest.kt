@@ -14,10 +14,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-is-top-level`() {
         // given
-        val sut =
-            getSut("property-is-top-level")
-                .properties(includeNested = true)
-                .first()
+        val sut = getSut("property-is-top-level")
+            .properties(includeNested = true)
+            .first()
 
         // then
         sut.isTopLevel shouldBeEqualTo true
@@ -26,10 +25,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-is-not-top-level`() {
         // given
-        val sut =
-            getSut("property-is-not-top-level")
-                .properties(includeNested = true)
-                .first { it.name == "sampleNestedProperty" }
+        val sut = getSut("property-is-not-top-level")
+            .properties(includeNested = true)
+            .first { it.name == "sampleNestedProperty" }
 
         // then
         sut.isTopLevel shouldBeEqualTo false
@@ -38,10 +36,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-without-annotation`() {
         // given
-        val sut =
-            getSut("property-without-annotation")
-                .properties()
-                .first()
+        val sut = getSut("property-without-annotation")
+            .properties()
+            .first()
 
         // then
         sut.annotations shouldHaveSize 0
@@ -50,10 +47,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-with-annotation`() {
         // given
-        val sut =
-            getSut("property-with-annotation")
-                .properties()
-                .first()
+        val sut = getSut("property-with-annotation")
+            .properties()
+            .first()
 
         // then
         sut.apply {
@@ -66,10 +62,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-with-two-annotations`() {
         // given
-        val sut =
-            getSut("property-with-two-annotations")
-                .properties()
-                .first()
+        val sut = getSut("property-with-two-annotations")
+            .properties()
+            .first()
 
         // then
         sut.apply {
@@ -83,10 +78,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-without-visibility-modifier`() {
         // given
-        val sut =
-            getSut("property-without-visibility-modifier")
-                .properties()
-                .first()
+        val sut = getSut("property-without-visibility-modifier")
+            .properties()
+            .first()
 
         // then
         sut.apply {
@@ -100,10 +94,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-with-public-visibility-modifier`() {
         // given
-        val sut =
-            getSut("property-with-public-visibility-modifier")
-                .properties()
-                .first()
+        val sut = getSut("property-with-public-visibility-modifier")
+            .properties()
+            .first()
 
         // then
         sut.apply {
@@ -117,10 +110,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-with-private-visibility-modifier`() {
         // given
-        val sut =
-            getSut("property-with-private-visibility-modifier")
-                .properties()
-                .first()
+        val sut = getSut("property-with-private-visibility-modifier")
+            .properties()
+            .first()
 
         // then
         sut.apply {
@@ -134,10 +126,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-with-protected-visibility-modifier`() {
         // given
-        val sut =
-            getSut("property-with-protected-visibility-modifier")
-                .properties()
-                .first()
+        val sut = getSut("property-with-protected-visibility-modifier")
+            .properties()
+            .first()
 
         // then
         sut.apply {
@@ -151,10 +142,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-with-internal-visibility-modifier`() {
         // given
-        val sut =
-            getSut("property-with-internal-visibility-modifier")
-                .properties()
-                .first()
+        val sut = getSut("property-with-internal-visibility-modifier")
+            .properties()
+            .first()
 
         // then
         sut.apply {
@@ -168,10 +158,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-with-fully-qualified-name`() {
         // given
-        val sut =
-            getSut("property-with-fully-qualified-name")
-                .properties()
-                .first()
+        val sut = getSut("property-with-fully-qualified-name")
+            .properties()
+            .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleProperty"
@@ -180,10 +169,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-with-package`() {
         // given
-        val sut =
-            getSut("property-with-package")
-                .properties()
-                .first()
+        val sut = getSut("property-with-package")
+            .properties()
+            .first()
 
         // then
         sut.packageDirective shouldBeEqualTo "com.samplepackage"
@@ -192,10 +180,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-without-package`() {
         // given
-        val sut =
-            getSut("property-without-package")
-                .properties()
-                .first()
+        val sut = getSut("property-without-package")
+            .properties()
+            .first()
 
         // then
         sut.packageDirective shouldBeEqualTo ""
@@ -204,10 +191,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-with-protected-modifier`() {
         // given
-        val sut =
-            getSut("property-with-protected-modifier")
-                .properties()
-                .first()
+        val sut = getSut("property-with-protected-modifier")
+            .properties()
+            .first()
 
         // then
         sut.hasModifiers() shouldBeEqualTo true
@@ -216,10 +202,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-with-public-modifier`() {
         // given
-        val sut =
-            getSut("property-with-public-modifier")
-                .properties()
-                .first()
+        val sut = getSut("property-with-public-modifier")
+            .properties()
+            .first()
 
         // then
         sut.apply {
@@ -231,10 +216,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-reside-in-package`() {
         // given
-        val sut =
-            getSut("property-reside-in-package")
-                .properties()
-                .first()
+        val sut = getSut("property-reside-in-package")
+            .properties()
+            .first()
 
         // then
         sut.resideInAPackages("samplepackage") shouldBeEqualTo true
@@ -243,10 +227,9 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-not-reside-in-package`() {
         // given
-        val sut =
-            getSut("property-not-reside-in-package")
-                .properties()
-                .first()
+        val sut = getSut("property-not-reside-in-package")
+            .properties()
+            .first()
 
         // then
         sut.resideInAPackages("otherpackage") shouldBeEqualTo false

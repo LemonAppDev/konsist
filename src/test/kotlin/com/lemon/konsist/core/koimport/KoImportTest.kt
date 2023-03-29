@@ -9,9 +9,8 @@ class KoImportTest {
     @Test
     fun `import-name`() {
         // given
-        val sut =
-            getSut("import-name")
-                .imports()
+        val sut = getSut("import-name")
+            .imports()
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("com.SampleImport")
