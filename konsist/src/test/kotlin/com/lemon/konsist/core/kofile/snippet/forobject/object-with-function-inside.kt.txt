@@ -1,0 +1,3 @@
+object SampleObject {
+    fun sampleNestedFunction()
+}

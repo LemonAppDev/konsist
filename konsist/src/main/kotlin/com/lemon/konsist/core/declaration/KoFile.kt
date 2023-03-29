@@ -107,4 +107,14 @@ class KoFile(private val ktFile: KtFile) : KoNamedDeclaration(ktFile) {
     } else {
         declarations
     }
+
+    fun hasFunction(name: String, includeNested: Boolean = false) = functions(includeNested).any { it.name == name }
+
+    fun hasProperty(name: String, includeNested: Boolean = false) = properties(includeNested).any { it.name == name }
+
+    fun hasClass(name: String, includeNested: Boolean = false) = classes(includeNested).any { it.name == name }
+
+    fun hasInterface(name: String, includeNested: Boolean = false) = interfaces(includeNested).any { it.name == name }
+
+    fun hasObject(name: String, includeNested: Boolean = false) = objects(includeNested).any { it.name == name }
 }
