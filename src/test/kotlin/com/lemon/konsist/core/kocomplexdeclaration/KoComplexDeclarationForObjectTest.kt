@@ -11,12 +11,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-class includeNested true`() {
         // given
-        val sut = getSut("object-with-class")
+        val sut =
+            getSut("object-with-class")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .getClasses(includeNested = true)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedClass")
     }
@@ -24,12 +25,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-class includeNested false`() {
         // given
-        val sut = getSut("object-with-class")
+        val sut =
+            getSut("object-with-class")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .getClasses(includeNested = false)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedClass")
     }
@@ -37,12 +39,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-interface includeNested true`() {
         // given
-        val sut = getSut("object-with-interface")
+        val sut =
+            getSut("object-with-interface")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .interfaces(includeNested = true)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedInterface")
     }
@@ -50,12 +53,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-interface includeNested false`() {
         // given
-        val sut = getSut("object-with-interface")
+        val sut =
+            getSut("object-with-interface")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .interfaces(includeNested = false)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedInterface")
     }
@@ -63,12 +67,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-object includeNested true`() {
         // given
-        val sut = getSut("object-with-object")
+        val sut =
+            getSut("object-with-object")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .objects(includeNested = true)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedObject")
     }
@@ -76,12 +81,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-object includeNested false`() {
         // given
-        val sut = getSut("object-with-object")
+        val sut =
+            getSut("object-with-object")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .objects(includeNested = false)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedObject")
     }
@@ -89,12 +95,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-property includeNested true`() {
         // given
-        val sut = getSut("object-with-property")
+        val sut =
+            getSut("object-with-property")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .properties(includeNested = true)
             .map { it.name } shouldBeEqualTo listOf("sampleNestedProperty")
     }
@@ -102,12 +109,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-property includeNested false`() {
         // given
-        val sut = getSut("object-with-property")
+        val sut =
+            getSut("object-with-property")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .properties(includeNested = false)
             .map { it.name } shouldBeEqualTo listOf("sampleNestedProperty")
     }
@@ -115,12 +123,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-function includeNested true`() {
         // given
-        val sut = getSut("object-with-function")
+        val sut =
+            getSut("object-with-function")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .functions(includeNested = true)
             .map { it.name } shouldBeEqualTo listOf("sampleNestedFunction")
     }
@@ -128,12 +137,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-function includeNested false`() {
         // given
-        val sut = getSut("object-with-function")
+        val sut =
+            getSut("object-with-function")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .functions(includeNested = false)
             .map { it.name } shouldBeEqualTo listOf("sampleNestedFunction")
     }
@@ -141,7 +151,10 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-all-declarations includeNested true`() {
         // given
-        val sut = getSut("object-with-all-declarations")
+        val sut =
+            getSut("object-with-all-declarations")
+                .objects()
+                .first()
 
         // then
         val expected = listOf(
@@ -153,8 +166,6 @@ class KoComplexDeclarationForObjectTest {
         )
 
         sut
-            .objects()
-            .first()
             .declarations(includeNested = true)
             .map { it.name } shouldBeEqualTo expected
     }
@@ -162,7 +173,10 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-all-declarations includeNested false`() {
         // given
-        val sut = getSut("object-with-all-declarations")
+        val sut =
+            getSut("object-with-all-declarations")
+                .objects()
+                .first()
 
         // then
         val expected = listOf(
@@ -174,8 +188,6 @@ class KoComplexDeclarationForObjectTest {
         )
 
         sut
-            .objects()
-            .first()
             .declarations(includeNested = false)
             .map { it.name } shouldBeEqualTo expected
     }
@@ -183,12 +195,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-nested-classes includeNested true`() {
         // given
-        val sut = getSut("object-with-nested-classes")
+        val sut =
+            getSut("object-with-nested-classes")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .getClasses(includeNested = true)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedClass1", "SampleNestedClass2", "SampleNestedClass3")
     }
@@ -196,12 +209,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-nested-classes includeNested false`() {
         // given
-        val sut = getSut("object-with-nested-classes")
+        val sut =
+            getSut("object-with-nested-classes")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .getClasses(includeNested = false)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedClass1")
     }
@@ -209,12 +223,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-nested-interfaces includeNested true`() {
         // given
-        val sut = getSut("object-with-nested-interfaces")
+        val sut =
+            getSut("object-with-nested-interfaces")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .interfaces(includeNested = true)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedInterface3", "SampleNestedInterface1", "SampleNestedInterface2")
     }
@@ -222,12 +237,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-nested-interfaces includeNested false`() {
         // given
-        val sut = getSut("object-with-nested-interfaces")
+        val sut =
+            getSut("object-with-nested-interfaces")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .interfaces(includeNested = false)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedInterface1")
     }
@@ -235,12 +251,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-nested-objects includeNested true`() {
         // given
-        val sut = getSut("object-with-nested-objects")
+        val sut =
+            getSut("object-with-nested-objects")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .objects(includeNested = true)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedObject3", "SampleNestedObject1", "SampleNestedObject2")
     }
@@ -248,12 +265,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-nested-objects includeNested false`() {
         // given
-        val sut = getSut("object-with-nested-objects")
+        val sut =
+            getSut("object-with-nested-objects")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .objects(includeNested = false)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedObject1")
     }
@@ -261,12 +279,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-nested-properties includeNested true`() {
         // given
-        val sut = getSut("object-with-nested-properties")
+        val sut =
+            getSut("object-with-nested-properties")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .properties(includeNested = true)
             .map { it.name } shouldBeEqualTo listOf("sampleNestedProperty2", "sampleNestedProperty1")
     }
@@ -274,12 +293,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-nested-properties includeNested false`() {
         // given
-        val sut = getSut("object-with-nested-properties")
+        val sut =
+            getSut("object-with-nested-properties")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .properties(includeNested = false)
             .map { it.name } shouldBeEqualTo listOf("sampleNestedProperty1")
     }
@@ -287,12 +307,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-nested-functions includeNested true`() {
         // given
-        val sut = getSut("object-with-nested-functions")
+        val sut =
+            getSut("object-with-nested-functions")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .functions(includeNested = true)
             .map { it.name } shouldBeEqualTo listOf("sampleNestedFunction1", "sampleNestedFunction2", "sampleLocalFunction")
     }
@@ -300,12 +321,13 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-nested-functions includeNested false`() {
         // given
-        val sut = getSut("object-with-nested-functions")
+        val sut =
+            getSut("object-with-nested-functions")
+                .objects()
+                .first()
 
         // then
         sut
-            .objects()
-            .first()
             .functions(includeNested = false)
             .map { it.name } shouldBeEqualTo listOf("sampleNestedFunction1")
     }
@@ -313,7 +335,10 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-nested-declarations includeNested true`() {
         // given
-        val sut = getSut("object-with-nested-declarations")
+        val sut =
+            getSut("object-with-nested-declarations")
+                .objects()
+                .first()
 
         // then
         val expected = listOf(
@@ -326,9 +351,8 @@ class KoComplexDeclarationForObjectTest {
             "sampleNestedProperty",
             "sampleNestedFunction",
         )
+
         sut
-            .objects()
-            .first()
             .declarations(includeNested = true)
             .map { it.name } shouldBeEqualTo expected
     }
@@ -336,14 +360,15 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-nested-declarations includeNested false`() {
         // given
-        val sut = getSut("object-with-nested-declarations")
+        val sut =
+            getSut("object-with-nested-declarations")
+                .objects()
+                .first()
 
         // then
         val expected = listOf("SampleClass", "SampleInterface", "SampleObject", "sampleNestedProperty", "sampleNestedFunction")
 
         sut
-            .objects()
-            .first()
             .declarations(includeNested = false)
             .map { it.name } shouldBeEqualTo expected
     }
@@ -351,43 +376,43 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-with-class-which-not-represents-type`() {
         // given
-        val sut = getSut("object-with-class-which-not-represents-type")
+        val sut =
+            getSut("object-with-class-which-not-represents-type")
+                .objects()
+                .first()
 
         // then
-        sut
-            .objects()
-            .first()
-            .representsType(SampleClass::class) shouldBeEqualTo false
+        sut.representsType(SampleClass::class) shouldBeEqualTo false
     }
 
     @Test
     fun `object-with-function-with-modifier`() {
         // given
-        val sut = getSut("object-with-function-with-modifier")
+        val sut =
+            getSut("object-with-function-with-modifier")
+                .objects()
+                .first()
 
         // then
-        sut
-            .objects()
-            .first()
-            .apply {
-                hasFunction("sampleNestedFunction", PRIVATE) shouldBeEqualTo true
-                hasFunction("sampleNestedFunction", PUBLIC) shouldBeEqualTo false
-            }
+        sut.apply {
+            hasFunction("sampleNestedFunction", PRIVATE) shouldBeEqualTo true
+            hasFunction("sampleNestedFunction", PUBLIC) shouldBeEqualTo false
+        }
     }
 
     @Test
     fun `object-with-property-with-modifier`() {
         // given
-        val sut = getSut("object-with-property-with-modifier")
+        val sut =
+            getSut("object-with-property-with-modifier")
+                .objects()
+                .first()
 
         // then
-        sut
-            .objects()
-            .first()
-            .apply {
-                hasProperty("sampleNestedProperty", PRIVATE) shouldBeEqualTo true
-                hasProperty("sampleNestedProperty", PUBLIC) shouldBeEqualTo false
-            }
+        sut.apply {
+            hasProperty("sampleNestedProperty", PRIVATE) shouldBeEqualTo true
+            hasProperty("sampleNestedProperty", PUBLIC) shouldBeEqualTo false
+        }
     }
 
     private fun getSut(name: String) = TestSnippetProvider.getSnippetKoScope("core/kocomplexdeclaration/snippet/forobject/$name.kt.txt")

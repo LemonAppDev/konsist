@@ -8,37 +8,45 @@ class KoFileForInterfaceTest {
     @Test
     fun `file-with-one-interface includeNested true`() {
         // given
-        val sut = getSut("file-with-one-interface")
+        val sut =
+            getSut("file-with-one-interface")
+                .interfaces(includeNested = true)
 
         // then
-        sut.interfaces(includeNested = true).map { it.name } shouldBeEqualTo listOf("SampleInterface")
+        sut.map { it.name } shouldBeEqualTo listOf("SampleInterface")
     }
 
     @Test
     fun `file-with-one-interface includeNested false`() {
         // given
-        val sut = getSut("file-with-one-interface")
+        val sut =
+            getSut("file-with-one-interface")
+                .interfaces(includeNested = false)
 
         // then
-        sut.interfaces(includeNested = false).map { it.name } shouldBeEqualTo listOf("SampleInterface")
+        sut.map { it.name } shouldBeEqualTo listOf("SampleInterface")
     }
 
     @Test
     fun `file-with-one-interface-containing-interface includeNested true`() {
         // given
-        val sut = getSut("file-with-one-interface-containing-interface")
+        val sut =
+            getSut("file-with-one-interface-containing-interface")
+                .interfaces(includeNested = true)
 
         // then
-        sut.interfaces(includeNested = true).map { it.name } shouldBeEqualTo listOf("SampleInterface", "SampleNestedInterface")
+        sut.map { it.name } shouldBeEqualTo listOf("SampleInterface", "SampleNestedInterface")
     }
 
     @Test
     fun `file-with-one-interface-containing-interface includeNested false`() {
         // given
-        val sut = getSut("file-with-one-interface-containing-interface")
+        val sut =
+            getSut("file-with-one-interface-containing-interface")
+                .interfaces(includeNested = false)
 
         // then
-        sut.interfaces(includeNested = false).map { it.name } shouldBeEqualTo listOf("SampleInterface")
+        sut.map { it.name } shouldBeEqualTo listOf("SampleInterface")
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofile/snippet/forinterface/$fileName.kt.txt")

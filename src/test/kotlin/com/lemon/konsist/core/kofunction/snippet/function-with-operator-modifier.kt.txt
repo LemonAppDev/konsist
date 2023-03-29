@@ -1,2 +1,2 @@
-operator fun SampleFunction() {
+operator fun sampleFunction() {
 }

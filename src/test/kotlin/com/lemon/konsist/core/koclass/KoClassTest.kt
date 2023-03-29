@@ -1,7 +1,6 @@
 package com.lemon.konsist.core.koclass
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
-import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
@@ -10,94 +9,124 @@ class KoClassTest {
     @Test
     fun `abstract-class`() {
         // given
-        val sut = getSut("abstract-class")
+        val sut =
+            getSut("abstract-class")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().isAbstract shouldBe true
+        sut.isAbstract shouldBeEqualTo true
     }
 
     @Test
     fun `annotation-class`() {
         // given
-        val sut = getSut("annotation-class")
+        val sut =
+            getSut("annotation-class")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().isAnnotation shouldBe true
+        sut.isAnnotation shouldBeEqualTo true
     }
 
     @Test
     fun `class`() {
         // given
-        val sut = getSut("class")
+        val sut =
+            getSut("class")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().name shouldBeEqualTo "SampleClass"
+        sut.name shouldBeEqualTo "SampleClass"
     }
 
     @Test
     fun `data-class`() {
         // given
-        val sut = getSut("data-class")
+        val sut =
+            getSut("data-class")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().isData shouldBe true
+        sut.isData shouldBeEqualTo true
     }
 
     @Test
     fun `enum-class`() {
         // given
-        val sut = getSut("enum-class")
+        val sut =
+            getSut("enum-class")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().isEnum shouldBe true
+        sut.isEnum shouldBeEqualTo true
     }
 
     @Test
     fun `sealed-class`() {
         // given
-        val sut = getSut("sealed-class")
+        val sut =
+            getSut("sealed-class")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().isSealed shouldBe true
+        sut.isSealed shouldBeEqualTo true
     }
 
     @Test
     fun `value-class`() {
         // given
-        val sut = getSut("value-class")
+        val sut =
+            getSut("value-class")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().isValue shouldBe true
+        sut.isValue shouldBeEqualTo true
     }
 
     @Test
     fun `nested-inner-class`() {
         // given
-        val sut = getSut("nested-inner-class")
+        val sut =
+            getSut("nested-inner-class")
+                .classes(includeNested = true)
+                .first { it.name == "InnerClass" }
 
         // then
-        sut.classes(includeNested = true).first { it.name == "InnerClass" }.isInner shouldBe true
+        sut.isInner shouldBeEqualTo true
     }
 
     @Test
     fun `class-with-primary-constructor`() {
         // given
-        val sut = getSut("class-with-primary-constructor")
+        val sut =
+            getSut("class-with-primary-constructor")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().apply {
+        sut.apply {
             primaryConstructor?.name shouldBeEqualTo "SampleClass"
-            hasExplicitPrimaryConstructor shouldBe true
+            hasExplicitPrimaryConstructor shouldBeEqualTo true
         }
     }
 
     @Test
     fun `class-without-primary-constructor`() {
         // given
-        val sut = getSut("class-without-primary-constructor")
+        val sut =
+            getSut("class-without-primary-constructor")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().apply {
+        sut.apply {
             primaryConstructor?.name shouldBeEqualTo null
             hasExplicitPrimaryConstructor shouldBeEqualTo false
         }
@@ -106,34 +135,43 @@ class KoClassTest {
     @Test
     fun `class-with-secondary-constructor`() {
         // given
-        val sut = getSut("class-with-secondary-constructor")
+        val sut =
+            getSut("class-with-secondary-constructor")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().apply {
+        sut.apply {
             secondaryConstructors.first().name shouldBeEqualTo "SampleClass"
-            hasSecondaryConstructors shouldBe true
+            hasSecondaryConstructors shouldBeEqualTo true
         }
     }
 
     @Test
     fun `class-without-secondary-constructor`() {
         // given
-        val sut = getSut("class-without-secondary-constructor")
+        val sut =
+            getSut("class-without-secondary-constructor")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().apply {
+        sut.apply {
             secondaryConstructors.isEmpty()
-            hasSecondaryConstructors shouldBe false
+            hasSecondaryConstructors shouldBeEqualTo false
         }
     }
 
     @Test
     fun `class-with-primary-and-secondary-constructor`() {
         // given
-        val sut = getSut("class-with-primary-and-secondary-constructor")
+        val sut =
+            getSut("class-with-primary-and-secondary-constructor")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().apply {
+        sut.apply {
             primaryConstructor?.name shouldBeEqualTo "SampleClass"
             secondaryConstructors shouldHaveSize 1
             allConstructors shouldHaveSize 2

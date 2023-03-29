@@ -14,7 +14,9 @@ class KoScopeForDeclarationTest {
         // then
         val expected = listOf("SampleClass", "SampleInterface", "SampleObject", "sampleProperty", "SampleFunction")
 
-        sut.declarations().map { it.name } shouldBeEqualTo expected
+        sut
+            .declarations()
+            .map { it.name } shouldBeEqualTo expected
     }
 
     @Test
@@ -23,7 +25,9 @@ class KoScopeForDeclarationTest {
         val sut = getSut("file-with-one-class-containing-function")
 
         // then
-        sut.declarations(includeNested = true).map { it.name } shouldBeEqualTo listOf("sampleNestedFunction")
+        sut
+            .declarations(includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf("sampleNestedFunction")
     }
 
     @Test
@@ -34,7 +38,9 @@ class KoScopeForDeclarationTest {
         // then
         val expected = listOf("sampleProperty", "sampleNestedFunction")
 
-        sut.declarations(includeNested = true).map { it.name } shouldBeEqualTo expected
+        sut
+            .declarations(includeNested = true)
+            .map { it.name } shouldBeEqualTo expected
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/fordeclaration/$fileName.kt.txt")

@@ -1,7 +1,6 @@
 package com.lemon.konsist.core.kobasedeclaration
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
-import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -9,60 +8,74 @@ class KoBaseDeclarationTest {
     @Test
     fun `file-path`() {
         // given
-        val sut = getSut("file-path")
+        val sut =
+            getSut("file-path")
+                .functions()
+                .first()
 
         // then
-        sut.functions().first().filePath.endsWith("kobasedeclaration/snippet/file-path.kt") shouldBe true
+        sut.filePath.endsWith("kobasedeclaration/snippet/file-path.kt") shouldBeEqualTo true
     }
 
     @Test
     fun `text-with-location`() {
         // given
-        val sut = getSut("text-with-location")
+        val sut =
+            getSut("text-with-location")
+                .functions()
+                .first()
 
         // then
         val location = "'fun sampleFunction() {\n}' at (1,1) in //"
-        sut.functions().first().textWithLocation.startsWith(location) shouldBe true
+        sut.textWithLocation.startsWith(location) shouldBeEqualTo true
     }
 
     @Test
     fun `containing-file`() {
         // given
-        val sut = getSut("containing-file")
+        val sut =
+            getSut("containing-file")
+                .files()
+                .first()
 
         // then
-        sut.files().first().containingFile.name.endsWith("file.kt") shouldBe true
+        sut.containingFile.name.endsWith("file.kt") shouldBeEqualTo true
     }
 
     @Test
     fun `location`() {
         // given
-        val sut = getSut("location")
+        val sut =
+            getSut("location")
+                .functions()
+                .first()
 
         // then
-        val actual = sut.functions().first()
-        actual.location shouldBeEqualTo "${actual.filePath}:3:1"
+        sut.location shouldBeEqualTo "${sut.filePath}:3:1"
     }
 
     @Test
     fun `text`() {
         // given
-        val sut = getSut("text")
+        val sut =
+            getSut("text")
+                .functions()
+                .first()
 
         // then
-        val actual = sut.functions().first()
-        actual.text shouldBeEqualTo "fun sampleFunction()"
+        sut.text shouldBeEqualTo "fun sampleFunction()"
     }
 
     @Test
     fun `to-string`() {
         // given
-        val sut = getSut("to-string")
+        val sut =
+            getSut("to-string")
+                .functions()
+                .first()
 
         // then
-        val actual = sut.functions().first().toString()
-        val expected = sut.functions().first().textWithLocation
-        actual shouldBeEqualTo expected
+        sut.toString() shouldBeEqualTo sut.textWithLocation
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kobasedeclaration/snippet/$fileName.kt.txt")

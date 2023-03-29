@@ -8,46 +8,61 @@ class KoNamedDeclarationTest {
     @Test
     fun `class`() {
         // given
-        val sut = getSut("class")
+        val sut =
+            getSut("class")
+                .classes()
+                .first()
 
         // then
-        sut.classes().first().name shouldBeEqualTo "SampleClass"
+        sut.name shouldBeEqualTo "SampleClass"
     }
 
     @Test
     fun `interface`() {
         // given
-        val sut = getSut("interface")
+        val sut =
+            getSut("interface")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces().first().name shouldBeEqualTo "SampleInterface"
+        sut.name shouldBeEqualTo "SampleInterface"
     }
 
     @Test
     fun `object`() {
         // given
-        val sut = getSut("object")
+        val sut =
+            getSut("object")
+                .objects()
+                .first()
 
         // then
-        sut.objects().first().name shouldBeEqualTo "SampleObject"
+        sut.name shouldBeEqualTo "SampleObject"
     }
 
     @Test
     fun `function`() {
         // given
-        val sut = getSut("function")
+        val sut =
+            getSut("function")
+                .functions()
+                .first()
 
         // then
-        sut.functions().first().name shouldBeEqualTo "SampleFunction"
+        sut.name shouldBeEqualTo "SampleFunction"
     }
 
     @Test
     fun `property`() {
         // given
-        val sut = getSut("property")
+        val sut =
+            getSut("property")
+                .properties()
+                .first()
 
         // then
-        sut.properties().first().name shouldBeEqualTo "sampleProperty"
+        sut.name shouldBeEqualTo "sampleProperty"
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/konameddeclaration/snippet/$fileName.kt.txt")

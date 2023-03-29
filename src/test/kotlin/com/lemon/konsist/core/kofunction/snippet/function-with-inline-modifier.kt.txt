@@ -1,2 +1,2 @@
-inline fun SampleFunction() {
+inline fun sampleFunction() {
 }

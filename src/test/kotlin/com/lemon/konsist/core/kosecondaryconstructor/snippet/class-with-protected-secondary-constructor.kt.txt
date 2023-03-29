@@ -1,4 +1,4 @@
-class SampleFunction() {
+class SampleClass {
     protected constructor(name: String) {
     }
 }

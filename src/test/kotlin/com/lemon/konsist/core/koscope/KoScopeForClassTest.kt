@@ -12,7 +12,9 @@ class KoScopeForClassTest {
         val sut = getSut("file-with-one-class")
 
         // then
-        sut.classes().map { it.name } shouldBeEqualTo listOf("SampleClass")
+        sut
+            .classes()
+            .map { it.name } shouldBeEqualTo listOf("SampleClass")
     }
 
     @Test
@@ -21,7 +23,9 @@ class KoScopeForClassTest {
         val sut = getSut("file-without-class")
 
         // then
-        sut.classes().isEmpty()
+        sut
+            .classes()
+            .isEmpty()
     }
 
     @Test
@@ -30,11 +34,9 @@ class KoScopeForClassTest {
         val sut = getSut("file-with-two-classes-with-nested-class")
 
         // then
-        sut.classes(includeNested = true).map { it.name } shouldBeEqualTo listOf(
-            "SampleClass1",
-            "SampleClass2",
-            "NestedSampleClass",
-        )
+        sut
+            .classes(includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf("SampleClass1", "SampleClass2", "NestedSampleClass")
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forclass/$fileName.kt.txt")
