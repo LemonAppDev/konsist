@@ -8,9 +8,8 @@ class KoFileForPropertyTest {
     @Test
     fun `file-with-one-property`() {
         // given
-        val sut =
-            getSut("file-with-one-property")
-                .properties()
+        val sut = getSut("file-with-one-property")
+            .properties()
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("sampleProperty")
@@ -19,9 +18,8 @@ class KoFileForPropertyTest {
     @Test
     fun `file-with-one-class-containing-property`() {
         // given
-        val sut =
-            getSut("file-with-one-property")
-                .properties()
+        val sut = getSut("file-with-one-property")
+            .properties()
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("sampleProperty")
@@ -30,10 +28,9 @@ class KoFileForPropertyTest {
     @Test
     fun `one-property includeNested true`() {
         // given
-        val sut =
-            getSut("one-property")
-                .files()
-                .first()
+        val sut = getSut("one-property")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -45,10 +42,9 @@ class KoFileForPropertyTest {
     @Test
     fun `one-property includeNested false`() {
         // given
-        val sut =
-            getSut("one-property")
-                .files()
-                .first()
+        val sut = getSut("one-property")
+            .files()
+            .first()
 
         // then
         sut.apply {

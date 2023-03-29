@@ -8,10 +8,9 @@ class KoPackageTest {
     @Test
     fun `package-name`() {
         // given
-        val sut =
-            getSut("package-name")
-                .packages()
-                .first()
+        val sut = getSut("package-name")
+            .packages()
+            .first()
 
         // then
         sut?.name shouldBeEqualTo "samplepackage"
@@ -20,10 +19,9 @@ class KoPackageTest {
     @Test
     fun `package-without-name`() {
         // given
-        val sut =
-            getSut("package-without-name")
-                .packages()
-                .first()
+        val sut = getSut("package-without-name")
+            .packages()
+            .first()
 
         // then
         sut?.name shouldBeEqualTo null
@@ -32,10 +30,9 @@ class KoPackageTest {
     @Test
     fun `package-with-name`() {
         // given
-        val sut =
-            getSut("package-with-name")
-                .packages()
-                .first()
+        val sut = getSut("package-with-name")
+            .packages()
+            .first()
 
         // then
         sut?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
@@ -44,10 +41,9 @@ class KoPackageTest {
     @Test
     fun `package-without-fully-qualified-name`() {
         // given
-        val sut =
-            getSut("package-without-fully-qualified-name")
-                .packages()
-                .first()
+        val sut = getSut("package-without-fully-qualified-name")
+            .packages()
+            .first()
 
         // then
         sut?.fullyQualifiedName shouldBeEqualTo null

@@ -8,9 +8,8 @@ class KoFileForInterfaceTest {
     @Test
     fun `file-with-one-interface includeNested true`() {
         // given
-        val sut =
-            getSut("file-with-one-interface")
-                .interfaces(includeNested = true)
+        val sut = getSut("file-with-one-interface")
+            .interfaces(includeNested = true)
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("SampleInterface")
@@ -19,9 +18,8 @@ class KoFileForInterfaceTest {
     @Test
     fun `file-with-one-interface includeNested false`() {
         // given
-        val sut =
-            getSut("file-with-one-interface")
-                .interfaces(includeNested = false)
+        val sut = getSut("file-with-one-interface")
+            .interfaces(includeNested = false)
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("SampleInterface")
@@ -30,9 +28,8 @@ class KoFileForInterfaceTest {
     @Test
     fun `file-with-one-interface-containing-interface includeNested true`() {
         // given
-        val sut =
-            getSut("file-with-one-interface-containing-interface")
-                .interfaces(includeNested = true)
+        val sut = getSut("file-with-one-interface-containing-interface")
+            .interfaces(includeNested = true)
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("SampleInterface", "SampleNestedInterface")
@@ -41,9 +38,8 @@ class KoFileForInterfaceTest {
     @Test
     fun `file-with-one-interface-containing-interface includeNested false`() {
         // given
-        val sut =
-            getSut("file-with-one-interface-containing-interface")
-                .interfaces(includeNested = false)
+        val sut = getSut("file-with-one-interface-containing-interface")
+            .interfaces(includeNested = false)
 
         // then
         sut.map { it.name } shouldBeEqualTo listOf("SampleInterface")
@@ -52,10 +48,9 @@ class KoFileForInterfaceTest {
     @Test
     fun `one-interface includeNested true`() {
         // given
-        val sut =
-            getSut("one-interface")
-                .files()
-                .first()
+        val sut = getSut("one-interface")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -67,10 +62,9 @@ class KoFileForInterfaceTest {
     @Test
     fun `one-interface includeNested false`() {
         // given
-        val sut =
-            getSut("one-interface")
-                .files()
-                .first()
+        val sut = getSut("one-interface")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -82,10 +76,9 @@ class KoFileForInterfaceTest {
     @Test
     fun `interface-with-class-inside`() {
         // given
-        val sut =
-            getSut("interface-with-class-inside")
-                .files()
-                .first()
+        val sut = getSut("interface-with-class-inside")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -97,10 +90,9 @@ class KoFileForInterfaceTest {
     @Test
     fun `interface-with-property-inside`() {
         // given
-        val sut =
-            getSut("interface-with-property-inside")
-                .files()
-                .first()
+        val sut = getSut("interface-with-property-inside")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -112,10 +104,9 @@ class KoFileForInterfaceTest {
     @Test
     fun `interface-with-function-inside`() {
         // given
-        val sut =
-            getSut("interface-with-function-inside")
-                .files()
-                .first()
+        val sut = getSut("interface-with-function-inside")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -127,10 +118,9 @@ class KoFileForInterfaceTest {
     @Test
     fun `interface-with-object-inside`() {
         // given
-        val sut =
-            getSut("interface-with-object-inside")
-                .files()
-                .first()
+        val sut = getSut("interface-with-object-inside")
+            .files()
+            .first()
 
         // then
         sut.apply {
@@ -142,10 +132,9 @@ class KoFileForInterfaceTest {
     @Test
     fun `interface-with-interface-inside`() {
         // given
-        val sut =
-            getSut("interface-with-interface-inside")
-                .files()
-                .first()
+        val sut = getSut("interface-with-interface-inside")
+            .files()
+            .first()
 
         // then
         sut.apply {

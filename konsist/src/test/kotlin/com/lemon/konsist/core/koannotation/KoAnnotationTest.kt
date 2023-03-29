@@ -8,12 +8,11 @@ class KoAnnotationTest {
     @Test
     fun `annotation-type`() {
         // given
-        val sut =
-            getSut("annotation-type")
-                .functions()
-                .first()
-                .annotations
-                .first()
+        val sut = getSut("annotation-type")
+            .functions()
+            .first()
+            .annotations
+            .first()
 
         // then
         sut.type shouldBeEqualTo "SampleAnnotation"

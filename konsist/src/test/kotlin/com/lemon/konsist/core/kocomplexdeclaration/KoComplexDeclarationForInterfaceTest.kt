@@ -10,10 +10,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-class includeNested true`() {
         // given
-        val sut =
-            getSut("interface-with-class")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-class")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -24,10 +23,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-class includeNested false`() {
         // given
-        val sut =
-            getSut("interface-with-class")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-class")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -38,10 +36,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-interface includeNested true`() {
         // given
-        val sut =
-            getSut("interface-with-interface")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-interface")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -52,10 +49,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-interface includeNested false`() {
         // given
-        val sut =
-            getSut("interface-with-interface")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-interface")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -66,10 +62,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-object includeNested true`() {
         // given
-        val sut =
-            getSut("interface-with-object")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-object")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -80,10 +75,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-object includeNested false`() {
         // given
-        val sut =
-            getSut("interface-with-object")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-object")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -94,10 +88,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-property includeNested true`() {
         // given
-        val sut =
-            getSut("interface-with-property")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-property")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -108,10 +101,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-property includeNested false`() {
         // given
-        val sut =
-            getSut("interface-with-property")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-property")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -122,10 +114,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-function includeNested true`() {
         // given
-        val sut =
-            getSut("interface-with-function")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-function")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -136,10 +127,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-function includeNested false`() {
         // given
-        val sut =
-            getSut("interface-with-function")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-function")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -150,10 +140,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-all-declarations includeNested true`() {
         // given
-        val sut =
-            getSut("interface-with-all-declarations")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-all-declarations")
+            .interfaces()
+            .first()
 
         // then
         val expected = listOf(
@@ -172,10 +161,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-all-declarations includeNested false`() {
         // given
-        val sut =
-            getSut("interface-with-all-declarations")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-all-declarations")
+            .interfaces()
+            .first()
 
         // then
         val expected = listOf(
@@ -194,10 +182,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-nested-classes includeNested true`() {
         // given
-        val sut =
-            getSut("interface-with-nested-classes")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-nested-classes")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -208,10 +195,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-nested-classes includeNested false`() {
         // given
-        val sut =
-            getSut("interface-with-nested-classes")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-nested-classes")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -222,10 +208,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-nested-interfaces includeNested true`() {
         // given
-        val sut =
-            getSut("interface-with-nested-interfaces")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-nested-interfaces")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -236,10 +221,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-nested-interfaces includeNested false`() {
         // given
-        val sut =
-            getSut("interface-with-nested-interfaces")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-nested-interfaces")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -250,10 +234,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-nested-objects includeNested true`() {
         // given
-        val sut =
-            getSut("interface-with-nested-objects")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-nested-objects")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -264,10 +247,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-nested-objects includeNested false`() {
         // given
-        val sut =
-            getSut("interface-with-nested-objects")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-nested-objects")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -278,10 +260,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-nested-properties includeNested true`() {
         // given
-        val sut =
-            getSut("interface-with-nested-properties")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-nested-properties")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -292,10 +273,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-nested-properties includeNested false`() {
         // given
-        val sut =
-            getSut("interface-with-nested-properties")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-nested-properties")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -306,10 +286,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-nested-functions includeNested true`() {
         // given
-        val sut =
-            getSut("interface-with-nested-functions")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-nested-functions")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -320,10 +299,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-nested-functions includeNested false`() {
         // given
-        val sut =
-            getSut("interface-with-nested-functions")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-nested-functions")
+            .interfaces()
+            .first()
 
         // then
         sut
@@ -334,10 +312,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-nested-declarations includeNested true`() {
         // given
-        val sut =
-            getSut("interface-with-nested-declarations")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-nested-declarations")
+            .interfaces()
+            .first()
 
         // then
         val expected = listOf(
@@ -359,10 +336,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-nested-declarations includeNested false`() {
         // given
-        val sut =
-            getSut("interface-with-nested-declarations")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-nested-declarations")
+            .interfaces()
+            .first()
 
         // then
         val expected =
@@ -376,10 +352,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-class-which-not-represents-type`() {
         // given
-        val sut =
-            getSut("interface-with-class-which-not-represents-type")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-class-which-not-represents-type")
+            .interfaces()
+            .first()
 
         // then
         sut.representsType(SampleClass::class) shouldBeEqualTo false
@@ -388,10 +363,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-function-with-modifier`() {
         // given
-        val sut =
-            getSut("interface-with-function-with-modifier")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-function-with-modifier")
+            .interfaces()
+            .first()
 
         // then
         sut.apply {
@@ -403,10 +377,9 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-with-property-with-modifier`() {
         // given
-        val sut =
-            getSut("interface-with-property-with-modifier")
-                .interfaces()
-                .first()
+        val sut = getSut("interface-with-property-with-modifier")
+            .interfaces()
+            .first()
 
         // then
         sut.apply {

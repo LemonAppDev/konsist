@@ -8,13 +8,12 @@ class KoParameterTest {
     @Test
     fun `class-with-one-typed-parameter`() {
         // given
-        val sut =
-            getSut("class-with-one-typed-parameter")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
+        val sut = getSut("class-with-one-typed-parameter")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
 
         // then
         sut?.type shouldBeEqualTo "SampleParameter"
@@ -23,13 +22,12 @@ class KoParameterTest {
     @Test
     fun `class-with-one-name-parameter`() {
         // given
-        val sut =
-            getSut("class-with-one-name-parameter")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
+        val sut = getSut("class-with-one-name-parameter")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
 
         // then
         sut?.name shouldBeEqualTo "sampleParameter"
@@ -38,13 +36,12 @@ class KoParameterTest {
     @Test
     fun `class-one-parameter-with-default-value`() {
         // given
-        val sut =
-            getSut("class-one-parameter-with-default-value")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
-                ?.first()
+        val sut = getSut("class-one-parameter-with-default-value")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
 
         // then
         sut?.hasDefaultValue shouldBeEqualTo true
@@ -53,10 +50,9 @@ class KoParameterTest {
     @Test
     fun `class-without-parameters`() {
         // given
-        val sut =
-            getSut("class-without-parameters")
-                .classes()
-                .first()
+        val sut = getSut("class-without-parameters")
+            .classes()
+            .first()
 
         // then
         sut.primaryConstructor shouldBeEqualTo null
@@ -65,12 +61,11 @@ class KoParameterTest {
     @Test
     fun `class-with-empty-primary-constructor`() {
         // given
-        val sut =
-            getSut("class-with-empty-primary-constructor")
-                .classes()
-                .first()
-                .primaryConstructor
-                ?.parameters
+        val sut = getSut("class-with-empty-primary-constructor")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
 
         // then
         sut?.isEmpty() shouldBeEqualTo true
@@ -79,12 +74,11 @@ class KoParameterTest {
     @Test
     fun `function-with-primitive-default-parameter-value`() {
         // given
-        val sut =
-            getSut("function-with-primitive-default-parameter-value")
-                .functions()
-                .first()
-                .getParameters
-                .first()
+        val sut = getSut("function-with-primitive-default-parameter-value")
+            .functions()
+            .first()
+            .getParameters
+            .first()
 
         // then
         sut.defaultValue shouldBeEqualTo "2"
@@ -93,12 +87,11 @@ class KoParameterTest {
     @Test
     fun `function-with-complex-default-parameter-value`() {
         // given
-        val sut =
-            getSut("function-with-complex-default-parameter-value")
-                .functions()
-                .first()
-                .getParameters
-                .first()
+        val sut = getSut("function-with-complex-default-parameter-value")
+            .functions()
+            .first()
+            .getParameters
+            .first()
 
         // then
         sut.defaultValue shouldBeEqualTo "sampleFunction2()"
@@ -107,12 +100,11 @@ class KoParameterTest {
     @Test
     fun `function-with-null-default-parameter-value`() {
         // given
-        val sut =
-            getSut("function-with-null-default-parameter-value")
-                .functions()
-                .first()
-                .getParameters
-                .first()
+        val sut = getSut("function-with-null-default-parameter-value")
+            .functions()
+            .first()
+            .getParameters
+            .first()
 
         // then
         sut.defaultValue shouldBeEqualTo "null"
@@ -121,12 +113,11 @@ class KoParameterTest {
     @Test
     fun `function-without-default-parameter-value`() {
         // given
-        val sut =
-            getSut("function-without-default-parameter-value")
-                .functions()
-                .first()
-                .getParameters
-                .first()
+        val sut = getSut("function-without-default-parameter-value")
+            .functions()
+            .first()
+            .getParameters
+            .first()
 
         // then
         sut.defaultValue shouldBeEqualTo null

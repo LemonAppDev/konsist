@@ -8,10 +8,9 @@ class KoBaseDeclarationTest {
     @Test
     fun `file-path`() {
         // given
-        val sut =
-            getSut("file-path")
-                .functions()
-                .first()
+        val sut = getSut("file-path")
+            .functions()
+            .first()
 
         // then
         sut.filePath.endsWith("kobasedeclaration/snippet/file-path.kt") shouldBeEqualTo true
@@ -20,10 +19,9 @@ class KoBaseDeclarationTest {
     @Test
     fun `text-with-location`() {
         // given
-        val sut =
-            getSut("text-with-location")
-                .functions()
-                .first()
+        val sut = getSut("text-with-location")
+            .functions()
+            .first()
 
         // then
         val location = "'fun sampleFunction() {\n}' at (1,1) in //"
@@ -33,10 +31,9 @@ class KoBaseDeclarationTest {
     @Test
     fun `containing-file`() {
         // given
-        val sut =
-            getSut("containing-file")
-                .files()
-                .first()
+        val sut = getSut("containing-file")
+            .files()
+            .first()
 
         // then
         sut.containingFile.name.endsWith("file.kt") shouldBeEqualTo true
@@ -45,10 +42,9 @@ class KoBaseDeclarationTest {
     @Test
     fun `location`() {
         // given
-        val sut =
-            getSut("location")
-                .functions()
-                .first()
+        val sut = getSut("location")
+            .functions()
+            .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.filePath}:3:1"
@@ -57,10 +53,9 @@ class KoBaseDeclarationTest {
     @Test
     fun `text`() {
         // given
-        val sut =
-            getSut("text")
-                .functions()
-                .first()
+        val sut = getSut("text")
+            .functions()
+            .first()
 
         // then
         sut.text shouldBeEqualTo "fun sampleFunction()"
@@ -69,10 +64,9 @@ class KoBaseDeclarationTest {
     @Test
     fun `to-string`() {
         // given
-        val sut =
-            getSut("to-string")
-                .functions()
-                .first()
+        val sut = getSut("to-string")
+            .functions()
+            .first()
 
         // then
         sut.toString() shouldBeEqualTo sut.textWithLocation
