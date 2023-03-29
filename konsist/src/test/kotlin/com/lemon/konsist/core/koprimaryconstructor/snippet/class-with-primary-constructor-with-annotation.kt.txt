@@ -1,0 +1,1 @@
+class SampleClass @SampleAnnotation constuctor(val sampleParameter: SampleType)
