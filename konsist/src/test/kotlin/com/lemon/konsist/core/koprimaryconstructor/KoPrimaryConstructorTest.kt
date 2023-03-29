@@ -74,11 +74,23 @@ class KoPrimaryConstructorTest {
             .classes()
             .first()
             .primaryConstructor
+            ?.parameters
 
         // then
-        sut
+        sut?.map { it.name } shouldBeEqualTo listOf("sampleParameter")
+    }
+
+    @Test
+    fun `class-without-parameter-in-primary-constructor`() {
+        // given
+        val sut = getSut("class-without-parameter-in-primary-constructor")
+            .classes()
+            .first()
+            .primaryConstructor
             ?.parameters
-            ?.map { it.name } shouldBeEqualTo listOf("sampleParameter")
+
+        // then
+        sut?.isEmpty() shouldBeEqualTo true
     }
 
     @Test

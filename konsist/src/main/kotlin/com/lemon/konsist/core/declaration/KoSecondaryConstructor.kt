@@ -21,6 +21,8 @@ class KoSecondaryConstructor(
 
     val name by lazy { ktSecondaryConstructor.name }
 
+    val parameters by lazy { ktSecondaryConstructor.valueParameters.map { KoParameter(it) } }
+
     fun hasParameterNamed(name: String) =
         ktSecondaryConstructor
             .valueParameterList
