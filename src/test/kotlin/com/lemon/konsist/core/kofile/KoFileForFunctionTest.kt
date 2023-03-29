@@ -12,7 +12,7 @@ class KoFileForFunctionTest {
             .functions(includeNested = true)
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("SampleFunction")
+        sut.map { it.name } shouldBeEqualTo listOf("sampleFunction")
     }
 
     @Test
@@ -22,7 +22,7 @@ class KoFileForFunctionTest {
             .functions(includeNested = false)
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("SampleFunction")
+        sut.map { it.name } shouldBeEqualTo listOf("sampleFunction")
     }
 
     @Test
@@ -32,7 +32,7 @@ class KoFileForFunctionTest {
             .functions(includeNested = true)
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("sampleFunction")
+        sut.map { it.name } shouldBeEqualTo listOf("sampleNestedFunction")
     }
 
     @Test
@@ -43,6 +43,52 @@ class KoFileForFunctionTest {
 
         // then
         sut.map { it.name } shouldBeEqualTo emptyList()
+    }
+
+    @Test
+    fun `one-function includeNested true`() {
+        // given
+        val sut =
+            getSut("one-function")
+                .files()
+                .first()
+
+        // then
+        sut.apply {
+            hasFunction("sampleFunction", true) shouldBeEqualTo true
+            hasFunction("OtherFunction", true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `one-function includeNested false`() {
+        // given
+        val sut =
+            getSut("one-function")
+                .files()
+                .first()
+
+        // then
+        sut.apply {
+            hasFunction("sampleFunction", false) shouldBeEqualTo true
+            hasFunction("OtherFunction", false) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-with-function-inside`() {
+        // given
+        val sut =
+            getSut("function-with-function-inside")
+                .files()
+                .first()
+
+        // then
+        sut.apply {
+            hasFunction("sampleFunction", false) shouldBeEqualTo true
+            hasFunction("sampleNestedFunction", false) shouldBeEqualTo false
+            hasFunction("sampleNestedFunction", true) shouldBeEqualTo true
+        }
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofile/snippet/forfunction/$fileName.kt.txt")
