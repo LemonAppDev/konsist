@@ -1,7 +1,6 @@
 package com.lemon.konsist.core.koparameter
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemon.konsist.core.assertion.check.check
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -9,99 +8,128 @@ class KoParameterTest {
     @Test
     fun `class-with-one-typed-parameter`() {
         // given
-        val sut = getSut("class-with-one-typed-parameter")
+        val sut =
+            getSut("class-with-one-typed-parameter")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
-        sut.classes()
-            .mapNotNull { it.primaryConstructor }
-            .check {
-                it.parameters.first().type == "SampleParameter"
-            }
+        sut?.type shouldBeEqualTo "SampleParameter"
     }
 
     @Test
     fun `class-with-one-name-parameter`() {
         // given
-        val sut = getSut("class-with-one-name-parameter")
+        val sut =
+            getSut("class-with-one-name-parameter")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
-        sut.classes()
-            .mapNotNull { it.primaryConstructor }
-            .check {
-                it.parameters.first().name == "sampleParameter"
-            }
+        sut?.name shouldBeEqualTo "sampleParameter"
     }
 
     @Test
     fun `class-one-parameter-with-default-value`() {
         // given
-        val sut = getSut("class-one-parameter-with-default-value")
+        val sut =
+            getSut("class-one-parameter-with-default-value")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
+                ?.first()
 
         // then
-        sut.classes()
-            .mapNotNull { it.primaryConstructor }
-            .check {
-                it.parameters.first().hasDefaultValue
-            }
+        sut?.hasDefaultValue shouldBeEqualTo true
     }
 
     @Test
     fun `class-without-parameters`() {
         // given
-        val sut = getSut("class-without-parameters")
+        val sut =
+            getSut("class-without-parameters")
+                .classes()
+                .first()
 
         // then
-        sut.classes()
-            .check {
-                it.primaryConstructor == null
-            }
+        sut.primaryConstructor shouldBeEqualTo null
     }
 
     @Test
     fun `class-with-empty-primary-constructor`() {
         // given
-        val sut = getSut("class-with-empty-primary-constructor")
+        val sut =
+            getSut("class-with-empty-primary-constructor")
+                .classes()
+                .first()
+                .primaryConstructor
+                ?.parameters
 
         // then
-        sut.classes().mapNotNull { it.primaryConstructor }.check {
-            it.parameters.isEmpty()
-        }
+        sut?.isEmpty() shouldBeEqualTo true
     }
 
     @Test
     fun `function-with-primitive-default-parameter-value`() {
         // given
-        val sut = getSut("function-with-primitive-default-parameter-value")
+        val sut =
+            getSut("function-with-primitive-default-parameter-value")
+                .functions()
+                .first()
+                .getParameters
+                .first()
 
         // then
-        sut.functions().first().getParameters.first().defaultValue shouldBeEqualTo "2"
+        sut.defaultValue shouldBeEqualTo "2"
     }
 
     @Test
     fun `function-with-complex-default-parameter-value`() {
         // given
-        val sut = getSut("function-with-complex-default-parameter-value")
+        val sut =
+            getSut("function-with-complex-default-parameter-value")
+                .functions()
+                .first()
+                .getParameters
+                .first()
 
         // then
-        sut.functions().first().getParameters.first().defaultValue shouldBeEqualTo "SampleFunction2()"
+        sut.defaultValue shouldBeEqualTo "sampleFunction2()"
     }
 
     @Test
     fun `function-with-null-default-parameter-value`() {
         // given
-        val sut = getSut("function-with-null-default-parameter-value")
+        val sut =
+            getSut("function-with-null-default-parameter-value")
+                .functions()
+                .first()
+                .getParameters
+                .first()
 
         // then
-        sut.functions().first().getParameters.first().defaultValue shouldBeEqualTo "null"
+        sut.defaultValue shouldBeEqualTo "null"
     }
 
     @Test
     fun `function-without-default-parameter-value`() {
         // given
-        val sut = getSut("function-without-default-parameter-value")
+        val sut =
+            getSut("function-without-default-parameter-value")
+                .functions()
+                .first()
+                .getParameters
+                .first()
 
         // then
-        sut.functions().first().getParameters.first().defaultValue shouldBeEqualTo null
+        sut.defaultValue shouldBeEqualTo null
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/koparameter/snippet/$fileName.kt.txt")

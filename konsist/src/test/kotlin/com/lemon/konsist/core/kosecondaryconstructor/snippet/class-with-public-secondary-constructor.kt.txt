@@ -1,4 +1,4 @@
-class SampleFunction() {
+class SampleClass {
     public constructor(name: String) {
     }
 }

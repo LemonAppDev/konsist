@@ -6,7 +6,6 @@ import SampleAnnotation1
 import SampleAnnotation2
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemon.konsist.core.const.Modifier
-import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -14,203 +13,240 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-is-top-level`() {
         // given
-        val sut = getSut("interface-is-top-level")
+        val sut =
+            getSut("interface-is-top-level")
+                .interfaces(includeNested = true)
+                .first()
 
         // then
-        sut.interfaces(includeNested = true).first().isTopLevel shouldBe true
+        sut.isTopLevel shouldBeEqualTo true
     }
 
     @Test
     fun `interface-is-not-top-level`() {
         // given
-        val sut = getSut("interface-is-not-top-level")
+        val sut =
+            getSut("interface-is-not-top-level")
+                .interfaces(includeNested = true)
+                .first { it.name == "SampleNestedInterface" }
 
         // then
-        sut.interfaces(includeNested = true).first { it.name == "SampleNestedInterface" }.isTopLevel shouldBe false
+        sut.isTopLevel shouldBeEqualTo false
     }
 
     @Test
     fun `interface-without-annotation`() {
         // given
-        val sut = getSut("interface-without-annotation")
+        val sut =
+            getSut("interface-without-annotation")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces().first().annotations.isEmpty() shouldBe true
+        sut.annotations.isEmpty() shouldBeEqualTo true
     }
 
     @Test
     fun `interface-with-annotation`() {
         // given
-        val sut = getSut("interface-with-annotation")
+        val sut =
+            getSut("interface-with-annotation")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces().first().apply {
-            hasAnnotation(SampleAnnotation::class) shouldBe true
-            hasAnnotation(NonExistingAnnotation::class) shouldBe false
+        sut.apply {
+            hasAnnotation(SampleAnnotation::class) shouldBeEqualTo true
+            hasAnnotation(NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
 
     @Test
     fun `interface-with-two-annotations`() {
         // given
-        val sut = getSut("interface-with-two-annotations")
+        val sut =
+            getSut("interface-with-two-annotations")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces().first().apply {
-            hasAnnotation(SampleAnnotation1::class) shouldBe true
-            hasAnnotation(SampleAnnotation2::class) shouldBe true
-            hasAnnotation(NonExistingAnnotation::class) shouldBe false
+        sut.apply {
+            hasAnnotation(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotation(SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotation(NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
 
     @Test
     fun `interface-without-visibility-modifier`() {
         // given
-        val sut = getSut("interface-without-visibility-modifier")
+        val sut =
+            getSut("interface-without-visibility-modifier")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces().first().apply {
-            isPublic shouldBe true
-            isPrivate shouldBe false
-            isProtected shouldBe false
-            isInternal shouldBe false
+        sut.apply {
+            isPublic shouldBeEqualTo true
+            isPrivate shouldBeEqualTo false
+            isProtected shouldBeEqualTo false
+            isInternal shouldBeEqualTo false
         }
     }
 
     @Test
     fun `interface-with-public-visibility-modifier`() {
         // given
-        val sut = getSut("interface-with-public-visibility-modifier")
+        val sut =
+            getSut("interface-with-public-visibility-modifier")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces().first().apply {
-            isPublic shouldBe true
-            isPrivate shouldBe false
-            isProtected shouldBe false
-            isInternal shouldBe false
+        sut.apply {
+            isPublic shouldBeEqualTo true
+            isPrivate shouldBeEqualTo false
+            isProtected shouldBeEqualTo false
+            isInternal shouldBeEqualTo false
         }
     }
 
     @Test
     fun `interface-with-private-visibility-modifier`() {
         // given
-        val sut = getSut("interface-with-private-visibility-modifier")
+        val sut =
+            getSut("interface-with-private-visibility-modifier")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces().first().apply {
-            isPublic shouldBe false
-            isPrivate shouldBe true
-            isProtected shouldBe false
-            isInternal shouldBe false
+        sut.apply {
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo true
+            isProtected shouldBeEqualTo false
+            isInternal shouldBeEqualTo false
         }
     }
 
     @Test
     fun `interface-with-protected-visibility-modifier`() {
         // given
-        val sut = getSut("interface-with-protected-visibility-modifier")
+        val sut =
+            getSut("interface-with-protected-visibility-modifier")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces().first().apply {
-            isPublic shouldBe false
-            isPrivate shouldBe false
-            isProtected shouldBe true
-            isInternal shouldBe false
+        sut.apply {
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo false
+            isProtected shouldBeEqualTo true
+            isInternal shouldBeEqualTo false
         }
     }
 
     @Test
     fun `interface-with-internal-visibility-modifier`() {
         // given
-        val sut = getSut("interface-with-internal-visibility-modifier")
+        val sut =
+            getSut("interface-with-internal-visibility-modifier")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces().first().apply {
-            isPublic shouldBe false
-            isPrivate shouldBe false
-            isProtected shouldBe false
-            isInternal shouldBe true
+        sut.apply {
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo false
+            isProtected shouldBeEqualTo false
+            isInternal shouldBeEqualTo true
         }
     }
 
     @Test
     fun `interface-with-fully-qualified-name`() {
         // given
-        val sut = getSut("interface-with-fully-qualified-name")
+        val sut =
+            getSut("interface-with-fully-qualified-name")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces()
-            .first()
-            .fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleInterface"
+        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleInterface"
     }
 
     @Test
     fun `interface-with-package`() {
         // given
-        val sut = getSut("interface-with-package")
+        val sut =
+            getSut("interface-with-package")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces()
-            .first()
-            .packageDirective shouldBeEqualTo "com.samplepackage"
+        sut.packageDirective shouldBeEqualTo "com.samplepackage"
     }
 
     @Test
     fun `interface-without-package`() {
         // given
-        val sut = getSut("interface-without-package")
+        val sut =
+            getSut("interface-without-package")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces()
-            .first()
-            .packageDirective shouldBeEqualTo ""
+        sut.packageDirective shouldBeEqualTo ""
     }
 
     @Test
     fun `interface-with-protected-modifier`() {
         // given
-        val sut = getSut("interface-with-protected-modifier")
+        val sut =
+            getSut("interface-with-protected-modifier")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces()
-            .first()
-            .hasModifiers() shouldBe true
+        sut.hasModifiers() shouldBeEqualTo true
     }
 
     @Test
     fun `interface-with-public-modifier`() {
         // given
-        val sut = getSut("interface-with-public-modifier")
+        val sut =
+            getSut("interface-with-public-modifier")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces()
-            .first()
-            .apply {
-                hasModifiers(Modifier.PUBLIC) shouldBe true
-                hasModifiers(Modifier.PRIVATE) shouldBe false
-            }
+        sut.apply {
+            hasModifiers(Modifier.PUBLIC) shouldBeEqualTo true
+            hasModifiers(Modifier.PRIVATE) shouldBeEqualTo false
+        }
     }
 
     @Test
     fun `interface-reside-in-package`() {
         // given
-        val sut = getSut("interface-reside-in-package")
+        val sut =
+            getSut("interface-reside-in-package")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces()
-            .first()
-            .resideInAPackages("samplepackage") shouldBe true
+        sut.resideInAPackages("samplepackage") shouldBeEqualTo true
     }
 
     @Test
     fun `interface-not-reside-in-package`() {
         // given
-        val sut = getSut("interface-not-reside-in-package")
+        val sut =
+            getSut("interface-not-reside-in-package")
+                .interfaces()
+                .first()
 
         // then
-        sut.interfaces()
-            .first()
-            .resideInAPackages("otherpackage") shouldBe false
+        sut.resideInAPackages("otherpackage") shouldBeEqualTo false
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kodeclaration/snippet/forinterface/$fileName.kt.txt")

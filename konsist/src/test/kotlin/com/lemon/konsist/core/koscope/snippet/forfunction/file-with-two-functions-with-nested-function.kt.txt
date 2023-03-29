@@ -1,8 +1,8 @@
-fun SampleFunction1() {
-    fun NestedSampleFunction() {
+fun sampleFunction1() {
+    fun nestedSampleFunction() {
 
     }
 }
 
-fun SampleFunction2() {
+fun sampleFunction2() {
 }

@@ -9,40 +9,40 @@ class KoFileForFunctionTest {
     fun `file-with-one-function includeNested true`() {
         // given
         val sut = getSut("file-with-one-function")
+            .functions(includeNested = true)
 
         // then
-        sut.functions(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleFunction")
+        sut.map { it.name } shouldBeEqualTo listOf("SampleFunction")
     }
 
     @Test
     fun `file-with-one-function includeNested false`() {
         // given
         val sut = getSut("file-with-one-function")
+            .functions(includeNested = false)
 
         // then
-        sut.functions(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("SampleFunction")
+        sut.map { it.name } shouldBeEqualTo listOf("SampleFunction")
     }
 
     @Test
     fun `file-with-one-class-containing-function includeNested true`() {
         // given
         val sut = getSut("file-with-one-class-containing-function")
+            .functions(includeNested = true)
 
         // then
-        sut.functions(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleFunction")
+        sut.map { it.name } shouldBeEqualTo listOf("sampleFunction")
     }
 
     @Test
     fun `file-with-one-class-containing-function includeNested false`() {
         // given
         val sut = getSut("file-with-one-class-containing-function")
+            .functions(includeNested = false)
 
         // then
-        sut.functions(includeNested = false)
-            .map { it.name } shouldBeEqualTo emptyList()
+        sut.map { it.name } shouldBeEqualTo emptyList()
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofile/snippet/forfunction/$fileName.kt.txt")

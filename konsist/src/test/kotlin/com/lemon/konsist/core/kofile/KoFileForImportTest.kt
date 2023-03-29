@@ -8,19 +8,23 @@ class KoFileForImportTest {
     @Test
     fun `file-with-one-import`() {
         // given
-        val sut = getSut("file-with-one-import")
+        val sut =
+            getSut("file-with-one-import")
+                .imports()
 
         // then
-        sut.imports().map { it.name } shouldBeEqualTo listOf("com.sampleimport")
+        sut.map { it.name } shouldBeEqualTo listOf("com.sampleimport")
     }
 
     @Test
     fun `file-without-imports`() {
         // given
-        val sut = getSut("file-without-imports")
+        val sut =
+            getSut("file-without-imports")
+                .imports()
 
         // then
-        sut.imports().isEmpty()
+        sut.isEmpty()
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofile/snippet/forimport/$fileName.kt.txt")

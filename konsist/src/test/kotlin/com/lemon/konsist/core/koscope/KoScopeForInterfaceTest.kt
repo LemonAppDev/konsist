@@ -11,7 +11,9 @@ class KoScopeForInterfaceTest {
         val sut = getSut("file-with-one-interface")
 
         // then
-        sut.interfaces().map { it.name } shouldBeEqualTo listOf("SampleInterface")
+        sut
+            .interfaces()
+            .map { it.name } shouldBeEqualTo listOf("SampleInterface")
     }
 
     @Test
@@ -20,7 +22,9 @@ class KoScopeForInterfaceTest {
         val sut = getSut("file-without-interface")
 
         // then
-        sut.interfaces().isEmpty()
+        sut
+            .interfaces()
+            .isEmpty()
     }
 
     @Test
@@ -29,11 +33,9 @@ class KoScopeForInterfaceTest {
         val sut = getSut("file-with-two-interfaces-with-nested-interface")
 
         // then
-        sut.interfaces(includeNested = true).map { it.name } shouldBeEqualTo listOf(
-            "SampleInterface1",
-            "SampleInterface2",
-            "NestedSampleInterface",
-        )
+        sut
+            .interfaces(includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf("SampleInterface1", "SampleInterface2", "NestedSampleInterface")
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forinterface/$fileName.kt.txt")

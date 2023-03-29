@@ -1,5 +1,5 @@
 package com.samplepackage
 
-fun SampleFunction() {
+fun sampleFunction() {
 
 }

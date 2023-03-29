@@ -1,4 +1,4 @@
 class SampleClass {
-    fun SampleFunction {
+    fun sampleFunction() {
     }
 }

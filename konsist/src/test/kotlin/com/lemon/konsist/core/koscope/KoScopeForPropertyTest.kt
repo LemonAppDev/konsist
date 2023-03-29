@@ -12,7 +12,9 @@ class KoScopeForPropertyTest {
         val sut = getSut("file-with-one-property")
 
         // then
-        sut.properties().map { it.name } shouldBeEqualTo listOf("sampleProperty")
+        sut
+            .properties()
+            .map { it.name } shouldBeEqualTo listOf("sampleProperty")
     }
 
     @Test
@@ -21,7 +23,9 @@ class KoScopeForPropertyTest {
         val sut = getSut("file-without-property")
 
         // then
-        sut.properties().isEmpty()
+        sut
+            .properties()
+            .isEmpty()
     }
 
     @Test
@@ -30,9 +34,9 @@ class KoScopeForPropertyTest {
         val sut = getSut("file-with-one-class-containing-property")
 
         // then
-        sut.properties(includeNested = true).map { it.name } shouldBeEqualTo listOf(
-            "sampleProperty",
-        )
+        sut
+            .properties(includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf("sampleProperty")
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forproperty/$fileName.kt.txt")

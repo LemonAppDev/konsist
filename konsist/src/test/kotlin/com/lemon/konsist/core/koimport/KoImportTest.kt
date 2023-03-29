@@ -9,10 +9,12 @@ class KoImportTest {
     @Test
     fun `import-name`() {
         // given
-        val sut = getSut("import-name")
+        val sut =
+            getSut("import-name")
+                .imports()
 
         // then
-        sut.imports().map { it.name } shouldBeEqualTo listOf("com.SampleImport")
+        sut.map { it.name } shouldBeEqualTo listOf("com.SampleImport")
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koimport/snippet/$fileName.kt.txt")

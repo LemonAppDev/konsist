@@ -12,7 +12,9 @@ class KoScopeForFilePackageTest {
         val sut = getSut("file-with-package")
 
         // then
-        sut.packages().map { it?.name } shouldBeEqualTo listOf("samplepackage")
+        sut
+            .packages()
+            .map { it?.name } shouldBeEqualTo listOf("samplepackage")
     }
 
     @Test
@@ -21,7 +23,9 @@ class KoScopeForFilePackageTest {
         val sut = getSut("file-without-package")
 
         // then
-        sut.packages().isEmpty()
+        sut
+            .packages()
+            .isEmpty()
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forfilepackage/$fileName.kt.txt")

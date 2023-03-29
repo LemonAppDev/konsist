@@ -8,19 +8,25 @@ class KoFileForPackageTest {
     @Test
     fun `file-with-one-package`() {
         // given
-        val sut = getSut("file-with-one-package")
+        val sut =
+            getSut("file-with-one-package")
+                .files()
+                .first()
 
         // then
-        sut.files().first().packageDirective?.name shouldBeEqualTo "SamplePackage"
+        sut.packageDirective?.name shouldBeEqualTo "SamplePackage"
     }
 
     @Test
     fun `file-without-package`() {
         // given
-        val sut = getSut("file-without-package")
+        val sut =
+            getSut("file-without-package")
+                .files()
+                .first()
 
         // then
-        sut.files().first().packageDirective shouldBeEqualTo null
+        sut.packageDirective shouldBeEqualTo null
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofile/snippet/forpackage/$fileName.kt.txt")

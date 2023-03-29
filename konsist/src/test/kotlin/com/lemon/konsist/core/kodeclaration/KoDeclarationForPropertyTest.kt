@@ -6,7 +6,6 @@ import SampleAnnotation1
 import SampleAnnotation2
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemon.konsist.core.const.Modifier
-import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
@@ -15,205 +14,242 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-is-top-level`() {
         // given
-        val sut = getSut("property-is-top-level")
+        val sut =
+            getSut("property-is-top-level")
+                .properties(includeNested = true)
+                .first()
 
         // then
-        sut.properties(includeNested = true).first().isTopLevel shouldBe true
+        sut.isTopLevel shouldBeEqualTo true
     }
 
     @Test
     fun `property-is-not-top-level`() {
         // given
-        val sut = getSut("property-is-not-top-level")
+        val sut =
+            getSut("property-is-not-top-level")
+                .properties(includeNested = true)
+                .first { it.name == "sampleNestedProperty" }
 
         // then
-        sut.properties(includeNested = true).first { it.name == "sampleNestedProperty" }.isTopLevel shouldBe false
+        sut.isTopLevel shouldBeEqualTo false
     }
 
     @Test
     fun `property-without-annotation`() {
         // given
-        val sut = getSut("property-without-annotation")
+        val sut =
+            getSut("property-without-annotation")
+                .properties()
+                .first()
 
         // then
-        sut.properties().first().annotations shouldHaveSize 0
+        sut.annotations shouldHaveSize 0
     }
 
     @Test
     fun `property-with-annotation`() {
         // given
-        val sut = getSut("property-with-annotation")
+        val sut =
+            getSut("property-with-annotation")
+                .properties()
+                .first()
 
         // then
-        sut.properties().first().apply {
+        sut.apply {
             annotations shouldHaveSize 1
-            hasAnnotation(SampleAnnotation::class) shouldBe true
-            hasAnnotation(NonExistingAnnotation::class) shouldBe false
+            hasAnnotation(SampleAnnotation::class) shouldBeEqualTo true
+            hasAnnotation(NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
 
     @Test
     fun `property-with-two-annotations`() {
         // given
-        val sut = getSut("property-with-two-annotations")
+        val sut =
+            getSut("property-with-two-annotations")
+                .properties()
+                .first()
 
         // then
-        sut.properties().first().apply {
+        sut.apply {
             annotations shouldHaveSize 2
-            hasAnnotation(SampleAnnotation1::class) shouldBe true
-            hasAnnotation(SampleAnnotation2::class) shouldBe true
-            hasAnnotation(NonExistingAnnotation::class) shouldBe false
+            hasAnnotation(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotation(SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotation(NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
 
     @Test
     fun `property-without-visibility-modifier`() {
         // given
-        val sut = getSut("property-without-visibility-modifier")
+        val sut =
+            getSut("property-without-visibility-modifier")
+                .properties()
+                .first()
 
         // then
-        sut.properties().first().apply {
-            isPublic shouldBe true
-            isPrivate shouldBe false
-            isProtected shouldBe false
-            isInternal shouldBe false
+        sut.apply {
+            isPublic shouldBeEqualTo true
+            isPrivate shouldBeEqualTo false
+            isProtected shouldBeEqualTo false
+            isInternal shouldBeEqualTo false
         }
     }
 
     @Test
     fun `property-with-public-visibility-modifier`() {
         // given
-        val sut = getSut("property-with-public-visibility-modifier")
+        val sut =
+            getSut("property-with-public-visibility-modifier")
+                .properties()
+                .first()
 
         // then
-        sut.properties().first().apply {
-            isPublic shouldBe true
-            isPrivate shouldBe false
-            isProtected shouldBe false
-            isInternal shouldBe false
+        sut.apply {
+            isPublic shouldBeEqualTo true
+            isPrivate shouldBeEqualTo false
+            isProtected shouldBeEqualTo false
+            isInternal shouldBeEqualTo false
         }
     }
 
     @Test
     fun `property-with-private-visibility-modifier`() {
         // given
-        val sut = getSut("property-with-private-visibility-modifier")
+        val sut =
+            getSut("property-with-private-visibility-modifier")
+                .properties()
+                .first()
 
         // then
-        sut.properties().first().apply {
-            isPublic shouldBe false
-            isPrivate shouldBe true
-            isProtected shouldBe false
-            isInternal shouldBe false
+        sut.apply {
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo true
+            isProtected shouldBeEqualTo false
+            isInternal shouldBeEqualTo false
         }
     }
 
     @Test
     fun `property-with-protected-visibility-modifier`() {
         // given
-        val sut = getSut("property-with-protected-visibility-modifier")
+        val sut =
+            getSut("property-with-protected-visibility-modifier")
+                .properties()
+                .first()
 
         // then
-        sut.properties().first().apply {
-            isPublic shouldBe false
-            isPrivate shouldBe false
-            isProtected shouldBe true
-            isInternal shouldBe false
+        sut.apply {
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo false
+            isProtected shouldBeEqualTo true
+            isInternal shouldBeEqualTo false
         }
     }
 
     @Test
     fun `property-with-internal-visibility-modifier`() {
         // given
-        val sut = getSut("property-with-internal-visibility-modifier")
+        val sut =
+            getSut("property-with-internal-visibility-modifier")
+                .properties()
+                .first()
 
         // then
-        sut.properties().first().apply {
-            isPublic shouldBe false
-            isPrivate shouldBe false
-            isProtected shouldBe false
-            isInternal shouldBe true
+        sut.apply {
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo false
+            isProtected shouldBeEqualTo false
+            isInternal shouldBeEqualTo true
         }
     }
 
     @Test
     fun `property-with-fully-qualified-name`() {
         // given
-        val sut = getSut("property-with-fully-qualified-name")
+        val sut =
+            getSut("property-with-fully-qualified-name")
+                .properties()
+                .first()
 
         // then
-        sut.properties()
-            .first()
-            .fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleProperty"
+        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleProperty"
     }
 
     @Test
     fun `property-with-package`() {
         // given
-        val sut = getSut("property-with-package")
+        val sut =
+            getSut("property-with-package")
+                .properties()
+                .first()
 
         // then
-        sut.properties()
-            .first()
-            .packageDirective shouldBeEqualTo "com.samplepackage"
+        sut.packageDirective shouldBeEqualTo "com.samplepackage"
     }
 
     @Test
     fun `property-without-package`() {
         // given
-        val sut = getSut("property-without-package")
+        val sut =
+            getSut("property-without-package")
+                .properties()
+                .first()
 
         // then
-        sut.properties()
-            .first()
-            .packageDirective shouldBeEqualTo ""
+        sut.packageDirective shouldBeEqualTo ""
     }
 
     @Test
     fun `property-with-protected-modifier`() {
         // given
-        val sut = getSut("property-with-protected-modifier")
+        val sut =
+            getSut("property-with-protected-modifier")
+                .properties()
+                .first()
 
         // then
-        sut.properties()
-            .first()
-            .hasModifiers() shouldBe true
+        sut.hasModifiers() shouldBeEqualTo true
     }
 
     @Test
     fun `property-with-public-modifier`() {
         // given
-        val sut = getSut("property-with-public-modifier")
+        val sut =
+            getSut("property-with-public-modifier")
+                .properties()
+                .first()
 
         // then
-        sut.properties()
-            .first()
-            .apply {
-                hasModifiers(Modifier.PUBLIC) shouldBe true
-                hasModifiers(Modifier.PRIVATE) shouldBe false
-            }
+        sut.apply {
+            hasModifiers(Modifier.PUBLIC) shouldBeEqualTo true
+            hasModifiers(Modifier.PRIVATE) shouldBeEqualTo false
+        }
     }
 
     @Test
     fun `property-reside-in-package`() {
         // given
-        val sut = getSut("property-reside-in-package")
+        val sut =
+            getSut("property-reside-in-package")
+                .properties()
+                .first()
 
         // then
-        sut.properties()
-            .first()
-            .resideInAPackages("samplepackage") shouldBe true
+        sut.resideInAPackages("samplepackage") shouldBeEqualTo true
     }
 
     @Test
     fun `property-not-reside-in-package`() {
         // given
-        val sut = getSut("property-not-reside-in-package")
+        val sut =
+            getSut("property-not-reside-in-package")
+                .properties()
+                .first()
 
         // then
-        sut.properties()
-            .first()
-            .resideInAPackages("otherpackage") shouldBe false
+        sut.resideInAPackages("otherpackage") shouldBeEqualTo false
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kodeclaration/snippet/forproperty/$fileName.kt.txt")

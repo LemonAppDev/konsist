@@ -8,37 +8,49 @@ class KoPackageTest {
     @Test
     fun `package-name`() {
         // given
-        val sut = getSut("package-name")
+        val sut =
+            getSut("package-name")
+                .packages()
+                .first()
 
         // then
-        sut.packages().first()?.name shouldBeEqualTo "samplepackage"
+        sut?.name shouldBeEqualTo "samplepackage"
     }
 
     @Test
     fun `package-without-name`() {
         // given
-        val sut = getSut("package-without-name")
+        val sut =
+            getSut("package-without-name")
+                .packages()
+                .first()
 
         // then
-        sut.packages().first()?.name shouldBeEqualTo null
+        sut?.name shouldBeEqualTo null
     }
 
     @Test
     fun `package-with-name`() {
         // given
-        val sut = getSut("package-with-name")
+        val sut =
+            getSut("package-with-name")
+                .packages()
+                .first()
 
         // then
-        sut.packages().first()?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
+        sut?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
     }
 
     @Test
     fun `package-without-fully-qualified-name`() {
         // given
-        val sut = getSut("package-without-fully-qualified-name")
+        val sut =
+            getSut("package-without-fully-qualified-name")
+                .packages()
+                .first()
 
         // then
-        sut.packages().first()?.fullyQualifiedName shouldBeEqualTo null
+        sut?.fullyQualifiedName shouldBeEqualTo null
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/kopackage/snippet/$fileName.kt.txt")

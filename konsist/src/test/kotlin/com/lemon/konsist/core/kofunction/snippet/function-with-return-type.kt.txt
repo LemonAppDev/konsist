@@ -1,2 +1,2 @@
-fun SampleFunction(): SampleType {
+fun sampleFunction(): SampleType {
 }

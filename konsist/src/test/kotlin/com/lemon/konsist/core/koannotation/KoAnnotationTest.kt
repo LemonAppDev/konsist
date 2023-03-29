@@ -8,10 +8,15 @@ class KoAnnotationTest {
     @Test
     fun `annotation-type`() {
         // given
-        val sut = getSut("annotation-type")
+        val sut =
+            getSut("annotation-type")
+                .functions()
+                .first()
+                .annotations
+                .first()
 
         // then
-        sut.functions().first().annotations.first().type shouldBeEqualTo "SampleAnnotation"
+        sut.type shouldBeEqualTo "SampleAnnotation"
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/koannotation/snippet/$fileName.kt.txt")

@@ -1,4 +1,4 @@
 @SampleAnnotation1
 @SampleAnnotation2
-fun SampleFunction() {
+fun sampleFunction() {
 }
