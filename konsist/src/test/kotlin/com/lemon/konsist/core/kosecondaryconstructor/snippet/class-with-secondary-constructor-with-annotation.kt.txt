@@ -1,0 +1,3 @@
+class SampleClass(val sampleProperty1: SampleType) {
+    @SampleAnnotation constructor(val sampleProperty2: SampleType): this(sampleProperty1)
+}
