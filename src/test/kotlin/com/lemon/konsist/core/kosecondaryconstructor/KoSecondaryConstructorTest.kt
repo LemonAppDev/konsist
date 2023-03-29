@@ -73,6 +73,36 @@ class KoSecondaryConstructorTest {
     }
 
     @Test
+    fun `class-with-secondary-constructor-with-parameter`() {
+        // given
+        val sut = getSut("class-with-secondary-constructor-with-parameter")
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        sut
+            .parameters
+            .map { it.name } shouldBeEqualTo listOf("sampleProperty")
+    }
+
+    @Test
+    fun `class-with-secondary-constructor-without-parameter`() {
+        // given
+        val sut = getSut("class-with-secondary-constructor-without-parameter")
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        sut
+            .parameters
+            .isEmpty() shouldBeEqualTo true
+    }
+
+    @Test
     fun `class-with-secondary-constructor-with-annotation`() {
         // given
         val sut = getSut("class-with-secondary-constructor-with-annotation")
