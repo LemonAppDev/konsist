@@ -21,6 +21,12 @@ class KoSecondaryConstructor(
 
     val name by lazy { ktSecondaryConstructor.name }
 
+    fun hasParameterNamed(name: String) =
+        ktSecondaryConstructor
+            .valueParameterList
+            ?.parameters
+            ?.firstOrNull()?.name == name
+
     val annotations = ktSecondaryConstructor
         .annotationEntries
         .map { KoAnnotation(it) }

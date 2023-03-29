@@ -105,5 +105,21 @@ class KoSecondaryConstructorTest {
         }
     }
 
+    @Test
+    fun `class-with-secondary-constructor-with-named-parameter`() {
+        // given
+        val sut = getSut("class-with-secondary-constructor-with-named-parameter")
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        sut.apply {
+            hasParameterNamed("sampleProperty") shouldBeEqualTo true
+            hasParameterNamed("otherProperty") shouldBeEqualTo false
+        }
+    }
+
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/kosecondaryconstructor/snippet/$fileName.kt.txt")
 }
