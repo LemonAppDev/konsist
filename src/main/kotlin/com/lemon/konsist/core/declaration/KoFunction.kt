@@ -12,7 +12,7 @@ class KoFunction(private val ktFunction: KtFunction) : KoDeclaration(ktFunction)
 
     val isInline by lazy { ktFunction.modifierList?.hasModifier(KtTokens.INLINE_KEYWORD) ?: false }
 
-    val getParameters by lazy {
+    val parameters by lazy {
         ktFunction
             .children
             .first()
@@ -20,6 +20,8 @@ class KoFunction(private val ktFunction: KtFunction) : KoDeclaration(ktFunction)
             .filterIsInstance<KtParameter>()
             .map { KoParameter(it) }
     }
+
+    fun hasParameterNamed(name: String) = parameters.firstOrNull()?.name == name
 
     val hasExplicitReturnType by lazy { ktFunction.hasDeclaredReturnType() }
 
