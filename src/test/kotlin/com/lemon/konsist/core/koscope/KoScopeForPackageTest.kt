@@ -4,7 +4,7 @@ import com.lemon.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoScopeForFilePackageTest {
+class KoScopeForPackageTest {
 
     @Test
     fun `file-with-package`() {
@@ -28,5 +28,5 @@ class KoScopeForFilePackageTest {
             .isEmpty()
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forfilepackage/$fileName.kt.txt")
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forpackage/$fileName.kt.txt")
 }
