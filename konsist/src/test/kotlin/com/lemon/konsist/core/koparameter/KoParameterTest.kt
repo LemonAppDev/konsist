@@ -77,7 +77,7 @@ class KoParameterTest {
         val sut = getSut("function-with-primitive-default-parameter-value")
             .functions()
             .first()
-            .getParameters
+            .parameters
             .first()
 
         // then
@@ -90,7 +90,7 @@ class KoParameterTest {
         val sut = getSut("function-with-complex-default-parameter-value")
             .functions()
             .first()
-            .getParameters
+            .parameters
             .first()
 
         // then
@@ -103,7 +103,7 @@ class KoParameterTest {
         val sut = getSut("function-with-null-default-parameter-value")
             .functions()
             .first()
-            .getParameters
+            .parameters
             .first()
 
         // then
@@ -116,7 +116,7 @@ class KoParameterTest {
         val sut = getSut("function-without-default-parameter-value")
             .functions()
             .first()
-            .getParameters
+            .parameters
             .first()
 
         // then

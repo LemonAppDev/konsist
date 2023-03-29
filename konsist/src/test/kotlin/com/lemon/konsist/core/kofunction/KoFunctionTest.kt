@@ -122,7 +122,7 @@ class KoFunctionTest {
 
         // then
         sut.apply {
-            getParameters.size shouldBeEqualTo 2
+            parameters.size shouldBeEqualTo 2
             getExplicitReturnType shouldBeEqualTo "Boolean"
         }
     }
@@ -136,8 +136,23 @@ class KoFunctionTest {
 
         // then
         sut
-            .getParameters
+            .parameters
             .size shouldBeEqualTo 1
+    }
+
+    @Test
+    fun `function-with-named-parameter`() {
+        // given
+        val sut =
+            getSut("function-with-named-parameter")
+                .functions()
+                .first()
+
+        // then
+        sut.apply {
+            hasParameterNamed("sampleParameter") shouldBeEqualTo true
+            hasParameterNamed("otherParameter") shouldBeEqualTo false
+        }
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofunction/snippet/$fileName.kt.txt")
