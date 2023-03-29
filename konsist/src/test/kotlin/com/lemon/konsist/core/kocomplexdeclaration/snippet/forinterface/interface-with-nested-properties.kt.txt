@@ -1,0 +1,7 @@
+interface SampleInterface {
+    val sampleNestedProperty1: Boolean = true
+
+    class SampleClass {
+        val sampleNestedProperty2: Boolean = true
+    }
+}

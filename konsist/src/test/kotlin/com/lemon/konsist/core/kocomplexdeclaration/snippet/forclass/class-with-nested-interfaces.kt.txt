@@ -1,0 +1,9 @@
+class SampleClass {
+    interface SampleNestedInterface1 {
+        interface SampleNestedInterface2
+    }
+
+    class SampleClass {
+        interface SampleNestedInterface3
+    }
+}

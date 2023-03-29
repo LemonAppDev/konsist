@@ -36,14 +36,25 @@ open class KoComplexDeclaration(private val ktClassOrObject: KtClassOrObject) : 
 
     private val nestedDeclarations by lazy {
         declarations
-            .filterIsInstance<KoComplexDeclaration>()
-            .flatMap { mutableListOf(it) + it.declarations(true) }
+            .flatMap {
+                when (it) {
+                    is KoComplexDeclaration -> mutableListOf(it) + it.declarations(true)
+                    is KoFunction -> it.getLocalFunctions(true)
+                    else -> listOf(it)
+                }
+            }
     }
 
     fun getClasses(includeNested: Boolean = false) = if (includeNested) {
         nestedDeclarations.filterIsInstance<KoClass>()
     } else {
         classes
+    }
+
+    fun functions(includeNested: Boolean = false) = if (includeNested) {
+        functions + nestedDeclarations.filterIsInstance<KoFunction>()
+    } else {
+        functions
     }
 
     fun interfaces(includeNested: Boolean = false) = if (includeNested) {
@@ -65,15 +76,9 @@ open class KoComplexDeclaration(private val ktClassOrObject: KtClassOrObject) : 
     }
 
     fun declarations(includeNested: Boolean = false): List<KoDeclaration> = if (includeNested) {
-        nestedDeclarations + properties + functions
+        nestedDeclarations + functions
     } else {
         declarations
-    }
-
-    fun functions(includeNested: Boolean = false) = if (includeNested) {
-        nestedDeclarations.filterIsInstance<KoFunction>()
-    } else {
-        functions
     }
 
     fun hasFunction(name: String, vararg modifiers: Modifier): Boolean {

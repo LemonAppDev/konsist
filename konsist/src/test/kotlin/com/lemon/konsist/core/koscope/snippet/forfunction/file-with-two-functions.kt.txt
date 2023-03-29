@@ -1,0 +1,5 @@
+fun SampleFunction1 {
+}
+
+fun SampleFunction2 {
+}

@@ -91,7 +91,7 @@ class KoFile(private val ktFile: KtFile) : KoNamedDeclaration(ktFile) {
     }
 
     fun properties(includeNested: Boolean = false) = if (includeNested) {
-        nestedDeclarations.filterIsInstance<KoProperty>()
+        properties + nestedDeclarations.filterIsInstance<KoProperty>()
     } else {
         properties
     }

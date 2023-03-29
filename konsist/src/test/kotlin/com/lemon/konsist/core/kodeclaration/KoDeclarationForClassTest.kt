@@ -5,6 +5,7 @@ import SampleAnnotation
 import SampleAnnotation1
 import SampleAnnotation2
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemon.konsist.core.const.Modifier
 import com.lemon.konsist.core.const.Modifier.PRIVATE
 import com.lemon.konsist.core.const.Modifier.PUBLIC
 import org.amshove.kluent.shouldBe
@@ -190,8 +191,8 @@ class KoDeclarationForClassTest {
         sut.classes()
             .first()
             .apply {
-                hasModifiers(PUBLIC) shouldBe true
-                hasModifiers(PRIVATE) shouldBe false
+                hasModifiers(Modifier.PUBLIC) shouldBe true
+                hasModifiers(Modifier.PRIVATE) shouldBe false
             }
     }
 

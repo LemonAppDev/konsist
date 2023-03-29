@@ -23,7 +23,7 @@ class KoScopeForDeclarationTest {
         val sut = getSut("file-with-one-class-containing-function")
 
         // then
-        sut.declarations(includeNested = true).map { it.name } shouldBeEqualTo listOf("SampleNestedFunction")
+        sut.declarations(includeNested = true).map { it.name } shouldBeEqualTo listOf("sampleNestedFunction")
     }
 
     @Test
@@ -32,7 +32,7 @@ class KoScopeForDeclarationTest {
         val sut = getSut("file-with-one-class-containing-function-and-property")
 
         // then
-        val expected = listOf("sampleProperty", "SampleNestedFunction")
+        val expected = listOf("sampleProperty", "sampleNestedFunction")
 
         sut.declarations(includeNested = true).map { it.name } shouldBeEqualTo expected
     }
