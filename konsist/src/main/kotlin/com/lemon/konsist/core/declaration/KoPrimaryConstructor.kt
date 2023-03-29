@@ -27,7 +27,7 @@ class KoPrimaryConstructor(
 
     val parameters by lazy { ktParameters.map { KoParameter(it) } }
 
-    fun hasParameterNamed(name: String) = ktParameters.firstOrNull()?.name == name
+    fun hasParameterNamed(name: String) = parameters.firstOrNull()?.name == name
 
     val annotations = ktPrimaryConstructor
         .annotationEntries
