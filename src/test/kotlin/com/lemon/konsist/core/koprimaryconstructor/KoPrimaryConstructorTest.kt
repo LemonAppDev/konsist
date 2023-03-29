@@ -1,5 +1,7 @@
 package com.lemon.konsist.core.koprimaryconstructor
 
+import SampleAnnotation
+import SampleAnnotation1
 import com.lemon.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -109,6 +111,37 @@ class KoPrimaryConstructorTest {
 
         // then
         sut?.hasParameterNamed("otherName") shouldBeEqualTo false
+    }
+
+    @Test
+    fun `class-with-primary-constructor-with-annotation`() {
+        // given
+        val sut = getSut("class-with-primary-constructor-with-annotation")
+            .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        sut?.apply {
+            annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation")
+            hasAnnotation(SampleAnnotation::class) shouldBeEqualTo true
+            hasAnnotation(SampleAnnotation1::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-with-primary-constructor-without-annotation`() {
+        // given
+        val sut = getSut("class-with-primary-constructor-without-annotation")
+            .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        sut?.apply {
+            annotations.isEmpty() shouldBeEqualTo true
+            hasAnnotation(SampleAnnotation::class) shouldBeEqualTo false
+        }
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koprimaryconstructor/snippet/$fileName.kt.txt")
