@@ -9,40 +9,52 @@ class KoFileForInterfaceTest {
     fun `file-with-one-interface includeNested true`() {
         // given
         val sut = getSut("file-with-one-interface")
-            .interfaces(includeNested = true)
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("SampleInterface")
+        sut
+            .interfaces(includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf("SampleInterface")
     }
 
     @Test
     fun `file-with-one-interface includeNested false`() {
         // given
         val sut = getSut("file-with-one-interface")
-            .interfaces(includeNested = false)
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("SampleInterface")
+        sut
+            .interfaces(includeNested = false)
+            .map { it.name } shouldBeEqualTo listOf("SampleInterface")
     }
 
     @Test
     fun `file-with-one-interface-containing-interface includeNested true`() {
         // given
         val sut = getSut("file-with-one-interface-containing-interface")
-            .interfaces(includeNested = true)
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("SampleInterface", "SampleNestedInterface")
+        sut
+            .interfaces(includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf("SampleInterface", "SampleNestedInterface")
     }
 
     @Test
     fun `file-with-one-interface-containing-interface includeNested false`() {
         // given
         val sut = getSut("file-with-one-interface-containing-interface")
-            .interfaces(includeNested = false)
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("SampleInterface")
+        sut
+            .interfaces(includeNested = false)
+            .map { it.name } shouldBeEqualTo listOf("SampleInterface")
     }
 
     @Test

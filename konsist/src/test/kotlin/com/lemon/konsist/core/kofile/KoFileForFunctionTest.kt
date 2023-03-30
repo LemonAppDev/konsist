@@ -9,40 +9,52 @@ class KoFileForFunctionTest {
     fun `file-with-one-function includeNested true`() {
         // given
         val sut = getSut("file-with-one-function")
-            .functions(includeNested = true)
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("sampleFunction")
+        sut
+            .functions(includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf("sampleFunction")
     }
 
     @Test
     fun `file-with-one-function includeNested false`() {
         // given
         val sut = getSut("file-with-one-function")
-            .functions(includeNested = false)
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("sampleFunction")
+        sut
+            .functions(includeNested = false)
+            .map { it.name } shouldBeEqualTo listOf("sampleFunction")
     }
 
     @Test
     fun `file-with-one-class-containing-function includeNested true`() {
         // given
         val sut = getSut("file-with-one-class-containing-function")
-            .functions(includeNested = true)
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("sampleNestedFunction")
+        sut
+            .functions(includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf("sampleNestedFunction")
     }
 
     @Test
     fun `file-with-one-class-containing-function includeNested false`() {
         // given
         val sut = getSut("file-with-one-class-containing-function")
-            .functions(includeNested = false)
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo emptyList()
+        sut
+            .functions(includeNested = false)
+            .map { it.name } shouldBeEqualTo emptyList()
     }
 
     @Test
