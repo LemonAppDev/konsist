@@ -1,0 +1,7 @@
+class SampleClass {
+    private val sampleNestedProperty1: Boolean = true
+
+    private class sampleNestedClass() {
+            private val sampleNestedProperty2: Boolean = true
+        }
+}

@@ -2,7 +2,8 @@ package com.lemon.konsist.core.kocomplexdeclaration
 
 import SampleClass
 import com.lemon.konsist.TestSnippetProvider
-import com.lemon.konsist.core.const.Modifier
+import com.lemon.konsist.core.const.Modifier.PRIVATE
+import com.lemon.konsist.core.const.Modifier.PUBLIC
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -16,7 +17,7 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut
-            .getClasses(includeNested = true)
+            .classes(includeNested = true)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedClass")
     }
 
@@ -29,7 +30,7 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut
-            .getClasses(includeNested = false)
+            .classes(includeNested = false)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedClass")
     }
 
@@ -188,7 +189,7 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut
-            .getClasses(includeNested = true)
+            .classes(includeNested = true)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedClass1", "SampleNestedClass2", "SampleNestedClass3")
     }
 
@@ -201,7 +202,7 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut
-            .getClasses(includeNested = false)
+            .classes(includeNested = false)
             .map { it.name } shouldBeEqualTo listOf("SampleNestedClass1")
     }
 
@@ -361,30 +362,142 @@ class KoComplexDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-function-with-modifier`() {
+    fun `interface-with-nested-functions-with-modifiers includeNested false`() {
         // given
-        val sut = getSut("interface-with-function-with-modifier")
+        val sut = getSut("interface-with-nested-functions-with-modifiers")
             .interfaces()
             .first()
 
         // then
         sut.apply {
-            hasFunction("sampleNestedFunction", Modifier.PRIVATE) shouldBeEqualTo true
-            hasFunction("sampleNestedFunction", Modifier.PUBLIC) shouldBeEqualTo false
+            hasFunction("sampleNestedFunction1", PRIVATE, includeNested = false) shouldBeEqualTo true
+            hasFunction("sampleNestedFunction1", PUBLIC, includeNested = false) shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `interface-with-property-with-modifier`() {
+    fun `interface-with-nested-functions-with-modifiers includeNested true`() {
         // given
-        val sut = getSut("interface-with-property-with-modifier")
+        val sut = getSut("interface-with-nested-functions-with-modifiers")
             .interfaces()
             .first()
 
         // then
         sut.apply {
-            hasProperty("sampleNestedProperty", Modifier.PRIVATE) shouldBeEqualTo true
-            hasProperty("sampleNestedProperty", Modifier.PUBLIC) shouldBeEqualTo false
+            hasFunction("sampleNestedFunction2", PRIVATE, includeNested = true) shouldBeEqualTo true
+            hasFunction("sampleNestedFunction2", PUBLIC, includeNested = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-with-nested-properties-with-modifiers includeNested false`() {
+        // given
+        val sut = getSut("interface-with-nested-properties-with-modifiers")
+            .interfaces()
+            .first()
+
+        // then
+        sut.apply {
+            hasProperty("sampleNestedProperty1", PRIVATE, includeNested = false) shouldBeEqualTo true
+            hasProperty("sampleNestedProperty1", PUBLIC, includeNested = false) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-with-nested-properties-with-modifiers includeNested true`() {
+        // given
+        val sut = getSut("interface-with-nested-properties-with-modifiers")
+            .interfaces()
+            .first()
+
+        // then
+        sut.apply {
+            hasProperty("sampleNestedProperty2", PRIVATE, includeNested = true) shouldBeEqualTo true
+            hasProperty("sampleNestedProperty2", PUBLIC, includeNested = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-with-nested-classes-with-modifiers includeNested false`() {
+        // given
+        val sut = getSut("interface-with-nested-classes-with-modifiers")
+            .interfaces()
+            .first()
+
+        // then
+        sut.apply {
+            hasClass("SampleNestedClass1", PRIVATE, includeNested = false) shouldBeEqualTo true
+            hasClass("SampleNestedClass1", PUBLIC, includeNested = false) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-with-nested-classes-with-modifiers includeNested true`() {
+        // given
+        val sut = getSut("interface-with-nested-classes-with-modifiers")
+            .interfaces()
+            .first()
+
+        // then
+        sut.apply {
+            hasClass("SampleNestedClass2", PRIVATE, includeNested = true) shouldBeEqualTo true
+            hasClass("SampleNestedClass2", PUBLIC, includeNested = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-with-nested-interfaces-with-modifiers includeNested false`() {
+        // given
+        val sut = getSut("interface-with-nested-interfaces-with-modifiers")
+            .interfaces()
+            .first()
+
+        // then
+        sut.apply {
+            hasInterface("SampleNestedInterface1", PRIVATE, includeNested = false) shouldBeEqualTo true
+            hasInterface("SampleNestedInterface1", PUBLIC, includeNested = false) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-with-nested-interfaces-with-modifiers includeNested true`() {
+        // given
+        val sut = getSut("interface-with-nested-interfaces-with-modifiers")
+            .interfaces()
+            .first()
+
+        // then
+        sut.apply {
+            hasInterface("SampleNestedInterface2", PRIVATE, includeNested = true) shouldBeEqualTo true
+            hasInterface("SampleNestedInterface2", PUBLIC, includeNested = true) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-with-nested-objects-with-modifiers includeNested false`() {
+        // given
+        val sut = getSut("interface-with-nested-objects-with-modifiers")
+            .interfaces()
+            .first()
+
+        // then
+        sut.apply {
+            hasObject("SampleNestedObject1", PRIVATE, includeNested = false) shouldBeEqualTo true
+            hasObject("SampleNestedObject1", PUBLIC, includeNested = false) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-with-nested-objects-with-modifiers includeNested true`() {
+        // given
+        val sut = getSut("interface-with-nested-objects-with-modifiers")
+            .interfaces()
+            .first()
+
+        // then
+        sut.apply {
+            hasObject("SampleNestedObject2", PRIVATE, includeNested = true) shouldBeEqualTo true
+            hasObject("SampleNestedObject2", PUBLIC, includeNested = true) shouldBeEqualTo false
         }
     }
 

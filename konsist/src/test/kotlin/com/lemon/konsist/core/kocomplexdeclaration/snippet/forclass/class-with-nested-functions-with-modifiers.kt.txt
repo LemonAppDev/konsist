@@ -1,0 +1,5 @@
+class SampleClass {
+    private fun sampleNestedFunction1() {
+        private fun sampleNestedFunction2()
+    }
+}
