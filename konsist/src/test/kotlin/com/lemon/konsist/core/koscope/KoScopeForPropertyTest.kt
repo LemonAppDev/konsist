@@ -29,14 +29,24 @@ class KoScopeForPropertyTest {
     }
 
     @Test
-    fun `file-with-two-properties-with-nested-property`() {
+    fun `file-with-one-class-containing-property includeNested true`() {
         // given
         val sut = getSut("file-with-one-class-containing-property")
+            .properties(includeNested = true)
 
         // then
         sut
-            .properties(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("sampleProperty")
+            .map { it.name } shouldBeEqualTo listOf("sampleNestedProperty")
+    }
+
+    @Test
+    fun `file-with-one-class-containing-property includeNested false`() {
+        // given
+        val sut = getSut("file-with-one-class-containing-property")
+            .properties(includeNested = false)
+        // then
+        sut
+            .map { it.name } shouldBeEqualTo listOf()
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forproperty/$fileName.kt.txt")

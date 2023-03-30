@@ -29,14 +29,25 @@ class KoScopeForClassTest {
     }
 
     @Test
-    fun `file-with-two-classes-with-nested-class`() {
+    fun `file-with-two-classes-with-nested-class includeNested true`() {
         // given
         val sut = getSut("file-with-two-classes-with-nested-class")
 
         // then
         sut
             .classes(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleClass1", "SampleClass2", "NestedSampleClass")
+            .map { it.name } shouldBeEqualTo listOf("SampleClass1", "SampleNestedClass", "SampleClass2")
+    }
+
+    @Test
+    fun `file-with-two-classes-with-nested-class includeNested false`() {
+        // given
+        val sut = getSut("file-with-two-classes-with-nested-class")
+
+        // then
+        sut
+            .classes(includeNested = false)
+            .map { it.name } shouldBeEqualTo listOf("SampleClass1", "SampleClass2")
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forclass/$fileName.kt.txt")

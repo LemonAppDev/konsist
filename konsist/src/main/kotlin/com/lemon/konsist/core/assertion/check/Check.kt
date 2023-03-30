@@ -8,7 +8,7 @@ fun <E : KoBaseDeclaration?> Collection<E>.check(function: (E) -> Boolean) {
     val localNotNull = this.filterNotNull()
 
     if (localNotNull.isEmpty()) {
-        throw KonsistPreconditionFailedException("Check failed. No declarations found")
+        throw KonsistPreconditionFailedException("Check failed. Collection contains no elements.")
     }
 
     val allChecksPassed = localNotNull.all { function(it) }
@@ -25,7 +25,7 @@ fun <E : KoBaseDeclaration?> Collection<E>.checkNot(function: (E) -> Boolean) {
     val localNotNull = this.filterNotNull()
 
     if (localNotNull.isEmpty()) {
-        throw KonsistPreconditionFailedException("Check failed. No declarations found")
+        throw KonsistPreconditionFailedException("Check failed. Collection contains no elements.")
     }
 
     val noneChecksPassed = localNotNull.none { function(it) }

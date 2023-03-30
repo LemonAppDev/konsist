@@ -1,5 +1,5 @@
 class SampleClass1 {
-    class NestedSampleClass {
+    class SampleNestedClass {
 
     }
 }

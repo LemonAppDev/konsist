@@ -28,14 +28,25 @@ class KoScopeForInterfaceTest {
     }
 
     @Test
-    fun `file-with-two-interfaces-with-nested-class`() {
+    fun `file-with-two-interfaces-with-nested-interface includeNested true`() {
         // given
         val sut = getSut("file-with-two-interfaces-with-nested-interface")
 
         // then
         sut
             .interfaces(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleInterface1", "SampleInterface2", "NestedSampleInterface")
+            .map { it.name } shouldBeEqualTo listOf("SampleInterface1", "SampleNestedInterface", "SampleInterface2")
+    }
+
+    @Test
+    fun `file-with-two-interfaces-with-nested-interface includeNested false`() {
+        // given
+        val sut = getSut("file-with-two-interfaces-with-nested-interface")
+
+        // then
+        sut
+            .interfaces(includeNested = false)
+            .map { it.name } shouldBeEqualTo listOf("SampleInterface1", "SampleInterface2")
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forinterface/$fileName.kt.txt")

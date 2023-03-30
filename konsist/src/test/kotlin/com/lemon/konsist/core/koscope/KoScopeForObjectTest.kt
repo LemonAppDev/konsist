@@ -29,14 +29,25 @@ class KoScopeForObjectTest {
     }
 
     @Test
-    fun `file-with-two-objects-with-nested-object`() {
+    fun `file-with-two-objects-with-nested-object includeNested true`() {
         // given
         val sut = getSut("file-with-two-objects-with-nested-object")
 
         // then
         sut
             .objects(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleObject1", "SampleObject2", "NestedSampleObject")
+            .map { it.name } shouldBeEqualTo listOf("SampleObject1", "SampleNestedObject", "SampleObject2")
+    }
+
+    @Test
+    fun `file-with-two-objects-with-nested-object includeNested false`() {
+        // given
+        val sut = getSut("file-with-two-objects-with-nested-object")
+
+        // then
+        sut
+            .objects(includeNested = false)
+            .map { it.name } shouldBeEqualTo listOf("SampleObject1", "SampleObject2")
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forobject/$fileName.kt.txt")
