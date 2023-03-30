@@ -2,8 +2,8 @@ package com.lemon.konsist.core.kocomplexdeclaration
 
 import SampleClass
 import com.lemon.konsist.TestSnippetProvider
-import com.lemon.konsist.core.const.Modifier.PRIVATE
-import com.lemon.konsist.core.const.Modifier.PUBLIC
+import com.lemon.konsist.core.const.KoModifier.PRIVATE
+import com.lemon.konsist.core.const.KoModifier.PUBLIC
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -147,11 +147,11 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         val expected = listOf(
+            "sampleNestedProperty",
             "SampleNestedClass",
+            "sampleNestedFunction",
             "SampleNestedInterface",
             "SampleNestedObject",
-            "sampleNestedProperty",
-            "sampleNestedFunction",
         )
 
         sut
@@ -168,11 +168,11 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         val expected = listOf(
+            "sampleNestedProperty",
             "SampleNestedClass",
+            "sampleNestedFunction",
             "SampleNestedInterface",
             "SampleNestedObject",
-            "sampleNestedProperty",
-            "sampleNestedFunction",
         )
 
         sut
@@ -216,7 +216,11 @@ class KoComplexDeclarationForInterfaceTest {
         // then
         sut
             .interfaces(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedInterface3", "SampleNestedInterface1", "SampleNestedInterface2")
+            .map { it.name } shouldBeEqualTo listOf(
+            "SampleNestedInterface1",
+            "SampleNestedInterface2",
+            "SampleNestedInterface3",
+        )
     }
 
     @Test
@@ -242,7 +246,7 @@ class KoComplexDeclarationForInterfaceTest {
         // then
         sut
             .objects(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedObject3", "SampleNestedObject1", "SampleNestedObject2")
+            .map { it.name } shouldBeEqualTo listOf("SampleNestedObject1", "SampleNestedObject2", "SampleNestedObject3")
     }
 
     @Test
@@ -268,7 +272,7 @@ class KoComplexDeclarationForInterfaceTest {
         // then
         sut
             .properties(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("sampleNestedProperty2", "sampleNestedProperty1")
+            .map { it.name } shouldBeEqualTo listOf("sampleNestedProperty1", "sampleNestedProperty2")
     }
 
     @Test
@@ -285,7 +289,7 @@ class KoComplexDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-nested-functions includeNested true`() {
+    fun `interface-with-nested-functions includeNested false includeLocal true`() {
         // given
         val sut = getSut("interface-with-nested-functions")
             .interfaces()
@@ -293,21 +297,13 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut
-            .functions(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("sampleNestedFunction1", "sampleNestedFunction2", "sampleLocalFunction")
-    }
-
-    @Test
-    fun `interface-with-nested-functions includeNested false`() {
-        // given
-        val sut = getSut("interface-with-nested-functions")
-            .interfaces()
-            .first()
-
-        // then
-        sut
-            .functions(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("sampleNestedFunction1")
+            .functions(includeNested = true, includeLocal = true)
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleFunction",
+            "sampleLocalFunction1",
+            "sampleNestedFunction",
+            "sampleLocalFunction2",
+        )
     }
 
     @Test
@@ -319,14 +315,13 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         val expected = listOf(
+            "sampleNestedProperty1",
             "SampleNestedClass",
-            "SampleNestedObject",
+            "SampleNestedObject1",
             "SampleNestedInterface",
             "sampleNestedFunction",
-            "SampleNestedObject",
-            "sampleNestedProperty",
-            "sampleNestedProperty",
-            "sampleNestedFunction",
+            "SampleNestedObject2",
+            "sampleNestedProperty2",
         )
 
         sut
@@ -343,7 +338,12 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         val expected =
-            listOf("SampleNestedClass", "SampleNestedInterface", "SampleNestedObject", "sampleNestedProperty", "sampleNestedFunction")
+            listOf(
+                "sampleNestedProperty1",
+                "SampleNestedClass",
+                "SampleNestedInterface",
+                "SampleNestedObject2",
+            )
 
         sut
             .declarations(includeNested = false)
@@ -362,34 +362,6 @@ class KoComplexDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-nested-functions-with-modifiers includeNested false`() {
-        // given
-        val sut = getSut("interface-with-nested-functions-with-modifiers")
-            .interfaces()
-            .first()
-
-        // then
-        sut.apply {
-            hasFunction("sampleNestedFunction1", PRIVATE, includeNested = false) shouldBeEqualTo true
-            hasFunction("sampleNestedFunction1", PUBLIC, includeNested = false) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `interface-with-nested-functions-with-modifiers includeNested true`() {
-        // given
-        val sut = getSut("interface-with-nested-functions-with-modifiers")
-            .interfaces()
-            .first()
-
-        // then
-        sut.apply {
-            hasFunction("sampleNestedFunction2", PRIVATE, includeNested = true) shouldBeEqualTo true
-            hasFunction("sampleNestedFunction2", PUBLIC, includeNested = true) shouldBeEqualTo false
-        }
-    }
-
-    @Test
     fun `interface-with-nested-properties-with-modifiers includeNested false`() {
         // given
         val sut = getSut("interface-with-nested-properties-with-modifiers")
@@ -398,8 +370,8 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut.apply {
-            hasProperty("sampleNestedProperty1", PRIVATE, includeNested = false) shouldBeEqualTo true
-            hasProperty("sampleNestedProperty1", PUBLIC, includeNested = false) shouldBeEqualTo false
+            containsProperty("sampleNestedProperty1", listOf(PRIVATE), includeNested = false) shouldBeEqualTo true
+            containsProperty("sampleNestedProperty1", listOf(PUBLIC), includeNested = false) shouldBeEqualTo false
         }
     }
 
@@ -412,8 +384,8 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut.apply {
-            hasProperty("sampleNestedProperty2", PRIVATE, includeNested = true) shouldBeEqualTo true
-            hasProperty("sampleNestedProperty2", PUBLIC, includeNested = true) shouldBeEqualTo false
+            containsProperty("sampleNestedProperty2", listOf(PRIVATE), includeNested = true) shouldBeEqualTo true
+            containsProperty("sampleNestedProperty2", listOf(PUBLIC), includeNested = true) shouldBeEqualTo false
         }
     }
 
@@ -426,8 +398,8 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut.apply {
-            hasClass("SampleNestedClass1", PRIVATE, includeNested = false) shouldBeEqualTo true
-            hasClass("SampleNestedClass1", PUBLIC, includeNested = false) shouldBeEqualTo false
+            containsClass("SampleNestedClass1", listOf(PRIVATE), includeNested = false) shouldBeEqualTo true
+            containsClass("SampleNestedClass1", listOf(PUBLIC), includeNested = false) shouldBeEqualTo false
         }
     }
 
@@ -440,8 +412,8 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut.apply {
-            hasClass("SampleNestedClass2", PRIVATE, includeNested = true) shouldBeEqualTo true
-            hasClass("SampleNestedClass2", PUBLIC, includeNested = true) shouldBeEqualTo false
+            containsClass("SampleNestedClass2", listOf(PRIVATE), includeNested = true) shouldBeEqualTo true
+            containsClass("SampleNestedClass2", listOf(PUBLIC), includeNested = true) shouldBeEqualTo false
         }
     }
 
@@ -454,8 +426,8 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut.apply {
-            hasInterface("SampleNestedInterface1", PRIVATE, includeNested = false) shouldBeEqualTo true
-            hasInterface("SampleNestedInterface1", PUBLIC, includeNested = false) shouldBeEqualTo false
+            containsInterface("SampleNestedInterface1", listOf(PRIVATE), includeNested = false) shouldBeEqualTo true
+            containsInterface("SampleNestedInterface1", listOf(PUBLIC), includeNested = false) shouldBeEqualTo false
         }
     }
 
@@ -468,8 +440,8 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut.apply {
-            hasInterface("SampleNestedInterface2", PRIVATE, includeNested = true) shouldBeEqualTo true
-            hasInterface("SampleNestedInterface2", PUBLIC, includeNested = true) shouldBeEqualTo false
+            containsInterface("SampleNestedInterface2", listOf(PRIVATE), includeNested = true) shouldBeEqualTo true
+            containsInterface("SampleNestedInterface2", listOf(PUBLIC), includeNested = true) shouldBeEqualTo false
         }
     }
 
@@ -482,8 +454,8 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut.apply {
-            hasObject("SampleNestedObject1", PRIVATE, includeNested = false) shouldBeEqualTo true
-            hasObject("SampleNestedObject1", PUBLIC, includeNested = false) shouldBeEqualTo false
+            containsObject("SampleNestedObject1", listOf(PRIVATE), includeNested = false) shouldBeEqualTo true
+            containsObject("SampleNestedObject1", listOf(PUBLIC), includeNested = false) shouldBeEqualTo false
         }
     }
 
@@ -496,8 +468,8 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut.apply {
-            hasObject("SampleNestedObject2", PRIVATE, includeNested = true) shouldBeEqualTo true
-            hasObject("SampleNestedObject2", PUBLIC, includeNested = true) shouldBeEqualTo false
+            containsObject("SampleNestedObject2", listOf(PRIVATE), includeNested = true) shouldBeEqualTo true
+            containsObject("SampleNestedObject2", listOf(PUBLIC), includeNested = true) shouldBeEqualTo false
         }
     }
 

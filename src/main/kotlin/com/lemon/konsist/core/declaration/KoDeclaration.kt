@@ -1,6 +1,6 @@
 package com.lemon.konsist.core.declaration
 
-import com.lemon.konsist.core.const.Modifier
+import com.lemon.konsist.core.const.KoModifier
 import com.lemon.konsist.core.const.toKtToken
 import com.lemon.konsist.ext.isInternal
 import com.lemon.konsist.ext.isPrivate
@@ -51,7 +51,7 @@ open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterLi
             .contains(qualifiedName)
     }
 
-    fun hasModifiers(vararg modifiers: Modifier) = modifiers.all {
+    fun hasModifiers(vararg koModifiers: KoModifier) = koModifiers.all {
         ktTypeParameterListOwner
             .modifierList
             ?.hasModifier(it.toKtToken())

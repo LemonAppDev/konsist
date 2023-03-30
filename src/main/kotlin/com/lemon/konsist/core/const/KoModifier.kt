@@ -1,40 +1,40 @@
 package com.lemon.konsist.core.const
 
-import com.lemon.konsist.core.const.Modifier.ABSTRACT
-import com.lemon.konsist.core.const.Modifier.ACTUAL
-import com.lemon.konsist.core.const.Modifier.ANNOTATION
-import com.lemon.konsist.core.const.Modifier.COMPANION
-import com.lemon.konsist.core.const.Modifier.CONST
-import com.lemon.konsist.core.const.Modifier.CONTRACT
-import com.lemon.konsist.core.const.Modifier.CROSSINLINE
-import com.lemon.konsist.core.const.Modifier.DATA
-import com.lemon.konsist.core.const.Modifier.DEFAULT_VISIBILITY_KEYWORD
-import com.lemon.konsist.core.const.Modifier.ENUM
-import com.lemon.konsist.core.const.Modifier.EXPECT
-import com.lemon.konsist.core.const.Modifier.EXTERNAL
-import com.lemon.konsist.core.const.Modifier.FINAL
-import com.lemon.konsist.core.const.Modifier.INFIX
-import com.lemon.konsist.core.const.Modifier.INLINE
-import com.lemon.konsist.core.const.Modifier.INNER
-import com.lemon.konsist.core.const.Modifier.INTERNAL
-import com.lemon.konsist.core.const.Modifier.LATEINIT
-import com.lemon.konsist.core.const.Modifier.NOINLINE
-import com.lemon.konsist.core.const.Modifier.OPEN
-import com.lemon.konsist.core.const.Modifier.OPERATOR
-import com.lemon.konsist.core.const.Modifier.OUT
-import com.lemon.konsist.core.const.Modifier.OVERRIDE
-import com.lemon.konsist.core.const.Modifier.PRIVATE
-import com.lemon.konsist.core.const.Modifier.PROTECTED
-import com.lemon.konsist.core.const.Modifier.PUBLIC
-import com.lemon.konsist.core.const.Modifier.REIFIED
-import com.lemon.konsist.core.const.Modifier.SEALED
-import com.lemon.konsist.core.const.Modifier.SUSPEND
-import com.lemon.konsist.core.const.Modifier.TAILREC
-import com.lemon.konsist.core.const.Modifier.VALUE
-import com.lemon.konsist.core.const.Modifier.VARARG
+import com.lemon.konsist.core.const.KoModifier.ABSTRACT
+import com.lemon.konsist.core.const.KoModifier.ACTUAL
+import com.lemon.konsist.core.const.KoModifier.ANNOTATION
+import com.lemon.konsist.core.const.KoModifier.COMPANION
+import com.lemon.konsist.core.const.KoModifier.CONST
+import com.lemon.konsist.core.const.KoModifier.CONTRACT
+import com.lemon.konsist.core.const.KoModifier.CROSSINLINE
+import com.lemon.konsist.core.const.KoModifier.DATA
+import com.lemon.konsist.core.const.KoModifier.DEFAULT_VISIBILITY_KEYWORD
+import com.lemon.konsist.core.const.KoModifier.ENUM
+import com.lemon.konsist.core.const.KoModifier.EXPECT
+import com.lemon.konsist.core.const.KoModifier.EXTERNAL
+import com.lemon.konsist.core.const.KoModifier.FINAL
+import com.lemon.konsist.core.const.KoModifier.INFIX
+import com.lemon.konsist.core.const.KoModifier.INLINE
+import com.lemon.konsist.core.const.KoModifier.INNER
+import com.lemon.konsist.core.const.KoModifier.INTERNAL
+import com.lemon.konsist.core.const.KoModifier.LATEINIT
+import com.lemon.konsist.core.const.KoModifier.NOINLINE
+import com.lemon.konsist.core.const.KoModifier.OPEN
+import com.lemon.konsist.core.const.KoModifier.OPERATOR
+import com.lemon.konsist.core.const.KoModifier.OUT
+import com.lemon.konsist.core.const.KoModifier.OVERRIDE
+import com.lemon.konsist.core.const.KoModifier.PRIVATE
+import com.lemon.konsist.core.const.KoModifier.PROTECTED
+import com.lemon.konsist.core.const.KoModifier.PUBLIC
+import com.lemon.konsist.core.const.KoModifier.REIFIED
+import com.lemon.konsist.core.const.KoModifier.SEALED
+import com.lemon.konsist.core.const.KoModifier.SUSPEND
+import com.lemon.konsist.core.const.KoModifier.TAILREC
+import com.lemon.konsist.core.const.KoModifier.VALUE
+import com.lemon.konsist.core.const.KoModifier.VARARG
 import org.jetbrains.kotlin.lexer.KtTokens
 
-enum class Modifier(val type: String) {
+enum class KoModifier(val type: String) {
     DATA("data"),
     VALUE("value"),
     INLINE("inline"),
@@ -70,7 +70,7 @@ enum class Modifier(val type: String) {
 }
 
 @Suppress("detekt.ComplexMethod")
-internal fun Modifier.toKtToken() = when (this) {
+internal fun KoModifier.toKtToken() = when (this) {
     DATA -> KtTokens.DATA_KEYWORD
     VALUE -> KtTokens.VALUE_KEYWORD
     INLINE -> KtTokens.INLINE_KEYWORD

@@ -1,19 +1,18 @@
 object SampleObject {
-    val sampleNestedProperty: Boolean = true
+    val sampleNestedProperty1: Boolean = true
 
     class SampleClass {
         object SampleNestedObject
     }
 
-    fun sampleNestedFunction {
-        interface SampleNestedInterface
+    fun sampleNestedFunction1() {
     }
 
     interface SampleInterface {
-        fun sampleNestedFunction()
+        fun sampleNestedFunction2()
     }
 
     object SampleObject {
-        val sampleNestedProperty: Boolean = true
+        val sampleNestedProperty2: Boolean = true
     }
 }

@@ -57,4 +57,17 @@ class KoFunction(private val ktFunction: KtFunction) : KoDeclaration(ktFunction)
             ?.filterIsInstance<KtProperty>()
             ?.map { KoProperty(it) }
             ?: emptyList()
+
+    fun getLocalDeclarations(): List<KoDeclaration> =
+        ktFunction
+            .bodyBlockExpression
+            ?.children
+            ?.mapNotNull {
+                when (it) {
+                    is KtProperty -> KoProperty(it)
+                    is KtFunction -> KoFunction(it)
+                    else -> null
+                }
+            }
+            ?: emptyList()
 }

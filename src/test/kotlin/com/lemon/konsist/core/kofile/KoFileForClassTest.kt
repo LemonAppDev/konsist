@@ -66,9 +66,9 @@ class KoFileForClassTest {
 
         // then
         sut.apply {
-            hasClass("SampleClass", false) shouldBeEqualTo true
-            hasClass("SampleNestedClass", false) shouldBeEqualTo false
-            hasClass("SampleNestedClass", true) shouldBeEqualTo true
+            containsClass("SampleClass", includeNested = false) shouldBeEqualTo true
+            containsClass("SampleNestedClass", includeNested = false) shouldBeEqualTo false
+            containsClass("SampleNestedClass", includeNested = true) shouldBeEqualTo true
         }
     }
 
@@ -81,8 +81,8 @@ class KoFileForClassTest {
 
         // then
         sut.apply {
-            hasProperty("sampleNestedProperty", false) shouldBeEqualTo false
-            hasProperty("sampleNestedProperty", true) shouldBeEqualTo true
+            containsProperty("sampleNestedProperty", includeNested = false) shouldBeEqualTo false
+            containsProperty("sampleNestedProperty", includeNested = true) shouldBeEqualTo true
         }
     }
 
@@ -95,8 +95,8 @@ class KoFileForClassTest {
 
         // then
         sut.apply {
-            hasFunction("sampleNestedFunction", false) shouldBeEqualTo false
-            hasFunction("sampleNestedFunction", true) shouldBeEqualTo true
+            containsFunction("sampleNestedFunction", includeNested = false) shouldBeEqualTo false
+            containsFunction("sampleNestedFunction", includeNested = true) shouldBeEqualTo true
         }
     }
 
@@ -109,8 +109,8 @@ class KoFileForClassTest {
 
         // then
         sut.apply {
-            hasObject("SampleNestedObject", false) shouldBeEqualTo false
-            hasObject("SampleNestedObject", true) shouldBeEqualTo true
+            containsObject("SampleNestedObject", includeNested = false) shouldBeEqualTo false
+            containsObject("SampleNestedObject", includeNested = true) shouldBeEqualTo true
         }
     }
 
@@ -123,9 +123,74 @@ class KoFileForClassTest {
 
         // then
         sut.apply {
-            hasInterface("SampleNestedInterface", false) shouldBeEqualTo false
-            hasInterface("SampleNestedInterface", true) shouldBeEqualTo true
+            containsInterface("SampleNestedInterface", includeNested = false) shouldBeEqualTo false
+            containsInterface("SampleNestedInterface", includeNested = true) shouldBeEqualTo true
         }
+    }
+
+    @Test
+    fun `class-with-nested-functions includeNested true and includeLocal true`() {
+        // given
+        val sut = getSut("class-with-nested-functions")
+            .classes()
+            .first()
+
+        // then
+        sut
+            .functions(includeNested = true, includeLocal = true)
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleFunction",
+            "sampleLocalFunction1",
+            "sampleNestedFunction",
+            "sampleLocalFunction2",
+        )
+    }
+
+    @Test
+    fun `class-with-nested-functions includeNested true and includeLocal false`() {
+        // given
+        val sut = getSut("class-with-nested-functions")
+            .classes()
+            .first()
+
+        // then
+        sut
+            .functions(includeNested = true, includeLocal = false)
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleFunction",
+            "sampleNestedFunction",
+        )
+    }
+
+    @Test
+    fun `class-with-nested-functions includeNested false and includeLocal true`() {
+        // given
+        val sut = getSut("class-with-nested-functions")
+            .classes()
+            .first()
+
+        // then
+        sut
+            .functions(includeNested = false, includeLocal = true)
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleFunction",
+            "sampleLocalFunction1",
+        )
+    }
+
+    @Test
+    fun `class-with-nested-functions includeNested false and includeLocal false`() {
+        // given
+        val sut = getSut("class-with-nested-functions")
+            .classes()
+            .first()
+
+        // then
+        sut
+            .functions(includeNested = false, includeLocal = false)
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleFunction",
+        )
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofile/snippet/forclass/$fileName.kt.txt")
