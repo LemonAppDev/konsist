@@ -1,14 +1,14 @@
 package com.lemon.konsist.core.assertion.check
 
 import com.lemon.konsist.core.declaration.KoBaseDeclaration
-import com.lemon.konsist.exception.KonsistAssertionFailed
-import com.lemon.konsist.exception.KonsistPreconditionFailed
+import com.lemon.konsist.exception.KonsistAssertionFailedException
+import com.lemon.konsist.exception.KonsistPreconditionFailedException
 
 fun <E : KoBaseDeclaration?> Collection<E>.check(function: (E) -> Boolean) {
     val localNotNull = this.filterNotNull()
 
     if (localNotNull.isEmpty()) {
-        throw KonsistPreconditionFailed("Check failed. No declarations found")
+        throw KonsistPreconditionFailedException("Check failed. No declarations found")
     }
 
     val allChecksPassed = localNotNull.all { function(it) }
@@ -17,7 +17,7 @@ fun <E : KoBaseDeclaration?> Collection<E>.check(function: (E) -> Boolean) {
         val failedDeclarations = localNotNull.filter { !function(it) }
 
         val message = failedDeclarations.joinToString("\n") { it.textWithLocation }
-        throw KonsistAssertionFailed(message)
+        throw KonsistAssertionFailedException(message)
     }
 }
 
@@ -25,7 +25,7 @@ fun <E : KoBaseDeclaration?> Collection<E>.checkNot(function: (E) -> Boolean) {
     val localNotNull = this.filterNotNull()
 
     if (localNotNull.isEmpty()) {
-        throw KonsistPreconditionFailed("Check failed. No declarations found")
+        throw KonsistPreconditionFailedException("Check failed. No declarations found")
     }
 
     val noneChecksPassed = localNotNull.none { function(it) }
@@ -34,6 +34,6 @@ fun <E : KoBaseDeclaration?> Collection<E>.checkNot(function: (E) -> Boolean) {
         val failedDeclarations = localNotNull.filter { function(it) }
 
         val message = failedDeclarations.joinToString("\n") { it.textWithLocation }
-        throw KonsistAssertionFailed(message)
+        throw KonsistAssertionFailedException(message)
     }
 }
