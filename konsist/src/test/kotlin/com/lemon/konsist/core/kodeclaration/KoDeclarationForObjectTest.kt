@@ -5,7 +5,7 @@ import SampleAnnotation
 import SampleAnnotation1
 import SampleAnnotation2
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemon.konsist.core.const.Modifier
+import com.lemon.konsist.core.const.KoModifier
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
@@ -208,8 +208,8 @@ class KoDeclarationForObjectTest {
 
         // then
         sut.apply {
-            hasModifiers(Modifier.PUBLIC) shouldBeEqualTo true
-            hasModifiers(Modifier.PRIVATE) shouldBeEqualTo false
+            hasModifiers(KoModifier.PUBLIC) shouldBeEqualTo true
+            hasModifiers(KoModifier.PRIVATE) shouldBeEqualTo false
         }
     }
 

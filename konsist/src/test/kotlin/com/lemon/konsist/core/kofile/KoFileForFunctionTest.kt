@@ -66,8 +66,8 @@ class KoFileForFunctionTest {
 
         // then
         sut.apply {
-            hasFunction("sampleFunction", true) shouldBeEqualTo true
-            hasFunction("OtherFunction", true) shouldBeEqualTo false
+            containsFunction("sampleFunction", includeNested = true) shouldBeEqualTo true
+            containsFunction("OtherFunction", includeNested = true) shouldBeEqualTo false
         }
     }
 
@@ -93,8 +93,8 @@ class KoFileForFunctionTest {
 
         // then
         sut.apply {
-            hasFunction("sampleFunction", false) shouldBeEqualTo true
-            hasFunction("OtherFunction", false) shouldBeEqualTo false
+            containsFunction("sampleFunction", includeNested = false) shouldBeEqualTo true
+            containsFunction("OtherFunction", includeNested = false) shouldBeEqualTo false
         }
     }
 
@@ -107,10 +107,75 @@ class KoFileForFunctionTest {
 
         // then
         sut.apply {
-            hasFunction("sampleFunction", false) shouldBeEqualTo true
-            hasFunction("sampleLocalFunction", false) shouldBeEqualTo false
-            hasFunction("sampleLocalFunction", true) shouldBeEqualTo false
+            containsFunction("sampleFunction", includeNested = false) shouldBeEqualTo true
+            containsFunction("sampleLocalFunction", includeNested = false) shouldBeEqualTo false
+            containsFunction("sampleLocalFunction", includeNested = true) shouldBeEqualTo false
         }
+    }
+
+    @Test
+    fun `file-with-nested-functions includeNested true and includeLocal true`() {
+        // given
+        val sut = getSut("file-with-nested-functions")
+            .files()
+            .first()
+
+        // then
+        sut
+            .functions(includeNested = true, includeLocal = true)
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleFunction",
+            "sampleLocalFunction1",
+            "sampleNestedFunction",
+            "sampleLocalFunction2",
+        )
+    }
+
+    @Test
+    fun `file-with-nested-functions includeNested true and includeLocal false`() {
+        // given
+        val sut = getSut("file-with-nested-functions")
+            .files()
+            .first()
+
+        // then
+        sut
+            .functions(includeNested = true, includeLocal = false)
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleFunction",
+            "sampleNestedFunction",
+        )
+    }
+
+    @Test
+    fun `file-with-nested-functions includeNested false and includeLocal true`() {
+        // given
+        val sut = getSut("file-with-nested-functions")
+            .files()
+            .first()
+
+        // then
+        sut
+            .functions(includeNested = false, includeLocal = true)
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleFunction",
+            "sampleLocalFunction1",
+        )
+    }
+
+    @Test
+    fun `file-with-nested-functions includeNested false and includeLocal false`() {
+        // given
+        val sut = getSut("file-with-nested-functions")
+            .files()
+            .first()
+
+        // then
+        sut
+            .functions(includeNested = false, includeLocal = false)
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleFunction",
+        )
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofile/snippet/forfunction/$fileName.kt.txt")

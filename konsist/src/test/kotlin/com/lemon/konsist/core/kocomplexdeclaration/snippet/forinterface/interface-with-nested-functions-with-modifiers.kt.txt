@@ -1,5 +1,0 @@
-interface SampleInterface {
-    private fun sampleNestedFunction1() {
-        private fun sampleNestedFunction2()
-    }
-}

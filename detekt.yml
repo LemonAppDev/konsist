@@ -390,7 +390,7 @@ performance:
     active: true
     excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
   SpreadOperator:
-    active: true
+    active: false
     excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
   UnnecessaryPartOfBinaryExpression:
     active: false

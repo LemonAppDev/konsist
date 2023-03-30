@@ -62,8 +62,8 @@ class KoFileTest {
 
         // then
         sut.apply {
-            hasClass("SampleClass") shouldBeEqualTo true
-            hasClass("OtherClass") shouldBeEqualTo false
+            containsClass("SampleClass") shouldBeEqualTo true
+            containsClass("OtherClass") shouldBeEqualTo false
         }
     }
 
@@ -76,8 +76,8 @@ class KoFileTest {
 
         // then
         sut.apply {
-            hasProperty("sampleProperty") shouldBeEqualTo true
-            hasProperty("otherProperty") shouldBeEqualTo false
+            containsProperty("sampleProperty") shouldBeEqualTo true
+            containsProperty("otherProperty") shouldBeEqualTo false
         }
     }
 
@@ -90,8 +90,8 @@ class KoFileTest {
 
         // then
         sut.apply {
-            hasFunction("sampleFunction") shouldBeEqualTo true
-            hasFunction("otherFunction") shouldBeEqualTo false
+            containsFunction("sampleFunction") shouldBeEqualTo true
+            containsFunction("otherFunction") shouldBeEqualTo false
         }
     }
 
@@ -104,8 +104,8 @@ class KoFileTest {
 
         // then
         sut.apply {
-            hasObject("SampleObject") shouldBeEqualTo true
-            hasObject("OtherObject") shouldBeEqualTo false
+            containsObject("SampleObject") shouldBeEqualTo true
+            containsObject("OtherObject") shouldBeEqualTo false
         }
     }
 
@@ -118,8 +118,8 @@ class KoFileTest {
 
         // then
         sut.apply {
-            hasInterface("SampleInterface") shouldBeEqualTo true
-            hasInterface("OtherInterface") shouldBeEqualTo false
+            containsInterface("SampleInterface") shouldBeEqualTo true
+            containsInterface("OtherInterface") shouldBeEqualTo false
         }
     }
 

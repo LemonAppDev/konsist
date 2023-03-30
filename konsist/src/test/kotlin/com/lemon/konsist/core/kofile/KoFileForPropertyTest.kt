@@ -40,8 +40,8 @@ class KoFileForPropertyTest {
 
         // then
         sut.apply {
-            hasProperty("sampleProperty", true) shouldBeEqualTo true
-            hasProperty("otherProperty", true) shouldBeEqualTo false
+            containsProperty("sampleProperty", includeNested = true) shouldBeEqualTo true
+            containsProperty("otherProperty", includeNested = true) shouldBeEqualTo false
         }
     }
 
@@ -54,9 +54,38 @@ class KoFileForPropertyTest {
 
         // then
         sut.apply {
-            hasProperty("sampleProperty", false) shouldBeEqualTo true
-            hasProperty("otherProperty", false) shouldBeEqualTo false
+            containsProperty("sampleProperty", includeNested = false) shouldBeEqualTo true
+            containsProperty("otherProperty", includeNested = false) shouldBeEqualTo false
         }
+    }
+
+    @Test
+    fun `file-with-nested-properties includeNested true and includeLocal false`() {
+        // given
+        val sut = getSut("file-with-nested-properties")
+            .files()
+            .first()
+
+        // then
+        sut
+            .properties(includeNested = true, includeLocal = false)
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleProperty",
+            "sampleNestedProperty",
+        )
+    }
+
+    @Test
+    fun `file-with-nested-properties includeNested false and includeLocal false`() {
+        // given
+        val sut = getSut("file-with-nested-properties")
+            .files()
+            .first()
+
+        // then
+        sut
+            .properties(includeNested = false, includeLocal = false)
+            .map { it.name } shouldBeEqualTo listOf("sampleProperty")
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofile/snippet/forproperty/$fileName.kt.txt")

@@ -2,7 +2,7 @@ class SampleClass {
     val sampleNestedProperty: Boolean = true
 
     class SampleNestedClass {
-        object SampleNestedObject
+        object SampleNestedObject1
     }
 
     fun sampleNestedFunction {
@@ -13,7 +13,7 @@ class SampleClass {
         fun sampleNestedFunction()
     }
 
-    object SampleNestedObject {
+    object SampleNestedObject2 {
         val sampleNestedProperty: Boolean = true
     }
 }
