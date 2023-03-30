@@ -3,6 +3,7 @@ package com.lemon.konsist.core.declaration
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtParameter
+import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
@@ -48,4 +49,12 @@ class KoFunction(private val ktFunction: KtFunction) : KoDeclaration(ktFunction)
             koFunctions
         }
     }
+
+    fun getLocalProperties(): List<KoProperty> =
+        ktFunction
+            .bodyBlockExpression
+            ?.children
+            ?.filterIsInstance<KtProperty>()
+            ?.map { KoProperty(it) }
+            ?: emptyList()
 }

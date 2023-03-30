@@ -1,3 +1,3 @@
 class SampleClass {
-    val sampleProperty: Boolean = true
+    val sampleNestedProperty: Boolean = true
 }

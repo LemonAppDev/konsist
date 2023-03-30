@@ -9,7 +9,9 @@ import com.lemon.konsist.ext.getKoProperties
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import kotlin.reflect.KClass
 
-open class KoComplexDeclaration(private val ktClassOrObject: KtClassOrObject) : KoDeclaration(ktClassOrObject) {
+open class KoComplexDeclaration(
+    private val ktClassOrObject: KtClassOrObject,
+) : KoDeclaration(ktClassOrObject) {
     private val classes by lazy {
         ktClassOrObject.getKoClasses()
     }

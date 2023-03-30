@@ -72,6 +72,19 @@ class KoFileForFunctionTest {
     }
 
     @Test
+    fun `function-with-property-inside`() {
+        // given
+        val sut = getSut("function-with-property-inside")
+            .functions()
+            .first()
+
+        // then
+        sut.apply {
+            getLocalProperties().first().name shouldBeEqualTo "sampleLocalProperty"
+        }
+    }
+
+    @Test
     fun `one-function includeNested false`() {
         // given
         val sut = getSut("one-function")
@@ -86,17 +99,17 @@ class KoFileForFunctionTest {
     }
 
     @Test
-    fun `function-with-function-inside`() {
+    fun `function-with-local-function`() {
         // given
-        val sut = getSut("function-with-function-inside")
+        val sut = getSut("function-with-local-function")
             .files()
             .first()
 
         // then
         sut.apply {
             hasFunction("sampleFunction", false) shouldBeEqualTo true
-            hasFunction("sampleNestedFunction", false) shouldBeEqualTo false
-            hasFunction("sampleNestedFunction", true) shouldBeEqualTo true
+            hasFunction("sampleLocalFunction", false) shouldBeEqualTo false
+            hasFunction("sampleLocalFunction", true) shouldBeEqualTo false
         }
     }
 

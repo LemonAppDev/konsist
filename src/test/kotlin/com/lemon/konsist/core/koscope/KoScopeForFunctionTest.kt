@@ -29,14 +29,25 @@ class KoScopeForFunctionTest {
     }
 
     @Test
-    fun `file-with-two-functions-with-nested-function`() {
+    fun `file-with-two-functions-with-nested-function includeNested true`() {
         // given
         val sut = getSut("file-with-two-functions-with-nested-function")
 
         // then
         sut
             .functions(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("sampleFunction1", "nestedSampleFunction", "sampleFunction2")
+            .map { it.name } shouldBeEqualTo listOf("sampleFunction1", "sampleFunction2")
+    }
+
+    @Test
+    fun `file-with-two-functions-with-nested-function includeNested false`() {
+        // given
+        val sut = getSut("file-with-two-functions-with-nested-function")
+
+        // then
+        sut
+            .functions(includeNested = false)
+            .map { it.name } shouldBeEqualTo listOf("sampleFunction1", "sampleFunction2")
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forfunction/$fileName.kt.txt")
