@@ -47,7 +47,7 @@ open class KoComplexDeclaration(
             }
     }
 
-    fun getClasses(includeNested: Boolean = false) = if (includeNested) {
+    fun classes(includeNested: Boolean = false) = if (includeNested) {
         nestedDeclarations.filterIsInstance<KoClass>()
     } else {
         classes
@@ -83,16 +83,37 @@ open class KoComplexDeclaration(
         declarations
     }
 
-    fun hasFunction(name: String, vararg modifiers: Modifier): Boolean {
-        functions.firstOrNull { it.name == name }?.let {
+    fun hasFunction(name: String, vararg modifiers: Modifier, includeNested: Boolean = false): Boolean {
+        functions(includeNested).firstOrNull { it.name == name }?.let {
             return it.hasModifiers(*modifiers)
         }
 
         return false
     }
 
-    fun hasProperty(name: String, vararg modifiers: Modifier): Boolean {
-        properties.firstOrNull { it.name == name }?.let {
+    fun hasProperty(name: String, vararg modifiers: Modifier, includeNested: Boolean = false): Boolean {
+        properties(includeNested).firstOrNull { it.name == name }?.let {
+            return it.hasModifiers(*modifiers)
+        }
+        return false
+    }
+
+    fun hasClass(name: String, vararg modifiers: Modifier, includeNested: Boolean = false): Boolean {
+        classes(includeNested).firstOrNull { it.name == name }?.let {
+            return it.hasModifiers(*modifiers)
+        }
+        return false
+    }
+
+    fun hasInterface(name: String, vararg modifiers: Modifier, includeNested: Boolean = false): Boolean {
+        interfaces(includeNested).firstOrNull { it.name == name }?.let {
+            return it.hasModifiers(*modifiers)
+        }
+        return false
+    }
+
+    fun hasObject(name: String, vararg modifiers: Modifier, includeNested: Boolean = false): Boolean {
+        objects(includeNested).firstOrNull { it.name == name }?.let {
             return it.hasModifiers(*modifiers)
         }
         return false

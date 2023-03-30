@@ -1,0 +1,6 @@
+interface SampleInterface {
+    private object SampleNestedObject1 {
+        private object SampleNestedObject2 {
+        }
+    }
+}
