@@ -4,11 +4,37 @@ import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileForPackageTest {
+class KoFileTest {
     @Test
-    fun `file-with-one-package`() {
+    fun `file-with-import`() {
         // given
-        val sut = getSut("file-with-one-package")
+        val sut = getSut("file-with-import")
+            .files()
+            .first()
+
+        // then
+        sut
+            .imports
+            .map { it.name } shouldBeEqualTo listOf("com.sampleimport")
+    }
+
+    @Test
+    fun `file-without-import`() {
+        // given
+        val sut = getSut("file-without-import")
+            .files()
+            .first()
+
+        // then
+        sut
+            .imports
+            .isEmpty()
+    }
+
+    @Test
+    fun `file-with-package`() {
+        // given
+        val sut = getSut("file-with-package")
             .files()
             .first()
 
@@ -28,9 +54,9 @@ class KoFileForPackageTest {
     }
 
     @Test
-    fun `package-with-class-inside`() {
+    fun `file-with-package-and-class`() {
         // given
-        val sut = getSut("package-with-class-inside")
+        val sut = getSut("file-with-package-and-class")
             .files()
             .first()
 
@@ -42,9 +68,9 @@ class KoFileForPackageTest {
     }
 
     @Test
-    fun `package-with-property-inside`() {
+    fun `file-with-package-and-property`() {
         // given
-        val sut = getSut("package-with-property-inside")
+        val sut = getSut("file-with-package-and-property")
             .files()
             .first()
 
@@ -56,9 +82,9 @@ class KoFileForPackageTest {
     }
 
     @Test
-    fun `package-with-function-inside`() {
+    fun `file-with-package-and-function`() {
         // given
-        val sut = getSut("package-with-function-inside")
+        val sut = getSut("file-with-package-and-function")
             .files()
             .first()
 
@@ -70,9 +96,9 @@ class KoFileForPackageTest {
     }
 
     @Test
-    fun `package-with-object-inside`() {
+    fun `file-with-package-and-object`() {
         // given
-        val sut = getSut("package-with-object-inside")
+        val sut = getSut("file-with-package-and-object")
             .files()
             .first()
 
@@ -84,9 +110,9 @@ class KoFileForPackageTest {
     }
 
     @Test
-    fun `package-with-interface-inside`() {
+    fun `file-with-package-and-interface`() {
         // given
-        val sut = getSut("package-with-interface-inside")
+        val sut = getSut("file-with-package-and-interface")
             .files()
             .first()
 
@@ -97,5 +123,5 @@ class KoFileForPackageTest {
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/kofile/snippet/forpackage/$fileName.kt.txt")
+    private fun getSut(fileName: String) = getSnippetKoScope("core/kofile/snippet/forfile/$fileName.kt.txt")
 }

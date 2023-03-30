@@ -9,20 +9,26 @@ class KoFileForPropertyTest {
     fun `file-with-one-property`() {
         // given
         val sut = getSut("file-with-one-property")
-            .properties()
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("sampleProperty")
+        sut
+            .properties()
+            .map { it.name } shouldBeEqualTo listOf("sampleProperty")
     }
 
     @Test
     fun `file-with-one-class-containing-property`() {
         // given
         val sut = getSut("file-with-one-property")
-            .properties()
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("sampleProperty")
+        sut
+            .properties()
+            .map { it.name } shouldBeEqualTo listOf("sampleProperty")
     }
 
     @Test

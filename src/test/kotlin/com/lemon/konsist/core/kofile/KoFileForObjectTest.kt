@@ -9,40 +9,52 @@ class KoFileForObjectTest {
     fun `file-with-one-object includeNested true`() {
         // given
         val sut = getSut("file-with-one-object")
-            .objects(includeNested = true)
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("SampleObject")
+        sut
+            .objects(includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf("SampleObject")
     }
 
     @Test
     fun `file-with-one-object includeNested false`() {
         // given
         val sut = getSut("file-with-one-object")
-            .objects(includeNested = false)
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("SampleObject")
+        sut
+            .objects(includeNested = false)
+            .map { it.name } shouldBeEqualTo listOf("SampleObject")
     }
 
     @Test
     fun `file-with-one-object-containing-object includeNested true`() {
         // given
         val sut = getSut("file-with-one-object-containing-object")
-            .objects(includeNested = true)
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("SampleObject", "SampleNestedObject")
+        sut
+            .objects(includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf("SampleObject", "SampleNestedObject")
     }
 
     @Test
     fun `file-with-one-object-containing-object includeNested false`() {
         // given
         val sut = getSut("file-with-one-object-containing-object")
-            .objects(includeNested = false)
+            .files()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("SampleObject")
+        sut
+            .objects(includeNested = false)
+            .map { it.name } shouldBeEqualTo listOf("SampleObject")
     }
 
     @Test
