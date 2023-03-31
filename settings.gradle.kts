@@ -8,7 +8,7 @@ include(
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            version("kotlinVersion", "1.8.10")
+            version("kotlinVersion", "1.8.20")
 
             plugin("springframework-boot", "org.springframework.boot").version("3.0.5")
             plugin("spring-dependencyManagement", "io.spring.dependency-management").version("1.1.0")
@@ -34,5 +34,12 @@ dependencyResolutionManagement {
             library("mockk", "io.mockk", "mockk").version("1.13.4")
             library("kotlin-compiler", "org.jetbrains.kotlin", "kotlin-compiler").withoutVersion()
         }
+    }
+}
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
     }
 }
