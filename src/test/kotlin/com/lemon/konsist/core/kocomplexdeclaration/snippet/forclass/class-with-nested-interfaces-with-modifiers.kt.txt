@@ -1,6 +1,0 @@
-class SampleClass {
-    private interface SampleNestedInterface1 {
-        private interface SampleNestedInterface2 {
-        }
-    }
-}

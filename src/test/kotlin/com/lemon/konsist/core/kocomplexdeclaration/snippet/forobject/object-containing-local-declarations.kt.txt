@@ -1,0 +1,7 @@
+object SampleTopLevelClass {
+    fun sampleFunction() {
+        val sampleLocalProperty1: Boolean = true
+
+        fun sampleLocalFunction1() { }
+    }
+}

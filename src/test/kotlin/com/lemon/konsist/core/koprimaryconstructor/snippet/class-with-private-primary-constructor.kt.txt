@@ -1,2 +1,1 @@
-class SampleClass private constructor () {
-}
+class SampleClass private constructor ()

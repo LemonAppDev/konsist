@@ -1,5 +1,7 @@
 package com.lemon.konsist.core.declaration
 
+import com.lemon.konsist.core.const.KoModifier
+
 class KoScope(
     private val koFiles: List<KoFile>,
 ) {
@@ -7,17 +9,23 @@ class KoScope(
 
     fun files() = koFiles
 
-    fun classes(includeNested: Boolean = false) = koFiles.flatMap { it.classes(includeNested) }
+    fun classes(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false) =
+        koFiles.flatMap { it.classes(modifiers, includeNested) }
 
-    fun interfaces(includeNested: Boolean = false) = koFiles.flatMap { it.interfaces(includeNested) }
+    fun interfaces(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false) =
+        koFiles.flatMap { it.interfaces(modifiers, includeNested) }
 
-    fun objects(includeNested: Boolean = false) = koFiles.flatMap { it.objects(includeNested) }
+    fun objects(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false) =
+        koFiles.flatMap { it.objects(modifiers, includeNested) }
 
-    fun functions(includeNested: Boolean = false) = koFiles.flatMap { it.functions(includeNested) }
+    fun functions(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false) =
+        koFiles.flatMap { it.functions(modifiers, includeNested) }
 
-    fun declarations(includeNested: Boolean = false) = koFiles.flatMap { it.declarations(includeNested) }
+    fun declarations(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false) =
+        koFiles.flatMap { it.declarations(modifiers, includeNested) }
 
-    fun properties(includeNested: Boolean = false) = koFiles.flatMap { it.properties(includeNested) }
+    fun properties(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false) =
+        koFiles.flatMap { it.properties(modifiers, includeNested) }
 
     fun imports() = koFiles.flatMap { it.imports }
 

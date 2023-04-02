@@ -1,196 +1,109 @@
 package com.lemon.konsist.core.kocomplexdeclaration
 
-import SampleClass
 import com.lemon.konsist.TestSnippetProvider
-import com.lemon.konsist.core.const.KoModifier.PRIVATE
-import com.lemon.konsist.core.const.KoModifier.PUBLIC
+import com.lemon.konsist.core.const.KoModifier
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoComplexDeclarationForObjectTest {
     @Test
-    fun `object-with-class includeNested true`() {
+    fun `object-without-declarations`() {
         // given
-        val sut = getSut("object-with-class")
+        val sut = getSut("object-without-declarations")
             .objects()
             .first()
 
         // then
         sut
-            .classes(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedClass")
+            .declarations(includeNested = true, includeLocal = true)
+            .map { it.name } shouldBeEqualTo emptyList()
     }
 
     @Test
-    fun `object-with-class includeNested false`() {
+    fun `object-containing-declarations includeNested true includeLocal true`() {
         // given
-        val sut = getSut("object-with-class")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .classes(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedClass")
-    }
-
-    @Test
-    fun `object-with-interface includeNested true`() {
-        // given
-        val sut = getSut("object-with-interface")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .interfaces(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedInterface")
-    }
-
-    @Test
-    fun `object-with-interface includeNested false`() {
-        // given
-        val sut = getSut("object-with-interface")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .interfaces(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedInterface")
-    }
-
-    @Test
-    fun `object-with-object includeNested true`() {
-        // given
-        val sut = getSut("object-with-object")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .objects(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedObject")
-    }
-
-    @Test
-    fun `object-with-object includeNested false`() {
-        // given
-        val sut = getSut("object-with-object")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .objects(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedObject")
-    }
-
-    @Test
-    fun `object-with-property includeNested true`() {
-        // given
-        val sut = getSut("object-with-property")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .properties(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("sampleNestedProperty")
-    }
-
-    @Test
-    fun `object-with-property includeNested false`() {
-        // given
-        val sut = getSut("object-with-property")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .properties(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("sampleNestedProperty")
-    }
-
-    @Test
-    fun `object-with-nested-functions includeNested true includeLocal true`() {
-        // given
-        val sut = getSut("object-with-nested-functions")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .functions(includeNested = true, includeLocal = true)
-            .map { it.name } shouldBeEqualTo listOf(
-            "sampleFunction",
-            "sampleLocalFunction1",
-            "sampleNestedFunction",
-            "sampleLocalFunction2",
-        )
-    }
-
-    @Test
-    fun `object-with-nested-functions includeNested true includeLocal false`() {
-        // given
-        val sut = getSut("object-with-nested-functions")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .functions(includeNested = true, includeLocal = false)
-            .map { it.name } shouldBeEqualTo listOf(
-            "sampleFunction",
-            "sampleNestedFunction",
-        )
-    }
-
-    @Test
-    fun `object-with-nested-functions includeNested false includeLocal false`() {
-        // given
-        val sut = getSut("object-with-nested-functions")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .functions(includeNested = false, includeLocal = false)
-            .map { it.name } shouldBeEqualTo listOf(
-            "sampleFunction",
-        )
-    }
-
-    @Test
-    fun `object-with-nested-functions includeNested false includeLocal true`() {
-        // given
-        val sut = getSut("object-with-nested-functions")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .functions(includeNested = false, includeLocal = true)
-            .map { it.name } shouldBeEqualTo listOf(
-            "sampleFunction",
-            "sampleLocalFunction1",
-        )
-    }
-
-    @Test
-    fun `object-with-all-declarations includeNested true`() {
-        // given
-        val sut = getSut("object-with-all-declarations")
+        val sut = getSut("object-containing-declarations")
             .objects()
             .first()
 
         // then
         val expected = listOf(
-            "sampleNestedProperty",
-            "SampleNestedClass",
-            "sampleNestedFunction",
-            "SampleNestedInterface",
-            "SampleNestedObject",
+            "sampleProperty",
+            "sampleFunction",
+            "SampleClass",
+            "SampleObject",
+            "SampleInterface",
+        )
+
+        sut
+            .declarations(includeNested = true, includeLocal = true)
+            .map { it.name } shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `object-containing-declarations includeNested true includeLocal false`() {
+        // given
+        val sut = getSut("object-containing-declarations")
+            .objects()
+            .first()
+
+        // then
+        val expected = listOf(
+            "sampleProperty",
+            "sampleFunction",
+            "SampleClass",
+            "SampleObject",
+            "SampleInterface",
+        )
+
+        sut
+            .declarations(includeNested = true, includeLocal = false)
+            .map { it.name } shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `object-containing-declarations includeNested false includeLocal true`() {
+        // given
+        val sut = getSut("object-containing-declarations")
+            .objects()
+            .first()
+
+        // then
+        val expected = listOf(
+            "sampleProperty",
+            "sampleFunction",
+            "SampleClass",
+            "SampleObject",
+            "SampleInterface",
+        )
+
+        sut
+            .declarations(includeNested = false, includeLocal = true)
+            .map { it.name } shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `object-containing-nested-declarations includeNested true`() {
+        // given
+        val sut = getSut("object-containing-nested-declarations")
+            .objects()
+            .first()
+
+        // then
+        val expected = listOf(
+            "sampleFunction",
+            "SampleClass",
+            "SampleClassNestedInsideClass",
+            "SampleObjectNestedInsideClass",
+            "SampleInterfaceNestedInsideClass",
+            "SampleObject",
+            "SampleClassNestedInsideClass",
+            "SampleObjectNestedInsideClass",
+            "SampleInterfaceNestedInsideClass",
+            "SampleInterface",
+            "SampleClassNestedInsideInterface",
+            "SampleObjectNestedInsideInterface",
+            "SampleInterfaceNestedInsideInterface",
         )
 
         sut
@@ -199,19 +112,18 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-with-all-declarations includeNested false`() {
+    fun `object-containing-nested-declarations includeNested false`() {
         // given
-        val sut = getSut("object-with-all-declarations")
+        val sut = getSut("object-containing-nested-declarations")
             .objects()
             .first()
 
         // then
         val expected = listOf(
-            "sampleNestedProperty",
-            "SampleNestedClass",
-            "sampleNestedFunction",
-            "SampleNestedInterface",
-            "SampleNestedObject",
+            "sampleFunction",
+            "SampleClass",
+            "SampleObject",
+            "SampleInterface",
         )
 
         sut
@@ -220,275 +132,86 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-with-nested-classes includeNested true`() {
+    fun `object-containing-local-declarations includeLocal true`() {
         // given
-        val sut = getSut("object-with-nested-classes")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .classes(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedClass1", "SampleNestedClass2", "SampleNestedClass3")
-    }
-
-    @Test
-    fun `object-with-nested-classes includeNested false`() {
-        // given
-        val sut = getSut("object-with-nested-classes")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .classes(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedClass1")
-    }
-
-    @Test
-    fun `object-with-nested-interfaces includeNested true`() {
-        // given
-        val sut = getSut("object-with-nested-interfaces")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .interfaces(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedInterface1", "SampleNestedInterface2", "SampleNestedInterface3")
-    }
-
-    @Test
-    fun `object-with-nested-interfaces includeNested false`() {
-        // given
-        val sut = getSut("object-with-nested-interfaces")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .interfaces(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedInterface1")
-    }
-
-    @Test
-    fun `object-with-nested-objects includeNested true`() {
-        // given
-        val sut = getSut("object-with-nested-objects")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .objects(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedObject1", "SampleNestedObject2", "SampleNestedObject3")
-    }
-
-    @Test
-    fun `object-with-nested-objects includeNested false`() {
-        // given
-        val sut = getSut("object-with-nested-objects")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .objects(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("SampleNestedObject1")
-    }
-
-    @Test
-    fun `object-with-nested-properties includeNested true`() {
-        // given
-        val sut = getSut("object-with-nested-properties")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .properties(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("sampleNestedProperty1", "sampleNestedProperty2")
-    }
-
-    @Test
-    fun `object-with-nested-properties includeNested false`() {
-        // given
-        val sut = getSut("object-with-nested-properties")
-            .objects()
-            .first()
-
-        // then
-        sut
-            .properties(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("sampleNestedProperty1")
-    }
-
-    @Test
-    fun `object-with-nested-declarations includeNested true`() {
-        // given
-        val sut = getSut("object-with-nested-declarations")
+        val sut = getSut("object-containing-local-declarations")
             .objects()
             .first()
 
         // then
         val expected = listOf(
-            "sampleNestedProperty1",
-            "SampleClass",
-            "SampleNestedObject",
-            "sampleNestedFunction1",
-            "SampleInterface",
-            "sampleNestedFunction2",
-            "SampleObject",
-            "sampleNestedProperty2",
+            "sampleFunction",
+            "sampleLocalProperty1",
+            "sampleLocalFunction1",
         )
 
         sut
-            .declarations(includeNested = true)
+            .declarations(includeLocal = true)
             .map { it.name } shouldBeEqualTo expected
     }
 
     @Test
-    fun `object-with-nested-declarations includeNested false`() {
+    fun `object-containing-local-declarations includeLocal false`() {
         // given
-        val sut = getSut("object-with-nested-declarations")
+        val sut = getSut("object-containing-local-declarations")
             .objects()
             .first()
 
         // then
-        val expected = listOf(
-            "sampleNestedProperty1",
-            "SampleClass",
-            "sampleNestedFunction1",
-            "SampleInterface",
-            "SampleObject",
-        )
+        val expected = listOf("sampleFunction")
 
         sut
-            .declarations(includeNested = false)
+            .declarations(includeLocal = false)
             .map { it.name } shouldBeEqualTo expected
     }
 
     @Test
-    fun `object-with-class-which-not-represents-type`() {
+    fun `object-containing-declarations-heaving-visibility-modifiers includeNested = true`() {
         // given
-        val sut = getSut("object-with-class-which-not-represents-type")
+        val sut = getSut("object-containing-declarations-heaving-visibility-modifiers")
             .objects()
             .first()
 
         // then
-        sut.representsType(SampleClass::class) shouldBeEqualTo false
+        val expected = listOf("sampleFunction")
+
+        sut
+            .declarations(listOf(KoModifier.PRIVATE), includeNested = true)
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleFunction1",
+            "SampleClass1",
+            "SampleClassNestedInsideClass2",
+            "SampleObjectNestedInsideClass2",
+            "SampleInterfaceNestedInsideClass2",
+            "SampleObject1",
+            "SampleClassNestedInsideClass2",
+            "SampleObjectNestedInsideClass2",
+            "SampleInterfaceNestedInsideClass2",
+            "SampleInterface1",
+            "SampleClassNestedInsideInterface2",
+            "SampleObjectNestedInsideInterface2",
+            "SampleInterfaceNestedInsideInterface2",
+        )
     }
 
     @Test
-    fun `object-with-nested-properties-with-modifiers includeNested false`() {
+    fun `object-containing-declarations-heaving-visibility-modifiers includeNested = false`() {
         // given
-        val sut = getSut("object-with-nested-properties-with-modifiers")
+        val sut = getSut("object-containing-declarations-heaving-visibility-modifiers")
             .objects()
             .first()
 
         // then
-        sut.apply {
-            containsProperty("sampleNestedProperty1", listOf(PRIVATE), includeNested = false) shouldBeEqualTo true
-            containsProperty("sampleNestedProperty1", listOf(PUBLIC), includeNested = false) shouldBeEqualTo false
-        }
-    }
+        val expected = listOf("sampleFunction")
 
-    @Test
-    fun `object-with-nested-properties-with-modifiers includeNested true`() {
-        // given
-        val sut = getSut("object-with-nested-properties-with-modifiers")
-            .objects()
-            .first()
-
-        // then
-        sut.apply {
-            containsProperty("sampleNestedProperty2", listOf(PRIVATE), includeNested = true) shouldBeEqualTo true
-            containsProperty("sampleNestedProperty2", listOf(PUBLIC), includeNested = true) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `object-with-nested-classes-with-modifiers includeNested false`() {
-        // given
-        val sut = getSut("object-with-nested-classes-with-modifiers")
-            .objects()
-            .first()
-
-        // then
-        sut.apply {
-            containsClass("SampleNestedClass1", listOf(PRIVATE), includeNested = false) shouldBeEqualTo true
-            containsClass("SampleNestedClass1", listOf(PUBLIC), includeNested = false) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `object-with-nested-classes-with-modifiers includeNested true`() {
-        // given
-        val sut = getSut("object-with-nested-classes-with-modifiers")
-            .objects()
-            .first()
-
-        // then
-        sut.apply {
-            containsClass("SampleNestedClass2", listOf(PRIVATE), includeNested = true) shouldBeEqualTo true
-            containsClass("SampleNestedClass2", listOf(PUBLIC), includeNested = true) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `object-with-nested-interfaces-with-modifiers includeNested false`() {
-        // given
-        val sut = getSut("object-with-nested-interfaces-with-modifiers")
-            .objects()
-            .first()
-
-        // then
-        sut.apply {
-            containsInterface("SampleNestedInterface1", listOf(PRIVATE), includeNested = false) shouldBeEqualTo true
-            containsInterface("SampleNestedInterface1", listOf(PUBLIC), includeNested = false) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `object-with-nested-interfaces-with-modifiers includeNested true`() {
-        // given
-        val sut = getSut("object-with-nested-interfaces-with-modifiers")
-            .objects()
-            .first()
-
-        // then
-        sut.apply {
-            containsInterface("SampleNestedInterface2", listOf(PRIVATE), includeNested = true) shouldBeEqualTo true
-            containsInterface("SampleNestedInterface2", listOf(PUBLIC), includeNested = true) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `object-with-nested-objects-with-modifiers includeNested false`() {
-        // given
-        val sut = getSut("object-with-nested-objects-with-modifiers")
-            .objects()
-            .first()
-
-        // then
-        sut.apply {
-            containsObject("SampleNestedObject1", listOf(PRIVATE), includeNested = false) shouldBeEqualTo true
-            containsObject("SampleNestedObject1", listOf(PUBLIC), includeNested = false) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `object-with-nested-objects-with-modifiers includeNested true`() {
-        // given
-        val sut = getSut("object-with-nested-objects-with-modifiers")
-            .objects()
-            .first()
-
-        // then
-        sut.apply {
-            containsObject("SampleNestedObject2", listOf(PRIVATE), includeNested = true) shouldBeEqualTo true
-            containsObject("SampleNestedObject2", listOf(PUBLIC), includeNested = true) shouldBeEqualTo false
-        }
+        sut
+            .declarations(listOf(KoModifier.PRIVATE), includeNested = false)
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleFunction1",
+            "SampleClass1",
+            "SampleObject1",
+            "SampleInterface1",
+        )
     }
 
     private fun getSut(name: String) = TestSnippetProvider.getSnippetKoScope("core/kocomplexdeclaration/snippet/forobject/$name.kt.txt")

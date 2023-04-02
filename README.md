@@ -12,6 +12,10 @@ Example checks:
 - Check if no classes are using Java util logging 
 - and much more… see sample checks
 
+# Setup
+
+# Tests
+
 ## Why there are no pre-defined rules?
 
 Many linters including [Detekt](https://github.com/detekt/detekt) and [ktlint](https://github.com/pinterest/ktlint)
@@ -23,13 +27,12 @@ However, there are no industry standards when comes to application architecture.
 different class naming, different package structure, different application layers... These "rules" are also hard to 
 capture in a linter, because they are very specific to the project. Consider a simple use case class:
 - can use case extend or include another use case?
-- do we want every use case to have `UseCase` suffix?
+- should every use case to have `UseCase` suffix?
 - what package these use cases should resist in?
 - what annotations use case should have?
 - should use case have a single method?
 - how this method should be named?
 - can this method have overloads?
-- should this method be defined as `invoke operator`?
 - should this method always be `suspended`?
 - …
 

@@ -1,6 +1,0 @@
-class SampleClass {
-    private object SampleNestedObject1 {
-        private object SampleNestedObject2 {
-        }
-    }
-}

@@ -50,19 +50,6 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-nested-local-functions`() {
-        // given
-        val sut = getSut("function-with-nested-local-functions")
-            .functions()
-            .first()
-
-        // then
-        sut
-            .getLocalFunctions(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("LocalSampleFunction1", "LocalSampleFunction2")
-    }
-
-    @Test
     fun `function-with-local-function`() {
         // given
         val sut = getSut("function-with-local-function")
@@ -71,8 +58,8 @@ class KoFunctionTest {
 
         // then
         sut
-            .getLocalFunctions()
-            .map { it.name } shouldBeEqualTo listOf("localFunction")
+            .localFunctions()
+            .map { it.name } shouldBeEqualTo listOf("sampleLocalFunction")
     }
 
     @Test
@@ -84,7 +71,7 @@ class KoFunctionTest {
 
         // then
         sut
-            .getLocalFunctions()
+            .localFunctions()
             .isEmpty() shouldBeEqualTo true
     }
 
@@ -153,6 +140,32 @@ class KoFunctionTest {
             hasParameterNamed("sampleParameter") shouldBeEqualTo true
             hasParameterNamed("otherParameter") shouldBeEqualTo false
         }
+    }
+
+    @Test
+    fun `function-with-local-property includeLocal true`() {
+        // given
+        val sut = getSut("function-with-local-property")
+            .files()
+            .first()
+
+        // then
+        sut
+            .properties(includeLocal = true)
+            .map { it.name } shouldBeEqualTo listOf("sampleLocalProperty")
+    }
+
+    @Test
+    fun `function-with-local-property includeLocal false`() {
+        // given
+        val sut = getSut("function-with-local-property")
+            .files()
+            .first()
+
+        // then
+        sut
+            .properties(includeLocal = false)
+            .map { it.name } shouldBeEqualTo emptyList()
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofunction/snippet/$fileName.kt.txt")

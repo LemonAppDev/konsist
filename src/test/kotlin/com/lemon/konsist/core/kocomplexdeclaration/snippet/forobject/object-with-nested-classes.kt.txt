@@ -1,9 +1,0 @@
-object SampleObject {
-    class SampleNestedClass1 {
-        class SampleNestedClass2
-    }
-
-    interface SampleInterface {
-        class SampleNestedClass3
-    }
-}

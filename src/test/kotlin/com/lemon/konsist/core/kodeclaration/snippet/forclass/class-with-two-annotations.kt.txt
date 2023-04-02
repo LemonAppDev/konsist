@@ -1,3 +1,6 @@
+import com.lemon.konsist.testdata.SampleAnnotation1
+import com.lemon.konsist.testdata.SampleAnnotation2
+
 @SampleAnnotation1
 @SampleAnnotation2
 class SampleClass {
