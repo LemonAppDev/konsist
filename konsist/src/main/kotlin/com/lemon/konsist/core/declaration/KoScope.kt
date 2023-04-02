@@ -9,23 +9,44 @@ class KoScope(
 
     fun files() = koFiles
 
-    fun classes(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false) =
-        koFiles.flatMap { it.classes(modifiers, includeNested) }
+    fun classes(
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+    ) =
+        koFiles.flatMap { it.classes(modifiers, includeNested, includeLocal) }
 
-    fun interfaces(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false) =
+    fun interfaces(
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+    ) =
         koFiles.flatMap { it.interfaces(modifiers, includeNested) }
 
-    fun objects(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false) =
+    fun objects(
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+    ) =
         koFiles.flatMap { it.objects(modifiers, includeNested) }
 
-    fun functions(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false) =
-        koFiles.flatMap { it.functions(modifiers, includeNested) }
+    fun functions(
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+    ) =
+        koFiles.flatMap { it.functions(modifiers, includeNested, includeLocal) }
 
-    fun declarations(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false) =
+    fun declarations(
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+    ) =
         koFiles.flatMap { it.declarations(modifiers, includeNested) }
 
-    fun properties(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false) =
-        koFiles.flatMap { it.properties(modifiers, includeNested) }
+    fun properties(
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+    ) =
+        koFiles.flatMap { it.properties(modifiers, includeNested, includeLocal) }
 
     fun imports() = koFiles.flatMap { it.imports }
 

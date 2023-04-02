@@ -23,27 +23,47 @@ interface KoDeclarationProvider {
 }
 
 interface KoClassProvider : KoDeclarationProvider {
-    fun classes(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false): List<KoClass> =
-        KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested)
+    fun classes(
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+    ): List<KoClass> =
+        KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested, includeLocal)
 
-    fun containsClass(name: String, modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false): Boolean =
+    fun containsClass(
+        name: String,
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+    ): Boolean =
         classes(modifiers, includeNested).any { it.name == name }
 }
 
 interface KoInterfaceProvider : KoDeclarationProvider {
-    fun interfaces(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false): List<KoInterface> =
+    fun interfaces(
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+    ): List<KoInterface> =
         KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested)
 
-    fun containsInterface(name: String, modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false): Boolean =
+    fun containsInterface(
+        name: String,
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+    ): Boolean =
         interfaces(modifiers, includeNested).any { it.name == name }
 }
 
 interface KoObjectProvider : KoDeclarationProvider {
-    fun objects(modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false): List<KoObject> =
-        KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested)
+    fun objects(
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+    ): List<KoObject> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested)
 
-    fun containsObject(name: String, modifiers: List<KoModifier> = emptyList(), includeNested: Boolean = false): Boolean =
-        objects(modifiers, includeNested).any { it.name == name }
+    fun containsObject(
+        name: String,
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+    ): Boolean = objects(modifiers, includeNested).any { it.name == name }
 }
 
 interface KoPropertyProvider : KoDeclarationProvider {
