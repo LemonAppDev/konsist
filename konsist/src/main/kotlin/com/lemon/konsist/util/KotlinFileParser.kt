@@ -33,8 +33,8 @@ object KotlinFileParser {
         // Tests are using code snippets with txt extension that is messing up with Kotlin file parsing
         val filePath = file.path.replace(".txt", "")
         val lightVirtualFile = LightVirtualFile(filePath, KotlinFileType.INSTANCE, text)
-
-        return psiManager.findFile(lightVirtualFile) as KtFile
+        val psiFile = psiManager.findFile(lightVirtualFile)
+        return psiFile as KtFile
     }
 
     fun getKonsistFile(file: File): KoFile {
