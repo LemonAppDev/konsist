@@ -12,7 +12,7 @@ interface KoLocalDeclarationProvider {
 }
 
 interface KoLocalClassProvider : KoLocalDeclarationProvider {
-    fun localClasses(includeNested: Boolean = false): List<KoClass> = localDeclarations().filterIsInstance<KoClass>()
+    fun localClasses(): List<KoClass> = localDeclarations().filterIsInstance<KoClass>()
 
     fun containsLocalClass(name: String): Boolean = localClasses().any { it.name == name }
 }

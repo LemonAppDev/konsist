@@ -1,0 +1,7 @@
+fun sampleFunction() {
+    val sampleLocalProperty: Boolean = true
+
+    fun sampleLocalFunction() { }
+
+    class SampleClass
+}

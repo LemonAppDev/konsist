@@ -50,32 +50,6 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-local-function`() {
-        // given
-        val sut = getSut("function-with-local-function")
-            .functions()
-            .first()
-
-        // then
-        sut
-            .localFunctions()
-            .map { it.name } shouldBeEqualTo listOf("sampleLocalFunction")
-    }
-
-    @Test
-    fun `function-without-local-functions`() {
-        // given
-        val sut = getSut("function-without-local-functions")
-            .functions()
-            .first()
-
-        // then
-        sut
-            .localFunctions()
-            .isEmpty() shouldBeEqualTo true
-    }
-
-    @Test
     fun `function-with-return-type`() {
         // given
         val sut = getSut("function-with-return-type")
@@ -130,10 +104,9 @@ class KoFunctionTest {
     @Test
     fun `function-with-named-parameter`() {
         // given
-        val sut =
-            getSut("function-with-named-parameter")
-                .functions()
-                .first()
+        val sut = getSut("function-with-named-parameter")
+            .functions()
+            .first()
 
         // then
         sut.apply {
@@ -143,29 +116,62 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-local-property includeLocal true`() {
+    fun `function-with-local-property`() {
         // given
         val sut = getSut("function-with-local-property")
-            .files()
+            .functions()
             .first()
 
         // then
-        sut
-            .properties(includeLocal = true)
-            .map { it.name } shouldBeEqualTo listOf("sampleLocalProperty")
+        sut.apply {
+            containsLocalProperty("sampleLocalProperty") shouldBeEqualTo true
+            localProperties().map { it.name } shouldBeEqualTo listOf("sampleLocalProperty")
+        }
     }
 
     @Test
-    fun `function-with-local-property includeLocal false`() {
+    fun `function-with-local-function`() {
         // given
-        val sut = getSut("function-with-local-property")
-            .files()
+        val sut = getSut("function-with-local-function")
+            .functions()
+            .first()
+
+        // then
+        sut.apply {
+            containsLocalFunction("sampleLocalFunction") shouldBeEqualTo true
+            localFunctions().map { it.name } shouldBeEqualTo listOf("sampleLocalFunction")
+        }
+    }
+
+    @Test
+    fun `function-with-local-class`() {
+        // given
+        val sut = getSut("function-with-local-class")
+            .functions()
+            .first()
+
+        // then
+        sut.apply {
+            containsLocalClass("SampleClass") shouldBeEqualTo true
+            localClasses().map { it.name } shouldBeEqualTo listOf("SampleClass")
+        }
+    }
+
+    @Test
+    fun `function-with-local-declarations`() {
+        // given
+        val sut = getSut("function-with-local-declarations")
+            .functions()
             .first()
 
         // then
         sut
-            .properties(includeLocal = false)
-            .map { it.name } shouldBeEqualTo emptyList()
+            .localDeclarations()
+            .map { it.name } shouldBeEqualTo listOf(
+            "sampleLocalProperty",
+            "sampleLocalFunction",
+            "SampleClass",
+        )
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/kofunction/snippet/$fileName.kt.txt")
