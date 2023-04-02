@@ -1,15 +1,24 @@
 package com.lemon.konsist.core.declaration
 
-import com.lemon.konsist.core.util.KoDeclarationUtil
+import com.lemon.konsist.core.const.KoModifier
+import com.lemon.konsist.core.declaration.provider.KoClassProvider
+import com.lemon.konsist.core.declaration.provider.KoDeclarationProviderUtil
+import com.lemon.konsist.core.declaration.provider.KoFunctionProvider
+import com.lemon.konsist.core.declaration.provider.KoInterfaceProvider
+import com.lemon.konsist.core.declaration.provider.KoObjectProvider
+import com.lemon.konsist.core.declaration.provider.KoPropertyProvider
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import kotlin.reflect.KClass
 
 open class KoComplexDeclaration(
     private val ktClassOrObject: KtClassOrObject,
-) : KoDeclaration(ktClassOrObject), KoDeclarationProvider {
+) : KoDeclaration(ktClassOrObject), KoClassProvider, KoInterfaceProvider, KoObjectProvider, KoPropertyProvider, KoFunctionProvider {
 
     fun representsType(kClass: KClass<*>) = kClass.qualifiedName == fullyQualifiedName
 
-    override fun declarations(includeNested: Boolean, includeLocal: Boolean): List<KoDeclaration> =
-        KoDeclarationUtil.getKoDeclarations(ktClassOrObject, includeNested, includeLocal)
+    override fun declarations(
+        modifiers: List<KoModifier>,
+        includeNested: Boolean,
+        includeLocal: Boolean,
+    ): List<KoDeclaration> = KoDeclarationProviderUtil.getKoDeclarations(ktClassOrObject, modifiers, includeNested, includeLocal)
 }

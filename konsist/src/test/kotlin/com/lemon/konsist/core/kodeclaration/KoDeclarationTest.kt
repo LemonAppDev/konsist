@@ -7,14 +7,15 @@ import com.lemon.konsist.testdata.SampleAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation1
 import com.lemon.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
-class KoDeclarationForInterfaceTest {
+class KoDeclarationTest {
     @Test
-    fun `interface-is-top-level`() {
+    fun `property-is-top-level`() {
         // given
-        val sut = getSut("interface-is-top-level")
-            .interfaces(includeNested = true)
+        val sut = getSut("property-is-top-level")
+            .properties(includeNested = true)
             .first()
 
         // then
@@ -22,50 +23,52 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-is-not-top-level`() {
+    fun `property-is-not-top-level`() {
         // given
-        val sut = getSut("interface-is-not-top-level")
-            .interfaces(includeNested = true)
-            .first { it.name == "SampleNestedInterface" }
+        val sut = getSut("property-is-not-top-level")
+            .properties(includeNested = true)
+            .first { it.name == "sampleNestedProperty" }
 
         // then
         sut.isTopLevel shouldBeEqualTo false
     }
 
     @Test
-    fun `interface-without-annotation`() {
+    fun `property-without-annotation`() {
         // given
-        val sut = getSut("interface-without-annotation")
-            .interfaces()
+        val sut = getSut("property-without-annotation")
+            .properties()
             .first()
 
         // then
-        sut.annotations.isEmpty() shouldBeEqualTo true
+        sut.annotations shouldHaveSize 0
     }
 
     @Test
-    fun `interface-with-annotation`() {
+    fun `property-with-annotation`() {
         // given
-        val sut = getSut("interface-with-annotation")
-            .interfaces()
+        val sut = getSut("property-with-annotation")
+            .properties()
             .first()
 
         // then
         sut.apply {
+            annotations shouldHaveSize 1
             hasAnnotation(SampleAnnotation::class) shouldBeEqualTo true
             hasAnnotation(NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `interface-with-two-annotations`() {
+    fun `property-with-two-annotations`() {
         // given
-        val sut = getSut("interface-with-two-annotations")
-            .interfaces()
+        val sut = getSut("property-with-two-annotations")
+            .properties()
             .first()
 
         // then
         sut.apply {
+            annotations shouldHaveSize 2
             hasAnnotation(SampleAnnotation1::class) shouldBeEqualTo true
             hasAnnotation(SampleAnnotation2::class) shouldBeEqualTo true
             hasAnnotation(NonExistingAnnotation::class) shouldBeEqualTo false
@@ -73,10 +76,10 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-without-visibility-modifier`() {
+    fun `property-without-visibility-modifier`() {
         // given
-        val sut = getSut("interface-without-visibility-modifier")
-            .interfaces()
+        val sut = getSut("property-without-visibility-modifier")
+            .properties()
             .first()
 
         // then
@@ -89,10 +92,10 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-public-visibility-modifier`() {
+    fun `property-with-public-visibility-modifier`() {
         // given
-        val sut = getSut("interface-with-public-visibility-modifier")
-            .interfaces()
+        val sut = getSut("property-with-public-visibility-modifier")
+            .properties()
             .first()
 
         // then
@@ -105,10 +108,10 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-private-visibility-modifier`() {
+    fun `property-with-private-visibility-modifier`() {
         // given
-        val sut = getSut("interface-with-private-visibility-modifier")
-            .interfaces()
+        val sut = getSut("property-with-private-visibility-modifier")
+            .properties()
             .first()
 
         // then
@@ -121,10 +124,10 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-protected-visibility-modifier`() {
+    fun `property-with-protected-visibility-modifier`() {
         // given
-        val sut = getSut("interface-with-protected-visibility-modifier")
-            .interfaces()
+        val sut = getSut("property-with-protected-visibility-modifier")
+            .properties()
             .first()
 
         // then
@@ -137,10 +140,10 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-internal-visibility-modifier`() {
+    fun `property-with-internal-visibility-modifier`() {
         // given
-        val sut = getSut("interface-with-internal-visibility-modifier")
-            .interfaces()
+        val sut = getSut("property-with-internal-visibility-modifier")
+            .properties()
             .first()
 
         // then
@@ -153,21 +156,21 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-fully-qualified-name`() {
+    fun `property-with-fully-qualified-name`() {
         // given
-        val sut = getSut("interface-with-fully-qualified-name")
-            .interfaces()
+        val sut = getSut("property-with-fully-qualified-name")
+            .properties()
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleInterface"
+        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleProperty"
     }
 
     @Test
-    fun `interface-with-package`() {
+    fun `property-with-package`() {
         // given
-        val sut = getSut("interface-with-package")
-            .interfaces()
+        val sut = getSut("property-with-package")
+            .properties()
             .first()
 
         // then
@@ -175,10 +178,10 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-without-package`() {
+    fun `property-without-package`() {
         // given
-        val sut = getSut("interface-without-package")
-            .interfaces()
+        val sut = getSut("property-without-package")
+            .properties()
             .first()
 
         // then
@@ -186,10 +189,10 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-protected-modifier`() {
+    fun `property-with-protected-modifier`() {
         // given
-        val sut = getSut("interface-with-protected-modifier")
-            .interfaces()
+        val sut = getSut("property-with-protected-modifier")
+            .properties()
             .first()
 
         // then
@@ -197,10 +200,10 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-public-modifier`() {
+    fun `property-with-public-modifier`() {
         // given
-        val sut = getSut("interface-with-public-modifier")
-            .interfaces()
+        val sut = getSut("property-with-public-modifier")
+            .properties()
             .first()
 
         // then
@@ -211,10 +214,10 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-reside-in-package`() {
+    fun `property-reside-in-package`() {
         // given
-        val sut = getSut("interface-reside-in-package")
-            .interfaces()
+        val sut = getSut("property-reside-in-package")
+            .properties()
             .first()
 
         // then
@@ -222,15 +225,15 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-not-reside-in-package`() {
+    fun `property-not-reside-in-package`() {
         // given
-        val sut = getSut("interface-not-reside-in-package")
-            .interfaces()
+        val sut = getSut("property-not-reside-in-package")
+            .properties()
             .first()
 
         // then
         sut.resideInAPackages("otherpackage") shouldBeEqualTo false
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/kodeclaration/snippet/forinterface/$fileName.kt.txt")
+    private fun getSut(fileName: String) = getSnippetKoScope("core/kodeclaration/snippet/forproperty/$fileName.kt.txt")
 }

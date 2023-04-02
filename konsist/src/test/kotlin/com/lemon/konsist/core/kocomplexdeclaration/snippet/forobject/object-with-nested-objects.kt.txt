@@ -1,9 +1,0 @@
-object SampleObject {
-    object SampleNestedObject1 {
-        object SampleNestedObject2
-    }
-
-    class SampleClass {
-        object SampleNestedObject3
-    }
-}

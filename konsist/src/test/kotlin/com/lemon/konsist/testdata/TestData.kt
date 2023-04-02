@@ -1,3 +1,5 @@
+package com.lemon.konsist.testdata
+
 class SampleClass
 
 class SampleClass1

@@ -1,0 +1,41 @@
+interface SampleTopLevelClass {
+    private fun sampleFunction1() {}
+
+    fun sampleFunction2() {}
+
+    private class SampleClass1 {
+        class SampleClassNestedInsideClass1
+        object SampleObjectNestedInsideClass1
+        interface SampleInterfaceNestedInsideClass1
+    }
+
+    class SampleClass2 {
+        private class SampleClassNestedInsideClass2
+        private object SampleObjectNestedInsideClass2
+        private interface SampleInterfaceNestedInsideClass2
+    }
+
+    private object SampleObject1 {
+        class SampleClassNestedInsideClass1
+        object SampleObjectNestedInsideClass1
+        interface SampleInterfaceNestedInsideClass1
+    }
+
+    object SampleObject2 {
+        private class SampleClassNestedInsideClass2
+        private object SampleObjectNestedInsideClass2
+        private interface SampleInterfaceNestedInsideClass2
+    }
+
+    private object SampleInterface1 {
+        class SampleClassNestedInsideInterface1
+        object SampleObjectNestedInsideInterface1
+        interface SampleInterfaceNestedInsideInterface1
+    }
+
+    object SampleInterface2 {
+        private class SampleClassNestedInsideInterface2
+        private object SampleObjectNestedInsideInterface2
+        private interface SampleInterfaceNestedInsideInterface2
+    }
+}

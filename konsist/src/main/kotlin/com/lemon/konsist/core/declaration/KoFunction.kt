@@ -1,17 +1,48 @@
 package com.lemon.konsist.core.declaration
 
+import com.lemon.konsist.core.declaration.logger.KoLogger
+import com.lemon.konsist.core.declaration.provider.KoLocalClassProvider
+import com.lemon.konsist.core.declaration.provider.KoLocalFunctionProvider
+import com.lemon.konsist.core.declaration.provider.KoLocalPropertyProvider
 import org.jetbrains.kotlin.lexer.KtTokens
+import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-class KoFunction(private val ktFunction: KtFunction) : KoDeclaration(ktFunction) {
+class KoFunction(private val ktFunction: KtFunction) :
+    KoDeclaration(ktFunction),
+    KoLocalClassProvider,
+    KoLocalFunctionProvider,
+    KoLocalPropertyProvider {
 
     val isOperator by lazy { ktFunction.modifierList?.hasModifier(KtTokens.OPERATOR_KEYWORD) ?: false }
 
     val isInline by lazy { ktFunction.modifierList?.hasModifier(KtTokens.INLINE_KEYWORD) ?: false }
+
+    private val localDeclarations by lazy {
+        val psiChildren = ktFunction
+            .bodyBlockExpression
+            ?.children
+            ?.toList()
+            ?: emptyList()
+
+        psiChildren.mapNotNull {
+            if (it is KtClass && !it.isInterface()) {
+                KoClass(it)
+            } else if (it is KtFunction) {
+                KoFunction(it)
+            } else if (it is KtProperty) {
+                KoProperty(it)
+            } else {
+                KoLogger.logError("Unknown local declaration type: ${it.getTextWithLocation()}")
+                null
+            }
+        }
+    }
 
     val parameters by lazy {
         ktFunction
@@ -33,41 +64,5 @@ class KoFunction(private val ktFunction: KtFunction) : KoDeclaration(ktFunction)
             ?.text
     }
 
-    fun getLocalFunctions(includeNested: Boolean = false): List<KoFunction> {
-        val koFunctions = (
-            ktFunction
-                .bodyBlockExpression
-                ?.children
-                ?.filterIsInstance<KtFunction>()
-                ?.map { KoFunction(it) }
-                ?: emptyList()
-            )
-
-        return if (includeNested) {
-            koFunctions.flatMap { listOf(it) + it.getLocalFunctions(true) }
-        } else {
-            koFunctions
-        }
-    }
-
-    fun getLocalProperties(): List<KoProperty> =
-        ktFunction
-            .bodyBlockExpression
-            ?.children
-            ?.filterIsInstance<KtProperty>()
-            ?.map { KoProperty(it) }
-            ?: emptyList()
-
-    fun getLocalDeclarations(): List<KoDeclaration> =
-        ktFunction
-            .bodyBlockExpression
-            ?.children
-            ?.mapNotNull {
-                when (it) {
-                    is KtProperty -> KoProperty(it)
-                    is KtFunction -> KoFunction(it)
-                    else -> null
-                }
-            }
-            ?: emptyList()
+    override fun localDeclarations(): List<KoDeclaration> = localDeclarations
 }

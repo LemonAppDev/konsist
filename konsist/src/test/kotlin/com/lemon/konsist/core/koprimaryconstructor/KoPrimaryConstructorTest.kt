@@ -1,8 +1,8 @@
 package com.lemon.konsist.core.koprimaryconstructor
 
-import SampleAnnotation
-import SampleAnnotation1
 import com.lemon.konsist.TestSnippetProvider
+import com.lemon.konsist.testdata.SampleAnnotation
+import com.lemon.konsist.testdata.SampleAnnotation1
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 

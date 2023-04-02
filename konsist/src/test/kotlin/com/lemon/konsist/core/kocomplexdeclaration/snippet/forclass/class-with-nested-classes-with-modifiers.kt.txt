@@ -1,6 +1,0 @@
-class SampleClass {
-    private class SampleNestedClass1() {
-        private class SampleNestedClass2() {
-        }
-    }
-}

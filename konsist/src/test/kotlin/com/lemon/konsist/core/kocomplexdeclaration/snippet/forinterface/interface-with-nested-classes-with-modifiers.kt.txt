@@ -1,6 +1,0 @@
-interface SampleInterface {
-    private class SampleNestedClass1() {
-        private class SampleNestedClass2() {
-        }
-    }
-}

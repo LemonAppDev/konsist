@@ -1,6 +1,0 @@
-interface SampleInterface {
-    private interface SampleNestedInterface1 {
-        private interface SampleNestedInterface2 {
-        }
-    }
-}

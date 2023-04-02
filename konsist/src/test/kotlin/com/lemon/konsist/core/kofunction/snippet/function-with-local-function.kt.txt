@@ -1,5 +1,5 @@
 inline fun sampleFunction() {
-    fun localFunction() {
+    fun sampleLocalFunction() {
 
     }
 }

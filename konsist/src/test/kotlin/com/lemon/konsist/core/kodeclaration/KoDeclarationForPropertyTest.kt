@@ -1,11 +1,11 @@
 package com.lemon.konsist.core.kodeclaration
 
-import NonExistingAnnotation
-import SampleAnnotation
-import SampleAnnotation1
-import SampleAnnotation2
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemon.konsist.core.const.KoModifier
+import com.lemon.konsist.testdata.NonExistingAnnotation
+import com.lemon.konsist.testdata.SampleAnnotation
+import com.lemon.konsist.testdata.SampleAnnotation1
+import com.lemon.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
