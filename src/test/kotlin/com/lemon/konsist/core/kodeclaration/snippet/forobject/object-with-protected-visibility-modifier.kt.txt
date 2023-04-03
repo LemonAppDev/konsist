@@ -1,2 +1,2 @@
-protected object SampleClass {
+protected object SampleObject {
 }

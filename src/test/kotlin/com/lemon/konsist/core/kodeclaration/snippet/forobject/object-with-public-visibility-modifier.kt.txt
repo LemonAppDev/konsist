@@ -1,2 +1,2 @@
-public object SampleClass {
+public object SampleObject {
 }

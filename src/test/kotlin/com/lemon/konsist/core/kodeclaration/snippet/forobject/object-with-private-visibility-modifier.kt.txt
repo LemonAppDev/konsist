@@ -1,2 +1,2 @@
-private object SampleClass {
+private object SampleObject {
 }

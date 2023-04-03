@@ -1,6 +1,6 @@
 class SampleClass {
     val sampleNestedProperty: Boolean = true
 
-    fun sampleNestedFunction {
+    fun sampleNestedFunction() {
     }
 }

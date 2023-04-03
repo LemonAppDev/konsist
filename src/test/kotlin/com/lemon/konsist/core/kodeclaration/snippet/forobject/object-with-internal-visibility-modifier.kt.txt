@@ -1,2 +1,2 @@
-internal object SampleClass {
+internal object SampleObject {
 }

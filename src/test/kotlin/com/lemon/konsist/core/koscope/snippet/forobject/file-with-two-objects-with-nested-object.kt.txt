@@ -1,6 +1,5 @@
 object SampleObject1 {
     object SampleNestedObject {
-
     }
 }
 

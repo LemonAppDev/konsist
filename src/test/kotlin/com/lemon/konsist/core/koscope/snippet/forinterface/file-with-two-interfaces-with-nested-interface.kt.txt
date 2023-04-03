@@ -1,6 +1,5 @@
 interface SampleInterface1 {
     interface SampleNestedInterface {
-
     }
 }
 
