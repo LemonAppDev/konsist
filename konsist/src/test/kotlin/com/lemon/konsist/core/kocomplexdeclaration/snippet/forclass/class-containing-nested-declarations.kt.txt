@@ -5,17 +5,20 @@ class SampleTopLevelClass {
         class SampleClassNestedInsideClass
         object SampleObjectNestedInsideClass
         interface SampleInterfaceNestedInsideClass
+        companion object SampleCompanionObjectNestedInsideClass
     }
 
     object SampleObject {
-        class SampleClassNestedInsideClass
-        object SampleObjectNestedInsideClass
-        interface SampleInterfaceNestedInsideClass
+        class SampleClassNestedInsideObject
+        object SampleObjectNestedInsideObject
+        interface SampleInterfaceNestedInsideObject
+        companion object SampleCompanionObjectNestedInsideObject
     }
 
-    object SampleInterface {
+    interface SampleInterface {
         class SampleClassNestedInsideInterface
         object SampleObjectNestedInsideInterface
         interface SampleInterfaceNestedInsideInterface
+        companion object SampleCompanionObjectNestedInsideInterface
     }
 }

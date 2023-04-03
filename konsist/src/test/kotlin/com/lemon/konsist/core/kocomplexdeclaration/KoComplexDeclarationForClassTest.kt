@@ -31,8 +31,9 @@ class KoComplexDeclarationForClassTest {
             "sampleProperty",
             "sampleFunction",
             "SampleClass",
-            "SampleObject",
             "SampleInterface",
+            "SampleObject",
+            "SampleCompanionObject",
         )
 
         sut
@@ -52,8 +53,9 @@ class KoComplexDeclarationForClassTest {
             "sampleProperty",
             "sampleFunction",
             "SampleClass",
-            "SampleObject",
             "SampleInterface",
+            "SampleObject",
+            "SampleCompanionObject",
         )
 
         sut
@@ -73,8 +75,9 @@ class KoComplexDeclarationForClassTest {
             "sampleProperty",
             "sampleFunction",
             "SampleClass",
-            "SampleObject",
             "SampleInterface",
+            "SampleObject",
+            "SampleCompanionObject",
         )
 
         sut
@@ -96,18 +99,20 @@ class KoComplexDeclarationForClassTest {
             "SampleClassNestedInsideClass",
             "SampleObjectNestedInsideClass",
             "SampleInterfaceNestedInsideClass",
+            "SampleCompanionObjectNestedInsideClass",
             "SampleObject",
-            "SampleClassNestedInsideClass",
-            "SampleObjectNestedInsideClass",
-            "SampleInterfaceNestedInsideClass",
+            "SampleClassNestedInsideObject",
+            "SampleObjectNestedInsideObject",
+            "SampleInterfaceNestedInsideObject",
+            "SampleCompanionObjectNestedInsideObject",
             "SampleInterface",
             "SampleClassNestedInsideInterface",
             "SampleObjectNestedInsideInterface",
             "SampleInterfaceNestedInsideInterface",
+            "SampleCompanionObjectNestedInsideInterface",
         )
 
-        sut
-            .declarations(includeNested = true)
+        sut.declarations(includeNested = true, includeLocal = true)
             .map { it.name } shouldBeEqualTo expected
     }
 
@@ -173,8 +178,6 @@ class KoComplexDeclarationForClassTest {
             .first()
 
         // then
-        val expected = listOf("sampleFunction")
-
         sut
             .declarations(listOf(KoModifier.PRIVATE), includeNested = true)
             .map { it.name } shouldBeEqualTo listOf(
@@ -183,14 +186,17 @@ class KoComplexDeclarationForClassTest {
             "SampleClassNestedInsideClass2",
             "SampleObjectNestedInsideClass2",
             "SampleInterfaceNestedInsideClass2",
+            "SampleCompanionObjectNestedInsideClass2",
             "SampleObject1",
-            "SampleClassNestedInsideClass2",
-            "SampleObjectNestedInsideClass2",
-            "SampleInterfaceNestedInsideClass2",
+            "SampleClassNestedInsideObject2",
+            "SampleObjectNestedInsideObject2",
+            "SampleInterfaceNestedInsideObject2",
+            "SampleCompanionObjectNestedInsideObject2",
             "SampleInterface1",
             "SampleClassNestedInsideInterface2",
             "SampleObjectNestedInsideInterface2",
             "SampleInterfaceNestedInsideInterface2",
+            "SampleCompanionObjectNestedInsideInterface2",
         )
     }
 
@@ -202,8 +208,6 @@ class KoComplexDeclarationForClassTest {
             .first()
 
         // then
-        val expected = listOf("sampleFunction")
-
         sut
             .declarations(listOf(KoModifier.PRIVATE), includeNested = false)
             .map { it.name } shouldBeEqualTo listOf(

@@ -1,6 +1,7 @@
 package com.lemon.konsist.ext
 
 import com.lemon.konsist.core.declaration.KoClass
+import com.lemon.konsist.core.declaration.KoCompanionObject
 import com.lemon.konsist.core.declaration.KoFunction
 import com.lemon.konsist.core.declaration.KoInterface
 import com.lemon.konsist.core.declaration.KoObject
@@ -20,7 +21,12 @@ fun <E : KtDeclaration> List<E>.mapToKoInterface() = filterIsInstance<KtClass>()
     .map { KoInterface(it) }
 
 fun <E : KtDeclaration> List<E>.mapToKoObject() = filterIsInstance<KtObjectDeclaration>()
+    .filterNot { it.isCompanion() }
     .map { KoObject(it) }
+
+fun <E : KtDeclaration> List<E>.mapToKoCompanionObject() = filterIsInstance<KtObjectDeclaration>()
+    .filter { it.isCompanion() }
+    .map { KoCompanionObject(it) }
 
 fun <E : KtDeclaration> List<E>.mapToKoProperty() = filterIsInstance<KtProperty>()
     .map { KoProperty(it) }

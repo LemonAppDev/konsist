@@ -1,4 +1,4 @@
-interface SampleTopLevelClass {
+interface SampleTopLevelInterface {
     val sampleProperty: Boolean
 
     fun sampleFunction() {}
@@ -7,5 +7,7 @@ interface SampleTopLevelClass {
 
     object SampleObject
 
-    object SampleInterface
+    interface SampleInterface
+
+    companion object SampleCompanionObject
 }

@@ -33,6 +33,7 @@ class KoComplexDeclarationForInterfaceTest {
             "SampleClass",
             "SampleObject",
             "SampleInterface",
+            "SampleCompanionObject",
         )
 
         sut
@@ -54,6 +55,7 @@ class KoComplexDeclarationForInterfaceTest {
             "SampleClass",
             "SampleObject",
             "SampleInterface",
+            "SampleCompanionObject",
         )
 
         sut
@@ -75,6 +77,7 @@ class KoComplexDeclarationForInterfaceTest {
             "SampleClass",
             "SampleObject",
             "SampleInterface",
+            "SampleCompanionObject",
         )
 
         sut
@@ -96,10 +99,11 @@ class KoComplexDeclarationForInterfaceTest {
             "SampleClassNestedInsideClass",
             "SampleObjectNestedInsideClass",
             "SampleInterfaceNestedInsideClass",
+            "SampleCompanionObjectNestedInsideClass",
             "SampleObject",
-            "SampleClassNestedInsideClass",
-            "SampleObjectNestedInsideClass",
-            "SampleInterfaceNestedInsideClass",
+            "SampleClassNestedInsideObject",
+            "SampleObjectNestedInsideObject",
+            "SampleInterfaceNestedInsideObject",
             "SampleInterface",
             "SampleClassNestedInsideInterface",
             "SampleObjectNestedInsideInterface",
@@ -173,8 +177,6 @@ class KoComplexDeclarationForInterfaceTest {
             .first()
 
         // then
-        val expected = listOf("sampleFunction")
-
         sut
             .declarations(listOf(KoModifier.PRIVATE), includeNested = true)
             .map { it.name } shouldBeEqualTo listOf(
@@ -183,10 +185,11 @@ class KoComplexDeclarationForInterfaceTest {
             "SampleClassNestedInsideClass2",
             "SampleObjectNestedInsideClass2",
             "SampleInterfaceNestedInsideClass2",
+            "SampleCompanionObjectNestedInsideClass2",
             "SampleObject1",
-            "SampleClassNestedInsideClass2",
-            "SampleObjectNestedInsideClass2",
-            "SampleInterfaceNestedInsideClass2",
+            "SampleClassNestedInsideObject2",
+            "SampleObjectNestedInsideObject2",
+            "SampleInterfaceNestedInsideObject2",
             "SampleInterface1",
             "SampleClassNestedInsideInterface2",
             "SampleObjectNestedInsideInterface2",
@@ -202,8 +205,6 @@ class KoComplexDeclarationForInterfaceTest {
             .first()
 
         // then
-        val expected = listOf("sampleFunction")
-
         sut
             .declarations(listOf(KoModifier.PRIVATE), includeNested = false)
             .map { it.name } shouldBeEqualTo listOf(
