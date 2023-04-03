@@ -13,7 +13,7 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.filePath.endsWith("kobasedeclaration/snippet/file-path.kt") shouldBeEqualTo true
+        sut.filePath.endsWith("kobasedeclaration/snippet/file-path") shouldBeEqualTo true
     }
 
     @Test
@@ -36,7 +36,7 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.containingFile.name.endsWith("file.kt") shouldBeEqualTo true
+        sut.containingFile.name.endsWith("file") shouldBeEqualTo true
     }
 
     @Test
@@ -72,5 +72,5 @@ class KoBaseDeclarationTest {
         sut.toString() shouldBeEqualTo sut.textWithLocation
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/kobasedeclaration/snippet/$fileName.kt.txt")
+    private fun getSut(fileName: String) = getSnippetKoScope("core/kobasedeclaration/snippet/$fileName.kttxt")
 }

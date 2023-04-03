@@ -236,5 +236,5 @@ class KoDeclarationForObjectTest {
     }
 
     private fun
-    getSut(fileName: String) = getSnippetKoScope("core/kodeclaration/snippet/forobject/$fileName.kt.txt")
+    getSut(fileName: String) = getSnippetKoScope("core/kodeclaration/snippet/forobject/$fileName.kttxt")
 }

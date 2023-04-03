@@ -18,5 +18,5 @@ class KoAnnotationTest {
         sut.type shouldBeEqualTo "SampleAnnotation"
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/koannotation/snippet/$fileName.kt.txt")
+    private fun getSut(fileName: String) = getSnippetKoScope("core/koannotation/snippet/$fileName.kttxt")
 }

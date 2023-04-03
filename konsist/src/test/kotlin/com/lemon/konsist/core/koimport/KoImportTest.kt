@@ -16,5 +16,5 @@ class KoImportTest {
         sut.map { it.name } shouldBeEqualTo listOf("com.SampleImport")
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koimport/snippet/$fileName.kt.txt")
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koimport/snippet/$fileName.kttxt")
 }

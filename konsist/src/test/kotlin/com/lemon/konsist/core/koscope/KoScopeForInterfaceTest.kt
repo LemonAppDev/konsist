@@ -49,5 +49,5 @@ class KoScopeForInterfaceTest {
             .map { it.name } shouldBeEqualTo listOf("SampleInterface1", "SampleInterface2")
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forinterface/$fileName.kt.txt")
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forinterface/$fileName.kttxt")
 }
