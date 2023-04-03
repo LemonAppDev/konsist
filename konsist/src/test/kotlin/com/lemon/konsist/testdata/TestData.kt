@@ -2,15 +2,7 @@ package com.lemon.konsist.testdata
 
 class SampleClass
 
-class SampleClass1
-
-class SampleClass2
-
-class SampleInterface
-
-class SampleInterface1
-
-class SampleInterface2
+interface SampleInterface
 
 annotation class NonExistingAnnotation
 
