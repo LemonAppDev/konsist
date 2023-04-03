@@ -235,5 +235,5 @@ class KoDeclarationForFunctionTest {
         sut.resideInAPackages("otherpackage") shouldBeEqualTo false
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/kodeclaration/snippet/forfunction/$fileName.kt.txt")
+    private fun getSut(fileName: String) = getSnippetKoScope("core/kodeclaration/snippet/forfunction/$fileName.kttxt")
 }

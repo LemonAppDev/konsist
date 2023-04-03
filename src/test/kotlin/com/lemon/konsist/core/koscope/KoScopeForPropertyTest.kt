@@ -49,5 +49,5 @@ class KoScopeForPropertyTest {
             .map { it.name } shouldBeEqualTo listOf()
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forproperty/$fileName.kt.txt")
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koscope/snippet/forproperty/$fileName.kttxt")
 }

@@ -212,5 +212,5 @@ class KoComplexDeclarationForObjectTest {
         )
     }
 
-    private fun getSut(name: String) = TestSnippetProvider.getSnippetKoScope("core/kocomplexdeclaration/snippet/forobject/$name.kt.txt")
+    private fun getSut(name: String) = TestSnippetProvider.getSnippetKoScope("core/kocomplexdeclaration/snippet/forobject/$name.kttxt")
 }

@@ -123,5 +123,5 @@ class KoParameterTest {
         sut.defaultValue shouldBeEqualTo null
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/koparameter/snippet/$fileName.kt.txt")
+    private fun getSut(fileName: String) = getSnippetKoScope("core/koparameter/snippet/$fileName.kttxt")
 }

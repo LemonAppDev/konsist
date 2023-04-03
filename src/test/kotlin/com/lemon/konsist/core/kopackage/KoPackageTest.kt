@@ -49,5 +49,5 @@ class KoPackageTest {
         sut?.fullyQualifiedName shouldBeEqualTo null
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/kopackage/snippet/$fileName.kt.txt")
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/kopackage/snippet/$fileName.kttxt")
 }

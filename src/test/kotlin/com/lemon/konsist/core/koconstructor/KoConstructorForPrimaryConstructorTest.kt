@@ -149,5 +149,5 @@ class KoConstructorForPrimaryConstructorTest {
     }
 
     private fun getSut(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/koconstructor/snippet/forprimaryconstructor/$fileName.kt.txt")
+        TestSnippetProvider.getSnippetKoScope("core/koconstructor/snippet/forprimaryconstructor/$fileName.kttxt")
 }

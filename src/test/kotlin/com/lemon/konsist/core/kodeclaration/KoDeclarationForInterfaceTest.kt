@@ -232,5 +232,5 @@ class KoDeclarationForInterfaceTest {
         sut.resideInAPackages("otherpackage") shouldBeEqualTo false
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/kodeclaration/snippet/forinterface/$fileName.kt.txt")
+    private fun getSut(fileName: String) = getSnippetKoScope("core/kodeclaration/snippet/forinterface/$fileName.kttxt")
 }
