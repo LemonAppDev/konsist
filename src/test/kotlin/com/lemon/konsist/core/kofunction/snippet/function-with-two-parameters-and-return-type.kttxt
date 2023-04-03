@@ -1,2 +1,0 @@
-fun sampleFunction(sampleParameter1: Int, sampleParameter2: String): Boolean {
-}

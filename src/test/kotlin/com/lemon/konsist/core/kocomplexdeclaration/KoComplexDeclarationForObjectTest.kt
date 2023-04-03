@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 
 class KoComplexDeclarationForObjectTest {
     @Test
-    fun `object-without-declarations`() {
+    fun `object-contains-no-declarations`() {
         // given
-        val sut = getSut("object-without-declarations")
+        val sut = getSut("object-contains-no-declarations")
             .objects()
             .first()
 
@@ -20,9 +20,9 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-declarations includeNested true includeLocal true`() {
+    fun `object-contains-declarations includeNested true includeLocal true`() {
         // given
-        val sut = getSut("object-containing-declarations")
+        val sut = getSut("object-contains-declarations")
             .objects()
             .first()
 
@@ -41,9 +41,9 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-declarations includeNested true includeLocal false`() {
+    fun `object-contains-declarations includeNested true includeLocal false`() {
         // given
-        val sut = getSut("object-containing-declarations")
+        val sut = getSut("object-contains-declarations")
             .objects()
             .first()
 
@@ -62,9 +62,9 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-declarations includeNested false includeLocal true`() {
+    fun `object-contains-declarations includeNested false includeLocal true`() {
         // given
-        val sut = getSut("object-containing-declarations")
+        val sut = getSut("object-contains-declarations")
             .objects()
             .first()
 
@@ -83,9 +83,9 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-nested-declarations includeNested true`() {
+    fun `object-contains-nested-declarations includeNested true`() {
         // given
-        val sut = getSut("object-containing-nested-declarations")
+        val sut = getSut("object-contains-nested-declarations")
             .objects()
             .first()
 
@@ -113,9 +113,9 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-nested-declarations includeNested false`() {
+    fun `object-contains-nested-declarations includeNested false`() {
         // given
-        val sut = getSut("object-containing-nested-declarations")
+        val sut = getSut("object-contains-nested-declarations")
             .objects()
             .first()
 
@@ -133,9 +133,9 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-local-declarations includeLocal true`() {
+    fun `object-contains-local-declarations includeLocal true`() {
         // given
-        val sut = getSut("object-containing-local-declarations")
+        val sut = getSut("object-contains-local-declarations")
             .objects()
             .first()
 
@@ -152,9 +152,9 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-local-declarations includeLocal false`() {
+    fun `object-contains-local-declarations includeLocal false`() {
         // given
-        val sut = getSut("object-containing-local-declarations")
+        val sut = getSut("object-contains-local-declarations")
             .objects()
             .first()
 
@@ -167,9 +167,9 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-declarations-heaving-visibility-modifiers includeNested = true`() {
+    fun `object-contains-declarations-heaving-visibility-modifiers includeNested = true`() {
         // given
-        val sut = getSut("object-containing-declarations-heaving-visibility-modifiers")
+        val sut = getSut("object-contains-declarations-heaving-visibility-modifiers")
             .objects()
             .first()
 
@@ -195,9 +195,9 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-declarations-heaving-visibility-modifiers includeNested = false`() {
+    fun `object-contains-declarations-heaving-visibility-modifiers includeNested = false`() {
         // given
-        val sut = getSut("object-containing-declarations-heaving-visibility-modifiers")
+        val sut = getSut("object-contains-declarations-heaving-visibility-modifiers")
             .objects()
             .first()
 

@@ -7,14 +7,13 @@ import com.lemon.konsist.core.declaration.provider.KoLocalPropertyProvider
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
-import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 class KoFunction(private val ktFunction: KtFunction) :
-    KoDeclaration(ktFunction),
+    KoParametrizedDeclaration(ktFunction),
     KoLocalClassProvider,
     KoLocalFunctionProvider,
     KoLocalPropertyProvider {
@@ -43,17 +42,6 @@ class KoFunction(private val ktFunction: KtFunction) :
             }
         }
     }
-
-    val parameters by lazy {
-        ktFunction
-            .children
-            .first()
-            .children
-            .filterIsInstance<KtParameter>()
-            .map { KoParameter(it) }
-    }
-
-    fun hasParameterNamed(name: String) = parameters.firstOrNull()?.name == name
 
     val hasExplicitReturnType by lazy { ktFunction.hasDeclaredReturnType() }
 

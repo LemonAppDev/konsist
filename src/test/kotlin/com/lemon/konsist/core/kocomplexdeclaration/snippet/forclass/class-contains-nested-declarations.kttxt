@@ -12,7 +12,6 @@ class SampleTopLevelClass {
         class SampleClassNestedInsideObject
         object SampleObjectNestedInsideObject
         interface SampleInterfaceNestedInsideObject
-        companion object SampleCompanionObjectNestedInsideObject
     }
 
     interface SampleInterface {
