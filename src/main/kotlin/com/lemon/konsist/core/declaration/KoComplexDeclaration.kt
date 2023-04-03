@@ -2,6 +2,7 @@ package com.lemon.konsist.core.declaration
 
 import com.lemon.konsist.core.const.KoModifier
 import com.lemon.konsist.core.declaration.provider.KoClassProvider
+import com.lemon.konsist.core.declaration.provider.KoCompanionObjectProvider
 import com.lemon.konsist.core.declaration.provider.KoDeclarationProviderUtil
 import com.lemon.konsist.core.declaration.provider.KoFunctionProvider
 import com.lemon.konsist.core.declaration.provider.KoInterfaceProvider
@@ -12,7 +13,13 @@ import kotlin.reflect.KClass
 
 open class KoComplexDeclaration(
     private val ktClassOrObject: KtClassOrObject,
-) : KoDeclaration(ktClassOrObject), KoClassProvider, KoInterfaceProvider, KoObjectProvider, KoPropertyProvider, KoFunctionProvider {
+) : KoDeclaration(ktClassOrObject),
+    KoClassProvider,
+    KoInterfaceProvider,
+    KoObjectProvider,
+    KoCompanionObjectProvider,
+    KoPropertyProvider,
+    KoFunctionProvider {
 
     fun representsType(kClass: KClass<*>) = kClass.qualifiedName == fullyQualifiedName
 

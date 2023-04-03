@@ -1,0 +1,9 @@
+class SampleTopLevelClass {
+    companion object SampleTopLevelCompanionObject {
+        fun sampleFunction() {
+            val sampleLocalProperty1: Boolean = true
+
+            fun sampleLocalFunction1() { }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-object SampleTopLevelClass {
+object SampleTopLevelObject {
     val sampleProperty: Boolean = true
 
     fun sampleFunction() {}
@@ -7,5 +7,5 @@ object SampleTopLevelClass {
 
     object SampleObject
 
-    object SampleInterface
+    interface SampleInterface
 }

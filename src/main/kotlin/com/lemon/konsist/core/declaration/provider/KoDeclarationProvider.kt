@@ -2,6 +2,7 @@ package com.lemon.konsist.core.declaration.provider
 
 import com.lemon.konsist.core.const.KoModifier
 import com.lemon.konsist.core.declaration.KoClass
+import com.lemon.konsist.core.declaration.KoCompanionObject
 import com.lemon.konsist.core.declaration.KoDeclaration
 import com.lemon.konsist.core.declaration.KoFunction
 import com.lemon.konsist.core.declaration.KoInterface
@@ -64,6 +65,19 @@ interface KoObjectProvider : KoDeclarationProvider {
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
     ): Boolean = objects(modifiers, includeNested).any { it.name == name }
+}
+
+interface KoCompanionObjectProvider : KoDeclarationProvider {
+    fun companionObjects(
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+    ): List<KoCompanionObject> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested)
+
+    fun containsCompanionObject(
+        name: String,
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+    ): Boolean = companionObjects(modifiers, includeNested).any { it.name == name }
 }
 
 interface KoPropertyProvider : KoDeclarationProvider {

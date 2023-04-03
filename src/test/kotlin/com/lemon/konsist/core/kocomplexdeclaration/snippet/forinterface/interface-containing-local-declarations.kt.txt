@@ -1,4 +1,4 @@
-interface SampleTopLevelClass {
+interface SampleTopLevelInterface {
     fun sampleFunction() {
         val sampleLocalProperty1: Boolean = true
 

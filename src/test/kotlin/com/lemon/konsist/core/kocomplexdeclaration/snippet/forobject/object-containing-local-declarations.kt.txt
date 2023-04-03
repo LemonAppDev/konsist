@@ -1,4 +1,4 @@
-object SampleTopLevelClass {
+object SampleTopLevelObject {
     fun sampleFunction() {
         val sampleLocalProperty1: Boolean = true
 

@@ -2,6 +2,7 @@ package com.lemon.konsist.core.declaration
 
 import com.lemon.konsist.core.const.KoModifier
 import com.lemon.konsist.core.declaration.provider.KoClassProvider
+import com.lemon.konsist.core.declaration.provider.KoCompanionObjectProvider
 import com.lemon.konsist.core.declaration.provider.KoDeclarationProvider
 import com.lemon.konsist.core.declaration.provider.KoDeclarationProviderUtil
 import com.lemon.konsist.core.declaration.provider.KoFunctionProvider
@@ -18,6 +19,7 @@ class KoFile(private val ktFile: KtFile) :
     KoClassProvider,
     KoInterfaceProvider,
     KoObjectProvider,
+    KoCompanionObjectProvider,
     KoPropertyProvider,
     KoFunctionProvider {
     val imports by lazy {

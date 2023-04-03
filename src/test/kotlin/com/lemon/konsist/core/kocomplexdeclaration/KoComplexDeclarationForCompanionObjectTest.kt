@@ -5,12 +5,15 @@ import com.lemon.konsist.core.const.KoModifier
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoComplexDeclarationForObjectTest {
+class KoComplexDeclarationForCompanionObjectTest {
+
     @Test
-    fun `object-without-declarations`() {
+    fun `companion-object-without-declared-name`() {
         // given
-        val sut = getSut("object-without-declarations")
-            .objects()
+        val sut = getSut("companion-object-without-declarations")
+            .classes()
+            .first()
+            .companionObjects()
             .first()
 
         // then
@@ -20,10 +23,27 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-declarations includeNested true includeLocal true`() {
+    fun `companion-object-without-declarations`() {
         // given
-        val sut = getSut("object-containing-declarations")
-            .objects()
+        val sut = getSut("companion-object-without-declarations")
+            .classes()
+            .first()
+            .companionObjects()
+            .first()
+
+        // then
+        sut
+            .declarations(includeNested = true, includeLocal = true)
+            .map { it.name } shouldBeEqualTo emptyList()
+    }
+
+    @Test
+    fun `companion-object-containing-declarations includeNested true includeLocal true`() {
+        // given
+        val sut = getSut("companion-object-containing-declarations")
+            .classes()
+            .first()
+            .companionObjects()
             .first()
 
         // then
@@ -41,10 +61,12 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-declarations includeNested true includeLocal false`() {
+    fun `companion-object-containing-declarations includeNested true includeLocal false`() {
         // given
-        val sut = getSut("object-containing-declarations")
-            .objects()
+        val sut = getSut("companion-object-containing-declarations")
+            .classes()
+            .first()
+            .companionObjects()
             .first()
 
         // then
@@ -62,10 +84,12 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-declarations includeNested false includeLocal true`() {
+    fun `companion-object-containing-declarations includeNested false includeLocal true`() {
         // given
-        val sut = getSut("object-containing-declarations")
-            .objects()
+        val sut = getSut("companion-object-containing-declarations")
+            .classes()
+            .first()
+            .companionObjects()
             .first()
 
         // then
@@ -83,10 +107,12 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-nested-declarations includeNested true`() {
+    fun `companion-object-containing-nested-declarations includeNested true`() {
         // given
-        val sut = getSut("object-containing-nested-declarations")
-            .objects()
+        val sut = getSut("companion-object-containing-nested-declarations")
+            .classes()
+            .first()
+            .companionObjects()
             .first()
 
         // then
@@ -113,10 +139,12 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-nested-declarations includeNested false`() {
+    fun `companion-object-containing-nested-declarations includeNested false`() {
         // given
-        val sut = getSut("object-containing-nested-declarations")
-            .objects()
+        val sut = getSut("companion-object-containing-nested-declarations")
+            .classes()
+            .first()
+            .companionObjects()
             .first()
 
         // then
@@ -133,10 +161,12 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-local-declarations includeLocal true`() {
+    fun `companion-object-containing-local-declarations includeLocal true`() {
         // given
-        val sut = getSut("object-containing-local-declarations")
-            .objects()
+        val sut = getSut("companion-object-containing-local-declarations")
+            .classes()
+            .first()
+            .companionObjects()
             .first()
 
         // then
@@ -152,10 +182,12 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-local-declarations includeLocal false`() {
+    fun `companion-object-containing-local-declarations includeLocal false`() {
         // given
-        val sut = getSut("object-containing-local-declarations")
-            .objects()
+        val sut = getSut("companion-object-containing-local-declarations")
+            .classes()
+            .first()
+            .companionObjects()
             .first()
 
         // then
@@ -167,10 +199,12 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-declarations-heaving-visibility-modifiers includeNested = true`() {
+    fun `companion-object-containing-declarations-heaving-visibility-modifiers includeNested = true`() {
         // given
-        val sut = getSut("object-containing-declarations-heaving-visibility-modifiers")
-            .objects()
+        val sut = getSut("companion-object-containing-declarations-heaving-visibility-modifiers")
+            .classes()
+            .first()
+            .companionObjects()
             .first()
 
         // then
@@ -195,10 +229,12 @@ class KoComplexDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-containing-declarations-heaving-visibility-modifiers includeNested = false`() {
+    fun `companion-object-containing-declarations-heaving-visibility-modifiers includeNested = false`() {
         // given
-        val sut = getSut("object-containing-declarations-heaving-visibility-modifiers")
-            .objects()
+        val sut = getSut("companion-object-containing-declarations-heaving-visibility-modifiers")
+            .classes()
+            .first()
+            .companionObjects()
             .first()
 
         // then
@@ -212,5 +248,6 @@ class KoComplexDeclarationForObjectTest {
         )
     }
 
-    private fun getSut(name: String) = TestSnippetProvider.getSnippetKoScope("core/kocomplexdeclaration/snippet/forobject/$name.kt.txt")
+    private fun getSut(name: String) =
+        TestSnippetProvider.getSnippetKoScope("core/kocomplexdeclaration/snippet/forcompanionobject/$name.kt.txt")
 }
