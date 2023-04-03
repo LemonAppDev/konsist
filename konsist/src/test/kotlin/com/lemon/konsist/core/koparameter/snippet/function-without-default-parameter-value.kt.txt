@@ -1,2 +1,2 @@
-fun SampleFunction(sampleParameter: Int) {
+fun sampleFunction(sampleParameter: Int) {
 }

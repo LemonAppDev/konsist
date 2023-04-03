@@ -51,7 +51,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             hasAnnotation(SampleAnnotation::class) shouldBeEqualTo true
             hasAnnotation(NonExistingAnnotation::class) shouldBeEqualTo false
         }
@@ -65,7 +65,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             hasAnnotation(SampleAnnotation1::class) shouldBeEqualTo true
             hasAnnotation(SampleAnnotation2::class) shouldBeEqualTo true
             hasAnnotation(NonExistingAnnotation::class) shouldBeEqualTo false
@@ -80,7 +80,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             isPublic shouldBeEqualTo true
             isPrivate shouldBeEqualTo false
             isProtected shouldBeEqualTo false
@@ -96,7 +96,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             isPublic shouldBeEqualTo true
             isPrivate shouldBeEqualTo false
             isProtected shouldBeEqualTo false
@@ -112,7 +112,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             isPublic shouldBeEqualTo false
             isPrivate shouldBeEqualTo true
             isProtected shouldBeEqualTo false
@@ -128,7 +128,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             isPublic shouldBeEqualTo false
             isPrivate shouldBeEqualTo false
             isProtected shouldBeEqualTo true
@@ -144,7 +144,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             isPublic shouldBeEqualTo false
             isPrivate shouldBeEqualTo false
             isProtected shouldBeEqualTo false
@@ -204,7 +204,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             hasModifiers(KoModifier.PUBLIC) shouldBeEqualTo true
             hasModifiers(KoModifier.PRIVATE) shouldBeEqualTo false
         }

@@ -112,7 +112,7 @@ class KoSecondaryConstructorTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation")
             hasAnnotation(SampleAnnotation::class) shouldBeEqualTo true
             hasAnnotation(SampleAnnotation1::class) shouldBeEqualTo false
@@ -129,7 +129,7 @@ class KoSecondaryConstructorTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             annotations.isEmpty() shouldBeEqualTo true
             hasAnnotation(SampleAnnotation::class) shouldBeEqualTo false
         }
@@ -145,7 +145,7 @@ class KoSecondaryConstructorTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             hasParameterNamed("sampleProperty") shouldBeEqualTo true
             hasParameterNamed("otherProperty") shouldBeEqualTo false
         }

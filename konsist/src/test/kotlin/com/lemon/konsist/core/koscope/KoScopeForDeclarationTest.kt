@@ -14,7 +14,7 @@ class KoScopeForDeclarationTest {
         // then
         sut
             .declarations()
-            .map { it.name } shouldBeEqualTo listOf("SampleClass", "SampleFunction", "SampleObject", "SampleInterface", "sampleProperty")
+            .map { it.name } shouldBeEqualTo listOf("sampleProperty", "sampleFunction", "SampleClass", "SampleInterface", "SampleObject")
     }
 
     @Test

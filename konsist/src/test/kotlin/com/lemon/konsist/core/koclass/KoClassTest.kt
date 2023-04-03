@@ -102,7 +102,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             primaryConstructor?.name shouldBeEqualTo "SampleClass"
             hasExplicitPrimaryConstructor shouldBeEqualTo true
         }
@@ -116,7 +116,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             primaryConstructor?.name shouldBeEqualTo null
             hasExplicitPrimaryConstructor shouldBeEqualTo false
         }
@@ -130,7 +130,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             secondaryConstructors.first().name shouldBeEqualTo "SampleClass"
             hasSecondaryConstructors shouldBeEqualTo true
         }
@@ -144,7 +144,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             secondaryConstructors.isEmpty()
             hasSecondaryConstructors shouldBeEqualTo false
         }
@@ -158,7 +158,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             primaryConstructor?.name shouldBeEqualTo "SampleClass"
             secondaryConstructors shouldHaveSize 1
             allConstructors shouldHaveSize 2

@@ -1,2 +1,2 @@
-public interface SampleClass {
+public interface SampleInterface {
 }

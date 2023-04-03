@@ -1,2 +1,2 @@
-protected interface SampleClass {
+protected interface SampleInterface {
 }

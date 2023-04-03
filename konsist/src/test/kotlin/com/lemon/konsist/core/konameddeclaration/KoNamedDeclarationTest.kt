@@ -46,7 +46,7 @@ class KoNamedDeclarationTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleFunction"
+        sut.name shouldBeEqualTo "sampleFunction"
     }
 
     @Test

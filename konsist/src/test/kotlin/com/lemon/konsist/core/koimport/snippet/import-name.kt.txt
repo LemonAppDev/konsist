@@ -1,4 +1,4 @@
 import com.SampleImport
 
-class sampleFunction() {
+fun sampleFunction() {
 }

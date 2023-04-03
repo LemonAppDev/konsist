@@ -1,13 +1,14 @@
+val sampleProperty: Boolean = true
+
+fun sampleFunction() {
+}
+
 class SampleClass {
-}
-
-fun SampleFunction {
-}
-
-object SampleObject {
 }
 
 interface SampleInterface {
 }
 
-val sampleProperty: Boolean = true
+object SampleObject {
+}
+

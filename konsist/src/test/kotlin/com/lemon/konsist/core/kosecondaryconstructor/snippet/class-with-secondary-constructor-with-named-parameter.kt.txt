@@ -1,4 +1,4 @@
 class SampleClass() {
-    constructor(sampleProperty: SampleType) {
+    constructor(sampleProperty: SampleType): this() {
     }
 }

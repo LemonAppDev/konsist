@@ -14,7 +14,7 @@ class KoScopeForFunctionTest {
         // then
         sut
             .functions()
-            .map { it.name } shouldBeEqualTo listOf("SampleFunction")
+            .map { it.name } shouldBeEqualTo listOf("sampleFunction")
     }
 
     @Test

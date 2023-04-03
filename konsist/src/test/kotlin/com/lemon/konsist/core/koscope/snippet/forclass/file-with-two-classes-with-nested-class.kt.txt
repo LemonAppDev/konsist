@@ -1,6 +1,5 @@
 class SampleClass1 {
     class SampleNestedClass {
-
     }
 }
 

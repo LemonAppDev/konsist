@@ -1,6 +1,5 @@
 fun sampleFunction1() {
     fun sampleLocalFunction() {
-
     }
 }
 

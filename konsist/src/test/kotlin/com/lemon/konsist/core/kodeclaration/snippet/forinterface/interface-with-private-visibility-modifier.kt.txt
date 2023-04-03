@@ -1,2 +1,2 @@
-private interface SampleClass {
+private interface SampleInterface {
 }

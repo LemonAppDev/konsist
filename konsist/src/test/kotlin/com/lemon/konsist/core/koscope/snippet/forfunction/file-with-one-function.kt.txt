@@ -1,1 +1,2 @@
-fun SampleFunction
+fun sampleFunction() {
+}

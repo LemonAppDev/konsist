@@ -1,2 +1,2 @@
-protected fun SampleFunction {
+protected fun sampleFunction() {
 }

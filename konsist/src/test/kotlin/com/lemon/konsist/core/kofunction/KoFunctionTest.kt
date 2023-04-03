@@ -57,7 +57,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             hasExplicitReturnType shouldBeEqualTo true
             getExplicitReturnType shouldBeEqualTo "SampleType"
         }
@@ -82,7 +82,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             parameters.size shouldBeEqualTo 2
             getExplicitReturnType shouldBeEqualTo "Boolean"
         }
@@ -109,7 +109,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             hasParameterNamed("sampleParameter") shouldBeEqualTo true
             hasParameterNamed("otherParameter") shouldBeEqualTo false
         }

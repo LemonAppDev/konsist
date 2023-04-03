@@ -61,7 +61,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             containsClass("SampleClass") shouldBeEqualTo true
             containsClass("OtherClass") shouldBeEqualTo false
         }
@@ -75,7 +75,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             containsProperty("sampleProperty") shouldBeEqualTo true
             containsProperty("otherProperty") shouldBeEqualTo false
         }
@@ -89,7 +89,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             containsFunction("sampleFunction") shouldBeEqualTo true
             containsFunction("otherFunction") shouldBeEqualTo false
         }
@@ -103,7 +103,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             containsObject("SampleObject") shouldBeEqualTo true
             containsObject("OtherObject") shouldBeEqualTo false
         }
@@ -117,7 +117,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.apply {
+        with(sut) {
             containsInterface("SampleInterface") shouldBeEqualTo true
             containsInterface("OtherInterface") shouldBeEqualTo false
         }
