@@ -1,4 +1,4 @@
-package com.lemon.konsist.core.kosecondaryconstructor
+package com.lemon.konsist.core.koconstructor
 
 import com.lemon.konsist.TestSnippetProvider
 import com.lemon.konsist.testdata.SampleAnnotation
@@ -6,7 +6,7 @@ import com.lemon.konsist.testdata.SampleAnnotation1
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoSecondaryConstructorTest {
+class KoConstructorForSecondaryConstructorTest {
     @Test
     fun `class-with-public-secondary-constructor`() {
         // given
@@ -151,5 +151,6 @@ class KoSecondaryConstructorTest {
         }
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/kosecondaryconstructor/snippet/$fileName.kt.txt")
+    private fun getSut(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/koconstructor/snippet/forsecoundaryconstructor/$fileName.kt.txt")
 }

@@ -21,11 +21,7 @@ class KoClass(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
     val primaryConstructor by lazy {
         val localPrimaryConstructor = ktClass.primaryConstructor ?: return@lazy null
 
-        KoPrimaryConstructor(
-            localPrimaryConstructor,
-            ktClass.primaryConstructorParameters,
-            ktClass.primaryConstructorModifierList,
-        )
+        KoPrimaryConstructor(localPrimaryConstructor)
     }
 
     val hasExplicitPrimaryConstructor = ktClass.hasExplicitPrimaryConstructor()
