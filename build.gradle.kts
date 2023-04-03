@@ -30,6 +30,9 @@ spotless {
         indentWithSpaces()
         endWithNewline()
     }
+
+    // Don't add spotless as dependency for the Gradle's check task
+    isEnforceCheck = false
 }
 
 idea {

@@ -31,6 +31,7 @@ dependencies {
     testImplementation(libs.mockk)
 }
 
+@Suppress("UnstableApiUsage")
 testing {
     suites {
         val test by getting(JvmTestSuite::class) {
@@ -86,4 +87,7 @@ spotless {
         indentWithSpaces()
         endWithNewline()
     }
+
+    // Don't add spotless as dependency for the Gradle's check task
+    isEnforceCheck = false
 }
