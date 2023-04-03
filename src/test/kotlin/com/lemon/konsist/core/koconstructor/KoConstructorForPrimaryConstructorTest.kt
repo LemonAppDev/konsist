@@ -1,4 +1,4 @@
-package com.lemon.konsist.core.koprimaryconstructor
+package com.lemon.konsist.core.koconstructor
 
 import com.lemon.konsist.TestSnippetProvider
 import com.lemon.konsist.testdata.SampleAnnotation
@@ -6,7 +6,7 @@ import com.lemon.konsist.testdata.SampleAnnotation1
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoPrimaryConstructorTest {
+class KoConstructorForPrimaryConstructorTest {
     @Test
     fun `class-with-primary-constructor`() {
         // given
@@ -148,5 +148,6 @@ class KoPrimaryConstructorTest {
         }
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koprimaryconstructor/snippet/$fileName.kt.txt")
+    private fun getSut(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/koconstructor/snippet/forprimaryconstructor/$fileName.kt.txt")
 }
