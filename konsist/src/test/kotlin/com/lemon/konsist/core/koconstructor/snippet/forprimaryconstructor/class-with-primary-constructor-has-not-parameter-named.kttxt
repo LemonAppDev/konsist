@@ -1,2 +1,0 @@
-class SampleClass internal constructor (val sampleName: SampleName) {
-}

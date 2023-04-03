@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 
 class KoComplexDeclarationForInterfaceTest {
     @Test
-    fun `interface-without-declarations`() {
+    fun `interface-contains-no-declarations`() {
         // given
-        val sut = getSut("interface-without-declarations")
+        val sut = getSut("interface-contains-no-declarations")
             .interfaces()
             .first()
 
@@ -20,9 +20,9 @@ class KoComplexDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-containing-declarations includeNested true includeLocal true`() {
+    fun `interface-contains-declarations includeNested true includeLocal true`() {
         // given
-        val sut = getSut("interface-containing-declarations")
+        val sut = getSut("interface-contains-declarations")
             .interfaces()
             .first()
 
@@ -42,9 +42,9 @@ class KoComplexDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-containing-declarations includeNested true includeLocal false`() {
+    fun `interface-contains-declarations includeNested true includeLocal false`() {
         // given
-        val sut = getSut("interface-containing-declarations")
+        val sut = getSut("interface-contains-declarations")
             .interfaces()
             .first()
 
@@ -64,9 +64,9 @@ class KoComplexDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-containing-declarations includeNested false includeLocal true`() {
+    fun `interface-contains-declarations includeNested false includeLocal true`() {
         // given
-        val sut = getSut("interface-containing-declarations")
+        val sut = getSut("interface-contains-declarations")
             .interfaces()
             .first()
 
@@ -86,9 +86,9 @@ class KoComplexDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-containing-nested-declarations includeNested true`() {
+    fun `interface-contains-nested-declarations includeNested true`() {
         // given
-        val sut = getSut("interface-containing-nested-declarations")
+        val sut = getSut("interface-contains-nested-declarations")
             .interfaces()
             .first()
 
@@ -116,9 +116,9 @@ class KoComplexDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-containing-nested-declarations includeNested false`() {
+    fun `interface-contains-nested-declarations includeNested false`() {
         // given
-        val sut = getSut("interface-containing-nested-declarations")
+        val sut = getSut("interface-contains-nested-declarations")
             .interfaces()
             .first()
 
@@ -136,9 +136,9 @@ class KoComplexDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-containing-local-declarations includeLocal true`() {
+    fun `interface-contains-local-declarations includeLocal true`() {
         // given
-        val sut = getSut("interface-containing-local-declarations")
+        val sut = getSut("interface-contains-local-declarations")
             .interfaces()
             .first()
 
@@ -155,9 +155,9 @@ class KoComplexDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-containing-local-declarations includeLocal false`() {
+    fun `interface-contains-local-declarations includeLocal false`() {
         // given
-        val sut = getSut("interface-containing-local-declarations")
+        val sut = getSut("interface-contains-local-declarations")
             .interfaces()
             .first()
 
@@ -170,9 +170,9 @@ class KoComplexDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-containing-declarations-heaving-visibility-modifiers includeNested = true`() {
+    fun `interface-contains-declarations-heaving-visibility-modifiers includeNested = true`() {
         // given
-        val sut = getSut("interface-containing-declarations-heaving-visibility-modifiers")
+        val sut = getSut("interface-contains-declarations-heaving-visibility-modifiers")
             .interfaces()
             .first()
 
@@ -198,9 +198,9 @@ class KoComplexDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-containing-declarations-heaving-visibility-modifiers includeNested = false`() {
+    fun `interface-contains-declarations-heaving-visibility-modifiers includeNested = false`() {
         // given
-        val sut = getSut("interface-containing-declarations-heaving-visibility-modifiers")
+        val sut = getSut("interface-contains-declarations-heaving-visibility-modifiers")
             .interfaces()
             .first()
 

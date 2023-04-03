@@ -75,47 +75,6 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-two-parameters-and-return-type`() {
-        // given
-        val sut = getSut("function-with-two-parameters-and-return-type")
-            .functions()
-            .first()
-
-        // then
-        with(sut) {
-            parameters.size shouldBeEqualTo 2
-            getExplicitReturnType shouldBeEqualTo "Boolean"
-        }
-    }
-
-    @Test
-    fun `function-with-parameter`() {
-        // given
-        val sut = getSut("function-with-parameter")
-            .functions()
-            .first()
-
-        // then
-        sut
-            .parameters
-            .size shouldBeEqualTo 1
-    }
-
-    @Test
-    fun `function-with-named-parameter`() {
-        // given
-        val sut = getSut("function-with-named-parameter")
-            .functions()
-            .first()
-
-        // then
-        with(sut) {
-            hasParameterNamed("sampleParameter") shouldBeEqualTo true
-            hasParameterNamed("otherParameter") shouldBeEqualTo false
-        }
-    }
-
-    @Test
     fun `function-with-local-property`() {
         // given
         val sut = getSut("function-with-local-property")

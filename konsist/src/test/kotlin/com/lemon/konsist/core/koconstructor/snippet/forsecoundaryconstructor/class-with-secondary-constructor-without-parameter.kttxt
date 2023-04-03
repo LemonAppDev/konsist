@@ -1,3 +1,0 @@
-class SampleClass(sampleProperty: SampleType) {
-    constructor() : this(sampleProperty)
-}
