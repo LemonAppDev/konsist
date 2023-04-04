@@ -28,17 +28,17 @@ object KoDeclarationProviderUtil {
             .declarations
             .mapNotNull {
                 if (it is KtClass && !it.isInterface()) {
-                    KoClass(it)
+                    KoClass.getInstance(it)
                 } else if (it is KtClass && it.isInterface()) {
-                    KoInterface(it)
+                    KoInterface.getInstance(it)
                 } else if (it is KtObjectDeclaration && !it.isCompanion()) {
-                    KoObject(it)
+                    KoObject.getInstance(it)
                 } else if (it is KtObjectDeclaration && it.isCompanion()) {
-                    KoCompanionObject(it)
+                    KoCompanionObject.getInstance(it)
                 } else if (it is KtProperty) {
-                    KoProperty(it)
+                    KoProperty.getInstance(it)
                 } else if (it is KtFunction) {
-                    KoFunction(it)
+                    KoFunction.getInstance(it)
                 } else {
                     KoLogger.logError("Unknown declaration type: ${it.getTextWithLocation()}")
                     null

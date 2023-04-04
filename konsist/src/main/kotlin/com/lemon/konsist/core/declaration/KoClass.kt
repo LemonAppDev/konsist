@@ -3,7 +3,7 @@ package com.lemon.konsist.core.declaration
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.psiUtil.isAbstract
 
-class KoClass(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
+class KoClass private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
     val isEnum by lazy { ktClass.isEnum() }
 
     val isSealed by lazy { ktClass.isSealed() }
@@ -21,7 +21,7 @@ class KoClass(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
     val primaryConstructor by lazy {
         val localPrimaryConstructor = ktClass.primaryConstructor ?: return@lazy null
 
-        KoPrimaryConstructor(localPrimaryConstructor)
+        KoPrimaryConstructor.getInstance(localPrimaryConstructor)
     }
 
     val hasExplicitPrimaryConstructor = ktClass.hasExplicitPrimaryConstructor()
@@ -29,12 +29,20 @@ class KoClass(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
     val secondaryConstructors by lazy {
         ktClass
             .secondaryConstructors
-            .map {
-                KoSecondaryConstructor(it)
-            }
+            .map { KoSecondaryConstructor.getInstance(it) }
     }
 
     val hasSecondaryConstructors = ktClass.hasSecondaryConstructors()
 
     val allConstructors = listOfNotNull(primaryConstructor) + secondaryConstructors
+
+    companion object {
+        private val cache = KoDeclarationCache<KoClass>()
+        fun getInstance(ktClass: KtClass) = if (cache.hasKey(ktClass)) {
+            cache.get(ktClass)
+        } else {
+            cache.set(ktClass, KoClass(ktClass))
+            cache.get(ktClass)
+        }
+    }
 }

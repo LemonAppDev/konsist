@@ -39,6 +39,6 @@ object KotlinFileParser {
 
     fun getKonsistFile(file: File): KoFile {
         val ktFile = getKtFile(file)
-        return KoFile(ktFile)
+        return KoFile.getInstance(ktFile)
     }
 }
