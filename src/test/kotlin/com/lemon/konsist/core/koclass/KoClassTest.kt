@@ -84,6 +84,28 @@ class KoClassTest {
     }
 
     @Test
+    fun `open-class`() {
+        // given
+        val sut = getSut("open-class")
+            .classes()
+            .first()
+
+        // then
+        sut.isOpen shouldBeEqualTo true
+    }
+
+    @Test
+    fun `final-class`() {
+        // given
+        val sut = getSut("final-class")
+            .classes()
+            .first()
+
+        // then
+        sut.isFinal shouldBeEqualTo true
+    }
+
+    @Test
     fun `nested-inner-class`() {
         // given
         val sut = getSut("nested-inner-class")
