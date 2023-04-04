@@ -2,6 +2,8 @@ package com.lemon.konsist.core.kocomplexdeclaration
 
 import com.lemon.konsist.TestSnippetProvider
 import com.lemon.konsist.core.const.KoModifier
+import com.lemon.konsist.testdata.SampleTopLevelInterface.SampleCompanionObject
+import com.lemon.konsist.testdata.SampleType
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -246,6 +248,22 @@ class KoComplexDeclarationForCompanionObjectTest {
             "SampleObject1",
             "SampleInterface1",
         )
+    }
+
+    @Test
+    fun `companion-object-represents-type`() {
+        // given
+        val sut = getSut("companion-object-represents-type")
+            .interfaces()
+            .first()
+            .companionObjects()
+            .first()
+
+        // then
+        with(sut) {
+            representsType(SampleCompanionObject::class) shouldBeEqualTo true
+            representsType(SampleType::class) shouldBeEqualTo false
+        }
     }
 
     private fun getSut(name: String) =

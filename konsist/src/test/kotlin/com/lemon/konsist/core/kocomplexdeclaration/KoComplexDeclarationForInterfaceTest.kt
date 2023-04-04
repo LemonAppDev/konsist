@@ -2,6 +2,8 @@ package com.lemon.konsist.core.kocomplexdeclaration
 
 import com.lemon.konsist.TestSnippetProvider
 import com.lemon.konsist.core.const.KoModifier
+import com.lemon.konsist.testdata.SampleInterface
+import com.lemon.konsist.testdata.SampleType
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -213,6 +215,20 @@ class KoComplexDeclarationForInterfaceTest {
             "SampleObject1",
             "SampleInterface1",
         )
+    }
+
+    @Test
+    fun `interface-represents-type`() {
+        // given
+        val sut = getSut("interface-represents-type")
+            .interfaces()
+            .first()
+
+        // then
+        with(sut) {
+            representsType(SampleInterface::class) shouldBeEqualTo true
+            representsType(SampleType::class) shouldBeEqualTo false
+        }
     }
 
     private fun getSut(name: String) = TestSnippetProvider.getSnippetKoScope("core/kocomplexdeclaration/snippet/forinterface/$name.kttxt")

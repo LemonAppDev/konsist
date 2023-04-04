@@ -1,0 +1,3 @@
+package com.lemon.konsist.testdata
+
+object SampleObject
