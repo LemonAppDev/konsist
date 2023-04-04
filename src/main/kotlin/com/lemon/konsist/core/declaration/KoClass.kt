@@ -12,9 +12,9 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
 
     val isValue by lazy { ktClass.isValue() }
 
-    val isAnnotation by lazy { ktClass.isAnnotation() }
-
     val isData by lazy { ktClass.isData() }
+
+    val isAnnotation by lazy { ktClass.isAnnotation() }
 
     val isAbstract by lazy { ktClass.isAbstract() }
 
