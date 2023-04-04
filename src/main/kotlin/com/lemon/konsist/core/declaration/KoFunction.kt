@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-class KoFunction(private val ktFunction: KtFunction) :
+class KoFunction private constructor(private val ktFunction: KtFunction) :
     KoParametrizedDeclaration(ktFunction),
     KoLocalClassProvider,
     KoLocalFunctionProvider,
@@ -31,11 +31,11 @@ class KoFunction(private val ktFunction: KtFunction) :
 
         psiChildren.mapNotNull {
             if (it is KtClass && !it.isInterface()) {
-                KoClass(it)
+                KoClass.getInstance(it)
             } else if (it is KtFunction) {
-                KoFunction(it)
+                KoFunction.getInstance(it)
             } else if (it is KtProperty) {
-                KoProperty(it)
+                KoProperty.getInstance(it)
             } else {
                 KoLogger.logError("Unknown local declaration type: ${it.getTextWithLocation()}")
                 null
@@ -53,4 +53,14 @@ class KoFunction(private val ktFunction: KtFunction) :
     }
 
     override fun localDeclarations(): List<KoDeclaration> = localDeclarations
+
+    companion object {
+        private val cache = KoDeclarationCache<KoFunction>()
+        fun getInstance(ktFunction: KtFunction) = if (cache.hasKey(ktFunction)) {
+            cache.get(ktFunction)
+        } else {
+            cache.set(ktFunction, KoFunction(ktFunction))
+            cache.get(ktFunction)
+        }
+    }
 }

@@ -1,4 +1,4 @@
-import com.SampleImport
+import com.lemon.konsist.testdata.SampleClass
 
-fun sampleFunction() {
+fun sampleFunction(sampleProperty: SampleClass) {
 }

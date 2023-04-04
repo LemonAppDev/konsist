@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-class KoParameter(private val ktParameter: KtParameter) : KoDeclaration(ktParameter) {
+class KoParameter private constructor(private val ktParameter: KtParameter) : KoDeclaration(ktParameter) {
     val type by lazy {
         ktParameter
             .children
@@ -35,5 +35,15 @@ class KoParameter(private val ktParameter: KtParameter) : KoDeclaration(ktParame
             ?.text
 
         callExpressionText
+    }
+
+    companion object {
+        private val cache = KoDeclarationCache<KoParameter>()
+        fun getInstance(ktParameter: KtParameter) = if (cache.hasKey(ktParameter)) {
+            cache.get(ktParameter)
+        } else {
+            cache.set(ktParameter, KoParameter(ktParameter))
+            cache.get(ktParameter)
+        }
     }
 }

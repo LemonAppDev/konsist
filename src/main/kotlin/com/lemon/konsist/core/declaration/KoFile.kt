@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 
-class KoFile(private val ktFile: KtFile) :
+class KoFile private constructor(private val ktFile: KtFile) :
     KoNamedDeclaration(ktFile),
     KoDeclarationProvider,
     KoClassProvider,
@@ -30,19 +30,29 @@ class KoFile(private val ktFile: KtFile) :
             .children
             .filterIsInstance<KtImportDirective>()
 
-        ktImportDirectives.map { KoImport(it) }
+        ktImportDirectives.map { KoImport.getInstance(it) }
     }
 
     val packageDirective by lazy {
         if (ktFile.packageDirective?.qualifiedName == "") {
             null
         } else {
-            ktFile.packageDirective?.let { KoPackage(it) }
+            ktFile.packageDirective?.let { KoPackage.getInstance(it) }
         }
     }
 
     override fun declarations(modifiers: List<KoModifier>, includeNested: Boolean, includeLocal: Boolean): List<KoDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
-    fun hasImport(name: String) = imports.any { it.name == name }
+    fun hasImport(name: String) = imports.any { it?.name == name }
+
+    companion object {
+        private val cache = KoDeclarationCache<KoFile>()
+        fun getInstance(ktFile: KtFile) = if (cache.hasKey(ktFile)) {
+            cache.get(ktFile)
+        } else {
+            cache.set(ktFile, KoFile(ktFile))
+            cache.get(ktFile)
+        }
+    }
 }

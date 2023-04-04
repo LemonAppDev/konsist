@@ -11,7 +11,8 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 import kotlin.reflect.KClass
 
-open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterListOwner) : KoNamedDeclaration(ktTypeParameterListOwner) {
+open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterListOwner) :
+    KoNamedDeclaration(ktTypeParameterListOwner) {
 
     open val fullyQualifiedName by lazy {
         if (ktTypeParameterListOwner.fqName != null) {
@@ -41,7 +42,7 @@ open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterLi
 
     val annotations = ktTypeParameterListOwner
         .annotationEntries
-        .map { KoAnnotation(it) }
+        .map { KoAnnotation.getInstance(it) }
 
     fun hasAnnotation(kClass: KClass<*>): Boolean {
         val qualifiedName = kClass.qualifiedName ?: return false

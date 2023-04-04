@@ -13,7 +13,7 @@ class KoImportTest {
             .imports()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("com.SampleImport")
+        sut.map { it.name } shouldBeEqualTo listOf("com.lemon.konsist.testdata.SampleClass")
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/koimport/snippet/$fileName.kttxt")
