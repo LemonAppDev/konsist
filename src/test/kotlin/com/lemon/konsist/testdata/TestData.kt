@@ -6,6 +6,12 @@ class SampleType
 
 interface SampleInterface
 
+object SampleObject
+
+interface SampleTopLevelInterface {
+    companion object SampleCompanionObject
+}
+
 annotation class NonExistingAnnotation
 
 annotation class SampleAnnotation
