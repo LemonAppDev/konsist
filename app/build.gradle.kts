@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+
 @Suppress("DSL_SCOPE_VIOLATION") // Because of IDE bug https://youtrack.jetbrains.com/issue/KTIJ-19370
 plugins {
     alias(libs.plugins.springframework.boot)
@@ -91,3 +94,12 @@ spotless {
     // Don't add spotless as dependency for the Gradle's check task
     isEnforceCheck = false
 }
+
+// Required for konsist features preview from Kotlin 1.9
+tasks
+    .withType<KotlinCompilationTask<*>>()
+    .configureEach {
+        compilerOptions
+            .languageVersion
+            .set(KotlinVersion.KOTLIN_1_9)
+    }

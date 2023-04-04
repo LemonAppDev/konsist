@@ -2,7 +2,9 @@ package com.lemon.konsist.core.declaration
 
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 
-class KoObject private constructor(private val ktObjectDeclaration: KtObjectDeclaration) : KoComplexDeclaration(ktObjectDeclaration) {
+class KoObject(private val ktObjectDeclaration: KtObjectDeclaration) : KoComplexDeclaration(ktObjectDeclaration) {
+    val isData by lazy { ktObjectDeclaration.isData() }
+
     companion object {
         private val cache = KoDeclarationCache<KoObject>()
         fun getInstance(ktObjectDeclaration: KtObjectDeclaration) = if (cache.hasKey(ktObjectDeclaration)) {
