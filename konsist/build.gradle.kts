@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
-
 @Suppress("DSL_SCOPE_VIOLATION") // Because of IDE bug https://youtrack.jetbrains.com/issue/KTIJ-19370
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -21,13 +18,34 @@ repositories {
     mavenCentral()
 }
 
-tasks
-    .withType<KotlinCompilationTask<*>>()
-    .configureEach {
-        compilerOptions
-            .languageVersion
-            .set(KotlinVersion.KOTLIN_1_9)
+@Suppress("UnstableApiUsage")
+testing {
+    suites {
+        val test by getting(JvmTestSuite::class) {
+            useJUnitJupiter()
+        }
+
+        register("konsistTest", JvmTestSuite::class) {
+            dependencies {
+                implementation(project())
+                implementation(project(":konsist"))
+                implementation(libs.kotlin.compiler)
+                implementation(libs.spring.boot.starter.jpa)
+                implementation(libs.spring.boot.starter.web)
+
+                implementation(libs.kluent)
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
     }
+}
 
 // Need to be here, so spotless works at root project level "gw spotlessCheck"
 spotless {

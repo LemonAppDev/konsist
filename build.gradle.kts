@@ -1,4 +1,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 @Suppress("DSL_SCOPE_VIOLATION") // Because of IDE bug https://youtrack.jetbrains.com/issue/KTIJ-19370
 plugins {
@@ -23,6 +25,21 @@ subprojects {
             "junit.jupiter.execution.parallel.mode.default " to "concurrent",
         )
     }
+
+    // Required for konsist to use Kotlin 1.9 preview features
+    tasks
+        .withType<KotlinCompilationTask<*>> {
+            compilerOptions
+                .languageVersion
+                .set(KotlinVersion.KOTLIN_1_9)
+        }
+}
+
+idea {
+    module {
+        isDownloadJavadoc = true
+        isDownloadSources = true
+    }
 }
 
 kotlin {
@@ -39,13 +56,6 @@ spotless {
 
     // Don't add spotless as dependency for the Gradle's check task
     isEnforceCheck = false
-}
-
-idea {
-    module {
-        isDownloadJavadoc = true
-        isDownloadSources = true
-    }
 }
 
 val detektCheck by tasks.registering(Detekt::class) {
