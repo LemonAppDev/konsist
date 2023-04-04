@@ -44,15 +44,10 @@ class KoFile private constructor(private val ktFile: KtFile) :
     override fun declarations(modifiers: List<KoModifier>, includeNested: Boolean, includeLocal: Boolean): List<KoDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
-    fun hasImport(name: String) = imports.any { it?.name == name }
+    fun hasImport(name: String) = imports.any { it.name == name }
 
     companion object {
         private val cache = KoDeclarationCache<KoFile>()
-        fun getInstance(ktFile: KtFile) = if (cache.hasKey(ktFile)) {
-            cache.get(ktFile)
-        } else {
-            cache.set(ktFile, KoFile(ktFile))
-            cache.get(ktFile)
-        }
+        fun getInstance(ktFile: KtFile) = cache.getOrCreateInstance(ktFile) { KoFile(ktFile) }
     }
 }

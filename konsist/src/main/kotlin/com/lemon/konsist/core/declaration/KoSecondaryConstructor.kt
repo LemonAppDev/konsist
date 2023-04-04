@@ -6,11 +6,6 @@ class KoSecondaryConstructor private constructor(ktSecondaryConstructor: KtSecon
     companion object {
         private val cache = KoDeclarationCache<KoSecondaryConstructor>()
         fun getInstance(ktSecondaryConstructor: KtSecondaryConstructor) =
-            if (cache.hasKey(ktSecondaryConstructor)) {
-                cache.get(ktSecondaryConstructor)
-            } else {
-                cache.set(ktSecondaryConstructor, KoSecondaryConstructor(ktSecondaryConstructor))
-                cache.get(ktSecondaryConstructor)
-            }
+            cache.getOrCreateInstance(ktSecondaryConstructor) { KoSecondaryConstructor(ktSecondaryConstructor) }
     }
 }

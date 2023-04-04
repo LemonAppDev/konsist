@@ -3,19 +3,25 @@ package com.lemon.konsist.core.declaration
 import org.jetbrains.kotlin.psi.KtElement
 import java.util.concurrent.ConcurrentHashMap
 
-open class KoDeclarationCache<T : KoBaseDeclaration> {
-
+class KoDeclarationCache<T : KoBaseDeclaration> {
     private val elements = ConcurrentHashMap<KtElement, T>()
 
-    fun get(key: KtElement): T {
+    private fun get(key: KtElement): T {
         var value = elements[key]
         value = requireNotNull(value) { "Cache doesn't allow to null value of key: ${key.name}" }
         return value
     }
 
-    fun set(key: KtElement, value: T) {
+    private fun set(key: KtElement, value: T) {
         elements[key] = value
     }
 
-    fun hasKey(ktElement: KtElement) = elements.containsKey(ktElement)
+    private fun hasKey(ktElement: KtElement) = elements.containsKey(ktElement)
+
+    fun getOrCreateInstance(ktElement: KtElement, value: (KtElement) -> T) = if (hasKey(ktElement)) {
+        get(ktElement)
+    } else {
+        set(ktElement, value.invoke(ktElement))
+        get(ktElement)
+    }
 }

@@ -33,7 +33,7 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
             if (it is KtClass && !it.isInterface()) {
                 KoClass.getInstance(it)
             } else if (it is KtFunction) {
-                KoFunction.getInstance(it)
+                getInstance(it)
             } else if (it is KtProperty) {
                 KoProperty.getInstance(it)
             } else {
@@ -56,11 +56,6 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
 
     companion object {
         private val cache = KoDeclarationCache<KoFunction>()
-        fun getInstance(ktFunction: KtFunction) = if (cache.hasKey(ktFunction)) {
-            cache.get(ktFunction)
-        } else {
-            cache.set(ktFunction, KoFunction(ktFunction))
-            cache.get(ktFunction)
-        }
+        fun getInstance(ktFunction: KtFunction) = cache.getOrCreateInstance(ktFunction) { KoFunction(ktFunction) }
     }
 }
