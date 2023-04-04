@@ -1,7 +1,10 @@
 package com.lemon.konsist.core.declaration
 
+import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtClass
+import org.jetbrains.kotlin.psi.KtModifierList
 import org.jetbrains.kotlin.psi.psiUtil.isAbstract
+import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 class KoClass private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
     val isEnum by lazy { ktClass.isEnum() }
@@ -17,6 +20,22 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
     val isAnnotation by lazy { ktClass.isAnnotation() }
 
     val isAbstract by lazy { ktClass.isAbstract() }
+
+    val isOpen by lazy {
+        ktClass
+            .children
+            .firstIsInstanceOrNull<KtModifierList>()
+            ?.hasModifier(KtTokens.OPEN_KEYWORD)
+            ?: false
+    }
+
+    val isFinal by lazy {
+        ktClass
+            .children
+            .firstIsInstanceOrNull<KtModifierList>()
+            ?.hasModifier(KtTokens.FINAL_KEYWORD)
+            ?: false
+    }
 
     val primaryConstructor by lazy {
         val localPrimaryConstructor = ktClass.primaryConstructor ?: return@lazy null
