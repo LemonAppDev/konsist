@@ -1,9 +1,11 @@
 package com.lemon.konsist.core.declaration
 
 import org.jetbrains.kotlin.psi.KtElement
+import java.util.concurrent.ConcurrentHashMap
 
 open class KoDeclarationCache<T : KoBaseDeclaration> {
-    private val elements = mutableMapOf<KtElement, T>()
+
+    private val elements = ConcurrentHashMap<KtElement, T>()
 
     fun get(key: KtElement): T {
         var value = elements[key]
