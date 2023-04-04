@@ -9,11 +9,7 @@ class KoImport private constructor(private val ktImportDirective: KtImportDirect
 
     companion object {
         private val cache = KoDeclarationCache<KoImport>()
-        fun getInstance(ktImportDirective: KtImportDirective) = if (cache.hasKey(ktImportDirective)) {
-            cache.get(ktImportDirective)
-        } else {
-            cache.set(ktImportDirective, KoImport(ktImportDirective))
-            cache.get(ktImportDirective)
-        }
+        fun getInstance(ktImportDirective: KtImportDirective) =
+            cache.getOrCreateInstance(ktImportDirective) { KoImport(ktImportDirective) }
     }
 }

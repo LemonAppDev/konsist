@@ -57,11 +57,6 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
 
     companion object {
         private val cache = KoDeclarationCache<KoClass>()
-        fun getInstance(ktClass: KtClass) = if (cache.hasKey(ktClass)) {
-            cache.get(ktClass)
-        } else {
-            cache.set(ktClass, KoClass(ktClass))
-            cache.get(ktClass)
-        }
+        fun getInstance(ktClass: KtClass) = cache.getOrCreateInstance(ktClass) { KoClass(ktClass) }
     }
 }

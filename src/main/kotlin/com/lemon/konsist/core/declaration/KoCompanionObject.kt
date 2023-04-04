@@ -10,11 +10,7 @@ class KoCompanionObject private constructor(private val ktObjectDeclaration: KtO
         const val DEFAULT_COMPANION_OBJECT_NAME = "Companion"
 
         private val cache = KoDeclarationCache<KoCompanionObject>()
-        fun getInstance(ktObjectDeclaration: KtObjectDeclaration) = if (cache.hasKey(ktObjectDeclaration)) {
-            cache.get(ktObjectDeclaration)
-        } else {
-            cache.set(ktObjectDeclaration, KoCompanionObject(ktObjectDeclaration))
-            cache.get(ktObjectDeclaration)
-        }
+        fun getInstance(ktObjectDeclaration: KtObjectDeclaration) =
+            cache.getOrCreateInstance(ktObjectDeclaration) { KoCompanionObject(ktObjectDeclaration) }
     }
 }
