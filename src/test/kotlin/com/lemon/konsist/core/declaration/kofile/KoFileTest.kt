@@ -123,5 +123,18 @@ class KoFileTest {
         }
     }
 
+    @Test
+    fun `file`() {
+        // given
+        val sut = getSut("file")
+            .files()
+            .first()
+
+        // then
+        with(sut) {
+            path.endsWith("/konsist/src/test/kotlin/com/lemon/konsist/core/declaration/kofile/snippet/file.kt") shouldBeEqualTo true
+        }
+    }
+
     private fun getSut(fileName: String) = getSnippetKoScope("kofile/snippet/$fileName.kttxt")
 }

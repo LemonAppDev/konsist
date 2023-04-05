@@ -33,6 +33,8 @@ class KoFile private constructor(private val ktFile: KtFile) :
         ktImportDirectives.map { KoImport.getInstance(it) }
     }
 
+    val path by lazy { ktFile.virtualFilePath }
+
     val packageDirective by lazy {
         if (ktFile.packageDirective?.qualifiedName == "") {
             null
