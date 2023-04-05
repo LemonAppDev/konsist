@@ -22,7 +22,7 @@ open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterLi
         }
     }
 
-    val packageDirective by lazy {
+    val packageName by lazy {
         fullyQualifiedName
             .split(".")
             .toMutableList()
@@ -70,7 +70,7 @@ open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterLi
     fun resideInAPackages(vararg packages: String) = packages.toList().any { resideInAPackages(it) }
 
     private fun resideInAPackages(packages: String): Boolean {
-        val declarationPackages = this.packageDirective
+        val declarationPackages = this.packageName
             .split(".")
             .filter { it.isNotBlank() }
 

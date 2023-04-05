@@ -174,7 +174,7 @@ class KoDeclarationForPropertyTest {
             .first()
 
         // then
-        sut.packageDirective shouldBeEqualTo "com.samplepackage"
+        sut.packageName shouldBeEqualTo "com.samplepackage"
     }
 
     @Test
@@ -185,7 +185,7 @@ class KoDeclarationForPropertyTest {
             .first()
 
         // then
-        sut.packageDirective shouldBeEqualTo ""
+        sut.packageName shouldBeEqualTo ""
     }
 
     @Test
