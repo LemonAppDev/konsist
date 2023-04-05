@@ -45,7 +45,7 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
 
     val hasExplicitReturnType by lazy { ktFunction.hasDeclaredReturnType() }
 
-    val getExplicitReturnType by lazy {
+    val explicitReturnType by lazy {
         ktFunction
             .children
             .firstIsInstanceOrNull<KtTypeReference>()

@@ -59,7 +59,7 @@ class KoFunctionTest {
         // then
         with(sut) {
             hasExplicitReturnType shouldBeEqualTo true
-            getExplicitReturnType shouldBeEqualTo "SampleType"
+            explicitReturnType shouldBeEqualTo "SampleType"
         }
     }
 
