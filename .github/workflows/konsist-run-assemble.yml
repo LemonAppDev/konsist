@@ -1,4 +1,4 @@
-name: App - Build
+name: Check
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   run:
-    name: App - Build
+    name: Konsist - Assemble
     continue-on-error: false
     runs-on: self-hosted
     strategy:
@@ -23,8 +23,8 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: App - Build
-        run: ./gradlew app:build
+      - name: Konsist - Assemble
+        run: ./gradlew konsist:assemble
 
       - uses: actions/upload-artifact@v3
         with:

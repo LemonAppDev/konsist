@@ -1,4 +1,4 @@
-name: Konsist - Konsist Test
+name: Check
 
 on:
   push:

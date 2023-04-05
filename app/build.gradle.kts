@@ -1,16 +1,5 @@
-@Suppress("DSL_SCOPE_VIOLATION") // Because of IDE bug https://youtrack.jetbrains.com/issue/KTIJ-19370
 plugins {
-    alias(libs.plugins.springframework.boot)
-    alias(libs.plugins.spring.dependencyManagement)
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.plugin.spring)
-    alias(libs.plugins.kotlin.plugin.jpa)
-    alias(libs.plugins.spotless)
-    id("org.gradle.jvm-test-suite")
-}
-
-repositories {
-    mavenCentral()
+    id("local.spring")
 }
 
 dependencies {
@@ -77,17 +66,4 @@ testing {
             }
         }
     }
-}
-
-// Need to be here, so spotless works at root project level "gw spotlessCheck"
-spotless {
-    kotlin {
-        ktlint()
-
-        indentWithSpaces()
-        endWithNewline()
-    }
-
-    // Don't add spotless as dependency for the Gradle's check task
-    isEnforceCheck = false
 }

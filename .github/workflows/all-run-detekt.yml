@@ -1,4 +1,4 @@
-name: All - Detekt
+name: Check
 
 on:
   push:
