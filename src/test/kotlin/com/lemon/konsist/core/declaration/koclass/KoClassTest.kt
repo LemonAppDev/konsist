@@ -187,5 +187,35 @@ class KoClassTest {
         }
     }
 
+    @Test
+    fun `class-implements-class-and-interface`() {
+        // given
+        val sut = getSut("class-implements-class-and-interface")
+            .classes()
+            .first()
+
+        // then
+        with(sut) {
+            parentNames shouldBeEqualTo listOf("SampleParentClass", "SampleParentInterface")
+            parentClassName shouldBeEqualTo "SampleParentClass"
+            parentInterfaceNames shouldBeEqualTo listOf("SampleParentInterface")
+        }
+    }
+
+    @Test
+    fun `class-implements-nothing`() {
+        // given
+        val sut = getSut("class-implements-nothing")
+            .classes()
+            .first()
+
+        // then
+        with(sut) {
+            parentNames shouldBeEqualTo listOf()
+            parentClassName shouldBeEqualTo null
+            parentInterfaceNames shouldBeEqualTo listOf()
+        }
+    }
+
     private fun getSut(fileName: String) = getSnippetKoScope("koclass/snippet/$fileName.kttxt")
 }

@@ -3,6 +3,7 @@ package com.lemon.konsist.core.declaration
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtModifierList
+import org.jetbrains.kotlin.psi.psiUtil.getSuperNames
 import org.jetbrains.kotlin.psi.psiUtil.isAbstract
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
@@ -15,9 +16,9 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
 
     val isValue by lazy { ktClass.isValue() }
 
-    val isData by lazy { ktClass.isData() }
-
     val isAnnotation by lazy { ktClass.isAnnotation() }
+
+    val isData by lazy { ktClass.isData() }
 
     val isAbstract by lazy { ktClass.isAbstract() }
 
@@ -35,6 +36,28 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
             .firstIsInstanceOrNull<KtModifierList>()
             ?.hasModifier(KtTokens.FINAL_KEYWORD)
             ?: false
+    }
+
+    val parentNames by lazy { ktClass.getSuperNames() }
+
+    val parentInterfaceNames by lazy {
+        val imports = ktClass
+            .children
+
+        if (imports.isNotEmpty()) {
+            imports
+                .first()
+                .children
+                .map { it.text }
+                .filter { !it.contains('(') }
+        } else {
+            listOf()
+        }
+    }
+
+    val parentClassName: String? by lazy {
+        (parentNames - parentInterfaceNames.toSet())
+            .firstOrNull()
     }
 
     val primaryConstructor by lazy {
