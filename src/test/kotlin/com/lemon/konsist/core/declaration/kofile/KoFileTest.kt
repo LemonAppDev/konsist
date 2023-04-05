@@ -6,6 +6,32 @@ import org.junit.jupiter.api.Test
 
 class KoFileTest {
     @Test
+    fun `file-name`() {
+        // given
+        val sut = getSut("file-name")
+            .files()
+            .first()
+
+        // then
+        with(sut) {
+            name shouldBeEqualTo "file-name.kt"
+        }
+    }
+
+    @Test
+    fun `file-path`() {
+        // given
+        val sut = getSut("file-path")
+            .files()
+            .first()
+
+        // then
+        with(sut) {
+            path.endsWith("/konsist/src/test/kotlin/com/lemon/konsist/core/declaration/kofile/snippet/file-path.kt") shouldBeEqualTo true
+        }
+    }
+
+    @Test
     fun `file-with-import`() {
         // given
         val sut = getSut("file-with-import")
@@ -120,19 +146,6 @@ class KoFileTest {
         with(sut) {
             containsInterface("SampleInterface") shouldBeEqualTo true
             containsInterface("OtherInterface") shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `file`() {
-        // given
-        val sut = getSut("file")
-            .files()
-            .first()
-
-        // then
-        with(sut) {
-            path.endsWith("/konsist/src/test/kotlin/com/lemon/konsist/core/declaration/kofile/snippet/file.kt") shouldBeEqualTo true
         }
     }
 
