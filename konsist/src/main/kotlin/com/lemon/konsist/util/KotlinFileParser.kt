@@ -31,7 +31,7 @@ object KotlinFileParser {
         val text = file.readText()
 
         // Tests are using code snippets with txt extension that is messing up with Kotlin file parsing
-        val filePath = file.path.replace(".kttxt", "")
+        val filePath = file.path.replace(".kttxt", ".kt")
         val lightVirtualFile = LightVirtualFile(filePath, KotlinFileType.INSTANCE, text)
         val psiFile = psiManager.findFile(lightVirtualFile)
         return psiFile as KtFile
