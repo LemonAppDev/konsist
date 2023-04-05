@@ -8,7 +8,7 @@ object TestSnippetProvider {
     private val testSourceSetPath = "$projectPath/src/test/kotlin/com/lemon/konsist/core/declaration/"
 
     fun getSnippetKoScope(snippetRelativePath: String): KoScope {
-        val snippetPath = "$testSourceSetPath/$snippetRelativePath"
-        return KoFileImporter.importFile(snippetPath)
+        val snippetPath = "$testSourceSetPath$snippetRelativePath"
+        return KoScope.fromFile(snippetPath)
     }
 }

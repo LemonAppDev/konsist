@@ -22,6 +22,9 @@ class KoFile private constructor(private val ktFile: KtFile) :
     KoCompanionObjectProvider,
     KoPropertyProvider,
     KoFunctionProvider {
+
+    override val name = ktFile.name.split("/").last()
+
     val imports by lazy {
         val ktImportDirectives = ktFile
             .children
@@ -33,7 +36,11 @@ class KoFile private constructor(private val ktFile: KtFile) :
         ktImportDirectives.map { KoImport.getInstance(it) }
     }
 
-    val path by lazy { ktFile.virtualFilePath }
+    val path by lazy {
+        ktFile
+            .virtualFilePath
+            .replace("//", "/")
+    }
 
     val packageDirective by lazy {
         if (ktFile.packageDirective?.qualifiedName == "") {

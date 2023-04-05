@@ -13,7 +13,8 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.filePath.endsWith("kobasedeclaration/snippet/file-path") shouldBeEqualTo true
+        sut.filePath.startsWith("//") shouldBeEqualTo false
+        sut.filePath.endsWith("kobasedeclaration/snippet/file-path.kt") shouldBeEqualTo true
     }
 
     @Test
@@ -36,7 +37,7 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.containingFile.name.endsWith("file") shouldBeEqualTo true
+        sut.containingFile.name.endsWith("file.kt") shouldBeEqualTo true
     }
 
     @Test
