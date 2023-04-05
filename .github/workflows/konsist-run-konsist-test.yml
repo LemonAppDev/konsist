@@ -1,4 +1,4 @@
-name: Check
+name: Konsist - Konsist Test
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   run:
-    name: Konsist - Konsist Test
+    name: Run
     continue-on-error: false
     runs-on: self-hosted
     strategy:
