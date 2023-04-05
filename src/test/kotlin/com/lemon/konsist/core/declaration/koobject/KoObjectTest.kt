@@ -2,6 +2,7 @@ package com.lemon.konsist.core.declaration.koobject
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class KoObjectTest {
@@ -16,6 +17,7 @@ class KoObjectTest {
         sut.name shouldBeEqualTo "SampleObject"
     }
 
+    @Disabled("Enable after upgrading to Kotlin 1.9")
     @Test
     fun `data-object`() {
         // given
