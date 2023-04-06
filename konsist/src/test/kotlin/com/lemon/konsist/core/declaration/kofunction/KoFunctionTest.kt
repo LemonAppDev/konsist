@@ -59,7 +59,26 @@ class KoFunctionTest {
         // then
         with(sut) {
             hasExplicitReturnType shouldBeEqualTo true
-            explicitReturnType shouldBeEqualTo "SampleType"
+            explicitReturnType?.name shouldBeEqualTo "SampleType"
+            explicitReturnType?.aliasName shouldBeEqualTo null
+            explicitReturnType?.isTypeAlias shouldBeEqualTo false
+            explicitReturnType?.fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+        }
+    }
+
+    @Test
+    fun `function-with-alias-return-type`() {
+        // given
+        val sut = getSut("function-with-alias-return-type")
+            .functions()
+            .first()
+
+        // then
+        with(sut) {
+            hasExplicitReturnType shouldBeEqualTo true
+            explicitReturnType?.name shouldBeEqualTo "SampleType"
+            explicitReturnType?.aliasName shouldBeEqualTo "AliasType"
+            explicitReturnType?.isTypeAlias shouldBeEqualTo true
         }
     }
 
@@ -71,7 +90,12 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.hasExplicitReturnType shouldBeEqualTo false
+        with(sut) {
+            hasExplicitReturnType shouldBeEqualTo false
+            explicitReturnType?.name shouldBeEqualTo null
+            explicitReturnType?.aliasName shouldBeEqualTo null
+            explicitReturnType?.isTypeAlias shouldBeEqualTo null
+        }
     }
 
     @Test

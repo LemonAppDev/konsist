@@ -46,10 +46,11 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
     val hasExplicitReturnType by lazy { ktFunction.hasDeclaredReturnType() }
 
     val explicitReturnType by lazy {
-        ktFunction
+        val type = ktFunction
             .children
             .firstIsInstanceOrNull<KtTypeReference>()
-            ?.text
+
+        type?.let { KoType.getInstance(type) }
     }
 
     override fun localDeclarations(): List<KoDeclaration> = localDeclarations

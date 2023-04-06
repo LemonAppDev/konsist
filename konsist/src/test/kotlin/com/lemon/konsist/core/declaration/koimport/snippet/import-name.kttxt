@@ -1,4 +1,3 @@
 import com.lemon.konsist.testdata.SampleClass
 
-fun sampleFunction(sampleProperty: SampleClass) {
-}
+class SampleTopLevelClass(val sampleProperty2: SampleClass)
