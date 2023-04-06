@@ -9,10 +9,15 @@ class KoImportTest {
     @Test
     fun `import-name`() {
         // given
-        val sut = getSut("import-name").imports()
+        val sut = getSut("import-name")
+            .imports()
+            .first()
 
         // then
-        sut.map { it.name } shouldBeEqualTo listOf("com.lemon.konsist.testdata.SampleClass")
+        with(sut) {
+            name shouldBeEqualTo "com.lemon.konsist.testdata.SampleClass"
+            alias shouldBeEqualTo "com.lemon.konsist.testdata.SampleClass"
+        }
     }
 
     @Test
@@ -24,6 +29,7 @@ class KoImportTest {
         with(sut) {
             this[0].alias shouldBeEqualTo "com.lemon.konsist.testdata.SampleClass"
             this[1].alias shouldBeEqualTo "AliasType"
+            this[1].name shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
 

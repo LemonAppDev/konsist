@@ -50,5 +50,53 @@ class KoPropertyTest {
         }
     }
 
+    @Test
+    fun `property-with-type`() {
+        // given
+        val sut = getSut("property-with-type")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        with(sut.explicitType) {
+            this?.name shouldBeEqualTo "SampleType"
+            this?.aliasName shouldBeEqualTo null
+            this?.isTypeAlias shouldBeEqualTo false
+            this?.fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+        }
+    }
+
+    @Test
+    fun `property-with-alias-type`() {
+        // given
+        val sut = getSut("property-with-alias-type")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        with(sut.explicitType) {
+            this?.name shouldBeEqualTo "SampleType"
+            this?.aliasName shouldBeEqualTo "AliasType"
+            this?.isTypeAlias shouldBeEqualTo true
+            this?.fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+        }
+    }
+
+    @Test
+    fun `property-without-type`() {
+        // given
+        val sut = getSut("property-without-type")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        with(sut.explicitType) {
+            this?.name shouldBeEqualTo null
+            this?.aliasName shouldBeEqualTo null
+            this?.isTypeAlias shouldBeEqualTo null
+            this?.fullyQualifiedName shouldBeEqualTo null
+        }
+    }
+
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koproperty/snippet/$fileName.kttxt")
 }

@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 
 class KoParameterTest {
     @Test
-    fun `class-with-one-typed-parameter`() {
+    fun `class-with-one-parameter-with-type`() {
         // given
-        val sut = getSut("class-with-one-typed-parameter")
+        val sut = getSut("class-with-one-parameter-with-type")
             .classes()
             .first()
             .primaryConstructor
@@ -16,7 +16,31 @@ class KoParameterTest {
             ?.first()
 
         // then
-        sut?.type shouldBeEqualTo "SampleParameter"
+        with(sut?.explicitType) {
+            this?.name shouldBeEqualTo "SampleType"
+            this?.aliasName shouldBeEqualTo null
+            this?.isTypeAlias shouldBeEqualTo false
+            this?.fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+        }
+    }
+
+    @Test
+    fun `class-with-one-parameter-with-alias-type`() {
+        // given
+        val sut = getSut("class-with-one-parameter-with-alias-type")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+
+        // then
+        with(sut?.explicitType) {
+            this?.name shouldBeEqualTo "SampleType"
+            this?.aliasName shouldBeEqualTo "AliasType"
+            this?.isTypeAlias shouldBeEqualTo true
+            this?.fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+        }
     }
 
     @Test
