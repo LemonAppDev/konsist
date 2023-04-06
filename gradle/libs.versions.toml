@@ -27,6 +27,6 @@ springframework-boot = { id = "org.springframework.boot", version.ref = "springB
 spring-dependencyManagement = "io.spring.dependency-management:1.1.0"
 kotlin-plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlinVersion" }
 kotlin-plugin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlinVersion" }
-spotless = "com.diffplug.spotless:6.17.0"
+spotless = "com.diffplug.spotless:6.18.0"
 testLogger = "com.adarshr.test-logger:3.2.0"
 detekt = "io.gitlab.arturbosch.detekt:1.22.0"
