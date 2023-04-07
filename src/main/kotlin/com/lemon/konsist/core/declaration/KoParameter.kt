@@ -17,7 +17,7 @@ class KoParameter private constructor(private val ktParameter: KtParameter) : Ko
         KoType.getInstance(type)
     }
 
-    val isVararg by lazy { ktParameter.isVarArg }
+    val isVarArg by lazy { ktParameter.isVarArg }
 
     val isNoInline by lazy { ktParameter.modifierList?.hasModifier(KtTokens.NOINLINE_KEYWORD) ?: false }
 
