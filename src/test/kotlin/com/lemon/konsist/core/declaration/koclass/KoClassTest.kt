@@ -196,9 +196,9 @@ class KoClassTest {
 
         // then
         with(sut) {
-            parentNames shouldBeEqualTo listOf("SampleParentClass", "SampleParentInterface")
-            parentClassName shouldBeEqualTo "SampleParentClass"
-            parentInterfaceNames shouldBeEqualTo listOf("SampleParentInterface")
+            parents shouldBeEqualTo listOf("SampleParentClass", "SampleParentInterface")
+            parentClass shouldBeEqualTo "SampleParentClass"
+            parentInterfaces shouldBeEqualTo listOf("SampleParentInterface")
         }
     }
 
@@ -211,9 +211,9 @@ class KoClassTest {
 
         // then
         with(sut) {
-            parentNames shouldBeEqualTo listOf()
-            parentClassName shouldBeEqualTo null
-            parentInterfaceNames shouldBeEqualTo listOf()
+            parents shouldBeEqualTo listOf()
+            parentClass shouldBeEqualTo null
+            parentInterfaces shouldBeEqualTo listOf()
         }
     }
 
