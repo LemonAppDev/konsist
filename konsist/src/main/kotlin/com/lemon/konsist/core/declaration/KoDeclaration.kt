@@ -2,10 +2,6 @@ package com.lemon.konsist.core.declaration
 
 import com.lemon.konsist.core.const.KoModifier
 import com.lemon.konsist.core.const.toKtToken
-import com.lemon.konsist.ext.isInternal
-import com.lemon.konsist.ext.isPrivate
-import com.lemon.konsist.ext.isProtected
-import com.lemon.konsist.ext.isPublic
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -33,13 +29,43 @@ open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterLi
 
     val isPublic by lazy { ktTypeParameterListOwner.hasModifier(KtTokens.PUBLIC_KEYWORD) }
 
-    val isPublicOrDefault by lazy { ktTypeParameterListOwner.modifierList.isPublic() }
+    val isPublicOrDefault by lazy {
+        ktTypeParameterListOwner.run {
+            if (hasModifier(KtTokens.PUBLIC_KEYWORD)) {
+                return@run true
+            }
 
-    val isPrivate by lazy { ktTypeParameterListOwner.modifierList.isPrivate() }
+            val hasOtherVisibilityModifier =
+                hasModifier(KtTokens.PRIVATE_KEYWORD) ||
+                    hasModifier(KtTokens.PROTECTED_KEYWORD) ||
+                    hasModifier(
+                        KtTokens.INTERNAL_KEYWORD,
+                    )
 
-    val isProtected by lazy { ktTypeParameterListOwner.modifierList.isProtected() }
+            hasOtherVisibilityModifier.not()
+        }
+    }
 
-    val isInternal by lazy { ktTypeParameterListOwner.modifierList.isInternal() }
+    val isPrivate by lazy {
+        ktTypeParameterListOwner
+            .modifierList
+            ?.hasModifier(KtTokens.PRIVATE_KEYWORD)
+            ?: false
+    }
+
+    val isProtected by lazy {
+        ktTypeParameterListOwner
+            .modifierList
+            ?.hasModifier(KtTokens.PROTECTED_KEYWORD)
+            ?: false
+    }
+
+    val isInternal by lazy {
+        ktTypeParameterListOwner
+            .modifierList
+            ?.hasModifier(KtTokens.INTERNAL_KEYWORD)
+            ?: false
+    }
 
     val isTopLevel = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
 
