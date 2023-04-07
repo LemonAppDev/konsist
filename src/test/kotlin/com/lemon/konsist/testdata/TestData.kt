@@ -14,6 +14,13 @@ interface SampleTopLevelInterface {
 
 annotation class NonExistingAnnotation
 
+@Target(
+    AnnotationTarget.CLASS,
+    AnnotationTarget.PROPERTY,
+    AnnotationTarget.CONSTRUCTOR,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.FILE,
+)
 annotation class SampleAnnotation
 
 annotation class SampleAnnotation1
