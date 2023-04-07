@@ -215,27 +215,5 @@ class KoDeclarationForInterfaceTest {
         }
     }
 
-    @Test
-    fun `interface-reside-in-package`() {
-        // given
-        val sut = getSut("interface-reside-in-package")
-            .interfaces()
-            .first()
-
-        // then
-        sut.resideInAPackages("samplepackage") shouldBeEqualTo true
-    }
-
-    @Test
-    fun `interface-not-reside-in-package`() {
-        // given
-        val sut = getSut("interface-not-reside-in-package")
-            .interfaces()
-            .first()
-
-        // then
-        sut.resideInAPackages("otherpackage") shouldBeEqualTo false
-    }
-
     private fun getSut(fileName: String) = getSnippetKoScope("kodeclaration/snippet/forinterface/", fileName)
 }

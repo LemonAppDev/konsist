@@ -16,6 +16,6 @@ class UseCaseKonsistTest {
 
     @Test
     fun `UseCase class should reside in __domain__usecase__ package`() {
-        sut.check { it.resideInAPackages("..domain..usecase..") }
+        sut.check { it.resideInPackages("..domain..usecase..") }
     }
 }

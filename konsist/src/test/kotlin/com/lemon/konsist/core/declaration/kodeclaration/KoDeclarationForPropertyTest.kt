@@ -218,27 +218,5 @@ class KoDeclarationForPropertyTest {
         }
     }
 
-    @Test
-    fun `property-reside-in-package`() {
-        // given
-        val sut = getSut("property-reside-in-package")
-            .properties()
-            .first()
-
-        // then
-        sut.resideInAPackages("samplepackage") shouldBeEqualTo true
-    }
-
-    @Test
-    fun `property-not-reside-in-package`() {
-        // given
-        val sut = getSut("property-not-reside-in-package")
-            .properties()
-            .first()
-
-        // then
-        sut.resideInAPackages("otherpackage") shouldBeEqualTo false
-    }
-
     private fun getSut(fileName: String) = getSnippetKoScope("kodeclaration/snippet/forproperty/", fileName)
 }

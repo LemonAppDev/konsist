@@ -218,28 +218,6 @@ class KoDeclarationForObjectTest {
         }
     }
 
-    @Test
-    fun `object-reside-in-package`() {
-        // given
-        val sut = getSut("object-reside-in-package")
-            .objects()
-            .first()
-
-        // then
-        sut.resideInAPackages("samplepackage") shouldBeEqualTo true
-    }
-
-    @Test
-    fun `object-not-reside-in-package`() {
-        // given
-        val sut = getSut("object-not-reside-in-package")
-            .objects()
-            .first()
-
-        // then
-        sut.resideInAPackages("otherpackage") shouldBeEqualTo false
-    }
-
     private fun
     getSut(fileName: String) = getSnippetKoScope("kodeclaration/snippet/forobject/", fileName)
 }

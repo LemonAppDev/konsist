@@ -11,6 +11,6 @@ class RepositoryClassKonsistTest {
 
     @Test
     fun `classes having name ending with RepositoryImpl should reside in data package`() {
-        sut.check { it.resideInAPackages("..data..") }
+        sut.check { it.resideInPackages("..data..") }
     }
 }

@@ -12,7 +12,7 @@ class JpaRepositoryInterfaceKonsistTest {
 
     @Test
     fun `JpaRepository interface should reside in data package`() {
-        sut.check { it.resideInAPackages("..data..") }
+        sut.check { it.resideInPackages("..data..") }
     }
 
     @Test

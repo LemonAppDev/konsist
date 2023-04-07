@@ -96,21 +96,59 @@ open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterLi
             ?.toString()
             ?: className
 
-    fun resideInAPackages(vararg packages: String) = packages.toList().any { resideInAPackages(it) }
+    fun resideInPackages(vararg packages: String) = packages.toList().any { resideInPackages(it) }
 
-    private fun resideInAPackages(packages: String): Boolean {
-        val declarationPackages = this.packageName
+    @Suppress("detekt.CyclomaticComplexMethod")
+    private fun resideInPackages(packages: String): Boolean {
+        val declarationPackages = packageName
             .split(".")
             .filter { it.isNotBlank() }
+            .toMutableList()
 
         val packagesList = packages
             .split("..")
             .filter { it.isNotBlank() }
 
-        val declarationPackagesList = declarationPackages
-            .toMutableList()
-            .filter { packagesList.contains(it) }
+        val packagesListWithOneDot = packages
+            .split(".")
+            .filter { it.isNotBlank() }
 
-        return declarationPackagesList == packagesList
+        @Suppress("detekt.ComplexCondition")
+        return if (
+            packagesList.size == 1 &&
+            packages.startsWith("..") &&
+            packages.endsWith("..")
+        ) {
+            declarationPackages.contains(packagesList.first())
+        } else if (
+            packagesList.size == 1 &&
+            packages.startsWith("..") &&
+            !packages.endsWith("..")
+        ) {
+            packageName.endsWith(packagesList.first())
+        } else if (
+            packagesList.size == 1 &&
+            !packages.startsWith("..") &&
+            packages.endsWith("..")
+        ) {
+            packageName.startsWith(packagesList.first())
+        } else if (
+            (packageName.startsWith(packagesList.first()) && packageName.endsWith(packagesList.last())) ||
+            (!packageName.startsWith(packagesList.first()) && packages.startsWith("..")) ||
+            (!packageName.endsWith(packagesList.last()) && packages.endsWith(".."))
+        ) {
+            var counter = 0
+            packagesListWithOneDot.forEach {
+                if (declarationPackages.contains(it)) {
+                    val index = declarationPackages.indexOf(it)
+                    declarationPackages.removeAll { element -> declarationPackages.indexOf(element) <= index }
+                } else {
+                    counter++
+                }
+            }
+            counter == 0
+        } else {
+            false
+        }
     }
 }

@@ -13,7 +13,7 @@ class ControllerClassKonsistTest {
 
     @Test
     fun `classes annotated with 'RestController' should reside in __application__controller__ package`() {
-        sut.check { it.resideInAPackages("..application..controller..") }
+        sut.check { it.resideInPackages("..application..controller..") }
     }
 
     @Test

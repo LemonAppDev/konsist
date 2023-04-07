@@ -33,7 +33,7 @@ class GeneralCodingKonsistTest {
     fun `every class has test class`() {
         mangoScope
             .classes()
-            .filterNot { it.resideInAPackages("..config..", "..model..") }
+            .filterNot { it.resideInPackages("..config..", "..model..") }
             .filterNot { it.hasAnnotation(SpringBootApplication::class) }
             .filterNot { it.hasAnnotation(Entity::class) }
             .filterNot { it.name.endsWith("Test") }
