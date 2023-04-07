@@ -147,7 +147,7 @@ class KoParameterTest {
             ?.first()
 
         // then
-        sut?.isVararg shouldBeEqualTo true
+        sut?.isVarArg shouldBeEqualTo true
     }
 
     @Test
@@ -188,7 +188,7 @@ class KoParameterTest {
 
         // then
         sut?.run {
-            isVararg shouldBeEqualTo false
+            isVarArg shouldBeEqualTo false
             isNoInline shouldBeEqualTo false
             isCrossInline shouldBeEqualTo false
         }
