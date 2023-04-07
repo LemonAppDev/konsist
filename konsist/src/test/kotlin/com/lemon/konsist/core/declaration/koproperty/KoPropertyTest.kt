@@ -16,7 +16,6 @@ class KoPropertyTest {
         with(sut) {
             isVal shouldBeEqualTo true
             isVar shouldBeEqualTo false
-            isConst shouldBeEqualTo false
         }
     }
 
@@ -31,8 +30,62 @@ class KoPropertyTest {
         with(sut) {
             isVal shouldBeEqualTo false
             isVar shouldBeEqualTo true
-            isConst shouldBeEqualTo false
         }
+    }
+
+    @Test
+    fun `property-has-lateinit-modifier`() {
+        // given
+        val sut = getSut("property-has-lateinit-modifier")
+            .properties()
+            .first()
+
+        // then
+        sut.isLateinit shouldBeEqualTo true
+    }
+
+    @Test
+    fun `property-has-override-modifier`() {
+        // given
+        val sut = getSut("property-has-override-modifier")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        sut.isOverride shouldBeEqualTo true
+    }
+
+    @Test
+    fun `property-has-abstract-modifier`() {
+        // given
+        val sut = getSut("property-has-abstract-modifier")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        sut.isAbstract shouldBeEqualTo true
+    }
+
+    @Test
+    fun `property-has-open-modifier`() {
+        // given
+        val sut = getSut("property-has-open-modifier")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        sut.isOpen shouldBeEqualTo true
+    }
+
+    @Test
+    fun `property-has-final-modifier`() {
+        // given
+        val sut = getSut("property-has-final-modifier")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        sut.isFinal shouldBeEqualTo true
     }
 
     @Test
@@ -43,10 +96,24 @@ class KoPropertyTest {
             .first()
 
         // then
+        sut.isConst shouldBeEqualTo true
+    }
+
+    @Test
+    fun `property-has-no-modifiers`() {
+        // given
+        val sut = getSut("property-has-no-modifiers")
+            .properties()
+            .first()
+
+        // then
         with(sut) {
-            isVal shouldBeEqualTo true
-            isVar shouldBeEqualTo false
-            isConst shouldBeEqualTo true
+            isLateinit shouldBeEqualTo false
+            isOverride shouldBeEqualTo false
+            isAbstract shouldBeEqualTo false
+            isOpen shouldBeEqualTo false
+            isFinal shouldBeEqualTo false
+            isConst shouldBeEqualTo false
         }
     }
 
