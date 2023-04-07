@@ -39,9 +39,11 @@ class KoFileTest {
             .first()
 
         // then
-        sut
-            .imports
-            .map { it.name } shouldBeEqualTo listOf("com.lemon.konsist.testdata.SampleType")
+        sut.run {
+            imports.map { it.name } shouldBeEqualTo listOf("com.lemon.konsist.testdata.SampleType")
+            hasImport("com.lemon.konsist.testdata.SampleType") shouldBeEqualTo true
+            hasImport("com.lemon.konsist.testdata.OtherImport") shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -52,9 +54,10 @@ class KoFileTest {
             .first()
 
         // then
-        sut
-            .imports
-            .isEmpty()
+        sut.run {
+            imports.isEmpty() shouldBeEqualTo true
+            hasImport("com.lemon.konsist.testdata.OtherImport") shouldBeEqualTo false
+        }
     }
 
     @Test
