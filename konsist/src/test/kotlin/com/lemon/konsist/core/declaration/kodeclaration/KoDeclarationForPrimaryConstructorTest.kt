@@ -20,6 +20,24 @@ class KoDeclarationForPrimaryConstructorTest {
     }
 
     @Test
+    fun `primary-constructor-without-visibility-modifiers`() {
+        // given
+        val sut = getSut("primary-constructor-without-visibility-modifiers")
+            .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        sut?.run {
+            isPublicOrDefault shouldBeEqualTo true
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo false
+            isInternal shouldBeEqualTo false
+            isProtected shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `public-primary-constructor`() {
         // given
         val sut = getSut("public-primary-constructor")
@@ -28,7 +46,13 @@ class KoDeclarationForPrimaryConstructorTest {
             .primaryConstructor
 
         // then
-        sut?.isPublic shouldBeEqualTo true
+        sut?.run {
+            isPublicOrDefault shouldBeEqualTo true
+            isPublic shouldBeEqualTo true
+            isPrivate shouldBeEqualTo false
+            isInternal shouldBeEqualTo false
+            isProtected shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -40,7 +64,13 @@ class KoDeclarationForPrimaryConstructorTest {
             .primaryConstructor
 
         // then
-        sut?.isPrivate shouldBeEqualTo true
+        sut?.run {
+            isPublicOrDefault shouldBeEqualTo false
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo true
+            isInternal shouldBeEqualTo false
+            isProtected shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -52,7 +82,13 @@ class KoDeclarationForPrimaryConstructorTest {
             .primaryConstructor
 
         // then
-        sut?.isProtected shouldBeEqualTo true
+        sut?.run {
+            isPublicOrDefault shouldBeEqualTo false
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo false
+            isInternal shouldBeEqualTo false
+            isProtected shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -64,7 +100,13 @@ class KoDeclarationForPrimaryConstructorTest {
             .primaryConstructor
 
         // then
-        sut?.isInternal shouldBeEqualTo true
+        sut?.run {
+            isPublicOrDefault shouldBeEqualTo false
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo false
+            isInternal shouldBeEqualTo true
+            isProtected shouldBeEqualTo false
+        }
     }
 
     @Test
