@@ -1,0 +1,5 @@
+import com.lemon.konsist.testdata.SampleType
+
+open class SampleSuperClass {
+    open lateinit var sampleProperty: SampleType
+}
