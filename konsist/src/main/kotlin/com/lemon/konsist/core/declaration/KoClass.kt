@@ -38,9 +38,9 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
             ?: false
     }
 
-    val parentNames by lazy { ktClass.getSuperNames() }
+    val parents by lazy { ktClass.getSuperNames() }
 
-    val parentInterfaceNames by lazy {
+    val parentInterfaces by lazy {
         val imports = ktClass
             .children
 
@@ -55,8 +55,8 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
         }
     }
 
-    val parentClassName: String? by lazy {
-        (parentNames - parentInterfaceNames.toSet())
+    val parentClass: String? by lazy {
+        (parents - parentInterfaces.toSet())
             .firstOrNull()
     }
 
