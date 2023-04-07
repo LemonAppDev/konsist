@@ -218,27 +218,5 @@ class KoDeclarationForFunctionTest {
         }
     }
 
-    @Test
-    fun `function-reside-in-package`() {
-        // given
-        val sut = getSut("function-reside-in-package")
-            .functions()
-            .first()
-
-        // then
-        sut.resideInAPackages("samplepackage") shouldBeEqualTo true
-    }
-
-    @Test
-    fun `function-not-reside-in-package`() {
-        // given
-        val sut = getSut("function-not-reside-in-package")
-            .functions()
-            .first()
-
-        // then
-        sut.resideInAPackages("otherpackage") shouldBeEqualTo false
-    }
-
     private fun getSut(fileName: String) = getSnippetKoScope("kodeclaration/snippet/forfunction/", fileName)
 }
