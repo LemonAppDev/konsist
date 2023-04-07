@@ -14,7 +14,7 @@ class KoImportTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             name shouldBeEqualTo "com.lemon.konsist.testdata.SampleClass"
             alias shouldBeEqualTo "com.lemon.konsist.testdata.SampleClass"
         }
@@ -26,7 +26,7 @@ class KoImportTest {
         val sut = getSut("import-name-has-alias-type").imports()
 
         // then
-        with(sut) {
+        sut.run {
             this[0].alias shouldBeEqualTo "com.lemon.konsist.testdata.SampleClass"
             this[1].alias shouldBeEqualTo "AliasType"
             this[1].name shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"

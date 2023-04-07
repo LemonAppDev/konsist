@@ -53,7 +53,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             annotations shouldHaveSize 1
             hasAnnotation(SampleAnnotation::class) shouldBeEqualTo true
             hasAnnotation(NonExistingAnnotation::class) shouldBeEqualTo false
@@ -68,7 +68,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             annotations shouldHaveSize 2
             hasAnnotation(SampleAnnotation1::class) shouldBeEqualTo true
             hasAnnotation(SampleAnnotation2::class) shouldBeEqualTo true
@@ -84,7 +84,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             isPublicOrDefault shouldBeEqualTo true
             isPublic shouldBeEqualTo false
             isPrivate shouldBeEqualTo false
@@ -101,7 +101,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             isPublicOrDefault shouldBeEqualTo true
             isPublic shouldBeEqualTo true
             isPrivate shouldBeEqualTo false
@@ -118,7 +118,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             isPublicOrDefault shouldBeEqualTo false
             isPublic shouldBeEqualTo false
             isPrivate shouldBeEqualTo true
@@ -135,7 +135,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             isPublicOrDefault shouldBeEqualTo false
             isPublic shouldBeEqualTo false
             isPrivate shouldBeEqualTo false
@@ -152,7 +152,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             isPublicOrDefault shouldBeEqualTo false
             isPublic shouldBeEqualTo false
             isPrivate shouldBeEqualTo false
@@ -213,7 +213,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             hasModifiers(PUBLIC) shouldBeEqualTo true
             hasModifiers(PRIVATE) shouldBeEqualTo false
         }

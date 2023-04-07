@@ -18,11 +18,11 @@ class KoTypeTest {
             ?.type
 
         // then
-        with(sut) {
-            this?.name shouldBeEqualTo "SampleType"
-            this?.aliasName shouldBeEqualTo "AliasType"
-            this?.isTypeAlias shouldBeEqualTo true
-            this?.fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+        sut?.run {
+            name shouldBeEqualTo "SampleType"
+            aliasName shouldBeEqualTo "AliasType"
+            isTypeAlias shouldBeEqualTo true
+            fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
 
@@ -38,11 +38,11 @@ class KoTypeTest {
             ?.type
 
         // then
-        with(sut) {
-            this?.name shouldBeEqualTo "SampleType"
-            this?.aliasName shouldBeEqualTo null
-            this?.isTypeAlias shouldBeEqualTo false
-            this?.fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+        sut?.run {
+            name shouldBeEqualTo "SampleType"
+            aliasName shouldBeEqualTo null
+            isTypeAlias shouldBeEqualTo false
+            fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
 

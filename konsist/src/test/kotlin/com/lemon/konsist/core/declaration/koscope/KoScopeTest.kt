@@ -18,7 +18,7 @@ class KoScopeTest {
         val sut = KoScope.fromFile("$testSourceSetPath/lemon/konsist/core/declaration/koscope/KoScopeTest.kt")
 
         // then
-        with(sut.files()) {
+        sut.files().run {
             size shouldBeEqualTo 1
             first().name shouldBeEqualTo "KoScopeTest.kt"
             first().path shouldBeEqualTo "${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeTest.kt"
@@ -31,7 +31,7 @@ class KoScopeTest {
         val sut = KoScope.fromProject()
 
         // then
-        with(sut.files()) {
+        sut.files().run {
             none { it.path.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
             all { it.path.startsWith(projectPath) } shouldBeEqualTo true
         }

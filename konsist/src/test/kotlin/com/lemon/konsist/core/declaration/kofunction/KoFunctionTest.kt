@@ -123,7 +123,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             isOperator shouldBeEqualTo false
             isInline shouldBeEqualTo false
             isTailrec shouldBeEqualTo false
@@ -167,7 +167,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             hasExplicitReturnType shouldBeEqualTo true
             explicitReturnType?.name shouldBeEqualTo "SampleType"
             explicitReturnType?.aliasName shouldBeEqualTo null
@@ -184,7 +184,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             hasExplicitReturnType shouldBeEqualTo true
             explicitReturnType?.name shouldBeEqualTo "SampleType"
             explicitReturnType?.aliasName shouldBeEqualTo "AliasType"
@@ -200,7 +200,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             hasExplicitReturnType shouldBeEqualTo false
             explicitReturnType?.name shouldBeEqualTo null
             explicitReturnType?.aliasName shouldBeEqualTo null

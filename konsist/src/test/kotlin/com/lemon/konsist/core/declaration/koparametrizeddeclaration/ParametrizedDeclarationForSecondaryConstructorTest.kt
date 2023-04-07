@@ -14,7 +14,7 @@ class ParametrizedDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             parameters shouldBeEqualTo emptyList()
         }
     }
@@ -28,7 +28,7 @@ class ParametrizedDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        with(sut.parameters) {
+        sut.parameters.run {
             size shouldBeEqualTo 1
             first().name shouldBeEqualTo "sampleParameter"
         }
@@ -43,7 +43,7 @@ class ParametrizedDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             hasParameterNamed("sampleParameter") shouldBeEqualTo true
             hasParameterNamed("otherParameter") shouldBeEqualTo false
         }
