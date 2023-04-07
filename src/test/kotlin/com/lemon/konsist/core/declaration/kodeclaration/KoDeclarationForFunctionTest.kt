@@ -1,7 +1,10 @@
 package com.lemon.konsist.core.declaration.kodeclaration
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemon.konsist.core.const.KoModifier
+import com.lemon.konsist.core.const.KoModifier.PRIVATE
+import com.lemon.konsist.core.const.KoModifier.PROTECTED
+import com.lemon.konsist.core.const.KoModifier.PUBLIC
+import com.lemon.konsist.core.const.KoModifier.SUSPEND
 import com.lemon.konsist.testdata.NonExistingAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation1
@@ -213,8 +216,42 @@ class KoDeclarationForFunctionTest {
 
         // then
         sut.run {
-            hasModifiers(KoModifier.PUBLIC) shouldBeEqualTo true
-            hasModifiers(KoModifier.PRIVATE) shouldBeEqualTo false
+            hasModifiers(PUBLIC) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-has-two-modifiers`() {
+        // given
+        val sut = getSut("function-has-two-modifiers")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.run {
+            hasModifiers(PROTECTED) shouldBeEqualTo true
+            hasModifiers(SUSPEND) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
+            hasModifiers(PROTECTED, SUSPEND) shouldBeEqualTo true
+            hasModifiers(SUSPEND, PROTECTED) shouldBeEqualTo true
+            hasModifiers(PRIVATE, SUSPEND) shouldBeEqualTo false
+            hasModifiers(PROTECTED, SUSPEND, PRIVATE) shouldBeEqualTo false
+            hasModifiers() shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `function-has-no-modifier`() {
+        // given
+        val sut = getSut("function-has-no-modifier")
+            .functions()
+            .first()
+
+        // then
+        sut.run {
+            hasModifiers() shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
         }
     }
 

@@ -1,7 +1,9 @@
 package com.lemon.konsist.core.declaration.kodeclaration
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemon.konsist.core.const.KoModifier.OPEN
 import com.lemon.konsist.core.const.KoModifier.PRIVATE
+import com.lemon.konsist.core.const.KoModifier.PROTECTED
 import com.lemon.konsist.core.const.KoModifier.PUBLIC
 import com.lemon.konsist.testdata.NonExistingAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation
@@ -215,6 +217,40 @@ class KoDeclarationForClassTest {
         // then
         sut.run {
             hasModifiers(PUBLIC) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-has-two-modifiers`() {
+        // given
+        val sut = getSut("class-has-two-modifiers")
+            .classes()
+            .first()
+
+        // then
+        sut.run {
+            hasModifiers(PRIVATE) shouldBeEqualTo true
+            hasModifiers(OPEN) shouldBeEqualTo true
+            hasModifiers(PROTECTED) shouldBeEqualTo false
+            hasModifiers(PRIVATE, OPEN) shouldBeEqualTo true
+            hasModifiers(OPEN, PRIVATE) shouldBeEqualTo true
+            hasModifiers(PROTECTED, OPEN) shouldBeEqualTo false
+            hasModifiers(PROTECTED, OPEN, PRIVATE) shouldBeEqualTo false
+            hasModifiers() shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `class-has-no-modifier`() {
+        // given
+        val sut = getSut("class-has-no-modifier")
+            .classes()
+            .first()
+
+        // then
+        sut.run {
+            hasModifiers() shouldBeEqualTo true
             hasModifiers(PRIVATE) shouldBeEqualTo false
         }
     }
