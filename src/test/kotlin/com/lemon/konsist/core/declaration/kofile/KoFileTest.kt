@@ -13,7 +13,7 @@ class KoFileTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             name shouldBeEqualTo "file-name.kt"
         }
     }
@@ -26,7 +26,7 @@ class KoFileTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             path.endsWith("/konsist/src/test/kotlin/com/lemon/konsist/core/declaration/kofile/snippet/file-path.kt") shouldBeEqualTo true
         }
     }
@@ -90,7 +90,7 @@ class KoFileTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             containsClass("SampleClass") shouldBeEqualTo true
             containsClass("OtherClass") shouldBeEqualTo false
         }
@@ -104,7 +104,7 @@ class KoFileTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             containsProperty("sampleProperty") shouldBeEqualTo true
             containsProperty("otherProperty") shouldBeEqualTo false
         }
@@ -118,7 +118,7 @@ class KoFileTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             containsFunction("sampleFunction") shouldBeEqualTo true
             containsFunction("otherFunction") shouldBeEqualTo false
         }
@@ -132,7 +132,7 @@ class KoFileTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             containsObject("SampleObject") shouldBeEqualTo true
             containsObject("OtherObject") shouldBeEqualTo false
         }
@@ -146,7 +146,7 @@ class KoFileTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             containsInterface("SampleInterface") shouldBeEqualTo true
             containsInterface("OtherInterface") shouldBeEqualTo false
         }

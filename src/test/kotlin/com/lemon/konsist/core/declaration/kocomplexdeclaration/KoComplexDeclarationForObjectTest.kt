@@ -222,7 +222,7 @@ class KoComplexDeclarationForObjectTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             representsType(SampleObject::class) shouldBeEqualTo true
             representsType(SampleType::class) shouldBeEqualTo false
         }

@@ -125,7 +125,7 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation")
             hasAnnotation(SampleAnnotation::class) shouldBeEqualTo true
             hasAnnotation(SampleAnnotation1::class) shouldBeEqualTo false
@@ -142,7 +142,7 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             annotations.isEmpty() shouldBeEqualTo true
             hasAnnotation(SampleAnnotation::class) shouldBeEqualTo false
         }

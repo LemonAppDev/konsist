@@ -13,7 +13,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             isVal shouldBeEqualTo true
             isVar shouldBeEqualTo false
         }
@@ -27,7 +27,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             isVal shouldBeEqualTo false
             isVar shouldBeEqualTo true
         }
@@ -107,7 +107,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             isLateinit shouldBeEqualTo false
             isOverride shouldBeEqualTo false
             isAbstract shouldBeEqualTo false
@@ -147,11 +147,11 @@ class KoPropertyTest {
             .first()
 
         // then
-        with(sut.explicitType) {
-            this?.name shouldBeEqualTo "SampleType"
-            this?.aliasName shouldBeEqualTo null
-            this?.isTypeAlias shouldBeEqualTo false
-            this?.fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+        sut.explicitType?.run {
+            name shouldBeEqualTo "SampleType"
+            aliasName shouldBeEqualTo null
+            isTypeAlias shouldBeEqualTo false
+            fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
 
@@ -163,11 +163,11 @@ class KoPropertyTest {
             .first()
 
         // then
-        with(sut.explicitType) {
-            this?.name shouldBeEqualTo "SampleType"
-            this?.aliasName shouldBeEqualTo "AliasType"
-            this?.isTypeAlias shouldBeEqualTo true
-            this?.fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+        sut.explicitType?.run {
+            name shouldBeEqualTo "SampleType"
+            aliasName shouldBeEqualTo "AliasType"
+            isTypeAlias shouldBeEqualTo true
+            fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
 
@@ -179,11 +179,11 @@ class KoPropertyTest {
             .first()
 
         // then
-        with(sut.explicitType) {
-            this?.name shouldBeEqualTo null
-            this?.aliasName shouldBeEqualTo null
-            this?.isTypeAlias shouldBeEqualTo null
-            this?.fullyQualifiedName shouldBeEqualTo null
+        sut.explicitType?.run {
+            name shouldBeEqualTo null
+            aliasName shouldBeEqualTo null
+            isTypeAlias shouldBeEqualTo null
+            fullyQualifiedName shouldBeEqualTo null
         }
     }
 

@@ -225,7 +225,7 @@ class KoComplexDeclarationForInterfaceTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             representsType(SampleInterface::class) shouldBeEqualTo true
             representsType(SampleType::class) shouldBeEqualTo false
         }

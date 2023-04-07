@@ -124,7 +124,7 @@ class KoClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             primaryConstructor?.name shouldBeEqualTo "SampleClass"
             hasExplicitPrimaryConstructor shouldBeEqualTo true
         }
@@ -138,7 +138,7 @@ class KoClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             primaryConstructor?.name shouldBeEqualTo null
             hasExplicitPrimaryConstructor shouldBeEqualTo false
         }
@@ -152,7 +152,7 @@ class KoClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             secondaryConstructors.first().name shouldBeEqualTo "SampleClass"
             hasSecondaryConstructors shouldBeEqualTo true
         }
@@ -166,7 +166,7 @@ class KoClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             secondaryConstructors.isEmpty()
             hasSecondaryConstructors shouldBeEqualTo false
         }
@@ -180,7 +180,7 @@ class KoClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             primaryConstructor?.name shouldBeEqualTo "SampleClass"
             secondaryConstructors shouldHaveSize 1
             allConstructors shouldHaveSize 2
@@ -195,7 +195,7 @@ class KoClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             parents shouldBeEqualTo listOf("SampleParentClass", "SampleParentInterface")
             parentClass shouldBeEqualTo "SampleParentClass"
             parentInterfaces shouldBeEqualTo listOf("SampleParentInterface")
@@ -210,7 +210,7 @@ class KoClassTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             parents shouldBeEqualTo listOf()
             parentClass shouldBeEqualTo null
             parentInterfaces shouldBeEqualTo listOf()

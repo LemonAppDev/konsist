@@ -15,7 +15,7 @@ class KoCompanionObjectTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             name shouldBeEqualTo "SampleCompanionObject"
             hasExplicitName() shouldBeEqualTo true
         }
@@ -31,7 +31,7 @@ class KoCompanionObjectTest {
             .first()
 
         // then
-        with(sut) {
+        sut.run {
             name shouldBeEqualTo "Companion"
             hasExplicitName() shouldBeEqualTo false
         }
