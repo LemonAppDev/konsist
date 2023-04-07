@@ -138,6 +138,28 @@ class KoFunctionTest {
     }
 
     @Test
+    fun `function-is-extension`() {
+        // given
+        val sut = getSut("function-is-extension")
+            .functions()
+            .first()
+
+        // then
+        sut.isExtension shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-is-not-extension`() {
+        // given
+        val sut = getSut("function-is-not-extension")
+            .functions()
+            .first()
+
+        // then
+        sut.isExtension shouldBeEqualTo false
+    }
+
+    @Test
     fun `function-return-type`() {
         // given
         val sut = getSut("function-return-type")

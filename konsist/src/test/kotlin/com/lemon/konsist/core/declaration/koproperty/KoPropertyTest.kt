@@ -118,6 +118,28 @@ class KoPropertyTest {
     }
 
     @Test
+    fun `property-is-extension`() {
+        // given
+        val sut = getSut("property-is-extension")
+            .properties()
+            .first()
+
+        // then
+        sut.isExtension shouldBeEqualTo true
+    }
+
+    @Test
+    fun `property-is-not-extension`() {
+        // given
+        val sut = getSut("property-is-not-extension")
+            .properties()
+            .first()
+
+        // then
+        sut.isExtension shouldBeEqualTo false
+    }
+
+    @Test
     fun `property-has-simple-type`() {
         // given
         val sut = getSut("property-has-simple-type")

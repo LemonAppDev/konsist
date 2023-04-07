@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtModifierList
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 class KoProperty private constructor(private val ktProperty: KtProperty) : KoDeclaration(ktProperty) {
@@ -20,6 +21,8 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
     val isOpen by lazy { ktProperty.modifierList?.hasModifier(KtTokens.OPEN_KEYWORD) ?: false }
 
     val isFinal by lazy { ktProperty.modifierList?.hasModifier(KtTokens.FINAL_KEYWORD) ?: false }
+
+    val isExtension by lazy { ktProperty.isExtensionDeclaration() }
 
     val isConst by lazy {
         ktProperty
