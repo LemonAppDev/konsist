@@ -22,6 +22,22 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
 
     val isInline by lazy { ktFunction.modifierList?.hasModifier(KtTokens.INLINE_KEYWORD) ?: false }
 
+    val isTailrec by lazy { ktFunction.modifierList?.hasModifier(KtTokens.TAILREC_KEYWORD) ?: false }
+
+    val isInfix by lazy { ktFunction.modifierList?.hasModifier(KtTokens.INFIX_KEYWORD) ?: false }
+
+    val isExternal by lazy { ktFunction.modifierList?.hasModifier(KtTokens.EXTERNAL_KEYWORD) ?: false }
+
+    val isSuspend by lazy { ktFunction.modifierList?.hasModifier(KtTokens.SUSPEND_KEYWORD) ?: false }
+
+    val isOpen by lazy { ktFunction.modifierList?.hasModifier(KtTokens.OPEN_KEYWORD) ?: false }
+
+    val isOverride by lazy { ktFunction.modifierList?.hasModifier(KtTokens.OVERRIDE_KEYWORD) ?: false }
+
+    val isFinal by lazy { ktFunction.modifierList?.hasModifier(KtTokens.FINAL_KEYWORD) ?: false }
+
+    val isAbstract by lazy { ktFunction.modifierList?.hasModifier(KtTokens.ABSTRACT_KEYWORD) ?: false }
+
     private val localDeclarations by lazy {
         val psiChildren = ktFunction
             .bodyBlockExpression

@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 class KoParameter private constructor(private val ktParameter: KtParameter) : KoDeclaration(ktParameter) {
-    val explicitType by lazy {
+    val type by lazy {
         val type = ktParameter
             .children
             .firstIsInstance<KtTypeReference>()

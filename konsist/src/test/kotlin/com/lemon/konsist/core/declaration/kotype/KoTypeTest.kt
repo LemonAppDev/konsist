@@ -15,7 +15,7 @@ class KoTypeTest {
             .primaryConstructor
             ?.parameters
             ?.first()
-            ?.explicitType
+            ?.type
 
         // then
         with(sut) {
@@ -35,7 +35,7 @@ class KoTypeTest {
             .primaryConstructor
             ?.parameters
             ?.first()
-            ?.explicitType
+            ?.type
 
         // then
         with(sut) {

@@ -1,0 +1,5 @@
+package com.lemon.konsist.core.declaration.kofunction.snippet
+
+abstract class SampleClass {
+    abstract fun sampleFunction()
+}

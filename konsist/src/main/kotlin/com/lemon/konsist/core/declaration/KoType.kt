@@ -27,12 +27,10 @@ class KoType private constructor(private val ktTypeReference: KtTypeReference) :
     }
 
     val fullyQualifiedName by lazy {
-        name.let {
-            file
-                .imports
-                .map { it.name }
-                .first { it.contains(name) }
-        }
+        file
+            .imports
+            .map { it.name }
+            .first { it.contains(name) }
     }
 
     val isTypeAlias by lazy { aliasName != null }

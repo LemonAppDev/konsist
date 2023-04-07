@@ -17,17 +17,6 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-has-no-operator-modifier`() {
-        // given
-        val sut = getSut("function-has-no-operator-modifier")
-            .functions()
-            .first()
-
-        // then
-        sut.isOperator shouldBeEqualTo false
-    }
-
-    @Test
     fun `function-has-inline-modifier`() {
         // given
         val sut = getSut("function-has-inline-modifier")
@@ -39,14 +28,113 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-has-no-inline-modifier`() {
+    fun `function-has-tailrec-modifier`() {
         // given
-        val sut = getSut("function-has-no-inline-modifier")
+        val sut = getSut("function-has-tailrec-modifier")
             .functions()
             .first()
 
         // then
-        sut.isInline shouldBeEqualTo false
+        sut.isTailrec shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-has-infix-modifier`() {
+        // given
+        val sut = getSut("function-has-infix-modifier")
+            .functions()
+            .first()
+
+        // then
+        sut.isInfix shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-has-external-modifier`() {
+        // given
+        val sut = getSut("function-has-external-modifier")
+            .functions()
+            .first()
+
+        // then
+        sut.isExternal shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-has-suspend-modifier`() {
+        // given
+        val sut = getSut("function-has-suspend-modifier")
+            .functions()
+            .first()
+
+        // then
+        sut.isSuspend shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-has-open-modifier`() {
+        // given
+        val sut = getSut("function-has-open-modifier")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.isOpen shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-has-override-modifier`() {
+        // given
+        val sut = getSut("function-has-override-modifier")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.isOverride shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-has-final-modifier`() {
+        // given
+        val sut = getSut("function-has-final-modifier")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.isFinal shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-has-abstract-modifier`() {
+        // given
+        val sut = getSut("function-has-abstract-modifier")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.isAbstract shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-has-no-modifiers`() {
+        // given
+        val sut = getSut("function-has-no-modifiers")
+            .functions()
+            .first()
+
+        // then
+        with(sut) {
+            isOperator shouldBeEqualTo false
+            isInline shouldBeEqualTo false
+            isTailrec shouldBeEqualTo false
+            isInfix shouldBeEqualTo false
+            isExternal shouldBeEqualTo false
+            isSuspend shouldBeEqualTo false
+            isOpen shouldBeEqualTo false
+            isOverride shouldBeEqualTo false
+            isFinal shouldBeEqualTo false
+            isAbstract shouldBeEqualTo false
+        }
     }
 
     @Test
