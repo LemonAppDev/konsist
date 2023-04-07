@@ -28,5 +28,5 @@ class KoScopeForImportTest {
             .isEmpty()
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koscope/snippet/forimport/$fileName.kttxt")
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koscope/snippet/forimport/", fileName)
 }

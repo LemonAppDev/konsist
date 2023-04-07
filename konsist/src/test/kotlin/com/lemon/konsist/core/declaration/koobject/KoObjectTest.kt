@@ -29,5 +29,5 @@ class KoObjectTest {
         sut.isData shouldBeEqualTo true
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("koobject/snippet/$fileName.kttxt")
+    private fun getSut(fileName: String) = getSnippetKoScope("koobject/snippet/", fileName)
 }

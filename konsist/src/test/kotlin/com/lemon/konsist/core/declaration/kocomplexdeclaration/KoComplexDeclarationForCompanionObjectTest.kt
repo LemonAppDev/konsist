@@ -266,6 +266,6 @@ class KoComplexDeclarationForCompanionObjectTest {
         }
     }
 
-    private fun getSut(name: String) =
-        TestSnippetProvider.getSnippetKoScope("kocomplexdeclaration/snippet/forcompanionobject/$name.kttxt")
+    private fun getSut(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("kocomplexdeclaration/snippet/forcompanionobject/", fileName)
 }

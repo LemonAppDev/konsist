@@ -50,5 +50,5 @@ class KoScopeForFunctionTest {
             .map { it.name } shouldBeEqualTo listOf("sampleFunction1", "sampleFunction2")
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koscope/snippet/forfunction/$fileName.kttxt")
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koscope/snippet/forfunction/", fileName)
 }

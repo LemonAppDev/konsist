@@ -73,5 +73,5 @@ class KoBaseDeclarationTest {
         sut.toString() shouldBeEqualTo sut.textWithLocation
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("kobasedeclaration/snippet/$fileName.kttxt")
+    private fun getSut(fileName: String) = getSnippetKoScope("kobasedeclaration/snippet/", fileName)
 }
