@@ -1,4 +1,4 @@
-inline fun sampleFunction() {
+fun sampleFunction() {
     fun sampleLocalFunction() {
     }
 }

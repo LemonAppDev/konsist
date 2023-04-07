@@ -34,6 +34,21 @@ class ParametrizedDeclarationForSecondaryConstructorTest {
         }
     }
 
+    @Test
+    fun `secondary-constructor-has-parameter`() {
+        // given
+        val sut = getSut("secondary-constructor-has-parameter")
+            .classes()
+            .flatMap { it.secondaryConstructors }
+            .first()
+
+        // then
+        with(sut) {
+            hasParameterNamed("sampleParameter") shouldBeEqualTo true
+            hasParameterNamed("otherParameter") shouldBeEqualTo false
+        }
+    }
+
     private fun getSut(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("koparametrizeddeclaration/snippet/forsecondaryconstructor/$fileName.kttxt")
 }

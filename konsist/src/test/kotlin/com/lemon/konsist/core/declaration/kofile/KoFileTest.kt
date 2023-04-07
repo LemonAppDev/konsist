@@ -32,22 +32,22 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-with-import`() {
+    fun `file-contains-import`() {
         // given
-        val sut = getSut("file-with-import")
+        val sut = getSut("file-contains-import")
             .files()
             .first()
 
         // then
         sut
             .imports
-            .map { it.name } shouldBeEqualTo listOf("com.sampleimport")
+            .map { it.name } shouldBeEqualTo listOf("com.lemon.konsist.testdata.SampleType")
     }
 
     @Test
-    fun `file-without-import`() {
+    fun `file-contains-no-import`() {
         // given
-        val sut = getSut("file-without-import")
+        val sut = getSut("file-contains-no-import")
             .files()
             .first()
 
@@ -58,9 +58,9 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-with-package`() {
+    fun `file-contains-package`() {
         // given
-        val sut = getSut("file-with-package")
+        val sut = getSut("file-contains-package")
             .files()
             .first()
 
@@ -69,9 +69,9 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-without-package`() {
+    fun `file-contains-no-package`() {
         // given
-        val sut = getSut("file-without-package")
+        val sut = getSut("file-contains-no-package")
             .files()
             .first()
 
@@ -80,9 +80,9 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-with-package-and-class`() {
+    fun `file-contains-package-and-class`() {
         // given
-        val sut = getSut("file-with-package-and-class")
+        val sut = getSut("file-contains-package-and-class")
             .files()
             .first()
 
@@ -94,9 +94,9 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-with-package-and-property`() {
+    fun `file-contains-package-and-property`() {
         // given
-        val sut = getSut("file-with-package-and-property")
+        val sut = getSut("file-contains-package-and-property")
             .files()
             .first()
 
@@ -108,9 +108,9 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-with-package-and-function`() {
+    fun `file-contains-package-and-function`() {
         // given
-        val sut = getSut("file-with-package-and-function")
+        val sut = getSut("file-contains-package-and-function")
             .files()
             .first()
 
@@ -122,9 +122,9 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-with-package-and-object`() {
+    fun `file-contains-package-and-object`() {
         // given
-        val sut = getSut("file-with-package-and-object")
+        val sut = getSut("file-contains-package-and-object")
             .files()
             .first()
 
@@ -136,9 +136,9 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-with-package-and-interface`() {
+    fun `file-contains-package-and-interface`() {
         // given
-        val sut = getSut("file-with-package-and-interface")
+        val sut = getSut("file-contains-package-and-interface")
             .files()
             .first()
 

@@ -34,9 +34,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-without-annotation`() {
+    fun `object-has-no-annotation`() {
         // given
-        val sut = getSut("object-without-annotation")
+        val sut = getSut("object-has-no-annotation")
             .objects()
             .first()
 
@@ -45,9 +45,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-with-annotation`() {
+    fun `object-has-annotation`() {
         // given
-        val sut = getSut("object-with-annotation")
+        val sut = getSut("object-has-annotation")
             .objects()
             .first()
 
@@ -60,9 +60,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-with-two-annotations`() {
+    fun `object-has-two-annotations`() {
         // given
-        val sut = getSut("object-with-two-annotations")
+        val sut = getSut("object-has-two-annotations")
             .objects()
             .first()
 
@@ -76,9 +76,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-without-visibility-modifier`() {
+    fun `object-has-no-visibility-modifier`() {
         // given
-        val sut = getSut("object-without-visibility-modifier")
+        val sut = getSut("object-has-no-visibility-modifier")
             .objects()
             .first()
 
@@ -92,9 +92,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-with-public-visibility-modifier`() {
+    fun `object-has-public-visibility-modifier`() {
         // given
-        val sut = getSut("object-with-public-visibility-modifier")
+        val sut = getSut("object-has-public-visibility-modifier")
             .objects()
             .first()
 
@@ -108,9 +108,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-with-private-visibility-modifier`() {
+    fun `object-has-private-visibility-modifier`() {
         // given
-        val sut = getSut("object-with-private-visibility-modifier")
+        val sut = getSut("object-has-private-visibility-modifier")
             .objects()
             .first()
 
@@ -124,9 +124,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-with-protected-visibility-modifier`() {
+    fun `object-has-protected-visibility-modifier`() {
         // given
-        val sut = getSut("object-with-protected-visibility-modifier")
+        val sut = getSut("object-has-protected-visibility-modifier")
             .objects()
             .first()
 
@@ -140,9 +140,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-with-internal-visibility-modifier`() {
+    fun `object-has-internal-visibility-modifier`() {
         // given
-        val sut = getSut("object-with-internal-visibility-modifier")
+        val sut = getSut("object-has-internal-visibility-modifier")
             .objects()
             .first()
 
@@ -156,9 +156,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-with-fully-qualified-name`() {
+    fun `object-has-fully-qualified-name`() {
         // given
-        val sut = getSut("object-with-fully-qualified-name")
+        val sut = getSut("object-has-fully-qualified-name")
             .objects()
             .first()
 
@@ -167,9 +167,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-with-package`() {
+    fun `object-is-in-package`() {
         // given
-        val sut = getSut("object-with-package")
+        val sut = getSut("object-is-in-package")
             .objects()
             .first()
 
@@ -178,9 +178,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-without-package`() {
+    fun `object-is-not-in-package`() {
         // given
-        val sut = getSut("object-without-package")
+        val sut = getSut("object-is-not-in-package")
             .objects()
             .first()
 
@@ -189,9 +189,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-with-protected-modifier`() {
+    fun `object-has-protected-modifier`() {
         // given
-        val sut = getSut("object-with-protected-modifier")
+        val sut = getSut("object-has-protected-modifier")
             .objects()
             .first()
 
@@ -200,9 +200,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-with-public-modifier`() {
+    fun `object-has-public-modifier`() {
         // given
-        val sut = getSut("object-with-public-modifier")
+        val sut = getSut("object-has-public-modifier")
             .objects()
             .first()
 

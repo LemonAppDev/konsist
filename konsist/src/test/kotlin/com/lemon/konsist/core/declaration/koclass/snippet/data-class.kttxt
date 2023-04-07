@@ -1,2 +1,2 @@
-data class SampleClass {
+data class SampleClass(val sampleParameter: Int) {
 }

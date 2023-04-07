@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 
 class KoPackageTest {
     @Test
-    fun `package-name`() {
+    fun `package-has-name`() {
         // given
-        val sut = getSut("package-name")
+        val sut = getSut("package-has-name")
             .packages()
             .first()
 
@@ -17,9 +17,9 @@ class KoPackageTest {
     }
 
     @Test
-    fun `package-without-name`() {
+    fun `package-has-no-name`() {
         // given
-        val sut = getSut("package-without-name")
+        val sut = getSut("package-has-no-name")
             .packages()
             .first()
 
@@ -28,9 +28,9 @@ class KoPackageTest {
     }
 
     @Test
-    fun `package-with-name`() {
+    fun `package-has-fully-qualified-name`() {
         // given
-        val sut = getSut("package-with-name")
+        val sut = getSut("package-has-fully-qualified-name")
             .packages()
             .first()
 
@@ -39,9 +39,9 @@ class KoPackageTest {
     }
 
     @Test
-    fun `package-without-fully-qualified-name`() {
+    fun `package-has-no-fully-qualified-name`() {
         // given
-        val sut = getSut("package-without-fully-qualified-name")
+        val sut = getSut("package-has-no-fully-qualified-name")
             .packages()
             .first()
 

@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 class KoScopeForFunctionTest {
 
     @Test
-    fun `file-with-one-function`() {
+    fun `file-contains-one-function`() {
         // given
-        val sut = getSut("file-with-one-function")
+        val sut = getSut("file-contains-one-function")
 
         // then
         sut
@@ -18,9 +18,9 @@ class KoScopeForFunctionTest {
     }
 
     @Test
-    fun `file-without-function`() {
+    fun `file-contains-no-function`() {
         // given
-        val sut = getSut("file-without-function")
+        val sut = getSut("file-contains-no-function")
 
         // then
         sut
@@ -29,9 +29,9 @@ class KoScopeForFunctionTest {
     }
 
     @Test
-    fun `file-with-two-functions-with-nested-function includeNested true`() {
+    fun `file-contains-two-functions-with-nested-function includeNested true`() {
         // given
-        val sut = getSut("file-with-two-functions-with-nested-function")
+        val sut = getSut("file-contains-two-functions-with-nested-function")
 
         // then
         sut
@@ -40,9 +40,9 @@ class KoScopeForFunctionTest {
     }
 
     @Test
-    fun `file-with-two-functions-with-nested-function includeNested false`() {
+    fun `file-contains-two-functions-with-nested-function includeNested false`() {
         // given
-        val sut = getSut("file-with-two-functions-with-nested-function")
+        val sut = getSut("file-contains-two-functions-with-nested-function")
 
         // then
         sut

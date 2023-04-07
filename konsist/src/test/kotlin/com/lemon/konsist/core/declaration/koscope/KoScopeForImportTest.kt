@@ -7,20 +7,20 @@ import org.junit.jupiter.api.Test
 class KoScopeForImportTest {
 
     @Test
-    fun `file-with-import`() {
+    fun `file-contains-import`() {
         // given
-        val sut = getSut("file-with-import")
+        val sut = getSut("file-contains-import")
 
         // then
         sut
             .imports()
-            .map { it.name } shouldBeEqualTo listOf("com.sampleimport")
+            .map { it.name } shouldBeEqualTo listOf("com.lemon.konsist.testdata.SampleType")
     }
 
     @Test
-    fun `file-without-import`() {
+    fun `file-contains-no-import`() {
         // given
-        val sut = getSut("file-without-import")
+        val sut = getSut("file-contains-no-import")
 
         // then
         sut

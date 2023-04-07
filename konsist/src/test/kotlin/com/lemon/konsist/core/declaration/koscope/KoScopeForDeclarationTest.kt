@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 class KoScopeForDeclarationTest {
 
     @Test
-    fun `file-with-class-function-object-interface-property`() {
+    fun `file-contains-class-function-object-interface-property`() {
         // given
-        val sut = getSut("file-with-class-function-object-interface-property")
+        val sut = getSut("file-contains-class-function-object-interface-property")
 
         // then
         sut
@@ -18,9 +18,9 @@ class KoScopeForDeclarationTest {
     }
 
     @Test
-    fun `file-with-one-class-containing-function`() {
+    fun `file-contains-one-class-containing-function`() {
         // given
-        val sut = getSut("file-with-one-class-containing-function")
+        val sut = getSut("file-contains-one-class-containing-function")
 
         // then
         sut
@@ -29,9 +29,9 @@ class KoScopeForDeclarationTest {
     }
 
     @Test
-    fun `file-with-one-class-containing-function-and-property includeNested true`() {
+    fun `file-contains-one-class-containing-function-and-property includeNested true`() {
         // given
-        val sut = getSut("file-with-one-class-containing-function-and-property")
+        val sut = getSut("file-contains-one-class-containing-function-and-property")
 
         // then
         sut
@@ -40,9 +40,9 @@ class KoScopeForDeclarationTest {
     }
 
     @Test
-    fun `file-with-one-class-containing-function-and-property includeNested false`() {
+    fun `file-contains-one-class-containing-function-and-property includeNested false`() {
         // given
-        val sut = getSut("file-with-one-class-containing-function-and-property")
+        val sut = getSut("file-contains-one-class-containing-function-and-property")
 
         // then
         sut

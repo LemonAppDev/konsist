@@ -1,0 +1,4 @@
+class SampleClass {
+    public fun sampleFunction() {
+    }
+}

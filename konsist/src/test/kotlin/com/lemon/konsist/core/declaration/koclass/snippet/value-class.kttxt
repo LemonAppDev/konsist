@@ -1,2 +1,2 @@
-value class SampleClass {
-}
+@JvmInline
+value class SampleClass(val sampleParameter: Int)

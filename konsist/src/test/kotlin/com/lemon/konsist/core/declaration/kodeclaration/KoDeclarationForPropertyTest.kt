@@ -34,9 +34,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-without-annotation`() {
+    fun `property-has-no-annotation`() {
         // given
-        val sut = getSut("property-without-annotation")
+        val sut = getSut("property-has-no-annotation")
             .properties()
             .first()
 
@@ -45,9 +45,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-with-annotation`() {
+    fun `property-has-annotation`() {
         // given
-        val sut = getSut("property-with-annotation")
+        val sut = getSut("property-has-annotation")
             .properties()
             .first()
 
@@ -60,9 +60,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-with-two-annotations`() {
+    fun `property-has-two-annotations`() {
         // given
-        val sut = getSut("property-with-two-annotations")
+        val sut = getSut("property-has-two-annotations")
             .properties()
             .first()
 
@@ -76,9 +76,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-without-visibility-modifier`() {
+    fun `property-has-no-visibility-modifier`() {
         // given
-        val sut = getSut("property-without-visibility-modifier")
+        val sut = getSut("property-has-no-visibility-modifier")
             .properties()
             .first()
 
@@ -92,9 +92,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-with-public-visibility-modifier`() {
+    fun `property-has-public-visibility-modifier`() {
         // given
-        val sut = getSut("property-with-public-visibility-modifier")
+        val sut = getSut("property-has-public-visibility-modifier")
             .properties()
             .first()
 
@@ -108,9 +108,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-with-private-visibility-modifier`() {
+    fun `property-has-private-visibility-modifier`() {
         // given
-        val sut = getSut("property-with-private-visibility-modifier")
+        val sut = getSut("property-has-private-visibility-modifier")
             .properties()
             .first()
 
@@ -124,9 +124,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-with-protected-visibility-modifier`() {
+    fun `property-has-protected-visibility-modifier`() {
         // given
-        val sut = getSut("property-with-protected-visibility-modifier")
+        val sut = getSut("property-has-protected-visibility-modifier")
             .properties()
             .first()
 
@@ -140,9 +140,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-with-internal-visibility-modifier`() {
+    fun `property-has-internal-visibility-modifier`() {
         // given
-        val sut = getSut("property-with-internal-visibility-modifier")
+        val sut = getSut("property-has-internal-visibility-modifier")
             .properties()
             .first()
 
@@ -156,9 +156,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-with-fully-qualified-name`() {
+    fun `property-has-fully-qualified-name`() {
         // given
-        val sut = getSut("property-with-fully-qualified-name")
+        val sut = getSut("property-has-fully-qualified-name")
             .properties()
             .first()
 
@@ -167,9 +167,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-with-package`() {
+    fun `property-is-in-package`() {
         // given
-        val sut = getSut("property-with-package")
+        val sut = getSut("property-is-in-package")
             .properties()
             .first()
 
@@ -178,9 +178,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-without-package`() {
+    fun `property-is-not-in-package`() {
         // given
-        val sut = getSut("property-without-package")
+        val sut = getSut("property-is-not-in-package")
             .properties()
             .first()
 
@@ -189,9 +189,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-with-protected-modifier`() {
+    fun `property-has-protected-modifier`() {
         // given
-        val sut = getSut("property-with-protected-modifier")
+        val sut = getSut("property-has-protected-modifier")
             .properties()
             .first()
 
@@ -200,9 +200,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-with-public-modifier`() {
+    fun `property-has-public-modifier`() {
         // given
-        val sut = getSut("property-with-public-modifier")
+        val sut = getSut("property-has-public-modifier")
             .properties()
             .first()
 

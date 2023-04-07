@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 class KoScopeForPropertyTest {
 
     @Test
-    fun `file-with-one-property`() {
+    fun `file-contains-one-property`() {
         // given
-        val sut = getSut("file-with-one-property")
+        val sut = getSut("file-contains-one-property")
 
         // then
         sut
@@ -18,9 +18,9 @@ class KoScopeForPropertyTest {
     }
 
     @Test
-    fun `file-without-property`() {
+    fun `file-contains-no-property`() {
         // given
-        val sut = getSut("file-without-property")
+        val sut = getSut("file-contains-no-property")
 
         // then
         sut
@@ -29,9 +29,9 @@ class KoScopeForPropertyTest {
     }
 
     @Test
-    fun `file-with-one-class-containing-property includeNested true`() {
+    fun `file-contains-one-class-containing-property includeNested true`() {
         // given
-        val sut = getSut("file-with-one-class-containing-property")
+        val sut = getSut("file-contains-one-class-containing-property")
             .properties(includeNested = true)
 
         // then
@@ -40,9 +40,9 @@ class KoScopeForPropertyTest {
     }
 
     @Test
-    fun `file-with-one-class-containing-property includeNested false`() {
+    fun `file-contains-one-class-containing-property includeNested false`() {
         // given
-        val sut = getSut("file-with-one-class-containing-property")
+        val sut = getSut("file-contains-one-class-containing-property")
             .properties(includeNested = false)
         // then
         sut

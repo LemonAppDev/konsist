@@ -21,9 +21,9 @@ class KoImportTest {
     }
 
     @Test
-    fun `import-name-with-alias`() {
+    fun `import-name-has-alias-type`() {
         // given
-        val sut = getSut("import-name-with-alias").imports()
+        val sut = getSut("import-name-has-alias-type").imports()
 
         // then
         with(sut) {

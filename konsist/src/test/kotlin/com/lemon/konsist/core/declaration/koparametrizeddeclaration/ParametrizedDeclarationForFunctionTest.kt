@@ -32,6 +32,20 @@ class ParametrizedDeclarationForFunctionTest {
         }
     }
 
+    @Test
+    fun `function-has-parameter`() {
+        // given
+        val sut = getSut("function-has-parameter")
+            .functions()
+            .first()
+
+        // then
+        with(sut) {
+            hasParameterNamed("sampleProperty") shouldBeEqualTo true
+            hasParameterNamed("otherProperty") shouldBeEqualTo false
+        }
+    }
+
     private fun getSut(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("koparametrizeddeclaration/snippet/forfunction/$fileName.kttxt")
 }

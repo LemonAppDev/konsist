@@ -68,9 +68,9 @@ class KoDeclarationForPrimaryConstructorTest {
     }
 
     @Test
-    fun `primary-constructor-with-annotation`() {
+    fun `primary-constructor-has-annotation`() {
         // given
-        val sut = getSut("primary-constructor-with-annotation")
+        val sut = getSut("primary-constructor-has-annotation")
             .classes()
             .first()
             .primaryConstructor
@@ -84,9 +84,9 @@ class KoDeclarationForPrimaryConstructorTest {
     }
 
     @Test
-    fun `primary-constructor-without-annotation`() {
+    fun `primary-constructor-has-no-annotation`() {
         // given
-        val sut = getSut("primary-constructor-without-annotation")
+        val sut = getSut("primary-constructor-has-no-annotation")
             .classes()
             .first()
             .primaryConstructor

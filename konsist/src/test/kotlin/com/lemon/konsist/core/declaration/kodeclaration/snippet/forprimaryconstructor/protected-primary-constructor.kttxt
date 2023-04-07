@@ -1,2 +1,2 @@
-class SampleClass protected constructor () {
+open class SampleClass protected constructor() {
 }
