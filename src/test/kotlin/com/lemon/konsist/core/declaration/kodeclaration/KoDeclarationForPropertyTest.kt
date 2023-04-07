@@ -84,7 +84,8 @@ class KoDeclarationForPropertyTest {
 
         // then
         with(sut) {
-            isPublic shouldBeEqualTo true
+            isPublicOrDefault shouldBeEqualTo true
+            isPublic shouldBeEqualTo false
             isPrivate shouldBeEqualTo false
             isProtected shouldBeEqualTo false
             isInternal shouldBeEqualTo false
@@ -100,6 +101,7 @@ class KoDeclarationForPropertyTest {
 
         // then
         with(sut) {
+            isPublicOrDefault shouldBeEqualTo true
             isPublic shouldBeEqualTo true
             isPrivate shouldBeEqualTo false
             isProtected shouldBeEqualTo false
@@ -116,6 +118,7 @@ class KoDeclarationForPropertyTest {
 
         // then
         with(sut) {
+            isPublicOrDefault shouldBeEqualTo false
             isPublic shouldBeEqualTo false
             isPrivate shouldBeEqualTo true
             isProtected shouldBeEqualTo false
@@ -132,6 +135,7 @@ class KoDeclarationForPropertyTest {
 
         // then
         with(sut) {
+            isPublicOrDefault shouldBeEqualTo false
             isPublic shouldBeEqualTo false
             isPrivate shouldBeEqualTo false
             isProtected shouldBeEqualTo true
@@ -148,6 +152,7 @@ class KoDeclarationForPropertyTest {
 
         // then
         with(sut) {
+            isPublicOrDefault shouldBeEqualTo false
             isPublic shouldBeEqualTo false
             isPrivate shouldBeEqualTo false
             isProtected shouldBeEqualTo false

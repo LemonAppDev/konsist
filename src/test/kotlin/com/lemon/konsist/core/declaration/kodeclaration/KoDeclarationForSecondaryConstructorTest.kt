@@ -8,6 +8,25 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationForSecondaryConstructorTest {
     @Test
+    fun `secondary-constructor-without-visibility-modifiers`() {
+        // given
+        val sut = getSut("secondary-constructor-without-visibility-modifiers")
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        sut.run {
+            isPublicOrDefault shouldBeEqualTo true
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo false
+            isInternal shouldBeEqualTo false
+            isProtected shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `public-secondary-constructor`() {
         // given
         val sut = getSut("public-secondary-constructor")
@@ -17,7 +36,13 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        sut.isPublic shouldBeEqualTo true
+        sut.run {
+            isPublicOrDefault shouldBeEqualTo true
+            isPublic shouldBeEqualTo true
+            isPrivate shouldBeEqualTo false
+            isInternal shouldBeEqualTo false
+            isProtected shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -30,7 +55,13 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        sut.isPrivate shouldBeEqualTo true
+        sut.run {
+            isPublicOrDefault shouldBeEqualTo false
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo true
+            isInternal shouldBeEqualTo false
+            isProtected shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -43,7 +74,13 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        sut.isProtected shouldBeEqualTo true
+        sut.run {
+            isPublicOrDefault shouldBeEqualTo false
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo false
+            isInternal shouldBeEqualTo false
+            isProtected shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -56,7 +93,13 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        sut.isInternal shouldBeEqualTo true
+        sut.run {
+            isPublicOrDefault shouldBeEqualTo false
+            isPublic shouldBeEqualTo false
+            isPrivate shouldBeEqualTo false
+            isInternal shouldBeEqualTo true
+            isProtected shouldBeEqualTo false
+        }
     }
 
     @Test

@@ -6,6 +6,7 @@ import com.lemon.konsist.ext.isInternal
 import com.lemon.konsist.ext.isPrivate
 import com.lemon.konsist.ext.isProtected
 import com.lemon.konsist.ext.isPublic
+import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
@@ -30,7 +31,9 @@ open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterLi
             .joinToString(separator = ".")
     }
 
-    val isPublic by lazy { ktTypeParameterListOwner.modifierList.isPublic() }
+    val isPublic by lazy { ktTypeParameterListOwner.hasModifier(KtTokens.PUBLIC_KEYWORD) }
+
+    val isPublicOrDefault by lazy { ktTypeParameterListOwner.modifierList.isPublic() }
 
     val isPrivate by lazy { ktTypeParameterListOwner.modifierList.isPrivate() }
 
