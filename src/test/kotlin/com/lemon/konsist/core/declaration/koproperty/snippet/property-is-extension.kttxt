@@ -1,0 +1,4 @@
+import com.lemon.konsist.testdata.SampleType
+
+val SampleType.sampleProperty: Int
+    get() = 6

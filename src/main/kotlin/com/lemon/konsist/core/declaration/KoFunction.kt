@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
+import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 class KoFunction private constructor(private val ktFunction: KtFunction) :
@@ -37,6 +38,8 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
     val isFinal by lazy { ktFunction.modifierList?.hasModifier(KtTokens.FINAL_KEYWORD) ?: false }
 
     val isAbstract by lazy { ktFunction.modifierList?.hasModifier(KtTokens.ABSTRACT_KEYWORD) ?: false }
+
+    val isExtension by lazy { ktFunction.isExtensionDeclaration() }
 
     private val localDeclarations by lazy {
         val psiChildren = ktFunction
