@@ -32,6 +32,12 @@ class KoScope(
     ) =
         koFiles.flatMap { it.objects(modifiers, includeNested) }
 
+    fun companionObjects(
+        modifiers: List<KoModifier> = emptyList(),
+        includeNested: Boolean = false,
+    ) =
+        koFiles.flatMap { it.companionObjects(modifiers, includeNested) }
+
     fun functions(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
