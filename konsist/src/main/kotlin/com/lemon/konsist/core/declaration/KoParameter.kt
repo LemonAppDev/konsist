@@ -47,6 +47,7 @@ class KoParameter private constructor(private val ktParameter: KtParameter) : Ko
 
     companion object {
         private val cache = KoDeclarationCache<KoParameter>()
+
         fun getInstance(ktParameter: KtParameter) =
             cache.getOrCreateInstance(ktParameter) { KoParameter(ktParameter) }
     }

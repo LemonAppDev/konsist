@@ -80,6 +80,7 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
 
     companion object {
         private val cache = KoDeclarationCache<KoClass>()
+
         fun getInstance(ktClass: KtClass) = cache.getOrCreateInstance(ktClass) { KoClass(ktClass) }
     }
 }

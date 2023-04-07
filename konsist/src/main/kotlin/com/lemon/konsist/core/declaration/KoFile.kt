@@ -57,6 +57,7 @@ class KoFile private constructor(private val ktFile: KtFile) :
 
     companion object {
         private val cache = KoDeclarationCache<KoFile>()
+
         fun getInstance(ktFile: KtFile) = cache.getOrCreateInstance(ktFile) { KoFile(ktFile) }
     }
 }

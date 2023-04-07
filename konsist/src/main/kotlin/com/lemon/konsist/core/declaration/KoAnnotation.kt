@@ -11,6 +11,7 @@ open class KoAnnotation private constructor(
 
     companion object {
         private val cache = KoDeclarationCache<KoAnnotation>()
+
         fun getInstance(ktObjectDeclaration: KtAnnotationEntry) =
             cache.getOrCreateInstance(ktObjectDeclaration) { KoAnnotation(ktObjectDeclaration) }
     }

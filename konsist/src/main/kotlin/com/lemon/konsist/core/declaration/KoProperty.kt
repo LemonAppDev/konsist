@@ -39,6 +39,7 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
 
     companion object {
         private val cache = KoDeclarationCache<KoProperty>()
+
         fun getInstance(ktProperty: KtProperty) = cache.getOrCreateInstance(ktProperty) { KoProperty(ktProperty) }
     }
 }
