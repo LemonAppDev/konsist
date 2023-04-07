@@ -16,7 +16,7 @@ class KoParameterTest {
             ?.first()
 
         // then
-        with(sut?.explicitType) {
+        with(sut?.type) {
             this?.name shouldBeEqualTo "SampleType"
             this?.aliasName shouldBeEqualTo null
             this?.isTypeAlias shouldBeEqualTo false
@@ -35,7 +35,7 @@ class KoParameterTest {
             ?.first()
 
         // then
-        with(sut?.explicitType) {
+        with(sut?.type) {
             this?.name shouldBeEqualTo "SampleType"
             this?.aliasName shouldBeEqualTo "AliasType"
             this?.isTypeAlias shouldBeEqualTo true
