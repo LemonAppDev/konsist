@@ -149,5 +149,5 @@ class KoDeclarationForSecondaryConstructorTest {
     }
 
     private fun getSut(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("kodeclaration/snippet/forsecondaryconstructor/$fileName.kttxt")
+        TestSnippetProvider.getSnippetKoScope("kodeclaration/snippet/forsecondaryconstructor/", fileName)
 }

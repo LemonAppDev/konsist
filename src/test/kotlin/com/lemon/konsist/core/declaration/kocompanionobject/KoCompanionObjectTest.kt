@@ -37,6 +37,6 @@ class KoCompanionObjectTest {
         }
     }
 
-    private fun getSut(name: String) =
-        TestSnippetProvider.getSnippetKoScope("kocompanionobject/snippet/$name.kttxt")
+    private fun getSut(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("kocompanionobject/snippet/", fileName)
 }

@@ -33,5 +33,5 @@ class KoImportTest {
         }
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koimport/snippet/$fileName.kttxt")
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koimport/snippet/", fileName)
 }
