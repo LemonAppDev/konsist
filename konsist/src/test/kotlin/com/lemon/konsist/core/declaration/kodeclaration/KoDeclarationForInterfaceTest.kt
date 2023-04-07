@@ -1,7 +1,9 @@
 package com.lemon.konsist.core.declaration.kodeclaration
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemon.konsist.core.const.KoModifier
+import com.lemon.konsist.core.const.KoModifier.ABSTRACT
+import com.lemon.konsist.core.const.KoModifier.PRIVATE
+import com.lemon.konsist.core.const.KoModifier.PUBLIC
 import com.lemon.konsist.testdata.NonExistingAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation1
@@ -210,8 +212,42 @@ class KoDeclarationForInterfaceTest {
 
         // then
         sut.run {
-            hasModifiers(KoModifier.PUBLIC) shouldBeEqualTo true
-            hasModifiers(KoModifier.PRIVATE) shouldBeEqualTo false
+            hasModifiers(PUBLIC) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-has-two-modifiers`() {
+        // given
+        val sut = getSut("interface-has-two-modifiers")
+            .interfaces()
+            .first()
+
+        // then
+        sut.run {
+            hasModifiers(ABSTRACT) shouldBeEqualTo true
+            hasModifiers(PUBLIC) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
+            hasModifiers(ABSTRACT, PUBLIC) shouldBeEqualTo true
+            hasModifiers(PUBLIC, ABSTRACT) shouldBeEqualTo true
+            hasModifiers(PRIVATE, ABSTRACT) shouldBeEqualTo false
+            hasModifiers(ABSTRACT, PUBLIC, PRIVATE) shouldBeEqualTo false
+            hasModifiers() shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `interface-has-no-modifiers`() {
+        // given
+        val sut = getSut("interface-has-no-modifiers")
+            .interfaces()
+            .first()
+
+        // then
+        sut.run {
+            hasModifiers() shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
         }
     }
 

@@ -2,6 +2,9 @@ package com.lemon.konsist.core.declaration.kodeclaration
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemon.konsist.core.const.KoModifier
+import com.lemon.konsist.core.const.KoModifier.OPEN
+import com.lemon.konsist.core.const.KoModifier.PRIVATE
+import com.lemon.konsist.core.const.KoModifier.PROTECTED
 import com.lemon.konsist.testdata.NonExistingAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation1
@@ -214,7 +217,41 @@ class KoDeclarationForPropertyTest {
         // then
         sut.run {
             hasModifiers(KoModifier.PUBLIC) shouldBeEqualTo true
-            hasModifiers(KoModifier.PRIVATE) shouldBeEqualTo false
+            hasModifiers(PRIVATE) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `property-has-two-modifiers`() {
+        // given
+        val sut = getSut("property-has-two-modifiers")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        sut.run {
+            hasModifiers(PROTECTED) shouldBeEqualTo true
+            hasModifiers(OPEN) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
+            hasModifiers(PROTECTED, OPEN) shouldBeEqualTo true
+            hasModifiers(OPEN, PROTECTED) shouldBeEqualTo true
+            hasModifiers(PRIVATE, OPEN) shouldBeEqualTo false
+            hasModifiers(PROTECTED, OPEN, PRIVATE) shouldBeEqualTo false
+            hasModifiers() shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `property-has-no-modifier`() {
+        // given
+        val sut = getSut("property-has-no-modifier")
+            .properties()
+            .first()
+
+        // then
+        sut.run {
+            hasModifiers() shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
         }
     }
 

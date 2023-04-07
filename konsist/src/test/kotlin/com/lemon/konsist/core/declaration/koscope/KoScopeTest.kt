@@ -45,6 +45,7 @@ class KoScopeTest {
         // then
         sut.files().map { it.name } shouldBeEqualTo listOf(
             "KoScopeForClassTest.kt",
+            "KoScopeForCompanionObjectTest.kt",
             "KoScopeForDeclarationTest.kt",
             "KoScopeForFunctionTest.kt",
             "KoScopeForImportTest.kt",
@@ -65,6 +66,7 @@ class KoScopeTest {
         // then
         sut.files().map { it.name } shouldBeEqualTo listOf(
             "KoScopeForClassTest.kt",
+            "KoScopeForCompanionObjectTest.kt",
             "KoScopeForDeclarationTest.kt",
             "KoScopeForFunctionTest.kt",
             "KoScopeForImportTest.kt",
