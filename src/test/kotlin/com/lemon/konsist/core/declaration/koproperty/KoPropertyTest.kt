@@ -51,9 +51,9 @@ class KoPropertyTest {
     }
 
     @Test
-    fun `property-with-type`() {
+    fun `property-has-simple-type`() {
         // given
-        val sut = getSut("property-with-type")
+        val sut = getSut("property-has-simple-type")
             .properties(includeNested = true)
             .first()
 
@@ -67,9 +67,9 @@ class KoPropertyTest {
     }
 
     @Test
-    fun `property-with-alias-type`() {
+    fun `property-has-alias-type`() {
         // given
-        val sut = getSut("property-with-alias-type")
+        val sut = getSut("property-has-alias-type")
             .properties(includeNested = true)
             .first()
 
@@ -83,9 +83,9 @@ class KoPropertyTest {
     }
 
     @Test
-    fun `property-without-type`() {
+    fun `property-has-no-type`() {
         // given
-        val sut = getSut("property-without-type")
+        val sut = getSut("property-has-no-type")
             .properties(includeNested = true)
             .first()
 

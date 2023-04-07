@@ -73,9 +73,9 @@ class KoDeclarationForSecondaryConstructorTest {
     }
 
     @Test
-    fun `secondary-constructor-with-annotation`() {
+    fun `secondary-constructor-has-annotation`() {
         // given
-        val sut = getSut("secondary-constructor-with-annotation")
+        val sut = getSut("secondary-constructor-has-annotation")
             .classes()
             .first()
             .secondaryConstructors
@@ -90,9 +90,9 @@ class KoDeclarationForSecondaryConstructorTest {
     }
 
     @Test
-    fun `secondary-constructor-without-annotation`() {
+    fun `secondary-constructor-has-no-annotation`() {
         // given
-        val sut = getSut("secondary-constructor-without-annotation")
+        val sut = getSut("secondary-constructor-has-no-annotation")
             .classes()
             .first()
             .secondaryConstructors

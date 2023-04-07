@@ -33,9 +33,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-without-annotation`() {
+    fun `interface-has-no-annotation`() {
         // given
-        val sut = getSut("interface-without-annotation")
+        val sut = getSut("interface-has-no-annotation")
             .interfaces()
             .first()
 
@@ -44,9 +44,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-annotation`() {
+    fun `interface-has-annotation`() {
         // given
-        val sut = getSut("interface-with-annotation")
+        val sut = getSut("interface-has-annotation")
             .interfaces()
             .first()
 
@@ -58,9 +58,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-two-annotations`() {
+    fun `interface-has-two-annotations`() {
         // given
-        val sut = getSut("interface-with-two-annotations")
+        val sut = getSut("interface-has-two-annotations")
             .interfaces()
             .first()
 
@@ -73,9 +73,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-without-visibility-modifier`() {
+    fun `interface-has-no-visibility-modifier`() {
         // given
-        val sut = getSut("interface-without-visibility-modifier")
+        val sut = getSut("interface-has-no-visibility-modifier")
             .interfaces()
             .first()
 
@@ -89,9 +89,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-public-visibility-modifier`() {
+    fun `interface-has-public-visibility-modifier`() {
         // given
-        val sut = getSut("interface-with-public-visibility-modifier")
+        val sut = getSut("interface-has-public-visibility-modifier")
             .interfaces()
             .first()
 
@@ -105,9 +105,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-private-visibility-modifier`() {
+    fun `interface-has-private-visibility-modifier`() {
         // given
-        val sut = getSut("interface-with-private-visibility-modifier")
+        val sut = getSut("interface-has-private-visibility-modifier")
             .interfaces()
             .first()
 
@@ -121,9 +121,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-protected-visibility-modifier`() {
+    fun `interface-has-protected-visibility-modifier`() {
         // given
-        val sut = getSut("interface-with-protected-visibility-modifier")
+        val sut = getSut("interface-has-protected-visibility-modifier")
             .interfaces()
             .first()
 
@@ -137,9 +137,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-internal-visibility-modifier`() {
+    fun `interface-has-internal-visibility-modifier`() {
         // given
-        val sut = getSut("interface-with-internal-visibility-modifier")
+        val sut = getSut("interface-has-internal-visibility-modifier")
             .interfaces()
             .first()
 
@@ -153,9 +153,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-fully-qualified-name`() {
+    fun `interface-has-fully-qualified-name`() {
         // given
-        val sut = getSut("interface-with-fully-qualified-name")
+        val sut = getSut("interface-has-fully-qualified-name")
             .interfaces()
             .first()
 
@@ -164,9 +164,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-package`() {
+    fun `interface-is-in-package`() {
         // given
-        val sut = getSut("interface-with-package")
+        val sut = getSut("interface-is-in-package")
             .interfaces()
             .first()
 
@@ -175,9 +175,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-without-package`() {
+    fun `interface-is-not-in-package`() {
         // given
-        val sut = getSut("interface-without-package")
+        val sut = getSut("interface-is-not-in-package")
             .interfaces()
             .first()
 
@@ -186,9 +186,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-protected-modifier`() {
+    fun `interface-has-protected-modifier`() {
         // given
-        val sut = getSut("interface-with-protected-modifier")
+        val sut = getSut("interface-has-protected-modifier")
             .interfaces()
             .first()
 
@@ -197,9 +197,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-with-public-modifier`() {
+    fun `interface-has-public-modifier`() {
         // given
-        val sut = getSut("interface-with-public-modifier")
+        val sut = getSut("interface-has-public-modifier")
             .interfaces()
             .first()
 

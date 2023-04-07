@@ -1,3 +1,0 @@
-class SampleClass(val sampleProperty: SampleType) {
-    constructor(): this(sampleProperty)
-}

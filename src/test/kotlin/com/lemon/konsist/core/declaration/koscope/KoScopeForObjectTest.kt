@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 class KoScopeForObjectTest {
 
     @Test
-    fun `file-with-one-object`() {
+    fun `file-contains-one-object`() {
         // given
-        val sut = getSut("file-with-one-object")
+        val sut = getSut("file-contains-one-object")
 
         // then
         sut
@@ -18,9 +18,9 @@ class KoScopeForObjectTest {
     }
 
     @Test
-    fun `file-without-object`() {
+    fun `file-contains-no-object`() {
         // given
-        val sut = getSut("file-without-object")
+        val sut = getSut("file-contains-no-object")
 
         // then
         sut
@@ -29,9 +29,9 @@ class KoScopeForObjectTest {
     }
 
     @Test
-    fun `file-with-two-objects-with-nested-object includeNested true`() {
+    fun `file-contains-two-objects-with-nested-object includeNested true`() {
         // given
-        val sut = getSut("file-with-two-objects-with-nested-object")
+        val sut = getSut("file-contains-two-objects-with-nested-object")
 
         // then
         sut
@@ -40,9 +40,9 @@ class KoScopeForObjectTest {
     }
 
     @Test
-    fun `file-with-two-objects-with-nested-object includeNested false`() {
+    fun `file-contains-two-objects-with-nested-object includeNested false`() {
         // given
-        val sut = getSut("file-with-two-objects-with-nested-object")
+        val sut = getSut("file-contains-two-objects-with-nested-object")
 
         // then
         sut

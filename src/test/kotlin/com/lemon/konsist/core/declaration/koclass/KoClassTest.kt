@@ -117,9 +117,9 @@ class KoClassTest {
     }
 
     @Test
-    fun `class-with-primary-constructor`() {
+    fun `class-has-primary-constructor`() {
         // given
-        val sut = getSut("class-with-primary-constructor")
+        val sut = getSut("class-has-primary-constructor")
             .classes()
             .first()
 
@@ -131,9 +131,9 @@ class KoClassTest {
     }
 
     @Test
-    fun `class-without-primary-constructor`() {
+    fun `class-has-no-primary-constructor`() {
         // given
-        val sut = getSut("class-without-primary-constructor")
+        val sut = getSut("class-has-no-primary-constructor")
             .classes()
             .first()
 
@@ -145,9 +145,9 @@ class KoClassTest {
     }
 
     @Test
-    fun `class-with-secondary-constructor`() {
+    fun `class-has-secondary-constructor`() {
         // given
-        val sut = getSut("class-with-secondary-constructor")
+        val sut = getSut("class-has-secondary-constructor")
             .classes()
             .first()
 
@@ -159,9 +159,9 @@ class KoClassTest {
     }
 
     @Test
-    fun `class-without-secondary-constructor`() {
+    fun `class-has-no-secondary-constructor`() {
         // given
-        val sut = getSut("class-without-secondary-constructor")
+        val sut = getSut("class-has-no-secondary-constructor")
             .classes()
             .first()
 
@@ -173,9 +173,9 @@ class KoClassTest {
     }
 
     @Test
-    fun `class-with-primary-and-secondary-constructor`() {
+    fun `class-has-primary-and-secondary-constructor`() {
         // given
-        val sut = getSut("class-with-primary-and-secondary-constructor")
+        val sut = getSut("class-has-primary-and-secondary-constructor")
             .classes()
             .first()
 
@@ -188,9 +188,9 @@ class KoClassTest {
     }
 
     @Test
-    fun `class-implements-class-and-interface`() {
+    fun `class-has-class-and-interface`() {
         // given
-        val sut = getSut("class-implements-class-and-interface")
+        val sut = getSut("class-has-class-and-interface")
             .classes()
             .first()
 
@@ -203,9 +203,9 @@ class KoClassTest {
     }
 
     @Test
-    fun `class-implements-nothing`() {
+    fun `class-has-no-interface-and-class`() {
         // given
-        val sut = getSut("class-implements-nothing")
+        val sut = getSut("class-has-no-interface-and-class")
             .classes()
             .first()
 

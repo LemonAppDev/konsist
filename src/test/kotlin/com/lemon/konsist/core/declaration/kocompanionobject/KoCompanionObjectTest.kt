@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 
 class KoCompanionObjectTest {
     @Test
-    fun `companion-object-with-declared-name`() {
+    fun `companion-object-has-declared-name`() {
         // given
-        val sut = getSut("companion-object-with-declared-name")
+        val sut = getSut("companion-object-has-declared-name")
             .classes()
             .first()
             .companionObjects()
@@ -22,9 +22,9 @@ class KoCompanionObjectTest {
     }
 
     @Test
-    fun `companion-object-without-declared-name`() {
+    fun `companion-object-has-no-declared-name`() {
         // given
-        val sut = getSut("companion-object-without-declared-name")
+        val sut = getSut("companion-object-has-no-declared-name")
             .classes()
             .first()
             .companionObjects()

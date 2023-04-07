@@ -1,1 +1,0 @@
-fun sampleFunction1(sampleParameter: Int = sampleFunction2()) {}

@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 class KoTypeTest {
 
     @Test
-    fun `type-with-alias`() {
+    fun `alias-type`() {
         // given
-        val sut = getSut("type-with-alias")
+        val sut = getSut("alias-type")
             .classes()
             .first()
             .primaryConstructor
@@ -27,9 +27,9 @@ class KoTypeTest {
     }
 
     @Test
-    fun `type-without-alias`() {
+    fun `simple-type`() {
         // given
-        val sut = getSut("type-without-alias")
+        val sut = getSut("simple-type")
             .classes()
             .first()
             .primaryConstructor

@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 
 class KoParameterTest {
     @Test
-    fun `class-with-one-parameter-with-type`() {
+    fun `class-has-complex-default-parameter-value`() {
         // given
-        val sut = getSut("class-with-one-parameter-with-type")
+        val sut = getSut("class-has-complex-default-parameter-value")
             .classes()
             .first()
             .primaryConstructor
@@ -25,9 +25,9 @@ class KoParameterTest {
     }
 
     @Test
-    fun `class-with-one-parameter-with-alias-type`() {
+    fun `class-has-one-parameter-with-alias-type`() {
         // given
-        val sut = getSut("class-with-one-parameter-with-alias-type")
+        val sut = getSut("class-has-one-parameter-with-alias-type")
             .classes()
             .first()
             .primaryConstructor
@@ -44,9 +44,9 @@ class KoParameterTest {
     }
 
     @Test
-    fun `class-with-one-name-parameter`() {
+    fun `class-has-primitive-default-parameter-value`() {
         // given
-        val sut = getSut("class-with-one-name-parameter")
+        val sut = getSut("class-has-primitive-default-parameter-value")
             .classes()
             .first()
             .primaryConstructor
@@ -54,27 +54,16 @@ class KoParameterTest {
             ?.first()
 
         // then
-        sut?.name shouldBeEqualTo "sampleParameter"
+        sut?.run {
+            hasDefaultValue shouldBeEqualTo true
+            name shouldBeEqualTo "sampleParameter"
+        }
     }
 
     @Test
-    fun `class-one-parameter-with-default-value`() {
+    fun `class-has-no-parameters`() {
         // given
-        val sut = getSut("class-one-parameter-with-default-value")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-
-        // then
-        sut?.hasDefaultValue shouldBeEqualTo true
-    }
-
-    @Test
-    fun `class-without-parameters`() {
-        // given
-        val sut = getSut("class-without-parameters")
+        val sut = getSut("class-has-no-parameters")
             .classes()
             .first()
 
@@ -83,9 +72,9 @@ class KoParameterTest {
     }
 
     @Test
-    fun `class-with-empty-primary-constructor`() {
+    fun `class-has-empty-primary-constructor`() {
         // given
-        val sut = getSut("class-with-empty-primary-constructor")
+        val sut = getSut("class-has-empty-primary-constructor")
             .classes()
             .first()
             .primaryConstructor
@@ -96,9 +85,9 @@ class KoParameterTest {
     }
 
     @Test
-    fun `function-with-primitive-default-parameter-value`() {
+    fun `function-has-primitive-default-parameter-value`() {
         // given
-        val sut = getSut("function-with-primitive-default-parameter-value")
+        val sut = getSut("function-has-primitive-default-parameter-value")
             .functions()
             .first()
             .parameters
@@ -109,22 +98,22 @@ class KoParameterTest {
     }
 
     @Test
-    fun `function-with-complex-default-parameter-value`() {
+    fun `function-has-complex-default-parameter-value`() {
         // given
-        val sut = getSut("function-with-complex-default-parameter-value")
+        val sut = getSut("function-has-complex-default-parameter-value")
             .functions()
             .first()
             .parameters
             .first()
 
         // then
-        sut.defaultValue shouldBeEqualTo "sampleFunction2()"
+        sut.defaultValue shouldBeEqualTo "SampleType()"
     }
 
     @Test
-    fun `function-with-null-default-parameter-value`() {
+    fun `function-has-null-default-parameter-value`() {
         // given
-        val sut = getSut("function-with-null-default-parameter-value")
+        val sut = getSut("function-has-null-default-parameter-value")
             .functions()
             .first()
             .parameters
@@ -135,9 +124,9 @@ class KoParameterTest {
     }
 
     @Test
-    fun `function-without-default-parameter-value`() {
+    fun `function-has-no-default-parameter-value`() {
         // given
-        val sut = getSut("function-without-default-parameter-value")
+        val sut = getSut("function-has-no-default-parameter-value")
             .functions()
             .first()
             .parameters

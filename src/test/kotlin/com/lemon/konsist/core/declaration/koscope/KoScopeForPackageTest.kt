@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 class KoScopeForPackageTest {
 
     @Test
-    fun `file-with-package`() {
+    fun `file-contains-package`() {
         // given
-        val sut = getSut("file-with-package")
+        val sut = getSut("file-contains-package")
 
         // then
         sut
@@ -18,9 +18,9 @@ class KoScopeForPackageTest {
     }
 
     @Test
-    fun `file-without-package`() {
+    fun `file-contains-no-package`() {
         // given
-        val sut = getSut("file-without-package")
+        val sut = getSut("file-contains-no-package")
 
         // then
         sut

@@ -34,9 +34,9 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-without-annotation`() {
+    fun `function-has-no-annotation`() {
         // given
-        val sut = getSut("function-without-annotation")
+        val sut = getSut("function-has-no-annotation")
             .functions()
             .first()
 
@@ -45,9 +45,9 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-with-annotation`() {
+    fun `function-has-annotation`() {
         // given
-        val sut = getSut("function-with-annotation")
+        val sut = getSut("function-has-annotation")
             .functions()
             .first()
 
@@ -60,9 +60,9 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-with-two-annotations`() {
+    fun `function-has-two-annotations`() {
         // given
-        val sut = getSut("function-with-two-annotations")
+        val sut = getSut("function-has-two-annotations")
             .functions()
             .first()
 
@@ -76,9 +76,9 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-without-visibility-modifier`() {
+    fun `function-has-no-visibility-modifier`() {
         // given
-        val sut = getSut("function-without-visibility-modifier")
+        val sut = getSut("function-has-no-visibility-modifier")
             .functions()
             .first()
 
@@ -92,10 +92,10 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-with-public-visibility-modifier`() {
+    fun `function-has-public-visibility-modifier`() {
         // given
-        val sut = getSut("function-with-public-visibility-modifier")
-            .functions()
+        val sut = getSut("function-has-public-visibility-modifier")
+            .functions(includeNested = true)
             .first()
 
         // then
@@ -108,10 +108,10 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-with-private-visibility-modifier`() {
+    fun `function-has-private-visibility-modifier`() {
         // given
-        val sut = getSut("function-with-private-visibility-modifier")
-            .functions()
+        val sut = getSut("function-has-private-visibility-modifier")
+            .functions(includeNested = true)
             .first()
 
         // then
@@ -124,10 +124,10 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-with-protected-visibility-modifier`() {
+    fun `function-has-protected-visibility-modifier`() {
         // given
-        val sut = getSut("function-with-protected-visibility-modifier")
-            .functions()
+        val sut = getSut("function-has-protected-visibility-modifier")
+            .functions(includeNested = true)
             .first()
 
         // then
@@ -140,10 +140,10 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-with-internal-visibility-modifier`() {
+    fun `function-has-internal-visibility-modifier`() {
         // given
-        val sut = getSut("function-with-internal-visibility-modifier")
-            .functions()
+        val sut = getSut("function-has-internal-visibility-modifier")
+            .functions(includeNested = true)
             .first()
 
         // then
@@ -156,9 +156,9 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-with-fully-qualified-name`() {
+    fun `function-has-fully-qualified-name`() {
         // given
-        val sut = getSut("function-with-fully-qualified-name")
+        val sut = getSut("function-has-fully-qualified-name")
             .functions()
             .first()
 
@@ -167,9 +167,9 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-with-package`() {
+    fun `function-is-in-package`() {
         // given
-        val sut = getSut("function-with-package")
+        val sut = getSut("function-is-in-package")
             .functions()
             .first()
 
@@ -178,9 +178,9 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-without-package`() {
+    fun `function-is-not-in-package`() {
         // given
-        val sut = getSut("function-without-package")
+        val sut = getSut("function-is-not-in-package")
             .functions()
             .first()
 
@@ -189,10 +189,10 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-with-protected-modifier`() {
+    fun `function-has-protected-modifier`() {
         // given
-        val sut = getSut("function-with-protected-modifier")
-            .functions()
+        val sut = getSut("function-has-protected-modifier")
+            .functions(includeNested = true)
             .first()
 
         // then
@@ -200,10 +200,10 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-with-public-modifier`() {
+    fun `function-has-public-modifier`() {
         // given
-        val sut = getSut("function-with-public-modifier")
-            .functions()
+        val sut = getSut("function-has-public-modifier")
+            .functions(includeNested = true)
             .first()
 
         // then

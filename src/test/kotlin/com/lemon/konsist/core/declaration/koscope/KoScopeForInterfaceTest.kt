@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 
 class KoScopeForInterfaceTest {
     @Test
-    fun `file-with-one-interface`() {
+    fun `file-contains-one-interface`() {
         // given
-        val sut = getSut("file-with-one-interface")
+        val sut = getSut("file-contains-one-interface")
 
         // then
         sut
@@ -17,9 +17,9 @@ class KoScopeForInterfaceTest {
     }
 
     @Test
-    fun `file-without-interface`() {
+    fun `file-contains-no-interface`() {
         // given
-        val sut = getSut("file-without-interface")
+        val sut = getSut("file-contains-no-interface")
 
         // then
         sut
@@ -28,9 +28,9 @@ class KoScopeForInterfaceTest {
     }
 
     @Test
-    fun `file-with-two-interfaces-with-nested-interface includeNested true`() {
+    fun `file-contains-two-interfaces-with-nested-interface includeNested true`() {
         // given
-        val sut = getSut("file-with-two-interfaces-with-nested-interface")
+        val sut = getSut("file-contains-two-interfaces-with-nested-interface")
 
         // then
         sut
@@ -39,9 +39,9 @@ class KoScopeForInterfaceTest {
     }
 
     @Test
-    fun `file-with-two-interfaces-with-nested-interface includeNested false`() {
+    fun `file-contains-two-interfaces-with-nested-interface includeNested false`() {
         // given
-        val sut = getSut("file-with-two-interfaces-with-nested-interface")
+        val sut = getSut("file-contains-two-interfaces-with-nested-interface")
 
         // then
         sut

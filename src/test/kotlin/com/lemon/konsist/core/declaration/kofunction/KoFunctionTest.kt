@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 
 class KoFunctionTest {
     @Test
-    fun `function-with-operator-modifier`() {
+    fun `function-has-operator-modifier`() {
         // given
-        val sut = getSut("function-with-operator-modifier")
+        val sut = getSut("function-has-operator-modifier")
             .functions()
             .first()
 
@@ -17,9 +17,9 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-without-operator-modifier`() {
+    fun `function-has-no-operator-modifier`() {
         // given
-        val sut = getSut("function-without-operator-modifier")
+        val sut = getSut("function-has-no-operator-modifier")
             .functions()
             .first()
 
@@ -28,9 +28,9 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-inline-modifier`() {
+    fun `function-has-inline-modifier`() {
         // given
-        val sut = getSut("function-with-inline-modifier")
+        val sut = getSut("function-has-inline-modifier")
             .functions()
             .first()
 
@@ -39,9 +39,9 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-without-inline-modifier`() {
+    fun `function-has-no-inline-modifier`() {
         // given
-        val sut = getSut("function-without-inline-modifier")
+        val sut = getSut("function-has-no-inline-modifier")
             .functions()
             .first()
 
@@ -50,9 +50,9 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-return-type`() {
+    fun `function-return-type`() {
         // given
-        val sut = getSut("function-with-return-type")
+        val sut = getSut("function-return-type")
             .functions()
             .first()
 
@@ -67,9 +67,9 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-alias-return-type`() {
+    fun `function-return-alias-type`() {
         // given
-        val sut = getSut("function-with-alias-return-type")
+        val sut = getSut("function-return-alias-type")
             .functions()
             .first()
 
@@ -83,9 +83,9 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-without-return-type`() {
+    fun `function-not-return-type`() {
         // given
-        val sut = getSut("function-without-return-type")
+        val sut = getSut("function-not-return-type")
             .functions()
             .first()
 
@@ -99,9 +99,9 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-local-property`() {
+    fun `function-contains-local-property`() {
         // given
-        val sut = getSut("function-with-local-property")
+        val sut = getSut("function-contains-local-property")
             .functions()
             .first()
 
@@ -113,9 +113,9 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-local-function`() {
+    fun `function-contains-local-function`() {
         // given
-        val sut = getSut("function-with-local-function")
+        val sut = getSut("function-contains-local-function")
             .functions()
             .first()
 
@@ -127,9 +127,9 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-local-class`() {
+    fun `function-contains-local-class`() {
         // given
-        val sut = getSut("function-with-local-class")
+        val sut = getSut("function-contains-local-class")
             .functions()
             .first()
 
@@ -141,9 +141,9 @@ class KoFunctionTest {
     }
 
     @Test
-    fun `function-with-local-declarations`() {
+    fun `function-contains-local-declarations`() {
         // given
-        val sut = getSut("function-with-local-declarations")
+        val sut = getSut("function-contains-local-declarations")
             .functions()
             .first()
 
@@ -153,7 +153,7 @@ class KoFunctionTest {
             .map { it.name } shouldBeEqualTo listOf(
             "sampleLocalProperty",
             "sampleLocalFunction",
-            "SampleClass",
+            "SampleNestedClass",
         )
     }
 
