@@ -12,6 +12,7 @@ import com.lemon.konsist.core.declaration.provider.KoPropertyProvider
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
+import kotlin.reflect.KClass
 
 class KoFile private constructor(private val ktFile: KtFile) :
     KoNamedDeclaration(ktFile),
@@ -48,6 +49,20 @@ class KoFile private constructor(private val ktFile: KtFile) :
         } else {
             ktFile.packageDirective?.let { KoPackage.getInstance(it) }
         }
+    }
+
+    val annotations by lazy {
+        ktFile
+            .annotationEntries
+            .map { KoAnnotation.getInstance(it) }
+    }
+
+    fun hasAnnotation(kClass: KClass<*>): Boolean {
+        val qualifiedName = kClass.qualifiedName ?: return false
+
+        return annotations
+            .map { it.getFullyQualifiedClassName(it.type, ktFile) }
+            .contains(qualifiedName)
     }
 
     override fun declarations(modifiers: List<KoModifier>, includeNested: Boolean, includeLocal: Boolean): List<KoDeclaration> =

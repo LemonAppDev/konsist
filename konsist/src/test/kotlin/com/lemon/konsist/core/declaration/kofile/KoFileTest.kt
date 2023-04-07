@@ -1,6 +1,8 @@
 package com.lemon.konsist.core.declaration.kofile
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemon.konsist.testdata.SampleAnnotation
+import com.lemon.konsist.testdata.SampleAnnotation1
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -149,6 +151,35 @@ class KoFileTest {
         sut.run {
             containsInterface("SampleInterface") shouldBeEqualTo true
             containsInterface("OtherInterface") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `file-contains-annotation`() {
+        // given
+        val sut = getSut("file-contains-annotation")
+            .files()
+            .first()
+
+        // then
+        sut.run {
+            annotations.map { it.type } shouldBeEqualTo listOf("SampleAnnotation")
+            hasAnnotation(SampleAnnotation::class) shouldBeEqualTo true
+            hasAnnotation(SampleAnnotation1::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `file-contains-no-annotation`() {
+        // given
+        val sut = getSut("file-contains-no-annotation")
+            .files()
+            .first()
+
+        // then
+        sut.run {
+            annotations.isEmpty() shouldBeEqualTo true
+            hasAnnotation(SampleAnnotation::class) shouldBeEqualTo false
         }
     }
 

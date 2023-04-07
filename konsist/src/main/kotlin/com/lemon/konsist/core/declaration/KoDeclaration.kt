@@ -77,7 +77,7 @@ open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterLi
         val qualifiedName = kClass.qualifiedName ?: return false
 
         return annotations
-            .map { getFullyQualifiedClassName(it.type) }
+            .map { it.getFullyQualifiedClassName(it.type, ktTypeParameterListOwner.containingFile as KtFile) }
             .contains(qualifiedName)
     }
 
@@ -87,14 +87,6 @@ open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterLi
             ?.hasModifier(it.toKtToken())
             ?: false
     }
-
-    private fun getFullyQualifiedClassName(className: String) =
-        (ktTypeParameterListOwner.containingFile as KtFile)
-            .importDirectives
-            .firstOrNull { it.importedName?.identifier == className }
-            ?.importedFqName
-            ?.toString()
-            ?: className
 
     fun resideInPackages(vararg packages: String) = packages.toList().any { resideInPackages(it) }
 
