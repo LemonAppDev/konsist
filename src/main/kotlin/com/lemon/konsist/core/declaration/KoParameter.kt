@@ -1,5 +1,6 @@
 package com.lemon.konsist.core.declaration
 
+import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.kotlin.psi.KtConstantExpression
 import org.jetbrains.kotlin.psi.KtParameter
@@ -15,6 +16,12 @@ class KoParameter private constructor(private val ktParameter: KtParameter) : Ko
 
         KoType.getInstance(type)
     }
+
+    val isVararg by lazy { ktParameter.isVarArg }
+
+    val isNoInline by lazy { ktParameter.modifierList?.hasModifier(KtTokens.NOINLINE_KEYWORD) ?: false }
+
+    val isCrossInline by lazy { ktParameter.modifierList?.hasModifier(KtTokens.CROSSINLINE_KEYWORD) ?: false }
 
     val hasDefaultValue by lazy { ktParameter.hasDefaultValue() }
 

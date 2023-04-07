@@ -136,5 +136,63 @@ class KoParameterTest {
         sut.defaultValue shouldBeEqualTo null
     }
 
+    @Test
+    fun `parameter-has-vararg-modifier`() {
+        // given
+        val sut = getSut("parameter-has-vararg-modifier")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+
+        // then
+        sut?.isVararg shouldBeEqualTo true
+    }
+
+    @Test
+    fun `parameter-has-noinline-modifier`() {
+        // given
+        val sut = getSut("parameter-has-noinline-modifier")
+            .functions()
+            .first()
+            .parameters
+            .first()
+
+        // then
+        sut.isNoInline shouldBeEqualTo true
+    }
+
+    @Test
+    fun `parameter-has-crossinline-modifier`() {
+        // given
+        val sut = getSut("parameter-has-crossinline-modifier")
+            .functions()
+            .first()
+            .parameters
+            .first()
+
+        // then
+        sut.isCrossInline shouldBeEqualTo true
+    }
+
+    @Test
+    fun `parameter-has-no-modifiers`() {
+        // given
+        val sut = getSut("parameter-has-no-modifiers")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+
+        // then
+        sut?.run {
+            isVararg shouldBeEqualTo false
+            isNoInline shouldBeEqualTo false
+            isCrossInline shouldBeEqualTo false
+        }
+    }
+
     private fun getSut(fileName: String) = getSnippetKoScope("koparameter/snippet/$fileName.kttxt")
 }
