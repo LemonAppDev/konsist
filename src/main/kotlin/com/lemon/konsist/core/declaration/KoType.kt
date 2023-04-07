@@ -39,6 +39,7 @@ class KoType private constructor(private val ktTypeReference: KtTypeReference) :
 
     companion object {
         private val cache = KoDeclarationCache<KoType>()
+
         fun getInstance(ktTypeReference: KtTypeReference) =
             cache.getOrCreateInstance(ktTypeReference) { KoType(ktTypeReference) }
     }

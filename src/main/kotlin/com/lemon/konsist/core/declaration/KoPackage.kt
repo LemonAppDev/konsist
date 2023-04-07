@@ -14,6 +14,7 @@ class KoPackage private constructor(private val ktPackageDirective: KtPackageDir
 
     companion object {
         private val cache = KoDeclarationCache<KoPackage>()
+
         fun getInstance(ktPackageDirective: KtPackageDirective) =
             cache.getOrCreateInstance(ktPackageDirective) { KoPackage(ktPackageDirective) }
     }

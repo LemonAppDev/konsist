@@ -57,6 +57,7 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
 
     companion object {
         private val cache = KoDeclarationCache<KoFunction>()
+
         fun getInstance(ktFunction: KtFunction) = cache.getOrCreateInstance(ktFunction) { KoFunction(ktFunction) }
     }
 }

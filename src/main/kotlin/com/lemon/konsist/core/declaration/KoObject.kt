@@ -7,6 +7,7 @@ class KoObject(private val ktObjectDeclaration: KtObjectDeclaration) : KoComplex
 
     companion object {
         private val cache = KoDeclarationCache<KoObject>()
+
         fun getInstance(ktObjectDeclaration: KtObjectDeclaration) =
             cache.getOrCreateInstance(ktObjectDeclaration) { KoObject(ktObjectDeclaration) }
     }
