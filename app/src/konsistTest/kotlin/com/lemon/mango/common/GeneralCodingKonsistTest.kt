@@ -66,7 +66,7 @@ class GeneralCodingKonsistTest {
             .mapNotNull { it.primaryConstructor }
             .flatMap { it.parameters }
             .check {
-                it.name.toTitleCase() == it.type.name
+                it.name.toTitleCase() == it.type.sourceType
             }
     }
 

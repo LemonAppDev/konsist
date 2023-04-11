@@ -169,26 +169,26 @@ class KoFunctionTest {
         // then
         sut.run {
             hasExplicitReturnType shouldBeEqualTo true
-            explicitReturnType?.name shouldBeEqualTo "SampleType"
-            explicitReturnType?.aliasName shouldBeEqualTo null
-            explicitReturnType?.isTypeAlias shouldBeEqualTo false
+            explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
+            explicitReturnType?.name shouldBeEqualTo ""
+            explicitReturnType?.isImportAlias shouldBeEqualTo false
             explicitReturnType?.fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
 
     @Test
-    fun `function-return-alias-type`() {
+    fun `function-return-import-alias`() {
         // given
-        val sut = getSut("function-return-alias-type")
+        val sut = getSut("function-return-import-alias")
             .functions()
             .first()
 
         // then
         sut.run {
             hasExplicitReturnType shouldBeEqualTo true
-            explicitReturnType?.name shouldBeEqualTo "SampleType"
-            explicitReturnType?.aliasName shouldBeEqualTo "AliasType"
-            explicitReturnType?.isTypeAlias shouldBeEqualTo true
+            explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
+            explicitReturnType?.name shouldBeEqualTo "ImportAlias"
+            explicitReturnType?.isImportAlias shouldBeEqualTo true
         }
     }
 
@@ -202,9 +202,9 @@ class KoFunctionTest {
         // then
         sut.run {
             hasExplicitReturnType shouldBeEqualTo false
+            explicitReturnType?.sourceType shouldBeEqualTo null
             explicitReturnType?.name shouldBeEqualTo null
-            explicitReturnType?.aliasName shouldBeEqualTo null
-            explicitReturnType?.isTypeAlias shouldBeEqualTo null
+            explicitReturnType?.isImportAlias shouldBeEqualTo null
         }
     }
 
