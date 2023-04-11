@@ -187,5 +187,36 @@ class KoPropertyTest {
         }
     }
 
+    @Test
+    fun `property-has-lazy-delegate`() {
+        // given
+        val sut = getSut("property-has-lazy-delegate")
+            .properties()
+            .first()
+
+        // then
+        sut.run {
+            delegateName shouldBeEqualTo "lazy"
+            hasDelegate shouldBeEqualTo true
+            hasDelegate("lazy") shouldBeEqualTo true
+            hasDelegate("Delegates.observable()") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `property-has-no-delegate`() {
+        // given
+        val sut = getSut("property-has-no-delegate")
+            .properties()
+            .first()
+
+        // then
+        sut.run {
+            delegateName shouldBeEqualTo null
+            hasDelegate shouldBeEqualTo false
+            hasDelegate("lazy") shouldBeEqualTo false
+        }
+    }
+
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koproperty/snippet/", fileName)
 }
