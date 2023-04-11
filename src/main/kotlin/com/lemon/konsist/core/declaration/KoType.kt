@@ -5,15 +5,15 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 class KoType private constructor(private val ktTypeReference: KtTypeReference) : KoNamedDeclaration(ktTypeReference) {
     private val file = KoFile.getInstance(ktTypeReference.containingKtFile)
 
-    val aliasName: String? by lazy {
+    override val name: String by lazy {
         file
             .imports
             .firstOrNull { it.alias == ktTypeReference.text }
-            ?.alias
+            ?.alias ?: ""
     }
 
-    override val name: String by lazy {
-        if (aliasName != null) {
+    val sourceType: String by lazy {
+        if (name.isNotEmpty()) {
             file
                 .imports
                 .first { it.alias == ktTypeReference.text }
@@ -30,10 +30,10 @@ class KoType private constructor(private val ktTypeReference: KtTypeReference) :
         file
             .imports
             .map { it.name }
-            .first { it.contains(name) }
+            .first { it.contains(sourceType) }
     }
 
-    val isTypeAlias by lazy { aliasName != null }
+    val isImportAlias by lazy { name.isNotEmpty() }
 
     companion object {
         private val cache = KoDeclarationCache<KoType>()

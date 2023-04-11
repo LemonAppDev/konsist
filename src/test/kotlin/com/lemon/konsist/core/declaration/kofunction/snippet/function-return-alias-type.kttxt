@@ -1,5 +1,0 @@
-import com.lemon.konsist.testdata.SampleType as AliasType
-
-fun sampleFunction(): AliasType {
-    return AliasType()
-}

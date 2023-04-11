@@ -148,25 +148,25 @@ class KoPropertyTest {
 
         // then
         sut.explicitType?.run {
-            name shouldBeEqualTo "SampleType"
-            aliasName shouldBeEqualTo null
-            isTypeAlias shouldBeEqualTo false
+            sourceType shouldBeEqualTo "SampleType"
+            name shouldBeEqualTo ""
+            isImportAlias shouldBeEqualTo false
             fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
 
     @Test
-    fun `property-has-alias-type`() {
+    fun `property-has-import-alias`() {
         // given
-        val sut = getSut("property-has-alias-type")
+        val sut = getSut("property-has-import-alias")
             .properties(includeNested = true)
             .first()
 
         // then
         sut.explicitType?.run {
-            name shouldBeEqualTo "SampleType"
-            aliasName shouldBeEqualTo "AliasType"
-            isTypeAlias shouldBeEqualTo true
+            sourceType shouldBeEqualTo "SampleType"
+            name shouldBeEqualTo "ImportAlias"
+            isImportAlias shouldBeEqualTo true
             fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
@@ -180,9 +180,9 @@ class KoPropertyTest {
 
         // then
         sut.explicitType?.run {
+            sourceType shouldBeEqualTo null
             name shouldBeEqualTo null
-            aliasName shouldBeEqualTo null
-            isTypeAlias shouldBeEqualTo null
+            isImportAlias shouldBeEqualTo null
             fullyQualifiedName shouldBeEqualTo null
         }
     }

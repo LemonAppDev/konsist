@@ -1,6 +1,0 @@
-import com.lemon.konsist.testdata.SampleClass
-import com.lemon.konsist.testdata.SampleType as AliasType
-
-class SampleTopLevelClass1(val sampleProperty2: SampleClass)
-
-class SampleTopLevelClass2(val sampleProperty2: AliasType)

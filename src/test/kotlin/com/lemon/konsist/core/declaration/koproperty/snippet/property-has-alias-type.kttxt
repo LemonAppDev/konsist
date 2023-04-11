@@ -1,5 +1,0 @@
-import com.lemon.konsist.testdata.SampleType as AliasType
-
-object SampleObject {
-    lateinit var sampleProperty: AliasType
-}

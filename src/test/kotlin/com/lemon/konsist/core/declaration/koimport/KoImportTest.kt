@@ -21,14 +21,14 @@ class KoImportTest {
     }
 
     @Test
-    fun `import-name-has-alias-type`() {
+    fun `import-name-has-import-alias`() {
         // given
-        val sut = getSut("import-name-has-alias-type").imports()
+        val sut = getSut("import-name-has-import-alias").imports()
 
         // then
         sut.run {
             this[0].alias shouldBeEqualTo "com.lemon.konsist.testdata.SampleClass"
-            this[1].alias shouldBeEqualTo "AliasType"
+            this[1].alias shouldBeEqualTo "ImportAlias"
             this[1].name shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }

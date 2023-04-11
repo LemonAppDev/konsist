@@ -17,17 +17,17 @@ class KoParameterTest {
 
         // then
         sut?.type?.run {
-            name shouldBeEqualTo "SampleType"
-            aliasName shouldBeEqualTo null
-            isTypeAlias shouldBeEqualTo false
+            sourceType shouldBeEqualTo "SampleType"
+            name shouldBeEqualTo ""
+            isImportAlias shouldBeEqualTo false
             fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
 
     @Test
-    fun `class-has-one-parameter-with-alias-type`() {
+    fun `class-has-one-parameter-with-import-alias`() {
         // given
-        val sut = getSut("class-has-one-parameter-with-alias-type")
+        val sut = getSut("class-has-one-parameter-with-import-alias")
             .classes()
             .first()
             .primaryConstructor
@@ -36,9 +36,9 @@ class KoParameterTest {
 
         // then
         sut?.type?.run {
-            name shouldBeEqualTo "SampleType"
-            aliasName shouldBeEqualTo "AliasType"
-            isTypeAlias shouldBeEqualTo true
+            sourceType shouldBeEqualTo "SampleType"
+            name shouldBeEqualTo "ImportAlias"
+            isImportAlias shouldBeEqualTo true
             fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
