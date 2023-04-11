@@ -1,6 +1,7 @@
 package com.lemon.konsist.core.assertion.check
 
 import com.lemon.konsist.core.declaration.KoBaseDeclaration
+import com.lemon.konsist.core.declaration.KoDeclaration
 import com.lemon.konsist.core.declaration.KoNamedDeclaration
 import com.lemon.konsist.exception.KoCheckFailedException
 import com.lemon.konsist.exception.KoInternalException
@@ -9,9 +10,10 @@ import com.lemon.konsist.exception.KoPreconditionFailedException
 private const val EMPTY_DECLARATION_LIST_MESSAGE =
     "Declaration list is empty. Please make sure that list of declarations contain items before calling “check” method."
 
-private const val CHECK_FAILED_MESSAGE_PREFIX = "Check failed for the following declarations:"
-
+@Suppress("detekt.TooGenericExceptionCaught", "detekt.ThrowsCount")
 fun <E : KoBaseDeclaration?> Collection<E>.check(function: (E) -> Boolean) {
+    var lastDeclaration: KoBaseDeclaration? = null
+
     try {
         val localNotNull = this.filterNotNull()
 
@@ -19,22 +21,28 @@ fun <E : KoBaseDeclaration?> Collection<E>.check(function: (E) -> Boolean) {
             throw KoPreconditionFailedException(EMPTY_DECLARATION_LIST_MESSAGE)
         }
 
-        val allChecksPassed = localNotNull.all { function(it) }
+        val allChecksPassed = localNotNull.all {
+            lastDeclaration = it as? KoDeclaration
+            function(it)
+        }
 
         if (!allChecksPassed) {
             val failedDeclarations = localNotNull.filter { !function(it) }
             throw KoCheckFailedException(getCheckFailedMessage(failedDeclarations))
         }
+    } catch (e: KoCheckFailedException) {
+        throw e
+    } catch (e: KoInternalException) {
+        throw e
     } catch (e: Exception) {
-        if (e is KoCheckFailedException) {
-            throw e
-        } else {
-            throw KoInternalException(e.message, e)
-        }
+        throw KoInternalException(e.message, e, lastDeclaration)
     }
 }
 
+@Suppress("detekt.TooGenericExceptionCaught", "detekt.ThrowsCount")
 fun <E : KoBaseDeclaration?> Collection<E>.checkNot(function: (E) -> Boolean) {
+    var lastDeclaration: KoBaseDeclaration? = null
+
     try {
         val localNotNull = this.filterNotNull()
 
@@ -42,18 +50,21 @@ fun <E : KoBaseDeclaration?> Collection<E>.checkNot(function: (E) -> Boolean) {
             throw KoPreconditionFailedException(EMPTY_DECLARATION_LIST_MESSAGE)
         }
 
-        val noneChecksPassed = localNotNull.none { function(it) }
+        val noneChecksPassed = localNotNull.none {
+            lastDeclaration = it as? KoDeclaration
+            function(it)
+        }
 
         if (!noneChecksPassed) {
             val failedDeclarations = localNotNull.filter { function(it) }
             throw KoCheckFailedException(getCheckFailedMessage(failedDeclarations))
         }
+    } catch (e: KoCheckFailedException) {
+        throw e
+    } catch (e: KoInternalException) {
+        throw e
     } catch (e: Exception) {
-        if (e is KoCheckFailedException) {
-            throw e
-        } else {
-            throw KoInternalException(e.message, e)
-        }
+        throw KoInternalException(e.message, e, lastDeclaration)
     }
 }
 
