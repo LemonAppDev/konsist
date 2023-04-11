@@ -7,7 +7,7 @@ import jakarta.persistence.Entity
 import org.junit.jupiter.api.Test
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.web.bind.annotation.RestController
-import java.util.Locale
+import java.util.*
 import javax.inject.Inject
 
 class GeneralCodingKonsistTest {
@@ -34,6 +34,7 @@ class GeneralCodingKonsistTest {
         mangoScope
             .classes()
             .filterNot { it.resideInPackages("..config..", "..model..") }
+            .filterNot { it.resideInPath("Test/") }
             .filterNot { it.hasAnnotation(SpringBootApplication::class) }
             .filterNot { it.hasAnnotation(Entity::class) }
             .filterNot { it.name.endsWith("Test") }

@@ -1,10 +1,10 @@
 package com.lemon.konsist.core.declaration
 
 import com.lemon.konsist.core.cache.KoDeclarationCache
-import com.lemon.konsist.core.declaration.logger.KoLogger
 import com.lemon.konsist.core.declaration.provider.KoLocalClassProvider
 import com.lemon.konsist.core.declaration.provider.KoLocalFunctionProvider
 import com.lemon.konsist.core.declaration.provider.KoLocalPropertyProvider
+import com.lemon.konsist.exception.KoInternalException
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
@@ -57,8 +57,7 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
             } else if (it is KtProperty) {
                 KoProperty.getInstance(it)
             } else {
-                KoLogger.logError("Unknown local declaration type: ${it.getTextWithLocation()}")
-                null
+                throw KoInternalException("Unknown local declaration type: ${it.getTextWithLocation()}")
             }
         }
     }

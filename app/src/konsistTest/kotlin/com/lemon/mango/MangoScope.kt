@@ -2,4 +2,4 @@ package com.lemon.mango
 
 import com.lemon.konsist.core.declaration.KoScope
 
-val mangoScope = KoScope.fromProject()
+val mangoScope = KoScope.fromModule("app")

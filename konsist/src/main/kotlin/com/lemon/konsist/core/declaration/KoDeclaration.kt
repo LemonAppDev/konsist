@@ -90,6 +90,8 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
 
     fun resideInPackages(vararg packages: String) = packages.toList().any { resideInPackages(it) }
 
+    fun resideInPath(path: String, ignoreCase: Boolean = true) = filePath.contains(path, ignoreCase)
+
     @Suppress("detekt.CyclomaticComplexMethod")
     private fun resideInPackages(packages: String): Boolean {
         val declarationPackages = packageName

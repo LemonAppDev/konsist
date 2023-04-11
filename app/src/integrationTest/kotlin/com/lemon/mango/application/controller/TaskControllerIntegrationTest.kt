@@ -41,7 +41,7 @@ import java.time.LocalDateTime
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-class TaskControllerTest {
+class TaskControllerIntegrationTest {
     @Autowired
     private lateinit var taskEndpointHelper: TaskEndpointHelper
 
