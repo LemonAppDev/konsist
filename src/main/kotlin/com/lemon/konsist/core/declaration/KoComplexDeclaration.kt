@@ -11,7 +11,7 @@ import com.lemon.konsist.core.declaration.provider.KoPropertyProvider
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import kotlin.reflect.KClass
 
-open class KoComplexDeclaration(
+abstract class KoComplexDeclaration(
     private val ktClassOrObject: KtClassOrObject,
 ) : KoDeclaration(ktClassOrObject),
     KoClassProvider,

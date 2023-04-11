@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 import kotlin.reflect.KClass
 
-open class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterListOwner) :
+abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterListOwner) :
     KoNamedDeclaration(ktTypeParameterListOwner) {
 
     open val fullyQualifiedName by lazy {

@@ -1,5 +1,6 @@
-package com.lemon.konsist.core.declaration
+package com.lemon.konsist.core.cache
 
+import com.lemon.konsist.core.declaration.KoBaseDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import java.util.concurrent.ConcurrentHashMap
 
