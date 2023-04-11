@@ -149,6 +149,10 @@ class KoComplexDeclarationForClassTest {
             "sampleFunction",
             "sampleLocalProperty1",
             "sampleLocalFunction1",
+            "sampleLocalProperty2",
+            "sampleLocalFunction2",
+            "SampleLocalClass1",
+            "sampleLocalFunction2",
         )
 
         sut

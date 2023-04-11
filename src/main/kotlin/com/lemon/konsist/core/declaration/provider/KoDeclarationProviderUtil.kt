@@ -78,7 +78,7 @@ object KoDeclarationProviderUtil {
             result = result
                 .flatMap {
                     if (it is KoFunction) {
-                        listOf(it) + it.localDeclarations()
+                        listOf(it) + it.localDeclarations() + localDeclarations(it.localFunctions())
                     } else {
                         listOf(it)
                     }
@@ -91,5 +91,22 @@ object KoDeclarationProviderUtil {
         }
 
         return result.filterIsInstance<T>()
+    }
+
+    fun localDeclarations(koFunctions: List<KoFunction>): List<KoDeclaration> {
+        val localDeclarations = mutableListOf<KoDeclaration>()
+        val nestedDeclarations = mutableListOf<KoDeclaration>()
+
+        koFunctions.forEach { koFunction ->
+            koFunction.localDeclarations().forEach {
+                if (it is KoComplexDeclaration) {
+                    nestedDeclarations += it.declarations(includeNested = true)
+                }
+            }
+
+            localDeclarations += koFunction.localDeclarations() + nestedDeclarations + localDeclarations(koFunction.localFunctions())
+        }
+
+        return localDeclarations
     }
 }
