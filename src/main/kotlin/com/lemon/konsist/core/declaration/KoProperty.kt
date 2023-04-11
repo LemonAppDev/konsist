@@ -32,6 +32,18 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
             ?: false
     }
 
+    val delegateName by lazy {
+        ktProperty
+            .delegate
+            ?.text
+            ?.replace("\n", "")
+            ?.substringAfter("by ")
+            ?.substringBefore("{")
+            ?.removeSuffix(" ")
+    }
+
+    val hasDelegate by lazy { ktProperty.hasDelegateExpression() }
+
     val explicitType by lazy {
         val type = ktProperty
             .children
@@ -39,6 +51,8 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
 
         type?.let { KoType.getInstance(it) }
     }
+
+    fun hasDelegate(name: String): Boolean = delegateName == name
 
     companion object {
         private val cache = KoDeclarationCache<KoProperty>()
