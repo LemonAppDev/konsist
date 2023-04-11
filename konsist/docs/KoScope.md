@@ -1,22 +1,33 @@
-# PackageSelector
+# KoScope
 
-Package selector is used to
+The
+[KoScope](../src/main/kotlin/com/lemon/konsist/core/declaration/KoScope.kt) class is the entry point. It represents set
+of Kotlin files to be verified by Konsist library. Scope can be created for a single Kotlin file, folder, package, module
+or entire project. Here is the sample scope.
 
-`KoScope` is a container for all the files to be analyzed by Konsist. It is a Kotlin class that contains a list of
-`KoFile` objects.
+Consider this scope:
 
-Scopes should be reused across tests. rather than creating scope for every test. This will improve the performance of
-konsist tests.
+```mermaid
+---
+title: Project code base representation
+---
 
+flowchart TD
+    KoScope
+    KoScope---KoFile
+    KoFile---KoClass
+    KoFile---KoInterface
+    KoFile---KoObject
+    KoFile---Other["..."]
+    KoClass---KoProperty
+    KoClass---KoFunction
 ```
-tests/
-├─ data/
-│  ├─ DataTest.kt
-├─ app/
-│  ├─ AppTest.kt
-├─ MyScope.kt   <--- Instance of the KoScope used in both DataTest and AppTest
 
-```
+Scope allows to query available kotlin files to tailor the code base verification.
+([KoFile.kt](../src/main/kotlin/com/lemon/konsist/core/declaration/KoFile.kt)), 
+classes (),
+
+Avoid creating scope for every test.
 
 ## Scope creation
 
@@ -67,6 +78,28 @@ koScope.slice { it.hasImport("com.domain.usecase") }
 
 // scope containing all files in "usecase" package and its subpackages
 koScope.slice { it.hasImport("usecase..") }
+```
+
+## Filtering Declarations
+
+Scope can be further filtered to retrieve specific declarations. For example, to retrieve all classes in the scope:
+
+```kotlin
+
+```
+
+## Scope Reuse
+
+Scopes should be reused across tests to improve test performance:
+
+```
+tests/
+├─ data/
+│  ├─ DataTest.kt
+├─ app/
+│  ├─ AppTest.kt
+├─ MyScope.kt   <--- Instance of the KoScope used in both DataTest and AppTest
+
 ```
 
 ## Scope composition
