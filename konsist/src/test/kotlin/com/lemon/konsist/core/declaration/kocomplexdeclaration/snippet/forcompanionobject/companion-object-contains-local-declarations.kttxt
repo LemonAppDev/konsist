@@ -3,7 +3,16 @@ class SampleTopLevelClass {
         fun sampleFunction() {
             val sampleLocalProperty1: Boolean = true
 
-            fun sampleLocalFunction1() { }
+            fun sampleLocalFunction1() {
+                val sampleLocalProperty2: Boolean = true
+
+                fun sampleLocalFunction2() {
+                    class SampleLocalClass1 {
+                        fun sampleLocalFunction2() {
+                        }
+                    }
+                }
+            }
         }
     }
 }
