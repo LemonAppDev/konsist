@@ -62,6 +62,8 @@ class KoScope(
 
     fun packages() = koFiles.map { it.packageDirective }
 
+    fun typeAliases() = koFiles.flatMap { it.typeAliases }
+
     companion object {
         /**
          * Return repository root directory File

@@ -183,5 +183,32 @@ class KoFileTest {
         }
     }
 
+    @Test
+    fun `file-contains-typealias`() {
+        // given
+        val sut = getSut("file-contains-typealias")
+            .files()
+            .first()
+
+        // then
+        sut.run {
+            typeAliases.first().name shouldBeEqualTo "SampleTypeAlias"
+            typeAliases.first().type shouldBeEqualTo "() -> Int"
+        }
+    }
+
+    @Test
+    fun `file-contains-no-typealias`() {
+        // given
+        val sut = getSut("file-contains-no-typealias")
+            .files()
+            .first()
+
+        // then
+        sut
+            .typeAliases
+            .isEmpty() shouldBeEqualTo true
+    }
+
     private fun getSut(fileName: String) = getSnippetKoScope("kofile/snippet/", fileName)
 }

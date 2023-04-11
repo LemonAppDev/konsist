@@ -12,6 +12,7 @@ import com.lemon.konsist.core.declaration.provider.KoPropertyProvider
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
+import org.jetbrains.kotlin.psi.KtTypeAlias
 import kotlin.reflect.KClass
 
 class KoFile private constructor(private val ktFile: KtFile) :
@@ -49,6 +50,13 @@ class KoFile private constructor(private val ktFile: KtFile) :
         } else {
             ktFile.packageDirective?.let { KoPackage.getInstance(it) }
         }
+    }
+
+    val typeAliases by lazy {
+        ktFile
+            .children
+            .filterIsInstance<KtTypeAlias>()
+            .map { KoTypeAlias.getInstance(it) }
     }
 
     val annotations by lazy {

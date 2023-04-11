@@ -20,6 +20,7 @@ annotation class NonExistingAnnotation
     AnnotationTarget.CONSTRUCTOR,
     AnnotationTarget.FUNCTION,
     AnnotationTarget.FILE,
+    AnnotationTarget.TYPEALIAS,
 )
 annotation class SampleAnnotation
 
