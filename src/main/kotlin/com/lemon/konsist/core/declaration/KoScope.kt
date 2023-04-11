@@ -72,17 +72,18 @@ class KoScope(
             File("")
                 .absoluteFile
                 .path
+                .dropLastWhile { it != '/' }
         }
 
-        private val kotlinFiles by lazy {
-            val prodDirectory = File("$projectRootDirectoryFilePath/src/main/")
+        private val projectKotlinFiles by lazy {
+            val prodDirectory = File(projectRootDirectoryFilePath)
 
             val prodSourceSet = prodDirectory
                 .walk()
                 .filter { it.isKotlinFile }
                 .map { it.toKoFile() }
 
-            val testDirectory = File("$projectRootDirectoryFilePath/src/test/")
+            val testDirectory = File("$projectRootDirectoryFilePath/konsist/src/test/")
 
             val testSourceSet = testDirectory
                 .walk()
@@ -90,6 +91,28 @@ class KoScope(
                 .map { it.toKoFile() }
 
             prodSourceSet + testSourceSet
+        }
+
+        fun fromProject() = KoScope(projectKotlinFiles.toList())
+
+        fun fromModule(name: String, sourceSet: String? = null): KoScope {
+            var pathPrefix = "$projectRootDirectoryFilePath${name.lowercase()}"
+
+            if (sourceSet != null) {
+                pathPrefix = "$pathPrefix/src/$sourceSet/"
+            }
+
+            val koFiles = projectKotlinFiles
+                .filter { it.path.startsWith(pathPrefix) }
+                .toList()
+            return KoScope(koFiles)
+        }
+
+        fun fromPackage(packageNameStart: String): KoScope {
+            val koFiles = projectKotlinFiles
+                .filter { it.packageDirective?.fullyQualifiedName?.startsWith(packageNameStart) ?: false }
+                .toList()
+            return KoScope(koFiles)
         }
 
         fun fromFile(path: String): KoScope {
@@ -103,21 +126,9 @@ class KoScope(
             return KoScope(koKoFile)
         }
 
-        fun fromProject() = KoScope(kotlinFiles.toList())
-
-        fun fromPackage(packageNameStart: String): KoScope {
-            val koFiles = kotlinFiles
-                .filter { it.packageDirective?.fullyQualifiedName?.startsWith(packageNameStart) ?: false }
-                .toList()
-            return KoScope(koFiles)
-        }
-
         fun fromPath(path: String): KoScope {
-            val koFiles = kotlinFiles
-                .filter {
-                    println("it.path: ${it.path} \n")
-                    it.path.startsWith(path)
-                }
+            val koFiles = projectKotlinFiles
+                .filter { it.path.startsWith(path) }
                 .toList()
             return KoScope(koFiles)
         }

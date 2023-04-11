@@ -9,7 +9,7 @@ import com.lemon.konsist.core.declaration.KoFunction
 import com.lemon.konsist.core.declaration.KoInterface
 import com.lemon.konsist.core.declaration.KoObject
 import com.lemon.konsist.core.declaration.KoProperty
-import com.lemon.konsist.core.declaration.logger.KoLogger
+import com.lemon.konsist.exception.KoInternalException
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDeclarationContainer
 import org.jetbrains.kotlin.psi.KtFunction
@@ -40,8 +40,7 @@ object KoDeclarationProviderUtil {
                 } else if (it is KtFunction) {
                     KoFunction.getInstance(it)
                 } else {
-                    KoLogger.logError("Unknown declaration type: ${it.getTextWithLocation()}")
-                    null
+                    throw KoInternalException("Unknown declaration type: ${it.getTextWithLocation()}")
                 }
             }
 

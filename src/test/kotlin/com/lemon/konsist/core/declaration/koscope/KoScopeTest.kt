@@ -7,14 +7,14 @@ import java.io.File
 
 class KoScopeTest {
 
-    private val projectPath = File("")
+    private val konsistModulePath = File("")
         .absoluteFile
         .path
 
     @Test
     fun `from file`() {
         // given
-        val testSourceSetPath = "$projectPath/src/test/kotlin/com/"
+        val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
         val sut = KoScope.fromFile("$testSourceSetPath/lemon/konsist/core/declaration/koscope/KoScopeTest.kt")
 
         // then
@@ -32,8 +32,9 @@ class KoScopeTest {
 
         // then
         sut.files().run {
+            isNotEmpty() shouldBeEqualTo true
             none { it.path.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
-            all { it.path.startsWith(projectPath) } shouldBeEqualTo true
+            all { it.path.startsWith(konsistModulePath) } shouldBeEqualTo true
         }
     }
 
@@ -60,7 +61,7 @@ class KoScopeTest {
     @Test
     fun `from path`() {
         // given
-        val testSourceSetPath = "$projectPath/src/test/kotlin/com/"
+        val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
         val sut = KoScope.fromPath("${testSourceSetPath}lemon/konsist/core/declaration/koscope/")
 
         // then
@@ -76,5 +77,19 @@ class KoScopeTest {
             "KoScopeForPropertyTest.kt",
             "KoScopeTest.kt",
         )
+    }
+
+    @Test
+    fun `from module`() {
+        // given
+        val projectPath = konsistModulePath.dropLastWhile { it != '/' }
+        val sut = KoScope.fromModule("konsist")
+
+        // then
+        with(sut.files()) {
+            isNotEmpty() shouldBeEqualTo true
+            none { it.path.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
+            all { it.path.startsWith(projectPath) } shouldBeEqualTo true
+        }
     }
 }

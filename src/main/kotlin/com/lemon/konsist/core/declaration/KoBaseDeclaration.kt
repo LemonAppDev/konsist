@@ -20,8 +20,8 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
     val location by lazy {
         val lineAndColumn =
             textWithLocation
-                .substringAfter("at")
-                .substringBefore("in")
+                .substringAfterLast("' at (")
+                .substringBefore(") in")
                 .toMutableList()
 
         lineAndColumn.removeIf { !it.isDigit() }
