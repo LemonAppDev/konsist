@@ -1,8 +1,9 @@
 package com.lemon.konsist.core.declaration
 
+import com.lemon.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtClass
 
-class KoInterface private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
+class KoInterface private constructor(ktClass: KtClass) : KoComplexDeclaration(ktClass) {
     companion object {
         private val cache = KoDeclarationCache<KoInterface>()
 

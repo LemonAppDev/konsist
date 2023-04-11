@@ -1,5 +1,6 @@
 package com.lemon.konsist.core.declaration
 
+import com.lemon.konsist.core.cache.KoDeclarationCache
 import com.lemon.konsist.core.const.KoModifier
 import com.lemon.konsist.core.declaration.provider.KoClassProvider
 import com.lemon.konsist.core.declaration.provider.KoCompanionObjectProvider

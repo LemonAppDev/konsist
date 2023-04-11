@@ -1,5 +1,6 @@
 package com.lemon.konsist.core.declaration
 
+import com.lemon.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtFile
 

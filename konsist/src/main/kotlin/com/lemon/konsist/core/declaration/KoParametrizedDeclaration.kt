@@ -2,7 +2,7 @@ package com.lemon.konsist.core.declaration
 
 import org.jetbrains.kotlin.psi.KtFunction
 
-open class KoParametrizedDeclaration(
+abstract class KoParametrizedDeclaration(
     private val ktFunction: KtFunction,
 ) : KoDeclaration(ktFunction) {
 

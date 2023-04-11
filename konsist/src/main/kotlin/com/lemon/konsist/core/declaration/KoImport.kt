@@ -1,5 +1,6 @@
 package com.lemon.konsist.core.declaration
 
+import com.lemon.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtImportDirective
 
 class KoImport private constructor(private val ktImportDirective: KtImportDirective) : KoNamedDeclaration(ktImportDirective) {
