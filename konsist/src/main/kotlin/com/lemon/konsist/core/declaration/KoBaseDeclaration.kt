@@ -16,13 +16,12 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
     val containingFile by lazy { KoFile.getInstance(ktElement.containingKtFile) }
 
     val location by lazy {
-        val lineAndColumn =
-            textWithLocation
-                .substringAfterLast("' at (")
-                .substringBefore(") in")
-                .toMutableList()
-
-        lineAndColumn.removeIf { !it.isDigit() }
+        val lineAndColumn = textWithLocation
+            .substringAfterLast("' at (")
+            .substringBefore(") in")
+            .split(",")
+            .toMutableList()
+            .also { it.removeIf { string -> string.isBlank() } }
 
         val line = lineAndColumn[0]
         val column = lineAndColumn[1]
