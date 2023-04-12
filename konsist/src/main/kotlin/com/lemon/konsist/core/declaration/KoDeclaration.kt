@@ -3,7 +3,6 @@ package com.lemon.konsist.core.declaration
 import com.lemon.konsist.core.const.KoModifier
 import com.lemon.konsist.core.const.toKtToken
 import org.jetbrains.kotlin.lexer.KtTokens
-import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 import kotlin.reflect.KClass
@@ -77,7 +76,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
         val qualifiedName = kClass.qualifiedName ?: return false
 
         return annotations
-            .map { it.getFullyQualifiedClassName(it.type, ktTypeParameterListOwner.containingFile as KtFile) }
+            .map { it.getFullyQualifiedClassName(it.type) }
             .contains(qualifiedName)
     }
 
