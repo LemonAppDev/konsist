@@ -8,37 +8,8 @@ import org.jetbrains.kotlin.psi.psiUtil.getSuperNames
 import org.jetbrains.kotlin.psi.psiUtil.isAbstract
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
+@Suppress("detekt.TooManyFunctions")
 class KoClass private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
-    val isEnum by lazy { ktClass.isEnum() }
-
-    val isSealed by lazy { ktClass.isSealed() }
-
-    val isInner by lazy { ktClass.isInner() }
-
-    val isValue by lazy { ktClass.isValue() }
-
-    val isAnnotation by lazy { ktClass.isAnnotation() }
-
-    val isData by lazy { ktClass.isData() }
-
-    val isAbstract by lazy { ktClass.isAbstract() }
-
-    val isOpen by lazy {
-        ktClass
-            .children
-            .firstIsInstanceOrNull<KtModifierList>()
-            ?.hasModifier(KtTokens.OPEN_KEYWORD)
-            ?: false
-    }
-
-    val isFinal by lazy {
-        ktClass
-            .children
-            .firstIsInstanceOrNull<KtModifierList>()
-            ?.hasModifier(KtTokens.FINAL_KEYWORD)
-            ?: false
-    }
-
     val parents by lazy { ktClass.getSuperNames() }
 
     val parentInterfaces by lazy {
@@ -67,17 +38,43 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
         KoPrimaryConstructor.getInstance(localPrimaryConstructor)
     }
 
-    val hasExplicitPrimaryConstructor = ktClass.hasExplicitPrimaryConstructor()
-
     val secondaryConstructors by lazy {
         ktClass
             .secondaryConstructors
             .map { KoSecondaryConstructor.getInstance(it) }
     }
 
-    val hasSecondaryConstructors = ktClass.hasSecondaryConstructors()
-
     val allConstructors = listOfNotNull(primaryConstructor) + secondaryConstructors
+
+    fun hasEnumModifier() = ktClass.isEnum()
+
+    fun hasSealedModifier() = ktClass.isSealed()
+
+    fun hasInnerModifier() = ktClass.isInner()
+
+    fun hasValueModifier() = ktClass.isValue()
+
+    fun hasAnnotationModifier() = ktClass.isAnnotation()
+
+    fun hasDataModifier() = ktClass.isData()
+
+    fun hasAbstractModifier() = ktClass.isAbstract()
+
+    fun hasOpenModifier() = ktClass
+        .children
+        .firstIsInstanceOrNull<KtModifierList>()
+        ?.hasModifier(KtTokens.OPEN_KEYWORD)
+        ?: false
+
+    fun hasFinalModifier() = ktClass
+        .children
+        .firstIsInstanceOrNull<KtModifierList>()
+        ?.hasModifier(KtTokens.FINAL_KEYWORD)
+        ?: false
+
+    fun hasExplicitPrimaryConstructor() = ktClass.hasExplicitPrimaryConstructor()
+
+    fun hasSecondaryConstructors() = ktClass.hasSecondaryConstructors()
 
     fun hasParentClass() = parentClass != null
 

@@ -24,7 +24,7 @@ class KoObjectTest {
             .first()
 
         // then
-        sut.isData shouldBeEqualTo true
+        sut.hasDataModifier() shouldBeEqualTo true
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/", fileName)

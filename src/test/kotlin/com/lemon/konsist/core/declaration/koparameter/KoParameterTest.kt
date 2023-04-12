@@ -19,7 +19,7 @@ class KoParameterTest {
         sut?.type?.run {
             sourceType shouldBeEqualTo "SampleType"
             name shouldBeEqualTo ""
-            isImportAlias shouldBeEqualTo false
+            isImportAlias() shouldBeEqualTo false
             fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
@@ -38,7 +38,7 @@ class KoParameterTest {
         sut?.type?.run {
             sourceType shouldBeEqualTo "SampleType"
             name shouldBeEqualTo "ImportAlias"
-            isImportAlias shouldBeEqualTo true
+            isImportAlias() shouldBeEqualTo true
             fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
@@ -55,7 +55,7 @@ class KoParameterTest {
 
         // then
         sut?.run {
-            hasDefaultValue shouldBeEqualTo true
+            hasDefaultValue() shouldBeEqualTo true
             name shouldBeEqualTo "sampleParameter"
         }
     }
@@ -147,7 +147,7 @@ class KoParameterTest {
             ?.first()
 
         // then
-        sut?.isVarArg shouldBeEqualTo true
+        sut?.hasVarargModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -160,7 +160,7 @@ class KoParameterTest {
             .first()
 
         // then
-        sut.isNoInline shouldBeEqualTo true
+        sut.hasNoInlineModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -173,7 +173,7 @@ class KoParameterTest {
             .first()
 
         // then
-        sut.isCrossInline shouldBeEqualTo true
+        sut.hasCrossInlineModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -188,9 +188,9 @@ class KoParameterTest {
 
         // then
         sut?.run {
-            isVarArg shouldBeEqualTo false
-            isNoInline shouldBeEqualTo false
-            isCrossInline shouldBeEqualTo false
+            hasVarargModifier() shouldBeEqualTo false
+            hasNoInlineModifier() shouldBeEqualTo false
+            hasCrossInlineModifier() shouldBeEqualTo false
         }
     }
 

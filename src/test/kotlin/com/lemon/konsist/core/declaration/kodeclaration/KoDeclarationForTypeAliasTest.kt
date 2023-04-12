@@ -18,7 +18,7 @@ class KoDeclarationForTypeAliasTest {
             .first()
 
         // then
-        sut.isTopLevel shouldBeEqualTo true
+        sut.isTopLevel() shouldBeEqualTo true
     }
 
     @Test
@@ -45,11 +45,11 @@ class KoDeclarationForTypeAliasTest {
 
         // then
         sut.run {
-            isPublicOrDefault shouldBeEqualTo true
-            isPublic shouldBeEqualTo false
-            isPrivate shouldBeEqualTo false
-            isProtected shouldBeEqualTo false
-            isInternal shouldBeEqualTo false
+            isPublicOrDefault() shouldBeEqualTo true
+            hasPublicModifier() shouldBeEqualTo false
+            hasPrivateModifier() shouldBeEqualTo false
+            hasProtectedModifier() shouldBeEqualTo false
+            hasInternalModifier() shouldBeEqualTo false
         }
     }
 
@@ -62,11 +62,11 @@ class KoDeclarationForTypeAliasTest {
 
         // then
         sut.run {
-            isPublicOrDefault shouldBeEqualTo true
-            isPublic shouldBeEqualTo true
-            isPrivate shouldBeEqualTo false
-            isProtected shouldBeEqualTo false
-            isInternal shouldBeEqualTo false
+            isPublicOrDefault() shouldBeEqualTo true
+            hasPublicModifier() shouldBeEqualTo true
+            hasPrivateModifier() shouldBeEqualTo false
+            hasProtectedModifier() shouldBeEqualTo false
+            hasInternalModifier() shouldBeEqualTo false
         }
     }
 
@@ -79,11 +79,11 @@ class KoDeclarationForTypeAliasTest {
 
         // then
         sut.run {
-            isPublicOrDefault shouldBeEqualTo false
-            isPublic shouldBeEqualTo false
-            isPrivate shouldBeEqualTo true
-            isProtected shouldBeEqualTo false
-            isInternal shouldBeEqualTo false
+            isPublicOrDefault() shouldBeEqualTo false
+            hasPublicModifier() shouldBeEqualTo false
+            hasPrivateModifier() shouldBeEqualTo true
+            hasProtectedModifier() shouldBeEqualTo false
+            hasInternalModifier() shouldBeEqualTo false
         }
     }
 
@@ -96,11 +96,11 @@ class KoDeclarationForTypeAliasTest {
 
         // then
         sut.run {
-            isPublicOrDefault shouldBeEqualTo false
-            isPublic shouldBeEqualTo false
-            isPrivate shouldBeEqualTo false
-            isProtected shouldBeEqualTo true
-            isInternal shouldBeEqualTo false
+            isPublicOrDefault() shouldBeEqualTo false
+            hasPublicModifier() shouldBeEqualTo false
+            hasPrivateModifier() shouldBeEqualTo false
+            hasProtectedModifier() shouldBeEqualTo true
+            hasInternalModifier() shouldBeEqualTo false
         }
     }
 
@@ -113,11 +113,11 @@ class KoDeclarationForTypeAliasTest {
 
         // then
         sut.run {
-            isPublicOrDefault shouldBeEqualTo false
-            isPublic shouldBeEqualTo false
-            isPrivate shouldBeEqualTo false
-            isProtected shouldBeEqualTo false
-            isInternal shouldBeEqualTo true
+            isPublicOrDefault() shouldBeEqualTo false
+            hasPublicModifier() shouldBeEqualTo false
+            hasPrivateModifier() shouldBeEqualTo false
+            hasProtectedModifier() shouldBeEqualTo false
+            hasInternalModifier() shouldBeEqualTo true
         }
     }
 

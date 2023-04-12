@@ -14,7 +14,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.isAbstract shouldBeEqualTo true
+        sut.hasAbstractModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -25,7 +25,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.isAnnotation shouldBeEqualTo true
+        sut.hasAnnotationModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -47,7 +47,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.isData shouldBeEqualTo true
+        sut.hasDataModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -58,7 +58,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.isEnum shouldBeEqualTo true
+        sut.hasEnumModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -69,7 +69,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.isSealed shouldBeEqualTo true
+        sut.hasSealedModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -80,7 +80,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.isValue shouldBeEqualTo true
+        sut.hasValueModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -91,7 +91,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.isOpen shouldBeEqualTo true
+        sut.hasOpenModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -102,7 +102,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.isFinal shouldBeEqualTo true
+        sut.hasFinalModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -113,7 +113,7 @@ class KoClassTest {
             .first { it.name == "InnerClass" }
 
         // then
-        sut.isInner shouldBeEqualTo true
+        sut.hasInnerModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -126,7 +126,7 @@ class KoClassTest {
         // then
         sut.run {
             primaryConstructor?.name shouldBeEqualTo "SampleClass"
-            hasExplicitPrimaryConstructor shouldBeEqualTo true
+            hasExplicitPrimaryConstructor() shouldBeEqualTo true
         }
     }
 
@@ -140,7 +140,7 @@ class KoClassTest {
         // then
         sut.run {
             primaryConstructor?.name shouldBeEqualTo null
-            hasExplicitPrimaryConstructor shouldBeEqualTo false
+            hasExplicitPrimaryConstructor() shouldBeEqualTo false
         }
     }
 
@@ -154,7 +154,7 @@ class KoClassTest {
         // then
         sut.run {
             secondaryConstructors.first().name shouldBeEqualTo "SampleClass"
-            hasSecondaryConstructors shouldBeEqualTo true
+            hasSecondaryConstructors() shouldBeEqualTo true
         }
     }
 
@@ -168,7 +168,7 @@ class KoClassTest {
         // then
         sut.run {
             secondaryConstructors.isEmpty()
-            hasSecondaryConstructors shouldBeEqualTo false
+            hasSecondaryConstructors() shouldBeEqualTo false
         }
     }
 

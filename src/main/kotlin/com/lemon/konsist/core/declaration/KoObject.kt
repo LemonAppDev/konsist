@@ -4,7 +4,7 @@ import com.lemon.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 
 class KoObject(private val ktObjectDeclaration: KtObjectDeclaration) : KoComplexDeclaration(ktObjectDeclaration) {
-    val isData by lazy { ktObjectDeclaration.isData() }
+    fun hasDataModifier() = ktObjectDeclaration.isData()
 
     companion object {
         private val cache = KoDeclarationCache<KoObject>()
