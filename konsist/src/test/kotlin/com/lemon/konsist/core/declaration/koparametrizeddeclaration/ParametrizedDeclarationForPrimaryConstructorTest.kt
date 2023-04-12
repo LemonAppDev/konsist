@@ -47,5 +47,5 @@ class ParametrizedDeclarationForPrimaryConstructorTest {
     }
 
     private fun getSut(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("koparametrizeddeclaration/snippet/forprimaryconstructor/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koparametrizeddeclaration/snippet/forprimaryconstructor/", fileName)
 }

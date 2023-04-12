@@ -141,5 +141,5 @@ class KoDeclarationForPrimaryConstructorTest {
     }
 
     private fun getSut(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("kodeclaration/snippet/forprimaryconstructor/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kodeclaration/snippet/forprimaryconstructor/", fileName)
 }

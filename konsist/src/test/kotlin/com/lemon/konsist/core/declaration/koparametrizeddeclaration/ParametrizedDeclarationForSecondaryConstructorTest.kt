@@ -50,5 +50,5 @@ class ParametrizedDeclarationForSecondaryConstructorTest {
     }
 
     private fun getSut(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("koparametrizeddeclaration/snippet/forsecondaryconstructor/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koparametrizeddeclaration/snippet/forsecondaryconstructor/", fileName)
 }

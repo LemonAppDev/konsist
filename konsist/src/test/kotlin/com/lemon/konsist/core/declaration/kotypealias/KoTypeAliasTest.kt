@@ -34,5 +34,5 @@ class KoTypeAliasTest {
         sut.isEmpty() shouldBeEqualTo true
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("kotypealias/snippet/", fileName)
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealias/snippet/", fileName)
 }

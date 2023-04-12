@@ -291,5 +291,5 @@ class KoDeclarationForCompanionObjectTest {
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("kodeclaration/snippet/forcompanionobject/", fileName)
+    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forcompanionobject/", fileName)
 }

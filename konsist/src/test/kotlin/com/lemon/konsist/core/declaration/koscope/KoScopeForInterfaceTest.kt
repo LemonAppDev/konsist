@@ -13,7 +13,8 @@ class KoScopeForInterfaceTest {
         // then
         sut
             .interfaces()
-            .map { it.name } shouldBeEqualTo listOf("SampleInterface")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("SampleInterface")
     }
 
     @Test
@@ -24,7 +25,7 @@ class KoScopeForInterfaceTest {
         // then
         sut
             .interfaces()
-            .isEmpty()
+            .toList() shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -35,7 +36,8 @@ class KoScopeForInterfaceTest {
         // then
         sut
             .interfaces(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleInterface1", "SampleNestedInterface", "SampleInterface2")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("SampleInterface1", "SampleNestedInterface", "SampleInterface2")
     }
 
     @Test
@@ -46,8 +48,9 @@ class KoScopeForInterfaceTest {
         // then
         sut
             .interfaces(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("SampleInterface1", "SampleInterface2")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("SampleInterface1", "SampleInterface2")
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koscope/snippet/forinterface/", fileName)
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forinterface/", fileName)
 }

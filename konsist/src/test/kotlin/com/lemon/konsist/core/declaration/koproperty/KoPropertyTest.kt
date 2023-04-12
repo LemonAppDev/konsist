@@ -218,5 +218,5 @@ class KoPropertyTest {
         }
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koproperty/snippet/", fileName)
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/", fileName)
 }

@@ -1,6 +1,6 @@
 package com.lemon.mango.common
 
-import com.lemon.konsist.core.assertion.check.check
+import com.lemon.konsist.core.check.check
 import com.lemon.mango.mangoScope
 import org.junit.jupiter.api.Test
 

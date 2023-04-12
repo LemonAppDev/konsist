@@ -18,11 +18,14 @@ class KoScopeTest {
         val sut = KoScope.fromFile("$testSourceSetPath/lemon/konsist/core/declaration/koscope/KoScopeTest.kt")
 
         // then
-        sut.files().run {
-            size shouldBeEqualTo 1
-            first().name shouldBeEqualTo "KoScopeTest.kt"
-            first().path shouldBeEqualTo "${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeTest.kt"
-        }
+        sut
+            .files()
+            .toList()
+            .run {
+                size shouldBeEqualTo 1
+                first().name shouldBeEqualTo "KoScopeTest.kt"
+                first().path shouldBeEqualTo "${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeTest.kt"
+            }
     }
 
     @Test
@@ -31,11 +34,14 @@ class KoScopeTest {
         val sut = KoScope.fromProject()
 
         // then
-        sut.files().run {
-            isNotEmpty() shouldBeEqualTo true
-            none { it.path.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
-            all { it.path.startsWith(konsistModulePath) } shouldBeEqualTo false
-        }
+        sut
+            .files()
+            .toList()
+            .run {
+                isNotEmpty() shouldBeEqualTo true
+                none { it.path.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
+                all { it.path.startsWith(konsistModulePath) } shouldBeEqualTo false
+            }
     }
 
     @Test
@@ -44,7 +50,10 @@ class KoScopeTest {
         val sut = KoScope.fromPackage("com.lemon.konsist.core.declaration.koscope")
 
         // then
-        sut.files().map { it.name } shouldBeEqualTo listOf(
+        sut
+            .files()
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf(
             "KoScopeForClassTest.kt",
             "KoScopeForCompanionObjectTest.kt",
             "KoScopeForDeclarationTest.kt",
@@ -65,7 +74,10 @@ class KoScopeTest {
         val sut = KoScope.fromPackage("com.lemon.konsist..declaration.koscope")
 
         // then
-        sut.files().map { it.name } shouldBeEqualTo listOf(
+        sut
+            .files()
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf(
             "KoScopeForClassTest.kt",
             "KoScopeForCompanionObjectTest.kt",
             "KoScopeForDeclarationTest.kt",
@@ -87,7 +99,10 @@ class KoScopeTest {
         val sut = KoScope.fromPath("${testSourceSetPath}lemon/konsist/core/declaration/koscope/")
 
         // then
-        sut.files().map { it.name } shouldBeEqualTo listOf(
+        sut
+            .files()
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf(
             "KoScopeForClassTest.kt",
             "KoScopeForCompanionObjectTest.kt",
             "KoScopeForDeclarationTest.kt",
@@ -109,10 +124,13 @@ class KoScopeTest {
         val sut = KoScope.fromModule("konsist")
 
         // then
-        with(sut.files()) {
-            isNotEmpty() shouldBeEqualTo true
-            none { it.path.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
-            all { it.path.startsWith(projectPath) } shouldBeEqualTo true
-        }
+        sut
+            .files()
+            .toList()
+            .run {
+                isNotEmpty() shouldBeEqualTo true
+                none { it.path.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
+                all { it.path.startsWith(projectPath) } shouldBeEqualTo true
+            }
     }
 }

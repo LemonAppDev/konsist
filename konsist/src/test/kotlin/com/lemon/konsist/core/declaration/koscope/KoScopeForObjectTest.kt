@@ -14,7 +14,8 @@ class KoScopeForObjectTest {
         // then
         sut
             .objects()
-            .map { it.name } shouldBeEqualTo listOf("SampleObject")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("SampleObject")
     }
 
     @Test
@@ -25,7 +26,7 @@ class KoScopeForObjectTest {
         // then
         sut
             .objects()
-            .isEmpty()
+            .toList() shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -36,7 +37,8 @@ class KoScopeForObjectTest {
         // then
         sut
             .objects(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleObject1", "SampleNestedObject", "SampleObject2")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("SampleObject1", "SampleNestedObject", "SampleObject2")
     }
 
     @Test
@@ -47,8 +49,9 @@ class KoScopeForObjectTest {
         // then
         sut
             .objects(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("SampleObject1", "SampleObject2")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("SampleObject1", "SampleObject2")
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koscope/snippet/forobject/", fileName)
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forobject/", fileName)
 }

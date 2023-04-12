@@ -1,7 +1,7 @@
 package com.lemon.mango.common
 
-import com.lemon.konsist.core.assertion.check.check
-import com.lemon.konsist.core.assertion.check.checkNot
+import com.lemon.konsist.core.check.check
+import com.lemon.konsist.core.check.checkNot
 import com.lemon.mango.mangoScope
 import jakarta.persistence.Entity
 import org.junit.jupiter.api.Test

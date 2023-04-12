@@ -47,5 +47,5 @@ class ParametrizedDeclarationForFunctionTest {
     }
 
     private fun getSut(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("koparametrizeddeclaration/snippet/forfunction/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koparametrizeddeclaration/snippet/forfunction/", fileName)
 }

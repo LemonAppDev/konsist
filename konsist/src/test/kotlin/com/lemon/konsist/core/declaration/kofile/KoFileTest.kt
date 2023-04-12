@@ -215,5 +215,5 @@ class KoFileTest {
             .isEmpty() shouldBeEqualTo true
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("kofile/snippet/", fileName)
+    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kofile/snippet/", fileName)
 }

@@ -46,5 +46,5 @@ class KoTypeTest {
         }
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("kotype/snippet/", fileName)
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kotype/snippet/", fileName)
 }

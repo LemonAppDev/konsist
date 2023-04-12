@@ -24,7 +24,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Konsist - Konsist Test
-        run: ./gradlew app:konsistTest
+        run: ./gradlew konsist:konsistTest
 
       - uses: actions/upload-artifact@v3
         with:

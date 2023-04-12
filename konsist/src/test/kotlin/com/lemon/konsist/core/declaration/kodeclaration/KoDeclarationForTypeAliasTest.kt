@@ -229,5 +229,5 @@ class KoDeclarationForTypeAliasTest {
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("kodeclaration/snippet/fortypealias/", fileName)
+    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/fortypealias/", fileName)
 }

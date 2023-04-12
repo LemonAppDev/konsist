@@ -13,6 +13,7 @@ class KoScopeForCompanionObjectTest {
         // then
         sut
             .companionObjects(includeNested = true)
+            .toList()
             .map { it.name } shouldBeEqualTo listOf("SampleCompanionObject")
     }
 
@@ -24,7 +25,7 @@ class KoScopeForCompanionObjectTest {
         // then
         sut
             .companionObjects(includeNested = true)
-            .isEmpty() shouldBeEqualTo true
+            .toList() shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -35,6 +36,7 @@ class KoScopeForCompanionObjectTest {
         // then
         sut
             .companionObjects(includeNested = true)
+            .toList()
             .map { it.name } shouldBeEqualTo listOf("SampleCompanionObject1", "SampleCompanionObject2")
     }
 
@@ -46,8 +48,9 @@ class KoScopeForCompanionObjectTest {
         // then
         sut
             .companionObjects(includeNested = false)
-            .isEmpty() shouldBeEqualTo true
+            .toList() shouldBeEqualTo emptyList()
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koscope/snippet/forcompanionobject/", fileName)
+    private fun getSut(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forcompanionobject/", fileName)
 }
