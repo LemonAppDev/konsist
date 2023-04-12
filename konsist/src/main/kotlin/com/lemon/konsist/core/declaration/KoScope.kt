@@ -4,6 +4,7 @@ import com.lemon.konsist.core.const.KoModifier
 import com.lemon.konsist.exception.KoPreconditionFailedException
 import com.lemon.konsist.ext.isKotlinFile
 import com.lemon.konsist.ext.toKoFile
+import com.lemon.konsist.util.PackageHelper
 import java.io.File
 
 class KoScope(
@@ -100,9 +101,13 @@ class KoScope(
             return KoScope(koFiles)
         }
 
-        fun fromPackage(packageNameStart: String): KoScope {
+        fun fromPackage(packageName: String): KoScope {
             val koFiles = projectKotlinFiles
-                .filter { it.packageDirective?.qualifiedName?.startsWith(packageNameStart) ?: false }
+                .filter {
+                    it.packageDirective?.let { koPackage ->
+                        PackageHelper.resideInPackage(packageName, koPackage.qualifiedName)
+                    } ?: false
+                }
                 .toList()
 
             return KoScope(koFiles)
