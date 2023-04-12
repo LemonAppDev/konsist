@@ -27,51 +27,43 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
             .joinToString(separator = ".")
     }
 
-    val isPublic by lazy { ktTypeParameterListOwner.hasModifier(KtTokens.PUBLIC_KEYWORD) }
-
-    val isPublicOrDefault by lazy {
-        ktTypeParameterListOwner.run {
-            if (hasModifier(KtTokens.PUBLIC_KEYWORD)) {
-                return@run true
-            }
-
-            val hasOtherVisibilityModifier =
-                hasModifier(KtTokens.PRIVATE_KEYWORD) ||
-                    hasModifier(KtTokens.PROTECTED_KEYWORD) ||
-                    hasModifier(
-                        KtTokens.INTERNAL_KEYWORD,
-                    )
-
-            hasOtherVisibilityModifier.not()
-        }
-    }
-
-    val isPrivate by lazy {
-        ktTypeParameterListOwner
-            .modifierList
-            ?.hasModifier(KtTokens.PRIVATE_KEYWORD)
-            ?: false
-    }
-
-    val isProtected by lazy {
-        ktTypeParameterListOwner
-            .modifierList
-            ?.hasModifier(KtTokens.PROTECTED_KEYWORD)
-            ?: false
-    }
-
-    val isInternal by lazy {
-        ktTypeParameterListOwner
-            .modifierList
-            ?.hasModifier(KtTokens.INTERNAL_KEYWORD)
-            ?: false
-    }
-
-    val isTopLevel = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
-
     val annotations = ktTypeParameterListOwner
         .annotationEntries
         .map { KoAnnotation.getInstance(it) }
+
+    fun hasPublicModifier() = ktTypeParameterListOwner.hasModifier(KtTokens.PUBLIC_KEYWORD)
+
+    fun isPublicOrDefault() = ktTypeParameterListOwner.run {
+        if (hasModifier(KtTokens.PUBLIC_KEYWORD)) {
+            return@run true
+        }
+
+        val hasOtherVisibilityModifier =
+            hasModifier(KtTokens.PRIVATE_KEYWORD) ||
+                hasModifier(KtTokens.PROTECTED_KEYWORD) ||
+                hasModifier(
+                    KtTokens.INTERNAL_KEYWORD,
+                )
+
+        hasOtherVisibilityModifier.not()
+    }
+
+    fun hasPrivateModifier() = ktTypeParameterListOwner
+        .modifierList
+        ?.hasModifier(KtTokens.PRIVATE_KEYWORD)
+        ?: false
+
+    fun hasProtectedModifier() = ktTypeParameterListOwner
+        .modifierList
+        ?.hasModifier(KtTokens.PROTECTED_KEYWORD)
+        ?: false
+
+    fun hasInternalModifier() = ktTypeParameterListOwner
+        .modifierList
+        ?.hasModifier(KtTokens.INTERNAL_KEYWORD)
+        ?: false
+
+    fun isTopLevel() = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
 
     fun hasAnnotation(kClass: KClass<*>): Boolean {
         val qualifiedName = kClass.qualifiedName ?: return false

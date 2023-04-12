@@ -20,28 +20,6 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
     KoLocalFunctionProvider,
     KoLocalPropertyProvider {
 
-    val isOperator by lazy { ktFunction.modifierList?.hasModifier(KtTokens.OPERATOR_KEYWORD) ?: false }
-
-    val isInline by lazy { ktFunction.modifierList?.hasModifier(KtTokens.INLINE_KEYWORD) ?: false }
-
-    val isTailrec by lazy { ktFunction.modifierList?.hasModifier(KtTokens.TAILREC_KEYWORD) ?: false }
-
-    val isInfix by lazy { ktFunction.modifierList?.hasModifier(KtTokens.INFIX_KEYWORD) ?: false }
-
-    val isExternal by lazy { ktFunction.modifierList?.hasModifier(KtTokens.EXTERNAL_KEYWORD) ?: false }
-
-    val isSuspend by lazy { ktFunction.modifierList?.hasModifier(KtTokens.SUSPEND_KEYWORD) ?: false }
-
-    val isOpen by lazy { ktFunction.modifierList?.hasModifier(KtTokens.OPEN_KEYWORD) ?: false }
-
-    val isOverride by lazy { ktFunction.modifierList?.hasModifier(KtTokens.OVERRIDE_KEYWORD) ?: false }
-
-    val isFinal by lazy { ktFunction.modifierList?.hasModifier(KtTokens.FINAL_KEYWORD) ?: false }
-
-    val isAbstract by lazy { ktFunction.modifierList?.hasModifier(KtTokens.ABSTRACT_KEYWORD) ?: false }
-
-    val isExtension by lazy { ktFunction.isExtensionDeclaration() }
-
     private val localDeclarations by lazy {
         val psiChildren = ktFunction
             .bodyBlockExpression
@@ -62,8 +40,6 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
         }
     }
 
-    val hasExplicitReturnType by lazy { ktFunction.hasDeclaredReturnType() }
-
     val explicitReturnType by lazy {
         val type = ktFunction
             .children
@@ -71,6 +47,30 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
 
         type?.let { KoType.getInstance(type) }
     }
+
+    fun hasOperatorModifier() = ktFunction.modifierList?.hasModifier(KtTokens.OPERATOR_KEYWORD) ?: false
+
+    fun hasInlineModifier() = ktFunction.modifierList?.hasModifier(KtTokens.INLINE_KEYWORD) ?: false
+
+    fun hasTailrecModifier() = ktFunction.modifierList?.hasModifier(KtTokens.TAILREC_KEYWORD) ?: false
+
+    fun hasInfixModifier() = ktFunction.modifierList?.hasModifier(KtTokens.INFIX_KEYWORD) ?: false
+
+    fun hasExternalModifier() = ktFunction.modifierList?.hasModifier(KtTokens.EXTERNAL_KEYWORD) ?: false
+
+    fun hasSuspendModifier() = ktFunction.modifierList?.hasModifier(KtTokens.SUSPEND_KEYWORD) ?: false
+
+    fun hasOpenModifier() = ktFunction.modifierList?.hasModifier(KtTokens.OPEN_KEYWORD) ?: false
+
+    fun hasOverrideModifier() = ktFunction.modifierList?.hasModifier(KtTokens.OVERRIDE_KEYWORD) ?: false
+
+    fun hasFinalModifier() = ktFunction.modifierList?.hasModifier(KtTokens.FINAL_KEYWORD) ?: false
+
+    fun hasAbstractModifier() = ktFunction.modifierList?.hasModifier(KtTokens.ABSTRACT_KEYWORD) ?: false
+
+    fun isExtension() = ktFunction.isExtensionDeclaration()
+
+    fun hasExplicitReturnType() = ktFunction.hasDeclaredReturnType()
 
     override fun localDeclarations(): List<KoDeclaration> = localDeclarations
 

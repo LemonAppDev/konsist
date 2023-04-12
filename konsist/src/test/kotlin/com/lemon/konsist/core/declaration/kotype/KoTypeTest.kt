@@ -21,7 +21,7 @@ class KoTypeTest {
         sut?.run {
             sourceType shouldBeEqualTo "SampleType"
             name shouldBeEqualTo "ImportAlias"
-            isImportAlias shouldBeEqualTo true
+            isImportAlias() shouldBeEqualTo true
             fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
@@ -41,7 +41,7 @@ class KoTypeTest {
         sut?.run {
             sourceType shouldBeEqualTo "SampleType"
             name shouldBeEqualTo ""
-            isImportAlias shouldBeEqualTo false
+            isImportAlias() shouldBeEqualTo false
             fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }

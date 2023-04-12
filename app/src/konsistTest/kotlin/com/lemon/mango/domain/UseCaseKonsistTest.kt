@@ -11,7 +11,7 @@ class UseCaseKonsistTest {
 
     @Test
     fun `UseCase class should have one public invoke operator method`() {
-        sut.check { it.containsFunction("invoke") && it.isPublicOrDefault }
+        sut.check { it.containsFunction("invoke") && it.isPublicOrDefault() }
     }
 
     @Test

@@ -18,11 +18,11 @@ class KoDeclarationForSecondaryConstructorTest {
 
         // then
         sut.run {
-            isPublicOrDefault shouldBeEqualTo true
-            isPublic shouldBeEqualTo false
-            isPrivate shouldBeEqualTo false
-            isInternal shouldBeEqualTo false
-            isProtected shouldBeEqualTo false
+            isPublicOrDefault() shouldBeEqualTo true
+            hasPublicModifier() shouldBeEqualTo false
+            hasPrivateModifier() shouldBeEqualTo false
+            hasProtectedModifier() shouldBeEqualTo false
+            hasInternalModifier() shouldBeEqualTo false
         }
     }
 
@@ -37,11 +37,11 @@ class KoDeclarationForSecondaryConstructorTest {
 
         // then
         sut.run {
-            isPublicOrDefault shouldBeEqualTo true
-            isPublic shouldBeEqualTo true
-            isPrivate shouldBeEqualTo false
-            isInternal shouldBeEqualTo false
-            isProtected shouldBeEqualTo false
+            isPublicOrDefault() shouldBeEqualTo true
+            hasPublicModifier() shouldBeEqualTo true
+            hasPrivateModifier() shouldBeEqualTo false
+            hasProtectedModifier() shouldBeEqualTo false
+            hasInternalModifier() shouldBeEqualTo false
         }
     }
 
@@ -56,11 +56,11 @@ class KoDeclarationForSecondaryConstructorTest {
 
         // then
         sut.run {
-            isPublicOrDefault shouldBeEqualTo false
-            isPublic shouldBeEqualTo false
-            isPrivate shouldBeEqualTo true
-            isInternal shouldBeEqualTo false
-            isProtected shouldBeEqualTo false
+            isPublicOrDefault() shouldBeEqualTo false
+            hasPublicModifier() shouldBeEqualTo false
+            hasPrivateModifier() shouldBeEqualTo true
+            hasProtectedModifier() shouldBeEqualTo false
+            hasInternalModifier() shouldBeEqualTo false
         }
     }
 
@@ -75,11 +75,11 @@ class KoDeclarationForSecondaryConstructorTest {
 
         // then
         sut.run {
-            isPublicOrDefault shouldBeEqualTo false
-            isPublic shouldBeEqualTo false
-            isPrivate shouldBeEqualTo false
-            isInternal shouldBeEqualTo false
-            isProtected shouldBeEqualTo true
+            isPublicOrDefault() shouldBeEqualTo false
+            hasPublicModifier() shouldBeEqualTo false
+            hasPrivateModifier() shouldBeEqualTo false
+            hasProtectedModifier() shouldBeEqualTo true
+            hasInternalModifier() shouldBeEqualTo false
         }
     }
 
@@ -94,11 +94,11 @@ class KoDeclarationForSecondaryConstructorTest {
 
         // then
         sut.run {
-            isPublicOrDefault shouldBeEqualTo false
-            isPublic shouldBeEqualTo false
-            isPrivate shouldBeEqualTo false
-            isInternal shouldBeEqualTo true
-            isProtected shouldBeEqualTo false
+            isPublicOrDefault() shouldBeEqualTo false
+            hasPublicModifier() shouldBeEqualTo false
+            hasPrivateModifier() shouldBeEqualTo false
+            hasProtectedModifier() shouldBeEqualTo false
+            hasInternalModifier() shouldBeEqualTo true
         }
     }
 

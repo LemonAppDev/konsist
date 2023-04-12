@@ -13,26 +13,6 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
 
     val isVal by lazy { !ktProperty.isVar }
 
-    val isLateinit by lazy { ktProperty.modifierList?.hasModifier(KtTokens.LATEINIT_KEYWORD) ?: false }
-
-    val isOverride by lazy { ktProperty.modifierList?.hasModifier(KtTokens.OVERRIDE_KEYWORD) ?: false }
-
-    val isAbstract by lazy { ktProperty.modifierList?.hasModifier(KtTokens.ABSTRACT_KEYWORD) ?: false }
-
-    val isOpen by lazy { ktProperty.modifierList?.hasModifier(KtTokens.OPEN_KEYWORD) ?: false }
-
-    val isFinal by lazy { ktProperty.modifierList?.hasModifier(KtTokens.FINAL_KEYWORD) ?: false }
-
-    val isExtension by lazy { ktProperty.isExtensionDeclaration() }
-
-    val isConst by lazy {
-        ktProperty
-            .children
-            .firstIsInstanceOrNull<KtModifierList>()
-            ?.hasModifier(KtTokens.CONST_KEYWORD)
-            ?: false
-    }
-
     val delegateName by lazy {
         ktProperty
             .delegate
@@ -43,8 +23,6 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
             ?.removeSuffix(" ")
     }
 
-    val hasDelegate by lazy { ktProperty.hasDelegateExpression() }
-
     val explicitType by lazy {
         val type = ktProperty
             .children
@@ -52,6 +30,26 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
 
         type?.let { KoType.getInstance(it) }
     }
+
+    fun hasLateinitModifier() = ktProperty.modifierList?.hasModifier(KtTokens.LATEINIT_KEYWORD) ?: false
+
+    fun hasOverrideModifier() = ktProperty.modifierList?.hasModifier(KtTokens.OVERRIDE_KEYWORD) ?: false
+
+    fun hasAbstractModifier() = ktProperty.modifierList?.hasModifier(KtTokens.ABSTRACT_KEYWORD) ?: false
+
+    fun hasOpenModifier() = ktProperty.modifierList?.hasModifier(KtTokens.OPEN_KEYWORD) ?: false
+
+    fun hasFinalModifier() = ktProperty.modifierList?.hasModifier(KtTokens.FINAL_KEYWORD) ?: false
+
+    fun hasConstModifier() = ktProperty
+        .children
+        .firstIsInstanceOrNull<KtModifierList>()
+        ?.hasModifier(KtTokens.CONST_KEYWORD)
+        ?: false
+
+    fun isExtension() = ktProperty.isExtensionDeclaration()
+
+    fun hasDelegate() = ktProperty.hasDelegateExpression()
 
     fun hasDelegate(name: String): Boolean = delegateName == name
 

@@ -13,7 +13,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.isOperator shouldBeEqualTo true
+        sut.hasOperatorModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -24,7 +24,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.isInline shouldBeEqualTo true
+        sut.hasInlineModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -35,7 +35,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.isTailrec shouldBeEqualTo true
+        sut.hasTailrecModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -46,7 +46,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.isInfix shouldBeEqualTo true
+        sut.hasInfixModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -57,7 +57,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.isExternal shouldBeEqualTo true
+        sut.hasExternalModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -68,7 +68,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.isSuspend shouldBeEqualTo true
+        sut.hasSuspendModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -79,7 +79,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.isOpen shouldBeEqualTo true
+        sut.hasOpenModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -90,7 +90,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.isOverride shouldBeEqualTo true
+        sut.hasOverrideModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -101,7 +101,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.isFinal shouldBeEqualTo true
+        sut.hasFinalModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -112,7 +112,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.isAbstract shouldBeEqualTo true
+        sut.hasAbstractModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -124,16 +124,16 @@ class KoFunctionTest {
 
         // then
         sut.run {
-            isOperator shouldBeEqualTo false
-            isInline shouldBeEqualTo false
-            isTailrec shouldBeEqualTo false
-            isInfix shouldBeEqualTo false
-            isExternal shouldBeEqualTo false
-            isSuspend shouldBeEqualTo false
-            isOpen shouldBeEqualTo false
-            isOverride shouldBeEqualTo false
-            isFinal shouldBeEqualTo false
-            isAbstract shouldBeEqualTo false
+            hasOperatorModifier() shouldBeEqualTo false
+            hasInlineModifier() shouldBeEqualTo false
+            hasTailrecModifier() shouldBeEqualTo false
+            hasInfixModifier() shouldBeEqualTo false
+            hasExternalModifier() shouldBeEqualTo false
+            hasSuspendModifier() shouldBeEqualTo false
+            hasOpenModifier() shouldBeEqualTo false
+            hasOverrideModifier() shouldBeEqualTo false
+            hasFinalModifier() shouldBeEqualTo false
+            hasAbstractModifier() shouldBeEqualTo false
         }
     }
 
@@ -145,7 +145,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.isExtension shouldBeEqualTo true
+        sut.isExtension() shouldBeEqualTo true
     }
 
     @Test
@@ -156,7 +156,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.isExtension shouldBeEqualTo false
+        sut.isExtension() shouldBeEqualTo false
     }
 
     @Test
@@ -168,10 +168,10 @@ class KoFunctionTest {
 
         // then
         sut.run {
-            hasExplicitReturnType shouldBeEqualTo true
+            hasExplicitReturnType() shouldBeEqualTo true
             explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
             explicitReturnType?.name shouldBeEqualTo ""
-            explicitReturnType?.isImportAlias shouldBeEqualTo false
+            explicitReturnType?.isImportAlias() shouldBeEqualTo false
             explicitReturnType?.fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
@@ -185,10 +185,10 @@ class KoFunctionTest {
 
         // then
         sut.run {
-            hasExplicitReturnType shouldBeEqualTo true
+            hasExplicitReturnType() shouldBeEqualTo true
             explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
             explicitReturnType?.name shouldBeEqualTo "ImportAlias"
-            explicitReturnType?.isImportAlias shouldBeEqualTo true
+            explicitReturnType?.isImportAlias() shouldBeEqualTo true
         }
     }
 
@@ -201,10 +201,10 @@ class KoFunctionTest {
 
         // then
         sut.run {
-            hasExplicitReturnType shouldBeEqualTo false
+            hasExplicitReturnType() shouldBeEqualTo false
             explicitReturnType?.sourceType shouldBeEqualTo null
             explicitReturnType?.name shouldBeEqualTo null
-            explicitReturnType?.isImportAlias shouldBeEqualTo null
+            explicitReturnType?.isImportAlias() shouldBeEqualTo null
         }
     }
 

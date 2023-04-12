@@ -41,7 +41,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.isLateinit shouldBeEqualTo true
+        sut.hasLateinitModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -52,7 +52,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.isOverride shouldBeEqualTo true
+        sut.hasOverrideModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -63,7 +63,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.isAbstract shouldBeEqualTo true
+        sut.hasAbstractModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -74,7 +74,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.isOpen shouldBeEqualTo true
+        sut.hasOpenModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -85,7 +85,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.isFinal shouldBeEqualTo true
+        sut.hasFinalModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -96,7 +96,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.isConst shouldBeEqualTo true
+        sut.hasConstModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -108,12 +108,12 @@ class KoPropertyTest {
 
         // then
         sut.run {
-            isLateinit shouldBeEqualTo false
-            isOverride shouldBeEqualTo false
-            isAbstract shouldBeEqualTo false
-            isOpen shouldBeEqualTo false
-            isFinal shouldBeEqualTo false
-            isConst shouldBeEqualTo false
+            hasLateinitModifier() shouldBeEqualTo false
+            hasOverrideModifier() shouldBeEqualTo false
+            hasAbstractModifier() shouldBeEqualTo false
+            hasOpenModifier() shouldBeEqualTo false
+            hasFinalModifier() shouldBeEqualTo false
+            hasConstModifier() shouldBeEqualTo false
         }
     }
 
@@ -125,7 +125,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.isExtension shouldBeEqualTo true
+        sut.isExtension() shouldBeEqualTo true
     }
 
     @Test
@@ -136,7 +136,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.isExtension shouldBeEqualTo false
+        sut.isExtension() shouldBeEqualTo false
     }
 
     @Test
@@ -150,7 +150,7 @@ class KoPropertyTest {
         sut.explicitType?.run {
             sourceType shouldBeEqualTo "SampleType"
             name shouldBeEqualTo ""
-            isImportAlias shouldBeEqualTo false
+            isImportAlias() shouldBeEqualTo false
             fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
@@ -166,7 +166,7 @@ class KoPropertyTest {
         sut.explicitType?.run {
             sourceType shouldBeEqualTo "SampleType"
             name shouldBeEqualTo "ImportAlias"
-            isImportAlias shouldBeEqualTo true
+            isImportAlias() shouldBeEqualTo true
             fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
         }
     }
@@ -182,7 +182,7 @@ class KoPropertyTest {
         sut.explicitType?.run {
             sourceType shouldBeEqualTo null
             name shouldBeEqualTo null
-            isImportAlias shouldBeEqualTo null
+            isImportAlias() shouldBeEqualTo null
             fullyQualifiedName shouldBeEqualTo null
         }
     }
@@ -197,7 +197,7 @@ class KoPropertyTest {
         // then
         sut.run {
             delegateName shouldBeEqualTo "lazy"
-            hasDelegate shouldBeEqualTo true
+            hasDelegate() shouldBeEqualTo true
             hasDelegate("lazy") shouldBeEqualTo true
             hasDelegate("Delegates.observable()") shouldBeEqualTo false
         }
@@ -213,7 +213,7 @@ class KoPropertyTest {
         // then
         sut.run {
             delegateName shouldBeEqualTo null
-            hasDelegate shouldBeEqualTo false
+            hasDelegate() shouldBeEqualTo false
             hasDelegate("lazy") shouldBeEqualTo false
         }
     }

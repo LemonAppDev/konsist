@@ -7,7 +7,7 @@ import jakarta.persistence.Entity
 import org.junit.jupiter.api.Test
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.web.bind.annotation.RestController
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 
 class GeneralCodingKonsistTest {
@@ -49,8 +49,8 @@ class GeneralCodingKonsistTest {
     fun `every class constructor has alphabetically ordered parameters`() {
         mangoScope
             .classes().filterNot { it.hasAnnotation(Entity::class) }
-            .filterNot { it.isData }
-            .filterNot { it.isValue }
+            .filterNot { it.hasDataModifier() }
+            .filterNot { it.hasValueModifier() }
             .mapNotNull { it.primaryConstructor }.check {
                 val names = it.parameters.map { parameter -> parameter.name }
                 val sortedNames = it.parameters.map { parameter -> parameter.name }.sorted()
@@ -62,9 +62,9 @@ class GeneralCodingKonsistTest {
     fun `every constructor parameter has name derived from parameter type`() {
         mangoScope
             .classes()
-            .filterNot { it.isData }
-            .filterNot { it.isValue }
-            .filterNot { it.isEnum }
+            .filterNot { it.hasDataModifier() }
+            .filterNot { it.hasValueModifier() }
+            .filterNot { it.hasEnumModifier() }
             .filterNot { it.hasAnnotation(Entity::class) }
             .mapNotNull { it.primaryConstructor }
             .flatMap { it.parameters }
@@ -79,7 +79,7 @@ class GeneralCodingKonsistTest {
             .classes()
             .filter { it.hasAnnotation(RestController::class) }
             .flatMap { it.functions() }
-            .check { it.hasExplicitReturnType }
+            .check { it.hasExplicitReturnType() }
     }
 }
 

@@ -9,7 +9,7 @@ class ValueClassKonsistTest {
     fun `value class has parameter named 'value'`() {
         mangoScope
             .classes()
-            .filter { it.isValue }
+            .filter { it.hasValueModifier() }
             .mapNotNull { it.primaryConstructor }
             .check { it.hasParameterNamed("value") }
     }

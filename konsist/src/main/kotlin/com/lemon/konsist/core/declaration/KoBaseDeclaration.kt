@@ -15,8 +15,6 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
 
     val containingFile by lazy { KoFile.getInstance(ktElement.containingKtFile) }
 
-    override fun toString() = textWithLocation
-
     val location by lazy {
         val lineAndColumn =
             textWithLocation
@@ -37,4 +35,6 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
             .removePrefix("'")
             .removeSuffix("\n")
     }
+
+    override fun toString() = textWithLocation
 }

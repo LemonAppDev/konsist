@@ -34,7 +34,7 @@ class KoType private constructor(private val ktTypeReference: KtTypeReference) :
             .first { it.contains(sourceType) }
     }
 
-    val isImportAlias by lazy { name.isNotEmpty() }
+    fun isImportAlias() = name.isNotEmpty()
 
     companion object {
         private val cache = KoDeclarationCache<KoType>()

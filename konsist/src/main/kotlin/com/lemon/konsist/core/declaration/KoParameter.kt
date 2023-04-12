@@ -18,14 +18,6 @@ class KoParameter private constructor(private val ktParameter: KtParameter) : Ko
         KoType.getInstance(type)
     }
 
-    val isVarArg by lazy { ktParameter.isVarArg }
-
-    val isNoInline by lazy { ktParameter.modifierList?.hasModifier(KtTokens.NOINLINE_KEYWORD) ?: false }
-
-    val isCrossInline by lazy { ktParameter.modifierList?.hasModifier(KtTokens.CROSSINLINE_KEYWORD) ?: false }
-
-    val hasDefaultValue by lazy { ktParameter.hasDefaultValue() }
-
     val defaultValue by lazy {
         // eg. primitive value as default parameter value
         val constantExpressionText = ktParameter
@@ -45,6 +37,14 @@ class KoParameter private constructor(private val ktParameter: KtParameter) : Ko
 
         callExpressionText
     }
+
+    fun hasVarargModifier() = ktParameter.isVarArg
+
+    fun hasNoInlineModifier() = ktParameter.modifierList?.hasModifier(KtTokens.NOINLINE_KEYWORD) ?: false
+
+    fun hasCrossInlineModifier() = ktParameter.modifierList?.hasModifier(KtTokens.CROSSINLINE_KEYWORD) ?: false
+
+    fun hasDefaultValue() = ktParameter.hasDefaultValue()
 
     companion object {
         private val cache = KoDeclarationCache<KoParameter>()
