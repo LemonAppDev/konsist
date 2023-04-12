@@ -41,14 +41,25 @@ class KoBaseDeclarationTest {
     }
 
     @Test
-    fun `location`() {
+    fun `location-with-single-digit`() {
         // given
-        val sut = getSut("location")
+        val sut = getSut("location-with-single-digit")
             .functions()
             .first()
 
         // then
         sut.location shouldBeEqualTo "${sut.filePath}:3:1"
+    }
+
+    @Test
+    fun `location-with-double-digit`() {
+        // given
+        val sut = getSut("location-with-double-digit")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.location shouldBeEqualTo "${sut.filePath}:12:25"
     }
 
     @Test
