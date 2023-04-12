@@ -116,6 +116,28 @@ class KoFunctionTest {
     }
 
     @Test
+    fun `function-has-actual-modifier`() {
+        // given
+        val sut = getSut("function-has-actual-modifier")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.hasActualModifier() shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-has-expect-modifier`() {
+        // given
+        val sut = getSut("function-has-expect-modifier")
+            .functions()
+            .first()
+
+        // then
+        sut.hasExpectModifier() shouldBeEqualTo true
+    }
+
+    @Test
     fun `function-has-no-modifiers`() {
         // given
         val sut = getSut("function-has-no-modifiers")
@@ -134,6 +156,8 @@ class KoFunctionTest {
             hasOverrideModifier() shouldBeEqualTo false
             hasFinalModifier() shouldBeEqualTo false
             hasAbstractModifier() shouldBeEqualTo false
+            hasActualModifier() shouldBeEqualTo false
+            hasExpectModifier() shouldBeEqualTo false
         }
     }
 

@@ -14,6 +14,7 @@ import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
+@Suppress("detekt.TooManyFunctions")
 class KoFunction private constructor(private val ktFunction: KtFunction) :
     KoParametrizedDeclaration(ktFunction),
     KoLocalClassProvider,
@@ -67,6 +68,10 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
     fun hasFinalModifier() = ktFunction.modifierList?.hasModifier(KtTokens.FINAL_KEYWORD) ?: false
 
     fun hasAbstractModifier() = ktFunction.modifierList?.hasModifier(KtTokens.ABSTRACT_KEYWORD) ?: false
+
+    fun hasActualModifier() = ktFunction.modifierList?.hasModifier(KtTokens.ACTUAL_KEYWORD) ?: false
+
+    fun hasExpectModifier() = ktFunction.modifierList?.hasModifier(KtTokens.EXPECT_KEYWORD) ?: false
 
     fun isExtension() = ktFunction.isExtensionDeclaration()
 
