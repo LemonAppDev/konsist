@@ -10,6 +10,7 @@ import com.lemon.konsist.core.declaration.provider.KoFunctionProvider
 import com.lemon.konsist.core.declaration.provider.KoInterfaceProvider
 import com.lemon.konsist.core.declaration.provider.KoObjectProvider
 import com.lemon.konsist.core.declaration.provider.KoPropertyProvider
+import com.lemon.konsist.util.PackageHelper
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
@@ -77,7 +78,7 @@ class KoFile private constructor(private val ktFile: KtFile) :
     override fun declarations(modifiers: List<KoModifier>, includeNested: Boolean, includeLocal: Boolean): List<KoDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
-    fun hasImport(name: String) = imports.any { it.name == name }
+    fun hasImport(name: String) = imports.any { PackageHelper.resideInPackage(name, it.name) }
 
     companion object {
         private val cache = KoDeclarationCache<KoFile>()

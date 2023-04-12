@@ -34,15 +34,20 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-contains-import`() {
+    fun `file-contains-imports`() {
         // given
-        val sut = getSut("file-contains-import")
+        val sut = getSut("file-contains-imports")
             .files()
             .first()
 
         // then
         sut.run {
-            imports.map { it.name } shouldBeEqualTo listOf("com.lemon.konsist.testdata.SampleType")
+            imports.map { it.name } shouldBeEqualTo listOf(
+                "com.lemon.konsist.testdata.SampleAnnotation",
+                "com.lemon.konsist.testdata.SampleType",
+            )
+            hasImport("com..") shouldBeEqualTo true
+            hasImport("com") shouldBeEqualTo false
             hasImport("com.lemon.konsist.testdata.SampleType") shouldBeEqualTo true
             hasImport("com.lemon.konsist.testdata.OtherImport") shouldBeEqualTo false
         }
