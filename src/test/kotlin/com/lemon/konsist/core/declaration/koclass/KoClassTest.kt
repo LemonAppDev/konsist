@@ -218,16 +218,16 @@ class KoClassTest {
 
         // then
         sut.run {
-            parents shouldBeEqualTo listOf()
+            parents shouldBeEqualTo emptyList()
             hasParent() shouldBeEqualTo false
             parentClass shouldBeEqualTo null
             hasParentClass() shouldBeEqualTo false
             hasParentClass("SampleParentClass") shouldBeEqualTo false
-            parentInterfaces shouldBeEqualTo listOf()
+            parentInterfaces shouldBeEqualTo emptyList()
             hasParentInterface() shouldBeEqualTo false
             hasParentInterface("SampleInterface") shouldBeEqualTo false
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("koclass/snippet/", fileName)
+    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/", fileName)
 }

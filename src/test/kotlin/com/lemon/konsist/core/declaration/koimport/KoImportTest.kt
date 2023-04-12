@@ -26,12 +26,14 @@ class KoImportTest {
         val sut = getSut("import-name-has-import-alias").imports()
 
         // then
-        sut.run {
-            this[0].alias shouldBeEqualTo "com.lemon.konsist.testdata.SampleClass"
-            this[1].alias shouldBeEqualTo "ImportAlias"
-            this[1].name shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
-        }
+        sut
+            .toList()
+            .run {
+                get(0).alias shouldBeEqualTo "com.lemon.konsist.testdata.SampleClass"
+                get(1).alias shouldBeEqualTo "ImportAlias"
+                get(1).name shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+            }
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koimport/snippet/", fileName)
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koimport/snippet/", fileName)
 }

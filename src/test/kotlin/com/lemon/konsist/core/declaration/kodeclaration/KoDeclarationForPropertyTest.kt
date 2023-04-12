@@ -291,5 +291,5 @@ class KoDeclarationForPropertyTest {
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("kodeclaration/snippet/forproperty/", fileName)
+    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forproperty/", fileName)
 }

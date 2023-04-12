@@ -8,60 +8,60 @@ import com.lemon.konsist.util.PackageHelper
 import java.io.File
 
 class KoScope(
-    private val koFiles: List<KoFile>,
+    private val koFiles: Sequence<KoFile>,
 ) {
-    constructor(koFile: KoFile) : this(listOf(koFile))
+    constructor(koFile: KoFile) : this(sequenceOf(koFile))
 
-    fun files() = koFiles.sortedBy { it.path }
+    fun files(): Sequence<KoFile> = koFiles.sortedBy { it.path }
 
     fun classes(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ) =
+    ): Sequence<KoClass> =
         koFiles.flatMap { it.classes(modifiers, includeNested, includeLocal) }
 
     fun interfaces(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
-    ) =
+    ): Sequence<KoInterface> =
         koFiles.flatMap { it.interfaces(modifiers, includeNested) }
 
     fun objects(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
-    ) =
+    ): Sequence<KoObject> =
         koFiles.flatMap { it.objects(modifiers, includeNested) }
 
     fun companionObjects(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
-    ) =
+    ): Sequence<KoCompanionObject> =
         koFiles.flatMap { it.companionObjects(modifiers, includeNested) }
 
     fun functions(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ) =
+    ): Sequence<KoFunction> =
         koFiles.flatMap { it.functions(modifiers, includeNested, includeLocal) }
 
     fun declarations(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
-    ) =
+    ): Sequence<KoDeclaration> =
         koFiles.flatMap { it.declarations(modifiers, includeNested) }
 
     fun properties(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ) =
+    ): Sequence<KoProperty> =
         koFiles.flatMap { it.properties(modifiers, includeNested, includeLocal) }
 
     fun imports() = koFiles.flatMap { it.imports }
 
-    fun packages() = koFiles.map { it.packageDirective }
+    fun packages() = koFiles.mapNotNull { it.packageDirective }
 
     fun typeAliases() = koFiles.flatMap { it.typeAliases }
 
@@ -85,7 +85,7 @@ class KoScope(
                 .map { it.toKoFile() }
         }
 
-        fun fromProject() = KoScope(projectKotlinFiles.toList())
+        fun fromProject(): KoScope = KoScope(projectKotlinFiles)
 
         fun fromModule(name: String, sourceSet: String? = null): KoScope {
             var pathPrefix = "$projectRootDirectoryFilePath${name.lowercase()}"
@@ -96,7 +96,6 @@ class KoScope(
 
             val koFiles = projectKotlinFiles
                 .filter { it.path.startsWith(pathPrefix) }
-                .toList()
 
             return KoScope(koFiles)
         }
@@ -108,7 +107,6 @@ class KoScope(
                         PackageHelper.resideInPackage(packageName, koPackage.qualifiedName)
                     } ?: false
                 }
-                .toList()
 
             return KoScope(koFiles)
         }
@@ -128,7 +126,6 @@ class KoScope(
         fun fromPath(path: String): KoScope {
             val koFiles = projectKotlinFiles
                 .filter { it.path.startsWith(path) }
-                .toList()
 
             return KoScope(koFiles)
         }

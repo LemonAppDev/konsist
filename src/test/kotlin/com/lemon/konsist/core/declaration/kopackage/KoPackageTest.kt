@@ -13,15 +13,16 @@ class KoPackageTest {
             .first()
 
         // then
-        sut?.name shouldBeEqualTo "samplepackage"
+        sut.name shouldBeEqualTo "samplepackage"
     }
 
     @Test
-    fun `package-has-no-name`() {
+    fun `package-does-not-exists`() {
         // given
-        val sut = getSut("package-has-no-name")
+        val sut = getSut("package-does-not-exists")
             .packages()
-            .first()
+            .toList()
+            .firstOrNull()
 
         // then
         sut?.name shouldBeEqualTo null
@@ -32,22 +33,13 @@ class KoPackageTest {
         // given
         val sut = getSut("package-has-fully-qualified-name")
             .packages()
-            .first()
 
         // then
-        sut?.qualifiedName shouldBeEqualTo "com.samplepackage"
+        sut
+            .map { it.qualifiedName }
+            .toList()
+            .first() shouldBeEqualTo "com.samplepackage"
     }
 
-    @Test
-    fun `package-has-no-fully-qualified-name`() {
-        // given
-        val sut = getSut("package-has-no-fully-qualified-name")
-            .packages()
-            .first()
-
-        // then
-        sut?.qualifiedName shouldBeEqualTo null
-    }
-
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("kopackage/snippet/", fileName)
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kopackage/snippet/", fileName)
 }

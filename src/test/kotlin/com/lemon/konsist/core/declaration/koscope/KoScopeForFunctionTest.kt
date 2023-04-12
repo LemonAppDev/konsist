@@ -14,7 +14,8 @@ class KoScopeForFunctionTest {
         // then
         sut
             .functions()
-            .map { it.name } shouldBeEqualTo listOf("sampleFunction")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("sampleFunction")
     }
 
     @Test
@@ -25,7 +26,7 @@ class KoScopeForFunctionTest {
         // then
         sut
             .functions()
-            .isEmpty()
+            .toList() shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -36,7 +37,8 @@ class KoScopeForFunctionTest {
         // then
         sut
             .functions(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("sampleFunction1", "sampleFunction2")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("sampleFunction1", "sampleFunction2")
     }
 
     @Test
@@ -47,8 +49,9 @@ class KoScopeForFunctionTest {
         // then
         sut
             .functions(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("sampleFunction1", "sampleFunction2")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("sampleFunction1", "sampleFunction2")
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koscope/snippet/forfunction/", fileName)
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forfunction/", fileName)
 }

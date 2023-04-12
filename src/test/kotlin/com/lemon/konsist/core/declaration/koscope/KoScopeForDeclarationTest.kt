@@ -14,7 +14,8 @@ class KoScopeForDeclarationTest {
         // then
         sut
             .declarations()
-            .map { it.name } shouldBeEqualTo listOf("sampleProperty", "sampleFunction", "SampleClass", "SampleInterface", "SampleObject")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("sampleProperty", "sampleFunction", "SampleClass", "SampleInterface", "SampleObject")
     }
 
     @Test
@@ -25,7 +26,8 @@ class KoScopeForDeclarationTest {
         // then
         sut
             .declarations(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleClass", "sampleNestedFunction")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("SampleClass", "sampleNestedFunction")
     }
 
     @Test
@@ -36,7 +38,8 @@ class KoScopeForDeclarationTest {
         // then
         sut
             .declarations(includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf("SampleClass", "sampleNestedProperty", "sampleNestedFunction")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("SampleClass", "sampleNestedProperty", "sampleNestedFunction")
     }
 
     @Test
@@ -47,8 +50,10 @@ class KoScopeForDeclarationTest {
         // then
         sut
             .declarations(includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf("SampleClass")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("SampleClass")
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koscope/snippet/fordeclaration/", fileName)
+    private fun getSut(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/fordeclaration/", fileName)
 }

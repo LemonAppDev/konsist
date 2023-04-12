@@ -287,5 +287,5 @@ class KoDeclarationForInterfaceTest {
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("kodeclaration/snippet/forinterface/", fileName)
+    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forinterface/", fileName)
 }

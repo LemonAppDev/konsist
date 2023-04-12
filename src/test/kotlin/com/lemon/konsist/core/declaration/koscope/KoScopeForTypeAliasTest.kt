@@ -14,7 +14,8 @@ class KoScopeForTypeAliasTest {
         // then
         sut
             .typeAliases()
-            .map { it.name } shouldBeEqualTo listOf("SampleTypeAlias")
+            .map { it.name }
+            .toList() shouldBeEqualTo listOf("SampleTypeAlias")
     }
 
     @Test
@@ -25,8 +26,8 @@ class KoScopeForTypeAliasTest {
         // then
         sut
             .typeAliases()
-            .isEmpty() shouldBeEqualTo true
+            .toList() shouldBeEqualTo emptyList()
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("koscope/snippet/fortypealias/", fileName)
+    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/fortypealias/", fileName)
 }

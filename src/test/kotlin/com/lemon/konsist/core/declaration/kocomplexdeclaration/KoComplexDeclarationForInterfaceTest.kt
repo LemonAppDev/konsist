@@ -235,5 +235,6 @@ class KoComplexDeclarationForInterfaceTest {
         }
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("kocomplexdeclaration/snippet/forinterface/", fileName)
+    private fun getSut(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kocomplexdeclaration/snippet/forinterface/", fileName)
 }

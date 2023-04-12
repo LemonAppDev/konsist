@@ -194,5 +194,5 @@ class KoParameterTest {
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("koparameter/snippet/", fileName)
+    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/koparameter/snippet/", fileName)
 }

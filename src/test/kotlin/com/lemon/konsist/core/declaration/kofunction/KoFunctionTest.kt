@@ -267,5 +267,5 @@ class KoFunctionTest {
         )
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("kofunction/snippet/", fileName)
+    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/", fileName)
 }
