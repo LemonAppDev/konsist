@@ -33,7 +33,8 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
 
     val text by lazy {
         textWithLocation
-            .substringBefore(" {\n}")
-            .substringAfter("'")
+            .substringBefore("' at (")
+            .removePrefix("'")
+            .removeSuffix("\n")
     }
 }

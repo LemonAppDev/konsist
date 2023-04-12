@@ -55,11 +55,15 @@ class KoBaseDeclarationTest {
     fun `text`() {
         // given
         val sut = getSut("text")
-            .functions()
+            .declarations()
             .first()
 
         // then
-        sut.text shouldBeEqualTo "fun sampleFunction()"
+        sut.text shouldBeEqualTo """
+            fun sampleFunction() {
+                "SampleText"
+            }
+        """.trimIndent()
     }
 
     @Test
