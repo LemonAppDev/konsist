@@ -110,7 +110,7 @@ class KoScope(
 
         fun fromPackage(packageNameStart: String): KoScope {
             val koFiles = projectKotlinFiles
-                .filter { it.packageDirective?.fullyQualifiedName?.startsWith(packageNameStart) ?: false }
+                .filter { it.packageDirective?.qualifiedName?.startsWith(packageNameStart) ?: false }
                 .toList()
             return KoScope(koFiles)
         }
