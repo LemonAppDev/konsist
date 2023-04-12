@@ -60,6 +60,27 @@ class KoScopeTest {
     }
 
     @Test
+    fun `'from package' using two dots syntax`() {
+        // given
+        val sut = KoScope.fromPackage("com.lemon.konsist..declaration.koscope")
+
+        // then
+        sut.files().map { it.name } shouldBeEqualTo listOf(
+            "KoScopeForClassTest.kt",
+            "KoScopeForCompanionObjectTest.kt",
+            "KoScopeForDeclarationTest.kt",
+            "KoScopeForFunctionTest.kt",
+            "KoScopeForImportTest.kt",
+            "KoScopeForInterfaceTest.kt",
+            "KoScopeForObjectTest.kt",
+            "KoScopeForPackageTest.kt",
+            "KoScopeForPropertyTest.kt",
+            "KoScopeForTypeAliasTest.kt",
+            "KoScopeTest.kt",
+        )
+    }
+
+    @Test
     fun `from path`() {
         // given
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
