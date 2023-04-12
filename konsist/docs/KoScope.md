@@ -3,7 +3,7 @@
 The
 [KoScope](../src/main/kotlin/com/lemon/konsist/core/declaration/KoScope.kt) class is the entry point. It represents set
 of Kotlin files to be verified by Konsist library. Scope can be created for a single Kotlin file, folder, package, module
-or entire project. Here is the sample scope.
+or entire project.
 
 Consider this scope:
 
@@ -27,16 +27,29 @@ Scope allows to query available kotlin files to tailor the code base verificatio
 ([KoFile.kt](../src/main/kotlin/com/lemon/konsist/core/declaration/KoFile.kt)), 
 classes (),
 
-Avoid creating scope for every test.
+Scopes should be reused across tests to improve test performance:
+
+```
+tests/
+├─ data/
+│  ├─ DataTest.kt
+├─ app/
+│  ├─ AppTest.kt
+├─ MyScope.kt   <--- Instance of the KoScope used in both DataTest and AppTest classes.
+
+```
 
 ## Scope creation
 
 The `KoScope` class allows to create scope containing all Kotlin files present in the project:
 
 ```kotlin
-val myScope = KoScope.fromProject()
-
+KoScope.fromProjectFiles() // All Kotlin files present in the project
+KoScope.fromProjectFiles(module = "app") // All Kotlin files present in the "app" module
+KoScope.fromProjectFiles(sourceSet = "test") // All Kotlin files present in the "test" source sets
 ```
+
+The `module` and `sourceSet` arguments allows to create more granular scopes.
 
 ### More Granular Scopes
 
@@ -46,13 +59,20 @@ It is also possible to create more granular scopes to store different subsets of
 - scope representing specific application layer
 - ...
 
+Here is an example of creating scopes for production code and test code:
+
+```kotlin
+KoScope.fromProjectTestFiles() // All Kotlin files present test sources sets
+KoScope.fromProjectProductionFiles() // All Kotlin files present production sources sets
+```
+
 Here is an example of creating scope for all files stored in `usecase` package:
 
 ```kotlin
 val myScope = KoScope.fromPackage("..usecase..")
 ```
 
-You can read more about package selector in [PackageSelector.md](PackageSelector.md).
+> You can read more about package selector in [PackageSelector.md](PackageSelector.md).
 
 Here is an example of creating scope for all files stored in `domain` folder`:
 
@@ -78,6 +98,12 @@ koScope.slice { it.hasImport("com.domain.usecase") }
 
 // scope containing all files in "usecase" package and its subpackages
 koScope.slice { it.hasImport("usecase..") }
+```
+
+The `KoScope` can be printed to display list of all files present in the scope. Here is an example: 
+
+```kotlin
+println(koScope)
 ```
 
 ## Filtering Declarations
@@ -116,20 +142,6 @@ Here is an example of retrieving all properties defined in classes and verifying
             .flatMap { it.properties() }
             .checkNot { it.hasAnnotation(Inject::class) }
     }
-```
-
-## Scope Reuse
-
-Scopes should be reused across tests to improve test performance:
-
-```
-tests/
-├─ data/
-│  ├─ DataTest.kt
-├─ app/
-│  ├─ AppTest.kt
-├─ MyScope.kt   <--- Instance of the KoScope used in both DataTest and AppTest classes.
-
 ```
 
 ## Scope composition

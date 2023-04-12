@@ -85,10 +85,12 @@ class KoScope(
                 .map { it.toKoFile() }
         }
 
-        fun fromProject(): KoScope = KoScope(projectKotlinFiles)
+        fun fromProjectFiles(module: String? = null, sourceSet: String? = null): KoScope {
+            if (module == null && sourceSet == null) {
+                return KoScope(projectKotlinFiles)
+            }
 
-        fun fromModule(name: String, sourceSet: String? = null): KoScope {
-            var pathPrefix = "$projectRootDirectoryFilePath${name.lowercase()}"
+            var pathPrefix = "$projectRootDirectoryFilePath${module?.lowercase()}"
 
             if (sourceSet != null) {
                 pathPrefix = "$pathPrefix/src/$sourceSet/"
@@ -98,6 +100,27 @@ class KoScope(
                 .filter { it.path.startsWith(pathPrefix) }
 
             return KoScope(koFiles)
+        }
+
+        fun fromProjectTestFiles(module: String? = null, sourceSet: String? = null): KoScope {
+            val koFiles = fromProjectFiles(module, sourceSet)
+                .files()
+                .filter { isTestFile(it) }
+
+            return KoScope(koFiles)
+        }
+
+        fun fromProjectProductionFiles(module: String? = null, sourceSet: String? = null): KoScope {
+            val koFiles = fromProjectFiles(module, sourceSet)
+                .files()
+                .filter { !isTestFile(it) }
+
+            return KoScope(koFiles)
+        }
+
+        private fun isTestFile(it: KoFile): Boolean {
+            val path = it.path.lowercase()
+            return path.contains("test/") || path.contains("/test")
         }
 
         fun fromPackage(packageName: String): KoScope {

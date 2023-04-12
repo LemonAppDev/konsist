@@ -31,7 +31,7 @@ class KoScopeTest {
     @Test
     fun `from project`() {
         // given
-        val sut = KoScope.fromProject()
+        val sut = KoScope.fromProjectFiles()
 
         // then
         sut
@@ -121,7 +121,7 @@ class KoScopeTest {
     fun `from module`() {
         // given
         val projectPath = konsistModulePath.dropLastWhile { it != '/' }
-        val sut = KoScope.fromModule("konsist")
+        val sut = KoScope.fromProjectFiles(module = "konsist")
 
         // then
         sut
