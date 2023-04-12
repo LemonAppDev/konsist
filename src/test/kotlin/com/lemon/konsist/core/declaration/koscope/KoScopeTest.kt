@@ -54,6 +54,7 @@ class KoScopeTest {
             "KoScopeForObjectTest.kt",
             "KoScopeForPackageTest.kt",
             "KoScopeForPropertyTest.kt",
+            "KoScopeForTypeAliasTest.kt",
             "KoScopeTest.kt",
         )
     }
@@ -75,6 +76,7 @@ class KoScopeTest {
             "KoScopeForObjectTest.kt",
             "KoScopeForPackageTest.kt",
             "KoScopeForPropertyTest.kt",
+            "KoScopeForTypeAliasTest.kt",
             "KoScopeTest.kt",
         )
     }

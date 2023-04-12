@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtPackageDirective
 
 class KoPackage private constructor(private val ktPackageDirective: KtPackageDirective) : KoNamedDeclaration(ktPackageDirective) {
-    val fullyQualifiedName by lazy {
+    val qualifiedName by lazy {
         if (ktPackageDirective.fqName != FqName.ROOT) {
             ktPackageDirective.fqName.toString()
         } else {
