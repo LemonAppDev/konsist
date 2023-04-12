@@ -70,7 +70,7 @@ class KoFile private constructor(private val ktFile: KtFile) :
         val qualifiedName = kClass.qualifiedName ?: return false
 
         return annotations
-            .map { it.getFullyQualifiedClassName(it.type, ktFile) }
+            .map { it.getFullyQualifiedClassName(it.type) }
             .contains(qualifiedName)
     }
 

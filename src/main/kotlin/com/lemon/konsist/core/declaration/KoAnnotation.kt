@@ -11,8 +11,8 @@ open class KoAnnotation private constructor(
 
     override val name by lazy { ktObjectDeclaration.shortName.toString() }
 
-    fun getFullyQualifiedClassName(className: String, ktFile: KtFile) =
-        ktFile
+    fun getFullyQualifiedClassName(className: String) =
+        (ktObjectDeclaration.containingFile as KtFile)
             .importDirectives
             .firstOrNull { it.importedName?.identifier == className }
             ?.importedFqName
