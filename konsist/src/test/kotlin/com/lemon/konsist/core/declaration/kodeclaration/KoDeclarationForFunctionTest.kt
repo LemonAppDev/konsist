@@ -255,5 +255,41 @@ class KoDeclarationForFunctionTest {
         }
     }
 
+    @Test
+    fun `function-reside-in-path`() {
+        // given
+        val sut = getSut("function-reside-in-path")
+            .functions()
+            .first()
+
+        // then
+        sut.run {
+            resideInPath("Test/") shouldBeEqualTo true
+            resideInPath("TEST/") shouldBeEqualTo true
+            resideInPath("TEST/", false) shouldBeEqualTo false
+            resideInPath("Main/") shouldBeEqualTo false
+            resideInPath("") shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `function-reside-outside-path`() {
+        // given
+        val sut = getSut("function-reside-outside-path")
+            .functions()
+            .first()
+
+        // then
+        sut.run {
+            resideOutsidePath("Main/") shouldBeEqualTo true
+            resideOutsidePath("MAIN/") shouldBeEqualTo true
+            resideOutsidePath("MAIN/", false) shouldBeEqualTo true
+            resideOutsidePath("Test/") shouldBeEqualTo false
+            resideOutsidePath("TEST/") shouldBeEqualTo false
+            resideOutsidePath("TEST/", false) shouldBeEqualTo true
+            resideOutsidePath("") shouldBeEqualTo false
+        }
+    }
+
     private fun getSut(fileName: String) = getSnippetKoScope("kodeclaration/snippet/forfunction/", fileName)
 }

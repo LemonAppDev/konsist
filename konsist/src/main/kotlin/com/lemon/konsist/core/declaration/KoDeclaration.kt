@@ -91,4 +91,6 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
     fun resideInPackages(vararg packages: String) = packages.toList().any { PackageHelper.resideInPackage(it, packageName) }
 
     fun resideInPath(path: String, ignoreCase: Boolean = true) = filePath.contains(path, ignoreCase)
+
+    fun resideOutsidePath(path: String, ignoreCase: Boolean = true) = !resideInPath(path, ignoreCase)
 }
