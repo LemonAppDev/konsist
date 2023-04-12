@@ -38,7 +38,7 @@ val myScope = KoScope.fromProject()
 
 ```
 
-## More Granular Scopes
+### More Granular Scopes
 
 It is also possible to create more granular scopes to store different subsets of project files e.g.
 - scope representing for production code
@@ -82,10 +82,40 @@ koScope.slice { it.hasImport("usecase..") }
 
 ## Filtering Declarations
 
-Scope can be further filtered to retrieve specific declarations. For example, to retrieve all classes in the scope:
+The `KoScope` class provides a set of methods to access Kotlin declarations. Each method returns a list representing a 
+subset declarations of the original scope:
+- `files()` - returns all files present in the scope
+- `classes()` - returns all classes present in the scope
+- `interfaces()` - returns all interfaces present in the scope
+- `objects()` - returns all objects present in the scope
+- `functions()` - returns all functions present in the scope
+- `properties()` - returns all properties present in the scope
+- `companionObjects()` - returns all companion objects present in the scope
+- `declarations()` - returns all declarations present in the scope
+
+Here is an example of retrieving all classes present in the scope:
 
 ```kotlin
+@Test
+    fun `every BaseUseCase child class has UseCase suffix`() {
+        scope
+            .classes()
+            .filter { it.parentClass == "BaseUseCase" }
+            .check { it.name.endsWith("UseCase") }
+    }
+```
 
+Here is an example of retrieving all properties defined in classes and verifying that they are not annotated with 
+`Inject` annotation:
+
+```kotlin
+@Test
+    fun `no classes should use field injection`() {
+        mangoScope
+            .classes()
+            .flatMap { it.properties() }
+            .checkNot { it.hasAnnotation(Inject::class) }
+    }
 ```
 
 ## Scope Reuse
@@ -98,7 +128,7 @@ tests/
 │  ├─ DataTest.kt
 ├─ app/
 │  ├─ AppTest.kt
-├─ MyScope.kt   <--- Instance of the KoScope used in both DataTest and AppTest
+├─ MyScope.kt   <--- Instance of the KoScope used in both DataTest and AppTest classes.
 
 ```
 
@@ -111,5 +141,5 @@ It is possible to compose scopes using Kotlin operators:
 val allKoScope = productionScope + testScope
 
 // subtract scopes
-val outerLayersScope = alllayersScope - domainScope
+val outerLayersScope = allLayersScope - domainLayerScope
 ```
