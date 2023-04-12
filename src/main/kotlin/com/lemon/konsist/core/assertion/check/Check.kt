@@ -77,5 +77,6 @@ private fun getCheckFailedMessage(failedDeclarations: List<KoBaseDeclaration>): 
 
         "${it.location} ($name $declarationType)"
     }
+
     return "Check '$testMethodName' failed for the following declarations:\n$failedDeclarationsMessage"
 }

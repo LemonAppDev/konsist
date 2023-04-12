@@ -78,19 +78,10 @@ class KoScope(
         private val projectKotlinFiles by lazy {
             val prodDirectory = File(projectRootDirectoryFilePath)
 
-            val prodSourceSet = prodDirectory
+            prodDirectory
                 .walk()
                 .filter { it.isKotlinFile }
                 .map { it.toKoFile() }
-
-            val testDirectory = File("$projectRootDirectoryFilePath/konsist/src/test/")
-
-            val testSourceSet = testDirectory
-                .walk()
-                .filter { it.isKotlinFile }
-                .map { it.toKoFile() }
-
-            prodSourceSet + testSourceSet
         }
 
         fun fromProject() = KoScope(projectKotlinFiles.toList())
@@ -105,6 +96,7 @@ class KoScope(
             val koFiles = projectKotlinFiles
                 .filter { it.path.startsWith(pathPrefix) }
                 .toList()
+
             return KoScope(koFiles)
         }
 
@@ -112,6 +104,7 @@ class KoScope(
             val koFiles = projectKotlinFiles
                 .filter { it.packageDirective?.qualifiedName?.startsWith(packageNameStart) ?: false }
                 .toList()
+
             return KoScope(koFiles)
         }
 
@@ -123,6 +116,7 @@ class KoScope(
             }
 
             val koKoFile = file.toKoFile()
+
             return KoScope(koKoFile)
         }
 
@@ -130,6 +124,7 @@ class KoScope(
             val koFiles = projectKotlinFiles
                 .filter { it.path.startsWith(path) }
                 .toList()
+
             return KoScope(koFiles)
         }
     }

@@ -34,7 +34,7 @@ class KoScopeTest {
         sut.files().run {
             isNotEmpty() shouldBeEqualTo true
             none { it.path.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
-            all { it.path.startsWith(konsistModulePath) } shouldBeEqualTo true
+            all { it.path.startsWith(konsistModulePath) } shouldBeEqualTo false
         }
     }
 
