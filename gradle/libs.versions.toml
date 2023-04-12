@@ -16,7 +16,7 @@ spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-star
 spring-boot-starter-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa", version.ref = "springBootVersion" }
 junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:5.9.2"
 kluent = "org.amshove.kluent:kluent:1.72"
-mockk = "io.mockk:mockk:1.13.4"
+mockk = "io.mockk:mockk:1.13.5"
 kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlinVersion" }
 
 [bundles]
