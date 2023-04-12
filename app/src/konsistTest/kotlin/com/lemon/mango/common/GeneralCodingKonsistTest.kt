@@ -48,7 +48,9 @@ class GeneralCodingKonsistTest {
     @Test
     fun `every class constructor has alphabetically ordered parameters`() {
         mangoScope
-            .classes().filterNot { it.hasAnnotation(Entity::class) }.filterNot { it.isData }.filterNot { it.isValue }
+            .classes().filterNot { it.hasAnnotation(Entity::class) }
+            .filterNot { it.isData }
+            .filterNot { it.isValue }
             .mapNotNull { it.primaryConstructor }.check {
                 val names = it.parameters.map { parameter -> parameter.name }
                 val sortedNames = it.parameters.map { parameter -> parameter.name }.sorted()
