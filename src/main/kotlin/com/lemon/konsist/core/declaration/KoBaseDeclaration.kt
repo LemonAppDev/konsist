@@ -11,12 +11,11 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
             .replace("//", "/")
     }
 
-    val textWithLocation by lazy { ktElement.getTextWithLocation() }
-
     val containingFile by lazy { KoFile.getInstance(ktElement.containingKtFile) }
 
     val location by lazy {
-        val lineAndColumn = textWithLocation
+        val lineAndColumn = ktElement
+            .getTextWithLocation()
             .substringAfterLast("' at (")
             .substringBefore(") in")
             .split(",")
@@ -29,11 +28,14 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
     }
 
     val text by lazy {
-        textWithLocation
+        ktElement
+            .getTextWithLocation()
             .substringBefore("' at (")
             .removePrefix("'")
             .removeSuffix("\n")
     }
+
+    val textWithLocation by lazy { "Location: $location \nDeclaration:\n$text" }
 
     override fun toString() = textWithLocation
 }

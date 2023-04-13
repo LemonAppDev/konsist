@@ -25,8 +25,13 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        val location = "'fun sampleFunction() {\n}' at (1,1) in //"
-        sut.textWithLocation.startsWith(location) shouldBeEqualTo true
+        val location = "/kotlin/com/lemon/konsist/core/declaration/kobasedeclaration/snippet/text-with-location.kt:1:1"
+        val declaration = "Declaration:\nfun sampleFunction() {\n}"
+        sut.textWithLocation.run {
+            startsWith("Location: /")
+            contains(location)
+            endsWith(declaration)
+        }
     }
 
     @Test
