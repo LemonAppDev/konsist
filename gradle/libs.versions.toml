@@ -6,14 +6,6 @@ jacksonModuleKotlin = "2.14.2"
 [libraries]
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlinVersion" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
-spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools", version.ref = "springBootVersion" }
-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "springBootVersion" }
-jacksonKotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jacksonModuleKotlin" }
-jacksonJsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jacksonModuleKotlin" }
-h2 = "com.h2database:h2:2.1.214"
-
-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "springBootVersion" }
-spring-boot-starter-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa", version.ref = "springBootVersion" }
 junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:5.9.2"
 kluent = "org.amshove.kluent:kluent:1.72"
 mockk = "io.mockk:mockk:1.13.5"
@@ -23,8 +15,6 @@ kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
-springframework-boot = { id = "org.springframework.boot", version.ref = "springBootVersion" }
-spring-dependencyManagement = "io.spring.dependency-management:1.1.0"
 kotlin-plugin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlinVersion" }
 kotlin-plugin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlinVersion" }
 spotless = "com.diffplug.spotless:6.18.0"
