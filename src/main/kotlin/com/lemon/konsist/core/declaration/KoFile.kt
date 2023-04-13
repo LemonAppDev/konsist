@@ -80,9 +80,7 @@ class KoFile private constructor(private val ktFile: KtFile) :
     fun hasAnnotation(kClass: KClass<*>): Boolean {
         val qualifiedName = kClass.qualifiedName ?: return false
 
-        return annotations
-            .map { it.getFullyQualifiedClassName(it.type) }
-            .contains(qualifiedName)
+        return annotations.any { it.fullyQualifiedName?.contains(qualifiedName) ?: false }
     }
 
     override fun declarations(modifiers: List<KoModifier>, includeNested: Boolean, includeLocal: Boolean): List<KoDeclaration> =
