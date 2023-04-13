@@ -1,7 +1,7 @@
 # Konsist
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
-![example workflow](https://github.com/LemonAppDev/konsist/actions/workflows/check/badge.svg)
+![Check](.github/workflows/check.yml/badge.svg)
 
 Konsist helps to guard [Kotlin](https://kotlinlang.org/) project consistency. It allows to standardise Kotlin codebase
 and enforce coding conventions tailored for given project.
