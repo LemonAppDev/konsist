@@ -1,0 +1,78 @@
+name: Assemble
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ opened, synchronize ]
+
+jobs:
+  assemble:
+    name: Assemble
+    continue-on-error: false
+    runs-on: self-hosted
+    strategy:
+      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Assemble
+        run: ./gradlew konsist:assemble
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: unit-test-report
+          path: ./**/build/reports/tests/
+  junit-test:
+    name: JUnit Test
+    continue-on-error: false
+    runs-on: self-hosted
+    strategy:
+      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: JUnit Test
+        run: ./gradlew :konsist:test
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: unit-test-report
+          path: ./**/build/reports/tests/
+  konsist-test:
+    name: Konsist Test
+    continue-on-error: false
+    runs-on: self-hosted
+    strategy:
+      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Konsist Test
+        run: ./gradlew konsist:konsistTest
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: unit-test-report
+          path: ./**/build/reports/tests/

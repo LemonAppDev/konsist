@@ -1,7 +1,6 @@
 # Konsist
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
-[![Slack channel](https://img.shields.io/badge/Chat-Slack-orange.svg?style=flat&logo=slack)](https://kotlinlang.slack.com/messages/konsist/)
 
 Konsist helps to guard [Kotlin](https://kotlinlang.org/) project consistency. It allows to standardise Kotlin codebase
 and enforce coding conventions tailored for given project.
@@ -26,9 +25,7 @@ code itself and mimics Kotlin [collection processing](https://kotlinlang.org/doc
 The
 [KoScope](src/main/kotlin/com/lemon/konsist/core/declaration/KoScope.kt) class is the entry point. It represents set
 of Kotlin files to be verified. It can be created for a single Kotlin file, given folder, package or from the whole 
-project. 
-
-```kotlin 
+project.
 
 At high level every konsist test looks like this:
 
