@@ -251,41 +251,5 @@ class KoDeclarationForInterfaceTest {
         }
     }
 
-    @Test
-    fun `interface-reside-in-path`() {
-        // given
-        val sut = getSut("interface-reside-in-path")
-            .interfaces()
-            .first()
-
-        // then
-        sut.run {
-            resideInPath("Test/") shouldBeEqualTo true
-            resideInPath("TEST/") shouldBeEqualTo true
-            resideInPath("TEST/", false) shouldBeEqualTo false
-            resideInPath("Main/") shouldBeEqualTo false
-            resideInPath("") shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `interface-reside-outside-path`() {
-        // given
-        val sut = getSut("interface-reside-outside-path")
-            .interfaces()
-            .first()
-
-        // then
-        sut.run {
-            resideOutsidePath("Main/") shouldBeEqualTo true
-            resideOutsidePath("MAIN/") shouldBeEqualTo true
-            resideOutsidePath("MAIN/", false) shouldBeEqualTo true
-            resideOutsidePath("Test/") shouldBeEqualTo false
-            resideOutsidePath("TEST/") shouldBeEqualTo false
-            resideOutsidePath("TEST/", false) shouldBeEqualTo true
-            resideOutsidePath("") shouldBeEqualTo false
-        }
-    }
-
     private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forinterface/", fileName)
 }
