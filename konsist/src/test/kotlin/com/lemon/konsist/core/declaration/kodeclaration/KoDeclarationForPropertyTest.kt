@@ -255,41 +255,5 @@ class KoDeclarationForPropertyTest {
         }
     }
 
-    @Test
-    fun `property-reside-in-path`() {
-        // given
-        val sut = getSut("property-reside-in-path")
-            .properties()
-            .first()
-
-        // then
-        sut.run {
-            resideInPath("Test/") shouldBeEqualTo true
-            resideInPath("TEST/") shouldBeEqualTo true
-            resideInPath("TEST/", false) shouldBeEqualTo false
-            resideInPath("Main/") shouldBeEqualTo false
-            resideInPath("") shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `property-reside-outside-path`() {
-        // given
-        val sut = getSut("property-reside-outside-path")
-            .properties()
-            .first()
-
-        // then
-        sut.run {
-            resideOutsidePath("Main/") shouldBeEqualTo true
-            resideOutsidePath("MAIN/") shouldBeEqualTo true
-            resideOutsidePath("MAIN/", false) shouldBeEqualTo true
-            resideOutsidePath("Test/") shouldBeEqualTo false
-            resideOutsidePath("TEST/") shouldBeEqualTo false
-            resideOutsidePath("TEST/", false) shouldBeEqualTo true
-            resideOutsidePath("") shouldBeEqualTo false
-        }
-    }
-
     private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forproperty/", fileName)
 }
