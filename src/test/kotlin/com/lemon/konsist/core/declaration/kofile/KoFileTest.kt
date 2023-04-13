@@ -34,6 +34,17 @@ class KoFileTest {
     }
 
     @Test
+    fun `file-project-path`() {
+        // given
+        val sut = getSut("file-project-path")
+            .files()
+            .first()
+
+        // then
+        sut.projectPath shouldBeEqualTo "/konsist/src/test/kotlin/com/lemon/konsist/core/declaration/kofile/snippet/file-project-path.kt"
+    }
+
+    @Test
     fun `file-contains-imports`() {
         // given
         val sut = getSut("file-contains-imports")
