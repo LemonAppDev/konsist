@@ -5,44 +5,28 @@ plugins {
 dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
     implementation(libs.kotlin.reflect)
-    implementation(libs.spring.boot.starter.web)
-    implementation(libs.spring.boot.starter.jpa)
     implementation(libs.jacksonKotlin)
-    implementation(libs.jacksonJsr310)
+    api(libs.jacksonJsr310)
+    api(libs.spring.boot.starter.web)
+    api(libs.spring.boot.starter.jpa)
 
     compileOnly(libs.spring.boot.devtools)
 
     runtimeOnly(libs.h2)
-
-    testImplementation(libs.spring.boot.starter.test)
-    testImplementation(libs.junitJupiterEngine)
-    testImplementation(libs.kluent)
-    testImplementation(libs.mockk)
 }
 
 @Suppress("UnstableApiUsage")
 testing {
     suites {
-        val test by getting(JvmTestSuite::class) {
-            useJUnitJupiter()
+        dependencies {
+            api(libs.junitJupiterEngine)
+            api(libs.spring.boot.starter.test)
+            api(libs.kluent)
+            implementation(libs.mockk)
         }
-
         register("integrationTest", JvmTestSuite::class) {
             dependencies {
                 implementation(project())
-                implementation(libs.kluent)
-
-                implementation(libs.jacksonJsr310)
-                implementation(libs.spring.boot.starter.test)
-                implementation(libs.spring.boot.starter.web)
-            }
-
-            targets {
-                all {
-                    testTask.configure {
-                        shouldRunAfter(test)
-                    }
-                }
             }
         }
 
@@ -51,18 +35,6 @@ testing {
                 implementation(project())
                 implementation(project(":konsist"))
                 implementation(libs.kotlin.compiler)
-                implementation(libs.spring.boot.starter.jpa)
-                implementation(libs.spring.boot.starter.web)
-
-                implementation(libs.kluent)
-            }
-
-            targets {
-                all {
-                    testTask.configure {
-                        shouldRunAfter(test)
-                    }
-                }
             }
         }
     }
