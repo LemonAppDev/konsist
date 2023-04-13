@@ -1,7 +1,6 @@
-rootProject.name = "mango"
+rootProject.name = "konsist"
 
 include(
-    ":app",
     ":konsist",
 )
 
