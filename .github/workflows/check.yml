@@ -1,4 +1,4 @@
-name: Assemble
+name: Check
 
 on:
   push:
