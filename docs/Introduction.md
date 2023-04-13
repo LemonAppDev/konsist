@@ -5,7 +5,15 @@ and enforce coding conventions tailored for given project.
 
 ## Getting Started
 
-### Installation
+Add the following dependency to the `module\build.gradle.kts` file:
+
+```kotlin
+dependencies {
+    testImplementation(KONSIST_DEPENDENCY)
+}
+```
+
+> Note: Konsist can be configured using custom `konsistTest` source set. See [ConfigureKonsist.md](ConfigureKonsist.md).
 
 ### Usage
 
@@ -45,6 +53,7 @@ See [KoScope](src/main/kotlin/com/lemon/konsist/core/declaration/KoScope.kt).
 
 Konsist is built on top of [Kotlin Compiler Psi](https://github.com/JetBrains/kotlin/tree/master/compiler/psi/src/org/jetbrains/kotlin/psi).
 It wraps Kotlin compiler parser and provides a simple API to access Kotlin code declarations. 
+
 Declarations tree mimics the Kotlin code structure:
 
 ```mermaid
