@@ -16,12 +16,14 @@ class KoParameterTest {
             ?.first()
 
         // then
-        sut?.type?.run {
-            sourceType shouldBeEqualTo "SampleType"
-            name shouldBeEqualTo ""
-            isImportAlias() shouldBeEqualTo false
-            fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
-        }
+        sut
+            ?.type
+            ?.run {
+                sourceType shouldBeEqualTo "SampleType"
+                name shouldBeEqualTo ""
+                isImportAlias() shouldBeEqualTo false
+                fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+            }
     }
 
     @Test
@@ -35,12 +37,14 @@ class KoParameterTest {
             ?.first()
 
         // then
-        sut?.type?.run {
-            sourceType shouldBeEqualTo "SampleType"
-            name shouldBeEqualTo "ImportAlias"
-            isImportAlias() shouldBeEqualTo true
-            fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
-        }
+        sut
+            ?.type
+            ?.run {
+                sourceType shouldBeEqualTo "SampleType"
+                name shouldBeEqualTo "ImportAlias"
+                isImportAlias() shouldBeEqualTo true
+                fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+            }
     }
 
     @Test

@@ -53,19 +53,22 @@ class KoScopeTest {
         sut
             .files()
             .map { it.name }
-            .toList() shouldBeEqualTo listOf(
-            "KoScopeForClassTest.kt",
-            "KoScopeForCompanionObjectTest.kt",
-            "KoScopeForDeclarationTest.kt",
-            "KoScopeForFunctionTest.kt",
-            "KoScopeForImportTest.kt",
-            "KoScopeForInterfaceTest.kt",
-            "KoScopeForObjectTest.kt",
-            "KoScopeForPackageTest.kt",
-            "KoScopeForPropertyTest.kt",
-            "KoScopeForTypeAliasTest.kt",
-            "KoScopeTest.kt",
-        )
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "KoScopeForClassTest.kt",
+                    "KoScopeForCompanionObjectTest.kt",
+                    "KoScopeForDeclarationTest.kt",
+                    "KoScopeForFunctionTest.kt",
+                    "KoScopeForImportTest.kt",
+                    "KoScopeForInterfaceTest.kt",
+                    "KoScopeForObjectTest.kt",
+                    "KoScopeForPackageTest.kt",
+                    "KoScopeForPropertyTest.kt",
+                    "KoScopeForTypeAliasTest.kt",
+                    "KoScopeTest.kt",
+                ),
+            )
     }
 
     @Test
@@ -77,19 +80,22 @@ class KoScopeTest {
         sut
             .files()
             .map { it.name }
-            .toList() shouldBeEqualTo listOf(
-            "KoScopeForClassTest.kt",
-            "KoScopeForCompanionObjectTest.kt",
-            "KoScopeForDeclarationTest.kt",
-            "KoScopeForFunctionTest.kt",
-            "KoScopeForImportTest.kt",
-            "KoScopeForInterfaceTest.kt",
-            "KoScopeForObjectTest.kt",
-            "KoScopeForPackageTest.kt",
-            "KoScopeForPropertyTest.kt",
-            "KoScopeForTypeAliasTest.kt",
-            "KoScopeTest.kt",
-        )
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "KoScopeForClassTest.kt",
+                    "KoScopeForCompanionObjectTest.kt",
+                    "KoScopeForDeclarationTest.kt",
+                    "KoScopeForFunctionTest.kt",
+                    "KoScopeForImportTest.kt",
+                    "KoScopeForInterfaceTest.kt",
+                    "KoScopeForObjectTest.kt",
+                    "KoScopeForPackageTest.kt",
+                    "KoScopeForPropertyTest.kt",
+                    "KoScopeForTypeAliasTest.kt",
+                    "KoScopeTest.kt",
+                ),
+            )
     }
 
     @Test
@@ -102,19 +108,22 @@ class KoScopeTest {
         sut
             .files()
             .map { it.name }
-            .toList() shouldBeEqualTo listOf(
-            "KoScopeForClassTest.kt",
-            "KoScopeForCompanionObjectTest.kt",
-            "KoScopeForDeclarationTest.kt",
-            "KoScopeForFunctionTest.kt",
-            "KoScopeForImportTest.kt",
-            "KoScopeForInterfaceTest.kt",
-            "KoScopeForObjectTest.kt",
-            "KoScopeForPackageTest.kt",
-            "KoScopeForPropertyTest.kt",
-            "KoScopeForTypeAliasTest.kt",
-            "KoScopeTest.kt",
-        )
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "KoScopeForClassTest.kt",
+                    "KoScopeForCompanionObjectTest.kt",
+                    "KoScopeForDeclarationTest.kt",
+                    "KoScopeForFunctionTest.kt",
+                    "KoScopeForImportTest.kt",
+                    "KoScopeForInterfaceTest.kt",
+                    "KoScopeForObjectTest.kt",
+                    "KoScopeForPackageTest.kt",
+                    "KoScopeForPropertyTest.kt",
+                    "KoScopeForTypeAliasTest.kt",
+                    "KoScopeTest.kt",
+                ),
+            )
     }
 
     @Test

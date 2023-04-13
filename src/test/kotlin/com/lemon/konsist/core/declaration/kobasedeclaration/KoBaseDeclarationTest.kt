@@ -13,8 +13,12 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.filePath.startsWith("//") shouldBeEqualTo false
-        sut.filePath.endsWith("kobasedeclaration/snippet/file-path.kt") shouldBeEqualTo true
+        sut
+            .filePath
+            .run {
+                startsWith("//") shouldBeEqualTo false
+                endsWith("kobasedeclaration/snippet/file-path.kt") shouldBeEqualTo true
+            }
     }
 
     @Test
@@ -31,11 +35,13 @@ class KoBaseDeclarationTest {
 
         // then
         val declaration = "Declaration:\nfun sampleFunction() {\n}"
-        sut.textWithLocation.run {
-            startsWith("Location: /")
-            contains(projectPath)
-            endsWith(declaration)
-        }
+        sut
+            .textWithLocation
+            .run {
+                startsWith("Location: /") shouldBeEqualTo true
+                contains(projectPath) shouldBeEqualTo true
+                endsWith(declaration) shouldBeEqualTo true
+            }
     }
 
     @Test
@@ -46,7 +52,11 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.containingFile.name.endsWith("file.kt") shouldBeEqualTo true
+        sut
+            .containingFile
+            .name
+            .endsWith("file.kt")
+            .shouldBeEqualTo(true)
     }
 
     @Test
@@ -79,11 +89,15 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.text shouldBeEqualTo """
+        sut
+            .text
+            .shouldBeEqualTo(
+                """
             fun sampleFunction() {
                 "SampleText"
             }
-        """.trimIndent()
+                """.trimIndent(),
+            )
     }
 
     @Test

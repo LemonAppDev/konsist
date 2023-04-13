@@ -167,7 +167,7 @@ class KoClassTest {
 
         // then
         sut.run {
-            secondaryConstructors.isEmpty()
+            secondaryConstructors.isEmpty() shouldBeEqualTo true
             hasSecondaryConstructors() shouldBeEqualTo false
         }
     }
