@@ -15,9 +15,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
-            name shouldBeEqualTo "file-name.kt"
-        }
+        sut.name shouldBeEqualTo "file-name.kt"
     }
 
     @Test
@@ -28,9 +26,10 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
-            path.endsWith("/konsist/src/test/kotlin/com/lemon/konsist/core/declaration/kofile/snippet/file-path.kt") shouldBeEqualTo true
-        }
+        sut
+            .path
+            .endsWith("/konsist/src/test/kotlin/com/lemon/konsist/core/declaration/kofile/snippet/file-path.kt")
+            .shouldBeEqualTo(true)
     }
 
     @Test
@@ -52,11 +51,26 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
-            imports.map { it.name } shouldBeEqualTo listOf(
-                "com.lemon.konsist.testdata.SampleAnnotation",
-                "com.lemon.konsist.testdata.SampleType",
+        sut
+            .imports
+            .map { it.name }
+            .shouldBeEqualTo(
+                listOf(
+                    "com.lemon.konsist.testdata.SampleAnnotation",
+                    "com.lemon.konsist.testdata.SampleType",
+                ),
             )
+    }
+
+    @Test
+    fun `file-has-imports`() {
+        // given
+        val sut = getSut("file-has-imports")
+            .files()
+            .first()
+
+        // then
+        sut.run {
             hasImport("com..") shouldBeEqualTo true
             hasImport("com") shouldBeEqualTo false
             hasImport("com.lemon.konsist.testdata.SampleType") shouldBeEqualTo true
@@ -207,10 +221,13 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
-            typeAliases.first().name shouldBeEqualTo "SampleTypeAlias"
-            typeAliases.first().type shouldBeEqualTo "() -> Int"
-        }
+        sut
+            .typeAliases
+            .first()
+            .run {
+                name shouldBeEqualTo "SampleTypeAlias"
+                type shouldBeEqualTo "() -> Int"
+            }
     }
 
     @Test
@@ -223,7 +240,8 @@ class KoFileTest {
         // then
         sut
             .typeAliases
-            .isEmpty() shouldBeEqualTo true
+            .isEmpty()
+            .shouldBeEqualTo(true)
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kofile/snippet/", fileName)

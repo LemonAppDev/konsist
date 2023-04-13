@@ -15,7 +15,16 @@ class KoScopeForDeclarationTest {
         sut
             .declarations()
             .map { it.name }
-            .toList() shouldBeEqualTo listOf("sampleProperty", "sampleFunction", "SampleClass", "SampleInterface", "SampleObject")
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "sampleProperty",
+                    "sampleFunction",
+                    "SampleClass",
+                    "SampleInterface",
+                    "SampleObject",
+                ),
+            )
     }
 
     @Test
@@ -27,7 +36,13 @@ class KoScopeForDeclarationTest {
         sut
             .declarations(includeNested = true)
             .map { it.name }
-            .toList() shouldBeEqualTo listOf("SampleClass", "sampleNestedFunction")
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "SampleClass",
+                    "sampleNestedFunction",
+                ),
+            )
     }
 
     @Test
@@ -39,7 +54,14 @@ class KoScopeForDeclarationTest {
         sut
             .declarations(includeNested = true)
             .map { it.name }
-            .toList() shouldBeEqualTo listOf("SampleClass", "sampleNestedProperty", "sampleNestedFunction")
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "SampleClass",
+                    "sampleNestedProperty",
+                    "sampleNestedFunction",
+                ),
+            )
     }
 
     @Test
@@ -51,7 +73,8 @@ class KoScopeForDeclarationTest {
         sut
             .declarations(includeNested = false)
             .map { it.name }
-            .toList() shouldBeEqualTo listOf("SampleClass")
+            .toList()
+            .shouldBeEqualTo(listOf("SampleClass"))
     }
 
     private fun getSut(fileName: String) =

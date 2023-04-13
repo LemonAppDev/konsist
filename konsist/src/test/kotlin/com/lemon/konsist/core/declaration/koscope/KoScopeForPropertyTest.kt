@@ -15,7 +15,8 @@ class KoScopeForPropertyTest {
         sut
             .properties()
             .map { it.name }
-            .toList() shouldBeEqualTo listOf("sampleProperty")
+            .toList()
+            .shouldBeEqualTo(listOf("sampleProperty"))
     }
 
     @Test
@@ -26,7 +27,8 @@ class KoScopeForPropertyTest {
         // then
         sut
             .properties()
-            .toList() shouldBeEqualTo emptyList()
+            .toList()
+            .shouldBeEqualTo(emptyList())
     }
 
     @Test
@@ -38,7 +40,8 @@ class KoScopeForPropertyTest {
         // then
         sut
             .map { it.name }
-            .toList() shouldBeEqualTo listOf("sampleNestedProperty")
+            .toList()
+            .shouldBeEqualTo(listOf("sampleNestedProperty"))
     }
 
     @Test
@@ -49,7 +52,8 @@ class KoScopeForPropertyTest {
         // then
         sut
             .map { it.name }
-            .toList() shouldBeEqualTo emptyList()
+            .toList()
+            .shouldBeEqualTo(emptyList())
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forproperty/", fileName)

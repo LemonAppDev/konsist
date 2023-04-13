@@ -284,11 +284,14 @@ class KoFunctionTest {
         // then
         sut
             .localDeclarations()
-            .map { it.name } shouldBeEqualTo listOf(
-            "sampleLocalProperty",
-            "sampleLocalFunction",
-            "SampleNestedClass",
-        )
+            .map { it.name }
+            .shouldBeEqualTo(
+                listOf(
+                    "sampleLocalProperty",
+                    "sampleLocalFunction",
+                    "SampleNestedClass",
+                ),
+            )
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/", fileName)

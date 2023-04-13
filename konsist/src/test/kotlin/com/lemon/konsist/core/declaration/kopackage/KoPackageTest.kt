@@ -38,7 +38,8 @@ class KoPackageTest {
         sut
             .map { it.qualifiedName }
             .toList()
-            .first() shouldBeEqualTo "com.samplepackage"
+            .first()
+            .shouldBeEqualTo("com.samplepackage")
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kopackage/snippet/", fileName)

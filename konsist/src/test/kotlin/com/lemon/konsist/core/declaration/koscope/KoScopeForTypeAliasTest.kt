@@ -15,7 +15,10 @@ class KoScopeForTypeAliasTest {
         sut
             .typeAliases()
             .map { it.name }
-            .toList() shouldBeEqualTo listOf("SampleTypeAlias")
+            .toList()
+            .shouldBeEqualTo(
+                listOf("SampleTypeAlias"),
+            )
     }
 
     @Test
@@ -26,7 +29,10 @@ class KoScopeForTypeAliasTest {
         // then
         sut
             .typeAliases()
-            .toList() shouldBeEqualTo emptyList()
+            .toList()
+            .shouldBeEqualTo(
+                emptyList(),
+            )
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/fortypealias/", fileName)

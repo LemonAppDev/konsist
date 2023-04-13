@@ -15,7 +15,8 @@ class KoScopeForPackageTest {
         sut
             .packages()
             .map { it.name }
-            .toList() shouldBeEqualTo listOf("samplepackage")
+            .toList()
+            .shouldBeEqualTo(listOf("samplepackage"))
     }
 
     @Test
@@ -26,7 +27,8 @@ class KoScopeForPackageTest {
         // then
         sut
             .packages()
-            .toList() shouldBeEqualTo emptyList()
+            .toList()
+            .shouldBeEqualTo(emptyList())
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forpackage/", fileName)

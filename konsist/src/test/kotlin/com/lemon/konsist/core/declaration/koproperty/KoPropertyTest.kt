@@ -147,12 +147,14 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.explicitType?.run {
-            sourceType shouldBeEqualTo "SampleType"
-            name shouldBeEqualTo ""
-            isImportAlias() shouldBeEqualTo false
-            fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
-        }
+        sut
+            .explicitType
+            ?.run {
+                sourceType shouldBeEqualTo "SampleType"
+                name shouldBeEqualTo ""
+                isImportAlias() shouldBeEqualTo false
+                fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+            }
     }
 
     @Test
@@ -163,12 +165,14 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.explicitType?.run {
-            sourceType shouldBeEqualTo "SampleType"
-            name shouldBeEqualTo "ImportAlias"
-            isImportAlias() shouldBeEqualTo true
-            fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
-        }
+        sut
+            .explicitType
+            ?.run {
+                sourceType shouldBeEqualTo "SampleType"
+                name shouldBeEqualTo "ImportAlias"
+                isImportAlias() shouldBeEqualTo true
+                fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleType"
+            }
     }
 
     @Test
@@ -179,12 +183,14 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.explicitType?.run {
-            sourceType shouldBeEqualTo null
-            name shouldBeEqualTo null
-            isImportAlias() shouldBeEqualTo null
-            fullyQualifiedName shouldBeEqualTo null
-        }
+        sut
+            .explicitType
+            ?.run {
+                sourceType shouldBeEqualTo null
+                name shouldBeEqualTo null
+                isImportAlias() shouldBeEqualTo null
+                fullyQualifiedName shouldBeEqualTo null
+            }
     }
 
     @Test

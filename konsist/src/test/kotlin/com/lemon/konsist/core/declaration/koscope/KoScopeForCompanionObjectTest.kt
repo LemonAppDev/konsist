@@ -14,7 +14,10 @@ class KoScopeForCompanionObjectTest {
         sut
             .companionObjects(includeNested = true)
             .toList()
-            .map { it.name } shouldBeEqualTo listOf("SampleCompanionObject")
+            .map { it.name }
+            .shouldBeEqualTo(
+                listOf("SampleCompanionObject"),
+            )
     }
 
     @Test
@@ -25,7 +28,10 @@ class KoScopeForCompanionObjectTest {
         // then
         sut
             .companionObjects(includeNested = true)
-            .toList() shouldBeEqualTo emptyList()
+            .toList()
+            .shouldBeEqualTo(
+                emptyList(),
+            )
     }
 
     @Test
@@ -37,7 +43,10 @@ class KoScopeForCompanionObjectTest {
         sut
             .companionObjects(includeNested = true)
             .toList()
-            .map { it.name } shouldBeEqualTo listOf("SampleCompanionObject1", "SampleCompanionObject2")
+            .map { it.name }
+            .shouldBeEqualTo(
+                listOf("SampleCompanionObject1", "SampleCompanionObject2"),
+            )
     }
 
     @Test
@@ -48,7 +57,10 @@ class KoScopeForCompanionObjectTest {
         // then
         sut
             .companionObjects(includeNested = false)
-            .toList() shouldBeEqualTo emptyList()
+            .toList()
+            .shouldBeEqualTo(
+                emptyList(),
+            )
     }
 
     private fun getSut(fileName: String) =

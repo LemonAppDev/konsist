@@ -15,7 +15,8 @@ class KoScopeForImportTest {
         sut
             .imports()
             .map { it.name }
-            .toList() shouldBeEqualTo listOf("com.lemon.konsist.testdata.SampleType")
+            .toList()
+            .shouldBeEqualTo(listOf("com.lemon.konsist.testdata.SampleType"))
     }
 
     @Test
@@ -26,7 +27,8 @@ class KoScopeForImportTest {
         // then
         sut
             .imports()
-            .toList() shouldBeEqualTo emptyList()
+            .toList()
+            .shouldBeEqualTo(emptyList())
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forimport/", fileName)

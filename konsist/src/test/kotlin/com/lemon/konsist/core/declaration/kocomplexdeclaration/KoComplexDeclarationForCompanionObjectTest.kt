@@ -21,7 +21,8 @@ class KoComplexDeclarationForCompanionObjectTest {
         // then
         sut
             .declarations(includeNested = true, includeLocal = true)
-            .map { it.name } shouldBeEqualTo emptyList()
+            .map { it.name }
+            .shouldBeEqualTo(emptyList())
     }
 
     @Test
@@ -36,7 +37,8 @@ class KoComplexDeclarationForCompanionObjectTest {
         // then
         sut
             .declarations(includeNested = true, includeLocal = true)
-            .map { it.name } shouldBeEqualTo emptyList()
+            .map { it.name }
+            .shouldBeEqualTo(emptyList())
     }
 
     @Test
@@ -59,7 +61,8 @@ class KoComplexDeclarationForCompanionObjectTest {
 
         sut
             .declarations(includeNested = true, includeLocal = true)
-            .map { it.name } shouldBeEqualTo expected
+            .map { it.name }
+            .shouldBeEqualTo(expected)
     }
 
     @Test
@@ -82,7 +85,8 @@ class KoComplexDeclarationForCompanionObjectTest {
 
         sut
             .declarations(includeNested = true, includeLocal = false)
-            .map { it.name } shouldBeEqualTo expected
+            .map { it.name }
+            .shouldBeEqualTo(expected)
     }
 
     @Test
@@ -105,7 +109,8 @@ class KoComplexDeclarationForCompanionObjectTest {
 
         sut
             .declarations(includeNested = false, includeLocal = true)
-            .map { it.name } shouldBeEqualTo expected
+            .map { it.name }
+            .shouldBeEqualTo(expected)
     }
 
     @Test
@@ -137,7 +142,8 @@ class KoComplexDeclarationForCompanionObjectTest {
 
         sut
             .declarations(includeNested = true)
-            .map { it.name } shouldBeEqualTo expected
+            .map { it.name }
+            .shouldBeEqualTo(expected)
     }
 
     @Test
@@ -159,7 +165,8 @@ class KoComplexDeclarationForCompanionObjectTest {
 
         sut
             .declarations(includeNested = false)
-            .map { it.name } shouldBeEqualTo expected
+            .map { it.name }
+            .shouldBeEqualTo(expected)
     }
 
     @Test
@@ -184,7 +191,8 @@ class KoComplexDeclarationForCompanionObjectTest {
 
         sut
             .declarations(includeLocal = true)
-            .map { it.name } shouldBeEqualTo expected
+            .map { it.name }
+            .shouldBeEqualTo(expected)
     }
 
     @Test
@@ -201,7 +209,8 @@ class KoComplexDeclarationForCompanionObjectTest {
 
         sut
             .declarations(includeLocal = false)
-            .map { it.name } shouldBeEqualTo expected
+            .map { it.name }
+            .shouldBeEqualTo(expected)
     }
 
     @Test
@@ -214,9 +223,7 @@ class KoComplexDeclarationForCompanionObjectTest {
             .first()
 
         // then
-        sut
-            .declarations(listOf(KoModifier.PRIVATE), includeNested = true)
-            .map { it.name } shouldBeEqualTo listOf(
+        val expected = listOf(
             "sampleFunction1",
             "SampleClass1",
             "SampleClassNestedInsideClass2",
@@ -232,6 +239,11 @@ class KoComplexDeclarationForCompanionObjectTest {
             "SampleObjectNestedInsideInterface2",
             "SampleInterfaceNestedInsideInterface2",
         )
+
+        sut
+            .declarations(listOf(KoModifier.PRIVATE), includeNested = true)
+            .map { it.name }
+            .shouldBeEqualTo(expected)
     }
 
     @Test
@@ -244,14 +256,17 @@ class KoComplexDeclarationForCompanionObjectTest {
             .first()
 
         // then
-        sut
-            .declarations(listOf(KoModifier.PRIVATE), includeNested = false)
-            .map { it.name } shouldBeEqualTo listOf(
+        val expected = listOf(
             "sampleFunction1",
             "SampleClass1",
             "SampleObject1",
             "SampleInterface1",
         )
+
+        sut
+            .declarations(listOf(KoModifier.PRIVATE), includeNested = false)
+            .map { it.name }
+            .shouldBeEqualTo(expected)
     }
 
     @Test
