@@ -65,6 +65,10 @@ class KoScope(
 
     fun typeAliases() = koFiles.flatMap { it.typeAliases }
 
+    override fun toString(): String = files()
+        .toList()
+        .joinToString("\n") { it.path }
+
     companion object {
         /**
          * Return repository root directory File

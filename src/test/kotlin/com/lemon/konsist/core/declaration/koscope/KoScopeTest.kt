@@ -142,4 +142,26 @@ class KoScopeTest {
                 all { it.path.startsWith(projectPath) } shouldBeEqualTo true
             }
     }
+
+    @Test
+    fun `toString method`() {
+        // given
+        val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
+        val sut = KoScope.fromPackage("com.lemon.konsist.core.declaration.koscope")
+
+        // then
+        sut.toString() shouldBeEqualTo """
+            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForClassTest.kt
+            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForCompanionObjectTest.kt
+            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForDeclarationTest.kt
+            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForFunctionTest.kt
+            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForImportTest.kt
+            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForInterfaceTest.kt
+            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForObjectTest.kt
+            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForPackageTest.kt
+            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForPropertyTest.kt
+            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForTypeAliasTest.kt
+            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeTest.kt
+        """.trimIndent()
+    }
 }
