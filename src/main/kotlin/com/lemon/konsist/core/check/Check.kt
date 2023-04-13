@@ -4,6 +4,7 @@ import com.lemon.konsist.core.declaration.KoBaseDeclaration
 import com.lemon.konsist.core.declaration.KoDeclaration
 import com.lemon.konsist.core.declaration.KoNamedDeclaration
 import com.lemon.konsist.exception.KoCheckFailedException
+import com.lemon.konsist.exception.KoException
 import com.lemon.konsist.exception.KoInternalException
 import com.lemon.konsist.exception.KoPreconditionFailedException
 
@@ -15,7 +16,7 @@ fun <E : KoBaseDeclaration> Sequence<E>.checkNot(function: (E) -> Boolean) {
     check(function, false)
 }
 
-@Suppress("detekt.TooGenericExceptionCaught", "detekt.ThrowsCount")
+@Suppress("detekt.ThrowsCount")
 private fun <E : KoBaseDeclaration> Sequence<E>.check(function: (E) -> Boolean, positiveCheck: Boolean) {
     var lastDeclaration: KoBaseDeclaration? = null
 
@@ -23,8 +24,10 @@ private fun <E : KoBaseDeclaration> Sequence<E>.check(function: (E) -> Boolean, 
         val localList = this.toList()
 
         if (localList.isEmpty()) {
+            val checkMethodName = Thread.currentThread().stackTrace[2].methodName
             throw KoPreconditionFailedException(
-                "Declaration list is empty. Please make sure that list of declarations contain items before calling “check” method.",
+                "Declaration list is empty. Please make sure that list of declarations contain items " +
+                    "before calling '$checkMethodName' method.",
             )
         }
 
@@ -39,17 +42,15 @@ private fun <E : KoBaseDeclaration> Sequence<E>.check(function: (E) -> Boolean, 
             val failedDeclarations = result[!positiveCheck] ?: emptyList()
             throw KoCheckFailedException(getCheckFailedMessage(failedDeclarations))
         }
-    } catch (e: KoCheckFailedException) {
+    } catch (e: KoException) {
         throw e
-    } catch (e: KoInternalException) {
-        throw e
-    } catch (e: Exception) {
+    } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
         throw KoInternalException(e.message, e, lastDeclaration)
     }
 }
 
 private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: List<E>): String {
-    val testMethodName = Thread.currentThread().stackTrace[5].methodName
+    val testMethodName = Thread.currentThread().stackTrace[4].methodName
     val failedDeclarationsMessage = failedDeclarations.joinToString("\n") {
         val name = if (it is KoNamedDeclaration) it.name else ""
         val konsistDeclarationClassNamePrefix = "Ko"
