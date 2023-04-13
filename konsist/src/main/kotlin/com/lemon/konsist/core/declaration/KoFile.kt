@@ -15,6 +15,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
+import java.io.File
 import kotlin.reflect.KClass
 
 class KoFile private constructor(private val ktFile: KtFile) :
@@ -44,6 +45,15 @@ class KoFile private constructor(private val ktFile: KtFile) :
         ktFile
             .virtualFilePath
             .replace("//", "/")
+    }
+
+    val projectPath by lazy {
+        val mainPath = File("")
+            .absoluteFile
+            .path
+            .substringBeforeLast('/')
+
+        path.removePrefix(mainPath)
     }
 
     val packageDirective by lazy {

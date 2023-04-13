@@ -20,16 +20,20 @@ class KoBaseDeclarationTest {
     @Test
     fun `text-with-location`() {
         // given
+        val projectPath = getSut("text-with-location")
+            .files()
+            .first()
+            .projectPath
+
         val sut = getSut("text-with-location")
             .functions()
             .first()
 
         // then
-        val location = "/kotlin/com/lemon/konsist/core/declaration/kobasedeclaration/snippet/text-with-location.kt:1:1"
         val declaration = "Declaration:\nfun sampleFunction() {\n}"
         sut.textWithLocation.run {
             startsWith("Location: /")
-            contains(location)
+            contains(projectPath)
             endsWith(declaration)
         }
     }
