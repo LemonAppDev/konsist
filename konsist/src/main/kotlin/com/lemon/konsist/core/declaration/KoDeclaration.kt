@@ -68,9 +68,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
     fun hasAnnotation(kClass: KClass<*>): Boolean {
         val qualifiedName = kClass.qualifiedName ?: return false
 
-        return annotations
-            .map { it.getFullyQualifiedClassName(it.type) }
-            .contains(qualifiedName)
+        return annotations.any { it.fullyQualifiedName == qualifiedName }
     }
 
     fun hasModifiers(vararg koModifiers: KoModifier) = koModifiers.all {

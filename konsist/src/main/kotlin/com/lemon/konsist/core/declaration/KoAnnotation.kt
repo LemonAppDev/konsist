@@ -2,22 +2,20 @@ package com.lemon.konsist.core.declaration
 
 import com.lemon.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
-import org.jetbrains.kotlin.psi.KtFile
 
 open class KoAnnotation private constructor(
-    private val ktObjectDeclaration: KtAnnotationEntry,
-) : KoNamedDeclaration(ktObjectDeclaration) {
-    val type = ktObjectDeclaration.typeReference?.text ?: ""
+    private val ktAnnotationEntry: KtAnnotationEntry,
+) : KoNamedDeclaration(ktAnnotationEntry) {
+    val type = ktAnnotationEntry.typeReference?.text ?: ""
 
-    override val name by lazy { ktObjectDeclaration.shortName.toString() }
+    override val name by lazy { ktAnnotationEntry.shortName.toString() }
 
-    fun getFullyQualifiedClassName(className: String) =
-        (ktObjectDeclaration.containingFile as KtFile)
-            .importDirectives
-            .firstOrNull { it.importedName?.identifier == className }
-            ?.importedFqName
-            ?.toString()
-            ?: className
+    val fullyQualifiedName: String? by lazy {
+        containingFile
+            .imports
+            .firstOrNull { it.text.endsWith(".$type") }
+            ?.name
+    }
 
     companion object {
         private val cache = KoDeclarationCache<KoAnnotation>()
