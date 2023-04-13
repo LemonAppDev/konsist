@@ -1,0 +1,7 @@
+class SampleClass1 {
+    class SampleNestedClass {
+    }
+}
+
+class SampleClass2 {
+}

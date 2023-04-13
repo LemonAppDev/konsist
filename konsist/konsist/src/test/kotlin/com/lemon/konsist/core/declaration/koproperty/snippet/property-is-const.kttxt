@@ -1,0 +1,3 @@
+object SampleObject {
+    const val sampleProperty = 6
+}

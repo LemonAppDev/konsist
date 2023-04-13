@@ -1,0 +1,5 @@
+package com.lemon.konsist.testdata
+
+interface SampleTopLevelInterface {
+    companion object SampleCompanionObject {}
+}

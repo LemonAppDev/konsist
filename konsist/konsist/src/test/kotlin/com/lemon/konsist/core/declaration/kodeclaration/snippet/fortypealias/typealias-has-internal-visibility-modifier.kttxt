@@ -1,0 +1,3 @@
+internal typealias SampleTypeAlias = (Boolean) -> Int
+
+class SampleClass(val sampleProperty: SampleTypeAlias)

@@ -1,0 +1,3 @@
+package com.lemon.konsist.core.declaration.kofunction.snippet
+
+suspend fun sampleFunction() {}

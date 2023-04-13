@@ -1,0 +1,19 @@
+package com.samplepackage
+
+import com.lemon.konsist.testdata.SampleAnnotation
+
+@SampleAnnotation
+interface SampleInterface {
+    class SampleClass1 {
+        class SampleClass2 {
+            class SampleClass3 {
+                class SampleClass4 {
+                    class SampleClass5 {
+                        fun sampleFunction() {
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

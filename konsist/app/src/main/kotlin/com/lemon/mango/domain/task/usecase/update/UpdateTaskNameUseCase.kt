@@ -1,0 +1,30 @@
+package com.lemon.mango.domain.task.usecase.update
+
+import com.lemon.mango.domain.activity.model.TaskActivityType
+import com.lemon.mango.domain.activity.usecase.AddTaskActivityUseCase
+import com.lemon.mango.domain.task.TaskRepository
+import com.lemon.mango.domain.task.model.TaskId
+import com.lemon.mango.domain.task.usecase.GetTaskOrThrowUseCase
+import org.springframework.stereotype.Service
+import java.time.LocalDateTime
+
+@Service
+class UpdateTaskNameUseCase(
+    private val addTaskActivityUseCase: AddTaskActivityUseCase,
+    private val getTaskOrThrowUseCase: GetTaskOrThrowUseCase,
+    private val taskRepository: TaskRepository,
+) {
+    operator fun invoke(taskId: TaskId, newName: String, date: LocalDateTime) {
+        val task = getTaskOrThrowUseCase(taskId)
+
+        val oldName = task.name
+
+        if (newName != oldName) {
+            val newTask = task.copy(name = newName)
+
+            taskRepository.saveTask(newTask)
+
+            addTaskActivityUseCase(newTask.id, TaskActivityType.UPDATE_NAME, date, newName, oldName)
+        }
+    }
+}

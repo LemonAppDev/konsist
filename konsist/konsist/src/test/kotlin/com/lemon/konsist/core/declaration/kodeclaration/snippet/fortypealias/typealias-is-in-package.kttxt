@@ -1,0 +1,5 @@
+package com.samplepackage
+
+typealias SampleTypeAlias = (Boolean) -> Int
+
+lateinit var sampleProperty: SampleTypeAlias

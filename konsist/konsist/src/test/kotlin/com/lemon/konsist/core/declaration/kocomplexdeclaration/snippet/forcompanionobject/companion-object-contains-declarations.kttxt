@@ -1,0 +1,13 @@
+class SampleTopLevelClass {
+    companion object SampleTopLevelCompanionObject {
+        val sampleProperty: Boolean = true
+
+        fun sampleFunction() {}
+
+        class SampleClass
+
+        object SampleObject
+
+        interface SampleInterface
+    }
+}

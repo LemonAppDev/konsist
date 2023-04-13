@@ -1,0 +1,3 @@
+import com.lemon.konsist.testdata.SampleType
+
+lateinit var sampleProperty: SampleType

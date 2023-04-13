@@ -1,0 +1,4 @@
+class SampleClass {
+    internal constructor(name: String) {
+    }
+}

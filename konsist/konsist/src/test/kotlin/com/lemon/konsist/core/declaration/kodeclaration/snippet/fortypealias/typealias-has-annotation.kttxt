@@ -1,0 +1,7 @@
+import Typealias_has_annotation.SampleTypeAlias
+import com.lemon.konsist.testdata.SampleAnnotation
+
+@SampleAnnotation
+typealias SampleTypeAlias = (Boolean) -> Int
+
+lateinit var sampleProperty: SampleTypeAlias
