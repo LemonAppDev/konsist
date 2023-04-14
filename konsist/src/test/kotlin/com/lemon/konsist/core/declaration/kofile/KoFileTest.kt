@@ -247,5 +247,19 @@ class KoFileTest {
             .shouldBeEqualTo(true)
     }
 
+    @Test
+    fun `equals-method`() {
+        // given
+        val sut = getSut("equals-method")
+            .files()
+            .first()
+
+        // then
+        sut
+            .typeAliases
+            .isEmpty()
+            .shouldBeEqualTo(true)
+    }
+
     private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kofile/snippet/", fileName)
 }

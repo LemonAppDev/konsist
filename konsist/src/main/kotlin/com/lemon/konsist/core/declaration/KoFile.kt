@@ -90,6 +90,13 @@ class KoFile private constructor(private val ktFile: KtFile) :
 
     fun hasImport(name: String) = imports.any { PackageHelper.resideInPackage(name, it.name) }
 
+    override fun equals(other: Any?): Boolean = other is KoFile && path == other.path
+
+    override fun hashCode(): Int {
+        val hash = 7
+        return 31 * hash + path.hashCode()
+    }
+
     companion object {
         private val cache = KoDeclarationCache<KoFile>()
 
