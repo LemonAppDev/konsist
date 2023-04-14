@@ -8,7 +8,7 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class CheckTest {
+class AssertTest {
     @Test
     fun `check-test-method-name`() {
         // given
@@ -17,7 +17,7 @@ class CheckTest {
 
         // then
         try {
-            sut.check { false }
+            sut.assert { false }
         } catch (e: Exception) {
             e.message?.shouldContain("Check 'check-test-method-name' has failed. Invalid declarations") ?: throw e
         }
@@ -30,7 +30,7 @@ class CheckTest {
             .classes()
 
         // then
-        sut.check {
+        sut.assert {
             it.name == "SampleClass"
         }
     }
@@ -43,7 +43,7 @@ class CheckTest {
 
         // when
         val func = {
-            sut.check {
+            sut.assert {
                 it.name == "OtherName"
             }
         }
@@ -59,7 +59,7 @@ class CheckTest {
             .classes()
 
         // then
-        sut.checkNot {
+        sut.assertNot {
             it.name == "OtherName"
         }
     }
@@ -72,7 +72,7 @@ class CheckTest {
 
         // when
         val func = {
-            sut.checkNot {
+            sut.assertNot {
                 it.name == "SampleClass"
             }
         }
@@ -89,12 +89,12 @@ class CheckTest {
 
         // when
         val func = {
-            sut.check { true }
+            sut.assert { true }
         }
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling 'check' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assert' method."
     }
 
     @Test
@@ -105,12 +105,12 @@ class CheckTest {
 
         // when
         val func = {
-            sut.checkNot { false }
+            sut.assertNot { false }
         }
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling 'checkNot' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assertNot' method."
     }
 
     private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/check/snippet/", fileName)
