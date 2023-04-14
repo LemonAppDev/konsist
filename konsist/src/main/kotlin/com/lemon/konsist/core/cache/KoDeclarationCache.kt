@@ -19,8 +19,6 @@ class KoDeclarationCache<T : KoBaseDeclaration> {
 
     private fun hasKey(ktElement: KtElement) = elements.containsKey(ktElement)
 
-
-
     fun getOrCreateInstance(ktElement: KtElement, value: (KtElement) -> T) = if (hasKey(ktElement)) {
         get(ktElement)
     } else {
