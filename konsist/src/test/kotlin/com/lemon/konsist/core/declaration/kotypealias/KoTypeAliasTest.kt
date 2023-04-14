@@ -9,7 +9,7 @@ class KoTypeAliasTest {
     @Test
     fun `typealias`() {
         // given
-        val sut = getSut("typealias")
+        val sut = getSnippetFile("typealias")
             .files()
             .first()
             .typeAliases
@@ -25,7 +25,7 @@ class KoTypeAliasTest {
     @Test
     fun `no-typealias`() {
         // given
-        val sut = getSut("no-typealias")
+        val sut = getSnippetFile("no-typealias")
             .files()
             .first()
             .typeAliases
@@ -34,5 +34,5 @@ class KoTypeAliasTest {
         sut.isEmpty() shouldBeEqualTo true
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealias/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealias/snippet/", fileName)
 }

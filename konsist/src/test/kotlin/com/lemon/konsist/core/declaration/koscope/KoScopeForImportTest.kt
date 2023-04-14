@@ -9,7 +9,7 @@ class KoScopeForImportTest {
     @Test
     fun `file-contains-import`() {
         // given
-        val sut = getSut("file-contains-import")
+        val sut = getSnippetFile("file-contains-import")
 
         // then
         sut
@@ -22,7 +22,7 @@ class KoScopeForImportTest {
     @Test
     fun `file-contains-no-import`() {
         // given
-        val sut = getSut("file-contains-no-import")
+        val sut = getSnippetFile("file-contains-no-import")
 
         // then
         sut
@@ -31,5 +31,6 @@ class KoScopeForImportTest {
             .shouldBeEqualTo(emptyList())
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forimport/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forimport/", fileName)
 }

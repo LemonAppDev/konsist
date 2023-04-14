@@ -8,7 +8,7 @@ class KoBaseDeclarationTest {
     @Test
     fun `file-path`() {
         // given
-        val sut = getSut("file-path")
+        val sut = getSnippetFile("file-path")
             .functions()
             .first()
 
@@ -24,12 +24,12 @@ class KoBaseDeclarationTest {
     @Test
     fun `text-with-location`() {
         // given
-        val projectPath = getSut("text-with-location")
+        val projectPath = getSnippetFile("text-with-location")
             .files()
             .first()
             .projectPath
 
-        val sut = getSut("text-with-location")
+        val sut = getSnippetFile("text-with-location")
             .functions()
             .first()
 
@@ -47,7 +47,7 @@ class KoBaseDeclarationTest {
     @Test
     fun `containing-file`() {
         // given
-        val sut = getSut("containing-file")
+        val sut = getSnippetFile("containing-file")
             .files()
             .first()
 
@@ -62,7 +62,7 @@ class KoBaseDeclarationTest {
     @Test
     fun `location-with-single-digit`() {
         // given
-        val sut = getSut("location-with-single-digit")
+        val sut = getSnippetFile("location-with-single-digit")
             .functions()
             .first()
 
@@ -73,7 +73,7 @@ class KoBaseDeclarationTest {
     @Test
     fun `location-with-double-digit`() {
         // given
-        val sut = getSut("location-with-double-digit")
+        val sut = getSnippetFile("location-with-double-digit")
             .functions(includeNested = true)
             .first()
 
@@ -84,7 +84,7 @@ class KoBaseDeclarationTest {
     @Test
     fun `text`() {
         // given
-        val sut = getSut("text")
+        val sut = getSnippetFile("text")
             .declarations()
             .first()
 
@@ -103,7 +103,7 @@ class KoBaseDeclarationTest {
     @Test
     fun `to-string`() {
         // given
-        val sut = getSut("to-string")
+        val sut = getSnippetFile("to-string")
             .functions()
             .first()
 
@@ -111,5 +111,5 @@ class KoBaseDeclarationTest {
         sut.toString() shouldBeEqualTo sut.textWithLocation
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kobasedeclaration/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kobasedeclaration/snippet/", fileName)
 }

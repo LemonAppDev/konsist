@@ -9,7 +9,7 @@ class KoScopeForPackageTest {
     @Test
     fun `file-contains-package`() {
         // given
-        val sut = getSut("file-contains-package")
+        val sut = getSnippetFile("file-contains-package")
 
         // then
         sut
@@ -22,7 +22,7 @@ class KoScopeForPackageTest {
     @Test
     fun `file-contains-no-package`() {
         // given
-        val sut = getSut("file-contains-no-package")
+        val sut = getSnippetFile("file-contains-no-package")
 
         // then
         sut
@@ -31,5 +31,6 @@ class KoScopeForPackageTest {
             .shouldBeEqualTo(emptyList())
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forpackage/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forpackage/", fileName)
 }

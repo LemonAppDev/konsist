@@ -9,7 +9,7 @@ class KoScopeForPropertyTest {
     @Test
     fun `file-contains-one-property`() {
         // given
-        val sut = getSut("file-contains-one-property")
+        val sut = getSnippetFile("file-contains-one-property")
 
         // then
         sut
@@ -22,7 +22,7 @@ class KoScopeForPropertyTest {
     @Test
     fun `file-contains-no-property`() {
         // given
-        val sut = getSut("file-contains-no-property")
+        val sut = getSnippetFile("file-contains-no-property")
 
         // then
         sut
@@ -34,7 +34,7 @@ class KoScopeForPropertyTest {
     @Test
     fun `file-contains-one-class-containing-property includeNested true`() {
         // given
-        val sut = getSut("file-contains-one-class-containing-property")
+        val sut = getSnippetFile("file-contains-one-class-containing-property")
             .properties(includeNested = true)
 
         // then
@@ -47,7 +47,7 @@ class KoScopeForPropertyTest {
     @Test
     fun `file-contains-one-class-containing-property includeNested false`() {
         // given
-        val sut = getSut("file-contains-one-class-containing-property")
+        val sut = getSnippetFile("file-contains-one-class-containing-property")
             .properties(includeNested = false)
         // then
         sut
@@ -56,5 +56,6 @@ class KoScopeForPropertyTest {
             .shouldBeEqualTo(emptyList())
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forproperty/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forproperty/", fileName)
 }

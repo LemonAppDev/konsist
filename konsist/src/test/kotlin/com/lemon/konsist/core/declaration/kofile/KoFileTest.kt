@@ -11,7 +11,7 @@ class KoFileTest {
     @Test
     fun `file-name`() {
         // given
-        val sut = getSut("file-name")
+        val sut = getSnippetFile("file-name")
             .files()
             .first()
 
@@ -22,7 +22,7 @@ class KoFileTest {
     @Test
     fun `file-path`() {
         // given
-        val sut = getSut("file-path")
+        val sut = getSnippetFile("file-path")
             .files()
             .first()
 
@@ -36,7 +36,7 @@ class KoFileTest {
     @Test
     fun `file-project-path`() {
         // given
-        val sut = getSut("file-project-path")
+        val sut = getSnippetFile("file-project-path")
             .files()
             .first()
 
@@ -47,7 +47,7 @@ class KoFileTest {
     @Test
     fun `file-contains-imports`() {
         // given
-        val sut = getSut("file-contains-imports")
+        val sut = getSnippetFile("file-contains-imports")
             .files()
             .first()
 
@@ -66,7 +66,7 @@ class KoFileTest {
     @Test
     fun `file-has-imports`() {
         // given
-        val sut = getSut("file-has-imports")
+        val sut = getSnippetFile("file-has-imports")
             .files()
             .first()
 
@@ -82,7 +82,7 @@ class KoFileTest {
     @Test
     fun `file-contains-no-import`() {
         // given
-        val sut = getSut("file-contains-no-import")
+        val sut = getSnippetFile("file-contains-no-import")
             .files()
             .first()
 
@@ -96,7 +96,7 @@ class KoFileTest {
     @Test
     fun `file-contains-package`() {
         // given
-        val sut = getSut("file-contains-package")
+        val sut = getSnippetFile("file-contains-package")
             .files()
             .first()
 
@@ -107,7 +107,7 @@ class KoFileTest {
     @Test
     fun `file-contains-no-package`() {
         // given
-        val sut = getSut("file-contains-no-package")
+        val sut = getSnippetFile("file-contains-no-package")
             .files()
             .first()
 
@@ -118,7 +118,7 @@ class KoFileTest {
     @Test
     fun `file-contains-package-and-class`() {
         // given
-        val sut = getSut("file-contains-package-and-class")
+        val sut = getSnippetFile("file-contains-package-and-class")
             .files()
             .first()
 
@@ -132,7 +132,7 @@ class KoFileTest {
     @Test
     fun `file-contains-package-and-property`() {
         // given
-        val sut = getSut("file-contains-package-and-property")
+        val sut = getSnippetFile("file-contains-package-and-property")
             .files()
             .first()
 
@@ -146,7 +146,7 @@ class KoFileTest {
     @Test
     fun `file-contains-package-and-function`() {
         // given
-        val sut = getSut("file-contains-package-and-function")
+        val sut = getSnippetFile("file-contains-package-and-function")
             .files()
             .first()
 
@@ -160,7 +160,7 @@ class KoFileTest {
     @Test
     fun `file-contains-package-and-object`() {
         // given
-        val sut = getSut("file-contains-package-and-object")
+        val sut = getSnippetFile("file-contains-package-and-object")
             .files()
             .first()
 
@@ -174,7 +174,7 @@ class KoFileTest {
     @Test
     fun `file-contains-package-and-interface`() {
         // given
-        val sut = getSut("file-contains-package-and-interface")
+        val sut = getSnippetFile("file-contains-package-and-interface")
             .files()
             .first()
 
@@ -188,7 +188,7 @@ class KoFileTest {
     @Test
     fun `file-contains-annotation`() {
         // given
-        val sut = getSut("file-contains-annotation")
+        val sut = getSnippetFile("file-contains-annotation")
             .files()
             .first()
 
@@ -205,7 +205,7 @@ class KoFileTest {
     @Test
     fun `file-contains-no-annotation`() {
         // given
-        val sut = getSut("file-contains-no-annotation")
+        val sut = getSnippetFile("file-contains-no-annotation")
             .files()
             .first()
 
@@ -220,7 +220,7 @@ class KoFileTest {
     @Test
     fun `file-contains-typealias`() {
         // given
-        val sut = getSut("file-contains-typealias")
+        val sut = getSnippetFile("file-contains-typealias")
             .files()
             .first()
 
@@ -237,7 +237,7 @@ class KoFileTest {
     @Test
     fun `file-contains-no-typealias`() {
         // given
-        val sut = getSut("file-contains-no-typealias")
+        val sut = getSnippetFile("file-contains-no-typealias")
             .files()
             .first()
 
@@ -251,11 +251,11 @@ class KoFileTest {
     @Test
     fun `files-are-equal`() {
         // given
-        val file1 = getSut("files-are-equal")
+        val file1 = getSnippetFile("files-are-equal")
             .files()
             .first()
 
-        val file2 = getSut("files-are-equal")
+        val file2 = getSnippetFile("files-are-equal")
             .files()
             .first()
 
@@ -267,11 +267,11 @@ class KoFileTest {
     @Test
     fun `files-are-not-equal`() {
         // given
-        val file1 = getSut("files-are-not-equal")
+        val file1 = getSnippetFile("files-are-not-equal")
             .files()
             .first()
 
-        val file2 = getSut("files-are-equal")
+        val file2 = getSnippetFile("files-are-equal")
             .files()
             .first()
 
@@ -280,5 +280,5 @@ class KoFileTest {
         file1.hashCode() shouldNotBeEqualTo file2.hashCode()
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kofile/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofile/snippet/", fileName)
 }

@@ -9,7 +9,7 @@ class KoScopeForClassTest {
     @Test
     fun `file-contains-one-class`() {
         // given
-        val sut = getSut("file-contains-one-class")
+        val sut = getSnippetFile("file-contains-one-class")
 
         // then
         sut
@@ -22,7 +22,7 @@ class KoScopeForClassTest {
     @Test
     fun `file-contains-no-class`() {
         // given
-        val sut = getSut("file-contains-no-class")
+        val sut = getSnippetFile("file-contains-no-class")
 
         // then
         sut
@@ -34,7 +34,7 @@ class KoScopeForClassTest {
     @Test
     fun `file-contains-two-classes-with-nested-class includeNested true`() {
         // given
-        val sut = getSut("file-contains-two-classes-with-nested-class")
+        val sut = getSnippetFile("file-contains-two-classes-with-nested-class")
 
         // then
         sut
@@ -53,7 +53,7 @@ class KoScopeForClassTest {
     @Test
     fun `file-contains-two-classes-with-nested-class includeNested false`() {
         // given
-        val sut = getSut("file-contains-two-classes-with-nested-class")
+        val sut = getSnippetFile("file-contains-two-classes-with-nested-class")
 
         // then
         sut
@@ -68,5 +68,6 @@ class KoScopeForClassTest {
             )
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forclass/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forclass/", fileName)
 }

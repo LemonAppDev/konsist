@@ -10,7 +10,7 @@ class KoDeclarationForSecondaryConstructorTest {
     @Test
     fun `secondary-constructor-without-visibility-modifiers`() {
         // given
-        val sut = getSut("secondary-constructor-without-visibility-modifiers")
+        val sut = getSnippetFile("secondary-constructor-without-visibility-modifiers")
             .classes()
             .first()
             .secondaryConstructors
@@ -29,7 +29,7 @@ class KoDeclarationForSecondaryConstructorTest {
     @Test
     fun `public-secondary-constructor`() {
         // given
-        val sut = getSut("public-secondary-constructor")
+        val sut = getSnippetFile("public-secondary-constructor")
             .classes()
             .first()
             .secondaryConstructors
@@ -48,7 +48,7 @@ class KoDeclarationForSecondaryConstructorTest {
     @Test
     fun `private-secondary-constructor`() {
         // given
-        val sut = getSut("private-secondary-constructor")
+        val sut = getSnippetFile("private-secondary-constructor")
             .classes()
             .first()
             .secondaryConstructors
@@ -67,7 +67,7 @@ class KoDeclarationForSecondaryConstructorTest {
     @Test
     fun `protected-secondary-constructor`() {
         // given
-        val sut = getSut("protected-secondary-constructor")
+        val sut = getSnippetFile("protected-secondary-constructor")
             .classes()
             .first()
             .secondaryConstructors
@@ -86,7 +86,7 @@ class KoDeclarationForSecondaryConstructorTest {
     @Test
     fun `internal-secondary-constructor`() {
         // given
-        val sut = getSut("internal-secondary-constructor")
+        val sut = getSnippetFile("internal-secondary-constructor")
             .classes()
             .first()
             .secondaryConstructors
@@ -105,7 +105,7 @@ class KoDeclarationForSecondaryConstructorTest {
     @Test
     fun `secondary-constructor`() {
         // given
-        val sut = getSut("secondary-constructor")
+        val sut = getSnippetFile("secondary-constructor")
             .classes()
             .first()
             .secondaryConstructors
@@ -118,7 +118,7 @@ class KoDeclarationForSecondaryConstructorTest {
     @Test
     fun `secondary-constructor-has-annotation`() {
         // given
-        val sut = getSut("secondary-constructor-has-annotation")
+        val sut = getSnippetFile("secondary-constructor-has-annotation")
             .classes()
             .first()
             .secondaryConstructors
@@ -137,7 +137,7 @@ class KoDeclarationForSecondaryConstructorTest {
     @Test
     fun `secondary-constructor-has-no-annotation`() {
         // given
-        val sut = getSut("secondary-constructor-has-no-annotation")
+        val sut = getSnippetFile("secondary-constructor-has-no-annotation")
             .classes()
             .first()
             .secondaryConstructors
@@ -151,6 +151,6 @@ class KoDeclarationForSecondaryConstructorTest {
         }
     }
 
-    private fun getSut(fileName: String) =
+    private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kodeclaration/snippet/forsecondaryconstructor/", fileName)
 }

@@ -8,7 +8,7 @@ class KoObjectTest {
     @Test
     fun `object`() {
         // given
-        val sut = getSut("object")
+        val sut = getSnippetFile("object")
             .objects()
             .first()
 
@@ -19,7 +19,7 @@ class KoObjectTest {
     @Test
     fun `data-object`() {
         // given
-        val sut = getSut("data-object")
+        val sut = getSnippetFile("data-object")
             .objects()
             .first()
 
@@ -27,5 +27,5 @@ class KoObjectTest {
         sut.hasDataModifier() shouldBeEqualTo true
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/", fileName)
 }

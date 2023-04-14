@@ -9,7 +9,7 @@ class KoScopeForFunctionTest {
     @Test
     fun `file-contains-one-function`() {
         // given
-        val sut = getSut("file-contains-one-function")
+        val sut = getSnippetFile("file-contains-one-function")
 
         // then
         sut
@@ -22,7 +22,7 @@ class KoScopeForFunctionTest {
     @Test
     fun `file-contains-no-function`() {
         // given
-        val sut = getSut("file-contains-no-function")
+        val sut = getSnippetFile("file-contains-no-function")
 
         // then
         sut
@@ -34,7 +34,7 @@ class KoScopeForFunctionTest {
     @Test
     fun `file-contains-two-functions-with-nested-function includeNested true`() {
         // given
-        val sut = getSut("file-contains-two-functions-with-nested-function")
+        val sut = getSnippetFile("file-contains-two-functions-with-nested-function")
 
         // then
         sut
@@ -52,7 +52,7 @@ class KoScopeForFunctionTest {
     @Test
     fun `file-contains-two-functions-with-nested-function includeNested false`() {
         // given
-        val sut = getSut("file-contains-two-functions-with-nested-function")
+        val sut = getSnippetFile("file-contains-two-functions-with-nested-function")
 
         // then
         sut
@@ -67,5 +67,6 @@ class KoScopeForFunctionTest {
             )
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forfunction/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forfunction/", fileName)
 }

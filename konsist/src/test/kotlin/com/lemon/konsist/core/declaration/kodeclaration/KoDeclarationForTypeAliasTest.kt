@@ -13,7 +13,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-is-top-level`() {
         // given
-        val sut = getSut("typealias-is-top-level")
+        val sut = getSnippetFile("typealias-is-top-level")
             .typeAliases()
             .first()
 
@@ -24,7 +24,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-has-annotation`() {
         // given
-        val sut = getSut("typealias-has-annotation")
+        val sut = getSnippetFile("typealias-has-annotation")
             .typeAliases()
             .first()
 
@@ -41,7 +41,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-has-no-visibility-modifier`() {
         // given
-        val sut = getSut("typealias-has-no-visibility-modifier")
+        val sut = getSnippetFile("typealias-has-no-visibility-modifier")
             .typeAliases()
             .first()
 
@@ -58,7 +58,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-has-public-visibility-modifier`() {
         // given
-        val sut = getSut("typealias-has-public-visibility-modifier")
+        val sut = getSnippetFile("typealias-has-public-visibility-modifier")
             .typeAliases()
             .first()
 
@@ -75,7 +75,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-has-private-visibility-modifier`() {
         // given
-        val sut = getSut("typealias-has-private-visibility-modifier")
+        val sut = getSnippetFile("typealias-has-private-visibility-modifier")
             .typeAliases()
             .first()
 
@@ -92,7 +92,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-has-protected-visibility-modifier`() {
         // given
-        val sut = getSut("typealias-has-protected-visibility-modifier")
+        val sut = getSnippetFile("typealias-has-protected-visibility-modifier")
             .typeAliases()
             .first()
 
@@ -109,7 +109,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-has-internal-visibility-modifier`() {
         // given
-        val sut = getSut("typealias-has-internal-visibility-modifier")
+        val sut = getSnippetFile("typealias-has-internal-visibility-modifier")
             .typeAliases()
             .first()
 
@@ -126,7 +126,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-has-fully-qualified-name`() {
         // given
-        val sut = getSut("typealias-has-fully-qualified-name")
+        val sut = getSnippetFile("typealias-has-fully-qualified-name")
             .typeAliases()
             .first()
 
@@ -137,7 +137,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-is-in-package`() {
         // given
-        val sut = getSut("typealias-is-in-package")
+        val sut = getSnippetFile("typealias-is-in-package")
             .typeAliases()
             .first()
 
@@ -148,7 +148,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-is-not-in-package`() {
         // given
-        val sut = getSut("typealias-is-not-in-package")
+        val sut = getSnippetFile("typealias-is-not-in-package")
             .typeAliases()
             .first()
 
@@ -159,7 +159,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-has-protected-modifier`() {
         // given
-        val sut = getSut("typealias-has-protected-modifier")
+        val sut = getSnippetFile("typealias-has-protected-modifier")
             .typeAliases()
             .first()
 
@@ -170,7 +170,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-has-public-modifier`() {
         // given
-        val sut = getSut("typealias-has-public-modifier")
+        val sut = getSnippetFile("typealias-has-public-modifier")
             .typeAliases()
             .first()
 
@@ -184,7 +184,7 @@ class KoDeclarationForTypeAliasTest {
     @Test
     fun `typealias-has-no-modifiers`() {
         // given
-        val sut = getSut("typealias-has-no-modifiers")
+        val sut = getSnippetFile("typealias-has-no-modifiers")
             .typeAliases()
             .first()
 
@@ -195,5 +195,5 @@ class KoDeclarationForTypeAliasTest {
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/fortypealias/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/fortypealias/", fileName)
 }

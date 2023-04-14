@@ -12,7 +12,7 @@ class AssertTest {
     @Test
     fun `check-test-method-name`() {
         // given
-        val sut = getSut("check-test-method-name")
+        val sut = getSnippetFile("check-test-method-name")
             .classes()
 
         // then
@@ -26,7 +26,7 @@ class AssertTest {
     @Test
     fun `check-pass`() {
         // given
-        val sut = getSut("check-pass")
+        val sut = getSnippetFile("check-pass")
             .classes()
 
         // then
@@ -38,7 +38,7 @@ class AssertTest {
     @Test
     fun `check-fail`() {
         // given
-        val sut = getSut("check-fail")
+        val sut = getSnippetFile("check-fail")
             .classes()
 
         // when
@@ -55,7 +55,7 @@ class AssertTest {
     @Test
     fun `check-not-pass`() {
         // given
-        val sut = getSut("check-not-pass")
+        val sut = getSnippetFile("check-not-pass")
             .classes()
 
         // then
@@ -67,7 +67,7 @@ class AssertTest {
     @Test
     fun `check-not-fail`() {
         // given
-        val sut = getSut("check-not-fail")
+        val sut = getSnippetFile("check-not-fail")
             .classes()
 
         // when
@@ -84,7 +84,7 @@ class AssertTest {
     @Test
     fun `check-fail-declaration-list-empty`() {
         // given
-        val sut = getSut("check-fail-declaration-list-empty")
+        val sut = getSnippetFile("check-fail-declaration-list-empty")
             .classes()
 
         // when
@@ -100,7 +100,7 @@ class AssertTest {
     @Test
     fun `check-not-fail-declaration-list-empty`() {
         // given
-        val sut = getSut("check-not-fail-declaration-list-empty")
+        val sut = getSnippetFile("check-not-fail-declaration-list-empty")
             .classes()
 
         // when
@@ -113,5 +113,5 @@ class AssertTest {
             "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assertNot' method."
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/check/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/check/snippet/", fileName)
 }

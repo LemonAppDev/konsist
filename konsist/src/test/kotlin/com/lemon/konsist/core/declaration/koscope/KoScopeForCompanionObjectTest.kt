@@ -8,7 +8,7 @@ class KoScopeForCompanionObjectTest {
     @Test
     fun `file-contains-one-companion-object`() {
         // given
-        val sut = getSut("file-contains-one-companion-object")
+        val sut = getSnippetFile("file-contains-one-companion-object")
 
         // then
         sut
@@ -23,7 +23,7 @@ class KoScopeForCompanionObjectTest {
     @Test
     fun `file-contains-no-companion-object`() {
         // given
-        val sut = getSut("file-contains-no-companion-object")
+        val sut = getSnippetFile("file-contains-no-companion-object")
 
         // then
         sut
@@ -37,7 +37,7 @@ class KoScopeForCompanionObjectTest {
     @Test
     fun `file-contains-two-companion-objects includeNested true`() {
         // given
-        val sut = getSut("file-contains-two-companion-objects")
+        val sut = getSnippetFile("file-contains-two-companion-objects")
 
         // then
         sut
@@ -52,7 +52,7 @@ class KoScopeForCompanionObjectTest {
     @Test
     fun `file-contains-two-companion-objects includeNested false`() {
         // given
-        val sut = getSut("file-contains-two-companion-objects")
+        val sut = getSnippetFile("file-contains-two-companion-objects")
 
         // then
         sut
@@ -63,6 +63,6 @@ class KoScopeForCompanionObjectTest {
             )
     }
 
-    private fun getSut(fileName: String) =
+    private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forcompanionobject/", fileName)
 }

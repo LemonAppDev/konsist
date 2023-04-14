@@ -8,7 +8,7 @@ class ParametrizedDeclarationForFunctionTest {
     @Test
     fun `function-contains-no-parameters`() {
         // given
-        val sut = getSut("function-contains-no-parameters")
+        val sut = getSnippetFile("function-contains-no-parameters")
             .functions()
             .first()
 
@@ -19,7 +19,7 @@ class ParametrizedDeclarationForFunctionTest {
     @Test
     fun `function-contains-parameter`() {
         // given
-        val sut = getSut("function-contains-parameter")
+        val sut = getSnippetFile("function-contains-parameter")
             .functions()
             .first()
 
@@ -35,7 +35,7 @@ class ParametrizedDeclarationForFunctionTest {
     @Test
     fun `function-has-parameter`() {
         // given
-        val sut = getSut("function-has-parameter")
+        val sut = getSnippetFile("function-has-parameter")
             .functions()
             .first()
 
@@ -46,6 +46,6 @@ class ParametrizedDeclarationForFunctionTest {
         }
     }
 
-    private fun getSut(fileName: String) =
+    private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koparametrizeddeclaration/snippet/forfunction/", fileName)
 }

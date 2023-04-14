@@ -8,7 +8,7 @@ class KoParameterTest {
     @Test
     fun `class-has-complex-default-parameter-value`() {
         // given
-        val sut = getSut("class-has-complex-default-parameter-value")
+        val sut = getSnippetFile("class-has-complex-default-parameter-value")
             .classes()
             .first()
             .primaryConstructor
@@ -29,7 +29,7 @@ class KoParameterTest {
     @Test
     fun `class-has-one-parameter-with-import-alias`() {
         // given
-        val sut = getSut("class-has-one-parameter-with-import-alias")
+        val sut = getSnippetFile("class-has-one-parameter-with-import-alias")
             .classes()
             .first()
             .primaryConstructor
@@ -50,7 +50,7 @@ class KoParameterTest {
     @Test
     fun `class-has-primitive-default-parameter-value`() {
         // given
-        val sut = getSut("class-has-primitive-default-parameter-value")
+        val sut = getSnippetFile("class-has-primitive-default-parameter-value")
             .classes()
             .first()
             .primaryConstructor
@@ -67,7 +67,7 @@ class KoParameterTest {
     @Test
     fun `class-has-no-parameters`() {
         // given
-        val sut = getSut("class-has-no-parameters")
+        val sut = getSnippetFile("class-has-no-parameters")
             .classes()
             .first()
 
@@ -78,7 +78,7 @@ class KoParameterTest {
     @Test
     fun `class-has-empty-primary-constructor`() {
         // given
-        val sut = getSut("class-has-empty-primary-constructor")
+        val sut = getSnippetFile("class-has-empty-primary-constructor")
             .classes()
             .first()
             .primaryConstructor
@@ -91,7 +91,7 @@ class KoParameterTest {
     @Test
     fun `function-has-primitive-default-parameter-value`() {
         // given
-        val sut = getSut("function-has-primitive-default-parameter-value")
+        val sut = getSnippetFile("function-has-primitive-default-parameter-value")
             .functions()
             .first()
             .parameters
@@ -104,7 +104,7 @@ class KoParameterTest {
     @Test
     fun `function-has-complex-default-parameter-value`() {
         // given
-        val sut = getSut("function-has-complex-default-parameter-value")
+        val sut = getSnippetFile("function-has-complex-default-parameter-value")
             .functions()
             .first()
             .parameters
@@ -117,7 +117,7 @@ class KoParameterTest {
     @Test
     fun `function-has-null-default-parameter-value`() {
         // given
-        val sut = getSut("function-has-null-default-parameter-value")
+        val sut = getSnippetFile("function-has-null-default-parameter-value")
             .functions()
             .first()
             .parameters
@@ -130,7 +130,7 @@ class KoParameterTest {
     @Test
     fun `function-has-no-default-parameter-value`() {
         // given
-        val sut = getSut("function-has-no-default-parameter-value")
+        val sut = getSnippetFile("function-has-no-default-parameter-value")
             .functions()
             .first()
             .parameters
@@ -143,7 +143,7 @@ class KoParameterTest {
     @Test
     fun `parameter-has-vararg-modifier`() {
         // given
-        val sut = getSut("parameter-has-vararg-modifier")
+        val sut = getSnippetFile("parameter-has-vararg-modifier")
             .classes()
             .first()
             .primaryConstructor
@@ -157,7 +157,7 @@ class KoParameterTest {
     @Test
     fun `parameter-has-noinline-modifier`() {
         // given
-        val sut = getSut("parameter-has-noinline-modifier")
+        val sut = getSnippetFile("parameter-has-noinline-modifier")
             .functions()
             .first()
             .parameters
@@ -170,7 +170,7 @@ class KoParameterTest {
     @Test
     fun `parameter-has-crossinline-modifier`() {
         // given
-        val sut = getSut("parameter-has-crossinline-modifier")
+        val sut = getSnippetFile("parameter-has-crossinline-modifier")
             .functions()
             .first()
             .parameters
@@ -183,7 +183,7 @@ class KoParameterTest {
     @Test
     fun `parameter-has-no-modifiers`() {
         // given
-        val sut = getSut("parameter-has-no-modifiers")
+        val sut = getSnippetFile("parameter-has-no-modifiers")
             .classes()
             .first()
             .primaryConstructor
@@ -198,5 +198,5 @@ class KoParameterTest {
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/koparameter/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameter/snippet/", fileName)
 }

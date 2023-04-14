@@ -9,7 +9,7 @@ class KoImportTest {
     @Test
     fun `import-name`() {
         // given
-        val sut = getSut("import-name")
+        val sut = getSnippetFile("import-name")
             .imports()
             .first()
 
@@ -23,7 +23,7 @@ class KoImportTest {
     @Test
     fun `import-name-has-import-alias`() {
         // given
-        val sut = getSut("import-name-has-import-alias").imports()
+        val sut = getSnippetFile("import-name-has-import-alias").imports()
 
         // then
         sut
@@ -35,5 +35,5 @@ class KoImportTest {
             }
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koimport/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koimport/snippet/", fileName)
 }

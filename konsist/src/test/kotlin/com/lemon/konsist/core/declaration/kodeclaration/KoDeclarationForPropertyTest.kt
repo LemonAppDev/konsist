@@ -17,7 +17,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-is-top-level`() {
         // given
-        val sut = getSut("property-is-top-level")
+        val sut = getSnippetFile("property-is-top-level")
             .properties(includeNested = true)
             .first()
 
@@ -28,7 +28,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-is-not-top-level`() {
         // given
-        val sut = getSut("property-is-not-top-level")
+        val sut = getSnippetFile("property-is-not-top-level")
             .properties(includeNested = true)
             .first { it.name == "sampleNestedProperty" }
 
@@ -39,7 +39,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-no-annotation`() {
         // given
-        val sut = getSut("property-has-no-annotation")
+        val sut = getSnippetFile("property-has-no-annotation")
             .properties()
             .first()
 
@@ -50,7 +50,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-annotation`() {
         // given
-        val sut = getSut("property-has-annotation")
+        val sut = getSnippetFile("property-has-annotation")
             .properties()
             .first()
 
@@ -67,7 +67,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-two-annotations`() {
         // given
-        val sut = getSut("property-has-two-annotations")
+        val sut = getSnippetFile("property-has-two-annotations")
             .properties()
             .first()
 
@@ -86,7 +86,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-no-visibility-modifier`() {
         // given
-        val sut = getSut("property-has-no-visibility-modifier")
+        val sut = getSnippetFile("property-has-no-visibility-modifier")
             .properties()
             .first()
 
@@ -103,7 +103,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-public-visibility-modifier`() {
         // given
-        val sut = getSut("property-has-public-visibility-modifier")
+        val sut = getSnippetFile("property-has-public-visibility-modifier")
             .properties()
             .first()
 
@@ -120,7 +120,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-private-visibility-modifier`() {
         // given
-        val sut = getSut("property-has-private-visibility-modifier")
+        val sut = getSnippetFile("property-has-private-visibility-modifier")
             .properties()
             .first()
 
@@ -137,7 +137,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-protected-visibility-modifier`() {
         // given
-        val sut = getSut("property-has-protected-visibility-modifier")
+        val sut = getSnippetFile("property-has-protected-visibility-modifier")
             .properties()
             .first()
 
@@ -154,7 +154,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-internal-visibility-modifier`() {
         // given
-        val sut = getSut("property-has-internal-visibility-modifier")
+        val sut = getSnippetFile("property-has-internal-visibility-modifier")
             .properties()
             .first()
 
@@ -171,7 +171,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-fully-qualified-name`() {
         // given
-        val sut = getSut("property-has-fully-qualified-name")
+        val sut = getSnippetFile("property-has-fully-qualified-name")
             .properties()
             .first()
 
@@ -182,7 +182,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-is-in-package`() {
         // given
-        val sut = getSut("property-is-in-package")
+        val sut = getSnippetFile("property-is-in-package")
             .properties()
             .first()
 
@@ -193,7 +193,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-is-not-in-package`() {
         // given
-        val sut = getSut("property-is-not-in-package")
+        val sut = getSnippetFile("property-is-not-in-package")
             .properties()
             .first()
 
@@ -204,7 +204,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-protected-modifier`() {
         // given
-        val sut = getSut("property-has-protected-modifier")
+        val sut = getSnippetFile("property-has-protected-modifier")
             .properties()
             .first()
 
@@ -215,7 +215,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-public-modifier`() {
         // given
-        val sut = getSut("property-has-public-modifier")
+        val sut = getSnippetFile("property-has-public-modifier")
             .properties()
             .first()
 
@@ -229,7 +229,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-two-modifiers`() {
         // given
-        val sut = getSut("property-has-two-modifiers")
+        val sut = getSnippetFile("property-has-two-modifiers")
             .properties(includeNested = true)
             .first()
 
@@ -249,7 +249,7 @@ class KoDeclarationForPropertyTest {
     @Test
     fun `property-has-no-modifier`() {
         // given
-        val sut = getSut("property-has-no-modifier")
+        val sut = getSnippetFile("property-has-no-modifier")
             .properties()
             .first()
 
@@ -260,6 +260,6 @@ class KoDeclarationForPropertyTest {
         }
     }
 
-    private fun getSut(fileName: String) =
+    private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kodeclaration/snippet/forproperty/", fileName)
 }

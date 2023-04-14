@@ -17,7 +17,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-is-top-level`() {
         // given
-        val sut = getSut("companion-object-is-top-level")
+        val sut = getSnippetFile("companion-object-is-top-level")
             .companionObjects(includeNested = true)
             .first()
 
@@ -28,7 +28,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-is-not-top-level`() {
         // given
-        val sut = getSut("companion-object-is-not-top-level")
+        val sut = getSnippetFile("companion-object-is-not-top-level")
             .companionObjects(includeNested = true)
             .first { it.name == "SampleNestedCompanionObject" }
 
@@ -39,7 +39,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-no-annotation`() {
         // given
-        val sut = getSut("companion-object-has-no-annotation")
+        val sut = getSnippetFile("companion-object-has-no-annotation")
             .companionObjects()
             .first()
 
@@ -50,7 +50,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-annotation`() {
         // given
-        val sut = getSut("companion-object-has-annotation")
+        val sut = getSnippetFile("companion-object-has-annotation")
             .companionObjects()
             .first()
 
@@ -67,7 +67,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-two-annotations`() {
         // given
-        val sut = getSut("companion-object-has-two-annotations")
+        val sut = getSnippetFile("companion-object-has-two-annotations")
             .companionObjects()
             .first()
 
@@ -86,7 +86,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-no-visibility-modifier`() {
         // given
-        val sut = getSut("companion-object-has-no-visibility-modifier")
+        val sut = getSnippetFile("companion-object-has-no-visibility-modifier")
             .companionObjects()
             .first()
 
@@ -103,7 +103,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-public-visibility-modifier`() {
         // given
-        val sut = getSut("companion-object-has-public-visibility-modifier")
+        val sut = getSnippetFile("companion-object-has-public-visibility-modifier")
             .companionObjects()
             .first()
 
@@ -120,7 +120,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-private-visibility-modifier`() {
         // given
-        val sut = getSut("companion-object-has-private-visibility-modifier")
+        val sut = getSnippetFile("companion-object-has-private-visibility-modifier")
             .companionObjects()
             .first()
 
@@ -137,7 +137,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-protected-visibility-modifier`() {
         // given
-        val sut = getSut("companion-object-has-protected-visibility-modifier")
+        val sut = getSnippetFile("companion-object-has-protected-visibility-modifier")
             .companionObjects()
             .first()
 
@@ -154,7 +154,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-internal-visibility-modifier`() {
         // given
-        val sut = getSut("companion-object-has-internal-visibility-modifier")
+        val sut = getSnippetFile("companion-object-has-internal-visibility-modifier")
             .companionObjects()
             .first()
 
@@ -171,7 +171,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-fully-qualified-name`() {
         // given
-        val sut = getSut("companion-object-has-fully-qualified-name")
+        val sut = getSnippetFile("companion-object-has-fully-qualified-name")
             .companionObjects()
             .first()
 
@@ -182,7 +182,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-is-in-package`() {
         // given
-        val sut = getSut("companion-object-is-in-package")
+        val sut = getSnippetFile("companion-object-is-in-package")
             .companionObjects()
             .first()
 
@@ -193,7 +193,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-is-not-in-package`() {
         // given
-        val sut = getSut("companion-object-is-not-in-package")
+        val sut = getSnippetFile("companion-object-is-not-in-package")
             .companionObjects()
             .first()
 
@@ -204,7 +204,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-protected-modifier`() {
         // given
-        val sut = getSut("companion-object-has-protected-modifier")
+        val sut = getSnippetFile("companion-object-has-protected-modifier")
             .companionObjects()
             .first()
 
@@ -215,7 +215,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-public-modifier`() {
         // given
-        val sut = getSut("companion-object-has-public-modifier")
+        val sut = getSnippetFile("companion-object-has-public-modifier")
             .companionObjects()
             .first()
 
@@ -229,7 +229,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-two-modifiers`() {
         // given
-        val sut = getSut("companion-object-has-two-modifiers")
+        val sut = getSnippetFile("companion-object-has-two-modifiers")
             .companionObjects()
             .first()
 
@@ -249,7 +249,7 @@ class KoDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-has-no-modifier`() {
         // given
-        val sut = getSut("companion-object-has-no-modifiers")
+        val sut = getSnippetFile("companion-object-has-no-modifiers")
             .companionObjects()
             .first()
 
@@ -260,5 +260,5 @@ class KoDeclarationForCompanionObjectTest {
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forcompanionobject/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forcompanionobject/", fileName)
 }

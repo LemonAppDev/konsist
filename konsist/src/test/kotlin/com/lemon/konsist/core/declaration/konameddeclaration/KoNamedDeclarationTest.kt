@@ -8,7 +8,7 @@ class KoNamedDeclarationTest {
     @Test
     fun `class`() {
         // given
-        val sut = getSut("class")
+        val sut = getSnippetFile("class")
             .classes()
             .first()
 
@@ -19,7 +19,7 @@ class KoNamedDeclarationTest {
     @Test
     fun `interface`() {
         // given
-        val sut = getSut("interface")
+        val sut = getSnippetFile("interface")
             .interfaces()
             .first()
 
@@ -30,7 +30,7 @@ class KoNamedDeclarationTest {
     @Test
     fun `object`() {
         // given
-        val sut = getSut("object")
+        val sut = getSnippetFile("object")
             .objects()
             .first()
 
@@ -41,7 +41,7 @@ class KoNamedDeclarationTest {
     @Test
     fun `function`() {
         // given
-        val sut = getSut("function")
+        val sut = getSnippetFile("function")
             .functions()
             .first()
 
@@ -52,7 +52,7 @@ class KoNamedDeclarationTest {
     @Test
     fun `property`() {
         // given
-        val sut = getSut("property")
+        val sut = getSnippetFile("property")
             .properties()
             .first()
 
@@ -60,5 +60,6 @@ class KoNamedDeclarationTest {
         sut.name shouldBeEqualTo "sampleProperty"
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/konameddeclaration/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/konameddeclaration/snippet/", fileName)
 }
