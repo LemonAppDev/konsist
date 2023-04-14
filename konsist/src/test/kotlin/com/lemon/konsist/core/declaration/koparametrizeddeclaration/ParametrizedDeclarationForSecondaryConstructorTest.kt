@@ -8,7 +8,7 @@ class ParametrizedDeclarationForSecondaryConstructorTest {
     @Test
     fun `secondary-constructor-contains-no-parameters`() {
         // given
-        val sut = getSut("secondary-constructor-contains-no-parameters")
+        val sut = getSnippetFile("secondary-constructor-contains-no-parameters")
             .classes()
             .flatMap { it.secondaryConstructors }
             .first()
@@ -20,7 +20,7 @@ class ParametrizedDeclarationForSecondaryConstructorTest {
     @Test
     fun `secondary-constructor-contains-parameter`() {
         // given
-        val sut = getSut("secondary-constructor-contains-parameter")
+        val sut = getSnippetFile("secondary-constructor-contains-parameter")
             .classes()
             .flatMap { it.secondaryConstructors }
             .first()
@@ -37,7 +37,7 @@ class ParametrizedDeclarationForSecondaryConstructorTest {
     @Test
     fun `secondary-constructor-has-parameter`() {
         // given
-        val sut = getSut("secondary-constructor-has-parameter")
+        val sut = getSnippetFile("secondary-constructor-has-parameter")
             .classes()
             .flatMap { it.secondaryConstructors }
             .first()
@@ -49,6 +49,6 @@ class ParametrizedDeclarationForSecondaryConstructorTest {
         }
     }
 
-    private fun getSut(fileName: String) =
+    private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koparametrizeddeclaration/snippet/forsecondaryconstructor/", fileName)
 }

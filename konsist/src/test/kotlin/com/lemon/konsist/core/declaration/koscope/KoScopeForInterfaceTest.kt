@@ -8,7 +8,7 @@ class KoScopeForInterfaceTest {
     @Test
     fun `file-contains-one-interface`() {
         // given
-        val sut = getSut("file-contains-one-interface")
+        val sut = getSnippetFile("file-contains-one-interface")
 
         // then
         sut
@@ -21,7 +21,7 @@ class KoScopeForInterfaceTest {
     @Test
     fun `file-contains-no-interface`() {
         // given
-        val sut = getSut("file-contains-no-interface")
+        val sut = getSnippetFile("file-contains-no-interface")
 
         // then
         sut
@@ -33,7 +33,7 @@ class KoScopeForInterfaceTest {
     @Test
     fun `file-contains-two-interfaces-with-nested-interface includeNested true`() {
         // given
-        val sut = getSut("file-contains-two-interfaces-with-nested-interface")
+        val sut = getSnippetFile("file-contains-two-interfaces-with-nested-interface")
 
         // then
         sut
@@ -52,7 +52,7 @@ class KoScopeForInterfaceTest {
     @Test
     fun `file-contains-two-interfaces-with-nested-interface includeNested false`() {
         // given
-        val sut = getSut("file-contains-two-interfaces-with-nested-interface")
+        val sut = getSnippetFile("file-contains-two-interfaces-with-nested-interface")
 
         // then
         sut
@@ -67,5 +67,5 @@ class KoScopeForInterfaceTest {
             )
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forinterface/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forinterface/", fileName)
 }

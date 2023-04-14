@@ -15,7 +15,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-is-top-level`() {
         // given
-        val sut = getSut("interface-is-top-level")
+        val sut = getSnippetFile("interface-is-top-level")
             .interfaces(includeNested = true)
             .first()
 
@@ -26,7 +26,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-is-not-top-level`() {
         // given
-        val sut = getSut("interface-is-not-top-level")
+        val sut = getSnippetFile("interface-is-not-top-level")
             .interfaces(includeNested = true)
             .first { it.name == "SampleNestedInterface" }
 
@@ -37,7 +37,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-no-annotation`() {
         // given
-        val sut = getSut("interface-has-no-annotation")
+        val sut = getSnippetFile("interface-has-no-annotation")
             .interfaces()
             .first()
 
@@ -48,7 +48,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-annotation`() {
         // given
-        val sut = getSut("interface-has-annotation")
+        val sut = getSnippetFile("interface-has-annotation")
             .interfaces()
             .first()
 
@@ -64,7 +64,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-two-annotations`() {
         // given
-        val sut = getSut("interface-has-two-annotations")
+        val sut = getSnippetFile("interface-has-two-annotations")
             .interfaces()
             .first()
 
@@ -82,7 +82,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-no-visibility-modifier`() {
         // given
-        val sut = getSut("interface-has-no-visibility-modifier")
+        val sut = getSnippetFile("interface-has-no-visibility-modifier")
             .interfaces()
             .first()
 
@@ -99,7 +99,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-public-visibility-modifier`() {
         // given
-        val sut = getSut("interface-has-public-visibility-modifier")
+        val sut = getSnippetFile("interface-has-public-visibility-modifier")
             .interfaces()
             .first()
 
@@ -116,7 +116,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-private-visibility-modifier`() {
         // given
-        val sut = getSut("interface-has-private-visibility-modifier")
+        val sut = getSnippetFile("interface-has-private-visibility-modifier")
             .interfaces()
             .first()
 
@@ -133,7 +133,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-protected-visibility-modifier`() {
         // given
-        val sut = getSut("interface-has-protected-visibility-modifier")
+        val sut = getSnippetFile("interface-has-protected-visibility-modifier")
             .interfaces()
             .first()
 
@@ -150,7 +150,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-internal-visibility-modifier`() {
         // given
-        val sut = getSut("interface-has-internal-visibility-modifier")
+        val sut = getSnippetFile("interface-has-internal-visibility-modifier")
             .interfaces()
             .first()
 
@@ -167,7 +167,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-fully-qualified-name`() {
         // given
-        val sut = getSut("interface-has-fully-qualified-name")
+        val sut = getSnippetFile("interface-has-fully-qualified-name")
             .interfaces()
             .first()
 
@@ -178,7 +178,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-is-in-package`() {
         // given
-        val sut = getSut("interface-is-in-package")
+        val sut = getSnippetFile("interface-is-in-package")
             .interfaces()
             .first()
 
@@ -189,7 +189,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-is-not-in-package`() {
         // given
-        val sut = getSut("interface-is-not-in-package")
+        val sut = getSnippetFile("interface-is-not-in-package")
             .interfaces()
             .first()
 
@@ -200,7 +200,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-protected-modifier`() {
         // given
-        val sut = getSut("interface-has-protected-modifier")
+        val sut = getSnippetFile("interface-has-protected-modifier")
             .interfaces()
             .first()
 
@@ -211,7 +211,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-public-modifier`() {
         // given
-        val sut = getSut("interface-has-public-modifier")
+        val sut = getSnippetFile("interface-has-public-modifier")
             .interfaces()
             .first()
 
@@ -225,7 +225,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-two-modifiers`() {
         // given
-        val sut = getSut("interface-has-two-modifiers")
+        val sut = getSnippetFile("interface-has-two-modifiers")
             .interfaces()
             .first()
 
@@ -245,7 +245,7 @@ class KoDeclarationForInterfaceTest {
     @Test
     fun `interface-has-no-modifiers`() {
         // given
-        val sut = getSut("interface-has-no-modifiers")
+        val sut = getSnippetFile("interface-has-no-modifiers")
             .interfaces()
             .first()
 
@@ -256,6 +256,6 @@ class KoDeclarationForInterfaceTest {
         }
     }
 
-    private fun getSut(fileName: String) =
+    private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kodeclaration/snippet/forinterface/", fileName)
 }

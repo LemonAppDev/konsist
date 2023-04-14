@@ -10,7 +10,7 @@ class KoDeclarationForPrimaryConstructorTest {
     @Test
     fun `primary-constructor`() {
         // given
-        val sut = getSut("primary-constructor")
+        val sut = getSnippetFile("primary-constructor")
             .classes()
             .first()
             .primaryConstructor
@@ -22,7 +22,7 @@ class KoDeclarationForPrimaryConstructorTest {
     @Test
     fun `primary-constructor-without-visibility-modifiers`() {
         // given
-        val sut = getSut("primary-constructor-without-visibility-modifiers")
+        val sut = getSnippetFile("primary-constructor-without-visibility-modifiers")
             .classes()
             .first()
             .primaryConstructor
@@ -40,7 +40,7 @@ class KoDeclarationForPrimaryConstructorTest {
     @Test
     fun `public-primary-constructor`() {
         // given
-        val sut = getSut("public-primary-constructor")
+        val sut = getSnippetFile("public-primary-constructor")
             .classes()
             .first()
             .primaryConstructor
@@ -58,7 +58,7 @@ class KoDeclarationForPrimaryConstructorTest {
     @Test
     fun `private-primary-constructor`() {
         // given
-        val sut = getSut("private-primary-constructor")
+        val sut = getSnippetFile("private-primary-constructor")
             .classes()
             .first()
             .primaryConstructor
@@ -76,7 +76,7 @@ class KoDeclarationForPrimaryConstructorTest {
     @Test
     fun `protected-primary-constructor`() {
         // given
-        val sut = getSut("protected-primary-constructor")
+        val sut = getSnippetFile("protected-primary-constructor")
             .classes()
             .first()
             .primaryConstructor
@@ -94,7 +94,7 @@ class KoDeclarationForPrimaryConstructorTest {
     @Test
     fun `internal-primary-constructor`() {
         // given
-        val sut = getSut("internal-primary-constructor")
+        val sut = getSnippetFile("internal-primary-constructor")
             .classes()
             .first()
             .primaryConstructor
@@ -112,7 +112,7 @@ class KoDeclarationForPrimaryConstructorTest {
     @Test
     fun `primary-constructor-has-annotation`() {
         // given
-        val sut = getSut("primary-constructor-has-annotation")
+        val sut = getSnippetFile("primary-constructor-has-annotation")
             .classes()
             .first()
             .primaryConstructor
@@ -130,7 +130,7 @@ class KoDeclarationForPrimaryConstructorTest {
     @Test
     fun `primary-constructor-has-no-annotation`() {
         // given
-        val sut = getSut("primary-constructor-has-no-annotation")
+        val sut = getSnippetFile("primary-constructor-has-no-annotation")
             .classes()
             .first()
             .primaryConstructor
@@ -143,6 +143,6 @@ class KoDeclarationForPrimaryConstructorTest {
         }
     }
 
-    private fun getSut(fileName: String) =
+    private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kodeclaration/snippet/forprimaryconstructor/", fileName)
 }

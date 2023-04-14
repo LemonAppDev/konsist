@@ -17,7 +17,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-is-top-level`() {
         // given
-        val sut = getSut("class-is-top-level")
+        val sut = getSnippetFile("class-is-top-level")
             .classes(includeNested = true)
             .first()
 
@@ -28,7 +28,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-is-not-top-level`() {
         // given
-        val sut = getSut("class-is-not-top-level")
+        val sut = getSnippetFile("class-is-not-top-level")
             .classes(includeNested = true)
             .first { it.name == "SampleNestedClass" }
 
@@ -39,7 +39,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-no-annotation`() {
         // given
-        val sut = getSut("class-has-no-annotation")
+        val sut = getSnippetFile("class-has-no-annotation")
             .classes()
             .first()
 
@@ -50,7 +50,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-annotation`() {
         // given
-        val sut = getSut("class-has-annotation")
+        val sut = getSnippetFile("class-has-annotation")
             .classes()
             .first()
 
@@ -67,7 +67,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-two-annotations`() {
         // given
-        val sut = getSut("class-has-two-annotations")
+        val sut = getSnippetFile("class-has-two-annotations")
             .classes()
             .first()
 
@@ -86,7 +86,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-no-visibility-modifier`() {
         // given
-        val sut = getSut("class-has-no-visibility-modifier")
+        val sut = getSnippetFile("class-has-no-visibility-modifier")
             .classes()
             .first()
 
@@ -103,7 +103,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-public-visibility-modifier`() {
         // given
-        val sut = getSut("class-has-public-visibility-modifier")
+        val sut = getSnippetFile("class-has-public-visibility-modifier")
             .classes()
             .first()
 
@@ -120,7 +120,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-private-visibility-modifier`() {
         // given
-        val sut = getSut("class-has-private-visibility-modifier")
+        val sut = getSnippetFile("class-has-private-visibility-modifier")
             .classes()
             .first()
 
@@ -137,7 +137,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-protected-visibility-modifier`() {
         // given
-        val sut = getSut("class-has-protected-visibility-modifier")
+        val sut = getSnippetFile("class-has-protected-visibility-modifier")
             .classes()
             .first()
 
@@ -154,7 +154,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-internal-visibility-modifier`() {
         // given
-        val sut = getSut("class-has-internal-visibility-modifier")
+        val sut = getSnippetFile("class-has-internal-visibility-modifier")
             .classes()
             .first()
 
@@ -171,7 +171,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-fully-qualified-name`() {
         // given
-        val sut = getSut("class-has-fully-qualified-name")
+        val sut = getSnippetFile("class-has-fully-qualified-name")
             .classes()
             .first()
 
@@ -182,7 +182,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-is-in-package`() {
         // given
-        val sut = getSut("class-is-in-package")
+        val sut = getSnippetFile("class-is-in-package")
             .classes()
             .first()
 
@@ -193,7 +193,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-is-not-in-package`() {
         // given
-        val sut = getSut("class-is-not-in-package")
+        val sut = getSnippetFile("class-is-not-in-package")
             .classes()
             .first()
 
@@ -204,7 +204,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-protected-modifier`() {
         // given
-        val sut = getSut("class-has-protected-modifier")
+        val sut = getSnippetFile("class-has-protected-modifier")
             .classes()
             .first()
 
@@ -215,7 +215,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-public-modifier`() {
         // given
-        val sut = getSut("class-has-public-modifier")
+        val sut = getSnippetFile("class-has-public-modifier")
             .classes()
             .first()
 
@@ -229,7 +229,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-two-modifiers`() {
         // given
-        val sut = getSut("class-has-two-modifiers")
+        val sut = getSnippetFile("class-has-two-modifiers")
             .classes()
             .first()
 
@@ -249,7 +249,7 @@ class KoDeclarationForClassTest {
     @Test
     fun `class-has-no-modifier`() {
         // given
-        val sut = getSut("class-has-no-modifier")
+        val sut = getSnippetFile("class-has-no-modifier")
             .classes()
             .first()
 
@@ -260,6 +260,6 @@ class KoDeclarationForClassTest {
         }
     }
 
-    private fun getSut(fileName: String) =
+    private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kodeclaration/snippet/forclass/", fileName)
 }

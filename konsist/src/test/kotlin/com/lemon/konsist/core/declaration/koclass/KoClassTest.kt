@@ -9,7 +9,7 @@ class KoClassTest {
     @Test
     fun `abstract-class`() {
         // given
-        val sut = getSut("abstract-class")
+        val sut = getSnippetFile("abstract-class")
             .classes()
             .first()
 
@@ -20,7 +20,7 @@ class KoClassTest {
     @Test
     fun `annotation-class`() {
         // given
-        val sut = getSut("annotation-class")
+        val sut = getSnippetFile("annotation-class")
             .classes()
             .first()
 
@@ -31,7 +31,7 @@ class KoClassTest {
     @Test
     fun `class`() {
         // given
-        val sut = getSut("class")
+        val sut = getSnippetFile("class")
             .classes()
             .first()
 
@@ -42,7 +42,7 @@ class KoClassTest {
     @Test
     fun `data-class`() {
         // given
-        val sut = getSut("data-class")
+        val sut = getSnippetFile("data-class")
             .classes()
             .first()
 
@@ -53,7 +53,7 @@ class KoClassTest {
     @Test
     fun `enum-class`() {
         // given
-        val sut = getSut("enum-class")
+        val sut = getSnippetFile("enum-class")
             .classes()
             .first()
 
@@ -64,7 +64,7 @@ class KoClassTest {
     @Test
     fun `sealed-class`() {
         // given
-        val sut = getSut("sealed-class")
+        val sut = getSnippetFile("sealed-class")
             .classes()
             .first()
 
@@ -75,7 +75,7 @@ class KoClassTest {
     @Test
     fun `value-class`() {
         // given
-        val sut = getSut("value-class")
+        val sut = getSnippetFile("value-class")
             .classes()
             .first()
 
@@ -86,7 +86,7 @@ class KoClassTest {
     @Test
     fun `open-class`() {
         // given
-        val sut = getSut("open-class")
+        val sut = getSnippetFile("open-class")
             .classes()
             .first()
 
@@ -97,7 +97,7 @@ class KoClassTest {
     @Test
     fun `final-class`() {
         // given
-        val sut = getSut("final-class")
+        val sut = getSnippetFile("final-class")
             .classes()
             .first()
 
@@ -108,7 +108,7 @@ class KoClassTest {
     @Test
     fun `nested-inner-class`() {
         // given
-        val sut = getSut("nested-inner-class")
+        val sut = getSnippetFile("nested-inner-class")
             .classes(includeNested = true)
             .first { it.name == "InnerClass" }
 
@@ -119,7 +119,7 @@ class KoClassTest {
     @Test
     fun `class-has-primary-constructor`() {
         // given
-        val sut = getSut("class-has-primary-constructor")
+        val sut = getSnippetFile("class-has-primary-constructor")
             .classes()
             .first()
 
@@ -133,7 +133,7 @@ class KoClassTest {
     @Test
     fun `class-has-no-primary-constructor`() {
         // given
-        val sut = getSut("class-has-no-primary-constructor")
+        val sut = getSnippetFile("class-has-no-primary-constructor")
             .classes()
             .first()
 
@@ -147,7 +147,7 @@ class KoClassTest {
     @Test
     fun `class-has-secondary-constructor`() {
         // given
-        val sut = getSut("class-has-secondary-constructor")
+        val sut = getSnippetFile("class-has-secondary-constructor")
             .classes()
             .first()
 
@@ -161,7 +161,7 @@ class KoClassTest {
     @Test
     fun `class-has-no-secondary-constructor`() {
         // given
-        val sut = getSut("class-has-no-secondary-constructor")
+        val sut = getSnippetFile("class-has-no-secondary-constructor")
             .classes()
             .first()
 
@@ -175,7 +175,7 @@ class KoClassTest {
     @Test
     fun `class-has-primary-and-secondary-constructor`() {
         // given
-        val sut = getSut("class-has-primary-and-secondary-constructor")
+        val sut = getSnippetFile("class-has-primary-and-secondary-constructor")
             .classes()
             .first()
 
@@ -190,7 +190,7 @@ class KoClassTest {
     @Test
     fun `class-has-class-and-interface`() {
         // given
-        val sut = getSut("class-has-class-and-interface")
+        val sut = getSnippetFile("class-has-class-and-interface")
             .classes()
             .first()
 
@@ -212,7 +212,7 @@ class KoClassTest {
     @Test
     fun `class-has-no-interface-and-class`() {
         // given
-        val sut = getSut("class-has-no-interface-and-class")
+        val sut = getSnippetFile("class-has-no-interface-and-class")
             .classes()
             .first()
 
@@ -229,5 +229,5 @@ class KoClassTest {
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclass/snippet/", fileName)
 }

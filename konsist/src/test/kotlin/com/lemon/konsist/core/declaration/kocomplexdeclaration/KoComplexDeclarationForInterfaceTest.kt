@@ -11,7 +11,7 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-contains-no-declarations`() {
         // given
-        val sut = getSut("interface-contains-no-declarations")
+        val sut = getSnippetFile("interface-contains-no-declarations")
             .interfaces()
             .first()
 
@@ -25,7 +25,7 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-contains-declarations includeNested true includeLocal true`() {
         // given
-        val sut = getSut("interface-contains-declarations")
+        val sut = getSnippetFile("interface-contains-declarations")
             .interfaces()
             .first()
 
@@ -48,7 +48,7 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-contains-declarations includeNested true includeLocal false`() {
         // given
-        val sut = getSut("interface-contains-declarations")
+        val sut = getSnippetFile("interface-contains-declarations")
             .interfaces()
             .first()
 
@@ -71,7 +71,7 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-contains-declarations includeNested false includeLocal true`() {
         // given
-        val sut = getSut("interface-contains-declarations")
+        val sut = getSnippetFile("interface-contains-declarations")
             .interfaces()
             .first()
 
@@ -94,7 +94,7 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-contains-nested-declarations includeNested true`() {
         // given
-        val sut = getSut("interface-contains-nested-declarations")
+        val sut = getSnippetFile("interface-contains-nested-declarations")
             .interfaces()
             .first()
 
@@ -125,7 +125,7 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-contains-nested-declarations includeNested false`() {
         // given
-        val sut = getSut("interface-contains-nested-declarations")
+        val sut = getSnippetFile("interface-contains-nested-declarations")
             .interfaces()
             .first()
 
@@ -146,7 +146,7 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-contains-local-declarations includeLocal true`() {
         // given
-        val sut = getSut("interface-contains-local-declarations")
+        val sut = getSnippetFile("interface-contains-local-declarations")
             .interfaces()
             .first()
 
@@ -170,7 +170,7 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-contains-local-declarations includeLocal false`() {
         // given
-        val sut = getSut("interface-contains-local-declarations")
+        val sut = getSnippetFile("interface-contains-local-declarations")
             .interfaces()
             .first()
 
@@ -186,7 +186,7 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-contains-declarations-heaving-visibility-modifiers includeNested = true`() {
         // given
-        val sut = getSut("interface-contains-declarations-heaving-visibility-modifiers")
+        val sut = getSnippetFile("interface-contains-declarations-heaving-visibility-modifiers")
             .interfaces()
             .first()
 
@@ -217,7 +217,7 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-contains-declarations-heaving-visibility-modifiers includeNested = false`() {
         // given
-        val sut = getSut("interface-contains-declarations-heaving-visibility-modifiers")
+        val sut = getSnippetFile("interface-contains-declarations-heaving-visibility-modifiers")
             .interfaces()
             .first()
 
@@ -238,7 +238,7 @@ class KoComplexDeclarationForInterfaceTest {
     @Test
     fun `interface-represents-type`() {
         // given
-        val sut = getSut("interface-represents-type")
+        val sut = getSnippetFile("interface-represents-type")
             .interfaces()
             .first()
 
@@ -251,6 +251,6 @@ class KoComplexDeclarationForInterfaceTest {
         }
     }
 
-    private fun getSut(fileName: String) =
+    private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kocomplexdeclaration/snippet/forinterface/", fileName)
 }

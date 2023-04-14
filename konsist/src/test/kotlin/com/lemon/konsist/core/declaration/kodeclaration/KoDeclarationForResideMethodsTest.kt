@@ -8,7 +8,7 @@ class KoDeclarationForResideMethodsTest {
     @Test
     fun `none-package-reside-in-file-package`() {
         // given
-        val sut = getSut("none-package-reside-in-file-package")
+        val sut = getSnippetFile("none-package-reside-in-file-package")
             .classes()
             .first()
 
@@ -19,7 +19,7 @@ class KoDeclarationForResideMethodsTest {
     @Test
     fun `all-packages-reside-in-file-package`() {
         // given
-        val sut = getSut("all-packages-reside-in-file-package")
+        val sut = getSnippetFile("all-packages-reside-in-file-package")
             .classes()
             .first()
 
@@ -30,7 +30,7 @@ class KoDeclarationForResideMethodsTest {
     @Test
     fun `one-package-reside-in-file-package`() {
         // given
-        val sut = getSut("one-package-reside-in-file-package")
+        val sut = getSnippetFile("one-package-reside-in-file-package")
             .classes()
             .first()
 
@@ -41,7 +41,7 @@ class KoDeclarationForResideMethodsTest {
     @Test
     fun `none-package-reside-outside-file-package`() {
         // given
-        val sut = getSut("none-package-reside-outside-file-package")
+        val sut = getSnippetFile("none-package-reside-outside-file-package")
             .classes()
             .first()
 
@@ -52,7 +52,7 @@ class KoDeclarationForResideMethodsTest {
     @Test
     fun `all-packages-reside-outside-file-package`() {
         // given
-        val sut = getSut("all-packages-reside-outside-file-package")
+        val sut = getSnippetFile("all-packages-reside-outside-file-package")
             .classes()
             .first()
 
@@ -63,7 +63,7 @@ class KoDeclarationForResideMethodsTest {
     @Test
     fun `one-package-reside-outside-file-package`() {
         // given
-        val sut = getSut("one-package-reside-outside-file-package")
+        val sut = getSnippetFile("one-package-reside-outside-file-package")
             .classes()
             .first()
 
@@ -74,7 +74,7 @@ class KoDeclarationForResideMethodsTest {
     @Test
     fun `none-path-reside-in-path`() {
         // given
-        val sut = getSut("none-path-reside-in-path")
+        val sut = getSnippetFile("none-path-reside-in-path")
             .classes()
             .first()
 
@@ -88,7 +88,7 @@ class KoDeclarationForResideMethodsTest {
     @Test
     fun `all-paths-reside-in-path`() {
         // given
-        val sut = getSut("all-paths-reside-in-path")
+        val sut = getSnippetFile("all-paths-reside-in-path")
             .classes()
             .first()
 
@@ -103,7 +103,7 @@ class KoDeclarationForResideMethodsTest {
     @Test
     fun `one-path-reside-in-path`() {
         // given
-        val sut = getSut("one-path-reside-in-path")
+        val sut = getSnippetFile("one-path-reside-in-path")
             .classes()
             .first()
 
@@ -120,7 +120,7 @@ class KoDeclarationForResideMethodsTest {
     @Test
     fun `none-path-reside-outside-path`() {
         // given
-        val sut = getSut("none-path-reside-outside-path")
+        val sut = getSnippetFile("none-path-reside-outside-path")
             .classes()
             .first()
 
@@ -134,7 +134,7 @@ class KoDeclarationForResideMethodsTest {
     @Test
     fun `all-paths-reside-outside-path`() {
         // given
-        val sut = getSut("all-paths-reside-outside-path")
+        val sut = getSnippetFile("all-paths-reside-outside-path")
             .classes()
             .first()
 
@@ -148,7 +148,7 @@ class KoDeclarationForResideMethodsTest {
     @Test
     fun `one-path-reside-outside-path`() {
         // given
-        val sut = getSut("one-path-reside-outside-path")
+        val sut = getSnippetFile("one-path-reside-outside-path")
             .classes()
             .first()
 
@@ -166,5 +166,5 @@ class KoDeclarationForResideMethodsTest {
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forresidemethods/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forresidemethods/", fileName)
 }

@@ -8,7 +8,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-operator-modifier`() {
         // given
-        val sut = getSut("function-has-operator-modifier")
+        val sut = getSnippetFile("function-has-operator-modifier")
             .functions()
             .first()
 
@@ -19,7 +19,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-inline-modifier`() {
         // given
-        val sut = getSut("function-has-inline-modifier")
+        val sut = getSnippetFile("function-has-inline-modifier")
             .functions()
             .first()
 
@@ -30,7 +30,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-tailrec-modifier`() {
         // given
-        val sut = getSut("function-has-tailrec-modifier")
+        val sut = getSnippetFile("function-has-tailrec-modifier")
             .functions()
             .first()
 
@@ -41,7 +41,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-infix-modifier`() {
         // given
-        val sut = getSut("function-has-infix-modifier")
+        val sut = getSnippetFile("function-has-infix-modifier")
             .functions()
             .first()
 
@@ -52,7 +52,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-external-modifier`() {
         // given
-        val sut = getSut("function-has-external-modifier")
+        val sut = getSnippetFile("function-has-external-modifier")
             .functions()
             .first()
 
@@ -63,7 +63,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-suspend-modifier`() {
         // given
-        val sut = getSut("function-has-suspend-modifier")
+        val sut = getSnippetFile("function-has-suspend-modifier")
             .functions()
             .first()
 
@@ -74,7 +74,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-open-modifier`() {
         // given
-        val sut = getSut("function-has-open-modifier")
+        val sut = getSnippetFile("function-has-open-modifier")
             .functions(includeNested = true)
             .first()
 
@@ -85,7 +85,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-override-modifier`() {
         // given
-        val sut = getSut("function-has-override-modifier")
+        val sut = getSnippetFile("function-has-override-modifier")
             .functions(includeNested = true)
             .first()
 
@@ -96,7 +96,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-final-modifier`() {
         // given
-        val sut = getSut("function-has-final-modifier")
+        val sut = getSnippetFile("function-has-final-modifier")
             .functions(includeNested = true)
             .first()
 
@@ -107,7 +107,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-abstract-modifier`() {
         // given
-        val sut = getSut("function-has-abstract-modifier")
+        val sut = getSnippetFile("function-has-abstract-modifier")
             .functions(includeNested = true)
             .first()
 
@@ -118,7 +118,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-actual-modifier`() {
         // given
-        val sut = getSut("function-has-actual-modifier")
+        val sut = getSnippetFile("function-has-actual-modifier")
             .functions(includeNested = true)
             .first()
 
@@ -129,7 +129,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-expect-modifier`() {
         // given
-        val sut = getSut("function-has-expect-modifier")
+        val sut = getSnippetFile("function-has-expect-modifier")
             .functions()
             .first()
 
@@ -140,7 +140,7 @@ class KoFunctionTest {
     @Test
     fun `function-has-no-modifiers`() {
         // given
-        val sut = getSut("function-has-no-modifiers")
+        val sut = getSnippetFile("function-has-no-modifiers")
             .functions()
             .first()
 
@@ -164,7 +164,7 @@ class KoFunctionTest {
     @Test
     fun `function-is-extension`() {
         // given
-        val sut = getSut("function-is-extension")
+        val sut = getSnippetFile("function-is-extension")
             .functions()
             .first()
 
@@ -175,7 +175,7 @@ class KoFunctionTest {
     @Test
     fun `function-is-not-extension`() {
         // given
-        val sut = getSut("function-is-not-extension")
+        val sut = getSnippetFile("function-is-not-extension")
             .functions()
             .first()
 
@@ -186,7 +186,7 @@ class KoFunctionTest {
     @Test
     fun `function-return-type`() {
         // given
-        val sut = getSut("function-return-type")
+        val sut = getSnippetFile("function-return-type")
             .functions()
             .first()
 
@@ -203,7 +203,7 @@ class KoFunctionTest {
     @Test
     fun `function-return-import-alias`() {
         // given
-        val sut = getSut("function-return-import-alias")
+        val sut = getSnippetFile("function-return-import-alias")
             .functions()
             .first()
 
@@ -219,7 +219,7 @@ class KoFunctionTest {
     @Test
     fun `function-not-return-type`() {
         // given
-        val sut = getSut("function-not-return-type")
+        val sut = getSnippetFile("function-not-return-type")
             .functions()
             .first()
 
@@ -235,7 +235,7 @@ class KoFunctionTest {
     @Test
     fun `function-contains-local-property`() {
         // given
-        val sut = getSut("function-contains-local-property")
+        val sut = getSnippetFile("function-contains-local-property")
             .functions()
             .first()
 
@@ -249,7 +249,7 @@ class KoFunctionTest {
     @Test
     fun `function-contains-local-function`() {
         // given
-        val sut = getSut("function-contains-local-function")
+        val sut = getSnippetFile("function-contains-local-function")
             .functions()
             .first()
 
@@ -263,7 +263,7 @@ class KoFunctionTest {
     @Test
     fun `function-contains-local-class`() {
         // given
-        val sut = getSut("function-contains-local-class")
+        val sut = getSnippetFile("function-contains-local-class")
             .functions()
             .first()
 
@@ -277,7 +277,7 @@ class KoFunctionTest {
     @Test
     fun `function-contains-local-declarations`() {
         // given
-        val sut = getSut("function-contains-local-declarations")
+        val sut = getSnippetFile("function-contains-local-declarations")
             .functions()
             .first()
 
@@ -294,5 +294,5 @@ class KoFunctionTest {
             )
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunction/snippet/", fileName)
 }

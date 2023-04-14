@@ -11,7 +11,7 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-contains-no-declarations`() {
         // given
-        val sut = getSut("object-contains-no-declarations")
+        val sut = getSnippetFile("object-contains-no-declarations")
             .objects()
             .first()
 
@@ -25,7 +25,7 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-contains-declarations includeNested true includeLocal true`() {
         // given
-        val sut = getSut("object-contains-declarations")
+        val sut = getSnippetFile("object-contains-declarations")
             .objects()
             .first()
 
@@ -47,7 +47,7 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-contains-declarations includeNested true includeLocal false`() {
         // given
-        val sut = getSut("object-contains-declarations")
+        val sut = getSnippetFile("object-contains-declarations")
             .objects()
             .first()
 
@@ -69,7 +69,7 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-contains-declarations includeNested false includeLocal true`() {
         // given
-        val sut = getSut("object-contains-declarations")
+        val sut = getSnippetFile("object-contains-declarations")
             .objects()
             .first()
 
@@ -91,7 +91,7 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-contains-nested-declarations includeNested true`() {
         // given
-        val sut = getSut("object-contains-nested-declarations")
+        val sut = getSnippetFile("object-contains-nested-declarations")
             .objects()
             .first()
 
@@ -122,7 +122,7 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-contains-nested-declarations includeNested false`() {
         // given
-        val sut = getSut("object-contains-nested-declarations")
+        val sut = getSnippetFile("object-contains-nested-declarations")
             .objects()
             .first()
 
@@ -143,7 +143,7 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-contains-local-declarations includeLocal true`() {
         // given
-        val sut = getSut("object-contains-local-declarations")
+        val sut = getSnippetFile("object-contains-local-declarations")
             .objects()
             .first()
 
@@ -167,7 +167,7 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-contains-local-declarations includeLocal false`() {
         // given
-        val sut = getSut("object-contains-local-declarations")
+        val sut = getSnippetFile("object-contains-local-declarations")
             .objects()
             .first()
 
@@ -183,7 +183,7 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-contains-declarations-heaving-visibility-modifiers includeNested = true`() {
         // given
-        val sut = getSut("object-contains-declarations-heaving-visibility-modifiers")
+        val sut = getSnippetFile("object-contains-declarations-heaving-visibility-modifiers")
             .objects()
             .first()
 
@@ -214,7 +214,7 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-contains-declarations-heaving-visibility-modifiers includeNested = false`() {
         // given
-        val sut = getSut("object-contains-declarations-heaving-visibility-modifiers")
+        val sut = getSnippetFile("object-contains-declarations-heaving-visibility-modifiers")
             .objects()
             .first()
 
@@ -235,7 +235,7 @@ class KoComplexDeclarationForObjectTest {
     @Test
     fun `object-represents-type`() {
         // given
-        val sut = getSut("object-represents-type")
+        val sut = getSnippetFile("object-represents-type")
             .objects()
             .first()
 
@@ -248,6 +248,6 @@ class KoComplexDeclarationForObjectTest {
         }
     }
 
-    private fun getSut(fileName: String) =
+    private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kocomplexdeclaration/snippet/forobject/", fileName)
 }

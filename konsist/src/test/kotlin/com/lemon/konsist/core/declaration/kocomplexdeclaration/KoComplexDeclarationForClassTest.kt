@@ -11,7 +11,7 @@ class KoComplexDeclarationForClassTest {
     @Test
     fun `class-contains-no-declarations`() {
         // given
-        val sut = getSut("class-contains-no-declarations")
+        val sut = getSnippetFile("class-contains-no-declarations")
             .classes()
             .first()
 
@@ -25,7 +25,7 @@ class KoComplexDeclarationForClassTest {
     @Test
     fun `class-contains-declarations includeNested true includeLocal true`() {
         // given
-        val sut = getSut("class-contains-declarations")
+        val sut = getSnippetFile("class-contains-declarations")
             .classes()
             .first()
 
@@ -48,7 +48,7 @@ class KoComplexDeclarationForClassTest {
     @Test
     fun `class-contains-declarations includeNested true includeLocal false`() {
         // given
-        val sut = getSut("class-contains-declarations")
+        val sut = getSnippetFile("class-contains-declarations")
             .classes()
             .first()
 
@@ -71,7 +71,7 @@ class KoComplexDeclarationForClassTest {
     @Test
     fun `class-contains-declarations includeNested false includeLocal true`() {
         // given
-        val sut = getSut("class-contains-declarations")
+        val sut = getSnippetFile("class-contains-declarations")
             .classes()
             .first()
 
@@ -94,7 +94,7 @@ class KoComplexDeclarationForClassTest {
     @Test
     fun `class-contains-nested-declarations includeNested true`() {
         // given
-        val sut = getSut("class-contains-nested-declarations")
+        val sut = getSnippetFile("class-contains-nested-declarations")
             .classes()
             .first()
 
@@ -125,7 +125,7 @@ class KoComplexDeclarationForClassTest {
     @Test
     fun `class-contains-nested-declarations includeNested false`() {
         // given
-        val sut = getSut("class-contains-nested-declarations")
+        val sut = getSnippetFile("class-contains-nested-declarations")
             .classes()
             .first()
 
@@ -146,7 +146,7 @@ class KoComplexDeclarationForClassTest {
     @Test
     fun `class-contains-local-declarations includeLocal true`() {
         // given
-        val sut = getSut("class-contains-local-declarations")
+        val sut = getSnippetFile("class-contains-local-declarations")
             .classes()
             .first()
 
@@ -170,7 +170,7 @@ class KoComplexDeclarationForClassTest {
     @Test
     fun `class-contains-local-declarations includeLocal false`() {
         // given
-        val sut = getSut("class-contains-local-declarations")
+        val sut = getSnippetFile("class-contains-local-declarations")
             .classes()
             .first()
 
@@ -186,7 +186,7 @@ class KoComplexDeclarationForClassTest {
     @Test
     fun `class-contains-declarations-heaving-visibility-modifiers includeNested = true`() {
         // given
-        val sut = getSut("class-contains-declarations-heaving-visibility-modifiers")
+        val sut = getSnippetFile("class-contains-declarations-heaving-visibility-modifiers")
             .classes()
             .first()
 
@@ -218,7 +218,7 @@ class KoComplexDeclarationForClassTest {
     @Test
     fun `class-contains-declarations-heaving-visibility-modifiers includeNested = false`() {
         // given
-        val sut = getSut("class-contains-declarations-heaving-visibility-modifiers")
+        val sut = getSnippetFile("class-contains-declarations-heaving-visibility-modifiers")
             .classes()
             .first()
 
@@ -239,7 +239,7 @@ class KoComplexDeclarationForClassTest {
     @Test
     fun `class-represents-type`() {
         // given
-        val sut = getSut("class-represents-type")
+        val sut = getSnippetFile("class-represents-type")
             .classes()
             .first()
 
@@ -252,6 +252,6 @@ class KoComplexDeclarationForClassTest {
         }
     }
 
-    private fun getSut(fileName: String) =
+    private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kocomplexdeclaration/snippet/forclass/", fileName)
 }

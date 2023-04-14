@@ -12,7 +12,7 @@ class KoComplexDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-contains-no-declared-name`() {
         // given
-        val sut = getSut("companion-object-contains-no-declarations")
+        val sut = getSnippetFile("companion-object-contains-no-declarations")
             .classes()
             .first()
             .companionObjects()
@@ -28,7 +28,7 @@ class KoComplexDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-contains-no-declarations`() {
         // given
-        val sut = getSut("companion-object-contains-no-declarations")
+        val sut = getSnippetFile("companion-object-contains-no-declarations")
             .classes()
             .first()
             .companionObjects()
@@ -44,7 +44,7 @@ class KoComplexDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-contains-declarations includeNested true includeLocal true`() {
         // given
-        val sut = getSut("companion-object-contains-declarations")
+        val sut = getSnippetFile("companion-object-contains-declarations")
             .classes()
             .first()
             .companionObjects()
@@ -68,7 +68,7 @@ class KoComplexDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-contains-declarations includeNested true includeLocal false`() {
         // given
-        val sut = getSut("companion-object-contains-declarations")
+        val sut = getSnippetFile("companion-object-contains-declarations")
             .classes()
             .first()
             .companionObjects()
@@ -92,7 +92,7 @@ class KoComplexDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-contains-declarations includeNested false includeLocal true`() {
         // given
-        val sut = getSut("companion-object-contains-declarations")
+        val sut = getSnippetFile("companion-object-contains-declarations")
             .classes()
             .first()
             .companionObjects()
@@ -116,7 +116,7 @@ class KoComplexDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-contains-nested-declarations includeNested true`() {
         // given
-        val sut = getSut("companion-object-contains-nested-declarations")
+        val sut = getSnippetFile("companion-object-contains-nested-declarations")
             .classes()
             .first()
             .companionObjects()
@@ -149,7 +149,7 @@ class KoComplexDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-contains-nested-declarations includeNested false`() {
         // given
-        val sut = getSut("companion-object-contains-nested-declarations")
+        val sut = getSnippetFile("companion-object-contains-nested-declarations")
             .classes()
             .first()
             .companionObjects()
@@ -172,7 +172,7 @@ class KoComplexDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-contains-local-declarations includeLocal true`() {
         // given
-        val sut = getSut("companion-object-contains-local-declarations")
+        val sut = getSnippetFile("companion-object-contains-local-declarations")
             .classes()
             .first()
             .companionObjects()
@@ -198,7 +198,7 @@ class KoComplexDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-contains-local-declarations includeLocal false`() {
         // given
-        val sut = getSut("companion-object-contains-local-declarations")
+        val sut = getSnippetFile("companion-object-contains-local-declarations")
             .classes()
             .first()
             .companionObjects()
@@ -216,7 +216,7 @@ class KoComplexDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-contains-declarations-heaving-visibility-modifiers includeNested = true`() {
         // given
-        val sut = getSut("companion-object-contains-declarations-heaving-visibility-modifiers")
+        val sut = getSnippetFile("companion-object-contains-declarations-heaving-visibility-modifiers")
             .classes()
             .first()
             .companionObjects()
@@ -249,7 +249,7 @@ class KoComplexDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-contains-declarations-heaving-visibility-modifiers includeNested = false`() {
         // given
-        val sut = getSut("companion-object-contains-declarations-heaving-visibility-modifiers")
+        val sut = getSnippetFile("companion-object-contains-declarations-heaving-visibility-modifiers")
             .classes()
             .first()
             .companionObjects()
@@ -272,7 +272,7 @@ class KoComplexDeclarationForCompanionObjectTest {
     @Test
     fun `companion-object-represents-type`() {
         // given
-        val sut = getSut("companion-object-represents-type")
+        val sut = getSnippetFile("companion-object-represents-type")
             .interfaces()
             .first()
             .companionObjects()
@@ -287,6 +287,6 @@ class KoComplexDeclarationForCompanionObjectTest {
         }
     }
 
-    private fun getSut(fileName: String) =
+    private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kocomplexdeclaration/snippet/forcompanionobject/", fileName)
 }

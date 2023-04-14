@@ -9,7 +9,7 @@ class KoTypeTest {
     @Test
     fun `import-alias`() {
         // given
-        val sut = getSut("import-alias")
+        val sut = getSnippetFile("import-alias")
             .classes()
             .first()
             .primaryConstructor
@@ -29,7 +29,7 @@ class KoTypeTest {
     @Test
     fun `simple-type`() {
         // given
-        val sut = getSut("simple-type")
+        val sut = getSnippetFile("simple-type")
             .classes()
             .first()
             .primaryConstructor
@@ -46,5 +46,5 @@ class KoTypeTest {
         }
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kotype/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kotype/snippet/", fileName)
 }

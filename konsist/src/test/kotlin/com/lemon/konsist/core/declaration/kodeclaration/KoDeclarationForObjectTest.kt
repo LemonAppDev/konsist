@@ -17,7 +17,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-is-top-level`() {
         // given
-        val sut = getSut("object-is-top-level")
+        val sut = getSnippetFile("object-is-top-level")
             .objects(includeNested = true)
             .first()
 
@@ -28,7 +28,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-is-not-top-level`() {
         // given
-        val sut = getSut("object-is-not-top-level")
+        val sut = getSnippetFile("object-is-not-top-level")
             .objects(includeNested = true)
             .first { it.name == "SampleNestedObject" }
 
@@ -39,7 +39,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-no-annotation`() {
         // given
-        val sut = getSut("object-has-no-annotation")
+        val sut = getSnippetFile("object-has-no-annotation")
             .objects()
             .first()
 
@@ -50,7 +50,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-annotation`() {
         // given
-        val sut = getSut("object-has-annotation")
+        val sut = getSnippetFile("object-has-annotation")
             .objects()
             .first()
 
@@ -67,7 +67,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-two-annotations`() {
         // given
-        val sut = getSut("object-has-two-annotations")
+        val sut = getSnippetFile("object-has-two-annotations")
             .objects()
             .first()
 
@@ -86,7 +86,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-no-visibility-modifier`() {
         // given
-        val sut = getSut("object-has-no-visibility-modifier")
+        val sut = getSnippetFile("object-has-no-visibility-modifier")
             .objects()
             .first()
 
@@ -103,7 +103,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-public-visibility-modifier`() {
         // given
-        val sut = getSut("object-has-public-visibility-modifier")
+        val sut = getSnippetFile("object-has-public-visibility-modifier")
             .objects()
             .first()
 
@@ -120,7 +120,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-private-visibility-modifier`() {
         // given
-        val sut = getSut("object-has-private-visibility-modifier")
+        val sut = getSnippetFile("object-has-private-visibility-modifier")
             .objects()
             .first()
 
@@ -137,7 +137,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-protected-visibility-modifier`() {
         // given
-        val sut = getSut("object-has-protected-visibility-modifier")
+        val sut = getSnippetFile("object-has-protected-visibility-modifier")
             .objects()
             .first()
 
@@ -154,7 +154,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-internal-visibility-modifier`() {
         // given
-        val sut = getSut("object-has-internal-visibility-modifier")
+        val sut = getSnippetFile("object-has-internal-visibility-modifier")
             .objects()
             .first()
 
@@ -171,7 +171,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-fully-qualified-name`() {
         // given
-        val sut = getSut("object-has-fully-qualified-name")
+        val sut = getSnippetFile("object-has-fully-qualified-name")
             .objects()
             .first()
 
@@ -182,7 +182,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-is-in-package`() {
         // given
-        val sut = getSut("object-is-in-package")
+        val sut = getSnippetFile("object-is-in-package")
             .objects()
             .first()
 
@@ -193,7 +193,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-is-not-in-package`() {
         // given
-        val sut = getSut("object-is-not-in-package")
+        val sut = getSnippetFile("object-is-not-in-package")
             .objects()
             .first()
 
@@ -204,7 +204,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-protected-modifier`() {
         // given
-        val sut = getSut("object-has-protected-modifier")
+        val sut = getSnippetFile("object-has-protected-modifier")
             .objects()
             .first()
 
@@ -215,7 +215,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-public-modifier`() {
         // given
-        val sut = getSut("object-has-public-modifier")
+        val sut = getSnippetFile("object-has-public-modifier")
             .objects()
             .first()
 
@@ -229,7 +229,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-two-modifiers`() {
         // given
-        val sut = getSut("object-has-two-modifiers")
+        val sut = getSnippetFile("object-has-two-modifiers")
             .objects()
             .first()
 
@@ -249,7 +249,7 @@ class KoDeclarationForObjectTest {
     @Test
     fun `object-has-no-modifier`() {
         // given
-        val sut = getSut("object-has-no-modifiers")
+        val sut = getSnippetFile("object-has-no-modifiers")
             .objects()
             .first()
 
@@ -261,5 +261,5 @@ class KoDeclarationForObjectTest {
     }
 
     private fun
-    getSut(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forobject/", fileName)
+    getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forobject/", fileName)
 }

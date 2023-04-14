@@ -8,7 +8,7 @@ class KoPropertyTest {
     @Test
     fun `property-is-val`() {
         // given
-        val sut = getSut("property-is-val")
+        val sut = getSnippetFile("property-is-val")
             .properties()
             .first()
 
@@ -22,7 +22,7 @@ class KoPropertyTest {
     @Test
     fun `property-is-var`() {
         // given
-        val sut = getSut("property-is-var")
+        val sut = getSnippetFile("property-is-var")
             .properties()
             .first()
 
@@ -36,7 +36,7 @@ class KoPropertyTest {
     @Test
     fun `property-has-lateinit-modifier`() {
         // given
-        val sut = getSut("property-has-lateinit-modifier")
+        val sut = getSnippetFile("property-has-lateinit-modifier")
             .properties()
             .first()
 
@@ -47,7 +47,7 @@ class KoPropertyTest {
     @Test
     fun `property-has-override-modifier`() {
         // given
-        val sut = getSut("property-has-override-modifier")
+        val sut = getSnippetFile("property-has-override-modifier")
             .properties(includeNested = true)
             .first()
 
@@ -58,7 +58,7 @@ class KoPropertyTest {
     @Test
     fun `property-has-abstract-modifier`() {
         // given
-        val sut = getSut("property-has-abstract-modifier")
+        val sut = getSnippetFile("property-has-abstract-modifier")
             .properties(includeNested = true)
             .first()
 
@@ -69,7 +69,7 @@ class KoPropertyTest {
     @Test
     fun `property-has-open-modifier`() {
         // given
-        val sut = getSut("property-has-open-modifier")
+        val sut = getSnippetFile("property-has-open-modifier")
             .properties(includeNested = true)
             .first()
 
@@ -80,7 +80,7 @@ class KoPropertyTest {
     @Test
     fun `property-has-final-modifier`() {
         // given
-        val sut = getSut("property-has-final-modifier")
+        val sut = getSnippetFile("property-has-final-modifier")
             .properties(includeNested = true)
             .first()
 
@@ -91,7 +91,7 @@ class KoPropertyTest {
     @Test
     fun `property-is-const`() {
         // given
-        val sut = getSut("property-is-const")
+        val sut = getSnippetFile("property-is-const")
             .properties(includeNested = true)
             .first()
 
@@ -102,7 +102,7 @@ class KoPropertyTest {
     @Test
     fun `property-has-no-modifiers`() {
         // given
-        val sut = getSut("property-has-no-modifiers")
+        val sut = getSnippetFile("property-has-no-modifiers")
             .properties()
             .first()
 
@@ -120,7 +120,7 @@ class KoPropertyTest {
     @Test
     fun `property-is-extension`() {
         // given
-        val sut = getSut("property-is-extension")
+        val sut = getSnippetFile("property-is-extension")
             .properties()
             .first()
 
@@ -131,7 +131,7 @@ class KoPropertyTest {
     @Test
     fun `property-is-not-extension`() {
         // given
-        val sut = getSut("property-is-not-extension")
+        val sut = getSnippetFile("property-is-not-extension")
             .properties()
             .first()
 
@@ -142,7 +142,7 @@ class KoPropertyTest {
     @Test
     fun `property-has-simple-type`() {
         // given
-        val sut = getSut("property-has-simple-type")
+        val sut = getSnippetFile("property-has-simple-type")
             .properties(includeNested = true)
             .first()
 
@@ -160,7 +160,7 @@ class KoPropertyTest {
     @Test
     fun `property-has-import-alias`() {
         // given
-        val sut = getSut("property-has-import-alias")
+        val sut = getSnippetFile("property-has-import-alias")
             .properties(includeNested = true)
             .first()
 
@@ -178,7 +178,7 @@ class KoPropertyTest {
     @Test
     fun `property-has-no-type`() {
         // given
-        val sut = getSut("property-has-no-type")
+        val sut = getSnippetFile("property-has-no-type")
             .properties(includeNested = true)
             .first()
 
@@ -196,7 +196,7 @@ class KoPropertyTest {
     @Test
     fun `property-has-lazy-delegate`() {
         // given
-        val sut = getSut("property-has-lazy-delegate")
+        val sut = getSnippetFile("property-has-lazy-delegate")
             .properties()
             .first()
 
@@ -212,7 +212,7 @@ class KoPropertyTest {
     @Test
     fun `property-has-no-delegate`() {
         // given
-        val sut = getSut("property-has-no-delegate")
+        val sut = getSnippetFile("property-has-no-delegate")
             .properties()
             .first()
 
@@ -224,5 +224,5 @@ class KoPropertyTest {
         }
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/", fileName)
 }

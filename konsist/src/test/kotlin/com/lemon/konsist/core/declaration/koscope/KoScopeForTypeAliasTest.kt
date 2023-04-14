@@ -9,7 +9,7 @@ class KoScopeForTypeAliasTest {
     @Test
     fun `file-contains-typealias`() {
         // given
-        val sut = getSut("file-contains-typealias")
+        val sut = getSnippetFile("file-contains-typealias")
 
         // then
         sut
@@ -24,7 +24,7 @@ class KoScopeForTypeAliasTest {
     @Test
     fun `file-contains-no-typealias`() {
         // given
-        val sut = getSut("file-contains-no-typealias")
+        val sut = getSnippetFile("file-contains-no-typealias")
 
         // then
         sut
@@ -35,5 +35,5 @@ class KoScopeForTypeAliasTest {
             )
     }
 
-    private fun getSut(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/fortypealias/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/fortypealias/", fileName)
 }
