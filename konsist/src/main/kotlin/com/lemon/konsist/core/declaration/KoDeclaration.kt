@@ -6,7 +6,6 @@ import com.lemon.konsist.util.PackageHelper
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
-import kotlin.reflect.KClass
 
 abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterListOwner) :
     KoNamedDeclaration(ktTypeParameterListOwner) {
@@ -65,10 +64,13 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
 
     fun isTopLevel() = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
 
-    fun hasAnnotation(kClass: KClass<*>): Boolean {
-        val qualifiedName = kClass.qualifiedName ?: return false
+    fun hasAnnotation(name: String) = annotations
+        .any {it.fullyQualifiedName?.substringAfterLast(".") == name}
 
-        return annotations.any { it.fullyQualifiedName == qualifiedName }
+    inline fun <reified T> hasAnnotation(): Boolean {
+        val qualifiedName = T::class.qualifiedName ?: return false
+
+        return annotations.any { it.fullyQualifiedName?.contains(qualifiedName) ?: false }
     }
 
     fun hasModifiers(vararg koModifiers: KoModifier) = koModifiers.all {

@@ -57,8 +57,10 @@ class KoDeclarationForFunctionTest {
         // then
         sut.run {
             annotations shouldHaveSize 1
-            hasAnnotation(SampleAnnotation::class) shouldBeEqualTo true
-            hasAnnotation(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotation("SampleAnnotation") shouldBeEqualTo true
+            hasAnnotation("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
+            hasAnnotation<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
 
@@ -72,9 +74,12 @@ class KoDeclarationForFunctionTest {
         // then
         sut.run {
             annotations shouldHaveSize 2
-            hasAnnotation(SampleAnnotation1::class) shouldBeEqualTo true
-            hasAnnotation(SampleAnnotation2::class) shouldBeEqualTo true
-            hasAnnotation(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotation("SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotation("SampleAnnotation2") shouldBeEqualTo true
+            hasAnnotation("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotation<SampleAnnotation1>() shouldBeEqualTo true
+            hasAnnotation<SampleAnnotation2>() shouldBeEqualTo true
+            hasAnnotation<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
 
@@ -255,5 +260,6 @@ class KoDeclarationForFunctionTest {
         }
     }
 
-    private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forfunction/", fileName)
+    private fun getSut(fileName: String) =
+        getSnippetKoScope("core/declaration/kodeclaration/snippet/forfunction/", fileName)
 }

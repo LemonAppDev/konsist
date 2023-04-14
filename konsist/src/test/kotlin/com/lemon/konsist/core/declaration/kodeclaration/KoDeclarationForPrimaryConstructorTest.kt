@@ -120,8 +120,10 @@ class KoDeclarationForPrimaryConstructorTest {
         // then
         sut?.let {
             it.annotations.map { annotation -> annotation.name } shouldBeEqualTo listOf("SampleAnnotation")
-            it.hasAnnotation(SampleAnnotation::class) shouldBeEqualTo true
-            it.hasAnnotation(SampleAnnotation1::class) shouldBeEqualTo false
+            it.hasAnnotation("SampleAnnotation") shouldBeEqualTo true
+            it.hasAnnotation("SampleAnnotation1") shouldBeEqualTo false
+            it.hasAnnotation< SampleAnnotation>() shouldBeEqualTo true
+            it.hasAnnotation< SampleAnnotation1>() shouldBeEqualTo false
         }
     }
 
@@ -136,7 +138,8 @@ class KoDeclarationForPrimaryConstructorTest {
         // then
         sut?.let {
             it.annotations.isEmpty() shouldBeEqualTo true
-            it.hasAnnotation(SampleAnnotation::class) shouldBeEqualTo false
+            it.hasAnnotation("SampleAnnotation") shouldBeEqualTo false
+            it.hasAnnotation<SampleAnnotation>() shouldBeEqualTo false
         }
     }
 
