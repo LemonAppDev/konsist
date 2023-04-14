@@ -1,15 +1,6 @@
 plugins {
-    id("org.jetbrains.kotlin.jvm")
-    id("local.spotless")
-    id("local.test")
-}
-
-repositories {
-    mavenCentral()
-}
-
-kotlin {
-    jvmToolchain(19)
+    id("org.gradle.jvm-test-suite")
+    id("com.adarshr.test-logger")
 }
 
 tasks.withType<Test> {
