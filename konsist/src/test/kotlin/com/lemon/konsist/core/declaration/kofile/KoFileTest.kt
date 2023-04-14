@@ -4,6 +4,7 @@ import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemon.konsist.testdata.SampleAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation1
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoFileTest {
@@ -245,6 +246,38 @@ class KoFileTest {
             .typeAliases
             .isEmpty()
             .shouldBeEqualTo(true)
+    }
+
+    @Test
+    fun `files-are-equal`() {
+        // given
+        val file1 = getSut("files-are-equal")
+            .files()
+            .first()
+
+        val file2 = getSut("files-are-equal")
+            .files()
+            .first()
+
+        // then
+        file1 shouldBeEqualTo file2
+        file1.hashCode() shouldBeEqualTo file2.hashCode()
+    }
+
+    @Test
+    fun `files-are-not-equal`() {
+        // given
+        val file1 = getSut("files-are-not-equal")
+            .files()
+            .first()
+
+        val file2 = getSut("files-are-equal")
+            .files()
+            .first()
+
+        // then
+        file1 shouldNotBeEqualTo file2
+        file1.hashCode() shouldNotBeEqualTo file2.hashCode()
     }
 
     private fun getSut(fileName: String) = getSnippetKoScope("core/declaration/kofile/snippet/", fileName)
