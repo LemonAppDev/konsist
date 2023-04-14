@@ -56,5 +56,6 @@ class KoScopeForPropertyTest {
             .shouldBeEqualTo(emptyList())
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forproperty/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forproperty/", fileName)
 }

@@ -68,5 +68,6 @@ class KoScopeForObjectTest {
             )
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forobject/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forobject/", fileName)
 }

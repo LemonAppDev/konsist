@@ -60,5 +60,6 @@ class KoNamedDeclarationTest {
         sut.name shouldBeEqualTo "sampleProperty"
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/konameddeclaration/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/konameddeclaration/snippet/", fileName)
 }

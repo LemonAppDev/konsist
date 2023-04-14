@@ -31,5 +31,6 @@ class KoScopeForImportTest {
             .shouldBeEqualTo(emptyList())
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forimport/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forimport/", fileName)
 }

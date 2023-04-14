@@ -7,6 +7,7 @@ import com.lemon.konsist.ext.toKoFile
 import com.lemon.konsist.util.PackageHelper
 import java.io.File
 
+@Suppress("detekt.TooManyFunctions")
 class KoScope(
     private var koFiles: Sequence<KoFile>,
 ) {

@@ -31,5 +31,6 @@ class KoScopeForPackageTest {
             .shouldBeEqualTo(emptyList())
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forpackage/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forpackage/", fileName)
 }
