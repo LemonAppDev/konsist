@@ -71,9 +71,7 @@ class KoScope(
 
     operator fun plus(scope: KoScope): KoScope = KoScope(files() + scope.files())
 
-    operator fun minus(scope: KoScope): KoScope {
-        return KoScope(files() - scope.files().toSet())
-    }
+    operator fun minus(scope: KoScope): KoScope = KoScope(files() - scope.files().toSet())
 
     operator fun plusAssign(scope: KoScope) {
         koFiles += scope.files()
