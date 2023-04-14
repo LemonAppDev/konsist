@@ -280,8 +280,10 @@ class KoComplexDeclarationForCompanionObjectTest {
 
         // then
         sut.run {
-            representsType(SampleCompanionObject::class) shouldBeEqualTo true
-            representsType(SampleType::class) shouldBeEqualTo false
+            representsType("SampleCompanionObject") shouldBeEqualTo true
+            representsType("SampleType") shouldBeEqualTo false
+            representsType<SampleCompanionObject>() shouldBeEqualTo true
+            representsType<SampleType>() shouldBeEqualTo false
         }
     }
 

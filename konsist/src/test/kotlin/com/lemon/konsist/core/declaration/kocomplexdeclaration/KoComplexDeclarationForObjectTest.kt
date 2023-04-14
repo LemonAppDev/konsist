@@ -241,8 +241,10 @@ class KoComplexDeclarationForObjectTest {
 
         // then
         sut.run {
-            representsType(SampleObject::class) shouldBeEqualTo true
-            representsType(SampleType::class) shouldBeEqualTo false
+            representsType("SampleObject") shouldBeEqualTo true
+            representsType("SampleType") shouldBeEqualTo false
+            representsType<SampleObject>() shouldBeEqualTo true
+            representsType<SampleType>() shouldBeEqualTo false
         }
     }
 

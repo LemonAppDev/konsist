@@ -9,7 +9,6 @@ import com.lemon.konsist.core.declaration.provider.KoInterfaceProvider
 import com.lemon.konsist.core.declaration.provider.KoObjectProvider
 import com.lemon.konsist.core.declaration.provider.KoPropertyProvider
 import org.jetbrains.kotlin.psi.KtClassOrObject
-import kotlin.reflect.KClass
 
 abstract class KoComplexDeclaration(
     private val ktClassOrObject: KtClassOrObject,
@@ -21,7 +20,9 @@ abstract class KoComplexDeclaration(
     KoPropertyProvider,
     KoFunctionProvider {
 
-    fun representsType(kClass: KClass<*>) = kClass.qualifiedName == fullyQualifiedName
+    fun representsType(name: String) = name == fullyQualifiedName.substringAfterLast(".")
+
+    inline fun <reified T>representsType() = T::class.qualifiedName == fullyQualifiedName
 
     override fun declarations(
         modifiers: List<KoModifier>,

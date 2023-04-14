@@ -31,8 +31,10 @@ class KoDeclarationForTypeAliasTest {
         // then
         sut.run {
             annotations shouldHaveSize 1
-            hasAnnotation(SampleAnnotation::class) shouldBeEqualTo true
-            hasAnnotation(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotation("SampleAnnotation") shouldBeEqualTo true
+            hasAnnotation("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
+            hasAnnotation<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
 

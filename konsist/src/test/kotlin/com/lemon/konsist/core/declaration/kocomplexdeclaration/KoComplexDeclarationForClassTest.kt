@@ -245,8 +245,10 @@ class KoComplexDeclarationForClassTest {
 
         // then
         sut.run {
-            representsType(SampleClass::class) shouldBeEqualTo true
-            representsType(SampleType::class) shouldBeEqualTo false
+            representsType("SampleClass") shouldBeEqualTo true
+            representsType("SampleType") shouldBeEqualTo false
+            representsType<SampleClass>() shouldBeEqualTo true
+            representsType<SampleType>() shouldBeEqualTo false
         }
     }
 
