@@ -41,6 +41,10 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
 
     fun hasFinalModifier() = ktProperty.modifierList?.hasModifier(KtTokens.FINAL_KEYWORD) ?: false
 
+    fun hasActualModifier() = ktProperty.modifierList?.hasModifier(KtTokens.ACTUAL_KEYWORD) ?: false
+
+    fun hasExpectModifier() = ktProperty.modifierList?.hasModifier(KtTokens.EXPECT_KEYWORD) ?: false
+
     fun hasConstModifier() = ktProperty
         .children
         .firstIsInstanceOrNull<KtModifierList>()

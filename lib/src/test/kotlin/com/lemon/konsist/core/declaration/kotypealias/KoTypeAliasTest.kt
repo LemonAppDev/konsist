@@ -34,5 +34,18 @@ class KoTypeAliasTest {
         sut.isEmpty() shouldBeEqualTo true
     }
 
+    @Test
+    fun `typealias-has-actual-modifier`() {
+        // given
+        val sut = getSnippetFile("typealias-has-actual-modifier")
+            .files()
+            .first()
+            .typeAliases
+            .first()
+
+        // then
+        sut.hasActualModifier() shouldBeEqualTo true
+    }
+
     private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealias/snippet/", fileName)
 }

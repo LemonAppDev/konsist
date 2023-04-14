@@ -117,6 +117,28 @@ class KoClassTest {
     }
 
     @Test
+    fun `class-has-actual-modifier`() {
+        // given
+        val sut = getSnippetFile("class-has-actual-modifier")
+            .classes(includeNested = true)
+            .first()
+
+        // then
+        sut.hasActualModifier() shouldBeEqualTo true
+    }
+
+    @Test
+    fun `class-has-expect-modifier`() {
+        // given
+        val sut = getSnippetFile("class-has-expect-modifier")
+            .classes(includeNested = true)
+            .first()
+
+        // then
+        sut.hasExpectModifier() shouldBeEqualTo true
+    }
+
+    @Test
     fun `class-has-primary-constructor`() {
         // given
         val sut = getSnippetFile("class-has-primary-constructor")
