@@ -122,6 +122,8 @@ class KoDeclarationForPrimaryConstructorTest {
             it.annotations.map { annotation -> annotation.name } shouldBeEqualTo listOf("SampleAnnotation")
             it.hasAnnotation("SampleAnnotation") shouldBeEqualTo true
             it.hasAnnotation("SampleAnnotation1") shouldBeEqualTo false
+            it.hasAnnotation("com.lemon.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
+            it.hasAnnotation("com.lemon.konsist.testdata.SampleAnnotation1") shouldBeEqualTo false
             it.hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
             it.hasAnnotation<SampleAnnotation1>() shouldBeEqualTo false
         }
@@ -139,6 +141,7 @@ class KoDeclarationForPrimaryConstructorTest {
         sut?.let {
             it.annotations.isEmpty() shouldBeEqualTo true
             it.hasAnnotation("SampleAnnotation") shouldBeEqualTo false
+            it.hasAnnotation("com.lemon.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
             it.hasAnnotation<SampleAnnotation>() shouldBeEqualTo false
         }
     }
