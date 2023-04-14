@@ -1,6 +1,6 @@
 plugins {
     id("org.jetbrains.kotlin.jvm")
-    id("com.diffplug.spotless")
+    id("local.spotless")
     id("org.gradle.jvm-test-suite")
     id("com.adarshr.test-logger")
     id("io.gitlab.arturbosch.detekt")
@@ -12,18 +12,6 @@ repositories {
 
 kotlin {
     jvmToolchain(19)
-}
-
-spotless {
-    kotlin {
-        ktlint()
-
-        indentWithSpaces()
-        endWithNewline()
-    }
-
-    // Don't add spotless as dependency for the Gradle's check task to facilitate separated codebase checks
-    isEnforceCheck = false
 }
 
 tasks.withType<Test> {
