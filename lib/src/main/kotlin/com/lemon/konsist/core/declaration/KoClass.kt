@@ -58,6 +58,10 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
 
     fun hasDataModifier() = ktClass.isData()
 
+    fun hasActualModifier() = ktClass.modifierList?.hasModifier(KtTokens.ACTUAL_KEYWORD) ?: false
+
+    fun hasExpectModifier() = ktClass.modifierList?.hasModifier(KtTokens.EXPECT_KEYWORD) ?: false
+
     fun hasAbstractModifier() = ktClass.isAbstract()
 
     fun hasOpenModifier() = ktClass
