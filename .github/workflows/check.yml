@@ -28,7 +28,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: unit-test-report
+          name: JUnit Test Report
           path: ./**/build/reports/tests/
   konsist-test:
     name: Konsist Test
@@ -51,7 +51,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: unit-test-report
+          name: Konsist Test Report
           path: ./**/build/reports/tests/
   spotless:
     name: Spotless
@@ -118,5 +118,5 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: unit-test-report
-          path: ./**/build/reports/tests/
+          name: lib.jar Artifact
+          path: lib/build/libs/lib.jar
