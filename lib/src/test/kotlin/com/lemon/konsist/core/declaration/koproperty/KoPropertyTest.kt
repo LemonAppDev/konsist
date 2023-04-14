@@ -100,6 +100,28 @@ class KoPropertyTest {
     }
 
     @Test
+    fun `property-has-actual-modifier`() {
+        // given
+        val sut = getSnippetFile("property-has-actual-modifier")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        sut.hasActualModifier() shouldBeEqualTo true
+    }
+
+    @Test
+    fun `property-has-expect-modifier`() {
+        // given
+        val sut = getSnippetFile("property-has-expect-modifier")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        sut.hasExpectModifier() shouldBeEqualTo true
+    }
+
+    @Test
     fun `property-has-no-modifiers`() {
         // given
         val sut = getSnippetFile("property-has-no-modifiers")
@@ -114,6 +136,8 @@ class KoPropertyTest {
             hasOpenModifier() shouldBeEqualTo false
             hasFinalModifier() shouldBeEqualTo false
             hasConstModifier() shouldBeEqualTo false
+            hasActualModifier() shouldBeEqualTo false
+            hasExpectModifier() shouldBeEqualTo false
         }
     }
 
@@ -224,5 +248,6 @@ class KoPropertyTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/", fileName)
 }
