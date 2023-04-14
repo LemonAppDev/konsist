@@ -7,29 +7,6 @@ on:
     types: [ opened, synchronize ]
 
 jobs:
-  assemble:
-    name: Assemble
-    continue-on-error: false
-    runs-on: self-hosted
-    strategy:
-      fail-fast: false
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Assemble
-        run: ./gradlew konsist:assemble
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: unit-test-report
-          path: ./**/build/reports/tests/
   junit-test:
     name: JUnit Test
     continue-on-error: false
@@ -94,3 +71,29 @@ jobs:
 
       - name: Spotless
         run: ./gradlew spotlessCheck
+  assemble:
+    name: Assemble
+    continue-on-error: false
+    runs-on: self-hosted
+    strategy:
+      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Assemble
+        run: ./gradlew konsist:assemble
+
+      - name: Show "konsist.jar" content
+        run: jar tf konsist/build/libs/konsist.jar
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: unit-test-report
+          path: ./**/build/reports/tests/
