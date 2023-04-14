@@ -69,6 +69,23 @@ class KoScope(
         .toList()
         .joinToString("\n") { it.path }
 
+    operator fun plus(scope: KoScope): KoScope = KoScope(files() + scope.files())
+
+    operator fun minus(scope: KoScope): KoScope {
+        val files = files()
+            .toMutableList()
+            .also { it.removeAll(scope.files().toSet()) }
+        return KoScope(files.asSequence())
+    }
+
+    operator fun plusAssign(scope: KoScope) {
+        this + scope
+    }
+
+    operator fun minusAssign(scope: KoScope) {
+        this - scope
+    }
+
     companion object {
         /**
          * Return repository root directory File
