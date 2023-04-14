@@ -92,10 +92,7 @@ class KoFile private constructor(private val ktFile: KtFile) :
 
     override fun equals(other: Any?): Boolean = other is KoFile && path == other.path
 
-    override fun hashCode(): Int {
-        val hash = 7
-        return 31 * hash + path.hashCode()
-    }
+    override fun hashCode(): Int = 31 * 7 + path.hashCode()
 
     companion object {
         private val cache = KoDeclarationCache<KoFile>()
