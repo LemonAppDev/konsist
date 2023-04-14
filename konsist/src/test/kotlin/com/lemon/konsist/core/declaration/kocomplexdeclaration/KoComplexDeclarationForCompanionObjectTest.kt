@@ -282,6 +282,8 @@ class KoComplexDeclarationForCompanionObjectTest {
         sut.run {
             representsType("SampleCompanionObject") shouldBeEqualTo true
             representsType("SampleType") shouldBeEqualTo false
+            representsType("com.lemon.konsist.testdata.SampleTopLevelInterface.SampleCompanionObject") shouldBeEqualTo true
+            representsType("com.lemon.konsist.testdata.SampleType") shouldBeEqualTo false
             representsType<SampleCompanionObject>() shouldBeEqualTo true
             representsType<SampleType>() shouldBeEqualTo false
         }

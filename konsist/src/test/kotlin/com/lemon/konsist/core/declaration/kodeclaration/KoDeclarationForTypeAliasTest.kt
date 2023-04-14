@@ -33,6 +33,8 @@ class KoDeclarationForTypeAliasTest {
             annotations shouldHaveSize 1
             hasAnnotation("SampleAnnotation") shouldBeEqualTo true
             hasAnnotation("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotation("com.lemon.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
+            hasAnnotation("com.lemon.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
             hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
             hasAnnotation<NonExistingAnnotation>() shouldBeEqualTo false
         }

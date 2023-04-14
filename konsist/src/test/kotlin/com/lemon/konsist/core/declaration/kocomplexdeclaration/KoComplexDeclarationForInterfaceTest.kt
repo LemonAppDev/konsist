@@ -246,6 +246,8 @@ class KoComplexDeclarationForInterfaceTest {
         sut.run {
             representsType("SampleInterface") shouldBeEqualTo true
             representsType("SampleType") shouldBeEqualTo false
+            representsType("com.lemon.konsist.testdata.SampleInterface") shouldBeEqualTo true
+            representsType("com.lemon.konsist.testdata.SampleType") shouldBeEqualTo false
             representsType<SampleInterface>() shouldBeEqualTo true
             representsType<SampleType>() shouldBeEqualTo false
         }

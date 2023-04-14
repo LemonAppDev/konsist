@@ -59,6 +59,8 @@ class KoDeclarationForFunctionTest {
             annotations shouldHaveSize 1
             hasAnnotation("SampleAnnotation") shouldBeEqualTo true
             hasAnnotation("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotation("com.lemon.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
+            hasAnnotation("com.lemon.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
             hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
             hasAnnotation<NonExistingAnnotation>() shouldBeEqualTo false
         }
@@ -77,6 +79,9 @@ class KoDeclarationForFunctionTest {
             hasAnnotation("SampleAnnotation1") shouldBeEqualTo true
             hasAnnotation("SampleAnnotation2") shouldBeEqualTo true
             hasAnnotation("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotation("com.lemon.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotation("com.lemon.konsist.testdata.SampleAnnotation2") shouldBeEqualTo true
+            hasAnnotation("com.lemon.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
             hasAnnotation<SampleAnnotation1>() shouldBeEqualTo true
             hasAnnotation<SampleAnnotation2>() shouldBeEqualTo true
             hasAnnotation<NonExistingAnnotation>() shouldBeEqualTo false

@@ -20,7 +20,8 @@ abstract class KoComplexDeclaration(
     KoPropertyProvider,
     KoFunctionProvider {
 
-    fun representsType(name: String) = name == fullyQualifiedName.substringAfterLast(".")
+    fun representsType(name: String) =
+        name == fullyQualifiedName.substringAfterLast(".") || name == fullyQualifiedName
 
     inline fun <reified T>representsType() = T::class.qualifiedName == fullyQualifiedName
 

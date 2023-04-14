@@ -247,6 +247,8 @@ class KoComplexDeclarationForClassTest {
         sut.run {
             representsType("SampleClass") shouldBeEqualTo true
             representsType("SampleType") shouldBeEqualTo false
+            representsType("com.lemon.konsist.testdata.SampleClass") shouldBeEqualTo true
+            representsType("com.lemon.konsist.testdata.SampleType") shouldBeEqualTo false
             representsType<SampleClass>() shouldBeEqualTo true
             representsType<SampleType>() shouldBeEqualTo false
         }

@@ -65,7 +65,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
     fun isTopLevel() = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
 
     fun hasAnnotation(name: String) = annotations
-        .any { it.fullyQualifiedName?.substringAfterLast(".") == name }
+        .any { it.fullyQualifiedName?.substringAfterLast(".") == name || it.fullyQualifiedName == name }
 
     inline fun <reified T> hasAnnotation(): Boolean {
         val qualifiedName = T::class.qualifiedName ?: return false
