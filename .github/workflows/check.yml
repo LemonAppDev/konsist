@@ -24,11 +24,11 @@ jobs:
           distribution: 'zulu'
 
       - name: JUnit Test
-        run: ./gradlew :konsist:test
+        run: ./gradlew :lib:test
 
       - uses: actions/upload-artifact@v3
         with:
-          name: unit-test-report
+          name: JUnit Test Report
           path: ./**/build/reports/tests/
   konsist-test:
     name: Konsist Test
@@ -47,11 +47,11 @@ jobs:
           distribution: 'zulu'
 
       - name: Konsist Test
-        run: ./gradlew konsist:konsistTest
+        run: ./gradlew lib:konsistTest
 
       - uses: actions/upload-artifact@v3
         with:
-          name: unit-test-report
+          name: Konsist Test Report
           path: ./**/build/reports/tests/
   spotless:
     name: Spotless
@@ -111,12 +111,12 @@ jobs:
           distribution: 'zulu'
 
       - name: Assemble
-        run: ./gradlew konsist:assemble
+        run: ./gradlew lib:assemble
 
-      - name: Show "konsist.jar" content
-        run: jar tf konsist/build/libs/konsist.jar
+      - name: Show "lib.jar" content
+        run: jar tf lib/build/libs/lib.jar
 
       - uses: actions/upload-artifact@v3
         with:
-          name: unit-test-report
-          path: ./**/build/reports/tests/
+          name: lib.jar Artifact
+          path: lib/build/libs/lib.jar

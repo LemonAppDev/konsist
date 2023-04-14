@@ -1,7 +1,7 @@
 rootProject.name = "konsist"
 
 include(
-    ":konsist",
+    ":lib",
 )
 
 pluginManagement {

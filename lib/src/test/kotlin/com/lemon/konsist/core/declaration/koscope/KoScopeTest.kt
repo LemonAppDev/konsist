@@ -133,7 +133,7 @@ class KoScopeTest {
     fun `from module`() {
         // given
         val projectPath = konsistModulePath.dropLastWhile { it != '/' }
-        val sut = KoScope.fromProjectFiles(module = "konsist")
+        val sut = KoScope.fromProjectFiles(module = "lib")
 
         // then
         sut
