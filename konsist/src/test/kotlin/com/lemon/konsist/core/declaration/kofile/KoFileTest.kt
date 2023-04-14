@@ -259,11 +259,8 @@ class KoFileTest {
             .files()
             .first()
 
-        // when
-        val sut = file1 == file2
-
         // then
-        sut shouldBeEqualTo true
+        file1 shouldBeEqualTo file2
         file1.hashCode() shouldBeEqualTo file2.hashCode()
     }
 
@@ -278,11 +275,8 @@ class KoFileTest {
             .files()
             .first()
 
-        // when
-        val sut = file1 == file2
-
         // then
-        sut shouldBeEqualTo false
+        file1 shouldNotBeEqualTo file2
         file1.hashCode() shouldNotBeEqualTo file2.hashCode()
     }
 
