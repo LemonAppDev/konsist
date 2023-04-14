@@ -16,7 +16,6 @@ import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
 import java.io.File
-import kotlin.reflect.KClass
 
 class KoFile private constructor(private val ktFile: KtFile) :
     KoNamedDeclaration(ktFile),
@@ -77,8 +76,11 @@ class KoFile private constructor(private val ktFile: KtFile) :
             .map { KoAnnotation.getInstance(it) }
     }
 
-    fun hasAnnotation(kClass: KClass<*>): Boolean {
-        val qualifiedName = kClass.qualifiedName ?: return false
+    fun hasAnnotation(name: String) = annotations
+        .any {it.fullyQualifiedName?.substringAfterLast(".") == name}
+
+    inline fun <reified T> hasAnnotation(): Boolean {
+        val qualifiedName = T::class.qualifiedName ?: return false
 
         return annotations.any { it.fullyQualifiedName?.contains(qualifiedName) ?: false }
     }
