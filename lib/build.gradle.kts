@@ -20,7 +20,7 @@ testing {
         }
         register("konsistTest", JvmTestSuite::class) {
             dependencies {
-                implementation(project(":konsist"))
+                implementation(project(":lib"))
             }
         }
     }
