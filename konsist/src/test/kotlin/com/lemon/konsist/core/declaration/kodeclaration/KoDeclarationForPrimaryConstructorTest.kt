@@ -122,8 +122,8 @@ class KoDeclarationForPrimaryConstructorTest {
             it.annotations.map { annotation -> annotation.name } shouldBeEqualTo listOf("SampleAnnotation")
             it.hasAnnotation("SampleAnnotation") shouldBeEqualTo true
             it.hasAnnotation("SampleAnnotation1") shouldBeEqualTo false
-            it.hasAnnotation< SampleAnnotation>() shouldBeEqualTo true
-            it.hasAnnotation< SampleAnnotation1>() shouldBeEqualTo false
+            it.hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
+            it.hasAnnotation<SampleAnnotation1>() shouldBeEqualTo false
         }
     }
 

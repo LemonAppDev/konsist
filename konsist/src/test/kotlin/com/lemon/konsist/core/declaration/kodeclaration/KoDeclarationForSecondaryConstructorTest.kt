@@ -129,7 +129,7 @@ class KoDeclarationForSecondaryConstructorTest {
             annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation")
             hasAnnotation("SampleAnnotation") shouldBeEqualTo true
             hasAnnotation("SampleAnnotation1") shouldBeEqualTo false
-            hasAnnotation< SampleAnnotation>() shouldBeEqualTo true
+            hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
             hasAnnotation<SampleAnnotation1>() shouldBeEqualTo false
         }
     }

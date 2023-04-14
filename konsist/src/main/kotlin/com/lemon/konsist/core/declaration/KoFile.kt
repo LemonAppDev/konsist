@@ -77,7 +77,7 @@ class KoFile private constructor(private val ktFile: KtFile) :
     }
 
     fun hasAnnotation(name: String) = annotations
-        .any {it.fullyQualifiedName?.substringAfterLast(".") == name}
+        .any { it.fullyQualifiedName?.substringAfterLast(".") == name }
 
     inline fun <reified T> hasAnnotation(): Boolean {
         val qualifiedName = T::class.qualifiedName ?: return false

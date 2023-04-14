@@ -33,8 +33,8 @@ class KoDeclarationForTypeAliasTest {
             annotations shouldHaveSize 1
             hasAnnotation("SampleAnnotation") shouldBeEqualTo true
             hasAnnotation("NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotation< SampleAnnotation>() shouldBeEqualTo true
-            hasAnnotation< NonExistingAnnotation>() shouldBeEqualTo false
+            hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
+            hasAnnotation<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
 
