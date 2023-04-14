@@ -244,8 +244,10 @@ class KoComplexDeclarationForInterfaceTest {
 
         // then
         sut.run {
-            representsType(SampleInterface::class) shouldBeEqualTo true
-            representsType(SampleType::class) shouldBeEqualTo false
+            representsType("SampleInterface") shouldBeEqualTo true
+            representsType("SampleType") shouldBeEqualTo false
+            representsType<SampleInterface>() shouldBeEqualTo true
+            representsType<SampleType>() shouldBeEqualTo false
         }
     }
 
