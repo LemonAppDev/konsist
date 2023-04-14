@@ -4,6 +4,10 @@ plugins {
     id("io.gitlab.arturbosch.detekt")
 }
 
+repositories {
+    mavenCentral()
+}
+
 val detektCheck by tasks.registering(Detekt::class) {
     description = "Checks that sourcecode satisfies detekt rules."
     autoCorrect = false
@@ -19,10 +23,10 @@ configure(listOf(detektCheck, detektApply)) {
         group = "verification"
         parallel = true
         ignoreFailures = false
-        setSource(file(projectDir))
+        setSource(file(rootDir))
 
         // Custom detekt config
-        config.setFrom("$projectDir/detekt.yml")
+        config.setFrom("$rootDir/detekt.yml")
 
         // Use default configuration on top of custom config
         // (new detect rules will work out of the box after upgrading detekt version)
