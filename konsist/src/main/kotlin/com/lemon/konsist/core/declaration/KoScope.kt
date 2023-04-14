@@ -8,7 +8,7 @@ import com.lemon.konsist.util.PackageHelper
 import java.io.File
 
 class KoScope(
-    private val koFiles: Sequence<KoFile>,
+    private var koFiles: Sequence<KoFile>,
 ) {
     constructor(koFile: KoFile) : this(sequenceOf(koFile))
 
@@ -72,18 +72,15 @@ class KoScope(
     operator fun plus(scope: KoScope): KoScope = KoScope(files() + scope.files())
 
     operator fun minus(scope: KoScope): KoScope {
-        val files = files()
-            .toMutableList()
-            .also { it.removeAll(scope.files().toSet()) }
-        return KoScope(files.asSequence())
+        return KoScope(files() - scope.files().toSet())
     }
 
     operator fun plusAssign(scope: KoScope) {
-        this + scope
+        koFiles += scope.files()
     }
 
     operator fun minusAssign(scope: KoScope) {
-        this - scope
+        koFiles -= scope.files()
     }
 
     companion object {
