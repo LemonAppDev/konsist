@@ -66,6 +66,7 @@ class KoScopeTest {
                     "KoScopeForPackageTest.kt",
                     "KoScopeForPropertyTest.kt",
                     "KoScopeForTypeAliasTest.kt",
+                    "KoScopeOperatorTest.kt",
                     "KoScopeTest.kt",
                 ),
             )
@@ -93,6 +94,7 @@ class KoScopeTest {
                     "KoScopeForPackageTest.kt",
                     "KoScopeForPropertyTest.kt",
                     "KoScopeForTypeAliasTest.kt",
+                    "KoScopeOperatorTest.kt",
                     "KoScopeTest.kt",
                 ),
             )
@@ -121,6 +123,7 @@ class KoScopeTest {
                     "KoScopeForPackageTest.kt",
                     "KoScopeForPropertyTest.kt",
                     "KoScopeForTypeAliasTest.kt",
+                    "KoScopeOperatorTest.kt",
                     "KoScopeTest.kt",
                 ),
             )
@@ -161,6 +164,7 @@ class KoScopeTest {
             ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForPackageTest.kt
             ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForPropertyTest.kt
             ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForTypeAliasTest.kt
+            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeOperatorTest.kt
             ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeTest.kt
         """.trimIndent()
     }
