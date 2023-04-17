@@ -1,8 +1,8 @@
 package com.lemon.konsist.core.check
 
 import com.lemon.konsist.TestSnippetProvider
-import com.lemon.konsist.exception.KoCheckFailedException
-import com.lemon.konsist.exception.KoPreconditionFailedException
+import com.lemon.konsist.core.exception.KoCheckFailedException
+import com.lemon.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage

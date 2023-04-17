@@ -1,4 +1,4 @@
-package com.lemon.konsist.ext
+package com.lemon.konsist.core.ext
 
 import com.lemon.konsist.util.KotlinFileParser
 import com.lemon.konsist.util.KotlinFileParser.KOTLIN_FILE_EXTENSION
