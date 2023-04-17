@@ -3,10 +3,10 @@ package com.lemon.konsist.core.check
 import com.lemon.konsist.core.declaration.KoBaseDeclaration
 import com.lemon.konsist.core.declaration.KoDeclaration
 import com.lemon.konsist.core.declaration.KoNamedDeclaration
-import com.lemon.konsist.exception.KoCheckFailedException
-import com.lemon.konsist.exception.KoException
-import com.lemon.konsist.exception.KoInternalException
-import com.lemon.konsist.exception.KoPreconditionFailedException
+import com.lemon.konsist.core.exception.KoCheckFailedException
+import com.lemon.konsist.core.exception.KoException
+import com.lemon.konsist.core.exception.KoInternalException
+import com.lemon.konsist.core.exception.KoPreconditionFailedException
 
 fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean) {
     assert(function, true)

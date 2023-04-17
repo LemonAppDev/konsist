@@ -1,9 +1,9 @@
 package com.lemon.konsist.core.declaration
 
 import com.lemon.konsist.core.const.KoModifier
-import com.lemon.konsist.exception.KoPreconditionFailedException
-import com.lemon.konsist.ext.isKotlinFile
-import com.lemon.konsist.ext.toKoFile
+import com.lemon.konsist.core.exception.KoPreconditionFailedException
+import com.lemon.konsist.core.ext.isKotlinFile
+import com.lemon.konsist.core.ext.toKoFile
 import com.lemon.konsist.util.PackageHelper
 import java.io.File
 

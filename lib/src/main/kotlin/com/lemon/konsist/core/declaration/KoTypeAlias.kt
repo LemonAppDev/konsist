@@ -1,7 +1,7 @@
 package com.lemon.konsist.core.declaration
 
 import com.lemon.konsist.core.cache.KoDeclarationCache
-import com.lemon.konsist.exception.KoInternalException
+import com.lemon.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
