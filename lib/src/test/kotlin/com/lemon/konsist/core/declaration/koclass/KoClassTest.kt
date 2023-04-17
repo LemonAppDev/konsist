@@ -210,21 +210,21 @@ class KoClassTest {
     }
 
     @Test
-    fun `class-has-class-and-interface`() {
+    fun `class-has-parent-class-and-interface`() {
         // given
-        val sut = getSnippetFile("class-has-class-and-interface")
+        val sut = getSnippetFile("class-has-parent-class-and-interface")
             .classes()
             .first()
 
         // then
         sut.run {
-            parents shouldBeEqualTo listOf("SampleParentClass", "SampleParentInterface")
+            parents.map { it.name } shouldBeEqualTo listOf("SampleParentClass", "SampleParentInterface")
             hasParent() shouldBeEqualTo true
-            parentClass shouldBeEqualTo "SampleParentClass"
+            parentClass?.name shouldBeEqualTo "SampleParentClass"
             hasParentClass() shouldBeEqualTo true
             hasParentClass("SampleParentClass") shouldBeEqualTo true
             hasParentClass("OtherClass") shouldBeEqualTo false
-            parentInterfaces shouldBeEqualTo listOf("SampleParentInterface")
+            parentInterfaces.map { it.name } shouldBeEqualTo listOf("SampleParentInterface")
             hasParentInterface() shouldBeEqualTo true
             hasParentInterface("SampleParentInterface") shouldBeEqualTo true
             hasParentInterface("OtherInterface") shouldBeEqualTo false
@@ -232,9 +232,9 @@ class KoClassTest {
     }
 
     @Test
-    fun `class-has-no-interface-and-class`() {
+    fun `class-has-no-parents`() {
         // given
-        val sut = getSnippetFile("class-has-no-interface-and-class")
+        val sut = getSnippetFile("class-has-no-parents")
             .classes()
             .first()
 
