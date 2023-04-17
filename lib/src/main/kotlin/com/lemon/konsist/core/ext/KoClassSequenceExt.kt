@@ -25,3 +25,23 @@ fun Sequence<KoClass>.withoutAnnotationModifier() = this - withAnnotationModifie
 fun Sequence<KoClass>.withDataModifier() = filter { it.hasDataModifier() }
 
 fun Sequence<KoClass>.withoutDataModifier() = this - withDataModifier().toSet()
+
+fun Sequence<KoClass>.withAbstractModifier() = filter { it.hasAbstractModifier() }
+
+fun Sequence<KoClass>.withoutAbstractModifier() = this - withAbstractModifier().toSet()
+
+fun Sequence<KoClass>.withOpenModifier() = filter { it.hasOpenModifier() }
+
+fun Sequence<KoClass>.withoutOpenModifier() = this - withOpenModifier().toSet()
+
+fun Sequence<KoClass>.withFinalModifier() = filter { it.hasFinalModifier() }
+
+fun Sequence<KoClass>.withoutFinalModifier() = this - withFinalModifier().toSet()
+
+fun Sequence<KoClass>.withExplicitPrimaryConstructor() = filter { it.hasExplicitPrimaryConstructor() }
+
+fun Sequence<KoClass>.withoutExplicitPrimaryConstructor() = this - withExplicitPrimaryConstructor().toSet()
+
+fun Sequence<KoClass>.withSecondaryConstructors() = filter { it.hasSecondaryConstructors() }
+
+fun Sequence<KoClass>.withoutSecondaryConstructors() = this - withSecondaryConstructors().toSet()

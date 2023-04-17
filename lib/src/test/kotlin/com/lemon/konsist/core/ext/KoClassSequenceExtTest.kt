@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class KoClassSequenceExtTest {
     @Test
-    fun `withEnumModifier() returns class with enum modifier`() {
+    fun `withEnumModifier() returns class1 with enum modifier`() {
         // given
         val class1: KoClass = mockk()
         every { class1.hasEnumModifier() } returns true
@@ -24,7 +24,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutEnumModifier() returns class without enum modifier`() {
+    fun `withoutEnumModifier() returns class2 without enum modifier`() {
         // given
         val class1: KoClass = mockk()
         every { class1.hasEnumModifier() } returns true
@@ -40,7 +40,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withSealedModifier() returns class with enum modifier`() {
+    fun `withSealedModifier() returns class1 with enum modifier`() {
         // given
         val class1: KoClass = mockk()
         every { class1.hasSealedModifier() } returns true
@@ -56,7 +56,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutSealedModifier() returns class without enum modifier`() {
+    fun `withoutSealedModifier() returns class2 without enum modifier`() {
         // given
         val class1: KoClass = mockk()
         every { class1.hasSealedModifier() } returns true
@@ -72,7 +72,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withInnerModifier() returns class with enum modifier`() {
+    fun `withInnerModifier() returns class1 with enum modifier`() {
         // given
         val class1: KoClass = mockk()
         every { class1.hasInnerModifier() } returns true
@@ -88,7 +88,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutInnerModifier() returns class without enum modifier`() {
+    fun `withoutInnerModifier() returns class2 without enum modifier`() {
         // given
         val class1: KoClass = mockk()
         every { class1.hasInnerModifier() } returns true
@@ -104,7 +104,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withValueModifier() returns class with enum modifier`() {
+    fun `withValueModifier() returns class1 with enum modifier`() {
         // given
         val class1: KoClass = mockk()
         every { class1.hasValueModifier() } returns true
@@ -120,7 +120,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutValueModifier() returns class without enum modifier`() {
+    fun `withoutValueModifier() returns class2 without enum modifier`() {
         // given
         val class1: KoClass = mockk()
         every { class1.hasValueModifier() } returns true
@@ -136,7 +136,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotationModifier() returns class with enum modifier`() {
+    fun `withAnnotationModifier() returns class1 with enum modifier`() {
         // given
         val class1: KoClass = mockk()
         every { class1.hasAnnotationModifier() } returns true
@@ -152,7 +152,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotationModifier() returns class without enum modifier`() {
+    fun `withoutAnnotationModifier() returns class2 without enum modifier`() {
         // given
         val class1: KoClass = mockk()
         every { class1.hasAnnotationModifier() } returns true
@@ -168,7 +168,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withDataModifier() returns class with enum modifier`() {
+    fun `withDataModifier() returns class1 with enum modifier`() {
         // given
         val class1: KoClass = mockk()
         every { class1.hasDataModifier() } returns true
@@ -184,7 +184,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutDataModifier() returns class without enum modifier`() {
+    fun `withoutDataModifier() returns class2 without enum modifier`() {
         // given
         val class1: KoClass = mockk()
         every { class1.hasDataModifier() } returns true
@@ -194,6 +194,166 @@ class KoClassSequenceExtTest {
 
         // when
         val sut = classes.withoutDataModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class2)
+    }
+
+    @Test
+    fun `withAbstractModifier() returns class1 with enum modifier`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasAbstractModifier() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasAbstractModifier() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withAbstractModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutAbstractModifier() returns class2 without enum modifier`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasAbstractModifier() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasAbstractModifier() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withoutAbstractModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class2)
+    }
+
+    @Test
+    fun `withOpenModifier() returns class1 with enum modifier`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasOpenModifier() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasOpenModifier() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withOpenModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutOpenModifier() returns class2 without enum modifier`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasOpenModifier() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasOpenModifier() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withoutOpenModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class2)
+    }
+
+    @Test
+    fun `withFinalModifier() returns class1 with enum modifier`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasFinalModifier() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasFinalModifier() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withFinalModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutFinalModifier() returns class2 without enum modifier`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasFinalModifier() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasFinalModifier() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withoutFinalModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class2)
+    }
+
+    @Test
+    fun `withExplicitPrimaryConstructor() returns class1 with primary constructor`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasExplicitPrimaryConstructor() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasExplicitPrimaryConstructor() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withExplicitPrimaryConstructor()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withExplicitPrimaryConstructor() returns class2 without primary constructor`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasExplicitPrimaryConstructor() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasExplicitPrimaryConstructor() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withoutExplicitPrimaryConstructor()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class2)
+    }
+
+    @Test
+    fun `withSecondaryConstructors() returns class1 with secondary constructor`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasSecondaryConstructors() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasSecondaryConstructors() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withSecondaryConstructors()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withSecondaryConstructors() returns class2 without secondary constructor`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasSecondaryConstructors() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasSecondaryConstructors() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withoutSecondaryConstructors()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class2)
