@@ -51,7 +51,7 @@ class KoParentTest {
         // then
         sut.run {
             name shouldBeEqualTo "SampleSuperInterface"
-            delegateName shouldBeEqualTo "SampleSuperInterface by sampleProperty"
+            delegateName shouldBeEqualTo "sampleProperty"
             hasDelegate() shouldBeEqualTo true
             hasDelegate("SampleSuperInterface") shouldBeEqualTo true
             hasDelegate("SampleOtherInterface") shouldBeEqualTo false
@@ -69,7 +69,7 @@ class KoParentTest {
         // then
         sut.run {
             map { it.name } shouldBeEqualTo listOf("SampleSuperInterface1", "SampleSuperInterface2", "SampleSuperClass")
-            map { it.delegateName } shouldBeEqualTo listOf("SampleSuperInterface1 by sampleProperty", null, null)
+            mapNotNull { it.delegateName } shouldBeEqualTo listOf("sampleProperty")
         }
     }
 

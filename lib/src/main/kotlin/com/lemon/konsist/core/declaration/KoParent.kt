@@ -10,12 +10,15 @@ class KoParent private constructor(private val ktSuperTypeListEntry: KtSuperType
         ktSuperTypeListEntry
             .text
             .removeSuffix("()")
+            .replace("\n", " ")
             .substringBefore(" by")
     }
 
     val delegateName by lazy {
         if (ktSuperTypeListEntry is KtDelegatedSuperTypeEntry) {
-            ktSuperTypeListEntry.text
+            ktSuperTypeListEntry
+                .delegateExpression
+                ?.text
         } else {
             null
         }
