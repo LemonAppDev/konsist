@@ -220,6 +220,8 @@ class KoClassTest {
         sut.run {
             parents.map { it.name } shouldBeEqualTo listOf("SampleParentClass", "SampleParentInterface")
             hasParent() shouldBeEqualTo true
+            hasParent("SampleParentClass") shouldBeEqualTo true
+            hasParent("OtherInterface") shouldBeEqualTo false
             parentClass?.name shouldBeEqualTo "SampleParentClass"
             hasParentClass() shouldBeEqualTo true
             hasParentClass("SampleParentClass") shouldBeEqualTo true
@@ -242,6 +244,7 @@ class KoClassTest {
         sut.run {
             parents shouldBeEqualTo emptyList()
             hasParent() shouldBeEqualTo false
+            hasParent("SampleClass") shouldBeEqualTo false
             parentClass shouldBeEqualTo null
             hasParentClass() shouldBeEqualTo false
             hasParentClass("SampleParentClass") shouldBeEqualTo false

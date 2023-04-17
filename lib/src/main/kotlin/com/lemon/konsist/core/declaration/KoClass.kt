@@ -104,6 +104,8 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
 
     fun hasParent() = hasParentClass() || hasParentInterface()
 
+    fun hasParent(name: String) = hasParentClass(name) || hasParentInterface(name)
+
     companion object {
         private val cache = KoDeclarationCache<KoClass>()
 

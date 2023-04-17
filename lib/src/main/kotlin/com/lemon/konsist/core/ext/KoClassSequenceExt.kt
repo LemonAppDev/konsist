@@ -45,3 +45,18 @@ fun Sequence<KoClass>.withoutExplicitPrimaryConstructor() = this - withExplicitP
 fun Sequence<KoClass>.withSecondaryConstructors() = filter { it.hasSecondaryConstructors() }
 
 fun Sequence<KoClass>.withoutSecondaryConstructors() = this - withSecondaryConstructors().toSet()
+
+fun Sequence<KoClass>.withAnyParent() = filter { it.hasParent() }
+
+fun Sequence<KoClass>.withoutAnyParent() = this - withAnyParent().toSet()
+
+fun Sequence<KoClass>.withParent(name: String) = filter { it.hasParent(name) }
+
+fun Sequence<KoClass>.withoutParent(name: String) = this - withParent(name).toSet()
+
+inline fun <reified T> Sequence<KoClass>.withParent() = filter { it.name == T::class.simpleName }
+
+inline fun <reified T> Sequence<KoClass>.withoutParent() = this - withParent<T>().toSet()
+
+
+
