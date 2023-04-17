@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 
 class KoAnnotationsSequenceExtTest {
     @Test
-    fun `withType() returns expected annotation`() {
+    fun `withType() returns annotation1`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val type1 = "type1"
@@ -45,7 +45,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutType() returns expected annotation`() {
+    fun `withoutType() returns annotation2`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val type1 = "type1"
@@ -81,7 +81,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withName() returns expected annotation`() {
+    fun `withName() returns annotation1`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val name1 = "name1"
@@ -117,7 +117,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withName() with KClass syntax returns expected annotation`() {
+    fun `withName() with KClass syntax returns annotation1`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val name1 = "SampleAnnotation"
@@ -153,7 +153,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutName() returns expected annotation`() {
+    fun `withoutName() returns annotation2`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val name1 = "name1"
@@ -189,7 +189,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutName() with KClass syntax returns expected annotation`() {
+    fun `withoutName() with KClass syntax returns annotation2`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val name1 = "SampleAnnotation"
@@ -225,7 +225,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withFullyQualifiedClassName() returns expected annotation`() {
+    fun `withFullyQualifiedClassName() returns annotation1`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val fullyQualifiedName1 = "fullyQualifiedName1"
@@ -261,7 +261,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withFullyQualifiedClassName() with KClass syntax returns expected annotation`() {
+    fun `withFullyQualifiedClassName() with KClass syntax returns annotation1`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val fullyQualifiedName1 = "com.lemon.konsist.testdata.SampleAnnotation"
@@ -297,7 +297,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutFullyQualifiedClassName() returns expected annotation`() {
+    fun `withoutFullyQualifiedClassName() returns annotation2`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val fullyQualifiedName1 = "fullyQualifiedName1"
@@ -333,7 +333,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutFullyQualifiedClassName() with KClass syntax returns expected annotation`() {
+    fun `withoutFullyQualifiedClassName() with KClass syntax returns annotation2`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val fullyQualifiedName1 = "com.lemon.konsist.testdata.SampleAnnotation"
