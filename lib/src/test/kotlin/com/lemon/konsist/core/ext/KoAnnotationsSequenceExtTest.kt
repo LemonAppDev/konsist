@@ -1,6 +1,7 @@
 package com.lemon.konsist.core.ext
 
 import com.lemon.konsist.core.declaration.KoAnnotation
+import com.lemon.konsist.testdata.NonExistingAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation
 import io.mockk.every
 import io.mockk.mockk
@@ -9,7 +10,7 @@ import org.junit.jupiter.api.Test
 
 class KoAnnotationsSequenceExtTest {
     @Test
-    fun `withType() returns annotation1`() {
+    fun `withType() returns annotation with type type1`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val type1 = "type1"
@@ -45,7 +46,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutType() returns annotation2`() {
+    fun `withoutType() returns annotation without type type1`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val type1 = "type1"
@@ -63,7 +64,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutType() returns empty list when there is no annotation with given type`() {
+    fun `withoutType() returns list consisting of annotation1 and annotation2 when there is no annotation with given type`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val type1 = "type1"
@@ -81,7 +82,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withName() returns annotation1`() {
+    fun `withName() returns annotation with name1`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val name1 = "name1"
@@ -117,7 +118,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withName() with KClass syntax returns annotation1`() {
+    fun `withName() with KClass syntax returns SampleAnnotation`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val name1 = "SampleAnnotation"
@@ -153,7 +154,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutName() returns annotation2`() {
+    fun `withoutName() returns annotation without name1`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val name1 = "name1"
@@ -171,7 +172,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutName() returns empty list when there is no annotation with given name`() {
+    fun `withoutName() returns list consisting of annotation1 and annotation2 when there is no annotation with given name`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val name1 = "name1"
@@ -189,7 +190,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutName() with KClass syntax returns annotation2`() {
+    fun `withoutName() with KClass syntax returns annotation without SampleAnnotation`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val name1 = "SampleAnnotation"
@@ -207,7 +208,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutName() with KClass syntax returns empty list when there is no annotation with given name`() {
+    fun `withoutName() with KClass syntax returns list consisting of annotation1 and annotation2 when there is no annotation with given name`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val name1 = "FirstAnnotation"
@@ -225,7 +226,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withFullyQualifiedClassName() returns annotation1`() {
+    fun `withFullyQualifiedClassName() returns annotation with fullyQualifiedName1`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val fullyQualifiedName1 = "fullyQualifiedName1"
@@ -261,7 +262,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withFullyQualifiedClassName() with KClass syntax returns annotation1`() {
+    fun `withFullyQualifiedClassName() with KClass syntax returns SampleAnnotation`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val fullyQualifiedName1 = "com.lemon.konsist.testdata.SampleAnnotation"
@@ -297,7 +298,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutFullyQualifiedClassName() returns annotation2`() {
+    fun `withoutFullyQualifiedClassName() returns annotation without fullyQualifiedName1`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val fullyQualifiedName1 = "fullyQualifiedName1"
@@ -315,7 +316,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutFullyQualifiedClassName() returns empty list when there is no annotation with given name`() {
+    fun `withoutFullyQualifiedClassName() returns list consisting of annotation1 and annotation2 when there is no annotation with given name`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val fullyQualifiedName1 = "fullyQualifiedName1"
@@ -333,7 +334,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutFullyQualifiedClassName() with KClass syntax returns annotation2`() {
+    fun `withoutFullyQualifiedClassName() with KClass syntax returns annotation without SampleAnnotation`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val fullyQualifiedName1 = "com.lemon.konsist.testdata.SampleAnnotation"
@@ -351,7 +352,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutFullyQualifiedClassName() with KClass syntax returns empty list when there is no annotation with given name`() {
+    fun `withoutFullyQualifiedClassName() with KClass syntax returns list consisting of annotation1 and annotation2 when there is no annotation with given name`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val fullyQualifiedName1 = "com.lemon.konsist.testdata.FirstAnnotation"
@@ -362,7 +363,7 @@ class KoAnnotationsSequenceExtTest {
         val annotations = sequenceOf(annotation1, annotation2)
 
         // when
-        val sut = annotations.withoutFullyQualifiedClassName<SampleAnnotation>()
+        val sut = annotations.withoutFullyQualifiedClassName<NonExistingAnnotation>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(annotation1, annotation2)
