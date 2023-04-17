@@ -64,7 +64,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutType() returns list consisting of annotation1 and annotation2 when there is no annotation with given type`() {
+    fun `withoutType() returns annotations list when there is no annotation with given type`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val type1 = "type1"
@@ -172,7 +172,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutName() returns list consisting of annotation1 and annotation2 when there is no annotation with given name`() {
+    fun `withoutName() returns annotations list when there is no annotation with given name`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val name1 = "name1"
@@ -208,7 +208,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutName() with KClass syntax returns list consisting of annotation1 and annotation2 when there is no annotation with given name`() {
+    fun `withoutName() with KClass syntax returns annotations list when there is no annotation with given name`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val name1 = "FirstAnnotation"
@@ -316,7 +316,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutFullyQualifiedClassName() returns list consisting of annotation1 and annotation2 when there is no annotation with given name`() {
+    fun `withoutFullyQualifiedClassName() returns annotations list when there is no annotation with given name`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val fullyQualifiedName1 = "fullyQualifiedName1"
@@ -352,7 +352,7 @@ class KoAnnotationsSequenceExtTest {
     }
 
     @Test
-    fun `withoutFullyQualifiedClassName() with KClass syntax returns list consisting of annotation1 and annotation2 when there is no annotation with given name`() {
+    fun `withoutFullyQualifiedClassName() with KClass syntax returns annotations list when there is no annotation with given name`() {
         // given
         val annotation1: KoAnnotation = mockk()
         val fullyQualifiedName1 = "com.lemon.konsist.testdata.FirstAnnotation"
