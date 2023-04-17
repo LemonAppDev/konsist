@@ -17,7 +17,7 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
         ktProperty
             .delegate
             ?.text
-            ?.replace("\n", "")
+            ?.replace("\n", " ")
             ?.substringAfter("by ")
             ?.substringBefore("{")
             ?.removeSuffix(" ")
