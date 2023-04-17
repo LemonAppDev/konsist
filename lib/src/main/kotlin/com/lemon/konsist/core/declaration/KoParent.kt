@@ -4,7 +4,7 @@ import com.lemon.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-class KoParent private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry): KoNamedDeclaration(ktSuperTypeListEntry) {
+class KoParent private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) : KoNamedDeclaration(ktSuperTypeListEntry) {
 
     override val name: String by lazy {
         ktSuperTypeListEntry
@@ -14,9 +14,11 @@ class KoParent private constructor(private val ktSuperTypeListEntry: KtSuperType
     }
 
     val delegateName by lazy {
-        if (ktSuperTypeListEntry is KtDelegatedSuperTypeEntry){
+        if (ktSuperTypeListEntry is KtDelegatedSuperTypeEntry) {
             ktSuperTypeListEntry.text
-        } else null
+        } else {
+            null
+        }
     }
 
     fun hasDelegate() = delegateName != null

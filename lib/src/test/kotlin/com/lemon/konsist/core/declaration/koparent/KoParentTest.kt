@@ -75,5 +75,4 @@ class KoParentTest {
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koparent/snippet/", fileName)
-
 }
