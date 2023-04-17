@@ -38,4 +38,36 @@ class KoClassSequenceExtTest {
         // then
         sut.toList() shouldBeEqualTo listOf(class2)
     }
+
+    @Test
+    fun `withSealedModifier() returns class with enum modifier`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasSealedModifier() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasSealedModifier() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withSealedModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutSealedModifier() returns class without enum modifier`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasSealedModifier() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasSealedModifier() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withoutSealedModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class2)
+    }
 }
