@@ -1,0 +1,3 @@
+interface SampleSuperInterface
+
+class SampleClass(sampleProperty: SampleSuperInterface) : SampleSuperInterface by sampleProperty
