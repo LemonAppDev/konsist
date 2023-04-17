@@ -582,4 +582,113 @@ class KoClassSequenceExtTest {
         sut.toList() shouldBeEqualTo listOf(class2)
     }
 
+    @Test
+    fun `withAnyParentClass() returns class1 with parent class`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasParentClass() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasParentClass() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withAnyParentClass()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutAnyParentClass() returns class2 without parent class`() {
+        // given
+        val class1: KoClass = mockk()
+        every { class1.hasParentClass() } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasParentClass() } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withoutAnyParentClass()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class2)
+    }
+
+    @Test
+    fun `withParentClass(name) returns class1 with given parent class`() {
+        // given
+        val name = "SampleName"
+        val class1: KoClass = mockk()
+        every { class1.hasParentClass(name) } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasParentClass(name) } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withParentClass(name)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutParentClass(name) returns class2 without given parent class`() {
+        // given
+        val name = "SampleName"
+        val class1: KoClass = mockk()
+        every { class1.hasParentClass(name) } returns true
+        val class2: KoClass = mockk()
+        every { class2.hasParentClass(name) } returns false
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withoutParentClass(name)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class2)
+    }
+
+    @Test
+    fun `withParentClass() with KClass syntax returns SampleClass`() {
+        // given
+        val class1: KoClass = mockk()
+        val parent1: KoParent = mockk()
+        every { class1.parentClass } returns parent1
+        val name1 = "SampleClass"
+        every { parent1.name } returns name1
+        val class2: KoClass = mockk()
+        val parent2: KoParent = mockk()
+        every { class2.parentClass } returns parent2
+        val name2 = "OtherClass"
+        every { parent2.name } returns name2
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withParentClass<SampleClass>()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutParentClass() with KClass syntax returns OtherClass`() {
+        // given
+        val class1: KoClass = mockk()
+        val parent1: KoParent = mockk()
+        every { class1.parentClass } returns parent1
+        val name1 = "SampleClass"
+        every { parent1.name } returns name1
+        val class2: KoClass = mockk()
+        val parent2: KoParent = mockk()
+        every { class2.parentClass } returns parent2
+        val name2 = "OtherClass"
+        every { parent2.name } returns name2
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withoutParentClass<SampleClass>()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class2)
+    }
 }
