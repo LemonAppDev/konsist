@@ -54,9 +54,29 @@ fun Sequence<KoClass>.withParent(name: String) = filter { it.hasParent(name) }
 
 fun Sequence<KoClass>.withoutParent(name: String) = this - withParent(name).toSet()
 
-inline fun <reified T> Sequence<KoClass>.withParent() = filter { it.name == T::class.simpleName }
+inline fun <reified T> Sequence<KoClass>.withParent() = filter { koClass ->
+    koClass
+        .parents
+        .any { it.name == T::class.simpleName }
+}
 
 inline fun <reified T> Sequence<KoClass>.withoutParent() = this - withParent<T>().toSet()
+
+fun Sequence<KoClass>.withAnyParentInterface() = filter { it.hasParentInterface() }
+
+fun Sequence<KoClass>.withoutAnyParentInterface() = this - withAnyParentInterface().toSet()
+
+fun Sequence<KoClass>.withParentInterface(name: String) = filter { it.hasParentInterface(name) }
+
+fun Sequence<KoClass>.withoutParentInterface(name: String) = this - withParentInterface(name).toSet()
+
+inline fun <reified T> Sequence<KoClass>.withParentInterface() = filter { koClass ->
+    koClass
+        .parentInterfaces
+        .any { it.name == T::class.simpleName }
+}
+
+inline fun <reified T> Sequence<KoClass>.withoutParentInterface() = this - withParentInterface<T>().toSet()
 
 
 
