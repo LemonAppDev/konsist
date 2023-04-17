@@ -14,7 +14,6 @@ fun Sequence<KoAnnotation>.withoutName(name: String) = filterNot { it.name == na
 
 inline fun <reified T> Sequence<KoAnnotation>.withoutName() = filterNot { it.name == T::class.simpleName }
 
-
 fun Sequence<KoAnnotation>.withFullyQualifiedClassName(name: String) =
     filter { it.fullyQualifiedName == name }
 
