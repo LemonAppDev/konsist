@@ -1,5 +1,3 @@
-import java.util.Base64
-
 plugins {
     `maven-publish`
     signing
@@ -66,37 +64,11 @@ publishing {
 }
 
 signing {
-    var signingKey = base64Decode("signingKey")
-    var signingPassword = base64Decode("signingPassword")
-
-    @Suppress("Detekt.MaxLineLength")
-    signingKey = """
-        -----BEGIN PGP PRIVATE KEY BLOCK-----
-
-        lIYEZD5QwRYJKwYBBAHaRw8BAQdALe3I9pSJ0+wwICGOboTiP2/nFvMlnENU49yj
-        jGIJljf+BwMCbSIisXKjQVXyXRhiEAKK9vWeOXttGFrMcuxINy+8RUbbj4igLwXV
-        lqeNEPIf+Iucx9m2L5KbCOOrcOkqnNAhUaBmrsclV+Rsfm1Cfuf2drQkTGVtb24g
-        QXBwIERldiA8aWdvci53b2pkYUBnbWFpbC5jb20+iJMEExYKADsWIQQ1DF110Eql
-        mcutIjSNUFnysZJ6mgUCZD5QwQIbAwULCQgHAgIiAgYVCgkICwIEFgIDAQIeBwIX
-        gAAKCRCNUFnysZJ6mhBtAQDgj646El5+Nu2B1EXEVetRt0517uCXBINFsVKq0DYs
-        kAEA3Pfk7jOGgjniKQW9B/gRL3x100srCoOXM1Ztf97ZmgyciwRkPlDBEgorBgEE
-        AZdVAQUBAQdA8f9pWBKFWPRr6AoXjNQHHbee0HbAKU2OkxdiFQo9Gw4DAQgH/gcD
-        An2Ub3PZpOvg8mDD6slGiv0aaIs1P/5YWz4JnaVWCfhi55tJe4qmb9XIK7O1g0Ng
-        ZYCLzikTKmK9gxWHrrtstOcs7hYo/SMQMMlFYRU75ACIeAQYFgoAIBYhBDUMXXXQ
-        SqWZy60iNI1QWfKxknqaBQJkPlDBAhsMAAoJEI1QWfKxknqaA5ABAJVje2MeixeX
-        H6GXNmAjYMddcwPGgC4A0S9eAkP8z4yMAQCftWq4Pprdq7Z7Je2moRzHgTComEyQ
-        OzLb64KEZ2IfCw==
-        =vCyW
-        -----END PGP PRIVATE KEY BLOCK-----
-    """.trimIndent()
-    signingPassword = "2perfection!BEASTgpg"
+    val signingKey = project.property("signingKey") as String
+    val signingPassword = project.property("signingPassword") as String
 
     useInMemoryPgpKeys(signingKey, signingPassword)
 
     // Sign all publications
     sign(publishing.publications[konsistPublicationName])
-}
-
-fun base64Decode(prop: String) = project.findProperty(prop)?.let {
-    String(Base64.getDecoder().decode(it.toString())).trim()
 }
