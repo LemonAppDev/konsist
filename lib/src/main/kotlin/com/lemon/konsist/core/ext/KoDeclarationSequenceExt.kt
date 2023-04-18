@@ -1,6 +1,7 @@
 package com.lemon.konsist.core.ext
 
 import com.lemon.konsist.core.declaration.KoDeclaration
+import kotlin.reflect.KClass
 
 fun Sequence<KoDeclaration>.withPublicModifier() = filter { it.hasPublicModifier() }
 
@@ -38,6 +39,30 @@ fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotation: String) = fil
     annotation.any { koDeclaration.hasAnnotation(it) }
 }
 
+fun Sequence<KoDeclaration>.withAnnotations(vararg annotation: KClass<*>) = filter { koDeclaration ->
+    annotation.all { annotation ->
+        annotation
+            .simpleName
+            ?.let { koDeclaration.hasAnnotation(it) } ?: false
+    }
+}
+
+fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotation: KClass<*>) = filter { koDeclaration ->
+    annotation.none { annotation ->
+        annotation
+            .simpleName
+            ?.let { koDeclaration.hasAnnotation(it) } ?: false
+    }
+}
+
+fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotation: KClass<*>) = filter { koDeclaration ->
+    annotation.any { annotation ->
+        annotation
+            .simpleName
+            ?.let { koDeclaration.hasAnnotation(it) } ?: false
+    }
+}
+
 fun Sequence<KoDeclaration>.withModifiers(vararg modifier: String) = filter { it.hasModifiers(*modifier) }
 
 fun Sequence<KoDeclaration>.withoutModifiers(vararg modifier: String) = filter { koDeclaration ->
@@ -71,5 +96,3 @@ fun Sequence<KoDeclaration>.withoutPaths(vararg paths: String) = filter { koDecl
 fun Sequence<KoDeclaration>.withSomePaths(vararg paths: String) = filter { koDeclaration ->
     paths.any { koDeclaration.resideInPath(it) }
 }
-
-
