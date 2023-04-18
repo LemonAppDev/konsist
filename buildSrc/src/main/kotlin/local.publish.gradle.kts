@@ -10,9 +10,9 @@ private val konsistPublicationName = "konsist"
 publishing {
     publications {
         create<MavenPublication>(konsistPublicationName) {
-            groupId = "com.lemon"
+            groupId = "com.lemonappdev"
             artifactId = "konsist"
-            version = "0.7.0"
+            version = "0.7.0-SNAPSHOT"
 
             from(components["java"])
 
@@ -50,9 +50,25 @@ publishing {
     }
 
     repositories {
-//        maven {
-//            name = "staging"
-//            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+        maven {
+//            val releasesRepoUrl = layout.buildDirectory.dir("repos/releases")
+//            val snapshotsRepoUrl = layout.buildDirectory.dir("repos/snapshots")
+//            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+
+//            println("version: $version")
+//            if (version.toString().endsWith("SNAPSHOT")) {
+//                name = "snapshots"
+//                url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+//                setCredentialsFromGradleProperties()
+//            } else {
+//                throw GradleException("Releases are not supported yet.")
+//            }
+
+            name = "snapshots"
+            url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+        }
+
+//        mavenCentral() {
 //            setCredentialsFromGradleProperties()
 //        }
 
