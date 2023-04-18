@@ -39,10 +39,10 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
 
         val hasOtherVisibilityModifier =
             hasModifier(KtTokens.PRIVATE_KEYWORD) ||
-                hasModifier(KtTokens.PROTECTED_KEYWORD) ||
-                hasModifier(
-                    KtTokens.INTERNAL_KEYWORD,
-                )
+                    hasModifier(KtTokens.PROTECTED_KEYWORD) ||
+                    hasModifier(
+                        KtTokens.INTERNAL_KEYWORD,
+                    )
 
         hasOtherVisibilityModifier.not()
     }
@@ -73,18 +73,36 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
         return annotations.any { it.fullyQualifiedName?.contains(qualifiedName) ?: false }
     }
 
-    fun hasModifiers(vararg koModifiers: KoModifier) = koModifiers.all {
+    fun hasKoModifiers(vararg koModifiers: KoModifier) = koModifiers.all {
         ktTypeParameterListOwner
             .modifierList
             ?.hasModifier(it.toKtToken())
             ?: false
     }
 
-    fun resideInPackages(vararg packages: String) = packages.toList().any { PackageHelper.resideInPackage(it, packageName) }
+    fun hasModifiers(vararg modifiers: String) = modifiers
+        .map { modifier ->
+            KoModifier
+                .values()
+                .first { modifier.lowercase() == it.type }
+                .toKtToken()
+        }
+        .all {
+            ktTypeParameterListOwner
+                .modifierList
+                ?.hasModifier(it)
+                ?: false
+        }
+
+
+    fun resideInPackages(vararg packages: String) =
+        packages.toList().any { PackageHelper.resideInPackage(it, packageName) }
 
     fun resideOutsidePackages(vararg packages: String) = !resideInPackages(*packages)
 
-    fun resideInPath(vararg paths: String, ignoreCase: Boolean = true) = paths.toList().any { filePath.contains(it, ignoreCase) }
+    fun resideInPath(vararg paths: String, ignoreCase: Boolean = true) =
+        paths.toList().any { filePath.contains(it, ignoreCase) }
 
-    fun resideOutsidePath(vararg paths: String, ignoreCase: Boolean = true) = !resideInPath(*paths, ignoreCase = ignoreCase)
+    fun resideOutsidePath(vararg paths: String, ignoreCase: Boolean = true) =
+        !resideInPath(*paths, ignoreCase = ignoreCase)
 }

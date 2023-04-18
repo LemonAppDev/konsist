@@ -86,7 +86,7 @@ object KoDeclarationProviderUtil {
         }
 
         if (modifiers.isNotEmpty()) {
-            result = result.filter { it.hasModifiers(*modifiers.toTypedArray()) }
+            result = result.filter { it.hasKoModifiers(*modifiers.toTypedArray()) }
         }
 
         return result.filterIsInstance<T>()

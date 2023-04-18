@@ -1,9 +1,6 @@
 package com.lemon.konsist.core.declaration.kodeclaration
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemon.konsist.core.const.KoModifier.ABSTRACT
-import com.lemon.konsist.core.const.KoModifier.PRIVATE
-import com.lemon.konsist.core.const.KoModifier.PUBLIC
 import com.lemon.konsist.testdata.NonExistingAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation1
@@ -210,7 +207,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.hasModifiers() shouldBeEqualTo true
+        sut.hasKoModifiers() shouldBeEqualTo true
     }
 
     @Test
@@ -222,8 +219,8 @@ class KoDeclarationForInterfaceTest {
 
         // then
         sut.run {
-            hasModifiers(PUBLIC) shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
+            hasModifiers("public") shouldBeEqualTo true
+            hasModifiers("private") shouldBeEqualTo false
         }
     }
 
@@ -236,14 +233,14 @@ class KoDeclarationForInterfaceTest {
 
         // then
         sut.run {
-            hasModifiers(ABSTRACT) shouldBeEqualTo true
-            hasModifiers(PUBLIC) shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-            hasModifiers(ABSTRACT, PUBLIC) shouldBeEqualTo true
-            hasModifiers(PUBLIC, ABSTRACT) shouldBeEqualTo true
-            hasModifiers(PRIVATE, ABSTRACT) shouldBeEqualTo false
-            hasModifiers(ABSTRACT, PUBLIC, PRIVATE) shouldBeEqualTo false
-            hasModifiers() shouldBeEqualTo true
+            hasModifiers("abstract") shouldBeEqualTo true
+            hasModifiers("public") shouldBeEqualTo true
+            hasModifiers("private") shouldBeEqualTo false
+            hasModifiers("abstract", "public") shouldBeEqualTo true
+            hasModifiers("public", "abstract") shouldBeEqualTo true
+            hasModifiers("private", "abstract") shouldBeEqualTo false
+            hasModifiers("abstract", "public", "private") shouldBeEqualTo false
+            hasKoModifiers() shouldBeEqualTo true
         }
     }
 
@@ -256,8 +253,8 @@ class KoDeclarationForInterfaceTest {
 
         // then
         sut.run {
-            hasModifiers() shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
+            hasKoModifiers() shouldBeEqualTo true
+            hasModifiers("private") shouldBeEqualTo false
         }
     }
 

@@ -1,8 +1,6 @@
 package com.lemon.konsist.core.declaration.kodeclaration
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemon.konsist.core.const.KoModifier
-import com.lemon.konsist.core.const.KoModifier.PRIVATE
 import com.lemon.konsist.testdata.NonExistingAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation
 import org.amshove.kluent.shouldBeEqualTo
@@ -166,7 +164,7 @@ class KoDeclarationForTypeAliasTest {
             .first()
 
         // then
-        sut.hasModifiers() shouldBeEqualTo true
+        sut.hasKoModifiers() shouldBeEqualTo true
     }
 
     @Test
@@ -178,8 +176,8 @@ class KoDeclarationForTypeAliasTest {
 
         // then
         sut.run {
-            hasModifiers(KoModifier.PUBLIC) shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
+            hasModifiers("public") shouldBeEqualTo true
+            hasModifiers("private") shouldBeEqualTo false
         }
     }
 
@@ -192,8 +190,8 @@ class KoDeclarationForTypeAliasTest {
 
         // then
         sut.run {
-            hasModifiers() shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
+            hasKoModifiers() shouldBeEqualTo true
+            hasModifiers("private") shouldBeEqualTo false
         }
     }
 
