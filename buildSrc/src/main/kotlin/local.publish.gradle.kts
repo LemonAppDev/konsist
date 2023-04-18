@@ -50,32 +50,13 @@ publishing {
     }
 
     repositories {
-        maven {
-            val releaseTarget = providers.gradleProperty("releaseTarget")
+//        maven {
+//            name = "staging"
+//            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+//            setCredentialsFromGradleProperties()
+//        }
 
-            when (releaseTarget.get()) {
-                "production" -> {
-                    name = "production"
-                    url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-                    setCredentialsFromGradleProperties()
-                }
-
-                "snapshot" -> {
-                    name = "snapshot"
-                    url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots")
-                    setCredentialsFromGradleProperties()
-                }
-
-                "local" -> {
-                    name = "local"
-                    url = mavenLocal().url
-                }
-
-                else -> {
-                    throw GradleException("Unknown repository: ${releaseTarget.get()}")
-                }
-            }
-        }
+        mavenLocal()
     }
 }
 
@@ -103,13 +84,13 @@ fun MavenArtifactRepository.setCredentialsFromGradleProperties() {
     val ossrhUsername = providers.gradleProperty("ossrhUsername")
     val ossrhPassword = providers.gradleProperty("ossrhPassword")
 
-    if (!ossrhUsername.isPresent) {
-        throw GradleException("ossrhUsername is not provided.")
-    }
-
-    if (!ossrhPassword.isPresent) {
-        throw GradleException("ossrhPassword is not provided.")
-    }
+//    if (!ossrhUsername.isPresent) {
+//        throw GradleException("ossrhUsername is not provided.")
+//    }
+//
+//    if (!ossrhPassword.isPresent) {
+//        throw GradleException("ossrhPassword is not provided.")
+//    }
 
     credentials {
         username = ossrhUsername.get()
