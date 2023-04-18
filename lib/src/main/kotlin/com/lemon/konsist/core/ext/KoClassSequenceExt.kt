@@ -3,6 +3,7 @@
 package com.lemon.konsist.core.ext
 
 import com.lemon.konsist.core.declaration.KoClass
+import kotlin.reflect.KClass
 
 fun Sequence<KoClass>.withEnumModifier() = filter { it.hasEnumModifier() }
 
@@ -64,6 +65,36 @@ inline fun <reified T> Sequence<KoClass>.withParentTyped() = filter { koClass ->
 
 inline fun <reified T> Sequence<KoClass>.withoutParentTyped() = this - withParentTyped<T>().toSet()
 
+fun Sequence<KoClass>.withParents(vararg name: String) = filter { koClass -> name.all { koClass.hasParent(it) } }
+
+fun Sequence<KoClass>.withoutParents(vararg name: String) = filter { koClass -> name.none { koClass.hasParent(it) } }
+
+fun Sequence<KoClass>.withSomeParents(vararg name: String) = filter { koClass -> name.any { koClass.hasParent(it) } }
+
+fun Sequence<KoClass>.withParents(vararg name: KClass<*>) = filter { koClass ->
+    name.all { kClass ->
+        koClass
+            .parents
+            .any { parent -> parent.name == kClass.simpleName }
+    }
+}
+
+fun Sequence<KoClass>.withoutParents(vararg name: KClass<*>) = filter { koClass ->
+    name.none { kClass ->
+        koClass
+            .parents
+            .any { parent -> parent.name == kClass.simpleName }
+    }
+}
+
+fun Sequence<KoClass>.withSomeParents(vararg name: KClass<*>) = filter { koClass ->
+    name.any { kClass ->
+        koClass
+            .parents
+            .any { parent -> parent.name == kClass.simpleName }
+    }
+}
+
 fun Sequence<KoClass>.withParentInterface() = filter { it.hasParentInterface() }
 
 fun Sequence<KoClass>.withoutParentInterface() = filterNot { it.hasParentInterface() }
@@ -79,6 +110,39 @@ inline fun <reified T> Sequence<KoClass>.withParentInterfaceTyped() = filter { k
 }
 
 inline fun <reified T> Sequence<KoClass>.withoutParentInterfaceTyped() = this - withParentInterfaceTyped<T>().toSet()
+
+fun Sequence<KoClass>.withParentInterfaces(vararg name: String) =
+    filter { koClass -> name.all { koClass.hasParentInterface(it) } }
+
+fun Sequence<KoClass>.withoutParentInterfaces(vararg name: String) =
+    filter { koClass -> name.none { koClass.hasParentInterface(it) } }
+
+fun Sequence<KoClass>.withSomeParentInterfaces(vararg name: String) =
+    filter { koClass -> name.any { koClass.hasParentInterface(it) } }
+
+fun Sequence<KoClass>.withParentInterfaces(vararg name: KClass<*>) = filter { koClass ->
+    name.all { kClass ->
+        koClass
+            .parentInterfaces
+            .any { parent -> parent.name == kClass.simpleName }
+    }
+}
+
+fun Sequence<KoClass>.withoutParentInterfaces(vararg name: KClass<*>) = filter { koClass ->
+    name.none { kClass ->
+        koClass
+            .parentInterfaces
+            .any { parent -> parent.name == kClass.simpleName }
+    }
+}
+
+fun Sequence<KoClass>.withSomeParentInterfaces(vararg name: KClass<*>) = filter { koClass ->
+    name.any { kClass ->
+        koClass
+            .parentInterfaces
+            .any { parent -> parent.name == kClass.simpleName }
+    }
+}
 
 fun Sequence<KoClass>.withParentClass() = filter { it.hasParentClass() }
 

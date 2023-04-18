@@ -4,11 +4,14 @@ import com.lemon.konsist.core.declaration.KoClass
 import com.lemon.konsist.core.declaration.KoParent
 import com.lemon.konsist.testdata.SampleClass
 import com.lemon.konsist.testdata.SampleInterface
+import com.lemon.konsist.testdata.SampleInterface1
+import com.lemon.konsist.testdata.SampleInterface2
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LargeClass")
 class KoClassSequenceExtTest {
     @Test
     fun `withEnumModifier() returns class1 with enum modifier`() {
@@ -533,6 +536,288 @@ class KoClassSequenceExtTest {
     }
 
     @Test
+    fun `withParents(String) returns class1 with parents`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val class1: KoClass = mockk {
+            every { hasParent(name1) } returns true
+            every { hasParent(name2) } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParent(name1) } returns false
+            every { hasParent(name2) } returns true
+        }
+        val class3: KoClass = mockk {
+            every { hasParent(name1) } returns false
+            every { hasParent(name2) } returns false
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withParents(name1, name2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutParents(String) returns class3 without parents`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val class1: KoClass = mockk {
+            every { hasParent(name1) } returns true
+            every { hasParent(name2) } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParent(name1) } returns false
+            every { hasParent(name2) } returns true
+        }
+        val class3: KoClass = mockk {
+            every { hasParent(name1) } returns false
+            every { hasParent(name2) } returns false
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withoutParents(name1, name2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class3)
+    }
+
+    @Test
+    fun `withSomeParents(String) returns class1 and class2 which have at least one of given parents`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val class1: KoClass = mockk {
+            every { hasParent(name1) } returns true
+            every { hasParent(name2) } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParent(name1) } returns false
+            every { hasParent(name2) } returns true
+        }
+        val class3: KoClass = mockk {
+            every { hasParent(name1) } returns false
+            every { hasParent(name2) } returns false
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withSomeParents(name1, name2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1, class2)
+    }
+
+    @Test
+    fun `withParents(KClass) returns class1 with parents`() {
+        // given
+        val name1 = "SampleClass"
+        val name2 = "SampleInterface"
+        val name3 = "OtherParent"
+        val parent1: KoParent = mockk {
+            every { name } returns name1
+        }
+        val parent2: KoParent = mockk {
+            every { name } returns name2
+        }
+        val parent3: KoParent = mockk {
+            every { name } returns name3
+        }
+
+        val class1: KoClass = mockk {
+            every { parents } returns listOf(parent1, parent2)
+        }
+        val class2: KoClass = mockk {
+            every { parents } returns listOf(parent1, parent3)
+        }
+        val class3: KoClass = mockk {
+            every { parents } returns listOf(parent3)
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withParents(SampleClass::class, SampleInterface::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutParents(KClass) returns class3 without parents`() {
+        // given
+        val name1 = "SampleClass"
+        val name2 = "SampleInterface"
+        val name3 = "OtherParent"
+        val parent1: KoParent = mockk {
+            every { name } returns name1
+        }
+        val parent2: KoParent = mockk {
+            every { name } returns name2
+        }
+        val parent3: KoParent = mockk {
+            every { name } returns name3
+        }
+
+        val class1: KoClass = mockk {
+            every { parents } returns listOf(parent1, parent2)
+        }
+        val class2: KoClass = mockk {
+            every { parents } returns listOf(parent1, parent3)
+        }
+        val class3: KoClass = mockk {
+            every { parents } returns listOf(parent3)
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withoutParents(SampleClass::class, SampleInterface::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class3)
+    }
+
+    @Test
+    fun `withSomeParents(KClass) returns class1 and class2 which have at least one of given parents`() {
+        // given
+        val name1 = "SampleClass"
+        val name2 = "SampleInterface"
+        val name3 = "OtherParent"
+        val parent1: KoParent = mockk {
+            every { name } returns name1
+        }
+        val parent2: KoParent = mockk {
+            every { name } returns name2
+        }
+        val parent3: KoParent = mockk {
+            every { name } returns name3
+        }
+
+        val class1: KoClass = mockk {
+            every { parents } returns listOf(parent1, parent2)
+        }
+        val class2: KoClass = mockk {
+            every { parents } returns listOf(parent1, parent3)
+        }
+        val class3: KoClass = mockk {
+            every { parents } returns listOf(parent3)
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withSomeParents(SampleClass::class, SampleInterface::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1, class2)
+    }
+
+    @Test
+    fun `withParentInterfaces(KClass) returns class1 with parents`() {
+        // given
+        val name1 = "SampleInterface1"
+        val name2 = "SampleInterface2"
+        val name3 = "SampleInterface3"
+        val parent1: KoParent = mockk {
+            every { name } returns name1
+        }
+        val parent2: KoParent = mockk {
+            every { name } returns name2
+        }
+        val parent3: KoParent = mockk {
+            every { name } returns name3
+        }
+
+        val class1: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent1, parent2)
+        }
+        val class2: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent1, parent3)
+        }
+        val class3: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent3)
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withParentInterfaces(SampleInterface1::class, SampleInterface2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutParentInterfaces(KClass) returns class3 without parents`() {
+        // given
+        val name1 = "SampleInterface1"
+        val name2 = "SampleInterface2"
+        val name3 = "SampleInterface3"
+        val parent1: KoParent = mockk {
+            every { name } returns name1
+        }
+        val parent2: KoParent = mockk {
+            every { name } returns name2
+        }
+        val parent3: KoParent = mockk {
+            every { name } returns name3
+        }
+
+        val class1: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent1, parent2)
+        }
+        val class2: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent1, parent3)
+        }
+        val class3: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent3)
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withoutParentInterfaces(SampleInterface1::class, SampleInterface2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class3)
+    }
+
+    @Test
+    fun `withSomeParentInterfaces(KClass) returns class1 and class2 which have at least one of given parents`() {
+        // given
+        val name1 = "SampleInterface1"
+        val name2 = "SampleInterface2"
+        val name3 = "SampleInterface3"
+        val parent1: KoParent = mockk {
+            every { name } returns name1
+        }
+        val parent2: KoParent = mockk {
+            every { name } returns name2
+        }
+        val parent3: KoParent = mockk {
+            every { name } returns name3
+        }
+
+        val class1: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent1, parent2)
+        }
+        val class2: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent1, parent3)
+        }
+        val class3: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent3)
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withSomeParentInterfaces(SampleInterface1::class, SampleInterface2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1, class2)
+    }
+
+    @Test
     fun `withParentInterface() returns class1 with parent interface`() {
         // given
         val class1: KoClass = mockk {
@@ -656,6 +941,84 @@ class KoClassSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(class2)
+    }
+
+    @Test
+    fun `withParentInterfaces() returns class1 with parent interfaces`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val class1: KoClass = mockk {
+            every { hasParentInterface(name1) } returns true
+            every { hasParentInterface(name2) } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParentInterface(name1) } returns false
+            every { hasParentInterface(name2) } returns true
+        }
+        val class3: KoClass = mockk {
+            every { hasParentInterface(name1) } returns false
+            every { hasParentInterface(name2) } returns false
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withParentInterfaces(name1, name2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutParentInterfaces() returns class3 without parent interfaces`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val class1: KoClass = mockk {
+            every { hasParentInterface(name1) } returns true
+            every { hasParentInterface(name2) } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParentInterface(name1) } returns false
+            every { hasParentInterface(name2) } returns true
+        }
+        val class3: KoClass = mockk {
+            every { hasParentInterface(name1) } returns false
+            every { hasParentInterface(name2) } returns false
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withoutParentInterfaces(name1, name2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class3)
+    }
+
+    @Test
+    fun `withSomeParentInterfaces() returns class1 and class2 which have at least one of given parent interfaces`() {
+        // given
+        val name1 = "SampleName1"
+        val name2 = "SampleName2"
+        val class1: KoClass = mockk {
+            every { hasParentInterface(name1) } returns true
+            every { hasParentInterface(name2) } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParentInterface(name1) } returns false
+            every { hasParentInterface(name2) } returns true
+        }
+        val class3: KoClass = mockk {
+            every { hasParentInterface(name1) } returns false
+            every { hasParentInterface(name2) } returns false
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withSomeParentInterfaces(name1, name2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1, class2)
     }
 
     @Test
