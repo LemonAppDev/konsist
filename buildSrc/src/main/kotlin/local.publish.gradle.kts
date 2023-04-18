@@ -1,3 +1,5 @@
+import java.util.Base64
+
 plugins {
     `maven-publish`
     signing
@@ -68,13 +70,19 @@ signing {
     val signingPassword = providers.gradleProperty("signingPassword")
 
     if (signingKey.isPresent && signingPassword.isPresent) {
-        useInMemoryPgpKeys(signingKey.get(), signingPassword.get())
+        useInMemoryPgpKeys(
+            decodeBase64(signingKey.get()),
+            decodeBase64(signingPassword.get()),
+        )
+
         sign(publishing.publications[konsistPublicationName])
     } else {
         if (!signingKey.isPresent) {
-            println("signingPassword is not provided. Skipping signing.")
+            println("signingKey is not provided. Skipping signing.")
         } else if (!signingPassword.isPresent) {
             println("signingPassword is not provided. Skipping signing.")
         }
     }
 }
+
+fun decodeBase64(string: String) = String(Base64.getDecoder().decode(string)).trim()
