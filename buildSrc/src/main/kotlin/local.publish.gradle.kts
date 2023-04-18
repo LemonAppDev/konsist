@@ -64,15 +64,19 @@ publishing {
 }
 
 signing {
-    val signingKey = project.findProperty("signingKey") as? String
-    val signingPassword = project.findProperty("signingPassword") as? String
+    val signingKey = providers.gradleProperty("signingKey")
+    val signingPassword = providers.gradleProperty("signingPassword")
 
-    if (signingKey != null || signingPassword != null) {
-        useInMemoryPgpKeys(signingKey, signingPassword)
+    if (signingKey.isPresent && signingPassword.isPresent) {
+        useInMemoryPgpKeys(signingKey.get(), signingPassword.get())
 
         // Sign all publications
         sign(publishing.publications[konsistPublicationName])
     } else {
-        println("signingKey or signingPassword are not provided. Skipping signing.")
+        if (!signingKey.isPresent) {
+            println("signingPassword is not provided. Skipping signing.")
+        } else if (!signingPassword.isPresent) {
+            println("signingPassword is not provided. Skipping signing.")
+        }
     }
 }
