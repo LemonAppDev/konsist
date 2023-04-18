@@ -1,3 +1,0 @@
-import com.lemon.konsist.testdata.SampleType
-
-internal actual class SampleClass (sampleProperty: SampleType) {}

@@ -1,5 +1,0 @@
-import com.lemon.konsist.testdata.SampleAnnotation
-
-@SampleAnnotation
-interface SampleInterface {
-}

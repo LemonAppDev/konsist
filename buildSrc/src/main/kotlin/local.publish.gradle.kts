@@ -17,7 +17,7 @@ publishing {
             from(components["java"])
 
             pom {
-                name.set("Konsist")
+                name.set("konsist")
                 description.set("A Kotlin architecture test library. Define and guard ode base consistency rules using Kotlin.")
                 url.set("https://github.com/LemonAppDev/konsist")
                 properties.set(
