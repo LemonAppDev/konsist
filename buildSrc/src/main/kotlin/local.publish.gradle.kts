@@ -69,8 +69,6 @@ signing {
 
     if (signingKey.isPresent && signingPassword.isPresent) {
         useInMemoryPgpKeys(signingKey.get(), signingPassword.get())
-
-        // Sign all publications
         sign(publishing.publications[konsistPublicationName])
     } else {
         if (!signingKey.isPresent) {
