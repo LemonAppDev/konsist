@@ -4,10 +4,7 @@
 
 [Nexus Repository Manager](https://s01.oss.sonatype.org/#view-repositories)
 
-## Publish To Local Maven Repository
-
-Use this command to publish artifacts to local maven repository (`~/.m2/repository`):
-
-`./gradlew publishKonsistPublicationToMavenLocal `
-
-This is useful for testing the artifacts in other projects.
+## Publish To Maven Repository
+- `./gradlew publish ` publish to all repositories 
+- `./gradlew publishKonsistPublicationToMavenLocal ` publish to local maven repository (`~/.m2/repository`)
+- `./gradlew publishKonsistPublicationToSnapshoots ` publish to snapshots repository

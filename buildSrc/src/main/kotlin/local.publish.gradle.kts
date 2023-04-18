@@ -14,7 +14,7 @@ publishing {
             artifactId = "konsist"
             version = "0.7.0-SNAPSHOT"
 
-            from(components["java"])
+            from(components.getByName("java"))
 
             pom {
                 name.set("konsist")
@@ -65,7 +65,12 @@ publishing {
 //            }
 
             name = "snapshots"
+            // Repository URL for snapshot deployment and download access:
             url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+
+            setCredentialsFromGradleProperties()
+            // Repository URL for release deployment, no download access! :
+            // url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
         }
 
 //        mavenCentral() {
