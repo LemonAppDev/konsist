@@ -51,9 +51,6 @@ publishing {
 
     repositories {
         maven {
-            name = "Local"
-            url = uri("~/.m2/repository")
-
             val repositoryUrl = when {
                 project.hasProperty("release") -> ""
                 project.hasProperty("snapshot") -> ""
