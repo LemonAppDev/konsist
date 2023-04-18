@@ -1,3 +1,5 @@
+@file:Suppress("detekt.TooManyFunctions")
+
 package com.lemon.konsist.core.ext
 
 import com.lemon.konsist.core.declaration.KoDeclaration
