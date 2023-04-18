@@ -29,6 +29,14 @@ fun Sequence<KoClass>.withDataModifier() = filter { it.hasDataModifier() }
 
 fun Sequence<KoClass>.withoutDataModifier() = filterNot { it.hasDataModifier() }
 
+fun Sequence<KoClass>.withActualModifier() = filter { it.hasActualModifier() }
+
+fun Sequence<KoClass>.withoutActualModifier() = filterNot { it.hasActualModifier() }
+
+fun Sequence<KoClass>.withExpectModifier() = filter { it.hasExpectModifier() }
+
+fun Sequence<KoClass>.withoutExpectModifier() = filterNot { it.hasExpectModifier() }
+
 fun Sequence<KoClass>.withAbstractModifier() = filter { it.hasAbstractModifier() }
 
 fun Sequence<KoClass>.withoutAbstractModifier() = filterNot { it.hasAbstractModifier() }

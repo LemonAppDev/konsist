@@ -230,6 +230,78 @@ class KoClassSequenceExtTest {
     }
 
     @Test
+    fun `withActualModifier() returns class1 with actual modifier`() {
+        // given
+        val class1: KoClass = mockk {
+            every { hasActualModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasActualModifier() } returns false
+        }
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withActualModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutActualModifier() returns class2 without actual modifier`() {
+        // given
+        val class1: KoClass = mockk {
+            every { hasActualModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasActualModifier() } returns false
+        }
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withoutActualModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class2)
+    }
+
+    @Test
+    fun `withExpectModifier() returns class1 with expect modifier`() {
+        // given
+        val class1: KoClass = mockk {
+            every { hasExpectModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasExpectModifier() } returns false
+        }
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withExpectModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1)
+    }
+
+    @Test
+    fun `withoutExpectModifier() returns class2 without expect modifier`() {
+        // given
+        val class1: KoClass = mockk {
+            every { hasExpectModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasExpectModifier() } returns false
+        }
+        val classes = sequenceOf(class1, class2)
+
+        // when
+        val sut = classes.withoutExpectModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class2)
+    }
+
+    @Test
     fun `withAbstractModifier() returns class1 with abstract modifier`() {
         // given
         val class1: KoClass = mockk {
