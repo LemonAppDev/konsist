@@ -48,50 +48,50 @@ fun Sequence<KoClass>.withSecondaryConstructors() = filter { it.hasSecondaryCons
 
 fun Sequence<KoClass>.withoutSecondaryConstructors() = filterNot { it.hasSecondaryConstructors() }
 
-fun Sequence<KoClass>.withAnyParent() = filter { it.hasParent() }
+fun Sequence<KoClass>.withParent() = filter { it.hasParent() }
 
-fun Sequence<KoClass>.withoutAnyParent() = filterNot { it.hasParent() }
+fun Sequence<KoClass>.withoutParent() = filterNot { it.hasParent() }
 
-fun Sequence<KoClass>.withParent(name: String) = filter { it.hasParent(name) }
+fun Sequence<KoClass>.withParentNamed(name: String) = filter { it.hasParent(name) }
 
-fun Sequence<KoClass>.withoutParent(name: String) = filterNot { it.hasParent(name) }
+fun Sequence<KoClass>.withoutParentNamed(name: String) = filterNot { it.hasParent(name) }
 
-inline fun <reified T> Sequence<KoClass>.withParent() = filter { koClass ->
+inline fun <reified T> Sequence<KoClass>.withParentTyped() = filter { koClass ->
     koClass
         .parents
         .any { it.name == T::class.simpleName }
 }
 
-inline fun <reified T> Sequence<KoClass>.withoutParent() = this - withParent<T>().toSet()
+inline fun <reified T> Sequence<KoClass>.withoutParentTyped() = this - withParentTyped<T>().toSet()
 
-fun Sequence<KoClass>.withAnyParentInterface() = filter { it.hasParentInterface() }
+fun Sequence<KoClass>.withParentInterface() = filter { it.hasParentInterface() }
 
-fun Sequence<KoClass>.withoutAnyParentInterface() = filterNot { it.hasParentInterface() }
+fun Sequence<KoClass>.withoutParentInterface() = filterNot { it.hasParentInterface() }
 
-fun Sequence<KoClass>.withParentInterface(name: String) = filter { it.hasParentInterface(name) }
+fun Sequence<KoClass>.withParentInterfaceNamed(name: String) = filter { it.hasParentInterface(name) }
 
-fun Sequence<KoClass>.withoutParentInterface(name: String) = filterNot { it.hasParentInterface(name) }
+fun Sequence<KoClass>.withoutParentInterfaceNamed(name: String) = filterNot { it.hasParentInterface(name) }
 
-inline fun <reified T> Sequence<KoClass>.withParentInterface() = filter { koClass ->
+inline fun <reified T> Sequence<KoClass>.withParentInterfaceTyped() = filter { koClass ->
     koClass
         .parentInterfaces
         .any { it.name == T::class.simpleName }
 }
 
-inline fun <reified T> Sequence<KoClass>.withoutParentInterface() = this - withParentInterface<T>().toSet()
+inline fun <reified T> Sequence<KoClass>.withoutParentInterfaceTyped() = this - withParentInterfaceTyped<T>().toSet()
 
-fun Sequence<KoClass>.withAnyParentClass() = filter { it.hasParentClass() }
+fun Sequence<KoClass>.withParentClass() = filter { it.hasParentClass() }
 
-fun Sequence<KoClass>.withoutAnyParentClass() = filterNot { it.hasParentClass() }
+fun Sequence<KoClass>.withoutParentClass() = filterNot { it.hasParentClass() }
 
-fun Sequence<KoClass>.withParentClass(name: String) = filter { it.hasParentClass(name) }
+fun Sequence<KoClass>.withParentClassNamed(name: String) = filter { it.hasParentClass(name) }
 
-fun Sequence<KoClass>.withoutParentClass(name: String) = filterNot { it.hasParentClass(name) }
+fun Sequence<KoClass>.withoutParentClassNamed(name: String) = filterNot { it.hasParentClass(name) }
 
-inline fun <reified T> Sequence<KoClass>.withParentClass() = filter {
+inline fun <reified T> Sequence<KoClass>.withParentClassTyped() = filter {
     it
         .parentClass
         ?.name == T::class.simpleName
 }
 
-inline fun <reified T> Sequence<KoClass>.withoutParentClass() = this - withParentClass<T>().toSet()
+inline fun <reified T> Sequence<KoClass>.withoutParentClassTyped() = this - withParentClassTyped<T>().toSet()
