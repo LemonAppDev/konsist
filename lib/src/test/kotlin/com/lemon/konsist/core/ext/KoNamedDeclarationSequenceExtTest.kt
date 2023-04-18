@@ -48,7 +48,7 @@ class KoNamedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withNameWithPrefix() returns namedDeclaration1 which name starts with given prefix`() {
+    fun `withNamePrefix() returns namedDeclaration1 which name starts with given prefix`() {
         // given
         val name1 = "sampleName1"
         val name2 = "notSampleName2"
@@ -62,14 +62,14 @@ class KoNamedDeclarationSequenceExtTest {
         val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
 
         // when
-        val sut = namedDeclarations.withNameWithPrefix(prefix)
+        val sut = namedDeclarations.withNamePrefix(prefix)
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration1)
     }
 
     @Test
-    fun `withoutNameWithPrefix() returns namedDeclaration2 which name not starts with given prefix`() {
+    fun `withoutNamePrefix() returns namedDeclaration2 which name not starts with given prefix`() {
         // given
         val name1 = "sampleName1"
         val name2 = "notSampleName2"
@@ -83,14 +83,14 @@ class KoNamedDeclarationSequenceExtTest {
         val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
 
         // when
-        val sut = namedDeclarations.withoutNameWithPrefix(prefix)
+        val sut = namedDeclarations.withoutNamePrefix(prefix)
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration2)
     }
 
     @Test
-    fun `withNameWithSuffix() returns namedDeclaration1 which name ends with given suffix`() {
+    fun `withNameSuffix() returns namedDeclaration1 which name ends with given suffix`() {
         // given
         val name1 = "sampleName1"
         val name2 = "sampleName2"
@@ -104,14 +104,14 @@ class KoNamedDeclarationSequenceExtTest {
         val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
 
         // when
-        val sut = namedDeclarations.withNameWithSuffix(suffix)
+        val sut = namedDeclarations.withNameSuffix(suffix)
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration1)
     }
 
     @Test
-    fun `withoutNameWithSuffix() returns namedDeclaration2 which name not ends with given suffix`() {
+    fun `withoutNameSuffix() returns namedDeclaration2 which name not ends with given suffix`() {
         // given
         val name1 = "sampleName1"
         val name2 = "notSampleName2"
@@ -125,7 +125,7 @@ class KoNamedDeclarationSequenceExtTest {
         val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
 
         // when
-        val sut = namedDeclarations.withoutNameWithSuffix(suffix)
+        val sut = namedDeclarations.withoutNameSuffix(suffix)
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration2)
