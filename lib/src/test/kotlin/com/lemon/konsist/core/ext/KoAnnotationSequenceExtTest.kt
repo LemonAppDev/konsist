@@ -46,6 +46,7 @@ class KoAnnotationSequenceExtTest {
         sut.toList() shouldBeEqualTo listOf(annotation2)
     }
 
+    //  'every { representsType<SampleAnnotation>() } returns true' doesn't work because there is a bug in mockk
     @Test
     fun `withType() with KClass syntax returns SampleAnnotation`() {
         // given
@@ -68,10 +69,10 @@ class KoAnnotationSequenceExtTest {
     fun `withoutType() with KClass syntax returns annotation without SampleAnnotation`() {
         // given
         val annotation1: KoAnnotation = mockk {
-            every { representsType<SampleAnnotation>() } returns true
+            every { fullyQualifiedName } returns "com.lemon.konsist.testdata.SampleAnnotation"
         }
         val annotation2: KoAnnotation = mockk {
-            every { representsType<SampleAnnotation>() } returns false
+            every { fullyQualifiedName } returns "com.lemon.konsist.testdata.NonExistingAnnotation"
         }
         val annotations = sequenceOf(annotation1, annotation2)
 
