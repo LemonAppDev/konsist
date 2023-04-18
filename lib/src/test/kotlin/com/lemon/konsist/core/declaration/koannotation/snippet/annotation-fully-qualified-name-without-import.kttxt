@@ -1,0 +1,3 @@
+@SampleAnnotationWithoutImport
+fun sampleFunction() {
+}

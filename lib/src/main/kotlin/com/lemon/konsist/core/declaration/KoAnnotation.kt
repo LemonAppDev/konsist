@@ -10,11 +10,11 @@ open class KoAnnotation private constructor(
 
     override val name by lazy { ktAnnotationEntry.shortName.toString() }
 
-    val fullyQualifiedName: String? by lazy {
+    val fullyQualifiedName: String by lazy {
         containingFile
             .imports
             .firstOrNull { it.text.endsWith(".$type") }
-            ?.name
+            ?.name ?: name
     }
 
     companion object {

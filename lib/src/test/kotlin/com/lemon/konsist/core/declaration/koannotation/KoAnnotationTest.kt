@@ -18,5 +18,31 @@ class KoAnnotationTest {
         sut.type shouldBeEqualTo "SampleAnnotation"
     }
 
+    @Test
+    fun `annotation-fully-qualified-name`() {
+        // given
+        val sut = getSnippetFile("annotation-fully-qualified-name")
+            .functions()
+            .first()
+            .annotations
+            .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemon.konsist.testdata.SampleAnnotation"
+    }
+
+    @Test
+    fun `annotation-fully-qualified-name-without-import`() {
+        // given
+        val sut = getSnippetFile("annotation-fully-qualified-name-without-import")
+            .functions()
+            .first()
+            .annotations
+            .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "SampleAnnotationWithoutImport"
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koannotation/snippet/", fileName)
 }
