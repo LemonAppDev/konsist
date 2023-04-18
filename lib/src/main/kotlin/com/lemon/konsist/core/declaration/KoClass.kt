@@ -94,17 +94,17 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
 
     fun hasSecondaryConstructors() = ktClass.hasSecondaryConstructors()
 
-    fun hasParentClass() = parentClass != null
+    fun hasParentClass(name: String? = null) = when (name) {
+        null -> parentClass != null
+        else -> parentClass?.name == name
+    }
 
-    fun hasParentClass(name: String) = parentClass?.name == name
+    fun hasParentInterface(name: String? = null) = when (name) {
+        null -> parentInterfaces.isNotEmpty()
+        else -> parentInterfaces.any { it.name == name }
+    }
 
-    fun hasParentInterface() = parentInterfaces.isNotEmpty()
-
-    fun hasParentInterface(name: String) = parentInterfaces.any { it.name == name }
-
-    fun hasParent() = hasParentClass() || hasParentInterface()
-
-    fun hasParent(name: String) = hasParentClass(name) || hasParentInterface(name)
+    fun hasParent(name: String? = null) = hasParentClass(name) || hasParentInterface(name)
 
     companion object {
         private val cache = KoDeclarationCache<KoClass>()
