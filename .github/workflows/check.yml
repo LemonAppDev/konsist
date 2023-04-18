@@ -120,25 +120,3 @@ jobs:
         with:
           name: lib.jar Artifact
           path: lib/build/libs/lib.jar
-  sign:
-    name: Sign
-    continue-on-error: false
-    runs-on: self-hosted
-    strategy:
-      fail-fast: false
-    steps:
-      - shell: bash
-        env:
-            GPG_KEY: ${{ secrets.GPG_KEY }}
-            GPG_KEY_PASSWORD: ${{ secrets.GPG_KEY_PASSWORD }}
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Sign
-        run: ./gradlew :lib:signKonsistPublication -PsigningKey=%SUPER_SECRET% -PsigningPassword=%GPG_KEY_PASSWORD%
