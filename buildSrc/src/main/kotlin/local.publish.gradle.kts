@@ -64,11 +64,15 @@ publishing {
 }
 
 signing {
-    val signingKey = project.property("signingKey") as String
-    val signingPassword = project.property("signingPassword") as String
+    val signingKey = project.findProperty("signingKey") as? String
+    val signingPassword = project.findProperty("signingPassword") as? String
 
-    useInMemoryPgpKeys(signingKey, signingPassword)
+    if (signingKey != null || signingPassword != null) {
+        useInMemoryPgpKeys(signingKey, signingPassword)
 
-    // Sign all publications
-    sign(publishing.publications[konsistPublicationName])
+        // Sign all publications
+        sign(publishing.publications[konsistPublicationName])
+    } else {
+        println("signingKey or signingPassword are not provided. Skipping signing.")
+    }
 }
