@@ -51,9 +51,16 @@ publishing {
 
     repositories {
         maven {
+            val releaseProperty = providers.gradleProperty("release")
+            val snapshotProperty = providers.gradleProperty("snapshot")
+
+            if (releaseProperty.isPresent && snapshotProperty.isPresent) {
+                throw GradleException("Both release and snapshot properties are provided. Only one of them should be provided.")
+            }
+
             val repositoryUrl = when {
-                project.hasProperty("release") -> ""
-                project.hasProperty("snapshot") -> ""
+                releaseProperty.isPresent -> ""
+                snapshotProperty.isPresent -> ""
                 else -> mavenLocal().url
             }
 
@@ -63,20 +70,20 @@ publishing {
 }
 
 signing {
-    val signingKey = providers.gradleProperty("signingKey")
-    val signingPassword = providers.gradleProperty("signingPassword")
+    val signingKeyProperty = providers.gradleProperty("signingKey")
+    val signingPasswordProperty = providers.gradleProperty("signingPassword")
 
-    if (signingKey.isPresent && signingPassword.isPresent) {
+    if (signingKeyProperty.isPresent && signingPasswordProperty.isPresent) {
         useInMemoryPgpKeys(
-            decodeBase64(signingKey.get()),
-            decodeBase64(signingPassword.get()),
+            decodeBase64(signingKeyProperty.get()),
+            decodeBase64(signingPasswordProperty.get()),
         )
 
         sign(publishing.publications[konsistPublicationName])
     } else {
-        if (!signingKey.isPresent) {
+        if (!signingKeyProperty.isPresent) {
             println("signingKey is not provided. Skipping signing.")
-        } else if (!signingPassword.isPresent) {
+        } else if (!signingPasswordProperty.isPresent) {
             println("signingPassword is not provided. Skipping signing.")
         }
     }
