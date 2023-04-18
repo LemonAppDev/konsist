@@ -13,10 +13,12 @@ class KoClassSequenceExtTest {
     @Test
     fun `withEnumModifier() returns class1 with enum modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasEnumModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasEnumModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasEnumModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasEnumModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -29,10 +31,12 @@ class KoClassSequenceExtTest {
     @Test
     fun `withoutEnumModifier() returns class2 without enum modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasEnumModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasEnumModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasEnumModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasEnumModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -43,12 +47,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withSealedModifier() returns class1 with enum modifier`() {
+    fun `withSealedModifier() returns class1 with sealed modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasSealedModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasSealedModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasSealedModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasSealedModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -59,12 +65,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutSealedModifier() returns class2 without enum modifier`() {
+    fun `withoutSealedModifier() returns class2 without sealed modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasSealedModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasSealedModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasSealedModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasSealedModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -75,12 +83,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withInnerModifier() returns class1 with enum modifier`() {
+    fun `withInnerModifier() returns class1 with inner modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasInnerModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasInnerModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasInnerModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasInnerModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -91,12 +101,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutInnerModifier() returns class2 without enum modifier`() {
+    fun `withoutInnerModifier() returns class2 without inner modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasInnerModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasInnerModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasInnerModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasInnerModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -107,12 +119,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withValueModifier() returns class1 with enum modifier`() {
+    fun `withValueModifier() returns class1 with value modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasValueModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasValueModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasValueModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasValueModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -123,12 +137,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutValueModifier() returns class2 without enum modifier`() {
+    fun `withoutValueModifier() returns class2 without value modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasValueModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasValueModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasValueModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasValueModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -139,12 +155,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotationModifier() returns class1 with enum modifier`() {
+    fun `withAnnotationModifier() returns class1 with annotation modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasAnnotationModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasAnnotationModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasAnnotationModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasAnnotationModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -155,12 +173,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotationModifier() returns class2 without enum modifier`() {
+    fun `withoutAnnotationModifier() returns class2 without annotation modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasAnnotationModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasAnnotationModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasAnnotationModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasAnnotationModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -171,12 +191,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withDataModifier() returns class1 with enum modifier`() {
+    fun `withDataModifier() returns class1 with data modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasDataModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasDataModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasDataModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasDataModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -187,12 +209,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutDataModifier() returns class2 without enum modifier`() {
+    fun `withoutDataModifier() returns class2 without data modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasDataModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasDataModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasDataModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasDataModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -203,12 +227,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withAbstractModifier() returns class1 with enum modifier`() {
+    fun `withAbstractModifier() returns class1 with abstract modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasAbstractModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasAbstractModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasAbstractModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasAbstractModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -219,12 +245,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutAbstractModifier() returns class2 without enum modifier`() {
+    fun `withoutAbstractModifier() returns class2 without abstract modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasAbstractModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasAbstractModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasAbstractModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasAbstractModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -235,12 +263,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withOpenModifier() returns class1 with enum modifier`() {
+    fun `withOpenModifier() returns class1 with open modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasOpenModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasOpenModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasOpenModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasOpenModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -251,12 +281,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutOpenModifier() returns class2 without enum modifier`() {
+    fun `withoutOpenModifier() returns class2 without open modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasOpenModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasOpenModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasOpenModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasOpenModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -267,12 +299,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withFinalModifier() returns class1 with enum modifier`() {
+    fun `withFinalModifier() returns class1 with final modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasFinalModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasFinalModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasFinalModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasFinalModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -283,12 +317,14 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutFinalModifier() returns class2 without enum modifier`() {
+    fun `withoutFinalModifier() returns class2 without final modifier`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasFinalModifier() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasFinalModifier() } returns false
+        val class1: KoClass = mockk {
+            every { hasFinalModifier() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasFinalModifier() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -301,10 +337,12 @@ class KoClassSequenceExtTest {
     @Test
     fun `withExplicitPrimaryConstructor() returns class1 with primary constructor`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasExplicitPrimaryConstructor() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasExplicitPrimaryConstructor() } returns false
+        val class1: KoClass = mockk {
+            every { hasExplicitPrimaryConstructor() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasExplicitPrimaryConstructor() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -317,10 +355,12 @@ class KoClassSequenceExtTest {
     @Test
     fun `withoutExplicitPrimaryConstructor() returns class2 without primary constructor`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasExplicitPrimaryConstructor() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasExplicitPrimaryConstructor() } returns false
+        val class1: KoClass = mockk {
+            every { hasExplicitPrimaryConstructor() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasExplicitPrimaryConstructor() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -333,10 +373,12 @@ class KoClassSequenceExtTest {
     @Test
     fun `withSecondaryConstructors() returns class1 with secondary constructor`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasSecondaryConstructors() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasSecondaryConstructors() } returns false
+        val class1: KoClass = mockk {
+            every { hasSecondaryConstructors() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasSecondaryConstructors() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -349,10 +391,12 @@ class KoClassSequenceExtTest {
     @Test
     fun `withoutSecondaryConstructors() returns class2 without secondary constructor`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasSecondaryConstructors() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasSecondaryConstructors() } returns false
+        val class1: KoClass = mockk {
+            every { hasSecondaryConstructors() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasSecondaryConstructors() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -365,10 +409,12 @@ class KoClassSequenceExtTest {
     @Test
     fun `withAnyParent() returns class1 with parent`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasParent() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasParent() } returns false
+        val class1: KoClass = mockk {
+            every { hasParent() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParent() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -381,10 +427,12 @@ class KoClassSequenceExtTest {
     @Test
     fun `withoutAnyParent() returns class2 without parent`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasParent() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasParent() } returns false
+        val class1: KoClass = mockk {
+            every { hasParent() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParent() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -398,10 +446,12 @@ class KoClassSequenceExtTest {
     fun `withParent(name) returns class1 with given parent`() {
         // given
         val name = "SampleName"
-        val class1: KoClass = mockk()
-        every { class1.hasParent(name) } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasParent(name) } returns false
+        val class1: KoClass = mockk {
+            every { hasParent(name) } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParent(name) } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -415,10 +465,12 @@ class KoClassSequenceExtTest {
     fun `withoutParent(name) returns class2 without given parent`() {
         // given
         val name = "SampleName"
-        val class1: KoClass = mockk()
-        every { class1.hasParent(name) } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasParent(name) } returns false
+        val class1: KoClass = mockk {
+            every { hasParent(name) } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParent(name) } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -431,16 +483,20 @@ class KoClassSequenceExtTest {
     @Test
     fun `withParent() with KClass syntax returns SampleClass`() {
         // given
-        val class1: KoClass = mockk()
-        val parent1: KoParent = mockk()
-        every { class1.parents } returns listOf(parent1)
         val name1 = "SampleClass"
-        every { parent1.name } returns name1
-        val class2: KoClass = mockk()
-        val parent2: KoParent = mockk()
-        every { class2.parents } returns listOf(parent2)
         val name2 = "OtherClass"
-        every { parent2.name } returns name2
+        val parent1: KoParent = mockk {
+            every { name } returns name1
+        }
+        val class1: KoClass = mockk {
+            every { parents } returns listOf(parent1)
+        }
+        val parent2: KoParent = mockk {
+            every { name } returns name2
+        }
+        val class2: KoClass = mockk {
+            every { parents } returns listOf(parent2)
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -453,16 +509,20 @@ class KoClassSequenceExtTest {
     @Test
     fun `withoutParent() with KClass syntax returns OtherClass`() {
         // given
-        val class1: KoClass = mockk()
-        val parent1: KoParent = mockk()
-        every { class1.parents } returns listOf(parent1)
         val name1 = "SampleClass"
-        every { parent1.name } returns name1
-        val class2: KoClass = mockk()
-        val parent2: KoParent = mockk()
-        every { class2.parents } returns listOf(parent2)
         val name2 = "OtherClass"
-        every { parent2.name } returns name2
+        val parent1: KoParent = mockk {
+            every { name } returns name1
+        }
+        val class1: KoClass = mockk {
+            every { parents } returns listOf(parent1)
+        }
+        val parent2: KoParent = mockk {
+            every { name } returns name2
+        }
+        val class2: KoClass = mockk {
+            every { parents } returns listOf(parent2)
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -475,10 +535,12 @@ class KoClassSequenceExtTest {
     @Test
     fun `withAnyParentInterface() returns class1 with parent interface`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasParentInterface() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasParentInterface() } returns false
+        val class1: KoClass = mockk {
+            every { hasParentInterface() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParentInterface() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -491,10 +553,12 @@ class KoClassSequenceExtTest {
     @Test
     fun `withoutAnyParentInterface() returns class2 without parent interface`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasParentInterface() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasParentInterface() } returns false
+        val class1: KoClass = mockk {
+            every { hasParentInterface() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParentInterface() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -508,10 +572,12 @@ class KoClassSequenceExtTest {
     fun `withParentInterface(name) returns class1 with given parent interface`() {
         // given
         val name = "SampleName"
-        val class1: KoClass = mockk()
-        every { class1.hasParentInterface(name) } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasParentInterface(name) } returns false
+        val class1: KoClass = mockk {
+            every { hasParentInterface(name) } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParentInterface(name) } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -525,10 +591,12 @@ class KoClassSequenceExtTest {
     fun `withoutParentInterface(name) returns class2 without given parent interface`() {
         // given
         val name = "SampleName"
-        val class1: KoClass = mockk()
-        every { class1.hasParentInterface(name) } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasParentInterface(name) } returns false
+        val class1: KoClass = mockk {
+            every { hasParentInterface(name) } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParentInterface(name) } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -541,16 +609,20 @@ class KoClassSequenceExtTest {
     @Test
     fun `withParentInterface() with KClass syntax returns SampleInterface`() {
         // given
-        val class1: KoClass = mockk()
-        val parent1: KoParent = mockk()
-        every { class1.parentInterfaces } returns listOf(parent1)
         val name1 = "SampleInterface"
-        every { parent1.name } returns name1
-        val class2: KoClass = mockk()
-        val parent2: KoParent = mockk()
-        every { class2.parentInterfaces } returns listOf(parent2)
         val name2 = "OtherInterface"
-        every { parent2.name } returns name2
+        val parent1: KoParent = mockk {
+            every { name } returns name1
+        }
+        val class1: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent1)
+        }
+        val parent2: KoParent = mockk {
+            every { name } returns name2
+        }
+        val class2: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent2)
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -563,16 +635,20 @@ class KoClassSequenceExtTest {
     @Test
     fun `withoutParentInterface() with KClass syntax returns OtherInterface`() {
         // given
-        val class1: KoClass = mockk()
-        val parent1: KoParent = mockk()
-        every { class1.parentInterfaces } returns listOf(parent1)
         val name1 = "SampleInterface"
-        every { parent1.name } returns name1
-        val class2: KoClass = mockk()
-        val parent2: KoParent = mockk()
-        every { class2.parentInterfaces } returns listOf(parent2)
         val name2 = "OtherInterface"
-        every { parent2.name } returns name2
+        val parent1: KoParent = mockk {
+            every { name } returns name1
+        }
+        val class1: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent1)
+        }
+        val parent2: KoParent = mockk {
+            every { name } returns name2
+        }
+        val class2: KoClass = mockk {
+            every { parentInterfaces } returns listOf(parent2)
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -585,10 +661,12 @@ class KoClassSequenceExtTest {
     @Test
     fun `withAnyParentClass() returns class1 with parent class`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasParentClass() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasParentClass() } returns false
+        val class1: KoClass = mockk {
+            every { hasParentClass() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParentClass() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -601,10 +679,12 @@ class KoClassSequenceExtTest {
     @Test
     fun `withoutAnyParentClass() returns class2 without parent class`() {
         // given
-        val class1: KoClass = mockk()
-        every { class1.hasParentClass() } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasParentClass() } returns false
+        val class1: KoClass = mockk {
+            every { hasParentClass() } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParentClass() } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -618,10 +698,12 @@ class KoClassSequenceExtTest {
     fun `withParentClass(name) returns class1 with given parent class`() {
         // given
         val name = "SampleName"
-        val class1: KoClass = mockk()
-        every { class1.hasParentClass(name) } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasParentClass(name) } returns false
+        val class1: KoClass = mockk {
+            every { hasParentClass(name) } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParentClass(name) } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -635,10 +717,12 @@ class KoClassSequenceExtTest {
     fun `withoutParentClass(name) returns class2 without given parent class`() {
         // given
         val name = "SampleName"
-        val class1: KoClass = mockk()
-        every { class1.hasParentClass(name) } returns true
-        val class2: KoClass = mockk()
-        every { class2.hasParentClass(name) } returns false
+        val class1: KoClass = mockk {
+            every { hasParentClass(name) } returns true
+        }
+        val class2: KoClass = mockk {
+            every { hasParentClass(name) } returns false
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -651,16 +735,20 @@ class KoClassSequenceExtTest {
     @Test
     fun `withParentClass() with KClass syntax returns SampleClass`() {
         // given
-        val class1: KoClass = mockk()
-        val parent1: KoParent = mockk()
-        every { class1.parentClass } returns parent1
         val name1 = "SampleClass"
-        every { parent1.name } returns name1
-        val class2: KoClass = mockk()
-        val parent2: KoParent = mockk()
-        every { class2.parentClass } returns parent2
         val name2 = "OtherClass"
-        every { parent2.name } returns name2
+        val parent1: KoParent = mockk {
+            every { name } returns name1
+        }
+        val class1: KoClass = mockk {
+            every { parentClass } returns parent1
+        }
+        val parent2: KoParent = mockk {
+            every { name } returns name2
+        }
+        val class2: KoClass = mockk {
+            every { parentClass } returns parent2
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
@@ -673,16 +761,20 @@ class KoClassSequenceExtTest {
     @Test
     fun `withoutParentClass() with KClass syntax returns OtherClass`() {
         // given
-        val class1: KoClass = mockk()
-        val parent1: KoParent = mockk()
-        every { class1.parentClass } returns parent1
         val name1 = "SampleClass"
-        every { parent1.name } returns name1
-        val class2: KoClass = mockk()
-        val parent2: KoParent = mockk()
-        every { class2.parentClass } returns parent2
         val name2 = "OtherClass"
-        every { parent2.name } returns name2
+        val parent1: KoParent = mockk {
+            every { name } returns name1
+        }
+        val class1: KoClass = mockk {
+            every { parentClass } returns parent1
+        }
+        val parent2: KoParent = mockk {
+            every { name } returns name2
+        }
+        val class2: KoClass = mockk {
+            every { parentClass } returns parent2
+        }
         val classes = sequenceOf(class1, class2)
 
         // when
