@@ -10,12 +10,17 @@ open class KoAnnotation private constructor(
 
     override val name by lazy { ktAnnotationEntry.shortName.toString() }
 
-    val fullyQualifiedName: String? by lazy {
+    val fullyQualifiedName: String by lazy {
         containingFile
             .imports
             .firstOrNull { it.text.endsWith(".$type") }
-            ?.name
+            ?.name ?: name
     }
+
+    fun representsType(name: String) =
+        name == fullyQualifiedName.substringAfterLast(".") || name == fullyQualifiedName
+
+    inline fun <reified T>representsType() = T::class.qualifiedName == fullyQualifiedName
 
     companion object {
         private val cache = KoDeclarationCache<KoAnnotation>()
