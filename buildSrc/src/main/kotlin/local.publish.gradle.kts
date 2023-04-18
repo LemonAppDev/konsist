@@ -51,20 +51,27 @@ publishing {
 
     repositories {
         maven {
-            val releaseProperty = providers.gradleProperty("release")
-            val snapshotProperty = providers.gradleProperty("snapshot")
+            val repositoryProperty = providers.gradleProperty("repository")
 
-            if (releaseProperty.isPresent && snapshotProperty.isPresent) {
-                throw GradleException("Both release and snapshot properties are provided. Only one of them should be provided.")
+            when (repositoryProperty.get()) {
+                "release" -> {
+                    url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                    setCredentialsFromGradleProperties()
+                }
+
+                "snapshot" -> {
+                    url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots")
+                    setCredentialsFromGradleProperties()
+                }
+
+                "local" -> {
+                    url = mavenLocal().url
+                }
+
+                else -> {
+                    throw GradleException("Unknown repository: ${repositoryProperty.get()}")
+                }
             }
-
-            val repositoryUrl = when {
-                releaseProperty.isPresent -> ""
-                snapshotProperty.isPresent -> ""
-                else -> mavenLocal().url
-            }
-
-            url = uri(repositoryUrl)
         }
     }
 }
@@ -86,6 +93,24 @@ signing {
         } else if (!signingPasswordProperty.isPresent) {
             println("signingPassword is not provided. Skipping signing.")
         }
+    }
+}
+
+fun MavenArtifactRepository.setCredentialsFromGradleProperties() {
+    val ossrhUsername = providers.gradleProperty("ossrhUsername")
+    val ossrhPassword = providers.gradleProperty("ossrhPassword")
+
+    if (!ossrhUsername.isPresent) {
+        throw GradleException("ossrhUsername is not provided.")
+    }
+
+    if (!ossrhPassword.isPresent) {
+        throw GradleException("ossrhPassword is not provided.")
+    }
+
+    credentials {
+        username = ossrhUsername.get()
+        password = ossrhPassword.get()
     }
 }
 

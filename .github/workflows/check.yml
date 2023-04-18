@@ -137,4 +137,4 @@ jobs:
           distribution: 'zulu'
 
       - name: Sign
-        run: ./gradlew :lib:signKonsistPublication -PsigningKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' -PsigningPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+        run: ./gradlew :lib:signKonsistPublication -PsigningKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' -PsigningPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' -PossrhUsername='${{secrets.OSSRH_USERNAME}}' -PossrhPassword='${{secrets.OSSRH_PASSWORD}}'
