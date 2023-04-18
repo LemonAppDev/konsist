@@ -74,10 +74,10 @@ class KoAnnotationSequenceExtTest {
         val name1 = "SampleAnnotation"
         val name2 = "OtherAnnotation"
         val annotation1: KoAnnotation = mockk {
-        every { name } returns name1
+            every { name } returns name1
         }
         val annotation2: KoAnnotation = mockk {
-        every { name } returns name2
+            every { name } returns name2
         }
         val annotations = sequenceOf(annotation1, annotation2)
 
@@ -134,10 +134,10 @@ class KoAnnotationSequenceExtTest {
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
         val annotation1: KoAnnotation = mockk {
-        every { fullyQualifiedName } returns fullyQualifiedName1
+            every { fullyQualifiedName } returns fullyQualifiedName1
         }
         val annotation2: KoAnnotation = mockk {
-        every { fullyQualifiedName } returns fullyQualifiedName2
+            every { fullyQualifiedName } returns fullyQualifiedName2
         }
         val annotations = sequenceOf(annotation1, annotation2)
 
@@ -154,10 +154,10 @@ class KoAnnotationSequenceExtTest {
         val fullyQualifiedName1 = "com.lemon.konsist.testdata.SampleAnnotation"
         val fullyQualifiedName2 = "com.lemon.konsist.testdata.OtherAnnotation"
         val annotation1: KoAnnotation = mockk {
-        every { fullyQualifiedName } returns fullyQualifiedName1
+            every { fullyQualifiedName } returns fullyQualifiedName1
         }
         val annotation2: KoAnnotation = mockk {
-        every { fullyQualifiedName } returns fullyQualifiedName2
+            every { fullyQualifiedName } returns fullyQualifiedName2
         }
         val annotations = sequenceOf(annotation1, annotation2)
 

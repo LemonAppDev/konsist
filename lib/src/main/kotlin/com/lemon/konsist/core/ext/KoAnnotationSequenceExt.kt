@@ -20,6 +20,8 @@ fun Sequence<KoAnnotation>.withFullyQualifiedClassName(name: String) =
 inline fun <reified T> Sequence<KoAnnotation>.withFullyQualifiedClassName() =
     filter { it.fullyQualifiedName == T::class.qualifiedName }
 
-fun Sequence<KoAnnotation>.withoutFullyQualifiedClassName(name: String) = filterNot { it.fullyQualifiedName == name }
+fun Sequence<KoAnnotation>.withoutFullyQualifiedClassName(name: String) =
+    filterNot { it.fullyQualifiedName == name }
 
-inline fun <reified T> Sequence<KoAnnotation>.withoutFullyQualifiedClassName() = filterNot { it.fullyQualifiedName == T::class.qualifiedName }
+inline fun <reified T> Sequence<KoAnnotation>.withoutFullyQualifiedClassName() =
+    filterNot { it.fullyQualifiedName == T::class.qualifiedName }
