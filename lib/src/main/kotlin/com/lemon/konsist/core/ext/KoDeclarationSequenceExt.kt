@@ -25,3 +25,51 @@ fun Sequence<KoDeclaration>.withoutInternalModifier() = filterNot { it.hasIntern
 fun Sequence<KoDeclaration>.withTopLevel() = filter { it.isTopLevel() }
 
 fun Sequence<KoDeclaration>.withoutTopLevel() = filterNot { it.isTopLevel() }
+
+fun Sequence<KoDeclaration>.withAnnotations(vararg annotation: String) = filter { koDeclaration ->
+    annotation.all { koDeclaration.hasAnnotation(it) }
+}
+
+fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotation: String) = filter { koDeclaration ->
+    annotation.none { koDeclaration.hasAnnotation(it) }
+}
+
+fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotation: String) = filter { koDeclaration ->
+    annotation.any { koDeclaration.hasAnnotation(it) }
+}
+
+fun Sequence<KoDeclaration>.withModifiers(vararg modifier: String) = filter { it.hasModifiers(*modifier) }
+
+fun Sequence<KoDeclaration>.withoutModifiers(vararg modifier: String) = filter { koDeclaration ->
+    modifier.none { koDeclaration.hasModifiers(it) }
+}
+
+fun Sequence<KoDeclaration>.withSomeModifiers(vararg modifier: String) = filter { koDeclaration ->
+    modifier.any { koDeclaration.hasModifiers(it) }
+}
+
+fun Sequence<KoDeclaration>.withPackages(vararg packages: String) = filter { koDeclaration ->
+    packages.all { koDeclaration.resideInPackages(it) }
+}
+
+fun Sequence<KoDeclaration>.withoutPackages(vararg packages: String) = filter { koDeclaration ->
+    packages.all { koDeclaration.resideOutsidePackages(it) }
+}
+
+fun Sequence<KoDeclaration>.withSomePackages(vararg packages: String) = filter { koDeclaration ->
+    packages.any { koDeclaration.resideInPackages(it) }
+}
+
+fun Sequence<KoDeclaration>.withPaths(vararg paths: String) = filter { koDeclaration ->
+    paths.all { koDeclaration.resideInPath(it) }
+}
+
+fun Sequence<KoDeclaration>.withoutPaths(vararg paths: String) = filter { koDeclaration ->
+    paths.all { koDeclaration.resideOutsidePath(it) }
+}
+
+fun Sequence<KoDeclaration>.withSomePaths(vararg paths: String) = filter { koDeclaration ->
+    paths.any { koDeclaration.resideInPath(it) }
+}
+
+
