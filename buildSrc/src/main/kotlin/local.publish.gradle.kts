@@ -51,25 +51,28 @@ publishing {
 
     repositories {
         maven {
-            val repositoryProperty = providers.gradleProperty("repository")
+            val releaseTarget = providers.gradleProperty("releaseTarget")
 
-            when (repositoryProperty.get()) {
-                "release" -> {
+            when (releaseTarget.get()) {
+                "production" -> {
+                    name = "production"
                     url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
                     setCredentialsFromGradleProperties()
                 }
 
                 "snapshot" -> {
+                    name = "snapshot"
                     url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots")
                     setCredentialsFromGradleProperties()
                 }
 
                 "local" -> {
+                    name = "local"
                     url = mavenLocal().url
                 }
 
                 else -> {
-                    throw GradleException("Unknown repository: ${repositoryProperty.get()}")
+                    throw GradleException("Unknown repository: ${releaseTarget.get()}")
                 }
             }
         }
