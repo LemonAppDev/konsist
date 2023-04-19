@@ -20,6 +20,7 @@ class KoTypeTest {
         // then
         sut?.run {
             sourceType shouldBeEqualTo "SampleType"
+            importAliasName shouldBeEqualTo "ImportAlias"
             name shouldBeEqualTo "ImportAlias"
             isImportAlias() shouldBeEqualTo true
             fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
@@ -40,11 +41,13 @@ class KoTypeTest {
         // then
         sut?.run {
             sourceType shouldBeEqualTo "SampleType"
-            name shouldBeEqualTo ""
+            importAliasName shouldBeEqualTo ""
+            name shouldBeEqualTo "SampleType"
             isImportAlias() shouldBeEqualTo false
             fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kotype/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotype/snippet/", fileName)
 }
