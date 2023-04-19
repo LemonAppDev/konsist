@@ -17,3 +17,12 @@ fun Sequence<KoParameter>.withoutCrossInlineModifier() = filterNot { it.hasCross
 fun Sequence<KoParameter>.withDefaultValue() = filter { it.hasDefaultValue() }
 
 fun Sequence<KoParameter>.withoutDefaultValue() = filterNot { it.hasDefaultValue() }
+
+fun Sequence<KoParameter>.withType(type: String) = filter { it.type.name == type }
+
+fun Sequence<KoParameter>.withoutType(type: String) = filterNot { it.type.name == type }
+
+inline fun <reified T> Sequence<KoParameter>.withTypeOf() = filter { T::class.simpleName == it.type.name }
+
+inline fun <reified T> Sequence<KoParameter>.withoutTypeOf() =
+    filterNot { T::class.simpleName == it.type.name }

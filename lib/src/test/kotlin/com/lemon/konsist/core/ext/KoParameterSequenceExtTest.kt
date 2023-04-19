@@ -1,6 +1,7 @@
 package com.lemon.konsist.core.ext
 
 import com.lemon.konsist.core.declaration.KoParameter
+import com.lemon.konsist.testdata.SampleType
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -146,6 +147,86 @@ class KoParameterSequenceExtTest {
 
         // when
         val sut = parameters.withoutDefaultValue()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(parameter2)
+    }
+
+    @Test
+    fun `withType(name) returns parameter1 which has given type`() {
+        // given
+        val typeName1 = "SampleType"
+        val typeName2 = "OtherType"
+        val parameter1: KoParameter = mockk {
+            every { type.name } returns typeName1
+        }
+        val parameter2: KoParameter = mockk {
+            every { type.name } returns typeName2
+        }
+        val properties = sequenceOf(parameter1, parameter2)
+
+        // when
+        val sut = properties.withType(typeName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(parameter1)
+    }
+
+    @Test
+    fun `withoutType(name) returns parameter2 which has not given type`() {
+        // given
+        val typeName1 = "SampleType"
+        val typeName2 = "OtherType"
+        val parameter1: KoParameter = mockk {
+            every { type.name } returns typeName1
+        }
+        val parameter2: KoParameter = mockk {
+            every { type.name } returns typeName2
+        }
+        val properties = sequenceOf(parameter1, parameter2)
+
+        // when
+        val sut = properties.withoutType(typeName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(parameter2)
+    }
+
+    @Test
+    fun `withTypeOf() returns parameter1 which has given type`() {
+        // given
+        val typeName1 = "SampleType"
+        val typeName2 = "OtherType"
+        val parameter1: KoParameter = mockk {
+            every { type.name } returns typeName1
+        }
+        val parameter2: KoParameter = mockk {
+            every { type.name } returns typeName2
+        }
+        val properties = sequenceOf(parameter1, parameter2)
+
+        // when
+        val sut = properties.withTypeOf<SampleType>()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(parameter1)
+    }
+
+    @Test
+    fun `withoutTypeOf() returns parameter2 which has not given type`() {
+        // given
+        val typeName1 = "SampleType"
+        val typeName2 = "OtherType"
+        val parameter1: KoParameter = mockk {
+            every { type.name } returns typeName1
+        }
+        val parameter2: KoParameter = mockk {
+            every { type.name } returns typeName2
+        }
+        val properties = sequenceOf(parameter1, parameter2)
+
+        // when
+        val sut = properties.withoutTypeOf<SampleType>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(parameter2)
