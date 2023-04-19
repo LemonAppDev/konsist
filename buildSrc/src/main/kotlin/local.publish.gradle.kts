@@ -73,10 +73,6 @@ publishing {
             // url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
         }
 
-//        mavenCentral() {
-//            setCredentialsFromGradleProperties()
-//        }
-
         mavenLocal()
     }
 }
@@ -104,14 +100,6 @@ signing {
 fun MavenArtifactRepository.setCredentialsFromGradleProperties() {
     val ossrhUsername = providers.gradleProperty("ossrhUsername")
     val ossrhPassword = providers.gradleProperty("ossrhPassword")
-
-//    if (!ossrhUsername.isPresent) {
-//        throw GradleException("ossrhUsername is not provided.")
-//    }
-//
-//    if (!ossrhPassword.isPresent) {
-//        throw GradleException("ossrhPassword is not provided.")
-//    }
 
     credentials {
         username = ossrhUsername.get()
