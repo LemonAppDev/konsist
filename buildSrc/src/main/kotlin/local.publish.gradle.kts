@@ -66,8 +66,8 @@ publishing {
 }
 
 signing {
-    val signingKey = getLocalOrGradleProperty("signingKey")
-    val signingPassword = getLocalOrGradleProperty("signingPassword")
+    val signingKey = getLocalOrGradleProperty("konsist.signingKey")
+    val signingPassword = getLocalOrGradleProperty("konsist.signingPassword")
 
     if (signingKey != null && signingPassword != null) {
         useInMemoryPgpKeys(
@@ -86,8 +86,8 @@ signing {
 }
 
 fun MavenArtifactRepository.setCredentialsFromGradleProperties() {
-    val ossrhUsername = getLocalOrGradleProperty("ossrhUsername")
-    val ossrhPassword = getLocalOrGradleProperty("ossrhPassword")
+    val ossrhUsername = getLocalOrGradleProperty("konsist.ossrhUsername")
+    val ossrhPassword = getLocalOrGradleProperty("konsist.ossrhPassword")
 
     credentials {
         username = ossrhUsername
