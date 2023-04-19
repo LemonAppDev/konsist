@@ -1,6 +1,9 @@
 package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.declaration.KoFile
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.SampleAnnotation1
+import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -353,4 +356,119 @@ class KoFileSequenceExtTest {
         sut.toList() shouldBeEqualTo listOf(file1, file2)
     }
 
+    @Test
+    fun `withAnnotations(KClass) returns file1 with given annotation`() {
+        // given
+        val annotation = "SampleAnnotation"
+        val file1: KoFile = mockk {
+            every { hasAnnotation(annotation) } returns true
+        }
+        val file2: KoFile = mockk {
+            every { hasAnnotation(annotation) } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withAnnotations(SampleAnnotation::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
+    }
+
+    @Test
+    fun `withoutAnnotations(KClass) returns file2 without given annotation`() {
+        // given
+        val annotation = "SampleAnnotation"
+        val file1: KoFile = mockk {
+            every { hasAnnotation(annotation) } returns true
+        }
+        val file2: KoFile = mockk {
+            every { hasAnnotation(annotation) } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withoutAnnotations(SampleAnnotation::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
+    }
+
+    @Test
+    fun `withAnnotations(KClass) returns file1 with annotations`() {
+        // given
+        val annotation1 = "SampleAnnotation1"
+        val annotation2 = "SampleAnnotation2"
+        val file1: KoFile = mockk {
+            every { hasAnnotation(annotation1) } returns true
+            every { hasAnnotation(annotation2) } returns true
+        }
+        val file2: KoFile = mockk {
+            every { hasAnnotation(annotation1) } returns false
+            every { hasAnnotation(annotation2) } returns true
+        }
+        val file3: KoFile = mockk {
+            every { hasAnnotation(annotation1) } returns false
+            every { hasAnnotation(annotation2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
+
+        // when
+        val sut = files.withAnnotations(SampleAnnotation1::class, SampleAnnotation2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
+    }
+
+    @Test
+    fun `withoutAnnotations(KClass) returns file3 without annotations`() {
+        // given
+        val annotation1 = "SampleAnnotation1"
+        val annotation2 = "SampleAnnotation2"
+        val file1: KoFile = mockk {
+            every { hasAnnotation(annotation1) } returns true
+            every { hasAnnotation(annotation2) } returns true
+        }
+        val file2: KoFile = mockk {
+            every { hasAnnotation(annotation1) } returns false
+            every { hasAnnotation(annotation2) } returns true
+        }
+        val file3: KoFile = mockk {
+            every { hasAnnotation(annotation1) } returns false
+            every { hasAnnotation(annotation2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
+
+        // when
+        val sut = files.withoutAnnotations(SampleAnnotation1::class, SampleAnnotation2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file3)
+    }
+
+    @Test
+    fun `withSomeAnnotations(KClass) returns file1 and file2 which have at least one of given annotations`() {
+        // given
+        val annotation1 = "SampleAnnotation1"
+        val annotation2 = "SampleAnnotation2"
+        val file1: KoFile = mockk {
+            every { hasAnnotation(annotation1) } returns true
+            every { hasAnnotation(annotation2) } returns true
+        }
+        val file2: KoFile = mockk {
+            every { hasAnnotation(annotation1) } returns false
+            every { hasAnnotation(annotation2) } returns true
+        }
+        val file3: KoFile = mockk {
+            every { hasAnnotation(annotation1) } returns false
+            every { hasAnnotation(annotation2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
+
+        // when
+        val sut = files.withSomeAnnotations(SampleAnnotation1::class, SampleAnnotation2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1, file2)
+    }
 }

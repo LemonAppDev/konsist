@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.declaration.KoFile
+import kotlin.reflect.KClass
 
 fun Sequence<KoFile>.withImports(vararg import: String) = filter { koFile ->
     import.all { koFile.hasImport(it) }
@@ -38,4 +39,26 @@ fun Sequence<KoFile>.withoutAnnotations(vararg annotation: String) = filter { ko
     annotation.none { koFile.hasAnnotation(it) }
 }
 
+fun Sequence<KoFile>.withAnnotations(vararg annotation: KClass<*>) = filter { koFile ->
+    annotation.all { annotation ->
+        annotation
+            .simpleName
+            ?.let { it -> koFile.hasAnnotation(it) } ?: false
+    }
+}
 
+fun Sequence<KoFile>.withSomeAnnotations(vararg annotation: KClass<*>) = filter { koFile ->
+    annotation.any { annotation ->
+        annotation
+            .simpleName
+            ?.let { it -> koFile.hasAnnotation(it) } ?: false
+    }
+}
+
+fun Sequence<KoFile>.withoutAnnotations(vararg annotation: KClass<*>) = filter { koFile ->
+    annotation.none { annotation ->
+        annotation
+            .simpleName
+            ?.let { it -> koFile.hasAnnotation(it) } ?: false
+    }
+}
