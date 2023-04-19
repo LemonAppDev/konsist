@@ -13,7 +13,10 @@ class ParametrizedDeclarationForFunctionTest {
             .first()
 
         // then
-        sut.parameters shouldBeEqualTo emptyList()
+        sut.run {
+            parameters shouldBeEqualTo emptyList()
+            hasParameterNamed() shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -41,6 +44,7 @@ class ParametrizedDeclarationForFunctionTest {
 
         // then
         sut.run {
+            hasParameterNamed() shouldBeEqualTo true
             hasParameterNamed("sampleProperty") shouldBeEqualTo true
             hasParameterNamed("otherProperty") shouldBeEqualTo false
         }

@@ -13,7 +13,10 @@ class ParametrizedDeclarationForPrimaryConstructorTest {
             .firstNotNullOf { it.primaryConstructor }
 
         // then
-        sut.parameters shouldBeEqualTo emptyList()
+        sut.run {
+            parameters shouldBeEqualTo emptyList()
+            hasParameterNamed() shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -41,6 +44,7 @@ class ParametrizedDeclarationForPrimaryConstructorTest {
 
         // then
         sut.run {
+            hasParameterNamed() shouldBeEqualTo true
             hasParameterNamed("sampleParameter") shouldBeEqualTo true
             hasParameterNamed("otherParameter") shouldBeEqualTo false
         }
