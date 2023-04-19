@@ -49,3 +49,19 @@ fun Sequence<KoProperty>.withoutExtension() = filterNot { it.isExtension() }
 fun Sequence<KoProperty>.withDelegate(name: String? = null) = filter { it.hasDelegate(name) }
 
 fun Sequence<KoProperty>.withoutDelegate(name: String? = null) = filterNot { it.hasDelegate(name) }
+
+fun Sequence<KoProperty>.withExplicitType(type: String? = null) = filter {
+    if (type == null) {
+        it.explicitType != null
+    }
+    else {
+        it.explicitType?.name == type
+    }
+}
+
+fun Sequence<KoProperty>.withoutExplicitType(type: String? = null) = this - withExplicitType(type).toSet()
+
+inline fun <reified T> Sequence<KoProperty>.withExplicitTypeTyped() = filter { T::class.simpleName == it.explicitType?.name }
+
+inline fun <reified T> Sequence<KoProperty>.withoutExplicitTypeTyped() =
+    filterNot { T::class.simpleName == it.explicitType?.name }

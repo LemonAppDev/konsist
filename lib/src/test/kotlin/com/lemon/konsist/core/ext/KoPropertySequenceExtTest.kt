@@ -1,6 +1,8 @@
 package com.lemon.konsist.core.ext
 
 import com.lemon.konsist.core.declaration.KoProperty
+import com.lemon.konsist.core.declaration.KoType
+import com.lemon.konsist.testdata.SampleType
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -472,6 +474,124 @@ class KoPropertySequenceExtTest {
 
         // when
         val sut = properties.withoutDelegate(delegateName)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(property2)
+    }
+
+    @Test
+    fun `withExplicitType() returns property1 which has explicitType`() {
+        // given
+        val type: KoType = mockk()
+        val property1: KoProperty = mockk {
+            every { explicitType } returns type
+        }
+        val property2: KoProperty = mockk {
+            every { explicitType } returns null
+        }
+        val properties = sequenceOf(property1, property2)
+
+        // when
+        val sut = properties.withExplicitType()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(property1)
+    }
+
+    @Test
+    fun `withExplicitType(name) returns property1 which has given explicitType`() {
+        // given
+        val typeName1 = "SampleType"
+        val typeName2 = "OtherType"
+        val property1: KoProperty = mockk {
+            every { explicitType?.name } returns typeName1
+        }
+        val property2: KoProperty = mockk {
+            every { explicitType?.name } returns typeName2
+        }
+        val properties = sequenceOf(property1, property2)
+
+        // when
+        val sut = properties.withExplicitType(typeName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(property1)
+    }
+
+    @Test
+    fun `withoutExplicitType() returns property2 which has not explicitType`() {
+        // given
+        val type: KoType = mockk()
+        val property1: KoProperty = mockk {
+            every { explicitType } returns type
+        }
+        val property2: KoProperty = mockk {
+            every { explicitType } returns null
+        }
+        val properties = sequenceOf(property1, property2)
+
+        // when
+        val sut = properties.withoutExplicitType()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(property2)
+    }
+
+    @Test
+    fun `withoutExplicitType(name) returns property2 which has not given explicitType`() {
+        // given
+        val typeName1 = "SampleType"
+        val typeName2 = "OtherType"
+        val property1: KoProperty = mockk {
+            every { explicitType?.name } returns typeName1
+        }
+        val property2: KoProperty = mockk {
+            every { explicitType?.name } returns typeName2
+        }
+        val properties = sequenceOf(property1, property2)
+
+        // when
+        val sut = properties.withoutExplicitType(typeName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(property2)
+    }
+
+    @Test
+    fun `withExplicitType() with KClass returns property1 which has given explicitType`() {
+        // given
+        val typeName1 = "SampleType"
+        val typeName2 = "OtherType"
+        val property1: KoProperty = mockk {
+            every { explicitType?.name } returns typeName1
+        }
+        val property2: KoProperty = mockk {
+            every { explicitType?.name } returns typeName2
+        }
+        val properties = sequenceOf(property1, property2)
+
+        // when
+        val sut = properties.withExplicitTypeTyped<SampleType>()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(property1)
+    }
+
+    @Test
+    fun `withoutExplicitType() with KClass returns property2 which has not given explicitType`() {
+        // given
+        val typeName1 = "SampleType"
+        val typeName2 = "OtherType"
+        val property1: KoProperty = mockk {
+            every { explicitType?.name } returns typeName1
+        }
+        val property2: KoProperty = mockk {
+            every { explicitType?.name } returns typeName2
+        }
+        val properties = sequenceOf(property1, property2)
+
+        // when
+        val sut = properties.withoutExplicitTypeTyped<SampleType>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(property2)
