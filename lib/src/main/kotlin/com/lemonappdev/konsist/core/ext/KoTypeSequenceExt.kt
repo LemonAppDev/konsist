@@ -19,3 +19,7 @@ inline fun <reified T> Sequence<KoType>.withoutImportAliasName() =
 fun Sequence<KoType>.withImportAliasName(name: String) = filter { it.importAliasName == name }
 
 fun Sequence<KoType>.withoutImportAliasName(name: String) = filterNot { it.importAliasName == name }
+
+fun Sequence<KoType>.withFullyQualifiedName(name: String) = filter { it.fullyQualifiedName == name }
+
+fun Sequence<KoType>.withoutFullyQualifiedName(name: String) = filterNot { it.fullyQualifiedName == name }

@@ -188,4 +188,44 @@ class KoTypeSequenceExtTest {
         // then
         sut.toList() shouldBeEqualTo listOf(type2)
     }
+
+    @Test
+    fun `withFullyQualifiedName() returns type1 which has given name`() {
+        // given
+        val fullyQualifiedName1 = "fullyQualifiedName1"
+        val fullyQualifiedName2 = "fullyQualifiedName2"
+        val type1: KoType = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName1
+        }
+        val type2: KoType = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName2
+        }
+        val types = sequenceOf(type1, type2)
+
+        // when
+        val sut = types.withFullyQualifiedName(fullyQualifiedName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(type1)
+    }
+
+    @Test
+    fun `withoutFullyQualifiedName() returns type2 which has not given name`() {
+        // given
+        val fullyQualifiedName1 = "fullyQualifiedName1"
+        val fullyQualifiedName2 = "fullyQualifiedName2"
+        val type1: KoType = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName1
+        }
+        val type2: KoType = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName2
+        }
+        val types = sequenceOf(type1, type2)
+
+        // when
+        val sut = types.withoutFullyQualifiedName(fullyQualifiedName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(type2)
+    }
 }
