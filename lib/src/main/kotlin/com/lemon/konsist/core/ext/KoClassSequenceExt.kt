@@ -61,13 +61,13 @@ fun Sequence<KoClass>.withParent() = filter { it.hasParent() }
 
 fun Sequence<KoClass>.withoutParent() = filterNot { it.hasParent() }
 
-inline fun <reified T> Sequence<KoClass>.withParentTyped() = filter { koClass ->
+inline fun <reified T> Sequence<KoClass>.withParentOf() = filter { koClass ->
     koClass
         .parents
         .any { it.name == T::class.simpleName }
 }
 
-inline fun <reified T> Sequence<KoClass>.withoutParentTyped() = this - withParentTyped<T>().toSet()
+inline fun <reified T> Sequence<KoClass>.withoutParentOf() = this - withParentOf<T>().toSet()
 
 fun Sequence<KoClass>.withParents(vararg name: String) = filter { koClass -> name.all { koClass.hasParent(it) } }
 
@@ -103,13 +103,13 @@ fun Sequence<KoClass>.withParentInterface() = filter { it.hasParentInterface() }
 
 fun Sequence<KoClass>.withoutParentInterface() = filterNot { it.hasParentInterface() }
 
-inline fun <reified T> Sequence<KoClass>.withParentInterfaceTyped() = filter { koClass ->
+inline fun <reified T> Sequence<KoClass>.withParentInterfaceOf() = filter { koClass ->
     koClass
         .parentInterfaces
         .any { it.name == T::class.simpleName }
 }
 
-inline fun <reified T> Sequence<KoClass>.withoutParentInterfaceTyped() = this - withParentInterfaceTyped<T>().toSet()
+inline fun <reified T> Sequence<KoClass>.withoutParentInterfaceOf() = this - withParentInterfaceOf<T>().toSet()
 
 fun Sequence<KoClass>.withParentInterfaces(vararg name: String) =
     filter { koClass -> name.all { koClass.hasParentInterface(it) } }
@@ -148,10 +148,10 @@ fun Sequence<KoClass>.withParentClass(name: String? = null) = filter { it.hasPar
 
 fun Sequence<KoClass>.withoutParentClass(name: String? = null) = filterNot { it.hasParentClass(name) }
 
-inline fun <reified T> Sequence<KoClass>.withParentClassTyped() = filter {
+inline fun <reified T> Sequence<KoClass>.withParentClassOf() = filter {
     it
         .parentClass
         ?.name == T::class.simpleName
 }
 
-inline fun <reified T> Sequence<KoClass>.withoutParentClassTyped() = this - withParentClassTyped<T>().toSet()
+inline fun <reified T> Sequence<KoClass>.withoutParentClassOf() = this - withParentClassOf<T>().toSet()
