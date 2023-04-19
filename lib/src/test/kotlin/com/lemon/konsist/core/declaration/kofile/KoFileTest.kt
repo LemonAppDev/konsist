@@ -194,7 +194,7 @@ class KoFileTest {
 
         // then
         sut.run {
-            annotations.map { it.type } shouldBeEqualTo listOf("SampleAnnotation")
+            annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation")
             hasAnnotation("SampleAnnotation") shouldBeEqualTo true
             hasAnnotation("SampleAnnotation1") shouldBeEqualTo false
             hasAnnotation("com.lemon.konsist.testdata.SampleAnnotation") shouldBeEqualTo true

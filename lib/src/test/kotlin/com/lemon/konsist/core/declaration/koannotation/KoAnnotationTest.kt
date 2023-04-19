@@ -8,19 +8,6 @@ import org.junit.jupiter.api.Test
 
 class KoAnnotationTest {
     @Test
-    fun `annotation-type`() {
-        // given
-        val sut = getSnippetFile("annotation-type")
-            .functions()
-            .first()
-            .annotations
-            .first()
-
-        // then
-        sut.type shouldBeEqualTo "SampleAnnotation"
-    }
-
-    @Test
     fun `annotation-name`() {
         // given
         val sut = getSnippetFile("annotation-name")
