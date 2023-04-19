@@ -1,0 +1,8 @@
+@file:SampleAnnotation
+
+package com.samplepackage
+
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+
+class SampleClass {
+}

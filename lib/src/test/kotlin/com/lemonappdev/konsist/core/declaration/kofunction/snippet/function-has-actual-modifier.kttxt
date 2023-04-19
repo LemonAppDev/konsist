@@ -1,0 +1,6 @@
+package com.lemonappdev.konsist.core.declaration.kofunction.snippet
+
+actual interface SampleInterface {
+    actual fun sampleFunction() {
+    }
+}
