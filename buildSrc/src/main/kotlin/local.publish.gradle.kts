@@ -1,3 +1,4 @@
+import util.getLocalOrGradleProperty
 import java.util.Base64
 
 plugins {
@@ -78,32 +79,32 @@ publishing {
 }
 
 signing {
-    val signingKeyProperty = providers.gradleProperty("signingKey")
-    val signingPasswordProperty = providers.gradleProperty("signingPassword")
+    val signingKey = getLocalOrGradleProperty("signingKey")
+    val signingPassword = getLocalOrGradleProperty("signingPassword")
 
-    if (signingKeyProperty.isPresent && signingPasswordProperty.isPresent) {
+    if (signingKey != null && signingPassword != null) {
         useInMemoryPgpKeys(
-            decodeBase64(signingKeyProperty.get()),
-            decodeBase64(signingPasswordProperty.get()),
+            decodeBase64(signingKey),
+            decodeBase64(signingPassword),
         )
 
         sign(publishing.publications[konsistPublicationName])
     } else {
-        if (!signingKeyProperty.isPresent) {
+        if (signingKey == null) {
             println("signingKey is not provided. Skipping signing.")
-        } else if (!signingPasswordProperty.isPresent) {
+        } else if (signingPassword == null) {
             println("signingPassword is not provided. Skipping signing.")
         }
     }
 }
 
 fun MavenArtifactRepository.setCredentialsFromGradleProperties() {
-    val ossrhUsername = providers.gradleProperty("ossrhUsername")
-    val ossrhPassword = providers.gradleProperty("ossrhPassword")
+    val ossrhUsername = getLocalOrGradleProperty("ossrhUsername")
+    val ossrhPassword = getLocalOrGradleProperty("ossrhPassword")
 
     credentials {
-        username = ossrhUsername.get()
-        password = ossrhPassword.get()
+        username = ossrhUsername
+        password = ossrhPassword
     }
 }
 
