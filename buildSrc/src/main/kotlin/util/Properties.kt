@@ -6,11 +6,7 @@ import java.io.FileInputStream
 import java.io.InputStreamReader
 import java.util.Properties
 
-fun Project.getLocalOrGradleProperty(propertyName: String): String? {
-    println("getProjectProperty name: $propertyName, value ${getProjectProperty(propertyName)}")
-    println("gradleLocalProperty name: $propertyName, value ${gradleLocalProperty(propertyName)}")
-    return gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)
-}
+fun Project.getLocalOrGradleProperty(propertyName: String) = gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)
 
 private fun Project.getProjectProperty(propertyName: String): String? = properties[propertyName] as String?
 
