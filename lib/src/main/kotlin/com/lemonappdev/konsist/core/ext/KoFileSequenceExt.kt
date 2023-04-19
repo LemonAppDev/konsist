@@ -1,3 +1,5 @@
+@file:Suppress("detekt.TooManyFunctions")
+
 package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.declaration.KoFile
@@ -43,7 +45,7 @@ fun Sequence<KoFile>.withAnnotations(vararg annotation: KClass<*>) = filter { ko
     annotation.all { annotation ->
         annotation
             .simpleName
-            ?.let { it -> koFile.hasAnnotation(it) } ?: false
+            ?.let { koFile.hasAnnotation(it) } ?: false
     }
 }
 
@@ -51,7 +53,7 @@ fun Sequence<KoFile>.withSomeAnnotations(vararg annotation: KClass<*>) = filter 
     annotation.any { annotation ->
         annotation
             .simpleName
-            ?.let { it -> koFile.hasAnnotation(it) } ?: false
+            ?.let { koFile.hasAnnotation(it) } ?: false
     }
 }
 
@@ -59,6 +61,6 @@ fun Sequence<KoFile>.withoutAnnotations(vararg annotation: KClass<*>) = filter {
     annotation.none { annotation ->
         annotation
             .simpleName
-            ?.let { it -> koFile.hasAnnotation(it) } ?: false
+            ?.let { koFile.hasAnnotation(it) } ?: false
     }
 }

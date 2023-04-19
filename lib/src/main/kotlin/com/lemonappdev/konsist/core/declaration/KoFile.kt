@@ -88,7 +88,7 @@ class KoFile private constructor(private val ktFile: KtFile) :
     override fun declarations(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ): List<KoDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
