@@ -24,6 +24,12 @@ publishing {
                 name.set("konsist")
                 description.set(konsistDescription)
                 url.set("https://github.com/LemonAppDev/konsist")
+                contributors {
+                    contributor {
+                        name.set("Igor Wojda")
+                        email.set("igor.wojda@gmail.com")
+                    }
+                }
                 properties.set(
                     mapOf(
                         "myProp" to "value",
