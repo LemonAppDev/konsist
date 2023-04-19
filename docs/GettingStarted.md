@@ -1,8 +1,3 @@
-# Introduction
-
-Konsist helps to guard [Kotlin](https://kotlinlang.org/) project consistency. It allows to standardise Kotlin codebase
-and enforce coding conventions tailored for given project.
-
 ## Getting Started
 
 Add the following dependency to the `module\build.gradle.kts` file:
