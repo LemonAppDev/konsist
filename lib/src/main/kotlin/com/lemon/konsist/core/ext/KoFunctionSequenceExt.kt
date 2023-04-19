@@ -1,3 +1,5 @@
+@file:Suppress("detekt.TooManyFunctions")
+
 package com.lemon.konsist.core.ext
 
 import com.lemon.konsist.core.declaration.KoFunction
@@ -53,3 +55,18 @@ fun Sequence<KoFunction>.withoutExpectModifier() = filterNot { it.hasExpectModif
 fun Sequence<KoFunction>.withExtension() = filter { it.isExtension() }
 
 fun Sequence<KoFunction>.withoutExtension() = filterNot { it.isExtension() }
+
+fun Sequence<KoFunction>.withExplicitReturnType(type: String? = null) = filter {
+    if (type == null) {
+        it.hasExplicitReturnType()
+    } else {
+        it.explicitReturnType?.name == type
+    }
+}
+
+fun Sequence<KoFunction>.withoutExplicitReturnType(type: String? = null) = this - withExplicitReturnType(type).toSet()
+
+inline fun <reified T> Sequence<KoFunction>.withExplicitReturnTypeOf() = filter { T::class.simpleName == it.explicitReturnType?.name }
+
+inline fun <reified T> Sequence<KoFunction>.withoutExplicitReturnTypeOf() =
+    filterNot { T::class.simpleName == it.explicitReturnType?.name }
