@@ -23,7 +23,7 @@ publishing {
             pom {
                 name.set("konsist")
                 description.set(konsistDescription)
-                url.set("https://github.com/LemonAppDev/konsist")
+                url.set("https://konsist.lemonappdev.com/")
                 contributors {
                     contributor {
                         name.set("Igor Wojda")
