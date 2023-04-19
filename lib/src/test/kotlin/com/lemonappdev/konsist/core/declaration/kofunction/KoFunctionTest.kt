@@ -194,7 +194,8 @@ class KoFunctionTest {
         sut.run {
             hasExplicitReturnType() shouldBeEqualTo true
             explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
-            explicitReturnType?.name shouldBeEqualTo ""
+            explicitReturnType?.importAliasName shouldBeEqualTo ""
+            explicitReturnType?.name shouldBeEqualTo "SampleType"
             explicitReturnType?.isImportAlias() shouldBeEqualTo false
             explicitReturnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
@@ -211,6 +212,7 @@ class KoFunctionTest {
         sut.run {
             hasExplicitReturnType() shouldBeEqualTo true
             explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
+            explicitReturnType?.importAliasName shouldBeEqualTo "ImportAlias"
             explicitReturnType?.name shouldBeEqualTo "ImportAlias"
             explicitReturnType?.isImportAlias() shouldBeEqualTo true
         }
@@ -227,6 +229,7 @@ class KoFunctionTest {
         sut.run {
             hasExplicitReturnType() shouldBeEqualTo false
             explicitReturnType?.sourceType shouldBeEqualTo null
+            explicitReturnType?.importAliasName shouldBeEqualTo null
             explicitReturnType?.name shouldBeEqualTo null
             explicitReturnType?.isImportAlias() shouldBeEqualTo null
         }
