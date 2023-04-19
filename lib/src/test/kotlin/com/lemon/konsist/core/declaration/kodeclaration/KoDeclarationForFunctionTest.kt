@@ -3,8 +3,8 @@ package com.lemon.konsist.core.declaration.kodeclaration
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemon.konsist.core.const.KoModifier.PRIVATE
 import com.lemon.konsist.core.const.KoModifier.PROTECTED
-import com.lemon.konsist.core.const.KoModifier.SUSPEND
 import com.lemon.konsist.core.const.KoModifier.PUBLIC
+import com.lemon.konsist.core.const.KoModifier.SUSPEND
 import com.lemon.konsist.testdata.NonExistingAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation1
