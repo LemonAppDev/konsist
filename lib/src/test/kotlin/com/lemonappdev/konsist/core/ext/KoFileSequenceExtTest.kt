@@ -160,4 +160,44 @@ class KoFileSequenceExtTest {
         // then
         sut.toList() shouldBeEqualTo listOf(file2)
     }
+
+    @Test
+    fun `withPath(String) returns file1 with given path`() {
+        // given
+        val path1 = "SamplePath"
+        val path2 = "OtherPath"
+        val file1: KoFile = mockk {
+            every { path } returns path1
+        }
+        val file2: KoFile = mockk {
+            every { path } returns path2
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withPath(path1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
+    }
+
+    @Test
+    fun `withoutPath(String) returns file2 without given path`() {
+        // given
+        val path1 = "SamplePath"
+        val path2 = "OtherPath"
+        val file1: KoFile = mockk {
+            every { path } returns path1
+        }
+        val file2: KoFile = mockk {
+            every { path } returns path2
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withoutPath(path1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
+    }
 }

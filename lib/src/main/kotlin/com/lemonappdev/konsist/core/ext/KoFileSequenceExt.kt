@@ -16,4 +16,9 @@ fun Sequence<KoFile>.withoutImports(vararg import: String) = filter { koFile ->
 
 fun Sequence<KoFile>.withPackage(packageName: String) = filter { it.hasPackage(packageName) ?: false }
 
-fun Sequence<KoFile>.withoutPackage(packageName: String) = filterNot { it.hasPackage(packageName) ?: false}
+fun Sequence<KoFile>.withoutPackage(packageName: String) = filterNot { it.hasPackage(packageName) ?: false }
+
+fun Sequence<KoFile>.withPath(path: String) = filter { it.path == path  }
+
+fun Sequence<KoFile>.withoutPath(path: String) = filterNot { it.path == path  }
+
