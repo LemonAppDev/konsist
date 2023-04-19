@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.ext
 
+import com.lemonappdev.konsist.core.declaration.KoAnnotation
 import com.lemonappdev.konsist.core.declaration.KoFile
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
@@ -207,11 +208,12 @@ class KoFileSequenceExtTest {
     @Test
     fun `withAnnotation() returns file1 which has annotation`() {
         // given
+        val annotation1: KoAnnotation = mockk()
         val file1: KoFile = mockk {
-            every { annotations.isNotEmpty() } returns true
+            every { annotations } returns listOf(annotation1)
         }
         val file2: KoFile = mockk {
-            every { annotations.isNotEmpty() } returns false
+            every { annotations } returns listOf()
         }
         val files = sequenceOf(file1, file2)
 
@@ -225,11 +227,12 @@ class KoFileSequenceExtTest {
     @Test
     fun `withoutAnnotation() returns file2 which has not annotation`() {
         // given
+        val annotation1: KoAnnotation = mockk()
         val file1: KoFile = mockk {
-            every { annotations.isNotEmpty() } returns true
+            every { annotations } returns listOf(annotation1)
         }
         val file2: KoFile = mockk {
-            every { annotations.isNotEmpty() } returns false
+            every { annotations } returns listOf()
         }
         val files = sequenceOf(file1, file2)
 
