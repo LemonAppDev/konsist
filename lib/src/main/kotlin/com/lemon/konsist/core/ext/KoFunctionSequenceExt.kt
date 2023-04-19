@@ -57,7 +57,7 @@ fun Sequence<KoFunction>.withExtension() = filter { it.isExtension() }
 fun Sequence<KoFunction>.withoutExtension() = filterNot { it.isExtension() }
 
 fun Sequence<KoFunction>.withExplicitReturnType(type: String? = null) = filter {
-    when(type) {
+    when (type) {
         null -> it.hasExplicitReturnType()
         else -> it.explicitReturnType?.name == type
     }
