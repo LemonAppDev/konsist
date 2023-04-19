@@ -6,6 +6,7 @@ import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import com.lemonappdev.konsist.testdata.SampleType as SampleImportAlias
 
 class KoTypeSequenceExtTest {
     @Test
@@ -83,6 +84,106 @@ class KoTypeSequenceExtTest {
 
         // when
         val sut = types.withoutSourceType(sourceType1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(type2)
+    }
+
+    @Test
+    fun `withImportAliasName() returns type1 which has SampleImportAlias`() {
+        // given
+        val sourceType1 = "SampleType"
+        val sourceType2 = "Sample"
+        val type1: KoType = mockk {
+            every { isImportAlias() } returns true
+            every { sourceType } returns sourceType1
+        }
+        val type2: KoType = mockk {
+            every { isImportAlias() } returns true
+            every { sourceType } returns sourceType2
+        }
+        val type3: KoType = mockk {
+            every { isImportAlias() } returns false
+            every { sourceType } returns sourceType1
+        }
+        val type4: KoType = mockk {
+            every { isImportAlias() } returns false
+            every { sourceType } returns sourceType2
+        }
+        val types = sequenceOf(type1, type2, type3, type4)
+
+        // when
+        val sut = types.withImportAliasName<SampleImportAlias>()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(type1)
+    }
+
+    @Test
+    fun `withoutImportAliasName() returns type2, typ3 and type4 which have not SampleImportAlias`() {
+        // given
+        val sourceType1 = "SampleType"
+        val sourceType2 = "Sample"
+        val type1: KoType = mockk {
+            every { isImportAlias() } returns true
+            every { sourceType } returns sourceType1
+        }
+        val type2: KoType = mockk {
+            every { isImportAlias() } returns true
+            every { sourceType } returns sourceType2
+        }
+        val type3: KoType = mockk {
+            every { isImportAlias() } returns false
+            every { sourceType } returns sourceType1
+        }
+        val type4: KoType = mockk {
+            every { isImportAlias() } returns false
+            every { sourceType } returns sourceType2
+        }
+        val types = sequenceOf(type1, type2, type3, type4)
+
+        // when
+        val sut = types.withoutImportAliasName<SampleImportAlias>()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(type2, type3, type4)
+    }
+
+    @Test
+    fun `withImportAliasName(type) returns type1 which has SampleImportAlias`() {
+        // given
+        val importAliasName1 = "SampleImportAlias"
+        val importAliasName2 = "OtherImportAlias"
+        val type1: KoType = mockk {
+            every { importAliasName } returns importAliasName1
+        }
+        val type2: KoType = mockk {
+            every { importAliasName } returns importAliasName2
+        }
+        val types = sequenceOf(type1, type2)
+
+        // when
+        val sut = types.withImportAliasName(importAliasName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(type1)
+    }
+
+    @Test
+    fun `withoutImportAliasName(type) returns type2, typ3 and type4 which have not SampleImportAlias`() {
+        // given
+        val importAliasName1 = "SampleImportAlias"
+        val importAliasName2 = "OtherImportAlias"
+        val type1: KoType = mockk {
+            every { importAliasName } returns importAliasName1
+        }
+        val type2: KoType = mockk {
+            every { importAliasName } returns importAliasName2
+        }
+        val types = sequenceOf(type1, type2)
+
+        // when
+        val sut = types.withoutImportAliasName(importAliasName1)
 
         // then
         sut.toList() shouldBeEqualTo listOf(type2)
