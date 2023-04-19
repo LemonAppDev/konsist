@@ -62,7 +62,7 @@ fun Sequence<KoProperty>.withExplicitType(type: String? = null) = filter {
 
 fun Sequence<KoProperty>.withoutExplicitType(type: String? = null) = this - withExplicitType(type).toSet()
 
-inline fun <reified T> Sequence<KoProperty>.withExplicitTypeTyped() = filter { T::class.simpleName == it.explicitType?.name }
+inline fun <reified T> Sequence<KoProperty>.withExplicitTypeOf() = filter { T::class.simpleName == it.explicitType?.name }
 
-inline fun <reified T> Sequence<KoProperty>.withoutExplicitTypeTyped() =
+inline fun <reified T> Sequence<KoProperty>.withoutExplicitTypeOf() =
     filterNot { T::class.simpleName == it.explicitType?.name }

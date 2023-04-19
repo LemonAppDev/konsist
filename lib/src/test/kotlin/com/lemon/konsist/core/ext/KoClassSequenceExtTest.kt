@@ -518,7 +518,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withParentTyped() returns SampleClass`() {
+    fun `withParentOf() returns SampleClass`() {
         // given
         val name1 = "SampleClass"
         val name2 = "OtherClass"
@@ -537,14 +537,14 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2)
 
         // when
-        val sut = classes.withParentTyped<SampleClass>()
+        val sut = classes.withParentOf<SampleClass>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class1)
     }
 
     @Test
-    fun `withoutParentTyped() returns OtherClass`() {
+    fun `withoutParentOf() returns OtherClass`() {
         // given
         val name1 = "SampleClass"
         val name2 = "OtherClass"
@@ -563,7 +563,7 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2)
 
         // when
-        val sut = classes.withoutParentTyped<SampleClass>()
+        val sut = classes.withoutParentOf<SampleClass>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class2)
@@ -926,7 +926,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withParentInterfaceTyped() returns SampleInterface`() {
+    fun `withParentInterfaceOf() returns SampleInterface`() {
         // given
         val name1 = "SampleInterface"
         val name2 = "OtherInterface"
@@ -945,14 +945,14 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2)
 
         // when
-        val sut = classes.withParentInterfaceTyped<SampleInterface>()
+        val sut = classes.withParentInterfaceOf<SampleInterface>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class1)
     }
 
     @Test
-    fun `withoutParentInterfaceTyped() returns OtherInterface`() {
+    fun `withoutParentInterfaceOf() returns OtherInterface`() {
         // given
         val name1 = "SampleInterface"
         val name2 = "OtherInterface"
@@ -971,7 +971,7 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2)
 
         // when
-        val sut = classes.withoutParentInterfaceTyped<SampleInterface>()
+        val sut = classes.withoutParentInterfaceOf<SampleInterface>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class2)
@@ -1168,7 +1168,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withParentClassTyped() returns SampleClass`() {
+    fun `withParentClassOf() returns SampleClass`() {
         // given
         val name1 = "SampleClass"
         val name2 = "OtherClass"
@@ -1187,14 +1187,14 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2)
 
         // when
-        val sut = classes.withParentClassTyped<SampleClass>()
+        val sut = classes.withParentClassOf<SampleClass>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class1)
     }
 
     @Test
-    fun `withoutParentClassTyped() returns OtherClass`() {
+    fun `withoutParentClassOf() returns OtherClass`() {
         // given
         val name1 = "SampleClass"
         val name2 = "OtherClass"
@@ -1213,7 +1213,7 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2)
 
         // when
-        val sut = classes.withoutParentClassTyped<SampleClass>()
+        val sut = classes.withoutParentClassOf<SampleClass>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class2)

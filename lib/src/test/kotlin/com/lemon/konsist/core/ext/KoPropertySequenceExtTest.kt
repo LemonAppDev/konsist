@@ -571,7 +571,7 @@ class KoPropertySequenceExtTest {
         val properties = sequenceOf(property1, property2)
 
         // when
-        val sut = properties.withExplicitTypeTyped<SampleType>()
+        val sut = properties.withExplicitTypeOf<SampleType>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(property1)
@@ -591,7 +591,7 @@ class KoPropertySequenceExtTest {
         val properties = sequenceOf(property1, property2)
 
         // when
-        val sut = properties.withoutExplicitTypeTyped<SampleType>()
+        val sut = properties.withoutExplicitTypeOf<SampleType>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(property2)
