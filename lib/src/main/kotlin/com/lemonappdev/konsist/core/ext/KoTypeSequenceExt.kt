@@ -1,0 +1,12 @@
+package com.lemonappdev.konsist.core.ext
+
+import com.lemonappdev.konsist.core.declaration.KoType
+
+inline fun <reified T> Sequence<KoType>.withSourceType() = filter { it.sourceType == T::class.simpleName }
+
+inline fun <reified T> Sequence<KoType>.withoutSourceType() = filterNot { it.sourceType == T::class.simpleName }
+
+fun Sequence<KoType>.withSourceType(type: String) = filter { it.sourceType == type }
+
+fun Sequence<KoType>.withoutSourceType(type: String) = filterNot { it.sourceType == type }
+
