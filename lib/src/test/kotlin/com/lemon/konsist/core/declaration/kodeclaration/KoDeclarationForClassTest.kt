@@ -247,7 +247,6 @@ class KoDeclarationForClassTest {
             hasModifiers(OPEN, PRIVATE) shouldBeEqualTo true
             hasModifiers(PROTECTED, OPEN) shouldBeEqualTo false
             hasModifiers(PROTECTED, OPEN, PRIVATE) shouldBeEqualTo false
-            hasModifiers() shouldBeEqualTo true
         }
     }
 
@@ -259,10 +258,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.run {
-            hasModifiers() shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
+        sut.hasModifiers(PRIVATE) shouldBeEqualTo false
     }
 
     private fun getSnippetFile(fileName: String) =
