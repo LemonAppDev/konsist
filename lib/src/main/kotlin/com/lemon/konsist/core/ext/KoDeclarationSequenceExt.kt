@@ -65,15 +65,15 @@ fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotation: KClass<*>) = 
     }
 }
 
-fun Sequence<KoDeclaration>.withModifiers(vararg modifier: String) = filter { it.hasModifiers(*modifier) }
-
-fun Sequence<KoDeclaration>.withoutModifiers(vararg modifier: String) = filter { koDeclaration ->
-    modifier.none { koDeclaration.hasModifiers(it) }
-}
-
-fun Sequence<KoDeclaration>.withSomeModifiers(vararg modifier: String) = filter { koDeclaration ->
-    modifier.any { koDeclaration.hasModifiers(it) }
-}
+//fun Sequence<KoDeclaration>.withModifiers(vararg modifier: String) = filter { it.hasModifiers(*modifier) }
+//
+//fun Sequence<KoDeclaration>.withoutModifiers(vararg modifier: String) = filter { koDeclaration ->
+//    modifier.none { koDeclaration.hasModifiers(it) }
+//}
+//
+//fun Sequence<KoDeclaration>.withSomeModifiers(vararg modifier: String) = filter { koDeclaration ->
+//    modifier.any { koDeclaration.hasModifiers(it) }
+//}
 
 fun Sequence<KoDeclaration>.withPackages(vararg packages: String) = filter { koDeclaration ->
     packages.all { koDeclaration.resideInPackages(it) }

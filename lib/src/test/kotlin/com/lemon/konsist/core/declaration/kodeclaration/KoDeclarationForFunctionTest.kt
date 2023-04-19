@@ -1,6 +1,10 @@
 package com.lemon.konsist.core.declaration.kodeclaration
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemon.konsist.core.const.KoModifier.PRIVATE
+import com.lemon.konsist.core.const.KoModifier.PROTECTED
+import com.lemon.konsist.core.const.KoModifier.SUSPEND
+import com.lemon.konsist.core.const.KoModifier.PUBLIC
 import com.lemon.konsist.testdata.NonExistingAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation1
@@ -222,8 +226,8 @@ class KoDeclarationForFunctionTest {
 
         // then
         sut.run {
-            hasModifiers("public") shouldBeEqualTo true
-            hasModifiers("private") shouldBeEqualTo false
+            hasModifiers(PUBLIC) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
         }
     }
 
@@ -236,13 +240,13 @@ class KoDeclarationForFunctionTest {
 
         // then
         sut.run {
-            hasModifiers("protected") shouldBeEqualTo true
-            hasModifiers("suspend") shouldBeEqualTo true
-            hasModifiers("private") shouldBeEqualTo false
-            hasModifiers("protected", "suspend") shouldBeEqualTo true
-            hasModifiers("suspend", "protected") shouldBeEqualTo true
-            hasModifiers("private", "suspend") shouldBeEqualTo false
-            hasModifiers("protected", "suspend", "private") shouldBeEqualTo false
+            hasModifiers(PROTECTED) shouldBeEqualTo true
+            hasModifiers(SUSPEND) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
+            hasModifiers(PROTECTED, SUSPEND) shouldBeEqualTo true
+            hasModifiers(SUSPEND, PROTECTED) shouldBeEqualTo true
+            hasModifiers(PRIVATE, SUSPEND) shouldBeEqualTo false
+            hasModifiers(PROTECTED, SUSPEND, PRIVATE) shouldBeEqualTo false
         }
     }
 
@@ -254,7 +258,7 @@ class KoDeclarationForFunctionTest {
             .first()
 
         // then
-        sut.hasModifiers("private") shouldBeEqualTo false
+        sut.hasModifiers(PRIVATE) shouldBeEqualTo false
     }
 
     private fun getSnippetFile(fileName: String) =

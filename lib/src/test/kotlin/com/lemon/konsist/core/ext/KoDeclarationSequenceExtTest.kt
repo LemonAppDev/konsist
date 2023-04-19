@@ -381,77 +381,77 @@ class KoDeclarationSequenceExtTest {
         sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
-    @Test
-    fun `withModifiers(String) returns declaration1 with modifiers`() {
-        // given
-        val modifier1 = "sampleModifier1"
-        val modifier2 = "SampleModifier2"
-        val declaration1: KoDeclaration = mockk {
-            every { hasModifiers(modifier1, modifier2) } returns true
-        }
-        val declaration2: KoDeclaration = mockk {
-            every { hasModifiers(modifier1, modifier2) } returns false
-        }
-        val declarations = sequenceOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withModifiers(modifier1, modifier2)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withoutModifiers(String) returns declaration3 without modifiers`() {
-        // given
-        val modifier1 = "SampleModifier1"
-        val modifier2 = "SampleModifier2"
-        val declaration1: KoDeclaration = mockk {
-            every { hasModifiers(modifier1) } returns true
-            every { hasModifiers(modifier2) } returns true
-        }
-        val declaration2: KoDeclaration = mockk {
-            every { hasModifiers(modifier1) } returns false
-            every { hasModifiers(modifier2) } returns true
-        }
-        val declaration3: KoDeclaration = mockk {
-            every { hasModifiers(modifier1) } returns false
-            every { hasModifiers(modifier2) } returns false
-        }
-        val declarations = sequenceOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withoutModifiers(modifier1, modifier2)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
-    }
-
-    @Test
-    fun `withSomeModifiers(String) returns declaration1 and declaration2 which have at least one of given modifiers`() {
-        // given
-        val modifier1 = "SampleModifier1"
-        val modifier2 = "SampleModifier2"
-        val declaration1: KoDeclaration = mockk {
-            every { hasModifiers(modifier1) } returns true
-            every { hasModifiers(modifier2) } returns true
-        }
-        val declaration2: KoDeclaration = mockk {
-            every { hasModifiers(modifier1) } returns false
-            every { hasModifiers(modifier2) } returns true
-        }
-        val declaration3: KoDeclaration = mockk {
-            every { hasModifiers(modifier1) } returns false
-            every { hasModifiers(modifier2) } returns false
-        }
-        val declarations = sequenceOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withSomeModifiers(modifier1, modifier2)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
-    }
+//    @Test
+//    fun `withModifiers(String) returns declaration1 with modifiers`() {
+//        // given
+//        val modifier1 = "sampleModifier1"
+//        val modifier2 = "SampleModifier2"
+//        val declaration1: KoDeclaration = mockk {
+//            every { hasModifiers(modifier1, modifier2) } returns true
+//        }
+//        val declaration2: KoDeclaration = mockk {
+//            every { hasModifiers(modifier1, modifier2) } returns false
+//        }
+//        val declarations = sequenceOf(declaration1, declaration2)
+//
+//        // when
+//        val sut = declarations.withModifiers(modifier1, modifier2)
+//
+//        // then
+//        sut.toList() shouldBeEqualTo listOf(declaration1)
+//    }
+//
+//    @Test
+//    fun `withoutModifiers(String) returns declaration3 without modifiers`() {
+//        // given
+//        val modifier1 = "SampleModifier1"
+//        val modifier2 = "SampleModifier2"
+//        val declaration1: KoDeclaration = mockk {
+//            every { hasModifiers(modifier1) } returns true
+//            every { hasModifiers(modifier2) } returns true
+//        }
+//        val declaration2: KoDeclaration = mockk {
+//            every { hasModifiers(modifier1) } returns false
+//            every { hasModifiers(modifier2) } returns true
+//        }
+//        val declaration3: KoDeclaration = mockk {
+//            every { hasModifiers(modifier1) } returns false
+//            every { hasModifiers(modifier2) } returns false
+//        }
+//        val declarations = sequenceOf(declaration1, declaration2, declaration3)
+//
+//        // when
+//        val sut = declarations.withoutModifiers(modifier1, modifier2)
+//
+//        // then
+//        sut.toList() shouldBeEqualTo listOf(declaration3)
+//    }
+//
+//    @Test
+//    fun `withSomeModifiers(String) returns declaration1 and declaration2 which have at least one of given modifiers`() {
+//        // given
+//        val modifier1 = "SampleModifier1"
+//        val modifier2 = "SampleModifier2"
+//        val declaration1: KoDeclaration = mockk {
+//            every { hasModifiers(modifier1) } returns true
+//            every { hasModifiers(modifier2) } returns true
+//        }
+//        val declaration2: KoDeclaration = mockk {
+//            every { hasModifiers(modifier1) } returns false
+//            every { hasModifiers(modifier2) } returns true
+//        }
+//        val declaration3: KoDeclaration = mockk {
+//            every { hasModifiers(modifier1) } returns false
+//            every { hasModifiers(modifier2) } returns false
+//        }
+//        val declarations = sequenceOf(declaration1, declaration2, declaration3)
+//
+//        // when
+//        val sut = declarations.withSomeModifiers(modifier1, modifier2)
+//
+//        // then
+//        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+//    }
 
     @Test
     fun `withPackages(String) returns declaration1 with package`() {

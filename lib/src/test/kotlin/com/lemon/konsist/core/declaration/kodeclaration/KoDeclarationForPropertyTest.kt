@@ -1,6 +1,10 @@
 package com.lemon.konsist.core.declaration.kodeclaration
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemon.konsist.core.const.KoModifier.OPEN
+import com.lemon.konsist.core.const.KoModifier.PRIVATE
+import com.lemon.konsist.core.const.KoModifier.PROTECTED
+import com.lemon.konsist.core.const.KoModifier.PUBLIC
 import com.lemon.konsist.testdata.NonExistingAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation1
@@ -222,8 +226,8 @@ class KoDeclarationForPropertyTest {
 
         // then
         sut.run {
-            hasModifiers("public") shouldBeEqualTo true
-            hasModifiers("private") shouldBeEqualTo false
+            hasModifiers(PUBLIC) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
         }
     }
 
@@ -236,13 +240,13 @@ class KoDeclarationForPropertyTest {
 
         // then
         sut.run {
-            hasModifiers("protected") shouldBeEqualTo true
-            hasModifiers("open") shouldBeEqualTo true
-            hasModifiers("private") shouldBeEqualTo false
-            hasModifiers("protected", "open") shouldBeEqualTo true
-            hasModifiers("open", "protected") shouldBeEqualTo true
-            hasModifiers("private", "open") shouldBeEqualTo false
-            hasModifiers("protected", "open", "private") shouldBeEqualTo false
+            hasModifiers(PROTECTED) shouldBeEqualTo true
+            hasModifiers(OPEN) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
+            hasModifiers(PROTECTED, OPEN) shouldBeEqualTo true
+            hasModifiers(OPEN, PROTECTED) shouldBeEqualTo true
+            hasModifiers(PRIVATE, OPEN) shouldBeEqualTo false
+            hasModifiers(PROTECTED, OPEN, PRIVATE) shouldBeEqualTo false
             hasModifiers() shouldBeEqualTo true
         }
     }
@@ -257,7 +261,7 @@ class KoDeclarationForPropertyTest {
         // then
         sut.run {
             hasModifiers() shouldBeEqualTo true
-            hasModifiers("private") shouldBeEqualTo false
+            hasModifiers(PRIVATE) shouldBeEqualTo false
         }
     }
 

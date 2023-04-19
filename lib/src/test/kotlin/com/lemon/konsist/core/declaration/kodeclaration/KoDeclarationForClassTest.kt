@@ -1,6 +1,10 @@
 package com.lemon.konsist.core.declaration.kodeclaration
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemon.konsist.core.const.KoModifier.OPEN
+import com.lemon.konsist.core.const.KoModifier.PRIVATE
+import com.lemon.konsist.core.const.KoModifier.PROTECTED
+import com.lemon.konsist.core.const.KoModifier.PUBLIC
 import com.lemon.konsist.testdata.NonExistingAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation1
@@ -222,8 +226,8 @@ class KoDeclarationForClassTest {
 
         // then
         sut.run {
-            hasModifiers("public") shouldBeEqualTo true
-            hasModifiers("private") shouldBeEqualTo false
+            hasModifiers(PUBLIC) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
         }
     }
 
@@ -236,13 +240,13 @@ class KoDeclarationForClassTest {
 
         // then
         sut.run {
-            hasModifiers("private") shouldBeEqualTo true
-            hasModifiers("open") shouldBeEqualTo true
-            hasModifiers("protected") shouldBeEqualTo false
-            hasModifiers("private", "open") shouldBeEqualTo true
-            hasModifiers("open", "private") shouldBeEqualTo true
-            hasModifiers("protected", "open") shouldBeEqualTo false
-            hasModifiers("protected", "open", "private") shouldBeEqualTo false
+            hasModifiers(PRIVATE) shouldBeEqualTo true
+            hasModifiers(OPEN) shouldBeEqualTo true
+            hasModifiers(PROTECTED) shouldBeEqualTo false
+            hasModifiers(PRIVATE, OPEN) shouldBeEqualTo true
+            hasModifiers(OPEN, PRIVATE) shouldBeEqualTo true
+            hasModifiers(PROTECTED, OPEN) shouldBeEqualTo false
+            hasModifiers(PROTECTED, OPEN, PRIVATE) shouldBeEqualTo false
         }
     }
 
@@ -254,7 +258,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.hasModifiers("private") shouldBeEqualTo false
+        sut.hasModifiers(PRIVATE) shouldBeEqualTo false
     }
 
     private fun getSnippetFile(fileName: String) =

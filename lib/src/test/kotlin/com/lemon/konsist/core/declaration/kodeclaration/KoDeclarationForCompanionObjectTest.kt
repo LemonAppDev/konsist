@@ -1,6 +1,10 @@
 package com.lemon.konsist.core.declaration.kodeclaration
 
 import com.lemon.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemon.konsist.core.const.KoModifier.FINAL
+import com.lemon.konsist.core.const.KoModifier.PRIVATE
+import com.lemon.konsist.core.const.KoModifier.PROTECTED
+import com.lemon.konsist.core.const.KoModifier.PUBLIC
 import com.lemon.konsist.testdata.NonExistingAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation
 import com.lemon.konsist.testdata.SampleAnnotation1
@@ -222,8 +226,8 @@ class KoDeclarationForCompanionObjectTest {
 
         // then
         sut.run {
-            hasModifiers("public") shouldBeEqualTo true
-            hasModifiers("private") shouldBeEqualTo false
+            hasModifiers(PUBLIC) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
         }
     }
 
@@ -236,13 +240,13 @@ class KoDeclarationForCompanionObjectTest {
 
         // then
         sut.run {
-            hasModifiers("protected") shouldBeEqualTo true
-            hasModifiers("final") shouldBeEqualTo true
-            hasModifiers("private") shouldBeEqualTo false
-            hasModifiers("protected", "final") shouldBeEqualTo true
-            hasModifiers("final", "protected") shouldBeEqualTo true
-            hasModifiers("final", "private") shouldBeEqualTo false
-            hasModifiers("protected", "final", "private") shouldBeEqualTo false
+            hasModifiers(PROTECTED) shouldBeEqualTo true
+            hasModifiers(FINAL) shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
+            hasModifiers(PROTECTED, FINAL) shouldBeEqualTo true
+            hasModifiers(FINAL, PROTECTED) shouldBeEqualTo true
+            hasModifiers(FINAL, PRIVATE) shouldBeEqualTo false
+            hasModifiers(PROTECTED, FINAL, PRIVATE) shouldBeEqualTo false
         }
     }
 
@@ -254,7 +258,7 @@ class KoDeclarationForCompanionObjectTest {
             .first()
 
         // then
-        sut.hasModifiers("private") shouldBeEqualTo false
+        sut.hasModifiers(PRIVATE) shouldBeEqualTo false
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forcompanionobject/", fileName)
