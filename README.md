@@ -5,6 +5,17 @@
 Konsist helps to guard [Kotlin](https://kotlinlang.org/) project consistency. It allows to standardise Kotlin codebase
 and enforce coding conventions tailored for given project.
 
+Features:
+- Code base consistency verification
+- Define custom rules
+- Guard architecture layers
+- Suppress issues in source files using `@Suppress` annotations
+- Compatible with popular testing frameworks such as [JUni4](https://junit.org/junit4/) and
+  [JUnit5](https://junit.org/junit5/)
+- ...
+
+See [docs](https://konsist.lemonappdev.com) for more details and review samples for inspiration.
+
 Example checks:
 - Check if all repository classes are reside in repository package
 - Check if every use case has one public function
@@ -13,9 +24,6 @@ Example checks:
 - Check if use case has one public function
 - Check if no classes are using Java util logging 
 - and much more… see sample checks
-
-Konsist is compatible with popular testing frameworks such as [JUni4](https://junit.org/junit4/) and 
-[JUnit5](https://junit.org/junit5/).
 
 # How This Works?
 
