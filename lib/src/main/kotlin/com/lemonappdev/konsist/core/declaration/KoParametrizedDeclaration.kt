@@ -8,5 +8,8 @@ abstract class KoParametrizedDeclaration(
 
     val parameters by lazy { ktFunction.valueParameters.map { KoParameter.getInstance(it) } }
 
-    fun hasParameterNamed(name: String) = parameters.firstOrNull()?.name == name
+    fun hasParameterNamed(name: String? = null) = when (name) {
+        null -> parameters.isNotEmpty()
+        else -> parameters.firstOrNull()?.name == name
+    }
 }
