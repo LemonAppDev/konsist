@@ -1,8 +1,8 @@
 root: ./docs
 
 ​structure:
-  readme: ./docs/GettingStarted.md
-  summary: ./docs/SUMMARY.md​
+  readme: README.md
+  summary: SUMMARY.md​
 
 redirects:
   previous/page: new-folder/page.md
