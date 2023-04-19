@@ -6,11 +6,11 @@ import java.io.FileInputStream
 import java.io.InputStreamReader
 import java.util.*
 
-fun Project.getLocalOrGradleProperty(propertyName: String) = gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)
+fun Project.getLocalPropertyOrGradleProperty(propertyName: String) = gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)
 
 private fun Project.getProjectProperty(propertyName: String): String? = properties[propertyName] as String?
 
-private fun gradleLocalProperty(propertyName: String): String? {
+private fun Project.gradleLocalProperty(propertyName: String): String? {
     val localProperties = Properties()
     val localPropertiesFile = File("local.properties")
 
@@ -20,5 +20,11 @@ private fun gradleLocalProperty(propertyName: String): String? {
         }
     }
 
-    return localProperties.getProperty(propertyName)
+    val property = localProperties.getProperty(propertyName)
+
+    if (property == null) {
+        logger.warn("Property $propertyName not found.")
+    }
+
+    return property
 }

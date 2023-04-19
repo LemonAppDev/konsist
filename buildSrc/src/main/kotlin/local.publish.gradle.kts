@@ -1,4 +1,4 @@
-import util.getLocalOrGradleProperty
+import util.getLocalPropertyOrGradleProperty
 import java.util.*
 
 plugins {
@@ -13,7 +13,7 @@ publishing {
         create<MavenPublication>(konsistPublicationName) {
             groupId = "com.lemonappdev"
             artifactId = "konsist"
-            version = "0.7.0-SNAPSHOT"
+            version = getKonsistVersion()
 
             from(components.getByName("java"))
 
@@ -52,22 +52,35 @@ publishing {
 
     repositories {
         maven {
-            name = "snapshots"
-            // Repository URL for snapshot deployment and download access:
-            url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+            when (getReleaseTarget()) {
+                ReleaseTarget.LOCAL -> {
+                    name = "local"
+                    url = mavenLocal().url
+                }
 
-            setCredentialsFromGradleProperties()
-            // Repository URL for release deployment, no download access! :
-            // url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                ReleaseTarget.SNAPSHOT -> {
+                    name = "snapshot"
+                    // Repository URL for snapshot deployment and download access:
+                    url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+
+                    setCredentialsFromGradleProperties()
+                }
+
+                ReleaseTarget.RELEASE -> {
+                    name = "release"
+                    // Repository URL for release deployment, no download access! :
+                    url = uri("https://s01.oss.sonatype.org/content/repositories/releases/")
+
+                    setCredentialsFromGradleProperties()
+                }
+            }
         }
-
-        mavenLocal()
     }
 }
 
 signing {
-    val signingKey = getLocalOrGradleProperty("konsist.signingKey")
-    val signingPassword = getLocalOrGradleProperty("konsist.signingPassword")
+    val signingKey = getLocalPropertyOrGradleProperty("konsist.signingKey")
+    val signingPassword = getLocalPropertyOrGradleProperty("konsist.signingPassword")
 
     if (signingKey != null && signingPassword != null) {
         useInMemoryPgpKeys(
@@ -85,9 +98,15 @@ signing {
     }
 }
 
+enum class ReleaseTarget(val value: String) {
+    LOCAL("local"),
+    SNAPSHOT("snapshot"),
+    RELEASE("release"),
+}
+
 fun MavenArtifactRepository.setCredentialsFromGradleProperties() {
-    val ossrhUsername = getLocalOrGradleProperty("konsist.ossrhUsername")
-    val ossrhPassword = getLocalOrGradleProperty("konsist.ossrhPassword")
+    val ossrhUsername = getLocalPropertyOrGradleProperty("konsist.ossrhUsername")
+    val ossrhPassword = getLocalPropertyOrGradleProperty("konsist.ossrhPassword")
 
     credentials {
         username = ossrhUsername
@@ -96,3 +115,23 @@ fun MavenArtifactRepository.setCredentialsFromGradleProperties() {
 }
 
 fun decodeBase64(string: String) = String(Base64.getDecoder().decode(string)).trim()
+
+fun getReleaseTarget(): ReleaseTarget {
+    val releaseTargetStr = getLocalPropertyOrGradleProperty("konsist.releaseTarget")
+
+    return ReleaseTarget
+        .values()
+        .firstOrNull { it.value == releaseTargetStr }
+        ?: ReleaseTarget.LOCAL
+}
+
+fun getKonsistVersion(): String {
+    val releaseTarget = getReleaseTarget()
+    val version = getLocalPropertyOrGradleProperty("konsist.version") ?: error("konsist.version is not provided.")
+
+    return when (releaseTarget) {
+        ReleaseTarget.LOCAL -> "$version-SNAPSHOT"
+        ReleaseTarget.SNAPSHOT -> "$version-SNAPSHOT"
+        ReleaseTarget.RELEASE -> version
+    }
+}
