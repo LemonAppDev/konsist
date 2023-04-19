@@ -207,7 +207,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.hasKoModifiers() shouldBeEqualTo true
+        sut.hasModifiers() shouldBeEqualTo true
     }
 
     @Test
@@ -240,7 +240,7 @@ class KoDeclarationForInterfaceTest {
             hasModifiers("public", "abstract") shouldBeEqualTo true
             hasModifiers("private", "abstract") shouldBeEqualTo false
             hasModifiers("abstract", "public", "private") shouldBeEqualTo false
-            hasKoModifiers() shouldBeEqualTo true
+            hasModifiers() shouldBeEqualTo true
         }
     }
 
@@ -253,7 +253,7 @@ class KoDeclarationForInterfaceTest {
 
         // then
         sut.run {
-            hasKoModifiers() shouldBeEqualTo true
+            hasModifiers() shouldBeEqualTo true
             hasModifiers("private") shouldBeEqualTo false
         }
     }

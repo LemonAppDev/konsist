@@ -20,7 +20,7 @@ interface KoDeclarationProvider {
         name: String,
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
-    ) = declarations(modifiers, includeNested).any { it.name == name && it.hasKoModifiers(*modifiers.toTypedArray()) }
+    ) = declarations(modifiers, includeNested).any { it.name == name && it.hasModifiers(*modifiers.toTypedArray()) }
 }
 
 interface KoClassProvider : KoDeclarationProvider {

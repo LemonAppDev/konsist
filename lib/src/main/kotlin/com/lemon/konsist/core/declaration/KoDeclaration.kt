@@ -73,26 +73,12 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
         return annotations.any { it.fullyQualifiedName?.contains(qualifiedName) ?: false }
     }
 
-    fun hasKoModifiers(vararg koModifiers: KoModifier) = koModifiers.all {
+    fun hasModifiers(vararg koModifiers: KoModifier) = koModifiers.all {
         ktTypeParameterListOwner
             .modifierList
             ?.hasModifier(it.toKtToken())
             ?: false
     }
-
-    fun hasModifiers(vararg modifiers: String) = modifiers
-        .map { modifier ->
-            KoModifier
-                .values()
-                .first { modifier.lowercase() == it.type }
-                .toKtToken()
-        }
-        .all {
-            ktTypeParameterListOwner
-                .modifierList
-                ?.hasModifier(it)
-                ?: false
-        }
 
     fun resideInPackages(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
 

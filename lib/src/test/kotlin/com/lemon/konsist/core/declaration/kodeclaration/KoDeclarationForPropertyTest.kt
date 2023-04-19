@@ -210,7 +210,7 @@ class KoDeclarationForPropertyTest {
             .first()
 
         // then
-        sut.hasKoModifiers() shouldBeEqualTo true
+        sut.hasModifiers() shouldBeEqualTo true
     }
 
     @Test
@@ -243,7 +243,7 @@ class KoDeclarationForPropertyTest {
             hasModifiers("open", "protected") shouldBeEqualTo true
             hasModifiers("private", "open") shouldBeEqualTo false
             hasModifiers("protected", "open", "private") shouldBeEqualTo false
-            hasKoModifiers() shouldBeEqualTo true
+            hasModifiers() shouldBeEqualTo true
         }
     }
 
@@ -256,7 +256,7 @@ class KoDeclarationForPropertyTest {
 
         // then
         sut.run {
-            hasKoModifiers() shouldBeEqualTo true
+            hasModifiers() shouldBeEqualTo true
             hasModifiers("private") shouldBeEqualTo false
         }
     }

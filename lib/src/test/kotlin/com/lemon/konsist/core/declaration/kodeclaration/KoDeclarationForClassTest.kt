@@ -210,7 +210,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.hasKoModifiers() shouldBeEqualTo true
+        sut.hasModifiers() shouldBeEqualTo true
     }
 
     @Test

@@ -164,7 +164,7 @@ class KoDeclarationForTypeAliasTest {
             .first()
 
         // then
-        sut.hasKoModifiers() shouldBeEqualTo true
+        sut.hasModifiers() shouldBeEqualTo true
     }
 
     @Test
@@ -190,7 +190,7 @@ class KoDeclarationForTypeAliasTest {
 
         // then
         sut.run {
-            hasKoModifiers() shouldBeEqualTo true
+            hasModifiers() shouldBeEqualTo true
             hasModifiers("private") shouldBeEqualTo false
         }
     }
