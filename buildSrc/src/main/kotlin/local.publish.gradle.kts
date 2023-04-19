@@ -6,20 +6,23 @@ plugins {
     signing
 }
 
-private val konsistPublicationName = "konsist"
+val konsistPublicationName = "konsist"
 
 publishing {
     publications {
         create<MavenPublication>(konsistPublicationName) {
+            val konsistDescription = "A Kotlin architecture test library. Define and guard ode base consistency rules using Kotlin."
+
             groupId = "com.lemonappdev"
             artifactId = "konsist"
             version = getKonsistVersion()
+            description = konsistDescription
 
             from(components.getByName("java"))
 
             pom {
                 name.set("konsist")
-                description.set("A Kotlin architecture test library. Define and guard ode base consistency rules using Kotlin.")
+                description.set(konsistDescription)
                 url.set("https://github.com/LemonAppDev/konsist")
                 properties.set(
                     mapOf(
