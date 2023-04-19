@@ -153,6 +153,46 @@ class KoParameterSequenceExtTest {
     }
 
     @Test
+    fun `withDefaultValue(name) returns parameter1 which has given default value`() {
+        // given
+        val value1 = "SampleDefaultValue"
+        val value2 = "OtherDefaultValue"
+        val parameter1: KoParameter = mockk {
+            every { defaultValue } returns value1
+        }
+        val parameter2: KoParameter = mockk {
+            every { defaultValue } returns value2
+        }
+        val parameters = sequenceOf(parameter1, parameter2)
+
+        // when
+        val sut = parameters.withDefaultValue(value1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(parameter1)
+    }
+
+    @Test
+    fun `withoutDefaultValue(name) returns parameter2 which has not given default value`() {
+        // given
+        val value1 = "SampleDefaultValue"
+        val value2 = "OtherDefaultValue"
+        val parameter1: KoParameter = mockk {
+            every { defaultValue } returns value1
+        }
+        val parameter2: KoParameter = mockk {
+            every { defaultValue } returns value2
+        }
+        val parameters = sequenceOf(parameter1, parameter2)
+
+        // when
+        val sut = parameters.withoutDefaultValue(value1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(parameter2)
+    }
+
+    @Test
     fun `withType(name) returns parameter1 which has given type`() {
         // given
         val typeName1 = "SampleType"

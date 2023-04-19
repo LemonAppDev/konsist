@@ -14,9 +14,14 @@ fun Sequence<KoParameter>.withCrossInlineModifier() = filter { it.hasCrossInline
 
 fun Sequence<KoParameter>.withoutCrossInlineModifier() = filterNot { it.hasCrossInlineModifier() }
 
-fun Sequence<KoParameter>.withDefaultValue() = filter { it.hasDefaultValue() }
+fun Sequence<KoParameter>.withDefaultValue(value: String? = null) = filter {
+    when (value){
+        null -> it.hasDefaultValue()
+        else -> it.defaultValue == value
+    }
+}
 
-fun Sequence<KoParameter>.withoutDefaultValue() = filterNot { it.hasDefaultValue() }
+fun Sequence<KoParameter>.withoutDefaultValue(value: String? = null) = this - withDefaultValue(value).toSet()
 
 fun Sequence<KoParameter>.withType(type: String) = filter { it.type.name == type }
 
