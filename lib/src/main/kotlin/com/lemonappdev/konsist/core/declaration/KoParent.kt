@@ -24,9 +24,10 @@ class KoParent private constructor(private val ktSuperTypeListEntry: KtSuperType
         }
     }
 
-    fun hasDelegate() = delegateName != null
-
-    fun hasDelegate(delegateName: String) = name == delegateName
+    fun hasDelegate(delegateName: String? = null) = when (delegateName) {
+        null -> this.delegateName != null
+        else -> name == delegateName
+    }
 
     companion object {
         private val cache = KoDeclarationCache<KoParent>()
