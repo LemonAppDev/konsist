@@ -2,6 +2,7 @@
 
 package com.lemon.konsist.core.ext
 
+import com.lemon.konsist.core.const.KoModifier
 import com.lemon.konsist.core.declaration.KoDeclaration
 import kotlin.reflect.KClass
 
@@ -65,15 +66,15 @@ fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotation: KClass<*>) = 
     }
 }
 
-//fun Sequence<KoDeclaration>.withModifiers(vararg modifier: String) = filter { it.hasModifiers(*modifier) }
-//
-//fun Sequence<KoDeclaration>.withoutModifiers(vararg modifier: String) = filter { koDeclaration ->
-//    modifier.none { koDeclaration.hasModifiers(it) }
-//}
-//
-//fun Sequence<KoDeclaration>.withSomeModifiers(vararg modifier: String) = filter { koDeclaration ->
-//    modifier.any { koDeclaration.hasModifiers(it) }
-//}
+fun Sequence<KoDeclaration>.withModifiers(vararg modifier: KoModifier) = filter { it.hasModifiers(*modifier) }
+
+fun Sequence<KoDeclaration>.withoutModifiers(vararg modifier: KoModifier) = filter { koDeclaration ->
+    modifier.none { koDeclaration.hasModifiers(it) }
+}
+
+fun Sequence<KoDeclaration>.withSomeModifiers(vararg modifier: KoModifier) = filter { koDeclaration ->
+    modifier.any { koDeclaration.hasModifiers(it) }
+}
 
 fun Sequence<KoDeclaration>.withPackages(vararg packages: String) = filter { koDeclaration ->
     packages.all { koDeclaration.resideInPackages(it) }
