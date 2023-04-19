@@ -104,9 +104,9 @@ signing {
         sign(publishing.publications[konsistPublicationName])
     } else {
         if (signingKey == null) {
-            println("signingKey is not provided. Skipping signing.")
+            logger.warn("Property 'konsist.signingKey' is not provided. Skipping signing.")
         } else if (signingPassword == null) {
-            println("signingPassword is not provided. Skipping signing.")
+            logger.warn("Property 'signingPassword' is not provided. Skipping signing.")
         }
     }
 }
