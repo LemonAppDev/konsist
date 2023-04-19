@@ -1,4 +1,8 @@
 .gradle
+
+# Local configuration file
+local.properties
+
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
