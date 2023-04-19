@@ -29,7 +29,7 @@ class KoFileTest {
         // then
         sut
             .path
-            .endsWith("/lib/src/test/kotlin/com/lemon/konsist/core/declaration/kofile/snippet/file-path.kt")
+            .endsWith("/lib/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kofile/snippet/file-path.kt")
             .shouldBeEqualTo(true)
     }
 
@@ -41,7 +41,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.projectPath shouldBeEqualTo "/lib/src/test/kotlin/com/lemon/konsist/core/declaration/kofile/snippet/file-project-path.kt"
+        sut.projectPath shouldBeEqualTo "/lib/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kofile/snippet/file-project-path.kt"
     }
 
     @Test
@@ -194,7 +194,7 @@ class KoFileTest {
 
         // then
         sut.run {
-            annotations.map { it.type } shouldBeEqualTo listOf("SampleAnnotation")
+            annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation")
             hasAnnotation("SampleAnnotation") shouldBeEqualTo true
             hasAnnotation("SampleAnnotation1") shouldBeEqualTo false
             hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true

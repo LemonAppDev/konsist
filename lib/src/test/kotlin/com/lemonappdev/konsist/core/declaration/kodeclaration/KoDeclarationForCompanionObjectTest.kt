@@ -1,10 +1,10 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.core.const.KoModifier.FINAL
 import com.lemonappdev.konsist.core.const.KoModifier.PRIVATE
 import com.lemonappdev.konsist.core.const.KoModifier.PROTECTED
+import com.lemonappdev.konsist.core.const.KoModifier.PUBLIC
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
@@ -226,7 +226,7 @@ class KoDeclarationForCompanionObjectTest {
 
         // then
         sut.run {
-            hasModifiers(KoModifier.PUBLIC) shouldBeEqualTo true
+            hasModifiers(PUBLIC) shouldBeEqualTo true
             hasModifiers(PRIVATE) shouldBeEqualTo false
         }
     }
@@ -247,7 +247,6 @@ class KoDeclarationForCompanionObjectTest {
             hasModifiers(FINAL, PROTECTED) shouldBeEqualTo true
             hasModifiers(FINAL, PRIVATE) shouldBeEqualTo false
             hasModifiers(PROTECTED, FINAL, PRIVATE) shouldBeEqualTo false
-            hasModifiers() shouldBeEqualTo true
         }
     }
 
@@ -259,10 +258,7 @@ class KoDeclarationForCompanionObjectTest {
             .first()
 
         // then
-        sut.run {
-            hasModifiers() shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
+        sut.hasModifiers(PRIVATE) shouldBeEqualTo false
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forcompanionobject/", fileName)

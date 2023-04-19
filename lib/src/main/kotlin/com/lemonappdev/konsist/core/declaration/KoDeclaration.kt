@@ -65,12 +65,12 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
     fun isTopLevel() = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
 
     fun hasAnnotation(name: String) = annotations
-        .any { it.fullyQualifiedName?.substringAfterLast(".") == name || it.fullyQualifiedName == name }
+        .any { it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name }
 
     inline fun <reified T> hasAnnotation(): Boolean {
         val qualifiedName = T::class.qualifiedName ?: return false
 
-        return annotations.any { it.fullyQualifiedName?.contains(qualifiedName) ?: false }
+        return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
     }
 
     fun hasModifiers(vararg koModifiers: KoModifier) = koModifiers.all {
@@ -80,11 +80,12 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
             ?: false
     }
 
-    fun resideInPackages(vararg packages: String) = packages.toList().any { PackageHelper.resideInPackage(it, packageName) }
+    fun resideInPackages(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
 
-    fun resideOutsidePackages(vararg packages: String) = !resideInPackages(*packages)
+    fun resideOutsidePackages(packageName: String) = !resideInPackages(packageName)
 
-    fun resideInPath(vararg paths: String, ignoreCase: Boolean = true) = paths.toList().any { filePath.contains(it, ignoreCase) }
+    fun resideInPath(path: String, ignoreCase: Boolean = true) = filePath.contains(path, ignoreCase)
 
-    fun resideOutsidePath(vararg paths: String, ignoreCase: Boolean = true) = !resideInPath(*paths, ignoreCase = ignoreCase)
+    fun resideOutsidePath(path: String, ignoreCase: Boolean = true) =
+        !resideInPath(path, ignoreCase = ignoreCase)
 }

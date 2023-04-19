@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalPropertyProvider
-import com.lemonappdev.konsist.exception.KoInternalException
+import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction

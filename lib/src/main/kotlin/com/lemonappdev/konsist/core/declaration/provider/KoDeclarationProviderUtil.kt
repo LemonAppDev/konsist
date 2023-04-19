@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.core.declaration.KoFunction
 import com.lemonappdev.konsist.core.declaration.KoInterface
 import com.lemonappdev.konsist.core.declaration.KoObject
 import com.lemonappdev.konsist.core.declaration.KoProperty
-import com.lemonappdev.konsist.exception.KoInternalException
+import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDeclarationContainer
 import org.jetbrains.kotlin.psi.KtFunction

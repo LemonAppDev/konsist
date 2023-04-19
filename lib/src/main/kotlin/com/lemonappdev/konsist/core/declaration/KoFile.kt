@@ -77,12 +77,12 @@ class KoFile private constructor(private val ktFile: KtFile) :
     }
 
     fun hasAnnotation(name: String) = annotations
-        .any { it.fullyQualifiedName?.substringAfterLast(".") == name || it.fullyQualifiedName == name }
+        .any { it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name }
 
     inline fun <reified T> hasAnnotation(): Boolean {
         val qualifiedName = T::class.qualifiedName ?: return false
 
-        return annotations.any { it.fullyQualifiedName?.contains(qualifiedName) ?: false }
+        return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
     }
 
     override fun declarations(modifiers: List<KoModifier>, includeNested: Boolean, includeLocal: Boolean): List<KoDeclaration> =

@@ -3,33 +3,47 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtClass
+import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtModifierList
-import org.jetbrains.kotlin.psi.psiUtil.getSuperNames
+import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
+import org.jetbrains.kotlin.psi.KtSuperTypeEntry
+import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import org.jetbrains.kotlin.psi.psiUtil.isAbstract
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 @Suppress("detekt.TooManyFunctions")
 class KoClass private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
-    val parents by lazy { ktClass.getSuperNames() }
-
-    val parentInterfaces by lazy {
-        val imports = ktClass
-            .children
-
-        if (imports.isNotEmpty()) {
-            imports
-                .first()
-                .children
-                .map { it.text }
-                .filter { !it.contains('(') }
-        } else {
-            listOf()
-        }
+    val parents by lazy {
+        ktClass
+            .getSuperTypeList()
+            ?.children
+            ?.filterIsInstance<KtSuperTypeListEntry>()
+            ?.map { KoParent.getInstance(it) } ?: emptyList()
     }
 
-    val parentClass: String? by lazy {
-        (parents - parentInterfaces.toSet())
-            .firstOrNull()
+    val parentInterfaces by lazy {
+        val interfaces = ktClass
+            .getSuperTypeList()
+            ?.children
+            ?.filterIsInstance<KtSuperTypeEntry>() ?: emptyList()
+
+        val delegations = ktClass
+            .getSuperTypeList()
+            ?.children
+            ?.filterIsInstance<KtDelegatedSuperTypeEntry>() ?: emptyList()
+
+        val all = interfaces + delegations
+        all.map { KoParent.getInstance(it) }
+    }
+
+    val parentClass by lazy {
+        val parentClass = ktClass
+            .getSuperTypeList()
+            ?.children
+            ?.filterIsInstance<KtSuperTypeCallEntry>()
+            ?.first()
+
+        parentClass?.let { KoParent.getInstance(it) }
     }
 
     val primaryConstructor by lazy {
@@ -80,15 +94,17 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
 
     fun hasSecondaryConstructors() = ktClass.hasSecondaryConstructors()
 
-    fun hasParentClass() = parentClass != null
+    fun hasParentClass(name: String? = null) = when (name) {
+        null -> parentClass != null
+        else -> parentClass?.name == name
+    }
 
-    fun hasParentClass(name: String) = parentClass == name
+    fun hasParentInterface(name: String? = null) = when (name) {
+        null -> parentInterfaces.isNotEmpty()
+        else -> parentInterfaces.any { it.name == name }
+    }
 
-    fun hasParentInterface() = parentInterfaces.isNotEmpty()
-
-    fun hasParentInterface(name: String) = parentInterfaces.any { it == name }
-
-    fun hasParent() = hasParentClass() || hasParentInterface()
+    fun hasParent(name: String? = null) = hasParentClass(name) || hasParentInterface(name)
 
     companion object {
         private val cache = KoDeclarationCache<KoClass>()

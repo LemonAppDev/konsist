@@ -5,7 +5,7 @@ import java.io.File
 
 object TestSnippetProvider {
     private val projectPath = File("").absoluteFile.path
-    val testSourceSetPath = "$projectPath/src/test/kotlin/com/lemon/konsist/"
+    val testSourceSetPath = "$projectPath/src/test/kotlin/com/lemonappdev/konsist/"
 
     fun getSnippetKoScope(snippetRelativePath: String, fileName: String): KoScope {
         val snippetPath = "$testSourceSetPath$snippetRelativePath$fileName.kttxt"

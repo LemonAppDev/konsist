@@ -53,9 +53,10 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
 
     fun isExtension() = ktProperty.isExtensionDeclaration()
 
-    fun hasDelegate() = ktProperty.hasDelegateExpression()
-
-    fun hasDelegate(name: String): Boolean = delegateName == name
+    fun hasDelegate(name: String? = null): Boolean = when (name) {
+        null -> ktProperty.hasDelegateExpression()
+        else -> delegateName == name
+    }
 
     companion object {
         private val cache = KoDeclarationCache<KoProperty>()

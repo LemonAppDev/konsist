@@ -15,7 +15,7 @@ class KoScopeTest {
     fun `from file`() {
         // given
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
-        val sut = KoScope.fromFile("$testSourceSetPath/lemon/konsist/core/declaration/koscope/KoScopeTest.kt")
+        val sut = KoScope.fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscope/KoScopeTest.kt")
 
         // then
         sut
@@ -24,7 +24,7 @@ class KoScopeTest {
             .run {
                 size shouldBeEqualTo 1
                 first().name shouldBeEqualTo "KoScopeTest.kt"
-                first().path shouldBeEqualTo "${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeTest.kt"
+                first().path shouldBeEqualTo "${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeTest.kt"
             }
     }
 
@@ -104,7 +104,7 @@ class KoScopeTest {
     fun `from path`() {
         // given
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
-        val sut = KoScope.fromPath("${testSourceSetPath}lemon/konsist/core/declaration/koscope/")
+        val sut = KoScope.fromPath("${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/")
 
         // then
         sut
@@ -154,18 +154,18 @@ class KoScopeTest {
 
         // then
         sut.toString() shouldBeEqualTo """
-            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForClassTest.kt
-            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForCompanionObjectTest.kt
-            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForDeclarationTest.kt
-            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForFunctionTest.kt
-            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForImportTest.kt
-            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForInterfaceTest.kt
-            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForObjectTest.kt
-            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForPackageTest.kt
-            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForPropertyTest.kt
-            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeForTypeAliasTest.kt
-            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeOperatorTest.kt
-            ${testSourceSetPath}lemon/konsist/core/declaration/koscope/KoScopeTest.kt
+            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForClassTest.kt
+            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForCompanionObjectTest.kt
+            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForDeclarationTest.kt
+            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForFunctionTest.kt
+            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForImportTest.kt
+            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForInterfaceTest.kt
+            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForObjectTest.kt
+            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForPackageTest.kt
+            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForPropertyTest.kt
+            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForTypeAliasTest.kt
+            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeOperatorTest.kt
+            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeTest.kt
         """.trimIndent()
     }
 }

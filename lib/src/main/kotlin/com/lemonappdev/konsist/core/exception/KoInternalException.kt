@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.exception
+package com.lemonappdev.konsist.core.exception
 
 import com.lemonappdev.konsist.core.declaration.KoBaseDeclaration
 

@@ -6,6 +6,10 @@ class SampleType
 
 interface SampleInterface
 
+interface SampleInterface1
+
+interface SampleInterface2
+
 object SampleObject
 
 interface SampleTopLevelInterface {

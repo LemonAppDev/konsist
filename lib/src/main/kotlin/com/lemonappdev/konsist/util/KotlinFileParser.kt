@@ -4,8 +4,8 @@ import com.intellij.openapi.util.Disposer
 import com.intellij.psi.PsiManager
 import com.intellij.testFramework.LightVirtualFile
 import com.lemonappdev.konsist.core.declaration.KoFile
-import com.lemonappdev.konsist.ext.isKotlinFile
-import com.lemonappdev.konsist.ext.isKotlinSnippetFile
+import com.lemonappdev.konsist.core.ext.isKotlinFile
+import com.lemonappdev.konsist.core.ext.isKotlinSnippetFile
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.config.CompilerConfiguration
