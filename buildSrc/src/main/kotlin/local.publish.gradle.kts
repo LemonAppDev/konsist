@@ -46,12 +46,11 @@ publishing {
                     developer {
                         id.set("lemonappdev")
                         name.set("Lemon App Dev")
-                        email.set("igor.wojda@gmail.com")
                     }
                 }
                 // Docs: https://maven.apache.org/pom.html#scm
                 scm {
-                    url.set("https://github.com/LemonAppDev/konsist")
+                    url.set("https://github.com/LemonAppDev/")
                     connection.set("scm:git:git@github.com:LemonAppDev/konsist.git")
                     developerConnection.set("scm:git:git@github.com:LemonAppDev/konsist.git")
                 }
