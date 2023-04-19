@@ -23,3 +23,7 @@ fun Sequence<KoType>.withoutImportAliasName(name: String) = filterNot { it.impor
 fun Sequence<KoType>.withFullyQualifiedName(name: String) = filter { it.fullyQualifiedName == name }
 
 fun Sequence<KoType>.withoutFullyQualifiedName(name: String) = filterNot { it.fullyQualifiedName == name }
+
+fun Sequence<KoType>.withImportAlias() = filter { it.isImportAlias() }
+
+fun Sequence<KoType>.withoutImportAlias() = filterNot { it.isImportAlias() }

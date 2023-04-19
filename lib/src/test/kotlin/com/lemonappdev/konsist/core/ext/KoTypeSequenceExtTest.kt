@@ -228,4 +228,40 @@ class KoTypeSequenceExtTest {
         // then
         sut.toList() shouldBeEqualTo listOf(type2)
     }
+
+    @Test
+    fun `withImportAlias() returns type1 which has given name`() {
+        // given
+        val type1: KoType = mockk {
+            every { isImportAlias() } returns true
+        }
+        val type2: KoType = mockk {
+            every { isImportAlias() } returns false
+        }
+        val types = sequenceOf(type1, type2)
+
+        // when
+        val sut = types.withImportAlias()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(type1)
+    }
+
+    @Test
+    fun `withoutImportAlias() returns type2 which has not given name`() {
+        // given
+        val type1: KoType = mockk {
+            every { isImportAlias() } returns true
+        }
+        val type2: KoType = mockk {
+            every { isImportAlias() } returns false
+        }
+        val types = sequenceOf(type1, type2)
+
+        // when
+        val sut = types.withoutImportAlias()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(type2)
+    }
 }
