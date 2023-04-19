@@ -21,6 +21,19 @@ class KoAnnotationTest {
     }
 
     @Test
+    fun `annotation-name`() {
+        // given
+        val sut = getSnippetFile("annotation-name")
+            .functions()
+            .first()
+            .annotations
+            .first()
+
+        // then
+        sut.name shouldBeEqualTo "SampleAnnotation"
+    }
+
+    @Test
     fun `annotation-fully-qualified-name`() {
         // given
         val sut = getSnippetFile("annotation-fully-qualified-name")
