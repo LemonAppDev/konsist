@@ -53,16 +53,16 @@ fun Sequence<KoProperty>.withDelegate(name: String? = null) = filter { it.hasDel
 fun Sequence<KoProperty>.withoutDelegate(name: String? = null) = filterNot { it.hasDelegate(name) }
 
 fun Sequence<KoProperty>.withExplicitType(type: String? = null) = filter {
-    if (type == null) {
-        it.explicitType != null
-    } else {
-        it.explicitType?.name == type
+    when (type) {
+        null -> it.explicitType != null
+        else -> it.explicitType?.name == type
     }
 }
 
 fun Sequence<KoProperty>.withoutExplicitType(type: String? = null) = this - withExplicitType(type).toSet()
 
-inline fun <reified T> Sequence<KoProperty>.withExplicitTypeOf() = filter { T::class.simpleName == it.explicitType?.name }
+inline fun <reified T> Sequence<KoProperty>.withExplicitTypeOf() =
+    filter { T::class.simpleName == it.explicitType?.name }
 
 inline fun <reified T> Sequence<KoProperty>.withoutExplicitTypeOf() =
     filterNot { T::class.simpleName == it.explicitType?.name }
