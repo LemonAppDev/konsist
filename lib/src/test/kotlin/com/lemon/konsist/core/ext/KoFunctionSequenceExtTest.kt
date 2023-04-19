@@ -553,7 +553,7 @@ class KoFunctionSequenceExtTest {
     }
 
     @Test
-    fun `withExplicitReturnType() with KClass returns function1 which has given explicit return type`() {
+    fun `withExplicitReturnTypeOf() returns function1 which has given explicit return type`() {
         // given
         val typeName1 = "SampleType"
         val typeName2 = "OtherType"
@@ -573,7 +573,7 @@ class KoFunctionSequenceExtTest {
     }
 
     @Test
-    fun `withoutExplicitReturnType() with KClass returns function2 which has not given explicit return type`() {
+    fun `withoutExplicitReturnTypeOf() returns function2 which has not given explicit return type`() {
         // given
         val typeName1 = "SampleType"
         val typeName2 = "OtherType"
