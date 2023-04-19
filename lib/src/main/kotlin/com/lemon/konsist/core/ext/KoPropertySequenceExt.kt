@@ -45,3 +45,7 @@ fun Sequence<KoProperty>.withoutConstModifier() = filterNot { it.hasConstModifie
 fun Sequence<KoProperty>.withExtension() = filter { it.isExtension() }
 
 fun Sequence<KoProperty>.withoutExtension() = filterNot { it.isExtension() }
+
+fun Sequence<KoProperty>.withDelegate(name: String? = null) = filter { it.hasDelegate(name) }
+
+fun Sequence<KoProperty>.withoutDelegate(name: String? = null) = filterNot { it.hasDelegate(name) }

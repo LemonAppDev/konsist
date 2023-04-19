@@ -402,4 +402,78 @@ class KoPropertySequenceExtTest {
         // then
         sut.toList() shouldBeEqualTo listOf(property2)
     }
+
+    @Test
+    fun `withDelegate() returns property1 which has delegate`() {
+        // given
+        val property1: KoProperty = mockk {
+            every { hasDelegate() } returns true
+        }
+        val property2: KoProperty = mockk {
+            every { hasDelegate() } returns false
+        }
+        val properties = sequenceOf(property1, property2)
+
+        // when
+        val sut = properties.withDelegate()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(property1)
+    }
+
+    @Test
+    fun `withDelegate(name) returns property1 which has delegate with given name`() {
+        // given
+        val delegateName = "DelegateName"
+        val property1: KoProperty = mockk {
+            every { hasDelegate(delegateName) } returns true
+        }
+        val property2: KoProperty = mockk {
+            every { hasDelegate(delegateName) } returns false
+        }
+        val properties = sequenceOf(property1, property2)
+
+        // when
+        val sut = properties.withDelegate(delegateName)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(property1)
+    }
+
+    @Test
+    fun `withoutDelegate() returns property2 which has not delegate`() {
+        // given
+        val property1: KoProperty = mockk {
+            every { hasDelegate() } returns true
+        }
+        val property2: KoProperty = mockk {
+            every { hasDelegate() } returns false
+        }
+        val properties = sequenceOf(property1, property2)
+
+        // when
+        val sut = properties.withoutDelegate()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(property2)
+    }
+
+    @Test
+    fun `withoutDelegate(name) returns property2 which has not delegate with given name`() {
+        // given
+        val delegateName = "DelegateName"
+        val property1: KoProperty = mockk {
+            every { hasDelegate(delegateName) } returns true
+        }
+        val property2: KoProperty = mockk {
+            every { hasDelegate(delegateName) } returns false
+        }
+        val properties = sequenceOf(property1, property2)
+
+        // when
+        val sut = properties.withoutDelegate(delegateName)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(property2)
+    }
 }
