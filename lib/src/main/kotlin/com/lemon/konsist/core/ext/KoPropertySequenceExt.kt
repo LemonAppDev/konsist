@@ -1,3 +1,5 @@
+@file:Suppress("detekt.TooManyFunctions")
+
 package com.lemon.konsist.core.ext
 
 import com.lemon.konsist.core.declaration.KoProperty
@@ -53,8 +55,7 @@ fun Sequence<KoProperty>.withoutDelegate(name: String? = null) = filterNot { it.
 fun Sequence<KoProperty>.withExplicitType(type: String? = null) = filter {
     if (type == null) {
         it.explicitType != null
-    }
-    else {
+    } else {
         it.explicitType?.name == type
     }
 }
