@@ -11,7 +11,7 @@ val konsistPublicationName = "konsist"
 publishing {
     publications {
         create<MavenPublication>(konsistPublicationName) {
-            val konsistDescription = "A Kotlin architecture test library. Define and guard ode base consistency rules using Kotlin."
+            val konsistDescription = "A Kotlin architecture test library. Define and guard code base consistency using Kotlin."
 
             groupId = "com.lemonappdev"
             artifactId = "konsist"
