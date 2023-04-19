@@ -101,7 +101,12 @@ class KoFileTest {
             .first()
 
         // then
-        sut.packageDirective?.name shouldBeEqualTo "SamplePackage"
+        sut.run {
+            packageDirective?.name shouldBeEqualTo "samplepackage"
+            hasPackage("com.samplepackage") shouldBeEqualTo true
+            hasPackage("com..") shouldBeEqualTo true
+            hasPackage("com") shouldBeEqualTo false
+        }
     }
 
     @Test
