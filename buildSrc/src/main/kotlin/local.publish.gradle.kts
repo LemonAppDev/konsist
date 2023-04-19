@@ -1,5 +1,5 @@
 import util.getLocalOrGradleProperty
-import java.util.Base64
+import java.util.*
 
 plugins {
     `maven-publish`
@@ -52,19 +52,6 @@ publishing {
 
     repositories {
         maven {
-//            val releasesRepoUrl = layout.buildDirectory.dir("repos/releases")
-//            val snapshotsRepoUrl = layout.buildDirectory.dir("repos/snapshots")
-//            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
-
-//            println("version: $version")
-//            if (version.toString().endsWith("SNAPSHOT")) {
-//                name = "snapshots"
-//                url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-//                setCredentialsFromGradleProperties()
-//            } else {
-//                throw GradleException("Releases are not supported yet.")
-//            }
-
             name = "snapshots"
             // Repository URL for snapshot deployment and download access:
             url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
