@@ -4,23 +4,21 @@ import org.gradle.api.Project
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStreamReader
-import java.util.Properties
+import java.util.*
 
 fun Project.getLocalOrGradleProperty(propertyName: String) = gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)
 
 private fun Project.getProjectProperty(propertyName: String): String? = properties[propertyName] as String?
 
 private fun gradleLocalProperty(propertyName: String): String? {
-    val properties = Properties()
-    val localProperties = File("local.properties")
+    val localProperties = Properties()
+    val localPropertiesFile = File("local.properties")
 
-    if (localProperties.isFile) {
-        InputStreamReader(FileInputStream(localProperties), Charsets.UTF_8).use { reader ->
-            properties.load(reader)
+    if (localPropertiesFile.isFile) {
+        InputStreamReader(FileInputStream(localPropertiesFile), Charsets.UTF_8).use { reader ->
+            localProperties.load(reader)
         }
-    } else {
-        error("File from not found")
     }
 
-    return properties.getProperty(propertyName)
+    return localProperties.getProperty(propertyName)
 }
