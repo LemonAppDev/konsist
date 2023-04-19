@@ -1,0 +1,9 @@
+import com.lemonappdev.konsist.testdata.SampleType
+
+class SampleClass: SampleInterface {
+    override var sampleProperty: SampleType = SampleType()
+}
+
+interface SampleInterface {
+     var sampleProperty: SampleType
+}

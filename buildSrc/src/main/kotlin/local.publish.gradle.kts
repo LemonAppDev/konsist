@@ -5,7 +5,7 @@ plugins {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "com.lemon.konsist"
+            groupId = "com.lemonappdev.konsist"
             artifactId = "konsist"
             version = "0.7.0"
 

@@ -1,5 +1,0 @@
-import com.lemon.konsist.testdata.SampleType
-
-abstract class SampleClass {
-    abstract var sampleProperty: SampleType
-}

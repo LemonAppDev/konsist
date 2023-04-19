@@ -1,3 +1,0 @@
-import com.lemon.konsist.testdata.SampleType as ImportAlias
-
-class SampleClass(val sampleParameter: ImportAlias)

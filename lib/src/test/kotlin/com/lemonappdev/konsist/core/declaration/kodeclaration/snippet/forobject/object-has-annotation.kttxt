@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+
+@SampleAnnotation
+object SampleObject {
+}
