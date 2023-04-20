@@ -17,6 +17,24 @@ class KoNamedDeclarationTest {
     }
 
     @Test
+    fun `class-has-name-sth`() {
+        // given
+        val sut = getSnippetFile("class-has-name-sth")
+            .classes()
+            .first()
+
+        // then
+        sut.run {
+            hasNameContaining("ple") shouldBeEqualTo true
+            hasNameContaining("non") shouldBeEqualTo false
+            hasNameWithPrefix("Sam") shouldBeEqualTo true
+            hasNameWithPrefix("non") shouldBeEqualTo false
+            hasNameWithSuffix("lass") shouldBeEqualTo true
+            hasNameWithSuffix("non") shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `interface`() {
         // given
         val sut = getSnippetFile("interface")
@@ -25,6 +43,24 @@ class KoNamedDeclarationTest {
 
         // then
         sut.name shouldBeEqualTo "SampleInterface"
+    }
+
+    @Test
+    fun `interface-has-name-sth`() {
+        // given
+        val sut = getSnippetFile("interface-has-name-sth")
+            .interfaces()
+            .first()
+
+        // then
+        sut.run {
+            hasNameContaining("ple") shouldBeEqualTo true
+            hasNameContaining("non") shouldBeEqualTo false
+            hasNameWithPrefix("Sam") shouldBeEqualTo true
+            hasNameWithPrefix("non") shouldBeEqualTo false
+            hasNameWithSuffix("ace") shouldBeEqualTo true
+            hasNameWithSuffix("non") shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -39,6 +75,24 @@ class KoNamedDeclarationTest {
     }
 
     @Test
+    fun `object-has-name-sth`() {
+        // given
+        val sut = getSnippetFile("object-has-name-sth")
+            .objects()
+            .first()
+
+        // then
+        sut.run {
+            hasNameContaining("ple") shouldBeEqualTo true
+            hasNameContaining("non") shouldBeEqualTo false
+            hasNameWithPrefix("Sam") shouldBeEqualTo true
+            hasNameWithPrefix("non") shouldBeEqualTo false
+            hasNameWithSuffix("ect") shouldBeEqualTo true
+            hasNameWithSuffix("non") shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `function`() {
         // given
         val sut = getSnippetFile("function")
@@ -50,6 +104,24 @@ class KoNamedDeclarationTest {
     }
 
     @Test
+    fun `function-has-name-sth`() {
+        // given
+        val sut = getSnippetFile("function-has-name-sth")
+            .functions()
+            .first()
+
+        // then
+        sut.run {
+            hasNameContaining("ple") shouldBeEqualTo true
+            hasNameContaining("non") shouldBeEqualTo false
+            hasNameWithPrefix("sam") shouldBeEqualTo true
+            hasNameWithPrefix("non") shouldBeEqualTo false
+            hasNameWithSuffix("ion") shouldBeEqualTo true
+            hasNameWithSuffix("non") shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `property`() {
         // given
         val sut = getSnippetFile("property")
@@ -58,6 +130,24 @@ class KoNamedDeclarationTest {
 
         // then
         sut.name shouldBeEqualTo "sampleProperty"
+    }
+
+    @Test
+    fun `property-has-name-sth`() {
+        // given
+        val sut = getSnippetFile("property-has-name-sth")
+            .properties()
+            .first()
+
+        // then
+        sut.run {
+            hasNameContaining("ple") shouldBeEqualTo true
+            hasNameContaining("non") shouldBeEqualTo false
+            hasNameWithPrefix("sam") shouldBeEqualTo true
+            hasNameWithPrefix("non") shouldBeEqualTo false
+            hasNameWithSuffix("rty") shouldBeEqualTo true
+            hasNameWithSuffix("non") shouldBeEqualTo false
+        }
     }
 
     private fun getSnippetFile(fileName: String) =
