@@ -98,6 +98,11 @@ class KoFile private constructor(private val ktFile: KtFile) :
         ?.qualifiedName
         ?.let { PackageHelper.resideInPackage(name, it) }
 
+    fun hasTypeAlias(name: String? = null) = when (name) {
+        null -> typeAliases.isNotEmpty()
+        else -> typeAliases.any { it.name == name }
+    }
+
     override fun equals(other: Any?): Boolean = other is KoFile && path == other.path
 
     override fun hashCode(): Int = 31 * 7 + path.hashCode()
