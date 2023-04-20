@@ -14,7 +14,7 @@ Features:
   [JUnit5](https://junit.org/junit5/)
 - ...
 
-See [docs](https://konsist.lemonappdev.com) for more details and review samples for inspiration.
+See [documentation](http://docs.konsist.lemonappdev.com/) for more details and code samples.
 
 Example checks:
 - Check if all repository classes are reside in repository package
