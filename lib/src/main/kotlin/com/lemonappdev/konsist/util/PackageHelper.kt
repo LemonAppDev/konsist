@@ -23,8 +23,8 @@ object PackageHelper {
             declarationPackage.startsWith("..") &&
             declarationPackage.endsWith("..")
         ) {
-            if (!declarationPackageSplitByTwoDots.first().contains(separator)) {
-                mainPackageSplitByOneSeparator.contains(declarationPackageSplitByTwoDots.first())
+            if(!declarationPackageSplitByTwoDots.first().contains(separator)){
+            mainPackageSplitByOneSeparator.contains(declarationPackageSplitByTwoDots.first())
             } else {
                 mainPackageSplitByOneSeparator.containsAll(declarationPackageSplitByOneSeparator)
             }
