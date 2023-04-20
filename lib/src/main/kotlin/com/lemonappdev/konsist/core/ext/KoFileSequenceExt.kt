@@ -64,3 +64,19 @@ fun Sequence<KoFile>.withoutAnnotations(vararg annotation: KClass<*>) = filter {
             ?.let { koFile.hasAnnotation(it) } ?: false
     }
 }
+
+fun Sequence<KoFile>.withTypeAlias() = filter { it.hasTypeAlias() }
+
+fun Sequence<KoFile>.withoutTypeAlias() = filterNot { it.hasTypeAlias() }
+
+fun Sequence<KoFile>.withTypeAliases(vararg typealiasName: String) = filter { koFile ->
+    typealiasName.all { koFile.hasTypeAlias(it) }
+}
+
+fun Sequence<KoFile>.withSomeTypeAliases(vararg typealiasName: String) = filter { koFile ->
+    typealiasName.any { koFile.hasTypeAlias(it) }
+}
+
+fun Sequence<KoFile>.withoutTypeAliases(vararg typealiasName: String) = filter { koFile ->
+    typealiasName.none { koFile.hasTypeAlias(it) }
+}
