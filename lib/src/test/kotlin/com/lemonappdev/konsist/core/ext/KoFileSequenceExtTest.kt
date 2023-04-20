@@ -514,17 +514,17 @@ class KoFileSequenceExtTest {
     @Test
     fun `withTypeAliases(String) returns file1 with given typealias`() {
         // given
-        val typealiasName = "SampleTypeAlias"
+        val typeAliasName = "SampleTypeAlias"
         val file1: KoFile = mockk {
-            every { hasTypeAlias(typealiasName) } returns true
+            every { hasTypeAlias(typeAliasName) } returns true
         }
         val file2: KoFile = mockk {
-            every { hasTypeAlias(typealiasName) } returns false
+            every { hasTypeAlias(typeAliasName) } returns false
         }
         val files = sequenceOf(file1, file2)
 
         // when
-        val sut = files.withTypeAliases(typealiasName)
+        val sut = files.withTypeAliases(typeAliasName)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1)
@@ -533,95 +533,95 @@ class KoFileSequenceExtTest {
     @Test
     fun `withoutTypeAliases(String) returns file2 without given typealias`() {
         // given
-        val typealiasName = "SampleTypeAlias"
+        val typeAliasName = "SampleTypeAlias"
         val file1: KoFile = mockk {
-            every { hasTypeAlias(typealiasName) } returns true
+            every { hasTypeAlias(typeAliasName) } returns true
         }
         val file2: KoFile = mockk {
-            every { hasTypeAlias(typealiasName) } returns false
+            every { hasTypeAlias(typeAliasName) } returns false
         }
         val files = sequenceOf(file1, file2)
 
         // when
-        val sut = files.withoutTypeAliases(typealiasName)
+        val sut = files.withoutTypeAliases(typeAliasName)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file2)
     }
 
     @Test
-    fun `withTypeAliases(String) returns file1 with typealiasNames`() {
+    fun `withTypeAliases(String) returns file1 with typeAliasNames`() {
         // given
-        val typealiasName1 = "SampleTypeAlias1"
-        val typealiasName2 = "SampleTypeAlias2"
+        val typeAliasName1 = "SampleTypeAlias1"
+        val typeAliasName2 = "SampleTypeAlias2"
         val file1: KoFile = mockk {
-            every { hasTypeAlias(typealiasName1) } returns true
-            every { hasTypeAlias(typealiasName2) } returns true
+            every { hasTypeAlias(typeAliasName1) } returns true
+            every { hasTypeAlias(typeAliasName2) } returns true
         }
         val file2: KoFile = mockk {
-            every { hasTypeAlias(typealiasName1) } returns false
-            every { hasTypeAlias(typealiasName2) } returns true
+            every { hasTypeAlias(typeAliasName1) } returns false
+            every { hasTypeAlias(typeAliasName2) } returns true
         }
         val file3: KoFile = mockk {
-            every { hasTypeAlias(typealiasName1) } returns false
-            every { hasTypeAlias(typealiasName2) } returns false
+            every { hasTypeAlias(typeAliasName1) } returns false
+            every { hasTypeAlias(typeAliasName2) } returns false
         }
         val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withTypeAliases(typealiasName1, typealiasName2)
+        val sut = files.withTypeAliases(typeAliasName1, typeAliasName2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1)
     }
 
     @Test
-    fun `withoutTypeAliases(String) returns file3 without typealiasNames`() {
+    fun `withoutTypeAliases(String) returns file3 without typeAliasNames`() {
         // given
-        val typealiasName1 = "SampleTypeAlias1"
-        val typealiasName2 = "SampleTypeAlias2"
+        val typeAliasName1 = "SampleTypeAlias1"
+        val typeAliasName2 = "SampleTypeAlias2"
         val file1: KoFile = mockk {
-            every { hasTypeAlias(typealiasName1) } returns true
-            every { hasTypeAlias(typealiasName2) } returns true
+            every { hasTypeAlias(typeAliasName1) } returns true
+            every { hasTypeAlias(typeAliasName2) } returns true
         }
         val file2: KoFile = mockk {
-            every { hasTypeAlias(typealiasName1) } returns false
-            every { hasTypeAlias(typealiasName2) } returns true
+            every { hasTypeAlias(typeAliasName1) } returns false
+            every { hasTypeAlias(typeAliasName2) } returns true
         }
         val file3: KoFile = mockk {
-            every { hasTypeAlias(typealiasName1) } returns false
-            every { hasTypeAlias(typealiasName2) } returns false
+            every { hasTypeAlias(typeAliasName1) } returns false
+            every { hasTypeAlias(typeAliasName2) } returns false
         }
         val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withoutTypeAliases(typealiasName1, typealiasName2)
+        val sut = files.withoutTypeAliases(typeAliasName1, typeAliasName2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file3)
     }
 
     @Test
-    fun `withSomeTypeAliass(String) returns file1 and file2 which have at least one of given typealiasNames`() {
+    fun `withSomeTypeAliases(String) returns file1 and file2 which have at least one of given typeAliasNames`() {
         // given
-        val typealiasName1 = "SampleTypeAlias1"
-        val typealiasName2 = "SampleTypeAlias2"
+        val typeAliasName1 = "SampleTypeAlias1"
+        val typeAliasName2 = "SampleTypeAlias2"
         val file1: KoFile = mockk {
-            every { hasTypeAlias(typealiasName1) } returns true
-            every { hasTypeAlias(typealiasName2) } returns true
+            every { hasTypeAlias(typeAliasName1) } returns true
+            every { hasTypeAlias(typeAliasName2) } returns true
         }
         val file2: KoFile = mockk {
-            every { hasTypeAlias(typealiasName1) } returns false
-            every { hasTypeAlias(typealiasName2) } returns true
+            every { hasTypeAlias(typeAliasName1) } returns false
+            every { hasTypeAlias(typeAliasName2) } returns true
         }
         val file3: KoFile = mockk {
-            every { hasTypeAlias(typealiasName1) } returns false
-            every { hasTypeAlias(typealiasName2) } returns false
+            every { hasTypeAlias(typeAliasName1) } returns false
+            every { hasTypeAlias(typeAliasName2) } returns false
         }
         val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withSomeTypeAliases(typealiasName1, typealiasName2)
+        val sut = files.withSomeTypeAliases(typeAliasName1, typeAliasName2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1, file2)
