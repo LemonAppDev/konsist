@@ -22,6 +22,22 @@ class KoBaseDeclarationTest {
     }
 
     @Test
+    fun `has-file-path`() {
+        // given
+        val sut = getSnippetFile("has-file-path")
+            .functions()
+            .first()
+
+        // then
+        sut.run {
+            hasFilePath("..snippet..") shouldBeEqualTo true
+            hasFilePath("..kobasedeclaration/snippet..") shouldBeEqualTo true
+            hasFilePath("..kobasedeclaration..has-file-path.kt") shouldBeEqualTo true
+            hasFilePath("kobasedeclaration/snippet/") shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `text-with-location`() {
         // given
         val projectPath = getSnippetFile("text-with-location")
