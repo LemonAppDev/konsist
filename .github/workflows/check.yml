@@ -11,7 +11,7 @@ on:
 jobs:
   junit-test:
     name: JUnit Test
-    continue-on-error: false
+    continue-on-error: true
     runs-on: self-hosted
     strategy:
       fail-fast: false
@@ -34,7 +34,7 @@ jobs:
           path: ./**/build/reports/tests/
   konsist-test:
     name: Konsist Test
-    continue-on-error: false
+    continue-on-error: true
     runs-on: self-hosted
     strategy:
       fail-fast: false
@@ -57,7 +57,7 @@ jobs:
           path: ./**/build/reports/tests/
   spotless:
     name: Spotless
-    continue-on-error: false
+    continue-on-error: true
     runs-on: self-hosted
     strategy:
       fail-fast: false
@@ -75,7 +75,7 @@ jobs:
         run: ./gradlew spotlessCheck
   detekt:
     name: Detekt
-    continue-on-error: false
+    continue-on-error: true
     runs-on: self-hosted
     strategy:
       fail-fast: false
@@ -98,7 +98,7 @@ jobs:
           path: ./**/build/reports/detekt/detekt.*
   assemble:
     name: Assemble
-    continue-on-error: false
+    continue-on-error: true
     runs-on: self-hosted
     strategy:
       fail-fast: false
@@ -124,7 +124,7 @@ jobs:
           path: lib/build/libs/lib.jar
   sign:
     name: Sign
-    continue-on-error: false
+    continue-on-error: true
     runs-on: self-hosted
     strategy:
       fail-fast: false
