@@ -2,9 +2,9 @@ package com.lemonappdev.konsist.util
 
 object PackageHelper {
     @Suppress("detekt.CyclomaticComplexMethod")
-    fun resideInPackage(declarationPackage: String, packageDirective: String): Boolean {
-        val mainPackageSplitByOneDot = packageDirective
-            .split(".")
+    fun resideInPackage(declarationPackage: String, packageDirective: String, separator: Char = '.'): Boolean {
+        val mainPackageSplitByOneSeparator = packageDirective
+            .split(separator)
             .filter { it.isNotBlank() }
             .toMutableList()
 
@@ -12,8 +12,9 @@ object PackageHelper {
             .split("..")
             .filter { it.isNotBlank() }
 
-        val declarationPackageSplitByOneDot = declarationPackage
-            .split(".")
+        val declarationPackageSplitByOneSeparator = declarationPackage
+            .replace("..", "$separator$separator")
+            .split(separator)
             .filter { it.isNotBlank() }
 
         @Suppress("detekt.ComplexCondition")
@@ -22,7 +23,7 @@ object PackageHelper {
             declarationPackage.startsWith("..") &&
             declarationPackage.endsWith("..")
         ) {
-            mainPackageSplitByOneDot.contains(declarationPackageSplitByTwoDots.first())
+            mainPackageSplitByOneSeparator.contains(declarationPackageSplitByTwoDots.first())
         } else if (
             declarationPackageSplitByTwoDots.size == 1 &&
             declarationPackage.startsWith("..") &&
@@ -50,10 +51,10 @@ object PackageHelper {
                 )
         ) {
             var counter = 0
-            declarationPackageSplitByOneDot.forEach {
-                if (mainPackageSplitByOneDot.contains(it)) {
-                    val index = mainPackageSplitByOneDot.indexOf(it)
-                    mainPackageSplitByOneDot.removeAll { element -> mainPackageSplitByOneDot.indexOf(element) <= index }
+            declarationPackageSplitByOneSeparator.forEach {
+                if (mainPackageSplitByOneSeparator.contains(it)) {
+                    val index = mainPackageSplitByOneSeparator.indexOf(it)
+                    mainPackageSplitByOneSeparator.removeAll { element -> mainPackageSplitByOneSeparator.indexOf(element) <= index }
                 } else {
                     counter++
                 }
