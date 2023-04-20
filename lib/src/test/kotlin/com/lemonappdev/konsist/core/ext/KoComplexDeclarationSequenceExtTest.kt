@@ -9,41 +9,55 @@ import org.junit.jupiter.api.Test
 
 class KoComplexDeclarationSequenceExtTest {
     @Test
-    fun `withType() returns complex declaration with type type1`() {
+    fun `withType() returns complex declarations with one of given types`() {
         // given
         val type1 = "type1"
+        val type2 = "type2"
         val complexDeclaration1: KoComplexDeclaration = mockk {
             every { representsType(type1) } returns true
+            every { representsType(type2) } returns false
         }
         val complexDeclaration2: KoComplexDeclaration = mockk {
             every { representsType(type1) } returns false
+            every { representsType(type2) } returns true
         }
-        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2)
+        val complexDeclaration3: KoComplexDeclaration = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns false
+        }
+        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
 
         // when
-        val sut = complexDeclarations.withType(type1)
+        val sut = complexDeclarations.withType(type1, type2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(complexDeclaration1)
+        sut.toList() shouldBeEqualTo listOf(complexDeclaration1, complexDeclaration2)
     }
 
     @Test
-    fun `withoutType() returns complex declaration without type type1`() {
+    fun `withoutType() returns complex declaration without given types`() {
         // given
         val type1 = "type1"
+        val type2 = "type2"
         val complexDeclaration1: KoComplexDeclaration = mockk {
             every { representsType(type1) } returns true
+            every { representsType(type2) } returns false
         }
         val complexDeclaration2: KoComplexDeclaration = mockk {
             every { representsType(type1) } returns false
+            every { representsType(type2) } returns true
         }
-        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2)
+        val complexDeclaration3: KoComplexDeclaration = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns false
+        }
+        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
 
         // when
-        val sut = complexDeclarations.withoutType(type1)
+        val sut = complexDeclarations.withoutType(type1, type2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(complexDeclaration2)
+        sut.toList() shouldBeEqualTo listOf(complexDeclaration3)
     }
 
     //  'every { representsType<SampleClass>() } returns true' doesn't work because there is a bug in mockk
