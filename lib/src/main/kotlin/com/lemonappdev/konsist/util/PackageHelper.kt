@@ -2,8 +2,8 @@ package com.lemonappdev.konsist.util
 
 object PackageHelper {
     @Suppress("detekt.CyclomaticComplexMethod", "detekt.LongMethod")
-    fun resideInPackage(declarationPackage: String, packageDirective: String, separator: Char = '.'): Boolean {
-        val mainPackageSplitByOneSeparator = packageDirective
+    fun resideInPackage(declarationPackage: String, packagee: String, separator: Char = '.'): Boolean {
+        val mainPackageSplitByOneSeparator = packagee
             .split(separator)
             .filter { it.isNotBlank() }
             .toMutableList()
@@ -33,24 +33,24 @@ object PackageHelper {
             declarationPackage.startsWith("..") &&
             !declarationPackage.endsWith("..")
         ) {
-            packageDirective.endsWith(declarationPackageSplitByTwoDots.first())
+            packagee.endsWith(declarationPackageSplitByTwoDots.first())
         } else if (
             declarationPackageSplitByTwoDots.size == 1 &&
             !declarationPackage.startsWith("..") &&
             declarationPackage.endsWith("..")
         ) {
-            packageDirective.startsWith(declarationPackageSplitByTwoDots.first())
+            packagee.startsWith(declarationPackageSplitByTwoDots.first())
         } else if (
             (
-                packageDirective.startsWith(declarationPackageSplitByTwoDots.first()) &&
-                    packageDirective.endsWith(declarationPackageSplitByTwoDots.last())
+                packagee.startsWith(declarationPackageSplitByTwoDots.first()) &&
+                    packagee.endsWith(declarationPackageSplitByTwoDots.last())
                 ) ||
             (
-                !packageDirective.startsWith(declarationPackageSplitByTwoDots.first()) &&
+                !packagee.startsWith(declarationPackageSplitByTwoDots.first()) &&
                     declarationPackage.startsWith("..")
                 ) ||
             (
-                !packageDirective.endsWith(declarationPackageSplitByTwoDots.last()) &&
+                !packagee.endsWith(declarationPackageSplitByTwoDots.last()) &&
                     declarationPackage.endsWith("..")
                 )
         ) {

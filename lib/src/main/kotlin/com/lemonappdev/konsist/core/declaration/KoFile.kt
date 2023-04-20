@@ -55,7 +55,7 @@ class KoFile private constructor(private val ktFile: KtFile) :
         path.removePrefix(mainPath)
     }
 
-    val packageDirective by lazy {
+    val packagee by lazy {
         if (ktFile.packageDirective?.qualifiedName == "") {
             null
         } else {
@@ -97,7 +97,7 @@ class KoFile private constructor(private val ktFile: KtFile) :
         else -> imports.any { PackageHelper.resideInPackage(name, it.name) }
     }
 
-    fun resideInPackage(name: String) = packageDirective
+    fun hasPackage(name: String) = packagee
         ?.qualifiedName
         ?.let { PackageHelper.resideInPackage(name, it) }
 

@@ -118,10 +118,10 @@ class KoFileTest {
 
         // then
         sut.run {
-            packageDirective?.name shouldBeEqualTo "samplepackage"
-            resideInPackage("com.samplepackage") shouldBeEqualTo true
-            resideInPackage("com..") shouldBeEqualTo true
-            resideInPackage("com") shouldBeEqualTo false
+            packagee?.name shouldBeEqualTo "samplepackage"
+            hasPackage("com.samplepackage") shouldBeEqualTo true
+            hasPackage("com..") shouldBeEqualTo true
+            hasPackage("com") shouldBeEqualTo false
         }
     }
 
@@ -133,7 +133,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.packageDirective shouldBeEqualTo null
+        sut.packagee shouldBeEqualTo null
     }
 
     @Test
