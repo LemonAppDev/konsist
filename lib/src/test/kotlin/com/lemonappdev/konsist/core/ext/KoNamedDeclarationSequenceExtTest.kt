@@ -72,7 +72,7 @@ class KoNamedDeclarationSequenceExtTest {
             every { hasNameWithPrefix(prefix1) } returns false
             every { hasNameWithPrefix(prefix2) } returns false
         }
-        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2,namedDeclaration3)
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
         val sut = namedDeclarations.withNamePrefixes(prefix1, prefix2)
@@ -98,7 +98,7 @@ class KoNamedDeclarationSequenceExtTest {
             every { hasNameWithPrefix(prefix1) } returns false
             every { hasNameWithPrefix(prefix2) } returns false
         }
-        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2,namedDeclaration3)
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
         val sut = namedDeclarations.withSomeNamePrefixes(prefix1, prefix2)
@@ -124,7 +124,7 @@ class KoNamedDeclarationSequenceExtTest {
             every { hasNameWithPrefix(prefix1) } returns false
             every { hasNameWithPrefix(prefix2) } returns false
         }
-        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2,namedDeclaration3)
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
         val sut = namedDeclarations.withoutNamePrefixes(prefix1, prefix2)
@@ -150,7 +150,7 @@ class KoNamedDeclarationSequenceExtTest {
             every { hasNameWithSuffix(suffix1) } returns false
             every { hasNameWithSuffix(suffix2) } returns false
         }
-        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2,namedDeclaration3)
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
         val sut = namedDeclarations.withNameSuffixes(suffix1, suffix2)
@@ -176,7 +176,7 @@ class KoNamedDeclarationSequenceExtTest {
             every { hasNameWithSuffix(suffix1) } returns false
             every { hasNameWithSuffix(suffix2) } returns false
         }
-        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2,namedDeclaration3)
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
         val sut = namedDeclarations.withSomeNameSuffixes(suffix1, suffix2)
@@ -202,7 +202,7 @@ class KoNamedDeclarationSequenceExtTest {
             every { hasNameWithSuffix(suffix1) } returns false
             every { hasNameWithSuffix(suffix2) } returns false
         }
-        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2,namedDeclaration3)
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
         val sut = namedDeclarations.withoutNameSuffixes(suffix1, suffix2)
@@ -228,7 +228,7 @@ class KoNamedDeclarationSequenceExtTest {
             every { hasNameContaining(text1) } returns false
             every { hasNameContaining(text2) } returns false
         }
-        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2,namedDeclaration3)
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
         val sut = namedDeclarations.withNameContains(text1, text2)
@@ -236,7 +236,6 @@ class KoNamedDeclarationSequenceExtTest {
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration1)
     }
-
 
     @Test
     fun `withSomeNameContains() returns namedDeclaration1 and namedDeclaration2 which name contains given one of texts`() {
@@ -255,7 +254,7 @@ class KoNamedDeclarationSequenceExtTest {
             every { hasNameContaining(text1) } returns false
             every { hasNameContaining(text2) } returns false
         }
-        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2,namedDeclaration3)
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
         val sut = namedDeclarations.withSomeNameContains(text1, text2)
@@ -263,6 +262,7 @@ class KoNamedDeclarationSequenceExtTest {
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration1, namedDeclaration2)
     }
+
     @Test
     fun `withoutNameContains() returns namedDeclaration2 which name not contains given texts`() {
         // given
@@ -280,7 +280,7 @@ class KoNamedDeclarationSequenceExtTest {
             every { hasNameContaining(text1) } returns false
             every { hasNameContaining(text2) } returns false
         }
-        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2,namedDeclaration3)
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
         val sut = namedDeclarations.withoutNameContains(text1, text2)
