@@ -2,18 +2,46 @@ package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.declaration.KoNamedDeclaration
 
-fun Sequence<KoNamedDeclaration>.withName(name: String) = filter { it.name == name }
+fun Sequence<KoNamedDeclaration>.withNames(vararg names: String) = filter { koNamedDeclaration ->
+    names.any { koNamedDeclaration.name == it }
+}
 
-fun Sequence<KoNamedDeclaration>.withoutName(name: String) = filterNot { it.name == name }
+fun Sequence<KoNamedDeclaration>.withoutNames(vararg names: String) = filter { koNamedDeclaration ->
+    names.none { koNamedDeclaration.name == it }
+}
 
-fun Sequence<KoNamedDeclaration>.withNamePrefix(prefix: String) = filter { it.hasNameWithPrefix(prefix) }
+fun Sequence<KoNamedDeclaration>.withNamePrefixes(vararg prefixes: String) = filter { koNamedDeclaration ->
+    prefixes.all { koNamedDeclaration.hasNameWithPrefix(it) }
+}
 
-fun Sequence<KoNamedDeclaration>.withoutNamePrefix(prefix: String) = filterNot { it.hasNameWithPrefix(prefix) }
+fun Sequence<KoNamedDeclaration>.withSomeNamePrefixes(vararg prefixes: String) = filter { koNamedDeclaration ->
+    prefixes.any { koNamedDeclaration.hasNameWithPrefix(it) }
+}
 
-fun Sequence<KoNamedDeclaration>.withNameSuffix(suffix: String) = filter { it.hasNameWithSuffix(suffix) }
+fun Sequence<KoNamedDeclaration>.withoutNamePrefixes(vararg prefixes: String) = filter { koNamedDeclaration ->
+    prefixes.none { koNamedDeclaration.hasNameWithPrefix(it) }
+}
 
-fun Sequence<KoNamedDeclaration>.withoutNameSuffix(suffix: String) = filterNot { it.hasNameWithSuffix(suffix) }
+fun Sequence<KoNamedDeclaration>.withNameSuffixes(vararg suffixes: String) = filter { koNamedDeclaration ->
+    suffixes.all { koNamedDeclaration.hasNameWithSuffix(it) }
+}
 
-fun Sequence<KoNamedDeclaration>.withNameContaining(text: String) = filter { it.hasNameContaining(text) }
+fun Sequence<KoNamedDeclaration>.withSomeNameSuffixes(vararg suffixes: String) = filter { koNamedDeclaration ->
+    suffixes.any { koNamedDeclaration.hasNameWithSuffix(it) }
+}
 
-fun Sequence<KoNamedDeclaration>.withoutNameContaining(text: String) = filterNot { it.hasNameContaining(text) }
+fun Sequence<KoNamedDeclaration>.withoutNameSuffixes(vararg suffixes: String) = filter { koNamedDeclaration ->
+    suffixes.none { koNamedDeclaration.hasNameWithSuffix(it) }
+}
+
+fun Sequence<KoNamedDeclaration>.withNameContains(vararg texts: String) = filter { koNamedDeclaration ->
+    texts.all { koNamedDeclaration.hasNameContaining(it) }
+}
+
+fun Sequence<KoNamedDeclaration>.withSomeNameContains(vararg texts: String) = filter { koNamedDeclaration ->
+    texts.any { koNamedDeclaration.hasNameContaining(it) }
+}
+
+fun Sequence<KoNamedDeclaration>.withoutNameContains(vararg texts: String) = filter { koNamedDeclaration ->
+    texts.none { koNamedDeclaration.hasNameContaining(it) }
+}
