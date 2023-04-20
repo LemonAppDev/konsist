@@ -161,7 +161,6 @@ class PackageHelperTest {
             resideInPackage("com..domain..update..usecase", name) shouldBeEqualTo true
             resideInPackage("domain..update..usecase", name) shouldBeEqualTo false
             resideInPackage("..domain.update..", name) shouldBeEqualTo true
-
         }
     }
 
@@ -181,7 +180,6 @@ class PackageHelperTest {
             resideInPackage("com..domain..update..usecase", name, '/') shouldBeEqualTo true
             resideInPackage("domain..update..usecase", name, '/') shouldBeEqualTo false
             resideInPackage("../domain/update..", name, '/') shouldBeEqualTo true
-
         }
     }
 
