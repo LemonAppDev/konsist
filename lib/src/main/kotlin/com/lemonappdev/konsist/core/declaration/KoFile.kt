@@ -83,6 +83,8 @@ class KoFile private constructor(private val ktFile: KtFile) :
     ): List<KoDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
+    fun resideInPath(name: String) = PackageHelper.resideInPackage(name, path, '/')
+
     fun hasAnnotation(name: String) = annotations
         .any { it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name }
 
@@ -100,8 +102,6 @@ class KoFile private constructor(private val ktFile: KtFile) :
         null -> imports.isNotEmpty()
         else -> imports.any { PackageHelper.resideInPackage(name, it.name) }
     }
-
-    fun resideInPath(name: String) = PackageHelper.resideInPackage(name, path, '/')
 
     fun hasTypeAlias(name: String? = null) = when (name) {
         null -> typeAliases.isNotEmpty()
