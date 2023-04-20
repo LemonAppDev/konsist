@@ -7,8 +7,9 @@ fun Sequence<KoBaseDeclaration>.withFilePaths(vararg path: String) = filter { ko
 }
 
 fun Sequence<KoBaseDeclaration>.withSomeFilePaths(vararg path: String) = filter { koBaseDeclaration ->
-    path.any { koBaseDeclaration.hasFilePath(it) } }
-
+    path.any { koBaseDeclaration.hasFilePath(it) }
+}
 
 fun Sequence<KoBaseDeclaration>.withoutFilePaths(vararg path: String) = filter { koBaseDeclaration ->
-    path.none { koBaseDeclaration.hasFilePath(it) } }
+    path.none { koBaseDeclaration.hasFilePath(it) }
+}
