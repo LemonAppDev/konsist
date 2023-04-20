@@ -1,37 +1,142 @@
-# Configure Konsist
+---
+description: Aim for better test separation.
+---
 
-## Configure Konsist
+# Add Custom Test Directory
 
-## Add Dependency To Test Source Set
+The `konsist` library can be added to the project by adding the dependency on the existing `test` source set (see [gettingstarted.md](gettingstarted.md "mention")).
 
-`Konsist` can be added to the project using the `test` source set.
+![test sorce directory](../.gitbook/assets/TestSourceSet.png)
 
-![KonsistSourceSet.png](../.gitbook/assets/TestSourceSet.png)
+As the project grows it is desirable to isolate each type of test e.g. isolate unit tests from Konsist tests.  To organize tests a new supplemental test source directory `konsistTest` can be defined.&#x20;
 
-Add the following dependency to the `module\build.gradle.kts` file:
+![konsistTest sorce directory](../.gitbook/assets/KonsistTestSourceSet.png)
+
+## Add Test Source Directory
+
+This section demonstrates how to add the `konsistTest` test source directory inside the `app` module. This test directory will have  `kotlin` folder containing Kotlin code.
+
+{% tabs %}
+{% tab title="Gradle (Kotlin)" %}
+Use the Gradle built-in [JVM Test Suite plugin](https://docs.gradle.org/current/userguide/jvm\_test\_suite\_plugin.html) to define the `konsistTest` source set. Add a `testing` block to the project configuration:
 
 ```kotlin
-dependencies {
-    testImplementation(KONSIST_DEPENDENCY)
+// app/build.gradle.kts
+
+plugins {
+    java
+    `jvm-test-suite`
 }
-```
 
-## Create KonsistTest Source Set
-
-For better test separation a new `konsistTest` source set can be defined using the [JVM Test Suite Plugin](https://docs.gradle.org/current/userguide/jvm\_test\_suite\_plugin.html).
-
-![KonsistSourceSet.png](../.gitbook/assets/KonsistTestSourceSet.png)
-
-Add the following `testing` block configuration to the `module\build.gradle.kts` file:
-
-```kotlin
 testing {
     suites {
         register("konsistTest", JvmTestSuite::class) {
             dependencies {
-                // KONSIST_DEPENDENCY
+                // Add 'main' source set dependency
+                implementation(project())
+                
+                // Add Konsist dependency
+                implementation("com.lemonappdev:konsist:0.7.4") 
             }
         }
     }
 }
+
+// Add optionally to run Konsist tests with the Gradle 'check' task
+tasks.named("check") { 
+    dependsOn(testing.suites.named("integrationTest"))
+}
 ```
+{% endtab %}
+
+{% tab title="Gradle" %}
+Use the Gradle built-in [JVM Test Suite plugin](https://docs.gradle.org/current/userguide/jvm\_test\_suite\_plugin.html) to define the `konsistTest` source set. Add a `testing` block to the project configuration:
+
+```kotlin
+// app/build.gradle
+
+plugins {
+    id 'java'
+    id 'jvm-test-suite'
+}
+
+testing {
+    suites { 
+        test { 
+            useJUnitJupiter() 
+        }
+
+        integrationTest(JvmTestSuite) { 
+            dependencies {
+                // Add 'main' source set dependency
+                implementation project() 
+                
+                // Add Konsist dependency
+                implementation "com.lemonappdev:konsist:0.7.4"
+            }
+
+            targets { 
+                all {
+                    testTask.configure {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Add optionally to run Konsist tests with the Gradle 'check' task
+tasks.named('check') { 
+    dependsOn(testing.suites.integrationTest)
+}
+```
+{% endtab %}
+
+{% tab title="Maven" %}
+Use the [Maven build helper plugin](https://github.com/mojohaus/build-helper-maven-plugin) to define the `konsistTest` test source directory. Add plugin config to the project configuration:
+
+````xml
+// app/pom.xml
+
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>build-helper-maven-plugin</artifactId>
+    <version>3.3.0</version>
+    <executions>
+        <execution>
+            <id>add-konsist-test-source</id>
+            <phase>generate-test-sources</phase>
+            <goals>
+                <goal>add-test-source</goal>
+            </goals>
+            <configuration>
+                <sources>
+                    <source>src/konsistTest/kotlin</source>
+                </sources>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+````
+{% endtab %}
+{% endtabs %}
+
+&#x20;Create `app/src/konsistTest/kotlin` folder and reload the project. The IDE will present a new `konsistTest` source set in the `app` module.
+
+<figure><img src="../.gitbook/assets/KonsistTestSourceSet.png" alt=""><figcaption><p>konsistTest sorce directory</p></figcaption></figure>
+
+The `konsistTest` test source folder works exactly like build-in `test` source folder, so Kosist tests can be defined and executed in a similar way:
+
+{% tabs %}
+{% tab title="Gradle" %}
+```
+ ./gradlew app:konsistTest
+```
+{% endtab %}
+
+{% tab title="Maven" %}
+
+{% endtab %}
+{% endtabs %}
