@@ -461,16 +461,16 @@ class KoDeclarationSequenceExtTest {
         val package1 = "com.sample.samplepackage1"
         val package2 = "com.sample.samplepackage2"
         val declaration1: KoDeclaration = mockk {
-            every { resideInPackages(package1) } returns true
-            every { resideInPackages(package2) } returns true
+            every { resideInPackage(package1) } returns true
+            every { resideInPackage(package2) } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { resideInPackages(package1) } returns false
-            every { resideInPackages(package2) } returns true
+            every { resideInPackage(package1) } returns false
+            every { resideInPackage(package2) } returns true
         }
         val declaration3: KoDeclaration = mockk {
-            every { resideInPackages(package1) } returns false
-            every { resideInPackages(package2) } returns false
+            every { resideInPackage(package1) } returns false
+            every { resideInPackage(package2) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
@@ -487,16 +487,16 @@ class KoDeclarationSequenceExtTest {
         val package1 = "com.sample.samplepackage1"
         val package2 = "com.sample.samplepackage2"
         val declaration1: KoDeclaration = mockk {
-            every { resideOutsidePackages(package1) } returns false
-            every { resideOutsidePackages(package2) } returns false
+            every { resideOutsidePackage(package1) } returns false
+            every { resideOutsidePackage(package2) } returns false
         }
         val declaration2: KoDeclaration = mockk {
-            every { resideOutsidePackages(package1) } returns true
-            every { resideOutsidePackages(package2) } returns false
+            every { resideOutsidePackage(package1) } returns true
+            every { resideOutsidePackage(package2) } returns false
         }
         val declaration3: KoDeclaration = mockk {
-            every { resideOutsidePackages(package1) } returns true
-            every { resideOutsidePackages(package2) } returns true
+            every { resideOutsidePackage(package1) } returns true
+            every { resideOutsidePackage(package2) } returns true
         }
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
@@ -513,16 +513,16 @@ class KoDeclarationSequenceExtTest {
         val package1 = "com.sample.samplepackage1"
         val package2 = "com.sample.samplepackage2"
         val declaration1: KoDeclaration = mockk {
-            every { resideInPackages(package1) } returns true
-            every { resideInPackages(package2) } returns true
+            every { resideInPackage(package1) } returns true
+            every { resideInPackage(package2) } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { resideInPackages(package1) } returns false
-            every { resideInPackages(package2) } returns true
+            every { resideInPackage(package1) } returns false
+            every { resideInPackage(package2) } returns true
         }
         val declaration3: KoDeclaration = mockk {
-            every { resideInPackages(package1) } returns false
-            every { resideInPackages(package2) } returns false
+            every { resideInPackage(package1) } returns false
+            every { resideInPackage(package2) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
