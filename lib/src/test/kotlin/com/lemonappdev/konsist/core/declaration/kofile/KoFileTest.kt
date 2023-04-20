@@ -34,6 +34,20 @@ class KoFileTest {
     }
 
     @Test
+    fun `file-has-path`() {
+        // given
+        val sut = getSnippetFile("file-has-path")
+            .files()
+            .first()
+
+        // then
+        sut.run {
+            resideInPath("../declaration/kofile/..") shouldBeEqualTo true
+            resideInPath("/declaration/kofile/") shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `file-project-path`() {
         // given
         val sut = getSnippetFile("file-project-path")
@@ -105,9 +119,9 @@ class KoFileTest {
         // then
         sut.run {
             packageDirective?.name shouldBeEqualTo "samplepackage"
-            hasPackage("com.samplepackage") shouldBeEqualTo true
-            hasPackage("com..") shouldBeEqualTo true
-            hasPackage("com") shouldBeEqualTo false
+            resideInPackage("com.samplepackage") shouldBeEqualTo true
+            resideInPackage("com..") shouldBeEqualTo true
+            resideInPackage("com") shouldBeEqualTo false
         }
     }
 

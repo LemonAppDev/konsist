@@ -97,9 +97,11 @@ class KoFile private constructor(private val ktFile: KtFile) :
         else -> imports.any { PackageHelper.resideInPackage(name, it.name) }
     }
 
-    fun hasPackage(name: String) = packageDirective
+    fun resideInPackage(name: String) = packageDirective
         ?.qualifiedName
         ?.let { PackageHelper.resideInPackage(name, it) }
+
+    fun resideInPath(name: String) = PackageHelper.resideInPackage(name, path, '/')
 
     fun hasTypeAlias(name: String? = null) = when (name) {
         null -> typeAliases.isNotEmpty()

@@ -168,10 +168,10 @@ class KoFileSequenceExtTest {
         // given
         val packageName = "SamplePackage"
         val file1: KoFile = mockk {
-            every { hasPackage(packageName) } returns true
+            every { resideInPackage(packageName) } returns true
         }
         val file2: KoFile = mockk {
-            every { hasPackage(packageName) } returns false
+            every { resideInPackage(packageName) } returns false
         }
         val files = sequenceOf(file1, file2)
 
@@ -187,10 +187,10 @@ class KoFileSequenceExtTest {
         // given
         val packageName = "SamplePackage"
         val file1: KoFile = mockk {
-            every { hasPackage(packageName) } returns true
+            every { resideInPackage(packageName) } returns true
         }
         val file2: KoFile = mockk {
-            every { hasPackage(packageName) } returns false
+            every { resideInPackage(packageName) } returns false
         }
         val files = sequenceOf(file1, file2)
 
@@ -204,18 +204,17 @@ class KoFileSequenceExtTest {
     @Test
     fun `withPath(String) returns file1 with given path`() {
         // given
-        val path1 = "SamplePath"
-        val path2 = "OtherPath"
+        val path = "SamplePath"
         val file1: KoFile = mockk {
-            every { path } returns path1
+            every { resideInPath(path) } returns true
         }
         val file2: KoFile = mockk {
-            every { path } returns path2
+            every { resideInPath(path) } returns false
         }
         val files = sequenceOf(file1, file2)
 
         // when
-        val sut = files.withPath(path1)
+        val sut = files.withPath(path)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1)
@@ -224,18 +223,17 @@ class KoFileSequenceExtTest {
     @Test
     fun `withoutPath(String) returns file2 without given path`() {
         // given
-        val path1 = "SamplePath"
-        val path2 = "OtherPath"
+        val path = "SamplePath"
         val file1: KoFile = mockk {
-            every { path } returns path1
+            every { resideInPath(path) } returns true
         }
         val file2: KoFile = mockk {
-            every { path } returns path2
+            every { resideInPath(path) } returns false
         }
         val files = sequenceOf(file1, file2)
 
         // when
-        val sut = files.withoutPath(path1)
+        val sut = files.withoutPath(path)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file2)
