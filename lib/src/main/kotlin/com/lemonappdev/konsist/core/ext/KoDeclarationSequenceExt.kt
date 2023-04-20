@@ -30,50 +30,50 @@ fun Sequence<KoDeclaration>.withTopLevel() = filter { it.isTopLevel() }
 
 fun Sequence<KoDeclaration>.withoutTopLevel() = filterNot { it.isTopLevel() }
 
-fun Sequence<KoDeclaration>.withAnnotations(vararg annotation: String) = filter { koDeclaration ->
-    annotation.all { koDeclaration.hasAnnotation(it) }
+fun Sequence<KoDeclaration>.withAnnotations(vararg annotations: String) = filter { koDeclaration ->
+    annotations.all { koDeclaration.hasAnnotation(it) }
 }
 
-fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotation: String) = filter { koDeclaration ->
-    annotation.none { koDeclaration.hasAnnotation(it) }
+fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotations: String) = filter { koDeclaration ->
+    annotations.none { koDeclaration.hasAnnotation(it) }
 }
 
-fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotation: String) = filter { koDeclaration ->
-    annotation.any { koDeclaration.hasAnnotation(it) }
+fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotations: String) = filter { koDeclaration ->
+    annotations.any { koDeclaration.hasAnnotation(it) }
 }
 
-fun Sequence<KoDeclaration>.withAnnotations(vararg annotation: KClass<*>) = filter { koDeclaration ->
-    annotation.all { annotation ->
+fun Sequence<KoDeclaration>.withAnnotations(vararg annotations: KClass<*>) = filter { koDeclaration ->
+    annotations.all { annotation ->
         annotation
             .simpleName
             ?.let { koDeclaration.hasAnnotation(it) } ?: false
     }
 }
 
-fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotation: KClass<*>) = filter { koDeclaration ->
-    annotation.none { annotation ->
+fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotations: KClass<*>) = filter { koDeclaration ->
+    annotations.none { annotation ->
         annotation
             .simpleName
             ?.let { koDeclaration.hasAnnotation(it) } ?: false
     }
 }
 
-fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotation: KClass<*>) = filter { koDeclaration ->
-    annotation.any { annotation ->
+fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotations: KClass<*>) = filter { koDeclaration ->
+    annotations.any { annotation ->
         annotation
             .simpleName
             ?.let { koDeclaration.hasAnnotation(it) } ?: false
     }
 }
 
-fun Sequence<KoDeclaration>.withModifiers(vararg modifier: KoModifier) = filter { it.hasModifiers(*modifier) }
+fun Sequence<KoDeclaration>.withModifiers(vararg modifiers: KoModifier) = filter { it.hasModifiers(*modifiers) }
 
-fun Sequence<KoDeclaration>.withoutModifiers(vararg modifier: KoModifier) = filter { koDeclaration ->
-    modifier.none { koDeclaration.hasModifiers(it) }
+fun Sequence<KoDeclaration>.withoutModifiers(vararg modifiers: KoModifier) = filter { koDeclaration ->
+    modifiers.none { koDeclaration.hasModifiers(it) }
 }
 
-fun Sequence<KoDeclaration>.withSomeModifiers(vararg modifier: KoModifier) = filter { koDeclaration ->
-    modifier.any { koDeclaration.hasModifiers(it) }
+fun Sequence<KoDeclaration>.withSomeModifiers(vararg modifiers: KoModifier) = filter { koDeclaration ->
+    modifiers.any { koDeclaration.hasModifiers(it) }
 }
 
 fun Sequence<KoDeclaration>.withPackages(vararg packages: String) = filter { koDeclaration ->

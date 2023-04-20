@@ -6,14 +6,14 @@ fun Sequence<KoParametrizedDeclaration>.withParameter() = filter { it.hasParamet
 
 fun Sequence<KoParametrizedDeclaration>.withoutParameter() = filterNot { it.hasParameterNamed() }
 
-fun Sequence<KoParametrizedDeclaration>.withParameters(vararg name: String) = filter { koParametrizedDeclaration ->
-    name.all { koParametrizedDeclaration.hasParameterNamed(it) }
+fun Sequence<KoParametrizedDeclaration>.withParameters(vararg names: String) = filter { koParametrizedDeclaration ->
+    names.all { koParametrizedDeclaration.hasParameterNamed(it) }
 }
 
-fun Sequence<KoParametrizedDeclaration>.withSomeParameters(vararg name: String) = filter { koParametrizedDeclaration ->
-    name.any { koParametrizedDeclaration.hasParameterNamed(it) }
+fun Sequence<KoParametrizedDeclaration>.withSomeParameters(vararg names: String) = filter { koParametrizedDeclaration ->
+    names.any { koParametrizedDeclaration.hasParameterNamed(it) }
 }
 
-fun Sequence<KoParametrizedDeclaration>.withoutParameters(vararg name: String) = filter { koParametrizedDeclaration ->
-    name.none { koParametrizedDeclaration.hasParameterNamed(it) }
+fun Sequence<KoParametrizedDeclaration>.withoutParameters(vararg names: String) = filter { koParametrizedDeclaration ->
+    names.none { koParametrizedDeclaration.hasParameterNamed(it) }
 }
