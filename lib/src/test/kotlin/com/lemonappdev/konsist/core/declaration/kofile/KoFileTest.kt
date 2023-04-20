@@ -243,6 +243,21 @@ class KoFileTest {
     }
 
     @Test
+    fun `file-has-typealias`() {
+        // given
+        val sut = getSnippetFile("file-has-typealias")
+            .files()
+            .first()
+
+        // then
+        sut.run {
+            hasTypeAlias() shouldBeEqualTo true
+            hasTypeAlias("SampleTypeAlias") shouldBeEqualTo true
+            hasTypeAlias("OtherTypeAlias") shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `file-contains-no-typealias`() {
         // given
         val sut = getSnippetFile("file-contains-no-typealias")
@@ -254,6 +269,20 @@ class KoFileTest {
             .typeAliases
             .isEmpty()
             .shouldBeEqualTo(true)
+    }
+
+    @Test
+    fun `file-has-no-typealias`() {
+        // given
+        val sut = getSnippetFile("file-has-no-typealias")
+            .files()
+            .first()
+
+        // then
+        sut.run {
+            hasTypeAlias() shouldBeEqualTo false
+            hasTypeAlias("SampleTypeAlias") shouldBeEqualTo false
+        }
     }
 
     @Test
