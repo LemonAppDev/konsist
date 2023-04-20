@@ -15,3 +15,4 @@ artefact will be transferred to [maven central](https://central.sonatype.com/art
 repository after some time.
 
 Add sonatype konsist artifacts can be filtered [here](https://s01.oss.sonatype.org/#nexus-search;quick~konsist). 
+
