@@ -164,79 +164,107 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withPackage(String) returns file1 with given package`() {
+    fun `withPackage(String) returns files with one of given package names`() {
         // given
-        val packageName = "SamplePackage"
+        val packageName1 = "SamplePackage1"
+        val packageName2 = "SamplePackage2"
         val file1: KoFile = mockk {
-            every { hasPackage(packageName) } returns true
+            every { hasPackage(packageName1) } returns true
+            every { hasPackage(packageName2) } returns false
         }
         val file2: KoFile = mockk {
-            every { hasPackage(packageName) } returns false
+            every { hasPackage(packageName1) } returns false
+            every { hasPackage(packageName2) } returns true
         }
-        val files = sequenceOf(file1, file2)
+        val file3: KoFile = mockk {
+            every { hasPackage(packageName1) } returns false
+            every { hasPackage(packageName2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withPackage(packageName)
+        val sut = files.withPackage(packageName1, packageName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut.toList() shouldBeEqualTo listOf(file1, file2)
     }
 
     @Test
-    fun `withoutPackage(String) returns file2 without given package`() {
+    fun `withoutPackage(String) returns file3 without given package names`() {
         // given
-        val packageName = "SamplePackage"
+        val packageName1 = "SamplePackage1"
+        val packageName2 = "SamplePackage2"
         val file1: KoFile = mockk {
-            every { hasPackage(packageName) } returns true
+            every { hasPackage(packageName1) } returns true
+            every { hasPackage(packageName2) } returns false
         }
         val file2: KoFile = mockk {
-            every { hasPackage(packageName) } returns false
+            every { hasPackage(packageName1) } returns false
+            every { hasPackage(packageName2) } returns true
         }
-        val files = sequenceOf(file1, file2)
+        val file3: KoFile = mockk {
+            every { hasPackage(packageName1) } returns false
+            every { hasPackage(packageName2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withoutPackage(packageName)
+        val sut = files.withoutPackage(packageName1, packageName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut.toList() shouldBeEqualTo listOf(file3)
     }
 
     @Test
-    fun `withPath(String) returns file1 with given path`() {
+    fun `withPath(String) returns files with one of given path names`() {
         // given
-        val path = "SamplePath"
+        val path1 = "SamplePath1"
+        val path2 = "SamplePath2"
         val file1: KoFile = mockk {
-            every { resideInPath(path) } returns true
+            every { resideInPath(path1) } returns true
+            every { resideInPath(path2) } returns false
         }
         val file2: KoFile = mockk {
-            every { resideInPath(path) } returns false
+            every { resideInPath(path1) } returns false
+            every { resideInPath(path2) } returns true
         }
-        val files = sequenceOf(file1, file2)
+        val file3: KoFile = mockk {
+            every { resideInPath(path1) } returns false
+            every { resideInPath(path2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withPath(path)
+        val sut = files.withPath(path1, path2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut.toList() shouldBeEqualTo listOf(file1, file2)
     }
 
     @Test
-    fun `withoutPath(String) returns file2 without given path`() {
+    fun `withoutPath(String) returns file3 without given path names`() {
         // given
-        val path = "SamplePath"
+        val path1 = "SamplePath1"
+        val path2 = "SamplePath2"
         val file1: KoFile = mockk {
-            every { resideInPath(path) } returns true
+            every { resideInPath(path1) } returns true
+            every { resideInPath(path2) } returns false
         }
         val file2: KoFile = mockk {
-            every { resideInPath(path) } returns false
+            every { resideInPath(path1) } returns false
+            every { resideInPath(path2) } returns true
         }
-        val files = sequenceOf(file1, file2)
+        val file3: KoFile = mockk {
+            every { resideInPath(path1) } returns false
+            every { resideInPath(path2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withoutPath(path)
+        val sut = files.withoutPath(path1, path2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut.toList() shouldBeEqualTo listOf(file3)
     }
 
     @Test
