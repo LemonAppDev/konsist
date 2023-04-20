@@ -12,6 +12,42 @@ import org.junit.jupiter.api.Test
 
 class KoFileSequenceExtTest {
     @Test
+    fun `withImport() returns file1 with given import`() {
+        // given
+        val file1: KoFile = mockk {
+            every { hasImport() } returns true
+        }
+        val file2: KoFile = mockk {
+            every { hasImport() } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withImport()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
+    }
+
+    @Test
+    fun `withoutImport() returns file2 without given import`() {
+        // given
+        val file1: KoFile = mockk {
+            every { hasImport() } returns true
+        }
+        val file2: KoFile = mockk {
+            every { hasImport() } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withoutImport()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
+    }
+
+    @Test
     fun `withImports(String) returns file1 with given import`() {
         // given
         val import = "SampleImport"
