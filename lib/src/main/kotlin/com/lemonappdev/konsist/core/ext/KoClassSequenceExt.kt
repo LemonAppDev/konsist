@@ -144,9 +144,25 @@ fun Sequence<KoClass>.withoutParentInterfaces(vararg names: KClass<*>) = filter 
     }
 }
 
-fun Sequence<KoClass>.withParentClass(name: String? = null) = filter { it.hasParentClass(name) }
+fun Sequence<KoClass>.withParentClass(vararg names: String) = filter { koClass ->
+    if (names.isEmpty()) {
+        koClass.hasParentClass()
+    } else {
+        names.any {
+            koClass.hasParentClass(it)
+        }
+    }
+}
 
-fun Sequence<KoClass>.withoutParentClass(name: String? = null) = filterNot { it.hasParentClass(name) }
+fun Sequence<KoClass>.withoutParentClass(vararg names: String) = filter { koClass ->
+    if (names.isEmpty()) {
+        !koClass.hasParentClass()
+    } else {
+        names.none {
+            koClass.hasParentClass(it)
+        }
+    }
+}
 
 inline fun <reified T> Sequence<KoClass>.withParentClassOf() = filter {
     it
