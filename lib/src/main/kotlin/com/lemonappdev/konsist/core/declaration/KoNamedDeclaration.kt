@@ -10,4 +10,10 @@ abstract class KoNamedDeclaration(private val ktElement: KtElement) : KoBaseDecl
      * Name of the declaration
      */
     open val name by lazy { ktElement.name ?: "" }
+
+    fun hasNameWithPrefix(prefix: String) = name.startsWith(prefix)
+
+    fun hasNameWithSuffix(suffix: String) = name.endsWith(suffix)
+
+    fun hasNameContaining(text: String) = name.contains(text)
 }
