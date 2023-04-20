@@ -23,7 +23,11 @@ object PackageHelper {
             declarationPackage.startsWith("..") &&
             declarationPackage.endsWith("..")
         ) {
+            if(!declarationPackageSplitByTwoDots.first().contains(separator)){
             mainPackageSplitByOneSeparator.contains(declarationPackageSplitByTwoDots.first())
+            } else {
+                mainPackageSplitByOneSeparator.containsAll(declarationPackageSplitByOneSeparator)
+            }
         } else if (
             declarationPackageSplitByTwoDots.size == 1 &&
             declarationPackage.startsWith("..") &&
