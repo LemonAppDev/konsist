@@ -5,6 +5,10 @@ package com.lemonappdev.konsist.core.ext
 import com.lemonappdev.konsist.core.declaration.KoFile
 import kotlin.reflect.KClass
 
+fun Sequence<KoFile>.withImport() = filter { it.hasImport() }
+
+fun Sequence<KoFile>.withoutImport() = filterNot { it.hasImport() }
+
 fun Sequence<KoFile>.withImports(vararg import: String) = filter { koFile ->
     import.all { koFile.hasImport(it) }
 }

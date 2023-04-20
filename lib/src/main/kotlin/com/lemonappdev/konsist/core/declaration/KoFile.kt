@@ -92,7 +92,10 @@ class KoFile private constructor(private val ktFile: KtFile) :
     ): List<KoDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
-    fun hasImport(name: String) = imports.any { PackageHelper.resideInPackage(name, it.name) }
+    fun hasImport(name: String? = null) = when (name) {
+        null -> imports.isNotEmpty()
+        else -> imports.any { PackageHelper.resideInPackage(name, it.name) }
+    }
 
     fun hasPackage(name: String) = packageDirective
         ?.qualifiedName

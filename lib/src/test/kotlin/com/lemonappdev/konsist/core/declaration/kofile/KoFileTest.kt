@@ -72,6 +72,7 @@ class KoFileTest {
 
         // then
         sut.run {
+            hasImport() shouldBeEqualTo true
             hasImport("com..") shouldBeEqualTo true
             hasImport("com") shouldBeEqualTo false
             hasImport("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo true
@@ -89,6 +90,7 @@ class KoFileTest {
         // then
         sut.run {
             imports.isEmpty() shouldBeEqualTo true
+            hasImport() shouldBeEqualTo false
             hasImport("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
         }
     }
