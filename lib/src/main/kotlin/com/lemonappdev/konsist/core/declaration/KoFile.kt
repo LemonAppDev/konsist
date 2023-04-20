@@ -44,9 +44,6 @@ class KoFile private constructor(private val ktFile: KtFile) :
         path.removePrefix(mainPath)
     }
 
-    val packagee by lazy {
-
-    }
     val annotations by lazy {
         ktFile
             .annotationEntries
@@ -86,8 +83,6 @@ class KoFile private constructor(private val ktFile: KtFile) :
     ): List<KoDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
-    fun resideInPath(name: String) = PackageHelper.resideInPackage(name, path, '/')
-
     fun hasAnnotation(name: String) = annotations
         .any { it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name }
 
@@ -99,16 +94,12 @@ class KoFile private constructor(private val ktFile: KtFile) :
 
     fun hasPackage(name: String) = packagee
         ?.qualifiedName
-        ?.let { PackageHelper.resideInPackage(name, it) } ?: false
+        ?.let { PackageHelper.resideInPackage(name, it) }
 
     fun hasImport(name: String? = null) = when (name) {
         null -> imports.isNotEmpty()
         else -> imports.any { PackageHelper.resideInPackage(name, it.name) }
     }
-
-    fun hasPackage(name: String) = packagee
-        ?.qualifiedName
-        ?.let { PackageHelper.resideInPackage(name, it) }
 
     fun resideInPath(name: String) = PackageHelper.resideInPackage(name, path, '/')
 
