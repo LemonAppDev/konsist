@@ -73,14 +73,14 @@ fun Sequence<KoFile>.withTypeAlias() = filter { it.hasTypeAlias() }
 
 fun Sequence<KoFile>.withoutTypeAlias() = filterNot { it.hasTypeAlias() }
 
-fun Sequence<KoFile>.withTypeAliases(vararg typealiasName: String) = filter { koFile ->
-    typealiasName.all { koFile.hasTypeAlias(it) }
+fun Sequence<KoFile>.withTypeAliases(vararg typeAliasName: String) = filter { koFile ->
+    typeAliasName.all { koFile.hasTypeAlias(it) }
 }
 
-fun Sequence<KoFile>.withSomeTypeAliases(vararg typealiasName: String) = filter { koFile ->
-    typealiasName.any { koFile.hasTypeAlias(it) }
+fun Sequence<KoFile>.withSomeTypeAliases(vararg typeAliasName: String) = filter { koFile ->
+    typeAliasName.any { koFile.hasTypeAlias(it) }
 }
 
-fun Sequence<KoFile>.withoutTypeAliases(vararg typealiasName: String) = filter { koFile ->
-    typealiasName.none { koFile.hasTypeAlias(it) }
+fun Sequence<KoFile>.withoutTypeAliases(vararg typeAliasName: String) = filter { koFile ->
+    typeAliasName.none { koFile.hasTypeAlias(it) }
 }
