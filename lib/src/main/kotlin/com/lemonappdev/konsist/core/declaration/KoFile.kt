@@ -96,7 +96,7 @@ class KoFile private constructor(private val ktFile: KtFile) :
 
     fun hasPackage(name: String) = packagee
         ?.qualifiedName
-        ?.let { PackageHelper.resideInPackage(name, it) }
+        ?.let { PackageHelper.resideInPackage(name, it) } ?: false
 
     fun hasImport(name: String? = null) = when (name) {
         null -> imports.isNotEmpty()
