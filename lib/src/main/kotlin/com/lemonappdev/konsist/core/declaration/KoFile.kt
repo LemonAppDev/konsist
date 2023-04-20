@@ -29,17 +29,6 @@ class KoFile private constructor(private val ktFile: KtFile) :
 
     override val name = ktFile.name.split("/").last()
 
-    val imports by lazy {
-        val ktImportDirectives = ktFile
-            .children
-            .filterIsInstance<KtImportList>()
-            .first()
-            .children
-            .filterIsInstance<KtImportDirective>()
-
-        ktImportDirectives.map { KoImport.getInstance(it) }
-    }
-
     val path by lazy {
         ktFile
             .virtualFilePath
@@ -55,12 +44,29 @@ class KoFile private constructor(private val ktFile: KtFile) :
         path.removePrefix(mainPath)
     }
 
+    val annotations by lazy {
+        ktFile
+            .annotationEntries
+            .map { KoAnnotation.getInstance(it) }
+    }
+
     val packagee by lazy {
         if (ktFile.packageDirective?.qualifiedName == "") {
             null
         } else {
             ktFile.packageDirective?.let { KoPackage.getInstance(it) }
         }
+    }
+
+    val imports by lazy {
+        val ktImportDirectives = ktFile
+            .children
+            .filterIsInstance<KtImportList>()
+            .first()
+            .children
+            .filterIsInstance<KtImportDirective>()
+
+        ktImportDirectives.map { KoImport.getInstance(it) }
     }
 
     val typeAliases by lazy {
@@ -70,11 +76,12 @@ class KoFile private constructor(private val ktFile: KtFile) :
             .map { KoTypeAlias.getInstance(it) }
     }
 
-    val annotations by lazy {
-        ktFile
-            .annotationEntries
-            .map { KoAnnotation.getInstance(it) }
-    }
+    override fun declarations(
+        modifiers: List<KoModifier>,
+        includeNested: Boolean,
+        includeLocal: Boolean,
+    ): List<KoDeclaration> =
+        KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
     fun hasAnnotation(name: String) = annotations
         .any { it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name }
@@ -85,21 +92,14 @@ class KoFile private constructor(private val ktFile: KtFile) :
         return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
     }
 
-    override fun declarations(
-        modifiers: List<KoModifier>,
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): List<KoDeclaration> =
-        KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
+    fun hasPackage(name: String) = packagee
+        ?.qualifiedName
+        ?.let { PackageHelper.resideInPackage(name, it) }
 
     fun hasImport(name: String? = null) = when (name) {
         null -> imports.isNotEmpty()
         else -> imports.any { PackageHelper.resideInPackage(name, it.name) }
     }
-
-    fun hasPackage(name: String) = packagee
-        ?.qualifiedName
-        ?.let { PackageHelper.resideInPackage(name, it) }
 
     fun resideInPath(name: String) = PackageHelper.resideInPackage(name, path, '/')
 
