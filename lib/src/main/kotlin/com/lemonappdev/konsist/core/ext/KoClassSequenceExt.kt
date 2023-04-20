@@ -71,9 +71,9 @@ inline fun <reified T> Sequence<KoClass>.withoutParentOf() = this - withParentOf
 
 fun Sequence<KoClass>.withParents(vararg names: String) = filter { koClass -> names.all { koClass.hasParent(it) } }
 
-fun Sequence<KoClass>.withoutParents(vararg names: String) = filter { koClass -> names.none { koClass.hasParent(it) } }
-
 fun Sequence<KoClass>.withSomeParents(vararg names: String) = filter { koClass -> names.any { koClass.hasParent(it) } }
+
+fun Sequence<KoClass>.withoutParents(vararg names: String) = filter { koClass -> names.none { koClass.hasParent(it) } }
 
 fun Sequence<KoClass>.withParents(vararg names: KClass<*>) = filter { koClass ->
     names.all { kClass ->
@@ -83,16 +83,16 @@ fun Sequence<KoClass>.withParents(vararg names: KClass<*>) = filter { koClass ->
     }
 }
 
-fun Sequence<KoClass>.withoutParents(vararg names: KClass<*>) = filter { koClass ->
-    names.none { kClass ->
+fun Sequence<KoClass>.withSomeParents(vararg names: KClass<*>) = filter { koClass ->
+    names.any { kClass ->
         koClass
             .parents
             .any { parent -> parent.name == kClass.simpleName }
     }
 }
 
-fun Sequence<KoClass>.withSomeParents(vararg names: KClass<*>) = filter { koClass ->
-    names.any { kClass ->
+fun Sequence<KoClass>.withoutParents(vararg names: KClass<*>) = filter { koClass ->
+    names.none { kClass ->
         koClass
             .parents
             .any { parent -> parent.name == kClass.simpleName }
@@ -114,11 +114,11 @@ inline fun <reified T> Sequence<KoClass>.withoutParentInterfaceOf() = this - wit
 fun Sequence<KoClass>.withParentInterfaces(vararg names: String) =
     filter { koClass -> names.all { koClass.hasParentInterface(it) } }
 
-fun Sequence<KoClass>.withoutParentInterfaces(vararg names: String) =
-    filter { koClass -> names.none { koClass.hasParentInterface(it) } }
-
 fun Sequence<KoClass>.withSomeParentInterfaces(vararg names: String) =
     filter { koClass -> names.any { koClass.hasParentInterface(it) } }
+
+fun Sequence<KoClass>.withoutParentInterfaces(vararg names: String) =
+    filter { koClass -> names.none { koClass.hasParentInterface(it) } }
 
 fun Sequence<KoClass>.withParentInterfaces(vararg names: KClass<*>) = filter { koClass ->
     names.all { kClass ->
@@ -128,16 +128,16 @@ fun Sequence<KoClass>.withParentInterfaces(vararg names: KClass<*>) = filter { k
     }
 }
 
-fun Sequence<KoClass>.withoutParentInterfaces(vararg names: KClass<*>) = filter { koClass ->
-    names.none { kClass ->
+fun Sequence<KoClass>.withSomeParentInterfaces(vararg names: KClass<*>) = filter { koClass ->
+    names.any { kClass ->
         koClass
             .parentInterfaces
             .any { parent -> parent.name == kClass.simpleName }
     }
 }
 
-fun Sequence<KoClass>.withSomeParentInterfaces(vararg names: KClass<*>) = filter { koClass ->
-    names.any { kClass ->
+fun Sequence<KoClass>.withoutParentInterfaces(vararg names: KClass<*>) = filter { koClass ->
+    names.none { kClass ->
         koClass
             .parentInterfaces
             .any { parent -> parent.name == kClass.simpleName }

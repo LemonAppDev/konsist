@@ -53,7 +53,7 @@ class KoBaseDeclarationSequenceExtTest {
         val baseDeclarations = sequenceOf(baseDeclaration1, baseDeclaration2, baseDeclaration3)
 
         // when
-        val sut = baseDeclarations.withoutFilePaths(path1, path2)
+        val sut = baseDeclarations.withoutFilePath(path1, path2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(baseDeclaration3)

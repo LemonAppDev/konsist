@@ -6,6 +6,6 @@ fun Sequence<KoBaseDeclaration>.withFilePath(vararg paths: String) = filter { ko
     paths.any { koBaseDeclaration.hasFilePath(it) }
 }
 
-fun Sequence<KoBaseDeclaration>.withoutFilePaths(vararg paths: String) = filter { koBaseDeclaration ->
+fun Sequence<KoBaseDeclaration>.withoutFilePath(vararg paths: String) = filter { koBaseDeclaration ->
     paths.none { koBaseDeclaration.hasFilePath(it) }
 }
