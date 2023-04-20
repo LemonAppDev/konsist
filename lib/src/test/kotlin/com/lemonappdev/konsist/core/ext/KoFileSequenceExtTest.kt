@@ -168,10 +168,10 @@ class KoFileSequenceExtTest {
         // given
         val packageName = "SamplePackage"
         val file1: KoFile = mockk {
-            every { resideInPackage(packageName) } returns true
+            every { hasPackage(packageName) } returns true
         }
         val file2: KoFile = mockk {
-            every { resideInPackage(packageName) } returns false
+            every { hasPackage(packageName) } returns false
         }
         val files = sequenceOf(file1, file2)
 
@@ -187,10 +187,10 @@ class KoFileSequenceExtTest {
         // given
         val packageName = "SamplePackage"
         val file1: KoFile = mockk {
-            every { resideInPackage(packageName) } returns true
+            every { hasPackage(packageName) } returns true
         }
         val file2: KoFile = mockk {
-            every { resideInPackage(packageName) } returns false
+            every { hasPackage(packageName) } returns false
         }
         val files = sequenceOf(file1, file2)
 
