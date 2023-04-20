@@ -58,8 +58,8 @@ class KoDeclarationForResideMethodsTest {
 
         // then
         sut.run {
-            resideInPath("Main/") shouldBeEqualTo false
-            resideInPath("TEST/", ignoreCase = false) shouldBeEqualTo false
+            resideInPath("main/") shouldBeEqualTo false
+            resideInPath("test/") shouldBeEqualTo false
         }
     }
 
@@ -72,9 +72,8 @@ class KoDeclarationForResideMethodsTest {
 
         // then
         sut.run {
-            resideInPath("TEST/") shouldBeEqualTo true
-            resideInPath("test/", ignoreCase = false) shouldBeEqualTo true
-            resideInPath("") shouldBeEqualTo true
+            resideInPath("../test/..") shouldBeEqualTo true
+            resideInPath("..snippet/forresidemethods/..") shouldBeEqualTo true
         }
     }
 
@@ -87,8 +86,8 @@ class KoDeclarationForResideMethodsTest {
 
         // then
         sut.run {
-            resideOutsidePath("test/", ignoreCase = false) shouldBeEqualTo false
-            resideOutsidePath("TEST/") shouldBeEqualTo false
+            resideOutsidePath("../test/..") shouldBeEqualTo false
+            resideOutsidePath("..snippet/forresidemethods/..") shouldBeEqualTo false
         }
     }
 
@@ -101,8 +100,8 @@ class KoDeclarationForResideMethodsTest {
 
         // then
         sut.run {
-            resideOutsidePath("TEST/", ignoreCase = false) shouldBeEqualTo true
-            resideOutsidePath("Main/") shouldBeEqualTo true
+            resideOutsidePath("/test/") shouldBeEqualTo true
+            resideOutsidePath("/Main/") shouldBeEqualTo true
         }
     }
 

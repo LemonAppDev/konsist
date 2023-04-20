@@ -21,13 +21,13 @@ fun Sequence<KoFile>.withoutImports(vararg import: String) = filter { koFile ->
     import.none { koFile.hasImport(it) }
 }
 
-fun Sequence<KoFile>.withPackage(packageName: String) = filter { it.hasPackage(packageName) ?: false }
+fun Sequence<KoFile>.withPackage(packageName: String) = filter { it.resideInPackage(packageName) ?: false }
 
-fun Sequence<KoFile>.withoutPackage(packageName: String) = filterNot { it.hasPackage(packageName) ?: false }
+fun Sequence<KoFile>.withoutPackage(packageName: String) = filterNot { it.resideInPackage(packageName) ?: false }
 
-fun Sequence<KoFile>.withPath(path: String) = filter { it.path == path }
+fun Sequence<KoFile>.withPath(path: String) = filter { it.resideInPath(path) }
 
-fun Sequence<KoFile>.withoutPath(path: String) = filterNot { it.path == path }
+fun Sequence<KoFile>.withoutPath(path: String) = filterNot { it.resideInPath(path) }
 
 fun Sequence<KoFile>.withAnnotation() = filter { it.annotations.isNotEmpty() }
 

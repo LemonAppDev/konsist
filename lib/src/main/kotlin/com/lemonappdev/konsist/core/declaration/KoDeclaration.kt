@@ -84,8 +84,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
 
     fun resideOutsidePackages(packageName: String) = !resideInPackages(packageName)
 
-    fun resideInPath(path: String, ignoreCase: Boolean = true) = filePath.contains(path, ignoreCase)
+    fun resideInPath(path: String) = PackageHelper.resideInPackage(path, filePath, '/')
 
-    fun resideOutsidePath(path: String, ignoreCase: Boolean = true) =
-        !resideInPath(path, ignoreCase = ignoreCase)
+    fun resideOutsidePath(path: String) = !resideInPath(path)
 }
