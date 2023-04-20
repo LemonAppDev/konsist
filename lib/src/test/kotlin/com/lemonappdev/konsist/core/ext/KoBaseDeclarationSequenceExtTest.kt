@@ -34,7 +34,7 @@ class KoBaseDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutFilePaths(String) returns baseDeclaration3 without path`() {
+    fun `withoutFilePath(String) returns baseDeclaration3 without path`() {
         // given
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"

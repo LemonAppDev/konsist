@@ -482,7 +482,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutPackages(String) returns declaration3 without package`() {
+    fun `withoutPackage(String) returns declaration3 without package`() {
         // given
         val package1 = "com.sample.samplepackage1"
         val package2 = "com.sample.samplepackage2"
@@ -534,7 +534,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutPaths(String) returns declaration3 without path`() {
+    fun `withoutPath(String) returns declaration3 without path`() {
         // given
         val path1 = "Path1"
         val path2 = "Path2"
