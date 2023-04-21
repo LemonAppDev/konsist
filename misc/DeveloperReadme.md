@@ -14,7 +14,10 @@
 artefact will be transferred to [maven central](https://central.sonatype.com/artifact/com.lemonappdev/konsist) 
 repository after some time.
 
-## Repository Links
+## Links
+- [Sonatype Jira](https://issues.sonatype.org/secure/Dashboard.jspa)
+
+### Repository Links
 - [Nexus Repository Manager](https://s01.oss.sonatype.org/#nexus-search;quick~konsist) 
 - [mvnrepository.com](https://mvnrepository.com/artifact/com.lemonappdev/konsist/)
 - [central.sonatype.com](https://central.sonatype.com/artifact/com.lemonappdev/konsist/)
