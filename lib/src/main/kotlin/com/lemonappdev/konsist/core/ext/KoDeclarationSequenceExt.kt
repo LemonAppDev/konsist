@@ -30,6 +30,10 @@ fun Sequence<KoDeclaration>.withTopLevel() = filter { it.isTopLevel() }
 
 fun Sequence<KoDeclaration>.withoutTopLevel() = filterNot { it.isTopLevel() }
 
+fun Sequence<KoDeclaration>.withAnnotation() = filter { it.annotations.isNotEmpty() }
+
+fun Sequence<KoDeclaration>.withoutAnnotation() = filterNot { it.annotations.isNotEmpty() }
+
 fun Sequence<KoDeclaration>.withAnnotations(vararg annotations: String) = filter {
     annotations.all { annotation -> it.hasAnnotation(annotation) }
 }
@@ -42,7 +46,7 @@ fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotations: String) = fil
     annotations.none { annotation -> it.hasAnnotation(annotation) }
 }
 
-fun Sequence<KoDeclaration>.withAnnotations(vararg annotations: KClass<*>) = filter {
+fun Sequence<KoDeclaration>.withAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.all { annotation ->
         annotation
             .simpleName
@@ -50,7 +54,7 @@ fun Sequence<KoDeclaration>.withAnnotations(vararg annotations: KClass<*>) = fil
     }
 }
 
-fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotations: KClass<*>) = filter {
+fun Sequence<KoDeclaration>.withSomeAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.any { annotation ->
         annotation
             .simpleName
@@ -58,13 +62,17 @@ fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotations: KClass<*>) =
     }
 }
 
-fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotations: KClass<*>) = filter {
+fun Sequence<KoDeclaration>.withoutAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.none { annotation ->
         annotation
             .simpleName
             ?.let { name -> it.hasAnnotation(name) } ?: false
     }
 }
+
+inline fun <reified T> Sequence<KoDeclaration>.withAnnotationOf() = filter { it.hasAnnotation<T>() }
+
+inline fun <reified T> Sequence<KoDeclaration>.withoutAnnotationOf() = filterNot { it.hasAnnotation<T>() }
 
 fun Sequence<KoDeclaration>.withModifiers(vararg modifiers: KoModifier) = filter { it.hasModifiers(*modifiers) }
 

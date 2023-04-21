@@ -34,10 +34,7 @@ fun Sequence<KoFile>.withAnnotation() = filter { it.annotations.isNotEmpty() }
 fun Sequence<KoFile>.withoutAnnotation() = filterNot { it.annotations.isNotEmpty() }
 
 fun Sequence<KoFile>.withAnnotations(vararg annotations: String) = filter {
-    when {
-        annotations.isEmpty() -> it.annotations.isNotEmpty()
-        else -> annotations.all { annotation -> it.hasAnnotation(annotation) }
-    }
+    annotations.all { annotation -> it.hasAnnotation(annotation) }
 }
 
 fun Sequence<KoFile>.withSomeAnnotations(vararg annotations: String) = filter {
@@ -48,7 +45,11 @@ fun Sequence<KoFile>.withoutAnnotations(vararg annotations: String) = filter {
     annotations.none { annotation -> it.hasAnnotation(annotation) }
 }
 
-fun Sequence<KoFile>.withAnnotations(vararg annotations: KClass<*>) = filter {
+inline fun <reified T> Sequence<KoFile>.withAnnotationOf() = filter { it.hasAnnotation<T>() }
+
+inline fun <reified T> Sequence<KoFile>.withoutAnnotationOf() = filterNot { it.hasAnnotation<T>() }
+
+fun Sequence<KoFile>.withAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.all { annotation ->
         annotation
             .simpleName
@@ -56,7 +57,7 @@ fun Sequence<KoFile>.withAnnotations(vararg annotations: KClass<*>) = filter {
     }
 }
 
-fun Sequence<KoFile>.withSomeAnnotations(vararg annotations: KClass<*>) = filter {
+fun Sequence<KoFile>.withSomeAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.any { annotation ->
         annotation
             .simpleName
@@ -64,7 +65,7 @@ fun Sequence<KoFile>.withSomeAnnotations(vararg annotations: KClass<*>) = filter
     }
 }
 
-fun Sequence<KoFile>.withoutAnnotations(vararg annotations: KClass<*>) = filter {
+fun Sequence<KoFile>.withoutAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.none { annotation ->
         annotation
             .simpleName

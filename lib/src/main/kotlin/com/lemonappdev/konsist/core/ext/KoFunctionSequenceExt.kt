@@ -3,6 +3,7 @@
 package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.declaration.KoFunction
+import kotlin.reflect.KClass
 
 fun Sequence<KoFunction>.withOperatorModifier() = filter { it.hasOperatorModifier() }
 
@@ -74,3 +75,11 @@ inline fun <reified T> Sequence<KoFunction>.withExplicitReturnTypeOf() = filter 
 
 inline fun <reified T> Sequence<KoFunction>.withoutExplicitReturnTypeOf() =
     filterNot { T::class.simpleName == it.explicitReturnType?.name }
+
+fun Sequence<KoFunction>.withExplicitReturnTypeOf(vararg types: KClass<*>) = filter {
+    types.any { kClass -> it.explicitReturnType?.name == kClass.simpleName }
+}
+
+fun Sequence<KoFunction>.withoutExplicitReturnTypeOf(vararg types: KClass<*>) = filter {
+    types.none { kClass -> it.explicitReturnType?.name == kClass.simpleName }
+}

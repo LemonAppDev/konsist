@@ -2,7 +2,15 @@ package com.lemonappdev.konsist.testdata
 
 class SampleClass
 
+class SampleClass1
+
+class SampleClass2
+
 class SampleType
+
+class SampleType1
+
+class SampleType2
 
 interface SampleInterface
 

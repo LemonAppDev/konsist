@@ -16,7 +16,7 @@ open class KoAnnotation private constructor(
     }
 
     fun representsType(name: String) =
-        name == fullyQualifiedName.substringAfterLast(".") || name == fullyQualifiedName
+        name == this.name || name == fullyQualifiedName
 
     inline fun <reified T>representsType() = T::class.qualifiedName == fullyQualifiedName
 

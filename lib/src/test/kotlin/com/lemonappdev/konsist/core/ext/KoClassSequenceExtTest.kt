@@ -3,6 +3,8 @@ package com.lemonappdev.konsist.core.ext
 import com.lemonappdev.konsist.core.declaration.KoClass
 import com.lemonappdev.konsist.core.declaration.KoParent
 import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.SampleClass1
+import com.lemonappdev.konsist.testdata.SampleClass2
 import com.lemonappdev.konsist.testdata.SampleInterface
 import com.lemonappdev.konsist.testdata.SampleInterface1
 import com.lemonappdev.konsist.testdata.SampleInterface2
@@ -493,7 +495,7 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2)
 
         // when
-        val sut = classes.withParent()
+        val sut = classes.withParents()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class1)
@@ -511,7 +513,7 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2)
 
         // when
-        val sut = classes.withoutParent()
+        val sut = classes.withoutParents()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class2)
@@ -686,7 +688,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withParents(KClass) returns class1 with given parents`() {
+    fun `withParentsOf(KClass) returns class1 with given parents`() {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
@@ -713,14 +715,14 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2, class3)
 
         // when
-        val sut = classes.withParents(SampleClass::class, SampleInterface::class)
+        val sut = classes.withParentsOf(SampleClass::class, SampleInterface::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(class1)
     }
 
     @Test
-    fun `withoutParents(KClass) returns class3 without given parents`() {
+    fun `withoutParentsOf(KClass) returns class3 without given parents`() {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
@@ -747,14 +749,14 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2, class3)
 
         // when
-        val sut = classes.withoutParents(SampleClass::class, SampleInterface::class)
+        val sut = classes.withoutParentsOf(SampleClass::class, SampleInterface::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(class3)
     }
 
     @Test
-    fun `withSomeParents(KClass) returns class1 and class2 which have at least one of given parents`() {
+    fun `withSomeParentsOf(KClass) returns class1 and class2 which have at least one of given parents`() {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
@@ -781,14 +783,14 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2, class3)
 
         // when
-        val sut = classes.withSomeParents(SampleClass::class, SampleInterface::class)
+        val sut = classes.withSomeParentsOf(SampleClass::class, SampleInterface::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(class1, class2)
     }
 
     @Test
-    fun `withParentInterfaces(KClass) returns classes with given parent interfaces`() {
+    fun `withParentInterfacesOf(KClass) returns classes with given parent interfaces`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -815,14 +817,14 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2, class3)
 
         // when
-        val sut = classes.withParentInterfaces(SampleInterface1::class, SampleInterface2::class)
+        val sut = classes.withParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(class1)
     }
 
     @Test
-    fun `withoutParentInterfaces(KClass) returns class3 without given parent interfaces`() {
+    fun `withoutParentInterfacesOf(KClass) returns class3 without given parent interfaces`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -849,14 +851,14 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2, class3)
 
         // when
-        val sut = classes.withoutParentInterfaces(SampleInterface1::class, SampleInterface2::class)
+        val sut = classes.withoutParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(class3)
     }
 
     @Test
-    fun `withSomeParentInterfaces(KClass) returns class1 and class2 which have at least one of given parents`() {
+    fun `withSomeParentInterfacesOf(KClass) returns class1 and class2 which have at least one of given parents`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -883,7 +885,7 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2, class3)
 
         // when
-        val sut = classes.withSomeParentInterfaces(SampleInterface1::class, SampleInterface2::class)
+        val sut = classes.withSomeParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(class1, class2)
@@ -901,7 +903,7 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2)
 
         // when
-        val sut = classes.withParentInterface()
+        val sut = classes.withParentInterfaces()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class1)
@@ -919,7 +921,7 @@ class KoClassSequenceExtTest {
         val classes = sequenceOf(class1, class2)
 
         // when
-        val sut = classes.withoutParentInterface()
+        val sut = classes.withoutParentInterfaces()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class2)
@@ -1231,5 +1233,57 @@ class KoClassSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(class2)
+    }
+
+    @Test
+    fun `withParentClassOf(KClass) returns parents with one of given parent classes`() {
+        // given
+        val name1 = "SampleClass1"
+        val name2 = "SampleClass2"
+        val class1: KoClass = mockk {
+            every { hasParentClass(name1) } returns true
+            every { hasParentClass(name2) } returns false
+        }
+        val class2: KoClass = mockk {
+            every { hasParentClass(name1) } returns false
+            every { hasParentClass(name2) } returns true
+        }
+        val class3: KoClass = mockk {
+            every { hasParentClass(name1) } returns false
+            every { hasParentClass(name2) } returns false
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withParentClassOf(SampleClass1::class, SampleClass2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class1, class2)
+    }
+
+    @Test
+    fun `withoutParentClassOf(KClass) returns parents without any of given parent classes`() {
+        // given
+        val name1 = "SampleClass1"
+        val name2 = "SampleClass2"
+        val class1: KoClass = mockk {
+            every { hasParentClass(name1) } returns true
+            every { hasParentClass(name2) } returns false
+        }
+        val class2: KoClass = mockk {
+            every { hasParentClass(name1) } returns false
+            every { hasParentClass(name2) } returns true
+        }
+        val class3: KoClass = mockk {
+            every { hasParentClass(name1) } returns false
+            every { hasParentClass(name2) } returns false
+        }
+        val classes = sequenceOf(class1, class2, class3)
+
+        // when
+        val sut = classes.withoutParentClassOf(SampleClass1::class, SampleClass2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(class3)
     }
 }

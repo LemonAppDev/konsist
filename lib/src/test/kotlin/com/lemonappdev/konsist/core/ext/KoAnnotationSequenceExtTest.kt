@@ -2,6 +2,8 @@ package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.declaration.KoAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.SampleAnnotation1
+import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -9,7 +11,7 @@ import org.junit.jupiter.api.Test
 
 class KoAnnotationSequenceExtTest {
     @Test
-    fun `withType() returns annotations with one of given types`() {
+    fun `withType(String) returns annotations with one of given types`() {
         // given
         val type1 = "type1"
         val type2 = "type2"
@@ -35,7 +37,7 @@ class KoAnnotationSequenceExtTest {
     }
 
     @Test
-    fun `withoutType() returns annotation3 without given types`() {
+    fun `withoutType(String) returns annotation3 without given types`() {
         // given
         val type1 = "type1"
         val type2 = "type2"
@@ -60,9 +62,61 @@ class KoAnnotationSequenceExtTest {
         sut.toList() shouldBeEqualTo listOf(annotation3)
     }
 
+    @Test
+    fun `withTypeOf(KClass) returns annotations with one of given types`() {
+        // given
+        val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
+        val type2 = "com.lemonappdev.konsist.testdata.SampleAnnotation2"
+        val annotation1: KoAnnotation = mockk {
+            every { representsType(type1) } returns true
+            every { representsType(type2) } returns false
+        }
+        val annotation2: KoAnnotation = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns true
+        }
+        val annotation3: KoAnnotation = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns false
+        }
+        val annotations = sequenceOf(annotation1, annotation2, annotation3)
+
+        // when
+        val sut = annotations.withTypeOf(SampleAnnotation1::class, SampleAnnotation2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(annotation1, annotation2)
+    }
+
+    @Test
+    fun `withoutTypeOf(KClass) returns annotation without any of given types`() {
+        // given
+        val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
+        val type2 = "com.lemonappdev.konsist.testdata.SampleAnnotation2"
+        val annotation1: KoAnnotation = mockk {
+            every { representsType(type1) } returns true
+            every { representsType(type2) } returns false
+        }
+        val annotation2: KoAnnotation = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns true
+        }
+        val annotation3: KoAnnotation = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns false
+        }
+        val annotations = sequenceOf(annotation1, annotation2, annotation3)
+
+        // when
+        val sut = annotations.withoutTypeOf(SampleAnnotation1::class, SampleAnnotation2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(annotation3)
+    }
+
     //  'every { representsType<SampleAnnotation>() } returns true' doesn't work because there is a bug in mockk
     @Test
-    fun `withType() with KClass syntax returns SampleAnnotation`() {
+    fun `withTypeOf() with KClass syntax returns SampleAnnotation`() {
         // given
         val annotation1: KoAnnotation = mockk {
             every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleAnnotation"
@@ -73,14 +127,14 @@ class KoAnnotationSequenceExtTest {
         val annotations = sequenceOf(annotation1, annotation2)
 
         // when
-        val sut = annotations.withType<SampleAnnotation>()
+        val sut = annotations.withTypeOf<SampleAnnotation>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(annotation1)
     }
 
     @Test
-    fun `withoutType() with KClass syntax returns annotation without SampleAnnotation`() {
+    fun `withoutTypeOf() with KClass syntax returns annotation without SampleAnnotation`() {
         // given
         val annotation1: KoAnnotation = mockk {
             every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleAnnotation"
@@ -91,7 +145,7 @@ class KoAnnotationSequenceExtTest {
         val annotations = sequenceOf(annotation1, annotation2)
 
         // when
-        val sut = annotations.withoutType<SampleAnnotation>()
+        val sut = annotations.withoutTypeOf<SampleAnnotation>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(annotation2)
