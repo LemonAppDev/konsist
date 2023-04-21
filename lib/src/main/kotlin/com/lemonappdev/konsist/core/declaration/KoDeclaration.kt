@@ -30,6 +30,15 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
         .annotationEntries
         .map { KoAnnotation.getInstance(it) }
 
+    val modifiers by lazy {
+        ktTypeParameterListOwner
+            .modifierList
+            ?.text
+            ?.split(" ")
+            ?.map { KoModifier.valueOf(it) }
+            ?: emptyList()
+    }
+
     fun hasPublicModifier() = ktTypeParameterListOwner.hasModifier(KtTokens.PUBLIC_KEYWORD)
 
     fun isPublicOrDefault() = ktTypeParameterListOwner.run {

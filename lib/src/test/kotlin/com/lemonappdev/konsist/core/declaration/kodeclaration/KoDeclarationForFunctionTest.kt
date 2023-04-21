@@ -89,6 +89,20 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
+    fun `function-has-modifiers`() {
+        // given
+        val sut = getSnippetFile("function-has-modifiers")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.run {
+            modifiers shouldHaveSize 5
+        }
+
+    }
+
+    @Test
     fun `function-has-no-visibility-modifier`() {
         // given
         val sut = getSnippetFile("function-has-no-visibility-modifier")
