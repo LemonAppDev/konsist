@@ -140,7 +140,7 @@ class KoParameterTest {
         // then
         sut.run {
             defaultValue shouldBeEqualTo "null"
-            hasDefaultValue() shouldBeEqualTo false
+            hasDefaultValue() shouldBeEqualTo true
             hasDefaultValue("SampleType()") shouldBeEqualTo false
         }
     }
