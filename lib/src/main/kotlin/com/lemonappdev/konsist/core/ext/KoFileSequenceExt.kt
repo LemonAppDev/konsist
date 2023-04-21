@@ -21,12 +21,12 @@ fun Sequence<KoFile>.withoutImports(vararg imports: String) = filter {
     imports.none { import -> it.hasImport(import) }
 }
 
-fun Sequence<KoFile>.withPackage(vararg packageNames: String) = filter {
-    packageNames.any { packagee -> it.hasPackage(packagee) }
+fun Sequence<KoFile>.withPackage(vararg packages: String) = filter {
+    packages.any { packagee -> it.hasPackage(packagee) }
 }
 
-fun Sequence<KoFile>.withoutPackage(vararg packageNames: String) = filter {
-    packageNames.none { packagee -> it.hasPackage(packagee) }
+fun Sequence<KoFile>.withoutPackage(vararg packages: String) = filter {
+    packages.none { packagee -> it.hasPackage(packagee) }
 }
 
 fun Sequence<KoFile>.withPath(vararg paths: String) = filter {

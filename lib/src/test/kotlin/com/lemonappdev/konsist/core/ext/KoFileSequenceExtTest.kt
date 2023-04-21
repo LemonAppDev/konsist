@@ -166,24 +166,24 @@ class KoFileSequenceExtTest {
     @Test
     fun `withPackage(String) returns files with one of given package names`() {
         // given
-        val packageName1 = "SamplePackage1"
-        val packageName2 = "SamplePackage2"
+        val package1 = "SamplePackage1"
+        val package2 = "SamplePackage2"
         val file1: KoFile = mockk {
-            every { hasPackage(packageName1) } returns true
-            every { hasPackage(packageName2) } returns false
+            every { hasPackage(package1) } returns true
+            every { hasPackage(package2) } returns false
         }
         val file2: KoFile = mockk {
-            every { hasPackage(packageName1) } returns false
-            every { hasPackage(packageName2) } returns true
+            every { hasPackage(package1) } returns false
+            every { hasPackage(package2) } returns true
         }
         val file3: KoFile = mockk {
-            every { hasPackage(packageName1) } returns false
-            every { hasPackage(packageName2) } returns false
+            every { hasPackage(package1) } returns false
+            every { hasPackage(package2) } returns false
         }
         val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withPackage(packageName1, packageName2)
+        val sut = files.withPackage(package1, package2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1, file2)
@@ -192,24 +192,24 @@ class KoFileSequenceExtTest {
     @Test
     fun `withoutPackage(String) returns file3 without given package names`() {
         // given
-        val packageName1 = "SamplePackage1"
-        val packageName2 = "SamplePackage2"
+        val package1 = "SamplePackage1"
+        val package2 = "SamplePackage2"
         val file1: KoFile = mockk {
-            every { hasPackage(packageName1) } returns true
-            every { hasPackage(packageName2) } returns false
+            every { hasPackage(package1) } returns true
+            every { hasPackage(package2) } returns false
         }
         val file2: KoFile = mockk {
-            every { hasPackage(packageName1) } returns false
-            every { hasPackage(packageName2) } returns true
+            every { hasPackage(package1) } returns false
+            every { hasPackage(package2) } returns true
         }
         val file3: KoFile = mockk {
-            every { hasPackage(packageName1) } returns false
-            every { hasPackage(packageName2) } returns false
+            every { hasPackage(package1) } returns false
+            every { hasPackage(package2) } returns false
         }
         val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withoutPackage(packageName1, packageName2)
+        val sut = files.withoutPackage(package1, package2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file3)

@@ -77,11 +77,11 @@ fun Sequence<KoDeclaration>.withoutModifiers(vararg modifiers: KoModifier) = fil
 }
 
 fun Sequence<KoDeclaration>.withPackage(vararg packages: String) = filter {
-    packages.any { packageName -> it.resideInPackage(packageName) }
+    packages.any { packagee -> it.resideInPackage(packagee) }
 }
 
 fun Sequence<KoDeclaration>.withoutPackage(vararg packages: String) = filter {
-    packages.all { packageName -> it.resideOutsidePackage(packageName) }
+    packages.all { packagee -> it.resideOutsidePackage(packagee) }
 }
 
 fun Sequence<KoDeclaration>.withPath(vararg paths: String) = filter {
