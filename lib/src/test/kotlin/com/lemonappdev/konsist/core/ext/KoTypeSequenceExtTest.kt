@@ -50,47 +50,55 @@ class KoTypeSequenceExtTest {
     }
 
     @Test
-    fun `withSourceType(type) returns type1 which has SampleClass source type`() {
+    fun `withSourceType(type) returns types which has one of given source types`() {
         // given
-        val sourceType1 = "SampleClass"
-        val sourceType2 = "OtherClass"
+        val sourceType1 = "SampleClass1"
+        val sourceType2 = "SampleClass2"
+        val sourceType3 = "SampleClass3"
         val type1: KoType = mockk {
             every { sourceType } returns sourceType1
         }
         val type2: KoType = mockk {
             every { sourceType } returns sourceType2
         }
-        val types = sequenceOf(type1, type2)
+        val type3: KoType = mockk {
+            every { sourceType } returns sourceType3
+        }
+        val types = sequenceOf(type1, type2, type3)
 
         // when
-        val sut = types.withSourceType(sourceType1)
+        val sut = types.withSourceType(sourceType1, sourceType2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(type1)
+        sut.toList() shouldBeEqualTo listOf(type1, type2)
     }
 
     @Test
-    fun `withoutSourceType(type) returns type2 which has not SampleClass source type`() {
+    fun `withoutSourceType(type) returns type3 which has not any given source type`() {
         // given
-        val sourceType1 = "SampleClass"
-        val sourceType2 = "OtherClass"
+        val sourceType1 = "SampleClass1"
+        val sourceType2 = "SampleClass2"
+        val sourceType3 = "SampleClass3"
         val type1: KoType = mockk {
             every { sourceType } returns sourceType1
         }
         val type2: KoType = mockk {
             every { sourceType } returns sourceType2
         }
-        val types = sequenceOf(type1, type2)
+        val type3: KoType = mockk {
+            every { sourceType } returns sourceType3
+        }
+        val types = sequenceOf(type1, type2, type3)
 
         // when
-        val sut = types.withoutSourceType(sourceType1)
+        val sut = types.withoutSourceType(sourceType1, sourceType2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(type2)
+        sut.toList() shouldBeEqualTo listOf(type3)
     }
 
     @Test
-    fun `withImportAliasName() returns type1 which has SampleImportAlias`() {
+    fun `withImportAliasOf() returns type1 which has SampleImportAlias`() {
         // given
         val sourceType1 = "SampleType"
         val sourceType2 = "Sample"
@@ -113,14 +121,14 @@ class KoTypeSequenceExtTest {
         val types = sequenceOf(type1, type2, type3, type4)
 
         // when
-        val sut = types.withImportAliasName<SampleImportAlias>()
+        val sut = types.withImportAliasOf<SampleImportAlias>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(type1)
     }
 
     @Test
-    fun `withoutImportAliasName() returns type2, typ3 and type4 which have not SampleImportAlias`() {
+    fun `withoutImportAliasOf() returns type2, typ3 and type4 which have not SampleImportAlias`() {
         // given
         val sourceType1 = "SampleType"
         val sourceType2 = "Sample"
@@ -143,90 +151,106 @@ class KoTypeSequenceExtTest {
         val types = sequenceOf(type1, type2, type3, type4)
 
         // when
-        val sut = types.withoutImportAliasName<SampleImportAlias>()
+        val sut = types.withoutImportAliasOf<SampleImportAlias>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(type2, type3, type4)
     }
 
     @Test
-    fun `withImportAliasName(type) returns type1 which has SampleImportAlias`() {
+    fun `withImportAlias(type) returns types which have one of given import aliases`() {
         // given
-        val importAliasName1 = "SampleImportAlias"
-        val importAliasName2 = "OtherImportAlias"
+        val importAliasName1 = "SampleImportAlias1"
+        val importAliasName2 = "SampleImportAlias2"
+        val importAliasName3 = "SampleImportAlias3"
         val type1: KoType = mockk {
             every { importAliasName } returns importAliasName1
         }
         val type2: KoType = mockk {
             every { importAliasName } returns importAliasName2
         }
-        val types = sequenceOf(type1, type2)
+        val type3: KoType = mockk {
+            every { importAliasName } returns importAliasName3
+        }
+        val types = sequenceOf(type1, type2, type3)
 
         // when
-        val sut = types.withImportAliasName(importAliasName1)
+        val sut = types.withImportAlias(importAliasName1, importAliasName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(type1)
+        sut.toList() shouldBeEqualTo listOf(type1, type2)
     }
 
     @Test
-    fun `withoutImportAliasName(type) returns type2, typ3 and type4 which have not SampleImportAlias`() {
+    fun `withoutImportAlias(type) returns type3 which has not any given import alias`() {
         // given
-        val importAliasName1 = "SampleImportAlias"
-        val importAliasName2 = "OtherImportAlias"
+        val importAliasName1 = "SampleImportAlias1"
+        val importAliasName2 = "SampleImportAlias2"
+        val importAliasName3 = "SampleImportAlias3"
         val type1: KoType = mockk {
             every { importAliasName } returns importAliasName1
         }
         val type2: KoType = mockk {
             every { importAliasName } returns importAliasName2
         }
-        val types = sequenceOf(type1, type2)
+        val type3: KoType = mockk {
+            every { importAliasName } returns importAliasName3
+        }
+        val types = sequenceOf(type1, type2, type3)
 
         // when
-        val sut = types.withoutImportAliasName(importAliasName1)
+        val sut = types.withoutImportAlias(importAliasName1, importAliasName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(type2)
+        sut.toList() shouldBeEqualTo listOf(type3)
     }
 
     @Test
-    fun `withFullyQualifiedName() returns type1 which has given name`() {
+    fun `withFullyQualifiedName() returns types which has one of given names`() {
         // given
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
+        val fullyQualifiedName3 = "fullyQualifiedName3"
         val type1: KoType = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName1
         }
         val type2: KoType = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName2
         }
-        val types = sequenceOf(type1, type2)
+        val type3: KoType = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName3
+        }
+        val types = sequenceOf(type1, type2, type3)
 
         // when
-        val sut = types.withFullyQualifiedName(fullyQualifiedName1)
+        val sut = types.withFullyQualifiedName(fullyQualifiedName1, fullyQualifiedName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(type1)
+        sut.toList() shouldBeEqualTo listOf(type1, type2)
     }
 
     @Test
-    fun `withoutFullyQualifiedName() returns type2 which has not given name`() {
+    fun `withoutFullyQualifiedName() returns type3 which has not any given name`() {
         // given
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
+        val fullyQualifiedName3 = "fullyQualifiedName3"
         val type1: KoType = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName1
         }
         val type2: KoType = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName2
         }
-        val types = sequenceOf(type1, type2)
+        val type3: KoType = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName3
+        }
+        val types = sequenceOf(type1, type2, type3)
 
         // when
-        val sut = types.withoutFullyQualifiedName(fullyQualifiedName1)
+        val sut = types.withoutFullyQualifiedName(fullyQualifiedName1, fullyQualifiedName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(type2)
+        sut.toList() shouldBeEqualTo listOf(type3)
     }
 
     @Test

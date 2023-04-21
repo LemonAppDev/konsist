@@ -26,22 +26,29 @@ class KoParentSequenceExtTest {
     }
 
     @Test
-    fun `withDelegate(name) returns parent1 which has delegate with given name`() {
+    fun `withDelegate(name) returns parents which have one of given delegate names`() {
         // given
-        val delegateName = "DelegateName"
+        val delegateName1 = "DelegateName1"
+        val delegateName2 = "DelegateName2"
         val parent1: KoParent = mockk {
-            every { hasDelegate(delegateName) } returns true
+            every { hasDelegate(delegateName1) } returns true
+            every { hasDelegate(delegateName2) } returns false
         }
         val parent2: KoParent = mockk {
-            every { hasDelegate(delegateName) } returns false
+            every { hasDelegate(delegateName1) } returns false
+            every { hasDelegate(delegateName2) } returns true
         }
-        val parents = sequenceOf(parent1, parent2)
+        val parent3: KoParent = mockk {
+            every { hasDelegate(delegateName1) } returns false
+            every { hasDelegate(delegateName2) } returns false
+        }
+        val parents = sequenceOf(parent1, parent2, parent3)
 
         // when
-        val sut = parents.withDelegate(delegateName)
+        val sut = parents.withDelegate(delegateName1, delegateName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(parent1)
+        sut.toList() shouldBeEqualTo listOf(parent1, parent2)
     }
 
     @Test
@@ -63,21 +70,28 @@ class KoParentSequenceExtTest {
     }
 
     @Test
-    fun `withoutDelegate(name) returns parent2 which has not delegate with given name`() {
+    fun `withoutDelegate(name) returns parent3 which has not delegate with any given name`() {
         // given
-        val delegateName = "DelegateName"
+        val delegateName1 = "DelegateName1"
+        val delegateName2 = "DelegateName2"
         val parent1: KoParent = mockk {
-            every { hasDelegate(delegateName) } returns true
+            every { hasDelegate(delegateName1) } returns true
+            every { hasDelegate(delegateName2) } returns false
         }
         val parent2: KoParent = mockk {
-            every { hasDelegate(delegateName) } returns false
+            every { hasDelegate(delegateName1) } returns false
+            every { hasDelegate(delegateName2) } returns true
         }
-        val parents = sequenceOf(parent1, parent2)
+        val parent3: KoParent = mockk {
+            every { hasDelegate(delegateName1) } returns false
+            every { hasDelegate(delegateName2) } returns false
+        }
+        val parents = sequenceOf(parent1, parent2, parent3)
 
         // when
-        val sut = parents.withoutDelegate(delegateName)
+        val sut = parents.withoutDelegate(delegateName1, delegateName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(parent2)
+        sut.toList() shouldBeEqualTo listOf(parent3)
     }
 }

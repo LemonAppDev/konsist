@@ -2,9 +2,13 @@ package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclaration
 
-fun Sequence<KoComplexDeclaration>.withType(type: String) = filter { it.representsType(type) }
+fun Sequence<KoComplexDeclaration>.withType(vararg types: String) = filter {
+    types.any { type -> it.representsType(type) }
+}
 
-fun Sequence<KoComplexDeclaration>.withoutType(type: String) = filterNot { it.representsType(type) }
+fun Sequence<KoComplexDeclaration>.withoutType(vararg types: String) = filter {
+    types.none { type -> it.representsType(type) }
+}
 
 inline fun <reified T> Sequence<KoComplexDeclaration>.withType() = filter { it.representsType<T>() }
 

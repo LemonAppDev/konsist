@@ -86,7 +86,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withImports(String) returns file1 with imports`() {
+    fun `withImports(String) returns file1 with all given imports`() {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
@@ -112,7 +112,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withoutImports(String) returns file3 without imports`() {
+    fun `withoutImports(String) returns file3 without given imports`() {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
@@ -138,7 +138,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withSomeImports(String) returns file1 and file2 which have at least one of given imports`() {
+    fun `withSomeImports(String) returns files which have at least one of given imports`() {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
@@ -164,79 +164,107 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withPackage(String) returns file1 with given package`() {
+    fun `withPackage(String) returns files with one of given package names`() {
         // given
-        val packageName = "SamplePackage"
+        val package1 = "SamplePackage1"
+        val package2 = "SamplePackage2"
         val file1: KoFile = mockk {
-            every { resideInPackage(packageName) } returns true
+            every { hasPackage(package1) } returns true
+            every { hasPackage(package2) } returns false
         }
         val file2: KoFile = mockk {
-            every { resideInPackage(packageName) } returns false
+            every { hasPackage(package1) } returns false
+            every { hasPackage(package2) } returns true
         }
-        val files = sequenceOf(file1, file2)
+        val file3: KoFile = mockk {
+            every { hasPackage(package1) } returns false
+            every { hasPackage(package2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withPackage(packageName)
+        val sut = files.withPackage(package1, package2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut.toList() shouldBeEqualTo listOf(file1, file2)
     }
 
     @Test
-    fun `withoutPackage(String) returns file2 without given package`() {
+    fun `withoutPackage(String) returns file3 without given package names`() {
         // given
-        val packageName = "SamplePackage"
+        val package1 = "SamplePackage1"
+        val package2 = "SamplePackage2"
         val file1: KoFile = mockk {
-            every { resideInPackage(packageName) } returns true
+            every { hasPackage(package1) } returns true
+            every { hasPackage(package2) } returns false
         }
         val file2: KoFile = mockk {
-            every { resideInPackage(packageName) } returns false
+            every { hasPackage(package1) } returns false
+            every { hasPackage(package2) } returns true
         }
-        val files = sequenceOf(file1, file2)
+        val file3: KoFile = mockk {
+            every { hasPackage(package1) } returns false
+            every { hasPackage(package2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withoutPackage(packageName)
+        val sut = files.withoutPackage(package1, package2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut.toList() shouldBeEqualTo listOf(file3)
     }
 
     @Test
-    fun `withPath(String) returns file1 with given path`() {
+    fun `withPath(String) returns files with one of given path names`() {
         // given
-        val path = "SamplePath"
+        val path1 = "SamplePath1"
+        val path2 = "SamplePath2"
         val file1: KoFile = mockk {
-            every { resideInPath(path) } returns true
+            every { resideInPath(path1) } returns true
+            every { resideInPath(path2) } returns false
         }
         val file2: KoFile = mockk {
-            every { resideInPath(path) } returns false
+            every { resideInPath(path1) } returns false
+            every { resideInPath(path2) } returns true
         }
-        val files = sequenceOf(file1, file2)
+        val file3: KoFile = mockk {
+            every { resideInPath(path1) } returns false
+            every { resideInPath(path2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withPath(path)
+        val sut = files.withPath(path1, path2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut.toList() shouldBeEqualTo listOf(file1, file2)
     }
 
     @Test
-    fun `withoutPath(String) returns file2 without given path`() {
+    fun `withoutPath(String) returns file3 without given path names`() {
         // given
-        val path = "SamplePath"
+        val path1 = "SamplePath1"
+        val path2 = "SamplePath2"
         val file1: KoFile = mockk {
-            every { resideInPath(path) } returns true
+            every { resideInPath(path1) } returns true
+            every { resideInPath(path2) } returns false
         }
         val file2: KoFile = mockk {
-            every { resideInPath(path) } returns false
+            every { resideInPath(path1) } returns false
+            every { resideInPath(path2) } returns true
         }
-        val files = sequenceOf(file1, file2)
+        val file3: KoFile = mockk {
+            every { resideInPath(path1) } returns false
+            every { resideInPath(path2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withoutPath(path)
+        val sut = files.withoutPath(path1, path2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut.toList() shouldBeEqualTo listOf(file3)
     }
 
     @Test
@@ -316,7 +344,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(String) returns file1 with annotations`() {
+    fun `withAnnotations(String) returns file1 with all given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -342,7 +370,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotations(String) returns file3 without annotations`() {
+    fun `withoutAnnotations(String) returns file3 without given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -432,7 +460,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(KClass) returns file1 with annotations`() {
+    fun `withAnnotations(KClass) returns file1 with all given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -458,7 +486,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotations(KClass) returns file3 without annotations`() {
+    fun `withoutAnnotations(KClass) returns file3 without given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -584,7 +612,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withTypeAliases(String) returns file1 with typeAliasNames`() {
+    fun `withTypeAliases(String) returns files with all given typeAliasNames`() {
         // given
         val typeAliasName1 = "SampleTypeAlias1"
         val typeAliasName2 = "SampleTypeAlias2"
@@ -610,7 +638,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withoutTypeAliases(String) returns file3 without typeAliasNames`() {
+    fun `withoutTypeAliases(String) returns file3 without given typeAliasNames`() {
         // given
         val typeAliasName1 = "SampleTypeAlias1"
         val typeAliasName2 = "SampleTypeAlias2"
@@ -636,7 +664,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withSomeTypeAliases(String) returns file1 and file2 which have at least one of given typeAliasNames`() {
+    fun `withSomeTypeAliases(String) returns files which have at least one of given typeAliasNames`() {
         // given
         val typeAliasName1 = "SampleTypeAlias1"
         val typeAliasName2 = "SampleTypeAlias2"

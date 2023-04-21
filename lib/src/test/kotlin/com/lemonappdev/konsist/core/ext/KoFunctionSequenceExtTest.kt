@@ -485,33 +485,37 @@ class KoFunctionSequenceExtTest {
         val function2: KoFunction = mockk {
             every { hasExplicitReturnType() } returns false
         }
-        val properties = sequenceOf(function1, function2)
+        val functions = sequenceOf(function1, function2)
 
         // when
-        val sut = properties.withExplicitReturnType()
+        val sut = functions.withExplicitReturnType()
 
         // then
         sut.toList() shouldBeEqualTo listOf(function1)
     }
 
     @Test
-    fun `withExplicitReturnType(name) returns function1 which has given explicit return type`() {
+    fun `withExplicitReturnType() returns functions which has one of given explicit return types`() {
         // given
-        val typeName1 = "SampleType"
-        val typeName2 = "OtherType"
+        val typeName1 = "SampleType1"
+        val typeName2 = "SampleType2"
+        val typeName3 = "SampleType3"
         val function1: KoFunction = mockk {
             every { explicitReturnType?.name } returns typeName1
         }
         val function2: KoFunction = mockk {
             every { explicitReturnType?.name } returns typeName2
         }
-        val properties = sequenceOf(function1, function2)
+        val function3: KoFunction = mockk {
+            every { explicitReturnType?.name } returns typeName3
+        }
+        val functions = sequenceOf(function1, function2, function3)
 
         // when
-        val sut = properties.withExplicitReturnType(typeName1)
+        val sut = functions.withExplicitReturnType(typeName1, typeName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(function1)
+        sut.toList() shouldBeEqualTo listOf(function1, function2)
     }
 
     @Test
@@ -523,33 +527,37 @@ class KoFunctionSequenceExtTest {
         val function2: KoFunction = mockk {
             every { hasExplicitReturnType() } returns false
         }
-        val properties = sequenceOf(function1, function2)
+        val functions = sequenceOf(function1, function2)
 
         // when
-        val sut = properties.withoutExplicitReturnType()
+        val sut = functions.withoutExplicitReturnType()
 
         // then
         sut.toList() shouldBeEqualTo listOf(function2)
     }
 
     @Test
-    fun `withoutExplicitReturnType(name) returns function2 which has not given explicit return type`() {
+    fun `withoutExplicitReturnType(name) returns function3 which has not any given explicit return types`() {
         // given
-        val typeName1 = "SampleType"
-        val typeName2 = "OtherType"
+        val typeName1 = "SampleType1"
+        val typeName2 = "SampleType2"
+        val typeName3 = "SampleType3"
         val function1: KoFunction = mockk {
             every { explicitReturnType?.name } returns typeName1
         }
         val function2: KoFunction = mockk {
             every { explicitReturnType?.name } returns typeName2
         }
-        val properties = sequenceOf(function1, function2)
+        val function3: KoFunction = mockk {
+            every { explicitReturnType?.name } returns typeName3
+        }
+        val functions = sequenceOf(function1, function2, function3)
 
         // when
-        val sut = properties.withoutExplicitReturnType(typeName1)
+        val sut = functions.withoutExplicitReturnType(typeName1, typeName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(function2)
+        sut.toList() shouldBeEqualTo listOf(function3)
     }
 
     @Test
@@ -563,10 +571,10 @@ class KoFunctionSequenceExtTest {
         val function2: KoFunction = mockk {
             every { explicitReturnType?.name } returns typeName2
         }
-        val properties = sequenceOf(function1, function2)
+        val functions = sequenceOf(function1, function2)
 
         // when
-        val sut = properties.withExplicitReturnTypeOf<SampleType>()
+        val sut = functions.withExplicitReturnTypeOf<SampleType>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(function1)
@@ -583,10 +591,10 @@ class KoFunctionSequenceExtTest {
         val function2: KoFunction = mockk {
             every { explicitReturnType?.name } returns typeName2
         }
-        val properties = sequenceOf(function1, function2)
+        val functions = sequenceOf(function1, function2)
 
         // when
-        val sut = properties.withoutExplicitReturnTypeOf<SampleType>()
+        val sut = functions.withoutExplicitReturnTypeOf<SampleType>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(function2)

@@ -62,7 +62,7 @@ class KoScope(
 
     fun imports() = koFiles.flatMap { it.imports }
 
-    fun packages() = koFiles.mapNotNull { it.packageDirective }
+    fun packages() = koFiles.mapNotNull { it.packagee }
 
     fun typeAliases() = koFiles.flatMap { it.typeAliases }
 
@@ -143,7 +143,7 @@ class KoScope(
         fun fromPackage(packageName: String): KoScope {
             val koFiles = projectKotlinFiles
                 .filter {
-                    it.packageDirective?.let { koPackage ->
+                    it.packagee?.let { koPackage ->
                         PackageHelper.resideInPackage(packageName, koPackage.qualifiedName)
                     } ?: false
                 }

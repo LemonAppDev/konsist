@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.declaration.KoProperty
-import com.lemonappdev.konsist.core.declaration.KoType
 import com.lemonappdev.konsist.testdata.SampleType
 import io.mockk.every
 import io.mockk.mockk
@@ -424,22 +423,29 @@ class KoPropertySequenceExtTest {
     }
 
     @Test
-    fun `withDelegate(name) returns property1 which has delegate with given name`() {
+    fun `withDelegate(name) returns properties which have one of given delegate names`() {
         // given
-        val delegateName = "DelegateName"
+        val delegateName1 = "DelegateName1"
+        val delegateName2 = "DelegateName2"
         val property1: KoProperty = mockk {
-            every { hasDelegate(delegateName) } returns true
+            every { hasDelegate(delegateName1) } returns true
+            every { hasDelegate(delegateName2) } returns false
         }
         val property2: KoProperty = mockk {
-            every { hasDelegate(delegateName) } returns false
+            every { hasDelegate(delegateName1) } returns false
+            every { hasDelegate(delegateName2) } returns true
         }
-        val properties = sequenceOf(property1, property2)
+        val property3: KoProperty = mockk {
+            every { hasDelegate(delegateName1) } returns false
+            every { hasDelegate(delegateName2) } returns false
+        }
+        val properties = sequenceOf(property1, property2, property3)
 
         // when
-        val sut = properties.withDelegate(delegateName)
+        val sut = properties.withDelegate(delegateName1, delegateName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(property1)
+        sut.toList() shouldBeEqualTo listOf(property1, property2)
     }
 
     @Test
@@ -461,33 +467,39 @@ class KoPropertySequenceExtTest {
     }
 
     @Test
-    fun `withoutDelegate(name) returns property2 which has not delegate with given name`() {
+    fun `withoutDelegate(name) returns property3 which has not delegate with given name`() {
         // given
-        val delegateName = "DelegateName"
+        val delegateName1 = "DelegateName1"
+        val delegateName2 = "DelegateName2"
         val property1: KoProperty = mockk {
-            every { hasDelegate(delegateName) } returns true
+            every { hasDelegate(delegateName1) } returns true
+            every { hasDelegate(delegateName2) } returns false
         }
         val property2: KoProperty = mockk {
-            every { hasDelegate(delegateName) } returns false
+            every { hasDelegate(delegateName1) } returns false
+            every { hasDelegate(delegateName2) } returns true
         }
-        val properties = sequenceOf(property1, property2)
+        val property3: KoProperty = mockk {
+            every { hasDelegate(delegateName1) } returns false
+            every { hasDelegate(delegateName2) } returns false
+        }
+        val properties = sequenceOf(property1, property2, property3)
 
         // when
-        val sut = properties.withoutDelegate(delegateName)
+        val sut = properties.withoutDelegate(delegateName1, delegateName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(property2)
+        sut.toList() shouldBeEqualTo listOf(property3)
     }
 
     @Test
     fun `withExplicitType() returns property1 which has explicitType`() {
         // given
-        val type: KoType = mockk()
         val property1: KoProperty = mockk {
-            every { explicitType } returns type
+            every { hasExplicitType() } returns true
         }
         val property2: KoProperty = mockk {
-            every { explicitType } returns null
+            every { hasExplicitType() } returns false
         }
         val properties = sequenceOf(property1, property2)
 
@@ -499,34 +511,39 @@ class KoPropertySequenceExtTest {
     }
 
     @Test
-    fun `withExplicitType(name) returns property1 which has given explicitType`() {
+    fun `withExplicitType(name) returns properties which has one of given explicitTypes`() {
         // given
-        val typeName1 = "SampleType"
-        val typeName2 = "OtherType"
+        val typeName1 = "SampleType1"
+        val typeName2 = "SampleType2"
         val property1: KoProperty = mockk {
-            every { explicitType?.name } returns typeName1
+            every { hasExplicitType(typeName1) } returns true
+            every { hasExplicitType(typeName2) } returns false
         }
         val property2: KoProperty = mockk {
-            every { explicitType?.name } returns typeName2
+            every { hasExplicitType(typeName1) } returns false
+            every { hasExplicitType(typeName2) } returns true
         }
-        val properties = sequenceOf(property1, property2)
+        val property3: KoProperty = mockk {
+            every { hasExplicitType(typeName1) } returns false
+            every { hasExplicitType(typeName2) } returns false
+        }
+        val properties = sequenceOf(property1, property2, property3)
 
         // when
-        val sut = properties.withExplicitType(typeName1)
+        val sut = properties.withExplicitType(typeName1, typeName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(property1)
+        sut.toList() shouldBeEqualTo listOf(property1, property2)
     }
 
     @Test
     fun `withoutExplicitType() returns property2 which has not explicitType`() {
         // given
-        val type: KoType = mockk()
         val property1: KoProperty = mockk {
-            every { explicitType } returns type
+            every { hasExplicitType() } returns true
         }
         val property2: KoProperty = mockk {
-            every { explicitType } returns null
+            every { hasExplicitType() } returns false
         }
         val properties = sequenceOf(property1, property2)
 
@@ -538,23 +555,29 @@ class KoPropertySequenceExtTest {
     }
 
     @Test
-    fun `withoutExplicitType(name) returns property2 which has not given explicitType`() {
+    fun `withoutExplicitType(name) returns property3 which has not any given explicitType`() {
         // given
-        val typeName1 = "SampleType"
-        val typeName2 = "OtherType"
+        val typeName1 = "SampleType1"
+        val typeName2 = "SampleType2"
         val property1: KoProperty = mockk {
-            every { explicitType?.name } returns typeName1
+            every { hasExplicitType(typeName1) } returns true
+            every { hasExplicitType(typeName2) } returns false
         }
         val property2: KoProperty = mockk {
-            every { explicitType?.name } returns typeName2
+            every { hasExplicitType(typeName1) } returns false
+            every { hasExplicitType(typeName2) } returns true
         }
-        val properties = sequenceOf(property1, property2)
+        val property3: KoProperty = mockk {
+            every { hasExplicitType(typeName1) } returns false
+            every { hasExplicitType(typeName2) } returns false
+        }
+        val properties = sequenceOf(property1, property2, property3)
 
         // when
-        val sut = properties.withoutExplicitType(typeName1)
+        val sut = properties.withoutExplicitType(typeName1, typeName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(property2)
+        sut.toList() shouldBeEqualTo listOf(property3)
     }
 
     @Test

@@ -6,24 +6,38 @@ inline fun <reified T> Sequence<KoType>.withSourceType() = filter { it.sourceTyp
 
 inline fun <reified T> Sequence<KoType>.withoutSourceType() = filterNot { it.sourceType == T::class.simpleName }
 
-fun Sequence<KoType>.withSourceType(type: String) = filter { it.sourceType == type }
+fun Sequence<KoType>.withSourceType(vararg types: String) = filter {
+    types.any { type -> it.sourceType == type }
+}
 
-fun Sequence<KoType>.withoutSourceType(type: String) = filterNot { it.sourceType == type }
+fun Sequence<KoType>.withoutSourceType(vararg types: String) = filter {
+    types.none { type -> it.sourceType == type }
+}
 
-inline fun <reified T> Sequence<KoType>.withImportAliasName() =
+inline fun <reified T> Sequence<KoType>.withImportAliasOf() =
     filter { it.isImportAlias() && it.sourceType == T::class.simpleName }
 
-inline fun <reified T> Sequence<KoType>.withoutImportAliasName() =
+inline fun <reified T> Sequence<KoType>.withoutImportAliasOf() =
     filterNot { it.isImportAlias() && it.sourceType == T::class.simpleName }
 
-fun Sequence<KoType>.withImportAliasName(name: String) = filter { it.importAliasName == name }
+fun Sequence<KoType>.withImportAlias(vararg names: String) = filter {
+    when {
+        names.isEmpty() -> it.isImportAlias()
+        else -> names.any { name -> it.importAliasName == name }
+    }
+}
 
-fun Sequence<KoType>.withoutImportAliasName(name: String) = filterNot { it.importAliasName == name }
+fun Sequence<KoType>.withoutImportAlias(vararg names: String) = filter {
+    when {
+        names.isEmpty() -> !it.isImportAlias()
+        else -> names.none { name -> it.importAliasName == name }
+    }
+}
 
-fun Sequence<KoType>.withFullyQualifiedName(name: String) = filter { it.fullyQualifiedName == name }
+fun Sequence<KoType>.withFullyQualifiedName(vararg names: String) = filter {
+    names.any { name -> it.fullyQualifiedName == name }
+}
 
-fun Sequence<KoType>.withoutFullyQualifiedName(name: String) = filterNot { it.fullyQualifiedName == name }
-
-fun Sequence<KoType>.withImportAlias() = filter { it.isImportAlias() }
-
-fun Sequence<KoType>.withoutImportAlias() = filterNot { it.isImportAlias() }
+fun Sequence<KoType>.withoutFullyQualifiedName(vararg names: String) = filter {
+    names.none { name -> it.fullyQualifiedName == name }
+}

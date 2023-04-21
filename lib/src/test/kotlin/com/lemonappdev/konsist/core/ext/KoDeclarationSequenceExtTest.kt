@@ -228,7 +228,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(String) returns declaration1 with annotations`() {
+    fun `withAnnotations(String) returns declaration1 with given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -254,7 +254,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotations(String) returns declaration3 without annotations`() {
+    fun `withoutAnnotations(String) returns declaration3 without given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -280,7 +280,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeAnnotations(String) returns declaration1 and declaration2 which have at least one of given annotations`() {
+    fun `withSomeAnnotations(String) returns declarations which have at least one of given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -306,7 +306,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(KClass) returns declaration1 with annotations`() {
+    fun `withAnnotations(KClass) returns declaration1 with given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -332,7 +332,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotations(KClass) returns declaration3 with annotations`() {
+    fun `withoutAnnotations(KClass) returns declaration3 without given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -384,7 +384,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withModifiers(String) returns declaration1 with modifiers`() {
+    fun `withModifiers(String) returns declaration1 with all given modifiers`() {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
@@ -404,7 +404,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutModifiers(String) returns declaration3 without modifiers`() {
+    fun `withoutModifiers(String) returns declaration3 without given modifiers`() {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
@@ -430,7 +430,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeModifiers(String) returns declaration1 and declaration2 which have at least one of given modifiers`() {
+    fun `withSomeModifiers(String) returns declarations which have at least one of given modifiers`() {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
@@ -456,87 +456,61 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withPackages(String) returns declaration1 with package`() {
+    fun `withPackage(String) returns declarations which have at least one of given package`() {
         // given
         val package1 = "com.sample.samplepackage1"
         val package2 = "com.sample.samplepackage2"
         val declaration1: KoDeclaration = mockk {
-            every { resideInPackages(package1) } returns true
-            every { resideInPackages(package2) } returns true
+            every { resideInPackage(package1) } returns true
+            every { resideInPackage(package2) } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { resideInPackages(package1) } returns false
-            every { resideInPackages(package2) } returns true
+            every { resideInPackage(package1) } returns false
+            every { resideInPackage(package2) } returns true
         }
         val declaration3: KoDeclaration = mockk {
-            every { resideInPackages(package1) } returns false
-            every { resideInPackages(package2) } returns false
+            every { resideInPackage(package1) } returns false
+            every { resideInPackage(package2) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withPackages(package1, package2)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withoutPackages(String) returns declaration3 without package`() {
-        // given
-        val package1 = "com.sample.samplepackage1"
-        val package2 = "com.sample.samplepackage2"
-        val declaration1: KoDeclaration = mockk {
-            every { resideOutsidePackages(package1) } returns false
-            every { resideOutsidePackages(package2) } returns false
-        }
-        val declaration2: KoDeclaration = mockk {
-            every { resideOutsidePackages(package1) } returns true
-            every { resideOutsidePackages(package2) } returns false
-        }
-        val declaration3: KoDeclaration = mockk {
-            every { resideOutsidePackages(package1) } returns true
-            every { resideOutsidePackages(package2) } returns true
-        }
-        val declarations = sequenceOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withoutPackages(package1, package2)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
-    }
-
-    @Test
-    fun `withSomePackages(String) returns declaration1 and declaration2 which have at least one of given package`() {
-        // given
-        val package1 = "com.sample.samplepackage1"
-        val package2 = "com.sample.samplepackage2"
-        val declaration1: KoDeclaration = mockk {
-            every { resideInPackages(package1) } returns true
-            every { resideInPackages(package2) } returns true
-        }
-        val declaration2: KoDeclaration = mockk {
-            every { resideInPackages(package1) } returns false
-            every { resideInPackages(package2) } returns true
-        }
-        val declaration3: KoDeclaration = mockk {
-            every { resideInPackages(package1) } returns false
-            every { resideInPackages(package2) } returns false
-        }
-        val declarations = sequenceOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withSomePackages(package1, package2)
+        val sut = declarations.withPackage(package1, package2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
-    fun `withPaths(String) returns declaration1 with path`() {
+    fun `withoutPackage(String) returns declaration3 without given packages`() {
         // given
-        val path1 = "Path/1"
+        val package1 = "com.sample.samplepackage1"
+        val package2 = "com.sample.samplepackage2"
+        val declaration1: KoDeclaration = mockk {
+            every { resideOutsidePackage(package1) } returns false
+            every { resideOutsidePackage(package2) } returns false
+        }
+        val declaration2: KoDeclaration = mockk {
+            every { resideOutsidePackage(package1) } returns true
+            every { resideOutsidePackage(package2) } returns false
+        }
+        val declaration3: KoDeclaration = mockk {
+            every { resideOutsidePackage(package1) } returns true
+            every { resideOutsidePackage(package2) } returns true
+        }
+        val declarations = sequenceOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutPackage(package1, package2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration3)
+    }
+
+    @Test
+    fun `withPath(String) returns declarations which have at least one of given paths`() {
+        // given
+        val path1 = "Path1"
         val path2 = "Path2"
         val declaration1: KoDeclaration = mockk {
             every { resideInPath(path1) } returns true
@@ -553,14 +527,14 @@ class KoDeclarationSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withPaths(path1, path2)
+        val sut = declarations.withPath(path1, path2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
-    fun `withoutPaths(String) returns declaration3 without path`() {
+    fun `withoutPath(String) returns declaration3 without given paths`() {
         // given
         val path1 = "Path1"
         val path2 = "Path2"
@@ -579,35 +553,9 @@ class KoDeclarationSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutPaths(path1, path2)
+        val sut = declarations.withoutPath(path1, path2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration3)
-    }
-
-    @Test
-    fun `withSomePaths(String) returns declaration1 and declaration2 which have at least one of given path`() {
-        // given
-        val path1 = "Path1"
-        val path2 = "Path2"
-        val declaration1: KoDeclaration = mockk {
-            every { resideInPath(path1) } returns true
-            every { resideInPath(path2) } returns true
-        }
-        val declaration2: KoDeclaration = mockk {
-            every { resideInPath(path1) } returns false
-            every { resideInPath(path2) } returns true
-        }
-        val declaration3: KoDeclaration = mockk {
-            every { resideInPath(path1) } returns false
-            every { resideInPath(path2) } returns false
-        }
-        val declarations = sequenceOf(declaration1, declaration2, declaration3)
-
-        // when
-        val sut = declarations.withSomePaths(path1, path2)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
     }
 }

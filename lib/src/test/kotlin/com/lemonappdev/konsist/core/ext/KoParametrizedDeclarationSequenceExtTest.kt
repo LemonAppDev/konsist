@@ -44,7 +44,7 @@ class KoParametrizedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParameters(String) returns parametrizedDeclaration1 with parameters`() {
+    fun `withParameters(String) returns parametrizedDeclaration1 with given parameters`() {
         // given
         val parameter1 = "SampleParameter1"
         val parameter2 = "SampleParameter2"
@@ -70,7 +70,7 @@ class KoParametrizedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParameters(String) returns parametrizedDeclaration3 without parameters`() {
+    fun `withoutParameters(String) returns parametrizedDeclaration3 without given parameters`() {
         // given
         val parameter1 = "SampleParameter1"
         val parameter2 = "SampleParameter2"

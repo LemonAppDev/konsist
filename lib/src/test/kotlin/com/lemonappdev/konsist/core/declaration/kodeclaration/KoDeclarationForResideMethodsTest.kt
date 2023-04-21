@@ -13,7 +13,7 @@ class KoDeclarationForResideMethodsTest {
             .first()
 
         // then
-        sut.resideInPackages("com") shouldBeEqualTo false
+        sut.resideInPackage("com") shouldBeEqualTo false
     }
 
     @Test
@@ -24,7 +24,7 @@ class KoDeclarationForResideMethodsTest {
             .first()
 
         // then
-        sut.resideInPackages("com..") shouldBeEqualTo true
+        sut.resideInPackage("com..") shouldBeEqualTo true
     }
 
     @Test
@@ -35,7 +35,7 @@ class KoDeclarationForResideMethodsTest {
             .first()
 
         // then
-        sut.resideOutsidePackages("com..") shouldBeEqualTo false
+        sut.resideOutsidePackage("com..") shouldBeEqualTo false
     }
 
     @Test
@@ -46,7 +46,7 @@ class KoDeclarationForResideMethodsTest {
             .first()
 
         // then
-        sut.resideOutsidePackages("com") shouldBeEqualTo true
+        sut.resideOutsidePackage("com") shouldBeEqualTo true
     }
 
     @Test

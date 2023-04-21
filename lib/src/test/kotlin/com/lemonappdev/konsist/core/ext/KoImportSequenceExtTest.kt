@@ -30,11 +30,12 @@ class KoImportSequenceExtTest {
     }
 
     @Test
-    fun `withAlias(name) returns import1 which has alias with given name`() {
+    fun `withAlias(name) returns imports which have one of given alias names`() {
         // given
         val importName = "name"
-        val aliasName1 = "AliasName"
-        val aliasName2 = "OtherAliasName"
+        val aliasName1 = "AliasName1"
+        val aliasName2 = "AliasName2"
+        val aliasName3 = "AliasName3"
         val import1: KoImport = mockk {
             every { name } returns importName
             every { alias } returns aliasName1
@@ -45,15 +46,19 @@ class KoImportSequenceExtTest {
         }
         val import3: KoImport = mockk {
             every { name } returns importName
+            every { alias } returns aliasName3
+        }
+        val import4: KoImport = mockk {
+            every { name } returns importName
             every { alias } returns importName
         }
-        val imports = sequenceOf(import1, import2, import3)
+        val imports = sequenceOf(import1, import2, import3, import4)
 
         // when
-        val sut = imports.withAlias(aliasName1)
+        val sut = imports.withAlias(aliasName1, aliasName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(import1)
+        sut.toList() shouldBeEqualTo listOf(import1, import2)
     }
 
     @Test
@@ -79,11 +84,12 @@ class KoImportSequenceExtTest {
     }
 
     @Test
-    fun `withoutAlias(name) returns import2 and import3 which has not alias with given name`() {
+    fun `withoutAlias(name) returns imports which have not alias with given names`() {
         // given
         val importName = "name"
-        val aliasName1 = "AliasName"
-        val aliasName2 = "OtherAliasName"
+        val aliasName1 = "AliasName1"
+        val aliasName2 = "AliasName2"
+        val aliasName3 = "AliasName3"
         val import1: KoImport = mockk {
             every { name } returns importName
             every { alias } returns aliasName1
@@ -94,14 +100,18 @@ class KoImportSequenceExtTest {
         }
         val import3: KoImport = mockk {
             every { name } returns importName
+            every { alias } returns aliasName3
+        }
+        val import4: KoImport = mockk {
+            every { name } returns importName
             every { alias } returns importName
         }
-        val imports = sequenceOf(import1, import2, import3)
+        val imports = sequenceOf(import1, import2, import3, import4)
 
         // when
-        val sut = imports.withoutAlias(aliasName1)
+        val sut = imports.withoutAlias(aliasName1, aliasName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(import2, import3)
+        sut.toList() shouldBeEqualTo listOf(import3, import4)
     }
 }

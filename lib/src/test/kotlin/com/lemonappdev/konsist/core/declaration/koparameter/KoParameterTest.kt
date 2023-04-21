@@ -62,6 +62,8 @@ class KoParameterTest {
         // then
         sut?.run {
             hasDefaultValue() shouldBeEqualTo true
+            hasDefaultValue("6") shouldBeEqualTo true
+            hasDefaultValue("10") shouldBeEqualTo false
             name shouldBeEqualTo "sampleParameter"
         }
     }
@@ -100,7 +102,12 @@ class KoParameterTest {
             .first()
 
         // then
-        sut.defaultValue shouldBeEqualTo "2"
+        sut.run {
+            defaultValue shouldBeEqualTo "2"
+            hasDefaultValue() shouldBeEqualTo true
+            hasDefaultValue("2") shouldBeEqualTo true
+            hasDefaultValue("10") shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -113,7 +120,12 @@ class KoParameterTest {
             .first()
 
         // then
-        sut.defaultValue shouldBeEqualTo "SampleType()"
+        sut.run {
+            defaultValue shouldBeEqualTo "SampleType()"
+            hasDefaultValue() shouldBeEqualTo true
+            hasDefaultValue("SampleType()") shouldBeEqualTo true
+            hasDefaultValue("OtherType()") shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -126,7 +138,11 @@ class KoParameterTest {
             .first()
 
         // then
-        sut.defaultValue shouldBeEqualTo "null"
+        sut.run {
+            defaultValue shouldBeEqualTo "null"
+            hasDefaultValue() shouldBeEqualTo true
+            hasDefaultValue("SampleType()") shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -139,7 +155,11 @@ class KoParameterTest {
             .first()
 
         // then
-        sut.defaultValue shouldBeEqualTo null
+        sut.run {
+            defaultValue shouldBeEqualTo null
+            hasDefaultValue() shouldBeEqualTo false
+            hasDefaultValue("SampleType()") shouldBeEqualTo false
+        }
     }
 
     @Test

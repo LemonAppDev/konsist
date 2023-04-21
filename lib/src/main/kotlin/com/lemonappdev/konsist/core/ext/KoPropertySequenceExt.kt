@@ -48,18 +48,33 @@ fun Sequence<KoProperty>.withExtension() = filter { it.isExtension() }
 
 fun Sequence<KoProperty>.withoutExtension() = filterNot { it.isExtension() }
 
-fun Sequence<KoProperty>.withDelegate(name: String? = null) = filter { it.hasDelegate(name) }
-
-fun Sequence<KoProperty>.withoutDelegate(name: String? = null) = filterNot { it.hasDelegate(name) }
-
-fun Sequence<KoProperty>.withExplicitType(type: String? = null) = filter {
-    when (type) {
-        null -> it.explicitType != null
-        else -> it.explicitType?.name == type
+fun Sequence<KoProperty>.withDelegate(vararg names: String) = filter {
+    when {
+        names.isEmpty() -> it.hasDelegate()
+        else -> names.any { name -> it.hasDelegate(name) }
     }
 }
 
-fun Sequence<KoProperty>.withoutExplicitType(type: String? = null) = this - withExplicitType(type).toSet()
+fun Sequence<KoProperty>.withoutDelegate(vararg names: String) = filter {
+    when {
+        names.isEmpty() -> !it.hasDelegate()
+        else -> names.none { name -> it.hasDelegate(name) }
+    }
+}
+
+fun Sequence<KoProperty>.withExplicitType(vararg types: String) = filter {
+    when {
+        types.isEmpty() -> it.hasExplicitType()
+        else -> types.any { type -> it.hasExplicitType(type) }
+    }
+}
+
+fun Sequence<KoProperty>.withoutExplicitType(vararg types: String) = filter {
+    when {
+        types.isEmpty() -> !it.hasExplicitType()
+        else -> types.none { type -> it.hasExplicitType(type) }
+    }
+}
 
 inline fun <reified T> Sequence<KoProperty>.withExplicitTypeOf() =
     filter { T::class.simpleName == it.explicitType?.name }

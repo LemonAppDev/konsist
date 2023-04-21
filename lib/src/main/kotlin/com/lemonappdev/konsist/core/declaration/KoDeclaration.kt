@@ -80,9 +80,9 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
             ?: false
     }
 
-    fun resideInPackages(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
+    fun resideInPackage(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
 
-    fun resideOutsidePackages(packageName: String) = !resideInPackages(packageName)
+    fun resideOutsidePackage(packageName: String) = !resideInPackage(packageName)
 
     fun resideInPath(path: String) = PackageHelper.resideInPackage(path, filePath, '/')
 
