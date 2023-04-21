@@ -22,27 +22,19 @@ fun Sequence<KoFile>.withoutImports(vararg imports: String) = filter { koFile ->
 }
 
 fun Sequence<KoFile>.withPackage(vararg packageNames: String) = filter { koFile ->
-    packageNames.any {
-        koFile.hasPackage(it)
-    }
+    packageNames.any { koFile.hasPackage(it) }
 }
 
 fun Sequence<KoFile>.withoutPackage(vararg packageNames: String) = filter { koFile ->
-    packageNames.none {
-        koFile.hasPackage(it)
-    }
+    packageNames.none { koFile.hasPackage(it) }
 }
 
 fun Sequence<KoFile>.withPath(vararg paths: String) = filter { koFile ->
-    paths.any {
-        koFile.resideInPath(it)
-    }
+    paths.any { koFile.resideInPath(it) }
 }
 
 fun Sequence<KoFile>.withoutPath(vararg paths: String) = filter { koFile ->
-    paths.none {
-        koFile.resideInPath(it)
-    }
+    paths.none { koFile.resideInPath(it) }
 }
 
 fun Sequence<KoFile>.withAnnotation() = filter { it.annotations.isNotEmpty() }

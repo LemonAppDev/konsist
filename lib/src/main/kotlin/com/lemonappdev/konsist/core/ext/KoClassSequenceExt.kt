@@ -148,9 +148,7 @@ fun Sequence<KoClass>.withParentClass(vararg names: String) = filter { koClass -
     if (names.isEmpty()) {
         koClass.hasParentClass()
     } else {
-        names.any {
-            koClass.hasParentClass(it)
-        }
+        names.any { koClass.hasParentClass(it) }
     }
 }
 
@@ -158,9 +156,7 @@ fun Sequence<KoClass>.withoutParentClass(vararg names: String) = filter { koClas
     if (names.isEmpty()) {
         !koClass.hasParentClass()
     } else {
-        names.none {
-            koClass.hasParentClass(it)
-        }
+        names.none { koClass.hasParentClass(it) }
     }
 }
 
