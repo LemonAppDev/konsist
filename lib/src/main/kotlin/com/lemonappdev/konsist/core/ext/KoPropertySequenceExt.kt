@@ -3,6 +3,7 @@
 package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.declaration.KoProperty
+import kotlin.reflect.KClass
 
 fun Sequence<KoProperty>.withVarModifier() = filter { it.isVar }
 
@@ -74,6 +75,14 @@ fun Sequence<KoProperty>.withoutExplicitType(vararg types: String) = filter {
         types.isEmpty() -> !it.hasExplicitType()
         else -> types.none { type -> it.hasExplicitType(type) }
     }
+}
+
+fun Sequence<KoProperty>.withExplicitTypeOf(vararg types: KClass<*>) = filter {
+    types.any { kClass -> it.explicitType?.name == kClass.simpleName }
+}
+
+fun Sequence<KoProperty>.withoutExplicitTypeOf(vararg types: KClass<*>) = filter {
+    types.none { kClass -> it.explicitType?.name == kClass.simpleName }
 }
 
 inline fun <reified T> Sequence<KoProperty>.withExplicitTypeOf() =
