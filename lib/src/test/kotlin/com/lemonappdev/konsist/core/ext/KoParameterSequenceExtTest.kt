@@ -259,7 +259,7 @@ class KoParameterSequenceExtTest {
     }
 
     @Test
-    fun `withType(KClass) returns parameters which have one of given types`() {
+    fun `withTypeOf(KClass) returns parameters which have one of given types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
@@ -278,14 +278,14 @@ class KoParameterSequenceExtTest {
         val parameters = sequenceOf(parameter1, parameter2, parameter3)
 
         // when
-        val sut = parameters.withType(SampleType1::class, SampleType2::class)
+        val sut = parameters.withTypeOf(SampleType1::class, SampleType2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(parameter1, parameter2)
     }
 
     @Test
-    fun `withoutType(KClass) returns parameter3 which has not any given type`() {
+    fun `withoutTypeOf(KClass) returns parameter3 which has not any given type`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
@@ -304,7 +304,7 @@ class KoParameterSequenceExtTest {
         val parameters = sequenceOf(parameter1, parameter2, parameter3)
 
         // when
-        val sut = parameters.withoutType(SampleType1::class, SampleType2::class)
+        val sut = parameters.withoutTypeOf(SampleType1::class, SampleType2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(parameter3)

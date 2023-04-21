@@ -57,7 +57,7 @@ inline fun <reified T> Sequence<KoFile>.withAnnotationOf() = filter { it.hasAnno
 
 inline fun <reified T> Sequence<KoFile>.withoutAnnotationOf() = filterNot { it.hasAnnotation<T>() }
 
-fun Sequence<KoFile>.withAnnotations(vararg annotations: KClass<*>) = filter {
+fun Sequence<KoFile>.withAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.all { annotation ->
         annotation
             .simpleName
@@ -65,7 +65,7 @@ fun Sequence<KoFile>.withAnnotations(vararg annotations: KClass<*>) = filter {
     }
 }
 
-fun Sequence<KoFile>.withSomeAnnotations(vararg annotations: KClass<*>) = filter {
+fun Sequence<KoFile>.withSomeAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.any { annotation ->
         annotation
             .simpleName
@@ -73,7 +73,7 @@ fun Sequence<KoFile>.withSomeAnnotations(vararg annotations: KClass<*>) = filter
     }
 }
 
-fun Sequence<KoFile>.withoutAnnotations(vararg annotations: KClass<*>) = filter {
+fun Sequence<KoFile>.withoutAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.none { annotation ->
         annotation
             .simpleName

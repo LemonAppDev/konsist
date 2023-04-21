@@ -11,23 +11,25 @@ fun Sequence<KoAnnotation>.withoutType(vararg types: String) = filter {
     types.none { type -> it.representsType(type) }
 }
 
-fun Sequence<KoAnnotation>.withType(vararg types: KClass<*>) = filter {
+fun Sequence<KoAnnotation>.withTypeOf(vararg types: KClass<*>) = filter {
     types.any { type ->
         type
             .qualifiedName
-            ?.let { name -> it.representsType(name) } ?: false }
+            ?.let { name -> it.representsType(name) } ?: false
+    }
 }
 
-fun Sequence<KoAnnotation>.withoutType(vararg types: KClass<*>) = filter {
+fun Sequence<KoAnnotation>.withoutTypeOf(vararg types: KClass<*>) = filter {
     types.none { type ->
         type
             .qualifiedName
-            ?.let { name -> it.representsType(name) } ?: false }
+            ?.let { name -> it.representsType(name) } ?: false
+    }
 }
 
-inline fun <reified T> Sequence<KoAnnotation>.withType() = filter { it.representsType<T>() }
+inline fun <reified T> Sequence<KoAnnotation>.withTypeOf() = filter { it.representsType<T>() }
 
-inline fun <reified T> Sequence<KoAnnotation>.withoutType() = filterNot { it.representsType<T>() }
+inline fun <reified T> Sequence<KoAnnotation>.withoutTypeOf() = filterNot { it.representsType<T>() }
 
 fun Sequence<KoAnnotation>.withName(vararg names: String) = filter {
     names.any { name -> it.name == name }

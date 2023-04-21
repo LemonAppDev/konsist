@@ -14,7 +14,7 @@ import com.lemonappdev.konsist.testdata.SampleType2 as SampleImportAlias2
 
 class KoTypeSequenceExtTest {
     @Test
-    fun `withSourceType() returns type1 which has SampleClass source type`() {
+    fun `withSourceTypeOf() returns type1 which has SampleClass source type`() {
         // given
         val sourceType1 = "SampleClass"
         val sourceType2 = "OtherClass"
@@ -27,14 +27,14 @@ class KoTypeSequenceExtTest {
         val types = sequenceOf(type1, type2)
 
         // when
-        val sut = types.withSourceType<SampleClass>()
+        val sut = types.withSourceTypeOf<SampleClass>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(type1)
     }
 
     @Test
-    fun `withoutSourceType() returns type2 which has not SampleClass source type`() {
+    fun `withoutSourceTypeOf() returns type2 which has not SampleClass source type`() {
         // given
         val sourceType1 = "SampleClass"
         val sourceType2 = "OtherClass"
@@ -47,14 +47,14 @@ class KoTypeSequenceExtTest {
         val types = sequenceOf(type1, type2)
 
         // when
-        val sut = types.withoutSourceType<SampleClass>()
+        val sut = types.withoutSourceTypeOf<SampleClass>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(type2)
     }
 
     @Test
-    fun `withSourceType(KClass) returns types with one of given source types`() {
+    fun `withSourceTypeOf(KClass) returns types with one of given source types`() {
         // given
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
@@ -71,14 +71,14 @@ class KoTypeSequenceExtTest {
         val types = sequenceOf(type1, type2, type3)
 
         // when
-        val sut = types.withSourceType(SampleClass1::class, SampleClass2::class)
+        val sut = types.withSourceTypeOf(SampleClass1::class, SampleClass2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(type1, type2)
     }
 
     @Test
-    fun `withoutSourceType(KClass) returns type without any of given source types`() {
+    fun `withoutSourceTypeOf(KClass) returns type without any of given source types`() {
         // given
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
@@ -95,7 +95,7 @@ class KoTypeSequenceExtTest {
         val types = sequenceOf(type1, type2, type3)
 
         // when
-        val sut = types.withoutSourceType(SampleClass1::class, SampleClass2::class)
+        val sut = types.withoutSourceTypeOf(SampleClass1::class, SampleClass2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(type3)

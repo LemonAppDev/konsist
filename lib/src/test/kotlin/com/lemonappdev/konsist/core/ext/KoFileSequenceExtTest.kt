@@ -474,7 +474,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(KClass) returns file1 with all given annotations`() {
+    fun `withAnnotationsOf(KClass) returns file1 with all given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -493,14 +493,14 @@ class KoFileSequenceExtTest {
         val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withAnnotations(SampleAnnotation1::class, SampleAnnotation2::class)
+        val sut = files.withAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1)
     }
 
     @Test
-    fun `withoutAnnotations(KClass) returns file3 without given annotations`() {
+    fun `withoutAnnotationsOf(KClass) returns file3 without given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -519,14 +519,14 @@ class KoFileSequenceExtTest {
         val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withoutAnnotations(SampleAnnotation1::class, SampleAnnotation2::class)
+        val sut = files.withoutAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file3)
     }
 
     @Test
-    fun `withSomeAnnotations(KClass) returns file1 and file2 which have at least one of given annotations`() {
+    fun `withSomeAnnotationsOf(KClass) returns file1 and file2 which have at least one of given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -545,7 +545,7 @@ class KoFileSequenceExtTest {
         val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withSomeAnnotations(SampleAnnotation1::class, SampleAnnotation2::class)
+        val sut = files.withSomeAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1, file2)

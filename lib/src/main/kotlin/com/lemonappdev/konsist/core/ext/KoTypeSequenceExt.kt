@@ -3,15 +3,15 @@ package com.lemonappdev.konsist.core.ext
 import com.lemonappdev.konsist.core.declaration.KoType
 import kotlin.reflect.KClass
 
-inline fun <reified T> Sequence<KoType>.withSourceType() = filter { it.sourceType == T::class.simpleName }
+inline fun <reified T> Sequence<KoType>.withSourceTypeOf() = filter { it.sourceType == T::class.simpleName }
 
-inline fun <reified T> Sequence<KoType>.withoutSourceType() = filterNot { it.sourceType == T::class.simpleName }
+inline fun <reified T> Sequence<KoType>.withoutSourceTypeOf() = filterNot { it.sourceType == T::class.simpleName }
 
-fun Sequence<KoType>.withSourceType(vararg types: KClass<*>) = filter {
+fun Sequence<KoType>.withSourceTypeOf(vararg types: KClass<*>) = filter {
     types.any { kClass -> it.sourceType == kClass.simpleName }
 }
 
-fun Sequence<KoType>.withoutSourceType(vararg types: KClass<*>) = filter {
+fun Sequence<KoType>.withoutSourceTypeOf(vararg types: KClass<*>) = filter {
     types.none { kClass -> it.sourceType == kClass.simpleName }
 }
 
@@ -30,7 +30,7 @@ inline fun <reified T> Sequence<KoType>.withoutImportAliasOf() =
     filterNot { it.isImportAlias() && it.sourceType == T::class.simpleName }
 
 fun Sequence<KoType>.withImportAliasOf(vararg names: KClass<*>) = filter {
-        names.any { kClass -> it.isImportAlias() && it.sourceType == kClass.simpleName }
+    names.any { kClass -> it.isImportAlias() && it.sourceType == kClass.simpleName }
 }
 
 fun Sequence<KoType>.withoutImportAliasOf(vararg names: KClass<*>) = filter {

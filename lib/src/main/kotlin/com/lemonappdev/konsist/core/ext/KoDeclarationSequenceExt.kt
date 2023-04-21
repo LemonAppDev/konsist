@@ -46,7 +46,7 @@ fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotations: String) = fil
     annotations.none { annotation -> it.hasAnnotation(annotation) }
 }
 
-fun Sequence<KoDeclaration>.withAnnotations(vararg annotations: KClass<*>) = filter {
+fun Sequence<KoDeclaration>.withAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.all { annotation ->
         annotation
             .simpleName
@@ -54,7 +54,7 @@ fun Sequence<KoDeclaration>.withAnnotations(vararg annotations: KClass<*>) = fil
     }
 }
 
-fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotations: KClass<*>) = filter {
+fun Sequence<KoDeclaration>.withSomeAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.any { annotation ->
         annotation
             .simpleName
@@ -62,7 +62,7 @@ fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotations: KClass<*>) =
     }
 }
 
-fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotations: KClass<*>) = filter {
+fun Sequence<KoDeclaration>.withoutAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.none { annotation ->
         annotation
             .simpleName

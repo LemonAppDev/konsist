@@ -346,7 +346,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(KClass) returns declaration1 with given annotations`() {
+    fun `withAnnotationsOf(KClass) returns declaration1 with given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -365,14 +365,14 @@ class KoDeclarationSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withAnnotations(SampleAnnotation1::class, SampleAnnotation2::class)
+        val sut = declarations.withAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutAnnotations(KClass) returns declaration3 without given annotations`() {
+    fun `withoutAnnotationsOf(KClass) returns declaration3 without given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -391,14 +391,14 @@ class KoDeclarationSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutAnnotations(SampleAnnotation1::class, SampleAnnotation2::class)
+        val sut = declarations.withoutAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
-    fun `withSomeAnnotations(KClass) returns declaration1 and declaration2 which have at least one of given annotations`() {
+    fun `withSomeAnnotationsOf(KClass) returns declaration1 and declaration2 which have at least one of given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -417,7 +417,7 @@ class KoDeclarationSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withSomeAnnotations(SampleAnnotation1::class, SampleAnnotation2::class)
+        val sut = declarations.withSomeAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)

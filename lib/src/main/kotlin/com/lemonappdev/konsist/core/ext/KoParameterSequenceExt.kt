@@ -37,18 +37,20 @@ fun Sequence<KoParameter>.withoutType(vararg types: String) = filter {
     types.none { type -> it.hasType(type) }
 }
 
-fun Sequence<KoParameter>.withType(vararg types: KClass<*>) = filter {
+fun Sequence<KoParameter>.withTypeOf(vararg types: KClass<*>) = filter {
     types.any { kClass ->
         kClass
             .simpleName
-            ?.let { name -> it.hasType(name) } ?: false }
+            ?.let { name -> it.hasType(name) } ?: false
+    }
 }
 
-fun Sequence<KoParameter>.withoutType(vararg types: KClass<*>) = filter {
+fun Sequence<KoParameter>.withoutTypeOf(vararg types: KClass<*>) = filter {
     types.none { kClass ->
         kClass
             .simpleName
-            ?.let { name -> it.hasType(name) } ?: false }
+            ?.let { name -> it.hasType(name) } ?: false
+    }
 }
 
 inline fun <reified T> Sequence<KoParameter>.withTypeOf() = filter { it.hasType<T>() }
