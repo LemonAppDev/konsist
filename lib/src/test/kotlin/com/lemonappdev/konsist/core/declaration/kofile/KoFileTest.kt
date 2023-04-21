@@ -254,7 +254,7 @@ class KoFileTest {
             .first()
             .run {
                 name shouldBeEqualTo "SampleTypeAlias"
-                type shouldBeEqualTo "() -> Int"
+                type.sourceType shouldBeEqualTo "() -> Int"
             }
     }
 

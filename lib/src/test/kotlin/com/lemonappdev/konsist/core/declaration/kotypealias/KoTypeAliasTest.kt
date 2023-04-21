@@ -18,7 +18,7 @@ class KoTypeAliasTest {
         // then
         sut.run {
             name shouldBeEqualTo "SampleTypeAlias"
-            type shouldBeEqualTo "() -> Int"
+            type.sourceType shouldBeEqualTo "() -> Int"
         }
     }
 
