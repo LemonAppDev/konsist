@@ -86,7 +86,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withImports(String) returns file1 with imports`() {
+    fun `withImports(String) returns file1 with all given imports`() {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
@@ -112,7 +112,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withoutImports(String) returns file3 without imports`() {
+    fun `withoutImports(String) returns file3 without given imports`() {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
@@ -138,7 +138,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withSomeImports(String) returns file1 and file2 which have at least one of given imports`() {
+    fun `withSomeImports(String) returns files which have at least one of given imports`() {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
@@ -344,7 +344,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(String) returns file1 with annotations`() {
+    fun `withAnnotations(String) returns file1 with all given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -370,7 +370,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotations(String) returns file3 without annotations`() {
+    fun `withoutAnnotations(String) returns file3 without given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -460,7 +460,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(KClass) returns file1 with annotations`() {
+    fun `withAnnotations(KClass) returns file1 with all given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -486,7 +486,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotations(KClass) returns file3 without annotations`() {
+    fun `withoutAnnotations(KClass) returns file3 without given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -612,7 +612,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withTypeAliases(String) returns file1 with typeAliasNames`() {
+    fun `withTypeAliases(String) returns files with all given typeAliasNames`() {
         // given
         val typeAliasName1 = "SampleTypeAlias1"
         val typeAliasName2 = "SampleTypeAlias2"
@@ -638,7 +638,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withoutTypeAliases(String) returns file3 without typeAliasNames`() {
+    fun `withoutTypeAliases(String) returns file3 without given typeAliasNames`() {
         // given
         val typeAliasName1 = "SampleTypeAlias1"
         val typeAliasName2 = "SampleTypeAlias2"
@@ -664,7 +664,7 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withSomeTypeAliases(String) returns file1 and file2 which have at least one of given typeAliasNames`() {
+    fun `withSomeTypeAliases(String) returns files which have at least one of given typeAliasNames`() {
         // given
         val typeAliasName1 = "SampleTypeAlias1"
         val typeAliasName2 = "SampleTypeAlias2"

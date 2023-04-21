@@ -228,7 +228,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(String) returns declaration1 with annotations`() {
+    fun `withAnnotations(String) returns declaration1 with given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -254,7 +254,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotations(String) returns declaration3 without annotations`() {
+    fun `withoutAnnotations(String) returns declaration3 without given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -280,7 +280,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeAnnotations(String) returns declaration1 and declaration2 which have at least one of given annotations`() {
+    fun `withSomeAnnotations(String) returns declarations which have at least one of given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -306,7 +306,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(KClass) returns declaration1 with annotations`() {
+    fun `withAnnotations(KClass) returns declaration1 with given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -332,7 +332,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotations(KClass) returns declaration3 with annotations`() {
+    fun `withoutAnnotations(KClass) returns declaration3 without given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -384,7 +384,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withModifiers(String) returns declaration1 with modifiers`() {
+    fun `withModifiers(String) returns declaration1 with all given modifiers`() {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
@@ -404,7 +404,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutModifiers(String) returns declaration3 without modifiers`() {
+    fun `withoutModifiers(String) returns declaration3 without given modifiers`() {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
@@ -430,7 +430,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeModifiers(String) returns declaration1 and declaration2 which have at least one of given modifiers`() {
+    fun `withSomeModifiers(String) returns declarations which have at least one of given modifiers`() {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
@@ -456,7 +456,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withPackage(String) returns declaration1 and declaration2 which have at least one of given package`() {
+    fun `withPackage(String) returns declarations which have at least one of given package`() {
         // given
         val package1 = "com.sample.samplepackage1"
         val package2 = "com.sample.samplepackage2"
@@ -482,7 +482,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutPackage(String) returns declaration3 without package`() {
+    fun `withoutPackage(String) returns declaration3 without given packages`() {
         // given
         val package1 = "com.sample.samplepackage1"
         val package2 = "com.sample.samplepackage2"
@@ -508,7 +508,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withPath(String) returns declaration1 and declaration2 which have at least one of given path`() {
+    fun `withPath(String) returns declarations which have at least one of given paths`() {
         // given
         val path1 = "Path1"
         val path2 = "Path2"
@@ -534,7 +534,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutPath(String) returns declaration3 without path`() {
+    fun `withoutPath(String) returns declaration3 without given paths`() {
         // given
         val path1 = "Path1"
         val path2 = "Path2"

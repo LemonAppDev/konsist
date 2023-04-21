@@ -608,7 +608,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withParents(String) returns class1 with parents`() {
+    fun `withParents(String) returns class1 with given parents`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -634,7 +634,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutParents(String) returns class3 without parents`() {
+    fun `withoutParents(String) returns class3 without given parents`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -686,7 +686,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withParents(KClass) returns class1 with parents`() {
+    fun `withParents(KClass) returns class1 with given parents`() {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
@@ -720,7 +720,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutParents(KClass) returns class3 without parents`() {
+    fun `withoutParents(KClass) returns class3 without given parents`() {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
@@ -788,7 +788,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withParentInterfaces(KClass) returns class1 with parents`() {
+    fun `withParentInterfaces(KClass) returns classes with given parent interfaces`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -822,7 +822,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentInterfaces(KClass) returns class3 without parents`() {
+    fun `withoutParentInterfaces(KClass) returns class3 without given parent interfaces`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -1016,7 +1016,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withParentInterfaces() returns class1 with parent interfaces`() {
+    fun `withParentInterfaces() returns class1 with all given parent interfaces`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -1042,7 +1042,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentInterfaces() returns class3 without parent interfaces`() {
+    fun `withoutParentInterfaces() returns class3 without given parent interfaces`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -1068,7 +1068,7 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withSomeParentInterfaces() returns class1 and class2 which have at least one of given parent interfaces`() {
+    fun `withSomeParentInterfaces() returns classes which have at least one of given parent interfaces`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"

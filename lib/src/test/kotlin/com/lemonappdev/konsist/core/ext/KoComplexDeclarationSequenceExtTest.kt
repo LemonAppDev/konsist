@@ -35,7 +35,7 @@ class KoComplexDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutType() returns complex declaration without given types`() {
+    fun `withoutType() returns complex declaration without any given type`() {
         // given
         val type1 = "type1"
         val type2 = "type2"

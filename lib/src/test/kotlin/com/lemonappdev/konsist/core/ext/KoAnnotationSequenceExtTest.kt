@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 
 class KoAnnotationSequenceExtTest {
     @Test
-    fun `withType() returns annotations with type type1 or type2`() {
+    fun `withType() returns annotations with one of given types`() {
         // given
         val type1 = "type1"
         val type2 = "type2"
@@ -35,7 +35,7 @@ class KoAnnotationSequenceExtTest {
     }
 
     @Test
-    fun `withoutType() returns annotation without type type1`() {
+    fun `withoutType() returns annotation3 without given types`() {
         // given
         val type1 = "type1"
         val type2 = "type2"
@@ -98,7 +98,7 @@ class KoAnnotationSequenceExtTest {
     }
 
     @Test
-    fun `withName() returns annotations with name1 or name2`() {
+    fun `withName() returns annotations with one of given names`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
@@ -122,7 +122,7 @@ class KoAnnotationSequenceExtTest {
     }
 
     @Test
-    fun `withoutName() returns annotation without name1 and name2`() {
+    fun `withoutName() returns annotation without any given name`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
@@ -146,7 +146,7 @@ class KoAnnotationSequenceExtTest {
     }
 
     @Test
-    fun `withFullyQualifiedClassName() returns annotation with fullyQualifiedName1 or fullyQualifiedName1`() {
+    fun `withFullyQualifiedClassName() returns annotations with one of given fullyQualifiedNames`() {
         // given
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
@@ -170,7 +170,7 @@ class KoAnnotationSequenceExtTest {
     }
 
     @Test
-    fun `withoutFullyQualifiedClassName() returns annotation without fullyQualifiedName1 and fullyQualifiedName3`() {
+    fun `withoutFullyQualifiedClassName() returns annotation without any given fullyQualifiedName`() {
         // given
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"

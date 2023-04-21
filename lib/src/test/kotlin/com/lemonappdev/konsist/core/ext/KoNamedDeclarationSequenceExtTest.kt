@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class KoNamedDeclarationSequenceExtTest {
     @Test
-    fun `withName() returns namedDeclaration1 and namedDeclaration2 with given any name`() {
+    fun `withName() returns namedDeclarations with one of given names`() {
         // given
         val name1 = "sampleName1"
         val name2 = "sampleName2"

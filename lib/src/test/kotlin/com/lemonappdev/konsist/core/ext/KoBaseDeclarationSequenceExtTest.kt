@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class KoBaseDeclarationSequenceExtTest {
     @Test
-    fun `withFilePath(String) returns baseDeclaration1 and baseDeclaration2 which have at least one of given path`() {
+    fun `withFilePath(String) returns baseDeclarations with one of given paths`() {
         // given
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
@@ -34,7 +34,7 @@ class KoBaseDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutFilePath(String) returns baseDeclaration3 without path`() {
+    fun `withoutFilePath(String) returns baseDeclaration3 without given path`() {
         // given
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
