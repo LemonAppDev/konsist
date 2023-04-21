@@ -14,13 +14,27 @@ fun Sequence<KoParameter>.withCrossInlineModifier() = filter { it.hasCrossInline
 
 fun Sequence<KoParameter>.withoutCrossInlineModifier() = filterNot { it.hasCrossInlineModifier() }
 
-fun Sequence<KoParameter>.withDefaultValue(value: String? = null) = filter { it.hasDefaultValue(value) }
+fun Sequence<KoParameter>.withDefaultValue(vararg values: String) = filter {
+    when {
+        values.isEmpty() -> it.hasDefaultValue()
+        else -> values.any { value -> it.hasDefaultValue(value) }
+    }
+}
 
-fun Sequence<KoParameter>.withoutDefaultValue(value: String? = null) = filterNot { it.hasDefaultValue(value) }
+fun Sequence<KoParameter>.withoutDefaultValue(vararg values: String) = filter {
+    when {
+        values.isEmpty() -> !it.hasDefaultValue()
+        else -> values.none { value -> it.hasDefaultValue(value) }
+    }
+}
 
-fun Sequence<KoParameter>.withType(type: String) = filter { it.hasType(type) }
+fun Sequence<KoParameter>.withType(vararg types: String) = filter {
+    types.any { type -> it.hasType(type) }
+}
 
-fun Sequence<KoParameter>.withoutType(type: String) = filterNot { it.hasType(type) }
+fun Sequence<KoParameter>.withoutType(vararg types: String) = filter {
+    types.none { type -> it.hasType(type) }
+}
 
 inline fun <reified T> Sequence<KoParameter>.withTypeOf() = filter { it.hasType<T>() }
 
