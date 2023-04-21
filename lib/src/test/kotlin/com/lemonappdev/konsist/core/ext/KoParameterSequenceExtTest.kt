@@ -203,10 +203,10 @@ class KoParameterSequenceExtTest {
         val parameter2: KoParameter = mockk {
             every { type.name } returns typeName2
         }
-        val properties = sequenceOf(parameter1, parameter2)
+        val parameters = sequenceOf(parameter1, parameter2)
 
         // when
-        val sut = properties.withType(typeName1)
+        val sut = parameters.withType(typeName1)
 
         // then
         sut.toList() shouldBeEqualTo listOf(parameter1)
@@ -223,10 +223,10 @@ class KoParameterSequenceExtTest {
         val parameter2: KoParameter = mockk {
             every { type.name } returns typeName2
         }
-        val properties = sequenceOf(parameter1, parameter2)
+        val parameters = sequenceOf(parameter1, parameter2)
 
         // when
-        val sut = properties.withoutType(typeName1)
+        val sut = parameters.withoutType(typeName1)
 
         // then
         sut.toList() shouldBeEqualTo listOf(parameter2)
@@ -243,10 +243,10 @@ class KoParameterSequenceExtTest {
         val parameter2: KoParameter = mockk {
             every { type.name } returns typeName2
         }
-        val properties = sequenceOf(parameter1, parameter2)
+        val parameters = sequenceOf(parameter1, parameter2)
 
         // when
-        val sut = properties.withTypeOf<SampleType>()
+        val sut = parameters.withTypeOf<SampleType>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(parameter1)
@@ -263,10 +263,10 @@ class KoParameterSequenceExtTest {
         val parameter2: KoParameter = mockk {
             every { type.name } returns typeName2
         }
-        val properties = sequenceOf(parameter1, parameter2)
+        val parameters = sequenceOf(parameter1, parameter2)
 
         // when
-        val sut = properties.withoutTypeOf<SampleType>()
+        val sut = parameters.withoutTypeOf<SampleType>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(parameter2)
