@@ -2,6 +2,8 @@ package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclaration
 import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.SampleClass1
+import com.lemonappdev.konsist.testdata.SampleClass2
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -9,7 +11,7 @@ import org.junit.jupiter.api.Test
 
 class KoComplexDeclarationSequenceExtTest {
     @Test
-    fun `withType() returns complex declarations with one of given types`() {
+    fun `withType(String) returns complex declarations with one of given types`() {
         // given
         val type1 = "type1"
         val type2 = "type2"
@@ -35,7 +37,7 @@ class KoComplexDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutType() returns complex declaration without any given type`() {
+    fun `withoutType(String) returns complex declaration without any given type`() {
         // given
         val type1 = "type1"
         val type2 = "type2"
@@ -55,6 +57,58 @@ class KoComplexDeclarationSequenceExtTest {
 
         // when
         val sut = complexDeclarations.withoutType(type1, type2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(complexDeclaration3)
+    }
+
+    @Test
+    fun `withType(KClass) returns complex declarations with one of given types`() {
+        // given
+        val type1 = "com.lemonappdev.konsist.testdata.SampleClass1"
+        val type2 = "com.lemonappdev.konsist.testdata.SampleClass2"
+        val complexDeclaration1: KoComplexDeclaration = mockk {
+            every { representsType(type1) } returns true
+            every { representsType(type2) } returns false
+        }
+        val complexDeclaration2: KoComplexDeclaration = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns true
+        }
+        val complexDeclaration3: KoComplexDeclaration = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns false
+        }
+        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
+
+        // when
+        val sut = complexDeclarations.withType(SampleClass1::class, SampleClass2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(complexDeclaration1, complexDeclaration2)
+    }
+
+    @Test
+    fun `withoutType(KClass) returns complex declaration without any of given types`() {
+        // given
+        val type1 = "com.lemonappdev.konsist.testdata.SampleClass1"
+        val type2 = "com.lemonappdev.konsist.testdata.SampleClass2"
+        val complexDeclaration1: KoComplexDeclaration = mockk {
+            every { representsType(type1) } returns true
+            every { representsType(type2) } returns false
+        }
+        val complexDeclaration2: KoComplexDeclaration = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns true
+        }
+        val complexDeclaration3: KoComplexDeclaration = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns false
+        }
+        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
+
+        // when
+        val sut = complexDeclarations.withoutType(SampleClass1::class, SampleClass2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(complexDeclaration3)
