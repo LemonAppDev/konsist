@@ -15,6 +15,14 @@ fun Sequence<KoType>.withoutSourceTypeOf(vararg types: KClass<*>) = filter {
     types.none { kClass -> it.sourceType == kClass.simpleName }
 }
 
+fun Sequence<KoType>.withSourceType(vararg types: KClass<*>) = filter {
+    types.any { kClass -> it.sourceType == kClass.simpleName }
+}
+
+fun Sequence<KoType>.withoutSourceType(vararg types: KClass<*>) = filter {
+    types.none { kClass -> it.sourceType == kClass.simpleName }
+}
+
 fun Sequence<KoType>.withSourceType(vararg types: String) = filter {
     types.any { type -> it.sourceType == type }
 }
