@@ -70,7 +70,6 @@ fun Sequence<KoFunction>.withoutExplicitReturnType(vararg types: String) = filte
     }
 }
 
-
 inline fun <reified T> Sequence<KoFunction>.withExplicitReturnTypeOf() = filter { T::class.simpleName == it.explicitReturnType?.name }
 
 inline fun <reified T> Sequence<KoFunction>.withoutExplicitReturnTypeOf() =
