@@ -40,9 +40,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
         val hasOtherVisibilityModifier =
             hasModifier(KtTokens.PRIVATE_KEYWORD) ||
                 hasModifier(KtTokens.PROTECTED_KEYWORD) ||
-                hasModifier(
-                    KtTokens.INTERNAL_KEYWORD,
-                )
+                hasModifier(KtTokens.INTERNAL_KEYWORD)
 
         hasOtherVisibilityModifier.not()
     }
