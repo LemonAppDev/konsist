@@ -14,5 +14,7 @@
 artefact will be transferred to [maven central](https://central.sonatype.com/artifact/com.lemonappdev/konsist) 
 repository after some time.
 
-Add sonatype konsist artifacts can be filtered [here](https://s01.oss.sonatype.org/#nexus-search;quick~konsist). 
-
+## Repository Links
+- [Nexus Repository Manager](https://s01.oss.sonatype.org/#nexus-search;quick~konsist) 
+- [mvnrepository.com](https://mvnrepository.com/artifact/com.lemonappdev/konsist/)
+- [central.sonatype.com](https://central.sonatype.com/artifact/com.lemonappdev/konsist/)
