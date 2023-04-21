@@ -9,6 +9,7 @@
 * [Project Status](getting-started/gettingstarted-1.md)
 * [Under The Hood](getting-started/under-the-hood.md)
 * [Changelog](getting-started/changelog.md)
+* [Why there are no pre-defined rules?](getting-started/why-there-are-no-pre-defined-rules.md)
 
 ## WRITING TESTS
 
@@ -16,8 +17,11 @@
 
 ## 📗 FEATURES
 
+* [Declaration](features/declaration.md)
 * [Scope](features/koscope.md)
-* [PackageSelector](features/packageselector.md)
+* [Declaration Quering And Filtering](features/declaration-quering-and-filtering.md)
+* [Assert](features/assert.md)
+* [Package Selector](features/packageselector.md)
 
 ## 🔍 INSPIRATION
 
@@ -29,6 +33,6 @@
 ## ❓ HELP
 
 * [Sending us Feedback](help/sending-us-feedback.md)
-* [Contribute](help/contribute.md)
+* [Contributing](help/contributing.md)
 * [Contributors](help/contributors.md)
 * [Open Source Licenses](help/open-source-licenses.md)
