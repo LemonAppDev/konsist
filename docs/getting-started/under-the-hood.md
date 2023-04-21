@@ -1,8 +1,8 @@
 # Under The Hood
 
-Konsist is built on top of [Kotlin Compiler Psi](https://github.com/JetBrains/kotlin/tree/master/compiler/psi/src/org/jetbrains/kotlin/psi). It wraps Kotlin compiler parser and provides a simple API to access Kotlin code declarations.
+Konsist is built on top of [Kotlin Compiler Psi](https://github.com/JetBrains/kotlin/tree/master/compiler/psi/src/org/jetbrains/kotlin/psi). It wraps the Kotlin compiler parser and provides a simple API to access Kotlin code declarations.
 
-Declarations tree mimics the Kotlin code structure:
+[declaration.md](../features/declaration.md "mention") tree mimics the Kotlin code structure:
 
 ```mermaid
 ---
