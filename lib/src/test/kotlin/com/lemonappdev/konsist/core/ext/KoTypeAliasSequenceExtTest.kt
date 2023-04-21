@@ -8,83 +8,51 @@ import org.junit.jupiter.api.Test
 
 class KoTypeAliasSequenceExtTest {
     @Test
-    fun `withType(name) returns typeAlias1 which has given type`() {
+    fun `withType(name) returns typeAliases which has one of given types`() {
         // given
-        val type1 = "SampleType"
-        val type2 = "OtherType"
+        val type1 = "SampleType1"
+        val type2 = "SampleType2"
+        val type3 = "SampleType3"
         val typeAlias1: KoTypeAlias = mockk {
-            every { type } returns type1
+            every { type.sourceType } returns type1
         }
         val typeAlias2: KoTypeAlias = mockk {
-            every { type } returns type2
+            every { type.sourceType } returns type2
         }
-        val properties = sequenceOf(typeAlias1, typeAlias2)
+        val typeAlias3: KoTypeAlias = mockk {
+            every { type.sourceType } returns type3
+        }
+        val typeAliases = sequenceOf(typeAlias1, typeAlias2, typeAlias3)
 
         // when
-        val sut = properties.withType(type1)
+        val sut = typeAliases.withSourceType(type1, type2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(typeAlias1)
+        sut.toList() shouldBeEqualTo listOf(typeAlias1, typeAlias2)
     }
 
     @Test
-    fun `withoutType(name) returns typeAlias2 which has not given type`() {
+    fun `withoutType(name) returns typeAlias3 which has not any given type`() {
         // given
-        val type1 = "SampleType"
-        val type2 = "OtherType"
+        val type1 = "SampleType1"
+        val type2 = "SampleType2"
+        val type3 = "SampleType3"
         val typeAlias1: KoTypeAlias = mockk {
-            every { type } returns type1
+            every { type.sourceType } returns type1
         }
         val typeAlias2: KoTypeAlias = mockk {
-            every { type } returns type2
+            every { type.sourceType } returns type2
         }
-        val properties = sequenceOf(typeAlias1, typeAlias2)
+        val typeAlias3: KoTypeAlias = mockk {
+            every { type.sourceType } returns type3
+        }
+        val typeAliases = sequenceOf(typeAlias1, typeAlias2, typeAlias3)
 
         // when
-        val sut = properties.withoutType(type1)
+        val sut = typeAliases.withoutSourceType(type1, type2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(typeAlias2)
-    }
-
-    @Test
-    fun `withTypeOf() returns typeAlias1 which has given type`() {
-        // given
-        val type1 = "() -> Unit"
-        val type2 = "OtherType"
-        val typeAlias1: KoTypeAlias = mockk {
-            every { type } returns type1
-        }
-        val typeAlias2: KoTypeAlias = mockk {
-            every { type } returns type2
-        }
-        val properties = sequenceOf(typeAlias1, typeAlias2)
-
-        // when
-        val sut = properties.withTypeOf<AliasName>()
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(typeAlias1)
-    }
-
-    @Test
-    fun `withoutTypeOf() returns typeAlias2 which has not given type`() {
-        // given
-        val type1 = "() -> Unit"
-        val type2 = "OtherType"
-        val typeAlias1: KoTypeAlias = mockk {
-            every { type } returns type1
-        }
-        val typeAlias2: KoTypeAlias = mockk {
-            every { type } returns type2
-        }
-        val properties = sequenceOf(typeAlias1, typeAlias2)
-
-        // when
-        val sut = properties.withoutTypeOf<AliasName>()
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(typeAlias2)
+        sut.toList() shouldBeEqualTo listOf(typeAlias3)
     }
 
     @Test
@@ -123,5 +91,3 @@ class KoTypeAliasSequenceExtTest {
         sut.toList() shouldBeEqualTo listOf(typeAlias2)
     }
 }
-
-typealias AliasName = () -> Unit

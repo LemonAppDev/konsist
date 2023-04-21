@@ -8,7 +8,10 @@ import org.jetbrains.kotlin.psi.KtTypeAlias
 class KoTypeAlias private constructor(private val ktTypeAlias: KtTypeAlias) : KoDeclaration(ktTypeAlias) {
 
     val type by lazy {
-        ktTypeAlias.getTypeReference()?.typeElement?.text ?: throw KoInternalException("Type alias has no type", koBaseDeclaration = this)
+        ktTypeAlias
+            .getTypeReference()
+            ?.let { KoType.getInstance(it) }
+            ?: throw KoInternalException("Type alias has no type", koBaseDeclaration = this)
     }
 
     fun hasActualModifier() = ktTypeAlias.modifierList?.hasModifier(KtTokens.ACTUAL_KEYWORD) ?: false
