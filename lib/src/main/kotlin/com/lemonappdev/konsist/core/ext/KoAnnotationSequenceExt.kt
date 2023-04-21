@@ -15,7 +15,8 @@ fun Sequence<KoAnnotation>.withTypeOf(vararg types: KClass<*>) = filter {
     types.any { type ->
         type
             .qualifiedName
-            ?.let { name -> it.representsType(name) } ?: false
+            ?.let { name -> it.representsType(name) }
+            ?: false
     }
 }
 
@@ -23,7 +24,8 @@ fun Sequence<KoAnnotation>.withoutTypeOf(vararg types: KClass<*>) = filter {
     types.none { type ->
         type
             .qualifiedName
-            ?.let { name -> it.representsType(name) } ?: false
+            ?.let { name -> it.representsType(name) }
+            ?: false
     }
 }
 
