@@ -20,20 +20,6 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-path`() {
-        // given
-        val sut = getSnippetFile("file-path")
-            .files()
-            .first()
-
-        // then
-        sut
-            .path
-            .endsWith("/lib/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kofile/snippet/file-path.kt")
-            .shouldBeEqualTo(true)
-    }
-
-    @Test
     fun `file-has-path`() {
         // given
         val sut = getSnippetFile("file-has-path")
@@ -45,17 +31,6 @@ class KoFileTest {
             resideInPath("../declaration/kofile/..") shouldBeEqualTo true
             resideInPath("/declaration/kofile/") shouldBeEqualTo false
         }
-    }
-
-    @Test
-    fun `file-project-path`() {
-        // given
-        val sut = getSnippetFile("file-project-path")
-            .files()
-            .first()
-
-        // then
-        sut.projectPath shouldBeEqualTo "/lib/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kofile/snippet/file-project-path.kt"
     }
 
     @Test

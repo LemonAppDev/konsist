@@ -6,18 +6,18 @@ import org.junit.jupiter.api.Test
 
 class KoBaseDeclarationTest {
     @Test
-    fun `file-path`() {
+    fun `path`() {
         // given
-        val sut = getSnippetFile("file-path")
+        val sut = getSnippetFile("path")
             .functions()
             .first()
 
         // then
         sut
-            .filePath
+            .path
             .run {
                 startsWith("//") shouldBeEqualTo false
-                endsWith("kobasedeclaration/snippet/file-path.kt") shouldBeEqualTo true
+                endsWith("kobasedeclaration/snippet/path.kt") shouldBeEqualTo true
             }
     }
 
@@ -35,6 +35,17 @@ class KoBaseDeclarationTest {
             hasFilePath("..kobasedeclaration..has-file-path.kt") shouldBeEqualTo true
             hasFilePath("kobasedeclaration/snippet/") shouldBeEqualTo false
         }
+    }
+
+    @Test
+    fun `project-path`() {
+        // given
+        val sut = getSnippetFile("project-path")
+            .files()
+            .first()
+
+        // then
+        sut.projectPath shouldBeEqualTo "/lib/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kobasedeclaration/snippet/project-path.kt"
     }
 
     @Test
@@ -83,7 +94,7 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.filePath}:3:1"
+        sut.location shouldBeEqualTo "${sut.path}:3:1"
     }
 
     @Test
@@ -94,7 +105,7 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.filePath}:12:25"
+        sut.location shouldBeEqualTo "${sut.path}:12:25"
     }
 
     @Test

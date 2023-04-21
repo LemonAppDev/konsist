@@ -15,7 +15,6 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
-import java.io.File
 
 class KoFile private constructor(private val ktFile: KtFile) :
     KoNamedDeclaration(ktFile),
@@ -29,19 +28,15 @@ class KoFile private constructor(private val ktFile: KtFile) :
 
     override val name = ktFile.name.split("/").last()
 
-    val path by lazy {
-        ktFile
-            .virtualFilePath
-            .replace("//", "/")
-    }
+    val imports by lazy {
+        val ktImportDirectives = ktFile
+            .children
+            .filterIsInstance<KtImportList>()
+            .first()
+            .children
+            .filterIsInstance<KtImportDirective>()
 
-    val projectPath by lazy {
-        val mainPath = File("")
-            .absoluteFile
-            .path
-            .substringBeforeLast('/')
-
-        path.removePrefix(mainPath)
+        ktImportDirectives.map { KoImport.getInstance(it) }
     }
 
     val annotations by lazy {
@@ -56,17 +51,6 @@ class KoFile private constructor(private val ktFile: KtFile) :
         } else {
             ktFile.packageDirective?.let { KoPackage.getInstance(it) }
         }
-    }
-
-    val imports by lazy {
-        val ktImportDirectives = ktFile
-            .children
-            .filterIsInstance<KtImportList>()
-            .first()
-            .children
-            .filterIsInstance<KtImportDirective>()
-
-        ktImportDirectives.map { KoImport.getInstance(it) }
     }
 
     val typeAliases by lazy {
