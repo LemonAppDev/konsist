@@ -2,7 +2,9 @@ package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.const.KoModifier.OPEN
 import com.lemonappdev.konsist.core.const.KoModifier.PROTECTED
+import com.lemonappdev.konsist.core.declaration.KoAnnotation
 import com.lemonappdev.konsist.core.declaration.KoDeclaration
+import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import io.mockk.every
@@ -228,6 +230,44 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
+    fun `withAnnotations() returns declaration with any annotation`() {
+        // given
+        val annotation: KoAnnotation = mockk()
+        val declaration1: KoDeclaration = mockk {
+            every { annotations } returns listOf(annotation)
+        }
+        val declaration2: KoDeclaration = mockk {
+            every { annotations } returns emptyList()
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAnnotation()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withAnnotations() returns declaration without any annotation`() {
+        // given
+        val annotation: KoAnnotation = mockk()
+        val declaration1: KoDeclaration = mockk {
+            every { annotations } returns listOf(annotation)
+        }
+        val declaration2: KoDeclaration = mockk {
+            every { annotations } returns emptyList()
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAnnotation()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAnnotations(String) returns declaration1 with given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
@@ -381,6 +421,58 @@ class KoDeclarationSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withAnnotationOf(KClass) returns declaration with given annotation`() {
+        // given
+        val qualifiedName1 = "com.lemonappdev.konsist.testdata.SampleAnnotation"
+        val qualifiedName2 = "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
+        val annotation1: KoAnnotation = mockk {
+            every { fullyQualifiedName } returns qualifiedName1
+        }
+        val annotation2: KoAnnotation = mockk {
+            every { fullyQualifiedName } returns qualifiedName2
+        }
+        val declaration1: KoDeclaration = mockk {
+            every { annotations } returns listOf(annotation1)
+        }
+        val declaration2: KoDeclaration = mockk {
+            every { annotations } returns listOf(annotation2)
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAnnotationOf<SampleAnnotation>()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutAnnotationOf(KClass) returns declaration without given annotation`() {
+        // given
+        val qualifiedName1 = "com.lemonappdev.konsist.testdata.SampleAnnotation"
+        val qualifiedName2 = "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
+        val annotation1: KoAnnotation = mockk {
+            every { fullyQualifiedName } returns qualifiedName1
+        }
+        val annotation2: KoAnnotation = mockk {
+            every { fullyQualifiedName } returns qualifiedName2
+        }
+        val declaration1: KoDeclaration = mockk {
+            every { annotations } returns listOf(annotation1)
+        }
+        val declaration2: KoDeclaration = mockk {
+            every { annotations } returns listOf(annotation2)
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAnnotationOf<SampleAnnotation>()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

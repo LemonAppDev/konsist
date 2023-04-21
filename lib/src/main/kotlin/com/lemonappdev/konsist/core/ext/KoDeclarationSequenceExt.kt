@@ -30,6 +30,10 @@ fun Sequence<KoDeclaration>.withTopLevel() = filter { it.isTopLevel() }
 
 fun Sequence<KoDeclaration>.withoutTopLevel() = filterNot { it.isTopLevel() }
 
+fun Sequence<KoDeclaration>.withAnnotation() = filter { it.annotations.isNotEmpty() }
+
+fun Sequence<KoDeclaration>.withoutAnnotation() = filterNot { it.annotations.isNotEmpty() }
+
 fun Sequence<KoDeclaration>.withAnnotations(vararg annotations: String) = filter {
     annotations.all { annotation -> it.hasAnnotation(annotation) }
 }
@@ -65,6 +69,10 @@ fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotations: KClass<*>) = 
             ?.let { name -> it.hasAnnotation(name) } ?: false
     }
 }
+
+inline fun <reified T> Sequence<KoDeclaration>.withAnnotationOf() = filter { it.hasAnnotation<T>() }
+
+inline fun <reified T> Sequence<KoDeclaration>.withoutAnnotationOf() = filterNot { it.hasAnnotation<T>() }
 
 fun Sequence<KoDeclaration>.withModifiers(vararg modifiers: KoModifier) = filter { it.hasModifiers(*modifiers) }
 
