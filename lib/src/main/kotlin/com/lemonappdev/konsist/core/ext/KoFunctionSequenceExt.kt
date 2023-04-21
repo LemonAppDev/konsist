@@ -56,14 +56,28 @@ fun Sequence<KoFunction>.withExtension() = filter { it.isExtension() }
 
 fun Sequence<KoFunction>.withoutExtension() = filterNot { it.isExtension() }
 
-fun Sequence<KoFunction>.withExplicitReturnType(type: String? = null) = filter {
-    when (type) {
-        null -> it.hasExplicitReturnType()
-        else -> it.explicitReturnType?.name == type
+fun Sequence<KoFunction>.withExplicitReturnType(vararg types: String) = filter {
+    when {
+        types.isEmpty() -> it.hasExplicitReturnType()
+        else -> {
+            types.any { type ->
+                it.explicitReturnType?.name == type
+            }
+        }
     }
 }
 
-fun Sequence<KoFunction>.withoutExplicitReturnType(type: String? = null) = this - withExplicitReturnType(type).toSet()
+fun Sequence<KoFunction>.withoutExplicitReturnType(vararg types: String) = filter {
+    when {
+        types.isEmpty() -> !it.hasExplicitReturnType()
+        else -> {
+            types.none { type ->
+                it.explicitReturnType?.name == type
+            }
+        }
+    }
+}
+
 
 inline fun <reified T> Sequence<KoFunction>.withExplicitReturnTypeOf() = filter { T::class.simpleName == it.explicitReturnType?.name }
 
