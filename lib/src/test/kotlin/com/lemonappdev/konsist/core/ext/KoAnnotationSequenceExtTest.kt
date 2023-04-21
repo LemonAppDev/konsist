@@ -63,7 +63,7 @@ class KoAnnotationSequenceExtTest {
     }
 
     @Test
-    fun `withType(KClass) returns annotations with one of given types`() {
+    fun `withTypeOf(KClass) returns annotations with one of given types`() {
         // given
         val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
         val type2 = "com.lemonappdev.konsist.testdata.SampleAnnotation2"
@@ -82,14 +82,14 @@ class KoAnnotationSequenceExtTest {
         val annotations = sequenceOf(annotation1, annotation2, annotation3)
 
         // when
-        val sut = annotations.withType(SampleAnnotation1::class, SampleAnnotation2::class)
+        val sut = annotations.withTypeOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(annotation1, annotation2)
     }
 
     @Test
-    fun `withoutType(KClass) returns annotation without any of given types`() {
+    fun `withoutTypeOf(KClass) returns annotation without any of given types`() {
         // given
         val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
         val type2 = "com.lemonappdev.konsist.testdata.SampleAnnotation2"
@@ -108,7 +108,7 @@ class KoAnnotationSequenceExtTest {
         val annotations = sequenceOf(annotation1, annotation2, annotation3)
 
         // when
-        val sut = annotations.withoutType(SampleAnnotation1::class, SampleAnnotation2::class)
+        val sut = annotations.withoutTypeOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(annotation3)
