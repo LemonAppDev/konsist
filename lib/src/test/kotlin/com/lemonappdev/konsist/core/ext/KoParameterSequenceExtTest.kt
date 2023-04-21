@@ -155,18 +155,17 @@ class KoParameterSequenceExtTest {
     @Test
     fun `withDefaultValue(name) returns parameter1 which has given default value`() {
         // given
-        val value1 = "SampleDefaultValue"
-        val value2 = "OtherDefaultValue"
+        val value = "SampleDefaultValue"
         val parameter1: KoParameter = mockk {
-            every { defaultValue } returns value1
+            every { hasDefaultValue(value) } returns true
         }
         val parameter2: KoParameter = mockk {
-            every { defaultValue } returns value2
+            every { hasDefaultValue(value) } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
 
         // when
-        val sut = parameters.withDefaultValue(value1)
+        val sut = parameters.withDefaultValue(value)
 
         // then
         sut.toList() shouldBeEqualTo listOf(parameter1)
@@ -175,18 +174,17 @@ class KoParameterSequenceExtTest {
     @Test
     fun `withoutDefaultValue(name) returns parameter2 which has not given default value`() {
         // given
-        val value1 = "SampleDefaultValue"
-        val value2 = "OtherDefaultValue"
+        val value = "SampleDefaultValue"
         val parameter1: KoParameter = mockk {
-            every { defaultValue } returns value1
+            every { hasDefaultValue(value) } returns true
         }
         val parameter2: KoParameter = mockk {
-            every { defaultValue } returns value2
+            every { hasDefaultValue(value) } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
 
         // when
-        val sut = parameters.withoutDefaultValue(value1)
+        val sut = parameters.withoutDefaultValue(value)
 
         // then
         sut.toList() shouldBeEqualTo listOf(parameter2)
@@ -195,18 +193,17 @@ class KoParameterSequenceExtTest {
     @Test
     fun `withType(name) returns parameter1 which has given type`() {
         // given
-        val typeName1 = "SampleType"
-        val typeName2 = "OtherType"
+        val typeName = "SampleType"
         val parameter1: KoParameter = mockk {
-            every { type.name } returns typeName1
+            every { hasType(typeName) } returns true
         }
         val parameter2: KoParameter = mockk {
-            every { type.name } returns typeName2
+            every { hasType(typeName) } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
 
         // when
-        val sut = parameters.withType(typeName1)
+        val sut = parameters.withType(typeName)
 
         // then
         sut.toList() shouldBeEqualTo listOf(parameter1)
@@ -215,18 +212,17 @@ class KoParameterSequenceExtTest {
     @Test
     fun `withoutType(name) returns parameter2 which has not given type`() {
         // given
-        val typeName1 = "SampleType"
-        val typeName2 = "OtherType"
+        val typeName = "SampleType"
         val parameter1: KoParameter = mockk {
-            every { type.name } returns typeName1
+            every { hasType(typeName) } returns true
         }
         val parameter2: KoParameter = mockk {
-            every { type.name } returns typeName2
+            every { hasType(typeName) } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
 
         // when
-        val sut = parameters.withoutType(typeName1)
+        val sut = parameters.withoutType(typeName)
 
         // then
         sut.toList() shouldBeEqualTo listOf(parameter2)

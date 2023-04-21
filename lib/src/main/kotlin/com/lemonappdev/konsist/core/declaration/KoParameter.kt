@@ -44,7 +44,14 @@ class KoParameter private constructor(private val ktParameter: KtParameter) : Ko
 
     fun hasCrossInlineModifier() = ktParameter.modifierList?.hasModifier(KtTokens.CROSSINLINE_KEYWORD) ?: false
 
-    fun hasDefaultValue() = ktParameter.hasDefaultValue()
+    fun hasDefaultValue(value: String? = null) = when (value) {
+        null -> ktParameter.hasDefaultValue()
+        else -> defaultValue == value
+    }
+
+    fun hasType(type: String) = this.type.name == type || this.type.fullyQualifiedName == type
+
+    inline fun <reified T>hasType() = T::class.simpleName == type.name
 
     companion object {
         private val cache = KoDeclarationCache<KoParameter>()

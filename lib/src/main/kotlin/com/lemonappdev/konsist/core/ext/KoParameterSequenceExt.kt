@@ -14,20 +14,14 @@ fun Sequence<KoParameter>.withCrossInlineModifier() = filter { it.hasCrossInline
 
 fun Sequence<KoParameter>.withoutCrossInlineModifier() = filterNot { it.hasCrossInlineModifier() }
 
-fun Sequence<KoParameter>.withDefaultValue(value: String? = null) = filter {
-    when (value) {
-        null -> it.hasDefaultValue()
-        else -> it.defaultValue == value
-    }
-}
+fun Sequence<KoParameter>.withDefaultValue(value: String? = null) = filter { it.hasDefaultValue(value) }
 
-fun Sequence<KoParameter>.withoutDefaultValue(value: String? = null) = this - withDefaultValue(value).toSet()
+fun Sequence<KoParameter>.withoutDefaultValue(value: String? = null) = filterNot { it.hasDefaultValue(value) }
 
-fun Sequence<KoParameter>.withType(type: String) = filter { it.type.name == type }
+fun Sequence<KoParameter>.withType(type: String) = filter { it.hasType(type) }
 
-fun Sequence<KoParameter>.withoutType(type: String) = filterNot { it.type.name == type }
+fun Sequence<KoParameter>.withoutType(type: String) = filterNot { it.hasType(type) }
 
-inline fun <reified T> Sequence<KoParameter>.withTypeOf() = filter { T::class.simpleName == it.type.name }
+inline fun <reified T> Sequence<KoParameter>.withTypeOf() = filter { it.hasType<T>() }
 
-inline fun <reified T> Sequence<KoParameter>.withoutTypeOf() =
-    filterNot { T::class.simpleName == it.type.name }
+inline fun <reified T> Sequence<KoParameter>.withoutTypeOf() = filterNot { it.hasType<T>() }
