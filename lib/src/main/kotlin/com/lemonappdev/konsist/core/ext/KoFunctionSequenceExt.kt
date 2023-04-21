@@ -59,18 +59,14 @@ fun Sequence<KoFunction>.withoutExtension() = filterNot { it.isExtension() }
 fun Sequence<KoFunction>.withExplicitReturnType(vararg types: String) = filter {
     when {
         types.isEmpty() -> it.hasExplicitReturnType()
-        else -> {
-            types.any { type -> it.explicitReturnType?.name == type }
-        }
+        else -> types.any { type -> it.explicitReturnType?.name == type }
     }
 }
 
 fun Sequence<KoFunction>.withoutExplicitReturnType(vararg types: String) = filter {
     when {
         types.isEmpty() -> !it.hasExplicitReturnType()
-        else -> {
-            types.none { type -> it.explicitReturnType?.name == type }
-        }
+        else -> types.none { type -> it.explicitReturnType?.name == type }
     }
 }
 

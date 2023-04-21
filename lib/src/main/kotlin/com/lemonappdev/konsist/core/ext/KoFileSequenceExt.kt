@@ -42,7 +42,10 @@ fun Sequence<KoFile>.withAnnotation() = filter { it.annotations.isNotEmpty() }
 fun Sequence<KoFile>.withoutAnnotation() = filterNot { it.annotations.isNotEmpty() }
 
 fun Sequence<KoFile>.withAnnotations(vararg annotations: String) = filter {
-    annotations.all { annotation -> it.hasAnnotation(annotation) }
+    when {
+        annotations.isEmpty() -> it.annotations.isNotEmpty()
+        else -> annotations.all { annotation -> it.hasAnnotation(annotation) }
+    }
 }
 
 fun Sequence<KoFile>.withSomeAnnotations(vararg annotations: String) = filter {

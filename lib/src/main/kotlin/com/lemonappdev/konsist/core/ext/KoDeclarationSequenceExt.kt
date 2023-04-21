@@ -46,7 +46,7 @@ fun Sequence<KoDeclaration>.withAnnotations(vararg annotations: KClass<*>) = fil
     annotations.all { annotation ->
         annotation
             .simpleName
-            ?.let {name -> it.hasAnnotation(name) } ?: false
+            ?.let { name -> it.hasAnnotation(name) } ?: false
     }
 }
 
@@ -54,7 +54,7 @@ fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotations: KClass<*>) =
     annotations.any { annotation ->
         annotation
             .simpleName
-            ?.let {name -> it.hasAnnotation(name) } ?: false
+            ?.let { name -> it.hasAnnotation(name) } ?: false
     }
 }
 
@@ -62,7 +62,7 @@ fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotations: KClass<*>) = 
     annotations.none { annotation ->
         annotation
             .simpleName
-            ?.let {name -> it.hasAnnotation(name) } ?: false
+            ?.let { name -> it.hasAnnotation(name) } ?: false
     }
 }
 

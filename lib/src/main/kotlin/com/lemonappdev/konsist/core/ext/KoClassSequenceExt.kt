@@ -64,16 +64,22 @@ fun Sequence<KoClass>.withoutParent() = filterNot { it.hasParent() }
 inline fun <reified T> Sequence<KoClass>.withParentOf() = filter {
     it
         .parents
-        .any { it.name == T::class.simpleName }
+        .any { parent -> parent.name == T::class.simpleName }
 }
 
 inline fun <reified T> Sequence<KoClass>.withoutParentOf() = this - withParentOf<T>().toSet()
 
-fun Sequence<KoClass>.withParents(vararg names: String) = filter { names.all { name -> it.hasParent(name) } }
+fun Sequence<KoClass>.withParents(vararg names: String) = filter {
+    names.all { name -> it.hasParent(name) }
+}
 
-fun Sequence<KoClass>.withSomeParents(vararg names: String) = filter { names.any { name -> it.hasParent(name) } }
+fun Sequence<KoClass>.withSomeParents(vararg names: String) = filter {
+    names.any { name -> it.hasParent(name) }
+}
 
-fun Sequence<KoClass>.withoutParents(vararg names: String) = filter { names.none { name -> it.hasParent(name) } }
+fun Sequence<KoClass>.withoutParents(vararg names: String) = filter {
+    names.none { name -> it.hasParent(name) }
+}
 
 fun Sequence<KoClass>.withParents(vararg names: KClass<*>) = filter {
     names.all { kClass ->
@@ -106,7 +112,7 @@ fun Sequence<KoClass>.withoutParentInterface() = filterNot { it.hasParentInterfa
 inline fun <reified T> Sequence<KoClass>.withParentInterfaceOf() = filter {
     it
         .parentInterfaces
-        .any { it.name == T::class.simpleName }
+        .any { parent -> parent.name == T::class.simpleName }
 }
 
 inline fun <reified T> Sequence<KoClass>.withoutParentInterfaceOf() = this - withParentInterfaceOf<T>().toSet()
@@ -145,18 +151,16 @@ fun Sequence<KoClass>.withoutParentInterfaces(vararg names: KClass<*>) = filter 
 }
 
 fun Sequence<KoClass>.withParentClass(vararg names: String) = filter {
-    if (names.isEmpty()) {
-        it.hasParentClass()
-    } else {
-        names.any { name-> it.hasParentClass(name) }
+    when {
+        names.isEmpty() -> it.hasParentClass()
+        else -> names.any { name -> it.hasParentClass(name) }
     }
 }
 
 fun Sequence<KoClass>.withoutParentClass(vararg names: String) = filter {
-    if (names.isEmpty()) {
-        !it.hasParentClass()
-    } else {
-        names.none { name-> it.hasParentClass(name) }
+    when {
+        names.isEmpty() -> !it.hasParentClass()
+        else -> names.none { name -> it.hasParentClass(name) }
     }
 }
 
