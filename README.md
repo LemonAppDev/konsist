@@ -1,6 +1,7 @@
 # Konsist
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
+![example workflow](https://github.com/LemonAppDev/konsist/actions/workflows/check.yml/badge.svg)
 
 Konsist is a library that ensures the consistency of [Kotlin](https://kotlinlang.org/) projects by promoting the 
 standardization of the Kotlin codebase. It enforces coding conventions and protects project architecture. Konsist
