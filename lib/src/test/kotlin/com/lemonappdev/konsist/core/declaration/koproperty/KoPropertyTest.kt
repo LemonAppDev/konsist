@@ -250,6 +250,35 @@ class KoPropertyTest {
         }
     }
 
+    @Test
+    fun `property-has-explicit-type`() {
+        // given
+        val sut = getSnippetFile("property-has-explicit-type")
+            .properties()
+            .first()
+
+        // then
+        sut.run {
+            hasExplicitType() shouldBeEqualTo true
+            hasExplicitType("SampleType") shouldBeEqualTo true
+            hasExplicitType("OtherType") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `property-has-no-explicit-type`() {
+        // given
+        val sut = getSnippetFile("property-has-no-explicit-type")
+            .properties()
+            .first()
+
+        // then
+        sut.run {
+            hasExplicitType() shouldBeEqualTo false
+            hasExplicitType("SampleType") shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/", fileName)
 }

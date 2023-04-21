@@ -58,6 +58,11 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
         else -> delegateName == name
     }
 
+    fun hasExplicitType(type: String? = null) = when (type) {
+        null -> explicitType != null
+        else -> explicitType?.name == type
+    }
+
     companion object {
         private val cache = KoDeclarationCache<KoProperty>()
 
