@@ -216,58 +216,6 @@ class KoFileSequenceExtTest {
     }
 
     @Test
-    fun `withPath(String) returns files with one of given path names`() {
-        // given
-        val path1 = "SamplePath1"
-        val path2 = "SamplePath2"
-        val file1: KoFile = mockk {
-            every { resideInPath(path1) } returns true
-            every { resideInPath(path2) } returns false
-        }
-        val file2: KoFile = mockk {
-            every { resideInPath(path1) } returns false
-            every { resideInPath(path2) } returns true
-        }
-        val file3: KoFile = mockk {
-            every { resideInPath(path1) } returns false
-            every { resideInPath(path2) } returns false
-        }
-        val files = sequenceOf(file1, file2, file3)
-
-        // when
-        val sut = files.withPath(path1, path2)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(file1, file2)
-    }
-
-    @Test
-    fun `withoutPath(String) returns file3 without given path names`() {
-        // given
-        val path1 = "SamplePath1"
-        val path2 = "SamplePath2"
-        val file1: KoFile = mockk {
-            every { resideInPath(path1) } returns true
-            every { resideInPath(path2) } returns false
-        }
-        val file2: KoFile = mockk {
-            every { resideInPath(path1) } returns false
-            every { resideInPath(path2) } returns true
-        }
-        val file3: KoFile = mockk {
-            every { resideInPath(path1) } returns false
-            every { resideInPath(path2) } returns false
-        }
-        val files = sequenceOf(file1, file2, file3)
-
-        // when
-        val sut = files.withoutPath(path1, path2)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(file3)
-    }
-
-    @Test
     fun `withAnnotation() returns file1 which has annotation`() {
         // given
         val annotation1: KoAnnotation = mockk()

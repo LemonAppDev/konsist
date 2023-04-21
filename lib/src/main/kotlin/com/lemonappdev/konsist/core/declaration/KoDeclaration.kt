@@ -83,8 +83,4 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
     fun resideInPackage(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
 
     fun resideOutsidePackage(packageName: String) = !resideInPackage(packageName)
-
-    fun resideInPath(path: String) = PackageHelper.resideInPackage(path, this.path, '/')
-
-    fun resideOutsidePath(path: String) = !resideInPath(path)
 }

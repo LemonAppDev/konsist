@@ -6,46 +6,62 @@ import org.junit.jupiter.api.Test
 
 class KoBaseDeclarationTest {
     @Test
-    fun `path`() {
+    fun `file-path`() {
         // given
-        val sut = getSnippetFile("path")
+        val sut = getSnippetFile("file-path")
             .functions()
             .first()
 
         // then
         sut
-            .path
+            .filePath
             .run {
                 startsWith("//") shouldBeEqualTo false
-                endsWith("kobasedeclaration/snippet/path.kt") shouldBeEqualTo true
+                endsWith("kobasedeclaration/snippet/file-path.kt") shouldBeEqualTo true
             }
     }
 
     @Test
-    fun `has-file-path`() {
+    fun `reside-in-file-path`() {
         // given
-        val sut = getSnippetFile("has-file-path")
+        val sut = getSnippetFile("reside-in-file-path")
             .functions()
             .first()
 
         // then
         sut.run {
-            hasFilePath("..snippet..") shouldBeEqualTo true
-            hasFilePath("..kobasedeclaration/snippet..") shouldBeEqualTo true
-            hasFilePath("..kobasedeclaration..has-file-path.kt") shouldBeEqualTo true
-            hasFilePath("kobasedeclaration/snippet/") shouldBeEqualTo false
+            resideInFilePath("..snippet..") shouldBeEqualTo true
+            resideInFilePath("..kobasedeclaration/snippet..") shouldBeEqualTo true
+            resideInFilePath("..kobasedeclaration..reside-in-file-path.kt") shouldBeEqualTo true
+            resideInFilePath("kobasedeclaration/snippet/") shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `project-path`() {
+    fun `project-file-path`() {
         // given
-        val sut = getSnippetFile("project-path")
+        val sut = getSnippetFile("project-file-path")
             .files()
             .first()
 
         // then
-        sut.projectPath shouldBeEqualTo "/lib/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kobasedeclaration/snippet/project-path.kt"
+        sut.projectFilePath shouldBeEqualTo "/lib/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kobasedeclaration/snippet/project-file-path.kt"
+    }
+
+    @Test
+    fun `reside-in-project-file-path`() {
+        // given
+        val sut = getSnippetFile("reside-in-project-file-path")
+            .functions()
+            .first()
+
+        // then
+        sut.run {
+            resideInProjectFilePath("..snippet..") shouldBeEqualTo true
+            resideInProjectFilePath("..kobasedeclaration/snippet..") shouldBeEqualTo true
+            resideInProjectFilePath("..kobasedeclaration..reside-in-project-file-path.kt") shouldBeEqualTo true
+            resideInProjectFilePath("kobasedeclaration/snippet/") shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -54,7 +70,7 @@ class KoBaseDeclarationTest {
         val projectPath = getSnippetFile("text-with-location")
             .files()
             .first()
-            .projectPath
+            .projectFilePath
 
         val sut = getSnippetFile("text-with-location")
             .functions()
@@ -94,7 +110,7 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.path}:3:1"
+        sut.location shouldBeEqualTo "${sut.filePath}:3:1"
     }
 
     @Test
@@ -105,7 +121,7 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.path}:12:25"
+        sut.location shouldBeEqualTo "${sut.filePath}:12:25"
     }
 
     @Test

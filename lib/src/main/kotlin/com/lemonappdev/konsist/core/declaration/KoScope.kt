@@ -13,7 +13,7 @@ class KoScope(
 ) {
     constructor(koFile: KoFile) : this(sequenceOf(koFile))
 
-    fun files(): Sequence<KoFile> = koFiles.sortedBy { it.path }
+    fun files(): Sequence<KoFile> = koFiles.sortedBy { it.filePath }
 
     fun classes(
         modifiers: List<KoModifier> = emptyList(),
@@ -68,7 +68,7 @@ class KoScope(
 
     override fun toString(): String = files()
         .toList()
-        .joinToString("\n") { it.path }
+        .joinToString("\n") { it.filePath }
 
     operator fun plus(scope: KoScope): KoScope = KoScope(files() + scope.files())
 
@@ -114,7 +114,7 @@ class KoScope(
             }
 
             val koFiles = projectKotlinFiles
-                .filter { it.path.startsWith(pathPrefix) }
+                .filter { it.filePath.startsWith(pathPrefix) }
 
             return KoScope(koFiles)
         }
@@ -136,7 +136,7 @@ class KoScope(
         }
 
         private fun isTestFile(it: KoFile): Boolean {
-            val path = it.path.lowercase()
+            val path = it.filePath.lowercase()
             return path.contains("test/") || path.contains("/test")
         }
 
@@ -165,7 +165,7 @@ class KoScope(
 
         fun fromPath(path: String): KoScope {
             val koFiles = projectKotlinFiles
-                .filter { it.path.startsWith(path) }
+                .filter { it.filePath.startsWith(path) }
 
             return KoScope(koFiles)
         }

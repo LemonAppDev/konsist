@@ -83,11 +83,3 @@ fun Sequence<KoDeclaration>.withPackage(vararg packages: String) = filter {
 fun Sequence<KoDeclaration>.withoutPackage(vararg packages: String) = filter {
     packages.all { packagee -> it.resideOutsidePackage(packagee) }
 }
-
-fun Sequence<KoDeclaration>.withPath(vararg paths: String) = filter {
-    paths.any { path -> it.resideInPath(path) }
-}
-
-fun Sequence<KoDeclaration>.withoutPath(vararg paths: String) = filter {
-    paths.all { path -> it.resideOutsidePath(path) }
-}

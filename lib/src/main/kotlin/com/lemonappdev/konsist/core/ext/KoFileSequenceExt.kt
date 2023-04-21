@@ -29,14 +29,6 @@ fun Sequence<KoFile>.withoutPackage(vararg packages: String) = filter {
     packages.none { packagee -> it.hasPackage(packagee) }
 }
 
-fun Sequence<KoFile>.withPath(vararg paths: String) = filter {
-    paths.any { path -> it.resideInPath(path) }
-}
-
-fun Sequence<KoFile>.withoutPath(vararg paths: String) = filter {
-    paths.none { path -> it.resideInPath(path) }
-}
-
 fun Sequence<KoFile>.withAnnotation() = filter { it.annotations.isNotEmpty() }
 
 fun Sequence<KoFile>.withoutAnnotation() = filterNot { it.annotations.isNotEmpty() }

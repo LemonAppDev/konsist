@@ -20,20 +20,6 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-has-path`() {
-        // given
-        val sut = getSnippetFile("file-has-path")
-            .files()
-            .first()
-
-        // then
-        sut.run {
-            resideInPath("../declaration/kofile/..") shouldBeEqualTo true
-            resideInPath("/declaration/kofile/") shouldBeEqualTo false
-        }
-    }
-
-    @Test
     fun `file-contains-imports`() {
         // given
         val sut = getSnippetFile("file-contains-imports")

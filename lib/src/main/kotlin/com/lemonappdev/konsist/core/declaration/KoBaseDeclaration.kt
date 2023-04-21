@@ -12,20 +12,20 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
     /**
      * File path of the declaration
      */
-    val path by lazy {
+    val filePath by lazy {
         ktElement
             .containingKtFile
             .virtualFilePath
             .replace("//", "/")
     }
 
-    val projectPath by lazy {
+    val projectFilePath by lazy {
         val mainPath = File("")
             .absoluteFile
             .path
             .substringBeforeLast('/')
 
-        path.removePrefix(mainPath)
+        filePath.removePrefix(mainPath)
     }
 
     /**
@@ -47,7 +47,7 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
 
         val line = lineAndColumn[0]
         val column = lineAndColumn[1]
-        "$path:$line:$column"
+        "$filePath:$line:$column"
     }
 
     /**
@@ -66,7 +66,9 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
      */
     val textWithLocation by lazy { "Location: $location \nDeclaration:\n$text" }
 
-    fun hasFilePath(text: String) = PackageHelper.resideInPackage(text, path, '/')
+    fun resideInFilePath(text: String) = PackageHelper.resideInPackage(text, filePath, '/')
+
+    fun resideInProjectFilePath(text: String) = PackageHelper.resideInPackage(text, projectFilePath, '/')
 
     /**
      * Text of the declaration with the location (file path, line and column).

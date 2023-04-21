@@ -24,7 +24,7 @@ class KoScopeTest {
             .run {
                 size shouldBeEqualTo 1
                 first().name shouldBeEqualTo "KoScopeTest.kt"
-                first().path shouldBeEqualTo "${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeTest.kt"
+                first().filePath shouldBeEqualTo "${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeTest.kt"
             }
     }
 
@@ -39,8 +39,8 @@ class KoScopeTest {
             .toList()
             .run {
                 isNotEmpty() shouldBeEqualTo true
-                none { it.path.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
-                all { it.path.startsWith(konsistModulePath) } shouldBeEqualTo false
+                none { it.filePath.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
+                all { it.filePath.startsWith(konsistModulePath) } shouldBeEqualTo false
             }
     }
 
@@ -141,8 +141,8 @@ class KoScopeTest {
             .toList()
             .run {
                 isNotEmpty() shouldBeEqualTo true
-                none { it.path.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
-                all { it.path.startsWith(projectPath) } shouldBeEqualTo true
+                none { it.filePath.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
+                all { it.filePath.startsWith(projectPath) } shouldBeEqualTo true
             }
     }
 
