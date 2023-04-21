@@ -22,18 +22,47 @@ class KoBaseDeclarationTest {
     }
 
     @Test
-    fun `has-file-path`() {
+    fun `reside-in-file-path`() {
         // given
-        val sut = getSnippetFile("has-file-path")
+        val sut = getSnippetFile("reside-in-file-path")
             .functions()
             .first()
 
         // then
         sut.run {
-            hasFilePath("..snippet..") shouldBeEqualTo true
-            hasFilePath("..kobasedeclaration/snippet..") shouldBeEqualTo true
-            hasFilePath("..kobasedeclaration..has-file-path.kt") shouldBeEqualTo true
-            hasFilePath("kobasedeclaration/snippet/") shouldBeEqualTo false
+            resideInFilePath("..snippet..") shouldBeEqualTo true
+            resideInFilePath("..kobasedeclaration/snippet..") shouldBeEqualTo true
+            resideInFilePath("..kobasedeclaration..reside-in-file-path.kt") shouldBeEqualTo true
+            resideInFilePath("kobasedeclaration/snippet/") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `project-file-path`() {
+        // given
+        val sut = getSnippetFile("project-file-path")
+            .files()
+            .first()
+
+        // then
+        sut
+            .projectFilePath
+            .shouldBeEqualTo("/lib/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kobasedeclaration/snippet/project-file-path.kt")
+    }
+
+    @Test
+    fun `reside-in-project-file-path`() {
+        // given
+        val sut = getSnippetFile("reside-in-project-file-path")
+            .functions()
+            .first()
+
+        // then
+        sut.run {
+            resideInProjectFilePath("..snippet..") shouldBeEqualTo true
+            resideInProjectFilePath("..kobasedeclaration/snippet..") shouldBeEqualTo true
+            resideInProjectFilePath("..kobasedeclaration..reside-in-project-file-path.kt") shouldBeEqualTo true
+            resideInProjectFilePath("kobasedeclaration/snippet/") shouldBeEqualTo false
         }
     }
 
@@ -43,7 +72,7 @@ class KoBaseDeclarationTest {
         val projectPath = getSnippetFile("text-with-location")
             .files()
             .first()
-            .projectPath
+            .projectFilePath
 
         val sut = getSnippetFile("text-with-location")
             .functions()

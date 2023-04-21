@@ -40,9 +40,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
         val hasOtherVisibilityModifier =
             hasModifier(KtTokens.PRIVATE_KEYWORD) ||
                 hasModifier(KtTokens.PROTECTED_KEYWORD) ||
-                hasModifier(
-                    KtTokens.INTERNAL_KEYWORD,
-                )
+                hasModifier(KtTokens.INTERNAL_KEYWORD)
 
         hasOtherVisibilityModifier.not()
     }
@@ -83,8 +81,4 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
     fun resideInPackage(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
 
     fun resideOutsidePackage(packageName: String) = !resideInPackage(packageName)
-
-    fun resideInPath(path: String) = PackageHelper.resideInPackage(path, filePath, '/')
-
-    fun resideOutsidePath(path: String) = !resideInPath(path)
 }

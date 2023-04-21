@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.util.PackageHelper
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
+import java.io.File
 
 /**
  * Base declaration
@@ -16,6 +17,15 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
             .containingKtFile
             .virtualFilePath
             .replace("//", "/")
+    }
+
+    val projectFilePath by lazy {
+        val mainPath = File("")
+            .absoluteFile
+            .path
+            .substringBeforeLast('/')
+
+        filePath.removePrefix(mainPath)
     }
 
     /**
@@ -56,7 +66,9 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
      */
     val textWithLocation by lazy { "Location: $location \nDeclaration:\n$text" }
 
-    fun hasFilePath(text: String) = PackageHelper.resideInPackage(text, filePath, '/')
+    fun resideInFilePath(text: String) = PackageHelper.resideInPackage(text, filePath, '/')
+
+    fun resideInProjectFilePath(text: String) = PackageHelper.resideInPackage(text, projectFilePath, '/')
 
     /**
      * Text of the declaration with the location (file path, line and column).

@@ -15,7 +15,6 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
-import java.io.File
 
 class KoFile private constructor(private val ktFile: KtFile) :
     KoNamedDeclaration(ktFile),
@@ -29,19 +28,15 @@ class KoFile private constructor(private val ktFile: KtFile) :
 
     override val name = ktFile.name.split("/").last()
 
-    val path by lazy {
-        ktFile
-            .virtualFilePath
-            .replace("//", "/")
-    }
+    val imports by lazy {
+        val ktImportDirectives = ktFile
+            .children
+            .filterIsInstance<KtImportList>()
+            .first()
+            .children
+            .filterIsInstance<KtImportDirective>()
 
-    val projectPath by lazy {
-        val mainPath = File("")
-            .absoluteFile
-            .path
-            .substringBeforeLast('/')
-
-        path.removePrefix(mainPath)
+        ktImportDirectives.map { KoImport.getInstance(it) }
     }
 
     val annotations by lazy {
@@ -58,17 +53,6 @@ class KoFile private constructor(private val ktFile: KtFile) :
         }
     }
 
-    val imports by lazy {
-        val ktImportDirectives = ktFile
-            .children
-            .filterIsInstance<KtImportList>()
-            .first()
-            .children
-            .filterIsInstance<KtImportDirective>()
-
-        ktImportDirectives.map { KoImport.getInstance(it) }
-    }
-
     val typeAliases by lazy {
         ktFile
             .children
@@ -82,8 +66,6 @@ class KoFile private constructor(private val ktFile: KtFile) :
         includeLocal: Boolean,
     ): List<KoDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
-
-    fun resideInPath(name: String) = PackageHelper.resideInPackage(name, path, '/')
 
     fun hasAnnotation(name: String) = annotations
         .any { it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name }
@@ -108,9 +90,9 @@ class KoFile private constructor(private val ktFile: KtFile) :
         else -> typeAliases.any { it.name == name }
     }
 
-    override fun equals(other: Any?): Boolean = other is KoFile && path == other.path
+    override fun equals(other: Any?): Boolean = other is KoFile && filePath == other.filePath
 
-    override fun hashCode(): Int = 31 * 7 + path.hashCode()
+    override fun hashCode(): Int = 31 * 7 + filePath.hashCode()
 
     companion object {
         private val cache = KoDeclarationCache<KoFile>()
