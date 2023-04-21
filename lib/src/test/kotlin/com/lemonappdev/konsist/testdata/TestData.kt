@@ -8,6 +8,10 @@ class SampleClass2
 
 class SampleType
 
+class SampleType1
+
+class SampleType2
+
 interface SampleInterface
 
 interface SampleInterface1

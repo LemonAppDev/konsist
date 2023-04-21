@@ -2,6 +2,8 @@ package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.declaration.KoFunction
 import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.testdata.SampleType1
+import com.lemonappdev.konsist.testdata.SampleType2
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -598,5 +600,53 @@ class KoFunctionSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(function2)
+    }
+
+    @Test
+    fun `withExplicitReturnTypeOf(KClass) returns functions which has one of given explicit return types`() {
+        // given
+        val typeName1 = "SampleType1"
+        val typeName2 = "SampleType2"
+        val typeName3 = "SampleType3"
+        val function1: KoFunction = mockk {
+            every { explicitReturnType?.name } returns typeName1
+        }
+        val function2: KoFunction = mockk {
+            every { explicitReturnType?.name } returns typeName2
+        }
+        val function3: KoFunction = mockk {
+            every { explicitReturnType?.name } returns typeName3
+        }
+        val functions = sequenceOf(function1, function2, function3)
+
+        // when
+        val sut = functions.withExplicitReturnTypeOf(SampleType1::class, SampleType2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(function1, function2)
+    }
+
+    @Test
+    fun `withoutExplicitReturnTypeOf(KClass) returns function which has not any of given explicit return types`() {
+        // given
+        val typeName1 = "SampleType1"
+        val typeName2 = "SampleType2"
+        val typeName3 = "SampleType3"
+        val function1: KoFunction = mockk {
+            every { explicitReturnType?.name } returns typeName1
+        }
+        val function2: KoFunction = mockk {
+            every { explicitReturnType?.name } returns typeName2
+        }
+        val function3: KoFunction = mockk {
+            every { explicitReturnType?.name } returns typeName3
+        }
+        val functions = sequenceOf(function1, function2, function3)
+
+        // when
+        val sut = functions.withoutExplicitReturnTypeOf(SampleType1::class, SampleType2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(function3)
     }
 }
