@@ -45,7 +45,9 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.projectFilePath shouldBeEqualTo "/lib/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kobasedeclaration/snippet/project-file-path.kt"
+        sut
+            .projectFilePath
+            .shouldBeEqualTo("/lib/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kobasedeclaration/snippet/project-file-path.kt")
     }
 
     @Test
