@@ -63,6 +63,58 @@ class KoAnnotationSequenceExtTest {
     }
 
     @Test
+    fun `withType(KClass) returns annotations with one of given types`() {
+        // given
+        val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
+        val type2 = "com.lemonappdev.konsist.testdata.SampleAnnotation2"
+        val annotation1: KoAnnotation = mockk {
+            every { representsType(type1) } returns true
+            every { representsType(type2) } returns false
+        }
+        val annotation2: KoAnnotation = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns true
+        }
+        val annotation3: KoAnnotation = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns false
+        }
+        val annotations = sequenceOf(annotation1, annotation2, annotation3)
+
+        // when
+        val sut = annotations.withType(SampleAnnotation1::class, SampleAnnotation2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(annotation1, annotation2)
+    }
+
+    @Test
+    fun `withoutType(KClass) returns annotation without any of given types`() {
+        // given
+        val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
+        val type2 = "com.lemonappdev.konsist.testdata.SampleAnnotation2"
+        val annotation1: KoAnnotation = mockk {
+            every { representsType(type1) } returns true
+            every { representsType(type2) } returns false
+        }
+        val annotation2: KoAnnotation = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns true
+        }
+        val annotation3: KoAnnotation = mockk {
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns false
+        }
+        val annotations = sequenceOf(annotation1, annotation2, annotation3)
+
+        // when
+        val sut = annotations.withoutType(SampleAnnotation1::class, SampleAnnotation2::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(annotation3)
+    }
+
+    @Test
     fun `withTypeOf(KClass) returns annotations with one of given types`() {
         // given
         val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
