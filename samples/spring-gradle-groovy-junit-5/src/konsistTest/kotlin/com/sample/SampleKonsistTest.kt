@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 
 class SampleKonsistTest {
     @Test
-    fun `Spring application class name ends with 'SpringBootApplication'`() {
+    fun `spring application class name ends with 'SpringBootApplication'`() {
         KoScope
             .fromProjectFiles("spring-gradle-groovy-junit-5")
             .classes()
