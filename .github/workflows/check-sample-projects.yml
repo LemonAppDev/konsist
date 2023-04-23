@@ -9,8 +9,8 @@ on:
     types: [ opened, synchronize ]
 
 jobs:
-  junit-test:
-    name: JUnit Test
+  spring-gradle-groovy-junit-5:
+    name: spring-gradle-groovy-junit-5
     continue-on-error: true
     runs-on: self-hosted
     strategy:
@@ -25,15 +25,11 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: JUnit Test
-        run: ./gradlew :lib:test
+      - name: spring-gradle-groovy-junit-5
+        run: cd samples/projects/spring-gradle-groovy-junit-5 && ./gradlew konsistTest
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: JUnit Test Report
-          path: ./**/build/reports/tests/
-  konsist-test:
-    name: Konsist Test
+  spring-gradle-kotlin-junit-5:
+    name: spring-gradle-kotlin-junit-5
     continue-on-error: true
     runs-on: self-hosted
     strategy:
@@ -48,15 +44,11 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Konsist Test
-        run: ./gradlew lib:konsistTest
+      - name: spring-gradle-kotlin-junit-5
+        run: cd samples/projects/spring-gradle-kotlin-junit-5 && ./gradlew konsistTest
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: Konsist Test Report
-          path: ./**/build/reports/tests/
-  spotless:
-    name: Spotless
+  spring-maven-junit5:
+    name: spring-maven-junit5
     continue-on-error: true
     runs-on: self-hosted
     strategy:
@@ -71,10 +63,11 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Spotless
-        run: ./gradlew spotlessCheck
-  detekt:
-    name: Detekt
+      - name: spring-maven-junit5
+        run: cd samples/projects/spring-maven-junit5 && mvn test
+
+  android-gradle-groovy-junit-4:
+    name: android-gradle-groovy-junit-4
     continue-on-error: true
     runs-on: self-hosted
     strategy:
@@ -89,15 +82,12 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Detekt
-        run: ./gradlew detektCheck
+      - name: android-gradle-groovy-junit-4
+        run: cd samples/projects/android-gradle-groovy-junit-4 && ./gradlew test
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: detekt-report
-          path: ./**/build/reports/detekt/detekt.*
-  assemble:
-    name: Assemble
+
+  android-gradle-groovy-junit-5:
+    name: android-gradle-groovy-junit-5
     continue-on-error: true
     runs-on: self-hosted
     strategy:
@@ -112,18 +102,12 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Assemble
-        run: ./gradlew lib:assemble
+      - name: android-gradle-groovy-junit-5
+        run: cd samples/projects/android-gradle-groovy-junit-5 && ./gradlew test
 
-      - name: Show "lib.jar" content
-        run: jar tf lib/build/libs/lib.jar
 
-      - uses: actions/upload-artifact@v3
-        with:
-          name: lib.jar Artifact
-          path: lib/build/libs/lib.jar
-  sign:
-    name: Sign
+  android-gradle-kotlin-junit-4:
+    name: android-gradle-kotlin-junit-4
     continue-on-error: true
     runs-on: self-hosted
     strategy:
@@ -138,5 +122,25 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Sign
-        run: ./gradlew :lib:signKonsistPublication -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
+      - name: android-gradle-kotlin-junit-4
+        run: cd samples/projects/android-gradle-kotlin-junit-4 && ./gradlew test
+
+
+  android-gradle-kotlin-junit-5:
+    name: android-gradle-kotlin-junit-5
+    continue-on-error: true
+    runs-on: self-hosted
+    strategy:
+      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: android-gradle-kotlin-junit-5
+        run: cd samples/projects/android-gradle-kotlin-junit-5 && ./gradlew test
