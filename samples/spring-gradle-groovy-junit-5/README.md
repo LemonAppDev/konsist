@@ -6,5 +6,5 @@ The [SampleKonsistTest.kt](src/konsistTest/kotlin/com/sample/SampleKonsistTest.k
 test directory defined by the
 [JVM Test Suite Plugin](https://docs.gradle.org/current/userguide/jvm_test_suite_plugin.html).
 
-To run test use IDE UI or run `./gradlew konsistTest` command.
+To run test use IDE UI or run `./gradlew konsistTest` (konsist tests) or `./gradlew test` (all tests) command.
 
