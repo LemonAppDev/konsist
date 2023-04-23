@@ -10,7 +10,7 @@ class SampleKonsistTest {
     @Test
     fun `Spring application class name ends with 'SpringBootApplication'`() {
         KoScope
-            .fromProjectFiles("spring-gradle-kotlin-junit-5")
+            .fromProjectFiles("spring-gradle-groovy-junit-5")
             .classes()
             .withAnnotationOf<SpringBootApplication>()
             .assert { it.name.endsWith("SpringBootApplication") }

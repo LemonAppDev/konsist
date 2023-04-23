@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    // api makes spring classes available in the konsistTest source set
+    // The 'api' is used, so Spring classes are available in the konsistTest source set
     api("org.springframework.boot:spring-boot-starter")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -54,7 +54,7 @@ testing {
     }
 }
 
-// Add optionally to run Konsist tests with the Gradle 'check' task
+// Optional block to run Konsist tests together with the Gradle 'check' task
 tasks.named("check") {
     dependsOn(testing.suites.named("konsistTest"))
 }
