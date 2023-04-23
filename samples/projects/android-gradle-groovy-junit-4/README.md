@@ -1,6 +1,6 @@
 # Konsist Sample
 
-This a konsist sample is configured using Spring Gradle-Kotlin, and Junit 5. Other samples are located [here](..). 
+This a konsist sample is configured using Spring Gradle-Groovy, and Junit 4. Other samples are located [here](../..). 
 
 The [SampleKonsistTest.kt](src/konsistTest/kotlin/com/sample/SampleKonsistTest.kt) class is placed in `konsistTest` 
 test directory defined.
