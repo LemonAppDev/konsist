@@ -6,3 +6,5 @@ test directory defined by [JVM Test Suite Plugin](https://docs.gradle.org/curren
 Test [SampleKonsistTest.kt](src/konsistTest/kotlin/com/sample/SampleKonsistTest.kt).
 
 Other samples are located [Here](/..).
+Other samples are located [Here](..).
+Other samples are located [Here](./..).
