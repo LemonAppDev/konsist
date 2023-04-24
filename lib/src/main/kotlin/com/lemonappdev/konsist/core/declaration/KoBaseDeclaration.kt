@@ -64,7 +64,7 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
     /**
      * Text of the declaration with the location (file path, line and column).
      */
-    val textWithLocation by lazy { "Location: $location \nDeclaration:\n$text" }
+    val locationWithText by lazy { "Location: $location \nDeclaration:\n$text" }
 
     fun resideInFilePath(text: String) = PackageHelper.resideInPackage(text, filePath, '/')
 
@@ -73,5 +73,5 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
     /**
      * Text of the declaration with the location (file path, line and column).
      */
-    override fun toString() = textWithLocation
+    override fun toString() = locationWithText
 }

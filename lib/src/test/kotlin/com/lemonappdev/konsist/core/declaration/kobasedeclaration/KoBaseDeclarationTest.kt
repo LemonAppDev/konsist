@@ -81,7 +81,7 @@ class KoBaseDeclarationTest {
         // then
         val declaration = "Declaration:\nfun sampleFunction() {\n}"
         sut
-            .textWithLocation
+            .locationWithText
             .run {
                 startsWith("Location: /") shouldBeEqualTo true
                 contains(projectPath) shouldBeEqualTo true
@@ -153,7 +153,7 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo sut.textWithLocation
+        sut.toString() shouldBeEqualTo sut.locationWithText
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kobasedeclaration/snippet/", fileName)
