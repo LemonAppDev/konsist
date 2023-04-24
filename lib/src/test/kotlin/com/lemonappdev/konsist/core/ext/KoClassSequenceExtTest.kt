@@ -412,36 +412,36 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withExplicitPrimaryConstructor() returns class1 with primary constructor`() {
+    fun `withPrimaryConstructor() returns class1 with primary constructor`() {
         // given
         val class1: KoClass = mockk {
-            every { hasExplicitPrimaryConstructor() } returns true
+            every { hasPrimaryConstructor() } returns true
         }
         val class2: KoClass = mockk {
-            every { hasExplicitPrimaryConstructor() } returns false
+            every { hasPrimaryConstructor() } returns false
         }
         val classes = sequenceOf(class1, class2)
 
         // when
-        val sut = classes.withExplicitPrimaryConstructor()
+        val sut = classes.withPrimaryConstructor()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class1)
     }
 
     @Test
-    fun `withoutExplicitPrimaryConstructor() returns class2 without primary constructor`() {
+    fun `withoutPrimaryConstructor() returns class2 without primary constructor`() {
         // given
         val class1: KoClass = mockk {
-            every { hasExplicitPrimaryConstructor() } returns true
+            every { hasPrimaryConstructor() } returns true
         }
         val class2: KoClass = mockk {
-            every { hasExplicitPrimaryConstructor() } returns false
+            every { hasPrimaryConstructor() } returns false
         }
         val classes = sequenceOf(class1, class2)
 
         // when
-        val sut = classes.withoutExplicitPrimaryConstructor()
+        val sut = classes.withoutPrimaryConstructor()
 
         // then
         sut.toList() shouldBeEqualTo listOf(class2)

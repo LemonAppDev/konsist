@@ -22,7 +22,7 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
             ?.removeSuffix(" ")
     }
 
-    val explicitType by lazy {
+    val type by lazy {
         val type = ktProperty
             .children
             .firstIsInstanceOrNull<KtTypeReference>()
@@ -53,9 +53,9 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
         else -> delegateName == name
     }
 
-    fun hasExplicitType(type: String? = null) = when (type) {
-        null -> explicitType != null
-        else -> explicitType?.name == type
+    fun hasType(type: String? = null) = when (type) {
+        null -> this.type != null
+        else -> this.type?.name == type
     }
 
     companion object {

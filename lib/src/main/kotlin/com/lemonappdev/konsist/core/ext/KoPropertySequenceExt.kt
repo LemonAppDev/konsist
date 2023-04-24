@@ -63,30 +63,30 @@ fun Sequence<KoProperty>.withoutDelegate(vararg names: String) = filter {
     }
 }
 
-fun Sequence<KoProperty>.withExplicitType(vararg types: String) = filter {
+fun Sequence<KoProperty>.withType(vararg types: String) = filter {
     when {
-        types.isEmpty() -> it.hasExplicitType()
-        else -> types.any { type -> it.hasExplicitType(type) }
+        types.isEmpty() -> it.hasType()
+        else -> types.any { type -> it.hasType(type) }
     }
 }
 
-fun Sequence<KoProperty>.withoutExplicitType(vararg types: String) = filter {
+fun Sequence<KoProperty>.withoutType(vararg types: String) = filter {
     when {
-        types.isEmpty() -> !it.hasExplicitType()
-        else -> types.none { type -> it.hasExplicitType(type) }
+        types.isEmpty() -> !it.hasType()
+        else -> types.none { type -> it.hasType(type) }
     }
 }
 
-fun Sequence<KoProperty>.withExplicitTypeOf(vararg types: KClass<*>) = filter {
-    types.any { kClass -> it.explicitType?.name == kClass.simpleName }
+fun Sequence<KoProperty>.withTypeOf(vararg types: KClass<*>) = filter {
+    types.any { kClass -> it.type?.name == kClass.simpleName }
 }
 
-fun Sequence<KoProperty>.withoutExplicitTypeOf(vararg types: KClass<*>) = filter {
-    types.none { kClass -> it.explicitType?.name == kClass.simpleName }
+fun Sequence<KoProperty>.withoutTypeOf(vararg types: KClass<*>) = filter {
+    types.none { kClass -> it.type?.name == kClass.simpleName }
 }
 
-inline fun <reified T> Sequence<KoProperty>.withExplicitTypeOf() =
-    filter { T::class.simpleName == it.explicitType?.name }
+inline fun <reified T> Sequence<KoProperty>.withTypeOf() =
+    filter { T::class.simpleName == it.type?.name }
 
-inline fun <reified T> Sequence<KoProperty>.withoutExplicitTypeOf() =
-    filterNot { T::class.simpleName == it.explicitType?.name }
+inline fun <reified T> Sequence<KoProperty>.withoutTypeOf() =
+    filterNot { T::class.simpleName == it.type?.name }

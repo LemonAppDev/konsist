@@ -41,7 +41,7 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
         }
     }
 
-    val explicitReturnType by lazy {
+    val returnType by lazy {
         val type = ktFunction
             .children
             .firstIsInstanceOrNull<KtTypeReference>()
@@ -75,7 +75,7 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
 
     fun isExtension() = ktFunction.isExtensionDeclaration()
 
-    fun hasExplicitReturnType() = ktFunction.hasDeclaredReturnType()
+    fun hasReturnType() = ktFunction.hasDeclaredReturnType()
 
     override fun localDeclarations(): Sequence<KoDeclaration> = localDeclarations
 

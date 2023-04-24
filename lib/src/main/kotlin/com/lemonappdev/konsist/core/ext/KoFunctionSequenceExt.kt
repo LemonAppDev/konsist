@@ -57,29 +57,29 @@ fun Sequence<KoFunction>.withExtension() = filter { it.isExtension() }
 
 fun Sequence<KoFunction>.withoutExtension() = filterNot { it.isExtension() }
 
-fun Sequence<KoFunction>.withExplicitReturnType(vararg types: String) = filter {
+fun Sequence<KoFunction>.withReturnType(vararg types: String) = filter {
     when {
-        types.isEmpty() -> it.hasExplicitReturnType()
-        else -> types.any { type -> it.explicitReturnType?.name == type }
+        types.isEmpty() -> it.hasReturnType()
+        else -> types.any { type -> it.returnType?.name == type }
     }
 }
 
-fun Sequence<KoFunction>.withoutExplicitReturnType(vararg types: String) = filter {
+fun Sequence<KoFunction>.withoutReturnType(vararg types: String) = filter {
     when {
-        types.isEmpty() -> !it.hasExplicitReturnType()
-        else -> types.none { type -> it.explicitReturnType?.name == type }
+        types.isEmpty() -> !it.hasReturnType()
+        else -> types.none { type -> it.returnType?.name == type }
     }
 }
 
-inline fun <reified T> Sequence<KoFunction>.withExplicitReturnTypeOf() = filter { T::class.simpleName == it.explicitReturnType?.name }
+inline fun <reified T> Sequence<KoFunction>.withReturnTypeOf() = filter { T::class.simpleName == it.returnType?.name }
 
-inline fun <reified T> Sequence<KoFunction>.withoutExplicitReturnTypeOf() =
-    filterNot { T::class.simpleName == it.explicitReturnType?.name }
+inline fun <reified T> Sequence<KoFunction>.withoutReturnTypeOf() =
+    filterNot { T::class.simpleName == it.returnType?.name }
 
-fun Sequence<KoFunction>.withExplicitReturnTypeOf(vararg types: KClass<*>) = filter {
-    types.any { kClass -> it.explicitReturnType?.name == kClass.simpleName }
+fun Sequence<KoFunction>.withReturnTypeOf(vararg types: KClass<*>) = filter {
+    types.any { kClass -> it.returnType?.name == kClass.simpleName }
 }
 
-fun Sequence<KoFunction>.withoutExplicitReturnTypeOf(vararg types: KClass<*>) = filter {
-    types.none { kClass -> it.explicitReturnType?.name == kClass.simpleName }
+fun Sequence<KoFunction>.withoutReturnTypeOf(vararg types: KClass<*>) = filter {
+    types.none { kClass -> it.returnType?.name == kClass.simpleName }
 }
