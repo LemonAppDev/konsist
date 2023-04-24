@@ -245,7 +245,10 @@ class KoFunctionTest {
         // then
         sut.apply {
             containsLocalProperty("sampleLocalProperty") shouldBeEqualTo true
-            localProperties().map { it.name } shouldBeEqualTo listOf("sampleLocalProperty")
+            localProperties()
+                .toList()
+                .map { it.name }
+                .shouldBeEqualTo(listOf("sampleLocalProperty"))
         }
     }
 
@@ -256,10 +259,14 @@ class KoFunctionTest {
             .functions()
             .first()
 
+
         // then
         sut.apply {
             containsLocalFunction("sampleLocalFunction") shouldBeEqualTo true
-            localFunctions().map { it.name } shouldBeEqualTo listOf("sampleLocalFunction")
+            localFunctions()
+                .toList()
+                .map { it.name }
+                .shouldBeEqualTo(listOf("sampleLocalFunction"))
         }
     }
 
@@ -273,7 +280,10 @@ class KoFunctionTest {
         // then
         sut.apply {
             containsLocalClass("SampleClass") shouldBeEqualTo true
-            localClasses().map { it.name } shouldBeEqualTo listOf("SampleClass")
+            localClasses()
+                .toList()
+                .map { it.name }
+                .shouldBeEqualTo(listOf("SampleClass"))
         }
     }
 
@@ -287,6 +297,7 @@ class KoFunctionTest {
         // then
         sut
             .localDeclarations()
+            .toList()
             .map { it.name }
             .shouldBeEqualTo(
                 listOf(

@@ -64,7 +64,7 @@ class KoFile private constructor(private val ktFile: KtFile) :
         modifiers: List<KoModifier>,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoDeclaration> =
+    ): Sequence<KoDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
     fun hasAnnotation(name: String) = annotations

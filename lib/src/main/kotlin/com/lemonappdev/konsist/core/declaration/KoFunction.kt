@@ -25,8 +25,8 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
         val psiChildren = ktFunction
             .bodyBlockExpression
             ?.children
-            ?.toList()
-            ?: emptyList()
+            ?.asSequence()
+            ?: emptySequence()
 
         psiChildren.mapNotNull {
             if (it is KtClass && !it.isInterface()) {
@@ -77,7 +77,7 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
 
     fun hasExplicitReturnType() = ktFunction.hasDeclaredReturnType()
 
-    override fun localDeclarations(): List<KoDeclaration> = localDeclarations
+    override fun localDeclarations(): Sequence<KoDeclaration> = localDeclarations
 
     companion object {
         private val cache = KoDeclarationCache<KoFunction>()

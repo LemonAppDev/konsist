@@ -18,6 +18,7 @@ class KoComplexDeclarationForObjectTest {
         // then
         sut
             .declarations(includeNested = true, includeLocal = true)
+            .toList()
             .map { it.name }
             .shouldBeEqualTo(emptyList())
     }
@@ -40,6 +41,7 @@ class KoComplexDeclarationForObjectTest {
 
         sut
             .declarations(includeNested = true, includeLocal = true)
+            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -62,6 +64,7 @@ class KoComplexDeclarationForObjectTest {
 
         sut
             .declarations(includeNested = true, includeLocal = false)
+            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -84,6 +87,7 @@ class KoComplexDeclarationForObjectTest {
 
         sut
             .declarations(includeNested = false, includeLocal = true)
+            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -115,6 +119,7 @@ class KoComplexDeclarationForObjectTest {
 
         sut
             .declarations(includeNested = true)
+            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -136,6 +141,7 @@ class KoComplexDeclarationForObjectTest {
 
         sut
             .declarations(includeNested = false)
+            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -160,6 +166,7 @@ class KoComplexDeclarationForObjectTest {
 
         sut
             .declarations(includeLocal = true)
+            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -176,6 +183,7 @@ class KoComplexDeclarationForObjectTest {
 
         sut
             .declarations(includeLocal = false)
+            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -207,6 +215,7 @@ class KoComplexDeclarationForObjectTest {
 
         sut
             .declarations(listOf(KoModifier.PRIVATE), includeNested = true)
+            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -228,6 +237,7 @@ class KoComplexDeclarationForObjectTest {
 
         sut
             .declarations(listOf(KoModifier.PRIVATE), includeNested = false)
+            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
