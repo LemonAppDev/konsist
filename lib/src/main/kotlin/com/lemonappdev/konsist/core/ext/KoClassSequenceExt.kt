@@ -49,9 +49,9 @@ fun Sequence<KoClass>.withFinalModifier() = filter { it.hasFinalModifier() }
 
 fun Sequence<KoClass>.withoutFinalModifier() = filterNot { it.hasFinalModifier() }
 
-fun Sequence<KoClass>.withExplicitPrimaryConstructor() = filter { it.hasExplicitPrimaryConstructor() }
+fun Sequence<KoClass>.withPrimaryConstructor() = filter { it.hasPrimaryConstructor() }
 
-fun Sequence<KoClass>.withoutExplicitPrimaryConstructor() = filterNot { it.hasExplicitPrimaryConstructor() }
+fun Sequence<KoClass>.withoutPrimaryConstructor() = filterNot { it.hasPrimaryConstructor() }
 
 fun Sequence<KoClass>.withSecondaryConstructors() = filter { it.hasSecondaryConstructors() }
 

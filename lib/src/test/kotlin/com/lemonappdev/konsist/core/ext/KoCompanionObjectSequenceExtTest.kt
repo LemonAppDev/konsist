@@ -8,36 +8,36 @@ import org.junit.jupiter.api.Test
 
 class KoCompanionObjectSequenceExtTest {
     @Test
-    fun `withExplicitName() returns companion object with explicit name`() {
+    fun `withName() returns companion object with name`() {
         // given
         val companionObject1: KoCompanionObject = mockk {
-            every { hasExplicitName() } returns true
+            every { hasName() } returns true
         }
         val companionObject2: KoCompanionObject = mockk {
-            every { hasExplicitName() } returns false
+            every { hasName() } returns false
         }
         val companionObjects = sequenceOf(companionObject1, companionObject2)
 
         // when
-        val sut = companionObjects.withExplicitName()
+        val sut = companionObjects.withName()
 
         // then
         sut.toList() shouldBeEqualTo listOf(companionObject1)
     }
 
     @Test
-    fun `withoutExplicitName() returns companion object without explicit name`() {
+    fun `withoutName() returns companion object without name`() {
         // given
         val companionObject1: KoCompanionObject = mockk {
-            every { hasExplicitName() } returns true
+            every { hasName() } returns true
         }
         val companionObject2: KoCompanionObject = mockk {
-            every { hasExplicitName() } returns false
+            every { hasName() } returns false
         }
         val companionObjects = sequenceOf(companionObject1, companionObject2)
 
         // when
-        val sut = companionObjects.withoutExplicitName()
+        val sut = companionObjects.withoutName()
 
         // then
         sut.toList() shouldBeEqualTo listOf(companionObject2)

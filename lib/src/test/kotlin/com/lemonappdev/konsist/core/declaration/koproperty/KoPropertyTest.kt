@@ -172,7 +172,7 @@ class KoPropertyTest {
 
         // then
         sut
-            .explicitType
+            .type
             ?.run {
                 sourceType shouldBeEqualTo "SampleType"
                 importAliasName shouldBeEqualTo ""
@@ -191,7 +191,7 @@ class KoPropertyTest {
 
         // then
         sut
-            .explicitType
+            .type
             ?.run {
                 sourceType shouldBeEqualTo "SampleType"
                 importAliasName shouldBeEqualTo "ImportAlias"
@@ -210,7 +210,7 @@ class KoPropertyTest {
 
         // then
         sut
-            .explicitType
+            .type
             ?.run {
                 sourceType shouldBeEqualTo null
                 name shouldBeEqualTo null
@@ -251,31 +251,31 @@ class KoPropertyTest {
     }
 
     @Test
-    fun `property-has-explicit-type`() {
+    fun `property-has-type`() {
         // given
-        val sut = getSnippetFile("property-has-explicit-type")
+        val sut = getSnippetFile("property-has-type")
             .properties()
             .first()
 
         // then
         sut.run {
-            hasExplicitType() shouldBeEqualTo true
-            hasExplicitType("SampleType") shouldBeEqualTo true
-            hasExplicitType("OtherType") shouldBeEqualTo false
+            hasType() shouldBeEqualTo true
+            hasType("SampleType") shouldBeEqualTo true
+            hasType("OtherType") shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `property-has-no-explicit-type`() {
+    fun `property-with-no-type`() {
         // given
-        val sut = getSnippetFile("property-has-no-explicit-type")
+        val sut = getSnippetFile("property-with-no-type")
             .properties()
             .first()
 
         // then
         sut.run {
-            hasExplicitType() shouldBeEqualTo false
-            hasExplicitType("SampleType") shouldBeEqualTo false
+            hasType() shouldBeEqualTo false
+            hasType("SampleType") shouldBeEqualTo false
         }
     }
 

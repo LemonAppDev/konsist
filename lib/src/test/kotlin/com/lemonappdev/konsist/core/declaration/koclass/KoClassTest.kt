@@ -148,7 +148,7 @@ class KoClassTest {
         // then
         sut.run {
             primaryConstructor?.name shouldBeEqualTo "SampleClass"
-            hasExplicitPrimaryConstructor() shouldBeEqualTo true
+            hasPrimaryConstructor() shouldBeEqualTo true
         }
     }
 
@@ -162,7 +162,7 @@ class KoClassTest {
         // then
         sut.run {
             primaryConstructor?.name shouldBeEqualTo null
-            hasExplicitPrimaryConstructor() shouldBeEqualTo false
+            hasPrimaryConstructor() shouldBeEqualTo false
         }
     }
 
