@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class PrintDeclaration {
     @Test
-    fun `print declaration from package`() {
+    fun `return value after printDeclaration() is equal to original value`() {
         // given
         val scope = KoScope.fromPackage("com.lemonappdev.konsist.core.declaration.koscope")
         val sut = scope
