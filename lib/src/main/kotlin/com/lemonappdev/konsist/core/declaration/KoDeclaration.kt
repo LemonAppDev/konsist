@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.util.PackageHelper
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isPublic
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
+import kotlin.reflect.KClass
 
 abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterListOwner) :
     KoNamedDeclaration(ktTypeParameterListOwner) {
@@ -54,10 +55,20 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
 
     fun isTopLevel() = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
 
-    fun hasAnnotation(name: String) = annotations
-        .any { it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name }
+    fun hasAnnotations(vararg names: String) = names.all {
+        annotations
+            .any { annotation ->
+                annotation.fullyQualifiedName.substringAfterLast(".") == it
+                        || annotation.fullyQualifiedName == it
+            }
+    }
 
-    inline fun <reified T> hasAnnotation(): Boolean {
+    fun hasAnnotations(vararg names: KClass<*>) = names.all {
+        annotations
+            .any { annotation -> annotation.fullyQualifiedName == it.qualifiedName }
+    }
+
+    inline fun <reified T> hasAnnotationOf(): Boolean {
         val qualifiedName = T::class.qualifiedName ?: return false
 
         return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }

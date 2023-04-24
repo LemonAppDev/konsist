@@ -141,12 +141,12 @@ class KoDeclarationForSecondaryConstructorTest {
         // then
         sut.run {
             annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation")
-            hasAnnotation("SampleAnnotation") shouldBeEqualTo true
-            hasAnnotation("SampleAnnotation1") shouldBeEqualTo false
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo false
-            hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
-            hasAnnotation<SampleAnnotation1>() shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation") shouldBeEqualTo true
+            hasAnnotations("SampleAnnotation1") shouldBeEqualTo false
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo false
+            hasAnnotationOf<SampleAnnotation>() shouldBeEqualTo true
+            hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo false
         }
     }
 
@@ -162,9 +162,9 @@ class KoDeclarationForSecondaryConstructorTest {
         // then
         sut.run {
             annotations.isEmpty() shouldBeEqualTo true
-            hasAnnotation("SampleAnnotation") shouldBeEqualTo false
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
-            hasAnnotation<SampleAnnotation>() shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation") shouldBeEqualTo false
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
+            hasAnnotationOf<SampleAnnotation>() shouldBeEqualTo false
         }
     }
 

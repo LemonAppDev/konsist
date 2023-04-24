@@ -5,10 +5,10 @@ import com.lemonappdev.konsist.core.const.KoModifier.ABSTRACT
 import com.lemonappdev.konsist.core.const.KoModifier.PRIVATE
 import com.lemonappdev.konsist.core.const.KoModifier.PUBLIC
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForInterfaceTest {
@@ -54,12 +54,10 @@ class KoDeclarationForInterfaceTest {
 
         // then
         sut.run {
-            hasAnnotation("SampleAnnotation") shouldBeEqualTo true
-            hasAnnotation("NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
-            hasAnnotation("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
-            hasAnnotation<NonExistingAnnotation>() shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation") shouldBeEqualTo true
+            hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
+            hasAnnotations("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
         }
     }
 
@@ -72,15 +70,35 @@ class KoDeclarationForInterfaceTest {
 
         // then
         sut.run {
-            hasAnnotation("SampleAnnotation1") shouldBeEqualTo true
-            hasAnnotation("SampleAnnotation2") shouldBeEqualTo true
-            hasAnnotation("NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation2") shouldBeEqualTo true
-            hasAnnotation("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotation<SampleAnnotation1>() shouldBeEqualTo true
-            hasAnnotation<SampleAnnotation2>() shouldBeEqualTo true
-            hasAnnotation<NonExistingAnnotation>() shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotations("SampleAnnotation2") shouldBeEqualTo true
+            hasAnnotations("SampleAnnotation1", "SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation1", "NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation2") shouldBeEqualTo true
+            hasAnnotations("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `interface-has-two-annotations-with-KClass`() {
+        // given
+        val sut = getSnippetFile("interface-has-two-annotations-with-KClass")
+            .interfaces()
+            .first()
+
+        // then
+        sut.run {
+            annotations shouldHaveSize 2
+            hasAnnotations(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotations(SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotations(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotations(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotations(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo true
+            hasAnnotationOf<SampleAnnotation2>() shouldBeEqualTo true
+            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
 
