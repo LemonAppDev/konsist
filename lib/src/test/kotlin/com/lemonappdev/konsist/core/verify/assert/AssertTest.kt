@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.ext.withExplicitPrimaryConstructor
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 import org.amshove.kluent.shouldContain
@@ -32,9 +33,7 @@ class AssertTest {
             .classes()
 
         // then
-        sut.assert {
-            it.name == "SampleClass"
-        }
+        sut.assert { it.name == "SampleClass" }
     }
 
     @Test
@@ -45,9 +44,7 @@ class AssertTest {
 
         // when
         val func = {
-            sut.assert {
-                it.name == "OtherName"
-            }
+            sut.assert { it.name == "OtherName" }
         }
 
         // then
@@ -77,6 +74,60 @@ class AssertTest {
             sut.assertNot {
                 it.name == "SampleClass"
             }
+        }
+
+        // then
+        func shouldThrow KoCheckFailedException::class
+    }
+
+    @Test
+    fun `assert-pass-when-expression-is-nullable`() {
+        // given
+        val sut = getSnippetFile("assert-pass-when-expression-is-nullable")
+            .classes()
+            .withExplicitPrimaryConstructor()
+
+        // then
+        sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
+    }
+
+    @Test
+    fun `assert-fail-when-expression-is-nullable`() {
+        // given
+        val sut = getSnippetFile("assert-fail-when-expression-is-nullable")
+            .classes()
+            .withExplicitPrimaryConstructor()
+
+        // when
+        val func = {
+            sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
+        }
+
+        // then
+        func shouldThrow KoCheckFailedException::class
+    }
+
+    @Test
+    fun `assert-not-pass-when-expression-is-nullable`() {
+        // given
+        val sut = getSnippetFile("assert-not-pass-when-expression-is-nullable")
+            .classes()
+            .withExplicitPrimaryConstructor()
+
+        // then
+        sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") }
+    }
+
+    @Test
+    fun `assert-not-fail-when-expression-is-nullable`() {
+        // given
+        val sut = getSnippetFile("assert-not-fail-when-expression-is-nullable")
+            .classes()
+            .withExplicitPrimaryConstructor()
+
+        // when
+        val func = {
+            sut.assertNot { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
         }
 
         // then
