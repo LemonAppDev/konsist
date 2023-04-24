@@ -35,7 +35,11 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
         ktTypeParameterListOwner
             .modifierList
             ?.text
-            ?.split(" ")
+            ?.split(" ", "\n")
+            ?.toMutableList()
+            ?.also {
+                it.removeIf { string -> string.contains('@') }
+            }
             ?.map { KoModifier.valueOf(it.uppercase()) }
             ?: emptyList()
     }
