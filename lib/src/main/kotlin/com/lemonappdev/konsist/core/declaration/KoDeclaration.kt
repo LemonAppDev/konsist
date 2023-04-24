@@ -40,7 +40,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
             ?: emptyList()
     }
 
-    fun hasPublicModifier() = modifiers.contains(KoModifier.PUBLIC)
+    fun hasPublicModifier() = hasModifiers(KoModifier.PUBLIC)
 
     fun isPublicOrDefault() = ktTypeParameterListOwner.isPublic
 
@@ -48,7 +48,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
 
     fun hasProtectedModifier() = ktTypeParameterListOwner.isProtected()
 
-    fun hasInternalModifier() = modifiers.contains(KoModifier.INTERNAL)
+    fun hasInternalModifier() = hasModifiers(KoModifier.INTERNAL)
 
     fun isTopLevel() = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
 

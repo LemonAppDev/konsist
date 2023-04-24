@@ -51,25 +51,25 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
         type?.let { KoType.getInstance(type) }
     }
 
-    fun hasOperatorModifier() = modifiers.contains(KoModifier.OPERATOR)
+    fun hasOperatorModifier() = hasModifiers(KoModifier.OPERATOR)
 
-    fun hasInlineModifier() = modifiers.contains(KoModifier.INLINE)
+    fun hasInlineModifier() = hasModifiers(KoModifier.INLINE)
 
-    fun hasTailrecModifier() = modifiers.contains(KoModifier.TAILREC)
+    fun hasTailrecModifier() = hasModifiers(KoModifier.TAILREC)
 
-    fun hasInfixModifier() = modifiers.contains(KoModifier.INFIX)
+    fun hasInfixModifier() = hasModifiers(KoModifier.INFIX)
 
-    fun hasExternalModifier() = modifiers.contains(KoModifier.EXTERNAL)
+    fun hasExternalModifier() = hasModifiers(KoModifier.EXTERNAL)
 
-    fun hasSuspendModifier() = modifiers.contains(KoModifier.SUSPEND)
+    fun hasSuspendModifier() = hasModifiers(KoModifier.SUSPEND)
 
-    fun hasOpenModifier() = modifiers.contains(KoModifier.OPEN)
+    fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
 
-    fun hasOverrideModifier() = modifiers.contains(KoModifier.OVERRIDE)
+    fun hasOverrideModifier() = hasModifiers(KoModifier.OVERRIDE)
 
-    fun hasFinalModifier() = modifiers.contains(KoModifier.FINAL)
+    fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
 
-    fun hasAbstractModifier() = modifiers.contains(KoModifier.ABSTRACT)
+    fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
 
     fun hasActualModifier() = ktFunction.hasActualModifier()
 

@@ -40,9 +40,9 @@ class KoParameter private constructor(private val ktParameter: KtParameter) : Ko
 
     fun hasVarargModifier() = ktParameter.isVarArg
 
-    fun hasNoInlineModifier() = modifiers.contains(KoModifier.NOINLINE)
+    fun hasNoInlineModifier() = hasModifiers(KoModifier.NOINLINE)
 
-    fun hasCrossInlineModifier() = modifiers.contains(KoModifier.CROSSINLINE)
+    fun hasCrossInlineModifier() = hasModifiers(KoModifier.CROSSINLINE)
 
     fun hasDefaultValue(value: String? = null) = when (value) {
         null -> ktParameter.hasDefaultValue()

@@ -78,9 +78,9 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
 
     fun hasAbstractModifier() = ktClass.isAbstract()
 
-    fun hasOpenModifier() = modifiers.contains(KoModifier.OPEN)
+    fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
 
-    fun hasFinalModifier() = modifiers.contains(KoModifier.FINAL)
+    fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
 
     fun hasExplicitPrimaryConstructor() = ktClass.hasExplicitPrimaryConstructor()
 

@@ -32,21 +32,21 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
         type?.let { KoType.getInstance(it) }
     }
 
-    fun hasLateinitModifier() = modifiers.contains(KoModifier.LATEINIT)
+    fun hasLateinitModifier() = hasModifiers(KoModifier.LATEINIT)
 
-    fun hasOverrideModifier() = modifiers.contains(KoModifier.OVERRIDE)
+    fun hasOverrideModifier() = hasModifiers(KoModifier.OVERRIDE)
 
-    fun hasAbstractModifier() =modifiers.contains(KoModifier.ABSTRACT)
+    fun hasAbstractModifier() =hasModifiers(KoModifier.ABSTRACT)
 
-    fun hasOpenModifier() = modifiers.contains(KoModifier.OPEN)
+    fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
 
-    fun hasFinalModifier() = modifiers.contains(KoModifier.FINAL)
+    fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
 
     fun hasActualModifier() = ktProperty.hasActualModifier()
 
     fun hasExpectModifier() = ktProperty.hasExpectModifier()
 
-    fun hasConstModifier() = modifiers.contains(KoModifier.CONST)
+    fun hasConstModifier() = hasModifiers(KoModifier.CONST)
 
     fun isExtension() = ktProperty.isExtensionDeclaration()
 

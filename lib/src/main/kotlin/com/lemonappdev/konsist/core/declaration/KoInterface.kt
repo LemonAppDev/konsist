@@ -6,7 +6,6 @@ import org.jetbrains.kotlin.psi.psiUtil.hasActualModifier
 import org.jetbrains.kotlin.psi.psiUtil.hasExpectModifier
 
 class KoInterface private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
-
     fun hasActualModifier() = ktClass.hasActualModifier()
 
     fun hasExpectModifier() = ktClass.hasExpectModifier()
