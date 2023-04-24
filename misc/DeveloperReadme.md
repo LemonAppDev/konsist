@@ -25,4 +25,3 @@
 [release repository](https://s01.oss.sonatype.org/content/repositories/releases/com/lemonappdev/konsist/). This 
 artefact will be transferred to [maven central](https://central.sonatype.com/artifact/com.lemonappdev/konsist) 
 repository after some time.
-- 
