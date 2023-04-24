@@ -67,21 +67,21 @@ class KoBaseDeclarationTest {
     }
 
     @Test
-    fun `text-with-location`() {
+    fun `location-with-text`() {
         // given
-        val projectPath = getSnippetFile("text-with-location")
+        val projectPath = getSnippetFile("location-with-text")
             .files()
             .first()
             .projectFilePath
 
-        val sut = getSnippetFile("text-with-location")
+        val sut = getSnippetFile("location-with-text")
             .functions()
             .first()
 
         // then
         val declaration = "Declaration:\nfun sampleFunction() {\n}"
         sut
-            .textWithLocation
+            .locationWithText
             .run {
                 startsWith("Location: /") shouldBeEqualTo true
                 contains(projectPath) shouldBeEqualTo true
@@ -153,7 +153,7 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo sut.textWithLocation
+        sut.toString() shouldBeEqualTo sut.locationWithText
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kobasedeclaration/snippet/", fileName)
