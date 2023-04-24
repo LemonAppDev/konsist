@@ -29,9 +29,9 @@ fun Sequence<KoAnnotation>.withoutTypeOf(vararg types: KClass<*>) = filter {
     }
 }
 
-inline fun <reified T> Sequence<KoAnnotation>.withTypeOf() = filter { it.representsType<T>() }
+inline fun <reified T> Sequence<KoAnnotation>.withTypeOf() = filter { it.representsTypeOf<T>() }
 
-inline fun <reified T> Sequence<KoAnnotation>.withoutTypeOf() = filterNot { it.representsType<T>() }
+inline fun <reified T> Sequence<KoAnnotation>.withoutTypeOf() = filterNot { it.representsTypeOf<T>() }
 
 fun Sequence<KoAnnotation>.withName(vararg names: String) = filter {
     names.any { name -> it.name == name }

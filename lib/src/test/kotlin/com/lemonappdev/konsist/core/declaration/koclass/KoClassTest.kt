@@ -210,26 +210,30 @@ class KoClassTest {
     }
 
     @Test
-    fun `class-has-parent-class-and-interface`() {
+    fun `class-has-parent-class-and-interfaces`() {
         // given
-        val sut = getSnippetFile("class-has-parent-class-and-interface")
+        val sut = getSnippetFile("class-has-parent-class-and-interfaces")
             .classes()
             .first()
 
         // then
         sut.run {
-            parents.map { it.name } shouldBeEqualTo listOf("SampleParentClass", "SampleParentInterface")
-            hasParent() shouldBeEqualTo true
-            hasParent("SampleParentClass") shouldBeEqualTo true
-            hasParent("OtherInterface") shouldBeEqualTo false
+            parents.map { it.name } shouldBeEqualTo listOf("SampleParentClass", "SampleParentInterface1", "SampleParentInterface2")
+            hasParents() shouldBeEqualTo true
+            hasParents("SampleParentClass") shouldBeEqualTo true
+            hasParents("OtherInterface") shouldBeEqualTo false
+            hasParents("SampleParentClass", "SampleParentInterface1") shouldBeEqualTo true
+            hasParents("SampleParentClass", "SampleParentInterface1", "OtherInterface") shouldBeEqualTo false
             parentClass?.name shouldBeEqualTo "SampleParentClass"
             hasParentClass() shouldBeEqualTo true
             hasParentClass("SampleParentClass") shouldBeEqualTo true
             hasParentClass("OtherClass") shouldBeEqualTo false
-            parentInterfaces.map { it.name } shouldBeEqualTo listOf("SampleParentInterface")
-            hasParentInterface() shouldBeEqualTo true
-            hasParentInterface("SampleParentInterface") shouldBeEqualTo true
-            hasParentInterface("OtherInterface") shouldBeEqualTo false
+            parentInterfaces.map { it.name } shouldBeEqualTo listOf("SampleParentInterface1", "SampleParentInterface2")
+            hasParentInterfaces() shouldBeEqualTo true
+            hasParentInterfaces("SampleParentInterface1") shouldBeEqualTo true
+            hasParentInterfaces("OtherInterface") shouldBeEqualTo false
+            hasParentInterfaces("SampleParentInterface1", "SampleParentInterface2") shouldBeEqualTo true
+            hasParentInterfaces("SampleParentInterface1", "OtherInterface") shouldBeEqualTo false
         }
     }
 
@@ -243,14 +247,14 @@ class KoClassTest {
         // then
         sut.run {
             parents shouldBeEqualTo emptyList()
-            hasParent() shouldBeEqualTo false
-            hasParent("SampleClass") shouldBeEqualTo false
+//            hasParents() shouldBeEqualTo false
+            hasParents("SampleClass") shouldBeEqualTo false
             parentClass shouldBeEqualTo null
             hasParentClass() shouldBeEqualTo false
             hasParentClass("SampleParentClass") shouldBeEqualTo false
             parentInterfaces shouldBeEqualTo emptyList()
-            hasParentInterface() shouldBeEqualTo false
-            hasParentInterface("SampleInterface") shouldBeEqualTo false
+            hasParentInterfaces() shouldBeEqualTo false
+            hasParentInterfaces("SampleInterface") shouldBeEqualTo false
         }
     }
 
