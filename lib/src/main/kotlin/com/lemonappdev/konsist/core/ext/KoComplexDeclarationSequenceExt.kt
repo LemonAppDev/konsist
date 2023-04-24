@@ -4,15 +4,15 @@ import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclaration
 import kotlin.reflect.KClass
 
-fun Sequence<KoComplexDeclaration>.withType(vararg types: String) = filter {
+fun <T : KoComplexDeclaration> Sequence<T>.withType(vararg types: String) = filter {
     types.any { type -> it.representsType(type) }
 }
 
-fun Sequence<KoComplexDeclaration>.withoutType(vararg types: String) = filter {
+fun <T : KoComplexDeclaration> Sequence<T>.withoutType(vararg types: String) = filter {
     types.none { type -> it.representsType(type) }
 }
 
-fun Sequence<KoComplexDeclaration>.withTypeOf(vararg types: KClass<*>) = filter {
+fun <T : KoComplexDeclaration> Sequence<T>.withTypeOf(vararg types: KClass<*>) = filter {
     types.any { type ->
         type
             .qualifiedName
@@ -20,7 +20,7 @@ fun Sequence<KoComplexDeclaration>.withTypeOf(vararg types: KClass<*>) = filter 
     }
 }
 
-fun Sequence<KoComplexDeclaration>.withoutTypeOf(vararg types: KClass<*>) = filter {
+fun <T : KoComplexDeclaration> Sequence<T>.withoutTypeOf(vararg types: KClass<*>) = filter {
     types.none { type ->
         type
             .qualifiedName
@@ -32,40 +32,40 @@ inline fun <reified T> Sequence<KoComplexDeclaration>.withTypeOf() = filter { it
 
 inline fun <reified T> Sequence<KoComplexDeclaration>.withoutTypeOf() = filterNot { it.representsType<T>() }
 
-fun Sequence<KoComplexDeclaration>.declarations(
+fun <T : KoComplexDeclaration> Sequence<T>.declarations(
     modifiers: List<KoModifier> = emptyList(),
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
 ) = flatMap { it.declarations(modifiers, includeNested, includeLocal) }
 
-fun Sequence<KoComplexDeclaration>.classes(
+fun <T : KoComplexDeclaration> Sequence<T>.classes(
     modifiers: List<KoModifier> = emptyList(),
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
 ) = flatMap { it.classes(modifiers, includeNested, includeLocal) }
 
-fun Sequence<KoComplexDeclaration>.interfaces(
+fun <T : KoComplexDeclaration> Sequence<T>.interfaces(
     modifiers: List<KoModifier> = emptyList(),
     includeNested: Boolean = false,
 ) = flatMap { it.interfaces(modifiers, includeNested) }
 
-fun Sequence<KoComplexDeclaration>.objects(
+fun <T : KoComplexDeclaration> Sequence<T>.objects(
     modifiers: List<KoModifier> = emptyList(),
     includeNested: Boolean = false,
 ) = flatMap { it.objects(modifiers, includeNested) }
 
-fun Sequence<KoComplexDeclaration>.companionObjects(
+fun <T : KoComplexDeclaration> Sequence<T>.companionObjects(
     modifiers: List<KoModifier> = emptyList(),
     includeNested: Boolean = false,
 ) = flatMap { it.companionObjects(modifiers, includeNested) }
 
-fun Sequence<KoComplexDeclaration>.properties(
+fun <T : KoComplexDeclaration> Sequence<T>.properties(
     modifiers: List<KoModifier> = emptyList(),
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
 ) = flatMap { it.properties(modifiers, includeNested, includeLocal) }
 
-fun Sequence<KoComplexDeclaration>.functions(
+fun <T : KoComplexDeclaration> Sequence<T>.functions(
     modifiers: List<KoModifier> = emptyList(),
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
