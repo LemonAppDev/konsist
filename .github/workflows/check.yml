@@ -122,21 +122,3 @@ jobs:
         with:
           name: lib.jar Artifact
           path: lib/build/libs/lib.jar
-  sign:
-    name: Sign
-    continue-on-error: true
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Sign
-        run: ./gradlew :lib:signKonsistPublication -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
