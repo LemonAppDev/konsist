@@ -232,17 +232,16 @@ class KoDeclarationSequenceExtTest {
     @Test
     fun `withAnnotations() returns declaration with any annotation`() {
         // given
-        val annotation: KoAnnotation = mockk()
         val declaration1: KoDeclaration = mockk {
-            every { annotations } returns listOf(annotation)
+            every { hasAnnotations() } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { annotations } returns emptyList()
+            every { hasAnnotations() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withAnnotation()
+        val sut = declarations.withAnnotations()
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1)
@@ -251,17 +250,16 @@ class KoDeclarationSequenceExtTest {
     @Test
     fun `withAnnotations() returns declaration without any annotation`() {
         // given
-        val annotation: KoAnnotation = mockk()
         val declaration1: KoDeclaration = mockk {
-            every { annotations } returns listOf(annotation)
+            every { hasAnnotations() } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { annotations } returns emptyList()
+            every { hasAnnotations() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutAnnotation()
+        val sut = declarations.withoutAnnotations()
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration2)
@@ -446,6 +444,42 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
+    fun `withModifiers() returns declaration1 which has modifier`() {
+        // given
+        val declaration1: KoDeclaration = mockk {
+            every { hasModifiers() } returns true
+        }
+        val declaration2: KoDeclaration = mockk {
+            every { hasModifiers() } returns false
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withModifiers()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutModifiers() returns declaration2 which has not modifier`() {
+        // given
+        val declaration1: KoDeclaration = mockk {
+            every { hasModifiers() } returns true
+        }
+        val declaration2: KoDeclaration = mockk {
+            every { hasModifiers() } returns false
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutModifiers()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withModifiers(String) returns declaration1 with all given modifiers`() {
         // given
         val modifier1 = PROTECTED
@@ -466,29 +500,23 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutModifiers(String) returns declaration3 without given modifiers`() {
+    fun `withoutModifiers(String) returns declaration2 without given modifiers`() {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
         val declaration1: KoDeclaration = mockk {
-            every { hasModifiers(modifier1) } returns true
-            every { hasModifiers(modifier2) } returns true
+            every { hasModifiers(modifier1, modifier2) } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { hasModifiers(modifier1) } returns false
-            every { hasModifiers(modifier2) } returns true
+            every { hasModifiers(modifier1, modifier2) } returns false
         }
-        val declaration3: KoDeclaration = mockk {
-            every { hasModifiers(modifier1) } returns false
-            every { hasModifiers(modifier2) } returns false
-        }
-        val declarations = sequenceOf(declaration1, declaration2, declaration3)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutModifiers(modifier1, modifier2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

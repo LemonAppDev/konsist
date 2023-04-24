@@ -55,12 +55,15 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
 
     fun isTopLevel() = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
 
-    fun hasAnnotations(vararg names: String) = names.all {
-        annotations
-            .any { annotation ->
-                annotation.fullyQualifiedName.substringAfterLast(".") == it ||
-                    annotation.fullyQualifiedName == it
-            }
+    fun hasAnnotations(vararg names: String) = when {
+        names.isEmpty() -> annotations.isNotEmpty()
+        else -> names.all {
+            annotations
+                .any { annotation ->
+                    annotation.fullyQualifiedName.substringAfterLast(".") == it ||
+                        annotation.fullyQualifiedName == it
+                }
+        }
     }
 
     fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {
