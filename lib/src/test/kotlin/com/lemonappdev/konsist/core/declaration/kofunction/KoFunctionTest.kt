@@ -259,7 +259,6 @@ class KoFunctionTest {
             .functions()
             .first()
 
-
         // then
         sut.apply {
             containsLocalFunction("sampleLocalFunction") shouldBeEqualTo true

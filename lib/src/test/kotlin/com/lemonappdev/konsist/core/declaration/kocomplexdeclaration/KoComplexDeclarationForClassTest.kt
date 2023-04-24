@@ -122,7 +122,6 @@ class KoComplexDeclarationForClassTest {
         )
 
         sut.declarations(includeNested = true, includeLocal = true).toList()
-
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
