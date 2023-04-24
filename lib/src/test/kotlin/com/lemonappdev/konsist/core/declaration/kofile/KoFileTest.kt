@@ -1,8 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
+import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
@@ -47,11 +48,13 @@ class KoFileTest {
 
         // then
         sut.run {
-            hasImport() shouldBeEqualTo true
-            hasImport("com..") shouldBeEqualTo true
-            hasImport("com") shouldBeEqualTo false
-            hasImport("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo true
-            hasImport("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
+            hasImports() shouldBeEqualTo true
+            hasImports("com..") shouldBeEqualTo true
+            hasImports("com..", "..testdata..") shouldBeEqualTo true
+            hasImports("com") shouldBeEqualTo false
+            hasImports("com", "..testdata..") shouldBeEqualTo false
+            hasImports("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo true
+            hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
         }
     }
 
@@ -65,8 +68,8 @@ class KoFileTest {
         // then
         sut.run {
             imports.isEmpty() shouldBeEqualTo true
-            hasImport() shouldBeEqualTo false
-            hasImport("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
+            hasImports() shouldBeEqualTo false
+            hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
         }
     }
 
@@ -168,21 +171,37 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-contains-annotation`() {
+    fun `file-contains-annotations`() {
         // given
-        val sut = getSnippetFile("file-contains-annotation")
+        val sut = getSnippetFile("file-contains-annotations")
             .files()
             .first()
 
         // then
         sut.run {
-            annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation")
-            hasAnnotation("SampleAnnotation") shouldBeEqualTo true
-            hasAnnotation("SampleAnnotation1") shouldBeEqualTo false
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo false
-            hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
-            hasAnnotation<SampleAnnotation1>() shouldBeEqualTo false
+            annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation1", "SampleAnnotation2")
+            hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotations("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo true
+            hasAnnotations("OtherAnnotation") shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation1", "OtherAnnotation") shouldBeEqualTo false
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotations("com.lemonappdev.konsist.testdata.OtherAnnotation") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `file-contains-annotations-with-KClass`() {
+        // given
+        val sut = getSnippetFile("file-contains-annotations-with-KClass")
+            .files()
+            .first()
+
+        // then
+        sut.run {
+            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
 
@@ -196,9 +215,8 @@ class KoFileTest {
         // then
         sut.run {
             annotations.isEmpty() shouldBeEqualTo true
-            hasAnnotation("SampleAnnotation") shouldBeEqualTo false
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
-            hasAnnotation<SampleAnnotation>() shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation") shouldBeEqualTo false
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
         }
     }
 
@@ -220,17 +238,18 @@ class KoFileTest {
     }
 
     @Test
-    fun `file-has-typealias`() {
+    fun `file-has-typealiases`() {
         // given
-        val sut = getSnippetFile("file-has-typealias")
+        val sut = getSnippetFile("file-has-typealiases")
             .files()
             .first()
 
         // then
         sut.run {
-            hasTypeAlias() shouldBeEqualTo true
-            hasTypeAlias("SampleTypeAlias") shouldBeEqualTo true
-            hasTypeAlias("OtherTypeAlias") shouldBeEqualTo false
+            hasTypeAliases() shouldBeEqualTo true
+            hasTypeAliases("SampleTypeAlias1") shouldBeEqualTo true
+            hasTypeAliases("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo true
+            hasTypeAliases("OtherTypeAlias") shouldBeEqualTo false
         }
     }
 
@@ -257,8 +276,8 @@ class KoFileTest {
 
         // then
         sut.run {
-            hasTypeAlias() shouldBeEqualTo false
-            hasTypeAlias("SampleTypeAlias") shouldBeEqualTo false
+            hasTypeAliases() shouldBeEqualTo false
+            hasTypeAliases("SampleTypeAlias") shouldBeEqualTo false
         }
     }
 
