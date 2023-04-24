@@ -16,4 +16,6 @@ abstract class KoNamedDeclaration(private val ktElement: KtElement) : KoBaseDecl
     fun hasNameWithSuffix(suffix: String) = name.endsWith(suffix)
 
     fun hasNameContaining(text: String) = name.contains(text)
+
+    fun hasNameMatching(regex: Regex) = name.matches(regex)
 }

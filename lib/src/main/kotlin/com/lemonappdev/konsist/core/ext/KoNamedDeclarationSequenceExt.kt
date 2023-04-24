@@ -33,3 +33,11 @@ fun <T : KoNamedDeclaration> Sequence<T>.withNameContaining(vararg texts: String
 fun <T : KoNamedDeclaration> Sequence<T>.withoutNameContaining(vararg texts: String) = filter {
     texts.none { text -> it.hasNameContaining(text) }
 }
+
+fun <T : KoNamedDeclaration> Sequence<T>.withNameMatching(vararg regexes: Regex) = filter {
+    regexes.any { text -> it.hasNameMatching(text) }
+}
+
+fun <T : KoNamedDeclaration> Sequence<T>.withoutNameMatching(vararg regexes: Regex) = filter {
+    regexes.none { text -> it.hasNameMatching(text) }
+}

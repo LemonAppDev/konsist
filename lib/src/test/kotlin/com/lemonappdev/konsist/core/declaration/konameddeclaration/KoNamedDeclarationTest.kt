@@ -5,6 +5,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoNamedDeclarationTest {
+
     @Test
     fun `class`() {
         // given
@@ -31,6 +32,8 @@ class KoNamedDeclarationTest {
             hasNameWithPrefix("non") shouldBeEqualTo false
             hasNameWithSuffix("lass") shouldBeEqualTo true
             hasNameWithSuffix("non") shouldBeEqualTo false
+            hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
+            hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
     }
 
@@ -60,6 +63,8 @@ class KoNamedDeclarationTest {
             hasNameWithPrefix("non") shouldBeEqualTo false
             hasNameWithSuffix("ace") shouldBeEqualTo true
             hasNameWithSuffix("non") shouldBeEqualTo false
+            hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
+            hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
     }
 
@@ -89,6 +94,8 @@ class KoNamedDeclarationTest {
             hasNameWithPrefix("non") shouldBeEqualTo false
             hasNameWithSuffix("ect") shouldBeEqualTo true
             hasNameWithSuffix("non") shouldBeEqualTo false
+            hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
+            hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
     }
 
@@ -118,6 +125,8 @@ class KoNamedDeclarationTest {
             hasNameWithPrefix("non") shouldBeEqualTo false
             hasNameWithSuffix("ion") shouldBeEqualTo true
             hasNameWithSuffix("non") shouldBeEqualTo false
+            hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
+            hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
     }
 
@@ -147,6 +156,8 @@ class KoNamedDeclarationTest {
             hasNameWithPrefix("non") shouldBeEqualTo false
             hasNameWithSuffix("rty") shouldBeEqualTo true
             hasNameWithSuffix("non") shouldBeEqualTo false
+            hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
+            hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
     }
 
