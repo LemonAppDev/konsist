@@ -27,9 +27,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-pass`() {
+    fun `assert-passes`() {
         // given
-        val sut = getSnippetFile("assert-pass")
+        val sut = getSnippetFile("assert-passes")
             .classes()
 
         // then
@@ -37,9 +37,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-fail`() {
+    fun `assert-fails`() {
         // given
-        val sut = getSnippetFile("assert-fail")
+        val sut = getSnippetFile("assert-fails")
             .classes()
 
         // when
@@ -52,9 +52,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-pass`() {
+    fun `assert-not-passes`() {
         // given
-        val sut = getSnippetFile("assert-not-pass")
+        val sut = getSnippetFile("assert-not-passes")
             .classes()
 
         // then
@@ -64,9 +64,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-fail`() {
+    fun `assert-not-fails`() {
         // given
-        val sut = getSnippetFile("assert-not-fail")
+        val sut = getSnippetFile("assert-not-fails")
             .classes()
 
         // when
@@ -81,9 +81,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-pass-when-expression-is-nullable`() {
+    fun `assert-passes-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-pass-when-expression-is-nullable")
+        val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
             .classes()
             .withExplicitPrimaryConstructor()
 
@@ -92,9 +92,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-fail-when-expression-is-nullable`() {
+    fun `assert-fails-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-fail-when-expression-is-nullable")
+        val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
             .classes()
             .withExplicitPrimaryConstructor()
 
@@ -108,9 +108,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-pass-when-expression-is-nullable`() {
+    fun `assert-not-passes-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-not-pass-when-expression-is-nullable")
+        val sut = getSnippetFile("assert-not-passes-when-expression-is-nullable")
             .classes()
             .withExplicitPrimaryConstructor()
 
@@ -119,9 +119,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-fail-when-expression-is-nullable`() {
+    fun `assert-not-fails-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-not-fail-when-expression-is-nullable")
+        val sut = getSnippetFile("assert-not-fails-when-expression-is-nullable")
             .classes()
             .withExplicitPrimaryConstructor()
 
@@ -135,9 +135,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-fail-declaration-list-empty`() {
+    fun `assert-fails-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("assert-fail-declaration-list-empty")
+        val sut = getSnippetFile("assert-fails-when-declaration-list-is-empty")
             .classes()
 
         // when
@@ -151,9 +151,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-fail-declaration-list-empty`() {
+    fun `assert-not-fails-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("assert-not-fail-declaration-list-empty")
+        val sut = getSnippetFile("assert-not-fails-when-declaration-list-is-empty")
             .classes()
 
         // when
