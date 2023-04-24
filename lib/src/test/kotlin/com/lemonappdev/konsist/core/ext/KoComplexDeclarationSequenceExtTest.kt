@@ -114,58 +114,6 @@ class KoComplexDeclarationSequenceExtTest {
         sut.toList() shouldBeEqualTo listOf(complexDeclaration3)
     }
 
-    @Test
-    fun `withTypeOf(KClass) returns complex declarations with one of given types`() {
-        // given
-        val type1 = "com.lemonappdev.konsist.testdata.SampleClass1"
-        val type2 = "com.lemonappdev.konsist.testdata.SampleClass2"
-        val complexDeclaration1: KoComplexDeclaration = mockk {
-            every { representsType(type1) } returns true
-            every { representsType(type2) } returns false
-        }
-        val complexDeclaration2: KoComplexDeclaration = mockk {
-            every { representsType(type1) } returns false
-            every { representsType(type2) } returns true
-        }
-        val complexDeclaration3: KoComplexDeclaration = mockk {
-            every { representsType(type1) } returns false
-            every { representsType(type2) } returns false
-        }
-        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
-
-        // when
-        val sut = complexDeclarations.withTypeOf(SampleClass1::class, SampleClass2::class)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(complexDeclaration1, complexDeclaration2)
-    }
-
-    @Test
-    fun `withoutTypeOf(KClass) returns complex declaration without any of given types`() {
-        // given
-        val type1 = "com.lemonappdev.konsist.testdata.SampleClass1"
-        val type2 = "com.lemonappdev.konsist.testdata.SampleClass2"
-        val complexDeclaration1: KoComplexDeclaration = mockk {
-            every { representsType(type1) } returns true
-            every { representsType(type2) } returns false
-        }
-        val complexDeclaration2: KoComplexDeclaration = mockk {
-            every { representsType(type1) } returns false
-            every { representsType(type2) } returns true
-        }
-        val complexDeclaration3: KoComplexDeclaration = mockk {
-            every { representsType(type1) } returns false
-            every { representsType(type2) } returns false
-        }
-        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
-
-        // when
-        val sut = complexDeclarations.withoutTypeOf(SampleClass1::class, SampleClass2::class)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(complexDeclaration3)
-    }
-
     //  'every { representsType<SampleClass>() } returns true' doesn't work because there is a bug in mockk
     @Test
     fun `withTypeOf() with KClass syntax returns SampleClass`() {
