@@ -12,7 +12,7 @@ jobs:
   junit-test:
     name: JUnit Test
     continue-on-error: true
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
@@ -35,7 +35,7 @@ jobs:
   konsist-test:
     name: Konsist Test
     continue-on-error: true
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
@@ -58,7 +58,7 @@ jobs:
   spotless:
     name: Spotless
     continue-on-error: true
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
@@ -76,7 +76,7 @@ jobs:
   detekt:
     name: Detekt
     continue-on-error: true
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
@@ -99,7 +99,7 @@ jobs:
   assemble:
     name: Assemble
     continue-on-error: true
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
@@ -125,7 +125,7 @@ jobs:
   sign:
     name: Sign
     continue-on-error: true
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
