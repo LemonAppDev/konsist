@@ -36,7 +36,7 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
 
     fun hasOverrideModifier() = hasModifiers(KoModifier.OVERRIDE)
 
-    fun hasAbstractModifier() =hasModifiers(KoModifier.ABSTRACT)
+    fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
 
     fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
 
