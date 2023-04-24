@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.check
+package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.core.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclaration
