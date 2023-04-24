@@ -38,7 +38,7 @@ class KoParameter private constructor(private val ktParameter: KtParameter) : Ko
         callExpressionText
     }
 
-    fun hasVarargModifier() = ktParameter.isVarArg
+    fun hasVarargModifier() = hasModifiers(KoModifier.VARARG)
 
     fun hasNoInlineModifier() = hasModifiers(KoModifier.NOINLINE)
 

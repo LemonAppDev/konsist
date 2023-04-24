@@ -7,9 +7,6 @@ import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
-import org.jetbrains.kotlin.psi.psiUtil.hasActualModifier
-import org.jetbrains.kotlin.psi.psiUtil.hasExpectModifier
-import org.jetbrains.kotlin.psi.psiUtil.isAbstract
 
 @Suppress("detekt.TooManyFunctions")
 class KoClass private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
@@ -60,23 +57,23 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
 
     val allConstructors = listOfNotNull(primaryConstructor) + secondaryConstructors
 
-    fun hasEnumModifier() = ktClass.isEnum()
+    fun hasEnumModifier() = hasModifiers(KoModifier.ENUM)
 
-    fun hasSealedModifier() = ktClass.isSealed()
+    fun hasSealedModifier() = hasModifiers(KoModifier.SEALED)
 
-    fun hasInnerModifier() = ktClass.isInner()
+    fun hasInnerModifier() = hasModifiers(KoModifier.INNER)
 
-    fun hasValueModifier() = ktClass.isValue()
+    fun hasValueModifier() = hasModifiers(KoModifier.VALUE)
 
-    fun hasAnnotationModifier() = ktClass.isAnnotation()
+    fun hasAnnotationModifier() = hasModifiers(KoModifier.ANNOTATION)
 
-    fun hasDataModifier() = ktClass.isData()
+    fun hasDataModifier() = hasModifiers(KoModifier.DATA)
 
-    fun hasActualModifier() = ktClass.hasActualModifier()
+    fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
-    fun hasExpectModifier() = ktClass.hasExpectModifier()
+    fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
 
-    fun hasAbstractModifier() = ktClass.isAbstract()
+    fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
 
     fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
 

@@ -3,8 +3,6 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.util.PackageHelper
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
-import org.jetbrains.kotlin.psi.psiUtil.isPrivate
-import org.jetbrains.kotlin.psi.psiUtil.isProtected
 import org.jetbrains.kotlin.psi.psiUtil.isPublic
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 
@@ -48,9 +46,9 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
 
     fun isPublicOrDefault() = ktTypeParameterListOwner.isPublic
 
-    fun hasPrivateModifier() = ktTypeParameterListOwner.isPrivate()
+    fun hasPrivateModifier() = hasModifiers(KoModifier.PRIVATE)
 
-    fun hasProtectedModifier() = ktTypeParameterListOwner.isProtected()
+    fun hasProtectedModifier() = hasModifiers(KoModifier.PROTECTED)
 
     fun hasInternalModifier() = hasModifiers(KoModifier.INTERNAL)
 

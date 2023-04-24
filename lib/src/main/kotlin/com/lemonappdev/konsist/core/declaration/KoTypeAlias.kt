@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.psi.KtTypeAlias
-import org.jetbrains.kotlin.psi.psiUtil.hasActualModifier
 
 class KoTypeAlias private constructor(private val ktTypeAlias: KtTypeAlias) : KoDeclaration(ktTypeAlias) {
 
@@ -14,7 +14,7 @@ class KoTypeAlias private constructor(private val ktTypeAlias: KtTypeAlias) : Ko
             ?: throw KoInternalException("Type alias has no type", koBaseDeclaration = this)
     }
 
-    fun hasActualModifier() = ktTypeAlias.hasActualModifier()
+    fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
     companion object {
         private val cache = KoDeclarationCache<KoTypeAlias>()

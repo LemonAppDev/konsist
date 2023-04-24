@@ -4,8 +4,6 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.const.KoModifier
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
-import org.jetbrains.kotlin.psi.psiUtil.hasActualModifier
-import org.jetbrains.kotlin.psi.psiUtil.hasExpectModifier
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
@@ -42,9 +40,9 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
 
     fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
 
-    fun hasActualModifier() = ktProperty.hasActualModifier()
+    fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
-    fun hasExpectModifier() = ktProperty.hasExpectModifier()
+    fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
 
     fun hasConstModifier() = hasModifiers(KoModifier.CONST)
 

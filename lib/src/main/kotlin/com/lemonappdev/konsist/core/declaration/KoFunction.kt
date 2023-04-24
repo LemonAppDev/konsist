@@ -11,8 +11,6 @@ import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
-import org.jetbrains.kotlin.psi.psiUtil.hasActualModifier
-import org.jetbrains.kotlin.psi.psiUtil.hasExpectModifier
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
@@ -71,9 +69,9 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
 
     fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
 
-    fun hasActualModifier() = ktFunction.hasActualModifier()
+    fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
-    fun hasExpectModifier() = ktFunction.hasExpectModifier()
+    fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
 
     fun isExtension() = ktFunction.isExtensionDeclaration()
 

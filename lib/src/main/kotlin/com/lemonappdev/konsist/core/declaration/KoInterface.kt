@@ -1,14 +1,13 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.const.KoModifier
 import org.jetbrains.kotlin.psi.KtClass
-import org.jetbrains.kotlin.psi.psiUtil.hasActualModifier
-import org.jetbrains.kotlin.psi.psiUtil.hasExpectModifier
 
 class KoInterface private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
-    fun hasActualModifier() = ktClass.hasActualModifier()
+    fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
-    fun hasExpectModifier() = ktClass.hasExpectModifier()
+    fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
 
     companion object {
         private val cache = KoDeclarationCache<KoInterface>()
