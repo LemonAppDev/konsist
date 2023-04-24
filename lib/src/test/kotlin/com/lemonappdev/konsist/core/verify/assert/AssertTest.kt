@@ -1,8 +1,10 @@
-package com.lemonappdev.konsist.core.check
+package com.lemonappdev.konsist.core.verify.assert
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.verify.assert
+import com.lemonappdev.konsist.core.verify.assertNot
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -10,23 +12,23 @@ import org.junit.jupiter.api.Test
 
 class AssertTest {
     @Test
-    fun `check-test-method-name`() {
+    fun `assert-test-method-name`() {
         // given
-        val sut = getSnippetFile("check-test-method-name")
+        val sut = getSnippetFile("assert-test-method-name")
             .classes()
 
         // then
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Check 'check-test-method-name' has failed. Invalid declarations") ?: throw e
+            e.message?.shouldContain("Check 'assert-test-method-name' has failed. Invalid declarations") ?: throw e
         }
     }
 
     @Test
-    fun `check-pass`() {
+    fun `assert-pass`() {
         // given
-        val sut = getSnippetFile("check-pass")
+        val sut = getSnippetFile("assert-pass")
             .classes()
 
         // then
@@ -36,9 +38,9 @@ class AssertTest {
     }
 
     @Test
-    fun `check-fail`() {
+    fun `assert-fail`() {
         // given
-        val sut = getSnippetFile("check-fail")
+        val sut = getSnippetFile("assert-fail")
             .classes()
 
         // when
@@ -53,9 +55,9 @@ class AssertTest {
     }
 
     @Test
-    fun `check-not-pass`() {
+    fun `assert-not-pass`() {
         // given
-        val sut = getSnippetFile("check-not-pass")
+        val sut = getSnippetFile("assert-not-pass")
             .classes()
 
         // then
@@ -65,9 +67,9 @@ class AssertTest {
     }
 
     @Test
-    fun `check-not-fail`() {
+    fun `assert-not-fail`() {
         // given
-        val sut = getSnippetFile("check-not-fail")
+        val sut = getSnippetFile("assert-not-fail")
             .classes()
 
         // when
@@ -82,9 +84,9 @@ class AssertTest {
     }
 
     @Test
-    fun `check-fail-declaration-list-empty`() {
+    fun `assert-fail-declaration-list-empty`() {
         // given
-        val sut = getSnippetFile("check-fail-declaration-list-empty")
+        val sut = getSnippetFile("assert-fail-declaration-list-empty")
             .classes()
 
         // when
@@ -98,9 +100,9 @@ class AssertTest {
     }
 
     @Test
-    fun `check-not-fail-declaration-list-empty`() {
+    fun `assert-not-fail-declaration-list-empty`() {
         // given
-        val sut = getSnippetFile("check-not-fail-declaration-list-empty")
+        val sut = getSnippetFile("assert-not-fail-declaration-list-empty")
             .classes()
 
         // when
@@ -113,5 +115,5 @@ class AssertTest {
             "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assertNot' method."
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/check/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/verify/assert/snippet/", fileName)
 }
