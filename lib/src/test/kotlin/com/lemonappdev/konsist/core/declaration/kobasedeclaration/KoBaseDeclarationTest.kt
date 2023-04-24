@@ -67,14 +67,14 @@ class KoBaseDeclarationTest {
     }
 
     @Test
-    fun `text-with-location`() {
+    fun `location-with-text`() {
         // given
-        val projectPath = getSnippetFile("text-with-location")
+        val projectPath = getSnippetFile("location-with-text")
             .files()
             .first()
             .projectFilePath
 
-        val sut = getSnippetFile("text-with-location")
+        val sut = getSnippetFile("location-with-text")
             .functions()
             .first()
 
