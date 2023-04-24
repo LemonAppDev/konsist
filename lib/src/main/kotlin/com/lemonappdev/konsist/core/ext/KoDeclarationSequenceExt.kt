@@ -6,47 +6,47 @@ import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.core.declaration.KoDeclaration
 import kotlin.reflect.KClass
 
-fun Sequence<KoDeclaration>.withPublicModifier() = filter { it.hasPublicModifier() }
+fun <T: KoDeclaration> Sequence<T>.withPublicModifier() = filter { it.hasPublicModifier() }
 
-fun Sequence<KoDeclaration>.withoutPublicModifier() = filterNot { it.hasPublicModifier() }
+fun <T: KoDeclaration> Sequence<T>.withoutPublicModifier() = filterNot { it.hasPublicModifier() }
 
-fun Sequence<KoDeclaration>.withPublicOrDefaultModifier() = filter { it.isPublicOrDefault() }
+fun <T: KoDeclaration> Sequence<T>.withPublicOrDefaultModifier() = filter { it.isPublicOrDefault() }
 
-fun Sequence<KoDeclaration>.withoutPublicOrDefaultModifier() = filterNot { it.isPublicOrDefault() }
+fun <T: KoDeclaration> Sequence<T>.withoutPublicOrDefaultModifier() = filterNot { it.isPublicOrDefault() }
 
-fun Sequence<KoDeclaration>.withPrivateModifier() = filter { it.hasPrivateModifier() }
+fun <T: KoDeclaration> Sequence<T>.withPrivateModifier() = filter { it.hasPrivateModifier() }
 
-fun Sequence<KoDeclaration>.withoutPrivateModifier() = filterNot { it.hasPrivateModifier() }
+fun <T: KoDeclaration> Sequence<T>.withoutPrivateModifier() = filterNot { it.hasPrivateModifier() }
 
-fun Sequence<KoDeclaration>.withProtectedModifier() = filter { it.hasProtectedModifier() }
+fun <T: KoDeclaration> Sequence<T>.withProtectedModifier() = filter { it.hasProtectedModifier() }
 
-fun Sequence<KoDeclaration>.withoutProtectedModifier() = filterNot { it.hasProtectedModifier() }
+fun <T: KoDeclaration> Sequence<T>.withoutProtectedModifier() = filterNot { it.hasProtectedModifier() }
 
-fun Sequence<KoDeclaration>.withInternalModifier() = filter { it.hasInternalModifier() }
+fun <T: KoDeclaration> Sequence<T>.withInternalModifier() = filter { it.hasInternalModifier() }
 
-fun Sequence<KoDeclaration>.withoutInternalModifier() = filterNot { it.hasInternalModifier() }
+fun <T: KoDeclaration> Sequence<T>.withoutInternalModifier() = filterNot { it.hasInternalModifier() }
 
-fun Sequence<KoDeclaration>.withTopLevel() = filter { it.isTopLevel() }
+fun <T: KoDeclaration> Sequence<T>.withTopLevel() = filter { it.isTopLevel() }
 
-fun Sequence<KoDeclaration>.withoutTopLevel() = filterNot { it.isTopLevel() }
+fun <T: KoDeclaration> Sequence<T>.withoutTopLevel() = filterNot { it.isTopLevel() }
 
-fun Sequence<KoDeclaration>.withAnnotation() = filter { it.annotations.isNotEmpty() }
+fun <T: KoDeclaration> Sequence<T>.withAnnotation() = filter { it.annotations.isNotEmpty() }
 
-fun Sequence<KoDeclaration>.withoutAnnotation() = filterNot { it.annotations.isNotEmpty() }
+fun <T: KoDeclaration> Sequence<T>.withoutAnnotation() = filterNot { it.annotations.isNotEmpty() }
 
-fun Sequence<KoDeclaration>.withAnnotations(vararg annotations: String) = filter {
+fun <T: KoDeclaration> Sequence<T>.withAnnotations(vararg annotations: String) = filter {
     annotations.all { annotation -> it.hasAnnotation(annotation) }
 }
 
-fun Sequence<KoDeclaration>.withSomeAnnotations(vararg annotations: String) = filter {
+fun <T: KoDeclaration> Sequence<T>.withSomeAnnotations(vararg annotations: String) = filter {
     annotations.any { annotation -> it.hasAnnotation(annotation) }
 }
 
-fun Sequence<KoDeclaration>.withoutAnnotations(vararg annotations: String) = filter {
+fun <T: KoDeclaration> Sequence<T>.withoutAnnotations(vararg annotations: String) = filter {
     annotations.none { annotation -> it.hasAnnotation(annotation) }
 }
 
-fun Sequence<KoDeclaration>.withAnnotationsOf(vararg annotations: KClass<*>) = filter {
+fun <T: KoDeclaration> Sequence<T>.withAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.all { annotation ->
         annotation
             .simpleName
@@ -54,7 +54,7 @@ fun Sequence<KoDeclaration>.withAnnotationsOf(vararg annotations: KClass<*>) = f
     }
 }
 
-fun Sequence<KoDeclaration>.withSomeAnnotationsOf(vararg annotations: KClass<*>) = filter {
+fun <T: KoDeclaration> Sequence<T>.withSomeAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.any { annotation ->
         annotation
             .simpleName
@@ -62,7 +62,7 @@ fun Sequence<KoDeclaration>.withSomeAnnotationsOf(vararg annotations: KClass<*>)
     }
 }
 
-fun Sequence<KoDeclaration>.withoutAnnotationsOf(vararg annotations: KClass<*>) = filter {
+fun <T: KoDeclaration> Sequence<T>.withoutAnnotationsOf(vararg annotations: KClass<*>) = filter {
     annotations.none { annotation ->
         annotation
             .simpleName
@@ -74,20 +74,20 @@ inline fun <reified T> Sequence<KoDeclaration>.withAnnotationOf() = filter { it.
 
 inline fun <reified T> Sequence<KoDeclaration>.withoutAnnotationOf() = filterNot { it.hasAnnotation<T>() }
 
-fun Sequence<KoDeclaration>.withModifiers(vararg modifiers: KoModifier) = filter { it.hasModifiers(*modifiers) }
+fun <T: KoDeclaration> Sequence<T>.withModifiers(vararg modifiers: KoModifier) = filter { it.hasModifiers(*modifiers) }
 
-fun Sequence<KoDeclaration>.withSomeModifiers(vararg modifiers: KoModifier) = filter {
+fun <T: KoDeclaration> Sequence<T>.withSomeModifiers(vararg modifiers: KoModifier) = filter {
     modifiers.any { modifier -> it.hasModifiers(modifier) }
 }
 
-fun Sequence<KoDeclaration>.withoutModifiers(vararg modifiers: KoModifier) = filter {
+fun <T: KoDeclaration> Sequence<T>.withoutModifiers(vararg modifiers: KoModifier) = filter {
     modifiers.none { modifier -> it.hasModifiers(modifier) }
 }
 
-fun Sequence<KoDeclaration>.withPackage(vararg packages: String) = filter {
+fun <T: KoDeclaration> Sequence<T>.withPackage(vararg packages: String) = filter {
     packages.any { packagee -> it.resideInPackage(packagee) }
 }
 
-fun Sequence<KoDeclaration>.withoutPackage(vararg packages: String) = filter {
+fun <T: KoDeclaration> Sequence<T>.withoutPackage(vararg packages: String) = filter {
     packages.all { packagee -> it.resideOutsidePackage(packagee) }
 }
