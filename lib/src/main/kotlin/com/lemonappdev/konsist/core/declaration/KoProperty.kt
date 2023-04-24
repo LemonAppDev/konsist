@@ -1,10 +1,11 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import org.jetbrains.kotlin.lexer.KtTokens
-import org.jetbrains.kotlin.psi.KtModifierList
+import com.lemonappdev.konsist.core.const.KoModifier
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.psiUtil.hasActualModifier
+import org.jetbrains.kotlin.psi.psiUtil.hasExpectModifier
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
@@ -31,25 +32,21 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
         type?.let { KoType.getInstance(it) }
     }
 
-    fun hasLateinitModifier() = ktProperty.modifierList?.hasModifier(KtTokens.LATEINIT_KEYWORD) ?: false
+    fun hasLateinitModifier() = modifiers.contains(KoModifier.LATEINIT)
 
-    fun hasOverrideModifier() = ktProperty.modifierList?.hasModifier(KtTokens.OVERRIDE_KEYWORD) ?: false
+    fun hasOverrideModifier() = modifiers.contains(KoModifier.OVERRIDE)
 
-    fun hasAbstractModifier() = ktProperty.modifierList?.hasModifier(KtTokens.ABSTRACT_KEYWORD) ?: false
+    fun hasAbstractModifier() =modifiers.contains(KoModifier.ABSTRACT)
 
-    fun hasOpenModifier() = ktProperty.modifierList?.hasModifier(KtTokens.OPEN_KEYWORD) ?: false
+    fun hasOpenModifier() = modifiers.contains(KoModifier.OPEN)
 
-    fun hasFinalModifier() = ktProperty.modifierList?.hasModifier(KtTokens.FINAL_KEYWORD) ?: false
+    fun hasFinalModifier() = modifiers.contains(KoModifier.FINAL)
 
-    fun hasActualModifier() = ktProperty.modifierList?.hasModifier(KtTokens.ACTUAL_KEYWORD) ?: false
+    fun hasActualModifier() = ktProperty.hasActualModifier()
 
-    fun hasExpectModifier() = ktProperty.modifierList?.hasModifier(KtTokens.EXPECT_KEYWORD) ?: false
+    fun hasExpectModifier() = ktProperty.hasExpectModifier()
 
-    fun hasConstModifier() = ktProperty
-        .children
-        .firstIsInstanceOrNull<KtModifierList>()
-        ?.hasModifier(KtTokens.CONST_KEYWORD)
-        ?: false
+    fun hasConstModifier() = modifiers.contains(KoModifier.CONST)
 
     fun isExtension() = ktProperty.isExtensionDeclaration()
 

@@ -1,15 +1,15 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import org.jetbrains.kotlin.lexer.KtTokens
+import com.lemonappdev.konsist.core.const.KoModifier
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
-import org.jetbrains.kotlin.psi.KtModifierList
 import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
+import org.jetbrains.kotlin.psi.psiUtil.hasActualModifier
+import org.jetbrains.kotlin.psi.psiUtil.hasExpectModifier
 import org.jetbrains.kotlin.psi.psiUtil.isAbstract
-import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 @Suppress("detekt.TooManyFunctions")
 class KoClass private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
@@ -72,23 +72,15 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
 
     fun hasDataModifier() = ktClass.isData()
 
-    fun hasActualModifier() = ktClass.modifierList?.hasModifier(KtTokens.ACTUAL_KEYWORD) ?: false
+    fun hasActualModifier() = ktClass.hasActualModifier()
 
-    fun hasExpectModifier() = ktClass.modifierList?.hasModifier(KtTokens.EXPECT_KEYWORD) ?: false
+    fun hasExpectModifier() = ktClass.hasExpectModifier()
 
     fun hasAbstractModifier() = ktClass.isAbstract()
 
-    fun hasOpenModifier() = ktClass
-        .children
-        .firstIsInstanceOrNull<KtModifierList>()
-        ?.hasModifier(KtTokens.OPEN_KEYWORD)
-        ?: false
+    fun hasOpenModifier() = modifiers.contains(KoModifier.OPEN)
 
-    fun hasFinalModifier() = ktClass
-        .children
-        .firstIsInstanceOrNull<KtModifierList>()
-        ?.hasModifier(KtTokens.FINAL_KEYWORD)
-        ?: false
+    fun hasFinalModifier() = modifiers.contains(KoModifier.FINAL)
 
     fun hasExplicitPrimaryConstructor() = ktClass.hasExplicitPrimaryConstructor()
 

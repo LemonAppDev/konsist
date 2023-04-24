@@ -1,10 +1,11 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.const.KoModifier
-import com.lemonappdev.konsist.core.const.toKtToken
 import com.lemonappdev.konsist.util.PackageHelper
-import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
+import org.jetbrains.kotlin.psi.psiUtil.isPrivate
+import org.jetbrains.kotlin.psi.psiUtil.isProtected
+import org.jetbrains.kotlin.psi.psiUtil.isPublic
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 
 abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterListOwner) :
@@ -39,35 +40,15 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
             ?: emptyList()
     }
 
-    fun hasPublicModifier() = ktTypeParameterListOwner.hasModifier(KtTokens.PUBLIC_KEYWORD)
+    fun hasPublicModifier() = modifiers.contains(KoModifier.PUBLIC)
 
-    fun isPublicOrDefault() = ktTypeParameterListOwner.run {
-        if (hasModifier(KtTokens.PUBLIC_KEYWORD)) {
-            return@run true
-        }
+    fun isPublicOrDefault() = ktTypeParameterListOwner.isPublic
 
-        val hasOtherVisibilityModifier =
-            hasModifier(KtTokens.PRIVATE_KEYWORD) ||
-                hasModifier(KtTokens.PROTECTED_KEYWORD) ||
-                hasModifier(KtTokens.INTERNAL_KEYWORD)
+    fun hasPrivateModifier() = ktTypeParameterListOwner.isPrivate()
 
-        hasOtherVisibilityModifier.not()
-    }
+    fun hasProtectedModifier() = ktTypeParameterListOwner.isProtected()
 
-    fun hasPrivateModifier() = ktTypeParameterListOwner
-        .modifierList
-        ?.hasModifier(KtTokens.PRIVATE_KEYWORD)
-        ?: false
-
-    fun hasProtectedModifier() = ktTypeParameterListOwner
-        .modifierList
-        ?.hasModifier(KtTokens.PROTECTED_KEYWORD)
-        ?: false
-
-    fun hasInternalModifier() = ktTypeParameterListOwner
-        .modifierList
-        ?.hasModifier(KtTokens.INTERNAL_KEYWORD)
-        ?: false
+    fun hasInternalModifier() = modifiers.contains(KoModifier.INTERNAL)
 
     fun isTopLevel() = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
 
@@ -80,12 +61,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
         return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
     }
 
-    fun hasModifiers(vararg koModifiers: KoModifier) = koModifiers.all {
-        ktTypeParameterListOwner
-            .modifierList
-            ?.hasModifier(it.toKtToken())
-            ?: false
-    }
+    fun hasModifiers(vararg koModifiers: KoModifier) = modifiers.containsAll(koModifiers.toList())
 
     fun resideInPackage(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
 

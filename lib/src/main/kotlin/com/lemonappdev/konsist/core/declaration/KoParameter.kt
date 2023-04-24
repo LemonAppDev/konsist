@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import org.jetbrains.kotlin.lexer.KtTokens
+import com.lemonappdev.konsist.core.const.KoModifier
 import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.kotlin.psi.KtConstantExpression
 import org.jetbrains.kotlin.psi.KtParameter
@@ -40,9 +40,9 @@ class KoParameter private constructor(private val ktParameter: KtParameter) : Ko
 
     fun hasVarargModifier() = ktParameter.isVarArg
 
-    fun hasNoInlineModifier() = ktParameter.modifierList?.hasModifier(KtTokens.NOINLINE_KEYWORD) ?: false
+    fun hasNoInlineModifier() = modifiers.contains(KoModifier.NOINLINE)
 
-    fun hasCrossInlineModifier() = ktParameter.modifierList?.hasModifier(KtTokens.CROSSINLINE_KEYWORD) ?: false
+    fun hasCrossInlineModifier() = modifiers.contains(KoModifier.CROSSINLINE)
 
     fun hasDefaultValue(value: String? = null) = when (value) {
         null -> ktParameter.hasDefaultValue()
