@@ -46,17 +46,17 @@ fun Sequence<KoComplexDeclaration>.classes(
 
 fun Sequence<KoComplexDeclaration>.interfaces(
     modifiers: List<KoModifier> = emptyList(),
-    includeNested: Boolean = false
+    includeNested: Boolean = false,
 ) = flatMap { it.interfaces(modifiers, includeNested) }
 
 fun Sequence<KoComplexDeclaration>.objects(
     modifiers: List<KoModifier> = emptyList(),
-    includeNested: Boolean = false
+    includeNested: Boolean = false,
 ) = flatMap { it.objects(modifiers, includeNested) }
 
 fun Sequence<KoComplexDeclaration>.companionObjects(
     modifiers: List<KoModifier> = emptyList(),
-    includeNested: Boolean = false
+    includeNested: Boolean = false,
 ) = flatMap { it.companionObjects(modifiers, includeNested) }
 
 fun Sequence<KoComplexDeclaration>.properties(

@@ -184,7 +184,7 @@ class KoComplexDeclarationSequenceExtTest {
             complexDeclaration1,
             complexDeclaration2,
             complexDeclaration3,
-            complexDeclaration4
+            complexDeclaration4,
         )
 
         // when
