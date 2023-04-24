@@ -41,6 +41,17 @@ class KoDeclarationForTypeAliasTest {
     }
 
     @Test
+    fun `typealias-has-modifier`() {
+        // given
+        val sut = getSnippetFile("typealias-has-modifier")
+            .typeAliases()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
+    }
+
+    @Test
     fun `typealias-has-no-visibility-modifier`() {
         // given
         val sut = getSnippetFile("typealias-has-no-visibility-modifier")

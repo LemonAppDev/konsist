@@ -207,6 +207,17 @@ class KoDeclarationForClassTest {
     }
 
     @Test
+    fun `class-has-modifiers`() {
+        // given
+        val sut = getSnippetFile("class-has-modifiers")
+            .classes()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE, OPEN)
+    }
+
+    @Test
     fun `class-has-protected-modifier`() {
         // given
         val sut = getSnippetFile("class-has-protected-modifier")

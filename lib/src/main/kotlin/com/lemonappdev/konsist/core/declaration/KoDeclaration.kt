@@ -35,7 +35,10 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
             .modifierList
             ?.text
             ?.split(" ")
-            ?.map { KoModifier.valueOf(it) }
+            ?.map {
+                KoModifier
+                    .values()
+                    .first { koModifier -> it == koModifier.type } }
             ?: emptyList()
     }
 

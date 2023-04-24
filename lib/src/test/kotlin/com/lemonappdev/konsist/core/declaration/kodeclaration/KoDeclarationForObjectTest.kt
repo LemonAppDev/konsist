@@ -89,6 +89,17 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
+    fun `object-has-modifiers`() {
+        // given
+        val sut = getSnippetFile("object-has-modifiers")
+            .objects()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE, DATA)
+    }
+
+    @Test
     fun `object-has-no-visibility-modifier`() {
         // given
         val sut = getSnippetFile("object-has-no-visibility-modifier")
