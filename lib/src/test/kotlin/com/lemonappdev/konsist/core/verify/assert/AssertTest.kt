@@ -1,8 +1,10 @@
-package com.lemonappdev.konsist.core.verify
+package com.lemonappdev.konsist.core.verify.assert
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.verify.assert
+import com.lemonappdev.konsist.core.verify.assertNot
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -113,5 +115,5 @@ class AssertTest {
             "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assertNot' method."
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/verify/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/verify/assert/snippet/", fileName)
 }
