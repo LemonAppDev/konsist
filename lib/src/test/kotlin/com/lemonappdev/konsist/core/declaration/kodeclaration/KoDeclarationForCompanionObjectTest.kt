@@ -95,11 +95,11 @@ class KoDeclarationForCompanionObjectTest {
         // then
         sut.run {
             annotations shouldHaveSize 2
-            hasAnnotations(SampleAnnotation1::class) shouldBeEqualTo true
-            hasAnnotations(SampleAnnotation2::class) shouldBeEqualTo true
-            hasAnnotations(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
-            hasAnnotations(NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAnnotations(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
             hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo true
             hasAnnotationOf<SampleAnnotation2>() shouldBeEqualTo true
             hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
@@ -287,7 +287,10 @@ class KoDeclarationForCompanionObjectTest {
             .first()
 
         // then
-        sut.hasModifiers(PRIVATE) shouldBeEqualTo false
+        sut.run {
+            hasModifiers() shouldBeEqualTo true
+            hasModifiers(PRIVATE) shouldBeEqualTo false
+        }
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forcompanionobject/", fileName)

@@ -23,7 +23,7 @@ abstract class KoComplexDeclaration(
     fun representsType(name: String) =
         name == this.name || name == fullyQualifiedName
 
-    inline fun <reified T>representsType() = T::class.qualifiedName == fullyQualifiedName
+    inline fun <reified T>representsTypeOf() = T::class.qualifiedName == fullyQualifiedName
 
     override fun declarations(
         modifiers: List<KoModifier>,

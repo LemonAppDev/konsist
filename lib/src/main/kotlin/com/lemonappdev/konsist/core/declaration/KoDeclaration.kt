@@ -63,7 +63,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
             }
     }
 
-    fun hasAnnotations(vararg names: KClass<*>) = names.all {
+    fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {
         annotations
             .any { annotation -> annotation.fullyQualifiedName == it.qualifiedName }
     }
@@ -74,7 +74,10 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
         return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
     }
 
-    fun hasModifiers(vararg koModifiers: KoModifier) = modifiers.containsAll(koModifiers.toList())
+    fun hasModifiers(vararg koModifiers: KoModifier) = when {
+        koModifiers.isEmpty() -> modifiers.isNotEmpty()
+        else -> modifiers.containsAll(koModifiers.toList())
+    }
 
     fun resideInPackage(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
 

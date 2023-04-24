@@ -42,13 +42,13 @@ fun <T : KoDeclaration> Sequence<T>.withSomeAnnotations(vararg annotations: Stri
 
 fun <T : KoDeclaration> Sequence<T>.withoutAnnotations(vararg annotations: String) = filter { !it.hasAnnotations(*annotations) }
 
-fun <T : KoDeclaration> Sequence<T>.withAnnotationsOf(vararg annotations: KClass<*>) = filter { it.hasAnnotations(*annotations) }
+fun <T : KoDeclaration> Sequence<T>.withAnnotationsOf(vararg annotations: KClass<*>) = filter { it.hasAnnotationsOf(*annotations) }
 
 fun <T : KoDeclaration> Sequence<T>.withSomeAnnotationsOf(vararg annotations: KClass<*>) = filter {
-    annotations.any { annotation -> it.hasAnnotations(annotation) }
+    annotations.any { annotation -> it.hasAnnotationsOf(annotation) }
 }
 
-fun <T : KoDeclaration> Sequence<T>.withoutAnnotationsOf(vararg annotations: KClass<*>) = filter { !it.hasAnnotations(*annotations) }
+fun <T : KoDeclaration> Sequence<T>.withoutAnnotationsOf(vararg annotations: KClass<*>) = filter { !it.hasAnnotationsOf(*annotations) }
 
 inline fun <reified T> Sequence<KoDeclaration>.withAnnotationOf() = filter { it.hasAnnotationOf<T>() }
 

@@ -248,8 +248,8 @@ class KoComplexDeclarationForInterfaceTest {
             representsType("SampleType") shouldBeEqualTo false
             representsType("com.lemonappdev.konsist.testdata.SampleInterface") shouldBeEqualTo true
             representsType("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo false
-            representsType<SampleInterface>() shouldBeEqualTo true
-            representsType<SampleType>() shouldBeEqualTo false
+            representsTypeOf<SampleInterface>() shouldBeEqualTo true
+            representsTypeOf<SampleType>() shouldBeEqualTo false
         }
     }
 

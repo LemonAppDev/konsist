@@ -245,8 +245,8 @@ class KoComplexDeclarationForObjectTest {
             representsType("SampleType") shouldBeEqualTo false
             representsType("com.lemonappdev.konsist.testdata.SampleObject") shouldBeEqualTo true
             representsType("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo false
-            representsType<SampleObject>() shouldBeEqualTo true
-            representsType<SampleType>() shouldBeEqualTo false
+            representsTypeOf<SampleObject>() shouldBeEqualTo true
+            representsTypeOf<SampleType>() shouldBeEqualTo false
         }
     }
 

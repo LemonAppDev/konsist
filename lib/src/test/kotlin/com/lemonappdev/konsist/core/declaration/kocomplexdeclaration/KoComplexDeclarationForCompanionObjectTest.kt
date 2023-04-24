@@ -284,8 +284,8 @@ class KoComplexDeclarationForCompanionObjectTest {
             representsType("SampleType") shouldBeEqualTo false
             representsType("com.lemonappdev.konsist.testdata.SampleTopLevelInterface.SampleCompanionObject") shouldBeEqualTo true
             representsType("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo false
-            representsType<SampleCompanionObject>() shouldBeEqualTo true
-            representsType<SampleType>() shouldBeEqualTo false
+            representsTypeOf<SampleCompanionObject>() shouldBeEqualTo true
+            representsTypeOf<SampleType>() shouldBeEqualTo false
         }
     }
 
