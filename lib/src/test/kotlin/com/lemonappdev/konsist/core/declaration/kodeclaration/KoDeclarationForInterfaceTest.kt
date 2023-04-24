@@ -85,6 +85,17 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
+    fun `interface-has-modifiers`() {
+        // given
+        val sut = getSnippetFile("interface-has-modifiers")
+            .interfaces()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PUBLIC, ABSTRACT)
+    }
+
+    @Test
     fun `interface-has-no-visibility-modifier`() {
         // given
         val sut = getSnippetFile("interface-has-no-visibility-modifier")

@@ -1,11 +1,11 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalPropertyProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
-import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
@@ -49,29 +49,29 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
         type?.let { KoType.getInstance(type) }
     }
 
-    fun hasOperatorModifier() = ktFunction.modifierList?.hasModifier(KtTokens.OPERATOR_KEYWORD) ?: false
+    fun hasOperatorModifier() = hasModifiers(KoModifier.OPERATOR)
 
-    fun hasInlineModifier() = ktFunction.modifierList?.hasModifier(KtTokens.INLINE_KEYWORD) ?: false
+    fun hasInlineModifier() = hasModifiers(KoModifier.INLINE)
 
-    fun hasTailrecModifier() = ktFunction.modifierList?.hasModifier(KtTokens.TAILREC_KEYWORD) ?: false
+    fun hasTailrecModifier() = hasModifiers(KoModifier.TAILREC)
 
-    fun hasInfixModifier() = ktFunction.modifierList?.hasModifier(KtTokens.INFIX_KEYWORD) ?: false
+    fun hasInfixModifier() = hasModifiers(KoModifier.INFIX)
 
-    fun hasExternalModifier() = ktFunction.modifierList?.hasModifier(KtTokens.EXTERNAL_KEYWORD) ?: false
+    fun hasExternalModifier() = hasModifiers(KoModifier.EXTERNAL)
 
-    fun hasSuspendModifier() = ktFunction.modifierList?.hasModifier(KtTokens.SUSPEND_KEYWORD) ?: false
+    fun hasSuspendModifier() = hasModifiers(KoModifier.SUSPEND)
 
-    fun hasOpenModifier() = ktFunction.modifierList?.hasModifier(KtTokens.OPEN_KEYWORD) ?: false
+    fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
 
-    fun hasOverrideModifier() = ktFunction.modifierList?.hasModifier(KtTokens.OVERRIDE_KEYWORD) ?: false
+    fun hasOverrideModifier() = hasModifiers(KoModifier.OVERRIDE)
 
-    fun hasFinalModifier() = ktFunction.modifierList?.hasModifier(KtTokens.FINAL_KEYWORD) ?: false
+    fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
 
-    fun hasAbstractModifier() = ktFunction.modifierList?.hasModifier(KtTokens.ABSTRACT_KEYWORD) ?: false
+    fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
 
-    fun hasActualModifier() = ktFunction.modifierList?.hasModifier(KtTokens.ACTUAL_KEYWORD) ?: false
+    fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
-    fun hasExpectModifier() = ktFunction.modifierList?.hasModifier(KtTokens.EXPECT_KEYWORD) ?: false
+    fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
 
     fun isExtension() = ktFunction.isExtensionDeclaration()
 

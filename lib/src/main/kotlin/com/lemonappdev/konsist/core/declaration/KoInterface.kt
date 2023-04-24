@@ -1,14 +1,13 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import org.jetbrains.kotlin.lexer.KtTokens
+import com.lemonappdev.konsist.core.const.KoModifier
 import org.jetbrains.kotlin.psi.KtClass
 
 class KoInterface private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
+    fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
-    fun hasActualModifier() = ktClass.modifierList?.hasModifier(KtTokens.ACTUAL_KEYWORD) ?: false
-
-    fun hasExpectModifier() = ktClass.modifierList?.hasModifier(KtTokens.EXPECT_KEYWORD) ?: false
+    fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
 
     companion object {
         private val cache = KoDeclarationCache<KoInterface>()

@@ -1,8 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import org.jetbrains.kotlin.lexer.KtTokens
-import org.jetbrains.kotlin.psi.KtModifierList
+import com.lemonappdev.konsist.core.const.KoModifier
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
@@ -31,25 +30,21 @@ class KoProperty private constructor(private val ktProperty: KtProperty) : KoDec
         type?.let { KoType.getInstance(it) }
     }
 
-    fun hasLateinitModifier() = ktProperty.modifierList?.hasModifier(KtTokens.LATEINIT_KEYWORD) ?: false
+    fun hasLateinitModifier() = hasModifiers(KoModifier.LATEINIT)
 
-    fun hasOverrideModifier() = ktProperty.modifierList?.hasModifier(KtTokens.OVERRIDE_KEYWORD) ?: false
+    fun hasOverrideModifier() = hasModifiers(KoModifier.OVERRIDE)
 
-    fun hasAbstractModifier() = ktProperty.modifierList?.hasModifier(KtTokens.ABSTRACT_KEYWORD) ?: false
+    fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
 
-    fun hasOpenModifier() = ktProperty.modifierList?.hasModifier(KtTokens.OPEN_KEYWORD) ?: false
+    fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
 
-    fun hasFinalModifier() = ktProperty.modifierList?.hasModifier(KtTokens.FINAL_KEYWORD) ?: false
+    fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
 
-    fun hasActualModifier() = ktProperty.modifierList?.hasModifier(KtTokens.ACTUAL_KEYWORD) ?: false
+    fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
-    fun hasExpectModifier() = ktProperty.modifierList?.hasModifier(KtTokens.EXPECT_KEYWORD) ?: false
+    fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
 
-    fun hasConstModifier() = ktProperty
-        .children
-        .firstIsInstanceOrNull<KtModifierList>()
-        ?.hasModifier(KtTokens.CONST_KEYWORD)
-        ?: false
+    fun hasConstModifier() = hasModifiers(KoModifier.CONST)
 
     fun isExtension() = ktProperty.isExtensionDeclaration()
 

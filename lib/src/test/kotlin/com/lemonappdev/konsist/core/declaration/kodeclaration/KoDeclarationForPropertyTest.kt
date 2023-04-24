@@ -207,6 +207,17 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
+    fun `property-has-modifiers`() {
+        // given
+        val sut = getSnippetFile("property-has-modifiers")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
+    }
+
+    @Test
     fun `property-has-protected-modifier`() {
         // given
         val sut = getSnippetFile("property-has-protected-modifier")

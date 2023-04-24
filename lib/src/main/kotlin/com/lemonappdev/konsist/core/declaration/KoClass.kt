@@ -1,15 +1,12 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import org.jetbrains.kotlin.lexer.KtTokens
+import com.lemonappdev.konsist.core.const.KoModifier
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
-import org.jetbrains.kotlin.psi.KtModifierList
 import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
-import org.jetbrains.kotlin.psi.psiUtil.isAbstract
-import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 @Suppress("detekt.TooManyFunctions")
 class KoClass private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
@@ -60,35 +57,27 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
 
     val allConstructors = listOfNotNull(primaryConstructor) + secondaryConstructors
 
-    fun hasEnumModifier() = ktClass.isEnum()
+    fun hasEnumModifier() = hasModifiers(KoModifier.ENUM)
 
-    fun hasSealedModifier() = ktClass.isSealed()
+    fun hasSealedModifier() = hasModifiers(KoModifier.SEALED)
 
-    fun hasInnerModifier() = ktClass.isInner()
+    fun hasInnerModifier() = hasModifiers(KoModifier.INNER)
 
-    fun hasValueModifier() = ktClass.isValue()
+    fun hasValueModifier() = hasModifiers(KoModifier.VALUE)
 
-    fun hasAnnotationModifier() = ktClass.isAnnotation()
+    fun hasAnnotationModifier() = hasModifiers(KoModifier.ANNOTATION)
 
-    fun hasDataModifier() = ktClass.isData()
+    fun hasDataModifier() = hasModifiers(KoModifier.DATA)
 
-    fun hasActualModifier() = ktClass.modifierList?.hasModifier(KtTokens.ACTUAL_KEYWORD) ?: false
+    fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
-    fun hasExpectModifier() = ktClass.modifierList?.hasModifier(KtTokens.EXPECT_KEYWORD) ?: false
+    fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
 
-    fun hasAbstractModifier() = ktClass.isAbstract()
+    fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
 
-    fun hasOpenModifier() = ktClass
-        .children
-        .firstIsInstanceOrNull<KtModifierList>()
-        ?.hasModifier(KtTokens.OPEN_KEYWORD)
-        ?: false
+    fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
 
-    fun hasFinalModifier() = ktClass
-        .children
-        .firstIsInstanceOrNull<KtModifierList>()
-        ?.hasModifier(KtTokens.FINAL_KEYWORD)
-        ?: false
+    fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
 
     fun hasExplicitPrimaryConstructor() = ktClass.hasExplicitPrimaryConstructor()
 

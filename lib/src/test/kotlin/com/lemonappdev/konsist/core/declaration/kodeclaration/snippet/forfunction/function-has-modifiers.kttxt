@@ -1,0 +1,4 @@
+class SampleClass {
+    protected open suspend inline operator fun invoke() {
+    }
+}
