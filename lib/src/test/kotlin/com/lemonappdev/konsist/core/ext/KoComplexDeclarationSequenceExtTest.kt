@@ -169,16 +169,16 @@ class KoComplexDeclarationSequenceExtTest {
         val property1: KoProperty = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
-            every { declarations(modifiers, includeNested = true, includeLocal = false) } returns listOf(class1, function1)
+            every { declarations(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(class1, function1)
         }
         val complexDeclaration2: KoComplexDeclaration = mockk {
-            every { declarations(modifiers, includeNested = true, includeLocal = false) } returns listOf(class2, interface1)
+            every { declarations(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(class2, interface1)
         }
         val complexDeclaration3: KoComplexDeclaration = mockk {
-            every { declarations(modifiers, includeNested = true, includeLocal = false) } returns listOf(property1)
+            every { declarations(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(property1)
         }
         val complexDeclaration4: KoComplexDeclaration = mockk {
-            every { declarations(modifiers, includeNested = true, includeLocal = false) } returns emptyList()
+            every { declarations(modifiers, includeNested = true, includeLocal = false) } returns emptySequence()
         }
         val complexDeclarations = sequenceOf(
             complexDeclaration1,
@@ -202,13 +202,13 @@ class KoComplexDeclarationSequenceExtTest {
         val class3: KoClass = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
-            every { classes(modifiers, includeNested = true, includeLocal = false) } returns listOf(class1, class2)
+            every { classes(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(class1, class2)
         }
         val complexDeclaration2: KoComplexDeclaration = mockk {
-            every { classes(modifiers, includeNested = true, includeLocal = false) } returns listOf(class3)
+            every { classes(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(class3)
         }
         val complexDeclaration3: KoComplexDeclaration = mockk {
-            every { classes(modifiers, includeNested = true, includeLocal = false) } returns emptyList()
+            every { classes(modifiers, includeNested = true, includeLocal = false) } returns emptySequence()
         }
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
 
@@ -227,13 +227,13 @@ class KoComplexDeclarationSequenceExtTest {
         val interface3: KoInterface = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
-            every { interfaces(modifiers, includeNested = true) } returns listOf(interface1, interface2)
+            every { interfaces(modifiers, includeNested = true) } returns sequenceOf(interface1, interface2)
         }
         val complexDeclaration2: KoComplexDeclaration = mockk {
-            every { interfaces(modifiers, includeNested = true) } returns listOf(interface3)
+            every { interfaces(modifiers, includeNested = true) } returns sequenceOf(interface3)
         }
         val complexDeclaration3: KoComplexDeclaration = mockk {
-            every { interfaces(modifiers, includeNested = true) } returns emptyList()
+            every { interfaces(modifiers, includeNested = true) } returns emptySequence()
         }
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
 
@@ -252,13 +252,13 @@ class KoComplexDeclarationSequenceExtTest {
         val object3: KoObject = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
-            every { objects(modifiers, includeNested = true) } returns listOf(object1, object2)
+            every { objects(modifiers, includeNested = true) } returns sequenceOf(object1, object2)
         }
         val complexDeclaration2: KoComplexDeclaration = mockk {
-            every { objects(modifiers, includeNested = true) } returns listOf(object3)
+            every { objects(modifiers, includeNested = true) } returns sequenceOf(object3)
         }
         val complexDeclaration3: KoComplexDeclaration = mockk {
-            every { objects(modifiers, includeNested = true) } returns emptyList()
+            every { objects(modifiers, includeNested = true) } returns emptySequence()
         }
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
 
@@ -277,13 +277,13 @@ class KoComplexDeclarationSequenceExtTest {
         val companionObject3: KoCompanionObject = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
-            every { companionObjects(modifiers, includeNested = true) } returns listOf(companionObject1, companionObject2)
+            every { companionObjects(modifiers, includeNested = true) } returns sequenceOf(companionObject1, companionObject2)
         }
         val complexDeclaration2: KoComplexDeclaration = mockk {
-            every { companionObjects(modifiers, includeNested = true) } returns listOf(companionObject3)
+            every { companionObjects(modifiers, includeNested = true) } returns sequenceOf(companionObject3)
         }
         val complexDeclaration3: KoComplexDeclaration = mockk {
-            every { companionObjects(modifiers, includeNested = true) } returns emptyList()
+            every { companionObjects(modifiers, includeNested = true) } returns emptySequence()
         }
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
 
@@ -302,13 +302,13 @@ class KoComplexDeclarationSequenceExtTest {
         val property3: KoProperty = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
-            every { properties(modifiers, includeNested = true, includeLocal = false) } returns listOf(property1, property2)
+            every { properties(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(property1, property2)
         }
         val complexDeclaration2: KoComplexDeclaration = mockk {
-            every { properties(modifiers, includeNested = true, includeLocal = false) } returns listOf(property3)
+            every { properties(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(property3)
         }
         val complexDeclaration3: KoComplexDeclaration = mockk {
-            every { properties(modifiers, includeNested = true, includeLocal = false) } returns emptyList()
+            every { properties(modifiers, includeNested = true, includeLocal = false) } returns emptySequence()
         }
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
 
@@ -327,13 +327,13 @@ class KoComplexDeclarationSequenceExtTest {
         val function3: KoFunction = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
-            every { functions(modifiers, includeNested = true, includeLocal = false) } returns listOf(function1, function2)
+            every { functions(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(function1, function2)
         }
         val complexDeclaration2: KoComplexDeclaration = mockk {
-            every { functions(modifiers, includeNested = true, includeLocal = false) } returns listOf(function3)
+            every { functions(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(function3)
         }
         val complexDeclaration3: KoComplexDeclaration = mockk {
-            every { functions(modifiers, includeNested = true, includeLocal = false) } returns emptyList()
+            every { functions(modifiers, includeNested = true, includeLocal = false) } returns emptySequence()
         }
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
 

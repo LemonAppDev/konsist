@@ -23,7 +23,7 @@ object KoDeclarationProviderUtil {
         modifiers: List<KoModifier>,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): List<T> {
+    ): Sequence<T> {
         val declarations = ktDeclarationContainer
             .declarations
             .mapNotNull {
@@ -43,16 +43,17 @@ object KoDeclarationProviderUtil {
                     throw KoInternalException("Unknown declaration type: ${it.getTextWithLocation()}")
                 }
             }
+            .asSequence()
 
         return getKoDeclarations(declarations, modifiers, includeNested, includeLocal)
     }
 
     inline fun <reified T : KoDeclaration> getKoDeclarations(
-        declarations: List<KoDeclaration>,
+        declarations: Sequence<KoDeclaration>,
         modifiers: List<KoModifier>,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): List<T> {
+    ): Sequence<T> {
         var result = if (includeNested) {
             declarations.flatMap {
                 when (it) {
@@ -92,7 +93,7 @@ object KoDeclarationProviderUtil {
         return result.filterIsInstance<T>()
     }
 
-    fun localDeclarations(koFunctions: List<KoFunction>): List<KoDeclaration> {
+    fun localDeclarations(koFunctions: Sequence<KoFunction>): Sequence<KoDeclaration> {
         val localDeclarations = mutableListOf<KoDeclaration>()
         val nestedDeclarations = mutableListOf<KoDeclaration>()
 
@@ -106,6 +107,6 @@ object KoDeclarationProviderUtil {
             localDeclarations += koFunction.localDeclarations() + nestedDeclarations + localDeclarations(koFunction.localFunctions())
         }
 
-        return localDeclarations
+        return localDeclarations.asSequence()
     }
 }
