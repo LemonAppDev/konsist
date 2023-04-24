@@ -58,8 +58,8 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
     fun hasAnnotations(vararg names: String) = names.all {
         annotations
             .any { annotation ->
-                annotation.fullyQualifiedName.substringAfterLast(".") == it
-                        || annotation.fullyQualifiedName == it
+                annotation.fullyQualifiedName.substringAfterLast(".") == it ||
+                    annotation.fullyQualifiedName == it
             }
     }
 

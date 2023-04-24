@@ -71,8 +71,8 @@ class KoFile private constructor(private val ktFile: KtFile) :
     fun hasAnnotations(vararg names: String) = names.all {
         annotations
             .any { annotation ->
-                annotation.fullyQualifiedName.substringAfterLast(".") == it
-                        || annotation.fullyQualifiedName == it
+                annotation.fullyQualifiedName.substringAfterLast(".") == it ||
+                    annotation.fullyQualifiedName == it
             }
     }
 
