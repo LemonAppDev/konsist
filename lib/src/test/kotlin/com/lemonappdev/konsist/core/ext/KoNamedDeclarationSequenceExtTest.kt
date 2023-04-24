@@ -210,4 +210,56 @@ class KoNamedDeclarationSequenceExtTest {
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration3)
     }
+
+    @Test
+    fun `withNameMatching() returns namedDeclaration1 and namedDeclaration2 which name contains given one of texts`() {
+        // given
+        val text1 = Regex("[1-9]")
+        val text2 = Regex("[a-z]")
+        val namedDeclaration1: KoNamedDeclaration = mockk {
+            every { hasNameMatching(text1) } returns true
+            every { hasNameMatching(text2) } returns true
+        }
+        val namedDeclaration2: KoNamedDeclaration = mockk {
+            every { hasNameMatching(text1) } returns true
+            every { hasNameMatching(text2) } returns false
+        }
+        val namedDeclaration3: KoNamedDeclaration = mockk {
+            every { hasNameMatching(text1) } returns false
+            every { hasNameMatching(text2) } returns false
+        }
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
+
+        // when
+        val sut = namedDeclarations.withNameMatching(text1, text2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(namedDeclaration1, namedDeclaration2)
+    }
+
+    @Test
+    fun `withoutNameMatching() returns namedDeclaration2 which name not contains given texts`() {
+        // given
+        val text1 = Regex("[1-9]")
+        val text2 = Regex("[a-z]")
+        val namedDeclaration1: KoNamedDeclaration = mockk {
+            every { hasNameMatching(text1) } returns true
+            every { hasNameMatching(text2) } returns true
+        }
+        val namedDeclaration2: KoNamedDeclaration = mockk {
+            every { hasNameMatching(text1) } returns true
+            every { hasNameMatching(text2) } returns false
+        }
+        val namedDeclaration3: KoNamedDeclaration = mockk {
+            every { hasNameMatching(text1) } returns false
+            every { hasNameMatching(text2) } returns false
+        }
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
+
+        // when
+        val sut = namedDeclarations.withoutNameMatching(text1, text2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(namedDeclaration3)
+    }
 }
