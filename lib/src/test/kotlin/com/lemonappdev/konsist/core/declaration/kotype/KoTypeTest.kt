@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kotype
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -18,12 +19,12 @@ class KoTypeTest {
             ?.type
 
         // then
-        sut?.run {
-            sourceType shouldBeEqualTo "SampleType"
-            importAliasName shouldBeEqualTo "ImportAlias"
-            name shouldBeEqualTo "ImportAlias"
-            isImportAlias() shouldBeEqualTo true
-            fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        assertSoftly(sut) {
+            it?.sourceType shouldBeEqualTo "SampleType"
+            it?.importAliasName shouldBeEqualTo "ImportAlias"
+            it?.name shouldBeEqualTo "ImportAlias"
+            it?.isImportAlias() shouldBeEqualTo true
+            it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
 
@@ -39,12 +40,12 @@ class KoTypeTest {
             ?.type
 
         // then
-        sut?.run {
-            sourceType shouldBeEqualTo "SampleType"
-            importAliasName shouldBeEqualTo ""
-            name shouldBeEqualTo "SampleType"
-            isImportAlias() shouldBeEqualTo false
-            fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        assertSoftly(sut) {
+            it?.sourceType shouldBeEqualTo "SampleType"
+            it?.importAliasName shouldBeEqualTo ""
+            it?.name shouldBeEqualTo "SampleType"
+            it?.isImportAlias() shouldBeEqualTo false
+            it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
 

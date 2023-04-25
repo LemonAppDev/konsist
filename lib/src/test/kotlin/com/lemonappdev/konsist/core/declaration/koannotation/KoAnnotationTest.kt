@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration.koannotation
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -56,7 +57,7 @@ class KoAnnotationTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             representsType("SampleAnnotation") shouldBeEqualTo true
             representsType("NonExistingAnnotation") shouldBeEqualTo false
             representsType("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true

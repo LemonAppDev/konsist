@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koscope
 
 import com.lemonappdev.konsist.core.declaration.KoScope
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -18,14 +19,15 @@ class KoScopeTest {
         val sut = KoScope.fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscope/KoScopeTest.kt")
 
         // then
-        sut
-            .files()
-            .toList()
-            .run {
-                size shouldBeEqualTo 1
-                first().name shouldBeEqualTo "KoScopeTest.kt"
-                first().filePath shouldBeEqualTo "${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeTest.kt"
-            }
+        assertSoftly(
+            sut
+                .files()
+                .toList(),
+        ) {
+            size shouldBeEqualTo 1
+            first().name shouldBeEqualTo "KoScopeTest.kt"
+            first().filePath shouldBeEqualTo "${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeTest.kt"
+        }
     }
 
     @Test
@@ -34,14 +36,15 @@ class KoScopeTest {
         val sut = KoScope.fromProjectFiles()
 
         // then
-        sut
-            .files()
-            .toList()
-            .run {
-                isNotEmpty() shouldBeEqualTo true
-                none { it.filePath.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
-                all { it.filePath.startsWith(konsistModulePath) } shouldBeEqualTo false
-            }
+        assertSoftly(
+            sut
+                .files()
+                .toList(),
+        ) {
+            isNotEmpty() shouldBeEqualTo true
+            none { it.filePath.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
+            all { it.filePath.startsWith(konsistModulePath) } shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -136,14 +139,15 @@ class KoScopeTest {
         val sut = KoScope.fromProjectFiles(module = "lib")
 
         // then
-        sut
-            .files()
-            .toList()
-            .run {
-                isNotEmpty() shouldBeEqualTo true
-                none { it.filePath.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
-                all { it.filePath.startsWith(projectPath) } shouldBeEqualTo true
-            }
+        assertSoftly(
+            sut
+                .files()
+                .toList(),
+        ) {
+            isNotEmpty() shouldBeEqualTo true
+            none { it.filePath.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
+            all { it.filePath.startsWith(projectPath) } shouldBeEqualTo true
+        }
     }
 
     @Test

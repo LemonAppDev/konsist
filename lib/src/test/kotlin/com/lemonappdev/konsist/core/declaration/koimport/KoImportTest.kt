@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koimport
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -14,7 +15,7 @@ class KoImportTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
             alias shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
         }
@@ -26,13 +27,11 @@ class KoImportTest {
         val sut = getSnippetFile("import-name-has-import-alias").imports()
 
         // then
-        sut
-            .toList()
-            .run {
-                get(0).alias shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
-                get(1).alias shouldBeEqualTo "ImportAlias"
-                get(1).name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
-            }
+        assertSoftly(sut.toList()) {
+            get(0).alias shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
+            get(1).alias shouldBeEqualTo "ImportAlias"
+            get(1).name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        }
     }
 
     private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koimport/snippet/", fileName)

@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koparametrizeddeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -13,7 +14,7 @@ class ParametrizedDeclarationForPrimaryConstructorTest {
             .firstNotNullOf { it.primaryConstructor }
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             parameters shouldBeEqualTo emptyList()
             hasParameterNamed() shouldBeEqualTo false
         }
@@ -27,12 +28,10 @@ class ParametrizedDeclarationForPrimaryConstructorTest {
             .firstNotNullOf { it.primaryConstructor }
 
         // then
-        sut
-            .parameters
-            .run {
-                size shouldBeEqualTo 1
-                first().name shouldBeEqualTo "sampleParameter"
-            }
+        assertSoftly(sut.parameters) {
+            size shouldBeEqualTo 1
+            first().name shouldBeEqualTo "sampleParameter"
+        }
     }
 
     @Test
@@ -43,7 +42,7 @@ class ParametrizedDeclarationForPrimaryConstructorTest {
             .firstNotNullOf { it.primaryConstructor }
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasParameterNamed() shouldBeEqualTo true
             hasParameterNamed("sampleParameter") shouldBeEqualTo true
             hasParameterNamed("otherParameter") shouldBeEqualTo false

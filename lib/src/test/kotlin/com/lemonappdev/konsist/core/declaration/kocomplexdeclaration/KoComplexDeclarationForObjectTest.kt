@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.testdata.SampleObject
 import com.lemonappdev.konsist.testdata.SampleType
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -250,7 +251,7 @@ class KoComplexDeclarationForObjectTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             representsType("SampleObject") shouldBeEqualTo true
             representsType("SampleType") shouldBeEqualTo false
             representsType("com.lemonappdev.konsist.testdata.SampleObject") shouldBeEqualTo true

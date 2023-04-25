@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kofunction
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -145,7 +146,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasOperatorModifier() shouldBeEqualTo false
             hasInlineModifier() shouldBeEqualTo false
             hasTailrecModifier() shouldBeEqualTo false
@@ -191,7 +192,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasReturnType() shouldBeEqualTo true
             returnType?.sourceType shouldBeEqualTo "SampleType"
             returnType?.importAliasName shouldBeEqualTo ""
@@ -209,7 +210,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasReturnType() shouldBeEqualTo true
             returnType?.sourceType shouldBeEqualTo "SampleType"
             returnType?.importAliasName shouldBeEqualTo "ImportAlias"
@@ -226,7 +227,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasReturnType() shouldBeEqualTo false
             returnType?.sourceType shouldBeEqualTo null
             returnType?.importAliasName shouldBeEqualTo null
@@ -243,7 +244,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             containsLocalProperty("sampleLocalProperty") shouldBeEqualTo true
             localProperties()
                 .toList()
@@ -260,7 +261,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             containsLocalFunction("sampleLocalFunction") shouldBeEqualTo true
             localFunctions()
                 .toList()
@@ -277,7 +278,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             containsLocalClass("SampleClass") shouldBeEqualTo true
             localClasses()
                 .toList()
