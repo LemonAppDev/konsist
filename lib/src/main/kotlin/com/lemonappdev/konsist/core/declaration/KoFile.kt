@@ -68,12 +68,13 @@ class KoFile private constructor(private val ktFile: KtFile) :
     ): List<KoDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
-    fun hasAnnotations(vararg names: String) = names.all {
-        annotations
-            .any { annotation ->
-                annotation.fullyQualifiedName.substringAfterLast(".") == it ||
-                    annotation.fullyQualifiedName == it
-            }
+    fun hasAnnotations(vararg names: String) = when {
+        names.isEmpty() -> annotations.isNotEmpty()
+        else -> names.all { hasAnnotationNameOrAnnotationFullyQualifyName(it) }
+    }
+
+    private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String) = annotations.any {
+        it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name
     }
 
     fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {
