@@ -121,8 +121,7 @@ jobs:
           name: lib.jar Artifact
           path: lib/build/libs/lib.jar
   publish:
-    name: Publish
-    description: Publish Konsist to local Maven repository
+    name: Publish (Local)
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
