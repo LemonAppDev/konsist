@@ -1,5 +1,5 @@
 [versions]
-kotlinVersion = "1.8.20"
+kotlinVersion = "1.8.21"
 springBootVersion = "3.0.5"
 jacksonModuleKotlin = "2.14.2"
 
