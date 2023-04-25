@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.const.KoModifier.PUBLIC
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
@@ -54,7 +55,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             annotations shouldHaveSize 1
             hasAnnotations("SampleAnnotation") shouldBeEqualTo true
             hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
@@ -71,7 +72,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             annotations shouldHaveSize 2
             hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
             hasAnnotations("SampleAnnotation2") shouldBeEqualTo true
@@ -92,7 +93,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             annotations shouldHaveSize 2
             hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
             hasAnnotationsOf(SampleAnnotation2::class) shouldBeEqualTo true
@@ -113,7 +114,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo true
             hasInternalModifier() shouldBeEqualTo false
             hasInternalModifier() shouldBeEqualTo false
@@ -130,7 +131,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo true
             hasPublicModifier() shouldBeEqualTo true
             hasPrivateModifier() shouldBeEqualTo false
@@ -147,7 +148,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo true
@@ -164,7 +165,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo false
@@ -181,7 +182,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo false
@@ -253,7 +254,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasModifiers(PUBLIC) shouldBeEqualTo true
             hasModifiers(PRIVATE) shouldBeEqualTo false
         }
@@ -267,7 +268,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasModifiers(PRIVATE) shouldBeEqualTo true
             hasModifiers(OPEN) shouldBeEqualTo true
             hasModifiers(PROTECTED) shouldBeEqualTo false
@@ -286,7 +287,7 @@ class KoDeclarationForClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasModifiers() shouldBeEqualTo false
             hasModifiers(PRIVATE) shouldBeEqualTo false
         }

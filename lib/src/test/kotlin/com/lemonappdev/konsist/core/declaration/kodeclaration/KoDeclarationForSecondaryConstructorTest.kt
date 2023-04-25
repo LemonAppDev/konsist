@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.core.const.KoModifier.PRIVATE
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -31,7 +32,7 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo true
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo false
@@ -50,7 +51,7 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo true
             hasPublicModifier() shouldBeEqualTo true
             hasPrivateModifier() shouldBeEqualTo false
@@ -69,7 +70,7 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo true
@@ -88,7 +89,7 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo false
@@ -107,7 +108,7 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo false
@@ -139,7 +140,7 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation")
             hasAnnotations("SampleAnnotation") shouldBeEqualTo true
             hasAnnotations("SampleAnnotation1") shouldBeEqualTo false
@@ -160,7 +161,7 @@ class KoDeclarationForSecondaryConstructorTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             annotations.isEmpty() shouldBeEqualTo true
             hasAnnotations("SampleAnnotation") shouldBeEqualTo false
             hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false

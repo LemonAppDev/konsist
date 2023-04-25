@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kotypealias
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -16,7 +17,7 @@ class KoTypeAliasTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             name shouldBeEqualTo "SampleTypeAlias"
             type.sourceType shouldBeEqualTo "() -> Int"
         }

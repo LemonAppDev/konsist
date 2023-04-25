@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.core.const.KoModifier.PUBLIC
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
@@ -53,7 +54,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasAnnotations("SampleAnnotation") shouldBeEqualTo true
             hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
             hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
@@ -69,7 +70,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
             hasAnnotations("SampleAnnotation2") shouldBeEqualTo true
             hasAnnotations("SampleAnnotation1", "SampleAnnotation1") shouldBeEqualTo true
@@ -89,7 +90,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             annotations shouldHaveSize 2
             hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
             hasAnnotationsOf(SampleAnnotation2::class) shouldBeEqualTo true
@@ -121,7 +122,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo true
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo false
@@ -138,7 +139,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo true
             hasPublicModifier() shouldBeEqualTo true
             hasPrivateModifier() shouldBeEqualTo false
@@ -155,7 +156,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo true
@@ -172,7 +173,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo false
@@ -189,7 +190,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo false
@@ -250,7 +251,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasModifiers(PUBLIC) shouldBeEqualTo true
             hasModifiers(PRIVATE) shouldBeEqualTo false
         }
@@ -264,7 +265,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasModifiers(ABSTRACT) shouldBeEqualTo true
             hasModifiers(PUBLIC) shouldBeEqualTo true
             hasModifiers(PRIVATE) shouldBeEqualTo false
@@ -284,7 +285,7 @@ class KoDeclarationForInterfaceTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasModifiers() shouldBeEqualTo false
             hasModifiers(PRIVATE) shouldBeEqualTo false
         }

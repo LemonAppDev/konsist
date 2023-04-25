@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koproperty
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -13,7 +14,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isVal shouldBeEqualTo true
             isVar shouldBeEqualTo false
         }
@@ -27,7 +28,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isVal shouldBeEqualTo false
             isVar shouldBeEqualTo true
         }
@@ -129,7 +130,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasLateinitModifier() shouldBeEqualTo false
             hasOverrideModifier() shouldBeEqualTo false
             hasAbstractModifier() shouldBeEqualTo false
@@ -171,14 +172,12 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut
-            .type
-            ?.run {
-                sourceType shouldBeEqualTo "SampleType"
-                importAliasName shouldBeEqualTo ""
-                name shouldBeEqualTo "SampleType"
-                isImportAlias() shouldBeEqualTo false
-                fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        assertSoftly (sut.type) {
+                it?.sourceType shouldBeEqualTo "SampleType"
+                it?.importAliasName shouldBeEqualTo ""
+                it?.name shouldBeEqualTo "SampleType"
+                it?.isImportAlias() shouldBeEqualTo false
+                it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
             }
     }
 
@@ -190,14 +189,12 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut
-            .type
-            ?.run {
-                sourceType shouldBeEqualTo "SampleType"
-                importAliasName shouldBeEqualTo "ImportAlias"
-                name shouldBeEqualTo "ImportAlias"
-                isImportAlias() shouldBeEqualTo true
-                fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        assertSoftly (sut.type) {
+                it?.sourceType shouldBeEqualTo "SampleType"
+                it?.importAliasName shouldBeEqualTo "ImportAlias"
+                it?.name shouldBeEqualTo "ImportAlias"
+                it?.isImportAlias() shouldBeEqualTo true
+                it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
             }
     }
 
@@ -209,13 +206,11 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut
-            .type
-            ?.run {
-                sourceType shouldBeEqualTo null
-                name shouldBeEqualTo null
-                isImportAlias() shouldBeEqualTo null
-                fullyQualifiedName shouldBeEqualTo null
+        assertSoftly (sut.type) {
+                it?.sourceType shouldBeEqualTo null
+                it?.name shouldBeEqualTo null
+                it?.isImportAlias() shouldBeEqualTo null
+                it?.fullyQualifiedName shouldBeEqualTo null
             }
     }
 
@@ -227,7 +222,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             delegateName shouldBeEqualTo "lazy"
             hasDelegate() shouldBeEqualTo true
             hasDelegate("lazy") shouldBeEqualTo true
@@ -243,7 +238,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             delegateName shouldBeEqualTo null
             hasDelegate() shouldBeEqualTo false
             hasDelegate("lazy") shouldBeEqualTo false
@@ -258,7 +253,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasType() shouldBeEqualTo true
             hasType("SampleType") shouldBeEqualTo true
             hasType("OtherType") shouldBeEqualTo false
@@ -273,7 +268,7 @@ class KoPropertyTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasType() shouldBeEqualTo false
             hasType("SampleType") shouldBeEqualTo false
         }

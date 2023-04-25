@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kobasedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -13,9 +14,7 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut
-            .filePath
-            .run {
+        assertSoftly(sut.filePath) {
                 startsWith("//") shouldBeEqualTo false
                 endsWith("kobasedeclaration/snippet/file-path.kt") shouldBeEqualTo true
             }
@@ -29,7 +28,7 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             resideInFilePath("..snippet..") shouldBeEqualTo true
             resideInFilePath("..kobasedeclaration/snippet..") shouldBeEqualTo true
             resideInFilePath("..kobasedeclaration..reside-in-file-path.kt") shouldBeEqualTo true
@@ -58,7 +57,7 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             resideInProjectFilePath("..snippet..") shouldBeEqualTo true
             resideInProjectFilePath("..kobasedeclaration/snippet..") shouldBeEqualTo true
             resideInProjectFilePath("..kobasedeclaration..reside-in-project-file-path.kt") shouldBeEqualTo true
@@ -80,9 +79,7 @@ class KoBaseDeclarationTest {
 
         // then
         val declaration = "Declaration:\nfun sampleFunction() {\n}"
-        sut
-            .locationWithText
-            .run {
+        assertSoftly(sut.locationWithText) {
                 startsWith("Location: /") shouldBeEqualTo true
                 contains(projectPath) shouldBeEqualTo true
                 endsWith(declaration) shouldBeEqualTo true

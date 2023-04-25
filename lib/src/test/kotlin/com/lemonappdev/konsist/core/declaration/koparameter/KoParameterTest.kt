@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -16,14 +17,12 @@ class KoParameterTest {
             ?.first()
 
         // then
-        sut
-            ?.type
-            ?.run {
-                sourceType shouldBeEqualTo "SampleType"
-                importAliasName shouldBeEqualTo ""
-                name shouldBeEqualTo "SampleType"
-                isImportAlias() shouldBeEqualTo false
-                fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        assertSoftly (sut?.type) {
+                it?.sourceType shouldBeEqualTo "SampleType"
+                it?.importAliasName shouldBeEqualTo ""
+                it?.name shouldBeEqualTo "SampleType"
+                it?.isImportAlias() shouldBeEqualTo false
+                it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
             }
     }
 
@@ -38,14 +37,12 @@ class KoParameterTest {
             ?.first()
 
         // then
-        sut
-            ?.type
-            ?.run {
-                sourceType shouldBeEqualTo "SampleType"
-                importAliasName shouldBeEqualTo "ImportAlias"
-                name shouldBeEqualTo "ImportAlias"
-                isImportAlias() shouldBeEqualTo true
-                fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        assertSoftly (sut?.type) {
+                it?.sourceType shouldBeEqualTo "SampleType"
+                it?.importAliasName shouldBeEqualTo "ImportAlias"
+                it?.name shouldBeEqualTo "ImportAlias"
+                it?.isImportAlias() shouldBeEqualTo true
+                it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
             }
     }
 
@@ -60,11 +57,11 @@ class KoParameterTest {
             ?.first()
 
         // then
-        sut?.run {
-            hasDefaultValue() shouldBeEqualTo true
-            hasDefaultValue("6") shouldBeEqualTo true
-            hasDefaultValue("10") shouldBeEqualTo false
-            name shouldBeEqualTo "sampleParameter"
+        assertSoftly(sut) {
+            it?.hasDefaultValue() shouldBeEqualTo true
+            it?.hasDefaultValue("6") shouldBeEqualTo true
+            it?.hasDefaultValue("10") shouldBeEqualTo false
+            it?.name shouldBeEqualTo "sampleParameter"
         }
     }
 
@@ -102,7 +99,7 @@ class KoParameterTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             defaultValue shouldBeEqualTo "2"
             hasDefaultValue() shouldBeEqualTo true
             hasDefaultValue("2") shouldBeEqualTo true
@@ -120,7 +117,7 @@ class KoParameterTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             defaultValue shouldBeEqualTo "SampleType()"
             hasDefaultValue() shouldBeEqualTo true
             hasDefaultValue("SampleType()") shouldBeEqualTo true
@@ -138,7 +135,7 @@ class KoParameterTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             defaultValue shouldBeEqualTo "null"
             hasDefaultValue() shouldBeEqualTo true
             hasDefaultValue("SampleType()") shouldBeEqualTo false
@@ -155,7 +152,7 @@ class KoParameterTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             defaultValue shouldBeEqualTo null
             hasDefaultValue() shouldBeEqualTo false
             hasDefaultValue("SampleType()") shouldBeEqualTo false
@@ -213,10 +210,10 @@ class KoParameterTest {
             ?.first()
 
         // then
-        sut?.run {
-            hasVarargModifier() shouldBeEqualTo false
-            hasNoInlineModifier() shouldBeEqualTo false
-            hasCrossInlineModifier() shouldBeEqualTo false
+        assertSoftly(sut) {
+            it?.hasVarargModifier() shouldBeEqualTo false
+            it?.hasNoInlineModifier() shouldBeEqualTo false
+            it?.hasCrossInlineModifier() shouldBeEqualTo false
         }
     }
 
