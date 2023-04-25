@@ -30,58 +30,52 @@ fun <T : KoDeclaration> Sequence<T>.withTopLevel() = filter { it.isTopLevel() }
 
 fun <T : KoDeclaration> Sequence<T>.withoutTopLevel() = filterNot { it.isTopLevel() }
 
-fun <T : KoDeclaration> Sequence<T>.withAnnotation() = filter { it.annotations.isNotEmpty() }
-
-fun <T : KoDeclaration> Sequence<T>.withoutAnnotation() = filterNot { it.annotations.isNotEmpty() }
-
 fun <T : KoDeclaration> Sequence<T>.withAnnotations(vararg annotations: String) = filter {
-    annotations.all { annotation -> it.hasAnnotation(annotation) }
+    when {
+        annotations.isEmpty() -> it.hasAnnotations()
+        else -> it.hasAnnotations(*annotations)
+    }
 }
 
 fun <T : KoDeclaration> Sequence<T>.withSomeAnnotations(vararg annotations: String) = filter {
-    annotations.any { annotation -> it.hasAnnotation(annotation) }
+    annotations.any { annotation -> it.hasAnnotations(annotation) }
 }
 
 fun <T : KoDeclaration> Sequence<T>.withoutAnnotations(vararg annotations: String) = filter {
-    annotations.none { annotation -> it.hasAnnotation(annotation) }
-}
-
-fun <T : KoDeclaration> Sequence<T>.withAnnotationsOf(vararg annotations: KClass<*>) = filter {
-    annotations.all { annotation ->
-        annotation
-            .simpleName
-            ?.let { name -> it.hasAnnotation(name) } ?: false
+    when {
+        annotations.isEmpty() -> !it.hasAnnotations()
+        else -> !it.hasAnnotations(*annotations)
     }
 }
+
+fun <T : KoDeclaration> Sequence<T>.withAnnotationsOf(vararg annotations: KClass<*>) = filter { it.hasAnnotationsOf(*annotations) }
 
 fun <T : KoDeclaration> Sequence<T>.withSomeAnnotationsOf(vararg annotations: KClass<*>) = filter {
-    annotations.any { annotation ->
-        annotation
-            .simpleName
-            ?.let { name -> it.hasAnnotation(name) } ?: false
-    }
+    annotations.any { annotation -> it.hasAnnotationsOf(annotation) }
 }
 
-fun <T : KoDeclaration> Sequence<T>.withoutAnnotationsOf(vararg annotations: KClass<*>) = filter {
-    annotations.none { annotation ->
-        annotation
-            .simpleName
-            ?.let { name -> it.hasAnnotation(name) } ?: false
+fun <T : KoDeclaration> Sequence<T>.withoutAnnotationsOf(vararg annotations: KClass<*>) = filter { !it.hasAnnotationsOf(*annotations) }
+
+inline fun <reified T> Sequence<KoDeclaration>.withAnnotationOf() = filter { it.hasAnnotationOf<T>() }
+
+inline fun <reified T> Sequence<KoDeclaration>.withoutAnnotationOf() = filterNot { it.hasAnnotationOf<T>() }
+
+fun <T : KoDeclaration> Sequence<T>.withModifiers(vararg modifiers: KoModifier) = filter {
+    when {
+        modifiers.isEmpty() -> it.hasModifiers()
+        else -> it.hasModifiers(*modifiers)
     }
 }
-
-inline fun <reified T> Sequence<KoDeclaration>.withAnnotationOf() = filter { it.hasAnnotation<T>() }
-
-inline fun <reified T> Sequence<KoDeclaration>.withoutAnnotationOf() = filterNot { it.hasAnnotation<T>() }
-
-fun <T : KoDeclaration> Sequence<T>.withModifiers(vararg modifiers: KoModifier) = filter { it.hasModifiers(*modifiers) }
 
 fun <T : KoDeclaration> Sequence<T>.withSomeModifiers(vararg modifiers: KoModifier) = filter {
     modifiers.any { modifier -> it.hasModifiers(modifier) }
 }
 
 fun <T : KoDeclaration> Sequence<T>.withoutModifiers(vararg modifiers: KoModifier) = filter {
-    modifiers.none { modifier -> it.hasModifiers(modifier) }
+    when {
+        modifiers.isEmpty() -> !it.hasModifiers()
+        else -> !it.hasModifiers(*modifiers)
+    }
 }
 
 fun <T : KoDeclaration> Sequence<T>.withPackage(vararg packages: String) = filter {

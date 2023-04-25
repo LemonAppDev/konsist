@@ -36,6 +36,8 @@ annotation class NonExistingAnnotation
 )
 annotation class SampleAnnotation
 
+@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
 annotation class SampleAnnotation1
 
+@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
 annotation class SampleAnnotation2

@@ -9,7 +9,6 @@ import com.lemonappdev.konsist.core.const.KoModifier.PROTECTED
 import com.lemonappdev.konsist.core.const.KoModifier.PUBLIC
 import com.lemonappdev.konsist.core.const.KoModifier.SUSPEND
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.shouldBeEqualTo
@@ -60,12 +59,10 @@ class KoDeclarationForFunctionTest {
         // then
         sut.run {
             annotations shouldHaveSize 1
-            hasAnnotation("SampleAnnotation") shouldBeEqualTo true
-            hasAnnotation("NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
-            hasAnnotation("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
-            hasAnnotation<NonExistingAnnotation>() shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation") shouldBeEqualTo true
+            hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
+            hasAnnotations("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
         }
     }
 
@@ -79,15 +76,35 @@ class KoDeclarationForFunctionTest {
         // then
         sut.run {
             annotations shouldHaveSize 2
-            hasAnnotation("SampleAnnotation1") shouldBeEqualTo true
-            hasAnnotation("SampleAnnotation2") shouldBeEqualTo true
-            hasAnnotation("NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation2") shouldBeEqualTo true
-            hasAnnotation("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotation<SampleAnnotation1>() shouldBeEqualTo true
-            hasAnnotation<SampleAnnotation2>() shouldBeEqualTo true
-            hasAnnotation<NonExistingAnnotation>() shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotations("SampleAnnotation2") shouldBeEqualTo true
+            hasAnnotations("SampleAnnotation1", "SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation1", "NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation2") shouldBeEqualTo true
+            hasAnnotations("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-has-two-annotations-with-KClass`() {
+        // given
+        val sut = getSnippetFile("function-has-two-annotations-with-KClass")
+            .functions()
+            .first()
+
+        // then
+        sut.run {
+            annotations shouldHaveSize 2
+            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo true
+            hasAnnotationOf<SampleAnnotation2>() shouldBeEqualTo true
+            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
 
@@ -272,7 +289,10 @@ class KoDeclarationForFunctionTest {
             .first()
 
         // then
-        sut.hasModifiers(PRIVATE) shouldBeEqualTo false
+        sut.run {
+            hasModifiers() shouldBeEqualTo false
+            hasModifiers(PRIVATE) shouldBeEqualTo false
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -28,9 +28,9 @@ fun <T : KoComplexDeclaration> Sequence<T>.withoutTypeOf(vararg types: KClass<*>
     }
 }
 
-inline fun <reified T> Sequence<KoComplexDeclaration>.withTypeOf() = filter { it.representsType<T>() }
+inline fun <reified T> Sequence<KoComplexDeclaration>.withTypeOf() = filter { it.representsTypeOf<T>() }
 
-inline fun <reified T> Sequence<KoComplexDeclaration>.withoutTypeOf() = filterNot { it.representsType<T>() }
+inline fun <reified T> Sequence<KoComplexDeclaration>.withoutTypeOf() = filterNot { it.representsTypeOf<T>() }
 
 fun <T : KoComplexDeclaration> Sequence<T>.declarations(
     modifiers: List<KoModifier> = emptyList(),

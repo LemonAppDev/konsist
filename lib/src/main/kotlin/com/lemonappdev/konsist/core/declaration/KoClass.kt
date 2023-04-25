@@ -88,12 +88,17 @@ class KoClass private constructor(private val ktClass: KtClass) : KoComplexDecla
         else -> parentClass?.name == name
     }
 
-    fun hasParentInterface(name: String? = null) = when (name) {
-        null -> parentInterfaces.isNotEmpty()
-        else -> parentInterfaces.any { it.name == name }
+    fun hasParentInterfaces(vararg names: String) = when {
+        names.isEmpty() -> parentInterfaces.isNotEmpty()
+        else -> names.all {
+            parentInterfaces.any { koParent -> it == koParent.name }
+        }
     }
 
-    fun hasParent(name: String? = null) = hasParentClass(name) || hasParentInterface(name)
+    fun hasParents(vararg names: String) = when {
+        names.isEmpty() -> hasParentClass() || hasParentInterfaces()
+        else -> names.all { hasParentClass(it) || hasParentInterfaces(it) }
+    }
 
     companion object {
         private val cache = KoDeclarationCache<KoClass>()

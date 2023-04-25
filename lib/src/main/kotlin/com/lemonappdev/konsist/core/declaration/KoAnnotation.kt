@@ -18,7 +18,7 @@ class KoAnnotation private constructor(
     fun representsType(name: String) =
         name == this.name || name == fullyQualifiedName
 
-    inline fun <reified T>representsType() = T::class.qualifiedName == fullyQualifiedName
+    inline fun <reified T>representsTypeOf() = T::class.qualifiedName == fullyQualifiedName
 
     companion object {
         private val cache = KoDeclarationCache<KoAnnotation>()

@@ -59,19 +59,19 @@ fun Sequence<KoClass>.withoutSecondaryConstructors() = filterNot { it.hasSeconda
 
 fun Sequence<KoClass>.withParents(vararg names: String) = filter {
     when {
-        names.isEmpty() -> it.hasParent()
-        else -> names.all { name -> it.hasParent(name) }
+        names.isEmpty() -> it.hasParents()
+        else -> it.hasParents(*names)
     }
 }
 
 fun Sequence<KoClass>.withSomeParents(vararg names: String) = filter {
-    names.any { name -> it.hasParent(name) }
+    names.any { name -> it.hasParents(name) }
 }
 
 fun Sequence<KoClass>.withoutParents(vararg names: String) = filter {
     when {
-        names.isEmpty() -> !it.hasParent()
-        else -> names.none { name -> it.hasParent(name) }
+        names.isEmpty() -> !it.hasParents()
+        else -> !it.hasParents(*names)
     }
 }
 
@@ -109,18 +109,18 @@ fun Sequence<KoClass>.withoutParentsOf(vararg names: KClass<*>) = filter {
 
 fun Sequence<KoClass>.withParentInterfaces(vararg names: String) = filter {
     when {
-        names.isEmpty() -> it.hasParentInterface()
-        else -> names.all { name -> it.hasParentInterface(name) }
+        names.isEmpty() -> it.hasParentInterfaces()
+        else -> it.hasParentInterfaces(*names)
     }
 }
 
 fun Sequence<KoClass>.withSomeParentInterfaces(vararg names: String) =
-    filter { names.any { name -> it.hasParentInterface(name) } }
+    filter { names.any { name -> it.hasParentInterfaces(name) } }
 
 fun Sequence<KoClass>.withoutParentInterfaces(vararg names: String) = filter {
     when {
-        names.isEmpty() -> !it.hasParentInterface()
-        else -> names.none { name -> it.hasParentInterface(name) }
+        names.isEmpty() -> !it.hasParentInterfaces()
+        else -> !it.hasParentInterfaces(*names)
     }
 }
 

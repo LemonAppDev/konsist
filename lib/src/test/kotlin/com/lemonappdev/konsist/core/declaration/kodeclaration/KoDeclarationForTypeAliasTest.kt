@@ -31,12 +31,12 @@ class KoDeclarationForTypeAliasTest {
         // then
         sut.run {
             annotations shouldHaveSize 1
-            hasAnnotation("SampleAnnotation") shouldBeEqualTo true
-            hasAnnotation("NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotation("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
-            hasAnnotation("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotation<SampleAnnotation>() shouldBeEqualTo true
-            hasAnnotation<NonExistingAnnotation>() shouldBeEqualTo false
+            hasAnnotations("SampleAnnotation") shouldBeEqualTo true
+            hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
+            hasAnnotations("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotationOf<SampleAnnotation>() shouldBeEqualTo true
+            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
 
@@ -203,7 +203,7 @@ class KoDeclarationForTypeAliasTest {
 
         // then
         sut.run {
-            hasModifiers() shouldBeEqualTo true
+            hasModifiers() shouldBeEqualTo false
             hasModifiers(PRIVATE) shouldBeEqualTo false
         }
     }

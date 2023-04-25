@@ -53,6 +53,6 @@ fun Sequence<KoParameter>.withoutTypeOf(vararg types: KClass<*>) = filter {
     }
 }
 
-inline fun <reified T> Sequence<KoParameter>.withTypeOf() = filter { it.hasType<T>() }
+inline fun <reified T> Sequence<KoParameter>.withTypeOf() = filter { it.hasTypeOf<T>() }
 
-inline fun <reified T> Sequence<KoParameter>.withoutTypeOf() = filterNot { it.hasType<T>() }
+inline fun <reified T> Sequence<KoParameter>.withoutTypeOf() = filterNot { it.hasTypeOf<T>() }

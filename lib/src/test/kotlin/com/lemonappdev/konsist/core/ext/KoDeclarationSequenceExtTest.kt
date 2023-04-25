@@ -232,17 +232,16 @@ class KoDeclarationSequenceExtTest {
     @Test
     fun `withAnnotations() returns declaration with any annotation`() {
         // given
-        val annotation: KoAnnotation = mockk()
         val declaration1: KoDeclaration = mockk {
-            every { annotations } returns listOf(annotation)
+            every { hasAnnotations() } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { annotations } returns emptyList()
+            every { hasAnnotations() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withAnnotation()
+        val sut = declarations.withAnnotations()
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1)
@@ -251,17 +250,16 @@ class KoDeclarationSequenceExtTest {
     @Test
     fun `withAnnotations() returns declaration without any annotation`() {
         // given
-        val annotation: KoAnnotation = mockk()
         val declaration1: KoDeclaration = mockk {
-            every { annotations } returns listOf(annotation)
+            every { hasAnnotations() } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { annotations } returns emptyList()
+            every { hasAnnotations() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutAnnotation()
+        val sut = declarations.withoutAnnotations()
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration2)
@@ -273,18 +271,12 @@ class KoDeclarationSequenceExtTest {
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
         val declaration1: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns true
-            every { hasAnnotation(annotation2) } returns true
+            every { hasAnnotations(annotation1, annotation2) } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns false
-            every { hasAnnotation(annotation2) } returns true
+            every { hasAnnotations(annotation1, annotation2) } returns false
         }
-        val declaration3: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns false
-            every { hasAnnotation(annotation2) } returns false
-        }
-        val declarations = sequenceOf(declaration1, declaration2, declaration3)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withAnnotations(annotation1, annotation2)
@@ -294,29 +286,23 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotations(String) returns declaration3 without given annotations`() {
+    fun `withoutAnnotations(String) returns declaration2 without given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
         val declaration1: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns true
-            every { hasAnnotation(annotation2) } returns true
+            every { hasAnnotations(annotation1, annotation2) } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns false
-            every { hasAnnotation(annotation2) } returns true
+            every { hasAnnotations(annotation1, annotation2) } returns false
         }
-        val declaration3: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns false
-            every { hasAnnotation(annotation2) } returns false
-        }
-        val declarations = sequenceOf(declaration1, declaration2, declaration3)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutAnnotations(annotation1, annotation2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -325,16 +311,16 @@ class KoDeclarationSequenceExtTest {
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
         val declaration1: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns true
-            every { hasAnnotation(annotation2) } returns true
+            every { hasAnnotations(annotation1) } returns true
+            every { hasAnnotations(annotation2) } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns false
-            every { hasAnnotation(annotation2) } returns true
+            every { hasAnnotations(annotation1) } returns false
+            every { hasAnnotations(annotation2) } returns true
         }
         val declaration3: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns false
-            every { hasAnnotation(annotation2) } returns false
+            every { hasAnnotations(annotation1) } returns false
+            every { hasAnnotations(annotation2) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
@@ -348,21 +334,13 @@ class KoDeclarationSequenceExtTest {
     @Test
     fun `withAnnotationsOf(KClass) returns declaration1 with given annotations`() {
         // given
-        val annotation1 = "SampleAnnotation1"
-        val annotation2 = "SampleAnnotation2"
         val declaration1: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns true
-            every { hasAnnotation(annotation2) } returns true
+            every { hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns false
-            every { hasAnnotation(annotation2) } returns true
+            every { hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) } returns false
         }
-        val declaration3: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns false
-            every { hasAnnotation(annotation2) } returns false
-        }
-        val declarations = sequenceOf(declaration1, declaration2, declaration3)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
@@ -374,45 +352,35 @@ class KoDeclarationSequenceExtTest {
     @Test
     fun `withoutAnnotationsOf(KClass) returns declaration3 without given annotations`() {
         // given
-        val annotation1 = "SampleAnnotation1"
-        val annotation2 = "SampleAnnotation2"
         val declaration1: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns true
-            every { hasAnnotation(annotation2) } returns true
+            every { hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns false
-            every { hasAnnotation(annotation2) } returns true
+            every { hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) } returns false
         }
-        val declaration3: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns false
-            every { hasAnnotation(annotation2) } returns false
-        }
-        val declarations = sequenceOf(declaration1, declaration2, declaration3)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
     fun `withSomeAnnotationsOf(KClass) returns declaration1 and declaration2 which have at least one of given annotations`() {
         // given
-        val annotation1 = "SampleAnnotation1"
-        val annotation2 = "SampleAnnotation2"
         val declaration1: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns true
-            every { hasAnnotation(annotation2) } returns true
+            every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
+            every { hasAnnotationsOf(SampleAnnotation2::class) } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns false
-            every { hasAnnotation(annotation2) } returns true
+            every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
+            every { hasAnnotationsOf(SampleAnnotation2::class) } returns false
         }
         val declaration3: KoDeclaration = mockk {
-            every { hasAnnotation(annotation1) } returns false
-            every { hasAnnotation(annotation2) } returns false
+            every { hasAnnotationsOf(SampleAnnotation1::class) } returns false
+            every { hasAnnotationsOf(SampleAnnotation2::class) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
@@ -476,6 +444,42 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
+    fun `withModifiers() returns declaration1 which has modifier`() {
+        // given
+        val declaration1: KoDeclaration = mockk {
+            every { hasModifiers() } returns true
+        }
+        val declaration2: KoDeclaration = mockk {
+            every { hasModifiers() } returns false
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withModifiers()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutModifiers() returns declaration2 which has not modifier`() {
+        // given
+        val declaration1: KoDeclaration = mockk {
+            every { hasModifiers() } returns true
+        }
+        val declaration2: KoDeclaration = mockk {
+            every { hasModifiers() } returns false
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutModifiers()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withModifiers(String) returns declaration1 with all given modifiers`() {
         // given
         val modifier1 = PROTECTED
@@ -496,29 +500,23 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutModifiers(String) returns declaration3 without given modifiers`() {
+    fun `withoutModifiers(String) returns declaration2 without given modifiers`() {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
         val declaration1: KoDeclaration = mockk {
-            every { hasModifiers(modifier1) } returns true
-            every { hasModifiers(modifier2) } returns true
+            every { hasModifiers(modifier1, modifier2) } returns true
         }
         val declaration2: KoDeclaration = mockk {
-            every { hasModifiers(modifier1) } returns false
-            every { hasModifiers(modifier2) } returns true
+            every { hasModifiers(modifier1, modifier2) } returns false
         }
-        val declaration3: KoDeclaration = mockk {
-            every { hasModifiers(modifier1) } returns false
-            every { hasModifiers(modifier2) } returns false
-        }
-        val declarations = sequenceOf(declaration1, declaration2, declaration3)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutModifiers(modifier1, modifier2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

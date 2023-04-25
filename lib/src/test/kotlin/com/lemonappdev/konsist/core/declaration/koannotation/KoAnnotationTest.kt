@@ -61,8 +61,8 @@ class KoAnnotationTest {
             representsType("NonExistingAnnotation") shouldBeEqualTo false
             representsType("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
             representsType("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
-            representsType<SampleAnnotation>() shouldBeEqualTo true
-            representsType<NonExistingAnnotation>() shouldBeEqualTo false
+            representsTypeOf<SampleAnnotation>() shouldBeEqualTo true
+            representsTypeOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
 

@@ -484,13 +484,13 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withParent() returns class1 with parent`() {
+    fun `withParents() returns class1 with parent`() {
         // given
         val class1: KoClass = mockk {
-            every { hasParent() } returns true
+            every { hasParents() } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParent() } returns false
+            every { hasParents() } returns false
         }
         val classes = sequenceOf(class1, class2)
 
@@ -502,13 +502,13 @@ class KoClassSequenceExtTest {
     }
 
     @Test
-    fun `withoutParent() returns class2 without parent`() {
+    fun `withoutParents() returns class2 without parent`() {
         // given
         val class1: KoClass = mockk {
-            every { hasParent() } returns true
+            every { hasParents() } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParent() } returns false
+            every { hasParents() } returns false
         }
         val classes = sequenceOf(class1, class2)
 
@@ -576,10 +576,10 @@ class KoClassSequenceExtTest {
         // given
         val name = "SampleName"
         val class1: KoClass = mockk {
-            every { hasParent(name) } returns true
+            every { hasParents(name) } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParent(name) } returns false
+            every { hasParents(name) } returns false
         }
         val classes = sequenceOf(class1, class2)
 
@@ -595,10 +595,10 @@ class KoClassSequenceExtTest {
         // given
         val name = "SampleName"
         val class1: KoClass = mockk {
-            every { hasParent(name) } returns true
+            every { hasParents(name) } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParent(name) } returns false
+            every { hasParents(name) } returns false
         }
         val classes = sequenceOf(class1, class2)
 
@@ -615,18 +615,12 @@ class KoClassSequenceExtTest {
         val name1 = "SampleName1"
         val name2 = "SampleName2"
         val class1: KoClass = mockk {
-            every { hasParent(name1) } returns true
-            every { hasParent(name2) } returns true
+            every { hasParents(name1, name2) } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParent(name1) } returns false
-            every { hasParent(name2) } returns true
+            every { hasParents(name1, name2) } returns false
         }
-        val class3: KoClass = mockk {
-            every { hasParent(name1) } returns false
-            every { hasParent(name2) } returns false
-        }
-        val classes = sequenceOf(class1, class2, class3)
+        val classes = sequenceOf(class1, class2)
 
         // when
         val sut = classes.withParents(name1, name2)
@@ -641,24 +635,18 @@ class KoClassSequenceExtTest {
         val name1 = "SampleName1"
         val name2 = "SampleName2"
         val class1: KoClass = mockk {
-            every { hasParent(name1) } returns true
-            every { hasParent(name2) } returns true
+            every { hasParents(name1, name2) } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParent(name1) } returns false
-            every { hasParent(name2) } returns true
+            every { hasParents(name1, name2) } returns false
         }
-        val class3: KoClass = mockk {
-            every { hasParent(name1) } returns false
-            every { hasParent(name2) } returns false
-        }
-        val classes = sequenceOf(class1, class2, class3)
+        val classes = sequenceOf(class1, class2)
 
         // when
         val sut = classes.withoutParents(name1, name2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class3)
+        sut.toList() shouldBeEqualTo listOf(class2)
     }
 
     @Test
@@ -667,16 +655,16 @@ class KoClassSequenceExtTest {
         val name1 = "SampleName1"
         val name2 = "SampleName2"
         val class1: KoClass = mockk {
-            every { hasParent(name1) } returns true
-            every { hasParent(name2) } returns true
+            every { hasParents(name1) } returns true
+            every { hasParents(name2) } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParent(name1) } returns false
-            every { hasParent(name2) } returns true
+            every { hasParents(name1) } returns false
+            every { hasParents(name2) } returns true
         }
         val class3: KoClass = mockk {
-            every { hasParent(name1) } returns false
-            every { hasParent(name2) } returns false
+            every { hasParents(name1) } returns false
+            every { hasParents(name2) } returns false
         }
         val classes = sequenceOf(class1, class2, class3)
 
@@ -895,10 +883,10 @@ class KoClassSequenceExtTest {
     fun `withParentInterface() returns class1 with parent interface`() {
         // given
         val class1: KoClass = mockk {
-            every { hasParentInterface() } returns true
+            every { hasParentInterfaces() } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParentInterface() } returns false
+            every { hasParentInterfaces() } returns false
         }
         val classes = sequenceOf(class1, class2)
 
@@ -913,10 +901,10 @@ class KoClassSequenceExtTest {
     fun `withoutParentInterface() returns class2 without parent interface`() {
         // given
         val class1: KoClass = mockk {
-            every { hasParentInterface() } returns true
+            every { hasParentInterfaces() } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParentInterface() } returns false
+            every { hasParentInterfaces() } returns false
         }
         val classes = sequenceOf(class1, class2)
 
@@ -984,10 +972,10 @@ class KoClassSequenceExtTest {
         // given
         val name = "SampleName"
         val class1: KoClass = mockk {
-            every { hasParentInterface(name) } returns true
+            every { hasParentInterfaces(name) } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParentInterface(name) } returns false
+            every { hasParentInterfaces(name) } returns false
         }
         val classes = sequenceOf(class1, class2)
 
@@ -1003,10 +991,10 @@ class KoClassSequenceExtTest {
         // given
         val name = "SampleName"
         val class1: KoClass = mockk {
-            every { hasParentInterface(name) } returns true
+            every { hasParentInterfaces(name) } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParentInterface(name) } returns false
+            every { hasParentInterfaces(name) } returns false
         }
         val classes = sequenceOf(class1, class2)
 
@@ -1023,18 +1011,12 @@ class KoClassSequenceExtTest {
         val name1 = "SampleName1"
         val name2 = "SampleName2"
         val class1: KoClass = mockk {
-            every { hasParentInterface(name1) } returns true
-            every { hasParentInterface(name2) } returns true
+            every { hasParentInterfaces(name1, name2) } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParentInterface(name1) } returns false
-            every { hasParentInterface(name2) } returns true
+            every { hasParentInterfaces(name1, name2) } returns false
         }
-        val class3: KoClass = mockk {
-            every { hasParentInterface(name1) } returns false
-            every { hasParentInterface(name2) } returns false
-        }
-        val classes = sequenceOf(class1, class2, class3)
+        val classes = sequenceOf(class1, class2)
 
         // when
         val sut = classes.withParentInterfaces(name1, name2)
@@ -1049,24 +1031,19 @@ class KoClassSequenceExtTest {
         val name1 = "SampleName1"
         val name2 = "SampleName2"
         val class1: KoClass = mockk {
-            every { hasParentInterface(name1) } returns true
-            every { hasParentInterface(name2) } returns true
+            every { hasParentInterfaces(name1, name2) } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParentInterface(name1) } returns false
-            every { hasParentInterface(name2) } returns true
+            every { hasParentInterfaces(name1, name2) } returns false
         }
-        val class3: KoClass = mockk {
-            every { hasParentInterface(name1) } returns false
-            every { hasParentInterface(name2) } returns false
-        }
-        val classes = sequenceOf(class1, class2, class3)
+
+        val classes = sequenceOf(class1, class2)
 
         // when
         val sut = classes.withoutParentInterfaces(name1, name2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class3)
+        sut.toList() shouldBeEqualTo listOf(class2)
     }
 
     @Test
@@ -1075,16 +1052,16 @@ class KoClassSequenceExtTest {
         val name1 = "SampleName1"
         val name2 = "SampleName2"
         val class1: KoClass = mockk {
-            every { hasParentInterface(name1) } returns true
-            every { hasParentInterface(name2) } returns true
+            every { hasParentInterfaces(name1) } returns true
+            every { hasParentInterfaces(name2) } returns true
         }
         val class2: KoClass = mockk {
-            every { hasParentInterface(name1) } returns false
-            every { hasParentInterface(name2) } returns true
+            every { hasParentInterfaces(name1) } returns false
+            every { hasParentInterfaces(name2) } returns true
         }
         val class3: KoClass = mockk {
-            every { hasParentInterface(name1) } returns false
-            every { hasParentInterface(name2) } returns false
+            every { hasParentInterfaces(name1) } returns false
+            every { hasParentInterfaces(name2) } returns false
         }
         val classes = sequenceOf(class1, class2, class3)
 

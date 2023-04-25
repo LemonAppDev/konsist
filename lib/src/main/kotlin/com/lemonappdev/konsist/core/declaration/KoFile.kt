@@ -15,6 +15,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
+import kotlin.reflect.KClass
 
 class KoFile private constructor(private val ktFile: KtFile) :
     KoNamedDeclaration(ktFile),
@@ -67,10 +68,20 @@ class KoFile private constructor(private val ktFile: KtFile) :
     ): Sequence<KoDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
-    fun hasAnnotation(name: String) = annotations
-        .any { it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name }
+    fun hasAnnotations(vararg names: String) = when {
+        names.isEmpty() -> annotations.isNotEmpty()
+        else -> names.all { hasAnnotationNameOrAnnotationFullyQualifyName(it) }
+    }
 
-    inline fun <reified T> hasAnnotation(): Boolean {
+    private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String) = annotations.any {
+        it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name
+    }
+
+    fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {
+        annotations.any { annotation -> annotation.fullyQualifiedName == it.qualifiedName }
+    }
+
+    inline fun <reified T> hasAnnotationOf(): Boolean {
         val qualifiedName = T::class.qualifiedName ?: return false
 
         return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
@@ -80,14 +91,18 @@ class KoFile private constructor(private val ktFile: KtFile) :
         ?.qualifiedName
         ?.let { PackageHelper.resideInPackage(name, it) } ?: false
 
-    fun hasImport(name: String? = null) = when (name) {
-        null -> imports.isNotEmpty()
-        else -> imports.any { PackageHelper.resideInPackage(name, it.name) }
+    fun hasImports(vararg names: String) = when {
+        names.isEmpty() -> imports.isNotEmpty()
+        else -> names.all {
+            imports.any { import -> PackageHelper.resideInPackage(it, import.name) }
+        }
     }
 
-    fun hasTypeAlias(name: String? = null) = when (name) {
-        null -> typeAliases.isNotEmpty()
-        else -> typeAliases.any { it.name == name }
+    fun hasTypeAliases(vararg names: String) = when {
+        names.isEmpty() -> typeAliases.isNotEmpty()
+        else -> names.all {
+            typeAliases.any { typeAlias -> typeAlias.name == it }
+        }
     }
 
     override fun equals(other: Any?): Boolean = other is KoFile && filePath == other.filePath
