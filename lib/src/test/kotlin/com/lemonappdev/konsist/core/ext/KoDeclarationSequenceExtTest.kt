@@ -596,4 +596,40 @@ class KoDeclarationSequenceExtTest {
         // then
         sut.toList() shouldBeEqualTo listOf(declaration3)
     }
+
+    @Test
+    fun `withKoDoc() returns declaration1 with koDoc`() {
+        // given
+        val declaration1: KoDeclaration = mockk {
+            every { hasKoDoc() } returns true
+        }
+        val declaration2: KoDeclaration = mockk {
+            every { hasKoDoc() } returns false
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withKoDoc()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutKoDoc() returns declaration2 without koDoc`() {
+        // given
+        val declaration1: KoDeclaration = mockk {
+            every { hasKoDoc() } returns true
+        }
+        val declaration2: KoDeclaration = mockk {
+            every { hasKoDoc() } returns false
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutKoDoc()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration2)
+    }
 }
