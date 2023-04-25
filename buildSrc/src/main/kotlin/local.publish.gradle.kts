@@ -90,6 +90,8 @@ publishing {
                     setCredentialsFromGradleProperties()
                 }
             }
+
+            println("Repository Url $url")
         }
     }
 }
@@ -148,12 +150,5 @@ fun getKonsistVersion(releaseTarget: ReleaseTarget): String {
         ReleaseTarget.LOCAL -> "$version-SNAPSHOT"
         ReleaseTarget.SNAPSHOT -> "$version-SNAPSHOT"
         ReleaseTarget.RELEASE -> version
-    }
-}
-
-// Print info about publishing e.g. "Starting to publish com.lemonappdev:konsist:0.7.6-SNAPSHOT to file:/Users/user/.m2/repository/"
-tasks.withType<PublishToMavenRepository>().configureEach {
-    doFirst {
-        println("Starting to publish ${publication.groupId}:${publication.artifactId}:${publication.version} to ${repository.url}")
     }
 }
