@@ -136,12 +136,9 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Delete Local Maven Repository
-        run: rm -r /home/runner/.m2/repository || true
-
       - name: Publish
         run: |
-          ./gradlew publish \
+          ./gradlew publishToMavenLocal \
           -Pkonsist.releaseTarget=local \
           -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
           -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \

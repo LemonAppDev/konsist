@@ -18,7 +18,7 @@
 
 ## Publish To Maven Repository
 
-- `./gradlew publish` publish to `local` (default repository target), located in `~/.m2/repository` 
+- `./gradlew publishToMavenLocal -Pkonsist.releaseTarget=local` publish to `~/.m2/repository` 
 - `./gradlew publish -Pkonsist.releaseTarget=snapshot` publish to
 [snapshot repository](https://s01.oss.sonatype.org/content/repositories/snapshots/com/lemonappdev/konsist/)
 - `./gradlew publish -Pkonsist.releaseTarget=release` publish to
