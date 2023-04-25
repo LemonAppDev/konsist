@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.util
 
 import com.lemonappdev.konsist.util.PackageHelper
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -12,7 +13,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("com", name) shouldBeEqualTo false
             resideInPackage("..com..", name) shouldBeEqualTo true
             resideInPackage("..com", name) shouldBeEqualTo false
@@ -37,7 +38,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("com", name, '/') shouldBeEqualTo false
             resideInPackage("..com..", name, '/') shouldBeEqualTo true
             resideInPackage("..com", name, '/') shouldBeEqualTo false
@@ -62,7 +63,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("com.domain", name) shouldBeEqualTo false
             resideInPackage("com.domain.update", name) shouldBeEqualTo false
             resideInPackage("com.domain.update.usecase", name) shouldBeEqualTo true
@@ -77,7 +78,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("com/domain", name, '/') shouldBeEqualTo false
             resideInPackage("com/domain/update", name, '/') shouldBeEqualTo false
             resideInPackage("com/domain/update/usecase", name, '/') shouldBeEqualTo true
@@ -92,7 +93,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("com..usecase", name) shouldBeEqualTo true
             resideInPackage("..com..usecase", name) shouldBeEqualTo true
             resideInPackage("com..usecase..", name) shouldBeEqualTo true
@@ -107,7 +108,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("com..usecase", name, '/') shouldBeEqualTo true
             resideInPackage("..com..usecase", name, '/') shouldBeEqualTo true
             resideInPackage("com..usecase..", name, '/') shouldBeEqualTo true
@@ -122,7 +123,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("com.domain..", name) shouldBeEqualTo true
             resideInPackage("com.domain.update..", name) shouldBeEqualTo true
             resideInPackage("com.domain.update.usecase..", name) shouldBeEqualTo true
@@ -137,7 +138,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("com/domain..", name, '/') shouldBeEqualTo true
             resideInPackage("com/domain/update..", name, '/') shouldBeEqualTo true
             resideInPackage("com/domain/update/usecase..", name, '/') shouldBeEqualTo true
@@ -152,7 +153,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("domain..usecase..", name) shouldBeEqualTo false
             resideInPackage("com.domain..usecase..", name) shouldBeEqualTo true
             resideInPackage("..domain..usecase", name) shouldBeEqualTo true
@@ -171,7 +172,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("domain..usecase..", name, '/') shouldBeEqualTo false
             resideInPackage("com/domain..usecase..", name, '/') shouldBeEqualTo true
             resideInPackage("..domain..usecase", name, '/') shouldBeEqualTo true
@@ -190,7 +191,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("..domain..domain..update.usecase", name) shouldBeEqualTo false
             resideInPackage("com..domain..update..com..usecase", name) shouldBeEqualTo false
         }
@@ -203,7 +204,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("..domain..domain..update/usecase", name, '/') shouldBeEqualTo false
             resideInPackage("com..domain..update..com..usecase", name, '/') shouldBeEqualTo false
         }
@@ -216,7 +217,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("..update..domain..", name) shouldBeEqualTo false
             resideInPackage("..usecase..domain..", name) shouldBeEqualTo false
         }
@@ -229,7 +230,7 @@ class PackageHelperTest {
         val sut = PackageHelper
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             resideInPackage("..update..domain..", name, '/') shouldBeEqualTo false
             resideInPackage("..usecase..domain..", name, '/') shouldBeEqualTo false
         }

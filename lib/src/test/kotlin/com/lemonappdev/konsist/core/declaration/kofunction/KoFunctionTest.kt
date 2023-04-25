@@ -244,7 +244,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             containsLocalProperty("sampleLocalProperty") shouldBeEqualTo true
             localProperties()
                 .toList()
@@ -261,7 +261,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             containsLocalFunction("sampleLocalFunction") shouldBeEqualTo true
             localFunctions()
                 .toList()
@@ -278,7 +278,7 @@ class KoFunctionTest {
             .first()
 
         // then
-        sut.apply {
+        assertSoftly(sut) {
             containsLocalClass("SampleClass") shouldBeEqualTo true
             localClasses()
                 .toList()
