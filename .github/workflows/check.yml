@@ -120,3 +120,22 @@ jobs:
         with:
           name: lib.jar Artifact
           path: lib/build/libs/lib.jar
+  publish:
+    name: Publish
+    description: Publish Konsist to local Maven repository
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: ./gradlew ./gradlew publish -Pkonsist.releaseTarget=local
