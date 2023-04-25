@@ -121,7 +121,7 @@ jobs:
           name: lib.jar Artifact
           path: lib/build/libs/lib.jar
   publish:
-    name: Publish (Local)
+    name: Publish Local
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -137,7 +137,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Publish
-        run: ./gradlew publish -Pkonsist.releaseTarget=local
+        run: ./gradlew publish -Pkonsist.releaseTarget=local -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: List Artifacts
-        run: ls /home/runner/.m2/repository/
+        run: ls -R /home/runner/.m2/repository/
