@@ -138,3 +138,6 @@ jobs:
 
       - name: Publish
         run: ./gradlew publish -Pkonsist.releaseTarget=local
+
+      - name: List Artifacts
+        run: ls /home/runner/.m2/repository/
