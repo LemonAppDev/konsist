@@ -89,6 +89,8 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
         else -> modifiers.containsAll(koModifiers.toList())
     }
 
+    fun hasKoDoc() = koDoc != null
+
     fun resideInPackage(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
 
     fun resideOutsidePackage(packageName: String) = !resideInPackage(packageName)

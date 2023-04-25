@@ -1,0 +1,4 @@
+/**
+ * Sample Description
+ */
+val sampleProperty: Boolean = true

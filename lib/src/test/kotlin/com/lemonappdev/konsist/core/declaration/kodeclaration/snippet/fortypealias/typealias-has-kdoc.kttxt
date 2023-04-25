@@ -1,0 +1,6 @@
+/**
+ * Sample Description
+ */
+typealias SampleTypeAlias = (Boolean) -> Int
+
+lateinit var sampleProperty: SampleTypeAlias

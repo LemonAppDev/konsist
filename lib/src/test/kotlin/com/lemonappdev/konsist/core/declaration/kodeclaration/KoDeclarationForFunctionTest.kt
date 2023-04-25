@@ -11,7 +11,9 @@ import com.lemonappdev.konsist.core.const.KoModifier.SUSPEND
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
@@ -292,6 +294,34 @@ class KoDeclarationForFunctionTest {
         sut.run {
             hasModifiers() shouldBeEqualTo false
             hasModifiers(PRIVATE) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-has-kdoc`() {
+        // given
+        val sut = getSnippetFile("function-has-kdoc")
+            .functions()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            koDoc?.text?.shouldContain("Sample Description")
+            hasKoDoc() shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `function-has-not-kdoc`() {
+        // given
+        val sut = getSnippetFile("function-has-not-kdoc")
+            .functions()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            koDoc shouldBeEqualTo null
+            hasKoDoc() shouldBeEqualTo false
         }
     }
 
