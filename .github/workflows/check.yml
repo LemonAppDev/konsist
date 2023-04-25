@@ -137,4 +137,4 @@ jobs:
           distribution: 'zulu'
 
       - name: Publish
-        run: ./gradlew ./gradlew publish -Pkonsist.releaseTarget=local
+        run: ./gradlew publish -Pkonsist.releaseTarget=local
