@@ -136,6 +136,9 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
+      - name: Delete Local Maven Repository
+        run: rm -r /home/runner/.m2/repository
+
       - name: Publish
         run: |
           ./gradlew publish \
