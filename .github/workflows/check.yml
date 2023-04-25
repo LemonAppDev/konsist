@@ -137,7 +137,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Delete Local Maven Repository
-        run: rm -r /home/runner/.m2/repository
+        run: rm -r /home/runner/.m2/repository || true
 
       - name: Publish
         run: |
