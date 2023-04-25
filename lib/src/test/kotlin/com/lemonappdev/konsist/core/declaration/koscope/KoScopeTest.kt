@@ -22,7 +22,7 @@ class KoScopeTest {
         assertSoftly(
             sut
                 .files()
-                .toList()
+                .toList(),
         ) {
             size shouldBeEqualTo 1
             first().name shouldBeEqualTo "KoScopeTest.kt"
@@ -39,7 +39,7 @@ class KoScopeTest {
         assertSoftly(
             sut
                 .files()
-                .toList()
+                .toList(),
         ) {
             isNotEmpty() shouldBeEqualTo true
             none { it.filePath.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true
@@ -142,7 +142,7 @@ class KoScopeTest {
         assertSoftly(
             sut
                 .files()
-                .toList()
+                .toList(),
         ) {
             isNotEmpty() shouldBeEqualTo true
             none { it.filePath.startsWith("//") shouldBeEqualTo false } shouldBeEqualTo true

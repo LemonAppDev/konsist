@@ -232,7 +232,7 @@ class KoFileTest {
         assertSoftly(
             sut
                 .typeAliases
-                .first()
+                .first(),
         ) {
             name shouldBeEqualTo "SampleTypeAlias"
             type.sourceType shouldBeEqualTo "() -> Int"

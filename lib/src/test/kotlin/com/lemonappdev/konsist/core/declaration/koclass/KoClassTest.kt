@@ -248,7 +248,7 @@ class KoClassTest {
         // then
         assertSoftly(sut) {
             parents shouldBeEqualTo emptyList()
-//            hasParents() shouldBeEqualTo false
+            hasParents() shouldBeEqualTo false
             hasParents("SampleClass") shouldBeEqualTo false
             parentClass shouldBeEqualTo null
             hasParentClass() shouldBeEqualTo false

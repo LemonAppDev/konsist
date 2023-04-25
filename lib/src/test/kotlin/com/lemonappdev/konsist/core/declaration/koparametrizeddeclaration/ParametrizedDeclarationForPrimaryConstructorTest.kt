@@ -28,10 +28,10 @@ class ParametrizedDeclarationForPrimaryConstructorTest {
             .firstNotNullOf { it.primaryConstructor }
 
         // then
-        assertSoftly (sut.parameters) {
-                size shouldBeEqualTo 1
-                first().name shouldBeEqualTo "sampleParameter"
-            }
+        assertSoftly(sut.parameters) {
+            size shouldBeEqualTo 1
+            first().name shouldBeEqualTo "sampleParameter"
+        }
     }
 
     @Test

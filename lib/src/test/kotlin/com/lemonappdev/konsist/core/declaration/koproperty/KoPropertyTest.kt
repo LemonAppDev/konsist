@@ -172,13 +172,13 @@ class KoPropertyTest {
             .first()
 
         // then
-        assertSoftly (sut.type) {
-                it?.sourceType shouldBeEqualTo "SampleType"
-                it?.importAliasName shouldBeEqualTo ""
-                it?.name shouldBeEqualTo "SampleType"
-                it?.isImportAlias() shouldBeEqualTo false
-                it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
-            }
+        assertSoftly(sut.type) {
+            it?.sourceType shouldBeEqualTo "SampleType"
+            it?.importAliasName shouldBeEqualTo ""
+            it?.name shouldBeEqualTo "SampleType"
+            it?.isImportAlias() shouldBeEqualTo false
+            it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        }
     }
 
     @Test
@@ -189,13 +189,13 @@ class KoPropertyTest {
             .first()
 
         // then
-        assertSoftly (sut.type) {
-                it?.sourceType shouldBeEqualTo "SampleType"
-                it?.importAliasName shouldBeEqualTo "ImportAlias"
-                it?.name shouldBeEqualTo "ImportAlias"
-                it?.isImportAlias() shouldBeEqualTo true
-                it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
-            }
+        assertSoftly(sut.type) {
+            it?.sourceType shouldBeEqualTo "SampleType"
+            it?.importAliasName shouldBeEqualTo "ImportAlias"
+            it?.name shouldBeEqualTo "ImportAlias"
+            it?.isImportAlias() shouldBeEqualTo true
+            it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        }
     }
 
     @Test
@@ -206,12 +206,12 @@ class KoPropertyTest {
             .first()
 
         // then
-        assertSoftly (sut.type) {
-                it?.sourceType shouldBeEqualTo null
-                it?.name shouldBeEqualTo null
-                it?.isImportAlias() shouldBeEqualTo null
-                it?.fullyQualifiedName shouldBeEqualTo null
-            }
+        assertSoftly(sut.type) {
+            it?.sourceType shouldBeEqualTo null
+            it?.name shouldBeEqualTo null
+            it?.isImportAlias() shouldBeEqualTo null
+            it?.fullyQualifiedName shouldBeEqualTo null
+        }
     }
 
     @Test

@@ -28,10 +28,10 @@ class ParametrizedDeclarationForFunctionTest {
             .first()
 
         // then
-        assertSoftly (sut.parameters) {
-                size shouldBeEqualTo 1
-                first().name shouldBeEqualTo "sampleParameter"
-            }
+        assertSoftly(sut.parameters) {
+            size shouldBeEqualTo 1
+            first().name shouldBeEqualTo "sampleParameter"
+        }
     }
 
     @Test

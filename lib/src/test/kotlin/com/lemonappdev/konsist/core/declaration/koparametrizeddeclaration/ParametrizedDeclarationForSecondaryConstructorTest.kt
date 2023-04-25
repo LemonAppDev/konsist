@@ -31,9 +31,9 @@ class ParametrizedDeclarationForSecondaryConstructorTest {
 
         // then
         assertSoftly(sut.parameters) {
-                size shouldBeEqualTo 1
-                first().name shouldBeEqualTo "sampleParameter"
-            }
+            size shouldBeEqualTo 1
+            first().name shouldBeEqualTo "sampleParameter"
+        }
     }
 
     @Test

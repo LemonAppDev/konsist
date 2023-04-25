@@ -17,13 +17,13 @@ class KoParameterTest {
             ?.first()
 
         // then
-        assertSoftly (sut?.type) {
-                it?.sourceType shouldBeEqualTo "SampleType"
-                it?.importAliasName shouldBeEqualTo ""
-                it?.name shouldBeEqualTo "SampleType"
-                it?.isImportAlias() shouldBeEqualTo false
-                it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
-            }
+        assertSoftly(sut?.type) {
+            it?.sourceType shouldBeEqualTo "SampleType"
+            it?.importAliasName shouldBeEqualTo ""
+            it?.name shouldBeEqualTo "SampleType"
+            it?.isImportAlias() shouldBeEqualTo false
+            it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        }
     }
 
     @Test
@@ -37,13 +37,13 @@ class KoParameterTest {
             ?.first()
 
         // then
-        assertSoftly (sut?.type) {
-                it?.sourceType shouldBeEqualTo "SampleType"
-                it?.importAliasName shouldBeEqualTo "ImportAlias"
-                it?.name shouldBeEqualTo "ImportAlias"
-                it?.isImportAlias() shouldBeEqualTo true
-                it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
-            }
+        assertSoftly(sut?.type) {
+            it?.sourceType shouldBeEqualTo "SampleType"
+            it?.importAliasName shouldBeEqualTo "ImportAlias"
+            it?.name shouldBeEqualTo "ImportAlias"
+            it?.isImportAlias() shouldBeEqualTo true
+            it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        }
     }
 
     @Test

@@ -15,9 +15,9 @@ class KoBaseDeclarationTest {
 
         // then
         assertSoftly(sut.filePath) {
-                startsWith("//") shouldBeEqualTo false
-                endsWith("kobasedeclaration/snippet/file-path.kt") shouldBeEqualTo true
-            }
+            startsWith("//") shouldBeEqualTo false
+            endsWith("kobasedeclaration/snippet/file-path.kt") shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -80,10 +80,10 @@ class KoBaseDeclarationTest {
         // then
         val declaration = "Declaration:\nfun sampleFunction() {\n}"
         assertSoftly(sut.locationWithText) {
-                startsWith("Location: /") shouldBeEqualTo true
-                contains(projectPath) shouldBeEqualTo true
-                endsWith(declaration) shouldBeEqualTo true
-            }
+            startsWith("Location: /") shouldBeEqualTo true
+            contains(projectPath) shouldBeEqualTo true
+            endsWith(declaration) shouldBeEqualTo true
+        }
     }
 
     @Test
