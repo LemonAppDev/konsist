@@ -157,19 +157,20 @@ class KoScopeTest {
         val sut = KoScope.fromPackage("com.lemonappdev.konsist.core.declaration.koscope")
 
         // then
+        val prefix = "${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/"
         sut.toString() shouldBeEqualTo """
-            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForClassTest.kt
-            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForCompanionObjectTest.kt
-            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForDeclarationTest.kt
-            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForFunctionTest.kt
-            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForImportTest.kt
-            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForInterfaceTest.kt
-            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForObjectTest.kt
-            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForPackageTest.kt
-            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForPropertyTest.kt
-            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeForTypeAliasTest.kt
-            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeOperatorTest.kt
-            ${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeTest.kt
+            ${prefix}KoScopeForClassTest.kt
+            ${prefix}KoScopeForCompanionObjectTest.kt
+            ${prefix}KoScopeForDeclarationTest.kt
+            ${prefix}KoScopeForFunctionTest.kt
+            ${prefix}KoScopeForImportTest.kt
+            ${prefix}KoScopeForInterfaceTest.kt
+            ${prefix}KoScopeForObjectTest.kt
+            ${prefix}KoScopeForPackageTest.kt
+            ${prefix}KoScopeForPropertyTest.kt
+            ${prefix}KoScopeForTypeAliasTest.kt
+            ${prefix}KoScopeOperatorTest.kt
+            ${prefix}KoScopeTest.kt
         """.trimIndent()
     }
 }

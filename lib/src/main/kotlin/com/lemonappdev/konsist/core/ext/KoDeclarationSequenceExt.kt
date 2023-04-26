@@ -85,3 +85,8 @@ fun <T : KoDeclaration> Sequence<T>.withPackage(vararg packages: String) = filte
 fun <T : KoDeclaration> Sequence<T>.withoutPackage(vararg packages: String) = filter {
     packages.all { packagee -> it.resideOutsidePackage(packagee) }
 }
+
+fun <T : KoDeclaration> Sequence<T>.print(): Sequence<T> {
+    forEach { println(it.toString()) }
+    return this
+}

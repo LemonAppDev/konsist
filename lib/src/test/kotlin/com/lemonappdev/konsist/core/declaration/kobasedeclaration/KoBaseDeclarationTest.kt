@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kobasedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.TestSnippetProvider.modulePath
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -66,27 +67,6 @@ class KoBaseDeclarationTest {
     }
 
     @Test
-    fun `location-with-text`() {
-        // given
-        val projectPath = getSnippetFile("location-with-text")
-            .files()
-            .first()
-            .projectFilePath
-
-        val sut = getSnippetFile("location-with-text")
-            .functions()
-            .first()
-
-        // then
-        val declaration = "Declaration:\nfun sampleFunction() {\n}"
-        assertSoftly(sut.locationWithText) {
-            startsWith("Location: /") shouldBeEqualTo true
-            contains(projectPath) shouldBeEqualTo true
-            endsWith(declaration) shouldBeEqualTo true
-        }
-    }
-
-    @Test
     fun `containing-file`() {
         // given
         val sut = getSnippetFile("containing-file")
@@ -131,15 +111,15 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
+        val expected = """ 
+                fun sampleFunction() {
+                    "SampleText"
+                }
+        """.trimIndent()
+
         sut
             .text
-            .shouldBeEqualTo(
-                """
-            fun sampleFunction() {
-                "SampleText"
-            }
-                """.trimIndent(),
-            )
+            .shouldBeEqualTo(expected)
     }
 
     @Test
@@ -150,7 +130,12 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo sut.locationWithText
+        val expected = """
+            [KoFunction] $modulePath/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kobasedeclaration/snippet/to-string.kt:1:1
+            fun sampleFunction() {
+            }
+        """.trimIndent()
+        sut.toString() shouldBeEqualTo expected
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kobasedeclaration/snippet/", fileName)
