@@ -60,7 +60,6 @@ class KoDoc(private val kDocElement: KDocElement) {
         firsts + others
     }
 
-
     val paramBlockTags by lazy {
         val tag = this.tags.filter { it.startsWith("@param") }
 
@@ -146,10 +145,12 @@ class KoDoc(private val kDocElement: KDocElement) {
     }
 
     val blockTags by lazy {
-        (paramBlockTags + returnBlockTag + constructorBlockTag + receiverBlockTag +
+        (
+            paramBlockTags + returnBlockTag + constructorBlockTag + receiverBlockTag +
                 propertyBlockTags + throwsBlockTags + sampleBlockTags +
                 seeBlockTags + authorBlockTags + sinceBlockTag + suppressBlockTag +
-                versionBlockTag + propertySetterBlockTag + propertyGetterBlockTag).filterNotNull()
+                versionBlockTag + propertySetterBlockTag + propertyGetterBlockTag
+            ).filterNotNull()
     }
 
     private fun parseToValuedBlockTag(sentence: String): KoValuedBlockTag {
