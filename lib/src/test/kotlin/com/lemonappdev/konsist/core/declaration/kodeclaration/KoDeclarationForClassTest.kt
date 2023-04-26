@@ -309,9 +309,9 @@ class KoDeclarationForClassTest {
     }
 
     @Test
-    fun `class-has-not-kdoc`() {
+    fun `class-has-no-kdoc`() {
         // given
-        val sut = getSnippetFile("class-has-not-kdoc")
+        val sut = getSnippetFile("class-has-no-kdoc")
             .classes()
             .first()
 

@@ -310,9 +310,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-has-not-kdoc`() {
+    fun `property-has-no-kdoc`() {
         // given
-        val sut = getSnippetFile("property-has-not-kdoc")
+        val sut = getSnippetFile("property-has-no-kdoc")
             .properties()
             .first()
 

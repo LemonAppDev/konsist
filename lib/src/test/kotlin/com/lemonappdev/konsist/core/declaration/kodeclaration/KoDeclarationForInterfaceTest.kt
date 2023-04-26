@@ -307,9 +307,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-has-not-kdoc`() {
+    fun `interface-has-no-kdoc`() {
         // given
-        val sut = getSnippetFile("interface-has-not-kdoc")
+        val sut = getSnippetFile("interface-has-no-kdoc")
             .interfaces()
             .first()
 

@@ -310,9 +310,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-has-not-kdoc`() {
+    fun `object-has-no-kdoc`() {
         // given
-        val sut = getSnippetFile("object-has-not-kdoc")
+        val sut = getSnippetFile("object-has-no-kdoc")
             .objects()
             .first()
 

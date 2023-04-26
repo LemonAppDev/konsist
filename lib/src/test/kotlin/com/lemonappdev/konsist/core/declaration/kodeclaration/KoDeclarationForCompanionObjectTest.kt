@@ -310,9 +310,9 @@ class KoDeclarationForCompanionObjectTest {
     }
 
     @Test
-    fun `companion-object-has-not-kdoc`() {
+    fun `companion-object-has-no-kdoc`() {
         // given
-        val sut = getSnippetFile("companion-object-has-not-kdoc")
+        val sut = getSnippetFile("companion-object-has-no-kdoc")
             .companionObjects()
             .first()
 

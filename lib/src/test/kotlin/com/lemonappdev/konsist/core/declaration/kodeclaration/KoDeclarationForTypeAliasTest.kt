@@ -225,9 +225,9 @@ class KoDeclarationForTypeAliasTest {
     }
 
     @Test
-    fun `typealias-has-not-kdoc`() {
+    fun `typealias-has-no-kdoc`() {
         // given
-        val sut = getSnippetFile("typealias-has-not-kdoc")
+        val sut = getSnippetFile("typealias-has-no-kdoc")
             .typeAliases()
             .first()
 

@@ -312,9 +312,9 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-has-not-kdoc`() {
+    fun `function-has-no-kdoc`() {
         // given
-        val sut = getSnippetFile("function-has-not-kdoc")
+        val sut = getSnippetFile("function-has-no-kdoc")
             .functions()
             .first()
 
