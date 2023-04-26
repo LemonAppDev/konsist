@@ -53,7 +53,7 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
     /**
      * Text of the declaration
      */
-    val text by lazy {
+    open val text by lazy {
         ktElement
             .getTextWithLocation()
             .substringBefore("' at (")

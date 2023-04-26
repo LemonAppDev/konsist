@@ -61,7 +61,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
     }
 
     private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String) = annotations.any {
-        it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name
+        it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name || it.text == name
     }
 
     fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {

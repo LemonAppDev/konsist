@@ -8,6 +8,8 @@ class KoAnnotation private constructor(
 ) : KoNamedDeclaration(ktAnnotationEntry) {
     override val name by lazy { ktAnnotationEntry.shortName.toString() }
 
+    override val text: String by lazy { ktAnnotationEntry.text.removePrefix("@") }
+
     val fullyQualifiedName: String by lazy {
         containingFile
             .imports
