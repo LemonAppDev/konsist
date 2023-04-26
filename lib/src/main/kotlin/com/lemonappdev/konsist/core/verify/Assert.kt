@@ -33,7 +33,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
             )
         }
 
-        val notSuppressedDeclarations = checkIfSuppress(localList)
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(localList)
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
@@ -66,7 +66,7 @@ private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: Li
     return "Assert '$testMethodName' has failed. Invalid declarations:\n$failedDeclarationsMessage"
 }
 
-private fun <E : KoBaseDeclaration> checkIfSuppress(localList: List<E>): List<E> {
+private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {
     val testName = Thread.currentThread().stackTrace[4].methodName
 
     val declarationsWithoutAnnotations = localList

@@ -1,0 +1,16 @@
+fun sampleTopLevelFunction() {
+    class SampleClass {
+        fun sampleNestedFunction() {
+
+            @Suppress("a")
+            fun sampleNestedFunctionWithSuppress1() {
+
+            }
+
+            @Suppress("=")
+            fun sampleNestedFunctionWithSuppress2() {
+
+            }
+        }
+    }
+}

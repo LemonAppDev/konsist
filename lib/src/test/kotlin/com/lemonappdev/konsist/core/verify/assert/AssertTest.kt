@@ -22,7 +22,7 @@ class AssertTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Check 'assert-test-method-name' has failed. Invalid declarations") ?: throw e
+            e.message?.shouldContain("Assert 'assert-test-method-name' has failed. Invalid declarations") ?: throw e
         }
     }
 
@@ -164,6 +164,16 @@ class AssertTest {
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assertNot' method."
+    }
+
+    @Test
+    fun `assert-not-check-declarations-with-suppress-annotation`() {
+        // given
+        val sut = getSnippetFile("assert-not-check-declarations-with-suppress-annotation")
+            .functions(includeLocal = true)
+
+        // then
+        sut.assert { it.name.endsWith("Function") }
     }
 
     private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/verify/assert/snippet/", fileName)
