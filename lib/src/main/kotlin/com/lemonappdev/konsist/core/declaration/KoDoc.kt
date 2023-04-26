@@ -91,7 +91,13 @@ class KoDoc(private val kDocElement: KDocElement) {
     }
 
     val throwsBlockTags by lazy {
-        val tag = this.tags.filter { it.startsWith("@throws") || it.startsWith("@exception") }
+        val tag = this.tags.filter { it.startsWith("@throws") }
+
+        tag.map { parseToValuedBlockTag(it) }
+    }
+
+    val exceptionBlockTags by lazy {
+        val tag = this.tags.filter { it.startsWith("@exception") }
 
         tag.map { parseToValuedBlockTag(it) }
     }
@@ -147,7 +153,7 @@ class KoDoc(private val kDocElement: KDocElement) {
     val blockTags by lazy {
         (
                 paramBlockTags + returnBlockTag + constructorBlockTag + receiverBlockTag +
-                        propertyBlockTags + throwsBlockTags + sampleBlockTags +
+                        propertyBlockTags + throwsBlockTags + exceptionBlockTags + sampleBlockTags +
                         seeBlockTags + authorBlockTags + sinceBlockTag + suppressBlockTag +
                         versionBlockTag + propertySetterBlockTag + propertyGetterBlockTag
                 ).filterNotNull()

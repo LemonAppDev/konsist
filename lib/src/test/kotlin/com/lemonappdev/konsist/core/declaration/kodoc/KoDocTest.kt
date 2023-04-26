@@ -5,7 +5,6 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldHaveSize
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoDocTest {
@@ -125,13 +124,27 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            throwsBlockTags shouldHaveSize 2
+            throwsBlockTags shouldHaveSize 1
             throwsBlockTags[0].name shouldBeEqualTo "@throws"
             throwsBlockTags[0].value shouldBeEqualTo "IllegalArgumentException"
             throwsBlockTags[0].description shouldBeEqualTo "First sample description"
-            throwsBlockTags[1].name shouldBeEqualTo "@exception"
-            throwsBlockTags[1].value shouldBeEqualTo "NullPointerException"
-            throwsBlockTags[1].description shouldBeEqualTo "Second sample description"
+        }
+    }
+
+    @Test
+    fun `class-with-block-tags exception tag`() {
+        // given
+        val sut = getSnippetFile("class-with-block-tags")
+            .classes()
+            .first()
+            .koDoc!!
+
+        // then
+        assertSoftly(sut) {
+            exceptionBlockTags shouldHaveSize 1
+            exceptionBlockTags[0].name shouldBeEqualTo "@exception"
+            exceptionBlockTags[0].value shouldBeEqualTo "NullPointerException"
+            exceptionBlockTags[0].description shouldBeEqualTo "Second sample description"
         }
     }
 
@@ -298,13 +311,27 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            throwsBlockTags shouldHaveSize 2
+            throwsBlockTags shouldHaveSize 1
             throwsBlockTags[0].name shouldBeEqualTo "@throws"
             throwsBlockTags[0].value shouldBeEqualTo "IllegalArgumentException"
             throwsBlockTags[0].description shouldBeEqualTo "First sample description"
-            throwsBlockTags[1].name shouldBeEqualTo "@exception"
-            throwsBlockTags[1].value shouldBeEqualTo "NullPointerException"
-            throwsBlockTags[1].description shouldBeEqualTo "Second sample description"
+        }
+    }
+
+    @Test
+    fun `function-with-block-tags exception tag`() {
+        // given
+        val sut = getSnippetFile("function-with-block-tags")
+            .functions(includeNested = true)
+            .first()
+            .koDoc!!
+
+        // then
+        assertSoftly(sut) {
+            exceptionBlockTags shouldHaveSize 1
+            exceptionBlockTags[0].name shouldBeEqualTo "@exception"
+            exceptionBlockTags[0].value shouldBeEqualTo "NullPointerException"
+            exceptionBlockTags[0].description shouldBeEqualTo "Second sample description"
         }
     }
 
