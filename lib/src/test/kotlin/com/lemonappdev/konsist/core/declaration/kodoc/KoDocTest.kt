@@ -1,6 +1,21 @@
 package com.lemonappdev.konsist.core.declaration.kodoc
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.core.const.KoTag.AUTHOR
+import com.lemonappdev.konsist.core.const.KoTag.CONSTRUCTOR
+import com.lemonappdev.konsist.core.const.KoTag.EXCEPTION
+import com.lemonappdev.konsist.core.const.KoTag.PARAM
+import com.lemonappdev.konsist.core.const.KoTag.PROPERTY
+import com.lemonappdev.konsist.core.const.KoTag.PROPERTYGETTER
+import com.lemonappdev.konsist.core.const.KoTag.PROPERTYSETTER
+import com.lemonappdev.konsist.core.const.KoTag.RECEIVER
+import com.lemonappdev.konsist.core.const.KoTag.RETURN
+import com.lemonappdev.konsist.core.const.KoTag.SAMPLE
+import com.lemonappdev.konsist.core.const.KoTag.SEE
+import com.lemonappdev.konsist.core.const.KoTag.SINCE
+import com.lemonappdev.konsist.core.const.KoTag.SUPPRESS
+import com.lemonappdev.konsist.core.const.KoTag.THROWS
+import com.lemonappdev.konsist.core.const.KoTag.VERSION
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContain
@@ -70,10 +85,10 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             paramBlockTags shouldHaveSize 2
-            paramBlockTags[0].name shouldBeEqualTo "@param"
+            paramBlockTags[0].name shouldBeEqualTo PARAM
             paramBlockTags[0].value shouldBeEqualTo "SampleType1"
             paramBlockTags[0].description shouldBeEqualTo "The first type parameter for this class."
-            paramBlockTags[1].name shouldBeEqualTo "@param"
+            paramBlockTags[1].name shouldBeEqualTo PARAM
             paramBlockTags[1].value shouldBeEqualTo "SampleType2"
             paramBlockTags[1].description shouldBeEqualTo "The second type parameter for this class."
         }
@@ -90,10 +105,10 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             propertyBlockTags shouldHaveSize 2
-            propertyBlockTags[0].name shouldBeEqualTo "@property"
+            propertyBlockTags[0].name shouldBeEqualTo PROPERTY
             propertyBlockTags[0].value shouldBeEqualTo "sampleProperty1"
             propertyBlockTags[0].description shouldBeEqualTo "The first property of the class."
-            propertyBlockTags[1].name shouldBeEqualTo "@property"
+            propertyBlockTags[1].name shouldBeEqualTo PROPERTY
             propertyBlockTags[1].value shouldBeEqualTo "sampleProperty2"
             propertyBlockTags[1].description shouldBeEqualTo "The second property of the class."
         }
@@ -109,7 +124,7 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            constructorBlockTag?.name shouldBeEqualTo "@constructor"
+            constructorBlockTag?.name shouldBeEqualTo CONSTRUCTOR
             constructorBlockTag?.description shouldBeEqualTo "Creates a new instance of the [SampleClass]."
         }
     }
@@ -125,7 +140,7 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             throwsBlockTags shouldHaveSize 1
-            throwsBlockTags[0].name shouldBeEqualTo "@throws"
+            throwsBlockTags[0].name shouldBeEqualTo THROWS
             throwsBlockTags[0].value shouldBeEqualTo "IllegalArgumentException"
             throwsBlockTags[0].description shouldBeEqualTo "First sample description"
         }
@@ -142,7 +157,7 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             exceptionBlockTags shouldHaveSize 1
-            exceptionBlockTags[0].name shouldBeEqualTo "@exception"
+            exceptionBlockTags[0].name shouldBeEqualTo EXCEPTION
             exceptionBlockTags[0].value shouldBeEqualTo "NullPointerException"
             exceptionBlockTags[0].description shouldBeEqualTo "Second sample description"
         }
@@ -159,10 +174,10 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             seeBlockTags shouldHaveSize 2
-            seeBlockTags[0].name shouldBeEqualTo "@see"
+            seeBlockTags[0].name shouldBeEqualTo SEE
             seeBlockTags[0].value shouldBeEqualTo "AnotherClass1"
             seeBlockTags[0].description shouldBeEqualTo "sample description"
-            seeBlockTags[1].name shouldBeEqualTo "@see"
+            seeBlockTags[1].name shouldBeEqualTo SEE
             seeBlockTags[1].value shouldBeEqualTo "AnotherClass2"
             seeBlockTags[1].description shouldBeEqualTo ""
         }
@@ -178,7 +193,7 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            sinceBlockTag?.name shouldBeEqualTo "@since"
+            sinceBlockTag?.name shouldBeEqualTo SINCE
             sinceBlockTag?.description shouldBeEqualTo "1.0.0"
         }
     }
@@ -193,7 +208,7 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            versionBlockTag?.name shouldBeEqualTo "@version"
+            versionBlockTag?.name shouldBeEqualTo VERSION
             versionBlockTag?.description shouldBeEqualTo "1.2.3"
         }
     }
@@ -209,10 +224,10 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             sampleBlockTags shouldHaveSize 2
-            sampleBlockTags[0].name shouldBeEqualTo "@sample"
+            sampleBlockTags[0].name shouldBeEqualTo SAMPLE
             sampleBlockTags[0].value shouldBeEqualTo "SampleClass.sampleMethod"
             sampleBlockTags[0].description shouldBeEqualTo "sample description"
-            sampleBlockTags[1].name shouldBeEqualTo "@sample"
+            sampleBlockTags[1].name shouldBeEqualTo SAMPLE
             sampleBlockTags[1].value shouldBeEqualTo "SampleClass.sampleProperty"
             sampleBlockTags[1].description shouldBeEqualTo ""
         }
@@ -228,7 +243,7 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            suppressBlockTag?.name shouldBeEqualTo "@suppress"
+            suppressBlockTag?.name shouldBeEqualTo SUPPRESS
             suppressBlockTag?.description shouldBeEqualTo "UnusedPrivateMember"
         }
     }
@@ -244,9 +259,9 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             authorBlockTags shouldHaveSize 2
-            authorBlockTags[0].name shouldBeEqualTo "@author"
+            authorBlockTags[0].name shouldBeEqualTo AUTHOR
             authorBlockTags[0].description shouldBeEqualTo "Author1"
-            authorBlockTags[1].name shouldBeEqualTo "@author"
+            authorBlockTags[1].name shouldBeEqualTo AUTHOR
             authorBlockTags[1].description shouldBeEqualTo "Author2"
         }
     }
@@ -277,10 +292,10 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             paramBlockTags shouldHaveSize 2
-            paramBlockTags[0].name shouldBeEqualTo "@param"
+            paramBlockTags[0].name shouldBeEqualTo PARAM
             paramBlockTags[0].value shouldBeEqualTo "sampleArgument1"
             paramBlockTags[0].description shouldBeEqualTo "The first argument."
-            paramBlockTags[1].name shouldBeEqualTo "@param"
+            paramBlockTags[1].name shouldBeEqualTo PARAM
             paramBlockTags[1].value shouldBeEqualTo "sampleArgument2"
             paramBlockTags[1].description shouldBeEqualTo "The second argument."
         }
@@ -296,7 +311,7 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            returnBlockTag?.name shouldBeEqualTo "@return"
+            returnBlockTag?.name shouldBeEqualTo RETURN
             returnBlockTag?.description shouldBeEqualTo "The result of the computation."
         }
     }
@@ -312,7 +327,7 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             throwsBlockTags shouldHaveSize 1
-            throwsBlockTags[0].name shouldBeEqualTo "@throws"
+            throwsBlockTags[0].name shouldBeEqualTo THROWS
             throwsBlockTags[0].value shouldBeEqualTo "IllegalArgumentException"
             throwsBlockTags[0].description shouldBeEqualTo "First sample description"
         }
@@ -329,7 +344,7 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             exceptionBlockTags shouldHaveSize 1
-            exceptionBlockTags[0].name shouldBeEqualTo "@exception"
+            exceptionBlockTags[0].name shouldBeEqualTo EXCEPTION
             exceptionBlockTags[0].value shouldBeEqualTo "NullPointerException"
             exceptionBlockTags[0].description shouldBeEqualTo "Second sample description"
         }
@@ -346,10 +361,10 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             sampleBlockTags shouldHaveSize 2
-            sampleBlockTags[0].name shouldBeEqualTo "@sample"
+            sampleBlockTags[0].name shouldBeEqualTo SAMPLE
             sampleBlockTags[0].value shouldBeEqualTo "SampleClass.sampleMethod"
             sampleBlockTags[0].description shouldBeEqualTo "sample description"
-            sampleBlockTags[1].name shouldBeEqualTo "@sample"
+            sampleBlockTags[1].name shouldBeEqualTo SAMPLE
             sampleBlockTags[1].value shouldBeEqualTo "SampleClass.sampleProperty"
             sampleBlockTags[1].description shouldBeEqualTo ""
         }
@@ -365,7 +380,7 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            receiverBlockTag?.name shouldBeEqualTo "@receiver"
+            receiverBlockTag?.name shouldBeEqualTo RECEIVER
             receiverBlockTag?.description shouldBeEqualTo "sample receiver description"
         }
     }
@@ -381,10 +396,10 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             seeBlockTags shouldHaveSize 2
-            seeBlockTags[0].name shouldBeEqualTo "@see"
+            seeBlockTags[0].name shouldBeEqualTo SEE
             seeBlockTags[0].value shouldBeEqualTo "AnotherClass1"
             seeBlockTags[0].description shouldBeEqualTo "sample description"
-            seeBlockTags[1].name shouldBeEqualTo "@see"
+            seeBlockTags[1].name shouldBeEqualTo SEE
             seeBlockTags[1].value shouldBeEqualTo "AnotherClass2"
             seeBlockTags[1].description shouldBeEqualTo ""
         }
@@ -401,9 +416,9 @@ class KoDocTest {
         // then
         assertSoftly(sut) {
             authorBlockTags shouldHaveSize 2
-            authorBlockTags[0].name shouldBeEqualTo "@author"
+            authorBlockTags[0].name shouldBeEqualTo AUTHOR
             authorBlockTags[0].description shouldBeEqualTo "Author1"
-            authorBlockTags[1].name shouldBeEqualTo "@author"
+            authorBlockTags[1].name shouldBeEqualTo AUTHOR
             authorBlockTags[1].description shouldBeEqualTo "Author2"
         }
     }
@@ -418,7 +433,7 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            sinceBlockTag?.name shouldBeEqualTo "@since"
+            sinceBlockTag?.name shouldBeEqualTo SINCE
             sinceBlockTag?.description shouldBeEqualTo "1.0.0"
         }
     }
@@ -433,7 +448,7 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            versionBlockTag?.name shouldBeEqualTo "@version"
+            versionBlockTag?.name shouldBeEqualTo VERSION
             versionBlockTag?.description shouldBeEqualTo "1.2.3"
         }
     }
@@ -448,7 +463,7 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            suppressBlockTag?.name shouldBeEqualTo "@suppress"
+            suppressBlockTag?.name shouldBeEqualTo SUPPRESS
             suppressBlockTag?.description shouldBeEqualTo "UnusedPrivateMember"
         }
     }
@@ -478,7 +493,7 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            propertySetterBlockTag?.name shouldBeEqualTo "@propertySetter"
+            propertySetterBlockTag?.name shouldBeEqualTo PROPERTYSETTER
             propertySetterBlockTag?.description shouldBeEqualTo "Sets the value of the [name] property."
         }
     }
@@ -493,7 +508,7 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            propertyGetterBlockTag?.name shouldBeEqualTo "@propertyGetter"
+            propertyGetterBlockTag?.name shouldBeEqualTo PROPERTYGETTER
             propertyGetterBlockTag?.description shouldBeEqualTo "Retrieves the value of the [name] property."
         }
     }
@@ -508,11 +523,11 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
-            hasTags("@since") shouldBeEqualTo true
-            hasTags("@since", "@see") shouldBeEqualTo true
-            hasTags("@sample") shouldBeEqualTo false
-            hasTags("@since", "@sample") shouldBeEqualTo false
-            hasTags("@since", "@see", "sample") shouldBeEqualTo false
+            hasTags(SINCE) shouldBeEqualTo true
+            hasTags(SINCE, SEE) shouldBeEqualTo true
+            hasTags(SAMPLE) shouldBeEqualTo false
+            hasTags(SINCE, SAMPLE) shouldBeEqualTo false
+            hasTags(SINCE, SEE, SAMPLE) shouldBeEqualTo false
         }
     }
 

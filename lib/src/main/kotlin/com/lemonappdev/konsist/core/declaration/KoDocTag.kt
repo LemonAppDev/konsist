@@ -1,3 +1,5 @@
 package com.lemonappdev.konsist.core.declaration
 
-open class KoDocTag(open val name: String, open val description: String)
+import com.lemonappdev.konsist.core.const.KoTag
+
+open class KoDocTag(open val name: KoTag, open val description: String)

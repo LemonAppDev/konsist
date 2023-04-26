@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.const.KoModifier.OPEN
 import com.lemonappdev.konsist.core.const.KoModifier.PROTECTED
+import com.lemonappdev.konsist.core.const.KoTag.*
 import com.lemonappdev.konsist.core.declaration.KoAnnotation
 import com.lemonappdev.konsist.core.declaration.KoDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDoc
@@ -637,8 +638,8 @@ class KoDeclarationSequenceExtTest {
     @Test
     fun `withKoDocWithTags(String) returns declaration with all of given block tags`() {
         // given
-        val blockTag1 = "@blockTag1"
-        val blockTag2 = "@blockTag2"
+        val blockTag1 = SINCE
+        val blockTag2 = SEE
         val koDoc1: KoDoc = mockk {
             every { hasTags(blockTag1, blockTag2) } returns true
         }
@@ -663,8 +664,8 @@ class KoDeclarationSequenceExtTest {
     @Test
     fun `withoutKoDocWithTags(String) returns declaration without any of given block tags`() {
         // given
-        val blockTag1 = "@blockTag1"
-        val blockTag2 = "@blockTag2"
+        val blockTag1 = SINCE
+        val blockTag2 = SEE
         val koDoc1: KoDoc = mockk {
             every { hasTags(blockTag1, blockTag2) } returns true
         }
@@ -689,8 +690,8 @@ class KoDeclarationSequenceExtTest {
     @Test
     fun `withSomeKoDocWithTags(String) returns declarations which have at least one of given block tags`() {
         // given
-        val blockTag1 = "@blockTag1"
-        val blockTag2 = "@blockTag2"
+        val blockTag1 = SINCE
+        val blockTag2 = SEE
         val koDoc1: KoDoc = mockk {
             every { hasTags(blockTag1) } returns true
             every { hasTags(blockTag2) } returns true

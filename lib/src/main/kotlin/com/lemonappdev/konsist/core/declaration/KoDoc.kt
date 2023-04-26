@@ -1,5 +1,20 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.core.const.KoTag
+import com.lemonappdev.konsist.core.const.KoTag.AUTHOR
+import com.lemonappdev.konsist.core.const.KoTag.CONSTRUCTOR
+import com.lemonappdev.konsist.core.const.KoTag.EXCEPTION
+import com.lemonappdev.konsist.core.const.KoTag.PARAM
+import com.lemonappdev.konsist.core.const.KoTag.PROPERTY
+import com.lemonappdev.konsist.core.const.KoTag.PROPERTYGETTER
+import com.lemonappdev.konsist.core.const.KoTag.PROPERTYSETTER
+import com.lemonappdev.konsist.core.const.KoTag.RECEIVER
+import com.lemonappdev.konsist.core.const.KoTag.RETURN
+import com.lemonappdev.konsist.core.const.KoTag.SAMPLE
+import com.lemonappdev.konsist.core.const.KoTag.SEE
+import com.lemonappdev.konsist.core.const.KoTag.SINCE
+import com.lemonappdev.konsist.core.const.KoTag.SUPPRESS
+import com.lemonappdev.konsist.core.const.KoTag.VERSION
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.kdoc.psi.impl.KDocSection
 
@@ -61,91 +76,91 @@ class KoDoc(private val kDocElement: KDocElement) {
     }
 
     val paramBlockTags by lazy {
-        val tag = this.tags.filter { it.startsWith("@param") }
+        val tag = this.tags.filter { it.startsWith(PARAM.type) }
 
         tag.map { parseToValuedBlockTag(it) }
     }
 
     val returnBlockTag by lazy {
-        val tag = this.tags.firstOrNull { it.startsWith("@return") }
+        val tag = this.tags.firstOrNull { it.startsWith(RETURN.type) }
 
         tag?.let { parseToBlockTag(it) }
     }
 
     val constructorBlockTag by lazy {
-        val tag = this.tags.firstOrNull { it.startsWith("@constructor") }
+        val tag = this.tags.firstOrNull { it.startsWith(CONSTRUCTOR.type) }
 
         tag?.let { parseToBlockTag(it) }
     }
 
     val receiverBlockTag by lazy {
-        val tag = this.tags.firstOrNull { it.startsWith("@receiver") }
+        val tag = this.tags.firstOrNull { it.startsWith(RECEIVER.type) }
 
         tag?.let { parseToBlockTag(it) }
     }
 
     val propertyBlockTags by lazy {
-        val tag = this.tags.filter { it.startsWith("@property") }
+        val tag = this.tags.filter { it.startsWith(PROPERTY.type) }
 
         tag.map { parseToValuedBlockTag(it) }
     }
 
     val throwsBlockTags by lazy {
-        val tag = this.tags.filter { it.startsWith("@throws") }
+        val tag = this.tags.filter { it.startsWith(KoTag.THROWS.type) }
 
         tag.map { parseToValuedBlockTag(it) }
     }
 
     val exceptionBlockTags by lazy {
-        val tag = this.tags.filter { it.startsWith("@exception") }
+        val tag = this.tags.filter { it.startsWith(EXCEPTION.type) }
 
         tag.map { parseToValuedBlockTag(it) }
     }
 
     val sampleBlockTags by lazy {
-        val tag = this.tags.filter { it.startsWith("@sample") }
+        val tag = this.tags.filter { it.startsWith(SAMPLE.type) }
 
         tag.map { parseToValuedBlockTag(it) }
     }
 
     val seeBlockTags by lazy {
-        val tag = this.tags.filter { it.startsWith("@see") }
+        val tag = this.tags.filter { it.startsWith(SEE.type) }
 
         tag.map { parseToValuedBlockTag(it) }
     }
 
     val authorBlockTags by lazy {
-        val tag = this.tags.filter { it.startsWith("@author") }
+        val tag = this.tags.filter { it.startsWith(AUTHOR.type) }
 
         tag.map { parseToBlockTag(it) }
     }
 
     val sinceBlockTag by lazy {
-        val tag = this.tags.firstOrNull { it.startsWith("@since") }
+        val tag = this.tags.firstOrNull { it.startsWith(SINCE.type) }
 
         tag?.let { parseToBlockTag(it) }
     }
 
     val suppressBlockTag by lazy {
-        val tag = this.tags.firstOrNull { it.startsWith("@suppress") }
+        val tag = this.tags.firstOrNull { it.startsWith(SUPPRESS.type) }
 
         tag?.let { parseToBlockTag(it) }
     }
 
     val versionBlockTag by lazy {
-        val tag = this.tags.firstOrNull { it.startsWith("@version") }
+        val tag = this.tags.firstOrNull { it.startsWith(VERSION.type) }
 
         tag?.let { parseToBlockTag(it) }
     }
 
     val propertySetterBlockTag by lazy {
-        val tag = this.tags.firstOrNull { it.startsWith("@propertySetter") }
+        val tag = this.tags.firstOrNull { it.startsWith(PROPERTYSETTER.type) }
 
         tag?.let { parseToBlockTag(it) }
     }
 
     val propertyGetterBlockTag by lazy {
-        val tag = this.tags.firstOrNull { it.startsWith("@propertyGetter") }
+        val tag = this.tags.firstOrNull { it.startsWith(PROPERTYGETTER.type) }
 
         tag?.let { parseToBlockTag(it) }
     }
@@ -159,7 +174,7 @@ class KoDoc(private val kDocElement: KDocElement) {
                 ).filterNotNull()
     }
 
-    fun hasTags(vararg tags: String) = tags.all {
+    fun hasTags(vararg tags: KoTag) = tags.all {
         blockTags
             .map { tag -> tag.name }
             .contains(it)
@@ -175,7 +190,11 @@ class KoDoc(private val kDocElement: KDocElement) {
             }
             .joinToString(" ")
 
-        return KoValuedDocTag(parsed[0], parsed[1], description)
+        val name = KoTag.values().first { tag ->
+            tag.type == parsed[0]
+        }
+
+        return KoValuedDocTag(name, parsed[1], description)
     }
 
     private fun parseToBlockTag(sentence: String): KoDocTag {
@@ -185,6 +204,10 @@ class KoDoc(private val kDocElement: KDocElement) {
             .also { it.removeFirst() }
             .joinToString(" ")
 
-        return KoDocTag(parsed[0], description)
+        val name = KoTag.values().first { tag ->
+            tag.type == parsed[0]
+        }
+
+        return KoDocTag(name, description)
     }
 }

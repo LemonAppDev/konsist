@@ -3,6 +3,7 @@
 package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.const.KoModifier
+import com.lemonappdev.konsist.core.const.KoTag
 import com.lemonappdev.konsist.core.declaration.KoDeclaration
 import kotlin.reflect.KClass
 
@@ -90,10 +91,10 @@ fun <T : KoDeclaration> Sequence<T>.withKoDoc() = filter { it.hasKoDoc() }
 
 fun <T : KoDeclaration> Sequence<T>.withoutKoDoc() = filterNot { it.hasKoDoc() }
 
-fun <T : KoDeclaration> Sequence<T>.withKoDocWithTags(vararg tags: String) = filter { it.koDoc?.hasTags(*tags) ?: false }
+fun <T : KoDeclaration> Sequence<T>.withKoDocWithTags(vararg tags: KoTag) = filter { it.koDoc?.hasTags(*tags) ?: false }
 
-fun <T : KoDeclaration> Sequence<T>.withSomeKoDocWithTags(vararg tags: String) = filter {
+fun <T : KoDeclaration> Sequence<T>.withSomeKoDocWithTags(vararg tags: KoTag) = filter {
     tags.any { tag -> it.koDoc?.hasTags(tag) ?: false}
 }
 
-fun <T : KoDeclaration> Sequence<T>.withoutKoDocWithTags(vararg tags: String) = filterNot { it.koDoc?.hasTags(*tags) ?: false}
+fun <T : KoDeclaration> Sequence<T>.withoutKoDocWithTags(vararg tags: KoTag) = filterNot { it.koDoc?.hasTags(*tags) ?: false}
