@@ -146,11 +146,17 @@ class KoDoc(private val kDocElement: KDocElement) {
 
     val blockTags by lazy {
         (
-            paramBlockTags + returnBlockTag + constructorBlockTag + receiverBlockTag +
-                propertyBlockTags + throwsBlockTags + sampleBlockTags +
-                seeBlockTags + authorBlockTags + sinceBlockTag + suppressBlockTag +
-                versionBlockTag + propertySetterBlockTag + propertyGetterBlockTag
-            ).filterNotNull()
+                paramBlockTags + returnBlockTag + constructorBlockTag + receiverBlockTag +
+                        propertyBlockTags + throwsBlockTags + sampleBlockTags +
+                        seeBlockTags + authorBlockTags + sinceBlockTag + suppressBlockTag +
+                        versionBlockTag + propertySetterBlockTag + propertyGetterBlockTag
+                ).filterNotNull()
+    }
+
+    fun hasTags(vararg tags: String) = tags.all {
+        blockTags
+            .map { tag -> tag.name }
+            .contains(it) ?: false
     }
 
     private fun parseToValuedBlockTag(sentence: String): KoValuedBlockTag {

@@ -90,10 +90,10 @@ fun <T : KoDeclaration> Sequence<T>.withKoDoc() = filter { it.hasKoDoc() }
 
 fun <T : KoDeclaration> Sequence<T>.withoutKoDoc() = filterNot { it.hasKoDoc() }
 
-fun <T : KoDeclaration> Sequence<T>.withKoDocWithTags(vararg tags: String) = filter { it.hasKoDocWithTags(*tags) }
+fun <T : KoDeclaration> Sequence<T>.withKoDocWithTags(vararg tags: String) = filter { it.koDoc?.hasTags(*tags) ?: false }
 
 fun <T : KoDeclaration> Sequence<T>.withSomeKoDocWithTags(vararg tags: String) = filter {
-    tags.any { tag -> it.hasKoDocWithTags(tag) }
+    tags.any { tag -> it.koDoc?.hasTags(tag) ?: false}
 }
 
-fun <T : KoDeclaration> Sequence<T>.withoutKoDocWithTags(vararg tags: String) = filterNot { it.hasKoDocWithTags(*tags) }
+fun <T : KoDeclaration> Sequence<T>.withoutKoDocWithTags(vararg tags: String) = filterNot { it.koDoc?.hasTags(*tags) ?: false}

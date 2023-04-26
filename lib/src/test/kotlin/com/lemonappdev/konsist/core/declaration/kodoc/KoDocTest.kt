@@ -5,6 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldHaveSize
+import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoDocTest {
@@ -467,6 +468,24 @@ class KoDocTest {
         assertSoftly(sut) {
             propertyGetterBlockTag?.name shouldBeEqualTo "@propertyGetter"
             propertyGetterBlockTag?.description shouldBeEqualTo "Retrieves the value of the [name] property."
+        }
+    }
+
+    @Test
+    fun `class-has-block-tags`() {
+        // given
+        val sut = getSnippetFile("class-has-block-tags")
+            .classes()
+            .first()
+            .koDoc!!
+
+        // then
+        assertSoftly(sut) {
+            hasTags("@since") shouldBeEqualTo true
+            hasTags("@since", "@see") shouldBeEqualTo true
+            hasTags("@sample") shouldBeEqualTo false
+            hasTags("@since", "@sample") shouldBeEqualTo false
+            hasTags("@since", "@see", "sample") shouldBeEqualTo false
         }
     }
 
