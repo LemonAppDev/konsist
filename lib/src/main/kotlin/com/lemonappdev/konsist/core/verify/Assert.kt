@@ -33,7 +33,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
 
         val result = localList.groupBy {
             lastDeclaration = it as? KoDeclaration
-            function(it) // ?: !positiveCheck
+            function(it)
         }
 
         val allChecksPassed = (result[positiveCheck]?.size ?: 0) == localList.size
