@@ -1,0 +1,40 @@
+/**
+ * This is a sample class that demonstrates the usage of KDoc tags.
+ *
+ * @param SampleType1 The first type parameter for this class.
+ * @property sampleProperty1 The first property of the class.
+ * @constructor Creates a new instance of the [SampleClass].
+ * @throws IllegalArgumentException First sample description
+ * @see AnotherClass1 sample description
+ * @since 1.0.0
+ * @version 1.2.3
+ * @sample SampleClass.sampleMethod sample description
+ * @suppress UnusedPrivateMember
+ * @author Author2
+ */
+class SampleClass<SampleType1>(private val sampleProperty1: String) {
+
+    /**
+     * This is a sample method that demonstrates the usage of KDoc tags.
+     *
+     * @return The result of the computation.
+     * @receiver sample receiver description
+     */
+    fun sampleMethod(): Int {
+        return 6
+    }
+
+    /**
+     * This is a sample property that demonstrates the usage of KDoc tags.
+     *
+     * @propertySetter Sets the value of the [name] property.
+     * @propertyGetter Retrieves the value of the [name] property.
+     */
+    var sampleProperty: Int
+        get() {
+            return 6
+        }
+        set(value) {
+            // Setter implementation
+        }
+}

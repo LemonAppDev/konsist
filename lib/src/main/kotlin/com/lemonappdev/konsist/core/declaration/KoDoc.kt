@@ -15,10 +15,9 @@ class KoDoc(private val kDocElement: KDocElement) {
             .substringBefore("@")
             .split("\n")
             .map {
-                it.removePrefix(" * ")
-                    .removePrefix(" *")
-                    .removePrefix("* ")
-                    .removePrefix("*")
+                it
+                    .substringAfter("*")
+                    .removePrefix(" ")
             }
             .toMutableList()
             .also { it.removeIf { element -> element.isBlank() } }
@@ -26,7 +25,7 @@ class KoDoc(private val kDocElement: KDocElement) {
     }
 
     private val tags by lazy {
-        val first = kDocElement
+        val firsts = kDocElement
             .children
             .filterIsInstance<KDocSection>()
             .first()
@@ -34,14 +33,12 @@ class KoDoc(private val kDocElement: KDocElement) {
             .replaceBefore('@', "")
             .split("\n")
             .map {
-                it.removePrefix(" * ")
-                    .removePrefix(" *")
-                    .removePrefix("* ")
-                    .removePrefix("*")
+                it
+                    .substringAfter("*")
+                    .removePrefix(" ")
             }
             .toMutableList()
             .also { it.removeIf { element -> element.isBlank() } }
-            .joinToString("\n")
 
         val others = kDocElement
             .children
@@ -49,20 +46,18 @@ class KoDoc(private val kDocElement: KDocElement) {
             .toMutableList()
             .also { it.removeFirst() }
             .map { it.text }
-            .map {
+            .flatMap {
                 it.split("\n")
                     .map {
-                        it.removePrefix(" * ")
-                            .removePrefix(" *")
-                            .removePrefix("* ")
-                            .removePrefix("*")
+                        it
+                            .substringAfter("*")
+                            .removePrefix(" ")
                     }
                     .toMutableList()
                     .also { it.removeIf { element -> element.isBlank() } }
-                    .joinToString("\n")
             }
 
-        listOf(first) + others
+        firsts + others
     }
 
 
@@ -84,10 +79,10 @@ class KoDoc(private val kDocElement: KDocElement) {
         tag?.let { parseToBlockTag(it) }
     }
 
-    val receiverBlockTags by lazy {
-        val tag = this.tags.filter { it.startsWith("@receiver") }
+    val receiverBlockTag by lazy {
+        val tag = this.tags.firstOrNull() { it.startsWith("@receiver") }
 
-        tag.map { parseToBlockTag(it) }
+        tag?.let { parseToBlockTag(it) }
     }
 
     val propertyBlockTags by lazy {
@@ -97,13 +92,7 @@ class KoDoc(private val kDocElement: KDocElement) {
     }
 
     val throwsBlockTags by lazy {
-        val tag = this.tags.filter { it.startsWith("@throws") }
-
-        tag.map { parseToValuedBlockTag(it) }
-    }
-
-    val exceptionBlockTags by lazy {
-        val tag = this.tags.filter { it.startsWith("@exception") }
+        val tag = this.tags.filter { it.startsWith("@throws") || it.startsWith("@exception") }
 
         tag.map { parseToValuedBlockTag(it) }
     }
@@ -120,10 +109,10 @@ class KoDoc(private val kDocElement: KDocElement) {
         tag.map { parseToValuedBlockTag(it) }
     }
 
-    val authorBlockTag by lazy {
-        val tag = this.tags.firstOrNull { it.startsWith("@author") }
+    val authorBlockTags by lazy {
+        val tag = this.tags.filter { it.startsWith("@author") }
 
-        tag?.let { parseToBlockTag(it) }
+        tag.map { parseToBlockTag(it) }
     }
 
     val sinceBlockTag by lazy {
@@ -138,10 +127,29 @@ class KoDoc(private val kDocElement: KDocElement) {
         tag?.let { parseToBlockTag(it) }
     }
 
+    val versionBlockTag by lazy {
+        val tag = this.tags.firstOrNull { it.startsWith("@version") }
+
+        tag?.let { parseToBlockTag(it) }
+    }
+
+    val propertySetterBlockTag by lazy {
+        val tag = this.tags.firstOrNull { it.startsWith("@propertySetter") }
+
+        tag?.let { parseToBlockTag(it) }
+    }
+
+    val propertyGetterBlockTag by lazy {
+        val tag = this.tags.firstOrNull { it.startsWith("@propertyGetter") }
+
+        tag?.let { parseToBlockTag(it) }
+    }
+
     val blockTags by lazy {
-        (paramBlockTags + returnBlockTag + constructorBlockTag + receiverBlockTags +
-                propertyBlockTags + throwsBlockTags + exceptionBlockTags + sampleBlockTags +
-                seeBlockTags + authorBlockTag + sinceBlockTag + suppressBlockTag).filterNotNull()
+        (paramBlockTags + returnBlockTag + constructorBlockTag + receiverBlockTag +
+                propertyBlockTags + throwsBlockTags + sampleBlockTags +
+                seeBlockTags + authorBlockTags + sinceBlockTag + suppressBlockTag +
+                versionBlockTag + propertySetterBlockTag + propertyGetterBlockTag).filterNotNull()
     }
 
     private fun parseToValuedBlockTag(sentence: String): KoValuedBlockTag {
