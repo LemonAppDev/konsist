@@ -156,10 +156,10 @@ class KoDoc(private val kDocElement: KDocElement) {
     fun hasTags(vararg tags: String) = tags.all {
         blockTags
             .map { tag -> tag.name }
-            .contains(it) ?: false
+            .contains(it)
     }
 
-    private fun parseToValuedBlockTag(sentence: String): KoValuedBlockTag {
+    private fun parseToValuedBlockTag(sentence: String): KoValuedDocTag {
         val parsed = sentence.split(" ")
         val description = parsed
             .toMutableList()
@@ -169,16 +169,16 @@ class KoDoc(private val kDocElement: KDocElement) {
             }
             .joinToString(" ")
 
-        return KoValuedBlockTag(parsed[0], parsed[1], description)
+        return KoValuedDocTag(parsed[0], parsed[1], description)
     }
 
-    private fun parseToBlockTag(sentence: String): KoBlockTag {
+    private fun parseToBlockTag(sentence: String): KoDocTag {
         val parsed = sentence.split(" ")
         val description = parsed
             .toMutableList()
             .also { it.removeFirst() }
             .joinToString(" ")
 
-        return KoBlockTag(parsed[0], description)
+        return KoDocTag(parsed[0], description)
     }
 }

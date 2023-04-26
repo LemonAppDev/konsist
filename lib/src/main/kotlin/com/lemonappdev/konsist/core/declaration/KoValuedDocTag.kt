@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
-open class KoValuedBlockTag(
+open class KoValuedDocTag(
     override val name: String,
     val value: String,
     override val description: String
-) : KoBlockTag(name, description)
+) : KoDocTag(name, description)
