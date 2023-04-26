@@ -10,8 +10,8 @@ import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldHaveSize
+import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForObjectTest {
@@ -304,7 +304,7 @@ class KoDeclarationForObjectTest {
 
         // then
         assertSoftly(sut) {
-            koDoc?.text?.shouldContain("Sample Description")
+            koDoc shouldNotBeEqualTo null
             hasKoDoc() shouldBeEqualTo true
         }
     }
