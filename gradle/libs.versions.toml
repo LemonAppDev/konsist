@@ -6,7 +6,7 @@ jacksonModuleKotlin = "2.14.2"
 [libraries]
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlinVersion" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }
-junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:5.9.2"
+junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:5.9.3"
 kluent = "org.amshove.kluent:kluent:1.72"
 mockk = "io.mockk:mockk:1.13.5"
 kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlinVersion" }
