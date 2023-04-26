@@ -308,6 +308,11 @@ class KoDeclarationForFunctionTest {
         assertSoftly(sut) {
             koDoc shouldNotBeEqualTo null
             hasKoDoc() shouldBeEqualTo true
+            hasKoDocWithTags("@since") shouldBeEqualTo true
+            hasKoDocWithTags("@since", "@see") shouldBeEqualTo true
+            hasKoDocWithTags("@sample") shouldBeEqualTo false
+            hasKoDocWithTags("@since", "@sample") shouldBeEqualTo false
+            hasKoDocWithTags("@since", "@see", "sample") shouldBeEqualTo false
         }
     }
 
@@ -322,6 +327,8 @@ class KoDeclarationForFunctionTest {
         assertSoftly(sut) {
             koDoc shouldBeEqualTo null
             hasKoDoc() shouldBeEqualTo false
+            hasKoDocWithTags("@since") shouldBeEqualTo false
+            hasKoDocWithTags("@since", "@see") shouldBeEqualTo false
         }
     }
 

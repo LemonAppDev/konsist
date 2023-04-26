@@ -48,13 +48,13 @@ class KoDoc(private val kDocElement: KDocElement) {
             .map { it.text }
             .flatMap {
                 it.split("\n")
-                    .map {
-                        it
+                    .map { line ->
+                        line
                             .substringAfter("*")
                             .removePrefix(" ")
                     }
                     .toMutableList()
-                    .also { it.removeIf { element -> element.isBlank() } }
+                    .also { line -> line.removeIf { element -> element.isBlank() } }
             }
 
         firsts + others
@@ -80,7 +80,7 @@ class KoDoc(private val kDocElement: KDocElement) {
     }
 
     val receiverBlockTag by lazy {
-        val tag = this.tags.firstOrNull() { it.startsWith("@receiver") }
+        val tag = this.tags.firstOrNull { it.startsWith("@receiver") }
 
         tag?.let { parseToBlockTag(it) }
     }

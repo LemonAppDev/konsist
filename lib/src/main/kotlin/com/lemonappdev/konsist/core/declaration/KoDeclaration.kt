@@ -91,6 +91,13 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
 
     fun hasKoDoc() = koDoc != null
 
+    fun hasKoDocWithTags(vararg tags: String) = tags.all {
+        koDoc
+            ?.blockTags
+            ?.map { tag -> tag.name }
+            ?.contains(it) ?: false
+    }
+
     fun resideInPackage(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
 
     fun resideOutsidePackage(packageName: String) = !resideInPackage(packageName)
