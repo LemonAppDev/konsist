@@ -89,3 +89,11 @@ fun <T : KoDeclaration> Sequence<T>.withoutPackage(vararg packages: String) = fi
 fun <T : KoDeclaration> Sequence<T>.withKoDoc() = filter { it.hasKoDoc() }
 
 fun <T : KoDeclaration> Sequence<T>.withoutKoDoc() = filterNot { it.hasKoDoc() }
+
+fun <T : KoDeclaration> Sequence<T>.withKoDocWithTags(vararg tags: String) = filter { it.hasKoDocWithTags(*tags) }
+
+fun <T : KoDeclaration> Sequence<T>.withSomeKoDocWithTags(vararg tags: String) = filter {
+    tags.any { tag -> it.hasKoDocWithTags(tag) }
+}
+
+fun <T : KoDeclaration> Sequence<T>.withoutKoDocWithTags(vararg tags: String) = filterNot {it.hasKoDocWithTags(*tags) }
