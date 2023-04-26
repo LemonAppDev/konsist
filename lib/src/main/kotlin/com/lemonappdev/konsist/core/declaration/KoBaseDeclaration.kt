@@ -61,31 +61,18 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
             .removeSuffix("\n")
     }
 
-    /**
-     * Text of the declaration with the location (file path, line and column).
-     */
     val locationWithText by lazy { "Location: $location \nDeclaration:\n$text" }
 
     fun resideInFilePath(text: String) = PackageHelper.resideInPackage(text, filePath, '/')
 
     fun resideInProjectFilePath(text: String) = PackageHelper.resideInPackage(text, projectFilePath, '/')
 
-    fun getDeclarationText(includeBody: Boolean = true): String {
-        val declaration = "[${this::class.simpleName}] $location"
-
-        return if (includeBody) {
-            "$declaration\n$text"
-        } else {
-            declaration
-        }
-    }
-
     fun print() {
-        print(getDeclarationText(false))
+        print(toString())
     }
 
     /**
-     * Text of the declaration with the location (file path, line and column).
+     * Text of the declaration containing ko declaration type, file path, line, column and the declaration text.
      */
-    override fun toString() = getDeclarationText(true)
+    override fun toString() = "[${this::class.simpleName}] $location\n$text"
 }
