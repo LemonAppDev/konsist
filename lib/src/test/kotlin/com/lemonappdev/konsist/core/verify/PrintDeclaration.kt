@@ -15,6 +15,6 @@ class PrintDeclaration {
             .withNamePrefix("KoScopeForC")
 
         // then
-        sut.printDeclarations() shouldBeEqualTo sut
+        sut.print() shouldBeEqualTo sut
     }
 }

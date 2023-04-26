@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kobasedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.TestSnippetProvider.modulePath
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -131,15 +132,15 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
+        val expected = """ 
+                fun sampleFunction() {
+                    "SampleText"
+                }
+        """.trimIndent()
+
         sut
             .text
-            .shouldBeEqualTo(
-                """
-            fun sampleFunction() {
-                "SampleText"
-            }
-                """.trimIndent(),
-            )
+            .shouldBeEqualTo(expected)
     }
 
     @Test
@@ -150,7 +151,39 @@ class KoBaseDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo sut.locationWithText
+        sut.toString() shouldBeEqualTo sut.getDeclarationText(true)
+    }
+
+    @Test
+    fun `get-declaration-text-include-body-true`() {
+        // given
+        val sut = getSnippetFile("get-declaration-text-include-body-true")
+            .functions()
+            .first()
+
+        // then
+        val expected = """
+                [KoFunction] $modulePath/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kobasedeclaration/snippet/get-declaration-text-include-body-true.kt:1:1
+                fun sampleFunction() {
+                }
+        """.trimIndent()
+
+        sut.getDeclarationText(true) shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `get-declaration-text-include-body-false`() {
+        // given
+        val sut = getSnippetFile("get-declaration-text-include-body-false")
+            .functions()
+            .first()
+
+        // then
+        val expected = """
+                [KoFunction] $modulePath/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kobasedeclaration/snippet/get-declaration-text-include-body-false.kt:1:1
+        """.trimIndent()
+
+        sut.getDeclarationText(false) shouldBeEqualTo expected
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kobasedeclaration/snippet/", fileName)

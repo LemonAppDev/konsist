@@ -66,10 +66,6 @@ class KoScope(
 
     fun typeAliases() = koFiles.flatMap { it.typeAliases }
 
-    override fun toString(): String = files()
-        .toList()
-        .joinToString("\n") { it.filePath }
-
     operator fun plus(scope: KoScope): KoScope = KoScope(files() + scope.files())
 
     operator fun minus(scope: KoScope): KoScope = KoScope(files() - scope.files().toSet())
@@ -169,5 +165,13 @@ class KoScope(
 
             return KoScope(koFiles)
         }
+    }
+
+    override fun toString(): String = files()
+        .toList()
+        .joinToString("\n") { it.filePath }
+
+    fun print() {
+        println(toString())
     }
 }

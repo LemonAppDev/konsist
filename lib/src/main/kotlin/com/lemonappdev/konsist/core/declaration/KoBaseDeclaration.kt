@@ -70,8 +70,22 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
 
     fun resideInProjectFilePath(text: String) = PackageHelper.resideInPackage(text, projectFilePath, '/')
 
+    fun getDeclarationText(includeBody: Boolean = true): String {
+        val declaration = "[${this::class.simpleName}] $location"
+
+        return if (includeBody) {
+            "$declaration\n$text"
+        } else {
+            declaration
+        }
+    }
+
+    fun print() {
+        print(getDeclarationText(false))
+    }
+
     /**
      * Text of the declaration with the location (file path, line and column).
      */
-    override fun toString() = locationWithText
+    override fun toString() = getDeclarationText(true)
 }
