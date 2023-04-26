@@ -59,5 +59,5 @@ private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: Li
         "${it.location} ($name $declarationType)"
     }
 
-    return "Check '$testMethodName' has failed. Invalid declarations:\n$failedDeclarationsMessage"
+    return "Assert '$testMethodName' has failed. Invalid declarations:\n$failedDeclarationsMessage"
 }
