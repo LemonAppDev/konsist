@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
-import com.lemonappdev.konsist.core.ext.withExplicitPrimaryConstructor
+import com.lemonappdev.konsist.core.ext.withPrimaryConstructor
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 import org.amshove.kluent.shouldContain
@@ -85,7 +85,7 @@ class AssertTest {
         // given
         val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
             .classes()
-            .withExplicitPrimaryConstructor()
+            .withPrimaryConstructor()
 
         // then
         sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
@@ -96,7 +96,7 @@ class AssertTest {
         // given
         val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
             .classes()
-            .withExplicitPrimaryConstructor()
+            .withPrimaryConstructor()
 
         // when
         val func = {
@@ -112,7 +112,7 @@ class AssertTest {
         // given
         val sut = getSnippetFile("assert-not-passes-when-expression-is-nullable")
             .classes()
-            .withExplicitPrimaryConstructor()
+            .withPrimaryConstructor()
 
         // then
         sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") }
@@ -123,7 +123,7 @@ class AssertTest {
         // given
         val sut = getSnippetFile("assert-not-fails-when-expression-is-nullable")
             .classes()
-            .withExplicitPrimaryConstructor()
+            .withPrimaryConstructor()
 
         // when
         val func = {
