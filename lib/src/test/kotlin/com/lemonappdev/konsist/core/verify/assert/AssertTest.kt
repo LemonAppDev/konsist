@@ -167,13 +167,13 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-check-declarations-with-suppress-annotation`() {
+    fun `assert-not-check-declarations-with-suppress-annotation-test-name`() {
         // given
-        val sut = getSnippetFile("assert-not-check-declarations-with-suppress-annotation")
-            .functions(includeLocal = true)
+        val sut = getSnippetFile("assert-not-check-declarations-with-suppress-annotation-test-name")
+            .classes(includeNested = true)
 
         // then
-        sut.assert { it.name.endsWith("Function") }
+        sut.assert { it.name.endsWith("Class") }
     }
 
     private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/verify/assert/snippet/", fileName)
