@@ -9,5 +9,5 @@ open class KoBaseDeclaration(private val ktElement: KtElement) : KoPsiDeclaratio
     /**
      * KoFile containing the declaration
      */
-    val containingFile by lazy { KoFile.getInstance(ktElement.containingKtFile) }
+    val containingFile by lazy { KoFileDeclaration.getInstance(ktElement.containingKtFile) }
 }

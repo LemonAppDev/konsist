@@ -30,7 +30,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
 
     val annotations = ktTypeParameterListOwner
         .annotationEntries
-        .map { KoAnnotation.getInstance(it) }
+        .map { KoAnnotationDeclaration.getInstance(it) }
 
     val modifiers by lazy {
         ktTypeParameterListOwner
@@ -51,7 +51,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
             .filterIsInstance<KDocElement>()
             .firstOrNull()
 
-        kDocElement?.let { KoDoc(kDocElement) }
+        kDocElement?.let { KoDocDeclaration(kDocElement) }
     }
 
     fun hasPublicModifier() = hasModifiers(KoModifier.PUBLIC)

@@ -1,9 +1,0 @@
-package com.lemonappdev.konsist.core.declaration.kofunction.snippet
-
-class SampleClass : SuperClass() {
-    override fun sampleFunction() {}
-}
-
-open class SuperClass {
-    open fun sampleFunction() {}
-}

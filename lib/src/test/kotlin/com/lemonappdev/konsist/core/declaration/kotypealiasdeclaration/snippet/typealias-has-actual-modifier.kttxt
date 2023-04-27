@@ -1,0 +1,5 @@
+actual typealias SampleTypeAlias<V> = com.lemonappdev.konsist.core.declaration.kotypealiasdeclaration.snippet.SampleType<V>
+
+expect class SampleType<V>(value: V) { }
+
+class SampleClass1(val sampleProperty1: SampleTypeAlias)

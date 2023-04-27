@@ -1,14 +1,14 @@
 package com.lemonappdev.konsist.core.declaration.provider
 
 import com.lemonappdev.konsist.core.const.KoModifier
-import com.lemonappdev.konsist.core.declaration.KoClass
-import com.lemonappdev.konsist.core.declaration.KoCompanionObject
+import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclaration
-import com.lemonappdev.konsist.core.declaration.KoFunction
-import com.lemonappdev.konsist.core.declaration.KoInterface
-import com.lemonappdev.konsist.core.declaration.KoObject
-import com.lemonappdev.konsist.core.declaration.KoProperty
+import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.core.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.core.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.core.exception.KoUnsupportedOperationException
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDeclarationContainer
@@ -28,17 +28,17 @@ object KoDeclarationProviderUtil {
             .declarations
             .mapNotNull {
                 if (it is KtClass && !it.isInterface()) {
-                    KoClass.getInstance(it)
+                    KoClassDeclaration.getInstance(it)
                 } else if (it is KtClass && it.isInterface()) {
-                    KoInterface.getInstance(it)
+                    KoInterfaceDeclaration.getInstance(it)
                 } else if (it is KtObjectDeclaration && !it.isCompanion()) {
-                    KoObject.getInstance(it)
+                    KoObjectDeclaration.getInstance(it)
                 } else if (it is KtObjectDeclaration && it.isCompanion()) {
-                    KoCompanionObject.getInstance(it)
+                    KoCompanionObjectDeclaration.getInstance(it)
                 } else if (it is KtProperty) {
-                    KoProperty.getInstance(it)
+                    KoPropertyDeclaration.getInstance(it)
                 } else if (it is KtFunction) {
-                    KoFunction.getInstance(it)
+                    KoFunctionDeclaration.getInstance(it)
                 } else {
                     throw KoUnsupportedOperationException("Unknown declaration type: ${it.getTextWithLocation()}")
                 }
@@ -77,7 +77,7 @@ object KoDeclarationProviderUtil {
         if (includeLocal) {
             result = result
                 .flatMap {
-                    if (it is KoFunction) {
+                    if (it is KoFunctionDeclaration) {
                         listOf(it) + it.localDeclarations() + localDeclarations(it.localFunctions())
                     } else {
                         listOf(it)
@@ -93,7 +93,7 @@ object KoDeclarationProviderUtil {
         return result.filterIsInstance<T>()
     }
 
-    fun localDeclarations(koFunctions: Sequence<KoFunction>): Sequence<KoDeclaration> {
+    fun localDeclarations(koFunctions: Sequence<KoFunctionDeclaration>): Sequence<KoDeclaration> {
         val localDeclarations = mutableListOf<KoDeclaration>()
         val nestedDeclarations = mutableListOf<KoDeclaration>()
 
