@@ -60,6 +60,36 @@ class KoDocTest {
     }
 
     @Test
+    fun `block-tags with multiline param tag`() {
+        // given
+        val sut = getSnippetFile("block-tags")
+            .classes()
+            .first()
+            .koDoc!!
+
+        // then
+        sut
+            .paramBlockTags[0]
+            .description
+            .shouldBeEqualTo("First line description\nSecond line description")
+    }
+
+    @Test
+    fun `block-tags with '@' into description`() {
+        // given
+        val sut = getSnippetFile("block-tags")
+            .classes()
+            .first()
+            .koDoc!!
+
+        // then
+        sut
+            .propertyBlockTags[0]
+            .description
+            .shouldBeEqualTo("The first @property of the class.")
+    }
+
+    @Test
     fun `class-with-block-tags text and description`() {
         // given
         val sut = getSnippetFile("class-with-block-tags")

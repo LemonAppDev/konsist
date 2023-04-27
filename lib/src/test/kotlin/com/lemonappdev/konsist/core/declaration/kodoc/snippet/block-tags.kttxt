@@ -1,8 +1,9 @@
 /**
  * This is a sample class that demonstrates the usage of KDoc tags.
  *
- * @param SampleType1 The first type parameter for this class.
- * @property sampleProperty1 The first property of the class.
+ * @param SampleType1 First line description
+ * Second line description
+ * @property sampleProperty1 The first @property of the class.
  * @constructor Creates a new instance of the [SampleClass].
  * @throws IllegalArgumentException First sample description
  * @see AnotherClass1 sample description

@@ -16,6 +16,7 @@ import com.lemonappdev.konsist.core.const.KoTag.SINCE
 import com.lemonappdev.konsist.core.const.KoTag.SUPPRESS
 import com.lemonappdev.konsist.core.const.KoTag.THROWS
 import com.lemonappdev.konsist.core.const.KoTag.VERSION
+import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
 class KoDoc(private val kDocElement: KDocElement) {
@@ -42,12 +43,18 @@ class KoDoc(private val kDocElement: KDocElement) {
         val regex = "@(\\w+)".toRegex()
 
         val tagsAsStringList = text.substringAfter("@")
-            .split("@")
+            .split("\n@")
             .map { ("@$it").trimEnd() }
 
         val tagsWithName = tagsAsStringList
             .flatMap { regex.findAll(it) }
-            .map { KoTag.values().first { tag -> tag.type == it.value } }
+            .map {
+                if (KoTag.values().none { koTag -> koTag.type == it.value }) {
+                    throw KoInternalException("Unknown doc tag $it")
+                }
+
+                KoTag.values().first { tag -> tag.type == it.value }
+            }
             .zip(tagsAsStringList)
 
         val tagsGroupingByValued = tagsWithName.groupBy { it.first.isValued }
