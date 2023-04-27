@@ -19,24 +19,22 @@ import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.kdoc.psi.impl.KDocSection
 
 class KoDoc(private val kDocElement: KDocElement) {
-    val text: String by lazy { kDocElement.text }
+    val text: String by lazy {
+        (kDocElement.text.split("\n") as MutableList)
+            .also {
+                it.removeFirst()
+                it.removeLast()
+            }.joinToString("\n") {
+                it.trim()
+                    .removePrefix("*")
+                    .trim()
+            }
+    }
 
     val description by lazy {
-        kDocElement
-            .children
-            .filterIsInstance<KDocSection>()
-            .first()
-            .text
+        text
             .substringBefore("@")
-            .split("\n")
-            .map {
-                it
-                    .substringAfter("*")
-                    .removePrefix(" ")
-            }
-            .toMutableList()
-            .also { it.removeIf { element -> element.isBlank() } }
-            .joinToString("\n")
+            .trimEnd()
     }
 
     private val tags by lazy {
