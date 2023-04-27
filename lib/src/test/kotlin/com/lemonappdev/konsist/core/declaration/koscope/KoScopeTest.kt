@@ -33,7 +33,7 @@ class KoScopeTest {
     @Test
     fun `from project`() {
         // given
-        val sut = KoScope.fromProjectFiles()
+        val sut = KoScope.fromProject()
 
         // then
         assertSoftly(
@@ -107,7 +107,7 @@ class KoScopeTest {
     fun `from path`() {
         // given
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
-        val sut = KoScope.fromPath("${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/")
+        val sut = KoScope.fromPathCodebase("${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/")
 
         // then
         sut
@@ -136,7 +136,7 @@ class KoScopeTest {
     fun `from module`() {
         // given
         val projectPath = konsistModulePath.dropLastWhile { it != '/' }
-        val sut = KoScope.fromProjectFiles(module = "lib")
+        val sut = KoScope.fromProject(module = "lib")
 
         // then
         assertSoftly(
