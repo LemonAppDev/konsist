@@ -4,6 +4,10 @@ import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
+import com.lemonappdev.konsist.core.filesystem.KoFileFactory
+import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.filesystem.PathVerifier
+import com.lemonappdev.konsist.core.filesystem.ProjectRootDirProviderFactory
 import com.lemonappdev.konsist.util.PackageHelper
 import java.io.File
 
@@ -79,18 +83,17 @@ class KoScope(
     }
 
     companion object {
-        /**
-         * Return repository root directory File
-         */
-        private val projectRootDirectoryFilePath by lazy {
-            File("")
-                .absoluteFile
-                .path
-                .dropLastWhile { it != '/' }
+        private val pathVerifier = PathVerifier()
+
+        private val pathProvider by lazy {
+            PathProvider(
+                KoFileFactory(),
+                ProjectRootDirProviderFactory(pathVerifier),
+            )
         }
 
         private val projectKotlinFiles by lazy {
-            val prodDirectory = File(projectRootDirectoryFilePath)
+            val prodDirectory = pathProvider.rootProjectDirectory
 
             prodDirectory
                 .walk()
@@ -103,7 +106,7 @@ class KoScope(
                 return KoScope(projectKotlinFiles)
             }
 
-            var pathPrefix = "$projectRootDirectoryFilePath${module?.lowercase()}"
+            var pathPrefix = "${pathProvider.rootProjectPath}/${module?.lowercase()}"
 
             if (sourceSet != null) {
                 pathPrefix = "$pathPrefix/src/$sourceSet/"
@@ -126,7 +129,7 @@ class KoScope(
         fun fromProjectProductionFiles(module: String? = null, sourceSet: String? = null): KoScope {
             val koFiles = fromProjectFiles(module, sourceSet)
                 .files()
-                .filter { !isTestFile(it) }
+                .filterNot { isTestFile(it) }
 
             return KoScope(koFiles)
         }

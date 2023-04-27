@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalPropertyProvider
-import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
@@ -36,7 +35,7 @@ class KoFunction private constructor(private val ktFunction: KtFunction) :
             } else if (it is KtProperty) {
                 KoProperty.getInstance(it)
             } else {
-                throw KoInternalException("Unknown local declaration type: ${it.getTextWithLocation()}")
+                throw UnsupportedOperationException("Unknown local declaration type: ${it.getTextWithLocation()}")
             }
         }
     }
