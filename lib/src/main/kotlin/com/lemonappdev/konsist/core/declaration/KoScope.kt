@@ -101,7 +101,10 @@ class KoScope(
                 .map { it.toKoFile() }
         }
 
-        fun fromProjectFiles(module: String? = null, sourceSet: String? = null): KoScope {
+        /**
+         * Returns a [KoScope] containing all of Kotlin files in the project.
+         */
+        fun fromProject(module: String? = null, sourceSet: String? = null): KoScope {
             if (module == null && sourceSet == null) {
                 return KoScope(projectKotlinFiles)
             }
@@ -118,27 +121,31 @@ class KoScope(
             return KoScope(koFiles)
         }
 
-        fun fromProjectTestFiles(module: String? = null, sourceSet: String? = null): KoScope {
-            val koFiles = fromProjectFiles(module, sourceSet)
-                .files()
-                .filter { isTestFile(it) }
-
-            return KoScope(koFiles)
-        }
-
-        fun fromProjectProductionFiles(module: String? = null, sourceSet: String? = null): KoScope {
-            val koFiles = fromProjectFiles(module, sourceSet)
+        /**
+         * Returns a [KoScope] containing all of Kotlin production files in the project.
+         */
+        fun fromProduction(module: String? = null, sourceSet: String? = null): KoScope {
+            val koFiles = fromProject(module, sourceSet)
                 .files()
                 .filterNot { isTestFile(it) }
 
             return KoScope(koFiles)
         }
 
-        private fun isTestFile(it: KoFile): Boolean {
-            val path = it.filePath.lowercase()
-            return path.contains("test/") || path.contains("/test")
+        /**
+         * Returns a [KoScope] containing all of Kotlin test files in the project.
+         */
+        fun fromTest(module: String? = null, sourceSet: String? = null): KoScope {
+            val koFiles = fromProject(module, sourceSet)
+                .files()
+                .filter { isTestFile(it) }
+
+            return KoScope(koFiles)
         }
 
+        /**
+         * Returns a [KoScope] containing all of Kotlin files in the given package.
+         */
         fun fromPackage(packageName: String): KoScope {
             val koFiles = projectKotlinFiles
                 .filter {
@@ -150,6 +157,19 @@ class KoScope(
             return KoScope(koFiles)
         }
 
+        /**
+         * Returns a [KoScope] containing all of Kotlin files in the given directory.
+         */
+        fun fromPathCodebase(path: String): KoScope {
+            val koFiles = projectKotlinFiles
+                .filter { it.filePath.startsWith(path) }
+
+            return KoScope(koFiles)
+        }
+
+        /**
+         * Returns a [KoScope] of a given file.
+         */
         fun fromFile(path: String): KoScope {
             val file = File(path)
 
@@ -162,11 +182,9 @@ class KoScope(
             return KoScope(koKoFile)
         }
 
-        fun fromPath(path: String): KoScope {
-            val koFiles = projectKotlinFiles
-                .filter { it.filePath.startsWith(path) }
-
-            return KoScope(koFiles)
+        private fun isTestFile(it: KoFile): Boolean {
+            val path = it.filePath.lowercase()
+            return path.contains("test/") || path.contains("/test")
         }
     }
 
