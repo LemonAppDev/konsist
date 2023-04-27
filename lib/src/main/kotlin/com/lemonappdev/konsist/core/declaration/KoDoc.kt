@@ -19,8 +19,8 @@ import com.lemonappdev.konsist.core.const.KoTag.VERSION
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
-class KoDoc(private val kDocElement: KDocElement) {
-    val text: String by lazy {
+class KoDoc(private val kDocElement: KDocElement): KoPsiDeclaration(kDocElement) {
+    override val text: String by lazy {
         (kDocElement.text.split("\n") as MutableList)
             .also {
                 it.removeFirst()
