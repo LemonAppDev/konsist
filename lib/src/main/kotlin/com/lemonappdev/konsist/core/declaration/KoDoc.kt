@@ -51,7 +51,7 @@ class KoDoc(private val kDocElement: KDocElement) : KoPsiDeclaration(kDocElement
             .flatMap { regex.findAll(it) }
             .map {
                 if (KoTag.values().none { koTag -> koTag.type == it.value }) {
-                    throw KoInternalException("Unknown doc tag $it")
+                    throw KoInternalException("Unknown doc tag: ${it.value}")
                 }
 
                 KoTag.values().first { tag -> tag.type == it.value }

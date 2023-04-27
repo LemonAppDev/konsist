@@ -16,10 +16,13 @@ import com.lemonappdev.konsist.core.const.KoTag.SINCE
 import com.lemonappdev.konsist.core.const.KoTag.SUPPRESS
 import com.lemonappdev.konsist.core.const.KoTag.THROWS
 import com.lemonappdev.konsist.core.const.KoTag.VERSION
+import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldHaveSize
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoDocTest {
@@ -34,7 +37,6 @@ class KoDocTest {
         // then
         sut.blockTags shouldHaveSize 10
     }
-
     @Test
     fun `block-tags function`() {
         // given
@@ -57,6 +59,19 @@ class KoDocTest {
 
         // then
         sut.blockTags shouldHaveSize 2
+    }
+
+    @Test
+    fun `class-with-unknown-block-tag`() {
+        // given
+        val sut = getSnippetFile("class-with-unknown-block-tag")
+            .classes()
+            .first()
+            .koDoc!!
+
+        // then
+        val actual = { sut.blockTags }
+        actual shouldThrow KoInternalException::class withMessage "Unknown doc tag: @unknown, declaration:\nnull"
     }
 
     @Test
@@ -553,6 +568,25 @@ class KoDocTest {
 
         // then
         assertSoftly(sut) {
+            hasTags(SINCE) shouldBeEqualTo true
+            hasTags(SINCE, SEE) shouldBeEqualTo true
+            hasTags(SAMPLE) shouldBeEqualTo false
+            hasTags(SINCE, SAMPLE) shouldBeEqualTo false
+            hasTags(SINCE, SEE, SAMPLE) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-has-block-tags-without-description`() {
+        // given
+        val sut = getSnippetFile("class-has-block-tags-without-description")
+            .classes()
+            .first()
+            .koDoc!!
+
+        // then
+        assertSoftly(sut) {
+            description shouldBeEqualTo ""
             hasTags(SINCE) shouldBeEqualTo true
             hasTags(SINCE, SEE) shouldBeEqualTo true
             hasTags(SAMPLE) shouldBeEqualTo false
