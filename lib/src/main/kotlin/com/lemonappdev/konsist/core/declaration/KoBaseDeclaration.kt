@@ -1,8 +1,10 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.util.PackageHelper
+import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
+import org.jetbrains.kotlin.psi.psiUtil.parents
 import java.io.File
 
 /**
@@ -62,6 +64,21 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
     }
 
     val locationWithText by lazy { "Location: $location \nDeclaration:\n$text" }
+
+    val parentDeclaration by lazy {
+        val parentName = ktElement
+            .parents
+            .toList()[1]
+            .namedUnwrappedElement
+            ?.name
+
+        parentName
+            ?.let {
+                containingFile
+                    .declarations(includeLocal = true, includeNested = true)
+                    .firstOrNull { it.name == parentName }
+            }
+    }
 
     fun resideInFilePath(text: String) = PackageHelper.resideInPackage(text, filePath, '/')
 

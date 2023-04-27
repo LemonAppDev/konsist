@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.TestSnippetProvider.modulePath
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoBaseDeclarationTest {
@@ -136,6 +137,21 @@ class KoBaseDeclarationTest {
             }
         """.trimIndent()
         sut.toString() shouldBeEqualTo expected
+    }
+
+    @Test
+    fun `class-with-parent-declaration`() {
+        // given
+        val sut = getSnippetFile("class-with-parent-declaration")
+            .classes(includeNested = true, includeLocal = true)
+            .last()
+
+        // then
+        assertSoftly(sut) {
+            parentDeclaration shouldNotBeEqualTo null
+            parentDeclaration?.name shouldBeEqualTo "SampleClass"
+            parentDeclaration?.parentDeclaration?.name shouldBeEqualTo "SampleTopLevelInterface"
+        }
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kobasedeclaration/snippet/", fileName)
