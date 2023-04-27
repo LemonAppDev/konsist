@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.declaration
 
+import org.jetbrains.kotlin.asJava.namedUnwrappedElement
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
-import java.io.File
+import org.jetbrains.kotlin.psi.psiUtil.parents
 
 /**
  * Base declaration

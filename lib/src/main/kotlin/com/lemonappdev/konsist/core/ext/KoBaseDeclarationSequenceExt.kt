@@ -1,3 +1,4 @@
+import com.lemonappdev.konsist.core.declaration.KoBaseDeclaration
 
 fun <T : KoBaseDeclaration> Sequence<T>.withParentDeclaration(vararg names: String) = filter {
     when {
