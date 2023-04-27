@@ -5,7 +5,6 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoScopeForClassTest {
-
     @Test
     fun `file-contains-one-class`() {
         // given

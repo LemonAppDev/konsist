@@ -11,8 +11,8 @@
 - [Nexus Repository Manager](https://s01.oss.sonatype.org/#nexus-search;quick~konsist)
 - [Sonatype Jira](https://issues.sonatype.org/secure/Dashboard.jspa)
 
-### Repositories Links
-- 
+## Repositories Links
+ 
 - [mvnrepository.com](https://mvnrepository.com/artifact/com.lemonappdev/konsist/)
 - [central.sonatype.com](https://central.sonatype.com/artifact/com.lemonappdev/konsist/)
 

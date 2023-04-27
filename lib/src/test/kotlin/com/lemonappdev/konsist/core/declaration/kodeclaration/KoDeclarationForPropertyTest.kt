@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
+import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForPropertyTest {
@@ -291,6 +292,34 @@ class KoDeclarationForPropertyTest {
         assertSoftly(sut) {
             hasModifiers() shouldBeEqualTo false
             hasModifiers(PRIVATE) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `property-has-kdoc`() {
+        // given
+        val sut = getSnippetFile("property-has-kdoc")
+            .properties()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            koDoc shouldNotBeEqualTo null
+            hasKoDoc() shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `property-has-no-kdoc`() {
+        // given
+        val sut = getSnippetFile("property-has-no-kdoc")
+            .properties()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            koDoc shouldBeEqualTo null
+            hasKoDoc() shouldBeEqualTo false
         }
     }
 
