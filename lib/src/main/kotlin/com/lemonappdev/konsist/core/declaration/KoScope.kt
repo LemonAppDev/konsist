@@ -7,9 +7,7 @@ import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.filesystem.KoFileFactory
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.filesystem.PathVerifier
-import com.lemonappdev.konsist.core.filesystem.rootprovider.GitProjectRootDirProvider
-import com.lemonappdev.konsist.core.filesystem.rootprovider.GradleProjectRootDirProvider
-import com.lemonappdev.konsist.core.filesystem.rootprovider.MavenProjectRootDirProvider
+import com.lemonappdev.konsist.core.filesystem.ProjectRootDirProviderFactory
 import com.lemonappdev.konsist.util.PackageHelper
 import java.io.File
 
@@ -88,15 +86,9 @@ class KoScope(
         private val pathVerifier = PathVerifier()
 
         private val pathProvider by lazy {
-            val projectRootDirectoryProviders = listOf(
-                GradleProjectRootDirProvider(pathVerifier),
-                MavenProjectRootDirProvider(pathVerifier),
-                GitProjectRootDirProvider(pathVerifier),
-            )
-
             PathProvider(
                 KoFileFactory(),
-                projectRootDirectoryProviders,
+                ProjectRootDirProviderFactory(pathVerifier),
             )
         }
 
@@ -137,7 +129,7 @@ class KoScope(
         fun fromProjectProductionFiles(module: String? = null, sourceSet: String? = null): KoScope {
             val koFiles = fromProjectFiles(module, sourceSet)
                 .files()
-                .filter { !isTestFile(it) }
+                .filterNot { isTestFile(it) }
 
             return KoScope(koFiles)
         }
