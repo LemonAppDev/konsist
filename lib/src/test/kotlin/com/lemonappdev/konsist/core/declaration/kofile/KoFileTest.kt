@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
@@ -47,7 +48,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasImports() shouldBeEqualTo true
             hasImports("com..") shouldBeEqualTo true
             hasImports("com..", "..testdata..") shouldBeEqualTo true
@@ -66,7 +67,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             imports.isEmpty() shouldBeEqualTo true
             hasImports() shouldBeEqualTo false
             hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
@@ -81,7 +82,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             packagee?.name shouldBeEqualTo "samplepackage"
             hasPackage("com.samplepackage") shouldBeEqualTo true
             hasPackage("com..") shouldBeEqualTo true
@@ -108,7 +109,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             containsClass("SampleClass") shouldBeEqualTo true
             containsClass("OtherClass") shouldBeEqualTo false
         }
@@ -122,7 +123,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             containsProperty("sampleProperty") shouldBeEqualTo true
             containsProperty("otherProperty") shouldBeEqualTo false
         }
@@ -136,7 +137,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             containsFunction("sampleFunction") shouldBeEqualTo true
             containsFunction("otherFunction") shouldBeEqualTo false
         }
@@ -150,7 +151,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             containsObject("SampleObject") shouldBeEqualTo true
             containsObject("OtherObject") shouldBeEqualTo false
         }
@@ -164,7 +165,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             containsInterface("SampleInterface") shouldBeEqualTo true
             containsInterface("OtherInterface") shouldBeEqualTo false
         }
@@ -178,7 +179,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation1", "SampleAnnotation2")
             hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
             hasAnnotations("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo true
@@ -197,7 +198,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
             hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
             hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
@@ -213,7 +214,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             annotations.isEmpty() shouldBeEqualTo true
             hasAnnotations("SampleAnnotation") shouldBeEqualTo false
             hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
@@ -228,13 +229,14 @@ class KoFileTest {
             .first()
 
         // then
-        sut
-            .typeAliases
-            .first()
-            .run {
-                name shouldBeEqualTo "SampleTypeAlias"
-                type.sourceType shouldBeEqualTo "() -> Int"
-            }
+        assertSoftly(
+            sut
+                .typeAliases
+                .first(),
+        ) {
+            name shouldBeEqualTo "SampleTypeAlias"
+            type.sourceType shouldBeEqualTo "() -> Int"
+        }
     }
 
     @Test
@@ -245,7 +247,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasTypeAliases() shouldBeEqualTo true
             hasTypeAliases("SampleTypeAlias1") shouldBeEqualTo true
             hasTypeAliases("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo true
@@ -275,7 +277,7 @@ class KoFileTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasTypeAliases() shouldBeEqualTo false
             hasTypeAliases("SampleTypeAlias") shouldBeEqualTo false
         }

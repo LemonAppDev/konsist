@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.ext.withPrimaryConstructor
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 import org.amshove.kluent.shouldContain
@@ -26,28 +27,24 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-pass`() {
+    fun `assert-passes`() {
         // given
-        val sut = getSnippetFile("assert-pass")
+        val sut = getSnippetFile("assert-passes")
             .classes()
 
         // then
-        sut.assert {
-            it.name == "SampleClass"
-        }
+        sut.assert { it.name == "SampleClass" }
     }
 
     @Test
-    fun `assert-fail`() {
+    fun `assert-fails`() {
         // given
-        val sut = getSnippetFile("assert-fail")
+        val sut = getSnippetFile("assert-fails")
             .classes()
 
         // when
         val func = {
-            sut.assert {
-                it.name == "OtherName"
-            }
+            sut.assert { it.name == "OtherName" }
         }
 
         // then
@@ -55,9 +52,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-pass`() {
+    fun `assert-not-passes`() {
         // given
-        val sut = getSnippetFile("assert-not-pass")
+        val sut = getSnippetFile("assert-not-passes")
             .classes()
 
         // then
@@ -67,9 +64,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-fail`() {
+    fun `assert-not-fails`() {
         // given
-        val sut = getSnippetFile("assert-not-fail")
+        val sut = getSnippetFile("assert-not-fails")
             .classes()
 
         // when
@@ -84,9 +81,63 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-fail-declaration-list-empty`() {
+    fun `assert-passes-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-fail-declaration-list-empty")
+        val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
+            .classes()
+            .withPrimaryConstructor()
+
+        // then
+        sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
+    }
+
+    @Test
+    fun `assert-fails-when-expression-is-nullable`() {
+        // given
+        val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
+            .classes()
+            .withPrimaryConstructor()
+
+        // when
+        val func = {
+            sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
+        }
+
+        // then
+        func shouldThrow KoCheckFailedException::class
+    }
+
+    @Test
+    fun `assert-not-passes-when-expression-is-nullable`() {
+        // given
+        val sut = getSnippetFile("assert-not-passes-when-expression-is-nullable")
+            .classes()
+            .withPrimaryConstructor()
+
+        // then
+        sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") }
+    }
+
+    @Test
+    fun `assert-not-fails-when-expression-is-nullable`() {
+        // given
+        val sut = getSnippetFile("assert-not-fails-when-expression-is-nullable")
+            .classes()
+            .withPrimaryConstructor()
+
+        // when
+        val func = {
+            sut.assertNot { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
+        }
+
+        // then
+        func shouldThrow KoCheckFailedException::class
+    }
+
+    @Test
+    fun `assert-fails-when-declaration-list-is-empty`() {
+        // given
+        val sut = getSnippetFile("assert-fails-when-declaration-list-is-empty")
             .classes()
 
         // when
@@ -100,9 +151,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-fail-declaration-list-empty`() {
+    fun `assert-not-fails-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("assert-not-fail-declaration-list-empty")
+        val sut = getSnippetFile("assert-not-fails-when-declaration-list-is-empty")
             .classes()
 
         // when

@@ -98,3 +98,8 @@ fun <T : KoDeclaration> Sequence<T>.withSomeKoDocWithTags(vararg tags: KoTag) = 
 }
 
 fun <T : KoDeclaration> Sequence<T>.withoutKoDocWithTags(vararg tags: KoTag) = filterNot { it.koDoc?.hasTags(*tags) ?: false }
+
+fun <T : KoDeclaration> Sequence<T>.print(): Sequence<T> {
+    forEach { println(it.toString()) }
+    return this
+}

@@ -9,13 +9,16 @@ plugins {
 val konsistPublicationName = "konsist"
 
 publishing {
+    val releaseTarget = getReleaseTarget()
+
     publications {
         create<MavenPublication>(konsistPublicationName) {
+
             val konsistDescription = "A Kotlin architecture test library. Define and guard code base consistency using Kotlin."
 
             groupId = "com.lemonappdev"
             artifactId = "konsist"
-            version = getKonsistVersion()
+            version = getKonsistVersion(releaseTarget)
             description = konsistDescription
 
             from(components.getByName("java"))
@@ -65,7 +68,7 @@ publishing {
 
     repositories {
         maven {
-            when (getReleaseTarget()) {
+            when (releaseTarget) {
                 ReleaseTarget.LOCAL -> {
                     name = "local"
                     url = mavenLocal().url
@@ -87,6 +90,8 @@ publishing {
                     setCredentialsFromGradleProperties()
                 }
             }
+
+            println("Repository Url $url")
         }
     }
 }
@@ -138,8 +143,7 @@ fun getReleaseTarget(): ReleaseTarget {
         ?: ReleaseTarget.LOCAL
 }
 
-fun getKonsistVersion(): String {
-    val releaseTarget = getReleaseTarget()
+fun getKonsistVersion(releaseTarget: ReleaseTarget): String {
     val version = getLocalPropertyOrGradleProperty("konsist.version") ?: error("konsist.version is not provided.")
 
     return when (releaseTarget) {

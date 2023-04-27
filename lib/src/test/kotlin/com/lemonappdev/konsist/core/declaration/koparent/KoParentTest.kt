@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -15,10 +16,10 @@ class KoParentTest {
             .parentClass
 
         // then
-        sut?.run {
-            name shouldBeEqualTo "SampleSuperClass"
-            delegateName shouldBeEqualTo null
-            hasDelegate() shouldBeEqualTo false
+        assertSoftly(sut) {
+            it?.name shouldBeEqualTo "SampleSuperClass"
+            it?.delegateName shouldBeEqualTo null
+            it?.hasDelegate() shouldBeEqualTo false
         }
     }
 
@@ -32,7 +33,7 @@ class KoParentTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             name shouldBeEqualTo "SampleSuperInterface"
             delegateName shouldBeEqualTo null
             hasDelegate() shouldBeEqualTo false
@@ -49,7 +50,7 @@ class KoParentTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             name shouldBeEqualTo "SampleSuperInterface"
             delegateName shouldBeEqualTo "sampleProperty"
             hasDelegate() shouldBeEqualTo true
@@ -67,7 +68,7 @@ class KoParentTest {
             .parents
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             map { it.name } shouldBeEqualTo listOf("SampleSuperInterface1", "SampleSuperInterface2", "SampleSuperClass")
             mapNotNull { it.delegateName } shouldBeEqualTo listOf("sampleProperty")
         }

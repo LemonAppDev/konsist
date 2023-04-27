@@ -17,6 +17,7 @@ testing {
     suites {
         dependencies {
             implementation(libs.junitJupiterEngine)
+            implementation(libs.junitJupiterParams)
             api(libs.mockk)
             api(libs.kluent)
         }

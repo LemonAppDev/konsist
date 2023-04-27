@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.konameddeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -25,7 +26,7 @@ class KoNamedDeclarationTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasNameContaining("ple") shouldBeEqualTo true
             hasNameContaining("non") shouldBeEqualTo false
             hasNameWithPrefix("Sam") shouldBeEqualTo true
@@ -56,7 +57,7 @@ class KoNamedDeclarationTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasNameContaining("ple") shouldBeEqualTo true
             hasNameContaining("non") shouldBeEqualTo false
             hasNameWithPrefix("Sam") shouldBeEqualTo true
@@ -87,7 +88,7 @@ class KoNamedDeclarationTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasNameContaining("ple") shouldBeEqualTo true
             hasNameContaining("non") shouldBeEqualTo false
             hasNameWithPrefix("Sam") shouldBeEqualTo true
@@ -118,7 +119,7 @@ class KoNamedDeclarationTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasNameContaining("ple") shouldBeEqualTo true
             hasNameContaining("non") shouldBeEqualTo false
             hasNameWithPrefix("sam") shouldBeEqualTo true
@@ -149,7 +150,7 @@ class KoNamedDeclarationTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasNameContaining("ple") shouldBeEqualTo true
             hasNameContaining("non") shouldBeEqualTo false
             hasNameWithPrefix("sam") shouldBeEqualTo true

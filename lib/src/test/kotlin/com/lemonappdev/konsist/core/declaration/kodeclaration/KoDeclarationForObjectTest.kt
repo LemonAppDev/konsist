@@ -56,7 +56,7 @@ class KoDeclarationForObjectTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             annotations shouldHaveSize 1
             hasAnnotations("SampleAnnotation") shouldBeEqualTo true
             hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
@@ -73,7 +73,7 @@ class KoDeclarationForObjectTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             annotations shouldHaveSize 2
             hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
             hasAnnotations("SampleAnnotation2") shouldBeEqualTo true
@@ -94,7 +94,7 @@ class KoDeclarationForObjectTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             annotations shouldHaveSize 2
             hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
             hasAnnotationsOf(SampleAnnotation2::class) shouldBeEqualTo true
@@ -126,7 +126,7 @@ class KoDeclarationForObjectTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo true
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo false
@@ -143,7 +143,7 @@ class KoDeclarationForObjectTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo true
             hasPublicModifier() shouldBeEqualTo true
             hasPrivateModifier() shouldBeEqualTo false
@@ -160,7 +160,7 @@ class KoDeclarationForObjectTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo true
@@ -177,7 +177,7 @@ class KoDeclarationForObjectTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo false
@@ -194,7 +194,7 @@ class KoDeclarationForObjectTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             isPublicOrDefault() shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             hasPrivateModifier() shouldBeEqualTo false
@@ -255,7 +255,7 @@ class KoDeclarationForObjectTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasModifiers(PUBLIC) shouldBeEqualTo true
             hasModifiers(PRIVATE) shouldBeEqualTo false
         }
@@ -269,7 +269,7 @@ class KoDeclarationForObjectTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasModifiers(PRIVATE) shouldBeEqualTo true
             hasModifiers(DATA) shouldBeEqualTo true
             hasModifiers(PROTECTED) shouldBeEqualTo false
@@ -289,7 +289,7 @@ class KoDeclarationForObjectTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             hasModifiers() shouldBeEqualTo false
             hasModifiers(PRIVATE) shouldBeEqualTo false
         }

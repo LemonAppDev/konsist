@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
@@ -146,7 +147,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             primaryConstructor?.name shouldBeEqualTo "SampleClass"
             hasPrimaryConstructor() shouldBeEqualTo true
         }
@@ -160,7 +161,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             primaryConstructor?.name shouldBeEqualTo null
             hasPrimaryConstructor() shouldBeEqualTo false
         }
@@ -174,7 +175,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             secondaryConstructors.first().name shouldBeEqualTo "SampleClass"
             hasSecondaryConstructors() shouldBeEqualTo true
         }
@@ -188,7 +189,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             secondaryConstructors.isEmpty() shouldBeEqualTo true
             hasSecondaryConstructors() shouldBeEqualTo false
         }
@@ -202,7 +203,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             primaryConstructor?.name shouldBeEqualTo "SampleClass"
             secondaryConstructors shouldHaveSize 1
             allConstructors shouldHaveSize 2
@@ -217,7 +218,7 @@ class KoClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             parents.map { it.name } shouldBeEqualTo listOf("SampleParentClass", "SampleParentInterface1", "SampleParentInterface2")
             hasParents() shouldBeEqualTo true
             hasParents("SampleParentClass") shouldBeEqualTo true
@@ -245,9 +246,9 @@ class KoClassTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             parents shouldBeEqualTo emptyList()
-//            hasParents() shouldBeEqualTo false
+            hasParents() shouldBeEqualTo false
             hasParents("SampleClass") shouldBeEqualTo false
             parentClass shouldBeEqualTo null
             hasParentClass() shouldBeEqualTo false

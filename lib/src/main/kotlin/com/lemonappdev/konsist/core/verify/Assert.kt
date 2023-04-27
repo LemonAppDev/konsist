@@ -8,16 +8,16 @@ import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean) {
+fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?) {
     assert(function, true)
 }
 
-fun <E : KoBaseDeclaration> Sequence<E>.assertNot(function: (E) -> Boolean) {
+fun <E : KoBaseDeclaration> Sequence<E>.assertNot(function: (E) -> Boolean?) {
     assert(function, false)
 }
 
 @Suppress("detekt.ThrowsCount")
-private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean, positiveCheck: Boolean) {
+private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
     var lastDeclaration: KoBaseDeclaration? = null
 
     try {

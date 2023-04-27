@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.core.const.KoModifier.PRIVATE
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -41,12 +42,12 @@ class KoDeclarationForPrimaryConstructorTest {
             .primaryConstructor
 
         // then
-        sut?.run {
-            isPublicOrDefault() shouldBeEqualTo true
-            hasPublicModifier() shouldBeEqualTo false
-            hasPrivateModifier() shouldBeEqualTo false
-            hasProtectedModifier() shouldBeEqualTo false
-            hasInternalModifier() shouldBeEqualTo false
+        assertSoftly(sut) {
+            it?.isPublicOrDefault() shouldBeEqualTo true
+            it?.hasPublicModifier() shouldBeEqualTo false
+            it?.hasPrivateModifier() shouldBeEqualTo false
+            it?.hasProtectedModifier() shouldBeEqualTo false
+            it?.hasInternalModifier() shouldBeEqualTo false
         }
     }
 
@@ -59,12 +60,12 @@ class KoDeclarationForPrimaryConstructorTest {
             .primaryConstructor
 
         // then
-        sut?.run {
-            isPublicOrDefault() shouldBeEqualTo true
-            hasPublicModifier() shouldBeEqualTo true
-            hasPrivateModifier() shouldBeEqualTo false
-            hasProtectedModifier() shouldBeEqualTo false
-            hasInternalModifier() shouldBeEqualTo false
+        assertSoftly(sut) {
+            it?.isPublicOrDefault() shouldBeEqualTo true
+            it?.hasPublicModifier() shouldBeEqualTo true
+            it?.hasPrivateModifier() shouldBeEqualTo false
+            it?.hasProtectedModifier() shouldBeEqualTo false
+            it?.hasInternalModifier() shouldBeEqualTo false
         }
     }
 
@@ -77,12 +78,12 @@ class KoDeclarationForPrimaryConstructorTest {
             .primaryConstructor
 
         // then
-        sut?.run {
-            isPublicOrDefault() shouldBeEqualTo false
-            hasPublicModifier() shouldBeEqualTo false
-            hasPrivateModifier() shouldBeEqualTo true
-            hasProtectedModifier() shouldBeEqualTo false
-            hasInternalModifier() shouldBeEqualTo false
+        assertSoftly(sut) {
+            it?.isPublicOrDefault() shouldBeEqualTo false
+            it?.hasPublicModifier() shouldBeEqualTo false
+            it?.hasPrivateModifier() shouldBeEqualTo true
+            it?.hasProtectedModifier() shouldBeEqualTo false
+            it?.hasInternalModifier() shouldBeEqualTo false
         }
     }
 
@@ -95,12 +96,12 @@ class KoDeclarationForPrimaryConstructorTest {
             .primaryConstructor
 
         // then
-        sut?.run {
-            isPublicOrDefault() shouldBeEqualTo false
-            hasPublicModifier() shouldBeEqualTo false
-            hasPrivateModifier() shouldBeEqualTo false
-            hasProtectedModifier() shouldBeEqualTo true
-            hasInternalModifier() shouldBeEqualTo false
+        assertSoftly(sut) {
+            it?.isPublicOrDefault() shouldBeEqualTo false
+            it?.hasPublicModifier() shouldBeEqualTo false
+            it?.hasPrivateModifier() shouldBeEqualTo false
+            it?.hasProtectedModifier() shouldBeEqualTo true
+            it?.hasInternalModifier() shouldBeEqualTo false
         }
     }
 
@@ -113,12 +114,12 @@ class KoDeclarationForPrimaryConstructorTest {
             .primaryConstructor
 
         // then
-        sut?.run {
-            isPublicOrDefault() shouldBeEqualTo false
-            hasPublicModifier() shouldBeEqualTo false
-            hasPrivateModifier() shouldBeEqualTo false
-            hasProtectedModifier() shouldBeEqualTo false
-            hasInternalModifier() shouldBeEqualTo true
+        assertSoftly(sut) {
+            it?.isPublicOrDefault() shouldBeEqualTo false
+            it?.hasPublicModifier() shouldBeEqualTo false
+            it?.hasPrivateModifier() shouldBeEqualTo false
+            it?.hasProtectedModifier() shouldBeEqualTo false
+            it?.hasInternalModifier() shouldBeEqualTo true
         }
     }
 
