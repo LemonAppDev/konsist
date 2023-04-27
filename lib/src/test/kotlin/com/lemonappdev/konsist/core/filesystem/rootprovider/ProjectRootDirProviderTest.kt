@@ -7,8 +7,8 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class ProjectRootDirectoryProviderTest {
-    private class Sut(pathVerifier: PathVerifier) : ProjectRootDirectoryProvider(pathVerifier) {
+class ProjectRootDirProviderTest {
+    private class Sut(pathVerifier: PathVerifier) : ProjectRootDirProvider(pathVerifier) {
         override val paths = setOf("/path1", "/path2")
     }
 
@@ -24,7 +24,7 @@ class ProjectRootDirectoryProviderTest {
         every { pathVerifier.verifyPathIfExists(file, "/path2") } returns true
 
         // when
-        val actual = sut(file)
+        val actual = sut.getDir(file)
 
         // then
         actual shouldBeEqualTo file
@@ -38,10 +38,9 @@ class ProjectRootDirectoryProviderTest {
         every { pathVerifier.verifyPathIfExists(file, "/path2") } returns false
 
         // when
-        val actual = sut(file)
+        val actual = sut.getDir(file)
 
         // then
         actual shouldBeEqualTo null
-
     }
 }

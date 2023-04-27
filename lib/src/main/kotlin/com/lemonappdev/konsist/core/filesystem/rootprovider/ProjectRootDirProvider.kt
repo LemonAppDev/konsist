@@ -3,12 +3,12 @@ package com.lemonappdev.konsist.core.filesystem.rootprovider
 import com.lemonappdev.konsist.core.filesystem.PathVerifier
 import java.io.File
 
-abstract class ProjectRootDirectoryProvider(
+abstract class ProjectRootDirProvider(
     private val pathVerifier: PathVerifier,
 ) {
     abstract val paths: Set<String>
 
-    operator fun invoke(file: File): File? {
+    fun getDir(file: File): File? {
         val allExist = paths.all { pathVerifier.verifyPathIfExists(file, it) }
 
         return if (allExist) {

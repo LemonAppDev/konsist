@@ -2,9 +2,9 @@ package com.lemonappdev.konsist.core.filesystem.rootprovider
 
 import com.lemonappdev.konsist.core.filesystem.PathVerifier
 
-class GradleProjectRootDirectoryProvider(
+class GradleProjectRootDirProvider(
     pathVerifier: PathVerifier,
-) : ProjectRootDirectoryProvider(pathVerifier) {
+) : ProjectRootDirProvider(pathVerifier) {
     override val paths = setOf(
         "gradlew",
         "gradlew.bat",

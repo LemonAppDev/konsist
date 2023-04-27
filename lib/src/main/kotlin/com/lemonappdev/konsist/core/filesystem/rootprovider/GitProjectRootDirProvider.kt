@@ -2,9 +2,9 @@ package com.lemonappdev.konsist.core.filesystem.rootprovider
 
 import com.lemonappdev.konsist.core.filesystem.PathVerifier
 
-class GitProjectRootDirectoryProvider(
+class GitProjectRootDirProvider(
     pathVerifier: PathVerifier,
-) : ProjectRootDirectoryProvider(pathVerifier) {
+) : ProjectRootDirProvider(pathVerifier) {
     /*
     Random files and directory selected from fresh '.git' repository (creates using the 'git init' command)
     Description of the '.git' directory https://githowto.com/git_internals_git_directory

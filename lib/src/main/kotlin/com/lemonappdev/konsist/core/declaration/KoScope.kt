@@ -7,9 +7,9 @@ import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.filesystem.KoFileFactory
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.filesystem.PathVerifier
-import com.lemonappdev.konsist.core.filesystem.rootprovider.GitProjectRootDirectoryProvider
-import com.lemonappdev.konsist.core.filesystem.rootprovider.GradleProjectRootDirectoryProvider
-import com.lemonappdev.konsist.core.filesystem.rootprovider.MavenProjectRootDirectoryProvider
+import com.lemonappdev.konsist.core.filesystem.rootprovider.GitProjectRootDirProvider
+import com.lemonappdev.konsist.core.filesystem.rootprovider.GradleProjectRootDirProvider
+import com.lemonappdev.konsist.core.filesystem.rootprovider.MavenProjectRootDirProvider
 import com.lemonappdev.konsist.util.PackageHelper
 import java.io.File
 
@@ -89,9 +89,9 @@ class KoScope(
 
         private val pathProvider by lazy {
             val projectRootDirectoryProviders = listOf(
-                GradleProjectRootDirectoryProvider(pathVerifier),
-                MavenProjectRootDirectoryProvider(pathVerifier),
-                GitProjectRootDirectoryProvider(pathVerifier),
+                GradleProjectRootDirProvider(pathVerifier),
+                MavenProjectRootDirProvider(pathVerifier),
+                GitProjectRootDirProvider(pathVerifier),
             )
 
             PathProvider(
@@ -101,7 +101,7 @@ class KoScope(
         }
 
         private val projectKotlinFiles by lazy {
-            val prodDirectory = pathProvider.projectDirectory
+            val prodDirectory = pathProvider.rootProjectDirectory
 
             prodDirectory
                 .walk()
@@ -114,7 +114,7 @@ class KoScope(
                 return KoScope(projectKotlinFiles)
             }
 
-            var pathPrefix = "${pathProvider.projectPath}/${module?.lowercase()}"
+            var pathPrefix = "${pathProvider.rootProjectPath}/${module?.lowercase()}"
 
             if (sourceSet != null) {
                 pathPrefix = "$pathPrefix/src/$sourceSet/"
