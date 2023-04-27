@@ -37,6 +37,7 @@ class KoDocTest {
         // then
         sut.blockTags shouldHaveSize 10
     }
+
     @Test
     fun `block-tags function`() {
         // given
