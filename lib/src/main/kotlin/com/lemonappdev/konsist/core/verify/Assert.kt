@@ -1,9 +1,7 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.core.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.core.declaration.KoComplexDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclaration
-import com.lemonappdev.konsist.core.declaration.KoFunction
 import com.lemonappdev.konsist.core.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
@@ -67,47 +65,25 @@ private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: Li
 }
 
 private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {
-    val testName = Thread.currentThread().stackTrace[4].methodName
+    val testMethodName = Thread.currentThread().stackTrace[4].methodName
+    val declarations: MutableMap<E, Boolean> = mutableMapOf()
 
-    val declarationsWithoutAnnotations = localList
-        .filterNot { (it as KoDeclaration).hasAnnotations("Suppress(\"konsist.$testName\")") }
-        .filterNot { (it as KoDeclaration).hasAnnotations("Suppress(\"$testName\")") }
+    localList.forEach { declarations[it] = checkIfSuppressed(it as KoDeclaration, testMethodName) }
 
-    val notTopLevelDeclarations = declarationsWithoutAnnotations.filter { !(it as KoDeclaration).isTopLevel() }
+    val withoutSuppress = mutableListOf<E>()
 
-    val withoutAnnotationFromTopLevelDeclaration = notTopLevelDeclarations.map {
-        val allDeclarations = it
-            .containingFile
-            .declarations(includeNested = true, includeLocal = true)
+    declarations.forEach{ if(!it.value) withoutSuppress.add(it.key) }
 
-        val functions = allDeclarations
-            .filterIsInstance<KoFunction>()
-            .filter { function -> function.containsLocalDeclarations((it as KoFunction).name) }
-            .toMutableList()
+    return withoutSuppress
+}
 
-        val others = allDeclarations
-            .toMutableList()
-            .also { declarations ->
-                declarations.removeIf { declaration -> declaration is KoFunction }
-            }
-            .filter { declaration ->
-                (declaration as KoComplexDeclaration).containsDeclarations((it as KoDeclaration).name, includeNested = true) ||
-                    declaration.containsFunction((it as KoDeclaration).name, includeNested = true, includeLocal = true)
-            }
-
-        if (
-            (functions + others).none { declaration ->
-                declaration.hasAnnotations("Suppress(\"konsist.$testName\")") ||
-                    declaration.hasAnnotations("Suppress(\"$testName\")")
-            }
-        ) {
-            it
-        } else {
-            null
-        }
-    }.filterNotNull()
-
-    return ((declarationsWithoutAnnotations - notTopLevelDeclarations.toSet()) + withoutAnnotationFromTopLevelDeclaration)
-        .filterNot { it.containingFile.hasAnnotations("file:Suppress(\"konsist.$testName\")") }
-        .filterNot { it.containingFile.hasAnnotations("file:Suppress(\"$testName\")") }
+private fun checkIfSuppressed(declaration: KoDeclaration, testMethodName: String): Boolean {
+    return when {
+        declaration.hasAnnotations("Suppress(\"konsist.$testMethodName\")") -> true
+        declaration.hasAnnotations("Suppress(\"$testMethodName\")") -> true
+        declaration.parentDeclaration != null -> declaration.parentDeclaration?.let { checkIfSuppressed(it, testMethodName)} ?: throw KoInternalException()
+        declaration.containingFile.hasAnnotations("Suppress(\"konsist.$testMethodName\")") -> true
+        declaration.containingFile.hasAnnotations("Suppress(\"$testMethodName\")") -> true
+        else -> false
+    }
 }
