@@ -1,9 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.util.PackageHelper
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
-import java.io.File
 
 /**
  * Base declaration
