@@ -30,7 +30,7 @@ class PathProvider(
         }
 
         return projectRootDirectoryProviders
-            .map { it.getProjectRootDirectory(file) }
+            .map { provider -> provider(file) }
             .firstOrNull()
             ?: getProjectRootDirectory(file.absoluteFile.parentFile)
     }

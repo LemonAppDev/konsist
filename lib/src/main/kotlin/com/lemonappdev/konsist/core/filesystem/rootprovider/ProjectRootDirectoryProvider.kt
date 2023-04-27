@@ -8,7 +8,7 @@ abstract class ProjectRootDirectoryProvider(
 ) {
     abstract val paths: Set<String>
 
-    fun getProjectRootDirectory(file: File): File? {
+    operator fun invoke(file: File): File? {
         val allExist = paths.all { pathVerifier.verifyPathIfExists(file, it) }
 
         return if (allExist) {
