@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
+import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForCompanionObjectTest {
@@ -291,6 +292,34 @@ class KoDeclarationForCompanionObjectTest {
         assertSoftly(sut) {
             hasModifiers() shouldBeEqualTo true
             hasModifiers(PRIVATE) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `companion-object-has-kdoc`() {
+        // given
+        val sut = getSnippetFile("companion-object-has-kdoc")
+            .companionObjects()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            koDoc shouldNotBeEqualTo null
+            hasKoDoc() shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `companion-object-has-no-kdoc`() {
+        // given
+        val sut = getSnippetFile("companion-object-has-no-kdoc")
+            .companionObjects()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            koDoc shouldBeEqualTo null
+            hasKoDoc() shouldBeEqualTo false
         }
     }
 

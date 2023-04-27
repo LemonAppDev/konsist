@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.testdata.SampleAnnotation
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
+import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForTypeAliasTest {
@@ -206,6 +207,34 @@ class KoDeclarationForTypeAliasTest {
         assertSoftly(sut) {
             hasModifiers() shouldBeEqualTo false
             hasModifiers(PRIVATE) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `typealias-has-kdoc`() {
+        // given
+        val sut = getSnippetFile("typealias-has-kdoc")
+            .typeAliases()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            koDoc shouldNotBeEqualTo null
+            hasKoDoc() shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `typealias-has-no-kdoc`() {
+        // given
+        val sut = getSnippetFile("typealias-has-no-kdoc")
+            .typeAliases()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            koDoc shouldBeEqualTo null
+            hasKoDoc() shouldBeEqualTo false
         }
     }
 

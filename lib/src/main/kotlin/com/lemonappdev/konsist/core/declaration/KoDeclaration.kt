@@ -2,11 +2,13 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.util.PackageHelper
+import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isPublic
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 import kotlin.reflect.KClass
 
+@Suppress("detekt.TooManyFunctions")
 abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParameterListOwner) :
     KoNamedDeclaration(ktTypeParameterListOwner) {
 
@@ -41,6 +43,15 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
             }
             ?.map { KoModifier.valueOf(it.uppercase()) }
             ?: emptyList()
+    }
+
+    val koDoc by lazy {
+        val kDocElement = ktTypeParameterListOwner
+            .children
+            .filterIsInstance<KDocElement>()
+            .firstOrNull()
+
+        kDocElement?.let { KoDoc(kDocElement) }
     }
 
     fun hasPublicModifier() = hasModifiers(KoModifier.PUBLIC)
@@ -78,6 +89,8 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
         koModifiers.isEmpty() -> modifiers.isNotEmpty()
         else -> modifiers.containsAll(koModifiers.toList())
     }
+
+    fun hasKoDoc() = koDoc != null
 
     fun resideInPackage(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
 
