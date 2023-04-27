@@ -27,7 +27,8 @@ class KoDoc(private val kDocElement: KDocElement) : KoPsiDeclaration(kDocElement
                 it.removeLast()
             }
             .joinToString("\n") {
-                it.trim()
+                it
+                    .trim()
                     .removePrefix("*")
                     .trim()
             }
