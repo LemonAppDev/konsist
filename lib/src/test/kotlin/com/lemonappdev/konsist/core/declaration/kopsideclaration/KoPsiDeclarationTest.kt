@@ -105,7 +105,6 @@ class KoPsiDeclarationTest {
             }
     }
 
-
     @Test
     fun `location-with-single-digit`() {
         // given

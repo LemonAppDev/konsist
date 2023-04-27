@@ -94,7 +94,7 @@ fun <T : KoDeclaration> Sequence<T>.withoutKoDoc() = filterNot { it.hasKoDoc() }
 fun <T : KoDeclaration> Sequence<T>.withKoDocWithTags(vararg tags: KoTag) = filter { it.koDoc?.hasTags(*tags) ?: false }
 
 fun <T : KoDeclaration> Sequence<T>.withSomeKoDocWithTags(vararg tags: KoTag) = filter {
-    tags.any { tag -> it.koDoc?.hasTags(tag) ?: false}
+    tags.any { tag -> it.koDoc?.hasTags(tag) ?: false }
 }
 
-fun <T : KoDeclaration> Sequence<T>.withoutKoDocWithTags(vararg tags: KoTag) = filterNot { it.koDoc?.hasTags(*tags) ?: false}
+fun <T : KoDeclaration> Sequence<T>.withoutKoDocWithTags(vararg tags: KoTag) = filterNot { it.koDoc?.hasTags(*tags) ?: false }

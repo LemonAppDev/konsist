@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.psi.KtElement
 /**
  * Base declaration
  */
-open class KoBaseDeclaration(private val ktElement: KtElement): KoPsiDeclaration(ktElement) {
+open class KoBaseDeclaration(private val ktElement: KtElement) : KoPsiDeclaration(ktElement) {
     /**
      * KoFile containing the declaration
      */
