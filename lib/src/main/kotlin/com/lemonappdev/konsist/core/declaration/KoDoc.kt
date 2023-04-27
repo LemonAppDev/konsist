@@ -41,18 +41,18 @@ class KoDoc(private val kDocElement: KDocElement) {
     val blockTags by lazy {
         val regex = "@(\\w+)".toRegex()
 
-        val strings = text.substringAfter("@")
+        val tagsAsStringList = text.substringAfter("@")
             .split("@")
             .map { ("@$it").trimEnd() }
 
-        val tags = strings
+        val tagsWithName = tagsAsStringList
             .flatMap { regex.findAll(it) }
             .map { KoTag.values().first { tag -> tag.type == it.value } }
-            .zip(strings)
+            .zip(tagsAsStringList)
 
-        val map = tags.groupBy { it.first.isValued }
+        val tagsGroupingByValued = tagsWithName.groupBy { it.first.isValued }
 
-        map.flatMap {
+        tagsGroupingByValued.flatMap {
             when (it.key) {
                 true -> it.value.map { value -> parseToValuedBlockTag(value.first, value.second) }
                 false -> it.value.map { value -> parseToBlockTag(value.first, value.second) }
