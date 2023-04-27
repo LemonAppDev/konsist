@@ -154,5 +154,35 @@ class KoBaseDeclarationTest {
         }
     }
 
+    @Test
+    fun `class-has-parent-declaration`() {
+        // given
+        val sut = getSnippetFile("class-has-parent-declaration")
+            .classes(includeNested = true, includeLocal = true)
+            .last()
+
+        // then
+        assertSoftly(sut) {
+            hasParentDeclaration() shouldBeEqualTo true
+            hasParentDeclaration("SampleClass") shouldBeEqualTo true
+            hasParentDeclaration("SampleOtherClass") shouldBeEqualTo false
+            hasParentDeclaration("SampleTopLevelInterface") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `class-without-parent-declaration`() {
+        // given
+        val sut = getSnippetFile("class-without-parent-declaration")
+            .classes(includeNested = true, includeLocal = true)
+            .last()
+
+        // then
+        assertSoftly(sut) {
+            hasParentDeclaration() shouldBeEqualTo false
+            hasParentDeclaration("SampleClass") shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kobasedeclaration/snippet/", fileName)
 }

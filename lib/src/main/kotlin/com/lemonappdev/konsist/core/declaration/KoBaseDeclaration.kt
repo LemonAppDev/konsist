@@ -66,18 +66,29 @@ open class KoBaseDeclaration(private val ktElement: KtElement) {
     val locationWithText by lazy { "Location: $location \nDeclaration:\n$text" }
 
     val parentDeclaration by lazy {
-        val parentName = ktElement
+        val parents = ktElement
             .parents
-            .toList()[1]
-            .namedUnwrappedElement
+            .toList()
+
+        val parent = when {
+            parents.size > 1 -> parents[1]
+            else -> null
+        }
+
+        val name = parent
+            ?.namedUnwrappedElement
             ?.name
 
-        parentName
-            ?.let {
-                containingFile
-                    .declarations(includeLocal = true, includeNested = true)
-                    .firstOrNull { it.name == parentName }
-            }
+        name?.let {
+            containingFile
+                .declarations(includeLocal = true, includeNested = true)
+                .firstOrNull { declaration -> declaration.name == it }
+        }
+    }
+
+    fun hasParentDeclaration(name: String? = null) = when (name) {
+        null -> parentDeclaration != null
+        else -> parentDeclaration?.name == name
     }
 
     fun resideInFilePath(text: String) = PackageHelper.resideInPackage(text, filePath, '/')
