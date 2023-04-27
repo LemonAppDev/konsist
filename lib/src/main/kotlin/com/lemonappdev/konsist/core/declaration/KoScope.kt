@@ -4,6 +4,12 @@ import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
+import com.lemonappdev.konsist.core.filesystem.KoFileFactory
+import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.filesystem.PathVerifier
+import com.lemonappdev.konsist.core.filesystem.rootprovider.GitProjectRootDirectoryProvider
+import com.lemonappdev.konsist.core.filesystem.rootprovider.GradleProjectRootDirectoryProvider
+import com.lemonappdev.konsist.core.filesystem.rootprovider.MavenProjectRootDirectoryProvider
 import com.lemonappdev.konsist.util.PackageHelper
 import java.io.File
 
@@ -79,18 +85,23 @@ class KoScope(
     }
 
     companion object {
-        /**
-         * Return repository root directory File
-         */
-        private val projectRootDirectoryFilePath by lazy {
-            File("")
-                .absoluteFile
-                .path
-                .dropLastWhile { it != '/' }
+        private val pathVerifier = PathVerifier()
+
+        private val pathProvider by lazy {
+            val projectRootDirectoryProviders = listOf(
+                GradleProjectRootDirectoryProvider(pathVerifier),
+                MavenProjectRootDirectoryProvider(pathVerifier),
+                GitProjectRootDirectoryProvider(pathVerifier),
+            )
+
+            PathProvider(
+                KoFileFactory(),
+                projectRootDirectoryProviders,
+            )
         }
 
         private val projectKotlinFiles by lazy {
-            val prodDirectory = File(projectRootDirectoryFilePath)
+            val prodDirectory = pathProvider.projectDirectory
 
             prodDirectory
                 .walk()
@@ -103,7 +114,7 @@ class KoScope(
                 return KoScope(projectKotlinFiles)
             }
 
-            var pathPrefix = "$projectRootDirectoryFilePath${module?.lowercase()}"
+            var pathPrefix = "${pathProvider.projectPath}/${module?.lowercase()}"
 
             if (sourceSet != null) {
                 pathPrefix = "$pathPrefix/src/$sourceSet/"
