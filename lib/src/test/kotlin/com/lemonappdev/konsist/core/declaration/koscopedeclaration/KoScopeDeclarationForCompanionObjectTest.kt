@@ -64,5 +64,5 @@ class KoScopeDeclarationForCompanionObjectTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koscope/snippet/forcompanionobject/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koscopedeclaration/snippet/forcompanionobject/", fileName)
 }

@@ -39,5 +39,5 @@ class KoCompanionObjectDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kocompanionobject/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kocompanionobjectdeclaration/snippet/", fileName)
 }

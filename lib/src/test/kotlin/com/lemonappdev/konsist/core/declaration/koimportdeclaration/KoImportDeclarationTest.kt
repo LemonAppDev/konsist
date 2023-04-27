@@ -34,5 +34,5 @@ class KoImportDeclarationTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koimport/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/koimportdeclaration/snippet/", fileName)
 }

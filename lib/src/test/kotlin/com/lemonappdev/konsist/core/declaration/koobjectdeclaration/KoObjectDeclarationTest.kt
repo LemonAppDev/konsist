@@ -27,5 +27,5 @@ class KoObjectDeclarationTest {
         sut.hasDataModifier() shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobject/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobjectdeclaration/snippet/", fileName)
 }

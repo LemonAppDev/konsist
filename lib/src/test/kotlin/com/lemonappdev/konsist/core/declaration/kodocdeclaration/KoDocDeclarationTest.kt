@@ -597,5 +597,5 @@ class KoDocDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kodoc/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kodocdeclaration/snippet/", fileName)
 }

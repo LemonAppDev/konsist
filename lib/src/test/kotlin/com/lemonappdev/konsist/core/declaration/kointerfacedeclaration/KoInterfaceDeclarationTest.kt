@@ -28,5 +28,5 @@ class KoInterfaceDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kointerface/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kointerfacedeclaration/snippet/", fileName)
 }

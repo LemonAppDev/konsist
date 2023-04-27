@@ -48,5 +48,5 @@ class KoTypeAliasDeclarationTest {
         sut.hasActualModifier() shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealias/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealiasdeclaration/snippet/", fileName)
 }
