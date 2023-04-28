@@ -1,0 +1,22 @@
+class SampleCorrectClass1WithSuffix
+
+@Suppress("konsist.assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation")
+class SampleCorrectClass2WithSuffix {
+    fun sampleIncorrectFunctionWithoutSuppressAnnotation1(){}
+
+    fun sampleCorrectFunction1WithSuffix(){}
+}
+
+@Suppress("assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation")
+class SampleIncorrectClassWithSuppressAnnotation1 {
+    fun sampleIncorrectFunctionWithoutSuppressAnnotation2(){}
+
+    fun sampleCorrectFunction2WithSuffix(){}
+}
+
+class SampleCorrectClass2WithSuffix {
+    @Suppress("assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation")
+    fun sampleIncorrectFunctionWithoutSuppressAnnotation2(){}
+
+    fun sampleCorrectFunction2WithSuffix(){}
+}

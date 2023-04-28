@@ -1,0 +1,9 @@
+@file:Suppress("assert-not-check-nested-declarations-in-file-with-suppress-annotation")
+
+class SampleCorrectClass{
+    class SampleIncorrectClassWithoutSuppressAnnotation1 {
+        fun sampleIncorrectFunctionWithoutSuppressAnnotation1(){}
+    }
+}
+
+fun sampleIncorrectFunctionWithoutSuppressAnnotation2(){}

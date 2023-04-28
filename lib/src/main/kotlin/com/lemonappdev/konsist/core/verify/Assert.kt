@@ -82,8 +82,8 @@ private fun checkIfSuppressed(declaration: KoDeclaration, testMethodName: String
         declaration.hasAnnotations("Suppress(\"konsist.$testMethodName\")") -> true
         declaration.hasAnnotations("Suppress(\"$testMethodName\")") -> true
         declaration.parentDeclaration != null -> declaration.parentDeclaration?.let { checkIfSuppressed(it, testMethodName)} ?: throw KoInternalException()
-        declaration.containingFile.hasAnnotations("Suppress(\"konsist.$testMethodName\")") -> true
-        declaration.containingFile.hasAnnotations("Suppress(\"$testMethodName\")") -> true
+        declaration.containingFile.hasAnnotations("file:Suppress(\"konsist.$testMethodName\")") -> true
+        declaration.containingFile.hasAnnotations("file:Suppress(\"$testMethodName\")") -> true
         else -> false
     }
 }

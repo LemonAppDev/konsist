@@ -1,0 +1,23 @@
+import com.lemonappdev.konsist.core.const.KoModifier
+import com.lemonappdev.konsist.core.exception.KoInternalException
+
+class SampleCorrectClass1WithSuffix {
+    @Suppress("konsist.assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation")
+    fun sampleIncorrectFunctionWithSuppressAnnotation1(){}
+
+    fun sampleCorrectFunction1WithSuffix(){}
+}
+
+class SampleCorrectClass2WithSuffix {
+    fun sampleCorrectFunction2WithSuffix(){
+        @Suppress("assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation")
+        fun sampleIncorrectFunctionWithSuppressAnnotation2(){}
+    }
+
+    fun sampleCorrectFunction3WithSuffix(){}
+}
+
+fun sampleCorrectFunction1WithSuffix() {
+    @Suppress("assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation")
+    fun sampleIncorrectFunctionWithoutSuppressAnnotation2(){}
+}

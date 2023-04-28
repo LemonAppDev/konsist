@@ -1,0 +1,6 @@
+@file:Suppress("konsist.assert-not-check-declarations-in-file-with-suppress-annotation-with-konsist-word")
+class SampleCorrectClass
+
+class SampleIncorrectClassWithoutSuppressAnnotation1
+
+class SampleIncorrectClassWithoutSuppressAnnotation2
