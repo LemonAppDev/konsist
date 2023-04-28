@@ -72,7 +72,7 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
 
     val withoutSuppress = mutableListOf<E>()
 
-    declarations.forEach{ if(!it.value) withoutSuppress.add(it.key) }
+    declarations.forEach { if (!it.value) withoutSuppress.add(it.key) }
 
     return withoutSuppress
 }
@@ -81,7 +81,9 @@ private fun checkIfSuppressed(declaration: KoDeclaration, testMethodName: String
     return when {
         declaration.hasAnnotations("Suppress(\"konsist.$testMethodName\")") -> true
         declaration.hasAnnotations("Suppress(\"$testMethodName\")") -> true
-        declaration.parentDeclaration != null -> declaration.parentDeclaration?.let { checkIfSuppressed(it, testMethodName)} ?: throw KoInternalException()
+        declaration.parentDeclaration != null -> declaration.parentDeclaration?.let {
+            checkIfSuppressed(it, testMethodName)
+        } ?: throw KoInternalException()
         declaration.containingFile.hasAnnotations("file:Suppress(\"konsist.$testMethodName\")") -> true
         declaration.containingFile.hasAnnotations("file:Suppress(\"$testMethodName\")") -> true
         else -> false

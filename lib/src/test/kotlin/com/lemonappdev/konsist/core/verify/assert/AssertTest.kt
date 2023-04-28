@@ -147,7 +147,7 @@ class AssertTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assert' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assert' method."
     }
 
     @Test
@@ -163,7 +163,7 @@ class AssertTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assertNot' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assertNot' method."
     }
 
     @Test
@@ -178,7 +178,6 @@ class AssertTest {
 
     @Test
     fun `assert-not-check-declarations-in-file-with-suppress-annotation-without-konsist-prefix`() {
-
         // given
         val sut = getSnippetFile("assert-not-check-declarations-in-file-with-suppress-annotation-without-konsist-prefix")
             .declarations(includeNested = true)
@@ -192,7 +191,7 @@ class AssertTest {
         // given
         val sut =
             getSnippetFile("assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation-with-konsist-prefix")
-            .declarations(includeNested = true)
+                .declarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -203,7 +202,7 @@ class AssertTest {
         // given
         val sut =
             getSnippetFile("assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation-without-konsist-prefix")
-            .declarations(includeNested = true)
+                .declarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
