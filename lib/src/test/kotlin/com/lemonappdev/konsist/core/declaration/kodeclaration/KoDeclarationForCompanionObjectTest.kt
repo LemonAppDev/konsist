@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.core.const.KoModifier.COMPANION
 import com.lemonappdev.konsist.core.const.KoModifier.FINAL
 import com.lemonappdev.konsist.core.const.KoModifier.PRIVATE
@@ -230,6 +231,39 @@ class KoDeclarationForCompanionObjectTest {
     fun `companion-object-has-modifiers`() {
         // given
         val sut = getSnippetFile("companion-object-has-modifiers")
+            .companionObjects()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, FINAL, COMPANION)
+    }
+
+    @Test
+    fun `companion-object-has-modifiers-and-annotation-with-parameter`() {
+        // given
+        val sut = getSnippetFile("companion-object-has-modifiers-and-annotation-with-parameter")
+            .companionObjects()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, FINAL, COMPANION)
+    }
+
+    @Test
+    fun `companion-object-has-modifiers-and-annotation-without-parameter`() {
+        // given
+        val sut = getSnippetFile("companion-object-has-modifiers-and-annotation-without-parameter")
+            .companionObjects()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, FINAL, COMPANION)
+    }
+
+    @Test
+    fun `companion-object-has-modifiers-and-annotations`() {
+        // given
+        val sut = getSnippetFile("companion-object-has-modifiers-and-annotations")
             .companionObjects()
             .first()
 
