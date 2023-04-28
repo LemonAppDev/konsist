@@ -2,13 +2,13 @@ package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.core.const.KoModifier.OPEN
 import com.lemonappdev.konsist.core.const.KoModifier.PUBLIC
-import com.lemonappdev.konsist.core.declaration.KoClass
-import com.lemonappdev.konsist.core.declaration.KoCompanionObject
+import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclaration
-import com.lemonappdev.konsist.core.declaration.KoFunction
-import com.lemonappdev.konsist.core.declaration.KoInterface
-import com.lemonappdev.konsist.core.declaration.KoObject
-import com.lemonappdev.konsist.core.declaration.KoProperty
+import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.core.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.core.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1
 import com.lemonappdev.konsist.testdata.SampleClass2
@@ -162,11 +162,11 @@ class KoComplexDeclarationSequenceExtTest {
     @Test
     fun `declarations() returns declarations of all complex declarations`() {
         // given
-        val class1: KoClass = mockk()
-        val function1: KoFunction = mockk()
-        val class2: KoClass = mockk()
-        val interface1: KoInterface = mockk()
-        val property1: KoProperty = mockk()
+        val class1: KoClassDeclaration = mockk()
+        val function1: KoFunctionDeclaration = mockk()
+        val class2: KoClassDeclaration = mockk()
+        val interface1: KoInterfaceDeclaration = mockk()
+        val property1: KoPropertyDeclaration = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
             every { declarations(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(class1, function1)
@@ -197,9 +197,9 @@ class KoComplexDeclarationSequenceExtTest {
     @Test
     fun `classes() returns classes of all complex declarations`() {
         // given
-        val class1: KoClass = mockk()
-        val class2: KoClass = mockk()
-        val class3: KoClass = mockk()
+        val class1: KoClassDeclaration = mockk()
+        val class2: KoClassDeclaration = mockk()
+        val class3: KoClassDeclaration = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
             every { classes(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(class1, class2)
@@ -222,9 +222,9 @@ class KoComplexDeclarationSequenceExtTest {
     @Test
     fun `interfaces() returns interfaces of all complex declarations`() {
         // given
-        val interface1: KoInterface = mockk()
-        val interface2: KoInterface = mockk()
-        val interface3: KoInterface = mockk()
+        val interface1: KoInterfaceDeclaration = mockk()
+        val interface2: KoInterfaceDeclaration = mockk()
+        val interface3: KoInterfaceDeclaration = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
             every { interfaces(modifiers, includeNested = true) } returns sequenceOf(interface1, interface2)
@@ -247,9 +247,9 @@ class KoComplexDeclarationSequenceExtTest {
     @Test
     fun `objects() returns objects of all complex declarations`() {
         // given
-        val object1: KoObject = mockk()
-        val object2: KoObject = mockk()
-        val object3: KoObject = mockk()
+        val object1: KoObjectDeclaration = mockk()
+        val object2: KoObjectDeclaration = mockk()
+        val object3: KoObjectDeclaration = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
             every { objects(modifiers, includeNested = true) } returns sequenceOf(object1, object2)
@@ -272,9 +272,9 @@ class KoComplexDeclarationSequenceExtTest {
     @Test
     fun `companionObjects() returns companionObjects of all complex declarations`() {
         // given
-        val companionObject1: KoCompanionObject = mockk()
-        val companionObject2: KoCompanionObject = mockk()
-        val companionObject3: KoCompanionObject = mockk()
+        val companionObject1: KoCompanionObjectDeclaration = mockk()
+        val companionObject2: KoCompanionObjectDeclaration = mockk()
+        val companionObject3: KoCompanionObjectDeclaration = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
             every { companionObjects(modifiers, includeNested = true) } returns sequenceOf(companionObject1, companionObject2)
@@ -297,9 +297,9 @@ class KoComplexDeclarationSequenceExtTest {
     @Test
     fun `properties() returns properties of all complex declarations`() {
         // given
-        val property1: KoProperty = mockk()
-        val property2: KoProperty = mockk()
-        val property3: KoProperty = mockk()
+        val property1: KoPropertyDeclaration = mockk()
+        val property2: KoPropertyDeclaration = mockk()
+        val property3: KoPropertyDeclaration = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
             every { properties(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(property1, property2)
@@ -322,9 +322,9 @@ class KoComplexDeclarationSequenceExtTest {
     @Test
     fun `functions() returns functions of all complex declarations`() {
         // given
-        val function1: KoFunction = mockk()
-        val function2: KoFunction = mockk()
-        val function3: KoFunction = mockk()
+        val function1: KoFunctionDeclaration = mockk()
+        val function2: KoFunctionDeclaration = mockk()
+        val function3: KoFunctionDeclaration = mockk()
         val modifiers = listOf(OPEN, PUBLIC)
         val complexDeclaration1: KoComplexDeclaration = mockk {
             every { functions(modifiers, includeNested = true, includeLocal = false) } returns sequenceOf(function1, function2)
