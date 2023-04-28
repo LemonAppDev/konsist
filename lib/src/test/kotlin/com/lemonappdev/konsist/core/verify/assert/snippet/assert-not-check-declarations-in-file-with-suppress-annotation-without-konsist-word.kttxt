@@ -1,6 +1,0 @@
-@file:Suppress("assert-not-check-declarations-in-file-with-suppress-annotation-without-konsist-word")
-class SampleCorrectClass
-
-class SampleIncorrectClassWithoutSuppressAnnotation1
-
-class SampleIncorrectClassWithoutSuppressAnnotation2

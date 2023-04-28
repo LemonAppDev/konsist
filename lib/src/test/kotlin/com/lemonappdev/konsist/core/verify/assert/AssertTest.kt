@@ -147,7 +147,7 @@ class AssertTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assert' method."
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assert' method."
     }
 
     @Test
@@ -163,67 +163,70 @@ class AssertTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assertNot' method."
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assertNot' method."
     }
 
     @Test
-    fun `assert-not-check-declarations-with-suppress-annotation`() {
+    fun `assert-not-check-declarations-in-file-with-suppress-annotation-with-konsist-prefix`() {
         // given
-        val sut = getSnippetFile("assert-not-check-declarations-with-suppress-annotation")
-            .classes()
-
-        // then
-        sut.assert { it.name.endsWith("Class") }
-    }
-
-    @Test
-    fun `assert-not-check-declarations-in-file-with-suppress-annotation-with-konsist-word`() {
-        // given
-        val sut = getSnippetFile("assert-not-check-declarations-in-file-with-suppress-annotation-with-konsist-word")
-            .classes()
-
-        // then
-        sut.assert { it.name.endsWith("Class") }
-    }
-
-    @Test
-    fun `assert-not-check-declarations-in-file-with-suppress-annotation-without-konsist-word`() {
-        // given
-        val sut = getSnippetFile("assert-not-check-declarations-in-file-with-suppress-annotation-without-konsist-word")
-            .classes()
-
-        // then
-        sut.assert { it.name.endsWith("Class") }
-    }
-
-    @Test
-    fun `assert-not-check-nested-declarations-in-file-with-suppress-annotation`() {
-        // given
-        val sut = getSnippetFile("assert-not-check-nested-declarations-in-file-with-suppress-annotation")
+        val sut = getSnippetFile("assert-not-check-declarations-in-file-with-suppress-annotation-with-konsist-prefix")
             .declarations(includeNested = true)
 
         // then
-        sut.assert { it.name.endsWith("Class") }
+        sut.assert { it.name.endsWith("Text") }
     }
 
     @Test
-    fun `assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation`() {
+    fun `assert-not-check-declarations-in-file-with-suppress-annotation-without-konsist-prefix`() {
+
         // given
-        val sut = getSnippetFile("assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation")
+        val sut = getSnippetFile("assert-not-check-declarations-in-file-with-suppress-annotation-without-konsist-prefix")
             .declarations(includeNested = true)
 
         // then
-        sut.assert { it.name.endsWith("WithSuffix") }
+        sut.assert { it.name.endsWith("Text") }
     }
 
     @Test
-    fun `assert-not-check-nested-declarations-with-suppress-annotation`() {
+    fun `assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation-with-konsist-prefix`() {
         // given
-        val sut = getSnippetFile("assert-not-check-nested-declarations-with-suppress-annotation")
+        val sut =
+            getSnippetFile("assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation-with-konsist-prefix")
             .declarations(includeNested = true)
 
         // then
-        sut.assert { it.name.endsWith("WithSuffix") }
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation-without-konsist-prefix`() {
+        // given
+        val sut =
+            getSnippetFile("assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation-without-konsist-prefix")
+            .declarations(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-not-check-declaration-with-suppress-annotation-with-konsist-prefix`() {
+        // given
+        val sut = getSnippetFile("assert-not-check-declaration-with-suppress-annotation-with-konsist-prefix")
+            .declarations(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-not-check-declaration-with-suppress-annotation-without-konsist-prefix`() {
+        // given
+        val sut = getSnippetFile("assert-not-check-declaration-with-suppress-annotation-without-konsist-prefix")
+            .declarations(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
     }
 
     private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/verify/assert/snippet/", fileName)

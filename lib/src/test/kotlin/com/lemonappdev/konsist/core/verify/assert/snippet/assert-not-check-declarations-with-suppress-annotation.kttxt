@@ -1,7 +1,0 @@
-class SampleCorrectClass
-
-@Suppress("konsist.assert-not-check-declarations-with-suppress-annotation")
-class SampleIncorrectClassWithSuppresAnnotation1
-
-@Suppress("assert-not-check-declarations-with-suppress-annotation")
-class SampleIncorrectClassWithSuppresAnnotation2
