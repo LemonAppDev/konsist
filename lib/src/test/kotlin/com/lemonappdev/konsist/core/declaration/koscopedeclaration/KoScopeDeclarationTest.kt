@@ -114,7 +114,7 @@ class KoScopeDeclarationTest {
         // given
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
         val sut = KoScopeDeclaration
-            .fromPathCodebase("${testSourceSetPath}lemonappdev/konsist/core/declaration/koscopedeclaration/")
+            .fromPath("${testSourceSetPath}lemonappdev/konsist/core/declaration/koscopedeclaration/")
 
         // then
         sut

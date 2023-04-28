@@ -160,7 +160,7 @@ class KoScopeDeclaration(
         /**
          * Returns a [KoScopeDeclaration] containing all of Kotlin files in the given directory.
          */
-        fun fromPathCodebase(path: String): KoScopeDeclaration {
+        fun fromPath(path: String): KoScopeDeclaration {
             val koFiles = projectKotlinFiles
                 .filter { it.filePath.startsWith(path) }
 
