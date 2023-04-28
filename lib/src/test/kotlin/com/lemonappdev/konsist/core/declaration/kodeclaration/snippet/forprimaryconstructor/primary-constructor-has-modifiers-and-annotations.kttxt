@@ -3,6 +3,5 @@ package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forprimar
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
 
-@SampleAnnotation @SampleAnnotationWithParameter(sampleParameter = " parameter description ")
-class SampleClass private constructor () {
+class SampleClass @SampleAnnotation @SampleAnnotationWithParameter(sampleParameter = " parameter description ") private constructor () {
 }
