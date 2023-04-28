@@ -4,7 +4,8 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-class KoParentDeclaration private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) : KoNamedDeclaration(ktSuperTypeListEntry) {
+class KoParentDeclaration private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
+    KoNamedDeclaration(ktSuperTypeListEntry) {
 
     override val name: String by lazy {
         ktSuperTypeListEntry

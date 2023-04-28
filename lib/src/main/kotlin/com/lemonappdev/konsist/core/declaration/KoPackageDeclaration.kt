@@ -4,7 +4,8 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtPackageDirective
 
-class KoPackageDeclaration private constructor(private val ktPackageDirective: KtPackageDirective) : KoNamedDeclaration(ktPackageDirective) {
+class KoPackageDeclaration private constructor(private val ktPackageDirective: KtPackageDirective) :
+    KoNamedDeclaration(ktPackageDirective) {
     val qualifiedName by lazy {
         if (ktPackageDirective.fqName != FqName.ROOT) {
             ktPackageDirective.fqName.toString()

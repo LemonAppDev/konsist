@@ -42,5 +42,6 @@ class KoPackageDeclarationTest {
             .shouldBeEqualTo("com.samplepackage")
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/declaration/kopackagedeclaration/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopackagedeclaration/snippet/", fileName)
 }

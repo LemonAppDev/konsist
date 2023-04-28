@@ -16,7 +16,9 @@ class KoScopeDeclarationTest {
     fun `from file`() {
         // given
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
-        val sut = KoScopeDeclaration.fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationTest.kt")
+        val sut =
+            KoScopeDeclaration
+                .fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationTest.kt")
 
         // then
         assertSoftly(
@@ -26,7 +28,11 @@ class KoScopeDeclarationTest {
         ) {
             size shouldBeEqualTo 1
             first().name shouldBeEqualTo "KoScopeDeclarationTest.kt"
-            first().filePath shouldBeEqualTo "${testSourceSetPath}lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationTest.kt"
+            first()
+                .filePath
+                .shouldBeEqualTo(
+                    "${testSourceSetPath}lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationTest.kt",
+                )
         }
     }
 
@@ -107,7 +113,8 @@ class KoScopeDeclarationTest {
     fun `from path`() {
         // given
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
-        val sut = KoScopeDeclaration.fromPathCodebase("${testSourceSetPath}lemonappdev/konsist/core/declaration/koscopedeclaration/")
+        val sut = KoScopeDeclaration
+            .fromPathCodebase("${testSourceSetPath}lemonappdev/konsist/core/declaration/koscopedeclaration/")
 
         // then
         sut

@@ -16,8 +16,8 @@ class KoScopeDeclarationOperatorTest {
         // given
         val scope1 = KoScopeDeclaration.fromPackage("com.lemonappdev.konsist.core.declaration.koscopedeclaration")
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
-        val scope2 =
-            KoScopeDeclaration.fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationForDeclarationTest.kt")
+        val scope2 = KoScopeDeclaration
+            .fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationForDeclarationTest.kt")
 
         // when
         val sut = scope1 + scope2
@@ -51,8 +51,8 @@ class KoScopeDeclarationOperatorTest {
         // given
         val scope1 = KoScopeDeclaration.fromPackage("com.lemonappdev.konsist.core.declaration.koscopedeclaration")
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
-        val scope2 =
-            KoScopeDeclaration.fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationForDeclarationTest.kt")
+        val scope2 = KoScopeDeclaration
+            .fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationForDeclarationTest.kt")
 
         // when
         val sut = scope1 - scope2
@@ -84,8 +84,8 @@ class KoScopeDeclarationOperatorTest {
         // given
         val scope1 = KoScopeDeclaration.fromPackage("com.lemonappdev.konsist.core.declaration.koscopedeclaration")
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
-        val scope2 =
-            KoScopeDeclaration.fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/kofiledeclaration/KoFileDeclarationTest.kt")
+        val scope2 = KoScopeDeclaration
+            .fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/kofiledeclaration/KoFileDeclarationTest.kt")
 
         // when
         val sut = scope1 - scope2
@@ -102,8 +102,8 @@ class KoScopeDeclarationOperatorTest {
         // given
         val scope1 = KoScopeDeclaration.fromPackage("com.lemonappdev.konsist.core.declaration.koscopedeclaration")
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
-        val scope2 =
-            KoScopeDeclaration.fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationForDeclarationTest.kt")
+        val scope2 = KoScopeDeclaration
+            .fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationForDeclarationTest.kt")
 
         // when
         scope1 += scope2
@@ -137,8 +137,8 @@ class KoScopeDeclarationOperatorTest {
         // given
         val scope1 = KoScopeDeclaration.fromPackage("com.lemonappdev.konsist.core.declaration.koscopedeclaration")
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
-        val scope2 =
-            KoScopeDeclaration.fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationForDeclarationTest.kt")
+        val scope2 = KoScopeDeclaration
+            .fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationForDeclarationTest.kt")
 
         // when
         scope1 -= scope2
@@ -161,7 +161,7 @@ class KoScopeDeclarationOperatorTest {
                     "KoScopeDeclarationForTypeAliasTest.kt",
                     "KoScopeDeclarationOperatorTest.kt",
                     "KoScopeDeclarationTest.kt",
-                )
+                ),
             )
     }
 }
