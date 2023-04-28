@@ -16,7 +16,7 @@ class KoScopeDeclarationTest {
     fun `from file`() {
         // given
         val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
-        val sut = KoScopeDeclaration.fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscope/KoScopeDeclarationTest.kt")
+        val sut = KoScopeDeclaration.fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationTest.kt")
 
         // then
         assertSoftly(
@@ -26,7 +26,7 @@ class KoScopeDeclarationTest {
         ) {
             size shouldBeEqualTo 1
             first().name shouldBeEqualTo "KoScopeDeclarationTest.kt"
-            first().filePath shouldBeEqualTo "${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/KoScopeDeclarationTest.kt"
+            first().filePath shouldBeEqualTo "${testSourceSetPath}lemonappdev/konsist/core/declaration/koscopedeclaration/KoScopeDeclarationTest.kt"
         }
     }
 
@@ -61,7 +61,7 @@ class KoScopeDeclarationTest {
                 listOf(
                     "KoScopeDeclarationForClassTest.kt",
                     "KoScopeDeclarationForCompanionObjectTest.kt",
-                    "KoScopeDeclarationForTest.kt",
+                    "KoScopeDeclarationForDeclarationTest.kt",
                     "KoScopeDeclarationForFunctionTest.kt",
                     "KoScopeDeclarationForImportTest.kt",
                     "KoScopeDeclarationForInterfaceTest.kt",
@@ -78,7 +78,7 @@ class KoScopeDeclarationTest {
     @Test
     fun `'from package' using two dots syntax`() {
         // given
-        val sut = KoScopeDeclaration.fromPackage("com.lemonappdev.konsist..declaration.koscopedeklaration")
+        val sut = KoScopeDeclaration.fromPackage("com.lemonappdev.konsist..declaration.koscopedeclaration")
 
         // then
         sut
@@ -89,7 +89,7 @@ class KoScopeDeclarationTest {
                 listOf(
                     "KoScopeDeclarationForClassTest.kt",
                     "KoScopeDeclarationForCompanionObjectTest.kt",
-                    "KoScopeDeclarationForTest.kt",
+                    "KoScopeDeclarationForDeclarationTest.kt",
                     "KoScopeDeclarationForFunctionTest.kt",
                     "KoScopeDeclarationForImportTest.kt",
                     "KoScopeDeclarationForInterfaceTest.kt",
@@ -118,7 +118,7 @@ class KoScopeDeclarationTest {
                 listOf(
                     "KoScopeDeclarationForClassTest.kt",
                     "KoScopeDeclarationForCompanionObjectTest.kt",
-                    "KoScopeDeclarationForTest.kt",
+                    "KoScopeDeclarationForDeclarationTest.kt",
                     "KoScopeDeclarationForFunctionTest.kt",
                     "KoScopeDeclarationForImportTest.kt",
                     "KoScopeDeclarationForInterfaceTest.kt",
@@ -157,11 +157,11 @@ class KoScopeDeclarationTest {
         val sut = KoScopeDeclaration.fromPackage("com.lemonappdev.konsist.core.declaration.koscopedeclaration")
 
         // then
-        val prefix = "${testSourceSetPath}lemonappdev/konsist/core/declaration/koscope/"
+        val prefix = "${testSourceSetPath}lemonappdev/konsist/core/declaration/koscopedeclaration/"
         sut.toString() shouldBeEqualTo """
             ${prefix}KoScopeDeclarationForClassTest.kt
             ${prefix}KoScopeDeclarationForCompanionObjectTest.kt
-            ${prefix}KoScopeDeclarationForTest.kt
+            ${prefix}KoScopeDeclarationForDeclarationTest.kt
             ${prefix}KoScopeDeclarationForFunctionTest.kt
             ${prefix}KoScopeDeclarationForImportTest.kt
             ${prefix}KoScopeDeclarationForInterfaceTest.kt
