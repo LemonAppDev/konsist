@@ -38,5 +38,4 @@ open class KoBaseDeclaration(private val ktElement: KtElement) : KoPsiDeclaratio
         null -> parentDeclaration != null
         else -> parentDeclaration?.name == name
     }
-    val containingFile by lazy { KoFileDeclaration.getInstance(ktElement.containingKtFile) }
 }

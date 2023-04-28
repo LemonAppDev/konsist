@@ -65,6 +65,8 @@ private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: Li
 }
 
 private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {
+    // In this declarations structure test name is at index 4
+    // We pass this name to checkIfSuppressed() because when declarations are nested, this index is changing
     val testMethodName = Thread.currentThread().stackTrace[4].methodName
     val declarations: MutableMap<E, Boolean> = mutableMapOf()
 
