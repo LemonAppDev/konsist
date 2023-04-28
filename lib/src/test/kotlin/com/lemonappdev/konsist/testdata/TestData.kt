@@ -41,3 +41,12 @@ annotation class SampleAnnotation1
 
 @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
 annotation class SampleAnnotation2
+
+@Target(
+    AnnotationTarget.CLASS,
+    AnnotationTarget.PROPERTY,
+    AnnotationTarget.CONSTRUCTOR,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.TYPEALIAS,
+)
+annotation class SampleAnnotationWithParameter(val sampleParameter: String)

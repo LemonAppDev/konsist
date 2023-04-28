@@ -11,7 +11,7 @@ open class KoBaseDeclaration(private val ktElement: KtElement) : KoPsiDeclaratio
     /**
      * KoFile containing the declaration
      */
-    val containingFile by lazy { KoFile.getInstance(ktElement.containingKtFile) }
+    val containingFile by lazy { KoFileDeclaration.getInstance(ktElement.containingKtFile) }
 
     val parentDeclaration by lazy {
         val parents = ktElement
@@ -38,4 +38,5 @@ open class KoBaseDeclaration(private val ktElement: KtElement) : KoPsiDeclaratio
         null -> parentDeclaration != null
         else -> parentDeclaration?.name == name
     }
+    val containingFile by lazy { KoFileDeclaration.getInstance(ktElement.containingKtFile) }
 }

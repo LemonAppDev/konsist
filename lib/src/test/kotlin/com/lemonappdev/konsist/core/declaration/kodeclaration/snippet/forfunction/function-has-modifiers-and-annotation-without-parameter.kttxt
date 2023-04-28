@@ -1,0 +1,10 @@
+package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forfunction
+
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+
+class SampleClass {
+    @SampleAnnotation
+    protected open fun invoke() {
+    }
+}

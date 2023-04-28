@@ -237,6 +237,39 @@ class KoDeclarationForClassTest {
     }
 
     @Test
+    fun `class-has-modifiers-and-annotation-with-parameter`() {
+        // given
+        val sut = getSnippetFile("class-has-modifiers-and-annotation-with-parameter")
+            .classes()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE, OPEN)
+    }
+
+    @Test
+    fun `class-has-modifiers-and-annotation-without-parameter`() {
+        // given
+        val sut = getSnippetFile("class-has-modifiers-and-annotation-without-parameter")
+            .classes()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE, OPEN)
+    }
+
+    @Test
+    fun `class-has-modifiers-and-annotations`() {
+        // given
+        val sut = getSnippetFile("class-has-modifiers-and-annotations")
+            .classes()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE, OPEN)
+    }
+
+    @Test
     fun `class-has-protected-modifier`() {
         // given
         val sut = getSnippetFile("class-has-protected-modifier")

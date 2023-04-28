@@ -116,6 +116,39 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
+    fun `interface-has-modifiers-and-annotation-with-parameter`() {
+        // given
+        val sut = getSnippetFile("interface-has-modifiers-and-annotation-with-parameter")
+            .interfaces()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PUBLIC, ABSTRACT)
+    }
+
+    @Test
+    fun `interface-has-modifiers-and-annotation-without-parameter`() {
+        // given
+        val sut = getSnippetFile("interface-has-modifiers-and-annotation-without-parameter")
+            .interfaces()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PUBLIC, ABSTRACT)
+    }
+
+    @Test
+    fun `interface-has-modifiers-and-annotations`() {
+        // given
+        val sut = getSnippetFile("interface-has-modifiers-and-annotations")
+            .interfaces()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PUBLIC, ABSTRACT)
+    }
+
+    @Test
     fun `interface-has-no-visibility-modifier`() {
         // given
         val sut = getSnippetFile("interface-has-no-visibility-modifier")

@@ -6,7 +6,7 @@ abstract class KoParametrizedDeclaration(
     private val ktFunction: KtFunction,
 ) : KoDeclaration(ktFunction) {
 
-    val parameters by lazy { ktFunction.valueParameters.map { KoParameter.getInstance(it) } }
+    val parameters by lazy { ktFunction.valueParameters.map { KoParameterDeclaration.getInstance(it) } }
 
     fun hasParameterNamed(name: String? = null) = when (name) {
         null -> parameters.isNotEmpty()

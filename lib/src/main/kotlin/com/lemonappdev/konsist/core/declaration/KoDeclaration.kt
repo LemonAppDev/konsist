@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.const.KoModifier
+import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.util.PackageHelper
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -30,18 +31,26 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
 
     val annotations = ktTypeParameterListOwner
         .annotationEntries
-        .map { KoAnnotation.getInstance(it) }
+        .map { KoAnnotationDeclaration.getInstance(it) }
 
     val modifiers by lazy {
         ktTypeParameterListOwner
             .modifierList
             ?.text
             ?.split(" ", "\n")
-            ?.toMutableList()
-            ?.also {
-                it.removeIf { string -> string.contains('@') }
+            ?.takeLastWhile {
+                // We filter this way because this list contains modifiers and annotations,
+                // and we need to exclude all annotations especially with blank spaces
+                // e.g. @SampleAnnotation(parameter = "sample parameter")
+                !it.contains(')') && !it.contains('@') && it.isNotBlank()
             }
-            ?.map { KoModifier.valueOf(it.uppercase()) }
+            ?.map {
+                KoModifier
+                    .values()
+                    .firstOrNull { modifier -> modifier.type == it }
+                    ?: throw KoInternalException("Modifier not found: $it")
+            }
+            ?.toList()
             ?: emptyList()
     }
 
@@ -51,7 +60,7 @@ abstract class KoDeclaration(private val ktTypeParameterListOwner: KtTypeParamet
             .filterIsInstance<KDocElement>()
             .firstOrNull()
 
-        kDocElement?.let { KoDoc(kDocElement) }
+        kDocElement?.let { KoDocDeclaration(kDocElement) }
     }
 
     fun hasPublicModifier() = hasModifiers(KoModifier.PUBLIC)
