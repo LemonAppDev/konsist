@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.core.const.KoModifier.COMPANION
 import com.lemonappdev.konsist.core.const.KoModifier.FINAL
 import com.lemonappdev.konsist.core.const.KoModifier.PRIVATE

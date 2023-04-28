@@ -1,9 +1,9 @@
-package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forfunction
+package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forsecondaryconstructor
 
 import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
 
-class SampleClass {
+open class SampleClass {
     @SampleAnnotationWithParameter(sampleParameter = " parameter description ")
-    protected open fun invoke() {
+    private constructor(name: String) {
     }
 }

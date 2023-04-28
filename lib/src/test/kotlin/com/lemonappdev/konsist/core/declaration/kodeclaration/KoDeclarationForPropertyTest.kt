@@ -237,6 +237,39 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
+    fun `property-has-modifiers-and-annotation-with-parameter`() {
+        // given
+        val sut = getSnippetFile("property-has-modifiers-and-annotation-with-parameter")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
+    }
+
+    @Test
+    fun `property-has-modifiers-and-annotation-without-parameter`() {
+        // given
+        val sut = getSnippetFile("property-has-modifiers-and-annotation-without-parameter")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
+    }
+
+    @Test
+    fun `property-has-modifiers-and-annotations`() {
+        // given
+        val sut = getSnippetFile("property-has-modifiers-and-annotations")
+            .properties(includeNested = true)
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
+    }
+
+    @Test
     fun `property-has-protected-modifier`() {
         // given
         val sut = getSnippetFile("property-has-protected-modifier")

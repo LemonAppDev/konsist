@@ -119,6 +119,39 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
+    fun `object-has-modifiers-and-annotation-with-parameter`() {
+        // given
+        val sut = getSnippetFile("object-has-modifiers-and-annotation-with-parameter")
+            .objects()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE, DATA)
+    }
+
+    @Test
+    fun `object-has-modifiers-and-annotation-without-parameter`() {
+        // given
+        val sut = getSnippetFile("object-has-modifiers-and-annotation-without-parameter")
+            .objects()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE, DATA)
+    }
+
+    @Test
+    fun `object-has-modifiers-and-annotations`() {
+        // given
+        val sut = getSnippetFile("object-has-modifiers-and-annotations")
+            .objects()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE, DATA)
+    }
+
+    @Test
     fun `object-has-no-visibility-modifier`() {
         // given
         val sut = getSnippetFile("object-has-no-visibility-modifier")

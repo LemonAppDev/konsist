@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.core.const.KoModifier.INLINE
 import com.lemonappdev.konsist.core.const.KoModifier.OPEN
 import com.lemonappdev.konsist.core.const.KoModifier.OPERATOR
@@ -120,6 +119,39 @@ class KoDeclarationForFunctionTest {
 
         // then
         sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN, SUSPEND, INLINE, OPERATOR)
+    }
+
+    @Test
+    fun `function-has-modifiers-and-annotation-with-parameter`() {
+        // given
+        val sut = getSnippetFile("function-has-modifiers-and-annotation-with-parameter")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
+    }
+
+    @Test
+    fun `function-has-modifiers-and-annotation-without-parameter`() {
+        // given
+        val sut = getSnippetFile("function-has-modifiers-and-annotation-without-parameter")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
+    }
+
+    @Test
+    fun `function-has-modifiers-and-annotations`() {
+        // given
+        val sut = getSnippetFile("function-has-modifiers-and-annotations")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
     }
 
     @Test
@@ -282,39 +314,6 @@ class KoDeclarationForFunctionTest {
             hasModifiers(PRIVATE, SUSPEND) shouldBeEqualTo false
             hasModifiers(PROTECTED, SUSPEND, PRIVATE) shouldBeEqualTo false
         }
-    }
-
-    @Test
-    fun `function-has-modifiers-and-annotation-with-parameter`() {
-        // given
-        val sut = getSnippetFile("function-has-modifiers-and-annotation-with-parameter")
-            .functions(includeNested = true)
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
-    }
-
-    @Test
-    fun `function-has-modifiers-and-annotation-without-parameter`() {
-        // given
-        val sut = getSnippetFile("function-has-modifiers-and-annotation-without-parameter")
-            .functions(includeNested = true)
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
-    }
-
-    @Test
-    fun `function-has-modifiers-and-annotations`() {
-        // given
-        val sut = getSnippetFile("function-has-modifiers-and-annotations")
-            .functions(includeNested = true)
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
     }
 
     @Test
