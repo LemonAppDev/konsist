@@ -238,6 +238,39 @@ class KoDeclarationForCompanionObjectTest {
     }
 
     @Test
+    fun `companion-object-has-modifiers-and-annotation-with-parameter`() {
+        // given
+        val sut = getSnippetFile("companion-object-has-modifiers-and-annotation-with-parameter")
+            .companionObjects()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, FINAL, COMPANION)
+    }
+
+    @Test
+    fun `companion-object-has-modifiers-and-annotation-without-parameter`() {
+        // given
+        val sut = getSnippetFile("companion-object-has-modifiers-and-annotation-without-parameter")
+            .companionObjects()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, FINAL, COMPANION)
+    }
+
+    @Test
+    fun `companion-object-has-modifiers-and-annotations`() {
+        // given
+        val sut = getSnippetFile("companion-object-has-modifiers-and-annotations")
+            .companionObjects()
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, FINAL, COMPANION)
+    }
+
+    @Test
     fun `companion-object-has-protected-modifier`() {
         // given
         val sut = getSnippetFile("companion-object-has-protected-modifier")

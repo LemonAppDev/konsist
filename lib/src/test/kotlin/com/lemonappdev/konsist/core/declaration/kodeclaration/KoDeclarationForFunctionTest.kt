@@ -122,6 +122,39 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
+    fun `function-has-modifiers-and-annotation-with-parameter`() {
+        // given
+        val sut = getSnippetFile("function-has-modifiers-and-annotation-with-parameter")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
+    }
+
+    @Test
+    fun `function-has-modifiers-and-annotation-without-parameter`() {
+        // given
+        val sut = getSnippetFile("function-has-modifiers-and-annotation-without-parameter")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
+    }
+
+    @Test
+    fun `function-has-modifiers-and-annotations`() {
+        // given
+        val sut = getSnippetFile("function-has-modifiers-and-annotations")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
+    }
+
+    @Test
     fun `function-has-no-visibility-modifier`() {
         // given
         val sut = getSnippetFile("function-has-no-visibility-modifier")

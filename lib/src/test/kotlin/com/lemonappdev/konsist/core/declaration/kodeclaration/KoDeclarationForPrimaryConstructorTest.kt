@@ -34,6 +34,42 @@ class KoDeclarationForPrimaryConstructorTest {
     }
 
     @Test
+    fun `primary-constructor-has-modifiers-and-annotation-with-parameter`() {
+        // given
+        val sut = getSnippetFile("primary-constructor-has-modifiers-and-annotation-with-parameter")
+            .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        sut?.modifiers shouldBeEqualTo listOf(PRIVATE)
+    }
+
+    @Test
+    fun `primary-constructor-has-modifiers-and-annotation-without-parameter`() {
+        // given
+        val sut = getSnippetFile("primary-constructor-has-modifiers-and-annotation-without-parameter")
+            .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        sut?.modifiers shouldBeEqualTo listOf(PRIVATE)
+    }
+
+    @Test
+    fun `primary-constructor-has-modifiers-and-annotations`() {
+        // given
+        val sut = getSnippetFile("primary-constructor-has-modifiers-and-annotations")
+            .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        sut?.modifiers shouldBeEqualTo listOf(PRIVATE)
+    }
+
+    @Test
     fun `primary-constructor-without-visibility-modifiers`() {
         // given
         val sut = getSnippetFile("primary-constructor-without-visibility-modifiers")

@@ -1,0 +1,8 @@
+package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forsecondaryconstructor
+
+import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+
+open class SampleClass {
+    @SampleAnnotationWithParameter(sampleParameter = " parameter description ") private constructor(name: String) {
+    }
+}

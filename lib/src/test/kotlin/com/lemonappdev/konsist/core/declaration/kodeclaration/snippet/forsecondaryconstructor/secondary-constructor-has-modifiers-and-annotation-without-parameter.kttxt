@@ -1,0 +1,8 @@
+package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forsecondaryconstructor
+
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+
+open class SampleClass {
+    @SampleAnnotation private constructor(name: String) {
+    }
+}

@@ -23,6 +23,45 @@ class KoDeclarationForSecondaryConstructorTest {
     }
 
     @Test
+    fun `secondary-constructor-has-modifiers-and-annotation-with-parameter`() {
+        // given
+        val sut = getSnippetFile("secondary-constructor-has-modifiers-and-annotation-with-parameter")
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
+    }
+
+    @Test
+    fun `secondary-constructor-has-modifiers-and-annotation-without-parameter`() {
+        // given
+        val sut = getSnippetFile("secondary-constructor-has-modifiers-and-annotation-without-parameter")
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
+    }
+
+    @Test
+    fun `secondary-constructor-has-modifiers-and-annotations`() {
+        // given
+        val sut = getSnippetFile("secondary-constructor-has-modifiers-and-annotations")
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
+    }
+
+    @Test
     fun `secondary-constructor-without-visibility-modifiers`() {
         // given
         val sut = getSnippetFile("secondary-constructor-without-visibility-modifiers")
