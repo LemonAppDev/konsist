@@ -1,60 +1,71 @@
 package com.lemonappdev.konsist.api
 
+import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 
 interface KoScope {
-    fun files(): Sequence<KoFileDeclarationImpl>
+    fun files(): Sequence<KoFileDeclaration>
     fun classes(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoClassDeclarationImpl>
+    ): Sequence<KoClassDeclaration>
 
     fun interfaces(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
-    ): Sequence<KoInterfaceDeclarationImpl>
+    ): Sequence<KoInterfaceDeclaration>
 
     fun objects(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
-    ): Sequence<KoObjectDeclarationImpl>
+    ): Sequence<KoObjectDeclaration>
 
     fun companionObjects(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
-    ): Sequence<KoCompanionObjectDeclarationImpl>
+    ): Sequence<KoCompanionObjectDeclaration>
 
     fun functions(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoFunctionDeclarationImpl>
+    ): Sequence<KoFunctionDeclaration>
 
     fun declarations(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
-    ): Sequence<KoDeclarationImpl>
+    ): Sequence<KoDeclaration>
 
     fun properties(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoPropertyDeclarationImpl>
+    ): Sequence<KoPropertyDeclaration>
 
-    fun imports(): Sequence<KoImportDeclarationImpl>
-    fun packages(): Sequence<KoPackageDeclarationImpl>
-    fun typeAliases(): Sequence<KoTypeAliasDeclarationImpl>
+    fun imports(): Sequence<KoImportDeclaration>
+    fun packages(): Sequence<KoPackageDeclaration>
+    fun typeAliases(): Sequence<KoTypeAliasDeclaration>
 
     operator fun plus(scope: KoScope): KoScope
 

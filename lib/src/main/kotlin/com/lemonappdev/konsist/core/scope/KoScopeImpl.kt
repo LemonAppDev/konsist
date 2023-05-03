@@ -1,67 +1,68 @@
 package com.lemonappdev.konsist.core.scope
 
-import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.KoModifier
-import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
+import com.lemonappdev.konsist.api.KoScope
+import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
+import com.lemonappdev.konsist.core.declaration.KoDeclaration
+import com.lemonappdev.konsist.core.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.core.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.core.declaration.KoPropertyDeclaration
 
 @Suppress("detekt.TooManyFunctions")
 internal class KoScopeImpl(
-    private var koFiles: Sequence<KoFileDeclarationImpl>,
+    private var koFiles: Sequence<KoFileDeclaration>,
 ) : KoScope {
     constructor(koFileDeclaration: KoFileDeclarationImpl) : this(sequenceOf(koFileDeclaration))
 
-    override fun files(): Sequence<KoFileDeclarationImpl> = koFiles.sortedBy { it.filePath }
+    override fun files(): Sequence<KoFileDeclaration> = koFiles.sortedBy { it.filePath }
 
     override fun classes(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoClassDeclarationImpl> =
+    ): Sequence<KoClassDeclaration> =
         koFiles.flatMap { it.classes(modifiers, includeNested, includeLocal) }
 
     override fun interfaces(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
-    ): Sequence<KoInterfaceDeclarationImpl> =
+    ): Sequence<KoInterfaceDeclaration> =
         koFiles.flatMap { it.interfaces(modifiers, includeNested) }
 
     override fun objects(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
-    ): Sequence<KoObjectDeclarationImpl> =
+    ): Sequence<KoObjectDeclaration> =
         koFiles.flatMap { it.objects(modifiers, includeNested) }
 
     override fun companionObjects(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
-    ): Sequence<KoCompanionObjectDeclarationImpl> =
+    ): Sequence<KoCompanionObjectDeclaration> =
         koFiles.flatMap { it.companionObjects(modifiers, includeNested) }
 
     override fun functions(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoFunctionDeclarationImpl> =
+    ): Sequence<KoFunctionDeclaration> =
         koFiles.flatMap { it.functions(modifiers, includeNested, includeLocal) }
 
     override fun declarations(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
-    ): Sequence<KoDeclarationImpl> =
+    ): Sequence<KoDeclaration> =
         koFiles.flatMap { it.declarations(modifiers, includeNested) }
 
     override fun properties(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoPropertyDeclarationImpl> =
+    ): Sequence<KoPropertyDeclaration> =
         koFiles.flatMap { it.properties(modifiers, includeNested, includeLocal) }
 
     override fun imports() = koFiles.flatMap { it.imports }
