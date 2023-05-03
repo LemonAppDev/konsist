@@ -28,7 +28,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: JUnit Test Report
+          name: junit-test-report
           path: ./lib/build/test-results/test/
   konsist-test:
     name: Konsist Test
@@ -51,7 +51,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: Konsist Test Report
+          name: konsist-test-report
           path: ./lib/build/test-results/konsistTest/
   integration-test:
     name: Integration Test
@@ -69,12 +69,12 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Konsist Test
+      - name: Integration Test
         run: ./gradlew lib:integrationTest
 
       - uses: actions/upload-artifact@v3
         with:
-          name: Integration Test Report
+          name: integration-test-report
           path: ./lib/build/test-results/integrationTest/
   spotless:
     name: Spotless
@@ -141,7 +141,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: lib.jar Artifact
+          name: konsist.jar
           path: lib/build/libs/lib.jar
   publish:
     name: Publish Local
