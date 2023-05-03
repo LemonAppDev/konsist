@@ -6,7 +6,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class KoScopeImplTest {
+class KoScopeTest {
 
     private val konsistModulePath = File("")
         .absoluteFile
@@ -17,7 +17,7 @@ class KoScopeImplTest {
         // given
         val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
         val sut =
-            Konsist.scopeFromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeImplTest.kt")
+            Konsist.scopeFromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeTest.kt")
 
         // then
         assertSoftly(
@@ -26,11 +26,11 @@ class KoScopeImplTest {
                 .toList(),
         ) {
             size shouldBeEqualTo 1
-            first().name shouldBeEqualTo "KoScopeImplTest.kt"
+            first().name shouldBeEqualTo "KoScopeTest.kt"
             first()
                 .filePath
                 .shouldBeEqualTo(
-                    "${testSourceSetPath}lemonappdev/konsist/core/scope/koscope/KoScopeImplTest.kt",
+                    "${testSourceSetPath}lemonappdev/konsist/core/scope/koscope/KoScopeTest.kt",
                 )
         }
     }
@@ -64,18 +64,18 @@ class KoScopeImplTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
-                    "KoScopeImplForClassTest.kt",
-                    "KoScopeImplForCompanionObjectTest.kt",
-                    "KoScopeImplForDeclarationTest.kt",
-                    "KoScopeImplForFunctionTest.kt",
-                    "KoScopeImplForImportTest.kt",
-                    "KoScopeImplForInterfaceTest.kt",
-                    "KoScopeImplForObjectTest.kt",
-                    "KoScopeImplForPackageTest.kt",
-                    "KoScopeImplForPropertyTest.kt",
-                    "KoScopeImplForTypeAliasTest.kt",
-                    "KoScopeImplOperatorTest.kt",
-                    "KoScopeImplTest.kt",
+                    "KoScopeForClassTest.kt",
+                    "KoScopeForCompanionObjectTest.kt",
+                    "KoScopeForDeclarationTest.kt",
+                    "KoScopeForFunctionTest.kt",
+                    "KoScopeForImportTest.kt",
+                    "KoScopeForInterfaceTest.kt",
+                    "KoScopeForObjectTest.kt",
+                    "KoScopeForPackageTest.kt",
+                    "KoScopeForPropertyTest.kt",
+                    "KoScopeForTypeAliasTest.kt",
+                    "KoScopeOperatorTest.kt",
+                    "KoScopeTest.kt",
                 ),
             )
     }
@@ -92,18 +92,18 @@ class KoScopeImplTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
-                    "KoScopeImplForClassTest.kt",
-                    "KoScopeImplForCompanionObjectTest.kt",
-                    "KoScopeImplForDeclarationTest.kt",
-                    "KoScopeImplForFunctionTest.kt",
-                    "KoScopeImplForImportTest.kt",
-                    "KoScopeImplForInterfaceTest.kt",
-                    "KoScopeImplForObjectTest.kt",
-                    "KoScopeImplForPackageTest.kt",
-                    "KoScopeImplForPropertyTest.kt",
-                    "KoScopeImplForTypeAliasTest.kt",
-                    "KoScopeImplOperatorTest.kt",
-                    "KoScopeImplTest.kt",
+                    "KoScopeForClassTest.kt",
+                    "KoScopeForCompanionObjectTest.kt",
+                    "KoScopeForDeclarationTest.kt",
+                    "KoScopeForFunctionTest.kt",
+                    "KoScopeForImportTest.kt",
+                    "KoScopeForInterfaceTest.kt",
+                    "KoScopeForObjectTest.kt",
+                    "KoScopeForPackageTest.kt",
+                    "KoScopeForPropertyTest.kt",
+                    "KoScopeForTypeAliasTest.kt",
+                    "KoScopeOperatorTest.kt",
+                    "KoScopeTest.kt",
                 ),
             )
     }
@@ -121,18 +121,18 @@ class KoScopeImplTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
-                    "KoScopeImplForClassTest.kt",
-                    "KoScopeImplForCompanionObjectTest.kt",
-                    "KoScopeImplForDeclarationTest.kt",
-                    "KoScopeImplForFunctionTest.kt",
-                    "KoScopeImplForImportTest.kt",
-                    "KoScopeImplForInterfaceTest.kt",
-                    "KoScopeImplForObjectTest.kt",
-                    "KoScopeImplForPackageTest.kt",
-                    "KoScopeImplForPropertyTest.kt",
-                    "KoScopeImplForTypeAliasTest.kt",
-                    "KoScopeImplOperatorTest.kt",
-                    "KoScopeImplTest.kt",
+                    "KoScopeForClassTest.kt",
+                    "KoScopeForCompanionObjectTest.kt",
+                    "KoScopeForDeclarationTest.kt",
+                    "KoScopeForFunctionTest.kt",
+                    "KoScopeForImportTest.kt",
+                    "KoScopeForInterfaceTest.kt",
+                    "KoScopeForObjectTest.kt",
+                    "KoScopeForPackageTest.kt",
+                    "KoScopeForPropertyTest.kt",
+                    "KoScopeForTypeAliasTest.kt",
+                    "KoScopeOperatorTest.kt",
+                    "KoScopeTest.kt",
                 ),
             )
     }
@@ -164,18 +164,18 @@ class KoScopeImplTest {
         // then
         val prefix = "${testSourceSetPath}lemonappdev/konsist/core/scope/koscope/"
         sut.toString() shouldBeEqualTo """
-            ${prefix}KoScopeImplForClassTest.kt
-            ${prefix}KoScopeImplForCompanionObjectTest.kt
-            ${prefix}KoScopeImplForDeclarationTest.kt
-            ${prefix}KoScopeImplForFunctionTest.kt
-            ${prefix}KoScopeImplForImportTest.kt
-            ${prefix}KoScopeImplForInterfaceTest.kt
-            ${prefix}KoScopeImplForObjectTest.kt
-            ${prefix}KoScopeImplForPackageTest.kt
-            ${prefix}KoScopeImplForPropertyTest.kt
-            ${prefix}KoScopeImplForTypeAliasTest.kt
-            ${prefix}KoScopeImplOperatorTest.kt
-            ${prefix}KoScopeImplTest.kt
+            ${prefix}KoScopeForClassTest.kt
+            ${prefix}KoScopeForCompanionObjectTest.kt
+            ${prefix}KoScopeForDeclarationTest.kt
+            ${prefix}KoScopeForFunctionTest.kt
+            ${prefix}KoScopeForImportTest.kt
+            ${prefix}KoScopeForInterfaceTest.kt
+            ${prefix}KoScopeForObjectTest.kt
+            ${prefix}KoScopeForPackageTest.kt
+            ${prefix}KoScopeForPropertyTest.kt
+            ${prefix}KoScopeForTypeAliasTest.kt
+            ${prefix}KoScopeOperatorTest.kt
+            ${prefix}KoScopeTest.kt
         """.trimIndent()
     }
 }

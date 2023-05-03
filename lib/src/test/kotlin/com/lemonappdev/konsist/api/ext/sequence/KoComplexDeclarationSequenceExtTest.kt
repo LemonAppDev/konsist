@@ -2,17 +2,6 @@ package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
-import com.lemonappdev.konsist.api.ext.sequence.classes
-import com.lemonappdev.konsist.api.ext.sequence.companionObjects
-import com.lemonappdev.konsist.api.ext.sequence.declarations
-import com.lemonappdev.konsist.api.ext.sequence.functions
-import com.lemonappdev.konsist.api.ext.sequence.interfaces
-import com.lemonappdev.konsist.api.ext.sequence.objects
-import com.lemonappdev.konsist.api.ext.sequence.properties
-import com.lemonappdev.konsist.api.ext.sequence.withType
-import com.lemonappdev.konsist.api.ext.sequence.withTypeOf
-import com.lemonappdev.konsist.api.ext.sequence.withoutType
-import com.lemonappdev.konsist.api.ext.sequence.withoutTypeOf
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclarationImpl

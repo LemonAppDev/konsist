@@ -1,9 +1,5 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withFilePath
-import com.lemonappdev.konsist.api.ext.sequence.withProjectFilePath
-import com.lemonappdev.konsist.api.ext.sequence.withoutFilePath
-import com.lemonappdev.konsist.api.ext.sequence.withoutProjectFilePath
 import com.lemonappdev.konsist.core.declaration.KoPsiDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk

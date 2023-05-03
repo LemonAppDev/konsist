@@ -1,13 +1,5 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withFullyQualifiedClassName
-import com.lemonappdev.konsist.api.ext.sequence.withName
-import com.lemonappdev.konsist.api.ext.sequence.withType
-import com.lemonappdev.konsist.api.ext.sequence.withTypeOf
-import com.lemonappdev.konsist.api.ext.sequence.withoutFullyQualifiedClassName
-import com.lemonappdev.konsist.api.ext.sequence.withoutName
-import com.lemonappdev.konsist.api.ext.sequence.withoutType
-import com.lemonappdev.konsist.api.ext.sequence.withoutTypeOf
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1

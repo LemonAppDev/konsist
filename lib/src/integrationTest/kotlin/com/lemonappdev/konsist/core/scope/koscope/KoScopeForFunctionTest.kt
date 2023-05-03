@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoScopeImplForFunctionTest {
+class KoScopeForFunctionTest {
 
     @Test
     fun `file-contains-one-function`() {

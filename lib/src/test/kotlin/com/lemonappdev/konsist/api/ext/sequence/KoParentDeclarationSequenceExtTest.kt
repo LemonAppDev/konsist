@@ -1,7 +1,5 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withDelegate
-import com.lemonappdev.konsist.api.ext.sequence.withoutDelegate
 import com.lemonappdev.konsist.core.declaration.KoParentDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk

@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoScopeImplForCompanionObjectTest {
+class KoScopeForCompanionObjectTest {
     @Test
     fun `file-contains-one-companion-object`() {
         // given
