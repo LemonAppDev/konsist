@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
 
 @Suppress("detekt.TooManyFunctions")
 internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: KtTypeParameterListOwner) :
-    KoNamedDeclarationImpl(ktTypeParameterListOwner) {
+    KoNamedDeclarationImpl(ktTypeParameterListOwner), KoDeclaration {
 
     open val fullyQualifiedName by lazy {
         if (ktTypeParameterListOwner.fqName != null) {
@@ -21,7 +21,7 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
         }
     }
 
-    val packageName by lazy {
+    override val packageName by lazy {
         fullyQualifiedName
             .split(".")
             .toMutableList()
@@ -29,11 +29,11 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
             .joinToString(separator = ".")
     }
 
-    val annotations = ktTypeParameterListOwner
+    override val annotations = ktTypeParameterListOwner
         .annotationEntries
         .map { KoAnnotationDeclarationImpl.getInstance(it) }
 
-    val modifiers by lazy {
+    override val modifiers by lazy {
         ktTypeParameterListOwner
             .modifierList
             ?.text
@@ -54,7 +54,7 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
             ?: emptyList()
     }
 
-    val koDoc by lazy {
+    override val koDoc by lazy {
         val kDocElement = ktTypeParameterListOwner
             .children
             .filterIsInstance<KDocElement>()
@@ -63,28 +63,28 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
         kDocElement?.let { KoDocDeclarationImpl(kDocElement) }
     }
 
-    fun hasPublicModifier() = hasModifiers(KoModifier.PUBLIC)
+    override fun hasPublicModifier() = hasModifiers(KoModifier.PUBLIC)
 
-    fun isPublicOrDefault() = ktTypeParameterListOwner.isPublic
+    override fun isPublicOrDefault() = ktTypeParameterListOwner.isPublic
 
-    fun hasPrivateModifier() = hasModifiers(KoModifier.PRIVATE)
+    override fun hasPrivateModifier() = hasModifiers(KoModifier.PRIVATE)
 
-    fun hasProtectedModifier() = hasModifiers(KoModifier.PROTECTED)
+    override fun hasProtectedModifier() = hasModifiers(KoModifier.PROTECTED)
 
-    fun hasInternalModifier() = hasModifiers(KoModifier.INTERNAL)
+    override fun hasInternalModifier() = hasModifiers(KoModifier.INTERNAL)
 
-    fun isTopLevel() = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
+    override fun isTopLevel() = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
 
-    fun hasAnnotations(vararg names: String) = when {
+    override fun hasAnnotations(vararg names: String) = when {
         names.isEmpty() -> annotations.isNotEmpty()
         else -> names.all { hasAnnotationNameOrAnnotationFullyQualifyName(it) }
     }
 
-    private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String) = annotations.any {
+    override fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String) = annotations.any {
         it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name
     }
 
-    fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {
+    override fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {
         annotations.any { annotation -> annotation.fullyQualifiedName == it.qualifiedName }
     }
 
@@ -94,14 +94,14 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
         return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
     }
 
-    fun hasModifiers(vararg koModifiers: KoModifier) = when {
+    override fun hasModifiers(vararg koModifiers: KoModifier) = when {
         koModifiers.isEmpty() -> modifiers.isNotEmpty()
         else -> modifiers.containsAll(koModifiers.toList())
     }
 
-    fun hasKoDoc() = koDoc != null
+    override fun hasKoDoc() = koDoc != null
 
-    fun resideInPackage(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
+    override fun resideInPackage(packageName: String) = PackageHelper.resideInPackage(packageName, this.packageName)
 
-    fun resideOutsidePackage(packageName: String) = !resideInPackage(packageName)
+    override fun resideOutsidePackage(packageName: String) = !resideInPackage(packageName)
 }

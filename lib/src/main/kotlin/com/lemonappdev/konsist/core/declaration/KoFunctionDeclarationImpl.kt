@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalPropertyProvider
@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 @Suppress("detekt.TooManyFunctions")
-class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction) :
+internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction) :
     KoParametrizedDeclarationImpl(ktFunction),
     KoLocalClassProvider,
     KoLocalFunctionProvider,
@@ -78,9 +78,9 @@ class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFu
 
     override fun localDeclarations(): Sequence<KoDeclarationImpl> = localDeclarations
 
-    companion object {
+    internal companion object {
         private val cache = KoDeclarationCache<KoFunctionDeclarationImpl>()
 
-        fun getInstance(ktFunction: KtFunction) = cache.getOrCreateInstance(ktFunction) { KoFunctionDeclarationImpl(ktFunction) }
+        internal fun getInstance(ktFunction: KtFunction) = cache.getOrCreateInstance(ktFunction) { KoFunctionDeclarationImpl(ktFunction) }
     }
 }

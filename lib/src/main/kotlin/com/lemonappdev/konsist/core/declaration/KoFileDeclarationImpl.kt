@@ -2,14 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.declaration.provider.KoClassProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoCompanionObjectProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProviderUtil
-import com.lemonappdev.konsist.core.declaration.provider.KoFunctionProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoObjectProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoPropertyProvider
 import com.lemonappdev.konsist.util.PackageHelper
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
@@ -19,17 +12,11 @@ import kotlin.reflect.KClass
 
 internal class KoFileDeclarationImpl private constructor(private val ktFile: KtFile) :
     KoNamedDeclarationImpl(ktFile),
-    KoDeclarationProvider,
-    KoClassProvider,
-    KoInterfaceProvider,
-    KoObjectProvider,
-    KoCompanionObjectProvider,
-    KoPropertyProvider,
-    KoFunctionProvider {
+    KoFileDeclaration {
 
     override val name = ktFile.name.split("/").last()
 
-    val imports by lazy {
+    override val imports by lazy {
         val ktImportDirectives = ktFile
             .children
             .filterIsInstance<KtImportList>()
@@ -40,13 +27,13 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
         ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it) }
     }
 
-    val annotations by lazy {
+    override val annotations by lazy {
         ktFile
             .annotationEntries
             .map { KoAnnotationDeclarationImpl.getInstance(it) }
     }
 
-    val packagee by lazy {
+    override val packagee by lazy {
         if (ktFile.packageDirective?.qualifiedName == "") {
             null
         } else {
@@ -54,7 +41,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
         }
     }
 
-    val typeAliases by lazy {
+    override val typeAliases by lazy {
         ktFile
             .children
             .filterIsInstance<KtTypeAlias>()
@@ -68,7 +55,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
     ): Sequence<KoDeclarationImpl> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
-    fun hasAnnotations(vararg names: String) = when {
+    override fun hasAnnotations(vararg names: String) = when {
         names.isEmpty() -> annotations.isNotEmpty()
         else -> names.all { hasAnnotationNameOrAnnotationFullyQualifyName(it) }
     }
@@ -77,7 +64,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
         it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name
     }
 
-    fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {
+    override fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {
         annotations.any { annotation -> annotation.fullyQualifiedName == it.qualifiedName }
     }
 
@@ -87,18 +74,18 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
         return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
     }
 
-    fun hasPackage(name: String) = packagee
+    override fun hasPackage(name: String) = packagee
         ?.qualifiedName
         ?.let { PackageHelper.resideInPackage(name, it) } ?: false
 
-    fun hasImports(vararg names: String) = when {
+    override fun hasImports(vararg names: String) = when {
         names.isEmpty() -> imports.isNotEmpty()
         else -> names.all {
             imports.any { import -> PackageHelper.resideInPackage(it, import.name) }
         }
     }
 
-    fun hasTypeAliases(vararg names: String) = when {
+    override fun hasTypeAliases(vararg names: String) = when {
         names.isEmpty() -> typeAliases.isNotEmpty()
         else -> names.all {
             typeAliases.any { typeAlias -> typeAlias.name == it }

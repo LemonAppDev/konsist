@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.kotlin.psi.KtConstantExpression
 import org.jetbrains.kotlin.psi.KtParameter
@@ -9,8 +9,10 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-class KoParameterDeclarationImpl private constructor(private val ktParameter: KtParameter) : KoDeclarationImpl(ktParameter) {
-    val type by lazy {
+internal class KoParameterDeclarationImpl private constructor(private val ktParameter: KtParameter) :
+    KoDeclarationImpl(ktParameter),
+    KoParameterDeclaration {
+    override val type by lazy {
         val type = ktParameter
             .children
             .firstIsInstance<KtTypeReference>()
@@ -18,7 +20,7 @@ class KoParameterDeclarationImpl private constructor(private val ktParameter: Kt
         KoTypeDeclarationImpl.getInstance(type)
     }
 
-    val defaultValue by lazy {
+    override val defaultValue by lazy {
         // eg. primitive value as default parameter value
         val constantExpressionText = ktParameter
             .children
@@ -38,25 +40,25 @@ class KoParameterDeclarationImpl private constructor(private val ktParameter: Kt
         callExpressionText
     }
 
-    fun hasVarargModifier() = hasModifiers(KoModifier.VARARG)
+    override fun hasVarargModifier() = hasModifiers(KoModifier.VARARG)
 
-    fun hasNoInlineModifier() = hasModifiers(KoModifier.NOINLINE)
+    override fun hasNoInlineModifier() = hasModifiers(KoModifier.NOINLINE)
 
-    fun hasCrossInlineModifier() = hasModifiers(KoModifier.CROSSINLINE)
+    override fun hasCrossInlineModifier() = hasModifiers(KoModifier.CROSSINLINE)
 
-    fun hasDefaultValue(value: String? = null) = when (value) {
+    override fun hasDefaultValue(value: String?) = when (value) {
         null -> ktParameter.hasDefaultValue()
         else -> defaultValue == value
     }
 
-    fun hasType(type: String) = this.type.name == type || this.type.fullyQualifiedName == type
+    override fun hasType(type: String) = this.type.name == type || this.type.fullyQualifiedName == type
 
-    inline fun <reified T>hasTypeOf() = T::class.simpleName == type.name
+    inline fun <reified T> hasTypeOf() = T::class.simpleName == type.name
 
-    companion object {
+    internal companion object {
         private val cache = KoDeclarationCache<KoParameterDeclarationImpl>()
 
-        fun getInstance(ktParameter: KtParameter) =
+        internal fun getInstance(ktParameter: KtParameter) =
             cache.getOrCreateInstance(ktParameter) { KoParameterDeclarationImpl(ktParameter) }
     }
 }

@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
@@ -9,8 +9,9 @@ import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 @Suppress("detekt.TooManyFunctions")
-class KoClassDeclarationImpl private constructor(private val ktClass: KtClass) : KoComplexDeclarationImpl(ktClass) {
-    val parents by lazy {
+internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass) : KoComplexDeclarationImpl(ktClass),
+    KoClassDeclaration {
+    override val parents by lazy {
         ktClass
             .getSuperTypeList()
             ?.children
@@ -18,7 +19,7 @@ class KoClassDeclarationImpl private constructor(private val ktClass: KtClass) :
             ?.map { KoParentDeclarationImpl.getInstance(it) } ?: emptyList()
     }
 
-    val parentInterfaces by lazy {
+    override val parentInterfaces by lazy {
         val interfaces = ktClass
             .getSuperTypeList()
             ?.children
@@ -33,7 +34,7 @@ class KoClassDeclarationImpl private constructor(private val ktClass: KtClass) :
         all.map { KoParentDeclarationImpl.getInstance(it) }
     }
 
-    val parentClass by lazy {
+    override val parentClass by lazy {
         val parentClass = ktClass
             .getSuperTypeList()
             ?.children
@@ -43,66 +44,66 @@ class KoClassDeclarationImpl private constructor(private val ktClass: KtClass) :
         parentClass?.let { KoParentDeclarationImpl.getInstance(it) }
     }
 
-    val primaryConstructor by lazy {
+    override val primaryConstructor by lazy {
         val localPrimaryConstructor = ktClass.primaryConstructor ?: return@lazy null
 
         KoPrimaryConstructorDeclarationImpl.getInstance(localPrimaryConstructor)
     }
 
-    val secondaryConstructors by lazy {
+    override val secondaryConstructors by lazy {
         ktClass
             .secondaryConstructors
             .map { KoSecondaryConstructorDeclarationImpl.getInstance(it) }
     }
 
-    val allConstructors = listOfNotNull(primaryConstructor) + secondaryConstructors
+    override val allConstructors = listOfNotNull(primaryConstructor) + secondaryConstructors
 
-    fun hasEnumModifier() = hasModifiers(KoModifier.ENUM)
+    override fun hasEnumModifier() = hasModifiers(KoModifier.ENUM)
 
-    fun hasSealedModifier() = hasModifiers(KoModifier.SEALED)
+    override fun hasSealedModifier() = hasModifiers(KoModifier.SEALED)
 
-    fun hasInnerModifier() = hasModifiers(KoModifier.INNER)
+    override fun hasInnerModifier() = hasModifiers(KoModifier.INNER)
 
-    fun hasValueModifier() = hasModifiers(KoModifier.VALUE)
+    override fun hasValueModifier() = hasModifiers(KoModifier.VALUE)
 
-    fun hasAnnotationModifier() = hasModifiers(KoModifier.ANNOTATION)
+    override fun hasAnnotationModifier() = hasModifiers(KoModifier.ANNOTATION)
 
-    fun hasDataModifier() = hasModifiers(KoModifier.DATA)
+    override fun hasDataModifier() = hasModifiers(KoModifier.DATA)
 
-    fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
+    override fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
-    fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
+    override fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
 
-    fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
+    override fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
 
-    fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
+    override fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
 
-    fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
+    override fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
 
-    fun hasPrimaryConstructor() = ktClass.hasExplicitPrimaryConstructor()
+    override fun hasPrimaryConstructor() = ktClass.hasExplicitPrimaryConstructor()
 
-    fun hasSecondaryConstructors() = ktClass.hasSecondaryConstructors()
+    override fun hasSecondaryConstructors() = ktClass.hasSecondaryConstructors()
 
-    fun hasParentClass(name: String? = null) = when (name) {
+    override fun hasParentClass(name: String?) = when (name) {
         null -> parentClass != null
         else -> parentClass?.name == name
     }
 
-    fun hasParentInterfaces(vararg names: String) = when {
+    override fun hasParentInterfaces(vararg names: String) = when {
         names.isEmpty() -> parentInterfaces.isNotEmpty()
         else -> names.all {
             parentInterfaces.any { koParent -> it == koParent.name }
         }
     }
 
-    fun hasParents(vararg names: String) = when {
+    override fun hasParents(vararg names: String) = when {
         names.isEmpty() -> hasParentClass() || hasParentInterfaces()
         else -> names.all { hasParentClass(it) || hasParentInterfaces(it) }
     }
 
-    companion object {
+    internal companion object {
         private val cache = KoDeclarationCache<KoClassDeclarationImpl>()
 
-        fun getInstance(ktClass: KtClass) = cache.getOrCreateInstance(ktClass) { KoClassDeclarationImpl(ktClass) }
+        internal fun getInstance(ktClass: KtClass) = cache.getOrCreateInstance(ktClass) { KoClassDeclarationImpl(ktClass) }
     }
 }

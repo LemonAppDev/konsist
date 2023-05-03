@@ -1,16 +1,20 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 
-class KoObjectDeclarationImpl(private val ktObjectDeclaration: KtObjectDeclaration) : KoComplexDeclarationImpl(ktObjectDeclaration) {
-    fun hasDataModifier() = hasModifiers(KoModifier.DATA)
+internal class KoObjectDeclarationImpl(
+    ktObjectDeclaration: KtObjectDeclaration,
+) :
+    KoComplexDeclarationImpl(ktObjectDeclaration),
+    KoObjectDeclaration {
+    override fun hasDataModifier() = hasModifiers(KoModifier.DATA)
 
-    companion object {
+    internal companion object {
         private val cache = KoDeclarationCache<KoObjectDeclarationImpl>()
 
-        fun getInstance(ktObjectDeclaration: KtObjectDeclaration) =
+        internal fun getInstance(ktObjectDeclaration: KtObjectDeclaration) =
             cache.getOrCreateInstance(ktObjectDeclaration) { KoObjectDeclarationImpl(ktObjectDeclaration) }
     }
 }

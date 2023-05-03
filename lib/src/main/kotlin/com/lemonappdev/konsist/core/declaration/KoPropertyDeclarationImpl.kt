@@ -1,18 +1,20 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-class KoPropertyDeclarationImpl private constructor(private val ktProperty: KtProperty) : KoDeclarationImpl(ktProperty) {
-    val isVar by lazy { ktProperty.isVar }
+internal class KoPropertyDeclarationImpl private constructor(private val ktProperty: KtProperty) :
+    KoDeclarationImpl(ktProperty),
+    KoPropertyDeclaration {
+    override val isVar by lazy { ktProperty.isVar }
 
-    val isVal by lazy { !ktProperty.isVar }
+    override val isVal by lazy { !ktProperty.isVar }
 
-    val delegateName by lazy {
+    override val delegateName by lazy {
         ktProperty
             .delegate
             ?.text
@@ -22,7 +24,7 @@ class KoPropertyDeclarationImpl private constructor(private val ktProperty: KtPr
             ?.removeSuffix(" ")
     }
 
-    val type by lazy {
+    override val type by lazy {
         val type = ktProperty
             .children
             .firstIsInstanceOrNull<KtTypeReference>()
@@ -30,37 +32,37 @@ class KoPropertyDeclarationImpl private constructor(private val ktProperty: KtPr
         type?.let { KoTypeDeclarationImpl.getInstance(it) }
     }
 
-    fun hasLateinitModifier() = hasModifiers(KoModifier.LATEINIT)
+    override fun hasLateinitModifier() = hasModifiers(KoModifier.LATEINIT)
 
-    fun hasOverrideModifier() = hasModifiers(KoModifier.OVERRIDE)
+    override fun hasOverrideModifier() = hasModifiers(KoModifier.OVERRIDE)
 
-    fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
+    override fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
 
-    fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
+    override fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
 
-    fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
+    override fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
 
-    fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
+    override fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
-    fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
+    override fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
 
-    fun hasConstModifier() = hasModifiers(KoModifier.CONST)
+    override fun hasConstModifier() = hasModifiers(KoModifier.CONST)
 
-    fun isExtension() = ktProperty.isExtensionDeclaration()
+    override fun isExtension() = ktProperty.isExtensionDeclaration()
 
-    fun hasDelegate(name: String? = null): Boolean = when (name) {
+    override fun hasDelegate(name: String?): Boolean = when (name) {
         null -> ktProperty.hasDelegateExpression()
         else -> delegateName == name
     }
 
-    fun hasType(type: String? = null) = when (type) {
+    override fun hasType(type: String?) = when (type) {
         null -> this.type != null
         else -> this.type?.name == type
     }
 
-    companion object {
+    internal companion object {
         private val cache = KoDeclarationCache<KoPropertyDeclarationImpl>()
 
-        fun getInstance(ktProperty: KtProperty) = cache.getOrCreateInstance(ktProperty) { KoPropertyDeclarationImpl(ktProperty) }
+        internal fun getInstance(ktProperty: KtProperty) = cache.getOrCreateInstance(ktProperty) { KoPropertyDeclarationImpl(ktProperty) }
     }
 }

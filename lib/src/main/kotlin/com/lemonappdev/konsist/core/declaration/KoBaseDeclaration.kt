@@ -4,5 +4,5 @@ interface KoBaseDeclaration : KoPsiDeclaration {
     /**
      * KoFile containing the declaration
      */
-    val containingFile: KoFileDeclarationImpl
+    val containingFile: KoFileDeclaration
 }
