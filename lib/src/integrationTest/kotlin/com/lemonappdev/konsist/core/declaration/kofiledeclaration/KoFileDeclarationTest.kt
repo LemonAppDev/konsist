@@ -172,9 +172,9 @@ class KoFileDeclarationTest {
     }
 
     @Test
-    fun `file-contains-annotations`() {
+    fun `file-contains-two-annotations`() {
         // given
-        val sut = getSnippetFile("file-contains-annotations")
+        val sut = getSnippetFile("file-contains-two-annotations")
             .files()
             .first()
 
@@ -191,9 +191,9 @@ class KoFileDeclarationTest {
     }
 
     @Test
-    fun `file-contains-annotations-with-kclass`() {
+    fun `file-contains-two-annotations-of-kclass`() {
         // given
-        val sut = getSnippetFile("file-contains-annotations-with-kclass")
+        val sut = getSnippetFile("file-contains-two-annotations-of-kclass")
             .files()
             .first()
 
