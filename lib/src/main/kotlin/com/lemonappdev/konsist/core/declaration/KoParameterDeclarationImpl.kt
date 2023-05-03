@@ -54,8 +54,6 @@ internal class KoParameterDeclarationImpl private constructor(private val ktPara
 
     override fun hasType(type: String) = this.type.name == type || this.type.fullyQualifiedName == type
 
-    inline fun <reified T> hasTypeOf() = T::class.simpleName == type.name
-
     internal companion object {
         private val cache = KoDeclarationCache<KoParameterDeclarationImpl>()
 

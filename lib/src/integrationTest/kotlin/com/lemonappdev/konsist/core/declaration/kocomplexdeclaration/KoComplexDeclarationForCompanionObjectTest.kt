@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.ext.declaration.representsTypeOf
 import com.lemonappdev.konsist.testdata.SampleTopLevelInterface.SampleCompanionObject
 import com.lemonappdev.konsist.testdata.SampleType
 import org.amshove.kluent.assertSoftly

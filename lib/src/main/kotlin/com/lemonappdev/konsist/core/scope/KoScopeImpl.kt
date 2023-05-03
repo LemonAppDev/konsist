@@ -6,17 +6,16 @@ import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.core.declaration.KoFileDeclarationImpl
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 
 @Suppress("detekt.TooManyFunctions")
-internal class KoScopeImpl(
+class KoScopeImpl(
     private var koFiles: Sequence<KoFileDeclaration>,
 ) : KoScope {
-    constructor(koFileDeclaration: KoFileDeclarationImpl) : this(sequenceOf(koFileDeclaration))
+    constructor(koFileDeclaration: KoFileDeclaration) : this(sequenceOf(koFileDeclaration))
 
     override fun files(): Sequence<KoFileDeclaration> = koFiles.sortedBy { it.filePath }
 

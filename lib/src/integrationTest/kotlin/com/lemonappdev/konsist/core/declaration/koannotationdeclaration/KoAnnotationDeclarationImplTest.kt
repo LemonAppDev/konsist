@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koannotationdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.declaration.representsTypeOf
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import org.amshove.kluent.assertSoftly
