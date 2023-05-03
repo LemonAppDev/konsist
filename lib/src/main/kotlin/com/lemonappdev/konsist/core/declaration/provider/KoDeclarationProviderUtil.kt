@@ -4,7 +4,8 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoDeclaration
+import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl
@@ -17,8 +18,8 @@ import org.jetbrains.kotlin.psi.KtObjectDeclaration
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
-object KoDeclarationProviderUtil {
-    inline fun <reified T : KoDeclarationImpl> getKoDeclarations(
+internal object KoDeclarationProviderUtil {
+    inline fun <reified T : KoDeclaration> getKoDeclarations(
         ktDeclarationContainer: KtDeclarationContainer,
         modifiers: List<KoModifier>,
         includeNested: Boolean = false,
@@ -48,8 +49,8 @@ object KoDeclarationProviderUtil {
         return getKoDeclarations(declarations, modifiers, includeNested, includeLocal)
     }
 
-    inline fun <reified T : KoDeclarationImpl> getKoDeclarations(
-        declarations: Sequence<KoDeclarationImpl>,
+    inline fun <reified T : KoDeclaration> getKoDeclarations(
+        declarations: Sequence<KoDeclaration>,
         modifiers: List<KoModifier>,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
@@ -93,9 +94,9 @@ object KoDeclarationProviderUtil {
         return result.filterIsInstance<T>()
     }
 
-    fun localDeclarations(koFunctions: Sequence<KoFunctionDeclarationImpl>): Sequence<KoDeclarationImpl> {
-        val localDeclarations = mutableListOf<KoDeclarationImpl>()
-        val nestedDeclarations = mutableListOf<KoDeclarationImpl>()
+    fun localDeclarations(koFunctions: Sequence<KoFunctionDeclaration>): Sequence<KoDeclaration> {
+        val localDeclarations = mutableListOf<KoDeclaration>()
+        val nestedDeclarations = mutableListOf<KoDeclaration>()
 
         koFunctions.forEach { koFunction ->
             koFunction.localDeclarations().forEach {

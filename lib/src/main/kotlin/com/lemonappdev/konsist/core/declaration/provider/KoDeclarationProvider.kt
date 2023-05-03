@@ -1,20 +1,20 @@
 package com.lemonappdev.konsist.core.declaration.provider
 
 import com.lemonappdev.konsist.api.KoModifier
-import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
+import com.lemonappdev.konsist.core.declaration.KoDeclaration
+import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.core.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.core.declaration.KoPropertyDeclaration
 
 interface KoDeclarationProvider {
     fun declarations(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoDeclarationImpl>
+    ): Sequence<KoDeclaration>
 
     fun containsDeclarations(
         name: String,
@@ -28,7 +28,7 @@ interface KoClassProvider : KoDeclarationProvider {
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoClassDeclarationImpl> =
+    ): Sequence<KoClassDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested, includeLocal)
 
     fun containsClass(
@@ -43,7 +43,7 @@ interface KoInterfaceProvider : KoDeclarationProvider {
     fun interfaces(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
-    ): Sequence<KoInterfaceDeclarationImpl> =
+    ): Sequence<KoInterfaceDeclaration> =
         KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested)
 
     fun containsInterface(
@@ -58,7 +58,7 @@ interface KoObjectProvider : KoDeclarationProvider {
     fun objects(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
-    ): Sequence<KoObjectDeclarationImpl> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested)
+    ): Sequence<KoObjectDeclaration> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested)
 
     fun containsObject(
         name: String,
@@ -71,7 +71,7 @@ interface KoCompanionObjectProvider : KoDeclarationProvider {
     fun companionObjects(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
-    ): Sequence<KoCompanionObjectDeclarationImpl> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested)
+    ): Sequence<KoCompanionObjectDeclaration> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested)
 
     fun containsCompanionObject(
         name: String,
@@ -85,7 +85,7 @@ interface KoPropertyProvider : KoDeclarationProvider {
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoPropertyDeclarationImpl> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested, includeLocal)
+    ): Sequence<KoPropertyDeclaration> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested, includeLocal)
 
     fun containsProperty(
         name: String,
@@ -101,7 +101,7 @@ interface KoFunctionProvider : KoDeclarationProvider {
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoFunctionDeclarationImpl> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested, includeLocal)
+    ): Sequence<KoFunctionDeclaration> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested, includeLocal)
 
     fun containsFunction(
         name: String,
