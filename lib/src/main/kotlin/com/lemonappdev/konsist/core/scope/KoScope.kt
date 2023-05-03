@@ -1,6 +1,14 @@
-package com.lemonappdev.konsist.core.declaration
+package com.lemonappdev.konsist.core.scope
 
 import com.lemonappdev.konsist.core.const.KoModifier
+import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
+import com.lemonappdev.konsist.core.declaration.KoDeclaration
+import com.lemonappdev.konsist.core.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.core.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.core.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
@@ -12,7 +20,7 @@ import com.lemonappdev.konsist.util.PackageHelper
 import java.io.File
 
 @Suppress("detekt.TooManyFunctions")
-class KoScopeDeclaration(
+class KoScope(
     private var koFiles: Sequence<KoFileDeclaration>,
 ) {
     constructor(koFileDeclaration: KoFileDeclaration) : this(sequenceOf(koFileDeclaration))
@@ -70,15 +78,15 @@ class KoScopeDeclaration(
 
     fun typeAliases() = koFiles.flatMap { it.typeAliases }
 
-    operator fun plus(scope: KoScopeDeclaration): KoScopeDeclaration = KoScopeDeclaration(files() + scope.files())
+    operator fun plus(scope: KoScope): KoScope = KoScope(files() + scope.files())
 
-    operator fun minus(scope: KoScopeDeclaration): KoScopeDeclaration = KoScopeDeclaration(files() - scope.files().toSet())
+    operator fun minus(scope: KoScope): KoScope = KoScope(files() - scope.files().toSet())
 
-    operator fun plusAssign(scope: KoScopeDeclaration) {
+    operator fun plusAssign(scope: KoScope) {
         koFiles += scope.files()
     }
 
-    operator fun minusAssign(scope: KoScopeDeclaration) {
+    operator fun minusAssign(scope: KoScope) {
         koFiles -= scope.files()
     }
 
@@ -102,11 +110,11 @@ class KoScopeDeclaration(
         }
 
         /**
-         * Returns a [KoScopeDeclaration] containing all of Kotlin files in the project.
+         * Returns a [KoScope] containing all of Kotlin files in the project.
          */
-        fun fromProject(module: String? = null, sourceSet: String? = null): KoScopeDeclaration {
+        fun fromProject(module: String? = null, sourceSet: String? = null): KoScope {
             if (module == null && sourceSet == null) {
-                return KoScopeDeclaration(projectKotlinFiles)
+                return KoScope(projectKotlinFiles)
             }
 
             var pathPrefix = "${pathProvider.rootProjectPath}/${module?.lowercase()}"
@@ -118,35 +126,35 @@ class KoScopeDeclaration(
             val koFiles = projectKotlinFiles
                 .filter { it.filePath.startsWith(pathPrefix) }
 
-            return KoScopeDeclaration(koFiles)
+            return KoScope(koFiles)
         }
 
         /**
-         * Returns a [KoScopeDeclaration] containing all of Kotlin production files in the project.
+         * Returns a [KoScope] containing all of Kotlin production files in the project.
          */
-        fun fromProduction(module: String? = null, sourceSet: String? = null): KoScopeDeclaration {
+        fun fromProduction(module: String? = null, sourceSet: String? = null): KoScope {
             val koFiles = fromProject(module, sourceSet)
                 .files()
                 .filterNot { isTestFile(it) }
 
-            return KoScopeDeclaration(koFiles)
+            return KoScope(koFiles)
         }
 
         /**
-         * Returns a [KoScopeDeclaration] containing all of Kotlin test files in the project.
+         * Returns a [KoScope] containing all of Kotlin test files in the project.
          */
-        fun fromTest(module: String? = null, sourceSet: String? = null): KoScopeDeclaration {
+        fun fromTest(module: String? = null, sourceSet: String? = null): KoScope {
             val koFiles = fromProject(module, sourceSet)
                 .files()
                 .filter { isTestFile(it) }
 
-            return KoScopeDeclaration(koFiles)
+            return KoScope(koFiles)
         }
 
         /**
-         * Returns a [KoScopeDeclaration] containing all of Kotlin files in the given package.
+         * Returns a [KoScope] containing all of Kotlin files in the given package.
          */
-        fun fromPackage(packageName: String): KoScopeDeclaration {
+        fun fromPackage(packageName: String): KoScope {
             val koFiles = projectKotlinFiles
                 .filter {
                     it.packagee?.let { koPackage ->
@@ -154,23 +162,23 @@ class KoScopeDeclaration(
                     } ?: false
                 }
 
-            return KoScopeDeclaration(koFiles)
+            return KoScope(koFiles)
         }
 
         /**
-         * Returns a [KoScopeDeclaration] containing all of Kotlin files in the given directory.
+         * Returns a [KoScope] containing all of Kotlin files in the given directory.
          */
-        fun fromPath(path: String): KoScopeDeclaration {
+        fun fromPath(path: String): KoScope {
             val koFiles = projectKotlinFiles
                 .filter { it.filePath.startsWith(path) }
 
-            return KoScopeDeclaration(koFiles)
+            return KoScope(koFiles)
         }
 
         /**
-         * Returns a [KoScopeDeclaration] of a given file.
+         * Returns a [KoScope] of a given file.
          */
-        fun fromFile(path: String): KoScopeDeclaration {
+        fun fromFile(path: String): KoScope {
             val file = File(path)
 
             if (!file.exists()) {
@@ -179,7 +187,7 @@ class KoScopeDeclaration(
 
             val koKoFile = file.toKoFile()
 
-            return KoScopeDeclaration(koKoFile)
+            return KoScope(koKoFile)
         }
 
         private fun isTestFile(it: KoFileDeclaration): Boolean {
