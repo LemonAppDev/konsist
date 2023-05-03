@@ -23,7 +23,7 @@ interface KoFileDeclaration :
 
     val annotations: List<KoAnnotationDeclaration>
 
-    val packagee: List<KoPackageDeclaration>
+    val packagee: KoPackageDeclaration?
 
     val typeAliases: List<KoTypeAliasDeclaration>
 

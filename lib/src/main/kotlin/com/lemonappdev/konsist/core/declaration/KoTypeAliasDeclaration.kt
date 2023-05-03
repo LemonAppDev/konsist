@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
-interface KoTypeAliasDeclaration {
+interface KoTypeAliasDeclaration : KoDeclaration {
     val type: KoTypeDeclaration
 
     fun hasActualModifier(): Boolean

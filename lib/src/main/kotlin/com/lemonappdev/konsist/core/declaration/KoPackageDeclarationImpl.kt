@@ -17,7 +17,7 @@ internal class KoPackageDeclarationImpl private constructor(private val ktPackag
     internal companion object {
         private val cache = KoDeclarationCache<KoPackageDeclarationImpl>()
 
-        internal fun getInstance(ktPackageDirective: KtPackageDirective) =
+        internal fun getInstance(ktPackageDirective: KtPackageDirective): KoPackageDeclaration =
             cache.getOrCreateInstance(ktPackageDirective) { KoPackageDeclarationImpl(ktPackageDirective) }
     }
 }

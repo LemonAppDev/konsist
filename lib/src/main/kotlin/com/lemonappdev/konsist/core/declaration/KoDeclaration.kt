@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.KoModifier
 import kotlin.reflect.KClass
 
-interface KoDeclaration {
+interface KoDeclaration : KoNamedDeclaration {
     val packageName: String
 
     val annotations: List<KoAnnotationDeclaration>
