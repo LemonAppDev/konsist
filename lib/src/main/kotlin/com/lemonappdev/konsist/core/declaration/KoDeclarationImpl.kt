@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 import kotlin.reflect.KClass
 
 @Suppress("detekt.TooManyFunctions")
-abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: KtTypeParameterListOwner) :
+internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: KtTypeParameterListOwner) :
     KoNamedDeclarationImpl(ktTypeParameterListOwner) {
 
     open val fullyQualifiedName by lazy {
@@ -60,7 +60,7 @@ abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: KtTypePar
             .filterIsInstance<KDocElement>()
             .firstOrNull()
 
-        kDocElement?.let { KoDocDeclarationImplImpl(kDocElement) }
+        kDocElement?.let { KoDocDeclarationImpl(kDocElement) }
     }
 
     fun hasPublicModifier() = hasModifiers(KoModifier.PUBLIC)

@@ -19,7 +19,7 @@ import com.lemonappdev.konsist.api.KoTag.VERSION
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
-class KoDocDeclarationImplImpl(private val kDocElement: KDocElement) : KoPsiDeclarationImpl(kDocElement) {
+internal class KoDocDeclarationImpl(private val kDocElement: KDocElement) : KoPsiDeclarationImpl(kDocElement), KoDocDeclaration {
     override val text: String by lazy {
         (kDocElement.text.split("\n") as MutableList)
             .also {
@@ -34,13 +34,13 @@ class KoDocDeclarationImplImpl(private val kDocElement: KDocElement) : KoPsiDecl
             }
     }
 
-    val description by lazy {
+    override val description by lazy {
         text
             .substringBefore("@")
             .trimEnd()
     }
 
-    val blockTags by lazy {
+    override val blockTags by lazy {
         val regex = "@(\\w+)".toRegex()
 
         val tagsAsStringList = text.substringAfter("@")
@@ -68,79 +68,79 @@ class KoDocDeclarationImplImpl(private val kDocElement: KDocElement) : KoPsiDecl
         }
     }
 
-    val paramBlockTags by lazy {
+    override val paramBlockTags by lazy {
         blockTags.filter { it.name == PARAM }
             .map { it as KoValuedDocTagDeclarationImpl }
     }
 
-    val returnBlockTag by lazy {
+    override val returnBlockTag by lazy {
         blockTags.firstOrNull { it.name == RETURN }
     }
 
-    val constructorBlockTag by lazy {
+    override val constructorBlockTag by lazy {
         blockTags.firstOrNull { it.name == CONSTRUCTOR }
     }
 
-    val receiverBlockTag by lazy {
+    override val receiverBlockTag by lazy {
         blockTags.firstOrNull { it.name == RECEIVER }
     }
 
-    val propertyBlockTags by lazy {
+    override val propertyBlockTags by lazy {
         blockTags.filter { it.name == PROPERTY }
             .map { it as KoValuedDocTagDeclarationImpl }
     }
 
-    val throwsBlockTags by lazy {
+    override val throwsBlockTags by lazy {
         blockTags.filter { it.name == THROWS }
             .map { it as KoValuedDocTagDeclarationImpl }
     }
 
-    val exceptionBlockTags by lazy {
+    override val exceptionBlockTags by lazy {
         blockTags.filter { it.name == EXCEPTION }
             .map { it as KoValuedDocTagDeclarationImpl }
     }
 
-    val sampleBlockTags by lazy {
+    override val sampleBlockTags by lazy {
         blockTags.filter { it.name == SAMPLE }
             .map { it as KoValuedDocTagDeclarationImpl }
     }
 
-    val seeBlockTags by lazy {
+    override val seeBlockTags by lazy {
         blockTags.filter { it.name == SEE }
             .map { it as KoValuedDocTagDeclarationImpl }
     }
 
-    val authorBlockTags by lazy {
+    override val authorBlockTags by lazy {
         blockTags.filter { it.name == AUTHOR }
     }
 
-    val sinceBlockTag by lazy {
+    override val sinceBlockTag by lazy {
         blockTags.firstOrNull { it.name == SINCE }
     }
 
-    val suppressBlockTag by lazy {
+    override val suppressBlockTag by lazy {
         blockTags.firstOrNull { it.name == SUPPRESS }
     }
 
-    val versionBlockTag by lazy {
+    override val versionBlockTag by lazy {
         blockTags.firstOrNull { it.name == VERSION }
     }
 
-    val propertySetterBlockTag by lazy {
+    override val propertySetterBlockTag by lazy {
         blockTags.firstOrNull { it.name == PROPERTY_SETTER }
     }
 
-    val propertyGetterBlockTag by lazy {
+    override val propertyGetterBlockTag by lazy {
         blockTags.firstOrNull { it.name == PROPERTY_GETTER }
     }
 
-    fun hasTags(vararg tags: KoTag) = tags.all {
+    override fun hasTags(vararg tags: KoTag) = tags.all {
         blockTags
             .map { tag -> tag.name }
             .contains(it)
     }
 
-    private fun parseToValuedBlockTag(koTag: KoTag, sentence: String): KoValuedDocTagDeclarationImpl {
+    override fun parseToValuedBlockTag(koTag: KoTag, sentence: String): KoValuedDocTagDeclarationImpl {
         val parsed = sentence.split(" ")
         val description = parsed
             .subList(2, parsed.size)
@@ -149,7 +149,7 @@ class KoDocDeclarationImplImpl(private val kDocElement: KDocElement) : KoPsiDecl
         return KoValuedDocTagDeclarationImpl(koTag, parsed[1], description)
     }
 
-    private fun parseToBlockTag(koTag: KoTag, sentence: String): KoDocTagDeclarationImpl {
+    override fun parseToBlockTag(koTag: KoTag, sentence: String): KoDocTagDeclarationImpl {
         val parsed = sentence.split(" ")
         val description = parsed
             .subList(1, parsed.size)

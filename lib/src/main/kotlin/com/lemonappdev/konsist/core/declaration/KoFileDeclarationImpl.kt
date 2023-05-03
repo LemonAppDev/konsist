@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.provider.KoClassProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoCompanionObjectProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProvider
@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
 import kotlin.reflect.KClass
 
-class KoFileDeclarationImpl private constructor(private val ktFile: KtFile) :
+internal class KoFileDeclarationImpl private constructor(private val ktFile: KtFile) :
     KoNamedDeclarationImpl(ktFile),
     KoDeclarationProvider,
     KoClassProvider,
@@ -109,9 +109,9 @@ class KoFileDeclarationImpl private constructor(private val ktFile: KtFile) :
 
     override fun hashCode(): Int = 31 * 7 + filePath.hashCode()
 
-    companion object {
+    internal companion object {
         private val cache = KoDeclarationCache<KoFileDeclarationImpl>()
 
-        fun getInstance(ktFile: KtFile) = cache.getOrCreateInstance(ktFile) { KoFileDeclarationImpl(ktFile) }
+        internal fun getInstance(ktFile: KtFile) = cache.getOrCreateInstance(ktFile) { KoFileDeclarationImpl(ktFile) }
     }
 }

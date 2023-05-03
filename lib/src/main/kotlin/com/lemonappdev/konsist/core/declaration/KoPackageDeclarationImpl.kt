@@ -4,9 +4,9 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtPackageDirective
 
-class KoPackageDeclarationImpl private constructor(private val ktPackageDirective: KtPackageDirective) :
-    KoNamedDeclarationImpl(ktPackageDirective) {
-    val qualifiedName by lazy {
+internal class KoPackageDeclarationImpl private constructor(private val ktPackageDirective: KtPackageDirective) :
+    KoNamedDeclarationImpl(ktPackageDirective), KoPackageDeclaration {
+    override val qualifiedName by lazy {
         if (ktPackageDirective.fqName != FqName.ROOT) {
             ktPackageDirective.fqName.toString()
         } else {
@@ -14,10 +14,10 @@ class KoPackageDeclarationImpl private constructor(private val ktPackageDirectiv
         }
     }
 
-    companion object {
+    internal companion object {
         private val cache = KoDeclarationCache<KoPackageDeclarationImpl>()
 
-        fun getInstance(ktPackageDirective: KtPackageDirective) =
+        internal fun getInstance(ktPackageDirective: KtPackageDirective) =
             cache.getOrCreateInstance(ktPackageDirective) { KoPackageDeclarationImpl(ktPackageDirective) }
     }
 }

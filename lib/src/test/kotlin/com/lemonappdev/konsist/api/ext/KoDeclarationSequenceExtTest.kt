@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.KoTag.SEE
 import com.lemonappdev.konsist.api.KoTag.SINCE
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoDocDeclarationImplImpl
+import com.lemonappdev.konsist.core.declaration.KoDocDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
@@ -641,13 +641,13 @@ class KoDeclarationSequenceExtTest {
         // given
         val blockTag1 = SINCE
         val blockTag2 = SEE
-        val koDoc1: KoDocDeclarationImplImpl = mockk {
+        val koDoc1: KoDocDeclarationImpl = mockk {
             every { hasTags(blockTag1, blockTag2) } returns true
         }
         val declaration1: KoDeclarationImpl = mockk {
             every { koDoc } returns koDoc1
         }
-        val koDoc2: KoDocDeclarationImplImpl = mockk {
+        val koDoc2: KoDocDeclarationImpl = mockk {
             every { hasTags(blockTag1, blockTag2) } returns false
         }
         val declaration2: KoDeclarationImpl = mockk {
@@ -667,13 +667,13 @@ class KoDeclarationSequenceExtTest {
         // given
         val blockTag1 = SINCE
         val blockTag2 = SEE
-        val koDoc1: KoDocDeclarationImplImpl = mockk {
+        val koDoc1: KoDocDeclarationImpl = mockk {
             every { hasTags(blockTag1, blockTag2) } returns true
         }
         val declaration1: KoDeclarationImpl = mockk {
             every { koDoc } returns koDoc1
         }
-        val koDoc2: KoDocDeclarationImplImpl = mockk {
+        val koDoc2: KoDocDeclarationImpl = mockk {
             every { hasTags(blockTag1, blockTag2) } returns false
         }
         val declaration2: KoDeclarationImpl = mockk {
@@ -693,21 +693,21 @@ class KoDeclarationSequenceExtTest {
         // given
         val blockTag1 = SINCE
         val blockTag2 = SEE
-        val koDoc1: KoDocDeclarationImplImpl = mockk {
+        val koDoc1: KoDocDeclarationImpl = mockk {
             every { hasTags(blockTag1) } returns true
             every { hasTags(blockTag2) } returns true
         }
         val declaration1: KoDeclarationImpl = mockk {
             every { koDoc } returns koDoc1
         }
-        val koDoc2: KoDocDeclarationImplImpl = mockk {
+        val koDoc2: KoDocDeclarationImpl = mockk {
             every { hasTags(blockTag1) } returns true
             every { hasTags(blockTag2) } returns false
         }
         val declaration2: KoDeclarationImpl = mockk {
             every { koDoc } returns koDoc2
         }
-        val koDoc3: KoDocDeclarationImplImpl = mockk {
+        val koDoc3: KoDocDeclarationImpl = mockk {
             every { hasTags(blockTag1) } returns false
             every { hasTags(blockTag2) } returns false
         }

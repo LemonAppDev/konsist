@@ -5,9 +5,9 @@ import org.jetbrains.kotlin.psi.KtElement
 /**
  * Base declaration
  */
-open class KoBaseDeclarationImpl(private val ktElement: KtElement) : KoPsiDeclarationImpl(ktElement) {
+internal open class KoBaseDeclarationImpl(private val ktElement: KtElement) : KoPsiDeclarationImpl(ktElement), KoBaseDeclaration {
     /**
      * KoFile containing the declaration
      */
-    val containingFile by lazy { KoFileDeclarationImpl.getInstance(ktElement.containingKtFile) }
+    override val containingFile by lazy { KoFileDeclarationImpl.getInstance(ktElement.containingKtFile) }
 }

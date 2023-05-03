@@ -4,8 +4,8 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-class KoParentDeclarationImpl private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
-    KoNamedDeclarationImpl(ktSuperTypeListEntry) {
+internal class KoParentDeclarationImpl private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
+    KoNamedDeclarationImpl(ktSuperTypeListEntry), KoParentDeclaration {
 
     override val name: String by lazy {
         ktSuperTypeListEntry
@@ -15,7 +15,7 @@ class KoParentDeclarationImpl private constructor(private val ktSuperTypeListEnt
             .substringBefore(" by")
     }
 
-    val delegateName by lazy {
+    override val delegateName by lazy {
         if (ktSuperTypeListEntry is KtDelegatedSuperTypeEntry) {
             ktSuperTypeListEntry
                 .delegateExpression
@@ -25,15 +25,15 @@ class KoParentDeclarationImpl private constructor(private val ktSuperTypeListEnt
         }
     }
 
-    fun hasDelegate(delegateName: String? = null) = when (delegateName) {
+    override fun hasDelegate(delegateName: String?) = when (delegateName) {
         null -> this.delegateName != null
         else -> name == delegateName
     }
 
-    companion object {
+    internal companion object {
         private val cache = KoDeclarationCache<KoParentDeclarationImpl>()
 
-        fun getInstance(ktSuperTypeListEntry: KtSuperTypeListEntry) =
+        internal fun getInstance(ktSuperTypeListEntry: KtSuperTypeListEntry) =
             cache.getOrCreateInstance(ktSuperTypeListEntry) { KoParentDeclarationImpl(ktSuperTypeListEntry) }
     }
 }

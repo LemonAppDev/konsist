@@ -5,17 +5,17 @@ import com.lemonappdev.konsist.util.PackageHelper
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import java.io.File
 
-open class KoPsiDeclarationImpl(private val psiElement: PsiElement) {
+internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : KoPsiDeclaration {
     /**
      * File path of the declaration
      */
-    val filePath by lazy {
+    override val filePath by lazy {
         psiElement
             .containingFile
             .name
     }
 
-    val projectFilePath by lazy {
+    override val projectFilePath by lazy {
         val mainPath = File("")
             .absoluteFile
             .path
@@ -27,7 +27,7 @@ open class KoPsiDeclarationImpl(private val psiElement: PsiElement) {
     /**
      * Location of the declaration containing the file path, line and column
      */
-    val location by lazy {
+    override val location by lazy {
         val lineAndColumn = psiElement
             .getTextWithLocation()
             .substringAfterLast("' at (")
@@ -44,7 +44,7 @@ open class KoPsiDeclarationImpl(private val psiElement: PsiElement) {
     /**
      * Text of the declaration
      */
-    open val text by lazy {
+    override val text by lazy {
         psiElement
             .getTextWithLocation()
             .substringBefore("' at (")
@@ -55,13 +55,13 @@ open class KoPsiDeclarationImpl(private val psiElement: PsiElement) {
     /**
      * Text of the declaration with the location (file path, line and column).
      */
-    val locationWithText by lazy { "Location: $location \nDeclaration:\n$text" }
+    override val locationWithText by lazy { "Location: $location \nDeclaration:\n$text" }
 
-    fun resideInFilePath(text: String) = PackageHelper.resideInPackage(text, filePath, '/')
+    override fun resideInFilePath(text: String) = PackageHelper.resideInPackage(text, filePath, '/')
 
-    fun resideInProjectFilePath(text: String) = PackageHelper.resideInPackage(text, projectFilePath, '/')
+    override fun resideInProjectFilePath(text: String) = PackageHelper.resideInPackage(text, projectFilePath, '/')
 
-    fun print() {
+    override fun print() {
         print(toString())
     }
 
