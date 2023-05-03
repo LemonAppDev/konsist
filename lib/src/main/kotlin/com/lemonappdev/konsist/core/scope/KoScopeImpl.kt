@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.scope
 
 import com.lemonappdev.konsist.api.KoScope
-import com.lemonappdev.konsist.core.const.KoModifier
+import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclaration

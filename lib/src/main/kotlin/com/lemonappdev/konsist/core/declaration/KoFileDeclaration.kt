@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.const.KoModifier
+import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.core.declaration.provider.KoClassProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoCompanionObjectProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProvider

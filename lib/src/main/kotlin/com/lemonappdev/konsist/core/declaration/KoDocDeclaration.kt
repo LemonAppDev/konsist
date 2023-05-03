@@ -1,21 +1,21 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.core.const.KoTag
-import com.lemonappdev.konsist.core.const.KoTag.AUTHOR
-import com.lemonappdev.konsist.core.const.KoTag.CONSTRUCTOR
-import com.lemonappdev.konsist.core.const.KoTag.EXCEPTION
-import com.lemonappdev.konsist.core.const.KoTag.PARAM
-import com.lemonappdev.konsist.core.const.KoTag.PROPERTY
-import com.lemonappdev.konsist.core.const.KoTag.PROPERTYGETTER
-import com.lemonappdev.konsist.core.const.KoTag.PROPERTYSETTER
-import com.lemonappdev.konsist.core.const.KoTag.RECEIVER
-import com.lemonappdev.konsist.core.const.KoTag.RETURN
-import com.lemonappdev.konsist.core.const.KoTag.SAMPLE
-import com.lemonappdev.konsist.core.const.KoTag.SEE
-import com.lemonappdev.konsist.core.const.KoTag.SINCE
-import com.lemonappdev.konsist.core.const.KoTag.SUPPRESS
-import com.lemonappdev.konsist.core.const.KoTag.THROWS
-import com.lemonappdev.konsist.core.const.KoTag.VERSION
+import com.lemonappdev.konsist.api.KoTag
+import com.lemonappdev.konsist.api.KoTag.AUTHOR
+import com.lemonappdev.konsist.api.KoTag.CONSTRUCTOR
+import com.lemonappdev.konsist.api.KoTag.EXCEPTION
+import com.lemonappdev.konsist.api.KoTag.PARAM
+import com.lemonappdev.konsist.api.KoTag.PROPERTY
+import com.lemonappdev.konsist.api.KoTag.PROPERTYGETTER
+import com.lemonappdev.konsist.api.KoTag.PROPERTYSETTER
+import com.lemonappdev.konsist.api.KoTag.RECEIVER
+import com.lemonappdev.konsist.api.KoTag.RETURN
+import com.lemonappdev.konsist.api.KoTag.SAMPLE
+import com.lemonappdev.konsist.api.KoTag.SEE
+import com.lemonappdev.konsist.api.KoTag.SINCE
+import com.lemonappdev.konsist.api.KoTag.SUPPRESS
+import com.lemonappdev.konsist.api.KoTag.THROWS
+import com.lemonappdev.konsist.api.KoTag.VERSION
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 

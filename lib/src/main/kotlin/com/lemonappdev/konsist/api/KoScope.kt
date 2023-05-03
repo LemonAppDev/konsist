@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api
 
-import com.lemonappdev.konsist.core.const.KoModifier
 import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclaration

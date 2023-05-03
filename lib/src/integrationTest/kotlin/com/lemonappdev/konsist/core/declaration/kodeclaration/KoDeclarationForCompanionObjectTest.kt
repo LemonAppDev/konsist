@@ -1,11 +1,11 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.const.KoModifier.COMPANION
-import com.lemonappdev.konsist.core.const.KoModifier.FINAL
-import com.lemonappdev.konsist.core.const.KoModifier.PRIVATE
-import com.lemonappdev.konsist.core.const.KoModifier.PROTECTED
-import com.lemonappdev.konsist.core.const.KoModifier.PUBLIC
+import com.lemonappdev.konsist.api.KoModifier.COMPANION
+import com.lemonappdev.konsist.api.KoModifier.FINAL
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
+import com.lemonappdev.konsist.api.KoModifier.PROTECTED
+import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2

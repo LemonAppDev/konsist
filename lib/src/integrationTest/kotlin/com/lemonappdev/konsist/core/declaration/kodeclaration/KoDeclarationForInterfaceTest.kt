@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.const.KoModifier.ABSTRACT
-import com.lemonappdev.konsist.core.const.KoModifier.PRIVATE
-import com.lemonappdev.konsist.core.const.KoModifier.PUBLIC
+import com.lemonappdev.konsist.api.KoModifier.ABSTRACT
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
+import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2

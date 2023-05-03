@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.const
+package com.lemonappdev.konsist.api
 
 enum class KoTag(val type: String, val isValued: Boolean = false) {
     PARAM("@param", true),

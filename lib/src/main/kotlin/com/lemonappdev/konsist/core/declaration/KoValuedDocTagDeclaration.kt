@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.core.const.KoTag
+import com.lemonappdev.konsist.api.KoTag
 open class KoValuedDocTagDeclaration(
     override val name: KoTag,
     val value: String,

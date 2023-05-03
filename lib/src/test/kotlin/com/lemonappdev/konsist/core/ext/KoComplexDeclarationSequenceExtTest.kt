@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.ext
 
-import com.lemonappdev.konsist.core.const.KoModifier.OPEN
-import com.lemonappdev.konsist.core.const.KoModifier.PUBLIC
+import com.lemonappdev.konsist.api.KoModifier.OPEN
+import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclaration

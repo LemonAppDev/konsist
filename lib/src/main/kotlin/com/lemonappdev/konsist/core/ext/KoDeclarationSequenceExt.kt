@@ -2,8 +2,8 @@
 
 package com.lemonappdev.konsist.core.ext
 
-import com.lemonappdev.konsist.core.const.KoModifier
-import com.lemonappdev.konsist.core.const.KoTag
+import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.KoTag
 import com.lemonappdev.konsist.core.declaration.KoDeclaration
 import kotlin.reflect.KClass
 

@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.const.KoModifier
+import com.lemonappdev.konsist.api.KoModifier
 import org.jetbrains.kotlin.psi.KtClass
 
 class KoInterfaceDeclaration private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {

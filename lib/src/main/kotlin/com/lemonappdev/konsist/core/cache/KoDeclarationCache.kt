@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.core.declaration.KoBaseDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import java.util.concurrent.ConcurrentHashMap
 
-class KoDeclarationCache<T : KoBaseDeclaration> {
+internal class KoDeclarationCache<T : KoBaseDeclaration> {
     private val elements = ConcurrentHashMap<KtElement, T>()
 
     private fun get(key: KtElement): T {

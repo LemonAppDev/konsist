@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.ext
 
-import com.lemonappdev.konsist.core.const.KoModifier.OPEN
-import com.lemonappdev.konsist.core.const.KoModifier.PROTECTED
-import com.lemonappdev.konsist.core.const.KoTag.SEE
-import com.lemonappdev.konsist.core.const.KoTag.SINCE
+import com.lemonappdev.konsist.api.KoModifier.OPEN
+import com.lemonappdev.konsist.api.KoModifier.PROTECTED
+import com.lemonappdev.konsist.api.KoTag.SEE
+import com.lemonappdev.konsist.api.KoTag.SINCE
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDocDeclaration
