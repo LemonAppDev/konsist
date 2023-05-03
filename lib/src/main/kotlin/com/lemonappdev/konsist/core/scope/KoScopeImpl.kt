@@ -12,7 +12,7 @@ import com.lemonappdev.konsist.core.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.core.declaration.KoPropertyDeclaration
 
 @Suppress("detekt.TooManyFunctions")
-class KoScopeImpl(
+internal class KoScopeImpl(
     private var koFiles: Sequence<KoFileDeclaration>,
 ) : KoScope {
     constructor(koFileDeclaration: KoFileDeclaration) : this(sequenceOf(koFileDeclaration))

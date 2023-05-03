@@ -14,7 +14,7 @@ import com.lemonappdev.konsist.core.scope.KoScopeImpl
 import com.lemonappdev.konsist.util.PackageHelper
 import java.io.File
 
-class KoScopeCreatorImpl : KoScopeCreator {
+internal class KoScopeCreatorImpl : KoScopeCreator {
     private val pathVerifier = PathVerifier()
 
     private val pathProvider by lazy {
