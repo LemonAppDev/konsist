@@ -1,9 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.core.const.KoModifier
-import com.lemonappdev.konsist.testdata.SampleClass
-import com.lemonappdev.konsist.testdata.SampleType
+import com.lemonappdev.konsist.api.KoModifier
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -259,8 +257,6 @@ class KoComplexDeclarationForClassTest {
             representsType("SampleType") shouldBeEqualTo false
             representsType("com.lemonappdev.konsist.testdata.SampleClass") shouldBeEqualTo true
             representsType("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo false
-            representsTypeOf<SampleClass>() shouldBeEqualTo true
-            representsTypeOf<SampleType>() shouldBeEqualTo false
         }
     }
 

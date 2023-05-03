@@ -1,10 +1,10 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.const.KoModifier.DATA
-import com.lemonappdev.konsist.core.const.KoModifier.PRIVATE
-import com.lemonappdev.konsist.core.const.KoModifier.PROTECTED
-import com.lemonappdev.konsist.core.const.KoModifier.PUBLIC
+import com.lemonappdev.konsist.api.KoModifier.DATA
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
+import com.lemonappdev.konsist.api.KoModifier.PROTECTED
+import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
@@ -87,9 +87,9 @@ class KoDeclarationForObjectTest {
     }
 
     @Test
-    fun `object-has-two-annotations-with-KClass`() {
+    fun `object-has-two-annotations-of-kclass`() {
         // given
-        val sut = getSnippetFile("object-has-two-annotations-with-KClass")
+        val sut = getSnippetFile("object-has-two-annotations-of-kclass")
             .objects()
             .first()
 
@@ -101,9 +101,6 @@ class KoDeclarationForObjectTest {
             hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
             hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
             hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo true
-            hasAnnotationOf<SampleAnnotation2>() shouldBeEqualTo true
-            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
 

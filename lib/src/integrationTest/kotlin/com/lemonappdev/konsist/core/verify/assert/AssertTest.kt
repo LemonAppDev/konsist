@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.verify.assert
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.ext.sequence.withPrimaryConstructor
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
-import com.lemonappdev.konsist.core.ext.withPrimaryConstructor
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 import org.amshove.kluent.shouldContain

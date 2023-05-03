@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.scope.koscope
 
-import com.lemonappdev.konsist.core.scope.KoScope
+import com.lemonappdev.konsist.api.Konsist
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -14,10 +14,9 @@ class KoScopeOperatorTest {
     @Test
     fun `plus operator`() {
         // given
-        val scope1 = KoScope.fromPackage("com.lemonappdev.konsist.core.scope.koscope")
+        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.scope.koscope")
         val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
-        val scope2 = KoScope
-            .fromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeForDeclarationTest.kt")
+        val scope2 = Konsist.scopeFromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeForDeclarationTest.kt")
 
         // when
         val sut = scope1 + scope2
@@ -49,10 +48,9 @@ class KoScopeOperatorTest {
     @Test
     fun `minus operator`() {
         // given
-        val scope1 = KoScope.fromPackage("com.lemonappdev.konsist.core.scope.koscope")
+        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.scope.koscope")
         val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
-        val scope2 = KoScope
-            .fromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeForDeclarationTest.kt")
+        val scope2 = Konsist.scopeFromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeForDeclarationTest.kt")
 
         // when
         val sut = scope1 - scope2
@@ -82,10 +80,10 @@ class KoScopeOperatorTest {
     @Test
     fun `minus operator works when we subtract element which scope1 not contain`() {
         // given
-        val scope1 = KoScope.fromPackage("com.lemonappdev.konsist.core.scope.koscope")
+        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.scope.koscope")
         val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
-        val scope2 = KoScope
-            .fromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/kofiledeclaration/KoFileDeclarationTest.kt")
+        val scope2 =
+            Konsist.scopeFromFile("$testSourceSetPath/lemonappdev/konsist/core/declaration/kofiledeclaration/KoFileDeclarationTest.kt")
 
         // when
         val sut = scope1 - scope2
@@ -100,10 +98,9 @@ class KoScopeOperatorTest {
     @Test
     fun `plusAssign operator`() {
         // given
-        val scope1 = KoScope.fromPackage("com.lemonappdev.konsist.core.scope.koscope")
+        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.scope.koscope")
         val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
-        val scope2 = KoScope
-            .fromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeForDeclarationTest.kt")
+        val scope2 = Konsist.scopeFromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeForDeclarationTest.kt")
 
         // when
         scope1 += scope2
@@ -135,10 +132,9 @@ class KoScopeOperatorTest {
     @Test
     fun `minusAssign operator`() {
         // given
-        val scope1 = KoScope.fromPackage("com.lemonappdev.konsist.core.scope.koscope")
+        val scope1 = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.scope.koscope")
         val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
-        val scope2 = KoScope
-            .fromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeForDeclarationTest.kt")
+        val scope2 = Konsist.scopeFromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeForDeclarationTest.kt")
 
         // when
         scope1 -= scope2

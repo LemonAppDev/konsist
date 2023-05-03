@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.scope.koscope
 
-import com.lemonappdev.konsist.core.scope.KoScope
+import com.lemonappdev.konsist.api.Konsist
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -17,8 +17,7 @@ class KoScopeTest {
         // given
         val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
         val sut =
-            KoScope
-                .fromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeTest.kt")
+            Konsist.scopeFromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeTest.kt")
 
         // then
         assertSoftly(
@@ -39,7 +38,7 @@ class KoScopeTest {
     @Test
     fun `from project`() {
         // given
-        val sut = KoScope.fromProject()
+        val sut = Konsist.scopeFromProject()
 
         // then
         assertSoftly(
@@ -56,7 +55,7 @@ class KoScopeTest {
     @Test
     fun `from package`() {
         // given
-        val sut = KoScope.fromPackage("com.lemonappdev.konsist.core.scope.koscope")
+        val sut = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.scope.koscope")
 
         // then
         sut
@@ -84,7 +83,7 @@ class KoScopeTest {
     @Test
     fun `'from package' using two dots syntax`() {
         // given
-        val sut = KoScope.fromPackage("com.lemonappdev.konsist..scope.koscope")
+        val sut = Konsist.scopeFromPackage("com.lemonappdev.konsist..scope.koscope")
 
         // then
         sut
@@ -113,8 +112,7 @@ class KoScopeTest {
     fun `from path`() {
         // given
         val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
-        val sut = KoScope
-            .fromPath("${testSourceSetPath}lemonappdev/konsist/core/scope/koscope/")
+        val sut = Konsist.scopeFromPath("${testSourceSetPath}lemonappdev/konsist/core/scope/koscope/")
 
         // then
         sut
@@ -143,7 +141,7 @@ class KoScopeTest {
     fun `from module`() {
         // given
         val projectPath = konsistModulePath.dropLastWhile { it != '/' }
-        val sut = KoScope.fromProject(module = "lib")
+        val sut = Konsist.scopeFromProject(module = "lib")
 
         // then
         assertSoftly(
@@ -161,7 +159,7 @@ class KoScopeTest {
     fun `toString method`() {
         // given
         val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
-        val sut = KoScope.fromPackage("com.lemonappdev.konsist.core.scope.koscope")
+        val sut = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.scope.koscope")
 
         // then
         val prefix = "${testSourceSetPath}lemonappdev/konsist/core/scope/koscope/"
