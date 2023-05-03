@@ -13,5 +13,5 @@ interface KoParameterDeclaration : KoDeclaration {
 
     fun hasDefaultValue(value: String? = null): Boolean
 
-    fun hasType(type: String): Boolean
+    fun representsType(type: String): Boolean
 }

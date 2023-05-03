@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
-import com.lemonappdev.konsist.api.ext.declaration.hasTypeOf
+import com.lemonappdev.konsist.api.ext.declaration.representsTypeOf
 import kotlin.reflect.KClass
 
 fun Sequence<KoParameterDeclaration>.withVarargModifier() = filter { it.hasVarargModifier() }
@@ -31,18 +31,18 @@ fun Sequence<KoParameterDeclaration>.withoutDefaultValue(vararg values: String) 
 }
 
 fun Sequence<KoParameterDeclaration>.withType(vararg types: String) = filter {
-    types.any { type -> it.hasType(type) }
+    types.any { type -> it.representsType(type) }
 }
 
 fun Sequence<KoParameterDeclaration>.withoutType(vararg types: String) = filter {
-    types.none { type -> it.hasType(type) }
+    types.none { type -> it.representsType(type) }
 }
 
 fun Sequence<KoParameterDeclaration>.withTypeOf(vararg types: KClass<*>) = filter {
     types.any { kClass ->
         kClass
             .simpleName
-            ?.let { name -> it.hasType(name) } ?: false
+            ?.let { name -> it.representsType(name) } ?: false
     }
 }
 
@@ -50,10 +50,10 @@ fun Sequence<KoParameterDeclaration>.withoutTypeOf(vararg types: KClass<*>) = fi
     types.none { kClass ->
         kClass
             .simpleName
-            ?.let { name -> it.hasType(name) } ?: false
+            ?.let { name -> it.representsType(name) } ?: false
     }
 }
 
-inline fun <reified T> Sequence<KoParameterDeclaration>.withTypeOf() = filter { it.hasTypeOf<T>() }
+inline fun <reified T> Sequence<KoParameterDeclaration>.withTypeOf() = filter { it.representsTypeOf<T>() }
 
-inline fun <reified T> Sequence<KoParameterDeclaration>.withoutTypeOf() = filterNot { it.hasTypeOf<T>() }
+inline fun <reified T> Sequence<KoParameterDeclaration>.withoutTypeOf() = filterNot { it.representsTypeOf<T>() }

@@ -212,16 +212,16 @@ class KoParameterDeclarationSequenceExtTest {
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val parameter1: KoParameterDeclarationImpl = mockk {
-            every { hasType(typeName1) } returns true
-            every { hasType(typeName2) } returns false
+            every { representsType(typeName1) } returns true
+            every { representsType(typeName2) } returns false
         }
         val parameter2: KoParameterDeclarationImpl = mockk {
-            every { hasType(typeName1) } returns false
-            every { hasType(typeName2) } returns true
+            every { representsType(typeName1) } returns false
+            every { representsType(typeName2) } returns true
         }
         val parameter3: KoParameterDeclarationImpl = mockk {
-            every { hasType(typeName1) } returns false
-            every { hasType(typeName2) } returns false
+            every { representsType(typeName1) } returns false
+            every { representsType(typeName2) } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2, parameter3)
 
@@ -238,16 +238,16 @@ class KoParameterDeclarationSequenceExtTest {
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val parameter1: KoParameterDeclarationImpl = mockk {
-            every { hasType(typeName1) } returns true
-            every { hasType(typeName2) } returns false
+            every { representsType(typeName1) } returns true
+            every { representsType(typeName2) } returns false
         }
         val parameter2: KoParameterDeclarationImpl = mockk {
-            every { hasType(typeName1) } returns false
-            every { hasType(typeName2) } returns true
+            every { representsType(typeName1) } returns false
+            every { representsType(typeName2) } returns true
         }
         val parameter3: KoParameterDeclarationImpl = mockk {
-            every { hasType(typeName1) } returns false
-            every { hasType(typeName2) } returns false
+            every { representsType(typeName1) } returns false
+            every { representsType(typeName2) } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2, parameter3)
 
@@ -264,16 +264,16 @@ class KoParameterDeclarationSequenceExtTest {
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val parameter1: KoParameterDeclarationImpl = mockk {
-            every { hasType(typeName1) } returns true
-            every { hasType(typeName2) } returns false
+            every { representsType(typeName1) } returns true
+            every { representsType(typeName2) } returns false
         }
         val parameter2: KoParameterDeclarationImpl = mockk {
-            every { hasType(typeName1) } returns false
-            every { hasType(typeName2) } returns true
+            every { representsType(typeName1) } returns false
+            every { representsType(typeName2) } returns true
         }
         val parameter3: KoParameterDeclarationImpl = mockk {
-            every { hasType(typeName1) } returns false
-            every { hasType(typeName2) } returns false
+            every { representsType(typeName1) } returns false
+            every { representsType(typeName2) } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2, parameter3)
 
@@ -290,16 +290,16 @@ class KoParameterDeclarationSequenceExtTest {
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val parameter1: KoParameterDeclarationImpl = mockk {
-            every { hasType(typeName1) } returns true
-            every { hasType(typeName2) } returns false
+            every { representsType(typeName1) } returns true
+            every { representsType(typeName2) } returns false
         }
         val parameter2: KoParameterDeclarationImpl = mockk {
-            every { hasType(typeName1) } returns false
-            every { hasType(typeName2) } returns true
+            every { representsType(typeName1) } returns false
+            every { representsType(typeName2) } returns true
         }
         val parameter3: KoParameterDeclarationImpl = mockk {
-            every { hasType(typeName1) } returns false
-            every { hasType(typeName2) } returns false
+            every { representsType(typeName1) } returns false
+            every { representsType(typeName2) } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2, parameter3)
 

@@ -217,5 +217,20 @@ class KoParameterDeclarationTest {
         }
     }
 
+    @Test
+    fun `parameter-represents-type`() {
+        // given
+        val sut = getSnippetFile("parameter-represents-type")
+            .functions()
+            .first()
+            .parameters
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            it.representsType("SampleType") shouldBeEqualTo true
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/", fileName)
 }
