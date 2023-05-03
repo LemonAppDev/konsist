@@ -1,10 +1,10 @@
-package com.lemonappdev.konsist.core.declaration.koscopedeclaration
+package com.lemonappdev.konsist.core.scope.koscope
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoScopeDeclarationForFunctionTest {
+class KoScopeForFunctionTest {
 
     @Test
     fun `file-contains-one-function`() {
@@ -68,5 +68,5 @@ class KoScopeDeclarationForFunctionTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koscopedeclaration/snippet/forfunction/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forfunction/", fileName)
 }

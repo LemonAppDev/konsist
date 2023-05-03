@@ -1,10 +1,10 @@
-package com.lemonappdev.konsist.core.declaration.koscopedeclaration
+package com.lemonappdev.konsist.core.scope.koscope
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoScopeDeclarationForTypeAliasTest {
+class KoScopeForTypeAliasTest {
 
     @Test
     fun `file-contains-typealias`() {
@@ -36,5 +36,5 @@ class KoScopeDeclarationForTypeAliasTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koscopedeclaration/snippet/fortypealias/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/fortypealias/", fileName)
 }

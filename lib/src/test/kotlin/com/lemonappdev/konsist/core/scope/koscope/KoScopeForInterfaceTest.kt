@@ -1,10 +1,10 @@
-package com.lemonappdev.konsist.core.declaration.koscopedeclaration
+package com.lemonappdev.konsist.core.scope.koscope
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoScopeDeclarationForInterfaceTest {
+class KoScopeForInterfaceTest {
     @Test
     fun `file-contains-one-interface`() {
         // given
@@ -68,5 +68,5 @@ class KoScopeDeclarationForInterfaceTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koscopedeclaration/snippet/forinterface/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forinterface/", fileName)
 }
