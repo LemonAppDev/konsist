@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.util
 
-object PackageHelper {
+internal object PackageHelper {
     @Suppress("detekt.CyclomaticComplexMethod", "detekt.LongMethod")
     fun resideInPackage(declarationPackage: String, packagee: String, separator: Char = '.'): Boolean {
         val mainPackageSplitByOneSeparator = packagee

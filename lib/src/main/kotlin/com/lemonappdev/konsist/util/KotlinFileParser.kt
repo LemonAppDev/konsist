@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.idea.KotlinFileType
 import org.jetbrains.kotlin.psi.KtFile
 import java.io.File
 
-object KotlinFileParser {
+internal object KotlinFileParser {
     const val KOTLIN_SNIPPET_FILE_EXTENSION = ".kttxt"
     const val KOTLIN_FILE_EXTENSION = ".kt"
 
