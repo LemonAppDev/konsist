@@ -6,8 +6,8 @@ import com.lemonappdev.konsist.api.KoTag.CONSTRUCTOR
 import com.lemonappdev.konsist.api.KoTag.EXCEPTION
 import com.lemonappdev.konsist.api.KoTag.PARAM
 import com.lemonappdev.konsist.api.KoTag.PROPERTY
-import com.lemonappdev.konsist.api.KoTag.PROPERTYGETTER
-import com.lemonappdev.konsist.api.KoTag.PROPERTYSETTER
+import com.lemonappdev.konsist.api.KoTag.PROPERTY_GETTER
+import com.lemonappdev.konsist.api.KoTag.PROPERTY_SETTER
 import com.lemonappdev.konsist.api.KoTag.RECEIVER
 import com.lemonappdev.konsist.api.KoTag.RETURN
 import com.lemonappdev.konsist.api.KoTag.SAMPLE
@@ -127,11 +127,11 @@ class KoDocDeclaration(private val kDocElement: KDocElement) : KoPsiDeclaration(
     }
 
     val propertySetterBlockTag by lazy {
-        blockTags.firstOrNull { it.name == PROPERTYSETTER }
+        blockTags.firstOrNull { it.name == PROPERTY_SETTER }
     }
 
     val propertyGetterBlockTag by lazy {
-        blockTags.firstOrNull { it.name == PROPERTYGETTER }
+        blockTags.firstOrNull { it.name == PROPERTY_GETTER }
     }
 
     fun hasTags(vararg tags: KoTag) = tags.all {

@@ -14,6 +14,6 @@ enum class KoTag(val type: String, val isValued: Boolean = false) {
     SINCE("@since"),
     SUPPRESS("@suppress"),
     VERSION("@version"),
-    PROPERTYSETTER("@propertySetter"),
-    PROPERTYGETTER("@propertyGetter"),
+    PROPERTY_SETTER("@propertySetter"),
+    PROPERTY_GETTER("@propertyGetter"),
 }
