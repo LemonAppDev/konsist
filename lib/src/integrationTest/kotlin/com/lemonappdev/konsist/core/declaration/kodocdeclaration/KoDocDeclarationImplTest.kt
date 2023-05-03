@@ -25,7 +25,7 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class KoDocDeclarationTest {
+class KoDocDeclarationImplTest {
     @Test
     fun `block-tags class`() {
         // given

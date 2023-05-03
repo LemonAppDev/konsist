@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core
 
 import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.KoScopeCreator
-import com.lemonappdev.konsist.core.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.core.declaration.KoFileDeclarationImpl
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
@@ -114,7 +114,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koKoFile)
     }
 
-    private fun isTestFile(it: KoFileDeclaration): Boolean {
+    private fun isTestFile(it: KoFileDeclarationImpl): Boolean {
         val path = it.filePath.lowercase()
         return path.contains("test/") || path.contains("/test")
     }

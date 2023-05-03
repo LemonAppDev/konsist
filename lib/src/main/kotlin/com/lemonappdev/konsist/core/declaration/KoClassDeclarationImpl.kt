@@ -9,13 +9,13 @@ import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 @Suppress("detekt.TooManyFunctions")
-class KoClassDeclaration private constructor(private val ktClass: KtClass) : KoComplexDeclaration(ktClass) {
+class KoClassDeclarationImpl private constructor(private val ktClass: KtClass) : KoComplexDeclarationImpl(ktClass) {
     val parents by lazy {
         ktClass
             .getSuperTypeList()
             ?.children
             ?.filterIsInstance<KtSuperTypeListEntry>()
-            ?.map { KoParentDeclaration.getInstance(it) } ?: emptyList()
+            ?.map { KoParentDeclarationImpl.getInstance(it) } ?: emptyList()
     }
 
     val parentInterfaces by lazy {
@@ -30,7 +30,7 @@ class KoClassDeclaration private constructor(private val ktClass: KtClass) : KoC
             ?.filterIsInstance<KtDelegatedSuperTypeEntry>() ?: emptyList()
 
         val all = interfaces + delegations
-        all.map { KoParentDeclaration.getInstance(it) }
+        all.map { KoParentDeclarationImpl.getInstance(it) }
     }
 
     val parentClass by lazy {
@@ -40,19 +40,19 @@ class KoClassDeclaration private constructor(private val ktClass: KtClass) : KoC
             ?.filterIsInstance<KtSuperTypeCallEntry>()
             ?.first()
 
-        parentClass?.let { KoParentDeclaration.getInstance(it) }
+        parentClass?.let { KoParentDeclarationImpl.getInstance(it) }
     }
 
     val primaryConstructor by lazy {
         val localPrimaryConstructor = ktClass.primaryConstructor ?: return@lazy null
 
-        KoPrimaryConstructorDeclaration.getInstance(localPrimaryConstructor)
+        KoPrimaryConstructorDeclarationImpl.getInstance(localPrimaryConstructor)
     }
 
     val secondaryConstructors by lazy {
         ktClass
             .secondaryConstructors
-            .map { KoSecondaryConstructorDeclaration.getInstance(it) }
+            .map { KoSecondaryConstructorDeclarationImpl.getInstance(it) }
     }
 
     val allConstructors = listOfNotNull(primaryConstructor) + secondaryConstructors
@@ -101,8 +101,8 @@ class KoClassDeclaration private constructor(private val ktClass: KtClass) : KoC
     }
 
     companion object {
-        private val cache = KoDeclarationCache<KoClassDeclaration>()
+        private val cache = KoDeclarationCache<KoClassDeclarationImpl>()
 
-        fun getInstance(ktClass: KtClass) = cache.getOrCreateInstance(ktClass) { KoClassDeclaration(ktClass) }
+        fun getInstance(ktClass: KtClass) = cache.getOrCreateInstance(ktClass) { KoClassDeclarationImpl(ktClass) }
     }
 }

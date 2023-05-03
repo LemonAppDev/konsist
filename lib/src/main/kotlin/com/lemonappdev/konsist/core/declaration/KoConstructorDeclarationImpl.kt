@@ -2,6 +2,6 @@ package com.lemonappdev.konsist.core.declaration
 
 import org.jetbrains.kotlin.psi.KtConstructor
 
-open class KoConstructorDeclaration(
+open class KoConstructorDeclarationImpl(
     ktConstructor: KtConstructor<*>,
-) : KoParametrizedDeclaration(ktConstructor)
+) : KoParametrizedDeclarationImpl(ktConstructor)

@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.api.ext.withName
-import com.lemonappdev.konsist.api.ext.withoutName
-import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
+import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -12,10 +10,10 @@ class KoCompanionObjectDeclarationSequenceExtTest {
     @Test
     fun `withName() returns companion object with name`() {
         // given
-        val companionObject1: KoCompanionObjectDeclaration = mockk {
+        val companionObject1: KoCompanionObjectDeclarationImpl = mockk {
             every { hasName() } returns true
         }
-        val companionObject2: KoCompanionObjectDeclaration = mockk {
+        val companionObject2: KoCompanionObjectDeclarationImpl = mockk {
             every { hasName() } returns false
         }
         val companionObjects = sequenceOf(companionObject1, companionObject2)
@@ -30,10 +28,10 @@ class KoCompanionObjectDeclarationSequenceExtTest {
     @Test
     fun `withoutName() returns companion object without name`() {
         // given
-        val companionObject1: KoCompanionObjectDeclaration = mockk {
+        val companionObject1: KoCompanionObjectDeclarationImpl = mockk {
             every { hasName() } returns true
         }
-        val companionObject2: KoCompanionObjectDeclaration = mockk {
+        val companionObject2: KoCompanionObjectDeclarationImpl = mockk {
             every { hasName() } returns false
         }
         val companionObjects = sequenceOf(companionObject1, companionObject2)

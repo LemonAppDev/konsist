@@ -1,16 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.api.ext.withName
-import com.lemonappdev.konsist.api.ext.withNameContaining
-import com.lemonappdev.konsist.api.ext.withNameMatching
-import com.lemonappdev.konsist.api.ext.withNamePrefix
-import com.lemonappdev.konsist.api.ext.withNameSuffix
-import com.lemonappdev.konsist.api.ext.withoutName
-import com.lemonappdev.konsist.api.ext.withoutNameContaining
-import com.lemonappdev.konsist.api.ext.withoutNameMatching
-import com.lemonappdev.konsist.api.ext.withoutNamePrefix
-import com.lemonappdev.konsist.api.ext.withoutNameSuffix
-import com.lemonappdev.konsist.core.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.core.declaration.KoNamedDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -23,13 +13,13 @@ class KoNamedDeclarationSequenceExtTest {
         val name1 = "sampleName1"
         val name2 = "sampleName2"
         val name3 = "sampleName3"
-        val namedDeclaration1: KoNamedDeclaration = mockk {
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
             every { name } returns name1
         }
-        val namedDeclaration2: KoNamedDeclaration = mockk {
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
             every { name } returns name2
         }
-        val namedDeclaration3: KoNamedDeclaration = mockk {
+        val namedDeclaration3: KoNamedDeclarationImpl = mockk {
             every { name } returns name3
         }
         val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
@@ -47,13 +37,13 @@ class KoNamedDeclarationSequenceExtTest {
         val name1 = "sampleName1"
         val name2 = "sampleName2"
         val name3 = "sampleName3"
-        val namedDeclaration1: KoNamedDeclaration = mockk {
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
             every { name } returns name1
         }
-        val namedDeclaration2: KoNamedDeclaration = mockk {
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
             every { name } returns name2
         }
-        val namedDeclaration3: KoNamedDeclaration = mockk {
+        val namedDeclaration3: KoNamedDeclarationImpl = mockk {
             every { name } returns name3
         }
         val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
@@ -70,15 +60,15 @@ class KoNamedDeclarationSequenceExtTest {
         // given
         val prefix1 = "prefix1"
         val prefix2 = "prefix2"
-        val namedDeclaration1: KoNamedDeclaration = mockk {
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
             every { hasNameWithPrefix(prefix1) } returns true
             every { hasNameWithPrefix(prefix2) } returns true
         }
-        val namedDeclaration2: KoNamedDeclaration = mockk {
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
             every { hasNameWithPrefix(prefix1) } returns true
             every { hasNameWithPrefix(prefix2) } returns false
         }
-        val namedDeclaration3: KoNamedDeclaration = mockk {
+        val namedDeclaration3: KoNamedDeclarationImpl = mockk {
             every { hasNameWithPrefix(prefix1) } returns false
             every { hasNameWithPrefix(prefix2) } returns false
         }
@@ -96,15 +86,15 @@ class KoNamedDeclarationSequenceExtTest {
         // given
         val prefix1 = "prefix1"
         val prefix2 = "prefix2"
-        val namedDeclaration1: KoNamedDeclaration = mockk {
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
             every { hasNameWithPrefix(prefix1) } returns true
             every { hasNameWithPrefix(prefix2) } returns true
         }
-        val namedDeclaration2: KoNamedDeclaration = mockk {
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
             every { hasNameWithPrefix(prefix1) } returns true
             every { hasNameWithPrefix(prefix2) } returns false
         }
-        val namedDeclaration3: KoNamedDeclaration = mockk {
+        val namedDeclaration3: KoNamedDeclarationImpl = mockk {
             every { hasNameWithPrefix(prefix1) } returns false
             every { hasNameWithPrefix(prefix2) } returns false
         }
@@ -122,15 +112,15 @@ class KoNamedDeclarationSequenceExtTest {
         // given
         val suffix1 = "suffix1"
         val suffix2 = "suffix2"
-        val namedDeclaration1: KoNamedDeclaration = mockk {
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
             every { hasNameWithSuffix(suffix1) } returns true
             every { hasNameWithSuffix(suffix2) } returns true
         }
-        val namedDeclaration2: KoNamedDeclaration = mockk {
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
             every { hasNameWithSuffix(suffix1) } returns true
             every { hasNameWithSuffix(suffix2) } returns false
         }
-        val namedDeclaration3: KoNamedDeclaration = mockk {
+        val namedDeclaration3: KoNamedDeclarationImpl = mockk {
             every { hasNameWithSuffix(suffix1) } returns false
             every { hasNameWithSuffix(suffix2) } returns false
         }
@@ -148,15 +138,15 @@ class KoNamedDeclarationSequenceExtTest {
         // given
         val suffix1 = "suffix1"
         val suffix2 = "suffix2"
-        val namedDeclaration1: KoNamedDeclaration = mockk {
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
             every { hasNameWithSuffix(suffix1) } returns true
             every { hasNameWithSuffix(suffix2) } returns true
         }
-        val namedDeclaration2: KoNamedDeclaration = mockk {
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
             every { hasNameWithSuffix(suffix1) } returns true
             every { hasNameWithSuffix(suffix2) } returns false
         }
-        val namedDeclaration3: KoNamedDeclaration = mockk {
+        val namedDeclaration3: KoNamedDeclarationImpl = mockk {
             every { hasNameWithSuffix(suffix1) } returns false
             every { hasNameWithSuffix(suffix2) } returns false
         }
@@ -174,15 +164,15 @@ class KoNamedDeclarationSequenceExtTest {
         // given
         val text1 = "text1"
         val text2 = "text2"
-        val namedDeclaration1: KoNamedDeclaration = mockk {
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
             every { hasNameContaining(text1) } returns true
             every { hasNameContaining(text2) } returns true
         }
-        val namedDeclaration2: KoNamedDeclaration = mockk {
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
             every { hasNameContaining(text1) } returns true
             every { hasNameContaining(text2) } returns false
         }
-        val namedDeclaration3: KoNamedDeclaration = mockk {
+        val namedDeclaration3: KoNamedDeclarationImpl = mockk {
             every { hasNameContaining(text1) } returns false
             every { hasNameContaining(text2) } returns false
         }
@@ -200,15 +190,15 @@ class KoNamedDeclarationSequenceExtTest {
         // given
         val text1 = "text1"
         val text2 = "text2"
-        val namedDeclaration1: KoNamedDeclaration = mockk {
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
             every { hasNameContaining(text1) } returns true
             every { hasNameContaining(text2) } returns true
         }
-        val namedDeclaration2: KoNamedDeclaration = mockk {
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
             every { hasNameContaining(text1) } returns true
             every { hasNameContaining(text2) } returns false
         }
-        val namedDeclaration3: KoNamedDeclaration = mockk {
+        val namedDeclaration3: KoNamedDeclarationImpl = mockk {
             every { hasNameContaining(text1) } returns false
             every { hasNameContaining(text2) } returns false
         }
@@ -226,15 +216,15 @@ class KoNamedDeclarationSequenceExtTest {
         // given
         val text1 = Regex("[1-9]")
         val text2 = Regex("[a-z]")
-        val namedDeclaration1: KoNamedDeclaration = mockk {
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
             every { hasNameMatching(text1) } returns true
             every { hasNameMatching(text2) } returns true
         }
-        val namedDeclaration2: KoNamedDeclaration = mockk {
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
             every { hasNameMatching(text1) } returns true
             every { hasNameMatching(text2) } returns false
         }
-        val namedDeclaration3: KoNamedDeclaration = mockk {
+        val namedDeclaration3: KoNamedDeclarationImpl = mockk {
             every { hasNameMatching(text1) } returns false
             every { hasNameMatching(text2) } returns false
         }
@@ -252,15 +242,15 @@ class KoNamedDeclarationSequenceExtTest {
         // given
         val text1 = Regex("[1-9]")
         val text2 = Regex("[a-z]")
-        val namedDeclaration1: KoNamedDeclaration = mockk {
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
             every { hasNameMatching(text1) } returns true
             every { hasNameMatching(text2) } returns true
         }
-        val namedDeclaration2: KoNamedDeclaration = mockk {
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
             every { hasNameMatching(text1) } returns true
             every { hasNameMatching(text2) } returns false
         }
-        val namedDeclaration3: KoNamedDeclaration = mockk {
+        val namedDeclaration3: KoNamedDeclarationImpl = mockk {
             every { hasNameMatching(text1) } returns false
             every { hasNameMatching(text2) } returns false
         }

@@ -9,13 +9,13 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-class KoParameterDeclaration private constructor(private val ktParameter: KtParameter) : KoDeclaration(ktParameter) {
+class KoParameterDeclarationImpl private constructor(private val ktParameter: KtParameter) : KoDeclarationImpl(ktParameter) {
     val type by lazy {
         val type = ktParameter
             .children
             .firstIsInstance<KtTypeReference>()
 
-        KoTypeDeclaration.getInstance(type)
+        KoTypeDeclarationImpl.getInstance(type)
     }
 
     val defaultValue by lazy {
@@ -54,9 +54,9 @@ class KoParameterDeclaration private constructor(private val ktParameter: KtPara
     inline fun <reified T>hasTypeOf() = T::class.simpleName == type.name
 
     companion object {
-        private val cache = KoDeclarationCache<KoParameterDeclaration>()
+        private val cache = KoDeclarationCache<KoParameterDeclarationImpl>()
 
         fun getInstance(ktParameter: KtParameter) =
-            cache.getOrCreateInstance(ktParameter) { KoParameterDeclaration(ktParameter) }
+            cache.getOrCreateInstance(ktParameter) { KoParameterDeclarationImpl(ktParameter) }
     }
 }

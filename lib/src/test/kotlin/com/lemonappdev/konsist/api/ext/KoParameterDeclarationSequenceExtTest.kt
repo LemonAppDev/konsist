@@ -1,18 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.api.ext.withCrossInlineModifier
-import com.lemonappdev.konsist.api.ext.withDefaultValue
-import com.lemonappdev.konsist.api.ext.withNoInlineModifier
-import com.lemonappdev.konsist.api.ext.withType
-import com.lemonappdev.konsist.api.ext.withTypeOf
-import com.lemonappdev.konsist.api.ext.withVarargModifier
-import com.lemonappdev.konsist.api.ext.withoutCrossInlineModifier
-import com.lemonappdev.konsist.api.ext.withoutDefaultValue
-import com.lemonappdev.konsist.api.ext.withoutNoInlineModifier
-import com.lemonappdev.konsist.api.ext.withoutType
-import com.lemonappdev.konsist.api.ext.withoutTypeOf
-import com.lemonappdev.konsist.api.ext.withoutVarargModifier
-import com.lemonappdev.konsist.core.declaration.KoParameterDeclaration
+import com.lemonappdev.konsist.core.declaration.KoParameterDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleType
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
@@ -25,10 +13,10 @@ class KoParameterDeclarationSequenceExtTest {
     @Test
     fun `withVarargModifier() returns parameter1 with vararg modifier`() {
         // given
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasVarargModifier() } returns true
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasVarargModifier() } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
@@ -43,10 +31,10 @@ class KoParameterDeclarationSequenceExtTest {
     @Test
     fun `withoutVarargModifier() returns parameter2 without vararg modifier`() {
         // given
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasVarargModifier() } returns true
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasVarargModifier() } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
@@ -61,10 +49,10 @@ class KoParameterDeclarationSequenceExtTest {
     @Test
     fun `withNoInlineModifier() returns parameter1 with noInline modifier`() {
         // given
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasNoInlineModifier() } returns true
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasNoInlineModifier() } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
@@ -79,10 +67,10 @@ class KoParameterDeclarationSequenceExtTest {
     @Test
     fun `withoutNoInlineModifier() returns parameter2 without noInline modifier`() {
         // given
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasNoInlineModifier() } returns true
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasNoInlineModifier() } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
@@ -97,10 +85,10 @@ class KoParameterDeclarationSequenceExtTest {
     @Test
     fun `withCrossInlineModifier() returns parameter1 with crossInline modifier`() {
         // given
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasCrossInlineModifier() } returns true
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasCrossInlineModifier() } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
@@ -115,10 +103,10 @@ class KoParameterDeclarationSequenceExtTest {
     @Test
     fun `withoutCrossInlineModifier() returns parameter2 without crossInline modifier`() {
         // given
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasCrossInlineModifier() } returns true
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasCrossInlineModifier() } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
@@ -133,10 +121,10 @@ class KoParameterDeclarationSequenceExtTest {
     @Test
     fun `withDefaultValue() returns parameter1 which has default value`() {
         // given
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasDefaultValue() } returns true
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasDefaultValue() } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
@@ -151,10 +139,10 @@ class KoParameterDeclarationSequenceExtTest {
     @Test
     fun `withoutDefaultValue() returns parameter2 which has not default value`() {
         // given
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasDefaultValue() } returns true
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasDefaultValue() } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
@@ -171,15 +159,15 @@ class KoParameterDeclarationSequenceExtTest {
         // given
         val value1 = "SampleDefaultValue1"
         val value2 = "SampleDefaultValue2"
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasDefaultValue(value1) } returns true
             every { hasDefaultValue(value2) } returns false
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasDefaultValue(value1) } returns false
             every { hasDefaultValue(value2) } returns true
         }
-        val parameter3: KoParameterDeclaration = mockk {
+        val parameter3: KoParameterDeclarationImpl = mockk {
             every { hasDefaultValue(value1) } returns false
             every { hasDefaultValue(value2) } returns false
         }
@@ -197,15 +185,15 @@ class KoParameterDeclarationSequenceExtTest {
         // given
         val value1 = "SampleDefaultValue1"
         val value2 = "SampleDefaultValue2"
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasDefaultValue(value1) } returns true
             every { hasDefaultValue(value2) } returns false
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasDefaultValue(value1) } returns false
             every { hasDefaultValue(value2) } returns true
         }
-        val parameter3: KoParameterDeclaration = mockk {
+        val parameter3: KoParameterDeclarationImpl = mockk {
             every { hasDefaultValue(value1) } returns false
             every { hasDefaultValue(value2) } returns false
         }
@@ -223,15 +211,15 @@ class KoParameterDeclarationSequenceExtTest {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasType(typeName1) } returns true
             every { hasType(typeName2) } returns false
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasType(typeName1) } returns false
             every { hasType(typeName2) } returns true
         }
-        val parameter3: KoParameterDeclaration = mockk {
+        val parameter3: KoParameterDeclarationImpl = mockk {
             every { hasType(typeName1) } returns false
             every { hasType(typeName2) } returns false
         }
@@ -249,15 +237,15 @@ class KoParameterDeclarationSequenceExtTest {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasType(typeName1) } returns true
             every { hasType(typeName2) } returns false
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasType(typeName1) } returns false
             every { hasType(typeName2) } returns true
         }
-        val parameter3: KoParameterDeclaration = mockk {
+        val parameter3: KoParameterDeclarationImpl = mockk {
             every { hasType(typeName1) } returns false
             every { hasType(typeName2) } returns false
         }
@@ -275,15 +263,15 @@ class KoParameterDeclarationSequenceExtTest {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasType(typeName1) } returns true
             every { hasType(typeName2) } returns false
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasType(typeName1) } returns false
             every { hasType(typeName2) } returns true
         }
-        val parameter3: KoParameterDeclaration = mockk {
+        val parameter3: KoParameterDeclarationImpl = mockk {
             every { hasType(typeName1) } returns false
             every { hasType(typeName2) } returns false
         }
@@ -301,15 +289,15 @@ class KoParameterDeclarationSequenceExtTest {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasType(typeName1) } returns true
             every { hasType(typeName2) } returns false
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { hasType(typeName1) } returns false
             every { hasType(typeName2) } returns true
         }
-        val parameter3: KoParameterDeclaration = mockk {
+        val parameter3: KoParameterDeclarationImpl = mockk {
             every { hasType(typeName1) } returns false
             every { hasType(typeName2) } returns false
         }
@@ -327,10 +315,10 @@ class KoParameterDeclarationSequenceExtTest {
         // given
         val typeName1 = "SampleType"
         val typeName2 = "OtherType"
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { type.name } returns typeName1
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { type.name } returns typeName2
         }
         val parameters = sequenceOf(parameter1, parameter2)
@@ -347,10 +335,10 @@ class KoParameterDeclarationSequenceExtTest {
         // given
         val typeName1 = "SampleType"
         val typeName2 = "OtherType"
-        val parameter1: KoParameterDeclaration = mockk {
+        val parameter1: KoParameterDeclarationImpl = mockk {
             every { type.name } returns typeName1
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val parameter2: KoParameterDeclarationImpl = mockk {
             every { type.name } returns typeName2
         }
         val parameters = sequenceOf(parameter1, parameter2)

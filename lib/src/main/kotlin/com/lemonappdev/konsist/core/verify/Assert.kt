@@ -1,24 +1,24 @@
 package com.lemonappdev.konsist.core.verify
 
-import com.lemonappdev.konsist.core.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.core.declaration.KoDeclaration
-import com.lemonappdev.konsist.core.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.core.declaration.KoBaseDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoNamedDeclarationImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?) {
+fun <E : KoBaseDeclarationImpl> Sequence<E>.assert(function: (E) -> Boolean?) {
     assert(function, true)
 }
 
-fun <E : KoBaseDeclaration> Sequence<E>.assertNot(function: (E) -> Boolean?) {
+fun <E : KoBaseDeclarationImpl> Sequence<E>.assertNot(function: (E) -> Boolean?) {
     assert(function, false)
 }
 
 @Suppress("detekt.ThrowsCount")
-private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
-    var lastDeclaration: KoBaseDeclaration? = null
+private fun <E : KoBaseDeclarationImpl> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
+    var lastDeclaration: KoBaseDeclarationImpl? = null
 
     try {
         val localList = this.toList()
@@ -32,7 +32,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
         }
 
         val result = localList.groupBy {
-            lastDeclaration = it as? KoDeclaration
+            lastDeclaration = it as? KoDeclarationImpl
             function(it)
         }
 
@@ -49,10 +49,10 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
     }
 }
 
-private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: List<E>): String {
+private fun <E : KoBaseDeclarationImpl> getCheckFailedMessage(failedDeclarations: List<E>): String {
     val testMethodName = Thread.currentThread().stackTrace[4].methodName
     val failedDeclarationsMessage = failedDeclarations.joinToString("\n") {
-        val name = if (it is KoNamedDeclaration) it.name else ""
+        val name = if (it is KoNamedDeclarationImpl) it.name else ""
         val konsistDeclarationClassNamePrefix = "Ko"
         val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
 

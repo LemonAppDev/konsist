@@ -1,16 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.api.ext.withFullyQualifiedName
-import com.lemonappdev.konsist.api.ext.withImportAlias
-import com.lemonappdev.konsist.api.ext.withImportAliasOf
-import com.lemonappdev.konsist.api.ext.withSourceType
-import com.lemonappdev.konsist.api.ext.withSourceTypeOf
-import com.lemonappdev.konsist.api.ext.withoutFullyQualifiedName
-import com.lemonappdev.konsist.api.ext.withoutImportAlias
-import com.lemonappdev.konsist.api.ext.withoutImportAliasOf
-import com.lemonappdev.konsist.api.ext.withoutSourceType
-import com.lemonappdev.konsist.api.ext.withoutSourceTypeOf
-import com.lemonappdev.konsist.core.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.core.declaration.KoTypeDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1
 import com.lemonappdev.konsist.testdata.SampleClass2
@@ -28,10 +18,10 @@ class KoTypeDeclarationSequenceExtTest {
         // given
         val sourceType1 = "SampleClass"
         val sourceType2 = "OtherClass"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType2
         }
         val types = sequenceOf(type1, type2)
@@ -48,10 +38,10 @@ class KoTypeDeclarationSequenceExtTest {
         // given
         val sourceType1 = "SampleClass"
         val sourceType2 = "OtherClass"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType2
         }
         val types = sequenceOf(type1, type2)
@@ -69,13 +59,13 @@ class KoTypeDeclarationSequenceExtTest {
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
         val sourceType3 = "SampleClass3"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType2
         }
-        val type3: KoTypeDeclaration = mockk {
+        val type3: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType3
         }
         val types = sequenceOf(type1, type2, type3)
@@ -93,13 +83,13 @@ class KoTypeDeclarationSequenceExtTest {
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
         val sourceType3 = "SampleClass3"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType2
         }
-        val type3: KoTypeDeclaration = mockk {
+        val type3: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType3
         }
         val types = sequenceOf(type1, type2, type3)
@@ -117,13 +107,13 @@ class KoTypeDeclarationSequenceExtTest {
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
         val sourceType3 = "SampleClass3"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType2
         }
-        val type3: KoTypeDeclaration = mockk {
+        val type3: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType3
         }
         val types = sequenceOf(type1, type2, type3)
@@ -141,13 +131,13 @@ class KoTypeDeclarationSequenceExtTest {
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
         val sourceType3 = "SampleClass3"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType2
         }
-        val type3: KoTypeDeclaration = mockk {
+        val type3: KoTypeDeclarationImpl = mockk {
             every { sourceType } returns sourceType3
         }
         val types = sequenceOf(type1, type2, type3)
@@ -164,19 +154,19 @@ class KoTypeDeclarationSequenceExtTest {
         // given
         val sourceType1 = "SampleType"
         val sourceType2 = "Sample"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns true
             every { sourceType } returns sourceType1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns true
             every { sourceType } returns sourceType2
         }
-        val type3: KoTypeDeclaration = mockk {
+        val type3: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns false
             every { sourceType } returns sourceType1
         }
-        val type4: KoTypeDeclaration = mockk {
+        val type4: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns false
             every { sourceType } returns sourceType2
         }
@@ -194,19 +184,19 @@ class KoTypeDeclarationSequenceExtTest {
         // given
         val sourceType1 = "SampleType"
         val sourceType2 = "Sample"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns true
             every { sourceType } returns sourceType1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns true
             every { sourceType } returns sourceType2
         }
-        val type3: KoTypeDeclaration = mockk {
+        val type3: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns false
             every { sourceType } returns sourceType1
         }
-        val type4: KoTypeDeclaration = mockk {
+        val type4: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns false
             every { sourceType } returns sourceType2
         }
@@ -225,19 +215,19 @@ class KoTypeDeclarationSequenceExtTest {
         val sourceType1 = "SampleType1"
         val sourceType2 = "SampleType2"
         val sourceType3 = "SampleType3"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns true
             every { sourceType } returns sourceType1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns true
             every { sourceType } returns sourceType2
         }
-        val type3: KoTypeDeclaration = mockk {
+        val type3: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns false
             every { sourceType } returns sourceType1
         }
-        val type4: KoTypeDeclaration = mockk {
+        val type4: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns false
             every { sourceType } returns sourceType3
         }
@@ -256,19 +246,19 @@ class KoTypeDeclarationSequenceExtTest {
         val sourceType1 = "SampleType1"
         val sourceType2 = "SampleType2"
         val sourceType3 = "SampleType3"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns true
             every { sourceType } returns sourceType1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns true
             every { sourceType } returns sourceType2
         }
-        val type3: KoTypeDeclaration = mockk {
+        val type3: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns false
             every { sourceType } returns sourceType1
         }
-        val type4: KoTypeDeclaration = mockk {
+        val type4: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns false
             every { sourceType } returns sourceType3
         }
@@ -287,13 +277,13 @@ class KoTypeDeclarationSequenceExtTest {
         val importAliasName1 = "SampleImportAlias1"
         val importAliasName2 = "SampleImportAlias2"
         val importAliasName3 = "SampleImportAlias3"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { importAliasName } returns importAliasName1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { importAliasName } returns importAliasName2
         }
-        val type3: KoTypeDeclaration = mockk {
+        val type3: KoTypeDeclarationImpl = mockk {
             every { importAliasName } returns importAliasName3
         }
         val types = sequenceOf(type1, type2, type3)
@@ -311,13 +301,13 @@ class KoTypeDeclarationSequenceExtTest {
         val importAliasName1 = "SampleImportAlias1"
         val importAliasName2 = "SampleImportAlias2"
         val importAliasName3 = "SampleImportAlias3"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { importAliasName } returns importAliasName1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { importAliasName } returns importAliasName2
         }
-        val type3: KoTypeDeclaration = mockk {
+        val type3: KoTypeDeclarationImpl = mockk {
             every { importAliasName } returns importAliasName3
         }
         val types = sequenceOf(type1, type2, type3)
@@ -335,13 +325,13 @@ class KoTypeDeclarationSequenceExtTest {
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
         val fullyQualifiedName3 = "fullyQualifiedName3"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName2
         }
-        val type3: KoTypeDeclaration = mockk {
+        val type3: KoTypeDeclarationImpl = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName3
         }
         val types = sequenceOf(type1, type2, type3)
@@ -359,13 +349,13 @@ class KoTypeDeclarationSequenceExtTest {
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
         val fullyQualifiedName3 = "fullyQualifiedName3"
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName1
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName2
         }
-        val type3: KoTypeDeclaration = mockk {
+        val type3: KoTypeDeclarationImpl = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName3
         }
         val types = sequenceOf(type1, type2, type3)
@@ -380,10 +370,10 @@ class KoTypeDeclarationSequenceExtTest {
     @Test
     fun `withImportAlias() returns type1 which has given name`() {
         // given
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns true
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns false
         }
         val types = sequenceOf(type1, type2)
@@ -398,10 +388,10 @@ class KoTypeDeclarationSequenceExtTest {
     @Test
     fun `withoutImportAlias() returns type2 which has not given name`() {
         // given
-        val type1: KoTypeDeclaration = mockk {
+        val type1: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns true
         }
-        val type2: KoTypeDeclaration = mockk {
+        val type2: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns false
         }
         val types = sequenceOf(type1, type2)

@@ -2,11 +2,11 @@ package com.lemonappdev.konsist.core.declaration
 
 import org.jetbrains.kotlin.psi.KtFunction
 
-abstract class KoParametrizedDeclaration(
+abstract class KoParametrizedDeclarationImpl(
     private val ktFunction: KtFunction,
-) : KoDeclaration(ktFunction) {
+) : KoDeclarationImpl(ktFunction) {
 
-    val parameters by lazy { ktFunction.valueParameters.map { KoParameterDeclaration.getInstance(it) } }
+    val parameters by lazy { ktFunction.valueParameters.map { KoParameterDeclarationImpl.getInstance(it) } }
 
     fun hasParameterNamed(name: String? = null) = when (name) {
         null -> parameters.isNotEmpty()

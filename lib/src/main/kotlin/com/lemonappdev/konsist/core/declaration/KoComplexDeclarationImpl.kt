@@ -10,9 +10,9 @@ import com.lemonappdev.konsist.core.declaration.provider.KoObjectProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoPropertyProvider
 import org.jetbrains.kotlin.psi.KtClassOrObject
 
-abstract class KoComplexDeclaration(
+abstract class KoComplexDeclarationImpl(
     private val ktClassOrObject: KtClassOrObject,
-) : KoDeclaration(ktClassOrObject),
+) : KoDeclarationImpl(ktClassOrObject),
     KoClassProvider,
     KoInterfaceProvider,
     KoObjectProvider,
@@ -29,5 +29,5 @@ abstract class KoComplexDeclaration(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoDeclaration> = KoDeclarationProviderUtil.getKoDeclarations(ktClassOrObject, modifiers, includeNested, includeLocal)
+    ): Sequence<KoDeclarationImpl> = KoDeclarationProviderUtil.getKoDeclarations(ktClassOrObject, modifiers, includeNested, includeLocal)
 }

@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-class KoPropertyDeclaration private constructor(private val ktProperty: KtProperty) : KoDeclaration(ktProperty) {
+class KoPropertyDeclarationImpl private constructor(private val ktProperty: KtProperty) : KoDeclarationImpl(ktProperty) {
     val isVar by lazy { ktProperty.isVar }
 
     val isVal by lazy { !ktProperty.isVar }
@@ -27,7 +27,7 @@ class KoPropertyDeclaration private constructor(private val ktProperty: KtProper
             .children
             .firstIsInstanceOrNull<KtTypeReference>()
 
-        type?.let { KoTypeDeclaration.getInstance(it) }
+        type?.let { KoTypeDeclarationImpl.getInstance(it) }
     }
 
     fun hasLateinitModifier() = hasModifiers(KoModifier.LATEINIT)
@@ -59,8 +59,8 @@ class KoPropertyDeclaration private constructor(private val ktProperty: KtProper
     }
 
     companion object {
-        private val cache = KoDeclarationCache<KoPropertyDeclaration>()
+        private val cache = KoDeclarationCache<KoPropertyDeclarationImpl>()
 
-        fun getInstance(ktProperty: KtProperty) = cache.getOrCreateInstance(ktProperty) { KoPropertyDeclaration(ktProperty) }
+        fun getInstance(ktProperty: KtProperty) = cache.getOrCreateInstance(ktProperty) { KoPropertyDeclarationImpl(ktProperty) }
     }
 }

@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.util.PackageHelper
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import java.io.File
 
-open class KoPsiDeclaration(private val psiElement: PsiElement) {
+open class KoPsiDeclarationImpl(private val psiElement: PsiElement) {
     /**
      * File path of the declaration
      */

@@ -19,7 +19,7 @@ import com.lemonappdev.konsist.api.KoTag.VERSION
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
-class KoDocDeclaration(private val kDocElement: KDocElement) : KoPsiDeclaration(kDocElement) {
+class KoDocDeclarationImplImpl(private val kDocElement: KDocElement) : KoPsiDeclarationImpl(kDocElement) {
     override val text: String by lazy {
         (kDocElement.text.split("\n") as MutableList)
             .also {
@@ -70,7 +70,7 @@ class KoDocDeclaration(private val kDocElement: KDocElement) : KoPsiDeclaration(
 
     val paramBlockTags by lazy {
         blockTags.filter { it.name == PARAM }
-            .map { it as KoValuedDocTagDeclaration }
+            .map { it as KoValuedDocTagDeclarationImpl }
     }
 
     val returnBlockTag by lazy {
@@ -87,27 +87,27 @@ class KoDocDeclaration(private val kDocElement: KDocElement) : KoPsiDeclaration(
 
     val propertyBlockTags by lazy {
         blockTags.filter { it.name == PROPERTY }
-            .map { it as KoValuedDocTagDeclaration }
+            .map { it as KoValuedDocTagDeclarationImpl }
     }
 
     val throwsBlockTags by lazy {
         blockTags.filter { it.name == THROWS }
-            .map { it as KoValuedDocTagDeclaration }
+            .map { it as KoValuedDocTagDeclarationImpl }
     }
 
     val exceptionBlockTags by lazy {
         blockTags.filter { it.name == EXCEPTION }
-            .map { it as KoValuedDocTagDeclaration }
+            .map { it as KoValuedDocTagDeclarationImpl }
     }
 
     val sampleBlockTags by lazy {
         blockTags.filter { it.name == SAMPLE }
-            .map { it as KoValuedDocTagDeclaration }
+            .map { it as KoValuedDocTagDeclarationImpl }
     }
 
     val seeBlockTags by lazy {
         blockTags.filter { it.name == SEE }
-            .map { it as KoValuedDocTagDeclaration }
+            .map { it as KoValuedDocTagDeclarationImpl }
     }
 
     val authorBlockTags by lazy {
@@ -140,21 +140,21 @@ class KoDocDeclaration(private val kDocElement: KDocElement) : KoPsiDeclaration(
             .contains(it)
     }
 
-    private fun parseToValuedBlockTag(koTag: KoTag, sentence: String): KoValuedDocTagDeclaration {
+    private fun parseToValuedBlockTag(koTag: KoTag, sentence: String): KoValuedDocTagDeclarationImpl {
         val parsed = sentence.split(" ")
         val description = parsed
             .subList(2, parsed.size)
             .joinToString(" ")
 
-        return KoValuedDocTagDeclaration(koTag, parsed[1], description)
+        return KoValuedDocTagDeclarationImpl(koTag, parsed[1], description)
     }
 
-    private fun parseToBlockTag(koTag: KoTag, sentence: String): KoDocTagDeclaration {
+    private fun parseToBlockTag(koTag: KoTag, sentence: String): KoDocTagDeclarationImpl {
         val parsed = sentence.split(" ")
         val description = parsed
             .subList(1, parsed.size)
             .joinToString(" ")
 
-        return KoDocTagDeclaration(koTag, description)
+        return KoDocTagDeclarationImpl(koTag, description)
     }
 }

@@ -1,10 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.api.ext.withActualModifier
-import com.lemonappdev.konsist.api.ext.withExpectModifier
-import com.lemonappdev.konsist.api.ext.withoutActualModifier
-import com.lemonappdev.konsist.api.ext.withoutExpectModifier
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -14,10 +10,10 @@ class KoInterfaceDeclarationSequenceExtTest {
     @Test
     fun `withActualModifier() returns interface1 with actual modifier`() {
         // given
-        val interface1: KoInterfaceDeclaration = mockk {
+        val interface1: KoInterfaceDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
         }
-        val interface2: KoInterfaceDeclaration = mockk {
+        val interface2: KoInterfaceDeclarationImpl = mockk {
             every { hasActualModifier() } returns false
         }
         val interfaces = sequenceOf(interface1, interface2)
@@ -32,10 +28,10 @@ class KoInterfaceDeclarationSequenceExtTest {
     @Test
     fun `withoutActualModifier() returns interface2 without actual modifier`() {
         // given
-        val interface1: KoInterfaceDeclaration = mockk {
+        val interface1: KoInterfaceDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
         }
-        val interface2: KoInterfaceDeclaration = mockk {
+        val interface2: KoInterfaceDeclarationImpl = mockk {
             every { hasActualModifier() } returns false
         }
         val interfaces = sequenceOf(interface1, interface2)
@@ -50,10 +46,10 @@ class KoInterfaceDeclarationSequenceExtTest {
     @Test
     fun `withExpectModifier() returns interface1 with expect modifier`() {
         // given
-        val interface1: KoInterfaceDeclaration = mockk {
+        val interface1: KoInterfaceDeclarationImpl = mockk {
             every { hasExpectModifier() } returns true
         }
-        val interface2: KoInterfaceDeclaration = mockk {
+        val interface2: KoInterfaceDeclarationImpl = mockk {
             every { hasExpectModifier() } returns false
         }
         val interfaces = sequenceOf(interface1, interface2)
@@ -68,10 +64,10 @@ class KoInterfaceDeclarationSequenceExtTest {
     @Test
     fun `withoutExpectModifier() returns interface2 without expect modifier`() {
         // given
-        val interface1: KoInterfaceDeclaration = mockk {
+        val interface1: KoInterfaceDeclarationImpl = mockk {
             every { hasExpectModifier() } returns true
         }
-        val interface2: KoInterfaceDeclaration = mockk {
+        val interface2: KoInterfaceDeclarationImpl = mockk {
             every { hasExpectModifier() } returns false
         }
         val interfaces = sequenceOf(interface1, interface2)

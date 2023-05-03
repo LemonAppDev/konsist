@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.api.ext.withQualifiedName
-import com.lemonappdev.konsist.api.ext.withoutQualifiedName
-import com.lemonappdev.konsist.core.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -15,13 +13,13 @@ class KoPackageDeclarationSequenceExtTest {
         val qualifiedName1 = "com.samplepackage1"
         val qualifiedName2 = "com.samplepackage2"
         val qualifiedName3 = "com.samplepackage3"
-        val package1: KoPackageDeclaration = mockk {
+        val package1: KoPackageDeclarationImpl = mockk {
             every { qualifiedName } returns qualifiedName1
         }
-        val package2: KoPackageDeclaration = mockk {
+        val package2: KoPackageDeclarationImpl = mockk {
             every { qualifiedName } returns qualifiedName2
         }
-        val package3: KoPackageDeclaration = mockk {
+        val package3: KoPackageDeclarationImpl = mockk {
             every { qualifiedName } returns qualifiedName3
         }
         val packages = sequenceOf(package1, package2, package3)
@@ -39,13 +37,13 @@ class KoPackageDeclarationSequenceExtTest {
         val qualifiedName1 = "com.samplepackage1"
         val qualifiedName2 = "com.samplepackage2"
         val qualifiedName3 = "com.samplepackage3"
-        val package1: KoPackageDeclaration = mockk {
+        val package1: KoPackageDeclarationImpl = mockk {
             every { qualifiedName } returns qualifiedName1
         }
-        val package2: KoPackageDeclaration = mockk {
+        val package2: KoPackageDeclarationImpl = mockk {
             every { qualifiedName } returns qualifiedName2
         }
-        val package3: KoPackageDeclaration = mockk {
+        val package3: KoPackageDeclarationImpl = mockk {
             every { qualifiedName } returns qualifiedName3
         }
         val packages = sequenceOf(package1, package2, package3)

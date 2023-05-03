@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
@@ -15,15 +15,15 @@ class KoAnnotationDeclarationSequenceExtTest {
         // given
         val type1 = "type1"
         val type2 = "type2"
-        val annotation1: KoAnnotationDeclaration = mockk {
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns true
             every { representsType(type2) } returns true
         }
-        val annotation2: KoAnnotationDeclaration = mockk {
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns true
             every { representsType(type2) } returns false
         }
-        val annotation3: KoAnnotationDeclaration = mockk {
+        val annotation3: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns false
             every { representsType(type2) } returns false
         }
@@ -41,15 +41,15 @@ class KoAnnotationDeclarationSequenceExtTest {
         // given
         val type1 = "type1"
         val type2 = "type2"
-        val annotation1: KoAnnotationDeclaration = mockk {
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns true
             every { representsType(type2) } returns true
         }
-        val annotation2: KoAnnotationDeclaration = mockk {
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns true
             every { representsType(type2) } returns false
         }
-        val annotation3: KoAnnotationDeclaration = mockk {
+        val annotation3: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns false
             every { representsType(type2) } returns false
         }
@@ -67,15 +67,15 @@ class KoAnnotationDeclarationSequenceExtTest {
         // given
         val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
         val type2 = "com.lemonappdev.konsist.testdata.SampleAnnotation2"
-        val annotation1: KoAnnotationDeclaration = mockk {
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns true
             every { representsType(type2) } returns false
         }
-        val annotation2: KoAnnotationDeclaration = mockk {
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns false
             every { representsType(type2) } returns true
         }
-        val annotation3: KoAnnotationDeclaration = mockk {
+        val annotation3: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns false
             every { representsType(type2) } returns false
         }
@@ -93,15 +93,15 @@ class KoAnnotationDeclarationSequenceExtTest {
         // given
         val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
         val type2 = "com.lemonappdev.konsist.testdata.SampleAnnotation2"
-        val annotation1: KoAnnotationDeclaration = mockk {
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns true
             every { representsType(type2) } returns false
         }
-        val annotation2: KoAnnotationDeclaration = mockk {
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns false
             every { representsType(type2) } returns true
         }
-        val annotation3: KoAnnotationDeclaration = mockk {
+        val annotation3: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns false
             every { representsType(type2) } returns false
         }
@@ -118,10 +118,10 @@ class KoAnnotationDeclarationSequenceExtTest {
     @Test
     fun `withTypeOf() with KClass syntax returns SampleAnnotation`() {
         // given
-        val annotation1: KoAnnotationDeclaration = mockk {
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleAnnotation"
         }
-        val annotation2: KoAnnotationDeclaration = mockk {
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
         }
         val annotations = sequenceOf(annotation1, annotation2)
@@ -136,10 +136,10 @@ class KoAnnotationDeclarationSequenceExtTest {
     @Test
     fun `withoutTypeOf() with KClass syntax returns annotation without SampleAnnotation`() {
         // given
-        val annotation1: KoAnnotationDeclaration = mockk {
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleAnnotation"
         }
-        val annotation2: KoAnnotationDeclaration = mockk {
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
         }
         val annotations = sequenceOf(annotation1, annotation2)
@@ -157,13 +157,13 @@ class KoAnnotationDeclarationSequenceExtTest {
         val name1 = "name1"
         val name2 = "name2"
         val name3 = "name3"
-        val annotation1: KoAnnotationDeclaration = mockk {
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { name } returns name1
         }
-        val annotation2: KoAnnotationDeclaration = mockk {
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { name } returns name2
         }
-        val annotation3: KoAnnotationDeclaration = mockk {
+        val annotation3: KoAnnotationDeclarationImpl = mockk {
             every { name } returns name3
         }
         val annotations = sequenceOf(annotation1, annotation2, annotation3)
@@ -181,13 +181,13 @@ class KoAnnotationDeclarationSequenceExtTest {
         val name1 = "name1"
         val name2 = "name2"
         val name3 = "name3"
-        val annotation1: KoAnnotationDeclaration = mockk {
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { name } returns name1
         }
-        val annotation2: KoAnnotationDeclaration = mockk {
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { name } returns name2
         }
-        val annotation3: KoAnnotationDeclaration = mockk {
+        val annotation3: KoAnnotationDeclarationImpl = mockk {
             every { name } returns name3
         }
         val annotations = sequenceOf(annotation1, annotation2, annotation3)
@@ -205,13 +205,13 @@ class KoAnnotationDeclarationSequenceExtTest {
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
         val fullyQualifiedName3 = "fullyQualifiedName3"
-        val annotation1: KoAnnotationDeclaration = mockk {
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName1
         }
-        val annotation2: KoAnnotationDeclaration = mockk {
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName2
         }
-        val annotation3: KoAnnotationDeclaration = mockk {
+        val annotation3: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName3
         }
         val annotations = sequenceOf(annotation1, annotation2, annotation3)
@@ -229,13 +229,13 @@ class KoAnnotationDeclarationSequenceExtTest {
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
         val fullyQualifiedName3 = "fullyQualifiedName3"
-        val annotation1: KoAnnotationDeclaration = mockk {
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName1
         }
-        val annotation2: KoAnnotationDeclaration = mockk {
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName2
         }
-        val annotation3: KoAnnotationDeclaration = mockk {
+        val annotation3: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns fullyQualifiedName3
         }
         val annotations = sequenceOf(annotation1, annotation2, annotation3)

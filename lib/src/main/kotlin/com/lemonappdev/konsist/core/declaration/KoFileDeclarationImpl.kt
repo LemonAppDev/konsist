@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
 import kotlin.reflect.KClass
 
-class KoFileDeclaration private constructor(private val ktFile: KtFile) :
-    KoNamedDeclaration(ktFile),
+class KoFileDeclarationImpl private constructor(private val ktFile: KtFile) :
+    KoNamedDeclarationImpl(ktFile),
     KoDeclarationProvider,
     KoClassProvider,
     KoInterfaceProvider,
@@ -37,20 +37,20 @@ class KoFileDeclaration private constructor(private val ktFile: KtFile) :
             .children
             .filterIsInstance<KtImportDirective>()
 
-        ktImportDirectives.map { KoImportDeclaration.getInstance(it) }
+        ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it) }
     }
 
     val annotations by lazy {
         ktFile
             .annotationEntries
-            .map { KoAnnotationDeclaration.getInstance(it) }
+            .map { KoAnnotationDeclarationImpl.getInstance(it) }
     }
 
     val packagee by lazy {
         if (ktFile.packageDirective?.qualifiedName == "") {
             null
         } else {
-            ktFile.packageDirective?.let { KoPackageDeclaration.getInstance(it) }
+            ktFile.packageDirective?.let { KoPackageDeclarationImpl.getInstance(it) }
         }
     }
 
@@ -58,14 +58,14 @@ class KoFileDeclaration private constructor(private val ktFile: KtFile) :
         ktFile
             .children
             .filterIsInstance<KtTypeAlias>()
-            .map { KoTypeAliasDeclaration.getInstance(it) }
+            .map { KoTypeAliasDeclarationImpl.getInstance(it) }
     }
 
     override fun declarations(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoDeclaration> =
+    ): Sequence<KoDeclarationImpl> =
         KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
 
     fun hasAnnotations(vararg names: String) = when {
@@ -105,13 +105,13 @@ class KoFileDeclaration private constructor(private val ktFile: KtFile) :
         }
     }
 
-    override fun equals(other: Any?): Boolean = other is KoFileDeclaration && filePath == other.filePath
+    override fun equals(other: Any?): Boolean = other is KoFileDeclarationImpl && filePath == other.filePath
 
     override fun hashCode(): Int = 31 * 7 + filePath.hashCode()
 
     companion object {
-        private val cache = KoDeclarationCache<KoFileDeclaration>()
+        private val cache = KoDeclarationCache<KoFileDeclarationImpl>()
 
-        fun getInstance(ktFile: KtFile) = cache.getOrCreateInstance(ktFile) { KoFileDeclaration(ktFile) }
+        fun getInstance(ktFile: KtFile) = cache.getOrCreateInstance(ktFile) { KoFileDeclarationImpl(ktFile) }
     }
 }

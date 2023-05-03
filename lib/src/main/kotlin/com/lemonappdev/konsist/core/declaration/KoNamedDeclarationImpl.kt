@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.psi.KtElement
 /**
  * Declaration with a name
  */
-abstract class KoNamedDeclaration(private val ktElement: KtElement) : KoBaseDeclaration(ktElement) {
+abstract class KoNamedDeclarationImpl(private val ktElement: KtElement) : KoBaseDeclarationImpl(ktElement) {
     /**
      * Name of the declaration
      */

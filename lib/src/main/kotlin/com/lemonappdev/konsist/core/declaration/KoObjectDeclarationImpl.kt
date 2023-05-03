@@ -4,13 +4,13 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.api.KoModifier
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 
-class KoObjectDeclaration(private val ktObjectDeclaration: KtObjectDeclaration) : KoComplexDeclaration(ktObjectDeclaration) {
+class KoObjectDeclarationImpl(private val ktObjectDeclaration: KtObjectDeclaration) : KoComplexDeclarationImpl(ktObjectDeclaration) {
     fun hasDataModifier() = hasModifiers(KoModifier.DATA)
 
     companion object {
-        private val cache = KoDeclarationCache<KoObjectDeclaration>()
+        private val cache = KoDeclarationCache<KoObjectDeclarationImpl>()
 
         fun getInstance(ktObjectDeclaration: KtObjectDeclaration) =
-            cache.getOrCreateInstance(ktObjectDeclaration) { KoObjectDeclaration(ktObjectDeclaration) }
+            cache.getOrCreateInstance(ktObjectDeclaration) { KoObjectDeclarationImpl(ktObjectDeclaration) }
     }
 }

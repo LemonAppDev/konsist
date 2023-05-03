@@ -3,9 +3,9 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 
-class KoAnnotationDeclaration private constructor(
+class KoAnnotationDeclarationImpl private constructor(
     private val ktAnnotationEntry: KtAnnotationEntry,
-) : KoNamedDeclaration(ktAnnotationEntry) {
+) : KoNamedDeclarationImpl(ktAnnotationEntry) {
     override val name by lazy { ktAnnotationEntry.shortName.toString() }
 
     val fullyQualifiedName: String by lazy {
@@ -21,9 +21,9 @@ class KoAnnotationDeclaration private constructor(
     inline fun <reified T>representsTypeOf() = T::class.qualifiedName == fullyQualifiedName
 
     companion object {
-        private val cache = KoDeclarationCache<KoAnnotationDeclaration>()
+        private val cache = KoDeclarationCache<KoAnnotationDeclarationImpl>()
 
         fun getInstance(ktObjectDeclaration: KtAnnotationEntry) =
-            cache.getOrCreateInstance(ktObjectDeclaration) { KoAnnotationDeclaration(ktObjectDeclaration) }
+            cache.getOrCreateInstance(ktObjectDeclaration) { KoAnnotationDeclarationImpl(ktObjectDeclaration) }
     }
 }

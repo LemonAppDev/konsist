@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.api.ext.withAlias
-import com.lemonappdev.konsist.api.ext.withoutAlias
-import com.lemonappdev.konsist.core.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -14,11 +12,11 @@ class KoImportDeclarationSequenceExtTest {
         // given
         val importName = "name"
         val alias1 = "AliasName"
-        val import1: KoImportDeclaration = mockk {
+        val import1: KoImportDeclarationImpl = mockk {
             every { name } returns importName
             every { alias } returns alias1
         }
-        val import2: KoImportDeclaration = mockk {
+        val import2: KoImportDeclarationImpl = mockk {
             every { name } returns importName
             every { alias } returns importName
         }
@@ -38,19 +36,19 @@ class KoImportDeclarationSequenceExtTest {
         val aliasName1 = "AliasName1"
         val aliasName2 = "AliasName2"
         val aliasName3 = "AliasName3"
-        val import1: KoImportDeclaration = mockk {
+        val import1: KoImportDeclarationImpl = mockk {
             every { name } returns importName
             every { alias } returns aliasName1
         }
-        val import2: KoImportDeclaration = mockk {
+        val import2: KoImportDeclarationImpl = mockk {
             every { name } returns importName
             every { alias } returns aliasName2
         }
-        val import3: KoImportDeclaration = mockk {
+        val import3: KoImportDeclarationImpl = mockk {
             every { name } returns importName
             every { alias } returns aliasName3
         }
-        val import4: KoImportDeclaration = mockk {
+        val import4: KoImportDeclarationImpl = mockk {
             every { name } returns importName
             every { alias } returns importName
         }
@@ -68,11 +66,11 @@ class KoImportDeclarationSequenceExtTest {
         // given
         val importName = "name"
         val alias1 = "AliasName"
-        val import1: KoImportDeclaration = mockk {
+        val import1: KoImportDeclarationImpl = mockk {
             every { name } returns importName
             every { alias } returns alias1
         }
-        val import2: KoImportDeclaration = mockk {
+        val import2: KoImportDeclarationImpl = mockk {
             every { name } returns importName
             every { alias } returns importName
         }
@@ -92,19 +90,19 @@ class KoImportDeclarationSequenceExtTest {
         val aliasName1 = "AliasName1"
         val aliasName2 = "AliasName2"
         val aliasName3 = "AliasName3"
-        val import1: KoImportDeclaration = mockk {
+        val import1: KoImportDeclarationImpl = mockk {
             every { name } returns importName
             every { alias } returns aliasName1
         }
-        val import2: KoImportDeclaration = mockk {
+        val import2: KoImportDeclarationImpl = mockk {
             every { name } returns importName
             every { alias } returns aliasName2
         }
-        val import3: KoImportDeclaration = mockk {
+        val import3: KoImportDeclarationImpl = mockk {
             every { name } returns importName
             every { alias } returns aliasName3
         }
-        val import4: KoImportDeclaration = mockk {
+        val import4: KoImportDeclarationImpl = mockk {
             every { name } returns importName
             every { alias } returns importName
         }

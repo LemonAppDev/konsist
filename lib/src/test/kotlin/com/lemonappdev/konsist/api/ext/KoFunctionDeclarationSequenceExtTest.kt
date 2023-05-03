@@ -1,36 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.api.ext.withAbstractModifier
-import com.lemonappdev.konsist.api.ext.withActualModifier
-import com.lemonappdev.konsist.api.ext.withExpectModifier
-import com.lemonappdev.konsist.api.ext.withExtension
-import com.lemonappdev.konsist.api.ext.withExternalModifier
-import com.lemonappdev.konsist.api.ext.withFinalModifier
-import com.lemonappdev.konsist.api.ext.withInfixModifier
-import com.lemonappdev.konsist.api.ext.withInlineModifier
-import com.lemonappdev.konsist.api.ext.withOpenModifier
-import com.lemonappdev.konsist.api.ext.withOperatorModifier
-import com.lemonappdev.konsist.api.ext.withOverrideModifier
-import com.lemonappdev.konsist.api.ext.withReturnType
-import com.lemonappdev.konsist.api.ext.withReturnTypeOf
-import com.lemonappdev.konsist.api.ext.withSuspendModifier
-import com.lemonappdev.konsist.api.ext.withTailrecModifier
-import com.lemonappdev.konsist.api.ext.withoutAbstractModifier
-import com.lemonappdev.konsist.api.ext.withoutActualModifier
-import com.lemonappdev.konsist.api.ext.withoutExpectModifier
-import com.lemonappdev.konsist.api.ext.withoutExtension
-import com.lemonappdev.konsist.api.ext.withoutExternalModifier
-import com.lemonappdev.konsist.api.ext.withoutFinalModifier
-import com.lemonappdev.konsist.api.ext.withoutInfixModifier
-import com.lemonappdev.konsist.api.ext.withoutInlineModifier
-import com.lemonappdev.konsist.api.ext.withoutOpenModifier
-import com.lemonappdev.konsist.api.ext.withoutOperatorModifier
-import com.lemonappdev.konsist.api.ext.withoutOverrideModifier
-import com.lemonappdev.konsist.api.ext.withoutReturnType
-import com.lemonappdev.konsist.api.ext.withoutReturnTypeOf
-import com.lemonappdev.konsist.api.ext.withoutSuspendModifier
-import com.lemonappdev.konsist.api.ext.withoutTailrecModifier
-import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleType
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
@@ -43,10 +13,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withOperatorModifier() returns function1 with operator modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasOperatorModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasOperatorModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -61,10 +31,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutOperatorModifier() returns function2 without operator modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasOperatorModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasOperatorModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -79,10 +49,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withInlineModifier() returns function1 with inline modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasInlineModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasInlineModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -97,10 +67,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutInlineModifier() returns function2 without inline modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasInlineModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasInlineModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -115,10 +85,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withTailrecModifier() returns function1 with tailrec modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasTailrecModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasTailrecModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -133,10 +103,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutTailrecModifier() returns function2 without tailrec modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasTailrecModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasTailrecModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -151,10 +121,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withInfixModifier() returns function1 with infix modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasInfixModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasInfixModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -169,10 +139,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutInfixModifier() returns function2 without infix modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasInfixModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasInfixModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -187,10 +157,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withExternalModifier() returns function1 with external modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasExternalModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasExternalModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -205,10 +175,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutExternalModifier() returns function2 without external modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasExternalModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasExternalModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -223,10 +193,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withSuspendModifier() returns function1 with suspend modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasSuspendModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasSuspendModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -241,10 +211,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutSuspendModifier() returns function2 without suspend modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasSuspendModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasSuspendModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -259,10 +229,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withOpenModifier() returns function1 with open modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasOpenModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasOpenModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -277,10 +247,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutOpenModifier() returns function2 without open modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasOpenModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasOpenModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -295,10 +265,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withOverrideModifier() returns function1 with override modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasOverrideModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasOverrideModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -313,10 +283,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutOverrideModifier() returns function2 without override modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasOverrideModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasOverrideModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -331,10 +301,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withFinalModifier() returns function1 with final modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasFinalModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasFinalModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -349,10 +319,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutFinalModifier() returns function2 without final modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasFinalModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasFinalModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -367,10 +337,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withAbstractModifier() returns function1 with abstract modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasAbstractModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasAbstractModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -385,10 +355,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutAbstractModifier() returns function2 without abstract modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasAbstractModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasAbstractModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -403,10 +373,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withActualModifier() returns function1 with actual modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasActualModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -421,10 +391,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutActualModifier() returns function2 without actual modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasActualModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -439,10 +409,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withExpectModifier() returns function1 with expect modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasExpectModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasExpectModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -457,10 +427,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutExpectModifier() returns function2 without expect modifier`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasExpectModifier() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasExpectModifier() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -475,10 +445,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withExtension() returns function1 which has extension`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { isExtension() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { isExtension() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -493,10 +463,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutExtension() returns function2 which has not extension`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { isExtension() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { isExtension() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -511,10 +481,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withReturnType() returns function1 which has return type`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasReturnType() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasReturnType() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -532,13 +502,13 @@ class KoFunctionDeclarationSequenceExtTest {
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val typeName3 = "SampleType3"
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName1
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName2
         }
-        val function3: KoFunctionDeclaration = mockk {
+        val function3: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName3
         }
         val functions = sequenceOf(function1, function2, function3)
@@ -553,10 +523,10 @@ class KoFunctionDeclarationSequenceExtTest {
     @Test
     fun `withoutReturnType() returns function2 which has not return type`() {
         // given
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { hasReturnType() } returns true
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { hasReturnType() } returns false
         }
         val functions = sequenceOf(function1, function2)
@@ -574,13 +544,13 @@ class KoFunctionDeclarationSequenceExtTest {
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val typeName3 = "SampleType3"
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName1
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName2
         }
-        val function3: KoFunctionDeclaration = mockk {
+        val function3: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName3
         }
         val functions = sequenceOf(function1, function2, function3)
@@ -597,10 +567,10 @@ class KoFunctionDeclarationSequenceExtTest {
         // given
         val typeName1 = "SampleType"
         val typeName2 = "OtherType"
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName1
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName2
         }
         val functions = sequenceOf(function1, function2)
@@ -617,10 +587,10 @@ class KoFunctionDeclarationSequenceExtTest {
         // given
         val typeName1 = "SampleType"
         val typeName2 = "OtherType"
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName1
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName2
         }
         val functions = sequenceOf(function1, function2)
@@ -638,13 +608,13 @@ class KoFunctionDeclarationSequenceExtTest {
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val typeName3 = "SampleType3"
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName1
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName2
         }
-        val function3: KoFunctionDeclaration = mockk {
+        val function3: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName3
         }
         val functions = sequenceOf(function1, function2, function3)
@@ -662,13 +632,13 @@ class KoFunctionDeclarationSequenceExtTest {
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val typeName3 = "SampleType3"
-        val function1: KoFunctionDeclaration = mockk {
+        val function1: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName1
         }
-        val function2: KoFunctionDeclaration = mockk {
+        val function2: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName2
         }
-        val function3: KoFunctionDeclaration = mockk {
+        val function3: KoFunctionDeclarationImpl = mockk {
             every { returnType?.name } returns typeName3
         }
         val functions = sequenceOf(function1, function2, function3)

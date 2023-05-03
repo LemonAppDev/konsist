@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 @Suppress("detekt.TooManyFunctions")
-class KoFunctionDeclaration private constructor(private val ktFunction: KtFunction) :
-    KoParametrizedDeclaration(ktFunction),
+class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction) :
+    KoParametrizedDeclarationImpl(ktFunction),
     KoLocalClassProvider,
     KoLocalFunctionProvider,
     KoLocalPropertyProvider {
@@ -29,11 +29,11 @@ class KoFunctionDeclaration private constructor(private val ktFunction: KtFuncti
 
         psiChildren.mapNotNull {
             if (it is KtClass && !it.isInterface()) {
-                KoClassDeclaration.getInstance(it)
+                KoClassDeclarationImpl.getInstance(it)
             } else if (it is KtFunction) {
                 getInstance(it)
             } else if (it is KtProperty) {
-                KoPropertyDeclaration.getInstance(it)
+                KoPropertyDeclarationImpl.getInstance(it)
             } else {
                 throw UnsupportedOperationException("Unknown local declaration type: ${it.getTextWithLocation()}")
             }
@@ -45,7 +45,7 @@ class KoFunctionDeclaration private constructor(private val ktFunction: KtFuncti
             .children
             .firstIsInstanceOrNull<KtTypeReference>()
 
-        type?.let { KoTypeDeclaration.getInstance(type) }
+        type?.let { KoTypeDeclarationImpl.getInstance(type) }
     }
 
     fun hasOperatorModifier() = hasModifiers(KoModifier.OPERATOR)
@@ -76,11 +76,11 @@ class KoFunctionDeclaration private constructor(private val ktFunction: KtFuncti
 
     fun hasReturnType() = ktFunction.hasDeclaredReturnType()
 
-    override fun localDeclarations(): Sequence<KoDeclaration> = localDeclarations
+    override fun localDeclarations(): Sequence<KoDeclarationImpl> = localDeclarations
 
     companion object {
-        private val cache = KoDeclarationCache<KoFunctionDeclaration>()
+        private val cache = KoDeclarationCache<KoFunctionDeclarationImpl>()
 
-        fun getInstance(ktFunction: KtFunction) = cache.getOrCreateInstance(ktFunction) { KoFunctionDeclaration(ktFunction) }
+        fun getInstance(ktFunction: KtFunction) = cache.getOrCreateInstance(ktFunction) { KoFunctionDeclarationImpl(ktFunction) }
     }
 }

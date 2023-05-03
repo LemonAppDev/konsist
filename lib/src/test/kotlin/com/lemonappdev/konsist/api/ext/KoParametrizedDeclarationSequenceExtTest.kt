@@ -1,11 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.api.ext.withParameter
-import com.lemonappdev.konsist.api.ext.withParameters
-import com.lemonappdev.konsist.api.ext.withSomeParameters
-import com.lemonappdev.konsist.api.ext.withoutParameter
-import com.lemonappdev.konsist.api.ext.withoutParameters
-import com.lemonappdev.konsist.core.declaration.KoParametrizedDeclaration
+import com.lemonappdev.konsist.core.declaration.KoParametrizedDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -15,10 +10,10 @@ class KoParametrizedDeclarationSequenceExtTest {
     @Test
     fun `withParameters() returns parametrizedDeclaration1 which has parameters`() {
         // given
-        val parametrizedDeclaration1: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration1: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed() } returns true
         }
-        val parametrizedDeclaration2: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration2: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed() } returns false
         }
         val parametrizedDeclarations = sequenceOf(parametrizedDeclaration1, parametrizedDeclaration2)
@@ -33,10 +28,10 @@ class KoParametrizedDeclarationSequenceExtTest {
     @Test
     fun `withoutParameters() returns parametrizedDeclaration2 which has not parameters`() {
         // given
-        val parametrizedDeclaration1: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration1: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed() } returns true
         }
-        val parametrizedDeclaration2: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration2: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed() } returns false
         }
         val parametrizedDeclarations = sequenceOf(parametrizedDeclaration1, parametrizedDeclaration2)
@@ -53,15 +48,15 @@ class KoParametrizedDeclarationSequenceExtTest {
         // given
         val parameter1 = "SampleParameter1"
         val parameter2 = "SampleParameter2"
-        val parametrizedDeclaration1: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration1: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed(parameter1) } returns true
             every { hasParameterNamed(parameter2) } returns true
         }
-        val parametrizedDeclaration2: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration2: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed(parameter1) } returns false
             every { hasParameterNamed(parameter2) } returns true
         }
-        val parametrizedDeclaration3: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration3: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed(parameter1) } returns false
             every { hasParameterNamed(parameter2) } returns false
         }
@@ -79,15 +74,15 @@ class KoParametrizedDeclarationSequenceExtTest {
         // given
         val parameter1 = "SampleParameter1"
         val parameter2 = "SampleParameter2"
-        val parametrizedDeclaration1: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration1: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed(parameter1) } returns true
             every { hasParameterNamed(parameter2) } returns true
         }
-        val parametrizedDeclaration2: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration2: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed(parameter1) } returns false
             every { hasParameterNamed(parameter2) } returns true
         }
-        val parametrizedDeclaration3: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration3: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed(parameter1) } returns false
             every { hasParameterNamed(parameter2) } returns false
         }
@@ -105,15 +100,15 @@ class KoParametrizedDeclarationSequenceExtTest {
         // given
         val parameter1 = "SampleParameter1"
         val parameter2 = "SampleParameter2"
-        val parametrizedDeclaration1: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration1: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed(parameter1) } returns true
             every { hasParameterNamed(parameter2) } returns true
         }
-        val parametrizedDeclaration2: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration2: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed(parameter1) } returns false
             every { hasParameterNamed(parameter2) } returns true
         }
-        val parametrizedDeclaration3: KoParametrizedDeclaration = mockk {
+        val parametrizedDeclaration3: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed(parameter1) } returns false
             every { hasParameterNamed(parameter2) } returns false
         }
