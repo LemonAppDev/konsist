@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationExtForSecondaryConstructorTest {
     @Test
-    fun `secondary-constructor-has-two-annotations-of`() {
+    fun `secondary-constructor-has-two-annotations-of-type`() {
         // given
-        val sut = getSnippetFile("secondary-constructor-has-two-annotations-of")
+        val sut = getSnippetFile("secondary-constructor-has-two-annotations-of-type")
             .classes()
             .first()
             .secondaryConstructors

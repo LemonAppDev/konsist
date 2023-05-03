@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationExtForInterfaceTest {
     @Test
-    fun `interface-has-two-annotations-of`() {
+    fun `interface-has-two-annotations-of-type`() {
         // given
-        val sut = getSnippetFile("interface-has-two-annotations-of")
+        val sut = getSnippetFile("interface-has-two-annotations-of-type")
             .interfaces()
             .first()
 

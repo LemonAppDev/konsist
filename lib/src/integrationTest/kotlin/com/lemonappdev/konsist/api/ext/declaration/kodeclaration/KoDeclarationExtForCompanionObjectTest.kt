@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationExtForCompanionObjectTest {
     @Test
-    fun `companion-object-has-two-annotations-of`() {
+    fun `companion-object-has-two-annotations-of-type`() {
         // given
-        val sut = getSnippetFile("companion-object-has-two-annotations-of")
+        val sut = getSnippetFile("companion-object-has-two-annotations-of-type")
             .companionObjects()
             .first()
 

@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationExtForPropertyTest {
     @Test
-    fun `property-has-two-annotations-of`() {
+    fun `property-has-two-annotations-of-type`() {
         // given
-        val sut = getSnippetFile("property-has-two-annotations-of")
+        val sut = getSnippetFile("property-has-two-annotations-of-type")
             .properties()
             .first()
 
