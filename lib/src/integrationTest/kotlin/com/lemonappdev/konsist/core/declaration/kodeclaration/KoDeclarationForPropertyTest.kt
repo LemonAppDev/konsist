@@ -87,9 +87,9 @@ class KoDeclarationForPropertyTest {
     }
 
     @Test
-    fun `property-has-two-annotations-with-kclass`() {
+    fun `property-has-two-annotations-of-kclass`() {
         // given
-        val sut = getSnippetFile("property-has-two-annotations-with-kclass")
+        val sut = getSnippetFile("property-has-two-annotations-of-kclass")
             .properties()
             .first()
 

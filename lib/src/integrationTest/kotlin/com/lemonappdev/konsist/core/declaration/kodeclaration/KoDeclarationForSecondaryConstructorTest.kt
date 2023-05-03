@@ -2,8 +2,12 @@ package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
+import com.lemonappdev.konsist.testdata.NonExistingAnnotation
+import com.lemonappdev.konsist.testdata.SampleAnnotation1
+import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForSecondaryConstructorTest {
@@ -168,9 +172,9 @@ class KoDeclarationForSecondaryConstructorTest {
     }
 
     @Test
-    fun `secondary-constructor-has-annotation`() {
+    fun `secondary-constructor-has-two-annotations-of-kclass`() {
         // given
-        val sut = getSnippetFile("secondary-constructor-has-annotation")
+        val sut = getSnippetFile("secondary-constructor-has-two-annotations-of-kclass")
             .classes()
             .first()
             .secondaryConstructors
@@ -178,28 +182,12 @@ class KoDeclarationForSecondaryConstructorTest {
 
         // then
         assertSoftly(sut) {
-            annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation")
-            hasAnnotations("SampleAnnotation") shouldBeEqualTo true
-            hasAnnotations("SampleAnnotation1") shouldBeEqualTo false
-            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
-            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `secondary-constructor-has-no-annotation`() {
-        // given
-        val sut = getSnippetFile("secondary-constructor-has-no-annotation")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            annotations.isEmpty() shouldBeEqualTo true
-            hasAnnotations("SampleAnnotation") shouldBeEqualTo false
-            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
+            annotations shouldHaveSize 2
+            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
 
