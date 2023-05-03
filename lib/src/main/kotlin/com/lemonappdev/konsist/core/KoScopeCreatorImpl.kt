@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core
 
 import com.lemonappdev.konsist.api.KoScope
-import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.KoScopeCreator
 import com.lemonappdev.konsist.core.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.ext.isKotlinFile
@@ -14,7 +14,7 @@ import com.lemonappdev.konsist.core.scope.KoScopeImpl
 import com.lemonappdev.konsist.util.PackageHelper
 import java.io.File
 
-class KonsistImpl : Konsist {
+class KoScopeCreatorImpl : KoScopeCreator {
     private val pathVerifier = PathVerifier()
 
     private val pathProvider by lazy {

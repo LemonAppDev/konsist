@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.verify
 
-import com.lemonappdev.konsist.api.Ko
+import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.ext.print
 import com.lemonappdev.konsist.core.ext.withNamePrefix
 import org.amshove.kluent.shouldBeEqualTo
@@ -10,7 +10,7 @@ class PrintDeclaration {
     @Test
     fun `return value after printDeclaration() is equal to original value`() {
         // given
-        val scope = Ko.scopeFromPackage("com.lemonappdev.konsist.core.scope.koscope")
+        val scope = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.scope.koscope")
         val sut = scope
             .classes()
             .withNamePrefix("KoScopeForC")
