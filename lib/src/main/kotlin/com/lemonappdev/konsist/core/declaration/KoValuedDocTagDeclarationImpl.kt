@@ -4,6 +4,6 @@ import com.lemonappdev.konsist.api.KoTag
 
 internal open class KoValuedDocTagDeclarationImpl(
     override val name: KoTag,
-    val value: String,
+    override val value: String,
     override val description: String,
-) : KoDocTagDeclarationImpl(name, description)
+) : KoDocTagDeclarationImpl(name, description), KoValuedDocTagDeclaration
