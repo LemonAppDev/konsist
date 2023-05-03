@@ -15,7 +15,7 @@ class KoScopeTest {
     @Test
     fun `from file`() {
         // given
-        val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
+        val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
         val sut =
             KoScope
                 .fromFile("$testSourceSetPath/lemonappdev/konsist/core/scope/koscope/KoScopeTest.kt")
@@ -112,7 +112,7 @@ class KoScopeTest {
     @Test
     fun `from path`() {
         // given
-        val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
+        val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
         val sut = KoScope
             .fromPath("${testSourceSetPath}lemonappdev/konsist/core/scope/koscope/")
 
@@ -160,7 +160,7 @@ class KoScopeTest {
     @Test
     fun `toString method`() {
         // given
-        val testSourceSetPath = "$konsistModulePath/src/test/kotlin/com/"
+        val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
         val sut = KoScope.fromPackage("com.lemonappdev.konsist.core.scope.koscope")
 
         // then
