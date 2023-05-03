@@ -87,9 +87,9 @@ class KoDeclarationForClassTest {
     }
 
     @Test
-    fun `class-has-two-annotations-with-KClass`() {
+    fun `class-has-two-annotations-with-kclass`() {
         // given
-        val sut = getSnippetFile("class-has-two-annotations-with-KClass")
+        val sut = getSnippetFile("class-has-two-annotations-with-kclass")
             .classes()
             .first()
 

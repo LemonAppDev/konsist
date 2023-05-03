@@ -84,9 +84,9 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-has-two-annotations-with-KClass`() {
+    fun `interface-has-two-annotations-with-kclass`() {
         // given
-        val sut = getSnippetFile("interface-has-two-annotations-with-KClass")
+        val sut = getSnippetFile("interface-has-two-annotations-with-kclass")
             .interfaces()
             .first()
 

@@ -90,9 +90,9 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-has-two-annotations-with-KClass`() {
+    fun `function-has-two-annotations-with-kclass`() {
         // given
-        val sut = getSnippetFile("function-has-two-annotations-with-KClass")
+        val sut = getSnippetFile("function-has-two-annotations-with-kclass")
             .functions()
             .first()
 

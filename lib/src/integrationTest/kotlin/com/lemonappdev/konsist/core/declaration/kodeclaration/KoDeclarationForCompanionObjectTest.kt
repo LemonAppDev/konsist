@@ -88,9 +88,9 @@ class KoDeclarationForCompanionObjectTest {
     }
 
     @Test
-    fun `companion-object-has-two-annotations-with-KClass`() {
+    fun `companion-object-has-two-annotations-with-kclass`() {
         // given
-        val sut = getSnippetFile("companion-object-has-two-annotations-with-KClass")
+        val sut = getSnippetFile("companion-object-has-two-annotations-with-kclass")
             .companionObjects()
             .first()
 
