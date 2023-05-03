@@ -2,7 +2,7 @@
 
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import kotlin.reflect.KClass
 
 fun Sequence<KoClassDeclaration>.withEnumModifier() = filter { it.hasEnumModifier() }

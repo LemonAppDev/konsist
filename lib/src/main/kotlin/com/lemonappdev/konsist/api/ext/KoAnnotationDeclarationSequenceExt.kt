@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import kotlin.reflect.KClass
 
 fun Sequence<KoAnnotationDeclaration>.withType(vararg types: String) = filter {

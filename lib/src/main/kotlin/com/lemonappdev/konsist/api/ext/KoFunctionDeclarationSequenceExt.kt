@@ -2,7 +2,7 @@
 
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import kotlin.reflect.KClass
 
 fun Sequence<KoFunctionDeclaration>.withOperatorModifier() = filter { it.hasOperatorModifier() }

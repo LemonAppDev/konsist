@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration
+package com.lemonappdev.konsist.api.declaration
 
 interface KoCompanionObjectDeclaration : KoComplexDeclaration {
     fun hasName(): Boolean

@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration
+package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.KoTag
 

@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 
 fun <T : KoNamedDeclaration> Sequence<T>.withName(vararg names: String) = filter {
     names.any { name -> it.name == name }

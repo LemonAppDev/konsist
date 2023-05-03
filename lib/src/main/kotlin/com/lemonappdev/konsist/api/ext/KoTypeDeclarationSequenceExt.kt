@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import kotlin.reflect.KClass
 
 inline fun <reified T> Sequence<KoTypeDeclaration>.withSourceTypeOf() = filter { it.sourceType == T::class.simpleName }

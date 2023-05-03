@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 
 fun Sequence<KoTypeAliasDeclaration>.withSourceType(vararg types: String) = filter {
     types.any { type -> it.type.sourceType == type }

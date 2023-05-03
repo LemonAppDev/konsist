@@ -2,15 +2,15 @@ package com.lemonappdev.konsist.core.scope
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoScope
-import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
-import com.lemonappdev.konsist.core.declaration.KoDeclaration
-import com.lemonappdev.konsist.core.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.core.declaration.KoObjectDeclaration
-import com.lemonappdev.konsist.core.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 
 @Suppress("detekt.TooManyFunctions")
 internal class KoScopeImpl(

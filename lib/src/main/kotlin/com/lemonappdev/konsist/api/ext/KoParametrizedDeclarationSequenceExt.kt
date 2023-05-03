@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoParametrizedDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParametrizedDeclaration
 
 fun <T : KoParametrizedDeclaration> Sequence<T>.withParameter() = filter { it.hasParameterNamed() }
 

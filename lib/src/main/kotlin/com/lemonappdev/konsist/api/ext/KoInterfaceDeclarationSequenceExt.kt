@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 
 fun Sequence<KoInterfaceDeclaration>.withActualModifier() = filter { it.hasActualModifier() }
 

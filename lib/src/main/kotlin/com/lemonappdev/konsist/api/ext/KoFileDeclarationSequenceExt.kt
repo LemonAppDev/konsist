@@ -2,7 +2,7 @@
 
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import kotlin.reflect.KClass
 
 fun Sequence<KoFileDeclaration>.withImports(vararg imports: String) = filter {

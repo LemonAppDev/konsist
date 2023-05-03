@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 
 fun Sequence<KoObjectDeclaration>.withDataModifier() = filter { it.hasDataModifier() }
 

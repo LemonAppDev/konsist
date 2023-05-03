@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.declaration.KoParametrizedDeclaration
 import org.jetbrains.kotlin.psi.KtFunction
 
 internal abstract class KoParametrizedDeclarationImpl(

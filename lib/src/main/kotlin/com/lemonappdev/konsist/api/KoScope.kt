@@ -1,27 +1,16 @@
 package com.lemonappdev.konsist.api
 
-import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
-import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoDeclaration
-import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.core.declaration.KoFileDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoImportDeclaration
-import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoObjectDeclaration
-import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoPropertyDeclaration
-import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 
 interface KoScope {
     fun files(): Sequence<KoFileDeclaration>

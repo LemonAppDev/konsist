@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
 import com.lemonappdev.konsist.util.PackageHelper
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import java.io.File

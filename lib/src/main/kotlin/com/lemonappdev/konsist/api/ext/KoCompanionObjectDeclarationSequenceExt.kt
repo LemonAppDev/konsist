@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 
 fun Sequence<KoCompanionObjectDeclaration>.withName() = filter { it.hasName() }
 

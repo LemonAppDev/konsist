@@ -2,7 +2,7 @@
 
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import kotlin.reflect.KClass
 
 fun Sequence<KoPropertyDeclaration>.withVarModifier() = filter { it.isVar }

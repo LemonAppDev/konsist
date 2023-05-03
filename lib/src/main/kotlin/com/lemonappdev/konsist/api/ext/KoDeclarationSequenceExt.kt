@@ -4,7 +4,7 @@ package com.lemonappdev.konsist.api.ext
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoTag
-import com.lemonappdev.konsist.core.declaration.KoDeclaration
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import kotlin.reflect.KClass
 
 fun <T : KoDeclaration> Sequence<T>.withPublicModifier() = filter { it.hasPublicModifier() }

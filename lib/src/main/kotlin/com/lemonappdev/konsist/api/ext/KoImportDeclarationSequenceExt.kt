@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 
 fun Sequence<KoImportDeclaration>.withAlias(vararg names: String) = filter {
     when {

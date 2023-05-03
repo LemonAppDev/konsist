@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoPsiDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
 
 fun <T : KoPsiDeclaration> Sequence<T>.withFilePath(vararg paths: String) = filter {
     paths.any { path -> it.resideInFilePath(path) }

@@ -1,3 +1,3 @@
-package com.lemonappdev.konsist.core.declaration
+package com.lemonappdev.konsist.api.declaration
 
 interface KoConstructorDeclaration : KoParametrizedDeclaration

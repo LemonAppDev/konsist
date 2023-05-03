@@ -16,6 +16,7 @@ import com.lemonappdev.konsist.api.KoTag.SINCE
 import com.lemonappdev.konsist.api.KoTag.SUPPRESS
 import com.lemonappdev.konsist.api.KoTag.THROWS
 import com.lemonappdev.konsist.api.KoTag.VERSION
+import com.lemonappdev.konsist.api.declaration.KoDocDeclaration
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 

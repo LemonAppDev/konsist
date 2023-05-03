@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoParameterDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import kotlin.reflect.KClass
 
 fun Sequence<KoParameterDeclaration>.withVarargModifier() = filter { it.hasVarargModifier() }

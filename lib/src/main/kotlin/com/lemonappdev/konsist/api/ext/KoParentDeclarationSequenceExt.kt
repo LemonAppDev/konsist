@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 
 fun Sequence<KoParentDeclaration>.withDelegate(vararg names: String) = filter {
     when {
