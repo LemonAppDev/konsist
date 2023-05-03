@@ -1,7 +1,5 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-
 interface KoNamedDeclaration : KoBaseDeclaration {
     /**
      * Name of the declaration

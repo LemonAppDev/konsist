@@ -11,7 +11,6 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 
-@Suppress("detekt.TooManyFunctions")
 class KoScopeImpl(
     private var koFiles: Sequence<KoFileDeclaration>,
 ) : KoScope {

@@ -1,11 +1,11 @@
 package com.lemonappdev.konsist.core.declaration.provider
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclarationImpl
-import com.lemonappdev.konsist.api.declaration.KoDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl

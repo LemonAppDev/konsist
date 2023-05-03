@@ -10,7 +10,6 @@ import org.jetbrains.kotlin.psi.psiUtil.isPublic
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 import kotlin.reflect.KClass
 
-@Suppress("detekt.TooManyFunctions")
 internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: KtTypeParameterListOwner) :
     KoNamedDeclarationImpl(ktTypeParameterListOwner), KoDeclaration {
 

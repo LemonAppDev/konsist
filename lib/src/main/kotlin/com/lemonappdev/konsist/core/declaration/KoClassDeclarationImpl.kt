@@ -9,8 +9,8 @@ import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-@Suppress("detekt.TooManyFunctions")
-internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass) : KoComplexDeclarationImpl(ktClass),
+internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass) :
+    KoComplexDeclarationImpl(ktClass),
     KoClassDeclaration {
     override val parents by lazy {
         ktClass

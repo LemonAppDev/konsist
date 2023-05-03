@@ -11,7 +11,6 @@ import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-@Suppress("detekt.TooManyFunctions")
 internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction) :
     KoParametrizedDeclarationImpl(ktFunction),
     KoFunctionDeclaration {
