@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.api.ext
+package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.ext.sequence.withCrossInlineModifier
 import com.lemonappdev.konsist.api.ext.sequence.withDefaultValue
