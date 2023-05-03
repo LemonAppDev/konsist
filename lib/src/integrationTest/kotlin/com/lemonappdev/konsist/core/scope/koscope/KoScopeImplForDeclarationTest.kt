@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoScopeForDeclarationTest {
+class KoScopeImplForDeclarationTest {
 
     @Test
     fun `file-contains-class-function-object-interface-property`() {

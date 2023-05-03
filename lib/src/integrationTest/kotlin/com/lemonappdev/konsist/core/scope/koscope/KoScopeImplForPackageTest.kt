@@ -4,33 +4,33 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoScopeForImportTest {
+class KoScopeImplForPackageTest {
 
     @Test
-    fun `file-contains-import`() {
+    fun `file-contains-package`() {
         // given
-        val sut = getSnippetFile("file-contains-import")
+        val sut = getSnippetFile("file-contains-package")
 
         // then
         sut
-            .imports()
+            .packages()
             .map { it.name }
             .toList()
-            .shouldBeEqualTo(listOf("com.lemonappdev.konsist.testdata.SampleType"))
+            .shouldBeEqualTo(listOf("samplepackage"))
     }
 
     @Test
-    fun `file-contains-no-import`() {
+    fun `file-contains-no-package`() {
         // given
-        val sut = getSnippetFile("file-contains-no-import")
+        val sut = getSnippetFile("file-contains-no-package")
 
         // then
         sut
-            .imports()
+            .packages()
             .toList()
             .shouldBeEqualTo(emptyList())
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forimport/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forpackage/", fileName)
 }
