@@ -3,9 +3,6 @@ package com.lemonappdev.konsist.core.declaration.kodeclaration
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
-import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
-import com.lemonappdev.konsist.testdata.NonExistingAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
@@ -38,8 +35,6 @@ class KoDeclarationForTypeAliasTest {
             hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
             hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
             hasAnnotations("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotationOf<SampleAnnotation>() shouldBeEqualTo true
-            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
 

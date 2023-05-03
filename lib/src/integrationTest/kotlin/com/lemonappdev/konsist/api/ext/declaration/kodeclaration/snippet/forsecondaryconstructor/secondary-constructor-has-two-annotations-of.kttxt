@@ -1,0 +1,9 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.SampleAnnotation1
+import com.lemonappdev.konsist.testdata.SampleAnnotation2
+
+class SampleClass(val sampleProperty1: Int) {
+    @SampleAnnotation1
+    @SampleAnnotation2
+    constructor(sampleProperty2: Int, sampleProperty1: Int): this(sampleProperty1)
+}

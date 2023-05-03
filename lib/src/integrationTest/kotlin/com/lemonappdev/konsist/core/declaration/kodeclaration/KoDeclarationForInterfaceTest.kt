@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier.ABSTRACT
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
-import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
@@ -99,9 +98,6 @@ class KoDeclarationForInterfaceTest {
             hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
             hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
             hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo true
-            hasAnnotationOf<SampleAnnotation2>() shouldBeEqualTo true
-            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
 

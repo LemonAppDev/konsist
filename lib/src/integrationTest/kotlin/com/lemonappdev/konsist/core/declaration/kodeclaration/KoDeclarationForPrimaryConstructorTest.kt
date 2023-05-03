@@ -2,9 +2,6 @@ package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
-import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -175,8 +172,6 @@ class KoDeclarationForPrimaryConstructorTest {
             it.hasAnnotations("SampleAnnotation1") shouldBeEqualTo false
             it.hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
             it.hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo false
-            it.hasAnnotationOf<SampleAnnotation>() shouldBeEqualTo true
-            it.hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo false
         }
     }
 
@@ -193,7 +188,6 @@ class KoDeclarationForPrimaryConstructorTest {
             it.annotations.isEmpty() shouldBeEqualTo true
             it.hasAnnotations("SampleAnnotation") shouldBeEqualTo false
             it.hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
-            it.hasAnnotationOf<SampleAnnotation>() shouldBeEqualTo false
         }
     }
 
