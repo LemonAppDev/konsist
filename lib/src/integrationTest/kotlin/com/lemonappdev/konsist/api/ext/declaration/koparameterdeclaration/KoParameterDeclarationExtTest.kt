@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.api.ext.declaration.koparameterDeclaration
+package com.lemonappdev.konsist.api.ext.declaration.koparameterdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.ext.declaration.representsTypeOf
