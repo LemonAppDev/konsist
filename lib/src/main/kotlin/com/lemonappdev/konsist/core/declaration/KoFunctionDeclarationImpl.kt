@@ -2,9 +2,6 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.declaration.provider.KoLocalClassProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoLocalFunctionProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoLocalPropertyProvider
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
@@ -16,9 +13,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 @Suppress("detekt.TooManyFunctions")
 internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction) :
     KoParametrizedDeclarationImpl(ktFunction),
-    KoLocalClassProvider,
-    KoLocalFunctionProvider,
-    KoLocalPropertyProvider {
+    KoFunctionDeclaration {
 
     private val localDeclarations by lazy {
         val psiChildren = ktFunction
@@ -40,7 +35,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
         }
     }
 
-    val returnType by lazy {
+    override val returnType by lazy {
         val type = ktFunction
             .children
             .firstIsInstanceOrNull<KtTypeReference>()
@@ -48,33 +43,33 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
         type?.let { KoTypeDeclarationImpl.getInstance(type) }
     }
 
-    fun hasOperatorModifier() = hasModifiers(KoModifier.OPERATOR)
+    override fun hasOperatorModifier() = hasModifiers(KoModifier.OPERATOR)
 
-    fun hasInlineModifier() = hasModifiers(KoModifier.INLINE)
+    override fun hasInlineModifier() = hasModifiers(KoModifier.INLINE)
 
-    fun hasTailrecModifier() = hasModifiers(KoModifier.TAILREC)
+    override fun hasTailrecModifier() = hasModifiers(KoModifier.TAILREC)
 
-    fun hasInfixModifier() = hasModifiers(KoModifier.INFIX)
+    override fun hasInfixModifier() = hasModifiers(KoModifier.INFIX)
 
-    fun hasExternalModifier() = hasModifiers(KoModifier.EXTERNAL)
+    override fun hasExternalModifier() = hasModifiers(KoModifier.EXTERNAL)
 
-    fun hasSuspendModifier() = hasModifiers(KoModifier.SUSPEND)
+    override fun hasSuspendModifier() = hasModifiers(KoModifier.SUSPEND)
 
-    fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
+    override fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
 
-    fun hasOverrideModifier() = hasModifiers(KoModifier.OVERRIDE)
+    override fun hasOverrideModifier() = hasModifiers(KoModifier.OVERRIDE)
 
-    fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
+    override fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
 
-    fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
+    override fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
 
-    fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
+    override fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
-    fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
+    override fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
 
-    fun isExtension() = ktFunction.isExtensionDeclaration()
+    override fun isExtension() = ktFunction.isExtensionDeclaration()
 
-    fun hasReturnType() = ktFunction.hasDeclaredReturnType()
+    override fun hasReturnType() = ktFunction.hasDeclaredReturnType()
 
     override fun localDeclarations(): Sequence<KoDeclarationImpl> = localDeclarations
 
