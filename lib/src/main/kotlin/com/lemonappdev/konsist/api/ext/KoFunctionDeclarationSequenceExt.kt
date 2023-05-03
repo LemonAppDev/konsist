@@ -2,84 +2,84 @@
 
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
 import kotlin.reflect.KClass
 
-fun Sequence<KoFunctionDeclarationImpl>.withOperatorModifier() = filter { it.hasOperatorModifier() }
+fun Sequence<KoFunctionDeclaration>.withOperatorModifier() = filter { it.hasOperatorModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutOperatorModifier() = filterNot { it.hasOperatorModifier() }
+fun Sequence<KoFunctionDeclaration>.withoutOperatorModifier() = filterNot { it.hasOperatorModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withInlineModifier() = filter { it.hasInlineModifier() }
+fun Sequence<KoFunctionDeclaration>.withInlineModifier() = filter { it.hasInlineModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutInlineModifier() = filterNot { it.hasInlineModifier() }
+fun Sequence<KoFunctionDeclaration>.withoutInlineModifier() = filterNot { it.hasInlineModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withTailrecModifier() = filter { it.hasTailrecModifier() }
+fun Sequence<KoFunctionDeclaration>.withTailrecModifier() = filter { it.hasTailrecModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutTailrecModifier() = filterNot { it.hasTailrecModifier() }
+fun Sequence<KoFunctionDeclaration>.withoutTailrecModifier() = filterNot { it.hasTailrecModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withInfixModifier() = filter { it.hasInfixModifier() }
+fun Sequence<KoFunctionDeclaration>.withInfixModifier() = filter { it.hasInfixModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutInfixModifier() = filterNot { it.hasInfixModifier() }
+fun Sequence<KoFunctionDeclaration>.withoutInfixModifier() = filterNot { it.hasInfixModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withExternalModifier() = filter { it.hasExternalModifier() }
+fun Sequence<KoFunctionDeclaration>.withExternalModifier() = filter { it.hasExternalModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutExternalModifier() = filterNot { it.hasExternalModifier() }
+fun Sequence<KoFunctionDeclaration>.withoutExternalModifier() = filterNot { it.hasExternalModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withSuspendModifier() = filter { it.hasSuspendModifier() }
+fun Sequence<KoFunctionDeclaration>.withSuspendModifier() = filter { it.hasSuspendModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutSuspendModifier() = filterNot { it.hasSuspendModifier() }
+fun Sequence<KoFunctionDeclaration>.withoutSuspendModifier() = filterNot { it.hasSuspendModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withOpenModifier() = filter { it.hasOpenModifier() }
+fun Sequence<KoFunctionDeclaration>.withOpenModifier() = filter { it.hasOpenModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutOpenModifier() = filterNot { it.hasOpenModifier() }
+fun Sequence<KoFunctionDeclaration>.withoutOpenModifier() = filterNot { it.hasOpenModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withOverrideModifier() = filter { it.hasOverrideModifier() }
+fun Sequence<KoFunctionDeclaration>.withOverrideModifier() = filter { it.hasOverrideModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutOverrideModifier() = filterNot { it.hasOverrideModifier() }
+fun Sequence<KoFunctionDeclaration>.withoutOverrideModifier() = filterNot { it.hasOverrideModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withFinalModifier() = filter { it.hasFinalModifier() }
+fun Sequence<KoFunctionDeclaration>.withFinalModifier() = filter { it.hasFinalModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutFinalModifier() = filterNot { it.hasFinalModifier() }
+fun Sequence<KoFunctionDeclaration>.withoutFinalModifier() = filterNot { it.hasFinalModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withAbstractModifier() = filter { it.hasAbstractModifier() }
+fun Sequence<KoFunctionDeclaration>.withAbstractModifier() = filter { it.hasAbstractModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutAbstractModifier() = filterNot { it.hasAbstractModifier() }
+fun Sequence<KoFunctionDeclaration>.withoutAbstractModifier() = filterNot { it.hasAbstractModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withActualModifier() = filter { it.hasActualModifier() }
+fun Sequence<KoFunctionDeclaration>.withActualModifier() = filter { it.hasActualModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutActualModifier() = filterNot { it.hasActualModifier() }
+fun Sequence<KoFunctionDeclaration>.withoutActualModifier() = filterNot { it.hasActualModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withExpectModifier() = filter { it.hasExpectModifier() }
+fun Sequence<KoFunctionDeclaration>.withExpectModifier() = filter { it.hasExpectModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutExpectModifier() = filterNot { it.hasExpectModifier() }
+fun Sequence<KoFunctionDeclaration>.withoutExpectModifier() = filterNot { it.hasExpectModifier() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withExtension() = filter { it.isExtension() }
+fun Sequence<KoFunctionDeclaration>.withExtension() = filter { it.isExtension() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutExtension() = filterNot { it.isExtension() }
+fun Sequence<KoFunctionDeclaration>.withoutExtension() = filterNot { it.isExtension() }
 
-fun Sequence<KoFunctionDeclarationImpl>.withReturnType(vararg types: String) = filter {
+fun Sequence<KoFunctionDeclaration>.withReturnType(vararg types: String) = filter {
     when {
         types.isEmpty() -> it.hasReturnType()
         else -> types.any { type -> it.returnType?.name == type }
     }
 }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutReturnType(vararg types: String) = filter {
+fun Sequence<KoFunctionDeclaration>.withoutReturnType(vararg types: String) = filter {
     when {
         types.isEmpty() -> !it.hasReturnType()
         else -> types.none { type -> it.returnType?.name == type }
     }
 }
 
-inline fun <reified T> Sequence<KoFunctionDeclarationImpl>.withReturnTypeOf() = filter { T::class.simpleName == it.returnType?.name }
+inline fun <reified T> Sequence<KoFunctionDeclaration>.withReturnTypeOf() = filter { T::class.simpleName == it.returnType?.name }
 
-inline fun <reified T> Sequence<KoFunctionDeclarationImpl>.withoutReturnTypeOf() =
+inline fun <reified T> Sequence<KoFunctionDeclaration>.withoutReturnTypeOf() =
     filterNot { T::class.simpleName == it.returnType?.name }
 
-fun Sequence<KoFunctionDeclarationImpl>.withReturnTypeOf(vararg types: KClass<*>) = filter {
+fun Sequence<KoFunctionDeclaration>.withReturnTypeOf(vararg types: KClass<*>) = filter {
     types.any { kClass -> it.returnType?.name == kClass.simpleName }
 }
 
-fun Sequence<KoFunctionDeclarationImpl>.withoutReturnTypeOf(vararg types: KClass<*>) = filter {
+fun Sequence<KoFunctionDeclaration>.withoutReturnTypeOf(vararg types: KClass<*>) = filter {
     types.none { kClass -> it.returnType?.name == kClass.simpleName }
 }

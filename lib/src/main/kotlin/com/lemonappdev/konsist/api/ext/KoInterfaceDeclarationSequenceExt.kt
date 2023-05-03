@@ -1,11 +1,11 @@
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclaration
 
-fun Sequence<KoInterfaceDeclarationImpl>.withActualModifier() = filter { it.hasActualModifier() }
+fun Sequence<KoInterfaceDeclaration>.withActualModifier() = filter { it.hasActualModifier() }
 
-fun Sequence<KoInterfaceDeclarationImpl>.withoutActualModifier() = filterNot { it.hasActualModifier() }
+fun Sequence<KoInterfaceDeclaration>.withoutActualModifier() = filterNot { it.hasActualModifier() }
 
-fun Sequence<KoInterfaceDeclarationImpl>.withExpectModifier() = filter { it.hasExpectModifier() }
+fun Sequence<KoInterfaceDeclaration>.withExpectModifier() = filter { it.hasExpectModifier() }
 
-fun Sequence<KoInterfaceDeclarationImpl>.withoutExpectModifier() = filterNot { it.hasExpectModifier() }
+fun Sequence<KoInterfaceDeclaration>.withoutExpectModifier() = filterNot { it.hasExpectModifier() }

@@ -2,88 +2,88 @@
 
 package com.lemonappdev.konsist.api.ext
 
-import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
 import kotlin.reflect.KClass
 
-fun Sequence<KoClassDeclarationImpl>.withEnumModifier() = filter { it.hasEnumModifier() }
+fun Sequence<KoClassDeclaration>.withEnumModifier() = filter { it.hasEnumModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutEnumModifier() = filterNot { it.hasEnumModifier() }
+fun Sequence<KoClassDeclaration>.withoutEnumModifier() = filterNot { it.hasEnumModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withSealedModifier() = filter { it.hasSealedModifier() }
+fun Sequence<KoClassDeclaration>.withSealedModifier() = filter { it.hasSealedModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutSealedModifier() = filterNot { it.hasSealedModifier() }
+fun Sequence<KoClassDeclaration>.withoutSealedModifier() = filterNot { it.hasSealedModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withInnerModifier() = filter { it.hasInnerModifier() }
+fun Sequence<KoClassDeclaration>.withInnerModifier() = filter { it.hasInnerModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutInnerModifier() = filterNot { it.hasInnerModifier() }
+fun Sequence<KoClassDeclaration>.withoutInnerModifier() = filterNot { it.hasInnerModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withValueModifier() = filter { it.hasValueModifier() }
+fun Sequence<KoClassDeclaration>.withValueModifier() = filter { it.hasValueModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutValueModifier() = filterNot { it.hasValueModifier() }
+fun Sequence<KoClassDeclaration>.withoutValueModifier() = filterNot { it.hasValueModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withAnnotationModifier() = filter { it.hasAnnotationModifier() }
+fun Sequence<KoClassDeclaration>.withAnnotationModifier() = filter { it.hasAnnotationModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutAnnotationModifier() = filterNot { it.hasAnnotationModifier() }
+fun Sequence<KoClassDeclaration>.withoutAnnotationModifier() = filterNot { it.hasAnnotationModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withDataModifier() = filter { it.hasDataModifier() }
+fun Sequence<KoClassDeclaration>.withDataModifier() = filter { it.hasDataModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutDataModifier() = filterNot { it.hasDataModifier() }
+fun Sequence<KoClassDeclaration>.withoutDataModifier() = filterNot { it.hasDataModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withActualModifier() = filter { it.hasActualModifier() }
+fun Sequence<KoClassDeclaration>.withActualModifier() = filter { it.hasActualModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutActualModifier() = filterNot { it.hasActualModifier() }
+fun Sequence<KoClassDeclaration>.withoutActualModifier() = filterNot { it.hasActualModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withExpectModifier() = filter { it.hasExpectModifier() }
+fun Sequence<KoClassDeclaration>.withExpectModifier() = filter { it.hasExpectModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutExpectModifier() = filterNot { it.hasExpectModifier() }
+fun Sequence<KoClassDeclaration>.withoutExpectModifier() = filterNot { it.hasExpectModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withAbstractModifier() = filter { it.hasAbstractModifier() }
+fun Sequence<KoClassDeclaration>.withAbstractModifier() = filter { it.hasAbstractModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutAbstractModifier() = filterNot { it.hasAbstractModifier() }
+fun Sequence<KoClassDeclaration>.withoutAbstractModifier() = filterNot { it.hasAbstractModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withOpenModifier() = filter { it.hasOpenModifier() }
+fun Sequence<KoClassDeclaration>.withOpenModifier() = filter { it.hasOpenModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutOpenModifier() = filterNot { it.hasOpenModifier() }
+fun Sequence<KoClassDeclaration>.withoutOpenModifier() = filterNot { it.hasOpenModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withFinalModifier() = filter { it.hasFinalModifier() }
+fun Sequence<KoClassDeclaration>.withFinalModifier() = filter { it.hasFinalModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutFinalModifier() = filterNot { it.hasFinalModifier() }
+fun Sequence<KoClassDeclaration>.withoutFinalModifier() = filterNot { it.hasFinalModifier() }
 
-fun Sequence<KoClassDeclarationImpl>.withPrimaryConstructor() = filter { it.hasPrimaryConstructor() }
+fun Sequence<KoClassDeclaration>.withPrimaryConstructor() = filter { it.hasPrimaryConstructor() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutPrimaryConstructor() = filterNot { it.hasPrimaryConstructor() }
+fun Sequence<KoClassDeclaration>.withoutPrimaryConstructor() = filterNot { it.hasPrimaryConstructor() }
 
-fun Sequence<KoClassDeclarationImpl>.withSecondaryConstructors() = filter { it.hasSecondaryConstructors() }
+fun Sequence<KoClassDeclaration>.withSecondaryConstructors() = filter { it.hasSecondaryConstructors() }
 
-fun Sequence<KoClassDeclarationImpl>.withoutSecondaryConstructors() = filterNot { it.hasSecondaryConstructors() }
+fun Sequence<KoClassDeclaration>.withoutSecondaryConstructors() = filterNot { it.hasSecondaryConstructors() }
 
-fun Sequence<KoClassDeclarationImpl>.withParents(vararg names: String) = filter {
+fun Sequence<KoClassDeclaration>.withParents(vararg names: String) = filter {
     when {
         names.isEmpty() -> it.hasParents()
         else -> it.hasParents(*names)
     }
 }
 
-fun Sequence<KoClassDeclarationImpl>.withSomeParents(vararg names: String) = filter {
+fun Sequence<KoClassDeclaration>.withSomeParents(vararg names: String) = filter {
     names.any { name -> it.hasParents(name) }
 }
 
-fun Sequence<KoClassDeclarationImpl>.withoutParents(vararg names: String) = filter {
+fun Sequence<KoClassDeclaration>.withoutParents(vararg names: String) = filter {
     when {
         names.isEmpty() -> !it.hasParents()
         else -> !it.hasParents(*names)
     }
 }
 
-inline fun <reified T> Sequence<KoClassDeclarationImpl>.withParentOf() = filter {
+inline fun <reified T> Sequence<KoClassDeclaration>.withParentOf() = filter {
     it
         .parents
         .any { parent -> parent.name == T::class.simpleName }
 }
 
-inline fun <reified T> Sequence<KoClassDeclarationImpl>.withoutParentOf() = this - withParentOf<T>().toSet()
+inline fun <reified T> Sequence<KoClassDeclaration>.withoutParentOf() = this - withParentOf<T>().toSet()
 
-fun Sequence<KoClassDeclarationImpl>.withParentsOf(vararg names: KClass<*>) = filter {
+fun Sequence<KoClassDeclaration>.withParentsOf(vararg names: KClass<*>) = filter {
     names.all { kClass ->
         it
             .parents
@@ -91,7 +91,7 @@ fun Sequence<KoClassDeclarationImpl>.withParentsOf(vararg names: KClass<*>) = fi
     }
 }
 
-fun Sequence<KoClassDeclarationImpl>.withSomeParentsOf(vararg names: KClass<*>) = filter {
+fun Sequence<KoClassDeclaration>.withSomeParentsOf(vararg names: KClass<*>) = filter {
     names.any { kClass ->
         it
             .parents
@@ -99,7 +99,7 @@ fun Sequence<KoClassDeclarationImpl>.withSomeParentsOf(vararg names: KClass<*>) 
     }
 }
 
-fun Sequence<KoClassDeclarationImpl>.withoutParentsOf(vararg names: KClass<*>) = filter {
+fun Sequence<KoClassDeclaration>.withoutParentsOf(vararg names: KClass<*>) = filter {
     names.none { kClass ->
         it
             .parents
@@ -107,32 +107,32 @@ fun Sequence<KoClassDeclarationImpl>.withoutParentsOf(vararg names: KClass<*>) =
     }
 }
 
-fun Sequence<KoClassDeclarationImpl>.withParentInterfaces(vararg names: String) = filter {
+fun Sequence<KoClassDeclaration>.withParentInterfaces(vararg names: String) = filter {
     when {
         names.isEmpty() -> it.hasParentInterfaces()
         else -> it.hasParentInterfaces(*names)
     }
 }
 
-fun Sequence<KoClassDeclarationImpl>.withSomeParentInterfaces(vararg names: String) =
+fun Sequence<KoClassDeclaration>.withSomeParentInterfaces(vararg names: String) =
     filter { names.any { name -> it.hasParentInterfaces(name) } }
 
-fun Sequence<KoClassDeclarationImpl>.withoutParentInterfaces(vararg names: String) = filter {
+fun Sequence<KoClassDeclaration>.withoutParentInterfaces(vararg names: String) = filter {
     when {
         names.isEmpty() -> !it.hasParentInterfaces()
         else -> !it.hasParentInterfaces(*names)
     }
 }
 
-inline fun <reified T> Sequence<KoClassDeclarationImpl>.withParentInterfaceOf() = filter {
+inline fun <reified T> Sequence<KoClassDeclaration>.withParentInterfaceOf() = filter {
     it
         .parentInterfaces
         .any { parent -> parent.name == T::class.simpleName }
 }
 
-inline fun <reified T> Sequence<KoClassDeclarationImpl>.withoutParentInterfaceOf() = this - withParentInterfaceOf<T>().toSet()
+inline fun <reified T> Sequence<KoClassDeclaration>.withoutParentInterfaceOf() = this - withParentInterfaceOf<T>().toSet()
 
-fun Sequence<KoClassDeclarationImpl>.withParentInterfacesOf(vararg names: KClass<*>) = filter {
+fun Sequence<KoClassDeclaration>.withParentInterfacesOf(vararg names: KClass<*>) = filter {
     names.all { kClass ->
         it
             .parentInterfaces
@@ -140,7 +140,7 @@ fun Sequence<KoClassDeclarationImpl>.withParentInterfacesOf(vararg names: KClass
     }
 }
 
-fun Sequence<KoClassDeclarationImpl>.withSomeParentInterfacesOf(vararg names: KClass<*>) = filter {
+fun Sequence<KoClassDeclaration>.withSomeParentInterfacesOf(vararg names: KClass<*>) = filter {
     names.any { kClass ->
         it
             .parentInterfaces
@@ -148,7 +148,7 @@ fun Sequence<KoClassDeclarationImpl>.withSomeParentInterfacesOf(vararg names: KC
     }
 }
 
-fun Sequence<KoClassDeclarationImpl>.withoutParentInterfacesOf(vararg names: KClass<*>) = filter {
+fun Sequence<KoClassDeclaration>.withoutParentInterfacesOf(vararg names: KClass<*>) = filter {
     names.none { kClass ->
         it
             .parentInterfaces
@@ -156,32 +156,32 @@ fun Sequence<KoClassDeclarationImpl>.withoutParentInterfacesOf(vararg names: KCl
     }
 }
 
-fun Sequence<KoClassDeclarationImpl>.withParentClass(vararg names: String) = filter {
+fun Sequence<KoClassDeclaration>.withParentClass(vararg names: String) = filter {
     when {
         names.isEmpty() -> it.hasParentClass()
         else -> names.any { name -> it.hasParentClass(name) }
     }
 }
 
-fun Sequence<KoClassDeclarationImpl>.withoutParentClass(vararg names: String) = filter {
+fun Sequence<KoClassDeclaration>.withoutParentClass(vararg names: String) = filter {
     when {
         names.isEmpty() -> !it.hasParentClass()
         else -> names.none { name -> it.hasParentClass(name) }
     }
 }
 
-inline fun <reified T> Sequence<KoClassDeclarationImpl>.withParentClassOf() = filter {
+inline fun <reified T> Sequence<KoClassDeclaration>.withParentClassOf() = filter {
     it
         .parentClass
         ?.name == T::class.simpleName
 }
 
-inline fun <reified T> Sequence<KoClassDeclarationImpl>.withoutParentClassOf() = this - withParentClassOf<T>().toSet()
+inline fun <reified T> Sequence<KoClassDeclaration>.withoutParentClassOf() = this - withParentClassOf<T>().toSet()
 
-fun Sequence<KoClassDeclarationImpl>.withParentClassOf(vararg names: KClass<*>) = filter {
+fun Sequence<KoClassDeclaration>.withParentClassOf(vararg names: KClass<*>) = filter {
     names.any { kClass -> it.hasParentClass(kClass.simpleName) }
 }
 
-fun Sequence<KoClassDeclarationImpl>.withoutParentClassOf(vararg names: KClass<*>) = filter {
+fun Sequence<KoClassDeclaration>.withoutParentClassOf(vararg names: KClass<*>) = filter {
     names.none { kClass -> it.hasParentClass(kClass.simpleName) }
 }
