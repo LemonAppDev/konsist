@@ -10,8 +10,7 @@ internal abstract class KoComplexDeclarationImpl(
 ) : KoDeclarationImpl(ktClassOrObject),
     KoComplexDeclaration {
 
-    override fun representsType(name: String) =
-        name == this.name || name == fullyQualifiedName
+    override fun representsType(name: String) = name == this.name || name == fullyQualifiedName
 
     inline fun <reified T> representsTypeOf() = T::class.qualifiedName == fullyQualifiedName
 

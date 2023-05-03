@@ -1,5 +1,9 @@
 package com.lemonappdev.konsist.api.ext
 
+import com.lemonappdev.konsist.api.ext.sequence.withActualModifier
+import com.lemonappdev.konsist.api.ext.sequence.withSourceType
+import com.lemonappdev.konsist.api.ext.sequence.withoutActualModifier
+import com.lemonappdev.konsist.api.ext.sequence.withoutSourceType
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk

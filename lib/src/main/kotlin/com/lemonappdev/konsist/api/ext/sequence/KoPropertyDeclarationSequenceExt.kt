@@ -1,6 +1,6 @@
 @file:Suppress("detekt.TooManyFunctions")
 
-package com.lemonappdev.konsist.api.ext
+package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import kotlin.reflect.KClass

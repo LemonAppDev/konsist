@@ -4,6 +4,8 @@ import com.lemonappdev.konsist.api.KoModifier
 import kotlin.reflect.KClass
 
 interface KoDeclaration : KoNamedDeclaration {
+    val fullyQualifiedName: String
+
     val packageName: String
 
     val annotations: List<KoAnnotationDeclaration>

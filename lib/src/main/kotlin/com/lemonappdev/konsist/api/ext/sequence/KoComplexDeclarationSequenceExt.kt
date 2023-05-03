@@ -1,7 +1,8 @@
-package com.lemonappdev.konsist.api.ext
+package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoComplexDeclaration
+import com.lemonappdev.konsist.api.ext.declaration.representsTypeOf
 import kotlin.reflect.KClass
 
 fun <T : KoComplexDeclaration> Sequence<T>.withType(vararg types: String) = filter {

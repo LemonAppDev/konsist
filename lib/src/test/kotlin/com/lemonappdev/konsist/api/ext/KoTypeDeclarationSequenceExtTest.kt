@@ -1,5 +1,15 @@
 package com.lemonappdev.konsist.api.ext
 
+import com.lemonappdev.konsist.api.ext.sequence.withFullyQualifiedName
+import com.lemonappdev.konsist.api.ext.sequence.withImportAlias
+import com.lemonappdev.konsist.api.ext.sequence.withImportAliasOf
+import com.lemonappdev.konsist.api.ext.sequence.withSourceType
+import com.lemonappdev.konsist.api.ext.sequence.withSourceTypeOf
+import com.lemonappdev.konsist.api.ext.sequence.withoutFullyQualifiedName
+import com.lemonappdev.konsist.api.ext.sequence.withoutImportAlias
+import com.lemonappdev.konsist.api.ext.sequence.withoutImportAliasOf
+import com.lemonappdev.konsist.api.ext.sequence.withoutSourceType
+import com.lemonappdev.konsist.api.ext.sequence.withoutSourceTypeOf
 import com.lemonappdev.konsist.core.declaration.KoTypeDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1

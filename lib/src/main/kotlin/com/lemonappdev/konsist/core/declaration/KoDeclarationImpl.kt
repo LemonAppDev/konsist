@@ -14,7 +14,7 @@ import kotlin.reflect.KClass
 internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: KtTypeParameterListOwner) :
     KoNamedDeclarationImpl(ktTypeParameterListOwner), KoDeclaration {
 
-    open val fullyQualifiedName by lazy {
+    override val fullyQualifiedName by lazy {
         if (ktTypeParameterListOwner.fqName != null) {
             ktTypeParameterListOwner.fqName.toString()
         } else {
@@ -87,12 +87,6 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
 
     override fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {
         annotations.any { annotation -> annotation.fullyQualifiedName == it.qualifiedName }
-    }
-
-    inline fun <reified T> hasAnnotationOf(): Boolean {
-        val qualifiedName = T::class.qualifiedName ?: return false
-
-        return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
     }
 
     override fun hasModifiers(vararg koModifiers: KoModifier) = when {

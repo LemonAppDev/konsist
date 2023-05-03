@@ -1,5 +1,17 @@
 package com.lemonappdev.konsist.api.ext
 
+import com.lemonappdev.konsist.api.ext.sequence.withCrossInlineModifier
+import com.lemonappdev.konsist.api.ext.sequence.withDefaultValue
+import com.lemonappdev.konsist.api.ext.sequence.withNoInlineModifier
+import com.lemonappdev.konsist.api.ext.sequence.withType
+import com.lemonappdev.konsist.api.ext.sequence.withTypeOf
+import com.lemonappdev.konsist.api.ext.sequence.withVarargModifier
+import com.lemonappdev.konsist.api.ext.sequence.withoutCrossInlineModifier
+import com.lemonappdev.konsist.api.ext.sequence.withoutDefaultValue
+import com.lemonappdev.konsist.api.ext.sequence.withoutNoInlineModifier
+import com.lemonappdev.konsist.api.ext.sequence.withoutType
+import com.lemonappdev.konsist.api.ext.sequence.withoutTypeOf
+import com.lemonappdev.konsist.api.ext.sequence.withoutVarargModifier
 import com.lemonappdev.konsist.core.declaration.KoParameterDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleType
 import com.lemonappdev.konsist.testdata.SampleType1

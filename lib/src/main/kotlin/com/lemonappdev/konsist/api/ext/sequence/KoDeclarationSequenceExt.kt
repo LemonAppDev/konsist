@@ -1,10 +1,11 @@
 @file:Suppress("detekt.TooManyFunctions")
 
-package com.lemonappdev.konsist.api.ext
+package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoTag
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
+import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
 import kotlin.reflect.KClass
 
 fun <T : KoDeclaration> Sequence<T>.withPublicModifier() = filter { it.hasPublicModifier() }

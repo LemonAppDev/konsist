@@ -1,5 +1,10 @@
 package com.lemonappdev.konsist.api.ext
 
+import com.lemonappdev.konsist.api.ext.sequence.withParameter
+import com.lemonappdev.konsist.api.ext.sequence.withParameters
+import com.lemonappdev.konsist.api.ext.sequence.withSomeParameters
+import com.lemonappdev.konsist.api.ext.sequence.withoutParameter
+import com.lemonappdev.konsist.api.ext.sequence.withoutParameters
 import com.lemonappdev.konsist.core.declaration.KoParametrizedDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk

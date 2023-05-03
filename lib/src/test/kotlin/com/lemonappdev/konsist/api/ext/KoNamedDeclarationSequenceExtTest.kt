@@ -1,5 +1,15 @@
 package com.lemonappdev.konsist.api.ext
 
+import com.lemonappdev.konsist.api.ext.sequence.withName
+import com.lemonappdev.konsist.api.ext.sequence.withNameContaining
+import com.lemonappdev.konsist.api.ext.sequence.withNameMatching
+import com.lemonappdev.konsist.api.ext.sequence.withNamePrefix
+import com.lemonappdev.konsist.api.ext.sequence.withNameSuffix
+import com.lemonappdev.konsist.api.ext.sequence.withoutName
+import com.lemonappdev.konsist.api.ext.sequence.withoutNameContaining
+import com.lemonappdev.konsist.api.ext.sequence.withoutNameMatching
+import com.lemonappdev.konsist.api.ext.sequence.withoutNamePrefix
+import com.lemonappdev.konsist.api.ext.sequence.withoutNameSuffix
 import com.lemonappdev.konsist.core.declaration.KoNamedDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk

@@ -69,12 +69,6 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
         annotations.any { annotation -> annotation.fullyQualifiedName == it.qualifiedName }
     }
 
-    inline fun <reified T> hasAnnotationOf(): Boolean {
-        val qualifiedName = T::class.qualifiedName ?: return false
-
-        return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
-    }
-
     override fun hasPackage(name: String) = packagee
         ?.qualifiedName
         ?.let { PackageHelper.resideInPackage(name, it) } ?: false

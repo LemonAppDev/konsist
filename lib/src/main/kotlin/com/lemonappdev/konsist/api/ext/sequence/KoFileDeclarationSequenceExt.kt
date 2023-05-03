@@ -1,8 +1,9 @@
 @file:Suppress("detekt.TooManyFunctions")
 
-package com.lemonappdev.konsist.api.ext
+package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
 import kotlin.reflect.KClass
 
 fun Sequence<KoFileDeclaration>.withImports(vararg imports: String) = filter {
