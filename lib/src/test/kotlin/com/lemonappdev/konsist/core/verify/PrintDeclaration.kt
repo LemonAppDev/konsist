@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.verify
 
-import com.lemonappdev.konsist.core.scope.KoScope
 import com.lemonappdev.konsist.core.ext.print
 import com.lemonappdev.konsist.core.ext.withNamePrefix
+import com.lemonappdev.konsist.core.scope.KoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
