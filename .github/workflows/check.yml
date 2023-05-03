@@ -29,7 +29,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: JUnit Test Report
-          path: ./**/build/reports/tests/
+          path: ./lib/build/test-results/test/
   konsist-test:
     name: Konsist Test
     continue-on-error: true
@@ -52,7 +52,30 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: Konsist Test Report
-          path: ./**/build/reports/tests/
+          path: ./lib/build/test-results/konsistTest/
+  integration-test:
+    name: Integration Test
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Konsist Test
+        run: ./gradlew lib:integrationTest
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Integration Test Report
+          path: ./lib/build/test-results/integrationTest/
   spotless:
     name: Spotless
     continue-on-error: true
