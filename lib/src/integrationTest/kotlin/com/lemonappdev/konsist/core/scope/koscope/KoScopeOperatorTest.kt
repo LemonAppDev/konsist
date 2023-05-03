@@ -5,7 +5,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class KoOperatorTest {
+class KoScopeOperatorTest {
 
     private val konsistModulePath = File("")
         .absoluteFile
