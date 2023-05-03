@@ -63,7 +63,7 @@ class KoPsiDeclarationTest {
         // then
         sut
             .projectFilePath
-            .shouldBeEqualTo("/lib/src/test/kotlin/com/lemonappdev/konsist/core/declaration/kopsideclaration/snippet/project-file-path.kt")
+            .shouldBeEqualTo("/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kopsideclaration/snippet/project-file-path.kt")
     }
 
     @Test
