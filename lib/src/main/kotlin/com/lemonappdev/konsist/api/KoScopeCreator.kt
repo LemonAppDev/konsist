@@ -1,5 +1,8 @@
 package com.lemonappdev.konsist.api
 
+/**
+ * Scope creator.
+ */
 interface KoScopeCreator {
     /**
      * Returns a [KoScope] containing all of Kotlin files in the project.
