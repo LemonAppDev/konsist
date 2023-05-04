@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.util
+package com.lemonappdev.konsist.core.util
 
 object PackageHelper {
     @Suppress("detekt.CyclomaticComplexMethod", "detekt.LongMethod")
