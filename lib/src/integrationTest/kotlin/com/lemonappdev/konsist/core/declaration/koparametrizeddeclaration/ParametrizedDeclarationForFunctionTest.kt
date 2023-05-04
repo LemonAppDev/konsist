@@ -15,7 +15,7 @@ class ParametrizedDeclarationForFunctionTest {
 
         // then
         assertSoftly(sut) {
-            parameters shouldBeEqualTo emptyList()
+            parameters shouldBeEqualTo null
             hasParameterNamed() shouldBeEqualTo false
         }
     }
@@ -29,8 +29,8 @@ class ParametrizedDeclarationForFunctionTest {
 
         // then
         assertSoftly(sut.parameters) {
-            size shouldBeEqualTo 1
-            first().name shouldBeEqualTo "sampleParameter"
+            it?.size shouldBeEqualTo 1
+            it?.first()?.name shouldBeEqualTo "sampleParameter"
         }
     }
 
