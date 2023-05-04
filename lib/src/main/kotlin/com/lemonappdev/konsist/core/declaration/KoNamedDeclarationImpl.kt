@@ -3,13 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 
-/**
- * Declaration with a name
- */
 internal abstract class KoNamedDeclarationImpl(private val ktElement: KtElement) : KoBaseDeclarationImpl(ktElement), KoNamedDeclaration {
-    /**
-     * Name of the declaration
-     */
     override val name by lazy { ktElement.name ?: "" }
 
     override fun hasNameWithPrefix(prefix: String) = name.startsWith(prefix)

@@ -22,7 +22,7 @@ class AssertTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Check 'assert-test-method-name' has failed. Invalid declarations") ?: throw e
+            e.message?.shouldContain("Check 'assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
         }
     }
 
@@ -147,7 +147,7 @@ class AssertTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assert' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assert' method."
     }
 
     @Test
@@ -163,7 +163,7 @@ class AssertTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling 'assertNot' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
     }
 
     private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/verify/assert/snippet/", fileName)
