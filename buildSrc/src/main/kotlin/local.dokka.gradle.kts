@@ -6,9 +6,8 @@ plugins {
 
 // Dokka config
 // https://kotlinlang.org/docs/dokka-gradle.html#package-options
-
 tasks.withType<DokkaTask>().configureEach {
-//    failOnWarning.set(false)
+    failOnWarning.set(true)
 
     dokkaSourceSets.configureEach {
         // Generate docs for 'api'
