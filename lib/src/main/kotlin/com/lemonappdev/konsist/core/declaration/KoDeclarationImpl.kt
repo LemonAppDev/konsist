@@ -25,7 +25,7 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
         fullyQualifiedName
             .split(".")
             .toMutableList()
-            .apply { removeLast() }
+            .also { it.removeLast() }
             .joinToString(separator = ".")
     }
 
