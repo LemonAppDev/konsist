@@ -227,7 +227,7 @@ class KoParameterDeclarationTest {
             ?.first()
 
         // then
-            sut?.representsType("SampleType") shouldBeEqualTo true
+        sut?.representsType("SampleType") shouldBeEqualTo true
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/", fileName)
