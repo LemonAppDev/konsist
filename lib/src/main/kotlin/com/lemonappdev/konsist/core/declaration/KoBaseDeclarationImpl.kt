@@ -12,7 +12,7 @@ internal open class KoBaseDeclarationImpl(private val ktElement: KtElement) : Ko
     /**
      * KoFile containing the declaration
      */
-    override val containingFile by lazy { KoFileDeclarationImpl.getInstance(ktElement.containingKtFile) }
+    override val containingFile by lazy { KoFileDeclarationImpl.getInstance(ktElement.containingKtFile, this) }
 
     override val parentDeclaration by lazy {
         val parents = ktElement

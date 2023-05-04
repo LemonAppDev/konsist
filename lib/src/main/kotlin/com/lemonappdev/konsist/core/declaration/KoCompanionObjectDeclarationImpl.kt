@@ -13,7 +13,7 @@ internal class KoCompanionObjectDeclarationImpl private constructor(ktObjectDecl
 
         internal const val DEFAULT_COMPANION_OBJECT_NAME = "Companion"
 
-        internal fun getInstance(ktObjectDeclaration: KtObjectDeclaration) =
-            cache.getOrCreateInstance(ktObjectDeclaration) { KoCompanionObjectDeclarationImpl(ktObjectDeclaration) }
+        internal fun getInstance(ktObjectDeclaration: KtObjectDeclaration, parent: KoBaseDeclarationImpl) =
+            cache.getOrCreateInstance(ktObjectDeclaration, parent) { KoCompanionObjectDeclarationImpl(ktObjectDeclaration) }
     }
 }

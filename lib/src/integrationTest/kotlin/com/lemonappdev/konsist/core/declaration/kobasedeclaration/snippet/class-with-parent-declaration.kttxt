@@ -2,6 +2,7 @@ interface SampleTopLevelInterface {
     class SampleClass() {
         fun sampleFunction(){
         }
+
         class SampleNestedClass{
         }
     }

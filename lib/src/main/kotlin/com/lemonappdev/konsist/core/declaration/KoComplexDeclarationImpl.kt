@@ -18,5 +18,5 @@ internal abstract class KoComplexDeclarationImpl(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoDeclarationImpl> = KoDeclarationProviderUtil.getKoDeclarations(ktClassOrObject, modifiers, includeNested, includeLocal)
+    ): Sequence<KoDeclarationImpl> = KoDeclarationProviderUtil.getKoDeclarations(ktClassOrObject, modifiers, includeNested, includeLocal, this)
 }

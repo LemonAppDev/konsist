@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 import withParentDeclaration
 import withoutParentDeclaration
 
-class KoBaseDeclarationImplSequenceExtTest {
+class KoBaseDeclarationSequenceExtTest {
     @Test
     fun `withParentDeclaration() returns baseDeclaration with any parent declaration`() {
         // given

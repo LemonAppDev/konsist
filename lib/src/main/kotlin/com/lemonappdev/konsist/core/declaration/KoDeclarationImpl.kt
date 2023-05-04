@@ -31,7 +31,7 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
 
     override val annotations = ktTypeParameterListOwner
         .annotationEntries
-        .map { KoAnnotationDeclarationImpl.getInstance(it) }
+        .map { KoAnnotationDeclarationImpl.getInstance(it, this) }
 
     override val modifiers by lazy {
         ktTypeParameterListOwner

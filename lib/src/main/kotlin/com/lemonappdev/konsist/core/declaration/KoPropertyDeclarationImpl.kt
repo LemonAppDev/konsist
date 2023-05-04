@@ -30,7 +30,7 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
             .children
             .firstIsInstanceOrNull<KtTypeReference>()
 
-        type?.let { KoTypeDeclarationImpl.getInstance(it) }
+        type?.let { KoTypeDeclarationImpl.getInstance(it, this) }
     }
 
     override fun hasLateinitModifier() = hasModifiers(KoModifier.LATEINIT)
@@ -64,6 +64,8 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
     internal companion object {
         private val cache = KoDeclarationCache<KoPropertyDeclarationImpl>()
 
-        internal fun getInstance(ktProperty: KtProperty) = cache.getOrCreateInstance(ktProperty) { KoPropertyDeclarationImpl(ktProperty) }
+        internal fun getInstance(ktProperty: KtProperty, parent: KoBaseDeclarationImpl) = cache.getOrCreateInstance(ktProperty, parent) {
+            KoPropertyDeclarationImpl(ktProperty)
+        }
     }
 }

@@ -13,7 +13,7 @@ internal class KoTypeAliasDeclarationImpl private constructor(private val ktType
     override val type by lazy {
         ktTypeAlias
             .getTypeReference()
-            ?.let { KoTypeDeclarationImpl.getInstance(it) }
+            ?.let { KoTypeDeclarationImpl.getInstance(it, this) }
             ?: throw KoInternalException("Type alias has no type", koBaseDeclarationImpl = this)
     }
 
@@ -22,7 +22,7 @@ internal class KoTypeAliasDeclarationImpl private constructor(private val ktType
     internal companion object {
         private val cache = KoDeclarationCache<KoTypeAliasDeclarationImpl>()
 
-        internal fun getInstance(ktTypeAlias: KtTypeAlias) =
-            cache.getOrCreateInstance(ktTypeAlias) { KoTypeAliasDeclarationImpl(ktTypeAlias) }
+        internal fun getInstance(ktTypeAlias: KtTypeAlias, parent: KoBaseDeclarationImpl) =
+            cache.getOrCreateInstance(ktTypeAlias, parent) { KoTypeAliasDeclarationImpl(ktTypeAlias) }
     }
 }

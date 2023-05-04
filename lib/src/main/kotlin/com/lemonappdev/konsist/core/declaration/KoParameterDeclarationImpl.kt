@@ -18,7 +18,7 @@ internal class KoParameterDeclarationImpl private constructor(private val ktPara
             .children
             .firstIsInstance<KtTypeReference>()
 
-        KoTypeDeclarationImpl.getInstance(type)
+        KoTypeDeclarationImpl.getInstance(type, this)
     }
 
     override val defaultValue by lazy {
@@ -57,7 +57,7 @@ internal class KoParameterDeclarationImpl private constructor(private val ktPara
     internal companion object {
         private val cache = KoDeclarationCache<KoParameterDeclarationImpl>()
 
-        internal fun getInstance(ktParameter: KtParameter) =
-            cache.getOrCreateInstance(ktParameter) { KoParameterDeclarationImpl(ktParameter) }
+        internal fun getInstance(ktParameter: KtParameter, parent: KoBaseDeclarationImpl) =
+            cache.getOrCreateInstance(ktParameter, parent) { KoParameterDeclarationImpl(ktParameter) }
     }
 }
