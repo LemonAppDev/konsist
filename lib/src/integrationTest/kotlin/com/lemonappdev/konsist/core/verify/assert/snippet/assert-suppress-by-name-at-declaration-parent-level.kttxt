@@ -1,0 +1,4 @@
+@Suppress("assert-supress-by-name-at-declaration-parent-level")
+class SampleClassWithIncorrectSuffix {
+    fun sampleFunctionWithIncorrectSuffix() {}
+}

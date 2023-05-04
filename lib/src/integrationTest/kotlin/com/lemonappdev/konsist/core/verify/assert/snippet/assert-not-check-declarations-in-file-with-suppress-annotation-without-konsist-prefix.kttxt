@@ -1,5 +1,0 @@
-@file:Suppress("assert-not-check-declarations-in-file-with-suppress-annotation-without-konsist-prefix")
-
-class SampleClassWithIncorrectSuffix {
-    fun sampleFunctionWithIncorrectSuffix(){}
-}

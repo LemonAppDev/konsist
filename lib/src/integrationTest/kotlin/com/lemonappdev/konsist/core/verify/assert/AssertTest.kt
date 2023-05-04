@@ -167,9 +167,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-check-declarations-in-file-with-suppress-annotation-with-konsist-prefix`() {
+    fun `assert-suppress-by-konsist-and-name-at-file-level`() {
         // given
-        val sut = getSnippetFile("assert-not-check-declarations-in-file-with-suppress-annotation-with-konsist-prefix")
+        val sut = getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level")
             .declarations(includeNested = true)
 
         // then
@@ -177,9 +177,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-check-declarations-in-file-with-suppress-annotation-without-konsist-prefix`() {
+    fun `assert-suppress-by-name-at-file-level`() {
         // given
-        val sut = getSnippetFile("assert-not-check-declarations-in-file-with-suppress-annotation-without-konsist-prefix")
+        val sut = getSnippetFile("assert-suppress-by-name-at-file-level")
             .declarations(includeNested = true)
 
         // then
@@ -187,10 +187,10 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation-with-konsist-prefix`() {
+    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level`() {
         // given
         val sut =
-            getSnippetFile("assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation-with-konsist-prefix")
+            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level")
                 .declarations(includeNested = true)
 
         // then
@@ -198,10 +198,10 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation-without-konsist-prefix`() {
+    fun `assert-suppress-by-name-at-declaration-parent-level`() {
         // given
         val sut =
-            getSnippetFile("assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation-without-konsist-prefix")
+            getSnippetFile("assert-suppress-by-name-at-declaration-parent-level")
                 .declarations(includeNested = true)
 
         // then
@@ -209,9 +209,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-check-declaration-with-suppress-annotation-with-konsist-prefix`() {
+    fun `assert-suppress-by-konsist-and-name-at-declaration-level`() {
         // given
-        val sut = getSnippetFile("assert-not-check-declaration-with-suppress-annotation-with-konsist-prefix")
+        val sut = getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level")
             .declarations(includeNested = true)
 
         // then
@@ -219,9 +219,9 @@ class AssertTest {
     }
 
     @Test
-    fun `assert-not-check-declaration-with-suppress-annotation-without-konsist-prefix`() {
+    fun `assert-suppress-by-name-at-declaration-level`() {
         // given
-        val sut = getSnippetFile("assert-not-check-declaration-with-suppress-annotation-without-konsist-prefix")
+        val sut = getSnippetFile("assert-suppress-by-name-at-declaration-level")
             .declarations(includeNested = true)
 
         // then

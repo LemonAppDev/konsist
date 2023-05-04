@@ -1,4 +1,0 @@
-@Suppress("assert-not-check-nested-declarations-when-top-level-declaration-has-suppress-annotation-without-konsist-prefix")
-class SampleClassWithIncorrectSuffix {
-    fun sampleFunctionWithIncorrectSuffix() {}
-}

@@ -1,0 +1,5 @@
+class SampleClassText {
+    @Suppress("konsist.assert-supress-by-konsist-and-name-at-declaration-level")
+    fun sampleFunctionWithIncorrectSuffix() {
+    }
+}
