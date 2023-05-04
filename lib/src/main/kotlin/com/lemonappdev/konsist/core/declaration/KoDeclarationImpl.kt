@@ -80,7 +80,7 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
         else -> names.all { hasAnnotationNameOrAnnotationFullyQualifyName(it) }
     }
 
-    override fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String) = annotations.any {
+    private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String) = annotations.any {
         it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name
     }
 

@@ -67,9 +67,6 @@ interface KoDeclaration : KoNamedDeclaration {
      */
     fun hasAnnotations(vararg names: String): Boolean
 
-    // TODO:
-    fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String): Boolean
-
     /**
      * Whether the declaration has annotations of kclass type.
      */
