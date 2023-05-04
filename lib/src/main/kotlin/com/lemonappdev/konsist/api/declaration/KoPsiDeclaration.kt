@@ -1,14 +1,17 @@
 package com.lemonappdev.konsist.api.declaration
 
+/**
+ * Base interface for all declarations.
+ */
 interface KoPsiDeclaration {
     /**
-     * File path of the declaration
+     * File path of the declaration.
      */
     val filePath: String
     val projectFilePath: String
 
     /**
-     * Location of the declaration containing the file path, line and column
+     * Location of the declaration containing the file path, line and column.
      */
     val location: String
 

@@ -7,9 +7,6 @@ import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import java.io.File
 
 internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : KoPsiDeclaration {
-    /**
-     * File path of the declaration
-     */
     override val filePath by lazy {
         psiElement
             .containingFile
@@ -25,9 +22,6 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         filePath.removePrefix(mainPath)
     }
 
-    /**
-     * Location of the declaration containing the file path, line and column
-     */
     override val location by lazy {
         val lineAndColumn = psiElement
             .getTextWithLocation()
@@ -42,9 +36,6 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         "$filePath:$line:$column"
     }
 
-    /**
-     * Text of the declaration
-     */
     override val text by lazy {
         psiElement
             .getTextWithLocation()
@@ -53,9 +44,6 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
             .removeSuffix("\n")
     }
 
-    /**
-     * Text of the declaration with the location (file path, line and column).
-     */
     override val locationWithText by lazy { "Location: $location \nDeclaration:\n$text" }
 
     override fun resideInFilePath(text: String) = PackageHelper.resideInPackage(text, filePath, '/')
@@ -66,8 +54,5 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         print(toString())
     }
 
-    /**
-     * Text of the declaration with the location (file path, line and column).
-     */
     override fun toString() = locationWithText
 }
