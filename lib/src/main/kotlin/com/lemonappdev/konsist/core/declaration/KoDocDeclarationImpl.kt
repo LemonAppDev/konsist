@@ -1,21 +1,21 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.KoTag
-import com.lemonappdev.konsist.api.KoTag.AUTHOR
-import com.lemonappdev.konsist.api.KoTag.CONSTRUCTOR
-import com.lemonappdev.konsist.api.KoTag.EXCEPTION
-import com.lemonappdev.konsist.api.KoTag.PARAM
-import com.lemonappdev.konsist.api.KoTag.PROPERTY
-import com.lemonappdev.konsist.api.KoTag.PROPERTY_GETTER
-import com.lemonappdev.konsist.api.KoTag.PROPERTY_SETTER
-import com.lemonappdev.konsist.api.KoTag.RECEIVER
-import com.lemonappdev.konsist.api.KoTag.RETURN
-import com.lemonappdev.konsist.api.KoTag.SAMPLE
-import com.lemonappdev.konsist.api.KoTag.SEE
-import com.lemonappdev.konsist.api.KoTag.SINCE
-import com.lemonappdev.konsist.api.KoTag.SUPPRESS
-import com.lemonappdev.konsist.api.KoTag.THROWS
-import com.lemonappdev.konsist.api.KoTag.VERSION
+import com.lemonappdev.konsist.api.KoDocTag
+import com.lemonappdev.konsist.api.KoDocTag.AUTHOR
+import com.lemonappdev.konsist.api.KoDocTag.CONSTRUCTOR
+import com.lemonappdev.konsist.api.KoDocTag.EXCEPTION
+import com.lemonappdev.konsist.api.KoDocTag.PARAM
+import com.lemonappdev.konsist.api.KoDocTag.PROPERTY
+import com.lemonappdev.konsist.api.KoDocTag.PROPERTY_GETTER
+import com.lemonappdev.konsist.api.KoDocTag.PROPERTY_SETTER
+import com.lemonappdev.konsist.api.KoDocTag.RECEIVER
+import com.lemonappdev.konsist.api.KoDocTag.RETURN
+import com.lemonappdev.konsist.api.KoDocTag.SAMPLE
+import com.lemonappdev.konsist.api.KoDocTag.SEE
+import com.lemonappdev.konsist.api.KoDocTag.SINCE
+import com.lemonappdev.konsist.api.KoDocTag.SUPPRESS
+import com.lemonappdev.konsist.api.KoDocTag.THROWS
+import com.lemonappdev.konsist.api.KoDocTag.VERSION
 import com.lemonappdev.konsist.api.declaration.KoDocDeclaration
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
@@ -51,11 +51,11 @@ internal class KoDocDeclarationImpl(private val kDocElement: KDocElement) : KoPs
         val tagsWithName = tagsAsStringList
             .flatMap { regex.findAll(it) }
             .map {
-                if (KoTag.values().none { koTag -> koTag.type == it.value }) {
+                if (KoDocTag.values().none { koTag -> koTag.type == it.value }) {
                     throw KoInternalException("Unknown doc tag: ${it.value}")
                 }
 
-                KoTag.values().first { tag -> tag.type == it.value }
+                KoDocTag.values().first { tag -> tag.type == it.value }
             }
             .zip(tagsAsStringList)
 
@@ -135,27 +135,27 @@ internal class KoDocDeclarationImpl(private val kDocElement: KDocElement) : KoPs
         tags.firstOrNull { it.name == PROPERTY_GETTER }
     }
 
-    override fun hasTags(vararg tags: KoTag) = tags.all {
+    override fun hasTags(vararg tags: KoDocTag) = tags.all {
         this.tags
             .map { tag -> tag.name }
             .contains(it)
     }
 
-    override fun parseToValuedTag(koTag: KoTag, sentence: String): KoValuedDocTagDeclarationImpl {
+    private fun parseToValuedTag(koDocTag: KoDocTag, sentence: String): KoValuedDocTagDeclarationImpl {
         val parsed = sentence.split(" ")
         val description = parsed
             .subList(2, parsed.size)
             .joinToString(" ")
 
-        return KoValuedDocTagDeclarationImpl(koTag, parsed[1], description)
+        return KoValuedDocTagDeclarationImpl(koDocTag, parsed[1], description)
     }
 
-    override fun parseToTag(koTag: KoTag, sentence: String): KoDocTagDeclarationImpl {
+    private fun parseToTag(koDocTag: KoDocTag, sentence: String): KoDocTagDeclarationImpl {
         val parsed = sentence.split(" ")
         val description = parsed
             .subList(1, parsed.size)
             .joinToString(" ")
 
-        return KoDocTagDeclarationImpl(koTag, description)
+        return KoDocTagDeclarationImpl(koDocTag, description)
     }
 }
