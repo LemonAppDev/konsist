@@ -62,7 +62,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
     }
 
     private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String) = annotations.any {
-        it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name || it.text == name
+        it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name
     }
 
     override fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {

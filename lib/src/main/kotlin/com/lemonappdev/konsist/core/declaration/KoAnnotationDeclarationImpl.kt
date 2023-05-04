@@ -9,8 +9,6 @@ internal class KoAnnotationDeclarationImpl private constructor(
 ) : KoNamedDeclarationImpl(ktAnnotationEntry), KoAnnotationDeclaration {
     override val name by lazy { ktAnnotationEntry.shortName.toString() }
 
-    override val text: String by lazy { ktAnnotationEntry.text.removePrefix("@") }
-
     override val fullyQualifiedName: String by lazy {
         containingFile
             .imports
