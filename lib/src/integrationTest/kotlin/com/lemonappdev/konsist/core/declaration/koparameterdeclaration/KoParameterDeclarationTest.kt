@@ -86,7 +86,7 @@ class KoParameterDeclarationTest {
             ?.parameters
 
         // then
-        sut?.isEmpty() shouldBeEqualTo true
+        sut shouldBeEqualTo null
     }
 
     @Test
