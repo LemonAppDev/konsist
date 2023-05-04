@@ -7,5 +7,3 @@ inline fun <reified T> KoDeclaration.hasAnnotationOf(): Boolean {
 
     return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
 }
-
-inline fun <reified T> KoDeclaration.representsTypeOf() = T::class.qualifiedName == fullyQualifiedName
