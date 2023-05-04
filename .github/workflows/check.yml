@@ -144,7 +144,7 @@ jobs:
           name: konsist.jar
           path: lib/build/libs/lib.jar
   dokka-html-doc:
-    name: Dokka Html doc
+    name: Dokka Html Doc
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -159,7 +159,7 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Dokka Html doc
+      - name: Dokka Html Doc
         run: ./gradlew lib:dokkaHtml
 
       - uses: actions/upload-artifact@v3
