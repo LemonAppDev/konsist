@@ -22,7 +22,7 @@ class AssertTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Check 'assert-test-method-name' has failed. Invalid declarations") ?: throw e
+            e.message?.shouldContain("Check 'assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
         }
     }
 
