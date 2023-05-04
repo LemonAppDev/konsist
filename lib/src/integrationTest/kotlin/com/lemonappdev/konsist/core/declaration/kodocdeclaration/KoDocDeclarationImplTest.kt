@@ -32,10 +32,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
-        sut.tags shouldHaveSize 10
+        sut
+            ?.tags
+            ?.shouldHaveSize(10)
     }
 
     @Test
@@ -44,10 +46,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
-        sut.tags shouldHaveSize 2
+        sut
+            ?.tags
+            ?.shouldHaveSize(2)
     }
 
     @Test
@@ -56,10 +60,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
-        sut.tags shouldHaveSize 2
+        sut
+            ?.tags
+            ?.shouldHaveSize(2)
     }
 
     @Test
@@ -68,10 +74,10 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-unknown-tag")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
-        val actual = { sut.tags }
+        val actual = { sut?.tags }
         actual shouldThrow KoInternalException::class withMessage "Unknown doc tag: @unknown, declaration:\nnull"
     }
 
@@ -81,12 +87,13 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         sut
-            .paramTags[0]
-            .description
+            ?.paramTags
+            ?.get(0)
+            ?.description
             .shouldBeEqualTo("First line description\nSecond line description")
     }
 
@@ -96,12 +103,13 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         sut
-            .propertyTags[0]
-            .description
+            ?.propertyTags
+            ?.get(0)
+            ?.description
             .shouldBeEqualTo("The first @property of the class.")
     }
 
@@ -111,12 +119,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            text shouldContain "This is a sample class that demonstrates the usage of KDoc tags."
-            description shouldBeEqualTo "This is a sample class that demonstrates the usage of KDoc tags."
+            it?.text?.shouldContain("This is a sample class that demonstrates the usage of KDoc tags.")
+            it?.description shouldBeEqualTo "This is a sample class that demonstrates the usage of KDoc tags."
         }
     }
 
@@ -126,17 +134,17 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            paramTags shouldHaveSize 2
-            paramTags[0].name shouldBeEqualTo PARAM
-            paramTags[0].value shouldBeEqualTo "SampleType1"
-            paramTags[0].description shouldBeEqualTo "The first type parameter for this class."
-            paramTags[1].name shouldBeEqualTo PARAM
-            paramTags[1].value shouldBeEqualTo "SampleType2"
-            paramTags[1].description shouldBeEqualTo "The second type parameter for this class."
+            it?.paramTags?.shouldHaveSize(2)
+            it?.paramTags?.get(0)?.name shouldBeEqualTo PARAM
+            it?.paramTags?.get(0)?.value shouldBeEqualTo "SampleType1"
+            it?.paramTags?.get(0)?.description shouldBeEqualTo "The first type parameter for this class."
+            it?.paramTags?.get(1)?.name shouldBeEqualTo PARAM
+            it?.paramTags?.get(1)?.value shouldBeEqualTo "SampleType2"
+            it?.paramTags?.get(1)?.description shouldBeEqualTo "The second type parameter for this class."
         }
     }
 
@@ -146,17 +154,17 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            propertyTags shouldHaveSize 2
-            propertyTags[0].name shouldBeEqualTo PROPERTY
-            propertyTags[0].value shouldBeEqualTo "sampleProperty1"
-            propertyTags[0].description shouldBeEqualTo "The first property of the class."
-            propertyTags[1].name shouldBeEqualTo PROPERTY
-            propertyTags[1].value shouldBeEqualTo "sampleProperty2"
-            propertyTags[1].description shouldBeEqualTo "The second property of the class."
+            it?.propertyTags?.shouldHaveSize(2)
+            it?.propertyTags?.get(0)?.name shouldBeEqualTo PROPERTY
+            it?.propertyTags?.get(0)?.value shouldBeEqualTo "sampleProperty1"
+            it?.propertyTags?.get(0)?.description shouldBeEqualTo "The first property of the class."
+            it?.propertyTags?.get(1)?.name shouldBeEqualTo PROPERTY
+            it?.propertyTags?.get(1)?.value shouldBeEqualTo "sampleProperty2"
+            it?.propertyTags?.get(1)?.description shouldBeEqualTo "The second property of the class."
         }
     }
 
@@ -166,12 +174,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            constructorTag?.name shouldBeEqualTo CONSTRUCTOR
-            constructorTag?.description shouldBeEqualTo "Creates a new instance of the [SampleClass]."
+            it?.constructorTag?.name shouldBeEqualTo CONSTRUCTOR
+            it?.constructorTag?.description shouldBeEqualTo "Creates a new instance of the [SampleClass]."
         }
     }
 
@@ -181,14 +189,14 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            throwsTags shouldHaveSize 1
-            throwsTags[0].name shouldBeEqualTo THROWS
-            throwsTags[0].value shouldBeEqualTo "IllegalArgumentException"
-            throwsTags[0].description shouldBeEqualTo "First sample description"
+            it?.throwsTags?.shouldHaveSize(1)
+            it?.throwsTags?.get(0)?.name shouldBeEqualTo THROWS
+            it?.throwsTags?.get(0)?.value shouldBeEqualTo "IllegalArgumentException"
+            it?.throwsTags?.get(0)?.description shouldBeEqualTo "First sample description"
         }
     }
 
@@ -198,14 +206,14 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            exceptionTags shouldHaveSize 1
-            exceptionTags[0].name shouldBeEqualTo EXCEPTION
-            exceptionTags[0].value shouldBeEqualTo "NullPointerException"
-            exceptionTags[0].description shouldBeEqualTo "Second sample description"
+            it?.exceptionTags?.shouldHaveSize(1)
+            it?.exceptionTags?.get(0)?.name shouldBeEqualTo EXCEPTION
+            it?.exceptionTags?.get(0)?.value shouldBeEqualTo "NullPointerException"
+            it?.exceptionTags?.get(0)?.description shouldBeEqualTo "Second sample description"
         }
     }
 
@@ -215,17 +223,17 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            seeTags shouldHaveSize 2
-            seeTags[0].name shouldBeEqualTo SEE
-            seeTags[0].value shouldBeEqualTo "AnotherClass1"
-            seeTags[0].description shouldBeEqualTo "sample description"
-            seeTags[1].name shouldBeEqualTo SEE
-            seeTags[1].value shouldBeEqualTo "AnotherClass2"
-            seeTags[1].description shouldBeEqualTo ""
+            it?.seeTags?.shouldHaveSize(2)
+            it?.seeTags?.get(0)?.name shouldBeEqualTo SEE
+            it?.seeTags?.get(0)?.value shouldBeEqualTo "AnotherClass1"
+            it?.seeTags?.get(0)?.description shouldBeEqualTo "sample description"
+            it?.seeTags?.get(1)?.name shouldBeEqualTo SEE
+            it?.seeTags?.get(1)?.value shouldBeEqualTo "AnotherClass2"
+            it?.seeTags?.get(1)?.description shouldBeEqualTo ""
         }
     }
 
@@ -235,12 +243,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            sinceTag?.name shouldBeEqualTo SINCE
-            sinceTag?.description shouldBeEqualTo "1.0.0"
+            it?.sinceTag?.name shouldBeEqualTo SINCE
+            it?.sinceTag?.description shouldBeEqualTo "1.0.0"
         }
     }
 
@@ -250,12 +258,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            versionTag?.name shouldBeEqualTo VERSION
-            versionTag?.description shouldBeEqualTo "1.2.3"
+            it?.versionTag?.name shouldBeEqualTo VERSION
+            it?.versionTag?.description shouldBeEqualTo "1.2.3"
         }
     }
 
@@ -265,17 +273,17 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            sampleTags shouldHaveSize 2
-            sampleTags[0].name shouldBeEqualTo SAMPLE
-            sampleTags[0].value shouldBeEqualTo "SampleClass.sampleMethod"
-            sampleTags[0].description shouldBeEqualTo "sample description"
-            sampleTags[1].name shouldBeEqualTo SAMPLE
-            sampleTags[1].value shouldBeEqualTo "SampleClass.sampleProperty"
-            sampleTags[1].description shouldBeEqualTo ""
+            it?.sampleTags?.shouldHaveSize(2)
+            it?.sampleTags?.get(0)?.name shouldBeEqualTo SAMPLE
+            it?.sampleTags?.get(0)?.value shouldBeEqualTo "SampleClass.sampleMethod"
+            it?.sampleTags?.get(0)?.description shouldBeEqualTo "sample description"
+            it?.sampleTags?.get(1)?.name shouldBeEqualTo SAMPLE
+            it?.sampleTags?.get(1)?.value shouldBeEqualTo "SampleClass.sampleProperty"
+            it?.sampleTags?.get(1)?.description shouldBeEqualTo ""
         }
     }
 
@@ -285,12 +293,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            suppressTag?.name shouldBeEqualTo SUPPRESS
-            suppressTag?.description shouldBeEqualTo "UnusedPrivateMember"
+            it?.suppressTag?.name shouldBeEqualTo SUPPRESS
+            it?.suppressTag?.description shouldBeEqualTo "UnusedPrivateMember"
         }
     }
 
@@ -300,15 +308,15 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            authorTags shouldHaveSize 2
-            authorTags[0].name shouldBeEqualTo AUTHOR
-            authorTags[0].description shouldBeEqualTo "Author1"
-            authorTags[1].name shouldBeEqualTo AUTHOR
-            authorTags[1].description shouldBeEqualTo "Author2"
+            it?.authorTags?.shouldHaveSize(2)
+            it?.authorTags?.get(0)?.name shouldBeEqualTo AUTHOR
+            it?.authorTags?.get(0)?.description shouldBeEqualTo "Author1"
+            it?.authorTags?.get(1)?.name shouldBeEqualTo AUTHOR
+            it?.authorTags?.get(1)?.description shouldBeEqualTo "Author2"
         }
     }
 
@@ -318,12 +326,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            text shouldContain "This is a sample method that demonstrates the usage of KDoc tags."
-            description shouldBeEqualTo "This is a sample method that demonstrates the usage of KDoc tags."
+            it?.text?.shouldContain("This is a sample method that demonstrates the usage of KDoc tags.")
+            it?.description shouldBeEqualTo "This is a sample method that demonstrates the usage of KDoc tags."
         }
     }
 
@@ -333,17 +341,17 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            paramTags shouldHaveSize 2
-            paramTags[0].name shouldBeEqualTo PARAM
-            paramTags[0].value shouldBeEqualTo "sampleArgument1"
-            paramTags[0].description shouldBeEqualTo "The first argument."
-            paramTags[1].name shouldBeEqualTo PARAM
-            paramTags[1].value shouldBeEqualTo "sampleArgument2"
-            paramTags[1].description shouldBeEqualTo "The second argument."
+            it?.paramTags?.shouldHaveSize(2)
+            it?.paramTags?.get(0)?.name shouldBeEqualTo PARAM
+            it?.paramTags?.get(0)?.value shouldBeEqualTo "sampleArgument1"
+            it?.paramTags?.get(0)?.description shouldBeEqualTo "The first argument."
+            it?.paramTags?.get(1)?.name shouldBeEqualTo PARAM
+            it?.paramTags?.get(1)?.value shouldBeEqualTo "sampleArgument2"
+            it?.paramTags?.get(1)?.description shouldBeEqualTo "The second argument."
         }
     }
 
@@ -353,12 +361,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            returnTag?.name shouldBeEqualTo RETURN
-            returnTag?.description shouldBeEqualTo "The result of the computation."
+            it?.returnTag?.name shouldBeEqualTo RETURN
+            it?.returnTag?.description shouldBeEqualTo "The result of the computation."
         }
     }
 
@@ -368,14 +376,14 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            throwsTags shouldHaveSize 1
-            throwsTags[0].name shouldBeEqualTo THROWS
-            throwsTags[0].value shouldBeEqualTo "IllegalArgumentException"
-            throwsTags[0].description shouldBeEqualTo "First sample description"
+            it?.throwsTags?.shouldHaveSize(1)
+            it?.throwsTags?.get(0)?.name shouldBeEqualTo THROWS
+            it?.throwsTags?.get(0)?.value shouldBeEqualTo "IllegalArgumentException"
+            it?.throwsTags?.get(0)?.description shouldBeEqualTo "First sample description"
         }
     }
 
@@ -385,14 +393,14 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            exceptionTags shouldHaveSize 1
-            exceptionTags[0].name shouldBeEqualTo EXCEPTION
-            exceptionTags[0].value shouldBeEqualTo "NullPointerException"
-            exceptionTags[0].description shouldBeEqualTo "Second sample description"
+            it?.exceptionTags?.shouldHaveSize(1)
+            it?.exceptionTags?.get(0)?.name shouldBeEqualTo EXCEPTION
+            it?.exceptionTags?.get(0)?.value shouldBeEqualTo "NullPointerException"
+            it?.exceptionTags?.get(0)?.description shouldBeEqualTo "Second sample description"
         }
     }
 
@@ -402,17 +410,17 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            sampleTags shouldHaveSize 2
-            sampleTags[0].name shouldBeEqualTo SAMPLE
-            sampleTags[0].value shouldBeEqualTo "SampleClass.sampleMethod"
-            sampleTags[0].description shouldBeEqualTo "sample description"
-            sampleTags[1].name shouldBeEqualTo SAMPLE
-            sampleTags[1].value shouldBeEqualTo "SampleClass.sampleProperty"
-            sampleTags[1].description shouldBeEqualTo ""
+            it?.sampleTags?.shouldHaveSize(2)
+            it?.sampleTags?.get(0)?.name shouldBeEqualTo SAMPLE
+            it?.sampleTags?.get(0)?.value shouldBeEqualTo "SampleClass.sampleMethod"
+            it?.sampleTags?.get(0)?.description shouldBeEqualTo "sample description"
+            it?.sampleTags?.get(1)?.name shouldBeEqualTo SAMPLE
+            it?.sampleTags?.get(1)?.value shouldBeEqualTo "SampleClass.sampleProperty"
+            it?.sampleTags?.get(1)?.description shouldBeEqualTo ""
         }
     }
 
@@ -422,12 +430,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            receiverTag?.name shouldBeEqualTo RECEIVER
-            receiverTag?.description shouldBeEqualTo "sample receiver description"
+            it?.receiverTag?.name shouldBeEqualTo RECEIVER
+            it?.receiverTag?.description shouldBeEqualTo "sample receiver description"
         }
     }
 
@@ -437,17 +445,17 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            seeTags shouldHaveSize 2
-            seeTags[0].name shouldBeEqualTo SEE
-            seeTags[0].value shouldBeEqualTo "AnotherClass1"
-            seeTags[0].description shouldBeEqualTo "sample description"
-            seeTags[1].name shouldBeEqualTo SEE
-            seeTags[1].value shouldBeEqualTo "AnotherClass2"
-            seeTags[1].description shouldBeEqualTo ""
+            it?.seeTags?.shouldHaveSize(2)
+            it?.seeTags?.get(0)?.name shouldBeEqualTo SEE
+            it?.seeTags?.get(0)?.value shouldBeEqualTo "AnotherClass1"
+            it?.seeTags?.get(0)?.description shouldBeEqualTo "sample description"
+            it?.seeTags?.get(1)?.name shouldBeEqualTo SEE
+            it?.seeTags?.get(1)?.value shouldBeEqualTo "AnotherClass2"
+            it?.seeTags?.get(1)?.description shouldBeEqualTo ""
         }
     }
 
@@ -457,15 +465,15 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            authorTags shouldHaveSize 2
-            authorTags[0].name shouldBeEqualTo AUTHOR
-            authorTags[0].description shouldBeEqualTo "Author1"
-            authorTags[1].name shouldBeEqualTo AUTHOR
-            authorTags[1].description shouldBeEqualTo "Author2"
+            it?.authorTags?.shouldHaveSize(2)
+            it?.authorTags?.get(0)?.name shouldBeEqualTo AUTHOR
+            it?.authorTags?.get(0)?.description shouldBeEqualTo "Author1"
+            it?.authorTags?.get(1)?.name shouldBeEqualTo AUTHOR
+            it?.authorTags?.get(1)?.description shouldBeEqualTo "Author2"
         }
     }
 
@@ -475,12 +483,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            sinceTag?.name shouldBeEqualTo SINCE
-            sinceTag?.description shouldBeEqualTo "1.0.0"
+            it?.sinceTag?.name shouldBeEqualTo SINCE
+            it?.sinceTag?.description shouldBeEqualTo "1.0.0"
         }
     }
 
@@ -490,12 +498,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            versionTag?.name shouldBeEqualTo VERSION
-            versionTag?.description shouldBeEqualTo "1.2.3"
+            it?.versionTag?.name shouldBeEqualTo VERSION
+            it?.versionTag?.description shouldBeEqualTo "1.2.3"
         }
     }
 
@@ -505,12 +513,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            suppressTag?.name shouldBeEqualTo SUPPRESS
-            suppressTag?.description shouldBeEqualTo "UnusedPrivateMember"
+            it?.suppressTag?.name shouldBeEqualTo SUPPRESS
+            it?.suppressTag?.description shouldBeEqualTo "UnusedPrivateMember"
         }
     }
 
@@ -520,12 +528,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("property-with-tags")
             .properties(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            text shouldContain "This is a sample property that demonstrates the usage of KDoc tags."
-            description shouldBeEqualTo "This is a sample property that demonstrates the usage of KDoc tags."
+            it?.text?.shouldContain("This is a sample property that demonstrates the usage of KDoc tags.")
+            it?.description shouldBeEqualTo "This is a sample property that demonstrates the usage of KDoc tags."
         }
     }
 
@@ -535,12 +543,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("property-with-tags")
             .properties(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            propertySetterTag?.name shouldBeEqualTo PROPERTY_SETTER
-            propertySetterTag?.description shouldBeEqualTo "Sets the value of the [name] property."
+            it?.propertySetterTag?.name shouldBeEqualTo PROPERTY_SETTER
+            it?.propertySetterTag?.description shouldBeEqualTo "Sets the value of the [name] property."
         }
     }
 
@@ -550,12 +558,12 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("property-with-tags")
             .properties(includeNested = true)
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            propertyGetterTag?.name shouldBeEqualTo PROPERTY_GETTER
-            propertyGetterTag?.description shouldBeEqualTo "Retrieves the value of the [name] property."
+            it?.propertyGetterTag?.name shouldBeEqualTo PROPERTY_GETTER
+            it?.propertyGetterTag?.description shouldBeEqualTo "Retrieves the value of the [name] property."
         }
     }
 
@@ -565,15 +573,15 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-has-tags")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            hasTags(SINCE) shouldBeEqualTo true
-            hasTags(SINCE, SEE) shouldBeEqualTo true
-            hasTags(SAMPLE) shouldBeEqualTo false
-            hasTags(SINCE, SAMPLE) shouldBeEqualTo false
-            hasTags(SINCE, SEE, SAMPLE) shouldBeEqualTo false
+            it?.hasTags(SINCE) shouldBeEqualTo true
+            it?.hasTags(SINCE, SEE) shouldBeEqualTo true
+            it?.hasTags(SAMPLE) shouldBeEqualTo false
+            it?.hasTags(SINCE, SAMPLE) shouldBeEqualTo false
+            it?.hasTags(SINCE, SEE, SAMPLE) shouldBeEqualTo false
         }
     }
 
@@ -583,16 +591,16 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-has-tags-without-description")
             .classes()
             .first()
-            .koDoc!!
+            .koDoc
 
         // then
         assertSoftly(sut) {
-            description shouldBeEqualTo ""
-            hasTags(SINCE) shouldBeEqualTo true
-            hasTags(SINCE, SEE) shouldBeEqualTo true
-            hasTags(SAMPLE) shouldBeEqualTo false
-            hasTags(SINCE, SAMPLE) shouldBeEqualTo false
-            hasTags(SINCE, SEE, SAMPLE) shouldBeEqualTo false
+            it?.description shouldBeEqualTo ""
+            it?.hasTags(SINCE) shouldBeEqualTo true
+            it?.hasTags(SINCE, SEE) shouldBeEqualTo true
+            it?.hasTags(SAMPLE) shouldBeEqualTo false
+            it?.hasTags(SINCE, SAMPLE) shouldBeEqualTo false
+            it?.hasTags(SINCE, SEE, SAMPLE) shouldBeEqualTo false
         }
     }
 
