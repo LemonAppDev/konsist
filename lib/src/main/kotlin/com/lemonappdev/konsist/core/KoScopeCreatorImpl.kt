@@ -33,9 +33,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             .map { it.toKoFile() }
     }
 
-    /**
-     * Returns a [KoScope] containing all of Kotlin files in the project.
-     */
     override fun scopeFromProject(module: String?, sourceSet: String?): KoScope {
         if (module == null && sourceSet == null) {
             return KoScopeImpl(projectKotlinFiles)
@@ -61,9 +58,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    /**
-     * Returns a [KoScope] containing all of Kotlin production files in the project.
-     */
     override fun scopeFromProduction(module: String?, sourceSet: String?): KoScope {
         val koFiles = scopeFromProject(module, sourceSet)
             .files()
@@ -72,9 +66,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    /**
-     * Returns a [KoScope] containing all of Kotlin test files in the project.
-     */
     override fun scopeFromTest(module: String?, sourceSet: String?): KoScope {
         val koFiles = scopeFromProject(module, sourceSet)
             .files()
@@ -83,9 +74,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    /**
-     * Returns a [KoScope] containing all of Kotlin files in the given package.
-     */
     override fun scopeFromPackage(packageName: String, module: String?, sourceSet: String?): KoScope {
         val koFiles = scopeFromProject(module, sourceSet)
             .files()
@@ -94,9 +82,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    /**
-     * Returns a [KoScope] containing all of Kotlin files in the given directory.
-     */
     override fun scopeFromPath(path: String): KoScope {
         val koFiles = projectKotlinFiles
             .filter { it.filePath.startsWith(path) }
@@ -104,9 +89,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    /**
-     * Returns a [KoScope] of a given file.
-     */
     override fun scopeFromFile(path: String): KoScope {
         val file = File(path)
 
