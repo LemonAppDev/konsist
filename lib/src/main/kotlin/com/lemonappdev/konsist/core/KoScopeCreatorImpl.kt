@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core
 import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.KoScopeCreator
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
@@ -11,7 +12,6 @@ import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.filesystem.PathVerifier
 import com.lemonappdev.konsist.core.filesystem.ProjectRootDirProviderFactory
 import com.lemonappdev.konsist.core.scope.KoScopeImpl
-import com.lemonappdev.konsist.core.util.PackageHelper
 import java.io.File
 
 internal class KoScopeCreatorImpl : KoScopeCreator {
@@ -78,13 +78,10 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     /**
      * Returns a [KoScope] containing all of Kotlin files in the given package.
      */
-    override fun scopeFromPackage(packageName: String): KoScope {
-        val koFiles = projectKotlinFiles
-            .filter {
-                it.packagee?.let { koPackage ->
-                    PackageHelper.resideInPackage(packageName, koPackage.qualifiedName)
-                } ?: false
-            }
+    override fun scopeFromPackage(packageName: String, module: String?, sourceSet: String?): KoScope {
+        val koFiles = scopeFromProject(module, sourceSet)
+            .files()
+            .withPackage(packageName)
 
         return KoScopeImpl(koFiles)
     }
