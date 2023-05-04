@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.util
+package com.lemonappdev.konsist.core.util
 
 import com.intellij.openapi.util.Disposer
 import com.intellij.psi.PsiManager

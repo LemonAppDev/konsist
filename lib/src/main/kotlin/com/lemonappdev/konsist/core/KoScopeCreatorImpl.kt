@@ -11,7 +11,7 @@ import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.filesystem.PathVerifier
 import com.lemonappdev.konsist.core.filesystem.ProjectRootDirProviderFactory
 import com.lemonappdev.konsist.core.scope.KoScopeImpl
-import com.lemonappdev.konsist.util.PackageHelper
+import com.lemonappdev.konsist.core.util.PackageHelper
 import java.io.File
 
 internal class KoScopeCreatorImpl : KoScopeCreator {

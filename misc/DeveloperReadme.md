@@ -29,6 +29,21 @@
 artefact will be transferred to [maven central](https://central.sonatype.com/artifact/com.lemonappdev/konsist) 
 repository after some time.
 
+## Layers
+
+Below is a diagram of the layers of the `konsist` library:
+
+```mermaid
+%%{init: {'theme':'forest'}}%%
+flowchart LR
+    subgraph Konsist
+        direction TB
+            direction LR
+            Api --> Core
+    end
+    Client --> Konsist
+```
+
 ## Test Source Sets
 
 - `test` - unit tests with mocks (tests using `mockk` library)
