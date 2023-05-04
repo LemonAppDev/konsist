@@ -5,41 +5,41 @@ import com.lemonappdev.konsist.api.KoTag
 interface KoDocDeclaration : KoPsiDeclaration {
     val description: String
 
-    val blockTags: List<KoDocTagDeclaration>
+    val tags: List<KoDocTagDeclaration>
 
-    val paramBlockTags: List<KoValuedDocTagDeclaration>
+    val paramTags: List<KoValuedDocTagDeclaration>
 
-    val returnBlockTag: KoDocTagDeclaration?
+    val returnTag: KoDocTagDeclaration?
 
-    val constructorBlockTag: KoDocTagDeclaration?
+    val constructorTag: KoDocTagDeclaration?
 
-    val receiverBlockTag: KoDocTagDeclaration?
+    val receiverTag: KoDocTagDeclaration?
 
-    val propertyBlockTags: List<KoValuedDocTagDeclaration>
+    val propertyTags: List<KoValuedDocTagDeclaration>
 
-    val throwsBlockTags: List<KoValuedDocTagDeclaration>
+    val throwsTags: List<KoValuedDocTagDeclaration>
 
-    val exceptionBlockTags: List<KoValuedDocTagDeclaration>
+    val exceptionTags: List<KoValuedDocTagDeclaration>
 
-    val sampleBlockTags: List<KoValuedDocTagDeclaration>
+    val sampleTags: List<KoValuedDocTagDeclaration>
 
-    val seeBlockTags: List<KoValuedDocTagDeclaration>
+    val seeTags: List<KoValuedDocTagDeclaration>
 
-    val authorBlockTags: List<KoDocTagDeclaration>
+    val authorTags: List<KoDocTagDeclaration>
 
-    val sinceBlockTag: KoDocTagDeclaration?
+    val sinceTag: KoDocTagDeclaration?
 
-    val suppressBlockTag: KoDocTagDeclaration?
+    val suppressTag: KoDocTagDeclaration?
 
-    val versionBlockTag: KoDocTagDeclaration?
+    val versionTag: KoDocTagDeclaration?
 
-    val propertySetterBlockTag: KoDocTagDeclaration?
+    val propertySetterTag: KoDocTagDeclaration?
 
-    val propertyGetterBlockTag: KoDocTagDeclaration?
+    val propertyGetterTag: KoDocTagDeclaration?
 
     fun hasTags(vararg tags: KoTag): Boolean
 
-    fun parseToValuedBlockTag(koTag: KoTag, sentence: String): KoValuedDocTagDeclaration
+    fun parseToValuedTag(koTag: KoTag, sentence: String): KoValuedDocTagDeclaration
 
-    fun parseToBlockTag(koTag: KoTag, sentence: String): KoDocTagDeclaration
+    fun parseToTag(koTag: KoTag, sentence: String): KoDocTagDeclaration
 }
