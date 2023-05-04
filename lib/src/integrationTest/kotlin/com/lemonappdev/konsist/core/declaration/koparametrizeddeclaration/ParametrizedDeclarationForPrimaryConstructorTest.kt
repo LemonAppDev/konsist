@@ -15,9 +15,9 @@ class ParametrizedDeclarationForPrimaryConstructorTest {
             .primaryConstructor
 
         // then
-        assertSoftly(sut!!) {
-            parameters shouldBeEqualTo null
-            hasParameterNamed() shouldBeEqualTo false
+        assertSoftly(sut) {
+            it?.parameters shouldBeEqualTo null
+            it?.hasParameterNamed() shouldBeEqualTo false
         }
     }
 
