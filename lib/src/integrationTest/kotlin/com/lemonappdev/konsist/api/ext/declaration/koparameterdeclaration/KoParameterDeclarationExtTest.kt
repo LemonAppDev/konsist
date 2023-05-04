@@ -15,11 +15,11 @@ class KoParameterDeclarationExtTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
         assertSoftly(sut) {
-            it.representsTypeOf<SampleType>() shouldBeEqualTo true
+            it?.representsTypeOf<SampleType>() shouldBeEqualTo true
         }
     }
 

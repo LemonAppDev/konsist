@@ -96,10 +96,10 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
-        assertSoftly(sut) {
+        assertSoftly(sut!!) {
             defaultValue shouldBeEqualTo "2"
             hasDefaultValue() shouldBeEqualTo true
             hasDefaultValue("2") shouldBeEqualTo true
@@ -114,10 +114,10 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
-        assertSoftly(sut) {
+        assertSoftly(sut!!) {
             defaultValue shouldBeEqualTo "SampleType()"
             hasDefaultValue() shouldBeEqualTo true
             hasDefaultValue("SampleType()") shouldBeEqualTo true
@@ -132,10 +132,10 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
-        assertSoftly(sut) {
+        assertSoftly(sut!!) {
             defaultValue shouldBeEqualTo "null"
             hasDefaultValue() shouldBeEqualTo true
             hasDefaultValue("SampleType()") shouldBeEqualTo false
@@ -149,10 +149,10 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
-        assertSoftly(sut) {
+        assertSoftly(sut!!) {
             defaultValue shouldBeEqualTo null
             hasDefaultValue() shouldBeEqualTo false
             hasDefaultValue("SampleType()") shouldBeEqualTo false
@@ -180,10 +180,10 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
-        sut.hasNoInlineModifier() shouldBeEqualTo true
+        sut?.hasNoInlineModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -193,10 +193,10 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
-        sut.hasCrossInlineModifier() shouldBeEqualTo true
+        sut?.hasCrossInlineModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -224,10 +224,10 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
-        assertSoftly(sut) {
+        assertSoftly(sut!!) {
             it.representsType("SampleType") shouldBeEqualTo true
         }
     }

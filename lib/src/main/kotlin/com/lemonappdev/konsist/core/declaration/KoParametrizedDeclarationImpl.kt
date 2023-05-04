@@ -11,10 +11,11 @@ internal abstract class KoParametrizedDeclarationImpl(
         ktFunction
         .valueParameters
         .map { KoParameterDeclarationImpl.getInstance(it) }
+        .ifEmpty { null }
     }
 
     override fun hasParameterNamed(name: String?) = when (name) {
-        null -> parameters.isNotEmpty()
-        else -> parameters.firstOrNull()?.name == name
+        null -> parameters != null
+        else -> parameters?.firstOrNull()?.name == name
     }
 }
