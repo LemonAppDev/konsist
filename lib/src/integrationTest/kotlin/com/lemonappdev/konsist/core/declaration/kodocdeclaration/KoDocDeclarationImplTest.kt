@@ -27,88 +27,88 @@ import org.junit.jupiter.api.Test
 
 class KoDocDeclarationImplTest {
     @Test
-    fun `block-tags class`() {
+    fun `tags class`() {
         // given
-        val sut = getSnippetFile("block-tags")
+        val sut = getSnippetFile("tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
-        sut.blockTags shouldHaveSize 10
+        sut.tags shouldHaveSize 10
     }
 
     @Test
-    fun `block-tags function`() {
+    fun `tags function`() {
         // given
-        val sut = getSnippetFile("block-tags")
+        val sut = getSnippetFile("tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
-        sut.blockTags shouldHaveSize 2
+        sut.tags shouldHaveSize 2
     }
 
     @Test
-    fun `block-tags property`() {
+    fun `tags property`() {
         // given
-        val sut = getSnippetFile("block-tags")
+        val sut = getSnippetFile("tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
-        sut.blockTags shouldHaveSize 2
+        sut.tags shouldHaveSize 2
     }
 
     @Test
-    fun `class-with-unknown-block-tag`() {
+    fun `class-with-unknown-tag`() {
         // given
-        val sut = getSnippetFile("class-with-unknown-block-tag")
+        val sut = getSnippetFile("class-with-unknown-tag")
             .classes()
             .first()
             .koDoc!!
 
         // then
-        val actual = { sut.blockTags }
+        val actual = { sut.tags }
         actual shouldThrow KoInternalException::class withMessage "Unknown doc tag: @unknown, declaration:\nnull"
     }
 
     @Test
-    fun `block-tags with multiline param tag`() {
+    fun `tags with multiline param tag`() {
         // given
-        val sut = getSnippetFile("block-tags")
+        val sut = getSnippetFile("tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         sut
-            .paramBlockTags[0]
+            .paramTags[0]
             .description
             .shouldBeEqualTo("First line description\nSecond line description")
     }
 
     @Test
-    fun `block-tags with '@' into description`() {
+    fun `tags with '@' into description`() {
         // given
-        val sut = getSnippetFile("block-tags")
+        val sut = getSnippetFile("tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         sut
-            .propertyBlockTags[0]
+            .propertyTags[0]
             .description
             .shouldBeEqualTo("The first @property of the class.")
     }
 
     @Test
-    fun `class-with-block-tags text and description`() {
+    fun `class-with-tags text and description`() {
         // given
-        val sut = getSnippetFile("class-with-block-tags")
+        val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
             .koDoc!!
@@ -121,201 +121,201 @@ class KoDocDeclarationImplTest {
     }
 
     @Test
-    fun `class-with-block-tags param tag`() {
+    fun `class-with-tags param tag`() {
         // given
-        val sut = getSnippetFile("class-with-block-tags")
+        val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            paramBlockTags shouldHaveSize 2
-            paramBlockTags[0].name shouldBeEqualTo PARAM
-            paramBlockTags[0].value shouldBeEqualTo "SampleType1"
-            paramBlockTags[0].description shouldBeEqualTo "The first type parameter for this class."
-            paramBlockTags[1].name shouldBeEqualTo PARAM
-            paramBlockTags[1].value shouldBeEqualTo "SampleType2"
-            paramBlockTags[1].description shouldBeEqualTo "The second type parameter for this class."
+            paramTags shouldHaveSize 2
+            paramTags[0].name shouldBeEqualTo PARAM
+            paramTags[0].value shouldBeEqualTo "SampleType1"
+            paramTags[0].description shouldBeEqualTo "The first type parameter for this class."
+            paramTags[1].name shouldBeEqualTo PARAM
+            paramTags[1].value shouldBeEqualTo "SampleType2"
+            paramTags[1].description shouldBeEqualTo "The second type parameter for this class."
         }
     }
 
     @Test
-    fun `class-with-block-tags property tag`() {
+    fun `class-with-tags property tag`() {
         // given
-        val sut = getSnippetFile("class-with-block-tags")
+        val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            propertyBlockTags shouldHaveSize 2
-            propertyBlockTags[0].name shouldBeEqualTo PROPERTY
-            propertyBlockTags[0].value shouldBeEqualTo "sampleProperty1"
-            propertyBlockTags[0].description shouldBeEqualTo "The first property of the class."
-            propertyBlockTags[1].name shouldBeEqualTo PROPERTY
-            propertyBlockTags[1].value shouldBeEqualTo "sampleProperty2"
-            propertyBlockTags[1].description shouldBeEqualTo "The second property of the class."
+            propertyTags shouldHaveSize 2
+            propertyTags[0].name shouldBeEqualTo PROPERTY
+            propertyTags[0].value shouldBeEqualTo "sampleProperty1"
+            propertyTags[0].description shouldBeEqualTo "The first property of the class."
+            propertyTags[1].name shouldBeEqualTo PROPERTY
+            propertyTags[1].value shouldBeEqualTo "sampleProperty2"
+            propertyTags[1].description shouldBeEqualTo "The second property of the class."
         }
     }
 
     @Test
-    fun `class-with-block-tags constructor tag`() {
+    fun `class-with-tags constructor tag`() {
         // given
-        val sut = getSnippetFile("class-with-block-tags")
+        val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            constructorBlockTag?.name shouldBeEqualTo CONSTRUCTOR
-            constructorBlockTag?.description shouldBeEqualTo "Creates a new instance of the [SampleClass]."
+            constructorTag?.name shouldBeEqualTo CONSTRUCTOR
+            constructorTag?.description shouldBeEqualTo "Creates a new instance of the [SampleClass]."
         }
     }
 
     @Test
-    fun `class-with-block-tags throws tag`() {
+    fun `class-with-tags throws tag`() {
         // given
-        val sut = getSnippetFile("class-with-block-tags")
+        val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            throwsBlockTags shouldHaveSize 1
-            throwsBlockTags[0].name shouldBeEqualTo THROWS
-            throwsBlockTags[0].value shouldBeEqualTo "IllegalArgumentException"
-            throwsBlockTags[0].description shouldBeEqualTo "First sample description"
+            throwsTags shouldHaveSize 1
+            throwsTags[0].name shouldBeEqualTo THROWS
+            throwsTags[0].value shouldBeEqualTo "IllegalArgumentException"
+            throwsTags[0].description shouldBeEqualTo "First sample description"
         }
     }
 
     @Test
-    fun `class-with-block-tags exception tag`() {
+    fun `class-with-tags exception tag`() {
         // given
-        val sut = getSnippetFile("class-with-block-tags")
+        val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            exceptionBlockTags shouldHaveSize 1
-            exceptionBlockTags[0].name shouldBeEqualTo EXCEPTION
-            exceptionBlockTags[0].value shouldBeEqualTo "NullPointerException"
-            exceptionBlockTags[0].description shouldBeEqualTo "Second sample description"
+            exceptionTags shouldHaveSize 1
+            exceptionTags[0].name shouldBeEqualTo EXCEPTION
+            exceptionTags[0].value shouldBeEqualTo "NullPointerException"
+            exceptionTags[0].description shouldBeEqualTo "Second sample description"
         }
     }
 
     @Test
-    fun `class-with-block-tags see tag`() {
+    fun `class-with-tags see tag`() {
         // given
-        val sut = getSnippetFile("class-with-block-tags")
+        val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            seeBlockTags shouldHaveSize 2
-            seeBlockTags[0].name shouldBeEqualTo SEE
-            seeBlockTags[0].value shouldBeEqualTo "AnotherClass1"
-            seeBlockTags[0].description shouldBeEqualTo "sample description"
-            seeBlockTags[1].name shouldBeEqualTo SEE
-            seeBlockTags[1].value shouldBeEqualTo "AnotherClass2"
-            seeBlockTags[1].description shouldBeEqualTo ""
+            seeTags shouldHaveSize 2
+            seeTags[0].name shouldBeEqualTo SEE
+            seeTags[0].value shouldBeEqualTo "AnotherClass1"
+            seeTags[0].description shouldBeEqualTo "sample description"
+            seeTags[1].name shouldBeEqualTo SEE
+            seeTags[1].value shouldBeEqualTo "AnotherClass2"
+            seeTags[1].description shouldBeEqualTo ""
         }
     }
 
     @Test
-    fun `class-with-block-tags since tag`() {
+    fun `class-with-tags since tag`() {
         // given
-        val sut = getSnippetFile("class-with-block-tags")
+        val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            sinceBlockTag?.name shouldBeEqualTo SINCE
-            sinceBlockTag?.description shouldBeEqualTo "1.0.0"
+            sinceTag?.name shouldBeEqualTo SINCE
+            sinceTag?.description shouldBeEqualTo "1.0.0"
         }
     }
 
     @Test
-    fun `class-with-block-tags version tag`() {
+    fun `class-with-tags version tag`() {
         // given
-        val sut = getSnippetFile("class-with-block-tags")
+        val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            versionBlockTag?.name shouldBeEqualTo VERSION
-            versionBlockTag?.description shouldBeEqualTo "1.2.3"
+            versionTag?.name shouldBeEqualTo VERSION
+            versionTag?.description shouldBeEqualTo "1.2.3"
         }
     }
 
     @Test
-    fun `class-with-block-tags sample tag`() {
+    fun `class-with-tags sample tag`() {
         // given
-        val sut = getSnippetFile("class-with-block-tags")
+        val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            sampleBlockTags shouldHaveSize 2
-            sampleBlockTags[0].name shouldBeEqualTo SAMPLE
-            sampleBlockTags[0].value shouldBeEqualTo "SampleClass.sampleMethod"
-            sampleBlockTags[0].description shouldBeEqualTo "sample description"
-            sampleBlockTags[1].name shouldBeEqualTo SAMPLE
-            sampleBlockTags[1].value shouldBeEqualTo "SampleClass.sampleProperty"
-            sampleBlockTags[1].description shouldBeEqualTo ""
+            sampleTags shouldHaveSize 2
+            sampleTags[0].name shouldBeEqualTo SAMPLE
+            sampleTags[0].value shouldBeEqualTo "SampleClass.sampleMethod"
+            sampleTags[0].description shouldBeEqualTo "sample description"
+            sampleTags[1].name shouldBeEqualTo SAMPLE
+            sampleTags[1].value shouldBeEqualTo "SampleClass.sampleProperty"
+            sampleTags[1].description shouldBeEqualTo ""
         }
     }
 
     @Test
-    fun `class-with-block-tags suppress tag`() {
+    fun `class-with-tags suppress tag`() {
         // given
-        val sut = getSnippetFile("class-with-block-tags")
+        val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            suppressBlockTag?.name shouldBeEqualTo SUPPRESS
-            suppressBlockTag?.description shouldBeEqualTo "UnusedPrivateMember"
+            suppressTag?.name shouldBeEqualTo SUPPRESS
+            suppressTag?.description shouldBeEqualTo "UnusedPrivateMember"
         }
     }
 
     @Test
-    fun `class-with-block-tags author tag`() {
+    fun `class-with-tags author tag`() {
         // given
-        val sut = getSnippetFile("class-with-block-tags")
+        val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            authorBlockTags shouldHaveSize 2
-            authorBlockTags[0].name shouldBeEqualTo AUTHOR
-            authorBlockTags[0].description shouldBeEqualTo "Author1"
-            authorBlockTags[1].name shouldBeEqualTo AUTHOR
-            authorBlockTags[1].description shouldBeEqualTo "Author2"
+            authorTags shouldHaveSize 2
+            authorTags[0].name shouldBeEqualTo AUTHOR
+            authorTags[0].description shouldBeEqualTo "Author1"
+            authorTags[1].name shouldBeEqualTo AUTHOR
+            authorTags[1].description shouldBeEqualTo "Author2"
         }
     }
 
     @Test
-    fun `function-with-block-tags text and description`() {
+    fun `function-with-tags text and description`() {
         // given
-        val sut = getSnippetFile("function-with-block-tags")
+        val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
@@ -328,196 +328,196 @@ class KoDocDeclarationImplTest {
     }
 
     @Test
-    fun `function-with-block-tags param tag`() {
+    fun `function-with-tags param tag`() {
         // given
-        val sut = getSnippetFile("function-with-block-tags")
+        val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            paramBlockTags shouldHaveSize 2
-            paramBlockTags[0].name shouldBeEqualTo PARAM
-            paramBlockTags[0].value shouldBeEqualTo "sampleArgument1"
-            paramBlockTags[0].description shouldBeEqualTo "The first argument."
-            paramBlockTags[1].name shouldBeEqualTo PARAM
-            paramBlockTags[1].value shouldBeEqualTo "sampleArgument2"
-            paramBlockTags[1].description shouldBeEqualTo "The second argument."
+            paramTags shouldHaveSize 2
+            paramTags[0].name shouldBeEqualTo PARAM
+            paramTags[0].value shouldBeEqualTo "sampleArgument1"
+            paramTags[0].description shouldBeEqualTo "The first argument."
+            paramTags[1].name shouldBeEqualTo PARAM
+            paramTags[1].value shouldBeEqualTo "sampleArgument2"
+            paramTags[1].description shouldBeEqualTo "The second argument."
         }
     }
 
     @Test
-    fun `function-with-block-tags return tag`() {
+    fun `function-with-tags return tag`() {
         // given
-        val sut = getSnippetFile("function-with-block-tags")
+        val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            returnBlockTag?.name shouldBeEqualTo RETURN
-            returnBlockTag?.description shouldBeEqualTo "The result of the computation."
+            returnTag?.name shouldBeEqualTo RETURN
+            returnTag?.description shouldBeEqualTo "The result of the computation."
         }
     }
 
     @Test
-    fun `function-with-block-tags throws tag`() {
+    fun `function-with-tags throws tag`() {
         // given
-        val sut = getSnippetFile("function-with-block-tags")
+        val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            throwsBlockTags shouldHaveSize 1
-            throwsBlockTags[0].name shouldBeEqualTo THROWS
-            throwsBlockTags[0].value shouldBeEqualTo "IllegalArgumentException"
-            throwsBlockTags[0].description shouldBeEqualTo "First sample description"
+            throwsTags shouldHaveSize 1
+            throwsTags[0].name shouldBeEqualTo THROWS
+            throwsTags[0].value shouldBeEqualTo "IllegalArgumentException"
+            throwsTags[0].description shouldBeEqualTo "First sample description"
         }
     }
 
     @Test
-    fun `function-with-block-tags exception tag`() {
+    fun `function-with-tags exception tag`() {
         // given
-        val sut = getSnippetFile("function-with-block-tags")
+        val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            exceptionBlockTags shouldHaveSize 1
-            exceptionBlockTags[0].name shouldBeEqualTo EXCEPTION
-            exceptionBlockTags[0].value shouldBeEqualTo "NullPointerException"
-            exceptionBlockTags[0].description shouldBeEqualTo "Second sample description"
+            exceptionTags shouldHaveSize 1
+            exceptionTags[0].name shouldBeEqualTo EXCEPTION
+            exceptionTags[0].value shouldBeEqualTo "NullPointerException"
+            exceptionTags[0].description shouldBeEqualTo "Second sample description"
         }
     }
 
     @Test
-    fun `function-with-block-tags sample tag`() {
+    fun `function-with-tags sample tag`() {
         // given
-        val sut = getSnippetFile("function-with-block-tags")
+        val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            sampleBlockTags shouldHaveSize 2
-            sampleBlockTags[0].name shouldBeEqualTo SAMPLE
-            sampleBlockTags[0].value shouldBeEqualTo "SampleClass.sampleMethod"
-            sampleBlockTags[0].description shouldBeEqualTo "sample description"
-            sampleBlockTags[1].name shouldBeEqualTo SAMPLE
-            sampleBlockTags[1].value shouldBeEqualTo "SampleClass.sampleProperty"
-            sampleBlockTags[1].description shouldBeEqualTo ""
+            sampleTags shouldHaveSize 2
+            sampleTags[0].name shouldBeEqualTo SAMPLE
+            sampleTags[0].value shouldBeEqualTo "SampleClass.sampleMethod"
+            sampleTags[0].description shouldBeEqualTo "sample description"
+            sampleTags[1].name shouldBeEqualTo SAMPLE
+            sampleTags[1].value shouldBeEqualTo "SampleClass.sampleProperty"
+            sampleTags[1].description shouldBeEqualTo ""
         }
     }
 
     @Test
-    fun `function-with-block-tags receiver tag`() {
+    fun `function-with-tags receiver tag`() {
         // given
-        val sut = getSnippetFile("function-with-block-tags")
+        val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            receiverBlockTag?.name shouldBeEqualTo RECEIVER
-            receiverBlockTag?.description shouldBeEqualTo "sample receiver description"
+            receiverTag?.name shouldBeEqualTo RECEIVER
+            receiverTag?.description shouldBeEqualTo "sample receiver description"
         }
     }
 
     @Test
-    fun `function-with-block-tags see tag`() {
+    fun `function-with-tags see tag`() {
         // given
-        val sut = getSnippetFile("function-with-block-tags")
+        val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            seeBlockTags shouldHaveSize 2
-            seeBlockTags[0].name shouldBeEqualTo SEE
-            seeBlockTags[0].value shouldBeEqualTo "AnotherClass1"
-            seeBlockTags[0].description shouldBeEqualTo "sample description"
-            seeBlockTags[1].name shouldBeEqualTo SEE
-            seeBlockTags[1].value shouldBeEqualTo "AnotherClass2"
-            seeBlockTags[1].description shouldBeEqualTo ""
+            seeTags shouldHaveSize 2
+            seeTags[0].name shouldBeEqualTo SEE
+            seeTags[0].value shouldBeEqualTo "AnotherClass1"
+            seeTags[0].description shouldBeEqualTo "sample description"
+            seeTags[1].name shouldBeEqualTo SEE
+            seeTags[1].value shouldBeEqualTo "AnotherClass2"
+            seeTags[1].description shouldBeEqualTo ""
         }
     }
 
     @Test
-    fun `function-with-block-tags author tag`() {
+    fun `function-with-tags author tag`() {
         // given
-        val sut = getSnippetFile("function-with-block-tags")
+        val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            authorBlockTags shouldHaveSize 2
-            authorBlockTags[0].name shouldBeEqualTo AUTHOR
-            authorBlockTags[0].description shouldBeEqualTo "Author1"
-            authorBlockTags[1].name shouldBeEqualTo AUTHOR
-            authorBlockTags[1].description shouldBeEqualTo "Author2"
+            authorTags shouldHaveSize 2
+            authorTags[0].name shouldBeEqualTo AUTHOR
+            authorTags[0].description shouldBeEqualTo "Author1"
+            authorTags[1].name shouldBeEqualTo AUTHOR
+            authorTags[1].description shouldBeEqualTo "Author2"
         }
     }
 
     @Test
-    fun `function-with-block-tags since tag`() {
+    fun `function-with-tags since tag`() {
         // given
-        val sut = getSnippetFile("function-with-block-tags")
+        val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            sinceBlockTag?.name shouldBeEqualTo SINCE
-            sinceBlockTag?.description shouldBeEqualTo "1.0.0"
+            sinceTag?.name shouldBeEqualTo SINCE
+            sinceTag?.description shouldBeEqualTo "1.0.0"
         }
     }
 
     @Test
-    fun `function-with-block-tags version tag`() {
+    fun `function-with-tags version tag`() {
         // given
-        val sut = getSnippetFile("function-with-block-tags")
+        val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            versionBlockTag?.name shouldBeEqualTo VERSION
-            versionBlockTag?.description shouldBeEqualTo "1.2.3"
+            versionTag?.name shouldBeEqualTo VERSION
+            versionTag?.description shouldBeEqualTo "1.2.3"
         }
     }
 
     @Test
-    fun `function-with-block-tags suppress tag`() {
+    fun `function-with-tags suppress tag`() {
         // given
-        val sut = getSnippetFile("function-with-block-tags")
+        val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            suppressBlockTag?.name shouldBeEqualTo SUPPRESS
-            suppressBlockTag?.description shouldBeEqualTo "UnusedPrivateMember"
+            suppressTag?.name shouldBeEqualTo SUPPRESS
+            suppressTag?.description shouldBeEqualTo "UnusedPrivateMember"
         }
     }
 
     @Test
-    fun `property-with-block-tags text and description`() {
+    fun `property-with-tags text and description`() {
         // given
-        val sut = getSnippetFile("property-with-block-tags")
+        val sut = getSnippetFile("property-with-tags")
             .properties(includeNested = true)
             .first()
             .koDoc!!
@@ -530,39 +530,39 @@ class KoDocDeclarationImplTest {
     }
 
     @Test
-    fun `property-with-block-tags propertySetter tag`() {
+    fun `property-with-tags propertySetter tag`() {
         // given
-        val sut = getSnippetFile("property-with-block-tags")
+        val sut = getSnippetFile("property-with-tags")
             .properties(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            propertySetterBlockTag?.name shouldBeEqualTo PROPERTY_SETTER
-            propertySetterBlockTag?.description shouldBeEqualTo "Sets the value of the [name] property."
+            propertySetterTag?.name shouldBeEqualTo PROPERTY_SETTER
+            propertySetterTag?.description shouldBeEqualTo "Sets the value of the [name] property."
         }
     }
 
     @Test
-    fun `property-with-block-tags propertyGetter tag`() {
+    fun `property-with-tags propertyGetter tag`() {
         // given
-        val sut = getSnippetFile("property-with-block-tags")
+        val sut = getSnippetFile("property-with-tags")
             .properties(includeNested = true)
             .first()
             .koDoc!!
 
         // then
         assertSoftly(sut) {
-            propertyGetterBlockTag?.name shouldBeEqualTo PROPERTY_GETTER
-            propertyGetterBlockTag?.description shouldBeEqualTo "Retrieves the value of the [name] property."
+            propertyGetterTag?.name shouldBeEqualTo PROPERTY_GETTER
+            propertyGetterTag?.description shouldBeEqualTo "Retrieves the value of the [name] property."
         }
     }
 
     @Test
-    fun `class-has-block-tags`() {
+    fun `class-has-tags`() {
         // given
-        val sut = getSnippetFile("class-has-block-tags")
+        val sut = getSnippetFile("class-has-tags")
             .classes()
             .first()
             .koDoc!!
@@ -578,9 +578,9 @@ class KoDocDeclarationImplTest {
     }
 
     @Test
-    fun `class-has-block-tags-without-description`() {
+    fun `class-has-tags-without-description`() {
         // given
-        val sut = getSnippetFile("class-has-block-tags-without-description")
+        val sut = getSnippetFile("class-has-tags-without-description")
             .classes()
             .first()
             .koDoc!!
