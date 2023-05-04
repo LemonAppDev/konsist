@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.verify
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -70,7 +71,7 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
     val testMethodName = Thread.currentThread().stackTrace[4].methodName
     val declarations: MutableMap<E, Boolean> = mutableMapOf()
 
-    localList.forEach { declarations[it] = checkIfSuppressed(it as KoDeclaration, testMethodName) }
+    localList.forEach { declarations[it] = checkIfSuppressed(it as KoDeclarationImpl, testMethodName) }
 
     val withoutSuppress = mutableListOf<E>()
 
@@ -79,7 +80,7 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
     return withoutSuppress
 }
 
-private fun checkIfSuppressed(declaration: KoDeclaration, testMethodName: String): Boolean {
+private fun checkIfSuppressed(declaration: KoDeclarationImpl, testMethodName: String): Boolean {
     return when {
         declaration.hasAnnotations("Suppress(\"konsist.$testMethodName\")") -> true
         declaration.hasAnnotations("Suppress(\"$testMethodName\")") -> true
