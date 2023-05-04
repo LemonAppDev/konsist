@@ -35,7 +35,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
             .substringBefore(") in")
             .split(",")
             .toMutableList()
-            .also { it.removeIf { string -> string.isBlank() } }
+            .filterNot { it.isBlank() }
 
         val line = lineAndColumn[0]
         val column = lineAndColumn[1]
