@@ -41,7 +41,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             return KoScopeImpl(projectKotlinFiles)
         }
 
-        var pathPrefix = if(module != null) {
+        var pathPrefix = if (module != null) {
             "${pathProvider.rootProjectPath}/${module.lowercase()}"
         } else {
             "${pathProvider.rootProjectPath}/.*"
