@@ -27,7 +27,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
             val checkMethodName = Thread.currentThread().stackTrace[2].methodName
             throw KoPreconditionFailedException(
                 "Declaration list is empty. Please make sure that list of declarations contain items " +
-                    "before calling '$checkMethodName' method.",
+                    "before calling the '$checkMethodName' method.",
             )
         }
 
