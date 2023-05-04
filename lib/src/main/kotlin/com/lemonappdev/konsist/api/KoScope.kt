@@ -53,7 +53,9 @@ interface KoScope {
     ): Sequence<KoPropertyDeclaration>
 
     fun imports(): Sequence<KoImportDeclaration>
+
     fun packages(): Sequence<KoPackageDeclaration>
+
     fun typeAliases(): Sequence<KoTypeAliasDeclaration>
 
     operator fun plus(scope: KoScope): KoScope
