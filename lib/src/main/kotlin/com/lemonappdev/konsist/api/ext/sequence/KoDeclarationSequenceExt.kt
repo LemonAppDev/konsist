@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.KoModifier
-import com.lemonappdev.konsist.api.KoTag
+import com.lemonappdev.konsist.api.KoDocTag
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
 import kotlin.reflect.KClass
@@ -90,13 +90,13 @@ fun <T : KoDeclaration> Sequence<T>.withKoDoc() = filter { it.hasKoDoc() }
 
 fun <T : KoDeclaration> Sequence<T>.withoutKoDoc() = filterNot { it.hasKoDoc() }
 
-fun <T : KoDeclaration> Sequence<T>.withKoDocWithTags(vararg tags: KoTag) = filter { it.koDoc?.hasTags(*tags) ?: false }
+fun <T : KoDeclaration> Sequence<T>.withKoDocWithTags(vararg tags: KoDocTag) = filter { it.koDoc?.hasTags(*tags) ?: false }
 
-fun <T : KoDeclaration> Sequence<T>.withSomeKoDocWithTags(vararg tags: KoTag) = filter {
+fun <T : KoDeclaration> Sequence<T>.withSomeKoDocWithTags(vararg tags: KoDocTag) = filter {
     tags.any { tag -> it.koDoc?.hasTags(tag) ?: false }
 }
 
-fun <T : KoDeclaration> Sequence<T>.withoutKoDocWithTags(vararg tags: KoTag) = filterNot { it.koDoc?.hasTags(*tags) ?: false }
+fun <T : KoDeclaration> Sequence<T>.withoutKoDocWithTags(vararg tags: KoDocTag) = filterNot { it.koDoc?.hasTags(*tags) ?: false }
 
 fun <T : KoDeclaration> Sequence<T>.print(): Sequence<T> {
     forEach { println(it.toString()) }

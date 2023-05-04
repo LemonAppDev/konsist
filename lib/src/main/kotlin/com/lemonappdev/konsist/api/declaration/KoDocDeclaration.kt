@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.api.KoTag
+import com.lemonappdev.konsist.api.KoDocTag
 
 interface KoDocDeclaration : KoPsiDeclaration {
     val description: String
@@ -37,9 +37,9 @@ interface KoDocDeclaration : KoPsiDeclaration {
 
     val propertyGetterTag: KoDocTagDeclaration?
 
-    fun hasTags(vararg tags: KoTag): Boolean
+    fun hasTags(vararg tags: KoDocTag): Boolean
 
-    fun parseToValuedTag(koTag: KoTag, sentence: String): KoValuedDocTagDeclaration
+    fun parseToValuedTag(koDocTag: KoDocTag, sentence: String): KoValuedDocTagDeclaration
 
-    fun parseToTag(koTag: KoTag, sentence: String): KoDocTagDeclaration
+    fun parseToTag(koDocTag: KoDocTag, sentence: String): KoDocTagDeclaration
 }

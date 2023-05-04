@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.api.KoTag
+import com.lemonappdev.konsist.api.KoDocTag
 
 interface KoDocTagDeclaration {
-    val name: KoTag
+    val name: KoDocTag
     val description: String
 }
