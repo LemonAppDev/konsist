@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.declaration
 
 /**
- * Companion object declaration.
+ * Object declaration.
  */
 interface KoObjectDeclaration : KoComplexDeclaration {
     /**
