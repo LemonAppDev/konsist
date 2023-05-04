@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.verify
 
-import com.lemonappdev.konsist.core.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.core.declaration.KoDeclaration
-import com.lemonappdev.konsist.core.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
+import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException

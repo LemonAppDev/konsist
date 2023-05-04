@@ -1,13 +1,13 @@
 package com.lemonappdev.konsist.core.declaration.provider
 
-import com.lemonappdev.konsist.core.const.KoModifier
-import com.lemonappdev.konsist.core.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclaration
-import com.lemonappdev.konsist.core.declaration.KoDeclaration
-import com.lemonappdev.konsist.core.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.core.declaration.KoObjectDeclaration
-import com.lemonappdev.konsist.core.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 
 interface KoDeclarationProvider {
     fun declarations(

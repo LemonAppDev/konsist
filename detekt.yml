@@ -162,12 +162,12 @@ complexity:
     ignoreStringsRegex: '$^'
   TooManyFunctions:
     active: true
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**' ]
-    thresholdInFiles: 15
-    thresholdInClasses: 15
-    thresholdInInterfaces: 15
-    thresholdInObjects: 15
-    thresholdInEnums: 15
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**', '**/konsist/api/ext/sequence/**' ]
+    thresholdInFiles: 20
+    thresholdInClasses: 20
+    thresholdInInterfaces: 20
+    thresholdInObjects: 20
+    thresholdInEnums: 20
     ignoreDeprecated: false
     ignorePrivate: false
     ignoreOverridden: false

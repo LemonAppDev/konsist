@@ -3,7 +3,8 @@ package com.lemonappdev.konsist.util
 import com.intellij.openapi.util.Disposer
 import com.intellij.psi.PsiManager
 import com.intellij.testFramework.LightVirtualFile
-import com.lemonappdev.konsist.core.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.core.declaration.KoFileDeclarationImpl
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.isKotlinSnippetFile
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
@@ -43,6 +44,6 @@ object KotlinFileParser {
 
     fun getKonsistFile(file: File): KoFileDeclaration {
         val ktFile = getKtFile(file)
-        return KoFileDeclaration.getInstance(ktFile)
+        return KoFileDeclarationImpl.getInstance(ktFile)
     }
 }
