@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.filesystem
 
 import com.lemonappdev.konsist.core.exception.KoInternalException
-import com.lemonappdev.konsist.core.filesystem.rootprovider.GitProjectRootDirProvider
-import com.lemonappdev.konsist.core.filesystem.rootprovider.GradleProjectRootDirProvider
-import com.lemonappdev.konsist.core.filesystem.rootprovider.MavenProjectRootDirProvider
+import com.lemonappdev.konsist.core.filesystem.rootprovider.GitProjectRootDirResolver
+import com.lemonappdev.konsist.core.filesystem.rootprovider.GradleProjectRootDirResolver
+import com.lemonappdev.konsist.core.filesystem.rootprovider.MavenProjectRootDirResolver
 import java.io.File
 
 class PathProvider(
@@ -42,9 +42,9 @@ class ProjectRootDirProviderFactory(
     pathVerifier: PathVerifier,
 ) {
     private val providers = listOf(
-        GradleProjectRootDirProvider(pathVerifier),
-        MavenProjectRootDirProvider(pathVerifier),
-        GitProjectRootDirProvider(pathVerifier),
+        GradleProjectRootDirResolver(pathVerifier),
+        MavenProjectRootDirResolver(pathVerifier),
+        GitProjectRootDirResolver(pathVerifier),
     )
 
     fun create() = providers
