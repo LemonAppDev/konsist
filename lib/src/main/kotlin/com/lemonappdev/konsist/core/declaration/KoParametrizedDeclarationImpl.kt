@@ -9,9 +9,9 @@ internal abstract class KoParametrizedDeclarationImpl(
 
     override val parameters by lazy {
         ktFunction
-        .valueParameters
-        .map { KoParameterDeclarationImpl.getInstance(it) }
-        .ifEmpty { null }
+            .valueParameters
+            .map { KoParameterDeclarationImpl.getInstance(it) }
+            .ifEmpty { null }
     }
 
     override fun hasParameterNamed(name: String?) = when (name) {
