@@ -41,14 +41,22 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             return KoScopeImpl(projectKotlinFiles)
         }
 
-        var pathPrefix = "${pathProvider.rootProjectPath}/${module?.lowercase()}"
-
-        if (sourceSet != null) {
-            pathPrefix = "$pathPrefix/src/$sourceSet/"
+        var pathPrefix = if(module != null) {
+            "${pathProvider.rootProjectPath}/${module.lowercase()}"
+        } else {
+            "${pathProvider.rootProjectPath}/.*"
         }
 
+        pathPrefix = if (sourceSet != null) {
+            "$pathPrefix/src/$sourceSet"
+        } else {
+            "$pathPrefix/src/.*"
+        }
+
+        pathPrefix += "/.*"
+
         val koFiles = projectKotlinFiles
-            .filter { it.filePath.startsWith(pathPrefix) }
+            .filter { it.filePath.matches(Regex(pathPrefix)) }
 
         return KoScopeImpl(koFiles)
     }
