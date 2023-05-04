@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 
 interface KoScope {
     fun files(): Sequence<KoFileDeclaration>
+
     fun classes(
         modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
