@@ -53,8 +53,9 @@ class KoScopeImpl(
     override fun declarations(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
+        includeLocal: Boolean,
     ): Sequence<KoDeclaration> =
-        koFiles.flatMap { it.declarations(modifiers, includeNested) }
+        koFiles.flatMap { it.declarations(modifiers, includeNested, includeLocal) }
 
     override fun properties(
         modifiers: List<KoModifier>,
