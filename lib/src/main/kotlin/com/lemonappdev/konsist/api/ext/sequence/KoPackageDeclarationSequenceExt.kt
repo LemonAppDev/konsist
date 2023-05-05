@@ -5,13 +5,13 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 /**
  * Sequence containing all declarations that have the fully qualified name.
  */
-fun Sequence<KoPackageDeclaration>.withQualifiedName(vararg names: String) = filter {
+fun Sequence<KoPackageDeclaration>.withQualifiedName(vararg names: String): Sequence<KoPackageDeclaration> = filter {
     names.any { name -> it.qualifiedName == name }
 }
 
 /**
  * Sequence containing all declarations that don't have the fully qualified name.
  */
-fun Sequence<KoPackageDeclaration>.withoutQualifiedName(vararg names: String) = filter {
+fun Sequence<KoPackageDeclaration>.withoutQualifiedName(vararg names: String): Sequence<KoPackageDeclaration> = filter {
     names.none { name -> it.qualifiedName == name }
 }
