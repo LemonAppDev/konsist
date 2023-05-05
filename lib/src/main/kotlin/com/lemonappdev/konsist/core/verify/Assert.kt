@@ -64,4 +64,7 @@ private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: Li
 /**
  * In this call stack hierarchy test name is at index 5.
  */
-private fun getTestMethodName() = Thread.currentThread().stackTrace[5].methodName
+private fun getTestMethodName(): String? {
+    val stackTraceIndexOfTestMethod = 5
+    return Thread.currentThread().stackTrace[stackTraceIndexOfTestMethod].methodName
+}
