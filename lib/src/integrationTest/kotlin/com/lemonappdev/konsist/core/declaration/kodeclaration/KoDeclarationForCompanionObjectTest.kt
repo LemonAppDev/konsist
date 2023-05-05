@@ -209,7 +209,7 @@ class KoDeclarationForCompanionObjectTest {
             .first()
 
         // then
-        sut.packageName shouldBeEqualTo "com.samplepackage"
+        sut.packagee shouldBeEqualTo "com.samplepackage"
     }
 
     @Test
@@ -220,7 +220,7 @@ class KoDeclarationForCompanionObjectTest {
             .first()
 
         // then
-        sut.packageName shouldBeEqualTo ""
+        sut.packagee shouldBeEqualTo ""
     }
 
     @Test

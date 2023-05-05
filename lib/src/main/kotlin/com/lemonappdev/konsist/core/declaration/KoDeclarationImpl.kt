@@ -21,7 +21,7 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
         }
     }
 
-    override val packageName by lazy {
+    override val packagee by lazy {
         fullyQualifiedName
             .split(".")
             .toMutableList()
@@ -95,7 +95,7 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
 
     override fun hasKoDoc() = koDoc != null
 
-    override fun resideInPackage(packagee: String) = LocationHelper.resideInLocation(packagee, this.packageName)
+    override fun resideInPackage(packagee: String) = LocationHelper.resideInLocation(packagee, this.packagee)
 
     override fun resideOutsidePackage(packagee: String) = !resideInPackage(packagee)
 }
