@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core
+package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.sequence.print
