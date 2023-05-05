@@ -34,8 +34,13 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     override fun scopeFromProject(module: String?, sourceSet: String?): KoScope {
+        val koFiles = getFiles(module, sourceSet)
+        return KoScopeImpl(koFiles)
+    }
+
+    private fun getFiles(module: String?, sourceSet: String?): Sequence<KoFileDeclaration> {
         if (module == null && sourceSet == null) {
-            return KoScopeImpl(projectKotlinFiles)
+            return projectKotlinFiles
         }
 
         var pathPrefix = if (module != null) {
@@ -55,28 +60,25 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val koFiles = projectKotlinFiles
             .filter { it.filePath.matches(Regex(pathPrefix)) }
 
-        return KoScopeImpl(koFiles)
+        return koFiles
     }
 
     override fun scopeFromProduction(module: String?, sourceSet: String?): KoScope {
-        val koFiles = scopeFromProject(module, sourceSet)
-            .files()
+        val koFiles = getFiles(module, sourceSet)
             .filterNot { isTestFile(it) }
 
         return KoScopeImpl(koFiles)
     }
 
     override fun scopeFromTest(module: String?, sourceSet: String?): KoScope {
-        val koFiles = scopeFromProject(module, sourceSet)
-            .files()
+        val koFiles = getFiles(module, sourceSet)
             .filter { isTestFile(it) }
 
         return KoScopeImpl(koFiles)
     }
 
     override fun scopeFromPackage(packageName: String, module: String?, sourceSet: String?): KoScope {
-        val koFiles = scopeFromProject(module, sourceSet)
-            .files()
+        val koFiles = getFiles(module, sourceSet)
             .withPackage(packageName)
 
         return KoScopeImpl(koFiles)
