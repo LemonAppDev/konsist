@@ -2,6 +2,9 @@ package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 
+/**
+ * Sequence containing all declarations that have an alias.
+ */
 fun Sequence<KoImportDeclaration>.withAlias(vararg names: String) = filter {
     when {
         names.isEmpty() -> it.alias != it.name
@@ -9,6 +12,9 @@ fun Sequence<KoImportDeclaration>.withAlias(vararg names: String) = filter {
     }
 }
 
+/**
+ * Sequence containing all declarations that don't have an alias.
+ */
 fun Sequence<KoImportDeclaration>.withoutAlias(vararg names: String) = filter {
     when {
         names.isEmpty() -> it.alias == it.name

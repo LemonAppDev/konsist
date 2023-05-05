@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
+import com.lemonappdev.konsist.api.KoDocTag.SEE
+import com.lemonappdev.konsist.api.KoDocTag.SINCE
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
-import com.lemonappdev.konsist.api.KoTag.SEE
-import com.lemonappdev.konsist.api.KoTag.SINCE
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoDocDeclarationImpl
@@ -637,18 +637,18 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withKoDocWithTags(String) returns declaration with all of given block tags`() {
+    fun `withKoDocWithTags(String) returns declaration with all of given tags`() {
         // given
-        val blockTag1 = SINCE
-        val blockTag2 = SEE
+        val tag1 = SINCE
+        val tag2 = SEE
         val koDoc1: KoDocDeclarationImpl = mockk {
-            every { hasTags(blockTag1, blockTag2) } returns true
+            every { hasTags(tag1, tag2) } returns true
         }
         val declaration1: KoDeclarationImpl = mockk {
             every { koDoc } returns koDoc1
         }
         val koDoc2: KoDocDeclarationImpl = mockk {
-            every { hasTags(blockTag1, blockTag2) } returns false
+            every { hasTags(tag1, tag2) } returns false
         }
         val declaration2: KoDeclarationImpl = mockk {
             every { koDoc } returns koDoc2
@@ -656,25 +656,25 @@ class KoDeclarationSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withKoDocWithTags(blockTag1, blockTag2)
+        val sut = declarations.withKoDocWithTags(tag1, tag2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutKoDocWithTags(String) returns declaration without any of given block tags`() {
+    fun `withoutKoDocWithTags(String) returns declaration without any of given tags`() {
         // given
-        val blockTag1 = SINCE
-        val blockTag2 = SEE
+        val tag1 = SINCE
+        val tag2 = SEE
         val koDoc1: KoDocDeclarationImpl = mockk {
-            every { hasTags(blockTag1, blockTag2) } returns true
+            every { hasTags(tag1, tag2) } returns true
         }
         val declaration1: KoDeclarationImpl = mockk {
             every { koDoc } returns koDoc1
         }
         val koDoc2: KoDocDeclarationImpl = mockk {
-            every { hasTags(blockTag1, blockTag2) } returns false
+            every { hasTags(tag1, tag2) } returns false
         }
         val declaration2: KoDeclarationImpl = mockk {
             every { koDoc } returns koDoc2
@@ -682,34 +682,34 @@ class KoDeclarationSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutKoDocWithTags(blockTag1, blockTag2)
+        val sut = declarations.withoutKoDocWithTags(tag1, tag2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withSomeKoDocWithTags(String) returns declarations which have at least one of given block tags`() {
+    fun `withSomeKoDocWithTags(String) returns declarations which have at least one of given tags`() {
         // given
-        val blockTag1 = SINCE
-        val blockTag2 = SEE
+        val tag1 = SINCE
+        val tag2 = SEE
         val koDoc1: KoDocDeclarationImpl = mockk {
-            every { hasTags(blockTag1) } returns true
-            every { hasTags(blockTag2) } returns true
+            every { hasTags(tag1) } returns true
+            every { hasTags(tag2) } returns true
         }
         val declaration1: KoDeclarationImpl = mockk {
             every { koDoc } returns koDoc1
         }
         val koDoc2: KoDocDeclarationImpl = mockk {
-            every { hasTags(blockTag1) } returns true
-            every { hasTags(blockTag2) } returns false
+            every { hasTags(tag1) } returns true
+            every { hasTags(tag2) } returns false
         }
         val declaration2: KoDeclarationImpl = mockk {
             every { koDoc } returns koDoc2
         }
         val koDoc3: KoDocDeclarationImpl = mockk {
-            every { hasTags(blockTag1) } returns false
-            every { hasTags(blockTag2) } returns false
+            every { hasTags(tag1) } returns false
+            every { hasTags(tag2) } returns false
         }
         val declaration3: KoDeclarationImpl = mockk {
             every { koDoc } returns koDoc3
@@ -717,7 +717,7 @@ class KoDeclarationSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withSomeKoDocWithTags(blockTag1, blockTag2)
+        val sut = declarations.withSomeKoDocWithTags(tag1, tag2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)

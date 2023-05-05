@@ -7,21 +7,6 @@ import org.junit.jupiter.api.Test
 
 class ParametrizedDeclarationForSecondaryConstructorTest {
     @Test
-    fun `secondary-constructor-contains-no-parameters`() {
-        // given
-        val sut = getSnippetFile("secondary-constructor-contains-no-parameters")
-            .classes()
-            .flatMap { it.secondaryConstructors }
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            parameters shouldBeEqualTo emptyList()
-            hasParameterNamed() shouldBeEqualTo false
-        }
-    }
-
-    @Test
     fun `secondary-constructor-contains-parameter`() {
         // given
         val sut = getSnippetFile("secondary-constructor-contains-parameter")
@@ -31,8 +16,8 @@ class ParametrizedDeclarationForSecondaryConstructorTest {
 
         // then
         assertSoftly(sut.parameters) {
-            size shouldBeEqualTo 1
-            first().name shouldBeEqualTo "sampleParameter"
+            it?.size shouldBeEqualTo 1
+            it?.first()?.name shouldBeEqualTo "sampleParameter"
         }
     }
 

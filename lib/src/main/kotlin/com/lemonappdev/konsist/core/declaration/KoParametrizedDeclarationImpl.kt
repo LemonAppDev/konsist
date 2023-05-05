@@ -8,10 +8,15 @@ internal abstract class KoParametrizedDeclarationImpl(
     parent: KoBaseDeclarationImpl?,
 ) : KoDeclarationImpl(ktFunction, parent), KoParametrizedDeclaration {
 
-    override val parameters by lazy { ktFunction.valueParameters.map { KoParameterDeclarationImpl.getInstance(it, this) } }
+    override val parameters by lazy {
+        ktFunction
+            .valueParameters
+            .map { KoParameterDeclarationImpl.getInstance(it, this) }
+            .ifEmpty { null }
+    }
 
     override fun hasParameterNamed(name: String?) = when (name) {
-        null -> parameters.isNotEmpty()
-        else -> parameters.firstOrNull()?.name == name
+        null -> parameters != null
+        else -> parameters?.firstOrNull()?.name == name
     }
 }

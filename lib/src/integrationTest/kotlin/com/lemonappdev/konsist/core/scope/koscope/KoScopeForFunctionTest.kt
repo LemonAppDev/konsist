@@ -32,9 +32,9 @@ class KoScopeForFunctionTest {
     }
 
     @Test
-    fun `file-contains-two-functions-with-nested-function includeNested true`() {
+    fun `file-contains-two-functions-and-local-function includeNested true`() {
         // given
-        val sut = getSnippetFile("file-contains-two-functions-with-nested-function")
+        val sut = getSnippetFile("file-contains-two-functions-and-local-function")
 
         // then
         sut
@@ -50,9 +50,9 @@ class KoScopeForFunctionTest {
     }
 
     @Test
-    fun `file-contains-two-functions-with-nested-function includeNested false`() {
+    fun `file-contains-two-functions-and-local-function includeNested false`() {
         // given
-        val sut = getSnippetFile("file-contains-two-functions-with-nested-function")
+        val sut = getSnippetFile("file-contains-two-functions-and-local-function")
 
         // then
         sut

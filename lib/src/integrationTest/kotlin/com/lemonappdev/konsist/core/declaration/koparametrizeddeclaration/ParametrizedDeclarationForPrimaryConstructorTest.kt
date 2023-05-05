@@ -11,12 +11,13 @@ class ParametrizedDeclarationForPrimaryConstructorTest {
         // given
         val sut = getSnippetFile("primary-constructor-contains-no-parameters")
             .classes()
-            .firstNotNullOf { it.primaryConstructor }
+            .first()
+            .primaryConstructor
 
         // then
         assertSoftly(sut) {
-            parameters shouldBeEqualTo emptyList()
-            hasParameterNamed() shouldBeEqualTo false
+            it?.parameters shouldBeEqualTo null
+            it?.hasParameterNamed() shouldBeEqualTo false
         }
     }
 
@@ -29,8 +30,8 @@ class ParametrizedDeclarationForPrimaryConstructorTest {
 
         // then
         assertSoftly(sut.parameters) {
-            size shouldBeEqualTo 1
-            first().name shouldBeEqualTo "sampleParameter"
+            it?.size shouldBeEqualTo 1
+            it?.first()?.name shouldBeEqualTo "sampleParameter"
         }
     }
 

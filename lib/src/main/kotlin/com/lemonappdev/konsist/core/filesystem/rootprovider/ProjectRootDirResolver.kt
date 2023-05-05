@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.filesystem.rootprovider
 import com.lemonappdev.konsist.core.filesystem.PathVerifier
 import java.io.File
 
-abstract class ProjectRootDirProvider(
+abstract class ProjectRootDirResolver(
     private val pathVerifier: PathVerifier,
 ) {
     abstract val paths: Set<String>

@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core
 import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.KoScopeCreator
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
@@ -11,7 +12,6 @@ import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.filesystem.PathVerifier
 import com.lemonappdev.konsist.core.filesystem.ProjectRootDirProviderFactory
 import com.lemonappdev.konsist.core.scope.KoScopeImpl
-import com.lemonappdev.konsist.util.PackageHelper
 import java.io.File
 
 internal class KoScopeCreatorImpl : KoScopeCreator {
@@ -33,65 +33,57 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             .map { it.toKoFile() }
     }
 
-    /**
-     * Returns a [KoScope] containing all of Kotlin files in the project.
-     */
     override fun scopeFromProject(module: String?, sourceSet: String?): KoScope {
-        if (module == null && sourceSet == null) {
-            return KoScopeImpl(projectKotlinFiles)
-        }
-
-        var pathPrefix = "${pathProvider.rootProjectPath}/${module?.lowercase()}"
-
-        if (sourceSet != null) {
-            pathPrefix = "$pathPrefix/src/$sourceSet/"
-        }
-
-        val koFiles = projectKotlinFiles
-            .filter { it.filePath.startsWith(pathPrefix) }
-
+        val koFiles = getFiles(module, sourceSet)
         return KoScopeImpl(koFiles)
     }
 
-    /**
-     * Returns a [KoScope] containing all of Kotlin production files in the project.
-     */
+    private fun getFiles(module: String?, sourceSet: String?): Sequence<KoFileDeclaration> {
+        if (module == null && sourceSet == null) {
+            return projectKotlinFiles
+        }
+
+        var pathPrefix = if (module != null) {
+            "${pathProvider.rootProjectPath}/${module.lowercase()}"
+        } else {
+            "${pathProvider.rootProjectPath}/.*"
+        }
+
+        pathPrefix = if (sourceSet != null) {
+            "$pathPrefix/src/$sourceSet"
+        } else {
+            "$pathPrefix/src/.*"
+        }
+
+        pathPrefix += "/.*"
+
+        val koFiles = projectKotlinFiles
+            .filter { it.filePath.matches(Regex(pathPrefix)) }
+
+        return koFiles
+    }
+
     override fun scopeFromProduction(module: String?, sourceSet: String?): KoScope {
-        val koFiles = scopeFromProject(module, sourceSet)
-            .files()
+        val koFiles = getFiles(module, sourceSet)
             .filterNot { isTestFile(it) }
 
         return KoScopeImpl(koFiles)
     }
 
-    /**
-     * Returns a [KoScope] containing all of Kotlin test files in the project.
-     */
     override fun scopeFromTest(module: String?, sourceSet: String?): KoScope {
-        val koFiles = scopeFromProject(module, sourceSet)
-            .files()
+        val koFiles = getFiles(module, sourceSet)
             .filter { isTestFile(it) }
 
         return KoScopeImpl(koFiles)
     }
 
-    /**
-     * Returns a [KoScope] containing all of Kotlin files in the given package.
-     */
-    override fun scopeFromPackage(packageName: String): KoScope {
-        val koFiles = projectKotlinFiles
-            .filter {
-                it.packagee?.let { koPackage ->
-                    PackageHelper.resideInPackage(packageName, koPackage.qualifiedName)
-                } ?: false
-            }
+    override fun scopeFromPackage(packageName: String, module: String?, sourceSet: String?): KoScope {
+        val koFiles = getFiles(module, sourceSet)
+            .withPackage(packageName)
 
         return KoScopeImpl(koFiles)
     }
 
-    /**
-     * Returns a [KoScope] containing all of Kotlin files in the given directory.
-     */
     override fun scopeFromPath(path: String): KoScope {
         val koFiles = projectKotlinFiles
             .filter { it.filePath.startsWith(path) }
@@ -99,9 +91,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    /**
-     * Returns a [KoScope] of a given file.
-     */
     override fun scopeFromFile(path: String): KoScope {
         val file = File(path)
 

@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.core.exception.KoInternalException
-import com.lemonappdev.konsist.util.PackageHelper
+import com.lemonappdev.konsist.core.util.PackageHelper
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isPublic
@@ -28,7 +28,7 @@ internal abstract class KoDeclarationImpl(
         fullyQualifiedName
             .split(".")
             .toMutableList()
-            .apply { removeLast() }
+            .also { it.removeLast() }
             .joinToString(separator = ".")
     }
 
@@ -83,7 +83,7 @@ internal abstract class KoDeclarationImpl(
         else -> names.all { hasAnnotationNameOrAnnotationFullyQualifyName(it) }
     }
 
-    override fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String) = annotations.any {
+    private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String) = annotations.any {
         it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name
     }
 

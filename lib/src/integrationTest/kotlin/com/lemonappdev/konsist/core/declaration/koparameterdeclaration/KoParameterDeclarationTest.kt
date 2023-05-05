@@ -86,7 +86,7 @@ class KoParameterDeclarationTest {
             ?.parameters
 
         // then
-        sut?.isEmpty() shouldBeEqualTo true
+        sut shouldBeEqualTo null
     }
 
     @Test
@@ -96,14 +96,14 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
         assertSoftly(sut) {
-            defaultValue shouldBeEqualTo "2"
-            hasDefaultValue() shouldBeEqualTo true
-            hasDefaultValue("2") shouldBeEqualTo true
-            hasDefaultValue("10") shouldBeEqualTo false
+            it?.defaultValue shouldBeEqualTo "2"
+            it?.hasDefaultValue() shouldBeEqualTo true
+            it?.hasDefaultValue("2") shouldBeEqualTo true
+            it?.hasDefaultValue("10") shouldBeEqualTo false
         }
     }
 
@@ -114,14 +114,14 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
         assertSoftly(sut) {
-            defaultValue shouldBeEqualTo "SampleType()"
-            hasDefaultValue() shouldBeEqualTo true
-            hasDefaultValue("SampleType()") shouldBeEqualTo true
-            hasDefaultValue("OtherType()") shouldBeEqualTo false
+            it?.defaultValue shouldBeEqualTo "SampleType()"
+            it?.hasDefaultValue() shouldBeEqualTo true
+            it?.hasDefaultValue("SampleType()") shouldBeEqualTo true
+            it?.hasDefaultValue("OtherType()") shouldBeEqualTo false
         }
     }
 
@@ -132,13 +132,13 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
         assertSoftly(sut) {
-            defaultValue shouldBeEqualTo "null"
-            hasDefaultValue() shouldBeEqualTo true
-            hasDefaultValue("SampleType()") shouldBeEqualTo false
+            it?.defaultValue shouldBeEqualTo "null"
+            it?.hasDefaultValue() shouldBeEqualTo true
+            it?.hasDefaultValue("SampleType()") shouldBeEqualTo false
         }
     }
 
@@ -149,13 +149,13 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
         assertSoftly(sut) {
-            defaultValue shouldBeEqualTo null
-            hasDefaultValue() shouldBeEqualTo false
-            hasDefaultValue("SampleType()") shouldBeEqualTo false
+            it?.defaultValue shouldBeEqualTo null
+            it?.hasDefaultValue() shouldBeEqualTo false
+            it?.hasDefaultValue("SampleType()") shouldBeEqualTo false
         }
     }
 
@@ -180,10 +180,10 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
-        sut.hasNoInlineModifier() shouldBeEqualTo true
+        sut?.hasNoInlineModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -193,10 +193,10 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
-        sut.hasCrossInlineModifier() shouldBeEqualTo true
+        sut?.hasCrossInlineModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -224,12 +224,10 @@ class KoParameterDeclarationTest {
             .functions()
             .first()
             .parameters
-            .first()
+            ?.first()
 
         // then
-        assertSoftly(sut) {
-            it.representsType("SampleType") shouldBeEqualTo true
-        }
+        sut?.representsType("SampleType") shouldBeEqualTo true
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/", fileName)

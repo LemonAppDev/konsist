@@ -1,45 +1,98 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.api.KoTag
+import com.lemonappdev.konsist.api.KoDocTag
 
+/**
+ * Represents a Kotlin declaration.
+ */
 interface KoDocDeclaration : KoPsiDeclaration {
+    /**
+     * Description of the declaration.
+     */
     val description: String
 
-    val blockTags: List<KoDocTagDeclaration>
+    /**
+     * List of tags.
+     */
+    val tags: List<KoDocTagDeclaration>
 
-    val paramBlockTags: List<KoValuedDocTagDeclaration>
+    /**
+     * List of '@param' tags.
+     */
+    val paramTags: List<KoValuedDocTagDeclaration>
 
-    val returnBlockTag: KoDocTagDeclaration?
+    /**
+     * List of '@return' tags.
+     */
+    val returnTag: KoDocTagDeclaration?
 
-    val constructorBlockTag: KoDocTagDeclaration?
+    /**
+     * List of '@constructor' tags.
+     */
+    val constructorTag: KoDocTagDeclaration?
 
-    val receiverBlockTag: KoDocTagDeclaration?
+    /**
+     * List of '@receiver' tags.
+     */
+    val receiverTag: KoDocTagDeclaration?
 
-    val propertyBlockTags: List<KoValuedDocTagDeclaration>
+    /**
+     * List of '@property' tags.
+     */
+    val propertyTags: List<KoValuedDocTagDeclaration>
 
-    val throwsBlockTags: List<KoValuedDocTagDeclaration>
+    /**
+     * List of '@throws' tags.
+     */
+    val throwsTags: List<KoValuedDocTagDeclaration>
 
-    val exceptionBlockTags: List<KoValuedDocTagDeclaration>
+    /**
+     * List of '@exception' tags.
+     */
+    val exceptionTags: List<KoValuedDocTagDeclaration>
 
-    val sampleBlockTags: List<KoValuedDocTagDeclaration>
+    /**
+     * List of '@sample' tags.
+     */
+    val sampleTags: List<KoValuedDocTagDeclaration>
 
-    val seeBlockTags: List<KoValuedDocTagDeclaration>
+    /**
+     * List of '@see' tags.
+     */
+    val seeTags: List<KoValuedDocTagDeclaration>
 
-    val authorBlockTags: List<KoDocTagDeclaration>
+    /**
+     * List of '@author' tags.
+     */
+    val authorTags: List<KoDocTagDeclaration>
 
-    val sinceBlockTag: KoDocTagDeclaration?
+    /**
+     * List of '@since' tags.
+     */
+    val sinceTag: KoDocTagDeclaration?
 
-    val suppressBlockTag: KoDocTagDeclaration?
+    /**
+     * List of '@suppress' tags.
+     */
+    val suppressTag: KoDocTagDeclaration?
 
-    val versionBlockTag: KoDocTagDeclaration?
+    /**
+     * List of '@version' tags.
+     */
+    val versionTag: KoDocTagDeclaration?
 
-    val propertySetterBlockTag: KoDocTagDeclaration?
+    /**
+     * List of '@propertySetter' tags.
+     */
+    val propertySetterTag: KoDocTagDeclaration?
 
-    val propertyGetterBlockTag: KoDocTagDeclaration?
+    /**
+     * List of '@propertyGetter' tags.
+     */
+    val propertyGetterTag: KoDocTagDeclaration?
 
-    fun hasTags(vararg tags: KoTag): Boolean
-
-    fun parseToValuedBlockTag(koTag: KoTag, sentence: String): KoValuedDocTagDeclaration
-
-    fun parseToBlockTag(koTag: KoTag, sentence: String): KoDocTagDeclaration
+    /**
+     * Whather the declaration has the given tags.
+     */
+    fun hasTags(vararg tags: KoDocTag): Boolean
 }

@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.util
 
-import com.lemonappdev.konsist.util.PackageHelper
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test

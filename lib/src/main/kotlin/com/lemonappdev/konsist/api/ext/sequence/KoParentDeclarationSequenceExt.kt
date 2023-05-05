@@ -2,6 +2,9 @@ package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 
+/**
+ * Sequence containing all declarations that have delegate with given name.
+ */
 fun Sequence<KoParentDeclaration>.withDelegate(vararg names: String) = filter {
     when {
         names.isEmpty() -> it.hasDelegate()
@@ -9,6 +12,9 @@ fun Sequence<KoParentDeclaration>.withDelegate(vararg names: String) = filter {
     }
 }
 
+/**
+ * Sequence containing all declarations that don't have delegate with given name.
+ */
 fun Sequence<KoParentDeclaration>.withoutDelegate(vararg names: String) = filter {
     when {
         names.isEmpty() -> !it.hasDelegate()

@@ -7,8 +7,8 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class ProjectRootDirProviderTest {
-    private class Sut(pathVerifier: PathVerifier) : ProjectRootDirProvider(pathVerifier) {
+class ProjectRootDirResolverTest {
+    private class Sut(pathVerifier: PathVerifier) : ProjectRootDirResolver(pathVerifier) {
         override val paths = setOf("/path1", "/path2")
     }
 
