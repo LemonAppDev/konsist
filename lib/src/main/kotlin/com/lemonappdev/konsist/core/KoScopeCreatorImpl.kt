@@ -55,12 +55,11 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             "$pathPrefix/src/.*"
         }
 
+        // Dot means any character, aster means occur any number of times
         pathPrefix += "/.*"
 
-        val koFiles = projectKotlinFiles
+        return projectKotlinFiles
             .filter { it.filePath.matches(Regex(pathPrefix)) }
-
-        return koFiles
     }
 
     override fun scopeFromProduction(module: String?, sourceSet: String?): KoScope {

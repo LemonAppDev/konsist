@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProviderUtil
-import com.lemonappdev.konsist.core.util.PackageHelper
+import com.lemonappdev.konsist.core.util.LocationHelper
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
@@ -71,12 +71,12 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
 
     override fun hasPackage(name: String) = packagee
         ?.qualifiedName
-        ?.let { PackageHelper.resideInPackage(name, it) } ?: false
+        ?.let { LocationHelper.resideInLocation(name, it) } ?: false
 
     override fun hasImports(vararg names: String) = when {
         names.isEmpty() -> imports.isNotEmpty()
         else -> names.all {
-            imports.any { import -> PackageHelper.resideInPackage(it, import.name) }
+            imports.any { import -> LocationHelper.resideInLocation(it, import.name) }
         }
     }
 
