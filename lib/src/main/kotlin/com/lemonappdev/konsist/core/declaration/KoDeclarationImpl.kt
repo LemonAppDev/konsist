@@ -10,7 +10,10 @@ import org.jetbrains.kotlin.psi.psiUtil.isPublic
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 import kotlin.reflect.KClass
 
-internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: KtTypeParameterListOwner, open val parent: KoBaseDeclarationImpl?) :
+internal abstract class KoDeclarationImpl(
+    private val ktTypeParameterListOwner: KtTypeParameterListOwner,
+    open val parent: KoBaseDeclarationImpl?,
+) :
     KoNamedDeclarationImpl(ktTypeParameterListOwner), KoDeclaration {
 
     override val fullyQualifiedName by lazy {

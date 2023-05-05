@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.psi.KtClassOrObject
 
 internal abstract class KoComplexDeclarationImpl(
     private val ktClassOrObject: KtClassOrObject,
-    override val parent: KoBaseDeclarationImpl
+    override val parent: KoBaseDeclarationImpl,
 ) : KoDeclarationImpl(ktClassOrObject, parent),
     KoComplexDeclaration {
 
@@ -19,5 +19,6 @@ internal abstract class KoComplexDeclarationImpl(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoDeclarationImpl> = KoDeclarationProviderUtil.getKoDeclarations(ktClassOrObject, modifiers, includeNested, includeLocal, this)
+    ): Sequence<KoDeclarationImpl> = KoDeclarationProviderUtil
+        .getKoDeclarations(ktClassOrObject, modifiers, includeNested, includeLocal, this)
 }

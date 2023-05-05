@@ -4,8 +4,9 @@ import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtPrimaryConstructor
 
-internal class KoPrimaryConstructorDeclarationImpl private constructor(ktPrimaryConstructor: KtPrimaryConstructor,
-                                                                       parent: KoBaseDeclarationImpl?
+internal class KoPrimaryConstructorDeclarationImpl private constructor(
+    ktPrimaryConstructor: KtPrimaryConstructor,
+    parent: KoBaseDeclarationImpl?,
 ) :
     KoConstructorDeclarationImpl(ktPrimaryConstructor, parent), KoPrimaryConstructorDeclaration {
     internal companion object {

@@ -6,7 +6,8 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 
 internal class KoObjectDeclarationImpl(
-    ktObjectDeclaration: KtObjectDeclaration, parent: KoBaseDeclarationImpl,
+    ktObjectDeclaration: KtObjectDeclaration,
+    parent: KoBaseDeclarationImpl,
 ) :
     KoComplexDeclarationImpl(ktObjectDeclaration, parent),
     KoObjectDeclaration {
