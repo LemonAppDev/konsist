@@ -95,7 +95,7 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
 
     override fun hasKoDoc() = koDoc != null
 
-    override fun resideInPackage(desiredPackage: String) = LocationHelper.resideInLocation(desiredPackage, this.packageName)
+    override fun resideInPackage(packagee: String) = LocationHelper.resideInLocation(packagee, this.packageName)
 
-    override fun resideOutsidePackage(packageName: String) = !resideInPackage(packageName)
+    override fun resideOutsidePackage(packagee: String) = !resideInPackage(packagee)
 }
