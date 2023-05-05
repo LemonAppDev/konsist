@@ -10,7 +10,13 @@ import java.util.*
 fun Project.getLocalPropertyOrGradleProperty(propertyName: String) =
     gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)
 
-fun Project.getKonsistVersion(releaseTarget: ReleaseTarget): String {
+/**
+ * Returns versions from gradle.properties or local.properties for given release target eg.
+ * "x.y.x"
+ * or
+ * "x.y.x-SNAPSHOT"
+ */
+fun Project.getFullKonsistVersion(releaseTarget: ReleaseTarget): String {
     val version = getLocalPropertyOrGradleProperty("konsist.version") ?: error("konsist.version is not provided.")
 
     return when (releaseTarget) {
@@ -19,6 +25,12 @@ fun Project.getKonsistVersion(releaseTarget: ReleaseTarget): String {
         ReleaseTarget.RELEASE -> version
     }
 }
+
+/**
+ * Returns versions from gradle.properties or local.properties eg.
+ * "x.y.x"
+ */
+fun Project.getKonsistVersion() = getLocalPropertyOrGradleProperty("konsist.version") ?: error("konsist.version is not provided.")
 
 private fun Project.getProjectProperty(propertyName: String): String? = properties[propertyName] as String?
 
@@ -33,4 +45,13 @@ private fun Project.gradleLocalProperty(propertyName: String): String? {
     }
 
     return localProperties.getProperty(propertyName)
+}
+
+fun Project.getReleaseTarget(): ReleaseTarget {
+    val releaseTargetStr = getLocalPropertyOrGradleProperty("konsist.releaseTarget")
+
+    return ReleaseTarget
+        .values()
+        .firstOrNull { it.value == releaseTargetStr }
+        ?: ReleaseTarget.LOCAL
 }

@@ -1,3 +1,4 @@
+import ext.getKonsistVersion
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
@@ -7,7 +8,7 @@ plugins {
 // Dokka config
 // https://kotlinlang.org/docs/dokka-gradle.html#package-options
 tasks.withType<DokkaTask>().configureEach {
-    moduleName.set("Konsist")
+    moduleName.set("Konsist ${project.getKonsistVersion()}")
     failOnWarning.set(true)
 
     dokkaSourceSets.configureEach {
