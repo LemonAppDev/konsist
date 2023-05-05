@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test
 @Suppress("detekt.LargeClass")
 class KoClassDeclarationSequenceExtTest {
     @Test
-    fun `withEnumModifier() returns class1 with enum modifier`() {
+    fun `withEnumModifier() returns class with enum modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasEnumModifier() } returns true
@@ -34,7 +34,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutEnumModifier() returns class2 without enum modifier`() {
+    fun `withoutEnumModifier() returns class without enum modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasEnumModifier() } returns true
@@ -52,7 +52,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSealedModifier() returns class1 with sealed modifier`() {
+    fun `withSealedModifier() returns class with sealed modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasSealedModifier() } returns true
@@ -70,7 +70,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutSealedModifier() returns class2 without sealed modifier`() {
+    fun `withoutSealedModifier() returns class without sealed modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasSealedModifier() } returns true
@@ -88,7 +88,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withInnerModifier() returns class1 with inner modifier`() {
+    fun `withInnerModifier() returns class with inner modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasInnerModifier() } returns true
@@ -106,7 +106,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutInnerModifier() returns class2 without inner modifier`() {
+    fun `withoutInnerModifier() returns class without inner modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasInnerModifier() } returns true
@@ -124,7 +124,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withValueModifier() returns class1 with value modifier`() {
+    fun `withValueModifier() returns class with value modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasValueModifier() } returns true
@@ -142,7 +142,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutValueModifier() returns class2 without value modifier`() {
+    fun `withoutValueModifier() returns class without value modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasValueModifier() } returns true
@@ -160,7 +160,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotationModifier() returns class1 with annotation modifier`() {
+    fun `withAnnotationModifier() returns class with annotation modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasAnnotationModifier() } returns true
@@ -178,7 +178,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotationModifier() returns class2 without annotation modifier`() {
+    fun `withoutAnnotationModifier() returns class without annotation modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasAnnotationModifier() } returns true
@@ -196,7 +196,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withDataModifier() returns class1 with data modifier`() {
+    fun `withDataModifier() returns class with data modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasDataModifier() } returns true
@@ -214,7 +214,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutDataModifier() returns class2 without data modifier`() {
+    fun `withoutDataModifier() returns class without data modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasDataModifier() } returns true
@@ -232,7 +232,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withActualModifier() returns class1 with actual modifier`() {
+    fun `withActualModifier() returns class with actual modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
@@ -250,7 +250,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutActualModifier() returns class2 without actual modifier`() {
+    fun `withoutActualModifier() returns class without actual modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
@@ -268,7 +268,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withExpectModifier() returns class1 with expect modifier`() {
+    fun `withExpectModifier() returns class with expect modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasExpectModifier() } returns true
@@ -286,7 +286,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutExpectModifier() returns class2 without expect modifier`() {
+    fun `withoutExpectModifier() returns class without expect modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasExpectModifier() } returns true
@@ -304,7 +304,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAbstractModifier() returns class1 with abstract modifier`() {
+    fun `withAbstractModifier() returns class with abstract modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasAbstractModifier() } returns true
@@ -322,7 +322,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAbstractModifier() returns class2 without abstract modifier`() {
+    fun `withoutAbstractModifier() returns class without abstract modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasAbstractModifier() } returns true
@@ -340,7 +340,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withOpenModifier() returns class1 with open modifier`() {
+    fun `withOpenModifier() returns class with open modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasOpenModifier() } returns true
@@ -358,7 +358,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutOpenModifier() returns class2 without open modifier`() {
+    fun `withoutOpenModifier() returns class without open modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasOpenModifier() } returns true
@@ -376,7 +376,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withFinalModifier() returns class1 with final modifier`() {
+    fun `withFinalModifier() returns class with final modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasFinalModifier() } returns true
@@ -394,7 +394,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutFinalModifier() returns class2 without final modifier`() {
+    fun `withoutFinalModifier() returns class without final modifier`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasFinalModifier() } returns true
@@ -412,7 +412,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withPrimaryConstructor() returns class1 with primary constructor`() {
+    fun `withPrimaryConstructor() returns class with primary constructor`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasPrimaryConstructor() } returns true
@@ -430,7 +430,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutPrimaryConstructor() returns class2 without primary constructor`() {
+    fun `withoutPrimaryConstructor() returns class without primary constructor`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasPrimaryConstructor() } returns true
@@ -448,7 +448,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSecondaryConstructors() returns class1 with secondary constructor`() {
+    fun `withSecondaryConstructors() returns class with secondary constructor`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasSecondaryConstructors() } returns true
@@ -466,7 +466,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutSecondaryConstructors() returns class2 without secondary constructor`() {
+    fun `withoutSecondaryConstructors() returns class without secondary constructor`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasSecondaryConstructors() } returns true
@@ -484,7 +484,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParents() returns class1 with parent`() {
+    fun `withParents() returns class with any parent`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasParents() } returns true
@@ -502,7 +502,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParents() returns class2 without parent`() {
+    fun `withoutParents() returns class without any parent`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasParents() } returns true
@@ -520,7 +520,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParentOf() returns SampleClass`() {
+    fun `withParentOf() returns class with SampleClass parent`() {
         // given
         val name1 = "SampleClass"
         val name2 = "OtherClass"
@@ -546,7 +546,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentOf() returns OtherClass`() {
+    fun `withoutParentOf() returns class without SampleClass parent`() {
         // given
         val name1 = "SampleClass"
         val name2 = "OtherClass"
@@ -572,7 +572,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParents(name) returns class1 with given parent`() {
+    fun `withParents(name) returns class with given parent`() {
         // given
         val name = "SampleName"
         val class1: KoClassDeclarationImpl = mockk {
@@ -591,7 +591,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParents(name) returns class2 without given parent`() {
+    fun `withoutParents(name) returns class without given parent`() {
         // given
         val name = "SampleName"
         val class1: KoClassDeclarationImpl = mockk {
@@ -610,7 +610,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParents(String) returns class1 with given parents`() {
+    fun `withParents(String) returns class with all given parents`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -630,7 +630,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParents(String) returns class3 without given parents`() {
+    fun `withoutParents(String) returns class without any of given parents`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -650,7 +650,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeParents(String) returns class1 and class2 which have at least one of given parents`() {
+    fun `withSomeParents(String) returns classes with at least one of given parents`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -676,7 +676,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParentsOf(KClass) returns class1 with given parents`() {
+    fun `withParentsOf(KClass) returns class with all of given parents`() {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
@@ -710,7 +710,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentsOf(KClass) returns class3 without given parents`() {
+    fun `withoutParentsOf(KClass) returns class without any of given parents`() {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
@@ -744,7 +744,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeParentsOf(KClass) returns class1 and class2 which have at least one of given parents`() {
+    fun `withSomeParentsOf(KClass) returns classes with at least one of given parents`() {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
@@ -778,7 +778,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParentInterfacesOf(KClass) returns classes with given parent interfaces`() {
+    fun `withParentInterfacesOf(KClass) returns classes with all given parent interfaces`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -812,7 +812,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentInterfacesOf(KClass) returns class3 without given parent interfaces`() {
+    fun `withoutParentInterfacesOf(KClass) returns class without any of given parent interfaces`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -846,7 +846,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeParentInterfacesOf(KClass) returns class1 and class2 which have at least one of given parents`() {
+    fun `withSomeParentInterfacesOf(KClass) returns classes with at least one of given parents`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -880,7 +880,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParentInterface() returns class1 with parent interface`() {
+    fun `withParentInterface() returns class with any parent interface`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasParentInterfaces() } returns true
@@ -898,7 +898,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentInterface() returns class2 without parent interface`() {
+    fun `withoutParentInterface() returns class without any parent interface`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasParentInterfaces() } returns true
@@ -916,7 +916,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParentInterfaceOf() returns SampleInterface`() {
+    fun `withParentInterfaceOf() returns class with SampleInterface parent interface`() {
         // given
         val name1 = "SampleInterface"
         val name2 = "OtherInterface"
@@ -942,7 +942,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentInterfaceOf() returns OtherInterface`() {
+    fun `withoutParentInterfaceOf() returns class without SampleInterface parent interface`() {
         // given
         val name1 = "SampleInterface"
         val name2 = "OtherInterface"
@@ -968,7 +968,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParentInterfaces(name) returns class1 with given parent interface`() {
+    fun `withParentInterfaces(name) returns class with given parent interface`() {
         // given
         val name = "SampleName"
         val class1: KoClassDeclarationImpl = mockk {
@@ -987,7 +987,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentInterfaces(name) returns class2 without given parent interface`() {
+    fun `withoutParentInterfaces(name) returns class without given parent interface`() {
         // given
         val name = "SampleName"
         val class1: KoClassDeclarationImpl = mockk {
@@ -1006,7 +1006,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParentInterfaces() returns class1 with all given parent interfaces`() {
+    fun `withParentInterfaces() returns class with all of given parent interfaces`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -1026,7 +1026,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentInterfaces() returns class3 without given parent interfaces`() {
+    fun `withoutParentInterfaces() returns class without any of given parent interfaces`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -1047,7 +1047,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeParentInterfaces() returns classes which have at least one of given parent interfaces`() {
+    fun `withSomeParentInterfaces() returns classes with at least one of given parent interfaces`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -1073,7 +1073,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParentClass() returns class1 with parent class`() {
+    fun `withParentClass() returns class with any parent class`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasParentClass() } returns true
@@ -1091,7 +1091,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentClass() returns class2 without parent class`() {
+    fun `withoutParentClass() returns class without any parent class`() {
         // given
         val class1: KoClassDeclarationImpl = mockk {
             every { hasParentClass() } returns true
@@ -1135,7 +1135,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentClass(name) returns class3 without given parent class names`() {
+    fun `withoutParentClass(name) returns class without any of given parent class names`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
@@ -1161,7 +1161,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParentClassOf() returns SampleClass`() {
+    fun `withParentClassOf() returns class with SampleClass parent class`() {
         // given
         val name1 = "SampleClass"
         val name2 = "OtherClass"
@@ -1187,7 +1187,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentClassOf() returns OtherClass`() {
+    fun `withoutParentClassOf() returns class without SampleClass parent class`() {
         // given
         val name1 = "SampleClass"
         val name2 = "OtherClass"
@@ -1213,7 +1213,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParentClassOf(KClass) returns parents with one of given parent classes`() {
+    fun `withParentClassOf(KClass) returns classes with one of given parent classes`() {
         // given
         val name1 = "SampleClass1"
         val name2 = "SampleClass2"
@@ -1239,7 +1239,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentClassOf(KClass) returns parents without any of given parent classes`() {
+    fun `withoutParentClassOf(KClass) returns class without any of given parent classes`() {
         // given
         val name1 = "SampleClass1"
         val name2 = "SampleClass2"

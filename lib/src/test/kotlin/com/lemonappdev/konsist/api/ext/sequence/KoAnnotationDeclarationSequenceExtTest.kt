@@ -37,7 +37,7 @@ class KoAnnotationDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutType(String) returns annotation3 without given types`() {
+    fun `withoutType(String) returns annotation without any of given types`() {
         // given
         val type1 = "type1"
         val type2 = "type2"
@@ -116,7 +116,7 @@ class KoAnnotationDeclarationSequenceExtTest {
 
     //  'every { representsType<SampleAnnotation>() } returns true' doesn't work because there is a bug in mockk
     @Test
-    fun `withTypeOf() with KClass syntax returns SampleAnnotation`() {
+    fun `withTypeOf() with KClass syntax returns SampleAnnotation type`() {
         // given
         val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleAnnotation"
@@ -134,7 +134,7 @@ class KoAnnotationDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutTypeOf() with KClass syntax returns annotation without SampleAnnotation`() {
+    fun `withoutTypeOf() with KClass syntax returns annotation without SampleAnnotation type`() {
         // given
         val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleAnnotation"
@@ -176,7 +176,7 @@ class KoAnnotationDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutName() returns annotation without any given name`() {
+    fun `withoutName() returns annotation without any of given names`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
@@ -200,7 +200,7 @@ class KoAnnotationDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withFullyQualifiedClassName() returns annotations with one of given fullyQualifiedNames`() {
+    fun `withFullyQualifiedClassName() returns annotations with one of given fullyQualifiedName`() {
         // given
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
@@ -224,7 +224,7 @@ class KoAnnotationDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutFullyQualifiedClassName() returns annotation without any given fullyQualifiedName`() {
+    fun `withoutFullyQualifiedClassName() returns annotation without any of given fullyQualifiedNames`() {
         // given
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"

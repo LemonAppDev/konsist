@@ -32,7 +32,7 @@ class KoNamedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutName() returns namedDeclaration3 without given names`() {
+    fun `withoutName() returns namedDeclaration without any of given names`() {
         // given
         val name1 = "sampleName1"
         val name2 = "sampleName2"
@@ -56,7 +56,7 @@ class KoNamedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withNamePrefix() returns namedDeclaration1 and namedDeclaration2 which name starts with one of prefixes`() {
+    fun `withNamePrefix() returns namedDeclarations which names starts with one of given prefixes`() {
         // given
         val prefix1 = "prefix1"
         val prefix2 = "prefix2"
@@ -82,7 +82,7 @@ class KoNamedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutNamePrefix() returns namedDeclaration3 which name not starts with given prefixes`() {
+    fun `withoutNamePrefix() returns namedDeclaration which name not starts with given prefixes`() {
         // given
         val prefix1 = "prefix1"
         val prefix2 = "prefix2"
@@ -108,7 +108,7 @@ class KoNamedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withNameSuffix() returns namedDeclaration1 and namedDeclaration2 which name ends with one of prefixes`() {
+    fun `withNameSuffix() returns namedDeclarations which names ends with one of suffixes`() {
         // given
         val suffix1 = "suffix1"
         val suffix2 = "suffix2"
@@ -134,7 +134,7 @@ class KoNamedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutNameSuffix() returns namedDeclaration3 which name not ends with given prefixes`() {
+    fun `withoutNameSuffix() returns namedDeclaration which name not ends with given suffixes`() {
         // given
         val suffix1 = "suffix1"
         val suffix2 = "suffix2"
@@ -160,7 +160,7 @@ class KoNamedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withNameContaining() returns namedDeclaration1 and namedDeclaration2 which name contains given one of texts`() {
+    fun `withNameContaining() returns namedDeclarations which names contains any of given texts`() {
         // given
         val text1 = "text1"
         val text2 = "text2"
@@ -186,7 +186,7 @@ class KoNamedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutNameContaining() returns namedDeclaration2 which name not contains given texts`() {
+    fun `withoutNameContaining() returns namedDeclaration which name not contains any of given texts`() {
         // given
         val text1 = "text1"
         val text2 = "text2"
@@ -212,7 +212,7 @@ class KoNamedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withNameMatching() returns namedDeclaration1 and namedDeclaration2 which name contains given one of texts`() {
+    fun `withNameMatching() returns namedDeclarations which names contains given one of texts`() {
         // given
         val text1 = Regex("[1-9]")
         val text2 = Regex("[a-z]")
@@ -238,7 +238,7 @@ class KoNamedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutNameMatching() returns namedDeclaration2 which name not contains given texts`() {
+    fun `withoutNameMatching() returns namedDeclaration which name not contains given texts`() {
         // given
         val text1 = Regex("[1-9]")
         val text2 = Regex("[a-z]")

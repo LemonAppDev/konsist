@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationSequenceExtTest {
     @Test
-    fun `withVarargModifier() returns parameter1 with vararg modifier`() {
+    fun `withVarargModifier() returns parameter with vararg modifier`() {
         // given
         val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasVarargModifier() } returns true
@@ -29,7 +29,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutVarargModifier() returns parameter2 without vararg modifier`() {
+    fun `withoutVarargModifier() returns parameter without vararg modifier`() {
         // given
         val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasVarargModifier() } returns true
@@ -47,7 +47,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withNoInlineModifier() returns parameter1 with noInline modifier`() {
+    fun `withNoInlineModifier() returns parameter with noInline modifier`() {
         // given
         val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasNoInlineModifier() } returns true
@@ -65,7 +65,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutNoInlineModifier() returns parameter2 without noInline modifier`() {
+    fun `withoutNoInlineModifier() returns parameter without noInline modifier`() {
         // given
         val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasNoInlineModifier() } returns true
@@ -83,7 +83,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withCrossInlineModifier() returns parameter1 with crossInline modifier`() {
+    fun `withCrossInlineModifier() returns parameter with crossInline modifier`() {
         // given
         val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasCrossInlineModifier() } returns true
@@ -101,7 +101,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutCrossInlineModifier() returns parameter2 without crossInline modifier`() {
+    fun `withoutCrossInlineModifier() returns parameter without crossInline modifier`() {
         // given
         val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasCrossInlineModifier() } returns true
@@ -119,7 +119,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withDefaultValue() returns parameter1 which has default value`() {
+    fun `withDefaultValue() returns parameter with default value`() {
         // given
         val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasDefaultValue() } returns true
@@ -137,7 +137,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutDefaultValue() returns parameter2 which has not default value`() {
+    fun `withoutDefaultValue() returns parameter without default value`() {
         // given
         val parameter1: KoParameterDeclarationImpl = mockk {
             every { hasDefaultValue() } returns true
@@ -155,7 +155,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withDefaultValue(name) returns parameters which have one of given default values`() {
+    fun `withDefaultValue(name) returns parameters with one of given default values`() {
         // given
         val value1 = "SampleDefaultValue1"
         val value2 = "SampleDefaultValue2"
@@ -181,7 +181,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutDefaultValue(name) returns parameter3 which has not any given default value`() {
+    fun `withoutDefaultValue(name) returns parameter without any of given default values`() {
         // given
         val value1 = "SampleDefaultValue1"
         val value2 = "SampleDefaultValue2"
@@ -207,7 +207,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withType(name) returns parameters which have one of given types`() {
+    fun `withType(name) returns parameters with one of given types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
@@ -233,7 +233,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutType(name) returns parameter3 which has not any given type`() {
+    fun `withoutType(name) returns parameter without any of given types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
@@ -259,7 +259,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withTypeOf(KClass) returns parameters which have one of given types`() {
+    fun `withTypeOf(KClass) returns parameters with one of given types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
@@ -285,7 +285,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutTypeOf(KClass) returns parameter3 which has not any given type`() {
+    fun `withoutTypeOf(KClass) returns parameter without any of given types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
@@ -311,7 +311,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withTypeOf() returns parameter1 which has given type`() {
+    fun `withTypeOf() returns parameter with given type`() {
         // given
         val typeName1 = "SampleType"
         val typeName2 = "OtherType"
@@ -331,7 +331,7 @@ class KoParameterDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutTypeOf() returns parameter2 which has not given type`() {
+    fun `withoutTypeOf() returns parameter without given type`() {
         // given
         val typeName1 = "SampleType"
         val typeName2 = "OtherType"
