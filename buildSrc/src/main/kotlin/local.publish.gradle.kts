@@ -1,4 +1,7 @@
-import util.getLocalPropertyOrGradleProperty
+
+import enu.ReleaseTarget
+import ext.getKonsistVersion
+import ext.getLocalPropertyOrGradleProperty
 import java.util.*
 
 plugins {
@@ -18,7 +21,7 @@ publishing {
 
             groupId = "com.lemonappdev"
             artifactId = "konsist"
-            version = getKonsistVersion(releaseTarget)
+            version = project.getKonsistVersion(releaseTarget)
             description = konsistDescription
 
             from(components.getByName("java"))
@@ -114,12 +117,6 @@ signing {
     }
 }
 
-enum class ReleaseTarget(val value: String) {
-    LOCAL("local"),
-    SNAPSHOT("snapshot"),
-    RELEASE("release"),
-}
-
 fun MavenArtifactRepository.setCredentialsFromGradleProperties() {
     val ossrhUsername = getLocalPropertyOrGradleProperty("konsist.ossrhUsername")
     val ossrhPassword = getLocalPropertyOrGradleProperty("konsist.ossrhPassword")
@@ -139,14 +136,4 @@ fun getReleaseTarget(): ReleaseTarget {
         .values()
         .firstOrNull { it.value == releaseTargetStr }
         ?: ReleaseTarget.LOCAL
-}
-
-fun getKonsistVersion(releaseTarget: ReleaseTarget): String {
-    val version = getLocalPropertyOrGradleProperty("konsist.version") ?: error("konsist.version is not provided.")
-
-    return when (releaseTarget) {
-        ReleaseTarget.LOCAL -> "$version-SNAPSHOT"
-        ReleaseTarget.SNAPSHOT -> "$version-SNAPSHOT"
-        ReleaseTarget.RELEASE -> version
-    }
 }
