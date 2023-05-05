@@ -22,7 +22,7 @@ interface KoScopeCreator {
     /**
      * Returns a [KoScope] containing all of Kotlin files in the given package.
      */
-    fun scopeFromPackage(packageName: String, module: String? = null, sourceSet: String? = null): KoScope
+    fun scopeFromPackage(packagee: String, module: String? = null, sourceSet: String? = null): KoScope
 
     /**
      * Returns a [KoScope] containing all of Kotlin files in the given directory.

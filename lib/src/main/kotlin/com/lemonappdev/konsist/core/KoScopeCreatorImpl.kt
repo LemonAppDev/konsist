@@ -76,9 +76,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    override fun scopeFromPackage(packageName: String, module: String?, sourceSet: String?): KoScope {
+    override fun scopeFromPackage(packagee: String, module: String?, sourceSet: String?): KoScope {
         val koFiles = getFiles(module, sourceSet)
-            .withPackage(packageName)
+            .withPackage(packagee)
 
         return KoScopeImpl(koFiles)
     }
