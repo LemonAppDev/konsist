@@ -11,6 +11,13 @@ class ApiKonsistTest {
             .assert { it.hasKoDoc() }
     }
 
+    @Test
+    fun `every api declaration has explicit return type`() {
+        apiPackageScope
+            .functions(includeNested = true)
+            .assert { it.hasReturnType() }
+    }
+
     companion object {
         val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSet = "main")
     }
