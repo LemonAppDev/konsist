@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoFileDeclarationImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -81,14 +81,26 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
 }
 
 private fun checkIfSuppressed(declaration: KoDeclarationImpl, testMethodName: String): Boolean {
+    val annotationParameter = declaration
+        .annotations
+        .firstOrNull { it.name == "Suppress" }
+        ?.text
+        ?.removePrefix("@Suppress(\"")
+        ?.removeSuffix("\")")
+
+
     return when {
-        declaration.hasAnnotations("Suppress(\"konsist.$testMethodName\")") -> true
-        declaration.hasAnnotations("Suppress(\"$testMethodName\")") -> true
-        declaration.parentDeclaration != null -> declaration.parentDeclaration?.let {
-            checkIfSuppressed(it, testMethodName)
-        } ?: throw KoInternalException()
-        declaration.containingFile.hasAnnotations("file:Suppress(\"konsist.$testMethodName\")") -> true
-        declaration.containingFile.hasAnnotations("file:Suppress(\"$testMethodName\")") -> true
+        annotationParameter == testMethodName ||  annotationParameter == "konsist.$testMethodName" -> true
+        declaration.parent !is KoFileDeclarationImpl -> checkIfSuppressed(declaration.parent as KoDeclarationImpl, testMethodName)
+        fileAnnotationParameter(declaration.parent as KoFileDeclarationImpl) == testMethodName -> true
+        fileAnnotationParameter(declaration.parent as KoFileDeclarationImpl) == "konsist.$testMethodName" -> true
         else -> false
     }
 }
+
+private fun fileAnnotationParameter(file: KoFileDeclarationImpl) = file
+    .annotations
+    .firstOrNull { it.name == "Suppress" }
+    ?.text
+    ?.removePrefix("@file:Suppress(\"")
+    ?.removeSuffix("\")")
