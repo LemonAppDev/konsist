@@ -13,30 +13,4 @@ internal open class KoBaseDeclarationImpl(private val ktElement: KtElement) : Ko
      * KoFile containing the declaration
      */
     override val containingFile by lazy { KoFileDeclarationImpl.getInstance(ktElement.containingKtFile, this) }
-
-    override val parentDeclaration by lazy {
-        val parents = ktElement
-            .parents
-            .toList()
-
-        val parent = when {
-            parents.size > 1 -> parents[1]
-            else -> null
-        }
-
-        val name = parent
-            ?.namedUnwrappedElement
-            ?.name
-
-        name?.let {
-            containingFile
-                .declarations(includeLocal = true, includeNested = true)
-                .firstOrNull { declaration -> declaration.name == it }
-        }
-    }
-
-    override fun hasParentDeclaration(name: String?) = when (name) {
-        null -> parentDeclaration != null
-        else -> parentDeclaration?.name == name
-    }
 }
