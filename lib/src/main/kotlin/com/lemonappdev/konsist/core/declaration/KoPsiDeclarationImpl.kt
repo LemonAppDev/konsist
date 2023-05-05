@@ -46,9 +46,9 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
 
     override val locationWithText by lazy { "Location: $location \nDeclaration:\n$text" }
 
-    override fun resideInFilePath(text: String) = PackageHelper.resideInPackage(text, filePath, '/')
+    override fun resideInFilePath(text: String) = PackageHelper.resideInPackage(text, filePath)
 
-    override fun resideInProjectFilePath(text: String) = PackageHelper.resideInPackage(text, projectFilePath, '/')
+    override fun resideInProjectFilePath(text: String) = PackageHelper.resideInPackage(text, projectFilePath)
 
     override fun print() {
         print(toString())
