@@ -50,7 +50,6 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
 }
 
 private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: List<E>): String {
-    val testMethodName = Thread.currentThread().stackTrace[4].methodName
     val failedDeclarationsMessage = failedDeclarations.joinToString("\n") {
         val name = if (it is KoNamedDeclaration) it.name else ""
         val konsistDeclarationClassNamePrefix = "Ko"
@@ -59,5 +58,13 @@ private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: Li
         "${it.location} ($name $declarationType)"
     }
 
-    return "Check '$testMethodName' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
+    return "Check '${getTestMethodName()}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
+}
+
+/**
+ * In this call stack hierarchy test name is at index 5.
+ */
+private fun getTestMethodName(): String? {
+    val stackTraceIndexOfTestMethod = 5
+    return Thread.currentThread().stackTrace[stackTraceIndexOfTestMethod].methodName
 }
