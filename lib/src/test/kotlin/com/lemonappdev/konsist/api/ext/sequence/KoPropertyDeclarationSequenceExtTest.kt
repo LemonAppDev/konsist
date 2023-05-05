@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 
 class KoPropertyDeclarationSequenceExtTest {
     @Test
-    fun `withVarModifier() returns property1 with var modifier`() {
+    fun `withVarModifier() returns property with var modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { isVar } returns true
@@ -29,7 +29,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutVarModifier() returns property2 without var modifier`() {
+    fun `withoutVarModifier() returns property without var modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { isVar } returns true
@@ -47,7 +47,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withValModifier() returns property1 with val modifier`() {
+    fun `withValModifier() returns property with val modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { isVal } returns true
@@ -65,7 +65,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutValModifier() returns property2 without val modifier`() {
+    fun `withoutValModifier() returns property without val modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { isVal } returns true
@@ -83,7 +83,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withLateinitModifier() returns property1 with lateinit modifier`() {
+    fun `withLateinitModifier() returns property with lateinit modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasLateinitModifier() } returns true
@@ -101,7 +101,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutLateinitModifier() returns property2 without lateinit modifier`() {
+    fun `withoutLateinitModifier() returns property without lateinit modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasLateinitModifier() } returns true
@@ -119,7 +119,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withOverrideModifier() returns property1 with override modifier`() {
+    fun `withOverrideModifier() returns property with override modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasOverrideModifier() } returns true
@@ -137,7 +137,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutOverrideModifier() returns property2 without override modifier`() {
+    fun `withoutOverrideModifier() returns property without override modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasOverrideModifier() } returns true
@@ -155,7 +155,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAbstractModifier() returns property1 with abstract modifier`() {
+    fun `withAbstractModifier() returns property with abstract modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasAbstractModifier() } returns true
@@ -173,7 +173,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAbstractModifier() returns property2 without abstract modifier`() {
+    fun `withoutAbstractModifier() returns property without abstract modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasAbstractModifier() } returns true
@@ -191,7 +191,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withOpenModifier() returns property1 with open modifier`() {
+    fun `withOpenModifier() returns property with open modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasOpenModifier() } returns true
@@ -209,7 +209,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutOpenModifier() returns property2 without open modifier`() {
+    fun `withoutOpenModifier() returns property without open modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasOpenModifier() } returns true
@@ -227,7 +227,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withFinalModifier() returns property1 with final modifier`() {
+    fun `withFinalModifier() returns property with final modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasFinalModifier() } returns true
@@ -245,7 +245,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutFinalModifier() returns property2 without final modifier`() {
+    fun `withoutFinalModifier() returns property without final modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasFinalModifier() } returns true
@@ -263,7 +263,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withActualModifier() returns property1 with actual modifier`() {
+    fun `withActualModifier() returns property with actual modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
@@ -281,7 +281,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutActualModifier() returns property2 without actual modifier`() {
+    fun `withoutActualModifier() returns property without actual modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
@@ -299,7 +299,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withExpectModifier() returns property1 with expect modifier`() {
+    fun `withExpectModifier() returns property with expect modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasExpectModifier() } returns true
@@ -317,7 +317,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutExpectModifier() returns property2 without expect modifier`() {
+    fun `withoutExpectModifier() returns property without expect modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasExpectModifier() } returns true
@@ -335,7 +335,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withConstModifier() returns property1 with const modifier`() {
+    fun `withConstModifier() returns property with const modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasConstModifier() } returns true
@@ -353,7 +353,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutConstModifier() returns property2 without const modifier`() {
+    fun `withoutConstModifier() returns property without const modifier`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasConstModifier() } returns true
@@ -371,7 +371,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withExtension() returns property1 which is extension`() {
+    fun `withExtension() returns property which is extension`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { isExtension() } returns true
@@ -389,7 +389,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutExtension() returns property2 which is not extension`() {
+    fun `withoutExtension() returns property which is not extension`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { isExtension() } returns true
@@ -407,7 +407,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withDelegate() returns property1 which has delegate`() {
+    fun `withDelegate() returns property with any delegate`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasDelegate() } returns true
@@ -425,7 +425,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withDelegate(name) returns properties which have one of given delegate names`() {
+    fun `withDelegate(name) returns properties with one of given delegate names`() {
         // given
         val delegateName1 = "DelegateName1"
         val delegateName2 = "DelegateName2"
@@ -451,7 +451,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutDelegate() returns property2 which has not delegate`() {
+    fun `withoutDelegate() returns property without any delegate`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasDelegate() } returns true
@@ -469,7 +469,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutDelegate(name) returns property3 which has not delegate with given name`() {
+    fun `withoutDelegate(name) returns property without any of delegate with given name`() {
         // given
         val delegateName1 = "DelegateName1"
         val delegateName2 = "DelegateName2"
@@ -495,7 +495,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withType() returns property1 which has type`() {
+    fun `withType() returns property with any type`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasType() } returns true
@@ -513,7 +513,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withType(name) returns properties which has one of given types`() {
+    fun `withType(name) returns properties with one of given types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
@@ -539,7 +539,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutType() returns property2 which has not type`() {
+    fun `withoutType() returns property without any type`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk {
             every { hasType() } returns true
@@ -557,7 +557,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutType(name) returns property3 which has not any given type`() {
+    fun `withoutType(name) returns property without any of given types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
@@ -583,7 +583,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withType() with KClass returns property1 which has given type`() {
+    fun `withType() with KClass returns property with given type`() {
         // given
         val typeName1 = "SampleType"
         val typeName2 = "OtherType"
@@ -603,7 +603,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutType() with KClass returns property2 which has not given type`() {
+    fun `withoutType() with KClass returns property without given type`() {
         // given
         val typeName1 = "SampleType"
         val typeName2 = "OtherType"
@@ -623,7 +623,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withTypeOf(KClass) returns properties which has one of given return types`() {
+    fun `withTypeOf(KClass) returns properties with one of given return types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
@@ -647,7 +647,7 @@ class KoPropertyDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutTypeOf(KClass) returns property which has not any of given return types`() {
+    fun `withoutTypeOf(KClass) returns property without any of given return types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"

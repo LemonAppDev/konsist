@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 
 class KoFunctionDeclarationSequenceExtTest {
     @Test
-    fun `withOperatorModifier() returns function1 with operator modifier`() {
+    fun `withOperatorModifier() returns function with operator modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasOperatorModifier() } returns true
@@ -29,7 +29,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutOperatorModifier() returns function2 without operator modifier`() {
+    fun `withoutOperatorModifier() returns function without operator modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasOperatorModifier() } returns true
@@ -47,7 +47,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withInlineModifier() returns function1 with inline modifier`() {
+    fun `withInlineModifier() returns function with inline modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasInlineModifier() } returns true
@@ -65,7 +65,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutInlineModifier() returns function2 without inline modifier`() {
+    fun `withoutInlineModifier() returns function without inline modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasInlineModifier() } returns true
@@ -83,7 +83,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withTailrecModifier() returns function1 with tailrec modifier`() {
+    fun `withTailrecModifier() returns function with tailrec modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasTailrecModifier() } returns true
@@ -101,7 +101,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutTailrecModifier() returns function2 without tailrec modifier`() {
+    fun `withoutTailrecModifier() returns function without tailrec modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasTailrecModifier() } returns true
@@ -119,7 +119,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withInfixModifier() returns function1 with infix modifier`() {
+    fun `withInfixModifier() returns function with infix modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasInfixModifier() } returns true
@@ -137,7 +137,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutInfixModifier() returns function2 without infix modifier`() {
+    fun `withoutInfixModifier() returns function without infix modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasInfixModifier() } returns true
@@ -155,7 +155,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withExternalModifier() returns function1 with external modifier`() {
+    fun `withExternalModifier() returns function with external modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasExternalModifier() } returns true
@@ -173,7 +173,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutExternalModifier() returns function2 without external modifier`() {
+    fun `withoutExternalModifier() returns function without external modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasExternalModifier() } returns true
@@ -191,7 +191,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSuspendModifier() returns function1 with suspend modifier`() {
+    fun `withSuspendModifier() returns function with suspend modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasSuspendModifier() } returns true
@@ -209,7 +209,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutSuspendModifier() returns function2 without suspend modifier`() {
+    fun `withoutSuspendModifier() returns function without suspend modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasSuspendModifier() } returns true
@@ -227,7 +227,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withOpenModifier() returns function1 with open modifier`() {
+    fun `withOpenModifier() returns function with open modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasOpenModifier() } returns true
@@ -245,7 +245,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutOpenModifier() returns function2 without open modifier`() {
+    fun `withoutOpenModifier() returns function without open modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasOpenModifier() } returns true
@@ -263,7 +263,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withOverrideModifier() returns function1 with override modifier`() {
+    fun `withOverrideModifier() returns function with override modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasOverrideModifier() } returns true
@@ -281,7 +281,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutOverrideModifier() returns function2 without override modifier`() {
+    fun `withoutOverrideModifier() returns function without override modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasOverrideModifier() } returns true
@@ -299,7 +299,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withFinalModifier() returns function1 with final modifier`() {
+    fun `withFinalModifier() returns function with final modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasFinalModifier() } returns true
@@ -317,7 +317,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutFinalModifier() returns function2 without final modifier`() {
+    fun `withoutFinalModifier() returns function without final modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasFinalModifier() } returns true
@@ -335,7 +335,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAbstractModifier() returns function1 with abstract modifier`() {
+    fun `withAbstractModifier() returns function with abstract modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasAbstractModifier() } returns true
@@ -353,7 +353,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAbstractModifier() returns function2 without abstract modifier`() {
+    fun `withoutAbstractModifier() returns function without abstract modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasAbstractModifier() } returns true
@@ -371,7 +371,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withActualModifier() returns function1 with actual modifier`() {
+    fun `withActualModifier() returns function with actual modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
@@ -389,7 +389,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutActualModifier() returns function2 without actual modifier`() {
+    fun `withoutActualModifier() returns function without actual modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
@@ -407,7 +407,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withExpectModifier() returns function1 with expect modifier`() {
+    fun `withExpectModifier() returns function with expect modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasExpectModifier() } returns true
@@ -425,7 +425,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutExpectModifier() returns function2 without expect modifier`() {
+    fun `withoutExpectModifier() returns function without expect modifier`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasExpectModifier() } returns true
@@ -443,7 +443,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withExtension() returns function1 which has extension`() {
+    fun `withExtension() returns function with extension`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { isExtension() } returns true
@@ -461,7 +461,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutExtension() returns function2 which has not extension`() {
+    fun `withoutExtension() returns function without extension`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { isExtension() } returns true
@@ -479,7 +479,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withReturnType() returns function1 which has return type`() {
+    fun `withReturnType() returns function with any return type`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasReturnType() } returns true
@@ -497,7 +497,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withReturnType() returns functions which has one of given return types`() {
+    fun `withReturnType() returns functions with one of given return types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
@@ -521,7 +521,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutReturnType() returns function2 which has not return type`() {
+    fun `withoutReturnType() returns function without any return type`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
             every { hasReturnType() } returns true
@@ -539,7 +539,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutReturnType(name) returns function3 which has not any given return types`() {
+    fun `withoutReturnType(name) returns function without any of given return types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
@@ -563,7 +563,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withReturnTypeOf() returns function1 which has given return type`() {
+    fun `withReturnTypeOf() returns function with given return type`() {
         // given
         val typeName1 = "SampleType"
         val typeName2 = "OtherType"
@@ -583,7 +583,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutReturnTypeOf() returns function2 which has not given return type`() {
+    fun `withoutReturnTypeOf() returns function without given return type`() {
         // given
         val typeName1 = "SampleType"
         val typeName2 = "OtherType"
@@ -603,7 +603,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withReturnTypeOf(KClass) returns functions which has one of given return types`() {
+    fun `withReturnTypeOf(KClass) returns functions with one of given return types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
@@ -627,7 +627,7 @@ class KoFunctionDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutReturnTypeOf(KClass) returns function which has not any of given return types`() {
+    fun `withoutReturnTypeOf(KClass) returns function without any of given return types`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"

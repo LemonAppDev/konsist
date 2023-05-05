@@ -34,7 +34,7 @@ class KoPsiDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutFilePath(String) returns psiDeclaration3 without given path`() {
+    fun `withoutFilePath(String) returns psiDeclaration without any of given path`() {
         // given
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
@@ -86,7 +86,7 @@ class KoPsiDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutProjectFilePath(String) returns psiDeclaration3 without given project path`() {
+    fun `withoutProjectFilePath(String) returns psiDeclaration without any of given project paths`() {
         // given
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"

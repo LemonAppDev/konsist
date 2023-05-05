@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 
 class KoFileDeclarationSequenceExtTest {
     @Test
-    fun `withImport() returns file1 with given import`() {
+    fun `withImport() returns file with any import`() {
         // given
         val file1: KoFileDeclarationImpl = mockk {
             every { hasImports() } returns true
@@ -30,7 +30,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutImport() returns file2 without given import`() {
+    fun `withoutImport() returns file without any import`() {
         // given
         val file1: KoFileDeclarationImpl = mockk {
             every { hasImports() } returns true
@@ -48,7 +48,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withImports(String) returns file1 with given import`() {
+    fun `withImports(String) returns file with given import`() {
         // given
         val import = "SampleImport"
         val file1: KoFileDeclarationImpl = mockk {
@@ -67,7 +67,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutImports(String) returns file2 without given import`() {
+    fun `withoutImports(String) returns file without given import`() {
         // given
         val import = "SampleImport"
         val file1: KoFileDeclarationImpl = mockk {
@@ -86,7 +86,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withImports(String) returns file1 with all given imports`() {
+    fun `withImports(String) returns file with all of given imports`() {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
@@ -106,7 +106,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutImports(String) returns file2 without given imports`() {
+    fun `withoutImports(String) returns file without any of given imports`() {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
@@ -126,7 +126,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeImports(String) returns files which have at least one of given imports`() {
+    fun `withSomeImports(String) returns files with at least one of given imports`() {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
@@ -178,7 +178,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutPackage(String) returns file3 without given package names`() {
+    fun `withoutPackage(String) returns file without any of given package names`() {
         // given
         val package1 = "SamplePackage1"
         val package2 = "SamplePackage2"
@@ -204,7 +204,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotation() returns file1 which has annotation`() {
+    fun `withAnnotation() returns file which has any annotation`() {
         // given
         val file1: KoFileDeclarationImpl = mockk {
             every { hasAnnotations() } returns true
@@ -222,7 +222,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotation() returns file2 which has not annotation`() {
+    fun `withoutAnnotation() returns file which has not any annotation`() {
         // given
         val file1: KoFileDeclarationImpl = mockk {
             every { hasAnnotations() } returns true
@@ -240,7 +240,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(String) returns file1 with given annotation`() {
+    fun `withAnnotations(String) returns file with given annotation`() {
         // given
         val annotation = "SampleAnnotation"
         val file1: KoFileDeclarationImpl = mockk {
@@ -259,7 +259,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotations(String) returns file2 without given annotation`() {
+    fun `withoutAnnotations(String) returns file without given annotation`() {
         // given
         val annotation = "SampleAnnotation"
         val file1: KoFileDeclarationImpl = mockk {
@@ -278,7 +278,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(String) returns file1 with all given annotations`() {
+    fun `withAnnotations(String) returns file with all of given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -298,7 +298,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotations(String) returns file2 without given annotations`() {
+    fun `withoutAnnotations(String) returns file without any of given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -318,7 +318,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeAnnotations(String) returns file1 and file2 which have at least one of given annotations`() {
+    fun `withSomeAnnotations(String) returns files with at least one of given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -344,7 +344,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotationOf(KClass) returns file1 with given annotation`() {
+    fun `withAnnotationOf(KClass) returns file with given annotation`() {
         // given
         val qualifiedName1 = "com.lemonappdev.konsist.testdata.SampleAnnotation"
         val qualifiedName2 = "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
@@ -370,7 +370,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotationOf(KClass) returns file2 without given annotation`() {
+    fun `withoutAnnotationOf(KClass) returns file without given annotation`() {
         // given
         val qualifiedName1 = "com.lemonappdev.konsist.testdata.SampleAnnotation"
         val qualifiedName2 = "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
@@ -396,7 +396,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotationsOf(KClass) returns file1 with all given annotations`() {
+    fun `withAnnotationsOf(KClass) returns file with all of given annotations`() {
         // given
         val file1: KoFileDeclarationImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) } returns true
@@ -414,7 +414,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotationsOf(KClass) returns file2 without given annotations`() {
+    fun `withoutAnnotationsOf(KClass) returns file without any of given annotations`() {
         // given
         val file1: KoFileDeclarationImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) } returns true
@@ -432,7 +432,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeAnnotationsOf(KClass) returns file1 and file2 which have at least one of given annotations`() {
+    fun `withSomeAnnotationsOf(KClass) returns files with at least one of given annotations`() {
         // given
         val file1: KoFileDeclarationImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
@@ -456,7 +456,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withTypeAlias() returns file1 which has typealias`() {
+    fun `withTypeAlias() returns file with typealias`() {
         // given
         val file1: KoFileDeclarationImpl = mockk {
             every { hasTypeAliases() } returns true
@@ -474,7 +474,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutTypeAlias() returns file2 which has not typealias`() {
+    fun `withoutTypeAlias() returns file without typealias`() {
         // given
         val file1: KoFileDeclarationImpl = mockk {
             every { hasTypeAliases() } returns true
@@ -492,7 +492,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withTypeAliases(String) returns file1 with given typealias`() {
+    fun `withTypeAliases(String) returns file with given typealias`() {
         // given
         val typeAliasName = "SampleTypeAlias"
         val file1: KoFileDeclarationImpl = mockk {
@@ -511,7 +511,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutTypeAliases(String) returns file2 without given typealias`() {
+    fun `withoutTypeAliases(String) returns file without given typealias`() {
         // given
         val typeAliasName = "SampleTypeAlias"
         val file1: KoFileDeclarationImpl = mockk {
@@ -530,7 +530,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withTypeAliases(String) returns files with all given typeAliasNames`() {
+    fun `withTypeAliases(String) returns files with all of given typeAliasNames`() {
         // given
         val typeAliasName1 = "SampleTypeAlias1"
         val typeAliasName2 = "SampleTypeAlias2"
@@ -550,7 +550,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutTypeAliases(String) returns file2 without given typeAliasNames`() {
+    fun `withoutTypeAliases(String) returns file without any of given typeAliasNames`() {
         // given
         val typeAliasName1 = "SampleTypeAlias1"
         val typeAliasName2 = "SampleTypeAlias2"
@@ -570,7 +570,7 @@ class KoFileDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeTypeAliases(String) returns files which have at least one of given typeAliasNames`() {
+    fun `withSomeTypeAliases(String) returns files with at least one of given typeAliasNames`() {
         // given
         val typeAliasName1 = "SampleTypeAlias1"
         val typeAliasName2 = "SampleTypeAlias2"
