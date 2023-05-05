@@ -42,7 +42,7 @@ interface KoPsiDeclaration {
     /**
      * Print declaration.
      */
-    fun print()
+    fun print(): Unit
 
     /**
      * Text of the declaration with the location (file path, line and column).
