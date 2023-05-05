@@ -55,6 +55,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             "$pathPrefix/src/.*"
         }
 
+        // Dot means any character, aster means occur any number of times
         pathPrefix += "/.*"
 
         val koFiles = projectKotlinFiles
