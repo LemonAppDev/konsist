@@ -8,17 +8,14 @@ object LocationHelper {
      *
      * This class cna be used with both file paths and packages.
      */
-    fun resideInLocation(desiredLocation: String, currentLocaion: String): Boolean {
+    fun resideInLocation(desiredLocation: String, currentLocation: String): Boolean {
         val regexAnyNumberOfCharacters = ".*"
-        val windowsFilePathSeparator = """\"""
-        val linuxFilePathSeparator = "/"
 
         val desiredPackageRegexString = desiredLocation
-            .replace(windowsFilePathSeparator, linuxFilePathSeparator)
             .replace(wildcardSyntax, regexAnyNumberOfCharacters)
 
         val desiredPackageRegex = Regex(desiredPackageRegexString)
 
-        return currentLocaion.matches(desiredPackageRegex)
+        return currentLocation.matches(desiredPackageRegex)
     }
 }
