@@ -1239,7 +1239,7 @@ class KoClassDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParentClassOf(KClass) returns parents without any of given parent classes`() {
+    fun `withoutParentClassOf(KClass) returns class without any of given parent classes`() {
         // given
         val name1 = "SampleClass1"
         val name2 = "SampleClass2"
