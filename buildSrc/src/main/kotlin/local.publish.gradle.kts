@@ -90,8 +90,6 @@ publishing {
                     setCredentialsFromGradleProperties()
                 }
             }
-
-            println("Repository Url $url")
         }
     }
 }

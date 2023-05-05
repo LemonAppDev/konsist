@@ -6,15 +6,8 @@ import java.io.FileInputStream
 import java.io.InputStreamReader
 import java.util.*
 
-fun Project.getLocalPropertyOrGradleProperty(propertyName: String): String? {
-    val property = gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)
-
-    if (property == null) {
-        logger.warn("Property $propertyName not found.")
-    }
-
-    return property
-}
+fun Project.getLocalPropertyOrGradleProperty(propertyName: String) =
+    gradleLocalProperty(propertyName) ?: getProjectProperty(propertyName)
 
 private fun Project.getProjectProperty(propertyName: String): String? = properties[propertyName] as String?
 

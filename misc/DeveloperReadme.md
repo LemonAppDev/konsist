@@ -29,6 +29,10 @@
 artefact will be transferred to [maven central](https://central.sonatype.com/artifact/com.lemonappdev/konsist) 
 repository after some time.
 
+## Generate KDocs
+
+- `./gradlew dokkaHtml` - generate KDocs in `./lib/build/dokka/html/index.html`
+
 ## Layers
 
 Below is a diagram of the layers of the `konsist` library:
