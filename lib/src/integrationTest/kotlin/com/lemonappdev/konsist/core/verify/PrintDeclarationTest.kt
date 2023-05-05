@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.ext.sequence.withNamePrefix
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class APrintDeclaration {
+class PrintDeclarationTest {
     @Test
     fun `return value after printDeclaration() is equal to original value`() {
         // given
