@@ -5,8 +5,8 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtClass
 
-internal class KoInterfaceDeclarationImpl private constructor(private val ktClass: KtClass) :
-    KoComplexDeclarationImpl(ktClass),
+internal class KoInterfaceDeclarationImpl private constructor(private val ktClass: KtClass, parent: KoBaseDeclarationImpl) :
+    KoComplexDeclarationImpl(ktClass, parent),
     KoInterfaceDeclaration {
     override fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
 
@@ -16,7 +16,7 @@ internal class KoInterfaceDeclarationImpl private constructor(private val ktClas
         private val cache = KoDeclarationCache<KoInterfaceDeclarationImpl>()
 
         internal fun getInstance(ktClass: KtClass, parent: KoBaseDeclarationImpl) = cache.getOrCreateInstance(ktClass, parent) {
-            KoInterfaceDeclarationImpl(ktClass)
+            KoInterfaceDeclarationImpl(ktClass, parent)
         }
     }
 }

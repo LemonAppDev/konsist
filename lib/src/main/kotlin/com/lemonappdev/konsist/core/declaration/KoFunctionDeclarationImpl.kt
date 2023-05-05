@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction) :
-    KoParametrizedDeclarationImpl(ktFunction),
+internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction, parent: KoBaseDeclarationImpl?) :
+    KoParametrizedDeclarationImpl(ktFunction, parent),
     KoFunctionDeclaration {
 
     private val localDeclarations by lazy {
@@ -77,7 +77,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
         private val cache = KoDeclarationCache<KoFunctionDeclarationImpl>()
 
         internal fun getInstance(ktFunction: KtFunction, parent: KoBaseDeclarationImpl) = cache.getOrCreateInstance(ktFunction, parent) {
-            KoFunctionDeclarationImpl(ktFunction)
+            KoFunctionDeclarationImpl(ktFunction, parent)
         }
     }
 }

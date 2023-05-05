@@ -8,8 +8,8 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal class KoPropertyDeclarationImpl private constructor(private val ktProperty: KtProperty) :
-    KoDeclarationImpl(ktProperty),
+internal class KoPropertyDeclarationImpl private constructor(private val ktProperty: KtProperty, parent: KoBaseDeclarationImpl?) :
+    KoDeclarationImpl(ktProperty, parent),
     KoPropertyDeclaration {
     override val isVar by lazy { ktProperty.isVar }
 
@@ -65,7 +65,7 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
         private val cache = KoDeclarationCache<KoPropertyDeclarationImpl>()
 
         internal fun getInstance(ktProperty: KtProperty, parent: KoBaseDeclarationImpl) = cache.getOrCreateInstance(ktProperty, parent) {
-            KoPropertyDeclarationImpl(ktProperty)
+            KoPropertyDeclarationImpl(ktProperty, parent)
         }
     }
 }

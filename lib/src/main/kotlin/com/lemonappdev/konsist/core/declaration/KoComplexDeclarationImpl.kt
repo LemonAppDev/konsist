@@ -7,7 +7,8 @@ import org.jetbrains.kotlin.psi.KtClassOrObject
 
 internal abstract class KoComplexDeclarationImpl(
     private val ktClassOrObject: KtClassOrObject,
-) : KoDeclarationImpl(ktClassOrObject),
+    override val parent: KoBaseDeclarationImpl
+) : KoDeclarationImpl(ktClassOrObject, parent),
     KoComplexDeclaration {
 
     override fun representsType(name: String) = name == this.name || name == fullyQualifiedName

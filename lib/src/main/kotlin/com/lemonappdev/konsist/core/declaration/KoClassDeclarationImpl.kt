@@ -9,8 +9,8 @@ import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass) :
-    KoComplexDeclarationImpl(ktClass),
+internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass, parent: KoBaseDeclarationImpl) :
+    KoComplexDeclarationImpl(ktClass, parent),
     KoClassDeclaration {
     override val parents by lazy {
         ktClass
@@ -106,7 +106,7 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
         private val cache = KoDeclarationCache<KoClassDeclarationImpl>()
 
         internal fun getInstance(ktClass: KtClass, parent: KoBaseDeclarationImpl) = cache.getOrCreateInstance(ktClass, parent) {
-            KoClassDeclarationImpl(ktClass)
+            KoClassDeclarationImpl(ktClass, parent)
         }
     }
 }

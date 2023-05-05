@@ -6,8 +6,8 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
-internal class KoTypeAliasDeclarationImpl private constructor(private val ktTypeAlias: KtTypeAlias) :
-    KoDeclarationImpl(ktTypeAlias),
+internal class KoTypeAliasDeclarationImpl private constructor(private val ktTypeAlias: KtTypeAlias, parent: KoBaseDeclarationImpl?) :
+    KoDeclarationImpl(ktTypeAlias, parent),
     KoTypeAliasDeclaration {
 
     override val type by lazy {
@@ -23,6 +23,6 @@ internal class KoTypeAliasDeclarationImpl private constructor(private val ktType
         private val cache = KoDeclarationCache<KoTypeAliasDeclarationImpl>()
 
         internal fun getInstance(ktTypeAlias: KtTypeAlias, parent: KoBaseDeclarationImpl) =
-            cache.getOrCreateInstance(ktTypeAlias, parent) { KoTypeAliasDeclarationImpl(ktTypeAlias) }
+            cache.getOrCreateInstance(ktTypeAlias, parent) { KoTypeAliasDeclarationImpl(ktTypeAlias, parent) }
     }
 }

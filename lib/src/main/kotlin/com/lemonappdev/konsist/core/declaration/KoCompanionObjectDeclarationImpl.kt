@@ -4,8 +4,8 @@ import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 
-internal class KoCompanionObjectDeclarationImpl private constructor(ktObjectDeclaration: KtObjectDeclaration) :
-    KoComplexDeclarationImpl(ktObjectDeclaration), KoCompanionObjectDeclaration {
+internal class KoCompanionObjectDeclarationImpl private constructor(ktObjectDeclaration: KtObjectDeclaration, parent: KoBaseDeclarationImpl) :
+    KoComplexDeclarationImpl(ktObjectDeclaration, parent), KoCompanionObjectDeclaration {
     override fun hasName() = name != DEFAULT_COMPANION_OBJECT_NAME
 
     internal companion object {
@@ -14,6 +14,6 @@ internal class KoCompanionObjectDeclarationImpl private constructor(ktObjectDecl
         internal const val DEFAULT_COMPANION_OBJECT_NAME = "Companion"
 
         internal fun getInstance(ktObjectDeclaration: KtObjectDeclaration, parent: KoBaseDeclarationImpl) =
-            cache.getOrCreateInstance(ktObjectDeclaration, parent) { KoCompanionObjectDeclarationImpl(ktObjectDeclaration) }
+            cache.getOrCreateInstance(ktObjectDeclaration, parent) { KoCompanionObjectDeclarationImpl(ktObjectDeclaration, parent) }
     }
 }
