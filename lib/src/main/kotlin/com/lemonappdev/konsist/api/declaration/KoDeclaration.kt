@@ -85,7 +85,7 @@ interface KoDeclaration : KoNamedDeclaration {
     /**
      * Whether the declaration resides in a package.
      */
-    fun resideInPackage(packageName: String): Boolean
+    fun resideInPackage(desiredPackage: String): Boolean
 
     /**
      * Whether the declaration resides outside a package.
