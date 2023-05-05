@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.core.exception.KoInternalException
-import com.lemonappdev.konsist.core.util.PackageHelper
+import com.lemonappdev.konsist.core.util.LocationHelper
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isPublic
@@ -95,7 +95,7 @@ internal abstract class KoDeclarationImpl(private val ktTypeParameterListOwner: 
 
     override fun hasKoDoc() = koDoc != null
 
-    override fun resideInPackage(desiredPackage: String) = PackageHelper.resideInPackage(desiredPackage, this.packageName)
+    override fun resideInPackage(desiredPackage: String) = LocationHelper.resideInLocation(desiredPackage, this.packageName)
 
     override fun resideOutsidePackage(packageName: String) = !resideInPackage(packageName)
 }
