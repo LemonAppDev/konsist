@@ -32,8 +32,3 @@ testing {
         }
     }
 }
-
-val compileTestKotlin: KotlinCompile by tasks
-compileTestKotlin.kotlinOptions {
-    languageVersion = "1.9"
-}
