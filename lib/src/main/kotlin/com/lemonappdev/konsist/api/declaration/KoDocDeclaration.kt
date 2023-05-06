@@ -92,7 +92,7 @@ interface KoDocDeclaration : KoPsiDeclaration {
     val propertyGetterTag: KoDocTagDeclaration?
 
     /**
-     * Whather the declaration has the given tags.
+     * Whether the declaration has the given tags.
      */
     fun hasTags(vararg tags: KoDocTag): Boolean
 }

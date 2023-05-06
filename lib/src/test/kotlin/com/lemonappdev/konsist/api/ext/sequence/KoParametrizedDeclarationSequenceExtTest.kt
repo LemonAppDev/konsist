@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class KoParametrizedDeclarationSequenceExtTest {
     @Test
-    fun `withParameters() returns parametrizedDeclaration1 which has parameters`() {
+    fun `withParameters() returns parametrized declaration with any parameter`() {
         // given
         val parametrizedDeclaration1: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed() } returns true
@@ -26,7 +26,7 @@ class KoParametrizedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParameters() returns parametrizedDeclaration2 which has not parameters`() {
+    fun `withoutParameters() returns parametrized declaration without any parameter`() {
         // given
         val parametrizedDeclaration1: KoParametrizedDeclarationImpl = mockk {
             every { hasParameterNamed() } returns true
@@ -44,7 +44,7 @@ class KoParametrizedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withParameters(String) returns parametrizedDeclaration1 with given parameters`() {
+    fun `withParameters(String) returns parametrized declaration with all of given parameters`() {
         // given
         val parameter1 = "SampleParameter1"
         val parameter2 = "SampleParameter2"
@@ -70,7 +70,7 @@ class KoParametrizedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutParameters(String) returns parametrizedDeclaration3 without given parameters`() {
+    fun `withoutParameters(String) returns parametrized declaration without any of given parameters`() {
         // given
         val parameter1 = "SampleParameter1"
         val parameter2 = "SampleParameter2"
@@ -96,7 +96,7 @@ class KoParametrizedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeParameters(String) returns parametrizedDeclarations which have at least one of given parameters`() {
+    fun `withSomeParameters(String) returns parametrized declarations with at least one of given parameters`() {
         // given
         val parameter1 = "SampleParameter1"
         val parameter2 = "SampleParameter2"

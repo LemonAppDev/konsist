@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class KoParentDeclarationSequenceExtTest {
     @Test
-    fun `withDelegate() returns parent1 which has delegate`() {
+    fun `withDelegate() returns parent with any delegate`() {
         // given
         val parent1: KoParentDeclarationImpl = mockk {
             every { hasDelegate() } returns true
@@ -26,7 +26,7 @@ class KoParentDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withDelegate(name) returns parents which have one of given delegate names`() {
+    fun `withDelegate(name) returns parent with one of given delegate names`() {
         // given
         val delegateName1 = "DelegateName1"
         val delegateName2 = "DelegateName2"
@@ -52,7 +52,7 @@ class KoParentDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutDelegate() returns parent2 which has not delegate`() {
+    fun `withoutDelegate() returns parent without any delegate`() {
         // given
         val parent1: KoParentDeclarationImpl = mockk {
             every { hasDelegate() } returns true
@@ -70,7 +70,7 @@ class KoParentDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutDelegate(name) returns parent3 which has not delegate with any given name`() {
+    fun `withoutDelegate(name) returns parent without delegate with any of given names`() {
         // given
         val delegateName1 = "DelegateName1"
         val delegateName2 = "DelegateName2"

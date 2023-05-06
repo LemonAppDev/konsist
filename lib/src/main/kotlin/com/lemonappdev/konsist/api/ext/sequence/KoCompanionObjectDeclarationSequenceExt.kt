@@ -5,9 +5,9 @@ import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 /**
  * Sequence containing declarations that have name.
  */
-fun Sequence<KoCompanionObjectDeclaration>.withName() = filter { it.hasName() }
+fun Sequence<KoCompanionObjectDeclaration>.withName(): Sequence<KoCompanionObjectDeclaration> = filter { it.hasName() }
 
 /**
  * Sequence containing declarations that don't have name.
  */
-fun Sequence<KoCompanionObjectDeclaration>.withoutName() = filterNot { it.hasName() }
+fun Sequence<KoCompanionObjectDeclaration>.withoutName(): Sequence<KoCompanionObjectDeclaration> = filterNot { it.hasName() }

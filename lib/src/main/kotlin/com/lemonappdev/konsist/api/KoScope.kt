@@ -109,12 +109,12 @@ interface KoScope {
     /**
      * Add a scope files and create a new scope.
      */
-    operator fun plusAssign(scope: KoScope)
+    operator fun plusAssign(scope: KoScope): Unit
 
     /**
      * Subtract a scope files and create a new scope.
      */
-    operator fun minusAssign(scope: KoScope)
+    operator fun minusAssign(scope: KoScope): Unit
 
     /**
      * String representing the scope.
@@ -124,5 +124,5 @@ interface KoScope {
     /**
      * Print the scope.
      */
-    fun print()
+    fun print(): Unit
 }

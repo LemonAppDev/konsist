@@ -32,17 +32,17 @@ interface KoPsiDeclaration {
     /**
      * Whatever declaration reside in file path.
      */
-    fun resideInFilePath(text: String): Boolean
+    fun resideInFilePath(path: String): Boolean
 
     /**
      * Whatever declaration reside in project file path.
      */
-    fun resideInProjectFilePath(text: String): Boolean
+    fun resideInProjectFilePath(path: String): Boolean
 
     /**
      * Print declaration.
      */
-    fun print()
+    fun print(): Unit
 
     /**
      * Text of the declaration with the location (file path, line and column).

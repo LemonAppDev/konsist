@@ -15,7 +15,7 @@ interface KoDeclaration : KoNamedDeclaration {
     /**
      * Package name of the declaration.
      */
-    val packageName: String
+    val packagee: String
 
     /**
      * List of annotations.
@@ -85,10 +85,10 @@ interface KoDeclaration : KoNamedDeclaration {
     /**
      * Whether the declaration resides in a package.
      */
-    fun resideInPackage(packageName: String): Boolean
+    fun resideInPackage(packagee: String): Boolean
 
     /**
      * Whether the declaration resides outside a package.
      */
-    fun resideOutsidePackage(packageName: String): Boolean
+    fun resideOutsidePackage(packagee: String): Boolean
 }

@@ -7,6 +7,7 @@ dependencies {
     implementation(plugin(libs.plugins.spotless))
     implementation(plugin(libs.plugins.testLogger))
     implementation(plugin(libs.plugins.detekt))
+    implementation(plugin(libs.plugins.dokka))
 }
 
 kotlin {

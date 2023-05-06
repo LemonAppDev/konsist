@@ -45,7 +45,7 @@ class KoComplexDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutType(String) returns complex declaration without any given type`() {
+    fun `withoutType(String) returns complex declaration without any of given types`() {
         // given
         val type1 = "type1"
         val type2 = "type2"
@@ -124,7 +124,7 @@ class KoComplexDeclarationSequenceExtTest {
 
     //  'every { representsType<SampleClass>() } returns true' doesn't work because there is a bug in mockk
     @Test
-    fun `withTypeOf() with KClass syntax returns SampleClass`() {
+    fun `withTypeOf() with KClass syntax returns complex declaration with SampleClass type`() {
         // given
         val complexDeclaration1: KoComplexDeclarationImpl = mockk {
             every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleClass"
@@ -142,7 +142,7 @@ class KoComplexDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutTypeOf() with KClass syntax returns complex declaration without SampleClass`() {
+    fun `withoutTypeOf() with KClass syntax returns complex declaration without SampleClass type`() {
         // given
         val complexDeclaration1: KoComplexDeclarationImpl = mockk {
             every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleClass"
@@ -160,7 +160,7 @@ class KoComplexDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `declarations() returns declarations of all complex declarations`() {
+    fun `declarations() returns declarations from all complex declarations`() {
         // given
         val class1: KoClassDeclarationImpl = mockk()
         val function1: KoFunctionDeclarationImpl = mockk()
@@ -195,7 +195,7 @@ class KoComplexDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `classes() returns classes of all complex declarations`() {
+    fun `classes() returns classes from all complex declarations`() {
         // given
         val class1: KoClassDeclarationImpl = mockk()
         val class2: KoClassDeclarationImpl = mockk()
@@ -220,7 +220,7 @@ class KoComplexDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `interfaces() returns interfaces of all complex declarations`() {
+    fun `interfaces() returns interfaces from all complex declarations`() {
         // given
         val interface1: KoInterfaceDeclarationImpl = mockk()
         val interface2: KoInterfaceDeclarationImpl = mockk()
@@ -245,7 +245,7 @@ class KoComplexDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `objects() returns objects of all complex declarations`() {
+    fun `objects() returns objects from all complex declarations`() {
         // given
         val object1: KoObjectDeclarationImpl = mockk()
         val object2: KoObjectDeclarationImpl = mockk()
@@ -270,7 +270,7 @@ class KoComplexDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `companionObjects() returns companionObjects of all complex declarations`() {
+    fun `companionObjects() returns companion objects from all complex declarations`() {
         // given
         val companionObject1: KoCompanionObjectDeclarationImpl = mockk()
         val companionObject2: KoCompanionObjectDeclarationImpl = mockk()
@@ -295,7 +295,7 @@ class KoComplexDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `properties() returns properties of all complex declarations`() {
+    fun `properties() returns properties from all complex declarations`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk()
         val property2: KoPropertyDeclarationImpl = mockk()
@@ -320,7 +320,7 @@ class KoComplexDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `functions() returns functions of all complex declarations`() {
+    fun `functions() returns functions from all complex declarations`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk()
         val function2: KoFunctionDeclarationImpl = mockk()

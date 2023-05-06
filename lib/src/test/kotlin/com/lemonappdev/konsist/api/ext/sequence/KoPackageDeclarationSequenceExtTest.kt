@@ -32,7 +32,7 @@ class KoPackageDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutQualifiedName() returns package without given names`() {
+    fun `withoutQualifiedName() returns package without any of given names`() {
         // given
         val qualifiedName1 = "com.samplepackage1"
         val qualifiedName2 = "com.samplepackage2"

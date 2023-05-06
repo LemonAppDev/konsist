@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class KoInterfaceDeclarationSequenceExtTest {
     @Test
-    fun `withActualModifier() returns interface1 with actual modifier`() {
+    fun `withActualModifier() returns interface with actual modifier`() {
         // given
         val interface1: KoInterfaceDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
@@ -26,7 +26,7 @@ class KoInterfaceDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutActualModifier() returns interface2 without actual modifier`() {
+    fun `withoutActualModifier() returns interface without actual modifier`() {
         // given
         val interface1: KoInterfaceDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
@@ -44,7 +44,7 @@ class KoInterfaceDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withExpectModifier() returns interface1 with expect modifier`() {
+    fun `withExpectModifier() returns interface with expect modifier`() {
         // given
         val interface1: KoInterfaceDeclarationImpl = mockk {
             every { hasExpectModifier() } returns true
@@ -62,7 +62,7 @@ class KoInterfaceDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutExpectModifier() returns interface2 without expect modifier`() {
+    fun `withoutExpectModifier() returns interface without expect modifier`() {
         // given
         val interface1: KoInterfaceDeclarationImpl = mockk {
             every { hasExpectModifier() } returns true

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class KoImportDeclarationSequenceExtTest {
     @Test
-    fun `withAlias() returns import1 which has alias`() {
+    fun `withAlias() returns import with any alias`() {
         // given
         val importName = "name"
         val alias1 = "AliasName"
@@ -30,7 +30,7 @@ class KoImportDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAlias(name) returns imports which have one of given alias names`() {
+    fun `withAlias(name) returns imports with one of given alias names`() {
         // given
         val importName = "name"
         val aliasName1 = "AliasName1"
@@ -62,7 +62,7 @@ class KoImportDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAlias() returns import2 which has not alias`() {
+    fun `withoutAlias() returns import without any alias`() {
         // given
         val importName = "name"
         val alias1 = "AliasName"
@@ -84,7 +84,7 @@ class KoImportDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAlias(name) returns imports which have not alias with given names`() {
+    fun `withoutAlias(name) returns imports without alias with any of given names`() {
         // given
         val importName = "name"
         val aliasName1 = "AliasName1"

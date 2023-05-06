@@ -32,7 +32,7 @@ class KoTypeAliasDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutType(name) returns typeAlias3 which has not any given type`() {
+    fun `withoutType(name) returns typeAlias which has not any of given types`() {
         // given
         val type1 = "SampleType1"
         val type2 = "SampleType2"
@@ -56,7 +56,7 @@ class KoTypeAliasDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withActualModifier() returns typeAlias1 with actual modifier`() {
+    fun `withActualModifier() returns typeAlias with actual modifier`() {
         // given
         val typeAlias1: KoTypeAliasDeclarationImpl = mockk {
             every { hasActualModifier() } returns true
@@ -74,7 +74,7 @@ class KoTypeAliasDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutActualModifier() returns typeAlias2 without actual modifier`() {
+    fun `withoutActualModifier() returns typeAlias without actual modifier`() {
         // given
         val typeAlias1: KoTypeAliasDeclarationImpl = mockk {
             every { hasActualModifier() } returns true

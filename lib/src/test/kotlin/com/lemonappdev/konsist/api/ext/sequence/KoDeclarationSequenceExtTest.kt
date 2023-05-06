@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationSequenceExtTest {
     @Test
-    fun `withPublicModifier() returns declaration1 with public modifier`() {
+    fun `withPublicModifier() returns declaration with public modifier`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasPublicModifier() } returns true
@@ -35,7 +35,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutPublicModifier() returns declaration2 without public modifier`() {
+    fun `withoutPublicModifier() returns declaration without public modifier`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasPublicModifier() } returns true
@@ -53,7 +53,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withPublicOrDefaultModifier() returns declaration1 with public or default modifier`() {
+    fun `withPublicOrDefaultModifier() returns declaration with public or default modifier`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { isPublicOrDefault() } returns true
@@ -71,7 +71,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutPublicOrDefaultModifier() returns declaration2 without public or default modifier`() {
+    fun `withoutPublicOrDefaultModifier() returns declaration without public or default modifier`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { isPublicOrDefault() } returns true
@@ -89,7 +89,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withPrivateModifier() returns declaration1 with private modifier`() {
+    fun `withPrivateModifier() returns declaration with private modifier`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasPrivateModifier() } returns true
@@ -107,7 +107,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutPrivateModifier() returns declaration2 without private modifier`() {
+    fun `withoutPrivateModifier() returns declaration without private modifier`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasPrivateModifier() } returns true
@@ -125,7 +125,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withProtectedModifier() returns declaration1 with protected modifier`() {
+    fun `withProtectedModifier() returns declaration with protected modifier`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasProtectedModifier() } returns true
@@ -143,7 +143,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutProtectedModifier() returns declaration2 without protected modifier`() {
+    fun `withoutProtectedModifier() returns declaration without protected modifier`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasProtectedModifier() } returns true
@@ -161,7 +161,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withInternalModifier() returns declaration1 with internal modifier`() {
+    fun `withInternalModifier() returns declaration with internal modifier`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasInternalModifier() } returns true
@@ -179,7 +179,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutInternalModifier() returns declaration2 without internal modifier`() {
+    fun `withoutInternalModifier() returns declaration without internal modifier`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasInternalModifier() } returns true
@@ -197,7 +197,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withTopLevel() returns declaration1 which is top level declaration`() {
+    fun `withTopLevel() returns declaration which is top level declaration`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { isTopLevel() } returns true
@@ -215,7 +215,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutTopLevel() returns declaration2 which is not top level declaration`() {
+    fun `withoutTopLevel() returns declaration which is not top level declaration`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { isTopLevel() } returns true
@@ -269,7 +269,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotations(String) returns declaration1 with given annotations`() {
+    fun `withAnnotations(String) returns declaration with all of given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -289,7 +289,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotations(String) returns declaration2 without given annotations`() {
+    fun `withoutAnnotations(String) returns declaration without any of given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -309,7 +309,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeAnnotations(String) returns declarations which have at least one of given annotations`() {
+    fun `withSomeAnnotations(String) returns declarations with at least one of given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
@@ -335,7 +335,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotationsOf(KClass) returns declaration1 with given annotations`() {
+    fun `withAnnotationsOf(KClass) returns declaration with all of given annotations`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) } returns true
@@ -353,7 +353,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotationsOf(KClass) returns declaration3 without given annotations`() {
+    fun `withoutAnnotationsOf(KClass) returns declaration without any of given annotations`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) } returns true
@@ -371,7 +371,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeAnnotationsOf(KClass) returns declaration1 and declaration2 which have at least one of given annotations`() {
+    fun `withSomeAnnotationsOf(KClass) returns declarations with at least one of given annotations`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
@@ -395,7 +395,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withAnnotationOf(KClass) returns declaration with given annotation`() {
+    fun `withAnnotationOf(KClass) returns declaration with all of given annotations`() {
         // given
         val qualifiedName1 = "com.lemonappdev.konsist.testdata.SampleAnnotation"
         val qualifiedName2 = "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
@@ -421,7 +421,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutAnnotationOf(KClass) returns declaration without given annotation`() {
+    fun `withoutAnnotationOf(KClass) returns declaration without any of given annotations`() {
         // given
         val qualifiedName1 = "com.lemonappdev.konsist.testdata.SampleAnnotation"
         val qualifiedName2 = "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
@@ -447,7 +447,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withModifiers() returns declaration1 which has modifier`() {
+    fun `withModifiers() returns declaration with modifier`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasModifiers() } returns true
@@ -465,7 +465,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutModifiers() returns declaration2 which has not modifier`() {
+    fun `withoutModifiers() returns declaration without modifier`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasModifiers() } returns true
@@ -483,7 +483,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withModifiers(String) returns declaration1 with all given modifiers`() {
+    fun `withModifiers(String) returns declaration with all of given modifiers`() {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
@@ -503,7 +503,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutModifiers(String) returns declaration2 without given modifiers`() {
+    fun `withoutModifiers(String) returns declaration without any of given modifiers`() {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
@@ -523,7 +523,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeModifiers(String) returns declarations which have at least one of given modifiers`() {
+    fun `withSomeModifiers(String) returns declarations with at least one of given modifiers`() {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
@@ -549,7 +549,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withPackage(String) returns declarations which have at least one of given package`() {
+    fun `withPackage(String) returns declarations with at least one of given package`() {
         // given
         val package1 = "com.sample.samplepackage1"
         val package2 = "com.sample.samplepackage2"
@@ -575,7 +575,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutPackage(String) returns declaration3 without given packages`() {
+    fun `withoutPackage(String) returns declaration without any of given packages`() {
         // given
         val package1 = "com.sample.samplepackage1"
         val package2 = "com.sample.samplepackage2"
@@ -601,7 +601,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withKoDoc() returns declaration1 with koDoc`() {
+    fun `withKoDoc() returns declaration with any koDoc`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasKoDoc() } returns true
@@ -619,7 +619,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutKoDoc() returns declaration2 without koDoc`() {
+    fun `withoutKoDoc() returns declaration without any koDoc`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
             every { hasKoDoc() } returns true
@@ -689,7 +689,7 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSomeKoDocWithTags(String) returns declarations which have at least one of given tags`() {
+    fun `withSomeKoDocWithTags(String) returns declarations with at least one of given tags`() {
         // given
         val tag1 = SINCE
         val tag2 = SEE

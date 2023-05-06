@@ -14,7 +14,7 @@ import com.lemonappdev.konsist.testdata.SampleType2 as SampleImportAlias2
 
 class KoTypeDeclarationSequenceExtTest {
     @Test
-    fun `withSourceTypeOf() returns type1 which has SampleClass source type`() {
+    fun `withSourceTypeOf() returns type with SampleClass source type`() {
         // given
         val sourceType1 = "SampleClass"
         val sourceType2 = "OtherClass"
@@ -34,7 +34,7 @@ class KoTypeDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutSourceTypeOf() returns type2 which has not SampleClass source type`() {
+    fun `withoutSourceTypeOf() returns type without SampleClass source type`() {
         // given
         val sourceType1 = "SampleClass"
         val sourceType2 = "OtherClass"
@@ -102,7 +102,7 @@ class KoTypeDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withSourceType(type) returns types which has one of given source types`() {
+    fun `withSourceType(type) returns types with one of given source types`() {
         // given
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
@@ -126,7 +126,7 @@ class KoTypeDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutSourceType(type) returns type3 which has not any given source type`() {
+    fun `withoutSourceType(type) returns type without any of given source type`() {
         // given
         val sourceType1 = "SampleClass1"
         val sourceType2 = "SampleClass2"
@@ -150,7 +150,7 @@ class KoTypeDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withImportAliasOf() returns type1 which has SampleImportAlias`() {
+    fun `withImportAliasOf() returns type with SampleImportAlias`() {
         // given
         val sourceType1 = "SampleType"
         val sourceType2 = "Sample"
@@ -180,7 +180,7 @@ class KoTypeDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutImportAliasOf() returns type2, typ3 and type4 which have not SampleImportAlias`() {
+    fun `withoutImportAliasOf() returns types without SampleImportAlias`() {
         // given
         val sourceType1 = "SampleType"
         val sourceType2 = "Sample"
@@ -272,7 +272,7 @@ class KoTypeDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withImportAlias(type) returns types which have one of given import aliases`() {
+    fun `withImportAlias(type) returns types with one of given import aliases`() {
         // given
         val importAliasName1 = "SampleImportAlias1"
         val importAliasName2 = "SampleImportAlias2"
@@ -296,7 +296,7 @@ class KoTypeDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutImportAlias(type) returns type3 which has not any given import alias`() {
+    fun `withoutImportAlias(type) returns type without any of given import alias`() {
         // given
         val importAliasName1 = "SampleImportAlias1"
         val importAliasName2 = "SampleImportAlias2"
@@ -320,7 +320,7 @@ class KoTypeDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withFullyQualifiedName() returns types which has one of given names`() {
+    fun `withFullyQualifiedName() returns types with one of given names`() {
         // given
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
@@ -344,7 +344,7 @@ class KoTypeDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutFullyQualifiedName() returns type3 which has not any given name`() {
+    fun `withoutFullyQualifiedName() returns type without any of given names`() {
         // given
         val fullyQualifiedName1 = "fullyQualifiedName1"
         val fullyQualifiedName2 = "fullyQualifiedName2"
@@ -368,7 +368,7 @@ class KoTypeDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withImportAlias() returns type1 which has given name`() {
+    fun `withImportAlias() returns type with any import alias`() {
         // given
         val type1: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns true
@@ -386,7 +386,7 @@ class KoTypeDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withoutImportAlias() returns type2 which has not given name`() {
+    fun `withoutImportAlias() returns type without any import alias`() {
         // given
         val type1: KoTypeDeclarationImpl = mockk {
             every { isImportAlias() } returns true

@@ -3,6 +3,7 @@ name: Check
 on:
   push:
     branches: [ main ]
+
   pull_request:
     types: [ opened, synchronize ]
 
@@ -143,6 +144,29 @@ jobs:
         with:
           name: konsist.jar
           path: lib/build/libs/lib.jar
+  dokka-html-doc:
+    name: Dokka Generate Html Doc
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Dokka Generate Html Doc
+        run: ./gradlew lib:dokkaHtml
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dokka-html-doc.jar
+          path: ./lib/build/dokka/*
   publish:
     name: Publish Local
     continue-on-error: true

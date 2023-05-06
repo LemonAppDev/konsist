@@ -1,5 +1,9 @@
-import util.getLocalPropertyOrGradleProperty
-import java.util.*
+
+import enu.ReleaseTarget
+import ext.getFullKonsistVersion
+import ext.getLocalPropertyOrGradleProperty
+import ext.getReleaseTarget
+import java.util.Base64
 
 plugins {
     `maven-publish`
@@ -9,16 +13,15 @@ plugins {
 val konsistPublicationName = "konsist"
 
 publishing {
-    val releaseTarget = getReleaseTarget()
+    val releaseTarget = project.getReleaseTarget()
 
     publications {
         create<MavenPublication>(konsistPublicationName) {
-
             val konsistDescription = "A Kotlin architecture test library. Define and guard code base consistency using Kotlin."
 
             groupId = "com.lemonappdev"
             artifactId = "konsist"
-            version = getKonsistVersion(releaseTarget)
+            version = project.getFullKonsistVersion(releaseTarget)
             description = konsistDescription
 
             from(components.getByName("java"))
@@ -90,8 +93,6 @@ publishing {
                     setCredentialsFromGradleProperties()
                 }
             }
-
-            println("Repository Url $url")
         }
     }
 }
@@ -116,12 +117,6 @@ signing {
     }
 }
 
-enum class ReleaseTarget(val value: String) {
-    LOCAL("local"),
-    SNAPSHOT("snapshot"),
-    RELEASE("release"),
-}
-
 fun MavenArtifactRepository.setCredentialsFromGradleProperties() {
     val ossrhUsername = getLocalPropertyOrGradleProperty("konsist.ossrhUsername")
     val ossrhPassword = getLocalPropertyOrGradleProperty("konsist.ossrhPassword")
@@ -133,22 +128,3 @@ fun MavenArtifactRepository.setCredentialsFromGradleProperties() {
 }
 
 fun decodeBase64(string: String) = String(Base64.getDecoder().decode(string)).trim()
-
-fun getReleaseTarget(): ReleaseTarget {
-    val releaseTargetStr = getLocalPropertyOrGradleProperty("konsist.releaseTarget")
-
-    return ReleaseTarget
-        .values()
-        .firstOrNull { it.value == releaseTargetStr }
-        ?: ReleaseTarget.LOCAL
-}
-
-fun getKonsistVersion(releaseTarget: ReleaseTarget): String {
-    val version = getLocalPropertyOrGradleProperty("konsist.version") ?: error("konsist.version is not provided.")
-
-    return when (releaseTarget) {
-        ReleaseTarget.LOCAL -> "$version-SNAPSHOT"
-        ReleaseTarget.SNAPSHOT -> "$version-SNAPSHOT"
-        ReleaseTarget.RELEASE -> version
-    }
-}
