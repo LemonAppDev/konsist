@@ -55,7 +55,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             "$pathPrefix/src/.*"
         }
 
-        // Dot means any character, aster means occur any number of times
+        // Dot means any character, asterisk means occur any number of times
         pathPrefix += "/.*"
 
         return projectKotlinFiles
