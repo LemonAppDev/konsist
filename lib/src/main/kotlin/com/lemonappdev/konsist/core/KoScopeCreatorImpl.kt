@@ -25,9 +25,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     private val projectKotlinFiles by lazy {
-        val prodDirectory = pathProvider.rootProjectDirectory
+        val projectRootDirectory = pathProvider.rootProjectDirectory
 
-        prodDirectory
+        projectRootDirectory
             .walk()
             .filter { it.isKotlinFile }
             .map { it.toKoFile() }
