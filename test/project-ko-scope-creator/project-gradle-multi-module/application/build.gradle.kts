@@ -8,9 +8,18 @@ repositories {
     mavenCentral()
 }
 
+kotlin {
+    jvmToolchain(19)
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
 
     testImplementation(files("../../../../lib/build/libs/lib.jar"))
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.3")
+    testImplementation(libs.junitJupiterEngine)
+    testImplementation(libs.kluent)
 }

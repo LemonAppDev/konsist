@@ -8,6 +8,14 @@ repositories {
     mavenCentral()
 }
 
+kotlin {
+    jvmToolchain(19)
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
 }
