@@ -5,7 +5,7 @@ plugins {
 }
 
 repositories {
-    mavenCentral()
+    mavenLocal()
 }
 
 kotlin {
@@ -19,7 +19,7 @@ tasks.withType<Test> {
 dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
 
-    testImplementation(files("../../../../lib/build/libs/lib.jar"))
+    testImplementation(libs.konsist)
     testImplementation(libs.junitJupiterEngine)
     testImplementation(libs.kluent)
 }
