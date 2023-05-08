@@ -3,6 +3,8 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.Konsist
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import java.io.File
 
@@ -18,6 +20,26 @@ class KonsistTest {
         sut.shouldBeEqualTo(
             listOf("$applicationMainSourceSetDirectory/sample/AppClass.kt"),
         )
+    }
+
+    @Test
+    fun `scopeFromFile throws exception if path does not exist`() {
+        // given
+        val func = { Konsist.scopeFromFile("$applicationMainSourceSetDirectory/sample/NonExisting.kt") }
+
+        // then
+        val message = "File does not exist: $applicationMainSourceSetDirectory/sample/NonExisting.kt"
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromFile throws exception if path points to folder`() {
+        // given
+        val func = { Konsist.scopeFromFile("$applicationMainSourceSetDirectory/sample/") }
+
+        // then
+        val message = "Path is a directory, but should be a file: $applicationMainSourceSetDirectory/sample/"
+        func shouldThrow IllegalArgumentException::class withMessage message
     }
 
     @Test

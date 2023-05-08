@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.KoScopeCreator
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
-import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.filesystem.KoFileFactory
@@ -83,18 +82,17 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     override fun scopeFromPath(path: String): KoScope {
-        val koFiles = projectKotlinFiles
-            .filter { it.filePath.startsWith(path) }
-
-        return KoScopeImpl(koFiles)
+        val file = File(path)
+        require(file.exists()) { "Path does not exist: $path" }
+        require(!file.isFile) { "Path is a file but should be a directory: $path" }
+        return KoScopeImpl(file.toKoFile())
     }
 
     override fun scopeFromFile(path: String): KoScope {
         val file = File(path)
 
-        if (!file.exists()) {
-            throw KoPreconditionFailedException("File does not exist: $path")
-        }
+        require(file.exists()) { "File does not exist: $path" }
+        require(file.isFile) { "Path is a directory, but should be a file: $path" }
 
         val koKoFile = file.toKoFile()
 
