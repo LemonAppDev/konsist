@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.KoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -8,24 +9,99 @@ import java.io.File
 class KoScopeCreatorTest {
     @Test
     fun `scopeFromProject`() {
-        Konsist
+        // given
+        val sut = Konsist
             .scopeFromProject()
-            .files()
-            .toList()
-            .map { it.filePath }
-            .shouldBeEqualTo(
-                listOf(
-                    "$applicationKotlinMainSourceSetDirectory/com/lemonappdev/sample/AppClass.kt",
-                    "$applicationKotlinMainSourceSetDirectory/com/lemonappdev/sample/data/AppDataClass.kt",
-                    "$applicationKotlinTestSourceSetDirectory/com/lemonappdev/konsist/KoScopeCreatorTest.kt",
-                    "$applicationKotlinTestSourceSetDirectory/com/lemonappdev/sample/AppClassTest.kt",
-                    "$applicationKotlinTestSourceSetDirectory/com/lemonappdev/sample/data/AppDataClassTest.kt",
-                    "$libraryKotlinMainSourceSetDirectory/com/lemonappdev/sample/LibClass.kt",
-                    "$libraryKotlinMainSourceSetDirectory/com/lemonappdev/sample/data/LibDataClass.kt",
-                    "$libraryKotlinTestSourceSetDirectory/com/lemonappdev/sample/LibClassTest.kt",
-                    "$libraryKotlinTestSourceSetDirectory/com/lemonappdev/sample/data/LibDataClassTest.kt",
-                ),
-            )
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$applicationTestSourceSetDirectory/konsist/KoScopeCreatorTest.kt",
+                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProject for library module`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(module = "library")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProject for main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(sourceSet = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProject for test source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(sourceSet = "test")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationTestSourceSetDirectory/konsist/KoScopeCreatorTest.kt",
+                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProject for application module and test source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(sourceSet = "test")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationTestSourceSetDirectory/konsist/KoScopeCreatorTest.kt",
+                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+            ),
+        )
     }
 
     companion object {
@@ -36,12 +112,16 @@ class KoScopeCreatorTest {
             .dropLastWhile { it != '/' }
             .dropLast(1)
 
-        private val applicationKotlinMainSourceSetDirectory = "$projectRootDirectory/application/src/main/kotlin"
+        private val applicationMainSourceSetDirectory = "$projectRootDirectory/application/src/main/kotlin/com/lemonappdev"
 
-        private val applicationKotlinTestSourceSetDirectory = "$projectRootDirectory/application/src/test/kotlin"
+        private val applicationTestSourceSetDirectory = "$projectRootDirectory/application/src/test/kotlin/com/lemonappdev"
 
-        private val libraryKotlinMainSourceSetDirectory = "$projectRootDirectory/library/src/main/kotlin"
+        private val libraryMainSourceSetDirectory = "$projectRootDirectory/library/src/main/kotlin/com/lemonappdev"
 
-        private val libraryKotlinTestSourceSetDirectory = "$projectRootDirectory/library/src/test/kotlin"
+        private val libraryTestSourceSetDirectory = "$projectRootDirectory/library/src/test/kotlin/com/lemonappdev"
     }
+
+    private fun KoScope.mapToFilePaths() = files()
+        .toList()
+        .map { it.filePath }
 }
