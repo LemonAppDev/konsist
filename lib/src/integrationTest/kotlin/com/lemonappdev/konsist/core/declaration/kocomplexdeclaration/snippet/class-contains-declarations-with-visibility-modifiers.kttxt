@@ -1,4 +1,6 @@
-object SampleTopLevelObject {
+package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration.snippet
+
+class SampleTopLevelClass {
     private fun sampleFunction1() {}
 
     fun sampleFunction2() {}
@@ -33,11 +35,13 @@ object SampleTopLevelObject {
         class SampleClassNestedInsideInterface1
         object SampleObjectNestedInsideInterface1
         interface SampleInterfaceNestedInsideInterface1
+        companion object SampleCompanionObjectNestedInsideInterface1
     }
 
     interface SampleInterface2 {
         private class SampleClassNestedInsideInterface2
         private object SampleObjectNestedInsideInterface2
         private interface SampleInterfaceNestedInsideInterface2
+        private companion object SampleCompanionObjectNestedInsideInterface2
     }
 }

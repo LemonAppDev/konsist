@@ -1,4 +1,6 @@
-class SampleTopLevelClass {
+package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration.snippet
+
+object SampleTopLevelObject {
     val sampleProperty: Boolean = true
 
     fun sampleFunction() {}

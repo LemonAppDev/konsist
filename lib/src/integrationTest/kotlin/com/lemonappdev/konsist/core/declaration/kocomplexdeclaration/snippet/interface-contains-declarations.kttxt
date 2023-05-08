@@ -1,3 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration.snippet
+
 interface SampleTopLevelInterface {
     val sampleProperty: Boolean
 
@@ -5,9 +7,9 @@ interface SampleTopLevelInterface {
 
     class SampleClass
 
-    object SampleObject
-
     interface SampleInterface
+
+    object SampleObject
 
     companion object SampleCompanionObject
 }

@@ -1,3 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration.snippet
+
 class SampleTopLevelClass {
     companion object SampleTopLevelCompanionObject {
         val sampleProperty: Boolean = true

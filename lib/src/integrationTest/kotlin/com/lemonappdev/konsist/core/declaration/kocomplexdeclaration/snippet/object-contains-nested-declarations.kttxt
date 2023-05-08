@@ -1,4 +1,6 @@
-interface SampleTopLevelInterface {
+package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration.snippet
+
+object SampleTopLevelObject {
     fun sampleFunction() { }
 
     class SampleClass {
@@ -18,5 +20,6 @@ interface SampleTopLevelInterface {
         class SampleClassNestedInsideInterface
         object SampleObjectNestedInsideInterface
         interface SampleInterfaceNestedInsideInterface
+        companion object SampleCompanionObjectNestedInsideInterface
     }
 }
