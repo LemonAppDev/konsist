@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.provider
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.core.declaration.KoBaseDeclarationImpl
@@ -25,7 +26,7 @@ internal object KoDeclarationProviderUtil {
         modifiers: List<KoModifier>,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-        parent: KoBaseDeclarationImpl,
+        parent: KoBaseDeclaration,
     ): Sequence<T> {
         val declarations = ktDeclarationContainer
             .declarations

@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProviderUtil
@@ -94,7 +95,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
     internal companion object {
         private val cache = KoDeclarationCache<KoFileDeclarationImpl>()
 
-        internal fun getInstance(ktFile: KtFile, parent: KoBaseDeclarationImpl?) = cache.getOrCreateInstance(ktFile, parent) {
+        internal fun getInstance(ktFile: KtFile, parent: KoBaseDeclaration?) = cache.getOrCreateInstance(ktFile, parent) {
             KoFileDeclarationImpl(ktFile)
         }
     }

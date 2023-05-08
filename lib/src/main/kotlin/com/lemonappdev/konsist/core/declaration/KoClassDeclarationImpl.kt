@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtClass
@@ -9,7 +10,7 @@ import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass, parent: KoBaseDeclarationImpl) :
+internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass, parent: KoBaseDeclaration) :
     KoComplexDeclarationImpl(ktClass, parent),
     KoClassDeclaration {
     override val parents by lazy {
@@ -105,7 +106,7 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
     internal companion object {
         private val cache = KoDeclarationCache<KoClassDeclarationImpl>()
 
-        internal fun getInstance(ktClass: KtClass, parent: KoBaseDeclarationImpl) = cache.getOrCreateInstance(ktClass, parent) {
+        internal fun getInstance(ktClass: KtClass, parent: KoBaseDeclaration) = cache.getOrCreateInstance(ktClass, parent) {
             KoClassDeclarationImpl(ktClass, parent)
         }
     }

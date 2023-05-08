@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtProperty
@@ -8,7 +9,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal class KoPropertyDeclarationImpl private constructor(private val ktProperty: KtProperty, parent: KoBaseDeclarationImpl?) :
+internal class KoPropertyDeclarationImpl private constructor(private val ktProperty: KtProperty, parent: KoBaseDeclaration?) :
     KoDeclarationImpl(ktProperty, parent),
     KoPropertyDeclaration {
     override val isVar by lazy { ktProperty.isVar }
@@ -64,7 +65,7 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
     internal companion object {
         private val cache = KoDeclarationCache<KoPropertyDeclarationImpl>()
 
-        internal fun getInstance(ktProperty: KtProperty, parent: KoBaseDeclarationImpl) = cache.getOrCreateInstance(ktProperty, parent) {
+        internal fun getInstance(ktProperty: KtProperty, parent: KoBaseDeclaration) = cache.getOrCreateInstance(ktProperty, parent) {
             KoPropertyDeclarationImpl(ktProperty, parent)
         }
     }

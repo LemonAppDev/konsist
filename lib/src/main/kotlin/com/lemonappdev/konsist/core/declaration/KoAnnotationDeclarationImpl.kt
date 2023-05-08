@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 
@@ -24,7 +25,7 @@ internal class KoAnnotationDeclarationImpl private constructor(
     internal companion object {
         private val cache = KoDeclarationCache<KoAnnotationDeclarationImpl>()
 
-        internal fun getInstance(ktObjectDeclaration: KtAnnotationEntry, parent: KoBaseDeclarationImpl) =
+        internal fun getInstance(ktObjectDeclaration: KtAnnotationEntry, parent: KoBaseDeclaration) =
             cache.getOrCreateInstance(ktObjectDeclaration, parent) { KoAnnotationDeclarationImpl(ktObjectDeclaration) }
     }
 }
