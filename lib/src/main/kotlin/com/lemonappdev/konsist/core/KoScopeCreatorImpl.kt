@@ -26,9 +26,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     private val projectKotlinFiles by lazy {
         pathProvider
             .rootProjectDirectory
-            .walk()
-            .filter { it.isKotlinFile }
-            .map { it.toKoFile() }
+            .toKoFiles()
     }
 
     override fun scopeFromProject(module: String?, sourceSet: String?): KoScope {
@@ -81,11 +79,14 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    override fun scopeFromPath(path: String): KoScope {
-        val file = File(path)
-        require(file.exists()) { "Path does not exist: $path" }
-        require(!file.isFile) { "Path is a file but should be a directory: $path" }
-        return KoScopeImpl(file.toKoFile())
+    override fun scopeFromDirectory(path: String): KoScope {
+        val directory = File(path)
+        require(directory.exists()) { "Directory does not exist: $path" }
+        require(!directory.isFile) { "Path is a file, but should be a directory: $path" }
+
+        val files = directory.toKoFiles()
+
+        return KoScopeImpl(files)
     }
 
     override fun scopeFromFile(path: String): KoScope {
@@ -103,4 +104,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val path = it.filePath.lowercase()
         return path.contains("test/") || path.contains("/test")
     }
+
+    private fun File.toKoFiles() = walk()
+        .filter { it.isKotlinFile }
+        .map { it.toKoFile() }
 }

@@ -27,7 +27,7 @@ interface KoScopeCreator {
     /**
      * Returns a [KoScope] containing all of Kotlin files in the given directory.
      */
-    fun scopeFromPath(path: String): KoScope
+    fun scopeFromDirectory(path: String): KoScope
 
     /**
      * Returns a [KoScope] of a given file.

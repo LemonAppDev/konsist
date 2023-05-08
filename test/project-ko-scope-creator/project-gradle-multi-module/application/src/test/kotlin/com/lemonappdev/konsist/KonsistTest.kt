@@ -25,20 +25,56 @@ class KonsistTest {
     @Test
     fun `scopeFromFile throws exception if path does not exist`() {
         // given
-        val func = { Konsist.scopeFromFile("$applicationMainSourceSetDirectory/sample/NonExisting.kt") }
+        val func = { Konsist.scopeFromFile("$applicationMainSourceSetDirectory/NonExisting.kt") }
 
         // then
-        val message = "File does not exist: $applicationMainSourceSetDirectory/sample/NonExisting.kt"
+        val message = "File does not exist: $applicationMainSourceSetDirectory/NonExisting.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
     @Test
-    fun `scopeFromFile throws exception if path points to folder`() {
+    fun `scopeFromFile throws exception if path points to directory`() {
         // given
         val func = { Konsist.scopeFromFile("$applicationMainSourceSetDirectory/sample/") }
 
         // then
         val message = "Path is a directory, but should be a file: $applicationMainSourceSetDirectory/sample/"
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromDirectory`() {
+        // given
+        val sut = Konsist
+            .scopeFromDirectory("$applicationMainSourceSetDirectory/sample/")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromDirectory throws exception if path does not exist`() {
+        // given
+        val func = { Konsist.scopeFromDirectory("$applicationMainSourceSetDirectory/nonExisting/") }
+
+        // then
+        val message = "Directory does not exist: $applicationMainSourceSetDirectory/nonExisting/"
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromDirectory throws exception if path points to file`() {
+        // given
+        val func = { Konsist.scopeFromDirectory("$applicationMainSourceSetDirectory/sample/AppClass.kt") }
+
+        // then
+        val message = "Path is a file, but should be a directory: $applicationMainSourceSetDirectory/sample/AppClass.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 

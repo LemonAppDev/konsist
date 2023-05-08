@@ -112,7 +112,7 @@ class KoScopeTest {
     fun `from path`() {
         // given
         val testSourceSetPath = "$konsistModulePath/src/integrationTest/kotlin/com/"
-        val sut = Konsist.scopeFromPath("${testSourceSetPath}lemonappdev/konsist/core/scope/koscope/")
+        val sut = Konsist.scopeFromDirectory("${testSourceSetPath}lemonappdev/konsist/core/scope/koscope/")
 
         // then
         sut
