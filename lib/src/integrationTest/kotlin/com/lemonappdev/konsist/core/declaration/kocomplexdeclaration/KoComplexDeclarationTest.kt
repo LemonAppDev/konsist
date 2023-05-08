@@ -3,11 +3,8 @@ package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoComplexDeclaration
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -58,7 +55,7 @@ class KoComplexDeclarationTest {
     fun `represents-type`(
         fileName: String,
         type: String,
-        value: Boolean
+        value: Boolean,
     ) {
         // given
         val sut = getSnippetFile(fileName)
@@ -119,7 +116,7 @@ class KoComplexDeclarationTest {
     fun `companion-object-represents-type`(
         fileName: String,
         type: String,
-        value: Boolean
+        value: Boolean,
     ) {
         // given
         val sut = getSnippetFile(fileName)
@@ -134,22 +131,28 @@ class KoComplexDeclarationTest {
     }
 
     companion object {
-        @Suppress("unused")
+        @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
         fun provideValues() = listOf(
             arguments("class-contains-no-declarations", true, true, emptyList<String>()),
             arguments(
-                "class-contains-declarations", false, false, listOf(
+                "class-contains-declarations",
+                false,
+                false,
+                listOf(
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
                     "SampleInterface",
                     "SampleObject",
                     "SampleCompanionObject",
-                )
+                ),
             ),
             arguments(
-                "class-contains-nested-declarations", true, false, listOf(
+                "class-contains-nested-declarations",
+                true,
+                false,
+                listOf(
                     "sampleFunction",
                     "SampleClass",
                     "SampleClassNestedInsideClass",
@@ -165,18 +168,24 @@ class KoComplexDeclarationTest {
                     "SampleObjectNestedInsideInterface",
                     "SampleInterfaceNestedInsideInterface",
                     "SampleCompanionObjectNestedInsideInterface",
-                )
+                ),
             ),
             arguments(
-                "class-contains-nested-declarations", false, false, listOf(
+                "class-contains-nested-declarations",
+                false,
+                false,
+                listOf(
                     "sampleFunction",
                     "SampleClass",
                     "SampleObject",
                     "SampleInterface",
-                )
+                ),
             ),
             arguments(
-                "class-contains-local-declarations", false, true, listOf(
+                "class-contains-local-declarations",
+                false,
+                true,
+                listOf(
                     "sampleFunction",
                     "sampleLocalProperty1",
                     "sampleLocalFunction1",
@@ -184,26 +193,35 @@ class KoComplexDeclarationTest {
                     "sampleLocalFunction2",
                     "SampleLocalClass1",
                     "sampleLocalFunction2",
-                )
+                ),
             ),
             arguments(
-                "class-contains-local-declarations", false, false, listOf(
-                    "sampleFunction"
-                )
+                "class-contains-local-declarations",
+                false,
+                false,
+                listOf(
+                    "sampleFunction",
+                ),
             ),
             arguments("interface-contains-no-declarations", true, true, emptyList<String>()),
             arguments(
-                "interface-contains-declarations", false, false, listOf(
+                "interface-contains-declarations",
+                false,
+                false,
+                listOf(
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
                     "SampleInterface",
                     "SampleObject",
                     "SampleCompanionObject",
-                )
+                ),
             ),
             arguments(
-                "interface-contains-nested-declarations", true, false, listOf(
+                "interface-contains-nested-declarations",
+                true,
+                false,
+                listOf(
                     "sampleFunction",
                     "SampleClass",
                     "SampleClassNestedInsideClass",
@@ -219,18 +237,24 @@ class KoComplexDeclarationTest {
                     "SampleObjectNestedInsideInterface",
                     "SampleInterfaceNestedInsideInterface",
                     "SampleCompanionObjectNestedInsideInterface",
-                )
+                ),
             ),
             arguments(
-                "interface-contains-nested-declarations", false, false, listOf(
+                "interface-contains-nested-declarations",
+                false,
+                false,
+                listOf(
                     "sampleFunction",
                     "SampleClass",
                     "SampleObject",
                     "SampleInterface",
-                )
+                ),
             ),
             arguments(
-                "interface-contains-local-declarations", false, true, listOf(
+                "interface-contains-local-declarations",
+                false,
+                true,
+                listOf(
                     "sampleFunction",
                     "sampleLocalProperty1",
                     "sampleLocalFunction1",
@@ -238,26 +262,35 @@ class KoComplexDeclarationTest {
                     "sampleLocalFunction2",
                     "SampleLocalClass1",
                     "sampleLocalFunction2",
-                )
+                ),
             ),
             arguments(
-                "interface-contains-local-declarations", false, false, listOf(
-                    "sampleFunction"
-                )
+                "interface-contains-local-declarations",
+                false,
+                false,
+                listOf(
+                    "sampleFunction",
+                ),
             ),
             arguments("object-contains-no-declarations", true, true, emptyList<String>()),
             arguments(
-                "object-contains-declarations", false, false, listOf(
+                "object-contains-declarations",
+                false,
+                false,
+                listOf(
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
                     "SampleInterface",
                     "SampleObject",
                     "SampleCompanionObject",
-                )
+                ),
             ),
             arguments(
-                "object-contains-nested-declarations", true, false, listOf(
+                "object-contains-nested-declarations",
+                true,
+                false,
+                listOf(
                     "sampleFunction",
                     "SampleClass",
                     "SampleClassNestedInsideClass",
@@ -273,18 +306,24 @@ class KoComplexDeclarationTest {
                     "SampleObjectNestedInsideInterface",
                     "SampleInterfaceNestedInsideInterface",
                     "SampleCompanionObjectNestedInsideInterface",
-                )
+                ),
             ),
             arguments(
-                "object-contains-nested-declarations", false, false, listOf(
+                "object-contains-nested-declarations",
+                false,
+                false,
+                listOf(
                     "sampleFunction",
                     "SampleClass",
                     "SampleObject",
                     "SampleInterface",
-                )
+                ),
             ),
             arguments(
-                "object-contains-local-declarations", false, true, listOf(
+                "object-contains-local-declarations",
+                false,
+                true,
+                listOf(
                     "sampleFunction",
                     "sampleLocalProperty1",
                     "sampleLocalFunction1",
@@ -292,20 +331,25 @@ class KoComplexDeclarationTest {
                     "sampleLocalFunction2",
                     "SampleLocalClass1",
                     "sampleLocalFunction2",
-                )
+                ),
             ),
             arguments(
-                "object-contains-local-declarations", false, false, listOf(
-                    "sampleFunction"
-                )
+                "object-contains-local-declarations",
+                false,
+                false,
+                listOf(
+                    "sampleFunction",
+                ),
             ),
         )
 
-        @Suppress("unused")
+        @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
         fun provideValuesWithModifiers() = listOf(
             arguments(
-                "class-contains-declarations-with-visibility-modifiers", true, listOf(
+                "class-contains-declarations-with-visibility-modifiers",
+                true,
+                listOf(
                     "sampleFunction1",
                     "SampleClass1",
                     "SampleClassNestedInsideClass2",
@@ -321,45 +365,22 @@ class KoComplexDeclarationTest {
                     "SampleObjectNestedInsideInterface2",
                     "SampleInterfaceNestedInsideInterface2",
                     "SampleCompanionObjectNestedInsideInterface2",
-                )
+                ),
             ),
             arguments(
-                "class-contains-declarations-with-visibility-modifiers", false, listOf(
+                "class-contains-declarations-with-visibility-modifiers",
+                false,
+                listOf(
                     "sampleFunction1",
                     "SampleClass1",
                     "SampleObject1",
                     "SampleInterface1",
-                )
+                ),
             ),
             arguments(
-                "interface-contains-declarations-with-visibility-modifiers", true, listOf(
-                    "sampleFunction1",
-                    "SampleClass1",
-                    "SampleClassNestedInsideClass2",
-                    "SampleObjectNestedInsideClass2",
-                    "SampleInterfaceNestedInsideClass2",
-                    "SampleCompanionObjectNestedInsideClass2",
-                    "SampleObject1",
-                    "SampleClassNestedInsideObject2",
-                    "SampleObjectNestedInsideObject2",
-                    "SampleInterfaceNestedInsideObject2",
-                    "SampleInterface1",
-                    "SampleClassNestedInsideInterface2",
-                    "SampleObjectNestedInsideInterface2",
-                    "SampleInterfaceNestedInsideInterface2",
-                    "SampleCompanionObjectNestedInsideInterface2",
-                )
-            ),
-            arguments(
-                "interface-contains-declarations-with-visibility-modifiers", false, listOf(
-                    "sampleFunction1",
-                    "SampleClass1",
-                    "SampleObject1",
-                    "SampleInterface1",
-                )
-            ),
-            arguments(
-                "object-contains-declarations-with-visibility-modifiers", true, listOf(
+                "interface-contains-declarations-with-visibility-modifiers",
+                true,
+                listOf(
                     "sampleFunction1",
                     "SampleClass1",
                     "SampleClassNestedInsideClass2",
@@ -375,15 +396,48 @@ class KoComplexDeclarationTest {
                     "SampleObjectNestedInsideInterface2",
                     "SampleInterfaceNestedInsideInterface2",
                     "SampleCompanionObjectNestedInsideInterface2",
-                )
+                ),
             ),
             arguments(
-                "object-contains-declarations-with-visibility-modifiers", false, listOf(
+                "interface-contains-declarations-with-visibility-modifiers",
+                false,
+                listOf(
                     "sampleFunction1",
                     "SampleClass1",
                     "SampleObject1",
                     "SampleInterface1",
-                )
+                ),
+            ),
+            arguments(
+                "object-contains-declarations-with-visibility-modifiers",
+                true,
+                listOf(
+                    "sampleFunction1",
+                    "SampleClass1",
+                    "SampleClassNestedInsideClass2",
+                    "SampleObjectNestedInsideClass2",
+                    "SampleInterfaceNestedInsideClass2",
+                    "SampleCompanionObjectNestedInsideClass2",
+                    "SampleObject1",
+                    "SampleClassNestedInsideObject2",
+                    "SampleObjectNestedInsideObject2",
+                    "SampleInterfaceNestedInsideObject2",
+                    "SampleInterface1",
+                    "SampleClassNestedInsideInterface2",
+                    "SampleObjectNestedInsideInterface2",
+                    "SampleInterfaceNestedInsideInterface2",
+                    "SampleCompanionObjectNestedInsideInterface2",
+                ),
+            ),
+            arguments(
+                "object-contains-declarations-with-visibility-modifiers",
+                false,
+                listOf(
+                    "sampleFunction1",
+                    "SampleClass1",
+                    "SampleObject1",
+                    "SampleInterface1",
+                ),
             ),
         )
 
@@ -404,21 +458,27 @@ class KoComplexDeclarationTest {
             arguments("object-represents-type", "com.lemonappdev.konsist.testdata.OtherObject", false),
         )
 
-        @Suppress("unused")
+        @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
         fun provideValuesForCompanionObject() = listOf(
             arguments("companion-object-contains-no-declarations", true, true, emptyList<String>()),
             arguments(
-                "companion-object-contains-declarations", false, false, listOf(
+                "companion-object-contains-declarations",
+                false,
+                false,
+                listOf(
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
                     "SampleObject",
                     "SampleInterface",
-                )
+                ),
             ),
             arguments(
-                "companion-object-contains-nested-declarations", true, false, listOf(
+                "companion-object-contains-nested-declarations",
+                true,
+                false,
+                listOf(
                     "sampleFunction",
                     "SampleClass",
                     "SampleClassNestedInsideClass",
@@ -433,18 +493,24 @@ class KoComplexDeclarationTest {
                     "SampleClassNestedInsideInterface",
                     "SampleObjectNestedInsideInterface",
                     "SampleInterfaceNestedInsideInterface",
-                )
+                ),
             ),
             arguments(
-                "companion-object-contains-nested-declarations", false, false, listOf(
+                "companion-object-contains-nested-declarations",
+                false,
+                false,
+                listOf(
                     "sampleFunction",
                     "SampleClass",
                     "SampleObject",
                     "SampleInterface",
-                )
+                ),
             ),
             arguments(
-                "companion-object-contains-local-declarations", false, true, listOf(
+                "companion-object-contains-local-declarations",
+                false,
+                true,
+                listOf(
                     "sampleFunction",
                     "sampleLocalProperty1",
                     "sampleLocalFunction1",
@@ -452,12 +518,15 @@ class KoComplexDeclarationTest {
                     "sampleLocalFunction2",
                     "SampleLocalClass1",
                     "sampleLocalFunction2",
-                )
+                ),
             ),
             arguments(
-                "companion-object-contains-local-declarations", false, false, listOf(
-                    "sampleFunction"
-                )
+                "companion-object-contains-local-declarations",
+                false,
+                false,
+                listOf(
+                    "sampleFunction",
+                ),
             ),
         )
 
@@ -465,7 +534,9 @@ class KoComplexDeclarationTest {
         @JvmStatic
         fun provideValuesWithModifiersForCompanionObject() = listOf(
             arguments(
-                "companion-object-contains-declarations-with-visibility-modifiers", true, listOf(
+                "companion-object-contains-declarations-with-visibility-modifiers",
+                true,
+                listOf(
                     "sampleFunction1",
                     "SampleClass1",
                     "SampleClassNestedInsideClass2",
@@ -480,15 +551,17 @@ class KoComplexDeclarationTest {
                     "SampleClassNestedInsideInterface2",
                     "SampleObjectNestedInsideInterface2",
                     "SampleInterfaceNestedInsideInterface2",
-                )
+                ),
             ),
             arguments(
-                "companion-object-contains-declarations-with-visibility-modifiers", false, listOf(
+                "companion-object-contains-declarations-with-visibility-modifiers",
+                false,
+                listOf(
                     "sampleFunction1",
                     "SampleClass1",
                     "SampleObject1",
                     "SampleInterface1",
-                )
+                ),
             ),
         )
 
@@ -497,7 +570,11 @@ class KoComplexDeclarationTest {
         fun provideValuesForRepresentsTypeForCompanionObject() = listOf(
             arguments("companion-object-represents-type", "SampleCompanionObject", true),
             arguments("companion-object-represents-type", "OtherCompanionObject", false),
-            arguments("companion-object-represents-type", "com.lemonappdev.konsist.testdata.SampleTopLevelInterface.SampleCompanionObject", true),
+            arguments(
+                "companion-object-represents-type",
+                "com.lemonappdev.konsist.testdata.SampleTopLevelInterface.SampleCompanionObject",
+                true,
+            ),
             arguments("companion-object-represents-type", "com.lemonappdev.konsist.testdata.OtherCompanionObject", false),
         )
     }
