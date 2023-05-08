@@ -2,9 +2,14 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.util.PathProvider.applicationMainSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.applicationTestSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.libraryMainSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.libraryTestSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.rootMainSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.rootTestSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class KonsistTestForScopeFromProject {
     @Test
@@ -25,6 +30,7 @@ class KonsistTestForScopeFromProject {
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProduction.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
+                "$applicationTestSourceSetDirectory/konsist/util/PathProvider.kt",
                 "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$libraryMainSourceSetDirectory/sample/LibClass.kt",
@@ -93,6 +99,7 @@ class KonsistTestForScopeFromProject {
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProduction.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
+                "$applicationTestSourceSetDirectory/konsist/util/PathProvider.kt",
                 "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
@@ -135,6 +142,7 @@ class KonsistTestForScopeFromProject {
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProduction.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
+                "$applicationTestSourceSetDirectory/konsist/util/PathProvider.kt",
                 "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
             ),
@@ -171,27 +179,6 @@ class KonsistTestForScopeFromProject {
                 "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ),
         )
-    }
-
-    companion object {
-        private val projectRootDirectory = File("")
-            .absoluteFile
-            .path
-            .dropLastWhile { it != '/' }
-            .dropLastWhile { it != '/' }
-            .dropLast(1)
-
-        private val rootMainSourceSetDirectory = "$projectRootDirectory/src/main/kotlin/com/lemonappdev"
-
-        private val rootTestSourceSetDirectory = "$projectRootDirectory/src/test/kotlin/com/lemonappdev"
-
-        private val applicationMainSourceSetDirectory = "$projectRootDirectory/application/src/main/kotlin/com/lemonappdev"
-
-        private val applicationTestSourceSetDirectory = "$projectRootDirectory/application/src/test/kotlin/com/lemonappdev"
-
-        private val libraryMainSourceSetDirectory = "$projectRootDirectory/library/src/main/kotlin/com/lemonappdev"
-
-        private val libraryTestSourceSetDirectory = "$projectRootDirectory/library/src/test/kotlin/com/lemonappdev"
     }
 
     private fun KoScope.mapToFilePaths() = files()
