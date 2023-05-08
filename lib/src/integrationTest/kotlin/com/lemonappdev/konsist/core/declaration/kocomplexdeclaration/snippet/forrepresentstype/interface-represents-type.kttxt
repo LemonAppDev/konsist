@@ -1,2 +1,2 @@
 package com.lemonappdev.konsist.testdata
-object SampleObject
+interface SampleInterface

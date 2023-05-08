@@ -1,5 +1,0 @@
-package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration.snippet
-
-class SampleTopLevelClass {
-    companion object SampleCompanionObject
-}

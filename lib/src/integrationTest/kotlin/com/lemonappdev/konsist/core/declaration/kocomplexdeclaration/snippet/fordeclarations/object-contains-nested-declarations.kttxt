@@ -1,6 +1,6 @@
-package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration.snippet
+package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration.snippet.fordeclarations
 
-interface SampleTopLevelInterface {
+object SampleTopLevelObject {
     fun sampleFunction() { }
 
     class SampleClass {

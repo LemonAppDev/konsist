@@ -8,9 +8,9 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoComplexDeclarationTest {
+class KoComplexDeclarationForDeclarationsTest {
     @ParameterizedTest
-    @MethodSource("provideValues")
+    @MethodSource("provideValuesWithoutModifiers")
     fun `declarations`(
         fileName: String,
         declarationName: String,
@@ -54,28 +54,10 @@ class KoComplexDeclarationTest {
             .shouldBeEqualTo(value)
     }
 
-    @ParameterizedTest
-    @MethodSource("provideValuesForRepresentsType")
-    fun `represents-type`(
-        fileName: String,
-        declarationName: String,
-        type: String,
-        value: Boolean,
-    ) {
-        // given
-        val sut = getSnippetFile(fileName)
-            .declarations(includeNested = true)
-            .filterIsInstance<KoComplexDeclaration>()
-            .first { it.name == declarationName }
-
-        // then
-        sut.representsType(type) shouldBeEqualTo value
-    }
-
     companion object {
         @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
-        fun provideValues() = listOf(
+        fun provideValuesWithoutModifiers() = listOf(
             arguments("class-contains-no-declarations", "SampleClass", true, true, emptyList<String>()),
             arguments(
                 "class-contains-declarations",
@@ -507,39 +489,8 @@ class KoComplexDeclarationTest {
                 ),
             ),
         )
-
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForRepresentsType() = listOf(
-            arguments("class-represents-type", "SampleClass", "SampleClass", true),
-            arguments("class-represents-type", "SampleClass", "OtherClass", false),
-            arguments("class-represents-type", "SampleClass", "com.lemonappdev.konsist.testdata.SampleClass", true),
-            arguments("class-represents-type", "SampleClass", "com.lemonappdev.konsist.testdata.OtherClass", false),
-            arguments("interface-represents-type", "SampleInterface", "SampleInterface", true),
-            arguments("interface-represents-type", "SampleInterface", "OtherInterface", false),
-            arguments("interface-represents-type", "SampleInterface", "com.lemonappdev.konsist.testdata.SampleInterface", true),
-            arguments("interface-represents-type", "SampleInterface", "com.lemonappdev.konsist.testdata.OtherInterface", false),
-            arguments("object-represents-type", "SampleObject", "SampleObject", true),
-            arguments("object-represents-type", "SampleObject", "OtherObject", false),
-            arguments("object-represents-type", "SampleObject", "com.lemonappdev.konsist.testdata.SampleObject", true),
-            arguments("object-represents-type", "SampleObject", "com.lemonappdev.konsist.testdata.OtherObject", false),
-            arguments("companion-object-represents-type", "SampleCompanionObject", "SampleCompanionObject", true),
-            arguments("companion-object-represents-type", "SampleCompanionObject", "OtherCompanionObject", false),
-            arguments(
-                "companion-object-represents-type",
-                "SampleCompanionObject",
-                "com.lemonappdev.konsist.testdata.SampleTopLevelInterface.SampleCompanionObject",
-                true,
-            ),
-            arguments(
-                "companion-object-represents-type",
-                "SampleCompanionObject",
-                "com.lemonappdev.konsist.testdata.OtherCompanionObject",
-                false,
-            ),
-        )
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kocomplexdeclaration/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kocomplexdeclaration/snippet/fordeclarations/", fileName)
 }
