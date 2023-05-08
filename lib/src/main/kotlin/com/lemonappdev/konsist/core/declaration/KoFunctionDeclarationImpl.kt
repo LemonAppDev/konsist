@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtClass
@@ -11,8 +12,8 @@ import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction) :
-    KoParametrizedDeclarationImpl(ktFunction),
+internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction, parent: KoBaseDeclaration?) :
+    KoParametrizedDeclarationImpl(ktFunction, parent),
     KoFunctionDeclaration {
 
     private val localDeclarations by lazy {
@@ -24,11 +25,11 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
 
         psiChildren.mapNotNull {
             if (it is KtClass && !it.isInterface()) {
-                KoClassDeclarationImpl.getInstance(it)
+                KoClassDeclarationImpl.getInstance(it, this)
             } else if (it is KtFunction) {
-                getInstance(it)
+                getInstance(it, this)
             } else if (it is KtProperty) {
-                KoPropertyDeclarationImpl.getInstance(it)
+                KoPropertyDeclarationImpl.getInstance(it, this)
             } else {
                 throw UnsupportedOperationException("Unknown local declaration type: ${it.getTextWithLocation()}")
             }
@@ -40,7 +41,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
             .children
             .firstIsInstanceOrNull<KtTypeReference>()
 
-        type?.let { KoTypeDeclarationImpl.getInstance(type) }
+        type?.let { KoTypeDeclarationImpl.getInstance(type, this) }
     }
 
     override fun hasOperatorModifier() = hasModifiers(KoModifier.OPERATOR)
@@ -76,6 +77,8 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
     internal companion object {
         private val cache = KoDeclarationCache<KoFunctionDeclarationImpl>()
 
-        internal fun getInstance(ktFunction: KtFunction) = cache.getOrCreateInstance(ktFunction) { KoFunctionDeclarationImpl(ktFunction) }
+        internal fun getInstance(ktFunction: KtFunction, parent: KoBaseDeclaration) = cache.getOrCreateInstance(ktFunction, parent) {
+            KoFunctionDeclarationImpl(ktFunction, parent)
+        }
     }
 }

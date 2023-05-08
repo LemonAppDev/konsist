@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtClass
@@ -9,15 +10,15 @@ import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass) :
-    KoComplexDeclarationImpl(ktClass),
+internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass, parent: KoBaseDeclaration) :
+    KoComplexDeclarationImpl(ktClass, parent),
     KoClassDeclaration {
     override val parents by lazy {
         ktClass
             .getSuperTypeList()
             ?.children
             ?.filterIsInstance<KtSuperTypeListEntry>()
-            ?.map { KoParentDeclarationImpl.getInstance(it) } ?: emptyList()
+            ?.map { KoParentDeclarationImpl.getInstance(it, this) } ?: emptyList()
     }
 
     override val parentInterfaces by lazy {
@@ -32,7 +33,7 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
             ?.filterIsInstance<KtDelegatedSuperTypeEntry>() ?: emptyList()
 
         val all = interfaces + delegations
-        all.map { KoParentDeclarationImpl.getInstance(it) }
+        all.map { KoParentDeclarationImpl.getInstance(it, this) }
     }
 
     override val parentClass by lazy {
@@ -42,19 +43,19 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
             ?.filterIsInstance<KtSuperTypeCallEntry>()
             ?.first()
 
-        parentClass?.let { KoParentDeclarationImpl.getInstance(it) }
+        parentClass?.let { KoParentDeclarationImpl.getInstance(it, this) }
     }
 
     override val primaryConstructor by lazy {
         val localPrimaryConstructor = ktClass.primaryConstructor ?: return@lazy null
 
-        KoPrimaryConstructorDeclarationImpl.getInstance(localPrimaryConstructor)
+        KoPrimaryConstructorDeclarationImpl.getInstance(localPrimaryConstructor, this)
     }
 
     override val secondaryConstructors by lazy {
         ktClass
             .secondaryConstructors
-            .map { KoSecondaryConstructorDeclarationImpl.getInstance(it) }
+            .map { KoSecondaryConstructorDeclarationImpl.getInstance(it, this) }
     }
 
     override val allConstructors = listOfNotNull(primaryConstructor) + secondaryConstructors
@@ -105,6 +106,8 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
     internal companion object {
         private val cache = KoDeclarationCache<KoClassDeclarationImpl>()
 
-        internal fun getInstance(ktClass: KtClass) = cache.getOrCreateInstance(ktClass) { KoClassDeclarationImpl(ktClass) }
+        internal fun getInstance(ktClass: KtClass, parent: KoBaseDeclaration) = cache.getOrCreateInstance(ktClass, parent) {
+            KoClassDeclarationImpl(ktClass, parent)
+        }
     }
 }

@@ -22,7 +22,7 @@ class AssertTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Check 'assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
+            e.message?.shouldContain("Assert 'assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
         }
     }
 
@@ -164,6 +164,68 @@ class AssertTest {
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-file-level`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level")
+            .declarations(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-file-level`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-name-at-file-level")
+            .declarations(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level")
+                .declarations(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-declaration-parent-level`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-name-at-declaration-parent-level")
+                .declarations(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-declaration-level`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level")
+            .declarations(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-declaration-level`() {
+        // given
+        val sut = getSnippetFile("assert-suppress-by-name-at-declaration-level")
+            .declarations(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
     }
 
     private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/verify/assert/snippet/", fileName)
