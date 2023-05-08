@@ -96,7 +96,7 @@ internal abstract class KoDeclarationImpl(
         else -> modifiers.containsAll(koModifiers.toList())
     }
 
-    override fun hasKoKDoc() = kDoc != null
+    override fun hasKDoc() = kDoc != null
 
     override fun resideInPackage(packagee: String) = LocationHelper.resideInLocation(packagee, this.packagee)
 

@@ -80,7 +80,7 @@ interface KoDeclaration : KoNamedDeclaration {
     /**
      * Whether the declaration has kdoc.
      */
-    fun hasKoKDoc(): Boolean
+    fun hasKDoc(): Boolean
 
     /**
      * Whether the declaration resides in a package.

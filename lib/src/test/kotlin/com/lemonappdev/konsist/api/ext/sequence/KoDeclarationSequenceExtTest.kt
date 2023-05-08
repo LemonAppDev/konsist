@@ -601,43 +601,43 @@ class KoDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withKoKDoc() returns declaration with any KoKDoc`() {
+    fun `withKDoc() returns declaration with any kDoc`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
-            every { hasKoKDoc() } returns true
+            every { hasKDoc() } returns true
         }
         val declaration2: KoDeclarationImpl = mockk {
-            every { hasKoKDoc() } returns false
+            every { hasKDoc() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withKoKDoc()
+        val sut = declarations.withKDoc()
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutKoKDoc() returns declaration without any KoKDoc`() {
+    fun `withoutKDoc() returns declaration without any kDoc`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
-            every { hasKoKDoc() } returns true
+            every { hasKDoc() } returns true
         }
         val declaration2: KoDeclarationImpl = mockk {
-            every { hasKoKDoc() } returns false
+            every { hasKDoc() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutKoKDoc()
+        val sut = declarations.withoutKDoc()
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withKoKDocWithTags(String) returns declaration with all of given tags`() {
+    fun `withKDocWithTags(String) returns declaration with all of given tags`() {
         // given
         val tag1 = SINCE
         val tag2 = SEE
@@ -656,14 +656,14 @@ class KoDeclarationSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withKoKDocWithTags(tag1, tag2)
+        val sut = declarations.withKDocWithTags(tag1, tag2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutKoKDocWithTags(String) returns declaration without any of given tags`() {
+    fun `withoutKDocWithTags(String) returns declaration without any of given tags`() {
         // given
         val tag1 = SINCE
         val tag2 = SEE
@@ -682,14 +682,14 @@ class KoDeclarationSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutKoKDocWithTags(tag1, tag2)
+        val sut = declarations.withoutKDocWithTags(tag1, tag2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withSomeKoKDocWithTags(String) returns declarations with at least one of given tags`() {
+    fun `withSomeKDocWithTags(String) returns declarations with at least one of given tags`() {
         // given
         val tag1 = SINCE
         val tag2 = SEE
@@ -717,7 +717,7 @@ class KoDeclarationSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withSomeKoKDocWithTags(tag1, tag2)
+        val sut = declarations.withSomeKDocWithTags(tag1, tag2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)

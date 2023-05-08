@@ -337,7 +337,7 @@ class KoDeclarationForFunctionTest {
         // then
         assertSoftly(sut) {
             kDoc shouldNotBeEqualTo null
-            hasKoKDoc() shouldBeEqualTo true
+            hasKDoc() shouldBeEqualTo true
         }
     }
 
@@ -351,7 +351,7 @@ class KoDeclarationForFunctionTest {
         // then
         assertSoftly(sut) {
             kDoc shouldBeEqualTo null
-            hasKoKDoc() shouldBeEqualTo false
+            hasKDoc() shouldBeEqualTo false
         }
     }
 
