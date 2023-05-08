@@ -16,7 +16,7 @@ import java.io.File
 internal class KoScopeCreatorImpl : KoScopeCreator {
     private val pathVerifier = PathVerifier()
 
-    private val pathProvider by lazy {
+    private val pathProvider: PathProvider by lazy {
         PathProvider(
             KoFileFactory(),
             ProjectRootDirProviderFactory(pathVerifier),
@@ -59,15 +59,21 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     override fun scopeFromProduction(module: String?, sourceSet: String?): KoScope {
-        val koFiles = getFiles(module, sourceSet)
-            .filterNot { isTestFile(it) }
+        sourceSet?.let {
+            require(!isTestSourceSetName(it)) { "Source set '$it' is a test source set, but it should be production source set." }
+        }
+
+        val koFiles = getFiles(module, sourceSet).filterNot { it.isTestFile() }
 
         return KoScopeImpl(koFiles)
     }
 
     override fun scopeFromTest(module: String?, sourceSet: String?): KoScope {
-        val koFiles = getFiles(module, sourceSet)
-            .filter { isTestFile(it) }
+        sourceSet?.let {
+            require(!isTestSourceSetName(it)) { "Source set '$it' is a production source set, but it should be test source set." }
+        }
+
+        val koFiles = getFiles(module, sourceSet).filter { it.isTestFile() }
 
         return KoScopeImpl(koFiles)
     }
@@ -100,12 +106,26 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koKoFile)
     }
 
-    private fun isTestFile(it: KoFileDeclaration): Boolean {
-        val path = it.filePath.lowercase()
-        return path.contains("test/") || path.contains("/test")
+    private fun isTestPath(path: String): Boolean {
+        val localPath = path.lowercase()
+        return localPath.contains("/$TEST_NAME_IN_PATH") || localPath.contains("$TEST_NAME_IN_PATH/")
+    }
+
+    private fun isTestSourceSetName(path: String): Boolean {
+        val localPath = path.lowercase()
+        return localPath.contains(TEST_NAME_IN_PATH) || localPath.contains(TEST_NAME_IN_PATH)
+    }
+
+    private fun KoFileDeclaration.isTestFile(): Boolean {
+        val path = filePath.substringAfter(pathProvider.rootProjectPath)
+        return isTestPath(path)
     }
 
     private fun File.toKoFiles() = walk()
         .filter { it.isKotlinFile }
         .map { it.toKoFile() }
+
+    companion object {
+        private const val TEST_NAME_IN_PATH = "test"
+    }
 }

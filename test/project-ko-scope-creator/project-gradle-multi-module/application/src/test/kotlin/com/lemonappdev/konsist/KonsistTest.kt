@@ -441,6 +441,109 @@ class KonsistTest {
         )
     }
 
+    @Test
+    fun `scopeFromProduction`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction()
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProduction, application module`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction(module = "application")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProduction, application module, source set main`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction(module = "application", sourceSet = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+            ),
+        )
+    }
+
+    // TODO: Error?
+    @Test
+    fun `scopeFromProduction, application module, source set test`() {
+        // given
+        val func = { Konsist.scopeFromProduction(module = "application", sourceSet = "test") }
+
+        // then
+        val message = "Source set 'test' is a test source set, but it should be production source set."
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromProduction, library module`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction(module = "library")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProduction, library module, main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction(module = "library", sourceSet = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProduction, library module, test source set`() {
+        // given
+        val func = { Konsist.scopeFromProduction(module = "library", sourceSet = "test") }
+
+        // then
+        val message = "Source set 'test' is a test source set, but it should be production source set."
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
     companion object {
         private val projectRootDirectory = File("")
             .absoluteFile
