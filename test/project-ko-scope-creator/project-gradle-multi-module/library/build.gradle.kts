@@ -5,7 +5,18 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
+    mavenCentral()
+
+    // Konsist artifact can be only retrieved from mavenLocal repository
+    exclusiveContent {
+        forRepository {
+            mavenLocal()
+        }
+        filter {
+            // This repository exclusively provides konsist artifact
+            includeModule("com.lemonappdev", "konsist")
+        }
+    }
 }
 
 kotlin {
