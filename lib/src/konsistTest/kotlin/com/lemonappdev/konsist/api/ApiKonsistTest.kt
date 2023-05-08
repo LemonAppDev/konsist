@@ -19,6 +19,6 @@ class ApiKonsistTest {
     }
 
     companion object {
-        val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSet = "main")
+        val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSetName = "main")
     }
 }

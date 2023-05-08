@@ -141,7 +141,7 @@ class KoScopeTest {
     fun `from module`() {
         // given
         val projectPath = konsistModulePath.dropLastWhile { it != '/' }
-        val sut = Konsist.scopeFromProject(module = "lib")
+        val sut = Konsist.scopeFromProject(moduleName = "lib")
 
         // then
         assertSoftly(

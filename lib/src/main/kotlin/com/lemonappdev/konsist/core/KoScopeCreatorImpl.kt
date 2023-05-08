@@ -29,8 +29,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             .toKoFiles()
     }
 
-    override fun scopeFromProject(module: String?, sourceSet: String?): KoScope {
-        val koFiles = getFiles(module, sourceSet)
+    override fun scopeFromProject(moduleName: String?, sourceSetName: String?): KoScope {
+        val koFiles = getFiles(moduleName, sourceSetName)
         return KoScopeImpl(koFiles)
     }
 
@@ -58,28 +58,28 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             .filter { it.filePath.matches(Regex(pathPrefix)) }
     }
 
-    override fun scopeFromProduction(module: String?, sourceSet: String?): KoScope {
-        sourceSet?.let {
+    override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
+        sourceSetName?.let {
             require(!isTestSourceSetName(it)) { "Source set '$it' is a test source set, but it should be production source set." }
         }
 
-        val koFiles = getFiles(module, sourceSet).filterNot { it.isTestFile() }
+        val koFiles = getFiles(moduleName, sourceSetName).filterNot { it.isTestFile() }
 
         return KoScopeImpl(koFiles)
     }
 
-    override fun scopeFromTest(module: String?, sourceSet: String?): KoScope {
-        sourceSet?.let {
+    override fun scopeFromTest(moduleName: String?, sourceSetName: String?): KoScope {
+        sourceSetName?.let {
             require(isTestSourceSetName(it)) { "Source set '$it' is a production source set, but it should be test source set." }
         }
 
-        val koFiles = getFiles(module, sourceSet).filter { it.isTestFile() }
+        val koFiles = getFiles(moduleName, sourceSetName).filter { it.isTestFile() }
 
         return KoScopeImpl(koFiles)
     }
 
-    override fun scopeFromPackage(packagee: String, module: String?, sourceSet: String?): KoScope {
-        val koFiles = getFiles(module, sourceSet)
+    override fun scopeFromPackage(packagee: String, moduleName: String?, sourceSetName: String?): KoScope {
+        val koFiles = getFiles(moduleName, sourceSetName)
             .withPackage(packagee)
 
         return KoScopeImpl(koFiles)

@@ -7,22 +7,22 @@ interface KoScopeCreator {
     /**
      * Returns a [KoScope] containing all of Kotlin files in the project.
      */
-    fun scopeFromProject(module: String? = null, sourceSet: String? = null): KoScope
+    fun scopeFromProject(moduleName: String? = null, sourceSetName: String? = null): KoScope
 
     /**
      * Returns a [KoScope] containing all of Kotlin production files in the project.
      */
-    fun scopeFromProduction(module: String? = null, sourceSet: String? = null): KoScope
+    fun scopeFromProduction(moduleName: String? = null, sourceSetName: String? = null): KoScope
 
     /**
      * Returns a [KoScope] containing all of Kotlin test files in the project.
      */
-    fun scopeFromTest(module: String? = null, sourceSet: String? = null): KoScope
+    fun scopeFromTest(moduleName: String? = null, sourceSetName: String? = null): KoScope
 
     /**
      * Returns a [KoScope] containing all of Kotlin files in the given package.
      */
-    fun scopeFromPackage(packagee: String, module: String? = null, sourceSet: String? = null): KoScope
+    fun scopeFromPackage(packagee: String, moduleName: String? = null, sourceSetName: String? = null): KoScope
 
     /**
      * Returns a [KoScope] containing all of Kotlin files in the given directory.

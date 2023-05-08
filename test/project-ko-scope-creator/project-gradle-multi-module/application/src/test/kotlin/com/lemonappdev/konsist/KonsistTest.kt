@@ -100,7 +100,7 @@ class KonsistTest {
     fun `scopeFromPackage for com_lemonappdev_sample package, application module`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", module = "application")
+            .scopeFromPackage("com.lemonappdev.sample", moduleName = "application")
             .mapToFilePaths()
 
         // then
@@ -116,7 +116,7 @@ class KonsistTest {
     fun `scopeFromPackage for com_lemonappdev_sample package, application module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", module = "application", sourceSet = "main")
+            .scopeFromPackage("com.lemonappdev.sample", moduleName = "application", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
@@ -131,7 +131,7 @@ class KonsistTest {
     fun `scopeFromPackage for com_lemonappdev_sample package, application module, test source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", module = "application", sourceSet = "test")
+            .scopeFromPackage("com.lemonappdev.sample", moduleName = "application", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
@@ -146,7 +146,7 @@ class KonsistTest {
     fun `scopeFromPackage for com_lemonappdev_sample package, library module`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", module = "library")
+            .scopeFromPackage("com.lemonappdev.sample", moduleName = "library")
             .mapToFilePaths()
 
         // then
@@ -162,7 +162,7 @@ class KonsistTest {
     fun `scopeFromPackage for com_lemonappdev_sample package, library module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", module = "library", sourceSet = "main")
+            .scopeFromPackage("com.lemonappdev.sample", moduleName = "library", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
@@ -177,7 +177,7 @@ class KonsistTest {
     fun `scopeFromPackage for com_lemonappdev_sample package, library module, test source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("com.lemonappdev.sample", module = "library", sourceSet = "test")
+            .scopeFromPackage("com.lemonappdev.sample", moduleName = "library", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
@@ -210,7 +210,7 @@ class KonsistTest {
     fun `scopeFromPackage for any__data__any package, application module`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..data..", module = "application")
+            .scopeFromPackage("..data..", moduleName = "application")
             .mapToFilePaths()
 
         // then
@@ -226,7 +226,7 @@ class KonsistTest {
     fun `scopeFromPackage for any__data__any package, application module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..data..", module = "application", sourceSet = "main")
+            .scopeFromPackage("..data..", moduleName = "application", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
@@ -241,7 +241,7 @@ class KonsistTest {
     fun `scopeFromPackage for any__data__any package, application module, test source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..data..", module = "application", sourceSet = "test")
+            .scopeFromPackage("..data..", moduleName = "application", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
@@ -256,7 +256,7 @@ class KonsistTest {
     fun `scopeFromPackage for any__data__any package, library module`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..data..", module = "library")
+            .scopeFromPackage("..data..", moduleName = "library")
             .mapToFilePaths()
 
         // then
@@ -272,7 +272,7 @@ class KonsistTest {
     fun `scopeFromPackage for any__data__any package, library module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..data..", module = "library", sourceSet = "main")
+            .scopeFromPackage("..data..", moduleName = "library", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
@@ -287,7 +287,7 @@ class KonsistTest {
     fun `scopeFromPackage for any__data__any package, library module, test source set`() {
         // given
         val sut = Konsist
-            .scopeFromPackage("..data..", module = "library", sourceSet = "test")
+            .scopeFromPackage("..data..", moduleName = "library", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
@@ -325,7 +325,7 @@ class KonsistTest {
     fun `scopeFromProject for library module`() {
         // given
         val sut = Konsist
-            .scopeFromProject(module = "library")
+            .scopeFromProject(moduleName = "library")
             .mapToFilePaths()
 
         // then
@@ -343,7 +343,7 @@ class KonsistTest {
     fun `scopeFromProject for main source set`() {
         // given
         val sut = Konsist
-            .scopeFromProject(sourceSet = "main")
+            .scopeFromProject(sourceSetName = "main")
             .mapToFilePaths()
 
         // then
@@ -361,7 +361,7 @@ class KonsistTest {
     fun `scopeFromProject for test source set`() {
         // given
         val sut = Konsist
-            .scopeFromProject(sourceSet = "test")
+            .scopeFromProject(sourceSetName = "test")
             .mapToFilePaths()
 
         // then
@@ -380,7 +380,7 @@ class KonsistTest {
     fun `scopeFromProject for application module and main source set`() {
         // given
         val sut = Konsist
-            .scopeFromProject(module = "application", sourceSet = "main")
+            .scopeFromProject(moduleName = "application", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
@@ -396,7 +396,7 @@ class KonsistTest {
     fun `scopeFromProject for application module and test source set`() {
         // given
         val sut = Konsist
-            .scopeFromProject(module = "application", sourceSet = "test")
+            .scopeFromProject(moduleName = "application", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
@@ -413,7 +413,7 @@ class KonsistTest {
     fun `scopeFromProject for library module and main source set`() {
         // given
         val sut = Konsist
-            .scopeFromProject(module = "library", sourceSet = "main")
+            .scopeFromProject(moduleName = "library", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
@@ -429,7 +429,7 @@ class KonsistTest {
     fun `scopeFromProject for library module and test source set`() {
         // given
         val sut = Konsist
-            .scopeFromProject(module = "library", sourceSet = "test")
+            .scopeFromProject(moduleName = "library", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
@@ -463,7 +463,7 @@ class KonsistTest {
     fun `scopeFromProduction, application module`() {
         // given
         val sut = Konsist
-            .scopeFromProduction(module = "application")
+            .scopeFromProduction(moduleName = "application")
             .mapToFilePaths()
 
         // then
@@ -479,7 +479,7 @@ class KonsistTest {
     fun `scopeFromProduction, application module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromProduction(module = "application", sourceSet = "main")
+            .scopeFromProduction(moduleName = "application", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
@@ -494,7 +494,7 @@ class KonsistTest {
     @Test
     fun `scopeFromProduction, application module, test source set`() {
         // given
-        val func = { Konsist.scopeFromProduction(module = "application", sourceSet = "test") }
+        val func = { Konsist.scopeFromProduction(moduleName = "application", sourceSetName = "test") }
 
         // then
         val message = "Source set 'test' is a test source set, but it should be production source set."
@@ -505,7 +505,7 @@ class KonsistTest {
     fun `scopeFromProduction, library module`() {
         // given
         val sut = Konsist
-            .scopeFromProduction(module = "library")
+            .scopeFromProduction(moduleName = "library")
             .mapToFilePaths()
 
         // then
@@ -521,7 +521,7 @@ class KonsistTest {
     fun `scopeFromProduction, library module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromProduction(module = "library", sourceSet = "main")
+            .scopeFromProduction(moduleName = "library", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
@@ -536,7 +536,7 @@ class KonsistTest {
     @Test
     fun `scopeFromProduction, library module, test source set`() {
         // given
-        val func = { Konsist.scopeFromProduction(module = "library", sourceSet = "test") }
+        val func = { Konsist.scopeFromProduction(moduleName = "library", sourceSetName = "test") }
 
         // then
         val message = "Source set 'test' is a test source set, but it should be production source set."
@@ -573,7 +573,7 @@ class KonsistTest {
     fun `scopeFromTest, application module`() {
         // given
         val sut = Konsist
-            .scopeFromTest(module = "application")
+            .scopeFromTest(moduleName = "application")
             .mapToFilePaths()
 
         // then
@@ -589,7 +589,7 @@ class KonsistTest {
     @Test
     fun `scopeFromTest, application module, main source set`() {
         // given
-        val func = { Konsist.scopeFromTest(module = "application", sourceSet = "main") }
+        val func = { Konsist.scopeFromTest(moduleName = "application", sourceSetName = "main") }
 
         // then
         val message = "Source set 'main' is a production source set, but it should be test source set."
@@ -600,7 +600,7 @@ class KonsistTest {
     fun `scopeFromTest, application module, test source set`() {
         // given
         val sut = Konsist
-            .scopeFromTest(module = "application", sourceSet = "test")
+            .scopeFromTest(moduleName = "application", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
@@ -617,7 +617,7 @@ class KonsistTest {
     fun `scopeFromTest, library module`() {
         // given
         val sut = Konsist
-            .scopeFromTest(module = "library")
+            .scopeFromTest(moduleName = "library")
             .mapToFilePaths()
 
         // then
@@ -632,7 +632,7 @@ class KonsistTest {
     @Test
     fun `scopeFromTest, library module, main source set`() {
         // given
-        val func = { Konsist.scopeFromTest(module = "library", sourceSet = "main") }
+        val func = { Konsist.scopeFromTest(moduleName = "library", sourceSetName = "main") }
 
         // then
         val message = "Source set 'main' is a production source set, but it should be test source set."
@@ -643,7 +643,7 @@ class KonsistTest {
     fun `scopeFromTest, library module, test source set`() {
         // given
         val sut = Konsist
-            .scopeFromTest(module = "library", sourceSet = "test")
+            .scopeFromTest(moduleName = "library", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
