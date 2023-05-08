@@ -79,6 +79,116 @@ class KonsistTest {
     }
 
     @Test
+    fun `scopeFromPackage for com_lemonappdev_sample package`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("com.lemonappdev.sample")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for com_lemonappdev_sample package, application module`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("com.lemonappdev.sample", module = "application")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for com_lemonappdev_sample package, application module, main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("com.lemonappdev.sample", module = "application", sourceSet = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for com_lemonappdev_sample package, application module, test source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("com.lemonappdev.sample", module = "application", sourceSet = "test")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for com_lemonappdev_sample package, library module`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("com.lemonappdev.sample", module = "library")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for com_lemonappdev_sample package, library module, main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("com.lemonappdev.sample", module = "library", sourceSet = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for com_lemonappdev_sample package, library module, test source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("com.lemonappdev.sample", module = "library", sourceSet = "test")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
     fun `scopeFromPackage for any__data__any package`() {
         // given
         val sut = Konsist
