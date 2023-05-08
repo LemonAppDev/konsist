@@ -1,16 +1,18 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParametrizedDeclaration
 import org.jetbrains.kotlin.psi.KtFunction
 
 internal abstract class KoParametrizedDeclarationImpl(
     private val ktFunction: KtFunction,
-) : KoDeclarationImpl(ktFunction), KoParametrizedDeclaration {
+    parent: KoBaseDeclaration?,
+) : KoDeclarationImpl(ktFunction, parent), KoParametrizedDeclaration {
 
     override val parameters by lazy {
         ktFunction
             .valueParameters
-            .map { KoParameterDeclarationImpl.getInstance(it) }
+            .map { KoParameterDeclarationImpl.getInstance(it, this) }
             .ifEmpty { null }
     }
 

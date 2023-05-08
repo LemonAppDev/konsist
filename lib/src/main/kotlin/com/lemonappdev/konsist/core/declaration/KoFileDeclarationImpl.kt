@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProviderUtil
@@ -25,20 +26,20 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
             .children
             .filterIsInstance<KtImportDirective>()
 
-        ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it) }
+        ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it, this) }
     }
 
     override val annotations by lazy {
         ktFile
             .annotationEntries
-            .map { KoAnnotationDeclarationImpl.getInstance(it) }
+            .map { KoAnnotationDeclarationImpl.getInstance(it, this) }
     }
 
     override val packagee by lazy {
         if (ktFile.packageDirective?.qualifiedName == "") {
             null
         } else {
-            ktFile.packageDirective?.let { KoPackageDeclarationImpl.getInstance(it) }
+            ktFile.packageDirective?.let { KoPackageDeclarationImpl.getInstance(it, this) }
         }
     }
 
@@ -46,7 +47,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
         ktFile
             .children
             .filterIsInstance<KtTypeAlias>()
-            .map { KoTypeAliasDeclarationImpl.getInstance(it) }
+            .map { KoTypeAliasDeclarationImpl.getInstance(it, this) }
     }
 
     override fun declarations(
@@ -54,7 +55,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
         includeNested: Boolean,
         includeLocal: Boolean,
     ): Sequence<KoDeclarationImpl> =
-        KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal)
+        KoDeclarationProviderUtil.getKoDeclarations(ktFile, modifiers, includeNested, includeLocal, this)
 
     override fun hasAnnotations(vararg names: String) = when {
         names.isEmpty() -> annotations.isNotEmpty()
@@ -94,6 +95,8 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
     internal companion object {
         private val cache = KoDeclarationCache<KoFileDeclarationImpl>()
 
-        internal fun getInstance(ktFile: KtFile) = cache.getOrCreateInstance(ktFile) { KoFileDeclarationImpl(ktFile) }
+        internal fun getInstance(ktFile: KtFile, parent: KoBaseDeclaration?) = cache.getOrCreateInstance(ktFile, parent) {
+            KoFileDeclarationImpl(ktFile)
+        }
     }
 }

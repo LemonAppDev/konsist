@@ -1,0 +1,5 @@
+@file:Suppress("assert-suppress-by-name-at-file-level")
+
+class SampleClassWithIncorrectSuffix {
+    fun sampleFunctionWithIncorrectSuffix(){}
+}

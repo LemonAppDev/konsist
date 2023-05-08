@@ -1,8 +1,9 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoFileDeclarationImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -31,12 +32,14 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
             )
         }
 
-        val result = localList.groupBy {
-            lastDeclaration = it as? KoDeclaration
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(localList)
+
+        val result = notSuppressedDeclarations.groupBy {
+            lastDeclaration = it
             function(it)
         }
 
-        val allChecksPassed = (result[positiveCheck]?.size ?: 0) == localList.size
+        val allChecksPassed = (result[positiveCheck]?.size ?: 0) == notSuppressedDeclarations.size
 
         if (!allChecksPassed) {
             val failedDeclarations = result[!positiveCheck] ?: emptyList()
@@ -58,7 +61,7 @@ private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: Li
         "${it.location} ($name $declarationType)"
     }
 
-    return "Check '${getTestMethodName()}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
+    return "Assert '${getTestMethodName()}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }
 
 /**
@@ -68,3 +71,42 @@ private fun getTestMethodName(): String? {
     val stackTraceIndexOfTestMethod = 5
     return Thread.currentThread().stackTrace[stackTraceIndexOfTestMethod].methodName
 }
+
+private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {
+    // In this declarations structure test name is at index 4
+    // We pass this name to checkIfSuppressed() because when declarations are nested, this index is changing
+    val testMethodName = Thread.currentThread().stackTrace[4].methodName
+    val declarations: MutableMap<E, Boolean> = mutableMapOf()
+
+    localList.forEach { declarations[it] = checkIfSuppressed(it as KoDeclarationImpl, testMethodName) }
+
+    val withoutSuppress = mutableListOf<E>()
+
+    declarations.forEach { if (!it.value) withoutSuppress.add(it.key) }
+
+    return withoutSuppress
+}
+
+private fun checkIfSuppressed(declaration: KoDeclarationImpl, testMethodName: String): Boolean {
+    val annotationParameter = declaration
+        .annotations
+        .firstOrNull { it.name == "Suppress" }
+        ?.text
+        ?.removePrefix("@Suppress(\"")
+        ?.removeSuffix("\")")
+
+    return when {
+        annotationParameter == testMethodName || annotationParameter == "konsist.$testMethodName" -> true
+        declaration.parent !is KoFileDeclarationImpl -> checkIfSuppressed(declaration.parent as KoDeclarationImpl, testMethodName)
+        fileAnnotationParameter(declaration.parent as KoFileDeclarationImpl) == testMethodName -> true
+        fileAnnotationParameter(declaration.parent as KoFileDeclarationImpl) == "konsist.$testMethodName" -> true
+        else -> false
+    }
+}
+
+private fun fileAnnotationParameter(file: KoFileDeclarationImpl) = file
+    .annotations
+    .firstOrNull { it.name == "Suppress" }
+    ?.text
+    ?.removePrefix("@file:Suppress(\"")
+    ?.removeSuffix("\")")

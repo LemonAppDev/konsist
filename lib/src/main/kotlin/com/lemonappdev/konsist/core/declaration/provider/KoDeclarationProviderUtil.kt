@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.provider
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
@@ -24,22 +25,23 @@ internal object KoDeclarationProviderUtil {
         modifiers: List<KoModifier>,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
+        parent: KoBaseDeclaration,
     ): Sequence<T> {
         val declarations = ktDeclarationContainer
             .declarations
             .mapNotNull {
                 if (it is KtClass && !it.isInterface()) {
-                    KoClassDeclarationImpl.getInstance(it)
+                    KoClassDeclarationImpl.getInstance(it, parent)
                 } else if (it is KtClass && it.isInterface()) {
-                    KoInterfaceDeclarationImpl.getInstance(it)
+                    KoInterfaceDeclarationImpl.getInstance(it, parent)
                 } else if (it is KtObjectDeclaration && !it.isCompanion()) {
-                    KoObjectDeclarationImpl.getInstance(it)
+                    KoObjectDeclarationImpl.getInstance(it, parent)
                 } else if (it is KtObjectDeclaration && it.isCompanion()) {
-                    KoCompanionObjectDeclarationImpl.getInstance(it)
+                    KoCompanionObjectDeclarationImpl.getInstance(it, parent)
                 } else if (it is KtProperty) {
-                    KoPropertyDeclarationImpl.getInstance(it)
+                    KoPropertyDeclarationImpl.getInstance(it, parent)
                 } else if (it is KtFunction) {
-                    KoFunctionDeclarationImpl.getInstance(it)
+                    KoFunctionDeclarationImpl.getInstance(it, parent)
                 } else {
                     throw KoUnsupportedOperationException("Unknown declaration type: ${it.getTextWithLocation()}")
                 }
