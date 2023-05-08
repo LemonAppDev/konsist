@@ -1,11 +1,11 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.api.KoDocTag
+import com.lemonappdev.konsist.api.KoKDocTag
 
 /**
  * Represents a Kotlin declaration.
  */
-interface KoDocDeclaration : KoPsiDeclaration {
+interface KoKDocDeclaration : KoPsiDeclaration {
     /**
      * Description of the declaration.
      */
@@ -14,85 +14,85 @@ interface KoDocDeclaration : KoPsiDeclaration {
     /**
      * List of tags.
      */
-    val tags: List<KoDocTagDeclaration>
+    val tags: List<KoKDocTagDeclaration>
 
     /**
      * List of '@param' tags.
      */
-    val paramTags: List<KoValuedDocTagDeclaration>
+    val paramTags: List<KoValuedKDocTagDeclaration>
 
     /**
      * List of '@return' tags.
      */
-    val returnTag: KoDocTagDeclaration?
+    val returnTag: KoKDocTagDeclaration?
 
     /**
      * List of '@constructor' tags.
      */
-    val constructorTag: KoDocTagDeclaration?
+    val constructorTag: KoKDocTagDeclaration?
 
     /**
      * List of '@receiver' tags.
      */
-    val receiverTag: KoDocTagDeclaration?
+    val receiverTag: KoKDocTagDeclaration?
 
     /**
      * List of '@property' tags.
      */
-    val propertyTags: List<KoValuedDocTagDeclaration>
+    val propertyTags: List<KoValuedKDocTagDeclaration>
 
     /**
      * List of '@throws' tags.
      */
-    val throwsTags: List<KoValuedDocTagDeclaration>
+    val throwsTags: List<KoValuedKDocTagDeclaration>
 
     /**
      * List of '@exception' tags.
      */
-    val exceptionTags: List<KoValuedDocTagDeclaration>
+    val exceptionTags: List<KoValuedKDocTagDeclaration>
 
     /**
      * List of '@sample' tags.
      */
-    val sampleTags: List<KoValuedDocTagDeclaration>
+    val sampleTags: List<KoValuedKDocTagDeclaration>
 
     /**
      * List of '@see' tags.
      */
-    val seeTags: List<KoValuedDocTagDeclaration>
+    val seeTags: List<KoValuedKDocTagDeclaration>
 
     /**
      * List of '@author' tags.
      */
-    val authorTags: List<KoDocTagDeclaration>
+    val authorTags: List<KoKDocTagDeclaration>
 
     /**
      * List of '@since' tags.
      */
-    val sinceTag: KoDocTagDeclaration?
+    val sinceTag: KoKDocTagDeclaration?
 
     /**
      * List of '@suppress' tags.
      */
-    val suppressTag: KoDocTagDeclaration?
+    val suppressTag: KoKDocTagDeclaration?
 
     /**
      * List of '@version' tags.
      */
-    val versionTag: KoDocTagDeclaration?
+    val versionTag: KoKDocTagDeclaration?
 
     /**
      * List of '@propertySetter' tags.
      */
-    val propertySetterTag: KoDocTagDeclaration?
+    val propertySetterTag: KoKDocTagDeclaration?
 
     /**
      * List of '@propertyGetter' tags.
      */
-    val propertyGetterTag: KoDocTagDeclaration?
+    val propertyGetterTag: KoKDocTagDeclaration?
 
     /**
      * Whether the declaration has the given tags.
      */
-    fun hasTags(vararg tags: KoDocTag): Boolean
+    fun hasTags(vararg tags: KoKDocTag): Boolean
 }

@@ -1,21 +1,21 @@
-package com.lemonappdev.konsist.core.declaration.kodocdeclaration
+package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.KoDocTag.AUTHOR
-import com.lemonappdev.konsist.api.KoDocTag.CONSTRUCTOR
-import com.lemonappdev.konsist.api.KoDocTag.EXCEPTION
-import com.lemonappdev.konsist.api.KoDocTag.PARAM
-import com.lemonappdev.konsist.api.KoDocTag.PROPERTY
-import com.lemonappdev.konsist.api.KoDocTag.PROPERTY_GETTER
-import com.lemonappdev.konsist.api.KoDocTag.PROPERTY_SETTER
-import com.lemonappdev.konsist.api.KoDocTag.RECEIVER
-import com.lemonappdev.konsist.api.KoDocTag.RETURN
-import com.lemonappdev.konsist.api.KoDocTag.SAMPLE
-import com.lemonappdev.konsist.api.KoDocTag.SEE
-import com.lemonappdev.konsist.api.KoDocTag.SINCE
-import com.lemonappdev.konsist.api.KoDocTag.SUPPRESS
-import com.lemonappdev.konsist.api.KoDocTag.THROWS
-import com.lemonappdev.konsist.api.KoDocTag.VERSION
+import com.lemonappdev.konsist.api.KoKDocTag.AUTHOR
+import com.lemonappdev.konsist.api.KoKDocTag.CONSTRUCTOR
+import com.lemonappdev.konsist.api.KoKDocTag.EXCEPTION
+import com.lemonappdev.konsist.api.KoKDocTag.PARAM
+import com.lemonappdev.konsist.api.KoKDocTag.PROPERTY
+import com.lemonappdev.konsist.api.KoKDocTag.PROPERTY_GETTER
+import com.lemonappdev.konsist.api.KoKDocTag.PROPERTY_SETTER
+import com.lemonappdev.konsist.api.KoKDocTag.RECEIVER
+import com.lemonappdev.konsist.api.KoKDocTag.RETURN
+import com.lemonappdev.konsist.api.KoKDocTag.SAMPLE
+import com.lemonappdev.konsist.api.KoKDocTag.SEE
+import com.lemonappdev.konsist.api.KoKDocTag.SINCE
+import com.lemonappdev.konsist.api.KoKDocTag.SUPPRESS
+import com.lemonappdev.konsist.api.KoKDocTag.THROWS
+import com.lemonappdev.konsist.api.KoKDocTag.VERSION
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -25,14 +25,14 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class KoDocDeclarationImplTest {
+class KoKDocDeclarationTest {
     @Test
     fun `tags class`() {
         // given
         val sut = getSnippetFile("tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         sut
@@ -46,7 +46,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         sut
@@ -60,7 +60,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         sut
@@ -74,7 +74,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-unknown-tag")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         val actual = { sut?.tags }
@@ -87,7 +87,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         sut
@@ -103,7 +103,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         sut
@@ -119,7 +119,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -134,7 +134,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -154,7 +154,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -174,7 +174,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -189,7 +189,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -206,7 +206,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -223,7 +223,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -243,7 +243,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -258,7 +258,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -273,7 +273,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -293,7 +293,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -308,7 +308,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-with-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -326,7 +326,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -341,7 +341,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -361,7 +361,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -376,7 +376,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -393,7 +393,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -410,7 +410,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -430,7 +430,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -445,7 +445,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -465,7 +465,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -483,7 +483,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -498,7 +498,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -513,7 +513,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("function-with-tags")
             .functions(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -528,7 +528,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("property-with-tags")
             .properties(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -543,7 +543,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("property-with-tags")
             .properties(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -558,7 +558,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("property-with-tags")
             .properties(includeNested = true)
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -573,7 +573,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-has-tags")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -591,7 +591,7 @@ class KoDocDeclarationImplTest {
         val sut = getSnippetFile("class-has-tags-without-description")
             .classes()
             .first()
-            .koDoc
+            .kDoc
 
         // then
         assertSoftly(sut) {
@@ -605,5 +605,5 @@ class KoDocDeclarationImplTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kodocdeclaration/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/", fileName)
 }

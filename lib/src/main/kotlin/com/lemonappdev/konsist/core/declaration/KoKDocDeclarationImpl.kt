@@ -1,26 +1,26 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.KoDocTag
-import com.lemonappdev.konsist.api.KoDocTag.AUTHOR
-import com.lemonappdev.konsist.api.KoDocTag.CONSTRUCTOR
-import com.lemonappdev.konsist.api.KoDocTag.EXCEPTION
-import com.lemonappdev.konsist.api.KoDocTag.PARAM
-import com.lemonappdev.konsist.api.KoDocTag.PROPERTY
-import com.lemonappdev.konsist.api.KoDocTag.PROPERTY_GETTER
-import com.lemonappdev.konsist.api.KoDocTag.PROPERTY_SETTER
-import com.lemonappdev.konsist.api.KoDocTag.RECEIVER
-import com.lemonappdev.konsist.api.KoDocTag.RETURN
-import com.lemonappdev.konsist.api.KoDocTag.SAMPLE
-import com.lemonappdev.konsist.api.KoDocTag.SEE
-import com.lemonappdev.konsist.api.KoDocTag.SINCE
-import com.lemonappdev.konsist.api.KoDocTag.SUPPRESS
-import com.lemonappdev.konsist.api.KoDocTag.THROWS
-import com.lemonappdev.konsist.api.KoDocTag.VERSION
-import com.lemonappdev.konsist.api.declaration.KoDocDeclaration
+import com.lemonappdev.konsist.api.KoKDocTag
+import com.lemonappdev.konsist.api.KoKDocTag.AUTHOR
+import com.lemonappdev.konsist.api.KoKDocTag.CONSTRUCTOR
+import com.lemonappdev.konsist.api.KoKDocTag.EXCEPTION
+import com.lemonappdev.konsist.api.KoKDocTag.PARAM
+import com.lemonappdev.konsist.api.KoKDocTag.PROPERTY
+import com.lemonappdev.konsist.api.KoKDocTag.PROPERTY_GETTER
+import com.lemonappdev.konsist.api.KoKDocTag.PROPERTY_SETTER
+import com.lemonappdev.konsist.api.KoKDocTag.RECEIVER
+import com.lemonappdev.konsist.api.KoKDocTag.RETURN
+import com.lemonappdev.konsist.api.KoKDocTag.SAMPLE
+import com.lemonappdev.konsist.api.KoKDocTag.SEE
+import com.lemonappdev.konsist.api.KoKDocTag.SINCE
+import com.lemonappdev.konsist.api.KoKDocTag.SUPPRESS
+import com.lemonappdev.konsist.api.KoKDocTag.THROWS
+import com.lemonappdev.konsist.api.KoKDocTag.VERSION
+import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
-internal class KoDocDeclarationImpl(private val kDocElement: KDocElement) : KoPsiDeclarationImpl(kDocElement), KoDocDeclaration {
+internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoPsiDeclarationImpl(kDocElement), KoKDocDeclaration {
     override val text: String by lazy {
         (kDocElement.text.split("\n") as MutableList)
             .also {
@@ -51,11 +51,11 @@ internal class KoDocDeclarationImpl(private val kDocElement: KDocElement) : KoPs
         val tagsWithName = tagsAsStringList
             .flatMap { regex.findAll(it) }
             .map {
-                if (KoDocTag.values().none { koTag -> koTag.type == it.value }) {
+                if (KoKDocTag.values().none { koTag -> koTag.type == it.value }) {
                     throw KoInternalException("Unknown doc tag: ${it.value}")
                 }
 
-                KoDocTag.values().first { tag -> tag.type == it.value }
+                KoKDocTag.values().first { tag -> tag.type == it.value }
             }
             .zip(tagsAsStringList)
 
@@ -71,7 +71,7 @@ internal class KoDocDeclarationImpl(private val kDocElement: KDocElement) : KoPs
 
     override val paramTags by lazy {
         tags.filter { it.name == PARAM }
-            .map { it as KoValuedDocTagDeclarationImpl }
+            .map { it as KoValuedKDocTagDeclarationImpl }
     }
 
     override val returnTag by lazy {
@@ -88,27 +88,27 @@ internal class KoDocDeclarationImpl(private val kDocElement: KDocElement) : KoPs
 
     override val propertyTags by lazy {
         tags.filter { it.name == PROPERTY }
-            .map { it as KoValuedDocTagDeclarationImpl }
+            .map { it as KoValuedKDocTagDeclarationImpl }
     }
 
     override val throwsTags by lazy {
         tags.filter { it.name == THROWS }
-            .map { it as KoValuedDocTagDeclarationImpl }
+            .map { it as KoValuedKDocTagDeclarationImpl }
     }
 
     override val exceptionTags by lazy {
         tags.filter { it.name == EXCEPTION }
-            .map { it as KoValuedDocTagDeclarationImpl }
+            .map { it as KoValuedKDocTagDeclarationImpl }
     }
 
     override val sampleTags by lazy {
         tags.filter { it.name == SAMPLE }
-            .map { it as KoValuedDocTagDeclarationImpl }
+            .map { it as KoValuedKDocTagDeclarationImpl }
     }
 
     override val seeTags by lazy {
         tags.filter { it.name == SEE }
-            .map { it as KoValuedDocTagDeclarationImpl }
+            .map { it as KoValuedKDocTagDeclarationImpl }
     }
 
     override val authorTags by lazy {
@@ -135,27 +135,27 @@ internal class KoDocDeclarationImpl(private val kDocElement: KDocElement) : KoPs
         tags.firstOrNull { it.name == PROPERTY_GETTER }
     }
 
-    override fun hasTags(vararg tags: KoDocTag) = tags.all {
+    override fun hasTags(vararg tags: KoKDocTag) = tags.all {
         this.tags
             .map { tag -> tag.name }
             .contains(it)
     }
 
-    private fun parseToValuedTag(koDocTag: KoDocTag, sentence: String): KoValuedDocTagDeclarationImpl {
+    private fun parseToValuedTag(koKDocTag: KoKDocTag, sentence: String): KoValuedKDocTagDeclarationImpl {
         val parsed = sentence.split(" ")
         val description = parsed
             .subList(2, parsed.size)
             .joinToString(" ")
 
-        return KoValuedDocTagDeclarationImpl(koDocTag, parsed[1], description)
+        return KoValuedKDocTagDeclarationImpl(koKDocTag, parsed[1], description)
     }
 
-    private fun parseToTag(koDocTag: KoDocTag, sentence: String): KoDocTagDeclarationImpl {
+    private fun parseToTag(koKDocTag: KoKDocTag, sentence: String): KoKDocTagDeclarationImpl {
         val parsed = sentence.split(" ")
         val description = parsed
             .subList(1, parsed.size)
             .joinToString(" ")
 
-        return KoDocTagDeclarationImpl(koDocTag, description)
+        return KoKDocTagDeclarationImpl(koKDocTag, description)
     }
 }

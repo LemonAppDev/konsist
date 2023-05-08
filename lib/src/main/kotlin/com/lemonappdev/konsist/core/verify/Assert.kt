@@ -98,8 +98,8 @@ private fun checkIfSuppressed(declaration: KoDeclarationImpl, testMethodName: St
     return when {
         annotationParameter == testMethodName || annotationParameter == "konsist.$testMethodName" -> true
         declaration.parent !is KoFileDeclarationImpl -> checkIfSuppressed(declaration.parent as KoDeclarationImpl, testMethodName)
-        fileAnnotationParameter(declaration.parent as KoFileDeclarationImpl) == testMethodName -> true
-        fileAnnotationParameter(declaration.parent as KoFileDeclarationImpl) == "konsist.$testMethodName" -> true
+        fileAnnotationParameter(declaration.parent) == testMethodName -> true
+        fileAnnotationParameter(declaration.parent) == "konsist.$testMethodName" -> true
         else -> false
     }
 }
