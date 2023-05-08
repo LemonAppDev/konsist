@@ -6,7 +6,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class KoScopeCreatorTest {
+class KonsistTest {
     @Test
     fun `scopeFromProject`() {
         // given
@@ -19,7 +19,7 @@ class KoScopeCreatorTest {
             listOf(
                 "$applicationMainSourceSetDirectory/sample/AppClass.kt",
                 "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
-                "$applicationTestSourceSetDirectory/konsist/KoScopeCreatorTest.kt",
+                "$applicationTestSourceSetDirectory/konsist/KonsistTest.kt",
                 "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$libraryMainSourceSetDirectory/sample/LibClass.kt",
@@ -76,7 +76,7 @@ class KoScopeCreatorTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$applicationTestSourceSetDirectory/konsist/KoScopeCreatorTest.kt",
+                "$applicationTestSourceSetDirectory/konsist/KonsistTest.kt",
                 "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
@@ -111,7 +111,7 @@ class KoScopeCreatorTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$applicationTestSourceSetDirectory/konsist/KoScopeCreatorTest.kt",
+                "$applicationTestSourceSetDirectory/konsist/KonsistTest.kt",
                 "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
             ),
