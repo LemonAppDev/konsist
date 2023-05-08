@@ -3,8 +3,6 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.Konsist
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import java.io.File
 
@@ -14,6 +12,42 @@ class KonsistTestForScopeFromPackage {
         // given
         val sut = Konsist
             .scopeFromPackage("com.lemonappdev.sample")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for com_lemonappdev_sample package, main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("com.lemonappdev.sample", sourceSetName = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for com_lemonappdev_sample package, test source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("com.lemonappdev.sample", sourceSetName = "test")
             .mapToFilePaths()
 
         // then
@@ -133,6 +167,38 @@ class KonsistTestForScopeFromPackage {
                 "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for any__data__any package, main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("..data..", sourceSetName = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for any__data__any package, test source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("..data..", sourceSetName = "test")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
             ),
         )
     }

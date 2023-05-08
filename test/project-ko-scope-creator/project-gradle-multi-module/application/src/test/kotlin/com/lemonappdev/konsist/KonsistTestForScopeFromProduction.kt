@@ -28,6 +28,34 @@ class KonsistTestForScopeFromProduction {
     }
 
     @Test
+    fun `scopeFromProduction, main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction(sourceSetName = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProduction, test source set`() {
+        // given
+        val func = { Konsist.scopeFromProduction(sourceSetName = "test") }
+
+        // then
+        val message = "Source set 'test' is a test source set, but it should be production source set."
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
     fun `scopeFromProduction, application module`() {
         // given
         val sut = Konsist
