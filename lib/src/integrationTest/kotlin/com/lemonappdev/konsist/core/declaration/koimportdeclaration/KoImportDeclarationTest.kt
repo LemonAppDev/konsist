@@ -24,7 +24,8 @@ class KoImportDeclarationTest {
     @Test
     fun `import-name-has-import-alias`() {
         // given
-        val sut = getSnippetFile("import-name-has-import-alias").imports()
+        val sut = getSnippetFile("import-name-has-import-alias")
+            .imports()
 
         // then
         assertSoftly(sut.toList()) {
@@ -32,6 +33,28 @@ class KoImportDeclarationTest {
             get(1).alias shouldBeEqualTo "ImportAlias"
             get(1).name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
+    }
+
+    @Test
+    fun `import-with-wildcard`() {
+        // given
+        val sut = getSnippetFile("import-with-wildcard")
+            .imports()
+            .first()
+
+        // then
+        sut.isWildcard shouldBeEqualTo true
+    }
+
+    @Test
+    fun `import-without-wildcard`() {
+        // given
+        val sut = getSnippetFile("import-without-wildcard")
+            .imports()
+            .first()
+
+        // then
+        sut.isWildcard shouldBeEqualTo false
     }
 
     private fun getSnippetFile(fileName: String) =

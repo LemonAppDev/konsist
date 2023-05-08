@@ -8,4 +8,9 @@ interface KoImportDeclaration : KoNamedDeclaration {
      * Alias of the import.
      */
     val alias: String
+
+    /**
+     * Whether this import is a wildcard.
+     */
+    val isWildcard: Boolean
 }
