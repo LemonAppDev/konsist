@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist
 
-import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.KoScope
+import com.lemonappdev.konsist.api.Konsist
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -86,10 +86,26 @@ class KoScopeCreatorTest {
     }
 
     @Test
+    fun `scopeFromProject for application module and main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(module = "application", sourceSet = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
+                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+            ),
+        )
+    }
+
+    @Test
     fun `scopeFromProject for application module and test source set`() {
         // given
         val sut = Konsist
-            .scopeFromProject(sourceSet = "test")
+            .scopeFromProject(module = "application", sourceSet = "test")
             .mapToFilePaths()
 
         // then
@@ -98,6 +114,36 @@ class KoScopeCreatorTest {
                 "$applicationTestSourceSetDirectory/konsist/KoScopeCreatorTest.kt",
                 "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProject for library module and main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(module = "library", sourceSet = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProject for library module and test source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(module = "library", sourceSet = "test")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
                 "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ),
