@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource
 
 class KoDeclarationForVisibilityModifierTest {
 
+    @Suppress("detekt.LongParameterList")
     @ParameterizedTest
     @MethodSource("provideValuesForVisibilityModifiers")
     fun `visibility-modifiers`(
@@ -70,7 +71,6 @@ class KoDeclarationForVisibilityModifierTest {
             arguments("property-has-protected-visibility-modifier", "sampleProperty", false, false, false, true, false),
             arguments("property-has-internal-visibility-modifier", "sampleProperty", false, false, false, false, true),
         )
-
     }
 
     private fun getSnippetFile(fileName: String) =
