@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.core.declaration.KoBaseDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclarationImpl
