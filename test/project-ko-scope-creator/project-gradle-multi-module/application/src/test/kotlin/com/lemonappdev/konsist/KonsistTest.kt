@@ -8,6 +8,129 @@ import java.io.File
 
 class KonsistTest {
     @Test
+    fun `scopeFromFile`() {
+        // given
+        val sut = Konsist
+            .scopeFromFile("$applicationMainSourceSetDirectory/sample/AppClass.kt")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf("$applicationMainSourceSetDirectory/sample/AppClass.kt"),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for any__data__any package`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("..data..")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for any__data__any package, application module`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("..data..", module = "application")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for any__data__any package, application module, main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("..data..", module = "application", sourceSet = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for any__data__any package, application module, test source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("..data..", module = "application", sourceSet = "test")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for any__data__any package, library module`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("..data..", module = "library")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for any__data__any package, library module, main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("..data..", module = "library", sourceSet = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for any__data__any package, library module, test source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("..data..", module = "library", sourceSet = "test")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
     fun `scopeFromProject`() {
         // given
         val sut = Konsist
