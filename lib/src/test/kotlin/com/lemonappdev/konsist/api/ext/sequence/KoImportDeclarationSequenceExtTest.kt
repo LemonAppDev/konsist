@@ -114,4 +114,40 @@ class KoImportDeclarationSequenceExtTest {
         // then
         sut.toList() shouldBeEqualTo listOf(import3, import4)
     }
+
+    @Test
+    fun `withWildcard() returns import with wildcard`() {
+        // given
+        val import1: KoImportDeclarationImpl = mockk {
+            every { isWildcard } returns true
+        }
+        val import2: KoImportDeclarationImpl = mockk {
+            every { isWildcard } returns false
+        }
+        val imports = sequenceOf(import1, import2)
+
+        // when
+        val sut = imports.withWildcard()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(import1)
+    }
+
+    @Test
+    fun `withoutWildcard() returns import without wildcard`() {
+        // given
+        val import1: KoImportDeclarationImpl = mockk {
+            every { isWildcard } returns true
+        }
+        val import2: KoImportDeclarationImpl = mockk {
+            every { isWildcard } returns false
+        }
+        val imports = sequenceOf(import1, import2)
+
+        // when
+        val sut = imports.withoutWildcard()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(import2)
+    }
 }
