@@ -8,7 +8,7 @@ class ApiKonsistTest {
     fun `every api declaration has kdoc`() {
         apiPackageScope
             .declarations(includeNested = true)
-            .assert { it.hasKoDoc() }
+            .assert { it.hasKoKDoc() }
     }
 
     @Test

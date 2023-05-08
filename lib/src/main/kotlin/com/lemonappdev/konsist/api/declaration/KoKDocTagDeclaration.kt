@@ -1,15 +1,15 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.api.KoDocTag
+import com.lemonappdev.konsist.api.KoKDocTag
 
 /**
  * Represents a Kotlin documentation tag declaration.
  */
-interface KoDocTagDeclaration {
+interface KoKDocTagDeclaration {
     /**
      * Name of the tag.
      */
-    val name: KoDocTag
+    val name: KoKDocTag
 
     /**
      * Description of the tag.

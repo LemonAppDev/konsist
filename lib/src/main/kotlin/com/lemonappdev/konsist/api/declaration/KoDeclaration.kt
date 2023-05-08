@@ -30,7 +30,7 @@ interface KoDeclaration : KoNamedDeclaration {
     /**
      * Documentation pf the declaration.
      */
-    val koDoc: KoDocDeclaration?
+    val kDoc: KoKDocDeclaration?
 
     /**
      * Whether the parameter has public modifier.
@@ -80,7 +80,7 @@ interface KoDeclaration : KoNamedDeclaration {
     /**
      * Whether the declaration has kdoc.
      */
-    fun hasKoDoc(): Boolean
+    fun hasKoKDoc(): Boolean
 
     /**
      * Whether the declaration resides in a package.

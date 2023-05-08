@@ -333,8 +333,8 @@ class KoDeclarationForClassTest {
 
         // then
         assertSoftly(sut) {
-            koDoc shouldNotBeEqualTo null
-            hasKoDoc() shouldBeEqualTo true
+            kDoc shouldNotBeEqualTo null
+            hasKoKDoc() shouldBeEqualTo true
         }
     }
 
@@ -347,8 +347,8 @@ class KoDeclarationForClassTest {
 
         // then
         assertSoftly(sut) {
-            koDoc shouldBeEqualTo null
-            hasKoDoc() shouldBeEqualTo false
+            kDoc shouldBeEqualTo null
+            hasKoKDoc() shouldBeEqualTo false
         }
     }
 
