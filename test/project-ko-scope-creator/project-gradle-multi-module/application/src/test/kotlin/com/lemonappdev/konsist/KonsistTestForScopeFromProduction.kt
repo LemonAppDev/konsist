@@ -23,6 +23,8 @@ class KonsistTestForScopeFromProduction {
                 "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
                 "$libraryMainSourceSetDirectory/sample/LibClass.kt",
                 "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
             ),
         )
     }
@@ -41,6 +43,8 @@ class KonsistTestForScopeFromProduction {
                 "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
                 "$libraryMainSourceSetDirectory/sample/LibClass.kt",
                 "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
             ),
         )
     }
@@ -146,6 +150,10 @@ class KonsistTestForScopeFromProduction {
             .dropLastWhile { it != '/' }
             .dropLastWhile { it != '/' }
             .dropLast(1)
+
+        private val rootMainSourceSetDirectory = "$projectRootDirectory/src/main/kotlin/com/lemonappdev"
+
+        private val rootTestSourceSetDirectory = "$projectRootDirectory/src/test/kotlin/com/lemonappdev"
 
         private val applicationMainSourceSetDirectory = "$projectRootDirectory/application/src/main/kotlin/com/lemonappdev"
 

@@ -53,6 +53,10 @@ class KonsistTestForScopeFromDirectory {
             .dropLastWhile { it != '/' }
             .dropLast(1)
 
+        private val rootMainSourceSetDirectory = "$projectRootDirectory/src/main/kotlin/com/lemonappdev"
+
+        private val rootTestSourceSetDirectory = "$projectRootDirectory/src/test/kotlin/com/lemonappdev"
+
         private val applicationMainSourceSetDirectory = "$projectRootDirectory/application/src/main/kotlin/com/lemonappdev"
 
         private val applicationTestSourceSetDirectory = "$projectRootDirectory/application/src/test/kotlin/com/lemonappdev"

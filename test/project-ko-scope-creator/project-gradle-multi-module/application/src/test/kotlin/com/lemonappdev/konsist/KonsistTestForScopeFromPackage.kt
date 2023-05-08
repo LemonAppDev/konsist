@@ -21,6 +21,8 @@ class KonsistTestForScopeFromPackage {
                 "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$libraryMainSourceSetDirectory/sample/LibClass.kt",
                 "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
             ),
         )
     }
@@ -36,9 +38,8 @@ class KonsistTestForScopeFromPackage {
         sut.shouldBeEqualTo(
             listOf(
                 "$applicationMainSourceSetDirectory/sample/AppClass.kt",
-                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$libraryMainSourceSetDirectory/sample/LibClass.kt",
-                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
             ),
         )
     }
@@ -53,10 +54,9 @@ class KonsistTestForScopeFromPackage {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
                 "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
                 "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
             ),
         )
     }
@@ -167,6 +167,8 @@ class KonsistTestForScopeFromPackage {
                 "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootTestSourceSetDirectory/sample/data/RootDataClassTest.kt",
             ),
         )
     }
@@ -181,8 +183,9 @@ class KonsistTestForScopeFromPackage {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
-                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
+                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
             ),
         )
     }
@@ -197,8 +200,9 @@ class KonsistTestForScopeFromPackage {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+                "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                "$rootTestSourceSetDirectory/sample/data/RootDataClassTest.kt",
             ),
         )
     }
@@ -302,6 +306,10 @@ class KonsistTestForScopeFromPackage {
             .dropLastWhile { it != '/' }
             .dropLastWhile { it != '/' }
             .dropLast(1)
+
+        private val rootMainSourceSetDirectory = "$projectRootDirectory/src/main/kotlin/com/lemonappdev"
+
+        private val rootTestSourceSetDirectory = "$projectRootDirectory/src/test/kotlin/com/lemonappdev"
 
         private val applicationMainSourceSetDirectory = "$projectRootDirectory/application/src/main/kotlin/com/lemonappdev"
 

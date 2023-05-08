@@ -40,19 +40,17 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         var pathPrefix = if (module != null) {
-            "${pathProvider.rootProjectPath}/${module.lowercase()}"
+            "${pathProvider.rootProjectPath}/$module"
         } else {
-            "${pathProvider.rootProjectPath}/.*"
+            // Dot means any character, asterisk means occur any number of times
+            "${pathProvider.rootProjectPath}.*"
         }
 
         pathPrefix = if (sourceSet != null) {
-            "$pathPrefix/src/$sourceSet"
+            "$pathPrefix/src/$sourceSet/.*"
         } else {
             "$pathPrefix/src/.*"
         }
-
-        // Dot means any character, asterisk means occur any number of times
-        pathPrefix += "/.*"
 
         return projectKotlinFiles
             .filter { it.filePath.matches(Regex(pathPrefix)) }
