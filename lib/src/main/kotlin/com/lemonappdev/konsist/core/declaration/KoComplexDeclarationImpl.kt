@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.psi.KtClassOrObject
 
 internal abstract class KoComplexDeclarationImpl(
     private val ktClassOrObject: KtClassOrObject,
-    override val parent: KoBaseDeclaration?,
+    parent: KoBaseDeclaration,
 ) : KoDeclarationImpl(ktClassOrObject, parent),
     KoComplexDeclaration {
 
