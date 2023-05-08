@@ -70,7 +70,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromTest(module: String?, sourceSet: String?): KoScope {
         sourceSet?.let {
-            require(!isTestSourceSetName(it)) { "Source set '$it' is a production source set, but it should be test source set." }
+            require(isTestSourceSetName(it)) { "Source set '$it' is a production source set, but it should be test source set." }
         }
 
         val koFiles = getFiles(module, sourceSet).filter { it.isTestFile() }

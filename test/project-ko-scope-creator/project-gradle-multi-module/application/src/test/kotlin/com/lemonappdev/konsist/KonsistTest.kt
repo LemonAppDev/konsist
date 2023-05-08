@@ -476,7 +476,7 @@ class KonsistTest {
     }
 
     @Test
-    fun `scopeFromProduction, application module, source set main`() {
+    fun `scopeFromProduction, application module, main source set`() {
         // given
         val sut = Konsist
             .scopeFromProduction(module = "application", sourceSet = "main")
@@ -491,9 +491,8 @@ class KonsistTest {
         )
     }
 
-    // TODO: Error?
     @Test
-    fun `scopeFromProduction, application module, source set test`() {
+    fun `scopeFromProduction, application module, test source set`() {
         // given
         val func = { Konsist.scopeFromProduction(module = "application", sourceSet = "test") }
 
@@ -542,6 +541,118 @@ class KonsistTest {
         // then
         val message = "Source set 'test' is a test source set, but it should be production source set."
         func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+
+
+
+
+
+
+
+    @Test
+    fun `scopeFromTest`() {
+        // given
+        val sut = Konsist
+            .scopeFromTest()
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationTestSourceSetDirectory/konsist/KonsistTest.kt",
+                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromTest, application module`() {
+        // given
+        val sut = Konsist
+            .scopeFromTest(module = "application")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationTestSourceSetDirectory/konsist/KonsistTest.kt",
+                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromTest, application module, main source set`() {
+        // given
+        val func = { Konsist.scopeFromTest(module = "application", sourceSet = "main") }
+
+        // then
+        val message = "Source set 'main' is a production source set, but it should be test source set."
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromTest, application module, test source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromTest(module = "application", sourceSet = "test")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationTestSourceSetDirectory/konsist/KonsistTest.kt",
+                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromTest, library module`() {
+        // given
+        val sut = Konsist
+            .scopeFromTest(module = "library")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromTest, library module, main source set`() {
+        // given
+        val func = { Konsist.scopeFromTest(module = "library", sourceSet = "main") }
+
+        // then
+        val message = "Source set 'main' is a production source set, but it should be test source set."
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
+    fun `scopeFromTest, library module, test source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromTest(module = "library", sourceSet = "test")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+            ),
+        )
     }
 
     companion object {
