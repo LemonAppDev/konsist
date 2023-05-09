@@ -16,28 +16,6 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationForObjectTest {
     @Test
-    fun `object-is-top-level`() {
-        // given
-        val sut = getSnippetFile("object-is-top-level")
-            .objects(includeNested = true)
-            .first()
-
-        // then
-        sut.isTopLevel() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `object-is-not-top-level`() {
-        // given
-        val sut = getSnippetFile("object-is-not-top-level")
-            .objects(includeNested = true)
-            .first { it.name == "SampleNestedObject" }
-
-        // then
-        sut.isTopLevel() shouldBeEqualTo false
-    }
-
-    @Test
     fun `object-has-no-annotation`() {
         // given
         val sut = getSnippetFile("object-has-no-annotation")

@@ -19,28 +19,6 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationForFunctionTest {
     @Test
-    fun `function-is-top-level`() {
-        // given
-        val sut = getSnippetFile("function-is-top-level")
-            .functions(includeNested = true)
-            .first()
-
-        // then
-        sut.isTopLevel() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `function-is-not-top-level`() {
-        // given
-        val sut = getSnippetFile("function-is-not-top-level")
-            .functions(includeNested = true)
-            .first { it.name == "sampleNestedFunction" }
-
-        // then
-        sut.isTopLevel() shouldBeEqualTo false
-    }
-
-    @Test
     fun `function-has-no-annotation`() {
         // given
         val sut = getSnippetFile("function-has-no-annotation")

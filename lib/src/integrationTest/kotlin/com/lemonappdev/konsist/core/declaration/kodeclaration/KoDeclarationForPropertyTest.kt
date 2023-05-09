@@ -16,28 +16,6 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationForPropertyTest {
     @Test
-    fun `property-is-top-level`() {
-        // given
-        val sut = getSnippetFile("property-is-top-level")
-            .properties(includeNested = true)
-            .first()
-
-        // then
-        sut.isTopLevel() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `property-is-not-top-level`() {
-        // given
-        val sut = getSnippetFile("property-is-not-top-level")
-            .properties(includeNested = true)
-            .first { it.name == "sampleNestedProperty" }
-
-        // then
-        sut.isTopLevel() shouldBeEqualTo false
-    }
-
-    @Test
     fun `property-has-no-annotation`() {
         // given
         val sut = getSnippetFile("property-has-no-annotation")

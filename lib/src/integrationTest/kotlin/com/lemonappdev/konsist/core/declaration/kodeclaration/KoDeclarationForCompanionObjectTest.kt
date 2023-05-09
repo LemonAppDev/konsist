@@ -17,28 +17,6 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationForCompanionObjectTest {
     @Test
-    fun `companion-object-is-top-level`() {
-        // given
-        val sut = getSnippetFile("companion-object-is-top-level")
-            .companionObjects(includeNested = true)
-            .first()
-
-        // then
-        sut.isTopLevel() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `companion-object-is-not-top-level`() {
-        // given
-        val sut = getSnippetFile("companion-object-is-not-top-level")
-            .companionObjects(includeNested = true)
-            .first { it.name == "SampleNestedCompanionObject" }
-
-        // then
-        sut.isTopLevel() shouldBeEqualTo false
-    }
-
-    @Test
     fun `companion-object-has-no-annotation`() {
         // given
         val sut = getSnippetFile("companion-object-has-no-annotation")

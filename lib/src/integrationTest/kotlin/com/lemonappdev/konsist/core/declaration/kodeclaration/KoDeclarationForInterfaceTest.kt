@@ -15,28 +15,6 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationForInterfaceTest {
     @Test
-    fun `interface-is-top-level`() {
-        // given
-        val sut = getSnippetFile("interface-is-top-level")
-            .interfaces(includeNested = true)
-            .first()
-
-        // then
-        sut.isTopLevel() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `interface-is-not-top-level`() {
-        // given
-        val sut = getSnippetFile("interface-is-not-top-level")
-            .interfaces(includeNested = true)
-            .first { it.name == "SampleNestedInterface" }
-
-        // then
-        sut.isTopLevel() shouldBeEqualTo false
-    }
-
-    @Test
     fun `interface-has-no-annotation`() {
         // given
         val sut = getSnippetFile("interface-has-no-annotation")

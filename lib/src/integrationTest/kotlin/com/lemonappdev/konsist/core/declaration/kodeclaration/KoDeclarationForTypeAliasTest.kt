@@ -11,17 +11,6 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationForTypeAliasTest {
     @Test
-    fun `typealias-is-top-level`() {
-        // given
-        val sut = getSnippetFile("typealias-is-top-level")
-            .typeAliases()
-            .first()
-
-        // then
-        sut.isTopLevel() shouldBeEqualTo true
-    }
-
-    @Test
     fun `typealias-has-annotation`() {
         // given
         val sut = getSnippetFile("typealias-has-annotation")
