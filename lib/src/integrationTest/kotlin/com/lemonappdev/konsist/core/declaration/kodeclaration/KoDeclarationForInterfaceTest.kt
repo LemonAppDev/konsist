@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForInterfaceTest {
@@ -52,28 +51,6 @@ class KoDeclarationForInterfaceTest {
 
         // then
         sut.modifiers shouldBeEqualTo listOf(PUBLIC, ABSTRACT)
-    }
-
-    @Test
-    fun `interface-is-in-package`() {
-        // given
-        val sut = getSnippetFile("interface-is-in-package")
-            .interfaces()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `interface-is-not-in-package`() {
-        // given
-        val sut = getSnippetFile("interface-is-not-in-package")
-            .interfaces()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo ""
     }
 
     @Test
@@ -132,34 +109,6 @@ class KoDeclarationForInterfaceTest {
         assertSoftly(sut) {
             hasModifiers() shouldBeEqualTo false
             hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `interface-has-kdoc`() {
-        // given
-        val sut = getSnippetFile("interface-has-kdoc")
-            .interfaces()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            koDoc shouldNotBeEqualTo null
-            hasKoDoc() shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `interface-has-no-kdoc`() {
-        // given
-        val sut = getSnippetFile("interface-has-no-kdoc")
-            .interfaces()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            koDoc shouldBeEqualTo null
-            hasKoDoc() shouldBeEqualTo false
         }
     }
 

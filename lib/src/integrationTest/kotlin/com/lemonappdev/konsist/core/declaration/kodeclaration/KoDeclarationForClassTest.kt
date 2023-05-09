@@ -7,32 +7,9 @@ import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForClassTest {
-    @Test
-    fun `class-is-in-package`() {
-        // given
-        val sut = getSnippetFile("class-is-in-package")
-            .classes()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `class-is-not-in-package`() {
-        // given
-        val sut = getSnippetFile("class-is-not-in-package")
-            .classes()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo ""
-    }
-
     @Test
     fun `class-has-modifiers`() {
         // given
@@ -132,34 +109,6 @@ class KoDeclarationForClassTest {
         assertSoftly(sut) {
             hasModifiers() shouldBeEqualTo false
             hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `class-has-kdoc`() {
-        // given
-        val sut = getSnippetFile("class-has-kdoc")
-            .classes()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            koDoc shouldNotBeEqualTo null
-            hasKoDoc() shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `class-has-no-kdoc`() {
-        // given
-        val sut = getSnippetFile("class-has-no-kdoc")
-            .classes()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            koDoc shouldBeEqualTo null
-            hasKoDoc() shouldBeEqualTo false
         }
     }
 

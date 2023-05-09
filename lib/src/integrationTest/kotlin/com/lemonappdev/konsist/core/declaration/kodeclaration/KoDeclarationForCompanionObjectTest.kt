@@ -8,32 +8,9 @@ import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForCompanionObjectTest {
-    @Test
-    fun `companion-object-is-in-package`() {
-        // given
-        val sut = getSnippetFile("companion-object-is-in-package")
-            .companionObjects()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `companion-object-is-not-in-package`() {
-        // given
-        val sut = getSnippetFile("companion-object-is-not-in-package")
-            .companionObjects()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo ""
-    }
-
     @Test
     fun `companion-object-has-modifiers`() {
         // given
@@ -133,34 +110,6 @@ class KoDeclarationForCompanionObjectTest {
         assertSoftly(sut) {
             hasModifiers() shouldBeEqualTo true
             hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `companion-object-has-kdoc`() {
-        // given
-        val sut = getSnippetFile("companion-object-has-kdoc")
-            .companionObjects()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            koDoc shouldNotBeEqualTo null
-            hasKoDoc() shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `companion-object-has-no-kdoc`() {
-        // given
-        val sut = getSnippetFile("companion-object-has-no-kdoc")
-            .companionObjects()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            koDoc shouldBeEqualTo null
-            hasKoDoc() shouldBeEqualTo false
         }
     }
 

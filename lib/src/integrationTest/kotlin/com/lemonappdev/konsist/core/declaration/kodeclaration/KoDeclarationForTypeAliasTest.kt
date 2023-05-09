@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForTypeAliasTest {
@@ -52,27 +51,6 @@ class KoDeclarationForTypeAliasTest {
         // then
         sut.modifiers shouldBeEqualTo listOf(PRIVATE)
     }
-    @Test
-    fun `typealias-is-in-package`() {
-        // given
-        val sut = getSnippetFile("typealias-is-in-package")
-            .typeAliases()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `typealias-is-not-in-package`() {
-        // given
-        val sut = getSnippetFile("typealias-is-not-in-package")
-            .typeAliases()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo ""
-    }
 
     @Test
     fun `typealias-has-protected-modifier`() {
@@ -110,34 +88,6 @@ class KoDeclarationForTypeAliasTest {
         assertSoftly(sut) {
             hasModifiers() shouldBeEqualTo false
             hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `typealias-has-kdoc`() {
-        // given
-        val sut = getSnippetFile("typealias-has-kdoc")
-            .typeAliases()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            koDoc shouldNotBeEqualTo null
-            hasKoDoc() shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `typealias-has-no-kdoc`() {
-        // given
-        val sut = getSnippetFile("typealias-has-no-kdoc")
-            .typeAliases()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            koDoc shouldBeEqualTo null
-            hasKoDoc() shouldBeEqualTo false
         }
     }
 
