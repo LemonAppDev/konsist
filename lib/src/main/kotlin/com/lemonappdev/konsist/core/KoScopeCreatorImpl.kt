@@ -29,6 +29,10 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             .toKoFiles()
     }
 
+    override val rootProjectPath = pathProvider.rootProjectPath
+
+    override val rootProjectDirectory = pathProvider.rootProjectDirectory
+
     override fun scopeFromProject(moduleName: String?, sourceSetName: String?): KoScope {
         val koFiles = getFiles(moduleName, sourceSetName)
         return KoScopeImpl(koFiles)
