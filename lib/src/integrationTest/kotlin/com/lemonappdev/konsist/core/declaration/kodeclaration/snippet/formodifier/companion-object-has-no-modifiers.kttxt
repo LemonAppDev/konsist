@@ -1,0 +1,4 @@
+package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.formodifier
+
+companion object SampleCompanionObject {
+}

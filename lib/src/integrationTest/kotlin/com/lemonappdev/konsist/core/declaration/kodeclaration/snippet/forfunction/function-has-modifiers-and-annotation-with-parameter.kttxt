@@ -1,9 +1,0 @@
-package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forfunction
-
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
-
-class SampleClass {
-    @SampleAnnotationWithParameter(sampleParameter = " parameter description ")
-    protected open fun invoke() {
-    }
-}

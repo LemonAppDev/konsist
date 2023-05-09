@@ -1,3 +1,0 @@
-open class SampleClass {
-    protected open val sampleProperty: Boolean = true
-}
