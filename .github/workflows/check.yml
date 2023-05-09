@@ -194,3 +194,31 @@ jobs:
 
       - name: List Artifacts
         run: ls -R /home/runner/.m2/repository/
+
+  konsist-scope-creation-test:
+    name: Konsist Scope Creation Test
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: |
+          ./gradlew publishToMavenLocal \
+          -Pkonsist.releaseTarget=local \
+          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
+          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
+          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
+
+      - name : Konsist Scope Creation Test
+        run: cd test/konsist-scope-creation/ && ./gradlew test
