@@ -2,8 +2,8 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.ext.mapToFilePaths
-import com.lemonappdev.konsist.util.PathProvider.applicationMainSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.libraryMainSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.appMainSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.dataMainSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.rootMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
@@ -21,10 +21,10 @@ class KonsistTestForScopeFromProduction {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
-                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
-                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
-                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$appMainSourceSetDirectory/sample/AppClass.kt",
+                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$dataMainSourceSetDirectory/sample/LibClass.kt",
+                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
             ),
@@ -41,10 +41,10 @@ class KonsistTestForScopeFromProduction {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
-                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
-                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
-                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$appMainSourceSetDirectory/sample/AppClass.kt",
+                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$dataMainSourceSetDirectory/sample/LibClass.kt",
+                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
             ),
@@ -72,41 +72,41 @@ class KonsistTestForScopeFromProduction {
     }
 
     @Test
-    fun `scopeFromProduction, application module`() {
+    fun `scopeFromProduction, app module`() {
         // given
         val sut = Konsist
-            .scopeFromProduction(moduleName = "application")
+            .scopeFromProduction(moduleName = "app")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
-                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$appMainSourceSetDirectory/sample/AppClass.kt",
+                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
             ),
         )
     }
 
     @Test
-    fun `scopeFromProduction, application module, main source set`() {
+    fun `scopeFromProduction, app module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromProduction(moduleName = "application", sourceSetName = "main")
+            .scopeFromProduction(moduleName = "app", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
-                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$appMainSourceSetDirectory/sample/AppClass.kt",
+                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
             ),
         )
     }
 
     @Test
-    fun `scopeFromProduction, application module, integrationTest source set`() {
+    fun `scopeFromProduction, app module, integrationTest source set`() {
         // given
-        val func = { Konsist.scopeFromProduction(moduleName = "application", sourceSetName = "integrationTest") }
+        val func = { Konsist.scopeFromProduction(moduleName = "app", sourceSetName = "integrationTest") }
 
         // then
         val message = "Source set 'integrationTest' is a test source set, but it should be production source set."
@@ -114,9 +114,9 @@ class KonsistTestForScopeFromProduction {
     }
 
     @Test
-    fun `scopeFromProduction, application module, test source set`() {
+    fun `scopeFromProduction, app module, test source set`() {
         // given
-        val func = { Konsist.scopeFromProduction(moduleName = "application", sourceSetName = "test") }
+        val func = { Konsist.scopeFromProduction(moduleName = "app", sourceSetName = "test") }
 
         // then
         val message = "Source set 'test' is a test source set, but it should be production source set."
@@ -124,41 +124,41 @@ class KonsistTestForScopeFromProduction {
     }
 
     @Test
-    fun `scopeFromProduction, library module`() {
+    fun `scopeFromProduction, data module`() {
         // given
         val sut = Konsist
-            .scopeFromProduction(moduleName = "library")
+            .scopeFromProduction(moduleName = "data")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
-                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataMainSourceSetDirectory/sample/LibClass.kt",
+                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
             ),
         )
     }
 
     @Test
-    fun `scopeFromProduction, library module, main source set`() {
+    fun `scopeFromProduction, data module, main source set`() {
         // given
         val sut = Konsist
-            .scopeFromProduction(moduleName = "library", sourceSetName = "main")
+            .scopeFromProduction(moduleName = "data", sourceSetName = "main")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$libraryMainSourceSetDirectory/sample/LibClass.kt",
-                "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataMainSourceSetDirectory/sample/LibClass.kt",
+                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
             ),
         )
     }
 
     @Test
-    fun `scopeFromProduction, library module, integrationTest source set`() {
+    fun `scopeFromProduction, data module, integrationTest source set`() {
         // given
-        val func = { Konsist.scopeFromProduction(moduleName = "library", sourceSetName = "integrationTest") }
+        val func = { Konsist.scopeFromProduction(moduleName = "data", sourceSetName = "integrationTest") }
 
         // then
         val message = "Source set 'integrationTest' is a test source set, but it should be production source set."
@@ -166,9 +166,9 @@ class KonsistTestForScopeFromProduction {
     }
 
     @Test
-    fun `scopeFromProduction, library module, test source set`() {
+    fun `scopeFromProduction, data module, test source set`() {
         // given
-        val func = { Konsist.scopeFromProduction(moduleName = "library", sourceSetName = "test") }
+        val func = { Konsist.scopeFromProduction(moduleName = "data", sourceSetName = "test") }
 
         // then
         val message = "Source set 'test' is a test source set, but it should be production source set."
