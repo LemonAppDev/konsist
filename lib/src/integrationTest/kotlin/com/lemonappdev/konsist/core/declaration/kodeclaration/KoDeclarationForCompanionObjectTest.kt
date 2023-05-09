@@ -6,12 +6,8 @@ import com.lemonappdev.konsist.api.KoModifier.FINAL
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
-import com.lemonappdev.konsist.testdata.NonExistingAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
-import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldHaveSize
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 

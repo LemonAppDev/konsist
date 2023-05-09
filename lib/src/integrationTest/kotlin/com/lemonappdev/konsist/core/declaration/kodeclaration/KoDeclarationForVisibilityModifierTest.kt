@@ -35,6 +35,7 @@ class KoDeclarationForVisibilityModifierTest {
         }
     }
 
+    @Suppress("detekt.LongParameterList")
     @ParameterizedTest
     @MethodSource("provideValuesForTypeAlias")
     fun `visibility-modifiers-for-type-aliases`(
@@ -60,6 +61,7 @@ class KoDeclarationForVisibilityModifierTest {
         }
     }
 
+    @Suppress("detekt.LongParameterList")
     @ParameterizedTest
     @MethodSource("provideValuesForPrimaryConstructor")
     fun `visibility-modifiers-for-primary-constructor`(
@@ -86,6 +88,7 @@ class KoDeclarationForVisibilityModifierTest {
         }
     }
 
+    @Suppress("detekt.LongParameterList")
     @ParameterizedTest
     @MethodSource("provideValuesForSecondaryConstructor")
     fun `visibility-modifiers-for-secondary-constructor`(

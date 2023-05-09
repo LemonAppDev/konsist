@@ -5,28 +5,10 @@ import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldHaveSize
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForTypeAliasTest {
-    @Test
-    fun `typealias-has-annotation`() {
-        // given
-        val sut = getSnippetFile("typealias-has-annotation")
-            .typeAliases()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            annotations shouldHaveSize 1
-            hasAnnotations("SampleAnnotation") shouldBeEqualTo true
-            hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
-            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
-            hasAnnotations("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
-        }
-    }
-
     @Test
     fun `typealias-has-modifier`() {
         // given

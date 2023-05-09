@@ -5,8 +5,10 @@ import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -36,7 +38,7 @@ class KoDeclarationForAnnotationTest {
         fileName: String,
         declarationName: String,
         name: String,
-        value: Boolean
+        value: Boolean,
     ) {
         // given
         val sut = getSnippetFile(fileName)
@@ -54,7 +56,7 @@ class KoDeclarationForAnnotationTest {
         declarationName: String,
         name1: String,
         name2: String,
-        value: Boolean
+        value: Boolean,
     ) {
         // given
         val sut = getSnippetFile(fileName)
@@ -71,7 +73,7 @@ class KoDeclarationForAnnotationTest {
         fileName: String,
         declarationName: String,
         name: KClass<*>,
-        value: Boolean
+        value: Boolean,
     ) {
         // given
         val sut = getSnippetFile(fileName)
@@ -89,7 +91,7 @@ class KoDeclarationForAnnotationTest {
         declarationName: String,
         name1: KClass<*>,
         name2: KClass<*>,
-        value: Boolean
+        value: Boolean,
     ) {
         // given
         val sut = getSnippetFile(fileName)
@@ -98,6 +100,140 @@ class KoDeclarationForAnnotationTest {
 
         // then
         sut.hasAnnotationsOf(name1, name2) shouldBeEqualTo value
+    }
+
+    @Test
+    fun `primary-constructor-has-no-annotation`() {
+        // given
+        val sut = getSnippetFile("primary-constructor-has-no-annotation")
+            .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        sut?.let {
+            it.annotations.isEmpty() shouldBeEqualTo true
+            it.hasAnnotations("SampleAnnotation") shouldBeEqualTo false
+            it.hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `primary-constructor-has-two-annotations`() {
+        // given
+        val sut = getSnippetFile("primary-constructor-has-two-annotations")
+            .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        sut?.let {
+            it.annotations shouldHaveSize 2
+            it.hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
+            it.hasAnnotations("SampleAnnotation2") shouldBeEqualTo true
+            it.hasAnnotations("SampleAnnotation1", "SampleAnnotation1") shouldBeEqualTo true
+            it.hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
+            it.hasAnnotations("SampleAnnotation1", "NonExistingAnnotation") shouldBeEqualTo false
+            it.hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
+            it.hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation2") shouldBeEqualTo true
+            it.hasAnnotations("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `primary-constructor-has-two-annotations-of-kclass`() {
+        // given
+        val sut = getSnippetFile("primary-constructor-has-two-annotations-of-kclass")
+            .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        sut?.let {
+            it.annotations shouldHaveSize 2
+            it.hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            it.hasAnnotationsOf(SampleAnnotation2::class) shouldBeEqualTo true
+            it.hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation1::class) shouldBeEqualTo true
+            it.hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            it.hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `secondary-constructor-has-no-annotation`() {
+        // given
+        val sut = getSnippetFile("secondary-constructor-has-no-annotation")
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        sut.let {
+            it.annotations.isEmpty() shouldBeEqualTo true
+            it.hasAnnotations("SampleAnnotation") shouldBeEqualTo false
+            it.hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `secondary-constructor-has-two-annotations`() {
+        // given
+        val sut = getSnippetFile("secondary-constructor-has-two-annotations")
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        sut.let {
+            it.annotations shouldHaveSize 2
+            it.hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
+            it.hasAnnotations("SampleAnnotation2") shouldBeEqualTo true
+            it.hasAnnotations("SampleAnnotation1", "SampleAnnotation1") shouldBeEqualTo true
+            it.hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
+            it.hasAnnotations("SampleAnnotation1", "NonExistingAnnotation") shouldBeEqualTo false
+            it.hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
+            it.hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation2") shouldBeEqualTo true
+            it.hasAnnotations("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `secondary-constructor-has-two-annotations-of-kclass`() {
+        // given
+        val sut = getSnippetFile("secondary-constructor-has-two-annotations-of-kclass")
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            annotations shouldHaveSize 2
+            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
+            hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `typealias-has-annotation`() {
+        // given
+        val sut = getSnippetFile("typealias-has-annotation")
+            .typeAliases()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            annotations shouldHaveSize 1
+            hasAnnotations("SampleAnnotation") shouldBeEqualTo true
+            hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
+            hasAnnotations("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
+        }
     }
 
     private fun getSnippetFile(fileName: String) =
@@ -139,8 +275,18 @@ class KoDeclarationForAnnotationTest {
             arguments("class-has-two-annotations", "SampleClass", "NonExistingAnnotation", false),
             arguments("companion-object-has-annotation", "SampleCompanionObject", "SampleAnnotation", true),
             arguments("companion-object-has-annotation", "SampleCompanionObject", "NonExistingAnnotation", false),
-            arguments("companion-object-has-annotation", "SampleCompanionObject", "com.lemonappdev.konsist.testdata.SampleAnnotation", true),
-            arguments("companion-object-has-annotation", "SampleCompanionObject", "com.lemonappdev.konsist.testdata.NonExistingAnnotation", false),
+            arguments(
+                "companion-object-has-annotation",
+                "SampleCompanionObject",
+                "com.lemonappdev.konsist.testdata.SampleAnnotation",
+                true,
+            ),
+            arguments(
+                "companion-object-has-annotation",
+                "SampleCompanionObject",
+                "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
+                false,
+            ),
             arguments("companion-object-has-two-annotations", "SampleCompanionObject", "SampleAnnotation1", true),
             arguments("companion-object-has-two-annotations", "SampleCompanionObject", "SampleAnnotation2", true),
             arguments("companion-object-has-two-annotations", "SampleCompanionObject", "NonExistingAnnotation", false),
@@ -231,8 +377,20 @@ class KoDeclarationForAnnotationTest {
         fun provideValuesForDeclarationHasTwoAnnotationsKClass() = listOf(
             arguments("class-has-two-annotations", "SampleClass", SampleAnnotation1::class, SampleAnnotation2::class, true),
             arguments("class-has-two-annotations", "SampleClass", SampleAnnotation1::class, NonExistingAnnotation::class, false),
-            arguments("companion-object-has-two-annotations", "SampleCompanionObject", SampleAnnotation1::class, SampleAnnotation2::class, true),
-            arguments("companion-object-has-two-annotations", "SampleCompanionObject", SampleAnnotation1::class, NonExistingAnnotation::class, false),
+            arguments(
+                "companion-object-has-two-annotations",
+                "SampleCompanionObject",
+                SampleAnnotation1::class,
+                SampleAnnotation2::class,
+                true,
+            ),
+            arguments(
+                "companion-object-has-two-annotations",
+                "SampleCompanionObject",
+                SampleAnnotation1::class,
+                NonExistingAnnotation::class,
+                false,
+            ),
             arguments("function-has-two-annotations", "sampleFunction", SampleAnnotation1::class, SampleAnnotation2::class, true),
             arguments("function-has-two-annotations", "sampleFunction", SampleAnnotation1::class, NonExistingAnnotation::class, false),
             arguments("interface-has-two-annotations", "SampleInterface", SampleAnnotation1::class, SampleAnnotation2::class, true),
