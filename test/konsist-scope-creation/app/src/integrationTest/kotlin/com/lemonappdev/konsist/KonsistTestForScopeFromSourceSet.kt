@@ -6,15 +6,37 @@ import com.lemonappdev.konsist.util.PathProvider.appIntegrationTestSourceSetDire
 import com.lemonappdev.konsist.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.dataMainSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.dataTestSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.rootMainSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.rootTestSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KonsistTestForScopeFromModule {
+class KonsistTestForScopeFromSourceSet {
     @Test
-    fun `scopeFromModule for app module`() {
+    fun `scopeFromModule for main source set`() {
         // given
         val sut = Konsist
-            .scopeFromModule("app")
+            .scopeFromSourceSet("main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$appMainSourceSetDirectory/sample/AppClass.kt",
+                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$dataMainSourceSetDirectory/sample/LibClass.kt",
+                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromModule for integrationTest source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromSourceSet("integrationTest")
             .mapToFilePaths()
 
         // then
@@ -34,26 +56,25 @@ class KonsistTestForScopeFromModule {
                 "$appIntegrationTestSourceSetDirectory/konsist/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
-                "$appMainSourceSetDirectory/sample/AppClass.kt",
-                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
             ),
         )
     }
 
     @Test
-    fun `scopeFromModule for data module`() {
+    fun `scopeFromModule for test source set`() {
         // given
         val sut = Konsist
-            .scopeFromModule("data")
+            .scopeFromSourceSet("test")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$dataMainSourceSetDirectory/sample/LibClass.kt",
-                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                "$rootTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
+                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
+                "$rootTestSourceSetDirectory/sample/data/RootDataClassTest.kt",
             ),
         )
     }

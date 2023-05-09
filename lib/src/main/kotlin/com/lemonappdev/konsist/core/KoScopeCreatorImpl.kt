@@ -43,22 +43,27 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    private fun getFiles(module: String? = null, sourceSet: String? = null): Sequence<KoFileDeclaration> {
+    override fun scopeFromSourceSet(sourceSetName: String): KoScope {
+        val koFiles = getFiles(sourceSetName = sourceSetName)
+        return KoScopeImpl(koFiles)
+    }
+
+    private fun getFiles(moduleName: String? = null, sourceSetName: String? = null): Sequence<KoFileDeclaration> {
         val localProjectKotlinFiles = projectKotlinFiles
             .filterNot { isBuildPath(it.filePath) }
 
-        if (module == null && sourceSet == null) {
+        if (moduleName == null && sourceSetName == null) {
             return localProjectKotlinFiles
         }
 
-        var pathPrefix = if (module != null) {
-            "$rootProjectPath/$module"
+        var pathPrefix = if (moduleName != null) {
+            "$rootProjectPath/$moduleName"
         } else {
             "$rootProjectPath.*"
         }
 
-        pathPrefix = if (sourceSet != null) {
-            "$pathPrefix/src/$sourceSet/.*"
+        pathPrefix = if (sourceSetName != null) {
+            "$pathPrefix/src/$sourceSetName/.*"
         } else {
             "$pathPrefix/src/.*"
         }
