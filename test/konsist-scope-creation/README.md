@@ -1,4 +1,4 @@
-# Test KoScope
+# Test Konsist Scope Creation
 
 This project is used to test the `Konsist` class.
 

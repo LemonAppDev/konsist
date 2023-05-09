@@ -1,4 +1,4 @@
-rootProject.name = "project-multi-module"
+rootProject.name = "konsist-scope-creation"
 
 include(
     ":application",
