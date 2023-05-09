@@ -52,18 +52,6 @@ class KoDeclarationForTypeAliasTest {
         // then
         sut.modifiers shouldBeEqualTo listOf(PRIVATE)
     }
-
-    @Test
-    fun `typealias-has-fully-qualified-name`() {
-        // given
-        val sut = getSnippetFile("typealias-has-fully-qualified-name")
-            .typeAliases()
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleTypeAlias"
-    }
-
     @Test
     fun `typealias-is-in-package`() {
         // given

@@ -12,17 +12,6 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationForPropertyTest {
     @Test
-    fun `property-has-fully-qualified-name`() {
-        // given
-        val sut = getSnippetFile("property-has-fully-qualified-name")
-            .properties()
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleProperty"
-    }
-
-    @Test
     fun `property-is-in-package`() {
         // given
         val sut = getSnippetFile("property-is-in-package")

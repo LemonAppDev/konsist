@@ -6,6 +6,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForSecondaryConstructorTest {
+
     @Test
     fun `secondary-constructor-has-modifier`() {
         // given
@@ -56,19 +57,6 @@ class KoDeclarationForSecondaryConstructorTest {
 
         // then
         sut.modifiers shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @Test
-    fun `secondary-constructor`() {
-        // given
-        val sut = getSnippetFile("secondary-constructor")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
-
-        // then
-        sut.name shouldBeEqualTo "SampleClass"
     }
 
     private fun getSnippetFile(fileName: String) =

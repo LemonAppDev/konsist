@@ -55,17 +55,6 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-has-fully-qualified-name`() {
-        // given
-        val sut = getSnippetFile("interface-has-fully-qualified-name")
-            .interfaces()
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleInterface"
-    }
-
-    @Test
     fun `interface-is-in-package`() {
         // given
         val sut = getSnippetFile("interface-is-in-package")

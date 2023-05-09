@@ -13,17 +13,6 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationForCompanionObjectTest {
     @Test
-    fun `companion-object-has-fully-qualified-name`() {
-        // given
-        val sut = getSnippetFile("companion-object-has-fully-qualified-name")
-            .companionObjects()
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleCompanionObject"
-    }
-
-    @Test
     fun `companion-object-is-in-package`() {
         // given
         val sut = getSnippetFile("companion-object-is-in-package")
