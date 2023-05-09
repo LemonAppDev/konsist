@@ -64,7 +64,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
         sourceSetName?.let {
-            require(!isTestSourceSetName(it)) { "Source set '$it' is a test source set, but it should be production source set." }
+            require(!isTestSourceSet(it)) { "Source set '$it' is a test source set, but it should be production source set." }
         }
 
         val koFiles = getFiles(moduleName, sourceSetName).filterNot { it.isTestFile() }
@@ -74,7 +74,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromTest(moduleName: String?, sourceSetName: String?): KoScope {
         sourceSetName?.let {
-            require(isTestSourceSetName(it)) { "Source set '$it' is a production source set, but it should be test source set." }
+            require(isTestSourceSet(it)) { "Source set '$it' is a production source set, but it should be test source set." }
         }
 
         val koFiles = getFiles(moduleName, sourceSetName).filter { it.isTestFile() }
@@ -133,9 +133,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return localPath.contains("/$TEST_NAME_IN_PATH") || localPath.contains("$TEST_NAME_IN_PATH/")
     }
 
-    private fun isTestSourceSetName(path: String): Boolean {
-        val localPath = path.lowercase()
-        return localPath.contains(TEST_NAME_IN_PATH) || localPath.contains(TEST_NAME_IN_PATH)
+    private fun isTestSourceSet(name: String): Boolean {
+        val lowercaseName = name.lowercase()
+        return lowercaseName.matches(Regex(".*$TEST_NAME_IN_PATH.*"))
     }
 
     private fun KoFileDeclaration.isTestFile(): Boolean {

@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist
 
-import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.ext.mapToFilePaths
 import com.lemonappdev.konsist.util.PathProvider.applicationMainSourceSetDirectory
@@ -53,6 +52,16 @@ class KonsistTestForScopeFromProduction {
     }
 
     @Test
+    fun `scopeFromProduction, integrationTest source set`() {
+        // given
+        val func = { Konsist.scopeFromProduction(sourceSetName = "integrationTest") }
+
+        // then
+        val message = "Source set 'integrationTest' is a test source set, but it should be production source set."
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
     fun `scopeFromProduction, test source set`() {
         // given
         val func = { Konsist.scopeFromProduction(sourceSetName = "test") }
@@ -95,6 +104,16 @@ class KonsistTestForScopeFromProduction {
     }
 
     @Test
+    fun `scopeFromProduction, application module, integrationTest source set`() {
+        // given
+        val func = { Konsist.scopeFromProduction(moduleName = "application", sourceSetName = "integrationTest") }
+
+        // then
+        val message = "Source set 'integrationTest' is a test source set, but it should be production source set."
+        func shouldThrow IllegalArgumentException::class withMessage message
+    }
+
+    @Test
     fun `scopeFromProduction, application module, test source set`() {
         // given
         val func = { Konsist.scopeFromProduction(moduleName = "application", sourceSetName = "test") }
@@ -134,6 +153,16 @@ class KonsistTestForScopeFromProduction {
                 "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
             ),
         )
+    }
+
+    @Test
+    fun `scopeFromProduction, library module, integrationTest source set`() {
+        // given
+        val func = { Konsist.scopeFromProduction(moduleName = "library", sourceSetName = "integrationTest") }
+
+        // then
+        val message = "Source set 'integrationTest' is a test source set, but it should be production source set."
+        func shouldThrow IllegalArgumentException::class withMessage message
     }
 
     @Test

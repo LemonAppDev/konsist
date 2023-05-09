@@ -2,8 +2,8 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.ext.mapToFilePaths
+import com.lemonappdev.konsist.util.PathProvider.applicationIntegrationTestSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.applicationMainSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.applicationTestSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.libraryMainSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.libraryTestSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.rootMainSourceSetDirectory
@@ -22,20 +22,20 @@ class KonsistTestForScopeFromProject {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromPackage.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProduction.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/util/PathProvider.kt",
+                "$applicationIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$applicationIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$applicationMainSourceSetDirectory/sample/AppClass.kt",
                 "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromPackage.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProduction.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
-                "$applicationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
-                "$applicationTestSourceSetDirectory/konsist/util/PathProvider.kt",
-                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$libraryMainSourceSetDirectory/sample/LibClass.kt",
                 "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
@@ -88,6 +88,32 @@ class KonsistTestForScopeFromProject {
     }
 
     @Test
+    fun `scopeFromProject for integrationTest source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(sourceSetName = "integrationTest")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromPackage.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProduction.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/util/PathProvider.kt",
+                "$applicationIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$applicationIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
     fun `scopeFromProject for test source set`() {
         // given
         val sut = Konsist
@@ -97,18 +123,6 @@ class KonsistTestForScopeFromProject {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromPackage.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProduction.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
-                "$applicationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
-                "$applicationTestSourceSetDirectory/konsist/util/PathProvider.kt",
-                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$libraryTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$libraryTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
                 "$rootTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
@@ -135,6 +149,32 @@ class KonsistTestForScopeFromProject {
     }
 
     @Test
+    fun `scopeFromProject for application module and integrationTest source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(moduleName = "application", sourceSetName = "integrationTest")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromPackage.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProduction.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
+                "$applicationIntegrationTestSourceSetDirectory/konsist/util/PathProvider.kt",
+                "$applicationIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
+                "$applicationIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
     fun `scopeFromProject for application module and test source set`() {
         // given
         val sut = Konsist
@@ -142,22 +182,7 @@ class KonsistTestForScopeFromProject {
             .mapToFilePaths()
 
         // then
-        sut.shouldBeEqualTo(
-            listOf(
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromPackage.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProduction.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
-                "$applicationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
-                "$applicationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
-                "$applicationTestSourceSetDirectory/konsist/util/PathProvider.kt",
-                "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
-                "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
-            ),
-        )
+        sut.shouldBeEqualTo(emptyList())
     }
 
     @Test
@@ -174,6 +199,17 @@ class KonsistTestForScopeFromProject {
                 "$libraryMainSourceSetDirectory/sample/data/LibDataClass.kt",
             ),
         )
+    }
+
+    @Test
+    fun `scopeFromProject for library module and integrationTest source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(moduleName = "library", sourceSetName = "integrationTest")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(emptyList())
     }
 
     @Test
