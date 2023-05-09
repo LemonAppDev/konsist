@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet
+package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.assertSoftly
@@ -8,11 +8,10 @@ import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class KoDeclarationForVisibilityModifierTest {
-
     @Suppress("detekt.LongParameterList")
     @ParameterizedTest
-    @MethodSource("provideValuesForVisibilityModifiers")
-    fun `visibility-modifiers`(
+    @MethodSource("provideValuesForDeclaration")
+    fun `visibility-modifiers-for-declarations`(
         fileName: String,
         declarationName: String,
         isPublicByDefault: Boolean,
@@ -36,10 +35,91 @@ class KoDeclarationForVisibilityModifierTest {
         }
     }
 
+    @ParameterizedTest
+    @MethodSource("provideValuesForTypeAlias")
+    fun `visibility-modifiers-for-type-aliases`(
+        fileName: String,
+        isPublicByDefault: Boolean,
+        isPublic: Boolean,
+        isPrivate: Boolean,
+        isProtected: Boolean,
+        isInternal: Boolean,
+    ) {
+        // given
+        val sut = getSnippetFile(fileName)
+            .typeAliases()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            isPublicOrDefault() shouldBeEqualTo isPublicByDefault
+            hasPublicModifier() shouldBeEqualTo isPublic
+            hasPrivateModifier() shouldBeEqualTo isPrivate
+            hasProtectedModifier() shouldBeEqualTo isProtected
+            hasInternalModifier() shouldBeEqualTo isInternal
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForPrimaryConstructor")
+    fun `visibility-modifiers-for-primary-constructor`(
+        fileName: String,
+        isPublicByDefault: Boolean,
+        isPublic: Boolean,
+        isPrivate: Boolean,
+        isProtected: Boolean,
+        isInternal: Boolean,
+    ) {
+        // given
+        val sut = getSnippetFile(fileName)
+            .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        assertSoftly(sut) {
+            it?.isPublicOrDefault() shouldBeEqualTo isPublicByDefault
+            it?.hasPublicModifier() shouldBeEqualTo isPublic
+            it?.hasPrivateModifier() shouldBeEqualTo isPrivate
+            it?.hasProtectedModifier() shouldBeEqualTo isProtected
+            it?.hasInternalModifier() shouldBeEqualTo isInternal
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForSecondaryConstructor")
+    fun `visibility-modifiers-for-secondary-constructor`(
+        fileName: String,
+        isPublicByDefault: Boolean,
+        isPublic: Boolean,
+        isPrivate: Boolean,
+        isProtected: Boolean,
+        isInternal: Boolean,
+    ) {
+        // given
+        val sut = getSnippetFile(fileName)
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            it.isPublicOrDefault() shouldBeEqualTo isPublicByDefault
+            it.hasPublicModifier() shouldBeEqualTo isPublic
+            it.hasPrivateModifier() shouldBeEqualTo isPrivate
+            it.hasProtectedModifier() shouldBeEqualTo isProtected
+            it.hasInternalModifier() shouldBeEqualTo isInternal
+        }
+    }
+
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kodeclaration/snippet/forvisibilitymodifier/", fileName)
+
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForVisibilityModifiers() = listOf(
+        fun provideValuesForDeclaration() = listOf(
             arguments("class-has-no-visibility-modifier", "SampleClass", true, false, false, false, false),
             arguments("class-has-public-visibility-modifier", "SampleClass", true, true, false, false, false),
             arguments("class-has-private-visibility-modifier", "SampleClass", false, false, true, false, false),
@@ -71,8 +151,35 @@ class KoDeclarationForVisibilityModifierTest {
             arguments("property-has-protected-visibility-modifier", "sampleProperty", false, false, false, true, false),
             arguments("property-has-internal-visibility-modifier", "sampleProperty", false, false, false, false, true),
         )
-    }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kodeclaration/snippet/forvisibilitymodifier/", fileName)
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForTypeAlias() = listOf(
+            arguments("typealias-has-no-visibility-modifier", true, false, false, false, false),
+            arguments("typealias-has-public-visibility-modifier", true, true, false, false, false),
+            arguments("typealias-has-private-visibility-modifier", false, false, true, false, false),
+            arguments("typealias-has-protected-visibility-modifier", false, false, false, true, false),
+            arguments("typealias-has-internal-visibility-modifier", false, false, false, false, true),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForPrimaryConstructor() = listOf(
+            arguments("primary-constructor-has-no-visibility-modifier", true, false, false, false, false),
+            arguments("primary-constructor-has-public-visibility-modifier", true, true, false, false, false),
+            arguments("primary-constructor-has-private-visibility-modifier", false, false, true, false, false),
+            arguments("primary-constructor-has-protected-visibility-modifier", false, false, false, true, false),
+            arguments("primary-constructor-has-internal-visibility-modifier", false, false, false, false, true),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForSecondaryConstructor() = listOf(
+            arguments("secondary-constructor-has-no-visibility-modifier", true, false, false, false, false),
+            arguments("secondary-constructor-has-public-visibility-modifier", true, true, false, false, false),
+            arguments("secondary-constructor-has-private-visibility-modifier", false, false, true, false, false),
+            arguments("secondary-constructor-has-protected-visibility-modifier", false, false, false, true, false),
+            arguments("secondary-constructor-has-internal-visibility-modifier", false, false, false, false, true),
+        )
+    }
 }
