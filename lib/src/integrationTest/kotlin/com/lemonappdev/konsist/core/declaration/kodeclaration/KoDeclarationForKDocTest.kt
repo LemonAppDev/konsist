@@ -24,7 +24,7 @@ class KoDeclarationForKDocTest {
             .first { it.name == declarationName }
 
         // then
-        sut.hasKoDoc() shouldBeEqualTo hasKDoc
+        sut.hasKDoc() shouldBeEqualTo hasKDoc
     }
 
     @Test
@@ -36,8 +36,8 @@ class KoDeclarationForKDocTest {
 
         // then
         assertSoftly(sut) {
-            koDoc shouldNotBeEqualTo null
-            hasKoDoc() shouldBeEqualTo true
+            kDoc shouldNotBeEqualTo null
+            hasKDoc() shouldBeEqualTo true
         }
     }
 
@@ -50,8 +50,8 @@ class KoDeclarationForKDocTest {
 
         // then
         assertSoftly(sut) {
-            koDoc shouldBeEqualTo null
-            hasKoDoc() shouldBeEqualTo false
+            kDoc shouldBeEqualTo null
+            hasKDoc() shouldBeEqualTo false
         }
     }
 
