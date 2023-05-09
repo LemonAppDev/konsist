@@ -1,5 +1,1 @@
-class RootBuildKotlinClass {
-    fun generatedFun() {
-        println("generatedFun")
-    }
-}
+class RootBuildKotlinClass
