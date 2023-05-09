@@ -2,6 +2,7 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.ext.mapToFilePaths
 import com.lemonappdev.konsist.util.PathProvider.applicationMainSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.applicationTestSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.libraryMainSourceSetDirectory
@@ -32,6 +33,7 @@ class KonsistTestForScopeFromProject {
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
+                "$applicationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
                 "$applicationTestSourceSetDirectory/konsist/util/PathProvider.kt",
                 "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
@@ -104,6 +106,7 @@ class KonsistTestForScopeFromProject {
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
+                "$applicationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
                 "$applicationTestSourceSetDirectory/konsist/util/PathProvider.kt",
                 "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
@@ -150,6 +153,7 @@ class KonsistTestForScopeFromProject {
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
+                "$applicationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
                 "$applicationTestSourceSetDirectory/konsist/util/PathProvider.kt",
                 "$applicationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$applicationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
@@ -188,8 +192,4 @@ class KonsistTestForScopeFromProject {
             ),
         )
     }
-
-    private fun KoScope.mapToFilePaths() = files()
-        .toList()
-        .map { it.filePath }
 }

@@ -2,6 +2,7 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.ext.mapToFilePaths
 import com.lemonappdev.konsist.util.PathProvider.applicationMainSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.libraryMainSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.rootMainSourceSetDirectory
@@ -144,8 +145,4 @@ class KonsistTestForScopeFromProduction {
         val message = "Source set 'test' is a test source set, but it should be production source set."
         func shouldThrow IllegalArgumentException::class withMessage message
     }
-
-    private fun KoScope.mapToFilePaths() = files()
-        .toList()
-        .map { it.filePath }
 }

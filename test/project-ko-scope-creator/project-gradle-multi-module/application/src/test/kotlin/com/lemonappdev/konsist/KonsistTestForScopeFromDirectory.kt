@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist
 
-import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.ext.mapToFilePaths
 import com.lemonappdev.konsist.util.PathProvider.applicationMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
@@ -44,8 +44,4 @@ class KonsistTestForScopeFromDirectory {
         val message = "Path is a file, but should be a directory: $applicationMainSourceSetDirectory/sample/AppClass.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
-
-    private fun KoScope.mapToFilePaths() = files()
-        .toList()
-        .map { it.filePath }
 }
