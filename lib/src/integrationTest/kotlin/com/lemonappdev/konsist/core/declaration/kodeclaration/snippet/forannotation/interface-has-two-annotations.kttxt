@@ -1,7 +1,9 @@
+package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forannotation
+
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
 
 @SampleAnnotation1
 @SampleAnnotation2
-companion object SampleCompanionObject {
+interface SampleInterface {
 }

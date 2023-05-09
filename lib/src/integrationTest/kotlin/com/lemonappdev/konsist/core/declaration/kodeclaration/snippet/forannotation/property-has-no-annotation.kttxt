@@ -1,0 +1,3 @@
+package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forannotation
+
+val sampleProperty: Boolean = true
