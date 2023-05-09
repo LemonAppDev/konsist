@@ -1,11 +1,5 @@
-# Operating System Files
-
-*.DS_Store
-Thumbs.db
-*~
-.#*
-#*
-*#
+# Local configuration file
+local.properties
 
 # Build Files #
 
@@ -14,27 +8,15 @@ target
 build/
 .gradle
 
-# Eclipse Project Files #
-
-.classpath
-.project
-.settings
-.attach_pid*
-
-# IntelliJ IDEA Files #
-
+# IntelliJ IDEA Files
+.idea
+*.iws
 *.iml
 *.ipr
-*.iws
-*.idea
 
 # VS Code #
 .vscode/
 
-# Spring Bootstrap artifacts
-
-dependency-reduced-pom.xml
-
-mem*.db
-
-README.html
+# Operating System Files
+**/.DS_Store
+Thumbs.db

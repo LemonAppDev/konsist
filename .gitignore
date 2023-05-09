@@ -1,24 +1,22 @@
-.gradle
-
 # Local configuration file
 local.properties
 
-build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Build Files #
 
-### IntelliJ IDEA ###
+bin
+target
+build/
+.gradle
+
+# IntelliJ IDEA Files
 .idea
 *.iws
 *.iml
 *.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
 
-### VS Code ###
+# VS Code #
 .vscode/
 
-### MacOS ###
+# Operating System Files
 **/.DS_Store
+Thumbs.db
