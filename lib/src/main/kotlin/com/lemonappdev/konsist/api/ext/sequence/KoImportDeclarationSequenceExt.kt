@@ -21,3 +21,13 @@ fun Sequence<KoImportDeclaration>.withoutAlias(vararg names: String): Sequence<K
         else -> names.none { name -> it.alias == name }
     }
 }
+
+/**
+ * Sequence containing all declarations that have a wildcard.
+ */
+fun Sequence<KoImportDeclaration>.withWildcard(): Sequence<KoImportDeclaration> = filter { it.isWildcard }
+
+/**
+ * Sequence containing all declarations that don't have a wildcard.
+ */
+fun Sequence<KoImportDeclaration>.withoutWildcard(): Sequence<KoImportDeclaration> = filterNot { it.isWildcard }

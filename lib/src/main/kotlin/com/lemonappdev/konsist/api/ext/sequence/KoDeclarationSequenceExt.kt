@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.KoDocTag
+import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
@@ -166,30 +166,30 @@ fun <T : KoDeclaration> Sequence<T>.withoutPackage(vararg packages: String): Seq
 /**
  * Sequence containing declarations that have KDoc.
  */
-fun <T : KoDeclaration> Sequence<T>.withKoDoc(): Sequence<T> = filter { it.hasKoDoc() }
+fun <T : KoDeclaration> Sequence<T>.withKDoc(): Sequence<T> = filter { it.hasKDoc() }
 
 /**
  * Sequence containing declarations that don't have the KDoc.
  */
-fun <T : KoDeclaration> Sequence<T>.withoutKoDoc(): Sequence<T> = filterNot { it.hasKoDoc() }
+fun <T : KoDeclaration> Sequence<T>.withoutKDoc(): Sequence<T> = filterNot { it.hasKDoc() }
 
 /**
  * Sequence containing declarations that have KDoc tags.
  */
-fun <T : KoDeclaration> Sequence<T>.withKoDocWithTags(vararg tags: KoDocTag): Sequence<T> = filter { it.koDoc?.hasTags(*tags) ?: false }
+fun <T : KoDeclaration> Sequence<T>.withKDocWithTags(vararg tags: KoKDocTag): Sequence<T> = filter { it.kDoc?.hasTags(*tags) ?: false }
 
 /**
  * Sequence containing declarations that don't have the KDoc tags.
  */
-fun <T : KoDeclaration> Sequence<T>.withSomeKoDocWithTags(vararg tags: KoDocTag): Sequence<T> = filter {
-    tags.any { tag -> it.koDoc?.hasTags(tag) ?: false }
+fun <T : KoDeclaration> Sequence<T>.withSomeKDocWithTags(vararg tags: KoKDocTag): Sequence<T> = filter {
+    tags.any { tag -> it.kDoc?.hasTags(tag) ?: false }
 }
 
 /**
  * Sequence containing declarations that don't have the KDoc tags.
  */
-fun <T : KoDeclaration> Sequence<T>.withoutKoDocWithTags(vararg tags: KoDocTag): Sequence<T> =
-    filterNot { it.koDoc?.hasTags(*tags) ?: false }
+fun <T : KoDeclaration> Sequence<T>.withoutKDocWithTags(vararg tags: KoKDocTag): Sequence<T> =
+    filterNot { it.kDoc?.hasTags(*tags) ?: false }
 
 /**
  * Print the declarations.

@@ -8,7 +8,7 @@ class ApiKonsistTest {
     fun `every api declaration has kdoc`() {
         apiPackageScope
             .declarations(includeNested = true)
-            .assert { it.hasKoDoc() }
+            .assert { it.hasKDoc() }
     }
 
     @Test
@@ -19,6 +19,6 @@ class ApiKonsistTest {
     }
 
     companion object {
-        val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSet = "main")
+        val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSetName = "main")
     }
 }

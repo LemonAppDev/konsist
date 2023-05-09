@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.*
+
+class SampleTopLevelClass(val sampleProperty2: SampleClass)
