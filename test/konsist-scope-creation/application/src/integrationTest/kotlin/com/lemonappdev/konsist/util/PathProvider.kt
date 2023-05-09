@@ -16,7 +16,7 @@ object PathProvider {
 
     val applicationMainSourceSetDirectory = "$projectRootDirectory/application/src/main/kotlin/com/lemonappdev"
 
-    val applicationTestSourceSetDirectory = "$projectRootDirectory/application/src/test/kotlin/com/lemonappdev"
+    val applicationIntegrationTestSourceSetDirectory = "$projectRootDirectory/application/src/integrationTest/kotlin/com/lemonappdev"
 
     val libraryMainSourceSetDirectory = "$projectRootDirectory/library/src/main/kotlin/com/lemonappdev"
 

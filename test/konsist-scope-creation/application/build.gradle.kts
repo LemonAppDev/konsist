@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.testLogger)
+    id("org.gradle.jvm-test-suite")
 }
 
 repositories {
@@ -29,8 +30,20 @@ tasks.withType<Test> {
 
 dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
-
-    testImplementation(libs.konsist)
-    testImplementation(libs.junitJupiterEngine)
-    testImplementation(libs.kluent)
 }
+
+@Suppress("UnstableApiUsage")
+testing {
+    suites {
+        register("integrationTest", JvmTestSuite::class) {
+            dependencies {
+                implementation(libs.junitJupiterEngine)
+                implementation(libs.kluent)
+                implementation(libs.konsist)
+            }
+        }
+    }
+}
+
+
+

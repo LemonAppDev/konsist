@@ -18,11 +18,13 @@ testing {
             api(libs.mockk)
             api(libs.kluent)
         }
+
         register("integrationTest", JvmTestSuite::class) {
             dependencies {
                 implementation(project(":lib"))
             }
         }
+
         register("konsistTest", JvmTestSuite::class) {
             dependencies {
                 implementation(project(":lib"))
