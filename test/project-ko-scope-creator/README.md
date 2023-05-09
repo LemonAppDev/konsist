@@ -2,11 +2,9 @@
 
 This project is used to test the `Konsist` class.
 
-This project is testing root project folder resolution and file querying logic using integration tests.
+This project is used to test root project folder resolution and file querying logic using integration tests.
 
-The 2 main project types are:
-- Gradle/Maven project-root-module - project containing a root project
-- Gradle/Maven project-multi-module - project containing modules
+Test project contains [root](.) module and two submodules ([application](.\application) and [library](.\library)). 
 
 For Konsist sample projects see
 the [konsist-sample-projects](https://github.com/LemonAppDev/konsist-sample-projects/) repository.
