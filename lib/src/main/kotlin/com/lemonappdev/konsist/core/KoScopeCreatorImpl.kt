@@ -38,7 +38,12 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    private fun getFiles(module: String?, sourceSet: String?): Sequence<KoFileDeclaration> {
+    override fun scopeFromModule(moduleName: String): KoScope {
+        val koFiles = getFiles(moduleName)
+        return KoScopeImpl(koFiles)
+    }
+
+    private fun getFiles(module: String? = null, sourceSet: String? = null): Sequence<KoFileDeclaration> {
         val localProjectKotlinFiles = projectKotlinFiles
             .filterNot { isBuildPath(it.filePath) }
 
