@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.util
 import java.io.File
 
 object PathProvider {
-    private val projectRootDirectory = File("")
+    val projectRootDirectory = File("")
         .absoluteFile
         .path
         .dropLastWhile { it != '/' }
