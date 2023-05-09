@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist
 
-import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.ext.mapToFilePaths
 import com.lemonappdev.konsist.util.PathProvider.applicationMainSourceSetDirectory

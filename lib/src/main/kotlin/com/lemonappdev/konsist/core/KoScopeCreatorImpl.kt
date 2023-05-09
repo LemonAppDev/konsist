@@ -39,15 +39,17 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     private fun getFiles(module: String?, sourceSet: String?): Sequence<KoFileDeclaration> {
+        val localProjectKotlinFiles = projectKotlinFiles
+            .filterNot { isBuildPath(it.filePath) }
+
         if (module == null && sourceSet == null) {
-            return projectKotlinFiles
+            return localProjectKotlinFiles
         }
 
         var pathPrefix = if (module != null) {
-            "${pathProvider.rootProjectPath}/$module"
+            "$rootProjectPath/$module"
         } else {
-            // Dot means any character, asterisk means occur any number of times
-            "${pathProvider.rootProjectPath}.*"
+            "$rootProjectPath.*"
         }
 
         pathPrefix = if (sourceSet != null) {
@@ -56,7 +58,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             "$pathPrefix/src/.*"
         }
 
-        return projectKotlinFiles
+        return localProjectKotlinFiles
             .filter { it.filePath.matches(Regex(pathPrefix)) }
     }
 
@@ -106,6 +108,24 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val koKoFile = file.toKoFile()
 
         return KoScopeImpl(koKoFile)
+    }
+
+    /**
+     * Determines if the given path is a build directory "build" for Gradle and "target" for Maven.
+     */
+    private fun isBuildPath(path: String): Boolean {
+        val gradleBuildDirectoryName = "build"
+        val gradleRootBuildDirectoryRegex = Regex("$rootProjectPath/$gradleBuildDirectoryName/.*")
+        val gradleModuleBuildDirectoryRegex = Regex("$rootProjectPath/.+/$gradleBuildDirectoryName/.*")
+
+        val mavenBuildDirectoryName = "target"
+        val mavenRootBuildDirectoryRegex = Regex("$rootProjectPath/$mavenBuildDirectoryName/.*")
+        val mavenModuleBuildDirectoryRegex = Regex("$rootProjectPath/.+/$mavenBuildDirectoryName/.*")
+
+        return path.matches(gradleRootBuildDirectoryRegex) ||
+            path.matches(gradleModuleBuildDirectoryRegex) ||
+            path.matches(mavenRootBuildDirectoryRegex) ||
+            path.matches(mavenModuleBuildDirectoryRegex)
     }
 
     private fun isTestPath(path: String): Boolean {
