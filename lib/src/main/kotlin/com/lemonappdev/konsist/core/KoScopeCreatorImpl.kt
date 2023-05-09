@@ -33,8 +33,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override val rootProjectDirectory = pathProvider.rootProjectDirectory
 
-    override fun scopeFromProject(moduleName: String?, sourceSetName: String?): KoScope {
-        val koFiles = getFiles(moduleName, sourceSetName)
+    override fun scopeFromProject(moduleName: String?, sourceSetName: String?, ignoreBuildConfig: Boolean): KoScope {
+        val koFiles = getFiles(moduleName, sourceSetName, ignoreBuildConfig)
         return KoScopeImpl(koFiles)
     }
 
@@ -55,9 +55,20 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    private fun getFiles(moduleName: String? = null, sourceSetName: String? = null): Sequence<KoFileDeclaration> {
+    private fun getFiles(
+        moduleName: String? = null,
+        sourceSetName: String? = null,
+        ignoreBuildConfig: Boolean = true,
+    ): Sequence<KoFileDeclaration> {
         val localProjectKotlinFiles = projectKotlinFiles
             .filterNot { isBuildPath(it.filePath) }
+            .let {
+                if (ignoreBuildConfig) {
+                    it.filterNot { file -> file.isBuildConfigFile() }
+                } else {
+                    it
+                }
+            }
 
         if (moduleName == null && sourceSetName == null) {
             return localProjectKotlinFiles
@@ -143,8 +154,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     private fun isTestPath(path: String): Boolean {
-        val localPath = path.lowercase()
-        return localPath.contains("/$TEST_NAME_IN_PATH") || localPath.contains("$TEST_NAME_IN_PATH/")
+        val lowercasePath = path.lowercase()
+        return lowercasePath.contains("/$TEST_NAME_IN_PATH") || lowercasePath.contains("$TEST_NAME_IN_PATH/")
     }
 
     private fun isTestSourceSet(name: String): Boolean {
@@ -155,6 +166,12 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     private fun KoFileDeclaration.isTestFile(): Boolean {
         val path = filePath.substringAfter(pathProvider.rootProjectPath)
         return isTestPath(path)
+    }
+
+    private fun KoFileDeclaration.isBuildConfigFile(): Boolean {
+        val lowercasePath = filePath.lowercase()
+        val gradleBuildConfigDirectoryName = "buildSrc".lowercase()
+        return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
     }
 
     private fun File.toKoFiles() = walk()
