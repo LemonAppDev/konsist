@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
-import sun.jvm.hotspot.oops.CellTypeState.value
 import kotlin.reflect.KClass
 
 class KoDeclarationForAnnotationTest {
