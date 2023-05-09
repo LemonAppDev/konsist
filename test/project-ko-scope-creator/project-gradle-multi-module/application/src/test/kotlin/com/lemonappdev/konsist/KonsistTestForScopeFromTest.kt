@@ -21,6 +21,7 @@ class KonsistTestForScopeFromTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$applicationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromPackage.kt",
@@ -58,6 +59,7 @@ class KonsistTestForScopeFromTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$applicationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromPackage.kt",
@@ -85,6 +87,7 @@ class KonsistTestForScopeFromTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$applicationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromPackage.kt",
@@ -118,6 +121,7 @@ class KonsistTestForScopeFromTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$applicationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
                 "$applicationTestSourceSetDirectory/konsist/KonsistTestForScopeFromPackage.kt",
