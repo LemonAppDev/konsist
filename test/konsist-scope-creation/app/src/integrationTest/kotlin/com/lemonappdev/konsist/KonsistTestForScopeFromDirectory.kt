@@ -2,7 +2,7 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.ext.mapToFilePaths
-import com.lemonappdev.konsist.util.PathProvider.applicationMainSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -13,14 +13,14 @@ class KonsistTestForScopeFromDirectory {
     fun `scopeFromDirectory`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$applicationMainSourceSetDirectory/sample/")
+            .scopeFromDirectory("$appMainSourceSetDirectory/sample/")
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$applicationMainSourceSetDirectory/sample/AppClass.kt",
-                "$applicationMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$appMainSourceSetDirectory/sample/AppClass.kt",
+                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
             ),
         )
     }
@@ -28,20 +28,20 @@ class KonsistTestForScopeFromDirectory {
     @Test
     fun `scopeFromDirectory throws exception if path does not exist`() {
         // given
-        val func = { Konsist.scopeFromDirectory("$applicationMainSourceSetDirectory/nonExisting/") }
+        val func = { Konsist.scopeFromDirectory("$appMainSourceSetDirectory/nonExisting/") }
 
         // then
-        val message = "Directory does not exist: $applicationMainSourceSetDirectory/nonExisting/"
+        val message = "Directory does not exist: $appMainSourceSetDirectory/nonExisting/"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
     @Test
     fun `scopeFromDirectory throws exception if path points to file`() {
         // given
-        val func = { Konsist.scopeFromDirectory("$applicationMainSourceSetDirectory/sample/AppClass.kt") }
+        val func = { Konsist.scopeFromDirectory("$appMainSourceSetDirectory/sample/AppClass.kt") }
 
         // then
-        val message = "Path is a file, but should be a directory: $applicationMainSourceSetDirectory/sample/AppClass.kt"
+        val message = "Path is a file, but should be a directory: $appMainSourceSetDirectory/sample/AppClass.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 }

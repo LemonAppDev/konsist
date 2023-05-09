@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.util.PathProvider.applicationMainSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -10,13 +10,13 @@ class KonsistTestForToString {
     fun `toString method`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$applicationMainSourceSetDirectory/sample/")
+            .scopeFromDirectory("$appMainSourceSetDirectory/sample/")
             .toString()
 
         // then
         sut shouldBeEqualTo """
-            $applicationMainSourceSetDirectory/sample/AppClass.kt
-            $applicationMainSourceSetDirectory/sample/data/AppDataClass.kt
+            $appMainSourceSetDirectory/sample/AppClass.kt
+            $appMainSourceSetDirectory/sample/data/AppDataClass.kt
         """.trimIndent()
     }
 }

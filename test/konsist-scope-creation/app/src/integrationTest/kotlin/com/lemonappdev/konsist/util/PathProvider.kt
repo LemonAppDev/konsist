@@ -14,11 +14,11 @@ object PathProvider {
 
     val rootTestSourceSetDirectory = "$projectRootDirectory/src/test/kotlin/com/lemonappdev"
 
-    val applicationMainSourceSetDirectory = "$projectRootDirectory/application/src/main/kotlin/com/lemonappdev"
+    val appMainSourceSetDirectory = "$projectRootDirectory/app/src/main/kotlin/com/lemonappdev"
 
-    val applicationIntegrationTestSourceSetDirectory = "$projectRootDirectory/application/src/integrationTest/kotlin/com/lemonappdev"
+    val appIntegrationTestSourceSetDirectory = "$projectRootDirectory/app/src/integrationTest/kotlin/com/lemonappdev"
 
-    val libraryMainSourceSetDirectory = "$projectRootDirectory/library/src/main/kotlin/com/lemonappdev"
+    val dataMainSourceSetDirectory = "$projectRootDirectory/data/src/main/kotlin/com/lemonappdev"
 
-    val libraryTestSourceSetDirectory = "$projectRootDirectory/library/src/test/kotlin/com/lemonappdev"
+    val dataTestSourceSetDirectory = "$projectRootDirectory/data/src/test/kotlin/com/lemonappdev"
 }
