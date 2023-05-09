@@ -43,6 +43,13 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
+    override fun scopeFromPackage(packagee: String, moduleName: String?, sourceSetName: String?): KoScope {
+        val koFiles = getFiles(moduleName, sourceSetName)
+            .withPackage(packagee)
+
+        return KoScopeImpl(koFiles)
+    }
+
     override fun scopeFromSourceSet(sourceSetName: String): KoScope {
         val koFiles = getFiles(sourceSetName = sourceSetName)
         return KoScopeImpl(koFiles)
@@ -92,13 +99,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    override fun scopeFromPackage(packagee: String, moduleName: String?, sourceSetName: String?): KoScope {
-        val koFiles = getFiles(moduleName, sourceSetName)
-            .withPackage(packagee)
-
-        return KoScopeImpl(koFiles)
-    }
-
     override fun scopeFromDirectory(path: String): KoScope {
         val directory = File(path)
         require(directory.exists()) { "Directory does not exist: $path" }
@@ -108,6 +108,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
         return KoScopeImpl(files)
     }
+
+    override fun scopeFromProjectDirectory(path: String): KoScope = scopeFromDirectory("$rootProjectPath/$path")
 
     override fun scopeFromFile(path: String): KoScope {
         val file = File(path)
@@ -119,6 +121,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
         return KoScopeImpl(koKoFile)
     }
+
+    override fun scopeFromProjectFile(path: String): KoScope = scopeFromFile("$rootProjectPath/$path")
 
     /**
      * Determines if the given path is a build directory "build" for Gradle and "target" for Maven.

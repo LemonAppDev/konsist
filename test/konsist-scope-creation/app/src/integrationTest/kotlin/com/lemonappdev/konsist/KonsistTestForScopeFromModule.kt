@@ -27,6 +27,8 @@ class KonsistTestForScopeFromModule {
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromPackage.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProduction.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProjectDirectory.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProjectFile.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromSourceSet.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
