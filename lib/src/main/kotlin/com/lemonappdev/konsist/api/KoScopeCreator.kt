@@ -22,12 +22,18 @@ interface KoScopeCreator {
     fun scopeFromProject(moduleName: String? = null, sourceSetName: String? = null): KoScope
 
     /**
-     * Returns a [KoScope] containing all of Kotlin production files in the project.
+     * Returns a [KoScope] containing all of Kotlin files in the production source sets.
+     * The production source set is the source set which name does not start and ends with "test".
+     *
+     * @See [scopeFromProduction]
      */
     fun scopeFromProduction(moduleName: String? = null, sourceSetName: String? = null): KoScope
 
     /**
-     * Returns a [KoScope] containing all of Kotlin test files in the project.
+     * Returns a [KoScope] containing all of Kotlin files in the test source sets.
+     * The test source set is the source set which name starts or ends with "test".
+     *
+     * @See [scopeFromTest]
      */
     fun scopeFromTest(moduleName: String? = null, sourceSetName: String? = null): KoScope
 
