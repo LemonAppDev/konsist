@@ -1,9 +1,10 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoFileDeclarationImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -97,14 +98,14 @@ private fun checkIfSuppressed(declaration: KoDeclarationImpl, testMethodName: St
 
     return when {
         annotationParameter == testMethodName || annotationParameter == "konsist.$testMethodName" -> true
-        declaration.parent !is KoFileDeclarationImpl -> checkIfSuppressed(declaration.parent as KoDeclarationImpl, testMethodName)
+        declaration.parent !is KoFileDeclaration -> checkIfSuppressed(declaration.parent as KoDeclarationImpl, testMethodName)
         fileAnnotationParameter(declaration.parent) == testMethodName -> true
         fileAnnotationParameter(declaration.parent) == "konsist.$testMethodName" -> true
         else -> false
     }
 }
 
-private fun fileAnnotationParameter(file: KoFileDeclarationImpl) = file
+private fun fileAnnotationParameter(file: KoFileDeclaration) = file
     .annotations
     .firstOrNull { it.name == "Suppress" }
     ?.text
