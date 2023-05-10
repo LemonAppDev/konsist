@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.declaration.provider
 
-import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
@@ -22,7 +21,6 @@ import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 internal object KoDeclarationProviderUtil {
     inline fun <reified T : KoDeclaration> getKoDeclarations(
         ktDeclarationContainer: KtDeclarationContainer,
-        modifiers: List<KoModifier>,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
         parent: KoBaseDeclaration,
@@ -48,12 +46,11 @@ internal object KoDeclarationProviderUtil {
             }
             .asSequence()
 
-        return getKoDeclarations(declarations, modifiers, includeNested, includeLocal)
+        return getKoDeclarations(declarations, includeNested, includeLocal)
     }
 
     inline fun <reified T : KoDeclaration> getKoDeclarations(
         declarations: Sequence<KoDeclaration>,
-        modifiers: List<KoModifier>,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
     ): Sequence<T> {
@@ -87,10 +84,6 @@ internal object KoDeclarationProviderUtil {
                     }
                 }
                 .filterIsInstance<T>()
-        }
-
-        if (modifiers.isNotEmpty()) {
-            result = result.filter { it.hasModifiers(*modifiers.toTypedArray()) }
         }
 
         return result.filterIsInstance<T>()

@@ -25,7 +25,6 @@ interface KoScope {
      * The classes present in the scope.
      */
     fun classes(
-        modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
     ): Sequence<KoClassDeclaration>
@@ -34,7 +33,6 @@ interface KoScope {
      * The interfaces present in the scope.
      */
     fun interfaces(
-        modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
     ): Sequence<KoInterfaceDeclaration>
 
@@ -42,7 +40,6 @@ interface KoScope {
      * The objects present in the scope.
      */
     fun objects(
-        modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
     ): Sequence<KoObjectDeclaration>
 
@@ -50,7 +47,6 @@ interface KoScope {
      * The companion objects present in the scope.
      */
     fun companionObjects(
-        modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
     ): Sequence<KoCompanionObjectDeclaration>
 
@@ -58,7 +54,6 @@ interface KoScope {
      * The functions present in the scope.
      */
     fun functions(
-        modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
     ): Sequence<KoFunctionDeclaration>
@@ -67,7 +62,6 @@ interface KoScope {
      * The declarations present in the scope.
      */
     fun declarations(
-        modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
     ): Sequence<KoDeclaration>
@@ -76,7 +70,6 @@ interface KoScope {
      * The properties present in the scope.
      */
     fun properties(
-        modifiers: List<KoModifier> = emptyList(),
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
     ): Sequence<KoPropertyDeclaration>
