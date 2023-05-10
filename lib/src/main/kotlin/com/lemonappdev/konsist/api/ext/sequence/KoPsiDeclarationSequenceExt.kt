@@ -1,6 +1,36 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
+import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
+
+/**
+ * Sequence containing declarations that have KDoc.
+ */
+fun <T : KoPsiDeclaration> Sequence<T>.withKDoc(): Sequence<T> = filter { it.hasKDoc() }
+
+/**
+ * Sequence containing declarations that don't have the KDoc.
+ */
+fun <T : KoPsiDeclaration> Sequence<T>.withoutKDoc(): Sequence<T> = filterNot { it.hasKDoc() }
+
+/**
+ * Sequence containing declarations that have KDoc tags.
+ */
+fun <T : KoPsiDeclaration> Sequence<T>.withKDocWithTags(vararg tags: KoKDocTag): Sequence<T> = filter { it.kDoc?.hasTags(*tags) ?: false }
+
+/**
+ * Sequence containing declarations that don't have the KDoc tags.
+ */
+fun <T : KoPsiDeclaration> Sequence<T>.withSomeKDocWithTags(vararg tags: KoKDocTag): Sequence<T> = filter {
+    tags.any { tag -> it.kDoc?.hasTags(tag) ?: false }
+}
+
+/**
+ * Sequence containing declarations that don't have the KDoc tags.
+ */
+fun <T : KoPsiDeclaration> Sequence<T>.withoutKDocWithTags(vararg tags: KoKDocTag): Sequence<T> =
+    filterNot { it.kDoc?.hasTags(*tags) ?: false }
+
 
 /**
  * Sequence containing declarations that have file path.

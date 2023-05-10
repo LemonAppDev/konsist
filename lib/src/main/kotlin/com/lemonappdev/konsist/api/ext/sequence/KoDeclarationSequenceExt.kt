@@ -164,34 +164,6 @@ fun <T : KoDeclaration> Sequence<T>.withoutPackage(vararg packages: String): Seq
 }
 
 /**
- * Sequence containing declarations that have KDoc.
- */
-fun <T : KoDeclaration> Sequence<T>.withKDoc(): Sequence<T> = filter { it.hasKDoc() }
-
-/**
- * Sequence containing declarations that don't have the KDoc.
- */
-fun <T : KoDeclaration> Sequence<T>.withoutKDoc(): Sequence<T> = filterNot { it.hasKDoc() }
-
-/**
- * Sequence containing declarations that have KDoc tags.
- */
-fun <T : KoDeclaration> Sequence<T>.withKDocWithTags(vararg tags: KoKDocTag): Sequence<T> = filter { it.kDoc?.hasTags(*tags) ?: false }
-
-/**
- * Sequence containing declarations that don't have the KDoc tags.
- */
-fun <T : KoDeclaration> Sequence<T>.withSomeKDocWithTags(vararg tags: KoKDocTag): Sequence<T> = filter {
-    tags.any { tag -> it.kDoc?.hasTags(tag) ?: false }
-}
-
-/**
- * Sequence containing declarations that don't have the KDoc tags.
- */
-fun <T : KoDeclaration> Sequence<T>.withoutKDocWithTags(vararg tags: KoKDocTag): Sequence<T> =
-    filterNot { it.kDoc?.hasTags(*tags) ?: false }
-
-/**
  * Print the declarations.
  */
 fun <T : KoDeclaration> Sequence<T>.print(): Sequence<T> {

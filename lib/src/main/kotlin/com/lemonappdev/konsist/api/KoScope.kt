@@ -60,9 +60,9 @@ interface KoScope {
     ): Sequence<KoFunctionDeclaration>
 
     /**
-     * The declarations present in the scope.
+     * The namedDeclarations present in the scope.
      */
-    fun declarations(
+    fun namedDeclarations(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
     ): Sequence<KoNamedDeclaration>

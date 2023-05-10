@@ -14,7 +14,7 @@ interface KoDeclarationProvider {
         includeLocal: Boolean = false,
     ): Sequence<KoNamedDeclaration>
 
-    fun containsDeclarations(
+    fun containsNamedDeclarations(
         name: String,
         includeNested: Boolean = false,
     ) = declarations(includeNested).any { it.name == name }

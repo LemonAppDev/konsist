@@ -44,7 +44,7 @@ class KoScopeImpl(
     ): Sequence<KoFunctionDeclaration> =
         koFiles.flatMap { it.functions(includeNested, includeLocal) }
 
-    override fun declarations(
+    override fun namedDeclarations(
         includeNested: Boolean,
         includeLocal: Boolean,
     ): Sequence<KoNamedDeclaration> =

@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
@@ -29,11 +30,12 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
             val checkMethodName = Thread.currentThread().stackTrace[2].methodName
             throw KoPreconditionFailedException(
                 "Declaration list is empty. Please make sure that list of declarations contain items " +
-                    "before calling the '$checkMethodName' method.",
+                        "before calling the '$checkMethodName' method.",
             )
         }
 
-        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(localList)
+        val notSuppressedDeclarations =
+            localList.filterNot { it is KoDeclaration } + checkIfAnnotatedWithSuppress(localList.filterIsInstance<KoDeclaration>())
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
@@ -83,10 +85,10 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                (
-                    it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
-                        it.text.endsWith("Suppress(\"$testMethodName\")")
-                    )
+                    (
+                            it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
+                                    it.text.endsWith("Suppress(\"$testMethodName\")")
+                            )
         }
         .forEach { declarations[it] = checkIfSuppressed(it as KoDeclarationImpl, testMethodName) }
 

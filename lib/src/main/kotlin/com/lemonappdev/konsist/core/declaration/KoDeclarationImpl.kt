@@ -57,15 +57,6 @@ internal abstract class KoDeclarationImpl(
             ?: emptyList()
     }
 
-    override val kDoc by lazy {
-        val kDocElement = ktTypeParameterListOwner
-            .children
-            .filterIsInstance<KDocElement>()
-            .firstOrNull()
-
-        kDocElement?.let { KoKDocDeclarationImpl(kDocElement) }
-    }
-
     override fun hasPublicModifier() = hasModifiers(KoModifier.PUBLIC)
 
     override fun isPublicOrDefault() = ktTypeParameterListOwner.isPublic
@@ -95,8 +86,6 @@ internal abstract class KoDeclarationImpl(
         koModifiers.isEmpty() -> modifiers.isNotEmpty()
         else -> modifiers.containsAll(koModifiers.toList())
     }
-
-    override fun hasKDoc() = kDoc != null
 
     override fun resideInPackage(packagee: String) = LocationHelper.resideInLocation(packagee, this.packagee)
 
