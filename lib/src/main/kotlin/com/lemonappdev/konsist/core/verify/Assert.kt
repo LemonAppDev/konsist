@@ -34,8 +34,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
             )
         }
 
-        val notSuppressedDeclarations =
-            localList.filterNot { it is KoDeclaration } + checkIfAnnotatedWithSuppress(localList.filterIsInstance<KoDeclaration>())
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(localList)
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
