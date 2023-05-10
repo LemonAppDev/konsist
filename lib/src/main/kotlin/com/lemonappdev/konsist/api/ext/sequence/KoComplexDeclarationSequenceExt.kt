@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoComplexDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.declaration.representsTypeOf
@@ -64,7 +65,7 @@ inline fun <reified T> Sequence<KoComplexDeclaration>.withoutTypeOf(): Sequence<
 fun <T : KoComplexDeclaration> Sequence<T>.declarations(
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
-): Sequence<KoDeclaration> = flatMap { it.declarations(includeNested, includeLocal) }
+): Sequence<KoNamedDeclaration> = flatMap { it.declarations(includeNested, includeLocal) }
 
 /**
  * Sequence containing class declarations.

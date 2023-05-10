@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoComplexDeclaration
+import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProviderUtil
 import org.jetbrains.kotlin.psi.KtClassOrObject
 
@@ -16,6 +17,6 @@ internal abstract class KoComplexDeclarationImpl(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoDeclarationImpl> = KoDeclarationProviderUtil
+    ): Sequence<KoNamedDeclaration> = KoDeclarationProviderUtil
         .getKoDeclarations(ktClassOrObject, includeNested, includeLocal, this)
 }

@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
@@ -64,7 +65,7 @@ interface KoScope {
     fun declarations(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoDeclaration>
+    ): Sequence<KoNamedDeclaration>
 
     /**
      * The properties present in the scope.

@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 
@@ -12,7 +13,7 @@ interface KoDeclarationProvider {
     fun declarations(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoDeclaration>
+    ): Sequence<KoNamedDeclaration>
 
     fun containsDeclarations(
         name: String,
