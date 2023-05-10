@@ -221,4 +221,4 @@ jobs:
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name : Konsist Scope Creation Integration Test
-        run: cd test/konsist-scope-creation/ && ./gradlew test
+        run: cd test/konsist-scope-creation/ && ./gradlew integrationTest
