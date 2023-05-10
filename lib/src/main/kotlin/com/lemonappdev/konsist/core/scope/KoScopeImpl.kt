@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.scope
 import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
@@ -49,6 +50,12 @@ class KoScopeImpl(
         includeLocal: Boolean,
     ): Sequence<KoNamedDeclaration> =
         koFiles.flatMap { it.declarations(includeNested, includeLocal) }
+
+    override fun declarations(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+    ): Sequence<KoDeclaration> = namedDeclarations(includeNested, includeLocal)
+        .filterIsInstance<KoDeclaration>()
 
     override fun properties(
         includeNested: Boolean,

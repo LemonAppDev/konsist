@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.api
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
@@ -60,12 +61,20 @@ interface KoScope {
     ): Sequence<KoFunctionDeclaration>
 
     /**
-     * The namedDeclarations present in the scope.
+     * The named declarations present in the scope.
      */
     fun namedDeclarations(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
     ): Sequence<KoNamedDeclaration>
+
+    /**
+     * The declarations present in the scope.
+     */
+    fun declarations(
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+    ): Sequence<KoDeclaration>
 
     /**
      * The properties present in the scope.
