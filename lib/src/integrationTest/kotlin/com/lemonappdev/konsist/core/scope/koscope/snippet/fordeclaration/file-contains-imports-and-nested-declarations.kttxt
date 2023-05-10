@@ -1,0 +1,7 @@
+import com.sampleimport1
+import com.sampleimport2
+
+class SampleClass {
+    fun sampleNestedFunction() {
+    }
+}

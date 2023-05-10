@@ -135,6 +135,7 @@ internal object KoDeclarationProviderUtil {
         ktDeclaration is KtObjectDeclaration && ktDeclaration.isCompanion() -> KoCompanionObjectDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtProperty -> KoPropertyDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtFunction -> KoFunctionDeclarationImpl.getInstance(ktDeclaration, parent)
+        ktDeclaration is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(ktDeclaration, parent)
         else -> throw KoUnsupportedOperationException("Unknown declaration type: ${ktDeclaration.getTextWithLocation()}")
     }
 
@@ -142,7 +143,6 @@ internal object KoDeclarationProviderUtil {
         is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parent)
         is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parent)
         is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(psiElement, parent)
-        is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(psiElement, parent)
         else -> throw KoUnsupportedOperationException("Unknown declaration type: ${psiElement.getTextWithLocation()}")
     }
 }

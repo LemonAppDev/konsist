@@ -1,15 +1,16 @@
 package com.lemonappdev.konsist.core.scope.koscope
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoScopeForDeclarationTest {
 
     @Test
-    fun `file-contains-package-class-function-object-interface-property`() {
+    fun `file-contains-all-type-of-declarations`() {
         // given
-        val sut = getSnippetFile("file-contains-package-class-function-object-interface-property")
+        val sut = getSnippetFile("file-contains-all-type-of-declarations")
 
         // then
         sut
@@ -18,12 +19,17 @@ class KoScopeForDeclarationTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
+                    "SampleAnnotation1",
+                    "SampleAnnotation2",
                     "samplepackage",
+                    "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                    "com.lemonappdev.konsist.testdata.SampleAnnotation2",
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
                     "SampleInterface",
                     "SampleObject",
+                    "SampleTypeAlias",
                 ),
             )
     }
@@ -62,6 +68,126 @@ class KoScopeForDeclarationTest {
                     "samplepackage",
                     "sampleFunction",
                     "sampleLocalProperty",
+                ),
+            )
+    }
+
+    @Test
+    fun `file-contains-imports-and-nested-declarations`() {
+        // given
+        val sut = getSnippetFile("file-contains-imports-and-nested-declarations")
+
+        // then
+        sut
+            .declarations(includeNested = true)
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "com.sampleimport1",
+                    "com.sampleimport2",
+                    "SampleClass",
+                    "sampleNestedFunction",
+                ),
+            )
+    }
+
+    @Test
+    fun `file-contains-imports-and-local-declarations`() {
+        // given
+        val sut = getSnippetFile("file-contains-imports-and-local-declarations")
+
+        // then
+        sut
+            .declarations(includeLocal = true)
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "com.sampleimport1",
+                    "com.sampleimport2",
+                    "sampleFunction",
+                    "sampleLocalProperty",
+                ),
+            )
+    }
+
+    @Test
+    fun `file-contains-annotations-and-nested-declarations`() {
+        // given
+        val sut = getSnippetFile("file-contains-annotations-and-nested-declarations")
+
+        // then
+        sut
+            .declarations(includeNested = true)
+            .filterNot { it is KoImportDeclaration }
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "SampleAnnotation1",
+                    "SampleAnnotation2",
+                    "SampleClass",
+                    "sampleNestedFunction",
+                ),
+            )
+    }
+
+    @Test
+    fun `file-contains-annotations-and-local-declarations`() {
+        // given
+        val sut = getSnippetFile("file-contains-annotations-and-local-declarations")
+
+        // then
+        sut
+            .declarations(includeLocal = true)
+            .filterNot { it is KoImportDeclaration }
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "SampleAnnotation1",
+                    "SampleAnnotation2",
+                    "sampleFunction",
+                    "sampleLocalProperty",
+                ),
+            )
+    }
+
+    @Test
+    fun `file-contains-typealias-and-nested-declarations`() {
+        // given
+        val sut = getSnippetFile("file-contains-typealias-and-nested-declarations")
+
+        // then
+        sut
+            .declarations(includeNested = true)
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "SampleClass",
+                    "sampleNestedFunction",
+                    "SampleTypeAlias",
+                ),
+            )
+    }
+
+    @Test
+    fun `file-contains-typealias-and-local-declarations`() {
+        // given
+        val sut = getSnippetFile("file-contains-typealias-and-local-declarations")
+
+        // then
+        sut
+            .declarations(includeLocal = true)
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "sampleFunction",
+                    "sampleLocalProperty",
+                    "SampleTypeAlias"
                 ),
             )
     }
