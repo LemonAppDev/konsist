@@ -29,6 +29,44 @@ class KoScopeForDeclarationTest {
     }
 
     @Test
+    fun `file-contains-package-and-nested-declarations`() {
+        // given
+        val sut = getSnippetFile("file-contains-package-and-nested-declarations")
+
+        // then
+        sut
+            .declarations(includeNested = true)
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "samplepackage",
+                    "SampleClass",
+                    "sampleNestedFunction",
+                ),
+            )
+    }
+
+    @Test
+    fun `file-contains-package-and-local-declarations`() {
+        // given
+        val sut = getSnippetFile("file-contains-package-and-local-declarations")
+
+        // then
+        sut
+            .declarations(includeLocal = true)
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "samplepackage",
+                    "sampleFunction",
+                    "sampleLocalProperty",
+                ),
+            )
+    }
+
+    @Test
     fun `file-contains-one-class-containing-function`() {
         // given
         val sut = getSnippetFile("file-contains-one-class-containing-function")

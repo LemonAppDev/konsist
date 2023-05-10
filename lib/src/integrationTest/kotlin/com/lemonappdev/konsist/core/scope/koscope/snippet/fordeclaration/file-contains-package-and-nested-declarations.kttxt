@@ -1,0 +1,6 @@
+package com.samplepackage
+
+class SampleClass {
+    fun sampleNestedFunction() {
+    }
+}

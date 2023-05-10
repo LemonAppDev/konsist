@@ -1,3 +1,5 @@
+package com.samplepackage
+
 val sampleProperty: Boolean = true
 
 fun sampleFunction() {

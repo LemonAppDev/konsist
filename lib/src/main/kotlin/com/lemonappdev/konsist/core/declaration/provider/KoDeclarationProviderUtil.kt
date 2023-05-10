@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtDeclarationContainer
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
+import org.jetbrains.kotlin.psi.KtFileAnnotationList
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
@@ -122,6 +123,7 @@ internal object KoDeclarationProviderUtil {
     private fun List<PsiElement>.flattenDeclarations() = this.flatMap {
         when (it) {
             is KtImportList -> it.imports
+            is KtFileAnnotationList -> it.annotations
             else -> listOf(it)
         }
     }
@@ -136,11 +138,11 @@ internal object KoDeclarationProviderUtil {
         else -> throw KoUnsupportedOperationException("Unknown declaration type: ${declaration.getTextWithLocation()}")
     }
 
-    private fun getInstanceOfOtherDeclaration(declaration: PsiElement, parent: KoBaseDeclaration) = when {
-        declaration is KtImportDirective -> KoImportDeclarationImpl.getInstance(declaration, parent)
-        declaration is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(declaration, parent)
-        declaration is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(declaration, parent)
-        declaration is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(declaration, parent)
+    private fun getInstanceOfOtherDeclaration(declaration: PsiElement, parent: KoBaseDeclaration) = when (declaration) {
+        is KtImportDirective -> KoImportDeclarationImpl.getInstance(declaration, parent)
+        is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(declaration, parent)
+        is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(declaration, parent)
+        is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(declaration, parent)
         else -> throw KoUnsupportedOperationException("Unknown declaration type: ${declaration.getTextWithLocation()}")
     }
 }
