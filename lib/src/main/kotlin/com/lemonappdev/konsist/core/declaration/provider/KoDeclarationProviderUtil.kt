@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration.provider
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiWhiteSpace
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
@@ -18,12 +17,12 @@ import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import com.lemonappdev.konsist.core.exception.KoUnsupportedOperationException
-import org.jetbrains.kotlin.ir.types.IdSignatureValues.result
-import org.jetbrains.kotlin.ir.types.impl.IrErrorClassImpl.declarations
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtClass
+import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtDeclarationContainer
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
@@ -41,40 +40,34 @@ internal object KoDeclarationProviderUtil {
         parent: KoBaseDeclaration,
     ): Sequence<T> {
         val declarations: Sequence<KoNamedDeclaration>
-        if (ktElement is KtDeclarationContainer) {
-            declarations = ktElement
-                .declarations
-                .mapNotNull {
-                    when {
-                        it is KtClass && !it.isInterface() -> KoClassDeclarationImpl.getInstance(it, parent)
-                        it is KtClass && it.isInterface() -> KoInterfaceDeclarationImpl.getInstance(it, parent)
-                        it is KtObjectDeclaration && !it.isCompanion() -> KoObjectDeclarationImpl.getInstance(it, parent)
-                        it is KtObjectDeclaration && it.isCompanion() -> KoCompanionObjectDeclarationImpl.getInstance(it, parent)
-                        it is KtProperty -> KoPropertyDeclarationImpl.getInstance(it, parent)
-                        it is KtFunction -> KoFunctionDeclarationImpl.getInstance(it, parent)
-                        else -> throw KoUnsupportedOperationException("Unknown declaration type: ${it.getTextWithLocation()}")
+
+        return when (ktElement) {
+            is KtFile -> {
+                declarations = ktElement
+                    .containingFile
+                    .children
+                    .filterNot { it is PsiWhiteSpace }
+                    .filterNot { it.text.isBlank() }
+                    .flattenDeclarations()
+                    .mapNotNull {
+                        when (it) {
+                            is KtDeclaration -> getInstanceOfKtDeclaration(it, parent)
+                            else -> getInstanceOfOtherDeclaration(it, parent)
+                        }
                     }
-                }
-                .asSequence()
-            return getKoDeclarations(declarations, includeNested, includeLocal)
-        } else {
-            declarations = ktElement
-                .containingFile
-                .children
-                .filterNot { it is PsiWhiteSpace }
-                .filterNot { it.text.isBlank() }
-                .flattenDeclarations()
-                .mapNotNull {
-                    when (it) {
-                        is KtImportDirective -> KoImportDeclarationImpl.getInstance(it, parent)
-                        is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(it, parent)
-                        is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(it, parent)
-                        is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(it, parent)
-                        else -> throw KoUnsupportedOperationException("Unknown declaration type: ${it.getTextWithLocation()}")
-                    }
-                }
-                .asSequence()
-            return declarations.filterIsInstance<T>()
+                    .asSequence()
+                getKoDeclarations(declarations, includeNested, includeLocal)
+            }
+
+            is KtDeclarationContainer -> {
+                declarations = ktElement
+                    .declarations
+                    .mapNotNull { getInstanceOfKtDeclaration(it, parent) }
+                    .asSequence()
+                getKoDeclarations(declarations, includeNested, includeLocal)
+            }
+
+            else -> emptySequence()
         }
     }
 
@@ -131,5 +124,23 @@ internal object KoDeclarationProviderUtil {
             is KtImportList -> it.imports
             else -> listOf(it)
         }
+    }
+
+    private fun getInstanceOfKtDeclaration(declaration: KtDeclaration, parent: KoBaseDeclaration) = when {
+        declaration is KtClass && !declaration.isInterface() -> KoClassDeclarationImpl.getInstance(declaration, parent)
+        declaration is KtClass && declaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(declaration, parent)
+        declaration is KtObjectDeclaration && !declaration.isCompanion() -> KoObjectDeclarationImpl.getInstance(declaration, parent)
+        declaration is KtObjectDeclaration && declaration.isCompanion() -> KoCompanionObjectDeclarationImpl.getInstance(declaration, parent)
+        declaration is KtProperty -> KoPropertyDeclarationImpl.getInstance(declaration, parent)
+        declaration is KtFunction -> KoFunctionDeclarationImpl.getInstance(declaration, parent)
+        else -> throw KoUnsupportedOperationException("Unknown declaration type: ${declaration.getTextWithLocation()}")
+    }
+
+    private fun getInstanceOfOtherDeclaration(declaration: PsiElement, parent: KoBaseDeclaration) = when {
+        declaration is KtImportDirective -> KoImportDeclarationImpl.getInstance(declaration, parent)
+        declaration is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(declaration, parent)
+        declaration is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(declaration, parent)
+        declaration is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(declaration, parent)
+        else -> throw KoUnsupportedOperationException("Unknown declaration type: ${declaration.getTextWithLocation()}")
     }
 }

@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 class KoScopeForDeclarationTest {
 
     @Test
-    fun `file-contains-class-function-object-interface-property`() {
+    fun `file-contains-package-class-function-object-interface-property`() {
         // given
-        val sut = getSnippetFile("file-contains-class-function-object-interface-property")
+        val sut = getSnippetFile("file-contains-package-class-function-object-interface-property")
 
         // then
         sut
@@ -18,6 +18,7 @@ class KoScopeForDeclarationTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
+                    "samplepackage",
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
