@@ -58,6 +58,8 @@ class KoScopeImpl(
 
     override fun imports() = koFiles.flatMap { it.imports }
 
+    override fun annotations() = koFiles.flatMap { it.annotations }
+
     override fun packages() = koFiles.mapNotNull { it.packagee }
 
     override fun typeAliases() = koFiles.flatMap { it.typeAliases }
