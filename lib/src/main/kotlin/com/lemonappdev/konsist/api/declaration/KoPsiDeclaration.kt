@@ -35,7 +35,7 @@ interface KoPsiDeclaration {
     val kDoc: KoKDocDeclaration?
 
     /**
-     * Whether the declaration has kdoc.
+     * Whether the declaration has kDoc.
      */
     fun hasKDoc(): Boolean
 
