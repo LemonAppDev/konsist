@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.KoKDocTag
-import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPsiDeclarationImpl
 import io.mockk.every

@@ -31,7 +31,6 @@ fun <T : KoPsiDeclaration> Sequence<T>.withSomeKDocWithTags(vararg tags: KoKDocT
 fun <T : KoPsiDeclaration> Sequence<T>.withoutKDocWithTags(vararg tags: KoKDocTag): Sequence<T> =
     filterNot { it.kDoc?.hasTags(*tags) ?: false }
 
-
 /**
  * Sequence containing declarations that have file path.
  */
