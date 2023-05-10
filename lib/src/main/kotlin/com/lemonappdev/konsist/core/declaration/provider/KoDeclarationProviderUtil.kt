@@ -132,7 +132,8 @@ internal object KoDeclarationProviderUtil {
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtObjectDeclaration && !ktDeclaration.isCompanion() -> KoObjectDeclarationImpl.getInstance(ktDeclaration, parent)
-        ktDeclaration is KtObjectDeclaration && ktDeclaration.isCompanion() -> KoCompanionObjectDeclarationImpl.getInstance(ktDeclaration, parent)
+        ktDeclaration is KtObjectDeclaration && ktDeclaration.isCompanion() ->
+            KoCompanionObjectDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtProperty -> KoPropertyDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtFunction -> KoFunctionDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(ktDeclaration, parent)

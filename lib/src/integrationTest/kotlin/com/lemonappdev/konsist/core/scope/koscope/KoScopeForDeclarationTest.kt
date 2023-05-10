@@ -187,7 +187,7 @@ class KoScopeForDeclarationTest {
                 listOf(
                     "sampleFunction",
                     "sampleLocalProperty",
-                    "SampleTypeAlias"
+                    "SampleTypeAlias",
                 ),
             )
     }
