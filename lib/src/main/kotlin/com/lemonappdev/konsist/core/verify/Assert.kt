@@ -79,6 +79,7 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
     val testMethodName = Thread.currentThread().stackTrace[4].methodName
     val declarations: MutableMap<E, Boolean> = mutableMapOf()
 
+    // First we need to exclude (if exist) file suppress test annotation
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&

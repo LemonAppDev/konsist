@@ -16,9 +16,7 @@ class KoScopeForAnnotationTest {
             .annotations()
             .map { it.name }
             .toList()
-            .shouldBeEqualTo(
-                listOf("SampleAnnotation1"),
-            )
+            .shouldBeEqualTo(listOf("SampleAnnotation1"))
     }
 
     @Test
@@ -30,9 +28,7 @@ class KoScopeForAnnotationTest {
         sut
             .annotations()
             .toList()
-            .shouldBeEqualTo(
-                emptyList(),
-            )
+            .shouldBeEqualTo(emptyList())
     }
 
     private fun getSnippetFile(fileName: String) =
