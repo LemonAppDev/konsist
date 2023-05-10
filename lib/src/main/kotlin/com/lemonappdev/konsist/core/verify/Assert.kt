@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.verify
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
@@ -29,7 +29,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
             val checkMethodName = Thread.currentThread().stackTrace[2].methodName
             throw KoPreconditionFailedException(
                 "Declaration list is empty. Please make sure that list of declarations contain items " +
-                    "before calling the '$checkMethodName' method.",
+                        "before calling the '$checkMethodName' method.",
             )
         }
 
@@ -79,7 +79,13 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
     val testMethodName = Thread.currentThread().stackTrace[4].methodName
     val declarations: MutableMap<E, Boolean> = mutableMapOf()
 
-    localList.forEach { declarations[it] = checkIfSuppressed(it as KoDeclarationImpl, testMethodName) }
+    localList
+        .filterNot {
+            it is KoAnnotationDeclaration
+                    && (it.text.endsWith("Suppress(\"konsist.$testMethodName\")")
+                    || it.text.endsWith("Suppress(\"$testMethodName\")"))
+        }
+        .forEach { declarations[it] = checkIfSuppressed(it as KoDeclarationImpl, testMethodName) }
 
     val withoutSuppress = mutableListOf<E>()
 
