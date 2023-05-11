@@ -29,10 +29,10 @@ class KoNamedDeclarationTest {
         assertSoftly(sut) {
             hasNameContaining("ple") shouldBeEqualTo true
             hasNameContaining("non") shouldBeEqualTo false
-            hasNameWithPrefix("Sam") shouldBeEqualTo true
-            hasNameWithPrefix("non") shouldBeEqualTo false
-            hasNameWithSuffix("lass") shouldBeEqualTo true
-            hasNameWithSuffix("non") shouldBeEqualTo false
+            hasNameStartingWith("Sam") shouldBeEqualTo true
+            hasNameStartingWith("non") shouldBeEqualTo false
+            hasNameEndingWith("lass") shouldBeEqualTo true
+            hasNameEndingWith("non") shouldBeEqualTo false
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -60,10 +60,10 @@ class KoNamedDeclarationTest {
         assertSoftly(sut) {
             hasNameContaining("ple") shouldBeEqualTo true
             hasNameContaining("non") shouldBeEqualTo false
-            hasNameWithPrefix("Sam") shouldBeEqualTo true
-            hasNameWithPrefix("non") shouldBeEqualTo false
-            hasNameWithSuffix("ace") shouldBeEqualTo true
-            hasNameWithSuffix("non") shouldBeEqualTo false
+            hasNameStartingWith("Sam") shouldBeEqualTo true
+            hasNameStartingWith("non") shouldBeEqualTo false
+            hasNameEndingWith("ace") shouldBeEqualTo true
+            hasNameEndingWith("non") shouldBeEqualTo false
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -91,10 +91,10 @@ class KoNamedDeclarationTest {
         assertSoftly(sut) {
             hasNameContaining("ple") shouldBeEqualTo true
             hasNameContaining("non") shouldBeEqualTo false
-            hasNameWithPrefix("Sam") shouldBeEqualTo true
-            hasNameWithPrefix("non") shouldBeEqualTo false
-            hasNameWithSuffix("ect") shouldBeEqualTo true
-            hasNameWithSuffix("non") shouldBeEqualTo false
+            hasNameStartingWith("Sam") shouldBeEqualTo true
+            hasNameStartingWith("non") shouldBeEqualTo false
+            hasNameEndingWith("ect") shouldBeEqualTo true
+            hasNameEndingWith("non") shouldBeEqualTo false
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -122,10 +122,10 @@ class KoNamedDeclarationTest {
         assertSoftly(sut) {
             hasNameContaining("ple") shouldBeEqualTo true
             hasNameContaining("non") shouldBeEqualTo false
-            hasNameWithPrefix("sam") shouldBeEqualTo true
-            hasNameWithPrefix("non") shouldBeEqualTo false
-            hasNameWithSuffix("ion") shouldBeEqualTo true
-            hasNameWithSuffix("non") shouldBeEqualTo false
+            hasNameStartingWith("sam") shouldBeEqualTo true
+            hasNameStartingWith("non") shouldBeEqualTo false
+            hasNameEndingWith("ion") shouldBeEqualTo true
+            hasNameEndingWith("non") shouldBeEqualTo false
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }
@@ -153,10 +153,10 @@ class KoNamedDeclarationTest {
         assertSoftly(sut) {
             hasNameContaining("ple") shouldBeEqualTo true
             hasNameContaining("non") shouldBeEqualTo false
-            hasNameWithPrefix("sam") shouldBeEqualTo true
-            hasNameWithPrefix("non") shouldBeEqualTo false
-            hasNameWithSuffix("rty") shouldBeEqualTo true
-            hasNameWithSuffix("non") shouldBeEqualTo false
+            hasNameStartingWith("sam") shouldBeEqualTo true
+            hasNameStartingWith("non") shouldBeEqualTo false
+            hasNameEndingWith("rty") shouldBeEqualTo true
+            hasNameEndingWith("non") shouldBeEqualTo false
             hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
             hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
         }

@@ -19,29 +19,29 @@ fun <T : KoNamedDeclaration> Sequence<T>.withoutName(vararg names: String): Sequ
 /**
  * Sequence containing declarations that have name with prefix.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withNamePrefix(vararg prefixes: String): Sequence<T> = filter {
-    prefixes.any { prefix -> it.hasNameWithPrefix(prefix) }
+fun <T : KoNamedDeclaration> Sequence<T>.withNameStartingWith(vararg prefixes: String): Sequence<T> = filter {
+    prefixes.any { prefix -> it.hasNameStartingWith(prefix) }
 }
 
 /**
  * Sequence containing declarations that don't have name with prefix.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withoutNamePrefix(vararg prefixes: String): Sequence<T> = filter {
-    prefixes.none { prefix -> it.hasNameWithPrefix(prefix) }
+fun <T : KoNamedDeclaration> Sequence<T>.withoutNameStartingWith(vararg prefixes: String): Sequence<T> = filter {
+    prefixes.none { prefix -> it.hasNameStartingWith(prefix) }
 }
 
 /**
  * Sequence containing declarations that have name with suffix.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withNameSuffix(vararg suffixes: String): Sequence<T> = filter {
-    suffixes.any { suffix -> it.hasNameWithSuffix(suffix) }
+fun <T : KoNamedDeclaration> Sequence<T>.withNameEndingWith(vararg suffixes: String): Sequence<T> = filter {
+    suffixes.any { suffix -> it.hasNameEndingWith(suffix) }
 }
 
 /**
  * Sequence containing declarations that don't have name with suffix.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withoutNameSuffix(vararg suffixes: String): Sequence<T> = filter {
-    suffixes.none { suffix -> it.hasNameWithSuffix(suffix) }
+fun <T : KoNamedDeclaration> Sequence<T>.withoutNameEndingWith(vararg suffixes: String): Sequence<T> = filter {
+    suffixes.none { suffix -> it.hasNameEndingWith(suffix) }
 }
 
 /**
