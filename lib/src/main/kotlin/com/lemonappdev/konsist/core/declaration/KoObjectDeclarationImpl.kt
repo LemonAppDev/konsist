@@ -12,7 +12,18 @@ internal class KoObjectDeclarationImpl(
 ) :
     KoComplexDeclarationImpl(ktObjectDeclaration, parent),
     KoObjectDeclaration {
+
+    override val name: String by lazy {
+        if (hasCompanionModifier() && super.name == "") {
+            "Companion"
+        } else {
+            super.name
+        }
+    }
+
     override fun hasDataModifier() = hasModifiers(KoModifier.DATA)
+
+    override fun hasCompanionModifier() = hasModifiers(KoModifier.COMPANION)
 
     internal companion object {
         private val cache = KoDeclarationCache<KoObjectDeclarationImpl>()

@@ -1,8 +1,0 @@
-package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forcompanionobject
-
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
-
-@SampleAnnotation @SampleAnnotationWithParameter(sampleParameter = " parameter description ")
-protected final companion object SampleCompanionObject {
-}

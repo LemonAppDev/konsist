@@ -34,10 +34,8 @@ internal object KoDeclarationProviderUtil {
                     KoClassDeclarationImpl.getInstance(it, parent)
                 } else if (it is KtClass && it.isInterface()) {
                     KoInterfaceDeclarationImpl.getInstance(it, parent)
-                } else if (it is KtObjectDeclaration && !it.isCompanion()) {
+                } else if (it is KtObjectDeclaration) {
                     KoObjectDeclarationImpl.getInstance(it, parent)
-                } else if (it is KtObjectDeclaration && it.isCompanion()) {
-                    KoCompanionObjectDeclarationImpl.getInstance(it, parent)
                 } else if (it is KtProperty) {
                     KoPropertyDeclarationImpl.getInstance(it, parent)
                 } else if (it is KtFunction) {

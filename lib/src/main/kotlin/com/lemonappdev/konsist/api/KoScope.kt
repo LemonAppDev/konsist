@@ -47,14 +47,6 @@ interface KoScope {
     ): Sequence<KoObjectDeclaration>
 
     /**
-     * The companion objects present in the scope.
-     */
-    fun companionObjects(
-        modifiers: List<KoModifier> = emptyList(),
-        includeNested: Boolean = false,
-    ): Sequence<KoCompanionObjectDeclaration>
-
-    /**
      * The functions present in the scope.
      */
     fun functions(

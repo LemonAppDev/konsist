@@ -67,19 +67,6 @@ interface KoObjectProvider : KoDeclarationProvider {
     ): Boolean = objects(modifiers, includeNested).any { it.name == name }
 }
 
-interface KoCompanionObjectProvider : KoDeclarationProvider {
-    fun companionObjects(
-        modifiers: List<KoModifier> = emptyList(),
-        includeNested: Boolean = false,
-    ): Sequence<KoCompanionObjectDeclaration> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), modifiers, includeNested)
-
-    fun containsCompanionObject(
-        name: String,
-        modifiers: List<KoModifier> = emptyList(),
-        includeNested: Boolean = false,
-    ): Boolean = companionObjects(modifiers, includeNested).any { it.name == name }
-}
-
 interface KoPropertyProvider : KoDeclarationProvider {
     fun properties(
         modifiers: List<KoModifier> = emptyList(),

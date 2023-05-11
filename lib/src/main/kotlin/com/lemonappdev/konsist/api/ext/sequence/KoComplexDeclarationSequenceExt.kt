@@ -94,14 +94,6 @@ fun <T : KoComplexDeclaration> Sequence<T>.objects(
 ): Sequence<KoObjectDeclaration> = flatMap { it.objects(modifiers, includeNested) }
 
 /**
- * Sequence containing companion object declarations.
- */
-fun <T : KoComplexDeclaration> Sequence<T>.companionObjects(
-    modifiers: List<KoModifier> = emptyList(),
-    includeNested: Boolean = false,
-): Sequence<KoCompanionObjectDeclaration> = flatMap { it.companionObjects(modifiers, includeNested) }
-
-/**
  * Sequence containing properties declarations.
  */
 fun <T : KoComplexDeclaration> Sequence<T>.properties(

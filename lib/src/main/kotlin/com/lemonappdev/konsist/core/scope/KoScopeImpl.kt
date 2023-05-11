@@ -37,12 +37,6 @@ class KoScopeImpl(
     ): Sequence<KoObjectDeclaration> =
         koFiles.flatMap { it.objects(modifiers, includeNested) }
 
-    override fun companionObjects(
-        modifiers: List<KoModifier>,
-        includeNested: Boolean,
-    ): Sequence<KoCompanionObjectDeclaration> =
-        koFiles.flatMap { it.companionObjects(modifiers, includeNested) }
-
     override fun functions(
         modifiers: List<KoModifier>,
         includeNested: Boolean,
