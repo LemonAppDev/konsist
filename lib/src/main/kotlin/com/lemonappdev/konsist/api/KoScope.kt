@@ -12,11 +12,24 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.core.declaration.provider.KoClassProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoFunctionProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoObjectProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoPropertyProvider
 
 /**
  * Represents a scope of Kotlin declarations.
  */
-interface KoScope {
+interface KoScope :
+    KoDeclarationProvider,
+    KoClassProvider,
+    KoInterfaceProvider,
+    KoObjectProvider,
+    KoPropertyProvider,
+    KoFunctionProvider {
+
     /**
      * The files present in the scope.
      */
@@ -25,31 +38,31 @@ interface KoScope {
     /**
      * The classes present in the scope.
      */
-    fun classes(
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
+    override fun classes(
+        includeNested: Boolean,
+        includeLocal: Boolean,
     ): Sequence<KoClassDeclaration>
 
     /**
      * The interfaces present in the scope.
      */
-    fun interfaces(
-        includeNested: Boolean = false,
+    override fun interfaces(
+        includeNested: Boolean,
     ): Sequence<KoInterfaceDeclaration>
 
     /**
      * The objects present in the scope.
      */
-    fun objects(
-        includeNested: Boolean = false,
+    override fun objects(
+        includeNested: Boolean,
     ): Sequence<KoObjectDeclaration>
 
     /**
      * The functions present in the scope.
      */
-    fun functions(
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
+    override fun functions(
+        includeNested: Boolean,
+        includeLocal: Boolean,
     ): Sequence<KoFunctionDeclaration>
 
     /**
@@ -63,17 +76,17 @@ interface KoScope {
     /**
      * The declarations present in the scope.
      */
-    fun declarations(
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
+    override fun declarations(
+        includeNested: Boolean,
+        includeLocal: Boolean,
     ): Sequence<KoDeclaration>
 
     /**
      * The properties present in the scope.
      */
-    fun properties(
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
+    override fun properties(
+        includeNested: Boolean,
+        includeLocal: Boolean,
     ): Sequence<KoPropertyDeclaration>
 
     /**
