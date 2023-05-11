@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 
 class KonsistTestForScopeFromSourceSet {
     @Test
-    fun `scopeFromModule for main source set`() {
+    fun `scopeFromSourceSet for main source set`() {
         // given
         val sut = Konsist
             .scopeFromSourceSet("main")
@@ -33,7 +33,7 @@ class KonsistTestForScopeFromSourceSet {
     }
 
     @Test
-    fun `scopeFromModule for integrationTest source set`() {
+    fun `scopeFromSourceSet for integrationTest source set`() {
         // given
         val sut = Konsist
             .scopeFromSourceSet("integrationTest")
@@ -63,7 +63,7 @@ class KonsistTestForScopeFromSourceSet {
     }
 
     @Test
-    fun `scopeFromModule for test source set`() {
+    fun `scopeFromSourceSet for test source set`() {
         // given
         val sut = Konsist
             .scopeFromSourceSet("test")
