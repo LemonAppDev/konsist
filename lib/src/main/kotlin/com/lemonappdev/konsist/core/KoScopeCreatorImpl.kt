@@ -38,10 +38,10 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    override fun scopeFromModule(moduleName: String): KoScope {
-        val koFiles = getFiles(moduleName)
-        return KoScopeImpl(koFiles)
-    }
+    override fun scopeFromModule(vararg moduleNames: String) = moduleNames
+        .flatMap { getFiles(it) }
+        .asSequence()
+        .let { KoScopeImpl(it) }
 
     override fun scopeFromPackage(packagee: String, moduleName: String?, sourceSetName: String?): KoScope {
         val koFiles = getFiles(moduleName, sourceSetName)
