@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.util.LocationHelper
-import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isPublic
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
@@ -57,15 +56,6 @@ internal abstract class KoDeclarationImpl(
             ?: emptyList()
     }
 
-    override val kDoc by lazy {
-        val kDocElement = ktTypeParameterListOwner
-            .children
-            .filterIsInstance<KDocElement>()
-            .firstOrNull()
-
-        kDocElement?.let { KoKDocDeclarationImpl(kDocElement) }
-    }
-
     override fun hasPublicModifier() = hasModifiers(KoModifier.PUBLIC)
 
     override fun isPublicOrDefault() = ktTypeParameterListOwner.isPublic
@@ -95,8 +85,6 @@ internal abstract class KoDeclarationImpl(
         koModifiers.isEmpty() -> modifiers.isNotEmpty()
         else -> modifiers.containsAll(koModifiers.toList())
     }
-
-    override fun hasKDoc() = kDoc != null
 
     override fun resideInPackage(packagee: String) = LocationHelper.resideInLocation(packagee, this.packagee)
 

@@ -1,0 +1,5 @@
+fun sampleFunction {
+    val sampleLocalProperty = 7
+}
+
+typealias SampleTypeAlias = () -> Int

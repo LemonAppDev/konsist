@@ -1,0 +1,6 @@
+import com.sampleimport1
+import com.sampleimport2
+
+fun sampleFunction {
+    val sampleLocalProperty = 7
+}

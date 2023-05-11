@@ -170,7 +170,7 @@ class AssertTest {
     fun `assert-suppress-by-konsist-and-name-at-file-level`() {
         // given
         val sut = getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level")
-            .declarations(includeNested = true)
+            .namedDeclarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -180,7 +180,7 @@ class AssertTest {
     fun `assert-suppress-by-name-at-file-level`() {
         // given
         val sut = getSnippetFile("assert-suppress-by-name-at-file-level")
-            .declarations(includeNested = true)
+            .namedDeclarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -191,7 +191,7 @@ class AssertTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level")
-                .declarations(includeNested = true)
+                .namedDeclarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -202,7 +202,7 @@ class AssertTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level")
-                .declarations(includeNested = true)
+                .namedDeclarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -212,7 +212,7 @@ class AssertTest {
     fun `assert-suppress-by-konsist-and-name-at-declaration-level`() {
         // given
         val sut = getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level")
-            .declarations(includeNested = true)
+            .namedDeclarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -222,7 +222,7 @@ class AssertTest {
     fun `assert-suppress-by-name-at-declaration-level`() {
         // given
         val sut = getSnippetFile("assert-suppress-by-name-at-declaration-level")
-            .declarations(includeNested = true)
+            .namedDeclarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }

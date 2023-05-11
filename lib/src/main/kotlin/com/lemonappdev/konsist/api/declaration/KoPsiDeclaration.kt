@@ -30,6 +30,16 @@ interface KoPsiDeclaration {
     val locationWithText: String
 
     /**
+     * Documentation pf the declaration.
+     */
+    val kDoc: KoKDocDeclaration?
+
+    /**
+     * Whether the declaration has kDoc.
+     */
+    fun hasKDoc(): Boolean
+
+    /**
      * Whatever declaration reside in file path.
      */
     fun resideInFilePath(path: String): Boolean

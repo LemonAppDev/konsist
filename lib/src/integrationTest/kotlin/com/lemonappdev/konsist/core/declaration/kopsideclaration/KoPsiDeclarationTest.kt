@@ -133,7 +133,7 @@ class KoPsiDeclarationTest {
     fun `text`() {
         // given
         val sut = getSnippetFile("text")
-            .declarations()
+            .namedDeclarations()
             .first()
 
         // then
