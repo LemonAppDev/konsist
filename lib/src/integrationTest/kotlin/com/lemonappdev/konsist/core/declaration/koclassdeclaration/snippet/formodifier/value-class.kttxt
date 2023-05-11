@@ -1,0 +1,4 @@
+package com.lemonappdev.konsist.core.declaration.koclassdeclaration.snippet.formodifier
+
+@JvmInline
+value class SampleClass(val sampleParameter: Int)
