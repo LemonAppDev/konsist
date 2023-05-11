@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.core.declaration.provider.KoObjectProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoPropertyProvider
 
 /**
- * Represents a complex declaration, such as a class, interface, object, companion object, etc.
+ * Represents a complex declaration, such as a class, interface, object, etc.
  */
 interface KoComplexDeclaration :
     KoDeclaration,

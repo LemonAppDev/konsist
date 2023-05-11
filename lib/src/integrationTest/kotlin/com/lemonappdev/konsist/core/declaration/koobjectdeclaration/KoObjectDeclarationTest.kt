@@ -46,7 +46,7 @@ class KoObjectDeclarationTest {
     fun `companion-object-without-name`() {
         // given
         val sut = getSnippetFile("companion-object-without-name")
-            .objects()
+            .objects(includeNested = true)
             .first()
 
         // then

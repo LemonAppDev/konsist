@@ -35,7 +35,6 @@ class KoComplexDeclarationForInterfaceTest {
             "SampleClass",
             "SampleObject",
             "SampleInterface",
-            "SampleCompanionObject",
         )
 
         sut
@@ -59,7 +58,6 @@ class KoComplexDeclarationForInterfaceTest {
             "SampleClass",
             "SampleObject",
             "SampleInterface",
-            "SampleCompanionObject",
         )
 
         sut
@@ -83,7 +81,6 @@ class KoComplexDeclarationForInterfaceTest {
             "SampleClass",
             "SampleObject",
             "SampleInterface",
-            "SampleCompanionObject",
         )
 
         sut
@@ -107,7 +104,6 @@ class KoComplexDeclarationForInterfaceTest {
             "SampleClassNestedInsideClass",
             "SampleObjectNestedInsideClass",
             "SampleInterfaceNestedInsideClass",
-            "SampleCompanionObjectNestedInsideClass",
             "SampleObject",
             "SampleClassNestedInsideObject",
             "SampleObjectNestedInsideObject",

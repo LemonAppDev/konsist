@@ -1,3 +1,4 @@
-companion object {
-
+class SampleClass{
+    companion object {
+    }
 }

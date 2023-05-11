@@ -5,7 +5,6 @@ object SampleTopLevelObject {
         class SampleClassNestedInsideClass
         object SampleObjectNestedInsideClass
         interface SampleInterfaceNestedInsideClass
-        companion object SampleCompanionObjectNestedInsideClass
     }
 
     object SampleObject {

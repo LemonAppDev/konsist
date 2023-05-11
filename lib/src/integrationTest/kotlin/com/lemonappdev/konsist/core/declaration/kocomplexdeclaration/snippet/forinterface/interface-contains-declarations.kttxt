@@ -8,6 +8,4 @@ interface SampleTopLevelInterface {
     object SampleObject
 
     interface SampleInterface
-
-    companion object SampleCompanionObject
 }
