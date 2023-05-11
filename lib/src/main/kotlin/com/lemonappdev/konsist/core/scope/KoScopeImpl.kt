@@ -85,11 +85,7 @@ class KoScopeImpl(
         println(toString())
     }
 
-    override fun equals(other: Any?): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun equals(other: Any?): Boolean = other is KoScopeImpl && files() == other.files()
 
-    override fun hashCode(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun hashCode(): Int = 31 * 7 + files().hashCode()
 }

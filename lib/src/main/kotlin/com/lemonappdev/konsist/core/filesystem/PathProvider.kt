@@ -7,7 +7,6 @@ class PathProvider(
     private val koFileFactory: KoFileFactory,
     private val projectRootDirProviderFactory: ProjectRootDirProviderFactory,
 ) {
-
     val rootProjectPath: String by lazy { rootProjectDirectory.absoluteFile.path }
 
     val rootProjectDirectory: File by lazy {
