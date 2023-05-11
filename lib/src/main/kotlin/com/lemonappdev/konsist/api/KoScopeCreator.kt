@@ -35,7 +35,7 @@ interface KoScopeCreator {
      *
      * @param moduleName The name of the module.
      */
-    fun scopeFromModule(moduleName: String): KoScope
+    fun scopeFromModule(vararg moduleNames: String): KoScope
 
     /**
      * Returns a [KoScope] containing all of Kotlin files in the given package.
