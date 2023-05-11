@@ -30,7 +30,6 @@ class KoScopeOperatorTest {
                 listOf(
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
-                    "KoScopeForCompanionObjectTest.kt",
                     "KoScopeForDeclarationTest.kt",
                     "KoScopeForDeclarationTest.kt",
                     "KoScopeForFunctionTest.kt",
@@ -66,7 +65,6 @@ class KoScopeOperatorTest {
                 listOf(
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
-                    "KoScopeForCompanionObjectTest.kt",
                     "KoScopeForFunctionTest.kt",
                     "KoScopeForImportTest.kt",
                     "KoScopeForInterfaceTest.kt",
@@ -118,7 +116,6 @@ class KoScopeOperatorTest {
                 listOf(
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
-                    "KoScopeForCompanionObjectTest.kt",
                     "KoScopeForDeclarationTest.kt",
                     "KoScopeForDeclarationTest.kt",
                     "KoScopeForFunctionTest.kt",
@@ -154,7 +151,6 @@ class KoScopeOperatorTest {
                 listOf(
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
-                    "KoScopeForCompanionObjectTest.kt",
                     "KoScopeForFunctionTest.kt",
                     "KoScopeForImportTest.kt",
                     "KoScopeForInterfaceTest.kt",

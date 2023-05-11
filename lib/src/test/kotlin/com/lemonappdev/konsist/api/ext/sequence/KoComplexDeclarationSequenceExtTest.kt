@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
@@ -261,30 +260,6 @@ class KoComplexDeclarationSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(object1, object2, object3)
-    }
-
-    @Test
-    fun `companionObjects() returns companion objects from all complex declarations`() {
-        // given
-        val companionObject1: KoCompanionObjectDeclarationImpl = mockk()
-        val companionObject2: KoCompanionObjectDeclarationImpl = mockk()
-        val companionObject3: KoCompanionObjectDeclarationImpl = mockk()
-        val complexDeclaration1: KoComplexDeclarationImpl = mockk {
-            every { companionObjects(includeNested = true) } returns sequenceOf(companionObject1, companionObject2)
-        }
-        val complexDeclaration2: KoComplexDeclarationImpl = mockk {
-            every { companionObjects(includeNested = true) } returns sequenceOf(companionObject3)
-        }
-        val complexDeclaration3: KoComplexDeclarationImpl = mockk {
-            every { companionObjects(includeNested = true) } returns emptySequence()
-        }
-        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
-
-        // when
-        val sut = complexDeclarations.companionObjects(includeNested = true)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(companionObject1, companionObject2, companionObject3)
     }
 
     @Test

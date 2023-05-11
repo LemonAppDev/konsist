@@ -20,10 +20,6 @@ interface SampleInterface2
 
 object SampleObject
 
-interface SampleTopLevelInterface {
-    companion object SampleCompanionObject
-}
-
 annotation class NonExistingAnnotation
 
 @Target(

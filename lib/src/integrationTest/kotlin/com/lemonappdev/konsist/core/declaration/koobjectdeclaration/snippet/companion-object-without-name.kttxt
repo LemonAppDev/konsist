@@ -1,4 +1,4 @@
-class SampleTopLevelClass {
+class SampleClass{
     companion object {
     }
 }

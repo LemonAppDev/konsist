@@ -1,4 +1,0 @@
-class SampleTopLevelClass {
-    companion object SampleCompanionObject {
-    }
-}

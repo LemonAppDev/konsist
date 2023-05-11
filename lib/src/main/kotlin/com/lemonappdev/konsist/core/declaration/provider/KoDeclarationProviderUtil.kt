@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
@@ -131,9 +130,7 @@ internal object KoDeclarationProviderUtil {
     private fun getInstanceOfKtDeclaration(ktDeclaration: KtDeclaration, parent: KoBaseDeclaration) = when {
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(ktDeclaration, parent)
-        ktDeclaration is KtObjectDeclaration && !ktDeclaration.isCompanion() -> KoObjectDeclarationImpl.getInstance(ktDeclaration, parent)
-        ktDeclaration is KtObjectDeclaration && ktDeclaration.isCompanion() ->
-            KoCompanionObjectDeclarationImpl.getInstance(ktDeclaration, parent)
+        ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtProperty -> KoPropertyDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtFunction -> KoFunctionDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(ktDeclaration, parent)

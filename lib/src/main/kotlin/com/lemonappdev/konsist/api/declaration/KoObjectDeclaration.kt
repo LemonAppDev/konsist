@@ -8,4 +8,9 @@ interface KoObjectDeclaration : KoComplexDeclaration {
      * Whether this object has a data modifier.
      */
     fun hasDataModifier(): Boolean
+
+    /**
+     * Whether this object has a companion modifier.
+     */
+    fun hasCompanionModifier(): Boolean
 }

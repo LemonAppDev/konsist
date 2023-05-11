@@ -42,4 +42,40 @@ class KoObjectDeclarationSequenceExtTest {
         // then
         sut.toList() shouldBeEqualTo listOf(object2)
     }
+
+    @Test
+    fun `withCompanionModifier() returns object with companion modifier`() {
+        // given
+        val object1: KoObjectDeclarationImpl = mockk {
+            every { hasCompanionModifier() } returns true
+        }
+        val object2: KoObjectDeclarationImpl = mockk {
+            every { hasCompanionModifier() } returns false
+        }
+        val objects = sequenceOf(object1, object2)
+
+        // when
+        val sut = objects.withCompanionModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(object1)
+    }
+
+    @Test
+    fun `withoutCompanionModifier() returns object without companion modifier`() {
+        // given
+        val object1: KoObjectDeclarationImpl = mockk {
+            every { hasCompanionModifier() } returns true
+        }
+        val object2: KoObjectDeclarationImpl = mockk {
+            every { hasCompanionModifier() } returns false
+        }
+        val objects = sequenceOf(object1, object2)
+
+        // when
+        val sut = objects.withoutCompanionModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(object2)
+    }
 }

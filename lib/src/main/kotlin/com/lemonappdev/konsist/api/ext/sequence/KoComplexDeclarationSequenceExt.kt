@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoComplexDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
@@ -87,13 +86,6 @@ fun <T : KoComplexDeclaration> Sequence<T>.interfaces(
 fun <T : KoComplexDeclaration> Sequence<T>.objects(
     includeNested: Boolean = false,
 ): Sequence<KoObjectDeclaration> = flatMap { it.objects(includeNested) }
-
-/**
- * Sequence containing companion object declarations.
- */
-fun <T : KoComplexDeclaration> Sequence<T>.companionObjects(
-    includeNested: Boolean = false,
-): Sequence<KoCompanionObjectDeclaration> = flatMap { it.companionObjects(includeNested) }
 
 /**
  * Sequence containing properties declarations.

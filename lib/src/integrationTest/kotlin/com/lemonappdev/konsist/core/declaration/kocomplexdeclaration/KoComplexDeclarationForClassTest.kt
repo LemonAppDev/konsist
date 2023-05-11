@@ -35,7 +35,6 @@ class KoComplexDeclarationForClassTest {
             "SampleClass",
             "SampleInterface",
             "SampleObject",
-            "SampleCompanionObject",
         )
 
         sut
@@ -59,7 +58,6 @@ class KoComplexDeclarationForClassTest {
             "SampleClass",
             "SampleInterface",
             "SampleObject",
-            "SampleCompanionObject",
         )
 
         sut
@@ -83,7 +81,6 @@ class KoComplexDeclarationForClassTest {
             "SampleClass",
             "SampleInterface",
             "SampleObject",
-            "SampleCompanionObject",
         )
 
         sut
@@ -107,7 +104,6 @@ class KoComplexDeclarationForClassTest {
             "SampleClassNestedInsideClass",
             "SampleObjectNestedInsideClass",
             "SampleInterfaceNestedInsideClass",
-            "SampleCompanionObjectNestedInsideClass",
             "SampleObject",
             "SampleClassNestedInsideObject",
             "SampleObjectNestedInsideObject",
@@ -116,7 +112,6 @@ class KoComplexDeclarationForClassTest {
             "SampleClassNestedInsideInterface",
             "SampleObjectNestedInsideInterface",
             "SampleInterfaceNestedInsideInterface",
-            "SampleCompanionObjectNestedInsideInterface",
         )
 
         sut.declarations(includeNested = true, includeLocal = true).toList()

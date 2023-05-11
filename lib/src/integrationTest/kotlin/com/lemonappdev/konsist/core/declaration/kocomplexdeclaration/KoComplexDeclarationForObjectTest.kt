@@ -104,7 +104,6 @@ class KoComplexDeclarationForObjectTest {
             "SampleClassNestedInsideClass",
             "SampleObjectNestedInsideClass",
             "SampleInterfaceNestedInsideClass",
-            "SampleCompanionObjectNestedInsideClass",
             "SampleObject",
             "SampleClassNestedInsideObject",
             "SampleObjectNestedInsideObject",

@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.scope
 
 import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoCompanionObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
@@ -33,11 +32,6 @@ class KoScopeImpl(
         includeNested: Boolean,
     ): Sequence<KoObjectDeclaration> =
         koFiles.flatMap { it.objects(includeNested) }
-
-    override fun companionObjects(
-        includeNested: Boolean,
-    ): Sequence<KoCompanionObjectDeclaration> =
-        koFiles.flatMap { it.companionObjects(includeNested) }
 
     override fun functions(
         includeNested: Boolean,
