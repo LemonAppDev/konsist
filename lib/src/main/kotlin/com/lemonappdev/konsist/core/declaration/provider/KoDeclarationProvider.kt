@@ -12,74 +12,37 @@ interface KoDeclarationProvider {
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
     ): Sequence<KoNamedDeclaration>
-
-    fun containsDeclarations(
-        name: String,
-        includeNested: Boolean = false,
-    ) = declarations(includeNested).any { it.name == name }
 }
 
 interface KoClassProvider : KoDeclarationProvider {
     fun classes(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoClassDeclaration> =
-        KoDeclarationProviderUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
-
-    fun containsClass(
-        name: String,
-        includeNested: Boolean = false,
-    ): Boolean =
-        classes(includeNested).any { it.name == name }
+    ): Sequence<KoClassDeclaration>
 }
 
 interface KoInterfaceProvider : KoDeclarationProvider {
     fun interfaces(
         includeNested: Boolean = false,
-    ): Sequence<KoInterfaceDeclaration> =
-        KoDeclarationProviderUtil.getKoDeclarations(declarations(), includeNested)
-
-    fun containsInterface(
-        name: String,
-        includeNested: Boolean = false,
-    ): Boolean =
-        interfaces(includeNested).any { it.name == name }
+    ): Sequence<KoInterfaceDeclaration>
 }
 
 interface KoObjectProvider : KoDeclarationProvider {
     fun objects(
         includeNested: Boolean = false,
-    ): Sequence<KoObjectDeclaration> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), includeNested)
-
-    fun containsObject(
-        name: String,
-        includeNested: Boolean = false,
-    ): Boolean = objects(includeNested).any { it.name == name }
+    ): Sequence<KoObjectDeclaration>
 }
 
 interface KoPropertyProvider : KoDeclarationProvider {
     fun properties(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoPropertyDeclaration> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
-
-    fun containsProperty(
-        name: String,
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
-    ): Boolean =
-        properties(includeNested, includeLocal).any { it.name == name }
+    ): Sequence<KoPropertyDeclaration>
 }
 
 interface KoFunctionProvider : KoDeclarationProvider {
     fun functions(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoFunctionDeclaration> = KoDeclarationProviderUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
-
-    fun containsFunction(
-        name: String,
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
-    ): Boolean = functions(includeNested, includeLocal).any { it.name == name }
+    ): Sequence<KoFunctionDeclaration>
 }

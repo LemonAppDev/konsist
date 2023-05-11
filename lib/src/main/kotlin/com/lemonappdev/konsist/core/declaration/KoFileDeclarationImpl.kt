@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProviderUtil
+import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
 import com.lemonappdev.konsist.core.util.LocationHelper
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
@@ -54,7 +54,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
         includeNested: Boolean,
         includeLocal: Boolean,
     ): Sequence<KoNamedDeclaration> =
-        KoDeclarationProviderUtil.getKoDeclarations(ktFile, includeNested, includeLocal, this)
+        KoDeclarationCoreProviderUtil.getKoDeclarations(ktFile, includeNested, includeLocal, this)
 
     override fun hasAnnotations(vararg names: String) = when {
         names.isEmpty() -> annotations.isNotEmpty()
