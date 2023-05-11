@@ -23,13 +23,27 @@ fun Sequence<KoObjectDeclaration>.withCompanionModifier(): Sequence<KoObjectDecl
 fun Sequence<KoObjectDeclaration>.withoutCompanionModifier(): Sequence<KoObjectDeclaration> = filterNot { it.hasCompanionModifier() }
 
 /**
- * Sequence containing declarations that have not defaulted name.
+ * Sequence containing declarations that have 'companion' modifier and not defaulted name.
  */
 fun Sequence<KoObjectDeclaration>.withNamedCompanionObject(): Sequence<KoObjectDeclaration> =
     filter { it.hasCompanionModifier() && it.name != "Companion" }
 
 /**
- * Sequence containing declarations that have defaulted name.
+ * Sequence containing declarations that have 'companion' modifier and defaulted name.
  */
 fun Sequence<KoObjectDeclaration>.withoutNamedCompanionObject(): Sequence<KoObjectDeclaration> =
     filter { it.hasCompanionModifier() && it.name == "Companion" }
+
+/**
+ * Sequence containing declarations that have 'companion' modifier and name.
+ */
+fun Sequence<KoObjectDeclaration>.withNamedCompanionObjectAs(vararg names: String): Sequence<KoObjectDeclaration> = filter {
+    it.hasCompanionModifier() && names.any { name -> it.name == name }
+}
+
+/**
+ * Sequence containing declarations that have 'companion' modifier and don't have name.
+ */
+fun Sequence<KoObjectDeclaration>.withoutNamedCompanionObjectAs(vararg names: String): Sequence<KoObjectDeclaration> = filter {
+    it.hasCompanionModifier() && names.none { name -> it.name == name }
+}
