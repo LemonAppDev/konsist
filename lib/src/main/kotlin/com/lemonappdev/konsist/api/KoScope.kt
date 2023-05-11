@@ -74,6 +74,14 @@ interface KoScope :
     ): Sequence<KoNamedDeclaration>
 
     /**
+     * The named declarations present in the scope.
+     */
+    fun namedDeclarations(
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+    ): Sequence<KoNamedDeclaration>
+
+    /**
      * The declarations present in the scope.
      */
     override fun declarations(

@@ -12,12 +12,12 @@ interface KoNamedDeclaration : KoBaseDeclaration {
     /**
      * Name of the declaration with prefix.
      */
-    fun hasNameWithPrefix(prefix: String): Boolean
+    fun hasNameStartingWith(prefix: String): Boolean
 
     /**
      * Name of the declaration with suffix.
      */
-    fun hasNameWithSuffix(suffix: String): Boolean
+    fun hasNameEndingWith(suffix: String): Boolean
 
     /**
      * Name of the declaration containing.

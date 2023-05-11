@@ -21,15 +21,3 @@ fun Sequence<KoObjectDeclaration>.withCompanionModifier(): Sequence<KoObjectDecl
  * Sequence containing all declarations that don't have 'companion' modifier.
  */
 fun Sequence<KoObjectDeclaration>.withoutCompanionModifier(): Sequence<KoObjectDeclaration> = filterNot { it.hasCompanionModifier() }
-
-/**
- * Sequence containing declarations that have not defaulted name.
- */
-fun Sequence<KoObjectDeclaration>.withNamedCompanionObject(): Sequence<KoObjectDeclaration> =
-    filter { it.hasCompanionModifier() && it.name != "Companion" }
-
-/**
- * Sequence containing declarations that have defaulted name.
- */
-fun Sequence<KoObjectDeclaration>.withoutNamedCompanionObject(): Sequence<KoObjectDeclaration> =
-    filter { it.hasCompanionModifier() && it.name == "Companion" }
