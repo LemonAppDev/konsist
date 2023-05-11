@@ -125,4 +125,14 @@ interface KoScope {
      * Print the scope.
      */
     fun print(): Unit
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     */
+    override fun equals(other: Any?): Boolean
+
+    /**
+     * Returns a hash code value for the object.
+     */
+    override fun hashCode(): Int
 }

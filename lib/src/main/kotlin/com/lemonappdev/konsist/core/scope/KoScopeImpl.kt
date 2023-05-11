@@ -84,4 +84,12 @@ class KoScopeImpl(
     override fun print() {
         println(toString())
     }
+
+    override fun equals(other: Any?): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun hashCode(): Int {
+        TODO("Not yet implemented")
+    }
 }
