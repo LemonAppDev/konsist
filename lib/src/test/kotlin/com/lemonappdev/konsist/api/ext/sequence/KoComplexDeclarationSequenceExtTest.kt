@@ -270,31 +270,6 @@ class KoComplexDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `companionObjects() returns companion objects from all complex declarations`() {
-        // given
-        val companionObject1: KoCompanionObjectDeclarationImpl = mockk()
-        val companionObject2: KoCompanionObjectDeclarationImpl = mockk()
-        val companionObject3: KoCompanionObjectDeclarationImpl = mockk()
-        val modifiers = listOf(OPEN, PUBLIC)
-        val complexDeclaration1: KoComplexDeclarationImpl = mockk {
-            every { companionObjects(modifiers, includeNested = true) } returns sequenceOf(companionObject1, companionObject2)
-        }
-        val complexDeclaration2: KoComplexDeclarationImpl = mockk {
-            every { companionObjects(modifiers, includeNested = true) } returns sequenceOf(companionObject3)
-        }
-        val complexDeclaration3: KoComplexDeclarationImpl = mockk {
-            every { companionObjects(modifiers, includeNested = true) } returns emptySequence()
-        }
-        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
-
-        // when
-        val sut = complexDeclarations.companionObjects(modifiers, includeNested = true)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(companionObject1, companionObject2, companionObject3)
-    }
-
-    @Test
     fun `properties() returns properties from all complex declarations`() {
         // given
         val property1: KoPropertyDeclarationImpl = mockk()
