@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeAlias
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
-internal object KoDeclarationProviderUtil {
+internal object KoDeclarationCoreProviderUtil {
     inline fun <reified T : KoNamedDeclaration> getKoDeclarations(
         ktElement: KtElement,
         includeNested: Boolean = false,
