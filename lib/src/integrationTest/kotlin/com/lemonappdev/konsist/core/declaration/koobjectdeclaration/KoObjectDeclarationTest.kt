@@ -36,7 +36,7 @@ class KoObjectDeclarationTest {
             .first()
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             sut.hasCompanionModifier() shouldBeEqualTo true
             sut.name shouldBeEqualTo "SampleObject"
         }
@@ -50,7 +50,7 @@ class KoObjectDeclarationTest {
             .first()
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             sut.hasCompanionModifier() shouldBeEqualTo true
             sut.name shouldBeEqualTo "Companion"
         }
@@ -64,7 +64,7 @@ class KoObjectDeclarationTest {
             .first()
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             sut.hasDataModifier() shouldBeEqualTo false
             sut.hasCompanionModifier() shouldBeEqualTo false
         }

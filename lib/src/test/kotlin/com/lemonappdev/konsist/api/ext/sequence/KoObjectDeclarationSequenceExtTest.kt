@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.core.declaration.KoCompanionObjectDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk
@@ -90,12 +89,10 @@ class KoObjectDeclarationSequenceExtTest {
         val object2: KoObjectDeclarationImpl = mockk {
             every { name } returns "Companion"
             every { hasCompanionModifier() } returns true
-
         }
         val object3: KoObjectDeclarationImpl = mockk {
             every { name } returns "Companion"
             every { hasCompanionModifier() } returns false
-
         }
         val objects = sequenceOf(object1, object2, object3)
 
@@ -116,12 +113,10 @@ class KoObjectDeclarationSequenceExtTest {
         val object2: KoObjectDeclarationImpl = mockk {
             every { name } returns "Companion"
             every { hasCompanionModifier() } returns true
-
         }
         val object3: KoObjectDeclarationImpl = mockk {
             every { name } returns "Companion"
             every { hasCompanionModifier() } returns false
-
         }
         val objects = sequenceOf(object1, object2, object3)
 
