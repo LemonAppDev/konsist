@@ -6,9 +6,9 @@ import org.jetbrains.kotlin.psi.KtElement
 internal abstract class KoNamedDeclarationImpl(private val ktElement: KtElement) : KoBaseDeclarationImpl(ktElement), KoNamedDeclaration {
     override val name by lazy { ktElement.name ?: "" }
 
-    override fun hasNameWithPrefix(prefix: String) = name.startsWith(prefix)
+    override fun hasNameStartingWith(prefix: String) = name.startsWith(prefix)
 
-    override fun hasNameWithSuffix(suffix: String) = name.endsWith(suffix)
+    override fun hasNameEndingWith(suffix: String) = name.endsWith(suffix)
 
     override fun hasNameContaining(text: String) = name.contains(text)
 

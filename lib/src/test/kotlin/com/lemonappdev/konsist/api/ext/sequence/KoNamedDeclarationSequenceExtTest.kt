@@ -56,104 +56,104 @@ class KoNamedDeclarationSequenceExtTest {
     }
 
     @Test
-    fun `withNamePrefix() returns namedDeclarations which names starts with one of given prefixes`() {
+    fun `withNameStartingWith() returns namedDeclarations which names starts with one of given prefixes`() {
         // given
         val prefix1 = "prefix1"
         val prefix2 = "prefix2"
         val namedDeclaration1: KoNamedDeclarationImpl = mockk {
-            every { hasNameWithPrefix(prefix1) } returns true
-            every { hasNameWithPrefix(prefix2) } returns true
+            every { hasNameStartingWith(prefix1) } returns true
+            every { hasNameStartingWith(prefix2) } returns true
         }
         val namedDeclaration2: KoNamedDeclarationImpl = mockk {
-            every { hasNameWithPrefix(prefix1) } returns true
-            every { hasNameWithPrefix(prefix2) } returns false
+            every { hasNameStartingWith(prefix1) } returns true
+            every { hasNameStartingWith(prefix2) } returns false
         }
         val namedDeclaration3: KoNamedDeclarationImpl = mockk {
-            every { hasNameWithPrefix(prefix1) } returns false
-            every { hasNameWithPrefix(prefix2) } returns false
+            every { hasNameStartingWith(prefix1) } returns false
+            every { hasNameStartingWith(prefix2) } returns false
         }
         val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
-        val sut = namedDeclarations.withNamePrefix(prefix1, prefix2)
+        val sut = namedDeclarations.withNameStartingWith(prefix1, prefix2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration1, namedDeclaration2)
     }
 
     @Test
-    fun `withoutNamePrefix() returns namedDeclaration which name not starts with given prefixes`() {
+    fun `withoutNameStartingWith() returns namedDeclaration which name not starts with given prefixes`() {
         // given
         val prefix1 = "prefix1"
         val prefix2 = "prefix2"
         val namedDeclaration1: KoNamedDeclarationImpl = mockk {
-            every { hasNameWithPrefix(prefix1) } returns true
-            every { hasNameWithPrefix(prefix2) } returns true
+            every { hasNameStartingWith(prefix1) } returns true
+            every { hasNameStartingWith(prefix2) } returns true
         }
         val namedDeclaration2: KoNamedDeclarationImpl = mockk {
-            every { hasNameWithPrefix(prefix1) } returns true
-            every { hasNameWithPrefix(prefix2) } returns false
+            every { hasNameStartingWith(prefix1) } returns true
+            every { hasNameStartingWith(prefix2) } returns false
         }
         val namedDeclaration3: KoNamedDeclarationImpl = mockk {
-            every { hasNameWithPrefix(prefix1) } returns false
-            every { hasNameWithPrefix(prefix2) } returns false
+            every { hasNameStartingWith(prefix1) } returns false
+            every { hasNameStartingWith(prefix2) } returns false
         }
         val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
-        val sut = namedDeclarations.withoutNamePrefix(prefix1, prefix2)
+        val sut = namedDeclarations.withoutNameStartingWith(prefix1, prefix2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration3)
     }
 
     @Test
-    fun `withNameSuffix() returns namedDeclarations which names ends with one of suffixes`() {
+    fun `withNameEndingWith() returns namedDeclarations which names ends with one of suffixes`() {
         // given
         val suffix1 = "suffix1"
         val suffix2 = "suffix2"
         val namedDeclaration1: KoNamedDeclarationImpl = mockk {
-            every { hasNameWithSuffix(suffix1) } returns true
-            every { hasNameWithSuffix(suffix2) } returns true
+            every { hasNameEndingWith(suffix1) } returns true
+            every { hasNameEndingWith(suffix2) } returns true
         }
         val namedDeclaration2: KoNamedDeclarationImpl = mockk {
-            every { hasNameWithSuffix(suffix1) } returns true
-            every { hasNameWithSuffix(suffix2) } returns false
+            every { hasNameEndingWith(suffix1) } returns true
+            every { hasNameEndingWith(suffix2) } returns false
         }
         val namedDeclaration3: KoNamedDeclarationImpl = mockk {
-            every { hasNameWithSuffix(suffix1) } returns false
-            every { hasNameWithSuffix(suffix2) } returns false
+            every { hasNameEndingWith(suffix1) } returns false
+            every { hasNameEndingWith(suffix2) } returns false
         }
         val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
-        val sut = namedDeclarations.withNameSuffix(suffix1, suffix2)
+        val sut = namedDeclarations.withNameEndingWith(suffix1, suffix2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration1, namedDeclaration2)
     }
 
     @Test
-    fun `withoutNameSuffix() returns namedDeclaration which name not ends with given suffixes`() {
+    fun `withoutNameEndingWith() returns namedDeclaration which name not ends with given suffixes`() {
         // given
         val suffix1 = "suffix1"
         val suffix2 = "suffix2"
         val namedDeclaration1: KoNamedDeclarationImpl = mockk {
-            every { hasNameWithSuffix(suffix1) } returns true
-            every { hasNameWithSuffix(suffix2) } returns true
+            every { hasNameEndingWith(suffix1) } returns true
+            every { hasNameEndingWith(suffix2) } returns true
         }
         val namedDeclaration2: KoNamedDeclarationImpl = mockk {
-            every { hasNameWithSuffix(suffix1) } returns true
-            every { hasNameWithSuffix(suffix2) } returns false
+            every { hasNameEndingWith(suffix1) } returns true
+            every { hasNameEndingWith(suffix2) } returns false
         }
         val namedDeclaration3: KoNamedDeclarationImpl = mockk {
-            every { hasNameWithSuffix(suffix1) } returns false
-            every { hasNameWithSuffix(suffix2) } returns false
+            every { hasNameEndingWith(suffix1) } returns false
+            every { hasNameEndingWith(suffix2) } returns false
         }
         val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
-        val sut = namedDeclarations.withoutNameSuffix(suffix1, suffix2)
+        val sut = namedDeclarations.withoutNameEndingWith(suffix1, suffix2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration3)
