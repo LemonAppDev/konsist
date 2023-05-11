@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core
+package com.lemonappdev.konsist.core.scope
 
 import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.KoScopeCreator
@@ -10,7 +10,6 @@ import com.lemonappdev.konsist.core.filesystem.KoFileFactory
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.filesystem.PathVerifier
 import com.lemonappdev.konsist.core.filesystem.ProjectRootDirProviderFactory
-import com.lemonappdev.konsist.core.scope.KoScopeImpl
 import java.io.File
 
 internal class KoScopeCreatorImpl : KoScopeCreator {
