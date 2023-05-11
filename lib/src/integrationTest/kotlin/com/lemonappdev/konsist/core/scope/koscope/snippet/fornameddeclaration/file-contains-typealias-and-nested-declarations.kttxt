@@ -1,0 +1,6 @@
+class SampleClass {
+    fun sampleNestedFunction() {
+    }
+}
+
+typealias SampleTypeAlias = () -> Int

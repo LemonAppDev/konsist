@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
 import com.lemonappdev.konsist.core.util.LocationHelper
+import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import java.io.File
 
@@ -45,6 +46,17 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
     }
 
     override val locationWithText by lazy { "Location: $location \nDeclaration:\n$text" }
+
+    override val kDoc by lazy {
+        val kDocElement = psiElement
+            .children
+            .filterIsInstance<KDocElement>()
+            .firstOrNull()
+
+        kDocElement?.let { KoKDocDeclarationImpl(kDocElement) }
+    }
+
+    override fun hasKDoc() = kDoc != null
 
     override fun resideInFilePath(path: String) = LocationHelper.resideInLocation(path, filePath)
 

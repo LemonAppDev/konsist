@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 class KoScopeForDeclarationTest {
 
     @Test
-    fun `file-contains-class-function-object-interface-property`() {
+    fun `file-contains-all-type-of-declarations`() {
         // given
-        val sut = getSnippetFile("file-contains-class-function-object-interface-property")
+        val sut = getSnippetFile("file-contains-all-type-of-declarations")
 
         // then
         sut
@@ -23,58 +23,9 @@ class KoScopeForDeclarationTest {
                     "SampleClass",
                     "SampleInterface",
                     "SampleObject",
+                    "SampleTypeAlias",
                 ),
             )
-    }
-
-    @Test
-    fun `file-contains-one-class-containing-function`() {
-        // given
-        val sut = getSnippetFile("file-contains-one-class-containing-function")
-
-        // then
-        sut
-            .declarations(includeNested = true)
-            .map { it.name }
-            .toList()
-            .shouldBeEqualTo(
-                listOf(
-                    "SampleClass",
-                    "sampleNestedFunction",
-                ),
-            )
-    }
-
-    @Test
-    fun `file-contains-one-class-containing-function-and-property includeNested true`() {
-        // given
-        val sut = getSnippetFile("file-contains-one-class-containing-function-and-property")
-
-        // then
-        sut
-            .declarations(includeNested = true)
-            .map { it.name }
-            .toList()
-            .shouldBeEqualTo(
-                listOf(
-                    "SampleClass",
-                    "sampleNestedProperty",
-                    "sampleNestedFunction",
-                ),
-            )
-    }
-
-    @Test
-    fun `file-contains-one-class-containing-function-and-property includeNested false`() {
-        // given
-        val sut = getSnippetFile("file-contains-one-class-containing-function-and-property")
-
-        // then
-        sut
-            .declarations(includeNested = false)
-            .map { it.name }
-            .toList()
-            .shouldBeEqualTo(listOf("SampleClass"))
     }
 
     private fun getSnippetFile(fileName: String) =
