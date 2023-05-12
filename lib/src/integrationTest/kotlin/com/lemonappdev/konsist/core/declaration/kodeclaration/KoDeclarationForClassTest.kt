@@ -17,28 +17,6 @@ import org.junit.jupiter.api.Test
 class KoDeclarationForClassTest {
 
     @Test
-    fun `class-is-in-package`() {
-        // given
-        val sut = getSnippetFile("class-is-in-package")
-            .classes()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `class-is-not-in-package`() {
-        // given
-        val sut = getSnippetFile("class-is-not-in-package")
-            .classes()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo ""
-    }
-
-    @Test
     fun `class-has-modifiers`() {
         // given
         val sut = getSnippetFile("class-has-modifiers")

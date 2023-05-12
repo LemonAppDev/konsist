@@ -16,29 +16,6 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationForPropertyTest {
 
-
-    @Test
-    fun `property-is-in-package`() {
-        // given
-        val sut = getSnippetFile("property-is-in-package")
-            .properties()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `property-is-not-in-package`() {
-        // given
-        val sut = getSnippetFile("property-is-not-in-package")
-            .properties()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo ""
-    }
-
     @Test
     fun `property-has-modifiers`() {
         // given

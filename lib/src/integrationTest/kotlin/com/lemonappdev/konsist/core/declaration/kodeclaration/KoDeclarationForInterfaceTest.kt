@@ -60,28 +60,6 @@ class KoDeclarationForInterfaceTest {
     }
 
     @Test
-    fun `interface-is-in-package`() {
-        // given
-        val sut = getSnippetFile("interface-is-in-package")
-            .interfaces()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `interface-is-not-in-package`() {
-        // given
-        val sut = getSnippetFile("interface-is-not-in-package")
-            .interfaces()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo ""
-    }
-
-    @Test
     fun `interface-has-protected-modifier`() {
         // given
         val sut = getSnippetFile("interface-has-protected-modifier")

@@ -58,28 +58,6 @@ class KoDeclarationForTypeAliasTest {
     }
 
     @Test
-    fun `typealias-is-in-package`() {
-        // given
-        val sut = getSnippetFile("typealias-is-in-package")
-            .typeAliases()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `typealias-is-not-in-package`() {
-        // given
-        val sut = getSnippetFile("typealias-is-not-in-package")
-            .typeAliases()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo ""
-    }
-
-    @Test
     fun `typealias-has-protected-modifier`() {
         // given
         val sut = getSnippetFile("typealias-has-protected-modifier")

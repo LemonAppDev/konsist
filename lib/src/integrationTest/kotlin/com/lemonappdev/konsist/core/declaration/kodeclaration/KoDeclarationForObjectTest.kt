@@ -62,29 +62,6 @@ class KoDeclarationForObjectTest {
         sut.modifiers shouldBeEqualTo listOf(PRIVATE, DATA)
     }
 
-
-    @Test
-    fun `object-is-in-package`() {
-        // given
-        val sut = getSnippetFile("object-is-in-package")
-            .objects()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `object-is-not-in-package`() {
-        // given
-        val sut = getSnippetFile("object-is-not-in-package")
-            .objects()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo ""
-    }
-
     @Test
     fun `object-has-protected-modifier`() {
         // given

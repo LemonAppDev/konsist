@@ -65,28 +65,6 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-is-in-package`() {
-        // given
-        val sut = getSnippetFile("function-is-in-package")
-            .functions()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo "com.samplepackage"
-    }
-
-    @Test
-    fun `function-is-not-in-package`() {
-        // given
-        val sut = getSnippetFile("function-is-not-in-package")
-            .functions()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo ""
-    }
-
-    @Test
     fun `function-has-protected-modifier`() {
         // given
         val sut = getSnippetFile("function-has-protected-modifier")
