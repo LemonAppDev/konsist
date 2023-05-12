@@ -1,3 +1,0 @@
-expect fun doName(): String
-
-actual fun doName(): String = "SampleText"

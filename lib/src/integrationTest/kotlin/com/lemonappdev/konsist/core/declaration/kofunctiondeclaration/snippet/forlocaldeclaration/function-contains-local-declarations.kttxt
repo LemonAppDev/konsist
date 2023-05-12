@@ -1,3 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration.snippet.forlocaldeclaration
+
 fun sampleFunction() {
     val sampleLocalProperty: Boolean = true
 

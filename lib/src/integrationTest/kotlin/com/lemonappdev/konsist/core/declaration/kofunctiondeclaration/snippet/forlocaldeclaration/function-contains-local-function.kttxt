@@ -1,0 +1,6 @@
+package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration.snippet.forlocaldeclaration
+
+fun sampleFunction() {
+    fun sampleLocalFunction() {
+    }
+}

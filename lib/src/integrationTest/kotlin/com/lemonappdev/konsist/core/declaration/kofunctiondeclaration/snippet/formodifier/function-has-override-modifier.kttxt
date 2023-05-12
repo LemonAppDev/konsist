@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration.snippet
+package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration.snippet.formodifier
 
 class SampleClass : SuperClass() {
     override fun sampleFunction() {}

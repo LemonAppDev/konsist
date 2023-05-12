@@ -1,0 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration.snippet.formodifier
+
+abstract class SampleClass {
+    open fun sampleFunction() {}
+}

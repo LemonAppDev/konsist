@@ -1,0 +1,4 @@
+package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration.snippet.forextension
+
+fun sampleFunction() {
+}

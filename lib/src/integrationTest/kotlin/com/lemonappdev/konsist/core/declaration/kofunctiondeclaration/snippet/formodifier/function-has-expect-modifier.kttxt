@@ -1,0 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration.snippet.formodifier
+
+expect fun doName(): String
+
+actual fun doName(): String = "SampleText"
