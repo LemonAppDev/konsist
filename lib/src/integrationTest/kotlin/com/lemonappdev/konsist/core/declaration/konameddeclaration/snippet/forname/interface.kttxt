@@ -1,0 +1,4 @@
+package com.lemonappdev.konsist.core.declaration.konameddeclaration.snippet.forname
+
+interface SampleInterface {
+}
