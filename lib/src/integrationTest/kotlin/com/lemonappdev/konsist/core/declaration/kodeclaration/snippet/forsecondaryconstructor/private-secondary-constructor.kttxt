@@ -1,4 +1,0 @@
-class SampleClass {
-    private constructor(name: String) {
-    }
-}

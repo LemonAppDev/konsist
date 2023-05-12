@@ -1,0 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forvisibilitymodifier
+
+class SampleClass() {
+    constructor(sampleProperty: Int): this()
+}
