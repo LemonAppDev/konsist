@@ -1,3 +1,0 @@
-actual interface SampleInterface {
-    actual fun sampleFunction(): String = ""
-}

@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoInterfaceDeclarationTest {
+class KoInterfaceDeclarationForModifierTest {
     @Test
     fun `interface-has-actual-modifier`() {
         // given
@@ -28,5 +28,5 @@ class KoInterfaceDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kointerfacedeclaration/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kointerfacedeclaration/snippet/formodifier/", fileName)
 }

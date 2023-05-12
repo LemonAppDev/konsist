@@ -1,0 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.kointerfacedeclaration.snippet.formodifier
+
+actual interface SampleInterface {
+    actual fun sampleFunction(): String = ""
+}
