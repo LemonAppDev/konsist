@@ -1,4 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-
-@SampleAnnotation
-val sampleProperty: Boolean = true

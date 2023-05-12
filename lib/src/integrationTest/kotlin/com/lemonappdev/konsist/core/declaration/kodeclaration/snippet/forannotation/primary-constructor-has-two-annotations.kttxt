@@ -1,0 +1,7 @@
+package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forannotation
+
+import com.lemonappdev.konsist.testdata.SampleAnnotation1
+import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import com.lemonappdev.konsist.testdata.SampleType
+
+class SampleClass @SampleAnnotation1 @SampleAnnotation2 constructor(val sampleParameter: SampleType)

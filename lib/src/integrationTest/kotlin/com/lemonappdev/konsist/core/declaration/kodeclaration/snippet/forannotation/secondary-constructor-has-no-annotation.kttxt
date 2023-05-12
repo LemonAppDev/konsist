@@ -1,0 +1,7 @@
+package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forannotation
+
+import com.lemonappdev.konsist.testdata.SampleType
+
+class SampleClass(val sampleProperty: SampleType) {
+    constructor(sampleProperty1: SampleType, sampleProperty2: SampleType) : this(sampleProperty1)
+}

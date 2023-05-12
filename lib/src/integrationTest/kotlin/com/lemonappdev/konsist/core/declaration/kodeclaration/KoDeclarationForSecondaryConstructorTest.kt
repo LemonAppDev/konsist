@@ -171,25 +171,6 @@ class KoDeclarationForSecondaryConstructorTest {
         sut.name shouldBeEqualTo "SampleClass"
     }
 
-    @Test
-    fun `secondary-constructor-has-two-annotations-of-kclass`() {
-        // given
-        val sut = getSnippetFile("secondary-constructor-has-two-annotations-of-kclass")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            annotations shouldHaveSize 2
-            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
-            hasAnnotationsOf(SampleAnnotation2::class) shouldBeEqualTo true
-            hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
-            hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
-        }
-    }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kodeclaration/snippet/forsecondaryconstructor/", fileName)

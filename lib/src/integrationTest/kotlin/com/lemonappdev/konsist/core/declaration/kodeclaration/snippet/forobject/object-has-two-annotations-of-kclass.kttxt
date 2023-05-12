@@ -1,7 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
-import com.lemonappdev.konsist.testdata.SampleAnnotation2
-
-@SampleAnnotation1
-@SampleAnnotation2
-object SampleObject {
-}
