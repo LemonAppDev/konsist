@@ -1,3 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.koannotationdeclaration.snippet.forname
+
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 
 @SampleAnnotation

@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoAnnotationDeclarationTest {
+class KoAnnotationDeclarationForNameTest {
     @Test
     fun `annotation-name`() {
         // given
@@ -44,5 +44,5 @@ class KoAnnotationDeclarationTest {
         sut.fullyQualifiedName shouldBeEqualTo "SampleAnnotationWithoutImport"
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koannotationdeclaration/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koannotationdeclaration/snippet/forname/", fileName)
 }

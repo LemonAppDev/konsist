@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoBaseDeclarationTest {
+class KoBaseDeclarationForContainingFileTest {
     @Test
     fun `containing-file`() {
         // given
@@ -20,5 +20,5 @@ class KoBaseDeclarationTest {
             .shouldBeEqualTo(true)
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kobasedeclaration/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kobasedeclaration/snippet/forcontainingfile/", fileName)
 }
