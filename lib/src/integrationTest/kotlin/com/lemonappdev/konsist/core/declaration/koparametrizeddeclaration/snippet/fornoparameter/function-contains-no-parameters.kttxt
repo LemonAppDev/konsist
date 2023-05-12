@@ -1,0 +1,4 @@
+package com.lemonappdev.konsist.core.declaration.koparametrizeddeclaration.snippet.fornoparameter
+
+fun sampleFunction() {
+}
