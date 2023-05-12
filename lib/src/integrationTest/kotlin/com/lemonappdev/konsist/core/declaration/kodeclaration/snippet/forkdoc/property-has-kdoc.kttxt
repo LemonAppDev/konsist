@@ -1,0 +1,9 @@
+package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forkdoc
+
+/**
+ * Sample Description
+ *
+ * @since 1.0.0
+ * @see example sample description
+ */
+val sampleProperty: Boolean = true

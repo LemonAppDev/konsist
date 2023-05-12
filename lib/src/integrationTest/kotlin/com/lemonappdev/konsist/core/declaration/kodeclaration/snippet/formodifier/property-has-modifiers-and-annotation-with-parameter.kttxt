@@ -1,0 +1,8 @@
+package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.formodifier
+
+import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+
+open class SampleClass {
+    @SampleAnnotationWithParameter(sampleParameter = " parameter description ")
+    protected open val sampleProperty: Boolean = true
+}

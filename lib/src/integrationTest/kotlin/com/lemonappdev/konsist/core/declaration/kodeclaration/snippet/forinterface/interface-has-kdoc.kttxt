@@ -1,7 +1,0 @@
-/**
- * Sample Description *
- * @since 1.0.0
- * @see example sample description
- */
-interface SampleInterface {
-}
