@@ -2,10 +2,10 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationHelper
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
-import java.io.File
 
 internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : KoPsiDeclaration {
     override val filePath by lazy {
@@ -15,12 +15,11 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
     }
 
     override val projectFilePath by lazy {
-        val mainPath = File("")
-            .absoluteFile
-            .path
-            .substringBeforeLast('/')
+        val rootPathProvider = PathProvider
+            .getInstance()
+            .rootProjectPath
 
-        filePath.removePrefix(mainPath)
+        filePath.removePrefix(rootPathProvider)
     }
 
     override val location by lazy {

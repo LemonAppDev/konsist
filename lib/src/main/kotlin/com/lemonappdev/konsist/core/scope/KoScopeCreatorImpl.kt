@@ -6,21 +6,11 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
-import com.lemonappdev.konsist.core.filesystem.KoFileFactory
 import com.lemonappdev.konsist.core.filesystem.PathProvider
-import com.lemonappdev.konsist.core.filesystem.PathVerifier
-import com.lemonappdev.konsist.core.filesystem.ProjectRootDirProviderFactory
 import java.io.File
 
 internal class KoScopeCreatorImpl : KoScopeCreator {
-    private val pathVerifier = PathVerifier()
-
-    private val pathProvider: PathProvider by lazy {
-        PathProvider(
-            KoFileFactory(),
-            ProjectRootDirProviderFactory(pathVerifier),
-        )
-    }
+    private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
 
     private val projectKotlinFiles by lazy {
         pathProvider
