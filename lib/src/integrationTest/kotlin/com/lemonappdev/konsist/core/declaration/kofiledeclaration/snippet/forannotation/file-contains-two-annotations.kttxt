@@ -1,7 +1,7 @@
 @file:SampleAnnotation1
 @file:SampleAnnotation2
 
-package com.samplepackage
+package com.lemonappdev.konsist.core.declaration.kofiledeclaration.snippet.forannotation
 
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2

@@ -1,3 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.kofiledeclaration.snippet.fortypealias
+
 typealias SampleTypeAlias1 = () -> Int
 typealias SampleTypeAlias2 = () -> String
 

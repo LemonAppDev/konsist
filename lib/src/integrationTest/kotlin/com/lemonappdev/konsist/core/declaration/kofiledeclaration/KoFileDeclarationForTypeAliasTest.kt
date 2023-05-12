@@ -1,0 +1,76 @@
+package com.lemonappdev.konsist.core.declaration.kofiledeclaration
+
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.testdata.NonExistingAnnotation
+import com.lemonappdev.konsist.testdata.SampleAnnotation1
+import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import org.amshove.kluent.assertSoftly
+import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldNotBeEqualTo
+import org.junit.jupiter.api.Test
+
+class KoFileDeclarationForTypeAliasTest {
+    @Test
+    fun `file-contains-typealias`() {
+        // given
+        val sut = getSnippetFile("file-contains-typealias")
+            .files()
+            .first()
+
+        // then
+        assertSoftly(
+            sut
+                .typeAliases
+                .first(),
+        ) {
+            name shouldBeEqualTo "SampleTypeAlias"
+            type.sourceType shouldBeEqualTo "() -> Int"
+        }
+    }
+
+    @Test
+    fun `file-has-typealiases`() {
+        // given
+        val sut = getSnippetFile("file-has-typealiases")
+            .files()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeAliases() shouldBeEqualTo true
+            hasTypeAliases("SampleTypeAlias1") shouldBeEqualTo true
+            hasTypeAliases("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo true
+            hasTypeAliases("OtherTypeAlias") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `file-contains-no-typealias`() {
+        // given
+        val sut = getSnippetFile("file-contains-no-typealias")
+            .files()
+            .first()
+
+        // then
+        sut
+            .typeAliases
+            .isEmpty()
+            .shouldBeEqualTo(true)
+    }
+
+    @Test
+    fun `file-has-no-typealias`() {
+        // given
+        val sut = getSnippetFile("file-has-no-typealias")
+            .files()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeAliases() shouldBeEqualTo false
+            hasTypeAliases("SampleTypeAlias") shouldBeEqualTo false
+        }
+    }
+
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofiledeclaration/snippet/fortypealias/", fileName)
+}
