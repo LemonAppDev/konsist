@@ -1,3 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.koimportdeclaration.snippet.forwildcard
+
 import com.lemonappdev.konsist.testdata.SampleClass
 
 class SampleTopLevelClass(val sampleProperty2: SampleClass)
