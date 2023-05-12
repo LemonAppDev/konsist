@@ -58,5 +58,6 @@ class KoFunctionDeclarationForReturnTypeTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forreturntype/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forreturntype/", fileName)
 }

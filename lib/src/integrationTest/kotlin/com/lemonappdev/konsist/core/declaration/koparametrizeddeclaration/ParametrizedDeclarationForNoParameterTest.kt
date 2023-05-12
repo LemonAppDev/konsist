@@ -35,8 +35,6 @@ class ParametrizedDeclarationForNoParameterTest {
         }
     }
 
-
-
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koparametrizeddeclaration/snippet/fornoparameter/", fileName)
 }

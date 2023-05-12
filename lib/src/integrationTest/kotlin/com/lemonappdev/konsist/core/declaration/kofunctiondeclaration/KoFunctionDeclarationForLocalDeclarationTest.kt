@@ -78,5 +78,6 @@ class KoFunctionDeclarationForLocalDeclarationTest {
             )
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forlocaldeclaration/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forlocaldeclaration/", fileName)
 }

@@ -19,7 +19,6 @@ import com.lemonappdev.konsist.api.KoKDocTag.VERSION
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldHaveSize
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage

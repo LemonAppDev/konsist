@@ -95,5 +95,6 @@ class KoParameterDeclarationForDefaultValueTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/fordefaultvalue/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/fordefaultvalue/", fileName)
 }

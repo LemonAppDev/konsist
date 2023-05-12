@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -28,5 +27,6 @@ class KoFunctionDeclarationForExtensionTest {
         sut.isExtension() shouldBeEqualTo false
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forextension/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forextension/", fileName)
 }

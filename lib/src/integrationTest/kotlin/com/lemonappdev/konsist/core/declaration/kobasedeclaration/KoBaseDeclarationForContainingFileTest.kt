@@ -20,5 +20,6 @@ class KoBaseDeclarationForContainingFileTest {
             .shouldBeEqualTo(true)
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kobasedeclaration/snippet/forcontainingfile/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kobasedeclaration/snippet/forcontainingfile/", fileName)
 }

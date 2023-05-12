@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koparameterdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -19,5 +18,6 @@ class KoParameterDeclarationForRepresentsTypeTest {
         sut?.representsType("SampleType") shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/forrepresentstype/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/forrepresentstype/", fileName)
 }

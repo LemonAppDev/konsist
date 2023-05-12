@@ -29,5 +29,6 @@ class KoParameterDeclarationForNoParameterTest {
         sut shouldBeEqualTo null
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/fornoparameter/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/fornoparameter/", fileName)
 }

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kofiledeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
@@ -39,5 +38,6 @@ class KoFileDeclarationForEqualsAndHashCodeTest {
         file1.hashCode() shouldNotBeEqualTo file2.hashCode()
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofiledeclaration/snippet/forequalsandhashcode/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kofiledeclaration/snippet/forequalsandhashcode/", fileName)
 }

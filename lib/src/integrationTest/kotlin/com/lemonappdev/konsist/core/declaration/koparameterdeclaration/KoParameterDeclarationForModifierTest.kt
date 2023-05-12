@@ -64,5 +64,6 @@ class KoParameterDeclarationForModifierTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/formodifier/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/formodifier/", fileName)
 }
