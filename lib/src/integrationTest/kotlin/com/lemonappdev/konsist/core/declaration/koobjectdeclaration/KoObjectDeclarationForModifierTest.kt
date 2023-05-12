@@ -5,18 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoObjectDeclarationTest {
-    @Test
-    fun `object`() {
-        // given
-        val sut = getSnippetFile("object")
-            .objects()
-            .first()
-
-        // then
-        sut.name shouldBeEqualTo "SampleObject"
-    }
-
+class KoObjectDeclarationForModifierTest {
     @Test
     fun `data-object`() {
         // given
@@ -70,5 +59,5 @@ class KoObjectDeclarationTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobjectdeclaration/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobjectdeclaration/snippet/formodifier/", fileName)
 }
