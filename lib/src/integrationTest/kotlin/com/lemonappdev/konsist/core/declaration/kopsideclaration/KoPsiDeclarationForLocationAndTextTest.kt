@@ -47,7 +47,7 @@ class KoPsiDeclarationForLocationAndTextTest {
             .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.filePath}:12:25"
+        sut.location shouldBeEqualTo "${sut.filePath}:10:25"
     }
 
     @Test
