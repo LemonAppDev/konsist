@@ -1,0 +1,21 @@
+package com.lemonappdev.konsist.core.declaration.kokdocdeclaration.snippet.fortextanddescription
+
+class SampleClass(){
+    fun sampleMethod() {
+        // Implementation
+    }
+
+    /**
+     * This is a sample property that demonstrates the usage of KDoc tags.
+     *
+     * @propertySetter Sets the value of the [name] property.
+     * @propertyGetter Retrieves the value of the [name] property.
+     */
+    var sampleProperty: Int
+        get() {
+            return 6
+        }
+        set(value) {
+            // Setter implementation
+        }
+}

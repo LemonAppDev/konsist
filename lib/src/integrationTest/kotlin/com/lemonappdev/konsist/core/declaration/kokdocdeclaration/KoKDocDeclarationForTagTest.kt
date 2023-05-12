@@ -25,7 +25,7 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class KoKDocDeclarationTest {
+class KoKDocDeclarationForTagTest {
     @Test
     fun `tags class`() {
         // given
@@ -111,21 +111,6 @@ class KoKDocDeclarationTest {
             ?.get(0)
             ?.description
             .shouldBeEqualTo("The first @property of the class.")
-    }
-
-    @Test
-    fun `class-with-tags text and description`() {
-        // given
-        val sut = getSnippetFile("class-with-tags")
-            .classes()
-            .first()
-            .kDoc
-
-        // then
-        assertSoftly(sut) {
-            it?.text?.shouldContain("This is a sample class that demonstrates the usage of KDoc tags.")
-            it?.description shouldBeEqualTo "This is a sample class that demonstrates the usage of KDoc tags."
-        }
     }
 
     @Test
@@ -321,21 +306,6 @@ class KoKDocDeclarationTest {
     }
 
     @Test
-    fun `function-with-tags text and description`() {
-        // given
-        val sut = getSnippetFile("function-with-tags")
-            .functions(includeNested = true)
-            .first()
-            .kDoc
-
-        // then
-        assertSoftly(sut) {
-            it?.text?.shouldContain("This is a sample method that demonstrates the usage of KDoc tags.")
-            it?.description shouldBeEqualTo "This is a sample method that demonstrates the usage of KDoc tags."
-        }
-    }
-
-    @Test
     fun `function-with-tags param tag`() {
         // given
         val sut = getSnippetFile("function-with-tags")
@@ -523,21 +493,6 @@ class KoKDocDeclarationTest {
     }
 
     @Test
-    fun `property-with-tags text and description`() {
-        // given
-        val sut = getSnippetFile("property-with-tags")
-            .properties(includeNested = true)
-            .first()
-            .kDoc
-
-        // then
-        assertSoftly(sut) {
-            it?.text?.shouldContain("This is a sample property that demonstrates the usage of KDoc tags.")
-            it?.description shouldBeEqualTo "This is a sample property that demonstrates the usage of KDoc tags."
-        }
-    }
-
-    @Test
     fun `property-with-tags propertySetter tag`() {
         // given
         val sut = getSnippetFile("property-with-tags")
@@ -605,5 +560,5 @@ class KoKDocDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/fortag/", fileName)
 }

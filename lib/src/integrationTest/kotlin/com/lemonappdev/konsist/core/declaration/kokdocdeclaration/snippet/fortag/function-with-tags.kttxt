@@ -1,3 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.kokdocdeclaration.snippet.fortag
+
 class SampleClass() {
 
     /**

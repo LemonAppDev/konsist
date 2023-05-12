@@ -1,3 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.kokdocdeclaration.snippet.fortag
+
 /**
  * This is a sample class that demonstrates the usage of KDoc tags.
  *
