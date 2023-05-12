@@ -1,3 +1,0 @@
-abstract class SampleClass {
-    expect abstract var sampleProperty: String
-}

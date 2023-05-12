@@ -1,7 +1,0 @@
-class SampleClass(sampleProperty: SampleSuperInterface1) : SampleSuperInterface1 by sampleProperty,  SampleSuperInterface2, SampleSuperClass()
-
-interface SampleSuperInterface1
-
-interface SampleSuperInterface2
-
-open class SampleSuperClass

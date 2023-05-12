@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoParentDeclarationTest {
+class KoParentDeclarationForNameAndDelegateTest {
 
     @Test
     fun `class-has-parent-class`() {
@@ -75,5 +75,5 @@ class KoParentDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koparentdeclaration/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koparentdeclaration/snippet/fornameanddelegate/", fileName)
 }

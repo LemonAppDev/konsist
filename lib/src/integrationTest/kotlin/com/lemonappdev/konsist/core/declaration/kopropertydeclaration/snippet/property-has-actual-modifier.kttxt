@@ -1,3 +1,0 @@
-open class SampleClass {
-    actual var sampleProperty: Int = 5
-}

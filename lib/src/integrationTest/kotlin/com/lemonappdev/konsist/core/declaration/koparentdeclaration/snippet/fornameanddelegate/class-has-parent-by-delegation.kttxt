@@ -1,3 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.koparentdeclaration.snippet.fornameanddelegate
+
 interface SampleSuperInterface
 
 class SampleClass(sampleProperty: SampleSuperInterface) : SampleSuperInterface by sampleProperty
