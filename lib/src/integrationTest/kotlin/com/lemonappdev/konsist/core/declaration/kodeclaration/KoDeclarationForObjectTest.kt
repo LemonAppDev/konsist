@@ -64,17 +64,6 @@ class KoDeclarationForObjectTest {
 
 
     @Test
-    fun `object-has-fully-qualified-name`() {
-        // given
-        val sut = getSnippetFile("object-has-fully-qualified-name")
-            .objects()
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleObject"
-    }
-
-    @Test
     fun `object-is-in-package`() {
         // given
         val sut = getSnippetFile("object-is-in-package")

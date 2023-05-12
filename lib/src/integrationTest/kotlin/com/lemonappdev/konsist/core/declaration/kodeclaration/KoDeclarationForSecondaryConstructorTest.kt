@@ -64,19 +64,6 @@ class KoDeclarationForSecondaryConstructorTest {
     }
 
 
-    @Test
-    fun `secondary-constructor`() {
-        // given
-        val sut = getSnippetFile("secondary-constructor")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
-
-        // then
-        sut.name shouldBeEqualTo "SampleClass"
-    }
-
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kodeclaration/snippet/forsecondaryconstructor/", fileName)

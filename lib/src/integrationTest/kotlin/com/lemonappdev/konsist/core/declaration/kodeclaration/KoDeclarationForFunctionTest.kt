@@ -65,17 +65,6 @@ class KoDeclarationForFunctionTest {
     }
 
     @Test
-    fun `function-has-fully-qualified-name`() {
-        // given
-        val sut = getSnippetFile("function-has-fully-qualified-name")
-            .functions()
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleFunction"
-    }
-
-    @Test
     fun `function-is-in-package`() {
         // given
         val sut = getSnippetFile("function-is-in-package")

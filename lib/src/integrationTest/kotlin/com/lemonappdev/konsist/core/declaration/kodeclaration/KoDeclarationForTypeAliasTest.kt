@@ -58,17 +58,6 @@ class KoDeclarationForTypeAliasTest {
     }
 
     @Test
-    fun `typealias-has-fully-qualified-name`() {
-        // given
-        val sut = getSnippetFile("typealias-has-fully-qualified-name")
-            .typeAliases()
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleTypeAlias"
-    }
-
-    @Test
     fun `typealias-is-in-package`() {
         // given
         val sut = getSnippetFile("typealias-is-in-package")

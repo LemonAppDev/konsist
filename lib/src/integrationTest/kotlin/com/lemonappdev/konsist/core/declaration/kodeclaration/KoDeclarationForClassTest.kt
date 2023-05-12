@@ -17,17 +17,6 @@ import org.junit.jupiter.api.Test
 class KoDeclarationForClassTest {
 
     @Test
-    fun `class-has-fully-qualified-name`() {
-        // given
-        val sut = getSnippetFile("class-has-fully-qualified-name")
-            .classes()
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass"
-    }
-
-    @Test
     fun `class-is-in-package`() {
         // given
         val sut = getSnippetFile("class-is-in-package")

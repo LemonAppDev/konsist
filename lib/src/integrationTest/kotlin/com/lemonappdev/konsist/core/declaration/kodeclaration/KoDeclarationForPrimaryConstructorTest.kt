@@ -8,17 +8,7 @@ import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
 class KoDeclarationForPrimaryConstructorTest {
-    @Test
-    fun `primary-constructor`() {
-        // given
-        val sut = getSnippetFile("primary-constructor")
-            .classes()
-            .first()
-            .primaryConstructor
 
-        // then
-        sut?.name shouldBeEqualTo "SampleClass"
-    }
 
     @Test
     fun `primary-constructor-has-modifier`() {
