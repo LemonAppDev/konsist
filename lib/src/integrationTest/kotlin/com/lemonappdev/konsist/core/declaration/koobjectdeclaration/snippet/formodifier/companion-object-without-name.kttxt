@@ -1,5 +1,3 @@
-package com.lemonappdev.konsist.core.declaration.koobjectdeclaration.snippet.formodifier
-
 class SampleClass{
     companion object {
     }

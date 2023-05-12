@@ -1,5 +1,3 @@
-package com.lemonappdev.konsist.core.declaration.kopropertydeclaration.snippet.formodifier
-
 import com.lemonappdev.konsist.testdata.SampleType
 
 class SampleClass: SampleInterface {

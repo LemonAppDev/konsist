@@ -1,4 +1,2 @@
-package com.lemonappdev.konsist.core.declaration.kopsideclaration.snippet.forlocationandtext
-
 fun sampleFunction() {
 }

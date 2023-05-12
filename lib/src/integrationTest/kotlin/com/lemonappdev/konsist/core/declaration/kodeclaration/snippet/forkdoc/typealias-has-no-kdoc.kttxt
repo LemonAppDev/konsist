@@ -1,5 +1,3 @@
-package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.forkdoc
-
 typealias SampleTypeAlias = (Boolean) -> Int
 
 lateinit var sampleProperty: SampleTypeAlias

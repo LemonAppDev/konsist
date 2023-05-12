@@ -1,5 +1,3 @@
-package com.lemonappdev.konsist.core.declaration.kopropertydeclaration.snippet.formodifier
-
 open class SampleClass {
     actual var sampleProperty: Int = 5
 }

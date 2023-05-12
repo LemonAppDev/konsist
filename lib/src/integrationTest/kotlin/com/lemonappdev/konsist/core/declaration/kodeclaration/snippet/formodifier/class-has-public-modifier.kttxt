@@ -1,4 +1,2 @@
-package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.formodifier
-
 public class SampleClass {
 }

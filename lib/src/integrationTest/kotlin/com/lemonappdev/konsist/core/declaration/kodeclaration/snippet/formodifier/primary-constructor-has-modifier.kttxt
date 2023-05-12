@@ -1,3 +1,1 @@
-package com.lemonappdev.konsist.core.declaration.kodeclaration.snippet.formodifier
-
 class SampleClass private constructor ()

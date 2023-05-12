@@ -1,5 +1,3 @@
-package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration.snippet.fordeclarations
-
 class SampleTopLevelClass {
     fun sampleFunction() {
         val sampleLocalProperty1: Boolean = true

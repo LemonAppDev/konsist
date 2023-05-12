@@ -1,5 +1,3 @@
-package com.lemonappdev.konsist.core.declaration.koclassdeclaration.snippet.forparent
-
 class SampleClass : SampleParentClass(), SampleParentInterface1, SampleParentInterface2
 
 open class SampleParentClass

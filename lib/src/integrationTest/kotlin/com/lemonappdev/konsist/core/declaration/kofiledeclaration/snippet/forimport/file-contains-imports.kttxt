@@ -1,5 +1,3 @@
-package com.lemonappdev.konsist.core.declaration.kofiledeclaration.snippet.forimport
-
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleType
 

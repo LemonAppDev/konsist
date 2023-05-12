@@ -1,5 +1,3 @@
-package com.lemonappdev.konsist.core.declaration.kopropertydeclaration.snippet.fortype
-
 import com.lemonappdev.konsist.testdata.SampleType
 
 val sampleProperty: SampleType = SampleType()
