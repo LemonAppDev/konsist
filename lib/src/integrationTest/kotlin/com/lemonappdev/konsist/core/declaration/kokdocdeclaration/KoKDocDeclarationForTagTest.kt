@@ -289,44 +289,6 @@ class KoKDocDeclarationForTagTest {
         }
     }
 
-    companion object {
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForTagsSize() = listOf(
-            arguments("SampleClass", 10),
-            arguments("sampleMethod", 2),
-            arguments("sampleProperty", 2),
-        )
-
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForParamTag() = listOf(
-            arguments(
-                "class-with-tags",
-                "SampleClass",
-                "SampleType1",
-                "The first type parameter for this class.",
-                "SampleType2",
-                "The second type parameter for this class.",
-            ),
-            arguments(
-                "function-with-tags",
-                "sampleMethod",
-                "sampleArgument1",
-                "The first argument.",
-                "sampleArgument2",
-                "The second argument.",
-            ),
-        )
-
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForTags() = listOf(
-            arguments("class-with-tags", "SampleClass"),
-            arguments("function-with-tags", "sampleMethod"),
-        )
-    }
-
     @Test
     fun `class-with-tags property tag`() {
         // given
@@ -461,4 +423,42 @@ class KoKDocDeclarationForTagTest {
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/fortag/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForTagsSize() = listOf(
+            arguments("SampleClass", 10),
+            arguments("sampleMethod", 2),
+            arguments("sampleProperty", 2),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForParamTag() = listOf(
+            arguments(
+                "class-with-tags",
+                "SampleClass",
+                "SampleType1",
+                "The first type parameter for this class.",
+                "SampleType2",
+                "The second type parameter for this class.",
+            ),
+            arguments(
+                "function-with-tags",
+                "sampleMethod",
+                "sampleArgument1",
+                "The first argument.",
+                "sampleArgument2",
+                "The second argument.",
+            ),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForTags() = listOf(
+            arguments("class-with-tags", "SampleClass"),
+            arguments("function-with-tags", "sampleMethod"),
+        )
+    }
 }
