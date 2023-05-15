@@ -2,76 +2,91 @@ package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.KoModifier.ABSTRACT
+import com.lemonappdev.konsist.api.KoModifier.DATA
+import com.lemonappdev.konsist.api.KoModifier.INLINE
 import com.lemonappdev.konsist.api.KoModifier.OPEN
+import com.lemonappdev.konsist.api.KoModifier.OPERATOR
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
+import com.lemonappdev.konsist.api.KoModifier.SUSPEND
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoDeclarationForModifierTest {
-    @Test
-    fun `class-has-modifiers`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesForDeclarationModifiers")
+    fun `declaration-modifiers`(
+        fileName: String,
+        declarationName: String,
+        modifiers: List<KoModifier>,
+    ) {
         // given
-        val sut = getSnippetFile("class-has-modifiers")
+        val sut = getSnippetFile(fileName)
+            .declarations(includeNested = true)
+            .first { it.name == declarationName }
+
+        // then
+        sut.modifiers shouldBeEqualTo modifiers
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForPrimaryConstructorModifiers")
+    fun `primary-constructor-modifiers`(fileName: String) {
+        // given
+        val sut = getSnippetFile(fileName)
             .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        sut?.modifiers shouldBeEqualTo listOf(PRIVATE)
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForSecondaryConstructorModifiers")
+    fun `secondary-constructor-modifiers`(fileName: String) {
+        // given
+        val sut = getSnippetFile(fileName)
+            .classes()
+            .first()
+            .secondaryConstructors
             .first()
 
         // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE, OPEN)
+        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
     }
 
-    @Test
-    fun `class-has-modifiers-and-annotation-with-parameter`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesForDeclarationHasModifiersWithoutParameters")
+    fun `declaration-has-protected-modifier`(
+        fileName: String,
+        declarationName: String,
+    ) {
         // given
-        val sut = getSnippetFile("class-has-modifiers-and-annotation-with-parameter")
-            .classes()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE, OPEN)
-    }
-
-    @Test
-    fun `class-has-modifiers-and-annotation-without-parameter`() {
-        // given
-        val sut = getSnippetFile("class-has-modifiers-and-annotation-without-parameter")
-            .classes()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE, OPEN)
-    }
-
-    @Test
-    fun `class-has-modifiers-and-annotations`() {
-        // given
-        val sut = getSnippetFile("class-has-modifiers-and-annotations")
-            .classes()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE, OPEN)
-    }
-
-    @Test
-    fun `class-has-protected-modifier`() {
-        // given
-        val sut = getSnippetFile("class-has-protected-modifier")
-            .classes()
-            .first()
+        val sut = getSnippetFile(fileName)
+            .declarations(includeNested = true)
+            .first { it.name == declarationName }
 
         // then
         sut.hasModifiers() shouldBeEqualTo true
     }
 
-    @Test
-    fun `class-has-public-modifier`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesForDeclarationHasModifiersWithOneParameter")
+    fun `declaration-has-public-modifier`(
+        fileName: String,
+        declarationName: String,
+    ) {
         // given
-        val sut = getSnippetFile("class-has-public-modifier")
-            .classes()
-            .first()
+        val sut = getSnippetFile(fileName)
+            .declarations(includeNested = true)
+            .first { it.name == declarationName }
 
         // then
         assertSoftly(sut) {
@@ -80,633 +95,143 @@ class KoDeclarationForModifierTest {
         }
     }
 
-    @Test
-    fun `class-has-two-modifiers`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesForDeclarationHasTwoModifiers")
+    fun `declaration-has-two-modifiers`(
+        fileName: String,
+        declarationName: String,
+        modifier1: KoModifier,
+        modifier2: KoModifier,
+        modifier3: KoModifier,
+    ) {
         // given
-        val sut = getSnippetFile("class-has-two-modifiers")
-            .classes()
-            .first()
+        val sut = getSnippetFile(fileName)
+            .declarations(includeNested = true)
+            .first { it.name == declarationName }
 
         // then
         assertSoftly(sut) {
-            hasModifiers(PRIVATE) shouldBeEqualTo true
-            hasModifiers(OPEN) shouldBeEqualTo true
-            hasModifiers(PROTECTED) shouldBeEqualTo false
-            hasModifiers(PRIVATE, OPEN) shouldBeEqualTo true
-            hasModifiers(OPEN, PRIVATE) shouldBeEqualTo true
-            hasModifiers(PROTECTED, OPEN) shouldBeEqualTo false
-            hasModifiers(PROTECTED, OPEN, PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `class-has-no-modifier`() {
-        // given
-        val sut = getSnippetFile("class-has-no-modifier")
-            .classes()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers() shouldBeEqualTo false
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `function-has-modifiers`() {
-        // given
-        val sut = getSnippetFile("function-has-modifiers")
-            .functions(includeNested = true)
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN, KoModifier.SUSPEND, KoModifier.INLINE, KoModifier.OPERATOR)
-    }
-
-    @Test
-    fun `function-has-modifiers-and-annotation-with-parameter`() {
-        // given
-        val sut = getSnippetFile("function-has-modifiers-and-annotation-with-parameter")
-            .functions(includeNested = true)
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
-    }
-
-    @Test
-    fun `function-has-modifiers-and-annotation-without-parameter`() {
-        // given
-        val sut = getSnippetFile("function-has-modifiers-and-annotation-without-parameter")
-            .functions(includeNested = true)
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
-    }
-
-    @Test
-    fun `function-has-modifiers-and-annotations`() {
-        // given
-        val sut = getSnippetFile("function-has-modifiers-and-annotations")
-            .functions(includeNested = true)
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
-    }
-
-    @Test
-    fun `function-has-protected-modifier`() {
-        // given
-        val sut = getSnippetFile("function-has-protected-modifier")
-            .functions(includeNested = true)
-            .first()
-
-        // then
-        sut.hasModifiers() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `function-has-public-modifier`() {
-        // given
-        val sut = getSnippetFile("function-has-public-modifier")
-            .functions(includeNested = true)
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers(PUBLIC) shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `function-has-two-modifiers`() {
-        // given
-        val sut = getSnippetFile("function-has-two-modifiers")
-            .functions(includeNested = true)
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers(PROTECTED) shouldBeEqualTo true
-            hasModifiers(KoModifier.SUSPEND) shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-            hasModifiers(PROTECTED, KoModifier.SUSPEND) shouldBeEqualTo true
-            hasModifiers(KoModifier.SUSPEND, PROTECTED) shouldBeEqualTo true
-            hasModifiers(PRIVATE, KoModifier.SUSPEND) shouldBeEqualTo false
-            hasModifiers(PROTECTED, KoModifier.SUSPEND, PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `function-has-no-modifier`() {
-        // given
-        val sut = getSnippetFile("function-has-no-modifier")
-            .functions()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers() shouldBeEqualTo false
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `interface-has-modifiers`() {
-        // given
-        val sut = getSnippetFile("interface-has-modifiers")
-            .interfaces()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PUBLIC, KoModifier.ABSTRACT)
-    }
-
-    @Test
-    fun `interface-has-modifiers-and-annotation-with-parameter`() {
-        // given
-        val sut = getSnippetFile("interface-has-modifiers-and-annotation-with-parameter")
-            .interfaces()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PUBLIC, KoModifier.ABSTRACT)
-    }
-
-    @Test
-    fun `interface-has-modifiers-and-annotation-without-parameter`() {
-        // given
-        val sut = getSnippetFile("interface-has-modifiers-and-annotation-without-parameter")
-            .interfaces()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PUBLIC, KoModifier.ABSTRACT)
-    }
-
-    @Test
-    fun `interface-has-modifiers-and-annotations`() {
-        // given
-        val sut = getSnippetFile("interface-has-modifiers-and-annotations")
-            .interfaces()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PUBLIC, KoModifier.ABSTRACT)
-    }
-
-    @Test
-    fun `interface-has-protected-modifier`() {
-        // given
-        val sut = getSnippetFile("interface-has-protected-modifier")
-            .interfaces()
-            .first()
-
-        // then
-        sut.hasModifiers() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `interface-has-public-modifier`() {
-        // given
-        val sut = getSnippetFile("interface-has-public-modifier")
-            .interfaces()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers(PUBLIC) shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `interface-has-two-modifiers`() {
-        // given
-        val sut = getSnippetFile("interface-has-two-modifiers")
-            .interfaces()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers(KoModifier.ABSTRACT) shouldBeEqualTo true
-            hasModifiers(PUBLIC) shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-            hasModifiers(KoModifier.ABSTRACT, PUBLIC) shouldBeEqualTo true
-            hasModifiers(PUBLIC, KoModifier.ABSTRACT) shouldBeEqualTo true
-            hasModifiers(PRIVATE, KoModifier.ABSTRACT) shouldBeEqualTo false
-            hasModifiers(KoModifier.ABSTRACT, PUBLIC, PRIVATE) shouldBeEqualTo false
             hasModifiers() shouldBeEqualTo true
+            hasModifiers(modifier1) shouldBeEqualTo true
+            hasModifiers(modifier2) shouldBeEqualTo true
+            hasModifiers(modifier3) shouldBeEqualTo false
+            hasModifiers(modifier1, modifier2) shouldBeEqualTo true
+            hasModifiers(modifier2, modifier1) shouldBeEqualTo true
+            hasModifiers(modifier3, modifier2) shouldBeEqualTo false
+            hasModifiers(modifier3, modifier2, modifier1) shouldBeEqualTo false
         }
     }
 
-    @Test
-    fun `interface-has-no-modifiers`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesForDeclarationWithoutModifiers")
+    fun `declaration-has-no-modifiers`(
+        fileName: String,
+        declarationName: String,
+    ) {
         // given
-        val sut = getSnippetFile("interface-has-no-modifiers")
-            .interfaces()
-            .first()
+        val sut = getSnippetFile(fileName)
+            .declarations(includeNested = true)
+            .first { it.name == declarationName }
 
         // then
         assertSoftly(sut) {
             hasModifiers() shouldBeEqualTo false
             hasModifiers(PRIVATE) shouldBeEqualTo false
         }
-    }
-
-    @Test
-    fun `object-has-modifiers`() {
-        // given
-        val sut = getSnippetFile("object-has-modifiers")
-            .objects()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE, KoModifier.DATA)
-    }
-
-    @Test
-    fun `object-has-modifiers-and-annotation-with-parameter`() {
-        // given
-        val sut = getSnippetFile("object-has-modifiers-and-annotation-with-parameter")
-            .objects()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE, KoModifier.DATA)
-    }
-
-    @Test
-    fun `object-has-modifiers-and-annotation-without-parameter`() {
-        // given
-        val sut = getSnippetFile("object-has-modifiers-and-annotation-without-parameter")
-            .objects()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE, KoModifier.DATA)
-    }
-
-    @Test
-    fun `object-has-modifiers-and-annotations`() {
-        // given
-        val sut = getSnippetFile("object-has-modifiers-and-annotations")
-            .objects()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE, KoModifier.DATA)
-    }
-
-    @Test
-    fun `object-has-protected-modifier`() {
-        // given
-        val sut = getSnippetFile("object-has-protected-modifier")
-            .objects()
-            .first()
-
-        // then
-        sut.hasModifiers() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `object-has-public-modifier`() {
-        // given
-        val sut = getSnippetFile("object-has-public-modifier")
-            .objects()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers(PUBLIC) shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `object-has-two-modifiers`() {
-        // given
-        val sut = getSnippetFile("object-has-two-modifiers")
-            .objects()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers(PRIVATE) shouldBeEqualTo true
-            hasModifiers(KoModifier.DATA) shouldBeEqualTo true
-            hasModifiers(PROTECTED) shouldBeEqualTo false
-            hasModifiers(PRIVATE, KoModifier.DATA) shouldBeEqualTo true
-            hasModifiers(KoModifier.DATA, PRIVATE) shouldBeEqualTo true
-            hasModifiers(PROTECTED, KoModifier.DATA) shouldBeEqualTo false
-            hasModifiers(PROTECTED, KoModifier.DATA, PRIVATE) shouldBeEqualTo false
-            hasModifiers() shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `object-has-no-modifier`() {
-        // given
-        val sut = getSnippetFile("object-has-no-modifiers")
-            .objects()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers() shouldBeEqualTo false
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `property-has-modifiers`() {
-        // given
-        val sut = getSnippetFile("property-has-modifiers")
-            .properties(includeNested = true)
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
-    }
-
-    @Test
-    fun `property-has-modifiers-and-annotation-with-parameter`() {
-        // given
-        val sut = getSnippetFile("property-has-modifiers-and-annotation-with-parameter")
-            .properties(includeNested = true)
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
-    }
-
-    @Test
-    fun `property-has-modifiers-and-annotation-without-parameter`() {
-        // given
-        val sut = getSnippetFile("property-has-modifiers-and-annotation-without-parameter")
-            .properties(includeNested = true)
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
-    }
-
-    @Test
-    fun `property-has-modifiers-and-annotations`() {
-        // given
-        val sut = getSnippetFile("property-has-modifiers-and-annotations")
-            .properties(includeNested = true)
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PROTECTED, OPEN)
-    }
-
-    @Test
-    fun `property-has-protected-modifier`() {
-        // given
-        val sut = getSnippetFile("property-has-protected-modifier")
-            .properties()
-            .first()
-
-        // then
-        sut.hasModifiers() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `property-has-public-modifier`() {
-        // given
-        val sut = getSnippetFile("property-has-public-modifier")
-            .properties()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers(PUBLIC) shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `property-has-two-modifiers`() {
-        // given
-        val sut = getSnippetFile("property-has-two-modifiers")
-            .properties(includeNested = true)
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers(PROTECTED) shouldBeEqualTo true
-            hasModifiers(OPEN) shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-            hasModifiers(PROTECTED, OPEN) shouldBeEqualTo true
-            hasModifiers(OPEN, PROTECTED) shouldBeEqualTo true
-            hasModifiers(PRIVATE, OPEN) shouldBeEqualTo false
-            hasModifiers(PROTECTED, OPEN, PRIVATE) shouldBeEqualTo false
-            hasModifiers() shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `property-has-no-modifier`() {
-        // given
-        val sut = getSnippetFile("property-has-no-modifier")
-            .properties()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers() shouldBeEqualTo false
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `typealias-has-modifier`() {
-        // given
-        val sut = getSnippetFile("typealias-has-modifier")
-            .typeAliases()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @Test
-    fun `typealias-has-modifiers-and-annotation-with-parameter`() {
-        // given
-        val sut = getSnippetFile("typealias-has-modifiers-and-annotation-with-parameter")
-            .typeAliases()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @Test
-    fun `typealias-has-modifiers-and-annotation-without-parameter`() {
-        // given
-        val sut = getSnippetFile("typealias-has-modifiers-and-annotation-without-parameter")
-            .typeAliases()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @Test
-    fun `typealias-has-modifiers-and-annotations`() {
-        // given
-        val sut = getSnippetFile("typealias-has-modifiers-and-annotations")
-            .typeAliases()
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @Test
-    fun `typealias-has-protected-modifier`() {
-        // given
-        val sut = getSnippetFile("typealias-has-protected-modifier")
-            .typeAliases()
-            .first()
-
-        // then
-        sut.hasModifiers() shouldBeEqualTo true
-    }
-
-    @Test
-    fun `typealias-has-public-modifier`() {
-        // given
-        val sut = getSnippetFile("typealias-has-public-modifier")
-            .typeAliases()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers(PUBLIC) shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `typealias-has-no-modifiers`() {
-        // given
-        val sut = getSnippetFile("typealias-has-no-modifiers")
-            .typeAliases()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasModifiers() shouldBeEqualTo false
-            hasModifiers(PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `primary-constructor-has-modifier`() {
-        // given
-        val sut = getSnippetFile("primary-constructor-has-modifier")
-            .classes()
-            .first()
-            .primaryConstructor
-
-        // then
-        sut?.modifiers shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @Test
-    fun `primary-constructor-has-modifiers-and-annotation-with-parameter`() {
-        // given
-        val sut = getSnippetFile("primary-constructor-has-modifiers-and-annotation-with-parameter")
-            .classes()
-            .first()
-            .primaryConstructor
-
-        // then
-        sut?.modifiers shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @Test
-    fun `primary-constructor-has-modifiers-and-annotation-without-parameter`() {
-        // given
-        val sut = getSnippetFile("primary-constructor-has-modifiers-and-annotation-without-parameter")
-            .classes()
-            .first()
-            .primaryConstructor
-
-        // then
-        sut?.modifiers shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @Test
-    fun `primary-constructor-has-modifiers-and-annotations`() {
-        // given
-        val sut = getSnippetFile("primary-constructor-has-modifiers-and-annotations")
-            .classes()
-            .first()
-            .primaryConstructor
-
-        // then
-        sut?.modifiers shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @Test
-    fun `secondary-constructor-has-modifier`() {
-        // given
-        val sut = getSnippetFile("secondary-constructor-has-modifier")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @Test
-    fun `secondary-constructor-has-modifiers-and-annotation-with-parameter`() {
-        // given
-        val sut = getSnippetFile("secondary-constructor-has-modifiers-and-annotation-with-parameter")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @Test
-    fun `secondary-constructor-has-modifiers-and-annotation-without-parameter`() {
-        // given
-        val sut = getSnippetFile("secondary-constructor-has-modifiers-and-annotation-without-parameter")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @Test
-    fun `secondary-constructor-has-modifiers-and-annotations`() {
-        // given
-        val sut = getSnippetFile("secondary-constructor-has-modifiers-and-annotations")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
     }
 
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kodeclaration/snippet/formodifier/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForDeclarationModifiers() = listOf(
+            arguments("class-has-modifiers", "SampleClass", listOf(PRIVATE, OPEN)),
+            arguments("class-has-modifiers-and-annotation-with-parameter", "SampleClass", listOf(PRIVATE, OPEN)),
+            arguments("class-has-modifiers-and-annotation-without-parameter", "SampleClass", listOf(PRIVATE, OPEN)),
+            arguments("class-has-modifiers-and-annotations", "SampleClass", listOf(PRIVATE, OPEN)),
+            arguments("function-has-modifiers", "invoke", listOf(PROTECTED, OPEN, SUSPEND, INLINE, OPERATOR)),
+            arguments("function-has-modifiers-and-annotation-with-parameter", "invoke", listOf(PROTECTED, OPEN)),
+            arguments("function-has-modifiers-and-annotation-without-parameter", "invoke", listOf(PROTECTED, OPEN)),
+            arguments("function-has-modifiers-and-annotations", "invoke", listOf(PROTECTED, OPEN)),
+            arguments("interface-has-modifiers", "SampleInterface", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-and-annotation-with-parameter", "SampleInterface", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-and-annotation-without-parameter", "SampleInterface", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-and-annotations", "SampleInterface", listOf(PUBLIC, ABSTRACT)),
+            arguments("object-has-modifiers", "SampleObject", listOf(PRIVATE, DATA)),
+            arguments("object-has-modifiers-and-annotation-with-parameter", "SampleObject", listOf(PRIVATE, DATA)),
+            arguments("object-has-modifiers-and-annotation-without-parameter", "SampleObject", listOf(PRIVATE, DATA)),
+            arguments("object-has-modifiers-and-annotations", "SampleObject", listOf(PRIVATE, DATA)),
+            arguments("property-has-modifiers", "sampleProperty", listOf(PROTECTED, OPEN)),
+            arguments("property-has-modifiers-and-annotation-with-parameter", "sampleProperty", listOf(PROTECTED, OPEN)),
+            arguments("property-has-modifiers-and-annotation-without-parameter", "sampleProperty", listOf(PROTECTED, OPEN)),
+            arguments("property-has-modifiers-and-annotations", "sampleProperty", listOf(PROTECTED, OPEN)),
+            arguments("typealias-has-modifier", "SampleTypeAlias", listOf(PRIVATE)),
+            arguments("typealias-has-modifiers-and-annotation-with-parameter", "SampleTypeAlias", listOf(PRIVATE)),
+            arguments("typealias-has-modifiers-and-annotation-without-parameter", "SampleTypeAlias", listOf(PRIVATE)),
+            arguments("typealias-has-modifiers-and-annotations", "SampleTypeAlias", listOf(PRIVATE)),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForPrimaryConstructorModifiers() = listOf(
+            arguments("primary-constructor-has-modifier"),
+            arguments("primary-constructor-has-modifiers-and-annotation-with-parameter"),
+            arguments("primary-constructor-has-modifiers-and-annotation-without-parameter"),
+            arguments("primary-constructor-has-modifiers-and-annotations"),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForSecondaryConstructorModifiers() = listOf(
+            arguments("secondary-constructor-has-modifier"),
+            arguments("secondary-constructor-has-modifiers-and-annotation-with-parameter"),
+            arguments("secondary-constructor-has-modifiers-and-annotation-without-parameter"),
+            arguments("secondary-constructor-has-modifiers-and-annotations"),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForDeclarationHasModifiersWithoutParameters() = listOf(
+            arguments("class-has-protected-modifier", "SampleClass"),
+            arguments("function-has-protected-modifier", "sampleFunction"),
+            arguments("interface-has-protected-modifier", "SampleInterface"),
+            arguments("object-has-protected-modifier", "SampleObject"),
+            arguments("property-has-protected-modifier", "sampleProperty"),
+            arguments("typealias-has-protected-modifier", "SampleTypeAlias"),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForDeclarationHasModifiersWithOneParameter() = listOf(
+            arguments("class-has-public-modifier", "SampleClass"),
+            arguments("function-has-public-modifier", "sampleFunction"),
+            arguments("interface-has-public-modifier", "SampleInterface"),
+            arguments("object-has-public-modifier", "SampleObject"),
+            arguments("property-has-public-modifier", "sampleProperty"),
+            arguments("typealias-has-public-modifier", "SampleTypeAlias"),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForDeclarationHasTwoModifiers() = listOf(
+            arguments("class-has-two-modifiers", "SampleClass", PRIVATE, OPEN, PROTECTED),
+            arguments("function-has-two-modifiers", "sampleFunction", PROTECTED, SUSPEND, PRIVATE),
+            arguments("interface-has-two-modifiers", "SampleInterface", ABSTRACT, PUBLIC, PRIVATE),
+            arguments("object-has-two-modifiers", "SampleObject", PRIVATE, DATA, PROTECTED),
+            arguments("property-has-two-modifiers", "sampleProperty", PROTECTED, OPEN, PRIVATE),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForDeclarationWithoutModifiers() = listOf(
+            arguments("class-has-no-modifier", "SampleClass"),
+            arguments("function-has-no-modifier", "sampleFunction"),
+            arguments("interface-has-no-modifiers", "SampleInterface"),
+            arguments("object-has-no-modifiers", "SampleObject"),
+            arguments("property-has-no-modifier", "sampleProperty"),
+            arguments("typealias-has-no-modifiers", "SampleTypeAlias"),
+        )
+    }
 }

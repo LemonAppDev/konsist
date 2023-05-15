@@ -6,17 +6,6 @@ import org.junit.jupiter.api.Test
 
 class KoPackageDeclarationForNameTest {
     @Test
-    fun `package-has-name`() {
-        // given
-        val sut = getSnippetFile("package-has-name")
-            .packages()
-            .first()
-
-        // then
-        sut.name shouldBeEqualTo "samplepackage"
-    }
-
-    @Test
     fun `package-does-not-exists`() {
         // given
         val sut = getSnippetFile("package-does-not-exists")
@@ -26,6 +15,17 @@ class KoPackageDeclarationForNameTest {
 
         // then
         sut?.name shouldBeEqualTo null
+    }
+
+    @Test
+    fun `package-has-name`() {
+        // given
+        val sut = getSnippetFile("package-has-name")
+            .packages()
+            .first()
+
+        // then
+        sut.name shouldBeEqualTo "samplepackage"
     }
 
     @Test
