@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.core.declaration.kopropertydeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoPropertyDeclarationForIsValOrVarTest {
+class KoPropertyDeclarationForIsValTest {
     @Test
     fun `property-is-val`() {
         // given
@@ -14,26 +13,20 @@ class KoPropertyDeclarationForIsValOrVarTest {
             .first()
 
         // then
-        assertSoftly(sut) {
-            isVal shouldBeEqualTo true
-            isVar shouldBeEqualTo false
-        }
+        sut.isVal shouldBeEqualTo true
     }
 
     @Test
-    fun `property-is-var`() {
+    fun `property-is-not-val`() {
         // given
-        val sut = getSnippetFile("property-is-var")
+        val sut = getSnippetFile("property-is-not-val")
             .properties()
             .first()
 
         // then
-        assertSoftly(sut) {
-            isVal shouldBeEqualTo false
-            isVar shouldBeEqualTo true
-        }
+        sut.isVal shouldBeEqualTo false
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forisvalorvar/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forisval/", fileName)
 }

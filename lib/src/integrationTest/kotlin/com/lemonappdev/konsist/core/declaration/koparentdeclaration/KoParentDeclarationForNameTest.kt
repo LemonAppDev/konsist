@@ -5,12 +5,11 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoParentDeclarationForNameAndDelegateTest {
-
+class KoParentDeclarationForNameTest {
     @Test
-    fun `class-has-parent-class`() {
+    fun `class-with-parent-class`() {
         // given
-        val sut = getSnippetFile("class-has-parent-class")
+        val sut = getSnippetFile("class-with-parent-class")
             .classes()
             .first()
             .parentClass
@@ -19,14 +18,13 @@ class KoParentDeclarationForNameAndDelegateTest {
         assertSoftly(sut) {
             it?.name shouldBeEqualTo "SampleSuperClass"
             it?.delegateName shouldBeEqualTo null
-            it?.hasDelegate() shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `class-has-parent-interface`() {
+    fun `class-with-parent-interface`() {
         // given
-        val sut = getSnippetFile("class-has-parent-interface")
+        val sut = getSnippetFile("class-with-parent-interface")
             .classes()
             .first()
             .parentInterfaces
@@ -36,14 +34,13 @@ class KoParentDeclarationForNameAndDelegateTest {
         assertSoftly(sut) {
             name shouldBeEqualTo "SampleSuperInterface"
             delegateName shouldBeEqualTo null
-            hasDelegate() shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `class-has-parent-by-delegation`() {
+    fun `class-with-parent-by-delegation`() {
         // given
-        val sut = getSnippetFile("class-has-parent-by-delegation")
+        val sut = getSnippetFile("class-with-parent-by-delegation")
             .classes()
             .first()
             .parentInterfaces
@@ -53,16 +50,13 @@ class KoParentDeclarationForNameAndDelegateTest {
         assertSoftly(sut) {
             name shouldBeEqualTo "SampleSuperInterface"
             delegateName shouldBeEqualTo "sampleProperty"
-            hasDelegate() shouldBeEqualTo true
-            hasDelegate("SampleSuperInterface") shouldBeEqualTo true
-            hasDelegate("SampleOtherInterface") shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `class-has-parents`() {
+    fun `class-with-parents`() {
         // given
-        val sut = getSnippetFile("class-has-parents")
+        val sut = getSnippetFile("class-with-parents")
             .classes()
             .first()
             .parents
@@ -75,5 +69,5 @@ class KoParentDeclarationForNameAndDelegateTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koparentdeclaration/snippet/fornameanddelegate/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koparentdeclaration/snippet/forname/", fileName)
 }

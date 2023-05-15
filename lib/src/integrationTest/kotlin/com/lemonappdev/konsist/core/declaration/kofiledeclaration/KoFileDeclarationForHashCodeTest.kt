@@ -5,39 +5,37 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileDeclarationForEqualsAndHashCodeTest {
+class KoFileDeclarationForHashCodeTest {
     @Test
-    fun `files-are-equal`() {
+    fun `files-with-the-same-hashcode`() {
         // given
-        val file1 = getSnippetFile("files-are-equal")
+        val file1 = getSnippetFile("files-with-the-same-hashcode")
             .files()
             .first()
 
-        val file2 = getSnippetFile("files-are-equal")
+        val file2 = getSnippetFile("files-with-the-same-hashcode")
             .files()
             .first()
 
         // then
-        file1 shouldBeEqualTo file2
         file1.hashCode() shouldBeEqualTo file2.hashCode()
     }
 
     @Test
-    fun `files-are-not-equal`() {
+    fun `files-with-the-different-hashcode`() {
         // given
-        val file1 = getSnippetFile("files-are-not-equal")
+        val file1 = getSnippetFile("files-with-the-different-hashcode")
             .files()
             .first()
 
-        val file2 = getSnippetFile("files-are-equal")
+        val file2 = getSnippetFile("files-with-the-same-hashcode")
             .files()
             .first()
 
         // then
-        file1 shouldNotBeEqualTo file2
         file1.hashCode() shouldNotBeEqualTo file2.hashCode()
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofiledeclaration/snippet/forequalsandhashcode/", fileName)
+        getSnippetKoScope("core/declaration/kofiledeclaration/snippet/forhashcode/", fileName)
 }

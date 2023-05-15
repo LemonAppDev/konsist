@@ -1,0 +1,3 @@
+package com.lemonappdev.konsist.core.declaration.kopropertydeclaration.snippet.forisvar
+
+val sampleProperty: Int = 6

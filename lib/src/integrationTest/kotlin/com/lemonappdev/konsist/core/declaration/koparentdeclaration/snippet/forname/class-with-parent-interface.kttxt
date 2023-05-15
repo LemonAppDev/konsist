@@ -1,0 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.koparentdeclaration.snippet.forname
+
+interface SampleSuperInterface
+
+class SampleClass() : SampleSuperInterface
