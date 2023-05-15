@@ -32,13 +32,13 @@ class KoScopeForFunctionTest {
     }
 
     @Test
-    fun `file-contains-two-functions-and-local-function includeNested true`() {
+    fun `file-contains-two-functions-and-local-function includeNested false includeLocal false`() {
         // given
         val sut = getSnippetFile("file-contains-two-functions-and-local-function")
 
         // then
         sut
-            .functions(includeNested = true)
+            .functions(includeNested = false, includeLocal = false)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -50,18 +50,56 @@ class KoScopeForFunctionTest {
     }
 
     @Test
-    fun `file-contains-two-functions-and-local-function includeNested false`() {
+    fun `file-contains-two-functions-and-local-function includeNested true includeLocal false`() {
         // given
         val sut = getSnippetFile("file-contains-two-functions-and-local-function")
 
         // then
         sut
-            .functions(includeNested = false)
+            .functions(includeNested = true, includeLocal = false)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
                 listOf(
                     "sampleFunction1",
+                    "sampleFunction2",
+                ),
+            )
+    }
+
+    @Test
+    fun `file-contains-two-functions-and-local-function includeNested false includeLocal true`() {
+        // given
+        val sut = getSnippetFile("file-contains-two-functions-and-local-function")
+
+        // then
+        sut
+            .functions(includeNested = false, includeLocal = true)
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "sampleFunction1",
+                    "sampleLocalFunction",
+                    "sampleFunction2",
+                ),
+            )
+    }
+
+    @Test
+    fun `file-contains-two-functions-and-local-function includeNested true includeLocal true`() {
+        // given
+        val sut = getSnippetFile("file-contains-two-functions-and-local-function")
+
+        // then
+        sut
+            .functions(includeNested = true, includeLocal = true)
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "sampleFunction1",
+                    "sampleLocalFunction",
                     "sampleFunction2",
                 ),
             )
