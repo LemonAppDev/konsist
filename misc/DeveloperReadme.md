@@ -57,14 +57,27 @@ flowchart LR
 
 # Naming Extensions
 
-If we create extensions with `vararg` for a property in a class we must check its return type:
+If we create extensions with `vararg` for a property in a class we must check its return type.
 
-- If the return type is in singular we create two extensions:
-    - with prefix 'with' and the name of the property in the singular number
-        - Such extension filters all objects in which this property complies with one of the given conditions
-    - with prefix 'without' and the name of the property in the singular number
-        - Such extension filters all objects in which this property not complies with any of the given conditions
-- If the return type is a list of objects we create three extensions:
+## Return type
+
+### Singular return type
+
+create two extensions:
+
+- with prefix 'with' and the name of the property in the singular number
+    - Such extension filters all objects in which this property complies with one of the given conditions
+- with prefix 'without' and the name of the property in the singular number
+    - Such extension filters all objects in which this property not complies with any of the given conditions
+
+E.g. In `KoClassDeclaration`, the `parentClass` property returns `KoParentDeclaration` (singular - it's one object), 
+so we create two extensions:
+    - `withParentClass(vararg names: String)`
+    - `withoutParentClass(vararg names: String)`
+
+### Return type is a list of objects
+
+Create three extensions:
     - with prefix 'with' and the name of the property in the plural number
         - Such extension filters all objects in which this property complies with all the given conditions
     - with prefix 'withSome' and the name of the property in the plural number
@@ -72,22 +85,15 @@ If we create extensions with `vararg` for a property in a class we must check it
     - with prefix 'without' and the name of the property in the plural number
         - Such extension filters all objects in which this property not complies with any of the given conditions
 
-E.g. In `KoClassDeclaration`:
-
-1. `parentClass` property returns `KoParentDeclaration` (singular - it's one object), so we create two extensions:
-    - `withParentClass(vararg names: String)`
-    - `withoutParentClass(vararg names: String)`
-
-2. `parentInterfaces` property returns `List<KoParentDeclaration>` (plural - it's list of objects), so we create three
-   extensions:
+E.g. In `KoClassDeclaration`, the `parentInterfaces` property returns `List<KoParentDeclaration>` (plural - it's list 
+of objects), so we create three extensions:
     - `withParentInterfaces(vararg names: String)`
     - `withSomeParentInterfaces(vararg names: String)`
     - `withoutParentInterfaces(vararg names: String)`
 
-### If parameters of extensions is KClass type, the extension must have suffix 'Of'.
+## If parameters of extensions is of KClass type, then extension must have suffix 'Of'.
 
 E.g. In `KoClassDeclaration`:
-
     - `withParentClassOf(vararg names: KClass<*>)`
     - `withoutParentClassOf(vararg names: KClass<*>)`
 
