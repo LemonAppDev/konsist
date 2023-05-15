@@ -5,7 +5,7 @@ class SampleTopLevelClass {
 
     class SampleClass
 
-    interface SampleInterface
-
     object SampleObject
+
+    interface SampleInterface
 }
