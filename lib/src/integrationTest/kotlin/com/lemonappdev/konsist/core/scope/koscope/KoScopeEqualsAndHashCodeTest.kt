@@ -15,7 +15,7 @@ class KoScopeEqualsAndHashCodeTest {
         val scope2 = getSnippetFile("scopes-are-equal")
 
         // then
-//        scope1 shouldBeEqualTo scope2
+        scope1 shouldBeEqualTo scope2
         scope1.hashCode() shouldBeEqualTo scope2.hashCode()
     }
 

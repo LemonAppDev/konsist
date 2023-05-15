@@ -28,6 +28,7 @@ class KoScopeOperatorTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
+                    "KoScopeEqualsAndHashCodeTest.kt",
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
                     "KoScopeForDeclarationTest.kt",
@@ -63,6 +64,7 @@ class KoScopeOperatorTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
+                    "KoScopeEqualsAndHashCodeTest.kt",
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
                     "KoScopeForFunctionTest.kt",
@@ -114,6 +116,7 @@ class KoScopeOperatorTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
+                    "KoScopeEqualsAndHashCodeTest.kt",
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
                     "KoScopeForDeclarationTest.kt",
@@ -149,6 +152,7 @@ class KoScopeOperatorTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
+                    "KoScopeEqualsAndHashCodeTest.kt",
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
                     "KoScopeForFunctionTest.kt",
