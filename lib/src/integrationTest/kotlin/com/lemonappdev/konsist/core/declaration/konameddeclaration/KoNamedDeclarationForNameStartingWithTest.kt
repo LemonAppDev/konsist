@@ -4,78 +4,43 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoNamedDeclarationForNameStartingWithTest {
-    @Test
-    fun `class-has-name-with-prefix`() {
+    @ParameterizedTest
+    @MethodSource("provideValues")
+    fun `declaration-has-name-with-prefix`(
+        fileName: String,
+        declarationName: String,
+        prefix: String,
+    ) {
         // given
-        val sut = getSnippetFile("class-has-name-with-prefix")
-            .classes()
-            .first()
+        val sut = getSnippetFile(fileName)
+            .namedDeclarations()
+            .first { it.name == declarationName }
 
         // then
         assertSoftly(sut) {
-            hasNameStartingWith("Sam") shouldBeEqualTo true
-            hasNameStartingWith("non") shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `interface-has-name-with-prefix`() {
-        // given
-        val sut = getSnippetFile("interface-has-name-with-prefix")
-            .interfaces()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasNameStartingWith("Sam") shouldBeEqualTo true
-            hasNameStartingWith("non") shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `object-has-name-with-prefix`() {
-        // given
-        val sut = getSnippetFile("object-has-name-with-prefix")
-            .objects()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasNameStartingWith("Sam") shouldBeEqualTo true
-            hasNameStartingWith("non") shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `function-has-name-with-prefix`() {
-        // given
-        val sut = getSnippetFile("function-has-name-with-prefix")
-            .functions()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasNameStartingWith("sam") shouldBeEqualTo true
-            hasNameStartingWith("non") shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `property-has-name-with-prefix`() {
-        // given
-        val sut = getSnippetFile("property-has-name-with-prefix")
-            .properties()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasNameStartingWith("sam") shouldBeEqualTo true
+            hasNameStartingWith(prefix) shouldBeEqualTo true
             hasNameStartingWith("non") shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/konameddeclaration/snippet/fornamestartingwith/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValues() = listOf(
+            arguments("class-has-name-with-prefix", "SampleClass", "Sam"),
+            arguments("function-has-name-with-prefix", "sampleFunction", "sam"),
+            arguments("interface-has-name-with-prefix", "SampleInterface", "Sam"),
+            arguments("object-has-name-with-prefix", "SampleObject", "Sam"),
+            arguments("property-has-name-with-prefix", "sampleProperty", "sam"),
+        )
+    }
 }

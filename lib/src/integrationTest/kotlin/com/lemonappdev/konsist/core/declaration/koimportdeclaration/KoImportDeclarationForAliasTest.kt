@@ -6,7 +6,6 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoImportDeclarationForAliasTest {
-
     @Test
     fun `import-name`() {
         // given

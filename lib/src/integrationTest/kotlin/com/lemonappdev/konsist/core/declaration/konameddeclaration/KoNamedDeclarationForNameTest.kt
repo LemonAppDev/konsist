@@ -1,65 +1,42 @@
 package com.lemonappdev.konsist.core.declaration.konameddeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoNamedDeclarationForNameTest {
-    @Test
-    fun `class`() {
+    @ParameterizedTest
+    @MethodSource("provideValues")
+    fun `declaration-name`(
+        fileName: String,
+        declarationName: String,
+    ) {
         // given
-        val sut = getSnippetFile("class")
-            .classes()
+        val sut = getSnippetFile(fileName)
+            .namedDeclarations()
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleClass"
-    }
-
-    @Test
-    fun `interface`() {
-        // given
-        val sut = getSnippetFile("interface")
-            .interfaces()
-            .first()
-
-        // then
-        sut.name shouldBeEqualTo "SampleInterface"
-    }
-
-    @Test
-    fun `object`() {
-        // given
-        val sut = getSnippetFile("object")
-            .objects()
-            .first()
-
-        // then
-        sut.name shouldBeEqualTo "SampleObject"
-    }
-
-    @Test
-    fun `function`() {
-        // given
-        val sut = getSnippetFile("function")
-            .functions()
-            .first()
-
-        // then
-        sut.name shouldBeEqualTo "sampleFunction"
-    }
-
-    @Test
-    fun `property`() {
-        // given
-        val sut = getSnippetFile("property")
-            .properties()
-            .first()
-
-        // then
-        sut.name shouldBeEqualTo "sampleProperty"
+        sut.name shouldBeEqualTo declarationName
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/konameddeclaration/snippet/forname/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValues() = listOf(
+            arguments("class", "SampleClass"),
+            arguments("function", "sampleFunction"),
+            arguments("interface", "SampleInterface"),
+            arguments("object", "SampleObject"),
+            arguments("property", "sampleProperty"),
+        )
+    }
 }
