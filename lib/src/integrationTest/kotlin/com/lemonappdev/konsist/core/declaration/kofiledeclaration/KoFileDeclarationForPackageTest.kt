@@ -7,6 +7,17 @@ import org.junit.jupiter.api.Test
 
 class KoFileDeclarationForPackageTest {
     @Test
+    fun `file-contains-no-package`() {
+        // given
+        val sut = getSnippetFile("file-contains-no-package")
+            .files()
+            .first()
+
+        // then
+        sut.packagee shouldBeEqualTo null
+    }
+
+    @Test
     fun `file-contains-package`() {
         // given
         val sut = getSnippetFile("file-contains-package")
@@ -20,17 +31,6 @@ class KoFileDeclarationForPackageTest {
             hasPackage("com..") shouldBeEqualTo true
             hasPackage("com") shouldBeEqualTo false
         }
-    }
-
-    @Test
-    fun `file-contains-no-package`() {
-        // given
-        val sut = getSnippetFile("file-contains-no-package")
-            .files()
-            .first()
-
-        // then
-        sut.packagee shouldBeEqualTo null
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofiledeclaration/snippet/forpackage/", fileName)

@@ -7,6 +7,34 @@ import org.junit.jupiter.api.Test
 
 class KoFileDeclarationForTypeAliasTest {
     @Test
+    fun `file-contains-no-typealias`() {
+        // given
+        val sut = getSnippetFile("file-contains-no-typealias")
+            .files()
+            .first()
+
+        // then
+        sut
+            .typeAliases
+            .isEmpty()
+            .shouldBeEqualTo(true)
+    }
+
+    @Test
+    fun `file-has-no-typealias`() {
+        // given
+        val sut = getSnippetFile("file-has-no-typealias")
+            .files()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasTypeAliases() shouldBeEqualTo false
+            hasTypeAliases("SampleTypeAlias") shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `file-contains-typealias`() {
         // given
         val sut = getSnippetFile("file-contains-typealias")
@@ -37,34 +65,6 @@ class KoFileDeclarationForTypeAliasTest {
             hasTypeAliases("SampleTypeAlias1") shouldBeEqualTo true
             hasTypeAliases("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo true
             hasTypeAliases("OtherTypeAlias") shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `file-contains-no-typealias`() {
-        // given
-        val sut = getSnippetFile("file-contains-no-typealias")
-            .files()
-            .first()
-
-        // then
-        sut
-            .typeAliases
-            .isEmpty()
-            .shouldBeEqualTo(true)
-    }
-
-    @Test
-    fun `file-has-no-typealias`() {
-        // given
-        val sut = getSnippetFile("file-has-no-typealias")
-            .files()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasTypeAliases() shouldBeEqualTo false
-            hasTypeAliases("SampleTypeAlias") shouldBeEqualTo false
         }
     }
 

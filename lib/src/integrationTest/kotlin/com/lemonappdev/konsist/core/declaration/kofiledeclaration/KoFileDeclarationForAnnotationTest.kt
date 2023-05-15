@@ -10,6 +10,21 @@ import org.junit.jupiter.api.Test
 
 class KoFileDeclarationForAnnotationTest {
     @Test
+    fun `file-contains-no-annotation`() {
+        // given
+        val sut = getSnippetFile("file-contains-no-annotation")
+            .files()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            annotations.isEmpty() shouldBeEqualTo true
+            hasAnnotations("SampleAnnotation") shouldBeEqualTo false
+            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `file-contains-two-annotations`() {
         // given
         val sut = getSnippetFile("file-contains-two-annotations")
@@ -41,21 +56,6 @@ class KoFileDeclarationForAnnotationTest {
             hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
             hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
             hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `file-contains-no-annotation`() {
-        // given
-        val sut = getSnippetFile("file-contains-no-annotation")
-            .files()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            annotations.isEmpty() shouldBeEqualTo true
-            hasAnnotations("SampleAnnotation") shouldBeEqualTo false
-            hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
         }
     }
 

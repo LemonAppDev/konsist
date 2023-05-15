@@ -7,6 +7,21 @@ import org.junit.jupiter.api.Test
 
 class KoFileDeclarationForImportTest {
     @Test
+    fun `file-contains-no-import`() {
+        // given
+        val sut = getSnippetFile("file-contains-no-import")
+            .files()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            imports.isEmpty() shouldBeEqualTo true
+            hasImports() shouldBeEqualTo false
+            hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `file-contains-imports`() {
         // given
         val sut = getSnippetFile("file-contains-imports")
@@ -40,21 +55,6 @@ class KoFileDeclarationForImportTest {
             hasImports("com") shouldBeEqualTo false
             hasImports("com", "..testdata..") shouldBeEqualTo false
             hasImports("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo true
-            hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `file-contains-no-import`() {
-        // given
-        val sut = getSnippetFile("file-contains-no-import")
-            .files()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            imports.isEmpty() shouldBeEqualTo true
-            hasImports() shouldBeEqualTo false
             hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
         }
     }
