@@ -3,9 +3,7 @@ package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoComplexDeclaration
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -21,7 +19,6 @@ class KoComplexDeclarationForDeclarationsTest {
             .declarations(includeNested = true)
             .filterIsInstance<KoComplexDeclaration>()
             .first { it.name == declarationName }
-
 
         // then
         sut
@@ -42,7 +39,6 @@ class KoComplexDeclarationForDeclarationsTest {
             .declarations(includeNested = true)
             .filterIsInstance<KoComplexDeclaration>()
             .first { it.name == declarationName }
-
 
         // then
         val expected = listOf(
@@ -72,7 +68,6 @@ class KoComplexDeclarationForDeclarationsTest {
             .filterIsInstance<KoComplexDeclaration>()
             .first { it.name == declarationName }
 
-
         // then
         val expected = listOf(
             "sampleProperty",
@@ -101,7 +96,6 @@ class KoComplexDeclarationForDeclarationsTest {
             .filterIsInstance<KoComplexDeclaration>()
             .first { it.name == declarationName }
 
-
         // then
         val expected = listOf(
             "sampleProperty",
@@ -129,7 +123,6 @@ class KoComplexDeclarationForDeclarationsTest {
             .declarations(includeNested = true)
             .filterIsInstance<KoComplexDeclaration>()
             .first { it.name == declarationName }
-
 
         // then
         val expected = listOf(
@@ -166,7 +159,6 @@ class KoComplexDeclarationForDeclarationsTest {
             .filterIsInstance<KoComplexDeclaration>()
             .first { it.name == declarationName }
 
-
         // then
         val expected = listOf(
             "sampleFunction",
@@ -193,7 +185,6 @@ class KoComplexDeclarationForDeclarationsTest {
             .declarations(includeNested = true)
             .filterIsInstance<KoComplexDeclaration>()
             .first { it.name == declarationName }
-
 
         // then
         val expected = listOf(
@@ -224,7 +215,6 @@ class KoComplexDeclarationForDeclarationsTest {
             .declarations(includeNested = true)
             .filterIsInstance<KoComplexDeclaration>()
             .first { it.name == declarationName }
-
 
         // then
         val expected = listOf("sampleFunction")
