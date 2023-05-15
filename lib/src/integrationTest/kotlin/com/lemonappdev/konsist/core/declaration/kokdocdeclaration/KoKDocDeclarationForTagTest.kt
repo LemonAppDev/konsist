@@ -16,7 +16,6 @@ import com.lemonappdev.konsist.api.KoKDocTag.SINCE
 import com.lemonappdev.konsist.api.KoKDocTag.SUPPRESS
 import com.lemonappdev.konsist.api.KoKDocTag.THROWS
 import com.lemonappdev.konsist.api.KoKDocTag.VERSION
-import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -94,6 +93,7 @@ class KoKDocDeclarationForTagTest {
 
     @ParameterizedTest
     @MethodSource("provideValuesForParamTag")
+    @Suppress("detekt.LongParameterList")
     fun `param-tag`(
         fileName: String,
         declarationName: String,
@@ -307,7 +307,7 @@ class KoKDocDeclarationForTagTest {
                 "SampleType1",
                 "The first type parameter for this class.",
                 "SampleType2",
-                "The second type parameter for this class."
+                "The second type parameter for this class.",
             ),
             arguments(
                 "function-with-tags",
@@ -315,17 +315,16 @@ class KoKDocDeclarationForTagTest {
                 "sampleArgument1",
                 "The first argument.",
                 "sampleArgument2",
-                "The second argument."
+                "The second argument.",
             ),
         )
 
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForTags() = listOf(
-            arguments("class-with-tags", "SampleClass",),
+            arguments("class-with-tags", "SampleClass"),
             arguments("function-with-tags", "sampleMethod"),
         )
-
     }
 
     @Test

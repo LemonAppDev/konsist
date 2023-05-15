@@ -77,7 +77,7 @@ class KoDeclarationForAnnotationTest {
             .first { it.name == declarationName }
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             annotations.size shouldBeEqualTo 1
             hasAnnotations(name) shouldBeEqualTo value
         }
@@ -98,7 +98,7 @@ class KoDeclarationForAnnotationTest {
             .first { it.name == declarationName }
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             annotations.size shouldBeEqualTo 2
             hasAnnotations(name1, name2) shouldBeEqualTo value
         }
@@ -118,7 +118,7 @@ class KoDeclarationForAnnotationTest {
             .first { it.name == declarationName }
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             annotations.size shouldBeEqualTo 2
             hasAnnotations(name) shouldBeEqualTo value
         }
@@ -183,7 +183,7 @@ class KoDeclarationForAnnotationTest {
             .first { it.name == declarationName }
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             annotations.size shouldBeEqualTo 1
             hasAnnotationsOf(name) shouldBeEqualTo value
         }
@@ -204,7 +204,7 @@ class KoDeclarationForAnnotationTest {
             .first { it.name == declarationName }
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             annotations.size shouldBeEqualTo 2
             hasAnnotationsOf(name1, name2) shouldBeEqualTo value
         }
@@ -224,7 +224,7 @@ class KoDeclarationForAnnotationTest {
             .first { it.name == declarationName }
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             annotations.size shouldBeEqualTo 2
             hasAnnotationsOf(name) shouldBeEqualTo value
         }
@@ -329,6 +329,7 @@ class KoDeclarationForAnnotationTest {
             arguments("typealias-has-two-annotations", "SampleTypeAlias", "SampleAnnotation1", "SampleAnnotation2", true),
             arguments("typealias-has-two-annotations", "SampleTypeAlias", "SampleAnnotation1", "NonExistingAnnotation", false),
         )
+
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarationWithTwoAnnotations() = listOf(
