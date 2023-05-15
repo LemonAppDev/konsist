@@ -6,6 +6,18 @@ import org.junit.jupiter.api.Test
 
 class KoScopeForClassTest {
     @Test
+    fun `file-contains-no-class`() {
+        // given
+        val sut = getSnippetFile("file-contains-no-class")
+
+        // then
+        sut
+            .classes()
+            .toList()
+            .shouldBeEqualTo(emptyList())
+    }
+
+    @Test
     fun `file-contains-one-class`() {
         // given
         val sut = getSnippetFile("file-contains-one-class")
@@ -16,18 +28,6 @@ class KoScopeForClassTest {
             .toList()
             .map { it.name }
             .shouldBeEqualTo(listOf("SampleClass"))
-    }
-
-    @Test
-    fun `file-contains-no-class`() {
-        // given
-        val sut = getSnippetFile("file-contains-no-class")
-
-        // then
-        sut
-            .classes()
-            .toList()
-            .shouldBeEqualTo(emptyList())
     }
 
     @Test
@@ -63,6 +63,71 @@ class KoScopeForClassTest {
                 listOf(
                     "SampleClass1",
                     "SampleClass2",
+                ),
+            )
+    }
+
+    @Test
+    fun `file-contains-class-with-local-and-nested-classes includeNested false includeLocal false`() {
+        // given
+        val sut = getSnippetFile("file-contains-class-with-local-and-nested-classes")
+
+        // then
+        sut
+            .classes(includeNested = false, includeLocal = false)
+            .toList()
+            .map { it.name }
+            .shouldBeEqualTo(listOf("SampleClass"))
+    }
+
+    @Test
+    fun `file-contains-class-with-local-and-nested-classes includeNested true includeLocal false`() {
+        // given
+        val sut = getSnippetFile("file-contains-class-with-local-and-nested-classes")
+
+        // then
+        sut
+            .classes(includeNested = true, includeLocal = false)
+            .toList()
+            .map { it.name }
+            .shouldBeEqualTo(
+                listOf(
+                    "SampleClass",
+                    "SampleNestedClass1",
+                    "SampleNestedClass2",
+                ),
+            )
+    }
+
+    @Test
+    fun `file-contains-class-with-local-and-nested-classes includeNested false includeLocal true`() {
+        // given
+        val sut = getSnippetFile("file-contains-class-with-local-and-nested-classes")
+
+        // then
+        sut
+            .classes(includeNested = false, includeLocal = true)
+            .toList()
+            .map { it.name }
+            .shouldBeEqualTo(listOf("SampleClass"))
+    }
+
+    @Test
+    fun `file-contains-class-with-local-and-nested-classes includeNested true includeLocal true`() {
+        // given
+        val sut = getSnippetFile("file-contains-class-with-local-and-nested-classes")
+
+        // then
+        sut
+            .classes(includeNested = true, includeLocal = true)
+            .toList()
+            .map { it.name }
+            .shouldBeEqualTo(
+                listOf(
+                    "SampleClass",
+                    "SampleLocalClass",
+                    "SampleNestedClass1",
+                    "SampleNestedClass2",
                 ),
             )
     }

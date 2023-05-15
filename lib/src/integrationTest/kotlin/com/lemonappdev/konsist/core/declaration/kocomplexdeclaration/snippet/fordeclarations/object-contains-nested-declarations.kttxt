@@ -1,5 +1,10 @@
 object SampleTopLevelObject {
-    fun sampleFunction() { }
+    fun sampleFunction() {
+        class SampleLocalClass
+
+        fun sampleLocalFunction() {
+        }
+    }
 
     class SampleClass {
         class SampleClassNestedInsideClass
