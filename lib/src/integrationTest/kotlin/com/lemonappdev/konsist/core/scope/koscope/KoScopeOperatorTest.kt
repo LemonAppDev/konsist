@@ -42,6 +42,7 @@ class KoScopeOperatorTest {
                     "KoScopeForTypeAliasTest.kt",
                     "KoScopeOperatorTest.kt",
                     "KoScopeTest.kt",
+                    "KoScopeToStringTest.kt",
                 ),
             )
     }
@@ -75,6 +76,7 @@ class KoScopeOperatorTest {
                     "KoScopeForTypeAliasTest.kt",
                     "KoScopeOperatorTest.kt",
                     "KoScopeTest.kt",
+                    "KoScopeToStringTest.kt",
                 ),
             )
     }
@@ -132,6 +134,7 @@ class KoScopeOperatorTest {
                     "KoScopeForTypeAliasTest.kt",
                     "KoScopeOperatorTest.kt",
                     "KoScopeTest.kt",
+                    "KoScopeToStringTest.kt",
                 ),
             )
     }
@@ -167,6 +170,7 @@ class KoScopeOperatorTest {
                     "KoScopeForTypeAliasTest.kt",
                     "KoScopeOperatorTest.kt",
                     "KoScopeTest.kt",
+                    "KoScopeToStringTest.kt",
                 ),
             )
     }

@@ -5,32 +5,28 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoImportDeclarationForAliasAndNameTest {
+class KoImportDeclarationForAliasTest {
     @Test
-    fun `import-name`() {
+    fun `import-without-import-alias`() {
         // given
-        val sut = getSnippetFile("import-name")
+        val sut = getSnippetFile("import-without-import-alias")
             .imports()
             .first()
 
         // then
-        assertSoftly(sut) {
-            name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
-            alias shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
-        }
+        sut.alias shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
     }
 
     @Test
-    fun `import-name-has-import-alias`() {
+    fun `import-with-import-alias`() {
         // given
-        val sut = getSnippetFile("import-name-has-import-alias")
+        val sut = getSnippetFile("import-with-import-alias")
             .imports()
 
         // then
         assertSoftly(sut.toList()) {
             get(0).alias shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
             get(1).alias shouldBeEqualTo "ImportAlias"
-            get(1).name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
 

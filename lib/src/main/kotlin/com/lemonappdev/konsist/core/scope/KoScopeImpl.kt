@@ -81,7 +81,5 @@ class KoScopeImpl(
         .toList()
         .joinToString("\n") { it.filePath }
 
-    override fun print() {
-        println(toString())
-    }
+    override fun print() { println(toString()) }
 }

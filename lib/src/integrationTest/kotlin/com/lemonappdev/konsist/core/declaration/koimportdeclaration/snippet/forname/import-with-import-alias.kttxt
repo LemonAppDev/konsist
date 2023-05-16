@@ -1,0 +1,6 @@
+import com.lemonappdev.konsist.testdata.SampleType as ImportAlias
+import com.lemonappdev.konsist.testdata.SampleClass
+
+class SampleTopLevelClass1(val sampleProperty2: SampleClass)
+
+class SampleTopLevelClass2(val sampleProperty2: ImportAlias)
