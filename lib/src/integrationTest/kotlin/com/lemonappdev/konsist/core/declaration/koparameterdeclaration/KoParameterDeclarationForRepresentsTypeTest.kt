@@ -16,7 +16,7 @@ class KoParameterDeclarationForRepresentsTypeTest {
             ?.first()
 
         // then
-        assertSoftly(sut){
+        assertSoftly(sut) {
             it?.representsType("SampleType") shouldBeEqualTo true
             it?.representsType("OtherType") shouldBeEqualTo false
         }

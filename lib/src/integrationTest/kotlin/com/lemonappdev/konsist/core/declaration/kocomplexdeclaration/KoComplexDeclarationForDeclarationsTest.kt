@@ -6,7 +6,6 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
-import org.junit.jupiter.params.provider.ValueSource
 
 class KoComplexDeclarationForDeclarationsTest {
     @ParameterizedTest
@@ -308,10 +307,10 @@ class KoComplexDeclarationForDeclarationsTest {
             arguments("class-contains-declarations", "SampleTopLevelClass", true, false),
             arguments("class-contains-declarations", "SampleTopLevelClass", false, true),
             arguments("class-contains-declarations", "SampleTopLevelClass", false, false),
-            arguments("interface-contains-declarations", "SampleTopLevelInterface",true, true),
-            arguments("interface-contains-declarations", "SampleTopLevelInterface",true, false),
-            arguments("interface-contains-declarations", "SampleTopLevelInterface",false, true),
-            arguments("interface-contains-declarations", "SampleTopLevelInterface",false, false),
+            arguments("interface-contains-declarations", "SampleTopLevelInterface", true, true),
+            arguments("interface-contains-declarations", "SampleTopLevelInterface", true, false),
+            arguments("interface-contains-declarations", "SampleTopLevelInterface", false, true),
+            arguments("interface-contains-declarations", "SampleTopLevelInterface", false, false),
             arguments("object-contains-declarations", "SampleTopLevelObject", true, true),
             arguments("object-contains-declarations", "SampleTopLevelObject", true, false),
             arguments("object-contains-declarations", "SampleTopLevelObject", false, true),

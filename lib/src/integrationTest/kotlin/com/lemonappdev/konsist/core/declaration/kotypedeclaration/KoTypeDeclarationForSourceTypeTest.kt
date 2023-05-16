@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kotypedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -18,7 +17,7 @@ class KoTypeDeclarationForSourceTypeTest {
             ?.type
 
         // then
-            sut?.sourceType shouldBeEqualTo "SampleType"
+        sut?.sourceType shouldBeEqualTo "SampleType"
     }
 
     @Test
@@ -33,7 +32,7 @@ class KoTypeDeclarationForSourceTypeTest {
             ?.type
 
         // then
-            sut?.sourceType shouldBeEqualTo "SampleType"
+        sut?.sourceType shouldBeEqualTo "SampleType"
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -15,7 +15,7 @@ class KoPsiDeclarationForKDocTest {
             .first()
 
         // then
-        assertSoftly (sut){
+        assertSoftly(sut) {
             kDoc shouldNotBeEqualTo null
             hasKDoc() shouldBeEqualTo true
         }
@@ -29,7 +29,7 @@ class KoPsiDeclarationForKDocTest {
             .first()
 
         // then
-        assertSoftly (sut){
+        assertSoftly(sut) {
             kDoc shouldBeEqualTo null
             hasKDoc() shouldBeEqualTo false
         }
