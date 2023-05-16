@@ -1,6 +1,0 @@
-package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration.snippet
-
-import com.lemonappdev.konsist.testdata.SampleType
-
-infix fun sampleFunction(sampleProperty: SampleType) {
-}

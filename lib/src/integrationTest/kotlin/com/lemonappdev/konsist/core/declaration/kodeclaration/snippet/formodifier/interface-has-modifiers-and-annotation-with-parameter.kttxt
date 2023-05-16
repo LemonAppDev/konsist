@@ -1,0 +1,5 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+
+@SampleAnnotationWithParameter(sampleParameter = " parameter description ")
+public abstract interface SampleInterface {
+}
