@@ -1,3 +1,0 @@
-package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration.snippet
-
-external fun sampleFunction()

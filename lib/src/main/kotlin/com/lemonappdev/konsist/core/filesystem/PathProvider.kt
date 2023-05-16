@@ -32,4 +32,10 @@ class PathProvider(
             .firstOrNull()
             ?: getProjectRootDirectory(file.absoluteFile.parentFile)
     }
+
+    companion object {
+        private val pathVerifier = PathVerifier()
+
+        internal fun getInstance() = PathProvider(KoFileFactory(), ProjectRootDirProviderFactory(pathVerifier))
+    }
 }
