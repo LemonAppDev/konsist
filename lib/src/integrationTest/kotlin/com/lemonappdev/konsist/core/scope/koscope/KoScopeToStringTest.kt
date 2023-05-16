@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 class KoScopeToStringTest {
+    private val konsistModulePath = File("")
+        .absoluteFile
+        .path
+
     @Test
     fun `toString method`() {
         // given
@@ -15,20 +19,21 @@ class KoScopeToStringTest {
         sut
             .toString()
             .shouldBeEqualTo(
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForAnnotationTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForClassTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForDeclarationTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForFunctionTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForImportTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForInterfaceTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForNamedDeclarationTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForObjectTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForPackageTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForPropertyTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForTypeAliasTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeOperatorTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeTest.kt\n" +
-                    "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeToStringTest.kt"
+                "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForAnnotationTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForClassTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForDeclarationTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForFileTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForFunctionTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForImportTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForInterfaceTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForNamedDeclarationTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForObjectTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForPackageTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForPropertyTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeForTypeAliasTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeOperatorTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeTest.kt\n" +
+                        "$konsistModulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope/koscope/KoScopeToStringTest.kt"
             )
     }
 }

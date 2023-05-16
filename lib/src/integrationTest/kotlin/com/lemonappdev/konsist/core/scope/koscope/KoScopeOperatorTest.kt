@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 class KoScopeOperatorTest {
-
     private val konsistModulePath = File("")
         .absoluteFile
         .path
@@ -32,6 +31,7 @@ class KoScopeOperatorTest {
                     "KoScopeForClassTest.kt",
                     "KoScopeForDeclarationTest.kt",
                     "KoScopeForDeclarationTest.kt",
+                    "KoScopeForFileTest.kt",
                     "KoScopeForFunctionTest.kt",
                     "KoScopeForImportTest.kt",
                     "KoScopeForInterfaceTest.kt",
@@ -66,6 +66,7 @@ class KoScopeOperatorTest {
                 listOf(
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
+                    "KoScopeForFileTest.kt",
                     "KoScopeForFunctionTest.kt",
                     "KoScopeForImportTest.kt",
                     "KoScopeForInterfaceTest.kt",
@@ -124,6 +125,7 @@ class KoScopeOperatorTest {
                     "KoScopeForClassTest.kt",
                     "KoScopeForDeclarationTest.kt",
                     "KoScopeForDeclarationTest.kt",
+                    "KoScopeForFileTest.kt",
                     "KoScopeForFunctionTest.kt",
                     "KoScopeForImportTest.kt",
                     "KoScopeForInterfaceTest.kt",
@@ -160,6 +162,7 @@ class KoScopeOperatorTest {
                 listOf(
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
+                    "KoScopeForFileTest.kt",
                     "KoScopeForFunctionTest.kt",
                     "KoScopeForImportTest.kt",
                     "KoScopeForInterfaceTest.kt",
