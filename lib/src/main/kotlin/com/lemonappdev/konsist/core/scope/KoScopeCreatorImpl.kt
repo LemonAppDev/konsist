@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core
+package com.lemonappdev.konsist.core.scope
 
 import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.KoScopeCreator
@@ -6,22 +6,11 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
-import com.lemonappdev.konsist.core.filesystem.KoFileFactory
 import com.lemonappdev.konsist.core.filesystem.PathProvider
-import com.lemonappdev.konsist.core.filesystem.PathVerifier
-import com.lemonappdev.konsist.core.filesystem.ProjectRootDirProviderFactory
-import com.lemonappdev.konsist.core.scope.KoScopeImpl
 import java.io.File
 
 internal class KoScopeCreatorImpl : KoScopeCreator {
-    private val pathVerifier = PathVerifier()
-
-    private val pathProvider: PathProvider by lazy {
-        PathProvider(
-            KoFileFactory(),
-            ProjectRootDirProviderFactory(pathVerifier),
-        )
-    }
+    private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
 
     private val projectKotlinFiles by lazy {
         pathProvider
@@ -50,10 +39,10 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    override fun scopeFromSourceSet(sourceSetName: String): KoScope {
-        val koFiles = getFiles(sourceSetName = sourceSetName)
-        return KoScopeImpl(koFiles)
-    }
+    override fun scopeFromSourceSet(vararg sourceSetNames: String) = sourceSetNames
+        .flatMap { getFiles(sourceSetName = it) }
+        .asSequence()
+        .let { KoScopeImpl(it) }
 
     private fun getFiles(
         moduleName: String? = null,

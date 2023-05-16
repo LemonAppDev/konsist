@@ -1,11 +1,11 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.core.declaration.provider.KoClassProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoFunctionProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoObjectProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoPropertyProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoFunctionCoreProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceCoreProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoObjectCoreProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoPropertyCoreProvider
 import kotlin.reflect.KClass
 
 /**
@@ -13,12 +13,12 @@ import kotlin.reflect.KClass
  */
 interface KoFileDeclaration :
     KoNamedDeclaration,
-    KoDeclarationProvider,
-    KoClassProvider,
-    KoInterfaceProvider,
-    KoObjectProvider,
-    KoPropertyProvider,
-    KoFunctionProvider {
+    KoDeclarationCoreProvider,
+    KoClassCoreProvider,
+    KoInterfaceCoreProvider,
+    KoObjectCoreProvider,
+    KoPropertyCoreProvider,
+    KoFunctionCoreProvider {
 
     /**
      * The imports of the file.

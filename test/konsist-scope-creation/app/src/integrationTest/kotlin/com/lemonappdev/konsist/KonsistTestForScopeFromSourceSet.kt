@@ -80,4 +80,29 @@ class KonsistTestForScopeFromSourceSet {
             ),
         )
     }
+
+    @Test
+    fun `scopeFromSourceSet for main and test source sets`() {
+        // given
+        val sut = Konsist
+            .scopeFromSourceSet("main", "test")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$appMainSourceSetDirectory/sample/AppClass.kt",
+                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+                "$dataMainSourceSetDirectory/sample/LibClass.kt",
+                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
+                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
+                "$rootTestSourceSetDirectory/sample/data/RootDataClassTest.kt",
+            ),
+        )
+    }
 }
