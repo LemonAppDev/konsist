@@ -242,6 +242,89 @@ class KoScopeForNamedDeclarationTest {
             .shouldBeEqualTo(listOf("SampleClass"))
     }
 
+    @Test
+    fun `file-contains-nested-and-local-declarations includeNested false includeLocal false`() {
+        // given
+        val sut = getSnippetFile("file-contains-nested-and-local-declarations")
+
+        // then
+        sut
+            .namedDeclarations(includeNested = false, includeLocal = false)
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "samplepackage",
+                    "com.sampleimport",
+                    "SampleClass",
+                )
+            )
+    }
+
+    @Test
+    fun `file-contains-nested-and-local-declarations includeNested true includeLocal false`() {
+        // given
+        val sut = getSnippetFile("file-contains-nested-and-local-declarations")
+
+        // then
+        sut
+            .namedDeclarations(includeNested = true, includeLocal = false)
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "samplepackage",
+                    "com.sampleimport",
+                    "SampleClass",
+                    "sampleNestedProperty1",
+                    "sampleNestedFunction",
+                )
+            )
+    }
+
+    @Test
+    fun `file-contains-nested-and-local-declarations includeNested false includeLocal true`() {
+        // given
+        val sut = getSnippetFile("file-contains-nested-and-local-declarations")
+
+        // then
+        sut
+            .namedDeclarations(includeNested = false, includeLocal = true)
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "samplepackage",
+                    "com.sampleimport",
+                    "SampleClass",
+                )
+            )
+    }
+
+    @Test
+    fun `file-contains-nested-and-local-declarations includeNested true includeLocal true`() {
+        // given
+        val sut = getSnippetFile("file-contains-nested-and-local-declarations")
+
+        // then
+        sut
+            .namedDeclarations(includeNested = true, includeLocal = true)
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(
+                listOf(
+                    "samplepackage",
+                    "com.sampleimport",
+                    "SampleClass",
+                    "sampleNestedProperty1",
+                    "sampleNestedFunction",
+                    "sampleLocalFunction",
+                    "SampleLocalClass",
+                    "sampleNestedProperty2",
+                )
+            )
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/fornameddeclaration/", fileName)
 }

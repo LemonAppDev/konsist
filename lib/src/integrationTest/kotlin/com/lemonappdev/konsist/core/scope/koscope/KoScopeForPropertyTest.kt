@@ -32,10 +32,10 @@ class KoScopeForPropertyTest {
     }
 
     @Test
-    fun `file-contains-one-class-containing-property includeNested true`() {
+    fun `file-contains-class-containing-nested-properties includeNested true includeLocal false`() {
         // given
-        val sut = getSnippetFile("file-contains-one-class-containing-property")
-            .properties(includeNested = true)
+        val sut = getSnippetFile("file-contains-class-containing-nested-properties")
+            .properties(includeNested = true, includeLocal = false)
 
         // then
         sut
@@ -45,15 +45,45 @@ class KoScopeForPropertyTest {
     }
 
     @Test
-    fun `file-contains-one-class-containing-property includeNested false`() {
+    fun `file-contains-class-containing-nested-properties includeNested false includeLocal false`() {
         // given
-        val sut = getSnippetFile("file-contains-one-class-containing-property")
-            .properties(includeNested = false)
+        val sut = getSnippetFile("file-contains-class-containing-nested-properties")
+            .properties(includeNested = false, includeLocal = false)
         // then
         sut
             .map { it.name }
             .toList()
             .shouldBeEqualTo(emptyList())
+    }
+
+    @Test
+    fun `file-contains-class-containing-nested-properties includeNested false includeLocal true`() {
+        // given
+        val sut = getSnippetFile("file-contains-class-containing-nested-properties")
+            .properties(includeNested = false, includeLocal = true)
+
+        // then
+        sut
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(listOf("sampleLocalProperty2"))
+    }
+
+    @Test
+    fun `file-contains-class-containing-nested-properties includeNested true includeLocal true`() {
+        // given
+        val sut = getSnippetFile("file-contains-class-containing-nested-properties")
+            .properties(includeNested = true, includeLocal = true)
+
+        // then
+        sut
+            .map { it.name }
+            .toList()
+            .shouldBeEqualTo(listOf(
+                "sampleNestedProperty",
+                "sampleLocalProperty1",
+                "sampleLocalProperty2"
+            ))
     }
 
     private fun getSnippetFile(fileName: String) =

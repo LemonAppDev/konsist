@@ -31,9 +31,9 @@ class KoScopeForInterfaceTest {
     }
 
     @Test
-    fun `file-contains-two-interfaces-with-nested-interface includeNested true`() {
+    fun `file-contains-interface-with-nested-interfaces includeNested true`() {
         // given
-        val sut = getSnippetFile("file-contains-two-interfaces-with-nested-interface")
+        val sut = getSnippetFile("file-contains-interface-with-nested-interfaces")
 
         // then
         sut
@@ -43,28 +43,23 @@ class KoScopeForInterfaceTest {
             .shouldBeEqualTo(
                 listOf(
                     "SampleInterface1",
-                    "SampleNestedInterface",
-                    "SampleInterface2",
+                    "SampleNestedInterface1",
+                    "SampleNestedInterface2",
                 ),
             )
     }
 
     @Test
-    fun `file-contains-two-interfaces-with-nested-interface includeNested false`() {
+    fun `file-contains-interface-with-nested-interfaces includeNested false`() {
         // given
-        val sut = getSnippetFile("file-contains-two-interfaces-with-nested-interface")
+        val sut = getSnippetFile("file-contains-interface-with-nested-interfaces")
 
         // then
         sut
             .interfaces(includeNested = false)
             .map { it.name }
             .toList()
-            .shouldBeEqualTo(
-                listOf(
-                    "SampleInterface1",
-                    "SampleInterface2",
-                ),
-            )
+            .shouldBeEqualTo(listOf("SampleInterface1"))
     }
 
     private fun getSnippetFile(fileName: String) =

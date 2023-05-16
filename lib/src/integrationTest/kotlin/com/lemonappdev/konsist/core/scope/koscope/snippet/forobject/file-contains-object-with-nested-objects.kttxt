@@ -1,0 +1,8 @@
+object SampleObject {
+    object SampleNestedObject1 {
+    }
+
+    class SampleClass{
+        object SampleNestedObject2
+    }
+}

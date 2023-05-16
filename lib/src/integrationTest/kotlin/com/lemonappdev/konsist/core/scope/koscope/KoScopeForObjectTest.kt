@@ -32,9 +32,9 @@ class KoScopeForObjectTest {
     }
 
     @Test
-    fun `file-contains-two-objects-with-nested-object includeNested true`() {
+    fun `file-contains-object-with-nested-objects includeNested true`() {
         // given
-        val sut = getSnippetFile("file-contains-two-objects-with-nested-object")
+        val sut = getSnippetFile("file-contains-object-with-nested-objects")
 
         // then
         sut
@@ -43,29 +43,24 @@ class KoScopeForObjectTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
-                    "SampleObject1",
-                    "SampleNestedObject",
-                    "SampleObject2",
+                    "SampleObject",
+                    "SampleNestedObject1",
+                    "SampleNestedObject2",
                 ),
             )
     }
 
     @Test
-    fun `file-contains-two-objects-with-nested-object includeNested false`() {
+    fun `file-contains-object-with-nested-objects includeNested false`() {
         // given
-        val sut = getSnippetFile("file-contains-two-objects-with-nested-object")
+        val sut = getSnippetFile("file-contains-object-with-nested-objects")
 
         // then
         sut
             .objects(includeNested = false)
             .map { it.name }
             .toList()
-            .shouldBeEqualTo(
-                listOf(
-                    "SampleObject1",
-                    "SampleObject2",
-                ),
-            )
+            .shouldBeEqualTo(listOf("SampleObject"))
     }
 
     private fun getSnippetFile(fileName: String) =
