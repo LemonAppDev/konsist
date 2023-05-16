@@ -3,6 +3,9 @@ package com.lemonappdev.konsist.core.scope.koscope
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoScopeForClassTest {
     @Test
@@ -30,108 +33,52 @@ class KoScopeForClassTest {
             .shouldBeEqualTo(listOf("SampleClass"))
     }
 
-    @Test
-    fun `file-contains-two-classes-with-nested-class includeNested true`() {
-        // given
-        val sut = getSnippetFile("file-contains-two-classes-with-nested-class")
-
-        // then
-        sut
-            .classes(includeNested = true)
-            .toList()
-            .map { it.name }
-            .shouldBeEqualTo(
-                listOf(
-                    "SampleClass1",
-                    "SampleNestedClass",
-                    "SampleClass2",
-                ),
-            )
-    }
-
-    @Test
-    fun `file-contains-two-classes-with-nested-class includeNested false`() {
-        // given
-        val sut = getSnippetFile("file-contains-two-classes-with-nested-class")
-
-        // then
-        sut
-            .classes(includeNested = false)
-            .toList()
-            .map { it.name }
-            .shouldBeEqualTo(
-                listOf(
-                    "SampleClass1",
-                    "SampleClass2",
-                ),
-            )
-    }
-
-    @Test
-    fun `file-contains-class-with-local-and-nested-classes includeNested false includeLocal false`() {
+    @ParameterizedTest
+    @MethodSource("provideValues")
+    fun `file-contains-class-with-local-and-nested-classes`(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+        expected: List<String>,
+    ) {
         // given
         val sut = getSnippetFile("file-contains-class-with-local-and-nested-classes")
 
         // then
         sut
-            .classes(includeNested = false, includeLocal = false)
+            .classes(includeNested = includeNested, includeLocal = includeLocal)
             .toList()
             .map { it.name }
-            .shouldBeEqualTo(listOf("SampleClass"))
-    }
-
-    @Test
-    fun `file-contains-class-with-local-and-nested-classes includeNested true includeLocal false`() {
-        // given
-        val sut = getSnippetFile("file-contains-class-with-local-and-nested-classes")
-
-        // then
-        sut
-            .classes(includeNested = true, includeLocal = false)
-            .toList()
-            .map { it.name }
-            .shouldBeEqualTo(
-                listOf(
-                    "SampleClass",
-                    "SampleNestedClass1",
-                    "SampleNestedClass2",
-                ),
-            )
-    }
-
-    @Test
-    fun `file-contains-class-with-local-and-nested-classes includeNested false includeLocal true`() {
-        // given
-        val sut = getSnippetFile("file-contains-class-with-local-and-nested-classes")
-
-        // then
-        sut
-            .classes(includeNested = false, includeLocal = true)
-            .toList()
-            .map { it.name }
-            .shouldBeEqualTo(listOf("SampleClass"))
-    }
-
-    @Test
-    fun `file-contains-class-with-local-and-nested-classes includeNested true includeLocal true`() {
-        // given
-        val sut = getSnippetFile("file-contains-class-with-local-and-nested-classes")
-
-        // then
-        sut
-            .classes(includeNested = true, includeLocal = true)
-            .toList()
-            .map { it.name }
-            .shouldBeEqualTo(
-                listOf(
-                    "SampleClass",
-                    "SampleLocalClass",
-                    "SampleNestedClass1",
-                    "SampleNestedClass2",
-                ),
-            )
+            .shouldBeEqualTo(expected)
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forclass/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValues() = listOf(
+            arguments(
+                false, false, listOf("SampleClass")
+            ),
+            arguments(
+                true, false, listOf(
+                    "SampleClass",
+                    "SampleNestedClass1",
+                    "SampleNestedClass2",
+                )
+            ),
+            arguments(
+                false, true, listOf("SampleClass")
+            ),
+            arguments(
+                true, true, listOf(
+                    "SampleClass",
+                    "SampleLocalClass",
+                    "SampleNestedClass1",
+                    "SampleNestedClass2",
+                )
+            ),
+        )
+    }
 }

@@ -3,21 +3,12 @@ package com.lemonappdev.konsist.core.scope.koscope
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoScopeForFunctionTest {
-
-    @Test
-    fun `file-contains-one-function`() {
-        // given
-        val sut = getSnippetFile("file-contains-one-function")
-
-        // then
-        sut
-            .functions()
-            .map { it.name }
-            .toList()
-            .shouldBeEqualTo(listOf("sampleFunction"))
-    }
 
     @Test
     fun `file-contains-no-function`() {
@@ -32,68 +23,62 @@ class KoScopeForFunctionTest {
     }
 
     @Test
-    fun `file-contains-function-with-local-and-nested-functions includeNested false includeLocal false`() {
+    fun `file-contains-one-function`() {
         // given
-        val sut = getSnippetFile("file-contains-function-with-local-and-nested-functions")
+        val sut = getSnippetFile("file-contains-one-function")
 
         // then
         sut
-            .functions(includeNested = false, includeLocal = false)
+            .functions()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(listOf("sampleFunction"))
     }
 
-    @Test
-    fun `file-contains-function-with-local-and-nested-functions includeNested true includeLocal false`() {
+    @ParameterizedTest
+    @MethodSource("provideValues")
+    fun `file-contains-function-with-local-and-nested-functions`(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+        expected: List<String>,
+    ) {
         // given
         val sut = getSnippetFile("file-contains-function-with-local-and-nested-functions")
 
         // then
         sut
-            .functions(includeNested = true, includeLocal = false)
-            .map { it.name }
+            .functions(includeNested = includeNested, includeLocal = includeLocal)
             .toList()
-            .shouldBeEqualTo(listOf("sampleFunction"))
-    }
-
-    @Test
-    fun `file-contains-function-with-local-and-nested-functions includeNested false includeLocal true`() {
-        // given
-        val sut = getSnippetFile("file-contains-function-with-local-and-nested-functions")
-
-        // then
-        sut
-            .functions(includeNested = false, includeLocal = true)
             .map { it.name }
-            .toList()
-            .shouldBeEqualTo(
-                listOf(
-                    "sampleFunction",
-                    "sampleLocalFunction",
-                ),
-            )
-    }
-
-    @Test
-    fun `file-contains-function-with-local-and-nested-functions includeNested true includeLocal true`() {
-        // given
-        val sut = getSnippetFile("file-contains-function-with-local-and-nested-functions")
-
-        // then
-        sut
-            .functions(includeNested = true, includeLocal = true)
-            .map { it.name }
-            .toList()
-            .shouldBeEqualTo(
-                listOf(
-                    "sampleFunction",
-                    "sampleLocalFunction",
-                    "sampleNestedFunction"
-                ),
-            )
+            .shouldBeEqualTo(expected)
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forfunction/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValues() = listOf(
+            arguments(
+                false, false, listOf("sampleFunction")
+            ),
+            arguments(
+                true, false, listOf("sampleFunction")
+            ),
+            arguments(
+                false, true, listOf(
+                    "sampleFunction",
+                    "sampleLocalFunction",
+                )
+            ),
+            arguments(
+                true, true, listOf(
+                    "sampleFunction",
+                    "sampleLocalFunction",
+                    "sampleNestedFunction"
+                )
+            ),
+        )
+    }
 }

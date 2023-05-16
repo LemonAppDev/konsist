@@ -26,6 +26,9 @@ class KoComplexDeclarationForRepresentsTypeTest {
         sut.representsType(type) shouldBeEqualTo value
     }
 
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kocomplexdeclaration/snippet/forrepresentstype/", fileName)
+
     companion object {
         @Suppress("unused")
         @JvmStatic
@@ -44,7 +47,4 @@ class KoComplexDeclarationForRepresentsTypeTest {
             arguments("object-represents-type", "SampleObject", "com.lemonappdev.konsist.testdata.OtherObject", false),
         )
     }
-
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kocomplexdeclaration/snippet/forrepresentstype/", fileName)
 }

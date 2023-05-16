@@ -3,6 +3,10 @@ package com.lemonappdev.konsist.core.scope.koscope
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoScopeForDeclarationTest {
     @Test
@@ -27,40 +31,43 @@ class KoScopeForDeclarationTest {
             )
     }
 
-    @Test
-    fun `file-contains-all-type-of-declarations-with-nested-and-local-declarations includeNested false includeLocal false`() {
+    @ParameterizedTest
+    @MethodSource("provideValues")
+    fun `file-contains-all-type-of-declarations-with-nested-and-local-declarations`(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+        expected: List<String>,
+    ) {
         // given
         val sut = getSnippetFile("file-contains-all-type-of-declarations-with-nested-and-local-declarations")
 
         // then
         sut
-            .declarations(includeNested = false, includeLocal = false)
-            .map { it.name }
+            .declarations(includeNested = includeNested, includeLocal = includeLocal)
             .toList()
-            .shouldBeEqualTo(
-                listOf(
+            .map { it.name }
+            .shouldBeEqualTo(expected)
+    }
+
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/fordeclaration/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValues() = listOf(
+            arguments(
+                false, false, listOf(
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
                     "SampleInterface",
                     "SampleObject",
                     "SampleTypeAlias",
-                ),
-            )
-    }
-
-    @Test
-    fun `file-contains-all-type-of-declarations-with-nested-and-local-declarations includeNested true includeLocal false`() {
-        // given
-        val sut = getSnippetFile("file-contains-all-type-of-declarations-with-nested-and-local-declarations")
-
-        // then
-        sut
-            .declarations(includeNested = true, includeLocal = false)
-            .map { it.name }
-            .toList()
-            .shouldBeEqualTo(
-                listOf(
+                )
+            ),
+            arguments(
+                true, false, listOf(
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
@@ -76,22 +83,10 @@ class KoScopeForDeclarationTest {
                     "sampleNestedFunctionInsideObject",
                     "sampleNestedClassInsideObject",
                     "SampleTypeAlias",
-                ),
-            )
-    }
-
-    @Test
-    fun `file-contains-all-type-of-declarations-with-nested-and-local-declarations includeNested false includeLocal true`() {
-        // given
-        val sut = getSnippetFile("file-contains-all-type-of-declarations-with-nested-and-local-declarations")
-
-        // then
-        sut
-            .declarations(includeNested = false, includeLocal = true)
-            .map { it.name }
-            .toList()
-            .shouldBeEqualTo(
-                listOf(
+                )
+            ),
+            arguments(
+                false, true, listOf(
                     "sampleProperty",
                     "sampleFunction",
                     "sampleLocalProperty1",
@@ -103,22 +98,10 @@ class KoScopeForDeclarationTest {
                     "SampleInterface",
                     "SampleObject",
                     "SampleTypeAlias",
-                ),
-            )
-    }
-
-    @Test
-    fun `file-contains-all-type-of-declarations-with-nested-and-local-declarations includeNested true includeLocal true`() {
-        // given
-        val sut = getSnippetFile("file-contains-all-type-of-declarations-with-nested-and-local-declarations")
-
-        // then
-        sut
-            .declarations(includeNested = true, includeLocal = true)
-            .map { it.name }
-            .toList()
-            .shouldBeEqualTo(
-                listOf(
+                )
+            ),
+            arguments(
+                true, true, listOf(
                     "sampleProperty",
                     "sampleFunction",
                     "sampleLocalProperty1",
@@ -142,10 +125,8 @@ class KoScopeForDeclarationTest {
                     "sampleNestedFunctionInsideObject",
                     "sampleNestedClassInsideObject",
                     "SampleTypeAlias",
-                ),
-            )
+                )
+            ),
+        )
     }
-
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/fordeclaration/", fileName)
 }
