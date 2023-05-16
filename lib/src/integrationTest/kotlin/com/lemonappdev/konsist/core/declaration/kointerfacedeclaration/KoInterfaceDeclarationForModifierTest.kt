@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kointerfacedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -25,6 +26,20 @@ class KoInterfaceDeclarationForModifierTest {
 
         // then
         sut.hasExpectModifier() shouldBeEqualTo true
+    }
+
+    @Test
+    fun `interface-has-no-modifier`() {
+        // given
+        val sut = getSnippetFile("interface-has-no-modifier")
+            .interfaces()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasActualModifier() shouldBeEqualTo false
+            hasExpectModifier() shouldBeEqualTo false
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

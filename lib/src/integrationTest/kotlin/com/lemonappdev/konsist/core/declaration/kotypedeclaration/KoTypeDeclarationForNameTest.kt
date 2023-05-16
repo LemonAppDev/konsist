@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeDeclarationForImportAliasTest {
+class KoTypeDeclarationForNameTest {
     @Test
     fun `simple-type`() {
         // given
@@ -18,10 +18,7 @@ class KoTypeDeclarationForImportAliasTest {
             ?.type
 
         // then
-        assertSoftly(sut) {
-            it?.importAliasName shouldBeEqualTo ""
-            it?.isImportAlias() shouldBeEqualTo false
-        }
+        sut?.name shouldBeEqualTo "SampleType"
     }
 
     @Test
@@ -36,10 +33,7 @@ class KoTypeDeclarationForImportAliasTest {
             ?.type
 
         // then
-        assertSoftly(sut) {
-            it?.importAliasName shouldBeEqualTo "ImportAlias"
-            it?.isImportAlias() shouldBeEqualTo true
-        }
+        sut?.name shouldBeEqualTo "ImportAlias"
     }
 
     private fun getSnippetFile(fileName: String) =

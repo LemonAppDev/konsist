@@ -18,13 +18,22 @@ class KoTypeDeclarationForSourceTypeTest {
             ?.type
 
         // then
-        assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleType"
-            it?.importAliasName shouldBeEqualTo ""
-            it?.name shouldBeEqualTo "SampleType"
-            it?.isImportAlias() shouldBeEqualTo false
-            it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
-        }
+            sut?.sourceType shouldBeEqualTo "SampleType"
+    }
+
+    @Test
+    fun `import-alias`() {
+        // given
+        val sut = getSnippetFile("import-alias")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+            ?.type
+
+        // then
+            sut?.sourceType shouldBeEqualTo "SampleType"
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -16,10 +16,10 @@ class KoTypeAliasDeclarationForTypeTest {
             .first()
 
         // then
-        assertSoftly(sut) {
-            name shouldBeEqualTo "SampleTypeAlias"
-            type.sourceType shouldBeEqualTo "() -> Int"
-        }
+        sut
+            .type
+            .sourceType
+            .shouldBeEqualTo("() -> Int")
     }
 
     private fun getSnippetFile(fileName: String) =
