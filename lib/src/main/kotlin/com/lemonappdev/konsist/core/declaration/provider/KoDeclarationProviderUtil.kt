@@ -79,9 +79,8 @@ internal object KoDeclarationProviderUtil {
         var result = if (includeNested) {
             declarations.flatMap {
                 when (it) {
-                    is KoComplexDeclarationImpl -> (listOf(it) + it.declarations(includeNested = true))
-                    is T -> listOf(it)
-                    else -> listOf()
+                    is KoComplexDeclarationImpl -> sequenceOf(it) + it.declarations(includeNested = true)
+                    else -> sequenceOf(it)
                 }
             }
         } else {
@@ -92,10 +91,15 @@ internal object KoDeclarationProviderUtil {
             result = result
                 .flatMap {
                     when (it) {
-                        is KoFunctionDeclarationImpl -> listOf(it) + it.localDeclarations() + localDeclarations(
-                            it.localFunctions(),
-                            includeNested
-                        )
+                        is KoFunctionDeclarationImpl -> {
+                            val decl = listOf(it) + it.localDeclarations() + localDeclarations(
+                                it.localFunctions(),
+                                includeNested
+                            )
+
+                            if (includeNested) decl + nestedDeclarations(it.localDeclarations())
+                            else decl
+                        }
 
                         else -> listOf(it)
                     }
@@ -106,6 +110,15 @@ internal object KoDeclarationProviderUtil {
         return result.filterIsInstance<T>()
     }
 
+    fun nestedDeclarations(koNamedDeclarations: Sequence<KoNamedDeclaration>): Sequence<KoNamedDeclaration> {
+        return koNamedDeclarations.flatMap {
+            when (it) {
+                is KoComplexDeclarationImpl -> it.declarations(includeNested = true)
+                else -> sequenceOf()
+            }
+        }
+    }
+
     fun localDeclarations(koFunctions: Sequence<KoFunctionDeclaration>, includeNested: Boolean): Sequence<KoNamedDeclaration> {
         val localDeclarations = mutableListOf<KoNamedDeclaration>()
         val nestedDeclarations = mutableListOf<KoNamedDeclaration>()
@@ -113,7 +126,7 @@ internal object KoDeclarationProviderUtil {
         koFunctions.forEach { koFunction ->
             koFunction.localDeclarations().forEach {
                 if (it is KoComplexDeclarationImpl && includeNested) {
-                    nestedDeclarations += it.declarations(includeNested = true)
+                    nestedDeclarations += it.declarations(includeNested = true, includeLocal = true)
                 }
             }
 

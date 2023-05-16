@@ -32,45 +32,35 @@ class KoScopeForFunctionTest {
     }
 
     @Test
-    fun `file-contains-two-functions-and-local-function includeNested false includeLocal false`() {
+    fun `file-contains-function-with-local-and-nested-functions includeNested false includeLocal false`() {
         // given
-        val sut = getSnippetFile("file-contains-two-functions-and-local-function")
+        val sut = getSnippetFile("file-contains-function-with-local-and-nested-functions")
 
         // then
         sut
             .functions(includeNested = false, includeLocal = false)
             .map { it.name }
             .toList()
-            .shouldBeEqualTo(
-                listOf(
-                    "sampleFunction1",
-                    "sampleFunction2",
-                ),
-            )
+            .shouldBeEqualTo(listOf("sampleFunction"))
     }
 
     @Test
-    fun `file-contains-two-functions-and-local-function includeNested true includeLocal false`() {
+    fun `file-contains-function-with-local-and-nested-functions includeNested true includeLocal false`() {
         // given
-        val sut = getSnippetFile("file-contains-two-functions-and-local-function")
+        val sut = getSnippetFile("file-contains-function-with-local-and-nested-functions")
 
         // then
         sut
             .functions(includeNested = true, includeLocal = false)
             .map { it.name }
             .toList()
-            .shouldBeEqualTo(
-                listOf(
-                    "sampleFunction1",
-                    "sampleFunction2",
-                ),
-            )
+            .shouldBeEqualTo(listOf("sampleFunction"))
     }
 
     @Test
-    fun `file-contains-two-functions-and-local-function includeNested false includeLocal true`() {
+    fun `file-contains-function-with-local-and-nested-functions includeNested false includeLocal true`() {
         // given
-        val sut = getSnippetFile("file-contains-two-functions-and-local-function")
+        val sut = getSnippetFile("file-contains-function-with-local-and-nested-functions")
 
         // then
         sut
@@ -79,17 +69,16 @@ class KoScopeForFunctionTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
-                    "sampleFunction1",
+                    "sampleFunction",
                     "sampleLocalFunction",
-                    "sampleFunction2",
                 ),
             )
     }
 
     @Test
-    fun `file-contains-two-functions-and-local-function includeNested true includeLocal true`() {
+    fun `file-contains-function-with-local-and-nested-functions includeNested true includeLocal true`() {
         // given
-        val sut = getSnippetFile("file-contains-two-functions-and-local-function")
+        val sut = getSnippetFile("file-contains-function-with-local-and-nested-functions")
 
         // then
         sut
@@ -98,9 +87,9 @@ class KoScopeForFunctionTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
-                    "sampleFunction1",
+                    "sampleFunction",
                     "sampleLocalFunction",
-                    "sampleFunction2",
+                    "sampleNestedFunction"
                 ),
             )
     }
