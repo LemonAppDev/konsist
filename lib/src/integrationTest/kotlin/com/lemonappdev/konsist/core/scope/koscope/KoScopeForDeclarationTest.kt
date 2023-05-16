@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -53,21 +52,25 @@ class KoScopeForDeclarationTest {
         TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/fordeclaration/", fileName)
 
     companion object {
-        @Suppress("unused")
+        @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
         fun provideValues() = listOf(
             arguments(
-                false, false, listOf(
+                false,
+                false,
+                listOf(
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
                     "SampleInterface",
                     "SampleObject",
                     "SampleTypeAlias",
-                )
+                ),
             ),
             arguments(
-                true, false, listOf(
+                true,
+                false,
+                listOf(
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
@@ -83,10 +86,12 @@ class KoScopeForDeclarationTest {
                     "sampleNestedFunctionInsideObject",
                     "sampleNestedClassInsideObject",
                     "SampleTypeAlias",
-                )
+                ),
             ),
             arguments(
-                false, true, listOf(
+                false,
+                true,
+                listOf(
                     "sampleProperty",
                     "sampleFunction",
                     "sampleLocalProperty1",
@@ -98,10 +103,12 @@ class KoScopeForDeclarationTest {
                     "SampleInterface",
                     "SampleObject",
                     "SampleTypeAlias",
-                )
+                ),
             ),
             arguments(
-                true, true, listOf(
+                true,
+                true,
+                listOf(
                     "sampleProperty",
                     "sampleFunction",
                     "sampleLocalProperty1",
@@ -125,7 +132,7 @@ class KoScopeForDeclarationTest {
                     "sampleNestedFunctionInsideObject",
                     "sampleNestedClassInsideObject",
                     "SampleTypeAlias",
-                )
+                ),
             ),
         )
     }

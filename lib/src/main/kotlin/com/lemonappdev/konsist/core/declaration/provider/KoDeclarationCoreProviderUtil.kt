@@ -94,11 +94,14 @@ internal object KoDeclarationCoreProviderUtil {
                         is KoFunctionDeclarationImpl -> {
                             val decl = listOf(it) + it.localDeclarations() + localDeclarations(
                                 it.localFunctions(),
-                                includeNested
+                                includeNested,
                             )
 
-                            if (includeNested) decl + nestedDeclarations(it.localDeclarations())
-                            else decl
+                            if (includeNested) {
+                                decl + nestedDeclarations(it.localDeclarations())
+                            } else {
+                                decl
+                            }
                         }
 
                         else -> listOf(it)
@@ -132,7 +135,7 @@ internal object KoDeclarationCoreProviderUtil {
 
             localDeclarations += koFunction.localDeclarations() + nestedDeclarations + localDeclarations(
                 koFunction.localFunctions(),
-                includeNested
+                includeNested,
             )
         }
 

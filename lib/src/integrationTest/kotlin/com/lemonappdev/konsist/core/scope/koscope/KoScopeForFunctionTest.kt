@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -61,23 +60,31 @@ class KoScopeForFunctionTest {
         @JvmStatic
         fun provideValues() = listOf(
             arguments(
-                false, false, listOf("sampleFunction")
+                false,
+                false,
+                listOf("sampleFunction"),
             ),
             arguments(
-                true, false, listOf("sampleFunction")
+                true,
+                false,
+                listOf("sampleFunction"),
             ),
             arguments(
-                false, true, listOf(
+                false,
+                true,
+                listOf(
                     "sampleFunction",
                     "sampleLocalFunction",
-                )
+                ),
             ),
             arguments(
-                true, true, listOf(
+                true,
+                true,
+                listOf(
                     "sampleFunction",
                     "sampleLocalFunction",
-                    "sampleNestedFunction"
-                )
+                    "sampleNestedFunction",
+                ),
             ),
         )
     }

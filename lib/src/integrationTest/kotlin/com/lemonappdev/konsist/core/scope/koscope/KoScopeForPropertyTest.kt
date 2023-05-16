@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -61,20 +60,28 @@ class KoScopeForPropertyTest {
         @JvmStatic
         fun provideValues() = listOf(
             arguments(
-                false, false, emptyList<String>()
+                false,
+                false,
+                emptyList<String>(),
             ),
             arguments(
-                true, false, listOf("sampleNestedProperty")
+                true,
+                false,
+                listOf("sampleNestedProperty"),
             ),
             arguments(
-                false, true, listOf("sampleLocalProperty2")
+                false,
+                true,
+                listOf("sampleLocalProperty2"),
             ),
             arguments(
-                true, true, listOf(
+                true,
+                true,
+                listOf(
                     "sampleNestedProperty",
                     "sampleLocalProperty1",
-                    "sampleLocalProperty2"
-                )
+                    "sampleLocalProperty2",
+                ),
             ),
         )
     }

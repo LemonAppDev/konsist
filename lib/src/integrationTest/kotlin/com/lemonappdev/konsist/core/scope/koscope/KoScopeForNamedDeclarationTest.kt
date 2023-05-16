@@ -257,7 +257,7 @@ class KoScopeForNamedDeclarationTest {
                     "samplepackage",
                     "com.sampleimport",
                     "SampleClass",
-                )
+                ),
             )
     }
 
@@ -278,7 +278,7 @@ class KoScopeForNamedDeclarationTest {
                     "SampleClass",
                     "sampleNestedProperty1",
                     "sampleNestedFunction",
-                )
+                ),
             )
     }
 
@@ -297,7 +297,7 @@ class KoScopeForNamedDeclarationTest {
                     "samplepackage",
                     "com.sampleimport",
                     "SampleClass",
-                )
+                ),
             )
     }
 
@@ -321,7 +321,7 @@ class KoScopeForNamedDeclarationTest {
                     "sampleLocalFunction",
                     "SampleLocalClass",
                     "sampleNestedProperty2",
-                )
+                ),
             )
     }
 

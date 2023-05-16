@@ -59,25 +59,33 @@ class KoScopeForClassTest {
         @JvmStatic
         fun provideValues() = listOf(
             arguments(
-                false, false, listOf("SampleClass")
+                false,
+                false,
+                listOf("SampleClass"),
             ),
             arguments(
-                true, false, listOf(
+                true,
+                false,
+                listOf(
                     "SampleClass",
                     "SampleNestedClass1",
                     "SampleNestedClass2",
-                )
+                ),
             ),
             arguments(
-                false, true, listOf("SampleClass")
+                false,
+                true,
+                listOf("SampleClass"),
             ),
             arguments(
-                true, true, listOf(
+                true,
+                true,
+                listOf(
                     "SampleClass",
                     "SampleLocalClass",
                     "SampleNestedClass1",
                     "SampleNestedClass2",
-                )
+                ),
             ),
         )
     }
