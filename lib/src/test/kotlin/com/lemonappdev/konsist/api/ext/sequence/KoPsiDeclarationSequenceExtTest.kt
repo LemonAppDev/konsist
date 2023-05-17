@@ -46,6 +46,42 @@ class KoPsiDeclarationSequenceExtTest {
     }
 
     @Test
+    fun `withCompleteKDoc() returns psiDeclaration with complete kDoc`() {
+        // given
+        val psiDeclaration1: KoPsiDeclarationImpl = mockk {
+            every { hasCompleteKDoc(verifyDescription = true, verifyParamTag = true) } returns true
+        }
+        val psiDeclaration2: KoPsiDeclarationImpl = mockk {
+            every { hasCompleteKDoc(verifyDescription = true, verifyParamTag = true) } returns false
+        }
+        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
+
+        // when
+        val sut = psiDeclarations.withCompleteKDoc(verifyDescription = true, verifyParamTag = true)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(psiDeclaration1)
+    }
+
+    @Test
+    fun `withoutCompleteKDoc() returns psiDeclaration without complete kDoc`() {
+        // given
+        val psiDeclaration1: KoPsiDeclarationImpl = mockk {
+            every { hasCompleteKDoc(verifyDescription = true, verifyParamTag = true) } returns true
+        }
+        val psiDeclaration2: KoPsiDeclarationImpl = mockk {
+            every { hasCompleteKDoc(verifyDescription = true, verifyParamTag = true) } returns false
+        }
+        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
+
+        // when
+        val sut = psiDeclarations.withoutCompleteKDoc(verifyDescription = true, verifyParamTag = true)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(psiDeclaration2)
+    }
+
+    @Test
     fun `withKDocWithTags(String) returns psiDeclaration with all of given tags`() {
         // given
         val tag1 = KoKDocTag.SINCE
