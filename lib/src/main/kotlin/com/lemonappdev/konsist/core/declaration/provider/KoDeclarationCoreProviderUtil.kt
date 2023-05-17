@@ -92,15 +92,15 @@ internal object KoDeclarationCoreProviderUtil {
                 .flatMap {
                     when (it) {
                         is KoFunctionDeclarationImpl -> {
-                            val decl = listOf(it) + it.localDeclarations() + localDeclarations(
+                            val localDeclarations = listOf(it) + it.localDeclarations() + localDeclarations(
                                 it.localFunctions(),
                                 includeNested,
                             )
 
                             if (includeNested) {
-                                decl + nestedDeclarations(it.localDeclarations())
+                                localDeclarations + nestedDeclarations(it.localDeclarations())
                             } else {
-                                decl
+                                localDeclarations
                             }
                         }
 

@@ -173,6 +173,8 @@ class KoComplexDeclarationForDeclarationsTest {
         // then
         val expected = listOf(
             "sampleFunction",
+            "SampleLocalClass",
+            "sampleLocalFunction",
             "SampleClass",
             "SampleObject",
             "SampleInterface",
@@ -205,7 +207,6 @@ class KoComplexDeclarationForDeclarationsTest {
             "sampleLocalProperty2",
             "sampleLocalFunction2",
             "SampleLocalClass1",
-            "sampleLocalFunction2",
         )
 
         sut

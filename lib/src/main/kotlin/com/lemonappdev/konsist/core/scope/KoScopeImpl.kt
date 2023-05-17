@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 
+@Suppress("detekt.TooManyFunctions")
 class KoScopeImpl(
     private var koFiles: Sequence<KoFileDeclaration>,
 ) : KoScope {
@@ -81,5 +82,11 @@ class KoScopeImpl(
         .toList()
         .joinToString("\n") { it.filePath }
 
-    override fun print() { println(toString()) }
+    override fun print() {
+        println(toString())
+    }
+
+    override fun equals(other: Any?): Boolean = other is KoScope && files().toList() == other.files().toList()
+
+    override fun hashCode(): Int = 31 * 7 + files().toList().hashCode()
 }
