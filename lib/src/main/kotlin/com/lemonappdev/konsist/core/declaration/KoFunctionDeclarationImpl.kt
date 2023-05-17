@@ -1,10 +1,10 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.declaration.taghelper.TagHelper
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
@@ -75,50 +75,9 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
 
     override fun localDeclarations(): Sequence<KoDeclarationImpl> = localDeclarations
 
-    override fun hasCompleteKDoc(
-        verifyDescription: Boolean,
-        verifyParamTag: Boolean,
-        verifyReturnTag: Boolean,
-        verifyConstructorTag: Boolean,
-        verifyReceiverTag: Boolean,
-        verifyPropertyTag: Boolean,
-        verifyThrowsTag: Boolean,
-        verifyExceptionTag: Boolean,
-        verifySampleTag: Boolean,
-        verifySeeTag: Boolean,
-        verifyAuthorTag: Boolean,
-        verifySinceTag: Boolean,
-        verifySuppressTag: Boolean,
-        verifyVersionTag: Boolean,
-        verifyPropertySetterTag: Boolean,
-        verifyPropertyGetterTag: Boolean
-    ): Boolean {
-        val paramValue = if (verifyParamTag && parameters != null) {
-            parameters
-                ?.all {
-                    kDoc
-                        ?.paramTags
-                        ?.any { tag -> tag.value == it.name }
-                        ?: false
-                } ?: false
-        } else {
-            true
-        }
+    override fun verifyParamTag(value: Boolean) = TagHelper.verifyParamTag(value, parameters, kDoc)
 
-        val returnValue = if (verifyReturnTag) {
-            kDoc?.returnTag != null
-        } else {
-            true
-        }
-
-        val descriptionValue = super.hasCompleteKDoc(
-            verifyDescription, verifyParamTag, verifyReturnTag, verifyConstructorTag, verifyReceiverTag,
-            verifyPropertyTag, verifyThrowsTag, verifyExceptionTag, verifySampleTag, verifySeeTag, verifyAuthorTag,
-            verifySinceTag, verifySuppressTag, verifyVersionTag, verifyPropertySetterTag, verifyPropertyGetterTag
-        )
-
-        return descriptionValue && paramValue && returnValue
-    }
+    override fun verifyReturnTag(value: Boolean) = TagHelper.verifyReturnTag(value, kDoc)
 
     internal companion object {
         private val cache = KoDeclarationCache<KoFunctionDeclarationImpl>()
