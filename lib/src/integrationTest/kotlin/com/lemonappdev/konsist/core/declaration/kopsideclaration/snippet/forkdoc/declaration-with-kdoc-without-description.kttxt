@@ -1,0 +1,5 @@
+/**
+ * @return Sample Return Type
+ */
+fun sampleFunction() {
+}
