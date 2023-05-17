@@ -73,7 +73,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         verifySuppressTag: Boolean,
         verifyVersionTag: Boolean,
         verifyPropertySetterTag: Boolean,
-        verifyPropertyGetterTag: Boolean
+        verifyPropertyGetterTag: Boolean,
     ) = if (verifyDescription) {
         hasKDoc() && kDoc?.description?.isNotBlank() ?: false
     } else {

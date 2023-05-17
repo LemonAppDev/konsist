@@ -1,0 +1,17 @@
+class SampleClass(){
+    fun sampleMethod() {
+        // Implementation
+    }
+
+    /***
+     * @propertySetter Sets the value of the [name] property.
+     * @propertyGetter Retrieves the value of the [name] property.
+     */
+    var sampleProperty: Int
+        get() {
+            return 6
+        }
+        set(value) {
+            // Setter implementation
+        }
+}

@@ -1,0 +1,15 @@
+/**
+ * This is a sample class that demonstrates the usage of KDoc tags.
+ */
+class SampleClass<SampleType1, SampleType2>(private val sampleProperty1: String, val sampleProperty2: Int) {
+
+    fun sampleMethod(): Int = 6
+
+    var sampleProperty: Int
+        get() {
+            return 5
+        }
+        set(value) {
+            // Setter implementation
+        }
+}

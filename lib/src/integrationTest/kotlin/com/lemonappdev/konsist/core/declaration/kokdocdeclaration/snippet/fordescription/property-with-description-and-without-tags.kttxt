@@ -1,5 +1,3 @@
-package com.lemonappdev.konsist.core.declaration.kokdocdeclaration.snippet.fordescription
-
 class SampleClass(){
     fun sampleMethod() {
         // Implementation
@@ -7,9 +5,6 @@ class SampleClass(){
 
     /**
      * This is a sample property that demonstrates the usage of KDoc tags.
-     *
-     * @propertySetter Sets the value of the [name] property.
-     * @propertyGetter Retrieves the value of the [name] property.
      */
     var sampleProperty: Int
         get() {

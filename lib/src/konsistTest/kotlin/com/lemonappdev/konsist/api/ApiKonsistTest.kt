@@ -1,13 +1,6 @@
 package com.lemonappdev.konsist.api
 
-import com.lemonappdev.konsist.api.KoKDocTag.PARAM
-import com.lemonappdev.konsist.api.KoKDocTag.RETURN
-import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
-import com.lemonappdev.konsist.api.ext.sequence.withKDocWithTags
-import com.lemonappdev.konsist.api.ext.sequence.withParameter
-import com.lemonappdev.konsist.api.ext.sequence.withPrimaryConstructor
 import com.lemonappdev.konsist.core.verify.assert
-import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class ApiKonsistTest {

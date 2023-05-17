@@ -1,0 +1,17 @@
+class SampleClass() {
+
+    /**
+     * This is a sample method that demonstrates the usage of KDoc tags.
+     */
+    fun sampleMethod(sampleArgument1: Int, sampleArgument2: String): Int {
+        return 6
+    }
+
+    var sampleProperty: Int
+        get() {
+            return 5
+        }
+        set(value) {
+            // Setter implementation
+        }
+}
