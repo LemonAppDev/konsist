@@ -111,10 +111,10 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
             ?.plus(
                 secondaryConstructors
                     .mapNotNull { it.parameters }
-                    .flatten()
+                    .flatten(),
             )
 
-       return TagHelper.verifyParamTag(value, parameters, kDoc)
+        return TagHelper.verifyParamTag(value, parameters, kDoc)
     }
 
     internal companion object {

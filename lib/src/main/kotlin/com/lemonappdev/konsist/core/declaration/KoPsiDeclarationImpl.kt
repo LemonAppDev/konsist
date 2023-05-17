@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.util.LocationHelper
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
+@Suppress("detekt.TooManyFunctions")
 internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : KoPsiDeclaration {
     override val filePath by lazy {
         psiElement
@@ -90,6 +91,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
 
     protected open fun verifyPropertyGetterTag(value: Boolean) = true
 
+    @Suppress("detekt.CyclomaticComplexMethod")
     override fun hasCompleteKDoc(
         verifyDescription: Boolean,
         verifyParamTag: Boolean,
@@ -126,8 +128,8 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         val propertyGetterValue = verifyPropertyGetterTag(verifyPropertyGetterTag)
 
         return hasKDoc() && descriptionValue && paramValue && returnValue && constructorValue && receiverValue && propertyValue &&
-                throwsValue && exceptionValue && sampleValue && seeValue && authorValue && sinceValue && suppressValue && versionValue
-                && propertySetterValue && propertyGetterValue
+            throwsValue && exceptionValue && sampleValue && seeValue && authorValue && sinceValue && suppressValue && versionValue &&
+            propertySetterValue && propertyGetterValue
     }
 
     override fun resideInFilePath(path: String) = LocationHelper.resideInLocation(path, filePath)

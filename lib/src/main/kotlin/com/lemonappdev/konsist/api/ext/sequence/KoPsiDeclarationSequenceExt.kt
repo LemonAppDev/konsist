@@ -50,7 +50,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withCompleteKDoc(
         verifySuppressTag,
         verifyVersionTag,
         verifyPropertySetterTag,
-        verifyPropertyGetterTag
+        verifyPropertyGetterTag,
     )
 }
 
@@ -91,7 +91,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutCompleteKDoc(
         verifySuppressTag,
         verifyVersionTag,
         verifyPropertySetterTag,
-        verifyPropertyGetterTag
+        verifyPropertyGetterTag,
     )
 }
 

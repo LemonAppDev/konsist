@@ -25,7 +25,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
             .hasCompleteKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
-                verifyReturnTag = verifyReturnTag
+                verifyReturnTag = verifyReturnTag,
             )
             .shouldBeEqualTo(value)
     }
@@ -48,7 +48,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
             .hasCompleteKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
-                verifyReturnTag = verifyReturnTag
+                verifyReturnTag = verifyReturnTag,
             )
             .shouldBeEqualTo(value)
     }
@@ -71,7 +71,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
             .hasCompleteKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
-                verifyReturnTag = verifyReturnTag
+                verifyReturnTag = verifyReturnTag,
             )
             .shouldBeEqualTo(value)
     }
@@ -95,7 +95,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
             .hasCompleteKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
-                verifyReturnTag = verifyReturnTag
+                verifyReturnTag = verifyReturnTag,
             )
             .shouldBeEqualTo(value)
     }
@@ -118,7 +118,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
             .hasCompleteKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
-                verifyReturnTag = verifyReturnTag
+                verifyReturnTag = verifyReturnTag,
             )
             .shouldBeEqualTo(value)
     }
@@ -141,7 +141,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
             .hasCompleteKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
-                verifyReturnTag = verifyReturnTag
+                verifyReturnTag = verifyReturnTag,
             )
             .shouldBeEqualTo(value)
     }
