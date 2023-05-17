@@ -22,6 +22,7 @@ import com.lemonappdev.konsist.core.declaration.provider.KoPropertyProvider
 /**
  * Represents a scope of Kotlin declarations.
  */
+@Suppress("detekt.TooManyFunctions")
 interface KoScope :
     KoDeclarationProvider,
     KoClassProvider,
