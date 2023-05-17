@@ -40,6 +40,28 @@ interface KoPsiDeclaration {
     fun hasKDoc(): Boolean
 
     /**
+     * Whether the declaration has kDoc with the given requirements.
+     */
+    fun hasCompleteKDoc(
+        verifyDescription: Boolean = true,
+        verifyParamTag: Boolean = false,
+        verifyReturnTag: Boolean = false,
+        verifyConstructorTag: Boolean = false,
+        verifyReceiverTag: Boolean = false,
+        verifyPropertyTag: Boolean = false,
+        verifyThrowsTag: Boolean = false,
+        verifyExceptionTag: Boolean = false,
+        verifySampleTag: Boolean = false,
+        verifySeeTag: Boolean = false,
+        verifyAuthorTag: Boolean = false,
+        verifySinceTag: Boolean = false,
+        verifySuppressTag: Boolean = false,
+        verifyVersionTag: Boolean = false,
+        verifyPropertySetterTag: Boolean = false,
+        verifyPropertyGetterTag: Boolean = false,
+    ): Boolean
+
+    /**
      * Whatever declaration reside in file path.
      */
     fun resideInFilePath(path: String): Boolean

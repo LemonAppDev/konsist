@@ -57,6 +57,29 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
 
     override fun hasKDoc() = kDoc != null
 
+    override fun hasCompleteKDoc(
+        verifyDescription: Boolean,
+        verifyParamTag: Boolean,
+        verifyReturnTag: Boolean,
+        verifyConstructorTag: Boolean,
+        verifyReceiverTag: Boolean,
+        verifyPropertyTag: Boolean,
+        verifyThrowsTag: Boolean,
+        verifyExceptionTag: Boolean,
+        verifySampleTag: Boolean,
+        verifySeeTag: Boolean,
+        verifyAuthorTag: Boolean,
+        verifySinceTag: Boolean,
+        verifySuppressTag: Boolean,
+        verifyVersionTag: Boolean,
+        verifyPropertySetterTag: Boolean,
+        verifyPropertyGetterTag: Boolean
+    ) = if (verifyDescription) {
+        hasKDoc() && kDoc?.description?.isNotBlank() ?: false
+    } else {
+        hasKDoc()
+    }
+
     override fun resideInFilePath(path: String) = LocationHelper.resideInLocation(path, filePath)
 
     override fun resideInProjectFilePath(path: String) = LocationHelper.resideInLocation(path, projectFilePath)
