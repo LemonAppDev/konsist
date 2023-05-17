@@ -20,22 +20,22 @@ class KoScopeToStringTest {
             .toString()
             .shouldBeEqualTo(
                 "$beginningOfPath/koscope/KoScopeForAnnotationTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForClassTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForDeclarationTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForEqualsTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForFileTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForFunctionTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForHashCodeTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForImportTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForInterfaceTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForNamedDeclarationTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForObjectTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForPackageTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForPropertyTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeForTypeAliasTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeOperatorTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeTest.kt\n" +
-                        "$beginningOfPath/koscope/KoScopeToStringTest.kt",
+                    "$beginningOfPath/koscope/KoScopeForClassTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeForDeclarationTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeForEqualsTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeForFileTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeForFunctionTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeForHashCodeTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeForImportTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeForInterfaceTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeForNamedDeclarationTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeForObjectTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeForPackageTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeForPropertyTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeForTypeAliasTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeOperatorTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeTest.kt\n" +
+                    "$beginningOfPath/koscope/KoScopeToStringTest.kt",
             )
     }
 }
