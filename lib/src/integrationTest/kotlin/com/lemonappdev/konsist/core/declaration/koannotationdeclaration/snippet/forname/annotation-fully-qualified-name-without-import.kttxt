@@ -1,3 +1,5 @@
+package com.lemonappdev.konsist.core.declaration.koannotationdeclaration.snippet.forname
+
 @SampleAnnotationWithoutImport
 fun sampleFunction() {
 }

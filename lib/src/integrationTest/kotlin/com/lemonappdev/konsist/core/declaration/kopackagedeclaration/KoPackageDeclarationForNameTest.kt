@@ -29,9 +29,9 @@ class KoPackageDeclarationForNameTest {
     }
 
     @Test
-    fun `package-has-fully-qualified-name`() {
+    fun `package-has-qualified-name`() {
         // given
-        val sut = getSnippetFile("package-has-fully-qualified-name")
+        val sut = getSnippetFile("package-has-qualified-name")
             .packages()
 
         // then
