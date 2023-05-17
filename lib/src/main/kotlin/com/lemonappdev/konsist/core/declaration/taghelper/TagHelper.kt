@@ -12,13 +12,10 @@ object TagHelper {
 
     fun verifyParamTag(verifyParamTag: Boolean, parameters: List<KoParameterDeclaration>?, kDoc: KoKDocDeclaration?) =
         if (verifyParamTag && parameters != null) {
-            parameters
-                .all {
-                    kDoc
-                        ?.paramTags
-                        ?.any { tag -> tag.value == it.name }
-                        ?: false
-                }
+            val kDocParameters = kDoc?.paramTags?.map { it.value }?.sorted()
+            val givenParameters = parameters.map { it.name }.sorted()
+
+            givenParameters == kDocParameters
         } else {
             true
         }
