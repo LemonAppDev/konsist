@@ -431,6 +431,7 @@ class KoKDocDeclarationForTagTest {
             arguments("SampleClass", 10),
             arguments("sampleMethod", 2),
             arguments("sampleProperty", 2),
+            arguments("SampleClassWithoutTags", 0)
         )
 
         @Suppress("unused")

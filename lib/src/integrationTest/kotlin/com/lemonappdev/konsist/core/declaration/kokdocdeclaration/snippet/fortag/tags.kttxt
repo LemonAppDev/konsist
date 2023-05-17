@@ -39,3 +39,8 @@ class SampleClass<SampleType1>(private val sampleProperty1: String) {
             // Setter implementation
         }
 }
+
+/**
+ * This is a sample class with KDoc without tags
+ */
+class SampleClassWithoutTags
