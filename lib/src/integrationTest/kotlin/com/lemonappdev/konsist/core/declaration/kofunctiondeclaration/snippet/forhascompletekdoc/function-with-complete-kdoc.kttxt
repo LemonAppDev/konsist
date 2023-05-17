@@ -1,0 +1,10 @@
+/**
+ * Sample description
+ *
+ * @return sample return type description
+ * @param sampleArgument1 sample description1
+ * @param sampleArgument2 sample description2
+ */
+fun sampleFunction(sampleArgument1: Int, sampleArgument2: String): Int {
+    return 6
+}
