@@ -7,7 +7,7 @@ class SampleTopLevelClass {
 
             fun sampleLocalFunction2() {
                 class SampleLocalClass1 {
-                    fun sampleLocalFunction2() {
+                    fun sampleLocalFunction3() {
                     }
                 }
             }
