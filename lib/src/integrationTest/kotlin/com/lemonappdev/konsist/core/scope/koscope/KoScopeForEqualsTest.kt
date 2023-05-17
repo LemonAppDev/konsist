@@ -7,7 +7,7 @@ import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class KoScopeEqualsAndHashCodeTest {
+class KoScopeForEqualsTest {
     @Test
     fun `scopes-are-equal`() {
         // given
@@ -16,7 +16,6 @@ class KoScopeEqualsAndHashCodeTest {
 
         // then
         scope1 shouldBeEqualTo scope2
-        scope1.hashCode() shouldBeEqualTo scope2.hashCode()
     }
 
     @Test
@@ -27,9 +26,8 @@ class KoScopeEqualsAndHashCodeTest {
 
         // then
         scope1 shouldNotBeEqualTo scope2
-        scope1.hashCode() shouldNotBeEqualTo scope2.hashCode()
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forequalsandhashcode/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forequals/", fileName)
 }

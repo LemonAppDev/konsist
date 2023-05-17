@@ -28,12 +28,13 @@ class KoScopeOperatorTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
-                    "KoScopeEqualsAndHashCodeTest.kt",
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
                     "KoScopeForDeclarationTest.kt",
                     "KoScopeForDeclarationTest.kt",
+                    "KoScopeForEqualsTest.kt",
                     "KoScopeForFunctionTest.kt",
+                    "KoScopeForHashCodeTest.kt",
                     "KoScopeForImportTest.kt",
                     "KoScopeForInterfaceTest.kt",
                     "KoScopeForNamedDeclarationTest.kt",
@@ -64,10 +65,11 @@ class KoScopeOperatorTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
-                    "KoScopeEqualsAndHashCodeTest.kt",
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
+                    "KoScopeForEqualsTest.kt",
                     "KoScopeForFunctionTest.kt",
+                    "KoScopeForHashCodeTest.kt",
                     "KoScopeForImportTest.kt",
                     "KoScopeForInterfaceTest.kt",
                     "KoScopeForNamedDeclarationTest.kt",
@@ -120,12 +122,13 @@ class KoScopeOperatorTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
-                    "KoScopeEqualsAndHashCodeTest.kt",
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
                     "KoScopeForDeclarationTest.kt",
                     "KoScopeForDeclarationTest.kt",
+                    "KoScopeForEqualsTest.kt",
                     "KoScopeForFunctionTest.kt",
+                    "KoScopeForHashCodeTest.kt",
                     "KoScopeForImportTest.kt",
                     "KoScopeForInterfaceTest.kt",
                     "KoScopeForNamedDeclarationTest.kt",
@@ -158,10 +161,11 @@ class KoScopeOperatorTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
-                    "KoScopeEqualsAndHashCodeTest.kt",
                     "KoScopeForAnnotationTest.kt",
                     "KoScopeForClassTest.kt",
+                    "KoScopeForEqualsTest.kt",
                     "KoScopeForFunctionTest.kt",
+                    "KoScopeForHashCodeTest.kt",
                     "KoScopeForImportTest.kt",
                     "KoScopeForInterfaceTest.kt",
                     "KoScopeForNamedDeclarationTest.kt",
