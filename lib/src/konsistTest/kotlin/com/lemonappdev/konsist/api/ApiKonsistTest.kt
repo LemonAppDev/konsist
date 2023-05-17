@@ -18,7 +18,26 @@ class ApiKonsistTest {
             .assert { it.hasReturnType() }
     }
 
+    @Test
+    fun `every api method has return tag in KDoc`() {
+        testScope
+            .functions(includeNested = true, includeLocal = true)
+            .assert { it.hasCompleteKDoc(verifyReturnTag = true) }
+    }
+
+    @Test
+    fun `every api declaration has parameter tag in KDoc`() {
+        testScope
+            .declarations(includeNested = true, includeLocal = true)
+            .assert { it.hasCompleteKDoc(verifyParamTag = true) }
+    }
+
     companion object {
         val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSetName = "main")
+
+        // change `testScope` to `apiPackageScope` in above tests and remove `testScope` property
+        val testScope =
+            Konsist.scopeFromProjectFile("lib/src/main/kotlin/com/lemonappdev/konsist/api/declaration/KoNamedDeclaration.kt") +
+                Konsist.scopeFromPackage("lib/src/main/kotlin/com/lemonappdev/konsist/api/ext")
     }
 }
