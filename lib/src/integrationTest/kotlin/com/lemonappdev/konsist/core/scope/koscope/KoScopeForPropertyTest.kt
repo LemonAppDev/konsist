@@ -3,21 +3,11 @@ package com.lemonappdev.konsist.core.scope.koscope
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoScopeForPropertyTest {
-
-    @Test
-    fun `file-contains-one-property`() {
-        // given
-        val sut = getSnippetFile("file-contains-one-property")
-
-        // then
-        sut
-            .properties()
-            .map { it.name }
-            .toList()
-            .shouldBeEqualTo(listOf("sampleProperty"))
-    }
 
     @Test
     fun `file-contains-no-property`() {
@@ -32,30 +22,67 @@ class KoScopeForPropertyTest {
     }
 
     @Test
-    fun `file-contains-one-class-containing-property includeNested true`() {
+    fun `file-contains-one-property`() {
         // given
-        val sut = getSnippetFile("file-contains-one-class-containing-property")
-            .properties(includeNested = true)
+        val sut = getSnippetFile("file-contains-one-property")
 
         // then
         sut
+            .properties()
             .map { it.name }
             .toList()
-            .shouldBeEqualTo(listOf("sampleNestedProperty"))
+            .shouldBeEqualTo(listOf("sampleProperty"))
     }
 
-    @Test
-    fun `file-contains-one-class-containing-property includeNested false`() {
+    @ParameterizedTest
+    @MethodSource("provideValues")
+    fun `file-contains-class-containing-nested-properties`(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+        expected: List<String>,
+    ) {
         // given
-        val sut = getSnippetFile("file-contains-one-class-containing-property")
-            .properties(includeNested = false)
+        val sut = getSnippetFile("file-contains-class-containing-nested-properties")
+
         // then
         sut
-            .map { it.name }
+            .properties(includeNested = includeNested, includeLocal = includeLocal)
             .toList()
-            .shouldBeEqualTo(emptyList())
+            .map { it.name }
+            .shouldBeEqualTo(expected)
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forproperty/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValues() = listOf(
+            arguments(
+                false,
+                false,
+                emptyList<String>(),
+            ),
+            arguments(
+                true,
+                false,
+                listOf("sampleNestedProperty"),
+            ),
+            arguments(
+                false,
+                true,
+                listOf("sampleLocalProperty2"),
+            ),
+            arguments(
+                true,
+                true,
+                listOf(
+                    "sampleNestedProperty",
+                    "sampleLocalProperty1",
+                    "sampleLocalProperty2",
+                ),
+            ),
+        )
+    }
 }

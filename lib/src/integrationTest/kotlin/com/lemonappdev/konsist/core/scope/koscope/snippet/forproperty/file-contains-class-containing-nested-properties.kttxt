@@ -1,0 +1,11 @@
+class SampleClass {
+    val sampleNestedProperty: Boolean = true
+
+    fun sampleNestedFunction() {
+        val sampleLocalProperty1 = 4
+    }
+}
+
+fun sampleFunction() {
+    val sampleLocalProperty2 = 4
+}

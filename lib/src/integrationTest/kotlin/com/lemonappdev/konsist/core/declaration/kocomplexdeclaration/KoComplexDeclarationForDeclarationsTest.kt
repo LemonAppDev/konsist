@@ -114,7 +114,7 @@ class KoComplexDeclarationForDeclarationsTest {
 
     @ParameterizedTest
     @MethodSource("provideValuesForNestedDeclarations")
-    fun `declaration-contains-nested-declarations includeNested true`(
+    fun `declaration-contains-nested-declarations includeNested true includeLocal false`(
         fileName: String,
         declarationName: String,
     ) {
@@ -141,7 +141,7 @@ class KoComplexDeclarationForDeclarationsTest {
             "SampleInterfaceNestedInsideInterface",
         )
 
-        sut.declarations(includeNested = true, includeLocal = true)
+        sut.declarations(includeNested = true, includeLocal = false)
             .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
@@ -149,13 +149,13 @@ class KoComplexDeclarationForDeclarationsTest {
 
     @ParameterizedTest
     @MethodSource("provideValuesForNestedDeclarations")
-    fun `declaration-contains-nested-declarations includeNested false`(
+    fun `declaration-contains-nested-declarations includeNested false includeLocal false`(
         fileName: String,
         declarationName: String,
     ) {
         // given
         val sut = getSnippetFile(fileName)
-            .declarations(includeNested = true)
+            .declarations(includeNested = false)
             .filterIsInstance<KoComplexDeclaration>()
             .first { it.name == declarationName }
 
@@ -168,7 +168,72 @@ class KoComplexDeclarationForDeclarationsTest {
         )
 
         sut
+            .declarations(includeNested = false, includeLocal = false)
+            .toList()
+            .map { it.name }
+            .shouldBeEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForNestedDeclarations")
+    fun `declaration-contains-nested-declarations includeNested false includeLocal true`(
+        fileName: String,
+        declarationName: String,
+    ) {
+        // given
+        val sut = getSnippetFile(fileName)
             .declarations(includeNested = false)
+            .filterIsInstance<KoComplexDeclaration>()
+            .first { it.name == declarationName }
+
+        // then
+        val expected = listOf(
+            "sampleFunction",
+            "SampleLocalClass",
+            "sampleLocalFunction",
+            "SampleClass",
+            "SampleObject",
+            "SampleInterface",
+        )
+
+        sut.declarations(includeNested = false, includeLocal = true)
+            .toList()
+            .map { it.name }
+            .shouldBeEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForNestedDeclarations")
+    fun `declaration-contains-nested-declarations includeNested true includeLocal true`(
+        fileName: String,
+        declarationName: String,
+    ) {
+        // given
+        val sut = getSnippetFile(fileName)
+            .declarations(includeNested = false)
+            .filterIsInstance<KoComplexDeclaration>()
+            .first { it.name == declarationName }
+
+        // then
+        val expected = listOf(
+            "sampleFunction",
+            "SampleLocalClass",
+            "sampleLocalFunction",
+            "SampleClass",
+            "SampleClassNestedInsideClass",
+            "SampleObjectNestedInsideClass",
+            "SampleInterfaceNestedInsideClass",
+            "SampleObject",
+            "SampleClassNestedInsideObject",
+            "SampleObjectNestedInsideObject",
+            "SampleInterfaceNestedInsideObject",
+            "SampleInterface",
+            "SampleClassNestedInsideInterface",
+            "SampleObjectNestedInsideInterface",
+            "SampleInterfaceNestedInsideInterface",
+        )
+
+        sut.declarations(includeNested = true, includeLocal = true)
             .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
@@ -176,7 +241,80 @@ class KoComplexDeclarationForDeclarationsTest {
 
     @ParameterizedTest
     @MethodSource("provideValuesForLocalDeclarations")
-    fun `declaration-contains-local-declarations includeLocal true`(
+    fun `declaration-contains-local-declarations includeNested false includeLocal true`(
+        fileName: String,
+        declarationName: String,
+    ) {
+        // given
+        val sut = getSnippetFile(fileName)
+            .declarations(includeNested = true)
+            .filterIsInstance<KoComplexDeclaration>()
+            .first { it.name == declarationName }
+
+        // then
+        val expected = listOf(
+            "sampleFunction",
+            "sampleLocalProperty1",
+            "sampleLocalFunction1",
+            "sampleLocalProperty2",
+            "sampleLocalFunction2",
+            "SampleLocalClass1",
+        )
+
+        sut
+            .declarations(includeNested = false, includeLocal = true)
+            .toList()
+            .map { it.name }
+            .shouldBeEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForLocalDeclarations")
+    fun `declaration-contains-local-declarations includeNested false includeLocal false`(
+        fileName: String,
+        declarationName: String,
+    ) {
+        // given
+        val sut = getSnippetFile(fileName)
+            .declarations(includeNested = true)
+            .filterIsInstance<KoComplexDeclaration>()
+            .first { it.name == declarationName }
+
+        // then
+        val expected = listOf("sampleFunction")
+
+        sut
+            .declarations(includeNested = false, includeLocal = false)
+            .toList()
+            .map { it.name }
+            .shouldBeEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForLocalDeclarations")
+    fun `declaration-contains-local-declarations includeNested true includeLocal false`(
+        fileName: String,
+        declarationName: String,
+    ) {
+        // given
+        val sut = getSnippetFile(fileName)
+            .declarations(includeNested = true)
+            .filterIsInstance<KoComplexDeclaration>()
+            .first { it.name == declarationName }
+
+        // then
+        val expected = listOf("sampleFunction")
+
+        sut
+            .declarations(includeNested = true, includeLocal = false)
+            .toList()
+            .map { it.name }
+            .shouldBeEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForLocalDeclarations")
+    fun `declaration-contains-local-declarations includeNested true includeLocal true`(
         fileName: String,
         declarationName: String,
     ) {
@@ -198,29 +336,7 @@ class KoComplexDeclarationForDeclarationsTest {
         )
 
         sut
-            .declarations(includeLocal = true)
-            .toList()
-            .map { it.name }
-            .shouldBeEqualTo(expected)
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideValuesForLocalDeclarations")
-    fun `declaration-contains-local-declarations includeLocal false`(
-        fileName: String,
-        declarationName: String,
-    ) {
-        // given
-        val sut = getSnippetFile(fileName)
-            .declarations(includeNested = true)
-            .filterIsInstance<KoComplexDeclaration>()
-            .first { it.name == declarationName }
-
-        // then
-        val expected = listOf("sampleFunction")
-
-        sut
-            .declarations(includeLocal = false)
+            .declarations(includeNested = true, includeLocal = true)
             .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)

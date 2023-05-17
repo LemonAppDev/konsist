@@ -3,8 +3,22 @@ package com.lemonappdev.konsist.core.scope.koscope
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoScopeForObjectTest {
+    @Test
+    fun `file-contains-no-object`() {
+        // given
+        val sut = getSnippetFile("file-contains-no-object")
+
+        // then
+        sut
+            .objects()
+            .toList()
+            .shouldBeEqualTo(emptyList())
+    }
 
     @Test
     fun `file-contains-one-object`() {
@@ -19,55 +33,42 @@ class KoScopeForObjectTest {
             .shouldBeEqualTo(listOf("SampleObject"))
     }
 
-    @Test
-    fun `file-contains-no-object`() {
+    @ParameterizedTest
+    @MethodSource("provideValues")
+    fun `file-contains-object-with-nested-objects`(
+        includeNested: Boolean,
+        expected: List<String>,
+    ) {
         // given
-        val sut = getSnippetFile("file-contains-no-object")
+        val sut = getSnippetFile("file-contains-object-with-nested-objects")
 
         // then
         sut
-            .objects()
+            .objects(includeNested = includeNested)
             .toList()
-            .shouldBeEqualTo(emptyList())
-    }
-
-    @Test
-    fun `file-contains-two-objects-with-nested-object includeNested true`() {
-        // given
-        val sut = getSnippetFile("file-contains-two-objects-with-nested-object")
-
-        // then
-        sut
-            .objects(includeNested = true)
             .map { it.name }
-            .toList()
-            .shouldBeEqualTo(
-                listOf(
-                    "SampleObject1",
-                    "SampleNestedObject",
-                    "SampleObject2",
-                ),
-            )
-    }
-
-    @Test
-    fun `file-contains-two-objects-with-nested-object includeNested false`() {
-        // given
-        val sut = getSnippetFile("file-contains-two-objects-with-nested-object")
-
-        // then
-        sut
-            .objects(includeNested = false)
-            .map { it.name }
-            .toList()
-            .shouldBeEqualTo(
-                listOf(
-                    "SampleObject1",
-                    "SampleObject2",
-                ),
-            )
+            .shouldBeEqualTo(expected)
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forobject/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValues() = listOf(
+            arguments(
+                true,
+                listOf(
+                    "SampleObject",
+                    "SampleNestedObject1",
+                    "SampleNestedObject2",
+                ),
+            ),
+            arguments(
+                false,
+                listOf("SampleObject"),
+            ),
+        )
+    }
 }

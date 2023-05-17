@@ -1,7 +1,0 @@
-fun sampleFunction1() {
-    fun sampleLocalFunction() {
-    }
-}
-
-fun sampleFunction2() {
-}

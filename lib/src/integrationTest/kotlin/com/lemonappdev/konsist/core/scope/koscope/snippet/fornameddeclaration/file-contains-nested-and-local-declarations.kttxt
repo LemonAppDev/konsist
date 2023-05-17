@@ -1,0 +1,15 @@
+package com.samplepackage
+
+import com.sampleimport
+
+class SampleClass {
+    val sampleNestedProperty1: Boolean = true
+
+    fun sampleNestedFunction() {
+        fun sampleLocalFunction(){}
+
+        class SampleLocalClass {
+            val sampleNestedProperty2 = 4
+        }
+    }
+}
