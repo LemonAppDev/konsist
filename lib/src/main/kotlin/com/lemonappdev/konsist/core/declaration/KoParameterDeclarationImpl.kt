@@ -14,6 +14,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 internal class KoParameterDeclarationImpl private constructor(private val ktParameter: KtParameter, parent: KoBaseDeclaration?) :
     KoDeclarationImpl(ktParameter, parent),
     KoParameterDeclaration {
+
     override val type by lazy {
         val type = ktParameter
             .children

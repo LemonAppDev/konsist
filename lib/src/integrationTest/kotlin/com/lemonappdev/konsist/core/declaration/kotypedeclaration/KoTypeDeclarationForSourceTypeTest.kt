@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kotypedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -18,13 +17,22 @@ class KoTypeDeclarationForSourceTypeTest {
             ?.type
 
         // then
-        assertSoftly(sut) {
-            it?.sourceType shouldBeEqualTo "SampleType"
-            it?.importAliasName shouldBeEqualTo ""
-            it?.name shouldBeEqualTo "SampleType"
-            it?.isImportAlias() shouldBeEqualTo false
-            it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
-        }
+        sut?.sourceType shouldBeEqualTo "SampleType"
+    }
+
+    @Test
+    fun `import-alias`() {
+        // given
+        val sut = getSnippetFile("import-alias")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+            ?.type
+
+        // then
+        sut?.sourceType shouldBeEqualTo "SampleType"
     }
 
     private fun getSnippetFile(fileName: String) =

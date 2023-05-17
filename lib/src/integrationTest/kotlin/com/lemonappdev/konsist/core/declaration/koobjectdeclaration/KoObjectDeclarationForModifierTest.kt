@@ -18,31 +18,14 @@ class KoObjectDeclarationForModifierTest {
     }
 
     @Test
-    fun `companion-object-with-name`() {
+    fun `companion-object`() {
         // given
-        val sut = getSnippetFile("companion-object-with-name")
+        val sut = getSnippetFile("companion-object")
             .objects()
             .first()
 
         // then
-        assertSoftly(sut) {
-            sut.hasCompanionModifier() shouldBeEqualTo true
-            sut.name shouldBeEqualTo "SampleObject"
-        }
-    }
-
-    @Test
-    fun `companion-object-without-name`() {
-        // given
-        val sut = getSnippetFile("companion-object-without-name")
-            .objects(includeNested = true)
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            sut.hasCompanionModifier() shouldBeEqualTo true
-            sut.name shouldBeEqualTo "Companion"
-        }
+        sut.hasCompanionModifier() shouldBeEqualTo true
     }
 
     @Test

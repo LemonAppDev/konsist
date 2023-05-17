@@ -17,10 +17,7 @@ internal class KoAnnotationDeclarationImpl private constructor(
             ?.name ?: name
     }
 
-    override fun representsType(name: String) =
-        name == this.name || name == fullyQualifiedName
-
-    inline fun <reified T> representsTypeOf() = T::class.qualifiedName == fullyQualifiedName
+    override fun representsType(name: String) = name == this.name || name == fullyQualifiedName
 
     internal companion object {
         private val cache = KoDeclarationCache<KoAnnotationDeclarationImpl>()

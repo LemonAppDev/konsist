@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.core.declaration.kotypedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeDeclarationForImportAliasTest {
+class KoTypeDeclarationForFullyQualifiedNameTest {
     @Test
     fun `simple-type`() {
         // given
@@ -18,10 +17,7 @@ class KoTypeDeclarationForImportAliasTest {
             ?.type
 
         // then
-        assertSoftly(sut) {
-            it?.importAliasName shouldBeEqualTo ""
-            it?.isImportAlias() shouldBeEqualTo false
-        }
+        sut?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
     }
 
     @Test
@@ -36,10 +32,7 @@ class KoTypeDeclarationForImportAliasTest {
             ?.type
 
         // then
-        assertSoftly(sut) {
-            it?.importAliasName shouldBeEqualTo "ImportAlias"
-            it?.isImportAlias() shouldBeEqualTo true
-        }
+        sut?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
     }
 
     private fun getSnippetFile(fileName: String) =
