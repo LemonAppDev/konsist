@@ -87,7 +87,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
         }
     }
 
-    override fun equals(other: Any?): Boolean = other is KoFileDeclarationImpl && filePath == other.filePath
+    override fun equals(other: Any?): Boolean = other is KoFileDeclaration && filePath == other.filePath
 
     override fun hashCode(): Int = 31 * 7 + filePath.hashCode()
 
