@@ -41,6 +41,8 @@ class KoSecondaryConstructorForHasValidKDocTest {
             arguments("secondary-constructor-with-kdoc-with-complete-param-tags", false, true),
             arguments("secondary-constructor-with-kdoc-with-not-complete-param-tags", true, false),
             arguments("secondary-constructor-with-kdoc-with-not-complete-param-tags", false, true),
+            arguments("secondary-constructor-with-kdoc-with-too-many-param-tags", true, false),
+            arguments("secondary-constructor-with-kdoc-with-too-many-param-tags", false, true),
             arguments("secondary-constructor-with-kdoc-without-param-tags", true, false),
             arguments("secondary-constructor-with-kdoc-without-param-tags", false, true),
         )

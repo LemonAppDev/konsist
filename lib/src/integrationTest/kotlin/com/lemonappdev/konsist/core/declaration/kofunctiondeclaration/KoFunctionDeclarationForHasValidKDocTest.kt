@@ -60,6 +60,8 @@ class KoFunctionDeclarationForHasValidKDocTest {
             arguments("function-with-kdoc-with-complete-param-tags", false, true),
             arguments("function-with-kdoc-with-not-complete-param-tags", true, false),
             arguments("function-with-kdoc-with-not-complete-param-tags", false, true),
+            arguments("function-with-kdoc-with-too-many-param-tags", true, false),
+            arguments("function-with-kdoc-with-too-many-param-tags", false, true),
             arguments("function-with-kdoc-without-param-tags", true, false),
             arguments("function-with-kdoc-without-param-tags", false, true),
         )

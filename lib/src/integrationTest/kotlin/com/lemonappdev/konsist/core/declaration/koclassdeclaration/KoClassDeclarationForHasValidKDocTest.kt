@@ -39,6 +39,8 @@ class KoClassDeclarationForHasValidKDocTest {
             arguments("class-with-kdoc-with-complete-param-tags", false, true),
             arguments("class-with-kdoc-with-not-complete-param-tags", true, false),
             arguments("class-with-kdoc-with-not-complete-param-tags", false, true),
+            arguments("class-with-kdoc-with-too-many-param-tags", true, false),
+            arguments("class-with-kdoc-with-too-many-param-tags", false, true),
             arguments("class-with-kdoc-without-param-tags", true, false),
             arguments("class-with-kdoc-without-param-tags", false, true),
         )
