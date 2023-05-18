@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.scope.koscope
+package com.lemonappdev.konsist.core.scope
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
@@ -32,5 +32,5 @@ class KoScopeForImportTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forimport/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/snippet/forimport/", fileName)
 }

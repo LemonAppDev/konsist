@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.scope.koscope
+package com.lemonappdev.konsist.core.scope
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
@@ -326,5 +326,5 @@ class KoScopeForNamedDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/fornameddeclaration/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/snippet/fornameddeclaration/", fileName)
 }

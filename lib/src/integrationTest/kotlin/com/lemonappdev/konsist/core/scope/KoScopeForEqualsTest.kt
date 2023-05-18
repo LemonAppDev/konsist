@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.scope.koscope
+package com.lemonappdev.konsist.core.scope
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
@@ -27,5 +27,5 @@ class KoScopeForEqualsTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forequals/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/snippet/forequals/", fileName)
 }

@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.scope.koscope
+package com.lemonappdev.konsist.core.scope
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
@@ -51,7 +51,7 @@ class KoScopeForInterfaceTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forinterface/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/snippet/forinterface/", fileName)
 
     companion object {
         @Suppress("unused")

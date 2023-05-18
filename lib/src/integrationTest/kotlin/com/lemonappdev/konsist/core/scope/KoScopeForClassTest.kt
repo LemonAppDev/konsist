@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.scope.koscope
+package com.lemonappdev.konsist.core.scope
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
@@ -7,53 +7,52 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoScopeForFunctionTest {
-
+class KoScopeForClassTest {
     @Test
-    fun `file-contains-no-function`() {
+    fun `file-contains-no-class`() {
         // given
-        val sut = getSnippetFile("file-contains-no-function")
+        val sut = getSnippetFile("file-contains-no-class")
 
         // then
         sut
-            .functions()
+            .classes()
             .toList()
             .shouldBeEqualTo(emptyList())
     }
 
     @Test
-    fun `file-contains-one-function`() {
+    fun `file-contains-one-class`() {
         // given
-        val sut = getSnippetFile("file-contains-one-function")
+        val sut = getSnippetFile("file-contains-one-class")
 
         // then
         sut
-            .functions()
-            .map { it.name }
+            .classes()
             .toList()
-            .shouldBeEqualTo(listOf("sampleFunction"))
+            .map { it.name }
+            .shouldBeEqualTo(listOf("SampleClass"))
     }
 
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `file-contains-function-with-local-and-nested-functions`(
+    fun `file-contains-class-with-local-and-nested-classes`(
         includeNested: Boolean,
         includeLocal: Boolean,
         expected: List<String>,
     ) {
         // given
-        val sut = getSnippetFile("file-contains-function-with-local-and-nested-functions")
+        val sut = getSnippetFile("file-contains-class-with-local-and-nested-classes")
 
         // then
         sut
-            .functions(includeNested = includeNested, includeLocal = includeLocal)
+            .classes(includeNested = includeNested, includeLocal = includeLocal)
             .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forfunction/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/snippet/forclass/", fileName)
 
     companion object {
         @Suppress("unused")
@@ -62,28 +61,30 @@ class KoScopeForFunctionTest {
             arguments(
                 false,
                 false,
-                listOf("sampleFunction"),
+                listOf("SampleClass"),
             ),
             arguments(
                 true,
                 false,
-                listOf("sampleFunction"),
-            ),
-            arguments(
-                false,
-                true,
                 listOf(
-                    "sampleFunction",
-                    "sampleLocalFunction",
+                    "SampleClass",
+                    "SampleNestedClass1",
+                    "SampleNestedClass2",
                 ),
             ),
             arguments(
+                false,
+                true,
+                listOf("SampleClass"),
+            ),
+            arguments(
                 true,
                 true,
                 listOf(
-                    "sampleFunction",
-                    "sampleLocalFunction",
-                    "sampleNestedFunction",
+                    "SampleClass",
+                    "SampleLocalClass",
+                    "SampleNestedClass1",
+                    "SampleNestedClass2",
                 ),
             ),
         )
