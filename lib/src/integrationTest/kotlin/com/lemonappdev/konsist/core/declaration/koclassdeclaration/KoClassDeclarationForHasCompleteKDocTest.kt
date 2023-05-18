@@ -21,7 +21,7 @@ class KoClassDeclarationForHasCompleteKDocTest {
 
         // then
         sut
-            .hasCompleteKDoc(
+            .hasValidKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
             )
@@ -42,7 +42,7 @@ class KoClassDeclarationForHasCompleteKDocTest {
 
         // then
         sut
-            .hasCompleteKDoc(
+            .hasValidKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
             )
@@ -63,7 +63,7 @@ class KoClassDeclarationForHasCompleteKDocTest {
 
         // then
         sut
-            .hasCompleteKDoc(
+            .hasValidKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
             )
@@ -85,7 +85,7 @@ class KoClassDeclarationForHasCompleteKDocTest {
 
         // then
         sut
-            .hasCompleteKDoc(
+            .hasValidKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
             )
@@ -106,7 +106,7 @@ class KoClassDeclarationForHasCompleteKDocTest {
 
         // then
         sut
-            .hasCompleteKDoc(
+            .hasValidKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
             )

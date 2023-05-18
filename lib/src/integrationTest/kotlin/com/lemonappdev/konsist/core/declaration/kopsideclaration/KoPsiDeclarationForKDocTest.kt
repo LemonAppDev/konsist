@@ -51,7 +51,7 @@ class KoPsiDeclarationForKDocTest {
             .first()
 
         // then
-        sut.hasCompleteKDoc(verifyDescription = verifyDescription) shouldBeEqualTo value
+        sut.hasValidKDoc(verifyDescription = verifyDescription) shouldBeEqualTo value
     }
 
     private fun getSnippetFile(fileName: String) =

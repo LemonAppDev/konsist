@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.intellij.util.containers.ContainerUtil.mapNotNull
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.declaration.taghelper.TagHelper
+import com.lemonappdev.konsist.core.util.TagHelper
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
@@ -105,7 +104,7 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
         else -> names.all { hasParentClass(it) || hasParentInterfaces(it) }
     }
 
-    override fun verifyParamTag(value: Boolean): Boolean {
+    override fun hasValidParamTag(value: Boolean): Boolean {
         val parameters = primaryConstructor
             ?.parameters
             ?.plus(
@@ -114,7 +113,7 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
                     .flatten(),
             )
 
-        return TagHelper.verifyParamTag(value, parameters, kDoc)
+        return TagHelper.hasValidParamTag(value, parameters, kDoc)
     }
 
     internal companion object {

@@ -49,10 +49,10 @@ class KoPsiDeclarationSequenceExtTest {
     fun `withCompleteKDoc() returns psiDeclaration with complete kDoc`() {
         // given
         val psiDeclaration1: KoPsiDeclarationImpl = mockk {
-            every { hasCompleteKDoc(verifyDescription = true, verifyParamTag = true) } returns true
+            every { hasValidKDoc(verifyDescription = true, verifyParamTag = true) } returns true
         }
         val psiDeclaration2: KoPsiDeclarationImpl = mockk {
-            every { hasCompleteKDoc(verifyDescription = true, verifyParamTag = true) } returns false
+            every { hasValidKDoc(verifyDescription = true, verifyParamTag = true) } returns false
         }
         val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
 
@@ -67,10 +67,10 @@ class KoPsiDeclarationSequenceExtTest {
     fun `withoutCompleteKDoc() returns psiDeclaration without complete kDoc`() {
         // given
         val psiDeclaration1: KoPsiDeclarationImpl = mockk {
-            every { hasCompleteKDoc(verifyDescription = true, verifyParamTag = true) } returns true
+            every { hasValidKDoc(verifyDescription = true, verifyParamTag = true) } returns true
         }
         val psiDeclaration2: KoPsiDeclarationImpl = mockk {
-            every { hasCompleteKDoc(verifyDescription = true, verifyParamTag = true) } returns false
+            every { hasValidKDoc(verifyDescription = true, verifyParamTag = true) } returns false
         }
         val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
 

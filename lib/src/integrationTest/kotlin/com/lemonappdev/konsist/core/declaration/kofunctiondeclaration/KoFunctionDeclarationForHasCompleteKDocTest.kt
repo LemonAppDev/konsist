@@ -22,7 +22,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
 
         // then
         sut
-            .hasCompleteKDoc(
+            .hasValidKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
                 verifyReturnTag = verifyReturnTag,
@@ -45,7 +45,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
 
         // then
         sut
-            .hasCompleteKDoc(
+            .hasValidKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
                 verifyReturnTag = verifyReturnTag,
@@ -68,7 +68,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
 
         // then
         sut
-            .hasCompleteKDoc(
+            .hasValidKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
                 verifyReturnTag = verifyReturnTag,
@@ -92,7 +92,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
 
         // then
         sut
-            .hasCompleteKDoc(
+            .hasValidKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
                 verifyReturnTag = verifyReturnTag,
@@ -115,7 +115,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
 
         // then
         sut
-            .hasCompleteKDoc(
+            .hasValidKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
                 verifyReturnTag = verifyReturnTag,
@@ -138,7 +138,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
 
         // then
         sut
-            .hasCompleteKDoc(
+            .hasValidKDoc(
                 verifyDescription = verifyDescription,
                 verifyParamTag = verifyParamTag,
                 verifyReturnTag = verifyReturnTag,
