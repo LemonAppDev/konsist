@@ -104,7 +104,7 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
         else -> names.all { hasParentClass(it) || hasParentInterfaces(it) }
     }
 
-    override fun hasValidParamTag(value: Boolean) = TagHelper.hasValidParamTag(value, primaryConstructor?.parameters, kDoc)
+    override fun hasValidParamTag(enabled: Boolean) = TagHelper.hasValidParamTag(enabled, primaryConstructor?.parameters, kDoc)
 
     internal companion object {
         private val cache = KoDeclarationCache<KoClassDeclarationImpl>()
