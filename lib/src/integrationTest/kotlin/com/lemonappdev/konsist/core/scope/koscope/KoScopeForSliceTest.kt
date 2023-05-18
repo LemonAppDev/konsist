@@ -5,7 +5,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class KoScopeToStringTest {
+class KoScopeForSliceTest {
     private val beginningOfPath = File("")
         .absoluteFile
         .path + "/src/integrationTest/kotlin/com/lemonappdev/konsist/core/scope"

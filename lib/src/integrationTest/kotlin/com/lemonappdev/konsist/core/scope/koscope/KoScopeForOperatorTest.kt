@@ -5,7 +5,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class KoScopeOperatorTest {
+class KoScopeForOperatorTest {
     private val konsistModulePath = File("")
         .absoluteFile
         .path
@@ -39,12 +39,13 @@ class KoScopeOperatorTest {
                     "KoScopeForInterfaceTest.kt",
                     "KoScopeForNamedDeclarationTest.kt",
                     "KoScopeForObjectTest.kt",
+                    "KoScopeForOperatorTest.kt",
                     "KoScopeForPackageTest.kt",
                     "KoScopeForPropertyTest.kt",
+                    "KoScopeForSliceTest.kt",
+                    "KoScopeForToStringTest.kt",
                     "KoScopeForTypeAliasTest.kt",
-                    "KoScopeOperatorTest.kt",
                     "KoScopeTest.kt",
-                    "KoScopeToStringTest.kt",
                 ),
             )
     }
@@ -76,12 +77,13 @@ class KoScopeOperatorTest {
                     "KoScopeForInterfaceTest.kt",
                     "KoScopeForNamedDeclarationTest.kt",
                     "KoScopeForObjectTest.kt",
+                    "KoScopeForOperatorTest.kt",
                     "KoScopeForPackageTest.kt",
                     "KoScopeForPropertyTest.kt",
+                    "KoScopeForSliceTest.kt",
+                    "KoScopeForToStringTest.kt",
                     "KoScopeForTypeAliasTest.kt",
-                    "KoScopeOperatorTest.kt",
                     "KoScopeTest.kt",
-                    "KoScopeToStringTest.kt",
                 ),
             )
     }
@@ -137,12 +139,13 @@ class KoScopeOperatorTest {
                     "KoScopeForInterfaceTest.kt",
                     "KoScopeForNamedDeclarationTest.kt",
                     "KoScopeForObjectTest.kt",
+                    "KoScopeForOperatorTest.kt",
                     "KoScopeForPackageTest.kt",
                     "KoScopeForPropertyTest.kt",
+                    "KoScopeForSliceTest.kt",
+                    "KoScopeForToStringTest.kt",
                     "KoScopeForTypeAliasTest.kt",
-                    "KoScopeOperatorTest.kt",
                     "KoScopeTest.kt",
-                    "KoScopeToStringTest.kt",
                 ),
             )
     }
@@ -176,12 +179,13 @@ class KoScopeOperatorTest {
                     "KoScopeForInterfaceTest.kt",
                     "KoScopeForNamedDeclarationTest.kt",
                     "KoScopeForObjectTest.kt",
+                    "KoScopeForOperatorTest.kt",
                     "KoScopeForPackageTest.kt",
                     "KoScopeForPropertyTest.kt",
+                    "KoScopeForSliceTest.kt",
+                    "KoScopeForToStringTest.kt",
                     "KoScopeForTypeAliasTest.kt",
-                    "KoScopeOperatorTest.kt",
                     "KoScopeTest.kt",
-                    "KoScopeToStringTest.kt",
                 ),
             )
     }
