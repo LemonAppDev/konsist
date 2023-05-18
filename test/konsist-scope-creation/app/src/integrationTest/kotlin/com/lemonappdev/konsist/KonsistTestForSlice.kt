@@ -31,7 +31,7 @@ class KonsistTestForSlice {
         val sut = Konsist.scopeFromPackage("com.lemonappdev.sample", sourceSetName = "main")
 
         // then
-        val actual = sut.slice { it.hasImports("java.awt.image.SampleModel") }
+        val actual = sut.slice { it.hasImports("com.sample") }
 
         actual
             .mapToFilePaths()

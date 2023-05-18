@@ -1,5 +1,5 @@
 package com.lemonappdev.sample
 
-import java.awt.image.SampleModel
+import com.sample
 
-class LibClass(val sampleProperty: SampleModel)
+class LibClass
