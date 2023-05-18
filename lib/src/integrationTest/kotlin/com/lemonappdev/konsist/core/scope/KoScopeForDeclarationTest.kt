@@ -49,7 +49,7 @@ class KoScopeForDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/fordeclaration/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/snippet/fordeclaration/", fileName)
 
     companion object {
         @Suppress("unused", "detekt.LongMethod")

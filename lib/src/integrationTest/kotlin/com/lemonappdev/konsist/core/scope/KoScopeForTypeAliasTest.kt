@@ -36,5 +36,5 @@ class KoScopeForTypeAliasTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/fortypealias/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/snippet/fortypealias/", fileName)
 }

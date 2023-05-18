@@ -32,5 +32,5 @@ class KoScopeForAnnotationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forannotation/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/snippet/forannotation/", fileName)
 }

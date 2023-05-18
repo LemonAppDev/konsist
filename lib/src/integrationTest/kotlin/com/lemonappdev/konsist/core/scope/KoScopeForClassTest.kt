@@ -52,7 +52,7 @@ class KoScopeForClassTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forclass/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/snippet/forclass/", fileName)
 
     companion object {
         @Suppress("unused")

@@ -27,5 +27,5 @@ class KoScopeForEqualsTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forequals/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/snippet/forequals/", fileName)
 }

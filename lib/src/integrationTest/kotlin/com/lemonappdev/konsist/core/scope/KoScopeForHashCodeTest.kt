@@ -27,5 +27,5 @@ class KoScopeForHashCodeTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forhashcode/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/snippet/forhashcode/", fileName)
 }

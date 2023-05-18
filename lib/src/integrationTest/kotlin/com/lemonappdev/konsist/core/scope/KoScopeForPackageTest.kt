@@ -32,5 +32,5 @@ class KoScopeForPackageTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/scope/koscope/snippet/forpackage/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/scope/snippet/forpackage/", fileName)
 }
