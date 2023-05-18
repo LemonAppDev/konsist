@@ -1,10 +1,7 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.Konsist.scopeFromPackage
 import com.lemonappdev.konsist.ext.mapToFilePaths
-import com.lemonappdev.konsist.util.PathProvider
-import com.lemonappdev.konsist.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.dataMainSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.dataTestSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.rootTestSourceSetDirectory
