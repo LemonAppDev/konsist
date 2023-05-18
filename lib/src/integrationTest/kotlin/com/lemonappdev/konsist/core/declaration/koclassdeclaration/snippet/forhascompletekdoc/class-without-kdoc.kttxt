@@ -1,1 +1,0 @@
-class SampleClass( val sampleProperty1: String, val sampleProperty2: Int)

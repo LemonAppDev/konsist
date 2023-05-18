@@ -1,0 +1,4 @@
+/**
+ * @param sampleProperty1 The first type parameter for this class.
+ */
+class SampleClass2( val sampleProperty1: String, val sampleProperty2: Int)

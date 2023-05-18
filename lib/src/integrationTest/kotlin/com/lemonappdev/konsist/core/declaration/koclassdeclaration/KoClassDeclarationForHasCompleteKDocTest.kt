@@ -8,56 +8,16 @@ import org.junit.jupiter.params.provider.MethodSource
 
 class KoClassDeclarationForHasCompleteKDocTest {
     @ParameterizedTest
-    @MethodSource("provideValuesForNoKDoc")
-    fun `class-without-kdoc`(
-        verifyParamTag: Boolean,
-        value: Boolean,
-    ) {
-        // given
-        val sut = getSnippetFile("class-without-kdoc")
-            .classes()
-            .first()
-
-        // then
-        sut
-            .hasValidKDoc(
-                verifyDescription = false,
-                verifyParamTag = verifyParamTag
-            )
-            .shouldBeEqualTo(value)
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideValuesForEmptyKDoc")
-    fun `class-with-empty-kdoc`(
-        verifyParamTag: Boolean,
-        value: Boolean,
-    ) {
-        // given
-        val sut = getSnippetFile("class-with-empty-kdoc")
-            .classes()
-            .first()
-
-        // then
-        sut
-            .hasValidKDoc(
-                verifyDescription = false,
-                verifyParamTag = verifyParamTag
-            )
-            .shouldBeEqualTo(value)
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideValuesForKDocWithParamTags")
+    @MethodSource("provideValues")
     fun `class-with-kdoc-with-param-tags`(
-        declarationName: String,
+        fileName: String,
         verifyParamTag: Boolean,
         value: Boolean,
     ) {
         // given
-        val sut = getSnippetFile("class-with-kdoc-with-param-tags")
+        val sut = getSnippetFile(fileName)
             .classes()
-            .first { it.name == declarationName }
+            .first()
 
         // then
         sut
@@ -74,24 +34,13 @@ class KoClassDeclarationForHasCompleteKDocTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForNoKDoc() = listOf(
-            arguments(true, false),
-            arguments(false, false),
-        )
-
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForEmptyKDoc() = listOf(
-            arguments(true, false),
-            arguments(false, true),
-        )
-
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForKDocWithParamTags() = listOf(
-            arguments("SampleClass1", true, true),
-            arguments("SampleClass1", false, true),
-            arguments("SampleClass2", true, false),
+        fun provideValues() = listOf(
+            arguments("class-with-kdoc-with-complete-param-tags", true, true),
+            arguments("class-with-kdoc-with-complete-param-tags", false, true),
+            arguments("class-with-kdoc-with-not-complete-param-tags", true, false),
+            arguments("class-with-kdoc-with-not-complete-param-tags", false, true),
+            arguments("class-with-kdoc-without-param-tags", true, false),
+            arguments("class-with-kdoc-without-param-tags", false, true),
         )
     }
 }

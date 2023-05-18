@@ -40,7 +40,7 @@ class KoPsiDeclarationForKDocTest {
 
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `hasKDoc-with-requirements`(
+    fun `hasValidKDoc-with-requirements`(
         fileName: String,
         verifyDescription: Boolean,
         value: Boolean,
@@ -61,6 +61,8 @@ class KoPsiDeclarationForKDocTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
+            arguments("declaration-without-kdoc", true, false),
+            arguments("declaration-without-kdoc", false, false),
             arguments("declaration-with-empty-kdoc", true, false),
             arguments("declaration-with-empty-kdoc", false, true),
             arguments("declaration-with-kdoc-with-description", true, true),
