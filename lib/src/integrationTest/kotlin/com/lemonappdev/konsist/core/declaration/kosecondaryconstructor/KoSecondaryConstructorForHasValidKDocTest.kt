@@ -2,16 +2,14 @@ package com.lemonappdev.konsist.core.declaration.kosecondaryconstructor
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class KoSecondaryConstructorForHasValidKDocTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `class-with-kdoc-with-param-tags`(
+    fun `secondary-constructor-with-kdoc-with-param-tags`(
         fileName: String,
         verifyParamTag: Boolean,
         value: Boolean,

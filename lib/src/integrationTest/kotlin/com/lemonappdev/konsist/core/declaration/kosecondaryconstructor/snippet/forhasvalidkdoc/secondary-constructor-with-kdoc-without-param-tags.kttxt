@@ -1,6 +1,8 @@
 class SampleClass(val sampleProperty1: Int) {
     /**
-     * @return sample return description
+     * Sample Description
+     *
+     * @since 1.0.0
      */
     constructor(sampleProperty1: Int, sampleProperty2: Int) : this(sampleProperty1)
 }
