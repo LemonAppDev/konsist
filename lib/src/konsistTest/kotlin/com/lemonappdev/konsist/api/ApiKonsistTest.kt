@@ -19,7 +19,7 @@ class ApiKonsistTest {
     }
 
     @Test
-    fun `every api method has return tag in KDoc`() {
+    fun `every api method has valid KDoc`() {
         testScope
             .functions(includeNested = true, includeLocal = true)
             .assert { it.hasValidKDoc(verifyParamTag = true, verifyReturnTag = true) }
