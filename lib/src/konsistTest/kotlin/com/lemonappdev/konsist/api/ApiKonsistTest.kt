@@ -22,14 +22,7 @@ class ApiKonsistTest {
     fun `every api method has return tag in KDoc`() {
         testScope
             .functions(includeNested = true, includeLocal = true)
-            .assert { it.hasCompleteKDoc(verifyReturnTag = true) }
-    }
-
-    @Test
-    fun `every api declaration has parameter tag in KDoc`() {
-        testScope
-            .declarations(includeNested = true, includeLocal = true)
-            .assert { it.hasCompleteKDoc(verifyParamTag = true) }
+            .assert { it.hasValidKDoc(verifyParamTag = true, verifyReturnTag = true) }
     }
 
     companion object {
