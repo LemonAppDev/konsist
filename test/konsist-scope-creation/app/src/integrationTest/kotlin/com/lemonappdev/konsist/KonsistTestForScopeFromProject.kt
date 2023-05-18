@@ -23,6 +23,7 @@ class KonsistTestForScopeFromProject {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForOperator.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
@@ -34,6 +35,7 @@ class KonsistTestForScopeFromProject {
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProjectFile.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromSourceSet.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForSlice.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/util/PathProvider.kt",
@@ -64,6 +66,7 @@ class KonsistTestForScopeFromProject {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForOperator.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
@@ -75,6 +78,7 @@ class KonsistTestForScopeFromProject {
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProjectFile.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromSourceSet.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForSlice.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/util/PathProvider.kt",
@@ -144,6 +148,7 @@ class KonsistTestForScopeFromProject {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForOperator.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
@@ -155,6 +160,7 @@ class KonsistTestForScopeFromProject {
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProjectFile.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromSourceSet.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForSlice.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/util/PathProvider.kt",
@@ -209,6 +215,7 @@ class KonsistTestForScopeFromProject {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForOperator.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
@@ -220,6 +227,7 @@ class KonsistTestForScopeFromProject {
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProjectFile.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromSourceSet.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForSlice.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/util/PathProvider.kt",

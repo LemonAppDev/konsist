@@ -1,22 +1,48 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.ext.mapToFilePaths
+import com.lemonappdev.konsist.util.PathProvider.appIntegrationTestSourceSetDirectory
 import com.lemonappdev.konsist.util.PathProvider.appMainSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.dataMainSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.dataTestSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.rootMainSourceSetDirectory
+import com.lemonappdev.konsist.util.PathProvider.rootTestSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KonsistTestForSlice {
     @Test
-    fun `toString method`() {
+    fun `slice-with-predicate-name`() {
         // given
-        val sut = Konsist
-            .scopeFromDirectory("$appMainSourceSetDirectory/sample/")
-            .toString()
+        val sut = Konsist.scopeFromPackage("com.lemonappdev.sample", sourceSetName = "test")
 
         // then
-        sut shouldBeEqualTo """
-            $appMainSourceSetDirectory/sample/AppClass.kt
-            $appMainSourceSetDirectory/sample/data/AppDataClass.kt
-        """.trimIndent()
+        val actual = sut.slice { it.name.startsWith("RootClass") }
+
+        actual
+            .mapToFilePaths()
+            .shouldBeEqualTo(
+                listOf(
+                    "${rootTestSourceSetDirectory}/sample/RootClassTest.kt",
+                ),
+            )
+    }
+
+    @Test
+    fun `slice-with-predicate-import`() {
+        // given
+        val sut = Konsist.scopeFromPackage("com.lemonappdev.sample", sourceSetName = "main")
+
+        // then
+        val actual = sut.slice { it.hasImports("java.awt.image.SampleModel") }
+
+        actual
+            .mapToFilePaths()
+            .shouldBeEqualTo(
+                listOf(
+                    "$dataMainSourceSetDirectory/sample/LibClass.kt",
+                ),
+            )
     }
 }
