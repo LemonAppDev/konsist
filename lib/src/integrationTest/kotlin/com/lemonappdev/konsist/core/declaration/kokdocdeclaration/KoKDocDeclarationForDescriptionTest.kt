@@ -2,45 +2,88 @@ package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoKDocDeclarationForDescriptionTest {
-    @Test
-    fun `class-with-tags`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesForClass")
+    fun `kdoc-description-for-class`(
+        fileName: String,
+        value: String,
+    ) {
         // given
-        val sut = getSnippetFile("class-with-tags")
+        val sut = getSnippetFile(fileName)
             .classes()
             .first()
             .kDoc
 
         // then
-        sut?.description shouldBeEqualTo "This is a sample class that demonstrates the usage of KDoc tags."
+        sut?.description shouldBeEqualTo value
     }
 
-    @Test
-    fun `function-with-tags`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesForFunction")
+    fun `kdoc-description-for-function`(
+        fileName: String,
+        value: String,
+    ) {
         // given
-        val sut = getSnippetFile("function-with-tags")
+        val sut = getSnippetFile(fileName)
             .functions(includeNested = true)
             .first()
             .kDoc
 
         // then
-        sut?.description shouldBeEqualTo "This is a sample method that demonstrates the usage of KDoc tags."
+        sut?.description shouldBeEqualTo value
     }
 
-    @Test
-    fun `property-with-tags`() {
+    @ParameterizedTest
+    @MethodSource("provideValuesForProperty")
+    fun `kdoc-description-for-property`(
+        fileName: String,
+        value: String,
+    ) {
         // given
-        val sut = getSnippetFile("property-with-tags")
+        val sut = getSnippetFile(fileName)
             .properties(includeNested = true)
             .first()
             .kDoc
 
         // then
-        sut?.description shouldBeEqualTo "This is a sample property that demonstrates the usage of KDoc tags."
+        sut?.description shouldBeEqualTo value
     }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/fordescription/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForClass() = listOf(
+            arguments("class-with-description-and-tags", "This is a sample class that demonstrates the usage of KDoc tags."),
+            arguments("class-with-description-and-without-tags", "This is a sample class that demonstrates the usage of KDoc tags."),
+            arguments("class-without-description-and-with-tags", ""),
+            arguments("class-with-empty-kdoc", ""),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForFunction() = listOf(
+            arguments("function-with-description-and-tags", "This is a sample method that demonstrates the usage of KDoc tags."),
+            arguments("function-with-description-and-without-tags", "This is a sample method that demonstrates the usage of KDoc tags."),
+            arguments("function-without-description-and-with-tags", ""),
+            arguments("function-with-empty-kdoc", ""),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForProperty() = listOf(
+            arguments("property-with-description-and-tags", "This is a sample property that demonstrates the usage of KDoc tags."),
+            arguments("property-with-description-and-without-tags", "This is a sample property that demonstrates the usage of KDoc tags."),
+            arguments("property-without-description-and-with-tags", ""),
+            arguments("property-with-empty-kdoc", ""),
+        )
+    }
 }

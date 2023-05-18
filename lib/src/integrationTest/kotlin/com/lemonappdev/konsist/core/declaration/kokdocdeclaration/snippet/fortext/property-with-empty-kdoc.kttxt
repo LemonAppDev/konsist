@@ -1,0 +1,15 @@
+class SampleClass(){
+    fun sampleMethod() {
+        // Implementation
+    }
+
+    /**
+     */
+    var sampleProperty: Int
+        get() {
+            return 6
+        }
+        set(value) {
+            // Setter implementation
+        }
+}

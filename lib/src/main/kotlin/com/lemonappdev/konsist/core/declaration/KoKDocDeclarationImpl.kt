@@ -44,11 +44,13 @@ internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoP
     override val tags by lazy {
         val regex = "@(\\w+)".toRegex()
 
-        val tagsAsStringList = text.substringAfter("@")
+        val tagsAsStringList = text
+            .substringAfter("@", "")
             .split("\n@")
             .map { ("@$it").trimEnd() }
 
         val tagsWithName = tagsAsStringList
+            .filterNot { it == "@" }
             .flatMap { regex.findAll(it) }
             .map {
                 if (KoKDocTag.values().none { koTag -> koTag.type == it.value }) {

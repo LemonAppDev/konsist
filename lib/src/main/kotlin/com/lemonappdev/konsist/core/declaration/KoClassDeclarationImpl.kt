@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.util.TagHelper
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
@@ -102,6 +103,8 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
         names.isEmpty() -> hasParentClass() || hasParentInterfaces()
         else -> names.all { hasParentClass(it) || hasParentInterfaces(it) }
     }
+
+    override fun hasValidParamTag(enabled: Boolean) = TagHelper.hasValidParamTag(enabled, primaryConstructor?.parameters, kDoc)
 
     internal companion object {
         private val cache = KoDeclarationCache<KoClassDeclarationImpl>()
