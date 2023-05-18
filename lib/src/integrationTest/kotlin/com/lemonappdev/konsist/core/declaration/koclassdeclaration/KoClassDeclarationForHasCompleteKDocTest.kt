@@ -23,7 +23,7 @@ class KoClassDeclarationForHasCompleteKDocTest {
         sut
             .hasValidKDoc(
                 verifyDescription = false,
-                verifyParamTag = verifyParamTag
+                verifyParamTag = verifyParamTag,
             )
             .shouldBeEqualTo(value)
     }

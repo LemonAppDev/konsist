@@ -2,9 +2,9 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
-import com.lemonappdev.konsist.core.util.TagHelper
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationHelper
+import com.lemonappdev.konsist.core.util.TagHelper
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
@@ -109,23 +109,23 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         verifyVersionTag: Boolean,
         verifyPropertySetterTag: Boolean,
         verifyPropertyGetterTag: Boolean,
-    ) = hasKDoc()
-            && hasValidDescription(verifyDescription)
-            && hasValidParamTag(verifyParamTag)
-            && hasValidReturnTag(verifyReturnTag)
-            && hasValidConstructorTag(verifyConstructorTag)
-            && hasValidReceiverTag(verifyReceiverTag)
-            && hasValidPropertyTag(verifyPropertyTag)
-            && hasValidThrowsTag(verifyThrowsTag)
-            && hasValidExceptionTag(verifyExceptionTag)
-            && hasValidSampleTag(verifySampleTag)
-            && hasValidSeeTag(verifySeeTag)
-            && hasValidAuthorTag(verifyAuthorTag)
-            && hasValidSinceTag(verifySinceTag)
-            && hasValidSuppressTag(verifySuppressTag)
-            && hasValidVersionTag(verifyVersionTag)
-            && hasValidPropertySetterTag(verifyPropertySetterTag)
-            && hasValidPropertyGetterTag(verifyPropertyGetterTag)
+    ) = hasKDoc() &&
+        hasValidDescription(verifyDescription) &&
+        hasValidParamTag(verifyParamTag) &&
+        hasValidReturnTag(verifyReturnTag) &&
+        hasValidConstructorTag(verifyConstructorTag) &&
+        hasValidReceiverTag(verifyReceiverTag) &&
+        hasValidPropertyTag(verifyPropertyTag) &&
+        hasValidThrowsTag(verifyThrowsTag) &&
+        hasValidExceptionTag(verifyExceptionTag) &&
+        hasValidSampleTag(verifySampleTag) &&
+        hasValidSeeTag(verifySeeTag) &&
+        hasValidAuthorTag(verifyAuthorTag) &&
+        hasValidSinceTag(verifySinceTag) &&
+        hasValidSuppressTag(verifySuppressTag) &&
+        hasValidVersionTag(verifyVersionTag) &&
+        hasValidPropertySetterTag(verifyPropertySetterTag) &&
+        hasValidPropertyGetterTag(verifyPropertyGetterTag)
 
     override fun resideInFilePath(path: String) = LocationHelper.resideInLocation(path, filePath)
 

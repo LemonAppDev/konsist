@@ -23,7 +23,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
         sut
             .hasValidKDoc(
                 verifyDescription = false,
-                verifyParamTag = verifyParamTag
+                verifyParamTag = verifyParamTag,
             )
             .shouldBeEqualTo(value)
     }
@@ -44,7 +44,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
         sut
             .hasValidKDoc(
                 verifyDescription = false,
-                verifyReturnTag = verifyReturnTag
+                verifyReturnTag = verifyReturnTag,
             )
             .shouldBeEqualTo(value)
     }
