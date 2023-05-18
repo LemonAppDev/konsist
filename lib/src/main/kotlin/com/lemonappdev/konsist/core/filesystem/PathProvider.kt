@@ -36,6 +36,6 @@ class PathProvider(
     companion object {
         private val pathVerifier = PathVerifier()
 
-        internal fun getInstance() = PathProvider(KoFileFactory(), ProjectRootDirProviderFactory(pathVerifier))
+        fun getInstance() = PathProvider(KoFileFactory(), ProjectRootDirProviderFactory(pathVerifier))
     }
 }
