@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoFunctionDeclarationForHasCompleteKDocTest {
+class KoFunctionDeclarationforhasvalidkdocTest {
     @ParameterizedTest
     @MethodSource("provideValuesForParamTag")
     fun `function-with-kdoc-with-param-tags`(
@@ -50,7 +50,7 @@ class KoFunctionDeclarationForHasCompleteKDocTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forhascompletekdoc/", fileName)
+        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forhasvalidkdoc/", fileName)
 
     companion object {
         @Suppress("unused")
