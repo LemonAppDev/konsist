@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoClassDeclarationforhasvalidkdocTest {
+class KoClassDeclarationForHasValidKDocTest {
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `class-with-kdoc-with-param-tags`(
