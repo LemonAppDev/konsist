@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.declaration.taghelper.TagHelper
+import com.lemonappdev.konsist.core.util.TagHelper
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
@@ -75,9 +75,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
 
     override fun localDeclarations(): Sequence<KoDeclarationImpl> = localDeclarations
 
-    override fun verifyParamTag(value: Boolean) = TagHelper.verifyParamTag(value, parameters, kDoc)
-
-    override fun verifyReturnTag(value: Boolean) = TagHelper.verifyReturnTag(value, kDoc)
+    override fun hasValidReturnTag(enabled: Boolean) = TagHelper.hasValidReturnTag(enabled, kDoc)
 
     internal companion object {
         private val cache = KoDeclarationCache<KoFunctionDeclarationImpl>()

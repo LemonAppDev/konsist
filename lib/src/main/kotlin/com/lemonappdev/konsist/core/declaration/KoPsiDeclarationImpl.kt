@@ -2,9 +2,9 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
-import com.lemonappdev.konsist.core.declaration.taghelper.TagHelper
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationHelper
+import com.lemonappdev.konsist.core.util.TagHelper
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
@@ -59,40 +59,40 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
 
     override fun hasKDoc() = kDoc != null
 
-    protected open fun verifyDescription(value: Boolean) = TagHelper.verifyDescription(value, kDoc)
+    protected open fun hasValidDescription(enabled: Boolean) = TagHelper.hasValidDescription(enabled, kDoc)
 
-    protected open fun verifyParamTag(value: Boolean) = true
+    protected open fun hasValidParamTag(enabled: Boolean) = true
 
-    protected open fun verifyReturnTag(value: Boolean) = true
+    protected open fun hasValidReturnTag(enabled: Boolean) = true
 
-    protected open fun verifyConstructorTag(value: Boolean) = true
+    protected open fun hasValidConstructorTag(enabled: Boolean) = true
 
-    protected open fun verifyReceiverTag(value: Boolean) = true
+    protected open fun hasValidReceiverTag(enabled: Boolean) = true
 
-    protected open fun verifyPropertyTag(value: Boolean) = true
+    protected open fun hasValidPropertyTag(enabled: Boolean) = true
 
-    protected open fun verifyThrowsTag(value: Boolean) = true
+    protected open fun hasValidThrowsTag(enabled: Boolean) = true
 
-    protected open fun verifyExceptionTag(value: Boolean) = true
+    protected open fun hasValidExceptionTag(enabled: Boolean) = true
 
-    protected open fun verifySampleTag(value: Boolean) = true
+    protected open fun hasValidSampleTag(enabled: Boolean) = true
 
-    protected open fun verifySeeTag(value: Boolean) = true
+    protected open fun hasValidSeeTag(enabled: Boolean) = true
 
-    protected open fun verifyAuthorTag(value: Boolean) = true
+    protected open fun hasValidAuthorTag(enabled: Boolean) = true
 
-    protected open fun verifySinceTag(value: Boolean) = true
+    protected open fun hasValidSinceTag(enabled: Boolean) = true
 
-    protected open fun verifySuppressTag(value: Boolean) = true
+    protected open fun hasValidSuppressTag(enabled: Boolean) = true
 
-    protected open fun verifyVersionTag(value: Boolean) = true
+    protected open fun hasValidVersionTag(enabled: Boolean) = true
 
-    protected open fun verifyPropertySetterTag(value: Boolean) = true
+    protected open fun hasValidPropertySetterTag(enabled: Boolean) = true
 
-    protected open fun verifyPropertyGetterTag(value: Boolean) = true
+    protected open fun hasValidPropertyGetterTag(enabled: Boolean) = true
 
     @Suppress("detekt.CyclomaticComplexMethod")
-    override fun hasCompleteKDoc(
+    override fun hasValidKDoc(
         verifyDescription: Boolean,
         verifyParamTag: Boolean,
         verifyReturnTag: Boolean,
@@ -109,28 +109,23 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         verifyVersionTag: Boolean,
         verifyPropertySetterTag: Boolean,
         verifyPropertyGetterTag: Boolean,
-    ): Boolean {
-        val descriptionValue = verifyDescription(verifyDescription)
-        val paramValue = verifyParamTag(verifyParamTag)
-        val returnValue = verifyReturnTag(verifyReturnTag)
-        val constructorValue = verifyConstructorTag(verifyConstructorTag)
-        val receiverValue = verifyReceiverTag(verifyReceiverTag)
-        val propertyValue = verifyPropertyTag(verifyPropertyTag)
-        val throwsValue = verifyThrowsTag(verifyThrowsTag)
-        val exceptionValue = verifyExceptionTag(verifyExceptionTag)
-        val sampleValue = verifySampleTag(verifySampleTag)
-        val seeValue = verifySeeTag(verifySeeTag)
-        val authorValue = verifyAuthorTag(verifyAuthorTag)
-        val sinceValue = verifySinceTag(verifySinceTag)
-        val suppressValue = verifySuppressTag(verifySuppressTag)
-        val versionValue = verifyVersionTag(verifyVersionTag)
-        val propertySetterValue = verifyPropertySetterTag(verifyPropertySetterTag)
-        val propertyGetterValue = verifyPropertyGetterTag(verifyPropertyGetterTag)
-
-        return hasKDoc() && descriptionValue && paramValue && returnValue && constructorValue && receiverValue && propertyValue &&
-            throwsValue && exceptionValue && sampleValue && seeValue && authorValue && sinceValue && suppressValue && versionValue &&
-            propertySetterValue && propertyGetterValue
-    }
+    ) = hasKDoc() &&
+        hasValidDescription(verifyDescription) &&
+        hasValidParamTag(verifyParamTag) &&
+        hasValidReturnTag(verifyReturnTag) &&
+        hasValidConstructorTag(verifyConstructorTag) &&
+        hasValidReceiverTag(verifyReceiverTag) &&
+        hasValidPropertyTag(verifyPropertyTag) &&
+        hasValidThrowsTag(verifyThrowsTag) &&
+        hasValidExceptionTag(verifyExceptionTag) &&
+        hasValidSampleTag(verifySampleTag) &&
+        hasValidSeeTag(verifySeeTag) &&
+        hasValidAuthorTag(verifyAuthorTag) &&
+        hasValidSinceTag(verifySinceTag) &&
+        hasValidSuppressTag(verifySuppressTag) &&
+        hasValidVersionTag(verifyVersionTag) &&
+        hasValidPropertySetterTag(verifyPropertySetterTag) &&
+        hasValidPropertyGetterTag(verifyPropertyGetterTag)
 
     override fun resideInFilePath(path: String) = LocationHelper.resideInLocation(path, filePath)
 

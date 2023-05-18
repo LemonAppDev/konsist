@@ -34,7 +34,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withCompleteKDoc(
     verifyPropertySetterTag: Boolean = false,
     verifyPropertyGetterTag: Boolean = false,
 ): Sequence<T> = filter {
-    it.hasCompleteKDoc(
+    it.hasValidKDoc(
         verifyDescription,
         verifyParamTag,
         verifyReturnTag,
@@ -75,7 +75,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutCompleteKDoc(
     verifyPropertySetterTag: Boolean = false,
     verifyPropertyGetterTag: Boolean = false,
 ): Sequence<T> = filterNot {
-    it.hasCompleteKDoc(
+    it.hasValidKDoc(
         verifyDescription,
         verifyParamTag,
         verifyReturnTag,

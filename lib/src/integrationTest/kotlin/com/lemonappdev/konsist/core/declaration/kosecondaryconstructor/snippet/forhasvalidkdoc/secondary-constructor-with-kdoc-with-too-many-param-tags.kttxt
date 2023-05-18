@@ -1,0 +1,8 @@
+class SampleClass(val sampleProperty1: Int) {
+    /**
+     * @param sampleProperty1 The first type parameter for this class.
+     * @param sampleProperty2 The second type parameter for this class.
+     * @param sampleProperty3 The third type parameter for this class.
+     */
+    constructor(sampleProperty1: Int, sampleProperty2: Int) : this(sampleProperty1)
+}

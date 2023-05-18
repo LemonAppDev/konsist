@@ -1,0 +1,6 @@
+/**
+ * @return sample return type
+ */
+fun sampleFunction1(sampleArgument1: Int, sampleArgument2: String): Int {
+    return 6
+}

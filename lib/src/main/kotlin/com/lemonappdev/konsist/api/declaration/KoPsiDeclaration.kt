@@ -42,7 +42,7 @@ interface KoPsiDeclaration {
     /**
      * Whether the declaration has kDoc with the given requirements.
      */
-    fun hasCompleteKDoc(
+    fun hasValidKDoc(
         verifyDescription: Boolean = true,
         verifyParamTag: Boolean = false,
         verifyReturnTag: Boolean = false,
