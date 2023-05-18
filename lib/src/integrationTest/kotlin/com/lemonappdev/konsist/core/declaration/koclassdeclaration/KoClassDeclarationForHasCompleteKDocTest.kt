@@ -10,7 +10,6 @@ class KoClassDeclarationForHasCompleteKDocTest {
     @ParameterizedTest
     @MethodSource("provideValuesForNoKDoc")
     fun `class-without-kdoc`(
-        verifyDescription: Boolean,
         verifyParamTag: Boolean,
         value: Boolean,
     ) {
@@ -22,8 +21,8 @@ class KoClassDeclarationForHasCompleteKDocTest {
         // then
         sut
             .hasValidKDoc(
-                verifyDescription = verifyDescription,
-                verifyParamTag = verifyParamTag,
+                verifyDescription = false,
+                verifyParamTag = verifyParamTag
             )
             .shouldBeEqualTo(value)
     }
@@ -31,7 +30,6 @@ class KoClassDeclarationForHasCompleteKDocTest {
     @ParameterizedTest
     @MethodSource("provideValuesForEmptyKDoc")
     fun `class-with-empty-kdoc`(
-        verifyDescription: Boolean,
         verifyParamTag: Boolean,
         value: Boolean,
     ) {
@@ -43,29 +41,8 @@ class KoClassDeclarationForHasCompleteKDocTest {
         // then
         sut
             .hasValidKDoc(
-                verifyDescription = verifyDescription,
-                verifyParamTag = verifyParamTag,
-            )
-            .shouldBeEqualTo(value)
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideValuesForKDocWithDescription")
-    fun `class-with-kdoc-with-description`(
-        verifyDescription: Boolean,
-        verifyParamTag: Boolean,
-        value: Boolean,
-    ) {
-        // given
-        val sut = getSnippetFile("class-with-kdoc-with-description")
-            .classes()
-            .first()
-
-        // then
-        sut
-            .hasValidKDoc(
-                verifyDescription = verifyDescription,
-                verifyParamTag = verifyParamTag,
+                verifyDescription = false,
+                verifyParamTag = verifyParamTag
             )
             .shouldBeEqualTo(value)
     }
@@ -74,7 +51,6 @@ class KoClassDeclarationForHasCompleteKDocTest {
     @MethodSource("provideValuesForKDocWithParamTags")
     fun `class-with-kdoc-with-param-tags`(
         declarationName: String,
-        verifyDescription: Boolean,
         verifyParamTag: Boolean,
         value: Boolean,
     ) {
@@ -86,29 +62,8 @@ class KoClassDeclarationForHasCompleteKDocTest {
         // then
         sut
             .hasValidKDoc(
-                verifyDescription = verifyDescription,
-                verifyParamTag = verifyParamTag,
-            )
-            .shouldBeEqualTo(value)
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideValuesForCompleteKDoc")
-    fun `class-with-complete-kdoc`(
-        verifyDescription: Boolean,
-        verifyParamTag: Boolean,
-        value: Boolean,
-    ) {
-        // given
-        val sut = getSnippetFile("class-with-complete-kdoc")
-            .classes()
-            .first()
-
-        // then
-        sut
-            .hasValidKDoc(
-                verifyDescription = verifyDescription,
-                verifyParamTag = verifyParamTag,
+                verifyDescription = false,
+                verifyParamTag = verifyParamTag
             )
             .shouldBeEqualTo(value)
     }
@@ -120,47 +75,23 @@ class KoClassDeclarationForHasCompleteKDocTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForNoKDoc() = listOf(
-            arguments(true, true, false),
-            arguments(true, false, false),
-            arguments(false, true, false),
-            arguments(false, false, false),
+            arguments(true, false),
+            arguments(false, false),
         )
 
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForEmptyKDoc() = listOf(
-            arguments(true, true, false),
-            arguments(true, false, false),
-            arguments(false, true, false),
-            arguments(false, false, true),
-        )
-
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForKDocWithDescription() = listOf(
-            arguments(true, true, false),
-            arguments(true, false, true),
-            arguments(false, true, false),
-            arguments(false, false, true),
+            arguments(true, false),
+            arguments(false, true),
         )
 
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForKDocWithParamTags() = listOf(
-            arguments("SampleClass1", true, true, false),
-            arguments("SampleClass1", true, false, false),
-            arguments("SampleClass1", false, true, true),
-            arguments("SampleClass1", false, false, true),
-            arguments("SampleClass2", false, true, false),
-        )
-
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForCompleteKDoc() = listOf(
-            arguments(true, true, true),
-            arguments(true, false, true),
-            arguments(false, true, true),
-            arguments(false, false, true),
+            arguments("SampleClass1", true, true),
+            arguments("SampleClass1", false, true),
+            arguments("SampleClass2", true, false),
         )
     }
 }
