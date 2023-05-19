@@ -24,13 +24,13 @@ class SnippetKonsistTest {
             .map { it.name.removeSuffix(".kttxt") }
 
         val snippetMap = mutableMapOf<String, String>()
-
         snippetNames.forEachIndexed { index, s -> snippetMap[s] = snippetPaths[index] }
 
         val r1 = Regex("""getSnippetFile\("(.+)"\)""")
         val r2 = Regex("""arguments\("([^"]+)"""")
         val withGetSnippetMethod = snippetNamesFromFiles(r1, "getSnippetFile(\"", "\")")
         val withArgument = snippetNamesFromFiles(r2, "arguments(\"", "\"")
+
         val snippetNamesUsedInTests = (withGetSnippetMethod + withArgument).toSet()
 
         // then
