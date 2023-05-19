@@ -12,12 +12,12 @@ interface KoScopeCreator {
     /**
      * Returns a path to the root project directory.
      */
-    val rootProjectPath: String
+    val projectRootPath: String
 
     /**
      * Returns a root project directory.
      */
-    val rootProjectDirectory: File
+    val projectRootDirectory: File
 
     /**
      * Returns a [KoScope] containing all of Kotlin files in the project.
