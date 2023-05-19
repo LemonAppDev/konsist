@@ -19,6 +19,7 @@ import com.lemonappdev.konsist.api.KoKDocTag.VERSION
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
+import java.util.Locale
 
 internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoPsiDeclarationImpl(kDocElement), KoKDocDeclaration {
     override val text: String by lazy {
@@ -47,7 +48,7 @@ internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoP
         val tagsAsStringList = text
             .substringAfter("@", "")
             .split("\n@")
-            .map { ("@${it.lowercase()}").trimEnd() }
+            .map { ("@${it.replaceFirstChar { char -> char.lowercase(Locale.getDefault()) }}").trimEnd() }
 
         val tagsWithName = tagsAsStringList
             .filterNot { it == "@" }

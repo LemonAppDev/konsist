@@ -4,6 +4,9 @@ import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 
 /**
  * Sequence containing all declarations that have delegate with given name.
+ *
+ * @param names The delegate names to include. If empty, all declarations with delegate are included.
+ * @return A sequence containing declarations with the specified delegate name(s).
  */
 fun Sequence<KoParentDeclaration>.withDelegate(vararg names: String): Sequence<KoParentDeclaration> = filter {
     when {
@@ -14,6 +17,9 @@ fun Sequence<KoParentDeclaration>.withDelegate(vararg names: String): Sequence<K
 
 /**
  * Sequence containing all declarations that don't have delegate with given name.
+ *
+ * @param names The delegate names to exlude. If empty, all declarations without delegate are included.
+ * @return A sequence containing declarations without the specified delegate name(s).
  */
 fun Sequence<KoParentDeclaration>.withoutDelegate(vararg names: String): Sequence<KoParentDeclaration> = filter {
     when {

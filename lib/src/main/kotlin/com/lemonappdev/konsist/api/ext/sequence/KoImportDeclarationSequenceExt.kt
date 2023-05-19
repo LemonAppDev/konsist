@@ -4,6 +4,9 @@ import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 
 /**
  * Sequence containing all declarations that have an alias.
+ *
+ * @param names The names of aliases to include. If empty, all import declarations with aliases are included.
+ * @return A sequence containing import declarations with aliases.
  */
 fun Sequence<KoImportDeclaration>.withAlias(vararg names: String): Sequence<KoImportDeclaration> = filter {
     when {
@@ -14,6 +17,9 @@ fun Sequence<KoImportDeclaration>.withAlias(vararg names: String): Sequence<KoIm
 
 /**
  * Sequence containing all declarations that don't have an alias.
+ *
+ * @param names The names of aliases to exclude. If empty, all import declarations without aliases are included.
+ * @return A sequence containing import declarations without aliases.
  */
 fun Sequence<KoImportDeclaration>.withoutAlias(vararg names: String): Sequence<KoImportDeclaration> = filter {
     when {
@@ -23,11 +29,15 @@ fun Sequence<KoImportDeclaration>.withoutAlias(vararg names: String): Sequence<K
 }
 
 /**
- * Sequence containing all declarations that have a wildcard.
+ * Sequence containing all import declarations that have a wildcard.
+ *
+ * @return A sequence containing import declarations with a wildcard.
  */
 fun Sequence<KoImportDeclaration>.withWildcard(): Sequence<KoImportDeclaration> = filter { it.isWildcard }
 
 /**
- * Sequence containing all declarations that don't have a wildcard.
+ * Sequence containing all import declarations that don't have a wildcard.
+ *
+ * @return A sequence containing import declarations without a wildcard.
  */
 fun Sequence<KoImportDeclaration>.withoutWildcard(): Sequence<KoImportDeclaration> = filterNot { it.isWildcard }
