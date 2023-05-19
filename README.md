@@ -1,4 +1,6 @@
-![Konsist](misc/page-konsist-logo.png)
+<div align="center">
+<img  align="center" src="./misc/page-konsist-logo.png" alt="Konist" width="315" /></div>
+<br>
 ==========
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
