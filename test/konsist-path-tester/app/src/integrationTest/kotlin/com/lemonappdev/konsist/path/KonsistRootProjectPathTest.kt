@@ -18,6 +18,6 @@ class KonsistRootProjectPathTest {
     @Test
     fun `projectRootPath`() {
         // then
-        Konsist.rootProjectPath shouldBeEqualTo projectRootPath
+        Konsist.projectRootPath shouldBeEqualTo projectRootPath
     }
 }
