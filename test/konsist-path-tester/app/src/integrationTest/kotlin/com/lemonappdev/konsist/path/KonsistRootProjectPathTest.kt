@@ -22,8 +22,20 @@ class KonsistRootProjectPathTest {
     }
 
     @Test
-    fun `rootProjectDirectory`() {
+    fun `rootProjectDirectory is equal to projectRootPath`() {
         // then
         Konsist.rootProjectDirectory shouldBeEqualTo File(projectRootPath)
+    }
+
+    @Test
+    fun `rootProjectDirectory exists`() {
+        // then
+        Konsist.rootProjectDirectory.exists() shouldBeEqualTo true
+    }
+
+    @Test
+    fun `rootProjectDirectory isDirectory`() {
+        // then
+        Konsist.rootProjectDirectory.isDirectory shouldBeEqualTo true
     }
 }
