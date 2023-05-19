@@ -3,20 +3,6 @@ package com.lemonappdev.konsist.api.ext.sequence
 import com.lemonappdev.konsist.api.declaration.KoParametrizedDeclaration
 
 /**
- * Sequence containing all declarations that have parameter.
- *
- * @return A sequence containing declarations that have a parameter.
- */
-fun <T : KoParametrizedDeclaration> Sequence<T>.withParameter(): Sequence<T> = filter { it.hasParameterNamed() }
-
-/**
- * Sequence containing all declarations that don't have parameter.
- *
- * @return A sequence containing declarations that don't have a parameter.
- */
-fun <T : KoParametrizedDeclaration> Sequence<T>.withoutParameter(): Sequence<T> = filterNot { it.hasParameterNamed() }
-
-/**
  * Sequence containing all declarations that have all parameters.
  *
  * @param names The names of the parameters to include.

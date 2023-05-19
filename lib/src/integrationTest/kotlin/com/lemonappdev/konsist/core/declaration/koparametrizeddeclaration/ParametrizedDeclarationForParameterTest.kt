@@ -15,8 +15,7 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut) {
-            parameters shouldBeEqualTo null
-            hasParameterNamed() shouldBeEqualTo false
+            parameters shouldBeEqualTo emptyList()
         }
     }
 
@@ -30,8 +29,7 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut) {
-            it?.parameters shouldBeEqualTo null
-            it?.hasParameterNamed() shouldBeEqualTo false
+            it?.parameters shouldBeEqualTo emptyList()
         }
     }
 
@@ -44,8 +42,8 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut.parameters) {
-            it?.size shouldBeEqualTo 1
-            it?.first()?.name shouldBeEqualTo "sampleParameter"
+            it.size shouldBeEqualTo 1
+            it.first().name shouldBeEqualTo "sampleParameter"
         }
     }
 
@@ -58,7 +56,6 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut) {
-            hasParameterNamed() shouldBeEqualTo true
             hasParameterNamed("sampleProperty") shouldBeEqualTo true
             hasParameterNamed("otherProperty") shouldBeEqualTo false
         }
@@ -73,8 +70,8 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut.parameters) {
-            it?.size shouldBeEqualTo 1
-            it?.first()?.name shouldBeEqualTo "sampleParameter"
+            it.size shouldBeEqualTo 1
+            it.first().name shouldBeEqualTo "sampleParameter"
         }
     }
 
@@ -87,7 +84,6 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut) {
-            hasParameterNamed() shouldBeEqualTo true
             hasParameterNamed("sampleParameter") shouldBeEqualTo true
             hasParameterNamed("otherParameter") shouldBeEqualTo false
         }
@@ -103,8 +99,8 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut.parameters) {
-            it?.size shouldBeEqualTo 1
-            it?.first()?.name shouldBeEqualTo "sampleParameter"
+            it.size shouldBeEqualTo 1
+            it.first().name shouldBeEqualTo "sampleParameter"
         }
     }
 
@@ -118,7 +114,6 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut) {
-            hasParameterNamed() shouldBeEqualTo true
             hasParameterNamed("sampleParameter") shouldBeEqualTo true
             hasParameterNamed("otherParameter") shouldBeEqualTo false
         }

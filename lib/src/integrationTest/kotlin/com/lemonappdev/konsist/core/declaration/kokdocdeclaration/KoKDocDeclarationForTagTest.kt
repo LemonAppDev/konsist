@@ -16,12 +16,9 @@ import com.lemonappdev.konsist.api.KoKDocTag.SINCE
 import com.lemonappdev.konsist.api.KoKDocTag.SUPPRESS
 import com.lemonappdev.konsist.api.KoKDocTag.THROWS
 import com.lemonappdev.konsist.api.KoKDocTag.VERSION
-import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -55,8 +52,7 @@ class KoKDocDeclarationForTagTest {
             .kDoc
 
         // then
-        val actual = { sut?.tags }
-        actual shouldThrow KoInternalException::class withMessage "Unknown doc tag: @unknown, declaration:\nnull"
+        sut?.tags shouldBeEqualTo listOf()
     }
 
     @Test

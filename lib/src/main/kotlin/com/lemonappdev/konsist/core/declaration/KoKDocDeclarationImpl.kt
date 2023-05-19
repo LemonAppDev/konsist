@@ -17,7 +17,6 @@ import com.lemonappdev.konsist.api.KoKDocTag.SUPPRESS
 import com.lemonappdev.konsist.api.KoKDocTag.THROWS
 import com.lemonappdev.konsist.api.KoKDocTag.VERSION
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
-import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import java.util.Locale
 
@@ -53,13 +52,7 @@ internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoP
         val tagsWithName = tagsAsStringList
             .filterNot { it == "@" }
             .flatMap { regex.findAll(it) }
-            .map {
-                if (KoKDocTag.values().none { koTag -> koTag.type == it.value }) {
-                    throw KoInternalException("Unknown doc tag: ${it.value}")
-                }
-
-                KoKDocTag.values().first { tag -> tag.type == it.value }
-            }
+            .mapNotNull { KoKDocTag.values().firstOrNull { tag -> tag.type == it.value } }
             .zip(tagsAsStringList)
 
         val tagsGroupingByValued = tagsWithName.groupBy { it.first.isValued }

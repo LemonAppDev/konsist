@@ -91,6 +91,11 @@ interface KoScope :
     ): Sequence<KoPropertyDeclaration>
 
     /**
+     * The scope with given predicate.
+     */
+    fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope
+
+    /**
      * The imports present in the scope.
      */
     fun imports(): Sequence<KoImportDeclaration>
