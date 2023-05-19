@@ -26,7 +26,7 @@ class PathProvider(
         }
 
         return projectRootDirProviderFactory.create()
-            .map { it.getDir(file) }
+            .map { it.getProjectRootDir(file) }
             .first { it != null }
             ?: getProjectRootDirectory(file.absoluteFile.parentFile)
     }
