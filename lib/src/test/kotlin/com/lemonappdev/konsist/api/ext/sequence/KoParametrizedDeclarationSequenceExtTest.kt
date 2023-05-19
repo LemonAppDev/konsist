@@ -8,42 +8,6 @@ import org.junit.jupiter.api.Test
 
 class KoParametrizedDeclarationSequenceExtTest {
     @Test
-    fun `withParameters() returns parametrized declaration with any parameter`() {
-        // given
-        val parametrizedDeclaration1: KoParametrizedDeclarationImpl = mockk {
-            every { hasParameterNamed() } returns true
-        }
-        val parametrizedDeclaration2: KoParametrizedDeclarationImpl = mockk {
-            every { hasParameterNamed() } returns false
-        }
-        val parametrizedDeclarations = sequenceOf(parametrizedDeclaration1, parametrizedDeclaration2)
-
-        // when
-        val sut = parametrizedDeclarations.withParameter()
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(parametrizedDeclaration1)
-    }
-
-    @Test
-    fun `withoutParameters() returns parametrized declaration without any parameter`() {
-        // given
-        val parametrizedDeclaration1: KoParametrizedDeclarationImpl = mockk {
-            every { hasParameterNamed() } returns true
-        }
-        val parametrizedDeclaration2: KoParametrizedDeclarationImpl = mockk {
-            every { hasParameterNamed() } returns false
-        }
-        val parametrizedDeclarations = sequenceOf(parametrizedDeclaration1, parametrizedDeclaration2)
-
-        // when
-        val sut = parametrizedDeclarations.withoutParameter()
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(parametrizedDeclaration2)
-    }
-
-    @Test
     fun `withParameters(String) returns parametrized declaration with all of given parameters`() {
         // given
         val parameter1 = "SampleParameter1"

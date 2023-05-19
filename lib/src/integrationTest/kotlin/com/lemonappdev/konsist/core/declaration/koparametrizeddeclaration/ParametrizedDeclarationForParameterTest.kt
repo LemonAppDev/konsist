@@ -56,7 +56,6 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut) {
-            hasParameterNamed() shouldBeEqualTo true
             hasParameterNamed("sampleProperty") shouldBeEqualTo true
             hasParameterNamed("otherProperty") shouldBeEqualTo false
         }
@@ -85,7 +84,6 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut) {
-            hasParameterNamed() shouldBeEqualTo true
             hasParameterNamed("sampleParameter") shouldBeEqualTo true
             hasParameterNamed("otherParameter") shouldBeEqualTo false
         }
@@ -116,7 +114,6 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut) {
-            hasParameterNamed() shouldBeEqualTo true
             hasParameterNamed("sampleParameter") shouldBeEqualTo true
             hasParameterNamed("otherParameter") shouldBeEqualTo false
         }

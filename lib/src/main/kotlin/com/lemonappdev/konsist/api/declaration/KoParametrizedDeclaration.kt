@@ -12,5 +12,5 @@ interface KoParametrizedDeclaration : KoDeclaration {
     /**
      * Whatever declaration has a parameter with given name.
      */
-    fun hasParameterNamed(name: String? = null): Boolean
+    fun hasParameterNamed(name: String): Boolean
 }
