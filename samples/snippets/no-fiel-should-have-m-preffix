@@ -1,0 +1,6 @@
+Konsist.scopeFromProject()
+    .classes()
+    .assert {
+        val secondCharacterIsUppercase = it.name.getOrNull(1)?.isUpperCase() ?: false
+        it.name.startsWith('m') && secondCharacterIsUppercase
+    }
