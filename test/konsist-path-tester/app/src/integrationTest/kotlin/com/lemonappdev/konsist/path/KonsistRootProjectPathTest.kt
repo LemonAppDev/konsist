@@ -6,17 +6,24 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 class KonsistRootProjectPathTest {
-    @Test
-    fun `scopeFromProject`() {
-        // given
-        val projectRootPath = File("")
+    private val projectRootPath by lazy {
+        File("")
             .absoluteFile
             .path
             .dropLastWhile { it != '/' }
             .dropLastWhile { it != '/' }
             .dropLast(1)
+    }
 
+    @Test
+    fun `projectRootPath`() {
         // then
         Konsist.rootProjectPath shouldBeEqualTo projectRootPath
+    }
+
+    @Test
+    fun `rootProjectDirectory`() {
+        // then
+        Konsist.rootProjectDirectory shouldBeEqualTo File(projectRootPath)
     }
 }
