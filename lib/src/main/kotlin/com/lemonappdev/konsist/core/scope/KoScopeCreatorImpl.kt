@@ -13,14 +13,11 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
 
     private val projectKotlinFiles by lazy {
-        pathProvider
-            .rootProjectDirectory
-            .toKoFiles()
+
+        File(pathProvider.rootProjectPath).toKoFiles()
     }
 
-    override val rootProjectPath = pathProvider.rootProjectPath
-
-    override val rootProjectDirectory = pathProvider.rootProjectDirectory
+    override val projectRootPath = pathProvider.rootProjectPath
 
     override fun scopeFromProject(moduleName: String?, sourceSetName: String?, ignoreBuildConfig: Boolean): KoScope {
         val koFiles = getFiles(moduleName, sourceSetName, ignoreBuildConfig)
@@ -49,6 +46,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         sourceSetName: String? = null,
         ignoreBuildConfig: Boolean = true,
     ): Sequence<KoFileDeclaration> {
+        println("getFiles ${projectKotlinFiles.toList().size}")
+
         val localProjectKotlinFiles = projectKotlinFiles
             .filterNot { isBuildPath(it.filePath) }
             .let {
@@ -64,9 +63,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         var pathPrefix = if (moduleName != null) {
-            "$rootProjectPath/$moduleName"
+            "$projectRootPath/$moduleName"
         } else {
-            "$rootProjectPath.*"
+            "$projectRootPath.*"
         }
 
         pathPrefix = if (sourceSetName != null) {
@@ -109,7 +108,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(files)
     }
 
-    override fun scopeFromProjectDirectory(path: String): KoScope = scopeFromDirectory("$rootProjectPath/$path")
+    override fun scopeFromProjectDirectory(path: String): KoScope = scopeFromDirectory("$projectRootPath/$path")
 
     override fun scopeFromFile(path: String): KoScope {
         val file = File(path)
@@ -122,19 +121,19 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koKoFile)
     }
 
-    override fun scopeFromProjectFile(path: String): KoScope = scopeFromFile("$rootProjectPath/$path")
+    override fun scopeFromProjectFile(path: String): KoScope = scopeFromFile("$projectRootPath/$path")
 
     /**
      * Determines if the given path is a build directory "build" for Gradle and "target" for Maven.
      */
     private fun isBuildPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
-        val gradleRootBuildDirectoryRegex = Regex("$rootProjectPath/$gradleBuildDirectoryName/.*")
-        val gradleModuleBuildDirectoryRegex = Regex("$rootProjectPath/.+/$gradleBuildDirectoryName/.*")
+        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*")
+        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*")
 
         val mavenBuildDirectoryName = "target"
-        val mavenRootBuildDirectoryRegex = Regex("$rootProjectPath/$mavenBuildDirectoryName/.*")
-        val mavenModuleBuildDirectoryRegex = Regex("$rootProjectPath/.+/$mavenBuildDirectoryName/.*")
+        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*")
+        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*")
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
             path.matches(gradleModuleBuildDirectoryRegex) ||
@@ -163,9 +162,13 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
     }
 
-    private fun File.toKoFiles() = walk()
-        .filter { it.isKotlinFile }
-        .map { it.toKoFile() }
+    private fun File.toKoFiles(): Sequence<KoFileDeclaration> {
+        println("File.toKoFiles ${walk().toList()}")
+
+        return walk()
+            .filter { it.isKotlinFile }
+            .map { it.toKoFile() }
+    }
 
     companion object {
         private const val TEST_NAME_IN_PATH = "test"
