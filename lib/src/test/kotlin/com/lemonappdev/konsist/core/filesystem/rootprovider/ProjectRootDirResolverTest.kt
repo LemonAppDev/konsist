@@ -24,7 +24,7 @@ class ProjectRootDirResolverTest {
         every { pathVerifier.verifyPathIfExists(file, "/path2") } returns true
 
         // when
-        val actual = sut.getDir(file)
+        val actual = sut.getProjectRootDir(file)
 
         // then
         actual shouldBeEqualTo file
@@ -38,7 +38,7 @@ class ProjectRootDirResolverTest {
         every { pathVerifier.verifyPathIfExists(file, "/path2") } returns false
 
         // when
-        val actual = sut.getDir(file)
+        val actual = sut.getProjectRootDir(file)
 
         // then
         actual shouldBeEqualTo null
