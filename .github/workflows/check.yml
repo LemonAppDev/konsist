@@ -195,8 +195,8 @@ jobs:
       - name: List Artifacts
         run: ls -R /home/runner/.m2/repository/
 
-  konsist-scope-creation-integration-test:
-    name: Konsist Scope Creation Integration Test
+  konsist-path-tester-project-integration-test:
+    name: Konsist Path Tester Project Integration Test
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -220,5 +220,5 @@ jobs:
           -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
-      - name : Konsist Scope Creation Integration Test
-        run: cd test/konsist-scope-creation/ && ./gradlew integrationTest
+      - name : Konsist Path Tester Project Integration Test
+        run: cd test/konsist-path-tester/ && ./gradlew integrationTest
