@@ -7,9 +7,7 @@ class PathProvider(
     private val koFileFactory: KoFileFactory,
     private val projectRootDirProviderFactory: ProjectRootDirProviderFactory,
 ) {
-    val rootProjectPath: String by lazy { rootProjectDirectory.absoluteFile.path }
-
-    val rootProjectDirectory: File by lazy {
+    val rootProjectPath: String by lazy {
         val file = koFileFactory.create("")
 
         val projectRootDirectory = getProjectRootDirectory(file)
@@ -18,7 +16,7 @@ class PathProvider(
             val message = "Project directory not found. Searched in ${file.absoluteFile.path} and parent directories"
             throw KoInternalException(message)
         } else {
-            projectRootDirectory
+            projectRootDirectory.absoluteFile.path
         }
     }
 

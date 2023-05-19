@@ -15,11 +15,6 @@ interface KoScopeCreator {
     val projectRootPath: String
 
     /**
-     * Returns a root project directory.
-     */
-    val projectRootDirectory: File
-
-    /**
      * Returns a [KoScope] containing all of Kotlin files in the project.
      * Method does return Kotlin files present in build directories such as "build" and "target".
      *

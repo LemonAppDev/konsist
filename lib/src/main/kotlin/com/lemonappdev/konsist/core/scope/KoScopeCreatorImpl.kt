@@ -13,14 +13,11 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
 
     private val projectKotlinFiles by lazy {
-        pathProvider
-            .rootProjectDirectory
-            .toKoFiles()
+
+        File(pathProvider.rootProjectPath).toKoFiles()
     }
 
     override val projectRootPath = pathProvider.rootProjectPath
-
-    override val projectRootDirectory = pathProvider.rootProjectDirectory
 
     override fun scopeFromProject(moduleName: String?, sourceSetName: String?, ignoreBuildConfig: Boolean): KoScope {
         val koFiles = getFiles(moduleName, sourceSetName, ignoreBuildConfig)
@@ -49,6 +46,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         sourceSetName: String? = null,
         ignoreBuildConfig: Boolean = true,
     ): Sequence<KoFileDeclaration> {
+        println("getFiles ${projectKotlinFiles.toList().size}" )
+
         val localProjectKotlinFiles = projectKotlinFiles
             .filterNot { isBuildPath(it.filePath) }
             .let {
@@ -137,9 +136,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*")
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
-            path.matches(gradleModuleBuildDirectoryRegex) ||
-            path.matches(mavenRootBuildDirectoryRegex) ||
-            path.matches(mavenModuleBuildDirectoryRegex)
+                path.matches(gradleModuleBuildDirectoryRegex) ||
+                path.matches(mavenRootBuildDirectoryRegex) ||
+                path.matches(mavenModuleBuildDirectoryRegex)
     }
 
     private fun isTestPath(path: String): Boolean {
@@ -163,9 +162,13 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
     }
 
-    private fun File.toKoFiles() = walk()
-        .filter { it.isKotlinFile }
-        .map { it.toKoFile() }
+    private fun File.toKoFiles(): Sequence<KoFileDeclaration> {
+        println("File.toKoFiles ${walk().toList()}" )
+
+        return walk()
+            .filter { it.isKotlinFile }
+            .map { it.toKoFile() }
+    }
 
     companion object {
         private const val TEST_NAME_IN_PATH = "test"
