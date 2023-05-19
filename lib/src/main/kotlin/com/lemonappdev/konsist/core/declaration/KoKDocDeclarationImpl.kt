@@ -47,7 +47,7 @@ internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoP
         val tagsAsStringList = text
             .substringAfter("@", "")
             .split("\n@")
-            .map { ("@$it").trimEnd() }
+            .map { ("@${it.lowercase()}").trimEnd() }
 
         val tagsWithName = tagsAsStringList
             .filterNot { it == "@" }

@@ -32,7 +32,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
             } else if (it is KtProperty) {
                 KoPropertyDeclarationImpl.getInstance(it, this)
             } else {
-                throw UnsupportedOperationException("Unknown local declaration type: ${it.getTextWithLocation()}")
+                null
             }
         }
     }
