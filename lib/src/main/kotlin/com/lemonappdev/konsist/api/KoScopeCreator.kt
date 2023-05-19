@@ -1,7 +1,5 @@
 package com.lemonappdev.konsist.api
 
-import java.io.File
-
 /**
  * Scope creator.
  *

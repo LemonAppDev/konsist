@@ -46,7 +46,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         sourceSetName: String? = null,
         ignoreBuildConfig: Boolean = true,
     ): Sequence<KoFileDeclaration> {
-        println("getFiles ${projectKotlinFiles.toList().size}" )
+        println("getFiles ${projectKotlinFiles.toList().size}")
 
         val localProjectKotlinFiles = projectKotlinFiles
             .filterNot { isBuildPath(it.filePath) }
@@ -136,9 +136,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*")
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
-                path.matches(gradleModuleBuildDirectoryRegex) ||
-                path.matches(mavenRootBuildDirectoryRegex) ||
-                path.matches(mavenModuleBuildDirectoryRegex)
+            path.matches(gradleModuleBuildDirectoryRegex) ||
+            path.matches(mavenRootBuildDirectoryRegex) ||
+            path.matches(mavenModuleBuildDirectoryRegex)
     }
 
     private fun isTestPath(path: String): Boolean {
@@ -163,7 +163,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     private fun File.toKoFiles(): Sequence<KoFileDeclaration> {
-        println("File.toKoFiles ${walk().toList()}" )
+        println("File.toKoFiles ${walk().toList()}")
 
         return walk()
             .filter { it.isKotlinFile }
