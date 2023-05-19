@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.ext
+package com.lemonappdev.konsist.helper.ext
 
 import com.lemonappdev.konsist.api.KoScope
 

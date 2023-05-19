@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.util
+package com.lemonappdev.konsist.helper.util
 
 import java.io.File
 
