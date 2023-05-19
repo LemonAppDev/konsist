@@ -1,0 +1,4 @@
+Konsist.scopeFromProject()
+    .classes()
+    .flatMap { it.functions() }
+    .assert { it.hasReturnType() }
