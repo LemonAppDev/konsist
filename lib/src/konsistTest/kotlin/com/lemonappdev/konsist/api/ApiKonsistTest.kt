@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api
 
-import com.lemonappdev.konsist.api.ext.sequence.withName
 import com.lemonappdev.konsist.core.verify.assert
 import org.junit.jupiter.api.Test
 
