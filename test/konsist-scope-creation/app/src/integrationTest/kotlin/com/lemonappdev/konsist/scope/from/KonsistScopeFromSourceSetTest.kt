@@ -1,17 +1,17 @@
-package com.lemonappdev.konsist
+package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.ext.mapToFilePaths
-import com.lemonappdev.konsist.util.PathProvider.appIntegrationTestSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.appMainSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.dataMainSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.dataTestSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.rootMainSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.rootTestSourceSetDirectory
+import com.lemonappdev.konsist.helper.ext.mapToFilePaths
+import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.rootTestSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KonsistTestForScopeFromSourceSet {
+class KonsistScopeFromSourceSetTest {
     @Test
     fun `scopeFromSourceSet for main source set`() {
         // given
@@ -42,22 +42,22 @@ class KonsistTestForScopeFromSourceSet {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForOperator.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromDirectory.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromFile.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromModule.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromPackage.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProduction.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProject.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProjectDirectory.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromProjectFile.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromSourceSet.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForScopeFromTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForSlice.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/KonsistTestForToString.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/ext/KoScopeExt.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/util/PathProvider.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/path/KonsistRootProjectPathTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistOperatorTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistSliceTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistToStringTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromDirectoryTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromFileTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromModuleTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromPackageTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromProductionTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromProjectDirectoryTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromProjectFileTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromProjectTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromSourceSetTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
             ),
@@ -76,7 +76,7 @@ class KonsistTestForScopeFromSourceSet {
             listOf(
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-                "$rootTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
+                "$rootTestSourceSetDirectory/konsist/path/KonsistRootProjectPathTest.kt",
                 "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
                 "$rootTestSourceSetDirectory/sample/data/RootDataClassTest.kt",
             ),
@@ -101,7 +101,7 @@ class KonsistTestForScopeFromSourceSet {
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
-                "$rootTestSourceSetDirectory/konsist/KonsistTestForRootProjectPath.kt",
+                "$rootTestSourceSetDirectory/konsist/path/KonsistRootProjectPathTest.kt",
                 "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
                 "$rootTestSourceSetDirectory/sample/data/RootDataClassTest.kt",
             ),

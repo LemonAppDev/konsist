@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist
+package com.lemonappdev.konsist.scope
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.helper.util.PathProvider.rootTestSourceSetDirecto
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KonsistTestForSlice {
+class KonsistSliceTest {
     @Test
     fun `slice-with-predicate-name`() {
         // given

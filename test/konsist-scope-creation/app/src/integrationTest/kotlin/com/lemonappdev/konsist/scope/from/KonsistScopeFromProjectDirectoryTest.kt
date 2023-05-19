@@ -1,14 +1,14 @@
-package com.lemonappdev.konsist
+package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.ext.mapToFilePaths
-import com.lemonappdev.konsist.util.PathProvider.appMainSourceSetDirectory
+import com.lemonappdev.konsist.helper.ext.mapToFilePaths
+import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class KonsistTestForScopeFromProjectDirectory {
+class KonsistScopeFromProjectDirectoryTest {
     @Test
     fun `scopeFromProjectDirectory`() {
         // given

@@ -1,11 +1,11 @@
-package com.lemonappdev.konsist
+package com.lemonappdev.konsist.scope
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KonsistTestForToString {
+class KonsistToStringTest {
     @Test
     fun `toString method`() {
         // given

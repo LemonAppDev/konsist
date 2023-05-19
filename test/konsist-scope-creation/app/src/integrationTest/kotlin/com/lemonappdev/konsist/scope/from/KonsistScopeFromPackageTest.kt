@@ -1,17 +1,17 @@
-package com.lemonappdev.konsist
+package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.ext.mapToFilePaths
-import com.lemonappdev.konsist.util.PathProvider.appIntegrationTestSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.appMainSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.dataMainSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.dataTestSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.rootMainSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.rootTestSourceSetDirectory
+import com.lemonappdev.konsist.helper.ext.mapToFilePaths
+import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.rootTestSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KonsistTestForScopeFromPackage {
+class KonsistScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_sample package`() {
         // given

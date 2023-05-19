@@ -1,14 +1,14 @@
-package com.lemonappdev.konsist
+package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.ext.mapToFilePaths
-import com.lemonappdev.konsist.util.PathProvider.appMainSourceSetDirectory
+import com.lemonappdev.konsist.helper.ext.mapToFilePaths
+import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class KonsistTestForScopeFromFile {
+class KonsistScopeFromFileTest {
     @Test
     fun `scopeFromFile`() {
         // given
@@ -25,10 +25,10 @@ class KonsistTestForScopeFromFile {
     @Test
     fun `scopeFromFile throws exception if path does not exist`() {
         // given
-        val func = { Konsist.scopeFromFile("$appMainSourceSetDirectory/NonExisting.kt") }
+        val func = { Konsist.scopeFromFile("$appMainSourceSetDirectory/NonExistingTest.kt") }
 
         // then
-        val message = "File does not exist: $appMainSourceSetDirectory/NonExisting.kt"
+        val message = "File does not exist: $appMainSourceSetDirectory/NonExistingTest.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 

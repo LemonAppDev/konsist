@@ -1,15 +1,14 @@
-package com.lemonappdev.konsist
+package com.lemonappdev.konsist.scope
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.ext.mapToFilePaths
-import com.lemonappdev.konsist.util.PathProvider.dataMainSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.dataTestSourceSetDirectory
-import com.lemonappdev.konsist.util.PathProvider.rootTestSourceSetDirectory
+import com.lemonappdev.konsist.helper.ext.mapToFilePaths
+import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.rootTestSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
-import java.io.File
 
-class KonsistTestForOperator {
+class KonsistOperatorTest {
     @Test
     fun `plus operator`() {
         // given
@@ -46,7 +45,7 @@ class KonsistTestForOperator {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$rootTestSourceSetDirectory/sample/RootClassTest.kt"
+                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
             ),
         )
     }
@@ -104,7 +103,7 @@ class KonsistTestForOperator {
             .mapToFilePaths()
             .shouldBeEqualTo(
                 listOf(
-                    "$rootTestSourceSetDirectory/sample/RootClassTest.kt"
+                    "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
                 ),
             )
     }
