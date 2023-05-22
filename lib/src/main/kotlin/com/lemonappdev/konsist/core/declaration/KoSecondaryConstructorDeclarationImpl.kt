@@ -15,13 +15,10 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
 
         internal fun getInstance(
             ktSecondaryConstructor: KtSecondaryConstructor,
-            parent: KoBaseDeclaration
+            parent: KoBaseDeclaration,
         ): KoSecondaryConstructorDeclaration =
             cache.getOrCreateInstance(ktSecondaryConstructor, parent) {
-                KoSecondaryConstructorDeclarationImpl(
-                    ktSecondaryConstructor,
-                    parent,
-                )
+                KoSecondaryConstructorDeclarationImpl(ktSecondaryConstructor, parent)
             }
     }
 }

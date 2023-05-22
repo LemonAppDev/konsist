@@ -30,7 +30,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
             val checkMethodName = Thread.currentThread().stackTrace[2].methodName
             throw KoPreconditionFailedException(
                 "Declaration list is empty. Please make sure that list of declarations contain items " +
-                        "before calling the '$checkMethodName' method.",
+                    "before calling the '$checkMethodName' method.",
             )
         }
 
@@ -84,10 +84,10 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                    (
-                            it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
-                                    it.text.endsWith("Suppress(\"$testMethodName\")")
-                            )
+                (
+                    it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
+                        it.text.endsWith("Suppress(\"$testMethodName\")")
+                    )
         }
         .forEach {
             if (it is KoDeclaration) {

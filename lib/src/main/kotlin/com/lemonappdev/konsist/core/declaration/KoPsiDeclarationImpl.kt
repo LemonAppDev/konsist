@@ -132,7 +132,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
 
     override fun resideInProjectFilePath(path: String): Boolean = LocationHelper.resideInLocation(path, projectFilePath)
 
-    override fun print(): Unit {
+    override fun print() {
         print(toString())
     }
 

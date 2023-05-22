@@ -83,27 +83,27 @@ internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoP
         tags.firstOrNull { it.name == RECEIVER }
     }
 
-    override val propertyTags: List<KoValuedKDocTagDeclaration>  by lazy {
+    override val propertyTags: List<KoValuedKDocTagDeclaration> by lazy {
         tags.filter { it.name == PROPERTY }
             .map { it as KoValuedKDocTagDeclarationImpl }
     }
 
-    override val throwsTags: List<KoValuedKDocTagDeclaration>  by lazy {
+    override val throwsTags: List<KoValuedKDocTagDeclaration> by lazy {
         tags.filter { it.name == THROWS }
             .map { it as KoValuedKDocTagDeclarationImpl }
     }
 
-    override val exceptionTags: List<KoValuedKDocTagDeclaration>  by lazy {
+    override val exceptionTags: List<KoValuedKDocTagDeclaration> by lazy {
         tags.filter { it.name == EXCEPTION }
             .map { it as KoValuedKDocTagDeclarationImpl }
     }
 
-    override val sampleTags: List<KoValuedKDocTagDeclaration>  by lazy {
+    override val sampleTags: List<KoValuedKDocTagDeclaration> by lazy {
         tags.filter { it.name == SAMPLE }
             .map { it as KoValuedKDocTagDeclarationImpl }
     }
 
-    override val seeTags: List<KoValuedKDocTagDeclaration>  by lazy {
+    override val seeTags: List<KoValuedKDocTagDeclaration> by lazy {
         tags.filter { it.name == SEE }
             .map { it as KoValuedKDocTagDeclarationImpl }
     }

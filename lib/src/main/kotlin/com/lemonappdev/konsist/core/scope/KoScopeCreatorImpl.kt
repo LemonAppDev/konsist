@@ -17,7 +17,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         File(pathProvider.rootProjectPath).toKoFiles()
     }
 
-    override val projectRootPath : String by lazy{
+    override val projectRootPath: String by lazy {
         pathProvider.rootProjectPath
     }
 

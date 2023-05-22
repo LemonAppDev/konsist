@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.core.util.KotlinFileParser.KOTLIN_FILE_EXTENSION
 import com.lemonappdev.konsist.core.util.KotlinFileParser.KOTLIN_SNIPPET_FILE_EXTENSION
 import java.io.File
 
-internal val File.isKotlinFile : Boolean get() = isFile && name.endsWith(KOTLIN_FILE_EXTENSION)
+internal val File.isKotlinFile: Boolean get() = isFile && name.endsWith(KOTLIN_FILE_EXTENSION)
 
 internal val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(KOTLIN_SNIPPET_FILE_EXTENSION)
 
