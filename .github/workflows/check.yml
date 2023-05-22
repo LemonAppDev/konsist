@@ -9,7 +9,7 @@ on:
 
 jobs:
   konsist-junit-test:
-    name: Konsist - JUnit Test
+    name: Konsist JUnit Test
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -32,7 +32,7 @@ jobs:
           name: junit-test-report
           path: ./lib/build/test-results/test/
   konsist-konsist-test:
-    name: Konsist - Konsist Test
+    name: Konsist Konsist Test
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -55,7 +55,7 @@ jobs:
           name: konsist-test-report
           path: ./lib/build/test-results/konsistTest/
   konsist-integration-test:
-    name: Konsist - Integration Test
+    name: Konsist Integration Test
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -78,7 +78,7 @@ jobs:
           name: integration-test-report
           path: ./lib/build/test-results/integrationTest/
   konsist-spotless:
-    name: Konsist-Spotless
+    name: Konsist - Spotless
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -96,7 +96,7 @@ jobs:
       - name: Spotless
         run: ./gradlew spotlessCheck
   konsist-detekt:
-    name: Konsist-Detekt
+    name: Konsist Detekt
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -196,7 +196,7 @@ jobs:
         run: ls -R /home/runner/.m2/repository/
 
   path-tester-project:
-    name: Path Tester Project
+    name: Test Project - Path Tester Project
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -227,7 +227,7 @@ jobs:
         run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
 
   root-path-gradle-tester:
-    name: Project Root Path Gradle
+    name: Test Project - Root Path Gradle
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
