@@ -30,7 +30,6 @@ class KonsistOperatorTest {
         )
     }
 
-    // TODO: HERE
     @Test
     fun `minus operator`() {
         // given
