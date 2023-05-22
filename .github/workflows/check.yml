@@ -221,7 +221,7 @@ jobs:
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name : Run Assemble
-        run: cd test/konsist-path-tester/ && ./gradlew assemble
+        run: cd test-projects/konsist-path-tester/ && ./gradlew assemble
 
       - name : Run Integration Test
-        run: cd test/konsist-path-tester/ && ./gradlew integrationTest
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
