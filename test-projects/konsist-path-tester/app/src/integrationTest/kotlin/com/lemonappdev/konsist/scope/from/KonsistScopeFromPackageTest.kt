@@ -27,7 +27,6 @@ class KonsistScopeFromPackageTest {
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
-                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
             ),
         )
     }
@@ -75,7 +74,6 @@ class KonsistScopeFromPackageTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
-                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
             ),
         )
     }
@@ -214,8 +212,6 @@ class KonsistScopeFromPackageTest {
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
-                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
-                "$rootTestSourceSetDirectory/sample/data/RootDataClassTest.kt",
             ),
         )
     }
@@ -268,8 +264,6 @@ class KonsistScopeFromPackageTest {
             listOf(
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
-                "$rootTestSourceSetDirectory/sample/data/RootDataClassTest.kt",
             ),
         )
     }

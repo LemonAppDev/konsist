@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
-import com.lemonappdev.konsist.helper.util.PathProvider.rootTestSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -27,7 +26,6 @@ class KonsistOperatorTest {
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
             ),
         )
     }
@@ -44,9 +42,7 @@ class KonsistOperatorTest {
 
         // then
         sut.shouldBeEqualTo(
-            listOf(
-                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
-            ),
+            emptyList(),
         )
     }
 
@@ -84,7 +80,6 @@ class KonsistOperatorTest {
                     "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                     "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                     "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-                    "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
                 ),
             )
     }
@@ -102,9 +97,7 @@ class KonsistOperatorTest {
         scope1
             .mapToFilePaths()
             .shouldBeEqualTo(
-                listOf(
-                    "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
-                ),
+                emptyList(),
             )
     }
 }

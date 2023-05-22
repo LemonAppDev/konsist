@@ -23,7 +23,6 @@ class KonsistScopeFromTest {
             listOf(
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/path/KonsistRootProjectPathTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistOperatorTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistSliceTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistToStringTest.kt",
@@ -41,9 +40,6 @@ class KonsistScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-                "$rootTestSourceSetDirectory/konsist/path/KonsistRootProjectPathTest.kt",
-                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
-                "$rootTestSourceSetDirectory/sample/data/RootDataClassTest.kt",
             ),
         )
     }
@@ -70,7 +66,6 @@ class KonsistScopeFromTest {
             listOf(
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/path/KonsistRootProjectPathTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistOperatorTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistSliceTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistToStringTest.kt",
@@ -102,9 +97,6 @@ class KonsistScopeFromTest {
             listOf(
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-                "$rootTestSourceSetDirectory/konsist/path/KonsistRootProjectPathTest.kt",
-                "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
-                "$rootTestSourceSetDirectory/sample/data/RootDataClassTest.kt",
             ),
         )
     }
@@ -121,7 +113,6 @@ class KonsistScopeFromTest {
             listOf(
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/path/KonsistRootProjectPathTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistOperatorTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistSliceTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistToStringTest.kt",
@@ -163,7 +154,6 @@ class KonsistScopeFromTest {
             listOf(
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/path/KonsistRootProjectPathTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistOperatorTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistSliceTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistToStringTest.kt",

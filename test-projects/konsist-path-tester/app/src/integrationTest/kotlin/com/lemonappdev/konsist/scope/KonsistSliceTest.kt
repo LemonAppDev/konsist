@@ -19,7 +19,6 @@ class KonsistSliceTest {
             .mapToFilePaths()
             .shouldBeEqualTo(
                 listOf(
-                    "$rootTestSourceSetDirectory/sample/RootClassTest.kt",
                 ),
             )
     }

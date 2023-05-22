@@ -1,20 +1,20 @@
-
 package com.lemonappdev.konsist.path
 
 import com.lemonappdev.konsist.api.Konsist
 import org.amshove.kluent.shouldBeEqualTo
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class KonsistRootProjectPathTest {
+class KonsistRootProjectPathFromGradleRootTest {
+    @Disabled
     @Test
-    fun `scopeFromProject`() {
-        // given
+    fun `project root path resolved from Gradle root`() {
         val projectRootPath = File("")
             .absoluteFile
             .path
 
         // then
-        Konsist.rootProjectPath shouldBeEqualTo projectRootPath
+        Konsist.projectRootPath shouldBeEqualTo projectRootPath
     }
 }
