@@ -78,7 +78,7 @@ jobs:
           name: integration-test-report
           path: ./lib/build/test-results/integrationTest/
   konsist-spotless:
-    name: Konsist - Spotless
+    name: Konsist Spotless
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -196,7 +196,7 @@ jobs:
         run: ls -R /home/runner/.m2/repository/
 
   path-tester-project:
-    name: Test Project - Path Tester Project
+    name: Test Project Path Tester Project
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -227,7 +227,7 @@ jobs:
         run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
 
   root-path-gradle-tester:
-    name: Test Project - Root Path Gradle
+    name: Test Project Root Path Gradle
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
