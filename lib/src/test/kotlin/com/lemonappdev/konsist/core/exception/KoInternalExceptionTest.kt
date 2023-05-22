@@ -26,10 +26,9 @@ class KoInternalExceptionTest {
     fun `test without declaration`() {
         // given
         val message = "message"
-        val declarationText = "declaration text"
         val func = { throw KoInternalException(message, koBaseDeclaration = null) }
 
         // when
-        func shouldThrow KoInternalException::class withMessage "$message"
+        func shouldThrow KoInternalException::class withMessage message
     }
 }
