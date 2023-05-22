@@ -4,13 +4,13 @@ import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 
 internal abstract class KoNamedDeclarationImpl(private val ktElement: KtElement) : KoBaseDeclarationImpl(ktElement), KoNamedDeclaration {
-    override val name by lazy { ktElement.name ?: "" }
+    override val name: String by lazy { ktElement.name ?: "" }
 
-    override fun hasNameStartingWith(prefix: String) = name.startsWith(prefix)
+    override fun hasNameStartingWith(prefix: String): Boolean = name.startsWith(prefix)
 
-    override fun hasNameEndingWith(suffix: String) = name.endsWith(suffix)
+    override fun hasNameEndingWith(suffix: String): Boolean = name.endsWith(suffix)
 
-    override fun hasNameContaining(text: String) = name.contains(text)
+    override fun hasNameContaining(text: String): Boolean = name.contains(text)
 
-    override fun hasNameMatching(regex: Regex) = name.matches(regex)
+    override fun hasNameMatching(regex: Regex): Boolean = name.matches(regex)
 }

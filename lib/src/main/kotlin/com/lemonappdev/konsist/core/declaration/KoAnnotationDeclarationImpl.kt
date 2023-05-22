@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.psi.KtAnnotationEntry
 internal class KoAnnotationDeclarationImpl private constructor(
     private val ktAnnotationEntry: KtAnnotationEntry,
 ) : KoNamedDeclarationImpl(ktAnnotationEntry), KoAnnotationDeclaration {
-    override val name by lazy { ktAnnotationEntry.shortName.toString() }
+    override val name: String by lazy { ktAnnotationEntry.shortName.toString() }
 
     override val fullyQualifiedName: String by lazy {
         containingFile
@@ -17,7 +17,7 @@ internal class KoAnnotationDeclarationImpl private constructor(
             ?.name ?: name
     }
 
-    override fun representsType(name: String) = name == this.name || name == fullyQualifiedName
+    override fun representsType(name: String): Boolean = name == this.name || name == fullyQualifiedName
 
     internal companion object {
         private val cache = KoDeclarationCache<KoAnnotationDeclarationImpl>()

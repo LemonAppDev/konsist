@@ -12,19 +12,21 @@ import java.io.File
 internal class KoScopeCreatorImpl : KoScopeCreator {
     private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
 
-    private val projectKotlinFiles by lazy {
+    private val projectKotlinFiles: Sequence<KoFileDeclaration> by lazy {
 
         File(pathProvider.rootProjectPath).toKoFiles()
     }
 
-    override val projectRootPath = pathProvider.rootProjectPath
+    override val projectRootPath : String by lazy{
+        pathProvider.rootProjectPath
+    }
 
     override fun scopeFromProject(moduleName: String?, sourceSetName: String?, ignoreBuildConfig: Boolean): KoScope {
         val koFiles = getFiles(moduleName, sourceSetName, ignoreBuildConfig)
         return KoScopeImpl(koFiles)
     }
 
-    override fun scopeFromModule(vararg moduleNames: String) = moduleNames
+    override fun scopeFromModule(vararg moduleNames: String): KoScope = moduleNames
         .flatMap { getFiles(it) }
         .asSequence()
         .let { KoScopeImpl(it) }
@@ -36,7 +38,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    override fun scopeFromSourceSet(vararg sourceSetNames: String) = sourceSetNames
+    override fun scopeFromSourceSet(vararg sourceSetNames: String): KoScope = sourceSetNames
         .flatMap { getFiles(sourceSetName = it) }
         .asSequence()
         .let { KoScopeImpl(it) }

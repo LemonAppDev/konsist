@@ -1,8 +1,12 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
 import com.lemonappdev.konsist.core.util.LocationHelper
@@ -16,9 +20,11 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
     KoNamedDeclarationImpl(ktFile),
     KoFileDeclaration {
 
-    override val name = ktFile.name.split("/").last()
+    override val name: String by lazy {
+        ktFile.name.split("/").last()
+    }
 
-    override val imports by lazy {
+    override val imports: List<KoImportDeclaration> by lazy {
         val ktImportDirectives = ktFile
             .children
             .filterIsInstance<KtImportList>()
@@ -29,13 +35,13 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
         ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it, this) }
     }
 
-    override val annotations by lazy {
+    override val annotations: List<KoAnnotationDeclaration> by lazy {
         ktFile
             .annotationEntries
             .map { KoAnnotationDeclarationImpl.getInstance(it, this) }
     }
 
-    override val packagee by lazy {
+    override val packagee: KoPackageDeclaration? by lazy {
         if (ktFile.packageDirective?.qualifiedName == "") {
             null
         } else {
@@ -43,7 +49,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
         }
     }
 
-    override val typeAliases by lazy {
+    override val typeAliases: List<KoTypeAliasDeclaration> by lazy {
         ktFile
             .children
             .filterIsInstance<KtTypeAlias>()
@@ -56,31 +62,31 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
     ): Sequence<KoNamedDeclaration> =
         KoDeclarationCoreProviderUtil.getKoDeclarations(ktFile, includeNested, includeLocal, this)
 
-    override fun hasAnnotations(vararg names: String) = when {
+    override fun hasAnnotations(vararg names: String): Boolean = when {
         names.isEmpty() -> annotations.isNotEmpty()
         else -> names.all { hasAnnotationNameOrAnnotationFullyQualifyName(it) }
     }
 
-    private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String) = annotations.any {
+    private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String): Boolean = annotations.any {
         it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name
     }
 
-    override fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {
+    override fun hasAnnotationsOf(vararg names: KClass<*>): Boolean = names.all {
         annotations.any { annotation -> annotation.fullyQualifiedName == it.qualifiedName }
     }
 
-    override fun hasPackage(name: String) = packagee
+    override fun hasPackage(name: String): Boolean = packagee
         ?.qualifiedName
         ?.let { LocationHelper.resideInLocation(name, it) } ?: false
 
-    override fun hasImports(vararg names: String) = when {
+    override fun hasImports(vararg names: String): Boolean = when {
         names.isEmpty() -> imports.isNotEmpty()
         else -> names.all {
             imports.any { import -> LocationHelper.resideInLocation(it, import.name) }
         }
     }
 
-    override fun hasTypeAliases(vararg names: String) = when {
+    override fun hasTypeAliases(vararg names: String): Boolean = when {
         names.isEmpty() -> typeAliases.isNotEmpty()
         else -> names.all {
             typeAliases.any { typeAlias -> typeAlias.name == it }

@@ -8,11 +8,11 @@ import org.jetbrains.kotlin.psi.KtImportDirective
 internal class KoImportDeclarationImpl private constructor(private val ktImportDirective: KtImportDirective) :
     KoNamedDeclarationImpl(ktImportDirective),
     KoImportDeclaration {
-    override val name by lazy { ktImportDirective.importPath?.fqName.toString() }
+    override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
 
-    override val alias by lazy { ktImportDirective.alias?.name ?: name }
+    override val alias: String by lazy { ktImportDirective.alias?.name ?: name }
 
-    override val isWildcard by lazy { ktImportDirective.text.endsWith('*') }
+    override val isWildcard: Boolean by lazy { ktImportDirective.text.endsWith('*') }
 
     internal companion object {
         private val cache = KoDeclarationCache<KoImportDeclarationImpl>()

@@ -33,10 +33,11 @@ import com.lemonappdev.konsist.api.KoModifier.SUSPEND
 import com.lemonappdev.konsist.api.KoModifier.TAILREC
 import com.lemonappdev.konsist.api.KoModifier.VALUE
 import com.lemonappdev.konsist.api.KoModifier.VARARG
+import org.jetbrains.kotlin.lexer.KtModifierKeywordToken
 import org.jetbrains.kotlin.lexer.KtTokens
 
 @Suppress("detekt.ComplexMethod")
-internal fun KoModifier.toKtToken() = when (this) {
+internal fun KoModifier.toKtToken(): KtModifierKeywordToken = when (this) {
     DATA -> KtTokens.DATA_KEYWORD
     VALUE -> KtTokens.VALUE_KEYWORD
     INLINE -> KtTokens.INLINE_KEYWORD

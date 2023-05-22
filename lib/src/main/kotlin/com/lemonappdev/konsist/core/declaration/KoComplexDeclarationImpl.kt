@@ -12,7 +12,7 @@ internal abstract class KoComplexDeclarationImpl(
 ) : KoDeclarationImpl(ktClassOrObject, parent),
     KoComplexDeclaration {
 
-    override fun representsType(name: String) = name == this.name || name == fullyQualifiedName
+    override fun representsType(name: String): Boolean = name == this.name || name == fullyQualifiedName
 
     override fun declarations(
         includeNested: Boolean,

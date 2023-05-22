@@ -21,9 +21,9 @@ internal class KoObjectDeclarationImpl(
         }
     }
 
-    override fun hasDataModifier() = hasModifiers(KoModifier.DATA)
+    override fun hasDataModifier(): Boolean = hasModifiers(KoModifier.DATA)
 
-    override fun hasCompanionModifier() = hasModifiers(KoModifier.COMPANION)
+    override fun hasCompanionModifier(): Boolean = hasModifiers(KoModifier.COMPANION)
 
     internal companion object {
         private val cache = KoDeclarationCache<KoObjectDeclarationImpl>()
