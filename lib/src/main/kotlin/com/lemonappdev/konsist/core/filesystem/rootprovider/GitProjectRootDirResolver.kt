@@ -6,8 +6,8 @@ class GitProjectRootDirResolver(
     pathVerifier: PathVerifier,
 ) : ProjectRootDirResolver(pathVerifier) {
     /*
-    A few files and directories selected from fresh '.git' directory. This directory stores config files for the git repository
-    (created using the 'git init' command).
+    A few files and directories selected from fresh '.git' directory. This directory represents standard directory layout for the git
+    repository (it can be created using the 'git init' command).
 
     Description of the '.git' directory https://githowto.com/git_internals_git_directory
      */
