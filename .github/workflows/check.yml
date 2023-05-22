@@ -226,37 +226,36 @@ jobs:
       - name : Run Integration Test
         run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
 
+  root-path-gradle-tester:
+    name: Project Root Path Gradle
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
 
-    konsist-root-path-gradle-tester:
-      name: Project Root Path Gradle Integration Test
-      continue-on-error: true
-      runs-on: ubuntu-latest
-      strategy:
-        fail-fast: false
-      steps:
-        - name: checkout
-          uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
 
-        - name: Set up JDK
-          uses: actions/setup-java@v3
-          with:
-            java-version: 19
-            distribution: 'zulu'
+      - name: Publish
+        run: |
+          ./gradlew publishToMavenLocal \
+          -Pkonsist.releaseTarget=local \
+          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
+          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
+          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
-        - name: Publish
-          run: |
-            ./gradlew publishToMavenLocal \
-            -Pkonsist.releaseTarget=local \
-            -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
-            -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
-            -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
-            -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
+      - name: Run Assemble
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew assemble
 
-        - name: Run Assemble
-          run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew assemble
+      - name: Run Root Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
 
-        - name: Run Root Integration Test
-          run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
-
-        - name: Run App Integration Test
-          run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
+      - name: Run App Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
