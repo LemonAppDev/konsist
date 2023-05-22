@@ -1,6 +1,9 @@
 # Konsist Path Tester
 
-This project is used to test Kotlin file querying logic.
+This project is used to test Kotlin file querying logic:
+- test scope creation
+- test scope operators
+- test `hasTest` logic 
 
 Test project contains [root](.) module and two submodules ([app](.\app) and [data](.\data)). 
 
