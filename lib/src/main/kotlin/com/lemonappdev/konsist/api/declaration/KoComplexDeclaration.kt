@@ -18,6 +18,9 @@ interface KoComplexDeclaration :
     KoFunctionCoreProvider {
     /**
      * Whether this type represents the specified type.
+     *
+     * @param name the name of type to compare.
+     * @return `true` if this type represents the specified type, `false` otherwise.
      */
     fun representsType(name: String): Boolean
 }

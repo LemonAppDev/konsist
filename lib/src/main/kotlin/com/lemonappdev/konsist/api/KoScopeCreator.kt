@@ -26,6 +26,7 @@ interface KoScopeCreator {
      * @param moduleName The name of the module. If null, all modules will be included.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
      * @param ignoreBuildConfig If true, build config files such as Gradle buildSrc directory will be ignored.
+     * @return a [KoScope] containing all of Kotlin files in the project.
      */
     fun scopeFromProject(moduleName: String? = null, sourceSetName: String? = null, ignoreBuildConfig: Boolean = true): KoScope
 
@@ -34,6 +35,7 @@ interface KoScopeCreator {
      * Method does return Kotlin files present in build directories such as "build" and "target".
      *
      * @param moduleNames The name of the module.
+     * @return a [KoScope] containing all of Kotlin files in the module.
      */
     fun scopeFromModule(vararg moduleNames: String): KoScope
 
@@ -41,8 +43,10 @@ interface KoScopeCreator {
      * Returns a [KoScope] containing all of Kotlin files in the given package.
      * Method does return Kotlin files present in build directories such as "build" and "target".
      *
+     * @param packagee The name of the package.
      * @param moduleName The name of the module. If null, all modules will be included.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
+     * @return a [KoScope] containing all of Kotlin files in the given package.
      */
     fun scopeFromPackage(packagee: String, moduleName: String? = null, sourceSetName: String? = null): KoScope
 
@@ -52,6 +56,7 @@ interface KoScopeCreator {
      * Method does return Kotlin files present in build directories such as "build" and "target".
      *
      * @param sourceSetNames The name of the source set.
+     * @return a [KoScope] containing all of Kotlin files in source set.
      */
     fun scopeFromSourceSet(vararg sourceSetNames: String): KoScope
 
@@ -62,6 +67,7 @@ interface KoScopeCreator {
      *
      * @param moduleName The name of the module. If null, all modules will be included.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
+     * @return a [KoScope] containing all of Kotlin files in the production source sets.
      *
      * @See [scopeFromProduction]
      */
@@ -74,6 +80,7 @@ interface KoScopeCreator {
      *
      * @param moduleName The name of the module. If null, all modules will be included.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
+     * @return a [KoScope] containing all of Kotlin files in the test source sets.
      *
      * @See [scopeFromTest]
      */
@@ -83,6 +90,7 @@ interface KoScopeCreator {
      * Returns a [KoScope] containing all of Kotlin files in the given directory.
      *
      * @param path The absolute path to the directory.
+     * @return a [KoScope] containing all of Kotlin files in the given directory.
      *
      * @see [scopeFromProjectDirectory]
      */
@@ -92,6 +100,7 @@ interface KoScopeCreator {
      * Returns a [KoScope] containing all of Kotlin files in the given directory.
      *
      * @param path The project root relative path to the directory.
+     * @return a [KoScope] containing all of Kotlin files in the given directory.
      *
      * @see [scopeFromDirectory]
      */
@@ -101,6 +110,7 @@ interface KoScopeCreator {
      * Returns a [KoScope] of a given file.
      *
      * @param path The absolute path to the file.
+     * @return a [KoScope] of a given file.
      *
      * @see [scopeFromProjectFile]
      */
@@ -110,6 +120,7 @@ interface KoScopeCreator {
      * Returns a [KoScope] of a given file.
      *
      * @param path The project root relative path to the file.
+     * @return a [KoScope] of a given file.
      *
      * @see [scopeFromFile]
      */

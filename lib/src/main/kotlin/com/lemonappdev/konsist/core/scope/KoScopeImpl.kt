@@ -58,8 +58,6 @@ class KoScopeImpl(
     ): Sequence<KoPropertyDeclaration> =
         koFiles.flatMap { it.properties(includeNested, includeLocal) }
 
-    override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope = KoScopeImpl(koFiles.filter { predicate(it) })
-
     override fun imports() = koFiles.flatMap { it.imports }
 
     override fun annotations() = koFiles.flatMap { it.annotations }
@@ -67,6 +65,8 @@ class KoScopeImpl(
     override fun packages() = koFiles.mapNotNull { it.packagee }
 
     override fun typeAliases() = koFiles.flatMap { it.typeAliases }
+
+    override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope = KoScopeImpl(koFiles.filter { predicate(it) })
 
     override operator fun plus(scope: KoScope): KoScope = KoScopeImpl(files() + scope.files())
 

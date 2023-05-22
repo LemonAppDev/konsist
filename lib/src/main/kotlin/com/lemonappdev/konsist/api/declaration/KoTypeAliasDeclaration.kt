@@ -11,6 +11,8 @@ interface KoTypeAliasDeclaration : KoDeclaration {
 
     /**
      * The 'actual' modifier.
+     *
+     * @return `true` if the declaration has the 'actual' modifier, `false` otherwise.
      */
     fun hasActualModifier(): Boolean
 }

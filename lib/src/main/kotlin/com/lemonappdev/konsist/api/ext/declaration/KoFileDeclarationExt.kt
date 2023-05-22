@@ -4,6 +4,8 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 
 /**
  * Returns `true` if this file declaration has an annotation of [T].
+ *
+ * @return `true` if this file declaration has an annotation of [T], `false` otherwise.
  */
 inline fun <reified T> KoFileDeclaration.hasAnnotationOf(): Boolean {
     val qualifiedName = T::class.qualifiedName ?: return false
