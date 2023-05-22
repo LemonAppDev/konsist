@@ -8,8 +8,8 @@ on:
     types: [ opened, synchronize ]
 
 jobs:
-  junit-test:
-    name: JUnit Test
+  konsist-junit-test:
+    name: Konsist - JUnit Test
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -31,8 +31,8 @@ jobs:
         with:
           name: junit-test-report
           path: ./lib/build/test-results/test/
-  konsist-test:
-    name: Konsist Test
+  konsist-konsist-test:
+    name: Konsist - Konsist Test
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -54,8 +54,8 @@ jobs:
         with:
           name: konsist-test-report
           path: ./lib/build/test-results/konsistTest/
-  integration-test:
-    name: Integration Test
+  konsist-integration-test:
+    name: Konsist - Integration Test
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -77,8 +77,8 @@ jobs:
         with:
           name: integration-test-report
           path: ./lib/build/test-results/integrationTest/
-  spotless:
-    name: Spotless
+  konsist-spotless:
+    name: Konsist-Spotless
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -95,8 +95,8 @@ jobs:
 
       - name: Spotless
         run: ./gradlew spotlessCheck
-  detekt:
-    name: Detekt
+  konsist-detekt:
+    name: Konsist-Detekt
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -118,8 +118,8 @@ jobs:
         with:
           name: detekt-report
           path: ./**/build/reports/detekt/detekt.*
-  assemble:
-    name: Assemble
+  konsist-assemble:
+    name: Konsist Assemble
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -144,8 +144,8 @@ jobs:
         with:
           name: konsist.jar
           path: lib/build/libs/lib.jar
-  dokka-html-doc:
-    name: Dokka Generate Html Doc
+  konsist-dokka-html-doc:
+    name: Konsist Dokka Generate Html Doc
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -167,8 +167,8 @@ jobs:
         with:
           name: dokka-html-doc.jar
           path: ./lib/build/dokka/*
-  publish:
-    name: Publish Local
+  konsist-publish:
+    name: Konsist Publish Local
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -195,8 +195,8 @@ jobs:
       - name: List Artifacts
         run: ls -R /home/runner/.m2/repository/
 
-  konsist-path-tester-project-integration-test:
-    name: Konsist Path Tester Project Integration Test
+  path-tester-project:
+    name: Path Tester Project
     continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
@@ -225,3 +225,38 @@ jobs:
 
       - name : Run Integration Test
         run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+
+
+    konsist-root-path-gradle-tester:
+      name: Project Root Path Gradle Integration Test
+      continue-on-error: true
+      runs-on: ubuntu-latest
+      strategy:
+        fail-fast: false
+      steps:
+        - name: checkout
+          uses: actions/checkout@v3
+
+        - name: Set up JDK
+          uses: actions/setup-java@v3
+          with:
+            java-version: 19
+            distribution: 'zulu'
+
+        - name: Publish
+          run: |
+            ./gradlew publishToMavenLocal \
+            -Pkonsist.releaseTarget=local \
+            -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
+            -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
+            -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+            -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
+
+        - name: Run Assemble
+          run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew assemble
+
+        - name: Run Root Integration Test
+          run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
+
+        - name: Run App Integration Test
+          run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest

@@ -1,6 +1,6 @@
 # Konsist Path Tester
 
-This project is used to test root project folder resolution and Kotlin file querying logic.
+This project is used to test Kotlin file querying logic.
 
 Test project contains [root](.) module and two submodules ([app](.\app) and [data](.\data)). 
 
