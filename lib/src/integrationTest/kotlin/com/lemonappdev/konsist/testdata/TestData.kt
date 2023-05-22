@@ -16,9 +16,9 @@ interface SampleInterface
 
 interface SampleInterface1
 
-interface SampleInterface2
-
 object SampleObject
+
+class SampleClassTest
 
 annotation class NonExistingAnnotation
 
