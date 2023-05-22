@@ -5,5 +5,13 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 class KoInternalException(
     message: String? = null,
     cause: Throwable? = null,
-    koBaseDeclarationImpl: KoBaseDeclaration? = null,
-) : KoException("$message, declaration:\n${koBaseDeclarationImpl?.text}", cause)
+    koBaseDeclaration: KoBaseDeclaration? = null,
+) : KoException("${message?.prepare(koBaseDeclaration)}", cause)
+
+private fun String.prepare(koBaseDeclaration: KoBaseDeclaration?): String {
+    return if (koBaseDeclaration == null) {
+        this
+    } else {
+        "$this, declaration:\n${koBaseDeclaration.text}"
+    }
+}
