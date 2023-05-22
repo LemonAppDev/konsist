@@ -55,7 +55,7 @@ internal class KoTypeDeclarationImpl private constructor(
     internal companion object {
         private val cache = KoDeclarationCache<KoTypeDeclarationImpl>()
 
-        internal fun getInstance(ktTypeReference: KtTypeReference, parent: KoBaseDeclaration) =
+        internal fun getInstance(ktTypeReference: KtTypeReference, parent: KoBaseDeclaration): KoTypeDeclaration =
             cache.getOrCreateInstance(ktTypeReference, parent) { KoTypeDeclarationImpl(ktTypeReference) }
     }
 }

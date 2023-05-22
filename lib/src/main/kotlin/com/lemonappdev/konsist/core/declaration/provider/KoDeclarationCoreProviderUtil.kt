@@ -50,7 +50,7 @@ internal object KoDeclarationCoreProviderUtil {
                     .filterNot { it is PsiWhiteSpace }
                     .filterNot { it.text.isBlank() }
                     .flattenDeclarations()
-                    .mapNotNull {
+                    .map {
                         when (it) {
                             is KtDeclaration -> getInstanceOfKtDeclaration(it, parent)
                             else -> getInstanceOfOtherDeclaration(it, parent)
@@ -143,7 +143,7 @@ internal object KoDeclarationCoreProviderUtil {
         return localDeclarations.asSequence()
     }
 
-    private fun List<PsiElement>.flattenDeclarations() = this.flatMap {
+    private fun List<PsiElement>.flattenDeclarations(): List<PsiElement> = this.flatMap {
         when (it) {
             is KtImportList -> it.imports
             is KtFileAnnotationList -> it.annotationEntries

@@ -22,7 +22,7 @@ internal class KoAnnotationDeclarationImpl private constructor(
     internal companion object {
         private val cache = KoDeclarationCache<KoAnnotationDeclarationImpl>()
 
-        internal fun getInstance(ktObjectDeclaration: KtAnnotationEntry, parent: KoBaseDeclaration) =
+        internal fun getInstance(ktObjectDeclaration: KtAnnotationEntry, parent: KoBaseDeclaration): KoAnnotationDeclaration =
             cache.getOrCreateInstance(ktObjectDeclaration, parent) { KoAnnotationDeclarationImpl(ktObjectDeclaration) }
     }
 }

@@ -100,7 +100,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
     internal companion object {
         private val cache = KoDeclarationCache<KoFileDeclarationImpl>()
 
-        internal fun getInstance(ktFile: KtFile, parent: KoBaseDeclaration?) = cache.getOrCreateInstance(ktFile, parent) {
+        internal fun getInstance(ktFile: KtFile, parent: KoBaseDeclaration?): KoFileDeclaration = cache.getOrCreateInstance(ktFile, parent) {
             KoFileDeclarationImpl(ktFile)
         }
     }

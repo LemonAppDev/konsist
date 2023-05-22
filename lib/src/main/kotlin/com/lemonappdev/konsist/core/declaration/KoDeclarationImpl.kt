@@ -61,7 +61,7 @@ internal abstract class KoDeclarationImpl(
 
     override fun hasPublicModifier(): Boolean = hasModifiers(KoModifier.PUBLIC)
 
-    override fun isPublicOrDefault() = ktTypeParameterListOwner.isPublic
+    override fun isPublicOrDefault(): Boolean = ktTypeParameterListOwner.isPublic
 
     override fun hasPrivateModifier(): Boolean = hasModifiers(KoModifier.PRIVATE)
 
