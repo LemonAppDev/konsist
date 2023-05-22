@@ -46,8 +46,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         sourceSetName: String? = null,
         ignoreBuildConfig: Boolean = true,
     ): Sequence<KoFileDeclaration> {
-        println("getFiles ${projectKotlinFiles.toList().size}")
-
         val localProjectKotlinFiles = projectKotlinFiles
             .filterNot { isBuildPath(it.filePath) }
             .let {
@@ -162,13 +160,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
     }
 
-    private fun File.toKoFiles(): Sequence<KoFileDeclaration> {
-        println("File.toKoFiles ${walk().toList()}")
-
-        return walk()
-            .filter { it.isKotlinFile }
-            .map { it.toKoFile() }
-    }
+    private fun File.toKoFiles(): Sequence<KoFileDeclaration> = walk()
+        .filter { it.isKotlinFile }
+        .map { it.toKoFile() }
 
     companion object {
         private const val TEST_NAME_IN_PATH = "test"
