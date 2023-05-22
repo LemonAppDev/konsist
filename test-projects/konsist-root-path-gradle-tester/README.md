@@ -1,6 +1,7 @@
 # Project Root Path Resolver Gradle
 
-This project is used to test root project folder resolution with Gradle build system.
+This project is used to test root project folder resolution with 
+[Gradle](https://gradle.org/) build system.
 
 Test project contains [root](.) module and [app](.\app) submodule. 
 
