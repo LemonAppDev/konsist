@@ -22,7 +22,7 @@ internal class KoTypeAliasDeclarationImpl private constructor(private val ktType
     override fun hasActualModifier(): Boolean = hasModifiers(KoModifier.ACTUAL)
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoTypeAliasDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoTypeAliasDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(ktTypeAlias: KtTypeAlias, parent: KoBaseDeclaration): KoTypeAliasDeclaration =
             cache.getOrCreateInstance(ktTypeAlias, parent) { KoTypeAliasDeclarationImpl(ktTypeAlias, parent) }

@@ -138,7 +138,7 @@ internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoP
             .contains(it)
     }
 
-    private fun parseToValuedTag(koKDocTag: KoKDocTag, sentence: String): KoValuedKDocTagDeclarationImpl {
+    private fun parseToValuedTag(koKDocTag: KoKDocTag, sentence: String): KoValuedKDocTagDeclaration {
         val parsed = sentence.split(" ")
         val description = parsed
             .subList(2, parsed.size)
@@ -147,7 +147,7 @@ internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoP
         return KoValuedKDocTagDeclarationImpl(koKDocTag, parsed[1], description)
     }
 
-    private fun parseToTag(koKDocTag: KoKDocTag, sentence: String): KoKDocTagDeclarationImpl {
+    private fun parseToTag(koKDocTag: KoKDocTag, sentence: String): KoKDocTagDeclaration {
         val parsed = sentence.split(" ")
         val description = parsed
             .subList(1, parsed.size)

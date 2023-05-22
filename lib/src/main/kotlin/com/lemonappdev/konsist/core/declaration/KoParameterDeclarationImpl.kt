@@ -58,7 +58,7 @@ internal class KoParameterDeclarationImpl private constructor(private val ktPara
     override fun representsType(type: String): Boolean = this.type.name == type || this.type.fullyQualifiedName == type
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoParameterDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(ktParameter: KtParameter, parent: KoBaseDeclaration): KoParameterDeclaration =
             cache.getOrCreateInstance(ktParameter, parent) { KoParameterDeclarationImpl(ktParameter, parent) }

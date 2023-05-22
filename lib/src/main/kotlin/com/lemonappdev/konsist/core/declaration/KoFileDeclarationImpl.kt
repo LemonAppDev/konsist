@@ -98,7 +98,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
     override fun hashCode(): Int = 31 * 7 + filePath.hashCode()
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoFileDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoFileDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(ktFile: KtFile, parent: KoBaseDeclaration?): KoFileDeclaration = cache.getOrCreateInstance(ktFile, parent) {
             KoFileDeclarationImpl(ktFile)

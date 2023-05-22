@@ -26,7 +26,7 @@ internal class KoObjectDeclarationImpl(
     override fun hasCompanionModifier(): Boolean = hasModifiers(KoModifier.COMPANION)
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoObjectDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoObjectDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(ktObjectDeclaration: KtObjectDeclaration, parent: KoBaseDeclaration): KoObjectDeclaration =
             cache.getOrCreateInstance(ktObjectDeclaration, parent) { KoObjectDeclarationImpl(ktObjectDeclaration, parent) }

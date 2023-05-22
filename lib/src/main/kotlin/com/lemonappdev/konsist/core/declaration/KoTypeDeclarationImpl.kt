@@ -53,7 +53,7 @@ internal class KoTypeDeclarationImpl private constructor(
     override fun isImportAlias(): Boolean = importAliasName.isNotEmpty()
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoTypeDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(ktTypeReference: KtTypeReference, parent: KoBaseDeclaration): KoTypeDeclaration =
             cache.getOrCreateInstance(ktTypeReference, parent) { KoTypeDeclarationImpl(ktTypeReference) }

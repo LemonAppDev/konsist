@@ -20,7 +20,7 @@ internal class KoAnnotationDeclarationImpl private constructor(
     override fun representsType(name: String): Boolean = name == this.name || name == fullyQualifiedName
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoAnnotationDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoAnnotationDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(ktObjectDeclaration: KtAnnotationEntry, parent: KoBaseDeclaration): KoAnnotationDeclaration =
             cache.getOrCreateInstance(ktObjectDeclaration, parent) { KoAnnotationDeclarationImpl(ktObjectDeclaration) }

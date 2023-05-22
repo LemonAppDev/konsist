@@ -15,7 +15,7 @@ internal class KoImportDeclarationImpl private constructor(private val ktImportD
     override val isWildcard: Boolean by lazy { ktImportDirective.text.endsWith('*') }
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoImportDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoImportDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(ktImportDirective: KtImportDirective, parent: KoBaseDeclaration): KoImportDeclaration =
             cache.getOrCreateInstance(ktImportDirective, parent) { KoImportDeclarationImpl(ktImportDirective) }

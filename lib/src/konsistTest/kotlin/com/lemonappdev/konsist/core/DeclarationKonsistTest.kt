@@ -19,6 +19,13 @@ class DeclarationKonsistTest {
             .assert { it.hasReturnType() }
     }
 
+    @Test
+    fun `every property has explicit type declaration`() {
+        declarationPackageScope
+            .properties(includeNested = true)
+            .assert { it.hasType() }
+    }
+
     companion object {
         val declarationPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.declaration..", sourceSetName = "main")
     }

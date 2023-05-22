@@ -80,7 +80,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
     override fun hasValidReturnTag(enabled: Boolean): Boolean = TagHelper.hasValidReturnTag(enabled, kDoc)
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoFunctionDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(ktFunction: KtFunction, parent: KoBaseDeclaration): KoFunctionDeclaration = cache.getOrCreateInstance(ktFunction, parent) {
             KoFunctionDeclarationImpl(ktFunction, parent)
