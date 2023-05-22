@@ -1,5 +1,5 @@
 /**
- * Sample KDoc
+ * @version 1.0.0
  */
 interface SampleInterface {
 }

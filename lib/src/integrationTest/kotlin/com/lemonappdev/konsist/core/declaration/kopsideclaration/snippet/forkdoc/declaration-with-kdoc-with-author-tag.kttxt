@@ -1,5 +1,5 @@
 /**
- * Sample KDoc
+ * @author sample author
  */
 interface SampleInterface {
 }
