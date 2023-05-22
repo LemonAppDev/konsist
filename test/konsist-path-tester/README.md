@@ -1,8 +1,6 @@
-# Test Konsist Scope Creation
+# Test Konsist Path Tester
 
-This project is used to test the `Konsist` class.
-
-This project is used to test root project folder resolution and file querying logic using integration tests.
+This project is used to test root project folder resolution and Kotlin file querying logic.
 
 Test project contains [root](.) module and two submodules ([app](.\app) and [data](.\data)). 
 
