@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
@@ -29,7 +30,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
             val checkMethodName = Thread.currentThread().stackTrace[2].methodName
             throw KoPreconditionFailedException(
                 "Declaration list is empty. Please make sure that list of declarations contain items " +
-                    "before calling the '$checkMethodName' method.",
+                        "before calling the '$checkMethodName' method.",
             )
         }
 
@@ -83,12 +84,18 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                (
-                    it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
-                        it.text.endsWith("Suppress(\"$testMethodName\")")
-                    )
+                    (
+                            it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
+                                    it.text.endsWith("Suppress(\"$testMethodName\")")
+                            )
         }
-        .forEach { declarations[it] = checkIfSuppressed(it as KoDeclarationImpl, testMethodName) }
+        .forEach {
+            if (it is KoDeclaration) {
+                declarations[it] = checkIfSuppressed(it as KoDeclaration, testMethodName)
+            } else {
+                declarations[it] = false
+            }
+        }
 
     val withoutSuppress = mutableListOf<E>()
 
@@ -97,8 +104,8 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
     return withoutSuppress
 }
 
-private fun checkIfSuppressed(declaration: KoDeclarationImpl, testMethodName: String): Boolean {
-    val annotationParameter = declaration
+private fun checkIfSuppressed(declaration: KoDeclaration, testMethodName: String): Boolean {
+    val annotationParameter = (declaration as KoDeclarationImpl)
         .annotations
         .firstOrNull { it.name == "Suppress" }
         ?.text
