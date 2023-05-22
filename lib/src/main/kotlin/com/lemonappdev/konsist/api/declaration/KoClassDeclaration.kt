@@ -113,4 +113,9 @@ interface KoClassDeclaration : KoComplexDeclaration {
      * Whatever class has parents.
      */
     fun hasParents(vararg names: String): Boolean
+
+    /**
+     * Whatever class has test.
+     */
+    fun hasTest(testFileNameSuffix: String = "Test", moduleName: String? = null, sourceSetName: String? = null): Boolean
 }
