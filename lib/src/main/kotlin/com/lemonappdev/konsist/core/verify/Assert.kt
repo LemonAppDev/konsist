@@ -49,7 +49,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
-        throw KoInternalException(e.message, e, lastDeclaration)
+        throw KoInternalException(e.message.orEmpty(), e, lastDeclaration)
     }
 }
 
