@@ -9,7 +9,7 @@ abstract class ProjectRootDirResolver(
     abstract val paths: Set<String>
 
     fun getProjectRootDir(file: File): File? {
-        val allExist = paths.all { pathVerifier.verifyPathIfExists(file, it) }
+        val allExist = paths.any { pathVerifier.verifyPathIfExists(file, it) }
 
         return if (allExist) {
             file
