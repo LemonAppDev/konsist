@@ -8,7 +8,7 @@ class MavenProjectRootDirResolver(
     override val paths = setOf(
         "mvnw",
         "mvnw.cmd",
-        "/.mvn/wrapper/maven-wrapper.jar",
-        "/.mvn/wrapper/maven-wrapper.properties",
+        "./mvn/wrapper/maven-wrapper.jar",
+        "./mvn/wrapper/maven-wrapper.properties",
     )
 }
