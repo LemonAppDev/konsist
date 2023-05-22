@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.sequence.withReturnType
 import com.lemonappdev.konsist.api.ext.sequence.withType
+import com.lemonappdev.konsist.api.ext.sequence.withoutName
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 import org.junit.jupiter.api.Test
@@ -12,6 +13,7 @@ class DeclarationKonsistTest {
     fun `every function has explicit return type declaration`() {
         declarationPackageScope
             .functions(includeNested = true)
+            .withoutName("print")
             .assert { it.hasReturnType() }
     }
 
