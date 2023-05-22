@@ -1,4 +1,4 @@
-# Test Konsist Path Tester
+# Konsist Path Tester
 
 This project is used to test root project folder resolution and Kotlin file querying logic.
 
