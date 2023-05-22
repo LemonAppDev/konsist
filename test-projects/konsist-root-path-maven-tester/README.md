@@ -1,8 +1,9 @@
-# junit5-jupiter-starter-maven-kotlin
+# Project Root Path Resolver Gradle
 
-The `junit5-jupiter-starter-maven-kotlin` sample demonstrates the bare minimum configuration for
-getting started with JUnit Jupiter project using Maven build system and Kotlin programming language.
+This project is used to test root project folder resolution with 
+[Maven](https://maven.apache.org/) build system.
 
-Please note that this project is uses the [Maven Wrapper](https://github.com/takari/maven-wrapper)
-3.6.1 version. This helps you ensure that already tested versions are not going to be failed if
-locally installed different maven version.
+Test project contains [root](.) module and [app](.\app) submodule. 
+
+For Konsist sample projects see
+the [konsist-sample-projects](https://github.com/LemonAppDev/konsist-sample-projects/) repository.
