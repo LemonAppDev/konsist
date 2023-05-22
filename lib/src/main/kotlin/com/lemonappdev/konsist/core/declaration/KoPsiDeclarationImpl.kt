@@ -61,35 +61,35 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
 
     protected open fun hasValidDescription(enabled: Boolean) = TagHelper.hasValidDescription(enabled, kDoc)
 
-    protected open fun hasValidParamTag(enabled: Boolean) = true
+    protected open fun hasValidParamTag(enabled: Boolean) = TagHelper.hasValidParamTag(enabled, parameters = null, kDoc)
 
-    protected open fun hasValidReturnTag(enabled: Boolean) = true
+    protected open fun hasValidReturnTag(enabled: Boolean) = TagHelper.hasValidReturnTag(enabled, kDoc)
 
-    protected open fun hasValidConstructorTag(enabled: Boolean) = true
+    protected open fun hasValidConstructorTag(enabled: Boolean) = TagHelper.hasValidConstructorTag(enabled, kDoc)
 
-    protected open fun hasValidReceiverTag(enabled: Boolean) = true
+    protected open fun hasValidReceiverTag(enabled: Boolean) = TagHelper.hasValidReceiverTag(enabled, kDoc)
 
-    protected open fun hasValidPropertyTag(enabled: Boolean) = true
+    protected open fun hasValidPropertyTag(enabled: Boolean) = TagHelper.hasValidPropertyTag(enabled, properties = null, kDoc)
 
-    protected open fun hasValidThrowsTag(enabled: Boolean) = true
+    protected open fun hasValidThrowsTag(enabled: Boolean) = TagHelper.hasValidThrowsTag(enabled, kDoc)
 
-    protected open fun hasValidExceptionTag(enabled: Boolean) = true
+    protected open fun hasValidExceptionTag(enabled: Boolean) = TagHelper.hasValidExceptionTag(enabled, kDoc)
 
-    protected open fun hasValidSampleTag(enabled: Boolean) = true
+    protected open fun hasValidSampleTag(enabled: Boolean) = TagHelper.hasValidSampleTag(enabled, kDoc)
 
-    protected open fun hasValidSeeTag(enabled: Boolean) = true
+    protected open fun hasValidSeeTag(enabled: Boolean) = TagHelper.hasValidSeeTag(enabled, kDoc)
 
-    protected open fun hasValidAuthorTag(enabled: Boolean) = true
+    protected open fun hasValidAuthorTag(enabled: Boolean) = TagHelper.hasValidAuthorTag(enabled, kDoc)
 
-    protected open fun hasValidSinceTag(enabled: Boolean) = true
+    protected open fun hasValidSinceTag(enabled: Boolean) = TagHelper.hasValidSinceTag(enabled, kDoc)
 
-    protected open fun hasValidSuppressTag(enabled: Boolean) = true
+    protected open fun hasValidSuppressTag(enabled: Boolean) = TagHelper.hasValidSuppressTag(enabled, kDoc)
 
-    protected open fun hasValidVersionTag(enabled: Boolean) = true
+    protected open fun hasValidVersionTag(enabled: Boolean) = TagHelper.hasValidVersionTag(enabled, kDoc)
 
-    protected open fun hasValidPropertySetterTag(enabled: Boolean) = true
+    protected open fun hasValidPropertySetterTag(enabled: Boolean) = TagHelper.hasValidPropertySetterTag(enabled, kDoc)
 
-    protected open fun hasValidPropertyGetterTag(enabled: Boolean) = true
+    protected open fun hasValidPropertyGetterTag(enabled: Boolean) = TagHelper.hasValidPropertyGetterTag(enabled, kDoc)
 
     @Suppress("detekt.CyclomaticComplexMethod")
     override fun hasValidKDoc(
