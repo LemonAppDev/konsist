@@ -6,72 +6,72 @@ import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
 import kotlin.reflect.KClass
 
 /**
- * Sequence containing declarations that have the 'public' modifier.
+ * Sequence containing declarations that have the `public` modifier.
  *
- * @return A sequence containing declarations with the 'public' modifier.
+ * @return A sequence containing declarations with the `public` modifier.
  */
 fun <T : KoDeclaration> Sequence<T>.withPublicModifier(): Sequence<T> = filter { it.hasPublicModifier() }
 
 /**
- * Sequence containing declarations that don't have the 'public' modifier.
+ * Sequence containing declarations that don't have the `public` modifier.
  *
- * @return A sequence containing declarations without the 'public' modifier.
+ * @return A sequence containing declarations without the `public` modifier.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutPublicModifier(): Sequence<T> = filterNot { it.hasPublicModifier() }
 
 /**
- * Sequence containing declarations that have the 'public' or no visibility modifier.
+ * Sequence containing declarations that have the `public` or no visibility modifier.
  *
- * @return A sequence containing declarations with the 'public' or no visibility modifier..
+ * @return A sequence containing declarations with the `public` or no visibility modifier..
  */
 fun <T : KoDeclaration> Sequence<T>.withPublicOrDefaultModifier(): Sequence<T> = filter { it.isPublicOrDefault() }
 
 /**
- * Sequence containing declarations that don't have the 'public' or no visibility modifier.
+ * Sequence containing declarations that don't have the `public` or no visibility modifier.
  *
- * @return A sequence containing declarations without the 'public' or no visibility modifier..
+ * @return A sequence containing declarations without the `public` or no visibility modifier..
  */
 fun <T : KoDeclaration> Sequence<T>.withoutPublicOrDefaultModifier(): Sequence<T> = filterNot { it.isPublicOrDefault() }
 
 /**
- * Sequence containing declarations that have the 'private' modifier.
+ * Sequence containing declarations that have the `private` modifier.
  *
- * @return A sequence containing declarations with the 'private' modifier.
+ * @return A sequence containing declarations with the `private` modifier.
  */
 fun <T : KoDeclaration> Sequence<T>.withPrivateModifier(): Sequence<T> = filter { it.hasPrivateModifier() }
 
 /**
- * Sequence containing declarations that don't have the 'private' modifier.
+ * Sequence containing declarations that don't have the `private` modifier.
  *
- * @return A sequence containing declarations without the 'private' modifier.
+ * @return A sequence containing declarations without the `private` modifier.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutPrivateModifier(): Sequence<T> = filterNot { it.hasPrivateModifier() }
 
 /**
- * Sequence containing declarations that have the 'protected' modifier.
+ * Sequence containing declarations that have the `protected` modifier.
  *
- * @return A sequence containing declarations with the 'protected' modifier.
+ * @return A sequence containing declarations with the `protected` modifier.
  */
 fun <T : KoDeclaration> Sequence<T>.withProtectedModifier(): Sequence<T> = filter { it.hasProtectedModifier() }
 
 /**
- * Sequence containing declarations that don't have the 'protected' modifier.
+ * Sequence containing declarations that don't have the `protected` modifier.
  *
- * @return A sequence containing declarations without the 'protected' modifier.
+ * @return A sequence containing declarations without the `protected` modifier.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutProtectedModifier(): Sequence<T> = filterNot { it.hasProtectedModifier() }
 
 /**
- * Sequence containing declarations that have the 'internal' modifier.
+ * Sequence containing declarations that have the `internal` modifier.
  *
- * @return A sequence containing declarations with the 'internal' modifier.
+ * @return A sequence containing declarations with the `internal` modifier.
  */
 fun <T : KoDeclaration> Sequence<T>.withInternalModifier(): Sequence<T> = filter { it.hasInternalModifier() }
 
 /**
- * Sequence containing declarations that don't have the 'internal' modifier.
+ * Sequence containing declarations that don't have the `internal` modifier.
  *
- * @return A sequence containing declarations without the 'internal' modifier.
+ * @return A sequence containing declarations without the `internal` modifier.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutInternalModifier(): Sequence<T> = filterNot { it.hasInternalModifier() }
 
@@ -92,8 +92,8 @@ fun <T : KoDeclaration> Sequence<T>.withoutTopLevel(): Sequence<T> = filterNot {
 /**
  * Sequence containing declarations that have all annotations.
  *
- * @param annotations The annotations to include. If empty, all declarations with annotations are included.
- * @return A sequence containing declarations that have all the specified annotations.
+ * @param annotations The annotations to include.
+ * @return A sequence containing declarations that have all the specified annotations (or any annotation if [annotations] is empty).
  */
 fun <T : KoDeclaration> Sequence<T>.withAnnotations(vararg annotations: String): Sequence<T> = filter {
     when {
@@ -115,8 +115,8 @@ fun <T : KoDeclaration> Sequence<T>.withSomeAnnotations(vararg annotations: Stri
 /**
  * Sequence containing declarations that don't have the annotations.
  *
- * @param annotations The annotations to exclude. If empty, all declarations without annotations are included.
- * @return A sequence containing declarations that don't have any of the specified annotations.
+ * @param annotations The annotations to exclude.
+ * @return A sequence containing declarations that don't have any of the specified annotations (or none annotation if [annotations] is empty).
  */
 fun <T : KoDeclaration> Sequence<T>.withoutAnnotations(vararg annotations: String): Sequence<T> = filter {
     when {
@@ -170,8 +170,8 @@ inline fun <reified T> Sequence<KoDeclaration>.withoutAnnotationOf(): Sequence<K
 /**
  * Sequence containing declarations that have all modifiers.
  *
- * @param modifiers The modifiers to include. If empty, all declarations with modifiers are included.
- * @return A sequence containing declarations that have all the specified modifiers.
+ * @param modifiers The modifiers to include.
+ * @return A sequence containing declarations that have all the specified modifiers (or any modifier if [modifiers] is empty).
  */
 fun <T : KoDeclaration> Sequence<T>.withModifiers(vararg modifiers: KoModifier): Sequence<T> = filter {
     when {
@@ -193,8 +193,8 @@ fun <T : KoDeclaration> Sequence<T>.withSomeModifiers(vararg modifiers: KoModifi
 /**
  * Sequence containing declarations that don't have the modifiers.
  *
- * @param modifiers The modifiers to exclude. If empty, all declarations without modifiers are included.
- * @return A sequence containing declarations that don't have any of the specified modifiers.
+ * @param modifiers The modifiers to exclude.
+ * @return A sequence containing declarations that don't have any of the specified modifiers (or none modifier if [modifiers] is empty).
  */
 fun <T : KoDeclaration> Sequence<T>.withoutModifiers(vararg modifiers: KoModifier): Sequence<T> = filter {
     when {

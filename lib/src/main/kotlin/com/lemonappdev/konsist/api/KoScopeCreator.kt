@@ -18,7 +18,7 @@ interface KoScopeCreator {
      *
      * @param moduleName The name of the module. If null, all modules will be included.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
-     * @param ignoreBuildConfig If true, build config files such as Gradle buildSrc directory will be ignored.
+     * @param ignoreBuildConfig If `true`, build config files such as Gradle buildSrc directory will be ignored.
      * @return a [KoScope] containing all of Kotlin files in the project.
      */
     fun scopeFromProject(moduleName: String? = null, sourceSetName: String? = null, ignoreBuildConfig: Boolean = true): KoScope

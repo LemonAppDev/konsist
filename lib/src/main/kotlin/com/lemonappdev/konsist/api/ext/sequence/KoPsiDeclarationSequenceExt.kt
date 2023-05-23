@@ -20,22 +20,22 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutKDoc(): Sequence<T> = filterNot { 
 /**
  * Sequence containing declarations that have valid KDoc.
  *
- * @param verifyDescription -false to not verify a description in the KDoc. By default, true.
- * @param verifyParamTag - true to verify param tags in the KDoc. By default, false.
- * @param verifyReturnTag - true to verify a return tag in the KDoc. By default, false.
- * @param verifyConstructorTag - true to verify a constructor tag in the KDoc. By default, false.
- * @param verifyReceiverTag - true to verify a receiver tag in the KDoc. By default, false.
- * @param verifyPropertyTag - true to verify a property tag in the KDoc. By default, false.
- * @param verifyThrowsTag - true to verify throws tags in the KDoc. By default, false.
- * @param verifyExceptionTag - true to verify exception tags in the KDoc. By default, false.
- * @param verifySampleTag - true to verify sample tags in the KDoc. By default, false.
- * @param verifySeeTag - true to verify see tags in the KDoc. By default, false.
- * @param verifyAuthorTag - true to verify author tags in the KDoc. By default, false.
- * @param verifySinceTag - true to verify since tags in the KDoc. By default, false.
- * @param verifySuppressTag - true to verify suppress tags in the KDoc. By default, false.
- * @param verifyVersionTag - true to verify version tags in the KDoc. By default, false.
- * @param verifyPropertySetterTag - true to verify property setter tags in the KDoc. By default, false.
- * @param verifyPropertyGetterTag - true to verify property getter tags in the KDoc. By default, false.
+ * @param verifyDescription `false` to not verify a description in the KDoc. By default, `true`.
+ * @param verifyParamTag `true` to verify param tags in the KDoc. By default, `false`.
+ * @param verifyReturnTag `true` to verify a return tag in the KDoc. By default, `false`.
+ * @param verifyConstructorTag `true` to verify a constructor tag in the KDoc. By default, `false`.
+ * @param verifyReceiverTag `true` to verify a receiver tag in the KDoc. By default, `false`.
+ * @param verifyPropertyTag `true` to verify a property tag in the KDoc. By default, `false`.
+ * @param verifyThrowsTag `true` to verify throws tags in the KDoc. By default, `false`.
+ * @param verifyExceptionTag `true` to verify exception tags in the KDoc. By default, `false`.
+ * @param verifySampleTag `true` to verify sample tags in the KDoc. By default, `false`.
+ * @param verifySeeTag `true` to verify see tags in the KDoc. By default, `false`.
+ * @param verifyAuthorTag `true` to verify author tags in the KDoc. By default, `false`.
+ * @param verifySinceTag `true` to verify since tags in the KDoc. By default, `false`.
+ * @param verifySuppressTag `true` to verify suppress tags in the KDoc. By default, `false`.
+ * @param verifyVersionTag `true` to verify version tags in the KDoc. By default, `false`.
+ * @param verifyPropertySetterTag `true` to verify property setter tags in the KDoc. By default, `false`.
+ * @param verifyPropertyGetterTag `true` to verify property getter tags in the KDoc. By default, `false`.
  * @return A sequence containing declarations with a valid KDoc.
  */
 fun <T : KoPsiDeclaration> Sequence<T>.withValidKDoc(
@@ -79,22 +79,22 @@ fun <T : KoPsiDeclaration> Sequence<T>.withValidKDoc(
 /**
  * Sequence containing declarations that don't have the valid KDoc.
  *
- * @param verifyDescription -false to not verify a description in the KDoc. By default, true.
- * @param verifyParamTag - true to verify param tags in the KDoc. By default, false.
- * @param verifyReturnTag - true to verify a return tag in the KDoc. By default, false.
- * @param verifyConstructorTag - true to verify a constructor tag in the KDoc. By default, false.
- * @param verifyReceiverTag - true to verify a receiver tag in the KDoc. By default, false.
- * @param verifyPropertyTag - true to verify a property tag in the KDoc. By default, false.
- * @param verifyThrowsTag - true to verify throws tags in the KDoc. By default, false.
- * @param verifyExceptionTag - true to verify exception tags in the KDoc. By default, false.
- * @param verifySampleTag - true to verify sample tags in the KDoc. By default, false.
- * @param verifySeeTag - true to verify see tags in the KDoc. By default, false.
- * @param verifyAuthorTag - true to verify author tags in the KDoc. By default, false.
- * @param verifySinceTag - true to verify since tags in the KDoc. By default, false.
- * @param verifySuppressTag - true to verify suppress tags in the KDoc. By default, false.
- * @param verifyVersionTag - true to verify version tags in the KDoc. By default, false.
- * @param verifyPropertySetterTag - true to verify property setter tags in the KDoc. By default, false.
- * @param verifyPropertyGetterTag - true to verify property getter tags in the KDoc. By default, false.
+ * @param verifyDescription `false` to not verify a description in the KDoc. By default, `true`.
+ * @param verifyParamTag `true` to verify param tags in the KDoc. By default, `false`.
+ * @param verifyReturnTag `true` to verify a return tag in the KDoc. By default, `false`.
+ * @param verifyConstructorTag `true` to verify a constructor tag in the KDoc. By default, `false`.
+ * @param verifyReceiverTag `true` to verify a receiver tag in the KDoc. By default, `false`.
+ * @param verifyPropertyTag `true` to verify a property tag in the KDoc. By default, `false`.
+ * @param verifyThrowsTag `true` to verify throws tags in the KDoc. By default, `false`.
+ * @param verifyExceptionTag `true` to verify exception tags in the KDoc. By default, `false`.
+ * @param verifySampleTag `true` to verify sample tags in the KDoc. By default, `false`.
+ * @param verifySeeTag `true` to verify see tags in the KDoc. By default, `false`.
+ * @param verifyAuthorTag `true` to verify author tags in the KDoc. By default, `false`.
+ * @param verifySinceTag `true` to verify since tags in the KDoc. By default, `false`.
+ * @param verifySuppressTag `true` to verify suppress tags in the KDoc. By default, `false`.
+ * @param verifyVersionTag `true` to verify version tags in the KDoc. By default, `false`.
+ * @param verifyPropertySetterTag `true` to verify property setter tags in the KDoc. By default, `false`.
+ * @param verifyPropertyGetterTag `true` to verify property getter tags in the KDoc. By default, `false`.
  * @return A sequence containing declarations without a valid KDoc.
  */
 fun <T : KoPsiDeclaration> Sequence<T>.withoutValidKDoc(
