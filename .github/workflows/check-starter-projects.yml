@@ -45,4 +45,4 @@ jobs:
         run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/konsistTest/build.gradle
 
       - name: Run App Konsist Test
-        run: samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/gradlew konsistTest:test
+        run: cd samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/ && ./gradlew konsistTest:test
