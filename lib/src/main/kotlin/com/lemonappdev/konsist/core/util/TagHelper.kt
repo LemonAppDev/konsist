@@ -14,11 +14,16 @@ object TagHelper {
     }
 
     fun hasValidParamTag(verifyParamTag: Boolean, parameters: List<KoParameterDeclaration>?, kDoc: KoKDocDeclaration?) =
-        if (verifyParamTag && parameters != null) {
-            val kDocParameters = kDoc?.paramTags?.map { it.value }?.sorted()
-            val givenParameters = parameters.map { it.name }.sorted()
+        if (verifyParamTag) {
+            when (parameters) {
+                null -> kDoc?.paramTags == null
+                else -> {
+                    val kDocParameters = kDoc?.paramTags?.map { it.value }?.sorted()
+                    val givenParameters = parameters.map { it.name }.sorted()
 
-            givenParameters == kDocParameters
+                    givenParameters == kDocParameters
+                }
+            }
         } else {
             true
         }
@@ -42,41 +47,46 @@ object TagHelper {
     }
 
     fun hasValidPropertyTag(verifyPropertyTag: Boolean, properties: List<KoPropertyDeclaration>?, kDoc: KoKDocDeclaration?) =
-        if (verifyPropertyTag && properties != null) {
-            val kDocProperties = kDoc?.propertyTags?.map { it.value }?.sorted()
-            val givenProperties = properties.map { it.name }.sorted()
+        if (verifyPropertyTag) {
+            when (properties) {
+                null -> kDoc?.propertyTags == null
+                else -> {
+                    val kDocProperties = kDoc?.propertyTags?.map { it.value }?.sorted()
+                    val givenProperties = properties.map { it.name }.sorted()
 
-            givenProperties == kDocProperties
+                    givenProperties == kDocProperties
+                }
+            }
         } else {
             true
         }
 
     fun hasValidThrowsTag(verifyThrowsTag: Boolean, kDoc: KoKDocDeclaration?) = if (verifyThrowsTag) {
-        kDoc?.throwsTags != emptyList<KoValuedKDocTagDeclaration>()
+        kDoc?.throwsTags != emptyList<KoValuedKDocTagDeclaration>() && kDoc != null
     } else {
         true
     }
 
     fun hasValidExceptionTag(verifyExceptionTag: Boolean, kDoc: KoKDocDeclaration?) = if (verifyExceptionTag) {
-        kDoc?.exceptionTags != emptyList<KoValuedKDocTagDeclaration>()
+        kDoc?.exceptionTags != emptyList<KoValuedKDocTagDeclaration>() && kDoc != null
     } else {
         true
     }
 
     fun hasValidSampleTag(verifySampleTag: Boolean, kDoc: KoKDocDeclaration?) = if (verifySampleTag) {
-        kDoc?.sampleTags != emptyList<KoValuedKDocTagDeclaration>()
+        kDoc?.sampleTags != emptyList<KoValuedKDocTagDeclaration>() && kDoc != null
     } else {
         true
     }
 
     fun hasValidSeeTag(verifySeeTag: Boolean, kDoc: KoKDocDeclaration?) = if (verifySeeTag) {
-        kDoc?.seeTags != emptyList<KoValuedKDocTagDeclaration>()
+        kDoc?.seeTags != emptyList<KoValuedKDocTagDeclaration>() && kDoc != null
     } else {
         true
     }
 
     fun hasValidAuthorTag(verifyAuthorTag: Boolean, kDoc: KoKDocDeclaration?) = if (verifyAuthorTag) {
-        kDoc?.authorTags != emptyList<KoKDocTagDeclaration>()
+        kDoc?.authorTags != emptyList<KoKDocTagDeclaration>() && kDoc != null
     } else {
         true
     }
