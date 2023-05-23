@@ -108,7 +108,7 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
     override fun hasValidParamTag(enabled: Boolean) = TagHelper.hasValidParamTag(enabled, primaryConstructor?.parameters, kDoc)
 
     override fun hasTest(testFileNameSuffix: String, moduleName: String?, sourceSetName: String?): Boolean = Konsist
-        .scopeFromProject(moduleName, sourceSetName)
+        .scopeFromTest(moduleName, sourceSetName)
         .classes()
         .any { it.name == name + testFileNameSuffix }
 
