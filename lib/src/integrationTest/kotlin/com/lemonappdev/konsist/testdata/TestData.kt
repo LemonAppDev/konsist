@@ -18,9 +18,6 @@ interface SampleInterface1
 
 object SampleObject
 
-// this class is used for KoClassDeclaration.hasTest() tests
-class SampleClassTest
-
 annotation class NonExistingAnnotation
 
 @Target(
