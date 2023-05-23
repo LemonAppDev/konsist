@@ -16,7 +16,7 @@ object TagHelper {
     fun hasValidParamTag(verifyParamTag: Boolean, parameters: List<KoParameterDeclaration>?, kDoc: KoKDocDeclaration?) =
         if (verifyParamTag) {
             when (parameters) {
-                null -> kDoc?.paramTags == null
+                null -> kDoc?.paramTags == emptyList<KoValuedKDocTagDeclaration>()
                 else -> {
                     val kDocParameters = kDoc?.paramTags?.map { it.value }?.sorted()
                     val givenParameters = parameters.map { it.name }.sorted()
@@ -49,7 +49,7 @@ object TagHelper {
     fun hasValidPropertyTag(verifyPropertyTag: Boolean, properties: List<KoPropertyDeclaration>?, kDoc: KoKDocDeclaration?) =
         if (verifyPropertyTag) {
             when (properties) {
-                null -> kDoc?.propertyTags == null
+                null -> kDoc?.propertyTags == emptyList<KoValuedKDocTagDeclaration>()
                 else -> {
                     val kDocProperties = kDoc?.propertyTags?.map { it.value }?.sorted()
                     val givenProperties = properties.map { it.name }.sorted()

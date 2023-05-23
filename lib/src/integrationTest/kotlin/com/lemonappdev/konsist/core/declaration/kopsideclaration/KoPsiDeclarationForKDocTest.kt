@@ -316,7 +316,7 @@ class KoPsiDeclarationForKDocTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForParamTag() = listOf(
-            arguments("declaration-with-kdoc-with-param-tags", true, true),
+            arguments("declaration-with-kdoc-with-param-tags", true, false),
             arguments("declaration-with-kdoc-with-param-tags", false, true),
             arguments("declaration-with-kdoc-without-param-tags", true, true),
             arguments("declaration-with-kdoc-without-param-tags", false, true),
@@ -352,7 +352,7 @@ class KoPsiDeclarationForKDocTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForPropertyTag() = listOf(
-            arguments("declaration-with-kdoc-with-property-tags", true, true),
+            arguments("declaration-with-kdoc-with-property-tags", true, false),
             arguments("declaration-with-kdoc-with-property-tags", false, true),
             arguments("declaration-with-kdoc-without-property-tags", true, true),
             arguments("declaration-with-kdoc-without-property-tags", false, true),
