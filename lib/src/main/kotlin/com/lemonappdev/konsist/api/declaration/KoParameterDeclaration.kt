@@ -17,21 +17,21 @@ interface KoParameterDeclaration : KoDeclaration {
     /**
      * Whether the parameter has vararg modifier.
      *
-     * @return `true` if the parameter has the 'vararg' modifier, `false` otherwise.
+     * @return `true` if the parameter has the `vararg` modifier, `false` otherwise.
      */
     fun hasVarargModifier(): Boolean
 
     /**
      * Whether the parameter has noinline modifier.
      *
-     * @return `true` if the parameter has the 'noinline' modifier, `false` otherwise.
+     * @return `true` if the parameter has the `noinline` modifier, `false` otherwise.
      */
     fun hasNoInlineModifier(): Boolean
 
     /**
      * Whether the parameter has crossinline modifier.
      *
-     * @return `true` if the parameter has the 'crossinline' modifier, `false` otherwise.
+     * @return `true` if the parameter has the `crossinline` modifier, `false` otherwise.
      */
     fun hasCrossInlineModifier(): Boolean
 

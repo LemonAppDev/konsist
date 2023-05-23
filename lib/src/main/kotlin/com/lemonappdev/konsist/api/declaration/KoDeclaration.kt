@@ -30,35 +30,35 @@ interface KoDeclaration : KoNamedDeclaration {
     /**
      * Whether the declaration has public modifier.
      *
-     * @return `true` if the declaration has the 'public' modifier, `false` otherwise.
+     * @return `true` if the declaration has the `public` modifier, `false` otherwise.
      */
     fun hasPublicModifier(): Boolean
 
     /**
      * Whether the declaration has public or no visibility modifier.
      *
-     * @return `true` if the declaration has the 'public' or no visibility modifier, `false` otherwise.
+     * @return `true` if the declaration has the `public` or no visibility modifier, `false` otherwise.
      */
     fun isPublicOrDefault(): Boolean
 
     /**
      * Whether the declaration has private modifier.
      *
-     * @return `true` if the declaration has the 'private' modifier, `false` otherwise.
+     * @return `true` if the declaration has the `private` modifier, `false` otherwise.
      */
     fun hasPrivateModifier(): Boolean
 
     /**
      * Whether the declaration has protected modifier.
      *
-     * @return `true` if the declaration has the 'protected' modifier, `false` otherwise.
+     * @return `true` if the declaration has the `protected` modifier, `false` otherwise.
      */
     fun hasProtectedModifier(): Boolean
 
     /**
      * Whether the declaration has internal modifier.
      *
-     * @return `true` if the declaration has the 'internal' modifier, `false` otherwise.
+     * @return `true` if the declaration has the `internal` modifier, `false` otherwise.
      */
     fun hasInternalModifier(): Boolean
 

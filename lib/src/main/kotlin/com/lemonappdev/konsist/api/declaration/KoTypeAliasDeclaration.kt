@@ -12,7 +12,7 @@ interface KoTypeAliasDeclaration : KoDeclaration {
     /**
      * Whether the type alias has actual modifier.
      *
-     * @return `true` if the type alias has the 'actual' modifier, `false` otherwise.
+     * @return `true` if the type alias has the `actual` modifier, `false` otherwise.
      */
     fun hasActualModifier(): Boolean
 }

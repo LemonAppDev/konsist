@@ -5,12 +5,12 @@ package com.lemonappdev.konsist.api.declaration
  */
 interface KoPropertyDeclaration : KoDeclaration {
     /**
-     * Whatever property is 'var'.
+     * Whatever property is `var`.
      */
     val isVar: Boolean
 
     /**
-     * Whatever property is 'val'.
+     * Whatever property is `val`.
      */
     val isVal: Boolean
 
@@ -34,49 +34,49 @@ interface KoPropertyDeclaration : KoDeclaration {
     /**
      * Whether the property has override modifier.
      *
-     * @return `true` if the property has the 'override' modifier, `false` otherwise.
+     * @return `true` if the property has the `override` modifier, `false` otherwise.
      */
     fun hasOverrideModifier(): Boolean
 
     /**
      * Whether the property has abstract modifier.
      *
-     * @return `true` if the property has the 'abstract' modifier, `false` otherwise.
+     * @return `true` if the property has the `abstract` modifier, `false` otherwise.
      */
     fun hasAbstractModifier(): Boolean
 
     /**
      * Whether the property has open modifier.
      *
-     * @return `true` if the property has the 'open' modifier, `false` otherwise.
+     * @return `true` if the property has the `open` modifier, `false` otherwise.
      */
     fun hasOpenModifier(): Boolean
 
     /**
      * Whether the property has final modifier.
      *
-     * @return `true` if the property has the 'final' modifier, `false` otherwise.
+     * @return `true` if the property has the `final` modifier, `false` otherwise.
      */
     fun hasFinalModifier(): Boolean
 
     /**
      * Whether the property has actual modifier.
      *
-     * @return `true` if the property has the 'actual' modifier, `false` otherwise.
+     * @return `true` if the property has the `actual` modifier, `false` otherwise.
      */
     fun hasActualModifier(): Boolean
 
     /**
      * Whether the property has expect modifier.
      *
-     * @return `true` if the property has the 'expect' modifier, `false` otherwise.
+     * @return `true` if the property has the `expect` modifier, `false` otherwise.
      */
     fun hasExpectModifier(): Boolean
 
     /**
      * Whether the property has const modifier.
      *
-     * @return `true` if the property has the 'const' modifier, `false` otherwise.
+     * @return `true` if the property has the `const` modifier, `false` otherwise.
      */
     fun hasConstModifier(): Boolean
 
