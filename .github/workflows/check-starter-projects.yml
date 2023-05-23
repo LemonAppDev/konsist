@@ -1,0 +1,48 @@
+name: Check Starter Projects
+
+on:
+  push:
+    branches: [ main ]
+
+  pull_request:
+    types: [ opened, synchronize ]
+
+jobs:
+  konsist-starter-android-gradle-groovy-junit-4:
+    name: Konsist Starter Android Gradle Groovy Junit 4
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.3'
+
+      - name: Publish
+        run: |
+          ./gradlew publishToMavenLocal \
+          -Pkonsist.releaseTarget=local \
+          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
+          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
+          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
+
+      - name: Replace Konsist Version
+        run: py scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/konsistTest/build.gradle
+
+      - name: Run Root Konsist Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
