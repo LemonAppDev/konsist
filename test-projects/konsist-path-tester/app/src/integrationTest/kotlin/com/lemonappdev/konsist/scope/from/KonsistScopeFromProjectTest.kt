@@ -45,6 +45,7 @@ class KonsistScopeFromProjectTest {
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
@@ -86,6 +87,7 @@ class KonsistScopeFromProjectTest {
                 "$projectRootDirectory/buildSrc/RootBuildScrKotlinClass.kt",
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
@@ -106,6 +108,7 @@ class KonsistScopeFromProjectTest {
             listOf(
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ),
@@ -174,6 +177,7 @@ class KonsistScopeFromProjectTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ),
@@ -276,6 +280,7 @@ class KonsistScopeFromProjectTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
+                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ),
