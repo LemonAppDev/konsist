@@ -1,3 +1,3 @@
 package com.lemonappdev.sample
 
-class LibClassTest
+class LibClassSpec
