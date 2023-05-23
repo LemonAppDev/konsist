@@ -157,13 +157,13 @@ internal object KoDeclarationCoreProviderUtil {
         ktDeclaration is KtProperty -> KoPropertyDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtFunction -> KoFunctionDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(ktDeclaration, parent)
-        else -> throw KoUnsupportedOperationException("Unknown declaration type: ${ktDeclaration.getTextWithLocation()}")
+        else -> null
     }
 
     private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parent: KoBaseDeclaration) = when (psiElement) {
         is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parent)
         is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parent)
         is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(psiElement, parent)
-        else -> throw KoUnsupportedOperationException("Unknown declaration type: ${psiElement.getTextWithLocation()}")
+        else -> null
     }
 }
