@@ -20,7 +20,7 @@ object TagHelper {
             true
         }
 
-    fun hasValidReturnTag(verifyReturnTag: Boolean, kDoc: KoKDocDeclaration?) = if (verifyReturnTag) {
+    fun hasValidReturnTag(verifyReturnTag: Boolean, type: String?, kDoc: KoKDocDeclaration?) = if (verifyReturnTag && type != "Unit") {
         kDoc?.returnTag != null
     } else {
         true

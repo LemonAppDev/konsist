@@ -36,6 +36,8 @@ interface KoPsiDeclaration {
 
     /**
      * Whether the declaration has kDoc.
+     *
+     * @return `true` if the declaration has kDoc, `false` otherwise.
      */
     fun hasKDoc(): Boolean
 
