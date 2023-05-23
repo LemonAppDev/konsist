@@ -74,7 +74,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
 
     override fun localDeclarations(): Sequence<KoDeclarationImpl> = localDeclarations
 
-    override fun hasValidReturnTag(enabled: Boolean) = TagHelper.hasValidReturnTag(enabled, kDoc)
+    override fun hasValidReturnTag(enabled: Boolean) = TagHelper.hasValidReturnTag(enabled, returnType?.name, kDoc)
 
     override fun hasValidParamTag(enabled: Boolean) = TagHelper.hasValidParamTag(enabled, parameters, kDoc)
 
