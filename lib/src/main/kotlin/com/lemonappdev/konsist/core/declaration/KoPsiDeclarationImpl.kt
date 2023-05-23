@@ -63,7 +63,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
 
     protected open fun hasValidParamTag(enabled: Boolean) = TagHelper.hasValidParamTag(enabled, parameters = null, kDoc)
 
-    protected open fun hasValidReturnTag(enabled: Boolean) = TagHelper.hasValidReturnTag(enabled, kDoc)
+    protected open fun hasValidReturnTag(enabled: Boolean) = TagHelper.hasValidReturnTag(enabled, null, kDoc)
 
     protected open fun hasValidConstructorTag(enabled: Boolean) = TagHelper.hasValidConstructorTag(enabled, kDoc)
 
