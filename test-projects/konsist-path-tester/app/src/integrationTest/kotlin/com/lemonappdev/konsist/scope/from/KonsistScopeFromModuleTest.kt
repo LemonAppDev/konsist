@@ -22,6 +22,7 @@ class KonsistScopeFromModuleTest {
             listOf(
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/koclass/KoClassDeclarationForHasTestTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistOperatorTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistSliceTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistToStringTest.kt",
@@ -55,6 +56,7 @@ class KonsistScopeFromModuleTest {
             listOf(
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ),
@@ -73,6 +75,7 @@ class KonsistScopeFromModuleTest {
             listOf(
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/koclass/KoClassDeclarationForHasTestTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistOperatorTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistSliceTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistToStringTest.kt",
@@ -92,6 +95,7 @@ class KonsistScopeFromModuleTest {
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ),

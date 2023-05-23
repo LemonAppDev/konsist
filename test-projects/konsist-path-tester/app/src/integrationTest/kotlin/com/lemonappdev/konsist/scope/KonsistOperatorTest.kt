@@ -23,6 +23,8 @@ class KonsistOperatorTest {
             listOf(
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
@@ -77,6 +79,8 @@ class KonsistOperatorTest {
                 listOf(
                     "$dataMainSourceSetDirectory/sample/LibClass.kt",
                     "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                    "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
+                    "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                     "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                     "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                     "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
