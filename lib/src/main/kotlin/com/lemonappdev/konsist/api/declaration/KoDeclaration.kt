@@ -73,7 +73,8 @@ interface KoDeclaration : KoNamedDeclaration {
      * Whether the declaration has annotations.
      *
      * @param names the names of the annotations to check.
-     * @return `true` if the declaration has annotations with the specified names (or any annotation if [names] is empty), `false` otherwise.
+     * @return `true` if the declaration has annotations with the specified names (or any annotation if [names] is empty),
+     * `false` otherwise.
      */
     fun hasAnnotations(vararg names: String): Boolean
 
