@@ -29,7 +29,7 @@ jobs:
         with:
           python-version: '3.11.3'
 
-      - name: Publish
+      - name: Publish Konsist Artifact To Local Maven Repository
         run: |
           ./gradlew publishToMavenLocal \
           -Pkonsist.releaseTarget=local \
@@ -40,6 +40,9 @@ jobs:
 
       - name: Replace Konsist Version
         run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/konsistTest/build.gradle
+
+      - name: Add Maven Local Repository
+        run: python3 scripts/replace-konsist-version/add-mavel-local-repository-to-gradle-file.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/settings.gradle
 
       - name: Run App Konsist Test
         run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew konsistTest:test

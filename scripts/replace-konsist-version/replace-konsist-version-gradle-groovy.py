@@ -7,11 +7,9 @@ import subprocess
 def call_get_konsist_version_script():
     current_script_path = os.path.abspath(__file__)
     current_script_directory = os.path.dirname(current_script_path)
-    get_konsist_version_file = current_script_directory + "/get-konsist-version.py"
-    print(get_konsist_version_file)
+    script_file = current_script_directory + "/get-konsist-version.py"
 
-    result = subprocess.run(['python3', get_konsist_version_file], 
-                            stdout=subprocess.PIPE, check=True)
+    result = subprocess.run(['python3', script_file], stdout=subprocess.PIPE, check=True)
     return result.stdout.decode().strip()
 
 def replace_version(file_path, new_version):
@@ -29,7 +27,6 @@ def replace_version(file_path, new_version):
     with open(file_path, 'w') as file:
         file.write(modified_contents)
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("file_path", help="The path to the file to be modified.")
@@ -38,4 +35,5 @@ if __name__ == "__main__":
     konsist_version = call_get_konsist_version_script()
     konsist_snapshot_version = konsist_version + "-SNAPSHOT"
     print(konsist_snapshot_version)
+
     replace_version(args.file_path, konsist_snapshot_version)
