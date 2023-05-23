@@ -21,6 +21,21 @@ class KoTypeDeclarationForFullyQualifiedNameTest {
     }
 
     @Test
+    fun `simple-list-type`() {
+        // given
+        val sut = getSnippetFile("simple-list-type")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+            ?.type
+
+        // then
+        sut?.fullyQualifiedName shouldBeEqualTo ""
+    }
+
+    @Test
     fun `import-alias`() {
         // given
         val sut = getSnippetFile("import-alias")

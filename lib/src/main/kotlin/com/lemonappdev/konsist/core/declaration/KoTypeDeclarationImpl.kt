@@ -42,7 +42,7 @@ internal class KoTypeDeclarationImpl private constructor(
         file
             .imports
             .map { it.name }
-            .first { it.contains(sourceType) }
+            .firstOrNull() { it.contains(sourceType) } ?: ""
     }
 
     override fun isImportAlias() = importAliasName.isNotEmpty()

@@ -21,6 +21,21 @@ class KoTypeDeclarationForNameTest {
     }
 
     @Test
+    fun `simple-list-type`() {
+        // given
+        val sut = getSnippetFile("simple-list-type")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+            ?.type
+
+        // then
+        sut?.name shouldBeEqualTo "List<SampleType?>?"
+    }
+
+    @Test
     fun `import-alias`() {
         // given
         val sut = getSnippetFile("import-alias")
