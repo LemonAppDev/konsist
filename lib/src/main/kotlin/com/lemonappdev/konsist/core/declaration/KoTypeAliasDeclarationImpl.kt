@@ -15,7 +15,7 @@ internal class KoTypeAliasDeclarationImpl private constructor(private val ktType
         ktTypeAlias
             .getTypeReference()
             ?.let { KoTypeDeclarationImpl.getInstance(it, this) }
-            ?: throw KoInternalException("Type alias has no type", koBaseDeclarationImpl = this)
+            ?: throw KoInternalException("Type alias has no type", koBaseDeclaration = this)
     }
 
     override fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)

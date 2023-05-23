@@ -1,7 +1,5 @@
 package com.lemonappdev.konsist.api
 
-import java.io.File
-
 /**
  * Scope creator.
  *
@@ -12,12 +10,7 @@ interface KoScopeCreator {
     /**
      * Returns a path to the root project directory.
      */
-    val rootProjectPath: String
-
-    /**
-     * Returns a root project directory.
-     */
-    val rootProjectDirectory: File
+    val projectRootPath: String
 
     /**
      * Returns a [KoScope] containing all of Kotlin files in the project.

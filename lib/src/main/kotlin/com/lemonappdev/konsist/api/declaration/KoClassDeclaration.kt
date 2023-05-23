@@ -149,4 +149,14 @@ interface KoClassDeclaration : KoComplexDeclaration {
      * @return `true` if the class has parents with the specified names (or any parent if `names` is empty), `false` otherwise.
      */
     fun hasParents(vararg names: String): Boolean
+
+    /**
+     * Whatever class has a Test.
+     *
+     * @param testFileNameSuffix the suffix of the test file name. By default, "Test".
+     * @param moduleName         the name of the module to check (optional).
+     * @param sourceSetName      the name of the source set to check (optional).
+     * @return `true` if the class has a test, `false` otherwise.
+     */
+    fun hasTest(testFileNameSuffix: String = "Test", moduleName: String? = null, sourceSetName: String? = null): Boolean
 }

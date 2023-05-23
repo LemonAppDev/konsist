@@ -9,7 +9,7 @@ import java.io.File
 
 class ProjectRootDirResolverTest {
     private class Sut(pathVerifier: PathVerifier) : ProjectRootDirResolver(pathVerifier) {
-        override val paths = setOf("/path1", "/path2")
+        override val paths = setOf("/path-1", "/path-2")
     }
 
     private val pathVerifier = mockk<PathVerifier>()
@@ -17,28 +17,29 @@ class ProjectRootDirResolverTest {
     private val sut = Sut(pathVerifier)
 
     @Test
-    fun `should return project root directory when all files exists`() {
+    fun `should return project root directory when any files exists`() {
         // given
         val file = mockk<File>()
-        every { pathVerifier.verifyPathIfExists(file, "/path1") } returns true
-        every { pathVerifier.verifyPathIfExists(file, "/path2") } returns true
+        every { pathVerifier.verifyPathIfExists(file, "/path-1") } returns true
+        every { pathVerifier.verifyPathIfExists(file, "/path-2") } returns true
 
         // when
-        val actual = sut.getDir(file)
+        val actual = sut.getProjectRootDir(file)
 
         // then
         actual shouldBeEqualTo file
     }
 
     @Test
-    fun `should return null when all files do not exist`() {
+    fun `should return null none of the files exist`() {
         // given
         val file = mockk<File>()
-        every { pathVerifier.verifyPathIfExists(file, "/path1") } returns true
-        every { pathVerifier.verifyPathIfExists(file, "/path2") } returns false
+
+        every { pathVerifier.verifyPathIfExists(file, "/path-1") } returns false
+        every { pathVerifier.verifyPathIfExists(file, "/path-2") } returns false
 
         // when
-        val actual = sut.getDir(file)
+        val actual = sut.getProjectRootDir(file)
 
         // then
         actual shouldBeEqualTo null

@@ -1,5 +1,5 @@
 /**
  * Sample KDoc
  */
-fun sampleFunction() {
+interface SampleInterface {
 }
