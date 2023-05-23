@@ -15,13 +15,13 @@ internal class KoTypeDeclarationImpl private constructor(
     override val importAliasName: String by lazy {
         file
             .imports
-            .firstOrNull { it.alias == ktTypeReference.text }
+            .firstOrNull { it.alias == ktTypeReference.text.removeSuffix("?") }
             ?.alias ?: ""
     }
 
     override val name: String by lazy {
         when {
-            isImportAlias() -> importAliasName
+            isImportAlias() -> importAliasName + if (isNullable) "?" else ""
             else -> ktTypeReference.text
         }
     }
@@ -30,13 +30,18 @@ internal class KoTypeDeclarationImpl private constructor(
         if (isImportAlias()) {
             file
                 .imports
-                .first { it.alias == ktTypeReference.text }
+                .first { it.alias == ktTypeReference.text.removeSuffix("?") }
                 .name
                 .split(".")
                 .toMutableList()
                 .last { it.isNotBlank() }
-        } else name.removeSuffix("?")
+        } else {
+            name
+                .removeSuffix("?")
+        }
     }
+
+    override val isNullable: Boolean by lazy { ktTypeReference.text.last() == '?' }
 
     override val fullyQualifiedName by lazy {
         file

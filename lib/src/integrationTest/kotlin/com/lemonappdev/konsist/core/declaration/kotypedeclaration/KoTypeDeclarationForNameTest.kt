@@ -47,7 +47,7 @@ class KoTypeDeclarationForNameTest {
             ?.type
 
         // then
-        sut?.name shouldBeEqualTo "ImportAlias"
+        sut?.name shouldBeEqualTo "ImportAlias?"
     }
 
     private fun getSnippetFile(fileName: String) =
