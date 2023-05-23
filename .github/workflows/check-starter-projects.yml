@@ -39,7 +39,7 @@ jobs:
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Replace Konsist Version
-        run: py scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/konsistTest/build.gradle
+        run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/konsistTest/build.gradle
 
       - name: Run Root Konsist Test
         run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
