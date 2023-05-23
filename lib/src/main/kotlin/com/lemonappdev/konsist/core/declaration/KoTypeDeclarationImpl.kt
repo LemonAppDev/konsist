@@ -22,12 +22,12 @@ internal class KoTypeDeclarationImpl private constructor(
     override val name: String by lazy {
         when {
             isImportAlias() -> importAliasName
-            else -> sourceType
+            else -> ktTypeReference.text
         }
     }
 
     override val sourceType: String by lazy {
-        if (importAliasName.isNotEmpty()) {
+        if (isImportAlias()) {
             file
                 .imports
                 .first { it.alias == ktTypeReference.text }
@@ -35,9 +35,7 @@ internal class KoTypeDeclarationImpl private constructor(
                 .split(".")
                 .toMutableList()
                 .last { it.isNotBlank() }
-        } else {
-            ktTypeReference.text
-        }
+        } else name.removeSuffix("?")
     }
 
     override val fullyQualifiedName by lazy {

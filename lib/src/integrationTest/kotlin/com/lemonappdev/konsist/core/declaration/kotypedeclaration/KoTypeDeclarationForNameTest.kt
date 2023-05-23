@@ -17,7 +17,7 @@ class KoTypeDeclarationForNameTest {
             ?.type
 
         // then
-        sut?.name shouldBeEqualTo "SampleType"
+        sut?.name shouldBeEqualTo "SampleType?"
     }
 
     @Test
@@ -36,5 +36,5 @@ class KoTypeDeclarationForNameTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forimportalias/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forname/", fileName)
 }

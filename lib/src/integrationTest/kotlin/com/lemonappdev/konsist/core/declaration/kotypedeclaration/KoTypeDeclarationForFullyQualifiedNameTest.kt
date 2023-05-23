@@ -36,5 +36,5 @@ class KoTypeDeclarationForFullyQualifiedNameTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forimportalias/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forfullyqualifiedname/", fileName)
 }
