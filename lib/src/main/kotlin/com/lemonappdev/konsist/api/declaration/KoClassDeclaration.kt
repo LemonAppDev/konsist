@@ -115,7 +115,7 @@ interface KoClassDeclaration : KoComplexDeclaration {
     fun hasParents(vararg names: String): Boolean
 
     /**
-     * Whatever class has test.
+     * Whatever class has a Test.
      *
      * @param testFileNameSuffix the suffix of the test file name. By default, "Test".
      * @param moduleName         the name of the module to check (optional).
