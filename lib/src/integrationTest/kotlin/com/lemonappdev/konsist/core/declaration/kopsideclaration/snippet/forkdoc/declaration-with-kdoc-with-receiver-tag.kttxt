@@ -1,5 +1,5 @@
 /**
- * Sample KDoc
+ * @receiver sample description
  */
 interface SampleInterface {
 }

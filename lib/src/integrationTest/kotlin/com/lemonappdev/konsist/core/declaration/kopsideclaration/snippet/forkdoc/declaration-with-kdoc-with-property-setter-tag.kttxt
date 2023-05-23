@@ -1,5 +1,5 @@
 /**
- * Sample KDoc
+ * @propertySetter sample description
  */
 interface SampleInterface {
 }

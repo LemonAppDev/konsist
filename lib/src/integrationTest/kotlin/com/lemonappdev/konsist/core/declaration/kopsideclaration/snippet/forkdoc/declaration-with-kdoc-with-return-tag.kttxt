@@ -1,5 +1,5 @@
 /**
- * Sample KDoc
+ * @return sample description
  */
 interface SampleInterface {
 }
