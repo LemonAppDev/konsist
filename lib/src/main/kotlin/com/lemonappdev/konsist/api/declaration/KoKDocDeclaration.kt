@@ -95,7 +95,7 @@ interface KoKDocDeclaration : KoPsiDeclaration {
      * Whether the declaration has the given tags.
      *
      * @param tags the tags to check.
-     * @return `true` if the declaration has all the specified tags, `false` otherwise.
+     * @return `true` if the kDoc has all the specified tags (or any tags if [tags] is empty), `false` otherwise.
      */
     fun hasTags(vararg tags: KoKDocTag): Boolean
 }

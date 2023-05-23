@@ -44,15 +44,15 @@ interface KoFileDeclaration :
      * Whether the file has annotations.
      *
      * @param names the names of the annotations to check.
-     * @return `true` if the file has annotations with the specified names, `false` otherwise.
+     * @return `true` if the file has annotations with the specified names (or any annotation if [names] is empty), `false` otherwise.
      */
     fun hasAnnotations(vararg names: String): Boolean
 
     /**
      * Whether the file has annotations.
      *
-     * @param names the names of the Kotlin classes to check.
-     * @return `true` if the file has annotations with the specified names, `false` otherwise.
+     * @param names the `KClass` types of the annotations to check.
+     * @return `true` if the file has annotations with the specified `KClass` types, `false` otherwise.
      */
     fun hasAnnotationsOf(vararg names: KClass<*>): Boolean
 
@@ -68,7 +68,7 @@ interface KoFileDeclaration :
      * Whether the file has imports.
      *
      * @param names the names of the imports to check.
-     * @return `true` if the file has imports with the specified names, `false` otherwise.
+     * @return `true` if the file has imports with the specified names (or any import if [names] is empty), `false` otherwise.
      */
     fun hasImports(vararg names: String): Boolean
 
@@ -76,7 +76,7 @@ interface KoFileDeclaration :
      * Whether the file has type aliases.
      *
      * @param names the names of the type aliases to check.
-     * @return `true` if the file has type aliases with the specified names, `false` otherwise.
+     * @return `true` if the file has type aliases with the specified names (or any type alias if [names] is empty), `false` otherwise.
      */
     fun hasTypeAliases(vararg names: String): Boolean
 

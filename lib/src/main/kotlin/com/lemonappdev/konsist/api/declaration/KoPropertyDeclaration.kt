@@ -25,63 +25,63 @@ interface KoPropertyDeclaration : KoDeclaration {
     val type: KoTypeDeclaration?
 
     /**
-     * The 'lateinit' modifier.
+     * Whether the property has lateinit modifier.
      *
-     * @return `true` if the declaration has the 'lateinit' modifier, `false` otherwise.
+     * @return `true` if the property has the `lateinit` modifier, `false` otherwise.
      */
     fun hasLateinitModifier(): Boolean
 
     /**
-     * The 'override' modifier.
+     * Whether the property has override modifier.
      *
-     * @return `true` if the declaration has the 'override' modifier, `false` otherwise.
+     * @return `true` if the property has the 'override' modifier, `false` otherwise.
      */
     fun hasOverrideModifier(): Boolean
 
     /**
-     * The 'abstract' modifier.
+     * Whether the property has abstract modifier.
      *
-     * @return `true` if the declaration has the 'abstract' modifier, `false` otherwise.
+     * @return `true` if the property has the 'abstract' modifier, `false` otherwise.
      */
     fun hasAbstractModifier(): Boolean
 
     /**
-     * The 'open' modifier.
+     * Whether the property has open modifier.
      *
-     * @return `true` if the declaration has the 'open' modifier, `false` otherwise.
+     * @return `true` if the property has the 'open' modifier, `false` otherwise.
      */
     fun hasOpenModifier(): Boolean
 
     /**
-     * The 'final' modifier.
+     * Whether the property has final modifier.
      *
-     * @return `true` if the declaration has the 'final' modifier, `false` otherwise.
+     * @return `true` if the property has the 'final' modifier, `false` otherwise.
      */
     fun hasFinalModifier(): Boolean
 
     /**
-     * The 'actual' modifier.
+     * Whether the property has actual modifier.
      *
-     * @return `true` if the declaration has the 'actual' modifier, `false` otherwise.
+     * @return `true` if the property has the 'actual' modifier, `false` otherwise.
      */
     fun hasActualModifier(): Boolean
 
     /**
-     * The 'expect' modifier.
+     * Whether the property has expect modifier.
      *
-     * @return `true` if the declaration has the 'expect' modifier, `false` otherwise.
+     * @return `true` if the property has the 'expect' modifier, `false` otherwise.
      */
     fun hasExpectModifier(): Boolean
 
     /**
-     * The 'const' modifier.
+     * Whether the property has const modifier.
      *
-     * @return `true` if the declaration has the 'const' modifier, `false` otherwise.
+     * @return `true` if the property has the 'const' modifier, `false` otherwise.
      */
     fun hasConstModifier(): Boolean
 
     /**
-     * Whatever property is extension property.
+     * Whatever property is an extension property.
      *
      * @return `true` if the property is an extension property, `false` otherwise.
      */
@@ -91,7 +91,7 @@ interface KoPropertyDeclaration : KoDeclaration {
      * Whatever property has a delegate.
      *
      * @param name the name of the delegate (optional).
-     * @return `true` if the property has a delegate matching the specified name (or any delegate if `name` is `null`), `false` otherwise.
+     * @return `true` if the property has a delegate matching the specified name (or any delegate if [name] is `null`), `false` otherwise.
      */
     fun hasDelegate(name: String? = null): Boolean
 
@@ -99,7 +99,7 @@ interface KoPropertyDeclaration : KoDeclaration {
      * Whatever property has a type.
      *
      * @param type the type to check for (optional).
-     * @return `true` if the property has the specified type (or any type if `type` is `null`), `false` otherwise.
+     * @return `true` if the property has the specified type (or any type if [type] is `null`), `false` otherwise.
      */
     fun hasType(type: String? = null): Boolean
 }

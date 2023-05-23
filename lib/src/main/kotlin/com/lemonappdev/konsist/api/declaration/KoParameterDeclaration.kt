@@ -17,21 +17,21 @@ interface KoParameterDeclaration : KoDeclaration {
     /**
      * Whether the parameter has vararg modifier.
      *
-     * @return `true` if the declaration has the 'vararg' modifier, `false` otherwise.
+     * @return `true` if the parameter has the 'vararg' modifier, `false` otherwise.
      */
     fun hasVarargModifier(): Boolean
 
     /**
      * Whether the parameter has noinline modifier.
      *
-     * @return `true` if the declaration has the 'noinline' modifier, `false` otherwise.
+     * @return `true` if the parameter has the 'noinline' modifier, `false` otherwise.
      */
     fun hasNoInlineModifier(): Boolean
 
     /**
      * Whether the parameter has crossinline modifier.
      *
-     * @return `true` if the declaration has the 'crossinline' modifier, `false` otherwise.
+     * @return `true` if the parameter has the 'crossinline' modifier, `false` otherwise.
      */
     fun hasCrossInlineModifier(): Boolean
 
@@ -39,7 +39,7 @@ interface KoParameterDeclaration : KoDeclaration {
      * Whether the parameter ha the default value.
      *
      * @param value the default value to check (optional).
-     * @return `true` if the parameter has the specified default value (or any default value if `value` is `null`), `false` otherwise.
+     * @return `true` if the parameter has the specified default value (or any default value if [value] is `null`), `false` otherwise.
      */
     fun hasDefaultValue(value: String? = null): Boolean
 

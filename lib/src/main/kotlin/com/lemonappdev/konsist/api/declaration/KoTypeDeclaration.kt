@@ -22,7 +22,7 @@ interface KoTypeDeclaration : KoNamedDeclaration {
     /**
      * Returns `true` if this type is import alias.
      *
-     * @return `true` if the declaration is import alias, `false` otherwise.
+     * @return `true` if this type is import alias, `false` otherwise.
      */
     fun isImportAlias(): Boolean
 }

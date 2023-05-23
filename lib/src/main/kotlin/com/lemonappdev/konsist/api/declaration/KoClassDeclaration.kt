@@ -37,91 +37,91 @@ interface KoClassDeclaration : KoComplexDeclaration {
     /**
      * Whatever class has 'enum' modifier.
      *
-     * @return `true` if the declaration has the 'enum' modifier, `false` otherwise.
+     * @return `true` if the class has the 'enum' modifier, `false` otherwise.
      */
     fun hasEnumModifier(): Boolean
 
     /**
      * Whatever class has 'sealed' modifier.
      *
-     * @return `true` if the declaration has the 'sealed' modifier, `false` otherwise.
+     * @return `true` if the class has the 'sealed' modifier, `false` otherwise.
      */
     fun hasSealedModifier(): Boolean
 
     /**
      * Whatever class has 'inner' modifier.
      *
-     * @return `true` if the declaration has the 'inner' modifier, `false` otherwise.
+     * @return `true` if the class has the 'inner' modifier, `false` otherwise.
      */
     fun hasInnerModifier(): Boolean
 
     /**
      * Whatever class has 'value' modifier.
      *
-     * @return `true` if the declaration has the 'value' modifier, `false` otherwise.
+     * @return `true` if the class has the 'value' modifier, `false` otherwise.
      */
     fun hasValueModifier(): Boolean
 
     /**
      * Whatever class has 'annotation' modifier.
      *
-     * @return `true` if the declaration has the 'annotation' modifier, `false` otherwise.
+     * @return `true` if the class has the 'annotation' modifier, `false` otherwise.
      */
     fun hasAnnotationModifier(): Boolean
 
     /**
      * Whatever class has 'data' modifier.
      *
-     * @return `true` if the declaration has the 'data' modifier, `false` otherwise.
+     * @return `true` if the class has the 'data' modifier, `false` otherwise.
      */
     fun hasDataModifier(): Boolean
 
     /**
      * Whatever class has 'actual' modifier.
      *
-     * @return `true` if the declaration has the 'actual' modifier, `false` otherwise.
+     * @return `true` if the class has the 'actual' modifier, `false` otherwise.
      */
     fun hasActualModifier(): Boolean
 
     /**
      * Whatever class has 'expect' modifier.
      *
-     * @return `true` if the declaration has the 'expect' modifier, `false` otherwise.
+     * @return `true` if the class has the 'expect' modifier, `false` otherwise.
      */
     fun hasExpectModifier(): Boolean
 
     /**
      * Whatever class has 'abstract' modifier.
      *
-     * @return `true` if the declaration has the 'abstract' modifier, `false` otherwise.
+     * @return `true` if the class has the 'abstract' modifier, `false` otherwise.
      */
     fun hasAbstractModifier(): Boolean
 
     /**
      * Whatever class has 'open' modifier.
      *
-     * @return `true` if the declaration has the 'open' modifier, `false` otherwise.
+     * @return `true` if the class has the 'open' modifier, `false` otherwise.
      */
     fun hasOpenModifier(): Boolean
 
     /**
      * Whatever class has 'final' modifier.
      *
-     * @return `true` if the declaration has the 'final' modifier, `false` otherwise.
+     * @return `true` if the class has the 'final' modifier, `false` otherwise.
      */
     fun hasFinalModifier(): Boolean
 
     /**
      * Whatever class has primary constructor.
      *
-     * @return `true` if the declaration has primary constructor, `false` otherwise.
+     * @return `true` if the class has primary constructor, `false` otherwise.
      */
     fun hasPrimaryConstructor(): Boolean
 
     /**
      * Whatever class has secondary constructors.
      *
-     * @return `true` if the declaration has secondary constructors, `false` otherwise.
+     * @return `true` if the class has secondary constructors, `false` otherwise.
      */
     fun hasSecondaryConstructors(): Boolean
 
