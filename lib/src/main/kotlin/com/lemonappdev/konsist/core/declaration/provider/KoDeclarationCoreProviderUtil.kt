@@ -15,7 +15,6 @@ import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
-import com.lemonappdev.konsist.core.exception.KoUnsupportedOperationException
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDeclaration
@@ -30,7 +29,6 @@ import org.jetbrains.kotlin.psi.KtObjectDeclaration
 import org.jetbrains.kotlin.psi.KtPackageDirective
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeAlias
-import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
 internal object KoDeclarationCoreProviderUtil {
     inline fun <reified T : KoNamedDeclaration> getKoDeclarations(
