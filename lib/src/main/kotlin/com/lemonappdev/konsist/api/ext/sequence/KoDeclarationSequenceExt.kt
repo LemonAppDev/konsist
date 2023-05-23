@@ -116,7 +116,8 @@ fun <T : KoDeclaration> Sequence<T>.withSomeAnnotations(vararg annotations: Stri
  * Sequence containing declarations that don't have the annotations.
  *
  * @param annotations The annotations to exclude.
- * @return A sequence containing declarations that don't have any of the specified annotations (or none annotation if [annotations] is empty).
+ * @return A sequence containing declarations that don't have any of the specified annotations
+ * (or none annotation if [annotations] is empty).
  */
 fun <T : KoDeclaration> Sequence<T>.withoutAnnotations(vararg annotations: String): Sequence<T> = filter {
     when {
