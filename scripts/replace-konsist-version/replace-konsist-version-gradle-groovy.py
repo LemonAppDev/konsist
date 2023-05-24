@@ -20,12 +20,12 @@ def replace_version(filename, new_version):
 
     if filename.endswith(".gradle") or filename.endswith(".kts"):
         # pattern for gradle files
-        pattern = r"(com\.lemonappdev:konsist:)([\d\.]*)"
+        pattern = r"(com\.lemonappdev:konsist:)([\d\.]*(-SNAPSHOT)?)"
         replacement = r"\g<1>" + new_version
     else:
         # pattern for pom.xml
-        pattern = r"(<groupId>com\.lemonappdev</groupId>\s*<artifactId>konsist</artifactId>\s*<version>)([\d\.]*)(</version>)"
-        replacement = r"\g<1>" + new_version + r"\g<3>"
+        pattern = r"(<groupId>com\.lemonappdev</groupId>\s*<artifactId>konsist</artifactId>\s*<version>)([\d\.]*(-SNAPSHOT)?)(</version>)"
+        replacement = r"\g<1>" + new_version + r"\g<4>"
 
     new_content = re.sub(pattern, replacement, content)
 
