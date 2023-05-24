@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.container.koscope
 
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.container.koscope.KoScope
 import com.lemonappdev.konsist.api.container.koscope.KoScopeCreator
-import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
