@@ -89,6 +89,16 @@ interface KoFile :
     fun hasTypeAliases(vararg names: String): Boolean
 
     /**
+     * Whatever file reside in file path.
+     */
+    fun resideInPath(path: String): Boolean
+
+    /**
+     * Whatever file reside in project file path.
+     */
+    fun resideInRootProjectPath(path: String): Boolean
+
+    /**
      * Name of the file with prefix.
      *
      * @param prefix The prefix to check against. It is a non-null string representing the desired prefix.

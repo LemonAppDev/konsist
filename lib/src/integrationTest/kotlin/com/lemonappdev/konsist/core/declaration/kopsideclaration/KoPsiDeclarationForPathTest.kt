@@ -30,7 +30,7 @@ class KoPsiDeclarationForPathTest {
 
         // then
         sut
-            .rootProjectFilePath
+            .projectFilePath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kopsideclaration/snippet/forpath/" +
                     "root-project-file-path.kt",

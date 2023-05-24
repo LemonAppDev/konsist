@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.api.ext.declaration
+package com.lemonappdev.konsist.api.ext.container
 
 import com.lemonappdev.konsist.api.container.KoFile
 

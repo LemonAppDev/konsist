@@ -112,6 +112,10 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
         }
     }
 
+    override fun resideInPath(path: String) = LocationHelper.resideInLocation(path, path)
+
+    override fun resideInRootProjectPath(path: String) = LocationHelper.resideInLocation(path, rootProjectPath)
+
     override fun hasNameStartingWith(prefix: String) = name.startsWith(prefix)
 
     override fun hasNameEndingWith(suffix: String) = name.endsWith(suffix)
