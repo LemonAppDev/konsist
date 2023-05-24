@@ -30,4 +30,4 @@ if __name__ == "__main__":
     print(konsist_version)
     pom_path = "/home/runner/.m2/repository/com/lemonappdev/konsist/" + konsist_version + "/" + konsist_version + ".pom"
 
-    sys.exit(check_dependencies(pom_path)
+    sys.exit(check_dependencies(pom_path))
