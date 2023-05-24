@@ -15,7 +15,7 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
 
         internal fun getInstance(
             ktSecondaryConstructor: KtSecondaryConstructor,
-            parentDeclaration: KoBaseDeclaration?
+            parentDeclaration: KoBaseDeclaration?,
         ): KoSecondaryConstructorDeclaration =
             cache.getOrCreateInstance(ktSecondaryConstructor, parentDeclaration) {
                 KoSecondaryConstructorDeclarationImpl(

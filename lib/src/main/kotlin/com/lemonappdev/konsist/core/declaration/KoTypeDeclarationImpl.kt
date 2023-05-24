@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -48,7 +49,7 @@ internal class KoTypeDeclarationImpl private constructor(
         file
             .imports
             .map { it.name }
-            .firstOrNull() { it.contains(sourceType) } ?: ""
+            .firstOrNull { it.contains(sourceType) } ?: ""
     }
 
     override fun isImportAlias(): Boolean = importAliasName.isNotEmpty()

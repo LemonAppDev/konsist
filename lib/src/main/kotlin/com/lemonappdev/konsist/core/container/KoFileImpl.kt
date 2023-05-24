@@ -1,7 +1,11 @@
 package com.lemonappdev.konsist.core.container
 
 import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl

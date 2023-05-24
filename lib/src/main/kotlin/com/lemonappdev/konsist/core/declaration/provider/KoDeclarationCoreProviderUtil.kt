@@ -159,10 +159,11 @@ internal object KoDeclarationCoreProviderUtil {
         else -> null
     }
 
-    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parentDeclaration: KoBaseDeclaration?): KoNamedDeclaration?  = when (psiElement) {
-        is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parentDeclaration)
-        is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parentDeclaration)
-        is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(psiElement, parentDeclaration)
-        else -> null
-    }
+    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parentDeclaration: KoBaseDeclaration?): KoNamedDeclaration? =
+        when (psiElement) {
+            is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parentDeclaration)
+            is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parentDeclaration)
+            is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(psiElement, parentDeclaration)
+            else -> null
+        }
 }

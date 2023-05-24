@@ -13,7 +13,10 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoPrimaryConstructorDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktPrimaryConstructor: KtPrimaryConstructor, parentDeclaration: KoBaseDeclaration?): KoPrimaryConstructorDeclaration =
+        internal fun getInstance(
+            ktPrimaryConstructor: KtPrimaryConstructor,
+            parentDeclaration: KoBaseDeclaration?,
+        ): KoPrimaryConstructorDeclaration =
             cache.getOrCreateInstance(ktPrimaryConstructor, parentDeclaration) {
                 KoPrimaryConstructorDeclarationImpl(
                     ktPrimaryConstructor,
