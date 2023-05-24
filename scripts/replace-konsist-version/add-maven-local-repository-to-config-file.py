@@ -45,7 +45,7 @@ def insert_maven_local(file_name):
         url = ET.SubElement(repository, 'url')
         url.text = 'file://${user.home}/.m2/repository'
 
-        tree.write(filename)
+        tree.write(file_name)
     else:
         print(f"Unsupported file extension: {extension}")
 
