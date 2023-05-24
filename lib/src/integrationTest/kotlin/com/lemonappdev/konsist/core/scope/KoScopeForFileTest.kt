@@ -32,8 +32,6 @@ class KoScopeForFileTest {
                     "KoScopeForPropertyTest.kt",
                     "KoScopeForTypeAliasTest.kt",
                     "KoScopeTest.kt",
-                    "KoScopeCreatorImpl.kt",
-                    "KoScopeImpl.kt",
                 ),
             )
     }

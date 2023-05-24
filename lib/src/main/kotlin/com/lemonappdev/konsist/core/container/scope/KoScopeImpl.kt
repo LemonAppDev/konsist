@@ -1,9 +1,9 @@
-package com.lemonappdev.konsist.core.scope
+package com.lemonappdev.konsist.core.container.scope
 
-import com.lemonappdev.konsist.api.KoScope
+import com.lemonappdev.konsist.api.container.scope.KoScope
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
@@ -12,11 +12,11 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 
 @Suppress("detekt.TooManyFunctions")
 class KoScopeImpl(
-    private var koFiles: Sequence<KoFileDeclaration>,
+    private var koFiles: Sequence<KoFile>,
 ) : KoScope {
-    constructor(koFileDeclaration: KoFileDeclaration) : this(sequenceOf(koFileDeclaration))
+    constructor(koFile: KoFile) : this(sequenceOf(koFile))
 
-    override fun files(): Sequence<KoFileDeclaration> = koFiles.sortedBy { it.path }
+    override fun files(): Sequence<KoFile> = koFiles.sortedBy { it.path }
 
     override fun classes(
         includeNested: Boolean,
@@ -58,7 +58,7 @@ class KoScopeImpl(
     ): Sequence<KoPropertyDeclaration> =
         koFiles.flatMap { it.properties(includeNested, includeLocal) }
 
-    override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope = KoScopeImpl(koFiles.filter { predicate(it) })
+    override fun slice(predicate: (KoFile) -> Boolean): KoScope = KoScopeImpl(koFiles.filter { predicate(it) })
 
     override fun imports() = koFiles.flatMap { it.imports }
 

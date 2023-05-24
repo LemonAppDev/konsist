@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist
 
-import com.lemonappdev.konsist.api.KoScope
+import com.lemonappdev.konsist.api.container.scope.KoScope
 import com.lemonappdev.konsist.api.Konsist
 import java.io.File
 

@@ -5,7 +5,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileDeclarationForHashCodeTest {
+class KoFileForHashCodeTest {
     @Test
     fun `files-with-the-same-hashcode`() {
         // given

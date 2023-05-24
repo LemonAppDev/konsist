@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoFileDeclarationImpl
+import com.lemonappdev.konsist.core.container.KoFileImpl
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
@@ -10,14 +10,14 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileDeclarationSequenceExtTest {
+class KoFileSequenceExtTest {
     @Test
     fun `withImport() returns file with any import`() {
         // given
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasImports() } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasImports() } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -32,10 +32,10 @@ class KoFileDeclarationSequenceExtTest {
     @Test
     fun `withoutImport() returns file without any import`() {
         // given
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasImports() } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasImports() } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -51,10 +51,10 @@ class KoFileDeclarationSequenceExtTest {
     fun `withImports(String) returns file with given import`() {
         // given
         val import = "SampleImport"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasImports(import) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasImports(import) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -70,10 +70,10 @@ class KoFileDeclarationSequenceExtTest {
     fun `withoutImports(String) returns file without given import`() {
         // given
         val import = "SampleImport"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasImports(import) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasImports(import) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -90,10 +90,10 @@ class KoFileDeclarationSequenceExtTest {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasImports(import1, import2) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasImports(import1, import2) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -110,10 +110,10 @@ class KoFileDeclarationSequenceExtTest {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasImports(import1, import2) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasImports(import1, import2) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -130,15 +130,15 @@ class KoFileDeclarationSequenceExtTest {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasImports(import1) } returns true
             every { hasImports(import2) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasImports(import1) } returns false
             every { hasImports(import2) } returns true
         }
-        val file3: KoFileDeclarationImpl = mockk {
+        val file3: KoFileImpl = mockk {
             every { hasImports(import1) } returns false
             every { hasImports(import2) } returns false
         }
@@ -156,15 +156,15 @@ class KoFileDeclarationSequenceExtTest {
         // given
         val package1 = "SamplePackage1"
         val package2 = "SamplePackage2"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasPackage(package1) } returns true
             every { hasPackage(package2) } returns false
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasPackage(package1) } returns false
             every { hasPackage(package2) } returns true
         }
-        val file3: KoFileDeclarationImpl = mockk {
+        val file3: KoFileImpl = mockk {
             every { hasPackage(package1) } returns false
             every { hasPackage(package2) } returns false
         }
@@ -182,15 +182,15 @@ class KoFileDeclarationSequenceExtTest {
         // given
         val package1 = "SamplePackage1"
         val package2 = "SamplePackage2"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasPackage(package1) } returns true
             every { hasPackage(package2) } returns false
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasPackage(package1) } returns false
             every { hasPackage(package2) } returns true
         }
-        val file3: KoFileDeclarationImpl = mockk {
+        val file3: KoFileImpl = mockk {
             every { hasPackage(package1) } returns false
             every { hasPackage(package2) } returns false
         }
@@ -206,10 +206,10 @@ class KoFileDeclarationSequenceExtTest {
     @Test
     fun `withAnnotation() returns file which has any annotation`() {
         // given
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasAnnotations() } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasAnnotations() } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -224,10 +224,10 @@ class KoFileDeclarationSequenceExtTest {
     @Test
     fun `withoutAnnotation() returns file which has not any annotation`() {
         // given
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasAnnotations() } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasAnnotations() } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -243,10 +243,10 @@ class KoFileDeclarationSequenceExtTest {
     fun `withAnnotations(String) returns file with given annotation`() {
         // given
         val annotation = "SampleAnnotation"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasAnnotations(annotation) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasAnnotations(annotation) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -262,10 +262,10 @@ class KoFileDeclarationSequenceExtTest {
     fun `withoutAnnotations(String) returns file without given annotation`() {
         // given
         val annotation = "SampleAnnotation"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasAnnotations(annotation) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasAnnotations(annotation) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -282,10 +282,10 @@ class KoFileDeclarationSequenceExtTest {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasAnnotations(annotation1, annotation2) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasAnnotations(annotation1, annotation2) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -302,10 +302,10 @@ class KoFileDeclarationSequenceExtTest {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasAnnotations(annotation1, annotation2) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasAnnotations(annotation1, annotation2) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -322,15 +322,15 @@ class KoFileDeclarationSequenceExtTest {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasAnnotations(annotation1) } returns true
             every { hasAnnotations(annotation2) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasAnnotations(annotation1) } returns false
             every { hasAnnotations(annotation2) } returns true
         }
-        val file3: KoFileDeclarationImpl = mockk {
+        val file3: KoFileImpl = mockk {
             every { hasAnnotations(annotation1) } returns false
             every { hasAnnotations(annotation2) } returns false
         }
@@ -354,10 +354,10 @@ class KoFileDeclarationSequenceExtTest {
         val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns qualifiedName2
         }
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { annotations } returns listOf(annotation1)
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { annotations } returns listOf(annotation2)
         }
         val files = sequenceOf(file1, file2)
@@ -380,10 +380,10 @@ class KoFileDeclarationSequenceExtTest {
         val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { fullyQualifiedName } returns qualifiedName2
         }
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { annotations } returns listOf(annotation1)
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { annotations } returns listOf(annotation2)
         }
         val files = sequenceOf(file1, file2)
@@ -398,10 +398,10 @@ class KoFileDeclarationSequenceExtTest {
     @Test
     fun `withAnnotationsOf(KClass) returns file with all of given annotations`() {
         // given
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -416,10 +416,10 @@ class KoFileDeclarationSequenceExtTest {
     @Test
     fun `withoutAnnotationsOf(KClass) returns file without any of given annotations`() {
         // given
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -434,15 +434,15 @@ class KoFileDeclarationSequenceExtTest {
     @Test
     fun `withSomeAnnotationsOf(KClass) returns files with at least one of given annotations`() {
         // given
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
             every { hasAnnotationsOf(SampleAnnotation2::class) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class) } returns false
             every { hasAnnotationsOf(SampleAnnotation2::class) } returns true
         }
-        val file3: KoFileDeclarationImpl = mockk {
+        val file3: KoFileImpl = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class) } returns false
             every { hasAnnotationsOf(SampleAnnotation2::class) } returns false
         }
@@ -458,10 +458,10 @@ class KoFileDeclarationSequenceExtTest {
     @Test
     fun `withTypeAlias() returns file with typealias`() {
         // given
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasTypeAliases() } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasTypeAliases() } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -476,10 +476,10 @@ class KoFileDeclarationSequenceExtTest {
     @Test
     fun `withoutTypeAlias() returns file without typealias`() {
         // given
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasTypeAliases() } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasTypeAliases() } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -495,10 +495,10 @@ class KoFileDeclarationSequenceExtTest {
     fun `withTypeAliases(String) returns file with given typealias`() {
         // given
         val typeAliasName = "SampleTypeAlias"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasTypeAliases(typeAliasName) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasTypeAliases(typeAliasName) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -514,10 +514,10 @@ class KoFileDeclarationSequenceExtTest {
     fun `withoutTypeAliases(String) returns file without given typealias`() {
         // given
         val typeAliasName = "SampleTypeAlias"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasTypeAliases(typeAliasName) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasTypeAliases(typeAliasName) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -534,10 +534,10 @@ class KoFileDeclarationSequenceExtTest {
         // given
         val typeAliasName1 = "SampleTypeAlias1"
         val typeAliasName2 = "SampleTypeAlias2"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasTypeAliases(typeAliasName1, typeAliasName2) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasTypeAliases(typeAliasName1, typeAliasName2) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -554,10 +554,10 @@ class KoFileDeclarationSequenceExtTest {
         // given
         val typeAliasName1 = "SampleTypeAlias1"
         val typeAliasName2 = "SampleTypeAlias2"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasTypeAliases(typeAliasName1, typeAliasName2) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasTypeAliases(typeAliasName1, typeAliasName2) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -574,15 +574,15 @@ class KoFileDeclarationSequenceExtTest {
         // given
         val typeAliasName1 = "SampleTypeAlias1"
         val typeAliasName2 = "SampleTypeAlias2"
-        val file1: KoFileDeclarationImpl = mockk {
+        val file1: KoFileImpl = mockk {
             every { hasTypeAliases(typeAliasName1) } returns true
             every { hasTypeAliases(typeAliasName2) } returns true
         }
-        val file2: KoFileDeclarationImpl = mockk {
+        val file2: KoFileImpl = mockk {
             every { hasTypeAliases(typeAliasName1) } returns false
             every { hasTypeAliases(typeAliasName2) } returns true
         }
-        val file3: KoFileDeclarationImpl = mockk {
+        val file3: KoFileImpl = mockk {
             every { hasTypeAliases(typeAliasName1) } returns false
             every { hasTypeAliases(typeAliasName2) } returns false
         }

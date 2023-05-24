@@ -8,7 +8,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileDeclarationForAnnotationTest {
+class KoFileForAnnotationTest {
     @Test
     fun `file-contains-no-annotation`() {
         // given

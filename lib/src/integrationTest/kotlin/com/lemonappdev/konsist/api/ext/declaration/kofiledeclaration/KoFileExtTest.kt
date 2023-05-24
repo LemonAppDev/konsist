@@ -9,7 +9,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileDeclarationExtTest {
+class KoFileExtTest {
     @Test
     fun `file-has-two-annotations-of-type`() {
         // given

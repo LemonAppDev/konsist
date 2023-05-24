@@ -1,9 +1,9 @@
-package com.lemonappdev.konsist.api
+package com.lemonappdev.konsist.api.container.scope
 
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
@@ -34,7 +34,7 @@ interface KoScope :
     /**
      * The files present in the scope.
      */
-    fun files(): Sequence<KoFileDeclaration>
+    fun files(): Sequence<KoFile>
 
     /**
      * The classes present in the scope.
@@ -93,7 +93,7 @@ interface KoScope :
     /**
      * The scope with given predicate.
      */
-    fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope
+    fun slice(predicate: (KoFile) -> Boolean): KoScope
 
     /**
      * The imports present in the scope.

@@ -1,7 +1,11 @@
-package com.lemonappdev.konsist.core.declaration
+package com.lemonappdev.konsist.core.container
 
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
 import com.lemonappdev.konsist.core.parent.KoParent
 import com.lemonappdev.konsist.core.util.LocationHelper
@@ -12,7 +16,7 @@ import org.jetbrains.kotlin.psi.KtTypeAlias
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import kotlin.reflect.KClass
 
-internal class KoFileDeclarationImpl(private val ktFile: KtFile) : KoFileDeclaration, KoParent {
+internal class KoFileImpl(private val ktFile: KtFile) : KoFile, KoParent {
 
     override val name by lazy {
         ktFile
@@ -100,7 +104,7 @@ internal class KoFileDeclarationImpl(private val ktFile: KtFile) : KoFileDeclara
         }
     }
 
-    override fun equals(other: Any?): Boolean = other is KoFileDeclaration && path == other.path
+    override fun equals(other: Any?): Boolean = other is KoFile && path == other.path
 
     override fun hashCode(): Int = 31 * 7 + path.hashCode()
 }

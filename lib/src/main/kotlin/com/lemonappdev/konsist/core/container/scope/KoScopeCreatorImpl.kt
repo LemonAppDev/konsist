@@ -1,8 +1,8 @@
-package com.lemonappdev.konsist.core.scope
+package com.lemonappdev.konsist.core.container.scope
 
-import com.lemonappdev.konsist.api.KoScope
-import com.lemonappdev.konsist.api.KoScopeCreator
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.container.scope.KoScope
+import com.lemonappdev.konsist.api.container.scope.KoScopeCreator
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.toKoFile
@@ -45,7 +45,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         moduleName: String? = null,
         sourceSetName: String? = null,
         ignoreBuildConfig: Boolean = true,
-    ): Sequence<KoFileDeclaration> {
+    ): Sequence<KoFile> {
         val localProjectKotlinFiles = projectKotlinFiles
             .filterNot { isBuildPath(it.path) }
             .let {
@@ -149,18 +149,18 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return lowercaseName.matches(Regex(".*$TEST_NAME_IN_PATH.*"))
     }
 
-    private fun KoFileDeclaration.isTestFile(): Boolean {
+    private fun KoFile.isTestFile(): Boolean {
         val path = path.substringAfter(pathProvider.rootProjectPath)
         return isTestPath(path)
     }
 
-    private fun KoFileDeclaration.isBuildConfigFile(): Boolean {
+    private fun KoFile.isBuildConfigFile(): Boolean {
         val lowercasePath = path.lowercase()
         val gradleBuildConfigDirectoryName = "buildSrc".lowercase()
         return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
     }
 
-    private fun File.toKoFiles(): Sequence<KoFileDeclaration> = walk()
+    private fun File.toKoFiles(): Sequence<KoFile> = walk()
         .filter { it.isKotlinFile }
         .map { it.toKoFile() }
 

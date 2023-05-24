@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.api
+package com.lemonappdev.konsist.api.container.scope
 
 /**
  * Scope creator.

@@ -5,7 +5,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileDeclarationForEqualsTest {
+class KoFileForEqualsTest {
     @Test
     fun `files-are-equal`() {
         // given
