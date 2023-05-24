@@ -11,7 +11,7 @@ def get_konsist_version():
     with open(gradle_properties_path, 'r') as file:
         for line in file:
             if line.startswith('konsist.version'):
-                return line.split('=')[1].strip()
+                return line.split('=')[1].strip() + "-SNAPSHOT"
     return None
 
 print(get_konsist_version())

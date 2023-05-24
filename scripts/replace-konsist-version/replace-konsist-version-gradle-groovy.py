@@ -38,7 +38,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     konsist_version = call_get_konsist_version_script()
-    konsist_snapshot_version = konsist_version + "-SNAPSHOT"
     print(konsist_snapshot_version)
 
     replace_version(args.file_path, konsist_snapshot_version)
