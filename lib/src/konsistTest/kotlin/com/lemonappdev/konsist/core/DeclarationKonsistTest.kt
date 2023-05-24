@@ -25,21 +25,21 @@ class DeclarationKonsistTest {
     }
 
     @Test
-    fun `none function return type have suffix 'Impl'`() {
+    fun `none function return type has the 'Impl' suffix`() {
         declarationPackageScope
             .functions(includeNested = true)
             .withReturnType()
             .mapNotNull { it.returnType }
-            .assertNot { it.hasNameContaining("Impl") }
+            .assertNot { it.sourceType.endsWith("Impl") }
     }
 
     @Test
-    fun `none property type have suffix 'Impl'`() {
+    fun `none property type has the 'Impl' suffix`() {
         declarationPackageScope
             .properties(includeNested = true)
             .withType()
             .mapNotNull { it.type }
-            .assertNot { it.hasNameContaining("Impl") }
+            .assertNot { it.sourceType.endsWith("Impl") }
     }
 
     companion object {
