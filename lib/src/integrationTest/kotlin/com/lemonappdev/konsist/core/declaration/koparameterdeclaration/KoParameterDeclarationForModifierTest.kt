@@ -27,10 +27,10 @@ class KoParameterDeclarationForModifierTest {
             .functions()
             .first()
             .parameters
-            ?.first()
+            .first()
 
         // then
-        sut?.hasNoInlineModifier() shouldBeEqualTo true
+        sut.hasNoInlineModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -40,10 +40,10 @@ class KoParameterDeclarationForModifierTest {
             .functions()
             .first()
             .parameters
-            ?.first()
+            .first()
 
         // then
-        sut?.hasCrossInlineModifier() shouldBeEqualTo true
+        sut.hasCrossInlineModifier() shouldBeEqualTo true
     }
 
     @Test
