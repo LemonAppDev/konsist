@@ -18,36 +18,39 @@ internal class KoTypeDeclarationImpl private constructor(
     override val importAliasName: String by lazy {
         file
             .imports
-            .firstOrNull { it.alias == ktTypeReference.text }
+            .firstOrNull { it.alias == ktTypeReference.text.removeSuffix("?") }
             ?.alias ?: ""
     }
 
     override val name: String by lazy {
         when {
-            isImportAlias() -> importAliasName
-            else -> sourceType
+            isImportAlias() -> importAliasName + if (isNullable) "?" else ""
+            else -> ktTypeReference.text
         }
     }
 
     override val sourceType: String by lazy {
-        if (importAliasName.isNotEmpty()) {
+        if (isImportAlias()) {
             file
                 .imports
-                .first { it.alias == ktTypeReference.text }
+                .first { it.alias == ktTypeReference.text.removeSuffix("?") }
                 .name
                 .split(".")
                 .toMutableList()
                 .last { it.isNotBlank() }
         } else {
-            ktTypeReference.text
+            name
+                .removeSuffix("?")
         }
     }
+
+    override val isNullable: Boolean by lazy { ktTypeReference.text.last() == '?' }
 
     override val fullyQualifiedName: String by lazy {
         file
             .imports
             .map { it.name }
-            .first { it.contains(sourceType) }
+            .firstOrNull() { it.contains(sourceType) } ?: ""
     }
 
     override fun isImportAlias(): Boolean = importAliasName.isNotEmpty()

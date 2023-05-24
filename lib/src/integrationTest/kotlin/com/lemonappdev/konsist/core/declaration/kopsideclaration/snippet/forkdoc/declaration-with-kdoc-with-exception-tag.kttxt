@@ -1,0 +1,5 @@
+/**
+ * @exception SampleException sample description
+ */
+interface SampleInterface {
+}

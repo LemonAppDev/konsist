@@ -1,0 +1,5 @@
+/**
+ * @return sample description
+ */
+interface SampleInterface {
+}

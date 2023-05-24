@@ -16,7 +16,6 @@ import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
-import com.lemonappdev.konsist.core.exception.KoUnsupportedOperationException
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDeclaration
@@ -31,7 +30,6 @@ import org.jetbrains.kotlin.psi.KtObjectDeclaration
 import org.jetbrains.kotlin.psi.KtPackageDirective
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeAlias
-import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
 internal object KoDeclarationCoreProviderUtil {
     inline fun <reified T : KoNamedDeclaration> getKoDeclarations(
@@ -158,13 +156,13 @@ internal object KoDeclarationCoreProviderUtil {
         ktDeclaration is KtProperty -> KoPropertyDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtFunction -> KoFunctionDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(ktDeclaration, parent)
-        else -> throw KoUnsupportedOperationException("Unknown declaration type: ${ktDeclaration.getTextWithLocation()}")
+        else -> null
     }
 
     private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parent: KoBaseDeclaration): KoNamedDeclaration = when (psiElement) {
         is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parent)
         is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parent)
         is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(psiElement, parent)
-        else -> throw KoUnsupportedOperationException("Unknown declaration type: ${psiElement.getTextWithLocation()}")
+        else -> null
     }
 }
