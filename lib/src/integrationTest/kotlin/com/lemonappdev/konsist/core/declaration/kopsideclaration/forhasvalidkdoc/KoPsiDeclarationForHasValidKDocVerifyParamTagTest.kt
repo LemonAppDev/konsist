@@ -1,10 +1,7 @@
-package com.lemonappdev.konsist.core.declaration.kopsideclaration
+package com.lemonappdev.konsist.core.declaration.kopsideclaration.forhasvalidkdoc
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -30,7 +27,7 @@ class KoPsiDeclarationForHasValidKDocVerifyParamTagTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopsideclaration/snippet/forkdoc/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopsideclaration/snippet/forhasvalidkdoc/forparamtag/", fileName)
 
     companion object {
         @Suppress("unused")
