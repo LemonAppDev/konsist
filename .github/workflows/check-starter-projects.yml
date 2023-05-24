@@ -9,8 +9,8 @@ on:
       - 'release-*'
   pull_request:
     types: [ opened, synchronize ]
-#    branches:
-#      - 'release-*'
+    branches:
+      - 'release-*'
 
 jobs:
   konsist-starter-android-gradle-groovy-junit-4:
