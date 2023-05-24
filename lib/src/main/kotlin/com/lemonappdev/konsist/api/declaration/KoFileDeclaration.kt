@@ -12,13 +12,27 @@ import kotlin.reflect.KClass
  * Represents a file declaration.
  */
 interface KoFileDeclaration :
-    KoNamedDeclaration,
     KoDeclarationCoreProvider,
     KoClassCoreProvider,
     KoInterfaceCoreProvider,
     KoObjectCoreProvider,
     KoPropertyCoreProvider,
     KoFunctionCoreProvider {
+
+    /**
+     * The name of the file.
+     */
+    val name: String
+
+    /**
+     * The text of the file.
+     */
+    val text: String
+
+    /**
+     * The path of the file.
+     */
+    val path: String
 
     /**
      * The imports of the file.

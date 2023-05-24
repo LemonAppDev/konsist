@@ -9,7 +9,7 @@ class KoBaseDeclarationForContainingFileTest {
     fun `containing-file`() {
         // given
         val sut = getSnippetFile("containing-file")
-            .files()
+            .declarations()
             .first()
 
         // then

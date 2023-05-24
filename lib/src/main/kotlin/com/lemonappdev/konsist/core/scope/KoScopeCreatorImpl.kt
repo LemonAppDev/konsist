@@ -47,7 +47,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         ignoreBuildConfig: Boolean = true,
     ): Sequence<KoFileDeclaration> {
         val localProjectKotlinFiles = projectKotlinFiles
-            .filterNot { isBuildPath(it.filePath) }
+            .filterNot { isBuildPath(it.path) }
             .let {
                 if (ignoreBuildConfig) {
                     it.filterNot { file -> file.isBuildConfigFile() }
@@ -73,7 +73,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         return localProjectKotlinFiles
-            .filter { it.filePath.matches(Regex(pathPrefix)) }
+            .filter { it.path.matches(Regex(pathPrefix)) }
     }
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
@@ -150,12 +150,12 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     private fun KoFileDeclaration.isTestFile(): Boolean {
-        val path = filePath.substringAfter(pathProvider.rootProjectPath)
+        val path = path.substringAfter(pathProvider.rootProjectPath)
         return isTestPath(path)
     }
 
     private fun KoFileDeclaration.isBuildConfigFile(): Boolean {
-        val lowercasePath = filePath.lowercase()
+        val lowercasePath = path.lowercase()
         val gradleBuildConfigDirectoryName = "buildSrc".lowercase()
         return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
     }

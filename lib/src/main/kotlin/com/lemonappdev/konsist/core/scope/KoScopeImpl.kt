@@ -16,7 +16,7 @@ class KoScopeImpl(
 ) : KoScope {
     constructor(koFileDeclaration: KoFileDeclaration) : this(sequenceOf(koFileDeclaration))
 
-    override fun files(): Sequence<KoFileDeclaration> = koFiles.sortedBy { it.filePath }
+    override fun files(): Sequence<KoFileDeclaration> = koFiles.sortedBy { it.path }
 
     override fun classes(
         includeNested: Boolean,
@@ -82,7 +82,7 @@ class KoScopeImpl(
 
     override fun toString(): String = files()
         .toList()
-        .joinToString("\n") { it.filePath }
+        .joinToString("\n") { it.path }
 
     override fun print() {
         println(toString())

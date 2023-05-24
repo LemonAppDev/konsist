@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.parent.KoParent
 import com.lemonappdev.konsist.core.util.TagHelper
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction, parent: KoBaseDeclaration?) :
+internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction, parent: KoParent) :
     KoParametrizedDeclarationImpl(ktFunction, parent),
     KoFunctionDeclaration {
 
@@ -80,7 +80,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
     internal companion object {
         private val cache = KoDeclarationCache<KoFunctionDeclarationImpl>()
 
-        internal fun getInstance(ktFunction: KtFunction, parent: KoBaseDeclaration) = cache.getOrCreateInstance(ktFunction, parent) {
+        internal fun getInstance(ktFunction: KtFunction, parent: KoParent) = cache.getOrCreateInstance(ktFunction, parent) {
             KoFunctionDeclarationImpl(ktFunction, parent)
         }
     }

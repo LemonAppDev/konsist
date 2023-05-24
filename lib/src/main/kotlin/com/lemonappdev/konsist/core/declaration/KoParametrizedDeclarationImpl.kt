@@ -1,13 +1,13 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParametrizedDeclaration
+import com.lemonappdev.konsist.core.parent.KoParent
 import com.lemonappdev.konsist.core.util.TagHelper
 import org.jetbrains.kotlin.psi.KtFunction
 
 internal abstract class KoParametrizedDeclarationImpl(
     private val ktFunction: KtFunction,
-    parent: KoBaseDeclaration?,
+    parent: KoParent,
 ) : KoDeclarationImpl(ktFunction, parent), KoParametrizedDeclaration {
 
     override val parameters by lazy {

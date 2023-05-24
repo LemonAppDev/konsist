@@ -44,6 +44,6 @@ object KotlinFileParser {
 
     fun getKoFileDeclaration(file: File): KoFileDeclaration {
         val ktFile = getKtFile(file)
-        return KoFileDeclarationImpl.getInstance(ktFile, null)
+        return KoFileDeclarationImpl(ktFile)
     }
 }

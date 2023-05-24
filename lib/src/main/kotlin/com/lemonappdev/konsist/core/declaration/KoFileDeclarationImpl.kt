@@ -1,22 +1,35 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
-import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
+import com.lemonappdev.konsist.core.parent.KoParent
 import com.lemonappdev.konsist.core.util.LocationHelper
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
+import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import kotlin.reflect.KClass
 
-internal class KoFileDeclarationImpl private constructor(private val ktFile: KtFile) :
-    KoNamedDeclarationImpl(ktFile),
-    KoFileDeclaration {
+internal class KoFileDeclarationImpl(private val ktFile: KtFile) : KoFileDeclaration, KoParent {
 
-    override val name = ktFile.name.split("/").last()
+    override val name by lazy {
+        ktFile
+            .name
+            .split("/")
+            .last()
+    }
+
+    override val text by lazy {
+        ktFile
+            .getTextWithLocation()
+            .substringBefore("' at (")
+            .removePrefix("'")
+            .removeSuffix("\n")
+    }
+
+    override val path: String by lazy { ktFile.name }
 
     override val imports by lazy {
         val ktImportDirectives = ktFile
@@ -87,15 +100,7 @@ internal class KoFileDeclarationImpl private constructor(private val ktFile: KtF
         }
     }
 
-    override fun equals(other: Any?): Boolean = other is KoFileDeclaration && filePath == other.filePath
+    override fun equals(other: Any?): Boolean = other is KoFileDeclaration && path == other.path
 
-    override fun hashCode(): Int = 31 * 7 + filePath.hashCode()
-
-    internal companion object {
-        private val cache = KoDeclarationCache<KoFileDeclarationImpl>()
-
-        internal fun getInstance(ktFile: KtFile, parent: KoBaseDeclaration?) = cache.getOrCreateInstance(ktFile, parent) {
-            KoFileDeclarationImpl(ktFile)
-        }
-    }
+    override fun hashCode(): Int = 31 * 7 + path.hashCode()
 }
