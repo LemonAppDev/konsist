@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api
 
-import com.lemonappdev.konsist.api.container.scope.KoScopeCreator
-import com.lemonappdev.konsist.core.container.scope.KoScopeCreatorImpl
+import com.lemonappdev.konsist.api.container.koscope.KoScopeCreator
+import com.lemonappdev.konsist.core.container.koscope.KoScopeCreatorImpl
 
 /**
  * Represents the Konsist API. This is the main entry point to the Konist library.
