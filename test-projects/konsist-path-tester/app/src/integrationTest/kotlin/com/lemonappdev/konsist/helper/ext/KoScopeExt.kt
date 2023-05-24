@@ -4,4 +4,4 @@ import com.lemonappdev.konsist.api.KoScope
 
 fun KoScope.mapToFilePaths() = files()
     .toList()
-    .map { it.filePath }
+    .map { it.path }
