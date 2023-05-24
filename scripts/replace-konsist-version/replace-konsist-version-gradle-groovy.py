@@ -3,16 +3,13 @@ import re
 import argparse
 import subprocess
 
-
 def call_get_konsist_version_script():
     current_script_path = os.path.abspath(__file__)
     current_script_directory = os.path.dirname(current_script_path)
-    script_file = current_script_directory + "/get-konsist-version.py"
+    script_file = current_script_directory + "../get-konsist-version.py"
 
     result = subprocess.run(['python3', script_file], stdout=subprocess.PIPE, check=True)
     return result.stdout.decode().strip()
-
-import re
 
 def replace_version(file_name, new_version):
     with open(file_name, 'r') as file:

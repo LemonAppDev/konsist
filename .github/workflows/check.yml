@@ -150,9 +150,6 @@ jobs:
       - name: Show "lib.jar" content
         run: jar tf lib/build/libs/lib.jar
 
-      - name: Show "lib.jar" content
-        run: python3 scripts/verify_jar_has_no_transitive_dependencies lib/build/libs/lib.jar
-
       - uses: actions/upload-artifact@v3
         with:
           name: konsist.jar
@@ -208,7 +205,7 @@ jobs:
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: List Artifacts
-        run: ls -R /home/runner/.m2/repository/
+        run: ls -R ~/.m2/repository/
 
       - name: Verify Dependencies Exposed By The Library Artifact
         run: python3 scripts/verify_dependencies_exposed_by_library_artifact.py
