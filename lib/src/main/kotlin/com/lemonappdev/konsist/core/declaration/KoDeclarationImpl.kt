@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -15,7 +16,7 @@ internal abstract class KoDeclarationImpl(
     val parentDeclaration: KoBaseDeclaration?,
 ) : KoNamedDeclarationImpl(ktTypeParameterListOwner), KoDeclaration {
 
-    override val fullyQualifiedName by lazy {
+    override val fullyQualifiedName: String by lazy {
         if (ktTypeParameterListOwner.fqName != null) {
             ktTypeParameterListOwner.fqName.toString()
         } else {
@@ -23,7 +24,7 @@ internal abstract class KoDeclarationImpl(
         }
     }
 
-    override val packagee by lazy {
+    override val packagee: String by lazy {
         fullyQualifiedName
             .split(".")
             .toMutableList()
@@ -31,11 +32,13 @@ internal abstract class KoDeclarationImpl(
             .joinToString(separator = ".")
     }
 
-    override val annotations = ktTypeParameterListOwner
-        .annotationEntries
-        .map { KoAnnotationDeclarationImpl.getInstance(it, this) }
+    override val annotations: List<KoAnnotationDeclaration> by lazy {
+        ktTypeParameterListOwner
+            .annotationEntries
+            .map { KoAnnotationDeclarationImpl.getInstance(it, this) }
+    }
 
-    override val modifiers by lazy {
+    override val modifiers: List<KoModifier> by lazy {
         ktTypeParameterListOwner
             .modifierList
             ?.text
@@ -56,37 +59,37 @@ internal abstract class KoDeclarationImpl(
             ?: emptyList()
     }
 
-    override fun hasPublicModifier() = hasModifiers(KoModifier.PUBLIC)
+    override fun hasPublicModifier(): Boolean = hasModifiers(KoModifier.PUBLIC)
 
-    override fun isPublicOrDefault() = ktTypeParameterListOwner.isPublic
+    override fun isPublicOrDefault(): Boolean = ktTypeParameterListOwner.isPublic
 
-    override fun hasPrivateModifier() = hasModifiers(KoModifier.PRIVATE)
+    override fun hasPrivateModifier(): Boolean = hasModifiers(KoModifier.PRIVATE)
 
-    override fun hasProtectedModifier() = hasModifiers(KoModifier.PROTECTED)
+    override fun hasProtectedModifier(): Boolean = hasModifiers(KoModifier.PROTECTED)
 
-    override fun hasInternalModifier() = hasModifiers(KoModifier.INTERNAL)
+    override fun hasInternalModifier(): Boolean = hasModifiers(KoModifier.INTERNAL)
 
-    override fun isTopLevel() = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
+    override fun isTopLevel(): Boolean = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
 
-    override fun hasAnnotations(vararg names: String) = when {
+    override fun hasAnnotations(vararg names: String): Boolean = when {
         names.isEmpty() -> annotations.isNotEmpty()
         else -> names.all { hasAnnotationNameOrAnnotationFullyQualifyName(it) }
     }
 
-    private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String) = annotations.any {
+    private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String): Boolean = annotations.any {
         it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name
     }
 
-    override fun hasAnnotationsOf(vararg names: KClass<*>) = names.all {
+    override fun hasAnnotationsOf(vararg names: KClass<*>): Boolean = names.all {
         annotations.any { annotation -> annotation.fullyQualifiedName == it.qualifiedName }
     }
 
-    override fun hasModifiers(vararg koModifiers: KoModifier) = when {
+    override fun hasModifiers(vararg koModifiers: KoModifier): Boolean = when {
         koModifiers.isEmpty() -> modifiers.isNotEmpty()
         else -> modifiers.containsAll(koModifiers.toList())
     }
 
-    override fun resideInPackage(packagee: String) = LocationHelper.resideInLocation(packagee, this.packagee)
+    override fun resideInPackage(packagee: String): Boolean = LocationHelper.resideInLocation(packagee, this.packagee)
 
-    override fun resideOutsidePackage(packagee: String) = !resideInPackage(packagee)
+    override fun resideOutsidePackage(packagee: String): Boolean = !resideInPackage(packagee)
 }

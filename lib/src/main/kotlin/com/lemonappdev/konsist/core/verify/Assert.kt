@@ -88,7 +88,13 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
                         it.text.endsWith("Suppress(\"$testMethodName\")")
                     )
         }
-        .forEach { declarations[it] = checkIfSuppressed(it as KoDeclarationImpl, testMethodName) }
+        .forEach {
+            if (it is KoDeclaration) {
+                declarations[it] = checkIfSuppressed(it as KoDeclaration, testMethodName)
+            } else {
+                declarations[it] = false
+            }
+        }
 
     val withoutSuppress = mutableListOf<E>()
 
@@ -97,8 +103,8 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
     return withoutSuppress
 }
 
-private fun checkIfSuppressed(declaration: KoDeclarationImpl, testMethodName: String): Boolean {
-    val annotationParameter = declaration
+private fun checkIfSuppressed(declaration: KoDeclaration, testMethodName: String): Boolean {
+    val annotationParameter = (declaration as KoDeclarationImpl)
         .annotations
         .firstOrNull { it.name == "Suppress" }
         ?.text

@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationHelper
@@ -10,13 +11,13 @@ import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
 @Suppress("detekt.TooManyFunctions")
 internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : KoPsiDeclaration {
-    override val filePath by lazy {
+    override val filePath: String by lazy {
         psiElement
             .containingFile
             .name
     }
 
-    override val projectFilePath by lazy {
+    override val projectFilePath: String by lazy {
         val rootPathProvider = PathProvider
             .getInstance()
             .rootProjectPath
@@ -24,7 +25,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         filePath.removePrefix(rootPathProvider)
     }
 
-    override val location by lazy {
+    override val location: String by lazy {
         val lineAndColumn = psiElement
             .getTextWithLocation()
             .substringAfterLast("' at (")
@@ -38,7 +39,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         "$filePath:$line:$column"
     }
 
-    override val text by lazy {
+    override val text: String by lazy {
         psiElement
             .getTextWithLocation()
             .substringBefore("' at (")
@@ -46,9 +47,9 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
             .removeSuffix("\n")
     }
 
-    override val locationWithText by lazy { "Location: $location \nDeclaration:\n$text" }
+    override val locationWithText: String by lazy { "Location: $location \nDeclaration:\n$text" }
 
-    override val kDoc by lazy {
+    override val kDoc: KoKDocDeclaration? by lazy {
         val kDocElement = psiElement
             .children
             .filterIsInstance<KDocElement>()
@@ -57,39 +58,39 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         kDocElement?.let { KoKDocDeclarationImpl(kDocElement) }
     }
 
-    override fun hasKDoc() = kDoc != null
+    override fun hasKDoc(): Boolean = kDoc != null
 
-    protected open fun hasValidDescription(enabled: Boolean) = TagHelper.hasValidDescription(enabled, kDoc)
+    protected open fun hasValidDescription(enabled: Boolean): Boolean = TagHelper.hasValidDescription(enabled, kDoc)
 
-    protected open fun hasValidParamTag(enabled: Boolean) = TagHelper.hasValidParamTag(enabled, parameters = null, kDoc)
+    protected open fun hasValidParamTag(enabled: Boolean): Boolean = TagHelper.hasValidParamTag(enabled, parameters = null, kDoc)
 
-    protected open fun hasValidReturnTag(enabled: Boolean) = TagHelper.hasValidReturnTag(enabled, kDoc)
+    protected open fun hasValidReturnTag(enabled: Boolean): Boolean = TagHelper.hasValidReturnTag(enabled, kDoc)
 
-    protected open fun hasValidConstructorTag(enabled: Boolean) = TagHelper.hasValidConstructorTag(enabled, kDoc)
+    protected open fun hasValidConstructorTag(enabled: Boolean): Boolean = TagHelper.hasValidConstructorTag(enabled, kDoc)
 
-    protected open fun hasValidReceiverTag(enabled: Boolean) = TagHelper.hasValidReceiverTag(enabled, kDoc)
+    protected open fun hasValidReceiverTag(enabled: Boolean): Boolean = TagHelper.hasValidReceiverTag(enabled, kDoc)
 
-    protected open fun hasValidPropertyTag(enabled: Boolean) = TagHelper.hasValidPropertyTag(enabled, properties = null, kDoc)
+    protected open fun hasValidPropertyTag(enabled: Boolean): Boolean = TagHelper.hasValidPropertyTag(enabled, properties = null, kDoc)
 
-    protected open fun hasValidThrowsTag(enabled: Boolean) = TagHelper.hasValidThrowsTag(enabled, kDoc)
+    protected open fun hasValidThrowsTag(enabled: Boolean): Boolean = TagHelper.hasValidThrowsTag(enabled, kDoc)
 
-    protected open fun hasValidExceptionTag(enabled: Boolean) = TagHelper.hasValidExceptionTag(enabled, kDoc)
+    protected open fun hasValidExceptionTag(enabled: Boolean): Boolean = TagHelper.hasValidExceptionTag(enabled, kDoc)
 
-    protected open fun hasValidSampleTag(enabled: Boolean) = TagHelper.hasValidSampleTag(enabled, kDoc)
+    protected open fun hasValidSampleTag(enabled: Boolean): Boolean = TagHelper.hasValidSampleTag(enabled, kDoc)
 
-    protected open fun hasValidSeeTag(enabled: Boolean) = TagHelper.hasValidSeeTag(enabled, kDoc)
+    protected open fun hasValidSeeTag(enabled: Boolean): Boolean = TagHelper.hasValidSeeTag(enabled, kDoc)
 
-    protected open fun hasValidAuthorTag(enabled: Boolean) = TagHelper.hasValidAuthorTag(enabled, kDoc)
+    protected open fun hasValidAuthorTag(enabled: Boolean): Boolean = TagHelper.hasValidAuthorTag(enabled, kDoc)
 
-    protected open fun hasValidSinceTag(enabled: Boolean) = TagHelper.hasValidSinceTag(enabled, kDoc)
+    protected open fun hasValidSinceTag(enabled: Boolean): Boolean = TagHelper.hasValidSinceTag(enabled, kDoc)
 
-    protected open fun hasValidSuppressTag(enabled: Boolean) = TagHelper.hasValidSuppressTag(enabled, kDoc)
+    protected open fun hasValidSuppressTag(enabled: Boolean): Boolean = TagHelper.hasValidSuppressTag(enabled, kDoc)
 
-    protected open fun hasValidVersionTag(enabled: Boolean) = TagHelper.hasValidVersionTag(enabled, kDoc)
+    protected open fun hasValidVersionTag(enabled: Boolean): Boolean = TagHelper.hasValidVersionTag(enabled, kDoc)
 
-    protected open fun hasValidPropertySetterTag(enabled: Boolean) = TagHelper.hasValidPropertySetterTag(enabled, kDoc)
+    protected open fun hasValidPropertySetterTag(enabled: Boolean): Boolean = TagHelper.hasValidPropertySetterTag(enabled, kDoc)
 
-    protected open fun hasValidPropertyGetterTag(enabled: Boolean) = TagHelper.hasValidPropertyGetterTag(enabled, kDoc)
+    protected open fun hasValidPropertyGetterTag(enabled: Boolean): Boolean = TagHelper.hasValidPropertyGetterTag(enabled, kDoc)
 
     @Suppress("detekt.CyclomaticComplexMethod")
     override fun hasValidKDoc(
@@ -109,7 +110,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         verifyVersionTag: Boolean,
         verifyPropertySetterTag: Boolean,
         verifyPropertyGetterTag: Boolean,
-    ) = hasKDoc() &&
+    ): Boolean = hasKDoc() &&
         hasValidDescription(verifyDescription) &&
         hasValidParamTag(verifyParamTag) &&
         hasValidReturnTag(verifyReturnTag) &&
@@ -127,13 +128,13 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         hasValidPropertySetterTag(verifyPropertySetterTag) &&
         hasValidPropertyGetterTag(verifyPropertyGetterTag)
 
-    override fun resideInFilePath(path: String) = LocationHelper.resideInLocation(path, filePath)
+    override fun resideInFilePath(path: String): Boolean = LocationHelper.resideInLocation(path, filePath)
 
-    override fun resideInProjectFilePath(path: String) = LocationHelper.resideInLocation(path, projectFilePath)
+    override fun resideInProjectFilePath(path: String): Boolean = LocationHelper.resideInLocation(path, projectFilePath)
 
     override fun print() {
         print(toString())
     }
 
-    override fun toString() = locationWithText
+    override fun toString(): String = locationWithText
 }

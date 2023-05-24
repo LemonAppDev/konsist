@@ -11,7 +11,7 @@ internal class KoTypeDeclarationImpl private constructor(
 ) :
     KoNamedDeclarationImpl(ktTypeReference),
     KoTypeDeclaration {
-    private val file = KoFileImpl(ktTypeReference.containingKtFile)
+    private val file: KoFile by lazy { KoFileImpl(ktTypeReference.containingKtFile) }
 
     override val importAliasName: String by lazy {
         file
@@ -44,19 +44,19 @@ internal class KoTypeDeclarationImpl private constructor(
 
     override val isNullable: Boolean by lazy { ktTypeReference.text.last() == '?' }
 
-    override val fullyQualifiedName by lazy {
+    override val fullyQualifiedName: String by lazy {
         file
             .imports
             .map { it.name }
             .firstOrNull() { it.contains(sourceType) } ?: ""
     }
 
-    override fun isImportAlias() = importAliasName.isNotEmpty()
+    override fun isImportAlias(): Boolean = importAliasName.isNotEmpty()
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoTypeDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktTypeReference: KtTypeReference, parentDeclaration: KoBaseDeclaration?) =
+        internal fun getInstance(ktTypeReference: KtTypeReference, parentDeclaration: KoBaseDeclaration?): KoTypeDeclaration =
             cache.getOrCreateInstance(ktTypeReference, parentDeclaration) { KoTypeDeclarationImpl(ktTypeReference) }
     }
 }

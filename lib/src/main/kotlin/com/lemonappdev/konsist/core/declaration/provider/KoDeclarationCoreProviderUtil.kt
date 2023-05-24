@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration.provider
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiWhiteSpace
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
@@ -140,7 +141,7 @@ internal object KoDeclarationCoreProviderUtil {
         return localDeclarations.asSequence()
     }
 
-    private fun List<PsiElement>.flattenDeclarations() = this.flatMap {
+    private fun List<PsiElement>.flattenDeclarations(): List<PsiElement> = this.flatMap {
         when (it) {
             is KtImportList -> it.imports
             is KtFileAnnotationList -> it.annotationEntries
@@ -148,7 +149,7 @@ internal object KoDeclarationCoreProviderUtil {
         }
     }
 
-    private fun getInstanceOfKtDeclaration(ktDeclaration: KtDeclaration, parentDeclaration: KoBaseDeclaration?) = when {
+    private fun getInstanceOfKtDeclaration(ktDeclaration: KtDeclaration, parentDeclaration: KoBaseDeclaration?): KoDeclaration? = when {
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
         ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
         ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
@@ -158,7 +159,7 @@ internal object KoDeclarationCoreProviderUtil {
         else -> null
     }
 
-    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parentDeclaration: KoBaseDeclaration?) = when (psiElement) {
+    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parentDeclaration: KoBaseDeclaration?): KoNamedDeclaration?  = when (psiElement) {
         is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parentDeclaration)
         is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parentDeclaration)
         is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(psiElement, parentDeclaration)

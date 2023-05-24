@@ -9,14 +9,14 @@ import org.jetbrains.kotlin.psi.KtClass
 internal class KoInterfaceDeclarationImpl private constructor(ktClass: KtClass, parentDeclaration: KoBaseDeclaration?) :
     KoComplexDeclarationImpl(ktClass, parentDeclaration),
     KoInterfaceDeclaration {
-    override fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
+    override fun hasActualModifier(): Boolean = hasModifiers(KoModifier.ACTUAL)
 
-    override fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
+    override fun hasExpectModifier(): Boolean = hasModifiers(KoModifier.EXPECT)
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoInterfaceDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoInterfaceDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktClass: KtClass, parentDeclaration: KoBaseDeclaration?) =
+        internal fun getInstance(ktClass: KtClass, parentDeclaration: KoBaseDeclaration?): KoInterfaceDeclaration  =
             cache.getOrCreateInstance(ktClass, parentDeclaration) {
                 KoInterfaceDeclarationImpl(ktClass, parentDeclaration)
             }

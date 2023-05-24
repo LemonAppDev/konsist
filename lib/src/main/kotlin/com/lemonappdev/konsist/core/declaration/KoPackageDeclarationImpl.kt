@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.psi.KtPackageDirective
 internal class KoPackageDeclarationImpl private constructor(private val ktPackageDirective: KtPackageDirective) :
     KoNamedDeclarationImpl(ktPackageDirective), KoPackageDeclaration {
 
-    override val qualifiedName by lazy {
+    override val qualifiedName: String by lazy {
         if (ktPackageDirective.fqName != FqName.ROOT) {
             ktPackageDirective.fqName.toString()
         } else {
@@ -18,7 +18,7 @@ internal class KoPackageDeclarationImpl private constructor(private val ktPackag
     }
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoPackageDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoPackageDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(ktPackageDirective: KtPackageDirective, parentDeclaration: KoBaseDeclaration?): KoPackageDeclaration =
             cache.getOrCreateInstance(ktPackageDirective, parentDeclaration) { KoPackageDeclarationImpl(ktPackageDirective) }
