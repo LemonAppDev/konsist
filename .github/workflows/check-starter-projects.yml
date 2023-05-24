@@ -273,7 +273,7 @@ jobs:
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
-        run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-gradle-config-file.py samples/starter-projects/konsist-starter-spring-maven-junit5/build.gradle
+        run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-maven-config-file.py samples/starter-projects/konsist-starter-spring-maven-junit5/build.gradle
 
       - name: Replace Konsist Version
         run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-spring-maven-junit5/build.gradle
