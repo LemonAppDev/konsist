@@ -3,16 +3,13 @@ import re
 import argparse
 import subprocess
 
-
 def call_get_konsist_version_script():
     current_script_path = os.path.abspath(__file__)
     current_script_directory = os.path.dirname(current_script_path)
-    script_file = current_script_directory + "/get-konsist-version.py"
+    script_file = current_script_directory + "/../get-konsist-version.py"
 
     result = subprocess.run(['python3', script_file], stdout=subprocess.PIPE, check=True)
     return result.stdout.decode().strip()
-
-import re
 
 def replace_version(file_name, new_version):
     with open(file_name, 'r') as file:
@@ -37,8 +34,7 @@ if __name__ == "__main__":
     parser.add_argument("file_path", help="The path to the file to be modified.")
     args = parser.parse_args()
 
-    konsist_version = call_get_konsist_version_script()
-    konsist_snapshot_version = konsist_version + "-SNAPSHOT"
+    konsist_snapshot_version = call_get_konsist_version_script()
     print(konsist_snapshot_version)
 
     replace_version(args.file_path, konsist_snapshot_version)

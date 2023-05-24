@@ -31,14 +31,8 @@ android {
     }
 }
 
-//kotlin {
-//    jvmToolchain {
-//        languageVersion.set(JavaLanguageVersion.of(19))
-//    }
-//}
-
 dependencies {
-    implementation(project(":app"))
+    implementation("androidx.appcompat:appcompat:1.6.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.3")
