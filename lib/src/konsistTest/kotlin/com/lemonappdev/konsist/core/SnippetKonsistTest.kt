@@ -1,14 +1,14 @@
-//package com.lemonappdev.konsist.core
+// package com.lemonappdev.konsist.core
 //
-//import com.lemonappdev.konsist.api.Konsist
-//import com.lemonappdev.konsist.core.filesystem.PathProvider
-//import com.lemonappdev.konsist.core.util.KotlinFileParser
-//import org.amshove.kluent.assertSoftly
-//import org.amshove.kluent.shouldBeEqualTo
-//import org.junit.jupiter.api.Test
-//import java.io.File
+// import com.lemonappdev.konsist.api.Konsist
+// import com.lemonappdev.konsist.core.filesystem.PathProvider
+// import com.lemonappdev.konsist.core.util.KotlinFileParser
+// import org.amshove.kluent.assertSoftly
+// import org.amshove.kluent.shouldBeEqualTo
+// import org.junit.jupiter.api.Test
+// import java.io.File
 //
-//class SnippetKonsistTest {
+// class SnippetKonsistTest {
 //    @Test
 //    fun `every snippet is used in tests`() {
 //        // given
@@ -56,4 +56,4 @@
 //        private val rootProjectPath = pathProvider.rootProjectPath
 //        private val File.isKotlinSnippetFile get() = isFile && name.endsWith(KotlinFileParser.KOTLIN_SNIPPET_FILE_EXTENSION)
 //    }
-//}
+// }
