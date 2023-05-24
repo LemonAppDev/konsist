@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core
 
-import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.KotlinFileParser
 import org.amshove.kluent.assertSoftly
@@ -28,8 +27,8 @@ class SnippetKonsistTest {
 
         val r1 = Regex("""getSnippetFile\("(.+)"\)""")
         val r2 = Regex("""arguments\("([^"]+)"""")
-        val withGetSnippetMethod = snippetNamesFromFiles(r1, "getSnippetFile(\"", "\")")
-        val withArgument = snippetNamesFromFiles(r2, "arguments(\"", "\"")
+        val withGetSnippetMethod = this.snippetNamesFromFiles(r1, "getSnippetFile(\"", "\")")
+        val withArgument = this.snippetNamesFromFiles(r2, "arguments(\"", "\"")
 
         val snippetNamesUsedInTests = (withGetSnippetMethod + withArgument).toSet()
 
@@ -42,18 +41,20 @@ class SnippetKonsistTest {
         }
     }
 
-    private fun snippetNamesFromFiles(regex: Regex, prefix: String, suffix: String) = snippetPackageScope
-        .files()
-        .map { it.text }
-        .flatMap { regex.findAll(it) }
-        .map { it.value }
-        .map { it.removePrefix(prefix) }
-        .map { it.removeSuffix(suffix) }
+    private fun snippetNamesFromFiles(regex: Regex, prefix: String, suffix: String) =
+        File("$rootProjectPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/")
+            .walk()
+            .filter { it.isKotlinNotSnippetFile }
+            .map { it.readText() }
+            .flatMap { regex.findAll(it) }
+            .map { it.value }
+            .map { it.removePrefix(prefix) }
+            .map { it.removeSuffix(suffix) }
 
     companion object {
-        private val snippetPackageScope = Konsist.scopeFromTest(sourceSetName = "integrationTest")
         private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
-        private val rootProjectPath = pathProvider.rootProjectPath
-        private val File.isKotlinSnippetFile get() = isFile && name.endsWith(KotlinFileParser.KOTLIN_SNIPPET_FILE_EXTENSION)
+        private val rootProjectPath: String = pathProvider.rootProjectPath
+        private val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(KotlinFileParser.KOTLIN_SNIPPET_FILE_EXTENSION)
+        private val File.isKotlinNotSnippetFile: Boolean get() = isFile && !name.endsWith(KotlinFileParser.KOTLIN_SNIPPET_FILE_EXTENSION)
     }
 }
