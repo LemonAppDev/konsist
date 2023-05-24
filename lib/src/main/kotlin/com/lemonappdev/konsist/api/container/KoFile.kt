@@ -29,14 +29,29 @@ interface KoFile :
     val name: String
 
     /**
+     * The path of the file.
+     */
+    val path: String
+
+    /**
+     * The root project path of the file.
+     */
+    val rootProjectPath: String
+
+    /**
      * The text of the file.
      */
     val text: String
 
     /**
-     * The path of the file.
+     * Location of the file containing the path, line and column.
      */
-    val path: String
+    val location: String
+
+    /**
+     * Text of the file with the location (file path, line and column).
+     */
+    val locationWithText: String
 
     /**
      * The imports of the file.
@@ -82,6 +97,38 @@ interface KoFile :
      * Whether the file has type aliases.
      */
     fun hasTypeAliases(vararg names: String): Boolean
+
+    /**
+     * Name of the file with prefix.
+     *
+     * @param prefix The prefix to check against. It is a non-null string representing the desired prefix.
+     * @return `true` if the file's name starts with the prefix, `false` otherwise.
+     */
+    fun hasNameStartingWith(prefix: String): Boolean
+
+    /**
+     * Name of the file with suffix.
+     *
+     * @param suffix The suffix to check against. It is a non-null string representing the desired suffix.
+     * @return `true` if the file's name ends with the prefix, `false` otherwise.
+     */
+    fun hasNameEndingWith(suffix: String): Boolean
+
+    /**
+     * Name of the file containing.
+     *
+     * @param text The text to check against. It is a non-null string representing the desired text.
+     * @return `true` if the file's name contains the text, `false` otherwise.
+     */
+    fun hasNameContaining(text: String): Boolean
+
+    /**
+     * Name of the file matching regex.
+     *
+     * @param regex The regex to check against. It is a non-null string representing the desired regex.
+     * @return `true` if the file's name matching with the regex, `false` otherwise.
+     */
+    fun hasNameMatching(regex: Regex): Boolean
 
     /**
      * Indicates whether some other object is "equal to" this one.
