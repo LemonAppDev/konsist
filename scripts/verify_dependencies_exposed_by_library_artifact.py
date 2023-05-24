@@ -1,3 +1,5 @@
+# Script used to verify that the library artifact only exposes dependencies from org.jetbrains.kotlin.
+
 import sys
 import xml.etree.ElementTree as ET
 
