@@ -37,7 +37,7 @@ configure(listOf(detektCheck, detektApply)) {
         a need to configure detekt plugin in every subproject.
          */
         include("**/*.kt", "**/*.kts")
-        exclude("**/resources/**", "**/build/**", "**/generated/**")
+        exclude("**/resources/**", "**/build/**", "**/generated/**", "**/samples/starter-projects/**")
 
         reports {
             html.required.set(true)

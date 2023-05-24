@@ -5,10 +5,30 @@
 | Repository                                                                        | Build Status                                                                                                    |
 |-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
 | [Konsist](https://github.com/LemonAppDev/konsist)                                 | ![Check Workflow](https://github.com/LemonAppDev/konsist/actions/workflows/check.yml/badge.svg)                 |
-| [Konsist Sample Projects](https://github.com/LemonAppDev/konsist-sample-projects) | ![Check Workflow](https://github.com/LemonAppDev/konsist-sample-projects/actions/workflows/check.yml/badge.svg) |
 | [Konsist Documentation](https://github.com/LemonAppDev/konsist-documentation)     | -                                                                                                               |
 
 ## Release
+
+1. Create `release-vx.y.z` branch
+2. After test pass merge release branch to `main`
+3. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
+4. Create a [new release](https://github.com/LemonAppDev/konsist/releases/new)
+   1. set `vx.y.z` as tag version
+   2. set `vx.y.z` as release title
+
+### Publish To Maven Repository
+
+- Publish Local: `./gradlew publishToMavenLocal -Pkonsist.releaseTarget=local` publish to local `~/.m2/repository`
+- Publish Snapshot `./gradlew publish -Pkonsist.releaseTarget=snapshot` publish to
+  [snapshot repository](https://s01.oss.sonatype.org/content/repositories/snapshots/com/lemonappdev/konsist/)
+- Publish Release `./gradlew publish -Pkonsist.releaseTarget=release` publish to
+  [release repository](https://s01.oss.sonatype.org/content/repositories/releases/com/lemonappdev/konsist/). This
+  artefact will be transferred to [maven central](https://central.sonatype.com/artifact/com.lemonappdev/konsist)
+  repository after some time.
+
+### Steps
+- Make sure test in starter projects are working
+- Create release
 
 ### Sonatype
 
@@ -19,16 +39,6 @@
 
 - [mvnrepository.com](https://mvnrepository.com/artifact/com.lemonappdev/konsist/)
 - [central.sonatype.com](https://central.sonatype.com/artifact/com.lemonappdev/konsist/)
-
-### Publish To Maven Repository
-
-- `./gradlew publishToMavenLocal -Pkonsist.releaseTarget=local` publish to local `~/.m2/repository`
-- `./gradlew publish -Pkonsist.releaseTarget=snapshot` publish to
-  [snapshot repository](https://s01.oss.sonatype.org/content/repositories/snapshots/com/lemonappdev/konsist/)
-- `./gradlew publish -Pkonsist.releaseTarget=release` publish to
-  [release repository](https://s01.oss.sonatype.org/content/repositories/releases/com/lemonappdev/konsist/). This
-  artefact will be transferred to [maven central](https://central.sonatype.com/artifact/com.lemonappdev/konsist)
-  repository after some time.
 
 ## Generate KDocs
 
@@ -55,9 +65,9 @@ flowchart LR
 - `integrationTest` - tests using real code snippets (tests using `kotest` library code)
 - `konsistTest` - tests using `konsist` library using `konsist` library code
 
-# Naming Extensions
+# Naming Conventions
 
-If we create extensions with `vararg` for a property in a class we must check its return type.
+If we create extensions with `vararg` for a property in a declaration class we must check its return type.
 
 ## Return type
 
