@@ -35,6 +35,9 @@ android {
 }
 
 dependencies {
+    // This specific Konsist test us veryfying AppCompatActivity class
+    implementation project(":app")
+
     testImplementation 'junit:junit:4.13.2'
 
     testImplementation 'com.lemonappdev:konsist:0.7.12'

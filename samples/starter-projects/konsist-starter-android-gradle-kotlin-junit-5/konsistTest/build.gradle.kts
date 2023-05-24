@@ -31,13 +31,8 @@ android {
     }
 }
 
-//kotlin {
-//    jvmToolchain {
-//        languageVersion.set(JavaLanguageVersion.of(19))
-//    }
-//}
-
 dependencies {
+    // This specific Konsist test us veryfying AppCompatActivity class
     implementation(project(":app"))
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")

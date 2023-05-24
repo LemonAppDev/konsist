@@ -37,6 +37,7 @@ kotlin {
 }
 
 dependencies {
+    // This specific Konsist test us veryfying AppCompatActivity class
     implementation(project(":app"))
 
     testImplementation("junit:junit:4.13.2")
