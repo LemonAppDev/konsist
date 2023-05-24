@@ -8,18 +8,18 @@ dependencies {
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.compiler)
 
-    implementation(libs.junitJupiterEngine)
-    implementation(libs.junitJupiterParams)
-    implementation(libs.mockk)
-    implementation(libs.kluent)
+    testImplementation(libs.junitJupiterEngine)
+    testImplementation(libs.junitJupiterParams)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kluent)
 }
 
 @Suppress("UnstableApiUsage")
 testing {
     suites {
         dependencies {
-            implementation(libs.junitJupiterEngine)
-            implementation(libs.junitJupiterParams)
+            testImplementation(libs.junitJupiterEngine)
+            testImplementation(libs.junitJupiterParams)
         }
 
         register("integrationTest", JvmTestSuite::class) {
