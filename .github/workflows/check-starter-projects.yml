@@ -279,4 +279,4 @@ jobs:
         run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-spring-maven-junit5/pom.xml
 
       - name: Run Konsist Test
-        run: cd samples/starter-projects/konsist-starter-spring-maven-junit5/ && ./gradlew konsistTest
+        run: cd samples/starter-projects/konsist-starter-spring-maven-junit5/ && mvn test
