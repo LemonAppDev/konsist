@@ -25,8 +25,8 @@ class SnippetTest {
 
         val r1 = Regex("""getSnippetFile\("(.+)"\)""")
         val r2 = Regex("""arguments\("([^"]+)"""")
-        val withGetSnippetMethod = this.snippetNamesFromFiles(r1, "getSnippetFile(\"", "\")")
-        val withArgument = this.snippetNamesFromFiles(r2, "arguments(\"", "\"")
+        val withGetSnippetMethod = snippetNamesFromFiles(r1, "getSnippetFile(\"", "\")")
+        val withArgument = snippetNamesFromFiles(r2, "arguments(\"", "\"")
 
         val snippetNamesUsedInTests = (withGetSnippetMethod + withArgument).toSet()
 
