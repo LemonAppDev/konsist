@@ -6,12 +6,12 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoTypeDeclarationForFullyQualifiedNameTest {
+class KoTypeDeclarationForIsNullableTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `fully-qualified-name`(
+    fun `is-nullable`(
         fileName: String,
-        value: String,
+        value: Boolean,
     ) {
         // given
         val sut = getSnippetFile(fileName)
@@ -23,22 +23,21 @@ class KoTypeDeclarationForFullyQualifiedNameTest {
             ?.type
 
         // then
-        sut?.fullyQualifiedName shouldBeEqualTo value
+        sut?.isNullable shouldBeEqualTo value
     }
-
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forfullyqualifiedname/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forisnullable/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("simple-type", "com.lemonappdev.konsist.testdata.SampleType"),
-            arguments("simple-nullable-type", "com.lemonappdev.konsist.testdata.SampleType"),
-            arguments("simple-list-type", ""),
-            arguments("simple-nullable-list-type", ""),
-            arguments("import-alias", "com.lemonappdev.konsist.testdata.SampleType"),
-            arguments("nullable-import-alias", "com.lemonappdev.konsist.testdata.SampleType"),
+            arguments("simple-type-is-nullable", true),
+            arguments("simple-type-is-not-nullable", false),
+            arguments("simple-list-type-is-nullable", true),
+            arguments("simple-list-type-is-not-nullable", false),
+            arguments("import-alias-is-nullable", true),
+            arguments("import-alias-is-not-nullable", false),
         )
     }
 }
