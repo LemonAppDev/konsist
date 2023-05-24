@@ -12,20 +12,25 @@ def call_get_konsist_version_script():
     result = subprocess.run(['python3', script_file], stdout=subprocess.PIPE, check=True)
     return result.stdout.decode().strip()
 
-def replace_version(file_path, new_version):
-    with open(file_path, 'r') as file:
-        contents = file.read()
+import re
 
-    pattern = r"(com\.lemonappdev:konsist:)([^']*)"
-    # pattern = r"(testImplementation 'com\.lemonappdev:konsist:)([^']*)'"
+def replace_version(filename, new_version):
+    with open(filename, 'r') as file:
+        content = file.read()
 
-    def repl(match):
-        return match.group(1) + new_version
+    if filename.endswith(".gradle") or filename.endswith(".kts"):
+        # pattern for gradle files
+        pattern = r"(com\.lemonappdev:konsist:)([\d\.]*)"
+        replacement = r"\g<1>" + new_version
+    else:
+        # pattern for pom.xml
+        pattern = r"(<groupId>com\.lemonappdev</groupId>\s*<artifactId>konsist</artifactId>\s*<version>)([\d\.]*)(</version>)"
+        replacement = r"\g<1>" + new_version + r"\g<3>"
 
-    modified_contents = re.sub(pattern, repl, contents)
+    new_content = re.sub(pattern, replacement, content)
 
-    with open(file_path, 'w') as file:
-        file.write(modified_contents)
+    with open(filename, 'w') as file:
+        file.write(new_content)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
