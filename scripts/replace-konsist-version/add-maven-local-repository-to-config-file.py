@@ -1,5 +1,6 @@
 import os
 import xml.etree.ElementTree as ET
+import argparse
 
 def insert_maven_local(file_name):
     _, extension = os.path.splitext(file_name)
