@@ -11,7 +11,7 @@ class KoPsiDeclarationForHasValidKDocVerifyPropertySetterTagTest {
     // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `hasValidKDoc-with-propertySetter-tag`(
+    fun `hasValidKDoc-with-property-setter-tag`(
         fileName: String,
         verifyPropertySetterTag: Boolean,
         value: Boolean,

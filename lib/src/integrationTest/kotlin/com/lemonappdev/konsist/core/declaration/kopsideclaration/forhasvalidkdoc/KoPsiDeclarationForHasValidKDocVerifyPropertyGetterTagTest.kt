@@ -11,7 +11,7 @@ class KoPsiDeclarationForHasValidKDocVerifyPropertyGetterTagTest {
     // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `hasValidKDoc-with-propertyGetter-tag`(
+    fun `hasValidKDoc-with-property-getter-tag`(
         fileName: String,
         verifyPropertyGetterTag: Boolean,
         value: Boolean,
