@@ -11,7 +11,7 @@ class KoPsiDeclarationForLocationAndTextTest {
         val projectPath = getSnippetFile("location-with-text")
             .declarations()
             .first()
-            .projectFilePath
+            .rootProjectFilePath
 
         val sut = getSnippetFile("location-with-text")
             .functions()

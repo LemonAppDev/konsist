@@ -10,9 +10,9 @@ interface KoPsiDeclaration {
     val filePath: String
 
     /**
-     * Project file path of the declaration.
+     * Roo project file path of the declaration.
      */
-    val projectFilePath: String
+    val rootProjectFilePath: String
 
     /**
      * Location of the declaration containing the file path, line and column.

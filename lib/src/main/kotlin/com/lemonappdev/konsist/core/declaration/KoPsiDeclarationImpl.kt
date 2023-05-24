@@ -16,7 +16,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
             .name
     }
 
-    override val projectFilePath by lazy {
+    override val rootProjectFilePath by lazy {
         val rootPathProvider = PathProvider
             .getInstance()
             .rootProjectPath
@@ -129,7 +129,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
 
     override fun resideInFilePath(path: String) = LocationHelper.resideInLocation(path, filePath)
 
-    override fun resideInProjectFilePath(path: String) = LocationHelper.resideInLocation(path, projectFilePath)
+    override fun resideInProjectFilePath(path: String) = LocationHelper.resideInLocation(path, rootProjectFilePath)
 
     override fun print() {
         print(toString())
