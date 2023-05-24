@@ -55,4 +55,3 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     insert_maven_local(args.file_path)
-
