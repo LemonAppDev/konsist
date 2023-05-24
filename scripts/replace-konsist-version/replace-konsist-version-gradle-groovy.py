@@ -34,7 +34,7 @@ if __name__ == "__main__":
     parser.add_argument("file_path", help="The path to the file to be modified.")
     args = parser.parse_args()
 
-    konsist_version = call_get_konsist_version_script()
+    konsist_snapshot_version = call_get_konsist_version_script()
     print(konsist_snapshot_version)
 
     replace_version(args.file_path, konsist_snapshot_version)
