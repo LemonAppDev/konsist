@@ -1,18 +1,15 @@
-package com.lemonappdev.konsist.core
+package com.lemonappdev.konsist.core.snippet
 
-import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.core.filesystem.PathProvider
-import com.lemonappdev.konsist.core.util.KotlinFileParser
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class SnippetKonsistTest {
+class SnippetTest {
     @Test
     fun `every snippet is used in tests`() {
         // given
-        val snippets = File("$rootProjectPath/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/")
+        val snippets = File("../")
             .walk()
             .filter { it.isKotlinSnippetFile }
 
@@ -42,18 +39,18 @@ class SnippetKonsistTest {
         }
     }
 
-    private fun snippetNamesFromFiles(regex: Regex, prefix: String, suffix: String) = snippetPackageScope
-        .files()
-        .map { it.text }
-        .flatMap { regex.findAll(it) }
-        .map { it.value }
-        .map { it.removePrefix(prefix) }
-        .map { it.removeSuffix(suffix) }
+    private fun snippetNamesFromFiles(regex: Regex, prefix: String, suffix: String) =
+        File("../")
+            .walk()
+            .filter { it.isKotlinNotSnippetFile }
+            .map { it.readText() }
+            .flatMap { regex.findAll(it) }
+            .map { it.value }
+            .map { it.removePrefix(prefix) }
+            .map { it.removeSuffix(suffix) }
 
     companion object {
-        private val snippetPackageScope = Konsist.scopeFromTest(sourceSetName = "integrationTest")
-        private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
-        private val rootProjectPath = pathProvider.rootProjectPath
-        private val File.isKotlinSnippetFile get() = isFile && name.endsWith(KotlinFileParser.KOTLIN_SNIPPET_FILE_EXTENSION)
+        private val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(".kttxt")
+        private val File.isKotlinNotSnippetFile: Boolean get() = isFile && !name.endsWith(".kttxt")
     }
 }

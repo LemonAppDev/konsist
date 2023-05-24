@@ -37,7 +37,7 @@ kotlin {
 }
 
 dependencies {
-    implementation(project(":app"))
+    implementation("androidx.appcompat:appcompat:1.6.1")
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.lemonappdev:konsist:0.7.12")

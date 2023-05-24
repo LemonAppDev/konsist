@@ -31,6 +31,7 @@ jobs:
         with:
           name: junit-test-report
           path: ./lib/build/test-results/test/
+
   konsist-konsist-test:
     name: Konsist Konsist Test
     continue-on-error: true
@@ -54,6 +55,7 @@ jobs:
         with:
           name: konsist-test-report
           path: ./lib/build/test-results/konsistTest/
+
   konsist-integration-test:
     name: Konsist Integration Test
     continue-on-error: true
@@ -77,6 +79,7 @@ jobs:
         with:
           name: integration-test-report
           path: ./lib/build/test-results/integrationTest/
+
   konsist-spotless:
     name: Konsist Spotless
     continue-on-error: true
@@ -95,6 +98,7 @@ jobs:
 
       - name: Spotless
         run: ./gradlew spotlessCheck
+
   konsist-detekt:
     name: Konsist Detekt
     continue-on-error: true
@@ -118,6 +122,7 @@ jobs:
         with:
           name: detekt-report
           path: ./**/build/reports/detekt/detekt.*
+
   konsist-assemble:
     name: Konsist Assemble
     continue-on-error: true
@@ -134,6 +139,11 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.3'
+
       - name: Assemble
         run: ./gradlew lib:assemble
 
@@ -144,6 +154,7 @@ jobs:
         with:
           name: konsist.jar
           path: lib/build/libs/lib.jar
+
   konsist-dokka-html-doc:
     name: Konsist Dokka Generate Html Doc
     continue-on-error: true
@@ -167,6 +178,7 @@ jobs:
         with:
           name: dokka-html-doc.jar
           path: ./lib/build/dokka/*
+
   konsist-publish:
     name: Konsist Publish Local
     continue-on-error: true
@@ -193,7 +205,10 @@ jobs:
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: List Artifacts
-        run: ls -R /home/runner/.m2/repository/
+        run: ls -R ~/.m2/repository/
+
+      - name: Verify Dependencies Exposed By The Library Artifact
+        run: python3 scripts/verify_dependencies_exposed_by_library_artifact.py
 
   path-tester-project:
     name: Test Project Path Tester Project
