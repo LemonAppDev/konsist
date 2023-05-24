@@ -1,14 +1,18 @@
 package com.lemonappdev.konsist.core.scope
 
 import com.lemonappdev.konsist.api.KoScope
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 
 @Suppress("detekt.TooManyFunctions")
 class KoScopeImpl(
@@ -60,13 +64,13 @@ class KoScopeImpl(
 
     override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope = KoScopeImpl(koFiles.filter { predicate(it) })
 
-    override fun imports() = koFiles.flatMap { it.imports }
+    override fun imports(): Sequence<KoImportDeclaration> = koFiles.flatMap { it.imports }
 
-    override fun annotations() = koFiles.flatMap { it.annotations }
+    override fun annotations(): Sequence<KoAnnotationDeclaration> = koFiles.flatMap { it.annotations }
 
-    override fun packages() = koFiles.mapNotNull { it.packagee }
+    override fun packages(): Sequence<KoPackageDeclaration> = koFiles.mapNotNull { it.packagee }
 
-    override fun typeAliases() = koFiles.flatMap { it.typeAliases }
+    override fun typeAliases(): Sequence<KoTypeAliasDeclaration> = koFiles.flatMap { it.typeAliases }
 
     override operator fun plus(scope: KoScope): KoScope = KoScopeImpl(files() + scope.files())
 

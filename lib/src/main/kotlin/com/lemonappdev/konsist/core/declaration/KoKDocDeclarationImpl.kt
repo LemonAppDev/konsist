@@ -17,6 +17,8 @@ import com.lemonappdev.konsist.api.KoKDocTag.SUPPRESS
 import com.lemonappdev.konsist.api.KoKDocTag.THROWS
 import com.lemonappdev.konsist.api.KoKDocTag.VERSION
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
+import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
+import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
 internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoPsiDeclarationImpl(kDocElement), KoKDocDeclaration {
@@ -34,13 +36,13 @@ internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoP
             }
     }
 
-    override val description by lazy {
+    override val description: String by lazy {
         text
             .substringBefore("@")
             .trimEnd()
     }
 
-    override val tags by lazy {
+    override val tags: List<KoKDocTagDeclaration> by lazy {
         val regex = "@(\\w+)".toRegex()
 
         val tagsAsStringList = text
@@ -64,79 +66,79 @@ internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoP
         }
     }
 
-    override val paramTags by lazy {
+    override val paramTags: List<KoValuedKDocTagDeclaration> by lazy {
         tags.filter { it.name == PARAM }
-            .map { it as KoValuedKDocTagDeclarationImpl }
+            .map { it as KoValuedKDocTagDeclaration }
     }
 
-    override val returnTag by lazy {
+    override val returnTag: KoKDocTagDeclaration? by lazy {
         tags.firstOrNull { it.name == RETURN }
     }
 
-    override val constructorTag by lazy {
+    override val constructorTag: KoKDocTagDeclaration? by lazy {
         tags.firstOrNull { it.name == CONSTRUCTOR }
     }
 
-    override val receiverTag by lazy {
+    override val receiverTag: KoKDocTagDeclaration? by lazy {
         tags.firstOrNull { it.name == RECEIVER }
     }
 
-    override val propertyTags by lazy {
+    override val propertyTags: List<KoValuedKDocTagDeclaration> by lazy {
         tags.filter { it.name == PROPERTY }
-            .map { it as KoValuedKDocTagDeclarationImpl }
+            .map { it as KoValuedKDocTagDeclaration }
     }
 
-    override val throwsTags by lazy {
+    override val throwsTags: List<KoValuedKDocTagDeclaration> by lazy {
         tags.filter { it.name == THROWS }
-            .map { it as KoValuedKDocTagDeclarationImpl }
+            .map { it as KoValuedKDocTagDeclaration }
     }
 
-    override val exceptionTags by lazy {
+    override val exceptionTags: List<KoValuedKDocTagDeclaration> by lazy {
         tags.filter { it.name == EXCEPTION }
-            .map { it as KoValuedKDocTagDeclarationImpl }
+            .map { it as KoValuedKDocTagDeclaration }
     }
 
-    override val sampleTags by lazy {
+    override val sampleTags: List<KoValuedKDocTagDeclaration> by lazy {
         tags.filter { it.name == SAMPLE }
-            .map { it as KoValuedKDocTagDeclarationImpl }
+            .map { it as KoValuedKDocTagDeclaration }
     }
 
-    override val seeTags by lazy {
+    override val seeTags: List<KoValuedKDocTagDeclaration> by lazy {
         tags.filter { it.name == SEE }
-            .map { it as KoValuedKDocTagDeclarationImpl }
+            .map { it as KoValuedKDocTagDeclaration }
     }
 
-    override val authorTags by lazy {
+    override val authorTags: List<KoKDocTagDeclaration> by lazy {
         tags.filter { it.name == AUTHOR }
     }
 
-    override val sinceTag by lazy {
+    override val sinceTag: KoKDocTagDeclaration? by lazy {
         tags.firstOrNull { it.name == SINCE }
     }
 
-    override val suppressTag by lazy {
+    override val suppressTag: KoKDocTagDeclaration? by lazy {
         tags.firstOrNull { it.name == SUPPRESS }
     }
 
-    override val versionTag by lazy {
+    override val versionTag: KoKDocTagDeclaration? by lazy {
         tags.firstOrNull { it.name == VERSION }
     }
 
-    override val propertySetterTag by lazy {
+    override val propertySetterTag: KoKDocTagDeclaration? by lazy {
         tags.firstOrNull { it.name == PROPERTY_SETTER }
     }
 
-    override val propertyGetterTag by lazy {
+    override val propertyGetterTag: KoKDocTagDeclaration? by lazy {
         tags.firstOrNull { it.name == PROPERTY_GETTER }
     }
 
-    override fun hasTags(vararg tags: KoKDocTag) = tags.all {
+    override fun hasTags(vararg tags: KoKDocTag): Boolean = tags.all {
         this.tags
             .map { tag -> tag.name }
             .contains(it)
     }
 
-    private fun parseToValuedTag(koKDocTag: KoKDocTag, sentence: String): KoValuedKDocTagDeclarationImpl {
+    private fun parseToValuedTag(koKDocTag: KoKDocTag, sentence: String): KoValuedKDocTagDeclaration {
         val parsed = sentence.split(" ")
         val description = parsed
             .subList(2, parsed.size)
@@ -145,7 +147,7 @@ internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoP
         return KoValuedKDocTagDeclarationImpl(koKDocTag, parsed[1], description)
     }
 
-    private fun parseToTag(koKDocTag: KoKDocTag, sentence: String): KoKDocTagDeclarationImpl {
+    private fun parseToTag(koKDocTag: KoKDocTag, sentence: String): KoKDocTagDeclaration {
         val parsed = sentence.split(" ")
         val description = parsed
             .subList(1, parsed.size)

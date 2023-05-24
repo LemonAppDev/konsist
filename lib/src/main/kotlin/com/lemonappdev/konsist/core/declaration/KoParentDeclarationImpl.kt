@@ -17,7 +17,7 @@ internal class KoParentDeclarationImpl private constructor(private val ktSuperTy
             .substringBefore(" by")
     }
 
-    override val delegateName by lazy {
+    override val delegateName: String? by lazy {
         if (ktSuperTypeListEntry is KtDelegatedSuperTypeEntry) {
             ktSuperTypeListEntry
                 .delegateExpression
@@ -27,15 +27,15 @@ internal class KoParentDeclarationImpl private constructor(private val ktSuperTy
         }
     }
 
-    override fun hasDelegate(delegateName: String?) = when (delegateName) {
+    override fun hasDelegate(delegateName: String?): Boolean = when (delegateName) {
         null -> this.delegateName != null
         else -> name == delegateName
     }
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoParentDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoParentDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktSuperTypeListEntry: KtSuperTypeListEntry, parent: KoBaseDeclaration) =
+        internal fun getInstance(ktSuperTypeListEntry: KtSuperTypeListEntry, parent: KoBaseDeclaration): KoParentDeclaration =
             cache.getOrCreateInstance(ktSuperTypeListEntry, parent) { KoParentDeclarationImpl(ktSuperTypeListEntry) }
     }
 }

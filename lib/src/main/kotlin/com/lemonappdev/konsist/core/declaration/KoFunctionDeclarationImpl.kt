@@ -2,7 +2,9 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.util.TagHelper
 import org.jetbrains.kotlin.psi.KtClass
@@ -17,7 +19,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
     KoParametrizedDeclarationImpl(ktFunction, parent),
     KoFunctionDeclaration {
 
-    private val localDeclarations by lazy {
+    private val localDeclarations: Sequence<KoDeclaration> by lazy {
         val psiChildren = ktFunction
             .bodyBlockExpression
             ?.children
@@ -37,7 +39,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
         }
     }
 
-    override val returnType by lazy {
+    override val returnType: KoTypeDeclaration? by lazy {
         val type = ktFunction
             .children
             .firstIsInstanceOrNull<KtTypeReference>()
@@ -45,43 +47,42 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
         type?.let { KoTypeDeclarationImpl.getInstance(type, this) }
     }
 
-    override fun hasOperatorModifier() = hasModifiers(KoModifier.OPERATOR)
+    override fun hasOperatorModifier(): Boolean = hasModifiers(KoModifier.OPERATOR)
 
-    override fun hasInlineModifier() = hasModifiers(KoModifier.INLINE)
+    override fun hasInlineModifier(): Boolean = hasModifiers(KoModifier.INLINE)
 
-    override fun hasTailrecModifier() = hasModifiers(KoModifier.TAILREC)
+    override fun hasTailrecModifier(): Boolean = hasModifiers(KoModifier.TAILREC)
 
-    override fun hasInfixModifier() = hasModifiers(KoModifier.INFIX)
+    override fun hasInfixModifier(): Boolean = hasModifiers(KoModifier.INFIX)
 
-    override fun hasExternalModifier() = hasModifiers(KoModifier.EXTERNAL)
+    override fun hasExternalModifier(): Boolean = hasModifiers(KoModifier.EXTERNAL)
 
-    override fun hasSuspendModifier() = hasModifiers(KoModifier.SUSPEND)
+    override fun hasSuspendModifier(): Boolean = hasModifiers(KoModifier.SUSPEND)
 
-    override fun hasOpenModifier() = hasModifiers(KoModifier.OPEN)
+    override fun hasOpenModifier(): Boolean = hasModifiers(KoModifier.OPEN)
 
-    override fun hasOverrideModifier() = hasModifiers(KoModifier.OVERRIDE)
+    override fun hasOverrideModifier(): Boolean = hasModifiers(KoModifier.OVERRIDE)
 
-    override fun hasFinalModifier() = hasModifiers(KoModifier.FINAL)
+    override fun hasFinalModifier(): Boolean = hasModifiers(KoModifier.FINAL)
 
-    override fun hasAbstractModifier() = hasModifiers(KoModifier.ABSTRACT)
+    override fun hasAbstractModifier(): Boolean = hasModifiers(KoModifier.ABSTRACT)
 
-    override fun hasActualModifier() = hasModifiers(KoModifier.ACTUAL)
+    override fun hasActualModifier(): Boolean = hasModifiers(KoModifier.ACTUAL)
 
-    override fun hasExpectModifier() = hasModifiers(KoModifier.EXPECT)
+    override fun hasExpectModifier(): Boolean = hasModifiers(KoModifier.EXPECT)
 
-    override fun isExtension() = ktFunction.isExtensionDeclaration()
+    override fun isExtension(): Boolean = ktFunction.isExtensionDeclaration()
 
-    override fun hasReturnType() = ktFunction.hasDeclaredReturnType()
+    override fun hasReturnType(): Boolean = ktFunction.hasDeclaredReturnType()
 
-    override fun localDeclarations(): Sequence<KoDeclarationImpl> = localDeclarations
+    override fun localDeclarations(): Sequence<KoDeclaration> = localDeclarations
 
-    override fun hasValidReturnTag(enabled: Boolean) = TagHelper.hasValidReturnTag(enabled, kDoc)
+    override fun hasValidReturnTag(enabled: Boolean): Boolean = TagHelper.hasValidReturnTag(enabled, kDoc)
 
     internal companion object {
-        private val cache = KoDeclarationCache<KoFunctionDeclarationImpl>()
+        private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktFunction: KtFunction, parent: KoBaseDeclaration) = cache.getOrCreateInstance(ktFunction, parent) {
-            KoFunctionDeclarationImpl(ktFunction, parent)
-        }
+        internal fun getInstance(ktFunction: KtFunction, parent: KoBaseDeclaration): KoFunctionDeclaration =
+            cache.getOrCreateInstance(ktFunction, parent) { KoFunctionDeclarationImpl(ktFunction, parent) }
     }
 }
