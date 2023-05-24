@@ -48,7 +48,7 @@ internal object KoDeclarationCoreProviderUtil {
                     .filterNot { it is PsiWhiteSpace }
                     .filterNot { it.text.isBlank() }
                     .flattenDeclarations()
-                    .map {
+                    .mapNotNull {
                         when (it) {
                             is KtDeclaration -> getInstanceOfKtDeclaration(it, parent)
                             else -> getInstanceOfOtherDeclaration(it, parent)
@@ -149,7 +149,7 @@ internal object KoDeclarationCoreProviderUtil {
         }
     }
 
-    private fun getInstanceOfKtDeclaration(ktDeclaration: KtDeclaration, parent: KoBaseDeclaration): KoDeclaration = when {
+    private fun getInstanceOfKtDeclaration(ktDeclaration: KtDeclaration, parent: KoBaseDeclaration): KoDeclaration? = when {
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationImpl.getInstance(ktDeclaration, parent)
@@ -159,7 +159,7 @@ internal object KoDeclarationCoreProviderUtil {
         else -> null
     }
 
-    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parent: KoBaseDeclaration): KoNamedDeclaration = when (psiElement) {
+    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parent: KoBaseDeclaration): KoNamedDeclaration? = when (psiElement) {
         is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parent)
         is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parent)
         is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(psiElement, parent)
