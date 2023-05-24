@@ -41,5 +41,5 @@ if __name__ == "__main__":
     konsist_version = call_get_konsist_version_script()
     print(konsist_version)
 
-    pom_path = "~/.m2/repository/com/lemonappdev/konsist/" + konsist_version + "/konsist-" + konsist_version + ".pom"
+    pom_path = "/home/runner/.m2/repository/com/lemonappdev/konsist/" + konsist_version + "/konsist-" + konsist_version + ".pom"
     sys.exit(check_dependencies(pom_path))
