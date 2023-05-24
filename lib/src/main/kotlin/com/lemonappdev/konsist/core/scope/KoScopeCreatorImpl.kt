@@ -13,7 +13,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
 
     private val projectKotlinFiles: Sequence<KoFileDeclaration> by lazy {
-
         File(pathProvider.rootProjectPath).toKoFiles()
     }
 
