@@ -1,3 +1,4 @@
+import argparse
 import xml.etree.ElementTree as ET
 
 def insert_maven_local(filename):
