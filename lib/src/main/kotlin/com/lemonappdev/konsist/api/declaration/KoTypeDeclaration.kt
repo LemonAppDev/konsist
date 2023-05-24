@@ -3,29 +3,37 @@ package com.lemonappdev.konsist.api.declaration
 /**
  * Represents a Kotlin declaration.
  *
- * E.g.
- * 1. For this code snippet:
- *      ```kotlin
- *      val sampleProperty: String
- *      val type = sampleProperty.type
+ *  Example 1
  *
- *      type.importAliasName // ""
- *      type.sourceType // "String"
- *      type.name // "String"
- *      type.isNullable // false
- *      ```
+ *  This code snippet...
+ *  ```kotlin
+ *  val sampleProperty: String
+ *  ```
  *
- * 2. For this code snippet:
- *      ```kotlin
- *      import com.SampleType as ImportAlias
- *      val sampleProperty: ImportAlias?
- *      val type = sampleProperty.type
+ *  ...will be represented as:
  *
- *      type.importAliasName // "ImportAlias"
- *      type.sourceType // "String"
- *      type.name // "ImportAlias?"
- *      type.isNullable // true
- *      ```
+ *  ```kotlin
+ *  importAliasName // ""
+ *  sourceType // "String"
+ *  name // "String"
+ *  isNullable // false
+ *  ```
+ *
+ * Example 2
+ * This code snippet...
+ * ```kotlin
+ * import com.SampleType as ImportAlias
+ * val sampleProperty: ImportAlias?
+ * ```
+ *
+ * ...will be represented as:
+ *
+ * ```kotlin
+ * importAliasName // "ImportAlias"
+ * sourceType // "String"
+ * name // "ImportAlias?"
+ * isNullable // true
+ * ```
  */
 interface KoTypeDeclaration : KoNamedDeclaration {
     /**
