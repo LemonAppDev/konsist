@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 interface KoLocalDeclarationProvider {
     fun localDeclarations(): Sequence<KoDeclaration>
 
-    fun containsLocalDeclarations(name: String) = localDeclarations().any { it.name == name }
+    fun containsLocalDeclarations(name: String): Boolean = localDeclarations().any { it.name == name }
 }
 
 interface KoLocalClassProvider : KoLocalDeclarationProvider {

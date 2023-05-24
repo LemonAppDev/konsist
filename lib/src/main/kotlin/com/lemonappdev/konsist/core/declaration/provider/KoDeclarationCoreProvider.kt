@@ -10,7 +10,7 @@ interface KoDeclarationCoreProvider : KoDeclarationProvider {
     fun containsDeclarations(
         name: String,
         includeNested: Boolean = false,
-    ) = declarations(includeNested).any { it.name == name }
+    ): Boolean = declarations(includeNested).any { it.name == name }
 }
 
 interface KoClassCoreProvider : KoDeclarationCoreProvider, KoClassProvider {

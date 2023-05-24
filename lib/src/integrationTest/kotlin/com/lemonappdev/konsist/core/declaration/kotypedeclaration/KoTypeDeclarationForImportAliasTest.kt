@@ -25,9 +25,45 @@ class KoTypeDeclarationForImportAliasTest {
     }
 
     @Test
+    fun `nullable-simple-type`() {
+        // given
+        val sut = getSnippetFile("nullable-simple-type")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+            ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.importAliasName shouldBeEqualTo ""
+            it?.isImportAlias() shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `import-alias`() {
         // given
         val sut = getSnippetFile("import-alias")
+            .classes()
+            .first()
+            .primaryConstructor
+            ?.parameters
+            ?.first()
+            ?.type
+
+        // then
+        assertSoftly(sut) {
+            it?.importAliasName shouldBeEqualTo "ImportAlias"
+            it?.isImportAlias() shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `nullable-import-alias`() {
+        // given
+        val sut = getSnippetFile("nullable-import-alias")
             .classes()
             .first()
             .primaryConstructor
