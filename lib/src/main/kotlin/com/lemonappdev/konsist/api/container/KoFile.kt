@@ -99,12 +99,12 @@ interface KoFile :
     fun hasTypeAliases(vararg names: String): Boolean
 
     /**
-     * Whatever file reside in file path.
+     * Whatever file reside in path.
      */
     fun resideInPath(path: String): Boolean
 
     /**
-     * Whatever file reside in project file path.
+     * Whatever file reside in root project path.
      */
     fun resideInRootProjectPath(path: String): Boolean
 

@@ -105,7 +105,7 @@ fun <T : KoFile> Sequence<T>.withoutNameMatching(vararg regexes: Regex): Sequenc
 }
 
 /**
- * Sequence containing files that have name containing String.
+ * Sequence containing files that have extension.
  *
  * @param extensions The extensions to include.
  * @return A sequence containing files with extensions matching the specified extensions.
@@ -115,7 +115,7 @@ fun <T : KoFile> Sequence<T>.withExtension(vararg extensions: String): Sequence<
 }
 
 /**
- * Sequence containing files that don't have name containing String.
+ * Sequence containing files that don't have extension.
  *
  * @param extensions The extensions to exclude.
  * @return A sequence containing files without extensions matching the specified extensions.
@@ -157,7 +157,7 @@ fun <T : KoFile> Sequence<T>.withRootProjectPath(vararg paths: String): Sequence
 /**
  * Sequence containing files that don't have root project file path.
  *
- * @param paths The project paths to exclude.
+ * @param paths The root project paths to exclude.
  * @return A sequence containing files that don't reside in any of the specified root project paths.
  */
 fun <T : KoFile> Sequence<T>.withoutRootProjectPath(vararg paths: String): Sequence<T> = filter {

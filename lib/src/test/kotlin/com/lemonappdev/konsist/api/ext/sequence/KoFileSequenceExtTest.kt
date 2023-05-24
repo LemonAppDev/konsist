@@ -10,6 +10,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LargeClass")
 class KoFileSequenceExtTest {
     @Test
     fun `withName() returns file with one of given names`() {

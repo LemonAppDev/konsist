@@ -22,9 +22,9 @@ class KoPsiDeclarationForPathTest {
     }
 
     @Test
-    fun `root-project-file-path`() {
+    fun `project-file-path`() {
         // given
-        val sut = getSnippetFile("root-project-file-path")
+        val sut = getSnippetFile("project-file-path")
             .declarations()
             .first()
 
@@ -33,7 +33,7 @@ class KoPsiDeclarationForPathTest {
             .projectFilePath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kopsideclaration/snippet/forpath/" +
-                    "root-project-file-path.kt",
+                    "project-file-path.kt",
             )
     }
 
