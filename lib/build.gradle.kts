@@ -15,19 +15,19 @@ testing {
         dependencies {
             implementation(libs.junitJupiterEngine)
             implementation(libs.junitJupiterParams)
-            api(libs.mockk)
-            api(libs.kluent)
         }
 
         register("integrationTest", JvmTestSuite::class) {
             dependencies {
                 implementation(project(":lib"))
+                implementation(libs.mockk)
             }
         }
 
         register("konsistTest", JvmTestSuite::class) {
             dependencies {
                 implementation(project(":lib"))
+                implementation(libs.kluent)
             }
         }
     }
