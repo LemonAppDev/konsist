@@ -144,9 +144,6 @@ jobs:
         with:
           python-version: '3.11.3'
 
-      - name: Install jar-analyzer
-        run: pip install jar-analyzer
-
       - name: Assemble
         run: ./gradlew lib:assemble
 
