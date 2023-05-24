@@ -14,8 +14,6 @@ def call_get_konsist_version_script():
     return result.stdout.decode().strip()
 
 def check_dependencies(file_path):
-    print(os.path.exists(file_path))
-
     try:
         tree = ET.parse(file_path)
         root = tree.getroot()
@@ -39,7 +37,6 @@ def check_dependencies(file_path):
 
 if __name__ == "__main__":
     konsist_version = call_get_konsist_version_script()
-    print(konsist_version)
-
     pom_path = "/home/runner/.m2/repository/com/lemonappdev/konsist/" + konsist_version + "/konsist-" + konsist_version + ".pom"
+    print(pom_path)
     sys.exit(check_dependencies(pom_path))
