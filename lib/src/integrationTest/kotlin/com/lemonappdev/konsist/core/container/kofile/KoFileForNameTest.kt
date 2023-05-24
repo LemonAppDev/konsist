@@ -14,6 +14,7 @@ class KoFileForNameTest {
             .first()
 
         // then
+        // The snippet file has '.kttxt' extension, but in name we have '.kt' because KotlinFileParser replace the first one into second one
         sut.name shouldBeEqualTo "file-name.kt"
     }
 

@@ -110,7 +110,7 @@ fun <T : KoFile> Sequence<T>.withoutNameMatching(vararg regexes: Regex): Sequenc
  * @param paths The paths to include.
  * @return A sequence containing files that reside in any of the specified paths.
  */
-fun <T : KoFile> Sequence<T>.withFilePath(vararg paths: String): Sequence<T> = filter {
+fun <T : KoFile> Sequence<T>.withPath(vararg paths: String): Sequence<T> = filter {
     paths.any { path -> it.resideInPath(path) }
 }
 

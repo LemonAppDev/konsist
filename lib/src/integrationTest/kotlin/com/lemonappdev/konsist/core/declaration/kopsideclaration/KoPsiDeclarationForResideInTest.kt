@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoPsiDeclarationForResideInMethodTest {
+class KoPsiDeclarationForResideInTest {
     @Test
     fun `reside-in-file-path`() {
         // given
@@ -38,5 +38,5 @@ class KoPsiDeclarationForResideInMethodTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopsideclaration/snippet/forresideinmethod/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopsideclaration/snippet/forresidein/", fileName)
 }
