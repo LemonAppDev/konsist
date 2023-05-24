@@ -35,8 +35,7 @@ android {
 }
 
 dependencies {
-    // This specific Konsist test us veryfying AppCompatActivity class
-    implementation project(":app")
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 
     testImplementation 'junit:junit:4.13.2'
 
