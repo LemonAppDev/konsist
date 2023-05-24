@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
 import com.lemonappdev.konsist.core.filesystem.PathProvider
-import com.lemonappdev.konsist.core.parent.KoParent
 import com.lemonappdev.konsist.core.util.LocationHelper
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
@@ -17,7 +16,7 @@ import org.jetbrains.kotlin.psi.KtTypeAlias
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import kotlin.reflect.KClass
 
-internal class KoFileImpl(private val ktFile: KtFile) : KoFile, KoParent {
+internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
 
     override val name by lazy {
         ktFile
@@ -68,20 +67,20 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile, KoParent {
             .children
             .filterIsInstance<KtImportDirective>()
 
-        ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it, this) }
+        ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it, null) }
     }
 
     override val annotations by lazy {
         ktFile
             .annotationEntries
-            .map { KoAnnotationDeclarationImpl.getInstance(it, this) }
+            .map { KoAnnotationDeclarationImpl.getInstance(it, null) }
     }
 
     override val packagee by lazy {
         if (ktFile.packageDirective?.qualifiedName == "") {
             null
         } else {
-            ktFile.packageDirective?.let { KoPackageDeclarationImpl.getInstance(it, this) }
+            ktFile.packageDirective?.let { KoPackageDeclarationImpl.getInstance(it, null) }
         }
     }
 
@@ -89,14 +88,14 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile, KoParent {
         ktFile
             .children
             .filterIsInstance<KtTypeAlias>()
-            .map { KoTypeAliasDeclarationImpl.getInstance(it, this) }
+            .map { KoTypeAliasDeclarationImpl.getInstance(it, null) }
     }
 
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
     ): Sequence<KoNamedDeclaration> =
-        KoDeclarationCoreProviderUtil.getKoDeclarations(ktFile, includeNested, includeLocal, this)
+        KoDeclarationCoreProviderUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
 
     override fun hasAnnotations(vararg names: String) = when {
         names.isEmpty() -> annotations.isNotEmpty()

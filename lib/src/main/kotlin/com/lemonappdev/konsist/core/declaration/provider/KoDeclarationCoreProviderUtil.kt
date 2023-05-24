@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.provider
 
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiWhiteSpace
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
@@ -14,7 +15,6 @@ import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
-import com.lemonappdev.konsist.core.parent.KoParent
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDeclaration
@@ -35,7 +35,7 @@ internal object KoDeclarationCoreProviderUtil {
         ktElement: KtElement,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-        parent: KoParent,
+        parentDeclaration: KoBaseDeclaration?,
     ): Sequence<T> {
         val declarations: Sequence<KoNamedDeclaration>
 
@@ -49,8 +49,8 @@ internal object KoDeclarationCoreProviderUtil {
                     .flattenDeclarations()
                     .mapNotNull {
                         when (it) {
-                            is KtDeclaration -> getInstanceOfKtDeclaration(it, parent)
-                            else -> getInstanceOfOtherDeclaration(it, parent)
+                            is KtDeclaration -> getInstanceOfKtDeclaration(it, parentDeclaration)
+                            else -> getInstanceOfOtherDeclaration(it, parentDeclaration)
                         }
                     }
                     .asSequence()
@@ -60,7 +60,7 @@ internal object KoDeclarationCoreProviderUtil {
             is KtDeclarationContainer -> {
                 declarations = ktElement
                     .declarations
-                    .mapNotNull { getInstanceOfKtDeclaration(it, parent) }
+                    .mapNotNull { getInstanceOfKtDeclaration(it, parentDeclaration) }
                     .asSequence()
                 getKoDeclarations(declarations, includeNested, includeLocal)
             }
@@ -148,20 +148,20 @@ internal object KoDeclarationCoreProviderUtil {
         }
     }
 
-    private fun getInstanceOfKtDeclaration(ktDeclaration: KtDeclaration, parent: KoParent) = when {
-        ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, parent)
-        ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(ktDeclaration, parent)
-        ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationImpl.getInstance(ktDeclaration, parent)
-        ktDeclaration is KtProperty -> KoPropertyDeclarationImpl.getInstance(ktDeclaration, parent)
-        ktDeclaration is KtFunction -> KoFunctionDeclarationImpl.getInstance(ktDeclaration, parent)
-        ktDeclaration is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(ktDeclaration, parent)
+    private fun getInstanceOfKtDeclaration(ktDeclaration: KtDeclaration, parentDeclaration: KoBaseDeclaration?) = when {
+        ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
+        ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
+        ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
+        ktDeclaration is KtProperty -> KoPropertyDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
+        ktDeclaration is KtFunction -> KoFunctionDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
+        ktDeclaration is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
         else -> null
     }
 
-    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parent: KoParent) = when (psiElement) {
-        is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parent)
-        is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parent)
-        is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(psiElement, parent)
+    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parentDeclaration: KoBaseDeclaration?) = when (psiElement) {
+        is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parentDeclaration)
+        is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parentDeclaration)
+        is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(psiElement, parentDeclaration)
         else -> null
     }
 }

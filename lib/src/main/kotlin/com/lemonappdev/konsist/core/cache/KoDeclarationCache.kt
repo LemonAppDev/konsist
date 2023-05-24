@@ -6,22 +6,22 @@ import org.jetbrains.kotlin.psi.KtElement
 import java.util.concurrent.ConcurrentHashMap
 
 internal class KoDeclarationCache<T : KoBaseDeclaration> {
-    private val elements = ConcurrentHashMap<Pair<KtElement, KoParent?>, T>()
+    private val elements = ConcurrentHashMap<Pair<KtElement, KoBaseDeclaration?>, T>()
 
-    private fun get(key: Pair<KtElement, KoParent?>): T {
+    private fun get(key: Pair<KtElement, KoBaseDeclaration?>): T {
         var value = elements[key]
         value = requireNotNull(value) { "Cache doesn't allow to null value of key: ${key.first.name}" }
         return value
     }
 
-    private fun set(key: Pair<KtElement, KoParent?>, value: T) {
+    private fun set(key: Pair<KtElement, KoBaseDeclaration?>, value: T) {
         elements[key] = value
     }
 
-    private fun hasKey(key: Pair<KtElement, KoParent?>) = elements.containsKey(key)
+    private fun hasKey(key: Pair<KtElement, KoBaseDeclaration?>) = elements.containsKey(key)
 
-    fun getOrCreateInstance(ktElement: KtElement, parent: KoParent, value: (KtElement) -> T): T {
-        val cacheKey = ktElement to parent
+    fun getOrCreateInstance(ktElement: KtElement, parentDeclaration: KoBaseDeclaration?, value: (KtElement) -> T): T {
+        val cacheKey = ktElement to parentDeclaration
 
         return if (hasKey(cacheKey)) {
             get(cacheKey)
