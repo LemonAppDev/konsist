@@ -43,22 +43,6 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
             .removeSuffix("\n")
     }
 
-    override val location by lazy {
-        val lineAndColumn = ktFile
-            .getTextWithLocation()
-            .substringAfterLast("' at (")
-            .substringBefore(") in")
-            .split(",")
-            .toMutableList()
-            .filterNot { it.isBlank() }
-
-        val line = lineAndColumn[0]
-        val column = lineAndColumn[1]
-        "$path:$line:$column"
-    }
-
-    override val locationWithText: String by lazy { "Location: $location \nDeclaration:\n$text" }
-
     override val imports by lazy {
         val ktImportDirectives = ktFile
             .children

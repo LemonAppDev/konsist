@@ -44,16 +44,6 @@ interface KoFile :
     val text: String
 
     /**
-     * Location of the file containing the path, line and column.
-     */
-    val location: String
-
-    /**
-     * Text of the file with the location (file path, line and column).
-     */
-    val locationWithText: String
-
-    /**
      * The imports of the file.
      */
     val imports: List<KoImportDeclaration>

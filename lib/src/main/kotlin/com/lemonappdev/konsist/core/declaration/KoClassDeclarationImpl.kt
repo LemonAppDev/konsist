@@ -115,8 +115,9 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
     internal companion object {
         private val cache = KoDeclarationCache<KoClassDeclarationImpl>()
 
-        internal fun getInstance(ktClass: KtClass, parentDeclaration: KoBaseDeclaration?) = cache.getOrCreateInstance(ktClass, parentDeclaration) {
-            KoClassDeclarationImpl(ktClass, parentDeclaration)
-        }
+        internal fun getInstance(ktClass: KtClass, parentDeclaration: KoBaseDeclaration?) =
+            cache.getOrCreateInstance(ktClass, parentDeclaration) {
+                KoClassDeclarationImpl(ktClass, parentDeclaration)
+            }
     }
 }

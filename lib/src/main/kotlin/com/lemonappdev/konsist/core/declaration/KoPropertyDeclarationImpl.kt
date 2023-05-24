@@ -65,8 +65,9 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
     internal companion object {
         private val cache = KoDeclarationCache<KoPropertyDeclarationImpl>()
 
-        internal fun getInstance(ktProperty: KtProperty, parentDeclaration: KoBaseDeclaration?) = cache.getOrCreateInstance(ktProperty, parentDeclaration) {
-            KoPropertyDeclarationImpl(ktProperty, parentDeclaration)
-        }
+        internal fun getInstance(ktProperty: KtProperty, parentDeclaration: KoBaseDeclaration?) =
+            cache.getOrCreateInstance(ktProperty, parentDeclaration) {
+                KoPropertyDeclarationImpl(ktProperty, parentDeclaration)
+            }
     }
 }

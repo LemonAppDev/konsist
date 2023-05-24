@@ -29,6 +29,11 @@ internal class KoObjectDeclarationImpl(
         private val cache = KoDeclarationCache<KoObjectDeclarationImpl>()
 
         internal fun getInstance(ktObjectDeclaration: KtObjectDeclaration, parentDeclaration: KoBaseDeclaration?) =
-            cache.getOrCreateInstance(ktObjectDeclaration, parentDeclaration) { KoObjectDeclarationImpl(ktObjectDeclaration, parentDeclaration) }
+            cache.getOrCreateInstance(ktObjectDeclaration, parentDeclaration) {
+                KoObjectDeclarationImpl(
+                    ktObjectDeclaration,
+                    parentDeclaration,
+                )
+            }
     }
 }
