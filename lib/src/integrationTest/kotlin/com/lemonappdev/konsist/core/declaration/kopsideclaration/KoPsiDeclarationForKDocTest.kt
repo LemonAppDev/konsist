@@ -38,7 +38,7 @@ class KoPsiDeclarationForKDocTest {
         }
     }
 
-    // We used interface in tests below, because it doesn't override any method used in hasValidKDoc().
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
     // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForDescription")
@@ -56,6 +56,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = verifyDescription) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForParamTag")
     fun `hasValidKDoc-with-param-tag`(
@@ -72,6 +74,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifyParamTag = verifyParamTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForReturnTag")
     fun `hasValidKDoc-with-return-tag`(
@@ -88,6 +92,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifyReturnTag = verifyReturnTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForConstructorTag")
     fun `hasValidKDoc-with-constructor-tag`(
@@ -104,6 +110,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifyConstructorTag = verifyConstructorTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForReceiverTag")
     fun `hasValidKDoc-with-receiver-tag`(
@@ -120,6 +128,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifyReceiverTag = verifyReceiverTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForPropertyTag")
     fun `hasValidKDoc-with-property-tag`(
@@ -136,6 +146,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifyPropertyTag = verifyPropertyTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForThrowsTag")
     fun `hasValidKDoc-with-throws-tag`(
@@ -152,6 +164,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifyThrowsTag = verifyThrowsTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForExceptionTag")
     fun `hasValidKDoc-with-exception-tag`(
@@ -168,6 +182,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifyExceptionTag = verifyExceptionTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForSampleTag")
     fun `hasValidKDoc-with-sample-tag`(
@@ -184,6 +200,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifySampleTag = verifySampleTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForSeeTag")
     fun `hasValidKDoc-with-see-tag`(
@@ -200,6 +218,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifySeeTag = verifySeeTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForAuthorTag")
     fun `hasValidKDoc-with-author-tag`(
@@ -216,6 +236,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifyAuthorTag = verifyAuthorTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForSinceTag")
     fun `hasValidKDoc-with-since-tag`(
@@ -232,6 +254,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifySinceTag = verifySinceTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForSuppressTag")
     fun `hasValidKDoc-with-suppress-tag`(
@@ -248,6 +272,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifySuppressTag = verifySuppressTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForVersionTag")
     fun `hasValidKDoc-with-version-tag`(
@@ -264,6 +290,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifyVersionTag = verifyVersionTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForPropertySetterTag")
     fun `hasValidKDoc-with-propertySetter-tag`(
@@ -280,6 +308,8 @@ class KoPsiDeclarationForKDocTest {
         sut.hasValidKDoc(verifyDescription = false, verifyPropertySetterTag = verifyPropertySetterTag) shouldBeEqualTo value
     }
 
+    // We used interface in snippet, because it doesn't override any method used in hasValidKDoc().
+    // It may changed in the future.
     @ParameterizedTest
     @MethodSource("provideValuesForPropertyGetterTag")
     fun `hasValidKDoc-with-propertyGetter-tag`(
