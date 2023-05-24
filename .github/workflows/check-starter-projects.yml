@@ -1,11 +1,9 @@
 name: Check Starter Projects
 
 on:
-  push:
-    branches: [ main ]
-
-  pull_request:
-    types: [ opened, synchronize ]
+  schedule:
+    # Runs every day At 00:00 UTC
+    - cron:  '0 0 * * *'
 
 jobs:
   konsist-starter-android-gradle-groovy-junit-4:
