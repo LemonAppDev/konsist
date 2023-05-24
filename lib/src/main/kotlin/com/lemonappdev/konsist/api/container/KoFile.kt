@@ -29,6 +29,16 @@ interface KoFile :
     val name: String
 
     /**
+     * The extension of the file.
+     */
+    val extension: String
+
+    /**
+     * The name with extension of the file.
+     */
+    val nameWithExtension: String
+
+    /**
      * The path of the file.
      */
     val path: String
@@ -129,6 +139,14 @@ interface KoFile :
      * @return `true` if the file's name matching with the regex, `false` otherwise.
      */
     fun hasNameMatching(regex: Regex): Boolean
+
+    /**
+     * Whether file has extension.
+     *
+     * @param extension The extension to check against. It is a non-null string representing the desired extension.
+     * @return `true` if the file's extension matching with the extension, `false` otherwise.
+     */
+    fun hasExtension(extension: String): Boolean
 
     /**
      * Indicates whether some other object is "equal to" this one.

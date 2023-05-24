@@ -105,6 +105,26 @@ fun <T : KoFile> Sequence<T>.withoutNameMatching(vararg regexes: Regex): Sequenc
 }
 
 /**
+ * Sequence containing files that have name containing String.
+ *
+ * @param extensions The extensions to include.
+ * @return A sequence containing files with extensions matching the specified extensions.
+ */
+fun <T : KoFile> Sequence<T>.withExtension(vararg extensions: String): Sequence<T> = filter {
+    extensions.any { extension -> it.hasExtension(extension) }
+}
+
+/**
+ * Sequence containing files that don't have name containing String.
+ *
+ * @param extensions The extensions to exclude.
+ * @return A sequence containing files without extensions matching the specified extensions.
+ */
+fun <T : KoFile> Sequence<T>.withoutExtension(vararg extensions: String): Sequence<T> = filter {
+    extensions.none { extension -> it.hasExtension(extension) }
+}
+
+/**
  * Sequence containing files that have path.
  *
  * @param paths The paths to include.

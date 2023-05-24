@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileForNameTest {
+class KoFileForNameAndExtensionTest {
     @Test
     fun `file-name`() {
         // given
@@ -14,8 +14,31 @@ class KoFileForNameTest {
             .first()
 
         // then
+        sut.name shouldBeEqualTo "file-name"
+    }
+
+    @Test
+    fun `file-extension`() {
+        // given
+        val sut = getSnippetFile("file-extension")
+            .files()
+            .first()
+
+        // then
         // The snippet file has '.kttxt' extension, but in name we have '.kt' because KotlinFileParser replace the first one into second one
-        sut.name shouldBeEqualTo "file-name.kt"
+        sut.extension shouldBeEqualTo "kt"
+    }
+
+    @Test
+    fun `file-name-with-extension`() {
+        // given
+        val sut = getSnippetFile("file-name-with-extension")
+            .files()
+            .first()
+
+        // then
+        // The snippet file has '.kttxt' extension, but in name we have '.kt' because KotlinFileParser replace the first one into second one
+        sut.nameWithExtension shouldBeEqualTo "file-name-with-extension.kt"
     }
 
     @Test
@@ -41,8 +64,8 @@ class KoFileForNameTest {
 
         // then
         assertSoftly(sut) {
-            hasNameEndingWith("with-suffix.kt") shouldBeEqualTo true
-            hasNameEndingWith("with-suffix") shouldBeEqualTo false
+            hasNameEndingWith("with-suffix") shouldBeEqualTo true
+            hasNameEndingWith("wrong-suffix") shouldBeEqualTo false
         }
     }
 
@@ -74,5 +97,20 @@ class KoFileForNameTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/kofile/snippet/forname/", fileName)
+    @Test
+    fun `file-has-extension`() {
+        // given
+        val sut = getSnippetFile("file-has-extension")
+            .files()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasExtension("kt") shouldBeEqualTo true
+            hasExtension("java") shouldBeEqualTo false
+        }
+    }
+
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/container/kofile/snippet/fornameandextension/", fileName)
 }

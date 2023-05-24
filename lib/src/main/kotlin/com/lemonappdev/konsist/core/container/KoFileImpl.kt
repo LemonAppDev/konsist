@@ -18,7 +18,11 @@ import kotlin.reflect.KClass
 
 internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
 
-    override val name by lazy {
+    override val name by lazy { nameWithExtension.substringBeforeLast('.') }
+
+    override val extension: String by lazy { nameWithExtension.substringAfterLast('.') }
+
+    override val nameWithExtension: String by lazy {
         ktFile
             .name
             .split("/")
@@ -123,6 +127,8 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     override fun hasNameContaining(text: String) = name.contains(text)
 
     override fun hasNameMatching(regex: Regex) = name.matches(regex)
+
+    override fun hasExtension(extension: String): Boolean = extension == this.extension
 
     override fun equals(other: Any?): Boolean = other is KoFile && path == other.path
 
