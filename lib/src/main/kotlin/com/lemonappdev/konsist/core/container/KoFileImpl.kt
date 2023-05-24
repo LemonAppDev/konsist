@@ -120,7 +120,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
         }
     }
 
-    override fun resideInPath(path: String) = LocationHelper.resideInLocation(path, path)
+    override fun resideInPath(path: String) = LocationHelper.resideInLocation(path, this.path)
 
     override fun resideInRootProjectPath(path: String) = LocationHelper.resideInLocation(path, rootProjectPath)
 
