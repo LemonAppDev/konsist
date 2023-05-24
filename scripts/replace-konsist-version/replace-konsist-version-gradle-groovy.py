@@ -14,11 +14,11 @@ def call_get_konsist_version_script():
 
 import re
 
-def replace_version(filename, new_version):
-    with open(filename, 'r') as file:
+def replace_version(file_name, new_version):
+    with open(file_name, 'r') as file:
         content = file.read()
 
-    if filename.endswith(".gradle") or filename.endswith(".kts"):
+    if file_name.endswith(".gradle") or file_name.endswith(".kts"):
         # pattern for gradle files
         pattern = r"(com\.lemonappdev:konsist:)([\d\.]*(-SNAPSHOT)?)"
         replacement = r"\g<1>" + new_version
@@ -29,7 +29,7 @@ def replace_version(filename, new_version):
 
     new_content = re.sub(pattern, replacement, content)
 
-    with open(filename, 'w') as file:
+    with open(file_name, 'w') as file:
         file.write(new_content)
 
 if __name__ == "__main__":
