@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass, parent: KoBaseDeclaration) :
-    KoComplexDeclarationImpl(ktClass, parent),
+internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass, parentDeclaration: KoBaseDeclaration?) :
+    KoComplexDeclarationImpl(ktClass, parentDeclaration),
     KoClassDeclaration {
     override val parents: List<KoParentDeclaration> by lazy {
         ktClass
@@ -121,7 +121,9 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
     internal companion object {
         private val cache: KoDeclarationCache<KoClassDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktClass: KtClass, parent: KoBaseDeclaration): KoClassDeclaration =
-            cache.getOrCreateInstance(ktClass, parent) { KoClassDeclarationImpl(ktClass, parent) }
+        internal fun getInstance(ktClass: KtClass, parentDeclaration: KoBaseDeclaration?): KoClassDeclaration =
+            cache.getOrCreateInstance(ktClass, parentDeclaration) {
+                KoClassDeclarationImpl(ktClass, parentDeclaration)
+            }
     }
 }

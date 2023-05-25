@@ -17,7 +17,7 @@ internal class KoImportDeclarationImpl private constructor(private val ktImportD
     internal companion object {
         private val cache: KoDeclarationCache<KoImportDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktImportDirective: KtImportDirective, parent: KoBaseDeclaration): KoImportDeclaration =
-            cache.getOrCreateInstance(ktImportDirective, parent) { KoImportDeclarationImpl(ktImportDirective) }
+        internal fun getInstance(ktImportDirective: KtImportDirective, parentDeclaration: KoBaseDeclaration?): KoImportDeclaration =
+            cache.getOrCreateInstance(ktImportDirective, parentDeclaration) { KoImportDeclarationImpl(ktImportDirective) }
     }
 }

@@ -8,9 +8,9 @@ import org.jetbrains.kotlin.psi.KtObjectDeclaration
 
 internal class KoObjectDeclarationImpl(
     ktObjectDeclaration: KtObjectDeclaration,
-    parent: KoBaseDeclaration,
+    parentDeclaration: KoBaseDeclaration?,
 ) :
-    KoComplexDeclarationImpl(ktObjectDeclaration, parent),
+    KoComplexDeclarationImpl(ktObjectDeclaration, parentDeclaration),
     KoObjectDeclaration {
 
     override val name: String by lazy {
@@ -28,7 +28,12 @@ internal class KoObjectDeclarationImpl(
     internal companion object {
         private val cache: KoDeclarationCache<KoObjectDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktObjectDeclaration: KtObjectDeclaration, parent: KoBaseDeclaration): KoObjectDeclaration =
-            cache.getOrCreateInstance(ktObjectDeclaration, parent) { KoObjectDeclarationImpl(ktObjectDeclaration, parent) }
+        internal fun getInstance(ktObjectDeclaration: KtObjectDeclaration, parentDeclaration: KoBaseDeclaration?): KoObjectDeclaration =
+            cache.getOrCreateInstance(ktObjectDeclaration, parentDeclaration) {
+                KoObjectDeclarationImpl(
+                    ktObjectDeclaration,
+                    parentDeclaration,
+                )
+            }
     }
 }

@@ -13,12 +13,12 @@ class KoParameterDeclarationForRepresentsTypeTest {
             .functions()
             .first()
             .parameters
-            ?.first()
+            .first()
 
         // then
         assertSoftly(sut) {
-            it?.representsType("SampleType") shouldBeEqualTo true
-            it?.representsType("OtherType") shouldBeEqualTo false
+            representsType("SampleType") shouldBeEqualTo true
+            representsType("OtherType") shouldBeEqualTo false
         }
     }
 

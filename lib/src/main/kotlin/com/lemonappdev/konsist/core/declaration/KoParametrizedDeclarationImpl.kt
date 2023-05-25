@@ -8,8 +8,8 @@ import org.jetbrains.kotlin.psi.KtFunction
 
 internal abstract class KoParametrizedDeclarationImpl(
     private val ktFunction: KtFunction,
-    parent: KoBaseDeclaration?,
-) : KoDeclarationImpl(ktFunction, parent), KoParametrizedDeclaration {
+    parentDeclaration: KoBaseDeclaration?,
+) : KoDeclarationImpl(ktFunction, parentDeclaration), KoParametrizedDeclaration {
 
     override val parameters: List<KoParameterDeclaration> by lazy {
         ktFunction

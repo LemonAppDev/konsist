@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction, parent: KoBaseDeclaration?) :
-    KoParametrizedDeclarationImpl(ktFunction, parent),
+internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction, parentDeclaration: KoBaseDeclaration?) :
+    KoParametrizedDeclarationImpl(ktFunction, parentDeclaration),
     KoFunctionDeclaration {
 
     private val localDeclarations: Sequence<KoDeclaration> by lazy {
@@ -83,7 +83,9 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
     internal companion object {
         private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktFunction: KtFunction, parent: KoBaseDeclaration): KoFunctionDeclaration =
-            cache.getOrCreateInstance(ktFunction, parent) { KoFunctionDeclarationImpl(ktFunction, parent) }
+        internal fun getInstance(ktFunction: KtFunction, parentDeclaration: KoBaseDeclaration?): KoFunctionDeclaration =
+            cache.getOrCreateInstance(ktFunction, parentDeclaration) {
+                KoFunctionDeclarationImpl(ktFunction, parentDeclaration)
+            }
     }
 }
