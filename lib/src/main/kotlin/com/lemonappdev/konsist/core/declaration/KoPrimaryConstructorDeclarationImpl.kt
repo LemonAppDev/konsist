@@ -7,13 +7,21 @@ import org.jetbrains.kotlin.psi.KtPrimaryConstructor
 
 internal class KoPrimaryConstructorDeclarationImpl private constructor(
     ktPrimaryConstructor: KtPrimaryConstructor,
-    parent: KoBaseDeclaration?,
+    parentDeclaration: KoBaseDeclaration?,
 ) :
-    KoConstructorDeclarationImpl(ktPrimaryConstructor, parent), KoPrimaryConstructorDeclaration {
+    KoConstructorDeclarationImpl(ktPrimaryConstructor, parentDeclaration), KoPrimaryConstructorDeclaration {
     internal companion object {
         private val cache: KoDeclarationCache<KoPrimaryConstructorDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktPrimaryConstructor: KtPrimaryConstructor, parent: KoBaseDeclaration): KoPrimaryConstructorDeclaration =
-            cache.getOrCreateInstance(ktPrimaryConstructor, parent) { KoPrimaryConstructorDeclarationImpl(ktPrimaryConstructor, parent) }
+        internal fun getInstance(
+            ktPrimaryConstructor: KtPrimaryConstructor,
+            parentDeclaration: KoBaseDeclaration?,
+        ): KoPrimaryConstructorDeclaration =
+            cache.getOrCreateInstance(ktPrimaryConstructor, parentDeclaration) {
+                KoPrimaryConstructorDeclarationImpl(
+                    ktPrimaryConstructor,
+                    parentDeclaration,
+                )
+            }
     }
 }

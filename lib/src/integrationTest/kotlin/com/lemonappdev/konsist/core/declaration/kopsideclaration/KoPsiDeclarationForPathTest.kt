@@ -25,7 +25,7 @@ class KoPsiDeclarationForPathTest {
     fun `project-file-path`() {
         // given
         val sut = getSnippetFile("project-file-path")
-            .files()
+            .declarations()
             .first()
 
         // then

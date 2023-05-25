@@ -9,7 +9,7 @@ class KoPsiDeclarationForLocationAndTextTest {
     fun `location-with-text`() {
         // given
         val projectPath = getSnippetFile("location-with-text")
-            .files()
+            .declarations()
             .first()
             .projectFilePath
 
