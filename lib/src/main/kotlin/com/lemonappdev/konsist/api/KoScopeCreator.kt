@@ -86,18 +86,11 @@ interface KoScopeCreator {
     /**
      * Returns a [KoScope] of a given file.
      *
-     * @param path The absolute path to the file.
-     *
-     * @see [scopeFromProjectFile]
+     * @param path The path to the file.
+     * @param resolvePathFromProjectRoot Determines whether the `path` parameter should be resolved relative to the project root directory.
+     *  If set to `true`, the `path` parameter will be resolved relative to the project root directory.
+     *  If set to `false`, the `path` parameter will be treated as an absolute path.
+     *  The default value is `true`.
      */
-    fun scopeFromFile(path: String): KoScope
-
-    /**
-     * Returns a [KoScope] of a given file.
-     *
-     * @param path The project root relative path to the file.
-     *
-     * @see [scopeFromFile]
-     */
-    fun scopeFromProjectFile(path: String): KoScope
+    fun scopeFromFile(path: String, resolvePathFromProjectRoot: Boolean = true): KoScope
 }

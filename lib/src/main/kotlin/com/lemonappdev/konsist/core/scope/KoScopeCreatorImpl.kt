@@ -113,18 +113,22 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(files)
     }
 
-    override fun scopeFromFile(path: String): KoScope {
-        val file = File(path)
+    override fun scopeFromFile(path: String, resolvePathFromProjectRoot: Boolean): KoScope {
+        val chosenPath = if(!resolvePathFromProjectRoot) {
+            path
+        } else {
+            "$projectRootPath/$path"
+        }
 
-        require(file.exists()) { "File does not exist: $path" }
-        require(file.isFile) { "Path is a directory, but should be a file: $path" }
+        val file = File(chosenPath)
+
+        require(file.exists()) { "File does not exist: $chosenPath" }
+        require(file.isFile) { "Path is a directory, but should be a file: $chosenPath" }
 
         val koKoFile = file.toKoFile()
 
         return KoScopeImpl(koKoFile)
     }
-
-    override fun scopeFromProjectFile(path: String): KoScope = scopeFromFile("$projectRootPath/$path")
 
     /**
      * Determines if the given path is a build directory "build" for Gradle and "target" for Maven.
