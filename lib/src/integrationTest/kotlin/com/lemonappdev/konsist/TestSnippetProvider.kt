@@ -11,6 +11,6 @@ object TestSnippetProvider {
 
     fun getSnippetKoScope(snippetRelativePath: String, fileName: String): KoScope {
         val snippetPath = "$testSourceSetPath$snippetRelativePath$fileName.kttxt"
-        return Konsist.scopeFromFile(snippetPath, resolvePathFromProjectRoot = false)
+        return Konsist.scopeFromFile(snippetPath, absolutePath = true)
     }
 }

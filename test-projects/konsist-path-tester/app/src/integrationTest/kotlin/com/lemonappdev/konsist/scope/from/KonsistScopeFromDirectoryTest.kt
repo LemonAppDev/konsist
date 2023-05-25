@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test
 
 class KonsistScopeFromDirectoryTest {
     @Test
-    fun `scopeFromDirectory with resolvePathFromProjectRoot false`() {
+    fun `scopeFromDirectory with absolutePath true`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$appMainSourceSetDirectory/sample/", resolvePathFromProjectRoot = false)
+            .scopeFromDirectory("$appMainSourceSetDirectory/sample/", absolutePath = true)
             .mapToFilePaths()
 
         // then
@@ -26,10 +26,10 @@ class KonsistScopeFromDirectoryTest {
     }
 
     @Test
-    fun `scopeFromDirectory with resolvePathFromProjectRoot true`() {
+    fun `scopeFromDirectory with absolutePath false`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/sample/", resolvePathFromProjectRoot = true)
+            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/sample/", absolutePath = false)
             .mapToFilePaths()
 
         // then
@@ -42,9 +42,9 @@ class KonsistScopeFromDirectoryTest {
     }
 
     @Test
-    fun `scopeFromDirectory with resolvePathFromProjectRoot false throws exception if path does not exist`() {
+    fun `scopeFromDirectory with absolutePath true throws exception if path does not exist`() {
         // given
-        val func = { Konsist.scopeFromDirectory("$appMainSourceSetDirectory/nonExisting/", resolvePathFromProjectRoot = false) }
+        val func = { Konsist.scopeFromDirectory("$appMainSourceSetDirectory/nonExisting/", absolutePath = true) }
 
         // then
         val message = "Directory does not exist: $appMainSourceSetDirectory/nonExisting/"
@@ -52,9 +52,9 @@ class KonsistScopeFromDirectoryTest {
     }
 
     @Test
-    fun `scopeFromDirectory with resolvePathFromProjectRoot true throws exception if path does not exist`() {
+    fun `scopeFromDirectory with absolutePath false throws exception if path does not exist`() {
         // given
-        val func = { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/nonExisting/", resolvePathFromProjectRoot = true) }
+        val func = { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/nonExisting/", absolutePath = false) }
 
         // then
         val message = "Directory does not exist: $appMainSourceSetDirectory/nonExisting/"
@@ -62,9 +62,9 @@ class KonsistScopeFromDirectoryTest {
     }
 
     @Test
-    fun `scopeFromDirectory with resolvePathFromProjectRoot false throws exception if path points to file`() {
+    fun `scopeFromDirectory with absolutePath true throws exception if path points to file`() {
         // given
-        val func = { Konsist.scopeFromDirectory("$appMainSourceSetDirectory/sample/AppClass.kt", resolvePathFromProjectRoot = false) }
+        val func = { Konsist.scopeFromDirectory("$appMainSourceSetDirectory/sample/AppClass.kt", absolutePath = true) }
 
         // then
         val message = "Path is a file, but should be a directory: $appMainSourceSetDirectory/sample/AppClass.kt"
@@ -72,10 +72,10 @@ class KonsistScopeFromDirectoryTest {
     }
 
     @Test
-    fun `scopeFromDirectory with resolvePathFromProjectRoot true throws exception if path points to file`() {
+    fun `scopeFromDirectory with absolutePath false throws exception if path points to file`() {
         // given
         val func =
-            { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt", resolvePathFromProjectRoot = true) }
+            { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt", absolutePath = false) }
 
         // then
         val message = "Path is a file, but should be a directory: $appMainSourceSetDirectory/sample/AppClass.kt"

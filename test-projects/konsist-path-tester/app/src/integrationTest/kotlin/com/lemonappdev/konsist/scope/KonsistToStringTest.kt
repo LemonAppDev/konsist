@@ -10,7 +10,7 @@ class KonsistToStringTest {
     fun `toString method`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$appMainSourceSetDirectory/sample/", resolvePathFromProjectRoot = false)
+            .scopeFromDirectory("$appMainSourceSetDirectory/sample/", absolutePath = true)
             .toString()
 
         // then

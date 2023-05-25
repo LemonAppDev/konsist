@@ -76,21 +76,21 @@ interface KoScopeCreator {
      * Returns a [KoScope] containing all of Kotlin files in the given directory.
      *
      * @param path The path to the directory.
-     * @param resolvePathFromProjectRoot Determines whether the `path` parameter should be resolved relative to the project root directory.
-     *  If set to `true`, the `path` parameter will be resolved relative to the project root directory.
-     *  If set to `false`, the `path` parameter will be treated as an absolute path.
-     *  The default value is `true`.
+     * @param absolutePath Determines whether the `path` parameter should be treated as an absolute path.
+     * If set to `true`, the `path` parameter will be treated as an absolute path.
+     * If set to `false`, the `path` parameter will be treated as a relative path.
+     * By default, `false`.
      */
-    fun scopeFromDirectory(path: String, resolvePathFromProjectRoot: Boolean = true): KoScope
+    fun scopeFromDirectory(path: String, absolutePath: Boolean = false): KoScope
 
     /**
      * Returns a [KoScope] of a given file.
      *
      * @param path The path to the file.
-     * @param resolvePathFromProjectRoot Determines whether the `path` parameter should be resolved relative to the project root directory.
-     *  If set to `true`, the `path` parameter will be resolved relative to the project root directory.
-     *  If set to `false`, the `path` parameter will be treated as an absolute path.
-     *  The default value is `true`.
+     * @param absolutePath Determines whether the `path` parameter should be treated as an absolute path.
+     * If set to `true`, the `path` parameter will be treated as an absolute path.
+     * If set to `false`, the `path` parameter will be treated as a relative path.
+     * By default, `false`.
      */
-    fun scopeFromFile(path: String, resolvePathFromProjectRoot: Boolean = true): KoScope
+    fun scopeFromFile(path: String, absolutePath: Boolean = false): KoScope
 }

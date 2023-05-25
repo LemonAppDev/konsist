@@ -98,8 +98,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    override fun scopeFromDirectory(path: String, resolvePathFromProjectRoot: Boolean): KoScope {
-        val chosenPath = if (!resolvePathFromProjectRoot) {
+    override fun scopeFromDirectory(path: String, absolutePath: Boolean): KoScope {
+        val chosenPath = if (absolutePath) {
             path
         } else {
             "$projectRootPath/$path"
@@ -114,8 +114,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(files)
     }
 
-    override fun scopeFromFile(path: String, resolvePathFromProjectRoot: Boolean): KoScope {
-        val chosenPath = if (!resolvePathFromProjectRoot) {
+    override fun scopeFromFile(path: String, absolutePath: Boolean): KoScope {
+        val chosenPath = if (absolutePath) {
             path
         } else {
             "$projectRootPath/$path"
