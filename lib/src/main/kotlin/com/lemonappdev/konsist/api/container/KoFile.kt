@@ -44,6 +44,11 @@ interface KoFile :
     val path: String
 
     /**
+     * The file's module name.
+     */
+    val containingModuleName: String
+
+    /**
      * The root project path of the file.
      */
     val rootProjectPath: String
@@ -107,6 +112,14 @@ interface KoFile :
      * Whatever file reside in root project path.
      */
     fun resideInRootProjectPath(path: String): Boolean
+
+    /**
+     * Whether file reside in module.
+     *
+     * @param module The name of the module to check.
+     * @return `true` if a file resides in the specified module, `false` otherwise.
+     */
+    fun resideInModule(module: String): Boolean
 
     /**
      * Name of the file with prefix.

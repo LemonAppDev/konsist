@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.container
 
+import com.intellij.openapi.util.text.StringUtil.substringAfter
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
@@ -41,6 +42,23 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
             .rootProjectPath
 
         path.removePrefix(rootPathProvider)
+    }
+
+    override val containingModuleName: String by lazy {
+        val projectName = PathProvider
+            .getInstance()
+            .rootProjectPath
+            .substringAfterLast('/')
+
+        val moduleName = rootProjectPath
+            .substringBefore("/src/")
+            .substringAfter("/")
+
+        if(moduleName == projectName) {
+            "root"
+        } else {
+            moduleName
+        }
     }
 
     override val text by lazy {
@@ -123,6 +141,8 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     override fun resideInPath(path: String) = LocationHelper.resideInLocation(path, this.path)
 
     override fun resideInRootProjectPath(path: String) = LocationHelper.resideInLocation(path, rootProjectPath)
+
+    override fun resideInModule(module: String): Boolean = module == containingModuleName
 
     override fun hasNameStartingWith(prefix: String) = name.startsWith(prefix)
 
