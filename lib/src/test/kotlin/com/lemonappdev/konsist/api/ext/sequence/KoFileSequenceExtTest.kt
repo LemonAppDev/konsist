@@ -432,7 +432,6 @@ class KoFileSequenceExtTest {
         sut.toList() shouldBeEqualTo listOf(file3)
     }
 
-
     @Test
     fun `withModule(String) returns files with one of given modules`() {
         // given

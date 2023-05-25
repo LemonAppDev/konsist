@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.container
 
-import com.intellij.openapi.util.text.StringUtil.substringAfter
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
@@ -54,7 +53,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
             .substringBefore("/src/")
             .substringAfter("/")
 
-        if(moduleName == projectName || moduleName == "") {
+        if (moduleName == projectName || moduleName == "") {
             "root"
         } else {
             moduleName
