@@ -165,6 +165,26 @@ fun <T : KoFile> Sequence<T>.withoutRootProjectPath(vararg paths: String): Seque
 }
 
 /**
+ * Sequence containing files that have source set.
+ *
+ * @param sourceSetNames The sourceSetNames to include.
+ * @return A sequence containing files that reside in any of the specified source sets.
+ */
+fun <T : KoFile> Sequence<T>.withSourceSet(vararg sourceSetNames: String): Sequence<T> = filter {
+    sourceSetNames.any { sourceSet -> it.resideInSourceSet(sourceSet) }
+}
+
+/**
+ * Sequence containing files that don't have source set.
+ *
+ * @param sourceSetNames The sourceSetNames to exclude.
+ * @return A sequence containing files that don't reside in any of the specified source sets.
+ */
+fun <T : KoFile> Sequence<T>.withoutSourceSet(vararg sourceSetNames: String): Sequence<T> = filter {
+    sourceSetNames.none { sourceSet -> it.resideInSourceSet(sourceSet) }
+}
+
+/**
  * Sequence containing declarations that have imports.
  */
 fun Sequence<KoFile>.withImports(vararg imports: String): Sequence<KoFile> = filter {

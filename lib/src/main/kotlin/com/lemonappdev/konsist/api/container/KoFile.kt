@@ -49,6 +49,11 @@ interface KoFile :
     val rootProjectPath: String
 
     /**
+     * The file's source set name.
+     */
+    val containingSourceSetName: String
+
+    /**
      * The text of the file.
      */
     val text: String
@@ -99,14 +104,22 @@ interface KoFile :
     fun hasTypeAliases(vararg names: String): Boolean
 
     /**
-     * Whatever file reside in path.
+     * Whether file reside in path.
      */
     fun resideInPath(path: String): Boolean
 
     /**
-     * Whatever file reside in root project path.
+     * Whether file reside in root project path.
      */
     fun resideInRootProjectPath(path: String): Boolean
+
+    /**
+     * Whether file reside in source set.
+     *
+     * @param sourceSet The name of the source set to check.
+     * @return `true` if a file resides in the specified source set, `false` otherwise.
+     */
+    fun resideInSourceSet(sourceSet: String): Boolean
 
     /**
      * Name of the file with prefix.

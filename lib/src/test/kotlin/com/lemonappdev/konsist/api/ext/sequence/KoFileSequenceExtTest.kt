@@ -381,6 +381,58 @@ class KoFileSequenceExtTest {
     }
 
     @Test
+    fun `withSourceSet(String) returns files with one of given source sets`() {
+        // given
+        val sourceSetName1 = "sourceSetName1"
+        val sourceSetName2 = "sourceSetName2"
+        val file1: KoFileImpl = mockk {
+            every { resideInSourceSet(sourceSetName1) } returns true
+            every { resideInSourceSet(sourceSetName2) } returns false
+        }
+        val file2: KoFileImpl = mockk {
+            every { resideInSourceSet(sourceSetName1) } returns false
+            every { resideInSourceSet(sourceSetName2) } returns true
+        }
+        val file3: KoFileImpl = mockk {
+            every { resideInSourceSet(sourceSetName1) } returns false
+            every { resideInSourceSet(sourceSetName2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
+
+        // when
+        val sut = files.withSourceSet(sourceSetName1, sourceSetName2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1, file2)
+    }
+
+    @Test
+    fun `withoutSourceSet(String) returns file without any of given source sets`() {
+        // given
+        val sourceSetName1 = "sourceSetName1"
+        val sourceSetName2 = "sourceSetName2"
+        val file1: KoFileImpl = mockk {
+            every { resideInSourceSet(sourceSetName1) } returns true
+            every { resideInSourceSet(sourceSetName2) } returns false
+        }
+        val file2: KoFileImpl = mockk {
+            every { resideInSourceSet(sourceSetName1) } returns false
+            every { resideInSourceSet(sourceSetName2) } returns true
+        }
+        val file3: KoFileImpl = mockk {
+            every { resideInSourceSet(sourceSetName1) } returns false
+            every { resideInSourceSet(sourceSetName2) } returns false
+        }
+        val files = sequenceOf(file1, file2, file3)
+
+        // when
+        val sut = files.withoutSourceSet(sourceSetName1, sourceSetName2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file3)
+    }
+
+    @Test
     fun `withProjectPath(String) returns files with one of given project paths`() {
         // given
         val projectPath1 = "com/sample/sampleProjectPath1.."
