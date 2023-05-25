@@ -1,9 +1,10 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.container.KoFileImpl
 import org.jetbrains.kotlin.psi.KtTypeReference
 
 internal class KoTypeDeclarationImpl private constructor(
@@ -11,9 +12,7 @@ internal class KoTypeDeclarationImpl private constructor(
 ) :
     KoNamedDeclarationImpl(ktTypeReference),
     KoTypeDeclaration {
-    private val file: KoFileDeclaration by lazy {
-        KoFileDeclarationImpl.getInstance(ktTypeReference.containingKtFile, this)
-    }
+    private val file: KoFile by lazy { KoFileImpl(ktTypeReference.containingKtFile) }
 
     override val importAliasName: String by lazy {
         file
@@ -50,7 +49,7 @@ internal class KoTypeDeclarationImpl private constructor(
         file
             .imports
             .map { it.name }
-            .firstOrNull() { it.contains(sourceType) } ?: ""
+            .firstOrNull { it.contains(sourceType) } ?: ""
     }
 
     override fun isImportAlias(): Boolean = importAliasName.isNotEmpty()
@@ -58,7 +57,7 @@ internal class KoTypeDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktTypeReference: KtTypeReference, parent: KoBaseDeclaration): KoTypeDeclaration =
-            cache.getOrCreateInstance(ktTypeReference, parent) { KoTypeDeclarationImpl(ktTypeReference) }
+        internal fun getInstance(ktTypeReference: KtTypeReference, parentDeclaration: KoBaseDeclaration?): KoTypeDeclaration =
+            cache.getOrCreateInstance(ktTypeReference, parentDeclaration) { KoTypeDeclarationImpl(ktTypeReference) }
     }
 }

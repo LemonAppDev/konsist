@@ -19,8 +19,8 @@ internal class KoDeclarationCache<T : KoBaseDeclaration> {
 
     private fun hasKey(key: Pair<KtElement, KoBaseDeclaration?>) = elements.containsKey(key)
 
-    fun getOrCreateInstance(ktElement: KtElement, parent: KoBaseDeclaration?, value: (KtElement) -> T): T {
-        val cacheKey = ktElement to parent
+    fun getOrCreateInstance(ktElement: KtElement, parentDeclaration: KoBaseDeclaration?, value: (KtElement) -> T): T {
+        val cacheKey = ktElement to parentDeclaration
 
         return if (hasKey(cacheKey)) {
             get(cacheKey)

@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist
 
-import com.lemonappdev.konsist.api.KoScope
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.container.koscope.KoScope
 import java.io.File
 
 object TestSnippetProvider {

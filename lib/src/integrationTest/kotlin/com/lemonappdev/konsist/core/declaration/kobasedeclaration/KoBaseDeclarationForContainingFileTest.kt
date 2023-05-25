@@ -9,14 +9,14 @@ class KoBaseDeclarationForContainingFileTest {
     fun `containing-file`() {
         // given
         val sut = getSnippetFile("containing-file")
-            .files()
+            .declarations()
             .first()
 
         // then
         sut
             .containingFile
             .name
-            .endsWith("file.kt")
+            .endsWith("file")
             .shouldBeEqualTo(true)
     }
 

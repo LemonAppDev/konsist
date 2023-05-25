@@ -6,5 +6,5 @@ import org.jetbrains.kotlin.psi.KtConstructor
 
 internal open class KoConstructorDeclarationImpl(
     ktConstructor: KtConstructor<*>,
-    parent: KoBaseDeclaration?,
-) : KoParametrizedDeclarationImpl(ktConstructor, parent), KoConstructorDeclaration
+    parentDeclaration: KoBaseDeclaration?,
+) : KoParametrizedDeclarationImpl(ktConstructor, parentDeclaration), KoConstructorDeclaration

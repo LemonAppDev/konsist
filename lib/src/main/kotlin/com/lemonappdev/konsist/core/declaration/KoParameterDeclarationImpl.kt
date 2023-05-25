@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal class KoParameterDeclarationImpl private constructor(private val ktParameter: KtParameter, parent: KoBaseDeclaration?) :
-    KoDeclarationImpl(ktParameter, parent),
+internal class KoParameterDeclarationImpl private constructor(private val ktParameter: KtParameter, parentDeclaration: KoBaseDeclaration?) :
+    KoDeclarationImpl(ktParameter, parentDeclaration),
     KoParameterDeclaration {
 
     override val type: KoTypeDeclaration by lazy {
@@ -60,7 +60,7 @@ internal class KoParameterDeclarationImpl private constructor(private val ktPara
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktParameter: KtParameter, parent: KoBaseDeclaration): KoParameterDeclaration =
-            cache.getOrCreateInstance(ktParameter, parent) { KoParameterDeclarationImpl(ktParameter, parent) }
+        internal fun getInstance(ktParameter: KtParameter, parentDeclaration: KoBaseDeclaration?): KoParameterDeclaration =
+            cache.getOrCreateInstance(ktParameter, parentDeclaration) { KoParameterDeclarationImpl(ktParameter, parentDeclaration) }
     }
 }
