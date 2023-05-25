@@ -54,7 +54,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
             .substringBefore("/src/")
             .substringAfter("/")
 
-        if(moduleName == projectName) {
+        if(moduleName == projectName || moduleName == "") {
             "root"
         } else {
             moduleName
