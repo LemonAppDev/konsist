@@ -53,7 +53,6 @@ class KonsistScopeFromSourceSetTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromModuleTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromPackageTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromProductionTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromProjectDirectoryTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromProjectFileTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromProjectTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromSourceSetTest.kt",

@@ -75,20 +75,13 @@ interface KoScopeCreator {
     /**
      * Returns a [KoScope] containing all of Kotlin files in the given directory.
      *
-     * @param path The absolute path to the directory.
-     *
-     * @see [scopeFromProjectDirectory]
+     * @param path The path to the directory.
+     * @param resolvePathFromProjectRoot Determines whether the `path` parameter should be resolved relative to the project root directory.
+     *  If set to `true`, the `path` parameter will be resolved relative to the project root directory.
+     *  If set to `false`, the `path` parameter will be treated as an absolute path.
+     *  The default value is `true`.
      */
-    fun scopeFromDirectory(path: String): KoScope
-
-    /**
-     * Returns a [KoScope] containing all of Kotlin files in the given directory.
-     *
-     * @param path The project root relative path to the directory.
-     *
-     * @see [scopeFromDirectory]
-     */
-    fun scopeFromProjectDirectory(path: String): KoScope
+    fun scopeFromDirectory(path: String, resolvePathFromProjectRoot: Boolean = true): KoScope
 
     /**
      * Returns a [KoScope] of a given file.

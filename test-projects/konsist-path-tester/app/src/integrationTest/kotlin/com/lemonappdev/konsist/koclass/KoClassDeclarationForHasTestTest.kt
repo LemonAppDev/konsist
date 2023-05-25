@@ -15,7 +15,7 @@ class KoClassDeclarationForHasTestTest {
     fun `class-with-test-with-default-parameters`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$appMainSourceSetDirectory/sample/")
+            .scopeFromDirectory("$appMainSourceSetDirectory/sample/", resolvePathFromProjectRoot = false)
             .classes()
             .first()
 
@@ -27,7 +27,7 @@ class KoClassDeclarationForHasTestTest {
     fun `class-without-test-with-default-parameters`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$projectRootDirectory/buildSrc/")
+            .scopeFromDirectory("$projectRootDirectory/buildSrc/", resolvePathFromProjectRoot = false)
             .classes()
             .first()
 
@@ -39,7 +39,7 @@ class KoClassDeclarationForHasTestTest {
     fun `class-with-test-with-declared-test-file-name-suffix`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$dataMainSourceSetDirectory/sample/")
+            .scopeFromDirectory("$dataMainSourceSetDirectory/sample/", resolvePathFromProjectRoot = false)
             .classes()
             .first()
 
@@ -51,7 +51,7 @@ class KoClassDeclarationForHasTestTest {
     fun `class-without-test-with-declared-test-file-name-suffix`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$appMainSourceSetDirectory/sample/")
+            .scopeFromDirectory("$appMainSourceSetDirectory/sample/", resolvePathFromProjectRoot = false)
             .classes()
             .first()
 
@@ -68,7 +68,7 @@ class KoClassDeclarationForHasTestTest {
     ) {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$appMainSourceSetDirectory/sample/")
+            .scopeFromDirectory("$appMainSourceSetDirectory/sample/", resolvePathFromProjectRoot = false)
             .classes()
             .first()
 

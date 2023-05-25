@@ -97,17 +97,21 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    override fun scopeFromDirectory(path: String): KoScope {
-        val directory = File(path)
-        require(directory.exists()) { "Directory does not exist: $path" }
-        require(!directory.isFile) { "Path is a file, but should be a directory: $path" }
+    override fun scopeFromDirectory(path: String, resolvePathFromProjectRoot: Boolean): KoScope {
+        val chosenPath = if(!resolvePathFromProjectRoot) {
+            path
+        } else {
+            "$projectRootPath/$path"
+        }
+
+        val directory = File(chosenPath)
+        require(directory.exists()) { "Directory does not exist: $chosenPath" }
+        require(!directory.isFile) { "Path is a file, but should be a directory: $chosenPath" }
 
         val files = directory.toKoFiles()
 
         return KoScopeImpl(files)
     }
-
-    override fun scopeFromProjectDirectory(path: String): KoScope = scopeFromDirectory("$projectRootPath/$path")
 
     override fun scopeFromFile(path: String): KoScope {
         val file = File(path)
