@@ -74,7 +74,8 @@ class KonsistScopeFromDirectoryTest {
     @Test
     fun `scopeFromDirectory with resolvePathFromProjectRoot true throws exception if path points to file`() {
         // given
-        val func = { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt", resolvePathFromProjectRoot = true) }
+        val func =
+            { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt", resolvePathFromProjectRoot = true) }
 
         // then
         val message = "Path is a file, but should be a directory: $appMainSourceSetDirectory/sample/AppClass.kt"
