@@ -98,30 +98,38 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return KoScopeImpl(koFiles)
     }
 
-    override fun scopeFromDirectory(path: String): KoScope {
-        val directory = File(path)
-        require(directory.exists()) { "Directory does not exist: $path" }
-        require(!directory.isFile) { "Path is a file, but should be a directory: $path" }
+    override fun scopeFromDirectory(path: String, absolutePath: Boolean): KoScope {
+        val chosenPath = if (absolutePath) {
+            path
+        } else {
+            "$projectRootPath/$path"
+        }
+
+        val directory = File(chosenPath)
+        require(directory.exists()) { "Directory does not exist: $chosenPath" }
+        require(!directory.isFile) { "Path is a file, but should be a directory: $chosenPath" }
 
         val files = directory.toKoFiles()
 
         return KoScopeImpl(files)
     }
 
-    override fun scopeFromProjectDirectory(path: String): KoScope = scopeFromDirectory("$projectRootPath/$path")
+    override fun scopeFromFile(path: String, absolutePath: Boolean): KoScope {
+        val chosenPath = if (absolutePath) {
+            path
+        } else {
+            "$projectRootPath/$path"
+        }
 
-    override fun scopeFromFile(path: String): KoScope {
-        val file = File(path)
+        val file = File(chosenPath)
 
-        require(file.exists()) { "File does not exist: $path" }
-        require(file.isFile) { "Path is a directory, but should be a file: $path" }
+        require(file.exists()) { "File does not exist: $chosenPath" }
+        require(file.isFile) { "Path is a directory, but should be a file: $chosenPath" }
 
         val koKoFile = file.toKoFile()
 
         return KoScopeImpl(koKoFile)
     }
-
-    override fun scopeFromProjectFile(path: String): KoScope = scopeFromFile("$projectRootPath/$path")
 
     /**
      * Determines if the given path is a build directory "build" for Gradle and "target" for Maven.

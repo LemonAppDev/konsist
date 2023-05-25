@@ -82,40 +82,22 @@ interface KoScopeCreator {
     /**
      * Returns a [KoScope] containing all of Kotlin files in the given directory.
      *
-     * @param path The absolute path to the directory.
-     * @return a [KoScope] containing all of Kotlin files in the given directory.
-     *
-     * @see [scopeFromProjectDirectory]
+     * @param path The path to the directory.
+     * @param absolutePath Determines whether the `path` parameter should be treated as an absolute path.
+     * If set to `true`, the `path` parameter will be treated as an absolute path.
+     * If set to `false`, the `path` parameter will be treated as a relative path.
+     * By default, `false`.
      */
-    fun scopeFromDirectory(path: String): KoScope
-
-    /**
-     * Returns a [KoScope] containing all of Kotlin files in the given directory.
-     *
-     * @param path The project root relative path to the directory.
-     * @return a [KoScope] containing all of Kotlin files in the given directory.
-     *
-     * @see [scopeFromDirectory]
-     */
-    fun scopeFromProjectDirectory(path: String): KoScope
+    fun scopeFromDirectory(path: String, absolutePath: Boolean = false): KoScope
 
     /**
      * Returns a [KoScope] of a given file.
      *
-     * @param path The absolute path to the file.
-     * @return a [KoScope] of a given file.
-     *
-     * @see [scopeFromProjectFile]
+     * @param path The path to the file.
+     * @param absolutePath Determines whether the `path` parameter should be treated as an absolute path.
+     * If set to `true`, the `path` parameter will be treated as an absolute path.
+     * If set to `false`, the `path` parameter will be treated as a relative path.
+     * By default, `false`.
      */
-    fun scopeFromFile(path: String): KoScope
-
-    /**
-     * Returns a [KoScope] of a given file.
-     *
-     * @param path The project root relative path to the file.
-     * @return a [KoScope] of a given file.
-     *
-     * @see [scopeFromFile]
-     */
-    fun scopeFromProjectFile(path: String): KoScope
+    fun scopeFromFile(path: String, absolutePath: Boolean = false): KoScope
 }
