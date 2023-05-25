@@ -9,10 +9,14 @@ import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirecto
 import com.lemonappdev.konsist.helper.util.PathProvider.projectRootDirectory
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.util.PathProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoFileForContainingSourceSetName {
+    private val main = "main"
+    private val test = "test"
+    private val integrationTest = "integrationTest"
     @Test
     fun `containing source set name is 'main' in app module`() {
         // given
@@ -22,7 +26,11 @@ class KoFileForContainingSourceSetName {
             .first()
 
         // then
-        sut.containingSourceSetName shouldBeEqualTo "main"
+        assertSoftly(sut) {
+            containingSourceSetName shouldBeEqualTo main
+            resideInSourceSet(main) shouldBeEqualTo true
+            resideInSourceSet(test) shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -34,7 +42,11 @@ class KoFileForContainingSourceSetName {
             .first()
 
         // then
-        sut.containingSourceSetName shouldBeEqualTo "integrationTest"
+        assertSoftly(sut) {
+            containingSourceSetName shouldBeEqualTo integrationTest
+            resideInSourceSet(integrationTest) shouldBeEqualTo true
+            resideInSourceSet(test) shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -46,7 +58,11 @@ class KoFileForContainingSourceSetName {
             .first()
 
         // then
-        sut.containingSourceSetName shouldBeEqualTo "main"
+        assertSoftly(sut) {
+            containingSourceSetName shouldBeEqualTo main
+            resideInSourceSet(main) shouldBeEqualTo true
+            resideInSourceSet(test) shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -58,7 +74,11 @@ class KoFileForContainingSourceSetName {
             .first()
 
         // then
-        sut.containingSourceSetName shouldBeEqualTo "test"
+        assertSoftly(sut) {
+            containingSourceSetName shouldBeEqualTo test
+            resideInSourceSet(test) shouldBeEqualTo true
+            resideInSourceSet(integrationTest) shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -70,6 +90,10 @@ class KoFileForContainingSourceSetName {
             .first()
 
         // then
-        sut.containingSourceSetName shouldBeEqualTo "main"
+        assertSoftly(sut) {
+            containingSourceSetName shouldBeEqualTo main
+            resideInSourceSet(main) shouldBeEqualTo true
+            resideInSourceSet(test) shouldBeEqualTo false
+        }
     }
 }
