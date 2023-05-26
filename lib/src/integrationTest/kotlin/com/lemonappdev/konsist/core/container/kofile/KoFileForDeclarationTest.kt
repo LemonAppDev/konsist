@@ -5,6 +5,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class KoFileForDeclarationTest {
@@ -63,7 +64,7 @@ class KoFileForDeclarationTest {
         @Suppress("unused", "detekt.LongMethod")
         @JvmStatic
         fun provideValues() = listOf(
-            Arguments.arguments(
+            arguments(
                 false,
                 false,
                 listOf(
@@ -75,7 +76,7 @@ class KoFileForDeclarationTest {
                     "SampleTypeAlias",
                 ),
             ),
-            Arguments.arguments(
+            arguments(
                 true,
                 false,
                 listOf(
@@ -96,7 +97,7 @@ class KoFileForDeclarationTest {
                     "SampleTypeAlias",
                 ),
             ),
-            Arguments.arguments(
+            arguments(
                 false,
                 true,
                 listOf(
@@ -113,7 +114,7 @@ class KoFileForDeclarationTest {
                     "SampleTypeAlias",
                 ),
             ),
-            Arguments.arguments(
+            arguments(
                 true,
                 true,
                 listOf(
