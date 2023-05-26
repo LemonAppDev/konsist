@@ -39,6 +39,18 @@ class SnippetTest {
         }
     }
 
+    @Test
+    fun `every snippet has valid code`() {
+        // given
+        val snippets = File("../")
+            .walk()
+            .filter { it.isKotlinSnippetFile }
+            .map { it.path.replace("kttxt", "kt") }
+
+        val builder = ProcessBuilder()
+
+    }
+
     private fun snippetNamesFromFiles(regex: Regex, prefix: String, suffix: String) =
         File("../")
             .walk()
