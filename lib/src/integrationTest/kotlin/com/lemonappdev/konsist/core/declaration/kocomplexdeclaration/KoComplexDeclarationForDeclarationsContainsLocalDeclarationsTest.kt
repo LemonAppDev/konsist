@@ -112,7 +112,10 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kocomplexdeclaration/snippet/fordeclarationscontainslocaldeclarations/", fileName)
+        TestSnippetProvider.getSnippetKoScope(
+            "core/declaration/kocomplexdeclaration/snippet/fordeclarationscontainslocaldeclarations/",
+            fileName,
+        )
 
     companion object {
         @Suppress("unused")

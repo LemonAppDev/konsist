@@ -136,7 +136,10 @@ class KoComplexDeclarationForDeclarationsContainsNestedDeclarationsTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kocomplexdeclaration/snippet/fordeclarationscontainsnesteddeclarations/", fileName)
+        TestSnippetProvider.getSnippetKoScope(
+            "core/declaration/kocomplexdeclaration/snippet/fordeclarationscontainsnesteddeclarations/",
+            fileName,
+        )
 
     companion object {
         @Suppress("unused")
