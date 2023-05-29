@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.container.koscope.KoScope
 import com.lemonappdev.konsist.api.container.koscope.KoScopeCreator
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
+import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import com.lemonappdev.konsist.core.filesystem.PathProvider
@@ -12,8 +13,6 @@ import java.io.File
 
 internal class KoScopeCreatorImpl : KoScopeCreator {
     private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
-
-    private val sep = File.separator
 
     private val projectKotlinFiles: Sequence<KoFile> by lazy { File(pathProvider.rootProjectPath).toKoFiles() }
 
@@ -61,15 +60,15 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         var pathPrefix = if (moduleName != null) {
-            "$projectRootPath$sep$moduleName"
+            "$projectRootPath/$moduleName"
         } else {
             "$projectRootPath.*"
         }
 
         pathPrefix = if (sourceSetName != null) {
-            "$pathPrefix${sep}src$sep$sourceSetName$sep.*"
+            "$pathPrefix/src/$sourceSetName/.*"
         } else {
-            "$pathPrefix${sep}src$sep.*"
+            "$pathPrefix/src/.*"
         }
 
         return localProjectKotlinFiles
@@ -98,9 +97,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromDirectory(path: String, absolutePath: Boolean): KoScope {
         val chosenPath = if (absolutePath) {
-            path.toNormalizedPath()
+            path
         } else {
-            "$projectRootPath$sep${path.toNormalizedPath()}"
+            "$projectRootPath$sep$path"
         }
 
         val directory = File(chosenPath)
@@ -114,9 +113,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromFile(path: String, absolutePath: Boolean): KoScope {
         val chosenPath = if (absolutePath) {
-            path.toNormalizedPath()
+            path
         } else {
-            "$projectRootPath$sep${path.toNormalizedPath()}"
+            "$projectRootPath$sep$path"
         }
 
         val file = File(chosenPath)
@@ -134,12 +133,12 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
      */
     private fun isBuildPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
-        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath$sep$gradleBuildDirectoryName$sep.*")
-        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath$sep.+$sep$gradleBuildDirectoryName$sep.*")
+        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toNormalizedPath())
+        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toNormalizedPath())
 
         val mavenBuildDirectoryName = "target"
-        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath$sep$mavenBuildDirectoryName$sep.*")
-        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath$sep.+$sep$mavenBuildDirectoryName$sep.*")
+        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toNormalizedPath())
+        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toNormalizedPath())
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
             path.matches(gradleModuleBuildDirectoryRegex) ||
@@ -148,7 +147,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     private fun isTestPath(path: String): Boolean {
-        val lowercasePath = path.toNormalizedPath().lowercase()
+        val lowercasePath = path.lowercase()
         return lowercasePath.contains("$sep$TEST_NAME_IN_PATH") || lowercasePath.contains("$TEST_NAME_IN_PATH$sep")
     }
 
