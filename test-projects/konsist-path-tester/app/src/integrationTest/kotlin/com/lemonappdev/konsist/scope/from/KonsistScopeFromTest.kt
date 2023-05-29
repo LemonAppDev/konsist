@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.core.ext.toNormalizedPaths
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
+import com.lemonappdev.konsist.helper.ext.toNormalizedPaths
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootTestSourceSetDirectory

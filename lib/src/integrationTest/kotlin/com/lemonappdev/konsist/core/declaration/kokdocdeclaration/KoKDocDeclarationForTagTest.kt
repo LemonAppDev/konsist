@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
