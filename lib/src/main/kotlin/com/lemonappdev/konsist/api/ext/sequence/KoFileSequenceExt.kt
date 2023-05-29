@@ -165,6 +165,26 @@ fun <T : KoFile> Sequence<T>.withoutRootProjectPath(vararg paths: String): Seque
 }
 
 /**
+ * Sequence containing files that have module.
+ *
+ * @param modules The modules to include.
+ * @return A sequence containing files that reside in any of the specified modules.
+ */
+fun <T : KoFile> Sequence<T>.withModule(vararg modules: String): Sequence<T> = filter {
+    modules.any { module -> it.resideInModule(module) }
+}
+
+/**
+ * Sequence containing files that don't have module.
+ *
+ * @param modules The modules to exclude.
+ * @return A sequence containing files that don't reside in any of the specified modules.
+ */
+fun <T : KoFile> Sequence<T>.withoutModule(vararg modules: String): Sequence<T> = filter {
+    modules.none { module -> it.resideInModule(module) }
+}
+
+/**
  * Sequence containing files that have imports.
  *
  * @param imports The import(s) to include.
