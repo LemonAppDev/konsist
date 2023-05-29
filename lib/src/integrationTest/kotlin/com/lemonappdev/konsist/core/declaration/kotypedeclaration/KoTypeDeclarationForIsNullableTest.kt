@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kotypedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -25,8 +26,9 @@ class KoTypeDeclarationForIsNullableTest {
         // then
         sut?.isNullable shouldBeEqualTo value
     }
+
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forisnullable/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forisnullable/".toNormalizedPath(), fileName)
 
     companion object {
         @Suppress("unused")

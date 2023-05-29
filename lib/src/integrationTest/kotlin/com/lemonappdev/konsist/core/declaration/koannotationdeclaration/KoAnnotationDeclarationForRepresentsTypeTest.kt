@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koannotationdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -25,7 +26,7 @@ class KoAnnotationDeclarationForRepresentsTypeTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koannotationdeclaration/snippet/forrepresentstype/", fileName)
+        getSnippetKoScope("core/declaration/koannotationdeclaration/snippet/forrepresentstype/".toNormalizedPath(), fileName)
 
     companion object {
         @Suppress("unused")

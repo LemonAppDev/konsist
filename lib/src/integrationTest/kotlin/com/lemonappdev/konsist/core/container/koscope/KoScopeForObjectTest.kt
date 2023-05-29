@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.container.koscope
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -51,7 +52,7 @@ class KoScopeForObjectTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/container/koscope/snippet/forobject/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/container/koscope/snippet/forobject/".toNormalizedPath(), fileName)
 
     companion object {
         @Suppress("unused")

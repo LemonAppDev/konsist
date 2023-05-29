@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.kopsideclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.core.ext.sep
+import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -15,9 +17,9 @@ class KoPsiDeclarationForResideInTest {
         // then
         sut.run {
             resideInFilePath("..snippet..") shouldBeEqualTo true
-            resideInFilePath("..kopsideclaration/snippet..") shouldBeEqualTo true
+            resideInFilePath("..kopsideclaration${sep}snippet..") shouldBeEqualTo true
             resideInFilePath("..kopsideclaration..reside-in-file-path.kt") shouldBeEqualTo true
-            resideInFilePath("kopsideclaration/snippet/") shouldBeEqualTo false
+            resideInFilePath("kopsideclaration${sep}snippet${sep}") shouldBeEqualTo false
         }
     }
 
@@ -31,12 +33,12 @@ class KoPsiDeclarationForResideInTest {
         // then
         sut.run {
             resideInProjectFilePath("..snippet..") shouldBeEqualTo true
-            resideInProjectFilePath("..kopsideclaration/snippet..") shouldBeEqualTo true
+            resideInProjectFilePath("..kopsideclaration${sep}snippet..") shouldBeEqualTo true
             resideInProjectFilePath("..kopsideclaration..reside-in-project-file-path.kt") shouldBeEqualTo true
-            resideInProjectFilePath("kopsideclaration/snippet/") shouldBeEqualTo false
+            resideInProjectFilePath("kopsideclaration${sep}snippet${sep}") shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopsideclaration/snippet/forresidein/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopsideclaration/snippet/forresidein/".toNormalizedPath(), fileName)
 }

@@ -1,4 +1,5 @@
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -23,7 +24,7 @@ class KoDeclarationForKDocTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kodeclaration/snippet/forkdoc/", fileName)
+        getSnippetKoScope("core/declaration/kodeclaration/snippet/forkdoc/".toNormalizedPath(), fileName)
 
     companion object {
         @Suppress("unused")

@@ -98,9 +98,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromDirectory(path: String, absolutePath: Boolean): KoScope {
         val chosenPath = if (absolutePath) {
-            path
+            path.toNormalizedPath()
         } else {
-            "$projectRootPath$sep$path"
+            "$projectRootPath$sep${path.toNormalizedPath()}"
         }
 
         val directory = File(chosenPath)
@@ -114,9 +114,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromFile(path: String, absolutePath: Boolean): KoScope {
         val chosenPath = if (absolutePath) {
-            path
+            path.toNormalizedPath()
         } else {
-            "$projectRootPath$sep$path"
+            "$projectRootPath$sep${path.toNormalizedPath()}"
         }
 
         val file = File(chosenPath)
@@ -148,7 +148,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     private fun isTestPath(path: String): Boolean {
-        val lowercasePath = path.lowercase()
+        val lowercasePath = path.toNormalizedPath().lowercase()
         return lowercasePath.contains("$sep$TEST_NAME_IN_PATH") || lowercasePath.contains("$TEST_NAME_IN_PATH$sep")
     }
 

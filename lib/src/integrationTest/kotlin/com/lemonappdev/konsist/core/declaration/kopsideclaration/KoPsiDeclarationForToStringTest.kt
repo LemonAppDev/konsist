@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kopsideclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -17,5 +18,5 @@ class KoPsiDeclarationForToStringTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopsideclaration/snippet/fortostring/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopsideclaration/snippet/fortostring/".toNormalizedPath(), fileName)
 }

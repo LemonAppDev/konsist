@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.filesystem.rootprovider
 
+import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.filesystem.PathVerifier
 import io.mockk.every
 import io.mockk.mockk
@@ -9,7 +10,7 @@ import java.io.File
 
 class ProjectRootDirResolverTest {
     private class Sut(pathVerifier: PathVerifier) : ProjectRootDirResolver(pathVerifier) {
-        override val paths = setOf("/path-1", "/path-2")
+        override val paths = setOf("${sep}path-1", "${sep}path-2")
     }
 
     private val pathVerifier = mockk<PathVerifier>()
@@ -20,8 +21,8 @@ class ProjectRootDirResolverTest {
     fun `should return project root directory when any files exists`() {
         // given
         val file = mockk<File>()
-        every { pathVerifier.verifyPathIfExists(file, "/path-1") } returns true
-        every { pathVerifier.verifyPathIfExists(file, "/path-2") } returns true
+        every { pathVerifier.verifyPathIfExists(file, "${sep}path-1") } returns true
+        every { pathVerifier.verifyPathIfExists(file, "${sep}path-2") } returns true
 
         // when
         val actual = sut.getProjectRootDir(file)
@@ -35,8 +36,8 @@ class ProjectRootDirResolverTest {
         // given
         val file = mockk<File>()
 
-        every { pathVerifier.verifyPathIfExists(file, "/path-1") } returns false
-        every { pathVerifier.verifyPathIfExists(file, "/path-2") } returns false
+        every { pathVerifier.verifyPathIfExists(file, "${sep}path-1") } returns false
+        every { pathVerifier.verifyPathIfExists(file, "${sep}path-2") } returns false
 
         // when
         val actual = sut.getProjectRootDir(file)

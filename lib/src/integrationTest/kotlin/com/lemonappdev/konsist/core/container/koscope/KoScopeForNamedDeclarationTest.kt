@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.container.koscope
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -326,5 +327,5 @@ class KoScopeForNamedDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/container/koscope/snippet/fornameddeclaration/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/container/koscope/snippet/fornameddeclaration/".toNormalizedPath(), fileName)
 }

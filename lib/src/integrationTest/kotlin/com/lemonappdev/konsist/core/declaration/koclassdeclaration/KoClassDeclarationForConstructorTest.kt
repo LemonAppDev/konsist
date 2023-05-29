@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koclassdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
@@ -79,5 +80,5 @@ class KoClassDeclarationForConstructorTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koclassdeclaration/snippet/forconstructor/", fileName)
+        getSnippetKoScope("core/declaration/koclassdeclaration/snippet/forconstructor/", fileName.toNormalizedPath())
 }

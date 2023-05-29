@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.ext.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
+import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
@@ -26,5 +27,5 @@ class KoDeclarationExtForPropertyTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("api/ext/declaration/kodeclaration/snippet/forproperty/", fileName)
+        getSnippetKoScope("api/ext/declaration/kodeclaration/snippet/forproperty/".toNormalizedPath(), fileName)
 }
