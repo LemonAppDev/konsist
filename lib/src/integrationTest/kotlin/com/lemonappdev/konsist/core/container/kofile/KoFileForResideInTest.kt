@@ -20,7 +20,7 @@ class KoFileForResideInTest {
             resideInPath("..snippet..") shouldBeEqualTo true
             resideInPath("..kofile${sep}snippet..") shouldBeEqualTo true
             resideInPath("..kofile..reside-in-path.kt") shouldBeEqualTo true
-            resideInPath("kofile${sep}snippet/") shouldBeEqualTo false
+            resideInPath("kofile${sep}snippet$sep") shouldBeEqualTo false
         }
     }
 
