@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.core.ext.toNormalizedPaths
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
@@ -21,6 +22,7 @@ class KonsistScopeFromModuleTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/koclass/KoClassDeclarationForHasTestTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistOperatorTest.kt",
@@ -38,7 +40,7 @@ class KonsistScopeFromModuleTest {
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -57,7 +59,7 @@ class KonsistScopeFromModuleTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -72,6 +74,7 @@ class KonsistScopeFromModuleTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/koclass/KoClassDeclarationForHasTestTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistOperatorTest.kt",
@@ -94,7 +97,7 @@ class KonsistScopeFromModuleTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 }

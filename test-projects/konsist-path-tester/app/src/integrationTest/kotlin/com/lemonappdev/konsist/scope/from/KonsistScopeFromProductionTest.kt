@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.core.ext.toNormalizedPaths
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
@@ -27,7 +28,7 @@ class KonsistScopeFromProductionTest {
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -47,7 +48,7 @@ class KonsistScopeFromProductionTest {
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -83,7 +84,7 @@ class KonsistScopeFromProductionTest {
             listOf(
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -99,7 +100,7 @@ class KonsistScopeFromProductionTest {
             listOf(
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -135,7 +136,7 @@ class KonsistScopeFromProductionTest {
             listOf(
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -151,7 +152,7 @@ class KonsistScopeFromProductionTest {
             listOf(
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 

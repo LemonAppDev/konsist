@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.core.ext.toNormalizedPaths
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
@@ -18,7 +19,7 @@ class KonsistScopeFromFileTest {
 
         // then
         sut.shouldBeEqualTo(
-            listOf("$appMainSourceSetDirectory/sample/AppClass.kt"),
+            listOf("$appMainSourceSetDirectory/sample/AppClass.kt").toNormalizedPaths(),
         )
     }
 
@@ -31,7 +32,7 @@ class KonsistScopeFromFileTest {
 
         // then
         sut.shouldBeEqualTo(
-            listOf("$appMainSourceSetDirectory/sample/AppClass.kt"),
+            listOf("$appMainSourceSetDirectory/sample/AppClass.kt").toNormalizedPaths(),
         )
     }
 
