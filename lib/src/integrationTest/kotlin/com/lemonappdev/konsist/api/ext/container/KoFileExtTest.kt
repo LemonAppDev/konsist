@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.container
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
@@ -25,5 +24,5 @@ class KoFileExtTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("api/ext/container/snippet/".toNormalizedPath(), fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("api/ext/container/snippet/", fileName)
 }

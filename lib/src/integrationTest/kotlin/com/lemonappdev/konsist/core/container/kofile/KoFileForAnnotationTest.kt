@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.container.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
@@ -61,5 +60,5 @@ class KoFileForAnnotationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/container/kofile/snippet/forannotation/".toNormalizedPath(), fileName)
+        getSnippetKoScope("core/container/kofile/snippet/forannotation/", fileName)
 }

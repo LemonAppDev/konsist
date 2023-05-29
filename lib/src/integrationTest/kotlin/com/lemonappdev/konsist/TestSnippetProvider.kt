@@ -11,7 +11,7 @@ object TestSnippetProvider {
     private val testSourceSetPath = "$modulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/".toNormalizedPath()
 
     fun getSnippetKoScope(snippetRelativePath: String, fileName: String): KoScope {
-        val snippetPath = "$testSourceSetPath$snippetRelativePath$fileName.kttxt"
+        val snippetPath = "$testSourceSetPath${snippetRelativePath.toNormalizedPath()}$fileName.kttxt"
         return Konsist.scopeFromFile(snippetPath, absolutePath = true)
     }
 }

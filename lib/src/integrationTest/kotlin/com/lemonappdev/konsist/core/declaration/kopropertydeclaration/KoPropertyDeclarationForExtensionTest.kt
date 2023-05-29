@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kopropertydeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -29,5 +28,5 @@ class KoPropertyDeclarationForExtensionTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forextension/".toNormalizedPath(), fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forextension/", fileName)
 }

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -37,7 +36,7 @@ class KoDeclarationForVisibilityModifierWithDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kodeclaration/snippet/forvisibilitymodifierwithdeclaration/".toNormalizedPath(), fileName)
+        getSnippetKoScope("core/declaration/kodeclaration/snippet/forvisibilitymodifierwithdeclaration/", fileName)
 
     companion object {
         @Suppress("unused")

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -51,7 +50,7 @@ class KoFunctionDeclarationForHasValidKDocTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forhasvalidkdoc/".toNormalizedPath(), fileName)
+        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forhasvalidkdoc/", fileName)
 
     companion object {
         @Suppress("unused")

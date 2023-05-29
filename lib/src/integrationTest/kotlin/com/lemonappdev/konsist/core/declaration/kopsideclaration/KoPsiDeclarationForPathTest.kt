@@ -38,5 +38,5 @@ class KoPsiDeclarationForPathTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopsideclaration/snippet/forpath/".toNormalizedPath(), fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopsideclaration/snippet/forpath/", fileName)
 }

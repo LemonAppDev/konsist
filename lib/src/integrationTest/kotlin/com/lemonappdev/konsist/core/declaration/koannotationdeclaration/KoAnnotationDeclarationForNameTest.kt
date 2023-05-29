@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koannotationdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -46,5 +45,5 @@ class KoAnnotationDeclarationForNameTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koannotationdeclaration/snippet/forname/".toNormalizedPath(), fileName)
+        getSnippetKoScope("core/declaration/koannotationdeclaration/snippet/forname/", fileName)
 }

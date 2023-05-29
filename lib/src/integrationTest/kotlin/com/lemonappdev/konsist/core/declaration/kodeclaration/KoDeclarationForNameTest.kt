@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -51,7 +50,7 @@ class KoDeclarationForNameTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kodeclaration/snippet/forname/".toNormalizedPath(), fileName)
+        getSnippetKoScope("core/declaration/kodeclaration/snippet/forname/", fileName)
 
     companion object {
         @Suppress("unused")

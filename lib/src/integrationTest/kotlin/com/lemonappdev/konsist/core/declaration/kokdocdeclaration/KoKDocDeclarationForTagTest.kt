@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
@@ -73,7 +72,7 @@ class KoKDocDeclarationForTagTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/fortag/".toNormalizedPath(), fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/fortag/", fileName)
 
     companion object {
         @Suppress("unused")

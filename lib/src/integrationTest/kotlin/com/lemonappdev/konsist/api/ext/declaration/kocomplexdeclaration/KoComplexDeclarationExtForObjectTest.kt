@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.api.ext.declaration.kocomplexdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.declaration.representsTypeOf
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import com.lemonappdev.konsist.testdata.SampleObject
 import com.lemonappdev.konsist.testdata.SampleType
 import org.amshove.kluent.assertSoftly
@@ -25,5 +24,5 @@ class KoComplexDeclarationExtForObjectTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("api/ext/declaration/kocomplexdeclaration/snippet/forobject/".toNormalizedPath(), fileName)
+        TestSnippetProvider.getSnippetKoScope("api/ext/declaration/kocomplexdeclaration/snippet/forobject/", fileName)
 }
