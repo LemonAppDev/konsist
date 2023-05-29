@@ -11,6 +11,9 @@ interface KoAnnotationDeclaration : KoNamedDeclaration {
 
     /**
      * Returns `true` if this annotation represents the specified type.
+     *
+     * @param name the name of the type to compare.
+     * @return `true` if this annotation represents the specified type, `false` otherwise.
      */
     fun representsType(name: String): Boolean
 }

@@ -22,7 +22,7 @@ class TagHelperForReturnTagTest {
         val sut = TagHelper
 
         // then
-        sut.hasValidReturnTag(true, kDoc) shouldBeEqualTo true
+        sut.hasValidReturnTag(true, null, kDoc) shouldBeEqualTo true
     }
 
     @Test
@@ -32,7 +32,7 @@ class TagHelperForReturnTagTest {
         val sut = TagHelper
 
         // then
-        sut.hasValidReturnTag(true, kDoc) shouldBeEqualTo false
+        sut.hasValidReturnTag(true, null, kDoc) shouldBeEqualTo false
     }
 
     @Test
@@ -46,6 +46,20 @@ class TagHelperForReturnTagTest {
         val sut = TagHelper
 
         // then
-        sut.hasValidReturnTag(false, kDoc) shouldBeEqualTo true
+        sut.hasValidReturnTag(false, null, kDoc) shouldBeEqualTo true
+    }
+
+    @Test
+    fun `hasValidReturnTag returns true when return type is Unit`() {
+        // given
+        val returnTag: KoKDocTagDeclaration = mockk {
+            every { name } returns RETURN
+        }
+        val kDoc: KoKDocDeclaration = mockk()
+        every { kDoc.returnTag } returns returnTag
+        val sut = TagHelper
+
+        // then
+        sut.hasValidReturnTag(false, "Unit", kDoc) shouldBeEqualTo true
     }
 }

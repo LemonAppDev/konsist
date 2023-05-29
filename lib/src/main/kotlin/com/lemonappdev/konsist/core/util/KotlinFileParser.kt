@@ -42,7 +42,7 @@ object KotlinFileParser {
         return psiFile as KtFile
     }
 
-    fun getKoFileDeclaration(file: File): KoFile {
+    fun getKoFile(file: File): KoFile {
         val ktFile = getKtFile(file)
         return KoFileImpl(ktFile)
     }

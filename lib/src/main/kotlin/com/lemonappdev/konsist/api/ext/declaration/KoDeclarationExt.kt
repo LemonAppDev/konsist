@@ -4,6 +4,8 @@ import com.lemonappdev.konsist.api.declaration.KoDeclaration
 
 /**
  * Returns `true` if this declaration represents the type of [T].
+ *
+ * @return `true` if this declaration represents the type of [T], `false` otherwise.
  */
 inline fun <reified T> KoDeclaration.hasAnnotationOf(): Boolean {
     /**
