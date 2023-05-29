@@ -196,12 +196,12 @@ jobs:
 #          distribution: 'zulu'
 #
 #      - name: Publish
-#        run: |
-#          ./gradlew publishToMavenLocal \
-#          -P konsist.releaseTarget=local \
-#          -P konsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
-#          -P konsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
-#          -P konsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+#        run: >
+#          ./gradlew publishToMavenLocal
+#          -P konsist.releaseTarget=local
+#          -P konsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
+#          -P konsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+#          -P konsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
 #          -P konsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 #
 #      - name: List Artifacts
@@ -227,12 +227,12 @@ jobs:
 #          distribution: 'zulu'
 #
 #      - name: Publish
-#        run: |
-#          ./gradlew publishToMavenLocal \
-#          -P konsist.releaseTarget=local \
-#          -P konsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
-#          -P konsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
-#          -P konsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+#        run: >
+#          ./gradlew publishToMavenLocal
+#          -P konsist.releaseTarget=local
+#          -P konsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
+#          -P konsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+#          -P konsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
 #          -P konsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 #
 #      - name : Run Assemble
@@ -294,12 +294,12 @@ jobs:
 
       - name: Publish
         run: >
-        ./gradlew publishToMavenLocal
-        -P konsist.releaseTarget=local
-        -P konsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
-        -P konsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
-        -P konsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
-        -P konsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+          -P konsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
+          -P konsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+          -P konsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
+          -P konsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
       - name: Run Assemble
         run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew assemble
 
