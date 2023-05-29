@@ -43,9 +43,9 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
         path.removePrefix(rootPathProvider)
     }
 
-    override val containingSourceSetName: String by lazy {
+    override val sourceSetName: String by lazy {
         rootProjectPath
-            .substringAfterLast("/src/")
+            .substringAfter("/src/")
             .substringBefore("/")
     }
 
@@ -130,7 +130,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
 
     override fun resideInRootProjectPath(path: String) = LocationHelper.resideInLocation(path, rootProjectPath)
 
-    override fun resideInSourceSet(sourceSet: String): Boolean = sourceSet == containingSourceSetName
+    override fun resideInSourceSet(sourceSet: String): Boolean = sourceSet == sourceSetName
 
     override fun hasNameStartingWith(prefix: String) = name.startsWith(prefix)
 

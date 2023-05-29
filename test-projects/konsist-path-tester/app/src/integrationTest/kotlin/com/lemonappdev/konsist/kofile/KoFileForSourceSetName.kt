@@ -13,12 +13,9 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileForContainingSourceSetName {
-    private val main = "main"
-    private val test = "test"
-    private val integrationTest = "integrationTest"
+class KoFileForSourceSetName {
     @Test
-    fun `containing source set name is 'main' in app module`() {
+    fun `source set name is 'main' in app module`() {
         // given
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetDirectory/sample/AppClass.kt", absolutePath = true)
@@ -27,14 +24,14 @@ class KoFileForContainingSourceSetName {
 
         // then
         assertSoftly(sut) {
-            containingSourceSetName shouldBeEqualTo main
+            containingSourceSetName shouldBeEqualTo MAIN
             resideInSourceSet(main) shouldBeEqualTo true
             resideInSourceSet(test) shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `containing source set name is 'integrationTest' in app module`() {
+    fun `source set name is 'integrationTest' in app module`() {
         // given
         val sut = Konsist
             .scopeFromFile("$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt", absolutePath = true)
@@ -43,14 +40,14 @@ class KoFileForContainingSourceSetName {
 
         // then
         assertSoftly(sut) {
-            containingSourceSetName shouldBeEqualTo integrationTest
+            containingSourceSetName shouldBeEqualTo INTEGRATION_TEST
             resideInSourceSet(integrationTest) shouldBeEqualTo true
             resideInSourceSet(test) shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `containing source set name is 'main' in data module`() {
+    fun `source set name is 'main' in data module`() {
         // given
         val sut = Konsist
             .scopeFromFile("$dataMainSourceSetDirectory/sample/LibClass.kt", absolutePath = true)
@@ -59,14 +56,14 @@ class KoFileForContainingSourceSetName {
 
         // then
         assertSoftly(sut) {
-            containingSourceSetName shouldBeEqualTo main
+            containingSourceSetName shouldBeEqualTo MAIN
             resideInSourceSet(main) shouldBeEqualTo true
             resideInSourceSet(test) shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `containing source set name is 'test' in data module`() {
+    fun `source set name is 'test' in data module`() {
         // given
         val sut = Konsist
             .scopeFromFile("$dataTestSourceSetDirectory/sample/LibClassTest.kt", absolutePath = true)
@@ -75,14 +72,14 @@ class KoFileForContainingSourceSetName {
 
         // then
         assertSoftly(sut) {
-            containingSourceSetName shouldBeEqualTo test
+            containingSourceSetName shouldBeEqualTo TEST
             resideInSourceSet(test) shouldBeEqualTo true
             resideInSourceSet(integrationTest) shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `containing source set name is 'main' in root module`() {
+    fun `source set name is 'main' in root module`() {
         // given
         val sut = Konsist
             .scopeFromFile("$rootMainSourceSetDirectory/sample/RootClass.kt", absolutePath = true)
@@ -91,9 +88,15 @@ class KoFileForContainingSourceSetName {
 
         // then
         assertSoftly(sut) {
-            containingSourceSetName shouldBeEqualTo main
+            containingSourceSetName shouldBeEqualTo MAIN
             resideInSourceSet(main) shouldBeEqualTo true
             resideInSourceSet(test) shouldBeEqualTo false
         }
+    }
+
+    companion object {
+        private const val MAIN = "main"
+        private const val TEST = "test"
+        private const val INTEGRATION_TEST = "integrationTest"
     }
 }

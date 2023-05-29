@@ -51,7 +51,7 @@ interface KoFile :
     /**
      * The file's source set name.
      */
-    val containingSourceSetName: String
+    val sourceSetName: String
 
     /**
      * The text of the file.
