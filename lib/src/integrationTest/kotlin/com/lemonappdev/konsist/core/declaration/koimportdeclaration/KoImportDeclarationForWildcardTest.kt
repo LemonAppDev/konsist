@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.declaration.koimportdeclaration
 
-import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test

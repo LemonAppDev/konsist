@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
-import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.AUTHOR
 import org.amshove.kluent.assertSoftly
