@@ -51,7 +51,8 @@ class KonsistScopeFromFileTest {
     @Test
     fun `scopeFromFile with absolutePath false throws exception if path does not exist`() {
         // given
-        val func = { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt".toNormalizedPath(), absolutePath = false) }
+        val func =
+            { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt".toNormalizedPath(), absolutePath = false) }
 
         // then
         val message = "File does not exist: $appMainSourceSetDirectory${sep}NonExistingTest.kt"
