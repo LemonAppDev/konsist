@@ -2,8 +2,6 @@ package com.lemonappdev.konsist.core.ext
 
 import java.io.File
 
-val sep = File.separator
+val sep: String = File.separator
 
 fun String.toNormalizedPath(): String = replace("/", File.separator)
-
-fun List<String>.toNormalizedPaths(): List<String> = map { it.replace("/", File.separator) }
