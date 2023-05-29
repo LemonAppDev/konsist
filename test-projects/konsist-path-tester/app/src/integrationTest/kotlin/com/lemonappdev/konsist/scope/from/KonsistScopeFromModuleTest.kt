@@ -23,7 +23,8 @@ class KonsistScopeFromModuleTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/koclass/KoClassDeclarationForHasTestTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/kofile/KoFileForContainingSourceSetName.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/kofile/KoFileForModuleName.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/kofile/KoFileForSourceSetName.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistOperatorTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistSliceTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistToStringTest.kt",
@@ -58,7 +59,7 @@ class KonsistScopeFromModuleTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-            ),
+            )
         )
     }
 
@@ -75,7 +76,8 @@ class KonsistScopeFromModuleTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/koclass/KoClassDeclarationForHasTestTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/kofile/KoFileForContainingSourceSetName.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/kofile/KoFileForModuleName.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/kofile/KoFileForSourceSetName.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistOperatorTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistSliceTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistToStringTest.kt",

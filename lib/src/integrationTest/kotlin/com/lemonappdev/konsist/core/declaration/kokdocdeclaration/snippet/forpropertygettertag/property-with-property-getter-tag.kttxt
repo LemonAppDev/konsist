@@ -1,0 +1,18 @@
+class SampleClass(){
+    fun sampleMethod() {
+        // Implementation
+    }
+
+    /**
+     * This is a sample property that demonstrates the usage of KDoc tags.
+     *
+     * @propertyGetter Retrieves the value of the [name] property.
+     */
+    var sampleProperty: Int
+        get() {
+            return 6
+        }
+        set(value) {
+            // Setter implementation
+        }
+}

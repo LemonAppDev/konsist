@@ -27,6 +27,7 @@ class KonsistScopeFromProductionTest {
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
             ),
         )
     }
@@ -47,6 +48,7 @@ class KonsistScopeFromProductionTest {
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
             ),
         )
     }
