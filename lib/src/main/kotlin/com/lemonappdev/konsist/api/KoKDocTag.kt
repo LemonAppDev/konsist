@@ -5,77 +5,77 @@ package com.lemonappdev.konsist.api
  */
 enum class KoKDocTag(val type: String, val isValued: Boolean = false) {
     /**
-     * The '@param' tag.
+     * The `@param` tag.
      */
     PARAM("@param", true),
 
     /**
-     * The '@return' tag.
+     * The `@return` tag.
      */
     RETURN("@return"),
 
     /**
-     * The '@constructor' tag.
+     * The `@constructor` tag.
      */
     CONSTRUCTOR("@constructor"),
 
     /**
-     * The '@receiver' tag.
+     * The `@receiver` tag.
      */
     RECEIVER("@receiver"),
 
     /**
-     * The ', tru' tag.
+     * The `@property` tag.
      */
     PROPERTY("@property", true),
 
     /**
-     * The ', tru' tag.
+     * The `@throws` tag.
      */
     THROWS("@throws", true),
 
     /**
-     * The ', tru' tag.
+     * The `@exception` tag.
      */
     EXCEPTION("@exception", true),
 
     /**
-     * The ', tru' tag.
+     * The `@sample` tag.
      */
     SAMPLE("@sample", true),
 
     /**
-     * The ', tru' tag.
+     * The `@see` tag.
      */
     SEE("@see", true),
 
     /**
-     * The '@author' tag.
+     * The `@author` tag.
      */
     AUTHOR("@author"),
 
     /**
-     * The '@since' tag.
+     * The `@since` tag.
      */
     SINCE("@since"),
 
     /**
-     * The '@suppress' tag.
+     * The `@suppress` tag.
      */
     SUPPRESS("@suppress"),
 
     /**
-     * The '@version' tag.
+     * The `@version` tag.
      */
     VERSION("@version"),
 
     /**
-     * The '@propertySetter' tag.
+     * The `@propertySetter` tag.
      */
     PROPERTY_SETTER("@propertySetter"),
 
     /**
-     * The '@propertyGetter' tag.
+     * The `@propertyGetter` tag.
      */
     PROPERTY_GETTER("@propertyGetter"),
 }
