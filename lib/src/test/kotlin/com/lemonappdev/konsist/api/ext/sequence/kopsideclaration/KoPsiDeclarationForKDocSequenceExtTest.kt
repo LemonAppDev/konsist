@@ -1,13 +1,13 @@
 package com.lemonappdev.konsist.api.ext.sequence.kopsideclaration
 
 import com.lemonappdev.konsist.api.KoKDocTag
-import com.lemonappdev.konsist.api.ext.sequence.withCompleteKDoc
 import com.lemonappdev.konsist.api.ext.sequence.withKDoc
 import com.lemonappdev.konsist.api.ext.sequence.withKDocWithTags
 import com.lemonappdev.konsist.api.ext.sequence.withSomeKDocWithTags
-import com.lemonappdev.konsist.api.ext.sequence.withoutCompleteKDoc
+import com.lemonappdev.konsist.api.ext.sequence.withValidKDoc
 import com.lemonappdev.konsist.api.ext.sequence.withoutKDoc
 import com.lemonappdev.konsist.api.ext.sequence.withoutKDocWithTags
+import com.lemonappdev.konsist.api.ext.sequence.withoutValidKDoc
 import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPsiDeclarationImpl
 import io.mockk.every
