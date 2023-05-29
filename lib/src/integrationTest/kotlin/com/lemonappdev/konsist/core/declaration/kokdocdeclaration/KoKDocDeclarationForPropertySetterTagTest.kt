@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.PROPERTY_SETTER
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -23,5 +24,5 @@ class KoKDocDeclarationForPropertySetterTagTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forpropertysettertag/", fileName)
+        getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forpropertysettertag/", fileName)
 }

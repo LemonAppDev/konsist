@@ -16,6 +16,5 @@ class KoClassDeclarationForNameTest {
         sut.name shouldBeEqualTo "SampleClass"
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koclassdeclaration/snippet/forname/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclassdeclaration/snippet/forname/", fileName)
 }

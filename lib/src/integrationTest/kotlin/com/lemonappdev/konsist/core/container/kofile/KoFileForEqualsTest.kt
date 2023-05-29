@@ -36,6 +36,5 @@ class KoFileForEqualsTest {
         file1 shouldNotBeEqualTo file2
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/container/kofile/snippet/forequals/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/kofile/snippet/forequals/", fileName)
 }

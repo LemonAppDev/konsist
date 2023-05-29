@@ -126,6 +126,5 @@ class KoClassDeclarationForModifierTest {
         sut.hasExpectModifier() shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koclassdeclaration/snippet/formodifier/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koclassdeclaration/snippet/formodifier/", fileName)
 }

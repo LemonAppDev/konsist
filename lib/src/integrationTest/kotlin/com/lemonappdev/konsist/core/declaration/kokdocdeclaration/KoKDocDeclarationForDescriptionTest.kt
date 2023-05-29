@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -56,7 +57,7 @@ class KoKDocDeclarationForDescriptionTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/fordescription/", fileName)
+        getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/fordescription/", fileName)
 
     companion object {
         @Suppress("unused")

@@ -49,6 +49,5 @@ class KoDeclarationForResideMethodsTest {
         sut.resideOutsidePackage("com") shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kodeclaration/snippet/forresidemethods/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forresidemethods/", fileName)
 }

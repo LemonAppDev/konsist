@@ -49,8 +49,7 @@ class KoDeclarationForNameTest {
         sut.name shouldBeEqualTo "SampleClass"
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kodeclaration/snippet/forname/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forname/", fileName)
 
     companion object {
         @Suppress("unused")

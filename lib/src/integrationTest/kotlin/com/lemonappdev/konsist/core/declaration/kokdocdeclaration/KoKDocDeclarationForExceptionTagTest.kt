@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.EXCEPTION
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -32,7 +33,7 @@ class KoKDocDeclarationForExceptionTagTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forexceptiontag/", fileName)
+        getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forexceptiontag/", fileName)
 
     companion object {
         @Suppress("unused")
