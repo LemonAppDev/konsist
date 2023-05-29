@@ -24,9 +24,9 @@ class KoFileForSourceSetName {
 
         // then
         assertSoftly(sut) {
-            containingSourceSetName shouldBeEqualTo MAIN
-            resideInSourceSet(main) shouldBeEqualTo true
-            resideInSourceSet(test) shouldBeEqualTo false
+            sourceSetName shouldBeEqualTo MAIN
+            resideInSourceSet(MAIN) shouldBeEqualTo true
+            resideInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -40,9 +40,9 @@ class KoFileForSourceSetName {
 
         // then
         assertSoftly(sut) {
-            containingSourceSetName shouldBeEqualTo INTEGRATION_TEST
-            resideInSourceSet(integrationTest) shouldBeEqualTo true
-            resideInSourceSet(test) shouldBeEqualTo false
+            sourceSetName shouldBeEqualTo INTEGRATION_TEST
+            resideInSourceSet(INTEGRATION_TEST) shouldBeEqualTo true
+            resideInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -56,9 +56,9 @@ class KoFileForSourceSetName {
 
         // then
         assertSoftly(sut) {
-            containingSourceSetName shouldBeEqualTo MAIN
-            resideInSourceSet(main) shouldBeEqualTo true
-            resideInSourceSet(test) shouldBeEqualTo false
+            sourceSetName shouldBeEqualTo MAIN
+            resideInSourceSet(MAIN) shouldBeEqualTo true
+            resideInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
@@ -72,9 +72,9 @@ class KoFileForSourceSetName {
 
         // then
         assertSoftly(sut) {
-            containingSourceSetName shouldBeEqualTo TEST
-            resideInSourceSet(test) shouldBeEqualTo true
-            resideInSourceSet(integrationTest) shouldBeEqualTo false
+            sourceSetName shouldBeEqualTo TEST
+            resideInSourceSet(TEST) shouldBeEqualTo true
+            resideInSourceSet(INTEGRATION_TEST) shouldBeEqualTo false
         }
     }
 
@@ -88,9 +88,25 @@ class KoFileForSourceSetName {
 
         // then
         assertSoftly(sut) {
-            containingSourceSetName shouldBeEqualTo MAIN
-            resideInSourceSet(main) shouldBeEqualTo true
-            resideInSourceSet(test) shouldBeEqualTo false
+            sourceSetName shouldBeEqualTo MAIN
+            resideInSourceSet(MAIN) shouldBeEqualTo true
+            resideInSourceSet(TEST) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `source set name is 'main' in root module with double src package`() {
+        // given
+        val sut = Konsist
+            .scopeFromFile("$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt", absolutePath = true)
+            .files()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            sourceSetName shouldBeEqualTo MAIN
+            resideInSourceSet(MAIN) shouldBeEqualTo true
+            resideInSourceSet(TEST) shouldBeEqualTo false
         }
     }
 
