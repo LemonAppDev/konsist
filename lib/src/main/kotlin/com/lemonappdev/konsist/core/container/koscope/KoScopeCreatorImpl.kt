@@ -84,7 +84,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         val koFiles = getFiles(moduleName, sourceSetName)
-            .filterNot { isTestSourceSet(it.containingSourceSetName) }
+            .filterNot { isTestSourceSet(it.sourceSetName) }
 
         return KoScopeImpl(koFiles)
     }
@@ -95,7 +95,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         val koFiles = getFiles(moduleName, sourceSetName)
-            .filter { isTestSourceSet(it.containingSourceSetName) }
+            .filter { isTestSourceSet(it.sourceSetName) }
 
         return KoScopeImpl(koFiles)
     }
