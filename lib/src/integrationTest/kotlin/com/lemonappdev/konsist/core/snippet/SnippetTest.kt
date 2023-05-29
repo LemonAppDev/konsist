@@ -1,7 +1,9 @@
 package com.lemonappdev.konsist.core.snippet
 
+import kotlin.system.measureTimeMillis
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import java.io.File
 import java.io.IOException
@@ -43,14 +45,11 @@ class SnippetTest {
     @Test
     fun `every snippet has valid code`() {
         // given
-        val map = mutableMapOf<String, String>()
+        val map = mutableMapOf<File, String>()
 
         val filePaths = File("/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/container/kofile/snippet")
             .walk()
             .filter { it.isFile && it.name.endsWith(".kttxt") }
-            .map { it.path.replace("kttxt", "kt") }
-            .toList()
-
 
         val texts = File("/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/container/kofile/snippet")
             .walk()
@@ -63,7 +62,6 @@ class SnippetTest {
 
         // then
         sut shouldBeEqualTo 0
-
     }
 
     private fun snippetNamesFromFiles(regex: Regex, prefix: String, suffix: String) =
@@ -81,6 +79,35 @@ class SnippetTest {
         private val File.isKotlinNotSnippetFile: Boolean get() = isFile && !name.endsWith(".kttxt")
     }
 
+    private fun validateKotlinCode(map: Map<File, String>): Int {
+        var counter = 0
+
+        map.forEach {
+            val newFile = File("snippet test.kt")
+            val file = it.key.copyTo(newFile)
+
+            try {
+                val processBuilder = ProcessBuilder("kotlinc", file.path)
+                val process = processBuilder.start()
+
+                val errorOutput = process.errorStream.bufferedReader().use { reader -> reader.readText() }
+                if (errorOutput.isNotEmpty()) {
+                    counter++
+                    println(it.key)
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                counter++
+                println(it.key)
+            }
+            newFile.delete()
+        }
+
+        return counter
+    }
+
+
+    /*
     private fun validateKotlinCode(map: Map<String, String>): Int {
         var counter = 0
         val file = File("snippet test.kt")
@@ -108,4 +135,5 @@ class SnippetTest {
         file.delete()
         return counter
     }
+     */
 }
