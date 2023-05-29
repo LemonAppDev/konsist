@@ -10,4 +10,4 @@ internal val File.isKotlinFile: Boolean get() = isFile && name.endsWith(KOTLIN_F
 
 internal val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(KOTLIN_SNIPPET_FILE_EXTENSION)
 
-internal fun File.toKoFile(): KoFile = KotlinFileParser.getKoFileDeclaration(this)
+internal fun File.toKoFile(): KoFile = KotlinFileParser.getKoFile(this)

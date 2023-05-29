@@ -5,162 +5,162 @@ package com.lemonappdev.konsist.api
  */
 enum class KoModifier(val type: String) {
     /**
-     * The 'data' modifier.
+     * The `data` modifier.
      */
     DATA("data"),
 
     /**
-     * The 'value' modifier.
+     * The `value` modifier.
      */
     VALUE("value"),
 
     /**
-     * The 'inline' modifier.
+     * The `inline` modifier.
      */
     INLINE("inline"),
 
     /**
-     * The 'noinline' modifier.
+     * The `noinline` modifier.
      */
     NOINLINE("noinline"),
 
     /**
-     * The 'tailrec' modifier.
+     * The `tailrec` modifier.
      */
     TAILREC("tailrec"),
 
     /**
-     * The 'external' modifier.
+     * The `external` modifier.
      */
     EXTERNAL("external"),
 
     /**
-     * The 'annotation' modifier.
+     * The `annotation` modifier.
      */
     ANNOTATION("annotation"),
 
     /**
-     * The 'crossinline' modifier.
+     * The `crossinline` modifier.
      */
     CROSSINLINE("crossinline"),
 
     /**
-     * The 'operator' modifier.
+     * The `operator` modifier.
      */
     OPERATOR("operator"),
 
     /**
-     * The 'nfix' modifier.
+     * The `nfix` modifier.
      */
     INFIX("infix"),
 
     /**
-     * The 'abstract' modifier.
+     * The `abstract` modifier.
      */
     ABSTRACT("abstract"),
 
     /**
-     * The 'num' modifier.
+     * The `num` modifier.
      */
     ENUM("enum"),
 
     /**
-     * The 'contract' modifier.
+     * The `contract` modifier.
      */
     CONTRACT("contract"),
 
     /**
-     * The 'open' modifier.
+     * The `open` modifier.
      */
     OPEN("open"),
 
     /**
-     * The 'inner' modifier.
+     * The `inner` modifier.
      */
     INNER("inner"),
 
     /**
-     * The 'override' modifier.
+     * The `override` modifier.
      */
     OVERRIDE("override"),
 
     /**
-     * The 'private' modifier.
+     * The `private` modifier.
      */
     PRIVATE("private"),
 
     /**
-     * The 'public' modifier.
+     * The `public` modifier.
      */
     PUBLIC("public"),
 
     /**
-     * The 'public' modifier.
+     * The `public` modifier.
      */
     DEFAULT_VISIBILITY_KEYWORD("public"),
 
     /**
-     * The 'internal' modifier.
+     * The `internal` modifier.
      */
     INTERNAL("internal"),
 
     /**
-     * The 'protected' modifier.
+     * The `protected` modifier.
      */
     PROTECTED("protected"),
 
     /**
-     * The 'out' modifier.
+     * The `out` modifier.
      */
     OUT("out"),
 
     /**
-     * The 'vararg' modifier.
+     * The `vararg` modifier.
      */
     VARARG("vararg"),
 
     /**
-     * The 'reified' modifier.
+     * The `reified` modifier.
      */
     REIFIED("reified"),
 
     /**
-     * The 'companion' modifier.
+     * The `companion` modifier.
      */
     COMPANION("companion"),
 
     /**
-     * The 'sealed' modifier.
+     * The `sealed` modifier.
      */
     SEALED("sealed"),
 
     /**
-     * The 'final' modifier.
+     * The `final` modifier.
      */
     FINAL("final"),
 
     /**
-     * The 'lateinit' modifier.
+     * The `lateinit` modifier.
      */
     LATEINIT("lateinit"),
 
     /**
-     * The 'const' modifier.
+     * The `const` modifier.
      */
     CONST("const"),
 
     /**
-     * The 'suspend' modifier.
+     * The `suspend` modifier.
      */
     SUSPEND("suspend"),
 
     /**
-     * The 'expect' modifier.
+     * The `expect` modifier.
      */
     EXPECT("expect"),
 
     /**
-     * The 'actual' modifier.
+     * The `actual` modifier.
      */
     ACTUAL("actual"),
 }

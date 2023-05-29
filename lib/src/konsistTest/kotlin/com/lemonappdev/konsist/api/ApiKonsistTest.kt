@@ -18,6 +18,13 @@ class ApiKonsistTest {
             .assert { it.hasReturnType() }
     }
 
+    @Test
+    fun `every api function has valid KDoc`() {
+        apiPackageScope
+            .functions(includeNested = true, includeLocal = true)
+            .assert { it.hasValidKDoc(verifyParamTag = true, verifyReturnTag = true) }
+    }
+
     companion object {
         val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSetName = "main")
     }
