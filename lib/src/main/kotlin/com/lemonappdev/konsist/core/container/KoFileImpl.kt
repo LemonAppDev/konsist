@@ -43,7 +43,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
         path.removePrefix(rootPathProvider)
     }
 
-    override val containingModuleName: String by lazy {
+    override val moduleName: String by lazy {
         val projectName = PathProvider
             .getInstance()
             .rootProjectPath
@@ -141,7 +141,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
 
     override fun resideInRootProjectPath(path: String) = LocationHelper.resideInLocation(path, rootProjectPath)
 
-    override fun resideInModule(module: String): Boolean = module == containingModuleName
+    override fun resideInModule(module: String): Boolean = module == moduleName
 
     override fun hasNameStartingWith(prefix: String) = name.startsWith(prefix)
 

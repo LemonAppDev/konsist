@@ -46,7 +46,7 @@ interface KoFile :
     /**
      * The file's module name.
      */
-    val containingModuleName: String
+    val moduleName: String
 
     /**
      * The root project path of the file.
