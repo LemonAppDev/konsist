@@ -258,12 +258,12 @@ jobs:
           distribution: 'zulu'
 
       - name: Publish
-        run: |
-          ./gradlew publishToMavenLocal \
-          -Pkonsist.releaseTarget=local \
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+        run: >
+          ./gradlew publishToMavenLocal
+          -Pkonsist.releaseTarget=local
+          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
+          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Run Assemble
@@ -293,12 +293,12 @@ jobs:
           distribution: 'zulu'
 
       - name: Publish
-        run: |
-          ./gradlew publishToMavenLocal \
-          -Pkonsist.releaseTarget=local \
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+        run: >
+          ./gradlew publishToMavenLocal
+          -Pkonsist.releaseTarget=local
+          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
+          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Run Assemble
