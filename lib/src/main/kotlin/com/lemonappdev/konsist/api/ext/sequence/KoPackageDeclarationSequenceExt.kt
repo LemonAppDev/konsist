@@ -3,21 +3,21 @@ package com.lemonappdev.konsist.api.ext.sequence
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 
 /**
- * Sequence containing all packages that have the fully qualified name.
+ * Sequence containing all packages that have the qualified name.
  *
- * @param names The names to include.
- * @return A sequence containing packages with the specified names.
+ * @param qualifiedNames The names to include.
+ * @return A sequence containing packages with the specified qualified names.
  */
-fun Sequence<KoPackageDeclaration>.withQualifiedName(vararg names: String): Sequence<KoPackageDeclaration> = filter {
-    names.any { name -> it.qualifiedName == name }
+fun Sequence<KoPackageDeclaration>.withQualifiedName(vararg qualifiedNames: String): Sequence<KoPackageDeclaration> = filter {
+    qualifiedNames.any { name -> it.qualifiedName == name }
 }
 
 /**
- * Sequence containing all packages that don't have the fully qualified name.
+ * Sequence containing all packages that don't have the qualified name.
  *
- * @param names The names to exclude.
- * @return A sequence containing packages without the specified names.
+ * @param qualifiedNames The names to exclude.
+ * @return A sequence containing packages without the specified qualified names.
  */
-fun Sequence<KoPackageDeclaration>.withoutQualifiedName(vararg names: String): Sequence<KoPackageDeclaration> = filter {
-    names.none { name -> it.qualifiedName == name }
+fun Sequence<KoPackageDeclaration>.withoutQualifiedName(vararg qualifiedNames: String): Sequence<KoPackageDeclaration> = filter {
+    qualifiedNames.none { name -> it.qualifiedName == name }
 }

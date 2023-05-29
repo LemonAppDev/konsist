@@ -59,7 +59,7 @@ interface KoTypeDeclaration : KoNamedDeclaration {
     /**
      * Returns `true` if this type is import alias.
      *
-     * @return `true` if this type is import alias, `false` otherwise.
+     * @return `true` if this type is import type alias, `false` otherwise.
      */
     fun isImportAlias(): Boolean
 }

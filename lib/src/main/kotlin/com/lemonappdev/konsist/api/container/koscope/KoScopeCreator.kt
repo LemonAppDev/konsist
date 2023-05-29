@@ -18,7 +18,7 @@ interface KoScopeCreator {
      *
      * @param moduleName The name of the module. If null, all modules will be included.
      * @param sourceSetName The name of the source set. If null, all source sets will be included.
-     * @param ignoreBuildConfig If `true`, build config files such as Gradle buildSrc directory will be ignored.
+     * @param ignoreBuildConfig If true, build config files and directories such as Gradle buildSrc directory will be ignored.
      * @return a [KoScope] containing all of Kotlin files in the project.
      */
     fun scopeFromProject(moduleName: String? = null, sourceSetName: String? = null, ignoreBuildConfig: Boolean = true): KoScope
@@ -83,7 +83,8 @@ interface KoScopeCreator {
      * Returns a [KoScope] containing all of Kotlin files in the given directory.
      *
      * @param path The path to the directory.
-     * @param absolutePath Determines whether the `path` parameter should be treated as an absolute path.
+     * @param absolutePath Determines whether the `path` parameter should be treated as an absolute path
+     * or path relative to the project root directory.
      * If set to `true`, the `path` parameter will be treated as an absolute path.
      * If set to `false`, the `path` parameter will be treated as a relative path.
      * By default, `false`.
@@ -96,7 +97,8 @@ interface KoScopeCreator {
      * Returns a [KoScope] of a given file.
      *
      * @param path The path to the file.
-     * @param absolutePath Determines whether the `path` parameter should be treated as an absolute path.
+     * @param absolutePath Determines whether the `path` parameter should be treated as an absolute path
+     * or path relative to the project root directory
      * If set to `true`, the `path` parameter will be treated as an absolute path.
      * If set to `false`, the `path` parameter will be treated as a relative path.
      * By default, `false`.

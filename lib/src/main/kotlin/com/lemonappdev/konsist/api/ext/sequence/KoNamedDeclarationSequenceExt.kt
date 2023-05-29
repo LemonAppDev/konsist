@@ -24,7 +24,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withoutName(vararg names: String): Sequ
 
 /**
  * Sequence containing declarations that have name with prefix.
- *
+÷÷ *
  * @param prefixes The prefixes to include.
  * @return A sequence containing declarations with names starting with the specified prefixes.
  */

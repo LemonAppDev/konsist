@@ -46,7 +46,7 @@ interface KoParameterDeclaration : KoDeclaration {
     /**
      * Whether this type represents the specified type.
      *
-     * @param type the type to compare.
+     * @param type the type to compare. It can be either a simple name or a fully qualified name.
      * @return `true` if this type represents the specified type, `false` otherwise.
      */
     fun representsType(type: String): Boolean

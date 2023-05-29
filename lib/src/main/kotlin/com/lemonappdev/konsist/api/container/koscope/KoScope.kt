@@ -34,7 +34,7 @@ interface KoScope :
     /**
      * The files present in the scope.
      *
-     * @return a sequence of [KoFileDeclaration] representing the files in the scope.
+     * @return a sequence of [KoFile] representing the files in the scope.
      */
     fun files(): Sequence<KoFile>
 
