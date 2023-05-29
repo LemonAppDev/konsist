@@ -28,6 +28,7 @@ class KonsistScopeFromSourceSetTest {
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
             ),
         )
     }
@@ -46,6 +47,7 @@ class KonsistScopeFromSourceSetTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/koclass/KoClassDeclarationForHasTestTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/kofile/KoFileForModuleName.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/kofile/KoFileForSourceSetName.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistOperatorTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistSliceTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/KonsistToStringTest.kt",
@@ -99,6 +101,7 @@ class KonsistScopeFromSourceSetTest {
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
             ),
         )
     }
