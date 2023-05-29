@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.kopsideclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.core.ext.toNormalizedPath
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -20,13 +21,11 @@ class KoPsiDeclarationForLocationAndTextTest {
 
         // then
         val declaration = "Declaration:\nfun sampleFunction() {\n}"
-        sut
-            .locationWithText
-            .run {
-                startsWith("Location: /") shouldBeEqualTo true
-                contains(projectPath) shouldBeEqualTo true
-                endsWith(declaration) shouldBeEqualTo true
-            }
+        assertSoftly(sut.locationWithText) {
+            startsWith("Location: /") shouldBeEqualTo true
+            contains(projectPath) shouldBeEqualTo true
+            endsWith(declaration) shouldBeEqualTo true
+        }
     }
 
     @Test

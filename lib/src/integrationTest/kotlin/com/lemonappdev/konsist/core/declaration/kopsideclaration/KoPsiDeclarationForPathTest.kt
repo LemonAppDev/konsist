@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.kopsideclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.core.ext.toNormalizedPath
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -14,12 +15,10 @@ class KoPsiDeclarationForPathTest {
             .first()
 
         // then
-        sut
-            .filePath
-            .run {
-                startsWith("//") shouldBeEqualTo false
-                endsWith("kopsideclaration/snippet/forpath/file-path.kt".toNormalizedPath()) shouldBeEqualTo true
-            }
+        assertSoftly(sut.filePath) {
+            startsWith("//") shouldBeEqualTo false
+            endsWith("kopsideclaration/snippet/forpath/file-path.kt".toNormalizedPath()) shouldBeEqualTo true
+        }
     }
 
     @Test

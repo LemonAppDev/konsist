@@ -1,0 +1,72 @@
+package com.lemonappdev.konsist.api.ext.sequence.kofile
+
+import com.lemonappdev.konsist.api.ext.sequence.withExtension
+import com.lemonappdev.konsist.api.ext.sequence.withoutExtension
+import com.lemonappdev.konsist.core.container.KoFileImpl
+import io.mockk.every
+import io.mockk.mockk
+import org.amshove.kluent.shouldBeEqualTo
+import org.junit.jupiter.api.Test
+
+@Suppress("detekt.LargeClass")
+class KoFileForExtensionSequenceExtTest {
+    @Test
+    fun `withExtension() returns file with one of given extensions`() {
+        // given
+        val extension1 = "sampleExtension1"
+        val extension2 = "sampleExtension2"
+        val extension3 = "sampleExtension3"
+        val file1: KoFileImpl = mockk {
+            every { hasExtension(extension1) } returns true
+            every { hasExtension(extension2) } returns false
+            every { hasExtension(extension3) } returns false
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasExtension(extension1) } returns false
+            every { hasExtension(extension2) } returns true
+            every { hasExtension(extension3) } returns false
+        }
+        val file3: KoFileImpl = mockk {
+            every { hasExtension(extension1) } returns false
+            every { hasExtension(extension2) } returns false
+            every { hasExtension(extension3) } returns true
+        }
+        val file = sequenceOf(file1, file2, file3)
+
+        // when
+        val sut = file.withExtension(extension1, extension2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1, file2)
+    }
+
+    @Test
+    fun `withoutExtension() returns file without any of given extensions`() {
+        // given
+        val extension1 = "sampleExtension1"
+        val extension2 = "sampleExtension2"
+        val extension3 = "sampleExtension3"
+        val file1: KoFileImpl = mockk {
+            every { hasExtension(extension1) } returns true
+            every { hasExtension(extension2) } returns false
+            every { hasExtension(extension3) } returns false
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasExtension(extension1) } returns false
+            every { hasExtension(extension2) } returns true
+            every { hasExtension(extension3) } returns false
+        }
+        val file3: KoFileImpl = mockk {
+            every { hasExtension(extension1) } returns false
+            every { hasExtension(extension2) } returns false
+            every { hasExtension(extension3) } returns true
+        }
+        val file = sequenceOf(file1, file2, file3)
+
+        // when
+        val sut = file.withoutExtension(extension1, extension2)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file3)
+    }
+}

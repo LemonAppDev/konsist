@@ -26,8 +26,9 @@ class SnippetTest {
 
         val r1 = Regex("""getSnippetFile\("(.+)"\)""")
         val r2 = Regex("""arguments\("([^"]+)"""")
+        val r3 = Regex("""arguments\(\s*"([^"]+)"""")
         val withGetSnippetMethod = snippetNamesFromFiles(r1, "getSnippetFile(\"", "\")")
-        val withArgument = snippetNamesFromFiles(r2, "arguments(\"", "\"")
+        val withArgument = snippetNamesFromFiles(r2, "arguments(\"", "\"") + snippetNamesFromFiles(r3, "arguments(\n", "\"")
 
         val snippetNamesUsedInTests = (withGetSnippetMethod + withArgument).toSet()
 
@@ -48,6 +49,8 @@ class SnippetTest {
             .flatMap { regex.findAll(it) }
             .map { it.value }
             .map { it.removePrefix(prefix) }
+            .map { it.trimIndent() }
+            .map { it.removePrefix("\"") }
             .map { it.removeSuffix(suffix) }
 
     companion object {

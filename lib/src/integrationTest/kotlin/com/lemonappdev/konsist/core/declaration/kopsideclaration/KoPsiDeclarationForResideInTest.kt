@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration.kopsideclaration
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toNormalizedPath
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -15,7 +16,7 @@ class KoPsiDeclarationForResideInTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             resideInFilePath("..snippet..") shouldBeEqualTo true
             resideInFilePath("..kopsideclaration${sep}snippet..") shouldBeEqualTo true
             resideInFilePath("..kopsideclaration..reside-in-file-path.kt") shouldBeEqualTo true
@@ -31,7 +32,7 @@ class KoPsiDeclarationForResideInTest {
             .first()
 
         // then
-        sut.run {
+        assertSoftly(sut) {
             resideInProjectFilePath("..snippet..") shouldBeEqualTo true
             resideInProjectFilePath("..kopsideclaration${sep}snippet..") shouldBeEqualTo true
             resideInProjectFilePath("..kopsideclaration..reside-in-project-file-path.kt") shouldBeEqualTo true

@@ -11,7 +11,6 @@ import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
-import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
@@ -34,7 +33,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
             } else if (it is KtProperty) {
                 KoPropertyDeclarationImpl.getInstance(it, this)
             } else {
-                throw UnsupportedOperationException("Unknown local declaration type: ${it.getTextWithLocation()}")
+                null
             }
         }
     }
@@ -77,7 +76,9 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
 
     override fun localDeclarations(): Sequence<KoDeclaration> = localDeclarations
 
-    override fun hasValidReturnTag(enabled: Boolean): Boolean = TagHelper.hasValidReturnTag(enabled, kDoc)
+    override fun hasValidReturnTag(enabled: Boolean): Boolean = TagHelper.hasValidReturnTag(enabled, returnType?.name, kDoc)
+
+    override fun hasValidParamTag(enabled: Boolean): Boolean = TagHelper.hasValidParamTag(enabled, parameters, kDoc)
 
     internal companion object {
         private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()

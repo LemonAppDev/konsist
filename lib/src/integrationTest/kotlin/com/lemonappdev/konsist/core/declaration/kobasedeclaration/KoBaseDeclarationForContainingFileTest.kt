@@ -16,8 +16,8 @@ class KoBaseDeclarationForContainingFileTest {
         // then
         sut
             .containingFile
-            .name
-            .endsWith("file")
+            .nameWithExtension
+            .endsWith("file.kt")
             .shouldBeEqualTo(true)
     }
 
