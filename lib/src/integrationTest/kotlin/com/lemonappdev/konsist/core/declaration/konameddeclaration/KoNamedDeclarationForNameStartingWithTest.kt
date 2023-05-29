@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.konameddeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -29,10 +28,7 @@ class KoNamedDeclarationForNameStartingWithTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/konameddeclaration/snippet/fornamestartingwith/".toNormalizedPath(),
-            fileName,
-        )
+        TestSnippetProvider.getSnippetKoScope("core/declaration/konameddeclaration/snippet/fornamestartingwith/", fileName)
 
     companion object {
         @Suppress("unused")

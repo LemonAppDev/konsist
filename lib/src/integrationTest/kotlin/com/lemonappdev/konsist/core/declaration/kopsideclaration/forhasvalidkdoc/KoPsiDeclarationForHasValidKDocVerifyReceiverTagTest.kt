@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kopsideclaration.forhasvalidkdoc
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -28,10 +27,7 @@ class KoPsiDeclarationForHasValidKDocVerifyReceiverTagTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/kopsideclaration/snippet/forhasvalidkdoc/forreceivertag/".toNormalizedPath(),
-            fileName,
-        )
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopsideclaration/snippet/forhasvalidkdoc/forreceivertag/", fileName)
 
     companion object {
         @Suppress("unused")

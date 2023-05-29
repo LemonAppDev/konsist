@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kosecondaryconstructor
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -32,10 +31,7 @@ class KoSecondaryConstructorForHasValidKDocTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope(
-            "core/declaration/kosecondaryconstructor/snippet/forhasvalidkdoc/".toNormalizedPath(),
-            fileName,
-        )
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kosecondaryconstructor/snippet/forhasvalidkdoc/", fileName)
 
     companion object {
         @Suppress("unused")
