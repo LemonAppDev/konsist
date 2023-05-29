@@ -121,5 +121,8 @@ class ParametrizedDeclarationForParameterTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koparametrizeddeclaration/snippet/forparameter/".toNormalizedPath(), fileName)
+        TestSnippetProvider.getSnippetKoScope(
+            "core/declaration/koparametrizeddeclaration/snippet/forparameter/".toNormalizedPath(),
+            fileName,
+        )
 }

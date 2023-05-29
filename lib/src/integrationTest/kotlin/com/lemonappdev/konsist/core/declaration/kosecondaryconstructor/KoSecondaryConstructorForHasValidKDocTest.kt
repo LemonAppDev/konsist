@@ -34,7 +34,7 @@ class KoSecondaryConstructorForHasValidKDocTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kosecondaryconstructor/snippet/forhasvalidkdoc/".toNormalizedPath(),
-            fileName
+            fileName,
         )
 
     companion object {

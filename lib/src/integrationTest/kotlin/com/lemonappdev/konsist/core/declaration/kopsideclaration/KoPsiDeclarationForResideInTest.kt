@@ -19,7 +19,7 @@ class KoPsiDeclarationForResideInTest {
             resideInFilePath("..snippet..") shouldBeEqualTo true
             resideInFilePath("..kopsideclaration${sep}snippet..") shouldBeEqualTo true
             resideInFilePath("..kopsideclaration..reside-in-file-path.kt") shouldBeEqualTo true
-            resideInFilePath("kopsideclaration${sep}snippet${sep}") shouldBeEqualTo false
+            resideInFilePath("kopsideclaration${sep}snippet$sep") shouldBeEqualTo false
         }
     }
 
@@ -35,7 +35,7 @@ class KoPsiDeclarationForResideInTest {
             resideInProjectFilePath("..snippet..") shouldBeEqualTo true
             resideInProjectFilePath("..kopsideclaration${sep}snippet..") shouldBeEqualTo true
             resideInProjectFilePath("..kopsideclaration..reside-in-project-file-path.kt") shouldBeEqualTo true
-            resideInProjectFilePath("kopsideclaration${sep}snippet${sep}") shouldBeEqualTo false
+            resideInProjectFilePath("kopsideclaration${sep}snippet$sep") shouldBeEqualTo false
         }
     }
 

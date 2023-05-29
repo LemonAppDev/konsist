@@ -29,7 +29,7 @@ class KoPsiDeclarationForHasValidKDocVerifyDescriptionTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kopsideclaration/snippet/forhasvalidkdoc/fordescription/".toNormalizedPath(),
-            fileName
+            fileName,
         )
 
     companion object {

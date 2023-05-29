@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.ext
+package com.lemonappdev.konsist.helper.ext
 
 import java.io.File
 

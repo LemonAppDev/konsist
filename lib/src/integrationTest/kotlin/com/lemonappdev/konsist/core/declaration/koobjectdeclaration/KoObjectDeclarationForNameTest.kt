@@ -39,5 +39,8 @@ class KoObjectDeclarationForNameTest {
         sut.name shouldBeEqualTo "Companion"
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobjectdeclaration/snippet/forname/".toNormalizedPath(), fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/declaration/koobjectdeclaration/snippet/forname/".toNormalizedPath(),
+        fileName,
+    )
 }

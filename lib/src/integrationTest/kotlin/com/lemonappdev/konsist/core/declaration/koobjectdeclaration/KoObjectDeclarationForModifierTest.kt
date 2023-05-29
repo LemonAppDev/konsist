@@ -43,5 +43,8 @@ class KoObjectDeclarationForModifierTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobjectdeclaration/snippet/formodifier/".toNormalizedPath(), fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/declaration/koobjectdeclaration/snippet/formodifier/".toNormalizedPath(),
+        fileName,
+    )
 }

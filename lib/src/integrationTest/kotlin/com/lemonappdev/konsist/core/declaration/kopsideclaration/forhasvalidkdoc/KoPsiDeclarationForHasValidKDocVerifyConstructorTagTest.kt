@@ -30,7 +30,7 @@ class KoPsiDeclarationForHasValidKDocVerifyConstructorTagTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kopsideclaration/snippet/forhasvalidkdoc/forconstructortag/".toNormalizedPath(),
-            fileName
+            fileName,
         )
 
     companion object {

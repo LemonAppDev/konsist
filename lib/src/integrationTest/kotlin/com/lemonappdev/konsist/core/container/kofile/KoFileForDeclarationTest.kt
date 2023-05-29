@@ -58,7 +58,10 @@ class KoFileForDeclarationTest {
             .shouldBeEqualTo(expected)
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/kofile/snippet/fordeclaration/".toNormalizedPath(), fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/container/kofile/snippet/fordeclaration/".toNormalizedPath(),
+        fileName,
+    )
 
     companion object {
         @Suppress("unused", "detekt.LongMethod")

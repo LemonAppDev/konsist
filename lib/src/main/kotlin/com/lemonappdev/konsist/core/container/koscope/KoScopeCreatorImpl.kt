@@ -67,9 +67,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         pathPrefix = if (sourceSetName != null) {
-            "$pathPrefix${sep}src$sep$sourceSetName${sep}.*"
+            "$pathPrefix${sep}src$sep$sourceSetName$sep.*"
         } else {
-            "$pathPrefix${sep}src${sep}.*"
+            "$pathPrefix${sep}src$sep.*"
         }
 
         return localProjectKotlinFiles

@@ -29,6 +29,6 @@ class KoDeclarationExtForPrimaryConstructorTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "api/ext/declaration/kodeclaration/snippet/forprimaryconstructor/".toNormalizedPath(),
-            fileName
+            fileName,
         )
 }

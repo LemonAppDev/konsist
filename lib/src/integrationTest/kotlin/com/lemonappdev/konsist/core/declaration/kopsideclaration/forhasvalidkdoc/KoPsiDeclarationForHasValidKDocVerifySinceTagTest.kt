@@ -30,7 +30,7 @@ class KoPsiDeclarationForHasValidKDocVerifySinceTagTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kopsideclaration/snippet/forhasvalidkdoc/forsincetag/".toNormalizedPath(),
-            fileName
+            fileName,
         )
 
     companion object {

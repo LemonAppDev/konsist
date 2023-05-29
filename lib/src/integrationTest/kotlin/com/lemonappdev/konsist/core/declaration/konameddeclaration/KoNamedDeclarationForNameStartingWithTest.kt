@@ -29,7 +29,10 @@ class KoNamedDeclarationForNameStartingWithTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/konameddeclaration/snippet/fornamestartingwith/".toNormalizedPath(), fileName)
+        TestSnippetProvider.getSnippetKoScope(
+            "core/declaration/konameddeclaration/snippet/fornamestartingwith/".toNormalizedPath(),
+            fileName,
+        )
 
     companion object {
         @Suppress("unused")

@@ -34,5 +34,8 @@ class KoFileForPackageTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/kofile/snippet/forpackage/".toNormalizedPath(), fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/container/kofile/snippet/forpackage/".toNormalizedPath(),
+        fileName,
+    )
 }

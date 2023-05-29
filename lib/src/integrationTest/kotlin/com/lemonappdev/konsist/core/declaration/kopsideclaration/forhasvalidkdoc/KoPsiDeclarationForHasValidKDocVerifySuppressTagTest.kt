@@ -30,7 +30,7 @@ class KoPsiDeclarationForHasValidKDocVerifySuppressTagTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kopsideclaration/snippet/forhasvalidkdoc/forsuppresstag/".toNormalizedPath(),
-            fileName
+            fileName,
         )
 
     companion object {

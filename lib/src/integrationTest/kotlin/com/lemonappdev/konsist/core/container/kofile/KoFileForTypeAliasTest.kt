@@ -69,5 +69,8 @@ class KoFileForTypeAliasTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/kofile/snippet/fortypealias/".toNormalizedPath(), fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/container/kofile/snippet/fortypealias/".toNormalizedPath(),
+        fileName,
+    )
 }

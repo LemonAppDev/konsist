@@ -29,7 +29,7 @@ class KoPsiDeclarationForHasValidKDocVerifyPropertySetterTagTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kopsideclaration/snippet/forhasvalidkdoc/forpropertysettertag/".toNormalizedPath(),
-            fileName
+            fileName,
         )
 
     companion object {

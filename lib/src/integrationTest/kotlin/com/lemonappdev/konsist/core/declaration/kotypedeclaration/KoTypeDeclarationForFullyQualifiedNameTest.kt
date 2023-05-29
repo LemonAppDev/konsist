@@ -30,7 +30,7 @@ class KoTypeDeclarationForFullyQualifiedNameTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kotypedeclaration/snippet/forfullyqualifiedname/".toNormalizedPath(),
-            fileName
+            fileName,
         )
 
     companion object {

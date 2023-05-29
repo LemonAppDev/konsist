@@ -30,7 +30,7 @@ class KoComplexDeclarationForRepresentsTypeTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kocomplexdeclaration/snippet/forrepresentstype/".toNormalizedPath(),
-            fileName
+            fileName,
         )
 
     companion object {

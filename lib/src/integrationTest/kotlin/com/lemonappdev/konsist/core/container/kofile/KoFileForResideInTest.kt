@@ -36,7 +36,7 @@ class KoFileForResideInTest {
             resideInRootProjectPath("..snippet..") shouldBeEqualTo true
             resideInRootProjectPath("..kofile${sep}snippet..") shouldBeEqualTo true
             resideInRootProjectPath("..kofile..reside-in-root-project-path.kt") shouldBeEqualTo true
-            resideInRootProjectPath("kofile${sep}snippet${sep}") shouldBeEqualTo false
+            resideInRootProjectPath("kofile${sep}snippet$sep") shouldBeEqualTo false
         }
     }
 

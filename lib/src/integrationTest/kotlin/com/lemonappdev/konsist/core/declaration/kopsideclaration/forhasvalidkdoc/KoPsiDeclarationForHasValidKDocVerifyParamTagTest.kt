@@ -30,7 +30,7 @@ class KoPsiDeclarationForHasValidKDocVerifyParamTagTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kopsideclaration/snippet/forhasvalidkdoc/forparamtag/".toNormalizedPath(),
-            fileName
+            fileName,
         )
 
     companion object {
