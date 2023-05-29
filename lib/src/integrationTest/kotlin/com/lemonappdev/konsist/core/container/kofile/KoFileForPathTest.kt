@@ -33,7 +33,8 @@ class KoFileForPathTest {
             .rootProjectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/container/kofile/snippet/forpath/" +
-                    "file-root-project-path.kt".toNormalizedPath(),
+                    "file-root-project-path.kt"
+                        .toNormalizedPath(),
             )
     }
 

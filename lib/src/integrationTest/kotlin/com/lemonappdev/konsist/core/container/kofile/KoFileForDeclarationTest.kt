@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.container.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -59,7 +58,7 @@ class KoFileForDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope(
-        "core/container/kofile/snippet/fordeclaration/".toNormalizedPath(),
+        "core/container/kofile/snippet/fordeclaration/",
         fileName,
     )
 
