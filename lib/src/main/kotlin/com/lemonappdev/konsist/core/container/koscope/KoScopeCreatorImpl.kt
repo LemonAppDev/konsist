@@ -63,7 +63,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         var pathPrefix = if (moduleName == "root") {
-            "$projectRootPath/src"
+            projectRootPath
         } else if (moduleName != null) {
             "$projectRootPath/$moduleName"
         } else {
