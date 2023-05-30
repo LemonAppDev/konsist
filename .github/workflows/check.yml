@@ -258,7 +258,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Display javaToolchains
-        run: ./gradlew gradle javaToolchains
+        run: ./gradlew javaToolchains
 
       - name: Publish
         run: >
@@ -302,7 +302,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Display javaToolchains
-        run: ./gradlew gradle javaToolchains
+        run: ./gradlew javaToolchains
 
       - name: Publish
         run: >
