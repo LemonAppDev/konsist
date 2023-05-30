@@ -55,7 +55,7 @@ internal class KoParameterDeclarationImpl private constructor(private val ktPara
         else -> defaultValue == value
     }
 
-    override fun representsType(type: String): Boolean = this.type.name == type || this.type.fullyQualifiedName == type
+    override fun representsType(name: String): Boolean = type.name == name || type.fullyQualifiedName == name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()

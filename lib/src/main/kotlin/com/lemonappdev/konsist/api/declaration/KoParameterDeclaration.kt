@@ -44,10 +44,10 @@ interface KoParameterDeclaration : KoDeclaration {
     fun hasDefaultValue(value: String? = null): Boolean
 
     /**
-     * Whether this type represents the specified type.
+     * Whether the parameter type represents the specified type.
      *
-     * @param type the type to compare. It can be either a simple name or a fully qualified name.
+     * @param name the type to compare. It can be either a simple name or a fully qualified name.
      * @return `true` if this type represents the specified type, `false` otherwise.
      */
-    fun representsType(type: String): Boolean
+    fun representsType(name: String): Boolean
 }
