@@ -295,6 +295,9 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
+      - name: javaToolchains
+        run: gradle -q javaToolchains
+
       - name: Publish
         run: >
           ./gradlew publishToMavenLocal
