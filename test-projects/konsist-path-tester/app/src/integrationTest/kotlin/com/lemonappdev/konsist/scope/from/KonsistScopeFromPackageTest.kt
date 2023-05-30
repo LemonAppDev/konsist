@@ -197,6 +197,36 @@ class KonsistScopeFromPackageTest {
     }
 
     @Test
+    fun `scopeFromPackage for com_lemonappdev_sample package, root module`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("com.lemonappdev.sample", moduleName = "root")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for com_lemonappdev_sample package, root module, main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("com.lemonappdev.sample", moduleName = "root", sourceSetName = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+            ),
+        )
+    }
+
+    @Test
     fun `scopeFromPackage for any__sample__any package`() {
         // given
         val sut = Konsist
@@ -396,6 +426,40 @@ class KonsistScopeFromPackageTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for any__sample__any package, root module`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("..sample..", moduleName = "root")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromPackage for any__sample__any package, root module, main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromPackage("..sample..", moduleName = "root", sourceSetName = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
             ),
         )
     }
