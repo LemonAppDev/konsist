@@ -86,7 +86,7 @@ interface KoFile :
     /**
      * Whether the file has annotations.
      *
-     * @param names the names of the annotations to check.
+     * @param names the annotation names or fully qualified annotation names to check.
      * @return `true` if the file has annotations with the specified names (or any annotation if [names] is empty), `false` otherwise
      */
     fun hasAnnotations(vararg names: String): Boolean
