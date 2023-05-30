@@ -43,7 +43,7 @@ class LocationHelperTest {
 
         // then
         val actual = { sut.resideInLocation(".", desiredPackage) }
-        actual shouldThrow IllegalArgumentException::class withMessage "Incorrect location selector format: ."
+        actual shouldThrow IllegalArgumentException::class withMessage "Incorrect location format: ."
     }
 
     @Test
