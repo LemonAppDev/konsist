@@ -6,6 +6,28 @@ import org.junit.jupiter.api.Test
 
 class LocationHelperTest {
     @Test
+    fun `reside in any package`() {
+        // given
+        val desiredPackage1 = "com.domain.update.usecase"
+        val desiredPackage2 = "com.domain"
+        val desiredPackage3 = "org.example.project"
+        val sut = LocationHelper
+
+        // then
+        assertSoftly(sut) {
+            resideInLocation("..", desiredPackage1) shouldBeEqualTo true
+            resideInLocation("..", desiredPackage2) shouldBeEqualTo true
+            resideInLocation("..", desiredPackage3) shouldBeEqualTo true
+            resideInLocation(".", desiredPackage1) shouldBeEqualTo false
+            resideInLocation(".", desiredPackage2) shouldBeEqualTo false
+            resideInLocation(".", desiredPackage3) shouldBeEqualTo false
+            resideInLocation("", desiredPackage1) shouldBeEqualTo false
+            resideInLocation("", desiredPackage2) shouldBeEqualTo false
+            resideInLocation("", desiredPackage3) shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `has given fragment with one word`() {
         // given
         val desiredPackage = "com.domain.update.usecase"
