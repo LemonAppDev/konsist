@@ -128,9 +128,11 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         hasValidPropertySetterTag(verifyPropertySetterTag) &&
         hasValidPropertyGetterTag(verifyPropertyGetterTag)
 
-    override fun resideInFilePath(path: String): Boolean = LocationHelper.resideInLocation(path, filePath)
-
-    override fun resideInProjectFilePath(path: String): Boolean = LocationHelper.resideInLocation(path, projectFilePath)
+    override fun resideInFilePath(path: String, absolutePath: Boolean): Boolean = if (absolutePath) {
+        LocationHelper.resideInLocation(path, filePath)
+    } else {
+        LocationHelper.resideInLocation(path, projectFilePath)
+    }
 
     override fun print() {
         print(toString())
