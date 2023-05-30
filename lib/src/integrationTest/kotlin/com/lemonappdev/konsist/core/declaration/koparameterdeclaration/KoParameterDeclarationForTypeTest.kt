@@ -46,5 +46,6 @@ class KoParameterDeclarationForTypeTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/fortype/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/fortype/", fileName)
 }

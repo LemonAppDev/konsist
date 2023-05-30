@@ -14,11 +14,12 @@ class KoParameterDeclarationExtTest {
             .functions()
             .first()
             .parameters
-            ?.first()
+            .first()
 
         // then
-        sut?.representsTypeOf<SampleType>() shouldBeEqualTo true
+        sut.representsTypeOf<SampleType>() shouldBeEqualTo true
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("api/ext/declaration/koparameterdeclaration/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("api/ext/declaration/koparameterdeclaration/snippet/", fileName)
 }

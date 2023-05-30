@@ -76,6 +76,5 @@ class KoFileForContainsMethodTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/container/kofile/snippet/forcontainsmethod/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/kofile/snippet/forcontainsmethod/", fileName)
 }

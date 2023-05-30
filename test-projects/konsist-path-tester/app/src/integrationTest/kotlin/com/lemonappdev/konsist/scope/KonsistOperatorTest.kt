@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.scope
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
+import com.lemonappdev.konsist.helper.ext.toNormalizedPaths
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
@@ -28,7 +29,7 @@ class KonsistOperatorTest {
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -84,7 +85,7 @@ class KonsistOperatorTest {
                     "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                     "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                     "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-                ),
+                ).toNormalizedPaths(),
             )
     }
 

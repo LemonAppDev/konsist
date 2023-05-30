@@ -24,8 +24,7 @@ class KoDeclarationForTopLevelTest {
         sut.isTopLevel() shouldBeEqualTo value
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kodeclaration/snippet/fortoplevel/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/fortoplevel/", fileName)
 
     companion object {
         @Suppress("unused")

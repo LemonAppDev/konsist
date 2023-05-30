@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
-import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.RETURN
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -22,6 +22,5 @@ class KoKDocDeclarationForReturnTagTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forreturntag/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forreturntag/", fileName)
 }
