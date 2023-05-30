@@ -1,7 +1,10 @@
 package com.lemonappdev.konsist.core.util
 
+import com.lemonappdev.konsist.core.util.LocationHelper.resideInLocation
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class LocationHelperTest {
@@ -18,13 +21,29 @@ class LocationHelperTest {
             resideInLocation("..", desiredPackage1) shouldBeEqualTo true
             resideInLocation("..", desiredPackage2) shouldBeEqualTo true
             resideInLocation("..", desiredPackage3) shouldBeEqualTo true
-            resideInLocation(".", desiredPackage1) shouldBeEqualTo false
-            resideInLocation(".", desiredPackage2) shouldBeEqualTo false
-            resideInLocation(".", desiredPackage3) shouldBeEqualTo false
-            resideInLocation("", desiredPackage1) shouldBeEqualTo false
-            resideInLocation("", desiredPackage2) shouldBeEqualTo false
-            resideInLocation("", desiredPackage3) shouldBeEqualTo false
         }
+    }
+
+    @Test
+    fun `throws exception when desired location is empty`() {
+        // given
+        val desiredPackage = "com.domain.update.usecase"
+        val sut = LocationHelper
+
+        // then
+        val actual = { sut.resideInLocation("", desiredPackage) }
+        actual shouldThrow IllegalArgumentException::class withMessage "Location name is empty"
+    }
+
+    @Test
+    fun `throws exception when desired location is single dot`() {
+        // given
+        val desiredPackage = "com.domain.update.usecase"
+        val sut = LocationHelper
+
+        // then
+        val actual = { sut.resideInLocation(".", desiredPackage) }
+        actual shouldThrow IllegalArgumentException::class withMessage "Incorrect location selector format: ."
     }
 
     @Test
