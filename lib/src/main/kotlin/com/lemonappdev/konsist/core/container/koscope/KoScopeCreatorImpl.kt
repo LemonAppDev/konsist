@@ -146,9 +146,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*")
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
-                path.matches(gradleModuleBuildDirectoryRegex) ||
-                path.matches(mavenRootBuildDirectoryRegex) ||
-                path.matches(mavenModuleBuildDirectoryRegex)
+            path.matches(gradleModuleBuildDirectoryRegex) ||
+            path.matches(mavenRootBuildDirectoryRegex) ||
+            path.matches(mavenModuleBuildDirectoryRegex)
     }
 
     private fun isTestPath(path: String): Boolean {
