@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
-import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.CONSTRUCTOR
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -23,5 +23,5 @@ class KoKDocDeclarationForConstructorTagTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forconstructortag/", fileName)
+        getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forconstructortag/", fileName)
 }

@@ -25,6 +25,7 @@ class KoTypeDeclarationForIsNullableTest {
         // then
         sut?.isNullable shouldBeEqualTo value
     }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forisnullable/", fileName)
 

@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koimportdeclaration
 
-import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -27,6 +27,5 @@ class KoImportDeclarationForWildcardTest {
         sut.isWildcard shouldBeEqualTo false
     }
 
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koimportdeclaration/snippet/forwildcard/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koimportdeclaration/snippet/forwildcard/", fileName)
 }

@@ -22,8 +22,7 @@ class KoDeclarationForKDocTest {
         sut.hasKDoc() shouldBeEqualTo hasKDoc
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kodeclaration/snippet/forkdoc/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forkdoc/", fileName)
 
     companion object {
         @Suppress("unused")
