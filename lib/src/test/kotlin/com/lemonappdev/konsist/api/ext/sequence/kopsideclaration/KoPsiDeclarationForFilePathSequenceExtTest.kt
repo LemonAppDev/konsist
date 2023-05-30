@@ -13,6 +13,57 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoPsiDeclarationForFilePathSequenceExtTest {
+    @Test
+    fun `withFilePath() with absolute path 'true' returns psiDeclarations with one of given paths`() {
+        // given
+        val path1 = "com/sample/samplepath1.."
+        val path2 = "..samplepath2"
+        val psiDeclaration1: KoPsiDeclarationImpl = mockk {
+            every { resideInFilePath(path1, true) } returns true
+            every { resideInFilePath(path2, true) } returns true
+        }
+        val psiDeclaration2: KoPsiDeclarationImpl = mockk {
+            every { resideInFilePath(path1, true) } returns false
+            every { resideInFilePath(path2, true) } returns true
+        }
+        val psiDeclaration3: KoPsiDeclarationImpl = mockk {
+            every { resideInFilePath(path1, true) } returns false
+            every { resideInFilePath(path2, true) } returns false
+        }
+        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2, psiDeclaration3)
+
+        // when
+        val sut = psiDeclarations.withFilePath(path1, path2, absolutePath = true)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(psiDeclaration1, psiDeclaration2)
+    }
+
+    @Test
+    fun `withoutFilePath() with absolute path 'true' returns psiDeclaration without any of given path`() {
+        // given
+        val path1 = "com/sample/samplepath1.."
+        val path2 = "..samplepath2"
+        val psiDeclaration1: KoPsiDeclarationImpl = mockk {
+            every { resideInFilePath(path1, true) } returns true
+            every { resideInFilePath(path2, true) } returns true
+        }
+        val psiDeclaration2: KoPsiDeclarationImpl = mockk {
+            every { resideInFilePath(path1, true) } returns false
+            every { resideInFilePath(path2, true) } returns true
+        }
+        val psiDeclaration3: KoPsiDeclarationImpl = mockk {
+            every { resideInFilePath(path1, true) } returns false
+            every { resideInFilePath(path2, true) } returns false
+        }
+        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2, psiDeclaration3)
+
+        // when
+        val sut = psiDeclarations.withoutFilePath(path1, path2, absolutePath = true)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(psiDeclaration3)
+    }
 
     @Test
     fun `withFilePath(String) with absolute path 'false' returns psiDeclarations with one of given project paths`() {
@@ -165,58 +216,6 @@ class KoPsiDeclarationForFilePathSequenceExtTest {
 
         // when
         val sut = psiDeclarations.withoutProjectFilePath(projectPath1, projectPath2)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration3)
-    }
-
-    @Test
-    fun `withFilePath() with absolute path 'true' returns psiDeclarations with one of given paths`() {
-        // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
-        val psiDeclaration1: KoPsiDeclarationImpl = mockk {
-            every { resideInFilePath(path1, true) } returns true
-            every { resideInFilePath(path2, true) } returns true
-        }
-        val psiDeclaration2: KoPsiDeclarationImpl = mockk {
-            every { resideInFilePath(path1, true) } returns false
-            every { resideInFilePath(path2, true) } returns true
-        }
-        val psiDeclaration3: KoPsiDeclarationImpl = mockk {
-            every { resideInFilePath(path1, true) } returns false
-            every { resideInFilePath(path2, true) } returns false
-        }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2, psiDeclaration3)
-
-        // when
-        val sut = psiDeclarations.withFilePath(path1, path2, absolutePath = true)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration1, psiDeclaration2)
-    }
-
-    @Test
-    fun `withoutFilePath() with absolute path 'true' returns psiDeclaration without any of given path`() {
-        // given
-        val path1 = "com/sample/samplepath1.."
-        val path2 = "..samplepath2"
-        val psiDeclaration1: KoPsiDeclarationImpl = mockk {
-            every { resideInFilePath(path1, true) } returns true
-            every { resideInFilePath(path2, true) } returns true
-        }
-        val psiDeclaration2: KoPsiDeclarationImpl = mockk {
-            every { resideInFilePath(path1, true) } returns false
-            every { resideInFilePath(path2, true) } returns true
-        }
-        val psiDeclaration3: KoPsiDeclarationImpl = mockk {
-            every { resideInFilePath(path1, true) } returns false
-            every { resideInFilePath(path2, true) } returns false
-        }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2, psiDeclaration3)
-
-        // when
-        val sut = psiDeclarations.withoutFilePath(path1, path2, absolutePath = true)
 
         // then
         sut.toList() shouldBeEqualTo listOf(psiDeclaration3)
