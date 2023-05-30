@@ -257,8 +257,8 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: javaToolchains
-        run: gradle -q javaToolchains
+      - name: Display javaToolchains
+        run: ./gradlew gradle javaToolchains
 
       - name: Publish
         run: >
@@ -301,8 +301,8 @@ jobs:
           java-version: 8
           distribution: 'zulu'
 
-      - name: javaToolchains
-        run: gradle -q javaToolchains
+      - name: Display javaToolchains
+        run: ./gradlew gradle javaToolchains
 
       - name: Publish
         run: >
