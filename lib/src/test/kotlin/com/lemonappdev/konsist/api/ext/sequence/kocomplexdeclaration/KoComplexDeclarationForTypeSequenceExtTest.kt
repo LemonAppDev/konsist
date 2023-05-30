@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.api.ext.sequence.kocomplexdeclaration
 
-import com.lemonappdev.konsist.api.ext.sequence.withType
-import com.lemonappdev.konsist.api.ext.sequence.withTypeOf
-import com.lemonappdev.konsist.api.ext.sequence.withoutType
-import com.lemonappdev.konsist.api.ext.sequence.withoutTypeOf
+import com.lemonappdev.konsist.api.ext.sequence.withRepresentedType
+import com.lemonappdev.konsist.api.ext.sequence.withRepresentedTypeOf
+import com.lemonappdev.konsist.api.ext.sequence.withoutRepresentedType
+import com.lemonappdev.konsist.api.ext.sequence.withoutRepresentedTypeOf
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test
 
 class KoComplexDeclarationForTypeSequenceExtTest {
     @Test
-    fun `withType(String) returns complex declarations with one of given types`() {
+    fun `withRepresentedType(String) returns complex declarations with one of given types`() {
         // given
         val type1 = "type1"
         val type2 = "type2"
@@ -34,14 +34,14 @@ class KoComplexDeclarationForTypeSequenceExtTest {
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
 
         // when
-        val sut = complexDeclarations.withType(type1, type2)
+        val sut = complexDeclarations.withRepresentedType(type1, type2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(complexDeclaration1, complexDeclaration2)
     }
 
     @Test
-    fun `withoutType(String) returns complex declaration without any of given types`() {
+    fun `withoutRepresentedType(String) returns complex declaration without any of given types`() {
         // given
         val type1 = "type1"
         val type2 = "type2"
@@ -60,14 +60,14 @@ class KoComplexDeclarationForTypeSequenceExtTest {
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
 
         // when
-        val sut = complexDeclarations.withoutType(type1, type2)
+        val sut = complexDeclarations.withoutRepresentedType(type1, type2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(complexDeclaration3)
     }
 
     @Test
-    fun `withTypeOf(KClass) returns complex declarations with one of given types`() {
+    fun `withRepresentedTypeOf(KClass) returns complex declarations with one of given types`() {
         // given
         val type1 = "com.lemonappdev.konsist.testdata.SampleClass1"
         val type2 = "com.lemonappdev.konsist.testdata.SampleClass2"
@@ -86,14 +86,14 @@ class KoComplexDeclarationForTypeSequenceExtTest {
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
 
         // when
-        val sut = complexDeclarations.withTypeOf(SampleClass1::class, SampleClass2::class)
+        val sut = complexDeclarations.withRepresentedTypeOf(SampleClass1::class, SampleClass2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(complexDeclaration1, complexDeclaration2)
     }
 
     @Test
-    fun `withoutTypeOf(KClass) returns complex declaration without any of given types`() {
+    fun `withoutRepresentedTypeOf(KClass) returns complex declaration without any of given types`() {
         // given
         val type1 = "com.lemonappdev.konsist.testdata.SampleClass1"
         val type2 = "com.lemonappdev.konsist.testdata.SampleClass2"
@@ -112,7 +112,7 @@ class KoComplexDeclarationForTypeSequenceExtTest {
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2, complexDeclaration3)
 
         // when
-        val sut = complexDeclarations.withoutTypeOf(SampleClass1::class, SampleClass2::class)
+        val sut = complexDeclarations.withoutRepresentedTypeOf(SampleClass1::class, SampleClass2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(complexDeclaration3)
@@ -120,7 +120,7 @@ class KoComplexDeclarationForTypeSequenceExtTest {
 
     //  'every { representsType<SampleClass>() } returns true' doesn't work because there is a bug in mockk
     @Test
-    fun `withTypeOf() with KClass syntax returns complex declaration with SampleClass type`() {
+    fun `withRepresentedTypeOf() with KClass syntax returns complex declaration with SampleClass type`() {
         // given
         val complexDeclaration1: KoComplexDeclarationImpl = mockk {
             every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleClass"
@@ -131,14 +131,14 @@ class KoComplexDeclarationForTypeSequenceExtTest {
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2)
 
         // when
-        val sut = complexDeclarations.withTypeOf<SampleClass>()
+        val sut = complexDeclarations.withRepresentedTypeOf<SampleClass>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(complexDeclaration1)
     }
 
     @Test
-    fun `withoutTypeOf() with KClass syntax returns complex declaration without SampleClass type`() {
+    fun `withoutRepresentedTypeOf() with KClass syntax returns complex declaration without SampleClass type`() {
         // given
         val complexDeclaration1: KoComplexDeclarationImpl = mockk {
             every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleClass"
@@ -149,7 +149,7 @@ class KoComplexDeclarationForTypeSequenceExtTest {
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2)
 
         // when
-        val sut = complexDeclarations.withoutTypeOf<SampleClass>()
+        val sut = complexDeclarations.withoutRepresentedTypeOf<SampleClass>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(complexDeclaration2)
