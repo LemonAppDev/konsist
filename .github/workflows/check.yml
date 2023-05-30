@@ -292,13 +292,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: 8
-          distribution: 'zulu'
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
+          java-version: 8 19
           distribution: 'zulu'
 
       - name: Display javaToolchains
