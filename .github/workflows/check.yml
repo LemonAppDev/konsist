@@ -21,7 +21,7 @@ jobs:
 #      - name: Set up JDK
 #        uses: actions/setup-java@v3
 #        with:
-#          java-version: 8
+#          java-version: 19
 #          distribution: 'zulu'
 #
 #      - name: JUnit Test
@@ -45,7 +45,7 @@ jobs:
 #      - name: Set up JDK
 #        uses: actions/setup-java@v3
 #        with:
-#          java-version: 8
+#          java-version: 19
 #          distribution: 'zulu'
 #
 #      - name: Konsist Test
@@ -69,7 +69,7 @@ jobs:
 #      - name: Set up JDK
 #        uses: actions/setup-java@v3
 #        with:
-#          java-version: 8
+#          java-version: 19
 #          distribution: 'zulu'
 #
 #      - name: Integration Test
@@ -93,7 +93,7 @@ jobs:
 #      - name: Set up JDK
 #        uses: actions/setup-java@v3
 #        with:
-#          java-version: 8
+#          java-version: 19
 #          distribution: 'zulu'
 #
 #      - name: Spotless
@@ -112,7 +112,7 @@ jobs:
 #      - name: Set up JDK
 #        uses: actions/setup-java@v3
 #        with:
-#          java-version: 8
+#          java-version: 19
 #          distribution: 'zulu'
 #
 #      - name: Detekt
@@ -136,7 +136,7 @@ jobs:
 #      - name: Set up JDK
 #        uses: actions/setup-java@v3
 #        with:
-#          java-version: 8
+#          java-version: 19
 #          distribution: 'zulu'
 #
 #      - name: Set up Python
@@ -168,7 +168,7 @@ jobs:
 #      - name: Set up JDK
 #        uses: actions/setup-java@v3
 #        with:
-#          java-version: 8
+#          java-version: 19
 #          distribution: 'zulu'
 #
 #      - name: Dokka Generate Html Doc
@@ -192,7 +192,7 @@ jobs:
 #      - name: Set up JDK
 #        uses: actions/setup-java@v3
 #        with:
-#          java-version: 8
+#          java-version: 19
 #          distribution: 'zulu'
 #
 #      - name: Publish
@@ -223,7 +223,7 @@ jobs:
 #      - name: Set up JDK
 #        uses: actions/setup-java@v3
 #        with:
-#          java-version: 8
+#          java-version: 19
 #          distribution: 'zulu'
 #
 #      - name: Publish
@@ -254,7 +254,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: 8
+          java-version: 19
           distribution: 'zulu'
 
       - name: Display javaToolchains
@@ -292,7 +292,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: 8
+          java-version: 19
           distribution: 'zulu'
 
       - name: Set up JDK
