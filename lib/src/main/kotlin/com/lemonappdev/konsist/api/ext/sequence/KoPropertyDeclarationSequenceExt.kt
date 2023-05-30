@@ -189,7 +189,7 @@ fun Sequence<KoPropertyDeclaration>.withoutDelegate(vararg names: String): Seque
  * @param types The type(s) to include.
  * @return A sequence containing properties that have the specified type (or any type if [types] is empty).
  */
-fun Sequence<KoPropertyDeclaration>.withType(vararg types: String): Sequence<KoPropertyDeclaration> = filter {
+fun Sequence<KoPropertyDeclaration>.withRepresentedType(vararg types: String): Sequence<KoPropertyDeclaration> = filter {
     when {
         types.isEmpty() -> it.hasType()
         else -> types.any { type -> it.hasType(type) }
@@ -202,7 +202,7 @@ fun Sequence<KoPropertyDeclaration>.withType(vararg types: String): Sequence<KoP
  * @param types The type(s) to exclude.
  * @return A sequence containing properties that don't have the specified type (or none type if [types] is empty).
  */
-fun Sequence<KoPropertyDeclaration>.withoutType(vararg types: String): Sequence<KoPropertyDeclaration> = filter {
+fun Sequence<KoPropertyDeclaration>.withoutRepresentedType(vararg types: String): Sequence<KoPropertyDeclaration> = filter {
     when {
         types.isEmpty() -> !it.hasType()
         else -> types.none { type -> it.hasType(type) }
@@ -215,7 +215,7 @@ fun Sequence<KoPropertyDeclaration>.withoutType(vararg types: String): Sequence<
  * @param types The Kotlin class(es) representing the type(s) to include.
  * @return A sequence containing properties that have the type of the specified Kotlin class(es).
  */
-fun Sequence<KoPropertyDeclaration>.withTypeOf(vararg types: KClass<*>): Sequence<KoPropertyDeclaration> = filter {
+fun Sequence<KoPropertyDeclaration>.withRepresentedTypeOf(vararg types: KClass<*>): Sequence<KoPropertyDeclaration> = filter {
     types.any { kClass -> it.type?.name == kClass.simpleName }
 }
 
@@ -225,7 +225,7 @@ fun Sequence<KoPropertyDeclaration>.withTypeOf(vararg types: KClass<*>): Sequenc
  * @param types The Kotlin class(es) representing the type(s) to exclude.
  * @return A sequence containing properties that don't have the type of the specified Kotlin class(es).
  */
-fun Sequence<KoPropertyDeclaration>.withoutTypeOf(vararg types: KClass<*>): Sequence<KoPropertyDeclaration> = filter {
+fun Sequence<KoPropertyDeclaration>.withoutRepresentedTypeOf(vararg types: KClass<*>): Sequence<KoPropertyDeclaration> = filter {
     types.none { kClass -> it.type?.name == kClass.simpleName }
 }
 
@@ -234,7 +234,7 @@ fun Sequence<KoPropertyDeclaration>.withoutTypeOf(vararg types: KClass<*>): Sequ
  *
  * @return A sequence containing properties that have the specified type.
  */
-inline fun <reified T> Sequence<KoPropertyDeclaration>.withTypeOf(): Sequence<KoPropertyDeclaration> =
+inline fun <reified T> Sequence<KoPropertyDeclaration>.withRepresentedTypeOf(): Sequence<KoPropertyDeclaration> =
     filter { T::class.simpleName == it.type?.name }
 
 /**
@@ -242,5 +242,5 @@ inline fun <reified T> Sequence<KoPropertyDeclaration>.withTypeOf(): Sequence<Ko
  *
  * @return A sequence containing properties that don't have the specified type.
  */
-inline fun <reified T> Sequence<KoPropertyDeclaration>.withoutTypeOf(): Sequence<KoPropertyDeclaration> =
+inline fun <reified T> Sequence<KoPropertyDeclaration>.withoutRepresentedTypeOf(): Sequence<KoPropertyDeclaration> =
     filterNot { T::class.simpleName == it.type?.name }

@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
  * @param types The types to include.
  * @return A sequence containing annotations with the specified types.
  */
-fun Sequence<KoAnnotationDeclaration>.withType(vararg types: String): Sequence<KoAnnotationDeclaration> = filter {
+fun Sequence<KoAnnotationDeclaration>.withRepresentedType(vararg types: String): Sequence<KoAnnotationDeclaration> = filter {
     types.any { type -> it.representsType(type) }
 }
 
@@ -20,7 +20,7 @@ fun Sequence<KoAnnotationDeclaration>.withType(vararg types: String): Sequence<K
  * @param types The types to exclude.
  * @return A sequence containing annotations without the specified types.
  */
-fun Sequence<KoAnnotationDeclaration>.withoutType(vararg types: String): Sequence<KoAnnotationDeclaration> = filter {
+fun Sequence<KoAnnotationDeclaration>.withoutRepresentedType(vararg types: String): Sequence<KoAnnotationDeclaration> = filter {
     types.none { type -> it.representsType(type) }
 }
 
@@ -30,7 +30,7 @@ fun Sequence<KoAnnotationDeclaration>.withoutType(vararg types: String): Sequenc
  * @param types The Kotlin classes representing the types to include.
  * @return A sequence containing annotations with types matching the specified Kotlin classes.
  */
-fun Sequence<KoAnnotationDeclaration>.withTypeOf(vararg types: KClass<*>): Sequence<KoAnnotationDeclaration> = filter {
+fun Sequence<KoAnnotationDeclaration>.withRepresentedTypeOf(vararg types: KClass<*>): Sequence<KoAnnotationDeclaration> = filter {
     types.any { type ->
         type
             .qualifiedName
@@ -45,7 +45,7 @@ fun Sequence<KoAnnotationDeclaration>.withTypeOf(vararg types: KClass<*>): Seque
  * @param types The Kotlin classes representing the types to exclude.
  * @return A sequence containing annotations without types matching the specified Kotlin classes.
  */
-fun Sequence<KoAnnotationDeclaration>.withoutTypeOf(vararg types: KClass<*>): Sequence<KoAnnotationDeclaration> = filter {
+fun Sequence<KoAnnotationDeclaration>.withoutRepresentedTypeOf(vararg types: KClass<*>): Sequence<KoAnnotationDeclaration> = filter {
     types.none { type ->
         type
             .qualifiedName
@@ -59,7 +59,7 @@ fun Sequence<KoAnnotationDeclaration>.withoutTypeOf(vararg types: KClass<*>): Se
  *
  * @return A sequence containing annotations with types matching the specified reified type parameter.
  */
-inline fun <reified T> Sequence<KoAnnotationDeclaration>.withTypeOf(): Sequence<KoAnnotationDeclaration> =
+inline fun <reified T> Sequence<KoAnnotationDeclaration>.withRepresentedTypeOf(): Sequence<KoAnnotationDeclaration> =
     filter { it.representsTypeOf<T>() }
 
 /**
@@ -67,7 +67,7 @@ inline fun <reified T> Sequence<KoAnnotationDeclaration>.withTypeOf(): Sequence<
  *
  * @return A sequence containing annotations without types matching the specified reified type parameter.
  */
-inline fun <reified T> Sequence<KoAnnotationDeclaration>.withoutTypeOf(): Sequence<KoAnnotationDeclaration> =
+inline fun <reified T> Sequence<KoAnnotationDeclaration>.withoutRepresentedTypeOf(): Sequence<KoAnnotationDeclaration> =
     filterNot { it.representsTypeOf<T>() }
 
 /**
