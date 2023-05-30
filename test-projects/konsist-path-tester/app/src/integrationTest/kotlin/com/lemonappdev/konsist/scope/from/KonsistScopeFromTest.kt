@@ -249,4 +249,15 @@ class KonsistScopeFromTest {
             ).toNormalizedPaths(),
         )
     }
+
+    @Test
+    fun `scopeFromTest, root module`() {
+        // given
+        val sut = Konsist
+            .scopeFromTest(moduleName = "root")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(emptyList())
+    }
 }

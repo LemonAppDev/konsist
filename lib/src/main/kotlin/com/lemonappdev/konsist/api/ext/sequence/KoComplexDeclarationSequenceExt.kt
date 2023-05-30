@@ -16,7 +16,7 @@ import kotlin.reflect.KClass
  * @param types The type(s) to include.
  * @return A sequence containing declarations that represent the specified type(s).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withType(vararg types: String): Sequence<T> = filter {
+fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedType(vararg types: String): Sequence<T> = filter {
     types.any { type -> it.representsType(type) }
 }
 
@@ -26,7 +26,7 @@ fun <T : KoComplexDeclaration> Sequence<T>.withType(vararg types: String): Seque
  * @param types The type(s) to exclude.
  * @return A sequence containing declarations that don't represent the specified type(s).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withoutType(vararg types: String): Sequence<T> = filter {
+fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedType(vararg types: String): Sequence<T> = filter {
     types.none { type -> it.representsType(type) }
 }
 
@@ -36,7 +36,7 @@ fun <T : KoComplexDeclaration> Sequence<T>.withoutType(vararg types: String): Se
  * @param types The Kotlin class(es) representing the type(s) to include.
  * @return A sequence containing declarations that have the type of the specified class(es).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.any { type ->
         type
             .qualifiedName
@@ -50,7 +50,7 @@ fun <T : KoComplexDeclaration> Sequence<T>.withTypeOf(vararg types: KClass<*>): 
  * @param types The Kotlin class(es) representing the type(s) to exclude.
  * @return A sequence containing declarations that don't have the type of the specified class(es).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withoutTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.none { type ->
         type
             .qualifiedName
@@ -63,14 +63,16 @@ fun <T : KoComplexDeclaration> Sequence<T>.withoutTypeOf(vararg types: KClass<*>
  *
  * @return A sequence containing declarations that have the type of the specified class.
  */
-inline fun <reified T> Sequence<KoComplexDeclaration>.withTypeOf(): Sequence<KoComplexDeclaration> = filter { it.representsTypeOf<T>() }
+inline fun <reified T> Sequence<KoComplexDeclaration>.withRepresentedTypeOf(): Sequence<KoComplexDeclaration> = filter {
+    it.representsTypeOf<T>()
+}
 
 /**
  * Sequence containing declarations that don't have the type of.
  *
  * @return A sequence containing declarations that don't have the type of the specified class.
  */
-inline fun <reified T> Sequence<KoComplexDeclaration>.withoutTypeOf(): Sequence<KoComplexDeclaration> =
+inline fun <reified T> Sequence<KoComplexDeclaration>.withoutRepresentedTypeOf(): Sequence<KoComplexDeclaration> =
     filterNot { it.representsTypeOf<T>() }
 
 /**

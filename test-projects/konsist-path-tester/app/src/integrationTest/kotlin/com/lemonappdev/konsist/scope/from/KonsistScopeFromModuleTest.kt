@@ -3,10 +3,12 @@ package com.lemonappdev.konsist.scope.from
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.ext.toNormalizedPaths
+import com.lemonappdev.konsist.helper.util.PathProvider
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -62,6 +64,23 @@ class KonsistScopeFromModuleTest {
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toNormalizedPaths(),
+        )
+    }
+
+    @Test
+    fun `scopeFromModule for root module`() {
+        // given
+        val sut = Konsist
+            .scopeFromModule("root")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+            ),
         )
     }
 

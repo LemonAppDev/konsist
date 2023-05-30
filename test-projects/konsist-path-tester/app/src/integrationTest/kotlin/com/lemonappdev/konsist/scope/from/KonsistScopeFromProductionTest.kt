@@ -107,6 +107,40 @@ class KonsistScopeFromProductionTest {
     }
 
     @Test
+    fun `scopeFromProduction, root module`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction(moduleName = "root")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProduction, root module, main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction(moduleName = "root", sourceSetName = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+            ),
+        )
+    }
+
+    @Test
     fun `scopeFromProduction, app module, integrationTest source set`() {
         // given
         val func = { Konsist.scopeFromProduction(moduleName = "app", sourceSetName = "integrationTest") }

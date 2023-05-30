@@ -85,17 +85,12 @@ interface KoPsiDeclaration {
      * Whatever declaration reside in file path.
      *
      * @param path the file path to check.
+     * @param absolutePath Flag indicating whether the provided path is an absolute path.
+     *                    If set to `true`, the `path` parameter represents an absolute path.
+     *                    If set to `false` (default), the `path` parameter represents a relative path.
      * @return `true` if the declaration resides in the specified file path, `false` otherwise.
      */
-    fun resideInFilePath(path: String): Boolean
-
-    /**
-     * Whatever declaration reside in project file path.
-     *
-     * @param path the project file path to check.
-     * @return `true` if the declaration resides in the specified project file path, `false` otherwise.
-     */
-    fun resideInProjectFilePath(path: String): Boolean
+    fun resideInFilePath(path: String, absolutePath: Boolean = false): Boolean
 
     /**
      * Print declaration.

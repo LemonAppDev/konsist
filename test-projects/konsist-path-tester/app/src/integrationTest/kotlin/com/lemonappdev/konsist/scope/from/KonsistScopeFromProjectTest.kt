@@ -121,6 +121,23 @@ class KonsistScopeFromProjectTest {
     }
 
     @Test
+    fun `scopeFromProject for root module`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(moduleName = "root")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+            ),
+        )
+    }
+
+    @Test
     fun `scopeFromProject for main source set`() {
         // given
         val sut = Konsist
@@ -292,6 +309,23 @@ class KonsistScopeFromProjectTest {
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toNormalizedPaths(),
+        )
+    }
+
+    @Test
+    fun `scopeFromProject for root module and main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProject(moduleName = "root", sourceSetName = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+            ),
         )
     }
 }

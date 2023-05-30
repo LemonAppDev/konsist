@@ -59,7 +59,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             return localProjectKotlinFiles
         }
 
-        var pathPrefix = if (moduleName != null) {
+        var pathPrefix = if (moduleName == ROOT_MODULE_NAME) {
+            projectRootPath
+        } else if (moduleName != null) {
             "$projectRootPath/$moduleName"
         } else {
             "$projectRootPath.*"
@@ -173,5 +175,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     companion object {
         private const val TEST_NAME_IN_PATH = "test"
+        private const val ROOT_MODULE_NAME = "root"
     }
 }

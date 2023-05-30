@@ -16,10 +16,10 @@ class KoPsiDeclarationForResideInTest {
 
         // then
         assertSoftly(sut) {
-            resideInFilePath("..snippet..") shouldBeEqualTo true
-            resideInFilePath("..kopsideclaration${sep}snippet..") shouldBeEqualTo true
-            resideInFilePath("..kopsideclaration..reside-in-file-path.kt") shouldBeEqualTo true
-            resideInFilePath("kopsideclaration${sep}snippet$sep") shouldBeEqualTo false
+            resideInFilePath("..snippet..", true) shouldBeEqualTo true
+            resideInFilePath("..kopsideclaration/snippet..", true) shouldBeEqualTo true
+            resideInFilePath("..kopsideclaration..reside-in-file-path.kt", true) shouldBeEqualTo true
+            resideInFilePath("kopsideclaration/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -32,10 +32,10 @@ class KoPsiDeclarationForResideInTest {
 
         // then
         assertSoftly(sut) {
-            resideInProjectFilePath("..snippet..") shouldBeEqualTo true
-            resideInProjectFilePath("..kopsideclaration${sep}snippet..") shouldBeEqualTo true
-            resideInProjectFilePath("..kopsideclaration..reside-in-project-file-path.kt") shouldBeEqualTo true
-            resideInProjectFilePath("kopsideclaration${sep}snippet$sep") shouldBeEqualTo false
+            resideInFilePath("..snippet..", false) shouldBeEqualTo true
+            resideInFilePath("..kopsideclaration/snippet..", false) shouldBeEqualTo true
+            resideInFilePath("..kopsideclaration..reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            resideInFilePath("kopsideclaration/snippet/", false) shouldBeEqualTo false
         }
     }
 
