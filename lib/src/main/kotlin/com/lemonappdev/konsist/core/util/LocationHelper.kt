@@ -10,7 +10,7 @@ object LocationHelper {
      */
     fun resideInLocation(desiredLocation: String, currentLocation: String): Boolean {
         require(desiredLocation.isNotEmpty()) { "Location name is empty" }
-        require(desiredLocation != ".") { "Incorrect location selector format: $desiredLocation" }
+        require(desiredLocation != ".") { "Incorrect location format: $desiredLocation" }
 
         val regexAnyNumberOfCharacters = ".*"
 
