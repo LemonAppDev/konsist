@@ -111,22 +111,22 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         verifyPropertySetterTag: Boolean,
         verifyPropertyGetterTag: Boolean,
     ): Boolean = hasKDoc() &&
-            hasValidDescription(verifyDescription) &&
-            hasValidParamTag(verifyParamTag) &&
-            hasValidReturnTag(verifyReturnTag) &&
-            hasValidConstructorTag(verifyConstructorTag) &&
-            hasValidReceiverTag(verifyReceiverTag) &&
-            hasValidPropertyTag(verifyPropertyTag) &&
-            hasValidThrowsTag(verifyThrowsTag) &&
-            hasValidExceptionTag(verifyExceptionTag) &&
-            hasValidSampleTag(verifySampleTag) &&
-            hasValidSeeTag(verifySeeTag) &&
-            hasValidAuthorTag(verifyAuthorTag) &&
-            hasValidSinceTag(verifySinceTag) &&
-            hasValidSuppressTag(verifySuppressTag) &&
-            hasValidVersionTag(verifyVersionTag) &&
-            hasValidPropertySetterTag(verifyPropertySetterTag) &&
-            hasValidPropertyGetterTag(verifyPropertyGetterTag)
+        hasValidDescription(verifyDescription) &&
+        hasValidParamTag(verifyParamTag) &&
+        hasValidReturnTag(verifyReturnTag) &&
+        hasValidConstructorTag(verifyConstructorTag) &&
+        hasValidReceiverTag(verifyReceiverTag) &&
+        hasValidPropertyTag(verifyPropertyTag) &&
+        hasValidThrowsTag(verifyThrowsTag) &&
+        hasValidExceptionTag(verifyExceptionTag) &&
+        hasValidSampleTag(verifySampleTag) &&
+        hasValidSeeTag(verifySeeTag) &&
+        hasValidAuthorTag(verifyAuthorTag) &&
+        hasValidSinceTag(verifySinceTag) &&
+        hasValidSuppressTag(verifySuppressTag) &&
+        hasValidVersionTag(verifyVersionTag) &&
+        hasValidPropertySetterTag(verifyPropertySetterTag) &&
+        hasValidPropertyGetterTag(verifyPropertyGetterTag)
 
     override fun resideInFilePath(path: String, absolutePath: Boolean): Boolean = if (absolutePath) {
         LocationHelper.resideInLocation(path, filePath)
