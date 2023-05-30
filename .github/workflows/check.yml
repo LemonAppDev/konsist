@@ -292,7 +292,9 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: 8 19
+          java-version: |
+            8 
+            19
           distribution: 'zulu'
 
       - name: Display javaToolchains
@@ -306,6 +308,7 @@ jobs:
           -P konsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
           -P konsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
           -P konsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
+
       - name: Run Assemble
         run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew assemble
 
