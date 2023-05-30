@@ -17,16 +17,16 @@ class KoPsiDeclarationForFilePathSequenceExtTest {
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
         val psiDeclaration1: KoPsiDeclarationImpl = mockk {
-            every { resideInFilePath(path1) } returns true
-            every { resideInFilePath(path2) } returns true
+            every { resideInFilePath(path1, true) } returns true
+            every { resideInFilePath(path2, true) } returns true
         }
         val psiDeclaration2: KoPsiDeclarationImpl = mockk {
-            every { resideInFilePath(path1) } returns false
-            every { resideInFilePath(path2) } returns true
+            every { resideInFilePath(path1, true) } returns false
+            every { resideInFilePath(path2, true) } returns true
         }
         val psiDeclaration3: KoPsiDeclarationImpl = mockk {
-            every { resideInFilePath(path1) } returns false
-            every { resideInFilePath(path2) } returns false
+            every { resideInFilePath(path1, true) } returns false
+            every { resideInFilePath(path2, true) } returns false
         }
         val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2, psiDeclaration3)
 
@@ -43,16 +43,16 @@ class KoPsiDeclarationForFilePathSequenceExtTest {
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
         val psiDeclaration1: KoPsiDeclarationImpl = mockk {
-            every { resideInFilePath(path1) } returns true
-            every { resideInFilePath(path2) } returns true
+            every { resideInFilePath(path1, true) } returns true
+            every { resideInFilePath(path2, true) } returns true
         }
         val psiDeclaration2: KoPsiDeclarationImpl = mockk {
-            every { resideInFilePath(path1) } returns false
-            every { resideInFilePath(path2) } returns true
+            every { resideInFilePath(path1, true) } returns false
+            every { resideInFilePath(path2, true) } returns true
         }
         val psiDeclaration3: KoPsiDeclarationImpl = mockk {
-            every { resideInFilePath(path1) } returns false
-            every { resideInFilePath(path2) } returns false
+            every { resideInFilePath(path1, true) } returns false
+            every { resideInFilePath(path2, true) } returns false
         }
         val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2, psiDeclaration3)
 
@@ -69,16 +69,16 @@ class KoPsiDeclarationForFilePathSequenceExtTest {
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
         val psiDeclaration1: KoPsiDeclarationImpl = mockk {
-            every { resideInProjectFilePath(projectPath1) } returns true
-            every { resideInProjectFilePath(projectPath2) } returns true
+            every { resideInFilePath(projectPath1, false) } returns true
+            every { resideInFilePath(projectPath2, false) } returns true
         }
         val psiDeclaration2: KoPsiDeclarationImpl = mockk {
-            every { resideInProjectFilePath(projectPath1) } returns false
-            every { resideInProjectFilePath(projectPath2) } returns true
+            every { resideInFilePath(projectPath1, false) } returns false
+            every { resideInFilePath(projectPath2, false) } returns true
         }
         val psiDeclaration3: KoPsiDeclarationImpl = mockk {
-            every { resideInProjectFilePath(projectPath1) } returns false
-            every { resideInProjectFilePath(projectPath2) } returns false
+            every { resideInFilePath(projectPath1, false) } returns false
+            every { resideInFilePath(projectPath2, false) } returns false
         }
         val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2, psiDeclaration3)
 
@@ -95,16 +95,16 @@ class KoPsiDeclarationForFilePathSequenceExtTest {
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
         val psiDeclaration1: KoPsiDeclarationImpl = mockk {
-            every { resideInProjectFilePath(projectPath1) } returns true
-            every { resideInProjectFilePath(projectPath2) } returns true
+            every { resideInFilePath(projectPath1, false) } returns true
+            every { resideInFilePath(projectPath2, false) } returns true
         }
         val psiDeclaration2: KoPsiDeclarationImpl = mockk {
-            every { resideInProjectFilePath(projectPath1) } returns false
-            every { resideInProjectFilePath(projectPath2) } returns true
+            every { resideInFilePath(projectPath1, false) } returns false
+            every { resideInFilePath(projectPath2, false) } returns true
         }
         val psiDeclaration3: KoPsiDeclarationImpl = mockk {
-            every { resideInProjectFilePath(projectPath1) } returns false
-            every { resideInProjectFilePath(projectPath2) } returns false
+            every { resideInFilePath(projectPath1, false) } returns false
+            every { resideInFilePath(projectPath2, false) } returns false
         }
         val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2, psiDeclaration3)
 

@@ -170,7 +170,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutKDocWithTags(vararg tags: KoKDocTa
  * @return A sequence containing declarations that reside in any of the specified paths.
  */
 fun <T : KoPsiDeclaration> Sequence<T>.withFilePath(vararg paths: String): Sequence<T> = filter {
-    paths.any { path -> it.resideInFilePath(path) }
+    paths.any { path -> it.resideInFilePath(path, true) }
 }
 
 /**
@@ -180,7 +180,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withFilePath(vararg paths: String): Seque
  * @return A sequence containing declarations that don't reside in any of the specified paths.
  */
 fun <T : KoPsiDeclaration> Sequence<T>.withoutFilePath(vararg paths: String): Sequence<T> = filter {
-    paths.none { path -> it.resideInFilePath(path) }
+    paths.none { path -> it.resideInFilePath(path, true) }
 }
 
 /**
@@ -190,7 +190,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutFilePath(vararg paths: String): Se
  * @return A sequence containing declarations that reside in any of the specified project paths.
  */
 fun <T : KoPsiDeclaration> Sequence<T>.withProjectFilePath(vararg paths: String): Sequence<T> = filter {
-    paths.any { path -> it.resideInProjectFilePath(path) }
+    paths.any { path -> it.resideInFilePath(path, false) }
 }
 
 /**
@@ -200,5 +200,5 @@ fun <T : KoPsiDeclaration> Sequence<T>.withProjectFilePath(vararg paths: String)
  * @return A sequence containing declarations that don't reside in any of the specified project paths.
  */
 fun <T : KoPsiDeclaration> Sequence<T>.withoutProjectFilePath(vararg paths: String): Sequence<T> = filter {
-    paths.none { path -> it.resideInProjectFilePath(path) }
+    paths.none { path -> it.resideInFilePath(path, false) }
 }
