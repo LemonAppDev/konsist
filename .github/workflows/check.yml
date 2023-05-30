@@ -303,6 +303,7 @@ jobs:
       - name: Publish
         run: >
           ./gradlew publishToMavenLocal
+          -i
           -P konsist.releaseTarget=local
           -P konsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
           -P konsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
