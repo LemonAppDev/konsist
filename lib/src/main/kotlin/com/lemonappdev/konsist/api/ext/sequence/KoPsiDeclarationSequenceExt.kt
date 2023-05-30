@@ -167,21 +167,40 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutKDocWithTags(vararg tags: KoKDocTa
  * Sequence containing declarations that have file path.
  *
  * @param paths The paths to include.
- * @return A sequence containing declarations that reside in any of the specified paths.
+ * @param absolutePath Determines whether the file paths should be treated as absolute paths. By default, false.
+ * @return A sequence containing declarations that reside in any of the specified file paths.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withFilePath(vararg paths: String): Sequence<T> = filter {
-    paths.any { path -> it.resideInFilePath(path, true) }
+fun <T : KoPsiDeclaration> Sequence<T>.withFilePath(vararg paths: String, absolutePath: Boolean = false): Sequence<T> = filter {
+    paths.any { path -> it.resideInFilePath(path, absolutePath) }
 }
 
 /**
  * Sequence containing declarations that don't have file path.
  *
  * @param paths The paths to exclude.
- * @return A sequence containing declarations that don't reside in any of the specified paths.
+ * @param absolutePath Determines whether the file paths should be treated as absolute paths. By default, false.
+ * @return A sequence containing declarations that don't reside in any of the specified file paths.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withoutFilePath(vararg paths: String): Sequence<T> = filter {
-    paths.none { path -> it.resideInFilePath(path, true) }
+fun <T : KoPsiDeclaration> Sequence<T>.withoutFilePath(vararg paths: String, absolutePath: Boolean = false): Sequence<T> = filter {
+    paths.none { path -> it.resideInFilePath(path, absolutePath) }
 }
+
+/**
+ * Sequence containing declarations that have absolute file path.
+ *
+ * @param paths The absolute paths to include.
+ * @return A sequence containing declarations that reside in any of the specified absolute paths.
+ */
+fun <T : KoPsiDeclaration> Sequence<T>.withAbsoluteFilePath(vararg paths: String): Sequence<T> = withFilePath(*paths, absolutePath = true)
+
+/**
+ * Sequence containing declarations that don't have absolute file path.
+ *
+ * @param paths The absolute paths to exclude.
+ * @return A sequence containing declarations that don't reside in any of the specified absolute paths.
+ */
+fun <T : KoPsiDeclaration> Sequence<T>.withoutAbsoluteFilePath(vararg paths: String): Sequence<T> =
+    withoutFilePath(*paths, absolutePath = true)
 
 /**
  * Sequence containing declarations that have project file path.
@@ -189,9 +208,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutFilePath(vararg paths: String): Se
  * @param paths The project paths to include.
  * @return A sequence containing declarations that reside in any of the specified project paths.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withProjectFilePath(vararg paths: String): Sequence<T> = filter {
-    paths.any { path -> it.resideInFilePath(path, false) }
-}
+fun <T : KoPsiDeclaration> Sequence<T>.withProjectFilePath(vararg paths: String): Sequence<T> = withFilePath(*paths, absolutePath = false)
 
 /**
  * Sequence containing declarations that don't have project file path.
@@ -199,6 +216,5 @@ fun <T : KoPsiDeclaration> Sequence<T>.withProjectFilePath(vararg paths: String)
  * @param paths The project paths to exclude.
  * @return A sequence containing declarations that don't reside in any of the specified project paths.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withoutProjectFilePath(vararg paths: String): Sequence<T> = filter {
-    paths.none { path -> it.resideInFilePath(path, false) }
-}
+fun <T : KoPsiDeclaration> Sequence<T>.withoutProjectFilePath(vararg paths: String): Sequence<T> =
+    withoutFilePath(*paths, absolutePath = false)
