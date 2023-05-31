@@ -2,8 +2,7 @@ package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
-import com.lemonappdev.konsist.helper.ext.toNormalizedPaths
-import com.lemonappdev.konsist.helper.util.PathProvider
+import com.lemonappdev.konsist.helper.ext.toCanonicalPathss
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
@@ -44,7 +43,7 @@ class KonsistScopeFromModuleTest {
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-            ).toNormalizedPaths(),
+            ).toCanonicalPathss(),
         )
     }
 
@@ -63,7 +62,7 @@ class KonsistScopeFromModuleTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-            ).toNormalizedPaths(),
+            ).toCanonicalPathss(),
         )
     }
 
@@ -120,7 +119,7 @@ class KonsistScopeFromModuleTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-            ).toNormalizedPaths(),
+            ).toCanonicalPathss(),
         )
     }
 }
