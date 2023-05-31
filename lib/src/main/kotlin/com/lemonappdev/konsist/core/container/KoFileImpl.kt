@@ -120,11 +120,9 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
 
     override fun hasAnnotations(vararg names: String): Boolean = when {
         names.isEmpty() -> annotations.isNotEmpty()
-        else -> names.all { hasAnnotationNameOrAnnotationFullyQualifyName(it) }
-    }
-
-    private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String): Boolean = annotations.any {
-        it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name
+        else -> names.all {
+            annotations.any { annotation -> annotation.representsType(it) }
+        }
     }
 
     override fun hasAnnotationsOf(vararg names: KClass<*>): Boolean = names.all {
