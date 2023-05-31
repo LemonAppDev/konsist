@@ -74,9 +74,7 @@ internal abstract class KoDeclarationImpl(
     override fun hasAnnotations(vararg names: String): Boolean = when {
         names.isEmpty() -> annotations.isNotEmpty()
         else -> names.all {
-            annotations.any { annotation ->
-                annotation.fullyQualifiedName.substringAfterLast(".") == it || annotation.fullyQualifiedName == it
-            }
+            annotations.any { annotation -> annotation.representsType(it) }
         }
     }
 
