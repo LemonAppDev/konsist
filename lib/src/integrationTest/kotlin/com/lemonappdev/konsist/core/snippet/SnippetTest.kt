@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.core.snippet
 
-import kotlin.system.measureTimeMillis
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
+import java.io.InputStreamReader
 
 class SnippetTest {
     @Test
@@ -47,13 +47,13 @@ class SnippetTest {
         // given
         val map = mutableMapOf<File, String>()
 
-        val filePaths = File("/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/..")
+        val filePaths = File("src/integrationTest/..")
             .walk()
-            .filter { it.isFile && it.name.endsWith(".kttxt") }
+            .filter { it.isKotlinSnippetFile }
 
-        val texts = File("/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/..")
+        val texts = File("src/integrationTest/..")
             .walk()
-            .filter { it.isFile && it.name.endsWith(".kttxt") }
+            .filter { it.isKotlinSnippetFile }
             .map { it.readText() }
             .toList()
 
@@ -67,7 +67,7 @@ class SnippetTest {
     }
 
     private fun snippetNamesFromFiles(regex: Regex, prefix: String, suffix: String) =
-        File("../")
+        File("src/integrationTest/..")
             .walk()
             .filter { it.isKotlinNotSnippetFile }
             .map { it.readText() }
@@ -80,46 +80,58 @@ class SnippetTest {
         var counter = 0
         val commands1 = listOf(
             "kotlinc",
-            "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/testdata/TestData.kt",
+            File("src/integrationTest/kotlin/com/lemonappdev/konsist/testdata/TestData.kt").absolutePath,
             "-include-runtime",
             "-d",
-            "test.jar"
+            "test.jar",
         )
+
         val builder = ProcessBuilder(commands1)
         builder.redirectErrorStream(true)
 
         val process1 = builder.start().waitFor()
+        require(process1 == 0) {"TestData is invalid file."}
 
-        if(process1 == 0){
-            map.forEach {
-                val file = it.key.copyTo(File("/Users/natalia/IdeaProjects/konsist/lib/build/snippet-test/test-snippet.kt"))
+        val file = File("build/snippet-test.test-snippet.kt")
 
-                val command2 = listOf(
-                    "kotlinc",
-                    "-cp",
-                    "test.jar",
-                    file.absolutePath
-                )
+        map.forEach {
+            file.writeText(it.value)
 
-                try {
-                    val processBuilder = ProcessBuilder(command2)
-                    val process = processBuilder.start()
+            val command2 = listOf(
+                "kotlinc",
+                "-cp",
+                "test.jar",
+                "-nowarn",
+                file.absolutePath,
+            )
 
-                    val errorOutput = process.errorStream.bufferedReader().use { reader -> reader.readText() }
-                    if (errorOutput.isNotEmpty()) {
-                        counter++
-                        println(it.key)
-                    }
-                } catch (e: IOException) {
-                    e.printStackTrace()
+            try {
+                val processBuilder = ProcessBuilder(command2)
+                processBuilder.redirectErrorStream(false)
+                val process = processBuilder.start()
+
+                val errorReader = BufferedReader(InputStreamReader(process.errorStream))
+                val errorOutput = errorReader.readText()
+                if (errorOutput.isNotEmpty()) {
                     counter++
-                    println(it.key)
+                    println("${it.key} \n $errorOutput")
                 }
-                file.delete()
+            } catch (e: IOException) {
+                e.printStackTrace()
+                println(it.key)
             }
-        } else {
-            counter = -1
+
+            file.delete()
+
+            File("com/").deleteRecursively()
+            File("META-INF/").deleteRecursively()
         }
+
+        ProcessBuilder(
+            "git",
+            "clean",
+            "-f",
+        ).start()
 
         return counter
     }
@@ -128,35 +140,4 @@ class SnippetTest {
         private val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(".kttxt")
         private val File.isKotlinNotSnippetFile: Boolean get() = isFile && !name.endsWith(".kttxt")
     }
-
-
-    /*
-    private fun validateKotlinCode(map: Map<String, String>): Int {
-        var counter = 0
-        val file = File("snippet test.kt")
-
-        map.forEach {
-            file.writeText(it.value)
-
-            try {
-                val processBuilder = ProcessBuilder("kotlinc", file.path)
-                val process = processBuilder.start()
-
-                val errorOutput = process.errorStream.bufferedReader().use { reader -> reader.readText() }
-                if (errorOutput.isNotEmpty()) {
-                    counter++
-                    println(it.key)
-                }
-            } catch (e: IOException) {
-                e.printStackTrace()
-                counter++
-                println(it.key)
-            }
-            file.writeText("")
-        }
-
-        file.delete()
-        return counter
-    }
-     */
 }
