@@ -82,7 +82,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             require(!isTestSourceSet(it)) { "Source set '$it' is a test source set, but it should be production source set." }
         }
 
-        val koFiles = getFiles(moduleName, sourceSetName).filterNot { it.isTestFile() }
+        val koFiles = getFiles(moduleName, sourceSetName)
+            .filterNot { isTestSourceSet(it.sourceSetName) }
 
         return KoScopeImpl(koFiles)
     }
@@ -92,7 +93,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             require(isTestSourceSet(it)) { "Source set '$it' is a production source set, but it should be test source set." }
         }
 
-        val koFiles = getFiles(moduleName, sourceSetName).filter { it.isTestFile() }
+        val koFiles = getFiles(moduleName, sourceSetName)
+            .filter { isTestSourceSet(it.sourceSetName) }
 
         return KoScopeImpl(koFiles)
     }
@@ -148,19 +150,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             path.matches(mavenModuleBuildDirectoryRegex)
     }
 
-    private fun isTestPath(path: String): Boolean {
-        val lowercasePath = path.lowercase()
-        return lowercasePath.contains("$sep$TEST_NAME_IN_PATH") || lowercasePath.contains("$TEST_NAME_IN_PATH$sep")
-    }
-
     private fun isTestSourceSet(name: String): Boolean {
         val lowercaseName = name.lowercase()
         return lowercaseName.matches(Regex(".*$TEST_NAME_IN_PATH.*"))
-    }
-
-    private fun KoFile.isTestFile(): Boolean {
-        val path = path.substringAfter(pathProvider.rootProjectPath)
-        return isTestPath(path)
     }
 
     private fun KoFile.isBuildConfigFile(): Boolean {
