@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
+import com.lemonappdev.konsist.helper.ext.toNormalizedPaths
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
@@ -29,7 +30,7 @@ class KonsistScopeFromSourceSetTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -44,6 +45,7 @@ class KonsistScopeFromSourceSetTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/util/PathProvider.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/koclass/KoClassDeclarationForHasTestTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/kofile/KoFileForModuleName.kt",
@@ -61,7 +63,7 @@ class KonsistScopeFromSourceSetTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -78,7 +80,7 @@ class KonsistScopeFromSourceSetTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -102,7 +104,7 @@ class KonsistScopeFromSourceSetTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 }

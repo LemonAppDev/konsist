@@ -72,7 +72,7 @@ interface KoDeclaration : KoNamedDeclaration {
     /**
      * Whether the declaration has annotations.
      *
-     * @param names the names of the annotations to check.
+     * @param names the annotation names to check. It can be either a simple name or a fully qualified name.
      * @return `true` if the declaration has annotations with the specified names (or any annotation if [names] is empty),
      * `false` otherwise.
      */

@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
+import com.lemonappdev.konsist.helper.ext.toNormalizedPaths
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirectory
@@ -28,7 +29,7 @@ class KonsistScopeFromProductionTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -49,7 +50,7 @@ class KonsistScopeFromProductionTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -85,7 +86,7 @@ class KonsistScopeFromProductionTest {
             listOf(
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -101,6 +102,40 @@ class KonsistScopeFromProductionTest {
             listOf(
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+            ).toNormalizedPaths(),
+        )
+    }
+
+    @Test
+    fun `scopeFromProduction, root module`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction(moduleName = "root")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
+            ),
+        )
+    }
+
+    @Test
+    fun `scopeFromProduction, root module, main source set`() {
+        // given
+        val sut = Konsist
+            .scopeFromProduction(moduleName = "root", sourceSetName = "main")
+            .mapToFilePaths()
+
+        // then
+        sut.shouldBeEqualTo(
+            listOf(
+                "$rootMainSourceSetDirectory/sample/RootClass.kt",
+                "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
+                "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
             ),
         )
     }
@@ -137,7 +172,7 @@ class KonsistScopeFromProductionTest {
             listOf(
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 
@@ -153,7 +188,7 @@ class KonsistScopeFromProductionTest {
             listOf(
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-            ),
+            ).toNormalizedPaths(),
         )
     }
 

@@ -9,6 +9,9 @@ object LocationHelper {
      * This class cna be used with both file paths and packages.
      */
     fun resideInLocation(desiredLocation: String, currentLocation: String): Boolean {
+        require(desiredLocation.isNotEmpty()) { "Location name is empty" }
+        require(desiredLocation != ".") { "Incorrect location format: $desiredLocation" }
+
         val regexAnyNumberOfCharacters = ".*"
 
         val desiredPackageRegexString = desiredLocation

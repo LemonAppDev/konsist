@@ -111,6 +111,5 @@ class KoFileForNameAndExtensionTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/container/kofile/snippet/fornameandextension/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/kofile/snippet/fornameandextension/", fileName)
 }

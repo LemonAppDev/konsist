@@ -35,12 +35,12 @@ jobs:
           python-version: '3.11.3'
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: |
-          ./gradlew publishToMavenLocal \
-          -Pkonsist.releaseTarget=local \
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+        run: >
+          ./gradlew publishToMavenLocal
+          -Pkonsist.releaseTarget=local
+          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
+          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
@@ -74,12 +74,12 @@ jobs:
           python-version: '3.11.3'
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: |
-          ./gradlew publishToMavenLocal \
-          -Pkonsist.releaseTarget=local \
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+        run: >
+          ./gradlew publishToMavenLocal
+          -Pkonsist.releaseTarget=local
+          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
+          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
@@ -113,12 +113,12 @@ jobs:
           python-version: '3.11.3'
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: |
-          ./gradlew publishToMavenLocal \
-          -Pkonsist.releaseTarget=local \
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+        run: >
+          ./gradlew publishToMavenLocal
+          -Pkonsist.releaseTarget=local
+          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
+          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
@@ -152,12 +152,12 @@ jobs:
           python-version: '3.11.3'
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: |
-          ./gradlew publishToMavenLocal \
-          -Pkonsist.releaseTarget=local \
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+        run: >
+          ./gradlew publishToMavenLocal
+          -Pkonsist.releaseTarget=local
+          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
+          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
@@ -191,12 +191,12 @@ jobs:
           python-version: '3.11.3'
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: |
-          ./gradlew publishToMavenLocal \
-          -Pkonsist.releaseTarget=local \
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+        run: >
+          ./gradlew publishToMavenLocal
+          -Pkonsist.releaseTarget=local
+          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
+          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
@@ -230,12 +230,12 @@ jobs:
           python-version: '3.11.3'
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: |
-          ./gradlew publishToMavenLocal \
-          -Pkonsist.releaseTarget=local \
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+        run: >
+          ./gradlew publishToMavenLocal
+          -Pkonsist.releaseTarget=local
+          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
+          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
@@ -269,12 +269,12 @@ jobs:
           python-version: '3.11.3'
 
       - name: Publish Konsist Artifact To Local Maven Repository
-        run: |
-          ./gradlew publishToMavenLocal \
-          -Pkonsist.releaseTarget=local \
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}' \
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}' \
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}' \
+        run: >
+          ./gradlew publishToMavenLocal
+          -Pkonsist.releaseTarget=local
+          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
+          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
+          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
           -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository

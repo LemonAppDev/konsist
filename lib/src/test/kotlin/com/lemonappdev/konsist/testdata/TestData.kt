@@ -1,5 +1,5 @@
 package com.lemonappdev.konsist.testdata
-//
+
 class SampleClass
 
 class SampleClass1

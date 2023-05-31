@@ -17,9 +17,6 @@ class KonsistSliceTest {
 
         actual
             .mapToFilePaths()
-            .shouldBeEqualTo(
-                listOf(
-                ),
-            )
+            .shouldBeEqualTo(emptyList())
     }
 }

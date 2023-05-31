@@ -23,8 +23,7 @@ class KoDeclarationForPackageeTest {
         sut.packagee shouldBeEqualTo value
     }
 
-    private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kodeclaration/snippet/forpackagee/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forpackagee/", fileName)
 
     companion object {
         @Suppress("unused")

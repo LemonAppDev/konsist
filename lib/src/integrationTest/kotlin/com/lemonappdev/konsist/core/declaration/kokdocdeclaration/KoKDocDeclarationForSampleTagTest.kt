@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
-import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.SAMPLE
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -34,8 +34,7 @@ class KoKDocDeclarationForSampleTagTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forsampletag/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forsampletag/", fileName)
 
     companion object {
         @Suppress("unused")

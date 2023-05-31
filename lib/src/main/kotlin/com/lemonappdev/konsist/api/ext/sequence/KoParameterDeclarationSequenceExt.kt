@@ -79,7 +79,7 @@ fun Sequence<KoParameterDeclaration>.withoutDefaultValue(vararg values: String):
  * @param types The types to include.
  * @return A sequence containing parameters with the specified types.
  */
-fun Sequence<KoParameterDeclaration>.withType(vararg types: String): Sequence<KoParameterDeclaration> = filter {
+fun Sequence<KoParameterDeclaration>.withRepresentedType(vararg types: String): Sequence<KoParameterDeclaration> = filter {
     types.any { type -> it.representsType(type) }
 }
 
@@ -89,7 +89,7 @@ fun Sequence<KoParameterDeclaration>.withType(vararg types: String): Sequence<Ko
  * @param types The types to exclude.
  * @return A sequence containing parameters without the specified types.
  */
-fun Sequence<KoParameterDeclaration>.withoutType(vararg types: String): Sequence<KoParameterDeclaration> = filter {
+fun Sequence<KoParameterDeclaration>.withoutRepresentedType(vararg types: String): Sequence<KoParameterDeclaration> = filter {
     types.none { type -> it.representsType(type) }
 }
 
@@ -99,7 +99,7 @@ fun Sequence<KoParameterDeclaration>.withoutType(vararg types: String): Sequence
  * @param types The Kotlin classes representing the types to include.
  * @return A sequence containing parameters with types matching the specified Kotlin classes.
  */
-fun Sequence<KoParameterDeclaration>.withTypeOf(vararg types: KClass<*>): Sequence<KoParameterDeclaration> = filter {
+fun Sequence<KoParameterDeclaration>.withRepresentedTypeOf(vararg types: KClass<*>): Sequence<KoParameterDeclaration> = filter {
     types.any { kClass ->
         kClass
             .simpleName
@@ -113,7 +113,7 @@ fun Sequence<KoParameterDeclaration>.withTypeOf(vararg types: KClass<*>): Sequen
  * @param types The Kotlin classes representing the types to exclude.
  * @return A sequence containing parameters without types matching the specified Kotlin classes.
  */
-fun Sequence<KoParameterDeclaration>.withoutTypeOf(vararg types: KClass<*>): Sequence<KoParameterDeclaration> = filter {
+fun Sequence<KoParameterDeclaration>.withoutRepresentedTypeOf(vararg types: KClass<*>): Sequence<KoParameterDeclaration> = filter {
     types.none { kClass ->
         kClass
             .simpleName
@@ -126,12 +126,14 @@ fun Sequence<KoParameterDeclaration>.withoutTypeOf(vararg types: KClass<*>): Seq
  *
  * @return A sequence containing parameters with types matching the specified reified type parameter.
  */
-inline fun <reified T> Sequence<KoParameterDeclaration>.withTypeOf(): Sequence<KoParameterDeclaration> = filter { it.representsTypeOf<T>() }
+inline fun <reified T> Sequence<KoParameterDeclaration>.withRepresentedTypeOf(): Sequence<KoParameterDeclaration> = filter {
+    it.representsTypeOf<T>()
+}
 
 /**
  * Sequence containing all parameters that don't have type of.
  *
  * @return A sequence containing parameters without types matching the specified reified type parameter.
  */
-inline fun <reified T> Sequence<KoParameterDeclaration>.withoutTypeOf(): Sequence<KoParameterDeclaration> =
+inline fun <reified T> Sequence<KoParameterDeclaration>.withoutRepresentedTypeOf(): Sequence<KoParameterDeclaration> =
     filterNot { it.representsTypeOf<T>() }
