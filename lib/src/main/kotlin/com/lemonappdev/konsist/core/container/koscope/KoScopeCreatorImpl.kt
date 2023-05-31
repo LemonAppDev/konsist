@@ -6,8 +6,8 @@ import com.lemonappdev.konsist.api.container.koscope.KoScopeCreator
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.sep
-import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.ext.toCanonicalPaths
+import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import java.io.File
 
