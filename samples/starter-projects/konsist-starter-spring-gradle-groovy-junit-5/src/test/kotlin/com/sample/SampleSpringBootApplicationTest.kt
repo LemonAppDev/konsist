@@ -8,5 +8,6 @@ class SampleSpringBootApplicationTest {
 
     @Test
     fun contextLoads() {
+        // Code
     }
 }
