@@ -12,22 +12,31 @@ import kotlin.reflect.KClass
 
 /**
  * Sequence containing declarations that have type of.
+ *
+ * @param types The type(s) to include.
+ * @return A sequence containing declarations that represent the specified type(s).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withType(vararg types: String): Sequence<T> = filter {
+fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedType(vararg types: String): Sequence<T> = filter {
     types.any { type -> it.representsType(type) }
 }
 
 /**
  * Sequence containing declarations that don't have type of.
+ *
+ * @param types The type(s) to exclude.
+ * @return A sequence containing declarations that don't represent the specified type(s).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withoutType(vararg types: String): Sequence<T> = filter {
+fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedType(vararg types: String): Sequence<T> = filter {
     types.none { type -> it.representsType(type) }
 }
 
 /**
  * Sequence containing declarations that have type of.
+ *
+ * @param types The Kotlin class(es) representing the type(s) to include.
+ * @return A sequence containing declarations that have the type of the specified class(es).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.any { type ->
         type
             .qualifiedName
@@ -37,8 +46,11 @@ fun <T : KoComplexDeclaration> Sequence<T>.withTypeOf(vararg types: KClass<*>): 
 
 /**
  * Sequence containing declarations that don't have type of.
+ *
+ * @param types The Kotlin class(es) representing the type(s) to exclude.
+ * @return A sequence containing declarations that don't have the type of the specified class(es).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withoutTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.none { type ->
         type
             .qualifiedName
@@ -48,17 +60,27 @@ fun <T : KoComplexDeclaration> Sequence<T>.withoutTypeOf(vararg types: KClass<*>
 
 /**
  * Sequence containing declarations that have the type of.
+ *
+ * @return A sequence containing declarations that have the type of the specified class.
  */
-inline fun <reified T> Sequence<KoComplexDeclaration>.withTypeOf(): Sequence<KoComplexDeclaration> = filter { it.representsTypeOf<T>() }
+inline fun <reified T> Sequence<KoComplexDeclaration>.withRepresentedTypeOf(): Sequence<KoComplexDeclaration> = filter {
+    it.representsTypeOf<T>()
+}
 
 /**
  * Sequence containing declarations that don't have the type of.
+ *
+ * @return A sequence containing declarations that don't have the type of the specified class.
  */
-inline fun <reified T> Sequence<KoComplexDeclaration>.withoutTypeOf(): Sequence<KoComplexDeclaration> =
+inline fun <reified T> Sequence<KoComplexDeclaration>.withoutRepresentedTypeOf(): Sequence<KoComplexDeclaration> =
     filterNot { it.representsTypeOf<T>() }
 
 /**
  * Sequence containing declarations of all types.
+ *
+ * @param includeNested Whether to include nested declarations.
+ * @param includeLocal Whether to include local declarations.
+ * @return A sequence containing all declarations.
  */
 fun <T : KoComplexDeclaration> Sequence<T>.declarations(
     includeNested: Boolean = false,
@@ -67,6 +89,10 @@ fun <T : KoComplexDeclaration> Sequence<T>.declarations(
 
 /**
  * Sequence containing class declarations.
+ *
+ * @param includeNested Whether to include nested declarations.
+ * @param includeLocal Whether to include local declarations.
+ * @return A sequence containing class declarations.
  */
 fun <T : KoComplexDeclaration> Sequence<T>.classes(
     includeNested: Boolean = false,
@@ -75,6 +101,9 @@ fun <T : KoComplexDeclaration> Sequence<T>.classes(
 
 /**
  * Sequence containing interface declarations.
+ *
+ * @param includeNested Whether to include nested declarations.
+ * @return A sequence containing interface declarations.
  */
 fun <T : KoComplexDeclaration> Sequence<T>.interfaces(
     includeNested: Boolean = false,
@@ -82,6 +111,9 @@ fun <T : KoComplexDeclaration> Sequence<T>.interfaces(
 
 /**
  * Sequence containing object declarations.
+ *
+ * @param includeNested Whether to include nested declarations.
+ * @return A sequence containing object declarations.
  */
 fun <T : KoComplexDeclaration> Sequence<T>.objects(
     includeNested: Boolean = false,
@@ -89,6 +121,10 @@ fun <T : KoComplexDeclaration> Sequence<T>.objects(
 
 /**
  * Sequence containing properties declarations.
+ *
+ * @param includeNested Whether to include nested declarations.
+ * @param includeLocal Whether to include local declarations.
+ * @return A sequence containing property declarations.
  */
 fun <T : KoComplexDeclaration> Sequence<T>.properties(
     includeNested: Boolean = false,
@@ -97,6 +133,10 @@ fun <T : KoComplexDeclaration> Sequence<T>.properties(
 
 /**
  * Sequence containing functions declarations.
+ *
+ * @param includeNested Whether to include nested declarations.
+ * @param includeLocal Whether to include local declarations.
+ * @return A sequence containing function declarations.
  */
 fun <T : KoComplexDeclaration> Sequence<T>.functions(
     includeNested: Boolean = false,

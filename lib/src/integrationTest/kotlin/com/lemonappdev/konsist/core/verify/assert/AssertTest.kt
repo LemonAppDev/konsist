@@ -228,5 +228,6 @@ class AssertTest {
         sut.assert { it.name.endsWith("Text") }
     }
 
-    private fun getSnippetFile(fileName: String) = TestSnippetProvider.getSnippetKoScope("core/verify/assert/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/verify/assert/snippet/", fileName)
 }

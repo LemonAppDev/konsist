@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
+import com.lemonappdev.konsist.core.ext.toCanonicalPaths
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationHelper
 import com.lemonappdev.konsist.core.util.TagHelper
@@ -15,12 +16,14 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         psiElement
             .containingFile
             .name
+            .toCanonicalPaths()
     }
 
     override val projectFilePath: String by lazy {
         val rootPathProvider = PathProvider
             .getInstance()
             .rootProjectPath
+            .toCanonicalPaths()
 
         filePath.removePrefix(rootPathProvider)
     }
@@ -64,7 +67,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
 
     protected open fun hasValidParamTag(enabled: Boolean): Boolean = TagHelper.hasValidParamTag(enabled, parameters = null, kDoc)
 
-    protected open fun hasValidReturnTag(enabled: Boolean): Boolean = TagHelper.hasValidReturnTag(enabled, kDoc)
+    protected open fun hasValidReturnTag(enabled: Boolean): Boolean = TagHelper.hasValidReturnTag(enabled, type = null, kDoc)
 
     protected open fun hasValidConstructorTag(enabled: Boolean): Boolean = TagHelper.hasValidConstructorTag(enabled, kDoc)
 
@@ -128,9 +131,11 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         hasValidPropertySetterTag(verifyPropertySetterTag) &&
         hasValidPropertyGetterTag(verifyPropertyGetterTag)
 
-    override fun resideInFilePath(path: String): Boolean = LocationHelper.resideInLocation(path, filePath)
-
-    override fun resideInProjectFilePath(path: String): Boolean = LocationHelper.resideInLocation(path, projectFilePath)
+    override fun resideInFilePath(path: String, absolutePath: Boolean): Boolean = if (absolutePath) {
+        LocationHelper.resideInLocation(path, filePath)
+    } else {
+        LocationHelper.resideInLocation(path, projectFilePath)
+    }
 
     override fun print() {
         print(toString())

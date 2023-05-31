@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
+import com.lemonappdev.konsist.core.ext.toCanonicalPaths
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationHelper
 import org.jetbrains.kotlin.psi.KtFile
@@ -33,14 +34,42 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
             .last()
     }
 
-    override val path: String by lazy { ktFile.name }
+    override val path: String by lazy {
+        ktFile
+            .name
+            .toCanonicalPaths()
+    }
 
     override val rootProjectPath by lazy {
         val rootPathProvider = PathProvider
             .getInstance()
             .rootProjectPath
+            .toCanonicalPaths()
 
         path.removePrefix(rootPathProvider)
+    }
+
+    override val moduleName: String by lazy {
+        val projectName = PathProvider
+            .getInstance()
+            .rootProjectPath
+            .substringAfterLast('/')
+
+        val moduleName = rootProjectPath
+            .substringBefore("/src/")
+            .substringAfter("/")
+
+        if (moduleName == projectName || moduleName == "") {
+            "root"
+        } else {
+            moduleName
+        }
+    }
+
+    override val sourceSetName: String by lazy {
+        rootProjectPath
+            .substringAfter("/src/")
+            .substringBefore("/")
     }
 
     override val text by lazy {
@@ -91,11 +120,9 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
 
     override fun hasAnnotations(vararg names: String): Boolean = when {
         names.isEmpty() -> annotations.isNotEmpty()
-        else -> names.all { hasAnnotationNameOrAnnotationFullyQualifyName(it) }
-    }
-
-    private fun hasAnnotationNameOrAnnotationFullyQualifyName(name: String): Boolean = annotations.any {
-        it.fullyQualifiedName.substringAfterLast(".") == name || it.fullyQualifiedName == name
+        else -> names.all {
+            annotations.any { annotation -> annotation.representsType(it) }
+        }
     }
 
     override fun hasAnnotationsOf(vararg names: KClass<*>): Boolean = names.all {
@@ -123,6 +150,10 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     override fun resideInPath(path: String) = LocationHelper.resideInLocation(path, this.path)
 
     override fun resideInRootProjectPath(path: String) = LocationHelper.resideInLocation(path, rootProjectPath)
+
+    override fun resideInModule(module: String): Boolean = module == moduleName
+
+    override fun resideInSourceSet(sourceSet: String): Boolean = sourceSet == sourceSetName
 
     override fun hasNameStartingWith(prefix: String) = name.startsWith(prefix)
 

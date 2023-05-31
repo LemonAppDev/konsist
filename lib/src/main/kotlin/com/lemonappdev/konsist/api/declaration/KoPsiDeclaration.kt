@@ -36,11 +36,31 @@ interface KoPsiDeclaration {
 
     /**
      * Whether the declaration has kDoc.
+     *
+     * @return `true` if the declaration has kDoc, `false` otherwise.
      */
     fun hasKDoc(): Boolean
 
     /**
      * Whether the declaration has kDoc with the given requirements.
+     *
+     * @param verifyDescription `false` to not verify a description in the KDoc. By default, `true`.
+     * @param verifyParamTag `true` to verify param tags in the KDoc. By default, `false`.
+     * @param verifyReturnTag `true` to verify a return tag in the KDoc. By default, `false`.
+     * @param verifyConstructorTag `true` to verify a constructor tag in the KDoc. By default, `false`.
+     * @param verifyReceiverTag `true` to verify a receiver tag in the KDoc. By default, `false`.
+     * @param verifyPropertyTag `true` to verify a property tag in the KDoc. By default, `false`.
+     * @param verifyThrowsTag `true` to verify throws tags in the KDoc. By default, `false`.
+     * @param verifyExceptionTag `true` to verify exception tags in the KDoc. By default, `false`.
+     * @param verifySampleTag `true` to verify sample tags in the KDoc. By default, `false`.
+     * @param verifySeeTag `true` to verify see tags in the KDoc. By default, `false`.
+     * @param verifyAuthorTag `true` to verify author tags in the KDoc. By default, `false`.
+     * @param verifySinceTag `true` to verify since tags in the KDoc. By default, `false`.
+     * @param verifySuppressTag `true` to verify suppress tags in the KDoc. By default, `false`.
+     * @param verifyVersionTag `true` to verify version tags in the KDoc. By default, `false`.
+     * @param verifyPropertySetterTag `true` to verify property setter tags in the KDoc. By default, `false`.
+     * @param verifyPropertyGetterTag `true` to verify property getter tags in the KDoc. By default, `false`.
+     * @return `true` if the declaration has valid kDoc with the given requirements, `false` otherwise.
      */
     fun hasValidKDoc(
         verifyDescription: Boolean = true,
@@ -63,13 +83,14 @@ interface KoPsiDeclaration {
 
     /**
      * Whatever declaration reside in file path.
+     *
+     * @param path the file path to check.
+     * @param absolutePath Flag indicating whether the provided path is an absolute path.
+     *                    If set to `true`, the `path` parameter represents an absolute path.
+     *                    If set to `false` (default), the `path` parameter represents a relative path.
+     * @return `true` if the declaration resides in the specified file path, `false` otherwise.
      */
-    fun resideInFilePath(path: String): Boolean
-
-    /**
-     * Whatever declaration reside in project file path.
-     */
-    fun resideInProjectFilePath(path: String): Boolean
+    fun resideInFilePath(path: String, absolutePath: Boolean = false): Boolean
 
     /**
      * Print declaration.
@@ -78,6 +99,8 @@ interface KoPsiDeclaration {
 
     /**
      * Text of the declaration with the location (file path, line and column).
+     *
+     * @return the text of the declaration with the location.
      */
     override fun toString(): String
 }

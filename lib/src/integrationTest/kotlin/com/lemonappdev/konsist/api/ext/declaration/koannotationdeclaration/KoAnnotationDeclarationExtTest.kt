@@ -25,5 +25,6 @@ class KoAnnotationDeclarationExtTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("api/ext/declaration/koannotationdeclaration/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("api/ext/declaration/koannotationdeclaration/snippet/", fileName)
 }

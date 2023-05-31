@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.snippet
 
+import com.lemonappdev.konsist.core.ext.sep
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -12,7 +13,7 @@ class SnippetTest {
     @Test
     fun `every snippet is used in tests`() {
         // given
-        val snippets = File("../")
+        val snippets = File("..$sep")
             .walk()
             .filter { it.isKotlinSnippetFile }
 
@@ -28,8 +29,9 @@ class SnippetTest {
 
         val r1 = Regex("""getSnippetFile\("(.+)"\)""")
         val r2 = Regex("""arguments\("([^"]+)"""")
+        val r3 = Regex("""arguments\(\s*"([^"]+)"""")
         val withGetSnippetMethod = snippetNamesFromFiles(r1, "getSnippetFile(\"", "\")")
-        val withArgument = snippetNamesFromFiles(r2, "arguments(\"", "\"")
+        val withArgument = snippetNamesFromFiles(r2, "arguments(\"", "\"") + snippetNamesFromFiles(r3, "arguments(\n", "\"")
 
         val snippetNamesUsedInTests = (withGetSnippetMethod + withArgument).toSet()
 
@@ -67,13 +69,15 @@ class SnippetTest {
     }
 
     private fun snippetNamesFromFiles(regex: Regex, prefix: String, suffix: String) =
-        File("src/integrationTest/..")
+        File("..$sep")
             .walk()
             .filter { it.isKotlinNotSnippetFile }
             .map { it.readText() }
             .flatMap { regex.findAll(it) }
             .map { it.value }
             .map { it.removePrefix(prefix) }
+            .map { it.trimIndent() }
+            .map { it.removePrefix("\"") }
             .map { it.removeSuffix(suffix) }
 
     private fun validateKotlinCode(map: Map<File, String>): Int {

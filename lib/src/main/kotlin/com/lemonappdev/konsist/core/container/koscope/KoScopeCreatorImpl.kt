@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.container.koscope.KoScope
 import com.lemonappdev.konsist.api.container.koscope.KoScopeCreator
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
+import com.lemonappdev.konsist.core.ext.sep
+import com.lemonappdev.konsist.core.ext.toCanonicalPaths
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import java.io.File
@@ -12,14 +14,9 @@ import java.io.File
 internal class KoScopeCreatorImpl : KoScopeCreator {
     private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
 
-    private val projectKotlinFiles: Sequence<KoFile> by lazy {
+    private val projectKotlinFiles: Sequence<KoFile> by lazy { File(pathProvider.rootProjectPath).toKoFiles() }
 
-        File(pathProvider.rootProjectPath).toKoFiles()
-    }
-
-    override val projectRootPath: String by lazy {
-        pathProvider.rootProjectPath
-    }
+    override val projectRootPath: String by lazy { pathProvider.rootProjectPath }
 
     override fun scopeFromProject(moduleName: String?, sourceSetName: String?, ignoreBuildConfig: Boolean): KoScope {
         val koFiles = getFiles(moduleName, sourceSetName, ignoreBuildConfig)
@@ -62,7 +59,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             return localProjectKotlinFiles
         }
 
-        var pathPrefix = if (moduleName != null) {
+        var pathPrefix = if (moduleName == ROOT_MODULE_NAME) {
+            projectRootPath
+        } else if (moduleName != null) {
             "$projectRootPath/$moduleName"
         } else {
             "$projectRootPath.*"
@@ -75,7 +74,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         return localProjectKotlinFiles
-            .filter { it.path.matches(Regex(pathPrefix)) }
+            .filter { it.path.matches(Regex(pathPrefix.toCanonicalPaths())) }
     }
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
@@ -83,7 +82,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             require(!isTestSourceSet(it)) { "Source set '$it' is a test source set, but it should be production source set." }
         }
 
-        val koFiles = getFiles(moduleName, sourceSetName).filterNot { it.isTestFile() }
+        val koFiles = getFiles(moduleName, sourceSetName)
+            .filterNot { isTestSourceSet(it.sourceSetName) }
 
         return KoScopeImpl(koFiles)
     }
@@ -93,7 +93,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             require(isTestSourceSet(it)) { "Source set '$it' is a production source set, but it should be test source set." }
         }
 
-        val koFiles = getFiles(moduleName, sourceSetName).filter { it.isTestFile() }
+        val koFiles = getFiles(moduleName, sourceSetName)
+            .filter { isTestSourceSet(it.sourceSetName) }
 
         return KoScopeImpl(koFiles)
     }
@@ -102,7 +103,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val chosenPath = if (absolutePath) {
             path
         } else {
-            "$projectRootPath/$path"
+            "$projectRootPath$sep$path"
         }
 
         val directory = File(chosenPath)
@@ -118,7 +119,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val chosenPath = if (absolutePath) {
             path
         } else {
-            "$projectRootPath/$path"
+            "$projectRootPath$sep$path"
         }
 
         val file = File(chosenPath)
@@ -136,12 +137,12 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
      */
     private fun isBuildPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
-        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*")
-        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*")
+        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toCanonicalPaths())
+        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toCanonicalPaths())
 
         val mavenBuildDirectoryName = "target"
-        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*")
-        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*")
+        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toCanonicalPaths())
+        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toCanonicalPaths())
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
             path.matches(gradleModuleBuildDirectoryRegex) ||
@@ -149,25 +150,15 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             path.matches(mavenModuleBuildDirectoryRegex)
     }
 
-    private fun isTestPath(path: String): Boolean {
-        val lowercasePath = path.lowercase()
-        return lowercasePath.contains("/$TEST_NAME_IN_PATH") || lowercasePath.contains("$TEST_NAME_IN_PATH/")
-    }
-
     private fun isTestSourceSet(name: String): Boolean {
         val lowercaseName = name.lowercase()
         return lowercaseName.matches(Regex(".*$TEST_NAME_IN_PATH.*"))
     }
 
-    private fun KoFile.isTestFile(): Boolean {
-        val path = path.substringAfter(pathProvider.rootProjectPath)
-        return isTestPath(path)
-    }
-
     private fun KoFile.isBuildConfigFile(): Boolean {
         val lowercasePath = path.lowercase()
         val gradleBuildConfigDirectoryName = "buildSrc".lowercase()
-        return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
+        return lowercasePath.matches(Regex(".*$sep$gradleBuildConfigDirectoryName.*"))
     }
 
     private fun File.toKoFiles(): Sequence<KoFile> = walk()
@@ -176,5 +167,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     companion object {
         private const val TEST_NAME_IN_PATH = "test"
+        private const val ROOT_MODULE_NAME = "root"
     }
 }

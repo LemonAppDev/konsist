@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
-import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContain
@@ -69,8 +69,7 @@ class KoKDocDeclarationForTextTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/fortext/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/fortext/", fileName)
 
     companion object {
         @Suppress("unused")

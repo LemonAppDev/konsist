@@ -32,12 +32,10 @@ configure(listOf(detektCheck, detektApply)) {
         // (new detect rules will work out of the box after upgrading detekt version)
         buildUponDefaultConfig = true
 
-        /*
-        Runs detekt for all files in the Gradle project and all subprojects without
-        a need to configure detekt plugin in every subproject.
-         */
+        // Runs detekt for all files in the Gradle project and all subprojects without
+        // a need to configure detekt plugin in every subproject.
         include("**/*.kt", "**/*.kts")
-        exclude("**/resources/**", "**/build/**", "**/generated/**", "**/samples/starter-projects/**")
+        exclude("**/resources/**", "**/build/**", "**/generated/**")
 
         reports {
             html.required.set(true)
