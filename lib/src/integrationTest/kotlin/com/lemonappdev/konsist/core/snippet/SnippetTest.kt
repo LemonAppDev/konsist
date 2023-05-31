@@ -47,17 +47,19 @@ class SnippetTest {
         // given
         val map = mutableMapOf<File, String>()
 
-        val filePaths = File("/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/container/kofile/snippet")
+        val filePaths = File("/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/..")
             .walk()
             .filter { it.isFile && it.name.endsWith(".kttxt") }
 
-        val texts = File("/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/container/kofile/snippet")
+        val texts = File("/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/..")
             .walk()
             .filter { it.isFile && it.name.endsWith(".kttxt") }
             .map { it.readText() }
             .toList()
 
         filePaths.forEachIndexed { index, s -> map[s] = texts[index] }
+
+        // when
         val sut = validateKotlinCode(map)
 
         // then
@@ -74,36 +76,57 @@ class SnippetTest {
             .map { it.removePrefix(prefix) }
             .map { it.removeSuffix(suffix) }
 
-    companion object {
-        private val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(".kttxt")
-        private val File.isKotlinNotSnippetFile: Boolean get() = isFile && !name.endsWith(".kttxt")
-    }
-
     private fun validateKotlinCode(map: Map<File, String>): Int {
         var counter = 0
+        val commands1 = listOf(
+            "kotlinc",
+            "/Users/natalia/IdeaProjects/konsist/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/testdata/TestData.kt",
+            "-include-runtime",
+            "-d",
+            "test.jar"
+        )
+        val builder = ProcessBuilder(commands1)
+        builder.redirectErrorStream(true)
 
-        map.forEach {
-            val newFile = File("snippet test.kt")
-            val file = it.key.copyTo(newFile)
+        val process1 = builder.start().waitFor()
 
-            try {
-                val processBuilder = ProcessBuilder("kotlinc", file.path)
-                val process = processBuilder.start()
+        if(process1 == 0){
+            map.forEach {
+                val file = it.key.copyTo(File("/Users/natalia/IdeaProjects/konsist/lib/build/snippet-test/test-snippet.kt"))
 
-                val errorOutput = process.errorStream.bufferedReader().use { reader -> reader.readText() }
-                if (errorOutput.isNotEmpty()) {
+                val command2 = listOf(
+                    "kotlinc",
+                    "-cp",
+                    "test.jar",
+                    file.absolutePath
+                )
+
+                try {
+                    val processBuilder = ProcessBuilder(command2)
+                    val process = processBuilder.start()
+
+                    val errorOutput = process.errorStream.bufferedReader().use { reader -> reader.readText() }
+                    if (errorOutput.isNotEmpty()) {
+                        counter++
+                        println(it.key)
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
                     counter++
                     println(it.key)
                 }
-            } catch (e: IOException) {
-                e.printStackTrace()
-                counter++
-                println(it.key)
+                file.delete()
             }
-            newFile.delete()
+        } else {
+            counter = -1
         }
 
         return counter
+    }
+
+    companion object {
+        private val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(".kttxt")
+        private val File.isKotlinNotSnippetFile: Boolean get() = isFile && !name.endsWith(".kttxt")
     }
 
 
