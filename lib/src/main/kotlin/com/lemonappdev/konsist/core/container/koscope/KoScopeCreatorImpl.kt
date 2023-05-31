@@ -6,8 +6,8 @@ import com.lemonappdev.konsist.api.container.koscope.KoScopeCreator
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.sep
+import com.lemonappdev.konsist.core.ext.toCanonicalPaths
 import com.lemonappdev.konsist.core.ext.toKoFile
-import com.lemonappdev.konsist.core.ext.toNormalizedPath
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import java.io.File
 
@@ -74,7 +74,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         return localProjectKotlinFiles
-            .filter { it.path.matches(Regex(pathPrefix.toNormalizedPath())) }
+            .filter { it.path.matches(Regex(pathPrefix.toCanonicalPaths())) }
     }
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
@@ -137,12 +137,12 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
      */
     private fun isBuildPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
-        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toNormalizedPath())
-        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toNormalizedPath())
+        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toCanonicalPaths())
+        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toCanonicalPaths())
 
         val mavenBuildDirectoryName = "target"
-        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toNormalizedPath())
-        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toNormalizedPath())
+        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toCanonicalPaths())
+        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toCanonicalPaths())
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
             path.matches(gradleModuleBuildDirectoryRegex) ||
