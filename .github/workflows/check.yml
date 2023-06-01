@@ -11,7 +11,6 @@ jobs:
 # ======================================= Run Tests =========================================================
   konsist-junit-test:
     name: Konsist JUnit Test
-    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -29,12 +28,10 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: junit-test-report
-          if: ${{ !cancelled() }}
           path: ./lib/build/test-results/test/
 
   konsist-konsist-test:
     name: Konsist Konsist Test
-    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -52,12 +49,10 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: konsist-test-report
-          if: ${{ !cancelled() }}
           path: ./lib/build/test-results/konsistTest/
 
   konsist-integration-test:
     name: Konsist Integration Test
-    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -75,14 +70,12 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: integration-test-report
-          if: ${{ !cancelled() }}
           path: ./lib/build/test-results/integrationTest/
 
 # ======================================= Run Linters =========================================================
 
   konsist-spotless:
     name: Konsist Spotless
-    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -99,7 +92,6 @@ jobs:
 
   konsist-detekt:
     name: Konsist Detekt
-    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -117,14 +109,12 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: detekt-report
-          if: ${{ !cancelled() }}
           path: ./**/build/reports/detekt/detekt.*
 
 # ======================================= Check Paths =======================================
 
   path-tester-project-ubuntu:
     name: Path Tester Project Ubuntu
-    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -148,7 +138,6 @@ jobs:
 
   path-tester-project-windows:
     name: Path Tester Project Windows
-    if: ${{ !cancelled() }}
     runs-on: windows-latest
     steps:
       - name: checkout
@@ -172,7 +161,6 @@ jobs:
 
   root-path-gradle-tester-ubuntu:
     name: Root Path Tester Gradle Ubuntu
-    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -199,7 +187,6 @@ jobs:
 
   root-path-gradle-tester-windows:
     name: Root Path Tester Gradle Windows
-    if: ${{ !cancelled() }}
     runs-on: windows-latest
     steps:
       - name: checkout
@@ -229,7 +216,6 @@ jobs:
 # ======================================= Library Artifact =========================================================
   konsist-artifact-check:
     name: Konsist Artifact Check
-    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -268,14 +254,12 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: konsist.jar
-          if: ${{ !cancelled() }}
           path: lib/build/libs/lib.jar
 
 # ======================================= Other =========================================================
 
   konsist-dokka:
     name: Konsist Dokka
-    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -293,5 +277,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: dokka-html-doc.jar
-          if: ${{ !cancelled() }}
           path: ./lib/build/dokka/*
