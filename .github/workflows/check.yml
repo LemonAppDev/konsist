@@ -273,8 +273,8 @@ jobs:
 
 # ======================================= Other =========================================================
 
-  konsist-dokka-html-doc:
-    name: Konsist Dokka Generate Html Doc
+  konsist-dokka:
+    name: Konsist Dokka
     if: '!cancelled()'
     runs-on: ubuntu-latest
     steps:
