@@ -35,7 +35,6 @@ jobs:
   konsist-konsist-test:
     name: Konsist Konsist Test
     if: '!cancelled()'
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -59,7 +58,6 @@ jobs:
   konsist-integration-test:
     name: Konsist Integration Test
     if: '!cancelled()'
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -85,7 +83,6 @@ jobs:
   konsist-spotless:
     name: Konsist Spotless
     if: '!cancelled()'
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -103,7 +100,6 @@ jobs:
   konsist-detekt:
     name: Konsist Detekt
     if: '!cancelled()'
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -129,7 +125,6 @@ jobs:
   path-tester-project-ubuntu:
     name: Test Project Path Tester Project Ubuntu
     if: '!cancelled()'
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -154,7 +149,6 @@ jobs:
   path-tester-project-windows:
     name: Test Project Path Tester Project Windows
     if: '!cancelled()'
-    continue-on-error: true
     runs-on: windows-latest
     steps:
       - name: checkout
@@ -179,7 +173,6 @@ jobs:
   root-path-gradle-tester-ubuntu:
     name: Test Project Root Path Gradle Ubuntu
     if: '!cancelled()'
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -207,7 +200,6 @@ jobs:
   root-path-gradle-tester-windows:
     name: Test Project Root Path Gradle Windows
     if: '!cancelled()'
-    continue-on-error: true
     runs-on: windows-latest
     steps:
       - name: checkout
@@ -238,7 +230,6 @@ jobs:
   check-konsist-artifact:
     name: Check Konsist Artifact
     if: '!cancelled()'
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -285,7 +276,6 @@ jobs:
   konsist-dokka-html-doc:
     name: Konsist Dokka Generate Html Doc
     if: '!cancelled()'
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: checkout
