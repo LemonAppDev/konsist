@@ -123,7 +123,7 @@ jobs:
 # ======================================= Check Paths =======================================
 
   path-tester-project-ubuntu:
-    name: Test Project Path Tester Project Ubuntu
+    name: Path Tester Project Ubuntu
     if: '!cancelled()'
     runs-on: ubuntu-latest
     steps:
@@ -147,7 +147,7 @@ jobs:
         run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
 
   path-tester-project-windows:
-    name: Test Project Path Tester Project Windows
+    name: Path Tester Project Windows
     if: '!cancelled()'
     runs-on: windows-latest
     steps:
@@ -171,7 +171,7 @@ jobs:
         run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
 
   root-path-gradle-tester-ubuntu:
-    name: Test Project Root Path Gradle Ubuntu
+    name: Root Path Tester Gradle Ubuntu
     if: '!cancelled()'
     runs-on: ubuntu-latest
     steps:
@@ -198,7 +198,7 @@ jobs:
         run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
 
   root-path-gradle-tester-windows:
-    name: Test Project Root Path Gradle Windows
+    name: Root Path Tester Gradle Windows
     if: '!cancelled()'
     runs-on: windows-latest
     steps:
