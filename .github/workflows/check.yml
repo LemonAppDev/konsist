@@ -8,6 +8,7 @@ on:
     types: [ opened, synchronize ]
 
 jobs:
+# ======================================= Run Tests =========================================================
   konsist-junit-test:
     name: Konsist JUnit Test
     continue-on-error: true
@@ -74,6 +75,8 @@ jobs:
           name: integration-test-report
           path: ./lib/build/test-results/integrationTest/
 
+# ======================================= Run Linters =========================================================
+
   konsist-spotless:
     name: Konsist Spotless
     continue-on-error: true
@@ -113,8 +116,115 @@ jobs:
           name: detekt-report
           path: ./**/build/reports/detekt/detekt.*
 
-  konsist-assemble:
-    name: Konsist Assemble
+# ======================================= Check Paths =======================================
+
+  path-tester-project-ubuntu:
+    name: Test Project Path Tester Project Ubuntu
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+
+  path-tester-project-windows:
+    name: Test Project Path Tester Project Windows
+    continue-on-error: true
+    runs-on: windows-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+
+  root-path-gradle-tester-ubuntu:
+    name: Test Project Root Path Gradle Ubuntu
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+
+      - name: Run Root Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
+
+  root-path-gradle-tester-windows:
+    name: Test Project Root Path Gradle Windows
+    continue-on-error: true
+    runs-on: windows-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: |
+            8 
+            19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+
+      - name: Run Root Integration Test
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
+
+# ======================================= Library Artifact =========================================================
+  check-konsist-artifact:
+    name: Check Konsist Artifact
     continue-on-error: true
     runs-on: ubuntu-latest
     steps:
@@ -135,13 +245,28 @@ jobs:
       - name: Assemble
         run: ./gradlew lib:assemble
 
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+
+      - name: List Artifacts
+        run: ls -R ~/.m2/repository/
+
       - name: Show "lib.jar" content
         run: jar tf lib/build/libs/lib.jar
+
+      - name: Check Dependencies Exposed By The Library Artifact
+        run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
 
       - uses: actions/upload-artifact@v3
         with:
           name: konsist.jar
           path: lib/build/libs/lib.jar
+
+# ======================================= Other =========================================================
 
   konsist-dokka-html-doc:
     name: Konsist Dokka Generate Html Doc
@@ -164,30 +289,3 @@ jobs:
         with:
           name: dokka-html-doc.jar
           path: ./lib/build/dokka/*
-
-  check-konsist-artifact:
-    name: Check Konsist Artifact
-    continue-on-error: true
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Publish
-        run: >
-          ./gradlew publishToMavenLocal
-          -P konsist.releaseTarget=local
-          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
-          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
-
-      - name: List Artifacts
-        run: ls -R ~/.m2/repository/
-
-      - name: Check Dependencies Exposed By The Library Artifact
-        run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
