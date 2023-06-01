@@ -265,9 +265,6 @@ jobs:
             19
           distribution: 'zulu'
 
-      - name: Display javaToolchains
-        run: ./gradlew javaToolchains
-
       - name: Publish
         run: >
           ./gradlew publishToMavenLocal
@@ -275,11 +272,11 @@ jobs:
           -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
           -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
 
-#      - name: Run Assemble
-#        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew assemble
-#
-#      - name: Run Root Integration Test
-#        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew integrationTest
-#
-#      - name: Run App Integration Test
-#        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
+      - name: Run Assemble
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew assemble
+
+      - name: Run Root Integration Test
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
