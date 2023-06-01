@@ -94,7 +94,7 @@ class SnippetTest {
         builder.redirectErrorStream(true)
 
         val process1 = builder.start().waitFor()
-        require(process1 == 0) {"TestData is invalid file."}
+        require(process1 == 0) { "TestData is invalid file." }
 
         val file = File("build/snippet-test.test-snippet.kt")
 
