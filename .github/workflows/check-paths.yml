@@ -1,0 +1,98 @@
+name: Check
+
+on:
+  push:
+    branches: [ main ]
+
+  pull_request:
+    types: [ opened, synchronize ]
+
+jobs:
+  path-tester-project:
+    name: Test Project Path Tester Project
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+
+      - name: Run Assemble
+        run: cd test-projects/konsist-path-tester/ && ./gradlew assemble
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+
+  root-path-gradle-tester-ubuntu:
+    name: Test Project Root Path Gradle Ubuntu
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+
+      - name: Run Assemble
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew assemble
+
+      - name: Run Root Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
+
+  root-path-gradle-tester-windows:
+    name: Test Project Root Path Gradle Windows
+    continue-on-error: true
+    runs-on: windows-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: |
+            8 
+            19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+
+      - name: Run Assemble
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew assemble
+
+      - name: Run Root Integration Test
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
