@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Start a discussion
+    url: https://github.com/LemonAppDev/konsist/discussions/new/choose
+    about: If you have any inquiries or suggestions regarding Konsist configuration or features we recommend beginning the conversation here.

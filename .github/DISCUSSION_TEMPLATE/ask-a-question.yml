@@ -1,0 +1,16 @@
+body:
+  - type: textarea
+    id: wanted-end-result
+    attributes:
+      label: Wanted end result.
+      description: 'Describe the wanted end result.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: describe-what-you-tried
+    attributes:
+      label: What you tried so far.
+      description: 'Tell us what you tried so far, what worked, what did not work, and so on.'
+    validations:
+      required: true
