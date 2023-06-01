@@ -227,8 +227,8 @@ jobs:
         run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
 
 # ======================================= Library Artifact =========================================================
-  check-konsist-artifact:
-    name: Check Konsist Artifact
+  konsist-artifact-check:
+    name: Konsist Artifact Check
     if: '!cancelled()'
     runs-on: ubuntu-latest
     steps:
