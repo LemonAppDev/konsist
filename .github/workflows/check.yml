@@ -8,12 +8,10 @@ on:
     types: [ opened, synchronize ]
 
 jobs:
+# ======================================= Run Tests =========================================================
   konsist-junit-test:
     name: Konsist JUnit Test
-    continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -34,10 +32,7 @@ jobs:
 
   konsist-konsist-test:
     name: Konsist Konsist Test
-    continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -58,10 +53,7 @@ jobs:
 
   konsist-integration-test:
     name: Konsist Integration Test
-    continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -80,12 +72,11 @@ jobs:
           name: integration-test-report
           path: ./lib/build/test-results/integrationTest/
 
+# ======================================= Run Linters =========================================================
+
   konsist-spotless:
     name: Konsist Spotless
-    continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -101,10 +92,7 @@ jobs:
 
   konsist-detekt:
     name: Konsist Detekt
-    continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -123,12 +111,114 @@ jobs:
           name: detekt-report
           path: ./**/build/reports/detekt/detekt.*
 
-  konsist-assemble:
-    name: Konsist Assemble
-    continue-on-error: true
+# ======================================= Check Paths =======================================
+
+  path-tester-project-ubuntu:
+    name: Path Tester Project Ubuntu
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+
+#  path-tester-project-windows:
+#    name: Path Tester Project Windows
+#    runs-on: windows-latest
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: |
+#            8
+#            19
+#          distribution: 'zulu'
+#
+#      - name: Publish
+#        run: >
+#          ./gradlew publishToMavenLocal
+#          -P konsist.releaseTarget=local
+#          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+#          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+#
+#      - name: Run Integration Test
+#        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+
+  root-path-gradle-tester-ubuntu:
+    name: Root Path Tester Gradle Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+
+      - name: Run Root Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
+
+#  root-path-gradle-tester-windows:
+#    name: Root Path Tester Gradle Windows
+#    runs-on: windows-latest
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: |
+#            8
+#            19
+#          distribution: 'zulu'
+#
+#      - name: Publish
+#        run: >
+#          ./gradlew publishToMavenLocal
+#          -P konsist.releaseTarget=local
+#          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+#          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+#
+#      - name: Run Root Integration Test
+#        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew integrationTest
+#
+#      - name: Run App Integration Test
+#        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
+
+# ======================================= Library Artifact =========================================================
+  konsist-artifact-check:
+    name: Konsist Artifact Check
+    runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -147,20 +237,32 @@ jobs:
       - name: Assemble
         run: ./gradlew lib:assemble
 
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+
+      - name: List Artifacts
+        run: ls -R ~/.m2/repository/
+
       - name: Show "lib.jar" content
         run: jar tf lib/build/libs/lib.jar
+
+      - name: Check Dependencies Exposed By The Library Artifact
+        run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
 
       - uses: actions/upload-artifact@v3
         with:
           name: konsist.jar
           path: lib/build/libs/lib.jar
 
-  konsist-dokka-html-doc:
-    name: Konsist Dokka Generate Html Doc
-    continue-on-error: true
+# ======================================= Other =========================================================
+
+  konsist-dokka:
+    name: Konsist Dokka
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -178,99 +280,3 @@ jobs:
         with:
           name: dokka-html-doc.jar
           path: ./lib/build/dokka/*
-
-  konsist-publish:
-    name: Konsist Publish Local
-    continue-on-error: true
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Publish
-        run: >
-          ./gradlew publishToMavenLocal
-          -Pkonsist.releaseTarget=local
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
-          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
-
-      - name: List Artifacts
-        run: ls -R ~/.m2/repository/
-
-      - name: Verify Dependencies Exposed By The Library Artifact
-        run: python3 scripts/verify_dependencies_exposed_by_library_artifact.py
-
-  path-tester-project:
-    name: Test Project Path Tester Project
-    continue-on-error: true
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Publish
-        run: >
-          ./gradlew publishToMavenLocal
-          -Pkonsist.releaseTarget=local
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
-          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
-
-      - name : Run Assemble
-        run: cd test-projects/konsist-path-tester/ && ./gradlew assemble
-
-      - name : Run Integration Test
-        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
-
-  root-path-gradle-tester:
-    name: Test Project Root Path Gradle
-    continue-on-error: true
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Publish
-        run: >
-          ./gradlew publishToMavenLocal
-          -Pkonsist.releaseTarget=local
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
-          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
-
-      - name: Run Assemble
-        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew assemble
-
-      - name: Run Root Integration Test
-        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
-
-      - name: Run App Integration Test
-        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
