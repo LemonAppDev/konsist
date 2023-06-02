@@ -6,3 +6,5 @@ The [SampleKonsistTest.kt](konsistTest/src/test/java/com/sample/SampleKonsistTes
 module.
 
 To run test use IDE UI or run `./gradlew konsistTest:test` (konsist tests) or `./gradlew test` (all tests) command.
+
+s
