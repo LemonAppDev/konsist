@@ -19,5 +19,5 @@ internal abstract class KoParametrizedDeclarationImpl(
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagHelper.hasValidParamTag(enabled, parameters, kDoc)
 
-    override fun hasParameterNamed(name: String): Boolean = parameters.firstOrNull()?.name == name
+    override fun hasParameterNamed(name: String): Boolean = parameters.any { it.name == name }
 }
