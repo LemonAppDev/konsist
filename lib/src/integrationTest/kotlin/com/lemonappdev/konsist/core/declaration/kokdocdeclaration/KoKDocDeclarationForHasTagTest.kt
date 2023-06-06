@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.api.KoKDocTag.SINCE
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.provider.Arguments.arguments
 
 class KoKDocDeclarationForHasTagTest {
     @Test

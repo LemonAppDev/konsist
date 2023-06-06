@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationHelper
 import com.lemonappdev.konsist.core.util.TagHelper
 import org.jetbrains.kotlin.kdoc.psi.api.KDoc
-import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
 @Suppress("detekt.TooManyFunctions")
