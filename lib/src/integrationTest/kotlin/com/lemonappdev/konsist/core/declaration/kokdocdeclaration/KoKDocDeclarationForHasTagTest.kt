@@ -29,6 +29,22 @@ class KoKDocDeclarationForHasTagTest {
     }
 
     @Test
+    fun `class-has-one-line-kdoc`() {
+        // given
+        val sut = getSnippetFile("class-has-one-line-kdoc")
+            .classes()
+            .first()
+            .kDoc
+
+        // then
+        assertSoftly(sut) {
+            it?.hasTags() shouldBeEqualTo true
+            it?.hasTags(SINCE) shouldBeEqualTo true
+            it?.hasTags(SINCE, SEE) shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `class-has-tags-without-description`() {
         // given
         val sut = getSnippetFile("class-has-tags-without-description")
@@ -48,43 +64,4 @@ class KoKDocDeclarationForHasTagTest {
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forhastag/", fileName)
-
-    companion object {
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForTagsSize() = listOf(
-            arguments("SampleClass", 10),
-            arguments("sampleMethod", 2),
-            arguments("sampleProperty", 2),
-            arguments("SampleClassWithoutTags", 0),
-        )
-
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForParamTag() = listOf(
-            arguments(
-                "class-with-tags",
-                "SampleClass",
-                "SampleType1",
-                "The first type parameter for this class.",
-                "SampleType2",
-                "The second type parameter for this class.",
-            ),
-            arguments(
-                "function-with-tags",
-                "sampleMethod",
-                "sampleArgument1",
-                "The first argument.",
-                "sampleArgument2",
-                "The second argument.",
-            ),
-        )
-
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForTags() = listOf(
-            arguments("class-with-tags", "SampleClass"),
-            arguments("function-with-tags", "sampleMethod"),
-        )
-    }
 }
