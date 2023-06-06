@@ -1,0 +1,8 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+
+class SampleClass {
+    @SampleAnnotation // sample comment
+    protected open fun invoke() {
+    }
+}
