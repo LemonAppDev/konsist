@@ -297,11 +297,5 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Publish
-        run: ./gradlew lib:snippetTest
-
-      - name: Snippet Valid Code
-        run: ls -R ~/.m2/repository/
-
       - name: Verify Snippet Code
         run: python3 scripts/verify_snippet_valid_code.py
