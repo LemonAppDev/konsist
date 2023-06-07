@@ -49,7 +49,13 @@ internal abstract class KoDeclarationImpl(
                 // We filter this way because this list contains modifiers and annotations,
                 // and we need to exclude all annotations especially with blank spaces
                 // e.g. @SampleAnnotation(parameter = "sample parameter")
-                !it.contains(')') && !it.contains('@') && it.isNotBlank()
+                // and with angle brackets
+                // e.g. @SampleAnnotation<String, Int>
+                !it.contains('<') &&
+                    !it.contains('>') &&
+                    !it.contains(')') &&
+                    !it.contains('@') &&
+                    it.isNotBlank()
             }
             ?.map {
                 KoModifier
