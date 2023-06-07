@@ -20,7 +20,7 @@ class KoObjectDeclarationForNameTest {
     fun `companion-object-with-name`() {
         // given
         val sut = getSnippetFile("companion-object-with-name")
-            .objects()
+            .objects(includeNested = true)
             .first()
 
         // then
