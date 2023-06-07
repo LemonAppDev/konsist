@@ -38,7 +38,7 @@ annotation class SampleAnnotation
     AnnotationTarget.FUNCTION,
     AnnotationTarget.FILE,
     AnnotationTarget.CONSTRUCTOR,
-    AnnotationTarget.TYPEALIAS
+    AnnotationTarget.TYPEALIAS,
 )
 annotation class SampleAnnotation1
 
@@ -48,7 +48,7 @@ annotation class SampleAnnotation1
     AnnotationTarget.FUNCTION,
     AnnotationTarget.FILE,
     AnnotationTarget.CONSTRUCTOR,
-    AnnotationTarget.TYPEALIAS
+    AnnotationTarget.TYPEALIAS,
 )
 annotation class SampleAnnotation2
 
