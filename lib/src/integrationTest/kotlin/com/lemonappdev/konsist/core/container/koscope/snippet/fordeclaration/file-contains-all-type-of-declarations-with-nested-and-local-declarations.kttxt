@@ -27,7 +27,7 @@ class SampleClass {
 }
 
 interface SampleInterface {
-    val sampleNestedPropertyInsideInterface = 6
+    val sampleNestedPropertyInsideInterface: String
 
     fun sampleNestedFunctionInsideInterface() {}
 

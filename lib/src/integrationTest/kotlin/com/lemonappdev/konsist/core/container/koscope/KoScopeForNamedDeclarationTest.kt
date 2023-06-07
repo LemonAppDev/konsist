@@ -84,8 +84,8 @@ class KoScopeForNamedDeclarationTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
-                    "com.sampleimport1",
-                    "com.sampleimport2",
+                    "com.lemonappdev.konsist.testdata.SampleType1",
+                    "com.lemonappdev.konsist.testdata.SampleType2",
                     "SampleClass",
                     "sampleNestedFunction",
                 ),
@@ -104,8 +104,8 @@ class KoScopeForNamedDeclarationTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
-                    "com.sampleimport1",
-                    "com.sampleimport2",
+                    "com.lemonappdev.konsist.testdata.SampleType1",
+                    "com.lemonappdev.konsist.testdata.SampleType2",
                     "sampleFunction",
                     "sampleLocalProperty",
                 ),
@@ -255,7 +255,7 @@ class KoScopeForNamedDeclarationTest {
             .shouldBeEqualTo(
                 listOf(
                     "samplepackage",
-                    "com.sampleimport",
+                    "com.lemonappdev.konsist.testdata.SampleType1",
                     "SampleClass",
                 ),
             )
@@ -274,7 +274,7 @@ class KoScopeForNamedDeclarationTest {
             .shouldBeEqualTo(
                 listOf(
                     "samplepackage",
-                    "com.sampleimport",
+                    "com.lemonappdev.konsist.testdata.SampleType1",
                     "SampleClass",
                     "sampleNestedProperty1",
                     "sampleNestedFunction",
@@ -295,7 +295,7 @@ class KoScopeForNamedDeclarationTest {
             .shouldBeEqualTo(
                 listOf(
                     "samplepackage",
-                    "com.sampleimport",
+                    "com.lemonappdev.konsist.testdata.SampleType1",
                     "SampleClass",
                 ),
             )
@@ -314,7 +314,7 @@ class KoScopeForNamedDeclarationTest {
             .shouldBeEqualTo(
                 listOf(
                     "samplepackage",
-                    "com.sampleimport",
+                    "com.lemonappdev.konsist.testdata.SampleType1",
                     "SampleClass",
                     "sampleNestedProperty1",
                     "sampleNestedFunction",
