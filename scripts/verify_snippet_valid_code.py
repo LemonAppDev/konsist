@@ -2,6 +2,7 @@ import subprocess
 import shutil
 import os
 import glob
+import sys
 import time
 
 script_path = os.path.abspath(__file__)
@@ -17,14 +18,13 @@ commandConvertingTestDataToJar = [
 ]
 
 try:
-    process = subprocess.run(commandConvertingTestDataToJar, check=True, text=True, capture_output=True)
+    subprocess.run(commandConvertingTestDataToJar, check=True, text=True, capture_output=True)
 except subprocess.CalledProcessError as e:
     print(f"An error occurred while running the command:\n{e.stderr}")
 else:
     credits
 
-# add counter and snippet-test package
-counter = 0
+# add snippet-test package
 os.makedirs(os.path.join(project_root + "/build", "snippet-test"))
 
 def copy_and_rename_files(source_dir, destination_dir):
@@ -58,7 +58,6 @@ for root, dirs, files in os.walk(destination_dir):
             process = subprocess.run(snippetCommand, check=True, text=True, capture_output=True)
         except subprocess.CalledProcessError as e:
             print(f"An error occurred while running the command:\n{e.stderr}")
-            counter += 1
         else:
             credits
 
@@ -85,5 +84,3 @@ shutil.rmtree(project_root + "/build/snippet-test")
 
 # Execute the Git command "git clean -f"
 subprocess.run(["git", "clean", "-f"])
-
-print(counter)
