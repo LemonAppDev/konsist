@@ -5,6 +5,6 @@ import java.nio.file.Paths
 
 val sep = File.separator
 
-fun String.toCanonicalPaths(): String = Paths.get(this).toString()
+fun String.toCanonicalPaths(): String = replace("/", File.separator)
 
-fun List<String>.toCanonicalPaths(): List<String> = map { Paths.get(it).toString() }
+fun List<String>.toCanonicalPaths(): List<String> = map { it.replace("/", File.separator) }
