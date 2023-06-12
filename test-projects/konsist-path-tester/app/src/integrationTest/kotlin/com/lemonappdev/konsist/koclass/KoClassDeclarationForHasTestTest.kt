@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.koclass
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
-import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.projectRootDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -40,7 +39,7 @@ class KoClassDeclarationForHasTestTest {
     fun `class-with-test-with-declared-test-file-name-suffix`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$dataTestSourceSetDirectory/sample/", absolutePath = true)
+            .scopeFromDirectory("$dataMainSourceSetDirectory/sample/", absolutePath = true)
             .classes()
             .first()
 
