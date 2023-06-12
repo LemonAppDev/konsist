@@ -25,6 +25,7 @@ else:
     credits
 
 # add snippet-test package
+counter = 0
 os.makedirs(os.path.join(project_root + "/build", "snippet-test"))
 
 def copy_and_rename_files(source_dir, destination_dir):
@@ -58,13 +59,13 @@ for root, dirs, files in os.walk(destination_dir):
             process = subprocess.run(snippetCommand, check=True, text=True, capture_output=True)
         except subprocess.CalledProcessError as e:
             print(f"An error occurred while running the command:\n{e.stderr}")
+            counter += 1
         else:
             credits
 
 # Delete the "com" directory and its contents
 try:
     shutil.rmtree(project_root + "/scripts/com")
-    print(f"Directory '{project_root}/scripts/com' deleted.")
 except FileNotFoundError:
     print(f"Directory '{project_root}/scripts/com' does not exist.")
 except OSError as e:
@@ -73,7 +74,6 @@ except OSError as e:
 # Delete the "META-INF" directory and its contents
 try:
     shutil.rmtree(project_root + "/scripts/META-INF")
-    print(f"Directory '{project_root}/scripts/META-INF' deleted.")
 except FileNotFoundError:
     print(f"Directory '{project_root}/scripts/META-INF' does not exist.")
 except OSError as e:
@@ -84,3 +84,8 @@ shutil.rmtree(project_root + "/build/snippet-test")
 
 # Execute the Git command "git clean -f"
 subprocess.run(["git", "clean", "-f"])
+
+if len(process.stderr) != 0:
+    sys.exit(1)
+else:
+    sys.exit(0)
