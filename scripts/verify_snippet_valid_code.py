@@ -24,7 +24,7 @@ else:
     error_occurred = False
 
 # add snippet-test package
-source_dir = project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kobasedeclaration"
+source_dir = project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core"
 destination_dir = project_root + "/build/snippet-test"
 
 def copy_and_rename_files(source_dir, destination_dir):
