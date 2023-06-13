@@ -1,1 +1,3 @@
-protected val sampleProperty: Boolean = true
+class SampleClass{
+    protected val sampleProperty: Boolean = true
+}

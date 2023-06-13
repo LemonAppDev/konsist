@@ -1,2 +1,4 @@
-protected class SampleClass {
+class SampleTopLevelClass {
+    protected class SampleClass {
+    }
 }

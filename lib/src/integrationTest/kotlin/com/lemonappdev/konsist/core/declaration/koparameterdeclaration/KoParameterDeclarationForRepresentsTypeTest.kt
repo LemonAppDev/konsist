@@ -17,7 +17,7 @@ class KoParameterDeclarationForRepresentsTypeTest {
 
         // then
         assertSoftly(sut) {
-            representsType("SampleType") shouldBeEqualTo true
+            representsType("() -> Unit") shouldBeEqualTo true
             representsType("OtherType") shouldBeEqualTo false
         }
     }
