@@ -25,6 +25,20 @@ class KoDeclarationExtForObjectTest {
         }
     }
 
+    @Test
+    fun `object-has-suppress-annotation-without-import`() {
+        // given
+        val sut = getSnippetFile("object-has-suppress-annotation-without-import")
+            .objects()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasAnnotationOf<Suppress>() shouldBeEqualTo true
+            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("api/ext/declaration/kodeclaration/snippet/forobject/", fileName)
 }
