@@ -55,13 +55,11 @@ for root, dirs, files in os.walk(destination_dir):
         except subprocess.CalledProcessError as e:
             # Exclude specific error messages.
             # It should be removed `if` branch when multi platform option and `data object` will be add
-            if " is only available since language version 1.9" in e.stderr:
-                print(f"Expected error occurred, excluding it: \n{e.stderr}")
-            elif " is experimental and should be enabled explicitly" in e.stderr:
-                print(f"Expected error occurred, excluding it: \n{e.stderr}")
-            else:
-                print(f"An error occurred while running the command:\n{e.stderr}")
-                error_occurred = True
+            if " is only available since language version 1.9" in e.stderr or " is experimental and should be enabled explicitly" in e.stderr:
+            error_occurred = False
+        else:
+             print(f"An error occurred while running the command:\n{e.stderr}")
+             error_occurred = True
 
 # Delete the "com" directory and its contents
 try:
