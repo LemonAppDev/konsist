@@ -12,11 +12,12 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KonsistScopeFromFileTest {
+
     @Test
-    fun `scopeFromFile with absolutePath true`() {
+    fun `scopeFromFile`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetDirectory/sample/AppClass.kt".toCanonicalPaths(), absolutePath = true)
+            .scopeFromFile("/app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toCanonicalPaths())
             .mapToFilePaths()
 
         // then
@@ -26,33 +27,10 @@ class KonsistScopeFromFileTest {
     }
 
     @Test
-    fun `scopeFromFile with absolutePath false`() {
-        // given
-        val sut = Konsist
-            .scopeFromFile("/app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toCanonicalPaths(), absolutePath = false)
-            .mapToFilePaths()
-
-        // then
-        sut.shouldBeEqualTo(
-            listOf("$appMainSourceSetDirectory/sample/AppClass.kt").toCanonicalPathss(),
-        )
-    }
-
-    @Test
-    fun `scopeFromFile with absolutePath true throws exception if path does not exist`() {
-        // given
-        val func = { Konsist.scopeFromFile("$appMainSourceSetDirectory/NonExistingTest.kt".toCanonicalPaths(), absolutePath = true) }
-
-        // then
-        val message = "File does not exist: $appMainSourceSetDirectory${sep}NonExistingTest.kt"
-        func shouldThrow IllegalArgumentException::class withMessage message
-    }
-
-    @Test
-    fun `scopeFromFile with absolutePath false throws exception if path does not exist`() {
+    fun `scopeFromFile throws exception if path does not exist`() {
         // given
         val func =
-            { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt".toCanonicalPaths(), absolutePath = false) }
+            { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt".toCanonicalPaths()) }
 
         // then
         val message = "File does not exist: $appMainSourceSetDirectory${sep}NonExistingTest.kt"
@@ -60,19 +38,9 @@ class KonsistScopeFromFileTest {
     }
 
     @Test
-    fun `scopeFromFile with absolutePath true throws exception if path points to directory`() {
+    fun `scopeFromFile throws exception if path points to directory`() {
         // given
-        val func = { Konsist.scopeFromFile("$appMainSourceSetDirectory/sample/".toCanonicalPaths(), absolutePath = true) }
-
-        // then
-        val message = "Path is a directory, but should be a file: $appMainSourceSetDirectory${sep}sample$sep"
-        func shouldThrow IllegalArgumentException::class withMessage message
-    }
-
-    @Test
-    fun `scopeFromFile with absolutePath false throws exception if path points to directory`() {
-        // given
-        val func = { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/sample".toCanonicalPaths(), absolutePath = false) }
+        val func = { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/sample".toCanonicalPaths()) }
 
         // then
         val message = "Path is a directory, but should be a file: $appMainSourceSetDirectory${sep}sample"
