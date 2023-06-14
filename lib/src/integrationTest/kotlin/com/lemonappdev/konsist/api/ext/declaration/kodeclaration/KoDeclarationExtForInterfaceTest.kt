@@ -25,6 +25,20 @@ class KoDeclarationExtForInterfaceTest {
         }
     }
 
+    @Test
+    fun `interface-has-suppress-annotation-without-import`() {
+        // given
+        val sut = getSnippetFile("interface-has-suppress-annotation-without-import")
+            .interfaces()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasAnnotationOf<Suppress>() shouldBeEqualTo true
+            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("api/ext/declaration/kodeclaration/snippet/forinterface/", fileName)
 }

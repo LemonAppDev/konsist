@@ -27,6 +27,22 @@ class KoDeclarationExtForSecondaryConstructorTest {
         }
     }
 
+    @Test
+    fun `secondary-constructor-has-suppress-annotation-without-import`() {
+        // given
+        val sut = getSnippetFile("secondary-constructor-has-suppress-annotation-without-import")
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasAnnotationOf<Suppress>() shouldBeEqualTo true
+            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("api/ext/declaration/kodeclaration/snippet/forsecondaryconstructor/", fileName)
 }

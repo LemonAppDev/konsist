@@ -59,5 +59,20 @@ class KoFileForAnnotationTest {
         }
     }
 
+    @Test
+    fun `file-contains-suppress-annotation-without-import`() {
+        // given
+        val sut = getSnippetFile("file-contains-suppress-annotation-without-import")
+            .files()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasAnnotationsOf(Suppress::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo false
+            hasAnnotationsOf(Suppress::class, SampleAnnotation1::class) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/kofile/snippet/forannotation/", fileName)
 }

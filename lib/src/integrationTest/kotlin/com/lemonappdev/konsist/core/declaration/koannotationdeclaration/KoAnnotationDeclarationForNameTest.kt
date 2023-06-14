@@ -41,7 +41,7 @@ class KoAnnotationDeclarationForNameTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleAnnotationWithoutImport"
+        sut.fullyQualifiedName shouldBeEqualTo ""
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koannotationdeclaration/snippet/forname/", fileName)

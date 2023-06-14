@@ -4,6 +4,6 @@
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
 
-fun sampleFunction {
+fun sampleFunction() {
     val sampleLocalProperty = 7
 }

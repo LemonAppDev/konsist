@@ -151,6 +151,24 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         }
     }
 
+    @ParameterizedTest
+    @MethodSource("provideValuesForDeclarationWithSuppressAnnotation")
+    fun `declaration-with-suppress-annotation-without-import`(
+        fileName: String,
+        declarationName: String,
+    ) {
+        // given
+        val sut = getSnippetFile(fileName)
+            .declarations(includeNested = true)
+            .first { it.name == declarationName }
+
+        // then
+        assertSoftly(sut) {
+            annotations.size shouldBeEqualTo 1
+            hasAnnotationsOf(Suppress::class) shouldBeEqualTo true
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kodeclaration/snippet/forannotationwithdeclaration/", fileName)
 
@@ -283,6 +301,16 @@ class KoDeclarationForAnnotationWithDeclarationTest {
             arguments("property-has-two-annotations", "sampleProperty", SampleAnnotation1::class, true),
             arguments("property-has-two-annotations", "sampleProperty", SampleAnnotation2::class, true),
             arguments("property-has-two-annotations", "sampleProperty", NonExistingAnnotation::class, false),
+        )
+
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValuesForDeclarationWithSuppressAnnotation() = listOf(
+            arguments("class-has-suppress-annotation-without-import", "SampleClass"),
+            arguments("function-has-suppress-annotation-without-import", "sampleFunction"),
+            arguments("interface-has-suppress-annotation-without-import", "SampleInterface"),
+            arguments("object-has-suppress-annotation-without-import", "SampleObject"),
+            arguments("property-has-suppress-annotation-without-import", "sampleProperty"),
         )
     }
 }

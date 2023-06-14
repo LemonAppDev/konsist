@@ -21,7 +21,7 @@ class KoObjectDeclarationForModifierTest {
     fun `companion-object`() {
         // given
         val sut = getSnippetFile("companion-object")
-            .objects()
+            .objects(includeNested = true)
             .first()
 
         // then

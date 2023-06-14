@@ -1,1 +1,3 @@
-companion object SampleObject
+class SampleClass {
+    companion object SampleObject
+}
