@@ -57,9 +57,9 @@ for root, dirs, files in os.walk(destination_dir):
             # It should be removed `if` branch when multi platform option and `data object` will be add
             if " is only available since language version 1.9" in e.stderr or " is experimental and should be enabled explicitly" in e.stderr:
             error_occurred = False
-        else:
-             print(f"An error occurred while running the command:\n{e.stderr}")
-             error_occurred = True
+            else:
+                 print(f"An error occurred while running the command:\n{e.stderr}")
+                 error_occurred = True
 
 # Delete the "com" directory and its contents
 try:
