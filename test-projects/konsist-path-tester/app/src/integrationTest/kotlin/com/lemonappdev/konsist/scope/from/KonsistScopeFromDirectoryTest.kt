@@ -1,10 +1,9 @@
 package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.helper.ext.fileSeparator
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
-import com.lemonappdev.konsist.helper.ext.sep
-import com.lemonappdev.konsist.helper.ext.toCanonicalPaths
-import com.lemonappdev.konsist.helper.ext.toCanonicalPathss
+import com.lemonappdev.konsist.helper.ext.toCanonicalPath
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
@@ -17,7 +16,7 @@ class KonsistScopeFromDirectoryTest {
     fun `scopeFromDirectory`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/sample/".toCanonicalPaths())
+            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/sample/".toCanonicalPath())
             .mapToFilePaths()
 
         // then
@@ -25,7 +24,7 @@ class KonsistScopeFromDirectoryTest {
             listOf(
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-            ).toCanonicalPathss(),
+            ).toCanonicalPath(),
         )
     }
 
@@ -33,10 +32,10 @@ class KonsistScopeFromDirectoryTest {
     fun `scopeFromDirectory throws exception if path does not exist`() {
         // given
         val func =
-            { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/nonExisting/".toCanonicalPaths()) }
+            { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/nonExisting/".toCanonicalPath()) }
 
         // then
-        val message = "Directory does not exist: $appMainSourceSetDirectory${sep}nonExisting$sep"
+        val message = "Directory does not exist: $appMainSourceSetDirectory${fileSeparator}nonExisting$fileSeparator"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
@@ -46,12 +45,13 @@ class KonsistScopeFromDirectoryTest {
         val func =
             {
                 Konsist.scopeFromDirectory(
-                    "app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toCanonicalPaths(),
+                    "app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toCanonicalPath(),
                 )
             }
 
         // then
-        val message = "Path is a file, but should be a directory: $appMainSourceSetDirectory${sep}sample${sep}AppClass.kt"
+        val message =
+            "Path is a file, but should be a directory: $appMainSourceSetDirectory${fileSeparator}sample${fileSeparator}AppClass.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 }
