@@ -6,6 +6,7 @@ object PathProvider {
     val projectRootDirectory = File("")
         .absoluteFile
         .path
+        .replace(File.separator, "/")
         .dropLastWhile { it != '/' }
         .dropLastWhile { it != '/' }
         .dropLast(1)
