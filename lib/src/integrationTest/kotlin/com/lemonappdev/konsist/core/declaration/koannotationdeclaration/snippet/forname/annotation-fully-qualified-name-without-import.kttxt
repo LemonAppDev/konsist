@@ -1,3 +1,5 @@
 @SampleAnnotationWithoutImport
 fun sampleFunction() {
 }
+
+annotation class SampleAnnotationWithoutImport

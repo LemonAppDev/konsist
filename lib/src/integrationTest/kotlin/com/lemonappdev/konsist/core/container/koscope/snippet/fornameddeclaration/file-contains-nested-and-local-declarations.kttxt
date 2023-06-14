@@ -1,8 +1,9 @@
 package com.samplepackage
 
-import com.sampleimport
+import com.lemonappdev.konsist.testdata.SampleType1
 
-class SampleClass {
+
+class SampleClass(sampleParameter: SampleType1) {
     val sampleNestedProperty1: Boolean = true
 
     fun sampleNestedFunction() {

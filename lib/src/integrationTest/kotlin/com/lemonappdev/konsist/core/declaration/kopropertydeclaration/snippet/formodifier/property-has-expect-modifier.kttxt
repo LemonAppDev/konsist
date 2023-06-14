@@ -1,3 +1,1 @@
-abstract class SampleClass {
-    expect abstract var sampleProperty: String
-}
+expect var sampleProperty: String

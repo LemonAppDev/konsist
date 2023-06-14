@@ -7,4 +7,8 @@ import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
  *
  * @return `true` if this annotation represents the type of [T], `false` otherwise.
  */
-inline fun <reified T> KoAnnotationDeclaration.representsTypeOf(): Boolean = T::class.qualifiedName == fullyQualifiedName
+inline fun <reified T> KoAnnotationDeclaration.representsTypeOf(): Boolean = if (T::class.qualifiedName?.startsWith("kotlin.") == true) {
+    T::class.simpleName == name
+} else {
+    T::class.qualifiedName == fullyQualifiedName
+}

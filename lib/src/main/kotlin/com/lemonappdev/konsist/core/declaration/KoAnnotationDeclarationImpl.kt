@@ -14,7 +14,7 @@ internal class KoAnnotationDeclarationImpl private constructor(
         containingFile
             .imports
             .firstOrNull { it.text.endsWith(".$name") }
-            ?.name ?: name
+            ?.name ?: ""
     }
 
     override fun representsType(name: String): Boolean = name == this.name || name == fullyQualifiedName

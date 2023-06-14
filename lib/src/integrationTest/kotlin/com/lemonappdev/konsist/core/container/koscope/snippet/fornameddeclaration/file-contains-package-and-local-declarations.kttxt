@@ -1,5 +1,5 @@
 package com.samplepackage
 
-fun sampleFunction {
+fun sampleFunction() {
     val sampleLocalProperty = 7
 }

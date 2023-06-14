@@ -70,7 +70,6 @@ class KoDeclarationForVisibilityModifierWithDeclarationTest {
             arguments("typealias-has-no-visibility-modifier", "SampleTypeAlias", true, false, false, false, false),
             arguments("typealias-has-public-visibility-modifier", "SampleTypeAlias", true, true, false, false, false),
             arguments("typealias-has-private-visibility-modifier", "SampleTypeAlias", false, false, true, false, false),
-            arguments("typealias-has-protected-visibility-modifier", "SampleTypeAlias", false, false, false, true, false),
             arguments("typealias-has-internal-visibility-modifier", "SampleTypeAlias", false, false, false, false, true),
         )
     }

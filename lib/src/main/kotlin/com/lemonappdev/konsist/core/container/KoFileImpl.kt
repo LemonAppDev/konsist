@@ -40,7 +40,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
             .toCanonicalPaths()
     }
 
-    override val rootProjectPath by lazy {
+    override val projectPath by lazy {
         val rootPathProvider = PathProvider
             .getInstance()
             .rootProjectPath
@@ -55,7 +55,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
             .rootProjectPath
             .substringAfterLast('/')
 
-        val moduleName = rootProjectPath
+        val moduleName = projectPath
             .substringBefore("/src/")
             .substringAfter("/")
 
@@ -67,7 +67,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     }
 
     override val sourceSetName: String by lazy {
-        rootProjectPath
+        projectPath
             .substringAfter("/src/")
             .substringBefore("/")
     }
@@ -126,7 +126,13 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     }
 
     override fun hasAnnotationsOf(vararg names: KClass<*>): Boolean = names.all {
-        annotations.any { annotation -> annotation.fullyQualifiedName == it.qualifiedName }
+        annotations.any { annotation ->
+            if (it.qualifiedName?.startsWith("kotlin.") == true) {
+                annotation.name == it.simpleName
+            } else {
+                annotation.fullyQualifiedName == it.qualifiedName
+            }
+        }
     }
 
     override fun hasPackage(name: String): Boolean = packagee
@@ -149,7 +155,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
 
     override fun resideInPath(path: String) = LocationHelper.resideInLocation(path, this.path)
 
-    override fun resideInRootProjectPath(path: String) = LocationHelper.resideInLocation(path, rootProjectPath)
+    override fun resideInProjectPath(path: String) = LocationHelper.resideInLocation(path, projectPath)
 
     override fun resideInModule(module: String): Boolean = module == moduleName
 

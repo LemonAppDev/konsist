@@ -32,10 +32,24 @@ annotation class NonExistingAnnotation
 )
 annotation class SampleAnnotation
 
-@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
+@Target(
+    AnnotationTarget.CLASS,
+    AnnotationTarget.PROPERTY,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.FILE,
+    AnnotationTarget.CONSTRUCTOR,
+    AnnotationTarget.TYPEALIAS,
+)
 annotation class SampleAnnotation1
 
-@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
+@Target(
+    AnnotationTarget.CLASS,
+    AnnotationTarget.PROPERTY,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.FILE,
+    AnnotationTarget.CONSTRUCTOR,
+    AnnotationTarget.TYPEALIAS,
+)
 annotation class SampleAnnotation2
 
 @Target(

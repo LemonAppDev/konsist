@@ -25,6 +25,22 @@ class KoAnnotationDeclarationExtTest {
         }
     }
 
+    @Test
+    fun `annotation-represents-type-without-import`() {
+        // given
+        val sut = getSnippetFile("annotation-represents-type-without-import")
+            .functions()
+            .first()
+            .annotations
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            representsTypeOf<Suppress>() shouldBeEqualTo true
+            representsTypeOf<NonExistingAnnotation>() shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("api/ext/declaration/koannotationdeclaration/snippet/", fileName)
 }

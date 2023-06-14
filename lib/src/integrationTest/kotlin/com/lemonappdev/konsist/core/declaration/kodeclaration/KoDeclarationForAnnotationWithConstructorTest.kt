@@ -127,6 +127,41 @@ class KoDeclarationForAnnotationWithConstructorTest {
         }
     }
 
+    @Test
+    fun `primary-constructor-has-suppress-annotation-without-import`() {
+        // given
+        val sut = getSnippetFile("primary-constructor-has-suppress-annotation-without-import")
+            .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        sut?.let {
+            it.annotations shouldHaveSize 1
+            it.hasAnnotationsOf(Suppress::class) shouldBeEqualTo true
+            it.hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo false
+            it.hasAnnotationsOf(Suppress::class, SampleAnnotation1::class) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `secondary-constructor-has-suppress-annotation-without-import`() {
+        // given
+        val sut = getSnippetFile("secondary-constructor-has-suppress-annotation-without-import")
+            .classes()
+            .first()
+            .secondaryConstructors
+            .first()
+
+        // then
+        sut.let {
+            it.annotations shouldHaveSize 1
+            it.hasAnnotationsOf(Suppress::class) shouldBeEqualTo true
+            it.hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo false
+            it.hasAnnotationsOf(Suppress::class, SampleAnnotation1::class) shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kodeclaration/snippet/forannotationwithconstructor/", fileName)
 }
