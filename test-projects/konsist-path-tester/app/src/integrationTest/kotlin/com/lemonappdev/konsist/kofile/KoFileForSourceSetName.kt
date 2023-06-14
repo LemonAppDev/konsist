@@ -7,9 +7,6 @@ import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirector
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirectory
-import com.lemonappdev.konsist.helper.util.PathProvider.projectRootDirectory
-import com.lemonappdev.konsist.helper.ext.mapToFilePaths
-import com.lemonappdev.konsist.helper.util.PathProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
