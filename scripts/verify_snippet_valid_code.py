@@ -53,8 +53,13 @@ for root, dirs, files in os.walk(destination_dir):
         try:
             subprocess.run(snippet_command, check=True, text=True, capture_output=True)
         except subprocess.CalledProcessError as e:
-            print(f"An error occurred while running the command:\n{e.stderr}")
-            error_occurred = True
+            # Exclude specific error messages
+            if "the feature \"multi platform projects\" is experimental and should be enabled explicitly 1" in e.stderr
+            or "the feature \"data objects\" is only available since language version 1.9" in e.stderr:
+                print("Expected error occurred, excluding it.")
+            else:
+                print(f"An error occurred while running the command:\n{e.stderr}")
+                error_occurred = True
 
 # Delete the "com" directory and its contents
 try:
