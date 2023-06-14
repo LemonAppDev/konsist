@@ -1,9 +1,8 @@
 package com.lemonappdev.konsist.koclass
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
-import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
-import com.lemonappdev.konsist.helper.util.PathProvider.projectRootDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -15,7 +14,7 @@ class KoClassDeclarationForHasTestTest {
     fun `class-with-test-with-default-parameters`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$appMainSourceSetDirectory/sample/", absolutePath = true)
+            .scopeFromDirectory("$appMainSourceSetProjectDirectory/sample/")
             .classes()
             .first()
 
@@ -27,7 +26,7 @@ class KoClassDeclarationForHasTestTest {
     fun `class-without-test-with-default-parameters`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$projectRootDirectory/buildSrc/", absolutePath = true)
+            .scopeFromDirectory("buildSrc/")
             .classes()
             .first()
 
@@ -39,7 +38,7 @@ class KoClassDeclarationForHasTestTest {
     fun `class-with-test-with-declared-test-file-name-suffix`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$dataMainSourceSetDirectory/sample/", absolutePath = true)
+            .scopeFromDirectory("$dataMainSourceSetProjectDirectory/sample/")
             .classes()
             .first()
 
@@ -51,7 +50,7 @@ class KoClassDeclarationForHasTestTest {
     fun `class-without-test-with-declared-test-file-name-suffix`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$appMainSourceSetDirectory/sample/", absolutePath = true)
+            .scopeFromDirectory("$appMainSourceSetProjectDirectory/sample/")
             .classes()
             .first()
 
@@ -68,7 +67,7 @@ class KoClassDeclarationForHasTestTest {
     ) {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$appMainSourceSetDirectory/sample/", absolutePath = true)
+            .scopeFromDirectory("$appMainSourceSetProjectDirectory/sample/")
             .classes()
             .first()
 
