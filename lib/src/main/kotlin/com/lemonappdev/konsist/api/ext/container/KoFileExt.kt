@@ -10,5 +10,11 @@ import com.lemonappdev.konsist.api.container.KoFile
 inline fun <reified T> KoFile.hasAnnotationOf(): Boolean {
     val qualifiedName = T::class.qualifiedName ?: return false
 
-    return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
+    return annotations.any {
+        if (qualifiedName.startsWith("kotlin.")) {
+            it.name == T::class.simpleName
+        } else {
+            it.fullyQualifiedName.contains(qualifiedName)
+        }
+    }
 }

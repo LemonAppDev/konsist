@@ -16,5 +16,12 @@ inline fun <reified T> KoDeclaration.hasAnnotationOf(): Boolean {
     /**
      * Returns annotations of this declaration.
      */
-    return annotations.any { it.fullyQualifiedName.contains(qualifiedName) }
+
+    return annotations.any {
+        if (qualifiedName.startsWith("kotlin.")) {
+            it.name == T::class.simpleName
+        } else {
+            it.fullyQualifiedName.contains(qualifiedName)
+        }
+    }
 }
