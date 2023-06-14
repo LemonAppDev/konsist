@@ -15,6 +15,7 @@ class KonsistRootProjectPathFromGradleModuleTest {
             .dropLastWhile { it != '/' }
             .dropLastWhile { it != '/' }
             .dropLast(1)
+            .replace("/", File.separator)
 
         // then
         Konsist.projectRootPath shouldBeEqualTo projectRootPath
