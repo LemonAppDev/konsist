@@ -34,7 +34,7 @@ class KoFileForResideInTest {
         assertSoftly(sut) {
             resideInProjectPath("..snippet..") shouldBeEqualTo true
             resideInProjectPath("..kofile${sep}snippet..") shouldBeEqualTo true
-            resideInProjectPath("..kofile..reside-in-root-project-path.kt") shouldBeEqualTo true
+            resideInProjectPath("..kofile..reside-in-project-path.kt") shouldBeEqualTo true
             resideInProjectPath("kofile${sep}snippet$sep") shouldBeEqualTo false
         }
     }
