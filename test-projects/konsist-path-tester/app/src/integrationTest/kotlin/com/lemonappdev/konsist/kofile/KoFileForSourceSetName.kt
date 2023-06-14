@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.kofile
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetProjectDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetProjectDirectory
@@ -15,7 +15,7 @@ class KoFileForSourceSetName {
     fun `source set name is 'main' in app module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetDirectory/sample/AppClass.kt")
+            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt")
             .files()
             .first()
 
