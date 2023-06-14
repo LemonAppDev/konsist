@@ -62,15 +62,15 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         var pathPrefix = if (moduleName == ROOT_MODULE_NAME) {
             projectRootPath
         } else if (moduleName != null) {
-            "$projectRootPath/$moduleName"
+            "$projectRootPath$sep$moduleName"
         } else {
             "$projectRootPath.*"
         }
 
         pathPrefix = if (sourceSetName != null) {
-            "$pathPrefix/src/$sourceSetName/.*"
+            "$pathPrefix${sep}src$sep$sourceSetName$sep.*"
         } else {
-            "$pathPrefix/src/.*"
+            "$pathPrefix${sep}src$sep.*"
         }
 
         return localProjectKotlinFiles
@@ -128,12 +128,12 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
      */
     private fun isBuildPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
-        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toCanonicalPaths())
-        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toCanonicalPaths())
+        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath$sep$gradleBuildDirectoryName$sep.*".toCanonicalPaths())
+        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath$sep.+$sep$gradleBuildDirectoryName$sep.*".toCanonicalPaths())
 
         val mavenBuildDirectoryName = "target"
-        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toCanonicalPaths())
-        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toCanonicalPaths())
+        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath$sep$mavenBuildDirectoryName$sep.*".toCanonicalPaths())
+        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath$sep.+$sep$mavenBuildDirectoryName$sep.*".toCanonicalPaths())
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
             path.matches(gradleModuleBuildDirectoryRegex) ||
