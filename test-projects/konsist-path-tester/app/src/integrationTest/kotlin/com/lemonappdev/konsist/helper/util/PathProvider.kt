@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.helper.util
 
+import com.lemonappdev.konsist.helper.ext.toCanonicalPath
 import java.io.File
 
 object PathProvider {
@@ -11,27 +12,27 @@ object PathProvider {
         .dropLastWhile { it != '/' }
         .dropLast(1)
 
-    val rootMainSourceSetDirectory = "$projectRootDirectory/src/main/kotlin/com/lemonappdev"
+    val rootMainSourceSetDirectory = "$projectRootDirectory/src/main/kotlin/com/lemonappdev".toCanonicalPath()
 
-    const val rootMainSourceSetProjectDirectory = "src/main/kotlin/com/lemonappdev"
+    val rootMainSourceSetProjectDirectory = "src/main/kotlin/com/lemonappdev".toCanonicalPath()
 
-    val rootTestSourceSetDirectory = "$projectRootDirectory/src/test/kotlin/com/lemonappdev"
+    val rootTestSourceSetDirectory = "$projectRootDirectory/src/test/kotlin/com/lemonappdev".toCanonicalPath()
 
-    const val rootTestSourceSetProjectDirectory = "src/test/kotlin/com/lemonappdev"
+    val rootTestSourceSetProjectDirectory = "src/test/kotlin/com/lemonappdev".toCanonicalPath()
 
-    val appMainSourceSetDirectory = "$projectRootDirectory/app/src/main/kotlin/com/lemonappdev"
+    val appMainSourceSetDirectory = "$projectRootDirectory/app/src/main/kotlin/com/lemonappdev".toCanonicalPath()
 
-    const val appMainSourceSetProjectDirectory = "app/src/main/kotlin/com/lemonappdev"
+    val appMainSourceSetProjectDirectory = "app/src/main/kotlin/com/lemonappdev".toCanonicalPath()
 
-    val appIntegrationTestSourceSetDirectory = "$projectRootDirectory/app/src/integrationTest/kotlin/com/lemonappdev"
+    val appIntegrationTestSourceSetDirectory = "$projectRootDirectory/app/src/integrationTest/kotlin/com/lemonappdev".toCanonicalPath()
 
-    const val appIntegrationTestSourceSetProjectDirectory = "app/src/integrationTest/kotlin/com/lemonappdev"
+    val appIntegrationTestSourceSetProjectDirectory = "app/src/integrationTest/kotlin/com/lemonappdev".toCanonicalPath()
 
-    val dataMainSourceSetDirectory = "$projectRootDirectory/data/src/main/kotlin/com/lemonappdev"
+    val dataMainSourceSetDirectory = "$projectRootDirectory/data/src/main/kotlin/com/lemonappdev".toCanonicalPath()
 
-    const val dataMainSourceSetProjectDirectory = "data/src/main/kotlin/com/lemonappdev"
+    val dataMainSourceSetProjectDirectory = "data/src/main/kotlin/com/lemonappdev".toCanonicalPath()
 
-    val dataTestSourceSetDirectory = "$projectRootDirectory/data/src/test/kotlin/com/lemonappdev"
+    val dataTestSourceSetDirectory = "$projectRootDirectory/data/src/test/kotlin/com/lemonappdev".toCanonicalPath()
 
-    const val dataTestSourceSetProjectDirectory = "data/src/test/kotlin/com/lemonappdev"
+    val dataTestSourceSetProjectDirectory = "data/src/test/kotlin/com/lemonappdev".toCanonicalPath()
 }
