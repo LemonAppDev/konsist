@@ -55,8 +55,7 @@ for root, dirs, files in os.walk(destination_dir):
         except subprocess.CalledProcessError as e:
             # Exclude specific error messages.
             # It should be removed `if` branch when multi platform option and `data object` will be add
-            if "the feature \"multi platform projects\" is experimental and should be enabled explicitly 1" in e.stderr
-            or "the feature \"data objects\" is only available since language version 1.9" in e.stderr:
+            if "the feature \"multi platform projects\" is experimental and should be enabled explicitly 1" in e.stderr or "the feature \"data objects\" is only available since language version 1.9" in e.stderr:
                 print("Expected error occurred, excluding it.")
             else:
                 print(f"An error occurred while running the command:\n{e.stderr}")
