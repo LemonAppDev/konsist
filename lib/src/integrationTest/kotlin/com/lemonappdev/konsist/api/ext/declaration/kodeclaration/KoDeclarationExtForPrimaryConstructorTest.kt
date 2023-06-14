@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -18,10 +19,25 @@ class KoDeclarationExtForPrimaryConstructorTest {
             .primaryConstructor
 
         // then
-        sut?.let {
-            it.hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo true
-            it.hasAnnotationOf<SampleAnnotation2>() shouldBeEqualTo true
-            it.hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
+        assertSoftly(sut) {
+            it?.hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo true
+            it?.hasAnnotationOf<SampleAnnotation2>() shouldBeEqualTo true
+            it?.hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `primary-constructor-has-suppress-annotation-without-import`() {
+        // given
+        val sut = getSnippetFile("primary-constructor-has-suppress-annotation-without-import")
+            .classes()
+            .first()
+            .primaryConstructor
+
+        // then
+        assertSoftly(sut) {
+            it?.hasAnnotationOf<Suppress>() shouldBeEqualTo true
+            it?.hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
         }
     }
 

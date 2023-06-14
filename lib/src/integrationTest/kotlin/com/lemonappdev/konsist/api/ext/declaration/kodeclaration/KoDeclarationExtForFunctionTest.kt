@@ -25,6 +25,20 @@ class KoDeclarationExtForFunctionTest {
         }
     }
 
+    @Test
+    fun `function-has-suppress-annotation-without-import`() {
+        // given
+        val sut = getSnippetFile("function-has-suppress-annotation-without-import")
+            .functions()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasAnnotationOf<Suppress>() shouldBeEqualTo true
+            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("api/ext/declaration/kodeclaration/snippet/forfunction/", fileName)
 }

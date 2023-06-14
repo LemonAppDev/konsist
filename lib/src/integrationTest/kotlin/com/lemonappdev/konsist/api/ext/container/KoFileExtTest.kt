@@ -24,5 +24,19 @@ class KoFileExtTest {
         }
     }
 
+    @Test
+    fun `file-has-suppress-annotation-without-import`() {
+        // given
+        val sut = getSnippetFile("file-has-suppress-annotation-without-import")
+            .files()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasAnnotationOf<Suppress>() shouldBeEqualTo true
+            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("api/ext/container/snippet/", fileName)
 }
