@@ -51,7 +51,7 @@ interface KoFile :
     /**
      * The root project path of the file.
      */
-    val rootProjectPath: String
+    val projectPath: String
 
     /**
      * The file's source set name.
@@ -137,7 +137,7 @@ interface KoFile :
      * @param path The path to check.
      * @return `true` if a file resides in the root project path, `false` otherwise.
      */
-    fun resideInRootProjectPath(path: String): Boolean
+    fun resideInProjectPath(path: String): Boolean
 
     /**
      * Whether file reside in module.

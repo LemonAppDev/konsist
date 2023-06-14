@@ -147,21 +147,21 @@ fun <T : KoFile> Sequence<T>.withoutPath(vararg paths: String): Sequence<T> = fi
 /**
  * Sequence containing files that have project file path.
  *
- * @param paths The root project paths to include.
- * @return A sequence containing files that reside in any of the specified root project paths.
+ * @param paths The project paths to include.
+ * @return A sequence containing files that reside in any of the specified project paths.
  */
-fun <T : KoFile> Sequence<T>.withRootProjectPath(vararg paths: String): Sequence<T> = filter {
-    paths.any { path -> it.resideInRootProjectPath(path) }
+fun <T : KoFile> Sequence<T>.withProjectPath(vararg paths: String): Sequence<T> = filter {
+    paths.any { path -> it.resideInProjectPath(path) }
 }
 
 /**
- * Sequence containing files that don't have root project file path.
+ * Sequence containing files that don't have project file path.
  *
- * @param paths The root project paths to exclude.
- * @return A sequence containing files that don't reside in any of the specified root project paths.
+ * @param paths The project paths to exclude.
+ * @return A sequence containing files that don't reside in any of the specified project paths.
  */
-fun <T : KoFile> Sequence<T>.withoutRootProjectPath(vararg paths: String): Sequence<T> = filter {
-    paths.none { path -> it.resideInRootProjectPath(path) }
+fun <T : KoFile> Sequence<T>.withoutProjectPath(vararg paths: String): Sequence<T> = filter {
+    paths.none { path -> it.resideInProjectPath(path) }
 }
 
 /**

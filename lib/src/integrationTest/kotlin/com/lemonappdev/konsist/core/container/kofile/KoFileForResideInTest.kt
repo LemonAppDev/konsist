@@ -24,18 +24,18 @@ class KoFileForResideInTest {
     }
 
     @Test
-    fun `reside-in-root-project-path`() {
+    fun `reside-in-project-path`() {
         // given
-        val sut = getSnippetFile("reside-in-root-project-path")
+        val sut = getSnippetFile("reside-in-project-path")
             .files()
             .first()
 
         // then
         assertSoftly(sut) {
-            resideInRootProjectPath("..snippet..") shouldBeEqualTo true
-            resideInRootProjectPath("..kofile${sep}snippet..") shouldBeEqualTo true
-            resideInRootProjectPath("..kofile..reside-in-root-project-path.kt") shouldBeEqualTo true
-            resideInRootProjectPath("kofile${sep}snippet$sep") shouldBeEqualTo false
+            resideInProjectPath("..snippet..") shouldBeEqualTo true
+            resideInProjectPath("..kofile${sep}snippet..") shouldBeEqualTo true
+            resideInProjectPath("..kofile..reside-in-root-project-path.kt") shouldBeEqualTo true
+            resideInProjectPath("kofile${sep}snippet$sep") shouldBeEqualTo false
         }
     }
 
