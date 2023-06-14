@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
+import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toCanonicalPaths
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationHelper
@@ -30,7 +31,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     override val nameWithExtension: String by lazy {
         ktFile
             .name
-            .split("/")
+            .split(sep)
             .last()
     }
 
@@ -53,11 +54,11 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
         val projectName = PathProvider
             .getInstance()
             .rootProjectPath
-            .substringAfterLast('/')
+            .substringAfterLast(sep)
 
         val moduleName = projectPath
-            .substringBefore("/src/")
-            .substringAfter("/")
+            .substringBefore("${sep}src$sep")
+            .substringAfter(sep)
 
         if (moduleName == projectName || moduleName == "") {
             "root"
@@ -68,8 +69,8 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
 
     override val sourceSetName: String by lazy {
         projectPath
-            .substringAfter("/src/")
-            .substringBefore("/")
+            .substringAfter("${sep}src$sep")
+            .substringBefore(sep)
     }
 
     override val text by lazy {
