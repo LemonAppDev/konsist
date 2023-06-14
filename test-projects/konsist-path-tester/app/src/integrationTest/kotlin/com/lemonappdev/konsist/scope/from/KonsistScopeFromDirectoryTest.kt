@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.ext.fileSeparator
+import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.ext.toCanonicalPath
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
@@ -50,7 +50,8 @@ class KonsistScopeFromDirectoryTest {
             }
 
         // then
-        val message = "Path is a file, but should be a directory: $appMainSourceSetDirectory${fileSeparator}sample${fileSeparator}AppClass.kt"
+        val message =
+            "Path is a file, but should be a directory: $appMainSourceSetDirectory${fileSeparator}sample${fileSeparator}AppClass.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 }
