@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.api.ext.sequence.kofile
 
 import com.lemonappdev.konsist.api.ext.sequence.withPath
-import com.lemonappdev.konsist.api.ext.sequence.withRootProjectPath
+import com.lemonappdev.konsist.api.ext.sequence.withProjectPath
 import com.lemonappdev.konsist.api.ext.sequence.withoutPath
-import com.lemonappdev.konsist.api.ext.sequence.withoutRootProjectPath
+import com.lemonappdev.konsist.api.ext.sequence.withoutProjectPath
 import com.lemonappdev.konsist.core.container.KoFileImpl
 import io.mockk.every
 import io.mockk.mockk
@@ -70,21 +70,21 @@ class KoFileForPathSequenceExtTest {
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
         val file1: KoFileImpl = mockk {
-            every { resideInRootProjectPath(projectPath1) } returns true
-            every { resideInRootProjectPath(projectPath2) } returns true
+            every { resideInProjectPath(projectPath1) } returns true
+            every { resideInProjectPath(projectPath2) } returns true
         }
         val file2: KoFileImpl = mockk {
-            every { resideInRootProjectPath(projectPath1) } returns false
-            every { resideInRootProjectPath(projectPath2) } returns true
+            every { resideInProjectPath(projectPath1) } returns false
+            every { resideInProjectPath(projectPath2) } returns true
         }
         val file3: KoFileImpl = mockk {
-            every { resideInRootProjectPath(projectPath1) } returns false
-            every { resideInRootProjectPath(projectPath2) } returns false
+            every { resideInProjectPath(projectPath1) } returns false
+            every { resideInProjectPath(projectPath2) } returns false
         }
         val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withRootProjectPath(projectPath1, projectPath2)
+        val sut = files.withProjectPath(projectPath1, projectPath2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1, file2)
@@ -96,21 +96,21 @@ class KoFileForPathSequenceExtTest {
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
         val file1: KoFileImpl = mockk {
-            every { resideInRootProjectPath(projectPath1) } returns true
-            every { resideInRootProjectPath(projectPath2) } returns true
+            every { resideInProjectPath(projectPath1) } returns true
+            every { resideInProjectPath(projectPath2) } returns true
         }
         val file2: KoFileImpl = mockk {
-            every { resideInRootProjectPath(projectPath1) } returns false
-            every { resideInRootProjectPath(projectPath2) } returns true
+            every { resideInProjectPath(projectPath1) } returns false
+            every { resideInProjectPath(projectPath2) } returns true
         }
         val file3: KoFileImpl = mockk {
-            every { resideInRootProjectPath(projectPath1) } returns false
-            every { resideInRootProjectPath(projectPath2) } returns false
+            every { resideInProjectPath(projectPath1) } returns false
+            every { resideInProjectPath(projectPath2) } returns false
         }
         val files = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = files.withoutRootProjectPath(projectPath1, projectPath2)
+        val sut = files.withoutProjectPath(projectPath1, projectPath2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file3)

@@ -22,18 +22,18 @@ class KoFileForPathTest {
     }
 
     @Test
-    fun `file-root-project-path`() {
+    fun `file-project-path`() {
         // given
-        val sut = getSnippetFile("file-root-project-path")
+        val sut = getSnippetFile("file-project-path")
             .files()
             .first()
 
         // then
         sut
-            .rootProjectPath
+            .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/container/kofile/snippet/forpath/" +
-                    "file-root-project-path.kt"
+                    "file-project-path.kt"
                         .toCanonicalPaths(),
             )
     }
