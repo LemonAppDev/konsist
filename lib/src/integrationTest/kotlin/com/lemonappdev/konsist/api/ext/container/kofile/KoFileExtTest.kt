@@ -1,6 +1,7 @@
-package com.lemonappdev.konsist.api.ext.container
+package com.lemonappdev.konsist.api.ext.container.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.container.hasAnnotationOf
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
