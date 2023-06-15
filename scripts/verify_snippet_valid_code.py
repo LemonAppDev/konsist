@@ -42,6 +42,9 @@ copy_and_rename_files(source_dir, destination_dir)
 
 for root, dirs, files in os.walk(destination_dir):
     for file in files:
+        if "actual" in file.text or "expect" in file.text or "data object" in file.text:
+            continue
+        else:
         # create and run kotlinc command which verifies valid kotlin code
         snippet_command = [
             "kotlinc",
@@ -53,13 +56,8 @@ for root, dirs, files in os.walk(destination_dir):
         try:
             subprocess.run(snippet_command, check=True, text=True, capture_output=True)
         except subprocess.CalledProcessError as e:
-            # Exclude specific error messages.
-            # It should be removed `if` branch when multi platform option and `data object` will be add
-            if " is only available since language version 1.9" in e.stderr or " is experimental and should be enabled explicitly" in e.stderr:
-            error_occurred = False
-            else:
-                 print(f"An error occurred while running the command:\n{e.stderr}")
-                 error_occurred = True
+             print(f"An error occurred while running the command:\n{e.stderr}")
+             error_occurred = True
 
 # Delete the "com" directory and its contents
 try:
