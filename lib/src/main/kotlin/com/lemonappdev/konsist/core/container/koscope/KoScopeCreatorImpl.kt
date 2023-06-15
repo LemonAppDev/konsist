@@ -55,9 +55,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
                 }
             }
 
-        println("Test1: $projectKotlinFiles")
-        println("Test2: $localProjectKotlinFiles")
-
         if (moduleName == null && sourceSetName == null) {
             return localProjectKotlinFiles
         }
@@ -77,7 +74,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         return localProjectKotlinFiles
-//            .filter { it.path.matches(Regex(pathPrefix.toCanonicalPaths())) }
+            .filter { it.path.matches(Regex(pathPrefix.toCanonicalPaths())) }
     }
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
