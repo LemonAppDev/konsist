@@ -72,14 +72,14 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             "$pathPrefix/src/$sourceSetName/.*"
         } else {
             "$pathPrefix/src/.*"
-        }.toCanonicalPaths()
+        }.toRegex()
 
         println("Test1: ${projectKotlinFiles.map { it.path }.toList()}")
         println("Test2: $projectRootPath")
         println("Test3: $pathPrefix")
 
         return localProjectKotlinFiles
-            .filter { it.path.matches(Regex(pathPrefix.toRegex())) }
+            .filter { it.path.toRegex().matches(Regex(pathPrefix)) }
     }
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
