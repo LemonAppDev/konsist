@@ -45,19 +45,19 @@ for root, dirs, files in os.walk(destination_dir):
         if "actual" in file.text or "expect" in file.text or "data object" in file.text:
             continue
         else:
-        # create and run kotlinc command which verifies valid kotlin code
-        snippet_command = [
-            "kotlinc",
-            "-cp",
-            "test.jar",
-            "-nowarn",
-            os.path.join(root, file)
-        ]
-        try:
-            subprocess.run(snippet_command, check=True, text=True, capture_output=True)
-        except subprocess.CalledProcessError as e:
-             print(f"An error occurred while running the command:\n{e.stderr}")
-             error_occurred = True
+            # create and run kotlinc command which verifies valid kotlin code
+            snippet_command = [
+                "kotlinc",
+                "-cp",
+                "test.jar",
+                "-nowarn",
+                os.path.join(root, file)
+            ]
+            try:
+                subprocess.run(snippet_command, check=True, text=True, capture_output=True)
+            except subprocess.CalledProcessError as e:
+                print(f"An error occurred while running the command:\n{e.stderr}")
+                error_occurred = True
 
 # Delete the "com" directory and its contents
 try:
