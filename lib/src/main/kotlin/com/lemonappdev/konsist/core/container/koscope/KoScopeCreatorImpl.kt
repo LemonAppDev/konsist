@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toKoFile
-import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.ext.toRegex
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import java.io.File
@@ -66,7 +65,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             "$projectRootPath/$moduleName"
         } else {
             "$projectRootPath.*"
-        }.toRegex()
+        }
 
         pathPrefix = if (sourceSetName != null) {
             "$pathPrefix/src/$sourceSetName/.*"
@@ -76,9 +75,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
         return localProjectKotlinFiles
             .filter { it.path.toRegex().matches(Regex(pathPrefix)) }
-            .also {
-                it.forEach { file -> file.path.toOsSeparator() }
-            }
     }
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
@@ -140,9 +136,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toRegex())
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
-                path.matches(gradleModuleBuildDirectoryRegex) ||
-                path.matches(mavenRootBuildDirectoryRegex) ||
-                path.matches(mavenModuleBuildDirectoryRegex)
+            path.matches(gradleModuleBuildDirectoryRegex) ||
+            path.matches(mavenRootBuildDirectoryRegex) ||
+            path.matches(mavenModuleBuildDirectoryRegex)
     }
 
     private fun isTestSourceSet(name: String): Boolean {

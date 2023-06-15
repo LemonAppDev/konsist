@@ -119,7 +119,7 @@ class KonsistScopeFromProductionTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ),
+            ).toCanonicalPath(),
         )
     }
 
@@ -136,7 +136,7 @@ class KonsistScopeFromProductionTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ),
+            ).toCanonicalPath(),
         )
     }
 

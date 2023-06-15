@@ -207,7 +207,7 @@ class KonsistScopeFromPackageTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
-            ),
+            ).toCanonicalPath(),
         )
     }
 
@@ -222,7 +222,7 @@ class KonsistScopeFromPackageTest {
         sut.shouldBeEqualTo(
             listOf(
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
-            ),
+            ).toCanonicalPath(),
         )
     }
 
@@ -443,7 +443,7 @@ class KonsistScopeFromPackageTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ),
+            ).toCanonicalPath(),
         )
     }
 
@@ -460,7 +460,7 @@ class KonsistScopeFromPackageTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ),
+            ).toCanonicalPath(),
         )
     }
 }
