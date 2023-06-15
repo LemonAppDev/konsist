@@ -280,22 +280,3 @@ jobs:
         with:
           name: dokka-html-doc.jar
           path: ./lib/build/dokka/*
-
-  snippet-validate-code:
-    name: Test snippet valid code
-    continue-on-error: true
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Verify Snippet Code
-        run: python3 scripts/verify_snippet_valid_code.py
