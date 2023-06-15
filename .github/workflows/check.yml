@@ -159,7 +159,7 @@ jobs:
           -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
 
       - name: Run Integration Test
-        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest --debug
 
 #  root-path-gradle-tester-ubuntu:
 #    name: Root Path Tester Gradle Ubuntu

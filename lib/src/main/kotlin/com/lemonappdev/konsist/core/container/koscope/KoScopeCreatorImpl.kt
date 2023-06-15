@@ -55,6 +55,9 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
                 }
             }
 
+        println("Test1: $projectKotlinFiles")
+        println("Test2: $localProjectKotlinFiles")
+
         if (moduleName == null && sourceSetName == null) {
             return localProjectKotlinFiles
         }
