@@ -47,7 +47,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         ignoreBuildConfig: Boolean = true,
     ): Sequence<KoFile> {
         val localProjectKotlinFiles = projectKotlinFiles
-            .filterNot { isBuildPath(it.path) }
+            .filterNot { isBuildPath(it.path.toRegex()) }
             .let {
                 if (ignoreBuildConfig) {
                     it.filterNot { file -> file.isBuildConfigFile() }
@@ -73,10 +73,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         } else {
             "$pathPrefix/src/.*"
         }.toRegex()
-
-        println("Test1: ${projectKotlinFiles.map { it.path }.toList()}")
-        println("Test2: $projectRootPath")
-        println("Test3: $pathPrefix")
 
         return localProjectKotlinFiles
             .filter { it.path.toRegex().matches(Regex(pathPrefix)) }
@@ -140,10 +136,10 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toRegex())
         val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toRegex())
 
-        return path.substringAfter(':').matches(gradleRootBuildDirectoryRegex) ||
-            path.substringAfter(':').matches(gradleModuleBuildDirectoryRegex) ||
-            path.substringAfter(':').matches(mavenRootBuildDirectoryRegex) ||
-            path.substringAfter(':').matches(mavenModuleBuildDirectoryRegex)
+        return path.matches(gradleRootBuildDirectoryRegex) ||
+                path.matches(gradleModuleBuildDirectoryRegex) ||
+                path.matches(mavenRootBuildDirectoryRegex) ||
+                path.matches(mavenModuleBuildDirectoryRegex)
     }
 
     private fun isTestSourceSet(name: String): Boolean {
