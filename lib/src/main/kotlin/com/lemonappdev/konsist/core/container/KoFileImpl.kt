@@ -12,7 +12,7 @@ import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
 import com.lemonappdev.konsist.core.ext.sep
-import com.lemonappdev.konsist.core.ext.toCanonicalPaths
+import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationHelper
 import org.jetbrains.kotlin.psi.KtFile
@@ -38,14 +38,14 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     override val path: String by lazy {
         ktFile
             .name
-            .toCanonicalPaths()
+            .toOsSeparator()
     }
 
     override val projectPath by lazy {
         val rootPathProvider = PathProvider
             .getInstance()
             .rootProjectPath
-            .toCanonicalPaths()
+            .toOsSeparator()
 
         path.removePrefix(rootPathProvider)
     }
