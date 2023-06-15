@@ -14,9 +14,9 @@ import java.io.File
 internal class KoScopeCreatorImpl : KoScopeCreator {
     private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
 
-    private val projectKotlinFiles: Sequence<KoFile> by lazy { File(pathProvider.rootProjectPath).toKoFiles() }
+    private val projectKotlinFiles: Sequence<KoFile> by lazy { File(pathProvider.rootProjectPath.toCanonicalPaths()).toKoFiles() }
 
-    override val projectRootPath: String by lazy { pathProvider.rootProjectPath }
+    override val projectRootPath: String by lazy { pathProvider.rootProjectPath.toCanonicalPaths() }
 
     override fun scopeFromProject(moduleName: String?, sourceSetName: String?, ignoreBuildConfig: Boolean): KoScope {
         val koFiles = getFiles(moduleName, sourceSetName, ignoreBuildConfig)
@@ -46,8 +46,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         ignoreBuildConfig: Boolean = true,
     ): Sequence<KoFile> {
         val localProjectKotlinFiles = projectKotlinFiles
-            .let { it.filterNot { file -> isBuildPath(file.path) } }
-//            .filterNot { isBuildPath(it.path) }
+            .filterNot { isBuildPath(it.path) }
             .let {
                 if (ignoreBuildConfig) {
                     it.filterNot { file -> file.isBuildConfigFile() }
@@ -75,8 +74,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         return localProjectKotlinFiles
-            .let { it.filter { file -> file.path.matches(Regex(pathPrefix.toCanonicalPaths())) } }
-//            .filter { it.path.matches(Regex(pathPrefix.toCanonicalPaths())) }
+            .filter { it.path.matches(Regex(pathPrefix.toCanonicalPaths())) }
     }
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
