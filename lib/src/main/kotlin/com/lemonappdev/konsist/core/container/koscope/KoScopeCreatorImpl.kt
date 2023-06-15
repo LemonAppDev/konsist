@@ -152,7 +152,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     private fun KoFile.isBuildConfigFile(): Boolean {
-        val lowercasePath = path.lowercase()
+        val lowercasePath = path.lowercase().toRegex()
         val gradleBuildConfigDirectoryName = "buildSrc".lowercase()
         return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
     }
