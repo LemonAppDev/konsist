@@ -55,8 +55,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
                 }
             }
 
-        println("TEST1$localProjectKotlinFiles")
-
         if (moduleName == null && sourceSetName == null) {
             return localProjectKotlinFiles
         }
@@ -69,15 +67,11 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             "$projectRootPath.*"
         }
 
-        println("TEST2$pathPrefix")
-
         pathPrefix = if (sourceSetName != null) {
             "$pathPrefix${sep}src$sep$sourceSetName$sep.*"
         } else {
             "$pathPrefix${sep}src$sep.*"
         }
-
-        println("TEST3$pathPrefix")
 
         return localProjectKotlinFiles
             .filter { it.path.matches(Regex(pathPrefix)) }
