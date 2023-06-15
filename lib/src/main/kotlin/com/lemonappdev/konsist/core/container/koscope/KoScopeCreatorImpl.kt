@@ -46,7 +46,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         ignoreBuildConfig: Boolean = true,
     ): Sequence<KoFile> {
         val localProjectKotlinFiles = projectKotlinFiles
-//            .filterNot { isBuildPath(it.path) }
+            .filterNot { isBuildPath(it.path) }
 //            .let {
 //                if (ignoreBuildConfig) {
 //                    it.filterNot { file -> file.isBuildConfigFile() }
