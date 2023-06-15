@@ -15,17 +15,36 @@ import org.junit.jupiter.api.Test
 
 class KoAnnotationDeclarationForTypeSequenceExtTest {
     @Test
+    fun `withRepresentedType(String) returns annotation with given type`() {
+        // given
+        val type = "type"
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
+            every { representsType(type) } returns true
+        }
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
+            every { representsType(type) } returns false
+        }
+        val annotations = sequenceOf(annotation1, annotation2)
+
+        // when
+        val sut = annotations.withRepresentedType(type)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(annotation1)
+    }
+
+    @Test
     fun `withRepresentedType(String) returns annotations with one of given types`() {
         // given
         val type1 = "type1"
         val type2 = "type2"
         val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns true
-            every { representsType(type2) } returns true
+            every { representsType(type2) } returns false
         }
         val annotation2: KoAnnotationDeclarationImpl = mockk {
-            every { representsType(type1) } returns true
-            every { representsType(type2) } returns false
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns true
         }
         val annotation3: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns false
@@ -41,17 +60,36 @@ class KoAnnotationDeclarationForTypeSequenceExtTest {
     }
 
     @Test
+    fun `withoutRepresentedType(String) returns annotation without given type`() {
+        // given
+        val type = "type"
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
+            every { representsType(type) } returns true
+        }
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
+            every { representsType(type) } returns false
+        }
+        val annotations = sequenceOf(annotation1, annotation2)
+
+        // when
+        val sut = annotations.withoutRepresentedType(type)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(annotation2)
+    }
+
+    @Test
     fun `withoutRepresentedType(String) returns annotation without any of given types`() {
         // given
         val type1 = "type1"
         val type2 = "type2"
         val annotation1: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns true
-            every { representsType(type2) } returns true
+            every { representsType(type2) } returns false
         }
         val annotation2: KoAnnotationDeclarationImpl = mockk {
-            every { representsType(type1) } returns true
-            every { representsType(type2) } returns false
+            every { representsType(type1) } returns false
+            every { representsType(type2) } returns true
         }
         val annotation3: KoAnnotationDeclarationImpl = mockk {
             every { representsType(type1) } returns false
@@ -60,10 +98,29 @@ class KoAnnotationDeclarationForTypeSequenceExtTest {
         val annotations = sequenceOf(annotation1, annotation2, annotation3)
 
         // when
-        val sut = annotations.withoutRepresentedType(type1)
+        val sut = annotations.withoutRepresentedType(type1, type2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(annotation3)
+    }
+
+    @Test
+    fun `withRepresentedTypeOf(KClass) returns annotations with given type`() {
+        // given
+        val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
+            every { representsType(type1) } returns true
+        }
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
+            every { representsType(type1) } returns false
+        }
+        val annotations = sequenceOf(annotation1, annotation2)
+
+        // when
+        val sut = annotations.withRepresentedTypeOf(SampleAnnotation1::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(annotation1)
     }
 
     @Test
@@ -90,6 +147,25 @@ class KoAnnotationDeclarationForTypeSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(annotation1, annotation2)
+    }
+
+    @Test
+    fun `withoutRepresentedTypeOf(KClass) returns annotation without given type`() {
+        // given
+        val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
+            every { representsType(type1) } returns true
+        }
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
+            every { representsType(type1) } returns false
+        }
+        val annotations = sequenceOf(annotation1, annotation2)
+
+        // when
+        val sut = annotations.withoutRepresentedTypeOf(SampleAnnotation1::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(annotation2)
     }
 
     @Test
