@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toCanonicalPaths
 import com.lemonappdev.konsist.core.ext.toKoFile
+import com.lemonappdev.konsist.core.ext.toRegex
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import java.io.File
 
@@ -78,7 +79,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         println("Test3: $pathPrefix")
 
         return localProjectKotlinFiles
-            .filter { it.path.matches(Regex("""$pathPrefix""")) }
+            .filter { it.path.matches(Regex(pathPrefix.toRegex())) }
     }
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
@@ -132,12 +133,12 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
      */
     private fun isBuildPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
-        val gradleRootBuildDirectoryRegex = Regex("""$projectRootPath/$gradleBuildDirectoryName/.*""".toCanonicalPaths())
-        val gradleModuleBuildDirectoryRegex = Regex("""$projectRootPath/.+/$gradleBuildDirectoryName/.*""".toCanonicalPaths())
+        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toRegex())
+        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toRegex())
 
         val mavenBuildDirectoryName = "target"
-        val mavenRootBuildDirectoryRegex = Regex("""$projectRootPath/$mavenBuildDirectoryName/.*""".toCanonicalPaths())
-        val mavenModuleBuildDirectoryRegex = Regex("""$projectRootPath/.+/$mavenBuildDirectoryName/.*""".toCanonicalPaths())
+        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toRegex())
+        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toRegex())
 
         return path.substringAfter(':').matches(gradleRootBuildDirectoryRegex) ||
             path.substringAfter(':').matches(gradleModuleBuildDirectoryRegex) ||
