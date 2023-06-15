@@ -55,7 +55,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
                 }
             }
 
-        println("Test2: ${projectKotlinFiles.map { it.path }}")
+        println("Test2: ${projectKotlinFiles.map { it.path.toList() }}")
         println("Test3: $projectRootPath")
 
         if (moduleName == null && sourceSetName == null) {
