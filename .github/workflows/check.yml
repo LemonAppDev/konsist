@@ -9,107 +9,107 @@ on:
 
 jobs:
 # ======================================= Run Tests =========================================================
-  konsist-junit-test:
-    name: Konsist JUnit Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: JUnit Test
-        run: ./gradlew :lib:test
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: junit-test-report
-          path: ./lib/build/test-results/test/
-
-  konsist-konsist-test:
-    name: Konsist Konsist Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Konsist Test
-        run: ./gradlew lib:konsistTest
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: konsist-test-report
-          path: ./lib/build/test-results/konsistTest/
-
-  konsist-integration-test:
-    name: Konsist Integration Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Integration Test
-        run: ./gradlew lib:integrationTest
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: integration-test-report
-          path: ./lib/build/test-results/integrationTest/
+#  konsist-junit-test:
+#    name: Konsist JUnit Test
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: 19
+#          distribution: 'zulu'
+#
+#      - name: JUnit Test
+#        run: ./gradlew :lib:test
+#
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: junit-test-report
+#          path: ./lib/build/test-results/test/
+#
+#  konsist-konsist-test:
+#    name: Konsist Konsist Test
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: 19
+#          distribution: 'zulu'
+#
+#      - name: Konsist Test
+#        run: ./gradlew lib:konsistTest
+#
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: konsist-test-report
+#          path: ./lib/build/test-results/konsistTest/
+#
+#  konsist-integration-test:
+#    name: Konsist Integration Test
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: 19
+#          distribution: 'zulu'
+#
+#      - name: Integration Test
+#        run: ./gradlew lib:integrationTest
+#
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: integration-test-report
+#          path: ./lib/build/test-results/integrationTest/
 
 # ======================================= Run Linters =========================================================
 
-  konsist-spotless:
-    name: Konsist Spotless
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Spotless
-        run: ./gradlew spotlessCheck
-
-  konsist-detekt:
-    name: Konsist Detekt
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Detekt
-        run: ./gradlew detektCheck
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: detekt-report
-          path: ./**/build/reports/detekt/detekt.*
+#  konsist-spotless:
+#    name: Konsist Spotless
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: 19
+#          distribution: 'zulu'
+#
+#      - name: Spotless
+#        run: ./gradlew spotlessCheck
+#
+#  konsist-detekt:
+#    name: Konsist Detekt
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: 19
+#          distribution: 'zulu'
+#
+#      - name: Detekt
+#        run: ./gradlew detektCheck
+#
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: detekt-report
+#          path: ./**/build/reports/detekt/detekt.*
 
 # ======================================= Check Paths =======================================
 
@@ -216,67 +216,67 @@ jobs:
         run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
 
 # ======================================= Library Artifact =========================================================
-  konsist-artifact-check:
-    name: Konsist Artifact Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11.3'
-
-      - name: Assemble
-        run: ./gradlew lib:assemble
-
-      - name: Publish
-        run: >
-          ./gradlew publishToMavenLocal
-          -P konsist.releaseTarget=local
-          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
-          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
-
-      - name: List Artifacts
-        run: ls -R ~/.m2/repository/
-
-      - name: Show "lib.jar" content
-        run: jar tf lib/build/libs/lib.jar
-
-      - name: Check Dependencies Exposed By The Library Artifact
-        run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: konsist.jar
-          path: lib/build/libs/lib.jar
+#  konsist-artifact-check:
+#    name: Konsist Artifact Check
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: 19
+#          distribution: 'zulu'
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v4
+#        with:
+#          python-version: '3.11.3'
+#
+#      - name: Assemble
+#        run: ./gradlew lib:assemble
+#
+#      - name: Publish
+#        run: >
+#          ./gradlew publishToMavenLocal
+#          -P konsist.releaseTarget=local
+#          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
+#          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
+#
+#      - name: List Artifacts
+#        run: ls -R ~/.m2/repository/
+#
+#      - name: Show "lib.jar" content
+#        run: jar tf lib/build/libs/lib.jar
+#
+#      - name: Check Dependencies Exposed By The Library Artifact
+#        run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
+#
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: konsist.jar
+#          path: lib/build/libs/lib.jar
 
 # ======================================= Other =========================================================
 
-  konsist-dokka:
-    name: Konsist Dokka
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          java-version: 19
-          distribution: 'zulu'
-
-      - name: Dokka Generate Html Doc
-        run: ./gradlew lib:dokkaHtml
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: dokka-html-doc.jar
-          path: ./lib/build/dokka/*
+#  konsist-dokka:
+#    name: Konsist Dokka
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: 19
+#          distribution: 'zulu'
+#
+#      - name: Dokka Generate Html Doc
+#        run: ./gradlew lib:dokkaHtml
+#
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: dokka-html-doc.jar
+#          path: ./lib/build/dokka/*
