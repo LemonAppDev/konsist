@@ -54,27 +54,27 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 //                    it
 //                }
 //            }
-
-        if (moduleName == null && sourceSetName == null) {
-            return localProjectKotlinFiles
-        }
-
-        var pathPrefix = if (moduleName == ROOT_MODULE_NAME) {
-            projectRootPath
-        } else if (moduleName != null) {
-            "$projectRootPath/$moduleName"
-        } else {
-            "$projectRootPath.*"
-        }
-
-        pathPrefix = if (sourceSetName != null) {
-            "$pathPrefix/src/$sourceSetName/.*"
-        } else {
-            "$pathPrefix/src/.*"
-        }
+//
+//        if (moduleName == null && sourceSetName == null) {
+//            return localProjectKotlinFiles
+//        }
+//
+//        var pathPrefix = if (moduleName == ROOT_MODULE_NAME) {
+//            projectRootPath
+//        } else if (moduleName != null) {
+//            "$projectRootPath/$moduleName"
+//        } else {
+//            "$projectRootPath.*"
+//        }
+//
+//        pathPrefix = if (sourceSetName != null) {
+//            "$pathPrefix/src/$sourceSetName/.*"
+//        } else {
+//            "$pathPrefix/src/.*"
+//        }
 
         return localProjectKotlinFiles
-            .filter { it.path.matches(Regex(pathPrefix.toCanonicalPaths())) }
+//            .filter { it.path.matches(Regex(pathPrefix.toCanonicalPaths())) }
     }
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
