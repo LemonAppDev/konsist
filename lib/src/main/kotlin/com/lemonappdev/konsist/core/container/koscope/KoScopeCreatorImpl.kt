@@ -73,6 +73,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         } else {
             "$pathPrefix/src/.*"
         }.toRegex()
+            .toCanonicalPaths()
 
         return localProjectKotlinFiles
             .filter { it.path.toRegex().matches(Regex(pathPrefix)) }
