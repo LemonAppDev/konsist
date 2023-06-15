@@ -138,15 +138,15 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toCanonicalPaths())
         val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toCanonicalPaths())
 
-        return path.matches(gradleRootBuildDirectoryRegex) ||
-            path.matches(gradleModuleBuildDirectoryRegex) ||
-            path.matches(mavenRootBuildDirectoryRegex) ||
-            path.matches(mavenModuleBuildDirectoryRegex)
+        return path.substringAfter(':').matches(gradleRootBuildDirectoryRegex) ||
+            path.substringAfter(':').matches(gradleModuleBuildDirectoryRegex) ||
+            path.substringAfter(':').matches(mavenRootBuildDirectoryRegex) ||
+            path.substringAfter(':').matches(mavenModuleBuildDirectoryRegex)
     }
 
     private fun isTestSourceSet(name: String): Boolean {
         val lowercaseName = name.lowercase()
-        return lowercaseName.matches(Regex(".*$TEST_NAME_IN_PATH.*"))
+        return lowercaseName.substringAfter(':').matches(Regex(".*$TEST_NAME_IN_PATH.*"))
     }
 
     private fun KoFile.isBuildConfigFile(): Boolean {
