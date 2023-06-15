@@ -46,6 +46,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         ignoreBuildConfig: Boolean = true,
     ): Sequence<KoFile> {
         val localProjectKotlinFiles = projectKotlinFiles
+            .let { it.filterNot { file -> isBuildPath(file.path) } }
 //            .filterNot { isBuildPath(it.path) }
             .let {
                 if (ignoreBuildConfig) {
@@ -74,7 +75,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         }
 
         return localProjectKotlinFiles
-            .filter { it.path.matches(Regex(pathPrefix.toCanonicalPaths())) }
+            .let { it.filter { file -> file.path.matches(Regex(pathPrefix.toCanonicalPaths())) } }
+//            .filter { it.path.matches(Regex(pathPrefix.toCanonicalPaths())) }
     }
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
