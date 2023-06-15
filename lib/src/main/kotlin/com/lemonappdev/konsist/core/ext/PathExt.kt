@@ -7,4 +7,4 @@ val sep: String = File.separator
 fun String.toOsSeparator(): String = replace("/", File.separator)
     .replace("\\", File.separator)
 
-fun String.toRegex(): String = replace("\\", "/")
+fun String.toMacOsSeparator(): String = replace("\\", "/")
