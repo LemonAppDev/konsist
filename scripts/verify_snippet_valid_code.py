@@ -55,7 +55,7 @@ for root, dirs, files in os.walk(destination_dir):
                 "-cp",
                 "test.jar",
                 "-nowarn",
-                os.path.join(root, file)
+                file_path
             ]
             try:
                 subprocess.run(snippet_command, check=True, text=True, capture_output=True)
