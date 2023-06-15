@@ -41,8 +41,12 @@ def copy_and_rename_files(source_dir, destination_dir):
 copy_and_rename_files(source_dir, destination_dir)
 
 for root, dirs, files in os.walk(destination_dir):
-    for file in files:
-        if "actual" in file or "expect" in file or "data object" in file:
+    for file_name in files:
+        file_path = os.path.join(root, file_name)
+        with open(file_path, 'r') as file:
+            file_content = file.read()
+
+        if "actual" in file_content or "expect" in file_content or "data object" in file_content:
             continue
         else:
             # create and run kotlinc command which verifies valid kotlin code
