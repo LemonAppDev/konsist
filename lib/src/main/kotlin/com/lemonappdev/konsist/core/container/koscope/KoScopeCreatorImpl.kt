@@ -62,19 +62,19 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         var pathPrefix = if (moduleName == ROOT_MODULE_NAME) {
             projectRootPath
         } else if (moduleName != null) {
-            "$projectRootPath$sep$moduleName"
+            "$projectRootPath/$moduleName"
         } else {
-            projectRootPath
+            "$projectRootPath.*"
         }
 
         pathPrefix = if (sourceSetName != null) {
-            "$pathPrefix${sep}src$sep$sourceSetName$sep"
+            "$pathPrefix/src/$sourceSetName/.*"
         } else {
-            "$pathPrefix${sep}src$sep"
+            "$pathPrefix/src/.*"
         }
 
         return localProjectKotlinFiles
-            .filter { it.path.startsWith(pathPrefix) }
+            .filter { it.path.matches(Regex(pathPrefix.toCanonicalPaths())) }
     }
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
