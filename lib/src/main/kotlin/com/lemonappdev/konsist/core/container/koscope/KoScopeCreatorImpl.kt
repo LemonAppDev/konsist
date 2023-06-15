@@ -64,17 +64,17 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         } else if (moduleName != null) {
             "$projectRootPath$sep$moduleName"
         } else {
-            "$projectRootPath.*"
+            projectRootPath
         }
 
         pathPrefix = if (sourceSetName != null) {
-            "$pathPrefix${sep}src$sep$sourceSetName$sep.*"
+            "$pathPrefix${sep}src$sep$sourceSetName$sep"
         } else {
-            "$pathPrefix${sep}src$sep.*"
+            "$pathPrefix${sep}src$sep"
         }
 
         return localProjectKotlinFiles
-            .filter { it.path.matches(Regex(pathPrefix)) }
+            .filter { it.path.startsWith(pathPrefix) }
     }
 
     override fun scopeFromProduction(moduleName: String?, sourceSetName: String?): KoScope {
