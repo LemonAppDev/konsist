@@ -39,5 +39,5 @@ class KoFileExtTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("api/ext/container/snippet/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("api/ext/container/kofile/snippet/", fileName)
 }
