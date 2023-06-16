@@ -40,7 +40,7 @@ class KoClassDeclarationForHasTestTest {
         val sut = Konsist
             .scopeFromDirectory("$dataMainSourceSetProjectDirectory/sample/")
             .classes()
-            .first()
+            .first { it.name == "LibClass" }
 
         // then
         sut.hasTest("Spec") shouldBeEqualTo true
