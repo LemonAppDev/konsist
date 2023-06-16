@@ -15,6 +15,25 @@ import org.junit.jupiter.api.Test
 
 class KoComplexDeclarationForTypeSequenceExtTest {
     @Test
+    fun `withRepresentedType(String) returns complex declaration with given type`() {
+        // given
+        val type = "type"
+        val complexDeclaration1: KoComplexDeclarationImpl = mockk {
+            every { representsType(type) } returns true
+        }
+        val complexDeclaration2: KoComplexDeclarationImpl = mockk {
+            every { representsType(type) } returns false
+        }
+        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2)
+
+        // when
+        val sut = complexDeclarations.withRepresentedType(type)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(complexDeclaration1)
+    }
+
+    @Test
     fun `withRepresentedType(String) returns complex declarations with one of given types`() {
         // given
         val type1 = "type1"
@@ -38,6 +57,25 @@ class KoComplexDeclarationForTypeSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(complexDeclaration1, complexDeclaration2)
+    }
+
+    @Test
+    fun `withoutRepresentedType(String) returns complex declaration without given type`() {
+        // given
+        val type1 = "type1"
+        val complexDeclaration1: KoComplexDeclarationImpl = mockk {
+            every { representsType(type1) } returns true
+        }
+        val complexDeclaration2: KoComplexDeclarationImpl = mockk {
+            every { representsType(type1) } returns false
+        }
+        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2)
+
+        // when
+        val sut = complexDeclarations.withoutRepresentedType(type1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(complexDeclaration2)
     }
 
     @Test
