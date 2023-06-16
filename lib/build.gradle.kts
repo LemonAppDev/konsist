@@ -12,7 +12,6 @@ dependencies {
     testImplementation(libs.junitJupiterParams)
     testImplementation(libs.mockk)
     testImplementation(libs.kluent)
-    testImplementation(kotlin("script-runtime"))
 }
 
 @Suppress("UnstableApiUsage")
