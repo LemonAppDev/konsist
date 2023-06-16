@@ -105,25 +105,6 @@ class KoAnnotationDeclarationForTypeSequenceExtTest {
     }
 
     @Test
-    fun `withRepresentedTypeOf(KClass) returns annotations with given type`() {
-        // given
-        val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
-        val annotation1: KoAnnotationDeclarationImpl = mockk {
-            every { representsType(type1) } returns true
-        }
-        val annotation2: KoAnnotationDeclarationImpl = mockk {
-            every { representsType(type1) } returns false
-        }
-        val annotations = sequenceOf(annotation1, annotation2)
-
-        // when
-        val sut = annotations.withRepresentedTypeOf(SampleAnnotation1::class)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(annotation1)
-    }
-
-    @Test
     fun `withRepresentedTypeOf(KClass) returns annotations with one of given types`() {
         // given
         val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
@@ -147,25 +128,6 @@ class KoAnnotationDeclarationForTypeSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(annotation1, annotation2)
-    }
-
-    @Test
-    fun `withoutRepresentedTypeOf(KClass) returns annotation without given type`() {
-        // given
-        val type1 = "com.lemonappdev.konsist.testdata.SampleAnnotation1"
-        val annotation1: KoAnnotationDeclarationImpl = mockk {
-            every { representsType(type1) } returns true
-        }
-        val annotation2: KoAnnotationDeclarationImpl = mockk {
-            every { representsType(type1) } returns false
-        }
-        val annotations = sequenceOf(annotation1, annotation2)
-
-        // when
-        val sut = annotations.withoutRepresentedTypeOf(SampleAnnotation1::class)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(annotation2)
     }
 
     @Test
