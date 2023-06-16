@@ -10,6 +10,26 @@ import org.junit.jupiter.api.Test
 
 class KoTypeDeclarationForFullyQualifiedNameSequenceExtTest {
     @Test
+    fun `withFullyQualifiedName() returns type with given name`() {
+        // given
+        val fullyQualifiedName1 = "fullyQualifiedName1"
+        val fullyQualifiedName2 = "fullyQualifiedName2"
+        val type1: KoTypeDeclarationImpl = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName1
+        }
+        val type2: KoTypeDeclarationImpl = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName2
+        }
+        val types = sequenceOf(type1, type2)
+
+        // when
+        val sut = types.withFullyQualifiedName(fullyQualifiedName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(type1)
+    }
+
+    @Test
     fun `withFullyQualifiedName() returns types with one of given names`() {
         // given
         val fullyQualifiedName1 = "fullyQualifiedName1"
@@ -31,6 +51,26 @@ class KoTypeDeclarationForFullyQualifiedNameSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(type1, type2)
+    }
+
+    @Test
+    fun `withoutFullyQualifiedName() returns type without given name`() {
+        // given
+        val fullyQualifiedName1 = "fullyQualifiedName1"
+        val fullyQualifiedName2 = "fullyQualifiedName2"
+        val type1: KoTypeDeclarationImpl = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName1
+        }
+        val type2: KoTypeDeclarationImpl = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName2
+        }
+        val types = sequenceOf(type1, type2)
+
+        // when
+        val sut = types.withoutFullyQualifiedName(fullyQualifiedName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(type2)
     }
 
     @Test

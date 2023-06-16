@@ -42,21 +42,23 @@ fun Sequence<KoTypeDeclaration>.withoutSourceTypeOf(vararg types: KClass<*>): Se
 /**
  * Sequence containing types that have source type.
  *
+ * @param type The source type to include.
  * @param types The source types to include.
  * @return A sequence containing types that have the specified source types.
  */
-fun Sequence<KoTypeDeclaration>.withSourceType(vararg types: String): Sequence<KoTypeDeclaration> = filter {
-    types.any { type -> it.sourceType == type }
+fun Sequence<KoTypeDeclaration>.withSourceType(type: String, vararg types: String): Sequence<KoTypeDeclaration> = filter {
+    it.sourceType == type || types.any { type -> it.sourceType == type }
 }
 
 /**
  * Sequence containing types that don't have source type.
  *
+ * @param type The source type to exclude.
  * @param types The source types to exclude.
  * @return A sequence containing types that don't have the specified source types.
  */
-fun Sequence<KoTypeDeclaration>.withoutSourceType(vararg types: String): Sequence<KoTypeDeclaration> = filter {
-    types.none { type -> it.sourceType == type }
+fun Sequence<KoTypeDeclaration>.withoutSourceType(type: String, vararg types: String): Sequence<KoTypeDeclaration> = filter {
+    it.sourceType != type && types.none { type -> it.sourceType == type }
 }
 
 /**
@@ -126,19 +128,21 @@ fun Sequence<KoTypeDeclaration>.withoutImportAlias(vararg names: String): Sequen
 /**
  * Sequence containing types that have fully qualified name.
  *
+ * @param name The name to include.
  * @param names The names to include.
  * @return A sequence containing types with the specified fully qualified names.
  */
-fun Sequence<KoTypeDeclaration>.withFullyQualifiedName(vararg names: String): Sequence<KoTypeDeclaration> = filter {
-    names.any { name -> it.fullyQualifiedName == name }
+fun Sequence<KoTypeDeclaration>.withFullyQualifiedName(name: String, vararg names: String): Sequence<KoTypeDeclaration> = filter {
+    it.fullyQualifiedName == name || names.any { name -> it.fullyQualifiedName == name }
 }
 
 /**
  * Sequence containing types that don't have fully qualified name.
  *
+ * @param name The name to exclude.
  * @param names The names to exclude.
  * @return A sequence containing types without the specified fully qualified names.
  */
-fun Sequence<KoTypeDeclaration>.withoutFullyQualifiedName(vararg names: String): Sequence<KoTypeDeclaration> = filter {
-    names.none { name -> it.fullyQualifiedName == name }
+fun Sequence<KoTypeDeclaration>.withoutFullyQualifiedName(name: String, vararg names: String): Sequence<KoTypeDeclaration> = filter {
+    it.fullyQualifiedName != name && names.none { name -> it.fullyQualifiedName == name }
 }
