@@ -38,7 +38,7 @@ class KoClassDeclarationForHasTestTest {
     fun `class-with-test-with-declared-test-file-name-suffix`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("$dataMainSourceSetProjectDirectory/sample/")
+            .scopeFromProduction("data")
             .classes()
             .first()
 
