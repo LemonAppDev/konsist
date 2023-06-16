@@ -134,7 +134,7 @@ jobs:
           -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
 
       - name: Run Integration Test
-        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest -d
 
 #  path-tester-project-windows:
 #    name: Path Tester Project Windows

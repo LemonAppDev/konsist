@@ -116,6 +116,12 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
     override fun hasTest(testFileNameSuffix: String, moduleName: String?, sourceSetName: String?): Boolean = Konsist
         .scopeFromTest(moduleName, sourceSetName)
         .classes()
+        .onEach {
+            println("onEach has Test-------")
+            println("it.filePath ${it.filePath}")
+            println("it.projectFilePath ${it.projectFilePath}")
+            println("-------")
+        }
         .any { it.name == name + testFileNameSuffix }
 
     internal companion object {
