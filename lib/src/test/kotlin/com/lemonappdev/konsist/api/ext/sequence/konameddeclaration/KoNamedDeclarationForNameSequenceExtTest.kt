@@ -18,6 +18,26 @@ import org.junit.jupiter.api.Test
 
 class KoNamedDeclarationForNameSequenceExtTest {
     @Test
+    fun `withName() returns namedDeclaration with given name`() {
+        // given
+        val name1 = "sampleName1"
+        val name2 = "sampleName2"
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
+            every { name } returns name1
+        }
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
+            every { name } returns name2
+        }
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
+
+        // when
+        val sut = namedDeclarations.withName(name1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(namedDeclaration1)
+    }
+
+    @Test
     fun `withName() returns namedDeclarations with one of given names`() {
         // given
         val name1 = "sampleName1"
@@ -42,6 +62,26 @@ class KoNamedDeclarationForNameSequenceExtTest {
     }
 
     @Test
+    fun `withoutName() returns namedDeclaration without given name`() {
+        // given
+        val name1 = "sampleName1"
+        val name2 = "sampleName2"
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
+            every { name } returns name1
+        }
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
+            every { name } returns name2
+        }
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
+
+        // when
+        val sut = namedDeclarations.withoutName(name1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(namedDeclaration2)
+    }
+
+    @Test
     fun `withoutName() returns namedDeclaration without any of given names`() {
         // given
         val name1 = "sampleName1"
@@ -63,6 +103,25 @@ class KoNamedDeclarationForNameSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration3)
+    }
+
+    @Test
+    fun `withNameStartingWith() returns namedDeclaration which names starts with given prefix`() {
+        // given
+        val prefix = "prefix"
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
+            every { hasNameStartingWith(prefix) } returns true
+        }
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
+            every { hasNameStartingWith(prefix) } returns false
+        }
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
+
+        // when
+        val sut = namedDeclarations.withNameStartingWith(prefix)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(namedDeclaration1)
     }
 
     @Test
@@ -92,6 +151,25 @@ class KoNamedDeclarationForNameSequenceExtTest {
     }
 
     @Test
+    fun `withoutNameStartingWith() returns namedDeclaration which name not starts with given prefix`() {
+        // given
+        val prefix = "prefix"
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
+            every { hasNameStartingWith(prefix) } returns true
+        }
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
+            every { hasNameStartingWith(prefix) } returns false
+        }
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
+
+        // when
+        val sut = namedDeclarations.withoutNameStartingWith(prefix)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(namedDeclaration2)
+    }
+
+    @Test
     fun `withoutNameStartingWith() returns namedDeclaration which name not starts with given prefixes`() {
         // given
         val prefix1 = "prefix1"
@@ -115,6 +193,25 @@ class KoNamedDeclarationForNameSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration3)
+    }
+
+    @Test
+    fun `withNameEndingWith() returns namedDeclaration which names ends with given suffix`() {
+        // given
+        val suffix = "suffix"
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
+            every { hasNameEndingWith(suffix) } returns true
+        }
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
+            every { hasNameEndingWith(suffix) } returns false
+        }
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
+
+        // when
+        val sut = namedDeclarations.withNameEndingWith(suffix)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(namedDeclaration1)
     }
 
     @Test
@@ -144,6 +241,25 @@ class KoNamedDeclarationForNameSequenceExtTest {
     }
 
     @Test
+    fun `withoutNameEndingWith() returns namedDeclaration which name not ends with given suffix`() {
+        // given
+        val suffix = "suffix"
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
+            every { hasNameEndingWith(suffix) } returns true
+        }
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
+            every { hasNameEndingWith(suffix) } returns false
+        }
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
+
+        // when
+        val sut = namedDeclarations.withoutNameEndingWith(suffix)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(namedDeclaration2)
+    }
+
+    @Test
     fun `withoutNameEndingWith() returns namedDeclaration which name not ends with given suffixes`() {
         // given
         val suffix1 = "suffix1"
@@ -167,6 +283,25 @@ class KoNamedDeclarationForNameSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration3)
+    }
+
+    @Test
+    fun `withNameContaining() returns namedDeclaration which names contains given text`() {
+        // given
+        val text = "text"
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
+            every { hasNameContaining(text) } returns true
+        }
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
+            every { hasNameContaining(text) } returns false
+        }
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
+
+        // when
+        val sut = namedDeclarations.withNameContaining(text)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(namedDeclaration1)
     }
 
     @Test
@@ -196,6 +331,25 @@ class KoNamedDeclarationForNameSequenceExtTest {
     }
 
     @Test
+    fun `withoutNameContaining() returns namedDeclaration which name not contains given text`() {
+        // given
+        val text = "text"
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
+            every { hasNameContaining(text) } returns true
+        }
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
+            every { hasNameContaining(text) } returns false
+        }
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
+
+        // when
+        val sut = namedDeclarations.withoutNameContaining(text)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(namedDeclaration2)
+    }
+
+    @Test
     fun `withoutNameContaining() returns namedDeclaration which name not contains any of given texts`() {
         // given
         val text1 = "text1"
@@ -222,52 +376,90 @@ class KoNamedDeclarationForNameSequenceExtTest {
     }
 
     @Test
-    fun `withNameMatching() returns namedDeclarations which names contains given one of texts`() {
+    fun `withNameMatching() returns namedDeclaration which name contains given regex`() {
         // given
-        val text1 = Regex("[1-9]")
-        val text2 = Regex("[a-z]")
+        val regex = Regex("[1-9]")
         val namedDeclaration1: KoNamedDeclarationImpl = mockk {
-            every { hasNameMatching(text1) } returns true
-            every { hasNameMatching(text2) } returns true
+            every { hasNameMatching(regex) } returns true
         }
         val namedDeclaration2: KoNamedDeclarationImpl = mockk {
-            every { hasNameMatching(text1) } returns true
-            every { hasNameMatching(text2) } returns false
+            every { hasNameMatching(regex) } returns false
+        }
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
+
+        // when
+        val sut = namedDeclarations.withNameMatching(regex)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(namedDeclaration1)
+    }
+
+    @Test
+    fun `withNameMatching() returns namedDeclarations which names contains given one of regexes`() {
+        // given
+        val regex1 = Regex("[1-9]")
+        val regex2 = Regex("[a-z]")
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
+            every { hasNameMatching(regex1) } returns true
+            every { hasNameMatching(regex2) } returns true
+        }
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
+            every { hasNameMatching(regex1) } returns true
+            every { hasNameMatching(regex2) } returns false
         }
         val namedDeclaration3: KoNamedDeclarationImpl = mockk {
-            every { hasNameMatching(text1) } returns false
-            every { hasNameMatching(text2) } returns false
+            every { hasNameMatching(regex1) } returns false
+            every { hasNameMatching(regex2) } returns false
         }
         val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
-        val sut = namedDeclarations.withNameMatching(text1, text2)
+        val sut = namedDeclarations.withNameMatching(regex1, regex2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration1, namedDeclaration2)
     }
 
     @Test
-    fun `withoutNameMatching() returns namedDeclaration which name not contains given texts`() {
+    fun `withoutNameMatching() returns namedDeclaration which name not contains given regex`() {
         // given
-        val text1 = Regex("[1-9]")
-        val text2 = Regex("[a-z]")
+        val regex = Regex("[1-9]")
         val namedDeclaration1: KoNamedDeclarationImpl = mockk {
-            every { hasNameMatching(text1) } returns true
-            every { hasNameMatching(text2) } returns true
+            every { hasNameMatching(regex) } returns true
         }
         val namedDeclaration2: KoNamedDeclarationImpl = mockk {
-            every { hasNameMatching(text1) } returns true
-            every { hasNameMatching(text2) } returns false
+            every { hasNameMatching(regex) } returns false
+        }
+        val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2)
+
+        // when
+        val sut = namedDeclarations.withoutNameMatching(regex)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(namedDeclaration2)
+    }
+
+    @Test
+    fun `withoutNameMatching() returns namedDeclaration which name not contains given regexes`() {
+        // given
+        val regex1 = Regex("[1-9]")
+        val regex2 = Regex("[a-z]")
+        val namedDeclaration1: KoNamedDeclarationImpl = mockk {
+            every { hasNameMatching(regex1) } returns true
+            every { hasNameMatching(regex2) } returns true
+        }
+        val namedDeclaration2: KoNamedDeclarationImpl = mockk {
+            every { hasNameMatching(regex1) } returns true
+            every { hasNameMatching(regex2) } returns false
         }
         val namedDeclaration3: KoNamedDeclarationImpl = mockk {
-            every { hasNameMatching(text1) } returns false
-            every { hasNameMatching(text2) } returns false
+            every { hasNameMatching(regex1) } returns false
+            every { hasNameMatching(regex2) } returns false
         }
         val namedDeclarations = sequenceOf(namedDeclaration1, namedDeclaration2, namedDeclaration3)
 
         // when
-        val sut = namedDeclarations.withoutNameMatching(text1, text2)
+        val sut = namedDeclarations.withoutNameMatching(regex1, regex2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(namedDeclaration3)
