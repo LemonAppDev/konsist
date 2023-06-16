@@ -16,13 +16,9 @@ class KoClassDeclarationForHasTestTest {
         val sut = Konsist
             .scopeFromProduction("data")
             .classes()
-            .onEach {
-                println("onEach-------")
-                println("it.filePath ${it.filePath}")
-                println("it.projectFilePath ${it.projectFilePath}")
-                println("-------")
-            }
             .first()
+
+        println("Class ${sut.name}")
 
         // then
         sut.hasTest("Spec") shouldBeEqualTo true
