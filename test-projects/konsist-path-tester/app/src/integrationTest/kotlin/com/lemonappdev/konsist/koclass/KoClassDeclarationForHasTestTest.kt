@@ -16,7 +16,7 @@ class KoClassDeclarationForHasTestTest {
         val sut = Konsist
             .scopeFromProduction("data")
             .classes()
-            .first()
+            .first { it.name == "LibClass"}
 
         println("Class ${sut.name} ${sut.projectFilePath}")
 
