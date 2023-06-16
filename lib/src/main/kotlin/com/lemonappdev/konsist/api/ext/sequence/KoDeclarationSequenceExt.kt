@@ -105,7 +105,7 @@ fun <T : KoDeclaration> Sequence<T>.withAnnotations(vararg annotations: String):
 /**
  * Sequence containing declarations that have some annotations.
  *
- * @param annotations The annotation to include.
+ * @param annotation The annotation to include.
  * @param annotations The annotations to include.
  * @return A sequence containing declarations that have at least one of the specified annotations.
  */
