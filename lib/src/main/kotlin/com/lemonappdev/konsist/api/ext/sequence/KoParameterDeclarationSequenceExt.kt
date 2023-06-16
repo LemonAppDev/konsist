@@ -76,21 +76,23 @@ fun Sequence<KoParameterDeclaration>.withoutDefaultValue(vararg values: String):
 /**
  * Sequence containing all parameters that have type.
  *
+ *  @param type The type to include.
  * @param types The types to include.
  * @return A sequence containing parameters with the specified types.
  */
-fun Sequence<KoParameterDeclaration>.withRepresentedType(vararg types: String): Sequence<KoParameterDeclaration> = filter {
-    types.any { type -> it.representsType(type) }
+fun Sequence<KoParameterDeclaration>.withRepresentedType(type: String, vararg types: String): Sequence<KoParameterDeclaration> = filter {
+    it.representsType(type) || types.any { type -> it.representsType(type) }
 }
 
 /**
  * Sequence containing all parameters that don't have type.
  *
+ * @param type The type to exclude.
  * @param types The types to exclude.
  * @return A sequence containing parameters without the specified types.
  */
-fun Sequence<KoParameterDeclaration>.withoutRepresentedType(vararg types: String): Sequence<KoParameterDeclaration> = filter {
-    types.none { type -> it.representsType(type) }
+fun Sequence<KoParameterDeclaration>.withoutRepresentedType(type: String, vararg types: String): Sequence<KoParameterDeclaration> = filter {
+    !it.representsType(type) && types.none { type -> it.representsType(type) }
 }
 
 /**
