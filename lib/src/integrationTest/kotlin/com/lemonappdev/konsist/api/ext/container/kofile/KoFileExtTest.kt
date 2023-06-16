@@ -1,7 +1,7 @@
-package com.lemonappdev.konsist.api.ext.declaration.kodeclaration
+package com.lemonappdev.konsist.api.ext.container.kofile
 
-import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.container.hasAnnotationOf
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
@@ -9,12 +9,12 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoDeclarationExtForClassTest {
+class KoFileExtTest {
     @Test
-    fun `class-has-two-annotations-of-type`() {
+    fun `file-has-two-annotations-of-type`() {
         // given
-        val sut = getSnippetFile("class-has-two-annotations-of-type")
-            .classes()
+        val sut = getSnippetFile("file-has-two-annotations-of-type")
+            .files()
             .first()
 
         // then
@@ -26,10 +26,10 @@ class KoDeclarationExtForClassTest {
     }
 
     @Test
-    fun `class-has-suppress-annotation-without-import`() {
+    fun `file-has-suppress-annotation-without-import`() {
         // given
-        val sut = getSnippetFile("class-has-suppress-annotation-without-import")
-            .classes()
+        val sut = getSnippetFile("file-has-suppress-annotation-without-import")
+            .files()
             .first()
 
         // then
@@ -39,6 +39,5 @@ class KoDeclarationExtForClassTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("api/ext/declaration/kodeclaration/snippet/forclass/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("api/ext/container/kofile/snippet/", fileName)
 }
