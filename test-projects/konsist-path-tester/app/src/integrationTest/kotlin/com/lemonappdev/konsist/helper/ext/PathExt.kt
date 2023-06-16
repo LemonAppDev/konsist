@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.helper.ext
 
 import java.io.File
+import java.nio.file.Paths
 
 val fileSeparator: String = File.separator
 

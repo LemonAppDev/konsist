@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.kofile
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.helper.ext.toCanonicalPath
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetProjectDirectory
@@ -17,7 +18,7 @@ class KoFileForModuleName {
     fun `module name is 'app'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt")
+            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toCanonicalPath())
             .files()
             .first()
 
@@ -33,7 +34,7 @@ class KoFileForModuleName {
     fun `module name is 'data'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt")
+            .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toCanonicalPath())
             .files()
             .first()
 
@@ -49,7 +50,7 @@ class KoFileForModuleName {
     fun `module name is 'root'`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt")
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toCanonicalPath())
             .files()
             .first()
 
