@@ -101,11 +101,11 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromDirectory(path: String): KoScope {
         val absolutePath = "$projectRootPath$sep$path"
-        val directory = File(absolutePath)
-        require(directory.exists()) { "Directory does not exist: $absolutePath" }
-        require(!directory.isFile) { "Path is a file, but should be a directory: $absolutePath" }
 
-        val files = directory.toKoFiles()
+        val files = projectKotlinFiles
+            .filter { it.path.startsWith(absolutePath) }
+
+        require(files.toList().isNotEmpty()) { "Directory does not exist: $absolutePath" }
 
         return KoScopeImpl(files)
     }
