@@ -117,7 +117,7 @@ fun Sequence<KoAnnotationDeclaration>.withFullyQualifiedClassName(name: String, 
  */
 fun Sequence<KoAnnotationDeclaration>.withoutFullyQualifiedClassName(
     name: String,
-    vararg names: String
+    vararg names: String,
 ): Sequence<KoAnnotationDeclaration> = filter {
     it.fullyQualifiedName != name && names.none { fullyQualifiedName -> it.fullyQualifiedName == fullyQualifiedName }
 }

@@ -23,7 +23,7 @@ fun Sequence<KoPackageDeclaration>.withQualifiedName(qualifiedName: String, vara
  */
 fun Sequence<KoPackageDeclaration>.withoutQualifiedName(
     qualifiedName: String,
-    vararg qualifiedNames: String
+    vararg qualifiedNames: String,
 ): Sequence<KoPackageDeclaration> = filter {
     it.qualifiedName != qualifiedName && qualifiedNames.none { name -> it.qualifiedName == name }
 }

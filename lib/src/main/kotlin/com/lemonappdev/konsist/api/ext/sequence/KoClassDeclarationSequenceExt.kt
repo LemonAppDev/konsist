@@ -249,11 +249,11 @@ inline fun <reified T> Sequence<KoClassDeclaration>.withoutParentOf(): Sequence<
  */
 fun Sequence<KoClassDeclaration>.withParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
     it.parents.any { parent -> parent.name == name.simpleName } &&
-            names.all { kClass ->
-                it
-                    .parents
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+        names.all { kClass ->
+            it
+                .parents
+                .any { parent -> parent.name == kClass.simpleName }
+        }
 }
 
 /**
@@ -265,11 +265,11 @@ fun Sequence<KoClassDeclaration>.withParentsOf(name: KClass<*>, vararg names: KC
  */
 fun Sequence<KoClassDeclaration>.withSomeParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
     it.parents.any { parent -> parent.name == name.simpleName } ||
-            names.any { kClass ->
-                it
-                    .parents
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+        names.any { kClass ->
+            it
+                .parents
+                .any { parent -> parent.name == kClass.simpleName }
+        }
 }
 
 /**
@@ -281,11 +281,11 @@ fun Sequence<KoClassDeclaration>.withSomeParentsOf(name: KClass<*>, vararg names
  */
 fun Sequence<KoClassDeclaration>.withoutParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
     it.parents.none { parent -> parent.name == name.simpleName } &&
-            names.none { kClass ->
-                it
-                    .parents
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+        names.none { kClass ->
+            it
+                .parents
+                .any { parent -> parent.name == kClass.simpleName }
+        }
 }
 
 /**
@@ -352,11 +352,11 @@ inline fun <reified T> Sequence<KoClassDeclaration>.withoutParentInterfaceOf(): 
  */
 fun Sequence<KoClassDeclaration>.withParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
     it.parentInterfaces.any { parent -> parent.name == name.simpleName } &&
-            names.all { kClass ->
-                it
-                    .parentInterfaces
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+        names.all { kClass ->
+            it
+                .parentInterfaces
+                .any { parent -> parent.name == kClass.simpleName }
+        }
 }
 
 /**
@@ -369,11 +369,11 @@ fun Sequence<KoClassDeclaration>.withParentInterfacesOf(name: KClass<*>, vararg 
 fun Sequence<KoClassDeclaration>.withSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> =
     filter {
         it.parentInterfaces.any { parent -> parent.name == name.simpleName } ||
-                names.any { kClass ->
-                    it
-                        .parentInterfaces
-                        .any { parent -> parent.name == kClass.simpleName }
-                }
+            names.any { kClass ->
+                it
+                    .parentInterfaces
+                    .any { parent -> parent.name == kClass.simpleName }
+            }
     }
 
 /**
@@ -386,11 +386,11 @@ fun Sequence<KoClassDeclaration>.withSomeParentInterfacesOf(name: KClass<*>, var
 fun Sequence<KoClassDeclaration>.withoutParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> =
     filter {
         it.parentInterfaces.none { parent -> parent.name == name.simpleName } &&
-        names.none { kClass ->
-            it
-                .parentInterfaces
-                .any { parent -> parent.name == kClass.simpleName }
-        }
+            names.none { kClass ->
+                it
+                    .parentInterfaces
+                    .any { parent -> parent.name == kClass.simpleName }
+            }
     }
 
 /**
