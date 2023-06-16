@@ -30,41 +30,32 @@ fun Sequence<KoAnnotationDeclaration>.withoutRepresentedType(type: String, varar
 /**
  * Sequence containing all annotations that represents the type.
  *
- * @param type The Kotlin class representing the type to include.
  * @param types The Kotlin classes representing the types to include.
  * @return A sequence containing annotations with types matching the specified Kotlin classes.
  */
-fun Sequence<KoAnnotationDeclaration>.withRepresentedTypeOf(type: KClass<*>, vararg types: KClass<*>): Sequence<KoAnnotationDeclaration> =
+fun Sequence<KoAnnotationDeclaration>.withRepresentedTypeOf(vararg types: KClass<*>): Sequence<KoAnnotationDeclaration> =
     filter {
-        type.qualifiedName?.let { name -> it.representsType(name) } ?: false
-                ||
-                types.any { type ->
-                    type
-                        .qualifiedName
-                        ?.let { name -> it.representsType(name) }
-                        ?: false
-                }
+        types.any { type ->
+            type
+                .qualifiedName
+                ?.let { name -> it.representsType(name) }
+                ?: false
+        }
     }
 
 /**
  * Sequence containing all annotations that do not represent the type.
  *
- * @param type The Kotlin class representing the type to exclude.
  * @param types The Kotlin classes representing the types to exclude.
  * @return A sequence containing annotations without types matching the specified Kotlin classes.
  */
-fun Sequence<KoAnnotationDeclaration>.withoutRepresentedTypeOf(
-    type: KClass<*>,
-    vararg types: KClass<*>
-): Sequence<KoAnnotationDeclaration> = filter {
-    type.qualifiedName?.let { name -> !it.representsType(name) } ?: false
-            &&
-            types.none { type ->
-                type
-                    .qualifiedName
-                    ?.let { name -> it.representsType(name) }
-                    ?: false
-            }
+fun Sequence<KoAnnotationDeclaration>.withoutRepresentedTypeOf(vararg types: KClass<*>): Sequence<KoAnnotationDeclaration> = filter {
+    types.none { type ->
+        type
+            .qualifiedName
+            ?.let { name -> it.representsType(name) }
+            ?: false
+    }
 }
 
 /**
@@ -112,9 +103,10 @@ fun Sequence<KoAnnotationDeclaration>.withoutName(name: String, vararg names: St
  * @param names The names to include.
  * @return A sequence containing annotations with the specified fully qualified names.
  */
-fun Sequence<KoAnnotationDeclaration>.withFullyQualifiedClassName(name: String, vararg names: String): Sequence<KoAnnotationDeclaration> = filter {
-    it.fullyQualifiedName == name || names.any { fullyQualifiedName -> it.fullyQualifiedName == fullyQualifiedName }
-}
+fun Sequence<KoAnnotationDeclaration>.withFullyQualifiedClassName(name: String, vararg names: String): Sequence<KoAnnotationDeclaration> =
+    filter {
+        it.fullyQualifiedName == name || names.any { fullyQualifiedName -> it.fullyQualifiedName == fullyQualifiedName }
+    }
 
 /**
  * Sequence containing all annotations that don't have the fully qualified name.
@@ -123,6 +115,9 @@ fun Sequence<KoAnnotationDeclaration>.withFullyQualifiedClassName(name: String, 
  * @param names The names to exclude.
  * @return A sequence containing annotations without the specified fully qualified names.
  */
-fun Sequence<KoAnnotationDeclaration>.withoutFullyQualifiedClassName(name: String, vararg names: String): Sequence<KoAnnotationDeclaration> = filter {
+fun Sequence<KoAnnotationDeclaration>.withoutFullyQualifiedClassName(
+    name: String,
+    vararg names: String
+): Sequence<KoAnnotationDeclaration> = filter {
     it.fullyQualifiedName != name && names.none { fullyQualifiedName -> it.fullyQualifiedName == fullyQualifiedName }
 }
