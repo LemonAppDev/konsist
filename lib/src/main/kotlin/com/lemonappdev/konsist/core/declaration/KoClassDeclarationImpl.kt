@@ -117,7 +117,7 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
         .scopeFromTest(moduleName, sourceSetName)
         .classes()
         .onEach {
-            println("hasTest ${it.name}")
+            println("hasTest ${it.name} ${it.projectFilePath}")
         }
         .any { it.name == name + testFileNameSuffix }
 

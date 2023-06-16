@@ -18,7 +18,7 @@ class KoClassDeclarationForHasTestTest {
             .classes()
             .first()
 
-        println("Class ${sut.name}")
+        println("Class ${sut.name} ${sut.projectFilePath}")
 
         // then
         sut.hasTest("Spec") shouldBeEqualTo true
