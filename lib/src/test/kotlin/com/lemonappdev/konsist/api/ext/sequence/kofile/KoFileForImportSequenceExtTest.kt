@@ -48,44 +48,6 @@ class KoFileForImportSequenceExtTest {
     }
 
     @Test
-    fun `withImports(String) returns file with given import`() {
-        // given
-        val import = "SampleImport"
-        val file1: KoFileImpl = mockk {
-            every { hasImports(import) } returns true
-        }
-        val file2: KoFileImpl = mockk {
-            every { hasImports(import) } returns false
-        }
-        val files = sequenceOf(file1, file2)
-
-        // when
-        val sut = files.withImports(import)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(file1)
-    }
-
-    @Test
-    fun `withoutImports(String) returns file without given import`() {
-        // given
-        val import = "SampleImport"
-        val file1: KoFileImpl = mockk {
-            every { hasImports(import) } returns true
-        }
-        val file2: KoFileImpl = mockk {
-            every { hasImports(import) } returns false
-        }
-        val files = sequenceOf(file1, file2)
-
-        // when
-        val sut = files.withoutImports(import)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(file2)
-    }
-
-    @Test
     fun `withImports(String) returns file with all of given imports`() {
         // given
         val import1 = "SampleImport1"
@@ -123,6 +85,25 @@ class KoFileForImportSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(file2)
+    }
+
+    @Test
+    fun `withSomeImports(String) returns file with given import`() {
+        // given
+        val import = "SampleImport"
+        val file1: KoFileImpl = mockk {
+            every { hasImports(import) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasImports(import) } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withSomeImports(import)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
     }
 
     @Test
