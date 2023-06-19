@@ -35,14 +35,4 @@ class KonsistScopeFromFileTest {
         val message = "File does not exist: $appMainSourceSetDirectory${fileSeparator}NonExistingTest.kt"
         func shouldThrow IllegalArgumentException::class withMessage message
     }
-
-    @Test
-    fun `scopeFromFile throws exception if path points to directory`() {
-        // given
-        val func = { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/sample".toCanonicalPath()) }
-
-        // then
-        val message = "Path is a directory, but should be a file: $appMainSourceSetDirectory${fileSeparator}sample"
-        func shouldThrow IllegalArgumentException::class withMessage message
-    }
 }

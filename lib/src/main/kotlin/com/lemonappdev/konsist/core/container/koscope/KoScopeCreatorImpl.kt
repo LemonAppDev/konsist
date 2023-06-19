@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.container.koscope.KoScope
 import com.lemonappdev.konsist.api.container.koscope.KoScopeCreator
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
+import com.lemonappdev.konsist.core.ext.isKotlinSnippetFile
 import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toKoFile
 import com.lemonappdev.konsist.core.ext.toMacOsSeparator
@@ -101,6 +102,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromDirectory(path: String): KoScope {
         val absolutePath = "$projectRootPath$sep$path"
+            .replace("$sep, $sep", sep) // if given path starts with file separator `absolutePath` contains `//`
 
         val files = projectKotlinFiles
             .filter { it.path.startsWith(absolutePath) }
@@ -112,15 +114,15 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromFile(path: String): KoScope {
         val absolutePath = "$projectRootPath$sep$path"
+            .replace("kttxt", "kt")
+            .replace("$sep$sep", sep) // if given path starts with file separator `absolutePath` contains `//`
 
-        val file = File(absolutePath)
+        val files = projectKotlinFiles
+            .filter { it.path == absolutePath }
 
-        require(file.exists()) { "File does not exist: $absolutePath" }
-        require(file.isFile) { "Path is a directory, but should be a file: $absolutePath" }
+        require(files.toList().isNotEmpty()) { "File does not exist: $absolutePath" }
 
-        val koKoFile = file.toKoFile()
-
-        return KoScopeImpl(koKoFile)
+        return KoScopeImpl(files)
     }
 
     /**
@@ -153,7 +155,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     private fun File.toKoFiles(): Sequence<KoFile> = walk()
-        .filter { it.isKotlinFile }
+        .filter { it.isKotlinFile || it.isKotlinSnippetFile }
         .map { it.toKoFile() }
 
     companion object {
