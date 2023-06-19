@@ -17,6 +17,8 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     private val projectKotlinFiles: Sequence<KoFile> by lazy { File(pathProvider.rootProjectPath).toKoFiles() }
 
+    private val projectKttxtFiles: Sequence<KoFile> by lazy { File(pathProvider.rootProjectPath).toKoFilesFromKttxt() }
+
     override val projectRootPath: String by lazy { pathProvider.rootProjectPath }
 
     override fun scopeFromProject(moduleName: String?, sourceSetName: String?, ignoreBuildConfig: Boolean): KoScope {
@@ -117,12 +119,12 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             .replace("kttxt", "kt")
             .replace("$sep$sep", sep) // if given path starts with file separator `absolutePath` contains `//`
 
-        val files = projectKotlinFiles
-            .filter { it.path == absolutePath }
+        val koFile = projectKttxtFiles
+            .firstOrNull { it.path == absolutePath }
 
-        require(files.toList().isNotEmpty()) { "File does not exist: $absolutePath" }
+        require(koFile != null) { "File does not exist: $absolutePath" }
 
-        return KoScopeImpl(files)
+        return KoScopeImpl(koFile)
     }
 
     /**
@@ -155,7 +157,11 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
     }
 
     private fun File.toKoFiles(): Sequence<KoFile> = walk()
-        .filter { it.isKotlinFile || it.isKotlinSnippetFile }
+        .filter { it.isKotlinFile }
+        .map { it.toKoFile() }
+
+    private fun File.toKoFilesFromKttxt(): Sequence<KoFile> = walk()
+        .filter { it.isKotlinSnippetFile }
         .map { it.toKoFile() }
 
     companion object {
