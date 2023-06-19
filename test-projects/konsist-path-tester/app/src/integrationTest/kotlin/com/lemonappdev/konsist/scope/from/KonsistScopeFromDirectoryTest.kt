@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.scope.from
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.fileSeparator
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
-import com.lemonappdev.konsist.helper.ext.toCanonicalPath
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
@@ -16,7 +16,7 @@ class KonsistScopeFromDirectoryTest {
     fun `scopeFromDirectory`() {
         // given
         val sut = Konsist
-            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/sample/".toCanonicalPath())
+            .scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/sample/".toOsSeparator())
             .mapToFilePaths()
 
         // then
@@ -24,7 +24,7 @@ class KonsistScopeFromDirectoryTest {
             listOf(
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -32,7 +32,7 @@ class KonsistScopeFromDirectoryTest {
     fun `scopeFromDirectory throws exception if path does not exist`() {
         // given
         val func =
-            { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/nonExisting/".toCanonicalPath()) }
+            { Konsist.scopeFromDirectory("app/src/main/kotlin/com/lemonappdev/nonExisting/".toOsSeparator()) }
 
         // then
         val message = "Directory does not exist: $appMainSourceSetDirectory${fileSeparator}nonExisting$fileSeparator"
@@ -45,7 +45,7 @@ class KonsistScopeFromDirectoryTest {
         val func =
             {
                 Konsist.scopeFromDirectory(
-                    "app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toCanonicalPath(),
+                    "app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toOsSeparator(),
                 )
             }
 
