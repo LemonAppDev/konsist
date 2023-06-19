@@ -140,11 +140,12 @@ fun <T : KoDeclaration> Sequence<T>.withAnnotationsOf(annotation: KClass<*>, var
 /**
  * Sequence containing declarations that have some annotations of type.
  *
- * @param annotations The Kotlin class(es) representing annotation(s) to include.
+ * @param annotation The Kotlin class representing annotation to include.
+ * @param annotations The Kotlin classes representing annotations to include.
  * @return A sequence containing declarations that have at least one of the specified the annotations.
  */
-fun <T : KoDeclaration> Sequence<T>.withSomeAnnotationsOf(vararg annotations: KClass<*>): Sequence<T> = filter {
-    annotations.any { annotation -> it.hasAnnotationsOf(annotation) }
+fun <T : KoDeclaration> Sequence<T>.withSomeAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> = filter {
+    it.hasAnnotationsOf(annotation) || annotations.any { annotation -> it.hasAnnotationsOf(annotation) }
 }
 
 /**

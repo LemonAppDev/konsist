@@ -49,14 +49,15 @@ fun Sequence<KoAnnotationDeclaration>.withRepresentedTypeOf(vararg types: KClass
  * @param types The Kotlin classes representing the types to exclude.
  * @return A sequence containing annotations without types matching the specified Kotlin classes.
  */
-fun Sequence<KoAnnotationDeclaration>.withoutRepresentedTypeOf(vararg types: KClass<*>): Sequence<KoAnnotationDeclaration> = filter {
-    types.none { type ->
-        type
-            .qualifiedName
-            ?.let { name -> it.representsType(name) }
-            ?: false
+fun Sequence<KoAnnotationDeclaration>.withoutRepresentedTypeOf(vararg types: KClass<*>): Sequence<KoAnnotationDeclaration> =
+    filter {
+        types.none { type ->
+            type
+                .qualifiedName
+                ?.let { name -> it.representsType(name) }
+                ?: false
+        }
     }
-}
 
 /**
  * Sequence containing all annotations that represents the type.
