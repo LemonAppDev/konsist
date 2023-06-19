@@ -1,10 +1,11 @@
 package com.lemonappdev.konsist.core.ext
 
+import com.lemonappdev.konsist.core.util.PathHelper.toMacOsSeparator
+import com.lemonappdev.konsist.core.util.PathHelper.toOsSeparator
 import java.io.File
 
 val sep: String = File.separator
 
-fun String.toOsSeparator(): String = replace("/", File.separator)
-    .replace("\\", File.separator)
+internal fun String.toOsSeparator(): String = toOsSeparator(this)
 
-fun String.toMacOsSeparator(): String = replace("\\", "/")
+internal fun String.toMacOsSeparator(): String = toMacOsSeparator(this)
