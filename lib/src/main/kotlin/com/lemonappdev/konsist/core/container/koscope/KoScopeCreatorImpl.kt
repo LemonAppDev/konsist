@@ -101,6 +101,12 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromDirectory(path: String): KoScope {
         val absolutePath = "$projectRootPath$sep$path"
+        return createScopeFromDirectory(absolutePath)
+    }
+
+    override fun scopeFromExternalDirectory(absolutePath: String): KoScope = createScopeFromDirectory(absolutePath)
+
+    private fun createScopeFromDirectory(absolutePath: String): KoScope {
         val directory = File(absolutePath)
         require(directory.exists()) { "Directory does not exist: $absolutePath" }
         require(!directory.isFile) { "Path is a file, but should be a directory: $absolutePath" }
