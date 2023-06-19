@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.container.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.ext.toCanonicalPaths
+import com.lemonappdev.konsist.core.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -17,24 +17,24 @@ class KoFileForPathTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("kofile/snippet/forpath/file-path.kt".toCanonicalPaths()) shouldBeEqualTo true
+            endsWith("kofile/snippet/forpath/file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
     @Test
-    fun `file-root-project-path`() {
+    fun `file-project-path`() {
         // given
-        val sut = getSnippetFile("file-root-project-path")
+        val sut = getSnippetFile("file-project-path")
             .files()
             .first()
 
         // then
         sut
-            .rootProjectPath
+            .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/container/kofile/snippet/forpath/" +
-                    "file-root-project-path.kt"
-                        .toCanonicalPaths(),
+                    "file-project-path.kt"
+                        .toOsSeparator(),
             )
     }
 

@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
-import com.lemonappdev.konsist.helper.ext.toCanonicalPathss
+import com.lemonappdev.konsist.helper.ext.toCanonicalPath
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
@@ -29,7 +29,7 @@ class KonsistScopeFromSourceSetTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ).toCanonicalPathss(),
+            ).toCanonicalPath(),
         )
     }
 
@@ -62,7 +62,7 @@ class KonsistScopeFromSourceSetTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
-            ).toCanonicalPathss(),
+            ).toCanonicalPath(),
         )
     }
 
@@ -79,7 +79,7 @@ class KonsistScopeFromSourceSetTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-            ).toCanonicalPathss(),
+            ).toCanonicalPath(),
         )
     }
 
@@ -103,7 +103,7 @@ class KonsistScopeFromSourceSetTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ).toCanonicalPathss(),
+            ).toCanonicalPath(),
         )
     }
 }

@@ -2,16 +2,13 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.container.koscope.KoScope
-import com.lemonappdev.konsist.core.ext.toCanonicalPaths
-import java.io.File
+import com.lemonappdev.konsist.core.ext.toOsSeparator
 
 object TestSnippetProvider {
-    private val modulePath = File("").absoluteFile.path
-
-    private val testSourceSetPath = "$modulePath/src/integrationTest/kotlin/com/lemonappdev/konsist/".toCanonicalPaths()
+    private val testSourceSetPath = "lib/src/integrationTest/kotlin/com/lemonappdev/konsist/".toOsSeparator()
 
     fun getSnippetKoScope(snippetRelativePath: String, fileName: String): KoScope {
-        val snippetPath = "$testSourceSetPath${snippetRelativePath.toCanonicalPaths()}$fileName.kttxt"
-        return Konsist.scopeFromFile(snippetPath, absolutePath = true)
+        val snippetPath = "$testSourceSetPath${snippetRelativePath.toOsSeparator()}$fileName.kttxt"
+        return Konsist.scopeFromFile(snippetPath)
     }
 }

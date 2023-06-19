@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
-import com.lemonappdev.konsist.core.ext.toCanonicalPaths
+import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationHelper
 import com.lemonappdev.konsist.core.util.TagHelper
@@ -16,14 +16,14 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         psiElement
             .containingFile
             .name
-            .toCanonicalPaths()
+            .toOsSeparator()
     }
 
     override val projectFilePath: String by lazy {
         val rootPathProvider = PathProvider
             .getInstance()
             .rootProjectPath
-            .toCanonicalPaths()
+            .toOsSeparator()
 
         filePath.removePrefix(rootPathProvider)
     }

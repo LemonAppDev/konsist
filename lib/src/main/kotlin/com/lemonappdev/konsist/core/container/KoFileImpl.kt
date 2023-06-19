@@ -11,7 +11,8 @@ import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
-import com.lemonappdev.konsist.core.ext.toCanonicalPaths
+import com.lemonappdev.konsist.core.ext.sep
+import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationHelper
 import org.jetbrains.kotlin.psi.KtFile
@@ -30,21 +31,21 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     override val nameWithExtension: String by lazy {
         ktFile
             .name
-            .split("/")
+            .split(sep)
             .last()
     }
 
     override val path: String by lazy {
         ktFile
             .name
-            .toCanonicalPaths()
+            .toOsSeparator()
     }
 
-    override val rootProjectPath by lazy {
+    override val projectPath by lazy {
         val rootPathProvider = PathProvider
             .getInstance()
             .rootProjectPath
-            .toCanonicalPaths()
+            .toOsSeparator()
 
         path.removePrefix(rootPathProvider)
     }
@@ -53,11 +54,11 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
         val projectName = PathProvider
             .getInstance()
             .rootProjectPath
-            .substringAfterLast('/')
+            .substringAfterLast(sep)
 
-        val moduleName = rootProjectPath
-            .substringBefore("/src/")
-            .substringAfter("/")
+        val moduleName = projectPath
+            .substringBefore("${sep}src$sep")
+            .substringAfter(sep)
 
         if (moduleName == projectName || moduleName == "") {
             "root"
@@ -67,9 +68,9 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     }
 
     override val sourceSetName: String by lazy {
-        rootProjectPath
-            .substringAfter("/src/")
-            .substringBefore("/")
+        projectPath
+            .substringAfter("${sep}src$sep")
+            .substringBefore(sep)
     }
 
     override val text by lazy {
@@ -126,7 +127,13 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     }
 
     override fun hasAnnotationsOf(vararg names: KClass<*>): Boolean = names.all {
-        annotations.any { annotation -> annotation.fullyQualifiedName == it.qualifiedName }
+        annotations.any { annotation ->
+            if (it.qualifiedName?.startsWith("kotlin.") == true) {
+                annotation.name == it.simpleName
+            } else {
+                annotation.fullyQualifiedName == it.qualifiedName
+            }
+        }
     }
 
     override fun hasPackage(name: String): Boolean = packagee
@@ -149,7 +156,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
 
     override fun resideInPath(path: String) = LocationHelper.resideInLocation(path, this.path)
 
-    override fun resideInRootProjectPath(path: String) = LocationHelper.resideInLocation(path, rootProjectPath)
+    override fun resideInProjectPath(path: String) = LocationHelper.resideInLocation(path, projectPath)
 
     override fun resideInModule(module: String): Boolean = module == moduleName
 

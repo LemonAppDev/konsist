@@ -26,7 +26,7 @@ fun Sequence<KoParameterDeclaration>.withoutVarargModifier(): Sequence<KoParamet
 fun Sequence<KoParameterDeclaration>.withNoInlineModifier(): Sequence<KoParameterDeclaration> = filter { it.hasNoInlineModifier() }
 
 /**
- * Sequence containing all parameters that don't have `vararg` modifier.
+ * Sequence containing all parameters that don't have `noinline` modifier.
  *
  * @return A sequence containing parameters without the `noinline` modifier.
  */
@@ -40,7 +40,7 @@ fun Sequence<KoParameterDeclaration>.withoutNoInlineModifier(): Sequence<KoParam
 fun Sequence<KoParameterDeclaration>.withCrossInlineModifier(): Sequence<KoParameterDeclaration> = filter { it.hasCrossInlineModifier() }
 
 /**
- * Sequence containing all parameters that don't have `vararg` modifier.
+ * Sequence containing all parameters that don't have `crossinline` modifier.
  *
  * @return A sequence containing parameters without the `crossinline` modifier.
  */

@@ -11,9 +11,11 @@ class KonsistRootProjectPathFromGradleModuleTest {
         val projectRootPath = File("")
             .absoluteFile
             .path
+            .replace(File.separator, "/")
             .dropLastWhile { it != '/' }
             .dropLastWhile { it != '/' }
             .dropLast(1)
+            .replace("/", File.separator)
 
         // then
         Konsist.projectRootPath shouldBeEqualTo projectRootPath

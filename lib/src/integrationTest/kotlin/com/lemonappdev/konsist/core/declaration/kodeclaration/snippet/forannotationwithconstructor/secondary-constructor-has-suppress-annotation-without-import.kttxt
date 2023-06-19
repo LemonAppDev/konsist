@@ -1,0 +1,3 @@
+class SampleClass(val sampleProperty1: Int) {
+    @Suppress constructor(sampleProperty2: Int, sampleProperty1: Int): this(sampleProperty1)
+}

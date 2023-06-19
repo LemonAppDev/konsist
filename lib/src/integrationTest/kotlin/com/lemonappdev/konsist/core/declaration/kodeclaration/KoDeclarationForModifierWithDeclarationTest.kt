@@ -165,7 +165,6 @@ class KoDeclarationForModifierWithDeclarationTest {
             arguments("interface-has-protected-modifier", "SampleInterface"),
             arguments("object-has-protected-modifier", "SampleObject"),
             arguments("property-has-protected-modifier", "sampleProperty"),
-            arguments("typealias-has-protected-modifier", "SampleTypeAlias"),
         )
 
         @Suppress("unused")

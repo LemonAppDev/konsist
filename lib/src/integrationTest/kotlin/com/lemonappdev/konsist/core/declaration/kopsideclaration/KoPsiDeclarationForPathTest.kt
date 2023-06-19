@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kopsideclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.core.ext.toCanonicalPaths
+import com.lemonappdev.konsist.core.ext.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -17,7 +17,7 @@ class KoPsiDeclarationForPathTest {
         // then
         assertSoftly(sut.filePath) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("kopsideclaration/snippet/forpath/file-path.kt".toCanonicalPaths()) shouldBeEqualTo true
+            endsWith("kopsideclaration/snippet/forpath/file-path.kt".toOsSeparator()) shouldBeEqualTo true
         }
     }
 
@@ -33,7 +33,7 @@ class KoPsiDeclarationForPathTest {
             .projectFilePath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kopsideclaration/snippet/forpath/" +
-                    "project-file-path.kt".toCanonicalPaths(),
+                    "project-file-path.kt".toOsSeparator(),
             )
     }
 

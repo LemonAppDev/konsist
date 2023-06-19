@@ -87,7 +87,13 @@ internal abstract class KoDeclarationImpl(
     }
 
     override fun hasAnnotationsOf(vararg names: KClass<*>): Boolean = names.all {
-        annotations.any { annotation -> annotation.fullyQualifiedName == it.qualifiedName }
+        annotations.any { annotation ->
+            if (it.qualifiedName?.startsWith("kotlin.") == true) {
+                annotation.name == it.simpleName
+            } else {
+                annotation.fullyQualifiedName == it.qualifiedName
+            }
+        }
     }
 
     override fun hasModifiers(vararg koModifiers: KoModifier): Boolean = when {
