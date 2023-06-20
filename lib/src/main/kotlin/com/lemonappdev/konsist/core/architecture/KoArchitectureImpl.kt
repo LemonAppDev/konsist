@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.architecture
 
 class KoArchitectureImpl(vararg layers: Layer): KoArchitecture {
-    val allLayers = layers.toMutableList() // jakis check? Czy jest valid?
-    // musimy zrobic zeby sie odswiezala
+    private val allLayers = layers.toMutableList() // jakis check? Czy jest valid?
+
     val dependencies = mutableMapOf<Layer, List<Layer>>()
 
     /*
@@ -29,21 +29,19 @@ class KoArchitectureImpl(vararg layers: Layer): KoArchitecture {
 
     override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
         require(allLayers.contains(layer) && layers.all { allLayers.contains(it) }) { "Some layer doesn't exist." }
-        addDependentLayers(layer, *layers)
+        dependencies[this] = listOf(layer, *layers)
     }
 
     override fun Layer.dependsOnAllLayers() {
-        addDependentLayers(allLayers)
+        dependencies[this] = allLayers
     }
 
     override fun Layer.notDependOnAnyLayer() {
-        clearDependentLayers()
+        dependencies[this] = emptyList()
     }
 
     override fun Layer.dependsOnAllLayersExpect(layer: Layer, vararg layers: Layer) {
         require(allLayers.contains(layer) && layers.all { allLayers.contains(it) }) { "Some layer doesn't exist." }
-
-        addDependentLayers(allLayers)
-        removeDependentLayers(layer, *layers)
+        dependencies[this] = allLayers - layer - layers.toSet()
     }
 }

@@ -15,9 +15,10 @@ fun main() {
             service.dependsOn(controller, persistence)
             controller.dependsOnAllLayers()
             persistence.notDependOnAnyLayer()
+
         }
 
-    println(koArchitecture.allLayers.map { it.name + it.isDependOnLayers })
+    println(koArchitecture.dependencies)
 
     Konsist.scopeFromProduction()
         .assert(koArchitecture)
