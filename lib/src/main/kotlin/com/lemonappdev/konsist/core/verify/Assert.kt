@@ -6,10 +6,8 @@ import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
-import com.lemonappdev.konsist.api.ext.sequence.withImports
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.architecture.KoArchitecture
-import com.lemonappdev.konsist.core.architecture.KoArchitectureImpl
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
@@ -27,9 +25,16 @@ fun <E : KoBaseDeclaration> Sequence<E>.assertNot(function: (E) -> Boolean?) {
 fun KoScope.assert(architecture: KoArchitecture): Boolean {
     val files = files()
     return architecture.dependencies.filter { it.value.isNotEmpty() }.all { (t, u) ->
+        val other = (architecture.allLayers - u).map { it.isDefinedBy }
+
         files
             .withPackage(t.isDefinedBy)
-            .withImports(*u.map { it.isDefinedBy }.toTypedArray()) == files
+            .flatMap { it.imports }
+            .none {
+                other.any { other ->
+                    it.hasNameContaining(other)
+                }
+            }
     }
 }
 
@@ -46,7 +51,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
             val checkMethodName = Thread.currentThread().stackTrace[2].methodName
             throw KoPreconditionFailedException(
                 "Declaration list is empty. Please make sure that list of declarations contain items " +
-                    "before calling the '$checkMethodName' method.",
+                        "before calling the '$checkMethodName' method.",
             )
         }
 
@@ -100,10 +105,10 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                (
-                    it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
-                        it.text.endsWith("Suppress(\"$testMethodName\")")
-                    )
+                    (
+                            it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
+                                    it.text.endsWith("Suppress(\"$testMethodName\")")
+                            )
         }
         .forEach {
             if (it is KoDeclaration) {

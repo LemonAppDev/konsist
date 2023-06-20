@@ -5,16 +5,14 @@ import com.lemonappdev.konsist.core.verify.assert
 
 
 fun main() {
-    val main = Layer("Main", "..main..")                       // name is necessary now?
     val api = Layer("Api", "..api..")
     val core = Layer("Core", "..core..")
 
     val koArchitecture = Konsist
-        .architecture(main, api, core)
+        .architecture(api, core)
         .addDependencies {
-            main.dependsOn(api, core)
-            api.notDependOnAnyLayer()
-            core.notDependOnAnyLayer()
+            api.dependsOn(core)
+            core.dependsOn(api)
         }
 
     println(koArchitecture.dependencies)
