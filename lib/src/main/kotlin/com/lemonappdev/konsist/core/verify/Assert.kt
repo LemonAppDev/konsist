@@ -6,6 +6,8 @@ import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.api.ext.sequence.withImports
+import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.architecture.KoArchitecture
 import com.lemonappdev.konsist.core.architecture.KoArchitectureImpl
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
@@ -22,12 +24,17 @@ fun <E : KoBaseDeclaration> Sequence<E>.assertNot(function: (E) -> Boolean?) {
     assert(function, false)
 }
 
-fun KoScope.assert(architecture: KoArchitecture) {
-    this.imports()
+fun KoScope.assert(architecture: KoArchitecture): Boolean {
+    val files = files()
+    return architecture.dependencies.all { (t, u) ->
+
+        files
+            .withPackage(t.isDefinedBy)
+            .withImports(*u.map { it.isDefinedBy }.toTypedArray()) == files
+    }
 }
 
-fun KoScope.assertNot(architecture: KoArchitecture) {
-}
+fun KoScope.assertNot(architecture: KoArchitecture) = !assert(architecture)
 
 @Suppress("detekt.ThrowsCount")
 private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
