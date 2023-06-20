@@ -1,10 +1,13 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.container.koscope.KoScope
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.core.architecture.KoArchitecture
+import com.lemonappdev.konsist.core.architecture.KoArchitectureImpl
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
@@ -17,6 +20,13 @@ fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?) {
 
 fun <E : KoBaseDeclaration> Sequence<E>.assertNot(function: (E) -> Boolean?) {
     assert(function, false)
+}
+
+fun KoScope.assert(architecture: KoArchitecture) {
+    this.imports()
+}
+
+fun KoScope.assertNot(architecture: KoArchitecture) {
 }
 
 @Suppress("detekt.ThrowsCount")
