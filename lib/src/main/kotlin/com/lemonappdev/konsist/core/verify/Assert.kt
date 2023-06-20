@@ -26,8 +26,7 @@ fun <E : KoBaseDeclaration> Sequence<E>.assertNot(function: (E) -> Boolean?) {
 
 fun KoScope.assert(architecture: KoArchitecture): Boolean {
     val files = files()
-    return architecture.dependencies.all { (t, u) ->
-
+    return architecture.dependencies.filter { it.value.isNotEmpty() }.all { (t, u) ->
         files
             .withPackage(t.isDefinedBy)
             .withImports(*u.map { it.isDefinedBy }.toTypedArray()) == files

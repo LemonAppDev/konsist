@@ -5,21 +5,22 @@ import com.lemonappdev.konsist.core.verify.assert
 
 
 fun main() {
-    val service = Layer("Service", "..service..")                       // name is necessary now?
-    val controller = Layer("Controller", "..controller..")
-    val persistence = Layer("Persistence", "..persistence..")
+    val main = Layer("Main", "..main..")                       // name is necessary now?
+    val api = Layer("Api", "..api..")
+    val core = Layer("Core", "..core..")
 
     val koArchitecture = Konsist
-        .architecture(service, controller, persistence)
+        .architecture(main, api, core)
         .addDependencies {
-            service.dependsOn(controller, persistence)
-            controller.dependsOnAllLayers()
-            persistence.notDependOnAnyLayer()
-
+            main.dependsOn(api, core)
+            api.notDependOnAnyLayer()
+            core.notDependOnAnyLayer()
         }
 
     println(koArchitecture.dependencies)
 
-    Konsist.scopeFromProduction()
-        .assert(koArchitecture)
+    println(
+        Konsist.scopeFromProduction()
+            .assert(koArchitecture)
+    )
 }

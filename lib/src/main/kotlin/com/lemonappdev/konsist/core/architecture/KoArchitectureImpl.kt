@@ -1,49 +1,30 @@
 package com.lemonappdev.konsist.core.architecture
 
-class KoArchitectureImpl(vararg layers: Layer): KoArchitecture {
-    val allLayers = layers.toMutableList() // jakis check? Czy jest valid?
-    // musimy zrobic zeby sie odswiezala
-    override val dependencies = mutableMapOf<Layer, List<Layer>>()
+class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
+    // remove
+    override val dependencies = mutableMapOf<Layer, Set<Layer>>()
 
-    /*
-    fun addLayers(layer: Layer, vararg layers: Layer): KoArchitecture {
-        // tutaj ten wyjątek ładniej rozbić i w error message dodać which layer
-        require(
-            projectKotlinFiles.any {
-                it.resideInPath(layer.isDefinedBy) && layers.all { layer -> it.resideInPath(layer.isDefinedBy) }
-            }
-        ) { "This layer doesn't exist."}
+    private val allLayers = layers.toMutableList() // jakis check? Czy jest valid?
+        .onEach { layer -> dependencies[layer] = setOf() }
 
-        allLayers.also {
-            it.add(layer)
-            layers.forEach { layer -> it.add(layer) }
-        }
-        return this
-    }
-     */
-
-    fun addDependencies(dependencies: KoArchitecture.() -> Unit): KoArchitectureImpl {
-        this.dependencies()
-        return this
-    }
+    fun addDependencies(dependencies: KoArchitecture.() -> Unit): KoArchitectureImpl = this
 
     override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
         require(allLayers.contains(layer) && layers.all { allLayers.contains(it) }) { "Some layer doesn't exist." }
-        addDependentLayers(layer, *layers)
+        dependencies[this] = (dependencies[this]?.plus(layer)?.plus(layers)?.minus(this) ?: setOf()).toSet()
     }
 
     override fun Layer.dependsOnAllLayers() {
-        addDependentLayers(allLayers)
+        dependencies[this] = (dependencies[this]?.plus(allLayers)?.minus(this) ?: setOf()).toSet()
     }
 
     override fun Layer.notDependOnAnyLayer() {
-        clearDependentLayers()
+        dependencies[this] = emptySet()
     }
 
     override fun Layer.dependsOnAllLayersExpect(layer: Layer, vararg layers: Layer) {
         require(allLayers.contains(layer) && layers.all { allLayers.contains(it) }) { "Some layer doesn't exist." }
 
-        addDependentLayers(allLayers)
-        removeDependentLayers(layer, *layers)
+        dependencies[this] = (allLayers - this - layer - layers.toSet()).toSet()
     }
 }

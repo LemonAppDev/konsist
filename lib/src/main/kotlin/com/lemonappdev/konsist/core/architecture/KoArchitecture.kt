@@ -1,7 +1,8 @@
 package com.lemonappdev.konsist.core.architecture
 
 interface KoArchitecture {
-    val dependencies: Map<Layer, List<Layer>>
+    // remove
+    val dependencies: Map<Layer, Set<Layer>>
 
     fun Layer.dependsOn(layer: Layer, vararg layers: Layer)
 
