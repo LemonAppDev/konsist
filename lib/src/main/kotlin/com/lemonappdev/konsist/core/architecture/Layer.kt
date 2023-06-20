@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.architecture
 
- data class Layer(val name: String, private val isDefinedBy: String) {
+ data class Layer(val name: String, val isDefinedBy: String) {
      // after make private?
       val isDependOnLayers = mutableListOf<Layer>()
 

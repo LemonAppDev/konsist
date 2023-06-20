@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.architecture
 class KoArchitectureImpl(vararg layers: Layer): KoArchitecture {
     val allLayers = layers.toMutableList() // jakis check? Czy jest valid?
     // musimy zrobic zeby sie odswiezala
-    val dependencies = mutableMapOf<Layer, List<Layer>>()
+    override val dependencies = mutableMapOf<Layer, List<Layer>>()
 
     /*
     fun addLayers(layer: Layer, vararg layers: Layer): KoArchitecture {
