@@ -2,10 +2,10 @@ package com.lemonappdev.konsist.core.architecture
 
 class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     // remove
-    override val dependencies = mutableMapOf<Layer, Set<Layer>>()
+    override val dependencies = mutableMapOf<Layer, Set<Layer>?>()
 
     override val allLayers = layers.toMutableList() // jakis check? Czy jest valid?
-        .onEach { layer -> dependencies[layer] = setOf(layer) }
+        .onEach { layer -> dependencies[layer] = null }
 
     fun addDependencies(dependency: KoArchitecture.() -> Unit): KoArchitectureImpl {
         dependency()
@@ -13,24 +13,24 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     }
 
     override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
-        require(allLayers.contains(layer) && layers.all { allLayers.contains(it) }) { "Some layer doesn't exist." }
-        require(checkCircularDependency(layer, this) && layers.all { checkCircularDependency(it, this) }) { "Illegal circular dependency" }
+        addRequirements(this, layer, *layers)
 
-        dependencies[this] = (dependencies[this]?.plus(layer)?.plus(layers) ?: setOf(this)).toSet()
+        dependencies[this] = (dependencies[this]?.plus(layer)?.plus(layers) ?: setOf(this).plus(layer).plus(layers)).toSet()
     }
 
     override fun Layer.dependsOnAllLayers() {
+        require(allLayers.contains(this)) { "Layer: $this is not add to the architecture." }
         require(allLayers.all { checkCircularDependency(it, this) }) { "Illegal circular dependency" }
         dependencies[this] = allLayers.toSet()
     }
 
     override fun Layer.notDependOnAnyLayer() {
+        require(allLayers.contains(this)) { "Layer: $this is not add to the architecture." }
         dependencies[this] = setOf(this)
     }
 
     override fun Layer.dependsOnAllLayersExpect(layer: Layer, vararg layers: Layer) {
-        require(allLayers.contains(layer) && layers.all { allLayers.contains(it) }) { "Some layer doesn't exist." }
-        require(checkCircularDependency(layer, this) && layers.all { checkCircularDependency(it, this) }) { "Illegal circular dependency" }
+        addRequirements(this, layer, *layers)
 
         dependencies[this] = (allLayers - layer - layers.toSet()).toSet()
     }
@@ -44,5 +44,11 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
                 else -> !value.contains(layer2)
             }
         }
+    }
+
+    private fun addRequirements(layer: Layer, vararg addedLayers: Layer) {
+        require(allLayers.contains(layer)) { "Layer: $layer is not add to the architecture." }
+        require(addedLayers.all { allLayers.contains(it) }) { "Some layer doesn't exist." }
+        require(addedLayers.all { checkCircularDependency(it, layer) }) { "Illegal circular dependency" }
     }
 }

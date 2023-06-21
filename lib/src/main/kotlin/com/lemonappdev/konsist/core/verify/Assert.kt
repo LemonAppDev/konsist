@@ -8,11 +8,13 @@ import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.architecture.KoArchitecture
+import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import org.jetbrains.kotlin.ir.types.IdSignatureValues
 
 fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?) {
     assert(function, true)
@@ -22,23 +24,54 @@ fun <E : KoBaseDeclaration> Sequence<E>.assertNot(function: (E) -> Boolean?) {
     assert(function, false)
 }
 
-fun KoScope.assert(architecture: KoArchitecture): Boolean {
-    val files = files()
-    return architecture.dependencies.filter { it.value.isNotEmpty() }.all { (t, u) ->
-        val other = (architecture.allLayers - u).map { it.isDefinedBy }
-
-        files
-            .withPackage(t.isDefinedBy)
-            .flatMap { it.imports }
-            .none {
-                other.any { other ->
-                    it.hasNameContaining(other)
-                }
-            }
-    }
+fun KoScope.assert(architecture: KoArchitecture) {
+    assert(architecture, true)
 }
 
-fun KoScope.assertNot(architecture: KoArchitecture) = !assert(architecture)
+fun KoScope.assertNot(architecture: KoArchitecture) {
+    assert(architecture, false)
+}
+
+private fun KoScope.assert(architecture: KoArchitecture, positiveCheck: Boolean) {
+    try {
+        val files = files()
+
+        val x = architecture
+            .dependencies
+            .map { (t, u) ->
+                u?.let {
+                    val other = (architecture.allLayers - u.toList()).map { (it as Layer).isDefinedBy }
+
+                    files
+                        .withPackage(t.isDefinedBy)
+                        .all { other.all { other -> !it.hasImports(other) } }
+                } ?: true
+            }
+
+        val result = mutableMapOf<Layer, Boolean>()
+
+        architecture.dependencies.keys.forEachIndexed { index, layer -> result[layer] = x[index] }
+
+        val passedLayers = mutableListOf<Layer>()
+        val failedLayers = mutableListOf<Layer>()
+
+        result.forEach { (t, u) ->
+            if(u) passedLayers += t
+            else failedLayers += t
+        }
+
+        val allChecksPassed = if(positiveCheck) failedLayers.isEmpty()
+        else passedLayers.isEmpty()
+
+        if (!allChecksPassed) {
+            throw KoCheckFailedException(getCheckFailedMessages(failedLayers))
+        }
+    } catch (e: KoException) {
+        throw e
+    } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
+        throw KoInternalException(e.message.orEmpty(), e)
+    }
+}
 
 @Suppress("detekt.ThrowsCount")
 private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
@@ -85,6 +118,12 @@ private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: Li
     }
 
     return "Assert '${getTestMethodName()}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
+}
+
+private fun getCheckFailedMessages(failedDeclarations: List<Layer>): String {
+    val failedDeclarationsMessage = failedDeclarations.joinToString("\n")
+
+    return "Assert '${getTestMethodName()}' has failed. Invalid dependencies at (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }
 
 /**
