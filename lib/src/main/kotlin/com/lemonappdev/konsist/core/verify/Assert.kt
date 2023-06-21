@@ -7,7 +7,8 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
-import com.lemonappdev.konsist.core.architecture.KoArchitecture
+import com.lemonappdev.konsist.api.architecture.KoArchitecture
+import com.lemonappdev.konsist.core.architecture.KoArchitectureImpl
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
@@ -36,7 +37,7 @@ private fun KoScope.assert(architecture: KoArchitecture, positiveCheck: Boolean)
     try {
         val files = files()
 
-        val layerHasValidArchitecture = architecture
+        val layerHasValidArchitecture = (architecture as KoArchitectureImpl)
             .dependencies
             .map { (t, u) ->
                 u?.let {

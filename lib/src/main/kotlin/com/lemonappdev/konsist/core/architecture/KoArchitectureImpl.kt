@@ -1,13 +1,15 @@
 package com.lemonappdev.konsist.core.architecture
 
+import com.lemonappdev.konsist.api.architecture.KoArchitecture
+
 class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     // remove
-    override val dependencies = mutableMapOf<Layer, Set<Layer>?>()
+    val dependencies = mutableMapOf<Layer, Set<Layer>?>()
 
-    override val allLayers = layers.toMutableList() // jakis check? Czy jest valid?
+    val allLayers = layers.toMutableList() // jakis check? Czy jest valid?
         .onEach { layer -> dependencies[layer] = null }
 
-    fun addDependencies(dependency: KoArchitecture.() -> Unit): KoArchitectureImpl {
+    override fun addDependencies(dependency: KoArchitecture.() -> Unit): KoArchitecture {
         dependency()
         return this
     }

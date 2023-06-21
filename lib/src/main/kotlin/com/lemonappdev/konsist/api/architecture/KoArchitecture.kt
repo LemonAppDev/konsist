@@ -1,9 +1,9 @@
-package com.lemonappdev.konsist.core.architecture
+package com.lemonappdev.konsist.api.architecture
+
+import com.lemonappdev.konsist.core.architecture.Layer
 
 interface KoArchitecture {
-    val allLayers: List<Layer>
-
-    val dependencies: Map<Layer, Set<Layer>?>
+    fun addDependencies(dependency: KoArchitecture.() -> Unit): KoArchitecture
 
     fun Layer.dependsOn(layer: Layer, vararg layers: Layer)
 
