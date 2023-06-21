@@ -62,11 +62,3 @@ private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): Stri
 
     return "Assert '${getTestMethodName()}' has failed. Invalid dependencies at (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }
-
-/**
- * In this call stack hierarchy test name is at index 5.
- */
-private fun getTestMethodName(): String? {
-    val stackTraceIndexOfTestMethod = 5
-    return Thread.currentThread().stackTrace[stackTraceIndexOfTestMethod].methodName
-}

@@ -66,14 +66,6 @@ private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: Li
     return "Assert '${getTestMethodName()}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }
 
-/**
- * In this call stack hierarchy test name is at index 5.
- */
-private fun getTestMethodName(): String? {
-    val stackTraceIndexOfTestMethod = 5
-    return Thread.currentThread().stackTrace[stackTraceIndexOfTestMethod].methodName
-}
-
 private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {
     // In this declarations structure test name is at index 4
     // We pass this name to checkIfSuppressed() because when declarations are nested, this index is changing
