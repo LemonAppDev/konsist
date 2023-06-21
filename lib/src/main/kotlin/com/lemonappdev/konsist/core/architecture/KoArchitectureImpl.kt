@@ -32,12 +32,6 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         dependencies[this] = setOf(this)
     }
 
-    override fun Layer.dependsOnAllLayersExpect(layer: Layer, vararg layers: Layer) {
-        addAllRequirements(this, layer, *layers)
-
-        dependencies[this] = (allLayers - layer - layers.toSet()).toSet()
-    }
-
     private fun checkCircularDependencies(layer: Layer, vararg addedLayers: Layer) {
         val circularDependencies: MutableList<Pair<Layer, Layer>> = mutableListOf()
         val value = addedLayers.map {

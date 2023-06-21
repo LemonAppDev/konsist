@@ -13,7 +13,7 @@ interface KoArchitectureCreator {
      *
      * @param layer The layer to be included in the architecture.
      * @param layers Additional layers to be included in the architecture.
-     * @return An instance of `KoArchitectureImpl` with the specified layers.
+     * @return An instance of [KoArchitecture] with the specified layers.
      */
     fun architecture(layer: Layer, vararg layers: Layer): KoArchitecture
 }

@@ -36,13 +36,4 @@ interface KoArchitecture {
      * @receiver The [Layer] that does not depend on any other layer.
      */
     fun Layer.notDependOnAnyLayer(): Unit
-
-    /**
-     * Specifies that the current layer depends on all layers except the specified layer(s).
-     *
-     * @receiver The [Layer] that should not depend on other layers.
-     * @param layer The layer that the current layer should not depend on.
-     * @param layers The layers that the current layer should not depend on.
-     */
-    fun Layer.dependsOnAllLayersExpect(layer: Layer, vararg layers: Layer): Unit
 }
