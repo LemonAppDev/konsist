@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.architecture
 import com.lemonappdev.konsist.core.architecture.Layer
 
 interface KoArchitecture {
-    fun addDependencies(dependency: KoArchitecture.() -> Unit): KoArchitecture
+    fun addDependencies(dependencies: KoArchitecture.() -> Unit): KoArchitecture
 
     fun Layer.dependsOn(layer: Layer, vararg layers: Layer)
 
