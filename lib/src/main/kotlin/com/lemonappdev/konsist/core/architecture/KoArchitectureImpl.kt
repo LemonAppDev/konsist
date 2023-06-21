@@ -55,7 +55,7 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         }
         require(value.none { !it }) {
             "Illegal circular dependencies (${circularDependencies.size}):\n" +
-                    circularDependencies.joinToString(separator = "\n") { "${it.first} with ${it.second}" }
+                circularDependencies.joinToString(separator = "\n") { "${it.first} with ${it.second}" }
         }
     }
 
