@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.core.architecture.Layer
 /**
  * Architecture creator.
  *
- * Creates a [KoArchitectureImpl] instance from the given set of layers.
+ * Creates a [KoArchitecture] instance from the given set of layers.
  */
 interface KoArchitectureCreator {
     /**
@@ -16,5 +16,5 @@ interface KoArchitectureCreator {
      * @param layers Additional layers to be included in the architecture.
      * @return An instance of `KoArchitectureImpl` with the specified layers.
      */
-    fun architecture(layer: Layer, vararg layers: Layer): KoArchitectureImpl
+    fun architecture(layer: Layer, vararg layers: Layer): KoArchitecture
 }
