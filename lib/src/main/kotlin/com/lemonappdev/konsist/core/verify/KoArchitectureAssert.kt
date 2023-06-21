@@ -21,10 +21,12 @@ fun KoScope.assert(architecture: KoArchitecture) {
 
                 files
                     .withPackage(t.isDefinedBy)
-                    .all { otherLayers.all { name -> !it.hasImports(name) } }
+                    .filter { otherLayers.any { name -> it.hasImports(name) } }
+                    .map { it.path }
+                    .joinToString("\n")
             }
 
-        val result = mutableMapOf<Layer, Boolean>()
+        val result = mutableMapOf<Layer, String>()
 
         architecture
             .dependencies
@@ -34,15 +36,17 @@ fun KoScope.assert(architecture: KoArchitecture) {
         val failedLayers = mutableListOf<Layer>()
 
         result.forEach { (t, u) ->
-            if (!u) {
+            if (u.toList().isNotEmpty()) {
                 failedLayers += t
             }
         }
 
+        val filtered = result.filter { it.value.toList().isNotEmpty() }
+
         val allChecksPassed = failedLayers.isEmpty()
 
         if (!allChecksPassed) {
-            throw KoCheckFailedException(getCheckFailedMessages(failedLayers))
+            throw KoCheckFailedException(getCheckFailedMessages(filtered))
         }
     } catch (e: KoException) {
         throw e
@@ -51,8 +55,10 @@ fun KoScope.assert(architecture: KoArchitecture) {
     }
 }
 
-private fun getCheckFailedMessages(failedDeclarations: List<Layer>): String {
-    val failedDeclarationsMessage = failedDeclarations.joinToString("\n")
+private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): String {
+    val failedDeclarationsMessage = failedDeclarations.keys.mapIndexed { index, layer ->
+        "Layer: ${layer.name} defined by: ${layer.isDefinedBy} . Invalid files:\n${failedDeclarations.values.toList()[index]}\n"
+    }
 
     return "Assert '${getTestMethodName()}' has failed. Invalid dependencies at (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }
