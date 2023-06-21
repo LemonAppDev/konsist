@@ -24,7 +24,7 @@ class ApiKonsistTest {
             .functions(includeNested = true, includeLocal = true)
             .assert {
                 it.hasValidKDoc(verifyParamTag = true, verifyReturnTag = true) ||
-                        it.hasValidKDoc(verifyParamTag = true, verifyReturnTag = true, verifyReceiverTag = true)
+                    it.hasValidKDoc(verifyParamTag = true, verifyReturnTag = true, verifyReceiverTag = true)
             }
     }
 
