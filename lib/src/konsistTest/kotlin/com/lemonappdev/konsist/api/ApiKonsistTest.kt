@@ -22,7 +22,9 @@ class ApiKonsistTest {
     fun `every api function has valid KDoc`() {
         apiPackageScope
             .functions(includeNested = true, includeLocal = true)
-            .assert { it.hasValidKDoc(verifyParamTag = true, verifyReturnTag = true) }
+            .assert {
+                it.hasValidKDoc(verifyParamTag = true, verifyReturnTag = true, verifyReceiverTag = true)
+            }
     }
 
     companion object {

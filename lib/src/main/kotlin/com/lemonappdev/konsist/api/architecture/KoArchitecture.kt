@@ -2,14 +2,47 @@ package com.lemonappdev.konsist.api.architecture
 
 import com.lemonappdev.konsist.core.architecture.Layer
 
+/**
+ * Represents a layered architecture.
+ */
 interface KoArchitecture {
+    /**
+     * Adds dependencies to the architecture.
+     *
+     * @param dependencies A lambda function that represents the dependencies to be added.
+     * @return The updated `KoArchitecture` instance.
+     */
     fun addDependencies(dependencies: KoArchitecture.() -> Unit): KoArchitecture
 
-    fun Layer.dependsOn(layer: Layer, vararg layers: Layer)
+    /**
+     * Adds dependencies between the current layer and the specified layers.
+     *
+     * @receiver The [Layer] that depends on other layers.
+     * @param layer The layer that the current layer depends on.
+     * @param layers The layers that the current layer depends on.
+     */
+    fun Layer.dependsOn(layer: Layer, vararg layers: Layer): Unit
 
-    fun Layer.dependsOnAllLayers()
+    /**
+     * Specifies that the current layer depends on all other layers.
+     *
+     * @receiver The [Layer] that depends on all other layers.
+     */
+    fun Layer.dependsOnAllLayers(): Unit
 
-    fun Layer.notDependOnAnyLayer()
+    /**
+     * Specifies that the current layer does not depend on any other layer.
+     *
+     * @receiver The [Layer] that does not depend on any other layer.
+     */
+    fun Layer.notDependOnAnyLayer(): Unit
 
-    fun Layer.dependsOnAllLayersExpect(layer: Layer, vararg layers: Layer)
+    /**
+     * Specifies that the current layer depends on all layers except the specified layer(s).
+     *
+     * @receiver The [Layer] that should not depend on other layers.
+     * @param layer The layer that the current layer should not depend on.
+     * @param layers The layers that the current layer should not depend on.
+     */
+    fun Layer.dependsOnAllLayersExpect(layer: Layer, vararg layers: Layer): Unit
 }

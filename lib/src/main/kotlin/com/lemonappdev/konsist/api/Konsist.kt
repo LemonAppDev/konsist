@@ -1,13 +1,13 @@
 package com.lemonappdev.konsist.api
 
 import com.lemonappdev.konsist.api.container.koscope.KoScopeCreator
-import com.lemonappdev.konsist.core.architecture.KoArchitectureCreator
+import com.lemonappdev.konsist.core.architecture.KoArchitectureCreatorImpl
 import com.lemonappdev.konsist.core.container.koscope.KoScopeCreatorImpl
 
 /**
  * Represents the Konsist API. This is the main entry point to the Konsist library.
  *
  * It allows to create a [com.lemonappdev.konsist.api.container.koscope.KoScope] instance from the given set of files such as all
- * project files, single module, path etc.
+ * project files, single module, path etc and [com.lemonappdev.konsist.api.architecture.KoArchitecture] instanse from the given layers.
  */
-object Konsist : KoScopeCreator by KoScopeCreatorImpl(), KoArchitectureCreator()
+object Konsist : KoScopeCreator by KoScopeCreatorImpl(), KoArchitectureCreatorImpl()
