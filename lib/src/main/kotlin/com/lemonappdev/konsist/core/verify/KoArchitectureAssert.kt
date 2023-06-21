@@ -17,13 +17,11 @@ fun KoScope.assert(architecture: KoArchitecture) {
         val layerHasValidArchitecture = (architecture as KoArchitectureImpl)
             .dependencies
             .map { (t, u) ->
-                u?.let {
-                    val other = (architecture.allLayers - u.toList()).map { (it as Layer).isDefinedBy }
+                val otherLayers = (architecture.allLayers - u).map { it.isDefinedBy }
 
-                    files
-                        .withPackage(t.isDefinedBy)
-                        .all { other.all { other -> !it.hasImports(other) } }
-                } ?: true
+                files
+                    .withPackage(t.isDefinedBy)
+                    .all { otherLayers.all { name -> !it.hasImports(name) } }
             }
 
         val result = mutableMapOf<Layer, Boolean>()
@@ -33,13 +31,10 @@ fun KoScope.assert(architecture: KoArchitecture) {
             .keys
             .forEachIndexed { index, layer -> result[layer] = layerHasValidArchitecture[index] }
 
-        val passedLayers = mutableListOf<Layer>()
         val failedLayers = mutableListOf<Layer>()
 
         result.forEach { (t, u) ->
-            if (u) {
-                passedLayers += t
-            } else {
+            if (!u) {
                 failedLayers += t
             }
         }
