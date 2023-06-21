@@ -4,10 +4,10 @@ import com.lemonappdev.konsist.api.architecture.KoArchitecture
 
 class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     // remove
-    val dependencies = mutableMapOf<Layer, Set<Layer>?>()
+    val dependencies = mutableMapOf<Layer, Set<Layer>>()
 
     val allLayers = layers.toMutableList() // jakis check? Czy jest valid?
-        .onEach { layer -> dependencies[layer] = null }
+        .onEach { layer -> dependencies[layer] = setOf(layer) }
 
     override fun addDependencies(dependency: KoArchitecture.() -> Unit): KoArchitecture {
         dependency()
@@ -15,23 +15,27 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     }
 
     override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
+        require(this != layer && layers.none { it != this }) { "Layer cannot be dependent on itself." }
         addRequirements(this, layer, *layers)
 
-        dependencies[this] = (dependencies[this]?.plus(layer)?.plus(layers) ?: setOf(this).plus(layer).plus(layers)).toSet()
+        dependencies[this] = (dependencies.getOrDefault(this, setOf(this))) + layer + layers
     }
 
     override fun Layer.dependsOnAllLayers() {
         require(allLayers.contains(this)) { "Layer: $this is not add to the architecture." }
         require(allLayers.all { checkCircularDependency(it, this) }) { "Illegal circular dependency" }
+
         dependencies[this] = allLayers.toSet()
     }
 
     override fun Layer.notDependOnAnyLayer() {
         require(allLayers.contains(this)) { "Layer: $this is not add to the architecture." }
+
         dependencies[this] = setOf(this)
     }
 
     override fun Layer.dependsOnAllLayersExpect(layer: Layer, vararg layers: Layer) {
+        require(this != layer && layers.none { it != this }) { "Layer cannot be dependent on itself." }
         addRequirements(this, layer, *layers)
 
         dependencies[this] = (allLayers - layer - layers.toSet()).toSet()
