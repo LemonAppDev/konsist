@@ -12,7 +12,6 @@ import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
-import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction, parentDeclaration: KoBaseDeclaration?) :
     KoParametrizedDeclarationImpl(ktFunction, parentDeclaration),
@@ -41,7 +40,9 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
     override val returnType: KoTypeDeclaration? by lazy {
         val type = ktFunction
             .children
-            .firstIsInstanceOrNull<KtTypeReference>()
+            .filterIsInstance<KtTypeReference>()
+            // We choose last because when we have extension function the first one is receiver and the second one is return type.
+            .lastOrNull()
 
         type?.let { KoTypeDeclarationImpl.getInstance(type, this) }
     }
