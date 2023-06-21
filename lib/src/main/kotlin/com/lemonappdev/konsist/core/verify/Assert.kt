@@ -14,7 +14,6 @@ import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
-import org.jetbrains.kotlin.ir.types.IdSignatureValues
 
 fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?) {
     assert(function, true)
@@ -32,11 +31,12 @@ fun KoScope.assertNot(architecture: KoArchitecture) {
     assert(architecture, false)
 }
 
+@Suppress("detekt.ThrowsCount")
 private fun KoScope.assert(architecture: KoArchitecture, positiveCheck: Boolean) {
     try {
         val files = files()
 
-        val x = architecture
+        val layerHasValidArchitecture = architecture
             .dependencies
             .map { (t, u) ->
                 u?.let {
@@ -50,18 +50,27 @@ private fun KoScope.assert(architecture: KoArchitecture, positiveCheck: Boolean)
 
         val result = mutableMapOf<Layer, Boolean>()
 
-        architecture.dependencies.keys.forEachIndexed { index, layer -> result[layer] = x[index] }
+        architecture
+            .dependencies
+            .keys
+            .forEachIndexed { index, layer -> result[layer] = layerHasValidArchitecture[index] }
 
         val passedLayers = mutableListOf<Layer>()
         val failedLayers = mutableListOf<Layer>()
 
         result.forEach { (t, u) ->
-            if(u) passedLayers += t
-            else failedLayers += t
+            if (u) {
+                passedLayers += t
+            } else {
+                failedLayers += t
+            }
         }
 
-        val allChecksPassed = if(positiveCheck) failedLayers.isEmpty()
-        else passedLayers.isEmpty()
+        val allChecksPassed = if (positiveCheck) {
+            failedLayers.isEmpty()
+        } else {
+            passedLayers.isEmpty()
+        }
 
         if (!allChecksPassed) {
             throw KoCheckFailedException(getCheckFailedMessages(failedLayers))
@@ -84,7 +93,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
             val checkMethodName = Thread.currentThread().stackTrace[2].methodName
             throw KoPreconditionFailedException(
                 "Declaration list is empty. Please make sure that list of declarations contain items " +
-                        "before calling the '$checkMethodName' method.",
+                    "before calling the '$checkMethodName' method.",
             )
         }
 
@@ -144,10 +153,10 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                    (
-                            it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
-                                    it.text.endsWith("Suppress(\"$testMethodName\")")
-                            )
+                (
+                    it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
+                        it.text.endsWith("Suppress(\"$testMethodName\")")
+                    )
         }
         .forEach {
             if (it is KoDeclaration) {
