@@ -42,6 +42,24 @@ class KoFunctionDeclarationForReturnTypeTest {
     }
 
     @Test
+    fun `extension-function-return-type`() {
+        // given
+        val sut = getSnippetFile("extension-function-return-type")
+            .functions()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasReturnType() shouldBeEqualTo true
+            returnType?.sourceType shouldBeEqualTo "SampleType"
+            returnType?.importAliasName shouldBeEqualTo ""
+            returnType?.name shouldBeEqualTo "SampleType"
+            returnType?.isImportAlias() shouldBeEqualTo false
+            returnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        }
+    }
+
+    @Test
     fun `function-not-return-type`() {
         // given
         val sut = getSnippetFile("function-not-return-type")
