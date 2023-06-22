@@ -54,7 +54,7 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         if (value.any { !it }) {
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
-                    circularDependencies.joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n"}
+                    circularDependencies.joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n" },
             )
         }
     }
