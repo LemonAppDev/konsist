@@ -9,17 +9,19 @@ import org.junit.jupiter.api.Test
 
 class Architecture5Test {
     @Test
-    fun `presentation and data layers are depend on domain layer`() {
+    fun `passes when good dependency is set`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture5.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture5.project.presentation..")
-        val data = Layer("Data", "com.lemonappdev.konsist.architecture5.project.data..")
+        val application = Layer("Application", "com.lemonappdev.konsist.architecture5.project.application..")
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture5.project.domain..")
+        val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture5.project.infrastructure..")
         val koArchitecture = Konsist
-            .architecture(domain, presentation, data)
+            .architecture(presentation, application, domain, infrastructure)
             .addDependencies {
-                domain.notDependOnAnyLayer()
-                presentation.dependsOn(domain)
-                data.dependsOn(domain)
+                presentation.dependsOn(application, infrastructure)
+                application.dependsOn(domain, infrastructure)
+                domain.dependsOn(infrastructure)
+                infrastructure.notDependOnAnyLayer()
             }
         val sut = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture5/project")
 
@@ -30,15 +32,17 @@ class Architecture5Test {
     @Test
     fun `fails when bad dependency is set`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture5.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture5.project.presentation..")
-        val data = Layer("Data", "com.lemonappdev.konsist.architecture5.project.data..")
+        val application = Layer("Application", "com.lemonappdev.konsist.architecture5.project.application..")
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture5.project.domain..")
+        val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture5.project.infrastructure..")
         val koArchitecture = Konsist
-            .architecture(domain, presentation, data)
+            .architecture(presentation, application, domain, infrastructure)
             .addDependencies {
-                data.notDependOnAnyLayer()
-                presentation.dependsOn(data)
-                domain.dependsOn(data)
+                presentation.dependsOn(application)
+                application.dependsOn(infrastructure)
+                domain.dependsOn(infrastructure)
+                infrastructure.notDependOnAnyLayer()
             }
         val sut = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture5/project")
 
@@ -48,27 +52,5 @@ class Architecture5Test {
         }
         // then
         func shouldThrow KoCheckFailedException::class
-    }
-
-    @Test
-    fun `throws exception when circular dependency is set`() {
-        // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture5.project.domain..")
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture5.project.presentation..")
-        val data = Layer("Data", "com.lemonappdev.konsist.architecture5.project.data..")
-
-        // when
-        val func = {
-            Konsist
-                .architecture(domain, presentation, data)
-                .addDependencies {
-                    domain.dependsOn(presentation)
-                    presentation.dependsOn(data)
-                    data.dependsOn(domain)
-                }
-        }
-
-        // then
-        func shouldThrow IllegalArgumentException::class // circular dependency (set message)
     }
 }

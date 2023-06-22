@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.architecture5.project.presentation.sample
 
-import com.lemonappdev.konsist.architecture5.project.domain.DomainFirstClass
+import com.lemonappdev.konsist.architecture5.project.application.ApplicationFirstClass
 
-class PresentationThirdClass(sampleParameter: DomainFirstClass) {
+class PresentationThirdClass(sampleParameter: ApplicationFirstClass) {
 }
