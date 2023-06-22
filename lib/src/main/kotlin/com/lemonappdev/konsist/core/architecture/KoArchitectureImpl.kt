@@ -34,7 +34,7 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     }
 
     private fun checkCircularDependencies(layer: Layer, vararg addedLayers: Layer) {
-        val circularDependencies: MutableList<Pair<Layer, Layer>> = mutableListOf()
+        val circularDependencies = mutableListOf<Layer>()
         val allLayers = getLayers(*addedLayers)
 
         val value = allLayers.map {
@@ -44,7 +44,7 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
                 when (val value = dependencies.getOrDefault(it, null)) {
                     null -> true
                     else -> {
-                        circularDependencies.add(Pair(layer, it))
+                        circularDependencies += it
                         !value.contains(layer)
                     }
                 }
@@ -53,8 +53,8 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
 
         if (value.any { !it }) {
             throw KoPreconditionFailedException(
-                "Illegal circular dependencies (${circularDependencies.size}):\n" +
-                    circularDependencies.joinToString(separator = "\n") { "${it.first} with ${it.second}" },
+                "Illegal circular dependencies:\n" +
+                    circularDependencies.joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n"}
             )
         }
     }

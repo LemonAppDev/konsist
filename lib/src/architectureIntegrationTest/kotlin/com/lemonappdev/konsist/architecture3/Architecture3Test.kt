@@ -29,12 +29,13 @@ class Architecture3Test {
                     presentation.dependsOnAllLayers()
                 }
         }
-        println("***************$rootPath")
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage """
-            Illegal circular dependencies (1):
-            Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture3.project.presentation..) with Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture3.project.domain..)
+            Illegal circular dependencies:
+            Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture3.project.presentation..) -->
+            Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture3.project.domain..) -->
+            Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture3.project.presentation..).
         """.trimIndent()
     }
 
@@ -56,8 +57,10 @@ class Architecture3Test {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage """
-            Illegal circular dependencies (1):
-            Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture3.project.presentation..) with Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture3.project.domain..)
+            Illegal circular dependencies:
+            Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture3.project.presentation..) -->
+            Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture3.project.domain..) -->
+            Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture3.project.presentation..).
         """.trimIndent()
     }
 

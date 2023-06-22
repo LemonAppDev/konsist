@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class Architecture4Test {
@@ -75,6 +76,12 @@ class Architecture4Test {
         }
 
         // then
-        func shouldThrow KoPreconditionFailedException::class
+        func shouldThrow KoPreconditionFailedException::class withMessage """
+            Illegal circular dependencies:
+            Layer(name=Data, isDefinedBy=com.lemonappdev.konsist.architecture4.project.data..) -->
+            Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture4.project.domain..) -->
+            Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture4.project.presentation..) -->
+            Layer(name=Data, isDefinedBy=com.lemonappdev.konsist.architecture4.project.data..).
+        """.trimIndent()
     }
 }
