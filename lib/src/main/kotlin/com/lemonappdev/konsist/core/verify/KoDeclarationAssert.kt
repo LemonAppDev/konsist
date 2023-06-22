@@ -63,7 +63,12 @@ private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: Li
         "${it.location} ($name $declarationType)"
     }
 
-    return "Assert '${getTestMethodName(5)}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
+    /**
+     * In this call stack hierarchy test name is at index 5.
+     */
+    val index = 5
+
+    return "Assert '${getTestMethodName(index)}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }
 
 private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {
