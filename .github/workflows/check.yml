@@ -72,6 +72,27 @@ jobs:
           name: integration-test-report
           path: ./lib/build/test-results/integrationTest/
 
+  konsist-architecture-integration-test:
+    name: Konsist Architecture Integration Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Architecture Integration Test
+        run: ./gradlew lib:architectureIntegrationTest
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: architecture-integration-test-report
+          path: ./lib/build/test-results/architectureIntegrationTest/
+
 # ======================================= Run Linters =========================================================
 
   konsist-spotless:
