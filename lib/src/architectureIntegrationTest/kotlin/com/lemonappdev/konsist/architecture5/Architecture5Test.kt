@@ -23,7 +23,7 @@ class Architecture5Test {
                 domain.dependsOn(infrastructure)
                 infrastructure.notDependOnAnyLayer()
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture5/project",)
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture5/project")
 
         // then
         assert(koArchitecture, scope)
@@ -44,9 +44,9 @@ class Architecture5Test {
                 domain.dependsOn(infrastructure)
                 infrastructure.notDependOnAnyLayer()
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture5/project",)
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture5/project")
         val sut = { assert(koArchitecture, scope) }
-        
+
         // then
         sut shouldThrow KoCheckFailedException::class
     }

@@ -69,7 +69,7 @@ class Architecture3Test {
             .addDependencies {
                 domain.dependsOn(presentation)
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project",)
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project")
         val sut = { assert(architecture, scope) }
 
         // then
@@ -91,7 +91,7 @@ class Architecture3Test {
                 domain.notDependOnAnyLayer()
                 presentation.notDependOnAnyLayer()
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project",)
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project")
         val sut = { assert(koArchitecture, scope) }
 
         // then
