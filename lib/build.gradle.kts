@@ -35,5 +35,11 @@ testing {
                 implementation(project(":lib"))
             }
         }
+
+        register("architectureIntegrationTest", JvmTestSuite::class) {
+            dependencies {
+                implementation(project(":lib"))
+            }
+        }
     }
 }
