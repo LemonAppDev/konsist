@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.architecture4
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
@@ -21,7 +22,9 @@ class Architecture4Test {
                 presentation.dependsOn(domain)
                 data.dependsOn(domain)
             }
-        val sut = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture4/project")
+        val sut = Konsist.scopeFromDirectory(
+            "lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture4/project".toOsSeparator(),
+        )
 
         // then
         sut.assert(koArchitecture)
@@ -40,7 +43,9 @@ class Architecture4Test {
                 presentation.dependsOn(data)
                 domain.dependsOn(data)
             }
-        val sut = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture4/project")
+        val sut = Konsist.scopeFromDirectory(
+            "lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture4/project".toOsSeparator(),
+        )
 
         // when
         val func = {

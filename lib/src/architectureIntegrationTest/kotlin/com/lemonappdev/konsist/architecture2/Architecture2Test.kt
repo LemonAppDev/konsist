@@ -3,12 +3,16 @@ package com.lemonappdev.konsist.architecture2
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.ext.toOsSeparator
+import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class Architecture2Test {
+    private val rootPath = PathProvider.getInstance().rootProjectPath
+
     @Test
     fun `presentation layer is depend on domain layer`() {
         // given
@@ -20,7 +24,9 @@ class Architecture2Test {
                 domain.notDependOnAnyLayer()
                 presentation.dependsOn(domain)
             }
-        val sut = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture2/project")
+        val sut = Konsist.scopeFromDirectory(
+            "lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture2/project".toOsSeparator(),
+        )
 
         // then
         sut.assert(koArchitecture)
@@ -37,7 +43,9 @@ class Architecture2Test {
                 presentation.notDependOnAnyLayer()
                 domain.dependsOn(presentation)
             }
-        val sut = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture2/project")
+        val sut = Konsist.scopeFromDirectory(
+            "lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture2/project".toOsSeparator(),
+        )
 
         // when
         val func = {
@@ -48,7 +56,7 @@ class Architecture2Test {
         func shouldThrow KoCheckFailedException::class withMessage """
             Assert 'domain layer is depend on presentation layer fails' has failed. Invalid dependencies at (1):
             Layer: Presentation defined by: com.lemonappdev.konsist.architecture2.project.presentation.. . Invalid files:
-            /Users/natalia/IdeaProjects/konsist/lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture2/project/presentation/sample/PresentationThirdClass.kt
-        """.trimIndent()
+            $rootPath/lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture2/project/presentation/sample/PresentationThirdClass.kt
+        """.trimIndent().toOsSeparator()
     }
 }

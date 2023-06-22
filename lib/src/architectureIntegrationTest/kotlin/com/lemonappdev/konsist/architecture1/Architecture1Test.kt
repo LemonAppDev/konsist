@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.architecture1
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.architecture.Layer
+import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -19,7 +20,9 @@ class Architecture1Test {
                 domain.notDependOnAnyLayer()
                 presentation.notDependOnAnyLayer()
             }
-        val sut = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture1/project")
+        val sut = Konsist.scopeFromDirectory(
+            "lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture1/project".toOsSeparator(),
+        )
 
         // then
         sut.assert(koArchitecture)
