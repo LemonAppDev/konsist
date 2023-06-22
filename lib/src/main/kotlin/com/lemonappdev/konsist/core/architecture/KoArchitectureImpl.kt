@@ -34,7 +34,11 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
 
     private fun checkCircularDependencies(layer: Layer, vararg addedLayers: Layer) {
         val circularDependencies: MutableList<Pair<Layer, Layer>> = mutableListOf()
-        val value = addedLayers.map {
+        val allNestedLayers = addedLayers.flatMap {
+            dependencies.getOrDefault(it, emptySet())
+        }
+
+        val value = allNestedLayers.map {
             if (it == layer) {
                 true
             } else {
@@ -47,10 +51,15 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
                 }
             }
         }
+
         require(value.none { !it }) {
             "Illegal circular dependencies (${circularDependencies.size}):\n" +
                 circularDependencies.joinToString(separator = "\n") { "${it.first} with ${it.second}" }
         }
+    }
+
+    private fun checkIfCircular(layer: Layer, vararg addedLayers: Layer) {
+
     }
 
     private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg addedLayers: Layer) =
