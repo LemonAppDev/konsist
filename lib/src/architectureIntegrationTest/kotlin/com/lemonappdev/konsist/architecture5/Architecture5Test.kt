@@ -18,7 +18,7 @@ class Architecture5Test {
         val koArchitecture = Konsist
             .architecture(presentation, application, domain, infrastructure)
             .addDependencies {
-                presentation.dependsOn(application, infrastructure)
+                presentation.dependsOn(application)
                 application.dependsOn(domain, infrastructure)
                 domain.dependsOn(infrastructure)
                 infrastructure.notDependOnAnyLayer()
@@ -39,7 +39,7 @@ class Architecture5Test {
         val koArchitecture = Konsist
             .architecture(presentation, application, domain, infrastructure)
             .addDependencies {
-                presentation.dependsOn(application)
+                presentation.dependsOn(application, infrastructure)
                 application.dependsOn(infrastructure)
                 domain.dependsOn(infrastructure)
                 infrastructure.notDependOnAnyLayer()

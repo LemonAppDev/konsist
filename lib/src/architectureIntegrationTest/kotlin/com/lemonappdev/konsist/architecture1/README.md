@@ -1,3 +1,9 @@
 # Architecture 1
 
-Add this description and diagram: independent layers
+Here we're testing situation where two layers are independent. See below diagram:
+
+```mermaid
+%%{init: {'theme': 'forest'}}%%
+flowchart LR
+    Domain ~~~ Presentation
+```
