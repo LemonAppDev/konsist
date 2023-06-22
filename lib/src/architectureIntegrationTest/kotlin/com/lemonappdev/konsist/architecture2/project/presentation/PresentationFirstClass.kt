@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.architecture1.project.presentation
+package com.lemonappdev.konsist.architecture2.project.presentation
 
 import com.lemonappdev.konsist.architecture2.project.presentation.sample.PresentationThirdClass
 

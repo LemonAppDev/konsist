@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 
 class Architecture1Test {
     @Test
-    fun `layer test`() {
+    fun `layers are independent`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
@@ -21,7 +21,7 @@ class Architecture1Test {
             }
         val sut = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture1/project")
 
-        //then
+        // then
         sut.assert(koArchitecture)
     }
 
