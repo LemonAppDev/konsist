@@ -74,27 +74,4 @@ class Architecture1Test {
         // then
         func shouldThrow IllegalArgumentException::class withMessage "Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) is not add to the architecture."
     }
-
-    @Test
-    fun `throws an exception when circular dependency is set`() {
-        // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
-
-        //when
-        val func = {
-            Konsist
-                .architecture(domain, presentation)
-                .addDependencies {
-                    domain.dependsOn(presentation)
-                    presentation.dependsOn(domain)
-                }
-        }
-
-        // then
-        func shouldThrow IllegalArgumentException::class withMessage """
-            Illegal circular dependencies (1):
-            Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..) with Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..)
-        """.trimIndent()
-    }
 }

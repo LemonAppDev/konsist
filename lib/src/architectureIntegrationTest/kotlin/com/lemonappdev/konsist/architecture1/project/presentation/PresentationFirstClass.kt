@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.architecture1.project.presentation
 
-import com.lemonappdev.konsist.architecture2.project.presentation.sample.PresentationThirdClass
+import com.lemonappdev.konsist.architecture1.project.presentation.sample.PresentationSecondClass
 
-class PresentationFirstClass(sampleParameter: PresentationThirdClass) {
+class PresentationFirstClass(sampleParameter: PresentationSecondClass) {
 }
