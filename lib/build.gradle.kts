@@ -39,6 +39,7 @@ testing {
         register("architectureIntegrationTest", JvmTestSuite::class) {
             dependencies {
                 implementation(project(":lib"))
+                implementation(libs.kluent)
             }
         }
     }

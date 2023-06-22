@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.architecture1.project.presentation.sample
+package com.lemonappdev.architecture1.presentation.sample
 
 class PresentationSecondClass {
 }
