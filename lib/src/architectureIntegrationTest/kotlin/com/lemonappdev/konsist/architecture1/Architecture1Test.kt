@@ -30,7 +30,7 @@ class Architecture1Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
 
-        //when
+        // when
         val func = {
             Konsist
                 .architecture(domain)
@@ -38,7 +38,9 @@ class Architecture1Test {
         }
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage "Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) cannot be dependent on itself."
+        func shouldThrow IllegalArgumentException::class withMessage """
+            Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) cannot be dependent on itself.
+        """.trimIndent()
     }
 
     @Test
@@ -47,7 +49,7 @@ class Architecture1Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
 
-        //when
+        // when
         val func = {
             Konsist
                 .architecture(domain)
@@ -55,7 +57,9 @@ class Architecture1Test {
         }
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage "Layers: [Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..)] is not add to the architecture."
+        func shouldThrow IllegalArgumentException::class withMessage """
+            Layers: [Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..)] is not add to the architecture.
+        """.trimIndent()
     }
 
     @Test
@@ -64,7 +68,7 @@ class Architecture1Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
 
-        //when
+        // when
         val func = {
             Konsist
                 .architecture(presentation)
@@ -72,6 +76,8 @@ class Architecture1Test {
         }
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage "Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) is not add to the architecture."
+        func shouldThrow IllegalArgumentException::class withMessage """
+            Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) is not add to the architecture.
+        """.trimIndent()
     }
 }

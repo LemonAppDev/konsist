@@ -8,7 +8,6 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-
 class Architecture3Test {
     @Test
     fun `throws an exception when circular dependency is set using dependsOnAllLayers() twice`() {
@@ -16,7 +15,7 @@ class Architecture3Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture3.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture3.project.presentation..")
 
-        //when
+        // when
         val func = {
             Konsist
                 .architecture(domain, presentation)
@@ -39,7 +38,7 @@ class Architecture3Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture3.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture3.project.presentation..")
 
-        //when
+        // when
         val func = {
             Konsist
                 .architecture(domain, presentation)
@@ -68,7 +67,7 @@ class Architecture3Test {
             }
         val sut = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project")
 
-        //when
+        // when
         val func = {
             sut.assert(architecture)
         }

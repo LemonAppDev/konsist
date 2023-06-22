@@ -48,7 +48,7 @@ class Architecture2Test {
         func shouldThrow KoCheckFailedException::class withMessage """
             Assert 'invoke' has failed. Invalid dependencies at (1):
             Layer: Presentation defined by: com.lemonappdev.konsist.architecture2.project.presentation.. . Invalid files:
-            /Users/natalia/IdeaProjects/konsist/lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture2/project/presentation/PresentationSecondClass.kt
+            /Users/natalia/IdeaProjects/konsist/lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture2/project/presentation/sample/PresentationThirdClass.kt
         """.trimIndent()
     }
 }
