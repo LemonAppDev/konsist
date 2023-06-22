@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 
 class Architecture4Test {
     @Test
-    fun `presentation and data layers are depend on domain layer`() {
+    fun `passes when dependency is set that presentation and data layers are depend on domain layer`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")

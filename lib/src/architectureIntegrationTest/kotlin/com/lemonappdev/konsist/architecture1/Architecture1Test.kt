@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 
 class Architecture1Test {
     @Test
-    fun `layers are independent`() {
+    fun `passes when dependency is set that layers are independent`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
@@ -29,7 +29,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `throws exception when self dependency is set`() {
+    fun `throws an exception when self dependency is set`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
 
@@ -47,7 +47,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `throws an exception when layer that domain layer should depend on is not added to the architecture`() {
+    fun `throws an exception when the layer that the domain layer should depend on is not added to the architecture`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
@@ -66,7 +66,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `throws an exception when layer on which the dependency is set is not added to architecture`() {
+    fun `throws an exception when the layer on which the dependency is set is not added to architecture`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")

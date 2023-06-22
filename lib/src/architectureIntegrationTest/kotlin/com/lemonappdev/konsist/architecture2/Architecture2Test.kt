@@ -14,7 +14,7 @@ class Architecture2Test {
     private val rootPath = PathProvider.getInstance().rootProjectPath
 
     @Test
-    fun `presentation layer is depend on domain layer`() {
+    fun `passes when dependency is set that presentation layer is depend on domain layer`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
@@ -33,7 +33,7 @@ class Architecture2Test {
     }
 
     @Test
-    fun `domain layer is depend on presentation layer fails`() {
+    fun `fails when dependency is set that domain layer is depend on presentation layer`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
