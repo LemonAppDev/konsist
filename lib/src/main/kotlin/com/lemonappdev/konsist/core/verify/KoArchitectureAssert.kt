@@ -60,5 +60,5 @@ private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): Stri
         "Layer: ${layer.name} defined by: ${layer.isDefinedBy} . Invalid files:\n${failedDeclarations.values.toList()[index]}"
     }.joinToString("\n")
 
-    return "Assert '${getTestMethodName()}' has failed. Invalid dependencies at (${failedDeclarations.size}):\n$failedDeclarationsMessage"
+    return "Assert '${getTestMethodName(7)}' has failed. Invalid dependencies at (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }

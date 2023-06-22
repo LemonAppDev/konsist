@@ -74,7 +74,7 @@ class Architecture3Test {
 
         // then
         func shouldThrow KoCheckFailedException::class withMessage """
-            Assert 'invoke' has failed. Invalid dependencies at (1):
+            Assert 'fails when layers have circular dependency but in architecture is set that domain layer is depend on presentation layer' has failed. Invalid dependencies at (1):
             Layer: Presentation defined by: com.lemonappdev.konsist.architecture3.project.presentation.. . Invalid files:
             /Users/natalia/IdeaProjects/konsist/lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project/presentation/PresentationFirstClass.kt
         """.trimIndent()
@@ -100,7 +100,7 @@ class Architecture3Test {
 
         // then
         func shouldThrow KoCheckFailedException::class withMessage """
-            Assert 'invoke' has failed. Invalid dependencies at (2):
+            Assert 'fails when layers have circular dependency but in architecture is set that they are independent' has failed. Invalid dependencies at (2):
             Layer: Domain defined by: com.lemonappdev.konsist.architecture3.project.domain.. . Invalid files:
             /Users/natalia/IdeaProjects/konsist/lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project/domain/DomainFirstClass.kt
             Layer: Presentation defined by: com.lemonappdev.konsist.architecture3.project.presentation.. . Invalid files:

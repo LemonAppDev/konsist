@@ -63,7 +63,7 @@ private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: Li
         "${it.location} ($name $declarationType)"
     }
 
-    return "Assert '${getTestMethodName()}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
+    return "Assert '${getTestMethodName(5)}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }
 
 private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {

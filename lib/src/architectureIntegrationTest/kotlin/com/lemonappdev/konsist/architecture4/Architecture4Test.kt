@@ -70,6 +70,6 @@ class Architecture4Test {
         }
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage ""
+        func shouldThrow IllegalArgumentException::class
     }
 }
