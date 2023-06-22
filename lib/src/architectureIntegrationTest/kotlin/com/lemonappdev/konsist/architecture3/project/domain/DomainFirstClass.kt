@@ -2,5 +2,5 @@ package com.lemonappdev.konsist.architecture3.project.domain
 
 import com.lemonappdev.konsist.architecture3.project.presentation.PresentationFirstClass
 
-class DomainFirstClass(val sampleParameter: PresentationFirstClass) {
+class DomainFirstClass(sampleParameter: PresentationFirstClass) {
 }
