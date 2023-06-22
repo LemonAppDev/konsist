@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.architecture1
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
-import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -21,28 +20,24 @@ class Architecture1Test {
                 domain.notDependOnAnyLayer()
                 presentation.notDependOnAnyLayer()
             }
-        val sut = Konsist.scopeFromDirectory(
-            "lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture1/project".toOsSeparator(),
-        )
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture1/project")
 
         // then
-        sut.assert(koArchitecture)
+        assert(koArchitecture, scope)
     }
 
     @Test
     fun `throws an exception when self dependency is set`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
-
-        // when
-        val func = {
+        val sut = {
             Konsist
                 .architecture(domain)
                 .addDependencies { domain.dependsOn(domain) }
         }
 
         // then
-        func shouldThrow KoPreconditionFailedException::class withMessage """
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
             Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) cannot be dependent on itself.
         """.trimIndent()
     }
@@ -52,16 +47,14 @@ class Architecture1Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
-
-        // when
-        val func = {
+        val sut = {
             Konsist
                 .architecture(domain)
                 .addDependencies { domain.dependsOn(presentation) }
         }
 
         // then
-        func shouldThrow KoPreconditionFailedException::class withMessage """
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
             Layers: [Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..)] is not add to the architecture.
         """.trimIndent()
     }
@@ -71,16 +64,14 @@ class Architecture1Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
-
-        // when
-        val func = {
+        val sut = {
             Konsist
                 .architecture(presentation)
                 .addDependencies { domain.dependsOn(presentation) }
         }
 
         // then
-        func shouldThrow KoPreconditionFailedException::class withMessage """
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
             Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) is not add to the architecture.
         """.trimIndent()
     }

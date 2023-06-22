@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
-import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -24,12 +23,10 @@ class Architecture4Test {
                 presentation.dependsOn(domain)
                 data.dependsOn(domain)
             }
-        val sut = Konsist.scopeFromDirectory(
-            "lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture4/project".toOsSeparator(),
-        )
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture4/project")
 
         // then
-        sut.assert(koArchitecture)
+        assert(koArchitecture, scope)
     }
 
     @Test
@@ -45,16 +42,11 @@ class Architecture4Test {
                 presentation.dependsOn(data)
                 domain.dependsOn(data)
             }
-        val sut = Konsist.scopeFromDirectory(
-            "lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture4/project".toOsSeparator(),
-        )
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture4/project",)
+        val sut = { assert(koArchitecture, scope) }
 
-        // when
-        val func = {
-            sut.assert(koArchitecture)
-        }
         // then
-        func shouldThrow KoCheckFailedException::class
+        sut shouldThrow KoCheckFailedException::class
     }
 
     @Test
@@ -63,9 +55,7 @@ class Architecture4Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")
         val data = Layer("Data", "com.lemonappdev.konsist.architecture4.project.data..")
-
-        // when
-        val func = {
+        val sut = {
             Konsist
                 .architecture(domain, presentation, data)
                 .addDependencies {
@@ -76,7 +66,7 @@ class Architecture4Test {
         }
 
         // then
-        func shouldThrow KoPreconditionFailedException::class withMessage """
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
             Illegal circular dependencies:
             Layer(name=Data, isDefinedBy=com.lemonappdev.konsist.architecture4.project.data..) -->
             Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture4.project.domain..) -->

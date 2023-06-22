@@ -10,9 +10,9 @@ import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 
 @Suppress("detekt.ThrowsCount")
-fun KoScope.assert(architecture: KoArchitecture) {
+fun assert(architecture: KoArchitecture, koScope: KoScope) {
     try {
-        val files = files()
+        val files = koScope.files()
 
         val layerHasValidArchitecture = (architecture as KoArchitectureImpl)
             .dependencies

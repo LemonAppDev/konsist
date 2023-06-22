@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
-import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
@@ -19,9 +18,7 @@ class Architecture3Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture3.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture3.project.presentation..")
-
-        // when
-        val func = {
+        val sut = {
             Konsist
                 .architecture(domain, presentation)
                 .addDependencies {
@@ -31,7 +28,7 @@ class Architecture3Test {
         }
 
         // then
-        func shouldThrow KoPreconditionFailedException::class withMessage """
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
             Illegal circular dependencies:
             Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture3.project.presentation..) -->
             Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture3.project.domain..) -->
@@ -44,9 +41,7 @@ class Architecture3Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture3.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture3.project.presentation..")
-
-        // when
-        val func = {
+        val sut = {
             Konsist
                 .architecture(domain, presentation)
                 .addDependencies {
@@ -56,7 +51,7 @@ class Architecture3Test {
         }
 
         // then
-        func shouldThrow KoPreconditionFailedException::class withMessage """
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
             Illegal circular dependencies:
             Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture3.project.presentation..) -->
             Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture3.project.domain..) -->
@@ -74,21 +69,15 @@ class Architecture3Test {
             .addDependencies {
                 domain.dependsOn(presentation)
             }
-        val sut = Konsist.scopeFromDirectory(
-            "lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project".toOsSeparator(),
-        )
-
-        // when
-        val func = {
-            sut.assert(architecture)
-        }
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project",)
+        val sut = { assert(architecture, scope) }
 
         // then
-        func shouldThrow KoCheckFailedException::class withMessage """
+        sut shouldThrow KoCheckFailedException::class withMessage """
             Assert 'fails when layers have circular dependency but in architecture is set that domain layer is depend on presentation layer' has failed. Invalid dependencies at (1):
             Layer: Presentation defined by: com.lemonappdev.konsist.architecture3.project.presentation.. . Invalid files:
             $rootPath/lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project/presentation/PresentationFirstClass.kt
-        """.trimIndent().toOsSeparator()
+        """.trimIndent()
     }
 
     @Test
@@ -102,22 +91,16 @@ class Architecture3Test {
                 domain.notDependOnAnyLayer()
                 presentation.notDependOnAnyLayer()
             }
-        val sut = Konsist.scopeFromDirectory(
-            "lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project".toOsSeparator(),
-        )
-
-        // when
-        val func = {
-            sut.assert(koArchitecture)
-        }
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project",)
+        val sut = { assert(koArchitecture, scope) }
 
         // then
-        func shouldThrow KoCheckFailedException::class withMessage """
+        sut shouldThrow KoCheckFailedException::class withMessage """
             Assert 'fails when layers have circular dependency but in architecture is set that they are independent' has failed. Invalid dependencies at (2):
             Layer: Domain defined by: com.lemonappdev.konsist.architecture3.project.domain.. . Invalid files:
             $rootPath/lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project/domain/DomainFirstClass.kt
             Layer: Presentation defined by: com.lemonappdev.konsist.architecture3.project.presentation.. . Invalid files:
             $rootPath/lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture3/project/presentation/PresentationFirstClass.kt
-        """.trimIndent().toOsSeparator()
+        """.trimIndent()
     }
 }

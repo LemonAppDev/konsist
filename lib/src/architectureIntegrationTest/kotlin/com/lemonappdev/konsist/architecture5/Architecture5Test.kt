@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.architecture5
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
-import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
@@ -24,12 +23,10 @@ class Architecture5Test {
                 domain.dependsOn(infrastructure)
                 infrastructure.notDependOnAnyLayer()
             }
-        val sut = Konsist.scopeFromDirectory(
-            "lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture5/project".toOsSeparator(),
-        )
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture5/project",)
 
         // then
-        sut.assert(koArchitecture)
+        assert(koArchitecture, scope)
     }
 
     @Test
@@ -47,15 +44,10 @@ class Architecture5Test {
                 domain.dependsOn(infrastructure)
                 infrastructure.notDependOnAnyLayer()
             }
-        val sut = Konsist.scopeFromDirectory(
-            "lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture5/project".toOsSeparator(),
-        )
-
-        // when
-        val func = {
-            sut.assert(koArchitecture)
-        }
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture5/project",)
+        val sut = { assert(koArchitecture, scope) }
+        
         // then
-        func shouldThrow KoCheckFailedException::class
+        sut shouldThrow KoCheckFailedException::class
     }
 }
