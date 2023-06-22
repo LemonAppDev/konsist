@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.architecture1
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.architecture.Layer
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
@@ -41,7 +42,7 @@ class Architecture1Test {
         }
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage """
+        func shouldThrow KoPreconditionFailedException::class withMessage """
             Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) cannot be dependent on itself.
         """.trimIndent()
     }
@@ -60,7 +61,7 @@ class Architecture1Test {
         }
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage """
+        func shouldThrow KoPreconditionFailedException::class withMessage """
             Layers: [Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..)] is not add to the architecture.
         """.trimIndent()
     }
@@ -79,7 +80,7 @@ class Architecture1Test {
         }
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage """
+        func shouldThrow KoPreconditionFailedException::class withMessage """
             Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) is not add to the architecture.
         """.trimIndent()
     }

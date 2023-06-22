@@ -54,7 +54,7 @@ class Architecture2Test {
 
         // then
         func shouldThrow KoCheckFailedException::class withMessage """
-            Assert 'domain layer is depend on presentation layer fails' has failed. Invalid dependencies at (1):
+            Assert 'fails when dependency is set that domain layer is depend on presentation layer' has failed. Invalid dependencies at (1):
             Layer: Presentation defined by: com.lemonappdev.konsist.architecture2.project.presentation.. . Invalid files:
             $rootPath/lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture2/project/presentation/sample/PresentationThirdClass.kt
         """.trimIndent().toOsSeparator()

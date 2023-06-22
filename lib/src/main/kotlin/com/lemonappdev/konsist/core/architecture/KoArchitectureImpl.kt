@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.architecture
 
 import com.lemonappdev.konsist.api.architecture.KoArchitecture
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     val dependencies = mutableMapOf<Layer, Set<Layer>>()
@@ -49,10 +50,9 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
                 }
             }
         }
-
-        require(value.none { !it }) {
-            "Illegal circular dependencies (${circularDependencies.size}):\n" +
-                circularDependencies.joinToString(separator = "\n") { "${it.first} with ${it.second}" }
+        if (!value.none { !it }) {
+            throw KoPreconditionFailedException("Illegal circular dependencies (${circularDependencies.size}):\n" +
+                    circularDependencies.joinToString(separator = "\n") { "${it.first} with ${it.second}" })
         }
     }
 
@@ -76,14 +76,21 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         return layers
     }
 
-    private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg addedLayers: Layer) =
-        require(addedLayers.none { it == layer }) { "Layer: $layer cannot be dependent on itself." }
+    private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg addedLayers: Layer) {
+        if(!addedLayers.none { it == layer }) {
+            throw KoPreconditionFailedException("Layer: $layer cannot be dependent on itself." )
+        }
+    }
 
     private fun checkIfLayerIsAddToArchitecture(layer: Layer, addedLayers: List<Layer>? = null) {
         addedLayers?.let {
-            require(addedLayers.all { allLayers.contains(it) }) { "Layers: $it is not add to the architecture." }
+            if(!addedLayers.all { allLayers.contains(it) }){
+                throw KoPreconditionFailedException("Layers: $it is not add to the architecture.")
+            }
         }
-        require(allLayers.contains(layer)) { "Layer: $layer is not add to the architecture." }
+        if(!allLayers.contains(layer)){
+            throw KoPreconditionFailedException("Layer: $layer is not add to the architecture.")
+        }
     }
 
     private fun addAllRequirements(layer: Layer, vararg addedLayers: Layer) {

@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.architecture3
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.verify.assert
@@ -31,7 +32,7 @@ class Architecture3Test {
         println("***************$rootPath")
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage """
+        func shouldThrow KoPreconditionFailedException::class withMessage """
             Illegal circular dependencies (1):
             Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture3.project.presentation..) with Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture3.project.domain..)
         """.trimIndent()
@@ -54,7 +55,7 @@ class Architecture3Test {
         }
 
         // then
-        func shouldThrow IllegalArgumentException::class withMessage """
+        func shouldThrow KoPreconditionFailedException::class withMessage """
             Illegal circular dependencies (1):
             Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture3.project.presentation..) with Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture3.project.domain..)
         """.trimIndent()
