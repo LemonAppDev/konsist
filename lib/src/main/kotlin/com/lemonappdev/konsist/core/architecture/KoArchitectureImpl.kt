@@ -50,7 +50,8 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
                 }
             }
         }
-        if (!value.none { !it }) {
+
+        if (value.any { !it }) {
             throw KoPreconditionFailedException("Illegal circular dependencies (${circularDependencies.size}):\n" +
                     circularDependencies.joinToString(separator = "\n") { "${it.first} with ${it.second}" })
         }
@@ -77,14 +78,14 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     }
 
     private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg addedLayers: Layer) {
-        if(!addedLayers.none { it == layer }) {
+        if(addedLayers.any { it == layer }) {
             throw KoPreconditionFailedException("Layer: $layer cannot be dependent on itself." )
         }
     }
 
     private fun checkIfLayerIsAddToArchitecture(layer: Layer, addedLayers: List<Layer>? = null) {
         addedLayers?.let {
-            if(!addedLayers.all { allLayers.contains(it) }){
+            if(addedLayers.any { layer ->  !allLayers.contains(layer) }){
                 throw KoPreconditionFailedException("Layers: $it is not add to the architecture.")
             }
         }
