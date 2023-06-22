@@ -34,11 +34,9 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
 
     private fun checkCircularDependencies(layer: Layer, vararg addedLayers: Layer) {
         val circularDependencies: MutableList<Pair<Layer, Layer>> = mutableListOf()
-        val allNestedLayers = addedLayers.flatMap {
-            dependencies.getOrDefault(it, emptySet())
-        }
+        val allLayers = getLayers(*addedLayers)
 
-        val value = allNestedLayers.map {
+        val value = allLayers.map {
             if (it == layer) {
                 true
             } else {
@@ -54,12 +52,28 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
 
         require(value.none { !it }) {
             "Illegal circular dependencies (${circularDependencies.size}):\n" +
-                circularDependencies.joinToString(separator = "\n") { "${it.first} with ${it.second}" }
+                    circularDependencies.joinToString(separator = "\n") { "${it.first} with ${it.second}" }
         }
     }
 
-    private fun checkIfCircular(layer: Layer, vararg addedLayers: Layer) {
+    private fun getLayers(vararg addedLayers: Layer, all: List<Layer> = emptyList()): List<Layer> {
+        val layers = mutableListOf<Layer>()
+        val map = mutableMapOf<Layer, Set<Layer>>()
 
+        addedLayers.forEach {
+            if (!all.contains(it)) {
+                layers += it
+                map[it] = dependencies.getOrDefault(it, emptySet())
+            }
+        }
+
+        val newLayers = map.values.flatten().toSet()
+
+        if (newLayers.toList().isNotEmpty()) {
+            layers += getLayers(*newLayers.toTypedArray(), all = all + layers)
+        }
+
+        return layers
     }
 
     private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg addedLayers: Layer) =
