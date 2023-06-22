@@ -24,17 +24,26 @@ import java.util.Locale
 
 internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoPsiDeclarationImpl(kDocElement), KoKDocDeclaration {
     override val text: String by lazy {
-        (kDocElement.text.split("\n") as MutableList)
-            .also {
+        val splitKDoc = kDocElement.text.split("\n") as MutableList
+
+        if (splitKDoc.size == 1 && splitKDoc.first().startsWith("/**") && splitKDoc.first().endsWith("*/")) {
+            splitKDoc
+                .first()
+                .removePrefix("/**")
+                .removeSuffix("*/")
+                .trim()
+        } else {
+            splitKDoc.also {
                 it.removeFirst()
                 it.removeLast()
             }
-            .joinToString("\n") {
-                it
-                    .trim()
-                    .removePrefix("*")
-                    .trim()
-            }
+                .joinToString("\n") {
+                    it
+                        .trim()
+                        .removePrefix("*")
+                        .trim()
+                }
+        }
     }
 
     override val description: String by lazy {
