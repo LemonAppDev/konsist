@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.sequence.withExtension
 import com.lemonappdev.konsist.api.ext.sequence.withRepresentedType
 import com.lemonappdev.konsist.api.ext.sequence.withReturnType
 import com.lemonappdev.konsist.api.ext.sequence.withoutName
