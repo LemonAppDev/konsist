@@ -1,10 +1,10 @@
 package com.lemonappdev.konsist.helper.ext
 
+import com.lemonappdev.konsist.core.util.PathHelper
 import java.io.File
-import java.nio.file.Paths
 
-val fileSeparator: String = File.separator
+internal val fileSeparator: String = PathHelper.sep
 
-fun String.toCanonicalPath(): String = replace("/", File.separator)
+internal fun String.toOsSeparator(): String = PathHelper.toOsSeparator(this)
 
-fun List<String>.toCanonicalPath(): List<String> = map { it.replace("/", File.separator) }
+internal fun List<String>.toOsSeparator(): List<String> = PathHelper.toOsSeparator(this)
