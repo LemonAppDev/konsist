@@ -1,0 +1,6 @@
+import org.springframework.stereotype.Repository
+
+Konsist.scopeFromProject()
+            .classes()
+            .withAnnotationOf<Repository>()
+            .assert { it.hasNameEndingWith("Repository") }
