@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     val dependencies = mutableMapOf<Layer, Set<Layer>>()
 
-    val allLayers = layers.toMutableList() // jakis check? Czy jest valid?
+    val allLayers = layers.toMutableList()
         .onEach { layer -> dependencies[layer] = setOf(layer) }
 
     override fun addDependencies(dependencies: KoArchitecture.() -> Unit): KoArchitecture {
