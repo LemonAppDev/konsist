@@ -10,6 +10,26 @@ import org.junit.jupiter.api.Test
 
 class KoTypeAliasDeclarationForTypeSequenceExtTest {
     @Test
+    fun `withType(name) returns typeAlias which has given type`() {
+        // given
+        val type1 = "SampleType1"
+        val type2 = "SampleType2"
+        val typeAlias1: KoTypeAliasDeclarationImpl = mockk {
+            every { type.sourceType } returns type1
+        }
+        val typeAlias2: KoTypeAliasDeclarationImpl = mockk {
+            every { type.sourceType } returns type2
+        }
+        val typeAliases = sequenceOf(typeAlias1, typeAlias2)
+
+        // when
+        val sut = typeAliases.withSourceType(type1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(typeAlias1)
+    }
+
+    @Test
     fun `withType(name) returns typeAliases which has one of given types`() {
         // given
         val type1 = "SampleType1"
@@ -31,6 +51,26 @@ class KoTypeAliasDeclarationForTypeSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(typeAlias1, typeAlias2)
+    }
+
+    @Test
+    fun `withoutType(name) returns typeAlias which has not given type`() {
+        // given
+        val type1 = "SampleType1"
+        val type2 = "SampleType2"
+        val typeAlias1: KoTypeAliasDeclarationImpl = mockk {
+            every { type.sourceType } returns type1
+        }
+        val typeAlias2: KoTypeAliasDeclarationImpl = mockk {
+            every { type.sourceType } returns type2
+        }
+        val typeAliases = sequenceOf(typeAlias1, typeAlias2)
+
+        // when
+        val sut = typeAliases.withoutSourceType(type1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(typeAlias2)
     }
 
     @Test

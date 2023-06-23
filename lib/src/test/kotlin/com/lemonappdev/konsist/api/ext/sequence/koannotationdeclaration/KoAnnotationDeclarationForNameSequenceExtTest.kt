@@ -12,6 +12,26 @@ import org.junit.jupiter.api.Test
 
 class KoAnnotationDeclarationForNameSequenceExtTest {
     @Test
+    fun `withName() returns annotations with given name`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
+            every { name } returns name1
+        }
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
+            every { name } returns name2
+        }
+        val annotations = sequenceOf(annotation1, annotation2)
+
+        // when
+        val sut = annotations.withName(name1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(annotation1)
+    }
+
+    @Test
     fun `withName() returns annotations with one of given names`() {
         // given
         val name1 = "name1"
@@ -33,6 +53,26 @@ class KoAnnotationDeclarationForNameSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(annotation1, annotation2)
+    }
+
+    @Test
+    fun `withoutName() returns annotation without given name`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
+            every { name } returns name1
+        }
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
+            every { name } returns name2
+        }
+        val annotations = sequenceOf(annotation1, annotation2)
+
+        // when
+        val sut = annotations.withoutName(name1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(annotation2)
     }
 
     @Test
@@ -60,6 +100,26 @@ class KoAnnotationDeclarationForNameSequenceExtTest {
     }
 
     @Test
+    fun `withFullyQualifiedClassName() returns annotation with given fullyQualifiedName`() {
+        // given
+        val fullyQualifiedName1 = "fullyQualifiedName1"
+        val fullyQualifiedName2 = "fullyQualifiedName2"
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName1
+        }
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName2
+        }
+        val annotations = sequenceOf(annotation1, annotation2)
+
+        // when
+        val sut = annotations.withFullyQualifiedClassName(fullyQualifiedName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(annotation1)
+    }
+
+    @Test
     fun `withFullyQualifiedClassName() returns annotations with one of given fullyQualifiedName`() {
         // given
         val fullyQualifiedName1 = "fullyQualifiedName1"
@@ -81,6 +141,26 @@ class KoAnnotationDeclarationForNameSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(annotation1, annotation2)
+    }
+
+    @Test
+    fun `withoutFullyQualifiedClassName() returns annotation without given fullyQualifiedName`() {
+        // given
+        val fullyQualifiedName1 = "fullyQualifiedName1"
+        val fullyQualifiedName2 = "fullyQualifiedName2"
+        val annotation1: KoAnnotationDeclarationImpl = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName1
+        }
+        val annotation2: KoAnnotationDeclarationImpl = mockk {
+            every { fullyQualifiedName } returns fullyQualifiedName2
+        }
+        val annotations = sequenceOf(annotation1, annotation2)
+
+        // when
+        val sut = annotations.withoutFullyQualifiedClassName(fullyQualifiedName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(annotation2)
     }
 
     @Test

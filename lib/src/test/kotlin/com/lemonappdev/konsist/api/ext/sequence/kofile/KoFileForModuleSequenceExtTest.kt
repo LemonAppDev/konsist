@@ -10,6 +10,25 @@ import org.junit.jupiter.api.Test
 
 class KoFileForModuleSequenceExtTest {
     @Test
+    fun `withModule(String) returns file with given module`() {
+        // given
+        val module = "module"
+        val file1: KoFileImpl = mockk {
+            every { resideInModule(module) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { resideInModule(module) } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withModule(module)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
+    }
+
+    @Test
     fun `withModule(String) returns files with one of given modules`() {
         // given
         val module1 = "module1"
@@ -33,6 +52,25 @@ class KoFileForModuleSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1, file2)
+    }
+
+    @Test
+    fun `withoutModule(String) returns file without given module`() {
+        // given
+        val module = "module"
+        val file1: KoFileImpl = mockk {
+            every { resideInModule(module) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { resideInModule(module) } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withoutModule(module)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
     }
 
     @Test

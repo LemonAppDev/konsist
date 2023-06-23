@@ -103,6 +103,26 @@ class KoTypeDeclarationForSourceTypeSequenceExtTest {
     }
 
     @Test
+    fun `withSourceType(type) returns type with given source type`() {
+        // given
+        val sourceType1 = "SampleClass1"
+        val sourceType2 = "SampleClass2"
+        val type1: KoTypeDeclarationImpl = mockk {
+            every { sourceType } returns sourceType1
+        }
+        val type2: KoTypeDeclarationImpl = mockk {
+            every { sourceType } returns sourceType2
+        }
+        val types = sequenceOf(type1, type2)
+
+        // when
+        val sut = types.withSourceType(sourceType1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(type1)
+    }
+
+    @Test
     fun `withSourceType(type) returns types with one of given source types`() {
         // given
         val sourceType1 = "SampleClass1"
@@ -124,6 +144,26 @@ class KoTypeDeclarationForSourceTypeSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(type1, type2)
+    }
+
+    @Test
+    fun `withoutSourceType(type) returns type without given source type`() {
+        // given
+        val sourceType1 = "SampleClass1"
+        val sourceType2 = "SampleClass2"
+        val type1: KoTypeDeclarationImpl = mockk {
+            every { sourceType } returns sourceType1
+        }
+        val type2: KoTypeDeclarationImpl = mockk {
+            every { sourceType } returns sourceType2
+        }
+        val types = sequenceOf(type1, type2)
+
+        // when
+        val sut = types.withoutSourceType(sourceType1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(type2)
     }
 
     @Test

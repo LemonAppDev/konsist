@@ -5,21 +5,23 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 /**
  * Sequence containing type aliases that have source type.
  *
+ * @param type The source type to include.
  * @param types The source types to include.
  * @return A sequence containing type aliases that have the specified source types.
  */
-fun Sequence<KoTypeAliasDeclaration>.withSourceType(vararg types: String): Sequence<KoTypeAliasDeclaration> = filter {
-    types.any { type -> it.type.sourceType == type }
+fun Sequence<KoTypeAliasDeclaration>.withSourceType(type: String, vararg types: String): Sequence<KoTypeAliasDeclaration> = filter {
+    it.type.sourceType == type || types.any { type -> it.type.sourceType == type }
 }
 
 /**
  * Sequence containing type aliases that don't have source type.
  *
+ * @param type The source type to exclude.
  * @param types The source types to exclude.
  * @return A sequence containing type aliases that don't have the specified source types.
  */
-fun Sequence<KoTypeAliasDeclaration>.withoutSourceType(vararg types: String): Sequence<KoTypeAliasDeclaration> = filter {
-    types.none { type -> it.type.sourceType == type }
+fun Sequence<KoTypeAliasDeclaration>.withoutSourceType(type: String, vararg types: String): Sequence<KoTypeAliasDeclaration> = filter {
+    it.type.sourceType != type && types.none { type -> it.type.sourceType == type }
 }
 
 /**

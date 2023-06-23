@@ -22,6 +22,20 @@ class KoPsiDeclarationForKDocTest {
     }
 
     @Test
+    fun `declaration-with-one-line-kdoc`() {
+        // given
+        val sut = getSnippetFile("declaration-with-one-line-kdoc")
+            .declarations()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            kDoc shouldNotBeEqualTo null
+            hasKDoc() shouldBeEqualTo true
+        }
+    }
+
+    @Test
     fun `declaration-without-kdoc`() {
         // given
         val sut = getSnippetFile("declaration-without-kdoc")

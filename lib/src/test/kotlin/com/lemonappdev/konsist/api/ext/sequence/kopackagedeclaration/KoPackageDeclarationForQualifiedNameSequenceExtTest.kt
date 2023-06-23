@@ -10,6 +10,26 @@ import org.junit.jupiter.api.Test
 
 class KoPackageDeclarationForQualifiedNameSequenceExtTest {
     @Test
+    fun `withQualifiedName() returns package with given name`() {
+        // given
+        val qualifiedName1 = "com.samplepackage1"
+        val qualifiedName2 = "com.samplepackage2"
+        val package1: KoPackageDeclarationImpl = mockk {
+            every { qualifiedName } returns qualifiedName1
+        }
+        val package2: KoPackageDeclarationImpl = mockk {
+            every { qualifiedName } returns qualifiedName2
+        }
+        val packages = sequenceOf(package1, package2)
+
+        // when
+        val sut = packages.withQualifiedName(qualifiedName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(package1)
+    }
+
+    @Test
     fun `withQualifiedName() returns packages with one of given names`() {
         // given
         val qualifiedName1 = "com.samplepackage1"
@@ -31,6 +51,26 @@ class KoPackageDeclarationForQualifiedNameSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(package1, package2)
+    }
+
+    @Test
+    fun `withoutQualifiedName() returns package without given name`() {
+        // given
+        val qualifiedName1 = "com.samplepackage1"
+        val qualifiedName2 = "com.samplepackage2"
+        val package1: KoPackageDeclarationImpl = mockk {
+            every { qualifiedName } returns qualifiedName1
+        }
+        val package2: KoPackageDeclarationImpl = mockk {
+            every { qualifiedName } returns qualifiedName2
+        }
+        val packages = sequenceOf(package1, package2)
+
+        // when
+        val sut = packages.withoutQualifiedName(qualifiedName1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(package2)
     }
 
     @Test

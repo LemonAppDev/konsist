@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kopsideclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.core.ext.toOsSeparator
+import com.lemonappdev.konsist.testdata.toOsSeparator
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test

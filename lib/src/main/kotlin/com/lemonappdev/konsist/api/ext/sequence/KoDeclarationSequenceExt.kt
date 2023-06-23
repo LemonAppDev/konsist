@@ -105,11 +105,12 @@ fun <T : KoDeclaration> Sequence<T>.withAnnotations(vararg annotations: String):
 /**
  * Sequence containing declarations that have some annotations.
  *
+ * @param annotation The annotation to include.
  * @param annotations The annotations to include.
  * @return A sequence containing declarations that have at least one of the specified annotations.
  */
-fun <T : KoDeclaration> Sequence<T>.withSomeAnnotations(vararg annotations: String): Sequence<T> = filter {
-    annotations.any { annotation -> it.hasAnnotations(annotation) }
+fun <T : KoDeclaration> Sequence<T>.withSomeAnnotations(annotation: String, vararg annotations: String): Sequence<T> = filter {
+    it.hasAnnotations(annotation) || annotations.any { annotation -> it.hasAnnotations(annotation) }
 }
 
 /**
@@ -129,30 +130,33 @@ fun <T : KoDeclaration> Sequence<T>.withoutAnnotations(vararg annotations: Strin
 /**
  * Sequence containing declarations that have all annotations of type.
  *
- * @param annotations The Kotlin class(es) representing annotation(s) to include.
+ * @param annotation The Kotlin class representing annotation to include.
+ * @param annotations The Kotlin classes representing annotations to include.
  * @return A sequence containing declarations that have all the specified annotations.
  */
-fun <T : KoDeclaration> Sequence<T>.withAnnotationsOf(vararg annotations: KClass<*>): Sequence<T> =
-    filter { it.hasAnnotationsOf(*annotations) }
+fun <T : KoDeclaration> Sequence<T>.withAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> =
+    filter { it.hasAnnotationsOf(annotation, *annotations) }
 
 /**
  * Sequence containing declarations that have some annotations of type.
  *
- * @param annotations The Kotlin class(es) representing annotation(s) to include.
+ * @param annotation The Kotlin class representing annotation to include.
+ * @param annotations The Kotlin classes representing annotations to include.
  * @return A sequence containing declarations that have at least one of the specified the annotations.
  */
-fun <T : KoDeclaration> Sequence<T>.withSomeAnnotationsOf(vararg annotations: KClass<*>): Sequence<T> = filter {
-    annotations.any { annotation -> it.hasAnnotationsOf(annotation) }
+fun <T : KoDeclaration> Sequence<T>.withSomeAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> = filter {
+    it.hasAnnotationsOf(annotation) || annotations.any { annotation -> it.hasAnnotationsOf(annotation) }
 }
 
 /**
  * Sequence containing declarations that don't have the annotations of type.
  *
- * @param annotations The Kotlin class(es) representing annotation(s) to exclude.
+ * @param annotation The Kotlin class representing annotation to exclude.
+ * @param annotations The Kotlin classes representing annotations to exclude.
  * @return A sequence containing declarations that don't have any of the specified annotations.
  */
-fun <T : KoDeclaration> Sequence<T>.withoutAnnotationsOf(vararg annotations: KClass<*>): Sequence<T> =
-    filter { !it.hasAnnotationsOf(*annotations) }
+fun <T : KoDeclaration> Sequence<T>.withoutAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> =
+    filter { !it.hasAnnotationsOf(annotation, *annotations) }
 
 /**
  * Sequence containing declarations that have all annotations of type.
@@ -184,11 +188,12 @@ fun <T : KoDeclaration> Sequence<T>.withModifiers(vararg modifiers: KoModifier):
 /**
  * Sequence containing declarations that have some modifiers.
  *
+ * @param modifier The modifier to include.
  * @param modifiers The modifiers to include.
  * @return A sequence containing declarations that have at least one of the specified modifiers.
  */
-fun <T : KoDeclaration> Sequence<T>.withSomeModifiers(vararg modifiers: KoModifier): Sequence<T> = filter {
-    modifiers.any { modifier -> it.hasModifiers(modifier) }
+fun <T : KoDeclaration> Sequence<T>.withSomeModifiers(modifier: KoModifier, vararg modifiers: KoModifier): Sequence<T> = filter {
+    it.hasModifiers(modifier) || modifiers.any { modifier -> it.hasModifiers(modifier) }
 }
 
 /**
@@ -207,22 +212,24 @@ fun <T : KoDeclaration> Sequence<T>.withoutModifiers(vararg modifiers: KoModifie
 /**
  * Sequence containing declarations that have packages.
  *
+ * @param packagee The package to include.
  * @param packages The packages to include.
  * @return A sequence containing declarations that reside in any of the specified packages.
 
  */
-fun <T : KoDeclaration> Sequence<T>.withPackage(vararg packages: String): Sequence<T> = filter {
-    packages.any { packagee -> it.resideInPackage(packagee) }
+fun <T : KoDeclaration> Sequence<T>.withPackage(packagee: String, vararg packages: String): Sequence<T> = filter {
+    it.resideInPackage(packagee) || packages.any { packagee -> it.resideInPackage(packagee) }
 }
 
 /**
  * Sequence containing declarations that don't have the packages.
  *
+ * @param packagee The package to exclude.
  * @param packages The packages to exclude.
  * @return A sequence containing declarations that don't reside in any of the specified packages.
  */
-fun <T : KoDeclaration> Sequence<T>.withoutPackage(vararg packages: String): Sequence<T> = filter {
-    packages.all { packagee -> it.resideOutsidePackage(packagee) }
+fun <T : KoDeclaration> Sequence<T>.withoutPackage(packagee: String, vararg packages: String): Sequence<T> = filter {
+    it.resideOutsidePackage(packagee) && packages.all { packagee -> it.resideOutsidePackage(packagee) }
 }
 
 /**

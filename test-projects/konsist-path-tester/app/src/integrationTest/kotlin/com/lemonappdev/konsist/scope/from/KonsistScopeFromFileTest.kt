@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.scope.from
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.ext.fileSeparator
-import com.lemonappdev.konsist.helper.ext.toCanonicalPath
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
@@ -16,12 +16,12 @@ class KonsistScopeFromFileTest {
     fun `scopeFromFile`() {
         // given
         val sut = Konsist
-            .scopeFromFile("/app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toCanonicalPath())
+            .scopeFromFile("/app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toOsSeparator())
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
-            listOf("$appMainSourceSetDirectory/sample/AppClass.kt").toCanonicalPath(),
+            listOf("$appMainSourceSetDirectory/sample/AppClass.kt").toOsSeparator(),
         )
     }
 
@@ -29,7 +29,7 @@ class KonsistScopeFromFileTest {
     fun `scopeFromFile throws exception if path does not exist`() {
         // given
         val func =
-            { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt".toCanonicalPath()) }
+            { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/NonExistingTest.kt".toOsSeparator()) }
 
         // then
         val message = "File does not exist: $appMainSourceSetDirectory${fileSeparator}NonExistingTest.kt"
@@ -39,7 +39,7 @@ class KonsistScopeFromFileTest {
     @Test
     fun `scopeFromFile throws exception if path points to directory`() {
         // given
-        val func = { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/sample".toCanonicalPath()) }
+        val func = { Konsist.scopeFromFile("app/src/main/kotlin/com/lemonappdev/sample".toOsSeparator()) }
 
         // then
         val message = "Path is a directory, but should be a file: $appMainSourceSetDirectory${fileSeparator}sample"

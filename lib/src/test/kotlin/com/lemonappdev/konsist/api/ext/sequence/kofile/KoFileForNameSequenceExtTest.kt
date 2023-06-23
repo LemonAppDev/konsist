@@ -19,6 +19,26 @@ import org.junit.jupiter.api.Test
 @Suppress("detekt.LargeClass")
 class KoFileForNameSequenceExtTest {
     @Test
+    fun `withName() returns file with given name`() {
+        // given
+        val name1 = "sampleName1"
+        val name2 = "sampleName2"
+        val file1: KoFileImpl = mockk {
+            every { name } returns name1
+        }
+        val file2: KoFileImpl = mockk {
+            every { name } returns name2
+        }
+        val file = sequenceOf(file1, file2)
+
+        // when
+        val sut = file.withName(name1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
+    }
+
+    @Test
     fun `withName() returns file with one of given names`() {
         // given
         val name1 = "sampleName1"
@@ -43,6 +63,26 @@ class KoFileForNameSequenceExtTest {
     }
 
     @Test
+    fun `withoutName() returns file without given name`() {
+        // given
+        val name1 = "sampleName1"
+        val name2 = "sampleName2"
+        val file1: KoFileImpl = mockk {
+            every { name } returns name1
+        }
+        val file2: KoFileImpl = mockk {
+            every { name } returns name2
+        }
+        val file = sequenceOf(file1, file2)
+
+        // when
+        val sut = file.withoutName(name1)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
+    }
+
+    @Test
     fun `withoutName() returns file without any of given names`() {
         // given
         val name1 = "sampleName1"
@@ -64,6 +104,25 @@ class KoFileForNameSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(file3)
+    }
+
+    @Test
+    fun `withNameStartingWith() returns file which names starts with given prefix`() {
+        // given
+        val prefix = "prefix"
+        val file1: KoFileImpl = mockk {
+            every { hasNameStartingWith(prefix) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasNameStartingWith(prefix) } returns false
+        }
+        val file = sequenceOf(file1, file2)
+
+        // when
+        val sut = file.withNameStartingWith(prefix)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
     }
 
     @Test
@@ -93,6 +152,25 @@ class KoFileForNameSequenceExtTest {
     }
 
     @Test
+    fun `withoutNameStartingWith() returns file which name not starts with given prefix`() {
+        // given
+        val prefix = "prefix"
+        val file1: KoFileImpl = mockk {
+            every { hasNameStartingWith(prefix) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasNameStartingWith(prefix) } returns false
+        }
+        val file = sequenceOf(file1, file2)
+
+        // when
+        val sut = file.withoutNameStartingWith(prefix)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
+    }
+
+    @Test
     fun `withoutNameStartingWith() returns file which name not starts with given prefixes`() {
         // given
         val prefix1 = "prefix1"
@@ -116,6 +194,25 @@ class KoFileForNameSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(file3)
+    }
+
+    @Test
+    fun `withNameEndingWith() returns file which name ends with suffix`() {
+        // given
+        val suffix = "suffix"
+        val file1: KoFileImpl = mockk {
+            every { hasNameEndingWith(suffix) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasNameEndingWith(suffix) } returns false
+        }
+        val file = sequenceOf(file1, file2)
+
+        // when
+        val sut = file.withNameEndingWith(suffix)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
     }
 
     @Test
@@ -145,6 +242,25 @@ class KoFileForNameSequenceExtTest {
     }
 
     @Test
+    fun `withoutNameEndingWith() returns file which name not ends with given suffix`() {
+        // given
+        val suffix = "suffix"
+        val file1: KoFileImpl = mockk {
+            every { hasNameEndingWith(suffix) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasNameEndingWith(suffix) } returns false
+        }
+        val file = sequenceOf(file1, file2)
+
+        // when
+        val sut = file.withoutNameEndingWith(suffix)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
+    }
+
+    @Test
     fun `withoutNameEndingWith() returns file which name not ends with given suffixes`() {
         // given
         val suffix1 = "suffix1"
@@ -168,6 +284,25 @@ class KoFileForNameSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(file3)
+    }
+
+    @Test
+    fun `withNameContaining() returns file which names contains given text`() {
+        // given
+        val text = "text"
+        val file1: KoFileImpl = mockk {
+            every { hasNameContaining(text) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasNameContaining(text) } returns false
+        }
+        val file = sequenceOf(file1, file2)
+
+        // when
+        val sut = file.withNameContaining(text)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
     }
 
     @Test
@@ -197,6 +332,25 @@ class KoFileForNameSequenceExtTest {
     }
 
     @Test
+    fun `withoutNameContaining() returns file which name not contains given text`() {
+        // given
+        val text = "text"
+        val file1: KoFileImpl = mockk {
+            every { hasNameContaining(text) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasNameContaining(text) } returns false
+        }
+        val file = sequenceOf(file1, file2)
+
+        // when
+        val sut = file.withoutNameContaining(text)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
+    }
+
+    @Test
     fun `withoutNameContaining() returns file which name not contains any of given texts`() {
         // given
         val text1 = "text1"
@@ -223,52 +377,90 @@ class KoFileForNameSequenceExtTest {
     }
 
     @Test
-    fun `withNameMatching() returns file which names contains given one of texts`() {
+    fun `withNameMatching() returns file which names contains given regex`() {
         // given
-        val text1 = Regex("[1-9]")
-        val text2 = Regex("[a-z]")
+        val regex = Regex("[1-9]")
         val file1: KoFileImpl = mockk {
-            every { hasNameMatching(text1) } returns true
-            every { hasNameMatching(text2) } returns true
+            every { hasNameMatching(regex) } returns true
         }
         val file2: KoFileImpl = mockk {
-            every { hasNameMatching(text1) } returns true
-            every { hasNameMatching(text2) } returns false
+            every { hasNameMatching(regex) } returns false
+        }
+        val file = sequenceOf(file1, file2)
+
+        // when
+        val sut = file.withNameMatching(regex)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
+    }
+
+    @Test
+    fun `withNameMatching() returns file which names contains given one of regexes`() {
+        // given
+        val regex1 = Regex("[1-9]")
+        val regex2 = Regex("[a-z]")
+        val file1: KoFileImpl = mockk {
+            every { hasNameMatching(regex1) } returns true
+            every { hasNameMatching(regex2) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasNameMatching(regex1) } returns true
+            every { hasNameMatching(regex2) } returns false
         }
         val file3: KoFileImpl = mockk {
-            every { hasNameMatching(text1) } returns false
-            every { hasNameMatching(text2) } returns false
+            every { hasNameMatching(regex1) } returns false
+            every { hasNameMatching(regex2) } returns false
         }
         val file = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = file.withNameMatching(text1, text2)
+        val sut = file.withNameMatching(regex1, regex2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1, file2)
     }
 
     @Test
-    fun `withoutNameMatching() returns file which name not contains given texts`() {
+    fun `withoutNameMatching() returns file which name not contains given regex`() {
         // given
-        val text1 = Regex("[1-9]")
-        val text2 = Regex("[a-z]")
+        val regex = Regex("[1-9]")
         val file1: KoFileImpl = mockk {
-            every { hasNameMatching(text1) } returns true
-            every { hasNameMatching(text2) } returns true
+            every { hasNameMatching(regex) } returns true
         }
         val file2: KoFileImpl = mockk {
-            every { hasNameMatching(text1) } returns true
-            every { hasNameMatching(text2) } returns false
+            every { hasNameMatching(regex) } returns false
+        }
+        val file = sequenceOf(file1, file2)
+
+        // when
+        val sut = file.withoutNameMatching(regex)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
+    }
+
+    @Test
+    fun `withoutNameMatching() returns file which name not contains given regexes`() {
+        // given
+        val regex1 = Regex("[1-9]")
+        val regex2 = Regex("[a-z]")
+        val file1: KoFileImpl = mockk {
+            every { hasNameMatching(regex1) } returns true
+            every { hasNameMatching(regex2) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasNameMatching(regex1) } returns true
+            every { hasNameMatching(regex2) } returns false
         }
         val file3: KoFileImpl = mockk {
-            every { hasNameMatching(text1) } returns false
-            every { hasNameMatching(text2) } returns false
+            every { hasNameMatching(regex1) } returns false
+            every { hasNameMatching(regex2) } returns false
         }
         val file = sequenceOf(file1, file2, file3)
 
         // when
-        val sut = file.withoutNameMatching(text1, text2)
+        val sut = file.withoutNameMatching(regex1, regex2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(file3)

@@ -96,6 +96,25 @@ class KoDeclarationForAnnotationSequenceExtTest {
     }
 
     @Test
+    fun `withSomeAnnotations(String) returns declaration with given annotation`() {
+        // given
+        val annotation = "SampleAnnotation"
+        val declaration1: KoDeclarationImpl = mockk {
+            every { hasAnnotations(annotation) } returns true
+        }
+        val declaration2: KoDeclarationImpl = mockk {
+            every { hasAnnotations(annotation) } returns false
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withSomeAnnotations(annotation)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withSomeAnnotations(String) returns declarations with at least one of given annotations`() {
         // given
         val annotation1 = "SampleAnnotation1"
@@ -122,6 +141,24 @@ class KoDeclarationForAnnotationSequenceExtTest {
     }
 
     @Test
+    fun `withAnnotationsOf(KClass) returns declaration with given annotation`() {
+        // given
+        val declaration1: KoDeclarationImpl = mockk {
+            every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
+        }
+        val declaration2: KoDeclarationImpl = mockk {
+            every { hasAnnotationsOf(SampleAnnotation1::class) } returns false
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAnnotationsOf(SampleAnnotation1::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withAnnotationsOf(KClass) returns declaration with all of given annotations`() {
         // given
         val declaration1: KoDeclarationImpl = mockk {
@@ -137,6 +174,24 @@ class KoDeclarationForAnnotationSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutAnnotationsOf(KClass) returns declaration without given annotation`() {
+        // given
+        val declaration1: KoDeclarationImpl = mockk {
+            every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
+        }
+        val declaration2: KoDeclarationImpl = mockk {
+            every { hasAnnotationsOf(SampleAnnotation1::class) } returns false
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAnnotationsOf(SampleAnnotation1::class)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

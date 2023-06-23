@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
-import com.lemonappdev.konsist.helper.ext.toCanonicalPath
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirectory
@@ -29,7 +29,7 @@ class KonsistScopeFromProductionTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -50,7 +50,7 @@ class KonsistScopeFromProductionTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -86,7 +86,7 @@ class KonsistScopeFromProductionTest {
             listOf(
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -102,7 +102,7 @@ class KonsistScopeFromProductionTest {
             listOf(
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -119,7 +119,7 @@ class KonsistScopeFromProductionTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -136,7 +136,7 @@ class KonsistScopeFromProductionTest {
                 "$rootMainSourceSetDirectory/sample/RootClass.kt",
                 "$rootMainSourceSetDirectory/sample/data/RootDataClass.kt",
                 "$rootMainSourceSetDirectory/sample/src/RootSrcClass.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -172,7 +172,7 @@ class KonsistScopeFromProductionTest {
             listOf(
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -188,7 +188,7 @@ class KonsistScopeFromProductionTest {
             listOf(
                 "$dataMainSourceSetDirectory/sample/LibClass.kt",
                 "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 

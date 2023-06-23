@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.kofile
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.helper.ext.toCanonicalPath
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
@@ -16,7 +16,7 @@ class KoFileForSourceSetName {
     fun `source set name is 'main' in app module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toCanonicalPath())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
             .files()
             .first()
 
@@ -32,7 +32,7 @@ class KoFileForSourceSetName {
     fun `source set name is 'integrationTest' in app module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/sample/AppClassTest.kt".toCanonicalPath())
+            .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/sample/AppClassTest.kt".toOsSeparator())
             .files()
             .first()
 
@@ -48,7 +48,7 @@ class KoFileForSourceSetName {
     fun `source set name is 'main' in data module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toCanonicalPath())
+            .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
             .files()
             .first()
 
@@ -64,7 +64,7 @@ class KoFileForSourceSetName {
     fun `source set name is 'test' in data module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataTestSourceSetProjectDirectory/sample/LibClassTest.kt".toCanonicalPath())
+            .scopeFromFile("$dataTestSourceSetProjectDirectory/sample/LibClassTest.kt".toOsSeparator())
             .files()
             .first()
 
@@ -80,7 +80,7 @@ class KoFileForSourceSetName {
     fun `source set name is 'main' in root module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toCanonicalPath())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
             .files()
             .first()
 
@@ -96,7 +96,7 @@ class KoFileForSourceSetName {
     fun `source set name is 'main' in root module with double src package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/src/RootSrcClass.kt".toCanonicalPath())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/src/RootSrcClass.kt".toOsSeparator())
             .files()
             .first()
 

@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationHelper
 import com.lemonappdev.konsist.core.util.TagHelper
-import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
+import org.jetbrains.kotlin.kdoc.psi.api.KDoc
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
 @Suppress("detekt.TooManyFunctions")
@@ -55,7 +55,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
     override val kDoc: KoKDocDeclaration? by lazy {
         val kDocElement = psiElement
             .children
-            .filterIsInstance<KDocElement>()
+            .filterIsInstance<KDoc>()
             .firstOrNull()
 
         kDocElement?.let { KoKDocDeclarationImpl(kDocElement) }

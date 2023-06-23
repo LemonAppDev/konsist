@@ -1,0 +1,4 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+
+@SampleAnnotation<String, Int>
+private open class SampleClass

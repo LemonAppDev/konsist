@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.scope.from
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
-import com.lemonappdev.konsist.helper.ext.toCanonicalPath
+import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
@@ -43,7 +43,7 @@ class KonsistScopeFromTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -86,7 +86,7 @@ class KonsistScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -103,7 +103,7 @@ class KonsistScopeFromTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -136,7 +136,7 @@ class KonsistScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -179,7 +179,7 @@ class KonsistScopeFromTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/scope/from/KonsistScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/AppClassTest.kt",
                 "$appIntegrationTestSourceSetDirectory/sample/data/AppDataClassTest.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -207,7 +207,7 @@ class KonsistScopeFromTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
@@ -245,7 +245,7 @@ class KonsistScopeFromTest {
                 "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
                 "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
                 "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
-            ).toCanonicalPath(),
+            ).toOsSeparator(),
         )
     }
 
