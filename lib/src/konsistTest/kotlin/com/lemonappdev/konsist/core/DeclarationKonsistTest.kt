@@ -42,6 +42,12 @@ class DeclarationKonsistTest {
             .assertNot { it.sourceType.endsWith("Impl") }
     }
 
+    @Test
+    fun `test x`(){
+        Konsist.scopeFromExternalDirectory("/Users/natalia/IdeaProjects/LargeKotlinProjects/..")
+            .classes()
+    }
+
     companion object {
         val declarationPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.declaration..", sourceSetName = "main")
     }

@@ -38,11 +38,18 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
     }
 
     override val returnType: KoTypeDeclaration? by lazy {
-        val type = ktFunction
+        val typeReference = ktFunction
             .children
             .filterIsInstance<KtTypeReference>()
+
+        val type = if (isExtension() && typeReference.size > 1) {
             // We choose last because when we have extension function the first one is receiver and the second one is return type.
-            .lastOrNull()
+            typeReference.last()
+        } else if (!isExtension()) {
+            typeReference.firstOrNull()
+        } else {
+            null
+        }
 
         type?.let { KoTypeDeclarationImpl.getInstance(type, this) }
     }
