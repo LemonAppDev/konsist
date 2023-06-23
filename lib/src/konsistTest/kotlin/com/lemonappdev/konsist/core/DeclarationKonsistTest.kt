@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.sequence.withExtension
 import com.lemonappdev.konsist.api.ext.sequence.withRepresentedType
 import com.lemonappdev.konsist.api.ext.sequence.withReturnType
 import com.lemonappdev.konsist.api.ext.sequence.withoutName
@@ -40,12 +41,6 @@ class DeclarationKonsistTest {
             .withRepresentedType()
             .mapNotNull { it.type }
             .assertNot { it.sourceType.endsWith("Impl") }
-    }
-
-    @Test
-    fun `test x`(){
-        Konsist.scopeFromExternalDirectory("/Users/natalia/IdeaProjects/LargeKotlinProjects/..")
-            .classes()
     }
 
     companion object {
