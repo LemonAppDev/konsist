@@ -89,6 +89,25 @@ class KoDeclarationForModifierSequenceExtTest {
     }
 
     @Test
+    fun `withSomeModifiers(String) returns declaration with given modifier`() {
+        // given
+        val modifier = PROTECTED
+        val declaration1: KoDeclarationImpl = mockk {
+            every { hasModifiers(modifier) } returns true
+        }
+        val declaration2: KoDeclarationImpl = mockk {
+            every { hasModifiers(modifier) } returns false
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withSomeModifiers(modifier)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withSomeModifiers(String) returns declarations with at least one of given modifiers`() {
         // given
         val modifier1 = PROTECTED

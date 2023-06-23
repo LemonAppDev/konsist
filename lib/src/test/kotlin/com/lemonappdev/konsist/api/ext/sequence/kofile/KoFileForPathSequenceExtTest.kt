@@ -13,6 +13,25 @@ import org.junit.jupiter.api.Test
 @Suppress("detekt.LargeClass")
 class KoFileForPathSequenceExtTest {
     @Test
+    fun `withPath(String) returns file with given path`() {
+        // given
+        val path = "com/sample/samplepath.."
+        val file1: KoFileImpl = mockk {
+            every { resideInPath(path) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { resideInPath(path) } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withPath(path)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
+    }
+
+    @Test
     fun `withPath(String) returns files with one of given paths`() {
         // given
         val path1 = "com/sample/samplepath1.."
@@ -36,6 +55,25 @@ class KoFileForPathSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1, file2)
+    }
+
+    @Test
+    fun `withoutPath(String) returns file without given path`() {
+        // given
+        val path = "com/sample/samplepath.."
+        val file1: KoFileImpl = mockk {
+            every { resideInPath(path) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { resideInPath(path) } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withoutPath(path)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
     }
 
     @Test
@@ -65,6 +103,25 @@ class KoFileForPathSequenceExtTest {
     }
 
     @Test
+    fun `withProjectPath(String) returns file with given project path`() {
+        // given
+        val projectPath = "com/sample/sampleProjectPath.."
+        val file1: KoFileImpl = mockk {
+            every { resideInProjectPath(projectPath) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { resideInProjectPath(projectPath) } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withProjectPath(projectPath)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
+    }
+
+    @Test
     fun `withProjectPath(String) returns files with one of given project paths`() {
         // given
         val projectPath1 = "com/sample/sampleProjectPath1.."
@@ -88,6 +145,25 @@ class KoFileForPathSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1, file2)
+    }
+
+    @Test
+    fun `withoutProjectPath(String) returns file without given project path`() {
+        // given
+        val projectPath = "com/sample/sampleProjectPath.."
+        val file1: KoFileImpl = mockk {
+            every { resideInProjectPath(projectPath) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { resideInProjectPath(projectPath) } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withoutProjectPath(projectPath)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
     }
 
     @Test

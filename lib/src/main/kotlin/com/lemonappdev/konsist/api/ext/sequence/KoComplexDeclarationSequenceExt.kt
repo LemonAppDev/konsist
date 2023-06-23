@@ -13,21 +13,23 @@ import kotlin.reflect.KClass
 /**
  * Sequence containing declarations that have type of.
  *
- * @param types The type(s) to include.
+ * @param type The type to include.
+ * @param types The types to include.
  * @return A sequence containing declarations that represent the specified type(s).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedType(vararg types: String): Sequence<T> = filter {
-    types.any { type -> it.representsType(type) }
+fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedType(type: String, vararg types: String): Sequence<T> = filter {
+    it.representsType(type) || types.any { type -> it.representsType(type) }
 }
 
 /**
  * Sequence containing declarations that don't have type of.
  *
- * @param types The type(s) to exclude.
+ * @param type The type to exclude.
+ * @param types The types to exclude.
  * @return A sequence containing declarations that don't represent the specified type(s).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedType(vararg types: String): Sequence<T> = filter {
-    types.none { type -> it.representsType(type) }
+fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedType(type: String, vararg types: String): Sequence<T> = filter {
+    !it.representsType(type) && types.none { type -> it.representsType(type) }
 }
 
 /**

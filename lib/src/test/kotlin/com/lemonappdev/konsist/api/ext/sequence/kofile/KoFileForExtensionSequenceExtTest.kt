@@ -11,6 +11,25 @@ import org.junit.jupiter.api.Test
 @Suppress("detekt.LargeClass")
 class KoFileForExtensionSequenceExtTest {
     @Test
+    fun `withExtension() returns file with given extension`() {
+        // given
+        val extension = "sampleExtension"
+        val file1: KoFileImpl = mockk {
+            every { hasExtension(extension) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasExtension(extension) } returns false
+        }
+        val file = sequenceOf(file1, file2)
+
+        // when
+        val sut = file.withExtension(extension)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
+    }
+
+    @Test
     fun `withExtension() returns file with one of given extensions`() {
         // given
         val extension1 = "sampleExtension1"
@@ -38,6 +57,25 @@ class KoFileForExtensionSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1, file2)
+    }
+
+    @Test
+    fun `withoutExtension() returns file without given extension`() {
+        // given
+        val extension = "sampleExtension"
+        val file1: KoFileImpl = mockk {
+            every { hasExtension(extension) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { hasExtension(extension) } returns false
+        }
+        val file = sequenceOf(file1, file2)
+
+        // when
+        val sut = file.withoutExtension(extension)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
     }
 
     @Test

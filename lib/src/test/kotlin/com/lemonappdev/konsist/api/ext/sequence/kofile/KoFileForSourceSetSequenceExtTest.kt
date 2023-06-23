@@ -10,6 +10,25 @@ import org.junit.jupiter.api.Test
 
 class KoFileForSourceSetSequenceExtTest {
     @Test
+    fun `withSourceSet(String) returns file with given source set`() {
+        // given
+        val sourceSetName = "sourceSetName"
+        val file1: KoFileImpl = mockk {
+            every { resideInSourceSet(sourceSetName) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { resideInSourceSet(sourceSetName) } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withSourceSet(sourceSetName)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file1)
+    }
+
+    @Test
     fun `withSourceSet(String) returns files with one of given source sets`() {
         // given
         val sourceSetName1 = "sourceSetName1"
@@ -33,6 +52,25 @@ class KoFileForSourceSetSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1, file2)
+    }
+
+    @Test
+    fun `withoutSourceSet(String) returns file without given source set`() {
+        // given
+        val sourceSetName = "sourceSetName"
+        val file1: KoFileImpl = mockk {
+            every { resideInSourceSet(sourceSetName) } returns true
+        }
+        val file2: KoFileImpl = mockk {
+            every { resideInSourceSet(sourceSetName) } returns false
+        }
+        val files = sequenceOf(file1, file2)
+
+        // when
+        val sut = files.withoutSourceSet(sourceSetName)
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(file2)
     }
 
     @Test
