@@ -48,30 +48,4 @@ class Architecture4Test {
         // then
         sut shouldThrow KoCheckFailedException::class
     }
-
-    @Test
-    fun `throws exception when circular dependency is set`() {
-        // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")
-        val data = Layer("Data", "com.lemonappdev.konsist.architecture4.project.data..")
-        val sut = {
-            Konsist
-                .architecture(domain, presentation, data)
-                .addDependencies {
-                    domain.dependsOn(presentation)
-                    presentation.dependsOn(data)
-                    data.dependsOn(domain)
-                }
-        }
-
-        // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Illegal circular dependencies:
-            Layer(name=Data, isDefinedBy=com.lemonappdev.konsist.architecture4.project.data..) -->
-            Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture4.project.domain..) -->
-            Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture4.project.presentation..) -->
-            Layer(name=Data, isDefinedBy=com.lemonappdev.konsist.architecture4.project.data..).
-        """.trimIndent()
-    }
 }

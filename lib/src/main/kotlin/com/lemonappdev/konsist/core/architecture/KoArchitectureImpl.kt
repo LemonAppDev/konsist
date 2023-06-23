@@ -34,49 +34,46 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     }
 
     private fun checkCircularDependencies(layer: Layer, vararg addedLayers: Layer) {
-        val circularDependencies = mutableListOf<Layer>()
-        val allLayers = getLayers(*addedLayers)
-
-        val value = allLayers.map {
-            if (it == layer) {
-                true
-            } else {
-                when (val value = dependencies.getOrDefault(it, null)) {
-                    null -> true
-                    else -> {
-                        circularDependencies += it
-                        !value.contains(layer)
-                    }
-                }
-            }
+        val layers = addedLayers.map {
+            checkCircularDependenciesHelper(layer, it, emptyList(), emptyList())
         }
 
-        if (value.any { !it }) {
+        val notEmpty = layers.firstOrNull { it.isNotEmpty() }
+
+        if (notEmpty != null) {
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
-                    circularDependencies.joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n" },
+                        notEmpty.filterNot { it == null }
+                            .joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n" },
             )
         }
     }
 
-    private fun getLayers(vararg addedLayers: Layer, all: List<Layer> = emptyList()): List<Layer> {
-        val layers = mutableListOf<Layer>()
-        val map = mutableMapOf<Layer, Set<Layer>>()
+    private fun checkCircularDependenciesHelper(
+        nodeLayer: Layer,
+        layerToCheck: Layer,
+        alreadyChecked: List<Layer>,
+        potentialCircular: List<Layer>
+    ): List<Layer?> {
+        val layerToCheckDependencies = dependencies.getOrDefault(layerToCheck, emptySet()) - layerToCheck
 
-        addedLayers.forEach {
-            if (!all.contains(it)) {
-                layers += it
-                map[it] = dependencies.getOrDefault(it, emptySet())
+        if (layerToCheckDependencies.isEmpty()) {
+            return potentialCircular
+        }
+
+        val layersToCheck = layerToCheckDependencies.filterNot { alreadyChecked.contains(it) }
+
+        val circularLayer = layersToCheck.firstOrNull { it == nodeLayer }
+
+        return if (circularLayer != null) {
+            potentialCircular + layerToCheck + null
+        } else {
+            val lists = layersToCheck.map {
+                checkCircularDependenciesHelper(nodeLayer, it, alreadyChecked + layerToCheck, potentialCircular + layerToCheck)
             }
+
+            lists.firstOrNull { it.last() == null } ?: emptyList()
         }
-
-        val newLayers = map.values.flatten().toSet()
-
-        if (newLayers.toList().isNotEmpty()) {
-            layers += getLayers(*newLayers.toTypedArray(), all = all + layers)
-        }
-
-        return layers
     }
 
     private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg addedLayers: Layer) {
