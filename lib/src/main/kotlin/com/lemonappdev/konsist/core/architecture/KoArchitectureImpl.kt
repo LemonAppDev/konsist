@@ -43,8 +43,8 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         if (notEmpty != null) {
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
-                        notEmpty.filterNot { it == null }
-                            .joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n" },
+                    notEmpty.filterNot { it == null }
+                        .joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n" },
             )
         }
     }
@@ -53,7 +53,7 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         nodeLayer: Layer,
         layerToCheck: Layer,
         alreadyChecked: List<Layer>,
-        potentialCircular: List<Layer>
+        potentialCircular: List<Layer>,
     ): List<Layer?> {
         val layerToCheckDependencies = dependencies.getOrDefault(layerToCheck, emptySet()) - layerToCheck
 

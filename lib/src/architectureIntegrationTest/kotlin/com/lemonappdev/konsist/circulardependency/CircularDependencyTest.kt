@@ -40,7 +40,6 @@ class CircularDependencyTest {
         val layer2 = Layer("layer2", "layer2")
         val layer3 = Layer("layer3", "layer3")
 
-
         // when
         val sut = {
             Konsist
@@ -107,7 +106,7 @@ class CircularDependencyTest {
                 .architecture(layer1, layer2, layer3, layer4)
                 .addDependencies {
                     layer1.dependsOn(layer2)
-                    layer2.dependsOn(layer3 )
+                    layer2.dependsOn(layer3)
                     layer3.dependsOn(layer1, layer4)
                 }
         }
@@ -136,7 +135,7 @@ class CircularDependencyTest {
                 .architecture(layer1, layer2, layer3, layer4)
                 .addDependencies {
                     layer1.dependsOn(layer2, layer3)
-                    layer2.dependsOn(layer4 )
+                    layer2.dependsOn(layer4)
                     layer3.dependsOn(layer4)
                     layer4.dependsOn(layer1)
                 }
