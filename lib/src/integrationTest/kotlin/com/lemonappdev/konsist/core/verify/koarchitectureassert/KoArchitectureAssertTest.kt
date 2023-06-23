@@ -15,10 +15,10 @@ class KoArchitectureAssertTest {
         val layer2 = Layer("Name2", "com.lemonappdev.konsist..")
         val architecture = Konsist.architecture(layer1, layer2)
             .addDependencies { layer1.dependsOn(layer2) }
-        val sut = Konsist.scopeFromProduction()
+        val scope = Konsist.scopeFromProduction()
 
         // then
-        sut.assert(architecture)
+        assert(architecture, scope)
     }
 
     @Test
@@ -29,11 +29,11 @@ class KoArchitectureAssertTest {
         val layer3 = Layer("Name3", "com.lemonappdev.konsist.architecture..")
         val architecture = Konsist.architecture(layer1, layer2, layer3)
             .addDependencies { layer3.dependsOn(layer1) }
-        val sut = Konsist.scopeFromProduction()
+        val scope = Konsist.scopeFromProduction()
 
         // when
         val func = {
-            sut.assert(architecture)
+            assert(architecture, scope)
         }
 
         // then
