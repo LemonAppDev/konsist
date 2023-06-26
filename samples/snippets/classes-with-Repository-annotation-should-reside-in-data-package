@@ -1,0 +1,4 @@
+Konsist.scopeFromProject()
+            .classes()
+            .withAnnotationOf<Repository>()
+            .assert { it.resideInPackage("..data..") }
