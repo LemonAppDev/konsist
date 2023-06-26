@@ -1,0 +1,3 @@
+Konsist.scopeFromProject()
+            .declarations(includeNested = true)
+            .assertNot { it.text.contains("System.out.println") }
