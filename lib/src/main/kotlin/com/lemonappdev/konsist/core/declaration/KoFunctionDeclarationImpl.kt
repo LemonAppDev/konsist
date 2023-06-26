@@ -54,6 +54,19 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
         type?.let { KoTypeDeclarationImpl.getInstance(type, this) }
     }
 
+    override val receiver: KoTypeDeclaration? by lazy {
+        val type = if (isExtension()) {
+            ktFunction
+                .children
+                .filterIsInstance<KtTypeReference>()
+                .first()
+        } else {
+            null
+        }
+
+        type?.let { KoTypeDeclarationImpl.getInstance(type, this) }
+    }
+
     override fun hasOperatorModifier(): Boolean = hasModifiers(KoModifier.OPERATOR)
 
     override fun hasInlineModifier(): Boolean = hasModifiers(KoModifier.INLINE)
@@ -79,6 +92,11 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
     override fun hasExpectModifier(): Boolean = hasModifiers(KoModifier.EXPECT)
 
     override fun isExtension(): Boolean = ktFunction.isExtensionDeclaration()
+
+    override fun hasReceiver(name: String?): Boolean = when (name) {
+        null -> receiver != null
+        else -> receiver?.name == name
+    }
 
     override fun hasReturnType(): Boolean = ktFunction.hasDeclaredReturnType()
 

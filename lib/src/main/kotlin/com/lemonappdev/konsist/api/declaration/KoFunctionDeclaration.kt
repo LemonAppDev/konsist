@@ -14,6 +14,11 @@ interface KoFunctionDeclaration : KoParametrizedDeclaration, KoLocalClassProvide
     val returnType: KoTypeDeclaration?
 
     /**
+     * Receiver of the extension function.
+     */
+    val receiver: KoTypeDeclaration?
+
+    /**
      * Whether this function has operator modifier.
      *
      * @return `true` if the function has the `operator` modifier, `false` otherwise.
@@ -103,6 +108,15 @@ interface KoFunctionDeclaration : KoParametrizedDeclaration, KoLocalClassProvide
      * @return `true` if the function is an extension function, `false` otherwise.
      */
     fun isExtension(): Boolean
+
+    /**
+     * Whether this function has receiver.
+     *
+     * @param name the receiver to check.
+     * @return `true` if the function has receiver with the specified name (or any receiver if [name] is null),
+     * `false` otherwise.
+     */
+    fun hasReceiver(name: String? = null): Boolean
 
     /**
      * Whether this function has a return type.
