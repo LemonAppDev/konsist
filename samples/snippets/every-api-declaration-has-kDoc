@@ -1,0 +1,3 @@
+Konsist.scopeFromPackage("..api..")
+            .declarations(includeNested = true)
+            .assert { it.hasKDoc() }
