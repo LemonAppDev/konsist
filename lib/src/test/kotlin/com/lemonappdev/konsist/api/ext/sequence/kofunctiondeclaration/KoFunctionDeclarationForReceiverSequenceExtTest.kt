@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.ext.sequence.kofunctiondeclaration
 
-import com.lemonappdev.konsist.api.ext.declaration.hasReceiverOf
 import com.lemonappdev.konsist.api.ext.sequence.withReceiver
 import com.lemonappdev.konsist.api.ext.sequence.withReceiverOf
 import com.lemonappdev.konsist.api.ext.sequence.withoutReceiver
@@ -107,10 +106,10 @@ class KoFunctionDeclarationForReceiverSequenceExtTest {
     fun `withReceiverOf() returns function with given receiver`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiverOf<SampleType>() } returns true
+            every { receiver?.name } returns "SampleType"
         }
         val function2: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiverOf<SampleType>() } returns false
+            every { receiver?.name } returns "OtherType"
         }
         val functions = sequenceOf(function1, function2)
 
@@ -125,10 +124,10 @@ class KoFunctionDeclarationForReceiverSequenceExtTest {
     fun `withoutReceiverOf() returns function without given receiver`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiverOf<SampleType>() } returns true
+            every { receiver?.name } returns "SampleType"
         }
         val function2: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiverOf<SampleType>() } returns false
+            every { receiver?.name } returns "OtherType"
         }
         val functions = sequenceOf(function1, function2)
 

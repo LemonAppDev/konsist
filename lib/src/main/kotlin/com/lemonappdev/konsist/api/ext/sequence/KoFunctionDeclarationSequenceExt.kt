@@ -226,7 +226,7 @@ inline fun <reified T> Sequence<KoFunctionDeclaration>.withReceiverOf(): Sequenc
  * @return A sequence containing functions that don't have the receiver of the specified type.
  */
 inline fun <reified T> Sequence<KoFunctionDeclaration>.withoutReceiverOf(): Sequence<KoFunctionDeclaration> =
-    filterNot { !it.hasReceiverOf<T>() }
+    filterNot { it.hasReceiverOf<T>() }
 
 /**
  * Sequence containing functions that have receiver.
