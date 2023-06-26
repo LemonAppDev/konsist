@@ -1,0 +1,16 @@
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+
+Konsist.scopeFromTest()
+            .declarations(includeNested = true)
+            // we must exclude test classes
+            .withoutNameEndingWith("Test")
+            .without
+            .withoutAnnotationsOf(
+                 Test::class,
+                 ParameterizedTest::class,
+                 TestFactory::class,
+                 RepeatedTest::class,
+                 TestTemplate::class
+            )
+            .assert { it.hasPrivateModifier() }
