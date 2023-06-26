@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.ext.declaration.hasReceiverOf
 import kotlin.reflect.KClass
 
 /**
@@ -184,6 +185,68 @@ fun Sequence<KoFunctionDeclaration>.withExtension(): Sequence<KoFunctionDeclarat
  * @return A sequence containing functions that are not extensions.
  */
 fun Sequence<KoFunctionDeclaration>.withoutExtension(): Sequence<KoFunctionDeclaration> = filterNot { it.isExtension() }
+
+/**
+ * Sequence containing functions that have receiver.
+ *
+ * @param types The receiver(s) to include.
+ * @return A sequence containing functions that have the specified receiver(s) (or any receiver if [types] is empty).
+ */
+fun Sequence<KoFunctionDeclaration>.withReceiver(vararg types: String): Sequence<KoFunctionDeclaration> = filter {
+    when {
+        types.isEmpty() -> it.hasReceiver()
+        else -> types.any { type -> it.hasReceiver(type) }
+    }
+}
+
+/**
+ * Sequence containing functions that don't have receiver.
+ *
+ * @param types The receiver(s) to exclude.
+ * @return A sequence containing functions that don't have the specified receiver(s) (or none receiver if [types] is empty).
+ */
+fun Sequence<KoFunctionDeclaration>.withoutReceiver(vararg types: String): Sequence<KoFunctionDeclaration> = filter {
+    when {
+        types.isEmpty() -> !it.hasReceiver()
+        else -> types.none { type -> it.hasReceiver(type) }
+    }
+}
+
+/**
+ * Sequence containing functions that have receiver.
+ *
+ * @return A sequence containing functions that have the receiver of the specified type.
+ */
+inline fun <reified T> Sequence<KoFunctionDeclaration>.withReceiverOf(): Sequence<KoFunctionDeclaration> =
+    filter { it.hasReceiverOf<T>() }
+
+/**
+ * Sequence containing functions that don't have receiver.
+ *
+ * @return A sequence containing functions that don't have the receiver of the specified type.
+ */
+inline fun <reified T> Sequence<KoFunctionDeclaration>.withoutReceiverOf(): Sequence<KoFunctionDeclaration> =
+    filterNot { !it.hasReceiverOf<T>() }
+
+/**
+ * Sequence containing functions that have receiver.
+ *
+ * @param types The Kotlin class(es) representing the receiver(s) to include.
+ * @return A sequence containing functions that have the receiver of the specified Kotlin class(es).
+ */
+fun Sequence<KoFunctionDeclaration>.withReceiverOf(vararg types: KClass<*>): Sequence<KoFunctionDeclaration> = filter {
+    types.any { kClass -> it.hasReceiver(kClass.simpleName) }
+}
+
+/**
+ * Sequence containing functions that don't have receiver.
+ *
+ * @param types The Kotlin class(es) representing the receiver(s) to exclude.
+ * @return A sequence containing functions that don't have the receiver of the specified Kotlin class(es).
+ */
+fun Sequence<KoFunctionDeclaration>.withoutReceiverOf(vararg types: KClass<*>): Sequence<KoFunctionDeclaration> = filter {
+    types.none { kClass -> it.hasReceiver(kClass.simpleName) }
+}
 
 /**
  * Sequence containing functions that have return type.
