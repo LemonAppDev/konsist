@@ -99,7 +99,8 @@ class Architecture1Test {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage "Layer: Layer(name=Domain, " +
-            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) was set as independent before."
+            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) was previously set as independent so it cannot be " +
+                "depend on Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..)."
     }
 
     @Test
@@ -117,8 +118,8 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Dependency that Layer(name=Domain, " +
-            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) should be independent was duplicated."
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency that " +
+                "Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) should be independent"
     }
 
     @Test
@@ -138,8 +139,8 @@ class Architecture1Test {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage "Layer: Layer(name=Domain, " +
-            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) had a previously set dependency with " +
-            "Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..), " +
+            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) had a dependency with " +
+            "Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..) previously set " +
             "so it cannot be independent."
     }
 
@@ -159,8 +160,8 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Dependency between Layer(name=Domain, " +
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency between Layer(name=Domain, " +
             "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) and Layer(name=Presentation, " +
-            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..) is set more than once."
+            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..)."
     }
 }

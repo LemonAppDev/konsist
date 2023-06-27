@@ -59,22 +59,21 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: Layer, vararg layers: Layer) {
         if (statuses[layer] == Status.INDEPENDENT) {
             if (toBeIndependent) {
-                throw KoPreconditionFailedException("Dependency that $layer should be independent was duplicated.")
+                throw KoPreconditionFailedException("Duplicated the dependency that $layer should be independent")
             } else {
-                throw KoPreconditionFailedException("Layer: $layer was set as independent before.")
+                throw KoPreconditionFailedException("Layer: $layer was previously set as independent so it cannot be depend on ${layers.first()}.")
             }
         } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {
             val dependency = dependencies.getOrDefault(layer, emptySet())
 
             if (toBeIndependent) {
-                // TODO("change error message")
                 val alreadySetLayer = dependency.first { it != layer }
                 throw KoPreconditionFailedException(
-                    "Layer: $layer had a previously set dependency with $alreadySetLayer, so it cannot be independent.",
+                    "Layer: $layer had a dependency with $alreadySetLayer previously set so it cannot be independent.",
                 )
             } else if (layers.any { dependency.contains(it) }) {
                 val alreadySetLayer = layers.first { dependency.contains(it) }
-                throw KoPreconditionFailedException("Dependency between $layer and $alreadySetLayer is set more than once.")
+                throw KoPreconditionFailedException("Duplicated the dependency between $layer and $alreadySetLayer.")
             }
         }
     }
@@ -89,8 +88,8 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         if (notEmpty != null) {
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
-                    notEmpty.filterNot { it == null }
-                        .joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n" },
+                        notEmpty.filterNot { it == null }
+                            .joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n" },
             )
         }
     }
