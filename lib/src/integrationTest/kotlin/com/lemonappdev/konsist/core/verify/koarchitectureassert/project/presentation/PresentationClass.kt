@@ -2,5 +2,4 @@ package com.lemonappdev.konsist.core.verify.koarchitectureassert.project.present
 
 import com.lemonappdev.konsist.core.verify.koarchitectureassert.project.business.BusinessClass
 
-class PresentationClass(val parameter: BusinessClass) {
-}
+class PresentationClass(val parameter: BusinessClass)

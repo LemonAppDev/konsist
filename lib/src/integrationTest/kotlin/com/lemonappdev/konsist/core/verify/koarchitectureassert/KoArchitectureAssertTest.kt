@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.with
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 

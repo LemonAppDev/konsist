@@ -98,9 +98,8 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) was set as independent before.
-        """.trimIndent()
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Layer: Layer(name=Domain, " +
+            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) was set as independent before."
     }
 
     @Test
@@ -118,9 +117,8 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Dependency that Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) should be independent was duplicated.
-        """.trimIndent()
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Dependency that Layer(name=Domain, " +
+            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) should be independent was duplicated."
     }
 
     @Test
@@ -139,9 +137,10 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) had a previously set dependency with Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..).
-        """.trimIndent()
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Layer: Layer(name=Domain, " +
+            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) had a previously set dependency with " +
+            "Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..), " +
+            "so it cannot be independent."
     }
 
     @Test
@@ -160,8 +159,8 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Dependency between Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) and Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..) is set more than once.
-        """.trimIndent()
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Dependency between Layer(name=Domain, " +
+            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) and Layer(name=Presentation, " +
+            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..) is set more than once."
     }
 }

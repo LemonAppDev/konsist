@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.architecture
 
 import com.lemonappdev.konsist.api.architecture.KoArchitecture
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
-import com.sun.tools.javac.comp.Todo
 
 class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     val dependencies = mutableMapOf<Layer, Set<Layer>>()
@@ -41,7 +40,9 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         layers?.let {
             if (layers.any { layer -> !allLayers.contains(layer) }) {
                 val notAddedLayers = layers.filterNot { layer -> allLayers.contains(layer) }
-                throw KoPreconditionFailedException("Layers not added to the architecture:\n${notAddedLayers.joinToString(separator = "\n")}.")
+                throw KoPreconditionFailedException(
+                    "Layers not added to the architecture:\n${notAddedLayers.joinToString(separator = "\n")}.",
+                )
             }
         }
         if (!allLayers.contains(layer)) {
@@ -55,36 +56,26 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         }
     }
 
-    private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: Layer, vararg layers: Layer): Boolean {
-        return when (statuses[layer]) {
-            Status.INDEPENDENT -> {
-                if (toBeIndependent) {
-                    throw KoPreconditionFailedException("Dependency that $layer should be independent was duplicated.")
-                } else {
-                    throw KoPreconditionFailedException("Layer: $layer was set as independent before.")
-                }
+    private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: Layer, vararg layers: Layer) {
+        if (statuses[layer] == Status.INDEPENDENT) {
+            if (toBeIndependent) {
+                throw KoPreconditionFailedException("Dependency that $layer should be independent was duplicated.")
+            } else {
+                throw KoPreconditionFailedException("Layer: $layer was set as independent before.")
             }
+        } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {
+            val dependency = dependencies.getOrDefault(layer, emptySet())
 
-            Status.DEPEND_ON_LAYER -> {
-                val dependency = dependencies.getOrDefault(layer, emptySet())
-
-                if (toBeIndependent) {
-                    // TODO("change error message")
-                    val alreadySetLayer = dependency.first { it != layer }
-                    throw KoPreconditionFailedException("Layer: $layer had a previously set dependency with $alreadySetLayer.")
-                } else if (layers.any { dependency.contains(it) }) {
-                    val alreadySetLayer = layers.first { dependency.contains(it) }
-                    throw KoPreconditionFailedException("Dependency between $layer and $alreadySetLayer is set more than once.")
-                } else {
-                    true
-                }
+            if (toBeIndependent) {
+                // TODO("change error message")
+                val alreadySetLayer = dependency.first { it != layer }
+                throw KoPreconditionFailedException(
+                    "Layer: $layer had a previously set dependency with $alreadySetLayer, so it cannot be independent.",
+                )
+            } else if (layers.any { dependency.contains(it) }) {
+                val alreadySetLayer = layers.first { dependency.contains(it) }
+                throw KoPreconditionFailedException("Dependency between $layer and $alreadySetLayer is set more than once.")
             }
-
-            Status.NONE -> {
-                true
-            }
-
-            else -> throw KoPreconditionFailedException("Unknown status of layer: $layer.")
         }
     }
 
@@ -98,8 +89,8 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         if (notEmpty != null) {
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
-                        notEmpty.filterNot { it == null }
-                            .joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n" },
+                    notEmpty.filterNot { it == null }
+                        .joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n" },
             )
         }
     }
