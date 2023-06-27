@@ -13,7 +13,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFunctionDeclarationForReceiverSequenceExtTest {
+class KoFunctionDeclarationForReceiverTypeSequenceExtTest {
     @Test
     fun `withReceiverType() returns function with any receiver`() {
         // given

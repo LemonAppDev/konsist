@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFunctionDeclarationForReceiverTest {
+class KoFunctionDeclarationForReceiverTypeTest {
     @Test
     fun `function-without-receiver`() {
         // given
