@@ -24,13 +24,6 @@ interface KoArchitecture {
     fun Layer.dependsOn(layer: Layer, vararg layers: Layer): Unit
 
     /**
-     * Specifies that the current layer depends on all other layers.
-     *
-     * @receiver The [Layer] that depends on all other layers.
-     */
-    fun Layer.dependsOnAllLayers(): Unit
-
-    /**
      * Specifies that the current layer does not depend on any other layer.
      *
      * @receiver The [Layer] that does not depend on any other layer.

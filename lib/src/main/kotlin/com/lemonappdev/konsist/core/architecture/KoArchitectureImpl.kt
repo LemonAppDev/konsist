@@ -20,13 +20,6 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         dependencies[this] = (dependencies.getOrDefault(this, setOf(this))) + layer + layers
     }
 
-    override fun Layer.dependsOnAllLayers() {
-        checkIfLayerIsAddToArchitecture(this)
-        checkCircularDependencies(this, *allLayers.toTypedArray())
-
-        dependencies[this] = allLayers.toSet()
-    }
-
     override fun Layer.notDependOnAnyLayer() {
         checkIfLayerIsAddToArchitecture(this)
 
