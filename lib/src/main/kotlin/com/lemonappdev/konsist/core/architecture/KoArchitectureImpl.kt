@@ -78,11 +78,12 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     private fun checkIfLayerIsAddToArchitecture(layer: Layer, layers: List<Layer>? = null) {
         layers?.let {
             if (layers.any { layer -> !allLayers.contains(layer) }) {
-                throw KoPreconditionFailedException("Layers: $it is not add to the architecture.")
+                val notAddedLayers = layers.filterNot { layer -> allLayers.contains(layer)  }
+                throw KoPreconditionFailedException("Layers not added to the architecture:\n${notAddedLayers.joinToString(separator = "\n")}.")
             }
         }
         if (!allLayers.contains(layer)) {
-            throw KoPreconditionFailedException("Layer: $layer is not add to the architecture.")
+            throw KoPreconditionFailedException("Layer not added to the architecture:\n$layer.")
         }
     }
 

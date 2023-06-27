@@ -58,7 +58,8 @@ class Architecture1Test {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layers: [Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..)] is not add to the architecture.
+            Layers not added to the architecture:
+            Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..).
         """.trimIndent()
     }
 
@@ -76,7 +77,8 @@ class Architecture1Test {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) is not add to the architecture.
+            Layer not added to the architecture:
+            Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..).
         """.trimIndent()
     }
 }
