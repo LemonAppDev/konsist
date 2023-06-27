@@ -7,6 +7,13 @@ import com.lemonappdev.konsist.core.verify.assertNot
 import java.util.*
 
 class GeneralSnippets {
+    fun `no empty files allowed`() {
+        Konsist.scopeFromProject()
+            .files()
+        TODO("remove comment after add files assert")
+//            .assertNot { it.text.isEmpty() }
+
+    }
     fun `no field should have 'm' prefix`() {
         Konsist.scopeFromProject()
             .classes()
