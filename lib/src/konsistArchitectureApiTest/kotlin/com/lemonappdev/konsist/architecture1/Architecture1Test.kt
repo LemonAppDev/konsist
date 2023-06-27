@@ -100,7 +100,7 @@ class Architecture1Test {
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage "Layer: Layer(name=Domain, " +
             "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) was previously set as independent so it cannot be " +
-                "depend on Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..)."
+            "depend on Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..)."
     }
 
     @Test
@@ -119,7 +119,7 @@ class Architecture1Test {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency that " +
-                "Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) should be independent"
+            "Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) should be independent"
     }
 
     @Test

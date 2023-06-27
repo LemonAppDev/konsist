@@ -61,7 +61,9 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
             if (toBeIndependent) {
                 throw KoPreconditionFailedException("Duplicated the dependency that $layer should be independent")
             } else {
-                throw KoPreconditionFailedException("Layer: $layer was previously set as independent so it cannot be depend on ${layers.first()}.")
+                throw KoPreconditionFailedException(
+                    "Layer: $layer was previously set as independent so it cannot be depend on ${layers.first()}.",
+                )
             }
         } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {
             val dependency = dependencies.getOrDefault(layer, emptySet())
@@ -88,8 +90,8 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         if (notEmpty != null) {
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
-                        notEmpty.filterNot { it == null }
-                            .joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n" },
+                    notEmpty.filterNot { it == null }
+                        .joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n" },
             )
         }
     }
