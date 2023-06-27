@@ -1,11 +1,7 @@
 package com.lemonappdev.konsist.core.verify.kofileassert
 
 import com.lemonappdev.konsist.api.container.KoFile
-import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.container.KoFileImpl
-import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -34,15 +30,15 @@ private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveC
             )
         }
 
-        val notSuppressedDeclarations = localList
+        val notSuppressedFiles = localList
             .filterNot { checkIfSuppressed(it, Thread.currentThread().stackTrace[4].methodName) }
 
-        val result = notSuppressedDeclarations.groupBy {
+        val result = notSuppressedFiles.groupBy {
             lastFile = it
             function(it)
         }
 
-        val allChecksPassed = (result[positiveCheck]?.size ?: 0) == notSuppressedDeclarations.size
+        val allChecksPassed = (result[positiveCheck]?.size ?: 0) == notSuppressedFiles.size
 
         if (!allChecksPassed) {
             val failedDeclarations = result[!positiveCheck] ?: emptyList()
@@ -57,7 +53,7 @@ private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveC
 
 private fun <E : KoFile> getCheckFailedMessage(failedDeclarations: List<E>): String {
     val failedDeclarationsMessage = failedDeclarations.joinToString("\n") {
-        val name = if (it is KoFile) it.name else ""
+        val name = it.name
         val konsistDeclarationClassNamePrefix = "Ko"
         val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
 
