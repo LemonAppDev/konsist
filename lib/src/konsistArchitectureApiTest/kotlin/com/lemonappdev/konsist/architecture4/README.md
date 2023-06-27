@@ -1,7 +1,7 @@
 # Architecture 4
 
-Test scenario where Presentation depends on Application, Application depends on Domain and Infrastructure,
-Domain depends on Infrastructure:
+Test scenario where `Presentation` depends on `Application`, `Application` depends on `Domain` and `Infrastructure`,
+`Domain` depends on `Infrastructure`:
 
 
 ```mermaid
