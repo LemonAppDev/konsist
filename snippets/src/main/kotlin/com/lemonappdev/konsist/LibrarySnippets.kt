@@ -1,10 +1,12 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
+import com.lemonappdev.konsist.api.ext.sequence.withName
 import com.lemonappdev.konsist.api.ext.sequence.withoutAnnotationsOf
 import com.lemonappdev.konsist.api.ext.sequence.withoutNameEndingWith
 import com.lemonappdev.konsist.core.verify.assert
-import jdk.internal.org.jline.utils.Colors.s
+import com.lemonappdev.konsist.core.verify.assertNot
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
@@ -51,5 +53,24 @@ class LibrarySnippets {
 
                 sut != null && sut.type?.name == type
             }
+    }
+
+    fun `test classes should reside in the same package as tested class`() {
+        Konsist.scopeFromProduction()
+            .classes()
+            .filter { it.hasTest() }
+            .assert {
+                Konsist.scopeFromTest()
+                    .classes()
+                    .withName("${it.name}Test")
+                    .first()
+                    .packagee == it.packagee
+            }
+    }
+
+    fun `junit 'Test' annotation is not allowed for functions`() {
+        Konsist.scopeFromTest()
+            .functions(includeNested = true)
+            .assertNot { it.hasAnnotations("org.junit.Test") }
     }
 }
