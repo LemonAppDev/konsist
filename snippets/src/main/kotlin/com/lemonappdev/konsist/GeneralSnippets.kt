@@ -47,4 +47,11 @@ class GeneralSnippets {
             .imports()
             .assertNot { it.isWildcard }
     }
+
+    fun `no class should use Java util logging`() {
+        Konsist.scopeFromProject()
+            .files()
+        TODO("remove comment after add files assert")
+//            .assert { it.hasImports("java.util.logging..")}
+    }
 }
