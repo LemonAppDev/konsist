@@ -6,13 +6,13 @@ import com.lemonappdev.konsist.api.ext.sequence.withoutModifiers
 import com.lemonappdev.konsist.core.verify.assert
 
 class TestingSnippets {
-    fun `every class has test`(){
+    fun `every class has test`() {
         Konsist.scopeFromProject()
             .classes()
             .assert { it.hasTest() }
     }
 
-    fun `every class - except data and value class - has test`(){
+    fun `every class - except data and value class - has test`() {
         Konsist.scopeFromProject()
             .classes()
             .withoutModifiers(KoModifier.DATA, KoModifier.VALUE)

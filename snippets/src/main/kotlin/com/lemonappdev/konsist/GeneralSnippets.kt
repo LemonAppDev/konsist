@@ -17,7 +17,6 @@ class GeneralSnippets {
         Konsist.scopeFromProject()
             .classes()
             .assert { it.hasAnnotations("javax.inject.Inject") }
-
     }
 
     fun `every class constructor has alphabetically ordered parameters`() {

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.TestTemplate
 import org.junit.jupiter.params.ParameterizedTest
 
 class LibrarySnippets {
-    fun `forbid string in files`(){
+    fun `forbid string in files`() {
         Konsist.scopeFromProject()
             .files()
 //            .assertNot { it.text.contains("Forbidden string") }
@@ -34,7 +34,7 @@ class LibrarySnippets {
                 ParameterizedTest::class,
                 TestFactory::class,
                 RepeatedTest::class,
-                TestTemplate::class
+                TestTemplate::class,
             )
             .assert { it.hasPrivateModifier() }
     }

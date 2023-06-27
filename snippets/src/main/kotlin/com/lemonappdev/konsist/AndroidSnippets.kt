@@ -1,4 +1,3 @@
 package com.lemonappdev.konsist
 
-class AndroidSnippets {
-}
+class AndroidSnippets
