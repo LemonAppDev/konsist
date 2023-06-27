@@ -28,23 +28,6 @@ class Architecture1Test {
     }
 
     @Test
-    fun `throws an exception when self dependency is set`() {
-        // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
-
-        val sut = {
-            Konsist
-                .architecture(domain)
-                .addDependencies { domain.dependsOn(domain) }
-        }
-
-        // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) cannot be dependent on itself.
-        """.trimIndent()
-    }
-
-    @Test
     fun `throws an exception when the layer that the domain layer should depend on is not added to the architecture`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
@@ -79,6 +62,106 @@ class Architecture1Test {
         sut shouldThrow KoPreconditionFailedException::class withMessage """
             Layer not added to the architecture:
             Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..).
+        """.trimIndent()
+    }
+
+    @Test
+    fun `throws an exception when self dependency is set`() {
+        // given
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
+
+        val sut = {
+            Konsist
+                .architecture(domain)
+                .addDependencies { domain.dependsOn(domain) }
+        }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
+            Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) cannot be dependent on itself.
+        """.trimIndent()
+    }
+
+    @Test
+    fun `throws an exception when layer is set as independent and then set as depend on other layer`() {
+        // given
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
+        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
+
+        val sut = {
+            Konsist
+                .architecture(domain, presentation)
+                .addDependencies {
+                    domain.notDependOnAnyLayer()
+                    domain.dependsOn(presentation)
+                }
+        }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
+            Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) was set as independent before.
+        """.trimIndent()
+    }
+
+    @Test
+    fun `throws an exception when layer is set as independent twice`() {
+        // given
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
+
+        val sut = {
+            Konsist
+                .architecture(domain)
+                .addDependencies {
+                    domain.notDependOnAnyLayer()
+                    domain.notDependOnAnyLayer()
+                }
+        }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
+            Dependency that Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) should be independent was duplicated.
+        """.trimIndent()
+    }
+
+    @Test
+    fun `throws an exception when layer is set as dependent on other layer and then as independent`() {
+        // given
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
+        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
+
+        val sut = {
+            Konsist
+                .architecture(domain, presentation)
+                .addDependencies {
+                    domain.dependsOn(presentation)
+                    domain.notDependOnAnyLayer()
+                }
+        }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
+            Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) had a previously set dependency with Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..).
+        """.trimIndent()
+    }
+
+    @Test
+    fun `throws an exception when layer is set as dependent on the same layer twice`() {
+        // given
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
+        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
+
+        val sut = {
+            Konsist
+                .architecture(domain, presentation)
+                .addDependencies {
+                    domain.dependsOn(presentation)
+                    domain.dependsOn(presentation)
+                }
+        }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
+            Dependency between Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) and Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..) is set more than once.
         """.trimIndent()
     }
 }
