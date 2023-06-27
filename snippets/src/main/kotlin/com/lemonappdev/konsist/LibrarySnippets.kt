@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.sequence.withoutAnnotationsOf
 import com.lemonappdev.konsist.api.ext.sequence.withoutNameEndingWith
 import com.lemonappdev.konsist.core.verify.assert
+import jdk.internal.org.jline.utils.Colors.s
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
@@ -37,5 +38,18 @@ class LibrarySnippets {
                 TestTemplate::class,
             )
             .assert { it.hasPrivateModifier() }
+    }
+
+    fun `test classes should have test subject named sut`() {
+        Konsist.scopeFromTest()
+            .classes()
+            .assert {
+                val type = it.name.removeSuffix("Test")
+                val sut = it
+                    .properties()
+                    .firstOrNull { property -> property.name == "sut" }
+
+                sut != null && sut.type?.name == type
+            }
     }
 }
