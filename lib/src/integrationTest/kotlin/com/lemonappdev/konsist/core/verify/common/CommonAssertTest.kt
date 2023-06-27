@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldContain
 import org.junit.jupiter.api.Test
 
-class CommonTest {
+class CommonAssertTest {
     @Test
     fun `declaration-assert-test-method-name`() {
         // given
