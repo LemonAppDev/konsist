@@ -79,4 +79,10 @@ class LibrarySnippets {
             .functions(includeNested = true)
             .assertNot { it.hasAnnotations("org.junit.Test") }
     }
+
+    fun `every class in the 'feature' module reside in package 'feature'`() {
+        Konsist.scopeFromModule("feature")
+            .classes(includeNested = true)
+            .assert { it.resideInPackage("..feature..") }
+    }
 }
