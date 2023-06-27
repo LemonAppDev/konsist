@@ -27,6 +27,12 @@ class LibrarySnippets {
             .assert { it.hasKDoc() }
     }
 
+    fun `every api declaration has complete KDoc`() {
+        Konsist.scopeFromPackage("..api..")
+            .declarations(includeNested = true)
+            .assert { it.hasValidKDoc() }
+    }
+
     fun `test classes should have all members private besides tests`() {
         Konsist.scopeFromTest()
             .classes(includeNested = true)
