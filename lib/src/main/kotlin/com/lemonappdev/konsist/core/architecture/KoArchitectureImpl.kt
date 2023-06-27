@@ -56,6 +56,7 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         }
     }
 
+    @Suppress("detekt.ThrowsCount")
     private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: Layer, vararg layers: Layer) {
         if (statuses[layer] == Status.INDEPENDENT) {
             if (toBeIndependent) {
