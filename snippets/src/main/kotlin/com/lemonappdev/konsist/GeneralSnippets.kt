@@ -3,6 +3,7 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
+import java.util.*
 
 class GeneralSnippets {
     fun `no field should have 'm' prefix`() {
@@ -54,4 +55,14 @@ class GeneralSnippets {
         TODO("remove comment after add files assert")
 //            .assert { it.hasImports("java.util.logging..")}
     }
+
+    fun `every constructor parameter has name derived from parameter type`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .mapNotNull { it.primaryConstructor }
+            .flatMap { it.parameters }
+            .assert { it.name.toTitleCase() == it.type.sourceType }
+    }
 }
+
+private fun String.toTitleCase() = replaceFirstChar { it.titlecase(Locale.getDefault()) }
