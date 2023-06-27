@@ -1,10 +1,13 @@
 # Architecture 4
 
-Here we're testing situation where Presentation and Data layers depend on Domain layer.
+Here we're testing situation where Presentation depends on Application, Application depends on Domain and Infrastructure, 
+Domain depends on Infrastructure.
 See below diagram:
 
 ```mermaid
 %%{init: {'theme': 'forest'}}%%
 flowchart LR
-    Presentation & Data --> Domain
+    Presentation --> Application
+    Application & Domain --> Infrastructure
+    Application --> Domain
 ```

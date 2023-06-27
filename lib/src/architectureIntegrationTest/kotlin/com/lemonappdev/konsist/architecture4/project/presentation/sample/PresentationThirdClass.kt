@@ -1,5 +1,5 @@
 package com.lemonappdev.konsist.architecture4.project.presentation.sample
 
-import com.lemonappdev.konsist.architecture4.project.domain.DomainFirstClass
+import com.lemonappdev.konsist.architecture4.project.application.ApplicationFirstClass
 
-class PresentationThirdClass(val sampleParameter: DomainFirstClass)
+class PresentationThirdClass(val sampleParameter: ApplicationFirstClass)

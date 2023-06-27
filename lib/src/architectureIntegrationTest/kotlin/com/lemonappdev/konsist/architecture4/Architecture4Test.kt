@@ -9,19 +9,21 @@ import org.junit.jupiter.api.Test
 
 class Architecture4Test {
     @Test
-    fun `passes when dependency is set that presentation and data layers are depend on domain layer`() {
+    fun `passes when good dependency is set`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")
-        val data = Layer("Data", "com.lemonappdev.konsist.architecture4.project.data..")
+        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture5.project.presentation..")
+        val application = Layer("Application", "com.lemonappdev.konsist.architecture5.project.application..")
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture5.project.domain..")
+        val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture5.project.infrastructure..")
         val koArchitecture = Konsist
-            .architecture(domain, presentation, data)
+            .architecture(presentation, application, domain, infrastructure)
             .addDependencies {
-                domain.notDependOnAnyLayer()
-                presentation.dependsOn(domain)
-                data.dependsOn(domain)
+                presentation.dependsOn(application)
+                application.dependsOn(domain, infrastructure)
+                domain.dependsOn(infrastructure)
+                infrastructure.notDependOnAnyLayer()
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture4/project")
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture5/project")
 
         // then
         assert(koArchitecture, scope)
@@ -30,17 +32,19 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")
-        val data = Layer("Data", "com.lemonappdev.konsist.architecture4.project.data..")
+        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture5.project.presentation..")
+        val application = Layer("Application", "com.lemonappdev.konsist.architecture5.project.application..")
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture5.project.domain..")
+        val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture5.project.infrastructure..")
         val koArchitecture = Konsist
-            .architecture(domain, presentation, data)
+            .architecture(presentation, application, domain, infrastructure)
             .addDependencies {
-                data.notDependOnAnyLayer()
-                presentation.dependsOn(data)
-                domain.dependsOn(data)
+                presentation.dependsOn(application, infrastructure)
+                application.dependsOn(infrastructure)
+                domain.dependsOn(infrastructure)
+                infrastructure.notDependOnAnyLayer()
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture4/project")
+        val scope = Konsist.scopeFromDirectory("lib/src/architectureIntegrationTest/kotlin/com/lemonappdev/konsist/architecture5/project")
         val sut = { assert(koArchitecture, scope) }
 
         // then
