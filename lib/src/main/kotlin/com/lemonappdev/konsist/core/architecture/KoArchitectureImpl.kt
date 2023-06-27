@@ -15,7 +15,9 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     }
 
     override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
-        addAllRequirements(this, layer, *layers)
+        checkIfLayerIsDependentOnItself(this, layer, *layers)
+        checkIfLayerIsAddToArchitecture(this, listOf(layer)+layers)
+        checkCircularDependencies(this, layer, *layers)
 
         dependencies[this] = (dependencies.getOrDefault(this, setOf(this))) + layer + layers
     }
@@ -85,11 +87,5 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         if (!allLayers.contains(layer)) {
             throw KoPreconditionFailedException("Layer not added to the architecture:\n$layer.")
         }
-    }
-
-    private fun addAllRequirements(layer: Layer, vararg layers: Layer) {
-        checkIfLayerIsDependentOnItself(layer, *layers)
-        checkIfLayerIsAddToArchitecture(layer, layers.toList())
-        checkCircularDependencies(layer, *layers)
     }
 }
