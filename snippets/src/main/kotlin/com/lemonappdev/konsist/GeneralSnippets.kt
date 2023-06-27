@@ -2,6 +2,7 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.verify.assert
+import com.lemonappdev.konsist.core.verify.assertNot
 
 class GeneralSnippets {
     fun `no field should have 'm' prefix`() {
@@ -39,5 +40,11 @@ class GeneralSnippets {
                     .replace("/", ".")
                     .endsWith(it.qualifiedName)
             }
+    }
+
+    fun `no wildcard imports allowed`() {
+        Konsist.scopeFromProject()
+            .imports()
+            .assertNot { it.isWildcard }
     }
 }
