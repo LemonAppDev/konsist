@@ -17,6 +17,7 @@ class Architecture2Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
+
         val koArchitecture = Konsist
             .architecture(domain, presentation)
             .addDependencies {
@@ -34,6 +35,7 @@ class Architecture2Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
+
         val koArchitecture = Konsist
             .architecture(domain, presentation)
             .addDependencies {

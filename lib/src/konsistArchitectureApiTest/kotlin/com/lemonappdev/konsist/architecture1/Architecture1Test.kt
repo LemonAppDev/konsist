@@ -14,6 +14,7 @@ class Architecture1Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
+
         val koArchitecture = Konsist
             .architecture(domain, presentation)
             .addDependencies {
@@ -30,6 +31,7 @@ class Architecture1Test {
     fun `throws an exception when self dependency is set`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
+
         val sut = {
             Konsist
                 .architecture(domain)
@@ -47,6 +49,7 @@ class Architecture1Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
+
         val sut = {
             Konsist
                 .architecture(domain)
@@ -64,6 +67,7 @@ class Architecture1Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
+
         val sut = {
             Konsist
                 .architecture(presentation)

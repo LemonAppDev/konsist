@@ -14,6 +14,7 @@ class Architecture3Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture3.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture3.project.presentation..")
         val data = Layer("Data", "com.lemonappdev.konsist.architecture3.project.data..")
+
         val koArchitecture = Konsist
             .architecture(domain, presentation, data)
             .addDependencies {
@@ -33,6 +34,7 @@ class Architecture3Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture3.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture3.project.presentation..")
         val data = Layer("Data", "com.lemonappdev.konsist.architecture3.project.data..")
+
         val koArchitecture = Konsist
             .architecture(domain, presentation, data)
             .addDependencies {

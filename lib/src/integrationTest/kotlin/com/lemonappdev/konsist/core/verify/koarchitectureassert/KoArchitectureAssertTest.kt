@@ -18,6 +18,7 @@ class KoArchitectureAssertTest {
         // given
         val layer1 = Layer("Presentation", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.presentation..")
         val layer2 = Layer("Business", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.business..")
+
         val architecture = Konsist.architecture(layer1, layer2)
             .addDependencies { layer1.dependsOn(layer2) }
 
@@ -34,6 +35,7 @@ class KoArchitectureAssertTest {
         val layer1 = Layer("Presentation", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.presentation..")
         val layer2 = Layer("Business", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.business..")
         val layer3 = Layer("Data", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.data..")
+
         val architecture = Konsist.architecture(layer1, layer2, layer3)
             .addDependencies { layer1.dependsOn(layer3) }
 
