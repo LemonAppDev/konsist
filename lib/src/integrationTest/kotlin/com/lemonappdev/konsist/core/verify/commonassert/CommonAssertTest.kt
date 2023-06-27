@@ -37,5 +37,5 @@ class CommonAssertTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/verify/common/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/verify/commonassert/snippet/", fileName)
 }
