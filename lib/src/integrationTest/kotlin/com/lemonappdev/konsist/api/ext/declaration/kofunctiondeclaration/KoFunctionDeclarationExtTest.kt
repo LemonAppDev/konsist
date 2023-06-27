@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.declaration.kofunctiondeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.declaration.hasReceiverOf
+import com.lemonappdev.konsist.api.ext.declaration.hasReceiverTypeOf
 import com.lemonappdev.konsist.testdata.SampleClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -17,8 +17,8 @@ class KoFunctionDeclarationExtTest {
 
         // then
         assertSoftly(sut) {
-            hasReceiverOf<Int>() shouldBeEqualTo true
-            hasReceiverOf<SampleClass>() shouldBeEqualTo false
+            hasReceiverTypeOf<Int>() shouldBeEqualTo true
+            hasReceiverTypeOf<SampleClass>() shouldBeEqualTo false
         }
     }
 
@@ -31,8 +31,8 @@ class KoFunctionDeclarationExtTest {
 
         // then
         assertSoftly(sut) {
-            hasReceiverOf<SampleClass>() shouldBeEqualTo true
-            hasReceiverOf<Int>() shouldBeEqualTo false
+            hasReceiverTypeOf<SampleClass>() shouldBeEqualTo true
+            hasReceiverTypeOf<Int>() shouldBeEqualTo false
         }
     }
 

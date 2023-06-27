@@ -15,9 +15,9 @@ class KoFunctionDeclarationForReceiverTest {
 
         // then
         assertSoftly(sut) {
-            receiver shouldBeEqualTo null
-            hasReceiver() shouldBeEqualTo false
-            hasReceiver("Int") shouldBeEqualTo false
+            receiverType shouldBeEqualTo null
+            hasReceiverType() shouldBeEqualTo false
+            hasReceiverType("Int") shouldBeEqualTo false
         }
     }
 
@@ -30,10 +30,10 @@ class KoFunctionDeclarationForReceiverTest {
 
         // then
         assertSoftly(sut) {
-            receiver?.name shouldBeEqualTo "Int"
-            hasReceiver() shouldBeEqualTo true
-            hasReceiver("Int") shouldBeEqualTo true
-            hasReceiver("String") shouldBeEqualTo false
+            receiverType?.name shouldBeEqualTo "Int"
+            hasReceiverType() shouldBeEqualTo true
+            hasReceiverType("Int") shouldBeEqualTo true
+            hasReceiverType("String") shouldBeEqualTo false
         }
     }
 
@@ -46,10 +46,10 @@ class KoFunctionDeclarationForReceiverTest {
 
         // then
         assertSoftly(sut) {
-            receiver?.name shouldBeEqualTo "SampleClass"
-            hasReceiver() shouldBeEqualTo true
-            hasReceiver("SampleClass") shouldBeEqualTo true
-            hasReceiver("String") shouldBeEqualTo false
+            receiverType?.name shouldBeEqualTo "SampleClass"
+            hasReceiverType() shouldBeEqualTo true
+            hasReceiverType("SampleClass") shouldBeEqualTo true
+            hasReceiverType("String") shouldBeEqualTo false
         }
     }
 

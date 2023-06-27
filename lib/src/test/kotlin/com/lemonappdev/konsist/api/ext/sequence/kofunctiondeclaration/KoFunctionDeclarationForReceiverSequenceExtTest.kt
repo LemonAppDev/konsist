@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.api.ext.sequence.kofunctiondeclaration
 
-import com.lemonappdev.konsist.api.ext.sequence.withReceiver
-import com.lemonappdev.konsist.api.ext.sequence.withReceiverOf
-import com.lemonappdev.konsist.api.ext.sequence.withoutReceiver
-import com.lemonappdev.konsist.api.ext.sequence.withoutReceiverOf
+import com.lemonappdev.konsist.api.ext.sequence.withReceiverType
+import com.lemonappdev.konsist.api.ext.sequence.withReceiverTypeOf
+import com.lemonappdev.konsist.api.ext.sequence.withoutReceiverType
+import com.lemonappdev.konsist.api.ext.sequence.withoutReceiverTypeOf
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleType
 import com.lemonappdev.konsist.testdata.SampleType1
@@ -15,176 +15,176 @@ import org.junit.jupiter.api.Test
 
 class KoFunctionDeclarationForReceiverSequenceExtTest {
     @Test
-    fun `withReceiver() returns function with any receiver`() {
+    fun `withReceiverType() returns function with any receiver`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver() } returns true
+            every { hasReceiverType() } returns true
         }
         val function2: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver() } returns false
+            every { hasReceiverType() } returns false
         }
         val functions = sequenceOf(function1, function2)
 
         // when
-        val sut = functions.withReceiver()
+        val sut = functions.withReceiverType()
 
         // then
         sut.toList() shouldBeEqualTo listOf(function1)
     }
 
     @Test
-    fun `withReceiver() returns functions with one of given receivers`() {
+    fun `withReceiverType() returns functions with one of given receivers`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val function1: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver(typeName1) } returns true
-            every { hasReceiver(typeName2) } returns false
+            every { hasReceiverType(typeName1) } returns true
+            every { hasReceiverType(typeName2) } returns false
         }
         val function2: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver(typeName1) } returns false
-            every { hasReceiver(typeName2) } returns true
+            every { hasReceiverType(typeName1) } returns false
+            every { hasReceiverType(typeName2) } returns true
         }
         val function3: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver(typeName1) } returns false
-            every { hasReceiver(typeName2) } returns false
+            every { hasReceiverType(typeName1) } returns false
+            every { hasReceiverType(typeName2) } returns false
         }
         val functions = sequenceOf(function1, function2, function3)
 
         // when
-        val sut = functions.withReceiver(typeName1, typeName2)
+        val sut = functions.withReceiverType(typeName1, typeName2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(function1, function2)
     }
 
     @Test
-    fun `withoutReceiver() returns function without any receiver`() {
+    fun `withoutReceiverType() returns function without any receiver`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver() } returns true
+            every { hasReceiverType() } returns true
         }
         val function2: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver() } returns false
+            every { hasReceiverType() } returns false
         }
         val functions = sequenceOf(function1, function2)
 
         // when
-        val sut = functions.withoutReceiver()
+        val sut = functions.withoutReceiverType()
 
         // then
         sut.toList() shouldBeEqualTo listOf(function2)
     }
 
     @Test
-    fun `withoutReceiver(name) returns function without any of given receivers`() {
+    fun `withoutReceiverType(name) returns function without any of given receivers`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val function1: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver(typeName1) } returns true
-            every { hasReceiver(typeName2) } returns false
+            every { hasReceiverType(typeName1) } returns true
+            every { hasReceiverType(typeName2) } returns false
         }
         val function2: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver(typeName1) } returns false
-            every { hasReceiver(typeName2) } returns true
+            every { hasReceiverType(typeName1) } returns false
+            every { hasReceiverType(typeName2) } returns true
         }
         val function3: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver(typeName1) } returns false
-            every { hasReceiver(typeName2) } returns false
+            every { hasReceiverType(typeName1) } returns false
+            every { hasReceiverType(typeName2) } returns false
         }
         val functions = sequenceOf(function1, function2, function3)
 
         // when
-        val sut = functions.withoutReceiver(typeName1, typeName2)
+        val sut = functions.withoutReceiverType(typeName1, typeName2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(function3)
     }
 
     @Test
-    fun `withReceiverOf() returns function with given receiver`() {
+    fun `withReceiverTypeOf() returns function with given receiver`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
-            every { receiver?.name } returns "SampleType"
+            every { receiverType?.name } returns "SampleType"
         }
         val function2: KoFunctionDeclarationImpl = mockk {
-            every { receiver?.name } returns "OtherType"
+            every { receiverType?.name } returns "OtherType"
         }
         val functions = sequenceOf(function1, function2)
 
         // when
-        val sut = functions.withReceiverOf<SampleType>()
+        val sut = functions.withReceiverTypeOf<SampleType>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(function1)
     }
 
     @Test
-    fun `withoutReceiverOf() returns function without given receiver`() {
+    fun `withoutReceiverTypeOf() returns function without given receiver`() {
         // given
         val function1: KoFunctionDeclarationImpl = mockk {
-            every { receiver?.name } returns "SampleType"
+            every { receiverType?.name } returns "SampleType"
         }
         val function2: KoFunctionDeclarationImpl = mockk {
-            every { receiver?.name } returns "OtherType"
+            every { receiverType?.name } returns "OtherType"
         }
         val functions = sequenceOf(function1, function2)
 
         // when
-        val sut = functions.withoutReceiverOf<SampleType>()
+        val sut = functions.withoutReceiverTypeOf<SampleType>()
 
         // then
         sut.toList() shouldBeEqualTo listOf(function2)
     }
 
     @Test
-    fun `withReceiverOf(KClass) returns functions with one of given receivers`() {
+    fun `withReceiverTypeOf(KClass) returns functions with one of given receivers`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val function1: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver(typeName1) } returns true
-            every { hasReceiver(typeName2) } returns false
+            every { hasReceiverType(typeName1) } returns true
+            every { hasReceiverType(typeName2) } returns false
         }
         val function2: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver(typeName1) } returns false
-            every { hasReceiver(typeName2) } returns true
+            every { hasReceiverType(typeName1) } returns false
+            every { hasReceiverType(typeName2) } returns true
         }
         val function3: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver(typeName1) } returns false
-            every { hasReceiver(typeName2) } returns false
+            every { hasReceiverType(typeName1) } returns false
+            every { hasReceiverType(typeName2) } returns false
         }
         val functions = sequenceOf(function1, function2, function3)
 
         // when
-        val sut = functions.withReceiverOf(SampleType1::class, SampleType2::class)
+        val sut = functions.withReceiverTypeOf(SampleType1::class, SampleType2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(function1, function2)
     }
 
     @Test
-    fun `withoutReceiverOf(KClass) returns function without any of given receivers`() {
+    fun `withoutReceiverTypeOf(KClass) returns function without any of given receivers`() {
         // given
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val function1: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver(typeName1) } returns true
-            every { hasReceiver(typeName2) } returns false
+            every { hasReceiverType(typeName1) } returns true
+            every { hasReceiverType(typeName2) } returns false
         }
         val function2: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver(typeName1) } returns false
-            every { hasReceiver(typeName2) } returns true
+            every { hasReceiverType(typeName1) } returns false
+            every { hasReceiverType(typeName2) } returns true
         }
         val function3: KoFunctionDeclarationImpl = mockk {
-            every { hasReceiver(typeName1) } returns false
-            every { hasReceiver(typeName2) } returns false
+            every { hasReceiverType(typeName1) } returns false
+            every { hasReceiverType(typeName2) } returns false
         }
         val functions = sequenceOf(function1, function2, function3)
 
         // when
-        val sut = functions.withoutReceiverOf(SampleType1::class, SampleType2::class)
+        val sut = functions.withoutReceiverTypeOf(SampleType1::class, SampleType2::class)
 
         // then
         sut.toList() shouldBeEqualTo listOf(function3)

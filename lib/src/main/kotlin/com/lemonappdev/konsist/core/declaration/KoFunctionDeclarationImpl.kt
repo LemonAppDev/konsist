@@ -54,7 +54,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
         type?.let { KoTypeDeclarationImpl.getInstance(type, this) }
     }
 
-    override val receiver: KoTypeDeclaration? by lazy {
+    override val receiverType: KoTypeDeclaration? by lazy {
         val type = if (isExtension()) {
             ktFunction
                 .children
@@ -93,9 +93,9 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
 
     override fun isExtension(): Boolean = ktFunction.isExtensionDeclaration()
 
-    override fun hasReceiver(name: String?): Boolean = when (name) {
-        null -> receiver != null
-        else -> receiver?.name == name
+    override fun hasReceiverType(name: String?): Boolean = when (name) {
+        null -> receiverType != null
+        else -> receiverType?.name == name
     }
 
     override fun hasReturnType(): Boolean = ktFunction.hasDeclaredReturnType()

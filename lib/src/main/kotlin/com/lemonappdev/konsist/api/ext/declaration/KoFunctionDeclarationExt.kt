@@ -7,4 +7,4 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
  *
  * @return `true` if the function has receiver with the specified KClass name, `false` otherwise.
  */
-inline fun <reified T> KoFunctionDeclaration.hasReceiverOf(): Boolean = T::class.simpleName == receiver?.name
+inline fun <reified T> KoFunctionDeclaration.hasReceiverTypeOf(): Boolean = T::class.simpleName == receiverType?.name
