@@ -12,7 +12,6 @@ class GeneralSnippets {
             .files()
         TODO("remove comment after add files assert")
 //            .assertNot { it.text.isEmpty() }
-
     }
     fun `no field should have 'm' prefix`() {
         Konsist.scopeFromProject()
