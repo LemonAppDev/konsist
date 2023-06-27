@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.verify.common
+package com.lemonappdev.konsist.core.verify.commonassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.Konsist
