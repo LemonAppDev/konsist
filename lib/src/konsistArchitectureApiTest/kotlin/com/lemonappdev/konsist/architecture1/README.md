@@ -1,6 +1,6 @@
 # Architecture 1
 
-Here we're testing situation where two layers are independent. See below diagram:
+Test scenario with two independent layers:
 
 ```mermaid
 %%{init: {'theme': 'forest'}}%%

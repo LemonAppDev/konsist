@@ -1,6 +1,6 @@
 # Circular dependency
 
-Here we test several situations where circular dependency is set. See below diagrams:
+Test scenarios with circular dependency:
 
 ## Test `simply circular dependency with two layers`
 ```mermaid

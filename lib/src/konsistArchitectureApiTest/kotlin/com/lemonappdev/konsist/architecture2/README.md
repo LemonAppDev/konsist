@@ -1,6 +1,6 @@
 # Architecture 2
 
-Here we're testing situation where Presentation layer depends on Domain one. See below diagram:
+Test scenario where Presentation layer depends on Domain one:
 
 ```mermaid
 %%{init: {'theme': 'forest'}}%%

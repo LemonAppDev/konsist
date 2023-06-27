@@ -1,7 +1,6 @@
 # Architecture 3
 
-Here we're testing situation where Presentation and Data layers depend on Domain layer.
-See below diagram:
+Test scenario where Presentation and Data layers depend on Domain layer:
 
 ```mermaid
 %%{init: {'theme': 'forest'}}%%

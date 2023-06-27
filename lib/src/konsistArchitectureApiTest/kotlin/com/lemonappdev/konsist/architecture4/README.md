@@ -1,8 +1,8 @@
 # Architecture 4
 
-Here we're testing situation where Presentation depends on Application, Application depends on Domain and Infrastructure, 
-Domain depends on Infrastructure.
-See below diagram:
+Test scenario where Presentation depends on Application, Application depends on Domain and Infrastructure,
+Domain depends on Infrastructure:
+
 
 ```mermaid
 %%{init: {'theme': 'forest'}}%%
