@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.sequence.withValueModifier
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 import java.util.*
@@ -62,6 +63,14 @@ class GeneralSnippets {
             .mapNotNull { it.primaryConstructor }
             .flatMap { it.parameters }
             .assert { it.name.toTitleCase() == it.type.sourceType }
+    }
+
+    fun `value class has parameter named 'value'`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .withValueModifier()
+            .mapNotNull { it.primaryConstructor }
+            .assert { it.hasParameterNamed("value") }
     }
 }
 
