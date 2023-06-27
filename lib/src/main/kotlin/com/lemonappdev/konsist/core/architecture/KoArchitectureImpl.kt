@@ -26,12 +26,12 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         dependencies[this] = setOf(this)
     }
 
-    private fun checkCircularDependencies(layer: Layer, vararg addedLayers: Layer) {
-        val layers = addedLayers.map {
+    private fun checkCircularDependencies(layer: Layer, vararg layers: Layer) {
+        val allLayers = layers.map {
             checkCircularDependenciesHelper(layer, it, emptyList(), emptyList())
         }
 
-        val notEmpty = layers.firstOrNull { it.isNotEmpty() }
+        val notEmpty = allLayers.firstOrNull { it.isNotEmpty() }
 
         if (notEmpty != null) {
             throw KoPreconditionFailedException(
@@ -69,15 +69,15 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         }
     }
 
-    private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg addedLayers: Layer) {
-        if (addedLayers.any { it == layer }) {
+    private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg layers: Layer) {
+        if (layers.any { it == layer }) {
             throw KoPreconditionFailedException("Layer: $layer cannot be dependent on itself.")
         }
     }
 
-    private fun checkIfLayerIsAddToArchitecture(layer: Layer, addedLayers: List<Layer>? = null) {
-        addedLayers?.let {
-            if (addedLayers.any { layer -> !allLayers.contains(layer) }) {
+    private fun checkIfLayerIsAddToArchitecture(layer: Layer, layers: List<Layer>? = null) {
+        layers?.let {
+            if (layers.any { layer -> !allLayers.contains(layer) }) {
                 throw KoPreconditionFailedException("Layers: $it is not add to the architecture.")
             }
         }
@@ -86,9 +86,9 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         }
     }
 
-    private fun addAllRequirements(layer: Layer, vararg addedLayers: Layer) {
-        checkIfLayerIsDependentOnItself(layer, *addedLayers)
-        checkIfLayerIsAddToArchitecture(layer, addedLayers.toList())
-        checkCircularDependencies(layer, *addedLayers)
+    private fun addAllRequirements(layer: Layer, vararg layers: Layer) {
+        checkIfLayerIsDependentOnItself(layer, *layers)
+        checkIfLayerIsAddToArchitecture(layer, layers.toList())
+        checkCircularDependencies(layer, *layers)
     }
 }
