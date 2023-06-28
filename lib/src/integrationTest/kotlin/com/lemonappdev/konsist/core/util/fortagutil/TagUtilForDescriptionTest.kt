@@ -1,20 +1,20 @@
-package com.lemonappdev.konsist.core.util.fortaghelper
+package com.lemonappdev.konsist.core.util.fortagutil
 
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
-import com.lemonappdev.konsist.core.util.TagHelper
+import com.lemonappdev.konsist.core.util.TagUtil
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class TagHelperForDescriptionTest {
+class TagUtilForDescriptionTest {
     @Test
     fun `hasValidDescription returns true when kDoc has valid description`() {
         // given
         val kDoc: KoKDocDeclaration = mockk {
             every { description } returns "description"
         }
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidDescription(true, kDoc) shouldBeEqualTo true
@@ -26,7 +26,7 @@ class TagHelperForDescriptionTest {
         val kDoc: KoKDocDeclaration = mockk {
             every { description } returns ""
         }
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidDescription(true, kDoc) shouldBeEqualTo false
@@ -36,7 +36,7 @@ class TagHelperForDescriptionTest {
     fun `hasValidDescription returns false when kDoc is null`() {
         // given
         val kDoc = null
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidDescription(true, kDoc) shouldBeEqualTo false
@@ -48,7 +48,7 @@ class TagHelperForDescriptionTest {
         val kDoc: KoKDocDeclaration = mockk {
             every { description } returns "description"
         }
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidDescription(false, kDoc) shouldBeEqualTo true

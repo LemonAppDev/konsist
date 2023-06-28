@@ -1,15 +1,15 @@
-package com.lemonappdev.konsist.core.util.fortaghelper
+package com.lemonappdev.konsist.core.util.fortagutil
 
 import com.lemonappdev.konsist.api.KoKDocTag.RETURN
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
-import com.lemonappdev.konsist.core.util.TagHelper
+import com.lemonappdev.konsist.core.util.TagUtil
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class TagHelperForPropertySetterTagTest {
+class TagUtilForPropertySetterTagTest {
     @Test
     fun `hasValidPropertySetterTag returns true when kDoc has propertySetter tag`() {
         // given
@@ -19,7 +19,7 @@ class TagHelperForPropertySetterTagTest {
         val kDoc: KoKDocDeclaration = mockk()
         every { kDoc.propertySetterTag } returns propertySetterTag
 
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidPropertySetterTag(true, kDoc) shouldBeEqualTo true
@@ -29,7 +29,7 @@ class TagHelperForPropertySetterTagTest {
     fun `hasValidPropertySetterTag returns false when kDoc is null`() {
         // given
         val kDoc = null
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidPropertySetterTag(true, kDoc) shouldBeEqualTo false
@@ -43,7 +43,7 @@ class TagHelperForPropertySetterTagTest {
         }
         val kDoc: KoKDocDeclaration = mockk()
         every { kDoc.propertySetterTag } returns propertySetterTag
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidPropertySetterTag(false, kDoc) shouldBeEqualTo true

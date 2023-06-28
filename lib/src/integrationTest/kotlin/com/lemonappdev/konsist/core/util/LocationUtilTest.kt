@@ -1,20 +1,19 @@
 package com.lemonappdev.konsist.core.util
 
-import com.lemonappdev.konsist.core.util.LocationHelper.resideInLocation
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class LocationHelperTest {
+class LocationUtilTest {
     @Test
     fun `reside in any package`() {
         // given
         val desiredPackage1 = "com.domain.update.usecase"
         val desiredPackage2 = "com.domain"
         val desiredPackage3 = "org.example.project"
-        val sut = LocationHelper
+        val sut = LocationUtil
 
         // then
         assertSoftly(sut) {
@@ -28,7 +27,7 @@ class LocationHelperTest {
     fun `throws exception when desired location is empty`() {
         // given
         val desiredPackage = "com.domain.update.usecase"
-        val sut = LocationHelper
+        val sut = LocationUtil
 
         // then
         val actual = { sut.resideInLocation("", desiredPackage) }
@@ -39,7 +38,7 @@ class LocationHelperTest {
     fun `throws exception when desired location is single dot`() {
         // given
         val desiredPackage = "com.domain.update.usecase"
-        val sut = LocationHelper
+        val sut = LocationUtil
 
         // then
         val actual = { sut.resideInLocation(".", desiredPackage) }
@@ -50,7 +49,7 @@ class LocationHelperTest {
     fun `has given fragment with one word`() {
         // given
         val desiredPackage = "com.domain.update.usecase"
-        val sut = LocationHelper
+        val sut = LocationUtil
 
         // then
         assertSoftly(sut) {
@@ -75,7 +74,7 @@ class LocationHelperTest {
     fun `has given fragment without two dots`() {
         // given
         val desiredPackage = "com.domain.update.usecase"
-        val sut = LocationHelper
+        val sut = LocationUtil
 
         // then
         assertSoftly(sut) {
@@ -90,7 +89,7 @@ class LocationHelperTest {
     fun `has given fragment with first and last word`() {
         // given
         val desiredPackage = "com.domain.update.usecase"
-        val sut = LocationHelper
+        val sut = LocationUtil
 
         // then
         assertSoftly(sut) {
@@ -105,7 +104,7 @@ class LocationHelperTest {
     fun `has given fragment with dots at end`() {
         // given
         val desiredPackage = "com.domain.update.usecase"
-        val sut = LocationHelper
+        val sut = LocationUtil
 
         // then
         assertSoftly(sut) {
@@ -120,7 +119,7 @@ class LocationHelperTest {
     fun `has given fragment with dots in few places`() {
         // given
         val desiredPackage = "com.domain.update.usecase"
-        val sut = LocationHelper
+        val sut = LocationUtil
 
         // then
         assertSoftly(sut) {
@@ -139,7 +138,7 @@ class LocationHelperTest {
     fun `has given fragment with repeating word`() {
         // given
         val desiredPackage = "com.domain.update.usecase"
-        val sut = LocationHelper
+        val sut = LocationUtil
 
         // then
         assertSoftly(sut) {
@@ -152,7 +151,7 @@ class LocationHelperTest {
     fun `has given fragment with the wrong order`() {
         // given
         val desiredPackage = "com.domain.update.usecase"
-        val sut = LocationHelper
+        val sut = LocationUtil
 
         // then
         assertSoftly(sut) {
