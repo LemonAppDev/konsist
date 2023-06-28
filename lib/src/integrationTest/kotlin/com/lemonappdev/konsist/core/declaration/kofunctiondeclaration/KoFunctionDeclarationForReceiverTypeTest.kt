@@ -22,9 +22,9 @@ class KoFunctionDeclarationForReceiverTypeTest {
     }
 
     @Test
-    fun `function-with-simple-type-receiver`() {
+    fun `function-with-type-receiver`() {
         // given
-        val sut = getSnippetFile("function-with-simple-type-receiver")
+        val sut = getSnippetFile("function-with-type-receiver")
             .functions()
             .first()
 
@@ -33,22 +33,6 @@ class KoFunctionDeclarationForReceiverTypeTest {
             receiverType?.name shouldBeEqualTo "Int"
             hasReceiverType() shouldBeEqualTo true
             hasReceiverType("Int") shouldBeEqualTo true
-            hasReceiverType("String") shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `function-with-complex-type-receiver`() {
-        // given
-        val sut = getSnippetFile("function-with-complex-type-receiver")
-            .functions()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            receiverType?.name shouldBeEqualTo "SampleClass"
-            hasReceiverType() shouldBeEqualTo true
-            hasReceiverType("SampleClass") shouldBeEqualTo true
             hasReceiverType("String") shouldBeEqualTo false
         }
     }

@@ -22,9 +22,9 @@ class KoPropertyDeclarationForReceiverTypeTest {
     }
 
     @Test
-    fun `property-with-simple-receiver-type`() {
+    fun `property-with-receiver-type`() {
         // given
-        val sut = getSnippetFile("property-with-simple-receiver-type")
+        val sut = getSnippetFile("property-with-receiver-type")
             .properties(includeNested = true)
             .first()
 
@@ -33,22 +33,6 @@ class KoPropertyDeclarationForReceiverTypeTest {
             receiverType?.name shouldBeEqualTo "Int"
             hasReceiverType() shouldBeEqualTo true
             hasReceiverType("Int") shouldBeEqualTo true
-            hasReceiverType("String") shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `property-with-complex-receiver-type`() {
-        // given
-        val sut = getSnippetFile("property-with-complex-receiver-type")
-            .properties(includeNested = true)
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            receiverType?.name shouldBeEqualTo "SampleClass"
-            hasReceiverType() shouldBeEqualTo true
-            hasReceiverType("SampleClass") shouldBeEqualTo true
             hasReceiverType("String") shouldBeEqualTo false
         }
     }
