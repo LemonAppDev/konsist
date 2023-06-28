@@ -1,0 +1,5 @@
+package com.lemonappdev.konsist.architecture4.project.infrastructure.sample
+
+import com.lemonappdev.konsist.architecture4.project.infrastructure.InfrastructureFirstClass
+
+class InfrastructureSecondClass(val sampleParameter: InfrastructureFirstClass)
