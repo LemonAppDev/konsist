@@ -38,9 +38,9 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
         }
     }
 
-    override val returnType: KoTypeDeclaration? by lazy { ReceiverUtil.setType(getTypeReferences(), isExtension(), this) }
+    override val returnType: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
 
-    override val receiverType: KoTypeDeclaration? by lazy { ReceiverUtil.setReceiverType(getTypeReferences(), isExtension(), this) }
+    override val receiverType: KoTypeDeclaration? by lazy { ReceiverUtil.getReceiverType(getTypeReferences(), isExtension(), this) }
 
     private fun getTypeReferences(): List<KtTypeReference> = ktFunction
         .children

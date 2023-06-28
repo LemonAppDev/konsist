@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.core.declaration.KoTypeDeclarationImpl
 import org.jetbrains.kotlin.psi.KtTypeReference
 
 object ReceiverUtil {
-    internal fun setType(types: List<KtTypeReference>, isExtension: Boolean, parentDeclaration: KoBaseDeclaration?): KoTypeDeclaration? {
+    internal fun getType(types: List<KtTypeReference>, isExtension: Boolean, parentDeclaration: KoBaseDeclaration?): KoTypeDeclaration? {
         val type = if (isExtension && types.size > 1) {
             // We choose last because when we have extension the first one is receiver and the second one is (return) type.
             types.last()
@@ -19,7 +19,7 @@ object ReceiverUtil {
         return type?.let { KoTypeDeclarationImpl.getInstance(it, parentDeclaration) }
     }
 
-    internal fun setReceiverType(
+    internal fun getReceiverType(
         types: List<KtTypeReference>,
         isExtension: Boolean,
         parentDeclaration: KoBaseDeclaration?,

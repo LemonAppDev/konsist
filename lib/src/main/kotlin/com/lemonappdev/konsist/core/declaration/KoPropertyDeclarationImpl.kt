@@ -27,9 +27,9 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
             ?.removeSuffix(" ")
     }
 
-    override val type: KoTypeDeclaration? by lazy { ReceiverUtil.setType(getTypeReferences(), isExtension(), this) }
+    override val type: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
 
-    override val receiverType: KoTypeDeclaration? by lazy { ReceiverUtil.setReceiverType(getTypeReferences(), isExtension(), this) }
+    override val receiverType: KoTypeDeclaration? by lazy { ReceiverUtil.getReceiverType(getTypeReferences(), isExtension(), this) }
 
     private fun getTypeReferences(): List<KtTypeReference> = ktProperty
         .children
