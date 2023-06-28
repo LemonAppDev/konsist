@@ -60,11 +60,6 @@ private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): Stri
         "Layer: ${layer.name} defined by: ${layer.isDefinedBy} . Invalid files:\n${failedDeclarations.values.toList()[index]}"
     }.joinToString("\n")
 
-    /**
-     * In this call stack hierarchy test name is at index 7.
-     */
-    val index = 7
-
-    return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies at (${failedDeclarations.size}):" +
+    return "Assert '${getTestMethodNameFromEightIndex()}' has failed. Invalid dependencies at (${failedDeclarations.size}):" +
         "\n$failedDeclarationsMessage"
 }

@@ -94,7 +94,7 @@ class KoFileAssertTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Files list is empty. Please make sure that list of files contain items before calling the 'assert' method."
+                "File list is empty. Please make sure that list of files contain items before calling the 'assert' method."
     }
 
     @Test
@@ -111,7 +111,7 @@ class KoFileAssertTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Files list is empty. Please make sure that list of files contain items before calling the 'assertNot' method."
+                "File list is empty. Please make sure that list of files contain items before calling the 'assertNot' method."
     }
 
     @Test

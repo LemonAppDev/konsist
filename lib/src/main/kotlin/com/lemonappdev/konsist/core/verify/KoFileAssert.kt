@@ -23,17 +23,15 @@ private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveC
         val localList = this.toList()
 
         if (localList.isEmpty()) {
-            val index = 2
-            val checkMethodName = getTestMethodName(index)
+            val checkMethodName = getTestMethodNameFromFourthIndex()
             throw KoPreconditionFailedException(
                 "File list is empty. Please make sure that list of files contain items " +
                         "before calling the '$checkMethodName' method.",
             )
         }
 
-        val index = 4
         val notSuppressedFiles = localList
-            .filterNot { checkIfSuppressed(it, getTestMethodName(index)) }
+            .filterNot { checkIfSuppressed(it, getTestMethodNameFromSixthIndex()) }
 
         val result = notSuppressedFiles.groupBy {
             lastFile = it
@@ -62,8 +60,7 @@ private fun <E : KoFile> getCheckFailedMessage(failedDeclarations: List<E>): Str
         "${it.path} ($name $declarationType)"
     }
 
-    val index = 5
-    return "Assert '${getTestMethodName(5)}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
+    return "Assert '${getTestMethodNameFromSixthIndex()}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }
 
 private fun checkIfSuppressed(file: KoFile, testMethodName: String): Boolean {
