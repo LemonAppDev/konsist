@@ -47,7 +47,7 @@ private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveC
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
-        throw KoException(e.message.orEmpty(), e)
+        throw KoInternalException(e.message.orEmpty(), e, lastFile)
     }
 }
 
