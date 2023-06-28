@@ -30,7 +30,7 @@ class CommonAssertTest {
 
         // then
         try {
-            assert(architecture, scope)
+           architecture.assert(scope)
         } catch (e: Exception) {
             e.message?.shouldContain("Assert 'architecture-assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
         }

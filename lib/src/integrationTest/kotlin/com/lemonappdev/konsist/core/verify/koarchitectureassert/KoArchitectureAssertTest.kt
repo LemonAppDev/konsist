@@ -25,7 +25,7 @@ class KoArchitectureAssertTest {
             Konsist.scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koarchitectureassert/project")
 
         // then
-        assert(architecture, scope)
+        architecture.assert(scope)
     }
 
     @Test
@@ -43,7 +43,7 @@ class KoArchitectureAssertTest {
 
         // when
         val func = {
-            assert(architecture, scope)
+            architecture.assert(scope)
         }
 
         // then

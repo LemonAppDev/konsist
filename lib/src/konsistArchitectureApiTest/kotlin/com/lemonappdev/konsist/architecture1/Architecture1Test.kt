@@ -24,7 +24,7 @@ class Architecture1Test {
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture1/project")
 
         // then
-        assert(koArchitecture, scope)
+        koArchitecture.assert(scope)
     }
 
     @Test

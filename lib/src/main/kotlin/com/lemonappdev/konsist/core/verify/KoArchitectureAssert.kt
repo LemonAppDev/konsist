@@ -10,14 +10,14 @@ import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 
 @Suppress("detekt.ThrowsCount")
-fun assert(architecture: KoArchitecture, koScope: KoScope) {
+fun KoArchitecture.assert(koScope: KoScope) {
     try {
         val files = koScope.files()
 
-        val layerHasValidArchitecture = (architecture as KoArchitectureImpl)
+        val layerHasValidArchitecture = (this as KoArchitectureImpl)
             .dependencies
             .map { (t, u) ->
-                val otherLayers = (architecture.allLayers - u).map { it.isDefinedBy }
+                val otherLayers = (this.allLayers - u).map { it.isDefinedBy }
 
                 files
                     .withPackage(t.isDefinedBy)
@@ -28,7 +28,7 @@ fun assert(architecture: KoArchitecture, koScope: KoScope) {
 
         val result = mutableMapOf<Layer, String>()
 
-        architecture
+        this
             .dependencies
             .keys
             .forEachIndexed { index, layer -> result[layer] = layerHasValidArchitecture[index] }

@@ -27,7 +27,7 @@ class Architecture4Test {
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
 
         // then
-        assert(koArchitecture, scope)
+        koArchitecture.assert(scope)
     }
 
     @Test
@@ -47,7 +47,7 @@ class Architecture4Test {
                 infrastructure.dependOnNothing()
             }
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
-        val sut = { assert(koArchitecture, scope) }
+        val sut = { koArchitecture.assert(scope) }
 
         // then
         sut shouldThrow KoCheckFailedException::class
