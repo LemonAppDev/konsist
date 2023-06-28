@@ -8,11 +8,32 @@ import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 @Suppress("detekt.ThrowsCount")
 fun KoArchitecture.assert(koScope: KoScope) {
     try {
         val files = koScope.files()
+
+        val isAllLayersValid = (this as KoArchitectureImpl).allLayers
+            .all {
+                files
+                    .withPackage(it.definedBy)
+                    .toList()
+                    .isNotEmpty()
+            }
+
+        if (!isAllLayersValid) {
+            val layer = this
+                .allLayers
+                .first {
+                    files
+                        .withPackage(it.definedBy)
+                        .toList()
+                        .isEmpty()
+                }
+            throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
+        }
 
         val layerHasValidArchitecture = (this as KoArchitectureImpl)
             .dependencies
@@ -66,5 +87,5 @@ private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): Stri
     val index = 7
 
     return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies (${failedDeclarations.size}):" +
-        "\n$failedDeclarationsMessage"
+            "\n$failedDeclarationsMessage"
 }

@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.verify.koarchitectureassert
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
@@ -52,5 +53,26 @@ class KoArchitectureAssertTest {
             Layer: Presentation. Invalid files:
             $root/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koarchitectureassert/project/presentation/PresentationClass.kt
         """.trimIndent()
+    }
+
+    @Test
+    fun `throws exception when layer contain no files`() {
+        // given
+        val layer1 = Layer("Presentation", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.presentation..")
+        val layer2 = Layer("EmptyLayer", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.emptylayer..")
+
+        val architecture = Konsist.architecture(layer1, layer2)
+            .addDependencies { layer1.dependsOn(layer2) }
+
+        val scope =
+            Konsist.scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koarchitectureassert/project")
+
+        // when
+        val func = {
+            architecture.assert(scope)
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage "Layer EmptyLayer doesn't contain any files."
     }
 }
