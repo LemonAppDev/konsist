@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.verify.kofileassert
+package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.core.container.KoFileImpl
@@ -23,15 +23,17 @@ private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveC
         val localList = this.toList()
 
         if (localList.isEmpty()) {
-            val checkMethodName = Thread.currentThread().stackTrace[2].methodName
+            val index = 2
+            val checkMethodName = getTestMethodName(index)
             throw KoPreconditionFailedException(
-                "Files list is empty. Please make sure that list of files contain items " +
+                "File list is empty. Please make sure that list of files contain items " +
                         "before calling the '$checkMethodName' method.",
             )
         }
 
+        val index = 4
         val notSuppressedFiles = localList
-            .filterNot { checkIfSuppressed(it, Thread.currentThread().stackTrace[4].methodName) }
+            .filterNot { checkIfSuppressed(it, getTestMethodName(index)) }
 
         val result = notSuppressedFiles.groupBy {
             lastFile = it
@@ -60,15 +62,8 @@ private fun <E : KoFile> getCheckFailedMessage(failedDeclarations: List<E>): Str
         "${it.path} ($name $declarationType)"
     }
 
-    return "Assert '${getTestMethodName()}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
-}
-
-/**
- * In this call stack hierarchy test name is at index 5.
- */
-private fun getTestMethodName(): String? {
-    val stackTraceIndexOfTestMethod = 5
-    return Thread.currentThread().stackTrace[stackTraceIndexOfTestMethod].methodName
+    val index = 5
+    return "Assert '${getTestMethodName(5)}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }
 
 private fun checkIfSuppressed(file: KoFile, testMethodName: String): Boolean {

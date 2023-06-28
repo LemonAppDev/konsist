@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.verify.kofileassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.sequence.withPrimaryConstructor
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.verify.assert
@@ -138,5 +137,5 @@ class KoFileAssertTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/verify/assert/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/verify/kofileassert/snippet/", fileName)
 }

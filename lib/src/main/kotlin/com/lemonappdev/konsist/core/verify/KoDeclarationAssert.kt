@@ -27,7 +27,8 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
         val localList = this.toList()
 
         if (localList.isEmpty()) {
-            val checkMethodName = Thread.currentThread().stackTrace[2].methodName
+            val index = 2
+            val checkMethodName = getTestMethodName(index)
             throw KoPreconditionFailedException(
                 "Declaration list is empty. Please make sure that list of declarations contain items " +
                     "before calling the '$checkMethodName' method.",
@@ -74,7 +75,8 @@ private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: Li
 private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {
     // In this declarations structure test name is at index 4
     // We pass this name to checkIfSuppressed() because when declarations are nested, this index is changing
-    val testMethodName = Thread.currentThread().stackTrace[4].methodName
+    val index = 4
+    val testMethodName = getTestMethodName(index)
     val declarations: MutableMap<E, Boolean> = mutableMapOf()
 
     // First we need to exclude (if exist) file suppress test annotation
