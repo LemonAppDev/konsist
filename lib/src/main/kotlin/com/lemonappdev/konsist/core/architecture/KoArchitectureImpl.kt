@@ -63,10 +63,10 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: Layer, vararg layers: Layer) {
         if (statuses[layer] == Status.INDEPENDENT) {
             if (toBeIndependent) {
-                throw KoPreconditionFailedException("Duplicated the dependency that ${layer.name} layer should be independent")
+                throw KoPreconditionFailedException("Duplicated the dependency that ${layer.name} layer should be depend on nothing.")
             } else {
                 throw KoPreconditionFailedException(
-                    "Layer ${layer.name} was previously set as independent, so it cannot be depend on ${layers.first().name} layer.",
+                    "Layer ${layer.name} was previously set as depend on nothing, so it cannot be depend on ${layers.first().name} layer.",
                 )
             }
         } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {
@@ -75,7 +75,7 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
             if (toBeIndependent) {
                 val alreadySetLayer = dependency.first { it != layer }
                 throw KoPreconditionFailedException(
-                    "Layer ${layer.name} had a dependency previously set with ${alreadySetLayer.name} layer, so it cannot be independent.",
+                    "Layer ${layer.name} had a dependency previously set with ${alreadySetLayer.name} layer, so it cannot be depend on nothing.",
                 )
             } else if (layers.any { dependency.contains(it) }) {
                 val alreadySetLayer = layers.first { dependency.contains(it) }

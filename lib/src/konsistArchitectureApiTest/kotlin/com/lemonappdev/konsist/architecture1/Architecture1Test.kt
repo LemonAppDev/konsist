@@ -94,7 +94,7 @@ class Architecture1Test {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer Domain was previously set as independent, so it cannot be depend on Presentation layer.
+            Layer Domain was previously set as depend on nothing, so it cannot be depend on Presentation layer.
         """.trimIndent()
     }
 
@@ -113,7 +113,7 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency that Domain layer should be independent"
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency that Domain layer should be depend on nothing."
     }
 
     @Test
@@ -133,7 +133,7 @@ class Architecture1Test {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer Domain had a dependency previously set with Presentation layer, so it cannot be independent.
+            Layer Domain had a dependency previously set with Presentation layer, so it cannot be depend on nothing.
         """.trimIndent()
     }
 
