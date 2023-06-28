@@ -31,7 +31,7 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
 
     override val receiverType: KoTypeDeclaration? by lazy { ReceiverUtil.setReceiverType(getTypeReferences(), isExtension(), this) }
 
-    private fun getTypeReferences() = ktProperty
+    private fun getTypeReferences(): List<KtTypeReference> = ktProperty
         .children
         .filterIsInstance<KtTypeReference>()
 
