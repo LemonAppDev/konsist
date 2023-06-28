@@ -17,10 +17,10 @@ fun KoArchitecture.assert(koScope: KoScope) {
         val layerHasValidArchitecture = (this as KoArchitectureImpl)
             .dependencies
             .map { (t, u) ->
-                val otherLayers = (this.allLayers - u).map { it.isDefinedBy }
+                val otherLayers = (this.allLayers - u).map { it.definedBy }
 
                 files
-                    .withPackage(t.isDefinedBy)
+                    .withPackage(t.definedBy)
                     .filter { otherLayers.any { name -> it.hasImports(name) } }
                     .map { it.path }
                     .joinToString("\n")
@@ -57,7 +57,7 @@ fun KoArchitecture.assert(koScope: KoScope) {
 
 private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): String {
     val failedDeclarationsMessage = failedDeclarations.keys.mapIndexed { index, layer ->
-        "Layer: ${layer.name} defined by: ${layer.isDefinedBy} . Invalid files:\n${failedDeclarations.values.toList()[index]}"
+        "Layer: ${layer.name} defined by: ${layer.definedBy} . Invalid files:\n${failedDeclarations.values.toList()[index]}"
     }.joinToString("\n")
 
     /**
