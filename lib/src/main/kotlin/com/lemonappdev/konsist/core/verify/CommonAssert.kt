@@ -6,30 +6,30 @@ import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-private const val atFourthIndex = 4
-private const val atFifthIndex = 5
-private const val atSixthIndex = 6
-private const val atEightIndex = 8
+private const val FOURTH_INDEX = 4
+private const val FIFTH_INDEX = 5
+private const val SIXTH_INDEX = 6
+private const val EIGHT_INDEX = 8
 
 /**
  * In this call stack hierarchy test name is at index 4.
  */
-internal fun getTestMethodNameFromFourthIndex() = getTestMethodName(atFourthIndex)
+internal fun getTestMethodNameFromFourthIndex() = getTestMethodName(FOURTH_INDEX)
 
 /**
  * In this call stack hierarchy test name is at index 5.
  */
-internal fun getTestMethodNameFromFifthIndex() = getTestMethodName(atFifthIndex)
+internal fun getTestMethodNameFromFifthIndex() = getTestMethodName(FIFTH_INDEX)
 
 /**
  * In this call stack hierarchy test name is at index 6.
  */
-internal fun getTestMethodNameFromSixthIndex() = getTestMethodName(atSixthIndex)
+internal fun getTestMethodNameFromSixthIndex() = getTestMethodName(SIXTH_INDEX)
 
 /**
  * In this call stack hierarchy test name is at index 8.
  */
-internal fun getTestMethodNameFromEightIndex() = getTestMethodName(atEightIndex)
+internal fun getTestMethodNameFromEightIndex() = getTestMethodName(EIGHT_INDEX)
 
 private fun getTestMethodName(index: Int): String = Thread.currentThread().stackTrace[index].methodName
 
@@ -77,7 +77,7 @@ internal fun checkIfLocalListIsEmpty(localList: List<*>, type: String, testMetho
     if (localList.isEmpty()) {
         throw KoPreconditionFailedException(
             "$type list is empty. Please make sure that list of ${type.lowercase()}s contain items " +
-                    "before calling the '$testMethodName' method.",
+                "before calling the '$testMethodName' method.",
         )
     }
 }

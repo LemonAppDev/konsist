@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.core.container.KoFileImpl
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
-import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?) {
     assert(function, true)
@@ -32,7 +31,6 @@ private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveC
         }
 
         getResult(notSuppressedFiles, result, positiveCheck, getTestMethodNameFromFifthIndex())
-
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {

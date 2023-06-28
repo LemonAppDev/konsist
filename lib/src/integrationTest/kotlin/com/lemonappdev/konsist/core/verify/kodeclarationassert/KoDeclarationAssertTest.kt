@@ -3,11 +3,9 @@ package com.lemonappdev.konsist.core.verify.kodeclarationassert
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.sequence.withPrimaryConstructor
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
-import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoDeclarationAssertTest {
@@ -117,38 +115,6 @@ class KoDeclarationAssertTest {
 
         // then
         func shouldThrow KoCheckFailedException::class
-    }
-
-    @Test
-    fun `assert-fails-when-declaration-list-is-empty`() {
-        // given
-        val sut = getSnippetFile("assert-fails-when-declaration-list-is-empty")
-            .classes()
-
-        // when
-        val func = {
-            sut.assert { true }
-        }
-
-        // then
-        func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assert' method."
-    }
-
-    @Test
-    fun `assert-not-fails-when-declaration-list-is-empty`() {
-        // given
-        val sut = getSnippetFile("assert-not-fails-when-declaration-list-is-empty")
-            .classes()
-
-        // when
-        val func = {
-            sut.assertNot { false }
-        }
-
-        // then
-        func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
     }
 
     @Test

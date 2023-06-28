@@ -4,12 +4,9 @@ import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
-import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
-import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
-import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?) {
     assert(function, true)
@@ -36,7 +33,6 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
         }
 
         getResult(notSuppressedDeclarations, result, positiveCheck, getTestMethodNameFromFifthIndex())
-
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
