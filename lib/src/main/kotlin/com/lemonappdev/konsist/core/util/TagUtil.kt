@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 
-object TagHelper {
+object TagUtil {
     fun hasValidDescription(verifyDescription: Boolean, kDoc: KoKDocDeclaration?) = if (verifyDescription) {
         kDoc?.description?.isNotBlank() ?: false
     } else {

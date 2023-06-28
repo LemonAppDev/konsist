@@ -1,16 +1,16 @@
-package com.lemonappdev.konsist.core.util.fortaghelper
+package com.lemonappdev.konsist.core.util.fortagutil
 
 import com.lemonappdev.konsist.api.KoKDocTag.PARAM
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
-import com.lemonappdev.konsist.core.util.TagHelper
+import com.lemonappdev.konsist.core.util.TagUtil
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class TagHelperForParamTagTest {
+class TagUtilForParamTagTest {
     @Test
     fun `hasValidParamTag returns true when parameters parameters list is equal to param tags list`() {
         // given
@@ -23,7 +23,7 @@ class TagHelperForParamTagTest {
         val parameter: KoParameterDeclaration = mockk {
             every { name } returns "name"
         }
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidParamTag(true, listOf(parameter), kDoc) shouldBeEqualTo true
@@ -41,7 +41,7 @@ class TagHelperForParamTagTest {
         val parameter: KoParameterDeclaration = mockk {
             every { name } returns "name2"
         }
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidParamTag(true, listOf(parameter), kDoc) shouldBeEqualTo false
@@ -55,7 +55,7 @@ class TagHelperForParamTagTest {
         val parameter: KoParameterDeclaration = mockk {
             every { name } returns "name"
         }
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidParamTag(true, listOf(parameter), kDoc) shouldBeEqualTo false
@@ -70,7 +70,7 @@ class TagHelperForParamTagTest {
         }
         val kDoc: KoKDocDeclaration = mockk()
         every { kDoc.paramTags } returns listOf(paramTag)
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidParamTag(true, emptyList(), kDoc) shouldBeEqualTo false
@@ -83,7 +83,7 @@ class TagHelperForParamTagTest {
         val parameter: KoParameterDeclaration = mockk {
             every { name } returns "name"
         }
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidParamTag(true, listOf(parameter), kDoc) shouldBeEqualTo false
@@ -98,7 +98,7 @@ class TagHelperForParamTagTest {
         val kDoc: KoKDocDeclaration = mockk()
         every { kDoc.paramTags } returns listOf(paramTag)
         val parameter: KoParameterDeclaration = mockk()
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidParamTag(false, listOf(parameter), kDoc) shouldBeEqualTo true
