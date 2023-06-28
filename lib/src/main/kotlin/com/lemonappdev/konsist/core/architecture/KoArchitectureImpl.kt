@@ -15,7 +15,6 @@ class KoArchitectureImpl : KoArchitecture {
     }
 
     override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
-        checkIfLayersAreCorrectlyCreated(this, layer, *layers)
         checkIfLayerIsDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
@@ -34,23 +33,11 @@ class KoArchitectureImpl : KoArchitecture {
     }
 
     override fun Layer.dependsOnNothing() {
-        checkIfLayersAreCorrectlyCreated(this)
         checkStatusOfLayer(true, this)
 
         allLayers += this
         dependencies[this] = setOf(this)
         statuses[this] = Status.INDEPENDENT
-    }
-
-    private fun checkIfLayersAreCorrectlyCreated(layer: Layer, vararg layers: Layer) {
-        val allLayers = listOf(layer, *layers)
-
-        if (allLayers.any { !it.definedBy.endsWith("..") }) {
-            val incorrectLayer = allLayers.first { it.definedBy.endsWith("..") }
-            throw KoPreconditionFailedException(
-                "Layer ${incorrectLayer.name} must be defined by package ending with '..'. Now: ${incorrectLayer.definedBy} .",
-            )
-        }
     }
 
     private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg layers: Layer) {

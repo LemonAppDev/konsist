@@ -27,28 +27,6 @@ class Architecture1Test {
         koArchitecture.assert(scope)
     }
 
-    // Todo("fix test)
-    @Test
-    fun `throws an exception when layer is defined by package without two dots at the end`() {
-        // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain")
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
-
-        val sut = {
-            Konsist
-                .architecture()
-                .addDependencies {
-                    domain.dependsOnNothing()
-                    domain.dependsOn(presentation)
-                }
-        }
-
-        // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer Domain must be defined by package ending with '..'. Now: com.lemonappdev.konsist.architecture1.project.domain .
-        """.trimIndent()
-    }
-
     @Test
     fun `throws an exception when self dependency is set`() {
         // given
