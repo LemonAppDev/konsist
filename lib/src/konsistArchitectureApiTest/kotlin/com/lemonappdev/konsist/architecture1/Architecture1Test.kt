@@ -18,8 +18,8 @@ class Architecture1Test {
         val koArchitecture = Konsist
             .architecture(domain, presentation)
             .addDependencies {
-                domain.notDependOnAnyLayer()
-                presentation.notDependOnAnyLayer()
+                domain.dependOnNothing()
+                presentation.dependOnNothing()
             }
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture1/project")
 
@@ -92,7 +92,7 @@ class Architecture1Test {
             Konsist
                 .architecture(domain, presentation)
                 .addDependencies {
-                    domain.notDependOnAnyLayer()
+                    domain.dependOnNothing()
                     domain.dependsOn(presentation)
                 }
         }
@@ -112,8 +112,8 @@ class Architecture1Test {
             Konsist
                 .architecture(domain)
                 .addDependencies {
-                    domain.notDependOnAnyLayer()
-                    domain.notDependOnAnyLayer()
+                    domain.dependOnNothing()
+                    domain.dependOnNothing()
                 }
         }
 
@@ -133,7 +133,7 @@ class Architecture1Test {
                 .architecture(domain, presentation)
                 .addDependencies {
                     domain.dependsOn(presentation)
-                    domain.notDependOnAnyLayer()
+                    domain.dependOnNothing()
                 }
         }
 

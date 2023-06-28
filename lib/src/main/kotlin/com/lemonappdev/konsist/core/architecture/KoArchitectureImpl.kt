@@ -28,7 +28,7 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         statuses[this] = Status.DEPEND_ON_LAYER
     }
 
-    override fun Layer.notDependOnAnyLayer() {
+    override fun Layer.dependOnNothing() {
         checkIfLayerIsAddToArchitecture(this)
         checkStatusOfLayer(true, this)
 
