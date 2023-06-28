@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.container.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.core.ext.sep
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -17,9 +16,9 @@ class KoFileForResideInTest {
         // then
         assertSoftly(sut) {
             resideInPath("..snippet..") shouldBeEqualTo true
-            resideInPath("..kofile${sep}snippet..") shouldBeEqualTo true
+            resideInPath("..kofile/snippet..") shouldBeEqualTo true
             resideInPath("..kofile..reside-in-path.kt") shouldBeEqualTo true
-            resideInPath("kofile${sep}snippet$sep") shouldBeEqualTo false
+            resideInPath("kofile/snippet/") shouldBeEqualTo false
         }
     }
 
@@ -33,9 +32,9 @@ class KoFileForResideInTest {
         // then
         assertSoftly(sut) {
             resideInProjectPath("..snippet..") shouldBeEqualTo true
-            resideInProjectPath("..kofile${sep}snippet..") shouldBeEqualTo true
+            resideInProjectPath("..kofile/snippet..") shouldBeEqualTo true
             resideInProjectPath("..kofile..reside-in-project-path.kt") shouldBeEqualTo true
-            resideInProjectPath("kofile${sep}snippet$sep") shouldBeEqualTo false
+            resideInProjectPath("kofile/snippet/") shouldBeEqualTo false
         }
     }
 

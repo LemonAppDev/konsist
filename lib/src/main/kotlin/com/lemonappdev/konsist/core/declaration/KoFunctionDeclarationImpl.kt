@@ -6,7 +6,8 @@ import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.util.TagHelper
+import com.lemonappdev.konsist.core.util.ReceiverUtil
+import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
@@ -37,15 +38,13 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
         }
     }
 
-    override val returnType: KoTypeDeclaration? by lazy {
-        val type = ktFunction
-            .children
-            .filterIsInstance<KtTypeReference>()
-            // We choose last because when we have extension function the first one is receiver and the second one is return type.
-            .lastOrNull()
+    override val returnType: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
 
-        type?.let { KoTypeDeclarationImpl.getInstance(type, this) }
-    }
+    override val receiverType: KoTypeDeclaration? by lazy { ReceiverUtil.getReceiverType(getTypeReferences(), isExtension(), this) }
+
+    private fun getTypeReferences(): List<KtTypeReference> = ktFunction
+        .children
+        .filterIsInstance<KtTypeReference>()
 
     override fun hasOperatorModifier(): Boolean = hasModifiers(KoModifier.OPERATOR)
 
@@ -73,13 +72,15 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
 
     override fun isExtension(): Boolean = ktFunction.isExtensionDeclaration()
 
+    override fun hasReceiverType(name: String?): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)
+
     override fun hasReturnType(): Boolean = ktFunction.hasDeclaredReturnType()
 
     override fun localDeclarations(): Sequence<KoDeclaration> = localDeclarations
 
-    override fun hasValidReturnTag(enabled: Boolean): Boolean = TagHelper.hasValidReturnTag(enabled, returnType?.name, kDoc)
+    override fun hasValidReturnTag(enabled: Boolean): Boolean = TagUtil.hasValidReturnTag(enabled, returnType?.name, kDoc)
 
-    override fun hasValidParamTag(enabled: Boolean): Boolean = TagHelper.hasValidParamTag(enabled, parameters, kDoc)
+    override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters, kDoc)
 
     override fun hasValidReceiverTag(enabled: Boolean): Boolean = TagHelper.hasValidReceiverTag(enabled, kDoc)
 

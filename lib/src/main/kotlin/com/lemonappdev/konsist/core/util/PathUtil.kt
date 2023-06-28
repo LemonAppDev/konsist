@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.util
 
 import java.io.File
 
-object PathHelper {
+object PathUtil {
     val sep: String = File.separator
 
     fun toOsSeparator(path: String): String = path
