@@ -48,8 +48,8 @@ class Architecture2Test {
 
         // then
         sut shouldThrow KoCheckFailedException::class withMessage """
-            Assert 'fails when dependency is set that domain layer is depend on presentation layer' has failed. Invalid dependencies at (1):
-            Layer: Presentation defined by: com.lemonappdev.konsist.architecture2.project.presentation.. . Invalid files:
+            Assert 'fails when dependency is set that domain layer is depend on presentation layer' has failed. Invalid dependencies (1):
+            Layer: Presentation. Invalid files:
             $rootPath/lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project/presentation/sample/PresentationThirdClass.kt
         """.trimIndent()
     }

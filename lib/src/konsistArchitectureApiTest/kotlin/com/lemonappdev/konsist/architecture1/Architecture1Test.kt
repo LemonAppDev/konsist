@@ -42,7 +42,7 @@ class Architecture1Test {
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
             Layers not added to the architecture:
-            Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..).
+            Presentation.
         """.trimIndent()
     }
 
@@ -59,10 +59,7 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer not added to the architecture:
-            Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..).
-        """.trimIndent()
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Layer Domain is not added to the architecture."
     }
 
     @Test
@@ -77,9 +74,7 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer: Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) cannot be dependent on itself.
-        """.trimIndent()
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Layer Domain cannot be dependent on itself."
     }
 
     @Test
@@ -98,9 +93,9 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Layer: Layer(name=Domain, " +
-            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) was previously set as independent so it cannot be " +
-            "depend on Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..)."
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
+            Layer Domain was previously set as independent, so it cannot be depend on Presentation layer.
+        """.trimIndent()
     }
 
     @Test
@@ -118,8 +113,7 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency that " +
-            "Layer(name=Domain, isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) should be independent"
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency that Domain layer should be independent"
     }
 
     @Test
@@ -138,10 +132,9 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Layer: Layer(name=Domain, " +
-            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) had a dependency with " +
-            "Layer(name=Presentation, isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..) previously set " +
-            "so it cannot be independent."
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
+            Layer Domain had a dependency previously set with Presentation layer, so it cannot be independent.
+        """.trimIndent()
     }
 
     @Test
@@ -160,8 +153,6 @@ class Architecture1Test {
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency between Layer(name=Domain, " +
-            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.domain..) and Layer(name=Presentation, " +
-            "isDefinedBy=com.lemonappdev.konsist.architecture1.project.presentation..)."
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency between Domain and Presentation layers."
     }
 }

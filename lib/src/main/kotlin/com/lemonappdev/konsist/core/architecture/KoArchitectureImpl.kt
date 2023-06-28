@@ -39,20 +39,23 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     private fun checkIfLayerIsAddToArchitecture(layer: Layer, layers: List<Layer>? = null) {
         layers?.let {
             if (layers.any { layer -> !allLayers.contains(layer) }) {
-                val notAddedLayers = layers.filterNot { layer -> allLayers.contains(layer) }
+                val notAddedLayers = layers
+                    .filterNot { layer -> allLayers.contains(layer) }
+                    .map { it.name }
+
                 throw KoPreconditionFailedException(
                     "Layers not added to the architecture:\n${notAddedLayers.joinToString(separator = "\n")}.",
                 )
             }
         }
         if (!allLayers.contains(layer)) {
-            throw KoPreconditionFailedException("Layer not added to the architecture:\n$layer.")
+            throw KoPreconditionFailedException("Layer ${layer.name} is not added to the architecture.")
         }
     }
 
     private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg layers: Layer) {
         if (layers.any { it == layer }) {
-            throw KoPreconditionFailedException("Layer: $layer cannot be dependent on itself.")
+            throw KoPreconditionFailedException("Layer ${layer.name} cannot be dependent on itself.")
         }
     }
 
@@ -60,10 +63,10 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: Layer, vararg layers: Layer) {
         if (statuses[layer] == Status.INDEPENDENT) {
             if (toBeIndependent) {
-                throw KoPreconditionFailedException("Duplicated the dependency that $layer should be independent")
+                throw KoPreconditionFailedException("Duplicated the dependency that ${layer.name} layer should be independent")
             } else {
                 throw KoPreconditionFailedException(
-                    "Layer: $layer was previously set as independent so it cannot be depend on ${layers.first()}.",
+                    "Layer ${layer.name} was previously set as independent, so it cannot be depend on ${layers.first().name} layer.",
                 )
             }
         } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {
@@ -72,11 +75,11 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
             if (toBeIndependent) {
                 val alreadySetLayer = dependency.first { it != layer }
                 throw KoPreconditionFailedException(
-                    "Layer: $layer had a dependency with $alreadySetLayer previously set so it cannot be independent.",
+                    "Layer ${layer.name} had a dependency previously set with ${alreadySetLayer.name} layer, so it cannot be independent.",
                 )
             } else if (layers.any { dependency.contains(it) }) {
                 val alreadySetLayer = layers.first { dependency.contains(it) }
-                throw KoPreconditionFailedException("Duplicated the dependency between $layer and $alreadySetLayer.")
+                throw KoPreconditionFailedException("Duplicated the dependency between ${layer.name} and ${alreadySetLayer.name} layers.")
             }
         }
     }
@@ -91,8 +94,12 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
         if (notEmpty != null) {
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
-                    notEmpty.filterNot { it == null }
-                        .joinToString(prefix = "$layer -->\n", postfix = "$layer.", separator = "") { "$it -->\n" },
+                        notEmpty.filterNot { it == null }
+                            .joinToString(
+                                prefix = "Layer ${layer.name} -->\n",
+                                postfix = "Layer ${layer.name}.",
+                                separator = ""
+                            ) { "Layer ${it?.name} -->\n" },
             )
         }
     }

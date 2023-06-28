@@ -30,10 +30,10 @@ class CircularDependency4Test {
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
             Illegal circular dependencies:
-            Layer(name=layer3, isDefinedBy=layer3) -->
-            Layer(name=layer1, isDefinedBy=layer1) -->
-            Layer(name=layer2, isDefinedBy=layer2) -->
-            Layer(name=layer3, isDefinedBy=layer3).
+            Layer layer3 -->
+            Layer layer1 -->
+            Layer layer2 -->
+            Layer layer3.
         """.trimIndent()
     }
 }

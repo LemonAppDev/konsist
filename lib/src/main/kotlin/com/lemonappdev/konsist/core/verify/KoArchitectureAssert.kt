@@ -57,7 +57,7 @@ fun KoArchitecture.assert(koScope: KoScope) {
 
 private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): String {
     val failedDeclarationsMessage = failedDeclarations.keys.mapIndexed { index, layer ->
-        "Layer: ${layer.name} defined by: ${layer.definedBy} . Invalid files:\n${failedDeclarations.values.toList()[index]}"
+        "Layer: ${layer.name}. Invalid files:\n${failedDeclarations.values.toList()[index]}"
     }.joinToString("\n")
 
     /**
@@ -65,6 +65,6 @@ private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): Stri
      */
     val index = 7
 
-    return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies at (${failedDeclarations.size}):" +
+    return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies (${failedDeclarations.size}):" +
         "\n$failedDeclarationsMessage"
 }

@@ -48,8 +48,8 @@ class KoArchitectureAssertTest {
 
         // then
         func shouldThrow KoCheckFailedException::class withMessage """
-            Assert 'assert-fails' has failed. Invalid dependencies at (1):
-            Layer: Presentation defined by: com.lemonappdev.konsist.core.verify.koarchitectureassert.project.presentation.. . Invalid files:
+            Assert 'assert-fails' has failed. Invalid dependencies (1):
+            Layer: Presentation. Invalid files:
             $root/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koarchitectureassert/project/presentation/PresentationClass.kt
         """.trimIndent()
     }
