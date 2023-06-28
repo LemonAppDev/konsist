@@ -60,7 +60,7 @@ private fun <E : KoFile> getCheckFailedMessage(failedDeclarations: List<E>): Str
         "${it.path} ($name $declarationType)"
     }
 
-    return "Assert '${getTestMethodNameFromSixthIndex()}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
+    return "Assert '${getTestMethodNameFromSixthIndex()}' has failed. Invalid files (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }
 
 private fun checkIfSuppressed(file: KoFile, testMethodName: String): Boolean {
