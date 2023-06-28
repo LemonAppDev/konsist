@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.util
 
-object LocationHelper {
+object LocationUtil {
     private const val wildcardSyntax = ".."
 
     /**

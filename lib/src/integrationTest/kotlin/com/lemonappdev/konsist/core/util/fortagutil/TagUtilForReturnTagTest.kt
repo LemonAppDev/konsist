@@ -1,15 +1,15 @@
-package com.lemonappdev.konsist.core.util.fortaghelper
+package com.lemonappdev.konsist.core.util.fortagutil
 
 import com.lemonappdev.konsist.api.KoKDocTag.RETURN
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
-import com.lemonappdev.konsist.core.util.TagHelper
+import com.lemonappdev.konsist.core.util.TagUtil
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class TagHelperForReturnTagTest {
+class TagUtilForReturnTagTest {
     @Test
     fun `hasValidReturnTag returns true when kDoc has return tag`() {
         // given
@@ -19,7 +19,7 @@ class TagHelperForReturnTagTest {
         val kDoc: KoKDocDeclaration = mockk()
         every { kDoc.returnTag } returns returnTag
 
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidReturnTag(true, null, kDoc) shouldBeEqualTo true
@@ -29,7 +29,7 @@ class TagHelperForReturnTagTest {
     fun `hasValidReturnTag returns false when kDoc is null`() {
         // given
         val kDoc = null
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidReturnTag(true, null, kDoc) shouldBeEqualTo false
@@ -43,7 +43,7 @@ class TagHelperForReturnTagTest {
         }
         val kDoc: KoKDocDeclaration = mockk()
         every { kDoc.returnTag } returns returnTag
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidReturnTag(false, null, kDoc) shouldBeEqualTo true
@@ -57,7 +57,7 @@ class TagHelperForReturnTagTest {
         }
         val kDoc: KoKDocDeclaration = mockk()
         every { kDoc.returnTag } returns returnTag
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidReturnTag(false, "Unit", kDoc) shouldBeEqualTo true
