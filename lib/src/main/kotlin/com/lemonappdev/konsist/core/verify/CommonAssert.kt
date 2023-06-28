@@ -33,18 +33,18 @@ internal fun getTestMethodNameFromEightIndex() = getTestMethodName(EIGHT_INDEX)
 
 private fun getTestMethodName(index: Int): String = Thread.currentThread().stackTrace[index].methodName
 
-internal fun getResult(objects: List<*>, result: Map<Boolean?, List<Any>>, positiveCheck: Boolean, testMethodName: String) {
-    val allChecksPassed = (result[positiveCheck]?.size ?: 0) == objects.size
+internal fun getResult(items: List<*>, result: Map<Boolean?, List<Any>>, positiveCheck: Boolean, testMethodName: String) {
+    val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
 
     if (!allChecksPassed) {
-        val failedDeclarations = result[!positiveCheck] ?: emptyList()
-        throw KoCheckFailedException(getCheckFailedMessage(failedDeclarations, testMethodName))
+        val failedItems = result[!positiveCheck] ?: emptyList()
+        throw KoCheckFailedException(getCheckFailedMessage(failedItems, testMethodName))
     }
 }
 
-private fun getCheckFailedMessage(failedDeclarations: List<*>, testMethodName: String): String {
+private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String): String {
     var types = ""
-    val failedDeclarationsMessage = failedDeclarations.joinToString("\n") {
+    val failedDeclarationsMessage = failedItems.joinToString("\n") {
         when (it) {
             is KoFile -> {
                 types = "files"
@@ -70,7 +70,7 @@ private fun getCheckFailedMessage(failedDeclarations: List<*>, testMethodName: S
         }
     }
 
-    return "Assert '$testMethodName' has failed. Invalid $types (${failedDeclarations.size}):\n$failedDeclarationsMessage"
+    return "Assert '$testMethodName' has failed. Invalid $types (${failedItems.size}):\n$failedDeclarationsMessage"
 }
 
 internal fun checkIfLocalListIsEmpty(localList: List<*>, type: String, testMethodName: String) {
