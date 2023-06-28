@@ -25,6 +25,11 @@ interface KoPropertyDeclaration : KoDeclaration {
     val type: KoTypeDeclaration?
 
     /**
+     * Receiver type of the property.
+     */
+    val receiverType: KoTypeDeclaration?
+
+    /**
      * Whether the property has lateinit modifier.
      *
      * @return `true` if the property has the `lateinit` modifier, `false` otherwise.
@@ -86,6 +91,15 @@ interface KoPropertyDeclaration : KoDeclaration {
      * @return `true` if the property is an extension property, `false` otherwise.
      */
     fun isExtension(): Boolean
+
+    /**
+     * Whether property has receiver type.
+     *
+     * @param name the receiver type to check.
+     * @return `true` if the property has receiver type with the specified name (or any receiver type if [name] is null),
+     * `false` otherwise.
+     */
+    fun hasReceiverType(name: String? = null): Boolean
 
     /**
      * Whatever property has a delegate.

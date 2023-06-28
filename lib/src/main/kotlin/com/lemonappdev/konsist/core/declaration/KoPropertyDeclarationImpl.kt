@@ -5,10 +5,10 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.util.ReceiverUtil
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
-import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 internal class KoPropertyDeclarationImpl private constructor(private val ktProperty: KtProperty, parentDeclaration: KoBaseDeclaration?) :
     KoDeclarationImpl(ktProperty, parentDeclaration),
@@ -27,13 +27,13 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
             ?.removeSuffix(" ")
     }
 
-    override val type: KoTypeDeclaration? by lazy {
-        val type = ktProperty
-            .children
-            .firstIsInstanceOrNull<KtTypeReference>()
+    override val type: KoTypeDeclaration? by lazy { ReceiverUtil.setType(getTypeReferences(), isExtension(), this) }
 
-        type?.let { KoTypeDeclarationImpl.getInstance(it, this) }
-    }
+    override val receiverType: KoTypeDeclaration? by lazy { ReceiverUtil.setReceiverType(getTypeReferences(), isExtension(), this) }
+
+    private fun getTypeReferences() = ktProperty
+        .children
+        .filterIsInstance<KtTypeReference>()
 
     override fun hasLateinitModifier(): Boolean = hasModifiers(KoModifier.LATEINIT)
 
@@ -52,6 +52,8 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
     override fun hasConstModifier(): Boolean = hasModifiers(KoModifier.CONST)
 
     override fun isExtension(): Boolean = ktProperty.isExtensionDeclaration()
+
+    override fun hasReceiverType(name: String?): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)
 
     override fun hasDelegate(name: String?): Boolean = when (name) {
         null -> ktProperty.hasDelegateExpression()
