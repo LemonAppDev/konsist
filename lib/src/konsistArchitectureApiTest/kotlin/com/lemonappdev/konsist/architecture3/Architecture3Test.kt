@@ -18,7 +18,7 @@ class Architecture3Test {
         val koArchitecture = Konsist
             .architecture()
             .addDependencies {
-                domain.dependOnNothing()
+                domain.dependsOnNothing()
                 presentation.dependsOn(domain)
                 data.dependsOn(domain)
             }
@@ -38,7 +38,7 @@ class Architecture3Test {
         val koArchitecture = Konsist
             .architecture()
             .addDependencies {
-                data.dependOnNothing()
+                data.dependsOnNothing()
                 presentation.dependsOn(data)
                 domain.dependsOn(data)
             }

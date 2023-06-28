@@ -18,13 +18,35 @@ class Architecture1Test {
         val koArchitecture = Konsist
             .architecture()
             .addDependencies {
-                domain.dependOnNothing()
-                presentation.dependOnNothing()
+                domain.dependsOnNothing()
+                presentation.dependsOnNothing()
             }
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture1/project")
 
         // then
         koArchitecture.assert(scope)
+    }
+
+    // Todo("fix test)
+    @Test
+    fun `throws an exception when layer is defined by package without two dots at the end`() {
+        // given
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain")
+        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
+
+        val sut = {
+            Konsist
+                .architecture()
+                .addDependencies {
+                    domain.dependsOnNothing()
+                    domain.dependsOn(presentation)
+                }
+        }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
+            Layer Domain must be defined by package ending with '..'. Now: com.lemonappdev.konsist.architecture1.project.domain .
+        """.trimIndent()
     }
 
     @Test
@@ -52,7 +74,7 @@ class Architecture1Test {
             Konsist
                 .architecture()
                 .addDependencies {
-                    domain.dependOnNothing()
+                    domain.dependsOnNothing()
                     domain.dependsOn(presentation)
                 }
         }
@@ -72,13 +94,15 @@ class Architecture1Test {
             Konsist
                 .architecture()
                 .addDependencies {
-                    domain.dependOnNothing()
-                    domain.dependOnNothing()
+                    domain.dependsOnNothing()
+                    domain.dependsOnNothing()
                 }
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency that Domain layer should be depend on nothing."
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
+            Duplicated the dependency that Domain layer should be depend on nothing.
+        """.trimIndent()
     }
 
     @Test
@@ -92,7 +116,7 @@ class Architecture1Test {
                 .architecture()
                 .addDependencies {
                     domain.dependsOn(presentation)
-                    domain.dependOnNothing()
+                    domain.dependsOnNothing()
                 }
         }
 

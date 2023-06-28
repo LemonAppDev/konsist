@@ -11,11 +11,11 @@ class CircularDependency3Test {
     @Test
     fun `circular dependency 3`() {
         // given
-        val layer1 = Layer("layer1", "layer1")
-        val layer2 = Layer("layer2", "layer2")
-        val layer3 = Layer("layer3", "layer3")
-        val layer4 = Layer("layer4", "layer4")
-        val layer5 = Layer("layer5", "layer5")
+        val layer1 = Layer("layer1", "layer1..")
+        val layer2 = Layer("layer2", "layer2..")
+        val layer3 = Layer("layer3", "layer3..")
+        val layer4 = Layer("layer4", "layer4..")
+        val layer5 = Layer("layer5", "layer5..")
 
         // when
         val sut = {

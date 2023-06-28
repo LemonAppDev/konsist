@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitecture
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-class KoArchitectureImpl() : KoArchitecture {
+class KoArchitectureImpl : KoArchitecture {
     val dependencies = mutableMapOf<Layer, Set<Layer>>()
     private val statuses = mutableMapOf<Layer, Status>()
 
@@ -15,6 +15,7 @@ class KoArchitectureImpl() : KoArchitecture {
     }
 
     override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
+        checkIfLayersAreCorrectlyCreated(this, layer, *layers)
         checkIfLayerIsDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
@@ -32,12 +33,24 @@ class KoArchitectureImpl() : KoArchitecture {
         }
     }
 
-    override fun Layer.dependOnNothing() {
+    override fun Layer.dependsOnNothing() {
+        checkIfLayersAreCorrectlyCreated(this)
         checkStatusOfLayer(true, this)
 
         allLayers += this
         dependencies[this] = setOf(this)
         statuses[this] = Status.INDEPENDENT
+    }
+
+    private fun checkIfLayersAreCorrectlyCreated(layer: Layer, vararg layers: Layer) {
+        val allLayers = listOf(layer, *layers)
+
+        if (allLayers.any { !it.definedBy.endsWith("..") }) {
+            val incorrectLayer = allLayers.first { it.definedBy.endsWith("..") }
+            throw KoPreconditionFailedException(
+                "Layer ${incorrectLayer.name} must be defined by package ending with '..'. Now: ${incorrectLayer.definedBy} .",
+            )
+        }
     }
 
     private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg layers: Layer) {
@@ -62,7 +75,8 @@ class KoArchitectureImpl() : KoArchitecture {
             if (toBeIndependent) {
                 val alreadySetLayer = dependency.first { it != layer }
                 throw KoPreconditionFailedException(
-                    "Layer ${layer.name} had a dependency previously set with ${alreadySetLayer.name} layer, so it cannot be depend on nothing.",
+                    "Layer ${layer.name} had a dependency previously set with ${alreadySetLayer.name} layer, " +
+                        "so it cannot be depend on nothing.",
                 )
             } else if (layers.any { dependency.contains(it) }) {
                 val alreadySetLayer = layers.first { dependency.contains(it) }
@@ -81,12 +95,12 @@ class KoArchitectureImpl() : KoArchitecture {
         if (notEmpty != null) {
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
-                        notEmpty.filterNot { it == null }
-                            .joinToString(
-                                prefix = "Layer ${layer.name} -->\n",
-                                postfix = "Layer ${layer.name}.",
-                                separator = ""
-                            ) { "Layer ${it?.name} -->\n" },
+                    notEmpty.filterNot { it == null }
+                        .joinToString(
+                            prefix = "Layer ${layer.name} -->\n",
+                            postfix = "Layer ${layer.name}.",
+                            separator = "",
+                        ) { "Layer ${it?.name} -->\n" },
             )
         }
     }
@@ -111,7 +125,12 @@ class KoArchitectureImpl() : KoArchitecture {
             potentialCircular + layerToCheck + null
         } else {
             val lists = layersToCheck.map {
-                checkCircularDependenciesHelper(nodeLayer, it, alreadyChecked + layerToCheck, potentialCircular + layerToCheck)
+                checkCircularDependenciesHelper(
+                    nodeLayer,
+                    it,
+                    alreadyChecked + layerToCheck,
+                    potentialCircular + layerToCheck,
+                )
             }
 
             lists.firstOrNull { it.last() == null } ?: emptyList()

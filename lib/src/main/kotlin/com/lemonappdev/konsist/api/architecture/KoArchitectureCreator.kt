@@ -1,7 +1,5 @@
 package com.lemonappdev.konsist.api.architecture
 
-import com.lemonappdev.konsist.core.architecture.Layer
-
 /**
  * Architecture creator.
  *

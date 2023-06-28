@@ -27,14 +27,13 @@ class CommonAssertTest {
     fun `architecture-assert-test-method-name`() {
         // given
         val scope = Konsist.scopeFromProduction()
-        val layer = Layer("SampleLayer", "com/lemonappdev/konsist/core/verify/commonassert..")
         val architecture = Konsist
             .architecture()
-            .addDependencies {  }
+            .addDependencies { }
 
         // then
         try {
-           architecture.assert(scope)
+            architecture.assert(scope)
         } catch (e: Exception) {
             e.message?.shouldContain("Assert 'architecture-assert-test-method-name' has failed. Invalid declarations") ?: throw e
         }

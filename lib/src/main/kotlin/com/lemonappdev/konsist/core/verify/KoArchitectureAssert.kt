@@ -87,5 +87,5 @@ private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): Stri
     val index = 7
 
     return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies (${failedDeclarations.size}):" +
-            "\n$failedDeclarationsMessage"
+        "\n$failedDeclarationsMessage"
 }

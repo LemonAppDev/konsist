@@ -21,7 +21,7 @@ class Architecture2Test {
         val koArchitecture = Konsist
             .architecture()
             .addDependencies {
-                domain.dependOnNothing()
+                domain.dependsOnNothing()
                 presentation.dependsOn(domain)
             }
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
@@ -39,7 +39,7 @@ class Architecture2Test {
         val koArchitecture = Konsist
             .architecture()
             .addDependencies {
-                presentation.dependOnNothing()
+                presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")

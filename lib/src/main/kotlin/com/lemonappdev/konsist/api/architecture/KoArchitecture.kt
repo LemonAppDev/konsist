@@ -28,5 +28,5 @@ interface KoArchitecture {
      *
      * @receiver The [Layer] that does not depend on any other layer.
      */
-    fun Layer.dependOnNothing(): Unit
+    fun Layer.dependsOnNothing(): Unit
 }

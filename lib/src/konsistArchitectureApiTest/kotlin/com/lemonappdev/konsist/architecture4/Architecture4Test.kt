@@ -22,7 +22,7 @@ class Architecture4Test {
                 presentation.dependsOn(application)
                 application.dependsOn(domain, infrastructure)
                 domain.dependsOn(infrastructure)
-                infrastructure.dependOnNothing()
+                infrastructure.dependsOnNothing()
             }
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
 
@@ -44,7 +44,7 @@ class Architecture4Test {
                 presentation.dependsOn(application, infrastructure)
                 application.dependsOn(infrastructure)
                 domain.dependsOn(infrastructure)
-                infrastructure.dependOnNothing()
+                infrastructure.dependsOnNothing()
             }
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
         val sut = { koArchitecture.assert(scope) }

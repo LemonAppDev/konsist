@@ -39,7 +39,7 @@ class KoArchitectureAssertTest {
         val architecture = Konsist.architecture()
             .addDependencies {
                 layer1.dependsOn(layer3)
-                layer2.dependOnNothing()
+                layer2.dependsOnNothing()
             }
 
         val scope =
