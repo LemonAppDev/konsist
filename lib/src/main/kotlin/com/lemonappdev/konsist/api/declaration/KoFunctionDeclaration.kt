@@ -14,7 +14,7 @@ interface KoFunctionDeclaration : KoParametrizedDeclaration, KoLocalClassProvide
     val returnType: KoTypeDeclaration?
 
     /**
-     * Receiver type of the extension function.
+     * Receiver type of the function.
      */
     val receiverType: KoTypeDeclaration?
 

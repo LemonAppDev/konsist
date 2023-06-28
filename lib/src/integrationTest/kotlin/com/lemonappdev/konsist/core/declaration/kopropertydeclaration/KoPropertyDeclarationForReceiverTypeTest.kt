@@ -1,16 +1,16 @@
-package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration
+package com.lemonappdev.konsist.core.declaration.kopropertydeclaration
 
-import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFunctionDeclarationForReceiverTypeTest {
+class KoPropertyDeclarationForReceiverTypeTest {
     @Test
-    fun `function-without-receiver`() {
+    fun `property-without-receiver-type`() {
         // given
-        val sut = getSnippetFile("function-without-receiver")
-            .functions()
+        val sut = getSnippetFile("property-without-receiver-type")
+            .properties(includeNested = true)
             .first()
 
         // then
@@ -22,10 +22,10 @@ class KoFunctionDeclarationForReceiverTypeTest {
     }
 
     @Test
-    fun `function-with-type-receiver`() {
+    fun `property-with-receiver-type`() {
         // given
-        val sut = getSnippetFile("function-with-type-receiver")
-            .functions()
+        val sut = getSnippetFile("property-with-receiver-type")
+            .properties(includeNested = true)
             .first()
 
         // then
@@ -38,5 +38,5 @@ class KoFunctionDeclarationForReceiverTypeTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forreceivertype/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forreceivertype/", fileName)
 }

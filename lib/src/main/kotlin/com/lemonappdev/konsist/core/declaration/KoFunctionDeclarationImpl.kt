@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.util.ReceiverUtil
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
@@ -37,35 +38,13 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
         }
     }
 
-    override val returnType: KoTypeDeclaration? by lazy {
-        val typeReference = ktFunction
-            .children
-            .filterIsInstance<KtTypeReference>()
+    override val returnType: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
 
-        val type = if (isExtension() && typeReference.size > 1) {
-            // We choose last because when we have extension function the first one is receiver and the second one is return type.
-            typeReference.last()
-        } else if (!isExtension()) {
-            typeReference.firstOrNull()
-        } else {
-            null
-        }
+    override val receiverType: KoTypeDeclaration? by lazy { ReceiverUtil.getReceiverType(getTypeReferences(), isExtension(), this) }
 
-        type?.let { KoTypeDeclarationImpl.getInstance(type, this) }
-    }
-
-    override val receiverType: KoTypeDeclaration? by lazy {
-        val type = if (isExtension()) {
-            ktFunction
-                .children
-                .filterIsInstance<KtTypeReference>()
-                .first()
-        } else {
-            null
-        }
-
-        type?.let { KoTypeDeclarationImpl.getInstance(type, this) }
-    }
+    private fun getTypeReferences(): List<KtTypeReference> = ktFunction
+        .children
+        .filterIsInstance<KtTypeReference>()
 
     override fun hasOperatorModifier(): Boolean = hasModifiers(KoModifier.OPERATOR)
 
@@ -93,10 +72,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
 
     override fun isExtension(): Boolean = ktFunction.isExtensionDeclaration()
 
-    override fun hasReceiverType(name: String?): Boolean = when (name) {
-        null -> receiverType != null
-        else -> receiverType?.name == name
-    }
+    override fun hasReceiverType(name: String?): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)
 
     override fun hasReturnType(): Boolean = ktFunction.hasDeclaredReturnType()
 
