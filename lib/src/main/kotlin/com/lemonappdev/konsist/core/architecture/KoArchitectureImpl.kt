@@ -3,15 +3,11 @@ package com.lemonappdev.konsist.core.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitecture
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
+class KoArchitectureImpl() : KoArchitecture {
     val dependencies = mutableMapOf<Layer, Set<Layer>>()
     private val statuses = mutableMapOf<Layer, Status>()
 
-    val allLayers = layers.toMutableList()
-        .onEach { layer ->
-            dependencies[layer] = setOf(layer)
-            statuses[layer] = Status.NONE
-        }
+    var allLayers = mutableListOf<Layer>()
 
     override fun addDependencies(dependencies: KoArchitecture.() -> Unit): KoArchitecture {
         dependencies()
@@ -19,38 +15,29 @@ class KoArchitectureImpl(vararg layers: Layer) : KoArchitecture {
     }
 
     override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
-        checkIfLayerIsAddToArchitecture(this, listOf(layer) + layers)
         checkIfLayerIsDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
 
+        allLayers = (allLayers + this + layer + layers).toMutableList()
+
         dependencies[this] = (dependencies.getOrDefault(this, setOf(this))) + layer + layers
         statuses[this] = Status.DEPEND_ON_LAYER
+
+        dependencies[layer] = dependencies.getOrDefault(layer, setOf(layer))
+        statuses[layer] = Status.NONE
+        layers.onEach {
+            dependencies.getOrDefault(it, setOf(it))
+            statuses[it] = Status.NONE
+        }
     }
 
     override fun Layer.dependOnNothing() {
-        checkIfLayerIsAddToArchitecture(this)
         checkStatusOfLayer(true, this)
 
+        allLayers += this
         dependencies[this] = setOf(this)
         statuses[this] = Status.INDEPENDENT
-    }
-
-    private fun checkIfLayerIsAddToArchitecture(layer: Layer, layers: List<Layer>? = null) {
-        layers?.let {
-            if (layers.any { layer -> !allLayers.contains(layer) }) {
-                val notAddedLayers = layers
-                    .filterNot { layer -> allLayers.contains(layer) }
-                    .map { it.name }
-
-                throw KoPreconditionFailedException(
-                    "Layers not added to the architecture:\n${notAddedLayers.joinToString(separator = "\n")}.",
-                )
-            }
-        }
-        if (!allLayers.contains(layer)) {
-            throw KoPreconditionFailedException("Layer ${layer.name} is not added to the architecture.")
-        }
     }
 
     private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg layers: Layer) {

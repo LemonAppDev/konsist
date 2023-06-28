@@ -4,5 +4,5 @@ import com.lemonappdev.konsist.api.architecture.KoArchitecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator
 
 open class KoArchitectureCreatorImpl : KoArchitectureCreator {
-    override fun architecture(layer: Layer, vararg layers: Layer): KoArchitecture = KoArchitectureImpl(layer, *layers)
+    override fun architecture(): KoArchitecture = KoArchitectureImpl()
 }

@@ -17,7 +17,7 @@ class Architecture4Test {
         val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
 
         val koArchitecture = Konsist
-            .architecture(presentation, application, domain, infrastructure)
+            .architecture()
             .addDependencies {
                 presentation.dependsOn(application)
                 application.dependsOn(domain, infrastructure)
@@ -39,7 +39,7 @@ class Architecture4Test {
         val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
 
         val koArchitecture = Konsist
-            .architecture(presentation, application, domain, infrastructure)
+            .architecture()
             .addDependencies {
                 presentation.dependsOn(application, infrastructure)
                 application.dependsOn(infrastructure)

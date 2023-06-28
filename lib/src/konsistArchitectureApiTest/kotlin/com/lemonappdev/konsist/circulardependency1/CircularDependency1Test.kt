@@ -17,7 +17,7 @@ class CircularDependency1Test {
         // when
         val sut = {
             Konsist
-                .architecture(layer1, layer2)
+                .architecture()
                 .addDependencies {
                     layer1.dependsOn(layer2)
                     layer2.dependsOn(layer1)

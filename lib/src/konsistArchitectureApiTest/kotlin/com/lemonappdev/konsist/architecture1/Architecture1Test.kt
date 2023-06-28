@@ -16,7 +16,7 @@ class Architecture1Test {
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
 
         val koArchitecture = Konsist
-            .architecture(domain, presentation)
+            .architecture()
             .addDependencies {
                 domain.dependOnNothing()
                 presentation.dependOnNothing()
@@ -28,48 +28,13 @@ class Architecture1Test {
     }
 
     @Test
-    fun `throws an exception when the layer that the domain layer should depend on is not added to the architecture`() {
-        // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
-
-        val sut = {
-            Konsist
-                .architecture(domain)
-                .addDependencies { domain.dependsOn(presentation) }
-        }
-
-        // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layers not added to the architecture:
-            Presentation.
-        """.trimIndent()
-    }
-
-    @Test
-    fun `throws an exception when the layer on which the dependency is set is not added to architecture`() {
-        // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
-
-        val sut = {
-            Konsist
-                .architecture(presentation)
-                .addDependencies { domain.dependsOn(presentation) }
-        }
-
-        // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Layer Domain is not added to the architecture."
-    }
-
-    @Test
     fun `throws an exception when self dependency is set`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
 
         val sut = {
             Konsist
-                .architecture(domain)
+                .architecture()
                 .addDependencies { domain.dependsOn(domain) }
         }
 
@@ -85,7 +50,7 @@ class Architecture1Test {
 
         val sut = {
             Konsist
-                .architecture(domain, presentation)
+                .architecture()
                 .addDependencies {
                     domain.dependOnNothing()
                     domain.dependsOn(presentation)
@@ -105,7 +70,7 @@ class Architecture1Test {
 
         val sut = {
             Konsist
-                .architecture(domain)
+                .architecture()
                 .addDependencies {
                     domain.dependOnNothing()
                     domain.dependOnNothing()
@@ -124,7 +89,7 @@ class Architecture1Test {
 
         val sut = {
             Konsist
-                .architecture(domain, presentation)
+                .architecture()
                 .addDependencies {
                     domain.dependsOn(presentation)
                     domain.dependOnNothing()
@@ -145,7 +110,7 @@ class Architecture1Test {
 
         val sut = {
             Konsist
-                .architecture(domain, presentation)
+                .architecture()
                 .addDependencies {
                     domain.dependsOn(presentation)
                     domain.dependsOn(presentation)
