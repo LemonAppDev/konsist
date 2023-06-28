@@ -13,20 +13,6 @@ import org.junit.jupiter.api.Test
 
 class KoFileAssertTest {
     @Test
-    fun `assert-test-method-name`() {
-        // given
-        val sut = getSnippetFile("assert-test-method-name")
-            .files()
-
-        // then
-        try {
-            sut.assert { false }
-        } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
-        }
-    }
-
-    @Test
     fun `assert-passes`() {
         // given
         val sut = getSnippetFile("assert-passes")

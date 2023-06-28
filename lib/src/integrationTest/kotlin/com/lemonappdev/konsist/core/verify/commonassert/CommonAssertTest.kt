@@ -23,6 +23,20 @@ class CommonAssertTest {
     }
 
     @Test
+    fun `file-assert-test-method-name`() {
+        // given
+        val sut = getSnippetFile("file-assert-test-method-name")
+            .files()
+
+        // then
+        try {
+            sut.assert { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert 'file-assert-test-method-name' has failed. Invalid files (1)") ?: throw e
+        }
+    }
+
+    @Test
     fun `architecture-assert-test-method-name`() {
         // given
         val scope = getSnippetFile("architecture-assert-test-method-name")
@@ -32,7 +46,7 @@ class CommonAssertTest {
         try {
             assert(architecture, scope)
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'architecture-assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
+            e.message?.shouldContain("Assert 'architecture-assert-test-method-name' has failed. Invalid dependencies (1)") ?: throw e
         }
     }
 
