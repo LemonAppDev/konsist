@@ -1,15 +1,15 @@
-package com.lemonappdev.konsist.core.util.fortaghelper
+package com.lemonappdev.konsist.core.util.fortagutil
 
 import com.lemonappdev.konsist.api.KoKDocTag.RETURN
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
-import com.lemonappdev.konsist.core.util.TagHelper
+import com.lemonappdev.konsist.core.util.TagUtil
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class TagHelperForConstructorTagTest {
+class TagUtilForConstructorTagTest {
     @Test
     fun `hasValidConstructorTag returns true when kDoc has constructor tag`() {
         // given
@@ -19,7 +19,7 @@ class TagHelperForConstructorTagTest {
         val kDoc: KoKDocDeclaration = mockk()
         every { kDoc.constructorTag } returns constructorTag
 
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidConstructorTag(true, kDoc) shouldBeEqualTo true
@@ -29,7 +29,7 @@ class TagHelperForConstructorTagTest {
     fun `hasValidConstructorTag returns false when kDoc is null`() {
         // given
         val kDoc = null
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidConstructorTag(true, kDoc) shouldBeEqualTo false
@@ -43,7 +43,7 @@ class TagHelperForConstructorTagTest {
         }
         val kDoc: KoKDocDeclaration = mockk()
         every { kDoc.constructorTag } returns constructorTag
-        val sut = TagHelper
+        val sut = TagUtil
 
         // then
         sut.hasValidConstructorTag(false, kDoc) shouldBeEqualTo true
