@@ -26,13 +26,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
     try {
         val localList = this.toList()
 
-        if (localList.isEmpty()) {
-            val checkMethodName = getTestMethodNameFromFourthIndex()
-            throw KoPreconditionFailedException(
-                "Declaration list is empty. Please make sure that list of declarations contain items " +
-                    "before calling the '$checkMethodName' method.",
-            )
-        }
+        checkIfLocalListIsEmpty(localList, "Declaration", getTestMethodNameFromFourthIndex())
 
         val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(localList)
 
@@ -41,29 +35,13 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
             function(it)
         }
 
-        val allChecksPassed = (result[positiveCheck]?.size ?: 0) == notSuppressedDeclarations.size
+        getResult(notSuppressedDeclarations, result, positiveCheck, getTestMethodNameFromFifthIndex())
 
-        if (!allChecksPassed) {
-            val failedDeclarations = result[!positiveCheck] ?: emptyList()
-            throw KoCheckFailedException(getCheckFailedMessage(failedDeclarations))
-        }
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
         throw KoInternalException(e.message.orEmpty(), e, lastDeclaration)
     }
-}
-
-private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: List<E>): String {
-    val failedDeclarationsMessage = failedDeclarations.joinToString("\n") {
-        val name = if (it is KoNamedDeclaration) it.name else ""
-        val konsistDeclarationClassNamePrefix = "Ko"
-        val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
-
-        "${it.location} ($name $declarationType)"
-    }
-
-    return "Assert '${getTestMethodNameFromSixthIndex()}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }
 
 private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {

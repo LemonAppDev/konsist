@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.core.container.KoFileImpl
-import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
@@ -22,13 +21,7 @@ private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveC
     try {
         val localList = this.toList()
 
-        if (localList.isEmpty()) {
-            val checkMethodName = getTestMethodNameFromFourthIndex()
-            throw KoPreconditionFailedException(
-                "File list is empty. Please make sure that list of files contain items " +
-                        "before calling the '$checkMethodName' method.",
-            )
-        }
+        checkIfLocalListIsEmpty(localList, "File", getTestMethodNameFromFourthIndex())
 
         val notSuppressedFiles = localList
             .filterNot { checkIfSuppressed(it, getTestMethodNameFromFifthIndex()) }
@@ -38,29 +31,13 @@ private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveC
             function(it)
         }
 
-        val allChecksPassed = (result[positiveCheck]?.size ?: 0) == notSuppressedFiles.size
+        getResult(notSuppressedFiles, result, positiveCheck, getTestMethodNameFromFifthIndex())
 
-        if (!allChecksPassed) {
-            val failedDeclarations = result[!positiveCheck] ?: emptyList()
-            throw KoCheckFailedException(getCheckFailedMessage(failedDeclarations))
-        }
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
         throw KoInternalException(e.message.orEmpty(), e, lastFile)
     }
-}
-
-private fun <E : KoFile> getCheckFailedMessage(failedDeclarations: List<E>): String {
-    val failedDeclarationsMessage = failedDeclarations.joinToString("\n") {
-        val name = it.name
-        val konsistDeclarationClassNamePrefix = "Ko"
-        val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
-
-        "${it.path} ($name $declarationType)"
-    }
-
-    return "Assert '${getTestMethodNameFromSixthIndex()}' has failed. Invalid files (${failedDeclarations.size}):\n$failedDeclarationsMessage"
 }
 
 private fun checkIfSuppressed(file: KoFile, testMethodName: String): Boolean {
