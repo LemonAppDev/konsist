@@ -103,8 +103,13 @@ class KoFileAssertTest {
     @Test
     fun `assert-suppress-by-konsist-and-name`() {
         // given
-        val sut = Konsist
-            .scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kofileassert/snippet/suppresspackage/withkonsist")
+        val scope1 = Konsist
+            .scopeFromFile("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kofileassert/snippet/suppresspackage/withkonsist/assert-suppress-by-konsist-and-name.kttxt")
+
+        val scope2 = Konsist
+            .scopeFromFile("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kofileassert/snippet/suppresspackage/withkonsist/file-without-suppress.kttxt")
+
+        val sut = (scope1 + scope2)
             .files()
 
         // then
@@ -114,8 +119,13 @@ class KoFileAssertTest {
     @Test
     fun `assert-suppress-by-name`() {
         // given
-        val sut = Konsist
-            .scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kofileassert/snippet/suppresspackage/withoutkonsist")
+        val scope1 = Konsist
+            .scopeFromFile("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kofileassert/snippet/suppresspackage/withoutkonsist/assert-suppress-by-name.kttxt")
+
+        val scope2 = Konsist
+            .scopeFromFile("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/kofileassert/snippet/suppresspackage/withoutkonsist/file-without-suppress.kttxt")
+
+        val sut = (scope1 + scope2)
             .files()
 
         // then

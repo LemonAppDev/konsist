@@ -1,5 +1,3 @@
 @file:Suppress("konsist.assert-suppress-by-konsist-and-name")
 
-class SampleClassWithIncorrectSuffix {
-    fun sampleFunctionWithIncorrectSuffix(){}
-}
+class SampleClass

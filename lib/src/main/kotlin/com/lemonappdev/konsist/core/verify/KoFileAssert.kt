@@ -31,7 +31,7 @@ private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveC
         }
 
         val notSuppressedFiles = localList
-            .filterNot { checkIfSuppressed(it, getTestMethodNameFromSixthIndex()) }
+            .filterNot { checkIfSuppressed(it, getTestMethodNameFromFifthIndex()) }
 
         val result = notSuppressedFiles.groupBy {
             lastFile = it

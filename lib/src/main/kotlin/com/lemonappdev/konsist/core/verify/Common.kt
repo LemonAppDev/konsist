@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.verify
 
 private const val atFourthIndex = 4
+private const val atFifthIndex = 5
 private const val atSixthIndex = 6
 private const val atEightIndex = 8
 
@@ -8,6 +9,11 @@ private const val atEightIndex = 8
  * In this call stack hierarchy test name is at index 4.
  */
 internal fun getTestMethodNameFromFourthIndex() = getTestMethodName(atFourthIndex)
+
+/**
+ * In this call stack hierarchy test name is at index 5.
+ */
+internal fun getTestMethodNameFromFifthIndex() = getTestMethodName(atFifthIndex)
 
 /**
  * In this call stack hierarchy test name is at index 6.
