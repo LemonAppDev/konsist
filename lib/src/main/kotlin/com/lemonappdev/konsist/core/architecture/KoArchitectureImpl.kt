@@ -9,11 +9,6 @@ class KoArchitectureImpl : KoArchitecture {
 
     var allLayers = mutableListOf<Layer>()
 
-    override fun addDependencies(dependencies: KoArchitecture.() -> Unit): KoArchitecture {
-        dependencies()
-        return this
-    }
-
     override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
         checkIfLayerIsDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)

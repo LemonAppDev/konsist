@@ -34,7 +34,6 @@ class Architecture2Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
-
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
 
         val koArchitecture = scope

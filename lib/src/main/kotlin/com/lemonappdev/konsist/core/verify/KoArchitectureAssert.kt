@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.verify
 
-import com.lemonappdev.konsist.api.architecture.KoArchitecture
-import com.lemonappdev.konsist.api.container.koscope.KoScope
+import com.lemonappdev.konsist.api.architecture.ArchitectureScope
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
+import com.lemonappdev.konsist.core.architecture.ArchitectureScopeImpl
 import com.lemonappdev.konsist.core.architecture.KoArchitectureImpl
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
@@ -11,10 +11,10 @@ import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 @Suppress("detekt.ThrowsCount")
-fun Pair<KoArchitecture, KoScope>.assert() {
+fun ArchitectureScope.assert() {
     try {
-        val files = this.second.files()
-        val architecture = this.first as KoArchitectureImpl
+        val files = (this as ArchitectureScopeImpl).koScope.files()
+        val architecture= this.koArchitecture as KoArchitectureImpl
 
         val isAllLayersValid = architecture.allLayers
             .all {

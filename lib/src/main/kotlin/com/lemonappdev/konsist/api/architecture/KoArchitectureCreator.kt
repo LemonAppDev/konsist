@@ -13,7 +13,7 @@ interface KoArchitectureCreator {
      *
      * @param dependencies The function literal with receiver [KoArchitecture] that allows configuring the dependencies
      *                     of the architecture.
-     * @return A [Pair] containing the configured [KoArchitecture] instance and the associated [KoScope] object.
+     * @return A [ArchitectureScope] containing the configured [KoArchitecture] instance and the associated [KoScope] object.
      */
-    fun architecture(dependencies: KoArchitecture.() -> Unit): Pair<KoArchitecture, KoScope>
+    fun architecture(dependencies: KoArchitecture.() -> Unit): ArchitectureScope
 }

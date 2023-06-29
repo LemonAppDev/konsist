@@ -7,14 +7,6 @@ import com.lemonappdev.konsist.core.architecture.Layer
  */
 interface KoArchitecture {
     /**
-     * Adds dependencies to the architecture.
-     *
-     * @param dependencies A lambda function that represents the dependencies to be added.
-     * @return The updated `KoArchitecture` instance.
-     */
-    fun addDependencies(dependencies: KoArchitecture.() -> Unit): KoArchitecture
-
-    /**
      * Adds dependencies between the current layer and the specified layers.
      *
      * @receiver The [Layer] that depends on other layers.
