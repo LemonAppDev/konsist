@@ -4,10 +4,10 @@ import com.lemonappdev.konsist.api.architecture.Dependency
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 class DependencyImpl : Dependency {
-    val dependencies = mutableMapOf<Layer, Set<Layer>>()
+    internal val dependencies = mutableMapOf<Layer, Set<Layer>>()
     private val statuses = mutableMapOf<Layer, Status>()
 
-    var allLayers = mutableListOf<Layer>()
+    internal var allLayers = mutableListOf<Layer>()
 
     override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
         checkIfLayerIsDependentOnItself(this, layer, *layers)
