@@ -11,11 +11,13 @@ interface KoArchitectureCreator {
     /**
      * Defines an architecture using the specified dependencies.
      *
-     * @param dependencies The function literal with receiver [KoArchitecture] that allows configuring the dependencies
+     * @param dependencies The function literal with receiver [Dependency] that allows configuring the dependencies
      *                     of the architecture.
-     * @return A [ArchitectureScope] containing the configured [KoArchitecture] instance and the associated [KoScope] object.
+     * @return A [ArchitectureScope] containing the configured [Dependency] instance and the associated [KoScope] object.
      */
-    fun KoScope.assertArchitecture(dependencies: KoArchitecture.() -> Unit)
+    fun KoScope.assertArchitecture(dependencies: Dependency.() -> Unit)
 
-    fun KoScope.assertArchitecture(koArchitecture: KoArchitecture)
+    fun KoScope.assertArchitecture(dependencies: Dependency)
+
+    fun architecture(dependencies: Dependency.() -> Unit): Dependency
 }

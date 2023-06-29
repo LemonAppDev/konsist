@@ -1,12 +1,11 @@
 package com.lemonappdev.konsist.core.verify.koarchitectureassert
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.Architecture.assertArchitecture
+import com.lemonappdev.konsist.api.architecture.KoArchitecture.assertArchitecture
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
-import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test

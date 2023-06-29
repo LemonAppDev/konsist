@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.architecture1
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.Architecture.architecture
-import com.lemonappdev.konsist.api.architecture.Architecture.assertArchitecture
+import com.lemonappdev.konsist.api.architecture.KoArchitecture.architecture
+import com.lemonappdev.konsist.api.architecture.KoArchitecture.assertArchitecture
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
-import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
@@ -27,7 +26,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `passes when dependency is set that layers are independent2`() {
+    fun `passes when dependency is set that layers are independent when architecture is passed as parameter`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")

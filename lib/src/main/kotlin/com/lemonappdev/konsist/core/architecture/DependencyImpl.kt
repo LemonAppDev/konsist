@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.architecture
 
-import com.lemonappdev.konsist.api.architecture.KoArchitecture
+import com.lemonappdev.konsist.api.architecture.Dependency
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-class KoArchitectureImpl : KoArchitecture {
+class DependencyImpl : Dependency {
     val dependencies = mutableMapOf<Layer, Set<Layer>>()
     private val statuses = mutableMapOf<Layer, Status>()
 
