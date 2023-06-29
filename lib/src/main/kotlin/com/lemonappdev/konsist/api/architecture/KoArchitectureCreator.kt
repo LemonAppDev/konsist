@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.container.koscope.KoScope
 /**
  * Architecture creator.
  *
- * Creates a [KoArchitecture] instance from the given set of layers.
+ * Creates a [ArchitectureScope] instance from the given dependencies.
  */
 interface KoArchitectureCreator {
     /**
