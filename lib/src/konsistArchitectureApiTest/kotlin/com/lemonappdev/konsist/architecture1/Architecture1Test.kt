@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.architecture1
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.architecture.Architecture
 import com.lemonappdev.konsist.api.architecture.Architecture.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator
@@ -29,22 +30,22 @@ class Architecture1Test {
         // then
         koArchitecture.assert()
     }
-//
-//    @Test
-//    fun `passes when dependency is set that layers are independent2`() {
-//        // given
-//        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
-//        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
-//        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture1/project")
-//
-//        val koArchitecture = KoArchitectureImpl().addDependencies {
-//            domain.dependsOnNothing()
-//            presentation.dependsOnNothing()
-//        }
-//
-//        // then
-//        scope.architecture(KoArchitectureImpl()).assert()
-//    }
+
+    @Test
+    fun `passes when dependency is set that layers are independent2`() {
+        // given
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
+        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
+        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture1/project")
+
+        val koArchitecture = architecture {
+            domain.dependsOnNothing()
+            presentation.dependsOnNothing()
+        }
+
+        // then
+        scope.architecture(koArchitecture).assert()
+    }
 
     @Test
     fun `throws an exception when self dependency is set`() {
