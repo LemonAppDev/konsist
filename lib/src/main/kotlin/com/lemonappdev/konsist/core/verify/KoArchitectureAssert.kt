@@ -13,35 +13,39 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 internal fun KoArchitectureScope.assert() {
     try {
         val files = this.koScope.files()
-        val architecture = this.koArchitecture as DependencyRulesImpl
+        val dependencyRules = this.dependencyRules as DependencyRulesImpl
 
-        val isAllLayersValid = architecture.allLayers
+        if(dependencyRules.allLayers.isEmpty()) {
+            throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")
+        }
+
+        val isAllLayersValid = dependencyRules.allLayers
             .all {
                 files
-                    .withPackage((it).definedBy)
+                    .withPackage(it.definedBy)
                     .toList()
                     .isNotEmpty()
             }
 
         if (!isAllLayersValid) {
-            val layer = architecture
+            val layer = dependencyRules
                 .allLayers
                 .first {
                     files
-                        .withPackage((it).definedBy)
+                        .withPackage(it.definedBy)
                         .toList()
                         .isEmpty()
                 }
             throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
         }
 
-        val layerHasValidArchitecture = architecture
+        val layerHasValidArchitecture = dependencyRules
             .dependencies
             .map { (t, u) ->
-                val otherLayers = (architecture.allLayers - u).map { (it).definedBy }
+                val otherLayers = (dependencyRules.allLayers - u).map { it.definedBy }
 
                 files
-                    .withPackage((t).definedBy)
+                    .withPackage(t.definedBy)
                     .filter { otherLayers.any { name -> it.hasImports(name) } }
                     .map { it.path }
                     .joinToString("\n")
@@ -49,7 +53,7 @@ internal fun KoArchitectureScope.assert() {
 
         val result = mutableMapOf<Layer, String>()
 
-        architecture
+        dependencyRules
             .dependencies
             .keys
             .forEachIndexed { index, layer -> result[layer] = layerHasValidArchitecture[index] }

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test
 
 class Architecture5Test {
     @Test
-    fun `throws exception when layer contain no files`() {
+    fun `throws exception when layer contains no files`() {
         // given
         val layer = Layer("EmptyLayer", "com/lemonappdev/konsist/assertarchitecture/architecture5/project/emptylayer..")
         val scope =
@@ -23,5 +23,37 @@ class Architecture5Test {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage "Layer EmptyLayer doesn't contain any files."
+    }
+
+    @Test
+    fun `throws exception when architecture contains no layers`() {
+        // given
+        val scope =
+            Konsist.scopeFromPackage("com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project")
+
+        // when
+        val func = {
+            scope.assertArchitecture { }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain any layers or dependencies."
+    }
+
+    @Test
+    fun `throws exception when architecture contains no dependencies`() {
+        // given
+        val layer = Layer("EmptyLayer", "com/lemonappdev/konsist/assertarchitecture/architecture5/project/emptylayer..")
+
+        val scope =
+            Konsist.scopeFromPackage("com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project")
+
+        // when
+        val func = {
+            scope.assertArchitecture { layer  }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
     }
 }
