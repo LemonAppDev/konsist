@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
-import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
 import com.lemonappdev.konsist.core.architecture.DependencyImpl
+import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException

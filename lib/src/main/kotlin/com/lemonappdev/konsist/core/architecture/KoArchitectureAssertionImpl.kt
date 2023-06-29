@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureAssertion
 import com.lemonappdev.konsist.api.container.koscope.KoScope
 import com.lemonappdev.konsist.core.verify.assert
 
-class KoArchitectureAssertionImpl: KoArchitectureAssertion {
+class KoArchitectureAssertionImpl : KoArchitectureAssertion {
     override fun KoScope.assertArchitecture(dependencies: Dependency.() -> Unit) {
         val architecture = DependencyImpl()
         dependencies(architecture)

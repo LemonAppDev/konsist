@@ -28,9 +28,9 @@ class DependencyTest {
 
         val sut = {
             architecture {
-                    domain.dependsOnNothing()
-                    domain.dependsOn(presentation)
-                }
+                domain.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
         }
 
         // then
@@ -46,9 +46,9 @@ class DependencyTest {
 
         val sut = {
             architecture {
-                    domain.dependsOnNothing()
-                    domain.dependsOnNothing()
-                }
+                domain.dependsOnNothing()
+                domain.dependsOnNothing()
+            }
         }
 
         // then
@@ -65,9 +65,9 @@ class DependencyTest {
 
         val sut = {
             architecture {
-                    domain.dependsOn(presentation)
-                    domain.dependsOnNothing()
-                }
+                domain.dependsOn(presentation)
+                domain.dependsOnNothing()
+            }
         }
 
         // then
@@ -84,9 +84,9 @@ class DependencyTest {
 
         val sut = {
             architecture {
-                    domain.dependsOn(presentation)
-                    domain.dependsOn(presentation)
-                }
+                domain.dependsOn(presentation)
+                domain.dependsOn(presentation)
+            }
         }
 
         // then

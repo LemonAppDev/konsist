@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.architecture.KoArchitecture.assertArchitectur
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class Architecture3Test {
@@ -16,7 +15,9 @@ class Architecture3Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture3.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture3.project.presentation..")
         val data = Layer("Data", "com.lemonappdev.konsist.architecture3.project.data..")
-        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture3/project")
+        val scope = Konsist.scopeFromDirectory(
+            "lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture3/project",
+        )
 
         // then
         scope
@@ -28,12 +29,14 @@ class Architecture3Test {
     }
 
     @Test
-    fun `passes when dependency is set that presentation and data layers are depend on domain layer and architecture is passed as parameter`() {
+    fun `passes when dependency is set correctly and architecture is passed as parameter`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture3.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture3.project.presentation..")
         val data = Layer("Data", "com.lemonappdev.konsist.architecture3.project.data..")
-        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture3/project")
+        val scope = Konsist.scopeFromDirectory(
+            "lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture3/project",
+        )
 
         val architecture = architecture {
             domain.dependsOnNothing()
@@ -50,7 +53,9 @@ class Architecture3Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture3.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture3.project.presentation..")
         val data = Layer("Data", "com.lemonappdev.konsist.architecture3.project.data..")
-        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture3/project")
+        val scope = Konsist.scopeFromDirectory(
+            "lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture3/project",
+        )
 
         val sut = {
             scope
@@ -71,7 +76,9 @@ class Architecture3Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture3.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture3.project.presentation..")
         val data = Layer("Data", "com.lemonappdev.konsist.architecture3.project.data..")
-        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture3/project")
+        val scope = Konsist.scopeFromDirectory(
+            "lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture3/project",
+        )
 
         val architecture = architecture {
             data.dependsOnNothing()

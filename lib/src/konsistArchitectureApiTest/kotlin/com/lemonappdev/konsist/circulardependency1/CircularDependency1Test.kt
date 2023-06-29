@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.circulardependency1
 
-import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitecture.architecture
-import com.lemonappdev.konsist.api.architecture.KoArchitecture.assertArchitecture
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldThrow

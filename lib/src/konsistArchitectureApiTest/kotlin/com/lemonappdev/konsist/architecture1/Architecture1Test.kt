@@ -4,9 +4,6 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitecture.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitecture.assertArchitecture
 import com.lemonappdev.konsist.core.architecture.Layer
-import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class Architecture1Test {
