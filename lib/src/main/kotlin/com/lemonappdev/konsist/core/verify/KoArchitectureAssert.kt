@@ -18,7 +18,7 @@ internal fun KoArchitectureScope.assert() {
         val isAllLayersValid = architecture.allLayers
             .all {
                 files
-                    .withPackage(it.definedBy)
+                    .withPackage((it as LayerImpl).definedBy)
                     .toList()
                     .isNotEmpty()
             }
@@ -28,20 +28,20 @@ internal fun KoArchitectureScope.assert() {
                 .allLayers
                 .first {
                     files
-                        .withPackage(it.definedBy)
+                        .withPackage((it as LayerImpl).definedBy)
                         .toList()
                         .isEmpty()
-                }
+                } as LayerImpl
             throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
         }
 
         val layerHasValidArchitecture = architecture
             .dependencies
             .map { (t, u) ->
-                val otherLayers = (architecture.allLayers - u).map { it.definedBy }
+                val otherLayers = (architecture.allLayers - u).map { (it as LayerImpl).definedBy }
 
                 files
-                    .withPackage(t.definedBy)
+                    .withPackage((t as LayerImpl).definedBy)
                     .filter { otherLayers.any { name -> it.hasImports(name) } }
                     .map { it.path }
                     .joinToString("\n")
@@ -52,7 +52,7 @@ internal fun KoArchitectureScope.assert() {
         architecture
             .dependencies
             .keys
-            .forEachIndexed { index, layer -> result[layer] = layerHasValidArchitecture[index] }
+            .forEachIndexed { index, layer -> result[layer as LayerImpl] = layerHasValidArchitecture[index] }
 
         val failedLayers = mutableListOf<LayerImpl>()
 

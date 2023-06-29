@@ -1,15 +1,16 @@
 package com.lemonappdev.konsist.core.architecture
 
 import com.lemonappdev.konsist.api.architecture.DependencyRules
+import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 class DependencyRulesImpl : DependencyRules {
-    internal val dependencies = mutableMapOf<LayerImpl, Set<LayerImpl>>()
-    private val statuses = mutableMapOf<LayerImpl, Status>()
+    internal val dependencies = mutableMapOf<Layer, Set<Layer>>()
+    private val statuses = mutableMapOf<Layer, Status>()
 
-    internal var allLayers = mutableListOf<LayerImpl>()
+    internal var allLayers = mutableListOf<Layer>()
 
-    override fun LayerImpl.dependsOn(layer: LayerImpl, vararg layers: LayerImpl) {
+    override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
         checkIfLayerIsDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
@@ -27,7 +28,7 @@ class DependencyRulesImpl : DependencyRules {
         }
     }
 
-    override fun LayerImpl.dependsOnNothing() {
+    override fun Layer.dependsOnNothing() {
         checkStatusOfLayer(true, this)
 
         allLayers += this
@@ -35,39 +36,41 @@ class DependencyRulesImpl : DependencyRules {
         statuses[this] = Status.INDEPENDENT
     }
 
-    private fun checkIfLayerIsDependentOnItself(layer: LayerImpl, vararg layers: LayerImpl) {
+    private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg layers: Layer) {
         if (layers.any { it == layer }) {
-            throw KoPreconditionFailedException("Layer ${layer.name} cannot be dependent on itself.")
+            throw KoPreconditionFailedException("Layer ${(layer as LayerImpl).name} cannot be dependent on itself.")
         }
     }
 
     @Suppress("detekt.ThrowsCount")
-    private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: LayerImpl, vararg layers: LayerImpl) {
+    private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: Layer, vararg layers: Layer) {
+        val layerName = (layer as LayerImpl).name
         if (statuses[layer] == Status.INDEPENDENT) {
             if (toBeIndependent) {
-                throw KoPreconditionFailedException("Duplicated the dependency that ${layer.name} layer should be depend on nothing.")
+                throw KoPreconditionFailedException("Duplicated the dependency that $layerName layer should be depend on nothing.")
             } else {
                 throw KoPreconditionFailedException(
-                    "Layer ${layer.name} was previously set as depend on nothing, so it cannot be depend on ${layers.first().name} layer.",
+                    "Layer $layerName was previously set as depend on nothing, " +
+                        "so it cannot be depend on ${(layers.first() as LayerImpl).name} layer.",
                 )
             }
         } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {
             val dependency = dependencies.getOrDefault(layer, emptySet())
 
             if (toBeIndependent) {
-                val alreadySetLayer = dependency.first { it != layer }
+                val alreadySetLayer = dependency.first { it != layer } as LayerImpl
                 throw KoPreconditionFailedException(
-                    "Layer ${layer.name} had a dependency previously set with ${alreadySetLayer.name} layer, " +
+                    "Layer $layerName had a dependency previously set with ${alreadySetLayer.name} layer, " +
                         "so it cannot be depend on nothing.",
                 )
             } else if (layers.any { dependency.contains(it) }) {
-                val alreadySetLayer = layers.first { dependency.contains(it) }
-                throw KoPreconditionFailedException("Duplicated the dependency between ${layer.name} and ${alreadySetLayer.name} layers.")
+                val alreadySetLayer = layers.first { dependency.contains(it) } as LayerImpl
+                throw KoPreconditionFailedException("Duplicated the dependency between $layerName and ${alreadySetLayer.name} layers.")
             }
         }
     }
 
-    private fun checkCircularDependencies(layer: LayerImpl, vararg layers: LayerImpl) {
+    private fun checkCircularDependencies(layer: Layer, vararg layers: Layer) {
         val allLayers = layers.map {
             checkCircularDependenciesHelper(layer, it, emptyList(), emptyList())
         }
@@ -75,24 +78,25 @@ class DependencyRulesImpl : DependencyRules {
         val notEmpty = allLayers.firstOrNull { it.isNotEmpty() }
 
         if (notEmpty != null) {
+            val layerName = (layer as LayerImpl).name
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
                     notEmpty.filterNot { it == null }
                         .joinToString(
-                            prefix = "Layer ${layer.name} -->\n",
-                            postfix = "Layer ${layer.name}.",
+                            prefix = "Layer $layerName -->\n",
+                            postfix = "Layer $layerName.",
                             separator = "",
-                        ) { "Layer ${it?.name} -->\n" },
+                        ) { "Layer ${(it as LayerImpl).name} -->\n" },
             )
         }
     }
 
     private fun checkCircularDependenciesHelper(
-        nodeLayer: LayerImpl,
-        layerToCheck: LayerImpl,
-        alreadyChecked: List<LayerImpl>,
-        potentialCircular: List<LayerImpl>,
-    ): List<LayerImpl?> {
+        nodeLayer: Layer,
+        layerToCheck: Layer,
+        alreadyChecked: List<Layer>,
+        potentialCircular: List<Layer>,
+    ): List<Layer?> {
         val layerToCheckDependencies = dependencies.getOrDefault(layerToCheck, emptySet()) - layerToCheck
 
         if (layerToCheckDependencies.isEmpty()) {
