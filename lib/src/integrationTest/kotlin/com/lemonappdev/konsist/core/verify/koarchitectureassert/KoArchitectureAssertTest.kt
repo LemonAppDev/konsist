@@ -37,9 +37,9 @@ class KoArchitectureAssertTest {
             Konsist.scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koarchitectureassert/project")
 
         val architecture = scope.architecture {
-                layer1.dependsOn(layer3)
-                layer2.dependsOnNothing()
-            }
+            layer1.dependsOn(layer3)
+            layer2.dependsOnNothing()
+        }
 
         // when
         val func = {

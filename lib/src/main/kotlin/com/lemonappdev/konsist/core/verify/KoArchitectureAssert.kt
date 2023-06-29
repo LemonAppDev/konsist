@@ -14,7 +14,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 fun ArchitectureScope.assert() {
     try {
         val files = (this as ArchitectureScopeImpl).koScope.files()
-        val architecture= this.koArchitecture as KoArchitectureImpl
+        val architecture = this.koArchitecture as KoArchitectureImpl
 
         val isAllLayersValid = architecture.allLayers
             .all {
