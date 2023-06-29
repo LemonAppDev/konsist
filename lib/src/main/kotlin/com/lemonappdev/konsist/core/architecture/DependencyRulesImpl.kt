@@ -1,15 +1,15 @@
 package com.lemonappdev.konsist.core.architecture
 
-import com.lemonappdev.konsist.api.architecture.Dependency
+import com.lemonappdev.konsist.api.architecture.DependencyRules
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-class DependencyImpl : Dependency {
-    internal val dependencies = mutableMapOf<Layer, Set<Layer>>()
-    private val statuses = mutableMapOf<Layer, Status>()
+class DependencyRulesImpl : DependencyRules {
+    internal val dependencies = mutableMapOf<LayerImpl, Set<LayerImpl>>()
+    private val statuses = mutableMapOf<LayerImpl, Status>()
 
-    internal var allLayers = mutableListOf<Layer>()
+    internal var allLayers = mutableListOf<LayerImpl>()
 
-    override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
+    override fun LayerImpl.dependsOn(layer: LayerImpl, vararg layers: LayerImpl) {
         checkIfLayerIsDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
@@ -27,7 +27,7 @@ class DependencyImpl : Dependency {
         }
     }
 
-    override fun Layer.dependsOnNothing() {
+    override fun LayerImpl.dependsOnNothing() {
         checkStatusOfLayer(true, this)
 
         allLayers += this
@@ -35,14 +35,14 @@ class DependencyImpl : Dependency {
         statuses[this] = Status.INDEPENDENT
     }
 
-    private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg layers: Layer) {
+    private fun checkIfLayerIsDependentOnItself(layer: LayerImpl, vararg layers: LayerImpl) {
         if (layers.any { it == layer }) {
             throw KoPreconditionFailedException("Layer ${layer.name} cannot be dependent on itself.")
         }
     }
 
     @Suppress("detekt.ThrowsCount")
-    private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: Layer, vararg layers: Layer) {
+    private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: LayerImpl, vararg layers: LayerImpl) {
         if (statuses[layer] == Status.INDEPENDENT) {
             if (toBeIndependent) {
                 throw KoPreconditionFailedException("Duplicated the dependency that ${layer.name} layer should be depend on nothing.")
@@ -67,7 +67,7 @@ class DependencyImpl : Dependency {
         }
     }
 
-    private fun checkCircularDependencies(layer: Layer, vararg layers: Layer) {
+    private fun checkCircularDependencies(layer: LayerImpl, vararg layers: LayerImpl) {
         val allLayers = layers.map {
             checkCircularDependenciesHelper(layer, it, emptyList(), emptyList())
         }
@@ -88,11 +88,11 @@ class DependencyImpl : Dependency {
     }
 
     private fun checkCircularDependenciesHelper(
-        nodeLayer: Layer,
-        layerToCheck: Layer,
-        alreadyChecked: List<Layer>,
-        potentialCircular: List<Layer>,
-    ): List<Layer?> {
+        nodeLayer: LayerImpl,
+        layerToCheck: LayerImpl,
+        alreadyChecked: List<LayerImpl>,
+        potentialCircular: List<LayerImpl>,
+    ): List<LayerImpl?> {
         val layerToCheckDependencies = dependencies.getOrDefault(layerToCheck, emptySet()) - layerToCheck
 
         if (layerToCheckDependencies.isEmpty()) {

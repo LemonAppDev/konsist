@@ -9,7 +9,7 @@ class LayerTest {
     @Test
     fun `throws an exception when layer is defined by package without two dots at the end`() {
         // given
-        val sut = { Layer("Layer", "package") }
+        val sut = { LayerImpl("Layer", "package") }
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """

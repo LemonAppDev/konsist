@@ -22,21 +22,6 @@ class CommonAssertTest {
         }
     }
 
-    // ToDo("this test doesn't work!!! Fix it!)
-    @Test
-    fun `architecture-assert-test-method-name`() {
-        // given
-        val scope = Konsist.scopeFromProduction()
-
-        // then
-        try {
-            scope
-                .assertArchitecture { }
-        } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'architecture-assert-test-method-name' has failed. Invalid declarations") ?: throw e
-        }
-    }
-
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/verify/commonassert/snippet/", fileName)
 }

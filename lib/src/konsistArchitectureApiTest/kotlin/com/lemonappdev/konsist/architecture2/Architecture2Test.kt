@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.architecture2
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitecture.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitecture.assertArchitecture
-import com.lemonappdev.konsist.core.architecture.Layer
+import com.lemonappdev.konsist.core.architecture.LayerImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import org.amshove.kluent.shouldThrow
@@ -16,8 +16,8 @@ class Architecture2Test {
     @Test
     fun `passes when dependency is set that presentation layer is depend on domain layer`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
+        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
+        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
 
         // then
@@ -31,8 +31,8 @@ class Architecture2Test {
     @Test
     fun `passes when dependency is set that presentation layer is depend on domain layer and architecture is passed as parameter`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
+        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
+        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
 
         val architecture = architecture {
@@ -47,8 +47,8 @@ class Architecture2Test {
     @Test
     fun `fails when dependency is set that domain layer is depend on presentation layer`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
+        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
+        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
 
         val sut = {
@@ -70,8 +70,8 @@ class Architecture2Test {
     @Test
     fun `fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
+        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
+        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
 
         val architecture = architecture {

@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
-import com.lemonappdev.konsist.core.architecture.DependencyImpl
+import com.lemonappdev.konsist.core.architecture.DependencyRulesImpl
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
-import com.lemonappdev.konsist.core.architecture.Layer
+import com.lemonappdev.konsist.core.architecture.LayerImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -13,7 +13,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 internal fun KoArchitectureScope.assert() {
     try {
         val files = this.koScope.files()
-        val architecture = this.koArchitecture as DependencyImpl
+        val architecture = this.koArchitecture as DependencyRulesImpl
 
         val isAllLayersValid = architecture.allLayers
             .all {
@@ -47,14 +47,14 @@ internal fun KoArchitectureScope.assert() {
                     .joinToString("\n")
             }
 
-        val result = mutableMapOf<Layer, String>()
+        val result = mutableMapOf<LayerImpl, String>()
 
         architecture
             .dependencies
             .keys
             .forEachIndexed { index, layer -> result[layer] = layerHasValidArchitecture[index] }
 
-        val failedLayers = mutableListOf<Layer>()
+        val failedLayers = mutableListOf<LayerImpl>()
 
         result.forEach { (t, u) ->
             if (u.toList().isNotEmpty()) {
@@ -76,7 +76,7 @@ internal fun KoArchitectureScope.assert() {
     }
 }
 
-private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): String {
+private fun getCheckFailedMessages(failedDeclarations: Map<LayerImpl, String>): String {
     val failedDeclarationsMessage = failedDeclarations.keys.mapIndexed { index, layer ->
         "Layer: ${layer.name}. Invalid files:\n${failedDeclarations.values.toList()[index]}"
     }.joinToString("\n")

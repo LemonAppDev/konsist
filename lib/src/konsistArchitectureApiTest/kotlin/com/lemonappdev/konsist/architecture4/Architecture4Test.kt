@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.architecture4
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitecture.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitecture.assertArchitecture
-import com.lemonappdev.konsist.core.architecture.Layer
+import com.lemonappdev.konsist.core.architecture.LayerImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
@@ -12,10 +12,10 @@ class Architecture4Test {
     @Test
     fun `passes when good dependency is set`() {
         // given
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")
-        val application = Layer("Application", "com.lemonappdev.konsist.architecture4.project.application..")
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
-        val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
+        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")
+        val application = LayerImpl("Application", "com.lemonappdev.konsist.architecture4.project.application..")
+        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
+        val infrastructure = LayerImpl("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
 
         // then
@@ -31,10 +31,10 @@ class Architecture4Test {
     @Test
     fun `passes when good dependency is set and architecture is passed as parameter`() {
         // given
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")
-        val application = Layer("Application", "com.lemonappdev.konsist.architecture4.project.application..")
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
-        val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
+        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")
+        val application = LayerImpl("Application", "com.lemonappdev.konsist.architecture4.project.application..")
+        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
+        val infrastructure = LayerImpl("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
 
         val architecture = architecture {
@@ -52,10 +52,10 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set`() {
         // given
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")
-        val application = Layer("Application", "com.lemonappdev.konsist.architecture4.project.application..")
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
-        val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
+        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")
+        val application = LayerImpl("Application", "com.lemonappdev.konsist.architecture4.project.application..")
+        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
+        val infrastructure = LayerImpl("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
 
         val sut = {
@@ -75,10 +75,10 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set and architecture is passed as parameter`() {
         // given
-        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")
-        val application = Layer("Application", "com.lemonappdev.konsist.architecture4.project.application..")
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
-        val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
+        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture4.project.presentation..")
+        val application = LayerImpl("Application", "com.lemonappdev.konsist.architecture4.project.application..")
+        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
+        val infrastructure = LayerImpl("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
 
         val architecture = architecture {
