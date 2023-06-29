@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.core.verify.commonassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.KoArchitecture.assertArchitecture
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldContain
 import org.junit.jupiter.api.Test

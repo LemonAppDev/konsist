@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.architecture3
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.KoArchitecture.architecture
-import com.lemonappdev.konsist.api.architecture.KoArchitecture.assertArchitecture
+import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
+import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.core.architecture.LayerImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import org.amshove.kluent.shouldThrow
