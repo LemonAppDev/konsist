@@ -1,11 +1,8 @@
 package com.lemonappdev.konsist.architecture1
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.Architecture
 import com.lemonappdev.konsist.api.architecture.Architecture.architecture
-import com.lemonappdev.konsist.api.architecture.KoArchitecture
-import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator
-import com.lemonappdev.konsist.core.architecture.KoArchitectureImpl
+import com.lemonappdev.konsist.api.architecture.Architecture.assertArchitecture
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.verify.assert
@@ -21,14 +18,12 @@ class Architecture1Test {
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture1/project")
 
-        val koArchitecture = scope
-            .architecture {
+        // then
+        scope
+            .assertArchitecture {
                 domain.dependsOnNothing()
                 presentation.dependsOnNothing()
             }
-
-        // then
-        koArchitecture.assert()
     }
 
     @Test
@@ -44,7 +39,7 @@ class Architecture1Test {
         }
 
         // then
-        scope.architecture(koArchitecture).assert()
+        scope.assertArchitecture(koArchitecture)
     }
 
     @Test
@@ -55,7 +50,7 @@ class Architecture1Test {
 
         val sut = {
             scope
-                .architecture { domain.dependsOn(domain) }
+                .assertArchitecture { domain.dependsOn(domain) }
         }
 
         // then
@@ -71,7 +66,7 @@ class Architecture1Test {
 
         val sut = {
             scope
-                .architecture {
+                .assertArchitecture {
                     domain.dependsOnNothing()
                     domain.dependsOn(presentation)
                 }
@@ -91,7 +86,7 @@ class Architecture1Test {
 
         val sut = {
             scope
-                .architecture {
+                .assertArchitecture {
                     domain.dependsOnNothing()
                     domain.dependsOnNothing()
                 }
@@ -112,7 +107,7 @@ class Architecture1Test {
 
         val sut = {
             scope
-                .architecture {
+                .assertArchitecture {
                     domain.dependsOn(presentation)
                     domain.dependsOnNothing()
                 }
@@ -133,7 +128,7 @@ class Architecture1Test {
 
         val sut = {
             scope
-                .architecture {
+                .assertArchitecture {
                     domain.dependsOn(presentation)
                     domain.dependsOn(presentation)
                 }

@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.architecture4
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.Architecture.architecture
+import com.lemonappdev.konsist.api.architecture.Architecture.assertArchitecture
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.verify.assert
@@ -18,16 +18,14 @@ class Architecture4Test {
         val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
 
-        val koArchitecture = scope
-            .architecture {
+        // then
+        scope
+            .assertArchitecture {
                 presentation.dependsOn(application)
                 application.dependsOn(domain, infrastructure)
                 domain.dependsOn(infrastructure)
                 infrastructure.dependsOnNothing()
             }
-
-        // then
-        koArchitecture.assert()
     }
 
     @Test
@@ -39,14 +37,15 @@ class Architecture4Test {
         val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
 
-        val koArchitecture = scope
-            .architecture {
-                presentation.dependsOn(application, infrastructure)
-                application.dependsOn(infrastructure)
-                domain.dependsOn(infrastructure)
-                infrastructure.dependsOnNothing()
-            }
-        val sut = { koArchitecture.assert() }
+        val sut = {
+            scope
+                .assertArchitecture {
+                    presentation.dependsOn(application, infrastructure)
+                    application.dependsOn(infrastructure)
+                    domain.dependsOn(infrastructure)
+                    infrastructure.dependsOnNothing()
+                }
+        }
 
         // then
         sut shouldThrow KoCheckFailedException::class

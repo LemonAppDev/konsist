@@ -11,7 +11,7 @@ import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 @Suppress("detekt.ThrowsCount")
-fun ArchitectureScope.assert() {
+internal fun ArchitectureScope.assert() {
     try {
         val files = (this as ArchitectureScopeImpl).koScope.files()
         val architecture = this.koArchitecture as KoArchitectureImpl
@@ -83,9 +83,9 @@ private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): Stri
     }.joinToString("\n")
 
     /**
-     * In this call stack hierarchy test name is at index 7.
+     * In this call stack hierarchy test name is at index 9.
      */
-    val index = 7
+    val index = 9
 
     return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies (${failedDeclarations.size}):" +
         "\n$failedDeclarationsMessage"

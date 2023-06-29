@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.verify.commonassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.Architecture.architecture
+import com.lemonappdev.konsist.api.architecture.Architecture.assertArchitecture
 import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldContain
 import org.junit.jupiter.api.Test
@@ -27,12 +27,11 @@ class CommonAssertTest {
     fun `architecture-assert-test-method-name`() {
         // given
         val scope = Konsist.scopeFromProduction()
-        val architecture = scope
-            .architecture { }
 
         // then
         try {
-            architecture.assert()
+            scope
+                .assertArchitecture { }
         } catch (e: Exception) {
             e.message?.shouldContain("Assert 'architecture-assert-test-method-name' has failed. Invalid declarations") ?: throw e
         }

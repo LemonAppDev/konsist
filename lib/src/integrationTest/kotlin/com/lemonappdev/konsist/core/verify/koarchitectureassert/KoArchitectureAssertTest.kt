@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.verify.koarchitectureassert
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.Architecture.architecture
+import com.lemonappdev.konsist.api.architecture.Architecture.assertArchitecture
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
@@ -22,10 +22,8 @@ class KoArchitectureAssertTest {
         val scope =
             Konsist.scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koarchitectureassert/project")
 
-        val architecture = scope.architecture { layer1.dependsOn(layer2) }
-
         // then
-        architecture.assert()
+        scope.assertArchitecture { layer1.dependsOn(layer2) }
     }
 
     @Test
@@ -37,14 +35,12 @@ class KoArchitectureAssertTest {
         val scope =
             Konsist.scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koarchitectureassert/project")
 
-        val architecture = scope.architecture {
-            layer1.dependsOn(layer3)
-            layer2.dependsOnNothing()
-        }
-
         // when
         val func = {
-            architecture.assert()
+            scope.assertArchitecture {
+                layer1.dependsOn(layer3)
+                layer2.dependsOnNothing()
+            }
         }
 
         // then
@@ -63,11 +59,9 @@ class KoArchitectureAssertTest {
         val scope =
             Konsist.scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koarchitectureassert/project")
 
-        val architecture = scope.architecture { layer1.dependsOn(layer2) }
-
         // when
         val func = {
-            architecture.assert()
+            scope.assertArchitecture { layer1.dependsOn(layer2) }
         }
 
         // then

@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.circulardependency4
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.Architecture.architecture
+import com.lemonappdev.konsist.api.architecture.Architecture.assertArchitecture
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldThrow
@@ -21,7 +21,7 @@ class CircularDependency4Test {
         // when
         val sut = {
             scope
-                .architecture {
+                .assertArchitecture {
                     layer1.dependsOn(layer2)
                     layer2.dependsOn(layer3)
                     layer3.dependsOn(layer1, layer4)

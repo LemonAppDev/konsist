@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.architecture2
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.architecture.Architecture.architecture
+import com.lemonappdev.konsist.api.architecture.Architecture.assertArchitecture
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
@@ -20,14 +20,12 @@ class Architecture2Test {
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
 
-        val koArchitecture = scope
-            .architecture {
+        // then
+        scope
+            .assertArchitecture {
                 domain.dependsOnNothing()
                 presentation.dependsOn(domain)
             }
-
-        // then
-        koArchitecture.assert()
     }
 
     @Test
@@ -37,13 +35,13 @@ class Architecture2Test {
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
         val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
 
-        val koArchitecture = scope
-            .architecture {
-                presentation.dependsOnNothing()
-                domain.dependsOn(presentation)
-            }
-
-        val sut = { koArchitecture.assert() }
+        val sut = {
+            scope
+                .assertArchitecture {
+                    presentation.dependsOnNothing()
+                    domain.dependsOn(presentation)
+                }
+        }
 
         // then
         sut shouldThrow KoCheckFailedException::class withMessage """
