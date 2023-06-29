@@ -11,11 +11,12 @@ import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 @Suppress("detekt.ThrowsCount")
-fun KoArchitecture.assert(koScope: KoScope) {
+fun Pair<KoArchitecture, KoScope>.assert() {
     try {
-        val files = koScope.files()
+        val files = this.second.files()
+        val architecture = this.first as KoArchitectureImpl
 
-        val isAllLayersValid = (this as KoArchitectureImpl).allLayers
+        val isAllLayersValid = architecture.allLayers
             .all {
                 files
                     .withPackage(it.definedBy)
@@ -24,7 +25,7 @@ fun KoArchitecture.assert(koScope: KoScope) {
             }
 
         if (!isAllLayersValid) {
-            val layer = this
+            val layer = architecture
                 .allLayers
                 .first {
                     files
@@ -35,10 +36,10 @@ fun KoArchitecture.assert(koScope: KoScope) {
             throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
         }
 
-        val layerHasValidArchitecture = (this as KoArchitectureImpl)
+        val layerHasValidArchitecture = architecture
             .dependencies
             .map { (t, u) ->
-                val otherLayers = (this.allLayers - u).map { it.definedBy }
+                val otherLayers = (architecture.allLayers - u).map { it.definedBy }
 
                 files
                     .withPackage(t.definedBy)
@@ -49,7 +50,7 @@ fun KoArchitecture.assert(koScope: KoScope) {
 
         val result = mutableMapOf<Layer, String>()
 
-        this
+        architecture
             .dependencies
             .keys
             .forEachIndexed { index, layer -> result[layer] = layerHasValidArchitecture[index] }

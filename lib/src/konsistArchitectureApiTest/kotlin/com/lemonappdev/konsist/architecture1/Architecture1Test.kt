@@ -14,28 +14,27 @@ class Architecture1Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
+        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture1/project")
 
-        val koArchitecture = Konsist
-            .architecture()
-            .addDependencies {
+        val koArchitecture = scope
+            .architecture {
                 domain.dependsOnNothing()
                 presentation.dependsOnNothing()
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture1/project")
 
         // then
-        koArchitecture.assert(scope)
+        koArchitecture.assert()
     }
 
     @Test
     fun `throws an exception when self dependency is set`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
+        val scope = Konsist.scopeFromProduction()
 
         val sut = {
-            Konsist
-                .architecture()
-                .addDependencies { domain.dependsOn(domain) }
+            scope
+                .architecture { domain.dependsOn(domain) }
         }
 
         // then
@@ -47,11 +46,11 @@ class Architecture1Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
+        val scope = Konsist.scopeFromProduction()
 
         val sut = {
-            Konsist
-                .architecture()
-                .addDependencies {
+            scope
+                .architecture {
                     domain.dependsOnNothing()
                     domain.dependsOn(presentation)
                 }
@@ -67,11 +66,11 @@ class Architecture1Test {
     fun `throws an exception when layer is set as independent twice`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
+        val scope = Konsist.scopeFromProduction()
 
         val sut = {
-            Konsist
-                .architecture()
-                .addDependencies {
+            scope
+                .architecture {
                     domain.dependsOnNothing()
                     domain.dependsOnNothing()
                 }
@@ -88,11 +87,11 @@ class Architecture1Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
+        val scope = Konsist.scopeFromProduction()
 
         val sut = {
-            Konsist
-                .architecture()
-                .addDependencies {
+            scope
+                .architecture {
                     domain.dependsOn(presentation)
                     domain.dependsOnNothing()
                 }
@@ -109,11 +108,11 @@ class Architecture1Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture1.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture1.project.presentation..")
+        val scope = Konsist.scopeFromProduction()
 
         val sut = {
-            Konsist
-                .architecture()
-                .addDependencies {
+            scope
+                .architecture {
                     domain.dependsOn(presentation)
                     domain.dependsOn(presentation)
                 }

@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.container.koscope
 
+import com.lemonappdev.konsist.api.architecture.KoArchitecture
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.container.koscope.KoScope
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
@@ -13,6 +14,7 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.core.architecture.KoArchitectureImpl
 
 @Suppress("detekt.TooManyFunctions")
 class KoScopeImpl(
@@ -95,4 +97,10 @@ class KoScopeImpl(
     override fun equals(other: Any?): Boolean = other is KoScope && files().toList() == other.files().toList()
 
     override fun hashCode(): Int = 31 * 7 + files().toList().hashCode()
+
+    override fun architecture(dependencies: KoArchitecture.() -> Unit): Pair<KoArchitecture, KoScope> {
+        val architecture = KoArchitectureImpl()
+        dependencies(architecture)
+        return Pair(architecture, this)
+    }
 }

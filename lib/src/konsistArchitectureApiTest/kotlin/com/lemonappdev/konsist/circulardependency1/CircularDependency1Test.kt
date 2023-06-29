@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.circulardependency1
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.container.koscope.KoScope
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldThrow
@@ -13,12 +14,12 @@ class CircularDependency1Test {
         // given
         val layer1 = Layer("layer1", "layer1..")
         val layer2 = Layer("layer2", "layer2..")
+        val scope = Konsist.scopeFromProduction()
 
         // when
         val sut = {
-            Konsist
-                .architecture()
-                .addDependencies {
+            scope
+                .architecture {
                     layer1.dependsOn(layer2)
                     layer2.dependsOn(layer1)
                 }

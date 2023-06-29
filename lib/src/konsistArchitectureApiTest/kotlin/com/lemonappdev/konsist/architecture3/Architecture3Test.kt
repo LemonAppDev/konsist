@@ -14,18 +14,17 @@ class Architecture3Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture3.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture3.project.presentation..")
         val data = Layer("Data", "com.lemonappdev.konsist.architecture3.project.data..")
+        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture3/project")
 
-        val koArchitecture = Konsist
-            .architecture()
-            .addDependencies {
+        val koArchitecture = scope
+            .architecture {
                 domain.dependsOnNothing()
                 presentation.dependsOn(domain)
                 data.dependsOn(domain)
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture3/project")
 
         // then
-        koArchitecture.assert(scope)
+        koArchitecture.assert()
     }
 
     @Test
@@ -34,16 +33,15 @@ class Architecture3Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture3.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture3.project.presentation..")
         val data = Layer("Data", "com.lemonappdev.konsist.architecture3.project.data..")
+        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture3/project")
 
-        val koArchitecture = Konsist
-            .architecture()
-            .addDependencies {
+        val koArchitecture = scope
+            .architecture {
                 data.dependsOnNothing()
                 presentation.dependsOn(data)
                 domain.dependsOn(data)
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture3/project")
-        val sut = { koArchitecture.assert(scope) }
+        val sut = { koArchitecture.assert() }
 
         // then
         sut shouldThrow KoCheckFailedException::class

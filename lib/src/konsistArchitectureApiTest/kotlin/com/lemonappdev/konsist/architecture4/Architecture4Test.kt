@@ -15,19 +15,18 @@ class Architecture4Test {
         val application = Layer("Application", "com.lemonappdev.konsist.architecture4.project.application..")
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
         val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
+        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
 
-        val koArchitecture = Konsist
-            .architecture()
-            .addDependencies {
+        val koArchitecture = scope
+            .architecture {
                 presentation.dependsOn(application)
                 application.dependsOn(domain, infrastructure)
                 domain.dependsOn(infrastructure)
                 infrastructure.dependsOnNothing()
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
 
         // then
-        koArchitecture.assert(scope)
+        koArchitecture.assert()
     }
 
     @Test
@@ -37,17 +36,16 @@ class Architecture4Test {
         val application = Layer("Application", "com.lemonappdev.konsist.architecture4.project.application..")
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture4.project.domain..")
         val infrastructure = Layer("Infrastructure", "com.lemonappdev.konsist.architecture4.project.infrastructure..")
+        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
 
-        val koArchitecture = Konsist
-            .architecture()
-            .addDependencies {
+        val koArchitecture = scope
+            .architecture {
                 presentation.dependsOn(application, infrastructure)
                 application.dependsOn(infrastructure)
                 domain.dependsOn(infrastructure)
                 infrastructure.dependsOnNothing()
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture4/project")
-        val sut = { koArchitecture.assert(scope) }
+        val sut = { koArchitecture.assert() }
 
         // then
         sut shouldThrow KoCheckFailedException::class

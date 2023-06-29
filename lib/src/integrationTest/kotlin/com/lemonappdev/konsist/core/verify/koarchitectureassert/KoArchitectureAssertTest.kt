@@ -18,15 +18,13 @@ class KoArchitectureAssertTest {
         // given
         val layer1 = Layer("Presentation", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.presentation..")
         val layer2 = Layer("Business", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.business..")
-
-        val architecture = Konsist.architecture()
-            .addDependencies { layer1.dependsOn(layer2) }
-
         val scope =
             Konsist.scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koarchitectureassert/project")
 
+        val architecture = scope.architecture { layer1.dependsOn(layer2) }
+
         // then
-        architecture.assert(scope)
+        architecture.assert()
     }
 
     @Test
@@ -35,19 +33,17 @@ class KoArchitectureAssertTest {
         val layer1 = Layer("Presentation", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.presentation..")
         val layer2 = Layer("Business", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.business..")
         val layer3 = Layer("Data", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.data..")
+        val scope =
+            Konsist.scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koarchitectureassert/project")
 
-        val architecture = Konsist.architecture()
-            .addDependencies {
+        val architecture = scope.architecture {
                 layer1.dependsOn(layer3)
                 layer2.dependsOnNothing()
             }
 
-        val scope =
-            Konsist.scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koarchitectureassert/project")
-
         // when
         val func = {
-            architecture.assert(scope)
+            architecture.assert()
         }
 
         // then
@@ -63,16 +59,14 @@ class KoArchitectureAssertTest {
         // given
         val layer1 = Layer("Presentation", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.presentation..")
         val layer2 = Layer("EmptyLayer", "com.lemonappdev.konsist.core.verify.koarchitectureassert.project.emptylayer..")
-
-        val architecture = Konsist.architecture()
-            .addDependencies { layer1.dependsOn(layer2) }
-
         val scope =
             Konsist.scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/koarchitectureassert/project")
 
+        val architecture = scope.architecture { layer1.dependsOn(layer2) }
+
         // when
         val func = {
-            architecture.assert(scope)
+            architecture.assert()
         }
 
         // then

@@ -1,5 +1,7 @@
 package com.lemonappdev.konsist.api.architecture
 
+import com.lemonappdev.konsist.api.container.koscope.KoScope
+
 /**
  * Architecture creator.
  *
@@ -7,9 +9,11 @@ package com.lemonappdev.konsist.api.architecture
  */
 interface KoArchitectureCreator {
     /**
-     * Creates an instance of `KoArchitectureImpl` with the specified layers.
+     * Defines an architecture using the specified dependencies.
      *
-     * @return An instance of [KoArchitecture] with the specified layers.
+     * @param dependencies The function literal with receiver [KoArchitecture] that allows configuring the dependencies
+     *                     of the architecture.
+     * @return A [Pair] containing the configured [KoArchitecture] instance and the associated [KoScope] object.
      */
-    fun architecture(): KoArchitecture
+    fun architecture(dependencies: KoArchitecture.() -> Unit): Pair<KoArchitecture, KoScope>
 }

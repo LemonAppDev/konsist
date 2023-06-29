@@ -17,17 +17,16 @@ class Architecture2Test {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
+        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
 
-        val koArchitecture = Konsist
-            .architecture()
-            .addDependencies {
+        val koArchitecture = scope
+            .architecture {
                 domain.dependsOnNothing()
                 presentation.dependsOn(domain)
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
 
         // then
-        koArchitecture.assert(scope)
+        koArchitecture.assert()
     }
 
     @Test
@@ -36,15 +35,15 @@ class Architecture2Test {
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
         val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
 
-        val koArchitecture = Konsist
-            .architecture()
-            .addDependencies {
+        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
+
+        val koArchitecture = scope
+            .architecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
-        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
 
-        val sut = { koArchitecture.assert(scope) }
+        val sut = { koArchitecture.assert() }
 
         // then
         sut shouldThrow KoCheckFailedException::class withMessage """
