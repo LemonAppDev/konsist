@@ -15,7 +15,7 @@ internal fun KoArchitectureScope.assert() {
         val files = this.koScope.files()
         val dependencyRules = this.dependencyRules as DependencyRulesImpl
 
-        if(dependencyRules.allLayers.isEmpty()) {
+        if (dependencyRules.allLayers.isEmpty()) {
             throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")
         }
 

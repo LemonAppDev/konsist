@@ -37,7 +37,7 @@ class Architecture5Test {
         }
 
         // then
-        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain any layers or dependencies."
+        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
     }
 
     @Test
@@ -50,7 +50,7 @@ class Architecture5Test {
 
         // when
         val func = {
-            scope.assertArchitecture { layer  }
+            scope.assertArchitecture { layer }
         }
 
         // then
