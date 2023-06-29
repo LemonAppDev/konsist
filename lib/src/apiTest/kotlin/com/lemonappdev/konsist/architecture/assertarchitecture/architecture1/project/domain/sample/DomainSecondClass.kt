@@ -1,0 +1,5 @@
+package com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain.sample
+
+import com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain.DomainFirstClass
+
+class DomainSecondClass(val sampleParameter: com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain.DomainFirstClass)

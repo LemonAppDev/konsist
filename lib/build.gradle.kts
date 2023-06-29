@@ -36,7 +36,7 @@ testing {
             }
         }
 
-        register("konsistArchitectureApiTest", JvmTestSuite::class) {
+        register("apiTest", JvmTestSuite::class) {
             dependencies {
                 implementation(project(":lib"))
                 implementation(libs.kluent)
