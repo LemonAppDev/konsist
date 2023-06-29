@@ -3,7 +3,9 @@ package com.lemonappdev.konsist.api.architecture
 import com.lemonappdev.konsist.core.architecture.Layer
 
 /**
- * Represents a layered architecture.
+ * Represents the dependency configuration for a layer within an architecture.
+ *
+ * This interface provides methods to define dependencies between layers in an architecture.
  */
 interface Dependency {
     /**

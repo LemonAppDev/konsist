@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.container.koscope
 
-import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
