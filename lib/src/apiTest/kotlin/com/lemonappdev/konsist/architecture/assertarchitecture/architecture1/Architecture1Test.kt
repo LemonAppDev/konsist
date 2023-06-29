@@ -11,7 +11,8 @@ class Architecture1Test {
     fun `passes when dependency is set that layers are independent`() {
         // given
         val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..")
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..")
+        val presentation =
+            LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..")
         val scope = Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture1/project",
         )
@@ -28,7 +29,8 @@ class Architecture1Test {
     fun `passes when dependency is set that layers are independent when architecture is passed as parameter`() {
         // given
         val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..")
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..")
+        val presentation =
+            LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..")
         val scope = Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture1/project",
         )

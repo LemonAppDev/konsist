@@ -13,7 +13,8 @@ class Architecture3Test {
     fun `passes when dependency is set that presentation and data layers are depend on domain layer`() {
         // given
         val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..")
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
+        val presentation =
+            LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
         val data = LayerImpl("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.data..")
         val scope = Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
@@ -32,7 +33,8 @@ class Architecture3Test {
     fun `passes when dependency is set correctly and architecture is passed as parameter`() {
         // given
         val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..")
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
+        val presentation =
+            LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
         val data = LayerImpl("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.data..")
         val scope = Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
@@ -51,7 +53,8 @@ class Architecture3Test {
     fun `fails when bad dependency is set`() {
         // given
         val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..")
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
+        val presentation =
+            LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
         val data = LayerImpl("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.data..")
         val scope = Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
@@ -74,7 +77,8 @@ class Architecture3Test {
     fun `fails when bad dependency is set and architecture is passed as parameter`() {
         // given
         val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..")
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
+        val presentation =
+            LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
         val data = LayerImpl("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.data..")
         val scope = Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",

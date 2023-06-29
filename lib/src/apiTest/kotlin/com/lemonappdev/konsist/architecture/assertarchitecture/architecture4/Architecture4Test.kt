@@ -12,8 +12,10 @@ class Architecture4Test {
     @Test
     fun `passes when good dependency is set`() {
         // given
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.presentation..")
-        val application = LayerImpl("Application", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.application..")
+        val presentation =
+            LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.presentation..")
+        val application =
+            LayerImpl("Application", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.application..")
         val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain..")
         val infrastructure =
             LayerImpl("Infrastructure", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.infrastructure..")
@@ -34,8 +36,10 @@ class Architecture4Test {
     @Test
     fun `passes when good dependency is set and architecture is passed as parameter`() {
         // given
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.presentation..")
-        val application = LayerImpl("Application", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.application..")
+        val presentation =
+            LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.presentation..")
+        val application =
+            LayerImpl("Application", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.application..")
         val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain..")
         val infrastructure =
             LayerImpl("Infrastructure", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.infrastructure..")
@@ -58,8 +62,10 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set`() {
         // given
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.presentation..")
-        val application = LayerImpl("Application", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.application..")
+        val presentation =
+            LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.presentation..")
+        val application =
+            LayerImpl("Application", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.application..")
         val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain..")
         val infrastructure =
             LayerImpl("Infrastructure", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.infrastructure..")
@@ -84,8 +90,10 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set and architecture is passed as parameter`() {
         // given
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.presentation..")
-        val application = LayerImpl("Application", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.application..")
+        val presentation =
+            LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.presentation..")
+        val application =
+            LayerImpl("Application", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.application..")
         val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain..")
         val infrastructure =
             LayerImpl("Infrastructure", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.infrastructure..")

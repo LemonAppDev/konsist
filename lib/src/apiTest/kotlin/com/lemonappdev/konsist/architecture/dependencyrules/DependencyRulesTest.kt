@@ -11,86 +11,89 @@ class DependencyRulesTest {
     @Test
     fun `throws an exception when self dependency is set`() {
         // given
-        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..")
+        val layer = LayerImpl("Name", "package..")
 
         val sut = {
-            architecture { domain.dependsOn(domain) }
+            architecture { layer.dependsOn(layer) }
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Layer Domain cannot be dependent on itself."
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Layer Name cannot be dependent on itself."
     }
 
     @Test
     fun `throws an exception when layer is set as independent and then set as depend on other layer`() {
         // given
-        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..")
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..")
+        val layer1 = LayerImpl("Name1", "package1..")
+        val layer2 =
+            LayerImpl("Name2", "package2..")
 
         val sut = {
             architecture {
-                domain.dependsOnNothing()
-                domain.dependsOn(presentation)
+                layer1.dependsOnNothing()
+                layer1.dependsOn(layer2)
             }
         }
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer Domain was previously set as depend on nothing, so it cannot be depend on Presentation layer.
+            Layer Name1 was previously set as depend on nothing, so it cannot be depend on Name2 layer.
         """.trimIndent()
     }
 
     @Test
     fun `throws an exception when layer is set as independent twice`() {
         // given
-        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..")
+        val layer = LayerImpl("Name", "package..")
 
         val sut = {
             architecture {
-                domain.dependsOnNothing()
-                domain.dependsOnNothing()
+                layer.dependsOnNothing()
+                layer.dependsOnNothing()
             }
         }
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Duplicated the dependency that Domain layer should be depend on nothing.
+            Duplicated the dependency that Name layer should be depend on nothing.
         """.trimIndent()
     }
 
     @Test
     fun `throws an exception when layer is set as dependent on other layer and then as independent`() {
         // given
-        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..")
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..")
+        val layer1 = LayerImpl("Name1", "package1..")
+        val layer2 =
+            LayerImpl("Name2", "package2..")
 
         val sut = {
             architecture {
-                domain.dependsOn(presentation)
-                domain.dependsOnNothing()
+                layer1.dependsOn(layer2)
+                layer1.dependsOnNothing()
             }
         }
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer Domain had a dependency previously set with Presentation layer, so it cannot be depend on nothing.
+            Layer Name1 had a dependency previously set with Name2 layer, so it cannot be depend on nothing.
         """.trimIndent()
     }
 
     @Test
     fun `throws an exception when layer is set as dependent on the same layer twice`() {
         // given
-        val domain = LayerImpl("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..")
-        val presentation = LayerImpl("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..")
+        val layer1 = LayerImpl("Name1", "package1..")
+        val layer2 =
+            LayerImpl("Name2", "package1..")
 
         val sut = {
             architecture {
-                domain.dependsOn(presentation)
-                domain.dependsOn(presentation)
+                layer1.dependsOn(layer2)
+                layer1.dependsOn(layer2)
             }
         }
 
         // then
-        sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency between Domain and Presentation layers."
+        sut shouldThrow KoPreconditionFailedException::class withMessage "Duplicated the dependency between Name1 and Name2 layers."
     }
 }
