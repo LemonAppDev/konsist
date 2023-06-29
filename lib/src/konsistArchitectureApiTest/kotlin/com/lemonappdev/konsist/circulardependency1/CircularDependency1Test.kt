@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.circulardependency1
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.architecture.KoArchitecture.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitecture.assertArchitecture
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
@@ -14,15 +15,13 @@ class CircularDependency1Test {
         // given
         val layer1 = Layer("layer1", "layer1..")
         val layer2 = Layer("layer2", "layer2..")
-        val scope = Konsist.scopeFromProduction()
 
         // when
         val sut = {
-            scope
-                .assertArchitecture {
-                    layer1.dependsOn(layer2)
-                    layer2.dependsOn(layer1)
-                }
+            architecture {
+                layer1.dependsOn(layer2)
+                layer2.dependsOn(layer1)
+            }
         }
 
         // then

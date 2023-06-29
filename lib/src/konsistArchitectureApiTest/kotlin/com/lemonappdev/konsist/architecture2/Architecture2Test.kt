@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.architecture2
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.architecture.KoArchitecture.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitecture.assertArchitecture
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
@@ -28,6 +29,22 @@ class Architecture2Test {
     }
 
     @Test
+    fun `passes when dependency is set that presentation layer is depend on domain layer and architecture is passed as parameter`() {
+        // given
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
+        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
+        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
+
+        val architecture = architecture {
+            domain.dependsOnNothing()
+            presentation.dependsOn(domain)
+        }
+
+        // then
+        scope.assertArchitecture(architecture)
+    }
+
+    @Test
     fun `fails when dependency is set that domain layer is depend on presentation layer`() {
         // given
         val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
@@ -45,6 +62,30 @@ class Architecture2Test {
         // then
         sut shouldThrow KoCheckFailedException::class withMessage """
             Assert 'fails when dependency is set that domain layer is depend on presentation layer' has failed. Invalid dependencies (1):
+            Layer: Presentation. Invalid files:
+            $rootPath/lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project/presentation/sample/PresentationThirdClass.kt
+        """.trimIndent()
+    }
+
+    @Test
+    fun `fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter`() {
+        // given
+        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture2.project.domain..")
+        val presentation = Layer("Presentation", "com.lemonappdev.konsist.architecture2.project.presentation..")
+        val scope = Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project")
+
+        val architecture = architecture {
+            presentation.dependsOnNothing()
+            domain.dependsOn(presentation)
+        }
+
+        val sut = {
+            scope.assertArchitecture(architecture)
+        }
+
+        // then
+        sut shouldThrow KoCheckFailedException::class withMessage """
+            Assert 'fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter' has failed. Invalid dependencies (1):
             Layer: Presentation. Invalid files:
             $rootPath/lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture2/project/presentation/sample/PresentationThirdClass.kt
         """.trimIndent()
