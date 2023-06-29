@@ -15,5 +15,7 @@ interface KoArchitectureCreator {
      *                     of the architecture.
      * @return A [ArchitectureScope] containing the configured [KoArchitecture] instance and the associated [KoScope] object.
      */
-    fun architecture(dependencies: KoArchitecture.() -> Unit): ArchitectureScope
+    fun KoScope.architecture(dependencies: KoArchitecture.() -> Unit): ArchitectureScope
+
+    fun KoScope.architecture(koArchitecture: KoArchitecture): ArchitectureScope
 }

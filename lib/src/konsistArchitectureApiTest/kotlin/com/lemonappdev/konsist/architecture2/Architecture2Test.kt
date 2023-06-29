@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.architecture2
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.architecture.Architecture.architecture
 import com.lemonappdev.konsist.core.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider

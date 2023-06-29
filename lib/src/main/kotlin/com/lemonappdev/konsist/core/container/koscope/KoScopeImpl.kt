@@ -99,10 +99,4 @@ class KoScopeImpl(
     override fun equals(other: Any?): Boolean = other is KoScope && files().toList() == other.files().toList()
 
     override fun hashCode(): Int = 31 * 7 + files().toList().hashCode()
-
-    override fun architecture(dependencies: KoArchitecture.() -> Unit): ArchitectureScope {
-        val architecture = KoArchitectureImpl()
-        dependencies(architecture)
-        return ArchitectureScopeImpl(architecture, this)
-    }
 }

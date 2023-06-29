@@ -30,8 +30,7 @@ interface KoScope :
     KoInterfaceProvider,
     KoObjectProvider,
     KoPropertyProvider,
-    KoFunctionProvider,
-    KoArchitectureCreator {
+    KoFunctionProvider {
 
     /**
      * The files present in the scope.
