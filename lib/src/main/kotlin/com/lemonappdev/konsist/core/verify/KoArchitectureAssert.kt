@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.verify
 
+import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.architecture.DependencyRulesImpl
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
-import com.lemonappdev.konsist.core.architecture.LayerImpl
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -18,7 +18,7 @@ internal fun KoArchitectureScope.assert() {
         val isAllLayersValid = architecture.allLayers
             .all {
                 files
-                    .withPackage((it as LayerImpl).definedBy)
+                    .withPackage((it).definedBy)
                     .toList()
                     .isNotEmpty()
             }
@@ -28,33 +28,33 @@ internal fun KoArchitectureScope.assert() {
                 .allLayers
                 .first {
                     files
-                        .withPackage((it as LayerImpl).definedBy)
+                        .withPackage((it).definedBy)
                         .toList()
                         .isEmpty()
-                } as LayerImpl
+                }
             throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
         }
 
         val layerHasValidArchitecture = architecture
             .dependencies
             .map { (t, u) ->
-                val otherLayers = (architecture.allLayers - u).map { (it as LayerImpl).definedBy }
+                val otherLayers = (architecture.allLayers - u).map { (it).definedBy }
 
                 files
-                    .withPackage((t as LayerImpl).definedBy)
+                    .withPackage((t).definedBy)
                     .filter { otherLayers.any { name -> it.hasImports(name) } }
                     .map { it.path }
                     .joinToString("\n")
             }
 
-        val result = mutableMapOf<LayerImpl, String>()
+        val result = mutableMapOf<Layer, String>()
 
         architecture
             .dependencies
             .keys
-            .forEachIndexed { index, layer -> result[layer as LayerImpl] = layerHasValidArchitecture[index] }
+            .forEachIndexed { index, layer -> result[layer] = layerHasValidArchitecture[index] }
 
-        val failedLayers = mutableListOf<LayerImpl>()
+        val failedLayers = mutableListOf<Layer>()
 
         result.forEach { (t, u) ->
             if (u.toList().isNotEmpty()) {
@@ -76,7 +76,7 @@ internal fun KoArchitectureScope.assert() {
     }
 }
 
-private fun getCheckFailedMessages(failedDeclarations: Map<LayerImpl, String>): String {
+private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): String {
     val failedDeclarationsMessage = failedDeclarations.keys.mapIndexed { index, layer ->
         "Layer: ${layer.name}. Invalid files:\n${failedDeclarations.values.toList()[index]}"
     }.joinToString("\n")

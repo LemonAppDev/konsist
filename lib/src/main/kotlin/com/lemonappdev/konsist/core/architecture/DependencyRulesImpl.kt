@@ -38,33 +38,33 @@ class DependencyRulesImpl : DependencyRules {
 
     private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg layers: Layer) {
         if (layers.any { it == layer }) {
-            throw KoPreconditionFailedException("Layer ${(layer as LayerImpl).name} cannot be dependent on itself.")
+            throw KoPreconditionFailedException("Layer ${layer.name} cannot be dependent on itself.")
         }
     }
 
     @Suppress("detekt.ThrowsCount")
     private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: Layer, vararg layers: Layer) {
-        val layerName = (layer as LayerImpl).name
+        val layerName = layer.name
         if (statuses[layer] == Status.INDEPENDENT) {
             if (toBeIndependent) {
                 throw KoPreconditionFailedException("Duplicated the dependency that $layerName layer should be depend on nothing.")
             } else {
                 throw KoPreconditionFailedException(
                     "Layer $layerName was previously set as depend on nothing, " +
-                        "so it cannot be depend on ${(layers.first() as LayerImpl).name} layer.",
+                        "so it cannot be depend on ${layers.first().name} layer.",
                 )
             }
         } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {
             val dependency = dependencies.getOrDefault(layer, emptySet())
 
             if (toBeIndependent) {
-                val alreadySetLayer = dependency.first { it != layer } as LayerImpl
+                val alreadySetLayer = dependency.first { it != layer }
                 throw KoPreconditionFailedException(
                     "Layer $layerName had a dependency previously set with ${alreadySetLayer.name} layer, " +
                         "so it cannot be depend on nothing.",
                 )
             } else if (layers.any { dependency.contains(it) }) {
-                val alreadySetLayer = layers.first { dependency.contains(it) } as LayerImpl
+                val alreadySetLayer = layers.first { dependency.contains(it) }
                 throw KoPreconditionFailedException("Duplicated the dependency between $layerName and ${alreadySetLayer.name} layers.")
             }
         }
@@ -78,7 +78,7 @@ class DependencyRulesImpl : DependencyRules {
         val notEmpty = allLayers.firstOrNull { it.isNotEmpty() }
 
         if (notEmpty != null) {
-            val layerName = (layer as LayerImpl).name
+            val layerName = layer.name
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
                     notEmpty.filterNot { it == null }
@@ -86,7 +86,7 @@ class DependencyRulesImpl : DependencyRules {
                             prefix = "Layer $layerName -->\n",
                             postfix = "Layer $layerName.",
                             separator = "",
-                        ) { "Layer ${(it as LayerImpl).name} -->\n" },
+                        ) { "Layer ${it?.name} -->\n" },
             )
         }
     }

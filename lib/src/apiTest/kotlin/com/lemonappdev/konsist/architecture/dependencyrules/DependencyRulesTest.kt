@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.architecture.dependencyrules
 
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
-import com.lemonappdev.konsist.core.architecture.LayerImpl
+import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -11,7 +11,7 @@ class DependencyRulesTest {
     @Test
     fun `throws an exception when self dependency is set`() {
         // given
-        val layer = LayerImpl("Name", "package..")
+        val layer = Layer("Name", "package..")
 
         val sut = {
             architecture { layer.dependsOn(layer) }
@@ -24,9 +24,9 @@ class DependencyRulesTest {
     @Test
     fun `throws an exception when layer is set as independent and then set as depend on other layer`() {
         // given
-        val layer1 = LayerImpl("Name1", "package1..")
+        val layer1 = Layer("Name1", "package1..")
         val layer2 =
-            LayerImpl("Name2", "package2..")
+            Layer("Name2", "package2..")
 
         val sut = {
             architecture {
@@ -44,7 +44,7 @@ class DependencyRulesTest {
     @Test
     fun `throws an exception when layer is set as independent twice`() {
         // given
-        val layer = LayerImpl("Name", "package..")
+        val layer = Layer("Name", "package..")
 
         val sut = {
             architecture {
@@ -62,9 +62,9 @@ class DependencyRulesTest {
     @Test
     fun `throws an exception when layer is set as dependent on other layer and then as independent`() {
         // given
-        val layer1 = LayerImpl("Name1", "package1..")
+        val layer1 = Layer("Name1", "package1..")
         val layer2 =
-            LayerImpl("Name2", "package2..")
+            Layer("Name2", "package2..")
 
         val sut = {
             architecture {
@@ -82,9 +82,9 @@ class DependencyRulesTest {
     @Test
     fun `throws an exception when layer is set as dependent on the same layer twice`() {
         // given
-        val layer1 = LayerImpl("Name1", "package1..")
+        val layer1 = Layer("Name1", "package1..")
         val layer2 =
-            LayerImpl("Name2", "package1..")
+            Layer("Name2", "package1..")
 
         val sut = {
             architecture {

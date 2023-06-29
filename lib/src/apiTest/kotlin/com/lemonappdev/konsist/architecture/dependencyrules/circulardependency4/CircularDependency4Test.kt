@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.architecture.dependencyrules.circulardependency4
 
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
-import com.lemonappdev.konsist.core.architecture.LayerImpl
+import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -11,10 +11,10 @@ class CircularDependency4Test {
     @Test
     fun `circular dependency 4`() {
         // given
-        val layer1 = LayerImpl("layer1", "layer1..")
-        val layer2 = LayerImpl("layer2", "layer2..")
-        val layer3 = LayerImpl("layer3", "layer3..")
-        val layer4 = LayerImpl("layer4", "layer4..")
+        val layer1 = Layer("layer1", "layer1..")
+        val layer2 = Layer("layer2", "layer2..")
+        val layer3 = Layer("layer3", "layer3..")
+        val layer4 = Layer("layer4", "layer4..")
 
         // when
         val sut = {

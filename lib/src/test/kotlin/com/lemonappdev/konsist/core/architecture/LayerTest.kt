@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.architecture
 
+import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -9,7 +10,7 @@ class LayerTest {
     @Test
     fun `throws an exception when layer is defined by package without two dots at the end`() {
         // given
-        val sut = { LayerImpl("Layer", "package") }
+        val sut = { Layer("Layer", "package") }
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """

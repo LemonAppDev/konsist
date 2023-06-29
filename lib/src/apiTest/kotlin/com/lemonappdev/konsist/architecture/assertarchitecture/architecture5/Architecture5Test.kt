@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.architecture.assertarchitecture.architecture5
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
-import com.lemonappdev.konsist.core.architecture.LayerImpl
+import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
@@ -12,7 +12,7 @@ class Architecture5Test {
     @Test
     fun `throws exception when layer contain no files`() {
         // given
-        val layer = LayerImpl("EmptyLayer", "com/lemonappdev/konsist/assertarchitecture/architecture5/project/emptylayer..")
+        val layer = Layer("EmptyLayer", "com/lemonappdev/konsist/assertarchitecture/architecture5/project/emptylayer..")
         val scope =
             Konsist.scopeFromPackage("com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project")
 
