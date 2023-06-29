@@ -14,7 +14,7 @@ class Architecture5Test {
         // given
         val layer = LayerImpl("EmptyLayer", "com/lemonappdev/konsist/architecture5/project/emptylayer..")
         val scope =
-            Konsist.scopeFromDirectory("lib/src/konsistArchitectureApiTest/kotlin/com/lemonappdev/konsist/architecture5/project/")
+            Konsist.scopeFromPackage("com.lemonappdev.konsist.architecture5.project")
 
         // when
         val func = {
