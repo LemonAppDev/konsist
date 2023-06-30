@@ -13,14 +13,12 @@ class Architecture3Test {
     private val presentation =
         Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
     private val data = Layer("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.data..")
+    private val scope = Konsist.scopeFromDirectory(
+        "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
+    )
 
     @Test
     fun `passes when dependency is set that presentation and data layers are depend on domain layer`() {
-        // given
-        val scope = Konsist.scopeFromDirectory(
-            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
-        )
-
         // then
         scope
             .assertArchitecture {
@@ -33,15 +31,12 @@ class Architecture3Test {
     @Test
     fun `passes when dependency is set correctly and architecture is passed as parameter`() {
         // given
-        val scope = Konsist.scopeFromDirectory(
-            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
-        )
-
         val architecture = architecture {
             domain.dependsOnNothing()
             presentation.dependsOn(domain)
             data.dependsOn(domain)
         }
+
         // then
         scope.assertArchitecture(architecture)
     }
@@ -49,10 +44,6 @@ class Architecture3Test {
     @Test
     fun `fails when bad dependency is set`() {
         // given
-        val scope = Konsist.scopeFromDirectory(
-            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
-        )
-
         val sut = {
             scope
                 .assertArchitecture {
@@ -69,10 +60,6 @@ class Architecture3Test {
     @Test
     fun `fails when bad dependency is set and architecture is passed as parameter`() {
         // given
-        val scope = Konsist.scopeFromDirectory(
-            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
-        )
-
         val architecture = architecture {
             data.dependsOnNothing()
             presentation.dependsOn(data)

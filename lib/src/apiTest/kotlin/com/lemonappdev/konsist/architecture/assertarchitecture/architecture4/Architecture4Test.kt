@@ -16,14 +16,12 @@ class Architecture4Test {
     private val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.domain..")
     private val infrastructure =
         Layer("Infrastructure", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.infrastructure..")
+    private val scope = Konsist.scopeFromDirectory(
+        "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture4/project",
+    )
 
     @Test
     fun `passes when good dependency is set`() {
-        // given
-        val scope = Konsist.scopeFromDirectory(
-            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture4/project",
-        )
-
         // then
         scope
             .assertArchitecture {
@@ -37,10 +35,6 @@ class Architecture4Test {
     @Test
     fun `passes when good dependency is set and architecture is passed as parameter`() {
         // given
-        val scope = Konsist.scopeFromDirectory(
-            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture4/project",
-        )
-
         val architecture = architecture {
             presentation.dependsOn(application)
             application.dependsOn(domain, infrastructure)
@@ -56,10 +50,6 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set`() {
         // given
-        val scope = Konsist.scopeFromDirectory(
-            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture4/project",
-        )
-
         val sut = {
             scope
                 .assertArchitecture {
@@ -77,10 +67,6 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set and architecture is passed as parameter`() {
         // given
-        val scope = Konsist.scopeFromDirectory(
-            "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture4/project",
-        )
-
         val architecture = architecture {
             presentation.dependsOn(application, infrastructure)
             application.dependsOn(infrastructure)

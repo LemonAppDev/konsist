@@ -10,13 +10,11 @@ import org.junit.jupiter.api.Test
 
 class Architecture5Test {
     private val layer = Layer("EmptyLayer", "com/lemonappdev/konsist/assertarchitecture/architecture5/project/emptylayer..")
+    private val scope =
+        Konsist.scopeFromPackage("com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project")
 
     @Test
     fun `throws exception when layer contains no files`() {
-        // given
-        val scope =
-            Konsist.scopeFromPackage("com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project")
-
         // when
         val func = {
             scope.assertArchitecture { layer.dependsOnNothing() }
@@ -28,10 +26,6 @@ class Architecture5Test {
 
     @Test
     fun `throws exception when architecture contains no layers`() {
-        // given
-        val scope =
-            Konsist.scopeFromPackage("com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project")
-
         // when
         val func = {
             scope.assertArchitecture { }
@@ -43,10 +37,6 @@ class Architecture5Test {
 
     @Test
     fun `throws exception when architecture contains no dependencies`() {
-        // given
-        val scope =
-            Konsist.scopeFromPackage("com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project")
-
         // when
         val func = {
             scope.assertArchitecture { layer }
