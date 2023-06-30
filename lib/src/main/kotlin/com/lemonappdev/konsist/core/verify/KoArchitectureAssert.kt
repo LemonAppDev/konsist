@@ -97,7 +97,7 @@ private fun getCheckFailedMessages(
                     "depends on ${layerDependencies.joinToString(", ")} assertion failure:"
                 }
 
-                Status.INDEPENDENT -> {
+                Status.DEPENDENT_ON_NOTHING -> {
                     "depends on nothing assertion failure:"
                 }
 

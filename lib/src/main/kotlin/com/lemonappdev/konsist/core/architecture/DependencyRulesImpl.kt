@@ -35,7 +35,7 @@ class DependencyRulesImpl : DependencyRules {
 
         allLayers += this
         dependencies[this] = setOf(this)
-        statuses[this] = Status.INDEPENDENT
+        statuses[this] = Status.DEPENDENT_ON_NOTHING
     }
 
     private fun checkIfLayerIsDependentOnItself(layer: Layer, vararg layers: Layer) {
@@ -47,7 +47,7 @@ class DependencyRulesImpl : DependencyRules {
     @Suppress("detekt.ThrowsCount")
     private fun checkStatusOfLayer(toBeIndependent: Boolean, layer: Layer, vararg layers: Layer) {
         val layerName = layer.name
-        if (statuses[layer] == Status.INDEPENDENT) {
+        if (statuses[layer] == Status.DEPENDENT_ON_NOTHING) {
             if (toBeIndependent) {
                 throw KoPreconditionFailedException("Duplicated the dependency that $layerName layer should be depend on nothing.")
             } else {
@@ -127,7 +127,7 @@ class DependencyRulesImpl : DependencyRules {
 }
 
 internal enum class Status {
-    INDEPENDENT,
+    DEPENDENT_ON_NOTHING,
     DEPEND_ON_LAYER,
     NONE,
 }
