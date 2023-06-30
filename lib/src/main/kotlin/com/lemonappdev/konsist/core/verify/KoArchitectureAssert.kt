@@ -86,9 +86,9 @@ private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>, depen
         .keys
         .mapIndexed { index, layer ->
             val layerDependencies = dependencies.getOrDefault(layer, emptySet())
-            val message = if(layerDependencies.size > 1) {
+            val message = if (layerDependencies.size > 1) {
                 "depends on ${layerDependencies.joinToString(", ")} assertion failure:"
-            } else if(layerDependencies.size == 1) {
+            } else if (layerDependencies.size == 1) {
                 "depends on nothing assertion failure:"
             } else {
                 ""
@@ -98,12 +98,11 @@ private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>, depen
         }
         .joinToString("\n")
 
-
     /**
      * In this call stack hierarchy test name is at index 6.
      */
     val index = 6
 
     return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies:" +
-            "\n$failedDeclarationsMessage"
+        "\n$failedDeclarationsMessage"
 }

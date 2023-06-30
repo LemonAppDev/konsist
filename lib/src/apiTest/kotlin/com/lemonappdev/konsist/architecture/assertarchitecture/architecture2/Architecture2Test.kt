@@ -6,11 +6,7 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArch
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
-import com.lemonappdev.konsist.core.verify.assert
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldContain
-import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class Architecture2Test {
@@ -69,13 +65,13 @@ class Architecture2Test {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
             }
-        } catch (e: Exception) {
+        } catch (e: KoCheckFailedException) {
             e.message?.shouldBeEqualTo(
                 """
                 Assert 'fails when dependency is set that domain layer is depend on presentation layer' has failed. Invalid dependencies:
                 Presentation depends on nothing assertion failure:
                 $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt
-            """.trimIndent()
+                """.trimIndent(),
             ) ?: throw e
         }
     }
@@ -98,13 +94,13 @@ class Architecture2Test {
         // then
         try {
             scope.assertArchitecture(architecture)
-        } catch (e: Exception) {
+        } catch (e: KoCheckFailedException) {
             e.message?.shouldBeEqualTo(
                 """
                 Assert 'fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter' has failed. Invalid dependencies:
                 Presentation depends on nothing assertion failure:
                 $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt
-            """.trimIndent()
+                """.trimIndent(),
             ) ?: throw e
         }
     }
