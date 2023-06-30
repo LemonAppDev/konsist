@@ -1,19 +1,13 @@
 package com.lemonappdev.konsist.api.architecture
 
-import com.lemonappdev.konsist.core.architecture.Layer
+import com.lemonappdev.konsist.core.architecture.KoArchitectureAssertionImpl
 
 /**
- * Architecture creator.
+ * A singleton object representing the `KoArchitectureCreator` that implements the [KoArchitectureAssertion] interface.
  *
- * Creates a [KoArchitecture] instance from the given set of layers.
+ * This object provides a way to access the functionalities defined in the [KoArchitectureAssertion] interface.
+ * It serves as the entry point for working with architecture assertions.
+ *
+ * @see KoArchitectureAssertion
  */
-interface KoArchitectureCreator {
-    /**
-     * Creates an instance of `KoArchitectureImpl` with the specified layers.
-     *
-     * @param layer The layer to be included in the architecture.
-     * @param layers Additional layers to be included in the architecture.
-     * @return An instance of [KoArchitecture] with the specified layers.
-     */
-    fun architecture(layer: Layer, vararg layers: Layer): KoArchitecture
-}
+object KoArchitectureCreator : KoArchitectureAssertion by KoArchitectureAssertionImpl()

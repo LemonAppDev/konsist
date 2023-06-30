@@ -72,8 +72,8 @@ jobs:
           name: integration-test-report
           path: ./lib/build/test-results/integrationTest/
 
-  konsist-architecture-api-test:
-    name: Konsist Architecture Api Test
+  api-test:
+    name: Api Test
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -85,13 +85,13 @@ jobs:
           java-version: 19
           distribution: 'zulu'
 
-      - name: Konsist Architecture Api Test
-        run: ./gradlew lib:konsistArchitectureApiTest
+      - name: Api Test
+        run: ./gradlew lib:apiTest
 
       - uses: actions/upload-artifact@v3
         with:
-          name: konsist-architecture-api-test-report
-          path: ./lib/build/test-results/konsistArchitectureApiTest/
+          name: api-test-report
+          path: ./lib/build/test-results/apiTest/
 
 # ======================================= Run Linters =========================================================
 

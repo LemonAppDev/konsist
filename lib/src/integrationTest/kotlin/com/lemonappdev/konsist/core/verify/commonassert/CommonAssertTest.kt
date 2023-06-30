@@ -41,20 +41,6 @@ class CommonAssertTest {
     }
 
     @Test
-    fun `architecture-assert-test-method-name`() {
-        // given
-        val scope = getSnippetFile("architecture-assert-test-method-name")
-        val architecture = Konsist.architecture(Layer("", ""))
-
-        // then
-        try {
-            assert(architecture, scope)
-        } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'architecture-assert-test-method-name' has failed. Invalid dependencies (1)") ?: throw e
-        }
-    }
-
-    @Test
     fun `declaration-assert-fails-when-declaration-list-is-empty`() {
         // given
         val sut = getSnippetFile("declaration-assert-fails-when-declaration-list-is-empty")
