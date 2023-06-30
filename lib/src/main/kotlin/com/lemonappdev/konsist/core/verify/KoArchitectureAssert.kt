@@ -110,6 +110,6 @@ private fun getCheckFailedMessages(
         }
         .joinToString("\n")
 
-    return "Assert '${getTestMethodNameFromEighthIndex()}' has failed. Invalid dependencies at (${failedDeclarations.size}):" +
+    return "'${getTestMethodNameFromSeventhIndex()}' test has failed." +
         "\n$failedDeclarationsMessage"
 }
