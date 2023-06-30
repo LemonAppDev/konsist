@@ -55,7 +55,7 @@ class DependencyRulesImpl : DependencyRules {
             } else {
                 throw KoPreconditionFailedException(
                     "Layer $layerName was previously set as depend on nothing, " +
-                        "so it cannot be depend on ${layers.first().name} layer.",
+                        "so it cannot depend on ${layers.first().name} layer.",
                 )
             }
         } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {

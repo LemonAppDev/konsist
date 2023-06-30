@@ -72,7 +72,7 @@ class DependencyRulesTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer Name1 was previously set as depend on nothing, so it cannot be depend on Name2 layer.
+            Layer Name1 was previously set as depend on nothing, so it cannot depend on Name2 layer.
         """.trimIndent()
     }
 
@@ -93,7 +93,7 @@ class DependencyRulesTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-            Layer Name1 was previously set as depend on nothing, so it cannot be depend on Name2 layer.
+            Layer Name1 was previously set as depend on nothing, so it cannot depend on Name2 layer.
         """.trimIndent()
     }
 

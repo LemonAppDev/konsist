@@ -115,6 +115,6 @@ private fun getCheckFailedMessages(
      */
     val index = 6
 
-    return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies:" +
+    return "'${getTestMethodName(index)}' test has failed. Invalid dependencies:" +
         "\n$failedDeclarationsMessage"
 }
