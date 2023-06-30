@@ -65,8 +65,8 @@ class KoFileAssertTest {
     @Test
     fun `assert-suppress-by-konsist-and-name`() {
         // given
-        val scope1 = getSnippetFile("suppresspackage/withkonsist/assert-suppress-by-konsist-and-name")
-        val scope2 = getSnippetFile("suppresspackage/withkonsist/file-without-suppress")
+        val scope1 = getSnippetFile("assert-suppress-by-konsist-and-name")
+        val scope2 = getSnippetFile("file-without-suppress")
 
         val sut = (scope1 + scope2)
             .files()
@@ -78,8 +78,8 @@ class KoFileAssertTest {
     @Test
     fun `assert-suppress-by-name`() {
         // given
-        val scope1 = getSnippetFile("suppresspackage/withoutkonsist/assert-suppress-by-name")
-        val scope2 = getSnippetFile("suppresspackage/withoutkonsist/file-without-suppress")
+        val scope1 = getSnippetFile("assert-suppress-by-name")
+        val scope2 = getSnippetFile("file-without-suppress")
 
         val sut = (scope1 + scope2)
             .files()
