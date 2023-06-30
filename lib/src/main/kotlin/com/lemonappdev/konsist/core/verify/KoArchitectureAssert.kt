@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.core.architecture.DependencyRulesImpl
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
+import com.lemonappdev.konsist.core.architecture.Status
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -72,7 +73,7 @@ internal fun KoArchitectureScope.assert() {
         val allChecksPassed = failedLayers.isEmpty()
 
         if (!allChecksPassed) {
-            throw KoCheckFailedException(getCheckFailedMessages(filtered, dependencyRules.dependencies))
+            throw KoCheckFailedException(getCheckFailedMessages(filtered, dependencyRules.dependencies, dependencyRules.statuses))
         }
     } catch (e: KoException) {
         throw e
@@ -81,14 +82,20 @@ internal fun KoArchitectureScope.assert() {
     }
 }
 
-private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>, dependencies: Map<Layer, Set<Layer>>): String {
+private fun getCheckFailedMessages(
+    failedDeclarations: Map<Layer, String>,
+    dependencies: Map<Layer, Set<Layer>>,
+    statuses: Map<Layer, Status>
+): String {
     val failedDeclarationsMessage = failedDeclarations
         .keys
         .mapIndexed { index, layer ->
             val layerDependencies = dependencies.getOrDefault(layer, emptySet())
-            val message = if (layerDependencies.size > 1) {
+            val status = statuses.getOrDefault(layer, Status.NONE)
+
+            val message = if (status == Status.DEPEND_ON_LAYER) {
                 "depends on ${layerDependencies.joinToString(", ")} assertion failure:"
-            } else if (layerDependencies.size == 1) {
+            } else if (status == Status.INDEPENDENT) {
                 "depends on nothing assertion failure:"
             } else {
                 ""
@@ -104,5 +111,5 @@ private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>, depen
     val index = 6
 
     return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies:" +
-        "\n$failedDeclarationsMessage"
+            "\n$failedDeclarationsMessage"
 }

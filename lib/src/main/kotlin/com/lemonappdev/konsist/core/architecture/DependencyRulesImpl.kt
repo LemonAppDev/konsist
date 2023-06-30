@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 class DependencyRulesImpl : DependencyRules {
     internal val dependencies = mutableMapOf<Layer, Set<Layer>>()
-    private val statuses = mutableMapOf<Layer, Status>()
+    internal val statuses = mutableMapOf<Layer, Status>()
 
     internal var allLayers = mutableListOf<Layer>()
 
@@ -20,12 +20,10 @@ class DependencyRulesImpl : DependencyRules {
         dependencies[this] = (dependencies.getOrDefault(this, setOf(this))) + layer + layers
         statuses[this] = Status.DEPEND_ON_LAYER
 
-        dependencies[layer] = dependencies.getOrDefault(layer, setOf(layer))
         if (statuses.getOrDefault(layer, Status.NONE) == Status.NONE) {
             statuses[layer] = Status.NONE
         }
         layers.onEach {
-            dependencies.getOrDefault(it, setOf(it))
             if (statuses.getOrDefault(it, Status.NONE) == Status.NONE) {
                 statuses[it] = Status.NONE
             }
@@ -128,7 +126,7 @@ class DependencyRulesImpl : DependencyRules {
     }
 }
 
-private enum class Status {
+internal enum class Status {
     INDEPENDENT,
     DEPEND_ON_LAYER,
     NONE,
