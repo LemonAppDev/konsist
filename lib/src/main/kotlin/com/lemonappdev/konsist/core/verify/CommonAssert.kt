@@ -6,30 +6,30 @@ import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-private const val FOURTH_INDEX = 4
-private const val FIFTH_INDEX = 5
-private const val SIXTH_INDEX = 6
-private const val EIGHT_INDEX = 8
+private const val INDEX_FOUR = 4
+private const val INDEX_FIVE = 5
+private const val INDEX_SIX = 6
+private const val INDEX_EIGHT = 8
 
 /**
  * In this call stack hierarchy test name is at index 4.
  */
-internal fun getTestMethodNameFromFourthIndex() = getTestMethodName(FOURTH_INDEX)
+internal fun getTestMethodNameFromFourthIndex() = getTestMethodName(INDEX_FOUR)
 
 /**
  * In this call stack hierarchy test name is at index 5.
  */
-internal fun getTestMethodNameFromFifthIndex() = getTestMethodName(FIFTH_INDEX)
+internal fun getTestMethodNameFromFifthIndex() = getTestMethodName(INDEX_FIVE)
 
 /**
  * In this call stack hierarchy test name is at index 6.
  */
-internal fun getTestMethodNameFromSixthIndex() = getTestMethodName(SIXTH_INDEX)
+internal fun getTestMethodNameFromSixthIndex() = getTestMethodName(INDEX_SIX)
 
 /**
  * In this call stack hierarchy test name is at index 8.
  */
-internal fun getTestMethodNameFromEightIndex() = getTestMethodName(EIGHT_INDEX)
+internal fun getTestMethodNameFromEighthIndex() = getTestMethodName(INDEX_EIGHT)
 
 private fun getTestMethodName(index: Int): String = Thread.currentThread().stackTrace[index].methodName
 
