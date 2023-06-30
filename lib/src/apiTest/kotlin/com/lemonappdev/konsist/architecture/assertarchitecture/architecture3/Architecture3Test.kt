@@ -9,13 +9,14 @@ import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
 class Architecture3Test {
+    private val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..")
+    private val presentation =
+        Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
+    private val data = Layer("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.data..")
+
     @Test
     fun `passes when dependency is set that presentation and data layers are depend on domain layer`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..")
-        val presentation =
-            Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
-        val data = Layer("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.data..")
         val scope = Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
         )
@@ -32,10 +33,6 @@ class Architecture3Test {
     @Test
     fun `passes when dependency is set correctly and architecture is passed as parameter`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..")
-        val presentation =
-            Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
-        val data = Layer("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.data..")
         val scope = Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
         )
@@ -52,10 +49,6 @@ class Architecture3Test {
     @Test
     fun `fails when bad dependency is set`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..")
-        val presentation =
-            Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
-        val data = Layer("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.data..")
         val scope = Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
         )
@@ -76,10 +69,6 @@ class Architecture3Test {
     @Test
     fun `fails when bad dependency is set and architecture is passed as parameter`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..")
-        val presentation =
-            Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
-        val data = Layer("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.data..")
         val scope = Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
         )

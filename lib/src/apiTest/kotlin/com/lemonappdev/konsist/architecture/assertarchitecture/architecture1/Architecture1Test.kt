@@ -7,12 +7,13 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import org.junit.jupiter.api.Test
 
 class Architecture1Test {
+    private val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..")
+    private val presentation =
+        Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..")
+
     @Test
     fun `passes when dependency is set that layers are independent`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..")
-        val presentation =
-            Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..")
         val scope = Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture1/project",
         )
@@ -28,9 +29,6 @@ class Architecture1Test {
     @Test
     fun `passes when dependency is set that layers are independent when architecture is passed as parameter`() {
         // given
-        val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.domain..")
-        val presentation =
-            Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture1.project.presentation..")
         val scope = Konsist.scopeFromDirectory(
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture1/project",
         )

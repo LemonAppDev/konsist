@@ -15,18 +15,5 @@ data class Layer(internal val name: String, internal val definedBy: String) {
         if (!definedBy.endsWith("..")) {
             throw KoPreconditionFailedException("Layer $name must be defined by package ending with '..'. Now: $definedBy .")
         }
-
-        val similarLayer = layers.firstOrNull { it.name == name || it.definedBy == definedBy }
-
-        if(similarLayer != null) {
-            val value = if (name == similarLayer.name) "name: $name" else "definedBy: $definedBy "
-                throw KoPreconditionFailedException("Already exists layer with the same $value.")
-        } else {
-        layers += this
-        }
-    }
-
-    companion object {
-        private val layers = mutableListOf<Layer>()
     }
 }

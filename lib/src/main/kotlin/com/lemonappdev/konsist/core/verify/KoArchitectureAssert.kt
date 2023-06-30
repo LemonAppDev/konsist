@@ -85,7 +85,7 @@ internal fun KoArchitectureScope.assert() {
 private fun getCheckFailedMessages(
     failedDeclarations: Map<Layer, String>,
     dependencies: Map<Layer, Set<Layer>>,
-    statuses: Map<Layer, Status>
+    statuses: Map<Layer, Status>,
 ): String {
     val failedDeclarationsMessage = failedDeclarations
         .keys
@@ -116,5 +116,5 @@ private fun getCheckFailedMessages(
     val index = 6
 
     return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies:" +
-            "\n$failedDeclarationsMessage"
+        "\n$failedDeclarationsMessage"
 }
