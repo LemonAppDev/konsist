@@ -55,7 +55,7 @@ class DependencyRulesImpl : DependencyRules {
             } else {
                 throw KoPreconditionFailedException(
                     "Layer $layerName was previously set as depend on nothing, " +
-                            "so it cannot be depend on ${layers.first().name} layer.",
+                        "so it cannot be depend on ${layers.first().name} layer.",
                 )
             }
         } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {
@@ -65,7 +65,7 @@ class DependencyRulesImpl : DependencyRules {
                 val alreadySetLayer = dependency.first { it != layer }
                 throw KoPreconditionFailedException(
                     "Layer $layerName had a dependency previously set with ${alreadySetLayer.name} layer, " +
-                            "so it cannot be depend on nothing.",
+                        "so it cannot be depend on nothing.",
                 )
             } else if (layers.any { dependency.contains(it) }) {
                 val alreadySetLayer = layers.first { dependency.contains(it) }
@@ -85,12 +85,12 @@ class DependencyRulesImpl : DependencyRules {
             val layerName = layer.name
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
-                        notEmpty.filterNot { it == null }
-                            .joinToString(
-                                prefix = "Layer $layerName -->\n",
-                                postfix = "Layer $layerName.",
-                                separator = "",
-                            ) { "Layer ${it?.name} -->\n" },
+                    notEmpty.filterNot { it == null }
+                        .joinToString(
+                            prefix = "Layer $layerName -->\n",
+                            postfix = "Layer $layerName.",
+                            separator = "",
+                        ) { "Layer ${it?.name} -->\n" },
             )
         }
     }
