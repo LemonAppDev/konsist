@@ -86,9 +86,9 @@ private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): Stri
     }.joinToString("\n")
 
     /**
-     * In this call stack hierarchy test name is at index 9.
+     * In this call stack hierarchy test name is at index 6.
      */
-    val index = 9
+    val index = 6
 
     return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies (${failedDeclarations.size}):" +
         "\n$failedDeclarationsMessage"

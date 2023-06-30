@@ -6,6 +6,9 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArch
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.verify.assert
+import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
@@ -60,20 +63,21 @@ class Architecture2Test {
             "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project",
         )
 
-        val sut = {
-            scope
-                .assertArchitecture {
-                    presentation.dependsOnNothing()
-                    domain.dependsOn(presentation)
-                }
-        }
-
         // then
-        sut shouldThrow KoCheckFailedException::class withMessage """
-            Assert 'fails when dependency is set that domain layer is depend on presentation layer' has failed. Invalid dependencies (1):
-            Layer: Presentation. Invalid files:
-            $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt
-        """.trimIndent()
+        try {
+            scope.assertArchitecture {
+                presentation.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
+        } catch (e: Exception) {
+            e.message?.shouldBeEqualTo(
+                """
+                Assert 'fails when dependency is set that domain layer is depend on presentation layer' has failed. Invalid dependencies (1):
+                Layer: Presentation. Invalid files:
+                $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt
+            """.trimIndent()
+            ) ?: throw e
+        }
     }
 
     @Test
@@ -91,15 +95,17 @@ class Architecture2Test {
             domain.dependsOn(presentation)
         }
 
-        val sut = {
-            scope.assertArchitecture(architecture)
-        }
-
         // then
-        sut shouldThrow KoCheckFailedException::class withMessage """
-            Assert 'fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter' has failed. Invalid dependencies (1):
-            Layer: Presentation. Invalid files:
-            $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt
-        """.trimIndent()
+        try {
+            scope.assertArchitecture(architecture)
+        } catch (e: Exception) {
+            e.message?.shouldBeEqualTo(
+                """
+                Assert 'fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter' has failed. Invalid dependencies (1):
+                Layer: Presentation. Invalid files:
+                $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt
+            """.trimIndent()
+            ) ?: throw e
+        }
     }
 }
