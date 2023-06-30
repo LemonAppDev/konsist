@@ -90,15 +90,20 @@ private fun getCheckFailedMessages(
     val failedDeclarationsMessage = failedDeclarations
         .keys
         .mapIndexed { index, layer ->
-            val layerDependencies = dependencies.getOrDefault(layer, emptySet())
-            val status = statuses.getOrDefault(layer, Status.NONE)
+            val layerDependencies = (dependencies.getOrDefault(layer, emptySet()) - layer).map { it.name }
 
-            val message = if (status == Status.DEPEND_ON_LAYER) {
-                "depends on ${layerDependencies.joinToString(", ")} assertion failure:"
-            } else if (status == Status.INDEPENDENT) {
-                "depends on nothing assertion failure:"
-            } else {
-                ""
+            val message = when (statuses.getOrDefault(layer, Status.NONE)) {
+                Status.DEPEND_ON_LAYER -> {
+                    "depends on ${layerDependencies.joinToString(", ")} assertion failure:"
+                }
+
+                Status.INDEPENDENT -> {
+                    "depends on nothing assertion failure:"
+                }
+
+                else -> {
+                    ""
+                }
             }
 
             "${layer.name} $message\n${failedDeclarations.values.toList()[index]}"
