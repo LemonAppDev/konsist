@@ -72,7 +72,7 @@ jobs:
           name: integration-test-report
           path: ./lib/build/test-results/integrationTest/
 
-  konsist-architecture-api-test:
+  api-test:
     name: Api Test
     runs-on: ubuntu-latest
     steps:
