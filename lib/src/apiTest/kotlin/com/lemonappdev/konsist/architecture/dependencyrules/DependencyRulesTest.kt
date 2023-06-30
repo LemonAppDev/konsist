@@ -9,6 +9,42 @@ import org.junit.jupiter.api.Test
 
 class DependencyRulesTest {
     @Test
+    fun `throws an exception when a layer with the same name already exists`() {
+        // given
+        val layer1 = Layer("Name", "package1..")
+        val layer2 = Layer("Name", "package2..")
+
+        val sut = {
+            architecture {
+                layer1.dependsOn(layer2)
+            }
+        }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
+            There are layers in the architecture with the same name: Name.
+        """.trimIndent()
+    }
+
+    @Test
+    fun `throws an exception when a layer with the same definedBy already exists`() {
+        // given
+        val layer1 = Layer("Name1", "package..")
+        val layer2 = Layer("Name2", "package..")
+
+        val sut = {
+            architecture {
+                layer1.dependsOn(layer2)
+            }
+        }
+
+        // then
+        sut shouldThrow KoPreconditionFailedException::class withMessage """
+        There are layers in the architecture with the same definedBy: package.. .
+        """.trimIndent()
+    }
+
+    @Test
     fun `throws an exception when self dependency is set`() {
         // given
         val layer = Layer("Name", "package..")
@@ -104,7 +140,7 @@ class DependencyRulesTest {
         // given
         val layer1 = Layer("Name1", "package1..")
         val layer2 =
-            Layer("Name2", "package1..")
+            Layer("Name2", "package2..")
 
         val sut = {
             architecture {

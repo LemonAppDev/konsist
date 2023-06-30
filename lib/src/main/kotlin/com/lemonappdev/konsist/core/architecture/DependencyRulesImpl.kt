@@ -11,6 +11,7 @@ class DependencyRulesImpl : DependencyRules {
     internal var allLayers = mutableListOf<Layer>()
 
     override fun Layer.dependsOn(layer: Layer, vararg layers: Layer) {
+        checkIfLayerHasTheSameValuesAsOtherLayer(this, layer, *layers)
         checkIfLayerIsDependentOnItself(this, layer, *layers)
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
@@ -31,6 +32,7 @@ class DependencyRulesImpl : DependencyRules {
     }
 
     override fun Layer.dependsOnNothing() {
+        checkIfLayerHasTheSameValuesAsOtherLayer(this)
         checkStatusOfLayer(true, this)
 
         allLayers += this
@@ -53,7 +55,7 @@ class DependencyRulesImpl : DependencyRules {
             } else {
                 throw KoPreconditionFailedException(
                     "Layer $layerName was previously set as depend on nothing, " +
-                            "so it cannot be depend on ${layers.first().name} layer.",
+                        "so it cannot be depend on ${layers.first().name} layer.",
                 )
             }
         } else if (statuses[layer] == Status.DEPEND_ON_LAYER) {
@@ -63,7 +65,7 @@ class DependencyRulesImpl : DependencyRules {
                 val alreadySetLayer = dependency.first { it != layer }
                 throw KoPreconditionFailedException(
                     "Layer $layerName had a dependency previously set with ${alreadySetLayer.name} layer, " +
-                            "so it cannot be depend on nothing.",
+                        "so it cannot be depend on nothing.",
                 )
             } else if (layers.any { dependency.contains(it) }) {
                 val alreadySetLayer = layers.first { dependency.contains(it) }
@@ -83,12 +85,12 @@ class DependencyRulesImpl : DependencyRules {
             val layerName = layer.name
             throw KoPreconditionFailedException(
                 "Illegal circular dependencies:\n" +
-                        notEmpty.filterNot { it == null }
-                            .joinToString(
-                                prefix = "Layer $layerName -->\n",
-                                postfix = "Layer $layerName.",
-                                separator = "",
-                            ) { "Layer ${it?.name} -->\n" },
+                    notEmpty.filterNot { it == null }
+                        .joinToString(
+                            prefix = "Layer $layerName -->\n",
+                            postfix = "Layer $layerName.",
+                            separator = "",
+                        ) { "Layer ${it?.name} -->\n" },
             )
         }
     }
@@ -125,18 +127,21 @@ class DependencyRulesImpl : DependencyRules {
         }
     }
 
-//    private fun checkIfLayerHasTheSameValuesAsOtherLayer(vararg layers: Layer) {
-//        layers.forEach {
-//            val similarLayer = allLayers.firstOrNull { layerAlreadyDefined ->
-//                layerAlreadyDefined.name == it.name || layerAlreadyDefined.definedBy == it.definedBy
-//            }
-//
-//            if (similarLayer != null) {
-//                val value = if (similarLayer.name == it.name) "name: ${it.name}" else "definedBy: ${it.definedBy}"
-//                throw KoPreconditionFailedException("Layers ${it.name} and ${similarLayer.name} have the same $value.")
-//            }
-//        }
-//    }
+    private fun checkIfLayerHasTheSameValuesAsOtherLayer(vararg layers: Layer) {
+        val list = allLayers
+        layers.forEach {
+            val similarLayer = list.firstOrNull { layerAlreadyDefined ->
+                it != layerAlreadyDefined && (layerAlreadyDefined.name == it.name || layerAlreadyDefined.definedBy == it.definedBy)
+            }
+
+            if (similarLayer != null) {
+                val value = if (similarLayer.name == it.name) "name: ${it.name}" else "definedBy: ${it.definedBy} "
+                throw KoPreconditionFailedException("There are layers in the architecture with the same $value.")
+            } else {
+                list += it
+            }
+        }
+    }
 }
 
 internal enum class Status {
