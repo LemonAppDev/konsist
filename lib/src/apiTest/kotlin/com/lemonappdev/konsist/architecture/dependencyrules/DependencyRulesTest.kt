@@ -25,8 +25,7 @@ class DependencyRulesTest {
     fun `throws an exception when layer is set as independent and then set as depend on other layer`() {
         // given
         val layer1 = Layer("Name1", "package1..")
-        val layer2 =
-            Layer("Name2", "package2..")
+        val layer2 = Layer("Name2", "package2..")
 
         val sut = {
             architecture {
