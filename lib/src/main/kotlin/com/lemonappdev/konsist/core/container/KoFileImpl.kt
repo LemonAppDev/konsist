@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
-import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import kotlin.reflect.KClass
 
 internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
@@ -73,13 +72,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
             .substringBefore(sep)
     }
 
-    override val text by lazy {
-        ktFile
-            .getTextWithLocation()
-            .substringBefore("' at (")
-            .removePrefix("'")
-            .removeSuffix("\n")
-    }
+    override val text: String by lazy { ktFile.text }
 
     override val imports: List<KoImportDeclaration> by lazy {
         val ktImportDirectives = ktFile
