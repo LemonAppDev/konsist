@@ -7,27 +7,27 @@ class KoInternalException(
     message: String,
     cause: Throwable? = null,
     koBaseDeclaration: KoBaseDeclaration? = null,
-) : KoException(message.prepare(koBaseDeclaration), cause) {
+) : KoException(getMessage(message, koBaseDeclaration), cause) {
 
     constructor(
         message: String,
         cause: Throwable? = null,
         koFile: KoFile?,
-    ) : this(message.prepare(koFile), cause)
+    ) : this(getMessage(message, koFile), cause)
 }
 
-private fun String.prepare(koBaseDeclaration: KoBaseDeclaration?): String {
+private fun getMessage(message: String, koBaseDeclaration: KoBaseDeclaration?): String {
     return if (koBaseDeclaration == null) {
-        this
+        message
     } else {
-        "$this, declaration:\n${koBaseDeclaration.text}"
+        "$message, declaration:\n${koBaseDeclaration.text}"
     }
 }
 
-private fun String.prepare(koFile: KoFile?): String {
+private fun getMessage(message: String, koFile: KoFile?): String {
     return if (koFile == null) {
-        this
+        message
     } else {
-        "$this, file:\n${koFile.text}"
+        "$message, file:\n${koFile.text}"
     }
 }
