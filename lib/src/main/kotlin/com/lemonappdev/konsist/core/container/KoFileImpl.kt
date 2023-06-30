@@ -73,13 +73,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
             .substringBefore(sep)
     }
 
-    override val text by lazy {
-        ktFile
-            .getTextWithLocation()
-            .substringBefore("' at (")
-            .removePrefix("'")
-            .removeSuffix("\n")
-    }
+    override val text: String by lazy { ktFile.text }
 
     override val imports: List<KoImportDeclaration> by lazy {
         val ktImportDirectives = ktFile
