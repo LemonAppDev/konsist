@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
-import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import kotlin.reflect.KClass
 
 internal class KoFileImpl(private val ktFile: KtFile) : KoFile {

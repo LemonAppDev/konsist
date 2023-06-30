@@ -21,7 +21,7 @@ class KoFileForTextTest {
                 "SampleText"
             }
             
-            """.trimIndent(),
+                """.trimIndent(),
             )
     }
 
