@@ -42,13 +42,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         "$filePath:$line:$column"
     }
 
-    override val text: String by lazy {
-        psiElement
-            .getTextWithLocation()
-            .substringBefore("' at (")
-            .removePrefix("'")
-            .removeSuffix("\n")
-    }
+    override val text: String by lazy { psiElement.text }
 
     override val locationWithText: String by lazy { "Location: $location \nDeclaration:\n$text" }
 
