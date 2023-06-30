@@ -66,12 +66,13 @@ internal fun KoArchitectureScope.assert() {
             }
         }
 
-        val filtered = result.filter { it.value.toList().isNotEmpty() }
+        val filtered = result
+            .filter { it.value.toList().isNotEmpty() }
 
         val allChecksPassed = failedLayers.isEmpty()
 
         if (!allChecksPassed) {
-            throw KoCheckFailedException(getCheckFailedMessages(filtered))
+            throw KoCheckFailedException(getCheckFailedMessages(filtered, dependencyRules.dependencies))
         }
     } catch (e: KoException) {
         throw e
@@ -80,16 +81,29 @@ internal fun KoArchitectureScope.assert() {
     }
 }
 
-private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>): String {
-    val failedDeclarationsMessage = failedDeclarations.keys.mapIndexed { index, layer ->
-        "Layer: ${layer.name}. Invalid files:\n${failedDeclarations.values.toList()[index]}"
-    }.joinToString("\n")
+private fun getCheckFailedMessages(failedDeclarations: Map<Layer, String>, dependencies: Map<Layer, Set<Layer>>): String {
+    val failedDeclarationsMessage = failedDeclarations
+        .keys
+        .mapIndexed { index, layer ->
+            val layerDependencies = dependencies.getOrDefault(layer, emptySet())
+            val message = if(layerDependencies.size > 1) {
+                "depends on ${layerDependencies.joinToString(", ")} assertion failure:"
+            } else if(layerDependencies.size == 1) {
+                "depends on nothing assertion failure:"
+            } else {
+                ""
+            }
+
+            "${layer.name} $message\n${failedDeclarations.values.toList()[index]}"
+        }
+        .joinToString("\n")
+
 
     /**
      * In this call stack hierarchy test name is at index 6.
      */
     val index = 6
 
-    return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies (${failedDeclarations.size}):" +
-        "\n$failedDeclarationsMessage"
+    return "Assert '${getTestMethodName(index)}' has failed. Invalid dependencies:" +
+            "\n$failedDeclarationsMessage"
 }

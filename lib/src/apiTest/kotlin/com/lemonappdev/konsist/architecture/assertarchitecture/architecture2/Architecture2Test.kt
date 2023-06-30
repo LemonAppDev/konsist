@@ -72,8 +72,8 @@ class Architecture2Test {
         } catch (e: Exception) {
             e.message?.shouldBeEqualTo(
                 """
-                Assert 'fails when dependency is set that domain layer is depend on presentation layer' has failed. Invalid dependencies (1):
-                Layer: Presentation. Invalid files:
+                Assert 'fails when dependency is set that domain layer is depend on presentation layer' has failed. Invalid dependencies:
+                Presentation depends on nothing assertion failure:
                 $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt
             """.trimIndent()
             ) ?: throw e
@@ -101,8 +101,8 @@ class Architecture2Test {
         } catch (e: Exception) {
             e.message?.shouldBeEqualTo(
                 """
-                Assert 'fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter' has failed. Invalid dependencies (1):
-                Layer: Presentation. Invalid files:
+                Assert 'fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter' has failed. Invalid dependencies:
+                Presentation depends on nothing assertion failure:
                 $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt
             """.trimIndent()
             ) ?: throw e
