@@ -14,6 +14,7 @@ import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
+@Suppress("detekt.TooManyFunctions")
 internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction, parentDeclaration: KoBaseDeclaration?) :
     KoParametrizedDeclarationImpl(ktFunction, parentDeclaration),
     KoFunctionDeclaration {
@@ -81,6 +82,8 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
     override fun hasValidReturnTag(enabled: Boolean): Boolean = TagUtil.hasValidReturnTag(enabled, returnType?.name, kDoc)
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters, kDoc)
+
+    override fun hasValidReceiverTag(enabled: Boolean): Boolean = TagUtil.hasValidReceiverTag(enabled, kDoc)
 
     internal companion object {
         private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()

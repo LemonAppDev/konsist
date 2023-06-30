@@ -35,5 +35,12 @@ testing {
                 implementation(project(":lib"))
             }
         }
+
+        register("apiTest", JvmTestSuite::class) {
+            dependencies {
+                implementation(project(":lib"))
+                implementation(libs.kluent)
+            }
+        }
     }
 }
