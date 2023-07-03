@@ -30,4 +30,4 @@ jobs:
           distribution: 'zulu'
 
       - name: Verify Snippet Code
-        run: python3 scripts/verify_snippet_valid_code.py
+        run: python3 scripts/check-kttxt-snippets.py
