@@ -83,4 +83,16 @@ class LibrarySnippets {
             .classes(includeNested = true)
             .assert { it.resideInPackage("..feature..") }
     }
+
+    fun `every public function in api package must have explicit return type`() {
+        Konsist.scopeFromPackage("..api..")
+            .functions(includeNested = true)
+            .assert { it.hasReturnType() }
+    }
+
+    fun `every public property in api package must have specify type explicitly`() {
+        Konsist.scopeFromPackage("..api..")
+            .properties(includeNested = true)
+            .assert { it.hasType() }
+    }
 }
