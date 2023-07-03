@@ -58,7 +58,7 @@ class GeneralSnippets {
     fun `no class should use Java util logging`() {
         Konsist.scopeFromProject()
             .files()
-            .assert { it.hasImports("java.util.logging..")}
+            .assert { it.hasImports("java.util.logging..") }
     }
 
     fun `every constructor parameter has name derived from parameter type`() {
