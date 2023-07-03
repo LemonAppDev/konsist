@@ -110,11 +110,6 @@ private fun getCheckFailedMessages(
         }
         .joinToString("\n")
 
-    /**
-     * In this call stack hierarchy test name is at index 6.
-     */
-    val index = 6
-
-    return "'${getTestMethodName(index)}' test has failed." +
+    return "'${getTestMethodNameFromSeventhIndex()}' test has failed." +
         "\n$failedDeclarationsMessage"
 }

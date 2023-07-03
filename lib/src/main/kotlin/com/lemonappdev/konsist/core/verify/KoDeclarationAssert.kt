@@ -4,12 +4,9 @@ import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
-import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
-import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
-import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?) {
     assert(function, true)
@@ -26,13 +23,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
     try {
         val localList = this.toList()
 
-        if (localList.isEmpty()) {
-            val checkMethodName = Thread.currentThread().stackTrace[2].methodName
-            throw KoPreconditionFailedException(
-                "Declaration list is empty. Please make sure that list of declarations contain items " +
-                    "before calling the '$checkMethodName' method.",
-            )
-        }
+        checkIfLocalListIsEmpty(localList, "Declaration", getTestMethodNameFromFourthIndex())
 
         val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(localList)
 
@@ -41,12 +32,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
             function(it)
         }
 
-        val allChecksPassed = (result[positiveCheck]?.size ?: 0) == notSuppressedDeclarations.size
-
-        if (!allChecksPassed) {
-            val failedDeclarations = result[!positiveCheck] ?: emptyList()
-            throw KoCheckFailedException(getCheckFailedMessage(failedDeclarations))
-        }
+        getResult(notSuppressedDeclarations, result, positiveCheck, getTestMethodNameFromFifthIndex())
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
@@ -54,27 +40,10 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
     }
 }
 
-private fun <E : KoBaseDeclaration> getCheckFailedMessage(failedDeclarations: List<E>): String {
-    val failedDeclarationsMessage = failedDeclarations.joinToString("\n") {
-        val name = if (it is KoNamedDeclaration) it.name else ""
-        val konsistDeclarationClassNamePrefix = "Ko"
-        val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
-
-        "${it.location} ($name $declarationType)"
-    }
-
-    /**
-     * In this call stack hierarchy test name is at index 5.
-     */
-    val index = 5
-
-    return "Assert '${getTestMethodName(index)}' has failed. Invalid declarations (${failedDeclarations.size}):\n$failedDeclarationsMessage"
-}
-
 private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {
-    // In this declarations structure test name is at index 4
+    // In this declarations structure test name is at index 6
     // We pass this name to checkIfSuppressed() because when declarations are nested, this index is changing
-    val testMethodName = Thread.currentThread().stackTrace[4].methodName
+    val testMethodName = getTestMethodNameFromSixthIndex()
     val declarations: MutableMap<E, Boolean> = mutableMapOf()
 
     // First we need to exclude (if exist) file suppress test annotation
