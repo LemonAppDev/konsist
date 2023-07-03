@@ -2,7 +2,6 @@ rootProject.name = "konsist"
 
 include(
     ":lib",
-    ":snippets",
 )
 
 pluginManagement {
