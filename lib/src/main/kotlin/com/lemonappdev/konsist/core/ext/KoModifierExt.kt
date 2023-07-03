@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.api.KoModifier.ENUM
 import com.lemonappdev.konsist.api.KoModifier.EXPECT
 import com.lemonappdev.konsist.api.KoModifier.EXTERNAL
 import com.lemonappdev.konsist.api.KoModifier.FINAL
+import com.lemonappdev.konsist.api.KoModifier.FUN
 import com.lemonappdev.konsist.api.KoModifier.INFIX
 import com.lemonappdev.konsist.api.KoModifier.INLINE
 import com.lemonappdev.konsist.api.KoModifier.INNER
@@ -70,4 +71,5 @@ internal fun KoModifier.toKtToken(): KtModifierKeywordToken = when (this) {
     SUSPEND -> KtTokens.SUSPEND_KEYWORD
     EXPECT -> KtTokens.EXPECT_KEYWORD
     ACTUAL -> KtTokens.ACTUAL_KEYWORD
+    FUN -> KtTokens.FUN_KEYWORD
 }
