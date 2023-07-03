@@ -16,8 +16,7 @@ class LibrarySnippets {
     fun `forbid string in files`() {
         Konsist.scopeFromProject()
             .files()
-//            .assertNot { it.text.contains("Forbidden string") }
-        TODO("remove comment after adding assert for files")
+            .assertNot { it.text.contains("Forbidden string") }
     }
 
     fun `every api declarartion has KDoc`() {

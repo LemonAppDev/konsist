@@ -10,8 +10,7 @@ class GeneralSnippets {
     fun `no empty files allowed`() {
         Konsist.scopeFromProject()
             .files()
-        TODO("remove comment after add files assert")
-//            .assertNot { it.text.isEmpty() }
+            .assertNot { it.text.isEmpty() }
     }
     fun `no field should have 'm' prefix`() {
         Konsist.scopeFromProject()
@@ -59,8 +58,7 @@ class GeneralSnippets {
     fun `no class should use Java util logging`() {
         Konsist.scopeFromProject()
             .files()
-        TODO("remove comment after add files assert")
-//            .assert { it.hasImports("java.util.logging..")}
+            .assert { it.hasImports("java.util.logging..")}
     }
 
     fun `every constructor parameter has name derived from parameter type`() {
