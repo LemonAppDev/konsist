@@ -1,38 +1,7 @@
 package com.lemonappdev.konsist.core.ext
 
 import com.lemonappdev.konsist.api.KoModifier
-import com.lemonappdev.konsist.api.KoModifier.ABSTRACT
-import com.lemonappdev.konsist.api.KoModifier.ACTUAL
-import com.lemonappdev.konsist.api.KoModifier.ANNOTATION
-import com.lemonappdev.konsist.api.KoModifier.COMPANION
-import com.lemonappdev.konsist.api.KoModifier.CONST
-import com.lemonappdev.konsist.api.KoModifier.CONTRACT
-import com.lemonappdev.konsist.api.KoModifier.CROSSINLINE
-import com.lemonappdev.konsist.api.KoModifier.DATA
-import com.lemonappdev.konsist.api.KoModifier.DEFAULT_VISIBILITY_KEYWORD
-import com.lemonappdev.konsist.api.KoModifier.ENUM
-import com.lemonappdev.konsist.api.KoModifier.EXPECT
-import com.lemonappdev.konsist.api.KoModifier.EXTERNAL
-import com.lemonappdev.konsist.api.KoModifier.FINAL
-import com.lemonappdev.konsist.api.KoModifier.INFIX
-import com.lemonappdev.konsist.api.KoModifier.INLINE
-import com.lemonappdev.konsist.api.KoModifier.INNER
-import com.lemonappdev.konsist.api.KoModifier.INTERNAL
-import com.lemonappdev.konsist.api.KoModifier.LATEINIT
-import com.lemonappdev.konsist.api.KoModifier.NOINLINE
-import com.lemonappdev.konsist.api.KoModifier.OPEN
-import com.lemonappdev.konsist.api.KoModifier.OPERATOR
-import com.lemonappdev.konsist.api.KoModifier.OUT
-import com.lemonappdev.konsist.api.KoModifier.OVERRIDE
-import com.lemonappdev.konsist.api.KoModifier.PRIVATE
-import com.lemonappdev.konsist.api.KoModifier.PROTECTED
-import com.lemonappdev.konsist.api.KoModifier.PUBLIC
-import com.lemonappdev.konsist.api.KoModifier.REIFIED
-import com.lemonappdev.konsist.api.KoModifier.SEALED
-import com.lemonappdev.konsist.api.KoModifier.SUSPEND
-import com.lemonappdev.konsist.api.KoModifier.TAILREC
-import com.lemonappdev.konsist.api.KoModifier.VALUE
-import com.lemonappdev.konsist.api.KoModifier.VARARG
+import com.lemonappdev.konsist.api.KoModifier.*
 import org.jetbrains.kotlin.lexer.KtModifierKeywordToken
 import org.jetbrains.kotlin.lexer.KtTokens
 
@@ -70,4 +39,5 @@ internal fun KoModifier.toKtToken(): KtModifierKeywordToken = when (this) {
     SUSPEND -> KtTokens.SUSPEND_KEYWORD
     EXPECT -> KtTokens.EXPECT_KEYWORD
     ACTUAL -> KtTokens.ACTUAL_KEYWORD
+    FUN -> KtTokens.FUN_KEYWORD
 }

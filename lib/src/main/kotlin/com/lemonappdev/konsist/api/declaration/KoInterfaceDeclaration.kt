@@ -17,4 +17,11 @@ interface KoInterfaceDeclaration : KoComplexDeclaration {
      * @return `true` if the interface has the `expect` modifier, `false` otherwise.
      */
     fun hasExpectModifier(): Boolean
+
+    /**
+     * Whatever interface has a `fun` modifier.
+     *
+     * @return `true` if the interface has the `fun` modifier, `false` otherwise.
+     */
+    fun hasFunModifier(): Boolean
 }

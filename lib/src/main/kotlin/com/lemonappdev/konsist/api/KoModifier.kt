@@ -163,4 +163,9 @@ enum class KoModifier(val type: String) {
      * The `actual` modifier.
      */
     ACTUAL("actual"),
+
+    /**
+     * The `fun` modifier.
+     */
+    FUN("fun"),
 }
