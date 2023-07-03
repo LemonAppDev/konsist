@@ -29,3 +29,17 @@ fun Sequence<KoInterfaceDeclaration>.withExpectModifier(): Sequence<KoInterfaceD
  * @return A sequence containing interfaces without the `expect` modifier.
  */
 fun Sequence<KoInterfaceDeclaration>.withoutExpectModifier(): Sequence<KoInterfaceDeclaration> = filterNot { it.hasExpectModifier() }
+
+/**
+ * Sequence containing all interfaces that have `fun` modifier.
+ *
+ * @return A sequence containing interfaces with the `fun` modifier.
+ */
+fun Sequence<KoInterfaceDeclaration>.withFunModifier(): Sequence<KoInterfaceDeclaration> = filter { it.hasFunModifier() }
+
+/**
+ * Sequence containing all interfaces that don't have `fun` modifier.
+ *
+ * @return A sequence containing interfaces without the `fun` modifier.
+ */
+fun Sequence<KoInterfaceDeclaration>.withoutFunModifier(): Sequence<KoInterfaceDeclaration> = filterNot { it.hasFunModifier() }

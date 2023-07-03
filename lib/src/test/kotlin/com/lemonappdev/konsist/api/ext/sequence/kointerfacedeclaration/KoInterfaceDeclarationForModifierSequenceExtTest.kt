@@ -1,9 +1,6 @@
 package com.lemonappdev.konsist.api.ext.sequence.kointerfacedeclaration
 
-import com.lemonappdev.konsist.api.ext.sequence.withActualModifier
-import com.lemonappdev.konsist.api.ext.sequence.withExpectModifier
-import com.lemonappdev.konsist.api.ext.sequence.withoutActualModifier
-import com.lemonappdev.konsist.api.ext.sequence.withoutExpectModifier
+import com.lemonappdev.konsist.api.ext.sequence.*
 import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk
@@ -78,6 +75,42 @@ class KoInterfaceDeclarationForModifierSequenceExtTest {
 
         // when
         val sut = interfaces.withoutExpectModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(interface2)
+    }
+
+    @Test
+    fun `withFunModifier() returns interface with fun modifier`() {
+        // given
+        val interface1: KoInterfaceDeclarationImpl = mockk {
+            every { hasFunModifier() } returns true
+        }
+        val interface2: KoInterfaceDeclarationImpl = mockk {
+            every { hasFunModifier() } returns false
+        }
+        val interfaces = sequenceOf(interface1, interface2)
+
+        // when
+        val sut = interfaces.withFunModifier()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(interface1)
+    }
+
+    @Test
+    fun `withoutFunModifier() returns interface without fun modifier`() {
+        // given
+        val interface1: KoInterfaceDeclarationImpl = mockk {
+            every { hasFunModifier() } returns true
+        }
+        val interface2: KoInterfaceDeclarationImpl = mockk {
+            every { hasFunModifier() } returns false
+        }
+        val interfaces = sequenceOf(interface1, interface2)
+
+        // when
+        val sut = interfaces.withoutFunModifier()
 
         // then
         sut.toList() shouldBeEqualTo listOf(interface2)
