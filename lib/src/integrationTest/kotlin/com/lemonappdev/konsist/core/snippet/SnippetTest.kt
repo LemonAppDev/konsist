@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.snippet
 
-import com.lemonappdev.konsist.core.ext.sep
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -10,7 +9,7 @@ class SnippetTest {
     @Test
     fun `every snippet is used in tests`() {
         // given
-        val snippets = File("..$sep")
+        val snippets = File("../")
             .walk()
             .filter { it.isKotlinSnippetFile }
 
@@ -42,7 +41,7 @@ class SnippetTest {
     }
 
     private fun snippetNamesFromFiles(regex: Regex, prefix: String, suffix: String) =
-        File("..$sep")
+        File("../")
             .walk()
             .filter { it.isKotlinNotSnippetFile }
             .map { it.readText() }

@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.core.exception.KoInternalException
-import com.lemonappdev.konsist.core.util.LocationHelper
+import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isPublic
 import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
@@ -101,7 +101,7 @@ internal abstract class KoDeclarationImpl(
         else -> modifiers.containsAll(koModifiers.toList())
     }
 
-    override fun resideInPackage(packagee: String): Boolean = LocationHelper.resideInLocation(packagee, this.packagee)
+    override fun resideInPackage(packagee: String): Boolean = LocationUtil.resideInLocation(packagee, this.packagee)
 
     override fun resideOutsidePackage(packagee: String): Boolean = !resideInPackage(packagee)
 }

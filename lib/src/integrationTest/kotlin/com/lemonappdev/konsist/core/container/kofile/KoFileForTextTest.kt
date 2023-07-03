@@ -20,6 +20,7 @@ class KoFileForTextTest {
             fun sampleFunction() {
                 "SampleText"
             }
+            
                 """.trimIndent(),
             )
     }

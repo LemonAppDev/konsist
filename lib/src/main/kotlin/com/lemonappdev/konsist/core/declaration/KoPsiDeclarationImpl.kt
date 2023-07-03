@@ -5,8 +5,8 @@ import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
-import com.lemonappdev.konsist.core.util.LocationHelper
-import com.lemonappdev.konsist.core.util.TagHelper
+import com.lemonappdev.konsist.core.util.LocationUtil
+import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.kdoc.psi.api.KDoc
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
@@ -42,13 +42,7 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         "$filePath:$line:$column"
     }
 
-    override val text: String by lazy {
-        psiElement
-            .getTextWithLocation()
-            .substringBefore("' at (")
-            .removePrefix("'")
-            .removeSuffix("\n")
-    }
+    override val text: String by lazy { psiElement.text }
 
     override val locationWithText: String by lazy { "Location: $location \nDeclaration:\n$text" }
 
@@ -63,37 +57,37 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
 
     override fun hasKDoc(): Boolean = kDoc != null
 
-    protected open fun hasValidDescription(enabled: Boolean): Boolean = TagHelper.hasValidDescription(enabled, kDoc)
+    protected open fun hasValidDescription(enabled: Boolean): Boolean = TagUtil.hasValidDescription(enabled, kDoc)
 
-    protected open fun hasValidParamTag(enabled: Boolean): Boolean = TagHelper.hasValidParamTag(enabled, parameters = null, kDoc)
+    protected open fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters = null, kDoc)
 
-    protected open fun hasValidReturnTag(enabled: Boolean): Boolean = TagHelper.hasValidReturnTag(enabled, type = null, kDoc)
+    protected open fun hasValidReturnTag(enabled: Boolean): Boolean = TagUtil.hasValidReturnTag(enabled, type = null, kDoc)
 
-    protected open fun hasValidConstructorTag(enabled: Boolean): Boolean = TagHelper.hasValidConstructorTag(enabled, kDoc)
+    protected open fun hasValidConstructorTag(enabled: Boolean): Boolean = TagUtil.hasValidConstructorTag(enabled, kDoc)
 
-    protected open fun hasValidReceiverTag(enabled: Boolean): Boolean = TagHelper.hasValidReceiverTag(enabled, kDoc)
+    protected open fun hasValidReceiverTag(enabled: Boolean): Boolean = TagUtil.hasValidReceiverTag(enabled, kDoc)
 
-    protected open fun hasValidPropertyTag(enabled: Boolean): Boolean = TagHelper.hasValidPropertyTag(enabled, properties = null, kDoc)
+    protected open fun hasValidPropertyTag(enabled: Boolean): Boolean = TagUtil.hasValidPropertyTag(enabled, properties = null, kDoc)
 
-    protected open fun hasValidThrowsTag(enabled: Boolean): Boolean = TagHelper.hasValidThrowsTag(enabled, kDoc)
+    protected open fun hasValidThrowsTag(enabled: Boolean): Boolean = TagUtil.hasValidThrowsTag(enabled, kDoc)
 
-    protected open fun hasValidExceptionTag(enabled: Boolean): Boolean = TagHelper.hasValidExceptionTag(enabled, kDoc)
+    protected open fun hasValidExceptionTag(enabled: Boolean): Boolean = TagUtil.hasValidExceptionTag(enabled, kDoc)
 
-    protected open fun hasValidSampleTag(enabled: Boolean): Boolean = TagHelper.hasValidSampleTag(enabled, kDoc)
+    protected open fun hasValidSampleTag(enabled: Boolean): Boolean = TagUtil.hasValidSampleTag(enabled, kDoc)
 
-    protected open fun hasValidSeeTag(enabled: Boolean): Boolean = TagHelper.hasValidSeeTag(enabled, kDoc)
+    protected open fun hasValidSeeTag(enabled: Boolean): Boolean = TagUtil.hasValidSeeTag(enabled, kDoc)
 
-    protected open fun hasValidAuthorTag(enabled: Boolean): Boolean = TagHelper.hasValidAuthorTag(enabled, kDoc)
+    protected open fun hasValidAuthorTag(enabled: Boolean): Boolean = TagUtil.hasValidAuthorTag(enabled, kDoc)
 
-    protected open fun hasValidSinceTag(enabled: Boolean): Boolean = TagHelper.hasValidSinceTag(enabled, kDoc)
+    protected open fun hasValidSinceTag(enabled: Boolean): Boolean = TagUtil.hasValidSinceTag(enabled, kDoc)
 
-    protected open fun hasValidSuppressTag(enabled: Boolean): Boolean = TagHelper.hasValidSuppressTag(enabled, kDoc)
+    protected open fun hasValidSuppressTag(enabled: Boolean): Boolean = TagUtil.hasValidSuppressTag(enabled, kDoc)
 
-    protected open fun hasValidVersionTag(enabled: Boolean): Boolean = TagHelper.hasValidVersionTag(enabled, kDoc)
+    protected open fun hasValidVersionTag(enabled: Boolean): Boolean = TagUtil.hasValidVersionTag(enabled, kDoc)
 
-    protected open fun hasValidPropertySetterTag(enabled: Boolean): Boolean = TagHelper.hasValidPropertySetterTag(enabled, kDoc)
+    protected open fun hasValidPropertySetterTag(enabled: Boolean): Boolean = TagUtil.hasValidPropertySetterTag(enabled, kDoc)
 
-    protected open fun hasValidPropertyGetterTag(enabled: Boolean): Boolean = TagHelper.hasValidPropertyGetterTag(enabled, kDoc)
+    protected open fun hasValidPropertyGetterTag(enabled: Boolean): Boolean = TagUtil.hasValidPropertyGetterTag(enabled, kDoc)
 
     @Suppress("detekt.CyclomaticComplexMethod")
     override fun hasValidKDoc(
@@ -132,9 +126,9 @@ internal open class KoPsiDeclarationImpl(private val psiElement: PsiElement) : K
         hasValidPropertyGetterTag(verifyPropertyGetterTag)
 
     override fun resideInFilePath(path: String, absolutePath: Boolean): Boolean = if (absolutePath) {
-        LocationHelper.resideInLocation(path, filePath)
+        LocationUtil.resideInLocation(path, filePath)
     } else {
-        LocationHelper.resideInLocation(path, projectFilePath)
+        LocationUtil.resideInLocation(path, projectFilePath)
     }
 
     override fun print() {

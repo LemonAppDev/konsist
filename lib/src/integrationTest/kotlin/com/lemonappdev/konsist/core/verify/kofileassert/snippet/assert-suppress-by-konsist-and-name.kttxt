@@ -1,0 +1,3 @@
+@file:Suppress("konsist.assert-suppress-by-konsist-and-name")
+
+class SampleClass

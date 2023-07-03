@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.ext.declaration.hasReceiverTypeOf
 import kotlin.reflect.KClass
 
 /**
@@ -184,6 +185,68 @@ fun Sequence<KoFunctionDeclaration>.withExtension(): Sequence<KoFunctionDeclarat
  * @return A sequence containing functions that are not extensions.
  */
 fun Sequence<KoFunctionDeclaration>.withoutExtension(): Sequence<KoFunctionDeclaration> = filterNot { it.isExtension() }
+
+/**
+ * Sequence containing functions that have receiver type.
+ *
+ * @param types The receiver type(s) to include.
+ * @return A sequence containing functions that have the specified receiver type(s) (or any receiver type if [types] is empty).
+ */
+fun Sequence<KoFunctionDeclaration>.withReceiverType(vararg types: String): Sequence<KoFunctionDeclaration> = filter {
+    when {
+        types.isEmpty() -> it.hasReceiverType()
+        else -> types.any { type -> it.hasReceiverType(type) }
+    }
+}
+
+/**
+ * Sequence containing functions that don't have receiver type.
+ *
+ * @param types The receiver type(s) to exclude.
+ * @return A sequence containing functions that don't have the specified receiver type(s) (or none receiver type if [types] is empty).
+ */
+fun Sequence<KoFunctionDeclaration>.withoutReceiverType(vararg types: String): Sequence<KoFunctionDeclaration> = filter {
+    when {
+        types.isEmpty() -> !it.hasReceiverType()
+        else -> types.none { type -> it.hasReceiverType(type) }
+    }
+}
+
+/**
+ * Sequence containing functions that have receiver type.
+ *
+ * @return A sequence containing functions that have the receiver type of the specified type.
+ */
+inline fun <reified T> Sequence<KoFunctionDeclaration>.withReceiverTypeOf(): Sequence<KoFunctionDeclaration> =
+    filter { it.hasReceiverTypeOf<T>() }
+
+/**
+ * Sequence containing functions that don't have receiver type.
+ *
+ * @return A sequence containing functions that don't have the receiver type of the specified type.
+ */
+inline fun <reified T> Sequence<KoFunctionDeclaration>.withoutReceiverTypeOf(): Sequence<KoFunctionDeclaration> =
+    filterNot { it.hasReceiverTypeOf<T>() }
+
+/**
+ * Sequence containing functions that have receiver type.
+ *
+ * @param types The Kotlin class(es) representing the receiver type(s) to include.
+ * @return A sequence containing functions that have the receiver type of the specified Kotlin class(es).
+ */
+fun Sequence<KoFunctionDeclaration>.withReceiverTypeOf(vararg types: KClass<*>): Sequence<KoFunctionDeclaration> = filter {
+    types.any { kClass -> it.hasReceiverType(kClass.simpleName) }
+}
+
+/**
+ * Sequence containing functions that don't have receiver type.
+ *
+ * @param types The Kotlin class(es) representing the receiver type(s) to exclude.
+ * @return A sequence containing functions that don't have the receiver type of the specified Kotlin class(es).
+ */
+fun Sequence<KoFunctionDeclaration>.withoutReceiverTypeOf(vararg types: KClass<*>): Sequence<KoFunctionDeclaration> = filter {
+    types.none { kClass -> it.hasReceiverType(kClass.simpleName) }
+}
 
 /**
  * Sequence containing functions that have return type.

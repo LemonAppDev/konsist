@@ -1,0 +1,2 @@
+val Int.sampleProperty: String
+    get() = this.toString()

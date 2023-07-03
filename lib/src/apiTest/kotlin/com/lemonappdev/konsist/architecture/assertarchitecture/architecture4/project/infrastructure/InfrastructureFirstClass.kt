@@ -1,0 +1,3 @@
+package com.lemonappdev.konsist.architecture.assertarchitecture.architecture4.project.infrastructure
+
+class InfrastructureFirstClass

@@ -14,12 +14,11 @@ import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvid
 import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
-import com.lemonappdev.konsist.core.util.LocationHelper
+import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
-import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 import kotlin.reflect.KClass
 
 internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
@@ -73,13 +72,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
             .substringBefore(sep)
     }
 
-    override val text by lazy {
-        ktFile
-            .getTextWithLocation()
-            .substringBefore("' at (")
-            .removePrefix("'")
-            .removeSuffix("\n")
-    }
+    override val text: String by lazy { ktFile.text }
 
     override val imports: List<KoImportDeclaration> by lazy {
         val ktImportDirectives = ktFile
@@ -138,12 +131,12 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
 
     override fun hasPackage(name: String): Boolean = packagee
         ?.qualifiedName
-        ?.let { LocationHelper.resideInLocation(name, it) } ?: false
+        ?.let { LocationUtil.resideInLocation(name, it) } ?: false
 
     override fun hasImports(vararg names: String): Boolean = when {
         names.isEmpty() -> imports.isNotEmpty()
         else -> names.all {
-            imports.any { import -> LocationHelper.resideInLocation(it, import.name) }
+            imports.any { import -> LocationUtil.resideInLocation(it, import.name) }
         }
     }
 
@@ -154,9 +147,9 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
         }
     }
 
-    override fun resideInPath(path: String) = LocationHelper.resideInLocation(path, this.path)
+    override fun resideInPath(path: String) = LocationUtil.resideInLocation(path, this.path)
 
-    override fun resideInProjectPath(path: String) = LocationHelper.resideInLocation(path, projectPath)
+    override fun resideInProjectPath(path: String) = LocationUtil.resideInLocation(path, projectPath)
 
     override fun resideInModule(module: String): Boolean = module == moduleName
 

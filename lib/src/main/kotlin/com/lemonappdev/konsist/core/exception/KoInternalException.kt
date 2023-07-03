@@ -1,17 +1,33 @@
 package com.lemonappdev.konsist.core.exception
 
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 
 class KoInternalException(
     message: String,
     cause: Throwable? = null,
     koBaseDeclaration: KoBaseDeclaration? = null,
-) : KoException(message.prepare(koBaseDeclaration), cause)
+) : KoException(getMessage(message, koBaseDeclaration), cause) {
 
-private fun String.prepare(koBaseDeclaration: KoBaseDeclaration?): String {
+    constructor(
+        message: String,
+        cause: Throwable? = null,
+        koFile: KoFile?,
+    ) : this(getMessage(message, koFile), cause)
+}
+
+private fun getMessage(message: String, koBaseDeclaration: KoBaseDeclaration?): String {
     return if (koBaseDeclaration == null) {
-        this
+        message
     } else {
-        "$this, declaration:\n${koBaseDeclaration.text}"
+        "$message, declaration:\n${koBaseDeclaration.text}"
+    }
+}
+
+private fun getMessage(message: String, koFile: KoFile?): String {
+    return if (koFile == null) {
+        message
+    } else {
+        "$message, file:\n${koFile.text}"
     }
 }

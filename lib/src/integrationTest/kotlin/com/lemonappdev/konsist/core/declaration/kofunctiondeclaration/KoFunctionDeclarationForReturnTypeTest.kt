@@ -76,6 +76,23 @@ class KoFunctionDeclarationForReturnTypeTest {
         }
     }
 
+    @Test
+    fun `extension-function-not-return-type`() {
+        // given
+        val sut = getSnippetFile("extension-function-not-return-type")
+            .functions()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasReturnType() shouldBeEqualTo false
+            returnType?.sourceType shouldBeEqualTo null
+            returnType?.importAliasName shouldBeEqualTo null
+            returnType?.name shouldBeEqualTo null
+            returnType?.isImportAlias() shouldBeEqualTo null
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forreturntype/", fileName)
 }
