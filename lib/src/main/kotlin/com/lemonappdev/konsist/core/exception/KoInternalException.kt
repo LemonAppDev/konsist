@@ -16,18 +16,12 @@ class KoInternalException(
     ) : this(getMessage(message, koFile), cause)
 }
 
-private fun getMessage(message: String, koBaseDeclaration: KoBaseDeclaration?): String {
-    return if (koBaseDeclaration == null) {
-        message
-    } else {
-        "$message, declaration:\n${koBaseDeclaration.text}"
-    }
-}
+private fun getMessage(message: String, koBaseDeclaration: KoBaseDeclaration?) = getMessage(message, koBaseDeclaration?.text, "declaration")
 
-private fun getMessage(message: String, koFile: KoFile?): String {
-    return if (koFile == null) {
-        message
-    } else {
-        "$message, file:\n${koFile.text}"
-    }
+private fun getMessage(message: String, koFile: KoFile?) = getMessage(message, koFile?.text, "file")
+
+private fun getMessage(message: String, suffix: String?, type: String) = if (suffix == null) {
+    message
+} else {
+    "$message, $type:\n$suffix"
 }

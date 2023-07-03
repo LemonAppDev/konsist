@@ -29,6 +29,17 @@ class KoInterfaceDeclarationForModifierTest {
     }
 
     @Test
+    fun `interface-has-fun-modifier`() {
+        // given
+        val sut = getSnippetFile("interface-has-fun-modifier")
+            .interfaces()
+            .first()
+
+        // then
+        sut.hasFunModifier() shouldBeEqualTo true
+    }
+
+    @Test
     fun `interface-has-no-modifier`() {
         // given
         val sut = getSnippetFile("interface-has-no-modifier")
@@ -39,6 +50,7 @@ class KoInterfaceDeclarationForModifierTest {
         assertSoftly(sut) {
             hasActualModifier() shouldBeEqualTo false
             hasExpectModifier() shouldBeEqualTo false
+            hasFunModifier() shouldBeEqualTo false
         }
     }
 

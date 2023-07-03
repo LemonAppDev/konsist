@@ -13,6 +13,8 @@ internal class KoInterfaceDeclarationImpl private constructor(ktClass: KtClass, 
 
     override fun hasExpectModifier(): Boolean = hasModifiers(KoModifier.EXPECT)
 
+    override fun hasFunModifier(): Boolean = hasModifiers(KoModifier.FUN)
+
     internal companion object {
         private val cache: KoDeclarationCache<KoInterfaceDeclaration> = KoDeclarationCache()
 
