@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.exception
 
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import java.awt.SystemColor.text
 
 class KoInternalException(
     message: String,
