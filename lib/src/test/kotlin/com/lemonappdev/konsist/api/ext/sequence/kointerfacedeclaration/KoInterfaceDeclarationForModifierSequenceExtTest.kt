@@ -1,6 +1,11 @@
 package com.lemonappdev.konsist.api.ext.sequence.kointerfacedeclaration
 
-import com.lemonappdev.konsist.api.ext.sequence.*
+import com.lemonappdev.konsist.api.ext.sequence.withActualModifier
+import com.lemonappdev.konsist.api.ext.sequence.withExpectModifier
+import com.lemonappdev.konsist.api.ext.sequence.withFunModifier
+import com.lemonappdev.konsist.api.ext.sequence.withoutActualModifier
+import com.lemonappdev.konsist.api.ext.sequence.withoutExpectModifier
+import com.lemonappdev.konsist.api.ext.sequence.withoutFunModifier
 import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk
