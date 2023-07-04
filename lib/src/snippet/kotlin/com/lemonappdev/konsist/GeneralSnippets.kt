@@ -16,6 +16,7 @@ class GeneralSnippets {
             .files()
             .assertNot { it.text.isEmpty() }
     }
+
     fun `no field should have 'm' prefix`() {
         Konsist.scopeFromProject()
             .classes()
@@ -31,13 +32,28 @@ class GeneralSnippets {
             .assert { it.hasAnnotations("javax.inject.Inject") }
     }
 
+    fun `no class should use Java util logging`() {
+        Konsist.scopeFromProject()
+            .files()
+            .assert { it.hasImports("java.util.logging..") }
+    }
+
+    // ToDo("moze wykluczyc tutaj data, value i enum classes? )
+    fun `every constructor parameter has name derived from parameter type`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .mapNotNull { it.primaryConstructor }
+            .flatMap { it.parameters }
+            .assert { it.name.toTitleCase() == it.type.sourceType }
+    }
+
     fun `every class constructor has alphabetically ordered parameters`() {
         Konsist.scopeFromProject()
             .classes()
             .flatMap { it.allConstructors }
             .assert {
                 val names = it.parameters.map { parameter -> parameter.name }
-                val sortedNames = it.parameters.map { parameter -> parameter.name }.sorted()
+                val sortedNames = names.sorted()
                 names == sortedNames
             }
     }
@@ -51,34 +67,6 @@ class GeneralSnippets {
                     .replace("/", ".")
                     .endsWith(it.qualifiedName)
             }
-    }
-
-    fun `no wildcard imports allowed`() {
-        Konsist.scopeFromProject()
-            .imports()
-            .assertNot { it.isWildcard }
-    }
-
-    fun `no class should use Java util logging`() {
-        Konsist.scopeFromProject()
-            .files()
-            .assert { it.hasImports("java.util.logging..") }
-    }
-
-    fun `every constructor parameter has name derived from parameter type`() {
-        Konsist.scopeFromProject()
-            .classes()
-            .mapNotNull { it.primaryConstructor }
-            .flatMap { it.parameters }
-            .assert { it.name.toTitleCase() == it.type.sourceType }
-    }
-
-    fun `value class has parameter named 'value'`() {
-        Konsist.scopeFromProject()
-            .classes()
-            .withValueModifier()
-            .mapNotNull { it.primaryConstructor }
-            .assert { it.hasParameterNamed("value") }
     }
 
     fun `Kotlin member order - properties are before functions`() {
@@ -95,6 +83,20 @@ class GeneralSnippets {
 
                 lastKoPropertyDeclarationIndex < firstKoFunctionDeclarationIndex
             }
+    }
+
+    fun `no wildcard imports allowed`() {
+        Konsist.scopeFromProject()
+            .imports()
+            .assertNot { it.isWildcard }
+    }
+
+    fun `value class has parameter named 'value'`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .withValueModifier()
+            .mapNotNull { it.primaryConstructor }
+            .assert { it.hasParameterNamed("value") }
     }
 }
 

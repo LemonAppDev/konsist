@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.ext.sequence.withName
 import com.lemonappdev.konsist.api.ext.sequence.withoutAnnotationsOf
 import com.lemonappdev.konsist.api.ext.sequence.withoutNameEndingWith
@@ -13,13 +14,7 @@ import org.junit.jupiter.api.TestTemplate
 import org.junit.jupiter.params.ParameterizedTest
 
 class LibrarySnippets {
-    fun `forbid string in files`() {
-        Konsist.scopeFromProject()
-            .files()
-            .assertNot { it.text.contains("Forbidden string") }
-    }
-
-    fun `every api declarartion has KDoc`() {
+    fun `every api declaration has KDoc`() {
         Konsist.scopeFromPackage("..api..")
             .declarations(includeNested = true)
             .assert { it.hasKDoc() }
@@ -31,19 +26,17 @@ class LibrarySnippets {
             .assert { it.hasValidKDoc() }
     }
 
-    fun `test classes should have all members private besides tests`() {
-        Konsist.scopeFromTest()
-            .classes(includeNested = true)
-            // we must exclude test classes
-            .withoutNameEndingWith("Test")
-            .withoutAnnotationsOf(
-                Test::class,
-                ParameterizedTest::class,
-                TestFactory::class,
-                RepeatedTest::class,
-                TestTemplate::class,
-            )
-            .assert { it.hasPrivateModifier() }
+    fun `test classes should reside in the same package as tested class`() {
+        Konsist.scopeFromProduction()
+            .classes()
+            .filter { it.hasTest() }
+            .assert {
+                Konsist.scopeFromTest()
+                    .classes()
+                    .withName("${it.name}Test")
+                    .first()
+                    .packagee == it.packagee
+            }
     }
 
     fun `test classes should have test subject named sut`() {
@@ -59,17 +52,25 @@ class LibrarySnippets {
             }
     }
 
-    fun `test classes should reside in the same package as tested class`() {
-        Konsist.scopeFromProduction()
+    fun `test classes should have all members private besides tests`() {
+        Konsist.scopeFromTest()
             .classes()
-            .filter { it.hasTest() }
-            .assert {
-                Konsist.scopeFromTest()
-                    .classes()
-                    .withName("${it.name}Test")
-                    .first()
-                    .packagee == it.packagee
-            }
+            .flatMap { it.declarations() }
+            .map { it as KoDeclaration }
+            .withoutAnnotationsOf(
+                Test::class,
+                ParameterizedTest::class,
+                TestFactory::class,
+                RepeatedTest::class,
+                TestTemplate::class,
+            )
+            .assert { it.hasPrivateModifier() }
+    }
+
+    fun `forbid string in files`() {
+        Konsist.scopeFromProject()
+            .files()
+            .assertNot { it.text.contains("Forbidden string") }
     }
 
     fun `junit 'Test' annotation is not allowed for functions`() {
