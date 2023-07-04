@@ -16,7 +16,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     private val projectKotlinFiles: Sequence<KoFile> by lazy { File(pathProvider.rootProjectPath).toKoFiles() }
 
-    override val projectRootPath: String by lazy { pathProvider.rootProjectPath }
+    override val projectRootPath: String by lazy { pathProvider.rootProjectPath.toMacOsSeparator() }
 
     override fun scopeFromProject(moduleName: String?, sourceSetName: String?, ignoreBuildConfig: Boolean): KoScope {
         val koFiles = getFiles(moduleName, sourceSetName, ignoreBuildConfig)
@@ -134,12 +134,12 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
      */
     private fun isBuildPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
-        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toMacOsSeparator())
-        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
+        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*")
+        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*")
 
         val mavenBuildDirectoryName = "target"
-        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toMacOsSeparator())
-        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*".toMacOsSeparator())
+        val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*")
+        val mavenModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$mavenBuildDirectoryName/.*")
 
         return path.matches(gradleRootBuildDirectoryRegex) ||
             path.matches(gradleModuleBuildDirectoryRegex) ||
