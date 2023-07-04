@@ -60,3 +60,6 @@ annotation class SampleAnnotation2
     AnnotationTarget.TYPEALIAS,
 )
 annotation class SampleAnnotationWithParameter(val sampleParameter: String)
+
+@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.TYPEALIAS)
+annotation class SampleAnnotationWithAngleBrackets<T, U>
