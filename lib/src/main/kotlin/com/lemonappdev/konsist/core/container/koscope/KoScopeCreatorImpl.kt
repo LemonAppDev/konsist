@@ -71,7 +71,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
             "$pathPrefix/src/$sourceSetName/.*"
         } else {
             "$pathPrefix/src/.*"
-        }.toMacOsSeparator()
+        }
 
         return localProjectKotlinFiles
             .filter { it.path.toMacOsSeparator().matches(Regex(pathPrefix)) }
