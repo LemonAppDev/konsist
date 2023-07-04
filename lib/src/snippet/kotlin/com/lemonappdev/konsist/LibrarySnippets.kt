@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.ext.sequence.withName
 import com.lemonappdev.konsist.api.ext.sequence.withoutAnnotationsOf
-import com.lemonappdev.konsist.api.ext.sequence.withoutNameEndingWith
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 import org.junit.jupiter.api.RepeatedTest
