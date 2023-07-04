@@ -15,7 +15,6 @@ on:
 jobs:
   check-kttxt-snippets:
     name: Check kttxt Snippets
-    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: checkout
