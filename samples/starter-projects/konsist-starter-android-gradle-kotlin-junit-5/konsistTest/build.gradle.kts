@@ -37,5 +37,5 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.3")
 
-    testImplementation("com.lemonappdev:konsist:0.7.12")
+    testImplementation("com.lemonappdev:konsist:0.8.0")
 }
