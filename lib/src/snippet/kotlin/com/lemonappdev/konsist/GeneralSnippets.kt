@@ -1,9 +1,14 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.sequence.withValueModifier
+import com.lemonappdev.konsist.core.ext.indexOfFirst
+import com.lemonappdev.konsist.core.ext.indexOfLast
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
+import org.junit.jupiter.api.Test
 import java.util.*
 
 class GeneralSnippets {
@@ -75,6 +80,23 @@ class GeneralSnippets {
             .withValueModifier()
             .mapNotNull { it.primaryConstructor }
             .assert { it.hasParameterNamed("value") }
+    }
+
+    @Test
+    fun `Kotlin member order - properties are before functions`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .assert {
+                val lastKoPropertyDeclarationIndex = it
+                    .declarations()
+                    .indexOfLast<KoPropertyDeclaration>()
+
+                val firstKoFunctionDeclarationIndex = it
+                    .declarations()
+                    .indexOfFirst<KoFunctionDeclaration>()
+
+                lastKoPropertyDeclarationIndex < firstKoFunctionDeclarationIndex
+            }
     }
 }
 

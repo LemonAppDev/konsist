@@ -42,5 +42,11 @@ testing {
                 implementation(libs.kluent)
             }
         }
+
+        register("snippet", JvmTestSuite::class) {
+            dependencies {
+                implementation(project(":lib"))
+            }
+        }
     }
 }
