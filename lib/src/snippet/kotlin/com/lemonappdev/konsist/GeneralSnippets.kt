@@ -8,7 +8,6 @@ import com.lemonappdev.konsist.core.ext.indexOfFirst
 import com.lemonappdev.konsist.core.ext.indexOfLast
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
-import org.junit.jupiter.api.Test
 import java.util.*
 
 class GeneralSnippets {
@@ -82,7 +81,6 @@ class GeneralSnippets {
             .assert { it.hasParameterNamed("value") }
     }
 
-    @Test
     fun `Kotlin member order - properties are before functions`() {
         Konsist.scopeFromProject()
             .classes()
