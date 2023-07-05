@@ -1,30 +1,19 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.sequence.withAnnotationOf
-import com.lemonappdev.konsist.api.ext.sequence.withNameEndingWith
-import com.lemonappdev.konsist.core.verify.assert
-import org.springframework.stereotype.Repository
+import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
+import com.lemonappdev.konsist.api.architecture.Layer
 
 class ArchitectureSnippets {
-    fun `classes with 'Repository' annotation should reside in 'data' package`() {
-        Konsist.scopeFromProject()
-            .classes()
-            .withAnnotationOf<Repository>()
-            .assert { it.resideInPackage("..data..") }
-    }
+    fun `2 layer architecture has correct dependencies`() {
+        Konsist
+            .scopeFromProject()
+            .assertArchitecture {
+                val presentation = Layer("Presentation", "com.myapp.presentation..")
+                val data = Layer("Data", "com.myapp.data..")
 
-    fun `classes with 'UseCase' suffix should reside in 'domain' and 'usecase' packages`() {
-        Konsist.scopeFromProject()
-            .classes()
-            .withNameEndingWith("UseCase")
-            .assert { it.resideInPackage("..domain..usecase..") }
-    }
-
-    fun `classes with 'UseCase' suffix should have single method named 'invoke'`() {
-        Konsist.scopeFromProject()
-            .classes()
-            .withNameEndingWith("UseCase")
-            .assert { it.declarations().toList().size == 1 && it.containsFunction("invoke") && it.isPublicOrDefault() }
+                presentation.dependsOn(data)
+                data.dependsOnNothing()
+            }
     }
 }

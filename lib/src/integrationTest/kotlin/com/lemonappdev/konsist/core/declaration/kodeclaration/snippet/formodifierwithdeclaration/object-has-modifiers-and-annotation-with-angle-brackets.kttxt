@@ -1,5 +1,5 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
+import com.lemonappdev.konsist.testdata.SampleAnnotationWithAngleBrackets
 
-@SampleAnnotation<String, Int>
+@SampleAnnotationWithAngleBrackets<String, Int>
 private data object SampleObject {
 }

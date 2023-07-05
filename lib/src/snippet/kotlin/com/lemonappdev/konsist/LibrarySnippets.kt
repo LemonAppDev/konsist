@@ -47,22 +47,16 @@ class LibrarySnippets {
             .assert { it.hasPrivateModifier() }
     }
 
-    fun `forbid string in files`() {
+    fun `forbid the usage of 'forbiddenString' in file`() {
         Konsist.scopeFromProject()
             .files()
-            .assertNot { it.text.contains("Forbidden string") }
+            .assertNot { it.text.contains("forbiddenString") }
     }
 
     fun `junit 'Test' annotation is not allowed for functions`() {
         Konsist.scopeFromTest()
             .functions(includeNested = true)
             .assertNot { it.hasAnnotations("org.junit.Test") }
-    }
-
-    fun `every class in the 'feature' module reside in package 'feature'`() {
-        Konsist.scopeFromModule("feature")
-            .classes(includeNested = true)
-            .assert { it.resideInPackage("..feature..") }
     }
 
     fun `every public function in api package must have explicit return type`() {

@@ -1,5 +1,4 @@
-import com.lemonappdev.konsist.testdata.SampleType
-
 object SampleObject {
-    val Int.sampleProperty: SampleType = SampleType()
+    val Int.sampleProperty: Int
+        get() = 6
 }

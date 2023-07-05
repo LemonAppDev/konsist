@@ -49,11 +49,11 @@ class KoPropertyDeclarationForTypeTest {
 
         // then
         assertSoftly(sut.type) {
-            it?.sourceType shouldBeEqualTo "SampleType"
+            it?.sourceType shouldBeEqualTo "Int"
             it?.importAliasName shouldBeEqualTo ""
-            it?.name shouldBeEqualTo "SampleType"
+            it?.name shouldBeEqualTo "Int"
             it?.isImportAlias() shouldBeEqualTo false
-            it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+            it?.fullyQualifiedName shouldBeEqualTo ""
         }
     }
 
@@ -61,22 +61,6 @@ class KoPropertyDeclarationForTypeTest {
     fun `property-has-no-type`() {
         // given
         val sut = getSnippetFile("property-has-no-type")
-            .properties(includeNested = true)
-            .first()
-
-        // then
-        assertSoftly(sut.type) {
-            it?.sourceType shouldBeEqualTo null
-            it?.name shouldBeEqualTo null
-            it?.isImportAlias() shouldBeEqualTo null
-            it?.fullyQualifiedName shouldBeEqualTo null
-        }
-    }
-
-    @Test
-    fun `property-with-extension-has-no-type`() {
-        // given
-        val sut = getSnippetFile("property-with-extension-has-no-type")
             .properties(includeNested = true)
             .first()
 

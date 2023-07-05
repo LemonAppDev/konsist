@@ -1,14 +1,19 @@
 package com.lemonappdev.konsist
 
+import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
 import com.lemonappdev.konsist.api.ext.sequence.withValueModifier
-import com.lemonappdev.konsist.core.ext.indexOfFirst
-import com.lemonappdev.konsist.core.ext.indexOfLast
+import com.lemonappdev.konsist.core.ext.indexOfFirstInstance
+import com.lemonappdev.konsist.core.ext.indexOfLastInstance
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 import java.util.*
+import javax.inject.Inject
 
 class GeneralSnippets {
     fun `no empty files allowed`() {
@@ -29,7 +34,7 @@ class GeneralSnippets {
     fun `no class should use field injection`() {
         Konsist.scopeFromProject()
             .classes()
-            .assert { it.hasAnnotations("javax.inject.Inject") }
+            .assert { it.hasAnnotationOf<Inject>() }
     }
 
     fun `no class should use Java util logging`() {
@@ -66,19 +71,37 @@ class GeneralSnippets {
             .assert { it.hasMatchingFilePath }
     }
 
-    fun `Kotlin member order - properties are before functions`() {
+    fun `properties are declared before functions`() {
         Konsist.scopeFromProject()
             .classes()
             .assert {
                 val lastKoPropertyDeclarationIndex = it
                     .declarations()
-                    .indexOfLast<KoPropertyDeclaration>()
+                    .indexOfLastInstance<KoPropertyDeclaration>()
 
                 val firstKoFunctionDeclarationIndex = it
                     .declarations()
-                    .indexOfFirst<KoFunctionDeclaration>()
+                    .indexOfFirstInstance<KoFunctionDeclaration>()
 
                 lastKoPropertyDeclarationIndex < firstKoFunctionDeclarationIndex
+            }
+    }
+
+    fun `companion object is the last declaration in the class`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .assert {
+                val companionObjectIndex = it
+                    .declarations()
+                    .indexOfLast { declaration ->
+                        declaration is KoObjectDeclaration && declaration.hasModifiers(KoModifier.COMPANION)
+                    }
+
+                val lastIndex = it
+                    .declarations()
+                    .indexOfLastInstance<KoNamedDeclaration>()
+
+                companionObjectIndex == lastIndex
             }
     }
 
@@ -88,11 +111,17 @@ class GeneralSnippets {
             .assertNot { it.isWildcard }
     }
 
-    fun `value class has parameter named 'value'`() {
+    fun `every value class has parameter named 'value'`() {
         Konsist.scopeFromProject()
             .classes()
             .withValueModifier()
             .mapNotNull { it.primaryConstructor }
             .assert { it.hasParameterNamed("value") }
+    }
+
+    fun `every class in the 'feature' module reside in package 'feature'`() {
+        Konsist.scopeFromModule("feature")
+            .classes(includeNested = true)
+            .assert { it.resideInPackage("..feature..") }
     }
 }
