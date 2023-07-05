@@ -20,7 +20,7 @@ internal class KoPackageDeclarationImpl private constructor(private val ktPackag
     override val hasMatchingFilePath: Boolean by lazy {
         filePath
             .replace("/", ".")
-            .endsWith(qualifiedName)
+            .endsWith(qualifiedName + "." + containingFile.nameWithExtension)
     }
 
     internal companion object {
