@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.declaration
+package com.lemonappdev.konsist
 
 import androidx.lifecycle.ViewModel
 import com.lemonappdev.konsist.api.Konsist
