@@ -17,6 +17,12 @@ internal class KoPackageDeclarationImpl private constructor(private val ktPackag
         }
     }
 
+    override val hasMatchingFilePath: Boolean by lazy {
+        filePath
+            .replace("/", ".")
+            .endsWith(qualifiedName)
+    }
+
     internal companion object {
         private val cache: KoDeclarationCache<KoPackageDeclaration> = KoDeclarationCache()
 

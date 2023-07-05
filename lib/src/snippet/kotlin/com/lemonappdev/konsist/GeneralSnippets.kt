@@ -63,12 +63,7 @@ class GeneralSnippets {
     fun `package name must match file path`() {
         Konsist.scopeFromProject()
             .packages()
-            .assert {
-                it
-                    .filePath
-                    .replace("/", ".")
-                    .endsWith(it.qualifiedName)
-            }
+            .assert { it.hasMatchingFilePath }
     }
 
     fun `Kotlin member order - properties are before functions`() {
