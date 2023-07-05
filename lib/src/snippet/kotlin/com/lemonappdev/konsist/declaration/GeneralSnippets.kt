@@ -3,12 +3,14 @@ package com.lemonappdev.konsist.declaration
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
 import com.lemonappdev.konsist.api.ext.sequence.withValueModifier
 import com.lemonappdev.konsist.core.ext.indexOfFirstInstance
 import com.lemonappdev.konsist.core.ext.indexOfLastInstance
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 import java.util.*
+import javax.inject.Inject
 
 class GeneralSnippets {
     fun `no empty files allowed`() {
@@ -29,7 +31,7 @@ class GeneralSnippets {
     fun `no class should use field injection`() {
         Konsist.scopeFromProject()
             .classes()
-            .assert { it.hasAnnotations("javax.inject.Inject") }
+            .assert { it.hasAnnotationOf<Inject>() }
     }
 
     fun `no class should use Java util logging`() {
@@ -71,7 +73,7 @@ class GeneralSnippets {
             }
     }
 
-    fun `Kotlin member order - properties are before functions`() {
+    fun `properties are declared before functions`() {
         Konsist.scopeFromProject()
             .classes()
             .assert {
@@ -93,11 +95,17 @@ class GeneralSnippets {
             .assertNot { it.isWildcard }
     }
 
-    fun `value class has parameter named 'value'`() {
+    fun `every value class has parameter named 'value'`() {
         Konsist.scopeFromProject()
             .classes()
             .withValueModifier()
             .mapNotNull { it.primaryConstructor }
             .assert { it.hasParameterNamed("value") }
+    }
+
+    fun `every class in the 'feature' module reside in package 'feature'`() {
+        Konsist.scopeFromModule("feature")
+            .classes(includeNested = true)
+            .assert { it.resideInPackage("..feature..") }
     }
 }
