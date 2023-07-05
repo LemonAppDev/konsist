@@ -1,7 +1,10 @@
 package com.lemonappdev.konsist.declaration
 
+import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
 import com.lemonappdev.konsist.api.ext.sequence.withValueModifier
@@ -86,6 +89,24 @@ class GeneralSnippets {
                     .indexOfFirstInstance<KoFunctionDeclaration>()
 
                 lastKoPropertyDeclarationIndex < firstKoFunctionDeclarationIndex
+            }
+    }
+
+    fun `companion object is the last declaration in the class`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .assert {
+                val companionObjectIndex = it
+                    .declarations()
+                    .indexOfLast { declaration ->
+                        declaration is KoObjectDeclaration && declaration.hasModifiers(KoModifier.COMPANION)
+                    }
+
+                val lastIndex = it
+                    .declarations()
+                    .indexOfLastInstance<KoNamedDeclaration>()
+
+                companionObjectIndex == lastIndex
             }
     }
 
