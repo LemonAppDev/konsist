@@ -11,6 +11,8 @@ interface KoDeclarationCoreProvider : KoDeclarationProvider {
         name: String,
         includeNested: Boolean = false,
     ): Boolean = declarations(includeNested).any { it.name == name }
+
+    fun numDeclarations(includeNested: Boolean = false): Int = declarations(includeNested).toList().size
 }
 
 interface KoClassCoreProvider : KoDeclarationCoreProvider, KoClassProvider {
@@ -25,6 +27,8 @@ interface KoClassCoreProvider : KoDeclarationCoreProvider, KoClassProvider {
         includeNested: Boolean = false,
     ): Boolean =
         classes(includeNested).any { it.name == name }
+
+    fun numClasses(includeNested: Boolean = false): Int = classes(includeNested).toList().size
 }
 
 interface KoInterfaceCoreProvider : KoDeclarationCoreProvider, KoInterfaceProvider {
@@ -38,6 +42,8 @@ interface KoInterfaceCoreProvider : KoDeclarationCoreProvider, KoInterfaceProvid
         includeNested: Boolean = false,
     ): Boolean =
         interfaces(includeNested).any { it.name == name }
+
+    fun numInterfaces(includeNested: Boolean = false): Int = interfaces(includeNested).toList().size
 }
 
 interface KoObjectCoreProvider : KoDeclarationCoreProvider, KoObjectProvider {
@@ -49,6 +55,8 @@ interface KoObjectCoreProvider : KoDeclarationCoreProvider, KoObjectProvider {
         name: String,
         includeNested: Boolean = false,
     ): Boolean = objects(includeNested).any { it.name == name }
+
+    fun numObjects(includeNested: Boolean = false): Int = objects(includeNested).toList().size
 }
 
 interface KoPropertyCoreProvider : KoDeclarationCoreProvider, KoPropertyProvider {
@@ -63,6 +71,8 @@ interface KoPropertyCoreProvider : KoDeclarationCoreProvider, KoPropertyProvider
         includeLocal: Boolean = false,
     ): Boolean =
         properties(includeNested, includeLocal).any { it.name == name }
+
+    fun numProperties(includeNested: Boolean = false, includeLocal: Boolean = false): Int = properties(includeNested, includeLocal).toList().size
 }
 
 interface KoFunctionCoreProvider : KoDeclarationCoreProvider, KoFunctionProvider {
@@ -76,4 +86,6 @@ interface KoFunctionCoreProvider : KoDeclarationCoreProvider, KoFunctionProvider
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
     ): Boolean = functions(includeNested, includeLocal).any { it.name == name }
+
+    fun numFunctions(includeNested: Boolean = false, includeLocal: Boolean = false): Int = functions(includeNested, includeLocal).toList().size
 }
