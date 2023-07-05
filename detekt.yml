@@ -324,7 +324,7 @@ naming:
     minimumFunctionNameLength: 3
   FunctionNaming:
     active: true
-    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**', '**/apiTest/**' ]
+    excludes: [ '**/test/**', '**/integrationTest/**', '**/konsistTest/**', '**/apiTest/**', '**/snippet/**' ]
     functionPattern: '[a-z][a-zA-Z0-9]*'
     excludeClassPattern: '$^'
     ignoreAnnotated: [ 'Composable' ]
