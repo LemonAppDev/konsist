@@ -27,3 +27,17 @@ fun Sequence<KoPackageDeclaration>.withoutQualifiedName(
 ): Sequence<KoPackageDeclaration> = filter {
     it.qualifiedName != qualifiedName && qualifiedNames.none { name -> it.qualifiedName == name }
 }
+
+/**
+ * Sequence containing all packages that have a matching file path.
+ *
+ * @return A sequence containing packages with a matching file path.
+ */
+fun Sequence<KoPackageDeclaration>.withMatchingFilePath(): Sequence<KoPackageDeclaration> = filter { it.hasMatchingFilePath }
+
+/**
+ * Sequence containing all packages that don't have a matching file path.
+ *
+ * @return A sequence containing packages without a matching file path.
+ */
+fun Sequence<KoPackageDeclaration>.withoutMatchingFilePath(): Sequence<KoPackageDeclaration> = filterNot { it.hasMatchingFilePath }
