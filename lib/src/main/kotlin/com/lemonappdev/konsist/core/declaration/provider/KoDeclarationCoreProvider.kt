@@ -72,7 +72,8 @@ interface KoPropertyCoreProvider : KoDeclarationCoreProvider, KoPropertyProvider
     ): Boolean =
         properties(includeNested, includeLocal).any { it.name == name }
 
-    fun numProperties(includeNested: Boolean = false, includeLocal: Boolean = false): Int = properties(includeNested, includeLocal).toList().size
+    fun numProperties(includeNested: Boolean = false, includeLocal: Boolean = false): Int =
+        properties(includeNested, includeLocal).toList().size
 }
 
 interface KoFunctionCoreProvider : KoDeclarationCoreProvider, KoFunctionProvider {
@@ -87,5 +88,6 @@ interface KoFunctionCoreProvider : KoDeclarationCoreProvider, KoFunctionProvider
         includeLocal: Boolean = false,
     ): Boolean = functions(includeNested, includeLocal).any { it.name == name }
 
-    fun numFunctions(includeNested: Boolean = false, includeLocal: Boolean = false): Int = functions(includeNested, includeLocal).toList().size
+    fun numFunctions(includeNested: Boolean = false, includeLocal: Boolean = false): Int =
+        functions(includeNested, includeLocal).toList().size
 }
