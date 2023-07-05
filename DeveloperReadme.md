@@ -59,11 +59,13 @@ flowchart LR
     Client --> Konsist
 ```
 
-## Test Source Sets
+## Custom Source Sets
 
-- `test` - unit tests with mocks (tests using `mockk` library)
-- `integrationTest` - tests using real code snippets (tests using `kotest` library code)
+- `apiTest` - tests multiple classes together
+- `integrationTest` - test each class in separation 
 - `konsistTest` - tests using `konsist` library using `konsist` library code
+- `snippets` - contain code snippets, written as tests, but lacking `@Test` annotation, so they will no te executed
+- `test` - unit tests with mocks (tests using `mockk` library)
 
 # Naming Conventions
 
