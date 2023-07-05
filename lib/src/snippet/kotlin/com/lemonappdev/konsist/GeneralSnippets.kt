@@ -102,9 +102,7 @@ class GeneralSnippets {
                         declaration is KoObjectDeclaration && declaration.hasModifiers(KoModifier.COMPANION)
                     }
 
-                val lastIndex = it
-                    .declarations()
-                    .indexOfLastInstance<KoNamedDeclaration>()
+                val lastIndex = it.numDeclarations() - 1
 
                 companionObjectIndex == lastIndex
             }
