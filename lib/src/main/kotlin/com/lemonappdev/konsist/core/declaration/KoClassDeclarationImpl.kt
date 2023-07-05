@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.provider.KoPrimaryConstructorProviderCore
+import com.lemonappdev.konsist.core.provider.KoConstructorProviderCore
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 internal class KoClassDeclarationImpl private constructor(override val ktClass: KtClass, override val parent: KoBaseDeclaration?
 ) :
-    KoPrimaryConstructorProviderCore,
+    KoConstructorProviderCore,
     KoComplexDeclarationImpl(ktClass, parent),
     KoClassDeclaration {
     override val parents: List<KoParentDeclaration> by lazy {
@@ -53,22 +53,6 @@ internal class KoClassDeclarationImpl private constructor(override val ktClass: 
             ?.first()
 
         parentClass?.let { KoParentDeclarationImpl.getInstance(it, this) }
-    }
-
-    override val primaryConstructor: KoPrimaryConstructorDeclaration? by lazy {
-        val localPrimaryConstructor = ktClass.primaryConstructor ?: return@lazy null
-
-        KoPrimaryConstructorDeclarationCore.getInstance(localPrimaryConstructor, this)
-    }
-
-    override val secondaryConstructors: List<KoSecondaryConstructorDeclaration> by lazy {
-        ktClass
-            .secondaryConstructors
-            .map { KoSecondaryConstructorDeclarationImpl.getInstance(it, this) }
-    }
-
-    override val allConstructors: List<KoConstructorDeclaration> by lazy {
-        listOfNotNull(primaryConstructor) + secondaryConstructors
     }
 
     override fun hasEnumModifier(): Boolean = hasModifiers(KoModifier.ENUM)

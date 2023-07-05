@@ -1,11 +1,11 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
+import com.lemonappdev.konsist.api.provider.KoConstructorProvider
 
 /**
  * Represents a Kotlin class declaration.
  */
-interface KoClassDeclaration : KoComplexDeclaration, KoPrimaryConstructorProvider {
+interface KoClassDeclaration : KoComplexDeclaration, KoConstructorProvider {
     /**
      * The parents of the class.
      */
@@ -20,21 +20,6 @@ interface KoClassDeclaration : KoComplexDeclaration, KoPrimaryConstructorProvide
      * The parent class of the class.
      */
     val parentClass: KoParentDeclaration?
-
-    /**
-     * The parent interfaces of the class.
-     */
-    override val primaryConstructor: KoPrimaryConstructorDeclaration?
-
-    /**
-     * The secondary constructors of the class.
-     */
-    val secondaryConstructors: List<KoSecondaryConstructorDeclaration>
-
-    /**
-     * The all primary and secondary constructors of the class.
-     */
-    val allConstructors: List<KoConstructorDeclaration>
 
     /**
      * Whatever class has `enum` modifier.
