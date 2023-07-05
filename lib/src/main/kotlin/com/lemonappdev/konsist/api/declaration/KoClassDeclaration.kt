@@ -1,9 +1,11 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
+
 /**
  * Represents a Kotlin class declaration.
  */
-interface KoClassDeclaration : KoComplexDeclaration {
+interface KoClassDeclaration : KoComplexDeclaration, KoPrimaryConstructorProvider {
     /**
      * The parents of the class.
      */
@@ -22,7 +24,7 @@ interface KoClassDeclaration : KoComplexDeclaration {
     /**
      * The parent interfaces of the class.
      */
-    val primaryConstructor: KoPrimaryConstructorDeclaration?
+    override val primaryConstructor: KoPrimaryConstructorDeclaration?
 
     /**
      * The secondary constructors of the class.

@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoPrimaryConstructorProviderCore
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
@@ -16,7 +17,8 @@ import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass, parentDeclaration: KoBaseDeclaration?) :
+internal class KoClassDeclarationImpl private constructor(override val ktClass: KtClass, parentDeclaration: KoBaseDeclaration?) :
+    KoPrimaryConstructorProviderCore,
     KoComplexDeclarationImpl(ktClass, parentDeclaration),
     KoClassDeclaration {
     override val parents: List<KoParentDeclaration> by lazy {

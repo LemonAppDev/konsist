@@ -80,7 +80,7 @@ private fun checkIfSuppressed(declaration: KoDeclaration, testMethodName: String
 
     return when {
         annotationParameter == testMethodName || annotationParameter == "konsist.$testMethodName" -> true
-        declaration.parentDeclaration != null -> checkIfSuppressed(declaration.parentDeclaration as KoDeclarationImpl, testMethodName)
+        declaration.parentDeclaration2 != null -> checkIfSuppressed(declaration.parentDeclaration2 as KoDeclarationImpl, testMethodName)
         fileAnnotationParameter(declaration.containingFile) == testMethodName -> true
         fileAnnotationParameter(declaration.containingFile) == "konsist.$testMethodName" -> true
         else -> false
