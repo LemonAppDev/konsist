@@ -2,16 +2,8 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
-import com.lemonappdev.konsist.api.ext.sequence.withAnnotations
-import com.lemonappdev.konsist.api.ext.sequence.withName
-import com.lemonappdev.konsist.api.ext.sequence.withoutAnnotationsOf
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
-import org.junit.jupiter.api.RepeatedTest
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestFactory
-import org.junit.jupiter.api.TestTemplate
-import org.junit.jupiter.params.ParameterizedTest
 
 class LibrarySnippets {
     fun `every api declaration has KDoc`() {
