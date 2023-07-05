@@ -13,5 +13,4 @@ interface KoPackageDeclaration : KoNamedDeclaration {
      * Whether the package has matching file path.
      */
     val hasMatchingFilePath: Boolean
-
 }
