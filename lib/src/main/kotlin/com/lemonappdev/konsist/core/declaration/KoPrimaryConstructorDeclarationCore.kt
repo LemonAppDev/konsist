@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtPrimaryConstructor
 
-internal class KoPrimaryConstructorDeclarationImpl private constructor(
+internal class KoPrimaryConstructorDeclarationCore private constructor(
     ktPrimaryConstructor: KtPrimaryConstructor,
     parentDeclaration: KoBaseDeclaration?,
 ) :
@@ -18,7 +18,7 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
             parentDeclaration: KoBaseDeclaration?,
         ): KoPrimaryConstructorDeclaration =
             cache.getOrCreateInstance(ktPrimaryConstructor, parentDeclaration) {
-                KoPrimaryConstructorDeclarationImpl(
+                KoPrimaryConstructorDeclarationCore(
                     ktPrimaryConstructor,
                     parentDeclaration,
                 )

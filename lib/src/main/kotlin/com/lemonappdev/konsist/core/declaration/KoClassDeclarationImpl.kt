@@ -17,9 +17,10 @@ import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal class KoClassDeclarationImpl private constructor(override val ktClass: KtClass, parentDeclaration: KoBaseDeclaration?) :
+internal class KoClassDeclarationImpl private constructor(override val ktClass: KtClass, override val parent: KoBaseDeclaration?
+) :
     KoPrimaryConstructorProviderCore,
-    KoComplexDeclarationImpl(ktClass, parentDeclaration),
+    KoComplexDeclarationImpl(ktClass, parent),
     KoClassDeclaration {
     override val parents: List<KoParentDeclaration> by lazy {
         ktClass
@@ -57,7 +58,7 @@ internal class KoClassDeclarationImpl private constructor(override val ktClass: 
     override val primaryConstructor: KoPrimaryConstructorDeclaration? by lazy {
         val localPrimaryConstructor = ktClass.primaryConstructor ?: return@lazy null
 
-        KoPrimaryConstructorDeclarationImpl.getInstance(localPrimaryConstructor, this)
+        KoPrimaryConstructorDeclarationCore.getInstance(localPrimaryConstructor, this)
     }
 
     override val secondaryConstructors: List<KoSecondaryConstructorDeclaration> by lazy {
