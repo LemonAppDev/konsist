@@ -124,9 +124,9 @@ class GeneralSnippets {
             .assert { it.hasParameterNamed("value") }
     }
 
-    fun `every class in the 'feature' module reside in package 'feature'`() {
-        Konsist.scopeFromModule("feature")
-            .classes(includeNested = true)
-            .assert { it.resideInPackage("..feature..") }
+    fun `forbid the usage of 'forbiddenString' in file`() {
+        Konsist.scopeFromProject()
+            .files()
+            .assertNot { it.text.contains("forbiddenString") }
     }
 }

@@ -8,21 +8,24 @@ import org.springframework.web.bind.annotation.RestController
 
 class SpringSnippets {
     fun `classes with 'Repository' annotation should have 'Repository' suffix`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .classes()
             .withAnnotationOf<Repository>()
             .assert { it.hasNameEndingWith("Repository") }
     }
 
     fun `classes with 'RestController' annotation should have 'Controller' suffix`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .classes()
             .withAnnotationOf<RestController>()
             .assert { it.hasNameEndingWith("Controller") }
     }
 
     fun `classes with 'RestController' annotation should reside in 'controller' package`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .classes()
             .withAnnotationOf<RestController>()
             .assert { it.resideInPackage("..controller..") }

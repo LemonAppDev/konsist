@@ -3,6 +3,7 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
+import com.lemonappdev.konsist.core.verify.assert
 
 class ArchitectureSnippets {
     fun `2 layer architecture has correct dependencies`() {
@@ -15,5 +16,11 @@ class ArchitectureSnippets {
                 presentation.dependsOn(data)
                 data.dependsOnNothing()
             }
+    }
+
+    fun `every class in the 'feature' module reside in package 'feature'`() {
+        Konsist.scopeFromModule("feature")
+            .classes(includeNested = true)
+            .assert { it.resideInPackage("..feature..") }
     }
 }
