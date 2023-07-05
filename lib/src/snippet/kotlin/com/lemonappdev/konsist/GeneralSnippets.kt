@@ -4,8 +4,8 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.sequence.withValueModifier
-import com.lemonappdev.konsist.core.ext.indexOfFirst
-import com.lemonappdev.konsist.core.ext.indexOfLast
+import com.lemonappdev.konsist.core.ext.indexOfFirstInstance
+import com.lemonappdev.konsist.core.ext.indexOfLastInstance
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 import java.util.*
@@ -77,11 +77,11 @@ class GeneralSnippets {
             .assert {
                 val lastKoPropertyDeclarationIndex = it
                     .declarations()
-                    .indexOfLast<KoPropertyDeclaration>()
+                    .indexOfLastInstance<KoPropertyDeclaration>()
 
                 val firstKoFunctionDeclarationIndex = it
                     .declarations()
-                    .indexOfFirst<KoFunctionDeclaration>()
+                    .indexOfFirstInstance<KoFunctionDeclaration>()
 
                 lastKoPropertyDeclarationIndex < firstKoFunctionDeclarationIndex
             }
