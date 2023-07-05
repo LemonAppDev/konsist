@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist
+package com.lemonappdev.konsist.declaration
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.sequence.withAnnotationOf

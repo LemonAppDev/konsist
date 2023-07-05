@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist
+package com.lemonappdev.konsist.declaration
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.sequence.withAnnotationOf
@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.ext.sequence.withNameEndingWith
 import com.lemonappdev.konsist.core.verify.assert
 import org.springframework.stereotype.Repository
 
-class ArchitectureSnippets {
+class CleanArchitectureSnippets {
     fun `classes with 'Repository' annotation should reside in 'data' package`() {
         Konsist.scopeFromProject()
             .classes()
