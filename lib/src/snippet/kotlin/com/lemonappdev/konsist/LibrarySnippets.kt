@@ -2,6 +2,7 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
+import com.lemonappdev.konsist.api.ext.sequence.withAnnotations
 import com.lemonappdev.konsist.api.ext.sequence.withName
 import com.lemonappdev.konsist.api.ext.sequence.withoutAnnotationsOf
 import com.lemonappdev.konsist.core.verify.assert
@@ -25,19 +26,6 @@ class LibrarySnippets {
             .assert { it.hasValidKDoc() }
     }
 
-    fun `test classes should reside in the same package as tested class`() {
-        Konsist.scopeFromProduction()
-            .classes()
-            .filter { it.hasTest() }
-            .assert {
-                Konsist.scopeFromTest()
-                    .classes()
-                    .withName("${it.name}Test")
-                    .first()
-                    .packagee == it.packagee
-            }
-    }
-
     fun `test classes should have test subject named sut`() {
         Konsist.scopeFromTest()
             .classes()
@@ -55,14 +43,15 @@ class LibrarySnippets {
         Konsist.scopeFromTest()
             .classes()
             .flatMap { it.declarations() }
-            .map { it as KoDeclaration }
-            .withoutAnnotationsOf(
-                Test::class,
-                ParameterizedTest::class,
-                TestFactory::class,
-                RepeatedTest::class,
-                TestTemplate::class,
-            )
+            .filterIsInstance<KoDeclaration>()
+            .filterNot {
+                it.annotations.any { annotation ->
+                    annotation
+                        .name
+                        .lowercase()
+                        .contains("test")
+                }
+            }
             .assert { it.hasPrivateModifier() }
     }
 

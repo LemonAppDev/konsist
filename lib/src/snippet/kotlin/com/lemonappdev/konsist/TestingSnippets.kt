@@ -7,13 +7,13 @@ import com.lemonappdev.konsist.core.verify.assert
 
 class TestingSnippets {
     fun `every class has test`() {
-        Konsist.scopeFromProject()
+        Konsist.scopeFromProduction()
             .classes()
             .assert { it.hasTest() }
     }
 
     fun `every class - except data and value class - has test`() {
-        Konsist.scopeFromProject()
+        Konsist.scopeFromProduction()
             .classes()
             .withoutModifiers(KoModifier.DATA, KoModifier.VALUE)
             .assert { it.hasTest() }

@@ -38,13 +38,15 @@ class GeneralSnippets {
             .assert { it.hasImports("java.util.logging..") }
     }
 
-    // ToDo("moze wykluczyc tutaj data, value i enum classes? )
     fun `every constructor parameter has name derived from parameter type`() {
         Konsist.scopeFromProject()
             .classes()
-            .mapNotNull { it.primaryConstructor }
+            .flatMap { it.allConstructors }
             .flatMap { it.parameters }
-            .assert { it.name.toTitleCase() == it.type.sourceType }
+            .assert {
+                val nameTitleCase = it.name.replaceFirstChar { char -> char.titlecase(Locale.getDefault()) }
+                nameTitleCase == it.type.sourceType
+            }
     }
 
     fun `every class constructor has alphabetically ordered parameters`() {
@@ -99,5 +101,3 @@ class GeneralSnippets {
             .assert { it.hasParameterNamed("value") }
     }
 }
-
-private fun String.toTitleCase() = replaceFirstChar { it.titlecase(Locale.getDefault()) }
