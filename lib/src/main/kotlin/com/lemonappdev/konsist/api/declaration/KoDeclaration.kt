@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import kotlin.reflect.KClass
 
@@ -10,13 +11,9 @@ import kotlin.reflect.KClass
  */
 interface KoDeclaration :
     KoBaseDeclaration,
+    KoPackageDeclarationProvider,
     KoFullyQualifiedNameProvider,
     KoParentProvider {
-
-    /**
-     * Package name of the declaration.
-     */
-    val packagee: String
 
     /**
      * List of annotations.
@@ -94,20 +91,4 @@ interface KoDeclaration :
      * @return `true` if the declaration has all the specified modifiers (or any modifier if [koModifiers] is empty), `false` otherwise.
      */
     fun hasModifiers(vararg koModifiers: KoModifier): Boolean
-
-    /**
-     * Whether the declaration resides in a package.
-     *
-     * @param packagee the package name to check.
-     * @return `true` if the declaration resides in the specified package, `false` otherwise.
-     */
-    fun resideInPackage(packagee: String): Boolean
-
-    /**
-     * Whether the declaration resides outside a package.
-     *
-     * @param packagee the package name to check.
-     * @return `true` if the declaration resides outside the specified package, `false` otherwise.
-     */
-    fun resideOutsidePackage(packagee: String): Boolean
 }

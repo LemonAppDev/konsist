@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
+import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isPublic
@@ -13,9 +14,9 @@ import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 import kotlin.reflect.KClass
 
 internal abstract class KoDeclarationImpl(
-    private val ktTypeParameterListOwner: KtTypeParameterListOwner,
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner,
     val parentDeclaration: KoParentProvider?,
-) : KoBaseDeclarationImpl(ktTypeParameterListOwner), KoDeclaration {
+) : KoBaseDeclarationImpl(ktTypeParameterListOwner), KoPackageDeclarationProviderCore, KoDeclaration {
 
     override val fullyQualifiedName: String by lazy {
         if (ktTypeParameterListOwner.fqName != null) {
@@ -23,14 +24,6 @@ internal abstract class KoDeclarationImpl(
         } else {
             ""
         }
-    }
-
-    override val packagee: String by lazy {
-        fullyQualifiedName
-            .split(".")
-            .toMutableList()
-            .also { it.removeLast() }
-            .joinToString(separator = ".")
     }
 
     override val annotations: List<KoAnnotationDeclaration> by lazy {
@@ -101,8 +94,4 @@ internal abstract class KoDeclarationImpl(
         koModifiers.isEmpty() -> modifiers.isNotEmpty()
         else -> modifiers.containsAll(koModifiers.toList())
     }
-
-    override fun resideInPackage(packagee: String): Boolean = LocationUtil.resideInLocation(packagee, this.packagee)
-
-    override fun resideOutsidePackage(packagee: String): Boolean = !resideInPackage(packagee)
 }
