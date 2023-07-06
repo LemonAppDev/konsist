@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.KoKDocTag.AUTHOR
 import com.lemonappdev.konsist.api.KoKDocTag.CONSTRUCTOR
@@ -19,10 +20,20 @@ import com.lemonappdev.konsist.api.KoKDocTag.VERSION
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
+import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 import java.util.Locale
 
-internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) : KoPsiDeclarationImpl(kDocElement), KoKDocDeclaration {
+internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) :
+    KoKDocProviderCore,
+    KoTextProviderCore,
+    KoKDocDeclaration {
+    override val psiElement: PsiElement
+        get() = kDocElement
+
     override val text: String by lazy {
         val splitKDoc = kDocElement.text.split("\n") as MutableList
 

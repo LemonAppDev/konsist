@@ -1,21 +1,22 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.KoKDocTag
-import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
 
 /**
  * Sequence containing declarations that have KDoc.
  *
  * @return A sequence containing declarations with KDoc.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withKDoc(): Sequence<T> = filter { it.hasKDoc() }
+fun <T : KoKDocProvider> Sequence<T>.withKDoc(): Sequence<T> = filter { it.hasKDoc() }
 
 /**
  * Sequence containing declarations that don't have the KDoc.
  *
  * @return A sequence containing declarations without KDoc.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withoutKDoc(): Sequence<T> = filterNot { it.hasKDoc() }
+fun <T : KoKDocProvider> Sequence<T>.withoutKDoc(): Sequence<T> = filterNot { it.hasKDoc() }
 
 /**
  * Sequence containing declarations that have valid KDoc.
@@ -38,7 +39,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutKDoc(): Sequence<T> = filterNot { 
  * @param verifyPropertyGetterTag `true` to verify property getter tags in the KDoc. By default, `false`.
  * @return A sequence containing declarations with a valid KDoc.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withValidKDoc(
+fun <T : KoKDocProvider> Sequence<T>.withValidKDoc(
     verifyDescription: Boolean = true,
     verifyParamTag: Boolean = false,
     verifyReturnTag: Boolean = false,
@@ -97,7 +98,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withValidKDoc(
  * @param verifyPropertyGetterTag `true` to verify property getter tags in the KDoc. By default, `false`.
  * @return A sequence containing declarations without a valid KDoc.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withoutValidKDoc(
+fun <T : KoKDocProvider> Sequence<T>.withoutValidKDoc(
     verifyDescription: Boolean = true,
     verifyParamTag: Boolean = false,
     verifyReturnTag: Boolean = false,
@@ -142,7 +143,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutValidKDoc(
  * @param tags The KDoc tags to check for in the declarations' KDoc.
  * @return A sequence containing declarations with the specified KDoc tags
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withKDocWithTags(tag: KoKDocTag, vararg tags: KoKDocTag): Sequence<T> =
+fun <T : KoKDocProvider> Sequence<T>.withKDocWithTags(tag: KoKDocTag, vararg tags: KoKDocTag): Sequence<T> =
     filter { it.kDoc?.hasTags(tag, *tags) ?: false }
 
 /**
@@ -152,7 +153,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withKDocWithTags(tag: KoKDocTag, vararg t
  * @param tags The KDoc tags to check for in the declarations' KDoc.
  * @return A sequence containing declarations with at least one of the specified KDoc tags.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withSomeKDocWithTags(tag: KoKDocTag, vararg tags: KoKDocTag): Sequence<T> = filter {
+fun <T : KoKDocProvider> Sequence<T>.withSomeKDocWithTags(tag: KoKDocTag, vararg tags: KoKDocTag): Sequence<T> = filter {
     it.kDoc?.hasTags(tag) ?: false || tags.any { tag -> it.kDoc?.hasTags(tag) ?: false }
 }
 
@@ -164,7 +165,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withSomeKDocWithTags(tag: KoKDocTag, vara
  * @return A sequence containing declarations without the specified KDoc tags.
  *
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withoutKDocWithTags(tag: KoKDocTag, vararg tags: KoKDocTag): Sequence<T> =
+fun <T : KoKDocProvider> Sequence<T>.withoutKDocWithTags(tag: KoKDocTag, vararg tags: KoKDocTag): Sequence<T> =
     filterNot { it.kDoc?.hasTags(tag, *tags) ?: false }
 
 /**
@@ -175,7 +176,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutKDocWithTags(tag: KoKDocTag, varar
  * @param absolutePath Determines whether the file paths should be treated as absolute paths. By default, false.
  * @return A sequence containing declarations that reside in any of the specified file paths.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withFilePath(path: String, vararg paths: String, absolutePath: Boolean = false): Sequence<T> =
+fun <T : KoPathProvider> Sequence<T>.withFilePath(path: String, vararg paths: String, absolutePath: Boolean = false): Sequence<T> =
     filter {
         it.resideInFilePath(path, absolutePath) || paths.any { path -> it.resideInFilePath(path, absolutePath) }
     }
@@ -188,7 +189,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withFilePath(path: String, vararg paths: 
  * @param absolutePath Determines whether the file paths should be treated as absolute paths. By default, false.
  * @return A sequence containing declarations that don't reside in any of the specified file paths.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withoutFilePath(path: String, vararg paths: String, absolutePath: Boolean = false): Sequence<T> =
+fun <T : KoPathProvider> Sequence<T>.withoutFilePath(path: String, vararg paths: String, absolutePath: Boolean = false): Sequence<T> =
     filter {
         !it.resideInFilePath(path, absolutePath) && paths.none { path -> it.resideInFilePath(path, absolutePath) }
     }
@@ -200,7 +201,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutFilePath(path: String, vararg path
  * @param paths The absolute paths to include.
  * @return A sequence containing declarations that reside in any of the specified absolute paths.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withAbsoluteFilePath(path: String, vararg paths: String): Sequence<T> =
+fun <T : KoPathProvider> Sequence<T>.withAbsoluteFilePath(path: String, vararg paths: String): Sequence<T> =
     withFilePath(path, *paths, absolutePath = true)
 
 /**
@@ -210,7 +211,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withAbsoluteFilePath(path: String, vararg
  * @param paths The absolute paths to exclude.
  * @return A sequence containing declarations that don't reside in any of the specified absolute paths.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withoutAbsoluteFilePath(path: String, vararg paths: String): Sequence<T> =
+fun <T : KoPathProvider> Sequence<T>.withoutAbsoluteFilePath(path: String, vararg paths: String): Sequence<T> =
     withoutFilePath(path, *paths, absolutePath = true)
 
 /**
@@ -220,7 +221,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutAbsoluteFilePath(path: String, var
  * @param paths The project paths to include.
  * @return A sequence containing declarations that reside in any of the specified project paths.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withProjectFilePath(path: String, vararg paths: String): Sequence<T> =
+fun <T : KoPathProvider> Sequence<T>.withProjectFilePath(path: String, vararg paths: String): Sequence<T> =
     withFilePath(path, *paths, absolutePath = false)
 
 /**
@@ -230,5 +231,5 @@ fun <T : KoPsiDeclaration> Sequence<T>.withProjectFilePath(path: String, vararg 
  * @param paths The project paths to exclude.
  * @return A sequence containing declarations that don't reside in any of the specified project paths.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withoutProjectFilePath(path: String, vararg paths: String): Sequence<T> =
+fun <T : KoPathProvider> Sequence<T>.withoutProjectFilePath(path: String, vararg paths: String): Sequence<T> =
     withoutFilePath(path, *paths, absolutePath = false)

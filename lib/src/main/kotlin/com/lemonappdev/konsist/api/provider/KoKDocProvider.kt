@@ -1,34 +1,8 @@
-package com.lemonappdev.konsist.api.declaration
+package com.lemonappdev.konsist.api.provider
 
-/**
- * Base interface for all declarations.
- */
-interface KoPsiDeclaration {
-    /**
-     * File path of the declaration.
-     */
-    val filePath: String
+import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 
-    /**
-     * Project file path of the declaration.
-     */
-    val projectFilePath: String
-
-    /**
-     * Location of the declaration containing the file path, line and column.
-     */
-    val location: String
-
-    /**
-     * Text of the declaration
-     */
-    val text: String
-
-    /**
-     * Text of the declaration with the location (file path, line and column).
-     */
-    val locationWithText: String
-
+interface KoKDocProvider {
     /**
      * Documentation pf the declaration.
      */
@@ -80,27 +54,4 @@ interface KoPsiDeclaration {
         verifyPropertySetterTag: Boolean = false,
         verifyPropertyGetterTag: Boolean = false,
     ): Boolean
-
-    /**
-     * Whatever declaration reside in file path.
-     *
-     * @param path the file path to check.
-     * @param absolutePath Flag indicating whether the provided path is an absolute path.
-     *                    If set to `true`, the `path` parameter represents an absolute path.
-     *                    If set to `false` (default), the `path` parameter represents a relative path.
-     * @return `true` if the declaration resides in the specified file path, `false` otherwise.
-     */
-    fun resideInFilePath(path: String, absolutePath: Boolean = false): Boolean
-
-    /**
-     * Print declaration.
-     */
-    fun print(): Unit
-
-    /**
-     * Text of the declaration with the location (file path, line and column).
-     *
-     * @return the text of the declaration with the location.
-     */
-    override fun toString(): String
 }
