@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
 import com.lemonappdev.konsist.api.ext.sequence.withValueModifier
+import com.lemonappdev.konsist.api.provider.hasAnnotationOf
 import com.lemonappdev.konsist.core.ext.indexOfFirstInstance
 import com.lemonappdev.konsist.core.ext.indexOfLastInstance
 import com.lemonappdev.konsist.core.verify.assert

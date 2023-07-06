@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -23,7 +24,7 @@ class KoDeclarationForVisibilityModifierWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoModifierProvider
 
         // then
         assertSoftly(sut) {

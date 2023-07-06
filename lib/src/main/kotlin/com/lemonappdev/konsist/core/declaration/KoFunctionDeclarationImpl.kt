@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
@@ -20,25 +19,27 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
     KoParametrizedDeclarationImpl(ktFunction, parentDeclaration),
     KoFunctionDeclaration {
 
-    private val localDeclarations: Sequence<KoDeclaration> by lazy {
-        val psiChildren = ktFunction
-            .bodyBlockExpression
-            ?.children
-            ?.asSequence()
-            ?: emptySequence()
+    private val localDeclarations: Sequence<KoBaseDeclaration>
+        get() {
+            val psiChildren = ktFunction
+                .bodyBlockExpression
+                ?.children
+                ?.asSequence()
+                ?: emptySequence()
 
-        psiChildren.mapNotNull {
-            if (it is KtClass && !it.isInterface()) {
-                KoClassDeclarationImpl.getInstance(it, this)
-            } else if (it is KtFunction) {
-                getInstance(it, this)
-            } else if (it is KtProperty) {
-                KoPropertyDeclarationImpl.getInstance(it, this)
-            } else {
-                null
-            }
+            return psiChildren
+                .mapNotNull {
+                    if (it is KtClass && !it.isInterface()) {
+                        KoClassDeclarationImpl.getInstance(it, this)
+                    } else if (it is KtFunction) {
+                        getInstance(it, this)
+                    } else if (it is KtProperty) {
+                        KoPropertyDeclarationImpl.getInstance(it, this)
+                    } else {
+                        null
+                    }
+                }
         }
-    }
 
     override val returnType: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
 
@@ -78,7 +79,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
 
     override fun hasReturnType(): Boolean = ktFunction.hasDeclaredReturnType()
 
-    override fun localDeclarations(): Sequence<KoDeclaration> = localDeclarations
+    override fun localDeclarations(): Sequence<KoBaseDeclaration> = localDeclarations
 
     override fun hasValidReturnTag(enabled: Boolean): Boolean = TagUtil.hasValidReturnTag(enabled, returnType?.name, kDoc)
 

@@ -121,7 +121,7 @@ class KoDeclarationAssertTest {
     fun `assert-suppress-by-konsist-and-name-at-file-level`() {
         // given
         val sut = getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level")
-            .baseDeclarations(includeNested = true)
+            .declarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -131,7 +131,7 @@ class KoDeclarationAssertTest {
     fun `assert-suppress-by-name-at-file-level`() {
         // given
         val sut = getSnippetFile("assert-suppress-by-name-at-file-level")
-            .baseDeclarations(includeNested = true)
+            .declarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -142,7 +142,7 @@ class KoDeclarationAssertTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level")
-                .baseDeclarations(includeNested = true)
+                .declarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -153,7 +153,7 @@ class KoDeclarationAssertTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level")
-                .baseDeclarations(includeNested = true)
+                .declarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -163,7 +163,7 @@ class KoDeclarationAssertTest {
     fun `assert-suppress-by-konsist-and-name-at-declaration-level`() {
         // given
         val sut = getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level")
-            .baseDeclarations(includeNested = true)
+            .declarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -173,7 +173,7 @@ class KoDeclarationAssertTest {
     fun `assert-suppress-by-name-at-declaration-level`() {
         // given
         val sut = getSnippetFile("assert-suppress-by-name-at-declaration-level")
-            .baseDeclarations(includeNested = true)
+            .declarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }

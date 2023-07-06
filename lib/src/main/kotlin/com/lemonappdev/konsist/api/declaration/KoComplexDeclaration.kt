@@ -1,6 +1,11 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoFunctionCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceCoreProvider
@@ -11,13 +16,18 @@ import com.lemonappdev.konsist.core.declaration.provider.KoPropertyCoreProvider
  * Represents a complex declaration, such as a class, interface, object, etc.
  */
 interface KoComplexDeclaration :
-    KoDeclaration,
     KoBaseDeclaration,
     KoClassCoreProvider,
     KoInterfaceCoreProvider,
     KoObjectCoreProvider,
     KoPropertyCoreProvider,
     KoFunctionCoreProvider,
+
+    KoAnnotationDeclarationProvider,
+    KoPackageDeclarationProvider,
+    KoDeclarationFullyQualifiedNameProvider,
+    KoModifierProvider,
+    KoTopLevelProvider,
     KoParentProvider {
     /**
      * Whether this declaration represents the specified type.

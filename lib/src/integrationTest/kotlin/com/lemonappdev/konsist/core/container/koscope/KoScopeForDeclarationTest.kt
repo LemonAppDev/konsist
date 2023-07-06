@@ -20,12 +20,17 @@ class KoScopeForDeclarationTest {
             .toList()
             .shouldBeEqualTo(
                 listOf(
+                    "SampleAnnotation1",
+                    "SampleAnnotation2",
+                    "samplepackage",
+                    "com.lemonappdev.konsist.testdata.SampleAnnotation1",
+                    "com.lemonappdev.konsist.testdata.SampleAnnotation2",
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
                     "SampleInterface",
                     "SampleObject",
-                    "SampleTypeAlias",
+                    "SampleTypeAlias"
                 ),
             )
     }

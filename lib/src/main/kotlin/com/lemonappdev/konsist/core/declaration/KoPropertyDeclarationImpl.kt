@@ -6,14 +6,28 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.util.ReceiverUtil
 import org.jetbrains.kotlin.psi.KtProperty
+import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
 internal class KoPropertyDeclarationImpl private constructor(private val ktProperty: KtProperty, parentDeclaration: KoParentProvider?) :
-    KoDeclarationImpl(ktProperty, parentDeclaration),
-    KoPropertyDeclaration {
+    KoPropertyDeclaration,
+    KoBaseDeclarationImpl(ktProperty),
+    KoAnnotationDeclarationProviderCore,
+    KoPackageDeclarationProviderCore,
+    KoDeclarationFullyQualifiedNameProviderCore,
+    KoModifierProviderCore,
+    KoTopLevelProviderCore {
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner
+        get() = ktProperty
+
     override val isVar: Boolean by lazy { ktProperty.isVar }
 
     override val isVal: Boolean by lazy { !ktProperty.isVar }

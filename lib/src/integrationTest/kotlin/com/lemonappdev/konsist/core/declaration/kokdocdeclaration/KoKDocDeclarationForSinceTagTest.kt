@@ -17,7 +17,7 @@ class KoKDocDeclarationForSinceTagTest {
     ) {
         // given
         val sut = getSnippetFile(fileName)
-            .baseDeclarations(includeNested = true)
+            .declarations(includeNested = true)
             .first { it.name == declarationName }
             .kDoc
 

@@ -6,16 +6,29 @@ import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.kotlin.psi.KtConstantExpression
 import org.jetbrains.kotlin.psi.KtParameter
+import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 internal class KoParameterDeclarationImpl private constructor(private val ktParameter: KtParameter, parentDeclaration: KoParentProvider?) :
-    KoDeclarationImpl(ktParameter, parentDeclaration),
-    KoParameterDeclaration {
+    KoParameterDeclaration,
+    KoBaseDeclarationImpl(ktParameter),
+    KoAnnotationDeclarationProviderCore,
+    KoPackageDeclarationProviderCore,
+    KoDeclarationFullyQualifiedNameProviderCore,
+    KoModifierProviderCore,
+    KoTopLevelProviderCore {
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner
+        get() = ktParameter
 
     override val type: KoTypeDeclaration by lazy {
         val type = ktParameter

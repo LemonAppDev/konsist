@@ -14,7 +14,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations()
+            .declarations()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -41,7 +41,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeNested = true)
+            .declarations(includeNested = true)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -60,7 +60,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeLocal = true)
+            .declarations(includeLocal = true)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -79,7 +79,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeNested = true)
+            .declarations(includeNested = true)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -99,7 +99,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeLocal = true)
+            .declarations(includeLocal = true)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -119,7 +119,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeNested = true)
+            .declarations(includeNested = true)
             .filterNot { it is KoImportDeclaration }
             .map { it.name }
             .toList()
@@ -140,7 +140,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeLocal = true)
+            .declarations(includeLocal = true)
             .filterNot { it is KoImportDeclaration }
             .map { it.name }
             .toList()
@@ -161,7 +161,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeNested = true)
+            .declarations(includeNested = true)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -180,7 +180,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeLocal = true)
+            .declarations(includeLocal = true)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -199,7 +199,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeNested = true)
+            .declarations(includeNested = true)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -217,7 +217,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeNested = true)
+            .declarations(includeNested = true)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -236,7 +236,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeNested = false)
+            .declarations(includeNested = false)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(listOf("SampleClass"))
@@ -249,7 +249,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeNested = false, includeLocal = false)
+            .declarations(includeNested = false, includeLocal = false)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -268,7 +268,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeNested = true, includeLocal = false)
+            .declarations(includeNested = true, includeLocal = false)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -289,7 +289,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeNested = false, includeLocal = true)
+            .declarations(includeNested = false, includeLocal = true)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -308,7 +308,7 @@ class KoScopeForNamedDeclarationTest {
 
         // then
         sut
-            .baseDeclarations(includeNested = true, includeLocal = true)
+            .declarations(includeNested = true, includeLocal = true)
             .map { it.name }
             .toList()
             .shouldBeEqualTo(

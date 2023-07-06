@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import com.lemonappdev.konsist.api.KoModifier.SUSPEND
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -28,7 +29,7 @@ class KoDeclarationForModifierWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoModifierProvider
 
         // then
         sut.modifiers shouldBeEqualTo modifiers
@@ -43,7 +44,7 @@ class KoDeclarationForModifierWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoModifierProvider
 
         // then
         sut.hasModifiers() shouldBeEqualTo true
@@ -58,7 +59,7 @@ class KoDeclarationForModifierWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoModifierProvider
 
         // then
         assertSoftly(sut) {
@@ -79,7 +80,7 @@ class KoDeclarationForModifierWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoModifierProvider
 
         // then
         assertSoftly(sut) {
@@ -103,7 +104,7 @@ class KoDeclarationForModifierWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoModifierProvider
 
         // then
         assertSoftly(sut) {

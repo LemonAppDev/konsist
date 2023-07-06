@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -18,7 +19,7 @@ class KoDeclarationForTopLevelTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoTopLevelProvider
 
         // then
         sut.isTopLevel() shouldBeEqualTo value

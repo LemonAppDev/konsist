@@ -17,7 +17,7 @@ class KoKDocDeclarationForTagTest {
     ) {
         // given
         val sut = getSnippetFile("tags")
-            .baseDeclarations(includeNested = true)
+            .declarations(includeNested = true)
             .first { it.name == declarationName }
             .kDoc
 
