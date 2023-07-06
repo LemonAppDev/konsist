@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
+import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -16,7 +17,11 @@ import kotlin.reflect.KClass
 internal abstract class KoDeclarationImpl(
     override val ktTypeParameterListOwner: KtTypeParameterListOwner,
     val parentDeclaration: KoParentProvider?,
-) : KoBaseDeclarationImpl(ktTypeParameterListOwner), KoPackageDeclarationProviderCore, KoDeclaration {
+) :
+    KoBaseDeclarationImpl(ktTypeParameterListOwner),
+    KoAnnotationDeclarationProviderCore,
+    KoPackageDeclarationProviderCore,
+    KoDeclaration {
 
     override val fullyQualifiedName: String by lazy {
         if (ktTypeParameterListOwner.fqName != null) {
@@ -24,12 +29,6 @@ internal abstract class KoDeclarationImpl(
         } else {
             ""
         }
-    }
-
-    override val annotations: List<KoAnnotationDeclaration> by lazy {
-        ktTypeParameterListOwner
-            .annotationEntries
-            .map { KoAnnotationDeclarationImpl.getInstance(it, this) }
     }
 
     override val modifiers: List<KoModifier> by lazy {
@@ -72,23 +71,6 @@ internal abstract class KoDeclarationImpl(
     override fun hasInternalModifier(): Boolean = hasModifiers(KoModifier.INTERNAL)
 
     override fun isTopLevel(): Boolean = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
-
-    override fun hasAnnotations(vararg names: String): Boolean = when {
-        names.isEmpty() -> annotations.isNotEmpty()
-        else -> names.all {
-            annotations.any { annotation -> annotation.representsType(it) }
-        }
-    }
-
-    override fun hasAnnotationsOf(vararg names: KClass<*>): Boolean = names.all {
-        annotations.any { annotation ->
-            if (it.qualifiedName?.startsWith("kotlin.") == true) {
-                annotation.name == it.simpleName
-            } else {
-                annotation.fullyQualifiedName == it.qualifiedName
-            }
-        }
-    }
 
     override fun hasModifiers(vararg koModifiers: KoModifier): Boolean = when {
         koModifiers.isEmpty() -> modifiers.isNotEmpty()

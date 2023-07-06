@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
@@ -11,14 +12,10 @@ import kotlin.reflect.KClass
  */
 interface KoDeclaration :
     KoBaseDeclaration,
+    KoAnnotationDeclarationProvider,
     KoPackageDeclarationProvider,
     KoFullyQualifiedNameProvider,
     KoParentProvider {
-
-    /**
-     * List of annotations.
-     */
-    val annotations: List<KoAnnotationDeclaration>
 
     /**
      * List of modifiers.
@@ -66,23 +63,6 @@ interface KoDeclaration :
      * @return `true` if the declaration is defined at top level, `false` otherwise.
      */
     fun isTopLevel(): Boolean
-
-    /**
-     * Whether the declaration has annotations.
-     *
-     * @param names the annotation names to check. It can be either a simple name or a fully qualified name.
-     * @return `true` if the declaration has annotations with the specified names (or any annotation if [names] is empty),
-     * `false` otherwise.
-     */
-    fun hasAnnotations(vararg names: String): Boolean
-
-    /**
-     * Whether the declaration has annotations of `KClass` type.
-     *
-     * @param names the `KClass` types of the annotations to check.
-     * @return `true` if the declaration has annotations of the specified `KClass` types, `false` otherwise.
-     */
-    fun hasAnnotationsOf(vararg names: KClass<*>): Boolean
 
     /**
      * Whether the declaration has modifiers.
