@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
@@ -9,18 +10,9 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 
-internal abstract class KoNamedDeclarationImpl(private val element: KtElement) :
+internal abstract class KoNamedDeclarationImpl( override val ktElement: KtElement) :
     KoNamedDeclaration,
-    KoPathProviderCore,
-    KoKDocProviderCore,
-    KoLocationProviderCore,
-    KoTextProviderCore,
-    KoContainingFileProviderCore {
-    override val psiElement: PsiElement
-        get() = ktElement
-
-    override val ktElement: KtElement
-        get() = element
+    KoBaseDeclarationImpl(ktElement) {
 
     override val name: String by lazy { ktElement.name ?: "" }
 
