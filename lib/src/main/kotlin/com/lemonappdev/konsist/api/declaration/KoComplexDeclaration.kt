@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoFunctionCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceCoreProvider
@@ -11,11 +12,13 @@ import com.lemonappdev.konsist.core.declaration.provider.KoPropertyCoreProvider
  */
 interface KoComplexDeclaration :
     KoDeclaration,
+    KoBaseDeclaration,
     KoClassCoreProvider,
     KoInterfaceCoreProvider,
     KoObjectCoreProvider,
     KoPropertyCoreProvider,
-    KoFunctionCoreProvider {
+    KoFunctionCoreProvider,
+    KoParentProvider {
     /**
      * Whether this declaration represents the specified type.
      *

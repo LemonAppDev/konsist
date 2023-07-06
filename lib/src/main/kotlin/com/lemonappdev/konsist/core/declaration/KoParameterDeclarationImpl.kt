@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.kotlin.psi.KtConstantExpression
@@ -12,7 +13,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal class KoParameterDeclarationImpl private constructor(private val ktParameter: KtParameter, parentDeclaration: KoBaseDeclaration?) :
+internal class KoParameterDeclarationImpl private constructor(private val ktParameter: KtParameter, parentDeclaration: KoParentProvider?) :
     KoDeclarationImpl(ktParameter, parentDeclaration),
     KoParameterDeclaration {
 
@@ -60,7 +61,7 @@ internal class KoParameterDeclarationImpl private constructor(private val ktPara
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktParameter: KtParameter, parentDeclaration: KoBaseDeclaration?): KoParameterDeclaration =
+        internal fun getInstance(ktParameter: KtParameter, parentDeclaration: KoParentProvider?): KoParameterDeclaration =
             cache.getOrCreateInstance(ktParameter, parentDeclaration) { KoParameterDeclarationImpl(ktParameter, parentDeclaration) }
     }
 }

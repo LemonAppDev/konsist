@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtPackageDirective
@@ -26,7 +27,7 @@ internal class KoPackageDeclarationImpl private constructor(private val ktPackag
     internal companion object {
         private val cache: KoDeclarationCache<KoPackageDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktPackageDirective: KtPackageDirective, parentDeclaration: KoBaseDeclaration?): KoPackageDeclaration =
+        internal fun getInstance(ktPackageDirective: KtPackageDirective, parentDeclaration: KoParentProvider?): KoPackageDeclaration =
             cache.getOrCreateInstance(ktPackageDirective, parentDeclaration) { KoPackageDeclarationImpl(ktPackageDirective) }
     }
 }

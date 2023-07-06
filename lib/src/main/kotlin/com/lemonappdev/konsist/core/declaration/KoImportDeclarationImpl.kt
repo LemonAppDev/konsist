@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtImportDirective
 
@@ -17,7 +18,7 @@ internal class KoImportDeclarationImpl private constructor(private val ktImportD
     internal companion object {
         private val cache: KoDeclarationCache<KoImportDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktImportDirective: KtImportDirective, parentDeclaration: KoBaseDeclaration?): KoImportDeclaration =
+        internal fun getInstance(ktImportDirective: KtImportDirective, parentDeclaration: KoParentProvider?): KoImportDeclaration =
             cache.getOrCreateInstance(ktImportDirective, parentDeclaration) { KoImportDeclarationImpl(ktImportDirective) }
     }
 }

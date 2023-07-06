@@ -1,9 +1,14 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoParentProvider
+
 /**
  * Represents a Kotlin import declaration.
  */
-interface KoInterfaceDeclaration : KoComplexDeclaration {
+interface KoInterfaceDeclaration :
+    KoComplexDeclaration,
+    KoBaseDeclaration,
+    KoParentProvider {
     /**
      * Whatever interface has a `actual` modifier.
      *

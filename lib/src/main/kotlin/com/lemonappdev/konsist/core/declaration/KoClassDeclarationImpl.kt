@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtClass
@@ -16,7 +17,7 @@ import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass, parentDeclaration: KoBaseDeclaration?) :
+internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass, parentDeclaration: KoParentProvider?) :
     KoComplexDeclarationImpl(ktClass, parentDeclaration),
     KoClassDeclaration {
     override val parents: List<KoParentDeclaration> by lazy {
@@ -121,7 +122,7 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
     internal companion object {
         private val cache: KoDeclarationCache<KoClassDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktClass: KtClass, parentDeclaration: KoBaseDeclaration?): KoClassDeclaration =
+        internal fun getInstance(ktClass: KtClass, parentDeclaration: KoParentProvider?): KoClassDeclaration =
             cache.getOrCreateInstance(ktClass, parentDeclaration) {
                 KoClassDeclarationImpl(ktClass, parentDeclaration)
             }

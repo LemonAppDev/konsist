@@ -1,9 +1,14 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoParentProvider
+
 /**
  * Object declaration.
  */
-interface KoObjectDeclaration : KoComplexDeclaration {
+interface KoObjectDeclaration :
+    KoComplexDeclaration,
+    KoBaseDeclaration,
+    KoParentProvider {
     /**
      * Whether this object has a data modifier.
      *

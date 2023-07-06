@@ -1,5 +1,7 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoParentProvider
+
 /**
  * Represents a Kotlin declaration.
  *
@@ -35,7 +37,10 @@ package com.lemonappdev.konsist.api.declaration
  * isNullable // true
  * ```
  */
-interface KoTypeDeclaration : KoNamedDeclaration {
+interface KoTypeDeclaration :
+    KoNamedDeclaration,
+    KoBaseDeclaration,
+    KoParentProvider {
     /**
      * The import alias name.
      */

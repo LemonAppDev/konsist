@@ -1,9 +1,14 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoParentProvider
+
 /**
  * Represents a Kotlin type alias declaration.
  */
-interface KoTypeAliasDeclaration : KoDeclaration {
+interface KoTypeAliasDeclaration :
+    KoDeclaration,
+    KoBaseDeclaration,
+    KoParentProvider {
     /**
      * Type alias type.
      */

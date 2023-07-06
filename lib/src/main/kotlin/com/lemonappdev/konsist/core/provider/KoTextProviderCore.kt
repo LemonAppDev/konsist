@@ -9,6 +9,10 @@ internal interface KoTextProviderCore: KoTextProvider {
     override val text: String
     get() = psiElement.text
 
+     override fun toString(): String {
+       return text
+    }
+
     override fun print() {
         print(toString())
     }

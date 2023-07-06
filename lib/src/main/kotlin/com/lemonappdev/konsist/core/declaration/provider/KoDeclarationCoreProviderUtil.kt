@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoComplexDeclarationImpl
@@ -36,7 +37,7 @@ internal object KoDeclarationCoreProviderUtil {
         ktElement: KtElement,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-        parentDeclaration: KoBaseDeclaration?,
+        parentDeclaration: KoParentProvider?,
     ): Sequence<T> {
         val declarations: Sequence<KoNamedDeclaration>
 
@@ -149,7 +150,7 @@ internal object KoDeclarationCoreProviderUtil {
         }
     }
 
-    private fun getInstanceOfKtDeclaration(ktDeclaration: KtDeclaration, parentDeclaration: KoBaseDeclaration?): KoDeclaration? = when {
+    private fun getInstanceOfKtDeclaration(ktDeclaration: KtDeclaration, parentDeclaration: KoParentProvider?): KoDeclaration? = when {
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
         ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
         ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
@@ -159,7 +160,7 @@ internal object KoDeclarationCoreProviderUtil {
         else -> null
     }
 
-    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parentDeclaration: KoBaseDeclaration?): KoNamedDeclaration? =
+    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parentDeclaration: KoParentProvider?): KoNamedDeclaration? =
         when (psiElement) {
             is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parentDeclaration)
             is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parentDeclaration)

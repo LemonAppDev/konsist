@@ -1,25 +1,26 @@
 package com.lemonappdev.konsist.core.cache
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import org.jetbrains.kotlin.psi.KtElement
 import java.util.concurrent.ConcurrentHashMap
 
-internal class KoDeclarationCache<T : KoBaseDeclaration> {
-    private val elements = ConcurrentHashMap<Pair<KtElement, KoBaseDeclaration?>, T>()
+internal class KoDeclarationCache<T : KoParentProvider> {
+    private val elements = ConcurrentHashMap<Pair<KtElement, KoParentProvider?>, T>()
 
-    private fun get(key: Pair<KtElement, KoBaseDeclaration?>): T {
+    private fun get(key: Pair<KtElement, KoParentProvider?>): T {
         var value = elements[key]
         value = requireNotNull(value) { "Cache doesn't allow to null value of key: ${key.first.name}" }
         return value
     }
 
-    private fun set(key: Pair<KtElement, KoBaseDeclaration?>, value: T) {
+    private fun set(key: Pair<KtElement, KoParentProvider?>, value: T) {
         elements[key] = value
     }
 
-    private fun hasKey(key: Pair<KtElement, KoBaseDeclaration?>) = elements.containsKey(key)
+    private fun hasKey(key: Pair<KtElement, KoParentProvider?>) = elements.containsKey(key)
 
-    fun getOrCreateInstance(ktElement: KtElement, parentDeclaration: KoBaseDeclaration?, value: (KtElement) -> T): T {
+    fun getOrCreateInstance(ktElement: KtElement, parentDeclaration: KoParentProvider?, value: (KtElement) -> T): T {
         val cacheKey = ktElement to parentDeclaration
 
         return if (hasKey(cacheKey)) {

@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalPropertyProvider
@@ -7,7 +8,14 @@ import com.lemonappdev.konsist.core.declaration.provider.KoLocalPropertyProvider
 /**
  * Represents a Kotlin function declaration.
  */
-interface KoFunctionDeclaration : KoParametrizedDeclaration, KoLocalClassProvider, KoLocalFunctionProvider, KoLocalPropertyProvider {
+interface KoFunctionDeclaration :
+    KoParametrizedDeclaration,
+    KoBaseDeclaration,
+    KoLocalClassProvider,
+    KoLocalFunctionProvider,
+    KoLocalPropertyProvider,
+    KoParentProvider {
+
     /**
      * Return type of the function.
      */

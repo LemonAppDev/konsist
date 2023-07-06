@@ -1,12 +1,16 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import kotlin.reflect.KClass
 
 /**
  * Represents a Kotlin declaration.
  */
-interface KoDeclaration : KoNamedDeclaration {
+interface KoDeclaration :
+    KoNamedDeclaration,
+    KoBaseDeclaration,
+    KoParentProvider {
     /**
      * Fully qualified name of the declaration.
      */

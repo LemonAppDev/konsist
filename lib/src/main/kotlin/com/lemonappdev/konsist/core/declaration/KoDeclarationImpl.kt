@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -13,7 +14,7 @@ import kotlin.reflect.KClass
 
 internal abstract class KoDeclarationImpl(
     private val ktTypeParameterListOwner: KtTypeParameterListOwner,
-    val parentDeclaration: KoBaseDeclaration?,
+    val parentDeclaration: KoParentProvider?,
 ) : KoNamedDeclarationImpl(ktTypeParameterListOwner), KoDeclaration {
 
     override val fullyQualifiedName: String by lazy {

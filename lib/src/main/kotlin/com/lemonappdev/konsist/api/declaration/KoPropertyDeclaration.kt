@@ -1,9 +1,14 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoParentProvider
+
 /**
  * Represents a Kotlin property declaration.
  */
-interface KoPropertyDeclaration : KoDeclaration {
+interface KoPropertyDeclaration :
+    KoDeclaration,
+    KoBaseDeclaration,
+    KoParentProvider {
     /**
      * Whatever property is `var`.
      */

@@ -1,9 +1,14 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoParentProvider
+
 /**
  * Represents a Kotlin annotation.
  */
-interface KoAnnotationDeclaration : KoNamedDeclaration {
+interface KoAnnotationDeclaration :
+    KoNamedDeclaration,
+    KoBaseDeclaration,
+    KoParentProvider {
     /**
      * The fully qualified name of the annotation.
      */
