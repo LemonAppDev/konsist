@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
 internal abstract class KoDeclarationImpl(
     private val ktTypeParameterListOwner: KtTypeParameterListOwner,
     val parentDeclaration: KoParentProvider?,
-) : KoNamedDeclarationImpl(ktTypeParameterListOwner), KoDeclaration {
+) : KoBaseDeclarationImpl(ktTypeParameterListOwner), KoDeclaration {
 
     override val fullyQualifiedName: String by lazy {
         if (ktTypeParameterListOwner.fqName != null) {

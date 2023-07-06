@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 internal class KoTypeDeclarationImpl private constructor(
     private val ktTypeReference: KtTypeReference,
 ) :
-    KoNamedDeclarationImpl(ktTypeReference),
+    KoBaseDeclarationImpl(ktTypeReference),
     KoTypeDeclaration {
     private val file: KoFile by lazy { KoFileImpl(ktTypeReference.containingKtFile) }
 

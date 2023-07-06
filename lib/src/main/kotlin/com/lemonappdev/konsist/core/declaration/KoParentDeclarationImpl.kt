@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 internal class KoParentDeclarationImpl private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
-    KoNamedDeclarationImpl(ktSuperTypeListEntry), KoParentDeclaration {
+    KoBaseDeclarationImpl(ktSuperTypeListEntry), KoParentDeclaration {
 
     override val name: String by lazy {
         ktSuperTypeListEntry

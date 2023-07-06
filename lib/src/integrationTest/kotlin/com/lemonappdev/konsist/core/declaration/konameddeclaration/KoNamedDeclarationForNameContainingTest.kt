@@ -16,7 +16,7 @@ class KoNamedDeclarationForNameContainingTest {
     ) {
         // given
         val sut = getSnippetFile(fileName)
-            .namedDeclarations()
+            .baseDeclarations()
             .first { it.name == declarationName }
 
         // then

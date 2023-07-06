@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
  * Represents a Kotlin import declaration.
  */
 interface KoImportDeclaration :
-    KoNamedDeclaration,
     KoBaseDeclaration,
     KoParentProvider {
     /**

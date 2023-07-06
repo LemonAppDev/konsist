@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtPackageDirective
 
 internal class KoPackageDeclarationImpl private constructor(private val ktPackageDirective: KtPackageDirective) :
-    KoNamedDeclarationImpl(ktPackageDirective), KoPackageDeclaration {
+    KoBaseDeclarationImpl(ktPackageDirective), KoPackageDeclaration {
 
     override val qualifiedName: String by lazy {
         if (ktPackageDirective.fqName != FqName.ROOT) {

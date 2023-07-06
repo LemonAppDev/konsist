@@ -8,7 +8,6 @@ import kotlin.reflect.KClass
  * Represents a Kotlin declaration.
  */
 interface KoDeclaration :
-    KoNamedDeclaration,
     KoBaseDeclaration,
     KoParentProvider {
     /**

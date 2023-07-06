@@ -38,7 +38,6 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
  * ```
  */
 interface KoTypeDeclaration :
-    KoNamedDeclaration,
     KoBaseDeclaration,
     KoParentProvider {
     /**

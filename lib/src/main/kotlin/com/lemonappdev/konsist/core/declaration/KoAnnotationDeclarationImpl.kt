@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.psi.KtAnnotationEntry
 
 internal class KoAnnotationDeclarationImpl private constructor(
     private val ktAnnotationEntry: KtAnnotationEntry,
-) : KoNamedDeclarationImpl(ktAnnotationEntry), KoAnnotationDeclaration {
+) : KoBaseDeclarationImpl(ktAnnotationEntry), KoAnnotationDeclaration {
     override val name: String by lazy { ktAnnotationEntry.shortName.toString() }
 
     override val fullyQualifiedName: String by lazy {

@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtImportDirective
 
 internal class KoImportDeclarationImpl private constructor(private val ktImportDirective: KtImportDirective) :
-    KoNamedDeclarationImpl(ktImportDirective),
+    KoBaseDeclarationImpl(ktImportDirective),
     KoImportDeclaration {
     override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
 
