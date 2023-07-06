@@ -3,17 +3,18 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoWildcardProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoAliasProviderCore
+import com.lemonappdev.konsist.core.provider.KoWildcardProviderCore
 import org.jetbrains.kotlin.psi.KtImportDirective
 
-internal class KoImportDeclarationImpl private constructor(private val ktImportDirective: KtImportDirective) :
+internal class KoImportDeclarationImpl private constructor(override val ktImportDirective: KtImportDirective) :
     KoBaseDeclarationImpl(ktImportDirective),
+    KoAliasProviderCore,
+    KoWildcardProviderCore,
     KoImportDeclaration {
     override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
-
-    override val alias: String by lazy { ktImportDirective.alias?.name ?: name }
-
-    override val isWildcard: Boolean by lazy { ktImportDirective.text.endsWith('*') }
 
     internal companion object {
         private val cache: KoDeclarationCache<KoImportDeclaration> = KoDeclarationCache()
