@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 
 /**
@@ -39,6 +40,7 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
  */
 interface KoTypeDeclaration :
     KoBaseDeclaration,
+    KoFullyQualifiedNameProvider,
     KoParentProvider {
     /**
      * The import alias name.
@@ -49,11 +51,6 @@ interface KoTypeDeclaration :
      * The source type.
      */
     val sourceType: String
-
-    /**
-     * The fully qualified name of the type.
-     */
-    val fullyQualifiedName: String
 
     /**
      * Whatever type is nullable.

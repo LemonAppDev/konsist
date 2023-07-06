@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -10,7 +9,7 @@ import org.jetbrains.kotlin.psi.KtPackageDirective
 internal class KoPackageDeclarationImpl private constructor(private val ktPackageDirective: KtPackageDirective) :
     KoBaseDeclarationImpl(ktPackageDirective), KoPackageDeclaration {
 
-    override val qualifiedName: String by lazy {
+    override val fullyQualifiedName: String by lazy {
         if (ktPackageDirective.fqName != FqName.ROOT) {
             ktPackageDirective.fqName.toString()
         } else {
@@ -21,7 +20,7 @@ internal class KoPackageDeclarationImpl private constructor(private val ktPackag
     override val hasMatchingFilePath: Boolean by lazy {
         filePath
             .replace("/", ".")
-            .endsWith(qualifiedName + "." + containingFile.nameWithExtension)
+            .endsWith(fullyQualifiedName + "." + containingFile.nameWithExtension)
     }
 
     internal companion object {

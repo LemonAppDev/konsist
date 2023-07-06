@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import kotlin.reflect.KClass
 
@@ -9,11 +10,8 @@ import kotlin.reflect.KClass
  */
 interface KoDeclaration :
     KoBaseDeclaration,
+    KoFullyQualifiedNameProvider,
     KoParentProvider {
-    /**
-     * Fully qualified name of the declaration.
-     */
-    val fullyQualifiedName: String
 
     /**
      * Package name of the declaration.

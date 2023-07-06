@@ -130,7 +130,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     }
 
     override fun hasPackage(name: String): Boolean = packagee
-        ?.qualifiedName
+        ?.fullyQualifiedName
         ?.let { LocationUtil.resideInLocation(name, it) } ?: false
 
     override fun hasImports(vararg names: String): Boolean = when {

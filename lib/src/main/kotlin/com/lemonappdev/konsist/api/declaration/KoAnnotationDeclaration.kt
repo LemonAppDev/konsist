@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 
 /**
@@ -7,11 +8,8 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
  */
 interface KoAnnotationDeclaration :
     KoBaseDeclaration,
+    KoFullyQualifiedNameProvider,
     KoParentProvider {
-    /**
-     * The fully qualified name of the annotation.
-     */
-    val fullyQualifiedName: String
 
     /**
      * Whether this annotation represents the specified type.

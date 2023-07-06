@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 
 /**
@@ -7,11 +8,8 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
  */
 interface KoPackageDeclaration :
     KoBaseDeclaration,
+    KoFullyQualifiedNameProvider,
     KoParentProvider {
-    /**
-     * Qualified name of the package.
-     */
-    val qualifiedName: String
 
     /**
      * Whether the package has matching file path.
