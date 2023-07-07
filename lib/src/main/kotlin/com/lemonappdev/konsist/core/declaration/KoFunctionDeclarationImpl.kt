@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.util.ReceiverUtil
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtClass
@@ -17,7 +18,8 @@ import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 @Suppress("detekt.TooManyFunctions")
 internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction, parentDeclaration: KoParentProvider?) :
     KoParametrizedDeclarationImpl(ktFunction, parentDeclaration),
-    KoFunctionDeclaration {
+    KoFunctionDeclaration,
+    KoModifierProviderCore {
 
     private val localDeclarations: Sequence<KoBaseDeclaration>
         get() {
@@ -48,30 +50,6 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
     private fun getTypeReferences(): List<KtTypeReference> = ktFunction
         .children
         .filterIsInstance<KtTypeReference>()
-
-    override fun hasOperatorModifier(): Boolean = hasModifiers(KoModifier.OPERATOR)
-
-    override fun hasInlineModifier(): Boolean = hasModifiers(KoModifier.INLINE)
-
-    override fun hasTailrecModifier(): Boolean = hasModifiers(KoModifier.TAILREC)
-
-    override fun hasInfixModifier(): Boolean = hasModifiers(KoModifier.INFIX)
-
-    override fun hasExternalModifier(): Boolean = hasModifiers(KoModifier.EXTERNAL)
-
-    override fun hasSuspendModifier(): Boolean = hasModifiers(KoModifier.SUSPEND)
-
-    override fun hasOpenModifier(): Boolean = hasModifiers(KoModifier.OPEN)
-
-    override fun hasOverrideModifier(): Boolean = hasModifiers(KoModifier.OVERRIDE)
-
-    override fun hasFinalModifier(): Boolean = hasModifiers(KoModifier.FINAL)
-
-    override fun hasAbstractModifier(): Boolean = hasModifiers(KoModifier.ABSTRACT)
-
-    override fun hasActualModifier(): Boolean = hasModifiers(KoModifier.ACTUAL)
-
-    override fun hasExpectModifier(): Boolean = hasModifiers(KoModifier.EXPECT)
 
     override fun isExtension(): Boolean = ktFunction.isExtensionDeclaration()
 

@@ -51,4 +51,52 @@ internal interface KoModifierProviderCore: KoModifierProvider {
     override fun hasProtectedModifier(): Boolean = hasModifiers(KoModifier.PROTECTED)
 
     override fun hasInternalModifier(): Boolean = hasModifiers(KoModifier.INTERNAL)
+
+    override fun hasEnumModifier(): Boolean = hasModifiers(KoModifier.ENUM)
+
+    override fun hasSealedModifier(): Boolean = hasModifiers(KoModifier.SEALED)
+
+    override fun hasInnerModifier(): Boolean = hasModifiers(KoModifier.INNER)
+
+    override fun hasValueModifier(): Boolean = hasModifiers(KoModifier.VALUE)
+
+    override fun hasAnnotationModifier(): Boolean = hasModifiers(KoModifier.ANNOTATION)
+
+    override fun hasDataModifier(): Boolean = hasModifiers(KoModifier.DATA)
+
+    override fun hasActualModifier(): Boolean = hasModifiers(KoModifier.ACTUAL)
+
+    override fun hasExpectModifier(): Boolean = hasModifiers(KoModifier.EXPECT)
+
+    override fun hasAbstractModifier(): Boolean = hasModifiers(KoModifier.ABSTRACT)
+
+    override fun hasOpenModifier(): Boolean = hasModifiers(KoModifier.OPEN)
+
+    override fun hasFinalModifier(): Boolean = hasModifiers(KoModifier.FINAL)
+
+    override fun hasVarargModifier(): Boolean = hasModifiers(KoModifier.VARARG)
+
+    override fun hasNoInlineModifier(): Boolean = hasModifiers(KoModifier.NOINLINE)
+
+    override fun hasCrossInlineModifier(): Boolean = hasModifiers(KoModifier.CROSSINLINE)
+
+    override fun hasOperatorModifier(): Boolean = hasModifiers(KoModifier.OPERATOR)
+
+    override fun hasInlineModifier(): Boolean = hasModifiers(KoModifier.INLINE)
+
+    override fun hasTailrecModifier(): Boolean = hasModifiers(KoModifier.TAILREC)
+
+    override fun hasInfixModifier(): Boolean = hasModifiers(KoModifier.INFIX)
+
+    override fun hasExternalModifier(): Boolean = hasModifiers(KoModifier.EXTERNAL)
+
+    override fun hasSuspendModifier(): Boolean = hasModifiers(KoModifier.SUSPEND)
+
+    override fun hasOverrideModifier(): Boolean = hasModifiers(KoModifier.OVERRIDE)
+
+    override fun hasFunModifier(): Boolean = hasModifiers(KoModifier.FUN)
+
+    override fun hasLateinitModifier(): Boolean = hasModifiers(KoModifier.LATEINIT)
+
+    override fun hasConstModifier(): Boolean = hasModifiers(KoModifier.CONST)
 }

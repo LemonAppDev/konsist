@@ -21,8 +21,6 @@ internal class KoObjectDeclarationImpl(
         }
     }
 
-    override fun hasDataModifier(): Boolean = hasModifiers(KoModifier.DATA)
-
     override fun hasCompanionModifier(): Boolean = hasModifiers(KoModifier.COMPANION)
 
     internal companion object {

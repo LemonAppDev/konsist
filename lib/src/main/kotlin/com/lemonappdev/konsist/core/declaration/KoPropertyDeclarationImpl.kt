@@ -50,22 +50,6 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
         .children
         .filterIsInstance<KtTypeReference>()
 
-    override fun hasLateinitModifier(): Boolean = hasModifiers(KoModifier.LATEINIT)
-
-    override fun hasOverrideModifier(): Boolean = hasModifiers(KoModifier.OVERRIDE)
-
-    override fun hasAbstractModifier(): Boolean = hasModifiers(KoModifier.ABSTRACT)
-
-    override fun hasOpenModifier(): Boolean = hasModifiers(KoModifier.OPEN)
-
-    override fun hasFinalModifier(): Boolean = hasModifiers(KoModifier.FINAL)
-
-    override fun hasActualModifier(): Boolean = hasModifiers(KoModifier.ACTUAL)
-
-    override fun hasExpectModifier(): Boolean = hasModifiers(KoModifier.EXPECT)
-
-    override fun hasConstModifier(): Boolean = hasModifiers(KoModifier.CONST)
-
     override fun isExtension(): Boolean = ktProperty.isExtensionDeclaration()
 
     override fun hasReceiverType(name: String?): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)

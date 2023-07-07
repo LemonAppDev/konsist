@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoDefaultValueProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
@@ -19,12 +20,13 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal class KoParameterDeclarationImpl private constructor(private val ktParameter: KtParameter, parentDeclaration: KoParentProvider?) :
+internal class KoParameterDeclarationImpl private constructor(override val ktParameter: KtParameter, parentDeclaration: KoParentProvider?) :
     KoParameterDeclaration,
     KoBaseDeclarationImpl(ktParameter),
     KoAnnotationDeclarationProviderCore,
     KoPackageDeclarationProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
+    KoDefaultValueProviderCore,
     KoModifierProviderCore,
     KoTopLevelProviderCore {
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
@@ -36,37 +38,6 @@ internal class KoParameterDeclarationImpl private constructor(private val ktPara
             .firstIsInstance<KtTypeReference>()
 
         KoTypeDeclarationImpl.getInstance(type, this)
-    }
-
-    override val defaultValue: String? by lazy {
-        // eg. primitive value as default parameter value
-        val constantExpressionText = ktParameter
-            .children
-            .firstIsInstanceOrNull<KtConstantExpression>()
-            ?.text
-
-        if (constantExpressionText != null) {
-            return@lazy constantExpressionText
-        }
-
-        // eg. function call as default parameter value
-        val callExpressionText = ktParameter
-            .children
-            .firstIsInstanceOrNull<KtCallExpression>()
-            ?.text
-
-        callExpressionText
-    }
-
-    override fun hasVarargModifier(): Boolean = hasModifiers(KoModifier.VARARG)
-
-    override fun hasNoInlineModifier(): Boolean = hasModifiers(KoModifier.NOINLINE)
-
-    override fun hasCrossInlineModifier(): Boolean = hasModifiers(KoModifier.CROSSINLINE)
-
-    override fun hasDefaultValue(value: String?): Boolean = when (value) {
-        null -> ktParameter.hasDefaultValue()
-        else -> defaultValue == value
     }
 
     override fun representsType(name: String): Boolean = type.name == name || type.fullyQualifiedName == name

@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
@@ -18,7 +19,8 @@ import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass, parentDeclaration: KoParentProvider?) :
     KoComplexDeclarationImpl(ktClass, parentDeclaration),
-    KoClassDeclaration {
+    KoClassDeclaration,
+    KoModifierProviderCore {
     override val parents: List<KoParentDeclaration> by lazy {
         ktClass
             .getSuperTypeList()
@@ -67,28 +69,6 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
     override val allConstructors: List<KoConstructorDeclaration> by lazy {
         listOfNotNull(primaryConstructor) + secondaryConstructors
     }
-
-    override fun hasEnumModifier(): Boolean = hasModifiers(KoModifier.ENUM)
-
-    override fun hasSealedModifier(): Boolean = hasModifiers(KoModifier.SEALED)
-
-    override fun hasInnerModifier(): Boolean = hasModifiers(KoModifier.INNER)
-
-    override fun hasValueModifier(): Boolean = hasModifiers(KoModifier.VALUE)
-
-    override fun hasAnnotationModifier(): Boolean = hasModifiers(KoModifier.ANNOTATION)
-
-    override fun hasDataModifier(): Boolean = hasModifiers(KoModifier.DATA)
-
-    override fun hasActualModifier(): Boolean = hasModifiers(KoModifier.ACTUAL)
-
-    override fun hasExpectModifier(): Boolean = hasModifiers(KoModifier.EXPECT)
-
-    override fun hasAbstractModifier(): Boolean = hasModifiers(KoModifier.ABSTRACT)
-
-    override fun hasOpenModifier(): Boolean = hasModifiers(KoModifier.OPEN)
-
-    override fun hasFinalModifier(): Boolean = hasModifiers(KoModifier.FINAL)
 
     override fun hasPrimaryConstructor(): Boolean = ktClass.hasExplicitPrimaryConstructor()
 

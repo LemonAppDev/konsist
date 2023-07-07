@@ -34,8 +34,6 @@ internal class KoTypeAliasDeclarationImpl private constructor(private val ktType
             ?: throw KoInternalException("Type alias has no type", koBaseDeclaration = this)
     }
 
-    override fun hasActualModifier(): Boolean = hasModifiers(KoModifier.ACTUAL)
-
     internal companion object {
         private val cache: KoDeclarationCache<KoTypeAliasDeclaration> = KoDeclarationCache()
 

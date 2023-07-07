@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 
 /**
@@ -8,13 +9,8 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
 interface KoObjectDeclaration :
     KoComplexDeclaration,
     KoBaseDeclaration,
-    KoParentProvider {
-    /**
-     * Whether this object has a data modifier.
-     *
-     * @return `true` if the object has the `data` modifier, `false` otherwise.
-     */
-    fun hasDataModifier(): Boolean
+    KoParentProvider,
+    KoModifierProvider {
 
     /**
      * Whether this object has a companion modifier.

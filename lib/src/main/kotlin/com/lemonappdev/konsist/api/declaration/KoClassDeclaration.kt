@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 
 /**
  * Represents a Kotlin class declaration.
@@ -8,7 +10,8 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
 interface KoClassDeclaration :
     KoComplexDeclaration,
     KoBaseDeclaration,
-    KoParentProvider {
+    KoParentProvider,
+    KoModifierProvider {
     /**
      * The parents of the class.
      */
@@ -38,83 +41,6 @@ interface KoClassDeclaration :
      * The all primary and secondary constructors of the class.
      */
     val allConstructors: List<KoConstructorDeclaration>
-
-    /**
-     * Whatever class has `enum` modifier.
-     *
-     * @return `true` if the class has the `enum` modifier, `false` otherwise.
-     */
-    fun hasEnumModifier(): Boolean
-
-    /**
-     * Whatever class has `sealed` modifier.
-     *
-     * @return `true` if the class has the `sealed` modifier, `false` otherwise.
-     */
-    fun hasSealedModifier(): Boolean
-
-    /**
-     * Whatever class has `inner` modifier.
-     *
-     * @return `true` if the class has the `inner` modifier, `false` otherwise.
-     */
-    fun hasInnerModifier(): Boolean
-
-    /**
-     * Whatever class has `value` modifier.
-     *
-     * @return `true` if the class has the `value` modifier, `false` otherwise.
-     */
-    fun hasValueModifier(): Boolean
-
-    /**
-     * Whatever class has `annotation` modifier.
-     *
-     * @return `true` if the class has the `annotation` modifier, `false` otherwise.
-     */
-    fun hasAnnotationModifier(): Boolean
-
-    /**
-     * Whatever class has `data` modifier.
-     *
-     * @return `true` if the class has the `data` modifier, `false` otherwise.
-     */
-    fun hasDataModifier(): Boolean
-
-    /**
-     * Whatever class has `actual` modifier.
-     *
-     * @return `true` if the class has the `actual` modifier, `false` otherwise.
-     */
-    fun hasActualModifier(): Boolean
-
-    /**
-     * Whatever class has `expect` modifier.
-     *
-     * @return `true` if the class has the `expect` modifier, `false` otherwise.
-     */
-    fun hasExpectModifier(): Boolean
-
-    /**
-     * Whatever class has `abstract` modifier.
-     *
-     * @return `true` if the class has the `abstract` modifier, `false` otherwise.
-     */
-    fun hasAbstractModifier(): Boolean
-
-    /**
-     * Whatever class has `open` modifier.
-     *
-     * @return `true` if the class has the `open` modifier, `false` otherwise.
-     */
-    fun hasOpenModifier(): Boolean
-
-    /**
-     * Whatever class has `final` modifier.
-     *
-     * @return `true` if the class has the `final` modifier, `false` otherwise.
-     */
-    fun hasFinalModifier(): Boolean
 
     /**
      * Whatever class has primary constructor.

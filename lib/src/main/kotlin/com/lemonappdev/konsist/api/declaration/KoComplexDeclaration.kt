@@ -26,7 +26,6 @@ interface KoComplexDeclaration :
     KoAnnotationDeclarationProvider,
     KoPackageDeclarationProvider,
     KoDeclarationFullyQualifiedNameProvider,
-    KoModifierProvider,
     KoTopLevelProvider,
     KoParentProvider {
     /**
