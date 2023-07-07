@@ -99,4 +99,6 @@ internal interface KoModifierProviderCore: KoModifierProvider {
     override fun hasLateinitModifier(): Boolean = hasModifiers(KoModifier.LATEINIT)
 
     override fun hasConstModifier(): Boolean = hasModifiers(KoModifier.CONST)
+
+    override fun hasCompanionModifier(): Boolean = hasModifiers(KoModifier.COMPANION)
 }

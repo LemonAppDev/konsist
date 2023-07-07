@@ -2,12 +2,18 @@ package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoComplexDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.declaration.representsTypeOf
+import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoFunctionCoreProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceCoreProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoObjectCoreProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoPropertyCoreProvider
 import kotlin.reflect.KClass
 
 /**
@@ -17,7 +23,7 @@ import kotlin.reflect.KClass
  * @param types The types to include.
  * @return A sequence containing declarations that represent the specified type(s).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedType(type: String, vararg types: String): Sequence<T> = filter {
+fun <T : KoRepresentsTypeProvider> Sequence<T>.withRepresentedType(type: String, vararg types: String): Sequence<T> = filter {
     it.representsType(type) || types.any { type -> it.representsType(type) }
 }
 
@@ -28,7 +34,7 @@ fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedType(type: String, var
  * @param types The types to exclude.
  * @return A sequence containing declarations that don't represent the specified type(s).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedType(type: String, vararg types: String): Sequence<T> = filter {
+fun <T : KoRepresentsTypeProvider> Sequence<T>.withoutRepresentedType(type: String, vararg types: String): Sequence<T> = filter {
     !it.representsType(type) && types.none { type -> it.representsType(type) }
 }
 
@@ -38,7 +44,7 @@ fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedType(type: String, 
  * @param types The Kotlin class(es) representing the type(s) to include.
  * @return A sequence containing declarations that have the type of the specified class(es).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoRepresentsTypeProvider> Sequence<T>.withRepresentedTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.any { type ->
         type
             .qualifiedName
@@ -52,7 +58,7 @@ fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedTypeOf(vararg types: K
  * @param types The Kotlin class(es) representing the type(s) to exclude.
  * @return A sequence containing declarations that don't have the type of the specified class(es).
  */
-fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoRepresentsTypeProvider> Sequence<T>.withoutRepresentedTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.none { type ->
         type
             .qualifiedName
@@ -65,17 +71,17 @@ fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedTypeOf(vararg types
  *
  * @return A sequence containing declarations that have the type of the specified class.
  */
-inline fun <reified T> Sequence<KoComplexDeclaration>.withRepresentedTypeOf(): Sequence<KoComplexDeclaration> = filter {
-    it.representsTypeOf<T>()
-}
+//inline fun <reified T> Sequence<KoRepresentsTypeProvider>.withRepresentedTypeOf(): Sequence<KoRepresentsTypeProvider> = filter {
+//    it.representsTypeOf<T>()
+//}
 
 /**
  * Sequence containing declarations that don't have the type of.
  *
  * @return A sequence containing declarations that don't have the type of the specified class.
  */
-inline fun <reified T> Sequence<KoComplexDeclaration>.withoutRepresentedTypeOf(): Sequence<KoComplexDeclaration> =
-    filterNot { it.representsTypeOf<T>() }
+//inline fun <reified T> Sequence<KoRepresentsTypeProvider>.withoutRepresentedTypeOf(): Sequence<KoRepresentsTypeProvider> =
+//    filterNot { it.representsTypeOf<T>() }
 
 /**
  * Sequence containing declarations of all types.
@@ -84,7 +90,7 @@ inline fun <reified T> Sequence<KoComplexDeclaration>.withoutRepresentedTypeOf()
  * @param includeLocal Whether to include local declarations.
  * @return A sequence containing all declarations.
  */
-fun <T : KoComplexDeclaration> Sequence<T>.declarations(
+fun <T : KoDeclarationCoreProvider> Sequence<T>.declarations(
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
 ): Sequence<KoBaseDeclaration> = flatMap { it.declarations(includeNested, includeLocal) }
@@ -96,7 +102,7 @@ fun <T : KoComplexDeclaration> Sequence<T>.declarations(
  * @param includeLocal Whether to include local declarations.
  * @return A sequence containing class declarations.
  */
-fun <T : KoComplexDeclaration> Sequence<T>.classes(
+fun <T : KoClassCoreProvider> Sequence<T>.classes(
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
 ): Sequence<KoClassDeclaration> = flatMap { it.classes(includeNested, includeLocal) }
@@ -107,7 +113,7 @@ fun <T : KoComplexDeclaration> Sequence<T>.classes(
  * @param includeNested Whether to include nested declarations.
  * @return A sequence containing interface declarations.
  */
-fun <T : KoComplexDeclaration> Sequence<T>.interfaces(
+fun <T : KoInterfaceCoreProvider> Sequence<T>.interfaces(
     includeNested: Boolean = false,
 ): Sequence<KoInterfaceDeclaration> = flatMap { it.interfaces(includeNested) }
 
@@ -117,7 +123,7 @@ fun <T : KoComplexDeclaration> Sequence<T>.interfaces(
  * @param includeNested Whether to include nested declarations.
  * @return A sequence containing object declarations.
  */
-fun <T : KoComplexDeclaration> Sequence<T>.objects(
+fun <T : KoObjectCoreProvider> Sequence<T>.objects(
     includeNested: Boolean = false,
 ): Sequence<KoObjectDeclaration> = flatMap { it.objects(includeNested) }
 
@@ -128,7 +134,7 @@ fun <T : KoComplexDeclaration> Sequence<T>.objects(
  * @param includeLocal Whether to include local declarations.
  * @return A sequence containing property declarations.
  */
-fun <T : KoComplexDeclaration> Sequence<T>.properties(
+fun <T : KoPropertyCoreProvider> Sequence<T>.properties(
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
 ): Sequence<KoPropertyDeclaration> = flatMap { it.properties(includeNested, includeLocal) }
@@ -140,7 +146,7 @@ fun <T : KoComplexDeclaration> Sequence<T>.properties(
  * @param includeLocal Whether to include local declarations.
  * @return A sequence containing function declarations.
  */
-fun <T : KoComplexDeclaration> Sequence<T>.functions(
+fun <T : KoFunctionCoreProvider> Sequence<T>.functions(
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
 ): Sequence<KoFunctionDeclaration> = flatMap { it.functions(includeNested, includeLocal) }

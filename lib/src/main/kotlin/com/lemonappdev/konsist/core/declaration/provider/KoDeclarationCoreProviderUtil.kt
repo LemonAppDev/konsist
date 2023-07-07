@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoComplexDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
@@ -77,7 +76,7 @@ internal object KoDeclarationCoreProviderUtil {
         var result = if (includeNested) {
             declarations.flatMap {
                 when (it) {
-                    is KoComplexDeclarationImpl -> sequenceOf(it) + it.declarations(includeNested = true)
+                    is KoDeclarationProvider -> sequenceOf(it) + it.declarations(includeNested = true)
                     else -> sequenceOf(it)
                 }
             }
@@ -114,7 +113,7 @@ internal object KoDeclarationCoreProviderUtil {
     fun nestedDeclarations(koNamedDeclarations: Sequence<KoBaseDeclaration>): Sequence<KoBaseDeclaration> {
         return koNamedDeclarations.flatMap {
             when (it) {
-                is KoComplexDeclarationImpl -> it.declarations(includeNested = true)
+                is KoDeclarationProvider -> it.declarations(includeNested = true)
                 else -> sequenceOf()
             }
         }
@@ -126,7 +125,7 @@ internal object KoDeclarationCoreProviderUtil {
 
         koFunctions.forEach { koFunction ->
             koFunction.localDeclarations().forEach {
-                if (it is KoComplexDeclarationImpl && includeNested) {
+                if (it is KoDeclarationProvider && includeNested) {
                     nestedDeclarations += it.declarations(includeNested = true, includeLocal = true)
                 }
             }

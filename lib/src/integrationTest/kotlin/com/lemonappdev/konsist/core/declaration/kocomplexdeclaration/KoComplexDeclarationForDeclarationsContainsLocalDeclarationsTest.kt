@@ -1,7 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.declaration.KoComplexDeclaration
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -17,8 +18,7 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .filterIsInstance<KoComplexDeclaration>()
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoDeclarationProvider
 
         // then
         val expected = listOf(
@@ -47,8 +47,7 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .filterIsInstance<KoComplexDeclaration>()
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoDeclarationProvider
 
         // then
         val expected = listOf("sampleFunction")
@@ -69,8 +68,7 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .filterIsInstance<KoComplexDeclaration>()
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoDeclarationProvider
 
         // then
         val expected = listOf(
@@ -98,8 +96,7 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .filterIsInstance<KoComplexDeclaration>()
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoDeclarationProvider
 
         // then
         val expected = listOf("sampleFunction")

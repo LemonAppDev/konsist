@@ -219,4 +219,11 @@ interface KoModifierProvider {
      * @return `true` if the declaration has the `const` modifier, `false` otherwise.
      */
     fun hasConstModifier(): Boolean
+
+    /**
+     * Whether the declaration has a companion modifier.
+     *
+     * @return `true` if the declaration has the `companion` modifier, `false` otherwise.
+     */
+    fun hasCompanionModifier(): Boolean
 }
