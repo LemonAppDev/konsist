@@ -8,29 +8,33 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.KoVarAndValProviderCore
 import com.lemonappdev.konsist.core.util.ReceiverUtil
+import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
-internal class KoPropertyDeclarationImpl private constructor(private val ktProperty: KtProperty, parentDeclaration: KoParentProvider?) :
+internal class KoPropertyDeclarationImpl private constructor(override val ktProperty: KtProperty, parentDeclaration: KoParentProvider?) :
     KoPropertyDeclaration,
     KoBaseDeclarationImpl(ktProperty),
     KoAnnotationDeclarationProviderCore,
     KoPackageDeclarationProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoModifierProviderCore,
-    KoTopLevelProviderCore {
+    KoTopLevelProviderCore,
+    KoVarAndValProviderCore,
+    KoExtensionProviderCore {
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktProperty
 
-    override val isVar: Boolean by lazy { ktProperty.isVar }
-
-    override val isVal: Boolean by lazy { !ktProperty.isVar }
+    override val ktCallableDeclaration: KtCallableDeclaration
+        get() = ktProperty
 
     override val delegateName: String? by lazy {
         ktProperty
@@ -49,8 +53,6 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
     private fun getTypeReferences(): List<KtTypeReference> = ktProperty
         .children
         .filterIsInstance<KtTypeReference>()
-
-    override fun isExtension(): Boolean = ktProperty.isExtensionDeclaration()
 
     override fun hasReceiverType(name: String?): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)
 

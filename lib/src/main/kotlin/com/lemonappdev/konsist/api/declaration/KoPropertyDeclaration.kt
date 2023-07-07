@@ -2,10 +2,12 @@ package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.KoVarAndValProvider
 
 /**
  * Represents a Kotlin property declaration.
@@ -17,16 +19,9 @@ interface KoPropertyDeclaration :
     KoDeclarationFullyQualifiedNameProvider,
     KoModifierProvider,
     KoTopLevelProvider,
-    KoParentProvider {
-    /**
-     * Whatever property is `var`.
-     */
-    val isVar: Boolean
-
-    /**
-     * Whatever property is `val`.
-     */
-    val isVal: Boolean
+    KoParentProvider,
+    KoVarAndValProvider,
+    KoExtensionProvider {
 
     /**
      * Property delegate name.
@@ -42,14 +37,6 @@ interface KoPropertyDeclaration :
      * Receiver type of the property.
      */
     val receiverType: KoTypeDeclaration?
-
-
-    /**
-     * Whatever property is an extension property.
-     *
-     * @return `true` if the property is an extension property, `false` otherwise.
-     */
-    fun isExtension(): Boolean
 
     /**
      * Whether property has receiver type.

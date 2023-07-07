@@ -4,11 +4,14 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.util.ReceiverUtil
 import com.lemonappdev.konsist.core.util.TagUtil
+import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
@@ -19,7 +22,10 @@ import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction, parentDeclaration: KoParentProvider?) :
     KoParametrizedDeclarationImpl(ktFunction, parentDeclaration),
     KoFunctionDeclaration,
-    KoModifierProviderCore {
+    KoModifierProviderCore,
+    KoExtensionProviderCore {
+    override val ktCallableDeclaration: KtCallableDeclaration
+        get() = ktFunction
 
     private val localDeclarations: Sequence<KoBaseDeclaration>
         get() {
@@ -50,8 +56,6 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
     private fun getTypeReferences(): List<KtTypeReference> = ktFunction
         .children
         .filterIsInstance<KtTypeReference>()
-
-    override fun isExtension(): Boolean = ktFunction.isExtensionDeclaration()
 
     override fun hasReceiverType(name: String?): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)
 

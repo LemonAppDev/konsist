@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalClassProvider
@@ -17,7 +18,8 @@ interface KoFunctionDeclaration :
     KoLocalFunctionProvider,
     KoLocalPropertyProvider,
     KoParentProvider,
-    KoModifierProvider {
+    KoModifierProvider,
+    KoExtensionProvider {
 
     /**
      * Return type of the function.
@@ -28,13 +30,6 @@ interface KoFunctionDeclaration :
      * Receiver type of the function.
      */
     val receiverType: KoTypeDeclaration?
-
-    /**
-     * Whether this function is an extension function.
-     *
-     * @return `true` if the function is an extension function, `false` otherwise.
-     */
-    fun isExtension(): Boolean
 
     /**
      * Whether this function has receiver type.
