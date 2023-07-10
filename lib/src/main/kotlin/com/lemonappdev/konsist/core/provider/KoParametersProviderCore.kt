@@ -4,14 +4,14 @@ import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoParameterDeclarationImpl
-import org.jetbrains.kotlin.psi.KtFunction
+import org.jetbrains.kotlin.psi.KtCallableDeclaration
 
 internal interface KoParametersProviderCore :
     KoParametersProvider,
     KoParentProvider {
-    val ktFunction: KtFunction
+    val ktCallableDeclaration: KtCallableDeclaration
     override val parameters: List<KoParameterDeclaration>
-        get() = ktFunction
+        get() = ktCallableDeclaration
             .valueParameters
             .map { KoParameterDeclarationImpl.getInstance(it, this) }
 
