@@ -1,0 +1,3 @@
+package com.lemonappdev.konsist.core.provider
+
+internal interface KoConstructorDeclarationProviderCore
