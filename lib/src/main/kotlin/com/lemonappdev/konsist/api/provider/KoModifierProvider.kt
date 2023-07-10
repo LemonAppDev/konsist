@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.KoModifier
 
+@Suppress("detekt.TooManyFunctions")
 interface KoModifierProvider {
     /**
      * List of modifiers.
@@ -190,7 +191,6 @@ interface KoModifierProvider {
      * @return `true` if the declaration has the `suspend` modifier, `false` otherwise.
      */
     fun hasSuspendModifier(): Boolean
-
 
     /**
      * Whether the declaration has override modifier.

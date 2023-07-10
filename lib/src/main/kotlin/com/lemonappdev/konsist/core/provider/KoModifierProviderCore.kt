@@ -6,7 +6,8 @@ import com.lemonappdev.konsist.core.exception.KoInternalException
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isPublic
 
-internal interface KoModifierProviderCore: KoModifierProvider {
+@Suppress("detekt.TooManyFunctions")
+internal interface KoModifierProviderCore : KoModifierProvider {
     val ktTypeParameterListOwner: KtTypeParameterListOwner
 
     override val modifiers: List<KoModifier>
@@ -23,10 +24,10 @@ internal interface KoModifierProviderCore: KoModifierProvider {
                 // and with angle brackets
                 // e.g. @SampleAnnotation<String, Int>
                 !it.contains('<') &&
-                        !it.contains('>') &&
-                        !it.contains(')') &&
-                        !it.contains('@') &&
-                        it.isNotBlank()
+                    !it.contains('>') &&
+                    !it.contains(')') &&
+                    !it.contains('@') &&
+                    it.isNotBlank()
             }
             ?.map {
                 KoModifier

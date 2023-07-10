@@ -8,25 +8,25 @@ import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 
-internal interface KoParentInterfaceProviderCore:
+internal interface KoParentInterfaceProviderCore :
     KoParentProvider,
     KoParentInterfaceProvider {
     val ktClass: KtClass
     override val parentInterfaces: List<KoParentDeclaration>
         get() {
-        val interfaces = ktClass
-            .getSuperTypeList()
-            ?.children
-            ?.filterIsInstance<KtSuperTypeEntry>() ?: emptyList()
+            val interfaces = ktClass
+                .getSuperTypeList()
+                ?.children
+                ?.filterIsInstance<KtSuperTypeEntry>() ?: emptyList()
 
-        val delegations = ktClass
-            .getSuperTypeList()
-            ?.children
-            ?.filterIsInstance<KtDelegatedSuperTypeEntry>() ?: emptyList()
+            val delegations = ktClass
+                .getSuperTypeList()
+                ?.children
+                ?.filterIsInstance<KtDelegatedSuperTypeEntry>() ?: emptyList()
 
-        val all = interfaces + delegations
-       return all.map { KoParentDeclarationImpl.getInstance(it, this) }
-    }
+            val all = interfaces + delegations
+            return all.map { KoParentDeclarationImpl.getInstance(it, this) }
+        }
 
     override fun hasParentInterfaces(vararg names: String): Boolean = when {
         names.isEmpty() -> parentInterfaces.isNotEmpty()

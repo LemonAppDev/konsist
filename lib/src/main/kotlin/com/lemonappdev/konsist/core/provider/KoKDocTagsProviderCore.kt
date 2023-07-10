@@ -4,37 +4,36 @@ import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocTagsProvider
-import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.core.declaration.KoKDocTagDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoValuedKDocTagDeclarationImpl
 import java.awt.SystemColor.text
 import java.util.*
 
-internal interface KoKDocTagsProviderCore: KoKDocTagsProvider, KoTextProviderCore {
+internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCore {
     override val tags: List<KoKDocTagDeclaration>
         get() {
-        val regex = "@(\\w+)".toRegex()
+            val regex = "@(\\w+)".toRegex()
 
-        val tagsAsStringList = text
-            .substringAfter("@", "")
-            .split("\n@")
-            .map { ("@${it.replaceFirstChar { char -> char.lowercase(Locale.getDefault()) }}").trimEnd() }
+            val tagsAsStringList = text
+                .substringAfter("@", "")
+                .split("\n@")
+                .map { ("@${it.replaceFirstChar { char -> char.lowercase(Locale.getDefault()) }}").trimEnd() }
 
-        val tagsWithName = tagsAsStringList
-            .filterNot { it == "@" }
-            .flatMap { regex.findAll(it) }
-            .mapNotNull { KoKDocTag.values().firstOrNull { tag -> tag.type == it.value } }
-            .zip(tagsAsStringList)
+            val tagsWithName = tagsAsStringList
+                .filterNot { it == "@" }
+                .flatMap { regex.findAll(it) }
+                .mapNotNull { KoKDocTag.values().firstOrNull { tag -> tag.type == it.value } }
+                .zip(tagsAsStringList)
 
-        val tagsGroupingByValued = tagsWithName.groupBy { it.first.isValued }
+            val tagsGroupingByValued = tagsWithName.groupBy { it.first.isValued }
 
-        return tagsGroupingByValued.flatMap {
-            when (it.key) {
-                true -> it.value.map { value -> parseToValuedTag(value.first, value.second) }
-                false -> it.value.map { value -> parseToTag(value.first, value.second) }
+            return tagsGroupingByValued.flatMap {
+                when (it.key) {
+                    true -> it.value.map { value -> parseToValuedTag(value.first, value.second) }
+                    false -> it.value.map { value -> parseToTag(value.first, value.second) }
+                }
             }
         }
-    }
 
     override val paramTags: List<KoValuedKDocTagDeclaration>
         get() = tags.filter { it.name == KoKDocTag.PARAM }

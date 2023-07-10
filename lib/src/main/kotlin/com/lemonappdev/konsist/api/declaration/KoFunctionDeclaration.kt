@@ -13,7 +13,6 @@ import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalPropertyProvider
-import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 
 /**
  * Represents a Kotlin function declaration.

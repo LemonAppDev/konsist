@@ -1,22 +1,21 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationImpl
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.kdoc.psi.api.KDoc
 
-internal interface KoKDocProviderCore: KoKDocProvider, KoTextProviderCore {
+internal interface KoKDocProviderCore : KoKDocProvider, KoTextProviderCore {
     override val kDoc: KoKDocDeclaration?
         get() {
-        val kDocElement = psiElement
-            .children
-            .filterIsInstance<KDoc>()
-            .firstOrNull()
+            val kDocElement = psiElement
+                .children
+                .filterIsInstance<KDoc>()
+                .firstOrNull()
 
-        return kDocElement?.let { KoKDocDeclarationImpl(kDocElement) }
-    }
+            return kDocElement?.let { KoKDocDeclarationImpl(kDocElement) }
+        }
 
     fun hasValidDescription(enabled: Boolean): Boolean = TagUtil.hasValidDescription(enabled, kDoc)
 
@@ -69,22 +68,22 @@ internal interface KoKDocProviderCore: KoKDocProvider, KoTextProviderCore {
         verifyPropertySetterTag: Boolean,
         verifyPropertyGetterTag: Boolean,
     ): Boolean = hasKDoc() &&
-            hasValidDescription(verifyDescription) &&
-            hasValidParamTag(verifyParamTag) &&
-            hasValidReturnTag(verifyReturnTag) &&
-            hasValidConstructorTag(verifyConstructorTag) &&
-            hasValidReceiverTag(verifyReceiverTag) &&
-            hasValidPropertyTag(verifyPropertyTag) &&
-            hasValidThrowsTag(verifyThrowsTag) &&
-            hasValidExceptionTag(verifyExceptionTag) &&
-            hasValidSampleTag(verifySampleTag) &&
-            hasValidSeeTag(verifySeeTag) &&
-            hasValidAuthorTag(verifyAuthorTag) &&
-            hasValidSinceTag(verifySinceTag) &&
-            hasValidSuppressTag(verifySuppressTag) &&
-            hasValidVersionTag(verifyVersionTag) &&
-            hasValidPropertySetterTag(verifyPropertySetterTag) &&
-            hasValidPropertyGetterTag(verifyPropertyGetterTag)
+        hasValidDescription(verifyDescription) &&
+        hasValidParamTag(verifyParamTag) &&
+        hasValidReturnTag(verifyReturnTag) &&
+        hasValidConstructorTag(verifyConstructorTag) &&
+        hasValidReceiverTag(verifyReceiverTag) &&
+        hasValidPropertyTag(verifyPropertyTag) &&
+        hasValidThrowsTag(verifyThrowsTag) &&
+        hasValidExceptionTag(verifyExceptionTag) &&
+        hasValidSampleTag(verifySampleTag) &&
+        hasValidSeeTag(verifySeeTag) &&
+        hasValidAuthorTag(verifyAuthorTag) &&
+        hasValidSinceTag(verifySinceTag) &&
+        hasValidSuppressTag(verifySuppressTag) &&
+        hasValidVersionTag(verifyVersionTag) &&
+        hasValidPropertySetterTag(verifyPropertySetterTag) &&
+        hasValidPropertyGetterTag(verifyPropertyGetterTag)
 
     override fun hasKDoc(): Boolean = kDoc != null
 }

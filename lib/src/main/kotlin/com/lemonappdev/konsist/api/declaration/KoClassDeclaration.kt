@@ -15,12 +15,10 @@ import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoFunctionCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoObjectCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoPropertyCoreProvider
-import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 
 /**
  * Represents a Kotlin class declaration.

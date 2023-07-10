@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.util.LocationUtil
 
-internal interface KoPathProviderCore: KoPathProvider {
+internal interface KoPathProviderCore : KoPathProvider {
     val psiElement: PsiElement
 
     override val filePath: String
@@ -17,13 +17,13 @@ internal interface KoPathProviderCore: KoPathProvider {
 
     override val projectFilePath: String
         get() {
-        val rootPathProvider = PathProvider
-            .getInstance()
-            .rootProjectPath
-            .toOsSeparator()
+            val rootPathProvider = PathProvider
+                .getInstance()
+                .rootProjectPath
+                .toOsSeparator()
 
-       return filePath.removePrefix(rootPathProvider)
-    }
+            return filePath.removePrefix(rootPathProvider)
+        }
 
     override fun resideInFilePath(path: String, absolutePath: Boolean): Boolean = if (absolutePath) {
         LocationUtil.resideInLocation(path, filePath)

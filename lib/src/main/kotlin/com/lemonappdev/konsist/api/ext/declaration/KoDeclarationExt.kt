@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.api.ext.declaration
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 
-
 /**
  * Returns `true` if this declaration represents the type of [T].
  *

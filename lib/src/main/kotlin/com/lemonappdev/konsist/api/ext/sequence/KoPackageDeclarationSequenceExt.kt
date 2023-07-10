@@ -9,7 +9,10 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
  * @param fullyQualifiedNames The names to include.
  * @return A sequence containing packages with the specified qualified names.
  */
-fun Sequence<KoPackageDeclaration>.withQualifiedName(fullyQualifiedName: String, vararg fullyQualifiedNames: String): Sequence<KoPackageDeclaration> =
+fun Sequence<KoPackageDeclaration>.withQualifiedName(
+    fullyQualifiedName: String,
+    vararg fullyQualifiedNames: String,
+): Sequence<KoPackageDeclaration> =
     filter {
         it.fullyQualifiedName == fullyQualifiedName || fullyQualifiedNames.any { name -> it.fullyQualifiedName == name }
     }

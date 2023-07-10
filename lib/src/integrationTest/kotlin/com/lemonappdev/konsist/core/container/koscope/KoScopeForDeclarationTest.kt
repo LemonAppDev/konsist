@@ -30,7 +30,7 @@ class KoScopeForDeclarationTest {
                     "SampleClass",
                     "SampleInterface",
                     "SampleObject",
-                    "SampleTypeAlias"
+                    "SampleTypeAlias",
                 ),
             )
     }

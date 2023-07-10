@@ -11,7 +11,6 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 
-
 internal open class KoBaseDeclarationImpl(private val element: KtElement) :
     KoBaseDeclaration,
     KoParentProvider,

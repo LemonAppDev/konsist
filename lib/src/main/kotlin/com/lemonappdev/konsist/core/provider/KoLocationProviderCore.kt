@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 
