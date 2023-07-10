@@ -4,11 +4,14 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 internal class KoParentDeclarationImpl private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
-    KoBaseDeclarationImpl(ktSuperTypeListEntry), KoParentDeclaration {
+    KoBaseDeclarationImpl(ktSuperTypeListEntry),
+    KoParentDeclaration,
+    KoDelegateProviderCore {
 
     override val name: String by lazy {
         ktSuperTypeListEntry
@@ -26,11 +29,6 @@ internal class KoParentDeclarationImpl private constructor(private val ktSuperTy
         } else {
             null
         }
-    }
-
-    override fun hasDelegate(delegateName: String?): Boolean = when (delegateName) {
-        null -> this.delegateName != null
-        else -> name == delegateName
     }
 
     internal companion object {

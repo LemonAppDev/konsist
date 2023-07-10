@@ -2,10 +2,12 @@ package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoDelegateProvider
 import com.lemonappdev.konsist.api.provider.KoExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.KoVarAndValProvider
 
@@ -21,39 +23,14 @@ interface KoPropertyDeclaration :
     KoTopLevelProvider,
     KoParentProvider,
     KoVarAndValProvider,
-    KoExtensionProvider {
-
-    /**
-     * Property delegate name.
-     */
-    val delegateName: String?
+    KoExtensionProvider,
+    KoReceiverTypeProvider,
+    KoDelegateProvider {
 
     /**
      * Property type.
      */
     val type: KoTypeDeclaration?
-
-    /**
-     * Receiver type of the property.
-     */
-    val receiverType: KoTypeDeclaration?
-
-    /**
-     * Whether property has receiver type.
-     *
-     * @param name the receiver type to check.
-     * @return `true` if the property has receiver type with the specified name (or any receiver type if [name] is null),
-     * `false` otherwise.
-     */
-    fun hasReceiverType(name: String? = null): Boolean
-
-    /**
-     * Whatever property has a delegate.
-     *
-     * @param name the name of the delegate (optional).
-     * @return `true` if the property has a delegate matching the specified name (or any delegate if [name] is `null`), `false` otherwise.
-     */
-    fun hasDelegate(name: String? = null): Boolean
 
     /**
      * Whatever property has a type.

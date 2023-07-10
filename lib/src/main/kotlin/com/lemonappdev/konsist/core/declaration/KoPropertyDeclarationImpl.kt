@@ -8,9 +8,11 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoVarAndValProviderCore
 import com.lemonappdev.konsist.core.util.ReceiverUtil
@@ -29,7 +31,9 @@ internal class KoPropertyDeclarationImpl private constructor(override val ktProp
     KoModifierProviderCore,
     KoTopLevelProviderCore,
     KoVarAndValProviderCore,
-    KoExtensionProviderCore {
+    KoExtensionProviderCore,
+    KoReceiverTypeProviderCore,
+    KoDelegateProviderCore {
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktProperty
 
@@ -38,7 +42,7 @@ internal class KoPropertyDeclarationImpl private constructor(override val ktProp
 
     override val delegateName: String? by lazy {
         ktProperty
-            .delegate
+            .delegateExpression
             ?.text
             ?.replace("\n", " ")
             ?.substringAfter("by ")
@@ -48,18 +52,9 @@ internal class KoPropertyDeclarationImpl private constructor(override val ktProp
 
     override val type: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
 
-    override val receiverType: KoTypeDeclaration? by lazy { ReceiverUtil.getReceiverType(getTypeReferences(), isExtension(), this) }
-
     private fun getTypeReferences(): List<KtTypeReference> = ktProperty
         .children
         .filterIsInstance<KtTypeReference>()
-
-    override fun hasReceiverType(name: String?): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)
-
-    override fun hasDelegate(name: String?): Boolean = when (name) {
-        null -> ktProperty.hasDelegateExpression()
-        else -> delegateName == name
-    }
 
     override fun hasType(type: String?): Boolean = when (type) {
         null -> this.type != null

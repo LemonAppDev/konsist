@@ -43,8 +43,8 @@ class KoParentDeclarationForHasDelegateTest {
         // then
         assertSoftly(sut) {
             hasDelegate() shouldBeEqualTo true
-            hasDelegate("SampleSuperInterface") shouldBeEqualTo true
-            hasDelegate("SampleOtherInterface") shouldBeEqualTo false
+            hasDelegate("sampleProperty") shouldBeEqualTo true
+            hasDelegate("sampleOtherProperty") shouldBeEqualTo false
         }
     }
 
