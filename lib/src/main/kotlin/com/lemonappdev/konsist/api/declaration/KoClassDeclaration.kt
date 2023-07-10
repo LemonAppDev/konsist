@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
+import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvider
@@ -39,26 +40,14 @@ interface KoClassDeclaration :
     KoRepresentsTypeProvider,
     KoPrimaryConstructorProvider,
     KoParentClassProvider,
-    KoParentInterfaceProvider {
+    KoParentInterfaceProvider,
+    KoSecondaryConstructorsProvider {
 
-    /**
-     * The secondary constructors of the class.
-     */
-    val secondaryConstructors: List<KoSecondaryConstructorDeclaration>
 
     /**
      * The all primary and secondary constructors of the class.
      */
     val allConstructors: List<KoConstructorDeclaration>
-
-
-    /**
-     * Whatever class has secondary constructors.
-     *
-     * @return `true` if the class has secondary constructors, `false` otherwise.
-     */
-    fun hasSecondaryConstructors(): Boolean
-
 
     /**
      * Whatever class has a Test.

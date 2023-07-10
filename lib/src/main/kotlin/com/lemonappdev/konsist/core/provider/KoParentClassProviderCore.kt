@@ -7,7 +7,9 @@ import com.lemonappdev.konsist.core.declaration.KoParentDeclarationImpl
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 
-internal interface KoParentClassProviderCore: KoParentClassProvider {
+internal interface KoParentClassProviderCore:
+    KoParentProvider,
+    KoParentClassProvider {
     val ktClass: KtClass
 
     override val parentClass: KoParentDeclaration?

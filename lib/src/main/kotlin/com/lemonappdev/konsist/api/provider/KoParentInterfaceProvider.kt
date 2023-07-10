@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 
-interface KoParentInterfaceProvider: KoParentProvider {
+interface KoParentInterfaceProvider {
     /**
      * The parent interfaces of the declaration.
      */

@@ -19,6 +19,7 @@ import com.lemonappdev.konsist.core.provider.KoParentClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoPrimaryConstructorProviderCore
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoSecondaryConstructorsProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtClass
@@ -39,21 +40,15 @@ internal class KoClassDeclarationImpl private constructor(override val ktClass: 
     KoRepresentsTypeProviderCore,
     KoPrimaryConstructorProviderCore,
     KoParentClassProviderCore,
-    KoParentInterfaceProviderCore {
+    KoParentInterfaceProviderCore,
+    KoSecondaryConstructorsProviderCore {
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktClass
 
-    override val secondaryConstructors: List<KoSecondaryConstructorDeclaration> by lazy {
-        ktClass
-            .secondaryConstructors
-            .map { KoSecondaryConstructorDeclarationImpl.getInstance(it, this) }
-    }
 
     override val allConstructors: List<KoConstructorDeclaration> by lazy {
         listOfNotNull(primaryConstructor) + secondaryConstructors
     }
-
-    override fun hasSecondaryConstructors(): Boolean = ktClass.hasSecondaryConstructors()
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, primaryConstructor?.parameters, kDoc)
 
