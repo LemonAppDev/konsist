@@ -4,7 +4,10 @@ import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoParentClassProvider
+import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
@@ -33,26 +36,10 @@ interface KoClassDeclaration :
     KoDeclarationFullyQualifiedNameProvider,
     KoModifierProvider,
     KoTopLevelProvider,
-    KoRepresentsTypeProvider {
-    /**
-     * The parents of the class.
-     */
-    val parents: List<KoParentDeclaration>
-
-    /**
-     * The parent interfaces of the class.
-     */
-    val parentInterfaces: List<KoParentDeclaration>
-
-    /**
-     * The parent class of the class.
-     */
-    val parentClass: KoParentDeclaration?
-
-    /**
-     * The parent interfaces of the class.
-     */
-    val primaryConstructor: KoPrimaryConstructorDeclaration?
+    KoRepresentsTypeProvider,
+    KoPrimaryConstructorProvider,
+    KoParentClassProvider,
+    KoParentInterfaceProvider {
 
     /**
      * The secondary constructors of the class.
@@ -64,12 +51,6 @@ interface KoClassDeclaration :
      */
     val allConstructors: List<KoConstructorDeclaration>
 
-    /**
-     * Whatever class has primary constructor.
-     *
-     * @return `true` if the class has primary constructor, `false` otherwise.
-     */
-    fun hasPrimaryConstructor(): Boolean
 
     /**
      * Whatever class has secondary constructors.
@@ -78,30 +59,6 @@ interface KoClassDeclaration :
      */
     fun hasSecondaryConstructors(): Boolean
 
-    /**
-     * Whatever class has parent class.
-     *
-     * @param name the name of the parent class to check (optional).
-     * @return `true` if the class has the specified parent class (or any parent class if [name] is `null`), `false` otherwise.
-     */
-    fun hasParentClass(name: String? = null): Boolean
-
-    /**
-     * Whatever class has parent interfaces.
-     *
-     * @param names the names of the parent interfaces to check.
-     * @return `true` if the class has parent interfaces with the specified names (or any parent interface if [names] is empty),
-     * `false` otherwise.
-     */
-    fun hasParentInterfaces(vararg names: String): Boolean
-
-    /**
-     * Whatever class has parents.
-     *
-     * @param names the names of the parents to check.
-     * @return `true` if the class has parents with the specified names (or any parent if [names] is empty), `false` otherwise.
-     */
-    fun hasParents(vararg names: String): Boolean
 
     /**
      * Whatever class has a Test.

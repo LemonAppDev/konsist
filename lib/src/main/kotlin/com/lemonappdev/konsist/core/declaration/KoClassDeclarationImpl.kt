@@ -15,6 +15,9 @@ import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentInterfaceProviderCore
+import com.lemonappdev.konsist.core.provider.KoPrimaryConstructorProviderCore
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.util.TagUtil
@@ -25,7 +28,7 @@ import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass, parentDeclaration: KoParentProvider?) :
+internal class KoClassDeclarationImpl private constructor(override val ktClass: KtClass, parentDeclaration: KoParentProvider?) :
     KoClassDeclaration,
     KoBaseDeclarationImpl(ktClass),
     KoAnnotationDeclarationProviderCore,
@@ -33,48 +36,12 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
     KoDeclarationFullyQualifiedNameProviderCore,
     KoModifierProviderCore,
     KoTopLevelProviderCore,
-    KoRepresentsTypeProviderCore {
+    KoRepresentsTypeProviderCore,
+    KoPrimaryConstructorProviderCore,
+    KoParentClassProviderCore,
+    KoParentInterfaceProviderCore {
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktClass
-
-    override val parents: List<KoParentDeclaration> by lazy {
-        ktClass
-            .getSuperTypeList()
-            ?.children
-            ?.filterIsInstance<KtSuperTypeListEntry>()
-            ?.map { KoParentDeclarationImpl.getInstance(it, this) } ?: emptyList()
-    }
-
-    override val parentInterfaces: List<KoParentDeclaration> by lazy {
-        val interfaces = ktClass
-            .getSuperTypeList()
-            ?.children
-            ?.filterIsInstance<KtSuperTypeEntry>() ?: emptyList()
-
-        val delegations = ktClass
-            .getSuperTypeList()
-            ?.children
-            ?.filterIsInstance<KtDelegatedSuperTypeEntry>() ?: emptyList()
-
-        val all = interfaces + delegations
-        all.map { KoParentDeclarationImpl.getInstance(it, this) }
-    }
-
-    override val parentClass: KoParentDeclaration? by lazy {
-        val parentClass = ktClass
-            .getSuperTypeList()
-            ?.children
-            ?.filterIsInstance<KtSuperTypeCallEntry>()
-            ?.first()
-
-        parentClass?.let { KoParentDeclarationImpl.getInstance(it, this) }
-    }
-
-    override val primaryConstructor: KoPrimaryConstructorDeclaration? by lazy {
-        val localPrimaryConstructor = ktClass.primaryConstructor ?: return@lazy null
-
-        KoPrimaryConstructorDeclarationImpl.getInstance(localPrimaryConstructor, this)
-    }
 
     override val secondaryConstructors: List<KoSecondaryConstructorDeclaration> by lazy {
         ktClass
@@ -86,26 +53,7 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
         listOfNotNull(primaryConstructor) + secondaryConstructors
     }
 
-    override fun hasPrimaryConstructor(): Boolean = ktClass.hasExplicitPrimaryConstructor()
-
     override fun hasSecondaryConstructors(): Boolean = ktClass.hasSecondaryConstructors()
-
-    override fun hasParentClass(name: String?): Boolean = when (name) {
-        null -> parentClass != null
-        else -> parentClass?.name == name
-    }
-
-    override fun hasParentInterfaces(vararg names: String): Boolean = when {
-        names.isEmpty() -> parentInterfaces.isNotEmpty()
-        else -> names.all {
-            parentInterfaces.any { koParent -> it == koParent.name }
-        }
-    }
-
-    override fun hasParents(vararg names: String): Boolean = when {
-        names.isEmpty() -> hasParentClass() || hasParentInterfaces()
-        else -> names.all { hasParentClass(it) || hasParentInterfaces(it) }
-    }
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, primaryConstructor?.parameters, kDoc)
 
