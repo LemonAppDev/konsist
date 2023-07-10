@@ -9,6 +9,8 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoReturnTypeProviderCore
 import com.lemonappdev.konsist.core.util.ReceiverUtil
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
@@ -19,11 +21,13 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
 @Suppress("detekt.TooManyFunctions")
-internal class KoFunctionDeclarationImpl private constructor(private val ktFunction: KtFunction, parentDeclaration: KoParentProvider?) :
+internal class KoFunctionDeclarationImpl private constructor(override val ktFunction: KtFunction, parentDeclaration: KoParentProvider?) :
     KoParametrizedDeclarationImpl(ktFunction, parentDeclaration),
     KoFunctionDeclaration,
     KoModifierProviderCore,
-    KoExtensionProviderCore {
+    KoExtensionProviderCore,
+    KoReturnTypeProviderCore,
+    KoReceiverTypeProviderCore {
     override val ktCallableDeclaration: KtCallableDeclaration
         get() = ktFunction
 
@@ -48,18 +52,6 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
                     }
                 }
         }
-
-    override val returnType: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
-
-    override val receiverType: KoTypeDeclaration? by lazy { ReceiverUtil.getReceiverType(getTypeReferences(), isExtension(), this) }
-
-    private fun getTypeReferences(): List<KtTypeReference> = ktFunction
-        .children
-        .filterIsInstance<KtTypeReference>()
-
-    override fun hasReceiverType(name: String?): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)
-
-    override fun hasReturnType(): Boolean = ktFunction.hasDeclaredReturnType()
 
     override fun localDeclarations(): Sequence<KoBaseDeclaration> = localDeclarations
 
