@@ -12,7 +12,9 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
 import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoConstructorsProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoHasTestProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentClassProviderCore
@@ -41,21 +43,13 @@ internal class KoClassDeclarationImpl private constructor(override val ktClass: 
     KoPrimaryConstructorProviderCore,
     KoParentClassProviderCore,
     KoParentInterfaceProviderCore,
-    KoSecondaryConstructorsProviderCore {
+    KoSecondaryConstructorsProviderCore,
+    KoConstructorsProviderCore,
+    KoHasTestProviderCore {
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktClass
 
-
-    override val allConstructors: List<KoConstructorDeclaration> by lazy {
-        listOfNotNull(primaryConstructor) + secondaryConstructors
-    }
-
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, primaryConstructor?.parameters, kDoc)
-
-    override fun hasTest(testFileNameSuffix: String, moduleName: String?, sourceSetName: String?): Boolean = Konsist
-        .scopeFromTest(moduleName, sourceSetName)
-        .classes()
-        .any { it.name == name + testFileNameSuffix }
 
     override fun declarations(
         includeNested: Boolean,

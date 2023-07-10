@@ -1,7 +1,9 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoHasTestProvider
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
@@ -41,21 +43,6 @@ interface KoClassDeclaration :
     KoPrimaryConstructorProvider,
     KoParentClassProvider,
     KoParentInterfaceProvider,
-    KoSecondaryConstructorsProvider {
-
-
-    /**
-     * The all primary and secondary constructors of the class.
-     */
-    val allConstructors: List<KoConstructorDeclaration>
-
-    /**
-     * Whatever class has a Test.
-     *
-     * @param testFileNameSuffix the suffix of the test file name. By default, "Test".
-     * @param moduleName         the name of the module to check (optional).
-     * @param sourceSetName      the name of the source set to check (optional).
-     * @return `true` if the class has a test, `false` otherwise.
-     */
-    fun hasTest(testFileNameSuffix: String = "Test", moduleName: String? = null, sourceSetName: String? = null): Boolean
-}
+    KoSecondaryConstructorsProvider,
+    KoConstructorsProvider,
+    KoHasTestProvider
