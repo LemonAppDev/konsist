@@ -10,5 +10,4 @@ import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 interface KoAnnotationDeclaration :
     KoBaseDeclaration,
     KoFullyQualifiedNameProvider,
-    KoParentProvider,
     KoRepresentsTypeProvider

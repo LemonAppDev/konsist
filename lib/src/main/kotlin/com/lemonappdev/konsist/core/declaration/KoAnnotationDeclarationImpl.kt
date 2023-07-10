@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -12,6 +13,7 @@ internal class KoAnnotationDeclarationImpl private constructor(
 ) : KoBaseDeclarationImpl(ktAnnotationEntry),
     KoAnnotationDeclaration,
     KoRepresentsTypeProviderCore {
+
     override val name: String by lazy { ktAnnotationEntry.shortName.toString() }
 
     override val fullyQualifiedName: String by lazy {

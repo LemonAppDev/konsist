@@ -4,6 +4,8 @@ import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 
@@ -78,11 +80,11 @@ private fun checkIfSuppressed(declaration: KoAnnotationDeclarationProvider, test
         ?.removeSuffix("\")")
 
     return when {
+        // ToDo: fix this
         annotationParameter == testMethodName || annotationParameter == "konsist.$testMethodName" -> true
-//        declaration.parentDeclaration != null -> checkIfSuppressed(declaration, testMethodName)
-//        fileAnnotationParameter(declaration.containingFile) == testMethodName -> true
-//        fileAnnotationParameter(declaration.containingFile) == "konsist.$testMethodName" -> true
-        // ToDo("fix this parents")
+//        (declaration as KoParentProvider).parentDeclaration != null -> checkIfSuppressed(declaration, testMethodName)
+        fileAnnotationParameter((declaration as KoContainingFileProvider).containingFile) == testMethodName -> true
+        fileAnnotationParameter((declaration as KoContainingFileProvider).containingFile) == "konsist.$testMethodName" -> true
         else -> false
     }
 }

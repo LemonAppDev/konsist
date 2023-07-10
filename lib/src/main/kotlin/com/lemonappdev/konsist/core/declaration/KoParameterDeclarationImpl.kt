@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
@@ -15,7 +16,10 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 
-internal class KoParameterDeclarationImpl private constructor(override val ktParameter: KtParameter, parentDeclaration: KoParentProvider?) :
+internal class KoParameterDeclarationImpl private constructor(
+    override val ktParameter: KtParameter,
+    override val parentDeclaration: KoParentProvider?
+) :
     KoParameterDeclaration,
     KoBaseDeclarationImpl(ktParameter),
     KoAnnotationDeclarationProviderCore,

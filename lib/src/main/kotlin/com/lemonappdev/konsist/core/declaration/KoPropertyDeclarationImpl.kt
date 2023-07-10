@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
@@ -19,7 +20,10 @@ import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
 
-internal class KoPropertyDeclarationImpl private constructor(override val ktProperty: KtProperty, parentDeclaration: KoParentProvider?) :
+internal class KoPropertyDeclarationImpl private constructor(
+    override val ktProperty: KtProperty,
+    override val parentDeclaration: KoParentProvider?
+) :
     KoPropertyDeclaration,
     KoBaseDeclarationImpl(ktProperty),
     KoAnnotationDeclarationProviderCore,

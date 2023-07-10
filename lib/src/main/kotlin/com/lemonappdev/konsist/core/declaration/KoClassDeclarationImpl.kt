@@ -21,7 +21,7 @@ import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-internal class KoClassDeclarationImpl private constructor(override val ktClass: KtClass, parentDeclaration: KoParentProvider?) :
+internal class KoClassDeclarationImpl private constructor(override val ktClass: KtClass, override val parentDeclaration: KoParentProvider?) :
     KoClassDeclaration,
     KoBaseDeclarationImpl(ktClass),
     KoAnnotationDeclarationProviderCore,
@@ -36,6 +36,7 @@ internal class KoClassDeclarationImpl private constructor(override val ktClass: 
     KoSecondaryConstructorsProviderCore,
     KoConstructorsProviderCore,
     KoHasTestProviderCore {
+
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktClass
 

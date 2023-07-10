@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -17,7 +18,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoSecondaryConstructorDeclarationImpl private constructor(
     private val ktSecondaryConstructor: KtSecondaryConstructor,
-    parentDeclaration: KoParentProvider?,
+    override val parentDeclaration: KoParentProvider?,
 ) :
     KoBaseDeclarationImpl(ktSecondaryConstructor),
     KoAnnotationDeclarationProviderCore,

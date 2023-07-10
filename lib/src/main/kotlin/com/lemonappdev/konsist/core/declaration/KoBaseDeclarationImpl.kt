@@ -20,6 +20,9 @@ internal open class KoBaseDeclarationImpl(private val element: KtElement) :
     KoLocationProviderCore,
     KoPathProviderCore,
     KoTextProviderCore {
+    override val parentDeclaration: KoParentProvider?
+        get() = null
+
     override val psiElement: PsiElement
         get() = ktElement
 

@@ -14,7 +14,10 @@ import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-internal class KoInterfaceDeclarationImpl private constructor(private val ktClass: KtClass, parentDeclaration: KoParentProvider?) :
+internal class KoInterfaceDeclarationImpl private constructor(
+    private val ktClass: KtClass,
+    override val parentDeclaration: KoParentProvider?
+) :
     KoInterfaceDeclaration,
     KoBaseDeclarationImpl(ktClass),
     KoAnnotationDeclarationProviderCore,
