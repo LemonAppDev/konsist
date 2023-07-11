@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository
 import org.springframework.web.bind.annotation.RestController
 
 class SpringSnippets {
-    fun `classes with 'Repository' annotation should have 'Repository' suffix`() {
+    fun `declarations with 'Repository' annotation should have 'Repository' suffix`() {
         Konsist
             .scopeFromProject()
-            .classes()
+            .declarations()
             .withAnnotationOf<Repository>()
             .assert { it.hasNameEndingWith("Repository") }
     }

@@ -39,9 +39,9 @@ class CleanArchitectureSnippets {
             .assert { it.numDeclarations() == 1 && it.containsFunction("invoke") && it.isPublicOrDefault() }
     }
 
-    fun `classes with 'Repository' annotation should reside in 'data' package`() {
+    fun `declarations with 'Repository' annotation should reside in 'data' package`() {
         Konsist.scopeFromProject()
-            .classes()
+            .declarations()
             .withAnnotationOf<Repository>()
             .assert { it.resideInPackage("..data..") }
     }
