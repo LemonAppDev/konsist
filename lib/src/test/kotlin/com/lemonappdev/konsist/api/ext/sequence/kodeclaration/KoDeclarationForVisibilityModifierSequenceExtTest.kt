@@ -10,7 +10,7 @@ import com.lemonappdev.konsist.api.ext.sequence.withoutPrivateModifier
 import com.lemonappdev.konsist.api.ext.sequence.withoutProtectedModifier
 import com.lemonappdev.konsist.api.ext.sequence.withoutPublicModifier
 import com.lemonappdev.konsist.api.ext.sequence.withoutPublicOrDefaultModifier
-import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -20,10 +20,10 @@ class KoDeclarationForVisibilityModifierSequenceExtTest {
     @Test
     fun `withPublicModifier() returns declaration with public modifier`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoModifierProvider = mockk {
             every { hasPublicModifier() } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoModifierProvider = mockk {
             every { hasPublicModifier() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -38,10 +38,10 @@ class KoDeclarationForVisibilityModifierSequenceExtTest {
     @Test
     fun `withoutPublicModifier() returns declaration without public modifier`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoModifierProvider = mockk {
             every { hasPublicModifier() } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoModifierProvider = mockk {
             every { hasPublicModifier() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -56,10 +56,10 @@ class KoDeclarationForVisibilityModifierSequenceExtTest {
     @Test
     fun `withPublicOrDefaultModifier() returns declaration with public or default modifier`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoModifierProvider = mockk {
             every { isPublicOrDefault() } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoModifierProvider = mockk {
             every { isPublicOrDefault() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -74,10 +74,10 @@ class KoDeclarationForVisibilityModifierSequenceExtTest {
     @Test
     fun `withoutPublicOrDefaultModifier() returns declaration without public or default modifier`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoModifierProvider = mockk {
             every { isPublicOrDefault() } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoModifierProvider = mockk {
             every { isPublicOrDefault() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -92,10 +92,10 @@ class KoDeclarationForVisibilityModifierSequenceExtTest {
     @Test
     fun `withPrivateModifier() returns declaration with private modifier`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoModifierProvider = mockk {
             every { hasPrivateModifier() } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoModifierProvider = mockk {
             every { hasPrivateModifier() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -110,10 +110,10 @@ class KoDeclarationForVisibilityModifierSequenceExtTest {
     @Test
     fun `withoutPrivateModifier() returns declaration without private modifier`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoModifierProvider = mockk {
             every { hasPrivateModifier() } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoModifierProvider = mockk {
             every { hasPrivateModifier() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -128,10 +128,10 @@ class KoDeclarationForVisibilityModifierSequenceExtTest {
     @Test
     fun `withProtectedModifier() returns declaration with protected modifier`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoModifierProvider = mockk {
             every { hasProtectedModifier() } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoModifierProvider = mockk {
             every { hasProtectedModifier() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -146,10 +146,10 @@ class KoDeclarationForVisibilityModifierSequenceExtTest {
     @Test
     fun `withoutProtectedModifier() returns declaration without protected modifier`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoModifierProvider = mockk {
             every { hasProtectedModifier() } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoModifierProvider = mockk {
             every { hasProtectedModifier() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -164,10 +164,10 @@ class KoDeclarationForVisibilityModifierSequenceExtTest {
     @Test
     fun `withInternalModifier() returns declaration with internal modifier`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoModifierProvider = mockk {
             every { hasInternalModifier() } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoModifierProvider = mockk {
             every { hasInternalModifier() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -182,10 +182,10 @@ class KoDeclarationForVisibilityModifierSequenceExtTest {
     @Test
     fun `withoutInternalModifier() returns declaration without internal modifier`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoModifierProvider = mockk {
             every { hasInternalModifier() } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoModifierProvider = mockk {
             every { hasInternalModifier() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)

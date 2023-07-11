@@ -7,12 +7,12 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoFunctionCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoObjectCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoPropertyCoreProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoClassProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoFunctionProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoObjectProvider
+import com.lemonappdev.konsist.core.declaration.provider.KoPropertyProvider
 import kotlin.reflect.KClass
 
 /**
@@ -89,7 +89,7 @@ fun <T : KoRepresentsTypeProvider> Sequence<T>.withoutRepresentedTypeOf(vararg t
  * @param includeLocal Whether to include local declarations.
  * @return A sequence containing all declarations.
  */
-fun <T : KoDeclarationCoreProvider> Sequence<T>.declarations(
+fun <T : KoDeclarationProvider> Sequence<T>.declarations(
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
 ): Sequence<KoBaseDeclaration> = flatMap { it.declarations(includeNested, includeLocal) }
@@ -101,7 +101,7 @@ fun <T : KoDeclarationCoreProvider> Sequence<T>.declarations(
  * @param includeLocal Whether to include local declarations.
  * @return A sequence containing class declarations.
  */
-fun <T : KoClassCoreProvider> Sequence<T>.classes(
+fun <T : KoClassProvider> Sequence<T>.classes(
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
 ): Sequence<KoClassDeclaration> = flatMap { it.classes(includeNested, includeLocal) }
@@ -112,7 +112,7 @@ fun <T : KoClassCoreProvider> Sequence<T>.classes(
  * @param includeNested Whether to include nested declarations.
  * @return A sequence containing interface declarations.
  */
-fun <T : KoInterfaceCoreProvider> Sequence<T>.interfaces(
+fun <T : KoInterfaceProvider> Sequence<T>.interfaces(
     includeNested: Boolean = false,
 ): Sequence<KoInterfaceDeclaration> = flatMap { it.interfaces(includeNested) }
 
@@ -122,7 +122,7 @@ fun <T : KoInterfaceCoreProvider> Sequence<T>.interfaces(
  * @param includeNested Whether to include nested declarations.
  * @return A sequence containing object declarations.
  */
-fun <T : KoObjectCoreProvider> Sequence<T>.objects(
+fun <T : KoObjectProvider> Sequence<T>.objects(
     includeNested: Boolean = false,
 ): Sequence<KoObjectDeclaration> = flatMap { it.objects(includeNested) }
 
@@ -133,7 +133,7 @@ fun <T : KoObjectCoreProvider> Sequence<T>.objects(
  * @param includeLocal Whether to include local declarations.
  * @return A sequence containing property declarations.
  */
-fun <T : KoPropertyCoreProvider> Sequence<T>.properties(
+fun <T : KoPropertyProvider> Sequence<T>.properties(
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
 ): Sequence<KoPropertyDeclaration> = flatMap { it.properties(includeNested, includeLocal) }
@@ -145,7 +145,7 @@ fun <T : KoPropertyCoreProvider> Sequence<T>.properties(
  * @param includeLocal Whether to include local declarations.
  * @return A sequence containing function declarations.
  */
-fun <T : KoFunctionCoreProvider> Sequence<T>.functions(
+fun <T : KoFunctionProvider> Sequence<T>.functions(
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
 ): Sequence<KoFunctionDeclaration> = flatMap { it.functions(includeNested, includeLocal) }
