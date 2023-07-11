@@ -45,6 +45,41 @@ internal class KoTypeDeclarationImpl private constructor(
 
     override val isNullable: Boolean by lazy { ktTypeReference.text.last() == '?' }
 
+    override val isKotlinType: Boolean by lazy {
+        if (isImportAlias()) {
+            false
+        } else {
+            basicTypes.any { sourceType.contains(it) } || collections.any { sourceType.contains(it) }
+        }
+    }
+
+    private val basicTypes: List<String> by lazy {
+        listOf(
+            "Byte",
+            "Short",
+            "Int",
+            "Long",
+            "Float",
+            "Double",
+            "UByte",
+            "UShort",
+            "UInt",
+            "ULong",
+            "UByteArray",
+            "UShortArray",
+            "UIntArray",
+            "ULongArray",
+            "Boolean",
+            "Char",
+            "String",
+            "Array",
+        )
+    }
+
+    private val collections: List<String> by lazy {
+        listOf("List", "Set", "Map", "MutableList", "MutableSet", "MutableMap")
+    }
+
     override val fullyQualifiedName: String by lazy {
         file
             .imports
