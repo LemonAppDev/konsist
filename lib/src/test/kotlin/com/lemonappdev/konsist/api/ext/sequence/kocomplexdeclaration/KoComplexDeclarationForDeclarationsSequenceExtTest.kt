@@ -12,7 +12,6 @@ import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.provider.KoClassProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoFunctionProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceProvider
@@ -163,7 +162,7 @@ class KoComplexDeclarationForDeclarationsSequenceExtTest {
         val complexDeclaration1: KoFunctionProvider = mockk {
             every { functions(includeNested = true, includeLocal = false) } returns sequenceOf(
                 function1,
-                function2
+                function2,
             )
         }
         val complexDeclaration2: KoFunctionProvider = mockk {

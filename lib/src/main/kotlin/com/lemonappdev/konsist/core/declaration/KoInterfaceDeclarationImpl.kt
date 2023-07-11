@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoInterfaceDeclarationImpl private constructor(
     private val ktClass: KtClass,
-    override val parentDeclaration: KoParentProvider?
+    override val parentDeclaration: KoParentProvider?,
 ) :
     KoInterfaceDeclaration,
     KoBaseDeclarationImpl(ktClass),

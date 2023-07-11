@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 @Suppress("detekt.TooManyFunctions")
 internal class KoFunctionDeclarationImpl private constructor(
     override val ktFunction: KtFunction,
-    override val parentDeclaration: KoParentProvider?
+    override val parentDeclaration: KoParentProvider?,
 ) :
     KoBaseDeclarationImpl(ktFunction),
     KoAnnotationDeclarationProviderCore,

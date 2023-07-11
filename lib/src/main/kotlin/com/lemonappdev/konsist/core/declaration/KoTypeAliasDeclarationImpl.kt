@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
@@ -16,7 +15,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoTypeAliasDeclarationImpl private constructor(
     private val ktTypeAlias: KtTypeAlias,
-    override val parentDeclaration: KoParentProvider?
+    override val parentDeclaration: KoParentProvider?,
 ) :
     KoTypeAliasDeclaration,
     KoBaseDeclarationImpl(ktTypeAlias),

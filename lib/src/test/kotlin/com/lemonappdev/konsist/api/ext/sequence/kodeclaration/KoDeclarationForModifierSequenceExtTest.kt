@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.ext.sequence.kodeclaration
 
-import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import com.lemonappdev.konsist.api.ext.sequence.withModifiers
