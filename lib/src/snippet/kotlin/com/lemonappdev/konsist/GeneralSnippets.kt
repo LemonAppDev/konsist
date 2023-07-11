@@ -98,7 +98,7 @@ class GeneralSnippets {
 
                 val lastIndex = it.numDeclarations() - 1
 
-                companionObjectIndex == lastIndex
+                companionObjectIndex == lastIndex || companionObjectIndex == -1
             }
     }
 
