@@ -15,10 +15,10 @@ class KoPackageDeclarationForQualifiedNameSequenceExtTest {
         val qualifiedName1 = "com.samplepackage1"
         val qualifiedName2 = "com.samplepackage2"
         val package1: KoPackageDeclarationImpl = mockk {
-            every { qualifiedName } returns qualifiedName1
+            every { fullyQualifiedName } returns qualifiedName1
         }
         val package2: KoPackageDeclarationImpl = mockk {
-            every { qualifiedName } returns qualifiedName2
+            every { fullyQualifiedName } returns qualifiedName2
         }
         val packages = sequenceOf(package1, package2)
 
@@ -36,13 +36,13 @@ class KoPackageDeclarationForQualifiedNameSequenceExtTest {
         val qualifiedName2 = "com.samplepackage2"
         val qualifiedName3 = "com.samplepackage3"
         val package1: KoPackageDeclarationImpl = mockk {
-            every { qualifiedName } returns qualifiedName1
+            every { fullyQualifiedName } returns qualifiedName1
         }
         val package2: KoPackageDeclarationImpl = mockk {
-            every { qualifiedName } returns qualifiedName2
+            every { fullyQualifiedName } returns qualifiedName2
         }
         val package3: KoPackageDeclarationImpl = mockk {
-            every { qualifiedName } returns qualifiedName3
+            every { fullyQualifiedName } returns qualifiedName3
         }
         val packages = sequenceOf(package1, package2, package3)
 
@@ -59,10 +59,10 @@ class KoPackageDeclarationForQualifiedNameSequenceExtTest {
         val qualifiedName1 = "com.samplepackage1"
         val qualifiedName2 = "com.samplepackage2"
         val package1: KoPackageDeclarationImpl = mockk {
-            every { qualifiedName } returns qualifiedName1
+            every { fullyQualifiedName } returns qualifiedName1
         }
         val package2: KoPackageDeclarationImpl = mockk {
-            every { qualifiedName } returns qualifiedName2
+            every { fullyQualifiedName } returns qualifiedName2
         }
         val packages = sequenceOf(package1, package2)
 
@@ -80,13 +80,13 @@ class KoPackageDeclarationForQualifiedNameSequenceExtTest {
         val qualifiedName2 = "com.samplepackage2"
         val qualifiedName3 = "com.samplepackage3"
         val package1: KoPackageDeclarationImpl = mockk {
-            every { qualifiedName } returns qualifiedName1
+            every { fullyQualifiedName } returns qualifiedName1
         }
         val package2: KoPackageDeclarationImpl = mockk {
-            every { qualifiedName } returns qualifiedName2
+            every { fullyQualifiedName } returns qualifiedName2
         }
         val package3: KoPackageDeclarationImpl = mockk {
-            every { qualifiedName } returns qualifiedName3
+            every { fullyQualifiedName } returns qualifiedName3
         }
         val packages = sequenceOf(package1, package2, package3)
 

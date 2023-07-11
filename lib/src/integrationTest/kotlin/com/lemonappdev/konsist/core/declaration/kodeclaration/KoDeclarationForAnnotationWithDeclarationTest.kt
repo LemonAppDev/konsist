@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
@@ -23,7 +24,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoAnnotationDeclarationProvider
 
         // then
         sut.annotations shouldHaveSize 0
@@ -40,7 +41,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoAnnotationDeclarationProvider
 
         // then
         assertSoftly(sut) {
@@ -61,7 +62,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoAnnotationDeclarationProvider
 
         // then
         assertSoftly(sut) {
@@ -81,7 +82,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoAnnotationDeclarationProvider
 
         // then
         assertSoftly(sut) {
@@ -101,7 +102,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoAnnotationDeclarationProvider
 
         // then
         assertSoftly(sut) {
@@ -122,7 +123,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoAnnotationDeclarationProvider
 
         // then
         assertSoftly(sut) {
@@ -142,7 +143,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoAnnotationDeclarationProvider
 
         // then
         assertSoftly(sut) {
@@ -160,7 +161,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoAnnotationDeclarationProvider
 
         // then
         assertSoftly(sut) {

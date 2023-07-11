@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.ext.sequence.kodeclaration
 
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.api.ext.sequence.withoutPackage
-import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
+import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -13,10 +13,10 @@ class KoDeclarationForPackageSequenceExtTest {
     fun `withPackage(String) returns declaration with given package`() {
         // given
         val packagee = "com.sample.samplepackage"
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoPackageDeclarationProvider = mockk {
             every { resideInPackage(packagee) } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoPackageDeclarationProvider = mockk {
             every { resideInPackage(packagee) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -33,15 +33,15 @@ class KoDeclarationForPackageSequenceExtTest {
         // given
         val package1 = "com.sample.samplepackage1"
         val package2 = "com.sample.samplepackage2"
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoPackageDeclarationProvider = mockk {
             every { resideInPackage(package1) } returns true
             every { resideInPackage(package2) } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoPackageDeclarationProvider = mockk {
             every { resideInPackage(package1) } returns false
             every { resideInPackage(package2) } returns true
         }
-        val declaration3: KoDeclarationImpl = mockk {
+        val declaration3: KoPackageDeclarationProvider = mockk {
             every { resideInPackage(package1) } returns false
             every { resideInPackage(package2) } returns false
         }
@@ -58,10 +58,10 @@ class KoDeclarationForPackageSequenceExtTest {
     fun `withoutPackage(String) returns declaration without given package`() {
         // given
         val packagee = "com.sample.samplepackage"
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoPackageDeclarationProvider = mockk {
             every { resideOutsidePackage(packagee) } returns false
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoPackageDeclarationProvider = mockk {
             every { resideOutsidePackage(packagee) } returns true
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -78,15 +78,15 @@ class KoDeclarationForPackageSequenceExtTest {
         // given
         val package1 = "com.sample.samplepackage1"
         val package2 = "com.sample.samplepackage2"
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoPackageDeclarationProvider = mockk {
             every { resideOutsidePackage(package1) } returns false
             every { resideOutsidePackage(package2) } returns false
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoPackageDeclarationProvider = mockk {
             every { resideOutsidePackage(package1) } returns true
             every { resideOutsidePackage(package2) } returns false
         }
-        val declaration3: KoDeclarationImpl = mockk {
+        val declaration3: KoPackageDeclarationProvider = mockk {
             every { resideOutsidePackage(package1) } returns true
             every { resideOutsidePackage(package2) } returns true
         }

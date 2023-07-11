@@ -1,16 +1,14 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoPackageMatchingFilePathProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
+
 /**
  * Represents a Kotlin package declaration.
  */
-interface KoPackageDeclaration : KoNamedDeclaration {
-    /**
-     * Qualified name of the package.
-     */
-    val qualifiedName: String
-
-    /**
-     * Whether the package has matching file path.
-     */
-    val hasMatchingFilePath: Boolean
-}
+interface KoPackageDeclaration :
+    KoBaseDeclaration,
+    KoFullyQualifiedNameProvider,
+    KoParentProvider,
+    KoPackageMatchingFilePathProvider

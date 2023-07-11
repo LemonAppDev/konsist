@@ -1,9 +1,6 @@
-package com.lemonappdev.konsist.api.declaration
+package com.lemonappdev.konsist.api.provider
 
-/**
- * Represents a Kotlin named declaration.
- */
-interface KoNamedDeclaration : KoBaseDeclaration {
+interface KoNameProvider {
     /**
      * Name of the declaration
      */

@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.ext.sequence.kodeclaration
 
 import com.lemonappdev.konsist.api.ext.sequence.withTopLevel
 import com.lemonappdev.konsist.api.ext.sequence.withoutTopLevel
-import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
+import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -12,10 +12,10 @@ class KoDeclarationForTopLevelSequenceExtTest {
     @Test
     fun `withTopLevel() returns declaration which is top level declaration`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoTopLevelProvider = mockk {
             every { isTopLevel() } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoTopLevelProvider = mockk {
             every { isTopLevel() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -30,10 +30,10 @@ class KoDeclarationForTopLevelSequenceExtTest {
     @Test
     fun `withoutTopLevel() returns declaration which is not top level declaration`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoTopLevelProvider = mockk {
             every { isTopLevel() } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoTopLevelProvider = mockk {
             every { isTopLevel() } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)

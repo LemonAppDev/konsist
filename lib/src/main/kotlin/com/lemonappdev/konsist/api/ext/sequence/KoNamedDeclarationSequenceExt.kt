@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 
 /**
  * Sequence containing declarations that have name.
@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
  * @param names The names to include.
  * @return A sequence containing declarations with the specified names.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withName(name: String, vararg names: String): Sequence<T> = filter {
+fun <T : KoBaseDeclaration> Sequence<T>.withName(name: String, vararg names: String): Sequence<T> = filter {
     it.name == name || names.any { name -> it.name == name }
 }
 
@@ -20,7 +20,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withName(name: String, vararg names: St
  * @param names The names to exclude.
  * @return A sequence containing declarations without the specified names.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withoutName(name: String, vararg names: String): Sequence<T> = filter {
+fun <T : KoBaseDeclaration> Sequence<T>.withoutName(name: String, vararg names: String): Sequence<T> = filter {
     it.name != name && names.none { name -> it.name == name }
 }
 
@@ -31,7 +31,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withoutName(name: String, vararg names:
  * @param prefixes The prefixes to include.
  * @return A sequence containing declarations with names starting with the specified prefixes.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withNameStartingWith(prefix: String, vararg prefixes: String): Sequence<T> = filter {
+fun <T : KoBaseDeclaration> Sequence<T>.withNameStartingWith(prefix: String, vararg prefixes: String): Sequence<T> = filter {
     it.hasNameStartingWith(prefix) || prefixes.any { prefix -> it.hasNameStartingWith(prefix) }
 }
 
@@ -42,7 +42,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withNameStartingWith(prefix: String, va
  * @param prefixes The prefixes to exclude.
  * @return A sequence containing declarations without names starting with the specified prefixes.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withoutNameStartingWith(prefix: String, vararg prefixes: String): Sequence<T> = filter {
+fun <T : KoBaseDeclaration> Sequence<T>.withoutNameStartingWith(prefix: String, vararg prefixes: String): Sequence<T> = filter {
     !it.hasNameStartingWith(prefix) && prefixes.none { prefix -> it.hasNameStartingWith(prefix) }
 }
 
@@ -53,7 +53,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withoutNameStartingWith(prefix: String,
  * @param suffixes The suffixes to include.
  * @return A sequence containing declarations with names ending with the specified suffixes.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withNameEndingWith(suffix: String, vararg suffixes: String): Sequence<T> = filter {
+fun <T : KoBaseDeclaration> Sequence<T>.withNameEndingWith(suffix: String, vararg suffixes: String): Sequence<T> = filter {
     it.hasNameEndingWith(suffix) || suffixes.any { suffix -> it.hasNameEndingWith(suffix) }
 }
 
@@ -64,7 +64,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withNameEndingWith(suffix: String, vara
  * @param suffixes The suffixes to exclude.
  * @return A sequence containing declarations without names ending with the specified suffixes.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withoutNameEndingWith(suffix: String, vararg suffixes: String): Sequence<T> = filter {
+fun <T : KoBaseDeclaration> Sequence<T>.withoutNameEndingWith(suffix: String, vararg suffixes: String): Sequence<T> = filter {
     !it.hasNameEndingWith(suffix) && suffixes.none { suffix -> it.hasNameEndingWith(suffix) }
 }
 
@@ -75,7 +75,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withoutNameEndingWith(suffix: String, v
  * @param texts The texts to include.
  * @return A sequence containing declarations with names containing the specified texts.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withNameContaining(text: String, vararg texts: String): Sequence<T> = filter {
+fun <T : KoBaseDeclaration> Sequence<T>.withNameContaining(text: String, vararg texts: String): Sequence<T> = filter {
     it.hasNameContaining(text) || texts.any { text -> it.hasNameContaining(text) }
 }
 
@@ -86,7 +86,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withNameContaining(text: String, vararg
  * @param texts The texts to exclude.
  * @return A sequence containing declarations without names containing the specified texts.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withoutNameContaining(text: String, vararg texts: String): Sequence<T> = filter {
+fun <T : KoBaseDeclaration> Sequence<T>.withoutNameContaining(text: String, vararg texts: String): Sequence<T> = filter {
     !it.hasNameContaining(text) && texts.none { text -> it.hasNameContaining(text) }
 }
 
@@ -97,7 +97,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withoutNameContaining(text: String, var
  * @param regexes The regular expressions to include.
  * @return A sequence containing declarations with names matching the specified regular expressions.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withNameMatching(regex: Regex, vararg regexes: Regex): Sequence<T> = filter {
+fun <T : KoBaseDeclaration> Sequence<T>.withNameMatching(regex: Regex, vararg regexes: Regex): Sequence<T> = filter {
     it.hasNameMatching(regex) || regexes.any { regex -> it.hasNameMatching(regex) }
 }
 
@@ -108,6 +108,6 @@ fun <T : KoNamedDeclaration> Sequence<T>.withNameMatching(regex: Regex, vararg r
  * @param regexes The regular expressions to exclude.
  * @return A sequence containing declarations without names matching the specified regular expressions.
  */
-fun <T : KoNamedDeclaration> Sequence<T>.withoutNameMatching(regex: Regex, vararg regexes: Regex): Sequence<T> = filter {
+fun <T : KoBaseDeclaration> Sequence<T>.withoutNameMatching(regex: Regex, vararg regexes: Regex): Sequence<T> = filter {
     !it.hasNameMatching(regex) && regexes.none { regex -> it.hasNameMatching(regex) }
 }

@@ -1,20 +1,34 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.KoModifier
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import org.jetbrains.kotlin.psi.KtCallExpression
-import org.jetbrains.kotlin.psi.KtConstantExpression
+import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoDefaultValueProviderCore
+import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import org.jetbrains.kotlin.psi.KtParameter
+import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
-import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal class KoParameterDeclarationImpl private constructor(private val ktParameter: KtParameter, parentDeclaration: KoBaseDeclaration?) :
-    KoDeclarationImpl(ktParameter, parentDeclaration),
-    KoParameterDeclaration {
+internal class KoParameterDeclarationImpl private constructor(
+    override val ktParameter: KtParameter,
+    override val parentDeclaration: KoParentProvider?,
+) :
+    KoParameterDeclaration,
+    KoBaseDeclarationImpl(ktParameter),
+    KoAnnotationDeclarationProviderCore,
+    KoPackageDeclarationProviderCore,
+    KoDeclarationFullyQualifiedNameProviderCore,
+    KoDefaultValueProviderCore,
+    KoModifierProviderCore,
+    KoTopLevelProviderCore {
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner
+        get() = ktParameter
 
     override val type: KoTypeDeclaration by lazy {
         val type = ktParameter
@@ -24,43 +38,12 @@ internal class KoParameterDeclarationImpl private constructor(private val ktPara
         KoTypeDeclarationImpl.getInstance(type, this)
     }
 
-    override val defaultValue: String? by lazy {
-        // eg. primitive value as default parameter value
-        val constantExpressionText = ktParameter
-            .children
-            .firstIsInstanceOrNull<KtConstantExpression>()
-            ?.text
-
-        if (constantExpressionText != null) {
-            return@lazy constantExpressionText
-        }
-
-        // eg. function call as default parameter value
-        val callExpressionText = ktParameter
-            .children
-            .firstIsInstanceOrNull<KtCallExpression>()
-            ?.text
-
-        callExpressionText
-    }
-
-    override fun hasVarargModifier(): Boolean = hasModifiers(KoModifier.VARARG)
-
-    override fun hasNoInlineModifier(): Boolean = hasModifiers(KoModifier.NOINLINE)
-
-    override fun hasCrossInlineModifier(): Boolean = hasModifiers(KoModifier.CROSSINLINE)
-
-    override fun hasDefaultValue(value: String?): Boolean = when (value) {
-        null -> ktParameter.hasDefaultValue()
-        else -> defaultValue == value
-    }
-
     override fun representsType(name: String): Boolean = type.name == name || type.fullyQualifiedName == name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktParameter: KtParameter, parentDeclaration: KoBaseDeclaration?): KoParameterDeclaration =
+        internal fun getInstance(ktParameter: KtParameter, parentDeclaration: KoParentProvider?): KoParameterDeclaration =
             cache.getOrCreateInstance(ktParameter, parentDeclaration) { KoParameterDeclarationImpl(ktParameter, parentDeclaration) }
     }
 }

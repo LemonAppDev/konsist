@@ -1,16 +1,14 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoAliasProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoWildcardProvider
+
 /**
  * Represents a Kotlin import declaration.
  */
-interface KoImportDeclaration : KoNamedDeclaration {
-    /**
-     * Alias of the import.
-     */
-    val alias: String
-
-    /**
-     * Whether this import is a wildcard.
-     */
-    val isWildcard: Boolean
-}
+interface KoImportDeclaration :
+    KoAliasProvider,
+    KoBaseDeclaration,
+    KoWildcardProvider,
+    KoParentProvider

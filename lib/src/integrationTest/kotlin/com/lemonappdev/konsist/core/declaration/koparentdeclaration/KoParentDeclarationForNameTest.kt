@@ -53,21 +53,6 @@ class KoParentDeclarationForNameTest {
         }
     }
 
-    @Test
-    fun `class-with-parents`() {
-        // given
-        val sut = getSnippetFile("class-with-parents")
-            .classes()
-            .first()
-            .parents
-
-        // then
-        assertSoftly(sut) {
-            map { it.name } shouldBeEqualTo listOf("SampleSuperInterface1", "SampleSuperInterface2", "SampleSuperClass")
-            mapNotNull { it.delegateName } shouldBeEqualTo listOf("sampleProperty")
-        }
-    }
-
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koparentdeclaration/snippet/forname/", fileName)
 }

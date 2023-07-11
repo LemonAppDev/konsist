@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.container.KoFile
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.container.KoFileImpl
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 internal class KoTypeDeclarationImpl private constructor(
     private val ktTypeReference: KtTypeReference,
 ) :
-    KoNamedDeclarationImpl(ktTypeReference),
+    KoBaseDeclarationImpl(ktTypeReference),
     KoTypeDeclaration {
     private val file: KoFile by lazy { KoFileImpl(ktTypeReference.containingKtFile) }
 
@@ -57,7 +57,7 @@ internal class KoTypeDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktTypeReference: KtTypeReference, parentDeclaration: KoBaseDeclaration?): KoTypeDeclaration =
+        internal fun getInstance(ktTypeReference: KtTypeReference, parentDeclaration: KoParentProvider?): KoTypeDeclaration =
             cache.getOrCreateInstance(ktTypeReference, parentDeclaration) { KoTypeDeclarationImpl(ktTypeReference) }
     }
 }

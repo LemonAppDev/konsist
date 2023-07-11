@@ -2,12 +2,11 @@ package com.lemonappdev.konsist.api.container.koscope
 
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
@@ -87,24 +86,12 @@ interface KoScope :
      *
      * @param includeNested specifies whether to include nested declarations.
      * @param includeLocal specifies whether to include local declarations.
-     * @return a sequence of [KoNamedDeclaration] representing the named declarations in the scope.
-     */
-    fun namedDeclarations(
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
-    ): Sequence<KoNamedDeclaration>
-
-    /**
-     * The declarations present in the scope.
-     *
-     * @param includeNested specifies whether to include nested declarations.
-     * @param includeLocal specifies whether to include local declarations.
-     * @return a sequence of [KoDeclaration] representing the declarations in the scope.
+     * @return a sequence of [KoBaseDeclaration] representing the named declarations in the scope.
      */
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoDeclaration>
+    ): Sequence<KoBaseDeclaration>
 
     /**
      * The properties present in the scope.

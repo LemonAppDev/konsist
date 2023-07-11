@@ -2,8 +2,8 @@ package com.lemonappdev.konsist.core.container
 
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
-import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
@@ -109,7 +109,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoNamedDeclaration> =
+    ): Sequence<KoBaseDeclaration> =
         KoDeclarationCoreProviderUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
 
     override fun hasAnnotations(vararg names: String): Boolean = when {
@@ -130,7 +130,7 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     }
 
     override fun hasPackage(name: String): Boolean = packagee
-        ?.qualifiedName
+        ?.fullyQualifiedName
         ?.let { LocationUtil.resideInLocation(name, it) } ?: false
 
     override fun hasImports(vararg names: String): Boolean = when {

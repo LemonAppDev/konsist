@@ -36,7 +36,7 @@ class KoPackageDeclarationForNameTest {
 
         // then
         sut
-            .map { it.qualifiedName }
+            .map { it.fullyQualifiedName }
             .toList()
             .first()
             .shouldBeEqualTo("com.samplepackage")

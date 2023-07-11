@@ -1,5 +1,8 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
+
 /**
  * Represents a Kotlin declaration.
  *
@@ -35,7 +38,10 @@ package com.lemonappdev.konsist.api.declaration
  * isNullable // true
  * ```
  */
-interface KoTypeDeclaration : KoNamedDeclaration {
+interface KoTypeDeclaration :
+    KoBaseDeclaration,
+    KoFullyQualifiedNameProvider,
+    KoParentProvider {
     /**
      * The import alias name.
      */
@@ -45,11 +51,6 @@ interface KoTypeDeclaration : KoNamedDeclaration {
      * The source type.
      */
     val sourceType: String
-
-    /**
-     * The fully qualified name of the type.
-     */
-    val fullyQualifiedName: String
 
     /**
      * Whatever type is nullable.

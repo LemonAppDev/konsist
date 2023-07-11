@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -18,7 +19,7 @@ class KoDeclarationForNameTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .first { it.name == declarationName } as KoFullyQualifiedNameProvider
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo value

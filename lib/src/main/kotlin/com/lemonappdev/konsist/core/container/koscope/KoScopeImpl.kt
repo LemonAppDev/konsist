@@ -3,12 +3,11 @@ package com.lemonappdev.konsist.core.container.koscope
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.container.koscope.KoScope
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
@@ -44,17 +43,11 @@ class KoScopeImpl(
     ): Sequence<KoFunctionDeclaration> =
         koFiles.flatMap { it.functions(includeNested, includeLocal) }
 
-    override fun namedDeclarations(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): Sequence<KoNamedDeclaration> =
-        koFiles.flatMap { it.declarations(includeNested, includeLocal) }
-
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoDeclaration> = namedDeclarations(includeNested, includeLocal)
-        .filterIsInstance<KoDeclaration>()
+    ): Sequence<KoBaseDeclaration> =
+        koFiles.flatMap { it.declarations(includeNested, includeLocal) }
 
     override fun properties(
         includeNested: Boolean,

@@ -53,7 +53,7 @@ class KoPsiDeclarationForLocationAndTextTest {
     fun `text`() {
         // given
         val sut = getSnippetFile("text")
-            .namedDeclarations()
+            .declarations()
             .first()
 
         // then
