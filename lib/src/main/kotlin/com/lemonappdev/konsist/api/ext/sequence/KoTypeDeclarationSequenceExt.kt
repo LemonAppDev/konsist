@@ -146,3 +146,17 @@ fun Sequence<KoTypeDeclaration>.withFullyQualifiedName(name: String, vararg name
 fun Sequence<KoTypeDeclaration>.withoutFullyQualifiedName(name: String, vararg names: String): Sequence<KoTypeDeclaration> = filter {
     it.fullyQualifiedName != name && names.none { name -> it.fullyQualifiedName == name }
 }
+
+/**
+ * Sequence containing types that are Kotlin basic types.
+ *
+ * @return A sequence containing types that are the Kotlin basic type.
+ */
+fun Sequence<KoTypeDeclaration>.withKotlinType(): Sequence<KoTypeDeclaration> = filter { it.isKotlinType }
+
+/**
+ * Sequence containing types that don't be Kotlin basic type.
+ *
+ * @return A sequence containing types that don't be the specified Kotlin basic types.
+ */
+fun Sequence<KoTypeDeclaration>.withoutKotlinType(): Sequence<KoTypeDeclaration> = filterNot { it.isKotlinType }
