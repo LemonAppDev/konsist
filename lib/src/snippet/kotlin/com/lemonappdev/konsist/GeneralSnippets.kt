@@ -82,7 +82,7 @@ class GeneralSnippets {
                     .declarations()
                     .indexOfFirstInstance<KoFunctionDeclaration>()
 
-                lastKoPropertyDeclarationIndex < firstKoFunctionDeclarationIndex
+                lastKoPropertyDeclarationIndex <= firstKoFunctionDeclarationIndex
             }
     }
 
