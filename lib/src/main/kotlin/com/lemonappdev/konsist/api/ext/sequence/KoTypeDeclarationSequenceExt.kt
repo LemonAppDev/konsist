@@ -146,3 +146,17 @@ fun Sequence<KoTypeDeclaration>.withFullyQualifiedName(name: String, vararg name
 fun Sequence<KoTypeDeclaration>.withoutFullyQualifiedName(name: String, vararg names: String): Sequence<KoTypeDeclaration> = filter {
     it.fullyQualifiedName != name && names.none { name -> it.fullyQualifiedName == name }
 }
+
+/**
+ * Sequence containing types that have generic type.
+ *
+ * @return A sequence containing types with the generic types.
+ */
+fun Sequence<KoTypeDeclaration>.withGenericType(): Sequence<KoTypeDeclaration> = filter { it.isGenericType }
+
+/**
+ * Sequence containing types that don't have generic type.
+ *
+ * @return A sequence containing types without the generic types.
+ */
+fun Sequence<KoTypeDeclaration>.withoutGenericType(): Sequence<KoTypeDeclaration> = filterNot { it.isGenericType }

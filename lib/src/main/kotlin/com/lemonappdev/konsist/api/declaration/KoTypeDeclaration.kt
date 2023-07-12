@@ -57,6 +57,11 @@ interface KoTypeDeclaration : KoNamedDeclaration {
     val isNullable: Boolean
 
     /**
+     * Whatever type is generic type.
+     */
+    val isGenericType: Boolean
+
+    /**
      * Returns `true` if this type is import alias.
      *
      * @return `true` if this type is import type alias, `false` otherwise.
