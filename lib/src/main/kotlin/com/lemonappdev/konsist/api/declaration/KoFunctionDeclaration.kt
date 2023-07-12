@@ -19,6 +19,13 @@ interface KoFunctionDeclaration : KoParametrizedDeclaration, KoLocalClassProvide
     val receiverType: KoTypeDeclaration?
 
     /**
+     * Whether this function has implementation.
+     *
+     * @return `true` if the function has the implementation, `false` otherwise.
+     */
+    fun hasImplementation(): Boolean
+
+    /**
      * Whether this function has operator modifier.
      *
      * @return `true` if the function has the `operator` modifier, `false` otherwise.

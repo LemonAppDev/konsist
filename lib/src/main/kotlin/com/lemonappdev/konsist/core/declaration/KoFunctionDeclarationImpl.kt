@@ -47,6 +47,8 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
         .children
         .filterIsInstance<KtTypeReference>()
 
+    override fun hasImplementation(): Boolean = ktFunction.hasBody()
+
     override fun hasOperatorModifier(): Boolean = hasModifiers(KoModifier.OPERATOR)
 
     override fun hasInlineModifier(): Boolean = hasModifiers(KoModifier.INLINE)
