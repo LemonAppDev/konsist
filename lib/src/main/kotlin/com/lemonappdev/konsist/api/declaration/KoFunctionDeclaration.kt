@@ -20,6 +20,8 @@ interface KoFunctionDeclaration : KoParametrizedDeclaration, KoLocalClassProvide
 
     /**
      * Whether this function has implementation.
+     *
+     * @return `true` if the function has the implementation, `false` otherwise.
      */
     fun hasImplementation(): Boolean
 
