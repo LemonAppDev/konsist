@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.api.ext.sequence.kofunctiondeclaration
 
-import com.lemonappdev.konsist.api.ext.sequence.withExtension
 import com.lemonappdev.konsist.api.ext.sequence.withImplementation
-import com.lemonappdev.konsist.api.ext.sequence.withoutExtension
 import com.lemonappdev.konsist.api.ext.sequence.withoutImplementation
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
 import io.mockk.every
