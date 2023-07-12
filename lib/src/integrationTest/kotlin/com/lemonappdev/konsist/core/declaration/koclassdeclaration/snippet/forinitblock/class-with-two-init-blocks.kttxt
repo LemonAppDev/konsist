@@ -1,0 +1,9 @@
+class SampleClass {
+    init {
+        val sampleProperty = 6
+    }
+
+    init {
+        println("Sample text")
+    }
+}
