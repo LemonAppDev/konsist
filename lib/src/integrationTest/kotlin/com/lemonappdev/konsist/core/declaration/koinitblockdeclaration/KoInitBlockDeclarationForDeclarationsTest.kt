@@ -37,5 +37,4 @@ class KoInitBlockDeclarationForDeclarationsTest {
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koinitblockdeclaration/snippet/fordeclarations/", fileName)
-
 }

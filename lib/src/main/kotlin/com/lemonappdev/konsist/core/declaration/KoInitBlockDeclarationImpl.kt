@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.psi.KtAnonymousInitializer
 
 internal class KoInitBlockDeclarationImpl private constructor(
     private val ktAnonymousInitializer: KtAnonymousInitializer,
-    parentDeclaration: KoBaseDeclaration?
+    parentDeclaration: KoBaseDeclaration?,
 ) :
     KoInitBlockDeclaration,
     KoBaseDeclarationImpl(ktAnonymousInitializer) {
@@ -24,7 +24,7 @@ internal class KoInitBlockDeclarationImpl private constructor(
 
         internal fun getInstance(
             ktAnonymousInitializer: KtAnonymousInitializer,
-            parentDeclaration: KoBaseDeclaration?
+            parentDeclaration: KoBaseDeclaration?,
         ): KoInitBlockDeclaration =
             cache.getOrCreateInstance(ktAnonymousInitializer, parentDeclaration) {
                 KoInitBlockDeclarationImpl(ktAnonymousInitializer, parentDeclaration)
