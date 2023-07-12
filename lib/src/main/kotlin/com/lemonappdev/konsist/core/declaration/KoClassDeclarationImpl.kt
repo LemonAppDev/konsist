@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
@@ -68,6 +69,18 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
         listOfNotNull(primaryConstructor) + secondaryConstructors
     }
 
+    override val initBlocks: List<KoInitBlockDeclaration>? by lazy {
+        val anonymousInitializers = ktClass
+            .body
+            ?.anonymousInitializers
+
+        if (anonymousInitializers?.isEmpty() == true) {
+            null
+        } else {
+            anonymousInitializers?.map { init -> KoInitBlockDeclarationImpl.getInstance(init, this) }
+        }
+    }
+
     override fun hasEnumModifier(): Boolean = hasModifiers(KoModifier.ENUM)
 
     override fun hasSealedModifier(): Boolean = hasModifiers(KoModifier.SEALED)
@@ -110,6 +123,8 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
         names.isEmpty() -> hasParentClass() || hasParentInterfaces()
         else -> names.all { hasParentClass(it) || hasParentInterfaces(it) }
     }
+
+    override fun hasInitBlocks(): Boolean = initBlocks != null
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, primaryConstructor?.parameters, kDoc)
 
