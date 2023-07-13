@@ -48,10 +48,10 @@ internal abstract class KoDeclarationImpl(
                 // and with angle brackets
                 // e.g. @SampleAnnotation<String, Int>
                 !it.contains('<') &&
-                        !it.contains('>') &&
-                        !it.contains(')') &&
-                        !it.contains('@') &&
-                        it.isNotBlank()
+                    !it.contains('>') &&
+                    !it.contains(')') &&
+                    !it.contains('@') &&
+                    it.isNotBlank()
             }
             ?.map {
                 KoModifier
@@ -100,5 +100,4 @@ internal abstract class KoDeclarationImpl(
     override fun resideInPackage(packagee: String): Boolean = this.packagee?.let { LocationUtil.resideInLocation(packagee, it) } ?: false
 
     override fun resideOutsidePackage(packagee: String): Boolean = !resideInPackage(packagee)
-
 }

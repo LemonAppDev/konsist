@@ -17,7 +17,7 @@ fun <T : KoParametrizedDeclaration> Sequence<T>.withParameters(): Sequence<T> = 
  * @return A sequence containing declarations that have all the specified parameters.
  */
 fun <T : KoParametrizedDeclaration> Sequence<T>.withAllParameters(name: String, vararg names: String): Sequence<T> = filter {
-   it.hasParameterNamed(name) && names.all { name -> it.hasParameterNamed(name) }
+    it.hasParameterNamed(name) && names.all { name -> it.hasParameterNamed(name) }
 }
 
 /**
@@ -59,5 +59,7 @@ fun <T : KoParametrizedDeclaration> Sequence<T>.withoutAllParameters(name: Strin
 fun <T : KoParametrizedDeclaration> Sequence<T>.withoutSomeParameters(name: String, vararg names: String): Sequence<T> = filter {
     !it.hasParameterNamed(name) && if (names.isNotEmpty()) {
         names.any { name -> !it.hasParameterNamed(name) }
-    } else true
+    } else {
+        true
+    }
 }

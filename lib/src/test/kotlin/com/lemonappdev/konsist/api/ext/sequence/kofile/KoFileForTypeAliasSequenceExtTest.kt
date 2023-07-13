@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.sequence.kofile
 
-import com.lemonappdev.konsist.api.ext.sequence.withSomeTypeAliases
 import com.lemonappdev.konsist.api.ext.sequence.withAllTypeAliases
+import com.lemonappdev.konsist.api.ext.sequence.withSomeTypeAliases
 import com.lemonappdev.konsist.api.ext.sequence.withTypeAliases
 import com.lemonappdev.konsist.api.ext.sequence.withoutAllTypeAliases
 import com.lemonappdev.konsist.api.ext.sequence.withoutSomeTypeAliases

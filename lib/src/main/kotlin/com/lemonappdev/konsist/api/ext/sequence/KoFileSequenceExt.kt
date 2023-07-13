@@ -281,7 +281,9 @@ fun Sequence<KoFile>.withoutAllImports(import: String, vararg imports: String): 
 fun Sequence<KoFile>.withoutSomeImports(import: String, vararg imports: String): Sequence<KoFile> = filter {
     !it.hasImports(import) && if (imports.isNotEmpty()) {
         imports.any { import -> !it.hasImports(import) }
-    } else true
+    } else {
+        true
+    }
 }
 
 /**
@@ -367,7 +369,9 @@ fun <T : KoFile> Sequence<T>.withoutAllAnnotations(annotation: String, vararg an
 fun <T : KoFile> Sequence<T>.withoutSomeAnnotations(annotation: String, vararg annotations: String): Sequence<T> = filter {
     !it.hasAnnotations(annotation) && if (annotations.isNotEmpty()) {
         annotations.any { annotation -> !it.hasAnnotations(annotation) }
-    } else true
+    } else {
+        true
+    }
 }
 
 /**
@@ -411,7 +415,9 @@ fun <T : KoFile> Sequence<T>.withoutAllAnnotationsOf(annotation: KClass<*>, vara
 fun <T : KoFile> Sequence<T>.withoutSomeAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> = filter {
     !it.hasAnnotationsOf(annotation) && if (annotations.isNotEmpty()) {
         annotations.any { annotation -> !it.hasAnnotationsOf(annotation) }
-    } else true
+    } else {
+        true
+    }
 }
 
 /**
@@ -485,5 +491,7 @@ fun Sequence<KoFile>.withoutAllTypeAliases(typeAlias: String, vararg typeAliases
 fun Sequence<KoFile>.withoutSomeTypeAliases(typeAlias: String, vararg typeAliases: String): Sequence<KoFile> = filter {
     !it.hasTypeAliases(typeAlias) && if (typeAliases.isNotEmpty()) {
         typeAliases.any { typeAlias -> !it.hasTypeAliases(typeAlias) }
-    } else true
+    } else {
+        true
+    }
 }

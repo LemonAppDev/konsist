@@ -146,7 +146,9 @@ fun <T : KoDeclaration> Sequence<T>.withoutAllAnnotations(annotation: String, va
 fun <T : KoDeclaration> Sequence<T>.withoutSomeAnnotations(annotation: String, vararg annotations: String): Sequence<T> = filter {
     !it.hasAnnotations(annotation) && if (annotations.isNotEmpty()) {
         annotations.any { annotation -> !it.hasAnnotations(annotation) }
-    } else true
+    } else {
+        true
+    }
 }
 
 /**
@@ -190,7 +192,9 @@ fun <T : KoDeclaration> Sequence<T>.withoutAllAnnotationsOf(annotation: KClass<*
 fun <T : KoDeclaration> Sequence<T>.withoutSomeAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> = filter {
     !it.hasAnnotationsOf(annotation) && if (annotations.isNotEmpty()) {
         annotations.any { annotation -> !it.hasAnnotationsOf(annotation) }
-    } else true
+    } else {
+        true
+    }
 }
 
 /**
@@ -251,7 +255,7 @@ fun <T : KoDeclaration> Sequence<T>.withoutModifiers(): Sequence<T> = filterNot 
  * @return A sequence containing declarations that don't have all the specified modifiers.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutAllModifiers(modifier: KoModifier, vararg modifiers: KoModifier): Sequence<T> = filterNot {
-       it.hasModifiers(modifier, *modifiers)
+    it.hasModifiers(modifier, *modifiers)
 }
 
 /**
@@ -264,7 +268,9 @@ fun <T : KoDeclaration> Sequence<T>.withoutAllModifiers(modifier: KoModifier, va
 fun <T : KoDeclaration> Sequence<T>.withoutSomeModifiers(modifier: KoModifier, vararg modifiers: KoModifier): Sequence<T> = filter {
     !it.hasModifiers(modifier) && if (modifiers.isNotEmpty()) {
         modifiers.any { modifier -> !it.hasModifiers(modifier) }
-    } else true
+    } else {
+        true
+    }
 }
 
 /**
