@@ -16,11 +16,14 @@ command_converting_testdata_to_jar = [
     "test.jar"
 ]
 
+isFailed = False
+
 try:
     subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
 except subprocess.CalledProcessError as e:
     print(f"An error occurred while running the command:\n{e.stderr}")
     sys.exit(1)
+    isFailed = True
 
 # Add snippet-test package
 source_dir = project_root + "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core"
@@ -48,20 +51,20 @@ def check_file(file_path):
     if "actual" in file_content or "expect" in file_content or "data object" in file_content:
         return
 
-    else:
-        # Create and run kotlinc command which verifies valid Kotlin code
-        snippet_command = [
-          "kotlinc",
-            "-cp",
-            "test.jar",
-            "-nowarn",
-            file_path
-        ]
-        try:
-            subprocess.run(snippet_command, check=True, text=True, capture_output=True)
-        except subprocess.CalledProcessError as e:
-            print(f"An error occurred while running the command:\n{e.stderr}")
-            sys.exit(1)
+    # Create and run kotlinc command which verifies valid Kotlin code
+    snippet_command = [
+        "kotlinc",
+        "-cp",
+        "test.jar",
+        "-nowarn",
+        file_path
+    ]
+    try:
+        subprocess.run(snippet_command, check=True, text=True, capture_output=True)
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred while running the command:\n{e.stderr}")
+        sys.exit(1)
+        isFailed = True
 
 # Check files concurrently
 with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -93,4 +96,5 @@ shutil.rmtree(destination_dir)
 # Execute the Git command "git clean -f"
 subprocess.run(["git", "clean", "-f"])
 
-sys.exit(0)
+if isFailed is False:
+    sys.exit(0)
