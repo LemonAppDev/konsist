@@ -248,7 +248,7 @@ fun <T : KoDeclaration> Sequence<T>.withoutModifiers(): Sequence<T> = filterNot 
  *
  * @param modifier The modifier to exclude.
  * @param modifiers The modifiers to exclude.
- * @return A sequence containing declarations that don't have any of the specified modifiers (or none modifier if [modifiers] is empty).
+ * @return A sequence containing declarations that don't have all the specified modifiers.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutAllModifiers(modifier: KoModifier, vararg modifiers: KoModifier): Sequence<T> = filterNot {
        it.hasModifiers(modifier, *modifiers)
@@ -257,8 +257,9 @@ fun <T : KoDeclaration> Sequence<T>.withoutAllModifiers(modifier: KoModifier, va
 /**
  * Sequence containing declarations that don't have the modifiers.
  *
+ * @param modifier The modifier to exclude.
  * @param modifiers The modifiers to exclude.
- * @return A sequence containing declarations that don't have any of the specified modifiers (or none modifier if [modifiers] is empty).
+ * @return A sequence containing declarations that don't have at least one of the specified modifiers.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutSomeModifiers(modifier: KoModifier, vararg modifiers: KoModifier): Sequence<T> = filter {
     !it.hasModifiers(modifier) && if (modifiers.isNotEmpty()) {
