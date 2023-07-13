@@ -22,7 +22,6 @@ try:
     subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
 except subprocess.CalledProcessError as e:
     print(f"An error occurred while running the command:\n{e.stderr}")
-    sys.exit(1)
     isFailed = True
 
 # Add snippet-test package
@@ -63,7 +62,6 @@ def check_file(file_path):
         subprocess.run(snippet_command, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         print(f"An error occurred while running the command:\n{e.stderr}")
-        sys.exit(1)
         isFailed = True
 
 # Check files concurrently
@@ -98,3 +96,5 @@ subprocess.run(["git", "clean", "-f"])
 
 if isFailed is False:
     sys.exit(0)
+else:
+    sys.exit(1)
