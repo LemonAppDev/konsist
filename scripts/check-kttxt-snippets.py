@@ -48,19 +48,20 @@ def check_file(file_path):
     if "actual" in file_content or "expect" in file_content or "data object" in file_content:
         return
 
-    # Create and run kotlinc command which verifies valid Kotlin code
-    snippet_command = [
-        "kotlinc",
-        "-cp",
-        "test.jar",
-        "-nowarn",
-        file_path
-    ]
-    try:
-        subprocess.run(snippet_command, check=True, text=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred while running the command:\n{e.stderr}")
-        sys.exit(1)
+    else:
+        # Create and run kotlinc command which verifies valid Kotlin code
+        snippet_command = [
+          "kotlinc",
+            "-cp",
+            "test.jar",
+            "-nowarn",
+            file_path
+        ]
+        try:
+            subprocess.run(snippet_command, check=True, text=True, capture_output=True)
+        except subprocess.CalledProcessError as e:
+            print(f"An error occurred while running the command:\n{e.stderr}")
+            sys.exit(1)
 
 # Check files concurrently
 with concurrent.futures.ThreadPoolExecutor() as executor:
