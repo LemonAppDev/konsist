@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 
 internal interface KoReturnTypeProviderCore :
     KoReturnTypeProvider,
-    KoParentProvider,
+    KoParentProviderCore,
     KoExtensionProviderCore {
     val ktFunction: KtFunction
 
