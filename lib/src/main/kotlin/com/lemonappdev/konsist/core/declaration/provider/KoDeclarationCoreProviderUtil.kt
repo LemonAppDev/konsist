@@ -17,6 +17,7 @@ import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
+import org.jetbrains.kotlin.psi.KtAnonymousInitializer
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtDeclarationContainer
@@ -63,6 +64,17 @@ internal object KoDeclarationCoreProviderUtil {
                     .declarations
                     .mapNotNull { getInstanceOfKtDeclaration(it, parentDeclaration) }
                     .asSequence()
+                getKoDeclarations(declarations, includeNested, includeLocal)
+            }
+
+            is KtAnonymousInitializer -> {
+                declarations = ktElement
+                    .body
+                    ?.children
+                    ?.filterIsInstance<KtDeclaration>()
+                    ?.mapNotNull { getInstanceOfKtDeclaration(it as KtDeclaration, parentDeclaration) }
+                    ?.asSequence()!!
+
                 getKoDeclarations(declarations, includeNested, includeLocal)
             }
 

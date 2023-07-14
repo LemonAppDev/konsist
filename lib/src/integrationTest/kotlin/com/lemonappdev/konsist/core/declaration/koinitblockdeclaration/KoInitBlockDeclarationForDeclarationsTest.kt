@@ -15,7 +15,7 @@ class KoInitBlockDeclarationForDeclarationsTest {
             ?.first()
 
         // then
-        sut?.declarations() shouldBeEqualTo emptySequence()
+        sut?.declarations()?.toList() shouldBeEqualTo emptyList()
     }
 
     @Test
