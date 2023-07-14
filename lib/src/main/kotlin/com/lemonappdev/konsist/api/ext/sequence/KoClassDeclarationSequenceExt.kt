@@ -186,16 +186,21 @@ fun Sequence<KoClassDeclaration>.withSecondaryConstructors(): Sequence<KoClassDe
 fun Sequence<KoClassDeclaration>.withoutSecondaryConstructors(): Sequence<KoClassDeclaration> = filterNot { it.hasSecondaryConstructors() }
 
 /**
- * Sequence containing all classes that have parents.
+ * Sequence containing all classes that have any parent.
  *
+ * @return A sequence containing classes that have any parent.
+ */
+fun Sequence<KoClassDeclaration>.withParents(): Sequence<KoClassDeclaration> = filter { it.hasParents() }
+
+/**
+ * Sequence containing all classes that have all specified parents.
+ *
+ * @param name The name of the parent to include.
  * @param names The name(s) of the parent(s) to include.
  * @return A sequence containing classes that have the specified parent(s) (or any parent if [names] is empty).
  */
-fun Sequence<KoClassDeclaration>.withParents(vararg names: String): Sequence<KoClassDeclaration> = filter {
-    when {
-        names.isEmpty() -> it.hasParents()
-        else -> it.hasParents(*names)
-    }
+fun Sequence<KoClassDeclaration>.withAllParents(name: String, vararg names: String): Sequence<KoClassDeclaration> = filter {
+    it.hasParents(name, *names)
 }
 
 /**
@@ -210,15 +215,35 @@ fun Sequence<KoClassDeclaration>.withSomeParents(name: String, vararg names: Str
 }
 
 /**
- * Sequence containing all classes that don't have parents.
+ * Sequence containing all classes that have no parent.
  *
- * @param names The name(s) of the parent(s) to exclude.
- * @return A sequence containing classes that don't have the specified parent(s) (or none parent if [names] is empty).
+ * @return A sequence containing classes that have no parent.
  */
-fun Sequence<KoClassDeclaration>.withoutParents(vararg names: String): Sequence<KoClassDeclaration> = filter {
-    when {
-        names.isEmpty() -> !it.hasParents()
-        else -> !it.hasParents(*names)
+fun Sequence<KoClassDeclaration>.withoutParents(): Sequence<KoClassDeclaration> = filterNot { it.hasParents() }
+
+/**
+ * Sequence containing all classes that don't have all specified parents.
+ *
+ * @param name The name of the parent to exclude.
+ * @param names The name(s) of the parent(s) to exclude.
+ * @return A sequence containing classes that don't have all specified parent(s).
+ */
+fun Sequence<KoClassDeclaration>.withoutAllParents(name: String, vararg names: String): Sequence<KoClassDeclaration> = filter {
+    !it.hasParents(name, *names)
+}
+
+/**
+ * Sequence containing all classes that don't have some parents.
+ *
+ * @param name The name of the parent to exclude.
+ * @param names The names of the parents to exclude.
+ * @return A sequence containing classes that don't have at least one of the specified parent(s).
+ */
+fun Sequence<KoClassDeclaration>.withoutSomeParents(name: String, vararg names: String): Sequence<KoClassDeclaration> = filter {
+    !it.hasParents(name) && if (names.isNotEmpty()) {
+        names.any { name -> !it.hasParents(name) }
+    } else {
+        true
     }
 }
 
@@ -247,7 +272,7 @@ inline fun <reified T> Sequence<KoClassDeclaration>.withoutParentOf(): Sequence<
  * @param names The Kotlin classes representing the parents to include.
  * @return A sequence containing classes that have the parents of the specified type(s).
  */
-fun Sequence<KoClassDeclaration>.withParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
+fun Sequence<KoClassDeclaration>.withAllParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
     it.parents.any { parent -> parent.name == name.simpleName } &&
         names.all { kClass ->
             it
@@ -279,7 +304,7 @@ fun Sequence<KoClassDeclaration>.withSomeParentsOf(name: KClass<*>, vararg names
  * @param names The Kotlin classes representing the parents to exclude.
  * @return A sequence containing classes that don't have the parents of the specified type(s).
  */
-fun Sequence<KoClassDeclaration>.withoutParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
+fun Sequence<KoClassDeclaration>.withoutAllParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
     it.parents.none { parent -> parent.name == name.simpleName } &&
         names.none { kClass ->
             it
@@ -289,16 +314,41 @@ fun Sequence<KoClassDeclaration>.withoutParentsOf(name: KClass<*>, vararg names:
 }
 
 /**
- * Sequence containing all classes that have parent of type.
+ * Sequence containing all classes that don't have some parent of type.
  *
- * @param names The name(s) of the parent interface(s) to include.
- * @return A sequence containing classes that have the specified parent interface(s) (or any parent interface if [names] is empty).
+ * @param name The Kotlin class representing the parent to exclude.
+ * @param names The Kotlin classes representing the parents to exclude.
+ * @return A sequence containing classes that don't have at least one of the specified parent(s).
  */
-fun Sequence<KoClassDeclaration>.withParentInterfaces(vararg names: String): Sequence<KoClassDeclaration> = filter {
-    when {
-        names.isEmpty() -> it.hasParentInterfaces()
-        else -> it.hasParentInterfaces(*names)
-    }
+fun Sequence<KoClassDeclaration>.withoutSomeParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
+    it.parents.none { parent -> parent.name == name.simpleName } &&
+        if (names.isNotEmpty()) {
+            names.any { kClass ->
+                it
+                    .parents
+                    .none { parent -> parent.name == kClass.simpleName }
+            }
+        } else {
+            true
+        }
+}
+
+/**
+ * Sequence containing all classes that have any parent interface of type.
+ *
+ * @return A sequence containing classes that have any parent.
+ */
+fun Sequence<KoClassDeclaration>.withParentInterfaces(): Sequence<KoClassDeclaration> = filter { it.hasParentInterfaces() }
+
+/**
+ * Sequence containing all classes that have all specified parent interfaces of type.
+ *
+ * @param name The name of the parent interface to include.
+ * @param names The name(s) of the parent interface(s) to include.
+ * @return A sequence containing classes that have all the specified parent interface(s).
+ */
+fun Sequence<KoClassDeclaration>.withAllParentInterfaces(name: String, vararg names: String): Sequence<KoClassDeclaration> = filter {
+    it.hasParentInterfaces(name, *names)
 }
 
 /**
@@ -312,15 +362,37 @@ fun Sequence<KoClassDeclaration>.withSomeParentInterfaces(name: String, vararg n
     filter { it.hasParentInterfaces(name) || names.any { name -> it.hasParentInterfaces(name) } }
 
 /**
+ * Sequence containing all classes that don't have any parent interface of type.
+ *
+ * @return A sequence containing classes that have no parent interface.
+ */
+fun Sequence<KoClassDeclaration>.withoutParentInterfaces(): Sequence<KoClassDeclaration> = filterNot { it.hasParentInterfaces() }
+
+/**
  * Sequence containing all classes that don't have parent interface of type.
  *
  * @param names The name(s) of the parent interface(s) to exclude.
  * @return A sequence containing classes that don't have the specified parent interface(s) (or none parent interface if [names] is empty).
  */
-fun Sequence<KoClassDeclaration>.withoutParentInterfaces(vararg names: String): Sequence<KoClassDeclaration> = filter {
+fun Sequence<KoClassDeclaration>.withoutAllParentInterfaces(vararg names: String): Sequence<KoClassDeclaration> = filter {
     when {
         names.isEmpty() -> !it.hasParentInterfaces()
         else -> !it.hasParentInterfaces(*names)
+    }
+}
+
+/**
+ * Sequence containing all classes that don't have some parent interface of type.
+ *
+ * @param name The name of the parent interface to exclude.
+ * @param names The names of the parent interfaces to exclude.
+ * @return A sequence containing classes that don't have at least one of the specified parent interface(s).
+ */
+fun Sequence<KoClassDeclaration>.withoutSomeParentInterfaces(name: String, vararg names: String): Sequence<KoClassDeclaration> = filter {
+    !it.hasParentInterfaces(name) && if (names.isNotEmpty()) {
+        names.any { name -> !it.hasParentInterfaces(name) }
+    } else {
+        true
     }
 }
 
@@ -350,14 +422,15 @@ inline fun <reified T> Sequence<KoClassDeclaration>.withoutParentInterfaceOf(): 
  * @param names The Kotlin classes representing the parent interfaces to include.
  * @return A sequence containing classes that have the parent interfaces of the specified type(s).
  */
-fun Sequence<KoClassDeclaration>.withParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
-    it.parentInterfaces.any { parent -> parent.name == name.simpleName } &&
-        names.all { kClass ->
-            it
-                .parentInterfaces
-                .any { parent -> parent.name == kClass.simpleName }
-        }
-}
+fun Sequence<KoClassDeclaration>.withAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> =
+    filter {
+        it.parentInterfaces.any { parent -> parent.name == name.simpleName } &&
+            names.all { kClass ->
+                it
+                    .parentInterfaces
+                    .any { parent -> parent.name == kClass.simpleName }
+            }
+    }
 
 /**
  * Sequence containing all classes that have some parent interface of type.
@@ -383,13 +456,34 @@ fun Sequence<KoClassDeclaration>.withSomeParentInterfacesOf(name: KClass<*>, var
  * @param names The Kotlin classes representing the parent interfaces to exclude.
  * @return A sequence containing classes that don't have the parent interfaces of the specified type(s).
  */
-fun Sequence<KoClassDeclaration>.withoutParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> =
+fun Sequence<KoClassDeclaration>.withoutAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> =
     filter {
         it.parentInterfaces.none { parent -> parent.name == name.simpleName } &&
             names.none { kClass ->
                 it
                     .parentInterfaces
                     .any { parent -> parent.name == kClass.simpleName }
+            }
+    }
+
+/**
+ * Sequence containing all classes that don't have some parent interface of type.
+ *
+ * @param name The Kotlin class representing the parent interface to exclude.
+ * @param names The Kotlin classes representing the parent interfaces to exclude.
+ * @return A sequence containing classes that don't have at least one of the specified parent interface(s).
+ */
+fun Sequence<KoClassDeclaration>.withoutSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> =
+    filter {
+        it.parentInterfaces.none { parent -> parent.name == name.simpleName } &&
+            if (names.isNotEmpty()) {
+                names.any { kClass ->
+                    it
+                        .parentInterfaces
+                        .none { parent -> parent.name == kClass.simpleName }
+                }
+            } else {
+                true
             }
     }
 
