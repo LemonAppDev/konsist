@@ -3,7 +3,7 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
-import com.lemonappdev.konsist.api.ext.sequence.withoutAllModifiers
+import com.lemonappdev.konsist.api.ext.sequence.withoutSomeModifiers
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 
@@ -17,7 +17,7 @@ class TestingSnippets {
     fun `every class - except data and value class - has test`() {
         Konsist.scopeFromProduction()
             .classes()
-            .withoutAllModifiers(KoModifier.DATA, KoModifier.VALUE)
+            .withoutSomeModifiers(KoModifier.DATA, KoModifier.VALUE)
             .assert { it.hasTest() }
     }
 
