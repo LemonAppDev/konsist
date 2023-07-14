@@ -165,15 +165,15 @@ fun <T : KoPsiDeclaration> Sequence<T>.withKDocWithSomeTags(tag: KoKDocTag, vara
 }
 
 /**
- * Sequence containing declarations that don't have the KDoc tags.
+ * Sequence containing declarations that don't have the KDoc with any tag.
  *
- * @return A sequence containing declarations without the specified KDoc tags.
+ * @return A sequence containing declarations without KDoc with any tag.
  */
 fun <T : KoPsiDeclaration> Sequence<T>.withoutKDocWithTags(): Sequence<T> =
     filterNot { it.kDoc?.tags?.isNotEmpty() ?: false }
 
 /**
- * Sequence containing declarations that don't have all specified KDoc tags.
+ * Sequence containing declarations that don't have KDoc with all specified tags.
  *
  * @param tag The KDoc tag to check for absence in the declarations' KDoc.
  * @param tags The KDoc tags to check for absence in the declarations' KDoc.
@@ -184,11 +184,11 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutKDocWithAllTags(tag: KoKDocTag, va
     filterNot { it.kDoc?.hasTags(tag, *tags) ?: false }
 
 /**
- * Sequence containing declarations that have at least one of the specified KDoc tags.
+ * Sequence containing declarations that don't have at least one of the specified KDoc tags.
  *
- * @param tag The KDoc tag to check for in the declarations' KDoc.
- * @param tags The KDoc tags to check for in the declarations' KDoc.
- * @return A sequence containing declarations with at least one of the specified KDoc tags.
+ * @param tag The KDoc tag to check for absence in the declarations' KDoc.
+ * @param tags The KDoc tags to check for absence in the declarations' KDoc.
+ * @return A sequence containing declarations without at least one of the specified KDoc tags.
  */
 fun <T : KoPsiDeclaration> Sequence<T>.withoutKDocWithSomeTags(tag: KoKDocTag, vararg tags: KoKDocTag): Sequence<T> = filter {
     it.kDoc?.hasTags(tag) == false && if (tags.isNotEmpty()) {

@@ -90,7 +90,7 @@ fun <T : KoDeclaration> Sequence<T>.withTopLevel(): Sequence<T> = filter { it.is
 fun <T : KoDeclaration> Sequence<T>.withoutTopLevel(): Sequence<T> = filterNot { it.isTopLevel() }
 
 /**
- * Sequence containing declarations that have all annotations.
+ * Sequence containing declarations that have any annotation.
  *
  * @return A sequence containing declarations that have any annotation.
  */
@@ -126,7 +126,7 @@ fun <T : KoDeclaration> Sequence<T>.withSomeAnnotations(annotation: String, vara
 fun <T : KoDeclaration> Sequence<T>.withoutAnnotations(): Sequence<T> = filterNot { it.hasAnnotations() }
 
 /**
- * Sequence containing declarations that don't have the specified annotations.
+ * Sequence containing declarations that don't have all the specified annotations.
  *
  * @param annotation The annotation to exclude.
  * @param annotations The annotations to exclude.
@@ -219,7 +219,7 @@ inline fun <reified T> Sequence<KoDeclaration>.withoutAnnotationOf(): Sequence<K
 fun <T : KoDeclaration> Sequence<T>.withModifiers(): Sequence<T> = filter { it.hasModifiers() }
 
 /**
- * Sequence containing declarations that have all modifiers.
+ * Sequence containing declarations that have all the specified modifiers.
  *
  * @param modifier The modifier to include.
  * @param modifiers The modifiers to include.
@@ -259,7 +259,7 @@ fun <T : KoDeclaration> Sequence<T>.withoutAllModifiers(modifier: KoModifier, va
 }
 
 /**
- * Sequence containing declarations that don't have the modifiers.
+ * Sequence containing declarations that don't have some modifiers.
  *
  * @param modifier The modifier to exclude.
  * @param modifiers The modifiers to exclude.
@@ -274,7 +274,7 @@ fun <T : KoDeclaration> Sequence<T>.withoutSomeModifiers(modifier: KoModifier, v
 }
 
 /**
- * Sequence containing declarations that have packages.
+ * Sequence containing declarations that have package.
  *
  * @param packages The packages to include.
  * @return A sequence containing declarations that reside in any of the specified packages (or any package if [packages] is empty).
@@ -287,7 +287,7 @@ fun <T : KoDeclaration> Sequence<T>.withPackage(vararg packages: String): Sequen
 }
 
 /**
- * Sequence containing declarations that don't have the packages.
+ * Sequence containing declarations that don't have the package.
  *
  * @param packages The packages to exclude.
  * @return A sequence containing declarations that don't reside in any of the specified packages (or none package if [packages] is empty).

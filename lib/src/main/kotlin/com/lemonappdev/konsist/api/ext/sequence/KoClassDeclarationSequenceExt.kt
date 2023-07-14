@@ -197,7 +197,7 @@ fun Sequence<KoClassDeclaration>.withParents(): Sequence<KoClassDeclaration> = f
  *
  * @param name The name of the parent to include.
  * @param names The name(s) of the parent(s) to include.
- * @return A sequence containing classes that have the specified parent(s) (or any parent if [names] is empty).
+ * @return A sequence containing classes that have all specified parent(s).
  */
 fun Sequence<KoClassDeclaration>.withAllParents(name: String, vararg names: String): Sequence<KoClassDeclaration> = filter {
     it.hasParents(name, *names)
@@ -336,7 +336,7 @@ fun Sequence<KoClassDeclaration>.withoutSomeParentsOf(name: KClass<*>, vararg na
 /**
  * Sequence containing all classes that have any parent interface of type.
  *
- * @return A sequence containing classes that have any parent.
+ * @return A sequence containing classes that have any parent interface.
  */
 fun Sequence<KoClassDeclaration>.withParentInterfaces(): Sequence<KoClassDeclaration> = filter { it.hasParentInterfaces() }
 
@@ -362,23 +362,21 @@ fun Sequence<KoClassDeclaration>.withSomeParentInterfaces(name: String, vararg n
     filter { it.hasParentInterfaces(name) || names.any { name -> it.hasParentInterfaces(name) } }
 
 /**
- * Sequence containing all classes that don't have any parent interface of type.
+ * Sequence containing all classes that have no parent interface of type.
  *
  * @return A sequence containing classes that have no parent interface.
  */
 fun Sequence<KoClassDeclaration>.withoutParentInterfaces(): Sequence<KoClassDeclaration> = filterNot { it.hasParentInterfaces() }
 
 /**
- * Sequence containing all classes that don't have parent interface of type.
+ * Sequence containing all classes that don't have all specified parent interfaces of type.
  *
+ * @param name The name of the parent interface to exclude.
  * @param names The name(s) of the parent interface(s) to exclude.
- * @return A sequence containing classes that don't have the specified parent interface(s) (or none parent interface if [names] is empty).
+ * @return A sequence containing classes that don't have all specified parent interface(s).
  */
-fun Sequence<KoClassDeclaration>.withoutAllParentInterfaces(vararg names: String): Sequence<KoClassDeclaration> = filter {
-    when {
-        names.isEmpty() -> !it.hasParentInterfaces()
-        else -> !it.hasParentInterfaces(*names)
-    }
+fun Sequence<KoClassDeclaration>.withoutAllParentInterfaces(name: String, vararg names: String): Sequence<KoClassDeclaration> = filterNot {
+    it.hasParentInterfaces(name, *names)
 }
 
 /**
@@ -416,7 +414,7 @@ inline fun <reified T> Sequence<KoClassDeclaration>.withoutParentInterfaceOf(): 
     this - withParentInterfaceOf<T>().toSet()
 
 /**
- * Sequence containing all classes that have parent interface of type.
+ * Sequence containing all classes that have all specified parent interfaces of type.
  *
  * @param name The Kotlin class representing the parent interface to include.
  * @param names The Kotlin classes representing the parent interfaces to include.

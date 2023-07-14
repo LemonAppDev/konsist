@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.ext.sequence
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 
 /**
- * Sequence containing all packages that have the qualified name.
+ * Sequence containing all packages that have any of the specified qualified name.
  *
  * @param qualifiedName The name to include.
  * @param qualifiedNames The names to include.
@@ -15,7 +15,7 @@ fun Sequence<KoPackageDeclaration>.withQualifiedName(qualifiedName: String, vara
     }
 
 /**
- * Sequence containing all packages that don't have the qualified name.
+ * Sequence containing all packages that don't have any of the specified qualified name.
  *
  * @param qualifiedName The name to exclude.
  * @param qualifiedNames The names to exclude.
