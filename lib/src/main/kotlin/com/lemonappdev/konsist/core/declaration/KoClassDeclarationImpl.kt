@@ -81,6 +81,8 @@ internal class KoClassDeclarationImpl private constructor(private val ktClass: K
         }
     }
 
+    override val numInitBlocks: Int by lazy { initBlocks?.size ?: 0 }
+
     override fun hasEnumModifier(): Boolean = hasModifiers(KoModifier.ENUM)
 
     override fun hasSealedModifier(): Boolean = hasModifiers(KoModifier.SEALED)

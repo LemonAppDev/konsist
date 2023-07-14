@@ -40,6 +40,11 @@ interface KoClassDeclaration : KoComplexDeclaration {
     val initBlocks: List<KoInitBlockDeclaration>?
 
     /**
+     * The number of init blocks in class.
+     */
+    val numInitBlocks: Int
+
+    /**
      * Whatever class has `enum` modifier.
      *
      * @return `true` if the class has the `enum` modifier, `false` otherwise.

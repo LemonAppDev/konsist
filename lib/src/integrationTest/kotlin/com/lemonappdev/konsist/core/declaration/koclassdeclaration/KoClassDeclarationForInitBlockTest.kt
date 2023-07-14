@@ -18,6 +18,7 @@ class KoClassDeclarationForInitBlockTest {
         assertSoftly(sut) {
             initBlocks shouldBeEqualTo null
             hasInitBlocks() shouldBeEqualTo false
+            numInitBlocks shouldBeEqualTo 0
         }
     }
 
@@ -32,6 +33,7 @@ class KoClassDeclarationForInitBlockTest {
         assertSoftly(sut) {
             initBlocks shouldNotBeEqualTo null
             hasInitBlocks() shouldBeEqualTo true
+            numInitBlocks shouldBeEqualTo 1
         }
     }
 
@@ -46,6 +48,7 @@ class KoClassDeclarationForInitBlockTest {
         assertSoftly(sut) {
             initBlocks shouldNotBeEqualTo null
             hasInitBlocks() shouldBeEqualTo true
+            numInitBlocks shouldBeEqualTo 2
         }
     }
 
