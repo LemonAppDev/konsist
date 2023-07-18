@@ -13,7 +13,7 @@ package com.lemonappdev.konsist.api.declaration
  *  ...will be represented as:
  *
  *  ```kotlin
- *  importAliasName // ""
+ *  importAliasName // null
  *  sourceType // "String"
  *  name // "String"
  *  isNullable // false
@@ -30,7 +30,7 @@ package com.lemonappdev.konsist.api.declaration
  *
  * ```kotlin
  * importAliasName // "ImportAlias"
- * sourceType // "String"
+ * sourceType // "SampleType"
  * name // "ImportAlias?"
  * isNullable // true
  * ```
@@ -39,7 +39,7 @@ interface KoTypeDeclaration : KoNamedDeclaration {
     /**
      * The import alias name.
      */
-    val importAliasName: String
+    val aliasType: String?
 
     /**
      * The source type.
@@ -61,5 +61,5 @@ interface KoTypeDeclaration : KoNamedDeclaration {
      *
      * @return `true` if this type is import type alias, `false` otherwise.
      */
-    fun isImportAlias(): Boolean
+    fun isAlias(): Boolean
 }

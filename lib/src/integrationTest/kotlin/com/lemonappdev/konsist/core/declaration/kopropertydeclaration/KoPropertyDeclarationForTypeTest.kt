@@ -16,9 +16,9 @@ class KoPropertyDeclarationForTypeTest {
         // then
         assertSoftly(sut.explicitType) {
             it?.sourceType shouldBeEqualTo "SampleType"
-            it?.importAliasName shouldBeEqualTo ""
+            it?.aliasType shouldBeEqualTo null
             it?.name shouldBeEqualTo "SampleType"
-            it?.isImportAlias() shouldBeEqualTo false
+            it?.isAlias() shouldBeEqualTo false
             it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
@@ -33,9 +33,9 @@ class KoPropertyDeclarationForTypeTest {
         // then
         assertSoftly(sut.explicitType) {
             it?.sourceType shouldBeEqualTo "SampleType"
-            it?.importAliasName shouldBeEqualTo "ImportAlias"
+            it?.aliasType shouldBeEqualTo "ImportAlias"
             it?.name shouldBeEqualTo "ImportAlias"
-            it?.isImportAlias() shouldBeEqualTo true
+            it?.isAlias() shouldBeEqualTo true
             it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
@@ -50,9 +50,9 @@ class KoPropertyDeclarationForTypeTest {
         // then
         assertSoftly(sut.explicitType) {
             it?.sourceType shouldBeEqualTo "Int"
-            it?.importAliasName shouldBeEqualTo ""
+            it?.aliasType shouldBeEqualTo null
             it?.name shouldBeEqualTo "Int"
-            it?.isImportAlias() shouldBeEqualTo false
+            it?.isAlias() shouldBeEqualTo false
             it?.fullyQualifiedName shouldBeEqualTo ""
         }
     }
@@ -68,7 +68,7 @@ class KoPropertyDeclarationForTypeTest {
         assertSoftly(sut.explicitType) {
             it?.sourceType shouldBeEqualTo null
             it?.name shouldBeEqualTo null
-            it?.isImportAlias() shouldBeEqualTo null
+            it?.isAlias() shouldBeEqualTo null
             it?.fullyQualifiedName shouldBeEqualTo null
         }
     }
