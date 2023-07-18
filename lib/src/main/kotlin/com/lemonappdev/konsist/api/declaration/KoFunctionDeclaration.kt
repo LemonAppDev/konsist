@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoExplicitReturnTypeProvider
 import com.lemonappdev.konsist.api.provider.KoExtensionProvider
+import com.lemonappdev.konsist.api.provider.KoImplementationProvider
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
@@ -31,11 +32,5 @@ interface KoFunctionDeclaration :
     KoLocalPropertyProvider,
     KoExtensionProvider,
     KoExplicitReturnTypeProvider,
-    KoReceiverTypeProvider {
-    /**
-     * Whether this function has implementation.
-     *
-     * @return `true` if the function has the implementation, `false` otherwise.
-     */
-    fun hasImplementation(): Boolean
-}
+    KoReceiverTypeProvider,
+    KoImplementationProvider

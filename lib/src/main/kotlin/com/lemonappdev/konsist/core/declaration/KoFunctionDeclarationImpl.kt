@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoExplicitReturnTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
+import com.lemonappdev.konsist.core.provider.KoImplementationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
@@ -35,7 +36,8 @@ internal class KoFunctionDeclarationImpl private constructor(
     KoFunctionDeclaration,
     KoExtensionProviderCore,
     KoExplicitReturnTypeProviderCore,
-    KoReceiverTypeProviderCore {
+    KoReceiverTypeProviderCore,
+    KoImplementationProviderCore {
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktCallableDeclaration
 
@@ -63,8 +65,6 @@ internal class KoFunctionDeclarationImpl private constructor(
                     }
                 }
         }
-
-    override fun hasImplementation(): Boolean = ktFunction.hasBody()
 
     override fun localDeclarations(): Sequence<KoBaseDeclaration> = localDeclarations
 
