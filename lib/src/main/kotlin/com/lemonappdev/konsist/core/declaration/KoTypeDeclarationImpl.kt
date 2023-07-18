@@ -49,7 +49,9 @@ internal class KoTypeDeclarationImpl private constructor(
         if (isImportAlias()) {
             false
         } else {
-            basicTypes.any { sourceType.contains(it) } || collections.any { sourceType.contains(it) }
+            val parts = sourceType.split("<", ">")
+            parts.any { basicTypes.any { basicType -> basicType == it } } ||
+                    parts.any { collections.any { collection -> collection == it } }
         }
     }
 
