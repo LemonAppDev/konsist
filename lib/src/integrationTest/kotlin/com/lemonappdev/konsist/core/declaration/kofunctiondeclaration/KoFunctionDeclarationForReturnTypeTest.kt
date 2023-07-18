@@ -15,12 +15,12 @@ class KoFunctionDeclarationForReturnTypeTest {
 
         // then
         assertSoftly(sut) {
-            hasReturnType() shouldBeEqualTo true
-            returnType?.sourceType shouldBeEqualTo "SampleType"
-            returnType?.importAliasName shouldBeEqualTo ""
-            returnType?.name shouldBeEqualTo "SampleType"
-            returnType?.isImportAlias() shouldBeEqualTo false
-            returnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+            hasExplicitReturnType() shouldBeEqualTo true
+            explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
+            explicitReturnType?.importAliasName shouldBeEqualTo ""
+            explicitReturnType?.name shouldBeEqualTo "SampleType"
+            explicitReturnType?.isImportAlias() shouldBeEqualTo false
+            explicitReturnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
 
@@ -33,11 +33,11 @@ class KoFunctionDeclarationForReturnTypeTest {
 
         // then
         assertSoftly(sut) {
-            hasReturnType() shouldBeEqualTo true
-            returnType?.sourceType shouldBeEqualTo "SampleType"
-            returnType?.importAliasName shouldBeEqualTo "ImportAlias"
-            returnType?.name shouldBeEqualTo "ImportAlias"
-            returnType?.isImportAlias() shouldBeEqualTo true
+            hasExplicitReturnType() shouldBeEqualTo true
+            explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
+            explicitReturnType?.importAliasName shouldBeEqualTo "ImportAlias"
+            explicitReturnType?.name shouldBeEqualTo "ImportAlias"
+            explicitReturnType?.isImportAlias() shouldBeEqualTo true
         }
     }
 
@@ -50,12 +50,12 @@ class KoFunctionDeclarationForReturnTypeTest {
 
         // then
         assertSoftly(sut) {
-            hasReturnType() shouldBeEqualTo true
-            returnType?.sourceType shouldBeEqualTo "SampleType"
-            returnType?.importAliasName shouldBeEqualTo ""
-            returnType?.name shouldBeEqualTo "SampleType"
-            returnType?.isImportAlias() shouldBeEqualTo false
-            returnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+            hasExplicitReturnType() shouldBeEqualTo true
+            explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
+            explicitReturnType?.importAliasName shouldBeEqualTo ""
+            explicitReturnType?.name shouldBeEqualTo "SampleType"
+            explicitReturnType?.isImportAlias() shouldBeEqualTo false
+            explicitReturnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
 
@@ -68,11 +68,11 @@ class KoFunctionDeclarationForReturnTypeTest {
 
         // then
         assertSoftly(sut) {
-            hasReturnType() shouldBeEqualTo false
-            returnType?.sourceType shouldBeEqualTo null
-            returnType?.importAliasName shouldBeEqualTo null
-            returnType?.name shouldBeEqualTo null
-            returnType?.isImportAlias() shouldBeEqualTo null
+            hasExplicitReturnType() shouldBeEqualTo false
+            explicitReturnType?.sourceType shouldBeEqualTo null
+            explicitReturnType?.importAliasName shouldBeEqualTo null
+            explicitReturnType?.name shouldBeEqualTo null
+            explicitReturnType?.isImportAlias() shouldBeEqualTo null
         }
     }
 
@@ -85,11 +85,11 @@ class KoFunctionDeclarationForReturnTypeTest {
 
         // then
         assertSoftly(sut) {
-            hasReturnType() shouldBeEqualTo false
-            returnType?.sourceType shouldBeEqualTo null
-            returnType?.importAliasName shouldBeEqualTo null
-            returnType?.name shouldBeEqualTo null
-            returnType?.isImportAlias() shouldBeEqualTo null
+            hasExplicitReturnType() shouldBeEqualTo false
+            explicitReturnType?.sourceType shouldBeEqualTo null
+            explicitReturnType?.importAliasName shouldBeEqualTo null
+            explicitReturnType?.name shouldBeEqualTo null
+            explicitReturnType?.isImportAlias() shouldBeEqualTo null
         }
     }
 

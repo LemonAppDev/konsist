@@ -19,12 +19,12 @@ class LibrarySnippets {
     fun `every public function in api package must have explicit return type`() {
         Konsist.scopeFromPackage("..api..")
             .functions(includeNested = true)
-            .assert { it.hasReturnType() }
+            .assert { it.hasExplicitReturnType() }
     }
 
     fun `every public property in api package must have specify type explicitly`() {
         Konsist.scopeFromPackage("..api..")
             .properties(includeNested = true)
-            .assert { it.hasType() }
+            .assert { it.hasExplicitType() }
     }
 }
