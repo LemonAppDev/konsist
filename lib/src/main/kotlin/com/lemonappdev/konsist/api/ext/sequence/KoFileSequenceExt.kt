@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.ext.container.hasAnnotationOf
 import kotlin.reflect.KClass
 
 /**
- * Sequence containing files that have name.
+ * Sequence containing files with any of the specified names.
  *
  * @param name The name to include.
  * @param names The names to include.
@@ -16,7 +16,7 @@ fun <T : KoFile> Sequence<T>.withName(name: String, vararg names: String): Seque
 }
 
 /**
- * Sequence containing files that don't have name.
+ * Sequence containing files without any of the specified names.
  *
  * @param name The name to exclude.
  * @param names The names to exclude.
@@ -27,7 +27,7 @@ fun <T : KoFile> Sequence<T>.withoutName(name: String, vararg names: String): Se
 }
 
 /**
- * Sequence containing files that have name with prefix.
+ * Sequence containing files with name with prefix.
  *
  * @param prefix The prefix to include.
  * @param prefixes The prefixes to include.
@@ -38,7 +38,7 @@ fun <T : KoFile> Sequence<T>.withNameStartingWith(prefix: String, vararg prefixe
 }
 
 /**
- * Sequence containing files that don't have name with prefix.
+ * Sequence containing files without name with prefix.
  *
  * @param prefix The prefix to exclude.
  * @param prefixes The prefixes to exclude.
@@ -49,7 +49,7 @@ fun <T : KoFile> Sequence<T>.withoutNameStartingWith(prefix: String, vararg pref
 }
 
 /**
- * Sequence containing files that have name with suffix.
+ * Sequence containing files with name with suffix.
  *
  * @param suffix The suffix to include.
  * @param suffixes The suffixes to include.
@@ -60,7 +60,7 @@ fun <T : KoFile> Sequence<T>.withNameEndingWith(suffix: String, vararg suffixes:
 }
 
 /**
- * Sequence containing files that don't have name with suffix.
+ * Sequence containing files without name with suffix.
  *
  * @param suffix The suffix to exclude.
  * @param suffixes The suffixes to exclude.
@@ -71,7 +71,7 @@ fun <T : KoFile> Sequence<T>.withoutNameEndingWith(suffix: String, vararg suffix
 }
 
 /**
- * Sequence containing files that have name containing String.
+ * Sequence containing files with name containing String.
  *
  * @param text The text to include.
  * @param texts The texts to include.
@@ -82,7 +82,7 @@ fun <T : KoFile> Sequence<T>.withNameContaining(text: String, vararg texts: Stri
 }
 
 /**
- * Sequence containing files that don't have name containing String.
+ * Sequence containing files without name containing String.
  *
  * @param text The text to exclude.
  * @param texts The texts to exclude.
@@ -93,7 +93,7 @@ fun <T : KoFile> Sequence<T>.withoutNameContaining(text: String, vararg texts: S
 }
 
 /**
- * Sequence containing files that have name matching regex.
+ * Sequence containing files with name matching regex.
  *
  * @param regex The regular expression to include.
  * @param regexes The regular expressions to include.
@@ -104,7 +104,7 @@ fun <T : KoFile> Sequence<T>.withNameMatching(regex: Regex, vararg regexes: Rege
 }
 
 /**
- * Sequence containing files that don't have name matching regex.
+ * Sequence containing files without name matching regex.
  *
  * @param regex The regular expression to exclude.
  * @param regexes The regular expressions to exclude.
@@ -115,7 +115,7 @@ fun <T : KoFile> Sequence<T>.withoutNameMatching(regex: Regex, vararg regexes: R
 }
 
 /**
- * Sequence containing files that have extension.
+ * Sequence containing files with extension.
  *
  * @param extension The extension to include.
  * @param extensions The extensions to include.
@@ -126,7 +126,7 @@ fun <T : KoFile> Sequence<T>.withExtension(extension: String, vararg extensions:
 }
 
 /**
- * Sequence containing files that don't have extension.
+ * Sequence containing files without extension.
  *
  * @param extension The extension to exclude.
  * @param extensions The extensions to exclude.
@@ -137,7 +137,7 @@ fun <T : KoFile> Sequence<T>.withoutExtension(extension: String, vararg extensio
 }
 
 /**
- * Sequence containing files that have path.
+ * Sequence containing files with path.
  *
  * @param path The path to include.
  * @param paths The paths to include.
@@ -148,7 +148,7 @@ fun <T : KoFile> Sequence<T>.withPath(path: String, vararg paths: String): Seque
 }
 
 /**
- * Sequence containing files that don't have path.
+ * Sequence containing files without path.
  *
  * @param path The path to exclude.
  * @param paths The paths to exclude.
@@ -159,7 +159,7 @@ fun <T : KoFile> Sequence<T>.withoutPath(path: String, vararg paths: String): Se
 }
 
 /**
- * Sequence containing files that have project file path.
+ * Sequence containing files with project file path.
  *
  * @param path The project path to include.
  * @param paths The project paths to include.
@@ -170,7 +170,7 @@ fun <T : KoFile> Sequence<T>.withProjectPath(path: String, vararg paths: String)
 }
 
 /**
- * Sequence containing files that don't have project file path.
+ * Sequence containing files without project file path.
  *
  * @param path The project path to exclude.
  * @param paths The project paths to exclude.
@@ -181,7 +181,7 @@ fun <T : KoFile> Sequence<T>.withoutProjectPath(path: String, vararg paths: Stri
 }
 
 /**
- * Sequence containing files that have module.
+ * Sequence containing files with module.
  *
  * @param module The module to include.
  * @param modules The modules to include.
@@ -192,7 +192,7 @@ fun <T : KoFile> Sequence<T>.withModule(module: String, vararg modules: String):
 }
 
 /**
- * Sequence containing files that don't have module.
+ * Sequence containing files without module.
  *
  * @param module The module to exclude.
  * @param modules The modules to exclude.
@@ -203,7 +203,7 @@ fun <T : KoFile> Sequence<T>.withoutModule(module: String, vararg modules: Strin
 }
 
 /**
- * Sequence containing files that have source set.
+ * Sequence containing files with source set.
  *
  * @param sourceSet The sourceSet to include.
  * @param sourceSets The sourceSets to include.
@@ -214,7 +214,7 @@ fun <T : KoFile> Sequence<T>.withSourceSet(sourceSet: String, vararg sourceSets:
 }
 
 /**
- * Sequence containing files that don't have source set.
+ * Sequence containing files without source set.
  *
  * @param sourceSet The sourceSet to exclude.
  * @param sourceSets The sourceSets to exclude.
@@ -225,180 +225,275 @@ fun <T : KoFile> Sequence<T>.withoutSourceSet(sourceSet: String, vararg sourceSe
 }
 
 /**
- * Sequence containing files that have imports.
+ * Sequence containing files with any import.
  *
- * @param imports The import(s) to include.
- * @return A sequence containing files that have the specified import(s) (or any import if [imports] is empty).
+ * @return A sequence containing files with any import.
  */
-fun Sequence<KoFile>.withImports(vararg imports: String): Sequence<KoFile> = filter {
-    when {
-        imports.isEmpty() -> it.hasImports()
-        else -> it.hasImports(*imports)
-    }
+fun Sequence<KoFile>.withImports(): Sequence<KoFile> = filter { it.hasImports() }
+
+/**
+ * Sequence containing files with all specified imports.
+ *
+ * @param import The import to include.
+ * @param imports The import(s) to include.
+ * @return A sequence containing files with the specified import(s).
+ */
+fun Sequence<KoFile>.withAllImports(import: String, vararg imports: String): Sequence<KoFile> = filter {
+    it.hasImports(import, *imports)
 }
 
 /**
- * Sequence containing files that have some imports.
+ * Sequence containing files with some imports.
  *
  * @param import The import to include.
  * @param imports The imports to include.
- * @return A sequence containing files that have at least one of the specified import(s).
+ * @return A sequence containing files with at least one of the specified import(s).
  */
 fun Sequence<KoFile>.withSomeImports(import: String, vararg imports: String): Sequence<KoFile> = filter {
     it.hasImports(import) || imports.any { import -> it.hasImports(import) }
 }
 
 /**
- * Sequence containing files that don't have imports.
+ * Sequence containing files with no import.
  *
+ * @return A sequence containing files with no import.
+ */
+fun Sequence<KoFile>.withoutImports(): Sequence<KoFile> = filterNot { it.hasImports() }
+
+/**
+ * Sequence containing files without all specified imports.
+ *
+ * @param import The import to exclude.
  * @param imports The import(s) to exclude.
- * @return A sequence containing files that don't have the specified import(s) (or none import if [imports] is empty).
+ * @return A sequence containing files without specified import(s).
  */
-fun Sequence<KoFile>.withoutImports(vararg imports: String): Sequence<KoFile> = filter {
-    when {
-        imports.isEmpty() -> !it.hasImports()
-        else -> !it.hasImports(*imports)
+fun Sequence<KoFile>.withoutAllImports(import: String, vararg imports: String): Sequence<KoFile> = filterNot {
+    it.hasImports(import, *imports)
+}
+
+/**
+ * Sequence containing files without some imports.
+ *
+ * @param import The import to exclude.
+ * @param imports The imports to exclude.
+ * @return A sequence containing files without at least one of the specified import(s).
+ */
+fun Sequence<KoFile>.withoutSomeImports(import: String, vararg imports: String): Sequence<KoFile> = filter {
+    !it.hasImports(import) && if (imports.isNotEmpty()) {
+        imports.any { import -> !it.hasImports(import) }
+    } else {
+        true
     }
 }
 
 /**
- * Sequence containing files that have package.
+ * Sequence containing files with package.
  *
- * @param packagee The package name to include.
  * @param packages The package names to include.
- * @return A sequence containing files that have a package matching any of the specified package names.
+ * @return A sequence containing files with a package matching any of the specified package names
+ * (or any package if [packages] is empty).
  */
-fun Sequence<KoFile>.withPackage(packagee: String, vararg packages: String): Sequence<KoFile> = filter {
-    it.hasPackage(packagee) || packages.any { packagee -> it.hasPackage(packagee) }
-}
-
-/**
- * Sequence containing files that have some package.
- *
- * @param packagee The package name to exclude.
- * @param packages The package names to exclude.
- * @return A sequence containing files that don't have a package matching any of the specified package names.
- */
-fun Sequence<KoFile>.withoutPackage(packagee: String, vararg packages: String): Sequence<KoFile> = filter {
-    !it.hasPackage(packagee) && packages.none { packagee -> it.hasPackage(packagee) }
-}
-
-/**
- * Sequence containing files that have the annotations.
- *
- * @param annotations The annotations to include.
- * @return A sequence containing files that have all the specified annotations (or any annotation if [annotations] is empty).
- */
-fun Sequence<KoFile>.withAnnotations(vararg annotations: String): Sequence<KoFile> = filter {
+fun Sequence<KoFile>.withPackage(vararg packages: String): Sequence<KoFile> = filter {
     when {
-        annotations.isEmpty() -> it.hasAnnotations()
-        else -> it.hasAnnotations(*annotations)
+        packages.isEmpty() -> it.packagee != null
+        else -> packages.any { packagee -> it.hasPackage(packagee) }
     }
 }
 
 /**
- * Sequence containing files that have some annotations.
+ * Sequence containing files with some package.
+ *
+ * @param packages The package names to exclude.
+ * @return A sequence containing files without a package matching any of the specified package names
+ * (or none package if [packages] is empty).
+ */
+fun Sequence<KoFile>.withoutPackage(vararg packages: String): Sequence<KoFile> = filter {
+    when {
+        packages.isEmpty() -> it.packagee == null
+        else -> packages.none { packagee -> it.hasPackage(packagee) }
+    }
+}
+
+/**
+ * Sequence containing files with all annotations.
+ *
+ * @return A sequence containing files with any annotation.
+ */
+fun <T : KoFile> Sequence<T>.withAnnotations(): Sequence<T> = filter { it.hasAnnotations() }
+
+/**
+ * Sequence containing files with all the specified annotations.
  *
  * @param annotation The annotation to include.
  * @param annotations The annotations to include.
- * @return A sequence containing files that have at least one of the specified annotations.
+ * @return A sequence containing files with all the specified annotations.
  */
-fun Sequence<KoFile>.withSomeAnnotations(annotation: String, vararg annotations: String): Sequence<KoFile> = filter {
+fun <T : KoFile> Sequence<T>.withAllAnnotations(annotation: String, vararg annotations: String): Sequence<T> = filter {
+    it.hasAnnotations(annotation, *annotations)
+}
+
+/**
+ * Sequence containing files with some annotations.
+ *
+ * @param annotation The annotation to include.
+ * @param annotations The annotations to include.
+ * @return A sequence containing files with at least one of the specified annotations.
+ */
+fun <T : KoFile> Sequence<T>.withSomeAnnotations(annotation: String, vararg annotations: String): Sequence<T> = filter {
     it.hasAnnotations(annotation) || annotations.any { annotation -> it.hasAnnotations(annotation) }
 }
 
 /**
- * Sequence containing files that don't have annotations.
+ * Sequence containing files with no annotation.
  *
- * @param annotations The annotations to exclude.
- * @return A sequence containing files that don't have all the specified annotations (or none annotation if [annotations] is empty).
+ * @return A sequence containing files with no annotation.
  */
-fun Sequence<KoFile>.withoutAnnotations(vararg annotations: String): Sequence<KoFile> = filter {
-    when {
-        annotations.isEmpty() -> !it.hasAnnotations()
-        else -> !it.hasAnnotations(*annotations)
+fun <T : KoFile> Sequence<T>.withoutAnnotations(): Sequence<T> = filterNot { it.hasAnnotations() }
+
+/**
+ * Sequence containing files without specified annotations.
+ *
+ * @param annotation The annotation to exclude.
+ * @param annotations The annotations to exclude.
+ * @return A sequence containing files without any of the specified annotations.
+ */
+fun <T : KoFile> Sequence<T>.withoutAllAnnotations(annotation: String, vararg annotations: String): Sequence<T> = filterNot {
+    it.hasAnnotations(annotation, *annotations)
+}
+
+/**
+ * Sequence containing files without some annotations.
+ *
+ * @param annotation The annotation to exclude.
+ * @param annotations The annotations to exclude.
+ * @return A sequence containing files without at least one of the specified annotations.
+ */
+fun <T : KoFile> Sequence<T>.withoutSomeAnnotations(annotation: String, vararg annotations: String): Sequence<T> = filter {
+    !it.hasAnnotations(annotation) && if (annotations.isNotEmpty()) {
+        annotations.any { annotation -> !it.hasAnnotations(annotation) }
+    } else {
+        true
     }
 }
 
 /**
- * Sequence containing files that have annotation of type.
- *
- * @return A sequence containing files that have the specified annotation.
- */
-inline fun <reified T> Sequence<KoFile>.withAnnotationOf(): Sequence<KoFile> = filter { it.hasAnnotationOf<T>() }
-
-/**
- * Sequence containing files that don't have some annotations of type.
- *
- * @return A sequence containing files that don't have the specified annotation.
- */
-inline fun <reified T> Sequence<KoFile>.withoutAnnotationOf(): Sequence<KoFile> =
-    filterNot { it.hasAnnotationOf<T>() }
-
-/**
- * Sequence containing files that have some annotations of type.
+ * Sequence containing files with all the specified annotations of type.
  *
  * @param annotation The Kotlin class representing annotation to include.
  * @param annotations The Kotlin classes representing annotations to include.
- * @return A sequence containing files that have all the specified annotations.
+ * @return A sequence containing files with all the specified annotations.
  */
-fun Sequence<KoFile>.withAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<KoFile> =
+fun <T : KoFile> Sequence<T>.withAllAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> =
     filter { it.hasAnnotationsOf(annotation, *annotations) }
 
 /**
- * Sequence containing files that have some annotations of type.
+ * Sequence containing files with some annotations of type.
  *
  * @param annotation The Kotlin class representing annotation to include.
  * @param annotations The Kotlin classes representing annotations to include.
- * @return A sequence containing files that have at least one of the specified the annotations.
+ * @return A sequence containing files with at least one of the specified the annotations.
  */
-fun Sequence<KoFile>.withSomeAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<KoFile> = filter {
+fun <T : KoFile> Sequence<T>.withSomeAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> = filter {
     it.hasAnnotationsOf(annotation) || annotations.any { annotation -> it.hasAnnotationsOf(annotation) }
 }
 
 /**
- * Sequence containing files that don't have some annotations of type.
+ * Sequence containing files without all the specified annotations.
  *
  * @param annotation The Kotlin class representing annotation to exclude.
  * @param annotations The Kotlin classes representing annotations to exclude.
- * @return A sequence containing files that don't have all the specified annotations.
+ * @return A sequence containing files without all the specified annotations.
  */
-fun Sequence<KoFile>.withoutAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<KoFile> =
-    filter { !it.hasAnnotationsOf(annotation, *annotations) }
+fun <T : KoFile> Sequence<T>.withoutAllAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> =
+    filterNot { it.hasAnnotationsOf(annotation, *annotations) }
 
 /**
- * Sequence containing files that have type alias.
+ * Sequence containing files without some annotations.
  *
- * @param typeAliases The type aliases to include.
- * @return A sequence containing files that have all the specified type alias(es) (or any type alias if [typeAliases] is empty).
+ * @param annotation The Kotlin class representing annotation to exclude.
+ * @param annotations The Kotlin classes representing annotations to exclude.
+ * @return A sequence containing files without at least one of the specified annotations.
  */
-fun Sequence<KoFile>.withTypeAliases(vararg typeAliases: String): Sequence<KoFile> = filter {
-    when {
-        typeAliases.isEmpty() -> it.hasTypeAliases()
-        else -> it.hasTypeAliases(*typeAliases)
+fun <T : KoFile> Sequence<T>.withoutSomeAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> = filter {
+    !it.hasAnnotationsOf(annotation) && if (annotations.isNotEmpty()) {
+        annotations.any { annotation -> !it.hasAnnotationsOf(annotation) }
+    } else {
+        true
     }
 }
 
 /**
- * Sequence containing files that have some type aliases.
+ * Sequence containing files with all annotations of type.
+ *
+ * @return A sequence containing files with the specified annotation.
+ */
+inline fun <reified T> Sequence<KoFile>.withAnnotationOf(): Sequence<KoFile> = filter { it.hasAnnotationOf<T>() }
+
+/**
+ * Sequence containing files without annotations of type.
+ *
+ * @return A sequence containing files without specified annotation.
+ */
+inline fun <reified T> Sequence<KoFile>.withoutAnnotationOf(): Sequence<KoFile> = filterNot { it.hasAnnotationOf<T>() }
+
+/**
+ * Sequence containing files with any type alias.
+ *
+ * @return A sequence containing files with any type alias.
+ */
+fun Sequence<KoFile>.withTypeAliases(): Sequence<KoFile> = filter { it.hasTypeAliases() }
+
+/**
+ * Sequence containing files with all specified type aliases.
  *
  * @param typeAlias The type alias to include.
  * @param typeAliases The type aliases to include.
- * @return A sequence containing files that have at least one of the specified type alias(es).
+ * @return A sequence containing files with all the specified type alias(es).
+ */
+fun Sequence<KoFile>.withAllTypeAliases(typeAlias: String, vararg typeAliases: String): Sequence<KoFile> = filter {
+    it.hasTypeAliases(typeAlias, *typeAliases)
+}
+
+/**
+ * Sequence containing files with some type aliases.
+ *
+ * @param typeAlias The type alias to include.
+ * @param typeAliases The type aliases to include.
+ * @return A sequence containing files with at least one of the specified type alias(es).
  */
 fun Sequence<KoFile>.withSomeTypeAliases(typeAlias: String, vararg typeAliases: String): Sequence<KoFile> = filter {
     it.hasTypeAliases(typeAlias) || typeAliases.any { typeAlias -> it.hasTypeAliases(typeAlias) }
 }
 
 /**
- * Sequence containing files that don't have type aliases.
+ * Sequence containing files with no type aliases.
  *
- * @param typeAliases The type aliases to exclude.
- * @return A sequence containing files that don't have all the specified type alias(es) (or none type alias if [typeAliases] is empty).
+ * @return A sequence containing files with no type aliases.
  */
-fun Sequence<KoFile>.withoutTypeAliases(vararg typeAliases: String): Sequence<KoFile> = filter {
-    when {
-        typeAliases.isEmpty() -> !it.hasTypeAliases()
-        else -> !it.hasTypeAliases(*typeAliases)
+fun Sequence<KoFile>.withoutTypeAliases(): Sequence<KoFile> = filterNot { it.hasTypeAliases() }
+
+/**
+ * Sequence containing files without all the specified type aliases.
+ *
+ * @param typeAlias The type alias to exclude.
+ * @param typeAliases The type aliases to exclude.
+ * @return A sequence containing files without all the specified type alias(es).
+ */
+fun Sequence<KoFile>.withoutAllTypeAliases(typeAlias: String, vararg typeAliases: String): Sequence<KoFile> = filterNot {
+    it.hasTypeAliases(typeAlias, *typeAliases)
+}
+
+/**
+ * Sequence containing files without some type aliases.
+ *
+ * @param typeAlias The type alias to exclude.
+ * @param typeAliases The type aliases to exclude.
+ * @return A sequence containing files without at least one of the specified type alias(es).
+ */
+fun Sequence<KoFile>.withoutSomeTypeAliases(typeAlias: String, vararg typeAliases: String): Sequence<KoFile> = filter {
+    !it.hasTypeAliases(typeAlias) && if (typeAliases.isNotEmpty()) {
+        typeAliases.any { typeAlias -> !it.hasTypeAliases(typeAlias) }
+    } else {
+        true
     }
 }
