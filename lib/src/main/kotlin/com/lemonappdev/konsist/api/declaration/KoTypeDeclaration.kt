@@ -13,7 +13,7 @@ package com.lemonappdev.konsist.api.declaration
  *  ...will be represented as:
  *
  *  ```kotlin
- *  importAliasName // ""
+ *  importAliasName // null
  *  sourceType // "String"
  *  name // "String"
  *  isNullable // false
@@ -30,7 +30,7 @@ package com.lemonappdev.konsist.api.declaration
  *
  * ```kotlin
  * importAliasName // "ImportAlias"
- * sourceType // "String"
+ * sourceType // "SampleType"
  * name // "ImportAlias?"
  * isNullable // true
  * ```
