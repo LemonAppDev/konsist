@@ -30,7 +30,7 @@ class TestingSnippets {
                     .properties()
                     .firstOrNull { property -> property.name == "sut" }
 
-                sut != null && sut.explicitType?.name == type
+                sut != null && (sut.explicitType?.name == type || sut.text.contains("$type("))
             }
     }
 

@@ -16,7 +16,7 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
  *  ...will be represented as:
  *
  *  ```kotlin
- *  importAliasName // ""
+ *  importAliasName // null
  *  sourceType // "String"
  *  name // "String"
  *  isNullable // false
@@ -33,7 +33,7 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
  *
  * ```kotlin
  * importAliasName // "ImportAlias"
- * sourceType // "String"
+ * sourceType // "SampleType"
  * name // "ImportAlias?"
  * isNullable // true
  * ```
@@ -45,7 +45,7 @@ interface KoTypeDeclaration :
     /**
      * The import alias name.
      */
-    val importAliasName: String
+    val aliasType: String?
 
     /**
      * The source type.
@@ -62,5 +62,5 @@ interface KoTypeDeclaration :
      *
      * @return `true` if this type is import type alias, `false` otherwise.
      */
-    fun isImportAlias(): Boolean
+    fun isAlias(): Boolean
 }

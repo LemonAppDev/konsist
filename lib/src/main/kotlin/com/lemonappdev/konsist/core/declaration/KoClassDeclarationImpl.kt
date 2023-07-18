@@ -43,6 +43,22 @@ internal class KoClassDeclarationImpl private constructor(
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktClass
 
+    override val initBlocks: List<KoInitBlockDeclaration>? by lazy {
+        val anonymousInitializers = ktClass
+            .body
+            ?.anonymousInitializers
+
+        if (anonymousInitializers?.isEmpty() == true) {
+            null
+        } else {
+            anonymousInitializers?.map { init -> KoInitBlockDeclarationImpl.getInstance(init, this) }
+        }
+    }
+
+    override val numInitBlocks: Int by lazy { initBlocks?.size ?: 0 }
+
+    override fun hasInitBlocks(): Boolean = initBlocks != null
+
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, primaryConstructor?.parameters, kDoc)
 
     override fun declarations(

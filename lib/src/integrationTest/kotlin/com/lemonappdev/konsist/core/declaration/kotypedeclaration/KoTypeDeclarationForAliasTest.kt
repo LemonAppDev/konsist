@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeDeclarationForImportAliasTest {
+class KoTypeDeclarationForAliasTest {
     @Test
     fun `simple-type`() {
         // given
@@ -19,8 +19,8 @@ class KoTypeDeclarationForImportAliasTest {
 
         // then
         assertSoftly(sut) {
-            it?.importAliasName shouldBeEqualTo ""
-            it?.isImportAlias() shouldBeEqualTo false
+            it?.aliasType shouldBeEqualTo null
+            it?.isAlias() shouldBeEqualTo false
         }
     }
 
@@ -37,8 +37,8 @@ class KoTypeDeclarationForImportAliasTest {
 
         // then
         assertSoftly(sut) {
-            it?.importAliasName shouldBeEqualTo ""
-            it?.isImportAlias() shouldBeEqualTo false
+            it?.aliasType shouldBeEqualTo null
+            it?.isAlias() shouldBeEqualTo false
         }
     }
 
@@ -55,8 +55,8 @@ class KoTypeDeclarationForImportAliasTest {
 
         // then
         assertSoftly(sut) {
-            it?.importAliasName shouldBeEqualTo "ImportAlias"
-            it?.isImportAlias() shouldBeEqualTo true
+            it?.aliasType shouldBeEqualTo "ImportAlias"
+            it?.isAlias() shouldBeEqualTo true
         }
     }
 
@@ -73,11 +73,11 @@ class KoTypeDeclarationForImportAliasTest {
 
         // then
         assertSoftly(sut) {
-            it?.importAliasName shouldBeEqualTo "ImportAlias"
-            it?.isImportAlias() shouldBeEqualTo true
+            it?.aliasType shouldBeEqualTo "ImportAlias"
+            it?.isAlias() shouldBeEqualTo true
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forimportalias/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/foralias/", fileName)
 }

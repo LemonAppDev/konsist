@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
+import com.lemonappdev.konsist.api.ext.sequence.properties
 import com.lemonappdev.konsist.api.ext.sequence.withValueModifier
 import com.lemonappdev.konsist.api.provider.hasAnnotationOf
 import com.lemonappdev.konsist.core.ext.indexOfFirstInstance
@@ -25,7 +26,8 @@ class GeneralSnippets {
     fun `no field should have 'm' prefix`() {
         Konsist.scopeFromProject()
             .classes()
-            .assert {
+            .properties()
+            .assertNot {
                 val secondCharacterIsUppercase = it.name.getOrNull(1)?.isUpperCase() ?: false
                 it.name.startsWith('m') && secondCharacterIsUppercase
             }
@@ -40,7 +42,7 @@ class GeneralSnippets {
     fun `no class should use Java util logging`() {
         Konsist.scopeFromProject()
             .files()
-            .assert { it.hasImports("java.util.logging..") }
+            .assertNot { it.hasImports("java.util.logging..") }
     }
 
     fun `every constructor parameter has name derived from parameter type`() {
@@ -83,7 +85,7 @@ class GeneralSnippets {
                     .declarations()
                     .indexOfFirstInstance<KoFunctionDeclaration>()
 
-                lastKoPropertyDeclarationIndex < firstKoFunctionDeclarationIndex
+                lastKoPropertyDeclarationIndex <= firstKoFunctionDeclarationIndex
             }
     }
 
@@ -99,7 +101,7 @@ class GeneralSnippets {
 
                 val lastIndex = it.numDeclarations() - 1
 
-                companionObjectIndex == lastIndex
+                companionObjectIndex == lastIndex || companionObjectIndex == -1
             }
     }
 

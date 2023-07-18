@@ -43,4 +43,22 @@ interface KoClassDeclaration :
     KoParentInterfaceProvider,
     KoSecondaryConstructorsProvider,
     KoConstructorsProvider,
-    KoHasTestProvider
+    KoHasTestProvider {
+
+    /**
+     * The init blocks of the class.
+     */
+    val initBlocks: List<KoInitBlockDeclaration>?
+
+    /**
+     * The number of init blocks in class.
+     */
+    val numInitBlocks: Int
+
+    /**
+     * Whatever class has init blocks.
+     *
+     * @return `true` if the class has init block(s), `false` otherwise.
+     */
+    fun hasInitBlocks(): Boolean
+    }
