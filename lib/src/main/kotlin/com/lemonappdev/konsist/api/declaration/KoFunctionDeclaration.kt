@@ -119,7 +119,7 @@ interface KoFunctionDeclaration : KoParametrizedDeclaration, KoLocalClassProvide
     fun hasReceiverType(name: String? = null): Boolean
 
     /**
-     * Whether this function has n explicit return type.
+     * Whether this function has an explicit return type.
      *
      * @return `true` if the function has the explicit return type, `false` otherwise.
      */
