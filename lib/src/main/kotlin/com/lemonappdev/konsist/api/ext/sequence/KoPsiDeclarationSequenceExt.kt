@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoPsiDeclaration
 
 /**
- * Sequence containing declarations that have KDoc.
+ * Sequence containing declarations with KDoc.
  *
  * @return A sequence containing declarations with KDoc.
  */
@@ -18,7 +18,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withKDoc(): Sequence<T> = filter { it.has
 fun <T : KoPsiDeclaration> Sequence<T>.withoutKDoc(): Sequence<T> = filterNot { it.hasKDoc() }
 
 /**
- * Sequence containing declarations that have valid KDoc.
+ * Sequence containing declarations with valid KDoc.
  *
  * @param verifyDescription `false` to not verify a description in the KDoc. By default, `true`.
  * @param verifyParamTag `true` to verify param tags in the KDoc. By default, `false`.
@@ -136,7 +136,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutValidKDoc(
 }
 
 /**
- * Sequence containing declarations that have KDoc with any tag.
+ * Sequence containing declarations with KDoc with any tag.
  *
  * @return A sequence containing declarations with KDoc with any tag.
  */
@@ -144,17 +144,17 @@ fun <T : KoPsiDeclaration> Sequence<T>.withKDocWithTags(): Sequence<T> =
     filter { it.kDoc?.tags?.isNotEmpty() ?: false }
 
 /**
- * Sequence containing declarations that have KDoc with all specified tags.
+ * Sequence containing declarations with KDoc with all specified tags.
  *
  * @param tag The KDoc tag to check for in the declarations' KDoc.
  * @param tags The KDoc tags to check for in the declarations' KDoc.
- * @return A sequence containing declarations with the specified KDoc tags.
+ * @return A sequence containing declarations with specified KDoc tags.
  */
 fun <T : KoPsiDeclaration> Sequence<T>.withKDocWithAllTags(tag: KoKDocTag, vararg tags: KoKDocTag): Sequence<T> =
     filter { it.kDoc?.hasTags(tag, *tags) ?: false }
 
 /**
- * Sequence containing declarations that have at least one of the specified KDoc tags.
+ * Sequence containing declarations with at least one of the specified KDoc tags.
  *
  * @param tag The KDoc tag to check for in the declarations' KDoc.
  * @param tags The KDoc tags to check for in the declarations' KDoc.
@@ -199,7 +199,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutKDocWithSomeTags(tag: KoKDocTag, v
 }
 
 /**
- * Sequence containing declarations that have file path.
+ * Sequence containing declarations with file path.
  *
  * @param path The path to include.
  * @param paths The paths to include.
@@ -225,7 +225,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutFilePath(path: String, vararg path
     }
 
 /**
- * Sequence containing declarations that have absolute file path.
+ * Sequence containing declarations with absolute file path.
  *
  * @param path The absolute path to include.
  * @param paths The absolute paths to include.
@@ -245,7 +245,7 @@ fun <T : KoPsiDeclaration> Sequence<T>.withoutAbsoluteFilePath(path: String, var
     withoutFilePath(path, *paths, absolutePath = true)
 
 /**
- * Sequence containing declarations that have project file path.
+ * Sequence containing declarations with project file path.
  *
  * @param path The project path to include.
  * @param paths The project paths to include.

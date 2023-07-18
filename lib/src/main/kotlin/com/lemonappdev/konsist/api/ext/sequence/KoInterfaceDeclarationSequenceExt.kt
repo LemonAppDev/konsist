@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.ext.sequence
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 
 /**
- * Sequence containing all interfaces that have `actual` modifier.
+ * Sequence containing all interfaces with `actual` modifier.
  *
  * @return A sequence containing interfaces with the `actual` modifier.
  */
@@ -17,7 +17,7 @@ fun Sequence<KoInterfaceDeclaration>.withActualModifier(): Sequence<KoInterfaceD
 fun Sequence<KoInterfaceDeclaration>.withoutActualModifier(): Sequence<KoInterfaceDeclaration> = filterNot { it.hasActualModifier() }
 
 /**
- * Sequence containing all interfaces that have `expect` modifier.
+ * Sequence containing all interfaces with `expect` modifier.
  *
  * @return A sequence containing interfaces with the `expect` modifier.
  */
@@ -31,7 +31,7 @@ fun Sequence<KoInterfaceDeclaration>.withExpectModifier(): Sequence<KoInterfaceD
 fun Sequence<KoInterfaceDeclaration>.withoutExpectModifier(): Sequence<KoInterfaceDeclaration> = filterNot { it.hasExpectModifier() }
 
 /**
- * Sequence containing all interfaces that have `fun` modifier.
+ * Sequence containing all interfaces with `fun` modifier.
  *
  * @return A sequence containing interfaces with the `fun` modifier.
  */

@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.ext.sequence
 import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 
 /**
- * Sequence containing declarations that have any of the specified names.
+ * Sequence containing declarations with any of the specified names.
  *
  * @param name The name to include.
  * @param names The names to include.
@@ -25,7 +25,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withoutName(name: String, vararg names:
 }
 
 /**
- * Sequence containing declarations that have name with any of the specified prefix.
+ * Sequence containing declarations with name with any of the specified prefix.
  *
  * @param prefix The prefix to include.
  * @param prefixes The prefixes to include.
@@ -47,7 +47,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withoutNameStartingWith(prefix: String,
 }
 
 /**
- * Sequence containing declarations that have name with any of the specified suffix.
+ * Sequence containing declarations with name with any of the specified suffix.
  *
  * @param suffix The suffix to include.
  * @param suffixes The suffixes to include.
@@ -69,7 +69,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withoutNameEndingWith(suffix: String, v
 }
 
 /**
- * Sequence containing declarations that have name containing any of the specified String.
+ * Sequence containing declarations with name containing any of the specified String.
  *
  * @param text The text to include.
  * @param texts The texts to include.
@@ -91,7 +91,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withoutNameContaining(text: String, var
 }
 
 /**
- * Sequence containing declarations that have name matching any of the specified regex.
+ * Sequence containing declarations with name matching any of the specified regex.
  *
  * @param regex The regular expression to include.
  * @param regexes The regular expressions to include.

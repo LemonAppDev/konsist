@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.ext.declaration.representsTypeOf
 import kotlin.reflect.KClass
 
 /**
- * Sequence containing all parameters that have `vararg` modifier.
+ * Sequence containing all parameters with `vararg` modifier.
  *
  * @return A sequence containing parameters with the `vararg` modifier.
  */
@@ -19,7 +19,7 @@ fun Sequence<KoParameterDeclaration>.withVarargModifier(): Sequence<KoParameterD
 fun Sequence<KoParameterDeclaration>.withoutVarargModifier(): Sequence<KoParameterDeclaration> = filterNot { it.hasVarargModifier() }
 
 /**
- * Sequence containing all parameters that have `noinline` modifier.
+ * Sequence containing all parameters with `noinline` modifier.
  *
  * @return A sequence containing parameters with the `noinline` modifier.
  */
@@ -33,7 +33,7 @@ fun Sequence<KoParameterDeclaration>.withNoInlineModifier(): Sequence<KoParamete
 fun Sequence<KoParameterDeclaration>.withoutNoInlineModifier(): Sequence<KoParameterDeclaration> = filterNot { it.hasNoInlineModifier() }
 
 /**
- * Sequence containing all parameters that have `crossinline` modifier.
+ * Sequence containing all parameters with `crossinline` modifier.
  *
  * @return A sequence containing parameters with the `crossinline` modifier.
  */
@@ -48,7 +48,7 @@ fun Sequence<KoParameterDeclaration>.withoutCrossInlineModifier(): Sequence<KoPa
     filterNot { it.hasCrossInlineModifier() }
 
 /**
- * Sequence containing all parameters that have default value.
+ * Sequence containing all parameters with default value.
  *
  * @param values The default values to include.
  * @return A sequence containing parameters with the specified default values (or any default value if [values] is empty).
@@ -74,7 +74,7 @@ fun Sequence<KoParameterDeclaration>.withoutDefaultValue(vararg values: String):
 }
 
 /**
- * Sequence containing all parameters that have type.
+ * Sequence containing all parameters with type.
  *
  *  @param type The type to include.
  * @param types The types to include.
@@ -96,7 +96,7 @@ fun Sequence<KoParameterDeclaration>.withoutRepresentedType(type: String, vararg
 }
 
 /**
- * Sequence containing all parameters that have type of.
+ * Sequence containing all parameters with type of.
  *
  * @param types The Kotlin classes representing the types to include.
  * @return A sequence containing parameters with types matching the specified Kotlin classes.
@@ -124,7 +124,7 @@ fun Sequence<KoParameterDeclaration>.withoutRepresentedTypeOf(vararg types: KCla
 }
 
 /**
- * Sequence containing all parameters that have type of.
+ * Sequence containing all parameters with type of.
  *
  * @return A sequence containing parameters with types matching the specified reified type parameter.
  */

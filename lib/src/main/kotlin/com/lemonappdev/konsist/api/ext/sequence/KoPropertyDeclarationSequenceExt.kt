@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import kotlin.reflect.KClass
 
 /**
- * Sequence containing properties that have `var` modifier.
+ * Sequence containing properties with `var` modifier.
  *
  * @return A sequence containing properties with the `var` modifier.
  */
@@ -18,7 +18,7 @@ fun Sequence<KoPropertyDeclaration>.withVarModifier(): Sequence<KoPropertyDeclar
 fun Sequence<KoPropertyDeclaration>.withoutVarModifier(): Sequence<KoPropertyDeclaration> = filterNot { it.isVar }
 
 /**
- * Sequence containing properties that have `val` modifier.
+ * Sequence containing properties with `val` modifier.
  *
  * @return A sequence containing properties with the `val` modifier.
  */
@@ -32,7 +32,7 @@ fun Sequence<KoPropertyDeclaration>.withValModifier(): Sequence<KoPropertyDeclar
 fun Sequence<KoPropertyDeclaration>.withoutValModifier(): Sequence<KoPropertyDeclaration> = filterNot { it.isVal }
 
 /**
- * Sequence containing properties that have `lateinit` modifier.
+ * Sequence containing properties with `lateinit` modifier.
  *
  * @return A sequence containing properties with the `lateinit` modifier.
  */
@@ -46,7 +46,7 @@ fun Sequence<KoPropertyDeclaration>.withLateinitModifier(): Sequence<KoPropertyD
 fun Sequence<KoPropertyDeclaration>.withoutLateinitModifier(): Sequence<KoPropertyDeclaration> = filterNot { it.hasLateinitModifier() }
 
 /**
- * Sequence containing properties that have `override` modifier.
+ * Sequence containing properties with `override` modifier.
  *
  * @return A sequence containing properties with the `override` modifier.
  */
@@ -60,7 +60,7 @@ fun Sequence<KoPropertyDeclaration>.withOverrideModifier(): Sequence<KoPropertyD
 fun Sequence<KoPropertyDeclaration>.withoutOverrideModifier(): Sequence<KoPropertyDeclaration> = filterNot { it.hasOverrideModifier() }
 
 /**
- * Sequence containing properties that have `abstract` modifier.
+ * Sequence containing properties with `abstract` modifier.
  *
  * @return A sequence containing properties with the `abstract` modifier.
  */
@@ -74,7 +74,7 @@ fun Sequence<KoPropertyDeclaration>.withAbstractModifier(): Sequence<KoPropertyD
 fun Sequence<KoPropertyDeclaration>.withoutAbstractModifier(): Sequence<KoPropertyDeclaration> = filterNot { it.hasAbstractModifier() }
 
 /**
- * Sequence containing properties that have `open` modifier.
+ * Sequence containing properties with `open` modifier.
  *
  * @return A sequence containing properties with the `open` modifier.
  */
@@ -88,7 +88,7 @@ fun Sequence<KoPropertyDeclaration>.withOpenModifier(): Sequence<KoPropertyDecla
 fun Sequence<KoPropertyDeclaration>.withoutOpenModifier(): Sequence<KoPropertyDeclaration> = filterNot { it.hasOpenModifier() }
 
 /**
- * Sequence containing properties that have `final` modifier.
+ * Sequence containing properties with `final` modifier.
  *
  * @return A sequence containing properties with the `final` modifier.
  */
@@ -102,7 +102,7 @@ fun Sequence<KoPropertyDeclaration>.withFinalModifier(): Sequence<KoPropertyDecl
 fun Sequence<KoPropertyDeclaration>.withoutFinalModifier(): Sequence<KoPropertyDeclaration> = filterNot { it.hasFinalModifier() }
 
 /**
- * Sequence containing properties that have `actual` modifier.
+ * Sequence containing properties with `actual` modifier.
  *
  * @return A sequence containing properties with the `actual` modifier.
  */
@@ -116,7 +116,7 @@ fun Sequence<KoPropertyDeclaration>.withActualModifier(): Sequence<KoPropertyDec
 fun Sequence<KoPropertyDeclaration>.withoutActualModifier(): Sequence<KoPropertyDeclaration> = filterNot { it.hasActualModifier() }
 
 /**
- * Sequence containing properties that have `expect` modifier.
+ * Sequence containing properties with `expect` modifier.
  *
  * @return A sequence containing properties with the `expect` modifier.
  */
@@ -130,7 +130,7 @@ fun Sequence<KoPropertyDeclaration>.withExpectModifier(): Sequence<KoPropertyDec
 fun Sequence<KoPropertyDeclaration>.withoutExpectModifier(): Sequence<KoPropertyDeclaration> = filterNot { it.hasExpectModifier() }
 
 /**
- * Sequence containing properties that have `const` modifier.
+ * Sequence containing properties with `const` modifier.
  *
  * @return A sequence containing properties with the `const` modifier.
  */
@@ -144,9 +144,9 @@ fun Sequence<KoPropertyDeclaration>.withConstModifier(): Sequence<KoPropertyDecl
 fun Sequence<KoPropertyDeclaration>.withoutConstModifier(): Sequence<KoPropertyDeclaration> = filterNot { it.hasConstModifier() }
 
 /**
- * Sequence containing properties that have extension.
+ * Sequence containing properties with extension.
  *
- * @return A sequence containing properties that have extensions.
+ * @return A sequence containing properties with extensions.
  */
 fun Sequence<KoPropertyDeclaration>.withExtension(): Sequence<KoPropertyDeclaration> = filter { it.isExtension() }
 
@@ -158,7 +158,7 @@ fun Sequence<KoPropertyDeclaration>.withExtension(): Sequence<KoPropertyDeclarat
 fun Sequence<KoPropertyDeclaration>.withoutExtension(): Sequence<KoPropertyDeclaration> = filterNot { it.isExtension() }
 
 /**
- * Sequence containing properties that have named delegate.
+ * Sequence containing properties with named delegate.
  *
  * @param names The delegate names to include.
  * @return A sequence containing properties with the specified delegate name(s) (or any delegate if [names] is empty).
@@ -184,10 +184,10 @@ fun Sequence<KoPropertyDeclaration>.withoutDelegate(vararg names: String): Seque
 }
 
 /**
- * Sequence containing properties that have type.
+ * Sequence containing properties with type.
  *
  * @param types The type(s) to include.
- * @return A sequence containing properties that have the specified type (or any type if [types] is empty).
+ * @return A sequence containing properties with the specified type (or any type if [types] is empty).
  */
 fun Sequence<KoPropertyDeclaration>.withRepresentedType(vararg types: String): Sequence<KoPropertyDeclaration> = filter {
     when {
@@ -210,10 +210,10 @@ fun Sequence<KoPropertyDeclaration>.withoutRepresentedType(vararg types: String)
 }
 
 /**
- * Sequence containing properties that have type of.
+ * Sequence containing properties with type of.
  *
  * @param types The Kotlin class(es) representing the type(s) to include.
- * @return A sequence containing properties that have the type of the specified Kotlin class(es).
+ * @return A sequence containing properties with the type of the specified Kotlin class(es).
  */
 fun Sequence<KoPropertyDeclaration>.withRepresentedTypeOf(vararg types: KClass<*>): Sequence<KoPropertyDeclaration> = filter {
     types.any { kClass -> it.type?.name == kClass.simpleName }
@@ -230,9 +230,9 @@ fun Sequence<KoPropertyDeclaration>.withoutRepresentedTypeOf(vararg types: KClas
 }
 
 /**
- * Sequence containing properties that have type of.
+ * Sequence containing properties with type of.
  *
- * @return A sequence containing properties that have the specified type.
+ * @return A sequence containing properties with the specified type.
  */
 inline fun <reified T> Sequence<KoPropertyDeclaration>.withRepresentedTypeOf(): Sequence<KoPropertyDeclaration> =
     filter { T::class.simpleName == it.type?.name }

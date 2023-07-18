@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.ext.sequence
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 
 /**
- * Sequence containing all declarations that have delegate with given name.
+ * Sequence containing all declarations with delegate with given name.
  *
  * @param names The delegate names to include.
  * @return A sequence containing declarations with the specified delegate name(s) (or any delegate if [names] is empty).

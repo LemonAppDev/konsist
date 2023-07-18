@@ -11,7 +11,7 @@ import com.lemonappdev.konsist.api.ext.declaration.representsTypeOf
 import kotlin.reflect.KClass
 
 /**
- * Sequence containing declarations that have type of.
+ * Sequence containing declarations with type of.
  *
  * @param type The type to include.
  * @param types The types to include.
@@ -33,10 +33,10 @@ fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedType(type: String, 
 }
 
 /**
- * Sequence containing declarations that have type of.
+ * Sequence containing declarations with type of.
  *
  * @param types The Kotlin class(es) representing the type(s) to include.
- * @return A sequence containing declarations that have the type of the specified class(es).
+ * @return A sequence containing declarations with the type of the specified class(es).
  */
 fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.any { type ->
@@ -61,9 +61,9 @@ fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedTypeOf(vararg types
 }
 
 /**
- * Sequence containing declarations that have the type of.
+ * Sequence containing declarations with the type of.
  *
- * @return A sequence containing declarations that have the type of the specified class.
+ * @return A sequence containing declarations with the type of the specified class.
  */
 inline fun <reified T> Sequence<KoComplexDeclaration>.withRepresentedTypeOf(): Sequence<KoComplexDeclaration> = filter {
     it.representsTypeOf<T>()

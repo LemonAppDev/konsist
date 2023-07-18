@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.ext.sequence
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 
 /**
- * Sequence containing all objects that have `data` modifier.
+ * Sequence containing all objects with `data` modifier.
  *
  * @return A sequence containing objects with the `data` modifier.
  */
@@ -17,7 +17,7 @@ fun Sequence<KoObjectDeclaration>.withDataModifier(): Sequence<KoObjectDeclarati
 fun Sequence<KoObjectDeclaration>.withoutDataModifier(): Sequence<KoObjectDeclaration> = filterNot { it.hasDataModifier() }
 
 /**
- * Sequence containing all objects that have `companion` modifier.
+ * Sequence containing all objects with `companion` modifier.
  *
  * @return A sequence containing objects with the `companion` modifier.
  */
