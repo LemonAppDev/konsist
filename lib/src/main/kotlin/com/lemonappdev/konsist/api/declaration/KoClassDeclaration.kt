@@ -61,4 +61,4 @@ interface KoClassDeclaration :
      * @return `true` if the class has init block(s), `false` otherwise.
      */
     fun hasInitBlocks(): Boolean
-    }
+}
