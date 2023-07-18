@@ -4,7 +4,7 @@ interface KoPackageDeclarationProvider {
     /**
      * Package name of the declaration.
      */
-    val packagee: String
+    val packagee: String?
 
     /**
      * Whether the declaration resides in a package.

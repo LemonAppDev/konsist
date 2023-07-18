@@ -141,7 +141,7 @@ fun <T : KoKDocProvider> Sequence<T>.withoutValidKDoc(
  *
  * @return A sequence containing declarations with KDoc with any tag.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withKDocWithTags(): Sequence<T> =
+fun <T : KoKDocProvider> Sequence<T>.withKDocWithTags(): Sequence<T> =
     filter { it.kDoc?.tags?.isNotEmpty() ?: false }
 
 /**
@@ -191,7 +191,7 @@ fun <T : KoKDocProvider> Sequence<T>.withoutKDocWithAllTags(tag: KoKDocTag, vara
  * @param tags The KDoc tags to check for absence in the declarations' KDoc.
  * @return A sequence containing declarations without at least one of the specified KDoc tags.
  */
-fun <T : KoPsiDeclaration> Sequence<T>.withoutKDocWithSomeTags(tag: KoKDocTag, vararg tags: KoKDocTag): Sequence<T> = filter {
+fun <T : KoKDocProvider> Sequence<T>.withoutKDocWithSomeTags(tag: KoKDocTag, vararg tags: KoKDocTag): Sequence<T> = filter {
     it.kDoc?.hasTags(tag) == false && if (tags.isNotEmpty()) {
         tags.any { tag -> it.kDoc?.hasTags(tag) == false }
     } else {

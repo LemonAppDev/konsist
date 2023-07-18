@@ -4,20 +4,13 @@ import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-internal interface KoPackageDeclarationProviderCore : KoPackageDeclarationProvider {
+internal interface KoPackageDeclarationProviderCore : KoPackageDeclarationProvider, KoContainingFileProviderCore {
     val ktTypeParameterListOwner: KtTypeParameterListOwner
 
-    override val packagee: String
-        get() =
-            ktTypeParameterListOwner
-                .fqName
-                .toString()
-                .split(".")
-                .toMutableList()
-                .also { it.removeLast() }
-                .joinToString(separator = ".")
+    override val packagee: String?
+        get() = containingFile.packagee?.fullyQualifiedName
 
-    override fun resideInPackage(packagee: String): Boolean = LocationUtil.resideInLocation(packagee, this.packagee)
+    override fun resideInPackage(packagee: String): Boolean = this.packagee?.let { LocationUtil.resideInLocation(packagee, it) } ?: false
 
     override fun resideOutsidePackage(packagee: String): Boolean = !resideInPackage(packagee)
 }
