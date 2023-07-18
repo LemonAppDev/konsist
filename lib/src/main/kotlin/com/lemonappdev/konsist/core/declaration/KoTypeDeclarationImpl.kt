@@ -89,7 +89,7 @@ internal class KoTypeDeclarationImpl private constructor(
             "Map",
             "MutableMap",
             "Set",
-            "MutableSet"
+            "MutableSet",
         )
     }
 
