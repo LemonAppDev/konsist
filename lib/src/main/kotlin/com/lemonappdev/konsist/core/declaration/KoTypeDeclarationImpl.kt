@@ -49,7 +49,7 @@ internal class KoTypeDeclarationImpl private constructor(
         if (isAlias()) {
             false
         } else {
-            val parts = sourceType.split("<", ">")
+            val parts = sourceType.split("<", ">", " ", ",")
             parts.any { basicTypes.any { basicType -> basicType == it } } ||
                 parts.any { collections.any { collection -> collection == it } }
         }

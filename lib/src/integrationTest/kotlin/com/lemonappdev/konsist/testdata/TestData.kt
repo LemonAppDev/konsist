@@ -6,7 +6,21 @@ class SampleClass1
 
 class SampleClass2
 
-class SampleCollection<out E> : Collection<E> {
+class SampleCollection1<out E> : Collection<E> {
+    override val size: Int = 1
+
+    override fun isEmpty(): Boolean = false
+
+    override fun iterator(): Iterator<E> {
+        return this.iterator()
+    }
+
+    override fun containsAll(elements: Collection<@UnsafeVariance E>): Boolean = false
+
+    override fun contains(element: @UnsafeVariance E): Boolean = false
+}
+
+class SampleCollection2<out E, out V> : Collection<E> {
     override val size: Int = 1
 
     override fun isEmpty(): Boolean = false
