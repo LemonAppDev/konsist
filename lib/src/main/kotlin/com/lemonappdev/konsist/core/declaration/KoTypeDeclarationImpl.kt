@@ -53,6 +53,7 @@ internal class KoTypeDeclarationImpl private constructor(
         }
     }
 
+    // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
     private val basicTypes: List<String> by lazy {
         listOf(
             "Byte",
@@ -76,8 +77,20 @@ internal class KoTypeDeclarationImpl private constructor(
         )
     }
 
+    // Collections in Kotlin are described here: https://kotlinlang.org/docs/collections-overview.html#collection
     private val collections: List<String> by lazy {
-        listOf("List", "Set", "Map", "MutableList", "MutableSet", "MutableMap")
+        listOf(
+            "Iterable",
+            "MutableIterable",
+            "Collection",
+            "MutableCollection",
+            "List",
+            "MutableList",
+            "Map",
+            "MutableMap",
+            "Set",
+            "MutableSet"
+        )
     }
 
     override val fullyQualifiedName: String by lazy {
