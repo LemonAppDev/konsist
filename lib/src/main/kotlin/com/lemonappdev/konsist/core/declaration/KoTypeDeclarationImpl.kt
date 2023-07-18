@@ -46,7 +46,9 @@ internal class KoTypeDeclarationImpl private constructor(
     override val isNullable: Boolean by lazy { ktTypeReference.text.last() == '?' }
 
     override val isGenericType: Boolean by lazy {
-        sourceType.contains("<") && sourceType.contains(">")
+        val regex = "\\w+<[^<>]+>".toRegex()
+
+        regex.matches(sourceType)
     }
 
     override val fullyQualifiedName: String by lazy {
