@@ -24,12 +24,8 @@ internal abstract class KoDeclarationImpl(
         }
     }
 
-    override val packagee: String by lazy {
-        fullyQualifiedName
-            .split(".")
-            .toMutableList()
-            .also { it.removeLast() }
-            .joinToString(separator = ".")
+    override val packagee: String? by lazy {
+        containingFile.packagee?.qualifiedName
     }
 
     override val annotations: List<KoAnnotationDeclaration> by lazy {
@@ -101,7 +97,7 @@ internal abstract class KoDeclarationImpl(
         else -> modifiers.containsAll(koModifiers.toList())
     }
 
-    override fun resideInPackage(packagee: String): Boolean = LocationUtil.resideInLocation(packagee, this.packagee)
+    override fun resideInPackage(packagee: String): Boolean = this.packagee?.let { LocationUtil.resideInLocation(packagee, it) } ?: false
 
     override fun resideOutsidePackage(packagee: String): Boolean = !resideInPackage(packagee)
 }

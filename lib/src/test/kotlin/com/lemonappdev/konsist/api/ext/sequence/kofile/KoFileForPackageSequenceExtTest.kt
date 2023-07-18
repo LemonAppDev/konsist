@@ -11,19 +11,18 @@ import org.junit.jupiter.api.Test
 @Suppress("detekt.LargeClass")
 class KoFileForPackageSequenceExtTest {
     @Test
-    fun `withPackage(String) returns file with given package name`() {
+    fun `withPackage() returns file with any package`() {
         // given
-        val packagee = "SamplePackage"
         val file1: KoFileImpl = mockk {
-            every { hasPackage(packagee) } returns true
+            every { packagee } returns mockk()
         }
         val file2: KoFileImpl = mockk {
-            every { hasPackage(packagee) } returns false
+            every { packagee } returns null
         }
         val files = sequenceOf(file1, file2)
 
         // when
-        val sut = files.withPackage(packagee)
+        val sut = files.withPackage()
 
         // then
         sut.toList() shouldBeEqualTo listOf(file1)
@@ -56,19 +55,18 @@ class KoFileForPackageSequenceExtTest {
     }
 
     @Test
-    fun `withoutPackage(String) returns file without given package name`() {
+    fun `withoutPackage() returns file without given package name`() {
         // given
-        val packagee = "SamplePackage"
         val file1: KoFileImpl = mockk {
-            every { hasPackage(packagee) } returns true
+            every { packagee } returns mockk()
         }
         val file2: KoFileImpl = mockk {
-            every { hasPackage(packagee) } returns false
+            every { packagee } returns null
         }
         val files = sequenceOf(file1, file2)
 
         // when
-        val sut = files.withoutPackage(packagee)
+        val sut = files.withoutPackage()
 
         // then
         sut.toList() shouldBeEqualTo listOf(file2)

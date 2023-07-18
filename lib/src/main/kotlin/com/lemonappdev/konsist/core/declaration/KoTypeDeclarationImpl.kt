@@ -95,6 +95,12 @@ internal class KoTypeDeclarationImpl private constructor(
         )
     }
 
+    override val isGenericType: Boolean by lazy {
+        val regex = "\\w+<[^<>]+>".toRegex()
+
+        regex.matches(sourceType)
+    }
+
     override val fullyQualifiedName: String by lazy {
         file
             .imports
