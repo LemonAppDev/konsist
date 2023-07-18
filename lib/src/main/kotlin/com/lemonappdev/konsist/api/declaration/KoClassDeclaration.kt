@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoHasTestProvider
+import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
@@ -43,22 +44,5 @@ interface KoClassDeclaration :
     KoParentInterfaceProvider,
     KoSecondaryConstructorsProvider,
     KoConstructorsProvider,
-    KoHasTestProvider {
-
-    /**
-     * The init blocks of the class.
-     */
-    val initBlocks: List<KoInitBlockDeclaration>?
-
-    /**
-     * The number of init blocks in class.
-     */
-    val numInitBlocks: Int
-
-    /**
-     * Whatever class has init blocks.
-     *
-     * @return `true` if the class has init block(s), `false` otherwise.
-     */
-    fun hasInitBlocks(): Boolean
-}
+    KoHasTestProvider,
+    KoInitBlockProvider

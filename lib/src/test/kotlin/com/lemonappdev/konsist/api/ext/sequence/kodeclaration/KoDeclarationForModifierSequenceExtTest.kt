@@ -9,7 +9,6 @@ import com.lemonappdev.konsist.api.ext.sequence.withoutAllModifiers
 import com.lemonappdev.konsist.api.ext.sequence.withoutModifiers
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.ext.sequence.withoutSomeModifiers
-import com.lemonappdev.konsist.core.declaration.KoDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -141,10 +140,10 @@ class KoDeclarationForModifierSequenceExtTest {
     fun `withoutSomeModifiers(String) returns declaration with given modifier`() {
         // given
         val modifier = PROTECTED
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoModifierProvider = mockk {
             every { hasModifiers(modifier) } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoModifierProvider = mockk {
             every { hasModifiers(modifier) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -161,15 +160,15 @@ class KoDeclarationForModifierSequenceExtTest {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoModifierProvider = mockk {
             every { hasModifiers(modifier1) } returns true
             every { hasModifiers(modifier2) } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoModifierProvider = mockk {
             every { hasModifiers(modifier1) } returns false
             every { hasModifiers(modifier2) } returns true
         }
-        val declaration3: KoDeclarationImpl = mockk {
+        val declaration3: KoModifierProvider = mockk {
             every { hasModifiers(modifier1) } returns false
             every { hasModifiers(modifier2) } returns false
         }

@@ -37,10 +37,10 @@ class KoParametrizedDeclarationForParameterSequenceExtTest {
     fun `withoutParameters() returns parametrized declaration with no parameter`() {
         // given
         val parameter: KoParameterDeclaration = mockk()
-        val parametrizedDeclaration1: KoParametrizedDeclarationImpl = mockk {
+        val parametrizedDeclaration1: KoParametersProvider = mockk {
             every { parameters } returns listOf(parameter)
         }
-        val parametrizedDeclaration2: KoParametrizedDeclarationImpl = mockk {
+        val parametrizedDeclaration2: KoParametersProvider = mockk {
             every { parameters } returns emptyList()
         }
         val parametrizedDeclarations = sequenceOf(parametrizedDeclaration1, parametrizedDeclaration2)

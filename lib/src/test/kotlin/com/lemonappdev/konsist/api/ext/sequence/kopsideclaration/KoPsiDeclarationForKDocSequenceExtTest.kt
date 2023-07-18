@@ -99,13 +99,13 @@ class KoPsiDeclarationForKDocSequenceExtTest {
         val kDoc1: KoKDocDeclarationImpl = mockk {
             every { tags } returns listOf(tag)
         }
-        val psiDeclaration1: KoPsiDeclarationImpl = mockk {
+        val psiDeclaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { tags } returns emptyList()
         }
-        val psiDeclaration2: KoPsiDeclarationImpl = mockk {
+        val psiDeclaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
         val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
@@ -124,13 +124,13 @@ class KoPsiDeclarationForKDocSequenceExtTest {
         val kDoc1: KoKDocDeclarationImpl = mockk {
             every { tags } returns listOf(tag)
         }
-        val psiDeclaration1: KoPsiDeclarationImpl = mockk {
+        val psiDeclaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { tags } returns emptyList()
         }
-        val psiDeclaration2: KoPsiDeclarationImpl = mockk {
+        val psiDeclaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
         val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
@@ -311,13 +311,13 @@ class KoPsiDeclarationForKDocSequenceExtTest {
         val kDoc1: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag) } returns true
         }
-        val psiDeclaration1: KoPsiDeclarationImpl = mockk {
+        val psiDeclaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag) } returns false
         }
-        val psiDeclaration2: KoPsiDeclarationImpl = mockk {
+        val psiDeclaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
         val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
@@ -338,21 +338,21 @@ class KoPsiDeclarationForKDocSequenceExtTest {
             every { hasTags(tag1) } returns true
             every { hasTags(tag2) } returns true
         }
-        val psiDeclaration1: KoPsiDeclarationImpl = mockk {
+        val psiDeclaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag1) } returns true
             every { hasTags(tag2) } returns false
         }
-        val psiDeclaration2: KoPsiDeclarationImpl = mockk {
+        val psiDeclaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
         val kDoc3: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag1) } returns false
             every { hasTags(tag2) } returns false
         }
-        val psiDeclaration3: KoPsiDeclarationImpl = mockk {
+        val psiDeclaration3: KoKDocProvider = mockk {
             every { kDoc } returns kDoc3
         }
         val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2, psiDeclaration3)

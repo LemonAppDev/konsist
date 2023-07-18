@@ -12,7 +12,6 @@ import com.lemonappdev.konsist.api.ext.sequence.withoutAnnotationOf
 import com.lemonappdev.konsist.api.ext.sequence.withoutAnnotations
 import com.lemonappdev.konsist.api.ext.sequence.withoutSomeAnnotations
 import com.lemonappdev.konsist.api.ext.sequence.withoutSomeAnnotationsOf
-import com.lemonappdev.konsist.api.ext.sequence.withoutAnnotationsOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleAnnotation
@@ -149,10 +148,10 @@ class KoDeclarationForAnnotationSequenceExtTest {
     fun `withoutSomeAnnotations(String) returns declaration without given annotation`() {
         // given
         val annotation = "SampleAnnotation"
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoAnnotationDeclarationProvider = mockk {
             every { hasAnnotations(annotation) } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoAnnotationDeclarationProvider = mockk {
             every { hasAnnotations(annotation) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -169,15 +168,15 @@ class KoDeclarationForAnnotationSequenceExtTest {
         // given
         val annotation1 = "SampleAnnotation1"
         val annotation2 = "SampleAnnotation2"
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoAnnotationDeclarationProvider = mockk {
             every { hasAnnotations(annotation1) } returns true
             every { hasAnnotations(annotation2) } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoAnnotationDeclarationProvider = mockk {
             every { hasAnnotations(annotation1) } returns false
             every { hasAnnotations(annotation2) } returns true
         }
-        val declaration3: KoDeclarationImpl = mockk {
+        val declaration3: KoAnnotationDeclarationProvider = mockk {
             every { hasAnnotations(annotation1) } returns false
             every { hasAnnotations(annotation2) } returns false
         }
@@ -289,15 +288,15 @@ class KoDeclarationForAnnotationSequenceExtTest {
     @Test
     fun `withoutSomeAnnotationsOf(KClass) returns declarations without at least one of given annotations`() {
         // given
-        val declaration1: KoDeclarationImpl = mockk {
+        val declaration1: KoAnnotationDeclarationProvider = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
             every { hasAnnotationsOf(SampleAnnotation2::class) } returns true
         }
-        val declaration2: KoDeclarationImpl = mockk {
+        val declaration2: KoAnnotationDeclarationProvider = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class) } returns true
             every { hasAnnotationsOf(SampleAnnotation2::class) } returns false
         }
-        val declaration3: KoDeclarationImpl = mockk {
+        val declaration3: KoAnnotationDeclarationProvider = mockk {
             every { hasAnnotationsOf(SampleAnnotation1::class) } returns false
             every { hasAnnotationsOf(SampleAnnotation2::class) } returns false
         }
