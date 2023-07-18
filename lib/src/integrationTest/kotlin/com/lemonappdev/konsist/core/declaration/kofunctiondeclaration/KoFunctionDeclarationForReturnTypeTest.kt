@@ -17,7 +17,7 @@ class KoFunctionDeclarationForReturnTypeTest {
         assertSoftly(sut) {
             hasReturnType() shouldBeEqualTo true
             returnType?.sourceType shouldBeEqualTo "SampleType"
-            returnType?.aliasType shouldBeEqualTo ""
+            returnType?.aliasType shouldBeEqualTo null
             returnType?.name shouldBeEqualTo "SampleType"
             returnType?.isAlias() shouldBeEqualTo false
             returnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
@@ -52,7 +52,7 @@ class KoFunctionDeclarationForReturnTypeTest {
         assertSoftly(sut) {
             hasReturnType() shouldBeEqualTo true
             returnType?.sourceType shouldBeEqualTo "SampleType"
-            returnType?.aliasType shouldBeEqualTo ""
+            returnType?.aliasType shouldBeEqualTo null
             returnType?.name shouldBeEqualTo "SampleType"
             returnType?.isAlias() shouldBeEqualTo false
             returnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"

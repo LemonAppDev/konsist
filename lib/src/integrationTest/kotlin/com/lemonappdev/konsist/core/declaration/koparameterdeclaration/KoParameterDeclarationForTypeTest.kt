@@ -19,7 +19,7 @@ class KoParameterDeclarationForTypeTest {
         // then
         assertSoftly(sut?.type) {
             it?.sourceType shouldBeEqualTo "SampleType"
-            it?.aliasType shouldBeEqualTo ""
+            it?.aliasType shouldBeEqualTo null
             it?.name shouldBeEqualTo "SampleType"
             it?.isAlias() shouldBeEqualTo false
             it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
