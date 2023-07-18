@@ -20,9 +20,9 @@ interface KoPropertyDeclaration : KoDeclaration {
     val delegateName: String?
 
     /**
-     * Property type.
+     * Property explicit type.
      */
-    val type: KoTypeDeclaration?
+    val explicitType: KoTypeDeclaration?
 
     /**
      * Receiver type of the property.
@@ -110,10 +110,10 @@ interface KoPropertyDeclaration : KoDeclaration {
     fun hasDelegate(name: String? = null): Boolean
 
     /**
-     * Whatever property has a type.
+     * Whatever property has an explicit type.
      *
      * @param type the type to check for (optional).
      * @return `true` if the property has the specified type (or any type if [type] is `null`), `false` otherwise.
      */
-    fun hasType(type: String? = null): Boolean
+    fun hasExplicitType(type: String? = null): Boolean
 }

@@ -9,14 +9,21 @@ import com.lemonappdev.konsist.core.declaration.provider.KoLocalPropertyProvider
  */
 interface KoFunctionDeclaration : KoParametrizedDeclaration, KoLocalClassProvider, KoLocalFunctionProvider, KoLocalPropertyProvider {
     /**
-     * Return type of the function.
+     * Explicit return type of the function.
      */
-    val returnType: KoTypeDeclaration?
+    val explicitReturnType: KoTypeDeclaration?
 
     /**
      * Receiver type of the function.
      */
     val receiverType: KoTypeDeclaration?
+
+    /**
+     * Whether this function has implementation.
+     *
+     * @return `true` if the function has the implementation, `false` otherwise.
+     */
+    fun hasImplementation(): Boolean
 
     /**
      * Whether this function has operator modifier.
@@ -119,9 +126,9 @@ interface KoFunctionDeclaration : KoParametrizedDeclaration, KoLocalClassProvide
     fun hasReceiverType(name: String? = null): Boolean
 
     /**
-     * Whether this function has a return type.
+     * Whether this function has an explicit return type.
      *
-     * @return `true` if the function has the return type, `false` otherwise.
+     * @return `true` if the function has the explicit return type, `false` otherwise.
      */
-    fun hasReturnType(): Boolean
+    fun hasExplicitReturnType(): Boolean
 }

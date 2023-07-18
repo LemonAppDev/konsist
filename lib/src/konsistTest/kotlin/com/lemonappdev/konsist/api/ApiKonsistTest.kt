@@ -15,7 +15,7 @@ class ApiKonsistTest {
     fun `every api declaration has explicit return type`() {
         apiPackageScope
             .functions(includeNested = true)
-            .assert { it.hasReturnType() }
+            .assert { it.hasExplicitReturnType() }
     }
 
     @Test

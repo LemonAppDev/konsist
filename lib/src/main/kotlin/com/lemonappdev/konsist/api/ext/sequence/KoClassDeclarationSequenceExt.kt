@@ -549,3 +549,17 @@ fun Sequence<KoClassDeclaration>.withParentClassOf(vararg names: KClass<*>): Seq
 fun Sequence<KoClassDeclaration>.withoutParentClassOf(vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
     names.none { kClass -> it.hasParentClass(kClass.simpleName) }
 }
+
+/**
+ * Sequence containing all classes that have init block(s).
+ *
+ * @return A sequence containing classes with the init block(s).
+ */
+fun Sequence<KoClassDeclaration>.withInitBlocks(): Sequence<KoClassDeclaration> = filter { it.hasInitBlocks() }
+
+/**
+ * Sequence containing all classes that don't have init block(s).
+ *
+ * @return A sequence containing classes without the init block(s).
+ */
+fun Sequence<KoClassDeclaration>.withoutInitBlocks(): Sequence<KoClassDeclaration> = filterNot { it.hasInitBlocks() }
