@@ -7,6 +7,6 @@ internal interface KoAliasProviderCore :
     KoAliasProvider,
     KoNameProviderCore {
     val ktImportDirective: KtImportDirective
-    override val alias: String
-        get() = ktImportDirective.alias?.name ?: name
+    override val alias: String?
+        get() = ktImportDirective.alias?.name
 }

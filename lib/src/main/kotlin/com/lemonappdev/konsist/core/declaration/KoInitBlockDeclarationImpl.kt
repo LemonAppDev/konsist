@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
@@ -16,7 +15,7 @@ internal class KoInitBlockDeclarationImpl private constructor(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoDeclaration> = KoDeclarationCoreProviderUtil
+    ): Sequence<KoBaseDeclaration> = KoDeclarationCoreProviderUtil
         .getKoDeclarations(ktAnonymousInitializer, includeNested, includeLocal, this)
 
     internal companion object {

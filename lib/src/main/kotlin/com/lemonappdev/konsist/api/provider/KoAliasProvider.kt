@@ -4,5 +4,5 @@ interface KoAliasProvider {
     /**
      * Alias of the declaration.
      */
-    val alias: String
+    val alias: String?
 }
