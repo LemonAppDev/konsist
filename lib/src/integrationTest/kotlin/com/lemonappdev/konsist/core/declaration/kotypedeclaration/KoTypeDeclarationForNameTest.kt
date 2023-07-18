@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource
 class KoTypeDeclarationForNameTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `fully-qualified-name`(
+    fun `type-name`(
         fileName: String,
         value: String,
     ) {

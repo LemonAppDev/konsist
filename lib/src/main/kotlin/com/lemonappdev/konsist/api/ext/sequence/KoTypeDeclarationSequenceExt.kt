@@ -67,7 +67,7 @@ fun Sequence<KoTypeDeclaration>.withoutSourceType(type: String, vararg types: St
  * @return A sequence containing types that have an import alias matching the specified type.
  */
 inline fun <reified T> Sequence<KoTypeDeclaration>.withImportAliasOf(): Sequence<KoTypeDeclaration> =
-    filter { it.isImportAlias() && it.sourceType == T::class.simpleName }
+    filter { it.isAlias() && it.sourceType == T::class.simpleName }
 
 /**
  * Sequence containing types that don't have import alias of.
@@ -75,7 +75,7 @@ inline fun <reified T> Sequence<KoTypeDeclaration>.withImportAliasOf(): Sequence
  * @return A sequence containing types that don't have an import alias matching the specified type.
  */
 inline fun <reified T> Sequence<KoTypeDeclaration>.withoutImportAliasOf(): Sequence<KoTypeDeclaration> =
-    filterNot { it.isImportAlias() && it.sourceType == T::class.simpleName }
+    filterNot { it.isAlias() && it.sourceType == T::class.simpleName }
 
 /**
  * Sequence containing types that have import alias of.
@@ -84,7 +84,7 @@ inline fun <reified T> Sequence<KoTypeDeclaration>.withoutImportAliasOf(): Seque
  * @return A sequence containing types that have the import alias matching any of the specified types.
  */
 fun Sequence<KoTypeDeclaration>.withImportAliasOf(vararg names: KClass<*>): Sequence<KoTypeDeclaration> = filter {
-    names.any { kClass -> it.isImportAlias() && it.sourceType == kClass.simpleName }
+    names.any { kClass -> it.isAlias() && it.sourceType == kClass.simpleName }
 }
 
 /**
@@ -94,7 +94,7 @@ fun Sequence<KoTypeDeclaration>.withImportAliasOf(vararg names: KClass<*>): Sequ
  * @return A sequence containing types that don't have the import alias matching any of the specified types.
  */
 fun Sequence<KoTypeDeclaration>.withoutImportAliasOf(vararg names: KClass<*>): Sequence<KoTypeDeclaration> = filter {
-    names.none { kClass -> it.isImportAlias() && it.sourceType == kClass.simpleName }
+    names.none { kClass -> it.isAlias() && it.sourceType == kClass.simpleName }
 }
 
 /**
@@ -106,8 +106,8 @@ fun Sequence<KoTypeDeclaration>.withoutImportAliasOf(vararg names: KClass<*>): S
  */
 fun Sequence<KoTypeDeclaration>.withImportAlias(vararg names: String): Sequence<KoTypeDeclaration> = filter {
     when {
-        names.isEmpty() -> it.isImportAlias()
-        else -> names.any { name -> it.importAliasName == name }
+        names.isEmpty() -> it.isAlias()
+        else -> names.any { name -> it.aliasType == name }
     }
 }
 
@@ -120,8 +120,8 @@ fun Sequence<KoTypeDeclaration>.withImportAlias(vararg names: String): Sequence<
  */
 fun Sequence<KoTypeDeclaration>.withoutImportAlias(vararg names: String): Sequence<KoTypeDeclaration> = filter {
     when {
-        names.isEmpty() -> !it.isImportAlias()
-        else -> names.none { name -> it.importAliasName == name }
+        names.isEmpty() -> !it.isAlias()
+        else -> names.none { name -> it.aliasType == name }
     }
 }
 

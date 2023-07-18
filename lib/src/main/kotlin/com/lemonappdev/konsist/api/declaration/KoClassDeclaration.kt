@@ -20,7 +20,7 @@ interface KoClassDeclaration : KoComplexDeclaration {
     val parentClass: KoParentDeclaration?
 
     /**
-     * The parent interfaces of the class.
+     * The primary constructor of the class.
      */
     val primaryConstructor: KoPrimaryConstructorDeclaration?
 
@@ -33,6 +33,16 @@ interface KoClassDeclaration : KoComplexDeclaration {
      * The all primary and secondary constructors of the class.
      */
     val allConstructors: List<KoConstructorDeclaration>
+
+    /**
+     * The init blocks of the class.
+     */
+    val initBlocks: List<KoInitBlockDeclaration>?
+
+    /**
+     * The number of init blocks in class.
+     */
+    val numInitBlocks: Int
 
     /**
      * Whatever class has `enum` modifier.
@@ -149,6 +159,13 @@ interface KoClassDeclaration : KoComplexDeclaration {
      * @return `true` if the class has parents with the specified names (or any parent if [names] is empty), `false` otherwise.
      */
     fun hasParents(vararg names: String): Boolean
+
+    /**
+     * Whatever class has init blocks.
+     *
+     * @return `true` if the class has init block(s), `false` otherwise.
+     */
+    fun hasInitBlocks(): Boolean
 
     /**
      * Whatever class has a Test.

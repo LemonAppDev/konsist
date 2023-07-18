@@ -27,7 +27,7 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
             ?.removeSuffix(" ")
     }
 
-    override val type: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
+    override val explicitType: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
 
     override val receiverType: KoTypeDeclaration? by lazy { ReceiverUtil.getReceiverType(getTypeReferences(), isExtension(), this) }
 
@@ -60,9 +60,9 @@ internal class KoPropertyDeclarationImpl private constructor(private val ktPrope
         else -> delegateName == name
     }
 
-    override fun hasType(type: String?): Boolean = when (type) {
-        null -> this.type != null
-        else -> this.type?.name == type
+    override fun hasExplicitType(type: String?): Boolean = when (type) {
+        null -> this.explicitType != null
+        else -> this.explicitType?.name == type
     }
 
     internal companion object {
