@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kotypedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.testdata.SampleType
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -42,7 +41,7 @@ class KoTypeDeclarationForIsKotlinTypeTest {
             arguments("sample-collection-with-two-arguments-and-one-is-kotlin-type", true),
             arguments("sample-collection-with-two-non-kotlin-type-arguments", false),
             arguments("sample-collection-with-in-keyword-and-kotlin-type", true),
-            arguments("sample-collection-with-in-keyword-and-non-kotlin-type", false)
+            arguments("sample-collection-with-in-keyword-and-non-kotlin-type", false),
         )
     }
 }
