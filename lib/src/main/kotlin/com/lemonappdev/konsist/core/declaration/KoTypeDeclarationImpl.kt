@@ -51,7 +51,7 @@ internal class KoTypeDeclarationImpl private constructor(
         } else {
             val parts = sourceType.split("<", ">")
             parts.any { basicTypes.any { basicType -> basicType == it } } ||
-                    parts.any { collections.any { collection -> collection == it } }
+                parts.any { collections.any { collection -> collection == it } }
         }
     }
 
