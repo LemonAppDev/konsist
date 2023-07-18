@@ -17,7 +17,7 @@ class KoFunctionDeclarationForReturnTypeTest {
         assertSoftly(sut) {
             hasExplicitReturnType() shouldBeEqualTo true
             explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
-            explicitReturnType?.aliasType shouldBeEqualTonull
+            explicitReturnType?.aliasType shouldBeEqualTo null
             explicitReturnType?.name shouldBeEqualTo "SampleType"
             explicitReturnType?.isAlias() shouldBeEqualTo false
             explicitReturnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
