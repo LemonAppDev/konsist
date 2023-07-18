@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
-import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
+import com.lemonappdev.konsist.api.provider.KoExplicitReturnTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoLocalFunctionProvider
@@ -30,7 +30,7 @@ interface KoFunctionDeclaration :
     KoLocalFunctionProvider,
     KoLocalPropertyProvider,
     KoExtensionProvider,
-    KoReturnTypeProvider,
+    KoExplicitReturnTypeProvider,
     KoReceiverTypeProvider {
     /**
      * Whether this function has implementation.
