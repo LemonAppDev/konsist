@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProv
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import org.jetbrains.kotlin.psi.KtTypeAlias
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
@@ -23,7 +24,8 @@ internal class KoTypeAliasDeclarationImpl private constructor(
     KoPackageDeclarationProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoModifierProviderCore,
-    KoTopLevelProviderCore {
+    KoTopLevelProviderCore,
+    KoTypeProviderCore {
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktTypeAlias
 

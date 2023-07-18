@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.KoTypeProvider
 
 /**
  * Represents a Kotlin type alias declaration.
@@ -17,9 +18,5 @@ interface KoTypeAliasDeclaration :
     KoDeclarationFullyQualifiedNameProvider,
     KoModifierProvider,
     KoTopLevelProvider,
-    KoParentProvider {
-    /**
-     * Type alias type.
-     */
-    val type: KoTypeDeclaration
-}
+    KoParentProvider,
+    KoTypeProvider

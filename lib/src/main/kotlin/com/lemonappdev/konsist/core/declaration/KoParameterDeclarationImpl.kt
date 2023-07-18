@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.core.provider.KoDefaultValueProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -26,7 +27,8 @@ internal class KoParameterDeclarationImpl private constructor(
     KoDeclarationFullyQualifiedNameProviderCore,
     KoDefaultValueProviderCore,
     KoModifierProviderCore,
-    KoTopLevelProviderCore {
+    KoTopLevelProviderCore,
+    KoTypeProviderCore {
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktParameter
 

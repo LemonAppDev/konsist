@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.KoTypeProvider
 
 /**
  * Represents a Kotlin parameter declaration.
@@ -19,11 +20,8 @@ interface KoParameterDeclaration :
     KoModifierProvider,
     KoDefaultValueProvider,
     KoTopLevelProvider,
-    KoParentProvider {
-    /**
-     * Type of the parameter.
-     */
-    val type: KoTypeDeclaration
+    KoParentProvider,
+    KoTypeProvider {
 
     /**
      * Whether the parameter type represents the specified type.
