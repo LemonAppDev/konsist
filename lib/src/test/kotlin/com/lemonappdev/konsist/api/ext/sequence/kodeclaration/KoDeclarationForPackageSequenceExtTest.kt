@@ -10,6 +10,25 @@ import org.junit.jupiter.api.Test
 
 class KoDeclarationForPackageSequenceExtTest {
     @Test
+    fun `withPackage() returns declaration reside in any package`() {
+        // given
+        val samplePackage = "com.sample.samplepackage"
+        val declaration1: KoDeclarationImpl = mockk {
+            every { packagee } returns samplePackage
+        }
+        val declaration2: KoDeclarationImpl = mockk {
+            every { packagee } returns null
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withPackage()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withPackage(String) returns declaration with given package`() {
         // given
         val packagee = "com.sample.samplepackage"
@@ -52,6 +71,25 @@ class KoDeclarationForPackageSequenceExtTest {
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withoutPackage() returns declaration reside in any package`() {
+        // given
+        val samplePackage = "com.sample.samplepackage"
+        val declaration1: KoDeclarationImpl = mockk {
+            every { packagee } returns samplePackage
+        }
+        val declaration2: KoDeclarationImpl = mockk {
+            every { packagee } returns null
+        }
+        val declarations = sequenceOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutPackage()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

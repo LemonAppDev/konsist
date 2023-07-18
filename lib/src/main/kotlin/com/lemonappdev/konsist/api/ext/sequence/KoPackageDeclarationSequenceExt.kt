@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.ext.sequence
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 
 /**
- * Sequence containing all packages that have the qualified name.
+ * Sequence containing all packages with any of the specified qualified name.
  *
  * @param fullyQualifiedName The name to include.
  * @param fullyQualifiedNames The names to include.
@@ -18,7 +18,7 @@ fun Sequence<KoPackageDeclaration>.withQualifiedName(
     }
 
 /**
- * Sequence containing all packages that don't have the qualified name.
+ * Sequence containing all packages without any of the specified qualified name.
  *
  * @param fullyQualifiedName The name to exclude.
  * @param fullyQualifiedNames The names to exclude.
@@ -32,14 +32,14 @@ fun Sequence<KoPackageDeclaration>.withoutQualifiedName(
 }
 
 /**
- * Sequence containing all packages that have a matching file path.
+ * Sequence containing all packages with a matching file path.
  *
  * @return A sequence containing packages with a matching file path.
  */
 fun Sequence<KoPackageDeclaration>.withMatchingFilePath(): Sequence<KoPackageDeclaration> = filter { it.hasMatchingFilePath }
 
 /**
- * Sequence containing all packages that don't have a matching file path.
+ * Sequence containing all packages without a matching file path.
  *
  * @return A sequence containing packages without a matching file path.
  */

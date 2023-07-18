@@ -76,7 +76,7 @@ inline fun <reified T> Sequence<KoAnnotationDeclaration>.withoutRepresentedTypeO
     filterNot { it.representsTypeOf<T>() }
 
 /**
- * Sequence containing all annotations that have the name.
+ * Sequence containing all annotations with the name.
  *
  * @param name The name to include.
  * @param names The names to include.
@@ -87,7 +87,7 @@ fun Sequence<KoAnnotationDeclaration>.withName(name: String, vararg names: Strin
 }
 
 /**
- * Sequence containing all annotations that don't have the name.
+ * Sequence containing all annotations without name.
  *
  * @param name The name to exclude.
  * @param names The names to exclude.
@@ -98,7 +98,7 @@ fun Sequence<KoAnnotationDeclaration>.withoutName(name: String, vararg names: St
 }
 
 /**
- * Sequence containing all annotations that have the fully qualified name.
+ * Sequence containing all annotations with the fully qualified name.
  *
  * @param name The name to include.
  * @param names The names to include.
@@ -110,7 +110,7 @@ fun Sequence<KoAnnotationDeclaration>.withFullyQualifiedClassName(name: String, 
     }
 
 /**
- * Sequence containing all annotations that don't have the fully qualified name.
+ * Sequence containing all annotations without fully qualified name.
  *
  * @param name The name to exclude.
  * @param names The names to exclude.

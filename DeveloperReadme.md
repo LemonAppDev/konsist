@@ -71,44 +71,67 @@ flowchart LR
 
 If we create extensions with `vararg` for a property in a declaration class we must check its return type.
 
-## Return type
+## Singular return type
 
-### Singular return type
-
-create two extensions:
+We have two options: this type always exist (like name or path) or is optional (like package or parent class).
+In both cases create two extensions:
 
 - with prefix 'with' and the name of the property in the singular number
     - Such extension filters all objects in which this property complies with one of the given conditions
 - with prefix 'without' and the name of the property in the singular number
     - Such extension filters all objects in which this property not complies with any of the given conditions
 
+### Type always exist
+E.g. In `KoClassDeclaration`, the `name` property returns `String` (singular - it's one object),
+so we create two extensions:
+- `withName(name: String, vararg names: String)`
+- `withoutName(name: String, vararg names: String)`
+
+### Type is optional
 E.g. In `KoClassDeclaration`, the `parentClass` property returns `KoParentDeclaration` (singular - it's one object), 
 so we create two extensions:
     - `withParentClass(vararg names: String)`
     - `withoutParentClass(vararg names: String)`
 
-### Return type is a list of objects
+The difference is that in the first case we force passing the parameter, in the second it is optional.
 
-Create three extensions:
-    - with prefix 'with' and the name of the property in the plural number
-        - Such extension filters all objects in which this property complies with all the given conditions
-    - with prefix 'withSome' and the name of the property in the plural number
-        - Such extension filters all objects in which this property complies with at least one of the given conditions
-    - with prefix 'without' and the name of the property in the plural number
-        - Such extension filters all objects in which this property not complies with any of the given conditions
+## Return type is a list of objects
+
+Create six extensions:
+- with prefix 'with' and the name of the property in the plural number
+  - Such extension filters all objects in which this property complies with any condition
+- with prefix 'withAll' and the name of the property in the plural number
+  - Such extension filters all objects in which this property complies with all the given conditions
+- with prefix 'withSome' and the name of the property in the plural number
+  - Such extension filters all objects in which this property complies with at least one of the given conditions
+- with prefix 'without' and the name of the property in the plural number
+    - Such extension filters all objects in which this property not complies with any condition
+- with prefix 'withoutAll' and the name of the property in the plural number
+  - Such extension filters all objects in which this property not complies with all the given conditions
+- with prefix 'withoutSome' and the name of the property in the plural number
+    - Such extension filters all objects in which this property not complies with at least one of the given conditions
 
 E.g. In `KoClassDeclaration`, the `parentInterfaces` property returns `List<KoParentDeclaration>` (plural - it's list 
 of objects), so we create three extensions:
-    - `withParentInterfaces(vararg names: String)`
-    - `withSomeParentInterfaces(vararg names: String)`
-    - `withoutParentInterfaces(vararg names: String)`
+- `withParentInterfaces()`
+- `withAllParentInterfaces(name: String, vararg names: String)`
+- `withSomeParentInterfaces(name: String, vararg names: String)`
+- `withoutParentInterfaces()`
+- `withoutAllParentInterfaces(name: String, vararg names: String)`
+- `withoutSomeParentInterfaces(name: String, vararg names: String)`
+
+Note that there are no parameters with the `with` and `without` prefixes, and in other cases we force the parameter 
+to be passed.
 
 ## If parameters of extensions is of KClass type, then extension must have suffix 'Of'.
 
 E.g. In `KoClassDeclaration`:
-    - `withParentClassOf(vararg names: KClass<*>)`
-    - `withoutParentClassOf(vararg names: KClass<*>)`
+- `withParentClassOf(vararg names: KClass<*>)`
+- `withoutParentClassOf(vararg names: KClass<*>)`
 
-    - `withParentInterfacesOf(vararg names: KClass<*>)`
-    - `withSomeParentInterfacesOf(vararg names: KClass<*>)`
-    - `withoutParentInterfacesOf(vararg names: KClass<*>)`
+- `withParentInterfaceOf()`
+- `withAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
+- `withSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
+- `withoutParentInterfaceOf()`
+- `withoutAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
+- `withoutSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
