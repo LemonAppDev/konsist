@@ -15,12 +15,9 @@ class KoTypeDeclarationForIsGenericTypeTest {
     ) {
         // given
         val sut = getSnippetFile(fileName)
-            .classes()
+            .properties()
             .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-            ?.type
+            .type
 
         // then
         sut?.isGenericType shouldBeEqualTo value
