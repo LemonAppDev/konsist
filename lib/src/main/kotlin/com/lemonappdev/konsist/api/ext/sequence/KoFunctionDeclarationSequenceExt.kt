@@ -309,3 +309,17 @@ fun Sequence<KoFunctionDeclaration>.withExplicitReturnTypeOf(vararg types: KClas
 fun Sequence<KoFunctionDeclaration>.withoutExplicitReturnTypeOf(vararg types: KClass<*>): Sequence<KoFunctionDeclaration> = filter {
     types.none { kClass -> it.explicitReturnType?.name == kClass.simpleName }
 }
+
+/**
+ * Sequence containing functions that have implementation.
+ *
+ * @return A sequence containing functions with the implementation.
+ */
+fun Sequence<KoFunctionDeclaration>.withImplementation(): Sequence<KoFunctionDeclaration> = filter { it.hasImplementation() }
+
+/**
+ * Sequence containing functions that don't have implementation.
+ *
+ * @return A sequence containing functions without the implementation.
+ */
+fun Sequence<KoFunctionDeclaration>.withoutImplementation(): Sequence<KoFunctionDeclaration> = filterNot { it.hasImplementation() }
