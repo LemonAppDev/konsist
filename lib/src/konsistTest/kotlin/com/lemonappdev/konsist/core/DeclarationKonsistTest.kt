@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.sequence.withExplicitType
 import com.lemonappdev.konsist.api.ext.sequence.withExplicitReturnType
+import com.lemonappdev.konsist.api.ext.sequence.withExplicitType
 import com.lemonappdev.konsist.api.ext.sequence.withoutName
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
