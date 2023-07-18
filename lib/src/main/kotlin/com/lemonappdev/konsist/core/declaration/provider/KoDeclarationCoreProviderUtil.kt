@@ -72,8 +72,8 @@ internal object KoDeclarationCoreProviderUtil {
                     .body
                     ?.children
                     ?.filterIsInstance<KtDeclaration>()
-                    ?.mapNotNull { getInstanceOfKtDeclaration(it as KtDeclaration, parentDeclaration) }
-                    ?.asSequence()!!
+                    ?.mapNotNull { getInstanceOfKtDeclaration(it, parentDeclaration) }
+                    ?.asSequence() ?: emptySequence()
 
                 getKoDeclarations(declarations, includeNested, includeLocal)
             }
