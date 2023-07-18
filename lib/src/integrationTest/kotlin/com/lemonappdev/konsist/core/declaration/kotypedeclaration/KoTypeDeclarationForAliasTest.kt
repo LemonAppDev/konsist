@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeDeclarationForImportAliasTest {
+class KoTypeDeclarationForAliasTest {
     @Test
     fun `simple-type`() {
         // given
@@ -79,5 +79,5 @@ class KoTypeDeclarationForImportAliasTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forimportalias/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/foralias/", fileName)
 }
