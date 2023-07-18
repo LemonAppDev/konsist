@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
+import com.lemonappdev.konsist.api.ext.sequence.properties
 import com.lemonappdev.konsist.api.ext.sequence.withValueModifier
 import com.lemonappdev.konsist.core.ext.indexOfFirstInstance
 import com.lemonappdev.konsist.core.ext.indexOfLastInstance
@@ -24,7 +25,8 @@ class GeneralSnippets {
     fun `no field should have 'm' prefix`() {
         Konsist.scopeFromProject()
             .classes()
-            .assert {
+            .properties()
+            .assertNot {
                 val secondCharacterIsUppercase = it.name.getOrNull(1)?.isUpperCase() ?: false
                 it.name.startsWith('m') && secondCharacterIsUppercase
             }
