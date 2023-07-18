@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.sequence.withRepresentedType
-import com.lemonappdev.konsist.api.ext.sequence.withReturnType
+import com.lemonappdev.konsist.api.ext.sequence.withExplicitType
+import com.lemonappdev.konsist.api.ext.sequence.withExplicitReturnType
 import com.lemonappdev.konsist.api.ext.sequence.withoutName
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
@@ -14,22 +14,22 @@ class DeclarationKonsistTest {
         declarationPackageScope
             .functions(includeNested = true)
             .withoutName("print")
-            .assert { it.hasReturnType() }
+            .assert { it.hasExplicitReturnType() }
     }
 
     @Test
     fun `every property has explicit type declaration`() {
         declarationPackageScope
             .properties(includeNested = true)
-            .assert { it.hasType() }
+            .assert { it.hasExplicitType() }
     }
 
     @Test
     fun `none function return type has the 'Impl' suffix`() {
         declarationPackageScope
             .functions(includeNested = true)
-            .withReturnType()
-            .mapNotNull { it.returnType }
+            .withExplicitReturnType()
+            .mapNotNull { it.explicitReturnType }
             .assertNot { it.sourceType.endsWith("Impl") }
     }
 
@@ -37,8 +37,8 @@ class DeclarationKonsistTest {
     fun `none property type has the 'Impl' suffix`() {
         declarationPackageScope
             .properties(includeNested = true)
-            .withRepresentedType()
-            .mapNotNull { it.type }
+            .withExplicitType()
+            .mapNotNull { it.explicitType }
             .assertNot { it.sourceType.endsWith("Impl") }
     }
 

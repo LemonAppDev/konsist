@@ -39,7 +39,7 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
         }
     }
 
-    override val returnType: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
+    override val explicitReturnType: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
 
     override val receiverType: KoTypeDeclaration? by lazy { ReceiverUtil.getReceiverType(getTypeReferences(), isExtension(), this) }
 
@@ -75,11 +75,11 @@ internal class KoFunctionDeclarationImpl private constructor(private val ktFunct
 
     override fun hasReceiverType(name: String?): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)
 
-    override fun hasReturnType(): Boolean = ktFunction.hasDeclaredReturnType()
+    override fun hasExplicitReturnType(): Boolean = ktFunction.hasDeclaredReturnType()
 
     override fun localDeclarations(): Sequence<KoDeclaration> = localDeclarations
 
-    override fun hasValidReturnTag(enabled: Boolean): Boolean = TagUtil.hasValidReturnTag(enabled, returnType?.name, kDoc)
+    override fun hasValidReturnTag(enabled: Boolean): Boolean = TagUtil.hasValidReturnTag(enabled, explicitReturnType?.name, kDoc)
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters, kDoc)
 
