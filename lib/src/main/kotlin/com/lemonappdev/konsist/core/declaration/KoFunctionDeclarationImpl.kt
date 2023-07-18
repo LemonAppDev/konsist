@@ -64,9 +64,11 @@ internal class KoFunctionDeclarationImpl private constructor(
                 }
         }
 
+    override fun hasImplementation(): Boolean = ktFunction.hasBody()
+
     override fun localDeclarations(): Sequence<KoBaseDeclaration> = localDeclarations
 
-    override fun hasValidReturnTag(enabled: Boolean): Boolean = TagUtil.hasValidReturnTag(enabled, returnType?.name, kDoc)
+    override fun hasValidReturnTag(enabled: Boolean): Boolean = TagUtil.hasValidReturnTag(enabled, explicitReturnType?.name, kDoc)
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters, kDoc)
 

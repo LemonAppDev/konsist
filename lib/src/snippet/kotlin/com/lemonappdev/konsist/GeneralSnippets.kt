@@ -3,7 +3,6 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
@@ -98,9 +97,7 @@ class GeneralSnippets {
                         declaration is KoObjectDeclaration && declaration.hasModifiers(KoModifier.COMPANION)
                     }
 
-                val lastIndex = it
-                    .declarations()
-                    .indexOfLastInstance<KoNamedDeclaration>()
+                val lastIndex = it.numDeclarations() - 1
 
                 companionObjectIndex == lastIndex
             }
@@ -120,9 +117,9 @@ class GeneralSnippets {
             .assert { it.hasParameterNamed("value") }
     }
 
-    fun `every class in the 'feature' module reside in package 'feature'`() {
-        Konsist.scopeFromModule("feature")
-            .classes(includeNested = true)
-            .assert { it.resideInPackage("..feature..") }
+    fun `forbid the usage of 'forbiddenString' in file`() {
+        Konsist.scopeFromProject()
+            .files()
+            .assertNot { it.text.contains("forbiddenString") }
     }
 }

@@ -50,15 +50,15 @@ internal class KoPropertyDeclarationImpl private constructor(
             ?.removeSuffix(" ")
     }
 
-    override val type: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
+    override val explicitType: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
 
     private fun getTypeReferences(): List<KtTypeReference> = ktProperty
         .children
         .filterIsInstance<KtTypeReference>()
 
-    override fun hasType(type: String?): Boolean = when (type) {
-        null -> this.type != null
-        else -> this.type?.name == type
+    override fun hasExplicitType(type: String?): Boolean = when (type) {
+        null -> this.explicitType != null
+        else -> this.explicitType?.name == type
     }
 
     internal companion object {

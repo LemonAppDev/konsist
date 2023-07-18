@@ -14,7 +14,7 @@ class KoPropertyDeclarationForTypeTest {
             .first()
 
         // then
-        assertSoftly(sut.type) {
+        assertSoftly(sut.explicitType) {
             it?.sourceType shouldBeEqualTo "SampleType"
             it?.importAliasName shouldBeEqualTo ""
             it?.name shouldBeEqualTo "SampleType"
@@ -31,7 +31,7 @@ class KoPropertyDeclarationForTypeTest {
             .first()
 
         // then
-        assertSoftly(sut.type) {
+        assertSoftly(sut.explicitType) {
             it?.sourceType shouldBeEqualTo "SampleType"
             it?.importAliasName shouldBeEqualTo "ImportAlias"
             it?.name shouldBeEqualTo "ImportAlias"
@@ -48,7 +48,7 @@ class KoPropertyDeclarationForTypeTest {
             .first()
 
         // then
-        assertSoftly(sut.type) {
+        assertSoftly(sut.explicitType) {
             it?.sourceType shouldBeEqualTo "Int"
             it?.importAliasName shouldBeEqualTo ""
             it?.name shouldBeEqualTo "Int"
@@ -65,7 +65,7 @@ class KoPropertyDeclarationForTypeTest {
             .first()
 
         // then
-        assertSoftly(sut.type) {
+        assertSoftly(sut.explicitType) {
             it?.sourceType shouldBeEqualTo null
             it?.name shouldBeEqualTo null
             it?.isImportAlias() shouldBeEqualTo null
@@ -82,9 +82,9 @@ class KoPropertyDeclarationForTypeTest {
 
         // then
         assertSoftly(sut) {
-            hasType() shouldBeEqualTo true
-            hasType("SampleType") shouldBeEqualTo true
-            hasType("OtherType") shouldBeEqualTo false
+            hasExplicitType() shouldBeEqualTo true
+            hasExplicitType("SampleType") shouldBeEqualTo true
+            hasExplicitType("OtherType") shouldBeEqualTo false
         }
     }
 
@@ -97,8 +97,8 @@ class KoPropertyDeclarationForTypeTest {
 
         // then
         assertSoftly(sut) {
-            hasType() shouldBeEqualTo false
-            hasType("SampleType") shouldBeEqualTo false
+            hasExplicitType() shouldBeEqualTo false
+            hasExplicitType("SampleType") shouldBeEqualTo false
         }
     }
 
