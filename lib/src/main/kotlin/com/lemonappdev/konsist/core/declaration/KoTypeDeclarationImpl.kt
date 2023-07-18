@@ -46,7 +46,7 @@ internal class KoTypeDeclarationImpl private constructor(
     override val isNullable: Boolean by lazy { ktTypeReference.text.last() == '?' }
 
     override val isKotlinType: Boolean by lazy {
-        if (isImportAlias()) {
+        if (isAlias()) {
             false
         } else {
             val parts = sourceType.split("<", ">")
