@@ -2,11 +2,13 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoExplicitTypeProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
+import com.lemonappdev.konsist.core.provider.KoExplicitTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
@@ -33,7 +35,8 @@ internal class KoPropertyDeclarationImpl private constructor(
     KoVarAndValProviderCore,
     KoExtensionProviderCore,
     KoReceiverTypeProviderCore,
-    KoDelegateProviderCore {
+    KoDelegateProviderCore,
+    KoExplicitTypeProviderCore{
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktProperty
 
@@ -48,17 +51,6 @@ internal class KoPropertyDeclarationImpl private constructor(
             ?.substringAfter("by ")
             ?.substringBefore("{")
             ?.removeSuffix(" ")
-    }
-
-    override val explicitType: KoTypeDeclaration? by lazy { ReceiverUtil.getType(getTypeReferences(), isExtension(), this) }
-
-    private fun getTypeReferences(): List<KtTypeReference> = ktProperty
-        .children
-        .filterIsInstance<KtTypeReference>()
-
-    override fun hasExplicitType(type: String?): Boolean = when (type) {
-        null -> this.explicitType != null
-        else -> this.explicitType?.name == type
     }
 
     internal companion object {
