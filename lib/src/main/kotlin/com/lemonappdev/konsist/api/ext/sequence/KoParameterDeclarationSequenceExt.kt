@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
 fun Sequence<KoParameterDeclaration>.withVarargModifier(): Sequence<KoParameterDeclaration> = filter { it.hasVarargModifier() }
 
 /**
- * Sequence containing all parameters that don't have `vararg` modifier.
+ * Sequence containing all parameters without `vararg` modifier.
  *
  * @return A sequence containing parameters without the `vararg` modifier.
  */
@@ -26,7 +26,7 @@ fun Sequence<KoParameterDeclaration>.withoutVarargModifier(): Sequence<KoParamet
 fun Sequence<KoParameterDeclaration>.withNoInlineModifier(): Sequence<KoParameterDeclaration> = filter { it.hasNoInlineModifier() }
 
 /**
- * Sequence containing all parameters that don't have `noinline` modifier.
+ * Sequence containing all parameters without `noinline` modifier.
  *
  * @return A sequence containing parameters without the `noinline` modifier.
  */
@@ -40,7 +40,7 @@ fun Sequence<KoParameterDeclaration>.withoutNoInlineModifier(): Sequence<KoParam
 fun Sequence<KoParameterDeclaration>.withCrossInlineModifier(): Sequence<KoParameterDeclaration> = filter { it.hasCrossInlineModifier() }
 
 /**
- * Sequence containing all parameters that don't have `crossinline` modifier.
+ * Sequence containing all parameters without `crossinline` modifier.
  *
  * @return A sequence containing parameters without the `crossinline` modifier.
  */
@@ -61,7 +61,7 @@ fun Sequence<KoParameterDeclaration>.withDefaultValue(vararg values: String): Se
 }
 
 /**
- * Sequence containing all parameters that don't have default value.
+ * Sequence containing all parameters without default value.
  *
  * @param values The default values to exclude.
  * @return A sequence containing parameters without the specified default values (or none default value if [values] is empty).
@@ -85,7 +85,7 @@ fun Sequence<KoParameterDeclaration>.withRepresentedType(type: String, vararg ty
 }
 
 /**
- * Sequence containing all parameters that don't have type.
+ * Sequence containing all parameters without type.
  *
  * @param type The type to exclude.
  * @param types The types to exclude.
@@ -110,7 +110,7 @@ fun Sequence<KoParameterDeclaration>.withRepresentedTypeOf(vararg types: KClass<
 }
 
 /**
- * Sequence containing all parameters that don't have type of.
+ * Sequence containing all parameters without type of.
  *
  * @param types The Kotlin classes representing the types to exclude.
  * @return A sequence containing parameters without types matching the specified Kotlin classes.
@@ -133,7 +133,7 @@ inline fun <reified T> Sequence<KoParameterDeclaration>.withRepresentedTypeOf():
 }
 
 /**
- * Sequence containing all parameters that don't have type of.
+ * Sequence containing all parameters without type of.
  *
  * @return A sequence containing parameters without types matching the specified reified type parameter.
  */

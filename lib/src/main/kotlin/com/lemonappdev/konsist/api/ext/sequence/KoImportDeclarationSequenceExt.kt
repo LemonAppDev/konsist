@@ -16,10 +16,10 @@ fun Sequence<KoImportDeclaration>.withAlias(vararg names: String): Sequence<KoIm
 }
 
 /**
- * Sequence containing all imports that don't have an alias.
+ * Sequence containing all imports without an alias.
  *
  * @param names The names of aliases to exclude.
- * @return A sequence containing imports that don't have the specified aliases (or none alias if [names] is empty).
+ * @return A sequence containing imports without specified aliases (or none alias if [names] is empty).
  */
 fun Sequence<KoImportDeclaration>.withoutAlias(vararg names: String): Sequence<KoImportDeclaration> = filter {
     when {
@@ -36,7 +36,7 @@ fun Sequence<KoImportDeclaration>.withoutAlias(vararg names: String): Sequence<K
 fun Sequence<KoImportDeclaration>.withWildcard(): Sequence<KoImportDeclaration> = filter { it.isWildcard }
 
 /**
- * Sequence containing all imports that don't have a wildcard.
+ * Sequence containing all imports without a wildcard.
  *
  * @return A sequence containing imports without a wildcard.
  */

@@ -16,7 +16,7 @@ fun Sequence<KoParentDeclaration>.withDelegate(vararg names: String): Sequence<K
 }
 
 /**
- * Sequence containing all declarations that don't have delegate with given name.
+ * Sequence containing all declarations without delegate with given name.
  *
  * @param names The delegate names to exclude.
  * @return A sequence containing declarations without the specified delegate name(s) (or none delegate if [names] is empty).

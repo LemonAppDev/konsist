@@ -12,9 +12,9 @@ inline fun <reified T> Sequence<KoTypeDeclaration>.withSourceTypeOf(): Sequence<
     filter { it.sourceType == T::class.simpleName }
 
 /**
- * Sequence containing types that don't have source type of.
+ * Sequence containing types without source type of.
  *
- * @return A sequence containing types that don't have the source type matching the specified type.
+ * @return A sequence containing types without source type matching the specified type.
  */
 inline fun <reified T> Sequence<KoTypeDeclaration>.withoutSourceTypeOf(): Sequence<KoTypeDeclaration> =
     filterNot { it.sourceType == T::class.simpleName }
@@ -30,10 +30,10 @@ fun Sequence<KoTypeDeclaration>.withSourceTypeOf(vararg types: KClass<*>): Seque
 }
 
 /**
- * Sequence containing types that don't have source type of.
+ * Sequence containing types without source type of.
  *
  * @param types The Kotlin classes representing the source types to exclude.
- * @return A sequence containing types that don't have the source type matching any of the specified types.
+ * @return A sequence containing types without source type matching any of the specified types.
  */
 fun Sequence<KoTypeDeclaration>.withoutSourceTypeOf(vararg types: KClass<*>): Sequence<KoTypeDeclaration> = filter {
     types.none { kClass -> it.sourceType == kClass.simpleName }
@@ -51,11 +51,11 @@ fun Sequence<KoTypeDeclaration>.withSourceType(type: String, vararg types: Strin
 }
 
 /**
- * Sequence containing types that don't have source type.
+ * Sequence containing types without source type.
  *
  * @param type The source type to exclude.
  * @param types The source types to exclude.
- * @return A sequence containing types that don't have the specified source types.
+ * @return A sequence containing types without specified source types.
  */
 fun Sequence<KoTypeDeclaration>.withoutSourceType(type: String, vararg types: String): Sequence<KoTypeDeclaration> = filter {
     it.sourceType != type && types.none { type -> it.sourceType == type }
@@ -70,9 +70,9 @@ inline fun <reified T> Sequence<KoTypeDeclaration>.withImportAliasOf(): Sequence
     filter { it.isAlias() && it.sourceType == T::class.simpleName }
 
 /**
- * Sequence containing types that don't have import alias of.
+ * Sequence containing types without import alias of.
  *
- * @return A sequence containing types that don't have an import alias matching the specified type.
+ * @return A sequence containing types without an import alias matching the specified type.
  */
 inline fun <reified T> Sequence<KoTypeDeclaration>.withoutImportAliasOf(): Sequence<KoTypeDeclaration> =
     filterNot { it.isAlias() && it.sourceType == T::class.simpleName }
@@ -88,10 +88,10 @@ fun Sequence<KoTypeDeclaration>.withImportAliasOf(vararg names: KClass<*>): Sequ
 }
 
 /**
- * Sequence containing types that don't have import alias of.
+ * Sequence containing types without import alias of.
  *
  * @param names The Kotlin classes representing the import alias to exclude.
- * @return A sequence containing types that don't have the import alias matching any of the specified types.
+ * @return A sequence containing types without import alias matching any of the specified types.
  */
 fun Sequence<KoTypeDeclaration>.withoutImportAliasOf(vararg names: KClass<*>): Sequence<KoTypeDeclaration> = filter {
     names.none { kClass -> it.isAlias() && it.sourceType == kClass.simpleName }
@@ -112,10 +112,10 @@ fun Sequence<KoTypeDeclaration>.withImportAlias(vararg names: String): Sequence<
 }
 
 /**
- * Sequence containing types that don't have import alias.
+ * Sequence containing types without import alias.
  *
  * @param names The import alias names to exclude.
- * @return A sequence containing types that don't have an import alias matching any of the specified names
+ * @return A sequence containing types without an import alias matching any of the specified names
  * (or none import alias if [names] is empty).
  */
 fun Sequence<KoTypeDeclaration>.withoutImportAlias(vararg names: String): Sequence<KoTypeDeclaration> = filter {
@@ -137,7 +137,7 @@ fun Sequence<KoTypeDeclaration>.withFullyQualifiedName(name: String, vararg name
 }
 
 /**
- * Sequence containing types that don't have fully qualified name.
+ * Sequence containing types without fully qualified name.
  *
  * @param name The name to exclude.
  * @param names The names to exclude.

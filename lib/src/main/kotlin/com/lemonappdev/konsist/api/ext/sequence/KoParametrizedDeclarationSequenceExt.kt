@@ -39,22 +39,22 @@ fun <T : KoParametrizedDeclaration> Sequence<T>.withSomeParameters(name: String,
 fun <T : KoParametrizedDeclaration> Sequence<T>.withoutParameters(): Sequence<T> = filter { it.parameters.isEmpty() }
 
 /**
- * Sequence containing all declarations that don't have all specified parameters.
+ * Sequence containing all declarations without all specified parameters.
  *
  * @param name The name of the parameter to exclude.
  * @param names The names of the parameters to exclude.
- * @return A sequence containing declarations that don't have all the specified parameters.
+ * @return A sequence containing declarations without all the specified parameters.
  */
 fun <T : KoParametrizedDeclaration> Sequence<T>.withoutAllParameters(name: String, vararg names: String): Sequence<T> = filter {
     !it.hasParameterNamed(name) && names.none { name -> it.hasParameterNamed(name) }
 }
 
 /**
- * Sequence containing all declarations that don't have some parameters.
+ * Sequence containing all declarations without some parameters.
  *
  * @param name The name of the parameters to exclude.
  * @param names The names of the parameters to exclude.
- * @return A sequence containing declarations that don't have at least one of the specified parameters.
+ * @return A sequence containing declarations without at least one of the specified parameters.
  */
 fun <T : KoParametrizedDeclaration> Sequence<T>.withoutSomeParameters(name: String, vararg names: String): Sequence<T> = filter {
     !it.hasParameterNamed(name) && if (names.isNotEmpty()) {

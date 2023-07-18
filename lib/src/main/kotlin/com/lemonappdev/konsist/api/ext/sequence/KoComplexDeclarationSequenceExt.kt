@@ -22,7 +22,7 @@ fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedType(type: String, var
 }
 
 /**
- * Sequence containing declarations that don't have type of.
+ * Sequence containing declarations without type of.
  *
  * @param type The type to exclude.
  * @param types The types to exclude.
@@ -47,10 +47,10 @@ fun <T : KoComplexDeclaration> Sequence<T>.withRepresentedTypeOf(vararg types: K
 }
 
 /**
- * Sequence containing declarations that don't have type of.
+ * Sequence containing declarations without type of.
  *
  * @param types The Kotlin class(es) representing the type(s) to exclude.
- * @return A sequence containing declarations that don't have the type of the specified class(es).
+ * @return A sequence containing declarations without type of the specified class(es).
  */
 fun <T : KoComplexDeclaration> Sequence<T>.withoutRepresentedTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.none { type ->
@@ -70,9 +70,9 @@ inline fun <reified T> Sequence<KoComplexDeclaration>.withRepresentedTypeOf(): S
 }
 
 /**
- * Sequence containing declarations that don't have the type of.
+ * Sequence containing declarations without type of.
  *
- * @return A sequence containing declarations that don't have the type of the specified class.
+ * @return A sequence containing declarations without type of the specified class.
  */
 inline fun <reified T> Sequence<KoComplexDeclaration>.withoutRepresentedTypeOf(): Sequence<KoComplexDeclaration> =
     filterNot { it.representsTypeOf<T>() }

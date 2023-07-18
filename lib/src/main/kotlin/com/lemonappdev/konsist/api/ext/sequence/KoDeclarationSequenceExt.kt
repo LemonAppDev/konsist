@@ -13,7 +13,7 @@ import kotlin.reflect.KClass
 fun <T : KoDeclaration> Sequence<T>.withPublicModifier(): Sequence<T> = filter { it.hasPublicModifier() }
 
 /**
- * Sequence containing declarations that don't have the `public` modifier.
+ * Sequence containing declarations without `public` modifier.
  *
  * @return A sequence containing declarations without the `public` modifier.
  */
@@ -27,7 +27,7 @@ fun <T : KoDeclaration> Sequence<T>.withoutPublicModifier(): Sequence<T> = filte
 fun <T : KoDeclaration> Sequence<T>.withPublicOrDefaultModifier(): Sequence<T> = filter { it.isPublicOrDefault() }
 
 /**
- * Sequence containing declarations that don't have the `public` or no visibility modifier.
+ * Sequence containing declarations without `public` or no visibility modifier.
  *
  * @return A sequence containing declarations without the `public` or no visibility modifier..
  */
@@ -41,7 +41,7 @@ fun <T : KoDeclaration> Sequence<T>.withoutPublicOrDefaultModifier(): Sequence<T
 fun <T : KoDeclaration> Sequence<T>.withPrivateModifier(): Sequence<T> = filter { it.hasPrivateModifier() }
 
 /**
- * Sequence containing declarations that don't have the `private` modifier.
+ * Sequence containing declarations without `private` modifier.
  *
  * @return A sequence containing declarations without the `private` modifier.
  */
@@ -55,7 +55,7 @@ fun <T : KoDeclaration> Sequence<T>.withoutPrivateModifier(): Sequence<T> = filt
 fun <T : KoDeclaration> Sequence<T>.withProtectedModifier(): Sequence<T> = filter { it.hasProtectedModifier() }
 
 /**
- * Sequence containing declarations that don't have the `protected` modifier.
+ * Sequence containing declarations without `protected` modifier.
  *
  * @return A sequence containing declarations without the `protected` modifier.
  */
@@ -69,7 +69,7 @@ fun <T : KoDeclaration> Sequence<T>.withoutProtectedModifier(): Sequence<T> = fi
 fun <T : KoDeclaration> Sequence<T>.withInternalModifier(): Sequence<T> = filter { it.hasInternalModifier() }
 
 /**
- * Sequence containing declarations that don't have the `internal` modifier.
+ * Sequence containing declarations without `internal` modifier.
  *
  * @return A sequence containing declarations without the `internal` modifier.
  */
@@ -126,22 +126,22 @@ fun <T : KoDeclaration> Sequence<T>.withSomeAnnotations(annotation: String, vara
 fun <T : KoDeclaration> Sequence<T>.withoutAnnotations(): Sequence<T> = filterNot { it.hasAnnotations() }
 
 /**
- * Sequence containing declarations that don't have all the specified annotations.
+ * Sequence containing declarations without all the specified annotations.
  *
  * @param annotation The annotation to exclude.
  * @param annotations The annotations to exclude.
- * @return A sequence containing declarations that don't have any of the specified annotations.
+ * @return A sequence containing declarations without any of the specified annotations.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutAllAnnotations(annotation: String, vararg annotations: String): Sequence<T> = filterNot {
     it.hasAnnotations(annotation, *annotations)
 }
 
 /**
- * Sequence containing declarations that don't have some annotations.
+ * Sequence containing declarations without some annotations.
  *
  * @param annotation The annotation to exclude.
  * @param annotations The annotations to exclude.
- * @return A sequence containing declarations that don't have at least one of the specified annotations.
+ * @return A sequence containing declarations without at least one of the specified annotations.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutSomeAnnotations(annotation: String, vararg annotations: String): Sequence<T> = filter {
     !it.hasAnnotations(annotation) && if (annotations.isNotEmpty()) {
@@ -173,21 +173,21 @@ fun <T : KoDeclaration> Sequence<T>.withSomeAnnotationsOf(annotation: KClass<*>,
 }
 
 /**
- * Sequence containing declarations that don't have the specified annotations.
+ * Sequence containing declarations without specified annotations.
  *
  * @param annotation The Kotlin class representing annotation to exclude.
  * @param annotations The Kotlin classes representing annotations to exclude.
- * @return A sequence containing declarations that don't have any of the specified annotations.
+ * @return A sequence containing declarations without any of the specified annotations.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutAllAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> =
     filterNot { it.hasAnnotationsOf(annotation, *annotations) }
 
 /**
- * Sequence containing declarations that don't have some annotations.
+ * Sequence containing declarations without some annotations.
  *
  * @param annotation The Kotlin class representing annotation to exclude.
  * @param annotations The Kotlin classes representing annotations to exclude.
- * @return A sequence containing declarations that don't have at least one of the specified annotations.
+ * @return A sequence containing declarations without at least one of the specified annotations.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutSomeAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> = filter {
     !it.hasAnnotationsOf(annotation) && if (annotations.isNotEmpty()) {
@@ -205,9 +205,9 @@ fun <T : KoDeclaration> Sequence<T>.withoutSomeAnnotationsOf(annotation: KClass<
 inline fun <reified T> Sequence<KoDeclaration>.withAnnotationOf(): Sequence<KoDeclaration> = filter { it.hasAnnotationOf<T>() }
 
 /**
- * Sequence containing declarations that don't have the annotations of type.
+ * Sequence containing declarations without annotations of type.
  *
- * @return A sequence containing declarations that don't have the specified annotation.
+ * @return A sequence containing declarations without specified annotation.
  */
 inline fun <reified T> Sequence<KoDeclaration>.withoutAnnotationOf(): Sequence<KoDeclaration> = filterNot { it.hasAnnotationOf<T>() }
 
@@ -248,22 +248,22 @@ fun <T : KoDeclaration> Sequence<T>.withSomeModifiers(modifier: KoModifier, vara
 fun <T : KoDeclaration> Sequence<T>.withoutModifiers(): Sequence<T> = filterNot { it.hasModifiers() }
 
 /**
- * Sequence containing declarations that don't have all specified modifiers.
+ * Sequence containing declarations without all specified modifiers.
  *
  * @param modifier The modifier to exclude.
  * @param modifiers The modifiers to exclude.
- * @return A sequence containing declarations that don't have all the specified modifiers.
+ * @return A sequence containing declarations without all the specified modifiers.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutAllModifiers(modifier: KoModifier, vararg modifiers: KoModifier): Sequence<T> = filterNot {
     it.hasModifiers(modifier, *modifiers)
 }
 
 /**
- * Sequence containing declarations that don't have some modifiers.
+ * Sequence containing declarations without some modifiers.
  *
  * @param modifier The modifier to exclude.
  * @param modifiers The modifiers to exclude.
- * @return A sequence containing declarations that don't have at least one of the specified modifiers.
+ * @return A sequence containing declarations without at least one of the specified modifiers.
  */
 fun <T : KoDeclaration> Sequence<T>.withoutSomeModifiers(modifier: KoModifier, vararg modifiers: KoModifier): Sequence<T> = filter {
     !it.hasModifiers(modifier) && if (modifiers.isNotEmpty()) {
@@ -287,7 +287,7 @@ fun <T : KoDeclaration> Sequence<T>.withPackage(vararg packages: String): Sequen
 }
 
 /**
- * Sequence containing declarations that don't have the package.
+ * Sequence containing declarations without package.
  *
  * @param packages The packages to exclude.
  * @return A sequence containing declarations that don't reside in any of the specified packages (or none package if [packages] is empty).

@@ -15,7 +15,7 @@ fun Sequence<KoPackageDeclaration>.withQualifiedName(qualifiedName: String, vara
     }
 
 /**
- * Sequence containing all packages that don't have any of the specified qualified name.
+ * Sequence containing all packages without any of the specified qualified name.
  *
  * @param qualifiedName The name to exclude.
  * @param qualifiedNames The names to exclude.
@@ -36,7 +36,7 @@ fun Sequence<KoPackageDeclaration>.withoutQualifiedName(
 fun Sequence<KoPackageDeclaration>.withMatchingFilePath(): Sequence<KoPackageDeclaration> = filter { it.hasMatchingFilePath }
 
 /**
- * Sequence containing all packages that don't have a matching file path.
+ * Sequence containing all packages without a matching file path.
  *
  * @return A sequence containing packages without a matching file path.
  */

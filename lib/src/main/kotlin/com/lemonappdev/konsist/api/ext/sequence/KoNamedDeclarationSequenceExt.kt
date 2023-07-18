@@ -14,7 +14,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withName(name: String, vararg names: St
 }
 
 /**
- * Sequence containing declarations that don't have any of the specified names.
+ * Sequence containing declarations without any of the specified names.
  *
  * @param name The name to exclude.
  * @param names The names to exclude.
@@ -36,7 +36,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withNameStartingWith(prefix: String, va
 }
 
 /**
- * Sequence containing declarations that don't have name with any of the specified prefix.
+ * Sequence containing declarations without name with any of the specified prefix.
  *
  * @param prefix The prefix to exclude.
  * @param prefixes The prefixes to exclude.
@@ -58,7 +58,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withNameEndingWith(suffix: String, vara
 }
 
 /**
- * Sequence containing declarations that don't have name with any of the specified suffix.
+ * Sequence containing declarations without name with any of the specified suffix.
  *
  * @param suffix The suffix to exclude.
  * @param suffixes The suffixes to exclude.
@@ -80,7 +80,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withNameContaining(text: String, vararg
 }
 
 /**
- * Sequence containing declarations that don't have name containing any of the specified String.
+ * Sequence containing declarations without name containing any of the specified String.
  *
  * @param text The text to exclude.
  * @param texts The texts to exclude.
@@ -102,7 +102,7 @@ fun <T : KoNamedDeclaration> Sequence<T>.withNameMatching(regex: Regex, vararg r
 }
 
 /**
- * Sequence containing declarations that don't have name matching any of the specified regex.
+ * Sequence containing declarations without name matching any of the specified regex.
  *
  * @param regex The regular expression to exclude.
  * @param regexes The regular expressions to exclude.

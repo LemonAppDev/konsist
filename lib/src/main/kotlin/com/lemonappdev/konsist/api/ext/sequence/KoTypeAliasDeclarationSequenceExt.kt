@@ -14,11 +14,11 @@ fun Sequence<KoTypeAliasDeclaration>.withSourceType(type: String, vararg types: 
 }
 
 /**
- * Sequence containing type aliases that don't have source type.
+ * Sequence containing type aliases without source type.
  *
  * @param type The source type to exclude.
  * @param types The source types to exclude.
- * @return A sequence containing type aliases that don't have the specified source types.
+ * @return A sequence containing type aliases without specified source types.
  */
 fun Sequence<KoTypeAliasDeclaration>.withoutSourceType(type: String, vararg types: String): Sequence<KoTypeAliasDeclaration> = filter {
     it.type.sourceType != type && types.none { type -> it.type.sourceType == type }
@@ -32,8 +32,8 @@ fun Sequence<KoTypeAliasDeclaration>.withoutSourceType(type: String, vararg type
 fun Sequence<KoTypeAliasDeclaration>.withActualModifier(): Sequence<KoTypeAliasDeclaration> = filter { it.hasActualModifier() }
 
 /**
- * Sequence containing type aliases that don't have `actual` modifier.
+ * Sequence containing type aliases without `actual` modifier.
  *
- * @return A sequence containing type aliases that don't have the `actual` modifier.
+ * @return A sequence containing type aliases without `actual` modifier.
  */
 fun Sequence<KoTypeAliasDeclaration>.withoutActualModifier(): Sequence<KoTypeAliasDeclaration> = filterNot { it.hasActualModifier() }
