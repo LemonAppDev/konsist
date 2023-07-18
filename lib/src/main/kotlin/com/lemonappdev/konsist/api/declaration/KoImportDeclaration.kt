@@ -7,7 +7,7 @@ interface KoImportDeclaration : KoNamedDeclaration {
     /**
      * Alias of the import.
      */
-    val alias: String
+    val alias: String?
 
     /**
      * Whether this import is a wildcard.

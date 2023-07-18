@@ -249,55 +249,55 @@ fun Sequence<KoFunctionDeclaration>.withoutReceiverTypeOf(vararg types: KClass<*
 }
 
 /**
- * Sequence containing functions that have return type.
+ * Sequence containing functions that have explicit return type.
  *
  * @param types The return type(s) to include.
  * @return A sequence containing functions that have the specified return type(s) (or any return type if [types] is empty).
  */
-fun Sequence<KoFunctionDeclaration>.withReturnType(vararg types: String): Sequence<KoFunctionDeclaration> = filter {
+fun Sequence<KoFunctionDeclaration>.withExplicitReturnType(vararg types: String): Sequence<KoFunctionDeclaration> = filter {
     when {
-        types.isEmpty() -> it.hasReturnType()
-        else -> types.any { type -> it.returnType?.name == type }
+        types.isEmpty() -> it.hasExplicitReturnType()
+        else -> types.any { type -> it.explicitReturnType?.name == type }
     }
 }
 
 /**
- * Sequence containing functions that don't have return type.
+ * Sequence containing functions that don't have explicit return type.
  *
  * @param types The return type(s) to exclude.
  * @return A sequence containing functions that don't have the specified return type(s) (or none return type if [types] is empty).
  */
-fun Sequence<KoFunctionDeclaration>.withoutReturnType(vararg types: String): Sequence<KoFunctionDeclaration> = filter {
+fun Sequence<KoFunctionDeclaration>.withoutExplicitReturnType(vararg types: String): Sequence<KoFunctionDeclaration> = filter {
     when {
-        types.isEmpty() -> !it.hasReturnType()
-        else -> types.none { type -> it.returnType?.name == type }
+        types.isEmpty() -> !it.hasExplicitReturnType()
+        else -> types.none { type -> it.explicitReturnType?.name == type }
     }
 }
 
 /**
- * Sequence containing functions that have return type.
+ * Sequence containing functions that have explicit return type.
  *
  * @return A sequence containing functions that have the return type of the specified type.
  */
-inline fun <reified T> Sequence<KoFunctionDeclaration>.withReturnTypeOf(): Sequence<KoFunctionDeclaration> =
-    filter { T::class.simpleName == it.returnType?.name }
+inline fun <reified T> Sequence<KoFunctionDeclaration>.withExplicitReturnTypeOf(): Sequence<KoFunctionDeclaration> =
+    filter { T::class.simpleName == it.explicitReturnType?.name }
 
 /**
- * Sequence containing functions that don't have return type.
+ * Sequence containing functions that don't have explicit return type.
  *
  * @return A sequence containing functions that don't have the return type of the specified type.
  */
-inline fun <reified T> Sequence<KoFunctionDeclaration>.withoutReturnTypeOf(): Sequence<KoFunctionDeclaration> =
-    filterNot { T::class.simpleName == it.returnType?.name }
+inline fun <reified T> Sequence<KoFunctionDeclaration>.withoutExplicitReturnTypeOf(): Sequence<KoFunctionDeclaration> =
+    filterNot { T::class.simpleName == it.explicitReturnType?.name }
 
 /**
- * Sequence containing functions that have return type.
+ * Sequence containing functions that have explicit return type.
  *
  * @param types The Kotlin class(es) representing the return type(s) to include.
  * @return A sequence containing functions that have the return type of the specified Kotlin class(es).
  */
-fun Sequence<KoFunctionDeclaration>.withReturnTypeOf(vararg types: KClass<*>): Sequence<KoFunctionDeclaration> = filter {
-    types.any { kClass -> it.returnType?.name == kClass.simpleName }
+fun Sequence<KoFunctionDeclaration>.withExplicitReturnTypeOf(vararg types: KClass<*>): Sequence<KoFunctionDeclaration> = filter {
+    types.any { kClass -> it.explicitReturnType?.name == kClass.simpleName }
 }
 
 /**
@@ -306,6 +306,20 @@ fun Sequence<KoFunctionDeclaration>.withReturnTypeOf(vararg types: KClass<*>): S
  * @param types The Kotlin class(es) representing the return type(s) to exclude.
  * @return A sequence containing functions that don't have the return type of the specified Kotlin class(es).
  */
-fun Sequence<KoFunctionDeclaration>.withoutReturnTypeOf(vararg types: KClass<*>): Sequence<KoFunctionDeclaration> = filter {
-    types.none { kClass -> it.returnType?.name == kClass.simpleName }
+fun Sequence<KoFunctionDeclaration>.withoutExplicitReturnTypeOf(vararg types: KClass<*>): Sequence<KoFunctionDeclaration> = filter {
+    types.none { kClass -> it.explicitReturnType?.name == kClass.simpleName }
 }
+
+/**
+ * Sequence containing functions that have implementation.
+ *
+ * @return A sequence containing functions with the implementation.
+ */
+fun Sequence<KoFunctionDeclaration>.withImplementation(): Sequence<KoFunctionDeclaration> = filter { it.hasImplementation() }
+
+/**
+ * Sequence containing functions that don't have implementation.
+ *
+ * @return A sequence containing functions without the implementation.
+ */
+fun Sequence<KoFunctionDeclaration>.withoutImplementation(): Sequence<KoFunctionDeclaration> = filterNot { it.hasImplementation() }
