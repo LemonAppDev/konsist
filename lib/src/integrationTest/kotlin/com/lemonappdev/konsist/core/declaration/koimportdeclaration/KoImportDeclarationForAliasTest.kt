@@ -14,7 +14,7 @@ class KoImportDeclarationForAliasTest {
             .first()
 
         // then
-        sut.alias shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
+        sut.alias shouldBeEqualTo null
     }
 
     @Test
@@ -25,7 +25,7 @@ class KoImportDeclarationForAliasTest {
 
         // then
         assertSoftly(sut.toList()) {
-            get(0).alias shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
+            get(0).alias shouldBeEqualTo null
             get(1).alias shouldBeEqualTo "ImportAlias"
         }
     }

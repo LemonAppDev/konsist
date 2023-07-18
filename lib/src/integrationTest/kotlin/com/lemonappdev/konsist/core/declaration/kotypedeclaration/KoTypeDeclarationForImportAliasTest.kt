@@ -19,8 +19,8 @@ class KoTypeDeclarationForImportAliasTest {
 
         // then
         assertSoftly(sut) {
-            it?.importAliasName shouldBeEqualTo ""
-            it?.isImportAlias() shouldBeEqualTo false
+            it?.aliasType shouldBeEqualTo null
+            it?.isAlias() shouldBeEqualTo false
         }
     }
 
@@ -37,8 +37,8 @@ class KoTypeDeclarationForImportAliasTest {
 
         // then
         assertSoftly(sut) {
-            it?.importAliasName shouldBeEqualTo ""
-            it?.isImportAlias() shouldBeEqualTo false
+            it?.aliasType shouldBeEqualTo null
+            it?.isAlias() shouldBeEqualTo false
         }
     }
 
@@ -55,8 +55,8 @@ class KoTypeDeclarationForImportAliasTest {
 
         // then
         assertSoftly(sut) {
-            it?.importAliasName shouldBeEqualTo "ImportAlias"
-            it?.isImportAlias() shouldBeEqualTo true
+            it?.aliasType shouldBeEqualTo "ImportAlias"
+            it?.isAlias() shouldBeEqualTo true
         }
     }
 
@@ -73,8 +73,8 @@ class KoTypeDeclarationForImportAliasTest {
 
         // then
         assertSoftly(sut) {
-            it?.importAliasName shouldBeEqualTo "ImportAlias"
-            it?.isImportAlias() shouldBeEqualTo true
+            it?.aliasType shouldBeEqualTo "ImportAlias"
+            it?.isAlias() shouldBeEqualTo true
         }
     }
 

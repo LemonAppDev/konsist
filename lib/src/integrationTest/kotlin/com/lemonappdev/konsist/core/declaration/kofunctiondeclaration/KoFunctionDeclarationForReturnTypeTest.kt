@@ -17,9 +17,9 @@ class KoFunctionDeclarationForReturnTypeTest {
         assertSoftly(sut) {
             hasReturnType() shouldBeEqualTo true
             returnType?.sourceType shouldBeEqualTo "SampleType"
-            returnType?.importAliasName shouldBeEqualTo ""
+            returnType?.aliasType shouldBeEqualTo ""
             returnType?.name shouldBeEqualTo "SampleType"
-            returnType?.isImportAlias() shouldBeEqualTo false
+            returnType?.isAlias() shouldBeEqualTo false
             returnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
@@ -35,9 +35,9 @@ class KoFunctionDeclarationForReturnTypeTest {
         assertSoftly(sut) {
             hasReturnType() shouldBeEqualTo true
             returnType?.sourceType shouldBeEqualTo "SampleType"
-            returnType?.importAliasName shouldBeEqualTo "ImportAlias"
+            returnType?.aliasType shouldBeEqualTo "ImportAlias"
             returnType?.name shouldBeEqualTo "ImportAlias"
-            returnType?.isImportAlias() shouldBeEqualTo true
+            returnType?.isAlias() shouldBeEqualTo true
         }
     }
 
@@ -52,9 +52,9 @@ class KoFunctionDeclarationForReturnTypeTest {
         assertSoftly(sut) {
             hasReturnType() shouldBeEqualTo true
             returnType?.sourceType shouldBeEqualTo "SampleType"
-            returnType?.importAliasName shouldBeEqualTo ""
+            returnType?.aliasType shouldBeEqualTo ""
             returnType?.name shouldBeEqualTo "SampleType"
-            returnType?.isImportAlias() shouldBeEqualTo false
+            returnType?.isAlias() shouldBeEqualTo false
             returnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
@@ -70,9 +70,9 @@ class KoFunctionDeclarationForReturnTypeTest {
         assertSoftly(sut) {
             hasReturnType() shouldBeEqualTo false
             returnType?.sourceType shouldBeEqualTo null
-            returnType?.importAliasName shouldBeEqualTo null
+            returnType?.aliasType shouldBeEqualTo null
             returnType?.name shouldBeEqualTo null
-            returnType?.isImportAlias() shouldBeEqualTo null
+            returnType?.isAlias() shouldBeEqualTo null
         }
     }
 
@@ -87,9 +87,9 @@ class KoFunctionDeclarationForReturnTypeTest {
         assertSoftly(sut) {
             hasReturnType() shouldBeEqualTo false
             returnType?.sourceType shouldBeEqualTo null
-            returnType?.importAliasName shouldBeEqualTo null
+            returnType?.aliasType shouldBeEqualTo null
             returnType?.name shouldBeEqualTo null
-            returnType?.isImportAlias() shouldBeEqualTo null
+            returnType?.isAlias() shouldBeEqualTo null
         }
     }
 

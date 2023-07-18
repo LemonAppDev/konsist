@@ -39,7 +39,7 @@ interface KoTypeDeclaration : KoNamedDeclaration {
     /**
      * The import alias name.
      */
-    val importAliasName: String
+    val aliasType: String?
 
     /**
      * The source type.
@@ -61,5 +61,5 @@ interface KoTypeDeclaration : KoNamedDeclaration {
      *
      * @return `true` if this type is import type alias, `false` otherwise.
      */
-    fun isImportAlias(): Boolean
+    fun isAlias(): Boolean
 }
