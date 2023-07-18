@@ -7,8 +7,8 @@ import com.lemonappdev.konsist.api.ext.sequence.withModifiers
 import com.lemonappdev.konsist.api.ext.sequence.withSomeModifiers
 import com.lemonappdev.konsist.api.ext.sequence.withoutAllModifiers
 import com.lemonappdev.konsist.api.ext.sequence.withoutModifiers
-import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.ext.sequence.withoutSomeModifiers
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo

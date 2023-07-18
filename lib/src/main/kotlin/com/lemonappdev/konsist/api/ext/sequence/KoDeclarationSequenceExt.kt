@@ -107,7 +107,10 @@ fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withAnnotations(): Sequenc
  * @param annotations The annotations to include.
  * @return A sequence containing declarations with all the specified annotations.
  */
-fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withAllAnnotations(annotation: String, vararg annotations: String): Sequence<T> = filter {
+fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withAllAnnotations(
+    annotation: String,
+    vararg annotations: String,
+): Sequence<T> = filter {
     it.hasAnnotations(annotation, *annotations)
 }
 
@@ -137,7 +140,10 @@ fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withoutAnnotations(): Sequ
  * @param annotations The annotations to exclude.
  * @return A sequence containing declarations without any of the specified annotations.
  */
-fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withoutAllAnnotations(annotation: String, vararg annotations: String): Sequence<T> = filterNot {
+fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withoutAllAnnotations(
+    annotation: String,
+    vararg annotations: String,
+): Sequence<T> = filterNot {
     it.hasAnnotations(annotation, *annotations)
 }
 
@@ -148,7 +154,10 @@ fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withoutAllAnnotations(anno
  * @param annotations The annotations to exclude.
  * @return A sequence containing declarations without at least one of the specified annotations.
  */
-fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withoutSomeAnnotations(annotation: String, vararg annotations: String): Sequence<T> = filter {
+fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withoutSomeAnnotations(
+    annotation: String,
+    vararg annotations: String,
+): Sequence<T> = filter {
     !it.hasAnnotations(annotation) && if (annotations.isNotEmpty()) {
         annotations.any { annotation -> !it.hasAnnotations(annotation) }
     } else {
@@ -163,7 +172,10 @@ fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withoutSomeAnnotations(ann
  * @param annotations The Kotlin classes representing annotations to include.
  * @return A sequence containing declarations with all the specified annotations.
  */
-fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withAllAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> =
+fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withAllAnnotationsOf(
+    annotation: KClass<*>,
+    vararg annotations: KClass<*>,
+): Sequence<T> =
     filter { it.hasAnnotationsOf(annotation, *annotations) }
 
 /**
@@ -187,7 +199,10 @@ fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withSomeAnnotationsOf(
  * @param annotations The Kotlin classes representing annotations to exclude.
  * @return A sequence containing declarations without any of the specified annotations.
  */
-fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withoutAllAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> =
+fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withoutAllAnnotationsOf(
+    annotation: KClass<*>,
+    vararg annotations: KClass<*>,
+): Sequence<T> =
     filterNot { it.hasAnnotationsOf(annotation, *annotations) }
 
 /**
@@ -197,7 +212,10 @@ fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withoutAllAnnotationsOf(an
  * @param annotations The Kotlin classes representing annotations to exclude.
  * @return A sequence containing declarations without at least one of the specified annotations.
  */
-fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withoutSomeAnnotationsOf(annotation: KClass<*>, vararg annotations: KClass<*>): Sequence<T> = filter {
+fun <T : KoAnnotationDeclarationProvider> Sequence<T>.withoutSomeAnnotationsOf(
+    annotation: KClass<*>,
+    vararg annotations: KClass<*>,
+): Sequence<T> = filter {
     !it.hasAnnotationsOf(annotation) && if (annotations.isNotEmpty()) {
         annotations.any { annotation -> !it.hasAnnotationsOf(annotation) }
     } else {
