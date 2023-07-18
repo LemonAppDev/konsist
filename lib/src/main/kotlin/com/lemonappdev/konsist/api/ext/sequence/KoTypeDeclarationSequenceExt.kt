@@ -148,15 +148,19 @@ fun Sequence<KoTypeDeclaration>.withoutFullyQualifiedName(name: String, vararg n
 }
 
 /**
- * Sequence containing types that are Kotlin basic types.
+ * Sequence containing Kotlin types that are built-in types. It can be a basic Kotlin type
+ * [Basic types](https://kotlinlang.org/docs/basic-types.html) or collection type
+ * [Collections overview](https://kotlinlang.org/docs/collections-overview.html#collection).
  *
- * @return A sequence containing types that are the Kotlin basic type.
+ * @return A sequence containing built-in Kotlin types.
  */
 fun Sequence<KoTypeDeclaration>.withKotlinType(): Sequence<KoTypeDeclaration> = filter { it.isKotlinType }
 
 /**
- * Sequence containing types that don't be Kotlin basic type.
+ * Sequence containing Kotlin types that are not built-in types. It cannot be a basic Kotlin type
+ * [Basic types](https://kotlinlang.org/docs/basic-types.html) and collection type
+ * [Collections overview](https://kotlinlang.org/docs/collections-overview.html#collection).
  *
- * @return A sequence containing types that don't be the specified Kotlin basic types.
+ * @return A sequence containing non-built-in Kotlin types.
  */
 fun Sequence<KoTypeDeclaration>.withoutKotlinType(): Sequence<KoTypeDeclaration> = filterNot { it.isKotlinType }
