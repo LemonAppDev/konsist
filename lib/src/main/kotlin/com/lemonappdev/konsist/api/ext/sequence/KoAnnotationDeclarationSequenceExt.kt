@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
-import com.lemonappdev.konsist.api.ext.declaration.representsTypeOf
+import com.lemonappdev.konsist.api.ext.provider.representsTypeOf
 import kotlin.reflect.KClass
 
 /**

@@ -1,7 +1,7 @@
-package com.lemonappdev.konsist.api.ext.declaration.kodeclaration
+package com.lemonappdev.konsist.api.ext.provider.koannotation
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
+import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
@@ -13,7 +13,36 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoDeclarationExtTest {
+class KoAnnotationProviderExtTest {
+    @Test
+    fun `file-has-two-annotations-of-type`() {
+        // given
+        val sut = getSnippetFile("file-has-two-annotations-of-type")
+            .files()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasAnnotationOf<SampleAnnotation1>() shouldBeEqualTo true
+            hasAnnotationOf<SampleAnnotation2>() shouldBeEqualTo true
+            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `file-has-suppress-annotation-without-import`() {
+        // given
+        val sut = getSnippetFile("file-has-suppress-annotation-without-import")
+            .files()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasAnnotationOf<Suppress>() shouldBeEqualTo true
+            hasAnnotationOf<NonExistingAnnotation>() shouldBeEqualTo false
+        }
+    }
+
     @ParameterizedTest
     @MethodSource("provideValuesForAnnotationWithImport")
     fun `declaration-has-two-annotations-of-type`(
@@ -116,7 +145,7 @@ class KoDeclarationExtTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("api/ext/declaration/kodeclaration/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("api/ext/provider/koannotation/snippet/", fileName)
 
     companion object {
         @Suppress("unused")

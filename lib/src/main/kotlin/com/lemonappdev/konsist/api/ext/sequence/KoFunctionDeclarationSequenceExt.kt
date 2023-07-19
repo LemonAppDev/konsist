@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.api.ext.declaration.hasReceiverTypeOf
+import com.lemonappdev.konsist.api.ext.provider.hasReceiverTypeOf
 import kotlin.reflect.KClass
 
 /**

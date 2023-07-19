@@ -1,6 +1,4 @@
 @file:Suppress
 
-package com.samplepackage
-
 class SampleClass {
 }

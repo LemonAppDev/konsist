@@ -1,13 +1,13 @@
-package com.lemonappdev.konsist.api.ext.declaration.kofunctiondeclaration
+package com.lemonappdev.konsist.api.ext.provider.koreceivertype
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.declaration.hasReceiverTypeOf
+import com.lemonappdev.konsist.api.ext.provider.hasReceiverTypeOf
 import com.lemonappdev.konsist.testdata.SampleClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFunctionDeclarationExtTest {
+class KoReceiverTypeProviderExtTest {
     @Test
     fun `function-has-receiver-with-simple-type`() {
         // given
@@ -37,5 +37,5 @@ class KoFunctionDeclarationExtTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("api/ext/declaration/kofunctiondeclaration/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("api/ext/provider/koreceivertype/snippet/", fileName)
 }

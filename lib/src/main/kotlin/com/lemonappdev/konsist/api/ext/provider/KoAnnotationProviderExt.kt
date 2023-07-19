@@ -1,11 +1,11 @@
-package com.lemonappdev.konsist.api.ext.declaration
+package com.lemonappdev.konsist.api.ext.provider
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 
 /**
- * Returns `true` if this declaration represents the type of [T].
+ * Returns `true` if this declaration or file represents the type of [T].
  *
- * @return `true` if this declaration represents the type of [T], `false` otherwise.
+ * @return `true` if this declaration or file represents the type of [T], `false` otherwise.
  */
 inline fun <reified T> KoAnnotationProvider.hasAnnotationOf(): Boolean {
     /**
