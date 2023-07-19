@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoConstructorsProvider: KoProvider {
+interface KoConstructorsProvider : KoProvider {
     /**
      * The all primary and secondary constructors of the declaration.
      */

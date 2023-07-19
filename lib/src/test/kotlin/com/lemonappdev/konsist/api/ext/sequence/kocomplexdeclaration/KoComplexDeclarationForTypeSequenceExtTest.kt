@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.ext.sequence.withoutRepresentedType
 import com.lemonappdev.konsist.api.ext.sequence.withoutRepresentedTypeOf
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
-import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1
 import com.lemonappdev.konsist.testdata.SampleClass2

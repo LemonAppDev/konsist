@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoFileExtensionProvider: KoProvider {
+interface KoFileExtensionProvider : KoProvider {
     /**
      * The extension of the file.
      */

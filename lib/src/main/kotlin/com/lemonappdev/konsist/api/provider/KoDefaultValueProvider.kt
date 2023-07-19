@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoDefaultValueProvider: KoProvider {
+interface KoDefaultValueProvider : KoProvider {
     /**
      * Default value of the declaration.
      */

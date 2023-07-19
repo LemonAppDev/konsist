@@ -274,11 +274,11 @@ inline fun <reified T> Sequence<KoClassDeclaration>.withoutParentOf(): Sequence<
  */
 fun Sequence<KoClassDeclaration>.withAllParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
     it.parents.any { parent -> parent.name == name.simpleName } &&
-            names.all { kClass ->
-                it
-                    .parents
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+        names.all { kClass ->
+            it
+                .parents
+                .any { parent -> parent.name == kClass.simpleName }
+        }
 }
 
 /**
@@ -290,11 +290,11 @@ fun Sequence<KoClassDeclaration>.withAllParentsOf(name: KClass<*>, vararg names:
  */
 fun Sequence<KoClassDeclaration>.withSomeParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
     it.parents.any { parent -> parent.name == name.simpleName } ||
-            names.any { kClass ->
-                it
-                    .parents
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+        names.any { kClass ->
+            it
+                .parents
+                .any { parent -> parent.name == kClass.simpleName }
+        }
 }
 
 /**
@@ -306,11 +306,11 @@ fun Sequence<KoClassDeclaration>.withSomeParentsOf(name: KClass<*>, vararg names
  */
 fun Sequence<KoClassDeclaration>.withoutAllParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
     it.parents.none { parent -> parent.name == name.simpleName } &&
-            names.none { kClass ->
-                it
-                    .parents
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+        names.none { kClass ->
+            it
+                .parents
+                .any { parent -> parent.name == kClass.simpleName }
+        }
 }
 
 /**
@@ -322,15 +322,15 @@ fun Sequence<KoClassDeclaration>.withoutAllParentsOf(name: KClass<*>, vararg nam
  */
 fun Sequence<KoClassDeclaration>.withoutSomeParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
     it.parents.none { parent -> parent.name == name.simpleName } &&
-            if (names.isNotEmpty()) {
-                names.any { kClass ->
-                    it
-                        .parents
-                        .none { parent -> parent.name == kClass.simpleName }
-                }
-            } else {
-                true
+        if (names.isNotEmpty()) {
+            names.any { kClass ->
+                it
+                    .parents
+                    .none { parent -> parent.name == kClass.simpleName }
             }
+        } else {
+            true
+        }
 }
 
 /**

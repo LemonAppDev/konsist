@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoPathProvider: KoProvider {
+interface KoPathProvider : KoProvider {
     /**
      * File path of the declaration or path of the file.
      */

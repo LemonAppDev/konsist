@@ -3,10 +3,6 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
-import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
-import com.lemonappdev.konsist.api.provider.KoLocalPropertyProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore

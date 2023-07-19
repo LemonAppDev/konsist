@@ -33,7 +33,10 @@ internal class KoParentDeclarationImpl private constructor(private val ktSuperTy
     internal companion object {
         private val cache: KoDeclarationCache<KoParentDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktSuperTypeListEntry: KtSuperTypeListEntry, parentDeclaration: KoParentDeclarationProvider?): KoParentDeclaration =
+        internal fun getInstance(
+            ktSuperTypeListEntry: KtSuperTypeListEntry,
+            parentDeclaration: KoParentDeclarationProvider?,
+        ): KoParentDeclaration =
             cache.getOrCreateInstance(ktSuperTypeListEntry, parentDeclaration) { KoParentDeclarationImpl(ktSuperTypeListEntry) }
     }
 }

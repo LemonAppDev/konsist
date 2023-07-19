@@ -5,7 +5,6 @@ import com.intellij.psi.PsiWhiteSpace
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
@@ -162,7 +161,10 @@ internal object KoDeclarationProviderCoreUtil {
         }
     }
 
-    private fun getInstanceOfKtDeclaration(ktDeclaration: KtDeclaration, parentDeclaration: KoParentDeclarationProvider?): KoBaseDeclaration? = when {
+    private fun getInstanceOfKtDeclaration(
+        ktDeclaration: KtDeclaration,
+        parentDeclaration: KoParentDeclarationProvider?,
+    ): KoBaseDeclaration? = when {
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
         ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
         ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)

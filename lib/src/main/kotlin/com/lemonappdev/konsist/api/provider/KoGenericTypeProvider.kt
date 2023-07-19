@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoGenericTypeProvider: KoProvider {
+interface KoGenericTypeProvider : KoProvider {
     /**
      * Whatever type is generic type.
      */
