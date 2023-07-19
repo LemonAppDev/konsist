@@ -1,12 +1,15 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import kotlin.reflect.KClass
 
 /**
@@ -307,7 +310,7 @@ fun <T : KoModifierProvider> Sequence<T>.withoutSomeModifiers(modifier: KoModifi
  * @param packages The packages to include.
  * @return A sequence containing declarations that reside in any of the specified packages (or any package if [packages] is empty).
  */
-fun <T : KoPackageDeclarationProvider> Sequence<T>.withPackage(vararg packages: String): Sequence<T> = filter {
+fun <T : KoResideInOrOutsidePackageProvider> Sequence<T>.withPackage(vararg packages: String): Sequence<T> = filter {
     when {
         packages.isEmpty() -> it.packagee != null
         else -> packages.any { packagee -> it.resideInPackage(packagee) }
@@ -320,7 +323,7 @@ fun <T : KoPackageDeclarationProvider> Sequence<T>.withPackage(vararg packages: 
  * @param packages The packages to exclude.
  * @return A sequence containing declarations that don't reside in any of the specified packages (or none package if [packages] is empty).
  */
-fun <T : KoPackageDeclarationProvider> Sequence<T>.withoutPackage(vararg packages: String): Sequence<T> = filter {
+fun <T : KoResideInOrOutsidePackageProvider> Sequence<T>.withoutPackage(vararg packages: String): Sequence<T> = filter {
     when {
         packages.isEmpty() -> it.packagee == null
         else -> packages.all { packagee -> it.resideOutsidePackage(packagee) }
