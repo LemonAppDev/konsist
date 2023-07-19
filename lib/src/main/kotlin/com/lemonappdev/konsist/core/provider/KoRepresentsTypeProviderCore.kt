@@ -8,5 +8,3 @@ internal interface KoRepresentsTypeProviderCore :
     KoFullyQualifiedNameProviderCore {
     override fun representsType(name: String): Boolean = name == this.name || name == fullyQualifiedName
 }
-
-internal inline fun <reified T> KoRepresentsTypeProviderCore.representsTypeOf(): Boolean = T::class.qualifiedName == fullyQualifiedName

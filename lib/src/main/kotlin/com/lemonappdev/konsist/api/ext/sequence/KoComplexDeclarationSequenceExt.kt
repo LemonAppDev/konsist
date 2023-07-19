@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.ext.declaration.representsTypeOf
 import com.lemonappdev.konsist.api.provider.KoClassProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
@@ -70,17 +71,17 @@ fun <T : KoRepresentsTypeProvider> Sequence<T>.withoutRepresentedTypeOf(vararg t
  *
  * @return A sequence containing declarations with the type of the specified class.
  */
-// inline fun <reified T> Sequence<KoRepresentsTypeProvider>.withRepresentedTypeOf(): Sequence<KoRepresentsTypeProvider> = filter {
-//    it.representsTypeOf<T>()
-// }
+ inline fun <reified T> Sequence<KoRepresentsTypeProvider>.withRepresentedTypeOf(): Sequence<KoRepresentsTypeProvider> = filter {
+    it.representsTypeOf<T>()
+ }
 
 /**
  * Sequence containing declarations without type of.
  *
  * @return A sequence containing declarations without type of the specified class.
  */
-// inline fun <reified T> Sequence<KoRepresentsTypeProvider>.withoutRepresentedTypeOf(): Sequence<KoRepresentsTypeProvider> =
-//    filterNot { it.representsTypeOf<T>() }
+ inline fun <reified T> Sequence<KoRepresentsTypeProvider>.withoutRepresentedTypeOf(): Sequence<KoRepresentsTypeProvider> =
+    filterNot { it.representsTypeOf<T>() }
 
 /**
  * Sequence containing declarations of all types.

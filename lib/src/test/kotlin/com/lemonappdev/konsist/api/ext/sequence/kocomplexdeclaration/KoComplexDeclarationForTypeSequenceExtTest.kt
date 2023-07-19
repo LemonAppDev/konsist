@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.ext.sequence.withRepresentedTypeOf
 import com.lemonappdev.konsist.api.ext.sequence.withoutRepresentedType
 import com.lemonappdev.konsist.api.ext.sequence.withoutRepresentedTypeOf
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
+import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1
 import com.lemonappdev.konsist.testdata.SampleClass2
 import io.mockk.every
@@ -156,40 +157,39 @@ class KoComplexDeclarationForTypeSequenceExtTest {
     }
 
     //  'every { representsType<SampleClass>() } returns true' doesn't work because there is a bug in mockk
-    // ToDo("uncomment this tests after fix bug with withRepresentsTypeOf")
-//    @Test
-//    fun `withRepresentedTypeOf() with KClass syntax returns complex declaration with SampleClass type`() {
-//        // given
-//        val complexDeclaration1: KoRepresentsTypeProvider = mockk {
-//            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleClass"
-//        }
-//        val complexDeclaration2: KoRepresentsTypeProvider = mockk {
-//            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.NonExistingClass"
-//        }
-//        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2)
-//
-//        // when
-//        val sut = complexDeclarations.withRepresentedTypeOf<SampleClass>()
-//
-//        // then
-//        sut.toList() shouldBeEqualTo listOf(complexDeclaration1)
-//    }
-//
-//    @Test
-//    fun `withoutRepresentedTypeOf() with KClass syntax returns complex declaration without SampleClass type`() {
-//        // given
-//        val complexDeclaration1: KoRepresentsTypeProvider = mockk {
-//            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleClass"
-//        }
-//        val complexDeclaration2: KoRepresentsTypeProvider = mockk {
-//            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.NonExistingClass"
-//        }
-//        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2)
-//
-//        // when
-//        val sut = complexDeclarations.withoutRepresentedTypeOf<SampleClass>()
-//
-//        // then
-//        sut.toList() shouldBeEqualTo listOf(complexDeclaration2)
-//    }
+    @Test
+    fun `withRepresentedTypeOf() with KClass syntax returns complex declaration with SampleClass type`() {
+        // given
+        val complexDeclaration1: KoRepresentsTypeProvider = mockk {
+            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleClass"
+        }
+        val complexDeclaration2: KoRepresentsTypeProvider = mockk {
+            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.NonExistingClass"
+        }
+        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2)
+
+        // when
+        val sut = complexDeclarations.withRepresentedTypeOf<SampleClass>()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(complexDeclaration1)
+    }
+
+    @Test
+    fun `withoutRepresentedTypeOf() with KClass syntax returns complex declaration without SampleClass type`() {
+        // given
+        val complexDeclaration1: KoRepresentsTypeProvider = mockk {
+            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleClass"
+        }
+        val complexDeclaration2: KoRepresentsTypeProvider = mockk {
+            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.NonExistingClass"
+        }
+        val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2)
+
+        // when
+        val sut = complexDeclarations.withoutRepresentedTypeOf<SampleClass>()
+
+        // then
+        sut.toList() shouldBeEqualTo listOf(complexDeclaration2)
+    }
 }
