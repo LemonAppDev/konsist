@@ -4,7 +4,6 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.core.provider.util.KoDeclarationCoreProviderUtil
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
@@ -23,6 +22,7 @@ import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeAliasProviderCore
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
@@ -71,7 +71,7 @@ internal class KoFileImpl(override val ktFile: KtFile) :
         includeNested: Boolean,
         includeLocal: Boolean,
     ): Sequence<KoBaseDeclaration> =
-        KoDeclarationCoreProviderUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
+        KoDeclarationProviderCoreUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
 
     override fun equals(other: Any?): Boolean = other is KoFile && path == other.path
 

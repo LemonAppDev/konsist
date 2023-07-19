@@ -4,10 +4,10 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.provider.util.KoDeclarationCoreProviderUtil
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnonymousInitializer
 
 internal class KoInitBlockDeclarationImpl private constructor(
@@ -22,7 +22,7 @@ internal class KoInitBlockDeclarationImpl private constructor(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseDeclaration> = KoDeclarationCoreProviderUtil
+    ): Sequence<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktAnonymousInitializer, includeNested, includeLocal, this)
 
     internal companion object {

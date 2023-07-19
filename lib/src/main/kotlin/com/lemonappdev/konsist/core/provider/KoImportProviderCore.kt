@@ -8,20 +8,20 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 
-internal interface KoImportProviderCore: KoImportProvider, KoParentProviderCore {
+internal interface KoImportProviderCore : KoImportProvider, KoParentProviderCore {
     val ktFile: KtFile
 
     override val imports: List<KoImportDeclaration>
         get() {
-        val ktImportDirectives = ktFile
-            .children
-            .filterIsInstance<KtImportList>()
-            .first()
-            .children
-            .filterIsInstance<KtImportDirective>()
+            val ktImportDirectives = ktFile
+                .children
+                .filterIsInstance<KtImportList>()
+                .first()
+                .children
+                .filterIsInstance<KtImportDirective>()
 
-        return ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it, null) }
-    }
+            return ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it, null) }
+        }
 
     override fun hasImports(vararg names: String): Boolean = when {
         names.isEmpty() -> imports.isNotEmpty()

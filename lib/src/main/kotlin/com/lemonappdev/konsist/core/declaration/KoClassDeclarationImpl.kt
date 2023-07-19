@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.provider.util.KoDeclarationCoreProviderUtil
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoConstructorsProviderCore
@@ -25,6 +24,7 @@ import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSecondaryConstructorsProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClass
@@ -71,7 +71,7 @@ internal class KoClassDeclarationImpl private constructor(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseDeclaration> = KoDeclarationCoreProviderUtil
+    ): Sequence<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktClass, includeNested, includeLocal, this)
 
     internal companion object {

@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 
-interface KoObjectProvider: KoDeclarationProvider {
+interface KoObjectProvider : KoDeclarationProvider {
     /**
      * The objects present in the scope, file or declaration.
      *
@@ -12,7 +12,6 @@ interface KoObjectProvider: KoDeclarationProvider {
     fun objects(
         includeNested: Boolean = false,
     ): Sequence<KoObjectDeclaration>
-
 
     fun containsObject(
         name: String,

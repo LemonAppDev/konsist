@@ -2,12 +2,12 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.provider.KoObjectProvider
-import com.lemonappdev.konsist.core.provider.util.KoDeclarationCoreProviderUtil
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 
-internal interface KoObjectProviderCore: KoObjectProvider, KoDeclarationProviderCore {
+internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProviderCore {
     override fun objects(
         includeNested: Boolean,
-    ): Sequence<KoObjectDeclaration> = KoDeclarationCoreProviderUtil.getKoDeclarations(declarations(), includeNested)
+    ): Sequence<KoObjectDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested)
 
     override fun containsObject(
         name: String,

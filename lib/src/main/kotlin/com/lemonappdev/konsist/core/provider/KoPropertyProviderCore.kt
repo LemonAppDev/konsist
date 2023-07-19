@@ -2,13 +2,13 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
-import com.lemonappdev.konsist.core.provider.util.KoDeclarationCoreProviderUtil
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 
-internal interface KoPropertyProviderCore: KoPropertyProvider, KoDeclarationProviderCore {
+internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationProviderCore {
     override fun properties(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoPropertyDeclaration> = KoDeclarationCoreProviderUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
+    ): Sequence<KoPropertyDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
 
     override fun containsProperty(
         name: String,

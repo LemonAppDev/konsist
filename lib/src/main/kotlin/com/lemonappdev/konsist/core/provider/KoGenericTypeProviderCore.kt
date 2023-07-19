@@ -2,12 +2,12 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
 
-internal interface KoGenericTypeProviderCore: KoGenericTypeProvider, KoSourceAndAliasTypeProviderCore {
+internal interface KoGenericTypeProviderCore : KoGenericTypeProvider, KoSourceAndAliasTypeProviderCore {
 
     override val isGenericType: Boolean
         get() {
-        val regex = "\\w+<[^<>]+>".toRegex()
+            val regex = "\\w+<[^<>]+>".toRegex()
 
-        return regex.matches(sourceType)
-    }
+            return regex.matches(sourceType)
+        }
 }

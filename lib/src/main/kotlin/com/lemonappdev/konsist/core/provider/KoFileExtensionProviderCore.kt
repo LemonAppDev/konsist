@@ -4,11 +4,11 @@ import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
 import com.lemonappdev.konsist.core.ext.sep
 import org.jetbrains.kotlin.psi.KtFile
 
-internal interface KoFileExtensionProviderCore: KoFileExtensionProvider {
+internal interface KoFileExtensionProviderCore : KoFileExtensionProvider {
     val ktFile: KtFile
 
     override val extension: String
-    get() = nameWithExtension.substringAfterLast('.')
+        get() = nameWithExtension.substringAfterLast('.')
 
     override val nameWithExtension: String
         get() = ktFile
