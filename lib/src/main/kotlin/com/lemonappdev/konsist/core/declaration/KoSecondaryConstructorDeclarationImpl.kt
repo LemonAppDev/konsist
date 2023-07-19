@@ -3,11 +3,11 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
-import com.lemonappdev.konsist.core.provider.KoConstructorDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
+import com.lemonappdev.konsist.core.provider.KoConstructorProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
-import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
@@ -23,14 +23,14 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
     override val parentDeclaration: KoParentProvider?,
 ) :
     KoBaseDeclarationImpl(ktSecondaryConstructor),
-    KoAnnotationDeclarationProviderCore,
-    KoPackageDeclarationProviderCore,
+    KoAnnotationProviderCore,
+    KoPackageProviderCore,
     KoResideInOrOutsidePackageProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoModifierProviderCore,
     KoTopLevelProviderCore,
     KoParametersProviderCore,
-    KoConstructorDeclarationProviderCore,
+    KoConstructorProviderCore,
     KoSecondaryConstructorDeclaration {
     override val ktAnnotated: KtAnnotated
         get() = ktSecondaryConstructor

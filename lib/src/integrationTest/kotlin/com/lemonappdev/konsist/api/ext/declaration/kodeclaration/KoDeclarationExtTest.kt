@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.ext.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.declaration.hasAnnotationOf
-import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
@@ -22,7 +22,7 @@ class KoDeclarationExtTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .filterIsInstance<KoAnnotationDeclarationProvider>()
+            .filterIsInstance<KoAnnotationProvider>()
             .first()
 
         // then
@@ -41,7 +41,7 @@ class KoDeclarationExtTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .filterIsInstance<KoAnnotationDeclarationProvider>()
+            .filterIsInstance<KoAnnotationProvider>()
             .first()
 
         // then

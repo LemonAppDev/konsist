@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.verify
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -56,7 +56,7 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
                     )
         }
         .forEach {
-            if (it is KoAnnotationDeclarationProvider) {
+            if (it is KoAnnotationProvider) {
                 declarations[it] = checkIfSuppressed(it, testMethodName)
             } else {
                 declarations[it] = false
@@ -70,7 +70,7 @@ private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List
     return withoutSuppress
 }
 
-private fun checkIfSuppressed(declaration: KoAnnotationDeclarationProvider, testMethodName: String): Boolean {
+private fun checkIfSuppressed(declaration: KoAnnotationProvider, testMethodName: String): Boolean {
     val annotationParameter = declaration
         .annotations
         .firstOrNull { it.name == "Suppress" }

@@ -1,27 +1,22 @@
 package com.lemonappdev.konsist.api.container
 
-import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
-import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoClassProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoHasPackageProvider
-import com.lemonappdev.konsist.api.provider.KoImportDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoObjectProvider
-import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoTypeAliasDeclarationProvider
-import kotlin.reflect.KClass
+import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 
 /**
  * Represents a file declaration.
@@ -36,14 +31,14 @@ interface KoFile :
     KoNameProvider,
     KoPathProvider,
     KoTextProvider,
-    KoAnnotationDeclarationProvider,
+    KoAnnotationProvider,
     KoFileExtensionProvider,
     KoModuleProvider,
     KoSourceSetProvider,
-    KoPackageDeclarationProvider,
+    KoPackageProvider,
     KoHasPackageProvider,
-    KoImportDeclarationProvider,
-    KoTypeAliasDeclarationProvider {
+    KoImportProvider,
+    KoTypeAliasProvider {
 
     /**
      * Indicates whether some other object is "equal to" this one.

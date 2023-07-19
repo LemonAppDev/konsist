@@ -1,3 +1,3 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoConstructorDeclarationProvider
+interface KoConstructorProvider

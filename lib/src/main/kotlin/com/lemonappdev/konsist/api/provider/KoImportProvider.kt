@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 
-interface KoImportDeclarationProvider {
+interface KoImportProvider {
     /**
      * The imports of the file.
      */

@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 
-interface KoTypeAliasDeclarationProvider {
+interface KoTypeAliasProvider {
     /**
      * The type aliases of the file.
      */

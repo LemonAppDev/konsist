@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoExplicitReturnTypeProvider
 import com.lemonappdev.konsist.api.provider.KoExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoImplementationProvider
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
-import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
@@ -21,8 +21,8 @@ import com.lemonappdev.konsist.core.declaration.provider.KoLocalPropertyProvider
  */
 interface KoFunctionDeclaration :
     KoBaseDeclaration,
-    KoAnnotationDeclarationProvider,
-    KoPackageDeclarationProvider,
+    KoAnnotationProvider,
+    KoPackageProvider,
     KoResideInOrOutsidePackageProvider,
     KoDeclarationFullyQualifiedNameProvider,
     KoModifierProvider,

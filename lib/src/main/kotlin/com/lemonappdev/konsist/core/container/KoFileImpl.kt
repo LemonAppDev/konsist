@@ -6,23 +6,23 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationCoreProviderUtil
 import com.lemonappdev.konsist.core.ext.toOsSeparator
-import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFileExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoHasPackageProviderCore
-import com.lemonappdev.konsist.core.provider.KoImportDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoImportProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
-import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeAliasDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeAliasProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
@@ -38,14 +38,14 @@ internal class KoFileImpl(override val ktFile: KtFile) :
     KoNameProviderCore,
     KoPathProviderCore,
     KoTextProviderCore,
-    KoAnnotationDeclarationProviderCore,
+    KoAnnotationProviderCore,
     KoFileExtensionProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoPackageDeclarationProviderCore,
+    KoPackageProviderCore,
     KoHasPackageProviderCore,
-    KoImportDeclarationProviderCore,
-    KoTypeAliasDeclarationProviderCore {
+    KoImportProviderCore,
+    KoTypeAliasProviderCore {
 
     override val ktElement: KtElement
         get() = ktFile

@@ -1,14 +1,14 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
-import com.lemonappdev.konsist.api.provider.KoImportDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
 import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 
-internal interface KoImportDeclarationProviderCore: KoImportDeclarationProvider, KoParentProviderCore {
+internal interface KoImportProviderCore: KoImportProvider, KoParentProviderCore {
     val ktFile: KtFile
 
     override val imports: List<KoImportDeclaration>

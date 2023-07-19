@@ -1,13 +1,11 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
-import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtFile
-import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-internal interface KoPackageDeclarationProviderCore : KoPackageDeclarationProvider, KoContainingFileProviderCore {
+internal interface KoPackageProviderCore : KoPackageProvider, KoContainingFileProviderCore {
     val ktFile: KtFile?
 
     override val packagee: KoPackageDeclaration?

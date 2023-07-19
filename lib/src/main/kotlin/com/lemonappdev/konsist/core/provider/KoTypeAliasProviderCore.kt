@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.api.provider.KoTypeAliasDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
-internal interface KoTypeAliasDeclarationProviderCore : KoTypeAliasDeclarationProvider {
+internal interface KoTypeAliasProviderCore : KoTypeAliasProvider {
     val ktFile: KtFile
 
     override val typeAliases: List<KoTypeAliasDeclaration>

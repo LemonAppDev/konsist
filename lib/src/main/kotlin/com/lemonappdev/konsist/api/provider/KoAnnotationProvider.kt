@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.provider
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import kotlin.reflect.KClass
 
-interface KoAnnotationDeclarationProvider {
+interface KoAnnotationProvider {
     /**
      * List of annotations.
      */
