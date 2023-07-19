@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 
 interface KoImportProvider {
     /**
-     * The imports present in the file.
+     * Sequence of imports.
      */
     val imports: Sequence<KoImportDeclaration>
 
