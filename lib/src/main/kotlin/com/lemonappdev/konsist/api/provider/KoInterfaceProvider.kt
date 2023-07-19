@@ -3,6 +3,12 @@ package com.lemonappdev.konsist.api.provider
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 
 interface KoInterfaceProvider: KoDeclarationProvider {
+    /**
+     * The interfaces present in the scope, file or declaration.
+     *
+     * @param includeNested specifies whether to include nested interfaces.
+     * @return a sequence of [KoInterfaceDeclaration] representing the interfaces in the scope, file or declaration.
+     */
     fun interfaces(
         includeNested: Boolean = false,
     ): Sequence<KoInterfaceDeclaration>
