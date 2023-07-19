@@ -18,8 +18,10 @@ import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFileExtensionProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
@@ -37,7 +39,9 @@ internal class KoFileImpl(override val ktFile: KtFile) :
     KoPathProviderCore,
     KoTextProviderCore,
     KoAnnotationDeclarationProviderCore,
-    KoFileExtensionProviderCore {
+    KoFileExtensionProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore {
 
     override val ktElement: KtElement
         get() = ktFile
@@ -57,29 +61,6 @@ internal class KoFileImpl(override val ktFile: KtFile) :
         ktFile
             .name
             .toOsSeparator()
-    }
-
-    override val moduleName: String by lazy {
-        val projectName = PathProvider
-            .getInstance()
-            .rootProjectPath
-            .substringAfterLast(sep)
-
-        val moduleName = projectPath
-            .substringBefore("${sep}src$sep")
-            .substringAfter(sep)
-
-        if (moduleName == projectName || moduleName == "") {
-            "root"
-        } else {
-            moduleName
-        }
-    }
-
-    override val sourceSetName: String by lazy {
-        projectPath
-            .substringAfter("${sep}src$sep")
-            .substringBefore(sep)
     }
 
     override val imports: List<KoImportDeclaration> by lazy {
@@ -131,10 +112,6 @@ internal class KoFileImpl(override val ktFile: KtFile) :
             typeAliases.any { typeAlias -> typeAlias.name == it }
         }
     }
-
-    override fun resideInModule(module: String): Boolean = module == moduleName
-
-    override fun resideInSourceSet(sourceSet: String): Boolean = sourceSet == sourceSetName
 
     override fun equals(other: Any?): Boolean = other is KoFile && path == other.path
 

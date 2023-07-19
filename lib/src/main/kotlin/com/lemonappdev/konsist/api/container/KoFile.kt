@@ -6,9 +6,11 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
+import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvider
@@ -32,17 +34,9 @@ interface KoFile :
     KoPathProvider,
     KoTextProvider,
     KoAnnotationDeclarationProvider,
-    KoFileExtensionProvider {
-
-    /**
-     * The file's module name.
-     */
-    val moduleName: String
-
-    /**
-     * The file's source set name.
-     */
-    val sourceSetName: String
+    KoFileExtensionProvider,
+    KoModuleProvider,
+    KoSourceSetProvider {
 
     /**
      * The imports of the file.
@@ -82,22 +76,6 @@ interface KoFile :
      * @return `true` if the file has type aliases with the specified names (or any type alias if [names] is empty), `false` otherwise.
      */
     fun hasTypeAliases(vararg names: String): Boolean
-
-    /**
-     * Whether file reside in module.
-     *
-     * @param module The name of the module to check. If this is the top-module, use "root".
-     * @return `true` if a file resides in the specified module, `false` otherwise.
-     */
-    fun resideInModule(module: String): Boolean
-
-    /**
-     * Whether file reside in source set.
-     *
-     * @param sourceSet The name of the source set to check.
-     * @return `true` if a file resides in the specified source set, `false` otherwise.
-     */
-    fun resideInSourceSet(sourceSet: String): Boolean
 
     /**
      * Indicates whether some other object is "equal to" this one.
