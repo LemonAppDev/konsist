@@ -53,7 +53,8 @@ internal abstract class KoDeclarationImpl(
                     it.isNotBlank()
             }
             ?.map {
-                KoModifier.entries
+                KoModifier
+                    .entries
                     .firstOrNull { modifier -> modifier.type == it }
                     ?: throw KoInternalException("Modifier not found: $it")
             }
