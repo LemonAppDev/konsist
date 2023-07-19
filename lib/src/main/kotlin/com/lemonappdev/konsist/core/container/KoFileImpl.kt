@@ -19,6 +19,7 @@ import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFileExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoHasPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoImportDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
@@ -45,7 +46,8 @@ internal class KoFileImpl(override val ktFile: KtFile) :
     KoModuleProviderCore,
     KoSourceSetProviderCore,
     KoPackageDeclarationProviderCore,
-    KoHasPackageProviderCore {
+    KoHasPackageProviderCore,
+    KoImportDeclarationProviderCore {
 
     override val ktElement: KtElement
         get() = ktFile
@@ -67,17 +69,6 @@ internal class KoFileImpl(override val ktFile: KtFile) :
             .toOsSeparator()
     }
 
-    override val imports: List<KoImportDeclaration> by lazy {
-        val ktImportDirectives = ktFile
-            .children
-            .filterIsInstance<KtImportList>()
-            .first()
-            .children
-            .filterIsInstance<KtImportDirective>()
-
-        ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it, null) }
-    }
-
     override val typeAliases: List<KoTypeAliasDeclaration> by lazy {
         ktFile
             .children
@@ -90,13 +81,6 @@ internal class KoFileImpl(override val ktFile: KtFile) :
         includeLocal: Boolean,
     ): Sequence<KoBaseDeclaration> =
         KoDeclarationCoreProviderUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
-
-    override fun hasImports(vararg names: String): Boolean = when {
-        names.isEmpty() -> imports.isNotEmpty()
-        else -> names.all {
-            imports.any { import -> LocationUtil.resideInLocation(it, import.name) }
-        }
-    }
 
     override fun hasTypeAliases(vararg names: String): Boolean = when {
         names.isEmpty() -> typeAliases.isNotEmpty()

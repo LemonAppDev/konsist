@@ -1,0 +1,32 @@
+package com.lemonappdev.konsist.core.provider
+
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.provider.KoImportDeclarationProvider
+import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
+import com.lemonappdev.konsist.core.util.LocationUtil
+import org.jetbrains.kotlin.psi.KtFile
+import org.jetbrains.kotlin.psi.KtImportDirective
+import org.jetbrains.kotlin.psi.KtImportList
+
+internal interface KoImportDeclarationProviderCore: KoImportDeclarationProvider, KoParentProviderCore {
+    val ktFile: KtFile
+
+    override val imports: List<KoImportDeclaration>
+        get() {
+        val ktImportDirectives = ktFile
+            .children
+            .filterIsInstance<KtImportList>()
+            .first()
+            .children
+            .filterIsInstance<KtImportDirective>()
+
+        return ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it, null) }
+    }
+
+    override fun hasImports(vararg names: String): Boolean = when {
+        names.isEmpty() -> imports.isNotEmpty()
+        else -> names.all {
+            imports.any { import -> LocationUtil.resideInLocation(it, import.name) }
+        }
+    }
+}
