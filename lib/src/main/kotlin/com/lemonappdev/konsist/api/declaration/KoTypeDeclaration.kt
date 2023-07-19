@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
 import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import com.lemonappdev.konsist.api.provider.KoNullableProvider
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 
 /**
@@ -45,7 +45,7 @@ import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 interface KoTypeDeclaration :
     KoBaseDeclaration,
     KoFullyQualifiedNameProvider,
-    KoParentProvider,
+    KoParentDeclarationProvider,
     KoNullableProvider,
     KoKotlinTypeProvider,
     KoSourceAndAliasTypeProvider,

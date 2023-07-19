@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoAliasProvider
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoWildcardProvider
 
 /**
@@ -11,4 +11,4 @@ interface KoImportDeclaration :
     KoAliasProvider,
     KoBaseDeclaration,
     KoWildcardProvider,
-    KoParentProvider
+    KoParentDeclarationProvider

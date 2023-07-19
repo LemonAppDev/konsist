@@ -15,6 +15,12 @@ class KoClassDeclarationForParentTest {
 
         // then
         assertSoftly(sut) {
+            parents.map { it.name } shouldBeEqualTo listOf("SampleParentClass", "SampleParentInterface1", "SampleParentInterface2")
+            hasParents() shouldBeEqualTo true
+            hasParents("SampleParentClass") shouldBeEqualTo true
+            hasParents("OtherInterface") shouldBeEqualTo false
+            hasParents("SampleParentClass", "SampleParentInterface1") shouldBeEqualTo true
+            hasParents("SampleParentClass", "SampleParentInterface1", "OtherInterface") shouldBeEqualTo false
             parentClass?.name shouldBeEqualTo "SampleParentClass"
             hasParentClass() shouldBeEqualTo true
             hasParentClass("SampleParentClass") shouldBeEqualTo true
@@ -37,6 +43,9 @@ class KoClassDeclarationForParentTest {
 
         // then
         assertSoftly(sut) {
+            parents shouldBeEqualTo emptyList()
+            hasParents() shouldBeEqualTo false
+            hasParents("SampleClass") shouldBeEqualTo false
             parentClass shouldBeEqualTo null
             hasParentClass() shouldBeEqualTo false
             hasParentClass("SampleParentClass") shouldBeEqualTo false

@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 
-internal interface KoImportProviderCore : KoImportProvider, KoParentProviderCore {
+internal interface KoImportProviderCore : KoImportProvider, KoParentDeclarationProviderCore {
     val ktFile: KtFile
 
     override val imports: List<KoImportDeclaration>

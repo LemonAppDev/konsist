@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoConstructorProviderCore
@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoPrimaryConstructorDeclarationImpl private constructor(
     private val ktPrimaryConstructor: KtPrimaryConstructor,
-    override val parentDeclaration: KoParentProvider?,
+    override val parentDeclaration: KoParentDeclarationProvider?,
 ) :
     KoBaseDeclarationImpl(ktPrimaryConstructor),
     KoAnnotationProviderCore,
@@ -50,7 +50,7 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
 
         internal fun getInstance(
             ktPrimaryConstructor: KtPrimaryConstructor,
-            parentDeclaration: KoParentProvider?,
+            parentDeclaration: KoParentDeclarationProvider?,
         ): KoPrimaryConstructorDeclaration =
             cache.getOrCreateInstance(ktPrimaryConstructor, parentDeclaration) {
                 KoPrimaryConstructorDeclarationImpl(

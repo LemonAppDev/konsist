@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
@@ -33,7 +33,7 @@ internal class KoParentDeclarationImpl private constructor(private val ktSuperTy
     internal companion object {
         private val cache: KoDeclarationCache<KoParentDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktSuperTypeListEntry: KtSuperTypeListEntry, parentDeclaration: KoParentProvider?): KoParentDeclaration =
+        internal fun getInstance(ktSuperTypeListEntry: KtSuperTypeListEntry, parentDeclaration: KoParentDeclarationProvider?): KoParentDeclaration =
             cache.getOrCreateInstance(ktSuperTypeListEntry, parentDeclaration) { KoParentDeclarationImpl(ktSuperTypeListEntry) }
     }
 }

@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.psi.KtAnonymousInitializer
 
 internal class KoInitBlockDeclarationImpl private constructor(
     private val ktAnonymousInitializer: KtAnonymousInitializer,
-    parentDeclaration: KoParentProvider?,
+    parentDeclaration: KoParentDeclarationProvider?,
 ) :
     KoInitBlockDeclaration,
     KoClassProviderCore,
@@ -30,7 +30,7 @@ internal class KoInitBlockDeclarationImpl private constructor(
 
         internal fun getInstance(
             ktAnonymousInitializer: KtAnonymousInitializer,
-            parentDeclaration: KoParentProvider?,
+            parentDeclaration: KoParentDeclarationProvider?,
         ): KoInitBlockDeclaration =
             cache.getOrCreateInstance(ktAnonymousInitializer, parentDeclaration) {
                 KoInitBlockDeclarationImpl(ktAnonymousInitializer, parentDeclaration)

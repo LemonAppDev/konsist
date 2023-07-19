@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageMatchingFilePathProvider
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 
 /**
  * Represents a Kotlin package declaration.
@@ -10,5 +10,5 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
 interface KoPackageDeclaration :
     KoBaseDeclaration,
     KoFullyQualifiedNameProvider,
-    KoParentProvider,
+    KoParentDeclarationProvider,
     KoPackageMatchingFilePathProvider

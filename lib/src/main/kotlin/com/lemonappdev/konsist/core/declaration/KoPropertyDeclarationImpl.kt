@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoPropertyDeclarationImpl private constructor(
     override val ktProperty: KtProperty,
-    override val parentDeclaration: KoParentProvider?,
+    override val parentDeclaration: KoParentDeclarationProvider?,
 ) :
     KoPropertyDeclaration,
     KoBaseDeclarationImpl(ktProperty),
@@ -62,7 +62,7 @@ internal class KoPropertyDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoPropertyDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktProperty: KtProperty, parentDeclaration: KoParentProvider?): KoPropertyDeclaration =
+        internal fun getInstance(ktProperty: KtProperty, parentDeclaration: KoParentDeclarationProvider?): KoPropertyDeclaration =
             cache.getOrCreateInstance(ktProperty, parentDeclaration) {
                 KoPropertyDeclarationImpl(ktProperty, parentDeclaration)
             }

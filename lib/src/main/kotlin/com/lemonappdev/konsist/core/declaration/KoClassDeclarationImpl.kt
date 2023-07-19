@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
@@ -18,6 +18,7 @@ import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentInterfaceProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPrimaryConstructorProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
@@ -33,7 +34,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoClassDeclarationImpl private constructor(
     override val ktClass: KtClass,
-    override val parentDeclaration: KoParentProvider?,
+    override val parentDeclaration: KoParentDeclarationProvider?,
 ) :
     KoClassDeclaration,
     KoDeclarationProviderCore,
@@ -56,7 +57,8 @@ internal class KoClassDeclarationImpl private constructor(
     KoSecondaryConstructorsProviderCore,
     KoConstructorsProviderCore,
     KoHasTestProviderCore,
-    KoInitBlockProviderCore {
+    KoInitBlockProviderCore,
+    KoParentProviderCore {
     override val ktFile: KtFile?
         get() = null
 
@@ -77,7 +79,7 @@ internal class KoClassDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoClassDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktClass: KtClass, parentDeclaration: KoParentProvider?): KoClassDeclaration =
+        internal fun getInstance(ktClass: KtClass, parentDeclaration: KoParentDeclarationProvider?): KoClassDeclaration =
             cache.getOrCreateInstance(ktClass, parentDeclaration) {
                 KoClassDeclarationImpl(ktClass, parentDeclaration)
             }

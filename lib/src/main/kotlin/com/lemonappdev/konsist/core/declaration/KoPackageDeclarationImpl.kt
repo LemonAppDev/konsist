@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageMatchingFilePathProviderCore
@@ -25,7 +25,7 @@ internal class KoPackageDeclarationImpl private constructor(private val ktPackag
     internal companion object {
         private val cache: KoDeclarationCache<KoPackageDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktPackageDirective: KtPackageDirective, parentDeclaration: KoParentProvider?): KoPackageDeclaration =
+        internal fun getInstance(ktPackageDirective: KtPackageDirective, parentDeclaration: KoParentDeclarationProvider?): KoPackageDeclaration =
             cache.getOrCreateInstance(ktPackageDirective, parentDeclaration) { KoPackageDeclarationImpl(ktPackageDirective) }
     }
 }

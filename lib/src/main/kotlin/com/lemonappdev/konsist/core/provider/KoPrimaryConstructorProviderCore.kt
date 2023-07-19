@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.psi.KtClass
 
 internal interface KoPrimaryConstructorProviderCore :
     KoPrimaryConstructorProvider,
-    KoParentProviderCore {
+    KoParentDeclarationProviderCore {
     val ktClass: KtClass
 
     override val primaryConstructor: KoPrimaryConstructorDeclaration?

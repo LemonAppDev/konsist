@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 @Suppress("detekt.TooManyFunctions")
 internal class KoFunctionDeclarationImpl private constructor(
     override val ktFunction: KtFunction,
-    override val parentDeclaration: KoParentProvider?,
+    override val parentDeclaration: KoParentDeclarationProvider?,
 ) :
     KoBaseDeclarationImpl(ktFunction),
     KoAnnotationProviderCore,
@@ -87,7 +87,7 @@ internal class KoFunctionDeclarationImpl private constructor(
     internal companion object {
 
         private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
-        internal fun getInstance(ktFunction: KtFunction, parentDeclaration: KoParentProvider?): KoFunctionDeclaration =
+        internal fun getInstance(ktFunction: KtFunction, parentDeclaration: KoParentDeclarationProvider?): KoFunctionDeclaration =
             cache.getOrCreateInstance(ktFunction, parentDeclaration) {
                 KoFunctionDeclarationImpl(ktFunction, parentDeclaration)
             }
