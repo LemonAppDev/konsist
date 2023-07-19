@@ -9,8 +9,4 @@ internal interface KoPackageDeclarationProviderCore : KoPackageDeclarationProvid
 
     override val packagee: String?
         get() = containingFile.packagee?.fullyQualifiedName
-
-    override fun resideInPackage(packagee: String): Boolean = this.packagee?.let { LocationUtil.resideInLocation(packagee, it) } ?: false
-
-    override fun resideOutsidePackage(packagee: String): Boolean = !resideInPackage(packagee)
 }

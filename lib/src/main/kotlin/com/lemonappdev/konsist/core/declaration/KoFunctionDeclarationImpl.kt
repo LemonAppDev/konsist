@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
@@ -30,6 +31,7 @@ internal class KoFunctionDeclarationImpl private constructor(
     KoBaseDeclarationImpl(ktFunction),
     KoAnnotationDeclarationProviderCore,
     KoPackageDeclarationProviderCore,
+    KoResideInOrOutsidePackageProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoModifierProviderCore,
     KoTopLevelProviderCore,

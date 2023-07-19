@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
@@ -23,6 +24,7 @@ internal class KoTypeAliasDeclarationImpl private constructor(
     KoBaseDeclarationImpl(ktTypeAlias),
     KoAnnotationDeclarationProviderCore,
     KoPackageDeclarationProviderCore,
+    KoResideInOrOutsidePackageProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoModifierProviderCore,
     KoTopLevelProviderCore,

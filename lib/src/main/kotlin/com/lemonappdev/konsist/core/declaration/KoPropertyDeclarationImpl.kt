@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoVarAndValProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
@@ -26,6 +27,7 @@ internal class KoPropertyDeclarationImpl private constructor(
     KoBaseDeclarationImpl(ktProperty),
     KoAnnotationDeclarationProviderCore,
     KoPackageDeclarationProviderCore,
+    KoResideInOrOutsidePackageProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoModifierProviderCore,
     KoTopLevelProviderCore,

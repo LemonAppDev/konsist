@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
+import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
@@ -35,6 +36,7 @@ interface KoClassDeclaration :
     KoParentProvider,
     KoAnnotationDeclarationProvider,
     KoPackageDeclarationProvider,
+    KoResideInOrOutsidePackageProvider,
     KoDeclarationFullyQualifiedNameProvider,
     KoModifierProvider,
     KoTopLevelProvider,
