@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
 import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import com.lemonappdev.konsist.api.provider.KoNullableProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
@@ -47,10 +48,5 @@ interface KoTypeDeclaration :
     KoParentProvider,
     KoNullableProvider,
     KoKotlinTypeProvider,
-    KoSourceAndAliasTypeProvider {
-
-    /**
-     * Whatever type is generic type.
-     */
-    val isGenericType: Boolean
-}
+    KoSourceAndAliasTypeProvider,
+    KoGenericTypeProvider

@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.container.KoFileImpl
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoKotlinTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoNullableProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentProviderCore
@@ -22,7 +23,8 @@ internal class KoTypeDeclarationImpl private constructor(
     KoParentProviderCore,
     KoNullableProviderCore,
     KoSourceAndAliasTypeProviderCore,
-    KoKotlinTypeProviderCore {
+    KoKotlinTypeProviderCore,
+    KoGenericTypeProviderCore {
     private val file: KoFile by lazy { KoFileImpl(ktTypeReference.containingKtFile) }
 
     override val name: String by lazy {
@@ -30,12 +32,6 @@ internal class KoTypeDeclarationImpl private constructor(
             isAlias() -> aliasType + if (isNullable) "?" else ""
             else -> ktTypeReference.text
         }
-    }
-
-    override val isGenericType: Boolean by lazy {
-        val regex = "\\w+<[^<>]+>".toRegex()
-
-        regex.matches(sourceType)
     }
 
     override val fullyQualifiedName: String by lazy {
