@@ -9,7 +9,7 @@ class KoPackageDeclarationForNameTest {
     fun `package-does-not-exists`() {
         // given
         val sut = getSnippetFile("package-does-not-exists")
-            .packages()
+            .packages
             .toList()
             .firstOrNull()
 
@@ -21,7 +21,7 @@ class KoPackageDeclarationForNameTest {
     fun `package-has-name`() {
         // given
         val sut = getSnippetFile("package-has-name")
-            .packages()
+            .packages
             .first()
 
         // then
@@ -32,7 +32,7 @@ class KoPackageDeclarationForNameTest {
     fun `package-has-qualified-name`() {
         // given
         val sut = getSnippetFile("package-has-qualified-name")
-            .packages()
+            .packages
 
         // then
         sut

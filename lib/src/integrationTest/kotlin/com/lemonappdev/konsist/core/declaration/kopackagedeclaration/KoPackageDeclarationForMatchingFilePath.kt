@@ -9,7 +9,7 @@ class KoPackageDeclarationForMatchingFilePath {
     fun `package-with-matching-file-path`() {
         // given
         val sut = getSnippetFile("package-with-matching-file-path")
-            .packages()
+            .packages
             .first()
 
         // then
@@ -20,7 +20,7 @@ class KoPackageDeclarationForMatchingFilePath {
     fun `package-without-matching-file-path`() {
         // given
         val sut = getSnippetFile("package-without-matching-file-path")
-            .packages()
+            .packages
             .first()
 
         // then

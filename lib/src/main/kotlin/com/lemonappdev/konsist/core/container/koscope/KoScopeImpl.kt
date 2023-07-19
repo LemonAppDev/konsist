@@ -21,6 +21,7 @@ import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoImportProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
+import com.lemonappdev.konsist.core.provider.KoPackagesProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtFile
@@ -36,7 +37,8 @@ class KoScopeImpl(
     KoPropertyProviderCore,
     KoFunctionProviderCore,
     KoImportProviderCore,
-    KoAnnotationProviderCore {
+    KoAnnotationProviderCore,
+    KoPackagesProviderCore {
     constructor(koFile: KoFile) : this(sequenceOf(koFile))
 
     override val ktFile: KtFile?
@@ -83,8 +85,6 @@ class KoScopeImpl(
         includeLocal: Boolean,
     ): Sequence<KoPropertyDeclaration> =
         koFiles.flatMap { it.properties(includeNested, includeLocal) }
-
-    override fun packages(): Sequence<KoPackageDeclaration> = koFiles.mapNotNull { it.packagee }
 
     override fun typeAliases(): Sequence<KoTypeAliasDeclaration> = koFiles.flatMap { it.typeAliases }
 

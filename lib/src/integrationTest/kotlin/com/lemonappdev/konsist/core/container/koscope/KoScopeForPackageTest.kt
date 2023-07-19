@@ -13,7 +13,7 @@ class KoScopeForPackageTest {
 
         // then
         sut
-            .packages()
+            .packages
             .map { it.name }
             .toList()
             .shouldBeEqualTo(listOf("samplepackage"))
@@ -26,7 +26,7 @@ class KoScopeForPackageTest {
 
         // then
         sut
-            .packages()
+            .packages
             .toList()
             .shouldBeEqualTo(emptyList())
     }
