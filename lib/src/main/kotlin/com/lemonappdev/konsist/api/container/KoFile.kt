@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
+import com.lemonappdev.konsist.api.provider.KoHasPackageProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
@@ -37,7 +38,8 @@ interface KoFile :
     KoFileExtensionProvider,
     KoModuleProvider,
     KoSourceSetProvider,
-    KoPackageDeclarationProvider {
+    KoPackageDeclarationProvider,
+    KoHasPackageProvider {
 
     /**
      * The imports of the file.
@@ -48,14 +50,6 @@ interface KoFile :
      * The type aliases of the file.
      */
     val typeAliases: List<KoTypeAliasDeclaration>
-
-    /**
-     * Whether the file has package.
-     *
-     * @param name the name of the package to check.
-     * @return `true` if the file has a package with the specified name, `false` otherwise.
-     */
-    fun hasPackage(name: String): Boolean
 
     /**
      * Whether the file has imports.

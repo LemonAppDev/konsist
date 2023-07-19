@@ -18,6 +18,7 @@ import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFileExtensionProviderCore
+import com.lemonappdev.konsist.core.provider.KoHasPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
@@ -43,7 +44,8 @@ internal class KoFileImpl(override val ktFile: KtFile) :
     KoFileExtensionProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoPackageDeclarationProviderCore {
+    KoPackageDeclarationProviderCore,
+    KoHasPackageProviderCore {
 
     override val ktElement: KtElement
         get() = ktFile
@@ -88,10 +90,6 @@ internal class KoFileImpl(override val ktFile: KtFile) :
         includeLocal: Boolean,
     ): Sequence<KoBaseDeclaration> =
         KoDeclarationCoreProviderUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
-
-    override fun hasPackage(name: String): Boolean = packagee
-        ?.fullyQualifiedName
-        ?.let { LocationUtil.resideInLocation(name, it) } ?: false
 
     override fun hasImports(vararg names: String): Boolean = when {
         names.isEmpty() -> imports.isNotEmpty()
