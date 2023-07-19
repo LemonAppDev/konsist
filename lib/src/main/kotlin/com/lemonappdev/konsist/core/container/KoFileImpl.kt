@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
@@ -15,26 +16,38 @@ import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvid
 import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.util.LocationUtil
+import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
+import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import kotlin.reflect.KClass
 
 internal class KoFileImpl(private val ktFile: KtFile) :
     KoFile,
     KoNameProviderCore,
-    KoPathProviderCore {
+    KoPathProviderCore,
+    KoTextProviderCore,
+    KoAnnotationDeclarationProviderCore {
 
     override val ktElement: KtElement
         get() = ktFile
 
     override val psiElement: PsiElement
         get() = ktFile
+
+    override val ktAnnotated: KtAnnotated
+        get() = ktFile
+
+    override val parentDeclaration: KoParentProvider?
+        get() = null
 
     override val name by lazy { nameWithExtension.substringBeforeLast('.') }
 
@@ -76,8 +89,6 @@ internal class KoFileImpl(private val ktFile: KtFile) :
             .substringBefore(sep)
     }
 
-    override val text: String by lazy { ktFile.text }
-
     override val imports: List<KoImportDeclaration> by lazy {
         val ktImportDirectives = ktFile
             .children
@@ -87,12 +98,6 @@ internal class KoFileImpl(private val ktFile: KtFile) :
             .filterIsInstance<KtImportDirective>()
 
         ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it, null) }
-    }
-
-    override val annotations: List<KoAnnotationDeclaration> by lazy {
-        ktFile
-            .annotationEntries
-            .map { KoAnnotationDeclarationImpl.getInstance(it, null) }
     }
 
     override val packagee: KoPackageDeclaration? by lazy {
@@ -115,23 +120,6 @@ internal class KoFileImpl(private val ktFile: KtFile) :
         includeLocal: Boolean,
     ): Sequence<KoBaseDeclaration> =
         KoDeclarationCoreProviderUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
-
-    override fun hasAnnotations(vararg names: String): Boolean = when {
-        names.isEmpty() -> annotations.isNotEmpty()
-        else -> names.all {
-            annotations.any { annotation -> annotation.representsType(it) }
-        }
-    }
-
-    override fun hasAnnotationsOf(vararg names: KClass<*>): Boolean = names.all {
-        annotations.any { annotation ->
-            if (it.qualifiedName?.startsWith("kotlin.") == true) {
-                annotation.name == it.simpleName
-            } else {
-                annotation.fullyQualifiedName == it.qualifiedName
-            }
-        }
-    }
 
     override fun hasPackage(name: String): Boolean = packagee
         ?.fullyQualifiedName

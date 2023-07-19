@@ -19,6 +19,7 @@ import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoSecondaryConstructorsProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.util.TagUtil
+import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
@@ -43,6 +44,9 @@ internal class KoClassDeclarationImpl private constructor(
     KoInitBlockProviderCore {
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
+        get() = ktClass
+
+    override val ktAnnotated: KtAnnotated
         get() = ktClass
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, primaryConstructor?.parameters, kDoc)

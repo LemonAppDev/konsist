@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
+import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtTypeAlias
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
@@ -26,6 +27,9 @@ internal class KoTypeAliasDeclarationImpl private constructor(
     KoModifierProviderCore,
     KoTopLevelProviderCore,
     KoTypeProviderCore {
+    override val ktAnnotated: KtAnnotated
+        get() = ktTypeAlias
+
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktTypeAlias
 

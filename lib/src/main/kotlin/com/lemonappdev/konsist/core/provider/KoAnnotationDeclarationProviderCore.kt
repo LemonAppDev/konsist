@@ -3,17 +3,18 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
+import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import kotlin.reflect.KClass
 
 internal interface KoAnnotationDeclarationProviderCore :
     KoAnnotationDeclarationProvider,
     KoParentProviderCore {
-    val ktTypeParameterListOwner: KtTypeParameterListOwner
+    val ktAnnotated: KtAnnotated
 
     override val annotations: List<KoAnnotationDeclaration>
         get() =
-            ktTypeParameterListOwner
+            ktAnnotated
                 .annotationEntries
                 .map { KoAnnotationDeclarationImpl.getInstance(it, this) }
 

@@ -15,6 +15,7 @@ import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.util.TagUtil
+import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtFunction
@@ -38,6 +39,9 @@ internal class KoFunctionDeclarationImpl private constructor(
     KoExplicitReturnTypeProviderCore,
     KoReceiverTypeProviderCore,
     KoImplementationProviderCore {
+    override val ktAnnotated: KtAnnotated
+        get() = ktCallableDeclaration
+
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktCallableDeclaration
 

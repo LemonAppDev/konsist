@@ -4,8 +4,10 @@ import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoFunctionCoreProvider
@@ -25,7 +27,9 @@ interface KoFile :
     KoPropertyCoreProvider,
     KoFunctionCoreProvider,
     KoNameProvider,
-    KoPathProvider {
+    KoPathProvider,
+    KoTextProvider,
+    KoAnnotationDeclarationProvider {
 
     /**
      * The extension of the file.
@@ -48,19 +52,9 @@ interface KoFile :
     val sourceSetName: String
 
     /**
-     * The text of the file.
-     */
-    val text: String
-
-    /**
      * The imports of the file.
      */
     val imports: List<KoImportDeclaration>
-
-    /**
-     * The annotations of the file.
-     */
-    val annotations: List<KoAnnotationDeclaration>
 
     /**
      * The package of the file.
@@ -71,22 +65,6 @@ interface KoFile :
      * The type aliases of the file.
      */
     val typeAliases: List<KoTypeAliasDeclaration>
-
-    /**
-     * Whether the file has annotations.
-     *
-     * @param names the annotation names to check. It can be either a simple name or a fully qualified name.
-     * @return `true` if the file has annotations with the specified names (or any annotation if [names] is empty), `false` otherwise
-     */
-    fun hasAnnotations(vararg names: String): Boolean
-
-    /**
-     * Whether the file has annotations.
-     *
-     * @param names the `KClass` types of the annotations to check.
-     * @return `true` if the file has annotations with the specified `KClass` types, `false` otherwise.
-     */
-    fun hasAnnotationsOf(vararg names: KClass<*>): Boolean
 
     /**
      * Whether the file has package.

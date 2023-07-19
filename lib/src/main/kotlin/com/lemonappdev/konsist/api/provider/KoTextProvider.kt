@@ -2,12 +2,12 @@ package com.lemonappdev.konsist.api.provider
 
 interface KoTextProvider {
     /**
-     * Text of the declaration
+     * Text of the declaration or file.
      */
     val text: String
 
     /**
-     * Print declaration.
+     * Print declaration or file.
      */
     fun print(): Unit
 }
