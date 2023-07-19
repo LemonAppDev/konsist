@@ -20,6 +20,7 @@ import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFileExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
@@ -41,7 +42,8 @@ internal class KoFileImpl(override val ktFile: KtFile) :
     KoAnnotationDeclarationProviderCore,
     KoFileExtensionProviderCore,
     KoModuleProviderCore,
-    KoSourceSetProviderCore {
+    KoSourceSetProviderCore,
+    KoPackageDeclarationProviderCore {
 
     override val ktElement: KtElement
         get() = ktFile
@@ -72,14 +74,6 @@ internal class KoFileImpl(override val ktFile: KtFile) :
             .filterIsInstance<KtImportDirective>()
 
         ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it, null) }
-    }
-
-    override val packagee: KoPackageDeclaration? by lazy {
-        if (ktFile.packageDirective?.qualifiedName == "") {
-            null
-        } else {
-            ktFile.packageDirective?.let { KoPackageDeclarationImpl.getInstance(it, null) }
-        }
     }
 
     override val typeAliases: List<KoTypeAliasDeclaration> by lazy {

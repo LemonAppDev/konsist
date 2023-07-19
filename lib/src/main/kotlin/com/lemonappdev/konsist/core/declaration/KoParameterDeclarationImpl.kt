@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderC
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -36,6 +37,9 @@ internal class KoParameterDeclarationImpl private constructor(
     KoRepresentsTypeProviderCore {
     override val ktAnnotated: KtAnnotated
         get() = ktParameter
+
+    override val ktFile: KtFile?
+        get() = null
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktParameter

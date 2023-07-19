@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
+import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtSecondaryConstructor
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
@@ -33,6 +34,9 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
     KoSecondaryConstructorDeclaration {
     override val ktAnnotated: KtAnnotated
         get() = ktSecondaryConstructor
+
+    override val ktFile: KtFile?
+        get() = null
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktSecondaryConstructor

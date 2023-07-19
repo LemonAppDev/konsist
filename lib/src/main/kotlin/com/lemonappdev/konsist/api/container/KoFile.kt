@@ -36,17 +36,13 @@ interface KoFile :
     KoAnnotationDeclarationProvider,
     KoFileExtensionProvider,
     KoModuleProvider,
-    KoSourceSetProvider {
+    KoSourceSetProvider,
+    KoPackageDeclarationProvider {
 
     /**
      * The imports of the file.
      */
     val imports: List<KoImportDeclaration>
-
-    /**
-     * The package of the file.
-     */
-    val packagee: KoPackageDeclaration?
 
     /**
      * The type aliases of the file.

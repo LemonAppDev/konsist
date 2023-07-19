@@ -19,6 +19,7 @@ import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtClass
+import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -41,6 +42,9 @@ internal class KoFunctionDeclarationImpl private constructor(
     KoExplicitReturnTypeProviderCore,
     KoReceiverTypeProviderCore,
     KoImplementationProviderCore {
+    override val ktFile: KtFile?
+        get() = null
+
     override val ktAnnotated: KtAnnotated
         get() = ktCallableDeclaration
 
