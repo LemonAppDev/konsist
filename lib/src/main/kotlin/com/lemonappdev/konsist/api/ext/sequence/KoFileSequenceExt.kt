@@ -144,7 +144,7 @@ fun <T : KoFile> Sequence<T>.withoutExtension(extension: String, vararg extensio
  * @return A sequence containing files that reside in any of the specified paths.
  */
 fun <T : KoFile> Sequence<T>.withPath(path: String, vararg paths: String): Sequence<T> = filter {
-    it.resideInPath(path) || paths.any { path -> it.resideInPath(path) }
+    it.resideInPath(path, absolutePath = true) || paths.any { path -> it.resideInPath(path, absolutePath = true) }
 }
 
 /**
@@ -155,7 +155,7 @@ fun <T : KoFile> Sequence<T>.withPath(path: String, vararg paths: String): Seque
  * @return A sequence containing files that don't reside in any of the specified paths.
  */
 fun <T : KoFile> Sequence<T>.withoutPath(path: String, vararg paths: String): Sequence<T> = filter {
-    !it.resideInPath(path) && paths.none { path -> it.resideInPath(path) }
+    !it.resideInPath(path, absolutePath = true) && paths.none { path -> it.resideInPath(path, absolutePath = true) }
 }
 
 /**
@@ -166,7 +166,7 @@ fun <T : KoFile> Sequence<T>.withoutPath(path: String, vararg paths: String): Se
  * @return A sequence containing files that reside in any of the specified project paths.
  */
 fun <T : KoFile> Sequence<T>.withProjectPath(path: String, vararg paths: String): Sequence<T> = filter {
-    it.resideInProjectPath(path) || paths.any { path -> it.resideInProjectPath(path) }
+    it.resideInPath(path, absolutePath = false) || paths.any { path -> it.resideInPath(path, absolutePath = false) }
 }
 
 /**
@@ -177,7 +177,7 @@ fun <T : KoFile> Sequence<T>.withProjectPath(path: String, vararg paths: String)
  * @return A sequence containing files that don't reside in any of the specified project paths.
  */
 fun <T : KoFile> Sequence<T>.withoutProjectPath(path: String, vararg paths: String): Sequence<T> = filter {
-    !it.resideInProjectPath(path) && paths.none { path -> it.resideInProjectPath(path) }
+    !it.resideInPath(path, absolutePath = false) && paths.none { path -> it.resideInPath(path, absolutePath = false) }
 }
 
 /**

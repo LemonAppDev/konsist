@@ -17,10 +17,10 @@ class KoFileForPathSequenceExtTest {
         // given
         val path = "com/sample/samplepath.."
         val file1: KoFileImpl = mockk {
-            every { resideInPath(path) } returns true
+            every { resideInPath(path, absolutePath = true) } returns true
         }
         val file2: KoFileImpl = mockk {
-            every { resideInPath(path) } returns false
+            every { resideInPath(path, absolutePath = true) } returns false
         }
         val files = sequenceOf(file1, file2)
 
@@ -37,16 +37,16 @@ class KoFileForPathSequenceExtTest {
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
         val file1: KoFileImpl = mockk {
-            every { resideInPath(path1) } returns true
-            every { resideInPath(path2) } returns true
+            every { resideInPath(path1, absolutePath = true) } returns true
+            every { resideInPath(path2, absolutePath = true) } returns true
         }
         val file2: KoFileImpl = mockk {
-            every { resideInPath(path1) } returns false
-            every { resideInPath(path2) } returns true
+            every { resideInPath(path1, absolutePath = true) } returns false
+            every { resideInPath(path2, absolutePath = true) } returns true
         }
         val file3: KoFileImpl = mockk {
-            every { resideInPath(path1) } returns false
-            every { resideInPath(path2) } returns false
+            every { resideInPath(path1, absolutePath = true) } returns false
+            every { resideInPath(path2, absolutePath = true) } returns false
         }
         val files = sequenceOf(file1, file2, file3)
 
@@ -62,10 +62,10 @@ class KoFileForPathSequenceExtTest {
         // given
         val path = "com/sample/samplepath.."
         val file1: KoFileImpl = mockk {
-            every { resideInPath(path) } returns true
+            every { resideInPath(path, absolutePath = true) } returns true
         }
         val file2: KoFileImpl = mockk {
-            every { resideInPath(path) } returns false
+            every { resideInPath(path, absolutePath = true) } returns false
         }
         val files = sequenceOf(file1, file2)
 
@@ -82,16 +82,16 @@ class KoFileForPathSequenceExtTest {
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
         val file1: KoFileImpl = mockk {
-            every { resideInPath(path1) } returns true
-            every { resideInPath(path2) } returns true
+            every { resideInPath(path1, absolutePath = true) } returns true
+            every { resideInPath(path2, absolutePath = true) } returns true
         }
         val file2: KoFileImpl = mockk {
-            every { resideInPath(path1) } returns false
-            every { resideInPath(path2) } returns true
+            every { resideInPath(path1, absolutePath = true) } returns false
+            every { resideInPath(path2, absolutePath = true) } returns true
         }
         val file3: KoFileImpl = mockk {
-            every { resideInPath(path1) } returns false
-            every { resideInPath(path2) } returns false
+            every { resideInPath(path1, absolutePath = true) } returns false
+            every { resideInPath(path2, absolutePath = true) } returns false
         }
         val files = sequenceOf(file1, file2, file3)
 
@@ -107,10 +107,10 @@ class KoFileForPathSequenceExtTest {
         // given
         val projectPath = "com/sample/sampleProjectPath.."
         val file1: KoFileImpl = mockk {
-            every { resideInProjectPath(projectPath) } returns true
+            every { resideInPath(projectPath, absolutePath = false) } returns true
         }
         val file2: KoFileImpl = mockk {
-            every { resideInProjectPath(projectPath) } returns false
+            every { resideInPath(projectPath, absolutePath = false) } returns false
         }
         val files = sequenceOf(file1, file2)
 
@@ -127,16 +127,16 @@ class KoFileForPathSequenceExtTest {
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
         val file1: KoFileImpl = mockk {
-            every { resideInProjectPath(projectPath1) } returns true
-            every { resideInProjectPath(projectPath2) } returns true
+            every { resideInPath(projectPath1, absolutePath = false) } returns true
+            every { resideInPath(projectPath2, absolutePath = false) } returns true
         }
         val file2: KoFileImpl = mockk {
-            every { resideInProjectPath(projectPath1) } returns false
-            every { resideInProjectPath(projectPath2) } returns true
+            every { resideInPath(projectPath1, absolutePath = false) } returns false
+            every { resideInPath(projectPath2, absolutePath = false) } returns true
         }
         val file3: KoFileImpl = mockk {
-            every { resideInProjectPath(projectPath1) } returns false
-            every { resideInProjectPath(projectPath2) } returns false
+            every { resideInPath(projectPath1, absolutePath = false) } returns false
+            every { resideInPath(projectPath2, absolutePath = false) } returns false
         }
         val files = sequenceOf(file1, file2, file3)
 
@@ -152,10 +152,10 @@ class KoFileForPathSequenceExtTest {
         // given
         val projectPath = "com/sample/sampleProjectPath.."
         val file1: KoFileImpl = mockk {
-            every { resideInProjectPath(projectPath) } returns true
+            every { resideInPath(projectPath, absolutePath = false) } returns true
         }
         val file2: KoFileImpl = mockk {
-            every { resideInProjectPath(projectPath) } returns false
+            every { resideInPath(projectPath, absolutePath = false) } returns false
         }
         val files = sequenceOf(file1, file2)
 
@@ -172,16 +172,16 @@ class KoFileForPathSequenceExtTest {
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
         val file1: KoFileImpl = mockk {
-            every { resideInProjectPath(projectPath1) } returns true
-            every { resideInProjectPath(projectPath2) } returns true
+            every { resideInPath(projectPath1, absolutePath = false) } returns true
+            every { resideInPath(projectPath2, absolutePath = false) } returns true
         }
         val file2: KoFileImpl = mockk {
-            every { resideInProjectPath(projectPath1) } returns false
-            every { resideInProjectPath(projectPath2) } returns true
+            every { resideInPath(projectPath1, absolutePath = false) } returns false
+            every { resideInPath(projectPath2, absolutePath = false) } returns true
         }
         val file3: KoFileImpl = mockk {
-            every { resideInProjectPath(projectPath1) } returns false
-            every { resideInProjectPath(projectPath2) } returns false
+            every { resideInPath(projectPath1, absolutePath = false) } returns false
+            every { resideInPath(projectPath2, absolutePath = false) } returns false
         }
         val files = sequenceOf(file1, file2, file3)
 

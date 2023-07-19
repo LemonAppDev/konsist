@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.container
 
+import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
@@ -15,6 +16,7 @@ import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
@@ -25,9 +27,13 @@ import kotlin.reflect.KClass
 
 internal class KoFileImpl(private val ktFile: KtFile) :
     KoFile,
-    KoNameProviderCore {
+    KoNameProviderCore,
+    KoPathProviderCore {
 
     override val ktElement: KtElement
+        get() = ktFile
+
+    override val psiElement: PsiElement
         get() = ktFile
 
     override val name by lazy { nameWithExtension.substringBeforeLast('.') }
@@ -45,15 +51,6 @@ internal class KoFileImpl(private val ktFile: KtFile) :
         ktFile
             .name
             .toOsSeparator()
-    }
-
-    override val projectPath by lazy {
-        val rootPathProvider = PathProvider
-            .getInstance()
-            .rootProjectPath
-            .toOsSeparator()
-
-        path.removePrefix(rootPathProvider)
     }
 
     override val moduleName: String by lazy {
@@ -153,10 +150,6 @@ internal class KoFileImpl(private val ktFile: KtFile) :
             typeAliases.any { typeAlias -> typeAlias.name == it }
         }
     }
-
-    override fun resideInPath(path: String) = LocationUtil.resideInLocation(path, this.path)
-
-    override fun resideInProjectPath(path: String) = LocationUtil.resideInLocation(path, projectPath)
 
     override fun resideInModule(module: String): Boolean = module == moduleName
 

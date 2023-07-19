@@ -209,7 +209,7 @@ fun <T : KoKDocProvider> Sequence<T>.withoutKDocWithSomeTags(tag: KoKDocTag, var
  */
 fun <T : KoPathProvider> Sequence<T>.withFilePath(path: String, vararg paths: String, absolutePath: Boolean = false): Sequence<T> =
     filter {
-        it.resideInFilePath(path, absolutePath) || paths.any { path -> it.resideInFilePath(path, absolutePath) }
+        it.resideInPath(path, absolutePath) || paths.any { path -> it.resideInPath(path, absolutePath) }
     }
 
 /**
@@ -222,7 +222,7 @@ fun <T : KoPathProvider> Sequence<T>.withFilePath(path: String, vararg paths: St
  */
 fun <T : KoPathProvider> Sequence<T>.withoutFilePath(path: String, vararg paths: String, absolutePath: Boolean = false): Sequence<T> =
     filter {
-        !it.resideInFilePath(path, absolutePath) && paths.none { path -> it.resideInFilePath(path, absolutePath) }
+        !it.resideInPath(path, absolutePath) && paths.none { path -> it.resideInPath(path, absolutePath) }
     }
 
 /**

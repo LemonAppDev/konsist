@@ -14,7 +14,7 @@ class KoPsiDeclarationForPathTest {
             .first()
 
         // then
-        assertSoftly(sut.filePath) {
+        assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
             endsWith("kopsideclaration/snippet/forpath/file-path.kt") shouldBeEqualTo true
         }
@@ -29,7 +29,7 @@ class KoPsiDeclarationForPathTest {
 
         // then
         sut
-            .projectFilePath
+            .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kopsideclaration/snippet/forpath/" +
                     "project-file-path.kt",

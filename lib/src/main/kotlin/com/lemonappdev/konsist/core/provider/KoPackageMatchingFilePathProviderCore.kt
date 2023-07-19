@@ -9,7 +9,7 @@ internal interface KoPackageMatchingFilePathProviderCore :
     KoPathProviderCore {
     override val hasMatchingFilePath: Boolean
         get() =
-            filePath
+            path
                 .replace("/", ".")
                 .endsWith(fullyQualifiedName + "." + containingFile.nameWithExtension)
 }

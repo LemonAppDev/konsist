@@ -2,23 +2,23 @@ package com.lemonappdev.konsist.api.provider
 
 interface KoPathProvider {
     /**
-     * File path of the declaration.
+     * File path of the declaration or path of the file.
      */
-    val filePath: String
+    val path: String
 
     /**
-     * Project file path of the declaration.
+     * Project file path of the declaration or root project path of the file.
      */
-    val projectFilePath: String
+    val projectPath: String
 
     /**
-     * Whatever declaration reside in file path.
+     * Whatever declaration reside in file path or file reside in path.
      *
-     * @param path the file path to check.
+     * @param path the (file) path to check.
      * @param absolutePath Flag indicating whether the provided path is an absolute path.
      *                    If set to `true`, the `path` parameter represents an absolute path.
      *                    If set to `false` (default), the `path` parameter represents a relative path.
-     * @return `true` if the declaration resides in the specified file path, `false` otherwise.
+     * @return `true` if the declaration resides in the specified (file) path, `false` otherwise.
      */
-    fun resideInFilePath(path: String, absolutePath: Boolean = false): Boolean
+    fun resideInPath(path: String, absolutePath: Boolean = false): Boolean
 }

@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoFunctionCoreProvider
@@ -23,7 +24,8 @@ interface KoFile :
     KoObjectCoreProvider,
     KoPropertyCoreProvider,
     KoFunctionCoreProvider,
-    KoNameProvider {
+    KoNameProvider,
+    KoPathProvider {
 
     /**
      * The extension of the file.
@@ -36,19 +38,9 @@ interface KoFile :
     val nameWithExtension: String
 
     /**
-     * The path of the file.
-     */
-    val path: String
-
-    /**
      * The file's module name.
      */
     val moduleName: String
-
-    /**
-     * The root project path of the file.
-     */
-    val projectPath: String
 
     /**
      * The file's source set name.
@@ -119,22 +111,6 @@ interface KoFile :
      * @return `true` if the file has type aliases with the specified names (or any type alias if [names] is empty), `false` otherwise.
      */
     fun hasTypeAliases(vararg names: String): Boolean
-
-    /**
-     * Whether file reside in path.
-     *
-     * @param path The path to check.
-     * @return `true` if a file resides in the specified path, `false` otherwise.
-     */
-    fun resideInPath(path: String): Boolean
-
-    /**
-     * Whether file reside in root project path.
-     *
-     * @param path The path to check.
-     * @return `true` if a file resides in the root project path, `false` otherwise.
-     */
-    fun resideInProjectPath(path: String): Boolean
 
     /**
      * Whether file reside in module.

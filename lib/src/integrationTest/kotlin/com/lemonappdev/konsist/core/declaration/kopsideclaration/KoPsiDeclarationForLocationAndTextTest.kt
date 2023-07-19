@@ -12,7 +12,7 @@ class KoPsiDeclarationForLocationAndTextTest {
         val projectPath = getSnippetFile("location-with-text")
             .declarations()
             .first()
-            .projectFilePath
+            .projectPath
 
         val sut = getSnippetFile("location-with-text")
             .functions()
@@ -35,7 +35,7 @@ class KoPsiDeclarationForLocationAndTextTest {
             .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.filePath}:3:1"
+        sut.location shouldBeEqualTo "${sut.path}:3:1"
     }
 
     @Test
@@ -46,7 +46,7 @@ class KoPsiDeclarationForLocationAndTextTest {
             .first()
 
         // then
-        sut.location shouldBeEqualTo "${sut.filePath}:10:25"
+        sut.location shouldBeEqualTo "${sut.path}:10:25"
     }
 
     @Test

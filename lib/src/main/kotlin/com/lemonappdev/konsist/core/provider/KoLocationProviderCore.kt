@@ -19,7 +19,7 @@ internal interface KoLocationProviderCore :
 
             val line = lineAndColumn[0]
             val column = lineAndColumn[1]
-            return "$filePath:$line:$column"
+            return "$path:$line:$column"
         }
 
     override val locationWithText: String

@@ -15,10 +15,10 @@ class KoFileForResideInTest {
 
         // then
         assertSoftly(sut) {
-            resideInPath("..snippet..") shouldBeEqualTo true
-            resideInPath("..kofile/snippet..") shouldBeEqualTo true
-            resideInPath("..kofile..reside-in-path.kt") shouldBeEqualTo true
-            resideInPath("kofile/snippet/") shouldBeEqualTo false
+            resideInPath("..snippet..", absolutePath = true) shouldBeEqualTo true
+            resideInPath("..kofile/snippet..", absolutePath = true) shouldBeEqualTo true
+            resideInPath("..kofile..reside-in-path.kt", absolutePath = true) shouldBeEqualTo true
+            resideInPath("kofile/snippet/", absolutePath = true) shouldBeEqualTo false
         }
     }
 
@@ -31,10 +31,10 @@ class KoFileForResideInTest {
 
         // then
         assertSoftly(sut) {
-            resideInProjectPath("..snippet..") shouldBeEqualTo true
-            resideInProjectPath("..kofile/snippet..") shouldBeEqualTo true
-            resideInProjectPath("..kofile..reside-in-project-path.kt") shouldBeEqualTo true
-            resideInProjectPath("kofile/snippet/") shouldBeEqualTo false
+            resideInPath("..snippet..", absolutePath = false) shouldBeEqualTo true
+            resideInPath("..kofile/snippet..", absolutePath = false) shouldBeEqualTo true
+            resideInPath("..kofile..reside-in-project-path.kt", absolutePath = false) shouldBeEqualTo true
+            resideInPath("kofile/snippet/", absolutePath = false) shouldBeEqualTo false
         }
     }
 
