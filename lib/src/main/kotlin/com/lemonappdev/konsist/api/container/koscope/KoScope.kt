@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoClassProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
@@ -24,7 +25,8 @@ interface KoScope :
     KoObjectProvider,
     KoPropertyProvider,
     KoFunctionProvider,
-    KoImportProvider {
+    KoImportProvider,
+    KoAnnotationProvider {
 
     /**
      * The files present in the scope.
@@ -32,13 +34,6 @@ interface KoScope :
      * @return a sequence of [KoFile] representing the files in the scope.
      */
     fun files(): Sequence<KoFile>
-
-    /**
-     * The annotations present in the scope.
-     *
-     * @return a sequence of [KoAnnotationDeclaration] representing the annotations in the scope.
-     */
-    fun annotations(): Sequence<KoAnnotationDeclaration>
 
     /**
      * The packages present in the scope.

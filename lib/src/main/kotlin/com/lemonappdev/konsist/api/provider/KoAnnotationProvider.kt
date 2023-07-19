@@ -5,9 +5,9 @@ import kotlin.reflect.KClass
 
 interface KoAnnotationProvider {
     /**
-     * List of annotations.
+     * Sequence of annotations.
      */
-    val annotations: List<KoAnnotationDeclaration>
+    val annotations: Sequence<KoAnnotationDeclaration>
 
     /**
      * Whether the declaration or file has annotations.

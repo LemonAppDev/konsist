@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
@@ -38,6 +39,8 @@ internal class KoTypeAliasDeclarationImpl private constructor(
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktTypeAlias
+
+    override val koFiles: Sequence<KoFile>? = null
 
     override val type: KoTypeDeclaration by lazy {
         ktTypeAlias

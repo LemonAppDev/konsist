@@ -321,10 +321,10 @@ class KoDeclarationForAnnotationSequenceExtTest {
             every { fullyQualifiedName } returns qualifiedName2
         }
         val declaration1: KoAnnotationProvider = mockk {
-            every { annotations } returns listOf(annotation1)
+            every { annotations } returns sequenceOf(annotation1)
         }
         val declaration2: KoAnnotationProvider = mockk {
-            every { annotations } returns listOf(annotation2)
+            every { annotations } returns sequenceOf(annotation2)
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
@@ -347,10 +347,10 @@ class KoDeclarationForAnnotationSequenceExtTest {
             every { fullyQualifiedName } returns qualifiedName2
         }
         val declaration1: KoAnnotationProvider = mockk {
-            every { annotations } returns listOf(annotation1)
+            every { annotations } returns sequenceOf(annotation1)
         }
         val declaration2: KoAnnotationProvider = mockk {
-            every { annotations } returns listOf(annotation2)
+            every { annotations } returns sequenceOf(annotation2)
         }
         val declarations = sequenceOf(declaration1, declaration2)
 

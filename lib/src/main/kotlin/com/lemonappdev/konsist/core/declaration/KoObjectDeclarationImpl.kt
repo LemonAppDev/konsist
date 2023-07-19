@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
@@ -50,6 +51,8 @@ internal class KoObjectDeclarationImpl(
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktObjectDeclaration
+
+    override val koFiles: Sequence<KoFile>? = null
 
     override val name: String by lazy {
         if (hasCompanionModifier() && super<KoBaseDeclarationImpl>.name == "") {

@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
@@ -21,6 +22,7 @@ import com.lemonappdev.konsist.core.provider.KoImportProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
+import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtFile
 
 @Suppress("detekt.TooManyFunctions")
@@ -33,13 +35,17 @@ class KoScopeImpl(
     KoObjectProviderCore,
     KoPropertyProviderCore,
     KoFunctionProviderCore,
-    KoImportProviderCore {
+    KoImportProviderCore,
+    KoAnnotationProviderCore {
     constructor(koFile: KoFile) : this(sequenceOf(koFile))
 
     override val ktFile: KtFile?
         get() = null
 
     override val parentDeclaration: KoParentDeclarationProvider?
+        get() = null
+
+    override val ktAnnotated: KtAnnotated?
         get() = null
 
     override fun files(): Sequence<KoFile> = koFiles.sortedBy { it.path }
@@ -77,8 +83,6 @@ class KoScopeImpl(
         includeLocal: Boolean,
     ): Sequence<KoPropertyDeclaration> =
         koFiles.flatMap { it.properties(includeNested, includeLocal) }
-
-    override fun annotations(): Sequence<KoAnnotationDeclaration> = koFiles.flatMap { it.annotations }
 
     override fun packages(): Sequence<KoPackageDeclaration> = koFiles.mapNotNull { it.packagee }
 

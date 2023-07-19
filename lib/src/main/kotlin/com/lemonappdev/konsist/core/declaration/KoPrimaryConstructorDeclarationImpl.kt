@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -43,6 +44,8 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
 
     override val ktCallableDeclaration: KtCallableDeclaration
         get() = ktPrimaryConstructor
+
+    override val koFiles: Sequence<KoFile>? = null
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters, kDoc)
     internal companion object {

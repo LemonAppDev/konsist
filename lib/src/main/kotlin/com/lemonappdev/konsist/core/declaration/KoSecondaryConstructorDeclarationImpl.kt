@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -37,6 +38,8 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
 
     override val ktFile: KtFile?
         get() = null
+
+    override val koFiles: Sequence<KoFile>? = null
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktSecondaryConstructor

@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
@@ -50,6 +51,8 @@ internal class KoInterfaceDeclarationImpl private constructor(
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktClass
+
+    override val koFiles: Sequence<KoFile>? = null
 
     override fun declarations(
         includeNested: Boolean,

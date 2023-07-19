@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -48,6 +49,8 @@ internal class KoPropertyDeclarationImpl private constructor(
 
     override val ktCallableDeclaration: KtCallableDeclaration
         get() = ktProperty
+
+    override val koFiles: Sequence<KoFile>? = null
 
     override val delegateName: String? by lazy {
         ktProperty

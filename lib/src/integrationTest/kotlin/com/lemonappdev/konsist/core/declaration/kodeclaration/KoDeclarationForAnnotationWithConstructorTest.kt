@@ -20,7 +20,7 @@ class KoDeclarationForAnnotationWithConstructorTest {
 
         // then
         sut?.let {
-            it.annotations.isEmpty() shouldBeEqualTo true
+            it.annotations.toList().isEmpty() shouldBeEqualTo true
             it.hasAnnotations("SampleAnnotation") shouldBeEqualTo false
             it.hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
         }
@@ -37,7 +37,7 @@ class KoDeclarationForAnnotationWithConstructorTest {
 
         // then
         sut.let {
-            it.annotations.isEmpty() shouldBeEqualTo true
+            it.annotations.toList().isEmpty() shouldBeEqualTo true
             it.hasAnnotations("SampleAnnotation") shouldBeEqualTo false
             it.hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
         }

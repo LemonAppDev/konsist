@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
@@ -53,6 +54,8 @@ internal class KoFunctionDeclarationImpl private constructor(
 
     override val ktCallableDeclaration: KtCallableDeclaration
         get() = ktFunction
+
+    override val koFiles: Sequence<KoFile>? = null
 
     private val localDeclarations: Sequence<KoBaseDeclaration>
         get() {

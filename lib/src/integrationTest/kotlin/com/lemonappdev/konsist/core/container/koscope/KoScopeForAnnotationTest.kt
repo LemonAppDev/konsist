@@ -13,7 +13,7 @@ class KoScopeForAnnotationTest {
 
         // then
         sut
-            .annotations()
+            .annotations
             .map { it.name }
             .toList()
             .shouldBeEqualTo(listOf("SampleAnnotation1"))
@@ -26,7 +26,7 @@ class KoScopeForAnnotationTest {
 
         // then
         sut
-            .annotations()
+            .annotations
             .toList()
             .shouldBeEqualTo(emptyList())
     }

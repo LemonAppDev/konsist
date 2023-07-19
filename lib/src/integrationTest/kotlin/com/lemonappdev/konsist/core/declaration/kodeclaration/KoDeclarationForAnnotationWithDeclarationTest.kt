@@ -45,7 +45,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            annotations.size shouldBeEqualTo 1
+            annotations.toList().size shouldBeEqualTo 1
             hasAnnotations(name) shouldBeEqualTo value
         }
     }
@@ -66,7 +66,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            annotations.size shouldBeEqualTo 2
+            annotations.toList().size shouldBeEqualTo 2
             hasAnnotations(name1, name2) shouldBeEqualTo value
         }
     }
@@ -86,7 +86,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            annotations.size shouldBeEqualTo 2
+            annotations.toList().size shouldBeEqualTo 2
             hasAnnotations(name) shouldBeEqualTo value
         }
     }
@@ -106,7 +106,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            annotations.size shouldBeEqualTo 1
+            annotations.toList().size shouldBeEqualTo 1
             hasAnnotationsOf(name) shouldBeEqualTo value
         }
     }
@@ -127,7 +127,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            annotations.size shouldBeEqualTo 2
+            annotations.toList().size shouldBeEqualTo 2
             hasAnnotationsOf(name1, name2) shouldBeEqualTo value
         }
     }
@@ -147,7 +147,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            annotations.size shouldBeEqualTo 2
+            annotations.toList().size shouldBeEqualTo 2
             hasAnnotationsOf(name) shouldBeEqualTo value
         }
     }
@@ -165,7 +165,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
 
         // then
         assertSoftly(sut) {
-            annotations.size shouldBeEqualTo 1
+            annotations.toList().size shouldBeEqualTo 1
             hasAnnotationsOf(Suppress::class) shouldBeEqualTo true
         }
     }

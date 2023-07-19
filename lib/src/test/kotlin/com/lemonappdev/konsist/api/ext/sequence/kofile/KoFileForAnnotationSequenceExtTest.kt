@@ -322,10 +322,10 @@ class KoFileForAnnotationSequenceExtTest {
             every { fullyQualifiedName } returns qualifiedName2
         }
         val file1: KoFileImpl = mockk {
-            every { annotations } returns listOf(annotation1)
+            every { annotations } returns sequenceOf(annotation1)
         }
         val file2: KoFileImpl = mockk {
-            every { annotations } returns listOf(annotation2)
+            every { annotations } returns sequenceOf(annotation2)
         }
         val files = sequenceOf(file1, file2)
 
@@ -348,10 +348,10 @@ class KoFileForAnnotationSequenceExtTest {
             every { fullyQualifiedName } returns qualifiedName2
         }
         val file1: KoFileImpl = mockk {
-            every { annotations } returns listOf(annotation1)
+            every { annotations } returns sequenceOf(annotation1)
         }
         val file2: KoFileImpl = mockk {
-            every { annotations } returns listOf(annotation2)
+            every { annotations } returns sequenceOf(annotation2)
         }
         val files = sequenceOf(file1, file2)
 
