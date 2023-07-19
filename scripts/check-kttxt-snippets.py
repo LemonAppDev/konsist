@@ -47,7 +47,7 @@ for root, dirs, files in os.walk(destination_dir):
             file_content = file.read()
 
         # remove ignoring multiplatform and 1.9 kotlin version on the snippets - ticket KON-216
-        if "actual" in file_content or "expect" in file_content or "data object" in file_content:
+        if "actual" in file_content or "expect" in file_content in file_content:
             continue
         else:
             # create and run kotlinc command which verifies valid kotlin code
