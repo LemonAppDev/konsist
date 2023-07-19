@@ -1,5 +1,5 @@
-//package com.lemonappdev.konsist.core.verify
-//
+package com.lemonappdev.konsist.core.verify
+
 //import com.lemonappdev.konsist.api.container.KoFile
 //import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 //import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
@@ -16,6 +16,7 @@
 //    assert(function, false)
 //}
 //
+// ToDo: Uncomment and implement this
 //@Suppress("detekt.ThrowsCount")
 //private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
 //    var lastDeclaration: KoBaseDeclaration? = null
