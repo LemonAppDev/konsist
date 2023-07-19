@@ -1,8 +1,10 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import com.lemonappdev.konsist.api.provider.KoNullableProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 
 /**
  * Represents a Kotlin declaration.
@@ -43,32 +45,12 @@ interface KoTypeDeclaration :
     KoBaseDeclaration,
     KoFullyQualifiedNameProvider,
     KoParentProvider,
-    KoNullableProvider {
-    /**
-     * The import alias name.
-     */
-    val aliasType: String?
-
-    /**
-     * The source type.
-     */
-    val sourceType: String
-
-    /**
-     * Whatever type is a build in Kotlin type. It can be a basic Kotlin type [Basic types](https://kotlinlang.org/docs/basic-types.html)
-     * or collection type [Collections overview](https://kotlinlang.org/docs/collections-overview.html#collection).
-     */
-    val isKotlinType: Boolean
+    KoNullableProvider,
+    KoKotlinTypeProvider,
+    KoSourceAndAliasTypeProvider {
 
     /**
      * Whatever type is generic type.
      */
     val isGenericType: Boolean
-
-    /**
-     * Returns `true` if this type is import alias.
-     *
-     * @return `true` if this type is import type alias, `false` otherwise.
-     */
-    fun isAlias(): Boolean
 }
