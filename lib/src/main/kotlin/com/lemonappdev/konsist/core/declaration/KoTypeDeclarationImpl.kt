@@ -45,6 +45,56 @@ internal class KoTypeDeclarationImpl private constructor(
 
     override val isNullable: Boolean by lazy { ktTypeReference.text.last() == '?' }
 
+    override val isKotlinType: Boolean by lazy {
+        if (isAlias()) {
+            false
+        } else {
+            val parts = sourceType.split("<", ">", " ", ",")
+            parts.any { basicTypes.any { basicType -> basicType == it } } ||
+                parts.any { collections.any { collection -> collection == it } }
+        }
+    }
+
+    // Basic types in Kotlin are described here: https://kotlinlang.org/docs/basic-types.html
+    private val basicTypes: List<String> by lazy {
+        listOf(
+            "Byte",
+            "Short",
+            "Int",
+            "Long",
+            "Float",
+            "Double",
+            "UByte",
+            "UShort",
+            "UInt",
+            "ULong",
+            "UByteArray",
+            "UShortArray",
+            "UIntArray",
+            "ULongArray",
+            "Boolean",
+            "Char",
+            "String",
+            "Array",
+        )
+    }
+
+    // Collections in Kotlin are described here: https://kotlinlang.org/docs/collections-overview.html#collection
+    private val collections: List<String> by lazy {
+        listOf(
+            "Iterable",
+            "MutableIterable",
+            "Collection",
+            "MutableCollection",
+            "List",
+            "MutableList",
+            "Map",
+            "MutableMap",
+            "Set",
+            "MutableSet",
+        )
+    }
+
     override val isGenericType: Boolean by lazy {
         val regex = "\\w+<[^<>]+>".toRegex()
 
