@@ -10,7 +10,7 @@ class KoFileForPathTest {
     fun `file-path`() {
         // given
         val sut = getSnippetFile("file-path")
-            .files()
+            .files
             .first()
 
         // then
@@ -24,7 +24,7 @@ class KoFileForPathTest {
     fun `file-project-path`() {
         // given
         val sut = getSnippetFile("file-project-path")
-            .files()
+            .files
             .first()
 
         // then

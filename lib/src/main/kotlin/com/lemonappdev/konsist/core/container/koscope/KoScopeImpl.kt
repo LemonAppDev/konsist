@@ -17,6 +17,7 @@ import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoImportProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
@@ -40,19 +41,15 @@ class KoScopeImpl(
     KoImportProviderCore,
     KoAnnotationProviderCore,
     KoPackagesProviderCore,
-    KoTypeAliasProviderCore {
+    KoTypeAliasProviderCore,
+    KoFileProviderCore {
     constructor(koFile: KoFile) : this(sequenceOf(koFile))
 
-    override val ktFile: KtFile?
-        get() = null
+    override val ktFile: KtFile? by lazy { null }
 
-    override val parentDeclaration: KoParentDeclarationProvider?
-        get() = null
+    override val parentDeclaration: KoParentDeclarationProvider? by lazy { null }
 
-    override val ktAnnotated: KtAnnotated?
-        get() = null
-
-    override fun files(): Sequence<KoFile> = koFiles.sortedBy { it.path }
+    override val ktAnnotated: KtAnnotated? by lazy { null }
 
     override fun classes(
         includeNested: Boolean,
@@ -90,19 +87,19 @@ class KoScopeImpl(
 
     override fun slice(predicate: (KoFile) -> Boolean): KoScope = KoScopeImpl(koFiles.filter { predicate(it) })
 
-    override operator fun plus(scope: KoScope): KoScope = KoScopeImpl(files() + scope.files())
+    override operator fun plus(scope: KoScope): KoScope = KoScopeImpl(files + scope.files)
 
-    override operator fun minus(scope: KoScope): KoScope = KoScopeImpl(files() - scope.files().toSet())
+    override operator fun minus(scope: KoScope): KoScope = KoScopeImpl(files - scope.files.toSet())
 
     override operator fun plusAssign(scope: KoScope) {
-        koFiles += scope.files()
+        koFiles += scope.files
     }
 
     override operator fun minusAssign(scope: KoScope) {
-        koFiles -= scope.files()
+        koFiles -= scope.files
     }
 
-    override fun toString(): String = files()
+    override fun toString(): String = files
         .toList()
         .joinToString("\n") { it.path }
 
@@ -110,7 +107,7 @@ class KoScopeImpl(
         println(toString())
     }
 
-    override fun equals(other: Any?): Boolean = other is KoScope && files().toList() == other.files().toList()
+    override fun equals(other: Any?): Boolean = other is KoScope && files.toList() == other.files.toList()
 
-    override fun hashCode(): Int = 31 * 7 + files().toList().hashCode()
+    override fun hashCode(): Int = 31 * 7 + files.toList().hashCode()
 }

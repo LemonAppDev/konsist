@@ -29,7 +29,7 @@ class CommonAssertTest {
     fun `file-assert-test-method-name`() {
         // given
         val sut = getSnippetFile("file-assert-test-method-name")
-            .files()
+            .files
 
         // then
         try {
@@ -76,7 +76,7 @@ class CommonAssertTest {
         // given
         val sut = Konsist
             .scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/commonassert/snippet/emptypackage")
-            .files()
+            .files
 
         // when
         val func = {
@@ -93,7 +93,7 @@ class CommonAssertTest {
         // given
         val sut = Konsist
             .scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/commonassert/snippet/emptypackage")
-            .files()
+            .files
 
         // when
         val func = {

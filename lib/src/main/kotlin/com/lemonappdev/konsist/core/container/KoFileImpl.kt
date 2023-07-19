@@ -47,20 +47,15 @@ internal class KoFileImpl(override val ktFile: KtFile) :
     KoImportProviderCore,
     KoTypeAliasProviderCore {
 
-    override val ktElement: KtElement
-        get() = ktFile
+    override val ktElement: KtElement by lazy { ktFile }
 
-    override val psiElement: PsiElement
-        get() = ktFile
+    override val psiElement: PsiElement by lazy { ktFile }
 
-    override val ktAnnotated: KtAnnotated
-        get() = ktFile
+    override val ktAnnotated: KtAnnotated by lazy { ktFile }
 
-    override val parentDeclaration: KoParentDeclarationProvider?
-        get() = null
+    override val parentDeclaration: KoParentDeclarationProvider? by lazy { null }
 
-    override val koFiles: Sequence<KoFile>?
-        get() = null
+    override val koFiles: Sequence<KoFile>? by lazy { null }
 
     override val name by lazy { nameWithExtension.substringBeforeLast('.') }
 

@@ -13,7 +13,7 @@ class KoFileForAnnotationTest {
     fun `file-contains-no-annotation`() {
         // given
         val sut = getSnippetFile("file-contains-no-annotation")
-            .files()
+            .files
             .first()
 
         // then
@@ -28,7 +28,7 @@ class KoFileForAnnotationTest {
     fun `file-contains-two-annotations`() {
         // given
         val sut = getSnippetFile("file-contains-two-annotations")
-            .files()
+            .files
             .first()
 
         // then
@@ -47,7 +47,7 @@ class KoFileForAnnotationTest {
     fun `file-contains-two-annotations-of-kclass`() {
         // given
         val sut = getSnippetFile("file-contains-two-annotations-of-kclass")
-            .files()
+            .files
             .first()
 
         // then
@@ -63,7 +63,7 @@ class KoFileForAnnotationTest {
     fun `file-contains-suppress-annotation-without-import`() {
         // given
         val sut = getSnippetFile("file-contains-suppress-annotation-without-import")
-            .files()
+            .files
             .first()
 
         // then

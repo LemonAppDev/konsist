@@ -9,7 +9,7 @@ class KoTypeAliasDeclarationForModifierTest {
     fun `typealias-has-actual-modifier`() {
         // given
         val sut = getSnippetFile("typealias-has-actual-modifier")
-            .files()
+            .files
             .first()
             .typeAliases
             .first()

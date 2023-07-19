@@ -10,7 +10,7 @@ class KoFileForNameAndExtensionTest {
     fun `file-name`() {
         // given
         val sut = getSnippetFile("file-name")
-            .files()
+            .files
             .first()
 
         // then
@@ -21,7 +21,7 @@ class KoFileForNameAndExtensionTest {
     fun `file-extension`() {
         // given
         val sut = getSnippetFile("file-extension")
-            .files()
+            .files
             .first()
 
         // then
@@ -33,7 +33,7 @@ class KoFileForNameAndExtensionTest {
     fun `file-name-with-extension`() {
         // given
         val sut = getSnippetFile("file-name-with-extension")
-            .files()
+            .files
             .first()
 
         // then
@@ -45,7 +45,7 @@ class KoFileForNameAndExtensionTest {
     fun `file-has-name-with-prefix`() {
         // given
         val sut = getSnippetFile("file-has-name-with-prefix")
-            .files()
+            .files
             .first()
 
         // then
@@ -59,7 +59,7 @@ class KoFileForNameAndExtensionTest {
     fun `file-has-name-with-suffix`() {
         // given
         val sut = getSnippetFile("file-has-name-with-suffix")
-            .files()
+            .files
             .first()
 
         // then
@@ -73,7 +73,7 @@ class KoFileForNameAndExtensionTest {
     fun `file-has-name-containing-text`() {
         // given
         val sut = getSnippetFile("file-has-name-containing-text")
-            .files()
+            .files
             .first()
 
         // then
@@ -87,7 +87,7 @@ class KoFileForNameAndExtensionTest {
     fun `file-has-name-matching-regex`() {
         // given
         val sut = getSnippetFile("file-has-name-matching-regex")
-            .files()
+            .files
             .first()
 
         // then
@@ -101,7 +101,7 @@ class KoFileForNameAndExtensionTest {
     fun `file-has-extension`() {
         // given
         val sut = getSnippetFile("file-has-extension")
-            .files()
+            .files
             .first()
 
         // then

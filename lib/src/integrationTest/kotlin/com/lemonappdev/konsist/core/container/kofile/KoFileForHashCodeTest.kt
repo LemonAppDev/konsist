@@ -10,11 +10,11 @@ class KoFileForHashCodeTest {
     fun `files-with-the-same-hashcode`() {
         // given
         val file1 = getSnippetFile("files-with-the-same-hashcode")
-            .files()
+            .files
             .first()
 
         val file2 = getSnippetFile("files-with-the-same-hashcode")
-            .files()
+            .files
             .first()
 
         // then
@@ -25,11 +25,11 @@ class KoFileForHashCodeTest {
     fun `files-with-the-different-hashcode`() {
         // given
         val file1 = getSnippetFile("files-with-the-different-hashcode")
-            .files()
+            .files
             .first()
 
         val file2 = getSnippetFile("files-with-the-same-hashcode")
-            .files()
+            .files
             .first()
 
         // then

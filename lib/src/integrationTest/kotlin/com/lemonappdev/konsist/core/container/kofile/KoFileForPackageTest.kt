@@ -10,7 +10,7 @@ class KoFileForPackageTest {
     fun `file-contains-no-package`() {
         // given
         val sut = getSnippetFile("file-contains-no-package")
-            .files()
+            .files
             .first()
 
         // then
@@ -21,7 +21,7 @@ class KoFileForPackageTest {
     fun `file-contains-package`() {
         // given
         val sut = getSnippetFile("file-contains-package")
-            .files()
+            .files
             .first()
 
         // then

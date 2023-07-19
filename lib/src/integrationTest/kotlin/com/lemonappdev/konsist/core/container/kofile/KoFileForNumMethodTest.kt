@@ -10,7 +10,7 @@ class KoFileForNumMethodTest {
     fun `file-contains-package-and-class`() {
         // given
         val sut = getSnippetFile("file-contains-package-and-class")
-            .files()
+            .files
             .first()
 
         // then
@@ -24,7 +24,7 @@ class KoFileForNumMethodTest {
     fun `file-contains-nested-classes`() {
         // given
         val sut = getSnippetFile("file-contains-nested-classes")
-            .files()
+            .files
             .first()
 
         // then
@@ -38,7 +38,7 @@ class KoFileForNumMethodTest {
     fun `file-contains-package-and-property`() {
         // given
         val sut = getSnippetFile("file-contains-package-and-property")
-            .files()
+            .files
             .first()
 
         // then
@@ -52,7 +52,7 @@ class KoFileForNumMethodTest {
     fun `file-contains-nested-and-local-properties`() {
         // given
         val sut = getSnippetFile("file-contains-nested-and-local-properties")
-            .files()
+            .files
             .first()
 
         // then
@@ -68,7 +68,7 @@ class KoFileForNumMethodTest {
     fun `file-contains-package-and-function`() {
         // given
         val sut = getSnippetFile("file-contains-package-and-function")
-            .files()
+            .files
             .first()
 
         // then
@@ -82,7 +82,7 @@ class KoFileForNumMethodTest {
     fun `file-contains-nested-and-local-functions`() {
         // given
         val sut = getSnippetFile("file-contains-nested-and-local-functions")
-            .files()
+            .files
             .first()
 
         // then
@@ -98,7 +98,7 @@ class KoFileForNumMethodTest {
     fun `file-contains-package-and-object`() {
         // given
         val sut = getSnippetFile("file-contains-package-and-object")
-            .files()
+            .files
             .first()
 
         // then
@@ -112,7 +112,7 @@ class KoFileForNumMethodTest {
     fun `file-contains-nested-objects`() {
         // given
         val sut = getSnippetFile("file-contains-nested-objects")
-            .files()
+            .files
             .first()
 
         // then
@@ -126,7 +126,7 @@ class KoFileForNumMethodTest {
     fun `file-contains-package-and-interface`() {
         // given
         val sut = getSnippetFile("file-contains-package-and-interface")
-            .files()
+            .files
             .first()
 
         // then
@@ -140,7 +140,7 @@ class KoFileForNumMethodTest {
     fun `file-contains-nested-interfaces`() {
         // given
         val sut = getSnippetFile("file-contains-nested-interfaces")
-            .files()
+            .files
             .first()
 
         // then

@@ -18,7 +18,7 @@ class KoAnnotationProviderExtTest {
     fun `file-has-two-annotations-of-type`() {
         // given
         val sut = getSnippetFile("file-has-two-annotations-of-type")
-            .files()
+            .files
             .first()
 
         // then
@@ -33,7 +33,7 @@ class KoAnnotationProviderExtTest {
     fun `file-has-suppress-annotation-without-import`() {
         // given
         val sut = getSnippetFile("file-has-suppress-annotation-without-import")
-            .files()
+            .files
             .first()
 
         // then

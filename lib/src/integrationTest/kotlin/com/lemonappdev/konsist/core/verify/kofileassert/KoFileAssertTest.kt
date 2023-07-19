@@ -12,7 +12,7 @@ class KoFileAssertTest {
     fun `assert-passes`() {
         // given
         val sut = getSnippetFile("assert-passes")
-            .files()
+            .files
 
         // then
         sut.assert { it.name == "assert-passes" }
@@ -22,7 +22,7 @@ class KoFileAssertTest {
     fun `assert-fails`() {
         // given
         val sut = getSnippetFile("assert-fails")
-            .files()
+            .files
 
         // when
         val func = {
@@ -37,7 +37,7 @@ class KoFileAssertTest {
     fun `assert-not-passes`() {
         // given
         val sut = getSnippetFile("assert-not-passes")
-            .files()
+            .files
 
         // then
         sut.assertNot {
@@ -49,7 +49,7 @@ class KoFileAssertTest {
     fun `assert-not-fails`() {
         // given
         val sut = getSnippetFile("assert-not-fails")
-            .files()
+            .files
 
         // when
         val func = {
@@ -69,7 +69,7 @@ class KoFileAssertTest {
         val scope2 = getSnippetFile("file-without-suppress")
 
         val sut = (scope1 + scope2)
-            .files()
+            .files
 
         // then
         sut.assert { it.name.endsWith("suppress") }
@@ -82,7 +82,7 @@ class KoFileAssertTest {
         val scope2 = getSnippetFile("file-without-suppress")
 
         val sut = (scope1 + scope2)
-            .files()
+            .files
 
         // then
         sut.assert { it.name.endsWith("suppress") }

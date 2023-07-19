@@ -10,7 +10,7 @@ class KoFileForContainsMethodTest {
     fun `file-contains-package-and-class`() {
         // given
         val sut = getSnippetFile("file-contains-package-and-class")
-            .files()
+            .files
             .first()
 
         // then
@@ -24,7 +24,7 @@ class KoFileForContainsMethodTest {
     fun `file-contains-package-and-property`() {
         // given
         val sut = getSnippetFile("file-contains-package-and-property")
-            .files()
+            .files
             .first()
 
         // then
@@ -38,7 +38,7 @@ class KoFileForContainsMethodTest {
     fun `file-contains-package-and-function`() {
         // given
         val sut = getSnippetFile("file-contains-package-and-function")
-            .files()
+            .files
             .first()
 
         // then
@@ -52,7 +52,7 @@ class KoFileForContainsMethodTest {
     fun `file-contains-package-and-object`() {
         // given
         val sut = getSnippetFile("file-contains-package-and-object")
-            .files()
+            .files
             .first()
 
         // then
@@ -66,7 +66,7 @@ class KoFileForContainsMethodTest {
     fun `file-contains-package-and-interface`() {
         // given
         val sut = getSnippetFile("file-contains-package-and-interface")
-            .files()
+            .files
             .first()
 
         // then

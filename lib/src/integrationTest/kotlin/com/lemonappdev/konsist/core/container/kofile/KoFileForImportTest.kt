@@ -10,7 +10,7 @@ class KoFileForImportTest {
     fun `file-contains-no-import`() {
         // given
         val sut = getSnippetFile("file-contains-no-import")
-            .files()
+            .files
             .first()
 
         // then
@@ -25,7 +25,7 @@ class KoFileForImportTest {
     fun `file-contains-imports`() {
         // given
         val sut = getSnippetFile("file-contains-imports")
-            .files()
+            .files
             .first()
 
         // then
@@ -45,7 +45,7 @@ class KoFileForImportTest {
     fun `file-has-imports`() {
         // given
         val sut = getSnippetFile("file-has-imports")
-            .files()
+            .files
             .first()
 
         // then

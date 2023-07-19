@@ -9,7 +9,7 @@ class KoFileForTextTest {
     fun `file-text`() {
         // given
         val sut = getSnippetFile("file-text")
-            .files()
+            .files
             .first()
 
         // then

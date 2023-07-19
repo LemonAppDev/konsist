@@ -13,7 +13,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 @Suppress("detekt.ThrowsCount")
 internal fun KoArchitectureScope.assert() {
     try {
-        val files = this.koScope.files()
+        val files = this.koScope.files
         val dependencyRules = this.dependencyRules as DependencyRulesImpl
 
         if (dependencyRules.allLayers.isEmpty()) {

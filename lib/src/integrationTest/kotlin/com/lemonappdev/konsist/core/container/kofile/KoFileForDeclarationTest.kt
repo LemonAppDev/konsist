@@ -12,7 +12,7 @@ class KoFileForDeclarationTest {
     fun `file-contains-all-type-of-declarations`() {
         // given
         val sut = getSnippetFile("file-contains-all-type-of-declarations")
-            .files()
+            .files
             .first()
 
         // then
@@ -46,7 +46,7 @@ class KoFileForDeclarationTest {
     ) {
         // given
         val sut = getSnippetFile("file-contains-all-type-of-declarations-with-nested-and-local-declarations")
-            .files()
+            .files
             .first()
 
         // then

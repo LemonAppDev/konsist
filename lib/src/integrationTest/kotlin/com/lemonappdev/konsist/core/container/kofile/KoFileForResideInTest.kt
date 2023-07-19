@@ -10,7 +10,7 @@ class KoFileForResideInTest {
     fun `reside-in-path`() {
         // given
         val sut = getSnippetFile("reside-in-path")
-            .files()
+            .files
             .first()
 
         // then
@@ -26,7 +26,7 @@ class KoFileForResideInTest {
     fun `reside-in-project-path`() {
         // given
         val sut = getSnippetFile("reside-in-project-path")
-            .files()
+            .files
             .first()
 
         // then

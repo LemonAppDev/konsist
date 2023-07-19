@@ -12,7 +12,7 @@ class KoScopeForFileTest {
 
         // then
         sut
-            .files()
+            .files
             .map { it.name }
             .toList()
             .shouldBeEqualTo(

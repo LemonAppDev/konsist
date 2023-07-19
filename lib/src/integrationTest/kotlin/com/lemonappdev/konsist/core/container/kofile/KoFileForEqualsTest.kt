@@ -10,11 +10,11 @@ class KoFileForEqualsTest {
     fun `files-are-equal`() {
         // given
         val file1 = getSnippetFile("files-are-equal")
-            .files()
+            .files
             .first()
 
         val file2 = getSnippetFile("files-are-equal")
-            .files()
+            .files
             .first()
 
         // then
@@ -25,11 +25,11 @@ class KoFileForEqualsTest {
     fun `files-are-not-equal`() {
         // given
         val file1 = getSnippetFile("files-are-not-equal")
-            .files()
+            .files
             .first()
 
         val file2 = getSnippetFile("files-are-equal")
-            .files()
+            .files
             .first()
 
         // then

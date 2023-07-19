@@ -9,7 +9,7 @@ class KoTypeAliasDeclarationForTypeTest {
     fun `typealias`() {
         // given
         val sut = getSnippetFile("typealias")
-            .files()
+            .files
             .first()
             .typeAliases
             .first()

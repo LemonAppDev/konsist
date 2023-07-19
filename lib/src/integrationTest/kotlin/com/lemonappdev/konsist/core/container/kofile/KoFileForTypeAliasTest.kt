@@ -10,7 +10,7 @@ class KoFileForTypeAliasTest {
     fun `file-contains-no-typealias`() {
         // given
         val sut = getSnippetFile("file-contains-no-typealias")
-            .files()
+            .files
             .first()
 
         // then
@@ -25,7 +25,7 @@ class KoFileForTypeAliasTest {
     fun `file-has-no-typealias`() {
         // given
         val sut = getSnippetFile("file-has-no-typealias")
-            .files()
+            .files
             .first()
 
         // then
@@ -39,7 +39,7 @@ class KoFileForTypeAliasTest {
     fun `file-contains-typealias`() {
         // given
         val sut = getSnippetFile("file-contains-typealias")
-            .files()
+            .files
             .first()
 
         // then
@@ -57,7 +57,7 @@ class KoFileForTypeAliasTest {
     fun `file-has-typealiases`() {
         // given
         val sut = getSnippetFile("file-has-typealiases")
-            .files()
+            .files
             .first()
 
         // then
