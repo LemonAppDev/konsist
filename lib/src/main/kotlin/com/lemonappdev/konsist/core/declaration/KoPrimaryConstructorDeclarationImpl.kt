@@ -33,19 +33,15 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
     KoParametersProviderCore,
     KoConstructorProviderCore,
     KoPrimaryConstructorDeclaration {
-    override val ktAnnotated: KtAnnotated
-        get() = ktPrimaryConstructor
+    override val ktAnnotated: KtAnnotated by lazy { ktPrimaryConstructor }
 
-    override val ktFile: KtFile?
-        get() = null
+    override val ktFile: KtFile? by lazy { null }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner
-        get() = ktPrimaryConstructor
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktPrimaryConstructor }
 
-    override val ktCallableDeclaration: KtCallableDeclaration
-        get() = ktPrimaryConstructor
+    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktPrimaryConstructor }
 
-    override val koFiles: Sequence<KoFile>? = null
+    override val koFiles: Sequence<KoFile>? by lazy { null }
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters, kDoc)
     internal companion object {

@@ -31,16 +31,13 @@ internal class KoTypeAliasDeclarationImpl private constructor(
     KoModifierProviderCore,
     KoTopLevelProviderCore,
     KoTypeProviderCore {
-    override val ktAnnotated: KtAnnotated
-        get() = ktTypeAlias
+    override val ktAnnotated: KtAnnotated by lazy { ktTypeAlias }
 
-    override val ktFile: KtFile?
-        get() = null
+    override val ktFile: KtFile? by lazy { null }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner
-        get() = ktTypeAlias
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktTypeAlias }
 
-    override val koFiles: Sequence<KoFile>? = null
+    override val koFiles: Sequence<KoFile>? by lazy { null }
 
     override val type: KoTypeDeclaration by lazy {
         ktTypeAlias

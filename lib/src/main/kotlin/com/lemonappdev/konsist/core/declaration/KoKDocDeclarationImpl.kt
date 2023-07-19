@@ -14,8 +14,7 @@ internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) :
     KoTextProviderCore,
     KoKDocDescriptionProviderCore,
     KoKDocTagsProviderCore {
-    override val psiElement: PsiElement
-        get() = kDocElement
+    override val psiElement: PsiElement by lazy { kDocElement }
 
     override val text: String by lazy {
         val splitKDoc = kDocElement.text.split("\n") as MutableList

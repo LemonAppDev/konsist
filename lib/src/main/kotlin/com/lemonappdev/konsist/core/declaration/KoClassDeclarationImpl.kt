@@ -60,17 +60,13 @@ internal class KoClassDeclarationImpl private constructor(
     KoHasTestProviderCore,
     KoInitBlockProviderCore,
     KoParentProviderCore {
-    override val ktFile: KtFile?
-        get() = null
+    override val ktFile: KtFile? by lazy { null }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner
-        get() = ktClass
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
 
-    override val ktAnnotated: KtAnnotated
-        get() = ktClass
+    override val ktAnnotated: KtAnnotated by lazy { ktClass }
 
-    override val koFiles: Sequence<KoFile>?
-        get() = null
+    override val koFiles: Sequence<KoFile>? by lazy { null }
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, primaryConstructor?.parameters, kDoc)
 

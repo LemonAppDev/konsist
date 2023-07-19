@@ -43,16 +43,13 @@ internal class KoObjectDeclarationImpl(
     KoModifierProviderCore,
     KoTopLevelProviderCore,
     KoRepresentsTypeProviderCore {
-    override val ktAnnotated: KtAnnotated
-        get() = ktObjectDeclaration
+    override val ktAnnotated: KtAnnotated by lazy { ktObjectDeclaration }
 
-    override val ktFile: KtFile?
-        get() = null
+    override val ktFile: KtFile? by lazy { null }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner
-        get() = ktObjectDeclaration
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktObjectDeclaration }
 
-    override val koFiles: Sequence<KoFile>? = null
+    override val koFiles: Sequence<KoFile>? by lazy { null }
 
     override val name: String by lazy {
         if (hasCompanionModifier() && super<KoBaseDeclarationImpl>.name == "") {

@@ -38,19 +38,15 @@ internal class KoPropertyDeclarationImpl private constructor(
     KoReceiverTypeProviderCore,
     KoDelegateProviderCore,
     KoExplicitTypeProviderCore {
-    override val ktAnnotated: KtAnnotated
-        get() = ktProperty
+    override val ktAnnotated: KtAnnotated by lazy { ktProperty }
 
-    override val ktFile: KtFile?
-        get() = null
+    override val ktFile: KtFile? by lazy { null }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner
-        get() = ktProperty
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktProperty }
 
-    override val ktCallableDeclaration: KtCallableDeclaration
-        get() = ktProperty
+    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
 
-    override val koFiles: Sequence<KoFile>? = null
+    override val koFiles: Sequence<KoFile>? by lazy { null }
 
     override val delegateName: String? by lazy {
         ktProperty

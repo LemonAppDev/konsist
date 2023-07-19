@@ -33,19 +33,15 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
     KoParametersProviderCore,
     KoConstructorProviderCore,
     KoSecondaryConstructorDeclaration {
-    override val ktAnnotated: KtAnnotated
-        get() = ktSecondaryConstructor
+    override val ktAnnotated: KtAnnotated by lazy { ktSecondaryConstructor }
 
-    override val ktFile: KtFile?
-        get() = null
+    override val ktFile: KtFile? by lazy { null }
 
-    override val koFiles: Sequence<KoFile>? = null
+    override val koFiles: Sequence<KoFile>? by lazy { null }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner
-        get() = ktSecondaryConstructor
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktSecondaryConstructor }
 
-    override val ktCallableDeclaration: KtCallableDeclaration
-        get() = ktSecondaryConstructor
+    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktSecondaryConstructor }
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters, kDoc)
     internal companion object {

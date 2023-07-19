@@ -43,16 +43,13 @@ internal class KoInterfaceDeclarationImpl private constructor(
     KoModifierProviderCore,
     KoTopLevelProviderCore,
     KoRepresentsTypeProviderCore {
-    override val ktAnnotated: KtAnnotated
-        get() = ktClass
+    override val ktAnnotated: KtAnnotated by lazy { ktClass }
 
-    override val ktFile: KtFile?
-        get() = null
+    override val ktFile: KtFile? by lazy { null }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner
-        get() = ktClass
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
 
-    override val koFiles: Sequence<KoFile>? = null
+    override val koFiles: Sequence<KoFile>? by lazy { null }
 
     override fun declarations(
         includeNested: Boolean,

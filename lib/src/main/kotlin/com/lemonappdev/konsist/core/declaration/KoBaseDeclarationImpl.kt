@@ -12,7 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 
-internal open class KoBaseDeclarationImpl(private val element: KtElement) :
+internal open class KoBaseDeclarationImpl(override val ktElement: KtElement) :
     KoBaseDeclaration,
     KoParentDeclarationProviderCore,
     KoContainingFileProviderCore,
@@ -21,14 +21,9 @@ internal open class KoBaseDeclarationImpl(private val element: KtElement) :
     KoLocationProviderCore,
     KoPathProviderCore,
     KoTextProviderCore {
-    override val parentDeclaration: KoParentDeclarationProvider?
-        get() = null
+    override val parentDeclaration: KoParentDeclarationProvider? by lazy { null }
 
-    override val psiElement: PsiElement
-        get() = ktElement
-
-    override val ktElement: KtElement
-        get() = element
+    override val psiElement: PsiElement by lazy { ktElement }
 
     override fun toString(): String {
         return locationWithText

@@ -36,16 +36,13 @@ internal class KoParameterDeclarationImpl private constructor(
     KoTopLevelProviderCore,
     KoTypeProviderCore,
     KoRepresentsTypeProviderCore {
-    override val ktAnnotated: KtAnnotated
-        get() = ktParameter
+    override val ktAnnotated: KtAnnotated by lazy { ktParameter }
 
-    override val ktFile: KtFile?
-        get() = null
+    override val ktFile: KtFile? by lazy { null }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner
-        get() = ktParameter
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktParameter }
 
-    override val koFiles: Sequence<KoFile>? = null
+    override val koFiles: Sequence<KoFile>? by lazy { null }
 
     override val type: KoTypeDeclaration by lazy {
         val type = ktParameter

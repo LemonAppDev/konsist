@@ -43,41 +43,36 @@ internal class KoFunctionDeclarationImpl private constructor(
     KoExplicitReturnTypeProviderCore,
     KoReceiverTypeProviderCore,
     KoImplementationProviderCore {
-    override val ktFile: KtFile?
-        get() = null
+    override val ktFile: KtFile? by lazy { null }
 
-    override val ktAnnotated: KtAnnotated
-        get() = ktCallableDeclaration
+    override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner
-        get() = ktCallableDeclaration
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
 
-    override val ktCallableDeclaration: KtCallableDeclaration
-        get() = ktFunction
+    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
 
-    override val koFiles: Sequence<KoFile>? = null
+    override val koFiles: Sequence<KoFile>? by lazy { null }
 
-    private val localDeclarations: Sequence<KoBaseDeclaration>
-        get() {
-            val psiChildren = ktFunction
-                .bodyBlockExpression
-                ?.children
-                ?.asSequence()
-                ?: emptySequence()
+    private val localDeclarations: Sequence<KoBaseDeclaration> by lazy {
+        val psiChildren = ktFunction
+            .bodyBlockExpression
+            ?.children
+            ?.asSequence()
+            ?: emptySequence()
 
-            return psiChildren
-                .mapNotNull {
-                    if (it is KtClass && !it.isInterface()) {
-                        KoClassDeclarationImpl.getInstance(it, this)
-                    } else if (it is KtFunction) {
-                        getInstance(it, this)
-                    } else if (it is KtProperty) {
-                        KoPropertyDeclarationImpl.getInstance(it, this)
-                    } else {
-                        null
-                    }
+        psiChildren
+            .mapNotNull {
+                if (it is KtClass && !it.isInterface()) {
+                    KoClassDeclarationImpl.getInstance(it, this)
+                } else if (it is KtFunction) {
+                    getInstance(it, this)
+                } else if (it is KtProperty) {
+                    KoPropertyDeclarationImpl.getInstance(it, this)
+                } else {
+                    null
                 }
-        }
+            }
+    }
 
     override fun localDeclarations(): Sequence<KoBaseDeclaration> = localDeclarations
 
