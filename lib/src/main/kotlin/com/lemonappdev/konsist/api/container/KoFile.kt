@@ -5,34 +5,34 @@ import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoClassProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
+import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoHasPackageProvider
 import com.lemonappdev.konsist.api.provider.KoImportDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoObjectProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTypeAliasDeclarationProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoFunctionCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoObjectCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoPropertyCoreProvider
 import kotlin.reflect.KClass
 
 /**
  * Represents a file declaration.
  */
 interface KoFile :
-    KoDeclarationCoreProvider,
-    KoClassCoreProvider,
-    KoInterfaceCoreProvider,
-    KoObjectCoreProvider,
-    KoPropertyCoreProvider,
-    KoFunctionCoreProvider,
+    KoDeclarationProvider,
+    KoClassProvider,
+    KoInterfaceProvider,
+    KoObjectProvider,
+    KoPropertyProvider,
+    KoFunctionProvider,
     KoNameProvider,
     KoPathProvider,
     KoTextProvider,

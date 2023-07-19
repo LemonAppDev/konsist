@@ -6,13 +6,13 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.provider.KoClassProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoFunctionProvider
+import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
+import com.lemonappdev.konsist.api.provider.KoObjectProvider
+import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoClassProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoFunctionProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoObjectProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoPropertyProvider
 import kotlin.reflect.KClass
 
 /**

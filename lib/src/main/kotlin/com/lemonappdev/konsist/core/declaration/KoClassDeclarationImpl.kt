@@ -4,17 +4,23 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationCoreProviderUtil
 import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoConstructorsProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoHasTestProviderCore
 import com.lemonappdev.konsist.core.provider.KoInitBlockProviderCore
+import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoPrimaryConstructorProviderCore
+import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSecondaryConstructorsProviderCore
@@ -30,6 +36,12 @@ internal class KoClassDeclarationImpl private constructor(
     override val parentDeclaration: KoParentProvider?,
 ) :
     KoClassDeclaration,
+    KoDeclarationProviderCore,
+    KoClassProviderCore,
+    KoInterfaceProviderCore,
+    KoObjectProviderCore,
+    KoPropertyProviderCore,
+    KoFunctionProviderCore,
     KoBaseDeclarationImpl(ktClass),
     KoAnnotationDeclarationProviderCore,
     KoPackageDeclarationProviderCore,

@@ -2,43 +2,39 @@ package com.lemonappdev.konsist.core.container
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
-import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
-import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
-import com.lemonappdev.konsist.core.ext.sep
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationCoreProviderUtil
 import com.lemonappdev.konsist.core.ext.toOsSeparator
-import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFileExtensionProviderCore
+import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoHasPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoImportDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeAliasDeclarationProviderCore
-import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
-import org.jetbrains.kotlin.psi.KtImportDirective
-import org.jetbrains.kotlin.psi.KtImportList
-import org.jetbrains.kotlin.psi.KtTypeAlias
-import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
-import kotlin.reflect.KClass
 
 internal class KoFileImpl(override val ktFile: KtFile) :
     KoFile,
+    KoDeclarationProviderCore,
+    KoClassProviderCore,
+    KoInterfaceProviderCore,
+    KoObjectProviderCore,
+    KoPropertyProviderCore,
+    KoFunctionProviderCore,
     KoNameProviderCore,
     KoPathProviderCore,
     KoTextProviderCore,

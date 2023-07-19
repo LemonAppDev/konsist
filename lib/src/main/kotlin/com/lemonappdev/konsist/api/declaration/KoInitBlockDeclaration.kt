@@ -1,14 +1,14 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoFunctionCoreProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoPropertyCoreProvider
+import com.lemonappdev.konsist.api.provider.KoClassProvider
+import com.lemonappdev.konsist.api.provider.KoFunctionProvider
+import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 
 /**
  * Represents a Kotlin init block declaration.
  */
 interface KoInitBlockDeclaration :
-    KoClassCoreProvider,
-    KoPropertyCoreProvider,
-    KoFunctionCoreProvider,
+    KoClassProvider,
+    KoPropertyProvider,
+    KoFunctionProvider,
     KoBaseDeclaration
