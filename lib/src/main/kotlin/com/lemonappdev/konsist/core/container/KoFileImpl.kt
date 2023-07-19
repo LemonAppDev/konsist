@@ -77,13 +77,6 @@ internal class KoFileImpl(override val ktFile: KtFile) :
     ): Sequence<KoBaseDeclaration> =
         KoDeclarationCoreProviderUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
 
-    override fun hasTypeAliases(vararg names: String): Boolean = when {
-        names.isEmpty() -> typeAliases.isNotEmpty()
-        else -> names.all {
-            typeAliases.any { typeAlias -> typeAlias.name == it }
-        }
-    }
-
     override fun equals(other: Any?): Boolean = other is KoFile && path == other.path
 
     override fun hashCode(): Int = 31 * 7 + path.hashCode()

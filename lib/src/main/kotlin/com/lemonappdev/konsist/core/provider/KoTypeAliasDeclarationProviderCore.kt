@@ -9,7 +9,6 @@ import org.jetbrains.kotlin.psi.KtTypeAlias
 internal interface KoTypeAliasDeclarationProviderCore : KoTypeAliasDeclarationProvider {
     val ktFile: KtFile
 
-
     override val typeAliases: List<KoTypeAliasDeclaration>
         get() = ktFile
             .children
