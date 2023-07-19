@@ -20,7 +20,7 @@ class KoDeclarationForPackageeTest {
             .first { it.name == declarationName }
 
         // then
-        sut.packagee shouldBeEqualTo value
+        sut.packagee?.qualifiedName shouldBeEqualTo value
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forpackagee/", fileName)
