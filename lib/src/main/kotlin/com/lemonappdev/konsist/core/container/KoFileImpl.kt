@@ -14,14 +14,21 @@ import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvid
 import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
+import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.util.LocationUtil
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtTypeAlias
 import kotlin.reflect.KClass
 
-internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
+internal class KoFileImpl(private val ktFile: KtFile) :
+    KoFile,
+    KoNameProviderCore {
+
+    override val ktElement: KtElement
+        get() = ktFile
 
     override val name by lazy { nameWithExtension.substringBeforeLast('.') }
 
@@ -154,14 +161,6 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
     override fun resideInModule(module: String): Boolean = module == moduleName
 
     override fun resideInSourceSet(sourceSet: String): Boolean = sourceSet == sourceSetName
-
-    override fun hasNameStartingWith(prefix: String) = name.startsWith(prefix)
-
-    override fun hasNameEndingWith(suffix: String) = name.endsWith(suffix)
-
-    override fun hasNameContaining(text: String) = name.contains(text)
-
-    override fun hasNameMatching(regex: Regex) = name.matches(regex)
 
     override fun hasExtension(extension: String): Boolean = extension == this.extension
 
