@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.KoTypeAliasDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoClassCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProvider
 import com.lemonappdev.konsist.core.declaration.provider.KoFunctionCoreProvider
@@ -41,20 +42,8 @@ interface KoFile :
     KoSourceSetProvider,
     KoPackageDeclarationProvider,
     KoHasPackageProvider,
-    KoImportDeclarationProvider {
-
-    /**
-     * The type aliases of the file.
-     */
-    val typeAliases: List<KoTypeAliasDeclaration>
-
-    /**
-     * Whether the file has type aliases.
-     *
-     * @param names the names of the type aliases to check.
-     * @return `true` if the file has type aliases with the specified names (or any type alias if [names] is empty), `false` otherwise.
-     */
-    fun hasTypeAliases(vararg names: String): Boolean
+    KoImportDeclarationProvider,
+    KoTypeAliasDeclarationProvider {
 
     /**
      * Indicates whether some other object is "equal to" this one.

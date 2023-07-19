@@ -26,6 +26,7 @@ import com.lemonappdev.konsist.core.provider.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeAliasDeclarationProviderCore
 import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
@@ -47,7 +48,8 @@ internal class KoFileImpl(override val ktFile: KtFile) :
     KoSourceSetProviderCore,
     KoPackageDeclarationProviderCore,
     KoHasPackageProviderCore,
-    KoImportDeclarationProviderCore {
+    KoImportDeclarationProviderCore,
+    KoTypeAliasDeclarationProviderCore {
 
     override val ktElement: KtElement
         get() = ktFile
@@ -67,13 +69,6 @@ internal class KoFileImpl(override val ktFile: KtFile) :
         ktFile
             .name
             .toOsSeparator()
-    }
-
-    override val typeAliases: List<KoTypeAliasDeclaration> by lazy {
-        ktFile
-            .children
-            .filterIsInstance<KtTypeAlias>()
-            .map { KoTypeAliasDeclarationImpl.getInstance(it, null) }
     }
 
     override fun declarations(
