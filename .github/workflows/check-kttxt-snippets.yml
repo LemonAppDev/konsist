@@ -5,8 +5,12 @@ on:
     # Runs every day At 00:00 UTC
     - cron:  '0 0 * * *'
   push:
+    branches:
+      - 'release-*'
   pull_request:
     types: [ opened, synchronize ]
+    branches:
+      - 'release-*'
 
 jobs:
   check-kttxt-snippets:
