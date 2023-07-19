@@ -15,7 +15,7 @@ interface KoDeclaration : KoNamedDeclaration {
     /**
      * Package name of the declaration.
      */
-    val packagee: String?
+    val packagee: KoPackageDeclaration?
 
     /**
      * List of annotations.

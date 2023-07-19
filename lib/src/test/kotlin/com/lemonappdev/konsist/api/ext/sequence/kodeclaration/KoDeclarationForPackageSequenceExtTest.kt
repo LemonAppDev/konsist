@@ -12,9 +12,8 @@ class KoDeclarationForPackageSequenceExtTest {
     @Test
     fun `withPackage() returns declaration reside in any package`() {
         // given
-        val samplePackage = "com.sample.samplepackage"
         val declaration1: KoDeclarationImpl = mockk {
-            every { packagee } returns samplePackage
+            every { packagee } returns mockk()
         }
         val declaration2: KoDeclarationImpl = mockk {
             every { packagee } returns null
@@ -76,9 +75,8 @@ class KoDeclarationForPackageSequenceExtTest {
     @Test
     fun `withoutPackage() returns declaration reside in any package`() {
         // given
-        val samplePackage = "com.sample.samplepackage"
         val declaration1: KoDeclarationImpl = mockk {
-            every { packagee } returns samplePackage
+            every { packagee } returns mockk()
         }
         val declaration2: KoDeclarationImpl = mockk {
             every { packagee } returns null

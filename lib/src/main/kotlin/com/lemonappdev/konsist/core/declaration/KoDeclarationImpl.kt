@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.util.LocationUtil
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -24,9 +25,7 @@ internal abstract class KoDeclarationImpl(
         }
     }
 
-    override val packagee: String? by lazy {
-        containingFile.packagee?.qualifiedName
-    }
+    override val packagee: KoPackageDeclaration? by lazy { containingFile.packagee }
 
     override val annotations: List<KoAnnotationDeclaration> by lazy {
         ktTypeParameterListOwner
@@ -54,8 +53,7 @@ internal abstract class KoDeclarationImpl(
                     it.isNotBlank()
             }
             ?.map {
-                KoModifier
-                    .values()
+                KoModifier.entries
                     .firstOrNull { modifier -> modifier.type == it }
                     ?: throw KoInternalException("Modifier not found: $it")
             }
@@ -97,7 +95,9 @@ internal abstract class KoDeclarationImpl(
         else -> modifiers.containsAll(koModifiers.toList())
     }
 
-    override fun resideInPackage(packagee: String): Boolean = this.packagee?.let { LocationUtil.resideInLocation(packagee, it) } ?: false
+    override fun resideInPackage(packagee: String): Boolean = this.packagee?.let {
+        LocationUtil.resideInLocation(packagee, it.qualifiedName)
+    } ?: false
 
     override fun resideOutsidePackage(packagee: String): Boolean = !resideInPackage(packagee)
 }
