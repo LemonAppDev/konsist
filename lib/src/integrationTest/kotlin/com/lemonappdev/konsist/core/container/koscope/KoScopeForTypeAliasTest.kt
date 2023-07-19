@@ -13,7 +13,7 @@ class KoScopeForTypeAliasTest {
 
         // then
         sut
-            .typeAliases()
+            .typeAliases
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -28,11 +28,9 @@ class KoScopeForTypeAliasTest {
 
         // then
         sut
-            .typeAliases()
+            .typeAliases
             .toList()
-            .shouldBeEqualTo(
-                emptyList(),
-            )
+            .shouldBeEqualTo(emptyList())
     }
 
     private fun getSnippetFile(fileName: String) =

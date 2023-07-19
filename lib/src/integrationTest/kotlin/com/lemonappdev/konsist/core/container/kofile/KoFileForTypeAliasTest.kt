@@ -16,6 +16,7 @@ class KoFileForTypeAliasTest {
         // then
         sut
             .typeAliases
+            .toList()
             .isEmpty()
             .shouldBeEqualTo(true)
     }

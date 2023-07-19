@@ -14,6 +14,7 @@ import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
 import com.lemonappdev.konsist.api.provider.KoObjectProvider
 import com.lemonappdev.konsist.api.provider.KoPackagesProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
+import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 
 /**
  * Represents a scope of Kotlin declarations.
@@ -28,7 +29,8 @@ interface KoScope :
     KoFunctionProvider,
     KoImportProvider,
     KoAnnotationProvider,
-    KoPackagesProvider {
+    KoPackagesProvider,
+    KoTypeAliasProvider {
 
     /**
      * The files present in the scope.
@@ -36,13 +38,6 @@ interface KoScope :
      * @return a sequence of [KoFile] representing the files in the scope.
      */
     fun files(): Sequence<KoFile>
-
-    /**
-     * The type aliases present in the scope.
-     *
-     * @return a sequence of [KoTypeAliasDeclaration] representing the type aliases in the scope.
-     */
-    fun typeAliases(): Sequence<KoTypeAliasDeclaration>
 
     /**
      * The scope with given predicate.
