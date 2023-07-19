@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoTopLevelProvider {
+interface KoTopLevelProvider: KoProvider {
     /**
      * Whether the declaration is defined at top level.
      *

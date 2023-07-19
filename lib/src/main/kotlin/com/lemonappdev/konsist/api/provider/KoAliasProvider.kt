@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoAliasProvider {
+interface KoAliasProvider: KoProvider {
     /**
      * Alias of the declaration.
      */

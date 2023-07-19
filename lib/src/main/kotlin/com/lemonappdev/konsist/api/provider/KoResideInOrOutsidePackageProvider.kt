@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoResideInOrOutsidePackageProvider : KoPackageProvider {
+interface KoResideInOrOutsidePackageProvider : KoProvider {
     /**
      * Whether the declaration resides in a package.
      *

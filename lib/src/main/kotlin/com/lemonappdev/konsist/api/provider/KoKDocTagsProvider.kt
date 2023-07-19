@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 
-interface KoKDocTagsProvider {
+interface KoKDocTagsProvider: KoProvider {
     /**
      * List of tags.
      */

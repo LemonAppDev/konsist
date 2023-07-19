@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoKDocDescriptionProvider {
+interface KoKDocDescriptionProvider: KoProvider {
     /**
      * Description of the declaration.
      */

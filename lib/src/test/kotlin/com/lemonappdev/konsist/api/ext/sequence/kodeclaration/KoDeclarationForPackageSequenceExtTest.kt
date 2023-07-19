@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.api.ext.sequence.kodeclaration
 import com.lemonappdev.konsist.api.ext.sequence.withPackage
 import com.lemonappdev.konsist.api.ext.sequence.withoutPackage
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -12,10 +13,10 @@ class KoDeclarationForPackageSequenceExtTest {
     @Test
     fun `withPackage() returns declaration reside in any package`() {
         // given
-        val declaration1: KoResideInOrOutsidePackageProvider = mockk {
+        val declaration1: KoResideInOrOutsidePackageProviderCore = mockk {
             every { packagee } returns mockk()
         }
-        val declaration2: KoResideInOrOutsidePackageProvider = mockk {
+        val declaration2: KoResideInOrOutsidePackageProviderCore = mockk {
             every { packagee } returns null
         }
         val declarations = sequenceOf(declaration1, declaration2)
@@ -75,10 +76,10 @@ class KoDeclarationForPackageSequenceExtTest {
     @Test
     fun `withoutPackage() returns declaration reside in any package`() {
         // given
-        val declaration1: KoResideInOrOutsidePackageProvider = mockk {
+        val declaration1: KoResideInOrOutsidePackageProviderCore = mockk {
             every { packagee } returns mockk()
         }
-        val declaration2: KoResideInOrOutsidePackageProvider = mockk {
+        val declaration2: KoResideInOrOutsidePackageProviderCore = mockk {
             every { packagee } returns null
         }
         val declarations = sequenceOf(declaration1, declaration2)

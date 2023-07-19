@@ -166,7 +166,8 @@ class KoAnnotationDeclarationForTypeSequenceExtTest {
         }
         val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { SampleAnnotation::class.simpleName?.let { representsType(it) } } returns false
-            every { SampleAnnotation::class.qualifiedName?.let { representsType(it) } } returns false        }
+            every { SampleAnnotation::class.qualifiedName?.let { representsType(it) } } returns false
+        }
         val annotations = sequenceOf(annotation1, annotation2)
 
         // when
@@ -184,7 +185,8 @@ class KoAnnotationDeclarationForTypeSequenceExtTest {
         }
         val annotation2: KoAnnotationDeclarationImpl = mockk {
             every { SampleAnnotation::class.simpleName?.let { representsType(it) } } returns false
-            every { SampleAnnotation::class.qualifiedName?.let { representsType(it) } } returns false        }
+            every { SampleAnnotation::class.qualifiedName?.let { representsType(it) } } returns false
+        }
         val annotations = sequenceOf(annotation1, annotation2)
 
         // when

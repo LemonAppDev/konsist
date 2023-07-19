@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoSourceAndAliasTypeProvider {
+interface KoSourceAndAliasTypeProvider: KoProvider {
     /**
      * The import alias name.
      */

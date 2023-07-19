@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 
-interface KoReceiverTypeProvider {
+interface KoReceiverTypeProvider: KoProvider {
     /**
      * Receiver type of the declaration.
      */

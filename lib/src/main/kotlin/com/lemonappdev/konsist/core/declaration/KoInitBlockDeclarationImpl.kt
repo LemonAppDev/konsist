@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
@@ -15,6 +16,7 @@ internal class KoInitBlockDeclarationImpl private constructor(
     parentDeclaration: KoParentDeclarationProvider?,
 ) :
     KoInitBlockDeclaration,
+    KoDeclarationProviderCore,
     KoClassProviderCore,
     KoPropertyProviderCore,
     KoFunctionProviderCore,

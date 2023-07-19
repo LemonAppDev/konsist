@@ -4,9 +4,11 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.KoPackagesProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import kotlin.reflect.KClass
 
 /**
@@ -309,7 +311,7 @@ fun <T : KoModifierProvider> Sequence<T>.withoutSomeModifiers(modifier: KoModifi
  */
 fun <T : KoResideInOrOutsidePackageProvider> Sequence<T>.withPackage(vararg packages: String): Sequence<T> = filter {
     when {
-        packages.isEmpty() -> it.packagee != null
+        packages.isEmpty() -> (it as KoResideInOrOutsidePackageProviderCore).packagee != null
         else -> packages.any { packagee -> it.resideInPackage(packagee) }
     }
 }
@@ -322,7 +324,7 @@ fun <T : KoResideInOrOutsidePackageProvider> Sequence<T>.withPackage(vararg pack
  */
 fun <T : KoResideInOrOutsidePackageProvider> Sequence<T>.withoutPackage(vararg packages: String): Sequence<T> = filter {
     when {
-        packages.isEmpty() -> it.packagee == null
+        packages.isEmpty() -> (it as KoResideInOrOutsidePackageProviderCore).packagee == null
         else -> packages.all { packagee -> it.resideOutsidePackage(packagee) }
     }
 }

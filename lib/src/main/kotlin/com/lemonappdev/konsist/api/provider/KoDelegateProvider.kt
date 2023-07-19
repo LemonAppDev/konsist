@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoDelegateProvider {
+interface KoDelegateProvider: KoProvider {
     /**
      * Name of the delegate.
      */

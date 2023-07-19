@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.ext.sequence.withRepresentedTypeOf
 import com.lemonappdev.konsist.api.ext.sequence.withoutRepresentedType
 import com.lemonappdev.konsist.api.ext.sequence.withoutRepresentedTypeOf
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
+import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
+import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1
 import com.lemonappdev.konsist.testdata.SampleClass2
@@ -160,11 +162,12 @@ class KoComplexDeclarationForTypeSequenceExtTest {
     @Test
     fun `withRepresentedTypeOf() with KClass syntax returns complex declaration with SampleClass type`() {
         // given
-        val complexDeclaration1: KoRepresentsTypeProvider = mockk {
-            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleClass"
+        val complexDeclaration1: KoRepresentsTypeProviderCore = mockk {
+            every { SampleClass::class.simpleName?.let { representsType(it) } } returns true
         }
-        val complexDeclaration2: KoRepresentsTypeProvider = mockk {
-            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.NonExistingClass"
+        val complexDeclaration2: KoRepresentsTypeProviderCore = mockk {
+            every { SampleClass::class.simpleName?.let { representsType(it) } } returns false
+            every { SampleClass::class.qualifiedName?.let { representsType(it) } } returns false
         }
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2)
 
@@ -178,11 +181,12 @@ class KoComplexDeclarationForTypeSequenceExtTest {
     @Test
     fun `withoutRepresentedTypeOf() with KClass syntax returns complex declaration without SampleClass type`() {
         // given
-        val complexDeclaration1: KoRepresentsTypeProvider = mockk {
-            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleClass"
+        val complexDeclaration1: KoRepresentsTypeProviderCore = mockk {
+            every { SampleClass::class.simpleName?.let { representsType(it) } } returns true
         }
-        val complexDeclaration2: KoRepresentsTypeProvider = mockk {
-            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.NonExistingClass"
+        val complexDeclaration2: KoRepresentsTypeProviderCore = mockk {
+            every { SampleClass::class.simpleName?.let { representsType(it) } } returns false
+            every { SampleClass::class.qualifiedName?.let { representsType(it) } } returns false
         }
         val complexDeclarations = sequenceOf(complexDeclaration1, complexDeclaration2)
 

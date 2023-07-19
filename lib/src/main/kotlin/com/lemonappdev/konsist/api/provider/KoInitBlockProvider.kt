@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
 
-interface KoInitBlockProvider {
+interface KoInitBlockProvider: KoProvider {
     /**
      * The init blocks of the declaration.
      */

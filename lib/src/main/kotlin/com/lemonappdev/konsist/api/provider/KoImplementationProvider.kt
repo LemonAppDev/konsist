@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoImplementationProvider {
+interface KoImplementationProvider: KoProvider {
     /**
      * Whether this declaration has implementation.
      *

@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.provider
 import com.lemonappdev.konsist.api.KoModifier
 
 @Suppress("detekt.TooManyFunctions")
-interface KoModifierProvider {
+interface KoModifierProvider: KoProvider {
     /**
      * List of modifiers.
      */

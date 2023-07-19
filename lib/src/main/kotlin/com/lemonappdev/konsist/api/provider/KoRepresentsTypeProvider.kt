@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoRepresentsTypeProvider : KoFullyQualifiedNameProvider {
+interface KoRepresentsTypeProvider : KoProvider {
     /**
      * Whether this declaration represents the specified type.
      *

@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoLocationProvider {
+interface KoLocationProvider: KoProvider {
     /**
      * Location of the declaration containing the file path, line and column.
      */
