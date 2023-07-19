@@ -3,6 +3,10 @@ package com.lemonappdev.konsist.core.declaration
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
+import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
+import com.lemonappdev.konsist.api.provider.KoLocalPropertyProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -10,6 +14,10 @@ import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProv
 import com.lemonappdev.konsist.core.provider.KoExplicitReturnTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoImplementationProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocalClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocalDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocalPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
@@ -39,6 +47,10 @@ internal class KoFunctionDeclarationImpl private constructor(
     KoTopLevelProviderCore,
     KoParametersProviderCore,
     KoFunctionDeclaration,
+    KoLocalDeclarationProviderCore,
+    KoLocalClassProviderCore,
+    KoLocalFunctionProviderCore,
+    KoLocalPropertyProviderCore,
     KoExtensionProviderCore,
     KoExplicitReturnTypeProviderCore,
     KoReceiverTypeProviderCore,

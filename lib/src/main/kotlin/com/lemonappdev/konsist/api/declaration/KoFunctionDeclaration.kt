@@ -5,6 +5,10 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvi
 import com.lemonappdev.konsist.api.provider.KoExplicitReturnTypeProvider
 import com.lemonappdev.konsist.api.provider.KoExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoImplementationProvider
+import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
+import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
+import com.lemonappdev.konsist.api.provider.KoLocalPropertyProvider
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
@@ -12,9 +16,6 @@ import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoLocalClassProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoLocalFunctionProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoLocalPropertyProvider
 
 /**
  * Represents a Kotlin function declaration.
@@ -29,6 +30,7 @@ interface KoFunctionDeclaration :
     KoTopLevelProvider,
     KoParentDeclarationProvider,
     KoParametersProvider,
+    KoLocalDeclarationProvider,
     KoLocalClassProvider,
     KoLocalFunctionProvider,
     KoLocalPropertyProvider,
