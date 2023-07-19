@@ -159,13 +159,12 @@ class KoParameterDeclarationForTypeSequenceExtTest {
     @Test
     fun `withRepresentedTypeOf() returns parameter with given type`() {
         // given
-        val type1 = "SampleType"
-        val type2 = "OtherType"
         val parameter1: KoParameterDeclarationImpl = mockk {
-            every { type.name } returns type1
+            every { SampleType::class.simpleName?.let { representsType(it) } } returns true
         }
         val parameter2: KoParameterDeclarationImpl = mockk {
-            every { type.name } returns type2
+            every { SampleType::class.simpleName?.let { representsType(it) } } returns false
+            every { SampleType::class.qualifiedName?.let { representsType(it) } } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
 
@@ -179,13 +178,12 @@ class KoParameterDeclarationForTypeSequenceExtTest {
     @Test
     fun `withoutRepresentedTypeOf() returns parameter without given type`() {
         // given
-        val type1 = "SampleType"
-        val type2 = "OtherType"
         val parameter1: KoParameterDeclarationImpl = mockk {
-            every { type.name } returns type1
+            every { SampleType::class.simpleName?.let { representsType(it) } } returns true
         }
         val parameter2: KoParameterDeclarationImpl = mockk {
-            every { type.name } returns type2
+            every { SampleType::class.simpleName?.let { representsType(it) } } returns false
+            every { SampleType::class.qualifiedName?.let { representsType(it) } } returns false
         }
         val parameters = sequenceOf(parameter1, parameter2)
 

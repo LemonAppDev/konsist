@@ -9,7 +9,7 @@ class KoImportDeclarationForWildcardTest {
     fun `import-with-wildcard`() {
         // given
         val sut = getSnippetFile("import-with-wildcard")
-            .imports()
+            .imports
             .first()
 
         // then
@@ -20,7 +20,7 @@ class KoImportDeclarationForWildcardTest {
     fun `import-without-wildcard`() {
         // given
         val sut = getSnippetFile("import-without-wildcard")
-            .imports()
+            .imports
             .first()
 
         // then

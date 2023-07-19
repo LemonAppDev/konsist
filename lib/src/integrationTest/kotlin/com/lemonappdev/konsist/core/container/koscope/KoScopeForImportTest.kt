@@ -13,7 +13,7 @@ class KoScopeForImportTest {
 
         // then
         sut
-            .imports()
+            .imports
             .map { it.name }
             .toList()
             .shouldBeEqualTo(listOf("com.lemonappdev.konsist.testdata.SampleType"))
@@ -26,7 +26,7 @@ class KoScopeForImportTest {
 
         // then
         sut
-            .imports()
+            .imports
             .toList()
             .shouldBeEqualTo(emptyList())
     }

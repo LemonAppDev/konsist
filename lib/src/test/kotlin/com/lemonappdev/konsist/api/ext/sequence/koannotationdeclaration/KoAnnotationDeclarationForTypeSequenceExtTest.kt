@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
+import com.lemonappdev.konsist.testdata.SampleType
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -161,11 +162,11 @@ class KoAnnotationDeclarationForTypeSequenceExtTest {
     fun `withRepresentedTypeOf() with KClass syntax returns SampleAnnotation type`() {
         // given
         val annotation1: KoAnnotationDeclarationImpl = mockk {
-            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleAnnotation"
+            every { SampleAnnotation::class.simpleName?.let { representsType(it) } } returns true
         }
         val annotation2: KoAnnotationDeclarationImpl = mockk {
-            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
-        }
+            every { SampleAnnotation::class.simpleName?.let { representsType(it) } } returns false
+            every { SampleAnnotation::class.qualifiedName?.let { representsType(it) } } returns false        }
         val annotations = sequenceOf(annotation1, annotation2)
 
         // when
@@ -179,11 +180,11 @@ class KoAnnotationDeclarationForTypeSequenceExtTest {
     fun `withoutRepresentedTypeOf() with KClass syntax returns annotation without SampleAnnotation type`() {
         // given
         val annotation1: KoAnnotationDeclarationImpl = mockk {
-            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.SampleAnnotation"
+            every { SampleAnnotation::class.simpleName?.let { representsType(it) } } returns true
         }
         val annotation2: KoAnnotationDeclarationImpl = mockk {
-            every { fullyQualifiedName } returns "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
-        }
+            every { SampleAnnotation::class.simpleName?.let { representsType(it) } } returns false
+            every { SampleAnnotation::class.qualifiedName?.let { representsType(it) } } returns false        }
         val annotations = sequenceOf(annotation1, annotation2)
 
         // when

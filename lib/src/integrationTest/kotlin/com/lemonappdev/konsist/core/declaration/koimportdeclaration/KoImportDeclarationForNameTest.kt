@@ -9,7 +9,7 @@ class KoImportDeclarationForNameTest {
     fun `import-without-import-alias`() {
         // given
         val sut = getSnippetFile("import-without-import-alias")
-            .imports()
+            .imports
             .first()
 
         // then
@@ -20,7 +20,7 @@ class KoImportDeclarationForNameTest {
     fun `import-with-import-alias`() {
         // given
         val sut = getSnippetFile("import-with-import-alias")
-            .imports()
+            .imports
             .first()
 
         // then
