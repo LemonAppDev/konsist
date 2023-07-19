@@ -17,6 +17,7 @@ import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import com.lemonappdev.konsist.core.provider.KoAnnotationDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoFileExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
@@ -30,12 +31,13 @@ import org.jetbrains.kotlin.psi.KtTypeAlias
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import kotlin.reflect.KClass
 
-internal class KoFileImpl(private val ktFile: KtFile) :
+internal class KoFileImpl(override val ktFile: KtFile) :
     KoFile,
     KoNameProviderCore,
     KoPathProviderCore,
     KoTextProviderCore,
-    KoAnnotationDeclarationProviderCore {
+    KoAnnotationDeclarationProviderCore,
+    KoFileExtensionProviderCore {
 
     override val ktElement: KtElement
         get() = ktFile
@@ -50,15 +52,6 @@ internal class KoFileImpl(private val ktFile: KtFile) :
         get() = null
 
     override val name by lazy { nameWithExtension.substringBeforeLast('.') }
-
-    override val extension: String by lazy { nameWithExtension.substringAfterLast('.') }
-
-    override val nameWithExtension: String by lazy {
-        ktFile
-            .name
-            .split(sep)
-            .last()
-    }
 
     override val path: String by lazy {
         ktFile
@@ -142,8 +135,6 @@ internal class KoFileImpl(private val ktFile: KtFile) :
     override fun resideInModule(module: String): Boolean = module == moduleName
 
     override fun resideInSourceSet(sourceSet: String): Boolean = sourceSet == sourceSetName
-
-    override fun hasExtension(extension: String): Boolean = extension == this.extension
 
     override fun equals(other: Any?): Boolean = other is KoFile && path == other.path
 

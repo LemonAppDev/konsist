@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
@@ -30,17 +31,8 @@ interface KoFile :
     KoNameProvider,
     KoPathProvider,
     KoTextProvider,
-    KoAnnotationDeclarationProvider {
-
-    /**
-     * The extension of the file.
-     */
-    val extension: String
-
-    /**
-     * The name with extension of the file.
-     */
-    val nameWithExtension: String
+    KoAnnotationDeclarationProvider,
+    KoFileExtensionProvider {
 
     /**
      * The file's module name.
@@ -106,14 +98,6 @@ interface KoFile :
      * @return `true` if a file resides in the specified source set, `false` otherwise.
      */
     fun resideInSourceSet(sourceSet: String): Boolean
-
-    /**
-     * Whether file has extension.
-     *
-     * @param extension The extension to check against. It is a non-null string representing the desired extension.
-     * @return `true` if the file's extension matching with the extension, `false` otherwise.
-     */
-    fun hasExtension(extension: String): Boolean
 
     /**
      * Indicates whether some other object is "equal to" this one.
