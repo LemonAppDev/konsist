@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
@@ -10,17 +9,17 @@ import com.lemonappdev.konsist.api.provider.KoProvider
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 
-fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?) {
+fun <E : KoProvider> Sequence<E>.assert(function: (E) -> Boolean?) {
     assert(function, true)
 }
 
-fun <E : KoBaseDeclaration> Sequence<E>.assertNot(function: (E) -> Boolean?) {
+fun <E : KoProvider> Sequence<E>.assertNot(function: (E) -> Boolean?) {
     assert(function, false)
 }
 
 @Suppress("detekt.ThrowsCount")
-private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
-    var lastDeclaration: KoBaseDeclaration? = null
+private fun <E : KoProvider> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
+    var lastDeclaration: KoProvider? = null
 
     try {
         val localList = this.toList()
@@ -42,7 +41,7 @@ private fun <E : KoBaseDeclaration> Sequence<E>.assert(function: (E) -> Boolean?
     }
 }
 
-private fun <E : KoBaseDeclaration> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {
+private fun <E : KoProvider> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {
     // In this declarations structure test name is at index 6
     // We pass this name to checkIfSuppressed() because when declarations are nested, this index is changing
     val testMethodName = getTestMethodNameFromSixthIndex()
