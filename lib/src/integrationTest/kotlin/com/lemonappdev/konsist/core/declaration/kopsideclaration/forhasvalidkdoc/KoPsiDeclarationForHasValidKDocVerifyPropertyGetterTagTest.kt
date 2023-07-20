@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kopsideclaration.forhasvalidkdoc
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -19,6 +20,7 @@ class KoPsiDeclarationForHasValidKDocVerifyPropertyGetterTagTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations()
+            .filterIsInstance<KoKDocProvider>()
             .first()
 
         // then

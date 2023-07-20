@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.kobasedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -10,6 +12,7 @@ class KoBaseDeclarationForContainingFileTest {
         // given
         val sut = getSnippetFile("containing-file")
             .declarations()
+            .filterIsInstance<KoContainingFileProvider>()
             .first()
 
         // then

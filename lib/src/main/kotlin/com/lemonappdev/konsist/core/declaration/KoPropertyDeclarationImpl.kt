@@ -1,22 +1,50 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoDelegateProvider
+import com.lemonappdev.konsist.api.provider.KoExplicitTypeProvider
+import com.lemonappdev.konsist.api.provider.KoExtensionProvider
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
+import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.KoVarAndValProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
+import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoExplicitTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
+import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoVarAndValProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -26,7 +54,14 @@ internal class KoPropertyDeclarationImpl private constructor(
     override val parentDeclaration: KoParentDeclarationProvider?,
 ) :
     KoPropertyDeclaration,
-    KoBaseDeclarationImpl(ktProperty),
+    KoContainingFileProviderCore,
+    KoKDocProviderCore,
+    KoLocationProviderCore,
+    KoNameProviderCore,
+    KoParentDeclarationProviderCore,
+    KoPathProviderCore,
+    KoTextProviderCore,
+    KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoPackageProviderCore,
     KoResideInOrOutsidePackageProviderCore,
@@ -48,6 +83,10 @@ internal class KoPropertyDeclarationImpl private constructor(
 
     override val koFiles: Sequence<KoFile>? by lazy { null }
 
+    override val psiElement: PsiElement by lazy { ktProperty }
+
+    override val ktElement: KtElement by lazy { ktProperty }
+
     override val delegateName: String? by lazy {
         ktProperty
             .delegateExpression
@@ -56,6 +95,10 @@ internal class KoPropertyDeclarationImpl private constructor(
             ?.substringAfter("by ")
             ?.substringBefore("{")
             ?.removeSuffix(" ")
+    }
+
+    override fun toString(): String {
+        return locationWithText
     }
 
     internal companion object {

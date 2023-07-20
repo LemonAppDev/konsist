@@ -1,15 +1,31 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoClassProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoFunctionProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoPropertyProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
+import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnonymousInitializer
+import org.jetbrains.kotlin.psi.KtElement
 
 internal class KoInitBlockDeclarationImpl private constructor(
     private val ktAnonymousInitializer: KtAnonymousInitializer,
@@ -20,12 +36,25 @@ internal class KoInitBlockDeclarationImpl private constructor(
     KoClassProviderCore,
     KoPropertyProviderCore,
     KoFunctionProviderCore,
-    KoBaseDeclarationImpl(ktAnonymousInitializer) {
+    KoContainingFileProviderCore,
+    KoLocationProviderCore,
+    KoParentDeclarationProviderCore,
+    KoPathProviderCore,
+    KoTextProviderCore,
+    KoBaseProviderCore {
+    override val psiElement: PsiElement by lazy { ktAnonymousInitializer }
+
+    override val ktElement: KtElement by lazy { ktAnonymousInitializer }
+
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
+    ): Sequence<KoBaseProvider> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktAnonymousInitializer, includeNested, includeLocal, this)
+
+    override fun toString(): String {
+        return locationWithText
+    }
 
     internal companion object {
         private val cache: KoDeclarationCache<KoInitBlockDeclaration> = KoDeclarationCache()

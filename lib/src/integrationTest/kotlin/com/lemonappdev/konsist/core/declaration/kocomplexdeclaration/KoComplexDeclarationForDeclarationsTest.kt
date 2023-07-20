@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -17,12 +18,14 @@ class KoComplexDeclarationForDeclarationsTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoDeclarationProvider
 
         // then
         sut
             .declarations(includeNested = true, includeLocal = true)
             .toList()
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(emptyList())
     }
@@ -38,6 +41,7 @@ class KoComplexDeclarationForDeclarationsTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoDeclarationProvider
 
         // then
@@ -52,6 +56,7 @@ class KoComplexDeclarationForDeclarationsTest {
         sut
             .declarations(includeNested = includeNested, includeLocal = includeLocal)
             .toList()
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

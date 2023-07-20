@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoParentDeclarationForHasDelegateTest {
+class KoParentForHasDelegateTest {
     @Test
     fun `class-has-parent-class-without-delegate`() {
         // given

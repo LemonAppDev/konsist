@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.kopsideclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -11,6 +13,7 @@ class KoPsiDeclarationForLocationAndTextTest {
         // given
         val projectPath = getSnippetFile("location-with-text")
             .declarations()
+            .filterIsInstance<KoPathProvider>()
             .first()
             .projectPath
 
@@ -54,6 +57,7 @@ class KoPsiDeclarationForLocationAndTextTest {
         // given
         val sut = getSnippetFile("text")
             .declarations()
+            .filterIsInstance<KoTextProvider>()
             .first()
 
         // then

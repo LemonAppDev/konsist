@@ -2,8 +2,8 @@ package com.lemonappdev.konsist.core.provider.util
 
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiWhiteSpace
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
@@ -33,13 +33,13 @@ import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
 internal object KoDeclarationProviderCoreUtil {
-    inline fun <reified T : KoBaseDeclaration> getKoDeclarations(
+    inline fun <reified T : KoBaseProvider> getKoDeclarations(
         ktElement: KtElement,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
         parentDeclaration: KoParentDeclarationProvider?,
     ): Sequence<T> {
-        val declarations: Sequence<KoBaseDeclaration>
+        val declarations: Sequence<KoBaseProvider>
 
         return when (ktElement) {
             is KtFile -> {
@@ -83,8 +83,8 @@ internal object KoDeclarationProviderCoreUtil {
         }
     }
 
-    inline fun <reified T : KoBaseDeclaration> getKoDeclarations(
-        declarations: Sequence<KoBaseDeclaration>,
+    inline fun <reified T : KoBaseProvider> getKoDeclarations(
+        declarations: Sequence<KoBaseProvider>,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
     ): Sequence<T> {
@@ -125,7 +125,7 @@ internal object KoDeclarationProviderCoreUtil {
         return result.filterIsInstance<T>()
     }
 
-    fun nestedDeclarations(koNamedDeclarations: Sequence<KoBaseDeclaration>): Sequence<KoBaseDeclaration> {
+    fun nestedDeclarations(koNamedDeclarations: Sequence<KoBaseProvider>): Sequence<KoBaseProvider> {
         return koNamedDeclarations.flatMap {
             when (it) {
                 is KoDeclarationProvider -> it.declarations(includeNested = true)
@@ -134,9 +134,9 @@ internal object KoDeclarationProviderCoreUtil {
         }
     }
 
-    fun localDeclarations(koFunctions: Sequence<KoFunctionDeclaration>, includeNested: Boolean): Sequence<KoBaseDeclaration> {
-        val localDeclarations = mutableListOf<KoBaseDeclaration>()
-        val nestedDeclarations = mutableListOf<KoBaseDeclaration>()
+    fun localDeclarations(koFunctions: Sequence<KoFunctionDeclaration>, includeNested: Boolean): Sequence<KoBaseProvider> {
+        val localDeclarations = mutableListOf<KoBaseProvider>()
+        val nestedDeclarations = mutableListOf<KoBaseProvider>()
 
         koFunctions.forEach { koFunction ->
             koFunction.localDeclarations().forEach {
@@ -165,7 +165,7 @@ internal object KoDeclarationProviderCoreUtil {
     private fun getInstanceOfKtDeclaration(
         ktDeclaration: KtDeclaration,
         parentDeclaration: KoParentDeclarationProvider?,
-    ): KoBaseDeclaration? = when {
+    ): KoBaseProvider? = when {
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
         ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
         ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
@@ -176,7 +176,7 @@ internal object KoDeclarationProviderCoreUtil {
         else -> null
     }
 
-    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parentDeclaration: KoParentDeclarationProvider?): KoBaseDeclaration? =
+    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parentDeclaration: KoParentDeclarationProvider?): KoBaseProvider? =
         when (psiElement) {
             is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parentDeclaration)
             is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parentDeclaration)

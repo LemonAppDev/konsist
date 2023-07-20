@@ -1,29 +1,60 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoExplicitReturnTypeProvider
+import com.lemonappdev.konsist.api.provider.KoExtensionProvider
+import com.lemonappdev.konsist.api.provider.KoImplementationProvider
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
+import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
+import com.lemonappdev.konsist.api.provider.KoLocalPropertyProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
+import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
+import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
+import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoExplicitReturnTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoImplementationProviderCore
+import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalPropertyProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtClass
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
@@ -34,7 +65,15 @@ internal class KoFunctionDeclarationImpl private constructor(
     override val ktFunction: KtFunction,
     override val parentDeclaration: KoParentDeclarationProvider?,
 ) :
-    KoBaseDeclarationImpl(ktFunction),
+    KoFunctionDeclaration,
+    KoContainingFileProviderCore,
+    KoKDocProviderCore,
+    KoLocationProviderCore,
+    KoNameProviderCore,
+    KoParentDeclarationProviderCore,
+    KoPathProviderCore,
+    KoTextProviderCore,
+    KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoPackageProviderCore,
     KoResideInOrOutsidePackageProviderCore,
@@ -42,7 +81,6 @@ internal class KoFunctionDeclarationImpl private constructor(
     KoModifierProviderCore,
     KoTopLevelProviderCore,
     KoParametersProviderCore,
-    KoFunctionDeclaration,
     KoLocalDeclarationProviderCore,
     KoLocalClassProviderCore,
     KoLocalFunctionProviderCore,
@@ -61,7 +99,11 @@ internal class KoFunctionDeclarationImpl private constructor(
 
     override val koFiles: Sequence<KoFile>? by lazy { null }
 
-    private val localDeclarations: Sequence<KoBaseDeclaration> by lazy {
+    override val psiElement: PsiElement by lazy { ktFunction }
+
+    override val ktElement: KtElement by lazy { ktFunction }
+
+    private val localDeclarations: Sequence<KoBaseProvider> by lazy {
         val psiChildren = ktFunction
             .bodyBlockExpression
             ?.children
@@ -82,13 +124,17 @@ internal class KoFunctionDeclarationImpl private constructor(
             }
     }
 
-    override fun localDeclarations(): Sequence<KoBaseDeclaration> = localDeclarations
+    override fun localDeclarations(): Sequence<KoBaseProvider> = localDeclarations
 
     override fun hasValidReturnTag(enabled: Boolean): Boolean = TagUtil.hasValidReturnTag(enabled, explicitReturnType?.name, kDoc)
 
     override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters, kDoc)
 
     override fun hasValidReceiverTag(enabled: Boolean): Boolean = TagUtil.hasValidReceiverTag(enabled, kDoc)
+
+    override fun toString(): String {
+        return locationWithText
+    }
 
     internal companion object {
 

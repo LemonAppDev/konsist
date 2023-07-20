@@ -1,7 +1,9 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.container.KoFile
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
@@ -55,12 +57,12 @@ private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String):
                 "${it.path} ($name $declarationType)"
             }
 
-            is KoBaseDeclaration -> {
+            is KoBaseProvider -> {
                 types = "declarations"
-                val name = it.name
+                val name = (it as KoNameProvider).name
                 val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
 
-                "${it.location} ($name $declarationType)"
+                "${(it as KoLocationProvider).location} ($name $declarationType)"
             }
 
             else -> {

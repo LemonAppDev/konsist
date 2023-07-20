@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.provider.representsTypeOf
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoClassProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
@@ -93,7 +93,7 @@ inline fun <reified T> Sequence<KoRepresentsTypeProvider>.withoutRepresentedType
 fun <T : KoDeclarationProvider> Sequence<T>.declarations(
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
-): Sequence<KoBaseDeclaration> = flatMap { it.declarations(includeNested, includeLocal) }
+): Sequence<KoBaseProvider> = flatMap { it.declarations(includeNested, includeLocal) }
 
 /**
  * Sequence containing class declarations.

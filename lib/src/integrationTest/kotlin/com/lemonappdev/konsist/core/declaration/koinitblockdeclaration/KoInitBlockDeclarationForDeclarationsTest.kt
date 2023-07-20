@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koinitblockdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -31,6 +32,7 @@ class KoInitBlockDeclarationForDeclarationsTest {
         sut
             ?.declarations()
             ?.toList()
+            ?.filterIsInstance<KoNameProvider>()
             ?.map { it.name }
             ?.shouldBeEqualTo(listOf("sampleProperty", "sampleFunction", "SampleClass"))
     }

@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -19,35 +20,11 @@ class KoDeclarationForNameTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoFullyQualifiedNameProvider
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo value
-    }
-
-    @Test
-    fun `primary-constructor`() {
-        // given
-        val sut = getSnippetFile("primary-constructor")
-            .classes()
-            .first()
-            .primaryConstructor
-
-        // then
-        sut?.name shouldBeEqualTo "SampleClass"
-    }
-
-    @Test
-    fun `secondary-constructor`() {
-        // given
-        val sut = getSnippetFile("secondary-constructor")
-            .classes()
-            .first()
-            .secondaryConstructors
-            .first()
-
-        // then
-        sut.name shouldBeEqualTo "SampleClass"
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kodeclaration/snippet/forname/", fileName)

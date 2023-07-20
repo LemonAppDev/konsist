@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -19,6 +20,7 @@ class KoComplexDeclarationForRepresentsTypeTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoRepresentsTypeProvider
 
         // then

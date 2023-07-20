@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import com.lemonappdev.konsist.api.KoModifier.SUSPEND
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
@@ -29,6 +30,7 @@ class KoDeclarationForModifierWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoModifierProvider
 
         // then
@@ -44,6 +46,7 @@ class KoDeclarationForModifierWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoModifierProvider
 
         // then
@@ -59,6 +62,7 @@ class KoDeclarationForModifierWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoModifierProvider
 
         // then
@@ -80,6 +84,7 @@ class KoDeclarationForModifierWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoModifierProvider
 
         // then
@@ -104,6 +109,7 @@ class KoDeclarationForModifierWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoModifierProvider
 
         // then

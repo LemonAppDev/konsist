@@ -1,20 +1,44 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoDefaultValueProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
+import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.KoTypeProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
+import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDefaultValueProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -26,14 +50,20 @@ internal class KoParameterDeclarationImpl private constructor(
     override val parentDeclaration: KoParentDeclarationProvider?,
 ) :
     KoParameterDeclaration,
-    KoBaseDeclarationImpl(ktParameter),
+    KoContainingFileProviderCore,
+    KoLocationProviderCore,
+    KoNameProviderCore,
+    KoPathProviderCore,
+    KoTextProviderCore,
+    KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoPackageProviderCore,
     KoResideInOrOutsidePackageProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
-    KoDefaultValueProviderCore,
     KoModifierProviderCore,
+    KoDefaultValueProviderCore,
     KoTopLevelProviderCore,
+    KoParentDeclarationProviderCore,
     KoTypeProviderCore,
     KoRepresentsTypeProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktParameter }
@@ -44,6 +74,10 @@ internal class KoParameterDeclarationImpl private constructor(
 
     override val koFiles: Sequence<KoFile>? by lazy { null }
 
+    override val psiElement: PsiElement by lazy { ktParameter }
+
+    override val ktElement: KtElement by lazy { ktParameter }
+
     override val type: KoTypeDeclaration by lazy {
         val type = ktParameter
             .children
@@ -53,6 +87,10 @@ internal class KoParameterDeclarationImpl private constructor(
     }
 
     override fun representsType(name: String): Boolean = type.name == name || type.fullyQualifiedName == name
+
+    override fun toString(): String {
+        return locationWithText
+    }
 
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()

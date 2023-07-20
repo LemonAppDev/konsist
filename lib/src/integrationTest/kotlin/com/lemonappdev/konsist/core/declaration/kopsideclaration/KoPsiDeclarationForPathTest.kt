@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kopsideclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -25,6 +26,7 @@ class KoPsiDeclarationForPathTest {
         // given
         val sut = getSnippetFile("project-file-path")
             .declarations()
+            .filterIsInstance<KoPathProvider>()
             .first()
 
         // then

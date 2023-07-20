@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.container.koscope
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -16,6 +17,7 @@ class KoScopeForDeclarationTest {
         // then
         sut
             .declarations()
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -49,6 +51,7 @@ class KoScopeForDeclarationTest {
         sut
             .declarations(includeNested = includeNested, includeLocal = includeLocal)
             .toList()
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

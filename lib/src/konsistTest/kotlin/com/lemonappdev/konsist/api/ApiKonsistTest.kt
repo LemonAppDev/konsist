@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api
 
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.verify.assert
 import org.junit.jupiter.api.Test
 
@@ -8,6 +9,7 @@ class ApiKonsistTest {
     fun `every api declaration has kdoc`() {
         apiPackageScope
             .declarations(includeNested = true)
+            .filterIsInstance<KoKDocProvider>()
             .assert { it.hasKDoc() }
     }
 

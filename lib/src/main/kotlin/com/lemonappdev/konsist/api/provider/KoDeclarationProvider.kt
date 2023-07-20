@@ -1,19 +1,17 @@
 package com.lemonappdev.konsist.api.provider
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-
 interface KoDeclarationProvider : KoBaseProvider {
     /**
      * The declarations present in the scope, file or declaration.
      *
      * @param includeNested specifies whether to include nested declarations.
      * @param includeLocal specifies whether to include local declarations.
-     * @return a sequence of [KoBaseDeclaration] representing the declarations in the scope, file or declaration.
+     * @return a sequence of [KoBaseProvider] representing the declarations in the scope, file or declaration.
      */
     fun declarations(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoBaseDeclaration>
+    ): Sequence<KoBaseProvider>
 
     fun containsDeclarations(
         name: String,

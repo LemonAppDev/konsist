@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.container.koscope
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -15,6 +16,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations()
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -42,6 +44,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -61,6 +64,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeLocal = true)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -80,6 +84,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -100,6 +105,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeLocal = true)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -121,6 +127,7 @@ class KoScopeForNamedDeclarationTest {
         sut
             .declarations(includeNested = true)
             .filterNot { it is KoImportDeclaration }
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -142,6 +149,7 @@ class KoScopeForNamedDeclarationTest {
         sut
             .declarations(includeLocal = true)
             .filterNot { it is KoImportDeclaration }
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -162,6 +170,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -181,6 +190,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeLocal = true)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -200,6 +210,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -218,6 +229,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -237,6 +249,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeNested = false)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(listOf("SampleClass"))
@@ -250,6 +263,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeNested = false, includeLocal = false)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -269,6 +283,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeNested = true, includeLocal = false)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -290,6 +305,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeNested = false, includeLocal = true)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(
@@ -309,6 +325,7 @@ class KoScopeForNamedDeclarationTest {
         // then
         sut
             .declarations(includeNested = true, includeLocal = true)
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .toList()
             .shouldBeEqualTo(

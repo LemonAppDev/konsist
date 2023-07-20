@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
@@ -16,9 +18,10 @@ class KoKDocDeclarationForTagTest {
         size: Int,
     ) {
         // given
-        val sut = getSnippetFile("tags")
+        val sut = (getSnippetFile("tags")
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .filterIsInstance<KoNameProvider>()
+            .first { it.name == declarationName } as KoKDocProvider)
             .kDoc
 
         // then

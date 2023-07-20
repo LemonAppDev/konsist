@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.kocomplexdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
@@ -17,6 +18,7 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoDeclarationProvider
 
         // then
@@ -33,6 +35,7 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         sut
             .declarations(includeNested = true, includeLocal = true)
             .toList()
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -46,6 +49,7 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoDeclarationProvider
 
         // then
@@ -54,6 +58,7 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         sut
             .declarations(includeNested = true, includeLocal = false)
             .toList()
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -67,6 +72,7 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoDeclarationProvider
 
         // then
@@ -82,6 +88,7 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         sut
             .declarations(includeNested = false, includeLocal = true)
             .toList()
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -95,6 +102,7 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoDeclarationProvider
 
         // then
@@ -103,6 +111,7 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         sut
             .declarations(includeNested = false, includeLocal = false)
             .toList()
+            .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

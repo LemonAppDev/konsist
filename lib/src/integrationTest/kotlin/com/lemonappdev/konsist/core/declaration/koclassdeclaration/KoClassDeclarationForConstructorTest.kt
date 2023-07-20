@@ -15,10 +15,7 @@ class KoClassDeclarationForConstructorTest {
             .first()
 
         // then
-        assertSoftly(sut) {
-            primaryConstructor?.name shouldBeEqualTo "SampleClass"
-            hasPrimaryConstructor() shouldBeEqualTo true
-        }
+            sut.hasPrimaryConstructor() shouldBeEqualTo true
     }
 
     @Test
@@ -29,10 +26,7 @@ class KoClassDeclarationForConstructorTest {
             .first()
 
         // then
-        assertSoftly(sut) {
-            primaryConstructor?.name shouldBeEqualTo null
-            hasPrimaryConstructor() shouldBeEqualTo false
-        }
+            sut.hasPrimaryConstructor() shouldBeEqualTo false
     }
 
     @Test
@@ -43,10 +37,7 @@ class KoClassDeclarationForConstructorTest {
             .first()
 
         // then
-        assertSoftly(sut) {
-            secondaryConstructors.first().name shouldBeEqualTo "SampleClass"
-            hasSecondaryConstructors() shouldBeEqualTo true
-        }
+            sut.hasSecondaryConstructors() shouldBeEqualTo true
     }
 
     @Test
@@ -72,7 +63,6 @@ class KoClassDeclarationForConstructorTest {
 
         // then
         assertSoftly(sut) {
-            primaryConstructor?.name shouldBeEqualTo "SampleClass"
             secondaryConstructors shouldHaveSize 1
             allConstructors shouldHaveSize 2
         }

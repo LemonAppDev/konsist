@@ -2,6 +2,8 @@ package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.SEE
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldHaveSize
@@ -17,9 +19,10 @@ class KoKDocDeclarationForSeeTagTest {
         declarationName: String,
     ) {
         // given
-        val sut = getSnippetFile(fileName)
+        val sut = (getSnippetFile(fileName)
             .declarations(includeNested = true)
-            .first { it.name == declarationName }
+            .filterIsInstance<KoNameProvider>()
+            .first { it.name == declarationName } as KoKDocProvider)
             .kDoc
 
         // then

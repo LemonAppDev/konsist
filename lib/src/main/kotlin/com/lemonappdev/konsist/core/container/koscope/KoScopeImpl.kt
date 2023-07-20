@@ -1,13 +1,14 @@
 package com.lemonappdev.konsist.core.container.koscope
 
+import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.container.koscope.KoScope
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
@@ -71,7 +72,7 @@ class KoScopeImpl(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseDeclaration> =
+    ): Sequence<KoBaseProvider> =
         koFiles.flatMap { it.declarations(includeNested, includeLocal) }
 
     override fun properties(

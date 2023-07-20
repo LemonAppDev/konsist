@@ -13,7 +13,7 @@ import com.lemonappdev.konsist.api.ext.sequence.withoutParents
 import com.lemonappdev.konsist.api.ext.sequence.withoutSomeParents
 import com.lemonappdev.konsist.api.ext.sequence.withoutSomeParentsOf
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoParentDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoParentImpl
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleInterface
 import io.mockk.every
@@ -64,13 +64,13 @@ class KoClassDeclarationForParentSequenceExtTest {
         // given
         val name1 = "SampleClass"
         val name2 = "OtherClass"
-        val parent1: KoParentDeclarationImpl = mockk {
+        val parent1: KoParentImpl = mockk {
             every { name } returns name1
         }
         val class1: KoClassDeclarationImpl = mockk {
             every { parents } returns listOf(parent1)
         }
-        val parent2: KoParentDeclarationImpl = mockk {
+        val parent2: KoParentImpl = mockk {
             every { name } returns name2
         }
         val class2: KoClassDeclarationImpl = mockk {
@@ -90,13 +90,13 @@ class KoClassDeclarationForParentSequenceExtTest {
         // given
         val name1 = "SampleClass"
         val name2 = "OtherClass"
-        val parent1: KoParentDeclarationImpl = mockk {
+        val parent1: KoParentImpl = mockk {
             every { name } returns name1
         }
         val class1: KoClassDeclarationImpl = mockk {
             every { parents } returns listOf(parent1)
         }
-        val parent2: KoParentDeclarationImpl = mockk {
+        val parent2: KoParentImpl = mockk {
             every { name } returns name2
         }
         val class2: KoClassDeclarationImpl = mockk {
@@ -284,10 +284,10 @@ class KoClassDeclarationForParentSequenceExtTest {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
-        val parent1: KoParentDeclarationImpl = mockk {
+        val parent1: KoParentImpl = mockk {
             every { name } returns name1
         }
-        val parent2: KoParentDeclarationImpl = mockk {
+        val parent2: KoParentImpl = mockk {
             every { name } returns name2
         }
         val class1: KoClassDeclarationImpl = mockk {
@@ -311,13 +311,13 @@ class KoClassDeclarationForParentSequenceExtTest {
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
         val name3 = "OtherParent"
-        val parent1: KoParentDeclarationImpl = mockk {
+        val parent1: KoParentImpl = mockk {
             every { name } returns name1
         }
-        val parent2: KoParentDeclarationImpl = mockk {
+        val parent2: KoParentImpl = mockk {
             every { name } returns name2
         }
-        val parent3: KoParentDeclarationImpl = mockk {
+        val parent3: KoParentImpl = mockk {
             every { name } returns name3
         }
 
@@ -344,10 +344,10 @@ class KoClassDeclarationForParentSequenceExtTest {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
-        val parent1: KoParentDeclarationImpl = mockk {
+        val parent1: KoParentImpl = mockk {
             every { name } returns name1
         }
-        val parent2: KoParentDeclarationImpl = mockk {
+        val parent2: KoParentImpl = mockk {
             every { name } returns name2
         }
         val class1: KoClassDeclarationImpl = mockk {
@@ -371,13 +371,13 @@ class KoClassDeclarationForParentSequenceExtTest {
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
         val name3 = "OtherParent"
-        val parent1: KoParentDeclarationImpl = mockk {
+        val parent1: KoParentImpl = mockk {
             every { name } returns name1
         }
-        val parent2: KoParentDeclarationImpl = mockk {
+        val parent2: KoParentImpl = mockk {
             every { name } returns name2
         }
-        val parent3: KoParentDeclarationImpl = mockk {
+        val parent3: KoParentImpl = mockk {
             every { name } returns name3
         }
 
@@ -404,10 +404,10 @@ class KoClassDeclarationForParentSequenceExtTest {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
-        val parent1: KoParentDeclarationImpl = mockk {
+        val parent1: KoParentImpl = mockk {
             every { name } returns name1
         }
-        val parent2: KoParentDeclarationImpl = mockk {
+        val parent2: KoParentImpl = mockk {
             every { name } returns name2
         }
 
@@ -432,13 +432,13 @@ class KoClassDeclarationForParentSequenceExtTest {
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
         val name3 = "OtherParent"
-        val parent1: KoParentDeclarationImpl = mockk {
+        val parent1: KoParentImpl = mockk {
             every { name } returns name1
         }
-        val parent2: KoParentDeclarationImpl = mockk {
+        val parent2: KoParentImpl = mockk {
             every { name } returns name2
         }
-        val parent3: KoParentDeclarationImpl = mockk {
+        val parent3: KoParentImpl = mockk {
             every { name } returns name3
         }
 
@@ -465,10 +465,10 @@ class KoClassDeclarationForParentSequenceExtTest {
         // given
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
-        val parent1: KoParentDeclarationImpl = mockk {
+        val parent1: KoParentImpl = mockk {
             every { name } returns name1
         }
-        val parent2: KoParentDeclarationImpl = mockk {
+        val parent2: KoParentImpl = mockk {
             every { name } returns name2
         }
 
@@ -493,13 +493,13 @@ class KoClassDeclarationForParentSequenceExtTest {
         val name1 = "SampleClass"
         val name2 = "SampleInterface"
         val name3 = "OtherParent"
-        val parent1: KoParentDeclarationImpl = mockk {
+        val parent1: KoParentImpl = mockk {
             every { name } returns name1
         }
-        val parent2: KoParentDeclarationImpl = mockk {
+        val parent2: KoParentImpl = mockk {
             every { name } returns name2
         }
-        val parent3: KoParentDeclarationImpl = mockk {
+        val parent3: KoParentImpl = mockk {
             every { name } returns name3
         }
 

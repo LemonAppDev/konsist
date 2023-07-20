@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.kodeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
@@ -24,6 +25,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoAnnotationProvider
 
         // then
@@ -41,6 +43,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoAnnotationProvider
 
         // then
@@ -62,6 +65,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoAnnotationProvider
 
         // then
@@ -82,6 +86,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoAnnotationProvider
 
         // then
@@ -102,6 +107,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoAnnotationProvider
 
         // then
@@ -123,6 +129,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoAnnotationProvider
 
         // then
@@ -143,6 +150,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoAnnotationProvider
 
         // then
@@ -161,6 +169,7 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         // given
         val sut = getSnippetFile(fileName)
             .declarations(includeNested = true)
+            .filterIsInstance<KoNameProvider>()
             .first { it.name == declarationName } as KoAnnotationProvider
 
         // then
