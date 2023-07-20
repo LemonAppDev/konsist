@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 
-interface KoPackagesProvider : KoProvider {
+interface KoPackagesProvider : KoBaseProvider {
     /**
      * Sequence of packages.
      */

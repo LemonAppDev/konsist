@@ -6,7 +6,8 @@ import com.lemonappdev.konsist.api.provider.KoConstructorsProvider
 internal interface KoConstructorsProviderCore :
     KoConstructorsProvider,
     KoPrimaryConstructorProviderCore,
-    KoSecondaryConstructorsProviderCore {
+    KoSecondaryConstructorsProviderCore,
+    KoBaseProviderCore {
     override val allConstructors: List<KoConstructorProvider>
         get() = listOfNotNull(primaryConstructor) + secondaryConstructors
 }

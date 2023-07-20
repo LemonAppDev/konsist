@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoNullableProvider : KoProvider {
+interface KoNullableProvider : KoBaseProvider {
     /**
      * Whatever type is nullable.
      */

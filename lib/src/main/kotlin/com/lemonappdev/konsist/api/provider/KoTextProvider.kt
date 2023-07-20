@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoTextProvider : KoProvider {
+interface KoTextProvider : KoBaseProvider {
     /**
      * Text of the declaration or file.
      */

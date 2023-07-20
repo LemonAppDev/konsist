@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 
-internal interface KoKotlinTypeProviderCore : KoKotlinTypeProvider, KoSourceAndAliasTypeProviderCore {
+internal interface KoKotlinTypeProviderCore : KoKotlinTypeProvider, KoSourceAndAliasTypeProviderCore, KoBaseProviderCore {
     override val isKotlinType: Boolean
         get() = if (isAlias()) {
             false

@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.container.KoFile
 
-interface KoFileProvider : KoProvider {
+interface KoFileProvider : KoBaseProvider {
     /**
      * Sequence of the files.
      */

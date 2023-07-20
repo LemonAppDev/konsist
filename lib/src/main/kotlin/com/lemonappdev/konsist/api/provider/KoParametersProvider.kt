@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 
-interface KoParametersProvider : KoProvider {
+interface KoParametersProvider : KoBaseProvider {
     /**
      * Parameters of the declaration.
      */

@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 
-internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationProviderCore {
+internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationProviderCore, KoBaseProviderCore {
     override fun interfaces(
         includeNested: Boolean,
     ): Sequence<KoInterfaceDeclaration> =

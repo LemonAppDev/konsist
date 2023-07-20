@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 internal interface KoRepresentsTypeProviderCore :
     KoRepresentsTypeProvider,
     KoNameProviderCore,
-    KoFullyQualifiedNameProviderCore {
+    KoFullyQualifiedNameProviderCore,
+    KoBaseProviderCore {
     override fun representsType(name: String): Boolean = name == this.name || name == fullyQualifiedName
 }

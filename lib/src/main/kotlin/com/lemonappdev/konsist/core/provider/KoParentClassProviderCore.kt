@@ -8,7 +8,8 @@ import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 
 internal interface KoParentClassProviderCore :
     KoParentDeclarationProviderCore,
-    KoParentClassProvider {
+    KoParentClassProvider,
+    KoBaseProviderCore{
     val ktClass: KtClass
 
     override val parentClass: KoParentDeclaration?

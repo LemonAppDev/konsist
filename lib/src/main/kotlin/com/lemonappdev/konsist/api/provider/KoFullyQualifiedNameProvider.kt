@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoFullyQualifiedNameProvider : KoProvider {
+interface KoFullyQualifiedNameProvider : KoBaseProvider {
     /**
      * Fully qualified name of the declaration.
      */

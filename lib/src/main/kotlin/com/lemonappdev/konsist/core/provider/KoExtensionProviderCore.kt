@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoExtensionProvider
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
-internal interface KoExtensionProviderCore : KoExtensionProvider {
+internal interface KoExtensionProviderCore : KoExtensionProvider, KoBaseProviderCore {
     val ktCallableDeclaration: KtCallableDeclaration
 
     override fun isExtension(): Boolean = ktCallableDeclaration.isExtensionDeclaration()

@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoModuleProvider : KoProvider {
+interface KoModuleProvider : KoBaseProvider {
     /**
      * The file's module name.
      */

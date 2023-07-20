@@ -9,7 +9,8 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 internal interface KoExplicitReturnTypeProviderCore :
     KoExplicitReturnTypeProvider,
     KoParentDeclarationProviderCore,
-    KoExtensionProviderCore {
+    KoExtensionProviderCore,
+    KoBaseProviderCore {
     val ktFunction: KtFunction
 
     private fun getTypeReferences(): List<KtTypeReference> = ktFunction

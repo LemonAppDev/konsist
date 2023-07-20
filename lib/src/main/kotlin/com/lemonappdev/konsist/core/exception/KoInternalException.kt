@@ -2,7 +2,8 @@ package com.lemonappdev.konsist.core.exception
 
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.provider.KoProvider
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 
 class KoInternalException(
     message: String,
@@ -19,15 +20,17 @@ class KoInternalException(
     constructor(
         message: String,
         cause: Throwable? = null,
-        koProvider: KoProvider?,
-    ) : this(getMessage(message, koProvider), cause)
+        koBaseProvider: KoBaseProvider?,
+    ) : this(getMessage(message, koBaseProvider), cause)
 }
 
-private fun getMessage(message: String, koBaseDeclaration: KoBaseDeclaration?) = getMessage(message, koBaseDeclaration?.text, "declaration")
+private fun getMessage(message: String, koBaseDeclaration: KoBaseDeclaration?) =
+    getMessage(message, koBaseDeclaration?.text, "declaration")
 
 private fun getMessage(message: String, koFile: KoFile?) = getMessage(message, koFile?.text, "file")
 
-private fun getMessage(message: String, koProvider: KoProvider?) = getMessage(message, koProvider?.errorText, "provider")
+private fun getMessage(message: String, koBaseProvider: KoBaseProvider?) =
+    getMessage(message, (koBaseProvider as KoBaseProviderCore).errorText, "provider")
 
 private fun getMessage(message: String, suffix: String?, type: String) = if (suffix == null) {
     message

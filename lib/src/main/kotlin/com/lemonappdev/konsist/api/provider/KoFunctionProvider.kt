@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 
-interface KoFunctionProvider : KoProvider {
+interface KoFunctionProvider : KoBaseProvider {
     /**
      * The functions present in the scope, file or declaration.
      *

@@ -5,7 +5,8 @@ import org.jetbrains.kotlin.psi.KtImportDirective
 
 internal interface KoAliasProviderCore :
     KoAliasProvider,
-    KoNameProviderCore {
+    KoNameProviderCore,
+    KoBaseProviderCore {
     val ktImportDirective: KtImportDirective
     override val alias: String?
         get() = ktImportDirective.alias?.name

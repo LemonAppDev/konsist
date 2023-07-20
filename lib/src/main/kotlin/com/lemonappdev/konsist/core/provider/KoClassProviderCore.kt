@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.provider.KoClassProvider
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 
-internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderCore {
+internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderCore, KoBaseProviderCore {
     override fun classes(
         includeNested: Boolean,
         includeLocal: Boolean,

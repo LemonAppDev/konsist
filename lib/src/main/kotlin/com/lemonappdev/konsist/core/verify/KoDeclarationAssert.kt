@@ -5,21 +5,21 @@ import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoProvider
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 
-fun <E : KoProvider> Sequence<E>.assert(function: (E) -> Boolean?) {
+fun <E : KoBaseProvider> Sequence<E>.assert(function: (E) -> Boolean?) {
     assert(function, true)
 }
 
-fun <E : KoProvider> Sequence<E>.assertNot(function: (E) -> Boolean?) {
+fun <E : KoBaseProvider> Sequence<E>.assertNot(function: (E) -> Boolean?) {
     assert(function, false)
 }
 
 @Suppress("detekt.ThrowsCount")
-private fun <E : KoProvider> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
-    var lastDeclaration: KoProvider? = null
+private fun <E : KoBaseProvider> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
+    var lastDeclaration: KoBaseProvider? = null
 
     try {
         val localList = this.toList()
@@ -41,7 +41,7 @@ private fun <E : KoProvider> Sequence<E>.assert(function: (E) -> Boolean?, posit
     }
 }
 
-private fun <E : KoProvider> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {
+private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>): List<E> {
     // In this declarations structure test name is at index 6
     // We pass this name to checkIfSuppressed() because when declarations are nested, this index is changing
     val testMethodName = getTestMethodNameFromSixthIndex()
@@ -65,7 +65,7 @@ private fun <E : KoProvider> checkIfAnnotatedWithSuppress(localList: List<E>): L
     return withoutSuppress
 }
 
-private fun checkIfSuppressed(declaration: KoProvider, testMethodName: String): Boolean =
+private fun checkIfSuppressed(declaration: KoBaseProvider, testMethodName: String): Boolean =
     if (declaration is KoAnnotationProvider) {
         val annotationParameter = declaration
             .annotations
@@ -82,7 +82,7 @@ private fun checkIfSuppressed(declaration: KoProvider, testMethodName: String): 
         checkParentAndSuppress(declaration, testMethodName)
     }
 
-private fun checkParentAndSuppress(declaration: KoProvider, testMethodName: String): Boolean =
+private fun checkParentAndSuppress(declaration: KoBaseProvider, testMethodName: String): Boolean =
     if (declaration is KoParentDeclarationProvider && declaration.parentDeclaration != null) {
         declaration.parentDeclaration?.let { checkIfSuppressed(it, testMethodName) } ?: false
     } else if (fileAnnotationParameter((declaration as KoContainingFileProvider).containingFile) == testMethodName) {

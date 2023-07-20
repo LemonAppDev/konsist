@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 
-interface KoInterfaceProvider : KoProvider {
+interface KoInterfaceProvider : KoBaseProvider {
     /**
      * The interfaces present in the scope, file or declaration.
      *

@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtImportList
 
-internal interface KoImportProviderCore : KoImportProvider, KoParentDeclarationProviderCore {
+internal interface KoImportProviderCore : KoImportProvider, KoParentDeclarationProviderCore, KoBaseProviderCore {
     val ktFile: KtFile?
     val koFiles: Sequence<KoFile>?
 

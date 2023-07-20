@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoExtensionProvider : KoProvider {
+interface KoExtensionProvider : KoBaseProvider {
     /**
      * Whether the declaration is an extension.
      *

@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoHasPackageProvider : KoProvider {
+interface KoHasPackageProvider : KoBaseProvider {
     /**
      * Whether the file has package.
      *

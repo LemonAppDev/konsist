@@ -9,7 +9,8 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 internal interface KoExplicitTypeProviderCore :
     KoExplicitTypeProvider,
     KoParentDeclarationProviderCore,
-    KoExtensionProviderCore {
+    KoExtensionProviderCore,
+    KoBaseProviderCore {
     val ktProperty: KtProperty
     override val explicitType: KoTypeDeclaration?
         get() = ReceiverUtil.getType(getTypeReferences(), isExtension(), this)

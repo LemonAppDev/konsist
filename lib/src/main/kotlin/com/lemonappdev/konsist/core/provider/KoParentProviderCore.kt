@@ -9,7 +9,8 @@ internal interface KoParentProviderCore :
     KoParentProvider,
     KoParentDeclarationProviderCore,
     KoParentClassProviderCore,
-    KoParentInterfaceProviderCore {
+    KoParentInterfaceProviderCore,
+    KoBaseProviderCore {
     override val parents: List<KoParentDeclaration>
         get() = ktClass
             .getSuperTypeList()

@@ -6,7 +6,8 @@ internal interface KoPackageMatchingFilePathProviderCore :
     KoPackageMatchingFilePathProvider,
     KoFullyQualifiedNameProviderCore,
     KoContainingFileProviderCore,
-    KoPathProviderCore {
+    KoPathProviderCore,
+    KoBaseProviderCore {
     override val hasMatchingFilePath: Boolean
         get() =
             path

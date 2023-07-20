@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
 import com.lemonappdev.konsist.core.declaration.KoInitBlockDeclarationImpl
 import org.jetbrains.kotlin.psi.KtClass
 
-internal interface KoInitBlockProviderCore : KoInitBlockProvider, KoParentDeclarationProviderCore {
+internal interface KoInitBlockProviderCore : KoInitBlockProvider, KoParentDeclarationProviderCore, KoBaseProviderCore {
     val ktClass: KtClass
 
     override val initBlocks: Sequence<KoInitBlockDeclaration>?

@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.isPublic
 
 @Suppress("detekt.TooManyFunctions")
-internal interface KoModifierProviderCore : KoModifierProvider {
+internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCore {
     val ktTypeParameterListOwner: KtTypeParameterListOwner
 
     override val modifiers: List<KoModifier>

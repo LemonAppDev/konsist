@@ -9,7 +9,8 @@ import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 
 internal interface KoParentInterfaceProviderCore :
     KoParentDeclarationProviderCore,
-    KoParentInterfaceProvider {
+    KoParentInterfaceProvider,
+    KoBaseProviderCore{
     val ktClass: KtClass
     override val parentInterfaces: List<KoParentDeclaration>
         get() {

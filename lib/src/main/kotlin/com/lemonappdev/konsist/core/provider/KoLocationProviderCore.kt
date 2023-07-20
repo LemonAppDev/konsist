@@ -6,7 +6,8 @@ import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
 internal interface KoLocationProviderCore :
     KoLocationProvider,
     KoTextProviderCore,
-    KoPathProviderCore {
+    KoPathProviderCore,
+    KoBaseProviderCore {
     override val location: String
         get() {
             val lineAndColumn = psiElement

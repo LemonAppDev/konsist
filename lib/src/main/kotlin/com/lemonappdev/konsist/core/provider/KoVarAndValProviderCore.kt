@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.provider.KoVarAndValProvider
 import org.jetbrains.kotlin.psi.KtProperty
 
-internal interface KoVarAndValProviderCore : KoVarAndValProvider {
+internal interface KoVarAndValProviderCore : KoVarAndValProvider, KoBaseProviderCore {
     val ktProperty: KtProperty
 
     override val isVar: Boolean

@@ -2,7 +2,9 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
@@ -20,7 +22,8 @@ internal open class KoBaseDeclarationImpl(override val ktElement: KtElement) :
     KoNameProviderCore,
     KoLocationProviderCore,
     KoPathProviderCore,
-    KoTextProviderCore {
+    KoTextProviderCore,
+    KoBaseProviderCore {
     override val parentDeclaration: KoParentDeclarationProvider? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktElement }

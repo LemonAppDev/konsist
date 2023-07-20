@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoNameProvider : KoProvider {
+interface KoNameProvider : KoBaseProvider {
     /**
      * Name of the declaration
      */

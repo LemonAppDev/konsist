@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 
-interface KoSecondaryConstructorsProvider : KoProvider {
+interface KoSecondaryConstructorsProvider : KoBaseProvider {
     /**
      * The secondary constructors of the declaration.
      */

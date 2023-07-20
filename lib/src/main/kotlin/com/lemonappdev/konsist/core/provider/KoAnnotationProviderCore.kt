@@ -9,7 +9,8 @@ import kotlin.reflect.KClass
 
 internal interface KoAnnotationProviderCore :
     KoAnnotationProvider,
-    KoParentDeclarationProviderCore {
+    KoParentDeclarationProviderCore,
+    KoBaseProviderCore {
     val ktAnnotated: KtAnnotated?
     val koFiles: Sequence<KoFile>?
 

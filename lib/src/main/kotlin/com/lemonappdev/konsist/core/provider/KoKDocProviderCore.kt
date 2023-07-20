@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationImpl
 import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.kdoc.psi.api.KDoc
 
-internal interface KoKDocProviderCore : KoKDocProvider, KoTextProviderCore {
+internal interface KoKDocProviderCore : KoKDocProvider, KoTextProviderCore, KoBaseProviderCore {
     override val kDoc: KoKDocDeclaration?
         get() {
             val kDocElement = psiElement

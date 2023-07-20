@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.core.declaration.KoValuedKDocTagDeclarationImpl
 import java.awt.SystemColor.text
 import java.util.*
 
-internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCore {
+internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCore, KoBaseProviderCore {
     override val tags: List<KoKDocTagDeclaration>
         get() {
             val regex = "@(\\w+)".toRegex()

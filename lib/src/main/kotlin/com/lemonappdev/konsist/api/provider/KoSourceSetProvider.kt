@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoSourceSetProvider : KoProvider {
+interface KoSourceSetProvider : KoBaseProvider {
 
     /**
      * The file's source set name.

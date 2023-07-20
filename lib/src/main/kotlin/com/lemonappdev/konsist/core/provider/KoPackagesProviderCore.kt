@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.provider.KoPackagesProvider
 import com.lemonappdev.konsist.core.util.LocationUtil
 
-internal interface KoPackagesProviderCore : KoPackagesProvider {
+internal interface KoPackagesProviderCore : KoPackagesProvider, KoBaseProviderCore {
     val koFiles: Sequence<KoFile>
 
     override val packages: Sequence<KoPackageDeclaration>

@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoWildcardProvider : KoProvider {
+interface KoWildcardProvider : KoBaseProvider {
     /**
      * Whether this declaration is a wildcard.
      */

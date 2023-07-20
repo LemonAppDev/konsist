@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.core.container.KoFileImpl
 import org.jetbrains.kotlin.psi.KtElement
 
-internal interface KoContainingFileProviderCore : KoContainingFileProvider {
+internal interface KoContainingFileProviderCore : KoContainingFileProvider, KoBaseProviderCore {
     val ktElement: KtElement
 
     /**

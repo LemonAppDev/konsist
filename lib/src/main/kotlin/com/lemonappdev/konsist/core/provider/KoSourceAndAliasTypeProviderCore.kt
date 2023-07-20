@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.core.container.KoFileImpl
 import org.jetbrains.kotlin.psi.KtTypeReference
 
-internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvider, KoNameProviderCore {
+internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvider, KoNameProviderCore, KoBaseProviderCore {
     val ktTypeReference: KtTypeReference
 
     private val file: KoFile

@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoVarAndValProvider : KoProvider {
+interface KoVarAndValProvider : KoBaseProvider {
     /**
      * Whatever declaration is `var`.
      */

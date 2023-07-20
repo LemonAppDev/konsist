@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 
-interface KoKDocProvider : KoProvider {
+interface KoKDocProvider : KoBaseProvider {
     /**
      * Documentation pf the declaration.
      */

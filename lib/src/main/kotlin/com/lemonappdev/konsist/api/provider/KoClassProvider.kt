@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 
-interface KoClassProvider : KoProvider {
+interface KoClassProvider : KoBaseProvider {
     /**
      * The classes present in the scope, file or declaration.
      *

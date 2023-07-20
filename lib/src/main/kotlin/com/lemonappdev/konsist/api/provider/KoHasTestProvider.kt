@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoHasTestProvider : KoProvider {
+interface KoHasTestProvider : KoBaseProvider {
     /**
      * Whatever declaration has a Test.
      *

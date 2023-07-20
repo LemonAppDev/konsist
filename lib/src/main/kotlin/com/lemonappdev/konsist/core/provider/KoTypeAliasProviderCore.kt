@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
-internal interface KoTypeAliasProviderCore : KoTypeAliasProvider {
+internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProviderCore {
     val ktFile: KtFile?
     val koFiles: Sequence<KoFile>?
 
