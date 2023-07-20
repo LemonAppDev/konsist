@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.verify.kodeclarationassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.sequence.withPrimaryConstructor
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
@@ -118,30 +119,10 @@ class KoDeclarationAssertTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-file-level`() {
-        // given
-        val sut = getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level")
-            .declarations(includeNested = true)
-
-        // then
-        sut.assert { it.name.endsWith("Text") }
-    }
-
-    @Test
-    fun `assert-suppress-by-name-at-file-level`() {
-        // given
-        val sut = getSnippetFile("assert-suppress-by-name-at-file-level")
-            .declarations(includeNested = true)
-
-        // then
-        sut.assert { it.name.endsWith("Text") }
-    }
-
-    @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level`() {
+    fun `assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level")
+            getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
                 .declarations(includeNested = true)
 
         // then
@@ -149,10 +130,10 @@ class KoDeclarationAssertTest {
     }
 
     @Test
-    fun `assert-suppress-by-name-at-declaration-parent-level`() {
+    fun `assert-suppress-by-name-at-file-level-when-all-declarations-are-KoAnnotationProvider`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-name-at-declaration-parent-level")
+            getSnippetFile("assert-suppress-by-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
                 .declarations(includeNested = true)
 
         // then
@@ -160,20 +141,162 @@ class KoDeclarationAssertTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-level`() {
+    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider`() {
         // given
-        val sut = getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level")
-            .declarations(includeNested = true)
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
+                .declarations(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
     }
 
     @Test
-    fun `assert-suppress-by-name-at-declaration-level`() {
+    fun `assert-suppress-by-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider`() {
         // given
-        val sut = getSnippetFile("assert-suppress-by-name-at-declaration-level")
-            .declarations(includeNested = true)
+        val sut =
+            getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
+                .declarations(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
+                .declarations(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
+                .declarations(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
+                .classes()
+                .first()
+                .initBlocks
+
+        // then
+        sut?.assert { it.containsProperty("otherProperty") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
+                .classes()
+                .first()
+                .initBlocks
+
+        // then
+        sut?.assert { it.containsProperty("otherProperty") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider")
+                .classes()
+                .first()
+                .initBlocks
+
+        // then
+        sut?.assert { it.containsProperty("otherProperty") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-file-level-when-it-is-not-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-not-KoAnnotationProvider")
+                .classes()
+                .first()
+                .initBlocks
+
+        // then
+        sut?.assert { it.containsProperty("otherProperty") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+                .properties(includeNested = true, includeLocal = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+                .properties(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+                .properties(includeNested = true, includeLocal = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+                .properties(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+                .properties(includeNested = true, includeLocal = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+                .properties(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }

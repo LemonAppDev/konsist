@@ -6,7 +6,7 @@ interface KoInitBlockProvider : KoProvider {
     /**
      * The init blocks of the declaration.
      */
-    val initBlocks: List<KoInitBlockDeclaration>?
+    val initBlocks: Sequence<KoInitBlockDeclaration>?
 
     /**
      * The number of init blocks in declaration.

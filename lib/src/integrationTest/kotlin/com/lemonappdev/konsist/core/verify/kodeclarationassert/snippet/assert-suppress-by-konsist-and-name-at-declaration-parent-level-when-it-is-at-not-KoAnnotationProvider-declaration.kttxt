@@ -1,0 +1,6 @@
+@Suppress("konsist.assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+class SampleClassText {
+    init {
+        val sampleProperty = 6
+    }
+}

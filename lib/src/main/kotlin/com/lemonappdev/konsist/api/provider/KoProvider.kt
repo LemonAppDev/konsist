@@ -1,3 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-interface KoProvider
+interface KoProvider {
+    val errorText: String
+        get() = this.toString()
+}

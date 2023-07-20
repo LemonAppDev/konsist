@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoInitBlockDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
@@ -171,6 +172,7 @@ internal object KoDeclarationProviderCoreUtil {
         ktDeclaration is KtProperty -> KoPropertyDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
         ktDeclaration is KtFunction -> KoFunctionDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
         ktDeclaration is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
+        ktDeclaration is KtAnonymousInitializer -> KoInitBlockDeclarationImpl.getInstance(ktDeclaration, parentDeclaration)
         else -> null
     }
 

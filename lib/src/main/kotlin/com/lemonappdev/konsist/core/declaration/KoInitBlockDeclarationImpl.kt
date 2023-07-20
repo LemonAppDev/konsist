@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.psi.KtAnonymousInitializer
 
 internal class KoInitBlockDeclarationImpl private constructor(
     private val ktAnonymousInitializer: KtAnonymousInitializer,
-    parentDeclaration: KoParentDeclarationProvider?,
+    override val parentDeclaration: KoParentDeclarationProvider?,
 ) :
     KoInitBlockDeclaration,
     KoDeclarationProviderCore,
