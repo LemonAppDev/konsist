@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.verify.kodeclarationassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.sequence.withPrimaryConstructor
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
@@ -262,7 +261,9 @@ class KoDeclarationAssertTest {
     fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+            getSnippetFile(
+                "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
+            )
                 .properties(includeNested = true, includeLocal = true)
 
         // then
