@@ -19,10 +19,12 @@ class KoKDocDeclarationForExceptionTagTest {
         declarationName: String,
     ) {
         // given
-        val sut = (getSnippetFile(fileName)
-            .declarations(includeNested = true)
-            .filterIsInstance<KoNameProvider>()
-            .first { it.name == declarationName } as KoKDocProvider)
+        val sut = (
+            getSnippetFile(fileName)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoNameProvider>()
+                .first { it.name == declarationName } as KoKDocProvider
+            )
             .kDoc
 
         // then

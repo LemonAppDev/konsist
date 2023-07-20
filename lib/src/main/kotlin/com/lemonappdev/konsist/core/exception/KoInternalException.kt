@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.exception
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 
 class KoInternalException(
     message: String,

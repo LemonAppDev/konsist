@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.verify.kodeclarationassert.forprovidersequence
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.sequence.withPrimaryConstructor
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
@@ -102,7 +101,7 @@ class KoDeclarationAssertForProviderSequenceTest {
             .filterIsInstance<KoPrimaryConstructorProvider>()
 
         // then
-        sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") ?: false}
+        sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") ?: false }
     }
 
     @Test
@@ -114,7 +113,7 @@ class KoDeclarationAssertForProviderSequenceTest {
 
         // when
         val func = {
-            sut.assertNot { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: false}
+            sut.assertNot { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: false }
         }
 
         // then
@@ -276,7 +275,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert {it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty("otherProperty") }
     }
 
     @Test
@@ -288,7 +287,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert {it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty("otherProperty") }
     }
 
     @Test
@@ -300,7 +299,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert {it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty("otherProperty") }
     }
 
     @Test
@@ -312,7 +311,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert {it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty("otherProperty") }
     }
 
     private fun getSnippetFile(fileName: String) =

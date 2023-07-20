@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.container.koscope
 
-import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.container.koscope.KoScope
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration

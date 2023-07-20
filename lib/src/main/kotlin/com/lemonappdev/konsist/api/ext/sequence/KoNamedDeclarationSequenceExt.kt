@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 
-
 /**
  * Sequence containing declarations with any of the specified names.
  *

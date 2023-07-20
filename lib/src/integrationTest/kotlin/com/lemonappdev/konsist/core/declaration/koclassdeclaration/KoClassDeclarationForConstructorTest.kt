@@ -15,7 +15,7 @@ class KoClassDeclarationForConstructorTest {
             .first()
 
         // then
-            sut.hasPrimaryConstructor() shouldBeEqualTo true
+        sut.hasPrimaryConstructor() shouldBeEqualTo true
     }
 
     @Test
@@ -26,7 +26,7 @@ class KoClassDeclarationForConstructorTest {
             .first()
 
         // then
-            sut.hasPrimaryConstructor() shouldBeEqualTo false
+        sut.hasPrimaryConstructor() shouldBeEqualTo false
     }
 
     @Test
@@ -37,7 +37,7 @@ class KoClassDeclarationForConstructorTest {
             .first()
 
         // then
-            sut.hasSecondaryConstructors() shouldBeEqualTo true
+        sut.hasSecondaryConstructors() shouldBeEqualTo true
     }
 
     @Test
