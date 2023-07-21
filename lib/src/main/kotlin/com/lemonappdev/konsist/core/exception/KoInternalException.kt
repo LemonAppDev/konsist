@@ -19,7 +19,7 @@ class KoInternalException(
 private fun getMessage(message: String, koFile: KoFile?) = getMessage(message, koFile?.text, "file")
 
 private fun getMessage(message: String, koBaseProvider: KoBaseProvider?) =
-    getMessage(message, (koBaseProvider as KoTextProvider).text, "declaration")
+    getMessage(message, (koBaseProvider as KoTextProvider?)?.text, "declaration")
 
 private fun getMessage(message: String, suffix: String?, type: String) = if (suffix == null) {
     message
