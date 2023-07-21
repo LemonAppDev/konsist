@@ -18,7 +18,7 @@ class KoDeclarationForModifierWithConstructorTest {
             .primaryConstructor
 
         // then
-        sut?.modifiers shouldBeEqualTo listOf(PRIVATE)
+        sut?.modifiers?.toList() shouldBeEqualTo listOf(PRIVATE)
     }
 
     @ParameterizedTest
@@ -32,7 +32,7 @@ class KoDeclarationForModifierWithConstructorTest {
             .first()
 
         // then
-        sut.modifiers shouldBeEqualTo listOf(PRIVATE)
+        sut.modifiers.toList() shouldBeEqualTo listOf(PRIVATE)
     }
 
     private fun getSnippetFile(fileName: String) =

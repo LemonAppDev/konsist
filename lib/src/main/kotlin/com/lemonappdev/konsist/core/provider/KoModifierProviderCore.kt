@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.psi.psiUtil.isPublic
 internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCore {
     val ktTypeParameterListOwner: KtTypeParameterListOwner
 
-    override val modifiers: List<KoModifier>
+    override val modifiers: Sequence<KoModifier>
         get() = ktTypeParameterListOwner
             .modifierList
             ?.text
@@ -31,16 +31,16 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
             }
             ?.map {
                 KoModifier
-                    .values()
+                    .entries
                     .firstOrNull { modifier -> modifier.type == it }
                     ?: throw KoInternalException("Modifier not found: $it")
             }
-            ?.toList()
-            ?: emptyList()
+            ?.asSequence()
+            ?: emptySequence()
 
     override fun hasModifiers(vararg koModifiers: KoModifier): Boolean = when {
-        koModifiers.isEmpty() -> modifiers.isNotEmpty()
-        else -> modifiers.containsAll(koModifiers.toList())
+        koModifiers.isEmpty() -> modifiers.toList().isNotEmpty()
+        else -> modifiers.toList().containsAll(koModifiers.toList())
     }
 
     override fun hasPublicModifier(): Boolean = hasModifiers(KoModifier.PUBLIC)

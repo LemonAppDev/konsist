@@ -34,7 +34,7 @@ class KoDeclarationForModifierWithDeclarationTest {
             .first { it.name == declarationName } as KoModifierProvider
 
         // then
-        sut.modifiers shouldBeEqualTo modifiers
+        sut.modifiers.toList() shouldBeEqualTo modifiers
     }
 
     @ParameterizedTest

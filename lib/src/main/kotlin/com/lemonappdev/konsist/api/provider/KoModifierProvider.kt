@@ -5,9 +5,9 @@ import com.lemonappdev.konsist.api.KoModifier
 @Suppress("detekt.TooManyFunctions")
 interface KoModifierProvider : KoBaseProvider {
     /**
-     * List of modifiers.
+     * Sequence of modifiers.
      */
-    val modifiers: List<KoModifier>
+    val modifiers: Sequence<KoModifier>
 
     /**
      * Whether the declaration has modifiers.
