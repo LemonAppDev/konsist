@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.ext.sequence.withParentClassOf
 import com.lemonappdev.konsist.api.ext.sequence.withoutParentClass
 import com.lemonappdev.konsist.api.ext.sequence.withoutParentClassOf
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoParentImpl
+import com.lemonappdev.konsist.core.declaration.KoParentDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1
 import com.lemonappdev.konsist.testdata.SampleClass2
@@ -147,13 +147,13 @@ class KoClassDeclarationForParentClassSequenceExtTest {
         // given
         val name1 = "SampleClass"
         val name2 = "OtherClass"
-        val parent1: KoParentImpl = mockk {
+        val parent1: KoParentDeclarationImpl = mockk {
             every { name } returns name1
         }
         val class1: KoClassDeclarationImpl = mockk {
             every { parentClass } returns parent1
         }
-        val parent2: KoParentImpl = mockk {
+        val parent2: KoParentDeclarationImpl = mockk {
             every { name } returns name2
         }
         val class2: KoClassDeclarationImpl = mockk {
@@ -173,13 +173,13 @@ class KoClassDeclarationForParentClassSequenceExtTest {
         // given
         val name1 = "SampleClass"
         val name2 = "OtherClass"
-        val parent1: KoParentImpl = mockk {
+        val parent1: KoParentDeclarationImpl = mockk {
             every { name } returns name1
         }
         val class1: KoClassDeclarationImpl = mockk {
             every { parentClass } returns parent1
         }
-        val parent2: KoParentImpl = mockk {
+        val parent2: KoParentDeclarationImpl = mockk {
             every { name } returns name2
         }
         val class2: KoClassDeclarationImpl = mockk {

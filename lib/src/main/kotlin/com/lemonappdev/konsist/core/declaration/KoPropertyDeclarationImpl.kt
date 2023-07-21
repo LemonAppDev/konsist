@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -17,7 +17,7 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
-import com.lemonappdev.konsist.core.provider.KoParentDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
@@ -33,14 +33,14 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoPropertyDeclarationImpl private constructor(
     override val ktProperty: KtProperty,
-    override val parentDeclaration: KoParentDeclarationProvider?,
+    override val parent: KoParentProvider?,
 ) :
     KoPropertyDeclaration,
     KoContainingFileProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
-    KoParentDeclarationProviderCore,
+    KoParentProviderCore,
     KoPathProviderCore,
     KoTextProviderCore,
     KoBaseProviderCore,
@@ -86,9 +86,9 @@ internal class KoPropertyDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoPropertyDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktProperty: KtProperty, parentDeclaration: KoParentDeclarationProvider?): KoPropertyDeclaration =
-            cache.getOrCreateInstance(ktProperty, parentDeclaration) {
-                KoPropertyDeclarationImpl(ktProperty, parentDeclaration)
+        internal fun getInstance(ktProperty: KtProperty, parent: KoParentProvider?,): KoPropertyDeclaration =
+            cache.getOrCreateInstance(ktProperty, parent) {
+                KoPropertyDeclarationImpl(ktProperty, parent)
             }
     }
 }

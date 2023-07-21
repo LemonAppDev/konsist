@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.declaration.KoParent
-import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -10,20 +10,20 @@ import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoParentDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal class KoParentImpl private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
-    KoParent,
+internal class KoParentDeclarationImpl private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
+    KoParentDeclaration,
     KoContainingFileProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
-    KoParentDeclarationProviderCore,
+    KoParentProviderCore,
     KoPathProviderCore,
     KoTextProviderCore,
     KoBaseProviderCore,
@@ -32,7 +32,7 @@ internal class KoParentImpl private constructor(private val ktSuperTypeListEntry
 
     override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
 
-    override val parentDeclaration: KoParentDeclarationProvider? by lazy { this }
+    override val parent: KoParentProvider? by lazy { this }
 
     override val name: String by lazy {
         ktSuperTypeListEntry
@@ -57,12 +57,12 @@ internal class KoParentImpl private constructor(private val ktSuperTypeListEntry
     }
 
     internal companion object {
-        private val cache: KoDeclarationCache<KoParent> = KoDeclarationCache()
+        private val cache: KoDeclarationCache<KoParentDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(
             ktSuperTypeListEntry: KtSuperTypeListEntry,
-            parentDeclaration: KoParentDeclarationProvider?,
-        ): KoParent =
-            cache.getOrCreateInstance(ktSuperTypeListEntry, parentDeclaration) { KoParentImpl(ktSuperTypeListEntry) }
+            parent: KoParentProvider?,
+        ): KoParentDeclaration =
+            cache.getOrCreateInstance(ktSuperTypeListEntry, parent) { KoParentDeclarationImpl(ktSuperTypeListEntry) }
     }
 }

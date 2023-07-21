@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.container
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
@@ -53,7 +53,7 @@ internal class KoFileImpl(override val ktFile: KtFile) :
 
     override val ktAnnotated: KtAnnotated by lazy { ktFile }
 
-    override val parentDeclaration: KoParentDeclarationProvider? by lazy { null }
+    override val parent: KoParentProvider? by lazy { null }
 
     override val koFiles: Sequence<KoFile>? by lazy { null }
 

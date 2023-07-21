@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAliasProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -40,8 +40,8 @@ internal class KoImportDeclarationImpl private constructor(override val ktImport
 
         internal fun getInstance(
             ktImportDirective: KtImportDirective,
-            parentDeclaration: KoParentDeclarationProvider?,
+            parent: KoParentProvider?,
         ): KoImportDeclaration =
-            cache.getOrCreateInstance(ktImportDirective, parentDeclaration) { KoImportDeclarationImpl(ktImportDirective) }
+            cache.getOrCreateInstance(ktImportDirective, parent) { KoImportDeclarationImpl(ktImportDirective) }
     }
 }

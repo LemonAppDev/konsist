@@ -1,18 +1,18 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoParent
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
-import com.lemonappdev.konsist.core.declaration.KoParentImpl
+import com.lemonappdev.konsist.core.declaration.KoParentDeclarationImpl
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 
 internal interface KoParentClassProviderCore :
-    KoParentDeclarationProviderCore,
+    KoParentProviderCore,
     KoParentClassProvider,
     KoBaseProviderCore {
     val ktClass: KtClass
 
-    override val parentClass: KoParent?
+    override val parentClass: KoParentDeclaration?
         get() {
             val parentClass = ktClass
                 .getSuperTypeList()
@@ -20,7 +20,7 @@ internal interface KoParentClassProviderCore :
                 ?.filterIsInstance<KtSuperTypeCallEntry>()
                 ?.first()
 
-            return parentClass?.let { KoParentImpl.getInstance(it, this) }
+            return parentClass?.let { KoParentDeclarationImpl.getInstance(it, this) }
         }
 
     override fun hasParentClass(name: String?): Boolean = when (name) {

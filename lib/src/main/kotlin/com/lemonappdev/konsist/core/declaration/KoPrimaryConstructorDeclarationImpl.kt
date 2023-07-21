@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -15,7 +15,7 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
-import com.lemonappdev.konsist.core.provider.KoParentDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
@@ -30,14 +30,14 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoPrimaryConstructorDeclarationImpl private constructor(
     private val ktPrimaryConstructor: KtPrimaryConstructor,
-    override val parentDeclaration: KoParentDeclarationProvider?,
+    override val parent: KoParentProvider?,
 ) :
     KoPrimaryConstructorDeclaration,
     KoConstructorProviderCore,
     KoContainingFileProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
-    KoParentDeclarationProviderCore,
+    KoParentProviderCore,
     KoPathProviderCore,
     KoTextProviderCore,
     KoBaseProviderCore,
@@ -73,12 +73,12 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
 
         internal fun getInstance(
             ktPrimaryConstructor: KtPrimaryConstructor,
-            parentDeclaration: KoParentDeclarationProvider?,
+            parent: KoParentProvider?,
         ): KoPrimaryConstructorDeclaration =
-            cache.getOrCreateInstance(ktPrimaryConstructor, parentDeclaration) {
+            cache.getOrCreateInstance(ktPrimaryConstructor, parent) {
                 KoPrimaryConstructorDeclarationImpl(
                     ktPrimaryConstructor,
-                    parentDeclaration,
+                    parent,
                 )
             }
     }

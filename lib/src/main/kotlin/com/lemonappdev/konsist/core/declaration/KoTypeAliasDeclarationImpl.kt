@@ -4,7 +4,7 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -16,7 +16,7 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
-import com.lemonappdev.konsist.core.provider.KoParentDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
@@ -30,14 +30,14 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoTypeAliasDeclarationImpl private constructor(
     private val ktTypeAlias: KtTypeAlias,
-    override val parentDeclaration: KoParentDeclarationProvider?,
+    override val parent: KoParentProvider?,
 ) :
     KoTypeAliasDeclaration,
     KoContainingFileProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
-    KoParentDeclarationProviderCore,
+    KoParentProviderCore,
     KoPathProviderCore,
     KoTextProviderCore,
     KoBaseProviderCore,
@@ -74,7 +74,7 @@ internal class KoTypeAliasDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoTypeAliasDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktTypeAlias: KtTypeAlias, parentDeclaration: KoParentDeclarationProvider?): KoTypeAliasDeclaration =
-            cache.getOrCreateInstance(ktTypeAlias, parentDeclaration) { KoTypeAliasDeclarationImpl(ktTypeAlias, parentDeclaration) }
+        internal fun getInstance(ktTypeAlias: KtTypeAlias, parent: KoParentProvider?,): KoTypeAliasDeclaration =
+            cache.getOrCreateInstance(ktTypeAlias, parent) { KoTypeAliasDeclarationImpl(ktTypeAlias, parent) }
     }
 }

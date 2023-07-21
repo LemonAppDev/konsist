@@ -190,7 +190,7 @@ fun Sequence<KoClassDeclaration>.withoutSecondaryConstructors(): Sequence<KoClas
  *
  * @return A sequence containing classes with class or interface parent.
  */
-fun Sequence<KoClassDeclaration>.withParents(): Sequence<KoClassDeclaration> = filter { it.hasParents() }
+fun Sequence<KoClassDeclaration>.withParents(): Sequence<KoClassDeclaration> = filter { it.hasParentDeclarations() }
 
 /**
  * Sequence containing all classes with all specified parents.
@@ -200,7 +200,7 @@ fun Sequence<KoClassDeclaration>.withParents(): Sequence<KoClassDeclaration> = f
  * @return A sequence containing classes with all specified parent(s).
  */
 fun Sequence<KoClassDeclaration>.withAllParents(name: String, vararg names: String): Sequence<KoClassDeclaration> = filter {
-    it.hasParents(name, *names)
+    it.hasParentDeclarations(name, *names)
 }
 
 /**
@@ -211,7 +211,7 @@ fun Sequence<KoClassDeclaration>.withAllParents(name: String, vararg names: Stri
  * @return A sequence containing classes with at least one of the specified parent(s).
  */
 fun Sequence<KoClassDeclaration>.withSomeParents(name: String, vararg names: String): Sequence<KoClassDeclaration> = filter {
-    it.hasParents(name) || names.any { name -> it.hasParents(name) }
+    it.hasParentDeclarations(name) || names.any { name -> it.hasParentDeclarations(name) }
 }
 
 /**
@@ -219,7 +219,7 @@ fun Sequence<KoClassDeclaration>.withSomeParents(name: String, vararg names: Str
  *
  * @return A sequence containing classes with no parent - class does not extend any class and does not implement any interface.
  */
-fun Sequence<KoClassDeclaration>.withoutParents(): Sequence<KoClassDeclaration> = filterNot { it.hasParents() }
+fun Sequence<KoClassDeclaration>.withoutParents(): Sequence<KoClassDeclaration> = filterNot { it.hasParentDeclarations() }
 
 /**
  * Sequence containing all classes without all specified parents.
@@ -229,7 +229,7 @@ fun Sequence<KoClassDeclaration>.withoutParents(): Sequence<KoClassDeclaration> 
  * @return A sequence containing classes without all specified parent(s).
  */
 fun Sequence<KoClassDeclaration>.withoutAllParents(name: String, vararg names: String): Sequence<KoClassDeclaration> = filter {
-    !it.hasParents(name, *names)
+    !it.hasParentDeclarations(name, *names)
 }
 
 /**
@@ -240,8 +240,8 @@ fun Sequence<KoClassDeclaration>.withoutAllParents(name: String, vararg names: S
  * @return A sequence containing classes without at least one of the specified parent(s).
  */
 fun Sequence<KoClassDeclaration>.withoutSomeParents(name: String, vararg names: String): Sequence<KoClassDeclaration> = filter {
-    !it.hasParents(name) && if (names.isNotEmpty()) {
-        names.any { name -> !it.hasParents(name) }
+    !it.hasParentDeclarations(name) && if (names.isNotEmpty()) {
+        names.any { name -> !it.hasParentDeclarations(name) }
     } else {
         true
     }
@@ -254,7 +254,7 @@ fun Sequence<KoClassDeclaration>.withoutSomeParents(name: String, vararg names: 
  */
 inline fun <reified T> Sequence<KoClassDeclaration>.withParentOf(): Sequence<KoClassDeclaration> = filter {
     it
-        .parents
+        .parentDeclarations
         .any { parent -> parent.name == T::class.simpleName }
 }
 
@@ -273,10 +273,10 @@ inline fun <reified T> Sequence<KoClassDeclaration>.withoutParentOf(): Sequence<
  * @return A sequence containing classes with the parents of the specified type(s).
  */
 fun Sequence<KoClassDeclaration>.withAllParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
-    it.parents.any { parent -> parent.name == name.simpleName } &&
+    it.parentDeclarations.any { parent -> parent.name == name.simpleName } &&
         names.all { kClass ->
             it
-                .parents
+                .parentDeclarations
                 .any { parent -> parent.name == kClass.simpleName }
         }
 }
@@ -289,10 +289,10 @@ fun Sequence<KoClassDeclaration>.withAllParentsOf(name: KClass<*>, vararg names:
  * @return A sequence containing classes with at least one of the specified parent(s).
  */
 fun Sequence<KoClassDeclaration>.withSomeParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
-    it.parents.any { parent -> parent.name == name.simpleName } ||
+    it.parentDeclarations.any { parent -> parent.name == name.simpleName } ||
         names.any { kClass ->
             it
-                .parents
+                .parentDeclarations
                 .any { parent -> parent.name == kClass.simpleName }
         }
 }
@@ -305,10 +305,10 @@ fun Sequence<KoClassDeclaration>.withSomeParentsOf(name: KClass<*>, vararg names
  * @return A sequence containing classes without parents of the specified type(s).
  */
 fun Sequence<KoClassDeclaration>.withoutAllParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
-    it.parents.none { parent -> parent.name == name.simpleName } &&
+    it.parentDeclarations.none { parent -> parent.name == name.simpleName } &&
         names.none { kClass ->
             it
-                .parents
+                .parentDeclarations
                 .any { parent -> parent.name == kClass.simpleName }
         }
 }
@@ -321,11 +321,11 @@ fun Sequence<KoClassDeclaration>.withoutAllParentsOf(name: KClass<*>, vararg nam
  * @return A sequence containing classes without at least one of the specified parent(s).
  */
 fun Sequence<KoClassDeclaration>.withoutSomeParentsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
-    it.parents.none { parent -> parent.name == name.simpleName } &&
+    it.parentDeclarations.none { parent -> parent.name == name.simpleName } &&
         if (names.isNotEmpty()) {
             names.any { kClass ->
                 it
-                    .parents
+                    .parentDeclarations
                     .none { parent -> parent.name == kClass.simpleName }
             }
         } else {

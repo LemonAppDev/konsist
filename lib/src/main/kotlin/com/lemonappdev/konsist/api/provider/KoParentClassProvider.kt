@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.api.provider
 
-import com.lemonappdev.konsist.api.declaration.KoParent
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 
 interface KoParentClassProvider : KoBaseProvider {
     /**
      * The parent class of the declaration.
      */
-    val parentClass: KoParent?
+    val parentClass: KoParentDeclaration?
 
     /**
      * Whatever declaration has parent class.

@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -48,8 +48,8 @@ internal class KoAnnotationDeclarationImpl private constructor(
 
         internal fun getInstance(
             ktObjectDeclaration: KtAnnotationEntry,
-            parentDeclaration: KoParentDeclarationProvider?,
+            parent: KoParentProvider?,
         ): KoAnnotationDeclaration =
-            cache.getOrCreateInstance(ktObjectDeclaration, parentDeclaration) { KoAnnotationDeclarationImpl(ktObjectDeclaration) }
+            cache.getOrCreateInstance(ktObjectDeclaration, parent) { KoAnnotationDeclarationImpl(ktObjectDeclaration) }
     }
 }

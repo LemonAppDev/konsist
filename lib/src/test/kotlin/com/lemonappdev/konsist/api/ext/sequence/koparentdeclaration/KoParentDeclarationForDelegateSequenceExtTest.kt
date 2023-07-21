@@ -2,20 +2,20 @@ package com.lemonappdev.konsist.api.ext.sequence.koparentdeclaration
 
 import com.lemonappdev.konsist.api.ext.sequence.withDelegate
 import com.lemonappdev.konsist.api.ext.sequence.withoutDelegate
-import com.lemonappdev.konsist.core.declaration.KoParentImpl
+import com.lemonappdev.konsist.core.declaration.KoParentDeclarationImpl
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoParentForDelegateSequenceExtTest {
+class KoParentDeclarationForDelegateSequenceExtTest {
     @Test
     fun `withDelegate() returns parent with any delegate`() {
         // given
-        val parent1: KoParentImpl = mockk {
+        val parent1: KoParentDeclarationImpl = mockk {
             every { hasDelegate() } returns true
         }
-        val parent2: KoParentImpl = mockk {
+        val parent2: KoParentDeclarationImpl = mockk {
             every { hasDelegate() } returns false
         }
         val parents = sequenceOf(parent1, parent2)
@@ -32,15 +32,15 @@ class KoParentForDelegateSequenceExtTest {
         // given
         val delegateName1 = "DelegateName1"
         val delegateName2 = "DelegateName2"
-        val parent1: KoParentImpl = mockk {
+        val parent1: KoParentDeclarationImpl = mockk {
             every { hasDelegate(delegateName1) } returns true
             every { hasDelegate(delegateName2) } returns false
         }
-        val parent2: KoParentImpl = mockk {
+        val parent2: KoParentDeclarationImpl = mockk {
             every { hasDelegate(delegateName1) } returns false
             every { hasDelegate(delegateName2) } returns true
         }
-        val parent3: KoParentImpl = mockk {
+        val parent3: KoParentDeclarationImpl = mockk {
             every { hasDelegate(delegateName1) } returns false
             every { hasDelegate(delegateName2) } returns false
         }
@@ -56,10 +56,10 @@ class KoParentForDelegateSequenceExtTest {
     @Test
     fun `withoutDelegate() returns parent without any delegate`() {
         // given
-        val parent1: KoParentImpl = mockk {
+        val parent1: KoParentDeclarationImpl = mockk {
             every { hasDelegate() } returns true
         }
-        val parent2: KoParentImpl = mockk {
+        val parent2: KoParentDeclarationImpl = mockk {
             every { hasDelegate() } returns false
         }
         val parents = sequenceOf(parent1, parent2)
@@ -76,15 +76,15 @@ class KoParentForDelegateSequenceExtTest {
         // given
         val delegateName1 = "DelegateName1"
         val delegateName2 = "DelegateName2"
-        val parent1: KoParentImpl = mockk {
+        val parent1: KoParentDeclarationImpl = mockk {
             every { hasDelegate(delegateName1) } returns true
             every { hasDelegate(delegateName2) } returns false
         }
-        val parent2: KoParentImpl = mockk {
+        val parent2: KoParentDeclarationImpl = mockk {
             every { hasDelegate(delegateName1) } returns false
             every { hasDelegate(delegateName2) } returns true
         }
-        val parent3: KoParentImpl = mockk {
+        val parent3: KoParentDeclarationImpl = mockk {
             every { hasDelegate(delegateName1) } returns false
             every { hasDelegate(delegateName2) } returns false
         }

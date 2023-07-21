@@ -4,7 +4,7 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -15,7 +15,7 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
-import com.lemonappdev.konsist.core.provider.KoParentDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 
 internal class KoParameterDeclarationImpl private constructor(
     override val ktParameter: KtParameter,
-    override val parentDeclaration: KoParentDeclarationProvider?,
+    override val parent: KoParentProvider?,
 ) :
     KoParameterDeclaration,
     KoContainingFileProviderCore,
@@ -48,7 +48,7 @@ internal class KoParameterDeclarationImpl private constructor(
     KoModifierProviderCore,
     KoDefaultValueProviderCore,
     KoTopLevelProviderCore,
-    KoParentDeclarationProviderCore,
+    KoParentProviderCore,
     KoTypeProviderCore,
     KoRepresentsTypeProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktParameter }
@@ -80,7 +80,7 @@ internal class KoParameterDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktParameter: KtParameter, parentDeclaration: KoParentDeclarationProvider?): KoParameterDeclaration =
-            cache.getOrCreateInstance(ktParameter, parentDeclaration) { KoParameterDeclarationImpl(ktParameter, parentDeclaration) }
+        internal fun getInstance(ktParameter: KtParameter, parent: KoParentProvider?,): KoParameterDeclaration =
+            cache.getOrCreateInstance(ktParameter, parent) { KoParameterDeclarationImpl(ktParameter, parent) }
     }
 }

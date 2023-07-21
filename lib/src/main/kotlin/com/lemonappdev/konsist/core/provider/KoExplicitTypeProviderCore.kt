@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 
 internal interface KoExplicitTypeProviderCore :
     KoExplicitTypeProvider,
-    KoParentDeclarationProviderCore,
+    KoParentProviderCore,
     KoExtensionProviderCore,
     KoBaseProviderCore {
     val ktProperty: KtProperty
