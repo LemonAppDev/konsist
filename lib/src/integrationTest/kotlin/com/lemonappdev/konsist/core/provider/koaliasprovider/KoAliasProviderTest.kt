@@ -1,16 +1,18 @@
-package com.lemonappdev.konsist.core.declaration.koimportdeclaration
+package com.lemonappdev.konsist.core.provider.koaliasprovider
 
-import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.provider.KoAliasProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoImportDeclarationForAliasTest {
+class KoAliasProviderTest {
     @Test
     fun `import-without-import-alias`() {
         // given
         val sut = getSnippetFile("import-without-import-alias")
-            .imports
+            .declarations()
+            .filterIsInstance<KoAliasProvider>()
             .first()
 
         // then
@@ -21,7 +23,8 @@ class KoImportDeclarationForAliasTest {
     fun `import-with-import-alias`() {
         // given
         val sut = getSnippetFile("import-with-import-alias")
-            .imports
+            .declarations()
+            .filterIsInstance<KoAliasProvider>()
 
         // then
         assertSoftly(sut.toList()) {
@@ -30,5 +33,6 @@ class KoImportDeclarationForAliasTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koimportdeclaration/snippet/foralias/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        TestSnippetProvider.getSnippetKoScope("core/provider/koaliasprovider/snippet/", fileName)
 }
