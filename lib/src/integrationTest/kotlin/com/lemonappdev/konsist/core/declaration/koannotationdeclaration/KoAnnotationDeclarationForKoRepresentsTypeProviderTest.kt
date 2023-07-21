@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoAnnotationDeclarationForRepresentsTypeTest {
+class KoAnnotationDeclarationForKoRepresentsTypeProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `annotation-represents-type`(
@@ -25,7 +25,7 @@ class KoAnnotationDeclarationForRepresentsTypeTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koannotationdeclaration/snippet/forrepresentstype/", fileName)
+        getSnippetKoScope("core/declaration/koannotationdeclaration/snippet/forkorepresentstypeprovider/", fileName)
 
     companion object {
         @Suppress("unused")

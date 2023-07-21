@@ -4,20 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoAnnotationDeclarationForNameTest {
-    @Test
-    fun `annotation-name`() {
-        // given
-        val sut = getSnippetFile("annotation-name")
-            .functions()
-            .first()
-            .annotations
-            .first()
-
-        // then
-        sut.name shouldBeEqualTo "SampleAnnotation"
-    }
-
+class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `annotation-fully-qualified-name`() {
         // given
@@ -44,5 +31,6 @@ class KoAnnotationDeclarationForNameTest {
         sut.fullyQualifiedName shouldBeEqualTo ""
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koannotationdeclaration/snippet/forname/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koannotationdeclaration/snippet/forkofullyqualifiednameprovider/", fileName)
 }
