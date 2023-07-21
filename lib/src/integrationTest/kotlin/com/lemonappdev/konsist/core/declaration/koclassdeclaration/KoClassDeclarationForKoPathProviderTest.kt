@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koclassdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.provider.KoPathProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -33,7 +32,7 @@ class KoClassDeclarationForKoPathProviderTest {
             .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koclassdeclaration/snippet/" +
-                        "forkopathprovider/class-project-file-path.kt",
+                    "forkopathprovider/class-project-file-path.kt",
             )
     }
 

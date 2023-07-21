@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koclassdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
@@ -12,7 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource
 
 class KoClassDeclarationForKoKDocProviderTest {
     @Test
-    fun `class-without-kdoc`(){
+    fun `class-without-kdoc`() {
         // given
         val sut = getSnippetFile("class-without-kdoc")
             .classes()
@@ -26,7 +25,7 @@ class KoClassDeclarationForKoKDocProviderTest {
     }
 
     @Test
-    fun `class-with-kdoc`(){
+    fun `class-with-kdoc`() {
         // given
         val sut = getSnippetFile("class-with-kdoc")
             .classes()

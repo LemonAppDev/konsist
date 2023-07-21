@@ -18,7 +18,7 @@ class KoClassDeclarationForKoParentDeclarationProviderTest {
             parentDeclarations.map { it.name }.toList() shouldBeEqualTo listOf(
                 "SampleParentClass",
                 "SampleParentInterface1",
-                "SampleParentInterface2"
+                "SampleParentInterface2",
             )
             hasParentDeclarations() shouldBeEqualTo true
             hasParentDeclarations("SampleParentClass") shouldBeEqualTo true

@@ -1,18 +1,12 @@
 package com.lemonappdev.konsist.core.declaration.koclassdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
-import org.junit.jupiter.params.provider.ValueSource
 
 class KoClassDeclarationForKoFunctionsProviderTest {
     @Test
@@ -30,7 +24,7 @@ class KoClassDeclarationForKoFunctionsProviderTest {
     @MethodSource("provideValues")
     fun `class-contains-functions includeNested true includeLocal true`(
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ) {
         // given
         val sut = getSnippetFile("class-contains-functions")

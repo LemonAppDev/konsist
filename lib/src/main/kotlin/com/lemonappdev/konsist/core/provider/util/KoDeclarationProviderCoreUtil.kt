@@ -176,7 +176,7 @@ internal object KoDeclarationProviderCoreUtil {
         else -> null
     }
 
-    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parent: KoParentProvider?,): KoBaseProvider? =
+    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parent: KoParentProvider?): KoBaseProvider? =
         when (psiElement) {
             is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parent)
             is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parent)

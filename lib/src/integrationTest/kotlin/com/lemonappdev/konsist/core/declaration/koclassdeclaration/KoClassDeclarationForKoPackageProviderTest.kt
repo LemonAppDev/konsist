@@ -27,8 +27,8 @@ class KoClassDeclarationForKoPackageProviderTest {
 
         // then
         assertSoftly(sut) {
-        packagee shouldNotBeEqualTo null
-        packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
+            packagee shouldNotBeEqualTo null
+            packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
         }
     }
 
