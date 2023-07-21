@@ -8,6 +8,6 @@ internal interface KoConstructorsProviderCore :
     KoPrimaryConstructorProviderCore,
     KoSecondaryConstructorsProviderCore,
     KoBaseProviderCore {
-    override val allConstructors: List<KoConstructorProvider>
-        get() = listOfNotNull(primaryConstructor) + secondaryConstructors
+    override val allConstructors: Sequence<KoConstructorProvider>
+        get() = sequenceOf(primaryConstructor as KoConstructorProvider) + secondaryConstructors
 }

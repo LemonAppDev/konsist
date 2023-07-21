@@ -49,7 +49,7 @@ class KoClassDeclarationForConstructorTest {
 
         // then
         assertSoftly(sut) {
-            secondaryConstructors.isEmpty() shouldBeEqualTo true
+            secondaryConstructors.toList().isEmpty() shouldBeEqualTo true
             hasSecondaryConstructors() shouldBeEqualTo false
         }
     }

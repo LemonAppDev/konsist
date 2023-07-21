@@ -6,7 +6,7 @@ interface KoSecondaryConstructorsProvider : KoBaseProvider {
     /**
      * The secondary constructors of the declaration.
      */
-    val secondaryConstructors: List<KoSecondaryConstructorDeclaration>
+    val secondaryConstructors: Sequence<KoSecondaryConstructorDeclaration>
 
     /**
      * Whatever declaration has secondary constructors.
