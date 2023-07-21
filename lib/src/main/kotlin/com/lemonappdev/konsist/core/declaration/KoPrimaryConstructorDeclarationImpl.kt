@@ -62,7 +62,7 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
 
     override val ktElement: KtElement by lazy { ktPrimaryConstructor }
 
-    override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters, kDoc)
+    override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters.toList(), kDoc)
 
     override fun toString(): String {
         return locationWithText

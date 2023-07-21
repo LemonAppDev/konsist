@@ -6,7 +6,7 @@ interface KoParametersProvider : KoBaseProvider {
     /**
      * Parameters of the declaration.
      */
-    val parameters: List<KoParameterDeclaration>
+    val parameters: Sequence<KoParameterDeclaration>
 
     /**
      * Whatever declaration has a parameter with given name.

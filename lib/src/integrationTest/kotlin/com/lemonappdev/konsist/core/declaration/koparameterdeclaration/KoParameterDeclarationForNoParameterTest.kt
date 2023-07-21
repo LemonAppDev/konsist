@@ -26,7 +26,7 @@ class KoParameterDeclarationForNoParameterTest {
             ?.parameters
 
         // then
-        sut shouldBeEqualTo emptyList()
+        sut?.toList() shouldBeEqualTo emptyList()
     }
 
     private fun getSnippetFile(fileName: String) =

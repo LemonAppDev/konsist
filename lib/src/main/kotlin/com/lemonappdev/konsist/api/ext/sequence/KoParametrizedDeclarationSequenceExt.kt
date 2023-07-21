@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoParametersProvider
  *
  * @return A sequence containing declarations with any parameter.
  */
-fun <T : KoParametersProvider> Sequence<T>.withParameters(): Sequence<T> = filter { it.parameters.isNotEmpty() }
+fun <T : KoParametersProvider> Sequence<T>.withParameters(): Sequence<T> = filter { it.parameters.toList().isNotEmpty() }
 
 /**
  * A sequence containing declarations with specified parameters.
@@ -36,7 +36,7 @@ fun <T : KoParametersProvider> Sequence<T>.withSomeParameters(name: String, vara
  *
  * @return A sequence containing declarations with no parameters.
  */
-fun <T : KoParametersProvider> Sequence<T>.withoutParameters(): Sequence<T> = filter { it.parameters.isEmpty() }
+fun <T : KoParametersProvider> Sequence<T>.withoutParameters(): Sequence<T> = filter { it.parameters.toList().isEmpty() }
 
 /**
  * Sequence containing all declarations without all specified parameters.

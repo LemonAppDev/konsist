@@ -15,7 +15,11 @@ class KoClassDeclarationForParentTest {
 
         // then
         assertSoftly(sut) {
-            parentDeclarations.map { it.name } shouldBeEqualTo listOf("SampleParentClass", "SampleParentInterface1", "SampleParentInterface2")
+            parentDeclarations.map { it.name }.toList() shouldBeEqualTo listOf(
+                "SampleParentClass",
+                "SampleParentInterface1",
+                "SampleParentInterface2"
+            )
             hasParentDeclarations() shouldBeEqualTo true
             hasParentDeclarations("SampleParentClass") shouldBeEqualTo true
             hasParentDeclarations("OtherInterface") shouldBeEqualTo false
@@ -25,7 +29,7 @@ class KoClassDeclarationForParentTest {
             hasParentClass() shouldBeEqualTo true
             hasParentClass("SampleParentClass") shouldBeEqualTo true
             hasParentClass("OtherClass") shouldBeEqualTo false
-            parentInterfaces.map { it.name } shouldBeEqualTo listOf("SampleParentInterface1", "SampleParentInterface2")
+            parentInterfaces.map { it.name }.toList() shouldBeEqualTo listOf("SampleParentInterface1", "SampleParentInterface2")
             hasParentInterfaces() shouldBeEqualTo true
             hasParentInterfaces("SampleParentInterface1") shouldBeEqualTo true
             hasParentInterfaces("OtherInterface") shouldBeEqualTo false
@@ -43,13 +47,13 @@ class KoClassDeclarationForParentTest {
 
         // then
         assertSoftly(sut) {
-            parentDeclarations shouldBeEqualTo emptyList()
+            parentDeclarations.toList() shouldBeEqualTo emptyList()
             hasParentDeclarations() shouldBeEqualTo false
             hasParentDeclarations("SampleClass") shouldBeEqualTo false
             parentClass shouldBeEqualTo null
             hasParentClass() shouldBeEqualTo false
             hasParentClass("SampleParentClass") shouldBeEqualTo false
-            parentInterfaces shouldBeEqualTo emptyList()
+            parentInterfaces.toList() shouldBeEqualTo emptyList()
             hasParentInterfaces() shouldBeEqualTo false
             hasParentInterfaces("SampleInterface") shouldBeEqualTo false
         }

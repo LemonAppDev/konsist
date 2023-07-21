@@ -15,7 +15,7 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut) {
-            parameters shouldBeEqualTo emptyList()
+            parameters.toList() shouldBeEqualTo emptyList()
         }
     }
 
@@ -29,7 +29,7 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut) {
-            it?.parameters shouldBeEqualTo emptyList()
+            it?.parameters?.toList() shouldBeEqualTo emptyList()
         }
     }
 
@@ -42,7 +42,7 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut.parameters) {
-            it.size shouldBeEqualTo 1
+            it.toList().size shouldBeEqualTo 1
             it.first().name shouldBeEqualTo "sampleParameter"
         }
     }
@@ -70,7 +70,7 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut.parameters) {
-            it.size shouldBeEqualTo 1
+            it.toList().size shouldBeEqualTo 1
             it.first().name shouldBeEqualTo "sampleParameter"
         }
     }
@@ -99,7 +99,7 @@ class ParametrizedDeclarationForParameterTest {
 
         // then
         assertSoftly(sut.parameters) {
-            it.size shouldBeEqualTo 1
+            it.toList().size shouldBeEqualTo 1
             it.first().name shouldBeEqualTo "sampleParameter"
         }
     }

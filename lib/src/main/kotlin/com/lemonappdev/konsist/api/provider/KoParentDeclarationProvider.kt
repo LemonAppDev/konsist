@@ -6,7 +6,7 @@ interface KoParentDeclarationProvider : KoBaseProvider {
     /**
      * The parent declarations (parent class and parent interfaces) of the declaration.
      */
-    val parentDeclarations: List<KoParentDeclaration>
+    val parentDeclarations: Sequence<KoParentDeclaration>
 
     /**
      * Whatever class has parent declarations (parent class and parent interfaces).
