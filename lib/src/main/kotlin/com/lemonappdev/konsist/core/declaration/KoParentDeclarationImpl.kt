@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -19,20 +20,13 @@ import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 internal class KoParentDeclarationImpl private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
     KoParentDeclaration,
-    KoContainingFileProviderCore,
-    KoKDocProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
-    KoParentProviderCore,
-    KoPathProviderCore,
-    KoTextProviderCore,
     KoBaseProviderCore,
     KoDelegateProviderCore {
     override val psiElement: PsiElement by lazy { ktSuperTypeListEntry }
 
     override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
-
-    override val parent: KoParentProvider? by lazy { this }
 
     override val name: String by lazy {
         ktSuperTypeListEntry

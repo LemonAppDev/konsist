@@ -242,10 +242,10 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1, parent2)
+            every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent2)
+            every { parentInterfaces } returns sequenceOf(parent2)
         }
         val classes = sequenceOf(class1, class2)
 
@@ -273,13 +273,13 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1, parent2)
+            every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1, parent3)
+            every { parentInterfaces } returns sequenceOf(parent1, parent3)
         }
         val class3: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent3)
+            every { parentInterfaces } returns sequenceOf(parent3)
         }
         val classes = sequenceOf(class1, class2, class3)
 
@@ -303,10 +303,10 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1, parent2)
+            every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent2)
+            every { parentInterfaces } returns sequenceOf(parent2)
         }
         val classes = sequenceOf(class1, class2)
 
@@ -334,13 +334,13 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1, parent2)
+            every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1, parent3)
+            every { parentInterfaces } returns sequenceOf(parent1, parent3)
         }
         val class3: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent3)
+            every { parentInterfaces } returns sequenceOf(parent3)
         }
         val classes = sequenceOf(class1, class2, class3)
 
@@ -364,10 +364,10 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1, parent2)
+            every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent2)
+            every { parentInterfaces } returns sequenceOf(parent2)
         }
         val classes = sequenceOf(class1, class2)
 
@@ -395,13 +395,13 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1, parent2)
+            every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1, parent3)
+            every { parentInterfaces } returns sequenceOf(parent1, parent3)
         }
         val class3: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent3)
+            every { parentInterfaces } returns sequenceOf(parent3)
         }
         val classes = sequenceOf(class1, class2, class3)
 
@@ -425,10 +425,10 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1, parent2)
+            every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent2)
+            every { parentInterfaces } returns sequenceOf(parent2)
         }
         val classes = sequenceOf(class1, class2)
 
@@ -456,13 +456,13 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1, parent2)
+            every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1, parent3)
+            every { parentInterfaces } returns sequenceOf(parent1, parent3)
         }
         val class3: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent3)
+            every { parentInterfaces } returns sequenceOf(parent3)
         }
         val classes = sequenceOf(class1, class2, class3)
 
@@ -482,13 +482,13 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
             every { name } returns name1
         }
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1)
+            every { parentInterfaces } returns sequenceOf(parent1)
         }
         val parent2: KoParentDeclarationImpl = mockk {
             every { name } returns name2
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent2)
+            every { parentInterfaces } returns sequenceOf(parent2)
         }
         val classes = sequenceOf(class1, class2)
 
@@ -508,13 +508,13 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
             every { name } returns name1
         }
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent1)
+            every { parentInterfaces } returns sequenceOf(parent1)
         }
         val parent2: KoParentDeclarationImpl = mockk {
             every { name } returns name2
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentInterfaces } returns listOf(parent2)
+            every { parentInterfaces } returns sequenceOf(parent2)
         }
         val classes = sequenceOf(class1, class2)
 

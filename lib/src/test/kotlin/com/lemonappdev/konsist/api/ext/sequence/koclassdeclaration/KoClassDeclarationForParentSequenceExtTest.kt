@@ -68,13 +68,13 @@ class KoClassDeclarationForParentSequenceExtTest {
             every { name } returns name1
         }
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1)
+            every { parentDeclarations } returns sequenceOf(parent1)
         }
         val parent2: KoParentDeclarationImpl = mockk {
             every { name } returns name2
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent2)
+            every { parentDeclarations } returns sequenceOf(parent2)
         }
         val classes = sequenceOf(class1, class2)
 
@@ -94,13 +94,13 @@ class KoClassDeclarationForParentSequenceExtTest {
             every { name } returns name1
         }
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1)
+            every { parentDeclarations } returns sequenceOf(parent1)
         }
         val parent2: KoParentDeclarationImpl = mockk {
             every { name } returns name2
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent2)
+            every { parentDeclarations } returns sequenceOf(parent2)
         }
         val classes = sequenceOf(class1, class2)
 
@@ -291,10 +291,10 @@ class KoClassDeclarationForParentSequenceExtTest {
             every { name } returns name2
         }
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1, parent2)
+            every { parentDeclarations } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent2)
+            every { parentDeclarations } returns sequenceOf(parent2)
         }
         val classes = sequenceOf(class1, class2)
 
@@ -322,13 +322,13 @@ class KoClassDeclarationForParentSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1, parent2)
+            every { parentDeclarations } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1, parent3)
+            every { parentDeclarations } returns sequenceOf(parent1, parent3)
         }
         val class3: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent3)
+            every { parentDeclarations } returns sequenceOf(parent3)
         }
         val classes = sequenceOf(class1, class2, class3)
 
@@ -351,10 +351,10 @@ class KoClassDeclarationForParentSequenceExtTest {
             every { name } returns name2
         }
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1, parent2)
+            every { parentDeclarations } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent2)
+            every { parentDeclarations } returns sequenceOf(parent2)
         }
         val classes = sequenceOf(class1, class2)
 
@@ -382,13 +382,13 @@ class KoClassDeclarationForParentSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1, parent2)
+            every { parentDeclarations } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1, parent3)
+            every { parentDeclarations } returns sequenceOf(parent1, parent3)
         }
         val class3: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent3)
+            every { parentDeclarations } returns sequenceOf(parent3)
         }
         val classes = sequenceOf(class1, class2, class3)
 
@@ -412,10 +412,10 @@ class KoClassDeclarationForParentSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1, parent2)
+            every { parentDeclarations } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent2)
+            every { parentDeclarations } returns sequenceOf(parent2)
         }
         val classes = sequenceOf(class1, class2)
 
@@ -443,13 +443,13 @@ class KoClassDeclarationForParentSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1, parent2)
+            every { parentDeclarations } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1, parent3)
+            every { parentDeclarations } returns sequenceOf(parent1, parent3)
         }
         val class3: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent3)
+            every { parentDeclarations } returns sequenceOf(parent3)
         }
         val classes = sequenceOf(class1, class2, class3)
 
@@ -473,10 +473,10 @@ class KoClassDeclarationForParentSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1, parent2)
+            every { parentDeclarations } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent2)
+            every { parentDeclarations } returns sequenceOf(parent2)
         }
         val classes = sequenceOf(class1, class2)
 
@@ -504,13 +504,13 @@ class KoClassDeclarationForParentSequenceExtTest {
         }
 
         val class1: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1, parent2)
+            every { parentDeclarations } returns sequenceOf(parent1, parent2)
         }
         val class2: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent1, parent3)
+            every { parentDeclarations } returns sequenceOf(parent1, parent3)
         }
         val class3: KoClassDeclarationImpl = mockk {
-            every { parentDeclarations } returns listOf(parent3)
+            every { parentDeclarations } returns sequenceOf(parent3)
         }
         val classes = sequenceOf(class1, class2, class3)
 

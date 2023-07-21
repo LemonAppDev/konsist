@@ -19,10 +19,10 @@ class KoParametrizedDeclarationForParameterSequenceExtTest {
         // given
         val parameter: KoParameterDeclaration = mockk()
         val parametrizedDeclaration1: KoParametersProvider = mockk {
-            every { parameters } returns listOf(parameter)
+            every { parameters } returns sequenceOf(parameter)
         }
         val parametrizedDeclaration2: KoParametersProvider = mockk {
-            every { parameters } returns emptyList()
+            every { parameters } returns emptySequence()
         }
         val parametrizedDeclarations = sequenceOf(parametrizedDeclaration1, parametrizedDeclaration2)
 
@@ -38,10 +38,10 @@ class KoParametrizedDeclarationForParameterSequenceExtTest {
         // given
         val parameter: KoParameterDeclaration = mockk()
         val parametrizedDeclaration1: KoParametersProvider = mockk {
-            every { parameters } returns listOf(parameter)
+            every { parameters } returns sequenceOf(parameter)
         }
         val parametrizedDeclaration2: KoParametersProvider = mockk {
-            every { parameters } returns emptyList()
+            every { parameters } returns emptySequence()
         }
         val parametrizedDeclarations = sequenceOf(parametrizedDeclaration1, parametrizedDeclaration2)
 

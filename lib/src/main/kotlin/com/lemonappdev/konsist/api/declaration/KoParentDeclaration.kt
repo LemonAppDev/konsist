@@ -14,12 +14,7 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
  * Represents a Kotlin parent declaration.
  */
 interface KoParentDeclaration :
-    KoContainingFileProvider,
-    KoKDocProvider,
     KoLocationProvider,
     KoNameProvider,
-    KoParentProvider,
-    KoPathProvider,
-    KoTextProvider,
     KoBaseProvider,
     KoDelegateProvider
