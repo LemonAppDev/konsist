@@ -21,8 +21,9 @@ interface KoAnnotationProvider : KoBaseProvider {
     /**
      * Whether the declaration, file or scope has annotations of `KClass` type.
      *
+     * @param name the `KClass` type of the annotation to check.
      * @param names the `KClass` types of the annotations to check.
      * @return `true` if the declaration, file or scope has annotations of the specified `KClass` types, `false` otherwise.
      */
-    fun hasAnnotationsOf(vararg names: KClass<*>): Boolean
+    fun hasAnnotationsOf(name: KClass<*>, vararg names: KClass<*>): Boolean
 }

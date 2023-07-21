@@ -31,13 +31,15 @@ internal interface KoAnnotationProviderCore :
         }
     }
 
-    override fun hasAnnotationsOf(vararg names: KClass<*>): Boolean = names.all {
+    override fun hasAnnotationsOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
+        checkIfAnnotated(name) && names.all { checkIfAnnotated(it) }
+
+    private fun checkIfAnnotated(kClass: KClass<*>): Boolean =
         annotations.any { annotation ->
-            if (it.qualifiedName?.startsWith("kotlin.") == true) {
-                annotation.name == it.simpleName
+            if (kClass.qualifiedName?.startsWith("kotlin.") == true) {
+                annotation.name == kClass.simpleName
             } else {
-                annotation.fullyQualifiedName == it.qualifiedName
+                annotation.fullyQualifiedName == kClass.qualifiedName
             }
         }
-    }
 }

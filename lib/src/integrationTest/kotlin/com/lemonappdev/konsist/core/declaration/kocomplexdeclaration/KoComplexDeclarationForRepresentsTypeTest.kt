@@ -34,10 +34,6 @@ class KoComplexDeclarationForRepresentsTypeTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("class-represents-type", "SampleClass", "SampleClass", true),
-            arguments("class-represents-type", "SampleClass", "OtherClass", false),
-            arguments("class-represents-type", "SampleClass", "com.lemonappdev.konsist.testdata.SampleClass", true),
-            arguments("class-represents-type", "SampleClass", "com.lemonappdev.konsist.testdata.OtherClass", false),
             arguments("interface-represents-type", "SampleInterface", "SampleInterface", true),
             arguments("interface-represents-type", "SampleInterface", "OtherInterface", false),
             arguments("interface-represents-type", "SampleInterface", "com.lemonappdev.konsist.testdata.SampleInterface", true),

@@ -1,0 +1,3 @@
+class SampleTopLevelClass {
+    val sampleProperty = 6
+}

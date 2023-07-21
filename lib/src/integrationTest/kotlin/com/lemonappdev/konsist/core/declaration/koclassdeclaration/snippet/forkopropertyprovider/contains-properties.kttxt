@@ -1,0 +1,10 @@
+class SampleTopLevelClass {
+    val sampleProperty = ""
+    fun sampleFunction() {
+        val sampleLocalProperty = 6
+    }
+
+    class SampleClass {
+        val sampleNestedProperty = ""
+    }
+}

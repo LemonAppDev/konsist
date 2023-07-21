@@ -126,7 +126,6 @@ class KoComplexDeclarationForDeclarationsContainsLocalDeclarationsTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("class-contains-local-declarations", "SampleTopLevelClass"),
             arguments("interface-contains-local-declarations", "SampleTopLevelInterface"),
             arguments("object-contains-local-declarations", "SampleTopLevelObject"),
         )

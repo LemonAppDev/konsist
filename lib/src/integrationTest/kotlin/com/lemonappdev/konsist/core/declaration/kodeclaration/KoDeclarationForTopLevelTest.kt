@@ -33,8 +33,6 @@ class KoDeclarationForTopLevelTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarations() = listOf(
-            arguments("class-is-top-level", "SampleClass", true),
-            arguments("class-is-not-top-level", "SampleNestedClass", false),
             arguments("function-is-top-level", "sampleFunction", true),
             arguments("function-is-not-top-level", "sampleNestedFunction", false),
             arguments("interface-is-top-level", "SampleInterface", true),

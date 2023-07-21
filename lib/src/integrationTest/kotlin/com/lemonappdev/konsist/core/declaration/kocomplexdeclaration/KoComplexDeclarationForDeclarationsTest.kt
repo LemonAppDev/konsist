@@ -68,7 +68,6 @@ class KoComplexDeclarationForDeclarationsTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForNoDeclarations() = listOf(
-            arguments("class-contains-no-declarations", "SampleClass"),
             arguments("interface-contains-no-declarations", "SampleInterface"),
             arguments("object-contains-no-declarations", "SampleObject"),
         )
@@ -76,10 +75,6 @@ class KoComplexDeclarationForDeclarationsTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarations() = listOf(
-            arguments("class-contains-declarations", "SampleTopLevelClass", true, true),
-            arguments("class-contains-declarations", "SampleTopLevelClass", true, false),
-            arguments("class-contains-declarations", "SampleTopLevelClass", false, true),
-            arguments("class-contains-declarations", "SampleTopLevelClass", false, false),
             arguments("interface-contains-declarations", "SampleTopLevelInterface", true, true),
             arguments("interface-contains-declarations", "SampleTopLevelInterface", true, false),
             arguments("interface-contains-declarations", "SampleTopLevelInterface", false, true),

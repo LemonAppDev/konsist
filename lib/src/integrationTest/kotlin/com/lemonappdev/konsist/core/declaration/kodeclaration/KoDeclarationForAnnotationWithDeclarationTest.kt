@@ -186,7 +186,6 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarationWithoutAnnotation() = listOf(
-            arguments("class-has-no-annotation", "SampleClass"),
             arguments("function-has-no-annotation", "sampleFunction"),
             arguments("interface-has-no-annotation", "SampleInterface"),
             arguments("object-has-no-annotation", "SampleObject"),
@@ -197,10 +196,6 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarationWithOneAnnotation() = listOf(
-            arguments("class-has-annotation", "SampleClass", "SampleAnnotation", true),
-            arguments("class-has-annotation", "SampleClass", "NonExistingAnnotation", false),
-            arguments("class-has-annotation", "SampleClass", "com.lemonappdev.konsist.testdata.SampleAnnotation", true),
-            arguments("class-has-annotation", "SampleClass", "com.lemonappdev.konsist.testdata.NonExistingAnnotation", false),
             arguments("function-has-annotation", "sampleFunction", "SampleAnnotation", true),
             arguments("function-has-annotation", "sampleFunction", "NonExistingAnnotation", false),
             arguments("function-has-annotation", "sampleFunction", "com.lemonappdev.konsist.testdata.SampleAnnotation", true),
@@ -226,8 +221,6 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarationWithExplicitTwoAnnotations() = listOf(
-            arguments("class-has-two-annotations", "SampleClass", "SampleAnnotation1", "SampleAnnotation2", true),
-            arguments("class-has-two-annotations", "SampleClass", "SampleAnnotation1", "NonExistingAnnotation", false),
             arguments("function-has-two-annotations", "sampleFunction", "SampleAnnotation1", "SampleAnnotation2", true),
             arguments("function-has-two-annotations", "sampleFunction", "SampleAnnotation1", "NonExistingAnnotation", false),
             arguments("interface-has-two-annotations", "SampleInterface", "SampleAnnotation1", "SampleAnnotation2", true),
@@ -243,9 +236,6 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarationWithTwoAnnotations() = listOf(
-            arguments("class-has-two-annotations", "SampleClass", "SampleAnnotation1", true),
-            arguments("class-has-two-annotations", "SampleClass", "SampleAnnotation2", true),
-            arguments("class-has-two-annotations", "SampleClass", "NonExistingAnnotation", false),
             arguments("function-has-two-annotations", "sampleFunction", "SampleAnnotation1", true),
             arguments("function-has-two-annotations", "sampleFunction", "SampleAnnotation2", true),
             arguments("function-has-two-annotations", "sampleFunction", "NonExistingAnnotation", false),
@@ -266,8 +256,6 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarationWithOneKClassAnnotation() = listOf(
-            arguments("class-has-annotation", "SampleClass", SampleAnnotation::class, true),
-            arguments("class-has-annotation", "SampleClass", NonExistingAnnotation::class, false),
             arguments("function-has-annotation", "sampleFunction", SampleAnnotation::class, true),
             arguments("function-has-annotation", "sampleFunction", NonExistingAnnotation::class, false),
             arguments("interface-has-annotation", "SampleInterface", SampleAnnotation::class, true),
@@ -281,8 +269,6 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarationWithExplicitTwoKClassAnnotations() = listOf(
-            arguments("class-has-two-annotations", "SampleClass", SampleAnnotation1::class, SampleAnnotation2::class, true),
-            arguments("class-has-two-annotations", "SampleClass", SampleAnnotation1::class, NonExistingAnnotation::class, false),
             arguments("function-has-two-annotations", "sampleFunction", SampleAnnotation1::class, SampleAnnotation2::class, true),
             arguments("function-has-two-annotations", "sampleFunction", SampleAnnotation1::class, NonExistingAnnotation::class, false),
             arguments("interface-has-two-annotations", "SampleInterface", SampleAnnotation1::class, SampleAnnotation2::class, true),
@@ -296,9 +282,6 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarationWithTwoKClassAnnotations() = listOf(
-            arguments("class-has-two-annotations", "SampleClass", SampleAnnotation1::class, true),
-            arguments("class-has-two-annotations", "SampleClass", SampleAnnotation2::class, true),
-            arguments("class-has-two-annotations", "SampleClass", NonExistingAnnotation::class, false),
             arguments("function-has-two-annotations", "sampleFunction", SampleAnnotation1::class, true),
             arguments("function-has-two-annotations", "sampleFunction", SampleAnnotation2::class, true),
             arguments("function-has-two-annotations", "sampleFunction", NonExistingAnnotation::class, false),
@@ -316,7 +299,6 @@ class KoDeclarationForAnnotationWithDeclarationTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarationWithSuppressAnnotation() = listOf(
-            arguments("class-has-suppress-annotation-without-import", "SampleClass"),
             arguments("function-has-suppress-annotation-without-import", "sampleFunction"),
             arguments("interface-has-suppress-annotation-without-import", "SampleInterface"),
             arguments("object-has-suppress-annotation-without-import", "SampleObject"),

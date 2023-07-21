@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 
 class KoAnnotationDeclarationForKoContainingFileProviderTest {
     @Test
-    fun `annotation-name`() {
+    fun `annotation-containing-file`() {
         // given
         val sut = getSnippetFile("annotation-containing-file")
             .functions()

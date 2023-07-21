@@ -150,7 +150,6 @@ class KoComplexDeclarationForDeclarationsContainsNestedDeclarationsTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("class-contains-nested-declarations", "SampleTopLevelClass"),
             arguments("interface-contains-nested-declarations", "SampleTopLevelInterface"),
             arguments("object-contains-nested-declarations", "SampleTopLevelObject"),
         )

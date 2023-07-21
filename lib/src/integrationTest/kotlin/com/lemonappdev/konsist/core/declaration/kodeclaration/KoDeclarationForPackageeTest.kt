@@ -32,8 +32,6 @@ class KoDeclarationForPackageeTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("class-is-in-package", "SampleClass", "com.samplepackage"),
-            arguments("class-is-not-in-package", "SampleClass", null),
             arguments("function-is-in-package", "sampleFunction", "com.samplepackage"),
             arguments("function-is-not-in-package", "sampleFunction", null),
             arguments("interface-is-in-package", "SampleInterface", "com.samplepackage"),

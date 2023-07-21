@@ -1,0 +1,10 @@
+package com.lemonappdev.konsist.core.declaration.koclassdeclaration.snippet.forkoclassprovider
+
+class SampleTopLevelClass {
+    class SampleClass {
+
+        val sampleProperty = ""
+
+        class SampleNestedClass
+    }
+}

@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 
 interface KoPackageProvider : KoBaseProvider {
     /**
-     * Package name of the declaration or file.
+     * Package of the declaration or file.
      */
     val packagee: KoPackageDeclaration?
 }
