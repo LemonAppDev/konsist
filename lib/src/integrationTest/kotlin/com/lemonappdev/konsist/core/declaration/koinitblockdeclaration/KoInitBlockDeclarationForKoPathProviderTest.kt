@@ -1,11 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.koinitblockdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.sequence.withInitBlocks
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoInitBlockDeclarationForKoPathProviderTest {
@@ -39,7 +36,7 @@ class KoInitBlockDeclarationForKoPathProviderTest {
             ?.projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koinitblockdeclaration/snippet/" +
-                        "forkopathprovider/init-block-project-file-path.kt",
+                    "forkopathprovider/init-block-project-file-path.kt",
             )
     }
 

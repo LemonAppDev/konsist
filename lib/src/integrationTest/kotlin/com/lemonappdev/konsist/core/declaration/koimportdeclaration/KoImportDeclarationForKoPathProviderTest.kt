@@ -32,7 +32,7 @@ class KoImportDeclarationForKoPathProviderTest {
             .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koimportdeclaration/snippet/" +
-                        "forkopathprovider/import-project-file-path.kt",
+                    "forkopathprovider/import-project-file-path.kt",
             )
     }
 

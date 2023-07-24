@@ -15,8 +15,7 @@ class KoFunctionDeclarationForKoLocalDeclarationProviderTest {
             .first()
 
         // then
-        assertSoftly(sut)
-        {
+        assertSoftly(sut) {
             containsLocalDeclarations("sampleLocalProperty") shouldBeEqualTo false
             localDeclarations()
                 .toList()
@@ -33,8 +32,7 @@ class KoFunctionDeclarationForKoLocalDeclarationProviderTest {
             .first()
 
         // then
-        assertSoftly(sut)
-        {
+        assertSoftly(sut) {
             containsLocalDeclarations("sampleLocalProperty") shouldBeEqualTo true
             containsLocalDeclarations("sampleLocalFunction") shouldBeEqualTo true
             containsLocalDeclarations("SampleLocalClass") shouldBeEqualTo true

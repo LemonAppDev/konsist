@@ -30,5 +30,8 @@ class KoImportDeclarationForKoAliasProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koimportdeclaration/snippet/forkoaliasprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/declaration/koimportdeclaration/snippet/forkoaliasprovider/",
+        fileName,
+    )
 }
