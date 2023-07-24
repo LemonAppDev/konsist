@@ -7,19 +7,6 @@ import org.junit.jupiter.api.Test
 
 class ParametrizedDeclarationForParameterTest {
     @Test
-    fun `function-contains-no-parameters`() {
-        // given
-        val sut = getSnippetFile("function-contains-no-parameters")
-            .functions()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            parameters.toList() shouldBeEqualTo emptyList()
-        }
-    }
-
-    @Test
     fun `primary-constructor-contains-no-parameters`() {
         // given
         val sut = getSnippetFile("primary-constructor-contains-no-parameters")
@@ -30,34 +17,6 @@ class ParametrizedDeclarationForParameterTest {
         // then
         assertSoftly(sut) {
             it?.parameters?.toList() shouldBeEqualTo emptyList()
-        }
-    }
-
-    @Test
-    fun `function-contains-parameter`() {
-        // given
-        val sut = getSnippetFile("function-contains-parameter")
-            .functions()
-            .first()
-
-        // then
-        assertSoftly(sut.parameters) {
-            it.toList().size shouldBeEqualTo 1
-            it.first().name shouldBeEqualTo "sampleParameter"
-        }
-    }
-
-    @Test
-    fun `function-has-parameter`() {
-        // given
-        val sut = getSnippetFile("function-has-parameter")
-            .functions()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasParameterNamed("sampleProperty") shouldBeEqualTo true
-            hasParameterNamed("otherProperty") shouldBeEqualTo false
         }
     }
 

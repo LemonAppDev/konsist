@@ -3,5 +3,5 @@ fun sampleFunction() {
 
     fun sampleLocalFunction() { }
 
-    class SampleNestedClass
+    class SampleLocalClass
 }

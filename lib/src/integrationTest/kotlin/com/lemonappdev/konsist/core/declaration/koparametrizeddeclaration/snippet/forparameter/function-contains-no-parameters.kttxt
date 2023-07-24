@@ -1,4 +1,0 @@
-package com.lemonappdev.konsist.core.declaration.koparametrizeddeclaration.snippet.forparameter
-
-fun sampleFunction() {
-}
