@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFunctionDeclarationForHasImplementationTest {
+class KoFunctionDeclarationForKoImplementationProviderTest {
     @Test
     fun `function-inside-interface-has-implementation-in-block-body`() {
         // given
@@ -39,5 +39,5 @@ class KoFunctionDeclarationForHasImplementationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forhasimplementation/", fileName)
+        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forkoimplementationprovider/", fileName)
 }

@@ -1,11 +1,58 @@
 package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.KoModifier
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFunctionDeclarationForModifierTest {
+class KoFunctionDeclarationForKoModifierProviderTest {
+    @Test
+    fun `function-has-no-modifiers`() {
+        // given
+        val sut = getSnippetFile("function-has-no-modifiers")
+            .functions()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            modifiers.toList() shouldBeEqualTo emptyList()
+            hasModifiers() shouldBeEqualTo false
+            hasModifiers(KoModifier.OPEN) shouldBeEqualTo false
+            hasModifiers(KoModifier.OPEN, KoModifier.DATA) shouldBeEqualTo false
+            hasPublicModifier() shouldBeEqualTo false
+            isPublicOrDefault() shouldBeEqualTo true
+            hasPrivateModifier() shouldBeEqualTo false
+            hasProtectedModifier() shouldBeEqualTo false
+            hasInternalModifier() shouldBeEqualTo false
+            hasEnumModifier() shouldBeEqualTo false
+            hasSealedModifier() shouldBeEqualTo false
+            hasInnerModifier() shouldBeEqualTo false
+            hasValueModifier() shouldBeEqualTo false
+            hasAnnotationModifier() shouldBeEqualTo false
+            hasDataModifier() shouldBeEqualTo false
+            hasActualModifier() shouldBeEqualTo false
+            hasExpectModifier() shouldBeEqualTo false
+            hasAbstractModifier() shouldBeEqualTo false
+            hasOpenModifier() shouldBeEqualTo false
+            hasFinalModifier() shouldBeEqualTo false
+            hasVarargModifier() shouldBeEqualTo false
+            hasNoInlineModifier() shouldBeEqualTo false
+            hasCrossInlineModifier() shouldBeEqualTo false
+            hasOperatorModifier() shouldBeEqualTo false
+            hasInlineModifier() shouldBeEqualTo false
+            hasTailrecModifier() shouldBeEqualTo false
+            hasInfixModifier() shouldBeEqualTo false
+            hasExternalModifier() shouldBeEqualTo false
+            hasSuspendModifier() shouldBeEqualTo false
+            hasOverrideModifier() shouldBeEqualTo false
+            hasFunModifier() shouldBeEqualTo false
+            hasLateinitModifier() shouldBeEqualTo false
+            hasConstModifier() shouldBeEqualTo false
+            hasCompanionModifier() shouldBeEqualTo false
+        }
+    }
+
     @Test
     fun `function-has-operator-modifier`() {
         // given
@@ -138,30 +185,6 @@ class KoFunctionDeclarationForModifierTest {
         sut.hasExpectModifier() shouldBeEqualTo true
     }
 
-    @Test
-    fun `function-has-no-modifiers`() {
-        // given
-        val sut = getSnippetFile("function-has-no-modifiers")
-            .functions()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasOperatorModifier() shouldBeEqualTo false
-            hasInlineModifier() shouldBeEqualTo false
-            hasTailrecModifier() shouldBeEqualTo false
-            hasInfixModifier() shouldBeEqualTo false
-            hasExternalModifier() shouldBeEqualTo false
-            hasSuspendModifier() shouldBeEqualTo false
-            hasOpenModifier() shouldBeEqualTo false
-            hasOverrideModifier() shouldBeEqualTo false
-            hasFinalModifier() shouldBeEqualTo false
-            hasAbstractModifier() shouldBeEqualTo false
-            hasActualModifier() shouldBeEqualTo false
-            hasExpectModifier() shouldBeEqualTo false
-        }
-    }
-
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/formodifier/", fileName)
+        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forkomodifierprovider/", fileName)
 }
