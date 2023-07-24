@@ -81,8 +81,8 @@ class KoClassDeclarationForKoModifierProviderTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideValuesForDeclarationModifiers")
-    fun `declaration-modifiers`(
+    @MethodSource("provideValues")
+    fun `class-modifiers`(
         fileName: String,
         modifiers: List<KoModifier>,
     ) {
@@ -281,13 +281,13 @@ class KoClassDeclarationForKoModifierProviderTest {
     companion object {
         @Suppress("unused")
         @JvmStatic
-        fun provideValuesForDeclarationModifiers() = listOf(
-            arguments("class-has-modifiers", "SampleClass", listOf(PRIVATE, OPEN)),
-            arguments("class-has-modifiers-and-annotation-with-parameter", "SampleClass", listOf(PRIVATE, OPEN)),
-            arguments("class-has-modifiers-and-annotation-without-parameter", "SampleClass", listOf(PRIVATE, OPEN)),
-            arguments("class-has-modifiers-annotation-and-comment", "SampleClass", listOf(PRIVATE, OPEN)),
-            arguments("class-has-modifiers-and-annotations", "SampleClass", listOf(PRIVATE, OPEN)),
-            arguments("class-has-modifiers-and-annotation-with-angle-brackets", "SampleClass", listOf(PRIVATE, OPEN)),
+        fun provideValues() = listOf(
+            arguments("class-has-modifiers", listOf(PRIVATE, OPEN)),
+            arguments("class-has-modifiers-and-annotation-with-parameter", listOf(PRIVATE, OPEN)),
+            arguments("class-has-modifiers-and-annotation-without-parameter", listOf(PRIVATE, OPEN)),
+            arguments("class-has-modifiers-annotation-and-comment", listOf(PRIVATE, OPEN)),
+            arguments("class-has-modifiers-and-annotations", listOf(PRIVATE, OPEN)),
+            arguments("class-has-modifiers-and-annotation-with-angle-brackets", listOf(PRIVATE, OPEN)),
         )
     }
 }

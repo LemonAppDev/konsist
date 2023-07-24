@@ -38,7 +38,7 @@ class KoClassDeclarationForKoAnnotationProviderTest {
             hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
             hasAnnotations("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
             hasAnnotationsOf(SampleAnnotation::class) shouldBeEqualTo true
-            hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo true
+            hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
 
@@ -58,9 +58,9 @@ class KoClassDeclarationForKoAnnotationProviderTest {
             hasAnnotations("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo true
             hasAnnotations("SampleAnnotation1", "NonExistingAnnotation") shouldBeEqualTo false
             hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
-            hasAnnotationsOf(SampleAnnotation::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
             hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
-            hasAnnotationsOf(SampleAnnotation::class, SampleAnnotation::class) shouldBeEqualTo true
+            hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation1::class) shouldBeEqualTo true
             hasAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
         }
     }
