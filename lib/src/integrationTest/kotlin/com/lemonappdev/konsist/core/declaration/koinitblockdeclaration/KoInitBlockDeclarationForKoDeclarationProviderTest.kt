@@ -2,10 +2,12 @@ package com.lemonappdev.konsist.core.declaration.koinitblockdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoInitBlockDeclarationForDeclarationsTest {
+class KoInitBlockDeclarationForKoDeclarationProviderTest {
+    // ToDo: uzupelnij to
     @Test
     fun `init-block-has-no-declarations`() {
         // given
@@ -16,7 +18,11 @@ class KoInitBlockDeclarationForDeclarationsTest {
             ?.first()
 
         // then
-        sut?.declarations()?.toList() shouldBeEqualTo emptyList()
+        assertSoftly {
+            sut?.declarations()?.toList() shouldBeEqualTo emptyList()
+            sut?.containsDeclarations("sampleProperty") shouldBeEqualTo false
+            sut?.numDeclarations(includeNested = true) shouldBeEqualTo 0
+        }
     }
 
     @Test
@@ -38,5 +44,5 @@ class KoInitBlockDeclarationForDeclarationsTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koinitblockdeclaration/snippet/fordeclarations/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koinitblockdeclaration/snippet/forkodeclarationprovider/", fileName)
 }

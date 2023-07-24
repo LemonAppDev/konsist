@@ -23,7 +23,7 @@ class KoClassDeclarationForKoDeclarationProviderTest {
 
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `class-contains-declarations includeNested true includeLocal true`(
+    fun `class-contains-declarations`(
         includeNested: Boolean,
         includeLocal: Boolean,
     ) {
