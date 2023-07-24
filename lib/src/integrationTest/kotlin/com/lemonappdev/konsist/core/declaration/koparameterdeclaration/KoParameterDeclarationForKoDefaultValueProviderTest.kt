@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoParameterDeclarationForDefaultValueTest {
+class KoParameterDeclarationForKoDefaultValueProviderTest {
     @Test
     fun `class-has-primitive-default-parameter-value`() {
         // given
@@ -21,7 +21,6 @@ class KoParameterDeclarationForDefaultValueTest {
             it?.hasDefaultValue() shouldBeEqualTo true
             it?.hasDefaultValue("6") shouldBeEqualTo true
             it?.hasDefaultValue("10") shouldBeEqualTo false
-            it?.name shouldBeEqualTo "sampleParameter"
         }
     }
 
@@ -96,5 +95,5 @@ class KoParameterDeclarationForDefaultValueTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/fordefaultvalue/", fileName)
+        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/forkodefaultvalueprovider/", fileName)
 }

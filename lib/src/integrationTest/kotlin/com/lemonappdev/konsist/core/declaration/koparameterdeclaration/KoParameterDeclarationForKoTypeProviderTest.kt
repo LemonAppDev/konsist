@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoParameterDeclarationForTypeTest {
+class KoParameterDeclarationForKoTypeProviderTest {
     @Test
     fun `class-has-complex-default-parameter-value`() {
         // given
@@ -47,5 +47,5 @@ class KoParameterDeclarationForTypeTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/fortype/", fileName)
+        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/forkotypeprovider/", fileName)
 }

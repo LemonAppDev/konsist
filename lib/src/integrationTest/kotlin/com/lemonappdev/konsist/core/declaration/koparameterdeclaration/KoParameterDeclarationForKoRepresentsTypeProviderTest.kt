@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoParameterDeclarationForRepresentsTypeTest {
+class KoParameterDeclarationForKoRepresentsTypeProviderTest {
     @Test
     fun `parameter-represents-type`() {
         // given
@@ -23,5 +23,5 @@ class KoParameterDeclarationForRepresentsTypeTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/forrepresentstype/", fileName)
+        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/forkorepresentstypeprovider/", fileName)
 }
