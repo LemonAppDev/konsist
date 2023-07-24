@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoImportDeclarationForNameTest {
+class KoImportDeclarationForKoNameProviderTest {
     @Test
     fun `import-without-import-alias`() {
         // given
@@ -27,5 +27,6 @@ class KoImportDeclarationForNameTest {
         sut.name shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koimportdeclaration/snippet/forname/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koimportdeclaration/snippet/forkonameprovider/", fileName)
 }

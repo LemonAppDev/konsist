@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoImportDeclarationForAliasTest {
+class KoImportDeclarationForKoAliasProviderTest {
     @Test
     fun `import-without-import-alias`() {
         // given
@@ -30,5 +30,5 @@ class KoImportDeclarationForAliasTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koimportdeclaration/snippet/foralias/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koimportdeclaration/snippet/forkoaliasprovider/", fileName)
 }
