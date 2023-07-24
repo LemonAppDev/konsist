@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoPackageDeclarationForNameTest {
+class KoPackageDeclarationForKoNameProviderTest {
     @Test
     fun `package-does-not-exists`() {
         // given
@@ -43,5 +43,5 @@ class KoPackageDeclarationForNameTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopackagedeclaration/snippet/forname/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopackagedeclaration/snippet/forkonameprovider/", fileName)
 }

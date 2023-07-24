@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoObjectDeclarationForNameTest {
+class KoObjectDeclarationForKoNameProviderTest {
     @Test
     fun `object`() {
         // given
@@ -38,5 +38,6 @@ class KoObjectDeclarationForNameTest {
         sut.name shouldBeEqualTo "Companion"
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/koobjectdeclaration/snippet/forname/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koobjectdeclaration/snippet/forkonameprovider/", fileName)
 }

@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoPackageDeclarationForMatchingFilePath {
+class KoPackageDeclarationForKoPackageMatchingFileProviderPath {
     @Test
     fun `package-with-matching-file-path`() {
         // given
@@ -28,5 +28,5 @@ class KoPackageDeclarationForMatchingFilePath {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopackagedeclaration/snippet/formatchingfilepath/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopackagedeclaration/snippet/forkomatchingfilepathprovider/", fileName)
 }

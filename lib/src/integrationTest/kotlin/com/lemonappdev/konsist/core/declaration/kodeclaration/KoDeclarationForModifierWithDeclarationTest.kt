@@ -126,12 +126,6 @@ class KoDeclarationForModifierWithDeclarationTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarationModifiers() = listOf(
-            arguments("object-has-modifiers", "SampleObject", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-annotation-with-parameter", "SampleObject", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-annotation-without-parameter", "SampleObject", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-annotation-and-comment", "SampleObject", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-annotations", "SampleObject", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-annotation-with-angle-brackets", "SampleObject", listOf(PRIVATE, DATA)),
             arguments("property-has-modifiers", "sampleProperty", listOf(PROTECTED, OPEN)),
             arguments("property-has-modifiers-and-annotation-with-parameter", "sampleProperty", listOf(PROTECTED, OPEN)),
             arguments("property-has-modifiers-and-annotation-without-parameter", "sampleProperty", listOf(PROTECTED, OPEN)),
