@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoKDocDeclarationForTextTest {
+class KoKDocDeclarationForKoTextProviderTest {
     @ParameterizedTest
     @MethodSource("provideValuesForClass")
     fun `kdoc-description-for-class`(
@@ -69,7 +69,8 @@ class KoKDocDeclarationForTextTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/fortext/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forkotextprovider/", fileName)
 
     companion object {
         @Suppress("unused")
