@@ -2,9 +2,17 @@ package com.lemonappdev.konsist.core.declaration.kofunctiondeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.KoModifier.OPEN
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
+import com.lemonappdev.konsist.api.KoModifier.PROTECTED
+import com.lemonappdev.konsist.api.KoModifier.SUSPEND
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class KoFunctionDeclarationForKoModifierProviderTest {
     @Test
@@ -18,8 +26,8 @@ class KoFunctionDeclarationForKoModifierProviderTest {
         assertSoftly(sut) {
             modifiers.toList() shouldBeEqualTo emptyList()
             hasModifiers() shouldBeEqualTo false
-            hasModifiers(KoModifier.OPEN) shouldBeEqualTo false
-            hasModifiers(KoModifier.OPEN, KoModifier.DATA) shouldBeEqualTo false
+            hasModifiers(OPEN) shouldBeEqualTo false
+            hasModifiers(OPEN, KoModifier.DATA) shouldBeEqualTo false
             hasPublicModifier() shouldBeEqualTo false
             isPublicOrDefault() shouldBeEqualTo true
             hasPrivateModifier() shouldBeEqualTo false
@@ -51,6 +59,99 @@ class KoFunctionDeclarationForKoModifierProviderTest {
             hasConstModifier() shouldBeEqualTo false
             hasCompanionModifier() shouldBeEqualTo false
         }
+    }
+
+    @Test
+    fun `function-has-protected-and-suspend-modifiers`() {
+        // given
+        val sut = getSnippetFile("function-has-protected-and-suspend-modifiers")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasModifiers() shouldBeEqualTo true
+            hasModifiers(PROTECTED) shouldBeEqualTo true
+            hasModifiers(SUSPEND) shouldBeEqualTo true
+            hasModifiers(OPEN) shouldBeEqualTo false
+            hasModifiers(PROTECTED, SUSPEND) shouldBeEqualTo true
+            hasModifiers(SUSPEND, PROTECTED) shouldBeEqualTo true
+            hasModifiers(PROTECTED, OPEN) shouldBeEqualTo false
+            hasModifiers(OPEN, SUSPEND, PROTECTED) shouldBeEqualTo false
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValues")
+    fun `function-modifiers`(
+        fileName: String,
+        modifiers: List<KoModifier>,
+    ) {
+        // given
+        val sut = getSnippetFile(fileName)
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.modifiers.toList() shouldBeEqualTo modifiers
+    }
+
+    @Test
+    fun `function-has-public-visibility-modifier`() {
+        // given
+        val sut = getSnippetFile("function-has-public-visibility-modifier")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.hasPublicModifier() shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-has-public-by-default-visibility-modifier`() {
+        // given
+        val sut = getSnippetFile("function-has-public-by-default-visibility-modifier")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            isPublicOrDefault() shouldBeEqualTo true
+            hasPublicModifier() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `function-has-private-visibility-modifier`() {
+        // given
+        val sut = getSnippetFile("function-has-private-visibility-modifier")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.hasPrivateModifier() shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-has-protected-visibility-modifier`() {
+        // given
+        val sut = getSnippetFile("function-has-protected-visibility-modifier")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.hasProtectedModifier() shouldBeEqualTo true
+    }
+
+    @Test
+    fun `function-has-internal-visibility-modifier`() {
+        // given
+        val sut = getSnippetFile("function-has-internal-visibility-modifier")
+            .functions(includeNested = true)
+            .first()
+
+        // then
+        sut.hasInternalModifier() shouldBeEqualTo true
     }
 
     @Test
@@ -187,4 +288,17 @@ class KoFunctionDeclarationForKoModifierProviderTest {
 
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forkomodifierprovider/", fileName)
+
+    companion object {
+        @Suppress("unused")
+        @JvmStatic
+        fun provideValues() = listOf(
+            arguments("function-has-modifiers", listOf(PROTECTED, OPEN, SUSPEND, KoModifier.INLINE, KoModifier.OPERATOR)),
+            arguments("function-has-modifiers-and-annotation-with-parameter", listOf(PROTECTED, OPEN)),
+            arguments("function-has-modifiers-and-annotation-without-parameter", listOf(PROTECTED, OPEN)),
+            arguments("function-has-modifiers-annotation-and-comment", listOf(PROTECTED, OPEN)),
+            arguments("function-has-modifiers-and-annotations", listOf(PROTECTED, OPEN)),
+            arguments("function-has-modifiers-and-annotation-with-angle-brackets", listOf(PROTECTED, OPEN)),
+        )
+    }
 }

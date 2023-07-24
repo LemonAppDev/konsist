@@ -126,13 +126,6 @@ class KoDeclarationForModifierWithDeclarationTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForDeclarationModifiers() = listOf(
-            arguments("function-has-modifiers", "invoke", listOf(PROTECTED, OPEN, SUSPEND, INLINE, OPERATOR)),
-            arguments("function-has-modifiers-and-annotation-with-parameter", "invoke", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-and-annotation-without-parameter", "invoke", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-annotation-and-comment", "invoke", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-and-annotations", "invoke", listOf(PROTECTED, OPEN)),
-            arguments("function-has-modifiers-and-annotation-with-angle-brackets", "invoke", listOf(PROTECTED, OPEN)),
-            arguments("interface-has-modifiers", "SampleInterface", listOf(PUBLIC, ABSTRACT)),
             arguments("interface-has-modifiers-and-annotation-with-parameter", "SampleInterface", listOf(PUBLIC, ABSTRACT)),
             arguments("interface-has-modifiers-and-annotation-without-parameter", "SampleInterface", listOf(PUBLIC, ABSTRACT)),
             arguments("interface-has-modifiers-annotation-and-comment", "SampleInterface", listOf(PUBLIC, ABSTRACT)),
