@@ -47,7 +47,6 @@ internal class KoParameterDeclarationImpl private constructor(
     KoDeclarationFullyQualifiedNameProviderCore,
     KoModifierProviderCore,
     KoDefaultValueProviderCore,
-    KoTopLevelProviderCore,
     KoParentProviderCore,
     KoTypeProviderCore,
     KoRepresentsTypeProviderCore {

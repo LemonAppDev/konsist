@@ -33,7 +33,6 @@ interface KoParameterDeclaration :
     KoDeclarationFullyQualifiedNameProvider,
     KoModifierProvider,
     KoDefaultValueProvider,
-    KoTopLevelProvider,
     KoParentProvider,
     KoTypeProvider,
     KoRepresentsTypeProvider
