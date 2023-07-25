@@ -30,6 +30,5 @@ interface KoSecondaryConstructorDeclaration :
     KoAnnotationProvider,
     KoPackageProvider,
     KoResideInOrOutsidePackageProvider,
-    KoDeclarationFullyQualifiedNameProvider,
     KoModifierProvider,
     KoParametersProvider

@@ -28,6 +28,5 @@ interface KoPrimaryConstructorDeclaration :
     KoAnnotationProvider,
     KoPackageProvider,
     KoResideInOrOutsidePackageProvider,
-    KoDeclarationFullyQualifiedNameProvider,
     KoModifierProvider,
     KoParametersProvider

@@ -43,7 +43,6 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
     KoAnnotationProviderCore,
     KoPackageProviderCore,
     KoResideInOrOutsidePackageProviderCore,
-    KoDeclarationFullyQualifiedNameProviderCore,
     KoModifierProviderCore,
     KoParametersProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktSecondaryConstructor }

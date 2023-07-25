@@ -40,7 +40,6 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
     KoAnnotationProviderCore,
     KoPackageProviderCore,
     KoResideInOrOutsidePackageProviderCore,
-    KoDeclarationFullyQualifiedNameProviderCore,
     KoModifierProviderCore,
     KoParametersProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktPrimaryConstructor }
