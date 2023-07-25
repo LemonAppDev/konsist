@@ -33,5 +33,4 @@ interface KoSecondaryConstructorDeclaration :
     KoResideInOrOutsidePackageProvider,
     KoDeclarationFullyQualifiedNameProvider,
     KoModifierProvider,
-    KoTopLevelProvider,
     KoParametersProvider

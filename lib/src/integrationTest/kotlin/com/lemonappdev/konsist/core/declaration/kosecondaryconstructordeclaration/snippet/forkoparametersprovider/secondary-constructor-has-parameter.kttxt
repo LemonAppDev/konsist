@@ -1,0 +1,3 @@
+class SampleClass(val sampleParameter1: Int) {
+    constructor(sampleParameter1: Int, sampleProperty2: Int) : this(sampleParameter1)
+}
