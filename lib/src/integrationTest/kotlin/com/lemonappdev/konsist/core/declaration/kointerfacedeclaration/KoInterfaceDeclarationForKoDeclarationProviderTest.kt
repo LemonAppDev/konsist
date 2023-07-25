@@ -1,20 +1,17 @@
-package com.lemonappdev.konsist.core.declaration.koclassdeclaration
+package com.lemonappdev.konsist.core.declaration.kointerfacedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments.arguments
-import org.junit.jupiter.params.provider.MethodSource
 
-class KoClassDeclarationForKoDeclarationProviderTest {
+class KoInterfaceDeclarationForKoDeclarationProviderTest {
     @Test
-    fun `class-contains-no-declarations`() {
+    fun `interface-contains-no-declarations`() {
         // given
-        val sut = getSnippetFile("class-contains-no-declarations")
-            .classes()
+        val sut = getSnippetFile("interface-contains-no-declarations")
+            .interfaces()
             .first()
 
         // then
@@ -22,10 +19,10 @@ class KoClassDeclarationForKoDeclarationProviderTest {
     }
 
     @Test
-    fun `class-contains-nested-and-local-declarations includeNested true includeLocal true`() {
+    fun `interface-contains-nested-and-local-declarations includeNested true includeLocal true`() {
         // given
-        val sut = getSnippetFile("class-contains-nested-and-local-declarations")
-            .classes()
+        val sut = getSnippetFile("interface-contains-nested-and-local-declarations")
+            .interfaces()
             .first()
 
         // then
@@ -56,10 +53,10 @@ class KoClassDeclarationForKoDeclarationProviderTest {
     }
 
     @Test
-    fun `class-contains-nested-and-local-declarations includeNested true includeLocal false`() {
+    fun `interface-contains-nested-and-local-declarations includeNested true includeLocal false`() {
         // given
-        val sut = getSnippetFile("class-contains-nested-and-local-declarations")
-            .classes()
+        val sut = getSnippetFile("interface-contains-nested-and-local-declarations")
+            .interfaces()
             .first()
 
         // then
@@ -87,10 +84,10 @@ class KoClassDeclarationForKoDeclarationProviderTest {
     }
 
     @Test
-    fun `class-contains-nested-and-local-declarations includeNested false includeLocal true`() {
+    fun `interface-contains-nested-and-local-declarations includeNested false includeLocal true`() {
         // given
-        val sut = getSnippetFile("class-contains-nested-and-local-declarations")
-            .classes()
+        val sut = getSnippetFile("interface-contains-nested-and-local-declarations")
+            .interfaces()
             .first()
 
         // then
@@ -112,10 +109,10 @@ class KoClassDeclarationForKoDeclarationProviderTest {
     }
 
     @Test
-    fun `class-contains-nested-and-local-declarations includeNested false includeLocal false`() {
+    fun `interface-contains-nested-and-local-declarations includeNested false includeLocal false`() {
         // given
-        val sut = getSnippetFile("class-contains-nested-and-local-declarations")
-            .classes()
+        val sut = getSnippetFile("interface-contains-nested-and-local-declarations")
+            .interfaces()
             .first()
 
         // then
@@ -137,7 +134,7 @@ class KoClassDeclarationForKoDeclarationProviderTest {
     fun `contains-declarations`() {
         // given
         val sut = getSnippetFile("contains-declarations")
-            .classes()
+            .interfaces()
             .first()
 
         // then
@@ -150,7 +147,6 @@ class KoClassDeclarationForKoDeclarationProviderTest {
             containsDeclarations("NonExisting") shouldBeEqualTo false
         }
     }
-
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koclassdeclaration/snippet/forkodeclarationprovider/", fileName)
+        getSnippetKoScope("core/declaration/kointerfacedeclaration/snippet/forkodeclarationprovider/", fileName)
 }

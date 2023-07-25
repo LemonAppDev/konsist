@@ -1,5 +1,6 @@
-class SampleTopLevelClass {
+object SampleObject {
     fun sampleFunction() {
+        val sampleLocalProperty = ""
         class SampleLocalClass
 
         fun sampleLocalFunction() {

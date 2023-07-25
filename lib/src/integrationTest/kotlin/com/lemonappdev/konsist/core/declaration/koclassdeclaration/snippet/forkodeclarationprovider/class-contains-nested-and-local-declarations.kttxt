@@ -1,0 +1,27 @@
+class SampleTopLevelClass {
+    fun sampleFunction() {
+        val sampleLocalProperty = ""
+        class SampleLocalClass
+
+        fun sampleLocalFunction() {
+        }
+    }
+
+    class SampleClass {
+        class SampleClassNestedInsideClass
+        object SampleObjectNestedInsideClass
+        interface SampleInterfaceNestedInsideClass
+    }
+
+    object SampleObject {
+        class SampleClassNestedInsideObject
+        object SampleObjectNestedInsideObject
+        interface SampleInterfaceNestedInsideObject
+    }
+
+    interface SampleInterface {
+        class SampleClassNestedInsideInterface
+        object SampleObjectNestedInsideInterface
+        interface SampleInterfaceNestedInsideInterface
+    }
+}

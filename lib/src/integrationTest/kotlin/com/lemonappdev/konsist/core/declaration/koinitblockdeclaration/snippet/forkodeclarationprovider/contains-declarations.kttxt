@@ -1,0 +1,8 @@
+class SampleTopLevelClass {
+    init {
+        class SampleNestedClass {
+
+            val sampleProperty = ""
+        }
+    }
+}

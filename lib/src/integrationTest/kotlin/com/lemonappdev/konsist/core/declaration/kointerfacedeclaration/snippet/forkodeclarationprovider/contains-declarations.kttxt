@@ -1,0 +1,6 @@
+interface SampleInterface {
+    class SampleNestedClass {
+
+        val sampleProperty = ""
+    }
+}
