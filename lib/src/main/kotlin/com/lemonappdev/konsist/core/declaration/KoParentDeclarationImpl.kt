@@ -1,6 +1,9 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoDelegateProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -12,9 +15,9 @@ import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 internal class KoParentDeclarationImpl private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
     KoParentDeclaration,
-    KoNameProviderCore,
     KoBaseProviderCore,
-    KoDelegateProviderCore {
+    KoDelegateProviderCore,
+    KoNameProviderCore {
     override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
 
     override val name: String by lazy {

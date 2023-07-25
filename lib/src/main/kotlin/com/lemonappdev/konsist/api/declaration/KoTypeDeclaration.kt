@@ -48,14 +48,14 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
  * ```
  */
 interface KoTypeDeclaration :
+    KoBaseProvider,
     KoContainingFileProvider,
+    KoFullyQualifiedNameProvider,
+    KoGenericTypeProvider,
+    KoKotlinTypeProvider,
     KoLocationProvider,
     KoNameProvider,
-    KoPathProvider,
-    KoTextProvider,
-    KoBaseProvider,
-    KoFullyQualifiedNameProvider,
     KoNullableProvider,
-    KoKotlinTypeProvider,
+    KoPathProvider,
     KoSourceAndAliasTypeProvider,
-    KoGenericTypeProvider
+    KoTextProvider

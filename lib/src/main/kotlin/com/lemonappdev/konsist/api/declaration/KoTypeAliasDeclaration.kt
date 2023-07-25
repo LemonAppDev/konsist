@@ -20,18 +20,18 @@ import com.lemonappdev.konsist.api.provider.KoTypeProvider
  * Represents a Kotlin type alias declaration.
  */
 interface KoTypeAliasDeclaration :
-    KoContainingFileProvider,
-    KoKDocProvider,
-    KoLocationProvider,
-    KoNameProvider,
-    KoParentProvider,
-    KoPathProvider,
-    KoTextProvider,
     KoBaseProvider,
     KoAnnotationProvider,
-    KoPackageProvider,
-    KoResideInOrOutsidePackageProvider,
+    KoContainingFileProvider,
     KoDeclarationFullyQualifiedNameProvider,
+    KoKDocProvider,
+    KoLocationProvider,
     KoModifierProvider,
+    KoNameProvider,
+    KoPackageProvider,
+    KoParentProvider,
+    KoPathProvider,
+    KoResideInOrOutsidePackageProvider,
+    KoTextProvider,
     KoTopLevelProvider,
     KoTypeProvider

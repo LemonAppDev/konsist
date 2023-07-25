@@ -3,7 +3,19 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoConstructorProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
+import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -31,19 +43,19 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
     override val parent: KoParentProvider?,
 ) :
     KoSecondaryConstructorDeclaration,
+    KoBaseProviderCore,
+    KoAnnotationProviderCore,
     KoConstructorProviderCore,
     KoContainingFileProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
+    KoModifierProviderCore,
+    KoPackageProviderCore,
+    KoParametersProviderCore,
     KoParentProviderCore,
     KoPathProviderCore,
-    KoTextProviderCore,
-    KoBaseProviderCore,
-    KoAnnotationProviderCore,
-    KoPackageProviderCore,
     KoResideInOrOutsidePackageProviderCore,
-    KoModifierProviderCore,
-    KoParametersProviderCore {
+    KoTextProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktSecondaryConstructor }
 
     override val ktFile: KtFile? by lazy { null }

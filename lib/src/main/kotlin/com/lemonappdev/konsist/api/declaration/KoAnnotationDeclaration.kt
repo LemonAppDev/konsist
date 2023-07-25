@@ -8,16 +8,15 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-
 /**
  * Represents a Kotlin annotation.
  */
 interface KoAnnotationDeclaration :
+    KoBaseProvider,
     KoContainingFileProvider,
+    KoFullyQualifiedNameProvider,
     KoLocationProvider,
     KoNameProvider,
     KoPathProvider,
-    KoTextProvider,
-    KoBaseProvider,
-    KoFullyQualifiedNameProvider,
-    KoRepresentsTypeProvider
+    KoRepresentsTypeProvider,
+    KoTextProvider

@@ -3,7 +3,25 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoDelegateProvider
+import com.lemonappdev.konsist.api.provider.KoExplicitTypeProvider
+import com.lemonappdev.konsist.api.provider.KoExtensionProvider
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
+import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.KoVarAndValProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -36,25 +54,25 @@ internal class KoPropertyDeclarationImpl private constructor(
     override val parent: KoParentProvider?,
 ) :
     KoPropertyDeclaration,
-    KoContainingFileProviderCore,
-    KoKDocProviderCore,
-    KoLocationProviderCore,
-    KoNameProviderCore,
-    KoParentProviderCore,
-    KoPathProviderCore,
-    KoTextProviderCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
-    KoPackageProviderCore,
-    KoResideInOrOutsidePackageProviderCore,
+    KoContainingFileProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
-    KoModifierProviderCore,
-    KoTopLevelProviderCore,
-    KoVarAndValProviderCore,
-    KoExtensionProviderCore,
-    KoReceiverTypeProviderCore,
     KoDelegateProviderCore,
-    KoExplicitTypeProviderCore {
+    KoExplicitTypeProviderCore,
+    KoExtensionProviderCore,
+    KoKDocProviderCore,
+    KoLocationProviderCore,
+    KoModifierProviderCore,
+    KoNameProviderCore,
+    KoPackageProviderCore,
+    KoParentProviderCore,
+    KoPathProviderCore,
+    KoReceiverTypeProviderCore,
+    KoResideInOrOutsidePackageProviderCore,
+    KoTextProviderCore,
+    KoTopLevelProviderCore,
+    KoVarAndValProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktProperty }
 
     override val ktFile: KtFile? by lazy { null }

@@ -4,7 +4,21 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoDefaultValueProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
+import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.KoTypeProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -34,21 +48,21 @@ internal class KoParameterDeclarationImpl private constructor(
     override val parent: KoParentProvider?,
 ) :
     KoParameterDeclaration,
-    KoContainingFileProviderCore,
-    KoLocationProviderCore,
-    KoNameProviderCore,
-    KoPathProviderCore,
-    KoTextProviderCore,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
-    KoPackageProviderCore,
-    KoResideInOrOutsidePackageProviderCore,
+    KoContainingFileProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
-    KoModifierProviderCore,
     KoDefaultValueProviderCore,
+    KoLocationProviderCore,
+    KoModifierProviderCore,
+    KoNameProviderCore,
+    KoPackageProviderCore,
     KoParentProviderCore,
-    KoTypeProviderCore,
-    KoRepresentsTypeProviderCore {
+    KoPathProviderCore,
+    KoRepresentsTypeProviderCore,
+    KoResideInOrOutsidePackageProviderCore,
+    KoTextProviderCore,
+    KoTypeProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktParameter }
 
     override val ktFile: KtFile? by lazy { null }

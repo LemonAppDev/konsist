@@ -2,6 +2,9 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
+import com.lemonappdev.konsist.api.provider.KoKDocDescriptionProvider
+import com.lemonappdev.konsist.api.provider.KoKDocTagsProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.core.provider.KoKDocDescriptionProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocTagsProviderCore
@@ -10,9 +13,9 @@ import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
 internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) :
     KoKDocDeclaration,
-    KoTextProviderCore,
     KoKDocDescriptionProviderCore,
-    KoKDocTagsProviderCore {
+    KoKDocTagsProviderCore,
+    KoTextProviderCore {
     override val psiElement: PsiElement by lazy { kDocElement }
 
     override val text: String by lazy {

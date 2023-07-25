@@ -20,18 +20,18 @@ import com.lemonappdev.konsist.api.provider.KoTypeProvider
  * Represents a Kotlin parameter declaration.
  */
 interface KoParameterDeclaration :
-    KoContainingFileProvider,
-    KoLocationProvider,
-    KoNameProvider,
-    KoPathProvider,
-    KoTextProvider,
     KoBaseProvider,
     KoAnnotationProvider,
-    KoPackageProvider,
-    KoResideInOrOutsidePackageProvider,
+    KoContainingFileProvider,
     KoDeclarationFullyQualifiedNameProvider,
-    KoModifierProvider,
     KoDefaultValueProvider,
+    KoLocationProvider,
+    KoModifierProvider,
+    KoNameProvider,
+    KoPackageProvider,
     KoParentProvider,
-    KoTypeProvider,
-    KoRepresentsTypeProvider
+    KoPathProvider,
+    KoRepresentsTypeProvider,
+    KoResideInOrOutsidePackageProvider,
+    KoTextProvider,
+    KoTypeProvider

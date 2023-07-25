@@ -9,6 +9,6 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
  * Represents a Kotlin declaration.
  */
 interface KoKDocDeclaration :
-    KoTextProvider,
     KoKDocDescriptionProvider,
-    KoKDocTagsProvider
+    KoKDocTagsProvider,
+    KoTextProvider

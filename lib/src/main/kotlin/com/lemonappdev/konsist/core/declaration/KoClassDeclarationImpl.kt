@@ -3,8 +3,35 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoClassProvider
+import com.lemonappdev.konsist.api.provider.KoConstructorsProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoFunctionProvider
+import com.lemonappdev.konsist.api.provider.KoHasTestProvider
+import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
+import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoObjectProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
+import com.lemonappdev.konsist.api.provider.KoParentClassProvider
+import com.lemonappdev.konsist.api.provider.KoParentDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
+import com.lemonappdev.konsist.api.provider.KoPropertyProvider
+import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
+import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -47,35 +74,35 @@ internal class KoClassDeclarationImpl private constructor(
     override val ktClass: KtClass,
     override val parent: KoParentProvider?,
 ) : KoClassDeclaration,
+    KoBaseProviderCore,
+    KoAnnotationProviderCore,
+    KoClassProviderCore,
+    KoConstructorsProviderCore,
     KoContainingFileProviderCore,
+    KoDeclarationFullyQualifiedNameProviderCore,
+    KoDeclarationProviderCore,
+    KoFunctionProviderCore,
+    KoHasTestProviderCore,
+    KoInitBlockProviderCore,
+    KoInterfaceProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
+    KoModifierProviderCore,
     KoNameProviderCore,
+    KoObjectProviderCore,
+    KoPackageProviderCore,
+    KoParentClassProviderCore,
+    KoParentDeclarationProviderCore,
+    KoParentInterfaceProviderCore,
     KoParentProviderCore,
     KoPathProviderCore,
-    KoTextProviderCore,
-    KoBaseProviderCore,
-    KoDeclarationProviderCore,
-    KoClassProviderCore,
-    KoInterfaceProviderCore,
-    KoObjectProviderCore,
-    KoPropertyProviderCore,
-    KoFunctionProviderCore,
-    KoAnnotationProviderCore,
-    KoPackageProviderCore,
-    KoResideInOrOutsidePackageProviderCore,
-    KoDeclarationFullyQualifiedNameProviderCore,
-    KoModifierProviderCore,
-    KoTopLevelProviderCore,
-    KoRepresentsTypeProviderCore,
     KoPrimaryConstructorProviderCore,
-    KoParentDeclarationProviderCore,
-    KoParentClassProviderCore,
-    KoParentInterfaceProviderCore,
+    KoPropertyProviderCore,
+    KoRepresentsTypeProviderCore,
+    KoResideInOrOutsidePackageProviderCore,
     KoSecondaryConstructorsProviderCore,
-    KoConstructorsProviderCore,
-    KoHasTestProviderCore,
-    KoInitBlockProviderCore {
+    KoTextProviderCore,
+    KoTopLevelProviderCore {
     override val ktFile: KtFile? by lazy { null }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }

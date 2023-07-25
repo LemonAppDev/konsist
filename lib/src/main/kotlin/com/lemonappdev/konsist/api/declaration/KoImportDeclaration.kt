@@ -13,11 +13,11 @@ import com.lemonappdev.konsist.api.provider.KoWildcardProvider
  * Represents a Kotlin import declaration.
  */
 interface KoImportDeclaration :
+    KoBaseProvider,
     KoAliasProvider,
     KoContainingFileProvider,
     KoLocationProvider,
     KoNameProvider,
     KoPathProvider,
     KoTextProvider,
-    KoBaseProvider,
     KoWildcardProvider

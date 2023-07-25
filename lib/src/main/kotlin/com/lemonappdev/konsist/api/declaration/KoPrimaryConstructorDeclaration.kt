@@ -17,15 +17,15 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
  * Represents a Kotlin primary constructor declaration.
  */
 interface KoPrimaryConstructorDeclaration :
+    KoBaseProvider,
+    KoAnnotationProvider,
     KoConstructorProvider,
     KoContainingFileProvider,
     KoLocationProvider,
+    KoModifierProvider,
+    KoPackageProvider,
+    KoParametersProvider,
     KoParentProvider,
     KoPathProvider,
-    KoTextProvider,
-    KoBaseProvider,
-    KoAnnotationProvider,
-    KoPackageProvider,
     KoResideInOrOutsidePackageProvider,
-    KoModifierProvider,
-    KoParametersProvider
+    KoTextProvider

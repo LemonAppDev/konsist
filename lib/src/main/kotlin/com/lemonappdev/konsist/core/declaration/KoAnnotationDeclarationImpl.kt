@@ -2,7 +2,15 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -18,14 +26,14 @@ import org.jetbrains.kotlin.psi.KtElement
 internal class KoAnnotationDeclarationImpl private constructor(
     private val ktAnnotationEntry: KtAnnotationEntry,
 ) : KoAnnotationDeclaration,
+    KoBaseProviderCore,
     KoContainingFileProviderCore,
+    KoFullyQualifiedNameProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
     KoPathProviderCore,
-    KoTextProviderCore,
-    KoBaseProviderCore,
-    KoFullyQualifiedNameProviderCore,
-    KoRepresentsTypeProviderCore {
+    KoRepresentsTypeProviderCore,
+    KoTextProviderCore {
     override val psiElement: PsiElement by lazy { ktAnnotationEntry }
 
     override val ktElement: KtElement by lazy { ktAnnotationEntry }

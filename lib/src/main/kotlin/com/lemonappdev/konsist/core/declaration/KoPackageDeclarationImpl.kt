@@ -2,7 +2,15 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPackageMatchingFilePathProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -18,14 +26,14 @@ import org.jetbrains.kotlin.psi.KtPackageDirective
 
 internal class KoPackageDeclarationImpl private constructor(private val ktPackageDirective: KtPackageDirective) :
     KoPackageDeclaration,
+    KoBaseProviderCore,
     KoContainingFileProviderCore,
+    KoFullyQualifiedNameProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
+    KoPackageMatchingFilePathProviderCore,
     KoPathProviderCore,
-    KoTextProviderCore,
-    KoBaseProviderCore,
-    KoFullyQualifiedNameProviderCore,
-    KoPackageMatchingFilePathProviderCore {
+    KoTextProviderCore {
     override val psiElement: PsiElement by lazy { ktPackageDirective }
 
     override val ktElement: KtElement by lazy { ktPackageDirective }
