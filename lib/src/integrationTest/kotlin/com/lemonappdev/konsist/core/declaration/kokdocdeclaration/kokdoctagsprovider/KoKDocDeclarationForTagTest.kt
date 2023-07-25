@@ -19,11 +19,11 @@ class KoKDocDeclarationForTagTest {
     ) {
         // given
         val sut = (
-                getSnippetFile("tags")
-                    .declarations(includeNested = true)
-                    .filterIsInstance<KoNameProvider>()
-                    .first { it.name == declarationName } as KoKDocProvider
-                )
+            getSnippetFile("tags")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoNameProvider>()
+                .first { it.name == declarationName } as KoKDocProvider
+            )
             .kDoc
 
         // then

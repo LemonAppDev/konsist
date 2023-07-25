@@ -2,11 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
-import com.lemonappdev.konsist.api.provider.KoKDocDescriptionProvider
-import com.lemonappdev.konsist.api.provider.KoKDocTagsProvider
-import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.core.provider.KoKDocDescriptionProviderCore
-import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocTagsProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
