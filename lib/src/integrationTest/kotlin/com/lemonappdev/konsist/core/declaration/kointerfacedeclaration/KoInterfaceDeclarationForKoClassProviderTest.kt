@@ -1,13 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.kointerfacedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments.arguments
-import org.junit.jupiter.params.provider.MethodSource
 
 class KoInterfaceDeclarationForKoClassProviderTest {
     @Test
@@ -29,7 +25,7 @@ class KoInterfaceDeclarationForKoClassProviderTest {
             .first()
 
         // then
-        val expected = listOf( "SampleNestedClass", "SampleLocalClass")
+        val expected = listOf("SampleNestedClass", "SampleLocalClass")
 
         sut.classes(includeNested = true, includeLocal = true)
             .toList()
@@ -45,7 +41,7 @@ class KoInterfaceDeclarationForKoClassProviderTest {
             .first()
 
         // then
-        val expected = listOf( "SampleNestedClass")
+        val expected = listOf("SampleNestedClass")
 
         sut.classes(includeNested = true, includeLocal = false)
             .toList()
@@ -61,7 +57,7 @@ class KoInterfaceDeclarationForKoClassProviderTest {
             .first()
 
         // then
-        val expected = listOf( "SampleLocalClass")
+        val expected = listOf("SampleLocalClass")
 
         sut.classes(includeNested = false, includeLocal = true)
             .toList()
