@@ -1,6 +1,6 @@
 class SampleTopLevelClass {
     fun sampleFunction() {
-        fun sampleLocalFunction()
+        fun sampleLocalFunction() {}
     }
 
     class SampleClass {
