@@ -15,7 +15,7 @@ class KoPropertyDeclarationForKoTextProviderTest {
         // then
         sut
             .text
-            .shouldBeEqualTo("val sampleProperty = \"\"" )
+            .shouldBeEqualTo("val sampleProperty = \"\"")
     }
 
     private fun getSnippetFile(fileName: String) =

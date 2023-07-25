@@ -15,7 +15,7 @@ class KoTypeAliasDeclarationForKoTextProviderTest {
         // then
         sut
             .text
-            .shouldBeEqualTo("typealias SampleTypeAlias = () -> Int" )
+            .shouldBeEqualTo("typealias SampleTypeAlias = () -> Int")
     }
 
     private fun getSnippetFile(fileName: String) =

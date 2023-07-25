@@ -38,7 +38,7 @@ class KoSecondaryConstructorDeclarationForKoPathProviderTest {
             .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/kosecondaryconstructordeclaration/snippet/" +
-                        "forkopathprovider/secondary-constructor-project-file-path.kt",
+                    "forkopathprovider/secondary-constructor-project-file-path.kt",
             )
     }
 
@@ -75,7 +75,7 @@ class KoSecondaryConstructorDeclarationForKoPathProviderTest {
             it.resideInPath("..kosecondaryconstructordeclaration/snippet..", false) shouldBeEqualTo true
             it.resideInPath(
                 "..kosecondaryconstructordeclaration..secondary-constructor-reside-in-project-file-path.kt",
-                false
+                false,
             ) shouldBeEqualTo true
             it.resideInPath("kosecondaryconstructordeclaration/snippet/", false) shouldBeEqualTo false
         }

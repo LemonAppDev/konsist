@@ -1,10 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kotypealiasdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.provider.KoNameProvider
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoTypeAliasDeclarationForKoParentProviderTest {

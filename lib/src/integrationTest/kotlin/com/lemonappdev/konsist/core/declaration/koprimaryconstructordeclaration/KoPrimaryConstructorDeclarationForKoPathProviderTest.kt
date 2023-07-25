@@ -67,7 +67,10 @@ class KoPrimaryConstructorDeclarationForKoPathProviderTest {
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", false) shouldBeEqualTo true
             it?.resideInPath("..koprimaryconstructordeclaration/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..koprimaryconstructordeclaration..primary-constructor-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            it?.resideInPath(
+                "..koprimaryconstructordeclaration..primary-constructor-reside-in-project-file-path.kt",
+                false,
+            ) shouldBeEqualTo true
             it?.resideInPath("koprimaryconstructordeclaration/snippet/", false) shouldBeEqualTo false
         }
     }

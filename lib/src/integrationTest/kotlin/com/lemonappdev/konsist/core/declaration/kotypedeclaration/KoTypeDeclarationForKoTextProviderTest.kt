@@ -16,7 +16,7 @@ class KoTypeDeclarationForKoTextProviderTest {
         // then
         sut
             ?.text
-            .shouldBeEqualTo("String" )
+            .shouldBeEqualTo("String")
     }
 
     private fun getSnippetFile(fileName: String) =
