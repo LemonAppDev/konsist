@@ -9,19 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource
 
 class KoDeclarationForModifierWithConstructorTest {
     @ParameterizedTest
-    @MethodSource("provideValuesForPrimaryConstructorModifiers")
-    fun `primary-constructor-modifiers`(fileName: String) {
-        // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-
-        // then
-        sut?.modifiers?.toList() shouldBeEqualTo listOf(PRIVATE)
-    }
-
-    @ParameterizedTest
     @MethodSource("provideValuesForSecondaryConstructorModifiers")
     fun `secondary-constructor-modifiers`(fileName: String) {
         // given
@@ -39,15 +26,6 @@ class KoDeclarationForModifierWithConstructorTest {
         getSnippetKoScope("core/declaration/kodeclaration/snippet/formodifierwithconstructor/", fileName)
 
     companion object {
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValuesForPrimaryConstructorModifiers() = listOf(
-            arguments("primary-constructor-has-modifier"),
-            arguments("primary-constructor-has-modifiers-and-annotation-with-parameter"),
-            arguments("primary-constructor-has-modifiers-and-annotation-without-parameter"),
-            arguments("primary-constructor-has-modifiers-and-annotations"),
-        )
-
         @Suppress("unused")
         @JvmStatic
         fun provideValuesForSecondaryConstructorModifiers() = listOf(

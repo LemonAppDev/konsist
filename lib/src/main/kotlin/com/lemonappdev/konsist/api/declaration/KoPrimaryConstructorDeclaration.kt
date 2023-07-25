@@ -14,7 +14,6 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 
 /**
  * Represents a Kotlin primary constructor declaration.
@@ -22,7 +21,6 @@ import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 interface KoPrimaryConstructorDeclaration :
     KoConstructorProvider,
     KoContainingFileProvider,
-    KoKDocProvider,
     KoLocationProvider,
     KoParentProvider,
     KoPathProvider,
@@ -33,5 +31,4 @@ interface KoPrimaryConstructorDeclaration :
     KoResideInOrOutsidePackageProvider,
     KoDeclarationFullyQualifiedNameProvider,
     KoModifierProvider,
-    KoTopLevelProvider,
     KoParametersProvider

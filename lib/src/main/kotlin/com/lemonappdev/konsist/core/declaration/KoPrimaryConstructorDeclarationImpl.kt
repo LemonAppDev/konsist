@@ -35,7 +35,6 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
     KoPrimaryConstructorDeclaration,
     KoConstructorProviderCore,
     KoContainingFileProviderCore,
-    KoKDocProviderCore,
     KoLocationProviderCore,
     KoParentProviderCore,
     KoPathProviderCore,
@@ -46,7 +45,6 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
     KoResideInOrOutsidePackageProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoModifierProviderCore,
-    KoTopLevelProviderCore,
     KoParametersProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktPrimaryConstructor }
 
@@ -61,8 +59,6 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
     override val psiElement: PsiElement by lazy { ktPrimaryConstructor }
 
     override val ktElement: KtElement by lazy { ktPrimaryConstructor }
-
-    override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters.toList(), kDoc)
 
     override fun toString(): String {
         return locationWithText
