@@ -1,0 +1,6 @@
+interface SampleInterface {
+        class SampleClass {
+
+            inner class SampleNestedClass
+        }
+}

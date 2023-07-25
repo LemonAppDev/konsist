@@ -1,0 +1,10 @@
+object SampleObject {
+    object SampleObject {
+
+        class SampleNestedClass
+    }
+
+    fun sampleFunction() {
+        class SampleLocalClass
+    }
+}

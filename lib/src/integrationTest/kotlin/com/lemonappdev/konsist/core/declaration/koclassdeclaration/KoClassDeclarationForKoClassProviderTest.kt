@@ -21,26 +21,6 @@ class KoClassDeclarationForKoClassProviderTest {
         sut.classes(includeNested = true, includeLocal = true).toList() shouldBeEqualTo emptyList()
     }
 
-    @ParameterizedTest
-    @MethodSource("provideValues")
-    fun `class-contains-classes includeNested true includeLocal true`(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ) {
-        // given
-        val sut = getSnippetFile("class-contains-classes")
-            .classes()
-            .first()
-
-        // then
-        val expected = listOf("SampleClass")
-
-        sut.classes(includeNested = includeNested, includeLocal = includeLocal)
-            .toList()
-            .map { it.name }
-            .shouldBeEqualTo(expected)
-    }
-
     @Test
     fun `class-contains-nested-and-local-classes includeNested true includeLocal true`() {
         // given
@@ -125,15 +105,4 @@ class KoClassDeclarationForKoClassProviderTest {
 
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koclassdeclaration/snippet/forkoclassprovider/", fileName)
-
-    companion object {
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValues() = listOf(
-            arguments(true, true),
-            arguments(true, false),
-            arguments(false, true),
-            arguments(false, false),
-        )
-    }
 }
