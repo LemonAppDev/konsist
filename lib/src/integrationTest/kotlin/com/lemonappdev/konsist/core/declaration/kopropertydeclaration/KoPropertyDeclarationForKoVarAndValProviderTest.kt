@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoPropertyDeclarationForIsValTest {
+class KoPropertyDeclarationForKoVarAndValProviderTest {
     @Test
     fun `property-is-val`() {
         // given
@@ -27,6 +27,28 @@ class KoPropertyDeclarationForIsValTest {
         sut.isVal shouldBeEqualTo false
     }
 
+    @Test
+    fun `property-is-var`() {
+        // given
+        val sut = getSnippetFile("property-is-var")
+            .properties()
+            .first()
+
+        // then
+        sut.isVar shouldBeEqualTo true
+    }
+
+    @Test
+    fun `property-is-not-var`() {
+        // given
+        val sut = getSnippetFile("property-is-not-var")
+            .properties()
+            .first()
+
+        // then
+        sut.isVar shouldBeEqualTo false
+    }
+
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forisval/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forkovarandvalprovider/", fileName)
 }

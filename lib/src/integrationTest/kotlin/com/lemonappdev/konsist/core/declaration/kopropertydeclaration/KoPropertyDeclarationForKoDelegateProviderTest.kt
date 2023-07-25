@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoPropertyDeclarationForDelegateTest {
+class KoPropertyDeclarationForKoDelegateProviderTest {
     @Test
     fun `property-has-lazy-delegate`() {
         // given
@@ -38,5 +38,5 @@ class KoPropertyDeclarationForDelegateTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/fordelegate/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forkodelegateprovider/", fileName)
 }

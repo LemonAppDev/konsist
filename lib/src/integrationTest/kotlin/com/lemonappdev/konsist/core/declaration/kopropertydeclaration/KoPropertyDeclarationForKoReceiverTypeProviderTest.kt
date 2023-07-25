@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoPropertyDeclarationForReceiverTypeTest {
+class KoPropertyDeclarationForKoReceiverTypeProviderTest {
     @Test
     fun `property-without-receiver-type`() {
         // given
@@ -38,5 +38,5 @@ class KoPropertyDeclarationForReceiverTypeTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forreceivertype/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forkoreceivertypeprovider/", fileName)
 }
