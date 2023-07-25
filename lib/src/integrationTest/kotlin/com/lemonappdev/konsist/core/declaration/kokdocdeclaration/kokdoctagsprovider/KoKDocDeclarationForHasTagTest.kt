@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
+package com.lemonappdev.konsist.core.declaration.kokdocdeclaration.kokdoctagsprovider
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.SAMPLE
@@ -62,5 +62,6 @@ class KoKDocDeclarationForHasTagTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forhastag/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kokdocdeclaration/kokdoctagsprovider/snippet/forhastag/", fileName)
 }

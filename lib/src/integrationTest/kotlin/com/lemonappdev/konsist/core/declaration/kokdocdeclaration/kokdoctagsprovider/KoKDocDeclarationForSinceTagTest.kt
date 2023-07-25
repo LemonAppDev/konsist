@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
+package com.lemonappdev.konsist.core.declaration.kokdocdeclaration.kokdoctagsprovider
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.SINCE
@@ -19,11 +19,11 @@ class KoKDocDeclarationForSinceTagTest {
     ) {
         // given
         val sut = (
-            getSnippetFile(fileName)
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
-            )
+                getSnippetFile(fileName)
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
+                )
             .kDoc
 
         // then
@@ -33,7 +33,8 @@ class KoKDocDeclarationForSinceTagTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forsincetag/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kokdocdeclaration/kokdoctagsprovider/snippet/forsincetag/", fileName)
 
     companion object {
         @Suppress("unused")

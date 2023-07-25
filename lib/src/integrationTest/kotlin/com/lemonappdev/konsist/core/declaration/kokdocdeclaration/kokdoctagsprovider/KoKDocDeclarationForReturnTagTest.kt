@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
+package com.lemonappdev.konsist.core.declaration.kokdocdeclaration.kokdoctagsprovider
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.RETURN
@@ -22,5 +22,6 @@ class KoKDocDeclarationForReturnTagTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forreturntag/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kokdocdeclaration/kokdoctagsprovider/snippet/forreturntag/", fileName)
 }

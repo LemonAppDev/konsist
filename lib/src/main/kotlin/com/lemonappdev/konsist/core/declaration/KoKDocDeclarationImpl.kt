@@ -10,7 +10,6 @@ import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
 internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) :
     KoKDocDeclaration,
-    KoKDocProviderCore,
     KoTextProviderCore,
     KoKDocDescriptionProviderCore,
     KoKDocTagsProviderCore {

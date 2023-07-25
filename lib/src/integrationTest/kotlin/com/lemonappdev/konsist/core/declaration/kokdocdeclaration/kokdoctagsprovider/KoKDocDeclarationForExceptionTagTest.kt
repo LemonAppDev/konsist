@@ -1,19 +1,20 @@
-package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
+package com.lemonappdev.konsist.core.declaration.kokdocdeclaration.kokdoctagsprovider
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.KoKDocTag.VERSION
+import com.lemonappdev.konsist.api.KoKDocTag.EXCEPTION
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoKDocDeclarationForVersionTagTest {
+class KoKDocDeclarationForExceptionTagTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `version-tag`(
+    fun `exception-tag`(
         fileName: String,
         declarationName: String,
     ) {
@@ -28,19 +29,22 @@ class KoKDocDeclarationForVersionTagTest {
 
         // then
         assertSoftly(sut) {
-            it?.versionTag?.name shouldBeEqualTo VERSION
-            it?.versionTag?.description shouldBeEqualTo "1.2.3"
+            it?.exceptionTags?.shouldHaveSize(1)
+            it?.exceptionTags?.get(0)?.name shouldBeEqualTo EXCEPTION
+            it?.exceptionTags?.get(0)?.value shouldBeEqualTo "NullPointerException"
+            it?.exceptionTags?.get(0)?.description shouldBeEqualTo "Second sample description"
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forversiontag/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kokdocdeclaration/kokdoctagsprovider/snippet/forexceptiontag/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("class-with-version-tag", "SampleClass"),
-            arguments("function-with-version-tag", "sampleMethod"),
+            arguments("class-with-exception-tag", "SampleClass"),
+            arguments("function-with-exception-tag", "sampleMethod"),
         )
     }
 }

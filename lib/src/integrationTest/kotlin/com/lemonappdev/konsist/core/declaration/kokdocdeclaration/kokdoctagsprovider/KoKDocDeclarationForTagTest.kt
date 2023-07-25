@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
+package com.lemonappdev.konsist.core.declaration.kokdocdeclaration.kokdoctagsprovider
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
@@ -19,11 +19,11 @@ class KoKDocDeclarationForTagTest {
     ) {
         // given
         val sut = (
-            getSnippetFile("tags")
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
-            )
+                getSnippetFile("tags")
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
+                )
             .kDoc
 
         // then
@@ -76,7 +76,8 @@ class KoKDocDeclarationForTagTest {
             .shouldBeEqualTo("The first @property of the class.")
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/fortag/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kokdocdeclaration/kokdoctagsprovider/snippet/fortag/", fileName)
 
     companion object {
         @Suppress("unused")

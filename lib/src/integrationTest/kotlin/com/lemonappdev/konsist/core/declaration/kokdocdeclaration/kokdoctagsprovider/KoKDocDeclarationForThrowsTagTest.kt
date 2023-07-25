@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
+package com.lemonappdev.konsist.core.declaration.kokdocdeclaration.kokdoctagsprovider
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.THROWS
@@ -20,11 +20,11 @@ class KoKDocDeclarationForThrowsTagTest {
     ) {
         // given
         val sut = (
-            getSnippetFile(fileName)
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
-            )
+                getSnippetFile(fileName)
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
+                )
             .kDoc
 
         // then
@@ -36,7 +36,8 @@ class KoKDocDeclarationForThrowsTagTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forthrowstag/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kokdocdeclaration/kokdoctagsprovider/snippet/forthrowstag/", fileName)
 
     companion object {
         @Suppress("unused")

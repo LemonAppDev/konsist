@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.kokdocdeclaration
+package com.lemonappdev.konsist.core.declaration.kokdocdeclaration.kokdoctagsprovider
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.PARAM
@@ -25,11 +25,11 @@ class KoKDocDeclarationForParamTagTest {
     ) {
         // given
         val sut = (
-            getSnippetFile(fileName)
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
-                .first { it.name == declarationName } as KoKDocProvider
-            )
+                getSnippetFile(fileName)
+                    .declarations(includeNested = true)
+                    .filterIsInstance<KoNameProvider>()
+                    .first { it.name == declarationName } as KoKDocProvider
+                )
             .kDoc
 
         // then
@@ -44,7 +44,8 @@ class KoKDocDeclarationForParamTagTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forparamtag/", fileName)
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kokdocdeclaration/kokdoctagsprovider/snippet/forparamtag/", fileName)
 
     companion object {
         @Suppress("unused")
