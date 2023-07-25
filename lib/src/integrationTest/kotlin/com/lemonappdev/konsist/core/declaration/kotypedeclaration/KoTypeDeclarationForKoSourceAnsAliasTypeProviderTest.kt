@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeDeclarationForAliasTest {
+class KoTypeDeclarationForKoSourceAnsAliasTypeProviderTest {
     @Test
     fun `simple-type`() {
         // given
@@ -19,15 +19,16 @@ class KoTypeDeclarationForAliasTest {
 
         // then
         assertSoftly(sut) {
+            it?.sourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo null
             it?.isAlias() shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `nullable-simple-type`() {
+    fun `simple-nullable-type`() {
         // given
-        val sut = getSnippetFile("nullable-simple-type")
+        val sut = getSnippetFile("simple-nullable-type")
             .classes()
             .first()
             .primaryConstructor
@@ -37,6 +38,7 @@ class KoTypeDeclarationForAliasTest {
 
         // then
         assertSoftly(sut) {
+            it?.sourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo null
             it?.isAlias() shouldBeEqualTo false
         }
@@ -55,6 +57,7 @@ class KoTypeDeclarationForAliasTest {
 
         // then
         assertSoftly(sut) {
+            it?.sourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo "ImportAlias"
             it?.isAlias() shouldBeEqualTo true
         }
@@ -73,11 +76,12 @@ class KoTypeDeclarationForAliasTest {
 
         // then
         assertSoftly(sut) {
+            it?.sourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo "ImportAlias"
             it?.isAlias() shouldBeEqualTo true
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/foralias/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forkosourceandaliastypeprovider/", fileName)
 }

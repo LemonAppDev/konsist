@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoTypeDeclarationForIsNullableTest {
+class KoTypeDeclarationForKoNullableProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `is-nullable`(
@@ -27,7 +27,7 @@ class KoTypeDeclarationForIsNullableTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forisnullable/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forkonullableprovider/", fileName)
 
     companion object {
         @Suppress("unused")

@@ -6,10 +6,10 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoTypeDeclarationForNameTest {
+class KoTypeDeclarationForKoFullyQualifiedNameProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
-    fun `type-name`(
+    fun `fully-qualified-name`(
         fileName: String,
         value: String,
     ) {
@@ -23,22 +23,22 @@ class KoTypeDeclarationForNameTest {
             ?.type
 
         // then
-        sut?.name shouldBeEqualTo value
+        sut?.fullyQualifiedName shouldBeEqualTo value
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forname/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forkofullyqualifiednameprovider/", fileName)
 
     companion object {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("simple-type", "SampleType"),
-            arguments("simple-nullable-type", "SampleType?"),
-            arguments("simple-list-type", "List<SampleType?>"),
-            arguments("simple-nullable-list-type", "List<SampleType?>?"),
-            arguments("import-alias", "ImportAlias"),
-            arguments("nullable-import-alias", "ImportAlias?"),
+            arguments("simple-type", "com.lemonappdev.konsist.testdata.SampleType"),
+            arguments("simple-nullable-type", "com.lemonappdev.konsist.testdata.SampleType"),
+            arguments("simple-list-type", ""),
+            arguments("simple-nullable-list-type", ""),
+            arguments("import-alias", "com.lemonappdev.konsist.testdata.SampleType"),
+            arguments("nullable-import-alias", "com.lemonappdev.konsist.testdata.SampleType"),
         )
     }
 }

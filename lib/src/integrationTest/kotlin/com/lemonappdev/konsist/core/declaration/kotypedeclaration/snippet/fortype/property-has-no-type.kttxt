@@ -1,3 +1,0 @@
-object SampleObject {
-    val sampleProperty = 6
-}

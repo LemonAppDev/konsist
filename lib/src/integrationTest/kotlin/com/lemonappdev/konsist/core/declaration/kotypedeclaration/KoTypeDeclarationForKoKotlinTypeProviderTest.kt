@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoTypeDeclarationForIsKotlinTypeTest {
+class KoTypeDeclarationForKoKotlinTypeProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `is-kotlin-type`(
@@ -27,7 +27,7 @@ class KoTypeDeclarationForIsKotlinTypeTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/foriskotlintype/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forkokotlintypeprovider/", fileName)
 
     companion object {
         @Suppress("unused")
