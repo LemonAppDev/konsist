@@ -4,20 +4,23 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeAliasDeclarationForModifierTest {
+class KoTypeAliasDeclarationForKoTypeProviderTest {
     @Test
-    fun `typealias-has-actual-modifier`() {
+    fun `typealias`() {
         // given
-        val sut = getSnippetFile("typealias-has-actual-modifier")
+        val sut = getSnippetFile("typealias")
             .files
             .first()
             .typeAliases
             .first()
 
         // then
-        sut.hasActualModifier() shouldBeEqualTo true
+        sut
+            .type
+            .sourceType
+            .shouldBeEqualTo("() -> Int")
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealiasdeclaration/snippet/formodifier/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealiasdeclaration/snippet/forkotypeprovider/", fileName)
 }

@@ -1,0 +1,4 @@
+@Suppress
+typealias SampleTypeAlias = () -> Int
+
+class SampleClass1(val sampleProperty1: SampleTypeAlias)
