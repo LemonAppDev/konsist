@@ -1,4 +1,2 @@
-/**
- * Sample KDoc
- */
+@Suppress
 val sampleProperty = ""

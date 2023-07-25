@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.koobjectdeclaration
+package com.lemonappdev.konsist.core.declaration.kopropertydeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.assertSoftly
@@ -6,12 +6,12 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoObjectDeclarationForKoKDocProviderTest {
+class KoPropertyDeclarationForKoKDocProviderTest {
     @Test
-    fun `object-without-kdoc`() {
+    fun `property-without-kdoc`() {
         // given
-        val sut = getSnippetFile("object-without-kdoc")
-            .objects()
+        val sut = getSnippetFile("property-without-kdoc")
+            .properties()
             .first()
 
         // then
@@ -22,10 +22,10 @@ class KoObjectDeclarationForKoKDocProviderTest {
     }
 
     @Test
-    fun `object-with-kdoc`() {
+    fun `property-with-kdoc`() {
         // given
-        val sut = getSnippetFile("object-with-kdoc")
-            .objects()
+        val sut = getSnippetFile("property-with-kdoc")
+            .properties()
             .first()
 
         // then
@@ -36,10 +36,10 @@ class KoObjectDeclarationForKoKDocProviderTest {
     }
 
     @Test
-    fun `object-with-one-line-kdoc`() {
+    fun `property-with-one-line-kdoc`() {
         // given
-        val sut = getSnippetFile("object-with-one-line-kdoc")
-            .objects()
+        val sut = getSnippetFile("property-with-one-line-kdoc")
+            .properties()
             .first()
 
         // then
@@ -50,5 +50,5 @@ class KoObjectDeclarationForKoKDocProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koobjectdeclaration/snippet/forkokdocprovider/", fileName)
+        getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forkokdocprovider/", fileName)
 }

@@ -1,4 +1,2 @@
-/**
- * Sample KDoc
- */
+/** Sample KDoc */
 val sampleProperty = ""
