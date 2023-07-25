@@ -1,0 +1,10 @@
+object SampleObject {
+    val sampleProperty: String = ""
+    fun sampleFunction() {
+        val sampleLocalProperty = 6
+    }
+
+    class SampleClass {
+        val sampleNestedProperty = ""
+    }
+}
