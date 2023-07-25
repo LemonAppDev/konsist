@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.koparentdeclaration.snippet.forname
+package com.lemonappdev.konsist.core.declaration.koparentdeclaration.snippet.forkonameprovider
 
 interface SampleSuperInterface
 

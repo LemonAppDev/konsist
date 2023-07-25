@@ -14,12 +14,9 @@ import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 internal class KoParentDeclarationImpl private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
     KoParentDeclaration,
-    KoLocationProviderCore,
     KoNameProviderCore,
     KoBaseProviderCore,
     KoDelegateProviderCore {
-    override val psiElement: PsiElement by lazy { ktSuperTypeListEntry }
-
     override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
 
     override val name: String by lazy {
@@ -38,10 +35,6 @@ internal class KoParentDeclarationImpl private constructor(private val ktSuperTy
         } else {
             null
         }
-    }
-
-    override fun toString(): String {
-        return locationWithText
     }
 
     internal companion object {

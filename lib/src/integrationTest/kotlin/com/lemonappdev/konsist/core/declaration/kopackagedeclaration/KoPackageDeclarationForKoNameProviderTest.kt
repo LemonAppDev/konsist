@@ -28,20 +28,6 @@ class KoPackageDeclarationForKoNameProviderTest {
         sut.name shouldBeEqualTo "samplepackage"
     }
 
-    @Test
-    fun `package-has-qualified-name`() {
-        // given
-        val sut = getSnippetFile("package-has-qualified-name")
-            .packages
-
-        // then
-        sut
-            .map { it.fullyQualifiedName }
-            .toList()
-            .first()
-            .shouldBeEqualTo("com.samplepackage")
-    }
-
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kopackagedeclaration/snippet/forkonameprovider/", fileName)
 }

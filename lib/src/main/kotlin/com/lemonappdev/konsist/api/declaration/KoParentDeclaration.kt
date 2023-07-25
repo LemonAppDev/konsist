@@ -9,7 +9,6 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
  * Represents a Kotlin parent declaration.
  */
 interface KoParentDeclaration :
-    KoLocationProvider,
     KoNameProvider,
     KoBaseProvider,
     KoDelegateProvider

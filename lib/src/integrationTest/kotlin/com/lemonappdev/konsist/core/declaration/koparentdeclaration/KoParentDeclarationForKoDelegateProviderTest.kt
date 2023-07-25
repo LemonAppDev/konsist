@@ -5,26 +5,26 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoParentDeclarationForNameTest {
+class KoParentDeclarationForKoDelegateProviderTest {
     @Test
-    fun `class-with-parent-class`() {
+    fun `class-has-parent-class-without-delegate`() {
         // given
-        val sut = getSnippetFile("class-with-parent-class")
+        val sut = getSnippetFile("class-has-parent-class-without-delegate")
             .classes()
             .first()
             .parentClass
 
         // then
         assertSoftly(sut) {
-            it?.name shouldBeEqualTo "SampleSuperClass"
             it?.delegateName shouldBeEqualTo null
+            it?.hasDelegate() shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `class-with-parent-interface`() {
+    fun `class-has-parent-interface-without-delegate`() {
         // given
-        val sut = getSnippetFile("class-with-parent-interface")
+        val sut = getSnippetFile("class-has-parent-interface-without-delegate")
             .classes()
             .first()
             .parentInterfaces
@@ -32,15 +32,15 @@ class KoParentDeclarationForNameTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleSuperInterface"
             delegateName shouldBeEqualTo null
+            it.hasDelegate() shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `class-with-parent-by-delegation`() {
+    fun `class-has-parent-by-delegation`() {
         // given
-        val sut = getSnippetFile("class-with-parent-by-delegation")
+        val sut = getSnippetFile("class-has-parent-by-delegation")
             .classes()
             .first()
             .parentInterfaces
@@ -48,11 +48,13 @@ class KoParentDeclarationForNameTest {
 
         // then
         assertSoftly(sut) {
-            name shouldBeEqualTo "SampleSuperInterface"
             delegateName shouldBeEqualTo "sampleProperty"
+            hasDelegate() shouldBeEqualTo true
+            hasDelegate("sampleProperty") shouldBeEqualTo true
+            hasDelegate("sampleOtherProperty") shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koparentdeclaration/snippet/forname/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koparentdeclaration/snippet/forkodelegateprovider/", fileName)
 }
