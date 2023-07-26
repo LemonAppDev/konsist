@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFunctionDeclarationForKoDeclarationFullyQualifiedNameProviderTest {
+class KoFunctionDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
     fun `function-fully-qualified-name`() {
         // given

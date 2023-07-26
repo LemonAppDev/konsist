@@ -5,8 +5,8 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoClassProvider
 import com.lemonappdev.konsist.api.provider.KoConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
-import com.lemonappdev.konsist.api.provider.KoDeclarationFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoHasTestProvider
 import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
@@ -39,8 +39,8 @@ interface KoClassDeclaration :
     KoClassProvider,
     KoConstructorsProvider,
     KoContainingFileProvider,
-    KoDeclarationFullyQualifiedNameProvider,
     KoDeclarationProvider,
+    KoFullyQualifiedNameProvider,
     KoFunctionProvider,
     KoHasTestProvider,
     KoInitBlockProvider,
