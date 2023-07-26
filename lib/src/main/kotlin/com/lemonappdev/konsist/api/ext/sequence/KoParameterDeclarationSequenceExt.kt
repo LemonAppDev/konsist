@@ -47,31 +47,6 @@ fun Sequence<KoParameterDeclaration>.withCrossInlineModifier(): Sequence<KoParam
 fun Sequence<KoParameterDeclaration>.withoutCrossInlineModifier(): Sequence<KoParameterDeclaration> =
     filterNot { it.hasCrossInlineModifier() }
 
-/**
- * Sequence containing all parameters with default value.
- *
- * @param values The default values to include.
- * @return A sequence containing parameters with the specified default values (or any default value if [values] is empty).
- */
-fun Sequence<KoParameterDeclaration>.withDefaultValue(vararg values: String): Sequence<KoParameterDeclaration> = filter {
-    when {
-        values.isEmpty() -> it.hasDefaultValue()
-        else -> values.any { value -> it.hasDefaultValue(value) }
-    }
-}
-
-/**
- * Sequence containing all parameters without default value.
- *
- * @param values The default values to exclude.
- * @return A sequence containing parameters without the specified default values (or none default value if [values] is empty).
- */
-fun Sequence<KoParameterDeclaration>.withoutDefaultValue(vararg values: String): Sequence<KoParameterDeclaration> = filter {
-    when {
-        values.isEmpty() -> !it.hasDefaultValue()
-        else -> values.none { value -> it.hasDefaultValue(value) }
-    }
-}
 
 /**
  * Sequence containing all parameters with type.

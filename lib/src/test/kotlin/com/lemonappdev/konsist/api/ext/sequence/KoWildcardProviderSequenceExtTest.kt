@@ -1,21 +1,19 @@
-package com.lemonappdev.konsist.api.ext.sequence.koimportdeclaration
+package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withWildcard
-import com.lemonappdev.konsist.api.ext.sequence.withoutWildcard
-import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
+import com.lemonappdev.konsist.api.provider.KoWildcardProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoImportDeclarationForWildcardSequenceExtTest {
+class KoWildcardProviderSequenceExtTest {
     @Test
     fun `withWildcard() returns import with wildcard`() {
         // given
-        val import1: KoImportDeclarationImpl = mockk {
+        val import1: KoWildcardProvider = mockk {
             every { isWildcard } returns true
         }
-        val import2: KoImportDeclarationImpl = mockk {
+        val import2: KoWildcardProvider = mockk {
             every { isWildcard } returns false
         }
         val imports = sequenceOf(import1, import2)
@@ -30,10 +28,10 @@ class KoImportDeclarationForWildcardSequenceExtTest {
     @Test
     fun `withoutWildcard() returns import without wildcard`() {
         // given
-        val import1: KoImportDeclarationImpl = mockk {
+        val import1: KoWildcardProvider = mockk {
             every { isWildcard } returns true
         }
-        val import2: KoImportDeclarationImpl = mockk {
+        val import2: KoWildcardProvider = mockk {
             every { isWildcard } returns false
         }
         val imports = sequenceOf(import1, import2)

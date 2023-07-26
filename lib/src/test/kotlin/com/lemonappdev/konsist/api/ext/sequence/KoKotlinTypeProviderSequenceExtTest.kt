@@ -1,21 +1,19 @@
-package com.lemonappdev.konsist.api.ext.sequence.kotypedeclaration
+package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withKotlinType
-import com.lemonappdev.konsist.api.ext.sequence.withoutKotlinType
-import com.lemonappdev.konsist.core.declaration.KoTypeDeclarationImpl
+import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeDeclarationForIsKotlinTypeSequenceExtTest {
+class KoKotlinTypeProviderSequenceExtTest {
     @Test
     fun `withKotlinType() returns type with Kotlin basic type`() {
         // given
-        val type1: KoTypeDeclarationImpl = mockk {
+        val type1: KoKotlinTypeProvider = mockk {
             every { isKotlinType } returns true
         }
-        val type2: KoTypeDeclarationImpl = mockk {
+        val type2: KoKotlinTypeProvider = mockk {
             every { isKotlinType } returns false
         }
         val types = sequenceOf(type1, type2)
@@ -30,10 +28,10 @@ class KoTypeDeclarationForIsKotlinTypeSequenceExtTest {
     @Test
     fun `withoutKotlinType() returns type without Kotlin basic type`() {
         // given
-        val type1: KoTypeDeclarationImpl = mockk {
+        val type1: KoKotlinTypeProvider = mockk {
             every { isKotlinType } returns true
         }
-        val type2: KoTypeDeclarationImpl = mockk {
+        val type2: KoKotlinTypeProvider = mockk {
             every { isKotlinType } returns false
         }
         val types = sequenceOf(type1, type2)
