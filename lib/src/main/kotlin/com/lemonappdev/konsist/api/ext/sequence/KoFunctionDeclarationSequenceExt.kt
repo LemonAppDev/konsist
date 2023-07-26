@@ -5,20 +5,6 @@ import com.lemonappdev.konsist.api.ext.provider.hasReceiverTypeOf
 import kotlin.reflect.KClass
 
 /**
- * Sequence containing functions that are extensions.
- *
- * @return A sequence containing functions that are extensions.
- */
-fun Sequence<KoFunctionDeclaration>.withExtension(): Sequence<KoFunctionDeclaration> = filter { it.isExtension() }
-
-/**
- * Sequence containing functions that are not extensions.
- *
- * @return A sequence containing functions that are not extensions.
- */
-fun Sequence<KoFunctionDeclaration>.withoutExtension(): Sequence<KoFunctionDeclaration> = filterNot { it.isExtension() }
-
-/**
  * Sequence containing functions with receiver type.
  *
  * @param types The receiver type(s) to include.
