@@ -4,34 +4,6 @@ import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import kotlin.reflect.KClass
 
 /**
- * Sequence containing all classes that have primary constructor.
- *
- * @return A sequence containing classes with primary constructor.
- */
-fun Sequence<KoClassDeclaration>.withPrimaryConstructor(): Sequence<KoClassDeclaration> = filter { it.hasPrimaryConstructor() }
-
-/**
- * Sequence containing all classes that don't have primary constructor.
- *
- * @return A sequence containing classes without primary constructor.
- */
-fun Sequence<KoClassDeclaration>.withoutPrimaryConstructor(): Sequence<KoClassDeclaration> = filterNot { it.hasPrimaryConstructor() }
-
-/**
- * Sequence containing all classes that have secondary constructors.
- *
- * @return A sequence containing classes with secondary constructor(s).
- */
-fun Sequence<KoClassDeclaration>.withSecondaryConstructors(): Sequence<KoClassDeclaration> = filter { it.hasSecondaryConstructors() }
-
-/**
- * Sequence containing all classes that don't have secondary constructors.
- *
- * @return A sequence containing classes without secondary constructor(s).
- */
-fun Sequence<KoClassDeclaration>.withoutSecondaryConstructors(): Sequence<KoClassDeclaration> = filterNot { it.hasSecondaryConstructors() }
-
-/**
  * Sequence containing all classes with class or interface parent.
  *
  * @return A sequence containing classes with class or interface parent.
@@ -395,17 +367,3 @@ fun Sequence<KoClassDeclaration>.withParentClassOf(vararg names: KClass<*>): Seq
 fun Sequence<KoClassDeclaration>.withoutParentClassOf(vararg names: KClass<*>): Sequence<KoClassDeclaration> = filter {
     names.none { kClass -> it.hasParentClass(kClass.simpleName) }
 }
-
-/**
- * Sequence containing all classes that have init block(s).
- *
- * @return A sequence containing classes with the init block(s).
- */
-fun Sequence<KoClassDeclaration>.withInitBlocks(): Sequence<KoClassDeclaration> = filter { it.hasInitBlocks() }
-
-/**
- * Sequence containing all classes that don't have init block(s).
- *
- * @return A sequence containing classes without the init block(s).
- */
-fun Sequence<KoClassDeclaration>.withoutInitBlocks(): Sequence<KoClassDeclaration> = filterNot { it.hasInitBlocks() }
