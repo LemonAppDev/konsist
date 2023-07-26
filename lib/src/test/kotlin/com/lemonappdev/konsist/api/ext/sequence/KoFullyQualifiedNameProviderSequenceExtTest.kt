@@ -1,6 +1,4 @@
-
-import com.lemonappdev.konsist.api.ext.sequence.withFullyQualifiedName
-import com.lemonappdev.konsist.api.ext.sequence.withoutFullyQualifiedName
+package com.lemonappdev.konsist.api.ext.sequence
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import io.mockk.every
 import io.mockk.mockk
