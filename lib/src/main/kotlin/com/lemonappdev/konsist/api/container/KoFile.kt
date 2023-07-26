@@ -22,22 +22,22 @@ import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
  * Represents a file declaration.
  */
 interface KoFile :
-    KoDeclarationProvider,
-    KoClassProvider,
-    KoInterfaceProvider,
-    KoObjectProvider,
-    KoPropertyProvider,
-    KoFunctionProvider,
-    KoNameProvider,
-    KoPathProvider,
-    KoTextProvider,
     KoAnnotationProvider,
+    KoClassProvider,
+    KoDeclarationProvider,
     KoFileExtensionProvider,
-    KoModuleProvider,
-    KoSourceSetProvider,
-    KoPackageProvider,
+    KoFunctionProvider,
     KoHasPackageProvider,
     KoImportProvider,
+    KoInterfaceProvider,
+    KoModuleProvider,
+    KoNameProvider,
+    KoObjectProvider,
+    KoPackageProvider,
+    KoPathProvider,
+    KoPropertyProvider,
+    KoSourceSetProvider,
+    KoTextProvider,
     KoTypeAliasProvider {
 
     /**
