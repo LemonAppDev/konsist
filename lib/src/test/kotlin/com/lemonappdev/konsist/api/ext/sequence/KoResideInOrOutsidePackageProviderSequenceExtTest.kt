@@ -1,7 +1,5 @@
-package com.lemonappdev.konsist.api.ext.sequence.kodeclaration
+package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withPackage
-import com.lemonappdev.konsist.api.ext.sequence.withoutPackage
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import io.mockk.every
@@ -9,7 +7,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoDeclarationForPackageSequenceExtTest {
+class KoResideInOrOutsidePackageProviderSequenceExtTest {
     @Test
     fun `withPackage() returns declaration reside in any package`() {
         // given

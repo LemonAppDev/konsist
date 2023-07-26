@@ -1,14 +1,12 @@
-package com.lemonappdev.konsist.api.ext.sequence.kodeclaration
+package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withTopLevel
-import com.lemonappdev.konsist.api.ext.sequence.withoutTopLevel
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoDeclarationForTopLevelSequenceExtTest {
+class KoTopLevelProviderSequenceExtTest {
     @Test
     fun `withTopLevel() returns declaration which is top level declaration`() {
         // given

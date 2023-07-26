@@ -1,23 +1,7 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
-import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
-
-/**
- * Sequence containing the top level declarations.
- *
- * @return A sequence containing the top-level declarations.
- */
-fun <T : KoTopLevelProvider> Sequence<T>.withTopLevel(): Sequence<T> = filter { it.isTopLevel() }
-
-/**
- * Sequence containing the non-top level declarations.
- *
- * @return A sequence containing the non-top level declarations.
- */
-fun <T : KoTopLevelProvider> Sequence<T>.withoutTopLevel(): Sequence<T> = filterNot { it.isTopLevel() }
 
 /**
  * Sequence containing declarations with package.
@@ -43,14 +27,4 @@ fun <T : KoResideInOrOutsidePackageProvider> Sequence<T>.withoutPackage(vararg p
         packages.isEmpty() -> (it as KoResideInOrOutsidePackageProviderCore).packagee == null
         else -> packages.all { packagee -> it.resideOutsidePackage(packagee) }
     }
-}
-
-/**
- * Print the declarations.
- *
- * @return The original sequence of declarations.
- */
-fun <T : KoTextProvider> Sequence<T>.print(): Sequence<T> {
-    forEach { println(it.toString()) }
-    return this
 }
