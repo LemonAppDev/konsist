@@ -1,5 +1,8 @@
 package com.lemonappdev.konsist.api
 
+import com.lemonappdev.konsist.api.KoKDocTag.PARAM
+import com.lemonappdev.konsist.api.KoKDocTag.RECEIVER
+import com.lemonappdev.konsist.api.KoKDocTag.RETURN
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.verify.assert
 import org.junit.jupiter.api.Test
@@ -25,8 +28,7 @@ class ApiKonsistTest {
         apiPackageScope
             .functions(includeNested = true, includeLocal = true)
             .assert {
-                it.hasValidKDoc(verifyParamTag = true, verifyReturnTag = true) ||
-                    it.hasValidKDoc(verifyParamTag = true, verifyReturnTag = true, verifyReceiverTag = true)
+                it.kDoc?.hasTags(PARAM, RETURN, RECEIVER) == true || it.kDoc?.hasTags(PARAM, RETURN) == true
             }
     }
 

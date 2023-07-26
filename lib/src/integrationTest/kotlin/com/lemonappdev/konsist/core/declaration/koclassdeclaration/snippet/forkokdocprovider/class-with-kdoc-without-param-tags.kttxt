@@ -1,4 +1,0 @@
-/**
- * @since 1.0.0
- */
-class SampleClass2( val sampleProperty1: String, val sampleProperty2: Int)

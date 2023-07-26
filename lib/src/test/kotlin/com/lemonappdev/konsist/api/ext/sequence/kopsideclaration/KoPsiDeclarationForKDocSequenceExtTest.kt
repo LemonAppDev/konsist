@@ -6,12 +6,10 @@ import com.lemonappdev.konsist.api.ext.sequence.withKDoc
 import com.lemonappdev.konsist.api.ext.sequence.withKDocWithAllTags
 import com.lemonappdev.konsist.api.ext.sequence.withKDocWithSomeTags
 import com.lemonappdev.konsist.api.ext.sequence.withKDocWithTags
-import com.lemonappdev.konsist.api.ext.sequence.withValidKDoc
 import com.lemonappdev.konsist.api.ext.sequence.withoutKDoc
 import com.lemonappdev.konsist.api.ext.sequence.withoutKDocWithAllTags
 import com.lemonappdev.konsist.api.ext.sequence.withoutKDocWithSomeTags
 import com.lemonappdev.konsist.api.ext.sequence.withoutKDocWithTags
-import com.lemonappdev.konsist.api.ext.sequence.withoutValidKDoc
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationImpl
 import io.mockk.every
@@ -51,42 +49,6 @@ class KoPsiDeclarationForKDocSequenceExtTest {
 
         // when
         val sut = psiDeclarations.withoutKDoc()
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration2)
-    }
-
-    @Test
-    fun `withValidDoc() returns psiDeclaration with complete kDoc`() {
-        // given
-        val psiDeclaration1: KoKDocProvider = mockk {
-            every { hasValidKDoc(verifyDescription = true, verifyParamTag = true) } returns true
-        }
-        val psiDeclaration2: KoKDocProvider = mockk {
-            every { hasValidKDoc(verifyDescription = true, verifyParamTag = true) } returns false
-        }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
-
-        // when
-        val sut = psiDeclarations.withValidKDoc(verifyDescription = true, verifyParamTag = true)
-
-        // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration1)
-    }
-
-    @Test
-    fun `withoutValidDoc() returns psiDeclaration without complete kDoc`() {
-        // given
-        val psiDeclaration1: KoKDocProvider = mockk {
-            every { hasValidKDoc(verifyDescription = true, verifyParamTag = true) } returns true
-        }
-        val psiDeclaration2: KoKDocProvider = mockk {
-            every { hasValidKDoc(verifyDescription = true, verifyParamTag = true) } returns false
-        }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
-
-        // when
-        val sut = psiDeclarations.withoutValidKDoc(verifyDescription = true, verifyParamTag = true)
 
         // then
         sut.toList() shouldBeEqualTo listOf(psiDeclaration2)

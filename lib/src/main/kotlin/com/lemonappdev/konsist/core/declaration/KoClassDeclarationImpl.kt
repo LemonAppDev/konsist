@@ -36,7 +36,6 @@ import com.lemonappdev.konsist.core.provider.KoSecondaryConstructorsProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
-import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtElement
@@ -87,9 +86,6 @@ internal class KoClassDeclarationImpl private constructor(
     override val psiElement: PsiElement by lazy { ktClass }
 
     override val ktElement: KtElement by lazy { ktClass }
-
-    override fun hasValidParamTag(enabled: Boolean): Boolean =
-        TagUtil.hasValidParamTag(enabled, primaryConstructor?.parameters?.toList(), kDoc)
 
     override fun declarations(
         includeNested: Boolean,

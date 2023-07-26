@@ -18,7 +18,6 @@ import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import com.lemonappdev.konsist.core.util.TagUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
@@ -57,8 +56,6 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
     override val psiElement: PsiElement by lazy { ktSecondaryConstructor }
 
     override val ktElement: KtElement by lazy { ktSecondaryConstructor }
-
-    override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, parameters.toList(), kDoc)
 
     override fun toString(): String {
         return locationWithText
