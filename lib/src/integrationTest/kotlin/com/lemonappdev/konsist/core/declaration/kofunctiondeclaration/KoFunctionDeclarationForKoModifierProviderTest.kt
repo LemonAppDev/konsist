@@ -95,9 +95,9 @@ class KoFunctionDeclarationForKoModifierProviderTest {
     }
 
     @Test
-    fun `function-has-public-visibility-modifier`() {
+    fun `function-has-public-modifier`() {
         // given
-        val sut = getSnippetFile("function-has-public-visibility-modifier")
+        val sut = getSnippetFile("function-has-public-modifier")
             .functions(includeNested = true)
             .first()
 
@@ -120,9 +120,9 @@ class KoFunctionDeclarationForKoModifierProviderTest {
     }
 
     @Test
-    fun `function-has-private-visibility-modifier`() {
+    fun `function-has-private-modifier`() {
         // given
-        val sut = getSnippetFile("function-has-private-visibility-modifier")
+        val sut = getSnippetFile("function-has-private-modifier")
             .functions(includeNested = true)
             .first()
 
@@ -131,9 +131,9 @@ class KoFunctionDeclarationForKoModifierProviderTest {
     }
 
     @Test
-    fun `function-has-protected-visibility-modifier`() {
+    fun `function-has-protected-modifier`() {
         // given
-        val sut = getSnippetFile("function-has-protected-visibility-modifier")
+        val sut = getSnippetFile("function-has-protected-modifier")
             .functions(includeNested = true)
             .first()
 
@@ -142,9 +142,9 @@ class KoFunctionDeclarationForKoModifierProviderTest {
     }
 
     @Test
-    fun `function-has-internal-visibility-modifier`() {
+    fun `function-has-internal-modifier`() {
         // given
-        val sut = getSnippetFile("function-has-internal-visibility-modifier")
+        val sut = getSnippetFile("function-has-internal-modifier")
             .functions(includeNested = true)
             .first()
 
