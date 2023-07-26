@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoExplicitTypeProvider
 import kotlin.reflect.KClass
 
@@ -10,7 +9,7 @@ import kotlin.reflect.KClass
  * @param types The type(s) to include.
  * @return A sequence containing declarations with the specified type (or any type if [types] is empty).
  */
-fun <T: KoExplicitTypeProvider> Sequence<T>.withExplicitType(vararg types: String): Sequence<T> = filter {
+fun <T : KoExplicitTypeProvider> Sequence<T>.withExplicitType(vararg types: String): Sequence<T> = filter {
     when {
         types.isEmpty() -> it.hasExplicitType()
         else -> types.any { type -> it.hasExplicitType(type) }
@@ -23,7 +22,7 @@ fun <T: KoExplicitTypeProvider> Sequence<T>.withExplicitType(vararg types: Strin
  * @param types The type(s) to exclude.
  * @return A sequence containing declarations without specified type (or none type if [types] is empty).
  */
-fun <T: KoExplicitTypeProvider> Sequence<T>.withoutExplicitType(vararg types: String): Sequence<T> = filter {
+fun <T : KoExplicitTypeProvider> Sequence<T>.withoutExplicitType(vararg types: String): Sequence<T> = filter {
     when {
         types.isEmpty() -> !it.hasExplicitType()
         else -> types.none { type -> it.hasExplicitType(type) }
@@ -36,7 +35,7 @@ fun <T: KoExplicitTypeProvider> Sequence<T>.withoutExplicitType(vararg types: St
  * @param types The Kotlin class(es) representing the type(s) to include.
  * @return A sequence containing declarations with the type of the specified Kotlin class(es).
  */
-fun <T: KoExplicitTypeProvider> Sequence<T>.withExplicitTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoExplicitTypeProvider> Sequence<T>.withExplicitTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.any { kClass -> it.explicitType?.name == kClass.simpleName }
 }
 
@@ -46,7 +45,7 @@ fun <T: KoExplicitTypeProvider> Sequence<T>.withExplicitTypeOf(vararg types: KCl
  * @param types The Kotlin class(es) representing the type(s) to exclude.
  * @return A sequence containing declarations without type of the specified Kotlin class(es).
  */
-fun <T: KoExplicitTypeProvider> Sequence<T>.withoutExplicitTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoExplicitTypeProvider> Sequence<T>.withoutExplicitTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.none { kClass -> it.explicitType?.name == kClass.simpleName }
 }
 

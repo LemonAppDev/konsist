@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.provider.KoImplementationProvider
 
-
 /**
  * Sequence containing declarations that have implementation.
  *

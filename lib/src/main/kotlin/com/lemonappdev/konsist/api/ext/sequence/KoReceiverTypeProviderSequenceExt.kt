@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.ext.provider.hasReceiverTypeOf
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import kotlin.reflect.KClass
@@ -11,7 +10,7 @@ import kotlin.reflect.KClass
  * @param types The receiver type(s) to include.
  * @return A sequence containing declarations with the specified receiver type(s) (or any receiver type if [types] is empty).
  */
-fun <T: KoReceiverTypeProvider> Sequence<T>.withReceiverType(vararg types: String): Sequence<T> = filter {
+fun <T : KoReceiverTypeProvider> Sequence<T>.withReceiverType(vararg types: String): Sequence<T> = filter {
     when {
         types.isEmpty() -> it.hasReceiverType()
         else -> types.any { type -> it.hasReceiverType(type) }
@@ -24,7 +23,7 @@ fun <T: KoReceiverTypeProvider> Sequence<T>.withReceiverType(vararg types: Strin
  * @param types The receiver type(s) to exclude.
  * @return A sequence containing declarations without specified receiver type(s) (or none receiver type if [types] is empty).
  */
-fun <T: KoReceiverTypeProvider> Sequence<T>.withoutReceiverType(vararg types: String): Sequence<T> = filter {
+fun <T : KoReceiverTypeProvider> Sequence<T>.withoutReceiverType(vararg types: String): Sequence<T> = filter {
     when {
         types.isEmpty() -> !it.hasReceiverType()
         else -> types.none { type -> it.hasReceiverType(type) }
@@ -53,7 +52,7 @@ inline fun <reified T> Sequence<KoReceiverTypeProvider>.withoutReceiverTypeOf():
  * @param types The Kotlin class(es) representing the receiver type(s) to include.
  * @return A sequence containing declarations with the receiver type of the specified Kotlin class(es).
  */
-fun <T: KoReceiverTypeProvider> Sequence<T>.withReceiverTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoReceiverTypeProvider> Sequence<T>.withReceiverTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.any { kClass -> it.hasReceiverType(kClass.simpleName) }
 }
 
@@ -63,6 +62,6 @@ fun <T: KoReceiverTypeProvider> Sequence<T>.withReceiverTypeOf(vararg types: KCl
  * @param types The Kotlin class(es) representing the receiver type(s) to exclude.
  * @return A sequence containing declarations without receiver type of the specified Kotlin class(es).
  */
-fun <T: KoReceiverTypeProvider> Sequence<T>.withoutReceiverTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoReceiverTypeProvider> Sequence<T>.withoutReceiverTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.none { kClass -> it.hasReceiverType(kClass.simpleName) }
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class KoPathProviderSequenceExtTest {
     @Test
-    fun `withFilePath() returns declaration with given path`() {
+    fun `withPath() returns declaration with given path`() {
         // given
         val path = "com/sample/samplepath.."
         val declaration1: KoPathProvider = mockk {
@@ -20,14 +20,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withFilePath(path)
+        val sut = declarations.withPath(path)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutFilePath() returns declaration without given path`() {
+    fun `withoutPath() returns declaration without given path`() {
         // given
         val path = "com/sample/samplepath.."
         val declaration1: KoPathProvider = mockk {
@@ -39,14 +39,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutFilePath(path)
+        val sut = declarations.withoutPath(path)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withFilePath() with absolute path 'true' returns declarations with one of given paths`() {
+    fun `withPath() with absolute path 'true' returns declarations with one of given paths`() {
         // given
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
@@ -65,14 +65,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withFilePath(path1, path2, absolutePath = true)
+        val sut = declarations.withPath(path1, path2, absolutePath = true)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
-    fun `withoutFilePath() with absolute path 'true' returns declaration without any of given path`() {
+    fun `withoutPath() with absolute path 'true' returns declaration without any of given path`() {
         // given
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
@@ -91,14 +91,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutFilePath(path1, path2, absolutePath = true)
+        val sut = declarations.withoutPath(path1, path2, absolutePath = true)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
-    fun `withFilePath(String) with absolute path 'false' returns declarations with one of given project paths`() {
+    fun `withPath(String) with absolute path 'false' returns declarations with one of given project paths`() {
         // given
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
@@ -117,14 +117,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withFilePath(projectPath1, projectPath2, absolutePath = false)
+        val sut = declarations.withPath(projectPath1, projectPath2, absolutePath = false)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
-    fun `withoutFilePath(String) with absolute path 'false' returns declaration without any of given project paths`() {
+    fun `withoutPath(String) with absolute path 'false' returns declaration without any of given project paths`() {
         // given
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
@@ -143,14 +143,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutFilePath(projectPath1, projectPath2, absolutePath = false)
+        val sut = declarations.withoutPath(projectPath1, projectPath2, absolutePath = false)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
-    fun `withAbsoluteFilePath(String) returns declaration with given path`() {
+    fun `withAbsolutePath(String) returns declaration with given path`() {
         // given
         val path = "com/sample/samplepath.."
         val declaration1: KoPathProvider = mockk {
@@ -162,14 +162,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withAbsoluteFilePath(path)
+        val sut = declarations.withAbsolutePath(path)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutAbsoluteFilePath(String) returns declaration without given path`() {
+    fun `withoutAbsolutePath(String) returns declaration without given path`() {
         // given
         val path = "com/sample/samplepath.."
         val declaration1: KoPathProvider = mockk {
@@ -181,14 +181,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutAbsoluteFilePath(path)
+        val sut = declarations.withoutAbsolutePath(path)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withAbsoluteFilePath(String) returns declarations with one of given paths`() {
+    fun `withAbsolutePath(String) returns declarations with one of given paths`() {
         // given
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
@@ -207,14 +207,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withAbsoluteFilePath(path1, path2)
+        val sut = declarations.withAbsolutePath(path1, path2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
-    fun `withoutAbsoluteFilePath(String) returns declaration without any of given path`() {
+    fun `withoutAbsolutePath(String) returns declaration without any of given path`() {
         // given
         val path1 = "com/sample/samplepath1.."
         val path2 = "..samplepath2"
@@ -233,14 +233,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutAbsoluteFilePath(path1, path2)
+        val sut = declarations.withoutAbsolutePath(path1, path2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
-    fun `withProjectFilePath(String) returns declaration with given project path`() {
+    fun `withProjectPath(String) returns declaration with given project path`() {
         // given
         val projectPath = "com/sample/sampleProjectPath.."
         val declaration1: KoPathProvider = mockk {
@@ -252,14 +252,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withProjectFilePath(projectPath)
+        val sut = declarations.withProjectPath(projectPath)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutProjectFilePath(String) returns declaration without given project path`() {
+    fun `withoutProjectPath(String) returns declaration without given project path`() {
         // given
         val projectPath = "com/sample/sampleProjectPath.."
         val declaration1: KoPathProvider = mockk {
@@ -271,14 +271,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withoutProjectFilePath(projectPath)
+        val sut = declarations.withoutProjectPath(projectPath)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withProjectFilePath(String) returns declarations with one of given project paths`() {
+    fun `withProjectPath(String) returns declarations with one of given project paths`() {
         // given
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
@@ -297,14 +297,14 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withProjectFilePath(projectPath1, projectPath2)
+        val sut = declarations.withProjectPath(projectPath1, projectPath2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
-    fun `withoutProjectFilePath(String) returns declaration without any of given project paths`() {
+    fun `withoutProjectPath(String) returns declaration without any of given project paths`() {
         // given
         val projectPath1 = "com/sample/sampleProjectPath1.."
         val projectPath2 = "..sampleProjectPath2"
@@ -323,7 +323,7 @@ class KoPathProviderSequenceExtTest {
         val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = declarations.withoutProjectFilePath(projectPath1, projectPath2)
+        val sut = declarations.withoutProjectPath(projectPath1, projectPath2)
 
         // then
         sut.toList() shouldBeEqualTo listOf(declaration3)

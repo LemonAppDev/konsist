@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
  * @param types The return type(s) to include.
  * @return A sequence containing declarations with the specified return type(s) (or any return type if [types] is empty).
  */
-fun <T: KoExplicitReturnTypeProvider> Sequence<T>.withExplicitReturnType(vararg types: String): Sequence<T> = filter {
+fun <T : KoExplicitReturnTypeProvider> Sequence<T>.withExplicitReturnType(vararg types: String): Sequence<T> = filter {
     when {
         types.isEmpty() -> it.hasExplicitReturnType()
         else -> types.any { type -> it.explicitReturnType?.name == type }
@@ -22,7 +22,7 @@ fun <T: KoExplicitReturnTypeProvider> Sequence<T>.withExplicitReturnType(vararg 
  * @param types The return type(s) to exclude.
  * @return A sequence containing declarations without specified return type(s) (or none return type if [types] is empty).
  */
-fun <T: KoExplicitReturnTypeProvider> Sequence<T>.withoutExplicitReturnType(vararg types: String): Sequence<T> = filter {
+fun <T : KoExplicitReturnTypeProvider> Sequence<T>.withoutExplicitReturnType(vararg types: String): Sequence<T> = filter {
     when {
         types.isEmpty() -> !it.hasExplicitReturnType()
         else -> types.none { type -> it.explicitReturnType?.name == type }
@@ -51,7 +51,7 @@ inline fun <reified T> Sequence<KoExplicitReturnTypeProvider>.withoutExplicitRet
  * @param types The Kotlin class(es) representing the return type(s) to include.
  * @return A sequence containing declarations with the return type of the specified Kotlin class(es).
  */
-fun <T: KoExplicitReturnTypeProvider> Sequence<T>.withExplicitReturnTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoExplicitReturnTypeProvider> Sequence<T>.withExplicitReturnTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.any { kClass -> it.explicitReturnType?.name == kClass.simpleName }
 }
 
@@ -61,6 +61,6 @@ fun <T: KoExplicitReturnTypeProvider> Sequence<T>.withExplicitReturnTypeOf(varar
  * @param types The Kotlin class(es) representing the return type(s) to exclude.
  * @return A sequence containing declarations without return type of the specified Kotlin class(es).
  */
-fun <T: KoExplicitReturnTypeProvider> Sequence<T>.withoutExplicitReturnTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoExplicitReturnTypeProvider> Sequence<T>.withoutExplicitReturnTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.none { kClass -> it.explicitReturnType?.name == kClass.simpleName }
 }

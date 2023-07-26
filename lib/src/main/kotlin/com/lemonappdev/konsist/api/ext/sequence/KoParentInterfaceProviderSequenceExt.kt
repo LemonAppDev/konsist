@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
  *
  * @return A sequence containing declarations with any parent interface.
  */
-fun <T: KoParentInterfaceProvider> Sequence<T>.withParentInterfaces(): Sequence<T> = filter { it.hasParentInterfaces() }
+fun <T : KoParentInterfaceProvider> Sequence<T>.withParentInterfaces(): Sequence<T> = filter { it.hasParentInterfaces() }
 
 /**
  * Sequence containing all declarations with all specified parent interfaces of type.
@@ -17,7 +17,7 @@ fun <T: KoParentInterfaceProvider> Sequence<T>.withParentInterfaces(): Sequence<
  * @param names The name(s) of the parent interface(s) to include.
  * @return A sequence containing declarations with all the specified parent interface(s).
  */
-fun <T: KoParentInterfaceProvider> Sequence<T>.withAllParentInterfaces(name: String, vararg names: String): Sequence<T> = filter {
+fun <T : KoParentInterfaceProvider> Sequence<T>.withAllParentInterfaces(name: String, vararg names: String): Sequence<T> = filter {
     it.hasParentInterfaces(name, *names)
 }
 
@@ -28,7 +28,7 @@ fun <T: KoParentInterfaceProvider> Sequence<T>.withAllParentInterfaces(name: Str
  * @param names The names of the parent interfaces to include.
  * @return A sequence containing declarations with at least one of the specified parent interface(s).
  */
-fun <T: KoParentInterfaceProvider> Sequence<T>.withSomeParentInterfaces(name: String, vararg names: String): Sequence<T> =
+fun <T : KoParentInterfaceProvider> Sequence<T>.withSomeParentInterfaces(name: String, vararg names: String): Sequence<T> =
     filter { it.hasParentInterfaces(name) || names.any { name -> it.hasParentInterfaces(name) } }
 
 /**
@@ -36,7 +36,7 @@ fun <T: KoParentInterfaceProvider> Sequence<T>.withSomeParentInterfaces(name: St
  *
  * @return A sequence containing declarations with no parent interface.
  */
-fun <T: KoParentInterfaceProvider> Sequence<T>.withoutParentInterfaces(): Sequence<T> = filterNot { it.hasParentInterfaces() }
+fun <T : KoParentInterfaceProvider> Sequence<T>.withoutParentInterfaces(): Sequence<T> = filterNot { it.hasParentInterfaces() }
 
 /**
  * Sequence containing all declarations without all specified parent interfaces of type.
@@ -45,7 +45,7 @@ fun <T: KoParentInterfaceProvider> Sequence<T>.withoutParentInterfaces(): Sequen
  * @param names The name(s) of the parent interface(s) to exclude.
  * @return A sequence containing declarations without all specified parent interface(s).
  */
-fun <T: KoParentInterfaceProvider> Sequence<T>.withoutAllParentInterfaces(name: String, vararg names: String): Sequence<T> = filterNot {
+fun <T : KoParentInterfaceProvider> Sequence<T>.withoutAllParentInterfaces(name: String, vararg names: String): Sequence<T> = filterNot {
     it.hasParentInterfaces(name, *names)
 }
 
@@ -56,7 +56,7 @@ fun <T: KoParentInterfaceProvider> Sequence<T>.withoutAllParentInterfaces(name: 
  * @param names The names of the parent interfaces to exclude.
  * @return A sequence containing declarations without at least one of the specified parent interface(s).
  */
-fun <T: KoParentInterfaceProvider> Sequence<T>.withoutSomeParentInterfaces(name: String, vararg names: String): Sequence<T> = filter {
+fun <T : KoParentInterfaceProvider> Sequence<T>.withoutSomeParentInterfaces(name: String, vararg names: String): Sequence<T> = filter {
     !it.hasParentInterfaces(name) && if (names.isNotEmpty()) {
         names.any { name -> !it.hasParentInterfaces(name) }
     } else {
@@ -90,14 +90,14 @@ inline fun <reified T> Sequence<KoParentInterfaceProvider>.withoutParentInterfac
  * @param names The Kotlin declarations representing the parent interfaces to include.
  * @return A sequence containing declarations with the parent interfaces of the specified type(s).
  */
-fun <T: KoParentInterfaceProvider> Sequence<T>.withAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
+fun <T : KoParentInterfaceProvider> Sequence<T>.withAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
     filter {
         it.parentInterfaces.any { parent -> parent.name == name.simpleName } &&
-                names.all { kClass ->
-                    it
-                        .parentInterfaces
-                        .any { parent -> parent.name == kClass.simpleName }
-                }
+            names.all { kClass ->
+                it
+                    .parentInterfaces
+                    .any { parent -> parent.name == kClass.simpleName }
+            }
     }
 
 /**
@@ -107,14 +107,14 @@ fun <T: KoParentInterfaceProvider> Sequence<T>.withAllParentInterfacesOf(name: K
  * @param names The Kotlin declarations representing the parent interfaces to include.
  * @return A sequence containing declarations with at least one of the specified parent interface(s).
  */
-fun <T: KoParentInterfaceProvider> Sequence<T>.withSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
+fun <T : KoParentInterfaceProvider> Sequence<T>.withSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
     filter {
         it.parentInterfaces.any { parent -> parent.name == name.simpleName } ||
-                names.any { kClass ->
-                    it
-                        .parentInterfaces
-                        .any { parent -> parent.name == kClass.simpleName }
-                }
+            names.any { kClass ->
+                it
+                    .parentInterfaces
+                    .any { parent -> parent.name == kClass.simpleName }
+            }
     }
 
 /**
@@ -124,14 +124,14 @@ fun <T: KoParentInterfaceProvider> Sequence<T>.withSomeParentInterfacesOf(name: 
  * @param names The Kotlin declarations representing the parent interfaces to exclude.
  * @return A sequence containing declarations without parent interfaces of the specified type(s).
  */
-fun <T: KoParentInterfaceProvider> Sequence<T>.withoutAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
+fun <T : KoParentInterfaceProvider> Sequence<T>.withoutAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
     filter {
         it.parentInterfaces.none { parent -> parent.name == name.simpleName } &&
-                names.none { kClass ->
-                    it
-                        .parentInterfaces
-                        .any { parent -> parent.name == kClass.simpleName }
-                }
+            names.none { kClass ->
+                it
+                    .parentInterfaces
+                    .any { parent -> parent.name == kClass.simpleName }
+            }
     }
 
 /**
@@ -141,16 +141,16 @@ fun <T: KoParentInterfaceProvider> Sequence<T>.withoutAllParentInterfacesOf(name
  * @param names The Kotlin declarations representing the parent interfaces to exclude.
  * @return A sequence containing declarations without at least one of the specified parent interface(s).
  */
-fun <T: KoParentInterfaceProvider> Sequence<T>.withoutSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
+fun <T : KoParentInterfaceProvider> Sequence<T>.withoutSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
     filter {
         it.parentInterfaces.none { parent -> parent.name == name.simpleName } &&
-                if (names.isNotEmpty()) {
-                    names.any { kClass ->
-                        it
-                            .parentInterfaces
-                            .none { parent -> parent.name == kClass.simpleName }
-                    }
-                } else {
-                    true
+            if (names.isNotEmpty()) {
+                names.any { kClass ->
+                    it
+                        .parentInterfaces
+                        .none { parent -> parent.name == kClass.simpleName }
                 }
+            } else {
+                true
+            }
     }
