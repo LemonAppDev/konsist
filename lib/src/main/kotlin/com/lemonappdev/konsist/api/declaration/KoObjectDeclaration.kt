@@ -46,4 +46,11 @@ interface KoObjectDeclaration :
     KoRepresentsTypeProvider,
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
-    KoTopLevelProvider
+    KoTopLevelProvider {
+    /**
+     * String representing the object.
+     *
+     * @return a string representing the object.
+     */
+    override fun toString(): String
+    }

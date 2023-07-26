@@ -7,6 +7,17 @@ import org.junit.jupiter.api.Test
 
 class KoFileTest {
     @Test
+    fun `file-to-string`() {
+        // given
+        val sut = getSnippetFile("file-to-string")
+            .files
+            .first()
+
+        // then
+        sut.toString() shouldBeEqualTo sut.path
+    }
+
+    @Test
     fun `files-are-equal`() {
         // given
         val file1 = getSnippetFile("files-are-equal")

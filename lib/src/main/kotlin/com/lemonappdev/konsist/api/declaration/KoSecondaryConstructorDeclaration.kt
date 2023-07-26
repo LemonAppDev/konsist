@@ -30,4 +30,11 @@ interface KoSecondaryConstructorDeclaration :
     KoParentProvider,
     KoPathProvider,
     KoResideInOrOutsidePackageProvider,
-    KoTextProvider
+    KoTextProvider {
+    /**
+     * String representing the secondary constructor.
+     *
+     * @return a string representing the secondary constructor.
+     */
+    override fun toString(): String
+    }

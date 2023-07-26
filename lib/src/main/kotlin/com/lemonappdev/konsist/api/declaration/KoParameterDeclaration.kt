@@ -34,4 +34,11 @@ interface KoParameterDeclaration :
     KoRepresentsTypeProvider,
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
-    KoTypeProvider
+    KoTypeProvider {
+    /**
+     * String representing the parameter.
+     *
+     * @return a string representing the parameter.
+     */
+    override fun toString(): String
+    }

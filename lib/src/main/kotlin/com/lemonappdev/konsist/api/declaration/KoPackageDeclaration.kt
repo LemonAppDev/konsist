@@ -20,4 +20,11 @@ interface KoPackageDeclaration :
     KoNameProvider,
     KoPackageMatchingFilePathProvider,
     KoPathProvider,
-    KoTextProvider
+    KoTextProvider {
+    /**
+     * String representing the package.
+     *
+     * @return a string representing the package.
+     */
+    override fun toString(): String
+}

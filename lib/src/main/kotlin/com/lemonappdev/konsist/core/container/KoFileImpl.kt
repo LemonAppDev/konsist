@@ -71,6 +71,8 @@ internal class KoFileImpl(override val ktFile: KtFile) :
     ): Sequence<KoBaseProvider> =
         KoDeclarationProviderCoreUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
 
+    override fun toString(): String = path
+
     override fun equals(other: Any?): Boolean = other is KoFile && path == other.path
 
     override fun hashCode(): Int = 31 * 7 + path.hashCode()

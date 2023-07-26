@@ -42,4 +42,11 @@ interface KoPropertyDeclaration :
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTopLevelProvider,
-    KoVarAndValProvider
+    KoVarAndValProvider {
+    /**
+     * String representing the property.
+     *
+     * @return a string representing the property.
+     */
+    override fun toString(): String
+    }

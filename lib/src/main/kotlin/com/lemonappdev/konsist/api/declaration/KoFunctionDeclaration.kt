@@ -50,4 +50,11 @@ interface KoFunctionDeclaration :
     KoReceiverTypeProvider,
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
-    KoTopLevelProvider
+    KoTopLevelProvider {
+    /**
+     * String representing the function.
+     *
+     * @return a string representing the function.
+     */
+    override fun toString(): String
+    }

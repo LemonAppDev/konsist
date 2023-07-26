@@ -24,4 +24,11 @@ interface KoInitBlockDeclaration :
     KoParentProvider,
     KoPathProvider,
     KoPropertyProvider,
-    KoTextProvider
+    KoTextProvider {
+    /**
+     * String representing the init block.
+     *
+     * @return a string representing the init block.
+     */
+    override fun toString(): String
+    }

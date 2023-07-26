@@ -19,4 +19,11 @@ interface KoAnnotationDeclaration :
     KoNameProvider,
     KoPathProvider,
     KoRepresentsTypeProvider,
-    KoTextProvider
+    KoTextProvider {
+    /**
+     * String representing the annotation.
+     *
+     * @return a string representing the annotation.
+     */
+    override fun toString(): String
+    }

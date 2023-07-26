@@ -34,4 +34,11 @@ interface KoTypeAliasDeclaration :
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTopLevelProvider,
-    KoTypeProvider
+    KoTypeProvider {
+    /**
+     * String representing the type alias.
+     *
+     * @return a string representing the type alias.
+     */
+    override fun toString(): String
+    }

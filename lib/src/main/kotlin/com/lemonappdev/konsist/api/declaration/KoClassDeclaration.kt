@@ -62,4 +62,11 @@ interface KoClassDeclaration :
     KoResideInOrOutsidePackageProvider,
     KoSecondaryConstructorsProvider,
     KoTextProvider,
-    KoTopLevelProvider
+    KoTopLevelProvider {
+    /**
+     * String representing the class.
+     *
+     * @return a string representing the class.
+     */
+    override fun toString(): String
+}

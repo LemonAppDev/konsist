@@ -28,4 +28,11 @@ interface KoPrimaryConstructorDeclaration :
     KoParentProvider,
     KoPathProvider,
     KoResideInOrOutsidePackageProvider,
-    KoTextProvider
+    KoTextProvider {
+    /**
+     * String representing the primary constructor.
+     *
+     * @return a string representing the primary constructor.
+     */
+    override fun toString(): String
+    }

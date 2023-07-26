@@ -58,4 +58,11 @@ interface KoTypeDeclaration :
     KoNullableProvider,
     KoPathProvider,
     KoSourceAndAliasTypeProvider,
-    KoTextProvider
+    KoTextProvider {
+    /**
+     * String representing the type.
+     *
+     * @return a string representing the type.
+     */
+    override fun toString(): String
+    }
