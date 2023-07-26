@@ -35,7 +35,8 @@ fun <T : KoParentDeclarationProvider> Sequence<T>.withSomeParentDeclarations(nam
 /**
  * Sequence containing all declarations with no parent declaration - class does not extend any class and does not implement any interface.
  *
- * @return A sequence containing declarations with no parent declaration - class does not extend any class and does not implement any interface.
+ * @return A sequence containing declarations with no parent declaration - class does not extend any class and does not implement any
+ * interface.
  */
 fun <T : KoParentDeclarationProvider> Sequence<T>.withoutParentDeclarations(): Sequence<T> = filterNot { it.hasParentDeclarations() }
 
