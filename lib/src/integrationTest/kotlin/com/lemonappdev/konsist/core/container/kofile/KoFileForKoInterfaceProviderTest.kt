@@ -11,158 +11,65 @@ import org.junit.jupiter.params.provider.MethodSource
 
 class KoFileForKoInterfaceProviderTest {
     @Test
-    fun `file-contains-declarations`() {
+    fun `file-contains-no-interfaces`() {
         // given
-        val sut = getSnippetFile("file-contains-declarations")
+        val sut = getSnippetFile("file-contains-no-interfaces")
+            .files
+            .first()
+
+        // then
+        sut.interfaces(includeNested = true).toList() shouldBeEqualTo emptyList()
+    }
+
+    @Test
+    fun `file-contains-interfaces includeNested true`() {
+        // given
+        val sut = getSnippetFile("file-contains-interfaces")
+            .files
+            .first()
+
+        // then
+        val expected = listOf("SampleInterface", "SampleNestedInterface")
+
+        sut.interfaces(includeNested = true)
+            .toList()
+            .map { it.name }
+            .shouldBeEqualTo(expected)
+    }
+
+    @Test
+    fun `file-contains-interfaces includeNested false`() {
+        // given
+        val sut = getSnippetFile("file-contains-interfaces")
+            .files
+            .first()
+
+        // then
+        val expected = listOf("SampleInterface")
+
+        sut.interfaces(includeNested = false)
+            .toList()
+            .map { it.name }
+            .shouldBeEqualTo(expected)
+    }
+
+    @Test
+    fun `contains-interfaces`() {
+        // given
+        val sut = getSnippetFile("contains-interfaces")
             .files
             .first()
 
         // then
         assertSoftly(sut) {
-            numDeclarations(includeNested = false) shouldBeEqualTo 1
-            numDeclarations(includeNested = true) shouldBeEqualTo 2
-            containsDeclarations("SampleInterface") shouldBeEqualTo true
-            containsDeclarations("sampleNestedClass", includeNested = true) shouldBeEqualTo true
-            containsDeclarations("sampleNestedClass", includeNested = false) shouldBeEqualTo false
+            numInterfaces(includeNested = false) shouldBeEqualTo 1
+            numInterfaces(includeNested = true) shouldBeEqualTo 2
+            containsInterface("SampleInterface", includeNested = false) shouldBeEqualTo true
+            containsInterface("SampleNestedInterface", includeNested = false) shouldBeEqualTo false
+            containsInterface("SampleNestedInterface", includeNested = true) shouldBeEqualTo true
+            containsInterface("NonExisting") shouldBeEqualTo false
         }
     }
 
-    @Test
-    fun `file-contains-all-type-of-declarations`() {
-        // given
-        val sut = getSnippetFile("file-contains-all-type-of-declarations")
-            .files
-            .first()
-
-        // then
-        sut
-            .declarations()
-            .filterIsInstance<KoNameProvider>()
-            .map { it.name }
-            .toList()
-            .shouldBeEqualTo(
-                listOf(
-                    "SampleAnnotation1",
-                    "SampleAnnotation2",
-                    "samplepackage",
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation1",
-                    "com.lemonappdev.konsist.testdata.SampleAnnotation2",
-                    "sampleProperty",
-                    "sampleFunction",
-                    "SampleClass",
-                    "SampleInterface",
-                    "SampleObject",
-                    "SampleTypeAlias",
-                ),
-            )
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideValues")
-    fun `file-contains-all-type-of-declarations-with-nested-and-local-declarations`(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-        expected: List<String>,
-    ) {
-        // given
-        val sut = getSnippetFile("file-contains-all-type-of-declarations-with-nested-and-local-declarations")
-            .files
-            .first()
-
-        // then
-        sut
-            .declarations(includeNested = includeNested, includeLocal = includeLocal)
-            .toList()
-            .filterIsInstance<KoNameProvider>()
-            .map { it.name }
-            .shouldBeEqualTo(expected)
-    }
-
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/kofile/snippet/forkodeclarationprovider/", fileName)
-
-    companion object {
-        @Suppress("unused", "detekt.LongMethod")
-        @JvmStatic
-        fun provideValues() = listOf(
-            arguments(
-                false,
-                false,
-                listOf(
-                    "sampleProperty",
-                    "sampleFunction",
-                    "SampleClass",
-                    "SampleInterface",
-                    "SampleObject",
-                    "SampleTypeAlias",
-                ),
-            ),
-            arguments(
-                true,
-                false,
-                listOf(
-                    "sampleProperty",
-                    "sampleFunction",
-                    "SampleClass",
-                    "sampleNestedPropertyInsideClass",
-                    "sampleNestedFunctionInsideClass",
-                    "sampleNestedClassInsideClass",
-                    "SampleInterface",
-                    "sampleNestedPropertyInsideInterface",
-                    "sampleNestedFunctionInsideInterface",
-                    "sampleNestedClassInsideInterface",
-                    "SampleObject",
-                    "sampleNestedPropertyInsideObject",
-                    "sampleNestedFunctionInsideObject",
-                    "sampleNestedClassInsideObject",
-                    "SampleTypeAlias",
-                ),
-            ),
-            arguments(
-                false,
-                true,
-                listOf(
-                    "sampleProperty",
-                    "sampleFunction",
-                    "sampleLocalProperty1",
-                    "sampleLocalFunction",
-                    "sampleLocalClass2",
-                    "sampleLocalProperty2",
-                    "sampleLocalClass1",
-                    "SampleClass",
-                    "SampleInterface",
-                    "SampleObject",
-                    "SampleTypeAlias",
-                ),
-            ),
-            arguments(
-                true,
-                true,
-                listOf(
-                    "sampleProperty",
-                    "sampleFunction",
-                    "sampleLocalProperty1",
-                    "sampleLocalFunction",
-                    "sampleLocalClass2",
-                    "sampleLocalProperty2",
-                    "sampleLocalClass1",
-                    "sampleNestedFunction",
-                    "SampleClass",
-                    "sampleNestedPropertyInsideClass",
-                    "sampleNestedFunctionInsideClass",
-                    "sampleLocalProperty3",
-                    "sampleLocalClass3",
-                    "sampleNestedClassInsideClass",
-                    "SampleInterface",
-                    "sampleNestedPropertyInsideInterface",
-                    "sampleNestedFunctionInsideInterface",
-                    "sampleNestedClassInsideInterface",
-                    "SampleObject",
-                    "sampleNestedPropertyInsideObject",
-                    "sampleNestedFunctionInsideObject",
-                    "sampleNestedClassInsideObject",
-                    "SampleTypeAlias",
-                ),
-            ),
-        )
-    }
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/kofile/snippet/forkointerfaceprovider/", fileName)
 }
