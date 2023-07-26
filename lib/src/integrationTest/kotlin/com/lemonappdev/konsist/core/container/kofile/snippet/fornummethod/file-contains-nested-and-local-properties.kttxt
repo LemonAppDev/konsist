@@ -1,7 +1,0 @@
-class SampleClass {
-    val sampleNestedProperty: Boolean = true
-}
-
-fun sampleFunction() {
-    val sampleLocalProperty: Boolean = true
-}
