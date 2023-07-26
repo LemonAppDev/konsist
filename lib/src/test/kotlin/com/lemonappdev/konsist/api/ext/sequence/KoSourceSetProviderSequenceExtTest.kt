@@ -1,22 +1,20 @@
-package com.lemonappdev.konsist.api.ext.sequence.kofile
+package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withSourceSet
-import com.lemonappdev.konsist.api.ext.sequence.withoutSourceSet
-import com.lemonappdev.konsist.core.container.KoFileImpl
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileForSourceSetSequenceExtTest {
+class KoSourceSetProviderSequenceExtTest {
     @Test
     fun `withSourceSet(String) returns file with given source set`() {
         // given
         val sourceSetName = "sourceSetName"
-        val file1: KoFileImpl = mockk {
+        val file1: KoSourceSetProvider = mockk {
             every { resideInSourceSet(sourceSetName) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoSourceSetProvider = mockk {
             every { resideInSourceSet(sourceSetName) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -33,15 +31,15 @@ class KoFileForSourceSetSequenceExtTest {
         // given
         val sourceSetName1 = "sourceSetName1"
         val sourceSetName2 = "sourceSetName2"
-        val file1: KoFileImpl = mockk {
+        val file1: KoSourceSetProvider = mockk {
             every { resideInSourceSet(sourceSetName1) } returns true
             every { resideInSourceSet(sourceSetName2) } returns false
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoSourceSetProvider = mockk {
             every { resideInSourceSet(sourceSetName1) } returns false
             every { resideInSourceSet(sourceSetName2) } returns true
         }
-        val file3: KoFileImpl = mockk {
+        val file3: KoSourceSetProvider = mockk {
             every { resideInSourceSet(sourceSetName1) } returns false
             every { resideInSourceSet(sourceSetName2) } returns false
         }
@@ -58,10 +56,10 @@ class KoFileForSourceSetSequenceExtTest {
     fun `withoutSourceSet(String) returns file without given source set`() {
         // given
         val sourceSetName = "sourceSetName"
-        val file1: KoFileImpl = mockk {
+        val file1: KoSourceSetProvider = mockk {
             every { resideInSourceSet(sourceSetName) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoSourceSetProvider = mockk {
             every { resideInSourceSet(sourceSetName) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -78,15 +76,15 @@ class KoFileForSourceSetSequenceExtTest {
         // given
         val sourceSetName1 = "sourceSetName1"
         val sourceSetName2 = "sourceSetName2"
-        val file1: KoFileImpl = mockk {
+        val file1: KoSourceSetProvider = mockk {
             every { resideInSourceSet(sourceSetName1) } returns true
             every { resideInSourceSet(sourceSetName2) } returns false
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoSourceSetProvider = mockk {
             every { resideInSourceSet(sourceSetName1) } returns false
             every { resideInSourceSet(sourceSetName2) } returns true
         }
-        val file3: KoFileImpl = mockk {
+        val file3: KoSourceSetProvider = mockk {
             every { resideInSourceSet(sourceSetName1) } returns false
             every { resideInSourceSet(sourceSetName2) } returns false
         }

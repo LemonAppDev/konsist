@@ -1,26 +1,20 @@
-package com.lemonappdev.konsist.api.ext.sequence.kofile
+package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withAllImports
-import com.lemonappdev.konsist.api.ext.sequence.withImports
-import com.lemonappdev.konsist.api.ext.sequence.withSomeImports
-import com.lemonappdev.konsist.api.ext.sequence.withoutAllImports
-import com.lemonappdev.konsist.api.ext.sequence.withoutImports
-import com.lemonappdev.konsist.api.ext.sequence.withoutSomeImports
-import com.lemonappdev.konsist.core.container.KoFileImpl
+import com.lemonappdev.konsist.api.provider.KoImportProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
-class KoFileForImportSequenceExtTest {
+class KoImportProviderSequenceExtTest {
     @Test
     fun `withImports() returns file with any import`() {
         // given
-        val file1: KoFileImpl = mockk {
+        val file1: KoImportProvider = mockk {
             every { hasImports() } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoImportProvider = mockk {
             every { hasImports() } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -35,10 +29,10 @@ class KoFileForImportSequenceExtTest {
     @Test
     fun `withoutImports() returns file without any import`() {
         // given
-        val file1: KoFileImpl = mockk {
+        val file1: KoImportProvider = mockk {
             every { hasImports() } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoImportProvider = mockk {
             every { hasImports() } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -55,10 +49,10 @@ class KoFileForImportSequenceExtTest {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
-        val file1: KoFileImpl = mockk {
+        val file1: KoImportProvider = mockk {
             every { hasImports(import1, import2) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoImportProvider = mockk {
             every { hasImports(import1, import2) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -75,10 +69,10 @@ class KoFileForImportSequenceExtTest {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
-        val file1: KoFileImpl = mockk {
+        val file1: KoImportProvider = mockk {
             every { hasImports(import1, import2) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoImportProvider = mockk {
             every { hasImports(import1, import2) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -94,10 +88,10 @@ class KoFileForImportSequenceExtTest {
     fun `withSomeImports(String) returns file with given import`() {
         // given
         val import = "SampleImport"
-        val file1: KoFileImpl = mockk {
+        val file1: KoImportProvider = mockk {
             every { hasImports(import) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoImportProvider = mockk {
             every { hasImports(import) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -114,15 +108,15 @@ class KoFileForImportSequenceExtTest {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
-        val file1: KoFileImpl = mockk {
+        val file1: KoImportProvider = mockk {
             every { hasImports(import1) } returns true
             every { hasImports(import2) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoImportProvider = mockk {
             every { hasImports(import1) } returns false
             every { hasImports(import2) } returns true
         }
-        val file3: KoFileImpl = mockk {
+        val file3: KoImportProvider = mockk {
             every { hasImports(import1) } returns false
             every { hasImports(import2) } returns false
         }
@@ -139,10 +133,10 @@ class KoFileForImportSequenceExtTest {
     fun `withoutSomeImports(String) returns file with given import`() {
         // given
         val import = "SampleImport"
-        val file1: KoFileImpl = mockk {
+        val file1: KoImportProvider = mockk {
             every { hasImports(import) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoImportProvider = mockk {
             every { hasImports(import) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -159,15 +153,15 @@ class KoFileForImportSequenceExtTest {
         // given
         val import1 = "SampleImport1"
         val import2 = "SampleImport2"
-        val file1: KoFileImpl = mockk {
+        val file1: KoImportProvider = mockk {
             every { hasImports(import1) } returns true
             every { hasImports(import2) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoImportProvider = mockk {
             every { hasImports(import1) } returns false
             every { hasImports(import2) } returns true
         }
-        val file3: KoFileImpl = mockk {
+        val file3: KoImportProvider = mockk {
             every { hasImports(import1) } returns false
             every { hasImports(import2) } returns false
         }

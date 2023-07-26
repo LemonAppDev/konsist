@@ -1,25 +1,19 @@
-package com.lemonappdev.konsist.api.ext.sequence.kofile
+package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withAllTypeAliases
-import com.lemonappdev.konsist.api.ext.sequence.withSomeTypeAliases
-import com.lemonappdev.konsist.api.ext.sequence.withTypeAliases
-import com.lemonappdev.konsist.api.ext.sequence.withoutAllTypeAliases
-import com.lemonappdev.konsist.api.ext.sequence.withoutSomeTypeAliases
-import com.lemonappdev.konsist.api.ext.sequence.withoutTypeAliases
-import com.lemonappdev.konsist.core.container.KoFileImpl
+import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileForTypeAliasSequenceExtTest {
+class KoTypeAliasProviderSequenceExtTest {
     @Test
     fun `withTypeAlias() returns file with typealias`() {
         // given
-        val file1: KoFileImpl = mockk {
+        val file1: KoTypeAliasProvider = mockk {
             every { hasTypeAliases() } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoTypeAliasProvider = mockk {
             every { hasTypeAliases() } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -34,10 +28,10 @@ class KoFileForTypeAliasSequenceExtTest {
     @Test
     fun `withoutTypeAlias() returns file without typealias`() {
         // given
-        val file1: KoFileImpl = mockk {
+        val file1: KoTypeAliasProvider = mockk {
             every { hasTypeAliases() } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoTypeAliasProvider = mockk {
             every { hasTypeAliases() } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -54,10 +48,10 @@ class KoFileForTypeAliasSequenceExtTest {
         // given
         val typeAlias1 = "SampleTypeAlias1"
         val typeAlias2 = "SampleTypeAlias2"
-        val file1: KoFileImpl = mockk {
+        val file1: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias1, typeAlias2) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias1, typeAlias2) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -74,10 +68,10 @@ class KoFileForTypeAliasSequenceExtTest {
         // given
         val typeAlias1 = "SampleTypeAlias1"
         val typeAlias2 = "SampleTypeAlias2"
-        val file1: KoFileImpl = mockk {
+        val file1: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias1, typeAlias2) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias1, typeAlias2) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -93,10 +87,10 @@ class KoFileForTypeAliasSequenceExtTest {
     fun `withSomeTypeAliases(String) returns file with given typeAlias`() {
         // given
         val typeAlias = "SampleTypeAlias"
-        val file1: KoFileImpl = mockk {
+        val file1: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -113,15 +107,15 @@ class KoFileForTypeAliasSequenceExtTest {
         // given
         val typeAlias1 = "SampleTypeAlias1"
         val typeAlias2 = "SampleTypeAlias2"
-        val file1: KoFileImpl = mockk {
+        val file1: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias1) } returns true
             every { hasTypeAliases(typeAlias2) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias1) } returns false
             every { hasTypeAliases(typeAlias2) } returns true
         }
-        val file3: KoFileImpl = mockk {
+        val file3: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias1) } returns false
             every { hasTypeAliases(typeAlias2) } returns false
         }
@@ -138,10 +132,10 @@ class KoFileForTypeAliasSequenceExtTest {
     fun `withoutSomeTypeAliases(String) returns file without given typeAlias`() {
         // given
         val typeAlias = "SampleTypeAlias"
-        val file1: KoFileImpl = mockk {
+        val file1: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias) } returns false
         }
         val files = sequenceOf(file1, file2)
@@ -158,15 +152,15 @@ class KoFileForTypeAliasSequenceExtTest {
         // given
         val typeAlias1 = "SampleTypeAlias1"
         val typeAlias2 = "SampleTypeAlias2"
-        val file1: KoFileImpl = mockk {
+        val file1: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias1) } returns true
             every { hasTypeAliases(typeAlias2) } returns true
         }
-        val file2: KoFileImpl = mockk {
+        val file2: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias1) } returns false
             every { hasTypeAliases(typeAlias2) } returns true
         }
-        val file3: KoFileImpl = mockk {
+        val file3: KoTypeAliasProvider = mockk {
             every { hasTypeAliases(typeAlias1) } returns false
             every { hasTypeAliases(typeAlias2) } returns false
         }
