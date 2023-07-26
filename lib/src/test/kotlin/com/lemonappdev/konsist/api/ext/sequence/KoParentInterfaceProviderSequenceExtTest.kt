@@ -1,17 +1,6 @@
-package com.lemonappdev.konsist.api.ext.sequence.koclassdeclaration
+package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withAllParentInterfaces
-import com.lemonappdev.konsist.api.ext.sequence.withAllParentInterfacesOf
-import com.lemonappdev.konsist.api.ext.sequence.withParentInterfaceOf
-import com.lemonappdev.konsist.api.ext.sequence.withParentInterfaces
-import com.lemonappdev.konsist.api.ext.sequence.withSomeParentInterfaces
-import com.lemonappdev.konsist.api.ext.sequence.withSomeParentInterfacesOf
-import com.lemonappdev.konsist.api.ext.sequence.withoutAllParentInterfaces
-import com.lemonappdev.konsist.api.ext.sequence.withoutAllParentInterfacesOf
-import com.lemonappdev.konsist.api.ext.sequence.withoutParentInterfaceOf
-import com.lemonappdev.konsist.api.ext.sequence.withoutParentInterfaces
-import com.lemonappdev.konsist.api.ext.sequence.withoutSomeParentInterfaces
-import com.lemonappdev.konsist.api.ext.sequence.withoutSomeParentInterfacesOf
+import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoParentDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleInterface
@@ -23,214 +12,214 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
-class KoClassDeclarationForParentInterfaceSequenceExtTest {
+class KoParentInterfaceProviderSequenceExtTest {
     @Test
-    fun `withParentInterface() returns class with any parent interface`() {
+    fun `withParentInterface() returns declaration with any parent interface`() {
         // given
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces() } returns true
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces() } returns false
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withParentInterfaces()
+        val sut = declarations.withParentInterfaces()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutParentInterface() returns class without any parent interface`() {
+    fun `withoutParentInterface() returns declaration without any parent interface`() {
         // given
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces() } returns true
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces() } returns false
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withoutParentInterfaces()
+        val sut = declarations.withoutParentInterfaces()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class2)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withAllParentInterfaces(name) returns class with given parent interface`() {
+    fun `withAllParentInterfaces(name) returns declaration with given parent interface`() {
         // given
         val name = "SampleName"
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name) } returns true
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name) } returns false
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withAllParentInterfaces(name)
+        val sut = declarations.withAllParentInterfaces(name)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutAllParentInterfaces(name) returns class without given parent interface`() {
+    fun `withoutAllParentInterfaces(name) returns declaration without given parent interface`() {
         // given
         val name = "SampleName"
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name) } returns true
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name) } returns false
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withoutAllParentInterfaces(name)
+        val sut = declarations.withoutAllParentInterfaces(name)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class2)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withAllParentInterfaces() returns class with all of given parent interfaces`() {
+    fun `withAllParentInterfaces() returns declaration with all of given parent interfaces`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name1, name2) } returns true
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name1, name2) } returns false
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withAllParentInterfaces(name1, name2)
+        val sut = declarations.withAllParentInterfaces(name1, name2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutAllParentInterfaces() returns class without any of given parent interfaces`() {
+    fun `withoutAllParentInterfaces() returns declaration without any of given parent interfaces`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name1, name2) } returns true
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name1, name2) } returns false
         }
 
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withoutAllParentInterfaces(name1, name2)
+        val sut = declarations.withoutAllParentInterfaces(name1, name2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class2)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withSomeParentInterfaces() returns class with given parent interface`() {
+    fun `withSomeParentInterfaces() returns declaration with given parent interface`() {
         // given
         val name = "SampleName"
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name) } returns true
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name) } returns false
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withSomeParentInterfaces(name)
+        val sut = declarations.withSomeParentInterfaces(name)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withSomeParentInterfaces() returns classes with at least one of given parent interfaces`() {
+    fun `withSomeParentInterfaces() returns declarations with at least one of given parent interfaces`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name1) } returns true
             every { hasParentInterfaces(name2) } returns true
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name1) } returns false
             every { hasParentInterfaces(name2) } returns true
         }
-        val class3: KoClassDeclarationImpl = mockk {
+        val declaration3: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name1) } returns false
             every { hasParentInterfaces(name2) } returns false
         }
-        val classes = sequenceOf(class1, class2, class3)
+        val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = classes.withSomeParentInterfaces(name1, name2)
+        val sut = declarations.withSomeParentInterfaces(name1, name2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class1, class2)
+        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
-    fun `withoutSomeParentInterfaces() returns class without given parent interface`() {
+    fun `withoutSomeParentInterfaces() returns declaration without given parent interface`() {
         // given
         val name = "SampleName"
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name) } returns true
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name) } returns false
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withoutSomeParentInterfaces(name)
+        val sut = declarations.withoutSomeParentInterfaces(name)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class2)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withoutSomeParentInterfaces() returns classes without at least one of given parent interfaces`() {
+    fun `withoutSomeParentInterfaces() returns declarations without at least one of given parent interfaces`() {
         // given
         val name1 = "SampleName1"
         val name2 = "SampleName2"
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name1) } returns true
             every { hasParentInterfaces(name2) } returns true
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name1) } returns false
             every { hasParentInterfaces(name2) } returns true
         }
-        val class3: KoClassDeclarationImpl = mockk {
+        val declaration3: KoParentInterfaceProvider = mockk {
             every { hasParentInterfaces(name1) } returns false
             every { hasParentInterfaces(name2) } returns false
         }
-        val classes = sequenceOf(class1, class2, class3)
+        val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = classes.withoutSomeParentInterfaces(name1, name2)
+        val sut = declarations.withoutSomeParentInterfaces(name1, name2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class3)
+        sut.toList() shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
-    fun `withAllParentInterfacesOf(KClass) returns class with given parent interface`() {
+    fun `withAllParentInterfacesOf(KClass) returns declaration with given parent interface`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -241,23 +230,23 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
             every { name } returns name2
         }
 
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent2)
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withAllParentInterfacesOf(SampleInterface1::class)
+        val sut = declarations.withAllParentInterfacesOf(SampleInterface1::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withAllParentInterfacesOf(KClass) returns classes with all given parent interfaces`() {
+    fun `withAllParentInterfacesOf(KClass) returns declarations with all given parent interfaces`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -272,26 +261,26 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
             every { name } returns name3
         }
 
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1, parent3)
         }
-        val class3: KoClassDeclarationImpl = mockk {
+        val declaration3: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent3)
         }
-        val classes = sequenceOf(class1, class2, class3)
+        val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = classes.withAllParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
+        val sut = declarations.withAllParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutAllParentInterfacesOf(KClass) returns class without given parent interface`() {
+    fun `withoutAllParentInterfacesOf(KClass) returns declaration without given parent interface`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -302,23 +291,23 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
             every { name } returns name2
         }
 
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent2)
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withoutAllParentInterfacesOf(SampleInterface1::class)
+        val sut = declarations.withoutAllParentInterfacesOf(SampleInterface1::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class2)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withoutAllParentInterfacesOf(KClass) returns class without any of given parent interfaces`() {
+    fun `withoutAllParentInterfacesOf(KClass) returns declaration without any of given parent interfaces`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -333,26 +322,26 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
             every { name } returns name3
         }
 
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1, parent3)
         }
-        val class3: KoClassDeclarationImpl = mockk {
+        val declaration3: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent3)
         }
-        val classes = sequenceOf(class1, class2, class3)
+        val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = classes.withoutAllParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
+        val sut = declarations.withoutAllParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class3)
+        sut.toList() shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
-    fun `withSomeParentInterfacesOf(KClass) returns class with given parent`() {
+    fun `withSomeParentInterfacesOf(KClass) returns declaration with given parent`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -363,23 +352,23 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
             every { name } returns name2
         }
 
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent2)
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withSomeParentInterfacesOf(SampleInterface1::class)
+        val sut = declarations.withSomeParentInterfacesOf(SampleInterface1::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withSomeParentInterfacesOf(KClass) returns classes with at least one of given parents`() {
+    fun `withSomeParentInterfacesOf(KClass) returns declarations with at least one of given parents`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -394,26 +383,26 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
             every { name } returns name3
         }
 
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1, parent3)
         }
-        val class3: KoClassDeclarationImpl = mockk {
+        val declaration3: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent3)
         }
-        val classes = sequenceOf(class1, class2, class3)
+        val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = classes.withSomeParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
+        val sut = declarations.withSomeParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class1, class2)
+        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
-    fun `withoutSomeParentInterfacesOf(KClass) returns class with given parent`() {
+    fun `withoutSomeParentInterfacesOf(KClass) returns declaration with given parent`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -424,23 +413,23 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
             every { name } returns name2
         }
 
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent2)
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withoutSomeParentInterfacesOf(SampleInterface1::class)
+        val sut = declarations.withoutSomeParentInterfacesOf(SampleInterface1::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class2)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withoutSomeParentInterfacesOf(KClass) returns classes with at least one of given parents`() {
+    fun `withoutSomeParentInterfacesOf(KClass) returns declarations with at least one of given parents`() {
         // given
         val name1 = "SampleInterface1"
         val name2 = "SampleInterface2"
@@ -455,73 +444,73 @@ class KoClassDeclarationForParentInterfaceSequenceExtTest {
             every { name } returns name3
         }
 
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1, parent2)
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1, parent3)
         }
-        val class3: KoClassDeclarationImpl = mockk {
+        val declaration3: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent3)
         }
-        val classes = sequenceOf(class1, class2, class3)
+        val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = classes.withoutSomeParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
+        val sut = declarations.withoutSomeParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class3)
+        sut.toList() shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
-    fun `withParentInterfaceOf() returns class with SampleInterface parent interface`() {
+    fun `withParentInterfaceOf() returns declaration with SampleInterface parent interface`() {
         // given
         val name1 = "SampleInterface"
         val name2 = "OtherInterface"
         val parent1: KoParentDeclarationImpl = mockk {
             every { name } returns name1
         }
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1)
         }
         val parent2: KoParentDeclarationImpl = mockk {
             every { name } returns name2
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent2)
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withParentInterfaceOf<SampleInterface>()
+        val sut = declarations.withParentInterfaceOf<SampleInterface>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutParentInterfaceOf() returns class without SampleInterface parent interface`() {
+    fun `withoutParentInterfaceOf() returns declaration without SampleInterface parent interface`() {
         // given
         val name1 = "SampleInterface"
         val name2 = "OtherInterface"
         val parent1: KoParentDeclarationImpl = mockk {
             every { name } returns name1
         }
-        val class1: KoClassDeclarationImpl = mockk {
+        val declaration1: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent1)
         }
         val parent2: KoParentDeclarationImpl = mockk {
             every { name } returns name2
         }
-        val class2: KoClassDeclarationImpl = mockk {
+        val declaration2: KoParentInterfaceProvider = mockk {
             every { parentInterfaces } returns sequenceOf(parent2)
         }
-        val classes = sequenceOf(class1, class2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = classes.withoutParentInterfaceOf<SampleInterface>()
+        val sut = declarations.withoutParentInterfaceOf<SampleInterface>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class2)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 }

@@ -1,7 +1,5 @@
-package com.lemonappdev.konsist.api.ext.sequence.koclassdeclaration
+package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withInitBlocks
-import com.lemonappdev.konsist.api.ext.sequence.withoutInitBlocks
 import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
 import io.mockk.every
 import io.mockk.mockk
