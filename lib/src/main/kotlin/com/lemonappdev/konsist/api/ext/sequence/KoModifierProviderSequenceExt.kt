@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.api.ext.sequence
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.provider.KoModifierProvider
 
-
 /**
  * Sequence containing declarations with any specified modifier.
  *
@@ -135,7 +134,6 @@ fun <T : KoModifierProvider> Sequence<T>.withInternalModifier(): Sequence<T> = f
  * @return A sequence containing declarations without the `internal` modifier.
  */
 fun <T : KoModifierProvider> Sequence<T>.withoutInternalModifier(): Sequence<T> = filterNot { it.hasInternalModifier() }
-
 
 /**
  * Sequence containing all declarations that have `enum` modifier.

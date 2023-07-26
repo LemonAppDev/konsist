@@ -53,4 +53,4 @@ interface KoInterfaceDeclaration :
      * @return a string representing the interface.
      */
     override fun toString(): String
-    }
+}

@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import kotlin.reflect.KClass
-
 
 /**
  * Sequence containing types with fully qualified name.

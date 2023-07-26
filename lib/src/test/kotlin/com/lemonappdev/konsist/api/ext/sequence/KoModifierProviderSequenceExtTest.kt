@@ -8,6 +8,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+@Suppress("detekt.LargeClass")
 class KoModifierProviderSequenceExtTest {
     @Test
     fun `withModifiers() returns declaration with modifier`() {

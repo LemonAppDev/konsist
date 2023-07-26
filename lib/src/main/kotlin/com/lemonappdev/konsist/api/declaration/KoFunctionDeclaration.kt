@@ -57,4 +57,4 @@ interface KoFunctionDeclaration :
      * @return a string representing the function.
      */
     override fun toString(): String
-    }
+}

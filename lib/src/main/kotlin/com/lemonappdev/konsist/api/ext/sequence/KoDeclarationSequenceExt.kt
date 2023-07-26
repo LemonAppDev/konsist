@@ -1,15 +1,9 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.KoModifier
-import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
-import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
-import kotlin.reflect.KClass
-
 
 /**
  * Sequence containing the top level declarations.
@@ -24,7 +18,6 @@ fun <T : KoTopLevelProvider> Sequence<T>.withTopLevel(): Sequence<T> = filter { 
  * @return A sequence containing the non-top level declarations.
  */
 fun <T : KoTopLevelProvider> Sequence<T>.withoutTopLevel(): Sequence<T> = filterNot { it.isTopLevel() }
-
 
 /**
  * Sequence containing declarations with package.

@@ -53,4 +53,4 @@ interface KoObjectDeclaration :
      * @return a string representing the object.
      */
     override fun toString(): String
-    }
+}

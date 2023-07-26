@@ -35,4 +35,4 @@ interface KoPrimaryConstructorDeclaration :
      * @return a string representing the primary constructor.
      */
     override fun toString(): String
-    }
+}

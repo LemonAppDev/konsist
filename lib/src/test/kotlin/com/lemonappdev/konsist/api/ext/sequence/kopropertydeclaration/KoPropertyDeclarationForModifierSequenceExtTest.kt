@@ -1,23 +1,7 @@
 package com.lemonappdev.konsist.api.ext.sequence.kopropertydeclaration
 
-import com.lemonappdev.konsist.api.ext.sequence.withAbstractModifier
-import com.lemonappdev.konsist.api.ext.sequence.withActualModifier
-import com.lemonappdev.konsist.api.ext.sequence.withConstModifier
-import com.lemonappdev.konsist.api.ext.sequence.withExpectModifier
-import com.lemonappdev.konsist.api.ext.sequence.withFinalModifier
-import com.lemonappdev.konsist.api.ext.sequence.withLateinitModifier
-import com.lemonappdev.konsist.api.ext.sequence.withOpenModifier
-import com.lemonappdev.konsist.api.ext.sequence.withOverrideModifier
 import com.lemonappdev.konsist.api.ext.sequence.withValModifier
 import com.lemonappdev.konsist.api.ext.sequence.withVarModifier
-import com.lemonappdev.konsist.api.ext.sequence.withoutAbstractModifier
-import com.lemonappdev.konsist.api.ext.sequence.withoutActualModifier
-import com.lemonappdev.konsist.api.ext.sequence.withoutConstModifier
-import com.lemonappdev.konsist.api.ext.sequence.withoutExpectModifier
-import com.lemonappdev.konsist.api.ext.sequence.withoutFinalModifier
-import com.lemonappdev.konsist.api.ext.sequence.withoutLateinitModifier
-import com.lemonappdev.konsist.api.ext.sequence.withoutOpenModifier
-import com.lemonappdev.konsist.api.ext.sequence.withoutOverrideModifier
 import com.lemonappdev.konsist.api.ext.sequence.withoutValModifier
 import com.lemonappdev.konsist.api.ext.sequence.withoutVarModifier
 import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl

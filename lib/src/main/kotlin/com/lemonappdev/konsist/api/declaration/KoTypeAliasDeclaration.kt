@@ -41,4 +41,4 @@ interface KoTypeAliasDeclaration :
      * @return a string representing the type alias.
      */
     override fun toString(): String
-    }
+}

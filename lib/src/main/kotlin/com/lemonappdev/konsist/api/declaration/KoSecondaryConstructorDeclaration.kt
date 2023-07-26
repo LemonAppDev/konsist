@@ -37,4 +37,4 @@ interface KoSecondaryConstructorDeclaration :
      * @return a string representing the secondary constructor.
      */
     override fun toString(): String
-    }
+}

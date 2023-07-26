@@ -23,4 +23,3 @@ fun Sequence<KoTypeAliasDeclaration>.withSourceType(type: String, vararg types: 
 fun Sequence<KoTypeAliasDeclaration>.withoutSourceType(type: String, vararg types: String): Sequence<KoTypeAliasDeclaration> = filter {
     it.type.sourceType != type && types.none { type -> it.type.sourceType == type }
 }
-

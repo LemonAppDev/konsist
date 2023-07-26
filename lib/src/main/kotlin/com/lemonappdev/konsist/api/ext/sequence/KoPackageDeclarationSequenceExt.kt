@@ -30,4 +30,3 @@ fun Sequence<KoPackageDeclaration>.withoutQualifiedName(
 ): Sequence<KoPackageDeclaration> = filter {
     it.fullyQualifiedName != fullyQualifiedName && fullyQualifiedNames.none { name -> it.fullyQualifiedName == name }
 }
-

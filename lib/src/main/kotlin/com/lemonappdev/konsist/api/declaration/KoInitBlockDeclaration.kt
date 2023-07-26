@@ -31,4 +31,4 @@ interface KoInitBlockDeclaration :
      * @return a string representing the init block.
      */
     override fun toString(): String
-    }
+}

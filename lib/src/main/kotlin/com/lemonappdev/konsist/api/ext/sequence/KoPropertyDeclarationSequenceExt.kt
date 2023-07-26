@@ -31,7 +31,6 @@ fun Sequence<KoPropertyDeclaration>.withValModifier(): Sequence<KoPropertyDeclar
  */
 fun Sequence<KoPropertyDeclaration>.withoutValModifier(): Sequence<KoPropertyDeclaration> = filterNot { it.isVal }
 
-
 /**
  * Sequence containing properties with extension.
  *

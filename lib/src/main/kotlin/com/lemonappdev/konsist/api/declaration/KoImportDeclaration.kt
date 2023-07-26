@@ -27,4 +27,4 @@ interface KoImportDeclaration :
      * @return a string representing the import.
      */
     override fun toString(): String
-    }
+}

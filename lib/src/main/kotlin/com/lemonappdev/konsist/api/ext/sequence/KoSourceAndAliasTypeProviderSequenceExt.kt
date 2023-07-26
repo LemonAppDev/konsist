@@ -25,7 +25,7 @@ inline fun <reified T> Sequence<KoSourceAndAliasTypeProvider>.withoutSourceTypeO
  * @param types The Kotlin classes representing the source types to include.
  * @return A sequence containing declarations with the source type matching any of the specified types.
  */
-fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withSourceTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withSourceTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.any { kClass -> it.sourceType == kClass.simpleName }
 }
 
@@ -35,7 +35,7 @@ fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withSourceTypeOf(vararg types:
  * @param types The Kotlin classes representing the source types to exclude.
  * @return A sequence containing declarations without source type matching any of the specified types.
  */
-fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withoutSourceTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
+fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withoutSourceTypeOf(vararg types: KClass<*>): Sequence<T> = filter {
     types.none { kClass -> it.sourceType == kClass.simpleName }
 }
 
@@ -46,7 +46,7 @@ fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withoutSourceTypeOf(vararg typ
  * @param types The source types to include.
  * @return A sequence containing declarations with the specified source types.
  */
-fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withSourceType(type: String, vararg types: String): Sequence<T> = filter {
+fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withSourceType(type: String, vararg types: String): Sequence<T> = filter {
     it.sourceType == type || types.any { type -> it.sourceType == type }
 }
 
@@ -57,7 +57,7 @@ fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withSourceType(type: String, v
  * @param types The source types to exclude.
  * @return A sequence containing declarations without specified source types.
  */
-fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withoutSourceType(type: String, vararg types: String): Sequence<T> = filter {
+fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withoutSourceType(type: String, vararg types: String): Sequence<T> = filter {
     it.sourceType != type && types.none { type -> it.sourceType == type }
 }
 
@@ -83,7 +83,7 @@ inline fun <reified T> Sequence<KoSourceAndAliasTypeProvider>.withoutAliasTypeOf
  * @param names The Kotlin classes representing the alias type to include.
  * @return A sequence containing declarations with the alias type matching any of the specified types.
  */
-fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withAliasTypeOf(vararg names: KClass<*>): Sequence<T> = filter {
+fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withAliasTypeOf(vararg names: KClass<*>): Sequence<T> = filter {
     names.any { kClass -> it.isAlias() && it.sourceType == kClass.simpleName }
 }
 
@@ -93,7 +93,7 @@ fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withAliasTypeOf(vararg names: 
  * @param names The Kotlin classes representing the alias type to exclude.
  * @return A sequence containing declarations without alias type matching any of the specified types.
  */
-fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withoutAliasTypeOf(vararg names: KClass<*>): Sequence<T> = filter {
+fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withoutAliasTypeOf(vararg names: KClass<*>): Sequence<T> = filter {
     names.none { kClass -> it.isAlias() && it.sourceType == kClass.simpleName }
 }
 
@@ -104,7 +104,7 @@ fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withoutAliasTypeOf(vararg name
  * @return A sequence containing declarations with an alias type matching any of the specified names
  * (or any alias type if [names] is empty).
  */
-fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withAliasType(vararg names: String): Sequence<T> = filter {
+fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withAliasType(vararg names: String): Sequence<T> = filter {
     when {
         names.isEmpty() -> it.isAlias()
         else -> names.any { name -> it.aliasType == name }
@@ -118,7 +118,7 @@ fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withAliasType(vararg names: St
  * @return A sequence containing declarations without an alias type matching any of the specified names
  * (or none alias type if [names] is empty).
  */
-fun <T: KoSourceAndAliasTypeProvider> Sequence<T>.withoutAliasType(vararg names: String): Sequence<T> = filter {
+fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withoutAliasType(vararg names: String): Sequence<T> = filter {
     when {
         names.isEmpty() -> !it.isAlias()
         else -> names.none { name -> it.aliasType == name }

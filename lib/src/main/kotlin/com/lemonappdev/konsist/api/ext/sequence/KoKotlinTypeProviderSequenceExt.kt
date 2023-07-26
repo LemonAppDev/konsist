@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 
 /**
@@ -10,7 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
  *
  * @return A sequence containing built-in Kotlin types.
  */
-fun <T: KoKotlinTypeProvider> Sequence<T>.withKotlinType(): Sequence<T> = filter { it.isKotlinType }
+fun <T : KoKotlinTypeProvider> Sequence<T>.withKotlinType(): Sequence<T> = filter { it.isKotlinType }
 
 /**
  * Sequence containing Kotlin types that are not built-in types. It cannot be a basic Kotlin type
@@ -19,4 +18,4 @@ fun <T: KoKotlinTypeProvider> Sequence<T>.withKotlinType(): Sequence<T> = filter
  *
  * @return A sequence containing non-built-in Kotlin types.
  */
-fun <T: KoKotlinTypeProvider> Sequence<T>.withoutKotlinType(): Sequence<T> = filterNot { it.isKotlinType }
+fun <T : KoKotlinTypeProvider> Sequence<T>.withoutKotlinType(): Sequence<T> = filterNot { it.isKotlinType }

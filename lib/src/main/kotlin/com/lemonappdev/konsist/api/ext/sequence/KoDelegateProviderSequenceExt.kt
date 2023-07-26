@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoDelegateProvider
 
 /**
@@ -9,7 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoDelegateProvider
  * @param names The delegate names to include.
  * @return A sequence containing declarations with the specified delegate name(s) (or any delegate if [names] is empty).
  */
-fun <T: KoDelegateProvider> Sequence<T>.withDelegate(vararg names: String): Sequence<T> = filter {
+fun <T : KoDelegateProvider> Sequence<T>.withDelegate(vararg names: String): Sequence<T> = filter {
     when {
         names.isEmpty() -> it.hasDelegate()
         else -> names.any { name -> it.hasDelegate(name) }
@@ -22,7 +21,7 @@ fun <T: KoDelegateProvider> Sequence<T>.withDelegate(vararg names: String): Sequ
  * @param names The delegate names to exclude.
  * @return A sequence containing declarations without the specified delegate name(s) (or none delegate if [names] is empty).
  */
-fun <T: KoDelegateProvider> Sequence<T>.withoutDelegate(vararg names: String): Sequence<T> = filter {
+fun <T : KoDelegateProvider> Sequence<T>.withoutDelegate(vararg names: String): Sequence<T> = filter {
     when {
         names.isEmpty() -> !it.hasDelegate()
         else -> names.none { name -> it.hasDelegate(name) }

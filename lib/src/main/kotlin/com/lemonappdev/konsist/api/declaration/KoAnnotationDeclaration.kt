@@ -26,4 +26,4 @@ interface KoAnnotationDeclaration :
      * @return a string representing the annotation.
      */
     override fun toString(): String
-    }
+}

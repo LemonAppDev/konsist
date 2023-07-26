@@ -10,8 +10,8 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
  * @return A sequence containing declarations with the specified aliases (or any alias if [names] is empty).
  */
 fun <T> Sequence<T>.withAlias(vararg names: String): Sequence<T>
-        where T : KoAliasProvider,
-              T : KoNameProvider = filter {
+    where T : KoAliasProvider,
+          T : KoNameProvider = filter {
     when {
         names.isEmpty() -> it.alias != it.name
         else -> names.any { name -> it.alias == name }
@@ -25,8 +25,8 @@ fun <T> Sequence<T>.withAlias(vararg names: String): Sequence<T>
  * @return A sequence containing declarations without specified aliases (or none alias if [names] is empty).
  */
 fun <T> Sequence<T>.withoutAlias(vararg names: String): Sequence<T>
-        where T : KoAliasProvider,
-              T : KoNameProvider = filter {
+    where T : KoAliasProvider,
+          T : KoNameProvider = filter {
     when {
         names.isEmpty() -> it.alias == it.name
         else -> names.none { name -> it.alias == name }

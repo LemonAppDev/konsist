@@ -41,4 +41,4 @@ interface KoParameterDeclaration :
      * @return a string representing the parameter.
      */
     override fun toString(): String
-    }
+}

@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoDefaultValueProvider
 
 /**

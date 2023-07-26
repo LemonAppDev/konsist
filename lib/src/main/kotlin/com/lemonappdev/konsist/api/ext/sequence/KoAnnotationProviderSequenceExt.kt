@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import kotlin.reflect.KClass
 
-
 /**
  * Sequence containing declarations with any annotation.
  *

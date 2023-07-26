@@ -49,4 +49,4 @@ interface KoPropertyDeclaration :
      * @return a string representing the property.
      */
     override fun toString(): String
-    }
+}

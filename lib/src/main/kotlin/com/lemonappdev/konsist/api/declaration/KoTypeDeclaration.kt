@@ -65,4 +65,4 @@ interface KoTypeDeclaration :
      * @return a string representing the type.
      */
     override fun toString(): String
-    }
+}

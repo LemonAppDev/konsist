@@ -55,7 +55,6 @@ interface KoFile :
      */
     override fun hashCode(): Int
 
-
     /**
      * String representing the file.
      *
