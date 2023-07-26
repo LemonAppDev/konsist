@@ -24,16 +24,3 @@ fun Sequence<KoTypeAliasDeclaration>.withoutSourceType(type: String, vararg type
     it.type.sourceType != type && types.none { type -> it.type.sourceType == type }
 }
 
-/**
- * Sequence containing type aliases with `actual` modifier.
- *
- * @return A sequence containing type aliases with the `actual` modifier.
- */
-fun Sequence<KoTypeAliasDeclaration>.withActualModifier(): Sequence<KoTypeAliasDeclaration> = filter { it.hasActualModifier() }
-
-/**
- * Sequence containing type aliases without `actual` modifier.
- *
- * @return A sequence containing type aliases without `actual` modifier.
- */
-fun Sequence<KoTypeAliasDeclaration>.withoutActualModifier(): Sequence<KoTypeAliasDeclaration> = filterNot { it.hasActualModifier() }

@@ -5,50 +5,6 @@ import com.lemonappdev.konsist.api.ext.provider.representsTypeOf
 import kotlin.reflect.KClass
 
 /**
- * Sequence containing all parameters with `vararg` modifier.
- *
- * @return A sequence containing parameters with the `vararg` modifier.
- */
-fun Sequence<KoParameterDeclaration>.withVarargModifier(): Sequence<KoParameterDeclaration> = filter { it.hasVarargModifier() }
-
-/**
- * Sequence containing all parameters without `vararg` modifier.
- *
- * @return A sequence containing parameters without the `vararg` modifier.
- */
-fun Sequence<KoParameterDeclaration>.withoutVarargModifier(): Sequence<KoParameterDeclaration> = filterNot { it.hasVarargModifier() }
-
-/**
- * Sequence containing all parameters with `noinline` modifier.
- *
- * @return A sequence containing parameters with the `noinline` modifier.
- */
-fun Sequence<KoParameterDeclaration>.withNoInlineModifier(): Sequence<KoParameterDeclaration> = filter { it.hasNoInlineModifier() }
-
-/**
- * Sequence containing all parameters without `noinline` modifier.
- *
- * @return A sequence containing parameters without the `noinline` modifier.
- */
-fun Sequence<KoParameterDeclaration>.withoutNoInlineModifier(): Sequence<KoParameterDeclaration> = filterNot { it.hasNoInlineModifier() }
-
-/**
- * Sequence containing all parameters with `crossinline` modifier.
- *
- * @return A sequence containing parameters with the `crossinline` modifier.
- */
-fun Sequence<KoParameterDeclaration>.withCrossInlineModifier(): Sequence<KoParameterDeclaration> = filter { it.hasCrossInlineModifier() }
-
-/**
- * Sequence containing all parameters without `crossinline` modifier.
- *
- * @return A sequence containing parameters without the `crossinline` modifier.
- */
-fun Sequence<KoParameterDeclaration>.withoutCrossInlineModifier(): Sequence<KoParameterDeclaration> =
-    filterNot { it.hasCrossInlineModifier() }
-
-
-/**
  * Sequence containing all parameters with type.
  *
  *  @param type The type to include.
