@@ -2,25 +2,8 @@ package com.lemonappdev.konsist.core.container
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
-import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.api.provider.KoClassProvider
-import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
-import com.lemonappdev.konsist.api.provider.KoFunctionProvider
-import com.lemonappdev.konsist.api.provider.KoHasPackageProvider
-import com.lemonappdev.konsist.api.provider.KoImportProvider
-import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
-import com.lemonappdev.konsist.api.provider.KoModuleProvider
-import com.lemonappdev.konsist.api.provider.KoNameProvider
-import com.lemonappdev.konsist.api.provider.KoObjectProvider
-import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.api.provider.KoPathProvider
-import com.lemonappdev.konsist.api.provider.KoPropertyProvider
-import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
-import com.lemonappdev.konsist.api.provider.KoTextProvider
-import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore

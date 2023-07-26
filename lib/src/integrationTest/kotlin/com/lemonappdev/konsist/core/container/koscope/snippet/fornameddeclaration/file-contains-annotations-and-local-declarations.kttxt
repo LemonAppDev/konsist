@@ -1,9 +1,0 @@
-@file:SampleAnnotation1
-@file:SampleAnnotation2
-
-import com.lemonappdev.konsist.testdata.SampleAnnotation1
-import com.lemonappdev.konsist.testdata.SampleAnnotation2
-
-fun sampleFunction() {
-    val sampleLocalProperty = 7
-}

@@ -27,17 +27,17 @@ import org.jetbrains.kotlin.psi.KtFile
 class KoScopeImpl(
     override var koFiles: Sequence<KoFile>,
 ) : KoScope,
-    KoDeclarationProviderCore,
+    KoAnnotationProviderCore,
     KoClassProviderCore,
-    KoInterfaceProviderCore,
-    KoObjectProviderCore,
-    KoPropertyProviderCore,
+    KoDeclarationProviderCore,
+    KoFileProviderCore,
     KoFunctionProviderCore,
     KoImportProviderCore,
-    KoAnnotationProviderCore,
+    KoInterfaceProviderCore,
+    KoObjectProviderCore,
     KoPackagesProviderCore,
-    KoTypeAliasProviderCore,
-    KoFileProviderCore {
+    KoPropertyProviderCore,
+    KoTypeAliasProviderCore {
     constructor(koFile: KoFile) : this(sequenceOf(koFile))
 
     override val ktFile: KtFile? by lazy { null }

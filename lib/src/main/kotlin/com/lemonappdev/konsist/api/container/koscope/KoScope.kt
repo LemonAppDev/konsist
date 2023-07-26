@@ -18,17 +18,17 @@ import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
  */
 @Suppress("detekt.TooManyFunctions")
 interface KoScope :
-    KoDeclarationProvider,
+    KoAnnotationProvider,
     KoClassProvider,
-    KoInterfaceProvider,
-    KoObjectProvider,
-    KoPropertyProvider,
+    KoDeclarationProvider,
+    KoFileProvider,
     KoFunctionProvider,
     KoImportProvider,
-    KoAnnotationProvider,
+    KoInterfaceProvider,
+    KoObjectProvider,
     KoPackagesProvider,
-    KoTypeAliasProvider,
-    KoFileProvider {
+    KoPropertyProvider,
+    KoTypeAliasProvider {
 
     /**
      * The scope with given predicate.
