@@ -11,7 +11,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileForSourceSetName {
+class KoFileForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in app module`() {
         // given

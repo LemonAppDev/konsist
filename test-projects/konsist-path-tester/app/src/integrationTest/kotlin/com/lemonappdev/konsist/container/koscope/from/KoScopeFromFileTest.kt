@@ -10,7 +10,7 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class KonsistScopeFromFileTest {
+class KoScopeFromFileTest {
 
     @Test
     fun `scopeFromFile`() {

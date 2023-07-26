@@ -11,7 +11,7 @@ import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirecto
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KonsistScopeFromModuleTest {
+class KoScopeFromModuleTest {
     @Test
     fun `scopeFromModule for app module`() {
         // given
@@ -22,19 +22,17 @@ class KonsistScopeFromModuleTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/konsist/container/kofile/KoFileForModuleName.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/kofile/KoFileForSourceSetName.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/KonsistOperatorTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/KonsistSliceTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/KonsistToStringTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromDirectoryTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromFileTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromModuleTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromPackageTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromProductionTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromProjectTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromSourceSetTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/kofile/KoFileForKoModuleProviderTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/kofile/KoFileForKoSourceSetProviderTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/KoScopeTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromDirectoryTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromFileTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromModuleTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromPackageTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromProductionTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromProjectTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromSourceSetTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koclassdeclaration/KoClassDeclarationForKoHasTestProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",
@@ -93,19 +91,17 @@ class KonsistScopeFromModuleTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "$appIntegrationTestSourceSetDirectory/konsist/container/kofile/KoFileForModuleName.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/kofile/KoFileForSourceSetName.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/KonsistOperatorTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/KonsistSliceTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/KonsistToStringTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromDirectoryTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromFileTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromModuleTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromPackageTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromProductionTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromProjectTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromSourceSetTest.kt",
-                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KonsistScopeFromTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/kofile/KoFileForKoModuleProviderTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/kofile/KoFileForKoSourceSetProviderTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/KoScopeTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromDirectoryTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromFileTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromModuleTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromPackageTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromProductionTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromProjectTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromSourceSetTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/koscope/from/KoScopeFromTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/declaration/koclassdeclaration/KoClassDeclarationForKoHasTestProviderTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/KoScopeExt.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/helper/ext/PathExt.kt",

@@ -11,7 +11,7 @@ import com.lemonappdev.konsist.helper.util.PathProvider.rootMainSourceSetDirecto
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KonsistScopeFromPackageTest {
+class KoScopeFromPackageTest {
     @Test
     fun `scopeFromPackage for com_lemonappdev_sample package`() {
         // given

@@ -11,7 +11,7 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class KonsistScopeFromProductionTest {
+class KoScopeFromProductionTest {
     @Test
     fun `scopeFromProduction`() {
         // given
