@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.koclass
+package com.lemonappdev.konsist.declaration.koclassdeclaration
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoClassDeclarationForHasTestTest {
+class KoClassDeclarationForKoHasTestProviderTest {
     @Test
     fun `class-with-test-with-default-parameters`() {
         // given

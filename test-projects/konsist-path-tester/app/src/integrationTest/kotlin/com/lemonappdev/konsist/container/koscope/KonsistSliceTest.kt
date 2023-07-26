@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.scope
+package com.lemonappdev.konsist.container.koscope
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths

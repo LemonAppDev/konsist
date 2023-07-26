@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.kofile
+package com.lemonappdev.konsist.container.kofile
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
@@ -19,7 +19,7 @@ class KoFileForModuleName {
         // given
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
-            .files()
+            .files
             .first()
 
         // then
@@ -35,7 +35,7 @@ class KoFileForModuleName {
         // given
         val sut = Konsist
             .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
-            .files()
+            .files
             .first()
 
         // then
@@ -51,7 +51,7 @@ class KoFileForModuleName {
         // given
         val sut = Konsist
             .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
-            .files()
+            .files
             .first()
 
         // then
