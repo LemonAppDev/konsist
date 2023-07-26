@@ -1,17 +1,5 @@
-package com.lemonappdev.konsist.api.ext.sequence.kodeclaration
+package com.lemonappdev.konsist.api.ext.sequence
 
-import com.lemonappdev.konsist.api.ext.sequence.withAllAnnotations
-import com.lemonappdev.konsist.api.ext.sequence.withAllAnnotationsOf
-import com.lemonappdev.konsist.api.ext.sequence.withAnnotationOf
-import com.lemonappdev.konsist.api.ext.sequence.withAnnotations
-import com.lemonappdev.konsist.api.ext.sequence.withSomeAnnotations
-import com.lemonappdev.konsist.api.ext.sequence.withSomeAnnotationsOf
-import com.lemonappdev.konsist.api.ext.sequence.withoutAllAnnotations
-import com.lemonappdev.konsist.api.ext.sequence.withoutAllAnnotationsOf
-import com.lemonappdev.konsist.api.ext.sequence.withoutAnnotationOf
-import com.lemonappdev.konsist.api.ext.sequence.withoutAnnotations
-import com.lemonappdev.konsist.api.ext.sequence.withoutSomeAnnotations
-import com.lemonappdev.konsist.api.ext.sequence.withoutSomeAnnotationsOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleAnnotation
@@ -22,7 +10,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoDeclarationForAnnotationSequenceExtTest {
+class KoAnnotationProviderSequenceExtTest {
     @Test
     fun `withAnnotations() returns declaration with any annotation`() {
         // given
