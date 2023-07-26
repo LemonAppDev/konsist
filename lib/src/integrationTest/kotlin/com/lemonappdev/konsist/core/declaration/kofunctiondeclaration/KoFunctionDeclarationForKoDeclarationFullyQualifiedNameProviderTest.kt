@@ -13,7 +13,7 @@ class KoFunctionDeclarationForKoDeclarationFullyQualifiedNameProviderTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.sampleFunction"
+        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleFunction"
     }
 
     @Test

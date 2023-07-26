@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koobjectdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -13,7 +14,17 @@ class KoObjectDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleObject"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleObject"
+            hasNameStartingWith("Sample") shouldBeEqualTo true
+            hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameEndingWith("ject") shouldBeEqualTo true
+            hasNameEndingWith("other") shouldBeEqualTo false
+            hasNameContaining("leObj") shouldBeEqualTo true
+            hasNameContaining("leobj") shouldBeEqualTo false
+            hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
+            hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -24,7 +35,17 @@ class KoObjectDeclarationForKoNameProviderTest {
             .first()
 
         // then
-        sut.name shouldBeEqualTo "SampleObject"
+        assertSoftly(sut) {
+            name shouldBeEqualTo "SampleObject"
+            hasNameStartingWith("Sample") shouldBeEqualTo true
+            hasNameStartingWith("Other") shouldBeEqualTo false
+            hasNameEndingWith("ject") shouldBeEqualTo true
+            hasNameEndingWith("other") shouldBeEqualTo false
+            hasNameContaining("leObj") shouldBeEqualTo true
+            hasNameContaining("leobj") shouldBeEqualTo false
+            hasNameMatching(Regex("[a-zA-Z]+")) shouldBeEqualTo true
+            hasNameMatching(Regex("[0-9]+")) shouldBeEqualTo false
+        }
     }
 
     @Test

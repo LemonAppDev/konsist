@@ -13,7 +13,7 @@ class KoPropertyDeclarationForKoDeclarationFullyQualifiedNameProviderTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.sampleProperty"
+        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.sampleProperty"
     }
 
     @Test

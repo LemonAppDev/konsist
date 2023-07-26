@@ -13,7 +13,7 @@ class KoInterfaceDeclarationForKoDeclarationFullyQualifiedNameProviderTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleInterface"
+        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleInterface"
     }
 
     @Test

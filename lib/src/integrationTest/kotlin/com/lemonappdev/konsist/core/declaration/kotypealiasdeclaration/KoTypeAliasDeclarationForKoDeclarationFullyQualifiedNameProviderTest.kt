@@ -13,7 +13,7 @@ class KoTypeAliasDeclarationForKoDeclarationFullyQualifiedNameProviderTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleTypeAlias"
+        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleTypeAlias"
     }
 
     @Test

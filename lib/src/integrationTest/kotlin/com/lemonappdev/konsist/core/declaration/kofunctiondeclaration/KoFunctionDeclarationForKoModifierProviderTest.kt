@@ -106,9 +106,9 @@ class KoFunctionDeclarationForKoModifierProviderTest {
     }
 
     @Test
-    fun `function-has-public-by-default-visibility-modifier`() {
+    fun `function-is-public-by-default`() {
         // given
-        val sut = getSnippetFile("function-has-public-by-default-visibility-modifier")
+        val sut = getSnippetFile("function-is-public-by-default")
             .functions(includeNested = true)
             .first()
 

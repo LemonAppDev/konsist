@@ -13,7 +13,7 @@ class KoClassDeclarationForKoDeclarationFullyQualifiedNameProviderTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
+        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass"
     }
 
     @Test

@@ -1,6 +1,5 @@
-package com.lemonappdev.konsist.testdata
+package com.samplepackage
 
 typealias SampleTypeAlias = () -> Int
 
 class SampleClass1(val sampleProperty1: SampleTypeAlias)
-
