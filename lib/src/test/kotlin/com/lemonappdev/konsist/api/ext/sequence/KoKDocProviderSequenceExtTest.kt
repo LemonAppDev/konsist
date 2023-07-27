@@ -1,15 +1,7 @@
-package com.lemonappdev.konsist.api.ext.sequence.kopsideclaration
+package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
-import com.lemonappdev.konsist.api.ext.sequence.withKDoc
-import com.lemonappdev.konsist.api.ext.sequence.withKDocWithAllTags
-import com.lemonappdev.konsist.api.ext.sequence.withKDocWithSomeTags
-import com.lemonappdev.konsist.api.ext.sequence.withKDocWithTags
-import com.lemonappdev.konsist.api.ext.sequence.withoutKDoc
-import com.lemonappdev.konsist.api.ext.sequence.withoutKDocWithAllTags
-import com.lemonappdev.konsist.api.ext.sequence.withoutKDocWithSomeTags
-import com.lemonappdev.konsist.api.ext.sequence.withoutKDocWithTags
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationImpl
 import io.mockk.every
@@ -17,222 +9,222 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoPsiDeclarationForKDocSequenceExtTest {
+class KoKDocProviderSequenceExtTest {
     @Test
-    fun `withKDoc() returns psiDeclaration with any kDoc`() {
+    fun `withKDoc() returns declaration with any kDoc`() {
         // given
-        val psiDeclaration1: KoKDocProvider = mockk {
+        val declaration1: KoKDocProvider = mockk {
             every { hasKDoc() } returns true
         }
-        val psiDeclaration2: KoKDocProvider = mockk {
+        val declaration2: KoKDocProvider = mockk {
             every { hasKDoc() } returns false
         }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = psiDeclarations.withKDoc()
+        val sut = declarations.withKDoc()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutKDoc() returns psiDeclaration without any kDoc`() {
+    fun `withoutKDoc() returns declaration without any kDoc`() {
         // given
-        val psiDeclaration1: KoKDocProvider = mockk {
+        val declaration1: KoKDocProvider = mockk {
             every { hasKDoc() } returns true
         }
-        val psiDeclaration2: KoKDocProvider = mockk {
+        val declaration2: KoKDocProvider = mockk {
             every { hasKDoc() } returns false
         }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = psiDeclarations.withoutKDoc()
+        val sut = declarations.withoutKDoc()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration2)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withKDocWithTags() returns psiDeclaration with any tag`() {
+    fun `withKDocWithTags() returns declaration with any tag`() {
         // given
         val tag: KoKDocTagDeclaration = mockk()
         val kDoc1: KoKDocDeclarationImpl = mockk {
             every { tags } returns listOf(tag)
         }
-        val psiDeclaration1: KoKDocProvider = mockk {
+        val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { tags } returns emptyList()
         }
-        val psiDeclaration2: KoKDocProvider = mockk {
+        val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = psiDeclarations.withKDocWithTags()
+        val sut = declarations.withKDocWithTags()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutKDocWithTags() returns psiDeclaration without any tag`() {
+    fun `withoutKDocWithTags() returns declaration without any tag`() {
         // given
         val tag: KoKDocTagDeclaration = mockk()
         val kDoc1: KoKDocDeclarationImpl = mockk {
             every { tags } returns listOf(tag)
         }
-        val psiDeclaration1: KoKDocProvider = mockk {
+        val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { tags } returns emptyList()
         }
-        val psiDeclaration2: KoKDocProvider = mockk {
+        val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = psiDeclarations.withoutKDocWithTags()
+        val sut = declarations.withoutKDocWithTags()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration2)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withKDocWithAllTags(String) returns psiDeclaration with given tag`() {
+    fun `withKDocWithAllTags(String) returns declaration with given tag`() {
         // given
         val tag = KoKDocTag.SINCE
         val kDoc1: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag) } returns true
         }
-        val psiDeclaration1: KoKDocProvider = mockk {
+        val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag) } returns false
         }
-        val psiDeclaration2: KoKDocProvider = mockk {
+        val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = psiDeclarations.withKDocWithAllTags(tag)
+        val sut = declarations.withKDocWithAllTags(tag)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withKDocWithAllTags(String) returns psiDeclaration with all of given tags`() {
+    fun `withKDocWithAllTags(String) returns declaration with all of given tags`() {
         // given
         val tag1 = KoKDocTag.SINCE
         val tag2 = KoKDocTag.SEE
         val kDoc1: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag1, tag2) } returns true
         }
-        val psiDeclaration1: KoKDocProvider = mockk {
+        val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag1, tag2) } returns false
         }
-        val psiDeclaration2: KoKDocProvider = mockk {
+        val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = psiDeclarations.withKDocWithAllTags(tag1, tag2)
+        val sut = declarations.withKDocWithAllTags(tag1, tag2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withoutKDocWithAllTags(String) returns psiDeclaration without given tag`() {
+    fun `withoutKDocWithAllTags(String) returns declaration without given tag`() {
         // given
         val tag = KoKDocTag.SINCE
         val kDoc1: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag) } returns true
         }
-        val psiDeclaration1: KoKDocProvider = mockk {
+        val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag) } returns false
         }
-        val psiDeclaration2: KoKDocProvider = mockk {
+        val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = psiDeclarations.withoutKDocWithAllTags(tag)
+        val sut = declarations.withoutKDocWithAllTags(tag)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration2)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withoutKDocWithAllTags(String) returns psiDeclaration without any of given tags`() {
+    fun `withoutKDocWithAllTags(String) returns declaration without any of given tags`() {
         // given
         val tag1 = KoKDocTag.SINCE
         val tag2 = KoKDocTag.SEE
         val kDoc1: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag1, tag2) } returns true
         }
-        val psiDeclaration1: KoKDocProvider = mockk {
+        val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag1, tag2) } returns false
         }
-        val psiDeclaration2: KoKDocProvider = mockk {
+        val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = psiDeclarations.withoutKDocWithAllTags(tag1, tag2)
+        val sut = declarations.withoutKDocWithAllTags(tag1, tag2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration2)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withKDocWithSomeTags(String) returns psiDeclarations with given tag`() {
+    fun `withKDocWithSomeTags(String) returns declarations with given tag`() {
         // given
         val tag = KoKDocTag.SINCE
         val kDoc1: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag) } returns true
         }
-        val psiDeclaration1: KoKDocProvider = mockk {
+        val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag) } returns false
         }
-        val psiDeclaration2: KoKDocProvider = mockk {
+        val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = psiDeclarations.withKDocWithSomeTags(tag)
+        val sut = declarations.withKDocWithSomeTags(tag)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration1)
+        sut.toList() shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withKDocWithSomeTags(String) returns psiDeclarations with at least one of given tags`() {
+    fun `withKDocWithSomeTags(String) returns declarations with at least one of given tags`() {
         // given
         val tag1 = KoKDocTag.SINCE
         val tag2 = KoKDocTag.SEE
@@ -240,59 +232,59 @@ class KoPsiDeclarationForKDocSequenceExtTest {
             every { hasTags(tag1) } returns true
             every { hasTags(tag2) } returns true
         }
-        val psiDeclaration1: KoKDocProvider = mockk {
+        val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag1) } returns true
             every { hasTags(tag2) } returns false
         }
-        val psiDeclaration2: KoKDocProvider = mockk {
+        val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
         val kDoc3: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag1) } returns false
             every { hasTags(tag2) } returns false
         }
-        val psiDeclaration3: KoKDocProvider = mockk {
+        val declaration3: KoKDocProvider = mockk {
             every { kDoc } returns kDoc3
         }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2, psiDeclaration3)
+        val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = psiDeclarations.withKDocWithSomeTags(tag1, tag2)
+        val sut = declarations.withKDocWithSomeTags(tag1, tag2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration1, psiDeclaration2)
+        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
-    fun `withoutKDocWithSomeTags(String) returns psiDeclarations with given tag`() {
+    fun `withoutKDocWithSomeTags(String) returns declarations with given tag`() {
         // given
         val tag = KoKDocTag.SINCE
         val kDoc1: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag) } returns true
         }
-        val psiDeclaration1: KoKDocProvider = mockk {
+        val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag) } returns false
         }
-        val psiDeclaration2: KoKDocProvider = mockk {
+        val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2)
+        val declarations = sequenceOf(declaration1, declaration2)
 
         // when
-        val sut = psiDeclarations.withoutKDocWithSomeTags(tag)
+        val sut = declarations.withoutKDocWithSomeTags(tag)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration2)
+        sut.toList() shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withoutKDocWithSomeTags(String) returns psiDeclarations with at least one of given tags`() {
+    fun `withoutKDocWithSomeTags(String) returns declarations with at least one of given tags`() {
         // given
         val tag1 = KoKDocTag.SINCE
         val tag2 = KoKDocTag.SEE
@@ -300,29 +292,29 @@ class KoPsiDeclarationForKDocSequenceExtTest {
             every { hasTags(tag1) } returns true
             every { hasTags(tag2) } returns true
         }
-        val psiDeclaration1: KoKDocProvider = mockk {
+        val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag1) } returns true
             every { hasTags(tag2) } returns false
         }
-        val psiDeclaration2: KoKDocProvider = mockk {
+        val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
         val kDoc3: KoKDocDeclarationImpl = mockk {
             every { hasTags(tag1) } returns false
             every { hasTags(tag2) } returns false
         }
-        val psiDeclaration3: KoKDocProvider = mockk {
+        val declaration3: KoKDocProvider = mockk {
             every { kDoc } returns kDoc3
         }
-        val psiDeclarations = sequenceOf(psiDeclaration1, psiDeclaration2, psiDeclaration3)
+        val declarations = sequenceOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = psiDeclarations.withoutKDocWithSomeTags(tag1, tag2)
+        val sut = declarations.withoutKDocWithSomeTags(tag1, tag2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(psiDeclaration3)
+        sut.toList() shouldBeEqualTo listOf(declaration3)
     }
 }
