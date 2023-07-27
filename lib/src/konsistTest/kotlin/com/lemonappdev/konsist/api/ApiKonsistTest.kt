@@ -28,7 +28,15 @@ class ApiKonsistTest {
         apiPackageScope
             .functions(includeNested = true, includeLocal = true)
             .assert {
-                it.kDoc?.hasTags(PARAM, RETURN, RECEIVER) == true || it.kDoc?.hasTags(PARAM, RETURN) == true
+                if (it.parameters.toList().isNotEmpty() && it.explicitReturnType?.name != "Unit") {
+                    it.kDoc?.hasTags(PARAM, RETURN) == true && it.parameters.toList().count() == it.kDoc?.paramTags?.count()
+                } else if (it.parameters.toList().isNotEmpty()) {
+                    it.kDoc?.hasTags(PARAM) == true && it.parameters.toList().count() == it.kDoc?.paramTags?.count()
+                } else if (it.explicitReturnType?.name != "Unit") {
+                    it.kDoc?.hasTags(RETURN)
+                } else {
+                    it.hasKDoc()
+                }
             }
     }
 
