@@ -38,7 +38,6 @@ class TestingSnippets {
         Konsist.scopeFromTest()
             .classes()
             .flatMap { it.declarations() }
-            .filterIsInstance<KoDeclaration>()
             .filterNot {
                 it.annotations.any { annotation ->
                     annotation
