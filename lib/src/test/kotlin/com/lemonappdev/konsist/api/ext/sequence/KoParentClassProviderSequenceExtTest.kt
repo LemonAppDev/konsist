@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
-import com.lemonappdev.konsist.core.declaration.KoParentDeclarationImpl
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1
 import com.lemonappdev.konsist.testdata.SampleClass2
@@ -141,19 +140,12 @@ class KoParentClassProviderSequenceExtTest {
     @Test
     fun `withParentClassOf() returns declaration with SampleClass parent declaration`() {
         // given
-        val name1 = "SampleClass"
-        val name2 = "OtherClass"
-        val parent1: KoParentDeclarationImpl = mockk {
-            every { name } returns name1
-        }
+        val name = "SampleClass"
         val declaration1: KoParentClassProvider = mockk {
-            every { parentClass } returns parent1
-        }
-        val parent2: KoParentDeclarationImpl = mockk {
-            every { name } returns name2
+            every { hasParentClass(name) } returns true
         }
         val declaration2: KoParentClassProvider = mockk {
-            every { parentClass } returns parent2
+            every { hasParentClass(name) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
@@ -167,19 +159,12 @@ class KoParentClassProviderSequenceExtTest {
     @Test
     fun `withoutParentClassOf() returns declaration without SampleClass parent declaration`() {
         // given
-        val name1 = "SampleClass"
-        val name2 = "OtherClass"
-        val parent1: KoParentDeclarationImpl = mockk {
-            every { name } returns name1
-        }
+        val name = "SampleClass"
         val declaration1: KoParentClassProvider = mockk {
-            every { parentClass } returns parent1
-        }
-        val parent2: KoParentDeclarationImpl = mockk {
-            every { name } returns name2
+            every { hasParentClass(name) } returns true
         }
         val declaration2: KoParentClassProvider = mockk {
-            every { parentClass } returns parent2
+            every { hasParentClass(name) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
@@ -193,12 +178,12 @@ class KoParentClassProviderSequenceExtTest {
     @Test
     fun `withParentClassOf(KClass) returns declaration with given parent declaration`() {
         // given
-        val name1 = "SampleClass1"
+        val name = "SampleClass1"
         val declaration1: KoParentClassProvider = mockk {
-            every { hasParentClass(name1) } returns true
+            every { hasParentClass(name) } returns true
         }
         val declaration2: KoParentClassProvider = mockk {
-            every { hasParentClass(name1) } returns false
+            every { hasParentClass(name) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
@@ -238,12 +223,12 @@ class KoParentClassProviderSequenceExtTest {
     @Test
     fun `withoutParentClassOf(KClass) returns declaration without given parent declaration`() {
         // given
-        val name1 = "SampleClass1"
+        val name = "SampleClass1"
         val declaration1: KoParentClassProvider = mockk {
-            every { hasParentClass(name1) } returns true
+            every { hasParentClass(name) } returns true
         }
         val declaration2: KoParentClassProvider = mockk {
-            every { hasParentClass(name1) } returns false
+            every { hasParentClass(name) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 

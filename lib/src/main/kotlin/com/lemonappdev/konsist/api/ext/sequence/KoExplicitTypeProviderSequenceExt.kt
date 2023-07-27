@@ -55,7 +55,7 @@ fun <T : KoExplicitTypeProvider> Sequence<T>.withoutExplicitTypeOf(vararg types:
  * @return A sequence containing declarations with the specified type.
  */
 inline fun <reified T> Sequence<KoExplicitTypeProvider>.withExplicitTypeOf(): Sequence<KoExplicitTypeProvider> =
-    filter { T::class.simpleName == it.explicitType?.name }
+    withExplicitTypeOf(T::class)
 
 /**
  * Sequence containing declarations without explicit type of.
@@ -63,4 +63,4 @@ inline fun <reified T> Sequence<KoExplicitTypeProvider>.withExplicitTypeOf(): Se
  * @return A sequence containing declarations without specified type.
  */
 inline fun <reified T> Sequence<KoExplicitTypeProvider>.withoutExplicitTypeOf(): Sequence<KoExplicitTypeProvider> =
-    filterNot { T::class.simpleName == it.explicitType?.name }
+    withoutExplicitTypeOf(T::class)

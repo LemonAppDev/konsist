@@ -36,7 +36,7 @@ fun <T : KoReceiverTypeProvider> Sequence<T>.withoutReceiverType(vararg types: S
  * @return A sequence containing declarations with the receiver type of the specified type.
  */
 inline fun <reified T> Sequence<KoReceiverTypeProvider>.withReceiverTypeOf(): Sequence<KoReceiverTypeProvider> =
-    filter { it.hasReceiverTypeOf<T>() }
+    withReceiverTypeOf(T::class)
 
 /**
  * Sequence containing declarations without receiver type.
@@ -44,7 +44,7 @@ inline fun <reified T> Sequence<KoReceiverTypeProvider>.withReceiverTypeOf(): Se
  * @return A sequence containing declarations without receiver type of the specified type.
  */
 inline fun <reified T> Sequence<KoReceiverTypeProvider>.withoutReceiverTypeOf(): Sequence<KoReceiverTypeProvider> =
-    filterNot { it.hasReceiverTypeOf<T>() }
+    withoutReceiverTypeOf(T::class)
 
 /**
  * Sequence containing declarations with receiver type.

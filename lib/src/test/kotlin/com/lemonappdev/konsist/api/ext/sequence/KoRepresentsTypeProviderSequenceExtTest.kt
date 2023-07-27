@@ -156,12 +156,12 @@ class KoRepresentsTypeProviderSequenceExtTest {
     @Test
     fun `withRepresentedTypeOf() with KClass syntax returns declaration with SampleClass type`() {
         // given
+        val type = "com.lemonappdev.konsist.testdata.SampleClass"
         val declaration1: KoRepresentsTypeProvider = mockk {
-            every { SampleClass::class.simpleName?.let { representsType(it) } } returns true
+            every { representsType(type) } returns true
         }
         val declaration2: KoRepresentsTypeProvider = mockk {
-            every { SampleClass::class.simpleName?.let { representsType(it) } } returns false
-            every { SampleClass::class.qualifiedName?.let { representsType(it) } } returns false
+            every { representsType(type) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
@@ -175,12 +175,12 @@ class KoRepresentsTypeProviderSequenceExtTest {
     @Test
     fun `withoutRepresentedTypeOf() with KClass syntax returns declaration without SampleClass type`() {
         // given
+        val type = "com.lemonappdev.konsist.testdata.SampleClass"
         val declaration1: KoRepresentsTypeProvider = mockk {
-            every { SampleClass::class.simpleName?.let { representsType(it) } } returns true
+            every { representsType(type) } returns true
         }
         val declaration2: KoRepresentsTypeProvider = mockk {
-            every { SampleClass::class.simpleName?.let { representsType(it) } } returns false
-            every { SampleClass::class.qualifiedName?.let { representsType(it) } } returns false
+            every { representsType(type) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 

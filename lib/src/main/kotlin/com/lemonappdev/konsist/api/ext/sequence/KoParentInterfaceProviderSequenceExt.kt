@@ -69,11 +69,8 @@ fun <T : KoParentInterfaceProvider> Sequence<T>.withoutSomeParentInterfaces(name
  *
  * @return A sequence containing declarations with the parent interface of the specified type.
  */
-inline fun <reified T> Sequence<KoParentInterfaceProvider>.withParentInterfaceOf(): Sequence<KoParentInterfaceProvider> = filter {
-    it
-        .parentInterfaces
-        .any { parent -> parent.name == T::class.simpleName }
-}
+inline fun <reified T> Sequence<KoParentInterfaceProvider>.withParentInterfaceOf(): Sequence<KoParentInterfaceProvider> =
+    withAllParentInterfacesOf(T::class)
 
 /**
  * Sequence containing all declarations without some named parent interface.
@@ -81,7 +78,7 @@ inline fun <reified T> Sequence<KoParentInterfaceProvider>.withParentInterfaceOf
  * @return A sequence containing declarations without parent interface of the specified type.
  */
 inline fun <reified T> Sequence<KoParentInterfaceProvider>.withoutParentInterfaceOf(): Sequence<KoParentInterfaceProvider> =
-    this - withParentInterfaceOf<T>().toSet()
+    withoutAllParentInterfacesOf(T::class)
 
 /**
  * Sequence containing all declarations with all specified parent interfaces of type.
@@ -93,11 +90,11 @@ inline fun <reified T> Sequence<KoParentInterfaceProvider>.withoutParentInterfac
 fun <T : KoParentInterfaceProvider> Sequence<T>.withAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
     filter {
         it.parentInterfaces.any { parent -> parent.name == name.simpleName } &&
-            names.all { kClass ->
-                it
-                    .parentInterfaces
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+                names.all { kClass ->
+                    it
+                        .parentInterfaces
+                        .any { parent -> parent.name == kClass.simpleName }
+                }
     }
 
 /**
@@ -110,11 +107,11 @@ fun <T : KoParentInterfaceProvider> Sequence<T>.withAllParentInterfacesOf(name: 
 fun <T : KoParentInterfaceProvider> Sequence<T>.withSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
     filter {
         it.parentInterfaces.any { parent -> parent.name == name.simpleName } ||
-            names.any { kClass ->
-                it
-                    .parentInterfaces
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+                names.any { kClass ->
+                    it
+                        .parentInterfaces
+                        .any { parent -> parent.name == kClass.simpleName }
+                }
     }
 
 /**
@@ -127,11 +124,11 @@ fun <T : KoParentInterfaceProvider> Sequence<T>.withSomeParentInterfacesOf(name:
 fun <T : KoParentInterfaceProvider> Sequence<T>.withoutAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
     filter {
         it.parentInterfaces.none { parent -> parent.name == name.simpleName } &&
-            names.none { kClass ->
-                it
-                    .parentInterfaces
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+                names.none { kClass ->
+                    it
+                        .parentInterfaces
+                        .any { parent -> parent.name == kClass.simpleName }
+                }
     }
 
 /**
@@ -144,13 +141,13 @@ fun <T : KoParentInterfaceProvider> Sequence<T>.withoutAllParentInterfacesOf(nam
 fun <T : KoParentInterfaceProvider> Sequence<T>.withoutSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
     filter {
         it.parentInterfaces.none { parent -> parent.name == name.simpleName } &&
-            if (names.isNotEmpty()) {
-                names.any { kClass ->
-                    it
-                        .parentInterfaces
-                        .none { parent -> parent.name == kClass.simpleName }
+                if (names.isNotEmpty()) {
+                    names.any { kClass ->
+                        it
+                            .parentInterfaces
+                            .none { parent -> parent.name == kClass.simpleName }
+                    }
+                } else {
+                    true
                 }
-            } else {
-                true
-            }
     }

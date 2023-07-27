@@ -140,7 +140,7 @@ fun <T : KoAnnotationProvider> Sequence<T>.withoutSomeAnnotationsOf(
  * @return A sequence containing declarations with the specified annotation.
  */
 inline fun <reified T> Sequence<KoAnnotationProvider>.withAnnotationOf(): Sequence<KoAnnotationProvider> =
-    filter { it.hasAnnotationOf<T>() }
+    withAllAnnotationsOf(T::class)
 
 /**
  * Sequence containing declarations without annotations of type.
@@ -148,4 +148,4 @@ inline fun <reified T> Sequence<KoAnnotationProvider>.withAnnotationOf(): Sequen
  * @return A sequence containing declarations without specified annotation.
  */
 inline fun <reified T> Sequence<KoAnnotationProvider>.withoutAnnotationOf(): Sequence<KoAnnotationProvider> =
-    filterNot { it.hasAnnotationOf<T>() }
+    withoutAllAnnotationsOf(T::class)

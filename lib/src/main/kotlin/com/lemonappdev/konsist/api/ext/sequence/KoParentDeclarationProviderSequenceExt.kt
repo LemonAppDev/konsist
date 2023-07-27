@@ -71,11 +71,8 @@ fun <T : KoParentDeclarationProvider> Sequence<T>.withoutSomeParentDeclarations(
  *
  * @return A sequence containing declarations with the parent declaration of the specified type.
  */
-inline fun <reified T> Sequence<KoParentDeclarationProvider>.withParentDeclarationOf(): Sequence<KoParentDeclarationProvider> = filter {
-    it
-        .parentDeclarations
-        .any { parent -> parent.name == T::class.simpleName }
-}
+inline fun <reified T> Sequence<KoParentDeclarationProvider>.withParentDeclarationOf(): Sequence<KoParentDeclarationProvider> =
+    withAllParentDeclarationsOf(T::class)
 
 /**
  * Sequence containing all declarations without named parent declarations.
@@ -83,7 +80,7 @@ inline fun <reified T> Sequence<KoParentDeclarationProvider>.withParentDeclarati
  * @return A sequence containing declarations without parent declaration of the specified type.
  */
 inline fun <reified T> Sequence<KoParentDeclarationProvider>.withoutParentDeclarationOf(): Sequence<KoParentDeclarationProvider> =
-    this - withParentDeclarationOf<T>().toSet()
+    withoutAllParentDeclarationsOf(T::class)
 
 /**
  * Sequence containing all declarations with named parent declarations.
@@ -95,11 +92,11 @@ inline fun <reified T> Sequence<KoParentDeclarationProvider>.withoutParentDeclar
 fun <T : KoParentDeclarationProvider> Sequence<T>.withAllParentDeclarationsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
     filter {
         it.parentDeclarations.any { parent -> parent.name == name.simpleName } &&
-            names.all { kClass ->
-                it
-                    .parentDeclarations
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+                names.all { kClass ->
+                    it
+                        .parentDeclarations
+                        .any { parent -> parent.name == kClass.simpleName }
+                }
     }
 
 /**
@@ -112,11 +109,11 @@ fun <T : KoParentDeclarationProvider> Sequence<T>.withAllParentDeclarationsOf(na
 fun <T : KoParentDeclarationProvider> Sequence<T>.withSomeParentDeclarationsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
     filter {
         it.parentDeclarations.any { parent -> parent.name == name.simpleName } ||
-            names.any { kClass ->
-                it
-                    .parentDeclarations
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+                names.any { kClass ->
+                    it
+                        .parentDeclarations
+                        .any { parent -> parent.name == kClass.simpleName }
+                }
     }
 
 /**
@@ -129,11 +126,11 @@ fun <T : KoParentDeclarationProvider> Sequence<T>.withSomeParentDeclarationsOf(n
 fun <T : KoParentDeclarationProvider> Sequence<T>.withoutAllParentDeclarationsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
     filter {
         it.parentDeclarations.none { parent -> parent.name == name.simpleName } &&
-            names.none { kClass ->
-                it
-                    .parentDeclarations
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
+                names.none { kClass ->
+                    it
+                        .parentDeclarations
+                        .any { parent -> parent.name == kClass.simpleName }
+                }
     }
 
 /**
@@ -146,13 +143,13 @@ fun <T : KoParentDeclarationProvider> Sequence<T>.withoutAllParentDeclarationsOf
 fun <T : KoParentDeclarationProvider> Sequence<T>.withoutSomeParentDeclarationsOf(name: KClass<*>, vararg names: KClass<*>): Sequence<T> =
     filter {
         it.parentDeclarations.none { parent -> parent.name == name.simpleName } &&
-            if (names.isNotEmpty()) {
-                names.any { kClass ->
-                    it
-                        .parentDeclarations
-                        .none { parent -> parent.name == kClass.simpleName }
+                if (names.isNotEmpty()) {
+                    names.any { kClass ->
+                        it
+                            .parentDeclarations
+                            .none { parent -> parent.name == kClass.simpleName }
+                    }
+                } else {
+                    true
                 }
-            } else {
-                true
-            }
     }

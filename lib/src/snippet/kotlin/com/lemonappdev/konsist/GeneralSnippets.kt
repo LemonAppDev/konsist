@@ -18,7 +18,7 @@ import javax.inject.Inject
 class GeneralSnippets {
     fun `no empty files allowed`() {
         Konsist.scopeFromProject()
-            .files()
+            .files
             .assertNot { it.text.isEmpty() }
     }
 
@@ -40,7 +40,7 @@ class GeneralSnippets {
 
     fun `no class should use Java util logging`() {
         Konsist.scopeFromProject()
-            .files()
+            .files
             .assertNot { it.hasImports("java.util.logging..") }
     }
 
@@ -68,7 +68,7 @@ class GeneralSnippets {
 
     fun `package name must match file path`() {
         Konsist.scopeFromProject()
-            .packages()
+            .packages
             .assert { it.hasMatchingFilePath }
     }
 
@@ -106,7 +106,7 @@ class GeneralSnippets {
 
     fun `no wildcard imports allowed`() {
         Konsist.scopeFromProject()
-            .imports()
+            .imports
             .assertNot { it.isWildcard }
     }
 
@@ -120,7 +120,7 @@ class GeneralSnippets {
 
     fun `forbid the usage of 'forbiddenString' in file`() {
         Konsist.scopeFromProject()
-            .files()
+            .files
             .assertNot { it.text.contains("forbiddenString") }
     }
 }

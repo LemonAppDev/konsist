@@ -35,7 +35,7 @@ fun <T : KoExplicitReturnTypeProvider> Sequence<T>.withoutExplicitReturnType(var
  * @return A sequence containing declarations with the return type of the specified type.
  */
 inline fun <reified T> Sequence<KoExplicitReturnTypeProvider>.withExplicitReturnTypeOf(): Sequence<KoExplicitReturnTypeProvider> =
-    filter { T::class.simpleName == it.explicitReturnType?.name }
+    withExplicitReturnTypeOf(T::class)
 
 /**
  * Sequence containing declarations without explicit return type.
@@ -43,7 +43,7 @@ inline fun <reified T> Sequence<KoExplicitReturnTypeProvider>.withExplicitReturn
  * @return A sequence containing declarations without return type of the specified type.
  */
 inline fun <reified T> Sequence<KoExplicitReturnTypeProvider>.withoutExplicitReturnTypeOf(): Sequence<KoExplicitReturnTypeProvider> =
-    filterNot { T::class.simpleName == it.explicitReturnType?.name }
+    withoutExplicitReturnTypeOf(T::class)
 
 /**
  * Sequence containing declarations with explicit return type.

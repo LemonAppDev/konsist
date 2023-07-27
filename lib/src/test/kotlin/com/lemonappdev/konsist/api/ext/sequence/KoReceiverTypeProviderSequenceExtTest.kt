@@ -101,11 +101,12 @@ class KoReceiverTypeProviderSequenceExtTest {
     @Test
     fun `withReceiverTypeOf() returns declaration with given receiver`() {
         // given
+        val typeName = "SampleType"
         val declaration1: KoReceiverTypeProvider = mockk {
-            every { receiverType?.name } returns "SampleType"
+            every { hasReceiverType(typeName) } returns true
         }
         val declaration2: KoReceiverTypeProvider = mockk {
-            every { receiverType?.name } returns "OtherType"
+            every { hasReceiverType(typeName) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
@@ -119,11 +120,12 @@ class KoReceiverTypeProviderSequenceExtTest {
     @Test
     fun `withoutReceiverTypeOf() returns declaration without given receiver`() {
         // given
+        val typeName = "SampleType"
         val declaration1: KoReceiverTypeProvider = mockk {
-            every { receiverType?.name } returns "SampleType"
+            every { hasReceiverType(typeName) } returns true
         }
         val declaration2: KoReceiverTypeProvider = mockk {
-            every { receiverType?.name } returns "OtherType"
+            every { hasReceiverType(typeName) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 

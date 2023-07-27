@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
+import org.jetbrains.kotlin.ir.types.impl.IrErrorClassImpl.declarations
 import org.junit.jupiter.api.Test
 
 class KoAnnotationProviderSequenceExtTest {
@@ -300,19 +301,11 @@ class KoAnnotationProviderSequenceExtTest {
     @Test
     fun `withAnnotationOf(KClass) returns declaration with all of given annotations`() {
         // given
-        val qualifiedName1 = "com.lemonappdev.konsist.testdata.SampleAnnotation"
-        val qualifiedName2 = "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
-        val annotation1: KoAnnotationDeclarationImpl = mockk {
-            every { fullyQualifiedName } returns qualifiedName1
-        }
-        val annotation2: KoAnnotationDeclarationImpl = mockk {
-            every { fullyQualifiedName } returns qualifiedName2
-        }
         val declaration1: KoAnnotationProvider = mockk {
-            every { annotations } returns sequenceOf(annotation1)
+            every { hasAnnotationsOf(SampleAnnotation::class) } returns true
         }
         val declaration2: KoAnnotationProvider = mockk {
-            every { annotations } returns sequenceOf(annotation2)
+            every { hasAnnotationsOf(SampleAnnotation::class) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
@@ -326,19 +319,11 @@ class KoAnnotationProviderSequenceExtTest {
     @Test
     fun `withoutAnnotationOf(KClass) returns declaration without any of given annotations`() {
         // given
-        val qualifiedName1 = "com.lemonappdev.konsist.testdata.SampleAnnotation"
-        val qualifiedName2 = "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
-        val annotation1: KoAnnotationDeclarationImpl = mockk {
-            every { fullyQualifiedName } returns qualifiedName1
-        }
-        val annotation2: KoAnnotationDeclarationImpl = mockk {
-            every { fullyQualifiedName } returns qualifiedName2
-        }
         val declaration1: KoAnnotationProvider = mockk {
-            every { annotations } returns sequenceOf(annotation1)
+            every { hasAnnotationsOf(SampleAnnotation::class) } returns true
         }
         val declaration2: KoAnnotationProvider = mockk {
-            every { annotations } returns sequenceOf(annotation2)
+            every { hasAnnotationsOf(SampleAnnotation::class) } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 

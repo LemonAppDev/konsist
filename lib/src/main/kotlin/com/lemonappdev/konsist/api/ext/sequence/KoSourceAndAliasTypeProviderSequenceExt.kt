@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
  * @return A sequence containing declarations with the source type matching the specified type.
  */
 inline fun <reified T> Sequence<KoSourceAndAliasTypeProvider>.withSourceTypeOf(): Sequence<KoSourceAndAliasTypeProvider> =
-    filter { it.sourceType == T::class.simpleName }
+    withSourceTypeOf(T::class)
 
 /**
  * Sequence containing declarations without source type of.
@@ -17,7 +17,7 @@ inline fun <reified T> Sequence<KoSourceAndAliasTypeProvider>.withSourceTypeOf()
  * @return A sequence containing declarations without source type matching the specified type.
  */
 inline fun <reified T> Sequence<KoSourceAndAliasTypeProvider>.withoutSourceTypeOf(): Sequence<KoSourceAndAliasTypeProvider> =
-    filterNot { it.sourceType == T::class.simpleName }
+    withoutSourceTypeOf(T::class)
 
 /**
  * Sequence containing declarations with source type of.
@@ -67,7 +67,7 @@ fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withoutSourceType(type: Strin
  * @return A sequence containing declarations with an alias type matching the specified type.
  */
 inline fun <reified T> Sequence<KoSourceAndAliasTypeProvider>.withAliasTypeOf(): Sequence<KoSourceAndAliasTypeProvider> =
-    filter { it.isAlias() && it.sourceType == T::class.simpleName }
+    withAliasTypeOf(T::class)
 
 /**
  * Sequence containing declarations without alias type of.
@@ -75,7 +75,7 @@ inline fun <reified T> Sequence<KoSourceAndAliasTypeProvider>.withAliasTypeOf():
  * @return A sequence containing declarations without an alias type matching the specified type.
  */
 inline fun <reified T> Sequence<KoSourceAndAliasTypeProvider>.withoutAliasTypeOf(): Sequence<KoSourceAndAliasTypeProvider> =
-    filterNot { it.isAlias() && it.sourceType == T::class.simpleName }
+    withoutAliasTypeOf(T::class)
 
 /**
  * Sequence containing declarations with alias type of.

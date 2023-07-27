@@ -65,7 +65,7 @@ fun <T : KoRepresentsTypeProvider> Sequence<T>.withoutRepresentedTypeOf(vararg t
  * @return A sequence containing declarations with types matching the specified reified type parameter.
  */
 inline fun <reified T> Sequence<KoRepresentsTypeProvider>.withRepresentedTypeOf(): Sequence<KoRepresentsTypeProvider> =
-    filter { it.representsTypeOf<T>() }
+    withRepresentedTypeOf(T::class)
 
 /**
  * Sequence containing all declarations that do not represent the type.
@@ -73,4 +73,4 @@ inline fun <reified T> Sequence<KoRepresentsTypeProvider>.withRepresentedTypeOf(
  * @return A sequence containing declarations without types matching the specified reified type parameter.
  */
 inline fun <reified T> Sequence<KoRepresentsTypeProvider>.withoutRepresentedTypeOf(): Sequence<KoRepresentsTypeProvider> =
-    filterNot { it.representsTypeOf<T>() }
+    withoutRepresentedTypeOf(T::class)
