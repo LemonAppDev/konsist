@@ -1,17 +1,20 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.sequence.withAllAnnotationsOf
 import com.lemonappdev.konsist.api.ext.sequence.withAnnotationOf
 import com.lemonappdev.konsist.core.verify.assert
 import org.springframework.stereotype.Repository
 import org.springframework.web.bind.annotation.RestController
+import java.lang.ModuleLayer.Controller
 
 class SpringSnippets {
     fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() {
         Konsist
             .scopeFromProject()
             .interfaces()
-            .withAnnotationOf<Repository>()
+//            .withAnnotationOf<Repository>()
+            .withAllAnnotationsOf(Repository::class)
             .assert { it.hasNameEndingWith("Repository") }
     }
 
@@ -19,7 +22,8 @@ class SpringSnippets {
         Konsist
             .scopeFromProject()
             .classes()
-            .withAnnotationOf<RestController>()
+//            .withAnnotationOf<RestController>()
+            .withAllAnnotationsOf(RestController::class)
             .assert { it.hasNameEndingWith("Controller") }
     }
 
@@ -27,7 +31,8 @@ class SpringSnippets {
         Konsist
             .scopeFromProject()
             .classes()
-            .withAnnotationOf<RestController>()
+//            .withAnnotationOf<RestController>()
+            .withAllAnnotationsOf(RestController::class)
             .assert { it.resideInPackage("..controller..") }
     }
 }

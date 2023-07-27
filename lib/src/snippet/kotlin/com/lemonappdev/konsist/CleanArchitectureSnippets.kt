@@ -3,10 +3,12 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
+import com.lemonappdev.konsist.api.ext.sequence.withAllAnnotationsOf
 import com.lemonappdev.konsist.api.ext.sequence.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.sequence.withNameEndingWith
 import com.lemonappdev.konsist.core.verify.assert
 import org.springframework.stereotype.Repository
+import org.springframework.web.bind.annotation.RestController
 
 class CleanArchitectureSnippets {
     fun `clean architecture layers have correct dependencies`() {
@@ -42,7 +44,8 @@ class CleanArchitectureSnippets {
     fun `interfaces with 'Repository' annotation should reside in 'data' package`() {
         Konsist.scopeFromProject()
             .interfaces()
-            .withAnnotationOf<Repository>()
+//            .withAnnotationOf<Repository>()
+            .withAllAnnotationsOf(Repository::class)
             .assert { it.resideInPackage("..data..") }
     }
 }
