@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api
 
 import com.lemonappdev.konsist.api.KoKDocTag.PARAM
-import com.lemonappdev.konsist.api.KoKDocTag.RECEIVER
 import com.lemonappdev.konsist.api.KoKDocTag.RETURN
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.verify.assert
