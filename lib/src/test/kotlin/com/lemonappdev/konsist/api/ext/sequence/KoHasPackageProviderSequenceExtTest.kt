@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.provider.KoHasPackageProvider
-import com.lemonappdev.konsist.core.provider.KoHasPackageProviderCore
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -9,13 +9,15 @@ import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
 class KoHasPackageProviderSequenceExtTest {
+    private interface SampleTestDeclaration : KoPackageProvider, KoHasPackageProvider
+
     @Test
     fun `withPackage() returns file with any package`() {
         // given
-        val file1: KoHasPackageProviderCore = mockk {
+        val file1: SampleTestDeclaration = mockk {
             every { packagee } returns mockk()
         }
-        val file2: KoHasPackageProviderCore = mockk {
+        val file2: SampleTestDeclaration = mockk {
             every { packagee } returns null
         }
         val files = sequenceOf(file1, file2)
@@ -32,15 +34,15 @@ class KoHasPackageProviderSequenceExtTest {
         // given
         val package1 = "SamplePackage1"
         val package2 = "SamplePackage2"
-        val file1: KoHasPackageProvider = mockk {
+        val file1: SampleTestDeclaration = mockk {
             every { hasPackage(package1) } returns true
             every { hasPackage(package2) } returns false
         }
-        val file2: KoHasPackageProvider = mockk {
+        val file2: SampleTestDeclaration = mockk {
             every { hasPackage(package1) } returns false
             every { hasPackage(package2) } returns true
         }
-        val file3: KoHasPackageProvider = mockk {
+        val file3: SampleTestDeclaration = mockk {
             every { hasPackage(package1) } returns false
             every { hasPackage(package2) } returns false
         }
@@ -56,10 +58,10 @@ class KoHasPackageProviderSequenceExtTest {
     @Test
     fun `withoutPackage() returns file without given package name`() {
         // given
-        val file1: KoHasPackageProviderCore = mockk {
+        val file1: SampleTestDeclaration = mockk {
             every { packagee } returns mockk()
         }
-        val file2: KoHasPackageProviderCore = mockk {
+        val file2: SampleTestDeclaration = mockk {
             every { packagee } returns null
         }
         val files = sequenceOf(file1, file2)
@@ -76,15 +78,15 @@ class KoHasPackageProviderSequenceExtTest {
         // given
         val package1 = "SamplePackage1"
         val package2 = "SamplePackage2"
-        val file1: KoHasPackageProvider = mockk {
+        val file1: SampleTestDeclaration = mockk {
             every { hasPackage(package1) } returns true
             every { hasPackage(package2) } returns false
         }
-        val file2: KoHasPackageProvider = mockk {
+        val file2: SampleTestDeclaration = mockk {
             every { hasPackage(package1) } returns false
             every { hasPackage(package2) } returns true
         }
-        val file3: KoHasPackageProvider = mockk {
+        val file3: SampleTestDeclaration = mockk {
             every { hasPackage(package1) } returns false
             every { hasPackage(package2) } returns false
         }
