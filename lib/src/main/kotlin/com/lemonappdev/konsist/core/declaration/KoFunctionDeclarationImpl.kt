@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
@@ -81,7 +82,7 @@ internal class KoFunctionDeclarationImpl private constructor(
 
     override val ktElement: KtElement by lazy { ktFunction }
 
-    private val localDeclarations: Sequence<KoBaseProvider> by lazy {
+    private val localDeclarations: Sequence<KoBaseDeclaration> by lazy {
         val psiChildren = ktFunction
             .bodyBlockExpression
             ?.children
@@ -102,7 +103,7 @@ internal class KoFunctionDeclarationImpl private constructor(
             }
     }
 
-    override fun localDeclarations(): Sequence<KoBaseProvider> = localDeclarations
+    override fun localDeclarations(): Sequence<KoBaseDeclaration> = localDeclarations
 
     override fun toString(): String {
         return locationWithText

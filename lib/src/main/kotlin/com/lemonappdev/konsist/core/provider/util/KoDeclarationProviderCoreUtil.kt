@@ -2,8 +2,8 @@ package com.lemonappdev.konsist.core.provider.util
 
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiWhiteSpace
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
@@ -33,13 +33,13 @@ import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
 internal object KoDeclarationProviderCoreUtil {
-    inline fun <reified T : KoBaseProvider> getKoDeclarations(
+    inline fun <reified T : KoBaseDeclaration> getKoDeclarations(
         ktElement: KtElement,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
         parent: KoParentProvider?,
     ): Sequence<T> {
-        val declarations: Sequence<KoBaseProvider>
+        val declarations: Sequence<KoBaseDeclaration>
 
         return when (ktElement) {
             is KtFile -> {
@@ -83,8 +83,8 @@ internal object KoDeclarationProviderCoreUtil {
         }
     }
 
-    inline fun <reified T : KoBaseProvider> getKoDeclarations(
-        declarations: Sequence<KoBaseProvider>,
+    inline fun <reified T : KoBaseDeclaration> getKoDeclarations(
+        declarations: Sequence<KoBaseDeclaration>,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
     ): Sequence<T> {
@@ -125,7 +125,7 @@ internal object KoDeclarationProviderCoreUtil {
         return result.filterIsInstance<T>()
     }
 
-    fun nestedDeclarations(koNamedDeclarations: Sequence<KoBaseProvider>): Sequence<KoBaseProvider> {
+    fun nestedDeclarations(koNamedDeclarations: Sequence<KoBaseDeclaration>): Sequence<KoBaseDeclaration> {
         return koNamedDeclarations.flatMap {
             when (it) {
                 is KoDeclarationProvider -> it.declarations(includeNested = true)
@@ -134,9 +134,9 @@ internal object KoDeclarationProviderCoreUtil {
         }
     }
 
-    fun localDeclarations(koFunctions: Sequence<KoFunctionDeclaration>, includeNested: Boolean): Sequence<KoBaseProvider> {
-        val localDeclarations = mutableListOf<KoBaseProvider>()
-        val nestedDeclarations = mutableListOf<KoBaseProvider>()
+    fun localDeclarations(koFunctions: Sequence<KoFunctionDeclaration>, includeNested: Boolean): Sequence<KoBaseDeclaration> {
+        val localDeclarations = mutableListOf<KoBaseDeclaration>()
+        val nestedDeclarations = mutableListOf<KoBaseDeclaration>()
 
         koFunctions.forEach { koFunction ->
             koFunction.localDeclarations().forEach {
@@ -165,7 +165,7 @@ internal object KoDeclarationProviderCoreUtil {
     private fun getInstanceOfKtDeclaration(
         ktDeclaration: KtDeclaration,
         parent: KoParentProvider?,
-    ): KoBaseProvider? = when {
+    ): KoBaseDeclaration? = when {
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationImpl.getInstance(ktDeclaration, parent)
@@ -176,7 +176,7 @@ internal object KoDeclarationProviderCoreUtil {
         else -> null
     }
 
-    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parent: KoParentProvider?): KoBaseProvider? =
+    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parent: KoParentProvider?): KoBaseDeclaration? =
         when (psiElement) {
             is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parent)
             is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parent)

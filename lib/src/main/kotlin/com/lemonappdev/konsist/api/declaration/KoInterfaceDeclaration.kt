@@ -26,6 +26,7 @@ import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
  * Represents a Kotlin import declaration.
  */
 interface KoInterfaceDeclaration :
+    KoBaseDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
     KoClassProvider,

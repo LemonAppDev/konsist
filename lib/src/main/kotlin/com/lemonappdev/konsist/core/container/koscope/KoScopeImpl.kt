@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.container.koscope
 
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.container.koscope.KoScope
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
@@ -71,7 +72,7 @@ class KoScopeImpl(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseProvider> =
+    ): Sequence<KoBaseDeclaration> =
         koFiles.flatMap { it.declarations(includeNested, includeLocal) }
 
     override fun properties(

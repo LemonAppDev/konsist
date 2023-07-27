@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
  * Represents a Kotlin package declaration.
  */
 interface KoPackageDeclaration :
+    KoBaseDeclaration,
     KoBaseProvider,
     KoContainingFileProvider,
     KoFullyQualifiedNameProvider,

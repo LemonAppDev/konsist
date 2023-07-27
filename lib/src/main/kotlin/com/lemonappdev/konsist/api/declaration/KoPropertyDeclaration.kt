@@ -24,6 +24,7 @@ import com.lemonappdev.konsist.api.provider.KoVarAndValProvider
  * Represents a Kotlin property declaration.
  */
 interface KoPropertyDeclaration :
+    KoBaseDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
     KoContainingFileProvider,

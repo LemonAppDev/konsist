@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 
@@ -13,4 +14,4 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 fun <T : KoDeclarationProvider> Sequence<T>.declarations(
     includeNested: Boolean = false,
     includeLocal: Boolean = false,
-): Sequence<KoBaseProvider> = flatMap { it.declarations(includeNested, includeLocal) }
+): Sequence<KoBaseDeclaration> = flatMap { it.declarations(includeNested, includeLocal) }

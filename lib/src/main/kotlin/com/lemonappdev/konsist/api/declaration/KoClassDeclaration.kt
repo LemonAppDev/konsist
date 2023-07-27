@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.declaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoClassProvider
-import com.lemonappdev.konsist.api.provider.KoConstructorsProvider
+import com.lemonappdev.konsist.api.provider.KoAllConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
@@ -34,10 +34,11 @@ import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
  * Represents a Kotlin class declaration.
  */
 interface KoClassDeclaration :
+    KoBaseDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
     KoClassProvider,
-    KoConstructorsProvider,
+    KoAllConstructorsProvider,
     KoContainingFileProvider,
     KoDeclarationProvider,
     KoFullyQualifiedNameProvider,

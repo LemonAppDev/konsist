@@ -1,5 +1,7 @@
 package com.lemonappdev.konsist.api.provider
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+
 /**
  * An interface representing a Kotlin scope, file, or declaration that provides information about declarations.
  */
@@ -9,12 +11,12 @@ interface KoDeclarationProvider : KoBaseProvider {
      *
      * @param includeNested specifies whether to include nested declarations.
      * @param includeLocal specifies whether to include local declarations.
-     * @return a sequence of [KoBaseProvider] representing the declarations in the scope, file or declaration.
+     * @return a sequence of [KoBaseDeclaration] representing the declarations in the scope, file or declaration.
      */
     fun declarations(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoBaseProvider>
+    ): Sequence<KoBaseDeclaration>
 
     /**
      * Checks whether the scope, file or declaration contains a declarations with the specified name.

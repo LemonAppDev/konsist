@@ -18,6 +18,7 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
  * Represents a Kotlin secondary constructor declaration.
  */
 interface KoSecondaryConstructorDeclaration :
+    KoBaseDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
     KoConstructorProvider,

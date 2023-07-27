@@ -15,6 +15,7 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
  * Represents a Kotlin init block declaration.
  */
 interface KoInitBlockDeclaration :
+    KoBaseDeclaration,
     KoBaseProvider,
     KoClassProvider,
     KoContainingFileProvider,

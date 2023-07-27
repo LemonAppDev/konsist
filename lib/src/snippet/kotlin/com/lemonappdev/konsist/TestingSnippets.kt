@@ -3,7 +3,10 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoDeclaration
+import com.lemonappdev.konsist.api.ext.sequence.declarations
 import com.lemonappdev.konsist.api.ext.sequence.withoutSomeModifiers
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 
@@ -37,7 +40,8 @@ class TestingSnippets {
     fun `test classes should have all members private besides tests`() {
         Konsist.scopeFromTest()
             .classes()
-            .flatMap { it.declarations() }
+            .declarations()
+            .filterIsInstance<KoAnnotationProvider>()
             .filterNot {
                 it.annotations.any { annotation ->
                     annotation
@@ -46,6 +50,7 @@ class TestingSnippets {
                         .contains("test")
                 }
             }
+            .filterIsInstance<KoModifierProvider>()
             .assert { it.hasPrivateModifier() }
     }
 

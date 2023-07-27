@@ -26,6 +26,7 @@ import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
  * Object declaration.
  */
 interface KoObjectDeclaration :
+    KoBaseDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
     KoClassProvider,

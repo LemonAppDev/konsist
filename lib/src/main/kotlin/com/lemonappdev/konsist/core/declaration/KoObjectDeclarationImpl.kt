@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
@@ -83,7 +84,7 @@ internal class KoObjectDeclarationImpl(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseProvider> = KoDeclarationProviderCoreUtil
+    ): Sequence<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktObjectDeclaration, includeNested, includeLocal, this)
 
     override fun toString(): String {
