@@ -2,6 +2,9 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 
+/**
+ * An interface representing a Kotlin declaration that provides access to the explicit type information.
+ */
 interface KoExplicitTypeProvider : KoBaseProvider {
     /**
      * Declaration explicit type.

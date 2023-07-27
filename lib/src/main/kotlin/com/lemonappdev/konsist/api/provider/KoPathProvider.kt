@@ -1,5 +1,8 @@
 package com.lemonappdev.konsist.api.provider
 
+/**
+ * An interface representing a Kotlin declaration or file that provides access to its path information.
+ */
 interface KoPathProvider : KoBaseProvider {
     /**
      * File path of the declaration or path of the file.

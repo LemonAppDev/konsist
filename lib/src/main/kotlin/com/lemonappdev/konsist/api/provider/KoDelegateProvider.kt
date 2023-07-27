@@ -1,5 +1,8 @@
 package com.lemonappdev.konsist.api.provider
 
+/**
+ * An interface representing a Kotlin declaration that provides access to the delegate information.
+ */
 interface KoDelegateProvider : KoBaseProvider {
     /**
      * Name of the delegate.

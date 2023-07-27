@@ -1,5 +1,8 @@
 package com.lemonappdev.konsist.api.provider
 
+/**
+ * An interface representing a Kotlin declaration that provides information about whether it is a kotlin type.
+ */
 interface KoKotlinTypeProvider : KoBaseProvider {
     /**
      * Whatever type is a build in Kotlin type. It can be a basic Kotlin type [Basic types](https://kotlinlang.org/docs/basic-types.html)

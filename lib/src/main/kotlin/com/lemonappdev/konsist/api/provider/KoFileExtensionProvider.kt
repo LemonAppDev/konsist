@@ -1,5 +1,8 @@
 package com.lemonappdev.konsist.api.provider
 
+/**
+ * An interface representing a Kotlin file that provides access to file extension information.
+ */
 interface KoFileExtensionProvider : KoBaseProvider {
     /**
      * The extension of the file.

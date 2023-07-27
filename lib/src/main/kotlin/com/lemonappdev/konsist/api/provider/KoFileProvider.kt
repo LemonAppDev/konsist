@@ -2,6 +2,9 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.container.KoFile
 
+/**
+ * An interface representing a Kotlin scope that provides access to files.
+ */
 interface KoFileProvider : KoBaseProvider {
     /**
      * Sequence of the files.

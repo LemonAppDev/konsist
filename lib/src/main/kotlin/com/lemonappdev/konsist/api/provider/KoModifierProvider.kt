@@ -2,6 +2,9 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.KoModifier
 
+/**
+ * An interface representing a Kotlin declaration that provides access to its modifiers.
+ */
 @Suppress("detekt.TooManyFunctions")
 interface KoModifierProvider : KoBaseProvider {
     /**

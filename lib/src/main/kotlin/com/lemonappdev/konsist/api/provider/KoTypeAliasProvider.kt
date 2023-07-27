@@ -2,6 +2,10 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 
+/**
+ * An interface representing a Kotlin file or scope that provides access to type aliases.
+ *
+ */
 interface KoTypeAliasProvider : KoBaseProvider {
     /**
      * Sequence of type aliases.

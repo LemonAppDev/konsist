@@ -4,6 +4,9 @@ import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 
+/**
+ * An interface representing a Kotlin declaration that provides access to KDoc tags.
+ */
 interface KoKDocTagsProvider : KoBaseProvider {
     /**
      * List of tags.

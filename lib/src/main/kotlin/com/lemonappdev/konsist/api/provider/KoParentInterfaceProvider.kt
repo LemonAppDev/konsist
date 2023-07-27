@@ -2,6 +2,9 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 
+/**
+ * An interface representing a Kotlin declaration that provides access to its parent interfaces.
+ */
 interface KoParentInterfaceProvider : KoBaseProvider {
     /**
      * The parent interfaces of the declaration.

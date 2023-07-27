@@ -1,5 +1,8 @@
 package com.lemonappdev.konsist.api.provider
 
+/**
+ * An interface representing a Kotlin file that provides information about its module.
+ */
 interface KoModuleProvider : KoBaseProvider {
     /**
      * The file's module name.

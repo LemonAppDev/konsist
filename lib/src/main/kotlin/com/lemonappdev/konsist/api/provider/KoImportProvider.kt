@@ -2,6 +2,9 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 
+/**
+ * An interface representing a Kotlin file or scope that provides access to import declarations.
+ */
 interface KoImportProvider : KoBaseProvider {
     /**
      * Sequence of imports.

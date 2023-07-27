@@ -1,5 +1,8 @@
 package com.lemonappdev.konsist.api.provider
 
+/**
+ * An interface representing a Kotlin declaration that provides information about whether it represents a specified type.
+ */
 interface KoRepresentsTypeProvider : KoBaseProvider {
     /**
      * Whether this declaration represents the specified type.

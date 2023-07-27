@@ -1,8 +1,11 @@
 package com.lemonappdev.konsist.api.provider
 
+/**
+ * An interface representing a Kotlin declaration or file that provides information about its name.
+ */
 interface KoNameProvider : KoBaseProvider {
     /**
-     * Name of the declaration
+     * Name of the declaration or file.
      */
     val name: String
 

@@ -2,9 +2,12 @@ package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 
+/**
+ * An interface representing a Kotlin declaration that provides access to its KDoc (documentation).
+ */
 interface KoKDocProvider : KoBaseProvider {
     /**
-     * Documentation pf the declaration.
+     * Documentation of the declaration.
      */
     val kDoc: KoKDocDeclaration?
 

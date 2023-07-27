@@ -1,5 +1,8 @@
 package com.lemonappdev.konsist.api.provider
 
+/**
+ * An interface representing a Kotlin file that provides information about whether it has a package.
+ */
 interface KoHasPackageProvider : KoBaseProvider {
     /**
      * Whether the file has package.

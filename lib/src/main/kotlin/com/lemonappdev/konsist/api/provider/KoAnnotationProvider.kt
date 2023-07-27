@@ -3,6 +3,9 @@ package com.lemonappdev.konsist.api.provider
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import kotlin.reflect.KClass
 
+/**
+ * An interface representing a Kotlin declaration, file or scope that provides an annotations.
+ */
 interface KoAnnotationProvider : KoBaseProvider {
     /**
      * Sequence of annotations.
