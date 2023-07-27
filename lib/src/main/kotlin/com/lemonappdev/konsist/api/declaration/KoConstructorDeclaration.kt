@@ -13,13 +13,18 @@ import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 
 /**
- * Represents a Kotlin primary constructor declaration.
+ * Represents a Kotlin constructor declaration.
  */
-interface KoPrimaryConstructorDeclaration : KoConstructorDeclaration {
-    /**
-     * String representing the primary constructor.
-     *
-     * @return a string representing the primary constructor.
-     */
-    override fun toString(): String
-}
+interface KoConstructorDeclaration :
+    KoBaseDeclaration,
+    KoBaseProvider,
+    KoAnnotationProvider,
+    KoContainingFileProvider,
+    KoLocationProvider,
+    KoModifierProvider,
+    KoPackageProvider,
+    KoParametersProvider,
+    KoParentProvider,
+    KoPathProvider,
+    KoResideInOrOutsidePackageProvider,
+    KoTextProvider

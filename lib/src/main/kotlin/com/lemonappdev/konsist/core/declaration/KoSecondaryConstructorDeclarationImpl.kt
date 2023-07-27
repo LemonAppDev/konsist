@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
-import com.lemonappdev.konsist.core.provider.KoConstructorProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
@@ -32,7 +31,6 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
     KoSecondaryConstructorDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
-    KoConstructorProviderCore,
     KoContainingFileProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
