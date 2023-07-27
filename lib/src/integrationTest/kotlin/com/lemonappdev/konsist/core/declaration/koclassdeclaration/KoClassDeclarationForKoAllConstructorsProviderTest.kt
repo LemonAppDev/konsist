@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
-class KoClassDeclarationForKoConstructorsProviderTest {
+class KoClassDeclarationForKoAllConstructorsProviderTest {
     @Test
     fun `class-has-primary-and-secondary-constructors`() {
         // given
