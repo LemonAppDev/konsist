@@ -8,7 +8,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoAliasProviderSequenceExtTest {
-    private interface SampleTestDeclaration: KoAliasProvider, KoNameProvider
+    private interface SampleTestDeclaration : KoAliasProvider, KoNameProvider
 
     @Test
     fun `withAlias() returns declaration with any alias`() {

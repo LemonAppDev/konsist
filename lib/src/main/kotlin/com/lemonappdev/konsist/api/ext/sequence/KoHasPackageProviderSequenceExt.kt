@@ -1,9 +1,7 @@
 package com.lemonappdev.konsist.api.ext.sequence
 
 import com.lemonappdev.konsist.api.provider.KoHasPackageProvider
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
-import com.lemonappdev.konsist.core.provider.KoHasPackageProviderCore
 
 /**
  * Sequence containing files with package.
@@ -13,8 +11,8 @@ import com.lemonappdev.konsist.core.provider.KoHasPackageProviderCore
  * (or any package if [packages] is empty).
  */
 fun <T> Sequence<T>.withPackage(vararg packages: String): Sequence<T>
-        where T : KoHasPackageProvider,
-              T : KoPackageProvider = filter {
+    where T : KoHasPackageProvider,
+          T : KoPackageProvider = filter {
     when {
         packages.isEmpty() -> it.packagee != null
         else -> packages.any { packagee -> it.hasPackage(packagee) }
@@ -29,8 +27,8 @@ fun <T> Sequence<T>.withPackage(vararg packages: String): Sequence<T>
  * (or none package if [packages] is empty).
  */
 fun <T> Sequence<T>.withoutPackage(vararg packages: String): Sequence<T>
-        where T : KoHasPackageProvider,
-              T : KoPackageProvider = filter {
+    where T : KoHasPackageProvider,
+          T : KoPackageProvider = filter {
     when {
         packages.isEmpty() -> it.packagee == null
         else -> packages.none { packagee -> it.hasPackage(packagee) }
