@@ -2,7 +2,6 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.declaration.KoDeclaration
 import com.lemonappdev.konsist.api.ext.sequence.declarations
 import com.lemonappdev.konsist.api.ext.sequence.withoutSomeModifiers
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider

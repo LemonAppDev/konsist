@@ -2,11 +2,9 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.sequence.withAllAnnotationsOf
-import com.lemonappdev.konsist.api.ext.sequence.withAnnotationOf
 import com.lemonappdev.konsist.core.verify.assert
 import org.springframework.stereotype.Repository
 import org.springframework.web.bind.annotation.RestController
-import java.lang.ModuleLayer.Controller
 
 class SpringSnippets {
     fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() {
