@@ -88,8 +88,8 @@ internal object KoDeclarationProviderCoreUtil {
         var result = if (includeNested) {
             declarations.flatMap {
                 when (it) {
-                    is KoDeclarationProvider -> sequenceOf(it) + it.declarations(includeNested = true)
-                    else -> sequenceOf(it)
+                    is KoDeclarationProvider -> listOf(it) + it.declarations(includeNested = true)
+                    else -> listOf(it)
                 }
             }
         } else {
