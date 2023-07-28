@@ -14,11 +14,11 @@ fun <E : KoFile> List<E>.assertNot(function: (E) -> Boolean?) {
 }
 
 fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?) {
-    assert(function, true)
+    this.toList().assert(function, true)
 }
 
 fun <E : KoFile> Sequence<E>.assertNot(function: (E) -> Boolean?) {
-    assert(function, false)
+    this.toList().assert(function, false)
 }
 
 @Suppress("detekt.ThrowsCount")
@@ -29,29 +29,6 @@ private fun <E : KoFile> List<E>.assert(function: (E) -> Boolean?, positiveCheck
         checkIfLocalListIsEmpty(this, "File", getTestMethodNameFromFourthIndex())
 
         val notSuppressedFiles = this
-            .filterNot { checkIfSuppressed(it, getTestMethodNameFromFifthIndex()) }
-
-        val result = notSuppressedFiles.groupBy {
-            lastFile = it
-            function(it)
-        }
-
-        getResult(notSuppressedFiles, result, positiveCheck, getTestMethodNameFromFifthIndex())
-    } catch (e: KoException) {
-        throw e
-    } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
-        throw KoInternalException(e.message.orEmpty(), e, lastFile)
-    }
-}
-
-private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
-    var lastFile: KoFile? = null
-
-    try {
-        checkIfLocalListIsEmpty(this.toList(), "File", getTestMethodNameFromFourthIndex())
-
-        val notSuppressedFiles = this
-            .toList()
             .filterNot { checkIfSuppressed(it, getTestMethodNameFromFifthIndex()) }
 
         val result = notSuppressedFiles.groupBy {
