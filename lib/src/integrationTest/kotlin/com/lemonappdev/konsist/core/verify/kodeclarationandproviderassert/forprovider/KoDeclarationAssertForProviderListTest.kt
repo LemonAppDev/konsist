@@ -265,12 +265,10 @@ class KoDeclarationAssertForProviderListTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-is-at-not-KoAnnotationProvider-decl`() {
         // given
         val sut =
-            getSnippetFile(
-                "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
-            )
+            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-is-at-not-KoAnnotationProvider-decl")
                 .declarations(includeNested = true)
                 .filterIsInstance<KoPropertyProvider>()
 
