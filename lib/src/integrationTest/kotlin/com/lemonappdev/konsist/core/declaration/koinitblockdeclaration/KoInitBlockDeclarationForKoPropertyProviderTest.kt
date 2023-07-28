@@ -17,7 +17,7 @@ class KoInitBlockDeclarationForKoPropertyProviderTest {
             ?.first()
 
         // then
-        sut?.properties(includeNested = true, includeLocal = true)?.toList() shouldBeEqualTo emptyList()
+        sut?.properties(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -33,7 +33,6 @@ class KoInitBlockDeclarationForKoPropertyProviderTest {
         val expected = listOf("sampleLocalProperty", "sampleNestedProperty")
 
         sut?.properties(includeNested = true, includeLocal = true)
-            ?.toList()
             ?.map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -51,7 +50,6 @@ class KoInitBlockDeclarationForKoPropertyProviderTest {
         val expected = listOf("sampleNestedProperty")
 
         sut?.properties(includeNested = true, includeLocal = false)
-            ?.toList()
             ?.map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -69,7 +67,6 @@ class KoInitBlockDeclarationForKoPropertyProviderTest {
         val expected = listOf("sampleLocalProperty")
 
         sut?.properties(includeNested = false, includeLocal = true)
-            ?.toList()
             ?.map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -87,7 +84,6 @@ class KoInitBlockDeclarationForKoPropertyProviderTest {
         val expected = emptyList<KoPropertyDeclaration>()
 
         sut?.properties(includeNested = false, includeLocal = false)
-            ?.toList()
             ?.map { it.name }
             .shouldBeEqualTo(expected)
     }

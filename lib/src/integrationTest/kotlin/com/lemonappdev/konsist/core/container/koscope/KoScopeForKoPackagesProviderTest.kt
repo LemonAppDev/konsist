@@ -14,7 +14,7 @@ class KoScopeForKoPackagesProviderTest {
 
         // then
         assertSoftly(sut) {
-            packages.toList() shouldBeEqualTo emptyList()
+            packages shouldBeEqualTo emptyList()
             hasPackages() shouldBeEqualTo false
         }
     }
@@ -26,7 +26,7 @@ class KoScopeForKoPackagesProviderTest {
 
         // then
         assertSoftly(sut) {
-            packages.map { it.name }.toList() shouldBeEqualTo listOf("samplepackage")
+            packages.map { it.name } shouldBeEqualTo listOf("samplepackage")
             hasPackages() shouldBeEqualTo true
             hasPackages("com.samplepackage") shouldBeEqualTo true
             hasPackages("samplepackage") shouldBeEqualTo true

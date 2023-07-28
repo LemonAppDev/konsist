@@ -13,7 +13,7 @@ class KoScopeForKoPropertyProviderTest {
         val sut = getSnippetFile("scope-contains-no-properties")
 
         // then
-        sut.properties(includeNested = true, includeLocal = true).toList() shouldBeEqualTo emptyList()
+        sut.properties(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -25,7 +25,6 @@ class KoScopeForKoPropertyProviderTest {
         val expected = listOf("sampleLocalProperty", "sampleNestedProperty")
 
         sut.properties(includeNested = true, includeLocal = true)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -39,7 +38,6 @@ class KoScopeForKoPropertyProviderTest {
         val expected = listOf("sampleNestedProperty")
 
         sut.properties(includeNested = true, includeLocal = false)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -53,7 +51,6 @@ class KoScopeForKoPropertyProviderTest {
         val expected = listOf("sampleLocalProperty")
 
         sut.properties(includeNested = false, includeLocal = true)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -67,7 +64,6 @@ class KoScopeForKoPropertyProviderTest {
         val expected = emptyList<KoPropertyDeclaration>()
 
         sut.properties(includeNested = false, includeLocal = false)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

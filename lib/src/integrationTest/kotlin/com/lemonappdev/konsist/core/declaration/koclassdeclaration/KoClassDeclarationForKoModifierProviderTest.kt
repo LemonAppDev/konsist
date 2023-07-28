@@ -23,7 +23,7 @@ class KoClassDeclarationForKoModifierProviderTest {
 
         // then
         assertSoftly(sut) {
-            modifiers.toList() shouldBeEqualTo emptyList()
+            modifiers shouldBeEqualTo emptyList()
             hasModifiers() shouldBeEqualTo false
             hasModifiers(OPEN) shouldBeEqualTo false
             hasModifiers(OPEN, DATA) shouldBeEqualTo false
@@ -92,7 +92,7 @@ class KoClassDeclarationForKoModifierProviderTest {
             .first()
 
         // then
-        sut.modifiers.toList() shouldBeEqualTo modifiers
+        sut.modifiers shouldBeEqualTo modifiers
     }
 
     @Test

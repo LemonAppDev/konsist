@@ -39,7 +39,6 @@ class KoFileForKoDeclarationProviderTest {
             .declarations()
             .filterIsInstance<KoNameProvider>()
             .map { it.name }
-            .toList()
             .shouldBeEqualTo(
                 listOf(
                     "SampleAnnotation1",
@@ -72,7 +71,6 @@ class KoFileForKoDeclarationProviderTest {
         // then
         sut
             .declarations(includeNested = includeNested, includeLocal = includeLocal)
-            .toList()
             .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)

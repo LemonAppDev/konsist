@@ -17,7 +17,7 @@ class KoFunctionDeclarationForKoLocalPropertyProviderTest {
         assertSoftly(sut) {
             containsLocalProperty("sampleLocalProperty") shouldBeEqualTo false
             localProperties()
-                .toList()
+                
                 .shouldBeEqualTo(emptyList())
         }
     }
@@ -33,7 +33,7 @@ class KoFunctionDeclarationForKoLocalPropertyProviderTest {
         assertSoftly(sut) {
             containsLocalProperty("sampleLocalProperty") shouldBeEqualTo true
             localProperties()
-                .toList()
+                
                 .map { it.name }
                 .shouldBeEqualTo(listOf("sampleLocalProperty"))
         }
