@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.verify.kodeclarationandproviderassert.fordeclaration
+package com.lemonappdev.konsist.core.verify.kodeclarationassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.withPrimaryConstructor
@@ -311,5 +311,5 @@ class KoDeclarationAssertForDeclarationListTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationandproviderassert/fordeclaration/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationassert/snippet/", fileName)
 }

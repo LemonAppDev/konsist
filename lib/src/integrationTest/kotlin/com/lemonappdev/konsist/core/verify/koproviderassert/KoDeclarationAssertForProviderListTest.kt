@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.verify.kodeclarationandproviderassert.forprovider
+package com.lemonappdev.konsist.core.verify.koproviderassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
@@ -265,10 +265,12 @@ class KoDeclarationAssertForProviderListTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-is-at-not-KoAnnotationProvider-decl`() {
+    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-is-at-not-KoAnnotationProvider-decl")
+            getSnippetFile(
+                "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
+            )
                 .declarations(includeNested = true)
                 .filterIsInstance<KoPropertyProvider>()
 
@@ -313,5 +315,5 @@ class KoDeclarationAssertForProviderListTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationandproviderassert/forprovider/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/verify/koproviderassert/snippet/", fileName)
 }
