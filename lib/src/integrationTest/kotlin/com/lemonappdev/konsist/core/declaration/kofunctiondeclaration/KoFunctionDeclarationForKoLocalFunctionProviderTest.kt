@@ -16,7 +16,7 @@ class KoFunctionDeclarationForKoLocalFunctionProviderTest {
         // then
         assertSoftly(sut) {
             containsLocalFunction("sampleLocalFunction") shouldBeEqualTo false
-            localFunctions()
+            localFunctions
                 .toList()
                 .shouldBeEqualTo(emptyList())
         }
@@ -32,7 +32,7 @@ class KoFunctionDeclarationForKoLocalFunctionProviderTest {
         // then
         assertSoftly(sut) {
             containsLocalFunction("sampleLocalFunction") shouldBeEqualTo true
-            localFunctions()
+            localFunctions
                 .toList()
                 .map { it.name }
                 .shouldBeEqualTo(listOf("sampleLocalFunction"))

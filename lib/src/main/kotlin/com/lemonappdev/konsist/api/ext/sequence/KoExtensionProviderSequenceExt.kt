@@ -7,11 +7,11 @@ import com.lemonappdev.konsist.api.provider.KoExtensionProvider
  *
  * @return A sequence containing declarations with extensions.
  */
-fun <T : KoExtensionProvider> Sequence<T>.withExtension(): Sequence<T> = filter { it.isExtension() }
+fun <T : KoExtensionProvider> Sequence<T>.withExtension(): Sequence<T> = filter { it.isExtension }
 
 /**
  * Sequence containing declarations without extension.
  *
  * @return A sequence containing declarations without extensions.
  */
-fun <T : KoExtensionProvider> Sequence<T>.withoutExtension(): Sequence<T> = filterNot { it.isExtension() }
+fun <T : KoExtensionProvider> Sequence<T>.withoutExtension(): Sequence<T> = filterNot { it.isExtension }

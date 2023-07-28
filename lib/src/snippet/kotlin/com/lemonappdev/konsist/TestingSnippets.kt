@@ -50,7 +50,7 @@ class TestingSnippets {
                 }
             }
             .filterIsInstance<KoModifierProvider>()
-            .assert { it.hasPrivateModifier() }
+            .assert { it.hasPrivateModifier }
     }
 
     fun `junit 4 'Test' annotation is not allowed for functions`() {

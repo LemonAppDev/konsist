@@ -13,8 +13,6 @@ interface KoExplicitReturnTypeProvider : KoBaseProvider {
 
     /**
      * Whether this declaration has a return type.
-     *
-     * @return `true` if the declaration has the return type, `false` otherwise.
      */
-    fun hasExplicitReturnType(): Boolean
+    val hasExplicitReturnType: Boolean
 }

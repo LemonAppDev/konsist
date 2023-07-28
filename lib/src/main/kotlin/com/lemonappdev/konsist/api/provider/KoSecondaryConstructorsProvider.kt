@@ -13,8 +13,6 @@ interface KoSecondaryConstructorsProvider : KoBaseProvider {
 
     /**
      * Whatever declaration has secondary constructors.
-     *
-     * @return `true` if the declaration has secondary constructors, `false` otherwise.
      */
-    fun hasSecondaryConstructors(): Boolean
+    val hasSecondaryConstructors: Boolean
 }

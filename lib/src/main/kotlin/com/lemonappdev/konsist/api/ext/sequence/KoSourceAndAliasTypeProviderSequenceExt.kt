@@ -84,7 +84,7 @@ inline fun <reified T> Sequence<KoSourceAndAliasTypeProvider>.withoutAliasTypeOf
  * @return A sequence containing declarations with the alias type matching any of the specified types.
  */
 fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withAliasTypeOf(vararg names: KClass<*>): Sequence<T> = filter {
-    names.any { kClass -> it.isAlias() && it.sourceType == kClass.simpleName }
+    names.any { kClass -> it.isAlias && it.sourceType == kClass.simpleName }
 }
 
 /**
@@ -94,7 +94,7 @@ fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withAliasTypeOf(vararg names:
  * @return A sequence containing declarations without alias type matching any of the specified types.
  */
 fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withoutAliasTypeOf(vararg names: KClass<*>): Sequence<T> = filter {
-    names.none { kClass -> it.isAlias() && it.sourceType == kClass.simpleName }
+    names.none { kClass -> it.isAlias && it.sourceType == kClass.simpleName }
 }
 
 /**
@@ -106,7 +106,7 @@ fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withoutAliasTypeOf(vararg nam
  */
 fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withAliasType(vararg names: String): Sequence<T> = filter {
     when {
-        names.isEmpty() -> it.isAlias()
+        names.isEmpty() -> it.isAlias
         else -> names.any { name -> it.aliasType == name }
     }
 }
@@ -120,7 +120,7 @@ fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withAliasType(vararg names: S
  */
 fun <T : KoSourceAndAliasTypeProvider> Sequence<T>.withoutAliasType(vararg names: String): Sequence<T> = filter {
     when {
-        names.isEmpty() -> !it.isAlias()
+        names.isEmpty() -> !it.isAlias
         else -> names.none { name -> it.aliasType == name }
     }
 }
