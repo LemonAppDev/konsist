@@ -9,5 +9,5 @@ internal interface KoConstructorProviderCore :
     KoSecondaryConstructorsProviderCore,
     KoBaseProviderCore {
     override val constructors: List<KoConstructorDeclaration>
-        get() = sequenceOf(primaryConstructor as KoConstructorDeclaration) + secondaryConstructors
+        get() = listOf(primaryConstructor as KoConstructorDeclaration) + secondaryConstructors
 }
