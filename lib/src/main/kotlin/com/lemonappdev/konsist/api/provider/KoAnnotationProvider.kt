@@ -10,7 +10,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     /**
      * Sequence of annotations.
      */
-    val annotations: Sequence<KoAnnotationDeclaration>
+    val annotations: List<KoAnnotationDeclaration>
 
     /**
      * Whether the declaration, file or scope has annotations.

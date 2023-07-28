@@ -9,5 +9,5 @@ interface KoAllConstructorsProvider : KoBaseProvider {
     /**
      * The all primary and secondary constructors of the declaration.
      */
-    val allConstructors: Sequence<KoConstructorDeclaration>
+    val allConstructors: List<KoConstructorDeclaration>
 }
