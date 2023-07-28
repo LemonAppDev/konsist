@@ -7,12 +7,13 @@ import com.lemonappdev.konsist.core.verify.assertNot
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
-class KoFileAssertTest {
+class KoFileAssertForSequenceTest {
     @Test
     fun `assert-passes`() {
         // given
         val sut = getSnippetFile("assert-passes")
             .files
+            .asSequence()
 
         // then
         sut.assert { it.name == "assert-passes" }
@@ -23,6 +24,7 @@ class KoFileAssertTest {
         // given
         val sut = getSnippetFile("assert-fails")
             .files
+            .asSequence()
 
         // when
         val func = {
@@ -38,6 +40,7 @@ class KoFileAssertTest {
         // given
         val sut = getSnippetFile("assert-not-passes")
             .files
+            .asSequence()
 
         // then
         sut.assertNot {
@@ -50,6 +53,7 @@ class KoFileAssertTest {
         // given
         val sut = getSnippetFile("assert-not-fails")
             .files
+            .asSequence()
 
         // when
         val func = {
@@ -70,6 +74,7 @@ class KoFileAssertTest {
 
         val sut = (scope1 + scope2)
             .files
+            .asSequence()
 
         // then
         sut.assert { it.name.endsWith("suppress") }
@@ -83,6 +88,7 @@ class KoFileAssertTest {
 
         val sut = (scope1 + scope2)
             .files
+            .asSequence()
 
         // then
         sut.assert { it.name.endsWith("suppress") }
