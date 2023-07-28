@@ -1,13 +1,13 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
-import com.lemonappdev.konsist.api.provider.KoAllConstructorsProvider
+import com.lemonappdev.konsist.api.provider.KoConstructorProvider
 
-internal interface KoAllConstructorsProviderCore :
-    KoAllConstructorsProvider,
+internal interface KoConstructorProviderCore :
+    KoConstructorProvider,
     KoPrimaryConstructorProviderCore,
     KoSecondaryConstructorsProviderCore,
     KoBaseProviderCore {
-    override val allConstructors: Sequence<KoConstructorDeclaration>
+    override val constructors: Sequence<KoConstructorDeclaration>
         get() = sequenceOf(primaryConstructor as KoConstructorDeclaration) + secondaryConstructors
 }
