@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
-class KoClassDeclarationForKoAllConstructorsProviderTest {
+class KoClassDeclarationForKoConstructorProviderTest {
     @Test
     fun `class-has-primary-and-secondary-constructors`() {
         // given
@@ -13,7 +13,7 @@ class KoClassDeclarationForKoAllConstructorsProviderTest {
             .first()
 
         // then
-        sut.allConstructors shouldHaveSize 3
+        sut.constructors shouldHaveSize 3
     }
 
     private fun getSnippetFile(fileName: String) =
