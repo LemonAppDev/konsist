@@ -1,5 +1,0 @@
-class SampleClassText {
-    @Suppress("assert-suppress-by-name-at-declaration-level")
-    fun sampleFunctionWithIncorrectSuffix() {
-    }
-}

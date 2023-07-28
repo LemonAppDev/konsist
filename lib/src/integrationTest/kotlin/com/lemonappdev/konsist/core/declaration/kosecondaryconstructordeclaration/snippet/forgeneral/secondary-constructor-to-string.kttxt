@@ -1,0 +1,3 @@
+class SampleClass(val sampleParameter: Int) {
+    constructor(): this(6)
+}

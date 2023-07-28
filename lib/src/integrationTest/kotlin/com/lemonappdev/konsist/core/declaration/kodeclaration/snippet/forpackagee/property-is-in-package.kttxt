@@ -1,3 +1,0 @@
-package com.samplepackage
-
-val sampleProperty: Boolean = true

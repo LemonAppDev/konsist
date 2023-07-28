@@ -1,0 +1,4 @@
+/**
+ * Sample KDoc
+ */
+fun sampleFunction() {}

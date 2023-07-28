@@ -1,20 +1,65 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.KoModifier
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import org.jetbrains.kotlin.psi.KtCallExpression
-import org.jetbrains.kotlin.psi.KtConstantExpression
+import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
+import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoDefaultValueProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
+import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtParameter
+import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
-import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal class KoParameterDeclarationImpl private constructor(private val ktParameter: KtParameter, parentDeclaration: KoBaseDeclaration?) :
-    KoDeclarationImpl(ktParameter, parentDeclaration),
-    KoParameterDeclaration {
+internal class KoParameterDeclarationImpl private constructor(
+    override val ktParameter: KtParameter,
+    override val parent: KoParentProvider?,
+) :
+    KoParameterDeclaration,
+    KoBaseProviderCore,
+    KoAnnotationProviderCore,
+    KoContainingFileProviderCore,
+    KoDeclarationFullyQualifiedNameProviderCore,
+    KoDefaultValueProviderCore,
+    KoLocationProviderCore,
+    KoModifierProviderCore,
+    KoNameProviderCore,
+    KoPackageProviderCore,
+    KoParentProviderCore,
+    KoPathProviderCore,
+    KoRepresentsTypeProviderCore,
+    KoResideInOrOutsidePackageProviderCore,
+    KoTextProviderCore,
+    KoTypeProviderCore {
+    override val ktAnnotated: KtAnnotated by lazy { ktParameter }
+
+    override val ktFile: KtFile? by lazy { null }
+
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktParameter }
+
+    override val koFiles: Sequence<KoFile>? by lazy { null }
+
+    override val psiElement: PsiElement by lazy { ktParameter }
+
+    override val ktElement: KtElement by lazy { ktParameter }
 
     override val type: KoTypeDeclaration by lazy {
         val type = ktParameter
@@ -24,43 +69,16 @@ internal class KoParameterDeclarationImpl private constructor(private val ktPara
         KoTypeDeclarationImpl.getInstance(type, this)
     }
 
-    override val defaultValue: String? by lazy {
-        // eg. primitive value as default parameter value
-        val constantExpressionText = ktParameter
-            .children
-            .firstIsInstanceOrNull<KtConstantExpression>()
-            ?.text
-
-        if (constantExpressionText != null) {
-            return@lazy constantExpressionText
-        }
-
-        // eg. function call as default parameter value
-        val callExpressionText = ktParameter
-            .children
-            .firstIsInstanceOrNull<KtCallExpression>()
-            ?.text
-
-        callExpressionText
-    }
-
-    override fun hasVarargModifier(): Boolean = hasModifiers(KoModifier.VARARG)
-
-    override fun hasNoInlineModifier(): Boolean = hasModifiers(KoModifier.NOINLINE)
-
-    override fun hasCrossInlineModifier(): Boolean = hasModifiers(KoModifier.CROSSINLINE)
-
-    override fun hasDefaultValue(value: String?): Boolean = when (value) {
-        null -> ktParameter.hasDefaultValue()
-        else -> defaultValue == value
-    }
-
     override fun representsType(name: String): Boolean = type.name == name || type.fullyQualifiedName == name
+
+    override fun toString(): String {
+        return locationWithText
+    }
 
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktParameter: KtParameter, parentDeclaration: KoBaseDeclaration?): KoParameterDeclaration =
-            cache.getOrCreateInstance(ktParameter, parentDeclaration) { KoParameterDeclarationImpl(ktParameter, parentDeclaration) }
+        internal fun getInstance(ktParameter: KtParameter, parent: KoParentProvider?): KoParameterDeclaration =
+            cache.getOrCreateInstance(ktParameter, parent) { KoParameterDeclarationImpl(ktParameter, parent) }
     }
 }

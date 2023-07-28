@@ -1,8 +1,9 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.container.KoFile
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
@@ -45,23 +46,23 @@ internal fun getResult(items: List<*>, result: Map<Boolean?, List<Any>>, positiv
 private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String): String {
     var types = ""
     val failedDeclarationsMessage = failedItems.joinToString("\n") {
+        val konsistDeclarationClassNamePrefix = "Ko"
+
         when (it) {
             is KoFile -> {
                 types = "files"
                 val name = it.name
-                val konsistDeclarationClassNamePrefix = "Ko"
                 val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
 
                 "${it.path} ($name $declarationType)"
             }
 
-            is KoBaseDeclaration -> {
+            is KoBaseProvider -> {
                 types = "declarations"
-                val name = if (it is KoNamedDeclaration) it.name else ""
-                val konsistDeclarationClassNamePrefix = "Ko"
+                val name = (it as KoNameProvider).name
                 val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
 
-                "${it.location} ($name $declarationType)"
+                "${(it as KoLocationProvider).location} ($name $declarationType)"
             }
 
             else -> {

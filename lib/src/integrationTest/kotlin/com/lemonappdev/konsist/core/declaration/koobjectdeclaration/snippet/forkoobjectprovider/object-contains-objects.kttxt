@@ -1,0 +1,5 @@
+object SampleTopLevelObject {
+    object SampleObject {
+        object SampleNestedObject
+    }
+}

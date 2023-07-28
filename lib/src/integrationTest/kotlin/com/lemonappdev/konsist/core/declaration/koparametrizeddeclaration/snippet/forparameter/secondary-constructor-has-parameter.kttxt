@@ -1,3 +1,0 @@
-class SampleClass() {
-    constructor(sampleParameter: Boolean) : this()
-}

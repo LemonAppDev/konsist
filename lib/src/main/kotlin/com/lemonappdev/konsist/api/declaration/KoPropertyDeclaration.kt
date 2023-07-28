@@ -1,119 +1,53 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoDelegateProvider
+import com.lemonappdev.konsist.api.provider.KoExplicitTypeProvider
+import com.lemonappdev.konsist.api.provider.KoExtensionProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
+import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.KoVarAndValProvider
+
 /**
  * Represents a Kotlin property declaration.
  */
-interface KoPropertyDeclaration : KoDeclaration {
+interface KoPropertyDeclaration :
+    KoBaseDeclaration,
+    KoBaseProvider,
+    KoAnnotationProvider,
+    KoContainingFileProvider,
+    KoDelegateProvider,
+    KoExplicitTypeProvider,
+    KoExtensionProvider,
+    KoFullyQualifiedNameProvider,
+    KoKDocProvider,
+    KoLocationProvider,
+    KoModifierProvider,
+    KoNameProvider,
+    KoPackageProvider,
+    KoParentProvider,
+    KoPathProvider,
+    KoReceiverTypeProvider,
+    KoResideInOrOutsidePackageProvider,
+    KoTextProvider,
+    KoTopLevelProvider,
+    KoVarAndValProvider {
     /**
-     * Whatever property is `var`.
-     */
-    val isVar: Boolean
-
-    /**
-     * Whatever property is `val`.
-     */
-    val isVal: Boolean
-
-    /**
-     * Property delegate name.
-     */
-    val delegateName: String?
-
-    /**
-     * Property explicit type.
-     */
-    val explicitType: KoTypeDeclaration?
-
-    /**
-     * Receiver type of the property.
-     */
-    val receiverType: KoTypeDeclaration?
-
-    /**
-     * Whether the property has lateinit modifier.
+     * String representing the property.
      *
-     * @return `true` if the property has the `lateinit` modifier, `false` otherwise.
+     * @return a string representing the property.
      */
-    fun hasLateinitModifier(): Boolean
-
-    /**
-     * Whether the property has override modifier.
-     *
-     * @return `true` if the property has the `override` modifier, `false` otherwise.
-     */
-    fun hasOverrideModifier(): Boolean
-
-    /**
-     * Whether the property has abstract modifier.
-     *
-     * @return `true` if the property has the `abstract` modifier, `false` otherwise.
-     */
-    fun hasAbstractModifier(): Boolean
-
-    /**
-     * Whether the property has open modifier.
-     *
-     * @return `true` if the property has the `open` modifier, `false` otherwise.
-     */
-    fun hasOpenModifier(): Boolean
-
-    /**
-     * Whether the property has final modifier.
-     *
-     * @return `true` if the property has the `final` modifier, `false` otherwise.
-     */
-    fun hasFinalModifier(): Boolean
-
-    /**
-     * Whether the property has actual modifier.
-     *
-     * @return `true` if the property has the `actual` modifier, `false` otherwise.
-     */
-    fun hasActualModifier(): Boolean
-
-    /**
-     * Whether the property has expect modifier.
-     *
-     * @return `true` if the property has the `expect` modifier, `false` otherwise.
-     */
-    fun hasExpectModifier(): Boolean
-
-    /**
-     * Whether the property has const modifier.
-     *
-     * @return `true` if the property has the `const` modifier, `false` otherwise.
-     */
-    fun hasConstModifier(): Boolean
-
-    /**
-     * Whatever property is an extension property.
-     *
-     * @return `true` if the property is an extension property, `false` otherwise.
-     */
-    fun isExtension(): Boolean
-
-    /**
-     * Whether property has receiver type.
-     *
-     * @param name the receiver type to check.
-     * @return `true` if the property has receiver type with the specified name (or any receiver type if [name] is null),
-     * `false` otherwise.
-     */
-    fun hasReceiverType(name: String? = null): Boolean
-
-    /**
-     * Whatever property has a delegate.
-     *
-     * @param name the name of the delegate (optional).
-     * @return `true` if the property has a delegate matching the specified name (or any delegate if [name] is `null`), `false` otherwise.
-     */
-    fun hasDelegate(name: String? = null): Boolean
-
-    /**
-     * Whatever property has an explicit type.
-     *
-     * @param type the type to check for (optional).
-     * @return `true` if the property has the specified type (or any type if [type] is `null`), `false` otherwise.
-     */
-    fun hasExplicitType(type: String? = null): Boolean
+    override fun toString(): String
 }

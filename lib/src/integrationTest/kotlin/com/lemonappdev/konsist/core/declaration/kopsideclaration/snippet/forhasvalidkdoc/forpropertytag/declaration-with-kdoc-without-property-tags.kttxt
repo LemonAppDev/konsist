@@ -1,5 +1,0 @@
-/**
- * @return Sample Return Type
- */
-interface SampleInterface {
-}

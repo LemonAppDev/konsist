@@ -1,7 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleType1
-import com.lemonappdev.konsist.testdata.SampleType2
-
-class SampleClass(sampleProperty1: SampleType1, sampleProperty2: SampleType2) {
-    fun sampleNestedFunction() {
-    }
-}

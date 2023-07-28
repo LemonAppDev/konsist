@@ -1,5 +1,0 @@
-/**
- * @param sampleParam sample description
- */
-interface SampleInterface {
-}

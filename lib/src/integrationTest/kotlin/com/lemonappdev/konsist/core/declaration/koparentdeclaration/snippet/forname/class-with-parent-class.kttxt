@@ -1,5 +1,0 @@
-package com.lemonappdev.konsist.core.declaration.koparentdeclaration.snippet.forname
-
-class SampleClass() : SampleSuperClass()
-
-open class SampleSuperClass

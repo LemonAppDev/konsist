@@ -2,6 +2,6 @@ package com.lemonappdev.konsist.helper.ext
 
 import com.lemonappdev.konsist.api.container.koscope.KoScope
 
-fun KoScope.mapToFilePaths() = files()
+fun KoScope.mapToFilePaths() = files
     .toList()
     .map { it.path }

@@ -1,150 +1,34 @@
 package com.lemonappdev.konsist.api.container.koscope
 
 import com.lemonappdev.konsist.api.container.KoFile
-import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
-import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
-import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.core.declaration.provider.KoClassProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoFunctionProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoInterfaceProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoObjectProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoPropertyProvider
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoClassProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoFileProvider
+import com.lemonappdev.konsist.api.provider.KoFunctionProvider
+import com.lemonappdev.konsist.api.provider.KoImportProvider
+import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
+import com.lemonappdev.konsist.api.provider.KoObjectProvider
+import com.lemonappdev.konsist.api.provider.KoPackagesProvider
+import com.lemonappdev.konsist.api.provider.KoPropertyProvider
+import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 
 /**
  * Represents a scope of Kotlin declarations.
  */
 @Suppress("detekt.TooManyFunctions")
 interface KoScope :
-    KoDeclarationProvider,
+    KoAnnotationProvider,
     KoClassProvider,
+    KoDeclarationProvider,
+    KoFileProvider,
+    KoFunctionProvider,
+    KoImportProvider,
     KoInterfaceProvider,
     KoObjectProvider,
+    KoPackagesProvider,
     KoPropertyProvider,
-    KoFunctionProvider {
-
-    /**
-     * The files present in the scope.
-     *
-     * @return a sequence of [KoFile] representing the files in the scope.
-     */
-    fun files(): Sequence<KoFile>
-
-    /**
-     * The classes present in the scope.
-     *
-     * @param includeNested specifies whether to include nested classes.
-     * @param includeLocal specifies whether to include local classes.
-     * @return a sequence of [KoClassDeclaration] representing the classes in the scope.
-     */
-    override fun classes(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): Sequence<KoClassDeclaration>
-
-    /**
-     * The interfaces present in the scope.
-     *
-     * @param includeNested specifies whether to include nested interfaces.
-     * @return a sequence of [KoInterfaceDeclaration] representing the interfaces in the scope.
-     */
-    override fun interfaces(
-        includeNested: Boolean,
-    ): Sequence<KoInterfaceDeclaration>
-
-    /**
-     * The objects present in the scope.
-     *
-     * @param includeNested specifies whether to include nested objects.
-     * @return a sequence of [KoObjectDeclaration] representing the objects in the scope.
-     */
-    override fun objects(
-        includeNested: Boolean,
-    ): Sequence<KoObjectDeclaration>
-
-    /**
-     * The functions present in the scope.
-     *
-     * @param includeNested specifies whether to include nested functions.
-     * @param includeLocal specifies whether to include local functions.
-     * @return a sequence of [KoFunctionDeclaration] representing the functions in the scope.
-     */
-    override fun functions(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): Sequence<KoFunctionDeclaration>
-
-    /**
-     * The named declarations present in the scope.
-     *
-     * @param includeNested specifies whether to include nested declarations.
-     * @param includeLocal specifies whether to include local declarations.
-     * @return a sequence of [KoNamedDeclaration] representing the named declarations in the scope.
-     */
-    fun namedDeclarations(
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
-    ): Sequence<KoNamedDeclaration>
-
-    /**
-     * The declarations present in the scope.
-     *
-     * @param includeNested specifies whether to include nested declarations.
-     * @param includeLocal specifies whether to include local declarations.
-     * @return a sequence of [KoDeclaration] representing the declarations in the scope.
-     */
-    override fun declarations(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): Sequence<KoDeclaration>
-
-    /**
-     * The properties present in the scope.
-     *
-     * @param includeNested specifies whether to include nested properties.
-     * @param includeLocal specifies whether to include local properties.
-     * @return a sequence of [KoPropertyDeclaration] representing the properties in the scope.
-     */
-    override fun properties(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): Sequence<KoPropertyDeclaration>
-
-    /**
-     * The imports present in the scope.
-     *
-     * @return a sequence of [KoImportDeclaration] representing the imports in the scope.
-     */
-    fun imports(): Sequence<KoImportDeclaration>
-
-    /**
-     * The annotations present in the scope.
-     *
-     * @return a sequence of [KoAnnotationDeclaration] representing the annotations in the scope.
-     */
-    fun annotations(): Sequence<KoAnnotationDeclaration>
-
-    /**
-     * The packages present in the scope.
-     *
-     * @return a sequence of [KoPackageDeclaration] representing the packages in the scope.
-     */
-    fun packages(): Sequence<KoPackageDeclaration>
-
-    /**
-     * The type aliases present in the scope.
-     *
-     * @return a sequence of [KoTypeAliasDeclaration] representing the type aliases in the scope.
-     */
-    fun typeAliases(): Sequence<KoTypeAliasDeclaration>
+    KoTypeAliasProvider {
 
     /**
      * The scope with given predicate.

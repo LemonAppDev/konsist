@@ -1,146 +1,108 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.KoModifier
-import com.lemonappdev.konsist.api.Konsist
+import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
-import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
-import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
-import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
-import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
-import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.util.TagUtil
+import com.lemonappdev.konsist.core.provider.KoAllConstructorsProviderCore
+import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
+import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
+import com.lemonappdev.konsist.core.provider.KoHasTestProviderCore
+import com.lemonappdev.konsist.core.provider.KoInitBlockProviderCore
+import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
+import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
+import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentInterfaceProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoPrimaryConstructorProviderCore
+import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
+import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoSecondaryConstructorsProviderCore
+import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
+import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClass
-import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
-import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
-import org.jetbrains.kotlin.psi.KtSuperTypeEntry
-import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
+import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtFile
+import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-internal class KoClassDeclarationImpl private constructor(private val ktClass: KtClass, parentDeclaration: KoBaseDeclaration?) :
-    KoComplexDeclarationImpl(ktClass, parentDeclaration),
-    KoClassDeclaration {
-    override val parents: List<KoParentDeclaration> by lazy {
-        ktClass
-            .getSuperTypeList()
-            ?.children
-            ?.filterIsInstance<KtSuperTypeListEntry>()
-            ?.map { KoParentDeclarationImpl.getInstance(it, this) } ?: emptyList()
+internal class KoClassDeclarationImpl private constructor(
+    override val ktClass: KtClass,
+    override val parent: KoParentProvider?,
+) : KoClassDeclaration,
+    KoBaseProviderCore,
+    KoAllConstructorsProviderCore,
+    KoAnnotationProviderCore,
+    KoClassProviderCore,
+    KoContainingFileProviderCore,
+    KoDeclarationFullyQualifiedNameProviderCore,
+    KoDeclarationProviderCore,
+    KoFunctionProviderCore,
+    KoHasTestProviderCore,
+    KoInitBlockProviderCore,
+    KoInterfaceProviderCore,
+    KoKDocProviderCore,
+    KoLocationProviderCore,
+    KoModifierProviderCore,
+    KoNameProviderCore,
+    KoObjectProviderCore,
+    KoPackageProviderCore,
+    KoParentClassProviderCore,
+    KoParentDeclarationProviderCore,
+    KoParentInterfaceProviderCore,
+    KoParentProviderCore,
+    KoPathProviderCore,
+    KoPrimaryConstructorProviderCore,
+    KoPropertyProviderCore,
+    KoRepresentsTypeProviderCore,
+    KoResideInOrOutsidePackageProviderCore,
+    KoSecondaryConstructorsProviderCore,
+    KoTextProviderCore,
+    KoTopLevelProviderCore {
+    override val ktFile: KtFile? by lazy { null }
+
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
+
+    override val ktAnnotated: KtAnnotated by lazy { ktClass }
+
+    override val koFiles: Sequence<KoFile>? by lazy { null }
+
+    override val psiElement: PsiElement by lazy { ktClass }
+
+    override val ktElement: KtElement by lazy { ktClass }
+
+    override fun declarations(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+    ): Sequence<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
+        .getKoDeclarations(ktClass, includeNested, includeLocal, this)
+
+    override fun toString(): String {
+        return locationWithText
     }
-
-    override val parentInterfaces: List<KoParentDeclaration> by lazy {
-        val interfaces = ktClass
-            .getSuperTypeList()
-            ?.children
-            ?.filterIsInstance<KtSuperTypeEntry>() ?: emptyList()
-
-        val delegations = ktClass
-            .getSuperTypeList()
-            ?.children
-            ?.filterIsInstance<KtDelegatedSuperTypeEntry>() ?: emptyList()
-
-        val all = interfaces + delegations
-        all.map { KoParentDeclarationImpl.getInstance(it, this) }
-    }
-
-    override val parentClass: KoParentDeclaration? by lazy {
-        val parentClass = ktClass
-            .getSuperTypeList()
-            ?.children
-            ?.filterIsInstance<KtSuperTypeCallEntry>()
-            ?.first()
-
-        parentClass?.let { KoParentDeclarationImpl.getInstance(it, this) }
-    }
-
-    override val primaryConstructor: KoPrimaryConstructorDeclaration? by lazy {
-        val localPrimaryConstructor = ktClass.primaryConstructor ?: return@lazy null
-
-        KoPrimaryConstructorDeclarationImpl.getInstance(localPrimaryConstructor, this)
-    }
-
-    override val secondaryConstructors: List<KoSecondaryConstructorDeclaration> by lazy {
-        ktClass
-            .secondaryConstructors
-            .map { KoSecondaryConstructorDeclarationImpl.getInstance(it, this) }
-    }
-
-    override val allConstructors: List<KoConstructorDeclaration> by lazy {
-        listOfNotNull(primaryConstructor) + secondaryConstructors
-    }
-
-    override val initBlocks: List<KoInitBlockDeclaration>? by lazy {
-        val anonymousInitializers = ktClass
-            .body
-            ?.anonymousInitializers
-
-        if (anonymousInitializers?.isEmpty() == true) {
-            null
-        } else {
-            anonymousInitializers?.map { init -> KoInitBlockDeclarationImpl.getInstance(init, this) }
-        }
-    }
-
-    override val numInitBlocks: Int by lazy { initBlocks?.size ?: 0 }
-
-    override fun hasEnumModifier(): Boolean = hasModifiers(KoModifier.ENUM)
-
-    override fun hasSealedModifier(): Boolean = hasModifiers(KoModifier.SEALED)
-
-    override fun hasInnerModifier(): Boolean = hasModifiers(KoModifier.INNER)
-
-    override fun hasValueModifier(): Boolean = hasModifiers(KoModifier.VALUE)
-
-    override fun hasAnnotationModifier(): Boolean = hasModifiers(KoModifier.ANNOTATION)
-
-    override fun hasDataModifier(): Boolean = hasModifiers(KoModifier.DATA)
-
-    override fun hasActualModifier(): Boolean = hasModifiers(KoModifier.ACTUAL)
-
-    override fun hasExpectModifier(): Boolean = hasModifiers(KoModifier.EXPECT)
-
-    override fun hasAbstractModifier(): Boolean = hasModifiers(KoModifier.ABSTRACT)
-
-    override fun hasOpenModifier(): Boolean = hasModifiers(KoModifier.OPEN)
-
-    override fun hasFinalModifier(): Boolean = hasModifiers(KoModifier.FINAL)
-
-    override fun hasPrimaryConstructor(): Boolean = ktClass.hasExplicitPrimaryConstructor()
-
-    override fun hasSecondaryConstructors(): Boolean = ktClass.hasSecondaryConstructors()
-
-    override fun hasParentClass(name: String?): Boolean = when (name) {
-        null -> parentClass != null
-        else -> parentClass?.name == name
-    }
-
-    override fun hasParentInterfaces(vararg names: String): Boolean = when {
-        names.isEmpty() -> parentInterfaces.isNotEmpty()
-        else -> names.all {
-            parentInterfaces.any { koParent -> it == koParent.name }
-        }
-    }
-
-    override fun hasParents(vararg names: String): Boolean = when {
-        names.isEmpty() -> hasParentClass() || hasParentInterfaces()
-        else -> names.all { hasParentClass(it) || hasParentInterfaces(it) }
-    }
-
-    override fun hasInitBlocks(): Boolean = initBlocks != null
-
-    override fun hasValidParamTag(enabled: Boolean): Boolean = TagUtil.hasValidParamTag(enabled, primaryConstructor?.parameters, kDoc)
-
-    override fun hasTest(testFileNameSuffix: String, moduleName: String?, sourceSetName: String?): Boolean = Konsist
-        .scopeFromTest(moduleName, sourceSetName)
-        .classes()
-        .any { it.name == name + testFileNameSuffix }
 
     internal companion object {
         private val cache: KoDeclarationCache<KoClassDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktClass: KtClass, parentDeclaration: KoBaseDeclaration?): KoClassDeclaration =
-            cache.getOrCreateInstance(ktClass, parentDeclaration) {
-                KoClassDeclarationImpl(ktClass, parentDeclaration)
+        internal fun getInstance(ktClass: KtClass, parent: KoParentProvider?): KoClassDeclaration =
+            cache.getOrCreateInstance(ktClass, parent) {
+                KoClassDeclarationImpl(ktClass, parent)
             }
     }
 }

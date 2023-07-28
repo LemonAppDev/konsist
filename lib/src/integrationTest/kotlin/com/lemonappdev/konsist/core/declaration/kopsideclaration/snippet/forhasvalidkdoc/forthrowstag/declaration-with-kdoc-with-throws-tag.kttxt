@@ -1,5 +1,0 @@
-/**
- * @throws SampleException sample description
- */
-interface SampleInterface {
-}

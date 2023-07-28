@@ -1,134 +1,61 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.core.declaration.provider.KoLocalClassProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoLocalFunctionProvider
-import com.lemonappdev.konsist.core.declaration.provider.KoLocalPropertyProvider
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoExplicitReturnTypeProvider
+import com.lemonappdev.konsist.api.provider.KoExtensionProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoImplementationProvider
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
+import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
+import com.lemonappdev.konsist.api.provider.KoLocalPropertyProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPackageProvider
+import com.lemonappdev.konsist.api.provider.KoParametersProvider
+import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
+import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 
 /**
  * Represents a Kotlin function declaration.
  */
-interface KoFunctionDeclaration : KoParametrizedDeclaration, KoLocalClassProvider, KoLocalFunctionProvider, KoLocalPropertyProvider {
+interface KoFunctionDeclaration :
+    KoBaseDeclaration,
+    KoBaseProvider,
+    KoAnnotationProvider,
+    KoContainingFileProvider,
+    KoExplicitReturnTypeProvider,
+    KoExtensionProvider,
+    KoFullyQualifiedNameProvider,
+    KoImplementationProvider,
+    KoKDocProvider,
+    KoLocalClassProvider,
+    KoLocalDeclarationProvider,
+    KoLocalFunctionProvider,
+    KoLocalPropertyProvider,
+    KoLocationProvider,
+    KoModifierProvider,
+    KoNameProvider,
+    KoPackageProvider,
+    KoParametersProvider,
+    KoParentProvider,
+    KoPathProvider,
+    KoReceiverTypeProvider,
+    KoResideInOrOutsidePackageProvider,
+    KoTextProvider,
+    KoTopLevelProvider {
     /**
-     * Explicit return type of the function.
-     */
-    val explicitReturnType: KoTypeDeclaration?
-
-    /**
-     * Receiver type of the function.
-     */
-    val receiverType: KoTypeDeclaration?
-
-    /**
-     * Whether this function has implementation.
+     * String representing the function.
      *
-     * @return `true` if the function has the implementation, `false` otherwise.
+     * @return a string representing the function.
      */
-    fun hasImplementation(): Boolean
-
-    /**
-     * Whether this function has operator modifier.
-     *
-     * @return `true` if the function has the `operator` modifier, `false` otherwise.
-     */
-    fun hasOperatorModifier(): Boolean
-
-    /**
-     * Whether this function has inline modifier.
-     *
-     * @return `true` if the function has the `inline` modifier, `false` otherwise.
-     */
-    fun hasInlineModifier(): Boolean
-
-    /**
-     * Whether this function has tailrec modifier.
-     *
-     * @return `true` if the function has the `tailrec` modifier, `false` otherwise.
-     */
-    fun hasTailrecModifier(): Boolean
-
-    /**
-     * Whether this function has infix modifier.
-     *
-     * @return `true` if the function has the `infix` modifier, `false` otherwise.
-     */
-    fun hasInfixModifier(): Boolean
-
-    /**
-     * Whether this function has external modifier.
-     *
-     * @return `true` if the function has the `external` modifier, `false` otherwise.
-     */
-    fun hasExternalModifier(): Boolean
-
-    /**
-     * Whether this function has suspend modifier.
-     *
-     * @return `true` if the function has the `suspend` modifier, `false` otherwise.
-     */
-    fun hasSuspendModifier(): Boolean
-
-    /**
-     * Whether this function has open modifier.
-     *
-     * @return `true` if the function has the `open` modifier, `false` otherwise.
-     */
-    fun hasOpenModifier(): Boolean
-
-    /**
-     * Whether this function has override modifier.
-     *
-     * @return `true` if the function has the `override` modifier, `false` otherwise.
-     */
-    fun hasOverrideModifier(): Boolean
-
-    /**
-     * Whether this function has final modifier.
-     *
-     * @return `true` if the function has the `final` modifier, `false` otherwise.
-     */
-    fun hasFinalModifier(): Boolean
-
-    /**
-     * Whether this function has abstract modifier.
-     *
-     * @return `true` if the function has the `abstract` modifier, `false` otherwise.
-     */
-    fun hasAbstractModifier(): Boolean
-
-    /**
-     * Whether this function has actual modifier.
-     *
-     * @return `true` if the function has the `actual` modifier, `false` otherwise.
-     */
-    fun hasActualModifier(): Boolean
-
-    /**
-     * Whether this function has expect modifier.
-     *
-     * @return `true` if the function has the `expect` modifier, `false` otherwise.
-     */
-    fun hasExpectModifier(): Boolean
-
-    /**
-     * Whether this function is an extension function.
-     *
-     * @return `true` if the function is an extension function, `false` otherwise.
-     */
-    fun isExtension(): Boolean
-
-    /**
-     * Whether this function has receiver type.
-     *
-     * @param name the receiver type to check.
-     * @return `true` if the function has receiver type with the specified name (or any receiver type if [name] is null),
-     * `false` otherwise.
-     */
-    fun hasReceiverType(name: String? = null): Boolean
-
-    /**
-     * Whether this function has an explicit return type.
-     *
-     * @return `true` if the function has the explicit return type, `false` otherwise.
-     */
-    fun hasExplicitReturnType(): Boolean
+    override fun toString(): String
 }

@@ -1,15 +1,36 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoPackageMatchingFilePathProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtPackageDirective
 
 internal class KoPackageDeclarationImpl private constructor(private val ktPackageDirective: KtPackageDirective) :
-    KoNamedDeclarationImpl(ktPackageDirective), KoPackageDeclaration {
+    KoPackageDeclaration,
+    KoBaseProviderCore,
+    KoContainingFileProviderCore,
+    KoFullyQualifiedNameProviderCore,
+    KoLocationProviderCore,
+    KoNameProviderCore,
+    KoPackageMatchingFilePathProviderCore,
+    KoPathProviderCore,
+    KoTextProviderCore {
+    override val psiElement: PsiElement by lazy { ktPackageDirective }
 
-    override val qualifiedName: String by lazy {
+    override val ktElement: KtElement by lazy { ktPackageDirective }
+
+    override val fullyQualifiedName: String by lazy {
         if (ktPackageDirective.fqName != FqName.ROOT) {
             ktPackageDirective.fqName.toString()
         } else {
@@ -17,16 +38,17 @@ internal class KoPackageDeclarationImpl private constructor(private val ktPackag
         }
     }
 
-    override val hasMatchingFilePath: Boolean by lazy {
-        filePath
-            .replace("/", ".")
-            .endsWith(qualifiedName + "." + containingFile.nameWithExtension)
+    override fun toString(): String {
+        return locationWithText
     }
 
     internal companion object {
         private val cache: KoDeclarationCache<KoPackageDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktPackageDirective: KtPackageDirective, parentDeclaration: KoBaseDeclaration?): KoPackageDeclaration =
-            cache.getOrCreateInstance(ktPackageDirective, parentDeclaration) { KoPackageDeclarationImpl(ktPackageDirective) }
+        internal fun getInstance(
+            ktPackageDirective: KtPackageDirective,
+            parent: KoParentProvider?,
+        ): KoPackageDeclaration =
+            cache.getOrCreateInstance(ktPackageDirective, parent) { KoPackageDeclarationImpl(ktPackageDirective) }
     }
 }

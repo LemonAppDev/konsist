@@ -1,13 +1,21 @@
 package com.lemonappdev.konsist.core.declaration
 
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
+import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 internal class KoParentDeclarationImpl private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
-    KoNamedDeclarationImpl(ktSuperTypeListEntry), KoParentDeclaration {
+    KoParentDeclaration,
+    KoBaseProviderCore,
+    KoDelegateProviderCore,
+    KoNameProviderCore {
+    override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
 
     override val name: String by lazy {
         ktSuperTypeListEntry
@@ -27,15 +35,13 @@ internal class KoParentDeclarationImpl private constructor(private val ktSuperTy
         }
     }
 
-    override fun hasDelegate(delegateName: String?): Boolean = when (delegateName) {
-        null -> this.delegateName != null
-        else -> name == delegateName
-    }
-
     internal companion object {
         private val cache: KoDeclarationCache<KoParentDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktSuperTypeListEntry: KtSuperTypeListEntry, parentDeclaration: KoBaseDeclaration?): KoParentDeclaration =
-            cache.getOrCreateInstance(ktSuperTypeListEntry, parentDeclaration) { KoParentDeclarationImpl(ktSuperTypeListEntry) }
+        internal fun getInstance(
+            ktSuperTypeListEntry: KtSuperTypeListEntry,
+            parent: KoParentProvider?,
+        ): KoParentDeclaration =
+            cache.getOrCreateInstance(ktSuperTypeListEntry, parent) { KoParentDeclarationImpl(ktSuperTypeListEntry) }
     }
 }

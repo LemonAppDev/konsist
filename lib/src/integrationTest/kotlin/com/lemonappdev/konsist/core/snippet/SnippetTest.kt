@@ -23,11 +23,11 @@ class SnippetTest {
         val snippetMap = mutableMapOf<String, String>()
         snippetNames.forEachIndexed { index, s -> snippetMap[s] = snippetPaths[index] }
 
-        val r1 = Regex("""getSnippetFile\("(.+)"\)""")
+        val r1 = Regex("""getSnippetFile\(\s*"(.+)"""")
         val r2 = Regex("""arguments\("([^"]+)"""")
         val r3 = Regex("""arguments\(\s*"([^"]+)"""")
-        val withGetSnippetMethod = snippetNamesFromFiles(r1, "getSnippetFile(\"", "\")")
-        val withArgument = snippetNamesFromFiles(r2, "arguments(\"", "\"") + snippetNamesFromFiles(r3, "arguments(\n", "\"")
+        val withGetSnippetMethod = snippetNamesFromFiles(r1, "getSnippetFile(")
+        val withArgument = snippetNamesFromFiles(r2, "arguments(") + snippetNamesFromFiles(r3, "arguments(\n")
 
         val snippetNamesUsedInTests = (withGetSnippetMethod + withArgument).toSet()
 
@@ -40,7 +40,7 @@ class SnippetTest {
         }
     }
 
-    private fun snippetNamesFromFiles(regex: Regex, prefix: String, suffix: String) =
+    private fun snippetNamesFromFiles(regex: Regex, prefix: String) =
         File("../")
             .walk()
             .filter { it.isKotlinNotSnippetFile }
@@ -48,9 +48,9 @@ class SnippetTest {
             .flatMap { regex.findAll(it) }
             .map { it.value }
             .map { it.removePrefix(prefix) }
-            .map { it.trimIndent() }
+            .map { it.trim() }
             .map { it.removePrefix("\"") }
-            .map { it.removeSuffix(suffix) }
+            .map { it.substringBefore("\"") }
 
     companion object {
         private val File.isKotlinSnippetFile: Boolean get() = isFile && name.endsWith(".kttxt")

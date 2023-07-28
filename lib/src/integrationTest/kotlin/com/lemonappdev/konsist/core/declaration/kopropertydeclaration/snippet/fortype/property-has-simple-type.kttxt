@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleType
-
-object SampleObject {
-    val sampleProperty: SampleType = SampleType()
-}

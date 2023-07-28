@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.exception
 
 import com.lemonappdev.konsist.api.container.KoFile
-import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.provider.KoTextProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldThrow
@@ -14,10 +14,10 @@ class KoInternalExceptionTest {
         // given
         val message = "message"
         val declarationText = "declaration text"
-        val declaration: KoBaseDeclaration = mockk {
+        val declaration: KoTextProvider = mockk {
             every { text } returns declarationText
         }
-        val func = { throw KoInternalException(message, koBaseDeclaration = declaration) }
+        val func = { throw KoInternalException(message, koBaseProvider = declaration) }
 
         // when
         func shouldThrow KoInternalException::class withMessage "$message, declaration:\n$declarationText"
@@ -27,7 +27,7 @@ class KoInternalExceptionTest {
     fun `test without declaration`() {
         // given
         val message = "message"
-        val func = { throw KoInternalException(message, koBaseDeclaration = null) }
+        val func = { throw KoInternalException(message, koBaseProvider = null) }
 
         // when
         func shouldThrow KoInternalException::class withMessage message

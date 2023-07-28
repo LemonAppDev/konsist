@@ -1,0 +1,16 @@
+package com.lemonappdev.konsist.api.provider
+
+/**
+ * An interface representing a Kotlin declaration that provides information about whether it has a test.
+ */
+interface KoHasTestProvider : KoBaseProvider {
+    /**
+     * Whatever declaration has a Test.
+     *
+     * @param testFileNameSuffix the suffix of the test file name. By default, "Test".
+     * @param moduleName         the name of the module to check (optional).
+     * @param sourceSetName      the name of the source set to check (optional).
+     * @return `true` if the declaration has a test, `false` otherwise.
+     */
+    fun hasTest(testFileNameSuffix: String = "Test", moduleName: String? = null, sourceSetName: String? = null): Boolean
+}

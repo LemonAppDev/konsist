@@ -1,9 +1,0 @@
-/**
- * Sample Description
- *
- * @since 1.0.0
- * @see example sample description
- */
-typealias SampleTypeAlias = (Boolean) -> Int
-
-lateinit var sampleProperty: SampleTypeAlias

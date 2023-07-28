@@ -1,5 +1,0 @@
-/**
- * @property sampleProperty sample description
- */
-interface SampleInterface {
-}

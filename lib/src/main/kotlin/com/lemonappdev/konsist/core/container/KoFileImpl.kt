@@ -1,38 +1,63 @@
 package com.lemonappdev.konsist.core.container
 
+import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
-import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
-import com.lemonappdev.konsist.api.declaration.KoNamedDeclaration
-import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.provider.KoDeclarationCoreProviderUtil
-import com.lemonappdev.konsist.core.ext.sep
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.ext.toOsSeparator
-import com.lemonappdev.konsist.core.filesystem.PathProvider
-import com.lemonappdev.konsist.core.util.LocationUtil
+import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
+import com.lemonappdev.konsist.core.provider.KoClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoFileExtensionProviderCore
+import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
+import com.lemonappdev.konsist.core.provider.KoHasPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoImportProviderCore
+import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
+import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
+import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
+import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.KoTypeAliasProviderCore
+import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
+import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
-import org.jetbrains.kotlin.psi.KtImportDirective
-import org.jetbrains.kotlin.psi.KtImportList
-import org.jetbrains.kotlin.psi.KtTypeAlias
-import kotlin.reflect.KClass
 
-internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
+internal class KoFileImpl(override val ktFile: KtFile) :
+    KoFile,
+    KoAnnotationProviderCore,
+    KoClassProviderCore,
+    KoDeclarationProviderCore,
+    KoFileExtensionProviderCore,
+    KoFunctionProviderCore,
+    KoHasPackageProviderCore,
+    KoImportProviderCore,
+    KoInterfaceProviderCore,
+    KoModuleProviderCore,
+    KoNameProviderCore,
+    KoObjectProviderCore,
+    KoPackageProviderCore,
+    KoPathProviderCore,
+    KoPropertyProviderCore,
+    KoSourceSetProviderCore,
+    KoTextProviderCore,
+    KoTypeAliasProviderCore {
+
+    override val ktElement: KtElement by lazy { ktFile }
+
+    override val psiElement: PsiElement by lazy { ktFile }
+
+    override val ktAnnotated: KtAnnotated by lazy { ktFile }
+
+    override val parent: KoParentProvider? by lazy { null }
+
+    override val koFiles: Sequence<KoFile>? by lazy { null }
 
     override val name by lazy { nameWithExtension.substringBeforeLast('.') }
-
-    override val extension: String by lazy { nameWithExtension.substringAfterLast('.') }
-
-    override val nameWithExtension: String by lazy {
-        ktFile
-            .name
-            .split(sep)
-            .last()
-    }
 
     override val path: String by lazy {
         ktFile
@@ -40,130 +65,13 @@ internal class KoFileImpl(private val ktFile: KtFile) : KoFile {
             .toOsSeparator()
     }
 
-    override val projectPath by lazy {
-        val rootPathProvider = PathProvider
-            .getInstance()
-            .rootProjectPath
-            .toOsSeparator()
-
-        path.removePrefix(rootPathProvider)
-    }
-
-    override val moduleName: String by lazy {
-        val projectName = PathProvider
-            .getInstance()
-            .rootProjectPath
-            .substringAfterLast(sep)
-
-        val moduleName = projectPath
-            .substringBefore("${sep}src$sep")
-            .substringAfter(sep)
-
-        if (moduleName == projectName || moduleName == "") {
-            "root"
-        } else {
-            moduleName
-        }
-    }
-
-    override val sourceSetName: String by lazy {
-        projectPath
-            .substringAfter("${sep}src$sep")
-            .substringBefore(sep)
-    }
-
-    override val text: String by lazy { ktFile.text }
-
-    override val imports: List<KoImportDeclaration> by lazy {
-        val ktImportDirectives = ktFile
-            .children
-            .filterIsInstance<KtImportList>()
-            .first()
-            .children
-            .filterIsInstance<KtImportDirective>()
-
-        ktImportDirectives.map { KoImportDeclarationImpl.getInstance(it, null) }
-    }
-
-    override val annotations: List<KoAnnotationDeclaration> by lazy {
-        ktFile
-            .annotationEntries
-            .map { KoAnnotationDeclarationImpl.getInstance(it, null) }
-    }
-
-    override val packagee: KoPackageDeclaration? by lazy {
-        if (ktFile.packageDirective?.qualifiedName == "") {
-            null
-        } else {
-            ktFile.packageDirective?.let { KoPackageDeclarationImpl.getInstance(it, null) }
-        }
-    }
-
-    override val typeAliases: List<KoTypeAliasDeclaration> by lazy {
-        ktFile
-            .children
-            .filterIsInstance<KtTypeAlias>()
-            .map { KoTypeAliasDeclarationImpl.getInstance(it, null) }
-    }
-
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoNamedDeclaration> =
-        KoDeclarationCoreProviderUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
+    ): Sequence<KoBaseDeclaration> =
+        KoDeclarationProviderCoreUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
 
-    override fun hasAnnotations(vararg names: String): Boolean = when {
-        names.isEmpty() -> annotations.isNotEmpty()
-        else -> names.all {
-            annotations.any { annotation -> annotation.representsType(it) }
-        }
-    }
-
-    override fun hasAnnotationsOf(vararg names: KClass<*>): Boolean = names.all {
-        annotations.any { annotation ->
-            if (it.qualifiedName?.startsWith("kotlin.") == true) {
-                annotation.name == it.simpleName
-            } else {
-                annotation.fullyQualifiedName == it.qualifiedName
-            }
-        }
-    }
-
-    override fun hasPackage(name: String): Boolean = packagee
-        ?.qualifiedName
-        ?.let { LocationUtil.resideInLocation(name, it) } ?: false
-
-    override fun hasImports(vararg names: String): Boolean = when {
-        names.isEmpty() -> imports.isNotEmpty()
-        else -> names.all {
-            imports.any { import -> LocationUtil.resideInLocation(it, import.name) }
-        }
-    }
-
-    override fun hasTypeAliases(vararg names: String): Boolean = when {
-        names.isEmpty() -> typeAliases.isNotEmpty()
-        else -> names.all {
-            typeAliases.any { typeAlias -> typeAlias.name == it }
-        }
-    }
-
-    override fun resideInPath(path: String) = LocationUtil.resideInLocation(path, this.path)
-
-    override fun resideInProjectPath(path: String) = LocationUtil.resideInLocation(path, projectPath)
-
-    override fun resideInModule(module: String): Boolean = module == moduleName
-
-    override fun resideInSourceSet(sourceSet: String): Boolean = sourceSet == sourceSetName
-
-    override fun hasNameStartingWith(prefix: String) = name.startsWith(prefix)
-
-    override fun hasNameEndingWith(suffix: String) = name.endsWith(suffix)
-
-    override fun hasNameContaining(text: String) = name.contains(text)
-
-    override fun hasNameMatching(regex: Regex) = name.matches(regex)
-
-    override fun hasExtension(extension: String): Boolean = extension == this.extension
+    override fun toString(): String = path
 
     override fun equals(other: Any?): Boolean = other is KoFile && path == other.path
 

@@ -1,0 +1,20 @@
+interface SampleInterface1 {
+    interface SampleInterface2 {
+        interface SampleInterface3 {
+            interface SampleInterface4 {
+                interface SampleInterface5 {
+                    interface SampleInterface6 {
+                        interface SampleInterface7 {
+                            interface SampleInterface8 {
+                                interface SampleInterface9 {
+                                    class SampleClass() {
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

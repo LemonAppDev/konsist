@@ -1,5 +1,0 @@
-/**
- * @propertySetter sample description
- */
-interface SampleInterface {
-}

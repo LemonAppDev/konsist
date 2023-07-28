@@ -1,5 +1,17 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
+import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoNullableProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
+
 /**
  * Represents a Kotlin declaration.
  *
@@ -35,42 +47,23 @@ package com.lemonappdev.konsist.api.declaration
  * isNullable // true
  * ```
  */
-interface KoTypeDeclaration : KoNamedDeclaration {
+interface KoTypeDeclaration :
+    KoBaseDeclaration,
+    KoBaseProvider,
+    KoContainingFileProvider,
+    KoFullyQualifiedNameProvider,
+    KoGenericTypeProvider,
+    KoKotlinTypeProvider,
+    KoLocationProvider,
+    KoNameProvider,
+    KoNullableProvider,
+    KoPathProvider,
+    KoSourceAndAliasTypeProvider,
+    KoTextProvider {
     /**
-     * The import alias name.
-     */
-    val aliasType: String?
-
-    /**
-     * The source type.
-     */
-    val sourceType: String
-
-    /**
-     * The fully qualified name of the type.
-     */
-    val fullyQualifiedName: String
-
-    /**
-     * Whatever type is nullable.
-     */
-    val isNullable: Boolean
-
-    /**
-     * Whatever type is a build in Kotlin type. It can be a basic Kotlin type [Basic types](https://kotlinlang.org/docs/basic-types.html)
-     * or collection type [Collections overview](https://kotlinlang.org/docs/collections-overview.html#collection).
-     */
-    val isKotlinType: Boolean
-
-    /**
-     * Whatever type is generic type.
-     */
-    val isGenericType: Boolean
-
-    /**
-     * Returns `true` if this type is import alias.
+     * String representing the type.
      *
-     * @return `true` if this type is import type alias, `false` otherwise.
+     * @return a string representing the type.
      */
-    fun isAlias(): Boolean
+    override fun toString(): String
 }

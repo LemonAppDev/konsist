@@ -1,0 +1,6 @@
+object SampleObject {
+        class SampleClass {
+
+            inner class SampleNestedClass
+        }
+}
