@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoSourceSetProviderListExtTest.kt
 package com.lemonappdev.konsist.api.ext.list
+========
+package com.lemonappdev.konsist.api.ext.sequence
+>>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoSourceSetProviderSequenceExtTest.kt
 
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import io.mockk.every
@@ -6,7 +10,11 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoSourceSetProviderListExtTest.kt
 class KoSourceSetProviderListExtTest {
+========
+class KoSourceSetProviderSequenceExtTest {
+>>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoSourceSetProviderSequenceExtTest.kt
     @Test
     fun `withSourceSet(String) returns file with given source set`() {
         // given

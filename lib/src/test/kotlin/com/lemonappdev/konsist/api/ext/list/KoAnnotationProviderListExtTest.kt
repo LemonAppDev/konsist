@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoAnnotationProviderListExtTest.kt
 package com.lemonappdev.konsist.api.ext.list
+========
+package com.lemonappdev.konsist.api.ext.sequence
+>>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoAnnotationProviderSequenceExtTest.kt
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.testdata.SampleAnnotation
@@ -7,9 +11,14 @@ import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
+import org.jetbrains.kotlin.ir.types.impl.IrErrorClassImpl.declarations
 import org.junit.jupiter.api.Test
 
+<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoAnnotationProviderListExtTest.kt
 class KoAnnotationProviderListExtTest {
+========
+class KoAnnotationProviderSequenceExtTest {
+>>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoAnnotationProviderSequenceExtTest.kt
     @Test
     fun `withAnnotations() returns declaration with any annotation`() {
         // given
@@ -305,7 +314,11 @@ class KoAnnotationProviderListExtTest {
         val declaration2: KoAnnotationProvider = mockk {
             every { hasAnnotationsOf(SampleAnnotation::class) } returns false
         }
+<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoAnnotationProviderListExtTest.kt
         val declarations = listOf(declaration1, declaration2)
+========
+        val declarations = sequenceOf(declaration1, declaration2)
+>>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoAnnotationProviderSequenceExtTest.kt
 
         // when
         val sut = declarations.withAnnotationOf<SampleAnnotation>()
@@ -323,7 +336,11 @@ class KoAnnotationProviderListExtTest {
         val declaration2: KoAnnotationProvider = mockk {
             every { hasAnnotationsOf(SampleAnnotation::class) } returns false
         }
+<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoAnnotationProviderListExtTest.kt
         val declarations = listOf(declaration1, declaration2)
+========
+        val declarations = sequenceOf(declaration1, declaration2)
+>>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoAnnotationProviderSequenceExtTest.kt
 
         // when
         val sut = declarations.withoutAnnotationOf<SampleAnnotation>()

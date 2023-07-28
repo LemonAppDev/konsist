@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoImportProviderListExtTest.kt
 package com.lemonappdev.konsist.api.ext.list
+========
+package com.lemonappdev.konsist.api.ext.sequence
+>>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoImportProviderSequenceExtTest.kt
 
 import com.lemonappdev.konsist.api.provider.KoImportProvider
 import io.mockk.every
@@ -7,7 +11,11 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
+<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoImportProviderListExtTest.kt
 class KoImportProviderListExtTest {
+========
+class KoImportProviderSequenceExtTest {
+>>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoImportProviderSequenceExtTest.kt
     @Test
     fun `withImports() returns file with any import`() {
         // given

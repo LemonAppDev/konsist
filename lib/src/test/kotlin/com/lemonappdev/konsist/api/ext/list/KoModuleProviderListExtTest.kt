@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoModuleProviderListExtTest.kt
 package com.lemonappdev.konsist.api.ext.list
+========
+package com.lemonappdev.konsist.api.ext.sequence
+>>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoModuleProviderSequenceExtTest.kt
 
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import io.mockk.every
@@ -6,7 +10,11 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoModuleProviderListExtTest.kt
 class KoModuleProviderListExtTest {
+========
+class KoModuleProviderSequenceExtTest {
+>>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoModuleProviderSequenceExtTest.kt
     @Test
     fun `withModule(String) returns file with given module`() {
         // given

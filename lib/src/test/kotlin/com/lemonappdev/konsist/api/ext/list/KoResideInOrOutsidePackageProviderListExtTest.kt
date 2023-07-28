@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoResideInOrOutsidePackageProviderListExtTest.kt
 package com.lemonappdev.konsist.api.ext.list
+========
+package com.lemonappdev.konsist.api.ext.sequence
+>>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoResideInOrOutsidePackageProviderSequenceExtTest.kt
 
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
@@ -7,7 +11,11 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoResideInOrOutsidePackageProviderListExtTest.kt
 class KoResideInOrOutsidePackageProviderListExtTest {
+========
+class KoResideInOrOutsidePackageProviderSequenceExtTest {
+>>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoResideInOrOutsidePackageProviderSequenceExtTest.kt
     private interface SampleTestDeclaration : KoPackageProvider, KoResideInOrOutsidePackageProvider
 
     @Test
