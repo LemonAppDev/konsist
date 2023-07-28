@@ -8,7 +8,7 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
     override fun functions(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoFunctionDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
+    ): List<KoFunctionDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
 
     override fun containsFunction(
         name: String,

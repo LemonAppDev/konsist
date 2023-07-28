@@ -8,7 +8,7 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
     override fun classes(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoClassDeclaration> =
+    ): List<KoClassDeclaration> =
         KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
 
     override fun containsClass(

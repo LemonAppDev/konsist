@@ -45,7 +45,7 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
 
     override val ktFile: KtFile? by lazy { null }
 
-    override val koFiles: Sequence<KoFile>? by lazy { null }
+    override val koFiles: List<KoFile>? by lazy { null }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktSecondaryConstructor }
 

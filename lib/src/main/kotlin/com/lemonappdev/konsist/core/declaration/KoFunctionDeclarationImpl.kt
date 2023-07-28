@@ -75,18 +75,18 @@ internal class KoFunctionDeclarationImpl private constructor(
 
     override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
 
-    override val koFiles: Sequence<KoFile>? by lazy { null }
+    override val koFiles: List<KoFile>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktFunction }
 
     override val ktElement: KtElement by lazy { ktFunction }
 
-    private val localDeclarations: Sequence<KoBaseDeclaration> by lazy {
+    private val localDeclarations: List<KoBaseDeclaration> by lazy {
         val psiChildren = ktFunction
             .bodyBlockExpression
             ?.children
-            ?.asSequence()
-            ?: emptySequence()
+            ?.toList()
+            ?: emptyList()
 
         psiChildren
             .mapNotNull {
@@ -102,7 +102,7 @@ internal class KoFunctionDeclarationImpl private constructor(
             }
     }
 
-    override fun localDeclarations(): Sequence<KoBaseDeclaration> = localDeclarations
+    override fun localDeclarations(): List<KoBaseDeclaration> = localDeclarations
 
     override fun toString(): String {
         return locationWithText

@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.psi.KtClass
 internal interface KoInitBlockProviderCore : KoInitBlockProvider, KoParentProviderCore, KoBaseProviderCore {
     val ktClass: KtClass
 
-    override val initBlocks: Sequence<KoInitBlockDeclaration>?
+    override val initBlocks: List<KoInitBlockDeclaration>?
         get() {
             val anonymousInitializers = ktClass
                 .body
@@ -19,7 +19,6 @@ internal interface KoInitBlockProviderCore : KoInitBlockProvider, KoParentProvid
             } else {
                 anonymousInitializers
                     ?.map { init -> KoInitBlockDeclarationImpl.getInstance(init, this) }
-                    ?.asSequence()
             }
         }
 

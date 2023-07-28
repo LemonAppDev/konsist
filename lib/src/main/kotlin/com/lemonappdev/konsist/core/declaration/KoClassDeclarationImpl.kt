@@ -81,7 +81,7 @@ internal class KoClassDeclarationImpl private constructor(
 
     override val ktAnnotated: KtAnnotated by lazy { ktClass }
 
-    override val koFiles: Sequence<KoFile>? by lazy { null }
+    override val koFiles: List<KoFile>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktClass }
 
@@ -90,7 +90,7 @@ internal class KoClassDeclarationImpl private constructor(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
+    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktClass, includeNested, includeLocal, this)
 
     override fun toString(): String {

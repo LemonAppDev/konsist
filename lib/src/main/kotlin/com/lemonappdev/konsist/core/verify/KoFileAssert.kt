@@ -5,24 +5,22 @@ import com.lemonappdev.konsist.core.container.KoFileImpl
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 
-fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?) {
+fun <E : KoFile> List<E>.assert(function: (E) -> Boolean?) {
     assert(function, true)
 }
 
-fun <E : KoFile> Sequence<E>.assertNot(function: (E) -> Boolean?) {
+fun <E : KoFile> List<E>.assertNot(function: (E) -> Boolean?) {
     assert(function, false)
 }
 
 @Suppress("detekt.ThrowsCount")
-private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
+private fun <E : KoFile> List<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
     var lastFile: KoFile? = null
 
     try {
-        val localList = this.toList()
+        checkIfLocalListIsEmpty(this, "File", getTestMethodNameFromFourthIndex())
 
-        checkIfLocalListIsEmpty(localList, "File", getTestMethodNameFromFourthIndex())
-
-        val notSuppressedFiles = localList
+        val notSuppressedFiles = this
             .filterNot { checkIfSuppressed(it, getTestMethodNameFromFifthIndex()) }
 
         val result = notSuppressedFiles.groupBy {

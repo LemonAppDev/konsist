@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
  */
 interface KoAnnotationProvider : KoBaseProvider {
     /**
-     * Sequence of annotations.
+     * List of annotations.
      */
     val annotations: List<KoAnnotationDeclaration>
 

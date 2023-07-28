@@ -41,7 +41,7 @@ internal class KoInitBlockDeclarationImpl private constructor(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
+    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktAnonymousInitializer, includeNested, includeLocal, this)
 
     override fun toString(): String {

@@ -38,8 +38,8 @@ internal object KoDeclarationProviderCoreUtil {
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
         parent: KoParentProvider?,
-    ): Sequence<T> {
-        val declarations: Sequence<KoBaseDeclaration>
+    ): List<T> {
+        val declarations: List<KoBaseDeclaration>
 
         return when (ktElement) {
             is KtFile -> {
@@ -55,7 +55,6 @@ internal object KoDeclarationProviderCoreUtil {
                             else -> getInstanceOfOtherDeclaration(it, parent)
                         }
                     }
-                    .asSequence()
                 getKoDeclarations(declarations, includeNested, includeLocal)
             }
 
@@ -63,7 +62,6 @@ internal object KoDeclarationProviderCoreUtil {
                 declarations = ktElement
                     .declarations
                     .mapNotNull { getInstanceOfKtDeclaration(it, parent) }
-                    .asSequence()
                 getKoDeclarations(declarations, includeNested, includeLocal)
             }
 
@@ -73,21 +71,20 @@ internal object KoDeclarationProviderCoreUtil {
                     ?.children
                     ?.filterIsInstance<KtDeclaration>()
                     ?.mapNotNull { getInstanceOfKtDeclaration(it, parent) }
-                    ?.asSequence()
-                    ?: emptySequence()
+                    ?: emptyList()
 
                 getKoDeclarations(declarations, includeNested, includeLocal)
             }
 
-            else -> emptySequence()
+            else -> emptyList()
         }
     }
 
     inline fun <reified T : KoBaseDeclaration> getKoDeclarations(
-        declarations: Sequence<KoBaseDeclaration>,
+        declarations: List<KoBaseDeclaration>,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<T> {
+    ): List<T> {
         var result = if (includeNested) {
             declarations.flatMap {
                 when (it) {
@@ -125,16 +122,16 @@ internal object KoDeclarationProviderCoreUtil {
         return result.filterIsInstance<T>()
     }
 
-    fun nestedDeclarations(koNamedDeclarations: Sequence<KoBaseDeclaration>): Sequence<KoBaseDeclaration> {
+    fun nestedDeclarations(koNamedDeclarations: List<KoBaseDeclaration>): List<KoBaseDeclaration> {
         return koNamedDeclarations.flatMap {
             when (it) {
                 is KoDeclarationProvider -> it.declarations(includeNested = true)
-                else -> sequenceOf()
+                else -> emptyList()
             }
         }
     }
 
-    fun localDeclarations(koFunctions: Sequence<KoFunctionDeclaration>, includeNested: Boolean): Sequence<KoBaseDeclaration> {
+    fun localDeclarations(koFunctions: List<KoFunctionDeclaration>, includeNested: Boolean): List<KoBaseDeclaration> {
         val localDeclarations = mutableListOf<KoBaseDeclaration>()
         val nestedDeclarations = mutableListOf<KoBaseDeclaration>()
 
@@ -151,7 +148,7 @@ internal object KoDeclarationProviderCoreUtil {
             )
         }
 
-        return localDeclarations.asSequence()
+        return localDeclarations
     }
 
     private fun List<PsiElement>.flattenDeclarations(): List<PsiElement> = this.flatMap {

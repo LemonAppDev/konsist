@@ -8,25 +8,24 @@ import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
+import org.jetbrains.kotlin.builtins.StandardNames.FqNames.list
 
-fun <E : KoBaseProvider> Sequence<E>.assert(function: (E) -> Boolean?) {
+fun <E : KoBaseProvider> List<E>.assert(function: (E) -> Boolean?) {
     assert(function, true)
 }
 
-fun <E : KoBaseProvider> Sequence<E>.assertNot(function: (E) -> Boolean?) {
+fun <E : KoBaseProvider> List<E>.assertNot(function: (E) -> Boolean?) {
     assert(function, false)
 }
 
 @Suppress("detekt.ThrowsCount")
-private fun <E : KoBaseProvider> Sequence<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
+private fun <E : KoBaseProvider> List<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
     var lastDeclaration: KoBaseProvider? = null
 
     try {
-        val localList = this.toList()
+        checkIfLocalListIsEmpty(this, "Declaration", getTestMethodNameFromFourthIndex())
 
-        checkIfLocalListIsEmpty(localList, "Declaration", getTestMethodNameFromFourthIndex())
-
-        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(localList)
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this)
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
