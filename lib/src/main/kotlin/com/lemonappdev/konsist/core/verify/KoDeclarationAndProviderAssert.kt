@@ -76,10 +76,10 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                    (
-                            it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
-                                    it.text.endsWith("Suppress(\"$testMethodName\")")
-                            )
+                (
+                    it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
+                        it.text.endsWith("Suppress(\"$testMethodName\")")
+                    )
         }
         .forEach { declarations[it] = checkIfSuppressed(it, testMethodName) }
 
