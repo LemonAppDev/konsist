@@ -1,11 +1,6 @@
-class SampleClassWithOtherProperty {
-    val otherProperty = ""
+class SampleClassText {
     init {
-        val otherProperty = ""
-
         @Suppress("konsist.assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-        fun sampleFunctionWithoutOtherProperty(){
-
-        }
+        val sampleProperty = 6
     }
 }

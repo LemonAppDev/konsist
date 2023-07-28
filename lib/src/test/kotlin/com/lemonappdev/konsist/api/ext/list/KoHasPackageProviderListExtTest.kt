@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoHasPackageProviderListExtTest.kt
 package com.lemonappdev.konsist.api.ext.list
-========
-package com.lemonappdev.konsist.api.ext.sequence
->>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoHasPackageProviderSequenceExtTest.kt
 
 import com.lemonappdev.konsist.api.provider.KoHasPackageProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
@@ -12,11 +8,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
-<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoHasPackageProviderListExtTest.kt
 class KoHasPackageProviderListExtTest {
-========
-class KoHasPackageProviderSequenceExtTest {
->>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoHasPackageProviderSequenceExtTest.kt
     private interface SampleTestDeclaration : KoPackageProvider, KoHasPackageProvider
 
     @Test

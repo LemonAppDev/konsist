@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoFileExtensionProviderListExtTest.kt
 package com.lemonappdev.konsist.api.ext.list
-========
-package com.lemonappdev.konsist.api.ext.sequence
->>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoFileExtensionProviderSequenceExtTest.kt
 
 import com.lemonappdev.konsist.api.provider.KoFileExtensionProvider
 import io.mockk.every
@@ -11,11 +7,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
-<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoFileExtensionProviderListExtTest.kt
 class KoFileExtensionProviderListExtTest {
-========
-class KoFileExtensionProviderSequenceExtTest {
->>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoFileExtensionProviderSequenceExtTest.kt
     @Test
     fun `withExtension() returns file with given extension`() {
         // given

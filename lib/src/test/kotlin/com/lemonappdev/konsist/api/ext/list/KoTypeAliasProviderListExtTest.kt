@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoTypeAliasProviderListExtTest.kt
 package com.lemonappdev.konsist.api.ext.list
-========
-package com.lemonappdev.konsist.api.ext.sequence
->>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoTypeAliasProviderSequenceExtTest.kt
 
 import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 import io.mockk.every
@@ -10,11 +6,7 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-<<<<<<<< HEAD:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/list/KoTypeAliasProviderListExtTest.kt
 class KoTypeAliasProviderListExtTest {
-========
-class KoTypeAliasProviderSequenceExtTest {
->>>>>>>> main:lib/src/test/kotlin/com/lemonappdev/konsist/api/ext/sequence/KoTypeAliasProviderSequenceExtTest.kt
     @Test
     fun `withTypeAlias() returns file with typealias`() {
         // given
