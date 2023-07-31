@@ -43,8 +43,13 @@ private fun checkIfSuppressed(file: KoFile, testMethodName: String): Boolean {
         .annotations
         .firstOrNull { it.name == "Suppress" }
         ?.text
-        ?.removePrefix("@file:Suppress(\"")
-        ?.removeSuffix("\")")
+        ?.removePrefix("@file:Suppress(")
+        ?.substringBeforeLast(")")
+        ?.split(",")
+        ?.map { it.trim() }
+        ?.map { it.removePrefix("\"") }
+        ?.map { it.removeSuffix("\"") }
+        ?: emptyList()
 
-    return annotationParameter == testMethodName || annotationParameter == "konsist.$testMethodName"
+    return annotationParameter.any { it == testMethodName } || annotationParameter.any { it == "konsist.$testMethodName" }
 }
