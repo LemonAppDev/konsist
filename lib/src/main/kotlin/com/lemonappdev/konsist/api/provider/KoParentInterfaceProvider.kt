@@ -12,6 +12,11 @@ interface KoParentInterfaceProvider : KoBaseProvider {
     val parentInterfaces: Sequence<KoParentDeclaration>
 
     /**
+     * The number of parent interfaces.
+     */
+    val numParentInterfaces: Int
+
+    /**
      * Whatever declaration has parent interfaces.
      *
      * @param names the names of the parent interfaces to check.
