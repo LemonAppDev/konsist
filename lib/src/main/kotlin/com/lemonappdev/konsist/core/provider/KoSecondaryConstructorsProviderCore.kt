@@ -18,5 +18,8 @@ internal interface KoSecondaryConstructorsProviderCore :
                 .map { KoSecondaryConstructorDeclarationImpl.getInstance(it, this) }
                 .asSequence()
 
+    override val numSecondaryConstructors: Int
+        get() = secondaryConstructors.toList().size
+
     override fun hasSecondaryConstructors(): Boolean = ktClass.hasSecondaryConstructors()
 }
