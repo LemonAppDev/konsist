@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.verify.commonassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
@@ -22,6 +23,21 @@ class CommonAssertTest {
             sut.assert { false }
         } catch (e: Exception) {
             e.message?.shouldContain("Assert 'declaration-assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
+        }
+    }
+
+    @Test
+    fun `provider-assert-test-method-name`() {
+        // given
+        val sut = getSnippetFile("provider-assert-test-method-name")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+
+        // then
+        try {
+            sut.assert { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert 'provider-assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
         }
     }
 
@@ -69,6 +85,40 @@ class CommonAssertTest {
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
             "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
+    }
+
+    @Test
+    fun `provider-assert-fails-when-declaration-list-is-empty`() {
+        // given
+        val sut = getSnippetFile("provider-assert-fails-when-declaration-list-is-empty")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+
+        // when
+        val func = {
+            sut.assert { true }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assert' method."
+    }
+
+    @Test
+    fun `provider-assert-not-fails-when-declaration-list-is-empty`() {
+        // given
+        val sut = getSnippetFile("provider-assert-not-fails-when-declaration-list-is-empty")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+
+        // when
+        val func = {
+            sut.assertNot { false }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
     }
 
     @Test
