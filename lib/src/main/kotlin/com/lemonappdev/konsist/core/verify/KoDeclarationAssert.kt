@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.verify
 
-import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
@@ -51,11 +50,11 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                    (
-                            it.name == "Suppress" &&
-                                    it.text.contains("\"konsist.$testMethodName\"") ||
-                                    it.text.contains("\"$testMethodName\"")
-                            )
+                (
+                    it.name == "Suppress" &&
+                        it.text.contains("\"konsist.$testMethodName\"") ||
+                        it.text.contains("\"$testMethodName\"")
+                    )
         }
         .forEach { declarations[it] = checkIfSuppressed(it, testMethodName) }
 

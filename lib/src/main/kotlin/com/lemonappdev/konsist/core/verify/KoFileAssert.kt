@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.container.KoFile
-import com.lemonappdev.konsist.core.container.KoFileImpl
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 
