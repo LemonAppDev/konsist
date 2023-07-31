@@ -12,6 +12,11 @@ interface KoImportProvider : KoBaseProvider {
     val imports: Sequence<KoImportDeclaration>
 
     /**
+     * The number of imports.
+     */
+    val numImports: Int
+
+    /**
      * Whether the file or scope has imports.
      *
      * @param names the names of the imports to check.
