@@ -12,6 +12,11 @@ interface KoFileProvider : KoBaseProvider {
     val files: Sequence<KoFile>
 
     /**
+     * The number of files.
+     */
+    val numFiles: Int
+
+    /**
      * Whether the scope has files.
      *
      * @param names the names of the files to check.
