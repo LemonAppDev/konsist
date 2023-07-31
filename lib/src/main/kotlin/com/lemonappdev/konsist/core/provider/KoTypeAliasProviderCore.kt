@@ -22,6 +22,9 @@ internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProvider
             koFiles?.flatMap { it.typeAliases } ?: emptySequence()
         }
 
+    override val numTypeAliases: Int
+        get() = typeAliases.toList().size
+
     override fun hasTypeAliases(vararg names: String): Boolean = when {
         names.isEmpty() -> typeAliases.toList().isNotEmpty()
         else -> names.all {
