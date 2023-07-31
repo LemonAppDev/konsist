@@ -35,6 +35,9 @@ internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCo
             }
         }
 
+    override val numTags: Int
+        get() = tags.size
+
     override val paramTags: List<KoValuedKDocTagDeclaration>
         get() = tags.filter { it.name == KoKDocTag.PARAM }
             .map { it as KoValuedKDocTagDeclaration }

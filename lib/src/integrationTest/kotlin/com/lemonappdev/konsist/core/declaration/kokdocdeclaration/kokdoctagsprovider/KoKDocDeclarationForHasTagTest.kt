@@ -19,6 +19,7 @@ class KoKDocDeclarationForHasTagTest {
 
         // then
         assertSoftly(sut) {
+            it?.numTags shouldBeEqualTo 2
             it?.hasTags(SINCE) shouldBeEqualTo true
             it?.hasTags(SINCE, SEE) shouldBeEqualTo true
             it?.hasTags(SAMPLE) shouldBeEqualTo false
@@ -37,6 +38,7 @@ class KoKDocDeclarationForHasTagTest {
 
         // then
         assertSoftly(sut) {
+            it?.numTags shouldBeEqualTo 1
             it?.hasTags() shouldBeEqualTo true
             it?.hasTags(SINCE) shouldBeEqualTo true
             it?.hasTags(SINCE, SEE) shouldBeEqualTo false
@@ -54,6 +56,7 @@ class KoKDocDeclarationForHasTagTest {
         // then
         assertSoftly(sut) {
             it?.description shouldBeEqualTo ""
+            it?.numTags shouldBeEqualTo 2
             it?.hasTags(SINCE) shouldBeEqualTo true
             it?.hasTags(SINCE, SEE) shouldBeEqualTo true
             it?.hasTags(SAMPLE) shouldBeEqualTo false
