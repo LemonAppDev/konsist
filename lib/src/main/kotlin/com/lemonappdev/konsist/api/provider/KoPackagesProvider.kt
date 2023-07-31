@@ -12,6 +12,11 @@ interface KoPackagesProvider : KoBaseProvider {
     val packages: Sequence<KoPackageDeclaration>
 
     /**
+     * The number of packages.
+     */
+    val numPackages: Int
+
+    /**
      * Whether the scope has packages.
      *
      * @param names the names of the packages to check.
