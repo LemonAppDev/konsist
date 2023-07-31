@@ -14,7 +14,11 @@ class KoFunctionDeclarationForKoParametersProviderTest {
             .first()
 
         // then
-        sut.parameters.toList() shouldBeEqualTo emptyList()
+        assertSoftly(sut) {
+            parameters.toList() shouldBeEqualTo emptyList()
+            numParameters shouldBeEqualTo 0
+        }
+
     }
 
     @Test
@@ -25,9 +29,10 @@ class KoFunctionDeclarationForKoParametersProviderTest {
             .first()
 
         // then
-        assertSoftly(sut.parameters) {
-            it.toList().size shouldBeEqualTo 1
-            it.first().name shouldBeEqualTo "sampleParameter"
+        assertSoftly(sut) {
+            parameters.toList().size shouldBeEqualTo 1
+            numParameters shouldBeEqualTo 1
+            parameters.first().name shouldBeEqualTo "sampleParameter"
         }
     }
 

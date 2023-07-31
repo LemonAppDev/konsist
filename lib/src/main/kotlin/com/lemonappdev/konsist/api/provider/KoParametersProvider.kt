@@ -12,6 +12,11 @@ interface KoParametersProvider : KoBaseProvider {
     val parameters: Sequence<KoParameterDeclaration>
 
     /**
+     * The number of parameters.
+     */
+    val numParameters: Int
+
+    /**
      * Whatever declaration has a parameter with given name.
      *
      * @param name the name of the parameter to check.

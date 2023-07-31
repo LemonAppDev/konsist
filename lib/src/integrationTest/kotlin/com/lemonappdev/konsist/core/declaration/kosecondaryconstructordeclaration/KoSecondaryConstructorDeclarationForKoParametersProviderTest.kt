@@ -16,7 +16,10 @@ class KoSecondaryConstructorDeclarationForKoParametersProviderTest {
             .first()
 
         // then
-        sut.parameters.toList() shouldBeEqualTo emptyList()
+        assertSoftly(sut) {
+            parameters.toList() shouldBeEqualTo emptyList()
+            numParameters shouldBeEqualTo 0
+        }
     }
 
     @Test
@@ -29,9 +32,10 @@ class KoSecondaryConstructorDeclarationForKoParametersProviderTest {
             .first()
 
         // then
-        assertSoftly(sut.parameters) {
-            it.toList().size shouldBeEqualTo 2
-            it.first().name shouldBeEqualTo "sampleParameter1"
+        assertSoftly(sut) {
+            parameters.toList().size shouldBeEqualTo 2
+            numParameters shouldBeEqualTo 2
+            parameters.first().name shouldBeEqualTo "sampleParameter1"
         }
     }
 
