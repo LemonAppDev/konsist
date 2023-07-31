@@ -13,6 +13,11 @@ interface KoLocalClassProvider : KoBaseProvider {
     fun localClasses(): Sequence<KoClassDeclaration>
 
     /**
+     * The number of local classes.
+     */
+    val numLocalClasses: Int
+
+    /**
      * Checks whether the declaration contains a local class with the specified name.
      *
      * @param name The name of the local class to check.

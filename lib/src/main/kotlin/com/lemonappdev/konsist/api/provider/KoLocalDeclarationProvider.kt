@@ -13,6 +13,11 @@ interface KoLocalDeclarationProvider : KoBaseProvider {
     fun localDeclarations(): Sequence<KoBaseDeclaration>
 
     /**
+     * The number of local declarations.
+     */
+    val numLocalDeclarations: Int
+
+    /**
      * Checks whether the declaration contains a local declaration with the specified name.
      *
      * @param name The name of the local declaration to check.

@@ -6,5 +6,8 @@ import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
 internal interface KoLocalFunctionProviderCore : KoLocalFunctionProvider, KoLocalDeclarationProviderCore, KoBaseProviderCore {
     override fun localFunctions(): Sequence<KoFunctionDeclaration> = localDeclarations().filterIsInstance<KoFunctionDeclaration>()
 
+    override val numLocalFunctions: Int
+        get() = localFunctions().toList().size
+
     override fun containsLocalFunction(name: String): Boolean = localFunctions().any { it.name == name }
 }

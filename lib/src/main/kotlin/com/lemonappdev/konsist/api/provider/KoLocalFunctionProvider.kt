@@ -13,6 +13,11 @@ interface KoLocalFunctionProvider : KoBaseProvider {
     fun localFunctions(): Sequence<KoFunctionDeclaration>
 
     /**
+     * The number of local functions.
+     */
+    val numLocalFunctions: Int
+
+    /**
      * Checks whether the declaration contains a local function with the specified name.
      *
      * @param name The name of the local function to check.
