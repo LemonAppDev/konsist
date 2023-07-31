@@ -74,7 +74,7 @@ class KoDeclarationAssertForProviderSequenceTest {
             .filterIsInstance<KoPrimaryConstructorProvider>()
 
         // then
-        sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: true }
+        sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
     }
 
     @Test
@@ -86,7 +86,7 @@ class KoDeclarationAssertForProviderSequenceTest {
 
         // when
         val func = {
-            sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: true }
+            sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
         }
 
         // then
@@ -101,7 +101,7 @@ class KoDeclarationAssertForProviderSequenceTest {
             .filterIsInstance<KoPrimaryConstructorProvider>()
 
         // then
-        sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") ?: false }
+        sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") }
     }
 
     @Test
@@ -113,7 +113,7 @@ class KoDeclarationAssertForProviderSequenceTest {
 
         // when
         val func = {
-            sut.assertNot { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: false }
+            sut.assertNot { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
         }
 
         // then
