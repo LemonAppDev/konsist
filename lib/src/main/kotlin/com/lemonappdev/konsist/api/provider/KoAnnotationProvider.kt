@@ -13,6 +13,11 @@ interface KoAnnotationProvider : KoBaseProvider {
     val annotations: Sequence<KoAnnotationDeclaration>
 
     /**
+     * The number of annotations present in the scope, file, or declaration.
+     */
+    val numAnnotations: Int
+
+    /**
      * Whether the declaration, file or scope has annotations.
      *
      * @param names the annotation names to check. It can be either a simple name or a fully qualified name.

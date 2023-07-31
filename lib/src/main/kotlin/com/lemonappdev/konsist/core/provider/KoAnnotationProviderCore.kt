@@ -24,6 +24,9 @@ internal interface KoAnnotationProviderCore :
             koFiles?.flatMap { it.annotations } ?: emptySequence()
         }
 
+    override val numAnnotations: Int
+        get() = annotations.toList().size
+
     override fun hasAnnotations(vararg names: String): Boolean = when {
         names.isEmpty() -> annotations.toList().isNotEmpty()
         else -> names.all {

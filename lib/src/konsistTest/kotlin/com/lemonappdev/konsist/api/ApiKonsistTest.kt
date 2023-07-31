@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.api
 import com.lemonappdev.konsist.api.KoKDocTag.PARAM
 import com.lemonappdev.konsist.api.KoKDocTag.RETURN
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.core.verify.assert
 import org.junit.jupiter.api.Test
 
@@ -37,6 +38,14 @@ class ApiKonsistTest {
                     it.hasKDoc()
                 }
             }
+    }
+
+    @Test
+    fun `test`() {
+       Konsist.scopeFromExternalDirectory("/Users/natalia/IdeaProjects/LargeKotlinProjects/koin")
+           .properties(includeNested = true)
+           .filter { (it.explicitType as? KoSourceAndAliasTypeProvider)?.aliasType != ""}
+           .assert { true }
     }
 
     companion object {
