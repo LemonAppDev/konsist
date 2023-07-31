@@ -314,6 +314,18 @@ class KoDeclarationAssertForProviderSequenceTest {
         sut.assert { it.containsProperty("otherProperty") }
     }
 
+    @Test
+    fun `assert-suppress-with-few-parameters`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-with-few-parameters")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
+
+        // then
+        sut.assert { it.hasModifiers() }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationassert/forprovidersequence/snippet/", fileName)
 }

@@ -310,6 +310,17 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         sut.assert { it.name.endsWith("Text") }
     }
 
+    @Test
+    fun `assert-suppress-with-few-parameters`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-with-few-parameters")
+                .properties(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationassert/fordeclarationsequence/snippet/", fileName)
 }
