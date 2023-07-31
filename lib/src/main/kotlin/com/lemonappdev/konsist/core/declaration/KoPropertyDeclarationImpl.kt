@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
-import com.lemonappdev.konsist.api.provider.KoImplementationProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
