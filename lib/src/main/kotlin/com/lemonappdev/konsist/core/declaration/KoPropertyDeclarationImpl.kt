@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.provider.KoImplementationProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -12,6 +13,7 @@ import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProv
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoExplicitTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
+import com.lemonappdev.konsist.core.provider.KoImplementationProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
@@ -28,6 +30,7 @@ import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
+import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
@@ -43,6 +46,7 @@ internal class KoPropertyDeclarationImpl private constructor(
     KoDelegateProviderCore,
     KoExplicitTypeProviderCore,
     KoExtensionProviderCore,
+    KoImplementationProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
     KoModifierProviderCore,
@@ -68,6 +72,8 @@ internal class KoPropertyDeclarationImpl private constructor(
     override val psiElement: PsiElement by lazy { ktProperty }
 
     override val ktElement: KtElement by lazy { ktProperty }
+
+    override val ktFunction: KtFunction? by lazy { null }
 
     override val delegateName: String? by lazy {
         ktProperty

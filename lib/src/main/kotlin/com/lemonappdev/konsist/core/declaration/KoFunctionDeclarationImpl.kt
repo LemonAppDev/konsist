@@ -81,6 +81,8 @@ internal class KoFunctionDeclarationImpl private constructor(
 
     override val ktElement: KtElement by lazy { ktFunction }
 
+    override val ktProperty: KtProperty? by lazy { null }
+
     private val localDeclarations: Sequence<KoBaseDeclaration> by lazy {
         val psiChildren = ktFunction
             .bodyBlockExpression
