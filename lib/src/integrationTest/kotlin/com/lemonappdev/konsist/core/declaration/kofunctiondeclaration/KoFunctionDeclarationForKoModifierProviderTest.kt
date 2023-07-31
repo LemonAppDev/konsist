@@ -23,6 +23,7 @@ class KoFunctionDeclarationForKoModifierProviderTest {
         // then
         assertSoftly(sut) {
             modifiers.toList() shouldBeEqualTo emptyList()
+            numModifiers shouldBeEqualTo 0
             hasModifiers() shouldBeEqualTo false
             hasModifiers(OPEN) shouldBeEqualTo false
             hasModifiers(OPEN, KoModifier.DATA) shouldBeEqualTo false
@@ -68,6 +69,7 @@ class KoFunctionDeclarationForKoModifierProviderTest {
 
         // then
         assertSoftly(sut) {
+            numModifiers shouldBeEqualTo 2
             hasModifiers() shouldBeEqualTo true
             hasModifiers(PROTECTED) shouldBeEqualTo true
             hasModifiers(SUSPEND) shouldBeEqualTo true

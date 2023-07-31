@@ -21,6 +21,7 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
         // then
         assertSoftly(sut) {
             modifiers.toList() shouldBeEqualTo emptyList()
+            numModifiers shouldBeEqualTo 0
             hasModifiers() shouldBeEqualTo false
             hasModifiers(KoModifier.OPEN) shouldBeEqualTo false
             hasModifiers(KoModifier.OPEN, KoModifier.DATA) shouldBeEqualTo false
@@ -60,8 +61,7 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `typealias-modifiers`(
-        fileName: String,
-        modifiers: List<KoModifier>,
+        fileName: String
     ) {
         // given
         val sut = getSnippetFile(fileName)
@@ -69,7 +69,10 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
             .first()
 
         // then
-        sut.modifiers.toList() shouldBeEqualTo modifiers
+        assertSoftly(sut){
+            modifiers.toList() shouldBeEqualTo listOf(PRIVATE)
+            numModifiers shouldBeEqualTo 1
+        }
     }
 
     @Test
@@ -139,11 +142,11 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
         @Suppress("unused")
         @JvmStatic
         fun provideValues() = listOf(
-            arguments("typealias-has-modifiers-and-annotation-with-parameter", listOf(PRIVATE)),
-            arguments("typealias-has-modifiers-and-annotation-without-parameter", listOf(PRIVATE)),
-            arguments("typealias-has-modifiers-annotation-and-comment", listOf(PRIVATE)),
-            arguments("typealias-has-modifiers-and-annotations", listOf(PRIVATE)),
-            arguments("typealias-has-modifiers-and-annotation-with-angle-brackets", listOf(PRIVATE)),
+            arguments("typealias-has-modifiers-and-annotation-with-parameter"),
+            arguments("typealias-has-modifiers-and-annotation-without-parameter"),
+            arguments("typealias-has-modifiers-annotation-and-comment"),
+            arguments("typealias-has-modifiers-and-annotations"),
+            arguments("typealias-has-modifiers-and-annotation-with-angle-brackets"),
         )
     }
 }

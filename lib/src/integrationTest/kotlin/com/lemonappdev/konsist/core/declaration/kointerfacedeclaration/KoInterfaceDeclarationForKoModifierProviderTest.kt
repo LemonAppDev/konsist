@@ -25,6 +25,7 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
         // then
         assertSoftly(sut) {
             modifiers.toList() shouldBeEqualTo emptyList()
+            numModifiers shouldBeEqualTo 0
             hasModifiers() shouldBeEqualTo false
             hasModifiers(OPEN) shouldBeEqualTo false
             hasModifiers(OPEN, DATA) shouldBeEqualTo false
@@ -70,6 +71,7 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
 
         // then
         assertSoftly(sut) {
+            numModifiers shouldBeEqualTo 2
             hasModifiers() shouldBeEqualTo true
             hasModifiers(PUBLIC) shouldBeEqualTo true
             hasModifiers(ABSTRACT) shouldBeEqualTo true
