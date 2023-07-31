@@ -18,7 +18,6 @@ class KoFunctionDeclarationForKoParametersProviderTest {
             parameters.toList() shouldBeEqualTo emptyList()
             numParameters shouldBeEqualTo 0
         }
-
     }
 
     @Test

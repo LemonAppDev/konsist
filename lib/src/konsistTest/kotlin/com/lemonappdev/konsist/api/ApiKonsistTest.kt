@@ -42,10 +42,10 @@ class ApiKonsistTest {
 
     @Test
     fun `test`() {
-       Konsist.scopeFromExternalDirectory("/Users/natalia/IdeaProjects/LargeKotlinProjects/koin")
-           .properties(includeNested = true)
-           .filter { (it.explicitType as? KoSourceAndAliasTypeProvider)?.aliasType != ""}
-           .assert { true }
+        Konsist.scopeFromExternalDirectory("/Users/natalia/IdeaProjects/LargeKotlinProjects/koin")
+            .properties(includeNested = true)
+            .filter { (it.explicitType as? KoSourceAndAliasTypeProvider)?.aliasType != "" }
+            .assert { true }
     }
 
     companion object {

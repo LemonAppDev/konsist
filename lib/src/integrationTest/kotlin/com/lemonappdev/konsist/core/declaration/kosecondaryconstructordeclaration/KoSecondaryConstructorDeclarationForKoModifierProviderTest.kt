@@ -72,7 +72,7 @@ class KoSecondaryConstructorDeclarationForKoModifierProviderTest {
             .first()
 
         // then
-        assertSoftly(sut){
+        assertSoftly(sut) {
             modifiers.toList() shouldBeEqualTo listOf(PRIVATE)
             numModifiers shouldBeEqualTo 1
         }

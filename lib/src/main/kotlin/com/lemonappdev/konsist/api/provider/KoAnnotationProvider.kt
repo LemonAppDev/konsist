@@ -13,7 +13,7 @@ interface KoAnnotationProvider : KoBaseProvider {
     val annotations: Sequence<KoAnnotationDeclaration>
 
     /**
-     * The number of annotations present in the scope, file, or declaration.
+     * The number of annotations.
      */
     val numAnnotations: Int
 

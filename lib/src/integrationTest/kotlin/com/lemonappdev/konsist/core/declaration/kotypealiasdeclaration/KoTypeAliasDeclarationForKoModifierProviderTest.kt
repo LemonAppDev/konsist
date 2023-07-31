@@ -61,7 +61,7 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
     @ParameterizedTest
     @MethodSource("provideValues")
     fun `typealias-modifiers`(
-        fileName: String
+        fileName: String,
     ) {
         // given
         val sut = getSnippetFile(fileName)
@@ -69,7 +69,7 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
             .first()
 
         // then
-        assertSoftly(sut){
+        assertSoftly(sut) {
             modifiers.toList() shouldBeEqualTo listOf(PRIVATE)
             numModifiers shouldBeEqualTo 1
         }
