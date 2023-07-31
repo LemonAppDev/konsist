@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.verify.kodeclarationassert.fordeclarationse
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.sequence.withPrimaryConstructor
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
@@ -310,7 +309,8 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         val sut =
             getSnippetFile("assert-suppress-with-few-parameters")
                 .functions(
-                    includeNested = true)
+                    includeNested = true,
+                )
 
         // then
         sut.assert { it.name.endsWith("Text") }
