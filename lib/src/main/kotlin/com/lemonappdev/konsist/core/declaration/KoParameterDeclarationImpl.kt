@@ -12,7 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDefaultValueProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentProviderCore

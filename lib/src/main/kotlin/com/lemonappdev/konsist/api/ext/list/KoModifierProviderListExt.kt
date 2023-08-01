@@ -3,7 +3,7 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.KoModifier
-import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoModifierProvider
 
 /**
  * List containing declarations with any specified modifier.

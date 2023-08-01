@@ -19,7 +19,7 @@ import com.lemonappdev.konsist.core.provider.KoLocalDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore

@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
-import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoModifierProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo

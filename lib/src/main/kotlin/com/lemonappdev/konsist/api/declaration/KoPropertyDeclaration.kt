@@ -10,7 +10,7 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoImplementationProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
-import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
@@ -19,7 +19,7 @@ import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
-import com.lemonappdev.konsist.api.provider.KoVarAndValProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoValModifierProvider
 
 /**
  * Represents a Kotlin property declaration.
@@ -45,7 +45,7 @@ interface KoPropertyDeclaration :
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTopLevelProvider,
-    KoVarAndValProvider {
+    KoValModifierProvider {
     /**
      * String representing the property.
      *

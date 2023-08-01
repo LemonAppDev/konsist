@@ -15,7 +15,7 @@ import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoImplementationProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentProviderCore
@@ -24,7 +24,7 @@ import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
-import com.lemonappdev.konsist.core.provider.KoVarAndValProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoValModifierProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
@@ -56,7 +56,7 @@ internal class KoPropertyDeclarationImpl private constructor(
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
-    KoVarAndValProviderCore {
+    KoValModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktProperty }
 
     override val ktFile: KtFile? by lazy { null }

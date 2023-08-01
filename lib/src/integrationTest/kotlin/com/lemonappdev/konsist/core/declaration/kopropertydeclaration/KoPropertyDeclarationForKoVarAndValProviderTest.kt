@@ -13,7 +13,7 @@ class KoPropertyDeclarationForKoVarAndValProviderTest {
             .first()
 
         // then
-        sut.isVal shouldBeEqualTo true
+        sut.hasValModifier shouldBeEqualTo true
     }
 
     @Test
@@ -24,7 +24,7 @@ class KoPropertyDeclarationForKoVarAndValProviderTest {
             .first()
 
         // then
-        sut.isVal shouldBeEqualTo false
+        sut.hasValModifier shouldBeEqualTo false
     }
 
     @Test
@@ -35,7 +35,7 @@ class KoPropertyDeclarationForKoVarAndValProviderTest {
             .first()
 
         // then
-        sut.isVar shouldBeEqualTo true
+        sut.hasVarModifier shouldBeEqualTo true
     }
 
     @Test
@@ -46,7 +46,7 @@ class KoPropertyDeclarationForKoVarAndValProviderTest {
             .first()
 
         // then
-        sut.isVar shouldBeEqualTo false
+        sut.hasVarModifier shouldBeEqualTo false
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -13,7 +13,7 @@ import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoLocalPropertyProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
-import com.lemonappdev.konsist.api.provider.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
