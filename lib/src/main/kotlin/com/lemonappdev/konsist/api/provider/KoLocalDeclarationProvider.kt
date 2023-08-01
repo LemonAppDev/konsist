@@ -8,9 +8,8 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 interface KoLocalDeclarationProvider : KoBaseProvider {
     /**
      * The local declarations present in the declaration.
-     * @return a list of [KoBaseProvider] representing the local declarations in the declaration.
      */
-    fun localDeclarations(): List<KoBaseDeclaration>
+    val localDeclarations: List<KoBaseDeclaration>
 
     /**
      * Checks whether the declaration contains a local declaration with the specified name.

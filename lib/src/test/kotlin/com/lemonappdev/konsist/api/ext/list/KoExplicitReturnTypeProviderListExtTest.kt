@@ -14,10 +14,10 @@ class KoExplicitReturnTypeProviderListExtTest {
     fun `withExplicitReturnType() returns declaration with any return type`() {
         // given
         val declaration1: KoExplicitReturnTypeProvider = mockk {
-            every { hasExplicitReturnType() } returns true
+            every { hasExplicitReturnType } returns true
         }
         val declaration2: KoExplicitReturnTypeProvider = mockk {
-            every { hasExplicitReturnType() } returns false
+            every { hasExplicitReturnType } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -56,10 +56,10 @@ class KoExplicitReturnTypeProviderListExtTest {
     fun `withoutExplicitReturnType() returns declaration without any return type`() {
         // given
         val declaration1: KoExplicitReturnTypeProvider = mockk {
-            every { hasExplicitReturnType() } returns true
+            every { hasExplicitReturnType } returns true
         }
         val declaration2: KoExplicitReturnTypeProvider = mockk {
-            every { hasExplicitReturnType() } returns false
+            every { hasExplicitReturnType } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 

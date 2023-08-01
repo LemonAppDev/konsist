@@ -11,10 +11,10 @@ class KoExtensionProviderListExtTest {
     fun `withExtension() returns declaration which is extension`() {
         // given
         val declaration1: KoExtensionProvider = mockk {
-            every { isExtension() } returns true
+            every { isExtension } returns true
         }
         val declaration2: KoExtensionProvider = mockk {
-            every { isExtension() } returns false
+            every { isExtension } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -29,10 +29,10 @@ class KoExtensionProviderListExtTest {
     fun `withoutExtension() returns declaration which is not extension`() {
         // given
         val declaration1: KoExtensionProvider = mockk {
-            every { isExtension() } returns true
+            every { isExtension } returns true
         }
         val declaration2: KoExtensionProvider = mockk {
-            every { isExtension() } returns false
+            every { isExtension } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 

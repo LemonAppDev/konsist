@@ -180,10 +180,10 @@ class KoModifierProviderListExtTest {
     fun `withPublicModifier() returns declaration with public modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasPublicModifier() } returns true
+            every { hasPublicModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasPublicModifier() } returns false
+            every { hasPublicModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -198,10 +198,10 @@ class KoModifierProviderListExtTest {
     fun `withoutPublicModifier() returns declaration without public modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasPublicModifier() } returns true
+            every { hasPublicModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasPublicModifier() } returns false
+            every { hasPublicModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -216,10 +216,10 @@ class KoModifierProviderListExtTest {
     fun `withPublicOrDefaultModifier() returns declaration with public or default modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { isPublicOrDefault() } returns true
+            every { isPublicOrDefault } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { isPublicOrDefault() } returns false
+            every { isPublicOrDefault } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -234,10 +234,10 @@ class KoModifierProviderListExtTest {
     fun `withoutPublicOrDefaultModifier() returns declaration without public or default modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { isPublicOrDefault() } returns true
+            every { isPublicOrDefault } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { isPublicOrDefault() } returns false
+            every { isPublicOrDefault } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -252,10 +252,10 @@ class KoModifierProviderListExtTest {
     fun `withPrivateModifier() returns declaration with private modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasPrivateModifier() } returns true
+            every { hasPrivateModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasPrivateModifier() } returns false
+            every { hasPrivateModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -270,10 +270,10 @@ class KoModifierProviderListExtTest {
     fun `withoutPrivateModifier() returns declaration without private modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasPrivateModifier() } returns true
+            every { hasPrivateModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasPrivateModifier() } returns false
+            every { hasPrivateModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -288,10 +288,10 @@ class KoModifierProviderListExtTest {
     fun `withProtectedModifier() returns declaration with protected modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasProtectedModifier() } returns true
+            every { hasProtectedModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasProtectedModifier() } returns false
+            every { hasProtectedModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -306,10 +306,10 @@ class KoModifierProviderListExtTest {
     fun `withoutProtectedModifier() returns declaration without protected modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasProtectedModifier() } returns true
+            every { hasProtectedModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasProtectedModifier() } returns false
+            every { hasProtectedModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -324,10 +324,10 @@ class KoModifierProviderListExtTest {
     fun `withInternalModifier() returns declaration with internal modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasInternalModifier() } returns true
+            every { hasInternalModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasInternalModifier() } returns false
+            every { hasInternalModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -342,10 +342,10 @@ class KoModifierProviderListExtTest {
     fun `withoutInternalModifier() returns declaration without internal modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasInternalModifier() } returns true
+            every { hasInternalModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasInternalModifier() } returns false
+            every { hasInternalModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -360,10 +360,10 @@ class KoModifierProviderListExtTest {
     fun `withEnumModifier() returns declaration with enum modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasEnumModifier() } returns true
+            every { hasEnumModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasEnumModifier() } returns false
+            every { hasEnumModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -378,10 +378,10 @@ class KoModifierProviderListExtTest {
     fun `withoutEnumModifier() returns declaration without enum modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasEnumModifier() } returns true
+            every { hasEnumModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasEnumModifier() } returns false
+            every { hasEnumModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -396,10 +396,10 @@ class KoModifierProviderListExtTest {
     fun `withSealedModifier() returns declaration with sealed modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasSealedModifier() } returns true
+            every { hasSealedModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasSealedModifier() } returns false
+            every { hasSealedModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -414,10 +414,10 @@ class KoModifierProviderListExtTest {
     fun `withoutSealedModifier() returns declaration without sealed modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasSealedModifier() } returns true
+            every { hasSealedModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasSealedModifier() } returns false
+            every { hasSealedModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -432,10 +432,10 @@ class KoModifierProviderListExtTest {
     fun `withInnerModifier() returns declaration with inner modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasInnerModifier() } returns true
+            every { hasInnerModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasInnerModifier() } returns false
+            every { hasInnerModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -450,10 +450,10 @@ class KoModifierProviderListExtTest {
     fun `withoutInnerModifier() returns declaration without inner modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasInnerModifier() } returns true
+            every { hasInnerModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasInnerModifier() } returns false
+            every { hasInnerModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -468,10 +468,10 @@ class KoModifierProviderListExtTest {
     fun `withValueModifier() returns declaration with value modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasValueModifier() } returns true
+            every { hasValueModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasValueModifier() } returns false
+            every { hasValueModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -486,10 +486,10 @@ class KoModifierProviderListExtTest {
     fun `withoutValueModifier() returns declaration without value modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasValueModifier() } returns true
+            every { hasValueModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasValueModifier() } returns false
+            every { hasValueModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -504,10 +504,10 @@ class KoModifierProviderListExtTest {
     fun `withAnnotationModifier() returns declaration with annotation modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasAnnotationModifier() } returns true
+            every { hasAnnotationModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasAnnotationModifier() } returns false
+            every { hasAnnotationModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -522,10 +522,10 @@ class KoModifierProviderListExtTest {
     fun `withoutAnnotationModifier() returns declaration without annotation modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasAnnotationModifier() } returns true
+            every { hasAnnotationModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasAnnotationModifier() } returns false
+            every { hasAnnotationModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -540,10 +540,10 @@ class KoModifierProviderListExtTest {
     fun `withDataModifier() returns declaration with data modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasDataModifier() } returns true
+            every { hasDataModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasDataModifier() } returns false
+            every { hasDataModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -558,10 +558,10 @@ class KoModifierProviderListExtTest {
     fun `withoutDataModifier() returns declaration without data modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasDataModifier() } returns true
+            every { hasDataModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasDataModifier() } returns false
+            every { hasDataModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -576,10 +576,10 @@ class KoModifierProviderListExtTest {
     fun `withActualModifier() returns declaration with actual modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasActualModifier() } returns true
+            every { hasActualModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasActualModifier() } returns false
+            every { hasActualModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -594,10 +594,10 @@ class KoModifierProviderListExtTest {
     fun `withoutActualModifier() returns declaration without actual modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasActualModifier() } returns true
+            every { hasActualModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasActualModifier() } returns false
+            every { hasActualModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -612,10 +612,10 @@ class KoModifierProviderListExtTest {
     fun `withExpectModifier() returns declaration with expect modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasExpectModifier() } returns true
+            every { hasExpectModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasExpectModifier() } returns false
+            every { hasExpectModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -630,10 +630,10 @@ class KoModifierProviderListExtTest {
     fun `withoutExpectModifier() returns declaration without expect modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasExpectModifier() } returns true
+            every { hasExpectModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasExpectModifier() } returns false
+            every { hasExpectModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -648,10 +648,10 @@ class KoModifierProviderListExtTest {
     fun `withAbstractModifier() returns declaration with abstract modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasAbstractModifier() } returns true
+            every { hasAbstractModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasAbstractModifier() } returns false
+            every { hasAbstractModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -666,10 +666,10 @@ class KoModifierProviderListExtTest {
     fun `withoutAbstractModifier() returns declaration without abstract modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasAbstractModifier() } returns true
+            every { hasAbstractModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasAbstractModifier() } returns false
+            every { hasAbstractModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -684,10 +684,10 @@ class KoModifierProviderListExtTest {
     fun `withOpenModifier() returns declaration with open modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasOpenModifier() } returns true
+            every { hasOpenModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasOpenModifier() } returns false
+            every { hasOpenModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -702,10 +702,10 @@ class KoModifierProviderListExtTest {
     fun `withoutOpenModifier() returns declaration without open modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasOpenModifier() } returns true
+            every { hasOpenModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasOpenModifier() } returns false
+            every { hasOpenModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -720,10 +720,10 @@ class KoModifierProviderListExtTest {
     fun `withFinalModifier() returns declaration with final modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasFinalModifier() } returns true
+            every { hasFinalModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasFinalModifier() } returns false
+            every { hasFinalModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -738,10 +738,10 @@ class KoModifierProviderListExtTest {
     fun `withoutFinalModifier() returns declaration without final modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasFinalModifier() } returns true
+            every { hasFinalModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasFinalModifier() } returns false
+            every { hasFinalModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -756,10 +756,10 @@ class KoModifierProviderListExtTest {
     fun `withVarargModifier() returns declaration with vararg modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasVarargModifier() } returns true
+            every { hasVarargModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasVarargModifier() } returns false
+            every { hasVarargModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -774,10 +774,10 @@ class KoModifierProviderListExtTest {
     fun `withoutVarargModifier() returns declaration without vararg modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasVarargModifier() } returns true
+            every { hasVarargModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasVarargModifier() } returns false
+            every { hasVarargModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -792,10 +792,10 @@ class KoModifierProviderListExtTest {
     fun `withNoInlineModifier() returns declaration with noInline modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasNoInlineModifier() } returns true
+            every { hasNoInlineModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasNoInlineModifier() } returns false
+            every { hasNoInlineModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -810,10 +810,10 @@ class KoModifierProviderListExtTest {
     fun `withoutNoInlineModifier() returns declaration without noInline modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasNoInlineModifier() } returns true
+            every { hasNoInlineModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasNoInlineModifier() } returns false
+            every { hasNoInlineModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -828,10 +828,10 @@ class KoModifierProviderListExtTest {
     fun `withCrossInlineModifier() returns declaration with crossInline modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasCrossInlineModifier() } returns true
+            every { hasCrossInlineModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasCrossInlineModifier() } returns false
+            every { hasCrossInlineModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -846,10 +846,10 @@ class KoModifierProviderListExtTest {
     fun `withoutCrossInlineModifier() returns declaration without crossInline modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasCrossInlineModifier() } returns true
+            every { hasCrossInlineModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasCrossInlineModifier() } returns false
+            every { hasCrossInlineModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -864,10 +864,10 @@ class KoModifierProviderListExtTest {
     fun `withOperatorModifier() returns declaration with operator modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasOperatorModifier() } returns true
+            every { hasOperatorModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasOperatorModifier() } returns false
+            every { hasOperatorModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -882,10 +882,10 @@ class KoModifierProviderListExtTest {
     fun `withoutOperatorModifier() returns declaration without operator modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasOperatorModifier() } returns true
+            every { hasOperatorModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasOperatorModifier() } returns false
+            every { hasOperatorModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -900,10 +900,10 @@ class KoModifierProviderListExtTest {
     fun `withInlineModifier() returns declaration with inline modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasInlineModifier() } returns true
+            every { hasInlineModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasInlineModifier() } returns false
+            every { hasInlineModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -918,10 +918,10 @@ class KoModifierProviderListExtTest {
     fun `withoutInlineModifier() returns declaration without inline modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasInlineModifier() } returns true
+            every { hasInlineModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasInlineModifier() } returns false
+            every { hasInlineModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -936,10 +936,10 @@ class KoModifierProviderListExtTest {
     fun `withTailrecModifier() returns declaration with tailrec modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasTailrecModifier() } returns true
+            every { hasTailrecModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasTailrecModifier() } returns false
+            every { hasTailrecModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -954,10 +954,10 @@ class KoModifierProviderListExtTest {
     fun `withoutTailrecModifier() returns declaration without tailrec modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasTailrecModifier() } returns true
+            every { hasTailrecModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasTailrecModifier() } returns false
+            every { hasTailrecModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -972,10 +972,10 @@ class KoModifierProviderListExtTest {
     fun `withInfixModifier() returns declaration with infix modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasInfixModifier() } returns true
+            every { hasInfixModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasInfixModifier() } returns false
+            every { hasInfixModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -990,10 +990,10 @@ class KoModifierProviderListExtTest {
     fun `withoutInfixModifier() returns declaration without infix modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasInfixModifier() } returns true
+            every { hasInfixModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasInfixModifier() } returns false
+            every { hasInfixModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1008,10 +1008,10 @@ class KoModifierProviderListExtTest {
     fun `withExternalModifier() returns declaration with external modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasExternalModifier() } returns true
+            every { hasExternalModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasExternalModifier() } returns false
+            every { hasExternalModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1026,10 +1026,10 @@ class KoModifierProviderListExtTest {
     fun `withoutExternalModifier() returns declaration without external modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasExternalModifier() } returns true
+            every { hasExternalModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasExternalModifier() } returns false
+            every { hasExternalModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1044,10 +1044,10 @@ class KoModifierProviderListExtTest {
     fun `withSuspendModifier() returns declaration with suspend modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasSuspendModifier() } returns true
+            every { hasSuspendModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasSuspendModifier() } returns false
+            every { hasSuspendModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1062,10 +1062,10 @@ class KoModifierProviderListExtTest {
     fun `withoutSuspendModifier() returns declaration without suspend modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasSuspendModifier() } returns true
+            every { hasSuspendModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasSuspendModifier() } returns false
+            every { hasSuspendModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1080,10 +1080,10 @@ class KoModifierProviderListExtTest {
     fun `withOverrideModifier() returns declaration with override modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasOverrideModifier() } returns true
+            every { hasOverrideModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasOverrideModifier() } returns false
+            every { hasOverrideModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1098,10 +1098,10 @@ class KoModifierProviderListExtTest {
     fun `withoutOverrideModifier() returns declaration without override modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasOverrideModifier() } returns true
+            every { hasOverrideModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasOverrideModifier() } returns false
+            every { hasOverrideModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1116,10 +1116,10 @@ class KoModifierProviderListExtTest {
     fun `withFunModifier() returns declaration with fun modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasFunModifier() } returns true
+            every { hasFunModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasFunModifier() } returns false
+            every { hasFunModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1134,10 +1134,10 @@ class KoModifierProviderListExtTest {
     fun `withoutFunModifier() returns declaration without fun modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasFunModifier() } returns true
+            every { hasFunModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasFunModifier() } returns false
+            every { hasFunModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1152,10 +1152,10 @@ class KoModifierProviderListExtTest {
     fun `withLateinitModifier() returns declaration with lateinit modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasLateinitModifier() } returns true
+            every { hasLateinitModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasLateinitModifier() } returns false
+            every { hasLateinitModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1170,10 +1170,10 @@ class KoModifierProviderListExtTest {
     fun `withoutLateinitModifier() returns declaration without lateinit modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasLateinitModifier() } returns true
+            every { hasLateinitModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasLateinitModifier() } returns false
+            every { hasLateinitModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1188,10 +1188,10 @@ class KoModifierProviderListExtTest {
     fun `withConstModifier() returns declaration with const modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasConstModifier() } returns true
+            every { hasConstModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasConstModifier() } returns false
+            every { hasConstModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1206,10 +1206,10 @@ class KoModifierProviderListExtTest {
     fun `withoutConstModifier() returns declaration without const modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasConstModifier() } returns true
+            every { hasConstModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasConstModifier() } returns false
+            every { hasConstModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1224,10 +1224,10 @@ class KoModifierProviderListExtTest {
     fun `withCompanionModifier() returns declaration with companion modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasCompanionModifier() } returns true
+            every { hasCompanionModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasCompanionModifier() } returns false
+            every { hasCompanionModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -1242,10 +1242,10 @@ class KoModifierProviderListExtTest {
     fun `withoutCompanionModifier() returns declaration without companion modifier`() {
         // given
         val declaration1: KoModifierProvider = mockk {
-            every { hasCompanionModifier() } returns true
+            every { hasCompanionModifier } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasCompanionModifier() } returns false
+            every { hasCompanionModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 

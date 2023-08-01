@@ -6,5 +6,6 @@ import org.jetbrains.kotlin.psi.KtFunction
 internal interface KoImplementationProviderCore : KoImplementationProvider, KoBaseProviderCore {
     val ktFunction: KtFunction
 
-    override fun hasImplementation(): Boolean = ktFunction.hasBody()
+    override val hasImplementation: Boolean
+        get() = ktFunction.hasBody()
 }

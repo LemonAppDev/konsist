@@ -8,9 +8,8 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 interface KoLocalFunctionProvider : KoBaseProvider {
     /**
      * The local functions present in the declaration.
-     * @return a list of [KoFunctionDeclaration] representing the local functions in the declaration.
      */
-    fun localFunctions(): List<KoFunctionDeclaration>
+    val localFunctions: List<KoFunctionDeclaration>
 
     /**
      * Checks whether the declaration contains a local function with the specified name.

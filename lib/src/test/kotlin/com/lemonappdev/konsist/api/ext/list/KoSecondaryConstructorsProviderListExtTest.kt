@@ -13,10 +13,10 @@ class KoSecondaryConstructorsProviderListExtTest {
     fun `withSecondaryConstructors() returns declaration with secondary constructor`() {
         // given
         val declaration1: KoSecondaryConstructorsProvider = mockk {
-            every { hasSecondaryConstructors() } returns true
+            every { hasSecondaryConstructors } returns true
         }
         val declaration2: KoSecondaryConstructorsProvider = mockk {
-            every { hasSecondaryConstructors() } returns false
+            every { hasSecondaryConstructors } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -31,10 +31,10 @@ class KoSecondaryConstructorsProviderListExtTest {
     fun `withoutSecondaryConstructors() returns declaration without secondary constructor`() {
         // given
         val declaration1: KoSecondaryConstructorsProvider = mockk {
-            every { hasSecondaryConstructors() } returns true
+            every { hasSecondaryConstructors } returns true
         }
         val declaration2: KoSecondaryConstructorsProvider = mockk {
-            every { hasSecondaryConstructors() } returns false
+            every { hasSecondaryConstructors } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 

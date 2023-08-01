@@ -16,5 +16,6 @@ internal interface KoKDocProviderCore : KoKDocProvider, KoTextProviderCore, KoBa
             return kDocElement?.let { KoKDocDeclarationImpl(kDocElement) }
         }
 
-    override fun hasKDoc(): Boolean = kDoc != null
+    override val hasKDoc: Boolean
+        get() = kDoc != null
 }

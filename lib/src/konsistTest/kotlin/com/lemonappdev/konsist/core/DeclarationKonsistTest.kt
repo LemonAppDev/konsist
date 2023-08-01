@@ -14,7 +14,7 @@ class DeclarationKonsistTest {
         declarationPackageScope
             .functions(includeNested = true)
             .withoutName("print")
-            .assert { it.hasExplicitReturnType() }
+            .assert { it.hasExplicitReturnType }
     }
 
     @Test

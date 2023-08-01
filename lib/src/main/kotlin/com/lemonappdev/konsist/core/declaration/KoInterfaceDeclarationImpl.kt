@@ -20,6 +20,7 @@ import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
@@ -35,7 +36,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoInterfaceDeclarationImpl private constructor(
-    private val ktClass: KtClass,
+    override val ktClass: KtClass,
     override val parent: KoParentProvider?,
 ) :
     KoInterfaceDeclaration,
@@ -53,6 +54,7 @@ internal class KoInterfaceDeclarationImpl private constructor(
     KoNameProviderCore,
     KoObjectProviderCore,
     KoPackageProviderCore,
+    KoParentInterfaceProviderCore,
     KoParentProviderCore,
     KoPathProviderCore,
     KoPropertyProviderCore,

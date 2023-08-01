@@ -38,6 +38,7 @@ import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClass
+import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -86,6 +87,8 @@ internal class KoClassDeclarationImpl private constructor(
     override val psiElement: PsiElement by lazy { ktClass }
 
     override val ktElement: KtElement by lazy { ktClass }
+
+    override val ktClassOrObject: KtClassOrObject by lazy { ktClass }
 
     override fun declarations(
         includeNested: Boolean,

@@ -81,7 +81,7 @@ internal class KoFunctionDeclarationImpl private constructor(
 
     override val ktElement: KtElement by lazy { ktFunction }
 
-    private val localDeclarations: List<KoBaseDeclaration> by lazy {
+    private val localDeclarationsHelper: List<KoBaseDeclaration> by lazy {
         val psiChildren = ktFunction
             .bodyBlockExpression
             ?.children
@@ -102,7 +102,8 @@ internal class KoFunctionDeclarationImpl private constructor(
             }
     }
 
-    override fun localDeclarations(): List<KoBaseDeclaration> = localDeclarations
+    override val localDeclarations: List<KoBaseDeclaration>
+        get() = localDeclarationsHelper
 
     override fun toString(): String {
         return locationWithText

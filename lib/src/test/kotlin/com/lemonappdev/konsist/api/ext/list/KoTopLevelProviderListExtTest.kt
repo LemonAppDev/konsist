@@ -11,10 +11,10 @@ class KoTopLevelProviderListExtTest {
     fun `withTopLevel() returns declaration which is top level declaration`() {
         // given
         val declaration1: KoTopLevelProvider = mockk {
-            every { isTopLevel() } returns true
+            every { isTopLevel } returns true
         }
         val declaration2: KoTopLevelProvider = mockk {
-            every { isTopLevel() } returns false
+            every { isTopLevel } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -29,10 +29,10 @@ class KoTopLevelProviderListExtTest {
     fun `withoutTopLevel() returns declaration which is not top level declaration`() {
         // given
         val declaration1: KoTopLevelProvider = mockk {
-            every { isTopLevel() } returns true
+            every { isTopLevel } returns true
         }
         val declaration2: KoTopLevelProvider = mockk {
-            every { isTopLevel() } returns false
+            every { isTopLevel } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 

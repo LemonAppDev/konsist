@@ -36,7 +36,7 @@ class CleanArchitectureSnippets {
         Konsist.scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
-            .assert { it.numDeclarations() == 1 && it.containsFunction("invoke") && it.isPublicOrDefault() }
+            .assert { it.numDeclarations() == 1 && it.containsFunction("invoke") && it.isPublicOrDefault }
     }
 
     fun `interfaces with 'Repository' annotation should reside in 'data' package`() {

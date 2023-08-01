@@ -11,10 +11,10 @@ class KoPrimaryConstructorProviderListExtTest {
     fun `withPrimaryConstructor() returns declaration with primary constructor`() {
         // given
         val declaration1: KoPrimaryConstructorProvider = mockk {
-            every { hasPrimaryConstructor() } returns true
+            every { hasPrimaryConstructor } returns true
         }
         val declaration2: KoPrimaryConstructorProvider = mockk {
-            every { hasPrimaryConstructor() } returns false
+            every { hasPrimaryConstructor } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -29,10 +29,10 @@ class KoPrimaryConstructorProviderListExtTest {
     fun `withoutPrimaryConstructor() returns declaration without primary constructor`() {
         // given
         val declaration1: KoPrimaryConstructorProvider = mockk {
-            every { hasPrimaryConstructor() } returns true
+            every { hasPrimaryConstructor } returns true
         }
         val declaration2: KoPrimaryConstructorProvider = mockk {
-            every { hasPrimaryConstructor() } returns false
+            every { hasPrimaryConstructor } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
