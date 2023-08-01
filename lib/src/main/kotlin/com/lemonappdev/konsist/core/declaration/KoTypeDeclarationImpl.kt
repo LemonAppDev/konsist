@@ -42,7 +42,7 @@ internal class KoTypeDeclarationImpl private constructor(
 
     override val name: String by lazy {
         when {
-            isAlias() -> aliasType + if (isNullable) "?" else ""
+            isAlias -> aliasType + if (isNullable) "?" else ""
             else -> ktTypeReference.text
         }
     }

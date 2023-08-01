@@ -4,9 +4,9 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoFileProvider
 
 internal interface KoFileProviderCore : KoFileProvider, KoBaseProviderCore {
-    val koFiles: Sequence<KoFileDeclaration>
+    val koFiles: List<KoFileDeclaration>
 
-    override val files: Sequence<KoFileDeclaration>
+    override val files: List<KoFileDeclaration>
         get() = koFiles.sortedBy { it.path }
 
     override fun hasFiles(vararg names: String): Boolean = when {

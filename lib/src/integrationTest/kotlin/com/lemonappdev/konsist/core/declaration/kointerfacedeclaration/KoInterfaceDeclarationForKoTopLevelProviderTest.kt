@@ -14,7 +14,7 @@ class KoInterfaceDeclarationForKoTopLevelProviderTest {
             .first()
 
         // then
-        sut.isTopLevel() shouldBeEqualTo false
+        sut.isTopLevel shouldBeEqualTo false
     }
 
     @Test
@@ -25,7 +25,7 @@ class KoInterfaceDeclarationForKoTopLevelProviderTest {
             .first()
 
         // then
-        sut.isTopLevel() shouldBeEqualTo true
+        sut.isTopLevel shouldBeEqualTo true
     }
 
     private fun getSnippetFile(fileName: String) =

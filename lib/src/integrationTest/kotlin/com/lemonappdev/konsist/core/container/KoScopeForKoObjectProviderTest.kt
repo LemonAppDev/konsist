@@ -12,7 +12,7 @@ class KoScopeForKoObjectProviderTest {
         val sut = getSnippetFile("scope-contains-no-objects")
 
         // then
-        sut.objects(includeNested = true).toList() shouldBeEqualTo emptyList()
+        sut.objects(includeNested = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -24,7 +24,6 @@ class KoScopeForKoObjectProviderTest {
         val expected = listOf("SampleObject", "SampleNestedObject")
 
         sut.objects(includeNested = true)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -38,7 +37,6 @@ class KoScopeForKoObjectProviderTest {
         val expected = listOf("SampleObject")
 
         sut.objects(includeNested = false)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

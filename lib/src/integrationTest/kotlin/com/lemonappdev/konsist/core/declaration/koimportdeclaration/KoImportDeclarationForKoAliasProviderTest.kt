@@ -24,7 +24,7 @@ class KoImportDeclarationForKoAliasProviderTest {
             .imports
 
         // then
-        assertSoftly(sut.toList()) {
+        assertSoftly(sut) {
             get(0).alias shouldBeEqualTo null
             get(1).alias shouldBeEqualTo "ImportAlias"
         }

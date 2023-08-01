@@ -82,3 +82,19 @@ internal fun checkIfLocalListIsEmpty(localList: List<*>, type: String, testMetho
         )
     }
 }
+
+internal fun checkIfSuppressed(item: KoAnnotationProvider, testMethodName: String, prefix: String): Boolean {
+    val annotationParameter = item
+        .annotations
+        .firstOrNull { it.name == "Suppress" }
+        ?.text
+        ?.removePrefix(prefix)
+        ?.substringBeforeLast(")")
+        ?.split(",")
+        ?.map { it.trim() }
+        ?.map { it.removePrefix("\"") }
+        ?.map { it.removeSuffix("\"") }
+        ?: emptyList()
+
+    return annotationParameter.any { it == testMethodName } || annotationParameter.any { it == "konsist.$testMethodName" }
+}

@@ -7,9 +7,9 @@ import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
  */
 interface KoFileProvider : KoBaseProvider {
     /**
-     * Sequence of the files.
+     * List of the files.
      */
-    val files: Sequence<KoFileDeclaration>
+    val files: List<KoFileDeclaration>
 
     /**
      * Whether the scope has files.

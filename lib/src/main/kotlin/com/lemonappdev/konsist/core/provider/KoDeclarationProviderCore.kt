@@ -8,5 +8,5 @@ internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProv
         includeNested: Boolean,
     ): Boolean = declarations(includeNested = includeNested).any { (it as KoNameProviderCore).name == name }
 
-    override fun numDeclarations(includeNested: Boolean): Int = declarations(includeNested).toList().size
+    override fun numDeclarations(includeNested: Boolean): Int = declarations(includeNested).size
 }

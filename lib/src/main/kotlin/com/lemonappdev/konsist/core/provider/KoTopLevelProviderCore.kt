@@ -7,5 +7,6 @@ import org.jetbrains.kotlin.psi.psiUtil.isTopLevelKtOrJavaMember
 internal interface KoTopLevelProviderCore : KoTopLevelProvider, KoBaseProviderCore {
     val ktTypeParameterListOwner: KtTypeParameterListOwner
 
-    override fun isTopLevel(): Boolean = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
+    override val isTopLevel: Boolean
+        get() = ktTypeParameterListOwner.isTopLevelKtOrJavaMember()
 }

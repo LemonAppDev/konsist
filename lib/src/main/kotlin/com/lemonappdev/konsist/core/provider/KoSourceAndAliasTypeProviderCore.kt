@@ -18,7 +18,7 @@ internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvid
             ?.alias
 
     override val sourceType: String
-        get() = if (isAlias()) {
+        get() = if (isAlias) {
             file
                 .imports
                 .first { it.alias == ktTypeReference.text.removeSuffix("?") }
@@ -31,5 +31,6 @@ internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvid
                 .removeSuffix("?")
         }
 
-    override fun isAlias(): Boolean = aliasType != null
+    override val isAlias: Boolean
+        get() = aliasType != null
 }

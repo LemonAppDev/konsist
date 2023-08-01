@@ -18,7 +18,8 @@ internal interface KoExplicitReturnTypeProviderCore :
         .filterIsInstance<KtTypeReference>()
 
     override val explicitReturnType: KoTypeDeclaration?
-        get() = ReceiverUtil.getType(getTypeReferences(), isExtension(), this)
+        get() = ReceiverUtil.getType(getTypeReferences(), isExtension, this)
 
-    override fun hasExplicitReturnType(): Boolean = ktFunction.hasDeclaredReturnType()
+    override val hasExplicitReturnType: Boolean
+        get() = ktFunction.hasDeclaredReturnType()
 }

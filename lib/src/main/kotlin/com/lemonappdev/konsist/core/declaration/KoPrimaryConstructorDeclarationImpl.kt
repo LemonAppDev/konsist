@@ -47,7 +47,7 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
 
     override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktPrimaryConstructor }
 
-    override val koFiles: Sequence<KoFileDeclaration>? by lazy { null }
+    override val koFiles: List<KoFileDeclaration>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktPrimaryConstructor }
 

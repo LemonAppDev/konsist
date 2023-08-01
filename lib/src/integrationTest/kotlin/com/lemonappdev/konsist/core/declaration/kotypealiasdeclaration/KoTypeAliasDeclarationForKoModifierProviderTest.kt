@@ -20,40 +20,40 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
 
         // then
         assertSoftly(sut) {
-            modifiers.toList() shouldBeEqualTo emptyList()
+            modifiers shouldBeEqualTo emptyList()
             hasModifiers() shouldBeEqualTo false
             hasModifiers(KoModifier.OPEN) shouldBeEqualTo false
             hasModifiers(KoModifier.OPEN, KoModifier.DATA) shouldBeEqualTo false
-            hasPublicModifier() shouldBeEqualTo false
-            isPublicOrDefault() shouldBeEqualTo true
-            hasPrivateModifier() shouldBeEqualTo false
-            hasProtectedModifier() shouldBeEqualTo false
-            hasInternalModifier() shouldBeEqualTo false
-            hasEnumModifier() shouldBeEqualTo false
-            hasSealedModifier() shouldBeEqualTo false
-            hasInnerModifier() shouldBeEqualTo false
-            hasValueModifier() shouldBeEqualTo false
-            hasAnnotationModifier() shouldBeEqualTo false
-            hasDataModifier() shouldBeEqualTo false
-            hasActualModifier() shouldBeEqualTo false
-            hasExpectModifier() shouldBeEqualTo false
-            hasAbstractModifier() shouldBeEqualTo false
-            hasOpenModifier() shouldBeEqualTo false
-            hasFinalModifier() shouldBeEqualTo false
-            hasVarargModifier() shouldBeEqualTo false
-            hasNoInlineModifier() shouldBeEqualTo false
-            hasCrossInlineModifier() shouldBeEqualTo false
-            hasOperatorModifier() shouldBeEqualTo false
-            hasInlineModifier() shouldBeEqualTo false
-            hasTailrecModifier() shouldBeEqualTo false
-            hasInfixModifier() shouldBeEqualTo false
-            hasExternalModifier() shouldBeEqualTo false
-            hasSuspendModifier() shouldBeEqualTo false
-            hasOverrideModifier() shouldBeEqualTo false
-            hasFunModifier() shouldBeEqualTo false
-            hasLateinitModifier() shouldBeEqualTo false
-            hasConstModifier() shouldBeEqualTo false
-            hasCompanionModifier() shouldBeEqualTo false
+            hasPublicModifier shouldBeEqualTo false
+            isPublicOrDefault shouldBeEqualTo true
+            hasPrivateModifier shouldBeEqualTo false
+            hasProtectedModifier shouldBeEqualTo false
+            hasInternalModifier shouldBeEqualTo false
+            hasEnumModifier shouldBeEqualTo false
+            hasSealedModifier shouldBeEqualTo false
+            hasInnerModifier shouldBeEqualTo false
+            hasValueModifier shouldBeEqualTo false
+            hasAnnotationModifier shouldBeEqualTo false
+            hasDataModifier shouldBeEqualTo false
+            hasActualModifier shouldBeEqualTo false
+            hasExpectModifier shouldBeEqualTo false
+            hasAbstractModifier shouldBeEqualTo false
+            hasOpenModifier shouldBeEqualTo false
+            hasFinalModifier shouldBeEqualTo false
+            hasVarargModifier shouldBeEqualTo false
+            hasNoInlineModifier shouldBeEqualTo false
+            hasCrossInlineModifier shouldBeEqualTo false
+            hasOperatorModifier shouldBeEqualTo false
+            hasInlineModifier shouldBeEqualTo false
+            hasTailrecModifier shouldBeEqualTo false
+            hasInfixModifier shouldBeEqualTo false
+            hasExternalModifier shouldBeEqualTo false
+            hasSuspendModifier shouldBeEqualTo false
+            hasOverrideModifier shouldBeEqualTo false
+            hasFunModifier shouldBeEqualTo false
+            hasLateinitModifier shouldBeEqualTo false
+            hasConstModifier shouldBeEqualTo false
+            hasCompanionModifier shouldBeEqualTo false
         }
     }
 
@@ -69,7 +69,7 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
             .first()
 
         // then
-        sut.modifiers.toList() shouldBeEqualTo modifiers
+        sut.modifiers shouldBeEqualTo modifiers
     }
 
     @Test
@@ -80,7 +80,7 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
             .first()
 
         // then
-        sut.hasPublicModifier() shouldBeEqualTo true
+        sut.hasPublicModifier shouldBeEqualTo true
     }
 
     @Test
@@ -92,8 +92,8 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
 
         // then
         assertSoftly(sut) {
-            isPublicOrDefault() shouldBeEqualTo true
-            hasPublicModifier() shouldBeEqualTo false
+            isPublicOrDefault shouldBeEqualTo true
+            hasPublicModifier shouldBeEqualTo false
         }
     }
 
@@ -105,7 +105,7 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
             .first()
 
         // then
-        sut.hasPrivateModifier() shouldBeEqualTo true
+        sut.hasPrivateModifier shouldBeEqualTo true
     }
 
     @Test
@@ -116,7 +116,7 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
             .first()
 
         // then
-        sut.hasInternalModifier() shouldBeEqualTo true
+        sut.hasInternalModifier shouldBeEqualTo true
     }
 
     @Test
@@ -129,7 +129,7 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
             .first()
 
         // then
-        sut.hasActualModifier() shouldBeEqualTo true
+        sut.hasActualModifier shouldBeEqualTo true
     }
 
     private fun getSnippetFile(fileName: String) =

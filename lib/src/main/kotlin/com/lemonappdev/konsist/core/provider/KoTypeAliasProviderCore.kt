@@ -9,21 +9,21 @@ import org.jetbrains.kotlin.psi.KtTypeAlias
 
 internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProviderCore {
     val ktFile: KtFile?
-    val koFiles: Sequence<KoFileDeclaration>?
+    val koFiles: List<KoFileDeclaration>?
 
-    override val typeAliases: Sequence<KoTypeAliasDeclaration>
+    override val typeAliases: List<KoTypeAliasDeclaration>
         get() = if (ktFile != null) {
             ktFile
                 ?.children
                 ?.filterIsInstance<KtTypeAlias>()
                 ?.map { KoTypeAliasDeclarationImpl.getInstance(it, null) }
-                ?.asSequence() ?: emptySequence()
+                ?: emptyList()
         } else {
-            koFiles?.flatMap { it.typeAliases } ?: emptySequence()
+            koFiles?.flatMap { it.typeAliases } ?: emptyList()
         }
 
     override fun hasTypeAliases(vararg names: String): Boolean = when {
-        names.isEmpty() -> typeAliases.toList().isNotEmpty()
+        names.isEmpty() -> typeAliases.isNotEmpty()
         else -> names.all {
             typeAliases.any { typeAlias -> typeAlias.name == it }
         }

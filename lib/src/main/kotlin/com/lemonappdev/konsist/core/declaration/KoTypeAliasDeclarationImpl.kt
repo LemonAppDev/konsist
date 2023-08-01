@@ -54,7 +54,7 @@ internal class KoTypeAliasDeclarationImpl private constructor(
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktTypeAlias }
 
-    override val koFiles: Sequence<KoFileDeclaration>? by lazy { null }
+    override val koFiles: List<KoFileDeclaration>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktTypeAlias }
 

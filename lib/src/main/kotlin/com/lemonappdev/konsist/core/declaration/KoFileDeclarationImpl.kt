@@ -57,7 +57,7 @@ internal class KoFileDeclarationImpl(override val ktFile: KtFile) :
 
     override val parent: KoParentProvider? by lazy { this }
 
-    override val koFiles: Sequence<KoFileDeclaration>? by lazy { null }
+    override val koFiles: List<KoFileDeclaration>? by lazy { null }
 
     override val name by lazy { nameWithExtension.substringBeforeLast('.') }
 
@@ -70,7 +70,7 @@ internal class KoFileDeclarationImpl(override val ktFile: KtFile) :
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseDeclaration> =
+    ): List<KoBaseDeclaration> =
         KoDeclarationProviderCoreUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
 
     override fun toString(): String = path

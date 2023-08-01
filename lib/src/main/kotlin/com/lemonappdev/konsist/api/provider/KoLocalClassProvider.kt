@@ -8,9 +8,8 @@ import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 interface KoLocalClassProvider : KoBaseProvider {
     /**
      * The local classes present in the declaration.
-     * @return a sequence of [KoClassDeclaration] representing the local classes in the declaration.
      */
-    fun localClasses(): Sequence<KoClassDeclaration>
+    val localClasses: List<KoClassDeclaration>
 
     /**
      * Checks whether the declaration contains a local class with the specified name.

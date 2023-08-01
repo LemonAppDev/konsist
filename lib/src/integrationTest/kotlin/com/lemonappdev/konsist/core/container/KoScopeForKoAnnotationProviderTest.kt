@@ -17,7 +17,7 @@ class KoScopeForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-            annotations.toList() shouldBeEqualTo emptyList()
+            annotations shouldBeEqualTo emptyList()
             hasAnnotations("SampleAnnotation") shouldBeEqualTo false
             hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
             hasAnnotationsOf(SampleAnnotation::class) shouldBeEqualTo false
@@ -31,7 +31,7 @@ class KoScopeForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-            annotations.map { it.name }.toList() shouldBeEqualTo listOf("SampleAnnotation1")
+            annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation1")
             hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
             hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
             hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false

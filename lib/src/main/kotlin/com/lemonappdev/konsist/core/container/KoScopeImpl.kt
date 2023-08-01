@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.psi.KtFile
 
 @Suppress("detekt.TooManyFunctions")
 class KoScopeImpl(
-    override var koFiles: Sequence<KoFileDeclaration>,
+    override var koFiles: List<KoFileDeclaration>,
 ) : KoScope,
     KoAnnotationProviderCore,
     KoClassProviderCore,
@@ -38,7 +38,7 @@ class KoScopeImpl(
     KoPackagesProviderCore,
     KoPropertyProviderCore,
     KoTypeAliasProviderCore {
-    constructor(koFileDeclaration: KoFileDeclaration) : this(sequenceOf(koFileDeclaration))
+    constructor(koFileDeclaration: KoFileDeclaration) : this(listOf(koFile))
 
     override val ktFile: KtFile? by lazy { null }
 
@@ -49,35 +49,35 @@ class KoScopeImpl(
     override fun classes(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoClassDeclaration> =
+    ): List<KoClassDeclaration> =
         koFiles.flatMap { it.classes(includeNested, includeLocal) }
 
     override fun interfaces(
         includeNested: Boolean,
-    ): Sequence<KoInterfaceDeclaration> =
+    ): List<KoInterfaceDeclaration> =
         koFiles.flatMap { it.interfaces(includeNested) }
 
     override fun objects(
         includeNested: Boolean,
-    ): Sequence<KoObjectDeclaration> =
+    ): List<KoObjectDeclaration> =
         koFiles.flatMap { it.objects(includeNested) }
 
     override fun functions(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoFunctionDeclaration> =
+    ): List<KoFunctionDeclaration> =
         koFiles.flatMap { it.functions(includeNested, includeLocal) }
 
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseDeclaration> =
+    ): List<KoBaseDeclaration> =
         koFiles.flatMap { it.declarations(includeNested, includeLocal) }
 
     override fun properties(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoPropertyDeclaration> =
+    ): List<KoPropertyDeclaration> =
         koFiles.flatMap { it.properties(includeNested, includeLocal) }
 
     override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope = KoScopeImpl(koFiles.filter { predicate(it) })
@@ -95,14 +95,13 @@ class KoScopeImpl(
     }
 
     override fun toString(): String = files
-        .toList()
         .joinToString("\n") { it.path }
 
     override fun print() {
         println(toString())
     }
 
-    override fun equals(other: Any?): Boolean = other is KoScope && files.toList() == other.files.toList()
+    override fun equals(other: Any?): Boolean = other is KoScope && files == other.files
 
-    override fun hashCode(): Int = 31 * 7 + files.toList().hashCode()
+    override fun hashCode(): Int = 31 * 7 + files.hashCode()
 }

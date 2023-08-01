@@ -16,7 +16,6 @@ class KoScopeForKoClassProviderTest {
         // then
         sut
             .classes()
-            .toList()
             .shouldBeEqualTo(emptyList())
     }
 
@@ -29,7 +28,6 @@ class KoScopeForKoClassProviderTest {
         val expected = listOf("SampleLocalClass", "SampleClassNestedInsideObject")
 
         sut.classes(includeNested = true, includeLocal = true)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -43,7 +41,6 @@ class KoScopeForKoClassProviderTest {
         val expected = listOf("SampleClassNestedInsideObject")
 
         sut.classes(includeNested = true, includeLocal = false)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -57,7 +54,6 @@ class KoScopeForKoClassProviderTest {
         val expected = listOf("SampleLocalClass")
 
         sut.classes(includeNested = false, includeLocal = true)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -71,7 +67,6 @@ class KoScopeForKoClassProviderTest {
         val expected = emptyList<KoClassDeclaration>()
 
         sut.classes(includeNested = false, includeLocal = false)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

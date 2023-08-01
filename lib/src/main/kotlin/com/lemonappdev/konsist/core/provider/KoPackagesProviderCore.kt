@@ -6,13 +6,13 @@ import com.lemonappdev.konsist.api.provider.KoPackagesProvider
 import com.lemonappdev.konsist.core.util.LocationUtil
 
 internal interface KoPackagesProviderCore : KoPackagesProvider, KoBaseProviderCore {
-    val koFiles: Sequence<KoFileDeclaration>
+    val koFiles: List<KoFileDeclaration>
 
-    override val packages: Sequence<KoPackageDeclaration>
+    override val packages: List<KoPackageDeclaration>
         get() = koFiles.mapNotNull { it.packagee }
 
     override fun hasPackages(vararg names: String): Boolean = when {
-        names.isEmpty() -> packages.toList().isNotEmpty()
+        names.isEmpty() -> packages.isNotEmpty()
         else -> names.all {
             packages.any { packagee ->
                 LocationUtil.resideInLocation(it, packagee.fullyQualifiedName) || LocationUtil.resideInLocation(

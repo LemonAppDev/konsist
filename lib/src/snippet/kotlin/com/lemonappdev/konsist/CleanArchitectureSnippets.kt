@@ -3,8 +3,8 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
-import com.lemonappdev.konsist.api.ext.sequence.withAllAnnotationsOf
-import com.lemonappdev.konsist.api.ext.sequence.withNameEndingWith
+import com.lemonappdev.konsist.api.ext.list.withAllAnnotationsOf
+import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.core.verify.assert
 import org.springframework.stereotype.Repository
 
@@ -36,7 +36,7 @@ class CleanArchitectureSnippets {
         Konsist.scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
-            .assert { it.numDeclarations() == 1 && it.containsFunction("invoke") && it.isPublicOrDefault() }
+            .assert { it.numDeclarations() == 1 && it.containsFunction("invoke") && it.isPublicOrDefault }
     }
 
     fun `interfaces with 'Repository' annotation should reside in 'data' package`() {

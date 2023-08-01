@@ -14,7 +14,7 @@ class KoFileDeclarationForKoFunctionProviderTest {
             .first()
 
         // then
-        sut.functions(includeNested = true, includeLocal = true).toList() shouldBeEqualTo emptyList()
+        sut.functions(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -28,7 +28,6 @@ class KoFileDeclarationForKoFunctionProviderTest {
         val expected = listOf("sampleFunction", "sampleLocalFunction", "sampleNestedFunction")
 
         sut.functions(includeNested = true, includeLocal = true)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -44,7 +43,6 @@ class KoFileDeclarationForKoFunctionProviderTest {
         val expected = listOf("sampleFunction", "sampleNestedFunction")
 
         sut.functions(includeNested = true, includeLocal = false)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -60,7 +58,6 @@ class KoFileDeclarationForKoFunctionProviderTest {
         val expected = listOf("sampleFunction", "sampleLocalFunction")
 
         sut.functions(includeNested = false, includeLocal = true)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -76,7 +73,6 @@ class KoFileDeclarationForKoFunctionProviderTest {
         val expected = listOf("sampleFunction")
 
         sut.functions(includeNested = false, includeLocal = false)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

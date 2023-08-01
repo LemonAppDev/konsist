@@ -9,7 +9,7 @@ interface KoInitBlockProvider : KoBaseProvider {
     /**
      * The init blocks of the declaration.
      */
-    val initBlocks: Sequence<KoInitBlockDeclaration>?
+    val initBlocks: List<KoInitBlockDeclaration>?
 
     /**
      * The number of init blocks in declaration.
@@ -18,8 +18,6 @@ interface KoInitBlockProvider : KoBaseProvider {
 
     /**
      * Whatever declaration has init blocks.
-     *
-     * @return `true` if the declaration has init block(s), `false` otherwise.
      */
-    fun hasInitBlocks(): Boolean
+    val hasInitBlocks: Boolean
 }

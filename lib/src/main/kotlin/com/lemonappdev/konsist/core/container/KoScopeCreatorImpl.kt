@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.container
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.api.container.KoScopeCreator
-import com.lemonappdev.konsist.api.ext.sequence.withPackage
+import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.sep
 import com.lemonappdev.konsist.core.ext.toKoFile
@@ -14,7 +14,7 @@ import java.io.File
 internal class KoScopeCreatorImpl : KoScopeCreator {
     private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
 
-    private val projectKotlinFiles: Sequence<KoFileDeclaration> by lazy { File(pathProvider.rootProjectPath).toKoFiles() }
+    private val projectKotlinFiles: List<KoFileDeclaration> by lazy { File(pathProvider.rootProjectPath).toKoFiles() }
 
     override val projectRootPath: String by lazy { pathProvider.rootProjectPath }
 
@@ -25,7 +25,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromModule(vararg moduleNames: String): KoScope = moduleNames
         .flatMap { getFiles(it) }
-        .asSequence()
         .let { KoScopeImpl(it) }
 
     override fun scopeFromPackage(packagee: String, moduleName: String?, sourceSetName: String?): KoScope {
@@ -37,14 +36,13 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromSourceSet(vararg sourceSetNames: String): KoScope = sourceSetNames
         .flatMap { getFiles(sourceSetName = it) }
-        .asSequence()
         .let { KoScopeImpl(it) }
 
     private fun getFiles(
         moduleName: String? = null,
         sourceSetName: String? = null,
         ignoreBuildConfig: Boolean = true,
-    ): Sequence<KoFileDeclaration> {
+    ): List<KoFileDeclaration> {
         val localProjectKotlinFiles = projectKotlinFiles
             .filterNot { isBuildPath(it.path.toMacOsSeparator()) }
             .let {
@@ -158,9 +156,10 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         return lowercasePath.matches(Regex(".*/$gradleBuildConfigDirectoryName.*"))
     }
 
-    private fun File.toKoFiles(): Sequence<KoFileDeclaration> = walk()
+    private fun File.toKoFiles(): List<KoFileDeclaration> = walk()
         .filter { it.isKotlinFile }
         .map { it.toKoFile() }
+        .toList()
 
     companion object {
         private const val TEST_NAME_IN_PATH = "test"

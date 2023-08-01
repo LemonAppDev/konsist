@@ -14,7 +14,7 @@ class KoFileDeclarationForKoInterfaceProviderTest {
             .first()
 
         // then
-        sut.interfaces(includeNested = true).toList() shouldBeEqualTo emptyList()
+        sut.interfaces(includeNested = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -28,7 +28,6 @@ class KoFileDeclarationForKoInterfaceProviderTest {
         val expected = listOf("SampleInterface", "SampleNestedInterface")
 
         sut.interfaces(includeNested = true)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -44,7 +43,6 @@ class KoFileDeclarationForKoInterfaceProviderTest {
         val expected = listOf("SampleInterface")
 
         sut.interfaces(includeNested = false)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

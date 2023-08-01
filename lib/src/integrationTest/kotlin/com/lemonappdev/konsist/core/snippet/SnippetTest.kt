@@ -12,10 +12,10 @@ class SnippetTest {
         val snippets = File("../")
             .walk()
             .filter { it.isKotlinSnippetFile }
+            .toList()
 
         val snippetPaths = snippets
             .map { it.path }
-            .toList()
 
         val snippetNames = snippets
             .map { it.name.removeSuffix(".kttxt") }

@@ -8,9 +8,9 @@ import com.lemonappdev.konsist.api.KoModifier
 @Suppress("detekt.TooManyFunctions")
 interface KoModifierProvider : KoBaseProvider {
     /**
-     * Sequence of modifiers.
+     * List of modifiers.
      */
-    val modifiers: Sequence<KoModifier>
+    val modifiers: List<KoModifier>
 
     /**
      * Whether the declaration has modifiers.
@@ -22,211 +22,151 @@ interface KoModifierProvider : KoBaseProvider {
 
     /**
      * Whether the declaration has public modifier.
-     *
-     * @return `true` if the declaration has the `public` modifier, `false` otherwise.
      */
-    fun hasPublicModifier(): Boolean
+    val hasPublicModifier: Boolean
 
     /**
      * Whether the declaration has public or no visibility modifier.
-     *
-     * @return `true` if the declaration has the `public` or no visibility modifier, `false` otherwise.
      */
-    fun isPublicOrDefault(): Boolean
+    val isPublicOrDefault: Boolean
 
     /**
      * Whether the declaration has private modifier.
-     *
-     * @return `true` if the declaration has the `private` modifier, `false` otherwise.
      */
-    fun hasPrivateModifier(): Boolean
+    val hasPrivateModifier: Boolean
 
     /**
      * Whether the declaration has protected modifier.
-     *
-     * @return `true` if the declaration has the `protected` modifier, `false` otherwise.
      */
-    fun hasProtectedModifier(): Boolean
+    val hasProtectedModifier: Boolean
 
     /**
      * Whether the declaration has internal modifier.
-     *
-     * @return `true` if the declaration has the `internal` modifier, `false` otherwise.
      */
-    fun hasInternalModifier(): Boolean
+    val hasInternalModifier: Boolean
 
     /**
      * Whatever declaration has `enum` modifier.
-     *
-     * @return `true` if the declaration has the `enum` modifier, `false` otherwise.
      */
-    fun hasEnumModifier(): Boolean
+    val hasEnumModifier: Boolean
 
     /**
      * Whatever declaration has `sealed` modifier.
-     *
-     * @return `true` if the declaration has the `sealed` modifier, `false` otherwise.
      */
-    fun hasSealedModifier(): Boolean
+    val hasSealedModifier: Boolean
 
     /**
      * Whatever declaration has `inner` modifier.
-     *
-     * @return `true` if the declaration has the `inner` modifier, `false` otherwise.
      */
-    fun hasInnerModifier(): Boolean
+    val hasInnerModifier: Boolean
 
     /**
      * Whatever declaration has `value` modifier.
-     *
-     * @return `true` if the declaration has the `value` modifier, `false` otherwise.
      */
-    fun hasValueModifier(): Boolean
+    val hasValueModifier: Boolean
 
     /**
      * Whatever declaration has `annotation` modifier.
-     *
-     * @return `true` if the declaration has the `annotation` modifier, `false` otherwise.
      */
-    fun hasAnnotationModifier(): Boolean
+    val hasAnnotationModifier: Boolean
 
     /**
      * Whatever declaration has `data` modifier.
-     *
-     * @return `true` if the declaration has the `data` modifier, `false` otherwise.
      */
-    fun hasDataModifier(): Boolean
+    val hasDataModifier: Boolean
 
     /**
      * Whatever class has `actual` modifier.
-     *
-     * @return `true` if the class has the `actual` modifier, `false` otherwise.
      */
-    fun hasActualModifier(): Boolean
+    val hasActualModifier: Boolean
 
     /**
      * Whatever declaration has `expect` modifier.
-     *
-     * @return `true` if the declaration has the `expect` modifier, `false` otherwise.
      */
-    fun hasExpectModifier(): Boolean
+    val hasExpectModifier: Boolean
 
     /**
      * Whatever declaration has `abstract` modifier.
-     *
-     * @return `true` if the declaration has the `abstract` modifier, `false` otherwise.
      */
-    fun hasAbstractModifier(): Boolean
+    val hasAbstractModifier: Boolean
 
     /**
      * Whatever declaration has `open` modifier.
-     *
-     * @return `true` if the declaration has the `open` modifier, `false` otherwise.
      */
-    fun hasOpenModifier(): Boolean
+    val hasOpenModifier: Boolean
 
     /**
      * Whatever declaration has `final` modifier.
-     *
-     * @return `true` if the declaration has the `final` modifier, `false` otherwise.
      */
-    fun hasFinalModifier(): Boolean
+    val hasFinalModifier: Boolean
 
     /**
      * Whether the declaration has vararg modifier.
-     *
-     * @return `true` if the declaration has the `vararg` modifier, `false` otherwise.
      */
-    fun hasVarargModifier(): Boolean
+    val hasVarargModifier: Boolean
 
     /**
      * Whether the declaration has noinline modifier.
-     *
-     * @return `true` if the declaration has the `noinline` modifier, `false` otherwise.
      */
-    fun hasNoInlineModifier(): Boolean
+    val hasNoInlineModifier: Boolean
 
     /**
      * Whether the declaration has crossinline modifier.
-     *
-     * @return `true` if the declaration has the `crossinline` modifier, `false` otherwise.
      */
-    fun hasCrossInlineModifier(): Boolean
+    val hasCrossInlineModifier: Boolean
 
     /**
      * Whether the declaration has operator modifier.
-     *
-     * @return `true` if the declaration has the `operator` modifier, `false` otherwise.
      */
-    fun hasOperatorModifier(): Boolean
+    val hasOperatorModifier: Boolean
 
     /**
      * Whether the declaration has inline modifier.
-     *
-     * @return `true` if the declaration has the `inline` modifier, `false` otherwise.
      */
-    fun hasInlineModifier(): Boolean
+    val hasInlineModifier: Boolean
 
     /**
      * Whether the declaration has tailrec modifier.
-     *
-     * @return `true` if the declaration has the `tailrec` modifier, `false` otherwise.
      */
-    fun hasTailrecModifier(): Boolean
+    val hasTailrecModifier: Boolean
 
     /**
      * Whether the declaration has infix modifier.
-     *
-     * @return `true` if the declaration has the `infix` modifier, `false` otherwise.
      */
-    fun hasInfixModifier(): Boolean
+    val hasInfixModifier: Boolean
 
     /**
      * Whether the declaration has external modifier.
-     *
-     * @return `true` if the declaration has the `external` modifier, `false` otherwise.
      */
-    fun hasExternalModifier(): Boolean
+    val hasExternalModifier: Boolean
 
     /**
      * Whether the declaration has suspend modifier.
-     *
-     * @return `true` if the declaration has the `suspend` modifier, `false` otherwise.
      */
-    fun hasSuspendModifier(): Boolean
+    val hasSuspendModifier: Boolean
 
     /**
      * Whether the declaration has override modifier.
-     *
-     * @return `true` if the declaration has the `override` modifier, `false` otherwise.
      */
-    fun hasOverrideModifier(): Boolean
+    val hasOverrideModifier: Boolean
 
     /**
      * Whatever declaration has a `fun` modifier.
-     *
-     * @return `true` if the declaration has the `fun` modifier, `false` otherwise.
      */
-    fun hasFunModifier(): Boolean
+    val hasFunModifier: Boolean
 
     /**
      * Whether the declaration has lateinit modifier.
-     *
-     * @return `true` if the declaration has the `lateinit` modifier, `false` otherwise.
      */
-    fun hasLateinitModifier(): Boolean
+    val hasLateinitModifier: Boolean
 
     /**
      * Whether the declaration has const modifier.
-     *
-     * @return `true` if the declaration has the `const` modifier, `false` otherwise.
      */
-    fun hasConstModifier(): Boolean
+    val hasConstModifier: Boolean
 
     /**
      * Whether the declaration has a companion modifier.
-     *
-     * @return `true` if the declaration has the `companion` modifier, `false` otherwise.
      */
-    fun hasCompanionModifier(): Boolean
+    val hasCompanionModifier: Boolean
 }
