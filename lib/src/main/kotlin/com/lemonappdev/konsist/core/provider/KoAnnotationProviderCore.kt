@@ -25,7 +25,7 @@ internal interface KoAnnotationProviderCore :
         }
 
     override val numAnnotations: Int
-        get() = annotations.toList().size
+        get() = annotations.size
 
     override fun hasAnnotations(vararg names: String): Boolean = when {
         names.isEmpty() -> annotations.isNotEmpty()

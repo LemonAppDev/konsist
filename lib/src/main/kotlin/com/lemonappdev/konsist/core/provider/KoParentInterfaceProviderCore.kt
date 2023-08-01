@@ -29,7 +29,7 @@ internal interface KoParentInterfaceProviderCore :
         }
 
     override val numParentInterfaces: Int
-        get() = parentInterfaces.toList().size
+        get() = parentInterfaces.size
 
     override fun hasParentInterfaces(vararg names: String): Boolean = when {
         names.isEmpty() -> parentInterfaces.isNotEmpty()

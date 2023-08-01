@@ -18,7 +18,7 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
         assertSoftly(sut) {
             secondaryConstructors.isEmpty() shouldBeEqualTo true
             numSecondaryConstructors shouldBeEqualTo 0
-            hasSecondaryConstructors() shouldBeEqualTo false
+            hasSecondaryConstructors shouldBeEqualTo false
         }
     }
 
@@ -33,7 +33,7 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
         assertSoftly(sut) {
             secondaryConstructors.isNotEmpty() shouldBeEqualTo true
             numSecondaryConstructors shouldBeEqualTo 1
-            hasSecondaryConstructors() shouldBeEqualTo true
+            hasSecondaryConstructors shouldBeEqualTo true
         }
     }
 
@@ -48,7 +48,7 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
         assertSoftly(sut) {
             secondaryConstructors shouldHaveSize 1
             numSecondaryConstructors shouldBeEqualTo 1
-            hasSecondaryConstructors() shouldBeEqualTo true
+            hasSecondaryConstructors shouldBeEqualTo true
         }
     }
 

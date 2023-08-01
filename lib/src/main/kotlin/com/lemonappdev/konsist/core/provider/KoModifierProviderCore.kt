@@ -38,7 +38,7 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
             ?: emptyList()
 
     override val numModifiers: Int
-        get() = modifiers.toList().size
+        get() = modifiers.size
 
     override fun hasModifiers(vararg koModifiers: KoModifier): Boolean = when {
         koModifiers.isEmpty() -> modifiers.isNotEmpty()

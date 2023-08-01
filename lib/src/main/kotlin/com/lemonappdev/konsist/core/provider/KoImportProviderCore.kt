@@ -33,7 +33,7 @@ internal interface KoImportProviderCore : KoImportProvider, KoParentProviderCore
         }
 
     override val numImports: Int
-        get() = imports.toList().size
+        get() = imports.size
 
     override fun hasImports(vararg names: String): Boolean = when {
         names.isEmpty() -> imports.isNotEmpty()

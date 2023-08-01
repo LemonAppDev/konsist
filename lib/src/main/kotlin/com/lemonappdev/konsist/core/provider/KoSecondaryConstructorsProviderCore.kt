@@ -20,5 +20,6 @@ internal interface KoSecondaryConstructorsProviderCore :
     override val numSecondaryConstructors: Int
         get() = secondaryConstructors.size
 
-    override fun hasSecondaryConstructors(): Boolean = ktClass.hasSecondaryConstructors()
+    override val hasSecondaryConstructors: Boolean
+        get() = ktClass.hasSecondaryConstructors()
 }

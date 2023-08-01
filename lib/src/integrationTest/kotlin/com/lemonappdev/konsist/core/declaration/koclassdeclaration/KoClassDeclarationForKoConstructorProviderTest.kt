@@ -16,7 +16,7 @@ class KoClassDeclarationForKoConstructorProviderTest {
 
         // then
         assertSoftly(sut) {
-            constructors.toList() shouldBeEqualTo emptyList()
+            constructors shouldBeEqualTo emptyList()
             numConstructors shouldBeEqualTo 0
         }
     }
@@ -30,7 +30,7 @@ class KoClassDeclarationForKoConstructorProviderTest {
 
         // then
         assertSoftly(sut) {
-            constructors.toList() shouldNotBeEqualTo emptyList()
+            constructors shouldNotBeEqualTo emptyList()
             numConstructors shouldBeEqualTo 3
         }
     }

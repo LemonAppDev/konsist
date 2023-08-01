@@ -23,7 +23,7 @@ internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProvider
         }
 
     override val numTypeAliases: Int
-        get() = typeAliases.toList().size
+        get() = typeAliases.size
 
     override fun hasTypeAliases(vararg names: String): Boolean = when {
         names.isEmpty() -> typeAliases.isNotEmpty()

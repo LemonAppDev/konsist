@@ -10,7 +10,7 @@ internal interface KoFileProviderCore : KoFileProvider, KoBaseProviderCore {
         get() = koFiles.sortedBy { it.path }
 
     override val numFiles: Int
-        get() = files.toList().size
+        get() = files.size
 
     override fun hasFiles(vararg names: String): Boolean = when {
         names.isEmpty() -> files.toString().isNotEmpty()

@@ -8,7 +8,7 @@ internal interface KoLocalPropertyProviderCore : KoLocalPropertyProvider, KoLoca
         get() = localDeclarations.filterIsInstance<KoPropertyDeclaration>()
 
     override val numLocalProperties: Int
-        get() = localProperties.toList().size
+        get() = localProperties.size
 
     override fun containsLocalProperty(name: String): Boolean = localProperties.any { it.name == name }
 }

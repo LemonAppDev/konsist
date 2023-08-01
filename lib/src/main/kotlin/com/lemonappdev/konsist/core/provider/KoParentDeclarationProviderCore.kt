@@ -20,7 +20,7 @@ internal interface KoParentDeclarationProviderCore :
             ?: emptyList()
 
     override val numParentDeclarations: Int
-        get() = parentDeclarations.toList().size
+        get() = parentDeclarations.size
 
     override fun hasParentDeclarations(vararg names: String): Boolean = when {
         names.isEmpty() -> hasParentClass() || hasParentInterfaces()
