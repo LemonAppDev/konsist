@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.declarations
 import com.lemonappdev.konsist.api.ext.list.komodifierproviderlistext.withoutSomeModifiers
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
