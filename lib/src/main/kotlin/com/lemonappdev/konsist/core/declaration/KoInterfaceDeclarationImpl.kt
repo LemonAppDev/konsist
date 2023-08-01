@@ -31,6 +31,7 @@ import com.lemonappdev.konsist.core.provider.komodifierprovider.KoActualModifier
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoExpectModifierProviderCore
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoFunModifierProviderCore
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoSealedModifierProviderCore
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
@@ -69,7 +70,8 @@ internal class KoInterfaceDeclarationImpl private constructor(
     KoVisibilityModifierProviderCore,
     KoActualModifierProviderCore,
     KoExpectModifierProviderCore,
-    KoFunModifierProviderCore {
+    KoFunModifierProviderCore,
+    KoSealedModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktClass }
 
     override val ktFile: KtFile? by lazy { null }
