@@ -7,7 +7,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
-class KoFileDeclarationExtensionProviderSequenceExtTest {
+class KoFileExtensionProviderSequenceExtTest {
     @Test
     fun `withExtension() returns file with given extension`() {
         // given

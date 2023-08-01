@@ -71,40 +71,6 @@ class CommonAssertTest {
             "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
     }
 
-    @Test
-    fun `file-assert-fails-when-files-list-is-empty`() {
-        // given
-        val sut = Konsist
-            .scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/commonassert/snippet/emptypackage")
-            .files
-
-        // when
-        val func = {
-            sut.assert { true }
-        }
-
-        // then
-        func shouldThrow KoPreconditionFailedException::class withMessage
-            "File list is empty. Please make sure that list of files contain items before calling the 'assert' method."
-    }
-
-    @Test
-    fun `file-assert-not-fails-when-files-list-is-empty`() {
-        // given
-        val sut = Konsist
-            .scopeFromDirectory("lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/verify/commonassert/snippet/emptypackage")
-            .files
-
-        // when
-        val func = {
-            sut.assertNot { false }
-        }
-
-        // then
-        func shouldThrow KoPreconditionFailedException::class withMessage
-            "File list is empty. Please make sure that list of files contain items before calling the 'assertNot' method."
-    }
-
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/verify/commonassert/snippet/", fileName)
 }
