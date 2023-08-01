@@ -47,7 +47,7 @@ class GeneralSnippets {
     fun `every constructor parameter has name derived from parameter type`() {
         Konsist.scopeFromProject()
             .classes()
-            .flatMap { it.allConstructors }
+            .flatMap { it.constructors }
             .flatMap { it.parameters }
             .assert {
                 val nameTitleCase = it.name.replaceFirstChar { char -> char.titlecase(Locale.getDefault()) }
@@ -58,7 +58,7 @@ class GeneralSnippets {
     fun `every class constructor has alphabetically ordered parameters`() {
         Konsist.scopeFromProject()
             .classes()
-            .flatMap { it.allConstructors }
+            .flatMap { it.constructors }
             .assert {
                 val names = it.parameters.map { parameter -> parameter.name }
                 val sortedNames = names.sorted()
