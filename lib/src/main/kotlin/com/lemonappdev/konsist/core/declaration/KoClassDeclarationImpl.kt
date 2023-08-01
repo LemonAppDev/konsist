@@ -38,6 +38,7 @@ import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClass
+import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -81,16 +82,18 @@ internal class KoClassDeclarationImpl private constructor(
 
     override val ktAnnotated: KtAnnotated by lazy { ktClass }
 
-    override val koFiles: Sequence<KoFile>? by lazy { null }
+    override val koFiles: List<KoFile>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktClass }
 
     override val ktElement: KtElement by lazy { ktClass }
 
+    override val ktClassOrObject: KtClassOrObject by lazy { ktClass }
+
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
+    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktClass, includeNested, includeLocal, this)
 
     override fun toString(): String {

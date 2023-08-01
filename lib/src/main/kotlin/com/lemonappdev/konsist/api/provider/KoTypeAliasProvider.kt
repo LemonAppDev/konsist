@@ -8,9 +8,9 @@ import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
  */
 interface KoTypeAliasProvider : KoBaseProvider {
     /**
-     * Sequence of type aliases.
+     * List of type aliases.
      */
-    val typeAliases: Sequence<KoTypeAliasDeclaration>
+    val typeAliases: List<KoTypeAliasDeclaration>
 
     /**
      * The number of type aliases.

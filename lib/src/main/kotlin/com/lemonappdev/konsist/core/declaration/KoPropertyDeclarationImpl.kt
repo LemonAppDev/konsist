@@ -63,7 +63,7 @@ internal class KoPropertyDeclarationImpl private constructor(
 
     override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
 
-    override val koFiles: Sequence<KoFile>? by lazy { null }
+    override val koFiles: List<KoFile>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktProperty }
 

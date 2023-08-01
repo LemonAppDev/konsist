@@ -15,7 +15,6 @@ class KoScopeForKoFileProviderTest {
         sut
             .files
             .map { it.name }
-            .toList()
             .shouldBeEqualTo(
                 listOf(
                     "KoScopeCreatorTest",

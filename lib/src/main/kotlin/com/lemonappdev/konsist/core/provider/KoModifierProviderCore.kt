@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.psi.psiUtil.isPublic
 internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCore {
     val ktTypeParameterListOwner: KtTypeParameterListOwner
 
-    override val modifiers: Sequence<KoModifier>
+    override val modifiers: List<KoModifier>
         get() = ktTypeParameterListOwner
             .modifierList
             ?.text
@@ -35,74 +35,103 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
                     .firstOrNull { modifier -> modifier.type == it }
                     ?: throw KoInternalException("Modifier not found: $it")
             }
-            ?.asSequence()
-            ?: emptySequence()
+            ?: emptyList()
 
     override val numModifiers: Int
         get() = modifiers.toList().size
 
     override fun hasModifiers(vararg koModifiers: KoModifier): Boolean = when {
-        koModifiers.isEmpty() -> modifiers.toList().isNotEmpty()
-        else -> modifiers.toList().containsAll(koModifiers.toList())
+        koModifiers.isEmpty() -> modifiers.isNotEmpty()
+        else -> modifiers.containsAll(koModifiers.toList())
     }
 
-    override fun hasPublicModifier(): Boolean = hasModifiers(KoModifier.PUBLIC)
+    override val hasPublicModifier: Boolean
+        get() = hasModifiers(KoModifier.PUBLIC)
 
-    override fun isPublicOrDefault(): Boolean = ktTypeParameterListOwner.isPublic
+    override val isPublicOrDefault: Boolean
+        get() = ktTypeParameterListOwner.isPublic
 
-    override fun hasPrivateModifier(): Boolean = hasModifiers(KoModifier.PRIVATE)
+    override val hasPrivateModifier: Boolean
+        get() = hasModifiers(KoModifier.PRIVATE)
 
-    override fun hasProtectedModifier(): Boolean = hasModifiers(KoModifier.PROTECTED)
+    override val hasProtectedModifier: Boolean
+        get() = hasModifiers(KoModifier.PROTECTED)
 
-    override fun hasInternalModifier(): Boolean = hasModifiers(KoModifier.INTERNAL)
+    override val hasInternalModifier: Boolean
+        get() = hasModifiers(KoModifier.INTERNAL)
 
-    override fun hasEnumModifier(): Boolean = hasModifiers(KoModifier.ENUM)
+    override val hasEnumModifier: Boolean
+        get() = hasModifiers(KoModifier.ENUM)
 
-    override fun hasSealedModifier(): Boolean = hasModifiers(KoModifier.SEALED)
+    override val hasSealedModifier: Boolean
+        get() = hasModifiers(KoModifier.SEALED)
 
-    override fun hasInnerModifier(): Boolean = hasModifiers(KoModifier.INNER)
+    override val hasInnerModifier: Boolean
+        get() = hasModifiers(KoModifier.INNER)
 
-    override fun hasValueModifier(): Boolean = hasModifiers(KoModifier.VALUE)
+    override val hasValueModifier: Boolean
+        get() = hasModifiers(KoModifier.VALUE)
 
-    override fun hasAnnotationModifier(): Boolean = hasModifiers(KoModifier.ANNOTATION)
+    override val hasAnnotationModifier: Boolean
+        get() = hasModifiers(KoModifier.ANNOTATION)
 
-    override fun hasDataModifier(): Boolean = hasModifiers(KoModifier.DATA)
+    override val hasDataModifier: Boolean
+        get() = hasModifiers(KoModifier.DATA)
 
-    override fun hasActualModifier(): Boolean = hasModifiers(KoModifier.ACTUAL)
+    override val hasActualModifier: Boolean
+        get() = hasModifiers(KoModifier.ACTUAL)
 
-    override fun hasExpectModifier(): Boolean = hasModifiers(KoModifier.EXPECT)
+    override val hasExpectModifier: Boolean
+        get() = hasModifiers(KoModifier.EXPECT)
 
-    override fun hasAbstractModifier(): Boolean = hasModifiers(KoModifier.ABSTRACT)
+    override val hasAbstractModifier: Boolean
+        get() = hasModifiers(KoModifier.ABSTRACT)
 
-    override fun hasOpenModifier(): Boolean = hasModifiers(KoModifier.OPEN)
+    override val hasOpenModifier: Boolean
+        get() = hasModifiers(KoModifier.OPEN)
 
-    override fun hasFinalModifier(): Boolean = hasModifiers(KoModifier.FINAL)
+    override val hasFinalModifier: Boolean
+        get() = hasModifiers(KoModifier.FINAL)
 
-    override fun hasVarargModifier(): Boolean = hasModifiers(KoModifier.VARARG)
+    override val hasVarargModifier: Boolean
+        get() = hasModifiers(KoModifier.VARARG)
 
-    override fun hasNoInlineModifier(): Boolean = hasModifiers(KoModifier.NOINLINE)
+    override val hasNoInlineModifier: Boolean
+        get() = hasModifiers(KoModifier.NOINLINE)
 
-    override fun hasCrossInlineModifier(): Boolean = hasModifiers(KoModifier.CROSSINLINE)
+    override val hasCrossInlineModifier: Boolean
+        get() = hasModifiers(KoModifier.CROSSINLINE)
 
-    override fun hasOperatorModifier(): Boolean = hasModifiers(KoModifier.OPERATOR)
+    override val hasOperatorModifier: Boolean
+        get() = hasModifiers(KoModifier.OPERATOR)
 
-    override fun hasInlineModifier(): Boolean = hasModifiers(KoModifier.INLINE)
+    override val hasInlineModifier: Boolean
+        get() = hasModifiers(KoModifier.INLINE)
 
-    override fun hasTailrecModifier(): Boolean = hasModifiers(KoModifier.TAILREC)
+    override val hasTailrecModifier: Boolean
+        get() = hasModifiers(KoModifier.TAILREC)
 
-    override fun hasInfixModifier(): Boolean = hasModifiers(KoModifier.INFIX)
+    override val hasInfixModifier: Boolean
+        get() = hasModifiers(KoModifier.INFIX)
 
-    override fun hasExternalModifier(): Boolean = hasModifiers(KoModifier.EXTERNAL)
+    override val hasExternalModifier: Boolean
+        get() = hasModifiers(KoModifier.EXTERNAL)
 
-    override fun hasSuspendModifier(): Boolean = hasModifiers(KoModifier.SUSPEND)
+    override val hasSuspendModifier: Boolean
+        get() = hasModifiers(KoModifier.SUSPEND)
 
-    override fun hasOverrideModifier(): Boolean = hasModifiers(KoModifier.OVERRIDE)
+    override val hasOverrideModifier: Boolean
+        get() = hasModifiers(KoModifier.OVERRIDE)
 
-    override fun hasFunModifier(): Boolean = hasModifiers(KoModifier.FUN)
+    override val hasFunModifier: Boolean
+        get() = hasModifiers(KoModifier.FUN)
 
-    override fun hasLateinitModifier(): Boolean = hasModifiers(KoModifier.LATEINIT)
+    override val hasLateinitModifier: Boolean
+        get() = hasModifiers(KoModifier.LATEINIT)
 
-    override fun hasConstModifier(): Boolean = hasModifiers(KoModifier.CONST)
+    override val hasConstModifier: Boolean
+        get() = hasModifiers(KoModifier.CONST)
 
-    override fun hasCompanionModifier(): Boolean = hasModifiers(KoModifier.COMPANION)
+    override val hasCompanionModifier: Boolean
+        get() = hasModifiers(KoModifier.COMPANION)
 }

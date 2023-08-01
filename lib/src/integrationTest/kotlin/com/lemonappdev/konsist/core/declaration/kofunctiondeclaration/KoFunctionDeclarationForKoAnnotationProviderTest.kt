@@ -18,7 +18,7 @@ class KoFunctionDeclarationForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-            annotations.toList() shouldBeEqualTo emptyList()
+            annotations shouldBeEqualTo emptyList()
             numAnnotations shouldBeEqualTo 0
             hasAnnotations() shouldBeEqualTo false
         }

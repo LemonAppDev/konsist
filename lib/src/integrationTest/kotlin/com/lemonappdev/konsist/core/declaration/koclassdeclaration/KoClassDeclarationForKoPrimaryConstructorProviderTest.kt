@@ -17,7 +17,7 @@ class KoClassDeclarationForKoPrimaryConstructorProviderTest {
         // then
         assertSoftly(sut) {
             primaryConstructor shouldBeEqualTo null
-            hasPrimaryConstructor() shouldBeEqualTo false
+            hasPrimaryConstructor shouldBeEqualTo false
         }
     }
 
@@ -31,7 +31,7 @@ class KoClassDeclarationForKoPrimaryConstructorProviderTest {
         // then
         assertSoftly(sut) {
             primaryConstructor shouldNotBeEqualTo null
-            hasPrimaryConstructor() shouldBeEqualTo true
+            hasPrimaryConstructor shouldBeEqualTo true
         }
     }
 

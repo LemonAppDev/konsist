@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
 
 internal interface KoLocalDeclarationProviderCore : KoLocalDeclarationProvider, KoBaseProviderCore {
     override val numLocalDeclarations: Int
-        get() = localDeclarations().toList().size
+        get() = localDeclarations.size
 
-    override fun containsLocalDeclarations(name: String): Boolean = localDeclarations().any { (it as KoNameProvider).name == name }
+    override fun containsLocalDeclarations(name: String): Boolean = localDeclarations.any { (it as KoNameProvider).name == name }
 }

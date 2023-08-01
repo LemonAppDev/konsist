@@ -15,7 +15,7 @@ class KoClassDeclarationForKoDeclarationProviderTest {
             .first()
 
         // then
-        sut.declarations(includeNested = true, includeLocal = true).toList() shouldBeEqualTo emptyList()
+        sut.declarations(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -46,7 +46,6 @@ class KoClassDeclarationForKoDeclarationProviderTest {
         )
 
         sut.declarations(includeNested = true, includeLocal = true)
-            .toList()
             .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)
@@ -77,7 +76,6 @@ class KoClassDeclarationForKoDeclarationProviderTest {
         )
 
         sut.declarations(includeNested = true, includeLocal = false)
-            .toList()
             .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)
@@ -102,7 +100,6 @@ class KoClassDeclarationForKoDeclarationProviderTest {
         )
 
         sut.declarations(includeNested = false, includeLocal = true)
-            .toList()
             .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)
@@ -124,7 +121,6 @@ class KoClassDeclarationForKoDeclarationProviderTest {
         )
 
         sut.declarations(includeNested = false, includeLocal = false)
-            .toList()
             .filterIsInstance<KoNameProvider>()
             .map { it.name }
             .shouldBeEqualTo(expected)

@@ -11,9 +11,9 @@ import org.jetbrains.kotlin.psi.KtImportList
 
 internal interface KoImportProviderCore : KoImportProvider, KoParentProviderCore, KoBaseProviderCore {
     val ktFile: KtFile?
-    val koFiles: Sequence<KoFile>?
+    val koFiles: List<KoFile>?
 
-    override val imports: Sequence<KoImportDeclaration>
+    override val imports: List<KoImportDeclaration>
         get() {
             val ktImportDirectives =
                 ktFile
@@ -22,7 +22,6 @@ internal interface KoImportProviderCore : KoImportProvider, KoParentProviderCore
                     ?.first()
                     ?.children
                     ?.filterIsInstance<KtImportDirective>()
-                    ?.asSequence()
 
             val imports = if (ktFile != null) {
                 ktImportDirectives?.map { KoImportDeclarationImpl.getInstance(it, null) }
@@ -30,14 +29,14 @@ internal interface KoImportProviderCore : KoImportProvider, KoParentProviderCore
                 koFiles?.flatMap { (it as KoImportProvider).imports }
             }
 
-            return imports ?: emptySequence()
+            return imports ?: emptyList()
         }
 
     override val numImports: Int
         get() = imports.toList().size
 
     override fun hasImports(vararg names: String): Boolean = when {
-        names.isEmpty() -> imports.toList().isNotEmpty()
+        names.isEmpty() -> imports.isNotEmpty()
         else -> names.all {
             imports.any { import -> LocationUtil.resideInLocation(it, import.name) }
         }

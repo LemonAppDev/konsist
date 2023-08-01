@@ -15,7 +15,7 @@ class KoFileForKoTypeAliasProviderTest {
 
         // then
         assertSoftly(sut) {
-            typeAliases.toList() shouldBeEqualTo emptyList()
+            typeAliases shouldBeEqualTo emptyList()
             numTypeAliases shouldBeEqualTo 0
             hasTypeAliases() shouldBeEqualTo false
             hasTypeAliases("SampleTypeAlias") shouldBeEqualTo false

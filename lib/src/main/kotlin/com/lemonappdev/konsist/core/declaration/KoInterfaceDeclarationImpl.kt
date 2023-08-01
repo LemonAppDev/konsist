@@ -20,6 +20,7 @@ import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
@@ -35,7 +36,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoInterfaceDeclarationImpl private constructor(
-    private val ktClass: KtClass,
+    override val ktClass: KtClass,
     override val parent: KoParentProvider?,
 ) :
     KoInterfaceDeclaration,
@@ -53,6 +54,7 @@ internal class KoInterfaceDeclarationImpl private constructor(
     KoNameProviderCore,
     KoObjectProviderCore,
     KoPackageProviderCore,
+    KoParentInterfaceProviderCore,
     KoParentProviderCore,
     KoPathProviderCore,
     KoPropertyProviderCore,
@@ -66,7 +68,7 @@ internal class KoInterfaceDeclarationImpl private constructor(
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
 
-    override val koFiles: Sequence<KoFile>? by lazy { null }
+    override val koFiles: List<KoFile>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktClass }
 
@@ -75,7 +77,7 @@ internal class KoInterfaceDeclarationImpl private constructor(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
+    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktClass, includeNested, includeLocal, this)
 
     override fun toString(): String {

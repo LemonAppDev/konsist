@@ -10,7 +10,6 @@ class KoPackageDeclarationForKoNameProviderTest {
         // given
         val sut = getSnippetFile("package-does-not-exists")
             .packages
-            .toList()
             .firstOrNull()
 
         // then

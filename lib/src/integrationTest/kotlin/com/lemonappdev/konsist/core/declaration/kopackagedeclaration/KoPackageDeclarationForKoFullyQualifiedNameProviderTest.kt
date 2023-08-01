@@ -14,7 +14,6 @@ class KoPackageDeclarationForKoFullyQualifiedNameProviderTest {
         // then
         sut
             .map { it.fullyQualifiedName }
-            .toList()
             .first()
             .shouldBeEqualTo("com.samplepackage")
     }

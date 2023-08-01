@@ -4,9 +4,9 @@ import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.provider.KoFileProvider
 
 internal interface KoFileProviderCore : KoFileProvider, KoBaseProviderCore {
-    val koFiles: Sequence<KoFile>
+    val koFiles: List<KoFile>
 
-    override val files: Sequence<KoFile>
+    override val files: List<KoFile>
         get() = koFiles.sortedBy { it.path }
 
     override val numFiles: Int

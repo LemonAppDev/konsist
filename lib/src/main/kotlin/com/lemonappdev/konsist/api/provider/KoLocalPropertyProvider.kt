@@ -8,9 +8,8 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 interface KoLocalPropertyProvider : KoBaseProvider {
     /**
      * The local properties present in the declaration.
-     * @return a sequence of [KoPropertyDeclaration] representing the local properties in the declaration.
      */
-    fun localProperties(): Sequence<KoPropertyDeclaration>
+    val localProperties: List<KoPropertyDeclaration>
 
     /**
      * The number of local properties.

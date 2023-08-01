@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
+import com.lemonappdev.konsist.core.provider.KoInitBlockProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
@@ -29,6 +30,7 @@ import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
+import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
@@ -46,6 +48,7 @@ internal class KoObjectDeclarationImpl(
     KoDeclarationFullyQualifiedNameProviderCore,
     KoDeclarationProviderCore,
     KoFunctionProviderCore,
+    KoInitBlockProviderCore,
     KoInterfaceProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
@@ -66,14 +69,16 @@ internal class KoObjectDeclarationImpl(
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktObjectDeclaration }
 
-    override val koFiles: Sequence<KoFile>? by lazy { null }
+    override val koFiles: List<KoFile>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktObjectDeclaration }
 
     override val ktElement: KtElement by lazy { ktObjectDeclaration }
 
+    override val ktClassOrObject: KtClassOrObject by lazy { ktObjectDeclaration }
+
     override val name: String by lazy {
-        if (hasCompanionModifier() && super<KoNameProviderCore>.name == "") {
+        if (hasCompanionModifier && super<KoNameProviderCore>.name == "") {
             "Companion"
         } else {
             super<KoNameProviderCore>.name
@@ -83,7 +88,7 @@ internal class KoObjectDeclarationImpl(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
+    ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktObjectDeclaration, includeNested, includeLocal, this)
 
     override fun toString(): String {

@@ -9,7 +9,7 @@ interface KoSecondaryConstructorsProvider : KoBaseProvider {
     /**
      * The secondary constructors of the declaration.
      */
-    val secondaryConstructors: Sequence<KoSecondaryConstructorDeclaration>
+    val secondaryConstructors: List<KoSecondaryConstructorDeclaration>
 
     /**
      * The number of secondary constructors.
@@ -18,8 +18,6 @@ interface KoSecondaryConstructorsProvider : KoBaseProvider {
 
     /**
      * Whatever declaration has secondary constructors.
-     *
-     * @return `true` if the declaration has secondary constructors, `false` otherwise.
      */
-    fun hasSecondaryConstructors(): Boolean
+    val hasSecondaryConstructors: Boolean
 }

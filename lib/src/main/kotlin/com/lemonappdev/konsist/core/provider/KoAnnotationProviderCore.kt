@@ -12,23 +12,23 @@ internal interface KoAnnotationProviderCore :
     KoParentProviderCore,
     KoBaseProviderCore {
     val ktAnnotated: KtAnnotated?
-    val koFiles: Sequence<KoFile>?
+    val koFiles: List<KoFile>?
 
-    override val annotations: Sequence<KoAnnotationDeclaration>
+    override val annotations: List<KoAnnotationDeclaration>
         get() = if (ktAnnotated != null) {
             ktAnnotated
                 ?.annotationEntries
                 ?.map { KoAnnotationDeclarationImpl.getInstance(it, this) }
-                ?.asSequence() ?: emptySequence()
+                ?: emptyList()
         } else {
-            koFiles?.flatMap { it.annotations } ?: emptySequence()
+            koFiles?.flatMap { it.annotations } ?: emptyList()
         }
 
     override val numAnnotations: Int
         get() = annotations.toList().size
 
     override fun hasAnnotations(vararg names: String): Boolean = when {
-        names.isEmpty() -> annotations.toList().isNotEmpty()
+        names.isEmpty() -> annotations.isNotEmpty()
         else -> names.all {
             annotations.any { annotation -> annotation.representsType(it) }
         }

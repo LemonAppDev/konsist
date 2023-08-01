@@ -7,9 +7,9 @@ import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
  */
 interface KoPackagesProvider : KoBaseProvider {
     /**
-     * Sequence of packages.
+     * List of packages.
      */
-    val packages: Sequence<KoPackageDeclaration>
+    val packages: List<KoPackageDeclaration>
 
     /**
      * The number of packages.

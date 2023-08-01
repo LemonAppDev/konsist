@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
@@ -81,4 +82,20 @@ internal fun checkIfLocalListIsEmpty(localList: List<*>, type: String, testMetho
                 "before calling the '$testMethodName' method.",
         )
     }
+}
+
+internal fun checkIfSuppressed(item: KoAnnotationProvider, testMethodName: String, prefix: String): Boolean {
+    val annotationParameter = item
+        .annotations
+        .firstOrNull { it.name == "Suppress" }
+        ?.text
+        ?.removePrefix(prefix)
+        ?.substringBeforeLast(")")
+        ?.split(",")
+        ?.map { it.trim() }
+        ?.map { it.removePrefix("\"") }
+        ?.map { it.removeSuffix("\"") }
+        ?: emptyList()
+
+    return annotationParameter.any { it == testMethodName } || annotationParameter.any { it == "konsist.$testMethodName" }
 }

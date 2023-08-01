@@ -21,7 +21,7 @@ class KoParameterDeclarationForKoTypeProviderTest {
             it?.sourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo null
             it?.name shouldBeEqualTo "SampleType"
-            it?.isAlias() shouldBeEqualTo false
+            it?.isAlias shouldBeEqualTo false
             it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
@@ -41,7 +41,7 @@ class KoParameterDeclarationForKoTypeProviderTest {
             it?.sourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo "ImportAlias"
             it?.name shouldBeEqualTo "ImportAlias"
-            it?.isAlias() shouldBeEqualTo true
+            it?.isAlias shouldBeEqualTo true
             it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }

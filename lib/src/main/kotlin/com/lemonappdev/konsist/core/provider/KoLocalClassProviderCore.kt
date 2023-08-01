@@ -4,10 +4,11 @@ import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
 
 internal interface KoLocalClassProviderCore : KoLocalClassProvider, KoLocalDeclarationProviderCore, KoBaseProviderCore {
-    override fun localClasses(): Sequence<KoClassDeclaration> = localDeclarations().filterIsInstance<KoClassDeclaration>()
+    override val localClasses: List<KoClassDeclaration>
+        get() = localDeclarations.filterIsInstance<KoClassDeclaration>()
 
     override val numLocalClasses: Int
-        get() = localClasses().toList().size
+        get() = localClasses.toList().size
 
-    override fun containsLocalClass(name: String): Boolean = localClasses().any { it.name == name }
+    override fun containsLocalClass(name: String): Boolean = localClasses.any { it.name == name }
 }

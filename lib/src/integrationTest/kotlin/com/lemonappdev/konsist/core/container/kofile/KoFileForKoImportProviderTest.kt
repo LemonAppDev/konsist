@@ -15,7 +15,7 @@ class KoFileForKoImportProviderTest {
 
         // then
         assertSoftly(sut) {
-            imports.toList().isEmpty() shouldBeEqualTo true
+            imports.isEmpty() shouldBeEqualTo true
             numImports shouldBeEqualTo 0
             hasImports() shouldBeEqualTo false
             hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
@@ -33,7 +33,6 @@ class KoFileForKoImportProviderTest {
         sut
             .imports
             .map { it.name }
-            .toList()
             .shouldBeEqualTo(
                 listOf(
                     "com.lemonappdev.konsist.testdata.SampleAnnotation",

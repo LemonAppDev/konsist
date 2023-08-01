@@ -10,11 +10,10 @@ internal interface KoParametersProviderCore :
     KoParentProviderCore,
     KoBaseProviderCore {
     val ktCallableDeclaration: KtCallableDeclaration
-    override val parameters: Sequence<KoParameterDeclaration>
+    override val parameters: List<KoParameterDeclaration>
         get() = ktCallableDeclaration
             .valueParameters
             .map { KoParameterDeclarationImpl.getInstance(it, this) }
-            .asSequence()
 
     override val numParameters: Int
         get() = parameters.toList().size

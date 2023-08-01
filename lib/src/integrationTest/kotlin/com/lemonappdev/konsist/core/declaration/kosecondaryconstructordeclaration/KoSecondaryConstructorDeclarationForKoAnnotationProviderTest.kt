@@ -20,7 +20,7 @@ class KoSecondaryConstructorDeclarationForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-            annotations.toList() shouldBeEqualTo emptyList()
+            annotations shouldBeEqualTo emptyList()
             numAnnotations shouldBeEqualTo 0
             it.hasAnnotations() shouldBeEqualTo false
         }
