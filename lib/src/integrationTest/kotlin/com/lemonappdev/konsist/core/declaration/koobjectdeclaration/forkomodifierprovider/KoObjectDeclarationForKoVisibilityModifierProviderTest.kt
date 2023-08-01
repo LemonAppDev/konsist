@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.koobjectdeclaration
+package com.lemonappdev.konsist.core.declaration.koobjectdeclaration.forkomodifierprovider
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier
@@ -12,50 +12,22 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoObjectDeclarationForKoModifierProviderTest {
+class KoObjectDeclarationForKoVisibilityModifierProviderTest {
     @Test
-    fun `object-without-modifiers`() {
+    fun `object-without-visibility-modifiers`() {
         // given
-        val sut = getSnippetFile("object-without-modifiers")
+        val sut = getSnippetFile("object-without-visibility-modifiers")
             .objects()
             .first()
 
         // then
         assertSoftly(sut) {
-            modifiers shouldBeEqualTo emptyList()
-            numModifiers shouldBeEqualTo 0
-            hasModifiers() shouldBeEqualTo false
-            hasModifiers(OPEN) shouldBeEqualTo false
-            hasModifiers(OPEN, DATA) shouldBeEqualTo false
             hasPublicModifier shouldBeEqualTo false
             isPublicOrDefault shouldBeEqualTo true
             hasPrivateModifier shouldBeEqualTo false
             hasProtectedModifier shouldBeEqualTo false
             hasInternalModifier shouldBeEqualTo false
-            hasEnumModifier shouldBeEqualTo false
-            hasSealedModifier shouldBeEqualTo false
-            hasInnerModifier shouldBeEqualTo false
-            hasValueModifier shouldBeEqualTo false
-            hasAnnotationModifier shouldBeEqualTo false
             hasDataModifier shouldBeEqualTo false
-            hasActualModifier shouldBeEqualTo false
-            hasExpectModifier shouldBeEqualTo false
-            hasAbstractModifier shouldBeEqualTo false
-            hasOpenModifier shouldBeEqualTo false
-            hasFinalModifier shouldBeEqualTo false
-            hasVarargModifier shouldBeEqualTo false
-            hasNoInlineModifier shouldBeEqualTo false
-            hasCrossInlineModifier shouldBeEqualTo false
-            hasOperatorModifier shouldBeEqualTo false
-            hasInlineModifier shouldBeEqualTo false
-            hasTailrecModifier shouldBeEqualTo false
-            hasInfixModifier shouldBeEqualTo false
-            hasExternalModifier shouldBeEqualTo false
-            hasSuspendModifier shouldBeEqualTo false
-            hasOverrideModifier shouldBeEqualTo false
-            hasFunModifier shouldBeEqualTo false
-            hasLateinitModifier shouldBeEqualTo false
-            hasConstModifier shouldBeEqualTo false
             hasCompanionModifier shouldBeEqualTo false
         }
     }

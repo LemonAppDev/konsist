@@ -10,16 +10,16 @@ class KoClassDeclarationForKoInnerModifierProviderTest {
         // given
         val sut = getSnippetFile("class-without-inner-modifier")
             .classes(includeNested = true)
-            .first { it.name == "InnerClass" }
+            .first()
 
         // then
         sut.hasInnerModifier shouldBeEqualTo false
     }
 
     @Test
-    fun `inner-class`() {
+    fun `nested-inner-class`() {
         // given
-        val sut = getSnippetFile("inner-class")
+        val sut = getSnippetFile("nested-inner-class")
             .classes(includeNested = true)
             .first { it.name == "InnerClass" }
 

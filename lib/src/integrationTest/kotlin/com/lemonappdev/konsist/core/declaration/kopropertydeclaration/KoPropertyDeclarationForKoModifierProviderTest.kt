@@ -33,31 +33,14 @@ class KoPropertyDeclarationForKoModifierProviderTest {
             hasPrivateModifier shouldBeEqualTo false
             hasProtectedModifier shouldBeEqualTo false
             hasInternalModifier shouldBeEqualTo false
-            hasEnumModifier shouldBeEqualTo false
-            hasSealedModifier shouldBeEqualTo false
-            hasInnerModifier shouldBeEqualTo false
-            hasValueModifier shouldBeEqualTo false
-            hasAnnotationModifier shouldBeEqualTo false
-            hasDataModifier shouldBeEqualTo false
             hasActualModifier shouldBeEqualTo false
             hasExpectModifier shouldBeEqualTo false
             hasAbstractModifier shouldBeEqualTo false
             hasOpenModifier shouldBeEqualTo false
             hasFinalModifier shouldBeEqualTo false
-            hasVarargModifier shouldBeEqualTo false
-            hasNoInlineModifier shouldBeEqualTo false
-            hasCrossInlineModifier shouldBeEqualTo false
-            hasOperatorModifier shouldBeEqualTo false
-            hasInlineModifier shouldBeEqualTo false
-            hasTailrecModifier shouldBeEqualTo false
-            hasInfixModifier shouldBeEqualTo false
-            hasExternalModifier shouldBeEqualTo false
-            hasSuspendModifier shouldBeEqualTo false
             hasOverrideModifier shouldBeEqualTo false
-            hasFunModifier shouldBeEqualTo false
             hasLateinitModifier shouldBeEqualTo false
             hasConstModifier shouldBeEqualTo false
-            hasCompanionModifier shouldBeEqualTo false
         }
     }
 

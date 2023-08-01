@@ -33,31 +33,6 @@ class KoSecondaryConstructorDeclarationForKoModifierProviderTest {
             it.hasPrivateModifier shouldBeEqualTo false
             it.hasProtectedModifier shouldBeEqualTo false
             it.hasInternalModifier shouldBeEqualTo false
-            it.hasEnumModifier shouldBeEqualTo false
-            it.hasSealedModifier shouldBeEqualTo false
-            it.hasInnerModifier shouldBeEqualTo false
-            it.hasValueModifier shouldBeEqualTo false
-            it.hasAnnotationModifier shouldBeEqualTo false
-            it.hasDataModifier shouldBeEqualTo false
-            it.hasActualModifier shouldBeEqualTo false
-            it.hasExpectModifier shouldBeEqualTo false
-            it.hasAbstractModifier shouldBeEqualTo false
-            it.hasOpenModifier shouldBeEqualTo false
-            it.hasFinalModifier shouldBeEqualTo false
-            it.hasVarargModifier shouldBeEqualTo false
-            it.hasNoInlineModifier shouldBeEqualTo false
-            it.hasCrossInlineModifier shouldBeEqualTo false
-            it.hasOperatorModifier shouldBeEqualTo false
-            it.hasInlineModifier shouldBeEqualTo false
-            it.hasTailrecModifier shouldBeEqualTo false
-            it.hasInfixModifier shouldBeEqualTo false
-            it.hasExternalModifier shouldBeEqualTo false
-            it.hasSuspendModifier shouldBeEqualTo false
-            it.hasOverrideModifier shouldBeEqualTo false
-            it.hasFunModifier shouldBeEqualTo false
-            it.hasLateinitModifier shouldBeEqualTo false
-            it.hasConstModifier shouldBeEqualTo false
-            it.hasCompanionModifier shouldBeEqualTo false
         }
     }
 
