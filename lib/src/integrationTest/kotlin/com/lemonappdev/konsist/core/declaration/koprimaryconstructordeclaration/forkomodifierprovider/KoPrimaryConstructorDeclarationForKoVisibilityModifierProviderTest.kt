@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.koprimaryconstructordeclaration
+package com.lemonappdev.konsist.core.declaration.koprimaryconstructordeclaration.forkomodifierprovider
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier.DATA
@@ -11,43 +11,22 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoPrimaryConstructorDeclarationForKoModifierProviderTest {
+class KoPrimaryConstructorDeclarationForKoVisibilityModifierProviderTest {
     @Test
-    fun `primary-constructor-has-no-modifiers`() {
+    fun `primary-constructor-has-no-visibility-modifiers`() {
         // given
-        val sut = getSnippetFile("primary-constructor-has-no-modifiers")
+        val sut = getSnippetFile("primary-constructor-has-no-visibility-modifiers")
             .classes()
             .first()
             .primaryConstructor
 
         // then
         assertSoftly(sut) {
-            it?.modifiers shouldBeEqualTo emptyList()
-            it?.numModifiers shouldBeEqualTo 0
-            it?.hasModifiers() shouldBeEqualTo false
-            it?.hasModifiers(OPEN) shouldBeEqualTo false
-            it?.hasModifiers(OPEN, DATA) shouldBeEqualTo false
             it?.hasPublicModifier shouldBeEqualTo false
             it?.isPublicOrDefault shouldBeEqualTo true
             it?.hasPrivateModifier shouldBeEqualTo false
             it?.hasProtectedModifier shouldBeEqualTo false
             it?.hasInternalModifier shouldBeEqualTo false
-        }
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideValues")
-    fun `primary-constructor-modifiers`(fileName: String) {
-        // given
-        val sut = getSnippetFile(fileName)
-            .classes()
-            .first()
-            .primaryConstructor
-
-        // then
-        assertSoftly(sut) {
-            it?.modifiers shouldBeEqualTo listOf(PRIVATE)
-            it?.numModifiers shouldBeEqualTo 1
         }
     }
 
@@ -115,16 +94,5 @@ class KoPrimaryConstructorDeclarationForKoModifierProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koprimaryconstructordeclaration/snippet/forkomodifierprovider/", fileName)
-
-    companion object {
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValues() = listOf(
-            arguments("primary-constructor-has-modifier"),
-            arguments("primary-constructor-has-modifiers-and-annotation-with-parameter"),
-            arguments("primary-constructor-has-modifiers-and-annotation-without-parameter"),
-            arguments("primary-constructor-has-modifiers-and-annotations"),
-        )
-    }
+        getSnippetKoScope("core/declaration/koprimaryconstructordeclaration/forkomodifierprovider/snippet/forkovisibilitymodifierprovider/", fileName)
 }
