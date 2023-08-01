@@ -18,7 +18,7 @@ class KoObjectDeclarationForKoInitBlockProviderTest {
         assertSoftly(sut) {
             initBlocks shouldBeEqualTo null
             numInitBlocks shouldBeEqualTo 0
-            hasInitBlocks() shouldBeEqualTo false
+            hasInitBlocks shouldBeEqualTo false
         }
     }
 
@@ -33,7 +33,7 @@ class KoObjectDeclarationForKoInitBlockProviderTest {
         assertSoftly(sut) {
             initBlocks shouldNotBeEqualTo null
             numInitBlocks shouldBeEqualTo 1
-            hasInitBlocks() shouldBeEqualTo true
+            hasInitBlocks shouldBeEqualTo true
         }
     }
 
@@ -48,7 +48,7 @@ class KoObjectDeclarationForKoInitBlockProviderTest {
         assertSoftly(sut) {
             initBlocks shouldNotBeEqualTo null
             numInitBlocks shouldBeEqualTo 2
-            hasInitBlocks() shouldBeEqualTo true
+            hasInitBlocks shouldBeEqualTo true
         }
     }
 

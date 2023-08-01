@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.verify
 
-import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
@@ -56,8 +55,9 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
         .filterNot {
             it is KoAnnotationDeclaration &&
                 (
-                    it.text.endsWith("Suppress(\"konsist.$testMethodName\")") ||
-                        it.text.endsWith("Suppress(\"$testMethodName\")")
+                    it.name == "Suppress" &&
+                        it.text.contains("\"konsist.$testMethodName\"") ||
+                        it.text.contains("\"$testMethodName\"")
                     )
         }
         .forEach { declarations[it] = checkIfSuppressed(it, testMethodName) }
@@ -71,17 +71,7 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
 
 private fun checkIfSuppressed(declaration: KoBaseProvider, testMethodName: String): Boolean =
     if (declaration is KoAnnotationProvider) {
-        val annotationParameter = declaration
-            .annotations
-            .firstOrNull { it.name == "Suppress" }
-            ?.text
-            ?.removePrefix("@Suppress(\"")
-            ?.removeSuffix("\")")
-        if (annotationParameter == testMethodName || annotationParameter == "konsist.$testMethodName") {
-            true
-        } else {
-            checkParentAndSuppress(declaration, testMethodName)
-        }
+        checkIfSuppressed(declaration, testMethodName, "@Suppress(") || checkParentAndSuppress(declaration, testMethodName)
     } else {
         checkParentAndSuppress(declaration, testMethodName)
     }
@@ -89,15 +79,6 @@ private fun checkIfSuppressed(declaration: KoBaseProvider, testMethodName: Strin
 private fun checkParentAndSuppress(declaration: KoBaseProvider, testMethodName: String): Boolean =
     if (declaration is KoParentProvider && declaration.parent != null) {
         declaration.parent?.let { checkIfSuppressed(it, testMethodName) } ?: false
-    } else if (fileAnnotationParameter((declaration as KoContainingFileProvider).containingFile) == testMethodName) {
-        true
     } else {
-        fileAnnotationParameter(declaration.containingFile) == "konsist.$testMethodName"
+        checkIfSuppressed((declaration as KoContainingFileProvider).containingFile, testMethodName, "@file:Suppress(")
     }
-
-private fun fileAnnotationParameter(file: KoFile) = file
-    .annotations
-    .firstOrNull { it.name == "Suppress" }
-    ?.text
-    ?.removePrefix("@file:Suppress(\"")
-    ?.removeSuffix("\")")

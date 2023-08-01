@@ -88,6 +88,19 @@ class KoFileAssertTest {
         sut.assert { it.name.endsWith("suppress") }
     }
 
+    @Test
+    fun `assert-suppress-with-few-parameters`() {
+        // given
+        val scope1 = getSnippetFile("assert-suppress-with-few-parameters")
+        val scope2 = getSnippetFile("file-without-suppress")
+
+        val sut = (scope1 + scope2)
+            .files
+
+        // then
+        sut.assert { it.name.endsWith("suppress") }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/verify/kofileassert/snippet/", fileName)
 }

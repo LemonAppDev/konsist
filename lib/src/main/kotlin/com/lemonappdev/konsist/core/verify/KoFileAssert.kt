@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.container.KoFile
-import com.lemonappdev.konsist.core.container.KoFileImpl
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 
@@ -23,7 +22,7 @@ private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveC
         checkIfLocalListIsEmpty(localList, "File", getTestMethodNameFromFourthIndex())
 
         val notSuppressedFiles = localList
-            .filterNot { checkIfSuppressed(it, getTestMethodNameFromFifthIndex()) }
+            .filterNot { checkIfSuppressed(it, getTestMethodNameFromFifthIndex(), "@file:Suppress(") }
 
         val result = notSuppressedFiles.groupBy {
             lastFile = it
@@ -36,15 +35,4 @@ private fun <E : KoFile> Sequence<E>.assert(function: (E) -> Boolean?, positiveC
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
         throw KoInternalException(e.message.orEmpty(), e, lastFile)
     }
-}
-
-private fun checkIfSuppressed(file: KoFile, testMethodName: String): Boolean {
-    val annotationParameter = (file as KoFileImpl)
-        .annotations
-        .firstOrNull { it.name == "Suppress" }
-        ?.text
-        ?.removePrefix("@file:Suppress(\"")
-        ?.removeSuffix("\")")
-
-    return annotationParameter == testMethodName || annotationParameter == "konsist.$testMethodName"
 }
