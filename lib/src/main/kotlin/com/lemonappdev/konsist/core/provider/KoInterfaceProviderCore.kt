@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationProviderCore, KoBaseProviderCore {
     override fun interfaces(
         includeNested: Boolean,
-    ): Sequence<KoInterfaceDeclaration> =
+    ): List<KoInterfaceDeclaration> =
         KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested)
 
     override fun containsInterface(
@@ -16,5 +16,5 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
     ): Boolean =
         interfaces(includeNested).any { it.name == name }
 
-    override fun numInterfaces(includeNested: Boolean): Int = interfaces(includeNested).toList().size
+    override fun numInterfaces(includeNested: Boolean): Int = interfaces(includeNested).size
 }

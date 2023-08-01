@@ -9,7 +9,7 @@ interface KoLocalFunctionProvider : KoBaseProvider {
     /**
      * The local functions present in the declaration.
      */
-    val localFunctions: Sequence<KoFunctionDeclaration>
+    val localFunctions: List<KoFunctionDeclaration>
 
     /**
      * Checks whether the declaration contains a local function with the specified name.

@@ -8,7 +8,7 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
     override fun properties(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Sequence<KoPropertyDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
+    ): List<KoPropertyDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
 
     override fun containsProperty(
         name: String,
@@ -18,5 +18,5 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
         properties(includeNested, includeLocal).any { it.name == name }
 
     override fun numProperties(includeNested: Boolean, includeLocal: Boolean): Int =
-        properties(includeNested, includeLocal).toList().size
+        properties(includeNested, includeLocal).size
 }

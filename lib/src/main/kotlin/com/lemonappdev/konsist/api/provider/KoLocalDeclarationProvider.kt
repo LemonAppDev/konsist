@@ -9,7 +9,7 @@ interface KoLocalDeclarationProvider : KoBaseProvider {
     /**
      * The local declarations present in the declaration.
      */
-    val localDeclarations: Sequence<KoBaseDeclaration>
+    val localDeclarations: List<KoBaseDeclaration>
 
     /**
      * Checks whether the declaration contains a local declaration with the specified name.

@@ -9,7 +9,7 @@ interface KoLocalClassProvider : KoBaseProvider {
     /**
      * The local classes present in the declaration.
      */
-    val localClasses: Sequence<KoClassDeclaration>
+    val localClasses: List<KoClassDeclaration>
 
     /**
      * Checks whether the declaration contains a local class with the specified name.

@@ -9,7 +9,7 @@ interface KoSecondaryConstructorsProvider : KoBaseProvider {
     /**
      * The secondary constructors of the declaration.
      */
-    val secondaryConstructors: Sequence<KoSecondaryConstructorDeclaration>
+    val secondaryConstructors: List<KoSecondaryConstructorDeclaration>
 
     /**
      * Whatever declaration has secondary constructors.

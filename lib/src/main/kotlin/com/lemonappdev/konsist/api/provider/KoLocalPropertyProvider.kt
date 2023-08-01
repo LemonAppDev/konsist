@@ -9,7 +9,7 @@ interface KoLocalPropertyProvider : KoBaseProvider {
     /**
      * The local properties present in the declaration.
      */
-    val localProperties: Sequence<KoPropertyDeclaration>
+    val localProperties: List<KoPropertyDeclaration>
 
     /**
      * Checks whether the declaration contains a local property with the specified name.

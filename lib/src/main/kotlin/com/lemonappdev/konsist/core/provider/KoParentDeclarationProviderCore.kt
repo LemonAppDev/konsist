@@ -11,13 +11,13 @@ internal interface KoParentDeclarationProviderCore :
     KoParentClassProviderCore,
     KoParentInterfaceProviderCore,
     KoBaseProviderCore {
-    override val parentDeclarations: Sequence<KoParentDeclaration>
+    override val parentDeclarations: List<KoParentDeclaration>
         get() = ktClass
             .getSuperTypeList()
             ?.children
             ?.filterIsInstance<KtSuperTypeListEntry>()
             ?.map { KoParentDeclarationImpl.getInstance(it, this) }
-            ?.asSequence() ?: emptySequence()
+            ?: emptyList()
 
     override fun hasParentDeclarations(vararg names: String): Boolean = when {
         names.isEmpty() -> hasParentClass() || hasParentInterfaces()

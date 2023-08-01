@@ -17,7 +17,6 @@ class KoFunctionDeclarationForKoLocalClassProviderTest {
         assertSoftly(sut) {
             containsLocalClass("SampleClass") shouldBeEqualTo false
             localClasses
-                .toList()
                 .shouldBeEqualTo(emptyList())
         }
     }
@@ -33,7 +32,6 @@ class KoFunctionDeclarationForKoLocalClassProviderTest {
         assertSoftly(sut) {
             containsLocalClass("SampleClass") shouldBeEqualTo true
             localClasses
-                .toList()
                 .map { it.name }
                 .shouldBeEqualTo(listOf("SampleClass"))
         }

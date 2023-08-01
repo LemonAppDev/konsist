@@ -12,7 +12,7 @@ internal interface KoParentInterfaceProviderCore :
     KoParentInterfaceProvider,
     KoBaseProviderCore {
     val ktClass: KtClass
-    override val parentInterfaces: Sequence<KoParentDeclaration>
+    override val parentInterfaces: List<KoParentDeclaration>
         get() {
             val interfaces = ktClass
                 .getSuperTypeList()
@@ -25,11 +25,11 @@ internal interface KoParentInterfaceProviderCore :
                 ?.filterIsInstance<KtDelegatedSuperTypeEntry>() ?: emptyList()
 
             val all = interfaces + delegations
-            return all.map { KoParentDeclarationImpl.getInstance(it, this) }.asSequence()
+            return all.map { KoParentDeclarationImpl.getInstance(it, this) }
         }
 
     override fun hasParentInterfaces(vararg names: String): Boolean = when {
-        names.isEmpty() -> parentInterfaces.toList().isNotEmpty()
+        names.isEmpty() -> parentInterfaces.isNotEmpty()
         else -> names.all {
             parentInterfaces.any { koParent -> it == koParent.name }
         }

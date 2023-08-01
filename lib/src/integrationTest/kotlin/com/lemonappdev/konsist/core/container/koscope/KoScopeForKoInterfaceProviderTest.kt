@@ -12,7 +12,7 @@ class KoScopeForKoInterfaceProviderTest {
         val sut = getSnippetFile("scope-contains-no-interfaces")
 
         // then
-        sut.interfaces(includeNested = true).toList() shouldBeEqualTo emptyList()
+        sut.interfaces(includeNested = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -24,7 +24,6 @@ class KoScopeForKoInterfaceProviderTest {
         val expected = listOf("SampleInterface", "SampleNestedInterface")
 
         sut.interfaces(includeNested = true)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -38,7 +37,6 @@ class KoScopeForKoInterfaceProviderTest {
         val expected = listOf("SampleInterface")
 
         sut.interfaces(includeNested = false)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

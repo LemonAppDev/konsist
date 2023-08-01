@@ -11,12 +11,12 @@ interface KoDeclarationProvider : KoBaseProvider {
      *
      * @param includeNested specifies whether to include nested declarations.
      * @param includeLocal specifies whether to include local declarations.
-     * @return a sequence of [KoBaseDeclaration] representing the declarations in the scope, file or declaration.
+     * @return a list of [KoBaseDeclaration] representing the declarations in the scope, file or declaration.
      */
     fun declarations(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoBaseDeclaration>
+    ): List<KoBaseDeclaration>
 
     /**
      * Checks whether the scope, file or declaration contains a declarations with the specified name.

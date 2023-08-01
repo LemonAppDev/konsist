@@ -15,7 +15,7 @@ class KoInterfaceDeclarationForKoParentInterfaceProviderTest {
 
         // then
         assertSoftly(sut) {
-            parentInterfaces.toList() shouldBeEqualTo emptyList()
+            parentInterfaces shouldBeEqualTo emptyList()
             hasParentInterfaces() shouldBeEqualTo false
             hasParentInterfaces("SampleInterface") shouldBeEqualTo false
         }
@@ -30,7 +30,7 @@ class KoInterfaceDeclarationForKoParentInterfaceProviderTest {
 
         // then
         assertSoftly(sut) {
-            parentInterfaces.map { it.name }.toList() shouldBeEqualTo listOf("SampleParentInterface1", "SampleParentInterface2")
+            parentInterfaces.map { it.name } shouldBeEqualTo listOf("SampleParentInterface1", "SampleParentInterface2")
             hasParentInterfaces() shouldBeEqualTo true
             hasParentInterfaces("SampleParentInterface1") shouldBeEqualTo true
             hasParentInterfaces("OtherInterface") shouldBeEqualTo false

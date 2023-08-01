@@ -11,12 +11,12 @@ interface KoPropertyProvider : KoBaseProvider {
      *
      * @param includeNested specifies whether to include nested properties.
      * @param includeLocal specifies whether to include local properties.
-     * @return a sequence of [KoPropertyDeclaration] representing the properties in the scope, file or declaration.
+     * @return a list of [KoPropertyDeclaration] representing the properties in the scope, file or declaration.
      */
     fun properties(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoPropertyDeclaration>
+    ): List<KoPropertyDeclaration>
 
     /**
      * Checks whether the scope, file or declaration contains a property with the specified name.
