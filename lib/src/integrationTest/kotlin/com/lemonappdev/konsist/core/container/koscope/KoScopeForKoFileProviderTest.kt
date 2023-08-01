@@ -43,6 +43,7 @@ class KoScopeForKoFileProviderTest {
 
         // then
         assertSoftly(sut) {
+            numFiles shouldBeEqualTo 15
             hasFiles() shouldBeEqualTo true
             hasFiles("KoScopeTest") shouldBeEqualTo true
             hasFiles("OtherTest") shouldBeEqualTo false

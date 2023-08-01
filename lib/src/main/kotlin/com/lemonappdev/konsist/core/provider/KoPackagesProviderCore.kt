@@ -11,6 +11,9 @@ internal interface KoPackagesProviderCore : KoPackagesProvider, KoBaseProviderCo
     override val packages: List<KoPackageDeclaration>
         get() = koFiles.mapNotNull { it.packagee }
 
+    override val numPackages: Int
+        get() = packages.size
+
     override fun hasPackages(vararg names: String): Boolean = when {
         names.isEmpty() -> packages.isNotEmpty()
         else -> names.all {

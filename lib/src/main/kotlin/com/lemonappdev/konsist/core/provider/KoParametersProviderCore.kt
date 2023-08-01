@@ -15,5 +15,8 @@ internal interface KoParametersProviderCore :
             .valueParameters
             .map { KoParameterDeclarationImpl.getInstance(it, this) }
 
+    override val numParameters: Int
+        get() = parameters.size
+
     override fun hasParameterNamed(name: String): Boolean = parameters.any { it.name == name }
 }

@@ -6,7 +6,6 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoScopeForKoPackagesProviderTest {
-
     @Test
     fun `scope-has-no-package`() {
         // given
@@ -15,6 +14,7 @@ class KoScopeForKoPackagesProviderTest {
         // then
         assertSoftly(sut) {
             packages shouldBeEqualTo emptyList()
+            numPackages shouldBeEqualTo 0
             hasPackages() shouldBeEqualTo false
         }
     }
@@ -27,6 +27,7 @@ class KoScopeForKoPackagesProviderTest {
         // then
         assertSoftly(sut) {
             packages.map { it.name } shouldBeEqualTo listOf("samplepackage")
+            numPackages shouldBeEqualTo 1
             hasPackages() shouldBeEqualTo true
             hasPackages("com.samplepackage") shouldBeEqualTo true
             hasPackages("samplepackage") shouldBeEqualTo true

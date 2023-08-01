@@ -14,6 +14,11 @@ interface KoKDocTagsProvider : KoBaseProvider {
     val tags: List<KoKDocTagDeclaration>
 
     /**
+     * The number of tags.
+     */
+    val numTags: Int
+
+    /**
      * List of `@param` tags.
      */
     val paramTags: List<KoValuedKDocTagDeclaration>

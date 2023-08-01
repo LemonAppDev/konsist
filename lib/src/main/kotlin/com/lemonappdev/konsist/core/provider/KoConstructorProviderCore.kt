@@ -9,5 +9,8 @@ internal interface KoConstructorProviderCore :
     KoSecondaryConstructorsProviderCore,
     KoBaseProviderCore {
     override val constructors: List<KoConstructorDeclaration>
-        get() = listOf(primaryConstructor as KoConstructorDeclaration) + secondaryConstructors
+        get() = listOfNotNull(primaryConstructor as? KoConstructorDeclaration) + secondaryConstructors
+
+    override val numConstructors: Int
+        get() = constructors.size
 }

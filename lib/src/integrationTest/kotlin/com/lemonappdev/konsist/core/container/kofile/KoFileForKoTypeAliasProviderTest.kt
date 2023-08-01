@@ -16,6 +16,7 @@ class KoFileForKoTypeAliasProviderTest {
         // then
         assertSoftly(sut) {
             typeAliases shouldBeEqualTo emptyList()
+            numTypeAliases shouldBeEqualTo 0
             hasTypeAliases() shouldBeEqualTo false
             hasTypeAliases("SampleTypeAlias") shouldBeEqualTo false
         }
@@ -29,11 +30,7 @@ class KoFileForKoTypeAliasProviderTest {
             .first()
 
         // then
-        assertSoftly(
-            sut
-                .typeAliases
-                .first(),
-        ) {
+        assertSoftly(sut.typeAliases.first()) {
             name shouldBeEqualTo "SampleTypeAlias"
             type.sourceType shouldBeEqualTo "() -> Int"
         }
@@ -48,6 +45,7 @@ class KoFileForKoTypeAliasProviderTest {
 
         // then
         assertSoftly(sut) {
+            numTypeAliases shouldBeEqualTo 2
             hasTypeAliases() shouldBeEqualTo true
             hasTypeAliases("SampleTypeAlias1") shouldBeEqualTo true
             hasTypeAliases("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo true

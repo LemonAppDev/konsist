@@ -10,4 +10,9 @@ interface KoConstructorProvider : KoBaseProvider {
      * The all primary and secondary constructors of the declaration.
      */
     val constructors: List<KoConstructorDeclaration>
+
+    /**
+     * The number of constructors.
+     */
+    val numConstructors: Int
 }

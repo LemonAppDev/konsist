@@ -13,6 +13,11 @@ interface KoTypeAliasProvider : KoBaseProvider {
     val typeAliases: List<KoTypeAliasDeclaration>
 
     /**
+     * The number of type aliases.
+     */
+    val numTypeAliases: Int
+
+    /**
      * Whether the file or scope has type aliases.
      *
      * @param names the names of the type aliases to check.

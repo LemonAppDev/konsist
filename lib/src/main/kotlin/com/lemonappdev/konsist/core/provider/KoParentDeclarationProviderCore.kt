@@ -19,6 +19,9 @@ internal interface KoParentDeclarationProviderCore :
             ?.map { KoParentDeclarationImpl.getInstance(it, this) }
             ?: emptyList()
 
+    override val numParentDeclarations: Int
+        get() = parentDeclarations.size
+
     override fun hasParentDeclarations(vararg names: String): Boolean = when {
         names.isEmpty() -> hasParentClass() || hasParentInterfaces()
         else -> names.all { hasParentClass(it) || hasParentInterfaces(it) }
