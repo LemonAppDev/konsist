@@ -25,7 +25,7 @@ internal interface KoImportProviderCore : KoImportProvider, KoParentProviderCore
                     ?.asSequence()
 
             val imports = if (ktFile != null) {
-                ktImportDirectives?.map { KoImportDeclarationImpl.getInstance(it, null) }
+                ktImportDirectives?.map { KoImportDeclarationImpl.getInstance(it, parent) }
             } else {
                 koFiles?.flatMap { (it as KoImportProvider).imports }
             }
