@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.verify.kodeclarationassert.fordeclarationsequence
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.sequence.withPrimaryConstructor
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.verify.assert
@@ -69,7 +68,6 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
             .classes()
-            .withPrimaryConstructor()
 
         // then
         sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
@@ -80,7 +78,6 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
             .classes()
-            .withPrimaryConstructor()
 
         // when
         val func = {
@@ -96,7 +93,6 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut = getSnippetFile("assert-not-passes-when-expression-is-nullable")
             .classes()
-            .withPrimaryConstructor()
 
         // then
         sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") }
@@ -107,7 +103,6 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut = getSnippetFile("assert-not-fails-when-expression-is-nullable")
             .classes()
-            .withPrimaryConstructor()
 
         // when
         val func = {
