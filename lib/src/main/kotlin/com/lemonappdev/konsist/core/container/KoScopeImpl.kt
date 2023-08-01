@@ -38,7 +38,7 @@ class KoScopeImpl(
     KoPackagesProviderCore,
     KoPropertyProviderCore,
     KoTypeAliasProviderCore {
-    constructor(koFileDeclaration: KoFileDeclaration) : this(listOf(koFile))
+    constructor(koFileDeclaration: KoFileDeclaration) : this(listOf(koFileDeclaration))
 
     override val ktFile: KtFile? by lazy { null }
 
