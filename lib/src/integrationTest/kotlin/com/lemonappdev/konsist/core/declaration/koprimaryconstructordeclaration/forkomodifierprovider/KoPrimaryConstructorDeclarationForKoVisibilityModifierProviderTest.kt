@@ -1,15 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.koprimaryconstructordeclaration.forkomodifierprovider
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.KoModifier.DATA
-import com.lemonappdev.konsist.api.KoModifier.OPEN
-import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.Arguments.arguments
-import org.junit.jupiter.params.provider.MethodSource
 
 class KoPrimaryConstructorDeclarationForKoVisibilityModifierProviderTest {
     @Test
@@ -94,5 +88,8 @@ class KoPrimaryConstructorDeclarationForKoVisibilityModifierProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koprimaryconstructordeclaration/forkomodifierprovider/snippet/forkovisibilitymodifierprovider/", fileName)
+        getSnippetKoScope(
+            "core/declaration/koprimaryconstructordeclaration/forkomodifierprovider/snippet/forkovisibilitymodifierprovider/",
+            fileName,
+        )
 }

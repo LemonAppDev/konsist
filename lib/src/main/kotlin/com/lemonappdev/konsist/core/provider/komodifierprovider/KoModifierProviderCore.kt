@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.provider.komodifierprovider.KoModifierProvide
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
-import org.jetbrains.kotlin.psi.psiUtil.isPublic
 
 internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCore {
     val ktTypeParameterListOwner: KtTypeParameterListOwner

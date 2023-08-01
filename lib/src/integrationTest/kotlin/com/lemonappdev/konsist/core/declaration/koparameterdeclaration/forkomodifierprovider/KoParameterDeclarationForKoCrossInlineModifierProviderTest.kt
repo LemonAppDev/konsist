@@ -32,5 +32,8 @@ class KoParameterDeclarationForKoCrossInlineModifierProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparameterdeclaration/forkomodifierprovider/snippet/forkocrossinlinemodifierprovider/", fileName)
+        getSnippetKoScope(
+            "core/declaration/koparameterdeclaration/forkomodifierprovider/snippet/forkocrossinlinemodifierprovider/",
+            fileName,
+        )
 }

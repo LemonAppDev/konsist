@@ -49,7 +49,10 @@ class KoSecondaryConstructorDeclarationForKoModifierProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kosecondaryconstructordeclaration/forkomodifierprovider/snippet/forkomodifierprovider/", fileName)
+        getSnippetKoScope(
+            "core/declaration/kosecondaryconstructordeclaration/forkomodifierprovider/snippet/forkomodifierprovider/",
+            fileName,
+        )
 
     companion object {
         @Suppress("unused")

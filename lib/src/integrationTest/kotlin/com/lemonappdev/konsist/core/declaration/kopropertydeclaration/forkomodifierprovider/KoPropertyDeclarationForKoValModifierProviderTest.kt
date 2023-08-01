@@ -30,6 +30,6 @@ class KoPropertyDeclarationForKoValModifierProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope(
             "core/declaration/kopropertydeclaration/forkomodifierprovider/snippet/forkovalmodifierprovider/",
-            fileName
+            fileName,
         )
 }

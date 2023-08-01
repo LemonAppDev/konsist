@@ -1,7 +1,5 @@
 package com.lemonappdev.konsist.api.ext.list.komodifierproviderlistext
 
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoEnumModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoDataModifierProvider
 import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExpectModifierProvider
 
 /**

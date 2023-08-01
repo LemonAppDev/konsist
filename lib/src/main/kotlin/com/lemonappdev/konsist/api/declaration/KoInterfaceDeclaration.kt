@@ -10,7 +10,6 @@ import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoObjectProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
@@ -25,6 +24,7 @@ import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
 import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExpectModifierProvider
 import com.lemonappdev.konsist.api.provider.komodifierprovider.KoFunModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 
 /**
@@ -57,7 +57,7 @@ interface KoInterfaceDeclaration :
     KoVisibilityModifierProvider,
     KoActualModifierProvider,
     KoExpectModifierProvider,
-    KoFunModifierProvider{
+    KoFunModifierProvider {
     /**
      * String representing the interface.
      *

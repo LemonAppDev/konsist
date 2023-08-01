@@ -68,7 +68,10 @@ class KoPropertyDeclarationForKoModifierProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/forkomodifierprovider/snippet/forkomodifierprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope(
+            "core/declaration/kopropertydeclaration/forkomodifierprovider/snippet/forkomodifierprovider/",
+            fileName,
+        )
 
     companion object {
         @Suppress("unused")

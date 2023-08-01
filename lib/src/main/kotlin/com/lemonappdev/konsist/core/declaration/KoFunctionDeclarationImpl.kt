@@ -5,19 +5,6 @@ import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoAbstractModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExpectModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExternalModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoFinalModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoInfixModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoInlineModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOpenModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOperatorModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOverrideModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoSuspendModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoTailrecModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -32,7 +19,6 @@ import com.lemonappdev.konsist.core.provider.KoLocalDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.komodifierprovider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
@@ -49,6 +35,7 @@ import com.lemonappdev.konsist.core.provider.komodifierprovider.KoExternalModifi
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoFinalModifierProviderCore
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoInfixModifierProviderCore
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoInlineModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoOpenModifierProviderCore
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoOperatorModifierProviderCore
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoOverrideModifierProviderCore

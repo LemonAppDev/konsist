@@ -1,8 +1,5 @@
 package com.lemonappdev.konsist.api.ext.list.komodifierproviderlistext
 
-
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoEnumModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.komodifierprovider.KoSealedModifierProvider
 import io.mockk.every
 import io.mockk.mockk
@@ -45,5 +42,4 @@ class KoSealedModifierProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration2)
     }
-
 }

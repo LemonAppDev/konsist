@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.ext.list.komodifierproviderlistext
 
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoEnumModifierProvider
 import com.lemonappdev.konsist.api.provider.komodifierprovider.KoValueModifierProvider
 
 /**
@@ -16,4 +15,3 @@ fun <T : KoValueModifierProvider> List<T>.withValueModifier(): List<T> = filter 
  * @return A list containing declarations without the `value` modifier.
  */
 fun <T : KoValueModifierProvider> List<T>.withoutValueModifier(): List<T> = filterNot { it.hasValueModifier }
-

@@ -5,12 +5,6 @@ import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoCrossInlineModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoNoInlineModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoValModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVarArgModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVarModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -18,7 +12,6 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDefaultValueProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.komodifierprovider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentProviderCore
@@ -28,6 +21,7 @@ import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderC
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoCrossInlineModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoNoInlineModifierProviderCore
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoValModifierProviderCore
 import com.lemonappdev.konsist.core.provider.komodifierprovider.KoVarArgModifierProviderCore

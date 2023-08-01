@@ -1,7 +1,5 @@
 package com.lemonappdev.konsist.api.ext.list.komodifierproviderlistext
 
-import com.lemonappdev.konsist.api.ext.list.komodifierproviderlistext.withVarModifier
-import com.lemonappdev.konsist.api.ext.list.komodifierproviderlistext.withoutVarModifier
 import com.lemonappdev.konsist.api.provider.komodifierprovider.KoValModifierProvider
 import io.mockk.every
 import io.mockk.mockk
