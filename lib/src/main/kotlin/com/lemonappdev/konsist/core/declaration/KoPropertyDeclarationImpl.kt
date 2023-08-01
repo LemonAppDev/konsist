@@ -29,7 +29,6 @@ import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
-import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
@@ -72,7 +71,7 @@ internal class KoPropertyDeclarationImpl private constructor(
 
     override val ktElement: KtElement by lazy { ktProperty }
 
-    override val ktFunction: KtFunction? by lazy { null }
+    override fun hasImplementation(): Boolean = ktProperty.hasBody()
 
     override val delegateName: String? by lazy {
         ktProperty
