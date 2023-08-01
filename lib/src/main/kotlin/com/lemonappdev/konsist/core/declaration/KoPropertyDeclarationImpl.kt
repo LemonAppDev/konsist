@@ -114,6 +114,10 @@ internal class KoPropertyDeclarationImpl private constructor(
             ?.removeSuffix(" ")
     }
 
+    override val hasValModifier: Boolean by lazy { !ktProperty.isVar }
+
+    override val hasVarModifier: Boolean by lazy { ktProperty.isVar }
+
     override fun toString(): String {
         return locationWithText
     }

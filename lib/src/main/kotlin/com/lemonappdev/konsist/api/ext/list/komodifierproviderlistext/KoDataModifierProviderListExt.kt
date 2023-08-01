@@ -1,0 +1,18 @@
+package com.lemonappdev.konsist.api.ext.list.komodifierproviderlistext
+
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoEnumModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoDataModifierProvider
+
+/**
+ * List containing all declarations that have `data` modifier.
+ *
+ * @return A list containing declarations with the `data` modifier.
+ */
+fun <T : KoDataModifierProvider> List<T>.withDataModifier(): List<T> = filter { it.hasDataModifier }
+
+/**
+ * List containing all declarations that don't have `data` modifier.
+ *
+ * @return A list containing declarations without the `data` modifier.
+ */
+fun <T : KoDataModifierProvider> List<T>.withoutDataModifier(): List<T> = filterNot { it.hasDataModifier }

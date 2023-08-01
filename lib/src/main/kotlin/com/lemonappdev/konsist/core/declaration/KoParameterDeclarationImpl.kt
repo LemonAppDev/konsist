@@ -89,6 +89,10 @@ internal class KoParameterDeclarationImpl private constructor(
 
     override fun representsType(name: String): Boolean = type.name == name || type.fullyQualifiedName == name
 
+    override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
+
+    override val hasVarModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
+
     override fun toString(): String {
         return locationWithText
     }

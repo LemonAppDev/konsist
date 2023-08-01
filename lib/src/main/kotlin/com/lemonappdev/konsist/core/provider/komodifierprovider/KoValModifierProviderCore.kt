@@ -4,9 +4,4 @@ import com.lemonappdev.konsist.api.provider.komodifierprovider.KoValModifierProv
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import org.jetbrains.kotlin.psi.KtProperty
 
-internal interface KoValModifierProviderCore : KoValModifierProvider, KoBaseProviderCore {
-    val ktProperty: KtProperty
-    
-    override val hasValModifier: Boolean
-        get() = !ktProperty.isVar
-}
+internal interface KoValModifierProviderCore : KoValModifierProvider, KoBaseProviderCore
