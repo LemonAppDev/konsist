@@ -71,7 +71,7 @@ internal class KoPropertyDeclarationImpl private constructor(
 
     override val ktElement: KtElement by lazy { ktProperty }
 
-    override fun hasImplementation(): Boolean = ktProperty.hasBody()
+    override val hasImplementation: Boolean = ktProperty.hasBody()
 
     override val delegateName: String? by lazy {
         ktProperty

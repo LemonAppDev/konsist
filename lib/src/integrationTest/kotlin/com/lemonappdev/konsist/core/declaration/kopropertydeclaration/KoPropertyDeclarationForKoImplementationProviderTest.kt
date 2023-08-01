@@ -13,7 +13,7 @@ class KoPropertyDeclarationForKoImplementationProviderTest {
             .first()
 
         // then
-        sut.hasImplementation() shouldBeEqualTo true
+        sut.hasImplementation shouldBeEqualTo true
     }
 
     @Test
@@ -24,7 +24,7 @@ class KoPropertyDeclarationForKoImplementationProviderTest {
             .first()
 
         // then
-        sut.hasImplementation() shouldBeEqualTo true
+        sut.hasImplementation shouldBeEqualTo true
     }
 
     @Test
@@ -35,7 +35,7 @@ class KoPropertyDeclarationForKoImplementationProviderTest {
             .first()
 
         // then
-        sut.hasImplementation() shouldBeEqualTo false
+        sut.hasImplementation shouldBeEqualTo false
     }
 
     private fun getSnippetFile(fileName: String) =

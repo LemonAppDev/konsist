@@ -81,7 +81,7 @@ internal class KoFunctionDeclarationImpl private constructor(
 
     override val ktElement: KtElement by lazy { ktFunction }
 
-    override fun hasImplementation(): Boolean = ktFunction.hasBody()
+    override val hasImplementation: Boolean = ktFunction.hasBody()
 
     private val localDeclarationsHelper: Sequence<KoBaseDeclaration> by lazy {
         val psiChildren = ktFunction
