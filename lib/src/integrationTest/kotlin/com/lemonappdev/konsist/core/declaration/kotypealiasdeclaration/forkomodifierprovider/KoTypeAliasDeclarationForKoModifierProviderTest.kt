@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.kotypealiasdeclaration
+package com.lemonappdev.konsist.core.declaration.kotypealiasdeclaration.forkomodifierprovider
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.KoModifier
@@ -25,12 +25,6 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
             hasModifiers() shouldBeEqualTo false
             hasModifiers(KoModifier.OPEN) shouldBeEqualTo false
             hasModifiers(KoModifier.OPEN, KoModifier.DATA) shouldBeEqualTo false
-            hasPublicModifier shouldBeEqualTo false
-            isPublicOrDefault shouldBeEqualTo true
-            hasPrivateModifier shouldBeEqualTo false
-            hasProtectedModifier shouldBeEqualTo false
-            hasInternalModifier shouldBeEqualTo false
-            hasActualModifier shouldBeEqualTo false
         }
     }
 
@@ -51,68 +45,8 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
         }
     }
 
-    @Test
-    fun `typealias-has-public-modifier`() {
-        // given
-        val sut = getSnippetFile("typealias-has-public-modifier")
-            .typeAliases
-            .first()
-
-        // then
-        sut.hasPublicModifier shouldBeEqualTo true
-    }
-
-    @Test
-    fun `typealias-is-public-by-default`() {
-        // given
-        val sut = getSnippetFile("typealias-is-public-by-default")
-            .typeAliases
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            isPublicOrDefault shouldBeEqualTo true
-            hasPublicModifier shouldBeEqualTo false
-        }
-    }
-
-    @Test
-    fun `typealias-has-private-modifier`() {
-        // given
-        val sut = getSnippetFile("typealias-has-private-modifier")
-            .typeAliases
-            .first()
-
-        // then
-        sut.hasPrivateModifier shouldBeEqualTo true
-    }
-
-    @Test
-    fun `typealias-has-internal-modifier`() {
-        // given
-        val sut = getSnippetFile("typealias-has-internal-modifier")
-            .typeAliases
-            .first()
-
-        // then
-        sut.hasInternalModifier shouldBeEqualTo true
-    }
-
-    @Test
-    fun `typealias-has-actual-modifier`() {
-        // given
-        val sut = getSnippetFile("typealias-has-actual-modifier")
-            .files
-            .first()
-            .typeAliases
-            .first()
-
-        // then
-        sut.hasActualModifier shouldBeEqualTo true
-    }
-
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealiasdeclaration/snippet/forkomodifierprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypealiasdeclaration/forkomodifierprovider/snippet/forkomodifierprovider/", fileName)
 
     companion object {
         @Suppress("unused")

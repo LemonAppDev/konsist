@@ -1,3 +1,0 @@
-package com.lemonappdev.konsist.core.declaration.kopropertydeclaration.snippet.forisvar
-
-var sampleProperty: Boolean = true
