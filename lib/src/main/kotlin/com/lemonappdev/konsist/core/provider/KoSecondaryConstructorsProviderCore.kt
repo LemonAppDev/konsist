@@ -11,12 +11,11 @@ internal interface KoSecondaryConstructorsProviderCore :
     KoBaseProviderCore {
     val ktClass: KtClass
 
-    override val secondaryConstructors: Sequence<KoSecondaryConstructorDeclaration>
+    override val secondaryConstructors: List<KoSecondaryConstructorDeclaration>
         get() =
             ktClass
                 .secondaryConstructors
                 .map { KoSecondaryConstructorDeclarationImpl.getInstance(it, this) }
-                .asSequence()
 
     override val hasSecondaryConstructors: Boolean
         get() = ktClass.hasSecondaryConstructors()

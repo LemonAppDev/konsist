@@ -11,12 +11,12 @@ interface KoFunctionProvider : KoBaseProvider {
      *
      * @param includeNested specifies whether to include nested functions.
      * @param includeLocal specifies whether to include local functions.
-     * @return a sequence of [KoFunctionDeclaration] representing the functions in the scope, file or declaration.
+     * @return a list of [KoFunctionDeclaration] representing the functions in the scope, file or declaration.
      */
     fun functions(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-    ): Sequence<KoFunctionDeclaration>
+    ): List<KoFunctionDeclaration>
 
     /**
      * Checks whether the scope, file or declaration contains a function with the specified name.

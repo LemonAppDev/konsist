@@ -15,7 +15,7 @@ class KoPrimaryConstructorDeclarationForKoParametersProviderTest {
             .primaryConstructor
 
         // then
-        sut?.parameters?.toList() shouldBeEqualTo emptyList()
+        sut?.parameters shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -28,7 +28,7 @@ class KoPrimaryConstructorDeclarationForKoParametersProviderTest {
 
         // then
         assertSoftly(sut?.parameters) {
-            it?.toList()?.size shouldBeEqualTo 1
+            it?.size shouldBeEqualTo 1
             it?.first()?.name shouldBeEqualTo "sampleParameter"
         }
     }

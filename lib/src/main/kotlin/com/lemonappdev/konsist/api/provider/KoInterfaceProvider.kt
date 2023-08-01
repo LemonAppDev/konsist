@@ -10,11 +10,11 @@ interface KoInterfaceProvider : KoBaseProvider {
      * The interfaces present in the scope, file or declaration.
      *
      * @param includeNested specifies whether to include nested interfaces.
-     * @return a sequence of [KoInterfaceDeclaration] representing the interfaces in the scope, file or declaration.
+     * @return a list of [KoInterfaceDeclaration] representing the interfaces in the scope, file or declaration.
      */
     fun interfaces(
         includeNested: Boolean = false,
-    ): Sequence<KoInterfaceDeclaration>
+    ): List<KoInterfaceDeclaration>
 
     /**
      * Checks whether the scope, file or declaration contains an interface with the specified name.

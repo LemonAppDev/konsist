@@ -15,7 +15,7 @@ class KoClassDeclarationForKoParentDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            parentDeclarations.map { it.name }.toList() shouldBeEqualTo listOf(
+            parentDeclarations.map { it.name } shouldBeEqualTo listOf(
                 "SampleParentClass",
                 "SampleParentInterface1",
                 "SampleParentInterface2",
@@ -37,7 +37,7 @@ class KoClassDeclarationForKoParentDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            parentDeclarations.toList() shouldBeEqualTo emptyList()
+            parentDeclarations shouldBeEqualTo emptyList()
             hasParentDeclarations() shouldBeEqualTo false
             hasParentDeclarations("SampleClass") shouldBeEqualTo false
         }

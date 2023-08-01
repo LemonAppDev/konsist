@@ -15,7 +15,7 @@ class KoFileForKoClassProviderTest {
             .first()
 
         // then
-        sut.classes(includeNested = true, includeLocal = true).toList() shouldBeEqualTo emptyList()
+        sut.classes(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -29,7 +29,6 @@ class KoFileForKoClassProviderTest {
         val expected = listOf("SampleLocalClass", "SampleClassNestedInsideObject")
 
         sut.classes(includeNested = true, includeLocal = true)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -45,7 +44,6 @@ class KoFileForKoClassProviderTest {
         val expected = listOf("SampleClassNestedInsideObject")
 
         sut.classes(includeNested = true, includeLocal = false)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -61,7 +59,6 @@ class KoFileForKoClassProviderTest {
         val expected = listOf("SampleLocalClass")
 
         sut.classes(includeNested = false, includeLocal = true)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }
@@ -77,7 +74,6 @@ class KoFileForKoClassProviderTest {
         val expected = emptyList<KoClassDeclaration>()
 
         sut.classes(includeNested = false, includeLocal = false)
-            .toList()
             .map { it.name }
             .shouldBeEqualTo(expected)
     }

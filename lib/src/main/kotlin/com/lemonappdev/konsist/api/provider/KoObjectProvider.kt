@@ -10,11 +10,11 @@ interface KoObjectProvider : KoBaseProvider {
      * The objects present in the scope, file or declaration.
      *
      * @param includeNested specifies whether to include nested objects.
-     * @return a sequence of [KoObjectDeclaration] representing the objects in the scope, file or declaration.
+     * @return a list of [KoObjectDeclaration] representing the objects in the scope, file or declaration.
      */
     fun objects(
         includeNested: Boolean = false,
-    ): Sequence<KoObjectDeclaration>
+    ): List<KoObjectDeclaration>
 
     /**
      * Checks whether the scope, file or declaration contains an object with the specified name.

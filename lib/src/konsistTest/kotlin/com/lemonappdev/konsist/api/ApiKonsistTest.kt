@@ -27,10 +27,10 @@ class ApiKonsistTest {
         apiPackageScope
             .functions(includeNested = true, includeLocal = true)
             .assert {
-                if (it.parameters.toList().isNotEmpty() && it.explicitReturnType?.name != "Unit") {
-                    it.kDoc?.hasTags(PARAM, RETURN) == true && it.parameters.toList().count() == it.kDoc?.paramTags?.count()
-                } else if (it.parameters.toList().isNotEmpty()) {
-                    it.kDoc?.hasTags(PARAM) == true && it.parameters.toList().count() == it.kDoc?.paramTags?.count()
+                if (it.parameters.isNotEmpty() && it.explicitReturnType?.name != "Unit") {
+                    it.kDoc?.hasTags(PARAM, RETURN) == true && it.parameters.count() == it.kDoc?.paramTags?.count()
+                } else if (it.parameters.isNotEmpty()) {
+                    it.kDoc?.hasTags(PARAM) == true && it.parameters.count() == it.kDoc?.paramTags?.count()
                 } else if (it.explicitReturnType?.name != "Unit") {
                     it.kDoc?.hasTags(RETURN)
                 } else {
