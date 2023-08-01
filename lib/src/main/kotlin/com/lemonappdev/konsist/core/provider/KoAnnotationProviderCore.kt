@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
@@ -12,7 +12,7 @@ internal interface KoAnnotationProviderCore :
     KoParentProviderCore,
     KoBaseProviderCore {
     val ktAnnotated: KtAnnotated?
-    val koFiles: Sequence<KoFile>?
+    val koFiles: Sequence<KoFileDeclaration>?
 
     override val annotations: Sequence<KoAnnotationDeclaration>
         get() = if (ktAnnotated != null) {

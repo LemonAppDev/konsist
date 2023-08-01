@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.verify
 
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
@@ -49,7 +49,7 @@ private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String):
         val konsistDeclarationClassNamePrefix = "Ko"
 
         when (it) {
-            is KoFile -> {
+            is KoFileDeclaration -> {
                 types = "files"
                 val name = it.name
                 val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)

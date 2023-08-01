@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.verify
 
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
@@ -91,7 +91,7 @@ private fun checkParentAndSuppress(declaration: KoBaseProvider, testMethodName: 
         fileAnnotationParameter(declaration.containingFile) == "konsist.$testMethodName"
     }
 
-private fun fileAnnotationParameter(file: KoFile) = file
+private fun fileAnnotationParameter(file: KoFileDeclaration) = file
     .annotations
     .firstOrNull { it.name == "Suppress" }
     ?.text

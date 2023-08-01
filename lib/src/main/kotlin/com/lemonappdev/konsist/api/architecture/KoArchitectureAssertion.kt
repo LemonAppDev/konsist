@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.architecture
 
-import com.lemonappdev.konsist.api.container.koscope.KoScope
+import com.lemonappdev.konsist.api.container.KoScope
 
 /**
  * An interface for asserting a KoArchitecture with its associated dependencies and configurations.

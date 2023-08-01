@@ -1,15 +1,15 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
-import com.lemonappdev.konsist.core.container.KoFileImpl
+import com.lemonappdev.konsist.core.declaration.KoFileDeclarationImpl
 import org.jetbrains.kotlin.psi.KtTypeReference
 
 internal interface KoSourceAndAliasTypeProviderCore : KoSourceAndAliasTypeProvider, KoNameProviderCore, KoBaseProviderCore {
     val ktTypeReference: KtTypeReference
 
-    private val file: KoFile
-        get() = KoFileImpl(ktTypeReference.containingKtFile)
+    private val file: KoFileDeclaration
+        get() = KoFileDeclarationImpl(ktTypeReference.containingKtFile)
 
     override val aliasType: String?
         get() = file

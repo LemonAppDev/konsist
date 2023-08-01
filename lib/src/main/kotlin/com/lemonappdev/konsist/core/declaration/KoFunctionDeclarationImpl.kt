@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
@@ -75,7 +75,7 @@ internal class KoFunctionDeclarationImpl private constructor(
 
     override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
 
-    override val koFiles: Sequence<KoFile>? by lazy { null }
+    override val koFiles: Sequence<KoFileDeclaration>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktFunction }
 

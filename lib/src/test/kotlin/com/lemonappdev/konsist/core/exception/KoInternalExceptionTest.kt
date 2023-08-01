@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.exception
 
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import io.mockk.every
 import io.mockk.mockk
@@ -38,10 +38,10 @@ class KoInternalExceptionTest {
         // given
         val message = "message"
         val fileText = "file text"
-        val file: KoFile = mockk {
+        val file: KoFileDeclaration = mockk {
             every { text } returns fileText
         }
-        val func = { throw KoInternalException(message, koFile = file) }
+        val func = { throw KoInternalException(message, koFileDeclaration = file) }
 
         // when
         func shouldThrow KoInternalException::class withMessage "$message, file:\n$fileText"
@@ -51,7 +51,7 @@ class KoInternalExceptionTest {
     fun `test without file`() {
         // given
         val message = "message"
-        val func = { throw KoInternalException(message, koFile = null) }
+        val func = { throw KoInternalException(message, koFileDeclaration = null) }
 
         // when
         func shouldThrow KoInternalException::class withMessage message

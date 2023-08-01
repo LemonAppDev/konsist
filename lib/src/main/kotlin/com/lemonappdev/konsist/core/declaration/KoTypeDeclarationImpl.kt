@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.container.KoFileImpl
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
@@ -39,7 +38,7 @@ internal class KoTypeDeclarationImpl private constructor(
 
     override val ktElement: KtElement by lazy { ktTypeReference }
 
-    private val file: KoFile by lazy { KoFileImpl(ktTypeReference.containingKtFile) }
+    private val file: KoFileDeclaration by lazy { KoFileDeclarationImpl(ktTypeReference.containingKtFile) }
 
     override val name: String by lazy {
         when {
