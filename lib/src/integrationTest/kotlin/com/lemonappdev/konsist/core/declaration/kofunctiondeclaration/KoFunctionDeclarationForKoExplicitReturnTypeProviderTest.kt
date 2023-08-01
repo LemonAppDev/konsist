@@ -15,11 +15,11 @@ class KoFunctionDeclarationForKoExplicitReturnTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasExplicitReturnType() shouldBeEqualTo true
+            hasExplicitReturnType shouldBeEqualTo true
             explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
             explicitReturnType?.aliasType shouldBeEqualTo null
             explicitReturnType?.name shouldBeEqualTo "SampleType"
-            explicitReturnType?.isAlias() shouldBeEqualTo false
+            explicitReturnType?.isAlias shouldBeEqualTo false
             explicitReturnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
@@ -33,11 +33,11 @@ class KoFunctionDeclarationForKoExplicitReturnTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasExplicitReturnType() shouldBeEqualTo true
+            hasExplicitReturnType shouldBeEqualTo true
             explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
             explicitReturnType?.aliasType shouldBeEqualTo "ImportAlias"
             explicitReturnType?.name shouldBeEqualTo "ImportAlias"
-            explicitReturnType?.isAlias() shouldBeEqualTo true
+            explicitReturnType?.isAlias shouldBeEqualTo true
         }
     }
 
@@ -50,11 +50,11 @@ class KoFunctionDeclarationForKoExplicitReturnTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasExplicitReturnType() shouldBeEqualTo true
+            hasExplicitReturnType shouldBeEqualTo true
             explicitReturnType?.sourceType shouldBeEqualTo "SampleType"
             explicitReturnType?.aliasType shouldBeEqualTo null
             explicitReturnType?.name shouldBeEqualTo "SampleType"
-            explicitReturnType?.isAlias() shouldBeEqualTo false
+            explicitReturnType?.isAlias shouldBeEqualTo false
             explicitReturnType?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
         }
     }
@@ -68,11 +68,11 @@ class KoFunctionDeclarationForKoExplicitReturnTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasExplicitReturnType() shouldBeEqualTo false
+            hasExplicitReturnType shouldBeEqualTo false
             explicitReturnType?.sourceType shouldBeEqualTo null
             explicitReturnType?.aliasType shouldBeEqualTo null
             explicitReturnType?.name shouldBeEqualTo null
-            explicitReturnType?.isAlias() shouldBeEqualTo null
+            explicitReturnType?.isAlias shouldBeEqualTo null
         }
     }
 
@@ -85,11 +85,11 @@ class KoFunctionDeclarationForKoExplicitReturnTypeProviderTest {
 
         // then
         assertSoftly(sut) {
-            hasExplicitReturnType() shouldBeEqualTo false
+            hasExplicitReturnType shouldBeEqualTo false
             explicitReturnType?.sourceType shouldBeEqualTo null
             explicitReturnType?.aliasType shouldBeEqualTo null
             explicitReturnType?.name shouldBeEqualTo null
-            explicitReturnType?.isAlias() shouldBeEqualTo null
+            explicitReturnType?.isAlias shouldBeEqualTo null
         }
     }
 

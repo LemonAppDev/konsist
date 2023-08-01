@@ -19,7 +19,7 @@ class KoSecondaryConstructorDeclarationForKoKDocProviderTest {
         // then
         assertSoftly(sut) {
             kDoc shouldBeEqualTo null
-            hasKDoc() shouldBeEqualTo false
+            hasKDoc shouldBeEqualTo false
         }
     }
 
@@ -35,7 +35,7 @@ class KoSecondaryConstructorDeclarationForKoKDocProviderTest {
         // then
         assertSoftly(sut) {
             kDoc shouldNotBeEqualTo null
-            hasKDoc() shouldBeEqualTo true
+            hasKDoc shouldBeEqualTo true
         }
     }
 
@@ -51,7 +51,7 @@ class KoSecondaryConstructorDeclarationForKoKDocProviderTest {
         // then
         assertSoftly(sut) {
             kDoc shouldNotBeEqualTo null
-            hasKDoc() shouldBeEqualTo true
+            hasKDoc shouldBeEqualTo true
         }
     }
 

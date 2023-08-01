@@ -29,7 +29,11 @@ private fun <E : KoBaseProvider> Sequence<E>.assert(function: (E) -> Boolean?, p
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
-            function(it)
+            if (function(it) == null) {
+                positiveCheck
+            } else {
+                function(it)
+            }
         }
 
         getResult(notSuppressedDeclarations, result, positiveCheck, getTestMethodNameFromFifthIndex())

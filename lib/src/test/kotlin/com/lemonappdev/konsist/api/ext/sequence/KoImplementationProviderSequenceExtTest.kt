@@ -11,10 +11,10 @@ class KoImplementationProviderSequenceExtTest {
     fun `withImplementation() returns declaration with implementation`() {
         // given
         val declaration1: KoImplementationProvider = mockk {
-            every { hasImplementation() } returns true
+            every { hasImplementation } returns true
         }
         val declaration2: KoImplementationProvider = mockk {
-            every { hasImplementation() } returns false
+            every { hasImplementation } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
@@ -29,10 +29,10 @@ class KoImplementationProviderSequenceExtTest {
     fun `withoutImplementation() returns declaration without implementation`() {
         // given
         val declaration1: KoImplementationProvider = mockk {
-            every { hasImplementation() } returns true
+            every { hasImplementation } returns true
         }
         val declaration2: KoImplementationProvider = mockk {
-            every { hasImplementation() } returns false
+            every { hasImplementation } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 

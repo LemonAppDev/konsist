@@ -7,11 +7,11 @@ import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
  *
  * @return A sequence containing the top-level declarations.
  */
-fun <T : KoTopLevelProvider> Sequence<T>.withTopLevel(): Sequence<T> = filter { it.isTopLevel() }
+fun <T : KoTopLevelProvider> Sequence<T>.withTopLevel(): Sequence<T> = filter { it.isTopLevel }
 
 /**
  * Sequence containing the non-top level declarations.
  *
  * @return A sequence containing the non-top level declarations.
  */
-fun <T : KoTopLevelProvider> Sequence<T>.withoutTopLevel(): Sequence<T> = filterNot { it.isTopLevel() }
+fun <T : KoTopLevelProvider> Sequence<T>.withoutTopLevel(): Sequence<T> = filterNot { it.isTopLevel }

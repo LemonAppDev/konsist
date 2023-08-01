@@ -13,7 +13,7 @@ class KoPropertyDeclarationForKoExtensionProviderTest {
             .first()
 
         // then
-        sut.isExtension() shouldBeEqualTo true
+        sut.isExtension shouldBeEqualTo true
     }
 
     @Test
@@ -24,7 +24,7 @@ class KoPropertyDeclarationForKoExtensionProviderTest {
             .first()
 
         // then
-        sut.isExtension() shouldBeEqualTo false
+        sut.isExtension shouldBeEqualTo false
     }
 
     private fun getSnippetFile(fileName: String) =

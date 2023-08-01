@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
  */
 fun <T : KoExplicitReturnTypeProvider> Sequence<T>.withExplicitReturnType(vararg types: String): Sequence<T> = filter {
     when {
-        types.isEmpty() -> it.hasExplicitReturnType()
+        types.isEmpty() -> it.hasExplicitReturnType
         else -> types.any { type -> it.explicitReturnType?.name == type }
     }
 }
@@ -24,7 +24,7 @@ fun <T : KoExplicitReturnTypeProvider> Sequence<T>.withExplicitReturnType(vararg
  */
 fun <T : KoExplicitReturnTypeProvider> Sequence<T>.withoutExplicitReturnType(vararg types: String): Sequence<T> = filter {
     when {
-        types.isEmpty() -> !it.hasExplicitReturnType()
+        types.isEmpty() -> !it.hasExplicitReturnType
         else -> types.none { type -> it.explicitReturnType?.name == type }
     }
 }

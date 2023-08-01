@@ -17,7 +17,7 @@ class KoFunctionDeclarationForKoLocalDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             containsLocalDeclarations("sampleLocalProperty") shouldBeEqualTo false
-            localDeclarations()
+            localDeclarations
                 .toList()
                 .filterIsInstance<KoNameProvider>()
                 .shouldBeEqualTo(emptyList())
@@ -37,7 +37,7 @@ class KoFunctionDeclarationForKoLocalDeclarationProviderTest {
             containsLocalDeclarations("sampleLocalFunction") shouldBeEqualTo true
             containsLocalDeclarations("SampleLocalClass") shouldBeEqualTo true
             containsLocalDeclarations("sampleOtherDeclaration") shouldBeEqualTo false
-            localDeclarations()
+            localDeclarations
                 .toList()
                 .filterIsInstance<KoNameProvider>()
                 .map { it.name }
