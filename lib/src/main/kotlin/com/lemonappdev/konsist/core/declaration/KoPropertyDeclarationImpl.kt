@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProv
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoExplicitTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
+import com.lemonappdev.konsist.core.provider.KoImplementationProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
@@ -43,6 +44,7 @@ internal class KoPropertyDeclarationImpl private constructor(
     KoDelegateProviderCore,
     KoExplicitTypeProviderCore,
     KoExtensionProviderCore,
+    KoImplementationProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
     KoModifierProviderCore,
@@ -68,6 +70,8 @@ internal class KoPropertyDeclarationImpl private constructor(
     override val psiElement: PsiElement by lazy { ktProperty }
 
     override val ktElement: KtElement by lazy { ktProperty }
+
+    override val hasImplementation: Boolean = ktProperty.hasBody()
 
     override val delegateName: String? by lazy {
         ktProperty

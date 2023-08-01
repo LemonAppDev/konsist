@@ -1,0 +1,4 @@
+interface SampleInterface {
+    val sampleProperty: Int
+        get() = 6
+}
