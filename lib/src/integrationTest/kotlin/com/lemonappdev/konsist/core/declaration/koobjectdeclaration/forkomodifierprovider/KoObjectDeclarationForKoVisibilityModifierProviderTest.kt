@@ -27,45 +27,7 @@ class KoObjectDeclarationForKoVisibilityModifierProviderTest {
             hasPrivateModifier shouldBeEqualTo false
             hasProtectedModifier shouldBeEqualTo false
             hasInternalModifier shouldBeEqualTo false
-            hasDataModifier shouldBeEqualTo false
-            hasCompanionModifier shouldBeEqualTo false
         }
-    }
-
-    @Test
-    fun `object-has-private-and-data-modifiers`() {
-        // given
-        val sut = getSnippetFile("object-has-private-and-data-modifiers")
-            .objects(includeNested = true)
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            numModifiers shouldBeEqualTo 2
-            hasModifiers() shouldBeEqualTo true
-            hasModifiers(PRIVATE) shouldBeEqualTo true
-            hasModifiers(DATA) shouldBeEqualTo true
-            hasModifiers(OPEN) shouldBeEqualTo false
-            hasModifiers(PRIVATE, DATA) shouldBeEqualTo true
-            hasModifiers(DATA, PRIVATE) shouldBeEqualTo true
-            hasModifiers(PRIVATE, OPEN) shouldBeEqualTo false
-            hasModifiers(OPEN, DATA, PRIVATE) shouldBeEqualTo false
-        }
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideValues")
-    fun `object-modifiers`(
-        fileName: String,
-        modifiers: List<KoModifier>,
-    ) {
-        // given
-        val sut = getSnippetFile(fileName)
-            .objects(includeNested = true)
-            .first()
-
-        // then
-        sut.modifiers shouldBeEqualTo modifiers
     }
 
     @Test
@@ -126,40 +88,6 @@ class KoObjectDeclarationForKoVisibilityModifierProviderTest {
         sut.hasInternalModifier shouldBeEqualTo true
     }
 
-    @Test
-    fun `data-object`() {
-        // given
-        val sut = getSnippetFile("data-object")
-            .objects()
-            .first()
-
-        // then
-        sut.hasDataModifier shouldBeEqualTo true
-    }
-
-    @Test
-    fun `companion-object`() {
-        // given
-        val sut = getSnippetFile("companion-object")
-            .objects(includeNested = true)
-            .first()
-
-        // then
-        sut.hasCompanionModifier shouldBeEqualTo true
-    }
-
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koobjectdeclaration/snippet/forkomodifierprovider/", fileName)
-
-    companion object {
-        @Suppress("unused")
-        @JvmStatic
-        fun provideValues() = listOf(
-            arguments("object-has-modifiers-and-annotation-with-parameter", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-annotation-without-parameter", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-annotation-and-comment", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-annotations", listOf(PRIVATE, DATA)),
-            arguments("object-has-modifiers-and-annotation-with-angle-brackets", listOf(PRIVATE, DATA)),
-        )
-    }
+        getSnippetKoScope("core/declaration/koobjectdeclaration/forkomodifierprovider/snippet/forkovisibilitymodifierprovider/", fileName)
 }
