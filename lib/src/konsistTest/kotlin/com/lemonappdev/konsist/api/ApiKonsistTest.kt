@@ -12,14 +12,14 @@ class ApiKonsistTest {
         apiPackageScope
             .declarations(includeNested = true)
             .filterIsInstance<KoKDocProvider>()
-            .assert { it.hasKDoc() }
+            .assert { it.hasKDoc }
     }
 
     @Test
     fun `every api declaration has explicit return type`() {
         apiPackageScope
             .functions(includeNested = true)
-            .assert { it.hasExplicitReturnType() }
+            .assert { it.hasExplicitReturnType }
     }
 
     @Test
@@ -34,7 +34,7 @@ class ApiKonsistTest {
                 } else if (it.explicitReturnType?.name != "Unit") {
                     it.kDoc?.hasTags(RETURN)
                 } else {
-                    it.hasKDoc()
+                    it.hasKDoc
                 }
             }
     }

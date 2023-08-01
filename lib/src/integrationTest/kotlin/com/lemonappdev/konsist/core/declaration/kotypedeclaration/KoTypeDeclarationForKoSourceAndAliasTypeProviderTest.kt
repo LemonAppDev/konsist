@@ -21,7 +21,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo null
-            it?.isAlias() shouldBeEqualTo false
+            it?.isAlias shouldBeEqualTo false
         }
     }
 
@@ -40,7 +40,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo null
-            it?.isAlias() shouldBeEqualTo false
+            it?.isAlias shouldBeEqualTo false
         }
     }
 
@@ -59,7 +59,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo "ImportAlias"
-            it?.isAlias() shouldBeEqualTo true
+            it?.isAlias shouldBeEqualTo true
         }
     }
 
@@ -78,7 +78,7 @@ class KoTypeDeclarationForKoSourceAndAliasTypeProviderTest {
         assertSoftly(sut) {
             it?.sourceType shouldBeEqualTo "SampleType"
             it?.aliasType shouldBeEqualTo "ImportAlias"
-            it?.isAlias() shouldBeEqualTo true
+            it?.isAlias shouldBeEqualTo true
         }
     }
 

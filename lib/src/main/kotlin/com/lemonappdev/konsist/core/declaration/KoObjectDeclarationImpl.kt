@@ -78,7 +78,7 @@ internal class KoObjectDeclarationImpl(
     override val ktClassOrObject: KtClassOrObject by lazy { ktObjectDeclaration }
 
     override val name: String by lazy {
-        if (hasCompanionModifier() && super<KoNameProviderCore>.name == "") {
+        if (hasCompanionModifier && super<KoNameProviderCore>.name == "") {
             "Companion"
         } else {
             super<KoNameProviderCore>.name
