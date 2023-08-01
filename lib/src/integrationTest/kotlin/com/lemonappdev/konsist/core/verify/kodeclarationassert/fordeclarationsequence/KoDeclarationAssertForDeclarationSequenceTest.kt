@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.core.verify.kodeclarationassert.fordeclarationsequence
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.sequence.withPrimaryConstructor
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
