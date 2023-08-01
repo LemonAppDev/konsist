@@ -29,6 +29,6 @@ class KoPropertyProviderListExtTest {
         val sut = declarations.properties(includeNested = true, includeLocal = false)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(property1, property2, property3)
+        sut shouldBeEqualTo listOf(property1, property2, property3)
     }
 }

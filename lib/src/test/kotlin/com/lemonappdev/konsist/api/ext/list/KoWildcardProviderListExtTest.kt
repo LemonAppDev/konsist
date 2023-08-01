@@ -22,7 +22,7 @@ class KoWildcardProviderListExtTest {
         val sut = imports.withWildcard()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(import1)
+        sut shouldBeEqualTo listOf(import1)
     }
 
     @Test
@@ -40,6 +40,6 @@ class KoWildcardProviderListExtTest {
         val sut = imports.withoutWildcard()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(import2)
+        sut shouldBeEqualTo listOf(import2)
     }
 }

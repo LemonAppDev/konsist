@@ -24,7 +24,7 @@ class KoSecondaryConstructorsProviderListExtTest {
         val sut = declarations.withSecondaryConstructors()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -42,6 +42,6 @@ class KoSecondaryConstructorsProviderListExtTest {
         val sut = declarations.withoutSecondaryConstructors()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 }

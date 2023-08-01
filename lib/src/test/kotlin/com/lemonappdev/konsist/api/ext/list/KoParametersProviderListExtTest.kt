@@ -24,7 +24,7 @@ class KoParametersProviderListExtTest {
         val sut = declarations.withParameters()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -43,7 +43,7 @@ class KoParametersProviderListExtTest {
         val sut = declarations.withoutParameters()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -69,7 +69,7 @@ class KoParametersProviderListExtTest {
         val sut = declarations.withAllParameters(parameter1, parameter2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -95,7 +95,7 @@ class KoParametersProviderListExtTest {
         val sut = declarations.withoutAllParameters(parameter1, parameter2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -114,7 +114,7 @@ class KoParametersProviderListExtTest {
         val sut = declarations.withSomeParameters(parameter)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -140,7 +140,7 @@ class KoParametersProviderListExtTest {
         val sut = declarations.withSomeParameters(parameter1, parameter2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -159,7 +159,7 @@ class KoParametersProviderListExtTest {
         val sut = declarations.withoutSomeParameters(parameter)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -185,6 +185,6 @@ class KoParametersProviderListExtTest {
         val sut = declarations.withoutSomeParameters(parameter1, parameter2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }

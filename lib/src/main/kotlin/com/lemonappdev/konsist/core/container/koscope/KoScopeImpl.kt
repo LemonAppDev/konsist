@@ -95,14 +95,13 @@ class KoScopeImpl(
     }
 
     override fun toString(): String = files
-        .toList()
         .joinToString("\n") { it.path }
 
     override fun print() {
         println(toString())
     }
 
-    override fun equals(other: Any?): Boolean = other is KoScope && files.toList() == other.files.toList()
+    override fun equals(other: Any?): Boolean = other is KoScope && files == other.files
 
-    override fun hashCode(): Int = 31 * 7 + files.toList().hashCode()
+    override fun hashCode(): Int = 31 * 7 + files.hashCode()
 }

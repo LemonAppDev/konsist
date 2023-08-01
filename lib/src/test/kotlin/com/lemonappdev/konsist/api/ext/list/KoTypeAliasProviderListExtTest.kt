@@ -22,7 +22,7 @@ class KoTypeAliasProviderListExtTest {
         val sut = files.withTypeAliases()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut shouldBeEqualTo listOf(file1)
     }
 
     @Test
@@ -40,7 +40,7 @@ class KoTypeAliasProviderListExtTest {
         val sut = files.withoutTypeAliases()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut shouldBeEqualTo listOf(file2)
     }
 
     @Test
@@ -60,7 +60,7 @@ class KoTypeAliasProviderListExtTest {
         val sut = files.withAllTypeAliases(typeAlias1, typeAlias2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut shouldBeEqualTo listOf(file1)
     }
 
     @Test
@@ -80,7 +80,7 @@ class KoTypeAliasProviderListExtTest {
         val sut = files.withoutAllTypeAliases(typeAlias1, typeAlias2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut shouldBeEqualTo listOf(file2)
     }
 
     @Test
@@ -99,7 +99,7 @@ class KoTypeAliasProviderListExtTest {
         val sut = files.withSomeTypeAliases(typeAlias)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut shouldBeEqualTo listOf(file1)
     }
 
     @Test
@@ -125,7 +125,7 @@ class KoTypeAliasProviderListExtTest {
         val sut = files.withSomeTypeAliases(typeAlias1, typeAlias2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1, file2)
+        sut shouldBeEqualTo listOf(file1, file2)
     }
 
     @Test
@@ -144,7 +144,7 @@ class KoTypeAliasProviderListExtTest {
         val sut = files.withoutSomeTypeAliases(typeAlias)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut shouldBeEqualTo listOf(file2)
     }
 
     @Test
@@ -170,6 +170,6 @@ class KoTypeAliasProviderListExtTest {
         val sut = files.withoutSomeTypeAliases(typeAlias1, typeAlias2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file3)
+        sut shouldBeEqualTo listOf(file3)
     }
 }

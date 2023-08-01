@@ -33,7 +33,7 @@ internal interface KoImportProviderCore : KoImportProvider, KoParentProviderCore
         }
 
     override fun hasImports(vararg names: String): Boolean = when {
-        names.isEmpty() -> imports.toList().isNotEmpty()
+        names.isEmpty() -> imports.isNotEmpty()
         else -> names.all {
             imports.any { import -> LocationUtil.resideInLocation(it, import.name) }
         }

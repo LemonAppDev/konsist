@@ -27,7 +27,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withParentInterfaces()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -45,7 +45,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withoutParentInterfaces()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -64,7 +64,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withAllParentInterfaces(name)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -83,7 +83,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withoutAllParentInterfaces(name)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -103,7 +103,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withAllParentInterfaces(name1, name2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -124,7 +124,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withoutAllParentInterfaces(name1, name2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -143,7 +143,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withSomeParentInterfaces(name)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -169,7 +169,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withSomeParentInterfaces(name1, name2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -188,7 +188,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withoutSomeParentInterfaces(name)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -214,7 +214,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withoutSomeParentInterfaces(name1, name2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -241,7 +241,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withAllParentInterfacesOf(SampleInterface1::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -275,7 +275,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withAllParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -302,7 +302,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withoutAllParentInterfacesOf(SampleInterface1::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -336,7 +336,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withoutAllParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -363,7 +363,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withSomeParentInterfacesOf(SampleInterface1::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -397,7 +397,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withSomeParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -424,7 +424,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withoutSomeParentInterfacesOf(SampleInterface1::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -458,7 +458,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withoutSomeParentInterfacesOf(SampleInterface1::class, SampleInterface2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -484,7 +484,7 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withParentInterfaceOf<SampleInterface>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -510,6 +510,6 @@ class KoParentInterfaceProviderListExtTest {
         val sut = declarations.withoutParentInterfaceOf<SampleInterface>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 }

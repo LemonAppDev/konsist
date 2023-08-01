@@ -25,7 +25,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withModifiers()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -43,7 +43,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutModifiers()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -63,7 +63,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withAllModifiers(modifier1, modifier2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -83,7 +83,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutAllModifiers(modifier1, modifier2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -102,7 +102,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withSomeModifiers(modifier)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -128,7 +128,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withSomeModifiers(modifier1, modifier2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -147,7 +147,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutSomeModifiers(modifier)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -173,7 +173,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutSomeModifiers(modifier1, modifier2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -191,7 +191,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withPublicModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -209,7 +209,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutPublicModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -227,7 +227,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withPublicOrDefaultModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -245,7 +245,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutPublicOrDefaultModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -263,7 +263,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withPrivateModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -281,7 +281,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutPrivateModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -299,7 +299,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withProtectedModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -317,7 +317,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutProtectedModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -335,7 +335,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withInternalModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -353,7 +353,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutInternalModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -371,7 +371,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withEnumModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -389,7 +389,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutEnumModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -407,7 +407,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withSealedModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -425,7 +425,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutSealedModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -443,7 +443,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withInnerModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -461,7 +461,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutInnerModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -479,7 +479,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withValueModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -497,7 +497,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutValueModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -515,7 +515,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withAnnotationModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -533,7 +533,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutAnnotationModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -551,7 +551,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withDataModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -569,7 +569,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutDataModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -587,7 +587,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withActualModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -605,7 +605,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutActualModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -623,7 +623,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withExpectModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -641,7 +641,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutExpectModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -659,7 +659,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withAbstractModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -677,7 +677,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutAbstractModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -695,7 +695,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withOpenModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -713,7 +713,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutOpenModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -731,7 +731,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withFinalModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -749,7 +749,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutFinalModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -767,7 +767,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withVarargModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -785,7 +785,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutVarargModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -803,7 +803,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withNoInlineModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -821,7 +821,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutNoInlineModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -839,7 +839,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withCrossInlineModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -857,7 +857,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutCrossInlineModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -875,7 +875,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withOperatorModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -893,7 +893,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutOperatorModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -911,7 +911,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withInlineModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -929,7 +929,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutInlineModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -947,7 +947,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withTailrecModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -965,7 +965,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutTailrecModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -983,7 +983,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withInfixModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -1001,7 +1001,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutInfixModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -1019,7 +1019,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withExternalModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -1037,7 +1037,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutExternalModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -1055,7 +1055,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withSuspendModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -1073,7 +1073,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutSuspendModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -1091,7 +1091,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withOverrideModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -1109,7 +1109,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutOverrideModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -1127,7 +1127,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withFunModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -1145,7 +1145,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutFunModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -1163,7 +1163,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withLateinitModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -1181,7 +1181,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutLateinitModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -1199,7 +1199,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withConstModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -1217,7 +1217,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutConstModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -1235,7 +1235,7 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withCompanionModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -1253,6 +1253,6 @@ class KoModifierProviderListExtTest {
         val sut = declarations.withoutCompanionModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 }

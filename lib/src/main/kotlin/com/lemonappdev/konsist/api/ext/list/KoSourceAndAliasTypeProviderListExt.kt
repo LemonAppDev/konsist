@@ -84,7 +84,7 @@ inline fun <reified T> List<KoSourceAndAliasTypeProvider>.withoutAliasTypeOf(): 
  * @return A list containing declarations with the alias type matching any of the specified types.
  */
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(vararg names: KClass<*>): List<T> = filter {
-    names.any { kClass -> it.isAlias() && it.sourceType == kClass.simpleName }
+    names.any { kClass -> it.isAlias && it.sourceType == kClass.simpleName }
 }
 
 /**
@@ -94,7 +94,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(vararg names: KCl
  * @return A list containing declarations without alias type matching any of the specified types.
  */
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutAliasTypeOf(vararg names: KClass<*>): List<T> = filter {
-    names.none { kClass -> it.isAlias() && it.sourceType == kClass.simpleName }
+    names.none { kClass -> it.isAlias && it.sourceType == kClass.simpleName }
 }
 
 /**
@@ -106,7 +106,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutAliasTypeOf(vararg names: 
  */
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasType(vararg names: String): List<T> = filter {
     when {
-        names.isEmpty() -> it.isAlias()
+        names.isEmpty() -> it.isAlias
         else -> names.any { name -> it.aliasType == name }
     }
 }
@@ -120,7 +120,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasType(vararg names: Strin
  */
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutAliasType(vararg names: String): List<T> = filter {
     when {
-        names.isEmpty() -> !it.isAlias()
+        names.isEmpty() -> !it.isAlias
         else -> names.none { name -> it.aliasType == name }
     }
 }

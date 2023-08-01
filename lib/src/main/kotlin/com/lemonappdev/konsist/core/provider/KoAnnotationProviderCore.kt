@@ -25,7 +25,7 @@ internal interface KoAnnotationProviderCore :
         }
 
     override fun hasAnnotations(vararg names: String): Boolean = when {
-        names.isEmpty() -> annotations.toList().isNotEmpty()
+        names.isEmpty() -> annotations.isNotEmpty()
         else -> names.all {
             annotations.any { annotation -> annotation.representsType(it) }
         }

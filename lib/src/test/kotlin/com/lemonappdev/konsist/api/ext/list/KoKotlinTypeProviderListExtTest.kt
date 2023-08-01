@@ -22,7 +22,7 @@ class KoKotlinTypeProviderListExtTest {
         val sut = types.withKotlinType()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(type1)
+        sut shouldBeEqualTo listOf(type1)
     }
 
     @Test
@@ -40,6 +40,6 @@ class KoKotlinTypeProviderListExtTest {
         val sut = types.withoutKotlinType()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(type2)
+        sut shouldBeEqualTo listOf(type2)
     }
 }

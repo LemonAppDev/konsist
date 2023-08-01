@@ -23,7 +23,7 @@ internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProvider
         }
 
     override fun hasTypeAliases(vararg names: String): Boolean = when {
-        names.isEmpty() -> typeAliases.toList().isNotEmpty()
+        names.isEmpty() -> typeAliases.isNotEmpty()
         else -> names.all {
             typeAliases.any { typeAlias -> typeAlias.name == it }
         }

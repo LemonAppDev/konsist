@@ -25,7 +25,7 @@ class KoExplicitTypeProviderListExtTest {
         val sut = declarations.withExplicitType()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -51,7 +51,7 @@ class KoExplicitTypeProviderListExtTest {
         val sut = declarations.withExplicitType(typeName1, typeName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -69,7 +69,7 @@ class KoExplicitTypeProviderListExtTest {
         val sut = declarations.withoutExplicitType()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -95,7 +95,7 @@ class KoExplicitTypeProviderListExtTest {
         val sut = declarations.withoutExplicitType(typeName1, typeName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -115,7 +115,7 @@ class KoExplicitTypeProviderListExtTest {
         val sut = declarations.withExplicitTypeOf<SampleType>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -135,7 +135,7 @@ class KoExplicitTypeProviderListExtTest {
         val sut = declarations.withoutExplicitTypeOf<SampleType>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -159,7 +159,7 @@ class KoExplicitTypeProviderListExtTest {
         val sut = declarations.withExplicitTypeOf(SampleType1::class, SampleType2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -183,6 +183,6 @@ class KoExplicitTypeProviderListExtTest {
         val sut = declarations.withoutExplicitTypeOf(SampleType1::class, SampleType2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }

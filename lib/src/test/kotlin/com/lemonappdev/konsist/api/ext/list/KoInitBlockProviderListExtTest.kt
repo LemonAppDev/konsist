@@ -23,7 +23,7 @@ class KoInitBlockProviderListExtTest {
         val sut = declarations.withInitBlocks()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -41,6 +41,6 @@ class KoInitBlockProviderListExtTest {
         val sut = declarations.withoutInitBlocks()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 }

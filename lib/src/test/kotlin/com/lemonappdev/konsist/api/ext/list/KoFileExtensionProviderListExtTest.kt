@@ -24,7 +24,7 @@ class KoFileExtensionProviderListExtTest {
         val sut = file.withExtension(extension)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut shouldBeEqualTo listOf(file1)
     }
 
     @Test
@@ -54,7 +54,7 @@ class KoFileExtensionProviderListExtTest {
         val sut = file.withExtension(extension1, extension2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1, file2)
+        sut shouldBeEqualTo listOf(file1, file2)
     }
 
     @Test
@@ -73,7 +73,7 @@ class KoFileExtensionProviderListExtTest {
         val sut = file.withoutExtension(extension)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut shouldBeEqualTo listOf(file2)
     }
 
     @Test
@@ -103,6 +103,6 @@ class KoFileExtensionProviderListExtTest {
         val sut = file.withoutExtension(extension1, extension2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file3)
+        sut shouldBeEqualTo listOf(file3)
     }
 }

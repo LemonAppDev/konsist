@@ -22,7 +22,7 @@ class KoGenericTypeProviderListExtTest {
         val sut = types.withGenericType()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(type1)
+        sut shouldBeEqualTo listOf(type1)
     }
 
     @Test
@@ -40,6 +40,6 @@ class KoGenericTypeProviderListExtTest {
         val sut = types.withoutGenericType()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(type2)
+        sut shouldBeEqualTo listOf(type2)
     }
 }

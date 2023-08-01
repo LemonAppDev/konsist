@@ -29,6 +29,6 @@ class KoObjectProviderListExtTest {
         val sut = declarations.objects(includeNested = true)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(object1, object2, object3)
+        sut shouldBeEqualTo listOf(object1, object2, object3)
     }
 }

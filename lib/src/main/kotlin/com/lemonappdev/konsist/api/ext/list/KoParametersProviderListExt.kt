@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoParametersProvider
  *
  * @return A list containing declarations with any parameter.
  */
-fun <T : KoParametersProvider> List<T>.withParameters(): List<T> = filter { it.parameters.toList().isNotEmpty() }
+fun <T : KoParametersProvider> List<T>.withParameters(): List<T> = filter { it.parameters.isNotEmpty() }
 
 /**
  * A list containing declarations with specified parameters.
@@ -36,7 +36,7 @@ fun <T : KoParametersProvider> List<T>.withSomeParameters(name: String, vararg n
  *
  * @return A list containing declarations with no parameters.
  */
-fun <T : KoParametersProvider> List<T>.withoutParameters(): List<T> = filter { it.parameters.toList().isEmpty() }
+fun <T : KoParametersProvider> List<T>.withoutParameters(): List<T> = filter { it.parameters.isEmpty() }
 
 /**
  * List containing all declarations without all specified parameters.

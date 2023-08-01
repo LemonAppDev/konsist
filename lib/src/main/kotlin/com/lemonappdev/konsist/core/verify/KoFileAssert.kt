@@ -28,7 +28,7 @@ private fun <E : KoFile> List<E>.assert(function: (E) -> Boolean?, positiveCheck
         checkIfLocalListIsEmpty(this, "File", getTestMethodNameFromFourthIndex())
 
         val notSuppressedFiles = this
-            .filterNot { checkIfSuppressed(it, getTestMethodNameFromFifthIndex()) }
+            .filterNot { checkIfSuppressed(it, getTestMethodNameFromFifthIndex(), "@file:Suppress(") }
 
         val result = notSuppressedFiles.groupBy {
             lastFile = it

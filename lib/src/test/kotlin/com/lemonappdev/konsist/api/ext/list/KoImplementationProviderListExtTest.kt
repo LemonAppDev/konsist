@@ -22,7 +22,7 @@ class KoImplementationProviderListExtTest {
         val sut = declarations.withImplementation()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -40,6 +40,6 @@ class KoImplementationProviderListExtTest {
         val sut = declarations.withoutImplementation()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 }

@@ -31,7 +31,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withSourceTypeOf<SampleClass>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -51,7 +51,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withoutSourceTypeOf<SampleClass>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -75,7 +75,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withSourceTypeOf(SampleClass1::class, SampleClass2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -99,7 +99,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withoutSourceTypeOf(SampleClass1::class, SampleClass2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -119,7 +119,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withSourceType(sourceType1)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -143,7 +143,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withSourceType(sourceType1, sourceType2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -163,7 +163,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withoutSourceType(sourceType1)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -187,7 +187,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withoutSourceType(sourceType1, sourceType2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -205,7 +205,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withAliasType()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -223,7 +223,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withoutAliasType()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -247,7 +247,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withAliasType(importAliasName1, importAliasName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -271,7 +271,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withoutAliasType(importAliasName1, importAliasName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -301,7 +301,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withAliasTypeOf<SampleType>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -331,7 +331,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withoutAliasTypeOf<SampleType>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2, declaration3, type4)
+        sut shouldBeEqualTo listOf(declaration2, declaration3, type4)
     }
 
     @Test
@@ -362,7 +362,7 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withAliasTypeOf(SampleType1::class, SampleType2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -393,6 +393,6 @@ class KoSourceAndAliasTypeProviderListExtTest {
         val sut = declarations.withoutAliasTypeOf(SampleType1::class, SampleType2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3, type4)
+        sut shouldBeEqualTo listOf(declaration3, type4)
     }
 }

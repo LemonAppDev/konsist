@@ -25,7 +25,7 @@ class KoKDocProviderListExtTest {
         val sut = declarations.withKDoc()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -43,7 +43,7 @@ class KoKDocProviderListExtTest {
         val sut = declarations.withoutKDoc()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -68,7 +68,7 @@ class KoKDocProviderListExtTest {
         val sut = declarations.withKDocWithTags()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -93,7 +93,7 @@ class KoKDocProviderListExtTest {
         val sut = declarations.withoutKDocWithTags()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -118,7 +118,7 @@ class KoKDocProviderListExtTest {
         val sut = declarations.withKDocWithAllTags(tag)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -144,7 +144,7 @@ class KoKDocProviderListExtTest {
         val sut = declarations.withKDocWithAllTags(tag1, tag2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -169,7 +169,7 @@ class KoKDocProviderListExtTest {
         val sut = declarations.withoutKDocWithAllTags(tag)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -195,7 +195,7 @@ class KoKDocProviderListExtTest {
         val sut = declarations.withoutKDocWithAllTags(tag1, tag2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -220,7 +220,7 @@ class KoKDocProviderListExtTest {
         val sut = declarations.withKDocWithSomeTags(tag)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -255,7 +255,7 @@ class KoKDocProviderListExtTest {
         val sut = declarations.withKDocWithSomeTags(tag1, tag2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -280,7 +280,7 @@ class KoKDocProviderListExtTest {
         val sut = declarations.withoutKDocWithSomeTags(tag)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -315,6 +315,6 @@ class KoKDocProviderListExtTest {
         val sut = declarations.withoutKDocWithSomeTags(tag1, tag2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }

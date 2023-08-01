@@ -14,5 +14,5 @@ internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProvide
         includeNested: Boolean,
     ): Boolean = objects(includeNested).any { it.name == name }
 
-    override fun numObjects(includeNested: Boolean): Int = objects(includeNested).toList().size
+    override fun numObjects(includeNested: Boolean): Int = objects(includeNested).size
 }

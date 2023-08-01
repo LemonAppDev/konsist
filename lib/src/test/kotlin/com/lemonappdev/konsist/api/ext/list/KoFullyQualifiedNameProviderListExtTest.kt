@@ -24,7 +24,7 @@ class KoFullyQualifiedNameProviderListExtTest {
         val sut = declarations.withFullyQualifiedName(fullyQualifiedName1)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -48,7 +48,7 @@ class KoFullyQualifiedNameProviderListExtTest {
         val sut = declarations.withFullyQualifiedName(fullyQualifiedName1, fullyQualifiedName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -68,7 +68,7 @@ class KoFullyQualifiedNameProviderListExtTest {
         val sut = declarations.withoutFullyQualifiedName(fullyQualifiedName1)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -92,6 +92,6 @@ class KoFullyQualifiedNameProviderListExtTest {
         val sut = declarations.withoutFullyQualifiedName(fullyQualifiedName1, fullyQualifiedName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }

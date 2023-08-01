@@ -24,7 +24,6 @@ internal fun KoArchitectureScope.assert() {
             .all {
                 files
                     .withPackage(it.definedBy)
-                    .toList()
                     .isNotEmpty()
             }
 
@@ -34,7 +33,6 @@ internal fun KoArchitectureScope.assert() {
                 .first {
                     files
                         .withPackage(it.definedBy)
-                        .toList()
                         .isEmpty()
                 }
             throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
@@ -62,13 +60,13 @@ internal fun KoArchitectureScope.assert() {
         val failedLayers = mutableListOf<Layer>()
 
         result.forEach { (t, u) ->
-            if (u.toList().isNotEmpty()) {
+            if (u.isNotEmpty()) {
                 failedLayers += t
             }
         }
 
         val filtered = result
-            .filter { it.value.toList().isNotEmpty() }
+            .filter { it.value.isNotEmpty() }
 
         val allChecksPassed = failedLayers.isEmpty()
 

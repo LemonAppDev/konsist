@@ -22,7 +22,7 @@ class KoDelegateProviderListExtTest {
         val sut = declarations.withDelegate()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -48,7 +48,7 @@ class KoDelegateProviderListExtTest {
         val sut = declarations.withDelegate(delegateName1, delegateName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -66,7 +66,7 @@ class KoDelegateProviderListExtTest {
         val sut = declarations.withoutDelegate()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -92,6 +92,6 @@ class KoDelegateProviderListExtTest {
         val sut = declarations.withoutDelegate(delegateName1, delegateName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }

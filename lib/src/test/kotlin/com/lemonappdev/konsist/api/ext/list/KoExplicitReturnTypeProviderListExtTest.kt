@@ -25,7 +25,7 @@ class KoExplicitReturnTypeProviderListExtTest {
         val sut = declarations.withExplicitReturnType()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -49,7 +49,7 @@ class KoExplicitReturnTypeProviderListExtTest {
         val sut = declarations.withExplicitReturnType(typeName1, typeName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -67,7 +67,7 @@ class KoExplicitReturnTypeProviderListExtTest {
         val sut = declarations.withoutExplicitReturnType()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -91,7 +91,7 @@ class KoExplicitReturnTypeProviderListExtTest {
         val sut = declarations.withoutExplicitReturnType(typeName1, typeName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -111,7 +111,7 @@ class KoExplicitReturnTypeProviderListExtTest {
         val sut = declarations.withExplicitReturnTypeOf<SampleType>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -131,7 +131,7 @@ class KoExplicitReturnTypeProviderListExtTest {
         val sut = declarations.withoutExplicitReturnTypeOf<SampleType>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -155,7 +155,7 @@ class KoExplicitReturnTypeProviderListExtTest {
         val sut = declarations.withExplicitReturnTypeOf(SampleType1::class, SampleType2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -179,6 +179,6 @@ class KoExplicitReturnTypeProviderListExtTest {
         val sut = declarations.withoutExplicitReturnTypeOf(SampleType1::class, SampleType2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }

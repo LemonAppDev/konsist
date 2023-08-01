@@ -29,7 +29,7 @@ class KoAliasProviderListExtTest {
         val sut = declarations.withAlias()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -61,7 +61,7 @@ class KoAliasProviderListExtTest {
         val sut = declarations.withAlias(aliasName1, aliasName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -83,7 +83,7 @@ class KoAliasProviderListExtTest {
         val sut = declarations.withoutAlias()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -115,6 +115,6 @@ class KoAliasProviderListExtTest {
         val sut = declarations.withoutAlias(aliasName1, aliasName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3, declaration4)
+        sut shouldBeEqualTo listOf(declaration3, declaration4)
     }
 }

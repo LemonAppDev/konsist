@@ -23,7 +23,7 @@ internal interface KoInitBlockProviderCore : KoInitBlockProvider, KoParentProvid
         }
 
     override val numInitBlocks: Int
-        get() = initBlocks?.toList()?.size ?: 0
+        get() = initBlocks?.size ?: 0
 
     override val hasInitBlocks: Boolean
         get() = initBlocks != null

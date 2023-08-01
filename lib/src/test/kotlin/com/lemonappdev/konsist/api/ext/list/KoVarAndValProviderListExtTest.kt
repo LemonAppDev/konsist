@@ -22,7 +22,7 @@ class KoVarAndValProviderListExtTest {
         val sut = declarations.withVarModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -40,7 +40,7 @@ class KoVarAndValProviderListExtTest {
         val sut = declarations.withoutVarModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -58,7 +58,7 @@ class KoVarAndValProviderListExtTest {
         val sut = declarations.withValModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -76,6 +76,6 @@ class KoVarAndValProviderListExtTest {
         val sut = declarations.withoutValModifier()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 }

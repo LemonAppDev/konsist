@@ -345,6 +345,7 @@ class KoDeclarationAssertForProviderSequenceTest {
             getSnippetFile("assert-suppress-with-few-parameters")
                 .declarations(includeNested = true)
                 .filterIsInstance<KoModifierProvider>()
+                .asSequence()
 
         // then
         sut.assert { it.hasModifiers() }

@@ -25,7 +25,7 @@ class KoReceiverTypeProviderListExtTest {
         val sut = declarations.withReceiverType()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -51,7 +51,7 @@ class KoReceiverTypeProviderListExtTest {
         val sut = declarations.withReceiverType(typeName1, typeName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -69,7 +69,7 @@ class KoReceiverTypeProviderListExtTest {
         val sut = declarations.withoutReceiverType()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -95,7 +95,7 @@ class KoReceiverTypeProviderListExtTest {
         val sut = declarations.withoutReceiverType(typeName1, typeName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -114,7 +114,7 @@ class KoReceiverTypeProviderListExtTest {
         val sut = declarations.withReceiverTypeOf<SampleType>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -133,7 +133,7 @@ class KoReceiverTypeProviderListExtTest {
         val sut = declarations.withoutReceiverTypeOf<SampleType>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -159,7 +159,7 @@ class KoReceiverTypeProviderListExtTest {
         val sut = declarations.withReceiverTypeOf(SampleType1::class, SampleType2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -185,6 +185,6 @@ class KoReceiverTypeProviderListExtTest {
         val sut = declarations.withoutReceiverTypeOf(SampleType1::class, SampleType2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }

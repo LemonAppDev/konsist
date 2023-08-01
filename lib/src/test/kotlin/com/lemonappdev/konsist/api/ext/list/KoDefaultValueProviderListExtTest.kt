@@ -22,7 +22,7 @@ class KoDefaultValueProviderListExtTest {
         val sut = declarations.withDefaultValue()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -40,7 +40,7 @@ class KoDefaultValueProviderListExtTest {
         val sut = declarations.withoutDefaultValue()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -66,7 +66,7 @@ class KoDefaultValueProviderListExtTest {
         val sut = declarations.withDefaultValue(value1, value2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -92,6 +92,6 @@ class KoDefaultValueProviderListExtTest {
         val sut = declarations.withoutDefaultValue(value1, value2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }

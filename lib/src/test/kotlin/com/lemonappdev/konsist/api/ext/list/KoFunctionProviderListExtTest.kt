@@ -32,6 +32,6 @@ class KoFunctionProviderListExtTest {
         val sut = declarations.functions(includeNested = true, includeLocal = false)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(function1, function2, function3)
+        sut shouldBeEqualTo listOf(function1, function2, function3)
     }
 }

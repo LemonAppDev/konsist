@@ -52,7 +52,6 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
                     it
                 }
             }
-            .toList()
 
         if (moduleName == null && sourceSetName == null) {
             return localProjectKotlinFiles

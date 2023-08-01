@@ -29,7 +29,7 @@ internal interface KoParentInterfaceProviderCore :
         }
 
     override fun hasParentInterfaces(vararg names: String): Boolean = when {
-        names.isEmpty() -> parentInterfaces.toList().isNotEmpty()
+        names.isEmpty() -> parentInterfaces.isNotEmpty()
         else -> names.all {
             parentInterfaces.any { koParent -> it == koParent.name }
         }

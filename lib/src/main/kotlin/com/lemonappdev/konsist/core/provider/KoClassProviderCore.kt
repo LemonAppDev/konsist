@@ -17,5 +17,5 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
     ): Boolean =
         classes(includeNested).any { it.name == name }
 
-    override fun numClasses(includeNested: Boolean): Int = classes(includeNested).toList().size
+    override fun numClasses(includeNested: Boolean): Int = classes(includeNested).size
 }

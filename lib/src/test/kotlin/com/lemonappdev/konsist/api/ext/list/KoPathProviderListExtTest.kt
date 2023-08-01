@@ -23,7 +23,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withPath(path)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -42,7 +42,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withoutPath(path)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -68,7 +68,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withPath(path1, path2, absolutePath = true)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -94,7 +94,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withoutPath(path1, path2, absolutePath = true)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -120,7 +120,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withPath(projectPath1, projectPath2, absolutePath = false)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -146,7 +146,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withoutPath(projectPath1, projectPath2, absolutePath = false)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -165,7 +165,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withAbsolutePath(path)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -184,7 +184,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withoutAbsolutePath(path)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -210,7 +210,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withAbsolutePath(path1, path2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -236,7 +236,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withoutAbsolutePath(path1, path2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -255,7 +255,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withProjectPath(projectPath)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -274,7 +274,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withoutProjectPath(projectPath)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -300,7 +300,7 @@ class KoPathProviderListExtTest {
         val sut = declarations.withProjectPath(projectPath1, projectPath2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -326,6 +326,6 @@ class KoPathProviderListExtTest {
         val sut = declarations.withoutProjectPath(projectPath1, projectPath2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }

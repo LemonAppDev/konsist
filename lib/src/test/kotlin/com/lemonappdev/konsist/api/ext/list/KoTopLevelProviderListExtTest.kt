@@ -22,7 +22,7 @@ class KoTopLevelProviderListExtTest {
         val sut = declarations.withTopLevel()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -40,6 +40,6 @@ class KoTopLevelProviderListExtTest {
         val sut = declarations.withoutTopLevel()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 }

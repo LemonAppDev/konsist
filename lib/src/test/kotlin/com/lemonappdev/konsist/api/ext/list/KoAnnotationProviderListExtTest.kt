@@ -25,7 +25,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withAnnotations()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -43,7 +43,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withoutAnnotations()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -63,7 +63,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withAllAnnotations(annotation1, annotation2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -83,7 +83,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withoutAllAnnotations(annotation1, annotation2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -102,7 +102,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withSomeAnnotations(annotation)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -128,7 +128,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withSomeAnnotations(annotation1, annotation2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -147,7 +147,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withoutSomeAnnotations(annotation)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -173,7 +173,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withoutSomeAnnotations(annotation1, annotation2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -191,7 +191,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withAllAnnotationsOf(SampleAnnotation1::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -209,7 +209,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -227,7 +227,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withoutAllAnnotationsOf(SampleAnnotation1::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -245,7 +245,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withoutAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -269,7 +269,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withSomeAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -293,7 +293,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withoutSomeAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -311,7 +311,7 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withAnnotationOf<SampleAnnotation>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -330,6 +330,6 @@ class KoAnnotationProviderListExtTest {
         val sut = declarations.withoutAnnotationOf<SampleAnnotation>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 }

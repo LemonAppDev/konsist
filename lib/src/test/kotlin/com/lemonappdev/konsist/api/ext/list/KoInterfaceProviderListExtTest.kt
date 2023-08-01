@@ -29,6 +29,6 @@ class KoInterfaceProviderListExtTest {
         val sut = declarations.interfaces(includeNested = true)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(interface1, interface2, interface3)
+        sut shouldBeEqualTo listOf(interface1, interface2, interface3)
     }
 }

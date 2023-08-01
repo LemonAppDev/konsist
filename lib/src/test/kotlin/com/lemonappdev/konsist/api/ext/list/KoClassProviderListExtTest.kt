@@ -29,6 +29,6 @@ class KoClassProviderListExtTest {
         val sut = declarations.classes(includeNested = true, includeLocal = false)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class1, class2, class3)
+        sut shouldBeEqualTo listOf(class1, class2, class3)
     }
 }

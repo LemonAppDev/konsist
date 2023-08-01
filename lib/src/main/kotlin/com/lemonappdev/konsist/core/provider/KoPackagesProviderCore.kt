@@ -12,7 +12,7 @@ internal interface KoPackagesProviderCore : KoPackagesProvider, KoBaseProviderCo
         get() = koFiles.mapNotNull { it.packagee }
 
     override fun hasPackages(vararg names: String): Boolean = when {
-        names.isEmpty() -> packages.toList().isNotEmpty()
+        names.isEmpty() -> packages.isNotEmpty()
         else -> names.all {
             packages.any { packagee ->
                 LocationUtil.resideInLocation(it, packagee.fullyQualifiedName) || LocationUtil.resideInLocation(

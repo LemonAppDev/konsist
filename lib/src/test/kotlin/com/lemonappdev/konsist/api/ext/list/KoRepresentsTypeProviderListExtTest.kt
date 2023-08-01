@@ -26,7 +26,7 @@ class KoRepresentsTypeProviderListExtTest {
         val sut = declarations.withRepresentedType(type)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -52,7 +52,7 @@ class KoRepresentsTypeProviderListExtTest {
         val sut = declarations.withRepresentedType(type1, type2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -71,7 +71,7 @@ class KoRepresentsTypeProviderListExtTest {
         val sut = declarations.withoutRepresentedType(type1)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -97,7 +97,7 @@ class KoRepresentsTypeProviderListExtTest {
         val sut = declarations.withoutRepresentedType(type1, type2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -123,7 +123,7 @@ class KoRepresentsTypeProviderListExtTest {
         val sut = declarations.withRepresentedTypeOf(SampleClass1::class, SampleClass2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -149,7 +149,7 @@ class KoRepresentsTypeProviderListExtTest {
         val sut = declarations.withoutRepresentedTypeOf(SampleClass1::class, SampleClass2::class)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     //  'every { representsType<SampleClass>() } returns true' doesn't work because there is a bug in mockk
@@ -169,7 +169,7 @@ class KoRepresentsTypeProviderListExtTest {
         val sut = declarations.withRepresentedTypeOf<SampleClass>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -188,6 +188,6 @@ class KoRepresentsTypeProviderListExtTest {
         val sut = declarations.withoutRepresentedTypeOf<SampleClass>()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 }

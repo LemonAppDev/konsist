@@ -26,7 +26,7 @@ class KoHasPackageProviderListExtTest {
         val sut = files.withPackage()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut shouldBeEqualTo listOf(file1)
     }
 
     @Test
@@ -52,7 +52,7 @@ class KoHasPackageProviderListExtTest {
         val sut = files.withPackage(package1, package2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1, file2)
+        sut shouldBeEqualTo listOf(file1, file2)
     }
 
     @Test
@@ -70,7 +70,7 @@ class KoHasPackageProviderListExtTest {
         val sut = files.withoutPackage()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut shouldBeEqualTo listOf(file2)
     }
 
     @Test
@@ -96,6 +96,6 @@ class KoHasPackageProviderListExtTest {
         val sut = files.withoutPackage(package1, package2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file3)
+        sut shouldBeEqualTo listOf(file3)
     }
 }

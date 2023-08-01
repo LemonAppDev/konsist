@@ -17,5 +17,5 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
     ): Boolean = functions(includeNested, includeLocal).any { it.name == name }
 
     override fun numFunctions(includeNested: Boolean, includeLocal: Boolean): Int =
-        functions(includeNested, includeLocal).toList().size
+        functions(includeNested, includeLocal).size
 }

@@ -18,5 +18,5 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
         properties(includeNested, includeLocal).any { it.name == name }
 
     override fun numProperties(includeNested: Boolean, includeLocal: Boolean): Int =
-        properties(includeNested, includeLocal).toList().size
+        properties(includeNested, includeLocal).size
 }

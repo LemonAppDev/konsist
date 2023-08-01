@@ -7,11 +7,11 @@ import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
  *
  * @return A list containing declarations with the init block(s).
  */
-fun <T : KoInitBlockProvider> List<T>.withInitBlocks(): List<T> = filter { it.hasInitBlocks() }
+fun <T : KoInitBlockProvider> List<T>.withInitBlocks(): List<T> = filter { it.hasInitBlocks }
 
 /**
  * List containing all declarations that don't have init block(s).
  *
  * @return A list containing declarations without the init block(s).
  */
-fun <T : KoInitBlockProvider> List<T>.withoutInitBlocks(): List<T> = filterNot { it.hasInitBlocks() }
+fun <T : KoInitBlockProvider> List<T>.withoutInitBlocks(): List<T> = filterNot { it.hasInitBlocks }

@@ -8,14 +8,14 @@ import com.lemonappdev.konsist.api.provider.KoKDocProvider
  *
  * @return A list containing declarations with KDoc.
  */
-fun <T : KoKDocProvider> List<T>.withKDoc(): List<T> = filter { it.hasKDoc() }
+fun <T : KoKDocProvider> List<T>.withKDoc(): List<T> = filter { it.hasKDoc }
 
 /**
  * List containing declarations without KDoc.
  *
  * @return A list containing declarations without KDoc.
  */
-fun <T : KoKDocProvider> List<T>.withoutKDoc(): List<T> = filterNot { it.hasKDoc() }
+fun <T : KoKDocProvider> List<T>.withoutKDoc(): List<T> = filterNot { it.hasKDoc }
 
 /**
  * List containing declarations with KDoc with any tag.

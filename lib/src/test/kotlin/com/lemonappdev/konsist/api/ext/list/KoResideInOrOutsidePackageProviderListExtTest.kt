@@ -25,7 +25,7 @@ class KoResideInOrOutsidePackageProviderListExtTest {
         val sut = declarations.withPackage()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -44,7 +44,7 @@ class KoResideInOrOutsidePackageProviderListExtTest {
         val sut = declarations.withPackage(packagee)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -70,7 +70,7 @@ class KoResideInOrOutsidePackageProviderListExtTest {
         val sut = declarations.withPackage(package1, package2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -88,7 +88,7 @@ class KoResideInOrOutsidePackageProviderListExtTest {
         val sut = declarations.withoutPackage()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -107,7 +107,7 @@ class KoResideInOrOutsidePackageProviderListExtTest {
         val sut = declarations.withoutPackage(packagee)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -133,6 +133,6 @@ class KoResideInOrOutsidePackageProviderListExtTest {
         val sut = declarations.withoutPackage(package1, package2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }

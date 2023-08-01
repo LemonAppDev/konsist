@@ -42,6 +42,6 @@ class KoDeclarationProviderListExtTest {
         val sut = declarations.declarations(includeNested = true, includeLocal = false)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(class1, function1, class2, interface1, property1)
+        sut shouldBeEqualTo listOf(class1, function1, class2, interface1, property1)
     }
 }

@@ -23,7 +23,7 @@ class KoSourceSetProviderListExtTest {
         val sut = files.withSourceSet(sourceSetName)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut shouldBeEqualTo listOf(file1)
     }
 
     @Test
@@ -49,7 +49,7 @@ class KoSourceSetProviderListExtTest {
         val sut = files.withSourceSet(sourceSetName1, sourceSetName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1, file2)
+        sut shouldBeEqualTo listOf(file1, file2)
     }
 
     @Test
@@ -68,7 +68,7 @@ class KoSourceSetProviderListExtTest {
         val sut = files.withoutSourceSet(sourceSetName)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut shouldBeEqualTo listOf(file2)
     }
 
     @Test
@@ -94,6 +94,6 @@ class KoSourceSetProviderListExtTest {
         val sut = files.withoutSourceSet(sourceSetName1, sourceSetName2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file3)
+        sut shouldBeEqualTo listOf(file3)
     }
 }

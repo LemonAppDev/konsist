@@ -16,5 +16,5 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
     ): Boolean =
         interfaces(includeNested).any { it.name == name }
 
-    override fun numInterfaces(includeNested: Boolean): Int = interfaces(includeNested).toList().size
+    override fun numInterfaces(includeNested: Boolean): Int = interfaces(includeNested).size
 }

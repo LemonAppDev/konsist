@@ -23,7 +23,7 @@ class KoImportProviderListExtTest {
         val sut = files.withImports()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut shouldBeEqualTo listOf(file1)
     }
 
     @Test
@@ -41,7 +41,7 @@ class KoImportProviderListExtTest {
         val sut = files.withoutImports()
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut shouldBeEqualTo listOf(file2)
     }
 
     @Test
@@ -61,7 +61,7 @@ class KoImportProviderListExtTest {
         val sut = files.withAllImports(import1, import2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut shouldBeEqualTo listOf(file1)
     }
 
     @Test
@@ -81,7 +81,7 @@ class KoImportProviderListExtTest {
         val sut = files.withoutAllImports(import1, import2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut shouldBeEqualTo listOf(file2)
     }
 
     @Test
@@ -100,7 +100,7 @@ class KoImportProviderListExtTest {
         val sut = files.withSomeImports(import)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1)
+        sut shouldBeEqualTo listOf(file1)
     }
 
     @Test
@@ -126,7 +126,7 @@ class KoImportProviderListExtTest {
         val sut = files.withSomeImports(import1, import2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file1, file2)
+        sut shouldBeEqualTo listOf(file1, file2)
     }
 
     @Test
@@ -145,7 +145,7 @@ class KoImportProviderListExtTest {
         val sut = files.withoutSomeImports(import)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file2)
+        sut shouldBeEqualTo listOf(file2)
     }
 
     @Test
@@ -171,6 +171,6 @@ class KoImportProviderListExtTest {
         val sut = files.withoutSomeImports(import1, import2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(file3)
+        sut shouldBeEqualTo listOf(file3)
     }
 }

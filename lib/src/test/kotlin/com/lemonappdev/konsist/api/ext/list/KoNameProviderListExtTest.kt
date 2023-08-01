@@ -24,7 +24,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withName(name1)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -48,7 +48,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withName(name1, name2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -68,7 +68,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withoutName(name1)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -92,7 +92,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withoutName(name1, name2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -111,7 +111,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withNameStartingWith(prefix)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -137,7 +137,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withNameStartingWith(prefix1, prefix2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -156,7 +156,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withoutNameStartingWith(prefix)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -182,7 +182,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withoutNameStartingWith(prefix1, prefix2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -201,7 +201,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withNameEndingWith(suffix)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -227,7 +227,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withNameEndingWith(suffix1, suffix2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -246,7 +246,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withoutNameEndingWith(suffix)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -272,7 +272,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withoutNameEndingWith(suffix1, suffix2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -291,7 +291,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withNameContaining(text)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -317,7 +317,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withNameContaining(text1, text2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -336,7 +336,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withoutNameContaining(text)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -362,7 +362,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withoutNameContaining(text1, text2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 
     @Test
@@ -381,7 +381,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withNameMatching(regex)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
@@ -407,7 +407,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withNameMatching(regex1, regex2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration1, declaration2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
@@ -426,7 +426,7 @@ class KoNameProviderListExtTest {
         val sut = declarations.withoutNameMatching(regex)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -452,6 +452,6 @@ class KoNameProviderListExtTest {
         val sut = declarations.withoutNameMatching(regex1, regex2)
 
         // then
-        sut.toList() shouldBeEqualTo listOf(declaration3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }
