@@ -74,7 +74,7 @@ class KoDeclarationAssertForProviderSequenceTest {
             .filterIsInstance<KoPrimaryConstructorProvider>()
 
         // then
-        sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: true }
+        sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
     }
 
     @Test
@@ -86,7 +86,7 @@ class KoDeclarationAssertForProviderSequenceTest {
 
         // when
         val func = {
-            sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: true }
+            sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
         }
 
         // then
@@ -101,7 +101,7 @@ class KoDeclarationAssertForProviderSequenceTest {
             .filterIsInstance<KoPrimaryConstructorProvider>()
 
         // then
-        sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") ?: false }
+        sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") }
     }
 
     @Test
@@ -113,7 +113,7 @@ class KoDeclarationAssertForProviderSequenceTest {
 
         // when
         val func = {
-            sut.assertNot { it.primaryConstructor?.hasParameterNamed("sampleParameter") ?: false }
+            sut.assertNot { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
         }
 
         // then
@@ -312,6 +312,18 @@ class KoDeclarationAssertForProviderSequenceTest {
 
         // then
         sut.assert { it.containsProperty("otherProperty") }
+    }
+
+    @Test
+    fun `assert-suppress-with-few-parameters`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-with-few-parameters")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
+
+        // then
+        sut.assert { it.hasModifiers() }
     }
 
     private fun getSnippetFile(fileName: String) =

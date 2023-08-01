@@ -12,10 +12,10 @@ class KoInitBlockProviderSequenceExtTest {
     fun `withInitBlocks() returns declaration with init blocks`() {
         // given
         val declaration1: KoInitBlockProvider = mockk {
-            every { hasInitBlocks() } returns true
+            every { hasInitBlocks } returns true
         }
         val declaration2: KoInitBlockProvider = mockk {
-            every { hasInitBlocks() } returns false
+            every { hasInitBlocks } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
@@ -30,10 +30,10 @@ class KoInitBlockProviderSequenceExtTest {
     fun `withoutInitBlocks() returns declaration without init blocks`() {
         // given
         val declaration1: KoInitBlockProvider = mockk {
-            every { hasInitBlocks() } returns true
+            every { hasInitBlocks } returns true
         }
         val declaration2: KoInitBlockProvider = mockk {
-            every { hasInitBlocks() } returns false
+            every { hasInitBlocks } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 

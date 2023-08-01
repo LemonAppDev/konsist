@@ -18,5 +18,6 @@ internal interface KoPrimaryConstructorProviderCore :
             return KoPrimaryConstructorDeclarationImpl.getInstance(localPrimaryConstructor, this)
         }
 
-    override fun hasPrimaryConstructor(): Boolean = ktClass.hasExplicitPrimaryConstructor()
+    override val hasPrimaryConstructor: Boolean
+        get() = ktClass.hasExplicitPrimaryConstructor()
 }

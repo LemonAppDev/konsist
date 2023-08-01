@@ -13,7 +13,7 @@ class KoTypeAliasDeclarationForKoTopLevelProviderTest {
             .first()
 
         // then
-        sut.isTopLevel() shouldBeEqualTo true
+        sut.isTopLevel shouldBeEqualTo true
     }
 
     private fun getSnippetFile(fileName: String) =

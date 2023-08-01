@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 
 internal interface KoKotlinTypeProviderCore : KoKotlinTypeProvider, KoSourceAndAliasTypeProviderCore, KoBaseProviderCore {
     override val isKotlinType: Boolean
-        get() = if (isAlias()) {
+        get() = if (isAlias) {
             false
         } else {
             val parts = sourceType.split("<", ">", " ", ",")

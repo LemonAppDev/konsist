@@ -14,10 +14,10 @@ class KoKDocProviderSequenceExtTest {
     fun `withKDoc() returns declaration with any kDoc`() {
         // given
         val declaration1: KoKDocProvider = mockk {
-            every { hasKDoc() } returns true
+            every { hasKDoc } returns true
         }
         val declaration2: KoKDocProvider = mockk {
-            every { hasKDoc() } returns false
+            every { hasKDoc } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 
@@ -32,10 +32,10 @@ class KoKDocProviderSequenceExtTest {
     fun `withoutKDoc() returns declaration without any kDoc`() {
         // given
         val declaration1: KoKDocProvider = mockk {
-            every { hasKDoc() } returns true
+            every { hasKDoc } returns true
         }
         val declaration2: KoKDocProvider = mockk {
-            every { hasKDoc() } returns false
+            every { hasKDoc } returns false
         }
         val declarations = sequenceOf(declaration1, declaration2)
 

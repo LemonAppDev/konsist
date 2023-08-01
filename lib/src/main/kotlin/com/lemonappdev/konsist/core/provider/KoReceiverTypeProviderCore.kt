@@ -11,7 +11,7 @@ internal interface KoReceiverTypeProviderCore :
     KoExtensionProviderCore,
     KoBaseProviderCore {
     override val receiverType: KoTypeDeclaration?
-        get() = ReceiverUtil.getReceiverType(getTypeReferences(), isExtension(), this)
+        get() = ReceiverUtil.getReceiverType(getTypeReferences(), isExtension, this)
 
     override fun hasReceiverType(name: String?): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)
 

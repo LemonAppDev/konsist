@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
  *
  * @return A sequence containing declarations with secondary constructor(s).
  */
-fun <T : KoSecondaryConstructorsProvider> Sequence<T>.withSecondaryConstructors(): Sequence<T> = filter { it.hasSecondaryConstructors() }
+fun <T : KoSecondaryConstructorsProvider> Sequence<T>.withSecondaryConstructors(): Sequence<T> = filter { it.hasSecondaryConstructors }
 
 /**
  * Sequence containing all declarations that don't have secondary constructors.
@@ -15,4 +15,4 @@ fun <T : KoSecondaryConstructorsProvider> Sequence<T>.withSecondaryConstructors(
  * @return A sequence containing declarations without secondary constructor(s).
  */
 fun <T : KoSecondaryConstructorsProvider> Sequence<T>.withoutSecondaryConstructors(): Sequence<T> =
-    filterNot { it.hasSecondaryConstructors() }
+    filterNot { it.hasSecondaryConstructors }

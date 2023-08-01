@@ -1,4 +1,4 @@
 @Suppress("assert-suppress-by-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
-class SampleClassWithIncorrectSuffix {
-    fun sampleFunctionWithIncorrectSuffix() {}
+class SampleClassWithIncorrectSuffix1 {
+    class SampleClassWithIncorrectSuffix2
 }

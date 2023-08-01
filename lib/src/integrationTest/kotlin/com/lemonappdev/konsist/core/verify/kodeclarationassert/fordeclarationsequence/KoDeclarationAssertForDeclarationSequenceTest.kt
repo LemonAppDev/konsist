@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.core.verify.kodeclarationassert.fordeclarationsequence
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.sequence.withPrimaryConstructor
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
@@ -69,7 +67,6 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
             .classes()
-            .withPrimaryConstructor()
 
         // then
         sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
@@ -80,7 +77,6 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
             .classes()
-            .withPrimaryConstructor()
 
         // when
         val func = {
@@ -96,7 +92,6 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut = getSnippetFile("assert-not-passes-when-expression-is-nullable")
             .classes()
-            .withPrimaryConstructor()
 
         // then
         sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") }
@@ -107,7 +102,6 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut = getSnippetFile("assert-not-fails-when-expression-is-nullable")
             .classes()
-            .withPrimaryConstructor()
 
         // when
         val func = {
@@ -123,8 +117,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
+                .classes(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -135,8 +128,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
+                .classes(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -147,8 +139,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
+                .classes(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -159,8 +150,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
+                .classes(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -171,8 +161,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
+                .classes(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -183,8 +172,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
-                .declarations(includeNested = true)
-                .filterIsInstance<KoNameProvider>()
+                .classes(includeNested = true)
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -305,6 +293,19 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .properties(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-with-few-parameters`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-with-few-parameters")
+                .functions(
+                    includeNested = true,
+                )
 
         // then
         sut.assert { it.name.endsWith("Text") }

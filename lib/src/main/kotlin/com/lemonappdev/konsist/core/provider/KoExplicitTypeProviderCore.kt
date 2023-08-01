@@ -13,7 +13,7 @@ internal interface KoExplicitTypeProviderCore :
     KoBaseProviderCore {
     val ktProperty: KtProperty
     override val explicitType: KoTypeDeclaration?
-        get() = ReceiverUtil.getType(getTypeReferences(), isExtension(), this)
+        get() = ReceiverUtil.getType(getTypeReferences(), isExtension, this)
 
     private fun getTypeReferences(): List<KtTypeReference> = ktProperty
         .children

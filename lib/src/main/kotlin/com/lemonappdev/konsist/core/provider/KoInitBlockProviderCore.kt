@@ -3,14 +3,14 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
 import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
 import com.lemonappdev.konsist.core.declaration.KoInitBlockDeclarationImpl
-import org.jetbrains.kotlin.psi.KtClass
+import org.jetbrains.kotlin.psi.KtClassOrObject
 
 internal interface KoInitBlockProviderCore : KoInitBlockProvider, KoParentProviderCore, KoBaseProviderCore {
-    val ktClass: KtClass
+    val ktClassOrObject: KtClassOrObject
 
     override val initBlocks: Sequence<KoInitBlockDeclaration>?
         get() {
-            val anonymousInitializers = ktClass
+            val anonymousInitializers = ktClassOrObject
                 .body
                 ?.anonymousInitializers
 
@@ -26,5 +26,6 @@ internal interface KoInitBlockProviderCore : KoInitBlockProvider, KoParentProvid
     override val numInitBlocks: Int
         get() = initBlocks?.toList()?.size ?: 0
 
-    override fun hasInitBlocks(): Boolean = initBlocks != null
+    override val hasInitBlocks: Boolean
+        get() = initBlocks != null
 }

@@ -9,13 +9,13 @@ class LibrarySnippets {
         Konsist.scopeFromPackage("..api..")
             .declarations(includeNested = true)
             .filterIsInstance<KoKDocProvider>()
-            .assert { it.hasKDoc() }
+            .assert { it.hasKDoc }
     }
 
     fun `every public function in api package must have explicit return type`() {
         Konsist.scopeFromPackage("..api..")
             .functions(includeNested = true)
-            .assert { it.hasExplicitReturnType() }
+            .assert { it.hasExplicitReturnType }
     }
 
     fun `every public property in api package must have specify type explicitly`() {
