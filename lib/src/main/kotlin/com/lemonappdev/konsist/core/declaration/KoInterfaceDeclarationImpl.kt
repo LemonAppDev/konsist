@@ -5,6 +5,10 @@ import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExpectModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoFunModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -28,6 +32,10 @@ import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoActualModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoExpectModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoFunModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClass
@@ -61,7 +69,11 @@ internal class KoInterfaceDeclarationImpl private constructor(
     KoRepresentsTypeProviderCore,
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
-    KoTopLevelProviderCore {
+    KoTopLevelProviderCore,
+    KoVisibilityModifierProviderCore,
+    KoActualModifierProviderCore,
+    KoExpectModifierProviderCore,
+    KoFunModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktClass }
 
     override val ktFile: KtFile? by lazy { null }

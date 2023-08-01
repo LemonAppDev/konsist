@@ -5,6 +5,19 @@ import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoAbstractModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExpectModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExternalModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoFinalModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoInfixModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoInlineModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOpenModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOperatorModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOverrideModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoSuspendModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoTailrecModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -29,6 +42,19 @@ import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoAbstractModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoActualModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoExpectModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoExternalModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoFinalModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoInfixModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoInlineModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoOpenModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoOperatorModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoOverrideModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoSuspendModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoTailrecModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoVisibilityModifierProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtClass
@@ -66,7 +92,20 @@ internal class KoFunctionDeclarationImpl private constructor(
     KoReceiverTypeProviderCore,
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
-    KoTopLevelProviderCore {
+    KoTopLevelProviderCore,
+    KoVisibilityModifierProviderCore,
+    KoOperatorModifierProviderCore,
+    KoInlineModifierProviderCore,
+    KoTailrecModifierProviderCore,
+    KoInfixModifierProviderCore,
+    KoExternalModifierProviderCore,
+    KoSuspendModifierProviderCore,
+    KoOpenModifierProviderCore,
+    KoOverrideModifierProviderCore,
+    KoFinalModifierProviderCore,
+    KoAbstractModifierProviderCore,
+    KoActualModifierProviderCore,
+    KoExpectModifierProviderCore {
     override val ktFile: KtFile? by lazy { null }
 
     override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }

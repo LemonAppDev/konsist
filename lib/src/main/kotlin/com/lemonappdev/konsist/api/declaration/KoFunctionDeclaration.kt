@@ -23,6 +23,19 @@ import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoAbstractModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExpectModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExternalModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoFinalModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoInfixModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoInlineModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOpenModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOperatorModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOverrideModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoSuspendModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoTailrecModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 
 /**
  * Represents a Kotlin function declaration.
@@ -51,7 +64,20 @@ interface KoFunctionDeclaration :
     KoReceiverTypeProvider,
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
-    KoTopLevelProvider {
+    KoTopLevelProvider,
+    KoVisibilityModifierProvider,
+    KoOperatorModifierProvider,
+    KoInlineModifierProvider,
+    KoTailrecModifierProvider,
+    KoInfixModifierProvider,
+    KoExternalModifierProvider,
+    KoSuspendModifierProvider,
+    KoOpenModifierProvider,
+    KoOverrideModifierProvider,
+    KoFinalModifierProvider,
+    KoAbstractModifierProvider,
+    KoActualModifierProvider,
+    KoExpectModifierProvider {
     /**
      * String representing the function.
      *

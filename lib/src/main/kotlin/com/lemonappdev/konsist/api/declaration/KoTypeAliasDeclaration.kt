@@ -15,6 +15,8 @@ import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 
 /**
  * Represents a Kotlin type alias declaration.
@@ -35,7 +37,9 @@ interface KoTypeAliasDeclaration :
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTopLevelProvider,
-    KoTypeProvider {
+    KoTypeProvider,
+    KoVisibilityModifierProvider,
+    KoActualModifierProvider {
     /**
      * String representing the type alias.
      *

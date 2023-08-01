@@ -5,6 +5,18 @@ import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoAbstractModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoAnnotationModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoDataModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoEnumModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExpectModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoFinalModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoInnerModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOpenModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoSealedModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoValueModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -35,6 +47,18 @@ import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderC
 import com.lemonappdev.konsist.core.provider.KoSecondaryConstructorsProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoAbstractModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoActualModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoAnnotationModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoDataModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoEnumModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoExpectModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoFinalModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoInnerModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoOpenModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoSealedModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoValueModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClass
@@ -75,7 +99,19 @@ internal class KoClassDeclarationImpl private constructor(
     KoResideInOrOutsidePackageProviderCore,
     KoSecondaryConstructorsProviderCore,
     KoTextProviderCore,
-    KoTopLevelProviderCore {
+    KoTopLevelProviderCore,
+    KoVisibilityModifierProviderCore,
+    KoEnumModifierProviderCore,
+    KoSealedModifierProviderCore,
+    KoInnerModifierProviderCore,
+    KoValueModifierProviderCore,
+    KoAnnotationModifierProviderCore,
+    KoDataModifierProviderCore,
+    KoActualModifierProviderCore,
+    KoExpectModifierProviderCore,
+    KoAbstractModifierProviderCore,
+    KoOpenModifierProviderCore,
+    KoFinalModifierProviderCore {
     override val ktFile: KtFile? by lazy { null }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }

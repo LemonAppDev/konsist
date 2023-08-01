@@ -22,6 +22,10 @@ import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExpectModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoFunModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 
 /**
  * Represents a Kotlin import declaration.
@@ -49,7 +53,11 @@ interface KoInterfaceDeclaration :
     KoRepresentsTypeProvider,
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
-    KoTopLevelProvider {
+    KoTopLevelProvider,
+    KoVisibilityModifierProvider,
+    KoActualModifierProvider,
+    KoExpectModifierProvider,
+    KoFunModifierProvider{
     /**
      * String representing the interface.
      *

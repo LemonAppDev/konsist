@@ -19,7 +19,17 @@ import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoAbstractModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoConstModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExpectModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoFinalModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoLateinitModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOpenModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOverrideModifierProvider
 import com.lemonappdev.konsist.api.provider.komodifierprovider.KoValModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVarModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 
 /**
  * Represents a Kotlin property declaration.
@@ -45,7 +55,17 @@ interface KoPropertyDeclaration :
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTopLevelProvider,
-    KoValModifierProvider {
+    KoVisibilityModifierProvider,
+    KoValModifierProvider,
+    KoVarModifierProvider,
+    KoLateinitModifierProvider,
+    KoOverrideModifierProvider,
+    KoAbstractModifierProvider,
+    KoOpenModifierProvider,
+    KoFinalModifierProvider,
+    KoActualModifierProvider,
+    KoExpectModifierProvider,
+    KoConstModifierProvider {
     /**
      * String representing the property.
      *

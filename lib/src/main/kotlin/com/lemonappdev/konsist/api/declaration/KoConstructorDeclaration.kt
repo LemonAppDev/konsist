@@ -11,6 +11,7 @@ import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 
 /**
  * Represents a Kotlin constructor declaration.
@@ -27,4 +28,5 @@ interface KoConstructorDeclaration :
     KoParentProvider,
     KoPathProvider,
     KoResideInOrOutsidePackageProvider,
-    KoTextProvider
+    KoTextProvider,
+    KoVisibilityModifierProvider

@@ -29,6 +29,18 @@ import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoAbstractModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoAnnotationModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoDataModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoEnumModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExpectModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoFinalModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoInnerModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOpenModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoSealedModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoValueModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 
 /**
  * Represents a Kotlin class declaration.
@@ -63,7 +75,19 @@ interface KoClassDeclaration :
     KoResideInOrOutsidePackageProvider,
     KoSecondaryConstructorsProvider,
     KoTextProvider,
-    KoTopLevelProvider {
+    KoTopLevelProvider,
+    KoVisibilityModifierProvider,
+    KoEnumModifierProvider,
+    KoSealedModifierProvider,
+    KoInnerModifierProvider,
+    KoValueModifierProvider,
+    KoAnnotationModifierProvider,
+    KoDataModifierProvider,
+    KoActualModifierProvider,
+    KoExpectModifierProvider,
+    KoAbstractModifierProvider,
+    KoOpenModifierProvider,
+    KoFinalModifierProvider {
     /**
      * String representing the class.
      *

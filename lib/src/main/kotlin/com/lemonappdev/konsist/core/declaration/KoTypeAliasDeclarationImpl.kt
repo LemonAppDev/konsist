@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
+import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -22,6 +24,8 @@ import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderC
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoActualModifierProviderCore
+import com.lemonappdev.konsist.core.provider.komodifierprovider.KoVisibilityModifierProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
@@ -47,7 +51,9 @@ internal class KoTypeAliasDeclarationImpl private constructor(
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
-    KoTypeProviderCore {
+    KoTypeProviderCore,
+    KoVisibilityModifierProviderCore,
+    KoActualModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktTypeAlias }
 
     override val ktFile: KtFile? by lazy { null }
