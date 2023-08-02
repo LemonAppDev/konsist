@@ -4,8 +4,8 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiWhiteSpace
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
@@ -164,7 +164,11 @@ internal object KoDeclarationProviderCoreUtil {
         containingDeclaration: KoContainingDeclarationProvider,
     ): KoBaseDeclaration? = when {
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, containingDeclaration)
-        ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(ktDeclaration, containingDeclaration)
+        ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(
+            ktDeclaration,
+            containingDeclaration,
+        )
+
         ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationImpl.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtProperty -> KoPropertyDeclarationImpl.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtFunction -> KoFunctionDeclarationImpl.getInstance(ktDeclaration, containingDeclaration)
@@ -173,7 +177,10 @@ internal object KoDeclarationProviderCoreUtil {
         else -> null
     }
 
-    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, containingDeclaration: KoContainingDeclarationProvider): KoBaseDeclaration? =
+    private fun getInstanceOfOtherDeclaration(
+        psiElement: PsiElement,
+        containingDeclaration: KoContainingDeclarationProvider,
+    ): KoBaseDeclaration? =
         when (psiElement) {
             is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, containingDeclaration)
             is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, containingDeclaration)

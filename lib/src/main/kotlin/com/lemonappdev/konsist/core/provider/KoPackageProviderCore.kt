@@ -5,7 +5,11 @@ import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
 import org.jetbrains.kotlin.psi.KtFile
 
-internal interface KoPackageProviderCore : KoPackageProvider, KoContainingFileProviderCore, KoBaseProviderCore, KoContainingDeclarationProviderCore {
+internal interface KoPackageProviderCore :
+    KoPackageProvider,
+    KoContainingFileProviderCore,
+    KoBaseProviderCore,
+    KoContainingDeclarationProviderCore {
     val ktFile: KtFile?
 
     override val packagee: KoPackageDeclaration?
