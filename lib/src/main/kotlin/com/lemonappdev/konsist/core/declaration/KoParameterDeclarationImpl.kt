@@ -12,7 +12,6 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDefaultValueProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentProviderCore
@@ -21,6 +20,13 @@ import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoCrossInlineModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoNoInlineModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoVarArgModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
@@ -48,7 +54,13 @@ internal class KoParameterDeclarationImpl private constructor(
     KoRepresentsTypeProviderCore,
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
-    KoTypeProviderCore {
+    KoTypeProviderCore,
+    KoVisibilityModifierProviderCore,
+    KoVarModifierProviderCore,
+    KoValModifierProviderCore,
+    KoVarArgModifierProviderCore,
+    KoNoInlineModifierProviderCore,
+    KoCrossInlineModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktParameter }
 
     override val ktFile: KtFile? by lazy { null }
@@ -70,6 +82,10 @@ internal class KoParameterDeclarationImpl private constructor(
     }
 
     override fun representsType(name: String): Boolean = type.name == name || type.fullyQualifiedName == name
+
+    override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
+
+    override val hasVarModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
 
     override fun toString(): String {
         return locationWithText

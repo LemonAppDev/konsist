@@ -19,7 +19,6 @@ import com.lemonappdev.konsist.core.provider.KoLocalDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
@@ -29,6 +28,20 @@ import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoExpectModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoExternalModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoFinalModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoInfixModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoInlineModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoOpenModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoOperatorModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoOverrideModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoSuspendModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoTailrecModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtClass
@@ -66,7 +79,20 @@ internal class KoFunctionDeclarationImpl private constructor(
     KoReceiverTypeProviderCore,
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
-    KoTopLevelProviderCore {
+    KoTopLevelProviderCore,
+    KoVisibilityModifierProviderCore,
+    KoOperatorModifierProviderCore,
+    KoInlineModifierProviderCore,
+    KoTailrecModifierProviderCore,
+    KoInfixModifierProviderCore,
+    KoExternalModifierProviderCore,
+    KoSuspendModifierProviderCore,
+    KoOpenModifierProviderCore,
+    KoOverrideModifierProviderCore,
+    KoFinalModifierProviderCore,
+    KoAbstractModifierProviderCore,
+    KoActualModifierProviderCore,
+    KoExpectModifierProviderCore {
     override val ktFile: KtFile? by lazy { null }
 
     override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }

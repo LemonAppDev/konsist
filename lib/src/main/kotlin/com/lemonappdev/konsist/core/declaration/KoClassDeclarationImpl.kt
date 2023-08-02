@@ -19,7 +19,6 @@ import com.lemonappdev.konsist.core.provider.KoInitBlockProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
@@ -35,6 +34,19 @@ import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderC
 import com.lemonappdev.konsist.core.provider.KoSecondaryConstructorsProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoAnnotationModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoDataModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoEnumModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoExpectModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoFinalModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoInnerModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoOpenModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoSealedModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoValueModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClass
@@ -75,7 +87,19 @@ internal class KoClassDeclarationImpl private constructor(
     KoResideInOrOutsidePackageProviderCore,
     KoSecondaryConstructorsProviderCore,
     KoTextProviderCore,
-    KoTopLevelProviderCore {
+    KoTopLevelProviderCore,
+    KoVisibilityModifierProviderCore,
+    KoEnumModifierProviderCore,
+    KoSealedModifierProviderCore,
+    KoInnerModifierProviderCore,
+    KoValueModifierProviderCore,
+    KoAnnotationModifierProviderCore,
+    KoDataModifierProviderCore,
+    KoActualModifierProviderCore,
+    KoExpectModifierProviderCore,
+    KoAbstractModifierProviderCore,
+    KoOpenModifierProviderCore,
+    KoFinalModifierProviderCore {
     override val ktFile: KtFile? by lazy { null }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }

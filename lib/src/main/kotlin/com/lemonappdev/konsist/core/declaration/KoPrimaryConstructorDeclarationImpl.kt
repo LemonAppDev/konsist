@@ -9,13 +9,14 @@ import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
@@ -38,7 +39,8 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
     KoParentProviderCore,
     KoPathProviderCore,
     KoResideInOrOutsidePackageProviderCore,
-    KoTextProviderCore {
+    KoTextProviderCore,
+    KoVisibilityModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktPrimaryConstructor }
 
     override val ktFile: KtFile? by lazy { null }
