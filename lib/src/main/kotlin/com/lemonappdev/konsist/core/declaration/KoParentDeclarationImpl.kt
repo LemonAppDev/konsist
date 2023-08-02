@@ -15,7 +15,6 @@ import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 internal interface KoParentDeclarationImpl :
     KoParentDeclaration,
     KoBaseProviderCore,
-    KoDelegateProviderCore,
     KoNameProviderCore,
     KoLocationProviderCore,
     KoPathProviderCore {
@@ -32,13 +31,4 @@ internal interface KoParentDeclarationImpl :
             .removeSuffix("()")
             .replace("\n", " ")
             .substringBefore(" by")
-
-    override val delegateName: String?
-        get() = if (ktSuperTypeListEntry is KtDelegatedSuperTypeEntry) {
-            (ktSuperTypeListEntry as KtDelegatedSuperTypeEntry)
-                .delegateExpression
-                ?.text
-        } else {
-            null
-        }
 }

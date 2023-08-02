@@ -12,7 +12,6 @@ import com.lemonappdev.konsist.api.provider.KoPathProvider
 interface KoParentDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
-    KoDelegateProvider,
     KoNameProvider,
     KoLocationProvider,
     KoPathProvider {

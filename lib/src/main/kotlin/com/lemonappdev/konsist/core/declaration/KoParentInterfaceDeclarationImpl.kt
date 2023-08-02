@@ -14,8 +14,18 @@ import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 internal class KoParentInterfaceDeclarationImpl private constructor(override val ktSuperTypeListEntry: KtSuperTypeListEntry) :
     KoParentInterfaceDeclaration,
-    KoParentDeclarationImpl {
+    KoParentDeclarationImpl,
+    KoDelegateProviderCore {
     override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
+
+    override val delegateName: String?
+        get() = if (ktSuperTypeListEntry is KtDelegatedSuperTypeEntry) {
+            ktSuperTypeListEntry
+                .delegateExpression
+                ?.text
+        } else {
+            null
+        }
 
     override fun toString(): String {
         return locationWithText

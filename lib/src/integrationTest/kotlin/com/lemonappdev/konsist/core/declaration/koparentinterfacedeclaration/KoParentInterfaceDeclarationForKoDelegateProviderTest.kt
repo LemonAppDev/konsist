@@ -1,26 +1,11 @@
-package com.lemonappdev.konsist.core.declaration.koparentdeclaration
+package com.lemonappdev.konsist.core.declaration.koparentinterfacedeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoParentDeclarationForKoDelegateProviderTest {
-    @Test
-    fun `class-has-parent-class-without-delegate`() {
-        // given
-        val sut = getSnippetFile("class-has-parent-class-without-delegate")
-            .classes()
-            .first()
-            .parentClass
-
-        // then
-        assertSoftly(sut) {
-            it?.delegateName shouldBeEqualTo null
-            it?.hasDelegate() shouldBeEqualTo false
-        }
-    }
-
+class KoParentInterfaceDeclarationForKoDelegateProviderTest {
     @Test
     fun `class-has-parent-interface-without-delegate`() {
         // given
@@ -56,5 +41,5 @@ class KoParentDeclarationForKoDelegateProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koparentdeclaration/snippet/forkodelegateprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koparentinterfacedeclaration/snippet/forkodelegateprovider/", fileName)
 }
