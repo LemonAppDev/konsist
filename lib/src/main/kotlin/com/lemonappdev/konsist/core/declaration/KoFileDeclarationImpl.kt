@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -17,7 +18,7 @@ import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
-import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
+import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
@@ -65,6 +66,14 @@ internal class KoFileDeclarationImpl(override val ktFile: KtFile) :
         ktFile
             .name
             .toOsSeparator()
+    }
+
+    override val packagee: KoPackageDeclaration? by lazy {
+        if (ktFile.packageDirective?.qualifiedName == "") {
+            null
+        } else {
+            ktFile.packageDirective?.let { KoPackageDeclarationImpl.getInstance(it, this) }
+        }
     }
 
     override fun declarations(

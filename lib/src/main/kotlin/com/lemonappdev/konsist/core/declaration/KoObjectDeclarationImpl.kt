@@ -4,6 +4,7 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -19,7 +20,7 @@ import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
-import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
+import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
@@ -31,11 +32,11 @@ import com.lemonappdev.konsist.core.provider.modifier.KoCompanionModifierProvide
 import com.lemonappdev.konsist.core.provider.modifier.KoDataModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
+import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
@@ -58,7 +59,7 @@ internal class KoObjectDeclarationImpl(
     KoModifierProviderCore,
     KoNameProviderCore,
     KoObjectProviderCore,
-    KoPackageProviderCore,
+    KoPackageDeclarationProviderCore,
     KoParentProviderCore,
     KoPathProviderCore,
     KoPropertyProviderCore,
@@ -70,8 +71,6 @@ internal class KoObjectDeclarationImpl(
     KoDataModifierProviderCore,
     KoCompanionModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktObjectDeclaration }
-
-    override val ktFile: KtFile? by lazy { null }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktObjectDeclaration }
 

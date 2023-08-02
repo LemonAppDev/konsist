@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -10,7 +11,7 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
+import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
@@ -18,10 +19,10 @@ import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderC
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
+import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtSecondaryConstructor
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
@@ -36,7 +37,7 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
     KoKDocProviderCore,
     KoLocationProviderCore,
     KoModifierProviderCore,
-    KoPackageProviderCore,
+    KoPackageDeclarationProviderCore,
     KoParametersProviderCore,
     KoParentProviderCore,
     KoPathProviderCore,
@@ -44,8 +45,6 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
     KoTextProviderCore,
     KoVisibilityModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktSecondaryConstructor }
-
-    override val ktFile: KtFile? by lazy { null }
 
     override val koFiles: List<KoFileDeclaration>? by lazy { null }
 
