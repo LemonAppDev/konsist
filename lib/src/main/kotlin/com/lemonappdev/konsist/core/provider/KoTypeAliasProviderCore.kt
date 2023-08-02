@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
-internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProviderCore {
+internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProviderCore, KoParentProviderCore {
     val ktFile: KtFile?
     val koFiles: List<KoFileDeclaration>?
 
@@ -16,7 +16,7 @@ internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProvider
             ktFile
                 ?.children
                 ?.filterIsInstance<KtTypeAlias>()
-                ?.map { KoTypeAliasDeclarationImpl.getInstance(it, null) }
+                ?.map { KoTypeAliasDeclarationImpl.getInstance(it, this) }
                 ?: emptyList()
         } else {
             koFiles?.flatMap { it.typeAliases } ?: emptyList()

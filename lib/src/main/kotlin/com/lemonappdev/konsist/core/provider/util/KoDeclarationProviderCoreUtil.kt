@@ -37,7 +37,7 @@ internal object KoDeclarationProviderCoreUtil {
         ktElement: KtElement,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-        parent: KoParentProvider?,
+        parent: KoParentProvider,
     ): List<T> {
         val declarations: List<KoBaseDeclaration>
 
@@ -161,7 +161,7 @@ internal object KoDeclarationProviderCoreUtil {
 
     private fun getInstanceOfKtDeclaration(
         ktDeclaration: KtDeclaration,
-        parent: KoParentProvider?,
+        parent: KoParentProvider,
     ): KoBaseDeclaration? = when {
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, parent)
         ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(ktDeclaration, parent)
@@ -173,7 +173,7 @@ internal object KoDeclarationProviderCoreUtil {
         else -> null
     }
 
-    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parent: KoParentProvider?): KoBaseDeclaration? =
+    private fun getInstanceOfOtherDeclaration(psiElement: PsiElement, parent: KoParentProvider): KoBaseDeclaration? =
         when (psiElement) {
             is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, parent)
             is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, parent)

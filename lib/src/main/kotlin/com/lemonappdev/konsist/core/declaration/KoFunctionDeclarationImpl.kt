@@ -54,7 +54,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 @Suppress("detekt.TooManyFunctions")
 internal class KoFunctionDeclarationImpl private constructor(
     override val ktFunction: KtFunction,
-    override val parent: KoParentProvider?,
+    override val parent: KoParentProvider,
 ) :
     KoFunctionDeclaration,
     KoBaseProviderCore,
@@ -140,7 +140,7 @@ internal class KoFunctionDeclarationImpl private constructor(
     internal companion object {
 
         private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
-        internal fun getInstance(ktFunction: KtFunction, parent: KoParentProvider?): KoFunctionDeclaration =
+        internal fun getInstance(ktFunction: KtFunction, parent: KoParentProvider): KoFunctionDeclaration =
             cache.getOrCreateInstance(ktFunction, parent) {
                 KoFunctionDeclarationImpl(ktFunction, parent)
             }

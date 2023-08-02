@@ -47,7 +47,7 @@ internal class KoPackageDeclarationImpl private constructor(private val ktPackag
 
         internal fun getInstance(
             ktPackageDirective: KtPackageDirective,
-            parent: KoParentProvider?,
+            parent: KoParentProvider,
         ): KoPackageDeclaration =
             cache.getOrCreateInstance(ktPackageDirective, parent) { KoPackageDeclarationImpl(ktPackageDirective) }
     }

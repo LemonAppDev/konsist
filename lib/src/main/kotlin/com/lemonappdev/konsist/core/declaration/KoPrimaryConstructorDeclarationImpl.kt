@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoPrimaryConstructorDeclarationImpl private constructor(
     private val ktPrimaryConstructor: KtPrimaryConstructor,
-    override val parent: KoParentProvider?,
+    override val parent: KoParentProvider,
 ) :
     KoPrimaryConstructorDeclaration,
     KoBaseProviderCore,
@@ -64,7 +64,7 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
 
         internal fun getInstance(
             ktPrimaryConstructor: KtPrimaryConstructor,
-            parent: KoParentProvider?,
+            parent: KoParentProvider,
         ): KoPrimaryConstructorDeclaration =
             cache.getOrCreateInstance(ktPrimaryConstructor, parent) {
                 KoPrimaryConstructorDeclarationImpl(

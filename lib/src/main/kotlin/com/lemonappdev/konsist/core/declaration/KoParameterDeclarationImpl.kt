@@ -37,7 +37,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 
 internal class KoParameterDeclarationImpl private constructor(
     override val ktParameter: KtParameter,
-    override val parent: KoParentProvider?,
+    override val parent: KoParentProvider,
 ) :
     KoParameterDeclaration,
     KoBaseProviderCore,
@@ -94,7 +94,7 @@ internal class KoParameterDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktParameter: KtParameter, parent: KoParentProvider?): KoParameterDeclaration =
+        internal fun getInstance(ktParameter: KtParameter, parent: KoParentProvider): KoParameterDeclaration =
             cache.getOrCreateInstance(ktParameter, parent) { KoParameterDeclarationImpl(ktParameter, parent) }
     }
 }

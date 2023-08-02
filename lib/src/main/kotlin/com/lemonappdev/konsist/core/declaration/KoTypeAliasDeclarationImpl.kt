@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoTypeAliasDeclarationImpl private constructor(
     private val ktTypeAlias: KtTypeAlias,
-    override val parent: KoParentProvider?,
+    override val parent: KoParentProvider,
 ) :
     KoTypeAliasDeclaration,
     KoBaseProviderCore,
@@ -78,7 +78,7 @@ internal class KoTypeAliasDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoTypeAliasDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktTypeAlias: KtTypeAlias, parent: KoParentProvider?): KoTypeAliasDeclaration =
+        internal fun getInstance(ktTypeAlias: KtTypeAlias, parent: KoParentProvider): KoTypeAliasDeclaration =
             cache.getOrCreateInstance(ktTypeAlias, parent) { KoTypeAliasDeclarationImpl(ktTypeAlias, parent) }
     }
 }

@@ -20,7 +20,7 @@ internal class KoDeclarationCache<T : KoBaseProvider> {
 
     private fun hasKey(key: Pair<KtElement, KoBaseProvider?>) = elements.containsKey(key)
 
-    fun getOrCreateInstance(ktElement: KtElement, parent: KoParentProvider?, value: (KtElement) -> T): T {
+    fun getOrCreateInstance(ktElement: KtElement, parent: KoParentProvider, value: (KtElement) -> T): T {
         val cacheKey = ktElement to parent
 
         return if (hasKey(cacheKey)) {

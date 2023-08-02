@@ -41,7 +41,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoObjectDeclarationImpl(
     private val ktObjectDeclaration: KtObjectDeclaration,
-    override val parent: KoParentProvider?,
+    override val parent: KoParentProvider,
 ) :
     KoObjectDeclaration,
     KoBaseProviderCore,
@@ -106,7 +106,7 @@ internal class KoObjectDeclarationImpl(
 
         internal fun getInstance(
             ktObjectDeclaration: KtObjectDeclaration,
-            parent: KoParentProvider?,
+            parent: KoParentProvider,
         ): KoObjectDeclaration =
             cache.getOrCreateInstance(ktObjectDeclaration, parent) {
                 KoObjectDeclarationImpl(
