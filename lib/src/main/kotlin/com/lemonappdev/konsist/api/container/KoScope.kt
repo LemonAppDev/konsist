@@ -11,17 +11,6 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.api.provider.KoClassProvider
-import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoFileProvider
-import com.lemonappdev.konsist.api.provider.KoFunctionProvider
-import com.lemonappdev.konsist.api.provider.KoImportProvider
-import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
-import com.lemonappdev.konsist.api.provider.KoObjectProvider
-import com.lemonappdev.konsist.api.provider.KoPackagesProvider
-import com.lemonappdev.konsist.api.provider.KoPropertyProvider
-import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 
 /**
  * Represents a scope of Kotlin declarations.
@@ -96,7 +85,6 @@ interface KoScope {
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
     ): List<KoFunctionDeclaration>
-
 
     /**
      * The declarations present in the scope.

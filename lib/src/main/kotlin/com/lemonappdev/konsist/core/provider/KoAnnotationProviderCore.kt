@@ -14,8 +14,8 @@ internal interface KoAnnotationProviderCore :
 
     override val annotations: List<KoAnnotationDeclaration>
         get() = ktAnnotated
-                .annotationEntries
-                .map { KoAnnotationDeclarationImpl.getInstance(it, this) }
+            .annotationEntries
+            .map { KoAnnotationDeclarationImpl.getInstance(it, this) }
 
     override val numAnnotations: Int
         get() = annotations.size

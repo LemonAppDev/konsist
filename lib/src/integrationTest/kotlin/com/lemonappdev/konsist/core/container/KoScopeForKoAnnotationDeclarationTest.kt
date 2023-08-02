@@ -22,7 +22,6 @@ class KoScopeForKoAnnotationDeclarationTest {
 
         // then
         sut.annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation1")
-
     }
 
     private fun getSnippetFile(fileName: String) =

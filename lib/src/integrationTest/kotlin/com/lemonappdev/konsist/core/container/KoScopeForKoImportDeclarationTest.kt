@@ -11,7 +11,7 @@ class KoScopeForKoImportDeclarationTest {
         val sut = getSnippetFile("scope-contains-no-import")
 
         // then
-            sut.imports.isEmpty() shouldBeEqualTo true
+        sut.imports.isEmpty() shouldBeEqualTo true
     }
 
     @Test
