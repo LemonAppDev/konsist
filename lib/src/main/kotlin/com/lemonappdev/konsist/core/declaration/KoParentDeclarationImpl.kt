@@ -16,6 +16,7 @@ internal interface KoParentDeclarationImpl :
     KoLocationProviderCore,
     KoPathProviderCore {
     val ktSuperTypeListEntry: KtSuperTypeListEntry
+
     override val psiElement: PsiElement
         get() = ktSuperTypeListEntry
 
