@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoDelegateProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
 
 /**
  * Represents a Kotlin parent declaration.
@@ -13,7 +14,8 @@ interface KoParentDeclaration :
     KoBaseProvider,
     KoDelegateProvider,
     KoNameProvider,
-    KoLocationProvider {
+    KoLocationProvider,
+    KoPathProvider {
     /**
      * String representing the parent.
      *

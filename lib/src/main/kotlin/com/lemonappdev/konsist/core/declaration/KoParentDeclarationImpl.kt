@@ -2,10 +2,12 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
@@ -15,7 +17,8 @@ internal interface KoParentDeclarationImpl :
     KoBaseProviderCore,
     KoDelegateProviderCore,
     KoNameProviderCore,
-    KoLocationProviderCore {
+    KoLocationProviderCore,
+    KoPathProviderCore {
     val ktSuperTypeListEntry: KtSuperTypeListEntry
     override val psiElement: PsiElement
         get() = ktSuperTypeListEntry

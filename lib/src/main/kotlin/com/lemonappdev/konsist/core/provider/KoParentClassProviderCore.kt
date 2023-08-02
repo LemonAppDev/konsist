@@ -14,15 +14,12 @@ internal interface KoParentClassProviderCore :
     val ktClass: KtClass
 
     override val parentClass: KoParentClassDeclaration?
-        get() {
-            val parentClass = ktClass
+        get() =  ktClass
                 .getSuperTypeList()
                 ?.children
                 ?.filterIsInstance<KtSuperTypeCallEntry>()
-                ?.first()
-
-            return parentClass?.let { KoParentClassDeclarationImpl.getInstance(it, this) }
-        }
+                ?.firstOrNull()
+                ?.let { KoParentClassDeclarationImpl.getInstance(it, this)  }
 
     override fun hasParentClass(name: String?): Boolean = when (name) {
         null -> parentClass != null
