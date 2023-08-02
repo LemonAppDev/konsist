@@ -325,10 +325,10 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .classes()
                 .first()
                 .initBlocks
-                ?.asSequence()
+                .asSequence()
 
         // then
-        sut?.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty("otherProperty") }
     }
 
     @Test
@@ -339,10 +339,10 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .classes()
                 .first()
                 .initBlocks
-                ?.asSequence()
+                .asSequence()
 
         // then
-        sut?.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty("otherProperty") }
     }
 
     @Test
@@ -353,10 +353,10 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .classes()
                 .first()
                 .initBlocks
-                ?.asSequence()
+                .asSequence()
 
         // then
-        sut?.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty("otherProperty") }
     }
 
     @Test
@@ -367,10 +367,10 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .classes()
                 .first()
                 .initBlocks
-                ?.asSequence()
+                .asSequence()
 
         // then
-        sut?.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty("otherProperty") }
     }
 
     @Test
