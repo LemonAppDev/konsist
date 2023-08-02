@@ -40,8 +40,8 @@ internal class KoParentDeclarationImpl private constructor(private val ktSuperTy
 
         internal fun getInstance(
             ktSuperTypeListEntry: KtSuperTypeListEntry,
-            parent: KoContainingDeclarationProvider?,
+            containingDeclaration: KoContainingDeclarationProvider,
         ): KoParentDeclaration =
-            cache.getOrCreateInstance(ktSuperTypeListEntry, parent) { KoParentDeclarationImpl(ktSuperTypeListEntry) }
+            cache.getOrCreateInstance(ktSuperTypeListEntry, containingDeclaration) { KoParentDeclarationImpl(ktSuperTypeListEntry) }
     }
 }

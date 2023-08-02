@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoTypeAliasDeclarationImpl private constructor(
     private val ktTypeAlias: KtTypeAlias,
-    override val containingDeclaration: KoContainingDeclarationProvider?,
+    override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
     KoTypeAliasDeclaration,
     KoBaseProviderCore,
@@ -58,7 +58,7 @@ internal class KoTypeAliasDeclarationImpl private constructor(
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktTypeAlias }
 
-    override val koFiles: List<KoFile>? by lazy { null }
+    override val koFiles: List<KoFileDeclaration>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktTypeAlias }
 
@@ -78,7 +78,7 @@ internal class KoTypeAliasDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoTypeAliasDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktTypeAlias: KtTypeAlias, parent: KoContainingDeclarationProvider?): KoTypeAliasDeclaration =
-            cache.getOrCreateInstance(ktTypeAlias, parent) { KoTypeAliasDeclarationImpl(ktTypeAlias, parent) }
+        internal fun getInstance(ktTypeAlias: KtTypeAlias, containingDeclaration: KoContainingDeclarationProvider): KoTypeAliasDeclaration =
+            cache.getOrCreateInstance(ktTypeAlias, containingDeclaration) { KoTypeAliasDeclarationImpl(ktTypeAlias, containingDeclaration) }
     }
 }

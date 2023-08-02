@@ -1,5 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
+import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -9,7 +11,7 @@ import org.jetbrains.kotlin.psi.KtSecondaryConstructor
 
 internal class KoSecondaryConstructorDeclarationImpl private constructor(
     private val ktSecondaryConstructor: KtSecondaryConstructor,
-    override val containingDeclaration: KoContainingDeclarationProvider?,
+    override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
     KoConstructorDeclarationImpl,
     KoSecondaryConstructorDeclaration,
@@ -25,12 +27,12 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
 
         internal fun getInstance(
             ktSecondaryConstructor: KtSecondaryConstructor,
-            parent: KoContainingDeclarationProvider?,
+            containingDeclaration: KoContainingDeclarationProvider,
         ): KoSecondaryConstructorDeclaration =
-            cache.getOrCreateInstance(ktSecondaryConstructor, parent) {
+            cache.getOrCreateInstance(ktSecondaryConstructor, containingDeclaration) {
                 KoSecondaryConstructorDeclarationImpl(
                     ktSecondaryConstructor,
-                    parent,
+                    containingDeclaration,
                 )
             }
     }

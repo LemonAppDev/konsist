@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -50,7 +50,7 @@ internal interface KoConstructorDeclarationImpl :
     override val ktCallableDeclaration: KtCallableDeclaration
         get() = ktConstructor
 
-    override val koFiles: List<KoFile>?
+    override val koFiles: List<KoFileDeclaration>?
         get() = null
 
     override val psiElement: PsiElement

@@ -9,20 +9,23 @@ import org.junit.jupiter.api.Test
 
 class KoPropertyDeclarationForKoContainingDeclarationProviderTest {
     @Test
-    fun `property-without-parent`() {
+    fun `property-with-file-parent-declaration`() {
         // given
-        val sut = getSnippetFile("property-without-parent")
+        val sut = getSnippetFile("property-with-file-parent-declaration")
             .properties()
             .first()
 
         // then
-        sut.containingDeclaration shouldBeEqualTo null
+        assertSoftly(sut) {
+            containingDeclaration shouldNotBeEqualTo null
+            (containingDeclaration as KoNameProvider).name shouldBeEqualTo "property-with-file-parent-declaration"
+        }
     }
 
     @Test
-    fun `property-with-parent`() {
+    fun `property-with-parent-declaration`() {
         // given
-        val sut = getSnippetFile("property-with-parent")
+        val sut = getSnippetFile("property-with-parent-declaration")
             .properties(includeNested = true)
             .first()
 

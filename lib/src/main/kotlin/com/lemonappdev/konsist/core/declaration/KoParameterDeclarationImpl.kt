@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
@@ -37,7 +37,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 
 internal class KoParameterDeclarationImpl private constructor(
     override val ktParameter: KtParameter,
-    override val containingDeclaration: KoContainingDeclarationProvider?,
+    override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
     KoParameterDeclaration,
     KoBaseProviderCore,
@@ -67,7 +67,7 @@ internal class KoParameterDeclarationImpl private constructor(
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktParameter }
 
-    override val koFiles: List<KoFile>? by lazy { null }
+    override val koFiles: List<KoFileDeclaration>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktParameter }
 
@@ -94,7 +94,7 @@ internal class KoParameterDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktParameter: KtParameter, parent: KoContainingDeclarationProvider?): KoParameterDeclaration =
-            cache.getOrCreateInstance(ktParameter, parent) { KoParameterDeclarationImpl(ktParameter, parent) }
+        internal fun getInstance(ktParameter: KtParameter, containingDeclaration: KoContainingDeclarationProvider): KoParameterDeclaration =
+            cache.getOrCreateInstance(ktParameter, containingDeclaration) { KoParameterDeclarationImpl(ktParameter, containingDeclaration) }
     }
 }

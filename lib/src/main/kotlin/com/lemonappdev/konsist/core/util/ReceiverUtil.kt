@@ -9,7 +9,7 @@ object ReceiverUtil {
     internal fun getType(
         types: List<KtTypeReference>,
         isExtension: Boolean,
-        parentDeclaration: KoContainingDeclarationProvider?,
+        parentDeclaration: KoContainingDeclarationProvider,
     ): KoTypeDeclaration? {
         val type = if (isExtension && types.size > 1) {
             // We choose last because when we have extension the first one is receiver and the second one is (return) type.
@@ -26,7 +26,7 @@ object ReceiverUtil {
     internal fun getReceiverType(
         types: List<KtTypeReference>,
         isExtension: Boolean,
-        parentDeclaration: KoContainingDeclarationProvider?,
+        parentDeclaration: KoContainingDeclarationProvider,
     ): KoTypeDeclaration? {
         val type = if (isExtension) {
             types.first()

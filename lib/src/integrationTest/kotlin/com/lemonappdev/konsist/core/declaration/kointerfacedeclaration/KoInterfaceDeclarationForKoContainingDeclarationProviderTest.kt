@@ -9,20 +9,23 @@ import org.junit.jupiter.api.Test
 
 class KoInterfaceDeclarationForKoContainingDeclarationProviderTest {
     @Test
-    fun `interface-without-parent`() {
+    fun `interface-with-file-parent-declaration`() {
         // given
-        val sut = getSnippetFile("interface-without-parent")
+        val sut = getSnippetFile("interface-with-file-parent-declaration")
             .interfaces()
             .first()
 
         // then
-        sut.containingDeclaration shouldBeEqualTo null
+        assertSoftly(sut) {
+            containingDeclaration shouldNotBeEqualTo null
+            (containingDeclaration as KoNameProvider).name shouldBeEqualTo "interface-with-file-parent-declaration"
+        }
     }
 
     @Test
-    fun `interface-with-parent`() {
+    fun `interface-with-parent-declaration`() {
         // given
-        val sut = getSnippetFile("interface-with-parent")
+        val sut = getSnippetFile("interface-with-parent-declaration")
             .interfaces(includeNested = true)
             .first()
 

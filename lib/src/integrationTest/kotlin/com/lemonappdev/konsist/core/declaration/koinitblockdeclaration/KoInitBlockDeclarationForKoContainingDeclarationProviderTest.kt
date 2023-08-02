@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test
 
 class KoInitBlockDeclarationForKoContainingDeclarationProviderTest {
     @Test
-    fun `init-block-parent`() {
+    fun `init-block-parent-declaration`() {
         // given
-        val sut = getSnippetFile("init-block-parent")
+        val sut = getSnippetFile("init-block-parent-declaration")
             .classes()
             .first()
             .initBlocks

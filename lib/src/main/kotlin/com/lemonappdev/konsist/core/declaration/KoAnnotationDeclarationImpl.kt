@@ -48,8 +48,8 @@ internal class KoAnnotationDeclarationImpl private constructor(
 
         internal fun getInstance(
             ktObjectDeclaration: KtAnnotationEntry,
-            parent: KoContainingDeclarationProvider?,
+            containingDeclaration: KoContainingDeclarationProvider,
         ): KoAnnotationDeclaration =
-            cache.getOrCreateInstance(ktObjectDeclaration, parent) { KoAnnotationDeclarationImpl(ktObjectDeclaration) }
+            cache.getOrCreateInstance(ktObjectDeclaration, containingDeclaration) { KoAnnotationDeclarationImpl(ktObjectDeclaration) }
     }
 }

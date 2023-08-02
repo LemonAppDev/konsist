@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 
 class KoParameterDeclarationForKoContainingDeclarationProviderTest {
     @Test
-    fun `parameter-parent`() {
+    fun `parameter-parent-declaration`() {
         // given
-        val sut = getSnippetFile("parameter-parent")
+        val sut = getSnippetFile("parameter-parent-declaration")
             .classes()
             .first()
             .primaryConstructor

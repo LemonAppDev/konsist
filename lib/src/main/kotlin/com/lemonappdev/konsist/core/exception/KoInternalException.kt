@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.exception
 
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 
@@ -13,10 +13,10 @@ class KoInternalException(
     constructor(
         message: String,
         cause: Throwable? = null,
-        koFile: KoFile?,
-    ) : this(getMessage(message, koFile), cause)
+        koFileDeclaration: KoFileDeclaration?,
+    ) : this(getMessage(message, koFileDeclaration), cause)
 }
-private fun getMessage(message: String, koFile: KoFile?) = getMessage(message, koFile?.text, "file")
+private fun getMessage(message: String, koFileDeclaration: KoFileDeclaration?) = getMessage(message, koFileDeclaration?.text, "file")
 
 private fun getMessage(message: String, koBaseProvider: KoBaseProvider?) =
     getMessage(message, (koBaseProvider as KoTextProvider?)?.text, "declaration")

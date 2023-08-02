@@ -1,22 +1,22 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
-internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProviderCore {
+internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProviderCore, KoContainingDeclarationProviderCore {
     val ktFile: KtFile?
-    val koFiles: List<KoFile>?
+    val koFiles: List<KoFileDeclaration>?
 
     override val typeAliases: List<KoTypeAliasDeclaration>
         get() = if (ktFile != null) {
             ktFile
                 ?.children
                 ?.filterIsInstance<KtTypeAlias>()
-                ?.map { KoTypeAliasDeclarationImpl.getInstance(it, null) }
+                ?.map { KoTypeAliasDeclarationImpl.getInstance(it, this) }
                 ?: emptyList()
         } else {
             koFiles?.flatMap { it.typeAliases } ?: emptyList()

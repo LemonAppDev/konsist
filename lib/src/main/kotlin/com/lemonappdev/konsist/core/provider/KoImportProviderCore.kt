@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.psi.KtImportList
 
 internal interface KoImportProviderCore : KoImportProvider, KoContainingDeclarationProviderCore, KoBaseProviderCore {
     val ktFile: KtFile?
-    val koFiles: List<KoFile>?
+    val koFiles: List<KoFileDeclaration>?
 
     override val imports: List<KoImportDeclaration>
         get() {
@@ -24,7 +24,7 @@ internal interface KoImportProviderCore : KoImportProvider, KoContainingDeclarat
                     ?.filterIsInstance<KtImportDirective>()
 
             val imports = if (ktFile != null) {
-                ktImportDirectives?.map { KoImportDeclarationImpl.getInstance(it, null) }
+                ktImportDirectives?.map { KoImportDeclarationImpl.getInstance(it, this) }
             } else {
                 koFiles?.flatMap { (it as KoImportProvider).imports }
             }

@@ -1,10 +1,10 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -57,7 +57,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoClassDeclarationImpl private constructor(
     override val ktClass: KtClass,
-    override val containingDeclaration: KoContainingDeclarationProvider?,
+    override val containingDeclaration: KoContainingDeclarationProvider,
 ) : KoClassDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
@@ -106,7 +106,7 @@ internal class KoClassDeclarationImpl private constructor(
 
     override val ktAnnotated: KtAnnotated by lazy { ktClass }
 
-    override val koFiles: List<KoFile>? by lazy { null }
+    override val koFiles: List<KoFileDeclaration>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktClass }
 
@@ -127,9 +127,9 @@ internal class KoClassDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoClassDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktClass: KtClass, parent: KoContainingDeclarationProvider?): KoClassDeclaration =
-            cache.getOrCreateInstance(ktClass, parent) {
-                KoClassDeclarationImpl(ktClass, parent)
+        internal fun getInstance(ktClass: KtClass, containingDeclaration: KoContainingDeclarationProvider): KoClassDeclaration =
+            cache.getOrCreateInstance(ktClass, containingDeclaration) {
+                KoClassDeclarationImpl(ktClass, containingDeclaration)
             }
     }
 }
