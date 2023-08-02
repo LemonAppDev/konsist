@@ -21,12 +21,12 @@ import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExpectModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoFunModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoSealedModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoActualModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoExpectModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoFunModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoSealedModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
 /**
  * Represents a Kotlin import declaration.

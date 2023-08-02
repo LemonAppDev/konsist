@@ -28,19 +28,19 @@ import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoAbstractModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoActualModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoAnnotationModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoDataModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoEnumModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoExpectModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoFinalModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoInnerModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoOpenModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoSealedModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoValueModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoActualModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoAnnotationModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoDataModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoEnumModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoExpectModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoFinalModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoInnerModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoOpenModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoSealedModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoValueModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
 /**
  * Represents a Kotlin class declaration.

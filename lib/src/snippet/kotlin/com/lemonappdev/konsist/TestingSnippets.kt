@@ -3,9 +3,9 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.declarations
-import com.lemonappdev.konsist.api.ext.list.komodifierproviderlistext.withoutSomeModifiers
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutSomeModifiers
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
 

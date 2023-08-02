@@ -14,13 +14,13 @@ import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoCrossInlineModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoNoInlineModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoValModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVarArgModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVarModifierProvider
-import com.lemonappdev.konsist.api.provider.komodifierprovider.KoVisibilityModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoCrossInlineModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoNoInlineModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoValModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoVarArgModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoVarModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
 /**
  * Represents a Kotlin parameter declaration.

@@ -21,9 +21,9 @@ import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderC
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
-import com.lemonappdev.konsist.core.provider.komodifierprovider.KoActualModifierProviderCore
-import com.lemonappdev.konsist.core.provider.komodifierprovider.KoModifierProviderCore
-import com.lemonappdev.konsist.core.provider.komodifierprovider.KoVisibilityModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
