@@ -2,12 +2,79 @@ package com.lemonappdev.konsist.core.verify.kodeclarationassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.verify.assert
 import com.lemonappdev.konsist.core.verify.assertNot
+import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoDeclarationAssertForDeclarationSequenceTest {
+    @Test
+    fun `declaration-assert-test-method-name`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-test-method-name")
+            .classes()
+            .asSequence()
+
+        // then
+        try {
+            sut.assert { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
+        }
+    }
+
+    @Test
+    fun `file-declaration-assert-test-method-name`() {
+        // given
+        val sut = getSnippetFile("file-declaration-assert-test-method-name")
+            .files
+            .asSequence()
+
+        // then
+        try {
+            sut.assert { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' has failed. Invalid files (1)") ?: throw e
+        }
+    }
+
+    @Test
+    fun `declaration-assert-fails-when-declaration-list-is-empty`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-fails-when-declaration-list-is-empty")
+            .classes()
+            .asSequence()
+
+        // when
+        val func = {
+            sut.assert { true }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assert' method."
+    }
+
+    @Test
+    fun `declaration-assert-not-fails-when-declaration-list-is-empty`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-not-fails-when-declaration-list-is-empty")
+            .classes()
+            .asSequence()
+
+        // when
+        val func = {
+            sut.assertNot { false }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
+    }
+
     @Test
     fun `assert-passes`() {
         // given

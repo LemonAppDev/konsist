@@ -1,12 +1,17 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 fun <E : KoBaseProvider> List<E>.assert(function: (E) -> Boolean?) {
     assert(function, positiveCheck = true)
@@ -31,7 +36,7 @@ private fun <E : KoBaseProvider> List<E>.assert(function: (E) -> Boolean?, posit
     try {
         val testMethodName = getTestMethodNameFromFifthIndex()
 
-        checkIfLocalListIsEmpty(this, "Declaration", getTestMethodNameFromFourthIndex())
+        checkIfLocalListIsEmpty(this, getTestMethodNameFromFourthIndex())
 
         val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this, testMethodName)
 
@@ -49,6 +54,15 @@ private fun <E : KoBaseProvider> List<E>.assert(function: (E) -> Boolean?, posit
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
         throw KoInternalException(e.message.orEmpty(), e, lastDeclaration)
+    }
+}
+
+private fun checkIfLocalListIsEmpty(localList: List<*>, testMethodName: String) {
+    if (localList.isEmpty()) {
+        throw KoPreconditionFailedException(
+            "Declaration list is empty. Please make sure that list of declarations contain items " +
+                    "before calling the '$testMethodName' method.",
+        )
     }
 }
 
@@ -87,3 +101,60 @@ private fun checkIfParentIsAnnotatedWithSuppress(declaration: KoBaseProvider, te
     } else {
         checkIfSuppressed((declaration as KoContainingFileProvider).containingFile, testMethodName)
     }
+
+private fun checkIfSuppressed(item: KoAnnotationProvider, testMethodName: String): Boolean {
+    val annotationParameter = item
+        .annotations
+        .firstOrNull { it.name == "Suppress" }
+        ?.text
+        ?.removePrefix("@file:Suppress(")
+        ?.removePrefix("@Suppress(")
+        ?.substringBeforeLast(")")
+        ?.split(",")
+        ?.map { it.trim() }
+        ?.map { it.removePrefix("\"") }
+        ?.map { it.removeSuffix("\"") }
+        ?: emptyList()
+
+    return annotationParameter.any { it == testMethodName } || annotationParameter.any { it == "konsist.$testMethodName" }
+}
+
+private fun getResult(items: List<*>, result: Map<Boolean?, List<Any>>, positiveCheck: Boolean, testMethodName: String) {
+    val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
+
+    if (!allChecksPassed) {
+        val failedItems = result[!positiveCheck] ?: emptyList()
+        throw KoCheckFailedException(getCheckFailedMessage(failedItems, testMethodName))
+    }
+}
+
+private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String): String {
+    var types = ""
+    val failedDeclarationsMessage = failedItems.joinToString("\n") {
+        val konsistDeclarationClassNamePrefix = "Ko"
+
+        when (it) {
+            is KoFileDeclaration -> {
+                types = "files"
+                val name = it.name
+                val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
+
+                "${it.path} ($name $declarationType)"
+            }
+
+            is KoBaseProvider -> {
+                types = "declarations"
+                val name = (it as KoNameProvider).name
+                val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
+
+                "${(it as KoLocationProvider).location} ($name $declarationType)"
+            }
+
+            else -> {
+                ""
+            }
+        }
+    }
+
+    return "Assert '$testMethodName' has failed. Invalid $types (${failedItems.size}):\n$failedDeclarationsMessage"
+}
