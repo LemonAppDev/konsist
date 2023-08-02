@@ -8,19 +8,13 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
 internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProviderCore, KoParentProviderCore {
-    val ktFile: KtFile?
-    val koFiles: List<KoFileDeclaration>?
+    val ktFile: KtFile
 
     override val typeAliases: List<KoTypeAliasDeclaration>
-        get() = if (ktFile != null) {
-            ktFile
-                ?.children
-                ?.filterIsInstance<KtTypeAlias>()
-                ?.map { KoTypeAliasDeclarationImpl.getInstance(it, this) }
-                ?: emptyList()
-        } else {
-            koFiles?.flatMap { it.typeAliases } ?: emptyList()
-        }
+        get() = ktFile
+                .children
+                .filterIsInstance<KtTypeAlias>()
+                .map { KoTypeAliasDeclarationImpl.getInstance(it, this) }
 
     override val numTypeAliases: Int
         get() = typeAliases.size

@@ -12,20 +12,6 @@ import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
-import com.lemonappdev.konsist.core.provider.KoClassProviderCore
-import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
-import com.lemonappdev.konsist.core.provider.KoFileProviderCore
-import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
-import com.lemonappdev.konsist.core.provider.KoImportProviderCore
-import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
-import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
-import com.lemonappdev.konsist.core.provider.KoPackagesProviderCore
-import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
-import com.lemonappdev.konsist.core.provider.KoTypeAliasProviderCore
-import org.jetbrains.kotlin.psi.KtAnnotated
-import org.jetbrains.kotlin.psi.KtFile
 
 @Suppress("detekt.TooManyFunctions")
 class KoScopeImpl(
