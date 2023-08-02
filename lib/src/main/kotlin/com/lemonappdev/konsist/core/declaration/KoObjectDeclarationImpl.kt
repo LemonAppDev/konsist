@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -41,7 +41,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoObjectDeclarationImpl(
     private val ktObjectDeclaration: KtObjectDeclaration,
-    override val parent: KoParentProvider?,
+    override val parent: KoParentProvider,
 ) :
     KoObjectDeclaration,
     KoBaseProviderCore,
@@ -75,7 +75,7 @@ internal class KoObjectDeclarationImpl(
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktObjectDeclaration }
 
-    override val koFiles: List<KoFile>? by lazy { null }
+    override val koFiles: List<KoFileDeclaration>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktObjectDeclaration }
 
@@ -106,7 +106,7 @@ internal class KoObjectDeclarationImpl(
 
         internal fun getInstance(
             ktObjectDeclaration: KtObjectDeclaration,
-            parent: KoParentProvider?,
+            parent: KoParentProvider,
         ): KoObjectDeclaration =
             cache.getOrCreateInstance(ktObjectDeclaration, parent) {
                 KoObjectDeclarationImpl(

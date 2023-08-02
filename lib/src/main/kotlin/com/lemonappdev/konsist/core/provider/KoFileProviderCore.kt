@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoFileProvider
 
 internal interface KoFileProviderCore : KoFileProvider, KoBaseProviderCore {
-    val koFiles: List<KoFile>
+    val koFiles: List<KoFileDeclaration>
 
-    override val files: List<KoFile>
+    override val files: List<KoFileDeclaration>
         get() = koFiles.sortedBy { it.path }
 
     override val numFiles: Int

@@ -40,7 +40,7 @@ internal class KoImportDeclarationImpl private constructor(override val ktImport
 
         internal fun getInstance(
             ktImportDirective: KtImportDirective,
-            parent: KoParentProvider?,
+            parent: KoParentProvider,
         ): KoImportDeclaration =
             cache.getOrCreateInstance(ktImportDirective, parent) { KoImportDeclarationImpl(ktImportDirective) }
     }

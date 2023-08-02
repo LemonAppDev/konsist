@@ -1,3 +1,0 @@
-@file:Suppress("detekt.someRule", "konsist.assert-suppress-with-few-parameters")
-
-class SampleClass

@@ -9,14 +9,17 @@ import org.junit.jupiter.api.Test
 
 class KoInterfaceDeclarationForKoParentProviderTest {
     @Test
-    fun `interface-without-parent`() {
+    fun `interface-with-file-parent`() {
         // given
-        val sut = getSnippetFile("interface-without-parent")
+        val sut = getSnippetFile("interface-with-file-parent")
             .interfaces()
             .first()
 
         // then
-        sut.parent shouldBeEqualTo null
+        assertSoftly(sut) {
+            parent shouldNotBeEqualTo null
+            (parent as KoNameProvider).name shouldBeEqualTo "interface-with-file-parent"
+        }
     }
 
     @Test

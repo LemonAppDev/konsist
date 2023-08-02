@@ -1,19 +1,25 @@
 package com.lemonappdev.konsist.core.declaration.kotypealiasdeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoTypeAliasDeclarationForKoParentProviderTest {
     @Test
-    fun `typealias-without-parent`() {
+    fun `typealias-with-file-parent`() {
         // given
-        val sut = getSnippetFile("typealias-without-parent")
+        val sut = getSnippetFile("typealias-with-file-parent")
             .typeAliases
             .first()
 
         // then
-        sut.parent shouldBeEqualTo null
+        assertSoftly(sut) {
+            parent shouldNotBeEqualTo null
+            (parent as KoNameProvider).name shouldBeEqualTo "typealias-with-file-parent"
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

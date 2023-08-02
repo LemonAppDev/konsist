@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -54,7 +54,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 @Suppress("detekt.TooManyFunctions")
 internal class KoFunctionDeclarationImpl private constructor(
     override val ktFunction: KtFunction,
-    override val parent: KoParentProvider?,
+    override val parent: KoParentProvider,
 ) :
     KoFunctionDeclaration,
     KoBaseProviderCore,
@@ -101,7 +101,7 @@ internal class KoFunctionDeclarationImpl private constructor(
 
     override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
 
-    override val koFiles: List<KoFile>? by lazy { null }
+    override val koFiles: List<KoFileDeclaration>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktFunction }
 
@@ -140,7 +140,7 @@ internal class KoFunctionDeclarationImpl private constructor(
     internal companion object {
 
         private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
-        internal fun getInstance(ktFunction: KtFunction, parent: KoParentProvider?): KoFunctionDeclaration =
+        internal fun getInstance(ktFunction: KtFunction, parent: KoParentProvider): KoFunctionDeclaration =
             cache.getOrCreateInstance(ktFunction, parent) {
                 KoFunctionDeclarationImpl(ktFunction, parent)
             }

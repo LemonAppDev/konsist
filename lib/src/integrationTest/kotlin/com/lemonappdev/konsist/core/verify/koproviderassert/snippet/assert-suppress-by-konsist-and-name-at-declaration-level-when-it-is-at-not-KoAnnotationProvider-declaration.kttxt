@@ -1,3 +1,5 @@
+val otherProperty = ""
+
 class SampleClassWithOtherProperty {
     val otherProperty = ""
     init {

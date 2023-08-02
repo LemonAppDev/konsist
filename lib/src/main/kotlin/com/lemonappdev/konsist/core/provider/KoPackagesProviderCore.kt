@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.container.KoFile
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.provider.KoPackagesProvider
 import com.lemonappdev.konsist.core.util.LocationUtil
 
 internal interface KoPackagesProviderCore : KoPackagesProvider, KoBaseProviderCore {
-    val koFiles: List<KoFile>
+    val koFiles: List<KoFileDeclaration>
 
     override val packages: List<KoPackageDeclaration>
         get() = koFiles.mapNotNull { it.packagee }
