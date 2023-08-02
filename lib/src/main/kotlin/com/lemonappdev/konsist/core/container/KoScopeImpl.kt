@@ -1,13 +1,17 @@
 package com.lemonappdev.konsist.core.container
 
 import com.lemonappdev.konsist.api.container.KoScope
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
@@ -25,26 +29,19 @@ import org.jetbrains.kotlin.psi.KtFile
 
 @Suppress("detekt.TooManyFunctions")
 class KoScopeImpl(
-    override var koFiles: List<KoFileDeclaration>,
-) : KoScope,
-    KoAnnotationProviderCore,
-    KoClassProviderCore,
-    KoDeclarationProviderCore,
-    KoFileProviderCore,
-    KoFunctionProviderCore,
-    KoImportProviderCore,
-    KoInterfaceProviderCore,
-    KoObjectProviderCore,
-    KoPackagesProviderCore,
-    KoPropertyProviderCore,
-    KoTypeAliasProviderCore {
+    private var koFiles: List<KoFileDeclaration>,
+) : KoScope {
     constructor(koFileDeclaration: KoFileDeclaration) : this(listOf(koFileDeclaration))
 
-    override val ktFile: KtFile? by lazy { null }
+    override val files: List<KoFileDeclaration> = koFiles.sortedBy { it.path }
 
-    override val parent: KoParentProvider? by lazy { null }
+    override val imports: List<KoImportDeclaration> = koFiles.flatMap { it.imports }
 
-    override val ktAnnotated: KtAnnotated? by lazy { null }
+    override val annotations: List<KoAnnotationDeclaration> = koFiles.flatMap { it.annotations }
+
+    override val packages: List<KoPackageDeclaration> = koFiles.mapNotNull { it.packagee }
+
+    override val typeAliases: List<KoTypeAliasDeclaration> = koFiles.flatMap { it.typeAliases }
 
     override fun classes(
         includeNested: Boolean,
@@ -71,7 +68,8 @@ class KoScopeImpl(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoBaseDeclaration> = koFiles.flatMap { listOf(it) + it.declarations(includeNested, includeLocal) }
+    ): List<KoBaseDeclaration> =
+        koFiles.flatMap { listOf(it) + it.declarations(includeNested, includeLocal) }
 
     override fun properties(
         includeNested: Boolean,
@@ -94,13 +92,14 @@ class KoScopeImpl(
     }
 
     override fun toString(): String = files
+        .toList()
         .joinToString("\n") { it.path }
 
     override fun print() {
         println(toString())
     }
 
-    override fun equals(other: Any?): Boolean = other is KoScope && files == other.files
+    override fun equals(other: Any?): Boolean = other is KoScope && files.toList() == other.files.toList()
 
-    override fun hashCode(): Int = 31 * 7 + files.hashCode()
+    override fun hashCode(): Int = 31 * 7 + files.toList().hashCode()
 }

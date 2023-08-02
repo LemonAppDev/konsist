@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.core.container
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoScopeForKoInterfaceProviderTest {
+class KoScopeForKoInterfaceDeclarationTest {
     @Test
     fun `scope-contains-no-interfaces`() {
         // given
@@ -41,21 +40,5 @@ class KoScopeForKoInterfaceProviderTest {
             .shouldBeEqualTo(expected)
     }
 
-    @Test
-    fun `contains-interfaces`() {
-        // given
-        val sut = getSnippetFile("contains-interfaces")
-
-        // then
-        assertSoftly(sut) {
-            numInterfaces(includeNested = false) shouldBeEqualTo 1
-            numInterfaces(includeNested = true) shouldBeEqualTo 2
-            containsInterface("SampleInterface", includeNested = false) shouldBeEqualTo true
-            containsInterface("SampleNestedInterface", includeNested = false) shouldBeEqualTo false
-            containsInterface("SampleNestedInterface", includeNested = true) shouldBeEqualTo true
-            containsInterface("NonExisting") shouldBeEqualTo false
-        }
-    }
-
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/snippet/forkointerfaceprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/container/snippet/forkointerfacedeclaration/", fileName)
 }

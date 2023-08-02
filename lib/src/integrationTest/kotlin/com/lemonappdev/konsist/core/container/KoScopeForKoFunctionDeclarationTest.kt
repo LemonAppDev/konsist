@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.core.container
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoScopeForKoFunctionProviderTest {
+class KoScopeForKoFunctionDeclarationTest {
     @Test
     fun `scope-contains-no-functions`() {
         // given
@@ -67,26 +66,6 @@ class KoScopeForKoFunctionProviderTest {
             .shouldBeEqualTo(expected)
     }
 
-    @Test
-    fun `contains-functions`() {
-        // given
-        val sut = getSnippetFile("contains-functions")
-
-        // then
-        assertSoftly(sut) {
-            numFunctions(includeNested = true, includeLocal = true) shouldBeEqualTo 3
-            numFunctions(includeNested = true, includeLocal = false) shouldBeEqualTo 2
-            numFunctions(includeNested = false, includeLocal = true) shouldBeEqualTo 2
-            numFunctions(includeNested = false, includeLocal = false) shouldBeEqualTo 1
-            containsFunction("sampleFunction", includeNested = false, includeLocal = false) shouldBeEqualTo true
-            containsFunction("sampleLocalFunction", includeNested = false, includeLocal = true) shouldBeEqualTo true
-            containsFunction("sampleLocalFunction", includeNested = false, includeLocal = false) shouldBeEqualTo false
-            containsFunction("sampleNestedFunction", includeNested = true, includeLocal = false) shouldBeEqualTo true
-            containsFunction("sampleNestedFunction", includeNested = false, includeLocal = false) shouldBeEqualTo false
-            containsFunction("NonExisting") shouldBeEqualTo false
-        }
-    }
-
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/container/snippet/forkofunctionprovider/", fileName)
+        getSnippetKoScope("core/container/snippet/forkofunctiondeclaration/", fileName)
 }

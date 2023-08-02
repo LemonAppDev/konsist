@@ -1,6 +1,16 @@
 package com.lemonappdev.konsist.api.container
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
+import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoClassProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
@@ -17,18 +27,100 @@ import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
  * Represents a scope of Kotlin declarations.
  */
 @Suppress("detekt.TooManyFunctions")
-interface KoScope :
-    KoAnnotationProvider,
-    KoClassProvider,
-    KoDeclarationProvider,
-    KoFileProvider,
-    KoFunctionProvider,
-    KoImportProvider,
-    KoInterfaceProvider,
-    KoObjectProvider,
-    KoPackagesProvider,
-    KoPropertyProvider,
-    KoTypeAliasProvider {
+interface KoScope {
+    /**
+     * The files present in the scope.
+     */
+    val files: List<KoFileDeclaration>
+
+    /**
+     * The imports present in the scope.
+     */
+    val imports: List<KoImportDeclaration>
+
+    /**
+     * The annotations present in the scope.
+     */
+    val annotations: List<KoAnnotationDeclaration>
+
+    /**
+     * The packages present in the scope.
+     */
+    val packages: List<KoPackageDeclaration>
+
+    /**
+     * The type aliases present in the scope.
+     */
+    val typeAliases: List<KoTypeAliasDeclaration>
+
+    /**
+     * The classes present in the scope.
+     *
+     * @param includeNested specifies whether to include nested classes, by default `false`.
+     * @param includeLocal specifies whether to include local classes, by default `false`.
+     * @return a sequence of [KoClassDeclaration] representing the classes in the scope.
+     */
+    fun classes(
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+    ): List<KoClassDeclaration>
+
+    /**
+     * The interfaces present in the scope.
+     *
+     * @param includeNested specifies whether to include nested interfaces, by default `false`.
+     * @return a sequence of [KoInterfaceDeclaration] representing the interfaces in the scope.
+     */
+    fun interfaces(
+        includeNested: Boolean = false,
+    ): List<KoInterfaceDeclaration>
+
+    /**
+     * The objects present in the scope.
+     *
+     * @param includeNested specifies whether to include nested objects, by default `false`.
+     * @return a sequence of [KoObjectDeclaration] representing the objects in the scope.
+     */
+    fun objects(
+        includeNested: Boolean = false,
+    ): List<KoObjectDeclaration>
+
+    /**
+     * The functions present in the scope.
+     *
+     * @param includeNested specifies whether to include nested functions, by default `false`.
+     * @param includeLocal specifies whether to include local functions, by default `false`.
+     * @return a sequence of [KoFunctionDeclaration] representing the functions in the scope.
+     */
+    fun functions(
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+    ): List<KoFunctionDeclaration>
+
+
+    /**
+     * The declarations present in the scope.
+     *
+     * @param includeNested specifies whether to include nested declarations, by default `false`.
+     * @param includeLocal specifies whether to include local declarations, by default `false`.
+     * @return a sequence of [KoBaseDeclaration] representing the declarations in the scope.
+     */
+    fun declarations(
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+    ): List<KoBaseDeclaration>
+
+    /**
+     * The properties present in the scope.
+     *
+     * @param includeNested specifies whether to include nested properties, by default `false`.
+     * @param includeLocal specifies whether to include local properties, by default `false`.
+     * @return a sequence of [KoPropertyDeclaration] representing the properties in the scope.
+     */
+    fun properties(
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+    ): List<KoPropertyDeclaration>
 
     /**
      * The scope with given predicate.
