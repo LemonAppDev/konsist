@@ -50,7 +50,7 @@ enum class KoModifier(val type: String) {
     OPERATOR("operator"),
 
     /**
-     * The `nfix` modifier.
+     * The `infix` modifier.
      */
     INFIX("infix"),
 

@@ -13,7 +13,6 @@ import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoLocalPropertyProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
-import com.lemonappdev.konsist.api.provider.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
@@ -23,6 +22,20 @@ import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoActualModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoExpectModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoExternalModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoFinalModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoInfixModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoInlineModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoOpenModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoOperatorModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoOverrideModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoSuspendModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoTailrecModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
 /**
  * Represents a Kotlin function declaration.
@@ -51,7 +64,20 @@ interface KoFunctionDeclaration :
     KoReceiverTypeProvider,
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
-    KoTopLevelProvider {
+    KoTopLevelProvider,
+    KoVisibilityModifierProvider,
+    KoOperatorModifierProvider,
+    KoInlineModifierProvider,
+    KoTailrecModifierProvider,
+    KoInfixModifierProvider,
+    KoExternalModifierProvider,
+    KoSuspendModifierProvider,
+    KoOpenModifierProvider,
+    KoOverrideModifierProvider,
+    KoFinalModifierProvider,
+    KoAbstractModifierProvider,
+    KoActualModifierProvider,
+    KoExpectModifierProvider {
     /**
      * String representing the function.
      *

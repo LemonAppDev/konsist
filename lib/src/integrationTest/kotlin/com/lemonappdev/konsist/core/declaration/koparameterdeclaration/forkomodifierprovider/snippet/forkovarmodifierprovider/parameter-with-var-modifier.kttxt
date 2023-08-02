@@ -1,0 +1,3 @@
+import com.lemonappdev.konsist.testdata.SampleType
+
+class SampleClass(var sampleParameter: SampleType)

@@ -15,7 +15,6 @@ import com.lemonappdev.konsist.core.provider.KoExtensionProviderCore
 import com.lemonappdev.konsist.core.provider.KoImplementationProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentProviderCore
@@ -24,7 +23,18 @@ import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
-import com.lemonappdev.konsist.core.provider.KoVarAndValProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoConstModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoExpectModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoFinalModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoLateinitModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoOpenModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoOverrideModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
@@ -56,7 +66,17 @@ internal class KoPropertyDeclarationImpl private constructor(
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
-    KoVarAndValProviderCore {
+    KoVisibilityModifierProviderCore,
+    KoValModifierProviderCore,
+    KoVarModifierProviderCore,
+    KoLateinitModifierProviderCore,
+    KoOverrideModifierProviderCore,
+    KoAbstractModifierProviderCore,
+    KoOpenModifierProviderCore,
+    KoFinalModifierProviderCore,
+    KoActualModifierProviderCore,
+    KoExpectModifierProviderCore,
+    KoConstModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktProperty }
 
     override val ktFile: KtFile? by lazy { null }
@@ -82,6 +102,10 @@ internal class KoPropertyDeclarationImpl private constructor(
             ?.substringBefore("{")
             ?.removeSuffix(" ")
     }
+
+    override val hasValModifier: Boolean by lazy { !ktProperty.isVar }
+
+    override val hasVarModifier: Boolean by lazy { ktProperty.isVar }
 
     override fun toString(): String {
         return locationWithText
