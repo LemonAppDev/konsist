@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.verify.koproviderassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
@@ -27,7 +28,7 @@ class KoDeclarationAssertForProviderListTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'provider-assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
+            e.message?.shouldContain("Assert 'provider-assert-test-method-name' has failed. Invalid declarations (2)") ?: throw e
         }
     }
 
@@ -36,6 +37,7 @@ class KoDeclarationAssertForProviderListTest {
         // given
         val sut = getSnippetFile("provider-assert-fails-when-declaration-list-is-empty")
             .declarations()
+            .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoNameProvider>()
 
         // when
@@ -53,6 +55,7 @@ class KoDeclarationAssertForProviderListTest {
         // given
         val sut = getSnippetFile("provider-assert-not-fails-when-declaration-list-is-empty")
             .declarations()
+            .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoNameProvider>()
 
         // when

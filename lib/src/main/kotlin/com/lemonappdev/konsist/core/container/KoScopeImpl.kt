@@ -71,8 +71,7 @@ class KoScopeImpl(
     override fun declarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoBaseDeclaration> =
-        koFiles.flatMap { it.declarations(includeNested, includeLocal) }
+    ): List<KoBaseDeclaration> = koFiles.flatMap { listOf(it) + it.declarations(includeNested, includeLocal) }
 
     override fun properties(
         includeNested: Boolean,

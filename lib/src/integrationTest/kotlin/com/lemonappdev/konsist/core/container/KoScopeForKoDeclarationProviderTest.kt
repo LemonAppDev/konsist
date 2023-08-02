@@ -17,8 +17,8 @@ class KoScopeForKoDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            numDeclarations(includeNested = false) shouldBeEqualTo 1
-            numDeclarations(includeNested = true) shouldBeEqualTo 2
+            numDeclarations(includeNested = false) shouldBeEqualTo 2
+            numDeclarations(includeNested = true) shouldBeEqualTo 3
             containsDeclarations("SampleInterface") shouldBeEqualTo true
             containsDeclarations("sampleNestedClass", includeNested = true) shouldBeEqualTo true
             containsDeclarations("sampleNestedClass", includeNested = false) shouldBeEqualTo false
@@ -37,6 +37,7 @@ class KoScopeForKoDeclarationProviderTest {
             .map { it.name }
             .shouldBeEqualTo(
                 listOf(
+                    "scope-contains-all-type-of-declarations",
                     "SampleAnnotation1",
                     "SampleAnnotation2",
                     "samplepackage",
@@ -81,6 +82,7 @@ class KoScopeForKoDeclarationProviderTest {
                 false,
                 false,
                 listOf(
+                    "scope-contains-all-type-of-declarations-with-nested-and-local-declarations",
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
@@ -93,6 +95,7 @@ class KoScopeForKoDeclarationProviderTest {
                 true,
                 false,
                 listOf(
+                    "scope-contains-all-type-of-declarations-with-nested-and-local-declarations",
                     "sampleProperty",
                     "sampleFunction",
                     "SampleClass",
@@ -114,6 +117,7 @@ class KoScopeForKoDeclarationProviderTest {
                 false,
                 true,
                 listOf(
+                    "scope-contains-all-type-of-declarations-with-nested-and-local-declarations",
                     "sampleProperty",
                     "sampleFunction",
                     "sampleLocalProperty1",
@@ -131,6 +135,7 @@ class KoScopeForKoDeclarationProviderTest {
                 true,
                 true,
                 listOf(
+                    "scope-contains-all-type-of-declarations-with-nested-and-local-declarations",
                     "sampleProperty",
                     "sampleFunction",
                     "sampleLocalProperty1",
