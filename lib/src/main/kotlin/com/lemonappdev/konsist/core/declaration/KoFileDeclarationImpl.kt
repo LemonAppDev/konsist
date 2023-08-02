@@ -71,7 +71,7 @@ internal class KoFileDeclarationImpl(override val ktFile: KtFile) :
         includeNested: Boolean,
         includeLocal: Boolean,
     ): List<KoBaseDeclaration> =
-        KoDeclarationProviderCoreUtil.getKoDeclarations(ktFile, includeNested, includeLocal, null)
+        KoDeclarationProviderCoreUtil.getKoDeclarations(ktFile, includeNested, includeLocal, this)
 
     override fun toString(): String = path
 

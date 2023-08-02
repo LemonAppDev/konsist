@@ -96,10 +96,10 @@ private fun checkIfDeclarationIsAnnotatedWithSuppress(declaration: KoBaseProvide
     }
 
 private fun checkIfParentIsAnnotatedWithSuppress(declaration: KoBaseProvider, testMethodName: String): Boolean =
-    if (declaration is KoParentProvider && declaration.parent != null) {
+    if (declaration is KoParentProvider) {
         declaration.parent?.let { checkIfDeclarationIsAnnotatedWithSuppress(it, testMethodName) } ?: false
     } else {
-        checkIfSuppressed((declaration as KoContainingFileProvider).containingFile, testMethodName)
+        false
     }
 
 private fun checkIfSuppressed(item: KoAnnotationProvider, testMethodName: String): Boolean {

@@ -9,14 +9,17 @@ import org.junit.jupiter.api.Test
 
 class KoClassDeclarationForKoParentProviderTest {
     @Test
-    fun `class-without-parent`() {
+    fun `class-with-file-parent`() {
         // given
-        val sut = getSnippetFile("class-without-parent")
+        val sut = getSnippetFile("class-with-file-parent")
             .classes()
             .first()
 
         // then
-        sut.parent shouldBeEqualTo null
+        assertSoftly(sut) {
+            parent shouldNotBeEqualTo null
+            (parent as KoNameProvider).name shouldBeEqualTo "class-with-file-parent"
+        }
     }
 
     @Test
