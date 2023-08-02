@@ -4,7 +4,7 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.container.KoFile
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -22,7 +22,7 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
-import com.lemonappdev.konsist.core.provider.KoParentProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
@@ -54,7 +54,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 @Suppress("detekt.TooManyFunctions")
 internal class KoFunctionDeclarationImpl private constructor(
     override val ktFunction: KtFunction,
-    override val parent: KoParentProvider?,
+    override val containingDeclaration: KoContainingDeclarationProvider?,
 ) :
     KoFunctionDeclaration,
     KoBaseProviderCore,
@@ -74,7 +74,7 @@ internal class KoFunctionDeclarationImpl private constructor(
     KoNameProviderCore,
     KoPackageProviderCore,
     KoParametersProviderCore,
-    KoParentProviderCore,
+    KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoReceiverTypeProviderCore,
     KoResideInOrOutsidePackageProviderCore,
@@ -140,7 +140,7 @@ internal class KoFunctionDeclarationImpl private constructor(
     internal companion object {
 
         private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
-        internal fun getInstance(ktFunction: KtFunction, parent: KoParentProvider?): KoFunctionDeclaration =
+        internal fun getInstance(ktFunction: KtFunction, parent: KoContainingDeclarationProvider?): KoFunctionDeclaration =
             cache.getOrCreateInstance(ktFunction, parent) {
                 KoFunctionDeclarationImpl(ktFunction, parent)
             }

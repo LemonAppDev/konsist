@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtSuperTypeCallEntry
 
 internal interface KoParentClassProviderCore :
-    KoParentProviderCore,
+    KoContainingDeclarationProviderCore,
     KoParentClassProvider,
     KoBaseProviderCore {
     val ktClass: KtClass

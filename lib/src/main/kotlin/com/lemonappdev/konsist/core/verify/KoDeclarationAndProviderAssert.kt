@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 
@@ -84,8 +84,8 @@ private fun checkIfSuppressed(declaration: KoBaseProvider, testMethodName: Strin
     }
 
 private fun checkParentAndSuppress(declaration: KoBaseProvider, testMethodName: String): Boolean =
-    if (declaration is KoParentProvider && declaration.parent != null) {
-        declaration.parent?.let { checkIfSuppressed(it, testMethodName) } ?: false
+    if (declaration is KoContainingDeclarationProvider && declaration.containingDeclaration != null) {
+        declaration.containingDeclaration?.let { checkIfSuppressed(it, testMethodName) } ?: false
     } else {
         checkIfSuppressed((declaration as KoContainingFileProvider).containingFile, testMethodName, "@file:Suppress(")
     }

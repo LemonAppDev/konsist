@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoParameterDeclarationForKoParentProviderTest {
+class KoParameterDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `parameter-parent`() {
         // given
@@ -16,9 +16,9 @@ class KoParameterDeclarationForKoParentProviderTest {
             ?.first()
 
         // then
-        sut?.parent shouldNotBeEqualTo null
+        sut?.containingDeclaration shouldNotBeEqualTo null
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/forkoparentprovider/", fileName)
+        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/forkocontainingdeclarationprovider/", fileName)
 }

@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
@@ -42,7 +42,7 @@ class KoScopeImpl(
 
     override val ktFile: KtFile? by lazy { null }
 
-    override val parent: KoParentProvider? by lazy { null }
+    override val containingDeclaration: KoContainingDeclarationProvider? by lazy { null }
 
     override val ktAnnotated: KtAnnotated? by lazy { null }
 

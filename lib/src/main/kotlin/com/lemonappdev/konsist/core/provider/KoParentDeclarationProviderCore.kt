@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 internal interface KoParentDeclarationProviderCore :
     KoParentDeclarationProvider,
-    KoParentProviderCore,
+    KoContainingDeclarationProviderCore,
     KoParentClassProviderCore,
     KoParentInterfaceProviderCore,
     KoBaseProviderCore {

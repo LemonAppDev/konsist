@@ -7,7 +7,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoInitBlockDeclarationForKoParentProviderTest {
+class KoInitBlockDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `init-block-parent`() {
         // given
@@ -19,11 +19,11 @@ class KoInitBlockDeclarationForKoParentProviderTest {
 
         // then
         assertSoftly(sut) {
-            this?.parent?.shouldNotBeEqualTo(null)
-            (this?.parent as KoNameProvider).name shouldBeEqualTo "SampleClass"
+            this?.containingDeclaration?.shouldNotBeEqualTo(null)
+            (this?.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleClass"
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koinitblockdeclaration/snippet/forkoparentprovider/", fileName)
+        getSnippetKoScope("core/declaration/koinitblockdeclaration/snippet/forkocontainingdeclarationprovider/", fileName)
 }

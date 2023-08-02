@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoTypeAliasDeclarationForKoParentProviderTest {
+class KoTypeAliasDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `typealias-without-parent`() {
         // given
@@ -13,9 +13,9 @@ class KoTypeAliasDeclarationForKoParentProviderTest {
             .first()
 
         // then
-        sut.parent shouldBeEqualTo null
+        sut.containingDeclaration shouldBeEqualTo null
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kotypealiasdeclaration/snippet/forkoparentprovider/", fileName)
+        getSnippetKoScope("core/declaration/kotypealiasdeclaration/snippet/forkocontainingdeclarationprovider/", fileName)
 }
