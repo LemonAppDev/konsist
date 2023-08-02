@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.container.kofile
+package com.lemonappdev.konsist.core.declaration.kofiledeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration

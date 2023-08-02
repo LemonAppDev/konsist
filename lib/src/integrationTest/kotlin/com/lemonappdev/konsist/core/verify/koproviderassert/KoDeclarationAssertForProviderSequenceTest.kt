@@ -32,7 +32,6 @@ class KoDeclarationAssertForProviderSequenceTest {
         }
     }
 
-
     @Test
     fun `provider-assert-fails-when-declaration-list-is-empty`() {
         // given
@@ -48,7 +47,7 @@ class KoDeclarationAssertForProviderSequenceTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assert' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assert' method."
     }
 
     @Test
@@ -66,7 +65,7 @@ class KoDeclarationAssertForProviderSequenceTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
     }
 
     @Test

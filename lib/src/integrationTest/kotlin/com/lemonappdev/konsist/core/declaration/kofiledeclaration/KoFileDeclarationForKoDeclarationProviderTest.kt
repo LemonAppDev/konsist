@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.container.kofile
+package com.lemonappdev.konsist.core.declaration.kofiledeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.provider.KoNameProvider
@@ -76,7 +76,10 @@ class KoFileDeclarationForKoDeclarationProviderTest {
             .shouldBeEqualTo(expected)
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofiledeclaration/snippet/forkodeclarationprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/declaration/kofiledeclaration/snippet/forkodeclarationprovider/",
+        fileName,
+    )
 
     companion object {
         @Suppress("unused", "detekt.LongMethod")

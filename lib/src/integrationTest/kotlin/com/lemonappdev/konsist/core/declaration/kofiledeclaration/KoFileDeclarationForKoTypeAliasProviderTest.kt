@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.container.kofile
+package com.lemonappdev.konsist.core.declaration.kofiledeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.assertSoftly
@@ -55,5 +55,8 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofiledeclaration/snippet/forkotypealiasprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/declaration/kofiledeclaration/snippet/forkotypealiasprovider/",
+        fileName,
+    )
 }

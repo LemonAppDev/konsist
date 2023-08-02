@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.container.kofile
+package com.lemonappdev.konsist.core.declaration.kofiledeclaration
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
@@ -74,5 +74,8 @@ class KoFileDeclarationForKoAnnotationProviderTest {
         }
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofiledeclaration/snippet/forkoannotationprovider/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope(
+        "core/declaration/kofiledeclaration/snippet/forkoannotationprovider/",
+        fileName,
+    )
 }

@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.container.kofile
+package com.lemonappdev.konsist.core.declaration.kofiledeclaration
 
 class KoFileDeclarationForKoModuleProviderTest {
     // Konsist koFile.moduleName and koFile.resideInModule() tests

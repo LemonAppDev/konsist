@@ -1,13 +1,5 @@
 package com.lemonappdev.konsist.core.verify
 
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
-import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.api.provider.KoLocationProvider
-import com.lemonappdev.konsist.api.provider.KoNameProvider
-import com.lemonappdev.konsist.core.exception.KoCheckFailedException
-import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
-
 private const val INDEX_FOUR = 4
 private const val INDEX_FIVE = 5
 private const val INDEX_SEVEN = 7
