@@ -55,7 +55,7 @@ internal class KoFileDeclarationImpl(override val ktFile: KtFile) :
 
     override val ktAnnotated: KtAnnotated by lazy { ktFile }
 
-    override val parent: KoParentProvider? by lazy { this }
+    override val parent: KoParentProvider? by lazy { null }
 
     override val koFiles: List<KoFileDeclaration>? by lazy { null }
 

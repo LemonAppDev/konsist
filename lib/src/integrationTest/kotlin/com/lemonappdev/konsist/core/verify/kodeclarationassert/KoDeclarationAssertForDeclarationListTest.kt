@@ -65,6 +65,60 @@ class KoDeclarationAssertForDeclarationListTest {
     }
 
     @Test
+    fun `assert-passes-on-declarations-which-items-have-null-parent`() {
+        // given
+        val sut = getSnippetFile("assert-passes-on-declarations-which-items-have-null-parent")
+            .files
+
+        // then
+        sut.assert { it.name == "assert-passes-on-declarations-which-items-have-null-parent" }
+    }
+
+    @Test
+    fun `assert-fails-on-declarations-which-items-have-null-parent`() {
+        // given
+        val sut = getSnippetFile("assert-fails-on-declarations-which-items-have-null-parent")
+            .files
+
+        // when
+        val func = {
+            sut.assert { it.name == "OtherName" }
+        }
+
+        // then
+        func shouldThrow KoCheckFailedException::class
+    }
+
+    @Test
+    fun `assert-not-passes-on-declarations-which-items-have-null-parent`() {
+        // given
+        val sut = getSnippetFile("assert-not-passes-on-declarations-which-items-have-null-parent")
+            .files
+
+        // then
+        sut.assertNot {
+            it.name == "OtherName"
+        }
+    }
+
+    @Test
+    fun `assert-not-fails-on-declarations-which-items-have-null-parent`() {
+        // given
+        val sut = getSnippetFile("assert-not-fails-on-declarations-which-items-have-null-parent")
+            .files
+
+        // when
+        val func = {
+            sut.assertNot {
+                it.name == "assert-not-fails-on-declarations-which-items-have-null-parent"
+            }
+        }
+
+        // then
+        func shouldThrow KoCheckFailedException::class
+    }
+
+    @Test
     fun `assert-passes-when-expression-is-nullable`() {
         // given
         val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
@@ -308,6 +362,56 @@ class KoDeclarationAssertForDeclarationListTest {
 
         // then
         sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-with-few-parameters`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-with-few-parameters")
+                .functions(includeNested = true)
+
+        // then
+        sut.assert { it.name.endsWith("Text") }
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-name-on-declarations-which-items-have-null-parent`() {
+        // given
+        val scope1 = getSnippetFile("assert-suppress-by-konsist-and-name-on-declarations-which-items-have-null-parent")
+        val scope2 = getSnippetFile("file-without-suppress")
+
+        val sut = (scope1 + scope2)
+            .files
+
+        // then
+        sut.assert { it.name.endsWith("suppress") }
+    }
+
+    @Test
+    fun `assert-suppress-by-name-on-declarations-which-items-have-null-parent`() {
+        // given
+        val scope1 = getSnippetFile("assert-suppress-by-name-on-declarations-which-items-have-null-parent")
+        val scope2 = getSnippetFile("file-without-suppress")
+
+        val sut = (scope1 + scope2)
+            .files
+
+        // then
+        sut.assert { it.name.endsWith("suppress") }
+    }
+
+    @Test
+    fun `assert-suppress-with-few-parameters-on-declarations-which-items-have-null-parent`() {
+        // given
+        val scope1 = getSnippetFile("assert-suppress-with-few-parameters-on-declarations-which-items-have-null-parent")
+        val scope2 = getSnippetFile("file-without-suppress")
+
+        val sut = (scope1 + scope2)
+            .files
+
+        // then
+        sut.assert { it.name.endsWith("suppress") }
     }
 
     private fun getSnippetFile(fileName: String) =

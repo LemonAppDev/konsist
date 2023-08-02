@@ -38,8 +38,6 @@ internal class KoTypeDeclarationImpl private constructor(
 
     override val ktElement: KtElement by lazy { ktTypeReference }
 
-    private val file: KoFileDeclaration by lazy { KoFileDeclarationImpl(ktTypeReference.containingKtFile) }
-
     override val name: String by lazy {
         when {
             isAlias -> aliasType + if (isNullable) "?" else ""
@@ -48,7 +46,7 @@ internal class KoTypeDeclarationImpl private constructor(
     }
 
     override val fullyQualifiedName: String by lazy {
-        file
+        containingFile
             .imports
             .map { it.name }
             .firstOrNull { it.contains(sourceType) } ?: ""
