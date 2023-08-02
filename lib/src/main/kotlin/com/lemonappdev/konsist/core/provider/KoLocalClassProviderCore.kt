@@ -7,5 +7,8 @@ internal interface KoLocalClassProviderCore : KoLocalClassProvider, KoLocalDecla
     override val localClasses: List<KoClassDeclaration>
         get() = localDeclarations.filterIsInstance<KoClassDeclaration>()
 
+    override val numLocalClasses: Int
+        get() = localClasses.size
+
     override fun containsLocalClass(name: String): Boolean = localClasses.any { it.name == name }
 }

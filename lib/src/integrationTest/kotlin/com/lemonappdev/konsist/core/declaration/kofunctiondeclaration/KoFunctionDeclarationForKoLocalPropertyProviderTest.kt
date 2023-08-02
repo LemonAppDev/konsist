@@ -15,6 +15,7 @@ class KoFunctionDeclarationForKoLocalPropertyProviderTest {
 
         // then
         assertSoftly(sut) {
+            numLocalProperties shouldBeEqualTo 0
             containsLocalProperty("sampleLocalProperty") shouldBeEqualTo false
             localProperties
                 .shouldBeEqualTo(emptyList())
@@ -30,6 +31,7 @@ class KoFunctionDeclarationForKoLocalPropertyProviderTest {
 
         // then
         assertSoftly(sut) {
+            numLocalProperties shouldBeEqualTo 1
             containsLocalProperty("sampleLocalProperty") shouldBeEqualTo true
             localProperties
                 .map { it.name }

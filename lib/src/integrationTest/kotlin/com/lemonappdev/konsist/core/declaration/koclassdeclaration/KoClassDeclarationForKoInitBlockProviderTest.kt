@@ -16,7 +16,7 @@ class KoClassDeclarationForKoInitBlockProviderTest {
 
         // then
         assertSoftly(sut) {
-            initBlocks shouldBeEqualTo null
+            initBlocks shouldBeEqualTo emptyList()
             numInitBlocks shouldBeEqualTo 0
             hasInitBlocks shouldBeEqualTo false
         }
@@ -31,7 +31,7 @@ class KoClassDeclarationForKoInitBlockProviderTest {
 
         // then
         assertSoftly(sut) {
-            initBlocks shouldNotBeEqualTo null
+            initBlocks shouldNotBeEqualTo emptyList()
             numInitBlocks shouldBeEqualTo 1
             hasInitBlocks shouldBeEqualTo true
         }
@@ -46,7 +46,7 @@ class KoClassDeclarationForKoInitBlockProviderTest {
 
         // then
         assertSoftly(sut) {
-            initBlocks shouldNotBeEqualTo null
+            initBlocks shouldNotBeEqualTo emptyList()
             numInitBlocks shouldBeEqualTo 2
             hasInitBlocks shouldBeEqualTo true
         }

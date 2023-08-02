@@ -14,6 +14,7 @@ class KoScopeForKoTypeAliasProviderTest {
         // then
         assertSoftly(sut) {
             typeAliases shouldBeEqualTo emptyList()
+            numTypeAliases shouldBeEqualTo 0
             hasTypeAliases() shouldBeEqualTo false
             hasTypeAliases("SampleTypeAlias") shouldBeEqualTo false
         }
@@ -42,6 +43,7 @@ class KoScopeForKoTypeAliasProviderTest {
 
         // then
         assertSoftly(sut) {
+            numTypeAliases shouldBeEqualTo 2
             hasTypeAliases() shouldBeEqualTo true
             hasTypeAliases("SampleTypeAlias1") shouldBeEqualTo true
             hasTypeAliases("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo true

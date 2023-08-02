@@ -7,5 +7,8 @@ internal interface KoLocalFunctionProviderCore : KoLocalFunctionProvider, KoLoca
     override val localFunctions: List<KoFunctionDeclaration>
         get() = localDeclarations.filterIsInstance<KoFunctionDeclaration>()
 
+    override val numLocalFunctions: Int
+        get() = localFunctions.size
+
     override fun containsLocalFunction(name: String): Boolean = localFunctions.any { it.name == name }
 }

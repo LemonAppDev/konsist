@@ -12,6 +12,11 @@ interface KoSecondaryConstructorsProvider : KoBaseProvider {
     val secondaryConstructors: List<KoSecondaryConstructorDeclaration>
 
     /**
+     * The number of secondary constructors.
+     */
+    val numSecondaryConstructors: Int
+
+    /**
      * Whatever declaration has secondary constructors.
      */
     val hasSecondaryConstructors: Boolean

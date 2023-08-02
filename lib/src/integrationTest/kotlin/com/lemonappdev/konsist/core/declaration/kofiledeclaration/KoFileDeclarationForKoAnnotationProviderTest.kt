@@ -19,6 +19,7 @@ class KoFileDeclarationForKoAnnotationProviderTest {
         // then
         assertSoftly(sut) {
             annotations.isEmpty() shouldBeEqualTo true
+            numAnnotations shouldBeEqualTo 0
             hasAnnotations("SampleAnnotation") shouldBeEqualTo false
             hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
         }
@@ -34,6 +35,7 @@ class KoFileDeclarationForKoAnnotationProviderTest {
         // then
         assertSoftly(sut) {
             annotations.map { it.name } shouldBeEqualTo listOf("SampleAnnotation1", "SampleAnnotation2")
+            numAnnotations shouldBeEqualTo 2
             hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
             hasAnnotations("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo true
             hasAnnotations("OtherAnnotation") shouldBeEqualTo false

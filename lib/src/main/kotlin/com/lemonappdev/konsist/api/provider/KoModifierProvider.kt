@@ -13,6 +13,11 @@ interface KoModifierProvider : KoBaseProvider {
     val modifiers: List<KoModifier>
 
     /**
+     * The number of modifiers.
+     */
+    val numModifiers: Int
+
+    /**
      * Whether the declaration has modifiers.
      *
      * @param koModifiers the modifiers to check.

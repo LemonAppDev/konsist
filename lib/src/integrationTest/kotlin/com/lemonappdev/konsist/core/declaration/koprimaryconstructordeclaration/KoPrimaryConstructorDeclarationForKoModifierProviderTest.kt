@@ -23,6 +23,7 @@ class KoPrimaryConstructorDeclarationForKoModifierProviderTest {
         // then
         assertSoftly(sut) {
             it?.modifiers shouldBeEqualTo emptyList()
+            it?.numModifiers shouldBeEqualTo 0
             it?.hasModifiers() shouldBeEqualTo false
             it?.hasModifiers(OPEN) shouldBeEqualTo false
             it?.hasModifiers(OPEN, DATA) shouldBeEqualTo false
@@ -69,7 +70,10 @@ class KoPrimaryConstructorDeclarationForKoModifierProviderTest {
             .primaryConstructor
 
         // then
-        sut?.modifiers shouldBeEqualTo listOf(PRIVATE)
+        assertSoftly(sut) {
+            it?.modifiers shouldBeEqualTo listOf(PRIVATE)
+            it?.numModifiers shouldBeEqualTo 1
+        }
     }
 
     @Test

@@ -12,6 +12,11 @@ interface KoLocalPropertyProvider : KoBaseProvider {
     val localProperties: List<KoPropertyDeclaration>
 
     /**
+     * The number of local properties.
+     */
+    val numLocalProperties: Int
+
+    /**
      * Checks whether the declaration contains a local property with the specified name.
      *
      * @param name The name of the local property to check.

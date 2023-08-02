@@ -18,7 +18,8 @@ class KoObjectDeclarationForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-            annotations.size shouldBeEqualTo 0
+            annotations shouldBeEqualTo emptyList()
+            numAnnotations shouldBeEqualTo 0
             hasAnnotations() shouldBeEqualTo false
         }
     }
@@ -32,7 +33,7 @@ class KoObjectDeclarationForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-            annotations.size shouldBeEqualTo 1
+            numAnnotations shouldBeEqualTo 1
             hasAnnotations("SampleAnnotation") shouldBeEqualTo true
             hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
             hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
@@ -51,7 +52,7 @@ class KoObjectDeclarationForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-            annotations.size shouldBeEqualTo 2
+            numAnnotations shouldBeEqualTo 2
             hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
             hasAnnotations("SampleAnnotation2") shouldBeEqualTo true
             hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
@@ -74,7 +75,7 @@ class KoObjectDeclarationForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
-            annotations.size shouldBeEqualTo 1
+            numAnnotations shouldBeEqualTo 1
             hasAnnotationsOf(Suppress::class) shouldBeEqualTo true
         }
     }

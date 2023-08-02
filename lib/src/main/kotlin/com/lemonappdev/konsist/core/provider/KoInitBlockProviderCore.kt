@@ -8,23 +8,24 @@ import org.jetbrains.kotlin.psi.KtClassOrObject
 internal interface KoInitBlockProviderCore : KoInitBlockProvider, KoParentProviderCore, KoBaseProviderCore {
     val ktClassOrObject: KtClassOrObject
 
-    override val initBlocks: List<KoInitBlockDeclaration>?
+    override val initBlocks: List<KoInitBlockDeclaration>
         get() {
             val anonymousInitializers = ktClassOrObject
                 .body
                 ?.anonymousInitializers
 
             return if (anonymousInitializers?.isEmpty() == true) {
-                null
+                emptyList()
             } else {
                 anonymousInitializers
                     ?.map { init -> KoInitBlockDeclarationImpl.getInstance(init, this) }
+                    ?: emptyList()
             }
         }
 
     override val numInitBlocks: Int
-        get() = initBlocks?.size ?: 0
+        get() = initBlocks.size
 
     override val hasInitBlocks: Boolean
-        get() = initBlocks != null
+        get() = initBlocks.isNotEmpty()
 }

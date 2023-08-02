@@ -12,6 +12,11 @@ interface KoParentDeclarationProvider : KoBaseProvider {
     val parentDeclarations: List<KoParentDeclaration>
 
     /**
+     * The number of parent declarations.
+     */
+    val numParentDeclarations: Int
+
+    /**
      * Whatever class has parent declarations (parent class and parent interfaces).
      *
      * @param names the names of the parents to check.
