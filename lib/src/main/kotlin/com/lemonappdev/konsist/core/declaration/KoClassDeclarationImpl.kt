@@ -23,7 +23,7 @@ import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentClassProviderCore
-import com.lemonappdev.konsist.core.provider.KoParentDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
@@ -77,7 +77,7 @@ internal class KoClassDeclarationImpl private constructor(
     KoObjectProviderCore,
     KoPackageProviderCore,
     KoParentClassProviderCore,
-    KoParentDeclarationProviderCore,
+    KoParentProviderCore,
     KoParentInterfaceProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
