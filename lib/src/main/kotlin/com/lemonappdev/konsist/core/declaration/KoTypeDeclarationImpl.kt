@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -58,7 +58,10 @@ internal class KoTypeDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktTypeReference: KtTypeReference, parent: KoParentProvider): KoTypeDeclaration =
-            cache.getOrCreateInstance(ktTypeReference, parent) { KoTypeDeclarationImpl(ktTypeReference) }
+        internal fun getInstance(
+            ktTypeReference: KtTypeReference,
+            containingDeclaration: KoContainingDeclarationProvider,
+        ): KoTypeDeclaration =
+            cache.getOrCreateInstance(ktTypeReference, containingDeclaration) { KoTypeDeclarationImpl(ktTypeReference) }
     }
 }

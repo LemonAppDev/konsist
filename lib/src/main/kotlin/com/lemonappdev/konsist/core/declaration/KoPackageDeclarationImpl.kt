@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -47,8 +47,8 @@ internal class KoPackageDeclarationImpl private constructor(private val ktPackag
 
         internal fun getInstance(
             ktPackageDirective: KtPackageDirective,
-            parent: KoParentProvider,
+            containingDeclaration: KoContainingDeclarationProvider,
         ): KoPackageDeclaration =
-            cache.getOrCreateInstance(ktPackageDirective, parent) { KoPackageDeclarationImpl(ktPackageDirective) }
+            cache.getOrCreateInstance(ktPackageDirective, containingDeclaration) { KoPackageDeclarationImpl(ktPackageDirective) }
     }
 }

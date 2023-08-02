@@ -1,8 +1,9 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.api.provider.KoDelegateProvider
+import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPathProvider
 
 /**
  * Represents a Kotlin parent declaration.
@@ -10,5 +11,13 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
 interface KoParentDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
-    KoDelegateProvider,
-    KoNameProvider
+    KoNameProvider,
+    KoLocationProvider,
+    KoPathProvider {
+    /**
+     * String representing the parent.
+     *
+     * @return a string representing the parent.
+     */
+    override fun toString(): String
+}

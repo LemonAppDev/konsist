@@ -1,3 +1,0 @@
-class SampleClass(val sampleParameter: String) {
-    constructor() : this("")
-}

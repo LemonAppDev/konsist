@@ -1,6 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-
-open class SampleClass {
-    @SampleAnnotation private constructor(name: String) {
-    }
-}
