@@ -10,7 +10,6 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 private const val INDEX_FOUR = 4
 private const val INDEX_FIVE = 5
-private const val INDEX_SIX = 6
 private const val INDEX_SEVEN = 7
 
 /**
@@ -22,11 +21,6 @@ internal fun getTestMethodNameFromFourthIndex() = getTestMethodName(INDEX_FOUR)
  * In this call stack hierarchy test name is at index 5.
  */
 internal fun getTestMethodNameFromFifthIndex() = getTestMethodName(INDEX_FIVE)
-
-/**
- * In this call stack hierarchy test name is at index 6.
- */
-internal fun getTestMethodNameFromSixthIndex() = getTestMethodName(INDEX_SIX)
 
 /**
  * In this call stack hierarchy test name is at index 7.
@@ -84,12 +78,13 @@ internal fun checkIfLocalListIsEmpty(localList: List<*>, type: String, testMetho
     }
 }
 
-internal fun checkIfSuppressed(item: KoAnnotationProvider, testMethodName: String, prefix: String): Boolean {
+internal fun checkIfSuppressed(item: KoAnnotationProvider, testMethodName: String): Boolean {
     val annotationParameter = item
         .annotations
         .firstOrNull { it.name == "Suppress" }
         ?.text
-        ?.removePrefix(prefix)
+        ?.removePrefix("@file:Suppress(")
+        ?.removePrefix("@Suppress(")
         ?.substringBeforeLast(")")
         ?.split(",")
         ?.map { it.trim() }
