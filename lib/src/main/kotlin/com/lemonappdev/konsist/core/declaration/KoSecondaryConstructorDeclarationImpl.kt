@@ -13,8 +13,8 @@ internal class KoSecondaryConstructorDeclarationImpl private constructor(
     private val ktSecondaryConstructor: KtSecondaryConstructor,
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
-    KoConstructorDeclarationImpl,
     KoSecondaryConstructorDeclaration,
+    KoConstructorDeclarationImpl,
     KoKDocProviderCore {
     override val ktConstructor: KtConstructor<*> by lazy { ktSecondaryConstructor }
 

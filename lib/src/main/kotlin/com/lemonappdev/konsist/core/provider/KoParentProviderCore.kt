@@ -2,22 +2,16 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
-import com.lemonappdev.konsist.core.declaration.KoParentDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoParentClassDeclarationImpl
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 internal interface KoParentProviderCore :
     KoParentProvider,
-    KoContainingDeclarationProviderCore,
     KoParentClassProviderCore,
     KoParentInterfaceProviderCore,
     KoBaseProviderCore {
     override val parents: List<KoParentDeclaration>
-        get() = ktClass
-            .getSuperTypeList()
-            ?.children
-            ?.filterIsInstance<KtSuperTypeListEntry>()
-            ?.map { KoParentDeclarationImpl.getInstance(it, this) }
-            ?: emptyList()
+        get() = listOfNotNull(parentClass as? KoParentDeclaration) + parentInterfaces
 
     override val numParents: Int
         get() = parents.size

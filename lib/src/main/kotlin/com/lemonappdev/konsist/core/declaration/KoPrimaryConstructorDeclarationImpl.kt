@@ -12,8 +12,8 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
     private val ktPrimaryConstructor: KtPrimaryConstructor,
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
-    KoConstructorDeclarationImpl,
-    KoPrimaryConstructorDeclaration {
+    KoPrimaryConstructorDeclaration,
+    KoConstructorDeclarationImpl {
     override val ktConstructor: KtConstructor<*> by lazy { ktPrimaryConstructor }
 
     override fun toString(): String {
