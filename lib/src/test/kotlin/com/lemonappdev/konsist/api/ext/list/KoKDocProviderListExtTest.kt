@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.ext.list
 import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
-import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationCore
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -50,13 +50,13 @@ class KoKDocProviderListExtTest {
     fun `withKDocWithTags() returns declaration with any tag`() {
         // given
         val tag: KoKDocTagDeclaration = mockk()
-        val kDoc1: KoKDocDeclarationImpl = mockk {
+        val kDoc1: KoKDocDeclarationCore = mockk {
             every { tags } returns listOf(tag)
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
-        val kDoc2: KoKDocDeclarationImpl = mockk {
+        val kDoc2: KoKDocDeclarationCore = mockk {
             every { tags } returns emptyList()
         }
         val declaration2: KoKDocProvider = mockk {
@@ -75,13 +75,13 @@ class KoKDocProviderListExtTest {
     fun `withoutKDocWithTags() returns declaration without any tag`() {
         // given
         val tag: KoKDocTagDeclaration = mockk()
-        val kDoc1: KoKDocDeclarationImpl = mockk {
+        val kDoc1: KoKDocDeclarationCore = mockk {
             every { tags } returns listOf(tag)
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
-        val kDoc2: KoKDocDeclarationImpl = mockk {
+        val kDoc2: KoKDocDeclarationCore = mockk {
             every { tags } returns emptyList()
         }
         val declaration2: KoKDocProvider = mockk {
@@ -100,13 +100,13 @@ class KoKDocProviderListExtTest {
     fun `withKDocWithAllTags(String) returns declaration with given tag`() {
         // given
         val tag = KoKDocTag.SINCE
-        val kDoc1: KoKDocDeclarationImpl = mockk {
+        val kDoc1: KoKDocDeclarationCore = mockk {
             every { hasTags(tag) } returns true
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
-        val kDoc2: KoKDocDeclarationImpl = mockk {
+        val kDoc2: KoKDocDeclarationCore = mockk {
             every { hasTags(tag) } returns false
         }
         val declaration2: KoKDocProvider = mockk {
@@ -126,13 +126,13 @@ class KoKDocProviderListExtTest {
         // given
         val tag1 = KoKDocTag.SINCE
         val tag2 = KoKDocTag.SEE
-        val kDoc1: KoKDocDeclarationImpl = mockk {
+        val kDoc1: KoKDocDeclarationCore = mockk {
             every { hasTags(tag1, tag2) } returns true
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
-        val kDoc2: KoKDocDeclarationImpl = mockk {
+        val kDoc2: KoKDocDeclarationCore = mockk {
             every { hasTags(tag1, tag2) } returns false
         }
         val declaration2: KoKDocProvider = mockk {
@@ -151,13 +151,13 @@ class KoKDocProviderListExtTest {
     fun `withoutKDocWithAllTags(String) returns declaration without given tag`() {
         // given
         val tag = KoKDocTag.SINCE
-        val kDoc1: KoKDocDeclarationImpl = mockk {
+        val kDoc1: KoKDocDeclarationCore = mockk {
             every { hasTags(tag) } returns true
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
-        val kDoc2: KoKDocDeclarationImpl = mockk {
+        val kDoc2: KoKDocDeclarationCore = mockk {
             every { hasTags(tag) } returns false
         }
         val declaration2: KoKDocProvider = mockk {
@@ -177,13 +177,13 @@ class KoKDocProviderListExtTest {
         // given
         val tag1 = KoKDocTag.SINCE
         val tag2 = KoKDocTag.SEE
-        val kDoc1: KoKDocDeclarationImpl = mockk {
+        val kDoc1: KoKDocDeclarationCore = mockk {
             every { hasTags(tag1, tag2) } returns true
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
-        val kDoc2: KoKDocDeclarationImpl = mockk {
+        val kDoc2: KoKDocDeclarationCore = mockk {
             every { hasTags(tag1, tag2) } returns false
         }
         val declaration2: KoKDocProvider = mockk {
@@ -202,13 +202,13 @@ class KoKDocProviderListExtTest {
     fun `withKDocWithSomeTags(String) returns declarations with given tag`() {
         // given
         val tag = KoKDocTag.SINCE
-        val kDoc1: KoKDocDeclarationImpl = mockk {
+        val kDoc1: KoKDocDeclarationCore = mockk {
             every { hasTags(tag) } returns true
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
-        val kDoc2: KoKDocDeclarationImpl = mockk {
+        val kDoc2: KoKDocDeclarationCore = mockk {
             every { hasTags(tag) } returns false
         }
         val declaration2: KoKDocProvider = mockk {
@@ -228,21 +228,21 @@ class KoKDocProviderListExtTest {
         // given
         val tag1 = KoKDocTag.SINCE
         val tag2 = KoKDocTag.SEE
-        val kDoc1: KoKDocDeclarationImpl = mockk {
+        val kDoc1: KoKDocDeclarationCore = mockk {
             every { hasTags(tag1) } returns true
             every { hasTags(tag2) } returns true
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
-        val kDoc2: KoKDocDeclarationImpl = mockk {
+        val kDoc2: KoKDocDeclarationCore = mockk {
             every { hasTags(tag1) } returns true
             every { hasTags(tag2) } returns false
         }
         val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
-        val kDoc3: KoKDocDeclarationImpl = mockk {
+        val kDoc3: KoKDocDeclarationCore = mockk {
             every { hasTags(tag1) } returns false
             every { hasTags(tag2) } returns false
         }
@@ -262,13 +262,13 @@ class KoKDocProviderListExtTest {
     fun `withoutKDocWithSomeTags(String) returns declarations with given tag`() {
         // given
         val tag = KoKDocTag.SINCE
-        val kDoc1: KoKDocDeclarationImpl = mockk {
+        val kDoc1: KoKDocDeclarationCore = mockk {
             every { hasTags(tag) } returns true
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
-        val kDoc2: KoKDocDeclarationImpl = mockk {
+        val kDoc2: KoKDocDeclarationCore = mockk {
             every { hasTags(tag) } returns false
         }
         val declaration2: KoKDocProvider = mockk {
@@ -288,21 +288,21 @@ class KoKDocProviderListExtTest {
         // given
         val tag1 = KoKDocTag.SINCE
         val tag2 = KoKDocTag.SEE
-        val kDoc1: KoKDocDeclarationImpl = mockk {
+        val kDoc1: KoKDocDeclarationCore = mockk {
             every { hasTags(tag1) } returns true
             every { hasTags(tag2) } returns true
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
-        val kDoc2: KoKDocDeclarationImpl = mockk {
+        val kDoc2: KoKDocDeclarationCore = mockk {
             every { hasTags(tag1) } returns true
             every { hasTags(tag2) } returns false
         }
         val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
         }
-        val kDoc3: KoKDocDeclarationImpl = mockk {
+        val kDoc3: KoKDocDeclarationCore = mockk {
             every { hasTags(tag1) } returns false
             every { hasTags(tag2) } returns false
         }

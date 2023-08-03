@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
-import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationCore
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -11,9 +11,9 @@ class KoFunctionProviderListExtTest {
     @Test
     fun `functions() returns functions from all declarations`() {
         // given
-        val function1: KoFunctionDeclarationImpl = mockk()
-        val function2: KoFunctionDeclarationImpl = mockk()
-        val function3: KoFunctionDeclarationImpl = mockk()
+        val function1: KoFunctionDeclarationCore = mockk()
+        val function2: KoFunctionDeclarationCore = mockk()
+        val function3: KoFunctionDeclarationCore = mockk()
         val declaration1: KoFunctionProvider = mockk {
             every { functions(includeNested = true, includeLocal = false) } returns listOf(
                 function1,

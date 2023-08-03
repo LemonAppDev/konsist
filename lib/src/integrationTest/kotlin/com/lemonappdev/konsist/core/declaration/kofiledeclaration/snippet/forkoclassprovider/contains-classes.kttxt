@@ -1,6 +1,0 @@
-class SampleClass {
-
-    val sampleProperty = ""
-
-    class SampleNestedClass
-}

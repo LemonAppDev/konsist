@@ -1,10 +1,10 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
-import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoClassDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationCore
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -14,11 +14,11 @@ class KoDeclarationProviderListExtTest {
     @Test
     fun `declarations() returns declarations from all declarations`() {
         // given
-        val class1: KoClassDeclarationImpl = mockk()
-        val function1: KoFunctionDeclarationImpl = mockk()
-        val class2: KoClassDeclarationImpl = mockk()
-        val interface1: KoInterfaceDeclarationImpl = mockk()
-        val property1: KoPropertyDeclarationImpl = mockk()
+        val class1: KoClassDeclarationCore = mockk()
+        val function1: KoFunctionDeclarationCore = mockk()
+        val class2: KoClassDeclarationCore = mockk()
+        val interface1: KoInterfaceDeclarationCore = mockk()
+        val property1: KoPropertyDeclarationCore = mockk()
         val declaration1: KoDeclarationProvider = mockk {
             every { declarations(includeNested = true, includeLocal = false) } returns listOf(class1, function1)
         }

@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.core.provider.packagee.KoPackageProviderCore
 import com.lemonappdev.konsist.core.util.LocationUtil
 
 internal interface KoResideInOrOutsidePackageProviderCore : KoResideInOrOutsidePackageProvider, KoPackageProviderCore, KoBaseProviderCore {

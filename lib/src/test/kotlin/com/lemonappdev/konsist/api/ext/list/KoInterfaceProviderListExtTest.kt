@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationCore
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -11,9 +11,9 @@ class KoInterfaceProviderListExtTest {
     @Test
     fun `interfaces() returns interfaces from all declarations`() {
         // given
-        val interface1: KoInterfaceDeclarationImpl = mockk()
-        val interface2: KoInterfaceDeclarationImpl = mockk()
-        val interface3: KoInterfaceDeclarationImpl = mockk()
+        val interface1: KoInterfaceDeclarationCore = mockk()
+        val interface2: KoInterfaceDeclarationCore = mockk()
+        val interface3: KoInterfaceDeclarationCore = mockk()
         val declaration1: KoInterfaceProvider = mockk {
             every { interfaces(includeNested = true) } returns listOf(interface1, interface2)
         }

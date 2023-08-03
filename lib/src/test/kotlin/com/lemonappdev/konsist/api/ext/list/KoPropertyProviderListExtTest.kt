@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
-import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationCore
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -11,9 +11,9 @@ class KoPropertyProviderListExtTest {
     @Test
     fun `properties() returns properties from all declarations`() {
         // given
-        val property1: KoPropertyDeclarationImpl = mockk()
-        val property2: KoPropertyDeclarationImpl = mockk()
-        val property3: KoPropertyDeclarationImpl = mockk()
+        val property1: KoPropertyDeclarationCore = mockk()
+        val property2: KoPropertyDeclarationCore = mockk()
+        val property3: KoPropertyDeclarationCore = mockk()
         val declaration1: KoPropertyProvider = mockk {
             every { properties(includeNested = true, includeLocal = false) } returns listOf(property1, property2)
         }
