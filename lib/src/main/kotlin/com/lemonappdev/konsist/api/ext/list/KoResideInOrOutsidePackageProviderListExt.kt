@@ -4,10 +4,10 @@ import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 
 /**
- * List containing declarations with package.
+ * List containing elements with package.
  *
  * @param packages The packages to include.
- * @return A list containing declarations that reside in any of the specified packages (or any package if [packages] is empty).
+ * @return A list containing elements that reside in any of the specified packages (or any package if [packages] is empty).
  */
 fun <T> List<T>.withPackage(vararg packages: String): List<T>
     where T : KoResideInOrOutsidePackageProvider,
@@ -19,10 +19,10 @@ fun <T> List<T>.withPackage(vararg packages: String): List<T>
 }
 
 /**
- * List containing declarations without package.
+ * List containing elements without package.
  *
  * @param packages The packages to exclude.
- * @return A list containing declarations that don't reside in any of the specified packages (or none package if [packages] is empty).
+ * @return A list containing elements that don't reside in any of the specified packages (or none package if [packages] is empty).
  */
 fun <T> List<T>.withoutPackage(vararg packages: String): List<T>
     where T : KoResideInOrOutsidePackageProvider,

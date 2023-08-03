@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.provider.KoKDocTagsProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 
 /**
- * Represents a Kotlin declaration.
+ * Represents a Kotlin KDoc declaration.
  */
 interface KoKDocDeclaration :
     KoBaseDeclaration,
