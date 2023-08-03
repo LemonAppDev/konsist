@@ -19,15 +19,15 @@ class KoScopeImpl(
 ) : KoScope {
     constructor(koFileDeclaration: KoFileDeclaration) : this(listOf(koFileDeclaration))
 
-    override val files: List<KoFileDeclaration> = koFiles.sortedBy { it.path }
+    override val files: List<KoFileDeclaration> by lazy { koFiles.sortedBy { it.path } }
 
-    override val imports: List<KoImportDeclaration> = koFiles.flatMap { it.imports }
+    override val imports: List<KoImportDeclaration> by lazy { koFiles.flatMap { it.imports } }
 
-    override val annotations: List<KoAnnotationDeclaration> = koFiles.flatMap { it.annotations }
+    override val annotations: List<KoAnnotationDeclaration> by lazy { koFiles.flatMap { it.annotations } }
 
-    override val packages: List<KoPackageDeclaration> = koFiles.mapNotNull { it.packagee }
+    override val packages: List<KoPackageDeclaration> by lazy { koFiles.mapNotNull { it.packagee } }
 
-    override val typeAliases: List<KoTypeAliasDeclaration> = koFiles.flatMap { it.typeAliases }
+    override val typeAliases: List<KoTypeAliasDeclaration> by lazy { koFiles.flatMap { it.typeAliases } }
 
     override fun classes(
         includeNested: Boolean,

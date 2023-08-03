@@ -4,6 +4,8 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.mapToFilePaths
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider
+import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetDirectory
+import com.lemonappdev.konsist.helper.util.PathProvider.dataTestSourceSetDirectory
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -50,13 +52,13 @@ class KoScopeTest {
         // then
         sut.shouldBeEqualTo(
             listOf(
-                "${PathProvider.dataMainSourceSetDirectory}/sample/LibClass.kt",
-                "${PathProvider.dataMainSourceSetDirectory}/sample/data/LibDataClass.kt",
-                "${PathProvider.dataTestSourceSetDirectory}/sample/LibClassSpec.kt",
-                "${PathProvider.dataTestSourceSetDirectory}/sample/LibClassSpec.kt",
-                "${PathProvider.dataTestSourceSetDirectory}/sample/LibClassTest.kt",
-                "${PathProvider.dataTestSourceSetDirectory}/sample/LibClassTest.kt",
-                "${PathProvider.dataTestSourceSetDirectory}/sample/data/LibDataClassTest.kt",
+                "$dataMainSourceSetDirectory/sample/LibClass.kt",
+                "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
+                "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
             ).toOsSeparator(),
         )
     }
@@ -106,13 +108,13 @@ class KoScopeTest {
             .mapToFilePaths()
             .shouldBeEqualTo(
                 listOf(
-                    "${PathProvider.dataMainSourceSetDirectory}/sample/LibClass.kt",
-                    "${PathProvider.dataMainSourceSetDirectory}/sample/data/LibDataClass.kt",
-                    "${PathProvider.dataTestSourceSetDirectory}/sample/LibClassSpec.kt",
-                    "${PathProvider.dataTestSourceSetDirectory}/sample/LibClassSpec.kt",
-                    "${PathProvider.dataTestSourceSetDirectory}/sample/LibClassTest.kt",
-                    "${PathProvider.dataTestSourceSetDirectory}/sample/LibClassTest.kt",
-                    "${PathProvider.dataTestSourceSetDirectory}/sample/data/LibDataClassTest.kt",
+                    "$dataMainSourceSetDirectory/sample/LibClass.kt",
+                    "$dataMainSourceSetDirectory/sample/data/LibDataClass.kt",
+                    "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
+                    "$dataTestSourceSetDirectory/sample/LibClassSpec.kt",
+                    "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                    "$dataTestSourceSetDirectory/sample/LibClassTest.kt",
+                    "$dataTestSourceSetDirectory/sample/data/LibDataClassTest.kt",
                 ).toOsSeparator(),
             )
     }
