@@ -1,0 +1,44 @@
+package com.lemonappdev.konsist.core.declaration.kofunction
+
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import org.amshove.kluent.assertSoftly
+import org.amshove.kluent.shouldBeEqualTo
+import org.junit.jupiter.api.Test
+
+class KoFunctionDeclarationForKoLocalClassProviderTest {
+    @Test
+    fun `function-contains-no-local-classes`() {
+        // given
+        val sut = getSnippetFile("function-contains-no-local-classes")
+            .functions()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            numLocalClasses shouldBeEqualTo 0
+            containsLocalClass("SampleClass") shouldBeEqualTo false
+            localClasses
+                .shouldBeEqualTo(emptyList())
+        }
+    }
+
+    @Test
+    fun `function-contains-local-class`() {
+        // given
+        val sut = getSnippetFile("function-contains-local-class")
+            .functions()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            numLocalClasses shouldBeEqualTo 1
+            containsLocalClass("SampleClass") shouldBeEqualTo true
+            localClasses
+                .map { it.name }
+                .shouldBeEqualTo(listOf("SampleClass"))
+        }
+    }
+
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forkolocalclassprovider/", fileName)
+}
