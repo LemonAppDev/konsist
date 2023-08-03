@@ -28,5 +28,5 @@ class KoFunctionDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forkodeclarationfullyqualifiednameprovider/", fileName)
+        getSnippetKoScope("core/declaration/kofunction/snippet/forkodeclarationfullyqualifiednameprovider/", fileName)
 }

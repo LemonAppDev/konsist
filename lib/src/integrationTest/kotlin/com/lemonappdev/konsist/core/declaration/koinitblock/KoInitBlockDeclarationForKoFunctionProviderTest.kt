@@ -112,5 +112,5 @@ class KoInitBlockDeclarationForKoFunctionProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koinitblockdeclaration/snippet/forkofunctionprovider/", fileName)
+        getSnippetKoScope("core/declaration/koinitblock/snippet/forkofunctionprovider/", fileName)
 }

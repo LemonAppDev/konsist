@@ -20,5 +20,5 @@ class KoParameterDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/forgeneral/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koparameter/snippet/forgeneral/", fileName)
 }

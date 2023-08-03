@@ -77,5 +77,5 @@ class KoFileDeclarationTest {
         file1.hashCode() shouldNotBeEqualTo file2.hashCode()
     }
 
-    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofiledeclaration/snippet/forgeneral/", fileName)
+    private fun getSnippetFile(fileName: String) = getSnippetKoScope("core/declaration/kofile/snippet/forgeneral/", fileName)
 }

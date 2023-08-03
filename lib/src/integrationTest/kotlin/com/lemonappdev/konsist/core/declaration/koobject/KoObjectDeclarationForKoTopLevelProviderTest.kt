@@ -29,5 +29,5 @@ class KoObjectDeclarationForKoTopLevelProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koobjectdeclaration/snippet/forkotoplevelprovider/", fileName)
+        getSnippetKoScope("core/declaration/koobject/snippet/forkotoplevelprovider/", fileName)
 }

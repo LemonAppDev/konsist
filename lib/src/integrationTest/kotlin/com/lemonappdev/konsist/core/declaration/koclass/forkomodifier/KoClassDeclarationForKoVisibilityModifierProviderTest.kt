@@ -83,5 +83,5 @@ class KoClassDeclarationForKoVisibilityModifierProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koclassdeclaration/forkomodifierprovider/snippet/forkovisibilitymodifierprovider/", fileName)
+        getSnippetKoScope("core/declaration/koclass/forkomodifier/snippet/forkovisibilitymodifierprovider/", fileName)
 }

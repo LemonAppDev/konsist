@@ -18,7 +18,7 @@ class KoAnnotationDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koannotationdeclaration/snippet/forkopathprovider/annotation-file-path.kt") shouldBeEqualTo true
+            endsWith("koannotation/snippet/forkopathprovider/annotation-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -35,7 +35,7 @@ class KoAnnotationDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koannotationdeclaration/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koannotation/snippet/" +
                     "forkopathprovider/annotation-project-file-path.kt",
             )
     }
@@ -52,9 +52,9 @@ class KoAnnotationDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koannotationdeclaration/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koannotationdeclaration..annotation-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koannotationdeclaration/snippet/", true) shouldBeEqualTo false
+            resideInPath("..koannotation/snippet..", true) shouldBeEqualTo true
+            resideInPath("..koannotation..annotation-reside-in-file-path.kt", true) shouldBeEqualTo true
+            resideInPath("koannotation/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -70,12 +70,12 @@ class KoAnnotationDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koannotationdeclaration/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koannotationdeclaration..annotation-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koannotationdeclaration/snippet/", false) shouldBeEqualTo false
+            resideInPath("..koannotation/snippet..", false) shouldBeEqualTo true
+            resideInPath("..koannotation..annotation-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            resideInPath("koannotation/snippet/", false) shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koannotationdeclaration/snippet/forkopathprovider/", fileName)
+        getSnippetKoScope("core/declaration/koannotation/snippet/forkopathprovider/", fileName)
 }

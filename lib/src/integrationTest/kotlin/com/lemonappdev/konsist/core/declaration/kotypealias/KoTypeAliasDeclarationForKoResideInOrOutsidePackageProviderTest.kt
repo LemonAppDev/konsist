@@ -50,5 +50,5 @@ class KoTypeAliasDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kotypealiasdeclaration/snippet/forkoresideinoroutsidepackageprovider/", fileName)
+        getSnippetKoScope("core/declaration/kotypealias/snippet/forkoresideinoroutsidepackageprovider/", fileName)
 }

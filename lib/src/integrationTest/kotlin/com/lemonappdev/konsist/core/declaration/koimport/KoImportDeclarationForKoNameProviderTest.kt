@@ -28,5 +28,5 @@ class KoImportDeclarationForKoNameProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koimportdeclaration/snippet/forkonameprovider/", fileName)
+        getSnippetKoScope("core/declaration/koimport/snippet/forkonameprovider/", fileName)
 }

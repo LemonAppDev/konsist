@@ -54,7 +54,7 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope(
-        "core/declaration/kofiledeclaration/snippet/forkotypealiasprovider/",
+        "core/declaration/kofile/snippet/forkotypealiasprovider/",
         fileName,
     )
 }

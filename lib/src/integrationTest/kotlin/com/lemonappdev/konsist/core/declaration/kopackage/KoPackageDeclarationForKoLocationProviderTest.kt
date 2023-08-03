@@ -39,5 +39,5 @@ class KoPackageDeclarationForKoLocationProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kopackagedeclaration/snippet/forkolocationprovider/", fileName)
+        getSnippetKoScope("core/declaration/kopackage/snippet/forkolocationprovider/", fileName)
 }

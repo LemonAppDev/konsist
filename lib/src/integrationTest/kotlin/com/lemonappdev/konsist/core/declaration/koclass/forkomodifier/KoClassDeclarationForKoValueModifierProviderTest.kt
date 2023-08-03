@@ -28,5 +28,5 @@ class KoClassDeclarationForKoValueModifierProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koclassdeclaration/forkomodifierprovider/snippet/forkovaluemodifierprovider/", fileName)
+        getSnippetKoScope("core/declaration/koclass/forkomodifier/snippet/forkovaluemodifierprovider/", fileName)
 }

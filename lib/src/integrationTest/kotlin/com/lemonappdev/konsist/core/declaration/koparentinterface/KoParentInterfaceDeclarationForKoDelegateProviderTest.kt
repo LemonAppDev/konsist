@@ -41,5 +41,5 @@ class KoParentInterfaceDeclarationForKoDelegateProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koparentinterfacedeclaration/snippet/forkodelegateprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koparentinterface/snippet/forkodelegateprovider/", fileName)
 }

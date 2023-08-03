@@ -37,5 +37,5 @@ class KoConstructorDeclarationForKoPackageProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koconstructordeclaration/snippet/forkopackageprovider/", fileName)
+        getSnippetKoScope("core/declaration/koconstructor/snippet/forkopackageprovider/", fileName)
 }

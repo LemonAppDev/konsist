@@ -18,7 +18,7 @@ class KoConstructorDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koconstructordeclaration/snippet/forkopathprovider/constructor-file-path.kt") shouldBeEqualTo true
+            endsWith("koconstructor/snippet/forkopathprovider/constructor-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -35,7 +35,7 @@ class KoConstructorDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koconstructordeclaration/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koconstructor/snippet/" +
                     "forkopathprovider/constructor-project-file-path.kt",
             )
     }
@@ -52,9 +52,9 @@ class KoConstructorDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koconstructordeclaration/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koconstructordeclaration..constructor-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koconstructordeclaration/snippet/", true) shouldBeEqualTo false
+            resideInPath("..koconstructor/snippet..", true) shouldBeEqualTo true
+            resideInPath("..koconstructor..constructor-reside-in-file-path.kt", true) shouldBeEqualTo true
+            resideInPath("koconstructor/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -70,15 +70,15 @@ class KoConstructorDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koconstructordeclaration/snippet..", false) shouldBeEqualTo true
+            resideInPath("..koconstructor/snippet..", false) shouldBeEqualTo true
             resideInPath(
-                "..koconstructordeclaration..constructor-reside-in-project-file-path.kt",
+                "..koconstructor..constructor-reside-in-project-file-path.kt",
                 false,
             ) shouldBeEqualTo true
-            resideInPath("koconstructordeclaration/snippet/", false) shouldBeEqualTo false
+            resideInPath("koconstructor/snippet/", false) shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koconstructordeclaration/snippet/forkopathprovider/", fileName)
+        getSnippetKoScope("core/declaration/koconstructor/snippet/forkopathprovider/", fileName)
 }

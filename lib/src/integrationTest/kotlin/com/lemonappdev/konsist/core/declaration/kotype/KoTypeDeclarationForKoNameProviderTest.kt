@@ -27,7 +27,7 @@ class KoTypeDeclarationForKoNameProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forkonameprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotype/snippet/forkonameprovider/", fileName)
 
     companion object {
         @Suppress("unused")

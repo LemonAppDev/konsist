@@ -39,5 +39,5 @@ class KoPropertyDeclarationForKoImplementationProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forkoimplementationprovider/", fileName)
+        getSnippetKoScope("core/declaration/koproperty/snippet/forkoimplementationprovider/", fileName)
 }

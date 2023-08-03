@@ -33,7 +33,7 @@ class KoFileDeclarationForKoHasPackageProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope(
-        "core/declaration/kofiledeclaration/snippet/forkohaspackageprovider/",
+        "core/declaration/kofile/snippet/forkohaspackageprovider/",
         fileName,
     )
 }

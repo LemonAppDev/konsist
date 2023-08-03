@@ -38,5 +38,5 @@ class KoPropertyDeclarationForKoReceiverTypeProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forkoreceivertypeprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/forkoreceivertypeprovider/", fileName)
 }

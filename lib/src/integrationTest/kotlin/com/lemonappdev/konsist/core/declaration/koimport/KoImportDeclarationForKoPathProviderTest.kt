@@ -16,7 +16,7 @@ class KoImportDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koimportdeclaration/snippet/forkopathprovider/import-file-path.kt") shouldBeEqualTo true
+            endsWith("koimport/snippet/forkopathprovider/import-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -31,7 +31,7 @@ class KoImportDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koimportdeclaration/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koimport/snippet/" +
                     "forkopathprovider/import-project-file-path.kt",
             )
     }
@@ -46,9 +46,9 @@ class KoImportDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koimportdeclaration/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koimportdeclaration..import-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koimportdeclaration/snippet/", true) shouldBeEqualTo false
+            resideInPath("..koimport/snippet..", true) shouldBeEqualTo true
+            resideInPath("..koimport..import-reside-in-file-path.kt", true) shouldBeEqualTo true
+            resideInPath("koimport/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -62,12 +62,12 @@ class KoImportDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koimportdeclaration/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koimportdeclaration..import-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koimportdeclaration/snippet/", false) shouldBeEqualTo false
+            resideInPath("..koimport/snippet..", false) shouldBeEqualTo true
+            resideInPath("..koimport..import-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            resideInPath("koimport/snippet/", false) shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koimportdeclaration/snippet/forkopathprovider/", fileName)
+        getSnippetKoScope("core/declaration/koimport/snippet/forkopathprovider/", fileName)
 }

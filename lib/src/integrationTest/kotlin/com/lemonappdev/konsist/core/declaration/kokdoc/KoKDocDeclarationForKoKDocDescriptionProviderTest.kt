@@ -56,7 +56,7 @@ class KoKDocDeclarationForKoKDocDescriptionProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kokdocdeclaration/snippet/forkokdocdescriptionprovider/", fileName)
+        getSnippetKoScope("core/declaration/kokdoc/snippet/forkokdocdescriptionprovider/", fileName)
 
     companion object {
         @Suppress("unused")

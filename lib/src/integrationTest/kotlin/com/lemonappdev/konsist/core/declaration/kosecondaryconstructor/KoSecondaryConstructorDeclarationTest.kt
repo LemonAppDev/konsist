@@ -19,5 +19,5 @@ class KoSecondaryConstructorDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kosecondaryconstructordeclaration/snippet/forgeneral/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kosecondaryconstructor/snippet/forgeneral/", fileName)
 }

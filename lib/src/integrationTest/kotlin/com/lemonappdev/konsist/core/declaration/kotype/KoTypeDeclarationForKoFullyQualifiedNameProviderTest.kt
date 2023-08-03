@@ -27,7 +27,7 @@ class KoTypeDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kotypedeclaration/snippet/forkofullyqualifiednameprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/kotype/snippet/forkofullyqualifiednameprovider/", fileName)
 
     companion object {
         @Suppress("unused")

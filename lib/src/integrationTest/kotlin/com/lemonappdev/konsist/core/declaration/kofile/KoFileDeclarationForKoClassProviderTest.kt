@@ -97,5 +97,5 @@ class KoFileDeclarationForKoClassProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofiledeclaration/snippet/forkoclassprovider/", fileName)
+        getSnippetKoScope("core/declaration/kofile/snippet/forkoclassprovider/", fileName)
 }

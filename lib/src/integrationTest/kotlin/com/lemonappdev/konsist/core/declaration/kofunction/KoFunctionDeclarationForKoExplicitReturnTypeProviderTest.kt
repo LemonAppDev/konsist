@@ -94,5 +94,5 @@ class KoFunctionDeclarationForKoExplicitReturnTypeProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofunctiondeclaration/snippet/forkoexplicitreturntypeprovider/", fileName)
+        getSnippetKoScope("core/declaration/kofunction/snippet/forkoexplicitreturntypeprovider/", fileName)
 }

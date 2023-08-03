@@ -23,7 +23,7 @@ class KoClassDeclarationForKoRepresentsTypeProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koclassdeclaration/snippet/forkorepresentstypeprovider/", fileName)
+        getSnippetKoScope("core/declaration/koclass/snippet/forkorepresentstypeprovider/", fileName)
 
     companion object {
         @Suppress("unused")

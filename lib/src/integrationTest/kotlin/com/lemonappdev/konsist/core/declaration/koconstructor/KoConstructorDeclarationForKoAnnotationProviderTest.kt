@@ -89,5 +89,5 @@ class KoConstructorDeclarationForKoAnnotationProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koconstructordeclaration/snippet/forkoannotationprovider/", fileName)
+        getSnippetKoScope("core/declaration/koconstructor/snippet/forkoannotationprovider/", fileName)
 }

@@ -133,5 +133,5 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koinitblockdeclaration/snippet/forkodeclarationprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koinitblock/snippet/forkodeclarationprovider/", fileName)
 }

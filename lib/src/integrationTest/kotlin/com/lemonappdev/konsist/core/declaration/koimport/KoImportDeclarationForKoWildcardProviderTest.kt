@@ -28,7 +28,7 @@ class KoImportDeclarationForKoWildcardProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope(
-        "core/declaration/koimportdeclaration/snippet/forkowildcardprovider/",
+        "core/declaration/koimport/snippet/forkowildcardprovider/",
         fileName,
     )
 }

@@ -28,5 +28,5 @@ class KoPropertyDeclarationForKoExtensionProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/kopropertydeclaration/snippet/forkoextensionprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koproperty/snippet/forkoextensionprovider/", fileName)
 }

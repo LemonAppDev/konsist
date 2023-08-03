@@ -21,5 +21,5 @@ class KoInterfaceDeclarationForKoContainingFileProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kointerfacedeclaration/snippet/forkocontainingfileprovider/", fileName)
+        getSnippetKoScope("core/declaration/kointerface/snippet/forkocontainingfileprovider/", fileName)
 }

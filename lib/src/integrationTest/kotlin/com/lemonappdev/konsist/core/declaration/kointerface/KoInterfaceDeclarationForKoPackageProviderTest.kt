@@ -33,5 +33,5 @@ class KoInterfaceDeclarationForKoPackageProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kointerfacedeclaration/snippet/forkopackageprovider/", fileName)
+        getSnippetKoScope("core/declaration/kointerface/snippet/forkopackageprovider/", fileName)
 }

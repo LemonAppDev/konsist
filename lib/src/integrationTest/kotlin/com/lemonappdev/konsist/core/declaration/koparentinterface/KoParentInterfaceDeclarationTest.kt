@@ -19,5 +19,5 @@ class KoParentInterfaceDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koparentinterfacedeclaration/snippet/forgeneral/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koparentinterface/snippet/forgeneral/", fileName)
 }

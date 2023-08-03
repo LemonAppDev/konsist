@@ -19,7 +19,7 @@ class KoParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut?.path) {
             it?.startsWith("//") shouldBeEqualTo false
-            it?.endsWith("koparameterdeclaration/snippet/forkopathprovider/parameter-file-path.kt") shouldBeEqualTo true
+            it?.endsWith("koparameter/snippet/forkopathprovider/parameter-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -37,7 +37,7 @@ class KoParameterDeclarationForKoPathProviderTest {
         sut
             ?.projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparameterdeclaration/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koparameter/snippet/" +
                     "forkopathprovider/parameter-project-file-path.kt",
             )
     }
@@ -55,9 +55,9 @@ class KoParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..koparameterdeclaration/snippet..", true) shouldBeEqualTo true
-            it?.resideInPath("..koparameterdeclaration..parameter-reside-in-file-path.kt", true) shouldBeEqualTo true
-            it?.resideInPath("koparameterdeclaration/snippet/", true) shouldBeEqualTo false
+            it?.resideInPath("..koparameter/snippet..", true) shouldBeEqualTo true
+            it?.resideInPath("..koparameter..parameter-reside-in-file-path.kt", true) shouldBeEqualTo true
+            it?.resideInPath("koparameter/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -74,12 +74,12 @@ class KoParameterDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             it?.resideInPath("..snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..koparameterdeclaration/snippet..", false) shouldBeEqualTo true
-            it?.resideInPath("..koparameterdeclaration..parameter-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            it?.resideInPath("koparameterdeclaration/snippet/", false) shouldBeEqualTo false
+            it?.resideInPath("..koparameter/snippet..", false) shouldBeEqualTo true
+            it?.resideInPath("..koparameter..parameter-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            it?.resideInPath("koparameter/snippet/", false) shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/forkopathprovider/", fileName)
+        getSnippetKoScope("core/declaration/koparameter/snippet/forkopathprovider/", fileName)
 }

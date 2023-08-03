@@ -95,5 +95,5 @@ class KoParameterDeclarationForKoDefaultValueProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/forkodefaultvalueprovider/", fileName)
+        getSnippetKoScope("core/declaration/koparameter/snippet/forkodefaultvalueprovider/", fileName)
 }

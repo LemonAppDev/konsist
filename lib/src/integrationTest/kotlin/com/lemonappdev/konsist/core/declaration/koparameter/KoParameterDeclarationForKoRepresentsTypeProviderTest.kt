@@ -23,5 +23,5 @@ class KoParameterDeclarationForKoRepresentsTypeProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparameterdeclaration/snippet/forkorepresentstypeprovider/", fileName)
+        getSnippetKoScope("core/declaration/koparameter/snippet/forkorepresentstypeprovider/", fileName)
 }

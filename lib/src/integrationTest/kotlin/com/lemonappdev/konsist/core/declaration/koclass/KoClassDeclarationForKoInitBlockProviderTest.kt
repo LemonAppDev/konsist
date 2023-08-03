@@ -53,5 +53,5 @@ class KoClassDeclarationForKoInitBlockProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koclassdeclaration/snippet/forkoinitblockprovider/", fileName)
+        getSnippetKoScope("core/declaration/koclass/snippet/forkoinitblockprovider/", fileName)
 }
