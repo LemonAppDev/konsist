@@ -18,7 +18,7 @@ import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtTypeReference
 
-internal class KoTypeDeclarationImpl private constructor(
+internal class KoTypeDeclarationCore private constructor(
     override val ktTypeReference: KtTypeReference,
 ) :
     KoTypeDeclaration,
@@ -62,6 +62,6 @@ internal class KoTypeDeclarationImpl private constructor(
             ktTypeReference: KtTypeReference,
             containingDeclaration: KoContainingDeclarationProvider,
         ): KoTypeDeclaration =
-            cache.getOrCreateInstance(ktTypeReference, containingDeclaration) { KoTypeDeclarationImpl(ktTypeReference) }
+            cache.getOrCreateInstance(ktTypeReference, containingDeclaration) { KoTypeDeclarationCore(ktTypeReference) }
     }
 }

@@ -6,16 +6,16 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
-import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoImportDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoInitBlockDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoClassDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoImportDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoInitBlockDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationCore
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtAnonymousInitializer
 import org.jetbrains.kotlin.psi.KtClass
@@ -100,7 +100,7 @@ internal object KoDeclarationProviderCoreUtil {
             result = result
                 .flatMap {
                     when (it) {
-                        is KoFunctionDeclarationImpl -> {
+                        is KoFunctionDeclarationCore -> {
                             val localDeclarations = listOf(it) + it.localDeclarations + localDeclarations(
                                 it.localFunctions,
                                 includeNested,
@@ -163,17 +163,17 @@ internal object KoDeclarationProviderCoreUtil {
         ktDeclaration: KtDeclaration,
         containingDeclaration: KoContainingDeclarationProvider,
     ): KoBaseDeclaration? = when {
-        ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationImpl.getInstance(ktDeclaration, containingDeclaration)
-        ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationImpl.getInstance(
+        ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+        ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationCore.getInstance(
             ktDeclaration,
             containingDeclaration,
         )
 
-        ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationImpl.getInstance(ktDeclaration, containingDeclaration)
-        ktDeclaration is KtProperty -> KoPropertyDeclarationImpl.getInstance(ktDeclaration, containingDeclaration)
-        ktDeclaration is KtFunction -> KoFunctionDeclarationImpl.getInstance(ktDeclaration, containingDeclaration)
-        ktDeclaration is KtTypeAlias -> KoTypeAliasDeclarationImpl.getInstance(ktDeclaration, containingDeclaration)
-        ktDeclaration is KtAnonymousInitializer -> KoInitBlockDeclarationImpl.getInstance(ktDeclaration, containingDeclaration)
+        ktDeclaration is KtObjectDeclaration -> KoObjectDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+        ktDeclaration is KtProperty -> KoPropertyDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+        ktDeclaration is KtFunction -> KoFunctionDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+        ktDeclaration is KtTypeAlias -> KoTypeAliasDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+        ktDeclaration is KtAnonymousInitializer -> KoInitBlockDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         else -> null
     }
 
@@ -182,9 +182,9 @@ internal object KoDeclarationProviderCoreUtil {
         containingDeclaration: KoContainingDeclarationProvider,
     ): KoBaseDeclaration? =
         when (psiElement) {
-            is KtImportDirective -> KoImportDeclarationImpl.getInstance(psiElement, containingDeclaration)
-            is KtPackageDirective -> KoPackageDeclarationImpl.getInstance(psiElement, containingDeclaration)
-            is KtAnnotationEntry -> KoAnnotationDeclarationImpl.getInstance(psiElement, containingDeclaration)
+            is KtImportDirective -> KoImportDeclarationCore.getInstance(psiElement, containingDeclaration)
+            is KtPackageDirective -> KoPackageDeclarationCore.getInstance(psiElement, containingDeclaration)
+            is KtAnnotationEntry -> KoAnnotationDeclarationCore.getInstance(psiElement, containingDeclaration)
             else -> null
         }
 }

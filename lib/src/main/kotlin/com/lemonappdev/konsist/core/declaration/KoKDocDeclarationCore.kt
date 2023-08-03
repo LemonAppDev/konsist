@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.core.provider.KoKDocTagsProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
-internal class KoKDocDeclarationImpl(private val kDocElement: KDocElement) :
+internal class KoKDocDeclarationCore(private val kDocElement: KDocElement) :
     KoKDocDeclaration,
     KoKDocDescriptionProviderCore,
     KoKDocTagsProviderCore,

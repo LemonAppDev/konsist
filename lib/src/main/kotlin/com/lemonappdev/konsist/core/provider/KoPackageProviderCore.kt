@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
-import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationCore
 import org.jetbrains.kotlin.psi.KtFile
 
 internal interface KoPackageProviderCore :
@@ -18,6 +18,6 @@ internal interface KoPackageProviderCore :
         } else if (ktFile?.packageDirective?.qualifiedName == "") {
             null
         } else {
-            ktFile?.packageDirective?.let { KoPackageDeclarationImpl.getInstance(it, this) }
+            ktFile?.packageDirective?.let { KoPackageDeclarationCore.getInstance(it, this) }
         }
 }

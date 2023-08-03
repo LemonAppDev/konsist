@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import kotlin.reflect.KClass
 
@@ -18,7 +18,7 @@ internal interface KoAnnotationProviderCore :
         get() = if (ktAnnotated != null) {
             ktAnnotated
                 ?.annotationEntries
-                ?.map { KoAnnotationDeclarationImpl.getInstance(it, this) }
+                ?.map { KoAnnotationDeclarationCore.getInstance(it, this) }
                 ?: emptyList()
         } else {
             koFiles?.flatMap { it.annotations } ?: emptyList()

@@ -15,7 +15,7 @@ import com.lemonappdev.konsist.core.provider.KoWildcardProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtImportDirective
 
-internal class KoImportDeclarationImpl private constructor(override val ktImportDirective: KtImportDirective) :
+internal class KoImportDeclarationCore private constructor(override val ktImportDirective: KtImportDirective) :
     KoImportDeclaration,
     KoBaseProviderCore,
     KoAliasProviderCore,
@@ -42,6 +42,6 @@ internal class KoImportDeclarationImpl private constructor(override val ktImport
             ktImportDirective: KtImportDirective,
             containingDeclaration: KoContainingDeclarationProvider,
         ): KoImportDeclaration =
-            cache.getOrCreateInstance(ktImportDirective, containingDeclaration) { KoImportDeclarationImpl(ktImportDirective) }
+            cache.getOrCreateInstance(ktImportDirective, containingDeclaration) { KoImportDeclarationCore(ktImportDirective) }
     }
 }

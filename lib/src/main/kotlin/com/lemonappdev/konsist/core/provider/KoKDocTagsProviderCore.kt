@@ -4,9 +4,8 @@ import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocTagsProvider
-import com.lemonappdev.konsist.core.declaration.KoKDocTagDeclarationImpl
-import com.lemonappdev.konsist.core.declaration.KoValuedKDocTagDeclarationImpl
-import java.awt.SystemColor.text
+import com.lemonappdev.konsist.core.declaration.KoKDocTagDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoValuedKDocTagDeclarationCore
 import java.util.*
 
 internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCore, KoBaseProviderCore {
@@ -101,7 +100,7 @@ internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCo
             .subList(2, parsed.size)
             .joinToString(" ")
 
-        return KoValuedKDocTagDeclarationImpl(koKDocTag, parsed[1], description)
+        return KoValuedKDocTagDeclarationCore(koKDocTag, parsed[1], description)
     }
 
     private fun parseToTag(koKDocTag: KoKDocTag, sentence: String): KoKDocTagDeclaration {
@@ -110,6 +109,6 @@ internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCo
             .subList(1, parsed.size)
             .joinToString(" ")
 
-        return KoKDocTagDeclarationImpl(koKDocTag, description)
+        return KoKDocTagDeclarationCore(koKDocTag, description)
     }
 }

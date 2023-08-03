@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoClassProvider
-import com.lemonappdev.konsist.core.declaration.KoClassDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoClassDeclarationCore
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
@@ -11,9 +11,9 @@ class KoClassProviderListExtTest {
     @Test
     fun `classes() returns classes from all declarations`() {
         // given
-        val class1: KoClassDeclarationImpl = mockk()
-        val class2: KoClassDeclarationImpl = mockk()
-        val class3: KoClassDeclarationImpl = mockk()
+        val class1: KoClassDeclarationCore = mockk()
+        val class2: KoClassDeclarationCore = mockk()
+        val class3: KoClassDeclarationCore = mockk()
         val declaration1: KoClassProvider = mockk {
             every { classes(includeNested = true, includeLocal = false) } returns listOf(class1, class2)
         }

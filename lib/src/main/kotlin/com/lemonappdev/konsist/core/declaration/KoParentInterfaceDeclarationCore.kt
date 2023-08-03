@@ -8,9 +8,9 @@ import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal class KoParentInterfaceDeclarationImpl private constructor(override val ktSuperTypeListEntry: KtSuperTypeListEntry) :
+internal class KoParentInterfaceDeclarationCore private constructor(override val ktSuperTypeListEntry: KtSuperTypeListEntry) :
     KoParentInterfaceDeclaration,
-    KoParentDeclarationImpl,
+    KoParentDeclarationCore,
     KoDelegateProviderCore {
     override val ktElement: KtElement by lazy { ktSuperTypeListEntry }
 
@@ -37,6 +37,6 @@ internal class KoParentInterfaceDeclarationImpl private constructor(override val
             cache.getOrCreateInstance(
                 ktSuperTypeListEntry,
                 containingDeclaration,
-            ) { KoParentInterfaceDeclarationImpl(ktSuperTypeListEntry) }
+            ) { KoParentInterfaceDeclarationCore(ktSuperTypeListEntry) }
     }
 }

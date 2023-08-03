@@ -30,8 +30,8 @@ class KoScopeForKoFileProviderTest {
                     "KoScopeForKoPropertyProviderTest",
                     "KoScopeForKoTypeAliasProviderTest",
                     "KoScopeTest",
-                    "KoScopeCreatorImpl",
-                    "KoScopeImpl",
+                    "KoScopeCore",
+                    "KoScopeCreatorCore",
                 ),
             )
     }

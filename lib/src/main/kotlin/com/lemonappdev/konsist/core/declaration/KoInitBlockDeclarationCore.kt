@@ -19,7 +19,7 @@ import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnonymousInitializer
 import org.jetbrains.kotlin.psi.KtElement
 
-internal class KoInitBlockDeclarationImpl private constructor(
+internal class KoInitBlockDeclarationCore private constructor(
     private val ktAnonymousInitializer: KtAnonymousInitializer,
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
@@ -56,7 +56,7 @@ internal class KoInitBlockDeclarationImpl private constructor(
             containingDeclaration: KoContainingDeclarationProvider,
         ): KoInitBlockDeclaration =
             cache.getOrCreateInstance(ktAnonymousInitializer, containingDeclaration) {
-                KoInitBlockDeclarationImpl(ktAnonymousInitializer, containingDeclaration)
+                KoInitBlockDeclarationCore(ktAnonymousInitializer, containingDeclaration)
             }
     }
 }

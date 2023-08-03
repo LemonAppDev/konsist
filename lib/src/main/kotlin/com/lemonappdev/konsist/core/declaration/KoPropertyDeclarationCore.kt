@@ -42,7 +42,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-internal class KoPropertyDeclarationImpl private constructor(
+internal class KoPropertyDeclarationCore private constructor(
     override val ktProperty: KtProperty,
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
@@ -116,7 +116,7 @@ internal class KoPropertyDeclarationImpl private constructor(
 
         internal fun getInstance(ktProperty: KtProperty, containingDeclaration: KoContainingDeclarationProvider): KoPropertyDeclaration =
             cache.getOrCreateInstance(ktProperty, containingDeclaration) {
-                KoPropertyDeclarationImpl(ktProperty, containingDeclaration)
+                KoPropertyDeclarationCore(ktProperty, containingDeclaration)
             }
     }
 }

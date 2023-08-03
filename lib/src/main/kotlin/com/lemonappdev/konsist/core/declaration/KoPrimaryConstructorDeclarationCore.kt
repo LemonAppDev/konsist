@@ -6,12 +6,12 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import org.jetbrains.kotlin.psi.KtConstructor
 import org.jetbrains.kotlin.psi.KtPrimaryConstructor
 
-internal class KoPrimaryConstructorDeclarationImpl private constructor(
+internal class KoPrimaryConstructorDeclarationCore private constructor(
     private val ktPrimaryConstructor: KtPrimaryConstructor,
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
     KoPrimaryConstructorDeclaration,
-    KoConstructorDeclarationImpl {
+    KoConstructorDeclarationCore {
     override val ktConstructor: KtConstructor<*> by lazy { ktPrimaryConstructor }
 
     override fun toString(): String {
@@ -26,7 +26,7 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
             containingDeclaration: KoContainingDeclarationProvider,
         ): KoPrimaryConstructorDeclaration =
             cache.getOrCreateInstance(ktPrimaryConstructor, containingDeclaration) {
-                KoPrimaryConstructorDeclarationImpl(
+                KoPrimaryConstructorDeclarationCore(
                     ktPrimaryConstructor,
                     containingDeclaration,
                 )

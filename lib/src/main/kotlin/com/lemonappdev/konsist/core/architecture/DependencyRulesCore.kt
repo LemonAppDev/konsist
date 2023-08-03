@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.architecture.DependencyRules
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-class DependencyRulesImpl : DependencyRules {
+class DependencyRulesCore : DependencyRules {
     internal val dependencies = mutableMapOf<Layer, Set<Layer>>()
     internal val statuses = mutableMapOf<Layer, Status>()
 
