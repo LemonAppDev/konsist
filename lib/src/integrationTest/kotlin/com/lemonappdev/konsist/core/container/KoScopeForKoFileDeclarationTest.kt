@@ -29,8 +29,8 @@ class KoScopeForKoFileDeclarationTest {
                     "KoScopeForKoPropertyDeclarationTest",
                     "KoScopeForKoTypeAliasDeclarationTest",
                     "KoScopeTest",
-                    "KoScopeCreatorImpl",
-                    "KoScopeImpl",
+                    "KoScopeCore",
+                    "KoScopeCreatorCore",
                 ),
             )
     }

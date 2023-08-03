@@ -67,7 +67,7 @@ internal class KoFileDeclarationCore(override val ktFile: KtFile) :
         if (ktFile.packageDirective?.qualifiedName == "") {
             null
         } else {
-            ktFile.packageDirective?.let { KoPackageDeclarationImpl.getInstance(it, this) }
+            ktFile.packageDirective?.let { KoPackageDeclarationCore.getInstance(it, this) }
         }
     }
 

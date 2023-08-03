@@ -14,7 +14,7 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 
 @Suppress("detekt.TooManyFunctions")
-class KoScopeImpl(
+class KoScopeCore(
     private var koFiles: List<KoFileDeclaration>,
 ) : KoScope {
     constructor(koFileDeclaration: KoFileDeclaration) : this(listOf(koFileDeclaration))
