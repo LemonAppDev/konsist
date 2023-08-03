@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.architecture
 
-import com.lemonappdev.konsist.core.architecture.KoArchitectureAssertionImpl
+import com.lemonappdev.konsist.core.architecture.KoArchitectureAssertionCore
 
 /**
  * A singleton object representing the `KoArchitectureCreator` that implements the [KoArchitectureAssertion] interface.
@@ -10,4 +10,4 @@ import com.lemonappdev.konsist.core.architecture.KoArchitectureAssertionImpl
  *
  * @see KoArchitectureAssertion
  */
-object KoArchitectureCreator : KoArchitectureAssertion by KoArchitectureAssertionImpl()
+object KoArchitectureCreator : KoArchitectureAssertion by KoArchitectureAssertionCore()

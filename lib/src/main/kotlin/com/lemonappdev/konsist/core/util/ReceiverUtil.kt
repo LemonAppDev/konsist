@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.util
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
-import com.lemonappdev.konsist.core.declaration.KoTypeDeclarationImpl
+import com.lemonappdev.konsist.core.declaration.KoTypeDeclarationCore
 import org.jetbrains.kotlin.psi.KtTypeReference
 
 object ReceiverUtil {
@@ -20,7 +20,7 @@ object ReceiverUtil {
             null
         }
 
-        return type?.let { KoTypeDeclarationImpl.getInstance(it, parentDeclaration) }
+        return type?.let { KoTypeDeclarationCore.getInstance(it, parentDeclaration) }
     }
 
     internal fun getReceiverType(
@@ -34,7 +34,7 @@ object ReceiverUtil {
             null
         }
 
-        return type?.let { KoTypeDeclarationImpl.getInstance(type, parentDeclaration) }
+        return type?.let { KoTypeDeclarationCore.getInstance(type, parentDeclaration) }
     }
 
     internal fun hasReceiverType(receiverType: KoTypeDeclaration?, name: String?): Boolean = when (name) {
