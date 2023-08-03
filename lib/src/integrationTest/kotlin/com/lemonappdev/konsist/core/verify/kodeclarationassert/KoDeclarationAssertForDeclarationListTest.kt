@@ -2,10 +2,10 @@ package com.lemonappdev.konsist.core.verify.kodeclarationassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.withPrimaryConstructor
+import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertNot
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
-import com.lemonappdev.konsist.core.verify.assert
-import com.lemonappdev.konsist.core.verify.assertNot
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
