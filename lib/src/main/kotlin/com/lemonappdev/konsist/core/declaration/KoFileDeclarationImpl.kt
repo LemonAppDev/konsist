@@ -56,8 +56,6 @@ internal class KoFileDeclarationImpl(override val ktFile: KtFile) :
 
     override val ktAnnotated: KtAnnotated by lazy { ktFile }
 
-    override val containingDeclaration: KoContainingDeclarationProvider? by lazy { null }
-
     override val name: String by lazy { nameWithExtension.substringBeforeLast('.') }
 
     override val path: String by lazy {
