@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.api.ext.list
+package com.lemonappdev.konsist.core.ext
 
 inline fun <reified T : Any> List<*>.indexOfFirstInstance(): Int = indexOfFirst { it is T }
 
