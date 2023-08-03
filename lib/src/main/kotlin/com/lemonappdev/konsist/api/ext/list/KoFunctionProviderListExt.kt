@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 
 /**
- * List containing functions declarations.
+ * List containing function declarations.
  *
  * @param includeNested Whether to include nested declarations.
  * @param includeLocal Whether to include local declarations.
