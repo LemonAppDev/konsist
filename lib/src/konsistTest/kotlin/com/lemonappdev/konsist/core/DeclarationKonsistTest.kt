@@ -4,8 +4,8 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.withExplicitReturnType
 import com.lemonappdev.konsist.api.ext.list.withExplicitType
 import com.lemonappdev.konsist.api.ext.list.withoutName
-import com.lemonappdev.konsist.core.verify.assert
-import com.lemonappdev.konsist.core.verify.assertNot
+import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertNot
 import org.junit.jupiter.api.Test
 
 class DeclarationKonsistTest {

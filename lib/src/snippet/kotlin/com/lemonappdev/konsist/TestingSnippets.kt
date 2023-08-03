@@ -6,8 +6,8 @@ import com.lemonappdev.konsist.api.ext.list.declarations
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutSomeModifiers
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
-import com.lemonappdev.konsist.core.verify.assert
-import com.lemonappdev.konsist.core.verify.assertNot
+import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertNot
 
 class TestingSnippets {
     fun `every class has test`() {

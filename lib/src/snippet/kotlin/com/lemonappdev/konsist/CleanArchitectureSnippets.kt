@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArch
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.ext.list.withAllAnnotationsOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
-import com.lemonappdev.konsist.core.verify.assert
+import com.lemonappdev.konsist.api.verify.assert
 import org.springframework.stereotype.Repository
 
 class CleanArchitectureSnippets {
