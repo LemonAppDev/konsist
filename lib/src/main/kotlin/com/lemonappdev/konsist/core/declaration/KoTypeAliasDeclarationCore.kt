@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
@@ -15,7 +14,6 @@ import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProv
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
@@ -24,9 +22,9 @@ import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
+import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeAlias
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
@@ -43,7 +41,7 @@ internal class KoTypeAliasDeclarationCore private constructor(
     KoLocationProviderCore,
     KoModifierProviderCore,
     KoNameProviderCore,
-    KoPackageProviderCore,
+    KoPackageDeclarationProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoResideInOrOutsidePackageProviderCore,
@@ -54,11 +52,7 @@ internal class KoTypeAliasDeclarationCore private constructor(
     KoActualModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktTypeAlias }
 
-    override val ktFile: KtFile? by lazy { null }
-
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktTypeAlias }
-
-    override val koFiles: List<KoFileDeclaration>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktTypeAlias }
 

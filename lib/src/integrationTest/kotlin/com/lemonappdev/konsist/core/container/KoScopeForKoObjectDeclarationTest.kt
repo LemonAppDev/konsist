@@ -1,11 +1,10 @@
 package com.lemonappdev.konsist.core.container
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoScopeForKoObjectProviderTest {
+class KoScopeForKoObjectDeclarationTest {
     @Test
     fun `scope-contains-no-objects`() {
         // given
@@ -41,22 +40,6 @@ class KoScopeForKoObjectProviderTest {
             .shouldBeEqualTo(expected)
     }
 
-    @Test
-    fun `contains-objects`() {
-        // given
-        val sut = getSnippetFile("contains-objects")
-
-        // then
-        assertSoftly(sut) {
-            numObjects(includeNested = false) shouldBeEqualTo 1
-            numObjects(includeNested = true) shouldBeEqualTo 2
-            containsObject("SampleObject", includeNested = false) shouldBeEqualTo true
-            containsObject("SampleNestedObject", includeNested = false) shouldBeEqualTo false
-            containsObject("SampleNestedObject", includeNested = true) shouldBeEqualTo true
-            containsObject("NonExisting") shouldBeEqualTo false
-        }
-    }
-
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/container/snippet/forkoobjectprovider/", fileName)
+        getSnippetKoScope("core/container/snippet/forkoobjectdeclaration/", fileName)
 }

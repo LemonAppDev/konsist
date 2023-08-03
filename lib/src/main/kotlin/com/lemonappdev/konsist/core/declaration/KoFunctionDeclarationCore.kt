@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
@@ -21,7 +20,6 @@ import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
@@ -42,11 +40,11 @@ import com.lemonappdev.konsist.core.provider.modifier.KoOverrideModifierProvider
 import com.lemonappdev.konsist.core.provider.modifier.KoSuspendModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoTailrecModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
+import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -72,7 +70,7 @@ internal class KoFunctionDeclarationCore private constructor(
     KoLocationProviderCore,
     KoModifierProviderCore,
     KoNameProviderCore,
-    KoPackageProviderCore,
+    KoPackageDeclarationProviderCore,
     KoParametersProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
@@ -93,15 +91,11 @@ internal class KoFunctionDeclarationCore private constructor(
     KoAbstractModifierProviderCore,
     KoActualModifierProviderCore,
     KoExpectModifierProviderCore {
-    override val ktFile: KtFile? by lazy { null }
-
     override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
 
     override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktFunction }
-
-    override val koFiles: List<KoFileDeclaration>? by lazy { null }
 
     override val psiElement: PsiElement by lazy { ktFunction }
 

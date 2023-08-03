@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
-import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationCore
 import org.jetbrains.kotlin.psi.KtAnnotated
@@ -11,18 +10,12 @@ internal interface KoAnnotationProviderCore :
     KoAnnotationProvider,
     KoContainingDeclarationProviderCore,
     KoBaseProviderCore {
-    val ktAnnotated: KtAnnotated?
-    val koFiles: List<KoFileDeclaration>?
+    val ktAnnotated: KtAnnotated
 
     override val annotations: List<KoAnnotationDeclaration>
-        get() = if (ktAnnotated != null) {
-            ktAnnotated
-                ?.annotationEntries
-                ?.map { KoAnnotationDeclarationCore.getInstance(it, this) }
-                ?: emptyList()
-        } else {
-            koFiles?.flatMap { it.annotations } ?: emptyList()
-        }
+        get() = ktAnnotated
+            .annotationEntries
+            .map { KoAnnotationDeclarationCore.getInstance(it, this) }
 
     override val numAnnotations: Int
         get() = annotations.size
