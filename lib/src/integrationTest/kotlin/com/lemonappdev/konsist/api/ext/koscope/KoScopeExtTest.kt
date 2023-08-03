@@ -15,7 +15,7 @@ class KoScopeExtTest {
     @MethodSource("provideValues")
     fun `scope-contains-all-nested-and-local-base-declarations`(
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ) {
         // given
         val sut = getSnippetFile("scope-contains-all-nested-and-local-base-declarations")
@@ -29,7 +29,7 @@ class KoScopeExtTest {
     @MethodSource("provideValues")
     fun `scope-contains-all-nested-and-local-classes`(
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ) {
         // given
         val sut = getSnippetFile("scope-contains-all-nested-and-local-classes")
@@ -43,7 +43,7 @@ class KoScopeExtTest {
     @MethodSource("provideValues")
     fun `scope-contains-all-nested-and-local-declarations-which-implement-base-provider`(
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ) {
         // given
         val sut =
@@ -58,7 +58,7 @@ class KoScopeExtTest {
     @MethodSource("provideValues")
     fun `scope-contains-all-nested-and-local-declarations-which-implement-kdoc-provider`(
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ) {
         // given
         val sut =
@@ -79,7 +79,7 @@ class KoScopeExtTest {
             arguments(false, false),
             arguments(true, false),
             arguments(false, true),
-            arguments(true, true)
+            arguments(true, true),
         )
     }
 }

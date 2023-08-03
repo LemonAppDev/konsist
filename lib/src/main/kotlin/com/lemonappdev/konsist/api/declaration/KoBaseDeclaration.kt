@@ -5,4 +5,4 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 /**
  * Represents a Kotlin base declaration.
  */
-interface KoBaseDeclaration: KoBaseProvider
+interface KoBaseDeclaration : KoBaseProvider
