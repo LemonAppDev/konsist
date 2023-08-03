@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api
 
 import com.lemonappdev.konsist.api.KoKDocTag.PARAM
 import com.lemonappdev.konsist.api.KoKDocTag.RETURN
+import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.verify.assert
 import org.junit.jupiter.api.Test
@@ -10,8 +11,7 @@ class ApiKonsistTest {
     @Test
     fun `every api declaration has kdoc`() {
         apiPackageScope
-            .declarations(includeNested = true)
-            .filterIsInstance<KoKDocProvider>()
+            .declarationsOf<KoKDocProvider>(includeNested = true)
             .assert { it.hasKDoc }
     }
 
