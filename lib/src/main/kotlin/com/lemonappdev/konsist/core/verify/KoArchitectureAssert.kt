@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.ext.list.withPackage
-import com.lemonappdev.konsist.core.architecture.DependencyRulesImpl
+import com.lemonappdev.konsist.core.architecture.DependencyRulesCore
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
 import com.lemonappdev.konsist.core.architecture.Status
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
@@ -14,7 +14,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 internal fun KoArchitectureScope.assert() {
     try {
         val files = this.koScope.files
-        val dependencyRules = this.dependencyRules as DependencyRulesImpl
+        val dependencyRules = this.dependencyRules as DependencyRulesCore
 
         if (dependencyRules.allLayers.isEmpty()) {
             throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")

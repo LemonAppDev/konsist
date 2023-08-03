@@ -1,5 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-import com.lemonappdev.konsist.testdata.SampleType
-
-@SampleAnnotation
-class SampleClass(val property: SampleType)
