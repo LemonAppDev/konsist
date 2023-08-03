@@ -7,11 +7,4 @@ import com.lemonappdev.konsist.api.provider.KoKDocProvider
  */
 interface KoSecondaryConstructorDeclaration :
     KoConstructorDeclaration,
-    KoKDocProvider {
-    /**
-     * String representing the secondary constructor.
-     *
-     * @return a string representing the secondary constructor.
-     */
-    override fun toString(): String
-}
+    KoKDocProvider

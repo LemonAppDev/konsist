@@ -3,15 +3,15 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
-import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.psi.KtElement
 
 internal class KoInitBlockDeclarationImpl private constructor(
     private val ktAnonymousInitializer: KtAnonymousInitializer,
-    override val parent: KoParentProvider,
+    override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
     KoInitBlockDeclaration,
     KoBaseProviderCore,
@@ -30,7 +30,7 @@ internal class KoInitBlockDeclarationImpl private constructor(
     KoDeclarationProviderCore,
     KoFunctionProviderCore,
     KoLocationProviderCore,
-    KoParentProviderCore,
+    KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoPropertyProviderCore,
     KoTextProviderCore {
@@ -53,10 +53,10 @@ internal class KoInitBlockDeclarationImpl private constructor(
 
         internal fun getInstance(
             ktAnonymousInitializer: KtAnonymousInitializer,
-            parent: KoParentProvider,
+            containingDeclaration: KoContainingDeclarationProvider,
         ): KoInitBlockDeclaration =
-            cache.getOrCreateInstance(ktAnonymousInitializer, parent) {
-                KoInitBlockDeclarationImpl(ktAnonymousInitializer, parent)
+            cache.getOrCreateInstance(ktAnonymousInitializer, containingDeclaration) {
+                KoInitBlockDeclarationImpl(ktAnonymousInitializer, containingDeclaration)
             }
     }
 }

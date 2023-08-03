@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.ext.toOsSeparator
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -56,7 +57,7 @@ internal class KoFileDeclarationImpl(override val ktFile: KtFile) :
 
     override val ktAnnotated: KtAnnotated by lazy { ktFile }
 
-    override val parent: KoParentProvider? by lazy { null }
+    override val containingDeclaration: KoContainingDeclarationProvider? by lazy { null }
 
     override val name: String by lazy { nameWithExtension.substringBeforeLast('.') }
 

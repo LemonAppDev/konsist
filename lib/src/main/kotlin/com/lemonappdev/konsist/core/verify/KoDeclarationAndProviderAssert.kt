@@ -4,9 +4,9 @@ import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
-import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -95,8 +95,8 @@ private fun checkIfDeclarationIsAnnotatedWithSuppress(declaration: KoBaseProvide
     }
 
 private fun checkIfParentIsAnnotatedWithSuppress(declaration: KoBaseProvider, testMethodName: String): Boolean =
-    if (declaration is KoParentProvider) {
-        declaration.parent?.let { checkIfDeclarationIsAnnotatedWithSuppress(it, testMethodName) } ?: false
+    if (declaration is KoContainingDeclarationProvider) {
+        declaration.containingDeclaration?.let { checkIfDeclarationIsAnnotatedWithSuppress(it, testMethodName) } ?: false
     } else {
         false
     }

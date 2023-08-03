@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 
 internal interface KoReceiverTypeProviderCore :
     KoReceiverTypeProvider,
-    KoParentProviderCore,
+    KoContainingDeclarationProviderCore,
     KoExtensionProviderCore,
     KoBaseProviderCore {
     override val receiverType: KoTypeDeclaration?

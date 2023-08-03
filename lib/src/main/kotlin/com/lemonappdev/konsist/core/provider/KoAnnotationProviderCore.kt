@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 
 internal interface KoAnnotationProviderCore :
     KoAnnotationProvider,
-    KoParentProviderCore,
+    KoContainingDeclarationProviderCore,
     KoBaseProviderCore {
     val ktAnnotated: KtAnnotated
 

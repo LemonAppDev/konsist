@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationImpl
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
-internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProviderCore, KoParentProviderCore {
+internal interface KoTypeAliasProviderCore : KoTypeAliasProvider, KoBaseProviderCore, KoContainingDeclarationProviderCore {
     val ktFile: KtFile
 
     override val typeAliases: List<KoTypeAliasDeclaration>

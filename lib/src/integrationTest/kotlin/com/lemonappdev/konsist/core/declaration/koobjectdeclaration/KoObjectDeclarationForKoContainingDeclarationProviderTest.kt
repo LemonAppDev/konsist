@@ -1,0 +1,41 @@
+package com.lemonappdev.konsist.core.declaration.koobjectdeclaration
+
+import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import org.amshove.kluent.assertSoftly
+import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldNotBeEqualTo
+import org.junit.jupiter.api.Test
+
+class KoObjectDeclarationForKoContainingDeclarationProviderTest {
+    @Test
+    fun `object-with-file-parent-declaration`() {
+        // given
+        val sut = getSnippetFile("object-with-file-parent-declaration")
+            .objects()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            containingDeclaration shouldNotBeEqualTo null
+            (containingDeclaration as KoNameProvider).name shouldBeEqualTo "object-with-file-parent-declaration"
+        }
+    }
+
+    @Test
+    fun `object-with-parent-declaration`() {
+        // given
+        val sut = getSnippetFile("object-with-parent-declaration")
+            .objects(includeNested = true)
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            containingDeclaration shouldNotBeEqualTo null
+            (containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleClass"
+        }
+    }
+
+    private fun getSnippetFile(fileName: String) =
+        getSnippetKoScope("core/declaration/koobjectdeclaration/snippet/forkocontainingdeclarationprovider/", fileName)
+}

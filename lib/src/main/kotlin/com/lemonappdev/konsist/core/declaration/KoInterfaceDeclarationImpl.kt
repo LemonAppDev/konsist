@@ -3,11 +3,12 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
@@ -18,7 +19,6 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentInterfaceProviderCore
-import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
@@ -40,7 +40,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoInterfaceDeclarationImpl private constructor(
     override val ktClass: KtClass,
-    override val parent: KoParentProvider,
+    override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
     KoInterfaceDeclaration,
     KoBaseProviderCore,
@@ -58,7 +58,7 @@ internal class KoInterfaceDeclarationImpl private constructor(
     KoObjectProviderCore,
     KoPackageDeclarationProviderCore,
     KoParentInterfaceProviderCore,
-    KoParentProviderCore,
+    KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoPropertyProviderCore,
     KoRepresentsTypeProviderCore,
@@ -91,9 +91,9 @@ internal class KoInterfaceDeclarationImpl private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoInterfaceDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktClass: KtClass, parent: KoParentProvider): KoInterfaceDeclaration =
-            cache.getOrCreateInstance(ktClass, parent) {
-                KoInterfaceDeclarationImpl(ktClass, parent)
+        internal fun getInstance(ktClass: KtClass, containingDeclaration: KoContainingDeclarationProvider): KoInterfaceDeclaration =
+            cache.getOrCreateInstance(ktClass, containingDeclaration) {
+                KoInterfaceDeclarationImpl(ktClass, containingDeclaration)
             }
     }
 }

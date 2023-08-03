@@ -2,7 +2,7 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
-import com.lemonappdev.konsist.api.provider.KoParentProvider
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -19,35 +19,16 @@ import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProvid
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtConstructor
 import org.jetbrains.kotlin.psi.KtPrimaryConstructor
-import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoPrimaryConstructorDeclarationImpl private constructor(
     private val ktPrimaryConstructor: KtPrimaryConstructor,
-    override val parent: KoParentProvider,
+    override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
     KoPrimaryConstructorDeclaration,
-    KoBaseProviderCore,
-    KoAnnotationProviderCore,
-    KoContainingFileProviderCore,
-    KoLocationProviderCore,
-    KoModifierProviderCore,
-    KoPackageDeclarationProviderCore,
-    KoParametersProviderCore,
-    KoParentProviderCore,
-    KoPathProviderCore,
-    KoResideInOrOutsidePackageProviderCore,
-    KoTextProviderCore,
-    KoVisibilityModifierProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktPrimaryConstructor }
-
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktPrimaryConstructor }
-
-    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktPrimaryConstructor }
-
-    override val psiElement: PsiElement by lazy { ktPrimaryConstructor }
-
-    override val ktElement: KtElement by lazy { ktPrimaryConstructor }
+    KoConstructorDeclarationImpl {
+    override val ktConstructor: KtConstructor<*> by lazy { ktPrimaryConstructor }
 
     override fun toString(): String {
         return locationWithText
@@ -58,12 +39,12 @@ internal class KoPrimaryConstructorDeclarationImpl private constructor(
 
         internal fun getInstance(
             ktPrimaryConstructor: KtPrimaryConstructor,
-            parent: KoParentProvider,
+            containingDeclaration: KoContainingDeclarationProvider,
         ): KoPrimaryConstructorDeclaration =
-            cache.getOrCreateInstance(ktPrimaryConstructor, parent) {
+            cache.getOrCreateInstance(ktPrimaryConstructor, containingDeclaration) {
                 KoPrimaryConstructorDeclarationImpl(
                     ktPrimaryConstructor,
-                    parent,
+                    containingDeclaration,
                 )
             }
     }
