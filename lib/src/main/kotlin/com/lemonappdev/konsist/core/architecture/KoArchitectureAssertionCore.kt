@@ -5,9 +5,9 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureAssertion
 import com.lemonappdev.konsist.api.container.KoScope
 import com.lemonappdev.konsist.core.verify.assert
 
-class KoArchitectureAssertionImpl : KoArchitectureAssertion {
+class KoArchitectureAssertionCore : KoArchitectureAssertion {
     override fun KoScope.assertArchitecture(dependencies: DependencyRules.() -> Unit) {
-        val dependencyRules = DependencyRulesImpl()
+        val dependencyRules = DependencyRulesCore()
         dependencies(dependencyRules)
         val architectureScope = KoArchitectureScope(dependencyRules, this)
         architectureScope.assert()
@@ -18,7 +18,7 @@ class KoArchitectureAssertionImpl : KoArchitectureAssertion {
     }
 
     override fun architecture(dependencies: DependencyRules.() -> Unit): DependencyRules {
-        val dependencyRules = DependencyRulesImpl()
+        val dependencyRules = DependencyRulesCore()
         dependencies(dependencyRules)
         return dependencyRules
     }

@@ -11,7 +11,7 @@ import com.lemonappdev.konsist.core.ext.toMacOsSeparator
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import java.io.File
 
-internal class KoScopeCreatorImpl : KoScopeCreator {
+internal class KoScopeCreatorCore : KoScopeCreator {
     private val pathProvider: PathProvider by lazy { PathProvider.getInstance() }
 
     private val projectKotlinFiles: List<KoFileDeclaration> by lazy { File(pathProvider.rootProjectPath).toKoFiles() }
@@ -20,23 +20,23 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
     override fun scopeFromProject(moduleName: String?, sourceSetName: String?, ignoreBuildConfig: Boolean): KoScope {
         val koFiles = getFiles(moduleName, sourceSetName, ignoreBuildConfig)
-        return KoScopeImpl(koFiles)
+        return KoScopeCore(koFiles)
     }
 
     override fun scopeFromModule(vararg moduleNames: String): KoScope = moduleNames
         .flatMap { getFiles(it) }
-        .let { KoScopeImpl(it) }
+        .let { KoScopeCore(it) }
 
     override fun scopeFromPackage(packagee: String, moduleName: String?, sourceSetName: String?): KoScope {
         val koFiles = getFiles(moduleName, sourceSetName)
             .withPackage(packagee)
 
-        return KoScopeImpl(koFiles)
+        return KoScopeCore(koFiles)
     }
 
     override fun scopeFromSourceSet(vararg sourceSetNames: String): KoScope = sourceSetNames
         .flatMap { getFiles(sourceSetName = it) }
-        .let { KoScopeImpl(it) }
+        .let { KoScopeCore(it) }
 
     private fun getFiles(
         moduleName: String? = null,
@@ -83,7 +83,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val koFiles = getFiles(moduleName, sourceSetName)
             .filterNot { isTestSourceSet(it.sourceSetName) }
 
-        return KoScopeImpl(koFiles)
+        return KoScopeCore(koFiles)
     }
 
     override fun scopeFromTest(moduleName: String?, sourceSetName: String?): KoScope {
@@ -94,7 +94,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
         val koFiles = getFiles(moduleName, sourceSetName)
             .filter { isTestSourceSet(it.sourceSetName) }
 
-        return KoScopeImpl(koFiles)
+        return KoScopeCore(koFiles)
     }
 
     override fun scopeFromDirectory(path: String): KoScope {
@@ -111,7 +111,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
         val files = directory.toKoFiles()
 
-        return KoScopeImpl(files)
+        return KoScopeCore(files)
     }
 
     override fun scopeFromFile(path: String): KoScope {
@@ -124,7 +124,7 @@ internal class KoScopeCreatorImpl : KoScopeCreator {
 
         val koKoFile = file.toKoFile()
 
-        return KoScopeImpl(koKoFile)
+        return KoScopeCore(koKoFile)
     }
 
     /**

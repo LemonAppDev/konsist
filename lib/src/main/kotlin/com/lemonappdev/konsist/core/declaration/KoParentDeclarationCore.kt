@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal interface KoParentDeclarationImpl :
+internal interface KoParentDeclarationCore :
     KoParentDeclaration,
     KoBaseProviderCore,
     KoNameProviderCore,

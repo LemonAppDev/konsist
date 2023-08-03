@@ -52,7 +52,7 @@ import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 @Suppress("detekt.TooManyFunctions")
-internal class KoFunctionDeclarationImpl private constructor(
+internal class KoFunctionDeclarationCore private constructor(
     override val ktFunction: KtFunction,
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
@@ -119,11 +119,11 @@ internal class KoFunctionDeclarationImpl private constructor(
         psiChildren
             .mapNotNull {
                 if (it is KtClass && !it.isInterface()) {
-                    KoClassDeclarationImpl.getInstance(it, this)
+                    KoClassDeclarationCore.getInstance(it, this)
                 } else if (it is KtFunction) {
                     getInstance(it, this)
                 } else if (it is KtProperty) {
-                    KoPropertyDeclarationImpl.getInstance(it, this)
+                    KoPropertyDeclarationCore.getInstance(it, this)
                 } else {
                     null
                 }
@@ -142,7 +142,7 @@ internal class KoFunctionDeclarationImpl private constructor(
         private val cache: KoDeclarationCache<KoFunctionDeclaration> = KoDeclarationCache()
         internal fun getInstance(ktFunction: KtFunction, containingDeclaration: KoContainingDeclarationProvider): KoFunctionDeclaration =
             cache.getOrCreateInstance(ktFunction, containingDeclaration) {
-                KoFunctionDeclarationImpl(ktFunction, containingDeclaration)
+                KoFunctionDeclarationCore(ktFunction, containingDeclaration)
             }
     }
 }

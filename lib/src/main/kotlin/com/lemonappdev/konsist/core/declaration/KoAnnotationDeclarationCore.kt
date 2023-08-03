@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -9,33 +9,34 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoPackageMatchingFilePathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtPackageDirective
 
-internal class KoPackageDeclarationImpl private constructor(private val ktPackageDirective: KtPackageDirective) :
-    KoPackageDeclaration,
+internal class KoAnnotationDeclarationCore private constructor(
+    private val ktAnnotationEntry: KtAnnotationEntry,
+) : KoAnnotationDeclaration,
     KoBaseProviderCore,
     KoContainingFileProviderCore,
     KoFullyQualifiedNameProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
-    KoPackageMatchingFilePathProviderCore,
     KoPathProviderCore,
+    KoRepresentsTypeProviderCore,
     KoTextProviderCore {
-    override val psiElement: PsiElement by lazy { ktPackageDirective }
+    override val psiElement: PsiElement by lazy { ktAnnotationEntry }
 
-    override val ktElement: KtElement by lazy { ktPackageDirective }
+    override val ktElement: KtElement by lazy { ktAnnotationEntry }
+
+    override val name: String by lazy { ktAnnotationEntry.shortName.toString() }
 
     override val fullyQualifiedName: String by lazy {
-        if (ktPackageDirective.fqName != FqName.ROOT) {
-            ktPackageDirective.fqName.toString()
-        } else {
-            ""
-        }
+        containingFile
+            .imports
+            .firstOrNull { it.text.endsWith(".$name") }
+            ?.name ?: ""
     }
 
     override fun toString(): String {
@@ -43,12 +44,12 @@ internal class KoPackageDeclarationImpl private constructor(private val ktPackag
     }
 
     internal companion object {
-        private val cache: KoDeclarationCache<KoPackageDeclaration> = KoDeclarationCache()
+        private val cache: KoDeclarationCache<KoAnnotationDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(
-            ktPackageDirective: KtPackageDirective,
+            ktObjectDeclaration: KtAnnotationEntry,
             containingDeclaration: KoContainingDeclarationProvider,
-        ): KoPackageDeclaration =
-            cache.getOrCreateInstance(ktPackageDirective, containingDeclaration) { KoPackageDeclarationImpl(ktPackageDirective) }
+        ): KoAnnotationDeclaration =
+            cache.getOrCreateInstance(ktObjectDeclaration, containingDeclaration) { KoAnnotationDeclarationCore(ktObjectDeclaration) }
     }
 }

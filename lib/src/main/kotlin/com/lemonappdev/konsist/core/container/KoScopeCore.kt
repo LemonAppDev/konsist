@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtFile
 
 @Suppress("detekt.TooManyFunctions")
-class KoScopeImpl(
+class KoScopeCore(
     override var koFiles: List<KoFileDeclaration>,
 ) : KoScope,
     KoAnnotationProviderCore,
@@ -79,11 +79,11 @@ class KoScopeImpl(
     ): List<KoPropertyDeclaration> =
         koFiles.flatMap { it.properties(includeNested, includeLocal) }
 
-    override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope = KoScopeImpl(koFiles.filter { predicate(it) })
+    override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope = KoScopeCore(koFiles.filter { predicate(it) })
 
-    override operator fun plus(scope: KoScope): KoScope = KoScopeImpl(files + scope.files)
+    override operator fun plus(scope: KoScope): KoScope = KoScopeCore(files + scope.files)
 
-    override operator fun minus(scope: KoScope): KoScope = KoScopeImpl(files - scope.files.toSet())
+    override operator fun minus(scope: KoScope): KoScope = KoScopeCore(files - scope.files.toSet())
 
     override operator fun plusAssign(scope: KoScope) {
         koFiles += scope.files

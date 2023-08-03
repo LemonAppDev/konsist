@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-internal interface KoConstructorDeclarationImpl :
+internal interface KoConstructorDeclarationCore :
     KoConstructorDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
