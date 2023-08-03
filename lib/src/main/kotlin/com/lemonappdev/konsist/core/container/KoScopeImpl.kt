@@ -11,7 +11,6 @@ import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPackageDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
-import org.jetbrains.kotlin.psi.KtFile
 import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 
 @Suppress("detekt.TooManyFunctions")
