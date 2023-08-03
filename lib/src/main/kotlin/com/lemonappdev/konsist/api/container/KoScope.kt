@@ -47,7 +47,7 @@ interface KoScope {
      *
      * @param includeNested specifies whether to include nested classes, by default `false`.
      * @param includeLocal specifies whether to include local classes, by default `false`.
-     * @return a sequence of [KoClassDeclaration] representing the classes in the scope.
+     * @return a list of [KoClassDeclaration] representing the classes in the scope.
      */
     fun classes(
         includeNested: Boolean = false,
@@ -58,7 +58,7 @@ interface KoScope {
      * The interfaces present in the scope.
      *
      * @param includeNested specifies whether to include nested interfaces, by default `false`.
-     * @return a sequence of [KoInterfaceDeclaration] representing the interfaces in the scope.
+     * @return a list of [KoInterfaceDeclaration] representing the interfaces in the scope.
      */
     fun interfaces(
         includeNested: Boolean = false,
@@ -68,7 +68,7 @@ interface KoScope {
      * The objects present in the scope.
      *
      * @param includeNested specifies whether to include nested objects, by default `false`.
-     * @return a sequence of [KoObjectDeclaration] representing the objects in the scope.
+     * @return a list of [KoObjectDeclaration] representing the objects in the scope.
      */
     fun objects(
         includeNested: Boolean = false,
@@ -79,7 +79,7 @@ interface KoScope {
      *
      * @param includeNested specifies whether to include nested functions, by default `false`.
      * @param includeLocal specifies whether to include local functions, by default `false`.
-     * @return a sequence of [KoFunctionDeclaration] representing the functions in the scope.
+     * @return a list of [KoFunctionDeclaration] representing the functions in the scope.
      */
     fun functions(
         includeNested: Boolean = false,
@@ -91,7 +91,7 @@ interface KoScope {
      *
      * @param includeNested specifies whether to include nested declarations, by default `false`.
      * @param includeLocal specifies whether to include local declarations, by default `false`.
-     * @return a sequence of [KoBaseDeclaration] representing the declarations in the scope.
+     * @return a list of [KoBaseDeclaration] representing the declarations in the scope.
      */
     fun declarations(
         includeNested: Boolean = false,
@@ -103,7 +103,7 @@ interface KoScope {
      *
      * @param includeNested specifies whether to include nested properties, by default `false`.
      * @param includeLocal specifies whether to include local properties, by default `false`.
-     * @return a sequence of [KoPropertyDeclaration] representing the properties in the scope.
+     * @return a list of [KoPropertyDeclaration] representing the properties in the scope.
      */
     fun properties(
         includeNested: Boolean = false,
