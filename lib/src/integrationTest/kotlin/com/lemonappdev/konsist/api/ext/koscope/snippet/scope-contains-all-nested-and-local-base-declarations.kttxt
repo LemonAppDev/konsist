@@ -1,0 +1,45 @@
+val sampleProperty: Boolean = true
+
+fun sampleFunction() {
+    val sampleLocalProperty1 = 6
+
+    fun sampleLocalFunction(){
+        val sampleLocalProperty2 = true
+
+        class sampleLocalClass1 {
+            fun sampleNestedFunction() {}
+        }
+    }
+
+    class sampleLocalClass2
+}
+
+class SampleClass {
+    val sampleNestedPropertyInsideClass = 6
+
+    fun sampleNestedFunctionInsideClass() {
+        val sampleLocalProperty3 = true
+
+        class sampleLocalClass3
+    }
+
+    class sampleNestedClassInsideClass
+}
+
+interface SampleInterface {
+    val sampleNestedPropertyInsideInterface: String
+
+    fun sampleNestedFunctionInsideInterface() {}
+
+    class sampleNestedClassInsideInterface
+}
+
+object SampleObject {
+    val sampleNestedPropertyInsideObject = 6
+
+    fun sampleNestedFunctionInsideObject() {}
+
+    class sampleNestedClassInsideObject
+}
+
+typealias SampleTypeAlias = () -> Int
