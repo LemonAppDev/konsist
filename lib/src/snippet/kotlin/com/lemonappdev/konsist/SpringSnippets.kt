@@ -2,7 +2,7 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.withAllAnnotationsOf
-import com.lemonappdev.konsist.core.verify.assert
+import com.lemonappdev.konsist.api.verify.assert
 import org.springframework.stereotype.Repository
 import org.springframework.web.bind.annotation.RestController
 

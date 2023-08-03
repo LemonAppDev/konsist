@@ -2,7 +2,7 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
-import com.lemonappdev.konsist.core.verify.assert
+import com.lemonappdev.konsist.api.verify.assert
 
 class LibrarySnippets {
     fun `every api declaration has KDoc`() {

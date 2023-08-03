@@ -10,8 +10,8 @@ import com.lemonappdev.konsist.api.ext.list.indexOfLastInstance
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withValueModifier
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
-import com.lemonappdev.konsist.core.verify.assert
-import com.lemonappdev.konsist.core.verify.assertNot
+import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertNot
 import java.util.*
 import javax.inject.Inject
 
