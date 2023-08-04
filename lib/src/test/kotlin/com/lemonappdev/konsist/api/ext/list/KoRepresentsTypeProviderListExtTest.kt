@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
-import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1
 import com.lemonappdev.konsist.testdata.SampleClass2
 import io.mockk.every
@@ -101,6 +100,25 @@ class KoRepresentsTypeProviderListExtTest {
     }
 
     @Test
+    fun `withRepresentedTypeOf(KClass) returns declaration with given type`() {
+        // given
+        val type = "com.lemonappdev.konsist.testdata.SampleClass1"
+        val declaration1: KoRepresentsTypeProvider = mockk {
+            every { representsType(type) } returns true
+        }
+        val declaration2: KoRepresentsTypeProvider = mockk {
+            every { representsType(type) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withRepresentedTypeOf(SampleClass1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withRepresentedTypeOf(KClass) returns declarations with one of given types`() {
         // given
         val type1 = "com.lemonappdev.konsist.testdata.SampleClass1"
@@ -127,6 +145,25 @@ class KoRepresentsTypeProviderListExtTest {
     }
 
     @Test
+    fun `withoutRepresentedTypeOf(KClass) returns declaration without given type`() {
+        // given
+        val type = "com.lemonappdev.konsist.testdata.SampleClass1"
+        val declaration1: KoRepresentsTypeProvider = mockk {
+            every { representsType(type) } returns true
+        }
+        val declaration2: KoRepresentsTypeProvider = mockk {
+            every { representsType(type) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutRepresentedTypeOf(SampleClass1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withoutRepresentedTypeOf(KClass) returns declaration without any of given types`() {
         // given
         val type1 = "com.lemonappdev.konsist.testdata.SampleClass1"
@@ -150,44 +187,5 @@ class KoRepresentsTypeProviderListExtTest {
 
         // then
         sut shouldBeEqualTo listOf(declaration3)
-    }
-
-    //  'every { representsType<SampleClass>() } returns true' doesn't work because there is a bug in mockk
-    @Test
-    fun `withRepresentedTypeOf() with KClass syntax returns declaration with SampleClass type`() {
-        // given
-        val type = "com.lemonappdev.konsist.testdata.SampleClass"
-        val declaration1: KoRepresentsTypeProvider = mockk {
-            every { representsType(type) } returns true
-        }
-        val declaration2: KoRepresentsTypeProvider = mockk {
-            every { representsType(type) } returns false
-        }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withRepresentedTypeOf<SampleClass>()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withoutRepresentedTypeOf() with KClass syntax returns declaration without SampleClass type`() {
-        // given
-        val type = "com.lemonappdev.konsist.testdata.SampleClass"
-        val declaration1: KoRepresentsTypeProvider = mockk {
-            every { representsType(type) } returns true
-        }
-        val declaration2: KoRepresentsTypeProvider = mockk {
-            every { representsType(type) } returns false
-        }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutRepresentedTypeOf<SampleClass>()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2)
     }
 }

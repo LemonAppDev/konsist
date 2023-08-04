@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import io.mockk.every
@@ -294,42 +293,5 @@ class KoAnnotationProviderListExtTest {
 
         // then
         sut shouldBeEqualTo listOf(declaration3)
-    }
-
-    @Test
-    fun `withAnnotationOf(KClass) returns declaration with all of given annotations`() {
-        // given
-        val declaration1: KoAnnotationProvider = mockk {
-            every { hasAnnotationsOf(SampleAnnotation::class) } returns true
-        }
-        val declaration2: KoAnnotationProvider = mockk {
-            every { hasAnnotationsOf(SampleAnnotation::class) } returns false
-        }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withAnnotationOf<SampleAnnotation>()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withoutAnnotationOf(KClass) returns declaration without any of given annotations`() {
-        // given
-        val declaration1: KoAnnotationProvider = mockk {
-            every { hasAnnotationsOf(SampleAnnotation::class) } returns true
-        }
-        val declaration2: KoAnnotationProvider = mockk {
-            every { hasAnnotationsOf(SampleAnnotation::class) } returns false
-        }
-
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutAnnotationOf<SampleAnnotation>()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2)
     }
 }

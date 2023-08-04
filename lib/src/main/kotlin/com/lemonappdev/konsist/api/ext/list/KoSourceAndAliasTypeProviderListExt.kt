@@ -6,38 +6,36 @@ import kotlin.reflect.KClass
 /**
  * List containing elements with source type of.
  *
- * @return A list containing elements with the source type matching the specified type.
- */
-inline fun <reified T> List<KoSourceAndAliasTypeProvider>.withSourceTypeOf(): List<KoSourceAndAliasTypeProvider> =
-    withSourceTypeOf(T::class)
-
-/**
- * List containing elements without source type of.
- *
- * @return A list containing elements without source type matching the specified type.
- */
-inline fun <reified T> List<KoSourceAndAliasTypeProvider>.withoutSourceTypeOf(): List<KoSourceAndAliasTypeProvider> =
-    withoutSourceTypeOf(T::class)
-
-/**
- * List containing elements with source type of.
- *
+ * @param type The Kotlin class representing the source type to include.
  * @param types The Kotlin classes representing the source types to include.
  * @return A list containing elements with the source type matching any of the specified types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(vararg types: KClass<*>): List<T> = filter {
-    types.any { kClass -> it.sourceType == kClass.simpleName }
-}
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
+    filter {
+        it.sourceType == type.simpleName ||
+            if (types.isNotEmpty()) {
+                types.any { kClass -> it.sourceType == kClass.simpleName }
+            } else {
+                false
+            }
+    }
 
 /**
  * List containing elements without source type of.
  *
+ * @param type The Kotlin class representing the source type to exclude.
  * @param types The Kotlin classes representing the source types to exclude.
  * @return A list containing elements without source type matching any of the specified types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(vararg types: KClass<*>): List<T> = filter {
-    types.none { kClass -> it.sourceType == kClass.simpleName }
-}
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
+    filter {
+        it.sourceType != type.simpleName &&
+            if (types.isNotEmpty()) {
+                types.none { kClass -> it.sourceType == kClass.simpleName }
+            } else {
+                true
+            }
+    }
 
 /**
  * List containing elements with source type.
@@ -64,38 +62,42 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(type: String, v
 /**
  * List containing elements with alias type of.
  *
- * @return A list containing elements with an alias type matching the specified type.
- */
-inline fun <reified T> List<KoSourceAndAliasTypeProvider>.withAliasTypeOf(): List<KoSourceAndAliasTypeProvider> =
-    withAliasTypeOf(T::class)
-
-/**
- * List containing elements without alias type of.
- *
- * @return A list containing elements without an alias type matching the specified type.
- */
-inline fun <reified T> List<KoSourceAndAliasTypeProvider>.withoutAliasTypeOf(): List<KoSourceAndAliasTypeProvider> =
-    withoutAliasTypeOf(T::class)
-
-/**
- * List containing elements with alias type of.
- *
+ * @param name The Kotlin class representing the alias type to include
  * @param names The Kotlin classes representing the alias type to include.
  * @return A list containing elements with the alias type matching any of the specified types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(vararg names: KClass<*>): List<T> = filter {
-    names.any { kClass -> it.isAlias && it.sourceType == kClass.simpleName }
-}
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(name: KClass<*>, vararg names: KClass<*>): List<T> =
+    filter {
+        it.isAlias &&
+            (
+                it.sourceType == name.simpleName ||
+                    if (names.isNotEmpty()) {
+                        names.any { kClass -> it.sourceType == kClass.simpleName }
+                    } else {
+                        false
+                    }
+                )
+    }
 
 /**
  * List containing elements without alias type of.
  *
+ * @param name The Kotlin class representing the alias type to exclude.
  * @param names The Kotlin classes representing the alias type to exclude.
  * @return A list containing elements without alias type matching any of the specified types.
  */
-fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutAliasTypeOf(vararg names: KClass<*>): List<T> = filter {
-    names.none { kClass -> it.isAlias && it.sourceType == kClass.simpleName }
-}
+fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutAliasTypeOf(name: KClass<*>, vararg names: KClass<*>): List<T> =
+    filterNot {
+        it.isAlias &&
+            (
+                it.sourceType == name.simpleName ||
+                    if (names.isNotEmpty()) {
+                        names.any { kClass -> it.sourceType == kClass.simpleName }
+                    } else {
+                        false
+                    }
+                )
+    }
 
 /**
  * List containing elements with alias type.

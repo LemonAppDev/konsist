@@ -11,7 +11,6 @@ class SpringSnippets {
         Konsist
             .scopeFromProject()
             .interfaces()
-//            .withAnnotationOf<Repository>()
             .withAllAnnotationsOf(Repository::class)
             .assert { it.hasNameEndingWith("Repository") }
     }
@@ -20,7 +19,6 @@ class SpringSnippets {
         Konsist
             .scopeFromProject()
             .classes()
-//            .withAnnotationOf<RestController>()
             .withAllAnnotationsOf(RestController::class)
             .assert { it.hasNameEndingWith("Controller") }
     }
@@ -29,7 +27,6 @@ class SpringSnippets {
         Konsist
             .scopeFromProject()
             .classes()
-//            .withAnnotationOf<RestController>()
             .withAllAnnotationsOf(RestController::class)
             .assert { it.resideInPackage("..controller..") }
     }

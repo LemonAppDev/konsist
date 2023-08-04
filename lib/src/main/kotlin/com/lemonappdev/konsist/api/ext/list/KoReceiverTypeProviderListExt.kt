@@ -32,35 +32,33 @@ fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(vararg types: Strin
 /**
  * List containing elements with receiver type.
  *
- * @return A list containing elements with the receiver type of the specified type.
- */
-inline fun <reified T> List<KoReceiverTypeProvider>.withReceiverTypeOf(): List<KoReceiverTypeProvider> =
-    withReceiverTypeOf(T::class)
-
-/**
- * List containing elements without receiver type.
- *
- * @return A list containing elements without receiver type of the specified type.
- */
-inline fun <reified T> List<KoReceiverTypeProvider>.withoutReceiverTypeOf(): List<KoReceiverTypeProvider> =
-    withoutReceiverTypeOf(T::class)
-
-/**
- * List containing elements with receiver type.
- *
+ * @param type The Kotlin class representing the receiver type to include.
  * @param types The Kotlin class(es) representing the receiver type(s) to include.
  * @return A list containing elements with the receiver type of the specified Kotlin class(es).
  */
-fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(vararg types: KClass<*>): List<T> = filter {
-    types.any { kClass -> it.hasReceiverType(kClass.simpleName) }
-}
+fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
+    filter {
+        it.hasReceiverType(type.simpleName) ||
+            if (types.isNotEmpty()) {
+                types.any { kClass -> it.hasReceiverType(kClass.simpleName) }
+            } else {
+                false
+            }
+    }
 
 /**
  * List containing elements without receiver type.
  *
+ * @param type The Kotlin class representing the receiver type to exclude.
  * @param types The Kotlin class(es) representing the receiver type(s) to exclude.
  * @return A list containing elements without receiver type of the specified Kotlin class(es).
  */
-fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(vararg types: KClass<*>): List<T> = filter {
-    types.none { kClass -> it.hasReceiverType(kClass.simpleName) }
-}
+fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
+    filter {
+        !it.hasReceiverType(type.simpleName) &&
+            if (types.isNotEmpty()) {
+                types.none { kClass -> it.hasReceiverType(kClass.simpleName) }
+            } else {
+                true
+            }
+    }

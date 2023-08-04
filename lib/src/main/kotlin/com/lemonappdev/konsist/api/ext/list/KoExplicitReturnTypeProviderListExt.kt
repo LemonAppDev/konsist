@@ -32,35 +32,37 @@ fun <T : KoExplicitReturnTypeProvider> List<T>.withoutExplicitReturnType(vararg 
 /**
  * List containing elements with explicit return type.
  *
- * @return A list containing elements with the return type of the specified type.
- */
-inline fun <reified T> List<KoExplicitReturnTypeProvider>.withExplicitReturnTypeOf(): List<KoExplicitReturnTypeProvider> =
-    withExplicitReturnTypeOf(T::class)
-
-/**
- * List containing elements without explicit return type.
- *
- * @return A list containing elements without return type of the specified type.
- */
-inline fun <reified T> List<KoExplicitReturnTypeProvider>.withoutExplicitReturnTypeOf(): List<KoExplicitReturnTypeProvider> =
-    withoutExplicitReturnTypeOf(T::class)
-
-/**
- * List containing elements with explicit return type.
- *
+ * @param type The Kotlin class representing the return type to include.
  * @param types The Kotlin class(es) representing the return type(s) to include.
  * @return A list containing elements with the return type of the specified Kotlin class(es).
  */
-fun <T : KoExplicitReturnTypeProvider> List<T>.withExplicitReturnTypeOf(vararg types: KClass<*>): List<T> = filter {
-    types.any { kClass -> it.explicitReturnType?.name == kClass.simpleName }
+fun <T : KoExplicitReturnTypeProvider> List<T>.withExplicitReturnTypeOf(
+    type: KClass<*>,
+    vararg types: KClass<*>,
+): List<T> = filter {
+    it.explicitReturnType?.name == type.simpleName ||
+        if (types.isNotEmpty()) {
+            types.any { kClass -> it.explicitReturnType?.name == kClass.simpleName }
+        } else {
+            false
+        }
 }
 
 /**
  * List containing elements without return type.
  *
+ * @param type The Kotlin class representing the return type to exclude.
  * @param types The Kotlin class(es) representing the return type(s) to exclude.
  * @return A list containing elements without return type of the specified Kotlin class(es).
  */
-fun <T : KoExplicitReturnTypeProvider> List<T>.withoutExplicitReturnTypeOf(vararg types: KClass<*>): List<T> = filter {
-    types.none { kClass -> it.explicitReturnType?.name == kClass.simpleName }
+fun <T : KoExplicitReturnTypeProvider> List<T>.withoutExplicitReturnTypeOf(
+    type: KClass<*>,
+    vararg types: KClass<*>,
+): List<T> = filter {
+    it.explicitReturnType?.name != type.simpleName &&
+        if (types.isNotEmpty()) {
+            types.none { kClass -> it.explicitReturnType?.name == kClass.simpleName }
+        } else {
+            true
+        }
 }

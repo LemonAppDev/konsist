@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoParentClassProvider
-import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleClass1
 import com.lemonappdev.konsist.testdata.SampleClass2
 import io.mockk.every
@@ -135,44 +134,6 @@ class KoParentClassProviderListExtTest {
 
         // then
         sut shouldBeEqualTo listOf(declaration3)
-    }
-
-    @Test
-    fun `withParentClassOf() returns declaration with SampleClass parent declaration`() {
-        // given
-        val name = "SampleClass"
-        val declaration1: KoParentClassProvider = mockk {
-            every { hasParentClass(name) } returns true
-        }
-        val declaration2: KoParentClassProvider = mockk {
-            every { hasParentClass(name) } returns false
-        }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withParentClassOf<SampleClass>()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withoutParentClassOf() returns declaration without SampleClass parent declaration`() {
-        // given
-        val name = "SampleClass"
-        val declaration1: KoParentClassProvider = mockk {
-            every { hasParentClass(name) } returns true
-        }
-        val declaration2: KoParentClassProvider = mockk {
-            every { hasParentClass(name) } returns false
-        }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutParentClassOf<SampleClass>()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

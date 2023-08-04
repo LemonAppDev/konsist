@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoExplicitTypeProvider
-import com.lemonappdev.konsist.testdata.SampleType
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
 import io.mockk.every
@@ -99,10 +98,10 @@ class KoExplicitTypeProviderListExtTest {
     }
 
     @Test
-    fun `withExplicitTypeOf() with KClass returns declaration with given type`() {
+    fun `withExplicitTypeOf(KClass) returns declaration with given return type`() {
         // given
-        val typeName1 = "SampleType"
-        val typeName2 = "OtherType"
+        val typeName1 = "SampleType1"
+        val typeName2 = "SampleType2"
         val declaration1: KoExplicitTypeProvider = mockk {
             every { explicitType?.name } returns typeName1
         }
@@ -112,30 +111,10 @@ class KoExplicitTypeProviderListExtTest {
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withExplicitTypeOf<SampleType>()
+        val sut = declarations.withExplicitTypeOf(SampleType1::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withoutExplicitTypeOf() with KClass returns declaration without given type`() {
-        // given
-        val typeName1 = "SampleType"
-        val typeName2 = "OtherType"
-        val declaration1: KoExplicitTypeProvider = mockk {
-            every { explicitType?.name } returns typeName1
-        }
-        val declaration2: KoExplicitTypeProvider = mockk {
-            every { explicitType?.name } returns typeName2
-        }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutExplicitTypeOf<SampleType>()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -160,6 +139,26 @@ class KoExplicitTypeProviderListExtTest {
 
         // then
         sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withoutExplicitTypeOf(KClass) returns declaration without given return type`() {
+        // given
+        val typeName1 = "SampleType1"
+        val typeName2 = "SampleType2"
+        val declaration1: KoExplicitTypeProvider = mockk {
+            every { explicitType?.name } returns typeName1
+        }
+        val declaration2: KoExplicitTypeProvider = mockk {
+            every { explicitType?.name } returns typeName2
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutExplicitTypeOf(SampleType1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

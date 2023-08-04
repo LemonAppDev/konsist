@@ -29,47 +29,43 @@ fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(type: String, 
 /**
  * List containing elements that represents the type.
  *
+ * @param type The Kotlin class representing the type to include.
  * @param types The Kotlin classes representing the types to include.
  * @return A list containing elements with types matching the specified Kotlin classes.
  */
-fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(vararg types: KClass<*>): List<T> =
+fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
     filter {
-        types.any { type ->
-            type
-                .qualifiedName
-                ?.let { name -> it.representsType(name) }
-                ?: false
-        }
+        type.qualifiedName?.let { type -> it.representsType(type) } ?: false ||
+            if (types.isNotEmpty()) {
+                types.any { type ->
+                    type
+                        .qualifiedName
+                        ?.let { name -> it.representsType(name) }
+                        ?: false
+                }
+            } else {
+                false
+            }
     }
 
 /**
  * List containing elements that do not represent the type.
  *
+ * @param type The Kotlin class representing the type to exclude.
  * @param types The Kotlin classes representing the types to exclude.
  * @return A list containing elements without types matching the specified Kotlin classes.
  */
-fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(vararg types: KClass<*>): List<T> =
+fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
     filter {
-        types.none { type ->
-            type
-                .qualifiedName
-                ?.let { name -> it.representsType(name) }
-                ?: false
-        }
+        type.qualifiedName?.let { type -> !it.representsType(type) } ?: true &&
+            if (types.isNotEmpty()) {
+                types.none { type ->
+                    type
+                        .qualifiedName
+                        ?.let { name -> it.representsType(name) }
+                        ?: false
+                }
+            } else {
+                true
+            }
     }
-
-/**
- * List containing elements that represents the type.
- *
- * @return A list containing elements with types matching the specified reified type parameter.
- */
-inline fun <reified T> List<KoRepresentsTypeProvider>.withRepresentedTypeOf(): List<KoRepresentsTypeProvider> =
-    withRepresentedTypeOf(T::class)
-
-/**
- * List containing elements that do not represent the type.
- *
- * @return A list containing elements without types matching the specified reified type parameter.
- */
-inline fun <reified T> List<KoRepresentsTypeProvider>.withoutRepresentedTypeOf(): List<KoRepresentsTypeProvider> =
-    withoutRepresentedTypeOf(T::class)

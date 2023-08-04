@@ -32,35 +32,33 @@ fun <T : KoExplicitTypeProvider> List<T>.withoutExplicitType(vararg types: Strin
 /**
  * List containing elements with explicit type of.
  *
+ * @param types The Kotlin class representing the type to include.
  * @param types The Kotlin class(es) representing the type(s) to include.
  * @return A list containing elements with the type of the specified Kotlin class(es).
  */
-fun <T : KoExplicitTypeProvider> List<T>.withExplicitTypeOf(vararg types: KClass<*>): List<T> = filter {
-    types.any { kClass -> it.explicitType?.name == kClass.simpleName }
-}
+fun <T : KoExplicitTypeProvider> List<T>.withExplicitTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
+    filter {
+        it.explicitType?.name == type.simpleName ||
+            if (types.isNotEmpty()) {
+                types.any { kClass -> it.explicitType?.name == kClass.simpleName }
+            } else {
+                false
+            }
+    }
 
 /**
  * List containing elements without explicit type of.
  *
+ * @param types The Kotlin class representing the type to exclude.
  * @param types The Kotlin class(es) representing the type(s) to exclude.
  * @return A list containing elements without type of the specified Kotlin class(es).
  */
-fun <T : KoExplicitTypeProvider> List<T>.withoutExplicitTypeOf(vararg types: KClass<*>): List<T> = filter {
-    types.none { kClass -> it.explicitType?.name == kClass.simpleName }
-}
-
-/**
- * List containing elements with explicit type of.
- *
- * @return A list containing elements with the specified type.
- */
-inline fun <reified T> List<KoExplicitTypeProvider>.withExplicitTypeOf(): List<KoExplicitTypeProvider> =
-    withExplicitTypeOf(T::class)
-
-/**
- * List containing elements without explicit type of.
- *
- * @return A list containing elements without specified type.
- */
-inline fun <reified T> List<KoExplicitTypeProvider>.withoutExplicitTypeOf(): List<KoExplicitTypeProvider> =
-    withoutExplicitTypeOf(T::class)
+fun <T : KoExplicitTypeProvider> List<T>.withoutExplicitTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
+    filter {
+        it.explicitType?.name != type.simpleName &&
+            if (types.isNotEmpty()) {
+                types.none { kClass -> it.explicitType?.name == kClass.simpleName }
+            } else {
+                true
+            }
+    }
