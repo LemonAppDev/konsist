@@ -1,7 +1,9 @@
-interface SampleInterface {
-    class SampleNestedClass{
-        init {
-            val sampleProperty = ""
-        }
+class SampleNestedClass {
+    init {
+        val sampleNestedProperty = ""
     }
+}
+
+fun sampleFunction() {
+    val sampleLocalProperty = ""
 }

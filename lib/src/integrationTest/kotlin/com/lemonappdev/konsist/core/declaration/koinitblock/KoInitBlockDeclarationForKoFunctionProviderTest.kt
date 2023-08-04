@@ -13,10 +13,10 @@ class KoInitBlockDeclarationForKoFunctionProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
-        sut?.functions(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
+        sut.functions(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -26,13 +26,13 @@ class KoInitBlockDeclarationForKoFunctionProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf("sampleFunction", "sampleLocalFunction", "sampleNestedFunction")
 
-        sut?.functions(includeNested = true, includeLocal = true)
-            ?.map { it.name }
+        sut.functions(includeNested = true, includeLocal = true)
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -43,13 +43,13 @@ class KoInitBlockDeclarationForKoFunctionProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf("sampleFunction", "sampleNestedFunction")
 
-        sut?.functions(includeNested = true, includeLocal = false)
-            ?.map { it.name }
+        sut.functions(includeNested = true, includeLocal = false)
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -60,13 +60,13 @@ class KoInitBlockDeclarationForKoFunctionProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf("sampleFunction", "sampleLocalFunction")
 
-        sut?.functions(includeNested = false, includeLocal = true)
-            ?.map { it.name }
+        sut.functions(includeNested = false, includeLocal = true)
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -77,13 +77,13 @@ class KoInitBlockDeclarationForKoFunctionProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf("sampleFunction")
 
-        sut?.functions(includeNested = false, includeLocal = false)
-            ?.map { it.name }
+        sut.functions(includeNested = false, includeLocal = false)
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -94,20 +94,20 @@ class KoInitBlockDeclarationForKoFunctionProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         assertSoftly(sut) {
-            it?.numFunctions(includeNested = true, includeLocal = true) shouldBeEqualTo 3
-            it?.numFunctions(includeNested = true, includeLocal = false) shouldBeEqualTo 2
-            it?.numFunctions(includeNested = false, includeLocal = true) shouldBeEqualTo 2
-            it?.numFunctions(includeNested = false, includeLocal = false) shouldBeEqualTo 1
-            it?.containsFunction("sampleFunction", includeNested = false, includeLocal = false) shouldBeEqualTo true
-            it?.containsFunction("sampleLocalFunction", includeNested = false, includeLocal = true) shouldBeEqualTo true
-            it?.containsFunction("sampleLocalFunction", includeNested = false, includeLocal = false) shouldBeEqualTo false
-            it?.containsFunction("sampleNestedFunction", includeNested = true, includeLocal = false) shouldBeEqualTo true
-            it?.containsFunction("sampleNestedFunction", includeNested = false, includeLocal = false) shouldBeEqualTo false
-            it?.containsFunction("NonExisting") shouldBeEqualTo false
+            numFunctions(includeNested = true, includeLocal = true) shouldBeEqualTo 3
+            numFunctions(includeNested = true, includeLocal = false) shouldBeEqualTo 2
+            numFunctions(includeNested = false, includeLocal = true) shouldBeEqualTo 2
+            numFunctions(includeNested = false, includeLocal = false) shouldBeEqualTo 1
+            containsFunction("sampleFunction", includeNested = false, includeLocal = false) shouldBeEqualTo true
+            containsFunction("sampleLocalFunction", includeNested = false, includeLocal = true) shouldBeEqualTo true
+            containsFunction("sampleLocalFunction", includeNested = false, includeLocal = false) shouldBeEqualTo false
+            containsFunction("sampleNestedFunction", includeNested = true, includeLocal = false) shouldBeEqualTo true
+            containsFunction("sampleNestedFunction", includeNested = false, includeLocal = false) shouldBeEqualTo false
+            containsFunction("NonExisting") shouldBeEqualTo false
         }
     }
 

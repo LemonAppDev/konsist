@@ -1,6 +1,9 @@
 interface SampleInterface {
     class SampleNestedClass {
+        val sampleNestedProperty = ""
+    }
 
-        val sampleProperty = ""
+    fun sampleFunction() {
+        val sampleLocalProperty = ""
     }
 }

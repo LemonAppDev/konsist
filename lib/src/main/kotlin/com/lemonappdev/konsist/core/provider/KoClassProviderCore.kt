@@ -14,8 +14,10 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
     override fun containsClass(
         name: String,
         includeNested: Boolean,
+        includeLocal: Boolean,
     ): Boolean =
-        classes(includeNested).any { it.name == name }
+        classes(includeNested, includeLocal).any { it.name == name }
 
-    override fun numClasses(includeNested: Boolean): Int = classes(includeNested).size
+    override fun numClasses(includeNested: Boolean, includeLocal: Boolean): Int =
+        classes(includeNested, includeLocal).size
 }

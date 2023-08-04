@@ -12,12 +12,12 @@ class KoInitBlockDeclarationForKoTextProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         sut
-            ?.text
-            ?.shouldBeEqualTo(
+            .text
+            .shouldBeEqualTo(
                 """
                 init {
                         val sampleInitProperty = 6

@@ -13,10 +13,10 @@ class KoInitBlockDeclarationForKoClassProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
-        sut?.classes(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
+        sut.classes(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -26,13 +26,13 @@ class KoInitBlockDeclarationForKoClassProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf("SampleClass", "SampleNestedClass", "SampleLocalClass")
 
-        sut?.classes(includeNested = true, includeLocal = true)
-            ?.map { it.name }
+        sut.classes(includeNested = true, includeLocal = true)
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -43,13 +43,13 @@ class KoInitBlockDeclarationForKoClassProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf("SampleClass", "SampleNestedClass")
 
-        sut?.classes(includeNested = true, includeLocal = false)
-            ?.map { it.name }
+        sut.classes(includeNested = true, includeLocal = false)
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -60,13 +60,13 @@ class KoInitBlockDeclarationForKoClassProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf("SampleClass", "SampleLocalClass")
 
-        sut?.classes(includeNested = false, includeLocal = true)
-            ?.map { it.name }
+        sut.classes(includeNested = false, includeLocal = true)
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -77,13 +77,13 @@ class KoInitBlockDeclarationForKoClassProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf("SampleClass")
 
-        sut?.classes(includeNested = false, includeLocal = false)
-            ?.map { it.name }
+        sut.classes(includeNested = false, includeLocal = false)
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -94,16 +94,20 @@ class KoInitBlockDeclarationForKoClassProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         assertSoftly(sut) {
-            it?.numClasses(includeNested = false) shouldBeEqualTo 1
-            it?.numClasses(includeNested = true) shouldBeEqualTo 2
-            it?.containsClass("SampleClass", includeNested = false) shouldBeEqualTo true
-            it?.containsClass("SampleNestedClass", includeNested = false) shouldBeEqualTo false
-            it?.containsClass("SampleNestedClass", includeNested = true) shouldBeEqualTo true
-            it?.containsClass("NonExisting") shouldBeEqualTo false
+            numClasses() shouldBeEqualTo 1
+            numClasses(includeNested = true) shouldBeEqualTo 2
+            numClasses(includeLocal = true) shouldBeEqualTo 2
+            numClasses(includeNested = true, includeLocal = true) shouldBeEqualTo 3
+            containsClass("SampleClass") shouldBeEqualTo true
+            containsClass("SampleNestedClass", includeNested = false) shouldBeEqualTo false
+            containsClass("SampleNestedClass", includeNested = true) shouldBeEqualTo true
+            containsClass("SampleLocalClass", includeLocal = false) shouldBeEqualTo false
+            containsClass("SampleLocalClass", includeLocal = true) shouldBeEqualTo true
+            containsClass("NonExisting") shouldBeEqualTo false
         }
     }
 

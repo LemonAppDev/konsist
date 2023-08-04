@@ -22,5 +22,5 @@ interface KoLocalDeclarationProvider : KoBaseProvider {
      * @param name The name of the local declaration to check.
      * @return `true` if the declaration contains a local declaration with the specified name, `false` otherwise.
      */
-    fun containsLocalDeclarations(name: String): Boolean
+    fun containsLocalDeclaration(name: String): Boolean
 }

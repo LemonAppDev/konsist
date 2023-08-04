@@ -14,10 +14,10 @@ class KoInitBlockDeclarationForKoPropertyProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
-        sut?.properties(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
+        sut.properties(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -27,13 +27,13 @@ class KoInitBlockDeclarationForKoPropertyProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf("sampleLocalProperty", "sampleNestedProperty")
 
-        sut?.properties(includeNested = true, includeLocal = true)
-            ?.map { it.name }
+        sut.properties(includeNested = true, includeLocal = true)
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -44,13 +44,13 @@ class KoInitBlockDeclarationForKoPropertyProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf("sampleNestedProperty")
 
-        sut?.properties(includeNested = true, includeLocal = false)
-            ?.map { it.name }
+        sut.properties(includeNested = true, includeLocal = false)
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -61,13 +61,13 @@ class KoInitBlockDeclarationForKoPropertyProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf("sampleLocalProperty")
 
-        sut?.properties(includeNested = false, includeLocal = true)
-            ?.map { it.name }
+        sut.properties(includeNested = false, includeLocal = true)
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -78,13 +78,13 @@ class KoInitBlockDeclarationForKoPropertyProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = emptyList<KoPropertyDeclaration>()
 
-        sut?.properties(includeNested = false, includeLocal = false)
-            ?.map { it.name }
+        sut.properties(includeNested = false, includeLocal = false)
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -95,20 +95,20 @@ class KoInitBlockDeclarationForKoPropertyProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         assertSoftly(sut) {
-            it?.numProperties(includeNested = true, includeLocal = true) shouldBeEqualTo 3
-            it?.numProperties(includeNested = true, includeLocal = false) shouldBeEqualTo 2
-            it?.numProperties(includeNested = false, includeLocal = true) shouldBeEqualTo 2
-            it?.numProperties(includeNested = false, includeLocal = false) shouldBeEqualTo 1
-            it?.containsProperty("sampleProperty", includeNested = false, includeLocal = false) shouldBeEqualTo true
-            it?.containsProperty("sampleLocalProperty", includeNested = false, includeLocal = true) shouldBeEqualTo true
-            it?.containsProperty("sampleLocalProperty", includeNested = false, includeLocal = false) shouldBeEqualTo false
-            it?.containsProperty("sampleNestedProperty", includeNested = true, includeLocal = false) shouldBeEqualTo true
-            it?.containsProperty("sampleNestedProperty", includeNested = false, includeLocal = false) shouldBeEqualTo false
-            it?.containsProperty("NonExisting") shouldBeEqualTo false
+            numProperties(includeNested = true, includeLocal = true) shouldBeEqualTo 3
+            numProperties(includeNested = true, includeLocal = false) shouldBeEqualTo 2
+            numProperties(includeNested = false, includeLocal = true) shouldBeEqualTo 2
+            numProperties(includeNested = false, includeLocal = false) shouldBeEqualTo 1
+            containsProperty("sampleProperty", includeNested = false, includeLocal = false) shouldBeEqualTo true
+            containsProperty("sampleLocalProperty", includeNested = false, includeLocal = true) shouldBeEqualTo true
+            containsProperty("sampleLocalProperty", includeNested = false, includeLocal = false) shouldBeEqualTo false
+            containsProperty("sampleNestedProperty", includeNested = true, includeLocal = false) shouldBeEqualTo true
+            containsProperty("sampleNestedProperty", includeNested = false, includeLocal = false) shouldBeEqualTo false
+            containsProperty("NonExisting") shouldBeEqualTo false
         }
     }
 

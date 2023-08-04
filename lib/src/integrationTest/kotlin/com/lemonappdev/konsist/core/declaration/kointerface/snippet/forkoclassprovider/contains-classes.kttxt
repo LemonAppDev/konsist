@@ -1,6 +1,10 @@
 interface SampleInterface {
-        class SampleClass {
+    class SampleClass {
 
-            inner class SampleNestedClass
-        }
+        inner class SampleNestedClass
+    }
+
+    fun sampleFunction() {
+        class SampleLocalClass
+    }
 }

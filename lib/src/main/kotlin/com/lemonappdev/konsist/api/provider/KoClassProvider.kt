@@ -23,18 +23,21 @@ interface KoClassProvider : KoBaseProvider {
      *
      * @param name The name of the class to check.
      * @param includeNested Specifies whether to include nested classes in the check (optional, default is `false`).
+     * @param includeLocal Specifies whether to include local classes in the check (optional, default is `false`).
      * @return `true` if the declaration contains a class with the specified name, `false` otherwise.
      */
     fun containsClass(
         name: String,
         includeNested: Boolean = false,
+        includeLocal: Boolean = false,
     ): Boolean
 
     /**
      * Gets the number of classes present in the declaration.
      *
      * @param includeNested Specifies whether to include nested classes in the count (optional, default is `false`).
+     * @param includeLocal Specifies whether to include local classes in the count (optional, default is `false`).
      * @return The number of classes in the declaration.
      */
-    fun numClasses(includeNested: Boolean = false): Int
+    fun numClasses(includeNested: Boolean = false, includeLocal: Boolean = false): Int
 }

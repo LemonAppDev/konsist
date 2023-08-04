@@ -7,6 +7,5 @@ internal interface KoLocalDeclarationProviderCore : KoLocalDeclarationProvider, 
     override val numLocalDeclarations: Int
         get() = localDeclarations.size
 
-    override fun containsLocalDeclarations(name: String): Boolean =
-        localDeclarations.any { (it as? KoNameProvider)?.name == name }
+    override fun containsLocalDeclaration(name: String): Boolean = localDeclarations.any { (it as? KoNameProvider)?.name == name }
 }

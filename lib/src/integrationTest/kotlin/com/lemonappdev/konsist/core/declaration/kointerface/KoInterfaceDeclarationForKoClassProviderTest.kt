@@ -86,11 +86,16 @@ class KoInterfaceDeclarationForKoClassProviderTest {
 
         // then
         assertSoftly(sut) {
-            it.numClasses(includeNested = false) shouldBeEqualTo 1
-            it.numClasses(includeNested = true) shouldBeEqualTo 2
-            it.containsClass("SampleNestedClass", includeNested = false) shouldBeEqualTo false
-            it.containsClass("SampleNestedClass", includeNested = true) shouldBeEqualTo true
-            it.containsClass("NonExisting") shouldBeEqualTo false
+            numClasses() shouldBeEqualTo 1
+            numClasses(includeNested = true) shouldBeEqualTo 2
+            numClasses(includeLocal = true) shouldBeEqualTo 2
+            numClasses(includeNested = true, includeLocal = true) shouldBeEqualTo 3
+            containsClass("SampleClass") shouldBeEqualTo true
+            containsClass("SampleNestedClass", includeNested = false) shouldBeEqualTo false
+            containsClass("SampleNestedClass", includeNested = true) shouldBeEqualTo true
+            containsClass("SampleLocalClass", includeLocal = false) shouldBeEqualTo false
+            containsClass("SampleLocalClass", includeLocal = true) shouldBeEqualTo true
+            containsClass("NonExisting") shouldBeEqualTo false
         }
     }
 
