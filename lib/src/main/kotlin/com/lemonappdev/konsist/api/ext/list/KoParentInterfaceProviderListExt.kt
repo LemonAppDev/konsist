@@ -65,22 +65,6 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfaces(name: St
 }
 
 /**
- * List containing elements with named parent interface.
- *
- * @return A list containing elements with the parent interface of the specified type.
- */
-inline fun <reified T> List<KoParentInterfaceProvider>.withParentInterfaceOf(): List<KoParentInterfaceProvider> =
-    withAllParentInterfacesOf(T::class)
-
-/**
- * List containing elements without some named parent interface.
- *
- * @return A list containing elements without parent interface of the specified type.
- */
-inline fun <reified T> List<KoParentInterfaceProvider>.withoutParentInterfaceOf(): List<KoParentInterfaceProvider> =
-    withoutAllParentInterfacesOf(T::class)
-
-/**
  * List containing elements with all specified parent interfaces of type.
  *
  * @param name The Kotlin class representing the parent interface to include.

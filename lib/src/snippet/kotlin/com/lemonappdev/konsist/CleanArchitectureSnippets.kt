@@ -42,7 +42,6 @@ class CleanArchitectureSnippets {
     fun `interfaces with 'Repository' annotation should reside in 'data' package`() {
         Konsist.scopeFromProject()
             .interfaces()
-//            .withAnnotationOf<Repository>()
             .withAllAnnotationsOf(Repository::class)
             .assert { it.resideInPackage("..data..") }
     }

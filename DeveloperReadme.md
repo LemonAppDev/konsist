@@ -129,9 +129,7 @@ E.g. In `KoClassDeclaration`:
 - `withParentClassOf(vararg names: KClass<*>)`
 - `withoutParentClassOf(vararg names: KClass<*>)`
 
-- `withParentInterfaceOf()`
 - `withAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
 - `withSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
-- `withoutParentInterfaceOf()`
 - `withoutAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
 - `withoutSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`

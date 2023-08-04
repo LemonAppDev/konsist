@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
-import com.lemonappdev.konsist.testdata.SampleType
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
 import io.mockk.every
@@ -99,9 +98,9 @@ class KoReceiverTypeProviderListExtTest {
     }
 
     @Test
-    fun `withReceiverTypeOf() returns declaration with given receiver`() {
+    fun `withReceiverTypeOf(KClass) returns declaration with one of given receiver`() {
         // given
-        val typeName = "SampleType"
+        val typeName = "SampleType1"
         val declaration1: KoReceiverTypeProvider = mockk {
             every { hasReceiverType(typeName) } returns true
         }
@@ -111,29 +110,10 @@ class KoReceiverTypeProviderListExtTest {
         val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = declarations.withReceiverTypeOf<SampleType>()
+        val sut = declarations.withReceiverTypeOf(SampleType1::class)
 
         // then
         sut shouldBeEqualTo listOf(declaration1)
-    }
-
-    @Test
-    fun `withoutReceiverTypeOf() returns declaration without given receiver`() {
-        // given
-        val typeName = "SampleType"
-        val declaration1: KoReceiverTypeProvider = mockk {
-            every { hasReceiverType(typeName) } returns true
-        }
-        val declaration2: KoReceiverTypeProvider = mockk {
-            every { hasReceiverType(typeName) } returns false
-        }
-        val declarations = listOf(declaration1, declaration2)
-
-        // when
-        val sut = declarations.withoutReceiverTypeOf<SampleType>()
-
-        // then
-        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
@@ -160,6 +140,25 @@ class KoReceiverTypeProviderListExtTest {
 
         // then
         sut shouldBeEqualTo listOf(declaration1, declaration2)
+    }
+
+    @Test
+    fun `withoutReceiverTypeOf(KClass) returns declaration without one of given receiver`() {
+        // given
+        val typeName = "SampleType1"
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { hasReceiverType(typeName) } returns true
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { hasReceiverType(typeName) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutReceiverTypeOf(SampleType1::class)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test

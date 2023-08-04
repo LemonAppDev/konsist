@@ -69,22 +69,6 @@ fun <T : KoParentProvider> List<T>.withoutSomeParents(name: String, vararg names
 /**
  * List containing elements with named parents.
  *
- * @return A list containing elements with the parent of the specified type.
- */
-inline fun <reified T> List<KoParentProvider>.withParentOf(): List<KoParentProvider> =
-    withAllParentsOf(T::class)
-
-/**
- * List containing elements without named parents.
- *
- * @return A list containing elements without parent of the specified type.
- */
-inline fun <reified T> List<KoParentProvider>.withoutParentOf(): List<KoParentProvider> =
-    withoutAllParentsOf(T::class)
-
-/**
- * List containing elements with named parents.
- *
  * @param name The Kotlin class representing the parent to include.
  * @param names The Kotlin declarations representing the parents to include.
  * @return A list containing elements with the parents of the specified type(s).

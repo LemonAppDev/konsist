@@ -132,19 +132,3 @@ fun <T : KoAnnotationProvider> List<T>.withoutSomeAnnotationsOf(
         true
     }
 }
-
-/**
- * List containing elements with all annotations of type.
- *
- * @return A list containing elements with the specified annotation.
- */
-inline fun <reified T> List<KoAnnotationProvider>.withAnnotationOf(): List<KoAnnotationProvider> =
-    withAllAnnotationsOf(T::class)
-
-/**
- * List containing elements without annotations of type.
- *
- * @return A list containing elements without specified annotation.
- */
-inline fun <reified T> List<KoAnnotationProvider>.withoutAnnotationOf(): List<KoAnnotationProvider> =
-    withoutAllAnnotationsOf(T::class)
