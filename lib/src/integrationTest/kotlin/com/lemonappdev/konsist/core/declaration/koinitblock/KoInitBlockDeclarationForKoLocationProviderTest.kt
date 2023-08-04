@@ -13,10 +13,10 @@ class KoInitBlockDeclarationForKoLocationProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
-        sut?.location shouldBeEqualTo "${sut?.path}:2:5"
+        sut.location shouldBeEqualTo "${sut.path}:2:5"
     }
 
     @Test
@@ -26,20 +26,20 @@ class KoInitBlockDeclarationForKoLocationProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
-            ?.projectPath
+            .first()
+            .projectPath
 
         val sut = getSnippetFile("init-block-location-with-text")
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
-        assertSoftly(sut?.locationWithText) {
-            (this?.startsWith("Location: /") ?: false) shouldBeEqualTo true
-            (projectPath?.let { string -> this?.contains(string) } ?: false) shouldBeEqualTo true
-            (this?.contains("val sampleInitProperty = 6") ?: false) shouldBeEqualTo true
+        assertSoftly(sut.locationWithText) {
+            startsWith("Location: /")  shouldBeEqualTo true
+            contains(projectPath) shouldBeEqualTo true
+            contains("val sampleInitProperty = 6") shouldBeEqualTo true
         }
     }
 

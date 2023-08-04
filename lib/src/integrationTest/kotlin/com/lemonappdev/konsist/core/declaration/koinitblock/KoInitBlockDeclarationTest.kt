@@ -12,10 +12,10 @@ class KoInitBlockDeclarationTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
-        sut.toString() shouldBeEqualTo sut?.locationWithText
+        sut.toString() shouldBeEqualTo sut.locationWithText
     }
 
     private fun getSnippetFile(fileName: String) =

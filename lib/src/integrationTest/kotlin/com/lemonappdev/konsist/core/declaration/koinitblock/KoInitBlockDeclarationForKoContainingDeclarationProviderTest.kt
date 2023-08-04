@@ -15,12 +15,12 @@ class KoInitBlockDeclarationForKoContainingDeclarationProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         assertSoftly(sut) {
-            this?.containingDeclaration?.shouldNotBeEqualTo(null)
-            (this?.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleClass"
+            containingDeclaration?.shouldNotBeEqualTo(null)
+            (containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleClass"
         }
     }
 

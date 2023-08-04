@@ -12,13 +12,13 @@ class KoInitBlockDeclarationForKoContainingFileProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         sut
-            ?.containingFile
-            ?.nameWithExtension
-            ?.endsWith("file.kt")
+            .containingFile
+            .nameWithExtension
+            .endsWith("file.kt")
             .shouldBeEqualTo(true)
     }
 

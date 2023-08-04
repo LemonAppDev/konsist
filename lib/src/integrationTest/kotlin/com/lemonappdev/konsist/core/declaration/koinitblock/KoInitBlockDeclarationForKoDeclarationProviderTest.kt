@@ -14,10 +14,10 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
-        sut?.declarations(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
+        sut.declarations(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test
@@ -27,7 +27,7 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf(
@@ -39,9 +39,9 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
             "SampleClassNestedInsideClass",
         )
 
-        sut?.declarations(includeNested = true, includeLocal = true)
-            ?.filterIsInstance<KoNameProvider>()
-            ?.map { it.name }
+        sut.declarations(includeNested = true, includeLocal = true)
+            .filterIsInstance<KoNameProvider>()
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -52,7 +52,7 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf(
@@ -61,9 +61,9 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
             "SampleClassNestedInsideClass",
         )
 
-        sut?.declarations(includeNested = true, includeLocal = false)
-            ?.filterIsInstance<KoNameProvider>()
-            ?.map { it.name }
+        sut.declarations(includeNested = true, includeLocal = false)
+            .filterIsInstance<KoNameProvider>()
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -74,7 +74,7 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf(
@@ -85,9 +85,9 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
             "SampleClass",
         )
 
-        sut?.declarations(includeNested = false, includeLocal = true)
-            ?.filterIsInstance<KoNameProvider>()
-            ?.map { it.name }
+        sut.declarations(includeNested = false, includeLocal = true)
+            .filterIsInstance<KoNameProvider>()
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -98,7 +98,7 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         val expected = listOf(
@@ -106,9 +106,9 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
             "SampleClass",
         )
 
-        sut?.declarations(includeNested = false, includeLocal = false)
-            ?.filterIsInstance<KoNameProvider>()
-            ?.map { it.name }
+        sut.declarations(includeNested = false, includeLocal = false)
+            .filterIsInstance<KoNameProvider>()
+            .map { it.name }
             .shouldBeEqualTo(expected)
     }
 
@@ -119,16 +119,20 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
             .classes()
             .first()
             .initBlocks
-            ?.first()
+            .first()
 
         // then
         assertSoftly(sut) {
-            it?.numDeclarations(includeNested = false) shouldBeEqualTo 1
-            it?.numDeclarations(includeNested = true) shouldBeEqualTo 2
-            it?.containsDeclarations("SampleNestedClass", includeNested = false) shouldBeEqualTo true
-            it?.containsDeclarations("sampleProperty", includeNested = false) shouldBeEqualTo false
-            it?.containsDeclarations("sampleProperty", includeNested = true) shouldBeEqualTo true
-            it?.containsDeclarations("NonExisting") shouldBeEqualTo false
+            numDeclarations() shouldBeEqualTo 2
+            numDeclarations(includeNested = true) shouldBeEqualTo 3
+            numDeclarations(includeLocal = true) shouldBeEqualTo 3
+            numDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
+            containsDeclaration("SampleNestedClass") shouldBeEqualTo true
+            containsDeclaration("sampleNestedProperty", includeNested = false) shouldBeEqualTo false
+            containsDeclaration("sampleNestedProperty", includeNested = true) shouldBeEqualTo true
+            containsDeclaration("sampleLocalProperty", includeLocal = false) shouldBeEqualTo false
+            containsDeclaration("sampleLocalProperty", includeLocal = true) shouldBeEqualTo true
+            containsDeclaration("NonExisting") shouldBeEqualTo false
         }
     }
 

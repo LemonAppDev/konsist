@@ -19,11 +19,16 @@ class KoFileDeclarationForKoDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            numDeclarations(includeNested = false) shouldBeEqualTo 1
-            numDeclarations(includeNested = true) shouldBeEqualTo 2
-            containsDeclarations("SampleInterface") shouldBeEqualTo true
-            containsDeclarations("sampleNestedClass", includeNested = true) shouldBeEqualTo true
-            containsDeclarations("sampleNestedClass", includeNested = false) shouldBeEqualTo false
+            numDeclarations() shouldBeEqualTo 2
+            numDeclarations(includeNested = true) shouldBeEqualTo 3
+            numDeclarations(includeLocal = true) shouldBeEqualTo 3
+            numDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
+            containsDeclaration("SampleNestedClass") shouldBeEqualTo true
+            containsDeclaration("sampleNestedProperty", includeNested = false) shouldBeEqualTo false
+            containsDeclaration("sampleNestedProperty", includeNested = true) shouldBeEqualTo true
+            containsDeclaration("sampleLocalProperty", includeLocal = false) shouldBeEqualTo false
+            containsDeclaration("sampleLocalProperty", includeLocal = true) shouldBeEqualTo true
+            containsDeclaration("NonExisting") shouldBeEqualTo false
         }
     }
 
