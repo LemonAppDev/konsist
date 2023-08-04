@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.KoKDocTag
-import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationCore
 import io.mockk.every
@@ -49,15 +48,14 @@ class KoKDocProviderListExtTest {
     @Test
     fun `withKDocWithTags() returns declaration with any tag`() {
         // given
-        val tag: KoKDocTagDeclaration = mockk()
         val kDoc1: KoKDocDeclarationCore = mockk {
-            every { tags } returns listOf(tag)
+            every { hasTags() } returns true
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationCore = mockk {
-            every { tags } returns emptyList()
+            every { hasTags() } returns false
         }
         val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
@@ -74,15 +72,14 @@ class KoKDocProviderListExtTest {
     @Test
     fun `withoutKDocWithTags() returns declaration without any tag`() {
         // given
-        val tag: KoKDocTagDeclaration = mockk()
         val kDoc1: KoKDocDeclarationCore = mockk {
-            every { tags } returns listOf(tag)
+            every { hasTags() } returns true
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationCore = mockk {
-            every { tags } returns emptyList()
+            every { hasTags() } returns false
         }
         val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
