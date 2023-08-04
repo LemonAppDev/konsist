@@ -15,8 +15,9 @@ import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class KoScopeExtTest {
-    private interface DeclarationWithModifierProvider : KoBaseDeclaration, KoModifierProvider
-    private interface DeclarationWithoutModifierProvider : KoBaseDeclaration, KoAnnotationProvider
+    // We add these interfaces to simulate declarations that different providers implement.
+    private interface TestDeclarationWithModifierProvider : KoBaseDeclaration, KoModifierProvider
+    private interface TestDeclarationWithoutModifierProvider : KoBaseDeclaration, KoAnnotationProvider
 
     @ParameterizedTest
     @MethodSource("provideValues")
@@ -65,8 +66,8 @@ class KoScopeExtTest {
         includeLocal: Boolean,
     ) {
         // given
-        val declaration1: DeclarationWithModifierProvider = mockk()
-        val declaration2: DeclarationWithoutModifierProvider = mockk()
+        val declaration1: TestDeclarationWithModifierProvider = mockk()
+        val declaration2: TestDeclarationWithoutModifierProvider = mockk()
         val declarations = listOf(declaration1, declaration2)
         val scope: KoScope = mockk {
             every { declarations(includeNested = includeNested, includeLocal = includeLocal) } returns declarations
