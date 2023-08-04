@@ -37,7 +37,7 @@ class KoInitBlockDeclarationForKoLocationProviderTest {
 
         // then
         assertSoftly(sut.locationWithText) {
-            startsWith("Location: /")  shouldBeEqualTo true
+            startsWith("Location: /") shouldBeEqualTo true
             contains(projectPath) shouldBeEqualTo true
             contains("val sampleInitProperty = 6") shouldBeEqualTo true
         }

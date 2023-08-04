@@ -39,5 +39,5 @@ interface KoDeclarationProvider : KoBaseProvider {
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `false`).
      * @return The number of declarations in the declaration.
      */
-    fun numDeclarations(includeNested: Boolean = false, includeLocal: Boolean = false,): Int
+    fun numDeclarations(includeNested: Boolean = false, includeLocal: Boolean = false): Int
 }

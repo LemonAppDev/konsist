@@ -9,7 +9,7 @@ internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProv
         includeLocal: Boolean,
     ): Boolean = declarations(
         includeNested = includeNested,
-        includeLocal = includeLocal
+        includeLocal = includeLocal,
     ).any { (it as KoNameProviderCore).name == name }
 
     override fun numDeclarations(includeNested: Boolean, includeLocal: Boolean): Int =

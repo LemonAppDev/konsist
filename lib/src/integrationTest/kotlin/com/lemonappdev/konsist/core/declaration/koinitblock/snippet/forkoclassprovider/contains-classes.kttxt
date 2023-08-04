@@ -5,5 +5,8 @@ class SampleTopLevelClass {
             inner class SampleNestedClass
         }
 
+        fun sampleFunction() {
+            class SampleLocalClass
+        }
     }
 }
