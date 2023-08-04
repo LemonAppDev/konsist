@@ -3,10 +3,15 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 
 internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProviderCore {
-    override fun containsDeclarations(
+    override fun containsDeclaration(
         name: String,
         includeNested: Boolean,
-    ): Boolean = declarations(includeNested = includeNested).any { (it as KoNameProviderCore).name == name }
+        includeLocal: Boolean
+    ): Boolean = declarations(
+        includeNested = includeNested,
+        includeLocal = includeLocal
+    ).any { (it as KoNameProviderCore).name == name }
 
-    override fun numDeclarations(includeNested: Boolean): Int = declarations(includeNested).size
+    override fun numDeclarations(includeNested: Boolean, includeLocal: Boolean): Int =
+        declarations(includeNested, includeLocal).size
 }
