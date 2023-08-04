@@ -29,7 +29,7 @@ interface KoDeclarationProvider : KoBaseProvider {
     fun containsDeclaration(
         name: String,
         includeNested: Boolean = false,
-        includeLocal: Boolean = false
+        includeLocal: Boolean = false,
     ): Boolean
 
     /**
