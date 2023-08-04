@@ -126,10 +126,10 @@ private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String):
 
             is KoBaseProvider -> {
                 types = "declarations"
-                val name = (it as KoNameProvider).name
+                val name = (it as? KoNameProvider)?.name
                 val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
 
-                "${(it as KoLocationProvider).location} ($name $declarationType)"
+                "${(it as? KoLocationProvider)?.location} ($name $declarationType)"
             }
 
             else -> {

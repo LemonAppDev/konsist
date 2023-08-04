@@ -20,10 +20,10 @@ class KoFileDeclarationForKoDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             numDeclarations(includeNested = false) shouldBeEqualTo 1
-            numDeclarations(includeNested = true) shouldBeEqualTo 2
+            numDeclarations(includeNested = true) shouldBeEqualTo 4
             containsDeclarations("SampleInterface") shouldBeEqualTo true
-            containsDeclarations("sampleNestedClass", includeNested = true) shouldBeEqualTo true
-            containsDeclarations("sampleNestedClass", includeNested = false) shouldBeEqualTo false
+            containsDeclarations("SampleNestedClass", includeNested = true) shouldBeEqualTo true
+            containsDeclarations("SampleNestedClass", includeNested = false) shouldBeEqualTo false
         }
     }
 
