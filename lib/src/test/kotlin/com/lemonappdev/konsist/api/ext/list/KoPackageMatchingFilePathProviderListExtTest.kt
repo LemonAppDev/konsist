@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class KoPackageMatchingFilePathProviderListExtTest {
     @Test
-    fun `withMatchingFilePath() returns declaration which has matching file path`() {
+    fun `withMatchingFilePath() returns declaration which has matching declaration path`() {
         // given
         val declaration1: KoPackageMatchingFilePathProvider = mockk {
             every { hasMatchingFilePath } returns true
@@ -26,7 +26,7 @@ class KoPackageMatchingFilePathProviderListExtTest {
     }
 
     @Test
-    fun `withoutMatchingFilePath() returns declaration which has not matching file path`() {
+    fun `withoutMatchingFilePath() returns declaration which has not matching declaration path`() {
         // given
         val declaration1: KoPackageMatchingFilePathProvider = mockk {
             every { hasMatchingFilePath } returns true

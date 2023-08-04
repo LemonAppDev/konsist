@@ -3,12 +3,12 @@ package com.lemonappdev.konsist.api.ext.list
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 
 /**
- * List containing declarations with path.
+ * List containing elements with path.
  *
  * @param path The path to include.
  * @param paths The paths to include.
  * @param absolutePath Determines whether the paths should be treated as absolute paths. By default, false.
- * @return A list containing declarations that reside in any of the specified paths.
+ * @return A list containing elements that reside in any of the specified paths.
  */
 fun <T : KoPathProvider> List<T>.withPath(path: String, vararg paths: String, absolutePath: Boolean = false): List<T> =
     filter {
@@ -16,12 +16,12 @@ fun <T : KoPathProvider> List<T>.withPath(path: String, vararg paths: String, ab
     }
 
 /**
- * List containing declarations without path.
+ * List containing elements without path.
  *
  * @param path The path to exclude.
  * @param paths The paths to exclude.
  * @param absolutePath Determines whether the paths should be treated as absolute paths. By default, false.
- * @return A list containing declarations that don't reside in any of the specified paths.
+ * @return A list containing elements that don't reside in any of the specified paths.
  */
 fun <T : KoPathProvider> List<T>.withoutPath(path: String, vararg paths: String, absolutePath: Boolean = false): List<T> =
     filter {
@@ -29,41 +29,41 @@ fun <T : KoPathProvider> List<T>.withoutPath(path: String, vararg paths: String,
     }
 
 /**
- * List containing declarations with absolute path.
+ * List containing elements with absolute path.
  *
  * @param path The absolute path to include.
  * @param paths The absolute paths to include.
- * @return A list containing declarations that reside in any of the specified absolute paths.
+ * @return A list containing elements that reside in any of the specified absolute paths.
  */
 fun <T : KoPathProvider> List<T>.withAbsolutePath(path: String, vararg paths: String): List<T> =
     withPath(path, *paths, absolutePath = true)
 
 /**
- * List containing declarations without absolute path.
+ * List containing elements without absolute path.
  *
  * @param path The absolute path to exclude.
  * @param paths The absolute paths to exclude.
- * @return A list containing declarations that don't reside in any of the specified absolute paths.
+ * @return A list containing elements that don't reside in any of the specified absolute paths.
  */
 fun <T : KoPathProvider> List<T>.withoutAbsolutePath(path: String, vararg paths: String): List<T> =
     withoutPath(path, *paths, absolutePath = true)
 
 /**
- * List containing declarations with project path.
+ * List containing elements with project path.
  *
  * @param path The project path to include.
  * @param paths The project paths to include.
- * @return A list containing declarations that reside in any of the specified project paths.
+ * @return A list containing elements that reside in any of the specified project paths.
  */
 fun <T : KoPathProvider> List<T>.withProjectPath(path: String, vararg paths: String): List<T> =
     withPath(path, *paths, absolutePath = false)
 
 /**
- * List containing declarations without project path.
+ * List containing elements without project path.
  *
  * @param path The project path to exclude.
  * @param paths The project paths to exclude.
- * @return A list containing declarations that don't reside in any of the specified project paths.
+ * @return A list containing elements that don't reside in any of the specified project paths.
  */
 fun <T : KoPathProvider> List<T>.withoutProjectPath(path: String, vararg paths: String): List<T> =
     withoutPath(path, *paths, absolutePath = false)

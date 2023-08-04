@@ -3,15 +3,15 @@ package com.lemonappdev.konsist.api.ext.list
 import com.lemonappdev.konsist.api.provider.KoExtensionProvider
 
 /**
- * List containing declarations with extension.
+ * List containing elements with extension.
  *
- * @return A list containing declarations with extensions.
+ * @return A list containing elements with extensions.
  */
 fun <T : KoExtensionProvider> List<T>.withExtension(): List<T> = filter { it.isExtension }
 
 /**
- * List containing declarations without extension.
+ * List containing elements without extension.
  *
- * @return A list containing declarations without extensions.
+ * @return A list containing elements without extensions.
  */
 fun <T : KoExtensionProvider> List<T>.withoutExtension(): List<T> = filterNot { it.isExtension }
