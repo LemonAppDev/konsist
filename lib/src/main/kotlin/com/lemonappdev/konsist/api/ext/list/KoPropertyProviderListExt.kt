@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 
 /**
- * List containing properties declarations.
+ * List containing property declarations.
  *
  * @param includeNested Whether to include nested declarations.
  * @param includeLocal Whether to include local declarations.

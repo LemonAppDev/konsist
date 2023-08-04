@@ -27,7 +27,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
 /**
- * Object declaration.
+ * Represents a Kotlin object declaration.
  */
 interface KoObjectDeclaration :
     KoBaseDeclaration,

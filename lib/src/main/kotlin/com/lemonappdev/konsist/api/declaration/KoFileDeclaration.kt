@@ -44,15 +44,15 @@ interface KoFileDeclaration :
     KoTypeAliasProvider {
 
     /**
-     * Indicates whether some other object is "equal to" this one.
+     * Indicates whether some other element is "equal to" this one.
      *
-     * @param other the object to compare.
-     * @return `true` if the objects are equal, `false` otherwise.
+     * @param other the element to compare.
+     * @return `true` if the elements are equal, `false` otherwise.
      */
     override fun equals(other: Any?): Boolean
 
     /**
-     * Returns a hash code value for the object.
+     * Returns a hash code value.
      *
      * @return the hash code value.
      */

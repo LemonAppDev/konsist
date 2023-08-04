@@ -1,16 +1,16 @@
 package com.lemonappdev.konsist.api.provider
 
 /**
- * An interface representing a Kotlin declaration or file that provides access to its text content.
+ * An interface representing a Kotlin declaration that provides access to its text content.
  */
 interface KoTextProvider : KoBaseProvider {
     /**
-     * Text of the declaration or file.
+     * Text of the declaration.
      */
     val text: String
 
     /**
-     * Print declaration or file.
+     * Print declaration.
      */
     fun print(): Unit
 }

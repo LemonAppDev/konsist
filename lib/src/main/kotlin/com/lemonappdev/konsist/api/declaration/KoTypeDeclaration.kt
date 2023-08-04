@@ -13,7 +13,7 @@ import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 
 /**
- * Represents a Kotlin declaration.
+ * Represents a Kotlin type declaration.
  *
  *  Example 1
  *

@@ -4,10 +4,10 @@ import com.lemonappdev.konsist.api.provider.KoHasPackageProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 
 /**
- * List containing files with package.
+ * List containing elements with package.
  *
  * @param packages The package names to include.
- * @return A list containing files with a package matching any of the specified package names
+ * @return A list containing elements with a package matching any of the specified package names
  * (or any package if [packages] is empty).
  */
 fun <T> List<T>.withPackage(vararg packages: String): List<T>
@@ -20,10 +20,10 @@ fun <T> List<T>.withPackage(vararg packages: String): List<T>
 }
 
 /**
- * List containing files with some package.
+ * List containing elements with some package.
  *
  * @param packages The package names to exclude.
- * @return A list containing files without a package matching any of the specified package names
+ * @return A list containing elements without a package matching any of the specified package names
  * (or none package if [packages] is empty).
  */
 fun <T> List<T>.withoutPackage(vararg packages: String): List<T>

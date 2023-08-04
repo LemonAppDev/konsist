@@ -4,10 +4,10 @@ import com.lemonappdev.konsist.api.provider.KoAliasProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 
 /**
- * List containing all declarations with an alias.
+ * List containing elements with an alias.
  *
  * @param names The names of aliases to include.
- * @return A list containing declarations with the specified aliases (or any alias if [names] is empty).
+ * @return A list containing elements with the specified aliases (or any alias if [names] is empty).
  */
 fun <T> List<T>.withAlias(vararg names: String): List<T>
     where T : KoAliasProvider,
@@ -19,10 +19,10 @@ fun <T> List<T>.withAlias(vararg names: String): List<T>
 }
 
 /**
- * List containing all declarations without an alias.
+ * List containing elements without an alias.
  *
  * @param names The names of aliases to exclude.
- * @return A list containing declarations without specified aliases (or none alias if [names] is empty).
+ * @return A list containing elements without specified aliases (or none alias if [names] is empty).
  */
 fun <T> List<T>.withoutAlias(vararg names: String): List<T>
     where T : KoAliasProvider,

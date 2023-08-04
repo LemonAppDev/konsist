@@ -12,90 +12,90 @@ class KoHasPackageProviderListExtTest {
     private interface SampleTestDeclaration : KoPackageProvider, KoHasPackageProvider
 
     @Test
-    fun `withPackage() returns file with any package`() {
+    fun `withPackage() returns declaration with any package`() {
         // given
-        val file1: SampleTestDeclaration = mockk {
+        val declaration1: SampleTestDeclaration = mockk {
             every { packagee } returns mockk()
         }
-        val file2: SampleTestDeclaration = mockk {
+        val declaration2: SampleTestDeclaration = mockk {
             every { packagee } returns null
         }
-        val files = listOf(file1, file2)
+        val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = files.withPackage()
+        val sut = declarations.withPackage()
 
         // then
-        sut shouldBeEqualTo listOf(file1)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
-    fun `withPackage(String) returns files with one of given package names`() {
+    fun `withPackage(String) returns declarations with one of given package names`() {
         // given
         val package1 = "SamplePackage1"
         val package2 = "SamplePackage2"
-        val file1: SampleTestDeclaration = mockk {
+        val declaration1: SampleTestDeclaration = mockk {
             every { hasPackage(package1) } returns true
             every { hasPackage(package2) } returns false
         }
-        val file2: SampleTestDeclaration = mockk {
+        val declaration2: SampleTestDeclaration = mockk {
             every { hasPackage(package1) } returns false
             every { hasPackage(package2) } returns true
         }
-        val file3: SampleTestDeclaration = mockk {
+        val declaration3: SampleTestDeclaration = mockk {
             every { hasPackage(package1) } returns false
             every { hasPackage(package2) } returns false
         }
-        val files = listOf(file1, file2, file3)
+        val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = files.withPackage(package1, package2)
+        val sut = declarations.withPackage(package1, package2)
 
         // then
-        sut shouldBeEqualTo listOf(file1, file2)
+        sut shouldBeEqualTo listOf(declaration1, declaration2)
     }
 
     @Test
-    fun `withoutPackage() returns file without given package name`() {
+    fun `withoutPackage() returns declaration without given package name`() {
         // given
-        val file1: SampleTestDeclaration = mockk {
+        val declaration1: SampleTestDeclaration = mockk {
             every { packagee } returns mockk()
         }
-        val file2: SampleTestDeclaration = mockk {
+        val declaration2: SampleTestDeclaration = mockk {
             every { packagee } returns null
         }
-        val files = listOf(file1, file2)
+        val declarations = listOf(declaration1, declaration2)
 
         // when
-        val sut = files.withoutPackage()
+        val sut = declarations.withoutPackage()
 
         // then
-        sut shouldBeEqualTo listOf(file2)
+        sut shouldBeEqualTo listOf(declaration2)
     }
 
     @Test
-    fun `withoutPackage(String) returns file without any of given package names`() {
+    fun `withoutPackage(String) returns declaration without any of given package names`() {
         // given
         val package1 = "SamplePackage1"
         val package2 = "SamplePackage2"
-        val file1: SampleTestDeclaration = mockk {
+        val declaration1: SampleTestDeclaration = mockk {
             every { hasPackage(package1) } returns true
             every { hasPackage(package2) } returns false
         }
-        val file2: SampleTestDeclaration = mockk {
+        val declaration2: SampleTestDeclaration = mockk {
             every { hasPackage(package1) } returns false
             every { hasPackage(package2) } returns true
         }
-        val file3: SampleTestDeclaration = mockk {
+        val declaration3: SampleTestDeclaration = mockk {
             every { hasPackage(package1) } returns false
             every { hasPackage(package2) } returns false
         }
-        val files = listOf(file1, file2, file3)
+        val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
-        val sut = files.withoutPackage(package1, package2)
+        val sut = declarations.withoutPackage(package1, package2)
 
         // then
-        sut shouldBeEqualTo listOf(file3)
+        sut shouldBeEqualTo listOf(declaration3)
     }
 }
