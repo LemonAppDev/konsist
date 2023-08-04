@@ -1,14 +1,14 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.verify.assert
 
 class LibrarySnippets {
     fun `every api declaration has KDoc`() {
         Konsist.scopeFromPackage("..api..")
-            .declarations(includeNested = true)
-            .filterIsInstance<KoKDocProvider>()
+            .declarationsOf<KoKDocProvider>(includeNested = true)
             .assert { it.hasKDoc }
     }
 
