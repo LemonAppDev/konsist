@@ -1,6 +1,6 @@
 class SampleNestedClass {
     init {
-        val sampleProperty = ""
+        val sampleNestedProperty = ""
     }
 }
 

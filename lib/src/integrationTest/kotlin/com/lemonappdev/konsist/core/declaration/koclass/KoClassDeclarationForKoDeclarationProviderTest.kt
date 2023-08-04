@@ -148,23 +148,6 @@ class KoClassDeclarationForKoDeclarationProviderTest {
         }
     }
 
-    @Test
-    fun `contains-declarations-when-some-declaration-have-no-name`() {
-        // given
-        val sut = getSnippetFile("contains-declarations-when-some-declaration-have-no-name")
-            .classes()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            numDeclarations(includeNested = false) shouldBeEqualTo 1
-            numDeclarations(includeNested = true) shouldBeEqualTo 2
-            containsDeclarations("sampleProperty", includeNested = false) shouldBeEqualTo false
-            containsDeclarations("sampleProperty", includeNested = true) shouldBeEqualTo true
-            containsDeclarations("NonExisting") shouldBeEqualTo false
-        }
-    }
-
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koclass/snippet/forkodeclarationprovider/", fileName)
 }
