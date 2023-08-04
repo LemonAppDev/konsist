@@ -15,7 +15,7 @@ internal class KoKDocDeclarationCore(private val kDocElement: KDocElement) :
     override val psiElement: PsiElement by lazy { kDocElement }
 
     override val text: String by lazy {
-        val splitKDoc = kDocElement.text.split("\n") as MutableList
+        val splitKDoc = kDocElement.text.split("\n").toMutableList()
 
         if (splitKDoc.size == 1 && splitKDoc.first().startsWith("/**") && splitKDoc.first().endsWith("*/")) {
             splitKDoc

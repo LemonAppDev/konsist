@@ -1,6 +1,7 @@
 class SampleNestedClass {
-
-    val sampleNestedProperty = ""
+    init {
+        val sampleProperty = ""
+    }
 }
 
 fun sampleFunction() {

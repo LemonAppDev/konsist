@@ -10,7 +10,7 @@ internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProv
     ): Boolean = declarations(
         includeNested = includeNested,
         includeLocal = includeLocal,
-    ).any { (it as KoNameProviderCore).name == name }
+    ).any { (it as? KoNameProviderCore)?.name == name }
 
     override fun numDeclarations(includeNested: Boolean, includeLocal: Boolean): Int =
         declarations(includeNested, includeLocal).size

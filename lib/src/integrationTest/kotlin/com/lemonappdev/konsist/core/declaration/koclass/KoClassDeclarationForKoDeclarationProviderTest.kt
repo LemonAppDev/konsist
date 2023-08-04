@@ -127,9 +127,9 @@ class KoClassDeclarationForKoDeclarationProviderTest {
     }
 
     @Test
-    fun `contains-declarations`() {
+    fun `contains-declarations-when-all-declaration-have-name`() {
         // given
-        val sut = getSnippetFile("contains-declarations")
+        val sut = getSnippetFile("contains-declarations-when-all-declaration-have-name")
             .classes()
             .first()
 
@@ -145,6 +145,23 @@ class KoClassDeclarationForKoDeclarationProviderTest {
             containsDeclaration("sampleLocalProperty", includeLocal = false) shouldBeEqualTo false
             containsDeclaration("sampleLocalProperty", includeLocal = true) shouldBeEqualTo true
             containsDeclaration("NonExisting") shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `contains-declarations-when-some-declaration-have-no-name`() {
+        // given
+        val sut = getSnippetFile("contains-declarations-when-some-declaration-have-no-name")
+            .classes()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            numDeclarations(includeNested = false) shouldBeEqualTo 1
+            numDeclarations(includeNested = true) shouldBeEqualTo 2
+            containsDeclarations("sampleProperty", includeNested = false) shouldBeEqualTo false
+            containsDeclarations("sampleProperty", includeNested = true) shouldBeEqualTo true
+            containsDeclarations("NonExisting") shouldBeEqualTo false
         }
     }
 
