@@ -39,11 +39,11 @@ fun <T : KoExplicitTypeProvider> List<T>.withoutExplicitType(vararg types: Strin
 fun <T : KoExplicitTypeProvider> List<T>.withExplicitTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
     filter {
         it.explicitType?.name == type.simpleName ||
-                if (types.isNotEmpty()) {
-                    types.any { kClass -> it.explicitType?.name == kClass.simpleName }
-                } else {
-                    false
-                }
+            if (types.isNotEmpty()) {
+                types.any { kClass -> it.explicitType?.name == kClass.simpleName }
+            } else {
+                false
+            }
     }
 
 /**
@@ -56,9 +56,9 @@ fun <T : KoExplicitTypeProvider> List<T>.withExplicitTypeOf(type: KClass<*>, var
 fun <T : KoExplicitTypeProvider> List<T>.withoutExplicitTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
     filter {
         it.explicitType?.name != type.simpleName &&
-                if (types.isNotEmpty()) {
-                    types.none { kClass -> it.explicitType?.name == kClass.simpleName }
-                } else {
-                    true
-                }
+            if (types.isNotEmpty()) {
+                types.none { kClass -> it.explicitType?.name == kClass.simpleName }
+            } else {
+                true
+            }
     }

@@ -38,11 +38,11 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClass(vararg names: String)
  */
 fun <T : KoParentClassProvider> List<T>.withParentClassOf(name: KClass<*>, vararg names: KClass<*>): List<T> = filter {
     it.hasParentClass(name.simpleName) ||
-            if (names.isNotEmpty()) {
-                names.any { kClass -> it.hasParentClass(kClass.simpleName) }
-            } else {
-                false
-            }
+        if (names.isNotEmpty()) {
+            names.any { kClass -> it.hasParentClass(kClass.simpleName) }
+        } else {
+            false
+        }
 }
 
 /**
@@ -55,9 +55,9 @@ fun <T : KoParentClassProvider> List<T>.withParentClassOf(name: KClass<*>, varar
 fun <T : KoParentClassProvider> List<T>.withoutParentClassOf(name: KClass<*>, vararg names: KClass<*>): List<T> =
     filter {
         !it.hasParentClass(name.simpleName) &&
-                if (names.isNotEmpty()) {
-                    names.none { kClass -> it.hasParentClass(kClass.simpleName) }
-                } else {
-                    true
-                }
+            if (names.isNotEmpty()) {
+                names.none { kClass -> it.hasParentClass(kClass.simpleName) }
+            } else {
+                true
+            }
     }

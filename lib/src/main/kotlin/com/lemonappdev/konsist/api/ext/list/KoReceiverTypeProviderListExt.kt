@@ -39,11 +39,11 @@ fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(vararg types: Strin
 fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
     filter {
         it.hasReceiverType(type.simpleName) ||
-                if (types.isNotEmpty()) {
-                    types.any { kClass -> it.hasReceiverType(kClass.simpleName) }
-                } else {
-                    false
-                }
+            if (types.isNotEmpty()) {
+                types.any { kClass -> it.hasReceiverType(kClass.simpleName) }
+            } else {
+                false
+            }
     }
 
 /**
@@ -56,9 +56,9 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(type: KClass<*>, var
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
     filter {
         !it.hasReceiverType(type.simpleName) &&
-                if (types.isNotEmpty()) {
-                    types.none { kClass -> it.hasReceiverType(kClass.simpleName) }
-                } else {
-                    true
-                }
+            if (types.isNotEmpty()) {
+                types.none { kClass -> it.hasReceiverType(kClass.simpleName) }
+            } else {
+                true
+            }
     }

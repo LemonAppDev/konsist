@@ -13,11 +13,11 @@ import kotlin.reflect.KClass
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
     filter {
         it.sourceType == type.simpleName ||
-                if (types.isNotEmpty()) {
-                    types.any { kClass -> it.sourceType == kClass.simpleName }
-                } else {
-                    false
-                }
+            if (types.isNotEmpty()) {
+                types.any { kClass -> it.sourceType == kClass.simpleName }
+            } else {
+                false
+            }
     }
 
 /**
@@ -30,11 +30,11 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(type: KClass<*>,
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
     filter {
         it.sourceType != type.simpleName &&
-                if (types.isNotEmpty()) {
-                    types.none { kClass -> it.sourceType == kClass.simpleName }
-                } else {
-                    true
-                }
+            if (types.isNotEmpty()) {
+                types.none { kClass -> it.sourceType == kClass.simpleName }
+            } else {
+                true
+            }
     }
 
 /**
@@ -68,12 +68,14 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(type: String, v
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(name: KClass<*>, vararg names: KClass<*>): List<T> =
     filter {
         it.isAlias &&
-                (it.sourceType == name.simpleName ||
-                        if (names.isNotEmpty()) {
-                            names.any { kClass -> it.sourceType == kClass.simpleName }
-                        } else {
-                            false
-                        })
+            (
+                it.sourceType == name.simpleName ||
+                    if (names.isNotEmpty()) {
+                        names.any { kClass -> it.sourceType == kClass.simpleName }
+                    } else {
+                        false
+                    }
+                )
     }
 
 /**
@@ -85,12 +87,14 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(name: KClass<*>, 
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutAliasTypeOf(name: KClass<*>, vararg names: KClass<*>): List<T> =
     filterNot {
         it.isAlias &&
-                (it.sourceType == name.simpleName ||
-                        if (names.isNotEmpty()) {
-                            names.any { kClass -> it.sourceType == kClass.simpleName }
-                        } else {
-                            false
-                        })
+            (
+                it.sourceType == name.simpleName ||
+                    if (names.isNotEmpty()) {
+                        names.any { kClass -> it.sourceType == kClass.simpleName }
+                    } else {
+                        false
+                    }
+                )
     }
 
 /**

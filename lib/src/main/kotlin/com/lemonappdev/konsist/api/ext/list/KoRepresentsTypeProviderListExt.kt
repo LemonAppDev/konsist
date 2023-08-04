@@ -35,16 +35,16 @@ fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(type: String, 
 fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
     filter {
         type.qualifiedName?.let { type -> it.representsType(type) } ?: false ||
-                if (types.isNotEmpty()) {
-                    types.any { type ->
-                        type
-                            .qualifiedName
-                            ?.let { name -> it.representsType(name) }
-                            ?: false
-                    }
-                } else {
-                    false
+            if (types.isNotEmpty()) {
+                types.any { type ->
+                    type
+                        .qualifiedName
+                        ?.let { name -> it.representsType(name) }
+                        ?: false
                 }
+            } else {
+                false
+            }
     }
 
 /**
@@ -56,14 +56,14 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(type: KClass<*>
 fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
     filter {
         type.qualifiedName?.let { type -> !it.representsType(type) } ?: true &&
-                if (types.isNotEmpty()) {
-                    types.none { type ->
-                        type
-                            .qualifiedName
-                            ?.let { name -> it.representsType(name) }
-                            ?: false
-                    }
-                } else {
-                    true
+            if (types.isNotEmpty()) {
+                types.none { type ->
+                    type
+                        .qualifiedName
+                        ?.let { name -> it.representsType(name) }
+                        ?: false
                 }
+            } else {
+                true
+            }
     }

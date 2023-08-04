@@ -29,7 +29,6 @@ fun <T : KoExplicitReturnTypeProvider> List<T>.withoutExplicitReturnType(vararg 
     }
 }
 
-
 /**
  * List containing elements with explicit return type.
  *
@@ -39,14 +38,14 @@ fun <T : KoExplicitReturnTypeProvider> List<T>.withoutExplicitReturnType(vararg 
  */
 fun <T : KoExplicitReturnTypeProvider> List<T>.withExplicitReturnTypeOf(
     type: KClass<*>,
-    vararg types: KClass<*>
+    vararg types: KClass<*>,
 ): List<T> = filter {
     it.explicitReturnType?.name == type.simpleName ||
-            if (types.isNotEmpty()) {
-                types.any { kClass -> it.explicitReturnType?.name == kClass.simpleName }
-            } else {
-                false
-            }
+        if (types.isNotEmpty()) {
+            types.any { kClass -> it.explicitReturnType?.name == kClass.simpleName }
+        } else {
+            false
+        }
 }
 
 /**
@@ -58,12 +57,12 @@ fun <T : KoExplicitReturnTypeProvider> List<T>.withExplicitReturnTypeOf(
  */
 fun <T : KoExplicitReturnTypeProvider> List<T>.withoutExplicitReturnTypeOf(
     type: KClass<*>,
-    vararg types: KClass<*>
+    vararg types: KClass<*>,
 ): List<T> = filter {
     it.explicitReturnType?.name != type.simpleName &&
-            if (types.isNotEmpty()) {
-                types.none { kClass -> it.explicitReturnType?.name == kClass.simpleName }
-            } else {
-                true
-            }
+        if (types.isNotEmpty()) {
+            types.none { kClass -> it.explicitReturnType?.name == kClass.simpleName }
+        } else {
+            true
+        }
 }

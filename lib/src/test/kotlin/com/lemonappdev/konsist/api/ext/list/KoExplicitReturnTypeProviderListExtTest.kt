@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoExplicitReturnTypeProvider
-import com.lemonappdev.konsist.testdata.SampleType
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
 import io.mockk.every
@@ -93,6 +92,7 @@ class KoExplicitReturnTypeProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(declaration3)
     }
+
     @Test
     fun `withExplicitReturnTypeOf(KClass) returns declarations with given return types`() {
         // given
@@ -105,7 +105,7 @@ class KoExplicitReturnTypeProviderListExtTest {
             every { explicitReturnType?.name } returns typeName2
         }
 
-        val declarations = listOf(declaration1, declaration2, )
+        val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withExplicitReturnTypeOf(SampleType1::class)
@@ -150,7 +150,7 @@ class KoExplicitReturnTypeProviderListExtTest {
             every { explicitReturnType?.name } returns typeName2
         }
 
-        val declarations = listOf(declaration1, declaration2, )
+        val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutExplicitReturnTypeOf(SampleType1::class)
