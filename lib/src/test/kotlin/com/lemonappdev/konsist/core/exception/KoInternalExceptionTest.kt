@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.exception
 
+import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import io.mockk.every
 import io.mockk.mockk
@@ -21,6 +23,17 @@ class KoInternalExceptionTest {
 
         // when
         func shouldThrow KoInternalException::class withMessage "$message, declaration:\n$declarationText"
+    }
+
+    @Test
+    fun `test with declaration without text`() {
+        // given
+        val message = "message"
+        val declaration: KoBaseProvider = mockk()
+        val func = { throw KoInternalException(message, koBaseProvider = declaration) }
+
+        // when
+        func shouldThrow KoInternalException::class withMessage message
     }
 
     @Test
