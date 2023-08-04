@@ -36,6 +36,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      * Gets the number of declarations present in the declaration.
      *
      * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `false`).
+     * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `false`).
      * @return The number of declarations in the declaration.
      */
     fun numDeclarations(includeNested: Boolean = false, includeLocal: Boolean = false): Int

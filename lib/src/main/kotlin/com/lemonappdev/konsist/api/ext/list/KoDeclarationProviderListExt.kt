@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
  *
  * @param includeNested Whether to include nested declarations.
  * @param includeLocal Whether to include local declarations.
- * @return A list containing all declarations.
+ * @return A list containing elements.
  */
 fun <T : KoDeclarationProvider> List<T>.declarations(
     includeNested: Boolean = false,
@@ -16,11 +16,11 @@ fun <T : KoDeclarationProvider> List<T>.declarations(
 ): List<KoBaseDeclaration> = flatMap { it.declarations(includeNested, includeLocal) }
 
 /**
- * List containing all declarations with any declaration.
+ * List containing elements with any declaration.
  *
  * @param includeNested Whether to include nested declarations.
  * @param includeLocal Whether to include local declarations.
- * @return A list containing declarations with any declaration.
+ * @return A list containing elements with any declaration.
  */
 fun <T : KoDeclarationProvider> List<T>.withDeclarations(
     includeNested: Boolean = false,
@@ -28,11 +28,13 @@ fun <T : KoDeclarationProvider> List<T>.withDeclarations(
 ): List<T> = filter { it.declarations(includeNested, includeLocal).isNotEmpty() }
 
 /**
- * List containing all declarations with all specified declarations.
+ * List containing elements with all specified declarations.
  *
  * @param name The name of the declaration to include.
  * @param names The name(s) of the declaration(s) to include.
- * @return A list containing declarations with all specified declaration(s).
+ * @param includeNested Whether to include nested declarations.
+ * @param includeLocal Whether to include local declarations.
+ * @return A list containing elements with all specified declaration(s).
  */
 fun <T : KoDeclarationProvider> List<T>.withAllDeclarations(
     name: String,
@@ -49,11 +51,13 @@ fun <T : KoDeclarationProvider> List<T>.withAllDeclarations(
 }
 
 /**
- * List containing all declarations with some declarations.
+ * List containing elements with some declarations.
  *
  * @param name The name of the declaration to include.
  * @param names The names of the declarations to include.
- * @return A list containing declarations with at least one of the specified declaration(s).
+ * @param includeNested Whether to include nested declarations.
+ * @param includeLocal Whether to include local declarations.
+ * @return A list containing elements with at least one of the specified declaration(s).
  */
 fun <T : KoDeclarationProvider> List<T>.withSomeDeclarations(
     name: String,
@@ -71,10 +75,11 @@ fun <T : KoDeclarationProvider> List<T>.withSomeDeclarations(
 }
 
 /**
- * List containing all declarations with no declaration - class does not extend any class and does not implement any interface.
+ * List containing elements without any declaration.
  *
- * @return A list containing declarations with no declaration - class does not extend any class and does not implement any
- * interface.
+ * @param includeNested Whether to include nested declarations.
+ * @param includeLocal Whether to include local declarations.
+ * @return A list containing elements with no declaration.
  */
 fun <T : KoDeclarationProvider> List<T>.withoutDeclarations(
     includeNested: Boolean = false,
@@ -82,11 +87,13 @@ fun <T : KoDeclarationProvider> List<T>.withoutDeclarations(
 ): List<T> = filter { it.declarations(includeNested, includeLocal).isEmpty() }
 
 /**
- * List containing all declarations without all specified declarations.
+ * List containing elements without all specified declarations.
  *
  * @param name The name of the declaration to exclude.
  * @param names The name(s) of the declaration(s) to exclude.
- * @return A list containing declarations without all specified declaration(s).
+ * @param includeNested Whether to include nested declarations.
+ * @param includeLocal Whether to include local declarations.
+ * @return A list containing elements without all specified declaration(s).
  */
 fun <T : KoDeclarationProvider> List<T>.withoutAllDeclarations(
     name: String,
@@ -103,11 +110,13 @@ fun <T : KoDeclarationProvider> List<T>.withoutAllDeclarations(
 }
 
 /**
- * List containing all declarations without some declarations represented by name.
+ * List containing elements without some declarations represented by name.
  *
  * @param name The name of the declaration to exclude.
  * @param names The names of the declarations to exclude.
- * @return A list containing declarations without at least one of the specified declaration(s).
+ * @param includeNested Whether to include nested declarations.
+ * @param includeLocal Whether to include local declarations.
+ * @return A list containing elements without at least one of the specified declaration(s).
  */
 fun <T : KoDeclarationProvider> List<T>.withoutSomeDeclarations(
     name: String,
