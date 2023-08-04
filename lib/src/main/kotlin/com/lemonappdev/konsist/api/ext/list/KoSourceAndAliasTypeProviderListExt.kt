@@ -62,6 +62,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(type: String, v
 /**
  * List containing elements with alias type of.
  *
+ * @param name The Kotlin class representing the alias type to include
  * @param names The Kotlin classes representing the alias type to include.
  * @return A list containing elements with the alias type matching any of the specified types.
  */
@@ -81,6 +82,7 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(name: KClass<*>, 
 /**
  * List containing elements without alias type of.
  *
+ * @param name The Kotlin class representing the alias type to exclude.
  * @param names The Kotlin classes representing the alias type to exclude.
  * @return A list containing elements without alias type matching any of the specified types.
  */

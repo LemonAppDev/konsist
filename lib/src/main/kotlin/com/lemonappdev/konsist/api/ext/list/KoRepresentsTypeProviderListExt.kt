@@ -29,6 +29,7 @@ fun <T : KoRepresentsTypeProvider> List<T>.withoutRepresentedType(type: String, 
 /**
  * List containing elements that represents the type.
  *
+ * @param type The Kotlin class representing the type to include.
  * @param types The Kotlin classes representing the types to include.
  * @return A list containing elements with types matching the specified Kotlin classes.
  */
@@ -50,6 +51,7 @@ fun <T : KoRepresentsTypeProvider> List<T>.withRepresentedTypeOf(type: KClass<*>
 /**
  * List containing elements that do not represent the type.
  *
+ * @param type The Kotlin class representing the type to exclude.
  * @param types The Kotlin classes representing the types to exclude.
  * @return A list containing elements without types matching the specified Kotlin classes.
  */
