@@ -88,10 +88,18 @@ internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCo
     override val propertyGetterTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.PROPERTY_GETTER }
 
-    override fun hasTags(vararg tags: KoKDocTag): Boolean = tags.all {
-        this.tags
-            .map { tag -> tag.name }
-            .contains(it)
+    override fun hasTags(vararg tags: KoKDocTag): Boolean = when {
+        tags.isEmpty() -> {
+            this.tags.isNotEmpty()
+        }
+
+        else -> {
+            tags.all {
+                this.tags
+                    .map { tag -> tag.name }
+                    .contains(it)
+            }
+        }
     }
 
     private fun parseToValuedTag(koKDocTag: KoKDocTag, sentence: String): KoValuedKDocTagDeclaration {

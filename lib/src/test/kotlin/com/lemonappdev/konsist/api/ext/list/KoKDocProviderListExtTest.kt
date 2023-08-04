@@ -49,15 +49,14 @@ class KoKDocProviderListExtTest {
     @Test
     fun `withKDocWithTags() returns declaration with any tag`() {
         // given
-        val tag: KoKDocTagDeclaration = mockk()
         val kDoc1: KoKDocDeclarationCore = mockk {
-            every { tags } returns listOf(tag)
+            every { hasTags() } returns true
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationCore = mockk {
-            every { tags } returns emptyList()
+            every { hasTags() } returns false
         }
         val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2
@@ -74,15 +73,14 @@ class KoKDocProviderListExtTest {
     @Test
     fun `withoutKDocWithTags() returns declaration without any tag`() {
         // given
-        val tag: KoKDocTagDeclaration = mockk()
         val kDoc1: KoKDocDeclarationCore = mockk {
-            every { tags } returns listOf(tag)
+            every { hasTags() } returns true
         }
         val declaration1: KoKDocProvider = mockk {
             every { kDoc } returns kDoc1
         }
         val kDoc2: KoKDocDeclarationCore = mockk {
-            every { tags } returns emptyList()
+            every { hasTags() } returns false
         }
         val declaration2: KoKDocProvider = mockk {
             every { kDoc } returns kDoc2

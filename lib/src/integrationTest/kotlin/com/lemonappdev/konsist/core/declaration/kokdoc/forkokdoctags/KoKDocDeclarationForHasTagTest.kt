@@ -10,9 +10,25 @@ import org.junit.jupiter.api.Test
 
 class KoKDocDeclarationForHasTagTest {
     @Test
-    fun `class-has-tags`() {
+    fun `kdoc-without-tags`() {
         // given
-        val sut = getSnippetFile("class-has-tags")
+        val sut = getSnippetFile("kdoc-without-tags")
+            .classes()
+            .first()
+            .kDoc
+
+        // then
+        assertSoftly(sut) {
+            it?.numTags shouldBeEqualTo 0
+            it?.hasTags() shouldBeEqualTo false
+            it?.hasTags(SINCE) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `kdoc-has-tags`() {
+        // given
+        val sut = getSnippetFile("kdoc-has-tags")
             .classes()
             .first()
             .kDoc
@@ -20,6 +36,7 @@ class KoKDocDeclarationForHasTagTest {
         // then
         assertSoftly(sut) {
             it?.numTags shouldBeEqualTo 2
+            it?.hasTags() shouldBeEqualTo true
             it?.hasTags(SINCE) shouldBeEqualTo true
             it?.hasTags(SINCE, SEE) shouldBeEqualTo true
             it?.hasTags(SAMPLE) shouldBeEqualTo false
@@ -46,9 +63,9 @@ class KoKDocDeclarationForHasTagTest {
     }
 
     @Test
-    fun `class-has-tags-without-description`() {
+    fun `kdoc-has-tags-without-description`() {
         // given
-        val sut = getSnippetFile("class-has-tags-without-description")
+        val sut = getSnippetFile("kdoc-has-tags-without-description")
             .classes()
             .first()
             .kDoc

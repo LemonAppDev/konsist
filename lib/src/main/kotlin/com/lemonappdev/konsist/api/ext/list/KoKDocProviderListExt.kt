@@ -23,7 +23,7 @@ fun <T : KoKDocProvider> List<T>.withoutKDoc(): List<T> = filterNot { it.hasKDoc
  * @return A list containing elements with KDoc with any tag.
  */
 fun <T : KoKDocProvider> List<T>.withKDocWithTags(): List<T> =
-    filter { it.kDoc?.tags?.isNotEmpty() ?: false }
+    filter { it.kDoc?.hasTags() ?: false }
 
 /**
  * List containing elements with KDoc with all specified tags.
@@ -52,7 +52,7 @@ fun <T : KoKDocProvider> List<T>.withKDocWithSomeTags(tag: KoKDocTag, vararg tag
  * @return A list containing elements without KDoc with any tag.
  */
 fun <T : KoKDocProvider> List<T>.withoutKDocWithTags(): List<T> =
-    filterNot { it.kDoc?.tags?.isNotEmpty() ?: false }
+    filterNot { it.kDoc?.hasTags() ?: false }
 
 /**
  * List containing elements without KDoc with all specified tags.
