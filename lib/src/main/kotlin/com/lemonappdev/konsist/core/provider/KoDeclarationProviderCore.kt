@@ -6,7 +6,7 @@ internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProv
     override fun containsDeclarations(
         name: String,
         includeNested: Boolean,
-    ): Boolean = declarations(includeNested = includeNested).any { (it as KoNameProviderCore).name == name }
+    ): Boolean = declarations(includeNested = includeNested).any { (it as? KoNameProviderCore)?.name == name }
 
     override fun numDeclarations(includeNested: Boolean): Int = declarations(includeNested).size
 }
