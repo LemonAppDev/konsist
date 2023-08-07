@@ -46,9 +46,7 @@ body:
       label: Relevant code snippet.
       description: 'You can place a Konsist test here and simplified Kotlin files to help us reproduce the problem.'
       value: |
-        <details><summary>Logs</summary>
-
-        ```
+        ```kotlin
         Copy/paste the code snippet here, between the starting and ending backticks
         ```
 
