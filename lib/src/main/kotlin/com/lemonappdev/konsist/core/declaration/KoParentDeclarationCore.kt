@@ -26,7 +26,15 @@ internal interface KoParentDeclarationCore :
     override val name: String
         get() = ktSuperTypeListEntry
             .text
-            .removeSuffix("()")
+            /**
+             * Replace everything after '<' and '(' characters with empty string e.g.
+             *
+             * Foo(param) -> Foo
+             * Foo<UiState> -> Foo
+             * Foo<UiState, Action> -> Foo
+             * Foo<UiState, Action>(Loading) -> Foo
+             */
+            .replace(Regex("<.*|\\(.*"), "")
             .replace("\n", " ")
             .substringBefore(" by")
 }

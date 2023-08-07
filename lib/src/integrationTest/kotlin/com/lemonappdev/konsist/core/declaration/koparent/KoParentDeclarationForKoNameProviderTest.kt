@@ -18,6 +18,42 @@ class KoParentDeclarationForKoNameProviderTest {
     }
 
     @Test
+    fun `class-with-generic-parent-class`() {
+        // given
+        val sut = getSnippetFile("class-with-generic-parent-class")
+            .classes()
+            .first()
+            .parentClass
+
+        // then
+        sut?.name shouldBeEqualTo "SampleGenericSuperClass"
+    }
+
+    @Test
+    fun `class-with-parametrized-parent-class`() {
+        // given
+        val sut = getSnippetFile("class-with-parametrized-parent-class")
+            .classes()
+            .first()
+            .parentClass
+
+        // then
+        sut?.name shouldBeEqualTo "SampleParametrizedSuperClass"
+    }
+
+    @Test
+    fun `class-with-parametrized-and-generic-parent-class`() {
+        // given
+        val sut = getSnippetFile("class-with-parametrized-and-generic-parent-class")
+            .classes()
+            .first()
+            .parentClass
+
+        // then
+        sut?.name shouldBeEqualTo "SampleParametrizedSuperClass"
+    }
+
+    @Test
     fun `class-with-parent-interface`() {
         // given
         val sut = getSnippetFile("class-with-parent-interface")
@@ -28,6 +64,19 @@ class KoParentDeclarationForKoNameProviderTest {
 
         // then
         sut.name shouldBeEqualTo "SampleSuperInterface"
+    }
+
+    @Test
+    fun `class-with-generic-parent-interface`() {
+        // given
+        val sut = getSnippetFile("class-with-generic-parent-interface")
+            .classes()
+            .first()
+            .parentInterfaces
+            .first()
+
+        // then
+        sut.name shouldBeEqualTo "SampleGenericSuperInterface"
     }
 
     @Test

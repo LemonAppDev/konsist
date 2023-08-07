@@ -42,6 +42,14 @@ class DeclarationKonsistTest {
             .assertNot { it.sourceType.endsWith("Impl") }
     }
 
+    @Test
+    fun `none function2 return type has the 'Impl' suffix`() {
+        declarationPackageScope
+            .classes(includeNested = true)
+            .first()
+            .name
+    }
+
     companion object {
         val declarationPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.declaration..", sourceSetName = "main")
     }
