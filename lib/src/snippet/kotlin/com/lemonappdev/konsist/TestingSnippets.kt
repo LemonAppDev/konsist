@@ -3,6 +3,7 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.declarations
+import com.lemonappdev.konsist.api.ext.list.functions
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutSomeModifiers
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
@@ -53,9 +54,10 @@ class TestingSnippets {
             .assert { it.hasPrivateModifier }
     }
 
-    fun `junit 4 'Test' annotation is not allowed for functions`() {
-        Konsist.scopeFromTest()
-            .functions(includeNested = true)
-            .assertNot { it.hasAnnotations("org.junit.Test") }
+    fun `don't use JUnit4 Test annotation`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .functions()
+            .assertNot { it.hasAnnotations("org.junit.Test") } // should be only org.junit.jupiter.api.Test
     }
 }
