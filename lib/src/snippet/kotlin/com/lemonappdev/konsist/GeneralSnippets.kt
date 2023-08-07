@@ -69,7 +69,7 @@ class GeneralSnippets {
     fun `package name must match file path`() {
         Konsist.scopeFromProject()
             .packages
-            .assert { it.hasMatchingFilePath }
+            .assert { it.hasMatchingPath }
     }
 
     fun `properties are declared before functions`() {

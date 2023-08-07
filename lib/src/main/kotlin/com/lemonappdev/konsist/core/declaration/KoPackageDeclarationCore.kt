@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoPackageMatchingFilePathProviderCore
+import com.lemonappdev.konsist.core.provider.KoPackageMatchingPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.name.FqName
@@ -23,7 +23,7 @@ internal class KoPackageDeclarationCore private constructor(private val ktPackag
     KoFullyQualifiedNameProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
-    KoPackageMatchingFilePathProviderCore,
+    KoPackageMatchingPathProviderCore,
     KoPathProviderCore,
     KoTextProviderCore {
     override val psiElement: PsiElement by lazy { ktPackageDirective }
