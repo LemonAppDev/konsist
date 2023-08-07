@@ -136,7 +136,7 @@ class DependencyRulesCore : DependencyRules {
 
             if (similarLayer != null) {
                 val value = if (similarLayer.name == it.name) "name: ${it.name}" else "definedBy: ${it.definedBy} "
-                throw KoPreconditionFailedException("There are layers in the architecture with the same $value.")
+                throw KoPreconditionFailedException("Layers have the same name $value.")
             } else {
                 list += it
             }

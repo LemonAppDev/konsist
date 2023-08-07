@@ -22,7 +22,7 @@ class DependencyRulesTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-            There are layers in the architecture with the same name: Name.
+            Layers have the same name name: Name.
         """.trimIndent()
     }
 
@@ -40,7 +40,7 @@ class DependencyRulesTest {
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
-        There are layers in the architecture with the same definedBy: package.. .
+        Layers have the same name definedBy: package.. .
         """.trimIndent()
     }
 
