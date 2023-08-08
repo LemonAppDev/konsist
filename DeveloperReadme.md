@@ -20,12 +20,11 @@
 ## Release
 
 1. Create `release-vx.y.z` branch
-2. Update version 
-   1. `gradle.properties` file
-   2. Sample projects (`sample/starter-projects`)
-3. Merge release branch to `main`
-4. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
-5. Create a [new release](https://github.com/LemonAppDev/konsist/releases/new)
+2. Update version in `gradle.properties` file and starter projects (`sample/starter-projects`)
+3. Update starter projects code (`sample/starter-projects`)
+4. Merge release branch to `main`
+5. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
+6. Create a [new release](https://github.com/LemonAppDev/konsist/releases/new)
     1. set `vx.y.z` as tag version
     2. set `vx.y.z` as release title
 
