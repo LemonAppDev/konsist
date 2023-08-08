@@ -13,7 +13,7 @@ See [documentation](http://docs.konsist.lemonappdev.com/) for getting started gu
 
 ## Contributing
 
-Please be sure to review Konsist's [contributing guidelines](https://docs.konsist.lemonappdev.com/help/contribute)
+Please be sure to review Konsist's [contributing guidelines](https://docs.konsist.lemonappdev.com/help/contributing)
 to learn how to support the project.
 
 ## Licence
