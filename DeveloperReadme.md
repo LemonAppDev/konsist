@@ -7,16 +7,7 @@
 | [Konsist](https://github.com/LemonAppDev/konsist)                                 | ![Check Workflow](https://github.com/LemonAppDev/konsist/actions/workflows/check.yml/badge.svg)                 |
 | [Konsist Documentation](https://github.com/LemonAppDev/konsist-documentation)     | -                                                                                                               |
 
-## Release
-
-1. Create `release-vx.y.z` branch
-2. After test pass merge release branch to `main`
-3. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
-4. Create a [new release](https://github.com/LemonAppDev/konsist/releases/new)
-   1. set `vx.y.z` as tag version
-   2. set `vx.y.z` as release title
-
-### Publish To Maven Repository
+## Publish To Maven Repository
 
 - Publish Local: `./gradlew publishToMavenLocal -Pkonsist.releaseTarget=local` publish to local `~/.m2/repository`
 - Publish Snapshot `./gradlew publish -Pkonsist.releaseTarget=snapshot` publish to
@@ -26,16 +17,21 @@
   artefact will be transferred to [maven central](https://central.sonatype.com/artifact/com.lemonappdev/konsist)
   repository after some time.
 
-### Steps
-- Make sure test in starter projects are working
-- Create release
+## Release
 
-### Sonatype
+1. Create `release-vx.y.z` branch
+2. After test pass merge release branch to `main`
+3. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
+4. Create a [new release](https://github.com/LemonAppDev/konsist/releases/new)
+    1. set `vx.y.z` as tag version
+    2. set `vx.y.z` as release title
+
+## Sonatype
 
 - [Nexus Repository Manager](https://s01.oss.sonatype.org/#nexus-search;quick~konsist)
 - [Sonatype Jira](https://issues.sonatype.org/secure/Dashboard.jspa)
 
-### Repositories Links
+## Repositories Links
 
 - [mvnrepository.com](https://mvnrepository.com/artifact/com.lemonappdev/konsist/)
 - [central.sonatype.com](https://central.sonatype.com/artifact/com.lemonappdev/konsist/)

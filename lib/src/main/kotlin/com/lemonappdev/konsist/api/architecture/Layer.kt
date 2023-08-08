@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.architecture
 
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.util.LocationUtil
 
 /**
  * Represents a layer within an architecture.
@@ -12,7 +13,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
  */
 data class Layer(internal val name: String, internal val definedBy: String) {
     init {
-        if (!definedBy.endsWith("..")) {
+        if (!definedBy.endsWith(LocationUtil.WILD_CARD_SYNTAX)) {
             throw KoPreconditionFailedException("Layer $name must be defined by package ending with '..'. Now: $definedBy .")
         }
     }

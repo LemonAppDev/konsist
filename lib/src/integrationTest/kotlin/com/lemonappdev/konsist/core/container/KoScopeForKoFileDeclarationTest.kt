@@ -8,7 +8,9 @@ class KoScopeForKoFileDeclarationTest {
     @Test
     fun `scope-files`() {
         // given
-        val sut = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.container")
+        val sut = Konsist
+            .scopeFromTest(sourceSetName = "integrationTest")
+            .slice { it.packagee?.fullyQualifiedName == "com.lemonappdev.konsist.core.container" }
 
         // then
         sut
@@ -29,8 +31,6 @@ class KoScopeForKoFileDeclarationTest {
                     "KoScopeForKoPropertyDeclarationTest",
                     "KoScopeForKoTypeAliasDeclarationTest",
                     "KoScopeTest",
-                    "KoScopeCore",
-                    "KoScopeCreatorCore",
                 ),
             )
     }

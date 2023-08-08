@@ -1,24 +1,66 @@
 package com.lemonappdev.konsist.core.util
 
 object LocationUtil {
-    private const val wildcardSyntax = ".."
+    internal const val WILD_CARD_SYNTAX = ".."
 
     /**
      * Use '..' as a wildcard for any number of characters.
      *
-     * This class cna be used with both file paths and packages.
+     * This class can be used with both file paths and packages.
      */
     fun resideInLocation(desiredLocation: String, currentLocation: String): Boolean {
         require(desiredLocation.isNotEmpty()) { "Location name is empty" }
         require(desiredLocation != ".") { "Incorrect location format: $desiredLocation" }
 
-        val regexAnyNumberOfCharacters = ".*"
+        if (desiredLocation == "..") return true
 
         val desiredPackageRegexString = desiredLocation
-            .replace(wildcardSyntax, regexAnyNumberOfCharacters)
+            .lowercase()
+            .toDotSeparatedLocation()
+            .toPackageRegex()
 
-        val desiredPackageRegex = Regex(desiredPackageRegexString)
+        val currentLocationCanonical = currentLocation
+            .toDotSeparatedLocation()
+            .removePrefix(".")
+            .removeSuffix(".")
+            .lowercase()
 
-        return currentLocation.matches(desiredPackageRegex)
+        return currentLocationCanonical.matches(desiredPackageRegexString.toRegex())
     }
+}
+
+private fun String.toDotSeparatedLocation() =
+    replace("\\", "/")
+        .replace("/", ".")
+
+private fun String.toPackageRegex(): String {
+    val segments = split("..")
+        .filter { it.isNotEmpty() }
+
+    val prefixOptional = startsWith("..")
+    val suffixOptional = endsWith("..")
+
+    return buildString {
+        // Match any package prefix or no prefix at all
+        if (prefixOptional) append("(?:[^.]+\\.)*?")
+
+        segments.forEachIndexed { index, segment ->
+            // Match any package in between segments with at least one dot
+            if (index > 0 && index < segments.size) append("(?:\\.[^.]+)*?\\.")
+            append(Regex.escape(segment)) // Match the exact segment
+        }
+
+        if (suffixOptional) {
+            // Match any package suffix or no suffix at all
+            append("(?:\\.[^.]+)*?")
+        } else {
+            // If there is no suffix, the pattern should match the end of the string
+            append("$")
+        }
+    }
+}
+
+fun String.replaceLast(oldValue: String, newValue: String, ignoreCase: Boolean = false): String {
+    val index = lastIndexOf(oldValue, ignoreCase = ignoreCase)
+    return if (index < 0) this else this.replaceRange(index, index + oldValue.length, newValue)
 }
