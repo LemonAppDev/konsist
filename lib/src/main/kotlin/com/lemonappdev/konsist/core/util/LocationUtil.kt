@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.util
 
 object LocationUtil {
-    private const val wildcardSyntax = ".."
+    internal const val WILD_CARD_SYNTAX = ".."
 
     /**
      * Use '..' as a wildcard for any number of characters.
@@ -15,7 +15,7 @@ object LocationUtil {
         val regexAnyNumberOfCharacters = ".*"
 
         val desiredPackageRegexString = desiredLocation
-            .replace(wildcardSyntax, regexAnyNumberOfCharacters)
+            .replace(WILD_CARD_SYNTAX, regexAnyNumberOfCharacters)
 
         val desiredPackageRegex = Regex(desiredPackageRegexString)
 
