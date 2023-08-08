@@ -169,7 +169,6 @@ class LocationUtilTest {
         LocationUtil.resideInLocation("com.lemonappdev.konsist..data..", currentPackage) shouldBeEqualTo false
     }
 
-
     @Test
     fun `has given fragment with the package name 'data' suffux is the same as selector`() {
         // given
@@ -178,8 +177,6 @@ class LocationUtilTest {
         // then
         LocationUtil.resideInLocation("com.lemonappdev.konsist..data..", currentPackage) shouldBeEqualTo false
     }
-
-
 
     @Test
     fun `has given fragment with the package name 'data' content is the same as selector`() {

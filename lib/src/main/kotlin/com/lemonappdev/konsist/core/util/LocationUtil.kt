@@ -26,15 +26,22 @@ private fun String.toPackageRegex(): Regex {
     val suffixOptional = endsWith("..")
 
     return buildString {
-        if (prefixOptional) append("(?:[^.]+\\.)*?") // Match any package prefix or no prefix at all
+        // Match any package prefix or no prefix at all
+        if (prefixOptional) append("(?:[^.]+\\.)*?")
 
         segments.forEachIndexed { index, segment ->
-            if (index > 0 && index < segments.size) append("(?:\\.[^.]+)*?\\.") // Match any package in between segments with at least one dot
+            // Match any package in between segments with at least one dot
+            if (index > 0 && index < segments.size) append("(?:\\.[^.]+)*?\\.")
             append(Regex.escape(segment)) // Match the exact segment
         }
 
-        if (suffixOptional) append("(?:\\.[^.]+)*?") // Match any package suffix or no suffix at all
-        else append("$") // If there is no suffix, the pattern should match the end of the string
+        if (suffixOptional) {
+            // Match any package suffix or no suffix at all
+            append("(?:\\.[^.]+)*?")
+        } else {
+            // If there is no suffix, the pattern should match the end of the string
+            append("$")
+        }
     }.toRegex()
 }
 
