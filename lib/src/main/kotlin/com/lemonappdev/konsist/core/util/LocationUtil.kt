@@ -14,14 +14,29 @@ object LocationUtil {
 
         if (desiredLocation == "..") return true
 
-        var desiredPackageRegexString = desiredLocation.toPackageRegex()
+        val desiredPackageRegexString = desiredLocation
+            .lowercase()
+            .toDotSeparatedLocation()
+            .toPackageRegex()
 
-        return currentLocation.matches(desiredPackageRegexString)
+        val currentLocationCanonical = currentLocation
+            .toDotSeparatedLocation()
+            .removePrefix(".")
+            .removeSuffix(".")
+            .lowercase()
+
+        return currentLocationCanonical.matches(desiredPackageRegexString.toRegex())
     }
 }
 
-private fun String.toPackageRegex(): Regex {
-    val segments = split("..").filter { it.isNotEmpty() }
+private fun String.toDotSeparatedLocation() =
+    replace("\\", "/")
+        .replace("/", ".")
+
+private fun String.toPackageRegex(): String {
+    val segments = split("..")
+        .filter { it.isNotEmpty() }
+
     val prefixOptional = startsWith("..")
     val suffixOptional = endsWith("..")
 
@@ -42,7 +57,7 @@ private fun String.toPackageRegex(): Regex {
             // If there is no suffix, the pattern should match the end of the string
             append("$")
         }
-    }.toRegex()
+    }
 }
 
 fun String.replaceLast(oldValue: String, newValue: String, ignoreCase: Boolean = false): String {
