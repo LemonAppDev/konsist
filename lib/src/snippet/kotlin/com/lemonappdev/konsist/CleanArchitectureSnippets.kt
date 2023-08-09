@@ -5,13 +5,14 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArch
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.ext.list.withAllAnnotationsOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
+import com.lemonappdev.konsist.api.ext.list.withParentClass
 import com.lemonappdev.konsist.api.verify.assert
 import org.springframework.stereotype.Repository
 
 class CleanArchitectureSnippets {
     fun `clean architecture layers have correct dependencies`() {
         Konsist
-            .scopeFromProject()
+            .scopeFromProduction()
             .assertArchitecture {
                 // Define layers
                 val domain = Layer("Domain", "com.myapp.domain..")
@@ -32,11 +33,14 @@ class CleanArchitectureSnippets {
             .assert { it.resideInPackage("..domain..usecase..") }
     }
 
-    fun `classes with 'UseCase' suffix should have single method named 'invoke'`() {
+    fun `classes with 'UseCase' suffix should have single public method named 'invoke'`() {
         Konsist.scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
-            .assert { it.numDeclarations() == 1 && it.containsFunction("invoke") && it.isPublicOrDefault }
+            .assert {
+                val function = it.functions().first()
+                it.numDeclarations() == 1 && function.name == "invoke" && function.isPublicOrDefault
+            }
     }
 
     fun `interfaces with 'Repository' annotation should reside in 'data' package`() {
@@ -44,5 +48,12 @@ class CleanArchitectureSnippets {
             .interfaces()
             .withAllAnnotationsOf(Repository::class)
             .assert { it.resideInPackage("..data..") }
+    }
+
+    fun `every UseCase class has test`() {
+        Konsist.scopeFromProduction()
+            .classes()
+            .withParentClass("UseCase")
+            .assert { it.hasTest() }
     }
 }
