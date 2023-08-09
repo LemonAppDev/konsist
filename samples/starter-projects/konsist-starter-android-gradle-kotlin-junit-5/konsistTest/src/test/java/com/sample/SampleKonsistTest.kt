@@ -2,8 +2,8 @@ package com.sample
 
 import androidx.appcompat.app.AppCompatActivity
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.sequence.withParentClassOf
-import com.lemonappdev.konsist.core.verify.assert
+import com.lemonappdev.konsist.api.ext.list.withParentClassOf
+import com.lemonappdev.konsist.api.verify.assert
 import org.junit.jupiter.api.Test
 
 class SampleKonsistTest {
@@ -12,7 +12,7 @@ class SampleKonsistTest {
         Konsist
             .scopeFromProject()
             .classes()
-            .withParentClassOf<AppCompatActivity>()
+            .withParentClassOf(AppCompatActivity::class)
             .assert { it.name.endsWith("Activity") }
     }
 }
