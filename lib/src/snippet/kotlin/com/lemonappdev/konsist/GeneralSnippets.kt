@@ -35,7 +35,8 @@ class GeneralSnippets {
     fun `no class should use field injection`() {
         Konsist.scopeFromProject()
             .classes()
-            .assert { it.hasAnnotationOf<Inject>() }
+            .properties()
+            .assertNot { it.hasAnnotationOf<Inject>() }
     }
 
     fun `no class should use Java util logging`() {
