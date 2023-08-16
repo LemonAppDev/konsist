@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.architecture.Layer
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.core.architecture.DependencyRulesCore
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
@@ -9,6 +10,7 @@ import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.util.LocationUtil
 
 @Suppress("detekt.ThrowsCount")
 internal fun KoArchitectureScope.assert() {
@@ -38,40 +40,36 @@ internal fun KoArchitectureScope.assert() {
             throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
         }
 
-        val layerHasValidArchitecture = dependencyRules
-            .dependencies
-            .map { (t, u) ->
-                val otherLayers = (dependencyRules.allLayers - u).map { it.definedBy }
-
-                files
-                    .withPackage(t.definedBy)
-                    .filter { otherLayers.any { name -> it.hasImports(name) } }
-                    .map { it.path }
-                    .joinToString("\n")
-            }
-
-        val result = mutableMapOf<Layer, String>()
+        val failedFiles = mutableListOf<FailedFiles>()
 
         dependencyRules
             .dependencies
-            .keys
-            .forEachIndexed { index, layer -> result[layer] = layerHasValidArchitecture[index] }
+            .forEach { (layer, layers) ->
+                val otherLayers = (dependencyRules.allLayers - layers)
 
-        val failedLayers = mutableListOf<Layer>()
+                files
+                    .withPackage(layer.definedBy)
+                    .onEach {
+                        otherLayers.forEach { otherLayer ->
+                            val imports = it.imports.filter { import ->
+                                LocationUtil.resideInLocation(otherLayer.definedBy, import.name)
+                            }
 
-        result.forEach { (t, u) ->
-            if (u.isNotEmpty()) {
-                failedLayers += t
+                            if (imports.isNotEmpty()) {
+                                failedFiles += FailedFiles(it.path, layer, otherLayer.name, imports)
+                            }
+                        }
+                    }
             }
-        }
 
-        val filtered = result
-            .filter { it.value.isNotEmpty() }
-
-        val allChecksPassed = failedLayers.isEmpty()
-
-        if (!allChecksPassed) {
-            throw KoCheckFailedException(getCheckFailedMessages(filtered, dependencyRules.dependencies, dependencyRules.statuses))
+        if (failedFiles.isNotEmpty()) {
+            throw KoCheckFailedException(
+                getCheckFailedMessages(
+                    failedFiles.distinct(),
+                    dependencyRules.dependencies,
+                    dependencyRules.statuses,
+                ),
+            )
         }
     } catch (e: KoException) {
         throw e
@@ -80,14 +78,31 @@ internal fun KoArchitectureScope.assert() {
     }
 }
 
+private data class FailedFiles(
+    val path: String,
+    val resideInLayer: Layer,
+    val failedLayer: String,
+    val imports: List<KoImportDeclaration>,
+)
+
 private fun getCheckFailedMessages(
-    failedDeclarations: Map<Layer, String>,
+    failedFiles: List<FailedFiles>,
     dependencies: Map<Layer, Set<Layer>>,
     statuses: Map<Layer, Status>,
 ): String {
-    val failedDeclarationsMessage = failedDeclarations
-        .keys
-        .mapIndexed { index, layer ->
+    val failedDeclarationsMessage = failedFiles
+        .map { it.resideInLayer }
+        .joinToString("\n") { layer ->
+            val details = failedFiles
+                .filter { it.resideInLayer == layer }
+                .joinToString(separator = "\n") {
+                    "A file ${it.path} in a ${it.resideInLayer.name} layer depends on ${it.failedLayer} layer, imports:\n${
+                        it.imports.joinToString(
+                            separator = "\n",
+                        ) { import -> "\t${import.name} (${import.location})" }
+                    }"
+                }
+
             val layerDependencies = (dependencies.getOrDefault(layer, emptySet()) - layer).map { it.name }
 
             val message = when (statuses.getOrDefault(layer, Status.NONE)) {
@@ -104,10 +119,8 @@ private fun getCheckFailedMessages(
                 }
             }
 
-            "${layer.name} $message\n${failedDeclarations.values.toList()[index]}"
+            layer.name + " " + message + "\n" + details
         }
-        .joinToString("\n")
 
-    return "'${getTestMethodNameFromSeventhIndex()}' test has failed." +
-        "\n$failedDeclarationsMessage"
+    return "'${getTestMethodNameFromSeventhIndex()}' test has failed.\n$failedDeclarationsMessage"
 }
