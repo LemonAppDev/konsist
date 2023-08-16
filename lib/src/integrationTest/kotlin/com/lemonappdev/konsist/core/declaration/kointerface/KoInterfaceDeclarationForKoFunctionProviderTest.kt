@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.kointerface
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.KoModifier
-import com.lemonappdev.konsist.api.KoModifier.INTERNAL
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
@@ -102,11 +100,6 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
             containsFunction("sampleNestedFunction", includeNested = true, includeLocal = false) shouldBeEqualTo true
             containsFunction("sampleNestedFunction", includeNested = false, includeLocal = false) shouldBeEqualTo false
             containsFunction("NonExisting") shouldBeEqualTo false
-            containsFunction(Regex("[a-zA-Z]+"), includeNested = false, includeLocal = false) shouldBeEqualTo true
-            containsFunction(Regex("[a-zA-Z]+"), includeNested = false, includeLocal = true) shouldBeEqualTo true
-            containsFunction(Regex("[0-9]+"), includeNested = false, includeLocal = false) shouldBeEqualTo false
-            containsFunction(Regex("[a-zA-Z]+"), includeNested = true, includeLocal = false) shouldBeEqualTo true
-            containsFunction(Regex("[0-9]+"), includeNested = false, includeLocal = false) shouldBeEqualTo false
         }
     }
 
@@ -125,82 +118,111 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
                 PUBLIC,
                 OPEN,
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
             containsFunction(
                 "sampleLocalFunction",
                 SUSPEND,
                 includeNested = false,
-                includeLocal = true
+                includeLocal = true,
             ) shouldBeEqualTo true
             containsFunction(
                 "sampleLocalFunction",
                 SUSPEND,
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
             containsFunction(
                 "sampleLocalFunction",
                 PRIVATE,
                 includeNested = false,
-                includeLocal = true
+                includeLocal = true,
             ) shouldBeEqualTo false
             containsFunction(
                 "sampleNestedFunction",
                 OPEN,
                 includeNested = true,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo true
             containsFunction(
                 "sampleNestedFunction",
                 OPEN,
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
             containsFunction(
                 "sampleNestedFunction",
                 PRIVATE,
                 includeNested = true,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `contains-functions-with-regex`() {
+        // given
+        val sut = getSnippetFile("contains-functions-with-regex")
+            .interfaces()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            containsFunction(Regex("[a-zA-Z]+"), includeNested = false, includeLocal = false) shouldBeEqualTo true
+            containsFunction(Regex("[a-zA-Z]+"), includeNested = false, includeLocal = true) shouldBeEqualTo true
+            containsFunction(Regex("[0-9]+"), includeNested = false, includeLocal = false) shouldBeEqualTo false
+            containsFunction(Regex("[a-zA-Z]+"), includeNested = true, includeLocal = false) shouldBeEqualTo true
+            containsFunction(Regex("[0-9]+"), includeNested = false, includeLocal = false) shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `contains-functions-with-modifiers-and-regex`() {
+        // given
+        val sut = getSnippetFile("contains-functions-with-modifiers-and-regex")
+            .interfaces()
+            .first()
+
+        // then
+        assertSoftly(sut) {
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 PUBLIC,
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo true
             containsFunction(Regex("[0-9]+"), PUBLIC, includeNested = false, includeLocal = false) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 PRIVATE,
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 PUBLIC,
                 OPEN,
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 SUSPEND,
                 includeNested = false,
-                includeLocal = true
+                includeLocal = true,
             ) shouldBeEqualTo true
             containsFunction(Regex("[0-9]+"), SUSPEND, includeNested = false, includeLocal = true) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 SUSPEND,
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 PRIVATE,
                 includeNested = false,
-                includeLocal = true
+                includeLocal = true,
             ) shouldBeEqualTo false
             containsFunction(Regex("[a-zA-Z]+"), OPEN, includeNested = true, includeLocal = false) shouldBeEqualTo true
             containsFunction(Regex("[0-9]+"), OPEN, includeNested = true, includeLocal = false) shouldBeEqualTo false
@@ -208,7 +230,7 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
                 Regex("[a-zA-Z]+"),
                 PRIVATE,
                 includeNested = true,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
         }
     }

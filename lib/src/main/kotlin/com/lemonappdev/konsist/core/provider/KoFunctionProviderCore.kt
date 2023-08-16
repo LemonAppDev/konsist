@@ -16,7 +16,7 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         name: String,
         vararg modifiers: KoModifier,
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ): Boolean = if (modifiers.isEmpty()) {
         functions(includeNested, includeLocal).any { it.name == name }
     } else {
@@ -27,7 +27,7 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         regex: Regex,
         vararg modifiers: KoModifier,
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ): Boolean = if (modifiers.isEmpty()) {
         functions(includeNested, includeLocal).any { it.hasNameMatching(regex) }
     } else {
