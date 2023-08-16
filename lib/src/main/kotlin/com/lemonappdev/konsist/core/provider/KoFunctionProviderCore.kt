@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
@@ -8,13 +9,25 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
     override fun functions(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoFunctionDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
+    ): List<KoFunctionDeclaration> =
+        KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
 
     override fun containsFunction(
         name: String,
         includeNested: Boolean,
         includeLocal: Boolean,
     ): Boolean = functions(includeNested, includeLocal).any { it.name == name }
+
+    override fun containsFunction(
+        name: String,
+        vararg modifiers: KoModifier,
+        includeNested: Boolean,
+        includeLocal: Boolean
+    ): Boolean = if (modifiers.isEmpty()) {
+        containsFunction(name, includeNested, includeLocal)
+    } else {
+        functions(includeNested, includeLocal).any { it.name == name && it.hasModifiers(*modifiers) }
+    }
 
     override fun numFunctions(includeNested: Boolean, includeLocal: Boolean): Int =
         functions(includeNested, includeLocal).size
