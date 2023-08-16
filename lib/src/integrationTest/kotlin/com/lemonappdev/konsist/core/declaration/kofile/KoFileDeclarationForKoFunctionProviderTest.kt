@@ -103,6 +103,7 @@ class KoFileDeclarationForKoFunctionProviderTest {
         }
     }
 
+    @Suppress("detekt.LongMethod")
     @Test
     fun `contains-functions-with-modifiers`() {
         // given
@@ -207,46 +208,41 @@ class KoFileDeclarationForKoFunctionProviderTest {
                 Regex("[a-zA-Z]+"),
                 INTERNAL,
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo true
-            containsFunction(
-                Regex("[0-9]+"),
-                INTERNAL,
-                includeNested = false,
-                includeLocal = false
-            ) shouldBeEqualTo false
+            containsFunction(Regex("[0-9]+"), INTERNAL, includeNested = false, includeLocal = false) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 PRIVATE,
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 INTERNAL,
                 SUSPEND,
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo true
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 INTERNAL,
                 PRIVATE,
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 SUSPEND,
                 includeNested = false,
-                includeLocal = true
+                includeLocal = true,
             ) shouldBeEqualTo true
             containsFunction(Regex("[0-9]+"), SUSPEND, includeNested = false, includeLocal = true) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 PRIVATE,
                 includeNested = false,
-                includeLocal = true
+                includeLocal = true,
             ) shouldBeEqualTo false
             containsFunction(Regex("[a-zA-Z]+"), OPEN, includeNested = true, includeLocal = false) shouldBeEqualTo true
             containsFunction(Regex("[0-9]+"), OPEN, includeNested = true, includeLocal = false) shouldBeEqualTo false
@@ -254,7 +250,7 @@ class KoFileDeclarationForKoFunctionProviderTest {
                 Regex("[a-zA-Z]+"),
                 PRIVATE,
                 includeNested = true,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
         }
     }
