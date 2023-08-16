@@ -26,10 +26,28 @@ interface KoFunctionProvider : KoBaseProvider {
      * @param modifiers The modifiers to filter functions by (optional).
      * @param includeNested Specifies whether to include nested functions in the check (optional, default is `false`).
      * @param includeLocal Specifies whether to include local functions in the check (optional, default is `false`).
-     * @return `true` if the declaration contains a function with the specified name, `false` otherwise.
+     * @return `true` if the declaration contains a function with the specified name and modifiers, `false` otherwise.
      */
     fun containsFunction(
         name: String,
+        vararg modifiers: KoModifier,
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+    ): Boolean
+
+    /**
+     * Checks whether the declaration contains a function with a name matching the specified regular expression pattern
+     * and modifiers.
+     *
+     * @param regex The regular expression pattern to match function names against.
+     * @param modifiers The modifiers to filter functions by (optional).
+     * @param includeNested Specifies whether to include nested functions in the check (optional, default is `false`).
+     * @param includeLocal Specifies whether to include local functions in the check (optional, default is `false`).
+     * @return `true` if the declaration contains a function with a name matching the specified regular expression
+     * pattern and modifiers, `false` otherwise.
+     */
+    fun containsFunction(
+        regex: Regex,
         vararg modifiers: KoModifier,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,

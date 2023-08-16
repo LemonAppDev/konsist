@@ -113,6 +113,11 @@ class KoInitBlockDeclarationForKoFunctionProviderTest {
             containsFunction("sampleNestedFunction", includeNested = true, includeLocal = false) shouldBeEqualTo true
             containsFunction("sampleNestedFunction", includeNested = false, includeLocal = false) shouldBeEqualTo false
             containsFunction("NonExisting") shouldBeEqualTo false
+            containsFunction(Regex("[a-zA-Z]+"), includeNested = false, includeLocal = false) shouldBeEqualTo true
+            containsFunction(Regex("[a-zA-Z]+"), includeNested = false, includeLocal = true) shouldBeEqualTo true
+            containsFunction(Regex("[0-9]+"), includeNested = false, includeLocal = false) shouldBeEqualTo false
+            containsFunction(Regex("[a-zA-Z]+"), includeNested = true, includeLocal = false) shouldBeEqualTo true
+            containsFunction(Regex("[0-9]+"), includeNested = false, includeLocal = false) shouldBeEqualTo false
         }
     }
 
@@ -176,6 +181,16 @@ class KoInitBlockDeclarationForKoFunctionProviderTest {
                 includeNested = true,
                 includeLocal = false
             ) shouldBeEqualTo false
+            containsFunction(Regex("[a-zA-Z]+"), SUSPEND, includeNested = false, includeLocal = false) shouldBeEqualTo true
+            containsFunction(Regex("[0-9]+"), SUSPEND, includeNested = false, includeLocal = false) shouldBeEqualTo false
+            containsFunction(Regex("[a-zA-Z]+"), PRIVATE, includeNested = false, includeLocal = false) shouldBeEqualTo false
+            containsFunction(Regex("[a-zA-Z]+"), SUSPEND, OPEN, includeNested = false, includeLocal = false) shouldBeEqualTo false
+            containsFunction(Regex("[a-zA-Z]+"), SUSPEND, includeNested = false, includeLocal = true) shouldBeEqualTo true
+            containsFunction(Regex("[0-9]+"), SUSPEND, includeNested = false, includeLocal = true) shouldBeEqualTo false
+            containsFunction(Regex("[a-zA-Z]+"), PRIVATE, includeNested = false, includeLocal = true) shouldBeEqualTo false
+            containsFunction(Regex("[a-zA-Z]+"), OPEN, includeNested = true, includeLocal = false) shouldBeEqualTo true
+            containsFunction(Regex("[0-9]+"), OPEN, includeNested = true, includeLocal = false) shouldBeEqualTo false
+            containsFunction(Regex("[a-zA-Z]+"), PRIVATE, includeNested = true, includeLocal = false) shouldBeEqualTo false
         }
     }
 

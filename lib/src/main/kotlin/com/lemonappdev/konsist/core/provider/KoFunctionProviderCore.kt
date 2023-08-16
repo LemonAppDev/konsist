@@ -23,6 +23,17 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         functions(includeNested, includeLocal).any { it.name == name && it.hasModifiers(*modifiers) }
     }
 
+    override fun containsFunction(
+        regex: Regex,
+        vararg modifiers: KoModifier,
+        includeNested: Boolean,
+        includeLocal: Boolean
+    ): Boolean = if (modifiers.isEmpty()) {
+        functions(includeNested, includeLocal).any { it.hasNameMatching(regex) }
+    } else {
+        functions(includeNested, includeLocal).any { it.hasNameMatching(regex) && it.hasModifiers(*modifiers) }
+    }
+
     override fun numFunctions(includeNested: Boolean, includeLocal: Boolean): Int =
         functions(includeNested, includeLocal).size
 }
