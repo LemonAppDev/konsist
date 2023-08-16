@@ -20,20 +20,6 @@ interface KoFunctionProvider : KoBaseProvider {
     ): List<KoFunctionDeclaration>
 
     /**
-     * Checks whether the declaration contains a function with the specified name.
-     *
-     * @param name The name of the function to check.
-     * @param includeNested Specifies whether to include nested functions in the check (optional, default is `false`).
-     * @param includeLocal Specifies whether to include local functions in the check (optional, default is `false`).
-     * @return `true` if the declaration contains a function with the specified name, `false` otherwise.
-     */
-    fun containsFunction(
-        name: String,
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
-    ): Boolean
-
-    /**
      * Checks whether the declaration contains a function with the specified name and modifiers.
      *
      * @param name The name of the function to check.

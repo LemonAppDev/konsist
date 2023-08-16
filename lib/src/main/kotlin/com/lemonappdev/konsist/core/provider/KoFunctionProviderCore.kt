@@ -14,17 +14,11 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
 
     override fun containsFunction(
         name: String,
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): Boolean = functions(includeNested, includeLocal).any { it.name == name }
-
-    override fun containsFunction(
-        name: String,
         vararg modifiers: KoModifier,
         includeNested: Boolean,
         includeLocal: Boolean
     ): Boolean = if (modifiers.isEmpty()) {
-        containsFunction(name, includeNested, includeLocal)
+        functions(includeNested, includeLocal).any { it.name == name }
     } else {
         functions(includeNested, includeLocal).any { it.name == name && it.hasModifiers(*modifiers) }
     }
