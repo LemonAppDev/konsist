@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist
 
+import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
@@ -38,8 +39,11 @@ class CleanArchitectureSnippets {
             .classes()
             .withNameEndingWith("UseCase")
             .assert {
-                val function = it.functions().first()
-                it.numDeclarations() == 1 && function.name == "invoke" && function.isPublicOrDefault
+                it.numDeclarations() == 1 && it.containsFunction(
+                    "invoke",
+                    KoModifier.OPERATOR,
+                    KoModifier.DEFAULT_VISIBILITY_KEYWORD,
+                )
             }
     }
 

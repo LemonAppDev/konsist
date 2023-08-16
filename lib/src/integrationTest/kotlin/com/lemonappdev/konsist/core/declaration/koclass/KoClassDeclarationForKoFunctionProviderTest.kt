@@ -99,6 +99,7 @@ class KoClassDeclarationForKoFunctionProviderTest {
             containsFunction("sampleLocalFunction", includeNested = false, includeLocal = false) shouldBeEqualTo false
             containsFunction("sampleNestedFunction", includeNested = true, includeLocal = false) shouldBeEqualTo true
             containsFunction("sampleNestedFunction", includeNested = false, includeLocal = false) shouldBeEqualTo false
+            containsFunction("NonExisting") shouldBeEqualTo false
         }
     }
 
