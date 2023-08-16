@@ -119,7 +119,7 @@ private fun getCheckFailedMessages(
                 }
             }
 
-            layer.name + " " + message + "\n" + details
+            "${layer.name} $message\n$details"
         }
 
     return "'${getTestMethodNameFromSeventhIndex()}' test has failed.\n$failedDeclarationsMessage"
