@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.provider.modifier
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import org.jetbrains.kotlin.psi.psiUtil.isPublic
 
 internal interface KoVisibilityModifierProviderCore :
     KoVisibilityModifierProvider,
@@ -12,7 +13,7 @@ internal interface KoVisibilityModifierProviderCore :
         get() = hasModifiers(KoModifier.PUBLIC)
 
     override val isPublicOrDefault: Boolean
-        get() = hasModifiers(KoModifier.PUBLIC_OR_DEFAULT)
+        get() = ktTypeParameterListOwner.isPublic
 
     override val hasPrivateModifier: Boolean
         get() = hasModifiers(KoModifier.PRIVATE)
