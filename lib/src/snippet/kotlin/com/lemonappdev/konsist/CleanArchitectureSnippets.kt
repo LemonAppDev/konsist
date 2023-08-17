@@ -39,11 +39,9 @@ class CleanArchitectureSnippets {
             .classes()
             .withNameEndingWith("UseCase")
             .assert {
-                it.numDeclarations() == 1 && it.containsFunction(
-                    "invoke",
-                    KoModifier.OPERATOR,
-                    KoModifier.DEFAULT_VISIBILITY_KEYWORD,
-                )
+                it.numDeclarations() == 1 && it.containsFunction { function ->
+                    function.name == "invoke" && function.isPublicOrDefault && function.hasOperatorModifier
+                }
             }
     }
 
