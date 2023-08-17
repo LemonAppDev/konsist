@@ -1,11 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.kointerface
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.OPEN
-import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.KoModifier.PUBLIC
-import com.lemonappdev.konsist.api.KoModifier.SUSPEND
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -91,10 +88,13 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
 
         // then
         assertSoftly(sut) {
-            numFunctions(includeNested = true, includeLocal = true) shouldBeEqualTo 3
-            numFunctions(includeNested = true, includeLocal = false) shouldBeEqualTo 2
-            numFunctions(includeNested = false, includeLocal = true) shouldBeEqualTo 2
-            numFunctions(includeNested = false, includeLocal = false) shouldBeEqualTo 1
+            countFunctions(includeNested = true, includeLocal = true) shouldBeEqualTo 3
+            countFunctions(includeNested = true, includeLocal = false) shouldBeEqualTo 2
+            countFunctions(includeNested = false, includeLocal = true) shouldBeEqualTo 2
+            countFunctions(includeNested = false, includeLocal = false) shouldBeEqualTo 1
+            countFunctions { it.hasPrivateModifier } shouldBeEqualTo 1
+            countFunctions(includeNested = true, includeLocal = true) { it.hasPrivateModifier } shouldBeEqualTo 2
+            countFunctions{ it.name == "sampleFunction" && it.hasSuspendModifier} shouldBeEqualTo 0
         }
     }
 

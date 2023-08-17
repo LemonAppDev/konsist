@@ -1,11 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.INTERNAL
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
-import com.lemonappdev.konsist.api.KoModifier.SUSPEND
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -91,10 +89,13 @@ class KoClassDeclarationForKoFunctionProviderTest {
 
         // then
         assertSoftly(sut) {
-            numFunctions(includeNested = true, includeLocal = true) shouldBeEqualTo 3
-            numFunctions(includeNested = true, includeLocal = false) shouldBeEqualTo 2
-            numFunctions(includeNested = false, includeLocal = true) shouldBeEqualTo 2
-            numFunctions(includeNested = false, includeLocal = false) shouldBeEqualTo 1
+            countFunctions(includeNested = true, includeLocal = true) shouldBeEqualTo 3
+            countFunctions(includeNested = true, includeLocal = false) shouldBeEqualTo 2
+            countFunctions(includeNested = false, includeLocal = true) shouldBeEqualTo 2
+            countFunctions(includeNested = false, includeLocal = false) shouldBeEqualTo 1
+            countFunctions { it.hasPrivateModifier } shouldBeEqualTo 1
+            countFunctions(includeNested = true, includeLocal = true) { it.hasPrivateModifier } shouldBeEqualTo 2
+            countFunctions{ it.name == "sampleFunction" && it.hasSuspendModifier} shouldBeEqualTo 0
         }
     }
 
@@ -110,32 +111,32 @@ class KoClassDeclarationForKoFunctionProviderTest {
         assertSoftly(sut) {
             containsFunction { it.name == "sampleFunction" && it.hasInternalModifier } shouldBeEqualTo true
             containsFunction { it.name == "sampleFunction" && it.hasModifiers(INTERNAL, OPEN) } shouldBeEqualTo true
-            containsFunction { it.name == "sampleFunction" && it.hasPrivateModifier }shouldBeEqualTo false
-            containsFunction { it.name == "sampleFunction" && it.hasModifiers(INTERNAL, PRIVATE) }shouldBeEqualTo false
+            containsFunction { it.name == "sampleFunction" && it.hasPrivateModifier } shouldBeEqualTo false
+            containsFunction { it.name == "sampleFunction" && it.hasModifiers(INTERNAL, PRIVATE) } shouldBeEqualTo false
             containsFunction(
                 includeNested = false,
                 includeLocal = true,
-            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier }shouldBeEqualTo true
+            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier } shouldBeEqualTo true
             containsFunction(
                 includeNested = false,
                 includeLocal = false,
-            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier }shouldBeEqualTo false
+            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier } shouldBeEqualTo false
             containsFunction(
                 includeNested = false,
                 includeLocal = true,
-                ) { it.name == "sampleLocalFunction" && it.hasPrivateModifier }shouldBeEqualTo false
+            ) { it.name == "sampleLocalFunction" && it.hasPrivateModifier } shouldBeEqualTo false
             containsFunction(
                 includeNested = true,
                 includeLocal = false,
-            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier }shouldBeEqualTo true
+            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier } shouldBeEqualTo true
             containsFunction(
                 includeNested = false,
                 includeLocal = false,
-            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier }shouldBeEqualTo false
+            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier } shouldBeEqualTo false
             containsFunction(
                 includeNested = true,
                 includeLocal = false,
-            ) { it.name == "sampleNestedFunction" && it.hasPrivateModifier }shouldBeEqualTo false
+            ) { it.name == "sampleNestedFunction" && it.hasPrivateModifier } shouldBeEqualTo false
         }
     }
 

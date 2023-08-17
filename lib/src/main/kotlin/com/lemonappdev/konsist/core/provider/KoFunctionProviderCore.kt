@@ -18,6 +18,12 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         predicate: (KoFunctionDeclaration) -> Boolean
     ): Boolean = functions(includeNested, includeLocal).any { predicate(it) }
 
-    override fun numFunctions(includeNested: Boolean, includeLocal: Boolean): Int =
+    override fun countFunctions(includeNested: Boolean, includeLocal: Boolean): Int =
         functions(includeNested, includeLocal).size
+
+    override fun countFunctions(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+        predicate: (KoFunctionDeclaration) -> Boolean
+    ): Int = functions(includeNested, includeLocal).filter { predicate(it) }.size
 }

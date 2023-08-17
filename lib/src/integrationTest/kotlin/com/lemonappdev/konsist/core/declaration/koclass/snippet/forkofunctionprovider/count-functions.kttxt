@@ -1,9 +1,9 @@
 class SampleTopLevelClass {
-    fun sampleFunction() {
+    private fun sampleFunction() {
         fun sampleLocalFunction() {}
     }
 
     class SampleClass {
-        fun sampleNestedFunction() {}
+        private fun sampleNestedFunction() {}
     }
 }
