@@ -38,8 +38,9 @@ class CleanArchitectureSnippets {
             .classes()
             .withNameEndingWith("UseCase")
             .assert {
-                val function = it.functions().first()
-                it.countDeclarations() == 1 && function.name == "invoke" && function.isPublicOrDefault
+                it.countDeclarations() == 1 && it.containsFunction { function ->
+                    function.name == "invoke" && function.isPublicOrDefault && function.hasOperatorModifier
+                }
             }
     }
 

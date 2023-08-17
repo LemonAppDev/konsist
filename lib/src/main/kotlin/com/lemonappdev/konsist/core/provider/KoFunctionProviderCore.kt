@@ -8,14 +8,21 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
     override fun functions(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoFunctionDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
+    ): List<KoFunctionDeclaration> =
+        KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
 
     override fun containsFunction(
-        name: String,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = functions(includeNested, includeLocal).any { it.name == name }
+        predicate: (KoFunctionDeclaration) -> Boolean,
+    ): Boolean = functions(includeNested, includeLocal).any { predicate(it) }
 
-    override fun numFunctions(includeNested: Boolean, includeLocal: Boolean): Int =
+    override fun countFunctions(includeNested: Boolean, includeLocal: Boolean): Int =
         functions(includeNested, includeLocal).size
+
+    override fun countFunctions(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+        predicate: (KoFunctionDeclaration) -> Boolean,
+    ): Int = functions(includeNested, includeLocal).filter { predicate(it) }.size
 }

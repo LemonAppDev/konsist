@@ -95,11 +95,6 @@ enum class KoModifier(val type: String) {
     PUBLIC("public"),
 
     /**
-     * The `public` modifier.
-     */
-    DEFAULT_VISIBILITY_KEYWORD("public"),
-
-    /**
      * The `internal` modifier.
      */
     INTERNAL("internal"),

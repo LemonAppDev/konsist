@@ -9,7 +9,6 @@ import com.lemonappdev.konsist.api.KoModifier.CONST
 import com.lemonappdev.konsist.api.KoModifier.CONTRACT
 import com.lemonappdev.konsist.api.KoModifier.CROSSINLINE
 import com.lemonappdev.konsist.api.KoModifier.DATA
-import com.lemonappdev.konsist.api.KoModifier.DEFAULT_VISIBILITY_KEYWORD
 import com.lemonappdev.konsist.api.KoModifier.ENUM
 import com.lemonappdev.konsist.api.KoModifier.EXPECT
 import com.lemonappdev.konsist.api.KoModifier.EXTERNAL
@@ -57,7 +56,6 @@ internal fun KoModifier.toKtToken(): KtModifierKeywordToken = when (this) {
     OVERRIDE -> KtTokens.OVERRIDE_KEYWORD
     PRIVATE -> KtTokens.PRIVATE_KEYWORD
     PUBLIC -> KtTokens.PUBLIC_KEYWORD
-    DEFAULT_VISIBILITY_KEYWORD -> KtTokens.DEFAULT_VISIBILITY_KEYWORD
     INTERNAL -> KtTokens.INTERNAL_KEYWORD
     PROTECTED -> KtTokens.PROTECTED_KEYWORD
     OUT -> KtTokens.OUT_KEYWORD
