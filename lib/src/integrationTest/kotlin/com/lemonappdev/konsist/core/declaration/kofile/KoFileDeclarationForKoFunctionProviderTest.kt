@@ -195,6 +195,7 @@ class KoFileDeclarationForKoFunctionProviderTest {
         }
     }
 
+    @Suppress("detekt.LongMethod")
     @Test
     fun `contains-functions-with-modifiers-and-regex`() {
         // given
@@ -214,7 +215,7 @@ class KoFileDeclarationForKoFunctionProviderTest {
                 Regex("[0-9]+"),
                 INTERNAL,
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
@@ -246,7 +247,7 @@ class KoFileDeclarationForKoFunctionProviderTest {
                 Regex("[0-9]+"),
                 SUSPEND,
                 includeNested = false,
-                includeLocal = true
+                includeLocal = true,
             ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
@@ -258,13 +259,13 @@ class KoFileDeclarationForKoFunctionProviderTest {
                 Regex("[a-zA-Z]+"),
                 OPEN,
                 includeNested = true,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo true
             containsFunction(
                 Regex("[0-9]+"),
                 OPEN,
                 includeNested = true,
-                includeLocal = false
+                includeLocal = false,
             ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
