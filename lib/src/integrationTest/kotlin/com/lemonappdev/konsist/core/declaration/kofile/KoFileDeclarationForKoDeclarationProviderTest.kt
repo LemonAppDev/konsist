@@ -1,7 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.KoModifier.INTERNAL
+import com.lemonappdev.konsist.api.KoModifier.OPEN
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
@@ -51,13 +53,13 @@ class KoFileDeclarationForKoDeclarationProviderTest {
                 (it as? KoVisibilityModifierProvider)?.hasInternalModifier ?: false
             } shouldBeEqualTo true
             containsDeclaration {
-                (it as? KoModifierProvider)?.hasModifiers(KoModifier.INTERNAL, KoModifier.OPEN) ?: false
+                (it as? KoModifierProvider)?.hasModifiers(INTERNAL, OPEN) ?: false
             } shouldBeEqualTo true
             containsDeclaration {
                 (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
             } shouldBeEqualTo false
             containsDeclaration {
-                (it as? KoModifierProvider)?.hasModifiers(KoModifier.INTERNAL, KoModifier.PRIVATE) ?: false
+                (it as? KoModifierProvider)?.hasModifiers(INTERNAL, PRIVATE) ?: false
             } shouldBeEqualTo false
             containsDeclaration(
                 includeNested = false,

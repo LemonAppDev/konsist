@@ -1,7 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.koinitblock
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.KoModifier.INTERNAL
+import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoOpenModifierProvider
@@ -161,7 +162,7 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
                 (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
             } shouldBeEqualTo false
             containsDeclaration {
-                (it as? KoModifierProvider)?.hasModifiers(KoModifier.INTERNAL, KoModifier.OPEN) ?: false
+                (it as? KoModifierProvider)?.hasModifiers(INTERNAL, OPEN) ?: false
             } shouldBeEqualTo false
             containsDeclaration(
                 includeNested = false,
