@@ -39,7 +39,7 @@ class CleanArchitectureSnippets {
             .withNameEndingWith("UseCase")
             .assert {
                 val function = it.functions().first()
-                it.numDeclarations() == 1 && function.name == "invoke" && function.isPublicOrDefault
+                it.countDeclarations() == 1 && function.name == "invoke" && function.isPublicOrDefault
             }
     }
 

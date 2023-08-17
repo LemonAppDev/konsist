@@ -1,6 +1,7 @@
 object SampleObject {
-    class SampleNestedClass {
-        val sampleNestedProperty = ""
+    internal open class SampleNestedClass {
+
+        open val sampleNestedProperty = ""
     }
 
     fun sampleFunction() {

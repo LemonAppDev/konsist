@@ -1,7 +1,11 @@
 package com.lemonappdev.konsist.core.declaration.koinitblock
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoOpenModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -113,9 +117,9 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
     }
 
     @Test
-    fun `contains-declarations`() {
+    fun `count-declarations`() {
         // given
-        val sut = getSnippetFile("contains-declarations")
+        val sut = getSnippetFile("count-declarations")
             .classes()
             .first()
             .initBlocks
@@ -123,19 +127,72 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            numDeclarations() shouldBeEqualTo 2
-            numDeclarations(includeNested = true) shouldBeEqualTo 3
-            numDeclarations(includeLocal = true) shouldBeEqualTo 3
-            numDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
-            containsDeclaration("SampleNestedClass") shouldBeEqualTo true
-            containsDeclaration("sampleNestedProperty", includeNested = false) shouldBeEqualTo false
-            containsDeclaration("sampleNestedProperty", includeNested = true) shouldBeEqualTo true
-            containsDeclaration("sampleLocalProperty", includeLocal = false) shouldBeEqualTo false
-            containsDeclaration("sampleLocalProperty", includeLocal = true) shouldBeEqualTo true
-            containsDeclaration("NonExisting") shouldBeEqualTo false
+            countDeclarations() shouldBeEqualTo 2
+            countDeclarations(includeNested = true) shouldBeEqualTo 3
+            countDeclarations(includeLocal = true) shouldBeEqualTo 3
+            countDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
+            countDeclarations {
+                (it as? KoOpenModifierProvider)?.hasOpenModifier ?: false
+            } shouldBeEqualTo 1
+            countDeclarations(includeNested = true, includeLocal = true) {
+                (it as? KoOpenModifierProvider)?.hasOpenModifier ?: false
+            } shouldBeEqualTo 2
+            countDeclarations {
+                (it as? KoVisibilityModifierProvider)?.hasInternalModifier ?: false
+            } shouldBeEqualTo 0
+        }
+    }
+
+    @Test
+    fun `contains-declarations-with-specified-conditions`() {
+        // given
+        val sut = getSnippetFile("contains-declarations-with-specified-conditions")
+            .classes()
+            .first()
+            .initBlocks
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            containsDeclaration {
+                (it as? KoOpenModifierProvider)?.hasOpenModifier ?: false
+            } shouldBeEqualTo true
+            containsDeclaration {
+                (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
+            } shouldBeEqualTo false
+            containsDeclaration {
+                (it as? KoModifierProvider)?.hasModifiers(KoModifier.INTERNAL, KoModifier.OPEN) ?: false
+            } shouldBeEqualTo false
+            containsDeclaration(
+                includeNested = false,
+                includeLocal = true,
+            ) { (it as? KoNameProvider)?.name == "sampleLocalProperty" } shouldBeEqualTo true
+            containsDeclaration(
+                includeNested = false,
+                includeLocal = false,
+            ) { (it as? KoNameProvider)?.name == "sampleLocalProperty" } shouldBeEqualTo false
+            containsDeclaration(
+                includeNested = false,
+                includeLocal = true,
+            ) { (it as? KoNameProvider)?.name == "sampleOtherProperty" } shouldBeEqualTo false
+            containsDeclaration(
+                includeNested = true,
+                includeLocal = false,
+            ) { (it as? KoNameProvider)?.name == "sampleNestedProperty" } shouldBeEqualTo true
+            containsDeclaration(
+                includeNested = false,
+                includeLocal = false,
+            ) { (it as? KoNameProvider)?.name == "sampleNestedProperty" } shouldBeEqualTo false
+            containsDeclaration(
+                includeNested = true,
+                includeLocal = false,
+            ) { (it as? KoNameProvider)?.name == "sampleOtherProperty" } shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koinitblock/snippet/forkodeclarationprovider/", fileName)
+        TestSnippetProvider.getSnippetKoScope(
+            "core/declaration/koinitblock/snippet/forkodeclarationprovider/",
+            fileName
+        )
 }

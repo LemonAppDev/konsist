@@ -1,5 +1,0 @@
-class SampleTopLevelClass {
-    init {
-        val sampleProperty = ""
-    }
-}

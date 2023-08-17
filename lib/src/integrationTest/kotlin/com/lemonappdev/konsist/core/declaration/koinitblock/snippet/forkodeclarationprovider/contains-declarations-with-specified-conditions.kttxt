@@ -1,7 +1,8 @@
 class SampleTopLevelClass {
     init {
-        class SampleNestedClass {
-            val sampleNestedProperty = ""
+        open class SampleNestedClass {
+
+            open val sampleNestedProperty = ""
         }
 
         fun sampleFunction() {

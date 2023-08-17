@@ -1,9 +1,0 @@
-class SampleNestedClass {
-    init {
-        val sampleNestedProperty = ""
-    }
-}
-
-fun sampleFunction() {
-    val sampleLocalProperty = ""
-}

@@ -19,17 +19,17 @@ interface KoDeclarationProvider : KoBaseProvider {
     ): List<KoBaseDeclaration>
 
     /**
-     * Checks whether the declaration contains a declarations with the specified name.
+     * Checks whether the declaration contains a declaration that satisfies the specified predicate.
      *
-     * @param name The name of the declarations to check.
      * @param includeNested Specifies whether to include nested declarations in the check (optional, default is `false`).
      * @param includeLocal Specifies whether to include local declarations in the check (optional, default is `false`).
-     * @return `true` if the declaration contains a declarations with the specified name, `false` otherwise.
+     * @param predicate The predicate function to determine if a declaration satisfies a condition.
+     * @return `true` if the declaration contains a declaration that satisfies the specified predicate, `false` otherwise.
      */
     fun containsDeclaration(
-        name: String,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
+        predicate: (KoBaseDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -39,5 +39,19 @@ interface KoDeclarationProvider : KoBaseProvider {
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `false`).
      * @return The number of declarations in the declaration.
      */
-    fun numDeclarations(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+    fun countDeclarations(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+
+    /**
+     * Gets the number of declarations that satisfies the specified predicate present in the declaration.
+     *
+     * @param includeNested Specifies whether to include nested declarations in the count (optional, default is `false`).
+     * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `false`).
+     * @param predicate The predicate function to determine if a declaration satisfies a condition.
+     * @return The number of declarations that satisfies the specified predicate in the declaration.
+     */
+    fun countDeclarations(
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+        predicate: (KoBaseDeclaration) -> Boolean,
+    ): Int
 }
