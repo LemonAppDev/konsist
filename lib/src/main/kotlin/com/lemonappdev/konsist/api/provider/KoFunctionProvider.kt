@@ -29,7 +29,7 @@ interface KoFunctionProvider : KoBaseProvider {
     fun containsFunction(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-        predicate: (KoFunctionDeclaration) -> Boolean
+        predicate: (KoFunctionDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -52,6 +52,6 @@ interface KoFunctionProvider : KoBaseProvider {
     fun countFunctions(
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
-        predicate: (KoFunctionDeclaration) -> Boolean
+        predicate: (KoFunctionDeclaration) -> Boolean,
     ): Int
 }

@@ -95,7 +95,7 @@ class KoClassDeclarationForKoFunctionProviderTest {
             countFunctions(includeNested = false, includeLocal = false) shouldBeEqualTo 1
             countFunctions { it.hasPrivateModifier } shouldBeEqualTo 1
             countFunctions(includeNested = true, includeLocal = true) { it.hasPrivateModifier } shouldBeEqualTo 2
-            countFunctions{ it.name == "sampleFunction" && it.hasSuspendModifier} shouldBeEqualTo 0
+            countFunctions { it.name == "sampleFunction" && it.hasSuspendModifier } shouldBeEqualTo 0
         }
     }
 
@@ -153,27 +153,27 @@ class KoClassDeclarationForKoFunctionProviderTest {
         assertSoftly(sut) {
             containsFunction(
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) { it.name.matches(regex1) } shouldBeEqualTo true
             containsFunction(
                 includeNested = false,
-                includeLocal = true
+                includeLocal = true,
             ) { it.name.matches(regex1) } shouldBeEqualTo true
             containsFunction(
                 includeNested = true,
-                includeLocal = false
+                includeLocal = false,
             ) { it.name.matches(regex1) } shouldBeEqualTo true
             containsFunction(
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) { it.name.matches(regex2) } shouldBeEqualTo false
             containsFunction(
                 includeNested = false,
-                includeLocal = true
+                includeLocal = true,
             ) { it.name.matches(regex2) } shouldBeEqualTo false
             containsFunction(
                 includeNested = true,
-                includeLocal = false
+                includeLocal = false,
             ) { it.name.matches(regex2) } shouldBeEqualTo false
         }
     }

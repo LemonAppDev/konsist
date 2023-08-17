@@ -106,7 +106,7 @@ class KoInitBlockDeclarationForKoFunctionProviderTest {
             countFunctions(includeNested = false, includeLocal = false) shouldBeEqualTo 1
             countFunctions { it.hasSuspendModifier } shouldBeEqualTo 1
             countFunctions(includeNested = true, includeLocal = true) { it.hasSuspendModifier } shouldBeEqualTo 2
-            countFunctions{ it.name == "sampleFunction" && it.hasPrivateModifier} shouldBeEqualTo 0
+            countFunctions { it.name == "sampleFunction" && it.hasPrivateModifier } shouldBeEqualTo 0
         }
     }
 
@@ -127,27 +127,27 @@ class KoInitBlockDeclarationForKoFunctionProviderTest {
             containsFunction(
                 includeNested = false,
                 includeLocal = true,
-            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier }shouldBeEqualTo true
+            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier } shouldBeEqualTo true
             containsFunction(
                 includeNested = false,
                 includeLocal = false,
-            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier }shouldBeEqualTo false
+            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier } shouldBeEqualTo false
             containsFunction(
                 includeNested = false,
                 includeLocal = true,
-            ) { it.name == "sampleLocalFunction" && it.hasPrivateModifier }shouldBeEqualTo false
+            ) { it.name == "sampleLocalFunction" && it.hasPrivateModifier } shouldBeEqualTo false
             containsFunction(
                 includeNested = true,
                 includeLocal = false,
-            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier }shouldBeEqualTo true
+            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier } shouldBeEqualTo true
             containsFunction(
                 includeNested = false,
                 includeLocal = false,
-            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier }shouldBeEqualTo false
+            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier } shouldBeEqualTo false
             containsFunction(
                 includeNested = true,
                 includeLocal = false,
-            ) { it.name == "sampleNestedFunction" && it.hasPrivateModifier }shouldBeEqualTo false
+            ) { it.name == "sampleNestedFunction" && it.hasPrivateModifier } shouldBeEqualTo false
         }
     }
 
@@ -166,23 +166,23 @@ class KoInitBlockDeclarationForKoFunctionProviderTest {
         assertSoftly(sut) {
             containsFunction(
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) { it.name.matches(regex1) } shouldBeEqualTo true
             containsFunction(
                 includeNested = false,
-                includeLocal = true
+                includeLocal = true,
             ) { it.name.matches(regex1) } shouldBeEqualTo true
             containsFunction(
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) { it.name.matches(regex2) } shouldBeEqualTo false
             containsFunction(
                 includeNested = true,
-                includeLocal = false
+                includeLocal = false,
             ) { it.name.matches(regex1) } shouldBeEqualTo true
             containsFunction(
                 includeNested = false,
-                includeLocal = false
+                includeLocal = false,
             ) { it.name.matches(regex2) } shouldBeEqualTo false
         }
     }
