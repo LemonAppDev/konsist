@@ -33,7 +33,9 @@ object KotlinFileParser {
     private fun getKtFile(file: File): KtFile {
         require(file.isKotlinFile || file.isKotlinSnippetFile) { "File must be a Kotlin file" }
 
-        val text = file.readText()
+        val text = file
+            .readText()
+            .replace(Regex(EndOfLine.WINDOWS.value), EndOfLine.UNIX.value)
 
         // Tests are using code snippets with txt extension that is messing up with Kotlin file parsing
         val filePath = file.path.replace(KOTLIN_SNIPPET_FILE_EXTENSION, KOTLIN_FILE_EXTENSION)

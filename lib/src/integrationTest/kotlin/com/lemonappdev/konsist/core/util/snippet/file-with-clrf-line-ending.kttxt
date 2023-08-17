@@ -1,0 +1,4 @@
+package com.sample.mapper
+
+class SampleClass {
+}

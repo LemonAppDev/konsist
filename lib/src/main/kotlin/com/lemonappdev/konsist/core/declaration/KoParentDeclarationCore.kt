@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
@@ -35,6 +36,6 @@ internal interface KoParentDeclarationCore :
              * Foo<UiState, Action>(Loading) -> Foo
              */
             .replace(Regex("<.*|\\(.*"), "")
-            .replace("\n", " ")
+            .replace(EndOfLine.UNIX.value, " ")
             .substringBefore(" by")
 }
