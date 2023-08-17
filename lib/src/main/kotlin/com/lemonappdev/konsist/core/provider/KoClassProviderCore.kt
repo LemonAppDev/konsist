@@ -12,12 +12,18 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
 
     override fun containsClass(
-        name: String,
         includeNested: Boolean,
         includeLocal: Boolean,
+        predicate: (KoClassDeclaration) -> Boolean,
     ): Boolean =
-        classes(includeNested, includeLocal).any { it.name == name }
+        classes(includeNested, includeLocal).any { predicate(it) }
 
-    override fun numClasses(includeNested: Boolean, includeLocal: Boolean): Int =
+    override fun countClasses(includeNested: Boolean, includeLocal: Boolean): Int =
         classes(includeNested, includeLocal).size
+
+    override fun countClasses(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+        predicate: (KoClassDeclaration) -> Boolean,
+    ): Int = classes(includeNested, includeLocal).filter { predicate(it) }.size
 }
