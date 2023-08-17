@@ -19,17 +19,17 @@ interface KoFunctionProvider : KoBaseProvider {
     ): List<KoFunctionDeclaration>
 
     /**
-     * Checks whether the declaration contains a function with the specified name.
+     * Checks whether the declaration contains a function that satisfies the specified predicate.
      *
-     * @param name The name of the function to check.
      * @param includeNested Specifies whether to include nested functions in the check (optional, default is `false`).
      * @param includeLocal Specifies whether to include local functions in the check (optional, default is `false`).
-     * @return `true` if the declaration contains a function with the specified name, `false` otherwise.
+     * @param predicate The predicate function to determine if a function satisfies a condition.
+     * @return `true` if the declaration contains a function with the specified predicate, `false` otherwise.
      */
     fun containsFunction(
-        name: String,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
+        predicate: (KoFunctionDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -39,5 +39,19 @@ interface KoFunctionProvider : KoBaseProvider {
      * @param includeLocal Specifies whether to include local functions in the count (optional, default is `false`).
      * @return The number of functions in the declaration.
      */
-    fun numFunctions(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+    fun countFunctions(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+
+    /**
+     * Gets the number of functions that satisfies the specified predicate present in the declaration.
+     *
+     * @param includeNested Specifies whether to include nested functions in the count (optional, default is `false`).
+     * @param includeLocal Specifies whether to include local functions in the count (optional, default is `false`).
+     * @param predicate The predicate function to determine if a function satisfies a condition.
+     * @return The number of functions in the declaration.
+     */
+    fun countFunctions(
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+        predicate: (KoFunctionDeclaration) -> Boolean,
+    ): Int
 }
