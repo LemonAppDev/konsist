@@ -112,7 +112,12 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
 
         // then
         assertSoftly(sut) {
-            containsFunction("sampleFunction", PUBLIC, includeNested = false, includeLocal = false) shouldBeEqualTo true
+            containsFunction(
+                "sampleFunction",
+                PUBLIC,
+                includeNested = false,
+                includeLocal = false
+            ) shouldBeEqualTo true
             containsFunction(
                 "sampleFunction",
                 PUBLIC,
@@ -191,7 +196,12 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
                 includeNested = false,
                 includeLocal = false,
             ) shouldBeEqualTo true
-            containsFunction(Regex("[0-9]+"), PUBLIC, includeNested = false, includeLocal = false) shouldBeEqualTo false
+            containsFunction(
+                Regex("[0-9]+"),
+                PUBLIC,
+                includeNested = false,
+                includeLocal = false
+            ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 PRIVATE,
@@ -211,7 +221,12 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
                 includeNested = false,
                 includeLocal = true,
             ) shouldBeEqualTo true
-            containsFunction(Regex("[0-9]+"), SUSPEND, includeNested = false, includeLocal = true) shouldBeEqualTo false
+            containsFunction(
+                Regex("[0-9]+"),
+                SUSPEND,
+                includeNested = false,
+                includeLocal = true
+            ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 SUSPEND,
@@ -224,8 +239,18 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
                 includeNested = false,
                 includeLocal = true,
             ) shouldBeEqualTo false
-            containsFunction(Regex("[a-zA-Z]+"), OPEN, includeNested = true, includeLocal = false) shouldBeEqualTo true
-            containsFunction(Regex("[0-9]+"), OPEN, includeNested = true, includeLocal = false) shouldBeEqualTo false
+            containsFunction(
+                Regex("[a-zA-Z]+"),
+                OPEN,
+                includeNested = true,
+                includeLocal = false
+            ) shouldBeEqualTo true
+            containsFunction(
+                Regex("[0-9]+"),
+                OPEN,
+                includeNested = true,
+                includeLocal = false
+            ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 PRIVATE,

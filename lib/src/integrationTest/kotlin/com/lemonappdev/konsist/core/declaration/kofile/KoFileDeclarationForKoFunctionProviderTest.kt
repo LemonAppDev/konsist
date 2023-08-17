@@ -210,7 +210,12 @@ class KoFileDeclarationForKoFunctionProviderTest {
                 includeNested = false,
                 includeLocal = false,
             ) shouldBeEqualTo true
-            containsFunction(Regex("[0-9]+"), INTERNAL, includeNested = false, includeLocal = false) shouldBeEqualTo false
+            containsFunction(
+                Regex("[0-9]+"),
+                INTERNAL,
+                includeNested = false,
+                includeLocal = false
+            ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 PRIVATE,
@@ -237,15 +242,30 @@ class KoFileDeclarationForKoFunctionProviderTest {
                 includeNested = false,
                 includeLocal = true,
             ) shouldBeEqualTo true
-            containsFunction(Regex("[0-9]+"), SUSPEND, includeNested = false, includeLocal = true) shouldBeEqualTo false
+            containsFunction(
+                Regex("[0-9]+"),
+                SUSPEND,
+                includeNested = false,
+                includeLocal = true
+            ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 PRIVATE,
                 includeNested = false,
                 includeLocal = true,
             ) shouldBeEqualTo false
-            containsFunction(Regex("[a-zA-Z]+"), OPEN, includeNested = true, includeLocal = false) shouldBeEqualTo true
-            containsFunction(Regex("[0-9]+"), OPEN, includeNested = true, includeLocal = false) shouldBeEqualTo false
+            containsFunction(
+                Regex("[a-zA-Z]+"),
+                OPEN,
+                includeNested = true,
+                includeLocal = false
+            ) shouldBeEqualTo true
+            containsFunction(
+                Regex("[0-9]+"),
+                OPEN,
+                includeNested = true,
+                includeLocal = false
+            ) shouldBeEqualTo false
             containsFunction(
                 Regex("[a-zA-Z]+"),
                 PRIVATE,
