@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocTagsProvider
 import com.lemonappdev.konsist.core.declaration.KoKDocTagDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoValuedKDocTagDeclarationCore
+import com.lemonappdev.konsist.core.util.EndOfLine
 import java.util.*
 
 internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCore, KoBaseProviderCore {
@@ -15,7 +16,7 @@ internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCo
 
             val tagsAsStringList = text
                 .substringAfter("@", "")
-                .split("\n@")
+                .split("${EndOfLine.UNIX.value}@")
                 .map { ("@${it.replaceFirstChar { char -> char.lowercase(Locale.getDefault()) }}").trimEnd() }
 
             val tagsWithName = tagsAsStringList

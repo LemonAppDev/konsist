@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.core.provider.KoKDocDescriptionProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocTagsProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
 internal class KoKDocDeclarationCore(private val kDocElement: KDocElement) :
@@ -15,7 +16,10 @@ internal class KoKDocDeclarationCore(private val kDocElement: KDocElement) :
     override val psiElement: PsiElement by lazy { kDocElement }
 
     override val text: String by lazy {
-        val splitKDoc = kDocElement.text.split("\n").toMutableList()
+        val splitKDoc = kDocElement
+            .text
+            .split(EndOfLine.UNIX.value)
+            .toMutableList()
 
         if (splitKDoc.size == 1 && splitKDoc.first().startsWith("/**") && splitKDoc.first().endsWith("*/")) {
             splitKDoc

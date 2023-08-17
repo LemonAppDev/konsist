@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCore {
@@ -13,7 +14,7 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
         get() = ktTypeParameterListOwner
             .modifierList
             ?.text
-            ?.split("\n")
+            ?.split(EndOfLine.UNIX.value)
             ?.map { it.substringBefore("//") }
             ?.flatMap { it.split(" ") }
             ?.takeLastWhile {
