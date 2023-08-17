@@ -12,7 +12,7 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
  */
 inline fun <reified T : KoBaseProvider> KoDeclarationProvider.declarationsOf(
     includeNested: Boolean = false,
-    includeLocal: Boolean = false
+    includeLocal: Boolean = false,
 ): List<T> =
     declarations(includeNested, includeLocal)
         .filterIsInstance<T>()
