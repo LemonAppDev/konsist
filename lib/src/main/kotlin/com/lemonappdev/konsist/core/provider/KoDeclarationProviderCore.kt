@@ -7,7 +7,7 @@ internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProv
     override fun containsDeclaration(
         includeNested: Boolean,
         includeLocal: Boolean,
-        predicate: (KoBaseDeclaration) -> Boolean
+        predicate: (KoBaseDeclaration) -> Boolean,
     ): Boolean = declarations(
         includeNested = includeNested,
         includeLocal = includeLocal,
@@ -15,7 +15,6 @@ internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProv
 
     override fun countDeclarations(includeNested: Boolean, includeLocal: Boolean): Int =
         declarations(includeNested, includeLocal).size
-
 
     override fun countDeclarations(
         includeNested: Boolean,
