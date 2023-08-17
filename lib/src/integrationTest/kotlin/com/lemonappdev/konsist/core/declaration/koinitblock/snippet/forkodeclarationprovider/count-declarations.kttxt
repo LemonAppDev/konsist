@@ -1,0 +1,12 @@
+class SampleTopLevelClass {
+    init {
+        open class SampleNestedClass {
+
+            open val sampleNestedProperty = ""
+        }
+
+        suspend fun sampleFunction() {
+            val sampleLocalProperty = ""
+        }
+    }
+}

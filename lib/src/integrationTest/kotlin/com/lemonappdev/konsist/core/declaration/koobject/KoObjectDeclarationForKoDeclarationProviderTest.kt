@@ -1,7 +1,12 @@
 package com.lemonappdev.konsist.core.declaration.koobject
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.KoModifier.INTERNAL
+import com.lemonappdev.konsist.api.KoModifier.OPEN
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -127,41 +132,75 @@ class KoObjectDeclarationForKoDeclarationProviderTest {
     }
 
     @Test
-    fun `contains-declarations-when-all-declaration-have-name`() {
+    fun `count-declarations`() {
         // given
-        val sut = getSnippetFile("contains-declarations-when-all-declaration-have-name")
+        val sut = getSnippetFile("count-declarations")
             .objects()
             .first()
 
         // then
         assertSoftly(sut) {
-            numDeclarations() shouldBeEqualTo 2
-            numDeclarations(includeNested = true) shouldBeEqualTo 3
-            numDeclarations(includeLocal = true) shouldBeEqualTo 3
-            numDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
-            containsDeclaration("SampleNestedClass") shouldBeEqualTo true
-            containsDeclaration("sampleNestedProperty", includeNested = false) shouldBeEqualTo false
-            containsDeclaration("sampleNestedProperty", includeNested = true) shouldBeEqualTo true
-            containsDeclaration("sampleLocalProperty", includeLocal = false) shouldBeEqualTo false
-            containsDeclaration("sampleLocalProperty", includeLocal = true) shouldBeEqualTo true
-            containsDeclaration("NonExisting") shouldBeEqualTo false
+            countDeclarations() shouldBeEqualTo 2
+            countDeclarations(includeNested = true) shouldBeEqualTo 3
+            countDeclarations(includeLocal = true) shouldBeEqualTo 3
+            countDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
+            countDeclarations {
+                (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
+            } shouldBeEqualTo 2
+            countDeclarations(includeNested = true, includeLocal = true) {
+                (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
+            } shouldBeEqualTo 3
+            countDeclarations {
+                (it as? KoVisibilityModifierProvider)?.hasInternalModifier ?: false
+            } shouldBeEqualTo 0
         }
     }
 
     @Test
-    fun `contains-declarations-when-some-declaration-have-no-name`() {
+    fun `contains-declarations-with-specified-conditions`() {
         // given
-        val sut = getSnippetFile("contains-declarations-when-some-declaration-have-no-name")
+        val sut = getSnippetFile("contains-declarations-with-specified-conditions")
             .objects()
             .first()
 
         // then
         assertSoftly(sut) {
-            numDeclarations(includeNested = false) shouldBeEqualTo 1
-            numDeclarations(includeNested = true) shouldBeEqualTo 2
-            containsDeclaration("sampleProperty", includeNested = false) shouldBeEqualTo false
-            containsDeclaration("sampleProperty", includeNested = true) shouldBeEqualTo true
-            containsDeclaration("NonExisting") shouldBeEqualTo false
+            containsDeclaration {
+                (it as? KoVisibilityModifierProvider)?.hasInternalModifier ?: false
+            } shouldBeEqualTo true
+            containsDeclaration {
+                (it as? KoModifierProvider)?.hasModifiers(INTERNAL, OPEN) ?: false
+            } shouldBeEqualTo true
+            containsDeclaration {
+                (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
+            } shouldBeEqualTo false
+            containsDeclaration {
+                (it as? KoModifierProvider)?.hasModifiers(INTERNAL, PRIVATE) ?: false
+            } shouldBeEqualTo false
+            containsDeclaration(
+                includeNested = false,
+                includeLocal = true,
+            ) { (it as? KoNameProvider)?.name == "sampleLocalProperty" } shouldBeEqualTo true
+            containsDeclaration(
+                includeNested = false,
+                includeLocal = false,
+            ) { (it as? KoNameProvider)?.name == "sampleLocalProperty" } shouldBeEqualTo false
+            containsDeclaration(
+                includeNested = false,
+                includeLocal = true,
+            ) { (it as? KoNameProvider)?.name == "sampleOtherProperty" } shouldBeEqualTo false
+            containsDeclaration(
+                includeNested = true,
+                includeLocal = false,
+            ) { (it as? KoNameProvider)?.name == "sampleNestedProperty" } shouldBeEqualTo true
+            containsDeclaration(
+                includeNested = false,
+                includeLocal = false,
+            ) { (it as? KoNameProvider)?.name == "sampleNestedProperty" } shouldBeEqualTo false
+            containsDeclaration(
+                includeNested = true,
+                includeLocal = false,
+            ) { (it as? KoNameProvider)?.name == "sampleOtherProperty" } shouldBeEqualTo false
         }
     }
 
