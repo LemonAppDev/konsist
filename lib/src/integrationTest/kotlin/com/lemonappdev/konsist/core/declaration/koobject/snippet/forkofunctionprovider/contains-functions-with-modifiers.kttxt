@@ -1,9 +1,0 @@
-object SampleTopLevelObject {
-    internal final fun sampleFunction() {
-        suspend fun sampleLocalFunction() {}
-    }
-
-    open class SampleClass {
-        open fun sampleNestedFunction() {}
-    }
-}

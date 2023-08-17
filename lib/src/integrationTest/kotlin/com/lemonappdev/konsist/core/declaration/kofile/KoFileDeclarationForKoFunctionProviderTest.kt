@@ -82,9 +82,9 @@ class KoFileDeclarationForKoFunctionProviderTest {
     }
 
     @Test
-    fun `contains-functions`() {
+    fun `count-functions`() {
         // given
-        val sut = getSnippetFile("contains-functions")
+        val sut = getSnippetFile("count-functions")
             .files
             .first()
 
@@ -94,185 +94,81 @@ class KoFileDeclarationForKoFunctionProviderTest {
             numFunctions(includeNested = true, includeLocal = false) shouldBeEqualTo 2
             numFunctions(includeNested = false, includeLocal = true) shouldBeEqualTo 2
             numFunctions(includeNested = false, includeLocal = false) shouldBeEqualTo 1
-            containsFunction("sampleFunction", includeNested = false, includeLocal = false) shouldBeEqualTo true
-            containsFunction("sampleLocalFunction", includeNested = false, includeLocal = true) shouldBeEqualTo true
-            containsFunction("sampleLocalFunction", includeNested = false, includeLocal = false) shouldBeEqualTo false
-            containsFunction("sampleNestedFunction", includeNested = true, includeLocal = false) shouldBeEqualTo true
-            containsFunction("sampleNestedFunction", includeNested = false, includeLocal = false) shouldBeEqualTo false
-            containsFunction("NonExisting") shouldBeEqualTo false
         }
     }
 
     @Suppress("detekt.LongMethod")
     @Test
-    fun `contains-functions-with-modifiers`() {
+    fun `contains-functions-with-specified-name-and-modifiers`() {
         // given
-        val sut = getSnippetFile("contains-functions-with-modifiers")
+        val sut = getSnippetFile("contains-functions-with-specified-name-and-modifiers")
             .files
             .first()
 
         // then
         assertSoftly(sut) {
+            containsFunction { it.name == "sampleFunction" && it.hasInternalModifier } shouldBeEqualTo true
+            containsFunction { it.name == "sampleFunction" && it.hasModifiers(INTERNAL, SUSPEND) } shouldBeEqualTo true
+            containsFunction { it.name == "sampleFunction" && it.hasPrivateModifier } shouldBeEqualTo false
+            containsFunction { it.name == "sampleFunction" && it.hasModifiers(INTERNAL, PRIVATE) } shouldBeEqualTo false
             containsFunction(
-                "sampleFunction",
-                INTERNAL,
-                includeNested = false,
-                includeLocal = false,
-            ) shouldBeEqualTo true
-            containsFunction(
-                "sampleFunction",
-                INTERNAL,
-                SUSPEND,
-                includeNested = false,
-                includeLocal = false,
-            ) shouldBeEqualTo true
-            containsFunction(
-                "sampleFunction",
-                PRIVATE,
-                includeNested = false,
-                includeLocal = false,
-            ) shouldBeEqualTo false
-            containsFunction(
-                "sampleFunction",
-                INTERNAL,
-                PRIVATE,
-                includeNested = false,
-                includeLocal = false,
-            ) shouldBeEqualTo false
-            containsFunction(
-                "sampleLocalFunction",
-                SUSPEND,
                 includeNested = false,
                 includeLocal = true,
-            ) shouldBeEqualTo true
+            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier } shouldBeEqualTo true
             containsFunction(
-                "sampleLocalFunction",
-                SUSPEND,
                 includeNested = false,
                 includeLocal = false,
-            ) shouldBeEqualTo false
+            ) { it.name == "sampleLocalFunction" && it.hasSuspendModifier } shouldBeEqualTo false
             containsFunction(
-                "sampleLocalFunction",
-                PRIVATE,
                 includeNested = false,
                 includeLocal = true,
-            ) shouldBeEqualTo false
+            ) { it.name == "sampleLocalFunction" && it.hasPrivateModifier } shouldBeEqualTo false
             containsFunction(
-                "sampleNestedFunction",
-                OPEN,
                 includeNested = true,
                 includeLocal = false,
-            ) shouldBeEqualTo true
+            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier } shouldBeEqualTo true
             containsFunction(
-                "sampleNestedFunction",
-                OPEN,
                 includeNested = false,
                 includeLocal = false,
-            ) shouldBeEqualTo false
+            ) { it.name == "sampleNestedFunction" && it.hasOpenModifier } shouldBeEqualTo false
             containsFunction(
-                "sampleNestedFunction",
-                PRIVATE,
                 includeNested = true,
                 includeLocal = false,
-            ) shouldBeEqualTo false
+            ) { it.name == "sampleNestedFunction" && it.hasPrivateModifier } shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `contains-functions-with-regex`() {
+    fun `contains-functions-with-specified-regex`() {
         // given
-        val sut = getSnippetFile("contains-functions-with-regex")
-            .files
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            containsFunction(Regex("[a-zA-Z]+"), includeNested = false, includeLocal = false) shouldBeEqualTo true
-            containsFunction(Regex("[a-zA-Z]+"), includeNested = false, includeLocal = true) shouldBeEqualTo true
-            containsFunction(Regex("[0-9]+"), includeNested = false, includeLocal = false) shouldBeEqualTo false
-            containsFunction(Regex("[a-zA-Z]+"), includeNested = true, includeLocal = false) shouldBeEqualTo true
-            containsFunction(Regex("[0-9]+"), includeNested = false, includeLocal = false) shouldBeEqualTo false
-        }
-    }
-
-    @Suppress("detekt.LongMethod")
-    @Test
-    fun `contains-functions-with-modifiers-and-regex`() {
-        // given
-        val sut = getSnippetFile("contains-functions-with-modifiers-and-regex")
+        val regex1 = Regex("[a-zA-Z]+")
+        val regex2 = Regex("[0-9]+")
+        val sut = getSnippetFile("contains-functions-with-specified-regex")
             .files
             .first()
 
         // then
         assertSoftly(sut) {
             containsFunction(
-                Regex("[a-zA-Z]+"),
-                INTERNAL,
                 includeNested = false,
-                includeLocal = false,
-            ) shouldBeEqualTo true
+                includeLocal = false
+            ) { it.name.matches(regex1) } shouldBeEqualTo true
             containsFunction(
-                Regex("[0-9]+"),
-                INTERNAL,
                 includeNested = false,
-                includeLocal = false,
-            ) shouldBeEqualTo false
+                includeLocal = true
+            ) { it.name.matches(regex1) } shouldBeEqualTo true
             containsFunction(
-                Regex("[a-zA-Z]+"),
-                PRIVATE,
                 includeNested = false,
-                includeLocal = false,
-            ) shouldBeEqualTo false
+                includeLocal = false
+            ) { it.name.matches(regex2) } shouldBeEqualTo false
             containsFunction(
-                Regex("[a-zA-Z]+"),
-                INTERNAL,
-                SUSPEND,
-                includeNested = false,
-                includeLocal = false,
-            ) shouldBeEqualTo true
-            containsFunction(
-                Regex("[a-zA-Z]+"),
-                INTERNAL,
-                PRIVATE,
-                includeNested = false,
-                includeLocal = false,
-            ) shouldBeEqualTo false
-            containsFunction(
-                Regex("[a-zA-Z]+"),
-                SUSPEND,
-                includeNested = false,
-                includeLocal = true,
-            ) shouldBeEqualTo true
-            containsFunction(
-                Regex("[0-9]+"),
-                SUSPEND,
-                includeNested = false,
-                includeLocal = true,
-            ) shouldBeEqualTo false
-            containsFunction(
-                Regex("[a-zA-Z]+"),
-                PRIVATE,
-                includeNested = false,
-                includeLocal = true,
-            ) shouldBeEqualTo false
-            containsFunction(
-                Regex("[a-zA-Z]+"),
-                OPEN,
                 includeNested = true,
-                includeLocal = false,
-            ) shouldBeEqualTo true
+                includeLocal = false
+            ) { it.name.matches(regex1) } shouldBeEqualTo true
             containsFunction(
-                Regex("[0-9]+"),
-                OPEN,
-                includeNested = true,
-                includeLocal = false,
-            ) shouldBeEqualTo false
-            containsFunction(
-                Regex("[a-zA-Z]+"),
-                PRIVATE,
-                includeNested = true,
-                includeLocal = false,
-            ) shouldBeEqualTo false
+                includeNested = false,
+                includeLocal = false
+            ) { it.name.matches(regex2) } shouldBeEqualTo false
         }
     }
 

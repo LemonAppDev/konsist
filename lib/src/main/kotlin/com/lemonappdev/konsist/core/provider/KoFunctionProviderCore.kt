@@ -13,26 +13,10 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
 
     override fun containsFunction(
-        name: String,
-        vararg modifiers: KoModifier,
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): Boolean = if (modifiers.isEmpty()) {
-        functions(includeNested, includeLocal).any { it.name == name }
-    } else {
-        functions(includeNested, includeLocal).any { it.name == name && it.hasModifiers(*modifiers) }
-    }
-
-    override fun containsFunction(
-        regex: Regex,
-        vararg modifiers: KoModifier,
-        includeNested: Boolean,
-        includeLocal: Boolean,
-    ): Boolean = if (modifiers.isEmpty()) {
-        functions(includeNested, includeLocal).any { it.hasNameMatching(regex) }
-    } else {
-        functions(includeNested, includeLocal).any { it.hasNameMatching(regex) && it.hasModifiers(*modifiers) }
-    }
+        predicate: (KoFunctionDeclaration) -> Boolean
+    ): Boolean = functions(includeNested, includeLocal).any { predicate(it) }
 
     override fun numFunctions(includeNested: Boolean, includeLocal: Boolean): Int =
         functions(includeNested, includeLocal).size
