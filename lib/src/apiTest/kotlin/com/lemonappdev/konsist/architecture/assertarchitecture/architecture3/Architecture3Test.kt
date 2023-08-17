@@ -5,14 +5,20 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architectu
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
-import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.assertSoftly
+import org.amshove.kluent.shouldContain
 import org.junit.jupiter.api.Test
 
 class Architecture3Test {
-    private val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..")
+    private val domain =
+        Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.domain..")
     private val presentation =
-        Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..")
-    private val data = Layer("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.data..")
+        Layer(
+            "Presentation",
+            "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.presentation..",
+        )
+    private val data =
+        Layer("Data", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture3.project.data..")
     private val scope = Konsist.scopeFromDirectory(
         "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture3/project",
     )
@@ -43,18 +49,20 @@ class Architecture3Test {
 
     @Test
     fun `fails when bad dependency is set`() {
-        // given
-        val sut = {
+        // then
+        try {
             scope
                 .assertArchitecture {
                     data.dependsOnNothing()
                     presentation.dependsOn(data)
                     domain.dependsOn(data)
                 }
+        } catch (e: KoCheckFailedException) {
+            assertSoftly {
+                e.message?.shouldContain("'fails when bad dependency is set' test has failed.\n")
+                e.message?.shouldContain("Presentation depends on Data assertion failure:\n")
+            }
         }
-
-        // then
-        sut shouldThrow KoCheckFailedException::class
     }
 
     @Test
@@ -66,11 +74,15 @@ class Architecture3Test {
             domain.dependsOn(data)
         }
 
-        val sut = {
-            scope.assertArchitecture(architecture)
-        }
-
         // then
-        sut shouldThrow KoCheckFailedException::class
+        try {
+            scope
+                .assertArchitecture(architecture)
+        } catch (e: KoCheckFailedException) {
+            assertSoftly {
+                e.message?.shouldContain("'fails when bad dependency is set and architecture is passed as parameter' test has failed.\n")
+                e.message?.shouldContain("Presentation depends on Data assertion failure:\n")
+            }
+        }
     }
 }
