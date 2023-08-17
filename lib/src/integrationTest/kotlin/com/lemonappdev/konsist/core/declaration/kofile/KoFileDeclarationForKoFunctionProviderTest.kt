@@ -99,7 +99,6 @@ class KoFileDeclarationForKoFunctionProviderTest {
         }
     }
 
-    @Suppress("detekt.LongMethod")
     @Test
     fun `contains-functions-with-specified-name-and-modifiers`() {
         // given
