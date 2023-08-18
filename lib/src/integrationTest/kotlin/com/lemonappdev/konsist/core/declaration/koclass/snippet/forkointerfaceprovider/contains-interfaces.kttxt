@@ -1,5 +1,0 @@
-class SampleTopLevelClass {
-    interface SampleInterface {
-        interface SampleNestedInterface
-    }
-}

@@ -17,15 +17,15 @@ interface KoInterfaceProvider : KoBaseProvider {
     ): List<KoInterfaceDeclaration>
 
     /**
-     * Checks whether the declaration contains an interface with the specified name.
+     * Checks whether the declaration contains an interface that satisfies the specified predicate.
      *
-     * @param name The name of the interface to check.
      * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `false`).
-     * @return `true` if the declaration contains an interface with the specified name, `false` otherwise.
+     * @param predicate The predicate function to determine if an interface satisfies a condition.
+     * @return `true` if the declaration contains an interface with the specified predicate, `false` otherwise.
      */
     fun containsInterface(
-        name: String,
         includeNested: Boolean = false,
+        predicate: (KoInterfaceDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -34,5 +34,17 @@ interface KoInterfaceProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested interfaces in the count (optional, default is `false`).
      * @return The number of interfaces in the declaration.
      */
-    fun numInterfaces(includeNested: Boolean = false): Int
+    fun countInterfaces(includeNested: Boolean = false): Int
+
+    /**
+     * Gets the number of interfaces that satisfies the specified predicate present in the declaration.
+     *
+     * @param includeNested Specifies whether to include nested interfaces in the count (optional, default is `false`).
+     * @param predicate The predicate function to determine if an interface satisfies a condition.
+     * @return The number of interfaces in the declaration.
+     */
+    fun countInterfaces(
+        includeNested: Boolean = false,
+        predicate: (KoInterfaceDeclaration) -> Boolean,
+    ): Int
 }
