@@ -157,6 +157,24 @@ class KoClassDeclarationForKoDeclarationProviderTest {
     }
 
     @Test
+    fun `count-declarations-with-visibility-modifiers`() {
+        // given
+        val sut = getSnippetFile("count-declarations-with-visibility-modifiers")
+            .classes()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            countDeclarations() shouldBeEqualTo 5
+            countPublic() shouldBeEqualTo 1
+            countPublicOrDefault() shouldBeEqualTo 2
+            countPrivate() shouldBeEqualTo 1
+            countProtected() shouldBeEqualTo 1
+            countInternal() shouldBeEqualTo 1
+        }
+    }
+
+    @Test
     fun `contains-declarations-with-specified-conditions`() {
         // given
         val sut = getSnippetFile("contains-declarations-with-specified-conditions")
