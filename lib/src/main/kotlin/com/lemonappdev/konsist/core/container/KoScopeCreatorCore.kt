@@ -23,9 +23,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return KoScopeCore(koFiles)
     }
 
-    override fun scopeFromModule(vararg moduleNames: String): KoScope = moduleNames
-        .flatMap { getFiles(it) }
-        .let { KoScopeCore(it) }
+    override fun scopeFromModule(moduleName: String, vararg moduleNames: String): KoScope =
+        (listOf(moduleName) + moduleNames)
+            .flatMap { getFiles(it) }
+            .let { KoScopeCore(it) }
 
     override fun scopeFromPackage(packagee: String, moduleName: String?, sourceSetName: String?): KoScope {
         val koFiles = getFiles(moduleName, sourceSetName)
@@ -34,9 +35,10 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return KoScopeCore(koFiles)
     }
 
-    override fun scopeFromSourceSet(vararg sourceSetNames: String): KoScope = sourceSetNames
-        .flatMap { getFiles(sourceSetName = it) }
-        .let { KoScopeCore(it) }
+    override fun scopeFromSourceSet(sourceSetName: String, vararg sourceSetNames: String): KoScope =
+        (listOf(sourceSetName) + sourceSetNames)
+            .flatMap { getFiles(sourceSetName = it) }
+            .let { KoScopeCore(it) }
 
     private fun getFiles(
         moduleName: String? = null,
@@ -133,7 +135,8 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     private fun isBuildPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
         val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toMacOsSeparator())
-        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
+        val gradleModuleBuildDirectoryRegex =
+            Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
 
         val mavenBuildDirectoryName = "target"
         val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toMacOsSeparator())

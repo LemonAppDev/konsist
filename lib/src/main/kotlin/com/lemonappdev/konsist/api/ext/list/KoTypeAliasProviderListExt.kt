@@ -12,23 +12,23 @@ fun <T : KoTypeAliasProvider> List<T>.withTypeAliases(): List<T> = filter { it.h
 /**
  * List containing elements with all specified type aliases.
  *
- * @param typeAlias The type alias to include.
- * @param typeAliases The type aliases to include.
+ * @param name The type alias name to include.
+ * @param names The type alias name(s) to include.
  * @return A list containing elements with all the specified type alias(es).
  */
-fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliases(typeAlias: String, vararg typeAliases: String): List<T> = filter {
-    it.hasTypeAliases(typeAlias, *typeAliases)
+fun <T : KoTypeAliasProvider> List<T>.withAllTypeAliases(name: String, vararg names: String): List<T> = filter {
+    it.hasTypeAliases(name, *names)
 }
 
 /**
  * List containing elements with some type aliases.
  *
- * @param typeAlias The type alias to include.
- * @param typeAliases The type aliases to include.
+ * @param name The type alias name to include.
+ * @param names The type alias name(s) to include.
  * @return A list containing elements with at least one of the specified type alias(es).
  */
-fun <T : KoTypeAliasProvider> List<T>.withSomeTypeAliases(typeAlias: String, vararg typeAliases: String): List<T> = filter {
-    it.hasTypeAliases(typeAlias) || typeAliases.any { typeAlias -> it.hasTypeAliases(typeAlias) }
+fun <T : KoTypeAliasProvider> List<T>.withSomeTypeAliases(name: String, vararg names: String): List<T> = filter {
+    it.hasTypeAliases(name) || names.any { typeAlias -> it.hasTypeAliases(typeAlias) }
 }
 
 /**
@@ -41,24 +41,24 @@ fun <T : KoTypeAliasProvider> List<T>.withoutTypeAliases(): List<T> = filterNot 
 /**
  * List containing elements without all the specified type aliases.
  *
- * @param typeAlias The type alias to exclude.
- * @param typeAliases The type aliases to exclude.
+ * @param name The type alias name to exclude.
+ * @param names The type alias name(s) to exclude.
  * @return A list containing elements without all the specified type alias(es).
  */
-fun <T : KoTypeAliasProvider> List<T>.withoutAllTypeAliases(typeAlias: String, vararg typeAliases: String): List<T> = filterNot {
-    it.hasTypeAliases(typeAlias, *typeAliases)
+fun <T : KoTypeAliasProvider> List<T>.withoutAllTypeAliases(name: String, vararg names: String): List<T> = filterNot {
+    it.hasTypeAliases(name, *names)
 }
 
 /**
  * List containing elements without some type aliases.
  *
- * @param typeAlias The type alias to exclude.
- * @param typeAliases The type aliases to exclude.
+ * @param name The type alias name to exclude.
+ * @param names The type alias name(s) to exclude.
  * @return A list containing elements without at least one of the specified type alias(es).
  */
-fun <T : KoTypeAliasProvider> List<T>.withoutSomeTypeAliases(typeAlias: String, vararg typeAliases: String): List<T> = filter {
-    !it.hasTypeAliases(typeAlias) && if (typeAliases.isNotEmpty()) {
-        typeAliases.any { typeAlias -> !it.hasTypeAliases(typeAlias) }
+fun <T : KoTypeAliasProvider> List<T>.withoutSomeTypeAliases(name: String, vararg names: String): List<T> = filter {
+    !it.hasTypeAliases(name) && if (names.isNotEmpty()) {
+        names.any { typeAlias -> !it.hasTypeAliases(typeAlias) }
     } else {
         true
     }

@@ -9,5 +9,5 @@ internal interface KoSourceSetProviderCore : KoSourceSetProvider, KoPathProvider
             .substringAfter("${sep}src$sep")
             .substringBefore(sep)
 
-    override fun resideInSourceSet(sourceSet: String): Boolean = sourceSet == sourceSetName
+    override fun resideInSourceSet(sourceSetName: String): Boolean = sourceSetName == this.sourceSetName
 }

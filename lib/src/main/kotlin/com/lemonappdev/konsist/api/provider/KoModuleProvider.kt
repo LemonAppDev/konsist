@@ -12,8 +12,8 @@ interface KoModuleProvider : KoBaseProvider {
     /**
      * Whether declaration reside in module.
      *
-     * @param module The name of the module to check. If this is the top-module, use "root".
+     * @param name The name of the module to check. If this is the top-module, use "root".
      * @return `true` if a declaration resides in the specified module, `false` otherwise.
      */
-    fun resideInModule(module: String): Boolean
+    fun resideInModule(name: String): Boolean
 }

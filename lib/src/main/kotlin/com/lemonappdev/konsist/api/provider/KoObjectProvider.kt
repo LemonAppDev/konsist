@@ -17,15 +17,15 @@ interface KoObjectProvider : KoBaseProvider {
     ): List<KoObjectDeclaration>
 
     /**
-     * Checks whether the declaration contains an object with the specified name.
+     * Checks whether the declaration contains an object that satisfies the specified predicate.
      *
-     * @param name The name of the object to check.
      * @param includeNested Specifies whether to include nested objects in the check (optional, default is `false`).
-     * @return `true` if the declaration contains an object with the specified name, `false` otherwise.
+     * @param predicate The predicate function to determine if an object satisfies a condition.
+     * @return `true` if the declaration contains an object with the specified predicate, `false` otherwise.
      */
     fun containsObject(
-        name: String,
         includeNested: Boolean = false,
+        predicate: (KoObjectDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -34,5 +34,17 @@ interface KoObjectProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested objects in the count (optional, default is `false`).
      * @return The number of objects in the declaration.
      */
-    fun numObjects(includeNested: Boolean = false): Int
+    fun countObjects(includeNested: Boolean = false): Int
+
+    /**
+     * Gets the number of objects that satisfies the specified predicate present in the declaration.
+     *
+     * @param includeNested Specifies whether to include nested objects in the count (optional, default is `false`).
+     * @param predicate The predicate function to determine if an object satisfies a condition.
+     * @return The number of objects in the declaration.
+     */
+    fun countObjects(
+        includeNested: Boolean = false,
+        predicate: (KoObjectDeclaration) -> Boolean,
+    ): Int
 }

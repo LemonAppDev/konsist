@@ -14,8 +14,8 @@ interface KoExplicitTypeProvider : KoBaseProvider {
     /**
      * Whatever declaration has an explicit type.
      *
-     * @param type the type to check for (optional).
-     * @return `true` if the declaration has the specified type (or any type if [type] is `null`), `false` otherwise.
+     * @param name the type name to check for (optional).
+     * @return `true` if the declaration has the specified type (or any type if [name] is `null`), `false` otherwise.
      */
-    fun hasExplicitType(type: String? = null): Boolean
+    fun hasExplicitType(name: String? = null): Boolean
 }

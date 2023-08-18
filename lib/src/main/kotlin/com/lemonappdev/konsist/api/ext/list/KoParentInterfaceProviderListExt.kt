@@ -67,14 +67,14 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfaces(name: St
 /**
  * List containing elements with all specified parent interfaces of type.
  *
- * @param name The Kotlin class representing the parent interface to include.
- * @param names The Kotlin declarations representing the parent interfaces to include.
+ * @param kClass The Kotlin class representing the parent interface to include.
+ * @param kClasses The Kotlin declarations representing the parent interfaces to include.
  * @return A list containing elements with the parent interfaces of the specified type(s).
  */
-fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): List<T> =
+fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.parentInterfaces.any { parent -> parent.name == name.simpleName } &&
-            names.all { kClass ->
+        it.parentInterfaces.any { parent -> parent.name == kClass.simpleName } &&
+            kClasses.all { kClass ->
                 it
                     .parentInterfaces
                     .any { parent -> parent.name == kClass.simpleName }
@@ -84,14 +84,14 @@ fun <T : KoParentInterfaceProvider> List<T>.withAllParentInterfacesOf(name: KCla
 /**
  * List containing elements with some named parent interface.
  *
- * @param name The Kotlin class representing the parent interface to include.
- * @param names The Kotlin declarations representing the parent interfaces to include.
+ * @param kClass The Kotlin class representing the parent interface to include.
+ * @param kClasses The Kotlin declarations representing the parent interfaces to include.
  * @return A list containing elements with at least one of the specified parent interface(s).
  */
-fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): List<T> =
+fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfacesOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.parentInterfaces.any { parent -> parent.name == name.simpleName } ||
-            names.any { kClass ->
+        it.parentInterfaces.any { parent -> parent.name == kClass.simpleName } ||
+            kClasses.any { kClass ->
                 it
                     .parentInterfaces
                     .any { parent -> parent.name == kClass.simpleName }
@@ -101,14 +101,14 @@ fun <T : KoParentInterfaceProvider> List<T>.withSomeParentInterfacesOf(name: KCl
 /**
  * List containing elements without named parent interface.
  *
- * @param name The Kotlin class representing the parent interface to exclude.
- * @param names The Kotlin declarations representing the parent interfaces to exclude.
+ * @param kClass The Kotlin class representing the parent interface to exclude.
+ * @param kClasses The Kotlin declarations representing the parent interfaces to exclude.
  * @return A list containing elements without parent interfaces of the specified type(s).
  */
-fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): List<T> =
+fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.parentInterfaces.none { parent -> parent.name == name.simpleName } &&
-            names.none { kClass ->
+        it.parentInterfaces.none { parent -> parent.name == kClass.simpleName } &&
+            kClasses.none { kClass ->
                 it
                     .parentInterfaces
                     .any { parent -> parent.name == kClass.simpleName }
@@ -118,15 +118,15 @@ fun <T : KoParentInterfaceProvider> List<T>.withoutAllParentInterfacesOf(name: K
 /**
  * List containing elements without some named parent interface.
  *
- * @param name The Kotlin class representing the parent interface to exclude.
- * @param names The Kotlin declarations representing the parent interfaces to exclude.
+ * @param kClass The Kotlin class representing the parent interface to exclude.
+ * @param kClasses The Kotlin declarations representing the parent interfaces to exclude.
  * @return A list containing elements without at least one of the specified parent interface(s).
  */
-fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>): List<T> =
+fun <T : KoParentInterfaceProvider> List<T>.withoutSomeParentInterfacesOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.parentInterfaces.none { parent -> parent.name == name.simpleName } &&
-            if (names.isNotEmpty()) {
-                names.any { kClass ->
+        it.parentInterfaces.none { parent -> parent.name == kClass.simpleName } &&
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass ->
                     it
                         .parentInterfaces
                         .none { parent -> parent.name == kClass.simpleName }

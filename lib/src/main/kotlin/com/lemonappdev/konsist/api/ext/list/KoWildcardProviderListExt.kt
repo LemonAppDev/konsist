@@ -7,11 +7,11 @@ import com.lemonappdev.konsist.api.provider.KoWildcardProvider
  *
  * @return A list containing elements with a wildcard.
  */
-fun <T : KoWildcardProvider> List<T>.withWildcard(): List<KoWildcardProvider> = filter { it.isWildcard }
+fun <T : KoWildcardProvider> List<T>.withWildcard(): List<T> = filter { it.isWildcard }
 
 /**
  * List containing elements without a wildcard.
  *
  * @return A list containing elements without a wildcard.
  */
-fun <T : KoWildcardProvider> List<T>.withoutWildcard(): List<KoWildcardProvider> = filterNot { it.isWildcard }
+fun <T : KoWildcardProvider> List<T>.withoutWildcard(): List<T> = filterNot { it.isWildcard }
