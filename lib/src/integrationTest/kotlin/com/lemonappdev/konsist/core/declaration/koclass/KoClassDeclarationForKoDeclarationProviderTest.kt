@@ -140,10 +140,10 @@ class KoClassDeclarationForKoDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            countDeclarations() shouldBeEqualTo 2
-            countDeclarations(includeNested = true) shouldBeEqualTo 3
-            countDeclarations(includeLocal = true) shouldBeEqualTo 3
-            countDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
+            numDeclarations() shouldBeEqualTo 2
+            numDeclarations(includeNested = true) shouldBeEqualTo 3
+            numDeclarations(includeLocal = true) shouldBeEqualTo 3
+            numDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
             countDeclarations {
                 (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
             } shouldBeEqualTo 2
@@ -165,12 +165,12 @@ class KoClassDeclarationForKoDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            countDeclarations() shouldBeEqualTo 5
-            countPublic() shouldBeEqualTo 1
-            countPublicOrDefault() shouldBeEqualTo 2
-            countPrivate() shouldBeEqualTo 1
-            countProtected() shouldBeEqualTo 1
-            countInternal() shouldBeEqualTo 1
+            numDeclarations() shouldBeEqualTo 5
+            numPublic() shouldBeEqualTo 1
+            numPublicOrDefault() shouldBeEqualTo 2
+            numPrivate() shouldBeEqualTo 1
+            numProtected() shouldBeEqualTo 1
+            numInternal() shouldBeEqualTo 1
         }
     }
 

@@ -90,10 +90,10 @@ class KoFileDeclarationForKoClassProviderTest {
 
         // then
         assertSoftly(sut) {
-            countClasses(includeNested = true, includeLocal = true) shouldBeEqualTo 3
-            countClasses(includeNested = true, includeLocal = false) shouldBeEqualTo 2
-            countClasses(includeNested = false, includeLocal = true) shouldBeEqualTo 2
-            countClasses(includeNested = false, includeLocal = false) shouldBeEqualTo 1
+            numClasses(includeNested = true, includeLocal = true) shouldBeEqualTo 3
+            numClasses(includeNested = true, includeLocal = false) shouldBeEqualTo 2
+            numClasses(includeNested = false, includeLocal = true) shouldBeEqualTo 2
+            numClasses(includeNested = false, includeLocal = false) shouldBeEqualTo 1
             countClasses { it.hasPrivateModifier } shouldBeEqualTo 1
             countClasses(includeNested = true, includeLocal = true) { it.hasPrivateModifier } shouldBeEqualTo 2
             countClasses { it.name == "SampleClass" && it.hasInternalModifier } shouldBeEqualTo 0

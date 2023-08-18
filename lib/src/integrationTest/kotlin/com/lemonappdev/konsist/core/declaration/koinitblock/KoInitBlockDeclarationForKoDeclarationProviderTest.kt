@@ -128,10 +128,10 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            countDeclarations() shouldBeEqualTo 2
-            countDeclarations(includeNested = true) shouldBeEqualTo 3
-            countDeclarations(includeLocal = true) shouldBeEqualTo 3
-            countDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
+            numDeclarations() shouldBeEqualTo 2
+            numDeclarations(includeNested = true) shouldBeEqualTo 3
+            numDeclarations(includeLocal = true) shouldBeEqualTo 3
+            numDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
             countDeclarations {
                 (it as? KoOpenModifierProvider)?.hasOpenModifier ?: false
             } shouldBeEqualTo 1
@@ -155,12 +155,12 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            countDeclarations() shouldBeEqualTo 2
-            countPublic() shouldBeEqualTo 0
-            countPublicOrDefault() shouldBeEqualTo 0
-            countPrivate() shouldBeEqualTo 0
-            countProtected() shouldBeEqualTo 0
-            countInternal() shouldBeEqualTo 0
+            numDeclarations() shouldBeEqualTo 2
+            numPublic() shouldBeEqualTo 0
+            numPublicOrDefault() shouldBeEqualTo 0
+            numPrivate() shouldBeEqualTo 0
+            numProtected() shouldBeEqualTo 0
+            numInternal() shouldBeEqualTo 0
         }
     }
 

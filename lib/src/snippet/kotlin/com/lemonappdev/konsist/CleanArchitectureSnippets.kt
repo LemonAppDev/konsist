@@ -38,7 +38,7 @@ class CleanArchitectureSnippets {
             .classes()
             .withNameEndingWith("UseCase")
             .assert {
-                it.countDeclarations() == 1 && it.containsFunction { function ->
+                it.numDeclarations() == 1 && it.containsFunction { function ->
                     function.name == "invoke" && function.isPublicOrDefault && function.hasOperatorModifier
                 }
             }

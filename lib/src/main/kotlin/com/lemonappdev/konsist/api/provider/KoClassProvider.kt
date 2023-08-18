@@ -39,7 +39,7 @@ interface KoClassProvider : KoBaseProvider {
      * @param includeLocal Specifies whether to include local classes in the count (optional, default is `false`).
      * @return The number of classes in the declaration.
      */
-    fun countClasses(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+    fun numClasses(includeNested: Boolean = false, includeLocal: Boolean = false): Int
 
     /**
      * Gets the number of classes that satisfies the specified predicate present in the declaration.

@@ -14,7 +14,7 @@ internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProv
         includeLocal = includeLocal,
     ).any { predicate(it) }
 
-    override fun countDeclarations(includeNested: Boolean, includeLocal: Boolean): Int =
+    override fun numDeclarations(includeNested: Boolean, includeLocal: Boolean): Int =
         declarations(includeNested, includeLocal).size
 
     override fun countDeclarations(
@@ -23,27 +23,27 @@ internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProv
         predicate: (KoBaseDeclaration) -> Boolean,
     ): Int = declarations(includeNested, includeLocal).filter { predicate(it) }.size
 
-    override fun countPublic(includeNested: Boolean, includeLocal: Boolean): Int =
+    override fun numPublic(includeNested: Boolean, includeLocal: Boolean): Int =
         declarations(includeNested, includeLocal)
             .filterIsInstance<KoVisibilityModifierProvider>()
             .count { it.hasPublicModifier }
 
-    override fun countPublicOrDefault(includeNested: Boolean, includeLocal: Boolean): Int =
+    override fun numPublicOrDefault(includeNested: Boolean, includeLocal: Boolean): Int =
         declarations(includeNested, includeLocal)
             .filterIsInstance<KoVisibilityModifierProvider>()
             .count { it.isPublicOrDefault }
 
-    override fun countPrivate(includeNested: Boolean, includeLocal: Boolean): Int =
+    override fun numPrivate(includeNested: Boolean, includeLocal: Boolean): Int =
         declarations(includeNested, includeLocal)
             .filterIsInstance<KoVisibilityModifierProvider>()
             .count { it.hasPrivateModifier }
 
-    override fun countProtected(includeNested: Boolean, includeLocal: Boolean): Int =
+    override fun numProtected(includeNested: Boolean, includeLocal: Boolean): Int =
         declarations(includeNested, includeLocal)
             .filterIsInstance<KoVisibilityModifierProvider>()
             .count { it.hasProtectedModifier }
 
-    override fun countInternal(includeNested: Boolean, includeLocal: Boolean): Int =
+    override fun numInternal(includeNested: Boolean, includeLocal: Boolean): Int =
         declarations(includeNested, includeLocal)
             .filterIsInstance<KoVisibilityModifierProvider>()
             .count { it.hasInternalModifier }
