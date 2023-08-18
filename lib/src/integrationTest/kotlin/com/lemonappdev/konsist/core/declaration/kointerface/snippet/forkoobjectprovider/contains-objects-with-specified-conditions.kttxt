@@ -1,0 +1,5 @@
+interface SampleInterface {
+    private companion object SampleObject {
+        private object SampleNestedObject
+    }
+}

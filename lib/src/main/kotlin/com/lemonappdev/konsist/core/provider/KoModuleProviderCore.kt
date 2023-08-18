@@ -23,5 +23,5 @@ internal interface KoModuleProviderCore : KoModuleProvider, KoPathProviderCore, 
             }
         }
 
-    override fun resideInModule(module: String): Boolean = module == moduleName
+    override fun resideInModule(name: String): Boolean = name == moduleName
 }

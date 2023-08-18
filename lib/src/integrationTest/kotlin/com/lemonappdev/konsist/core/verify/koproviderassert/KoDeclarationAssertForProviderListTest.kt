@@ -257,7 +257,7 @@ class KoDeclarationAssertForProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -269,7 +269,7 @@ class KoDeclarationAssertForProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -281,7 +281,7 @@ class KoDeclarationAssertForProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -293,7 +293,7 @@ class KoDeclarationAssertForProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -305,7 +305,7 @@ class KoDeclarationAssertForProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -317,7 +317,7 @@ class KoDeclarationAssertForProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -331,7 +331,7 @@ class KoDeclarationAssertForProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -343,7 +343,7 @@ class KoDeclarationAssertForProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -355,7 +355,7 @@ class KoDeclarationAssertForProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -367,7 +367,7 @@ class KoDeclarationAssertForProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test

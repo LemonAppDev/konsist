@@ -5,22 +5,22 @@ import com.lemonappdev.konsist.api.provider.KoExplicitTypeProvider
 import com.lemonappdev.konsist.core.util.ReceiverUtil
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
 internal interface KoExplicitTypeProviderCore :
     KoExplicitTypeProvider,
     KoContainingDeclarationProviderCore,
-    KoExtensionProviderCore,
     KoBaseProviderCore {
     val ktProperty: KtProperty
     override val explicitType: KoTypeDeclaration?
-        get() = ReceiverUtil.getType(getTypeReferences(), isExtension, this)
+        get() = ReceiverUtil.getType(getTypeReferences(), ktProperty.isExtensionDeclaration(), this)
 
     private fun getTypeReferences(): List<KtTypeReference> = ktProperty
         .children
         .filterIsInstance<KtTypeReference>()
 
-    override fun hasExplicitType(type: String?): Boolean = when (type) {
+    override fun hasExplicitType(name: String?): Boolean = when (name) {
         null -> this.explicitType != null
-        else -> this.explicitType?.name == type
+        else -> this.explicitType?.name == name
     }
 }

@@ -10,9 +10,14 @@ internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProvide
     ): List<KoObjectDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested)
 
     override fun containsObject(
-        name: String,
         includeNested: Boolean,
-    ): Boolean = objects(includeNested).any { it.name == name }
+        predicate: (KoObjectDeclaration) -> Boolean,
+    ): Boolean = objects(includeNested).any { predicate(it) }
 
-    override fun numObjects(includeNested: Boolean): Int = objects(includeNested).size
+    override fun countObjects(includeNested: Boolean): Int = objects(includeNested).size
+
+    override fun countObjects(
+        includeNested: Boolean,
+        predicate: (KoObjectDeclaration) -> Boolean,
+    ): Int = objects(includeNested).filter { predicate(it) }.size
 }
