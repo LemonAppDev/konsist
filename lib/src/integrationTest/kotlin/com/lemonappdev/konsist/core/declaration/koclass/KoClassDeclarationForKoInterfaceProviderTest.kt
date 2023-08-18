@@ -61,10 +61,9 @@ class KoClassDeclarationForKoInterfaceProviderTest {
         assertSoftly(sut) {
             countInterfaces(includeNested = true) shouldBeEqualTo 2
             countInterfaces(includeNested = false) shouldBeEqualTo 1
-            countInterfaces(includeNested = false) shouldBeEqualTo 1
             countInterfaces { it.hasPrivateModifier } shouldBeEqualTo 1
             countInterfaces(includeNested = true) { it.hasPrivateModifier } shouldBeEqualTo 2
-            countInterfaces { it.name == "SampleInterface" && it.hasInternalModifier } shouldBeEqualTo 0
+            countInterfaces { it.hasInternalModifier } shouldBeEqualTo 0
         }
     }
 
