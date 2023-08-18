@@ -11,10 +11,15 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
         KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested)
 
     override fun containsInterface(
-        name: String,
         includeNested: Boolean,
+        predicate: (KoInterfaceDeclaration) -> Boolean,
     ): Boolean =
-        interfaces(includeNested).any { it.name == name }
+        interfaces(includeNested).any { predicate(it) }
 
-    override fun numInterfaces(includeNested: Boolean): Int = interfaces(includeNested).size
+    override fun countInterfaces(includeNested: Boolean): Int = interfaces(includeNested).size
+
+    override fun countInterfaces(
+        includeNested: Boolean,
+        predicate: (KoInterfaceDeclaration) -> Boolean,
+    ): Int = interfaces(includeNested).filter { predicate(it) }.size
 }

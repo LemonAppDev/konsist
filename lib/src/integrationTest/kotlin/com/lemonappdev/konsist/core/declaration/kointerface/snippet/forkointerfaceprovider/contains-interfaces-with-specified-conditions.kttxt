@@ -1,0 +1,5 @@
+interface SampleTopLevelInterface {
+    private abstract interface SampleInterface {
+        private interface SampleNestedInterface
+    }
+}
