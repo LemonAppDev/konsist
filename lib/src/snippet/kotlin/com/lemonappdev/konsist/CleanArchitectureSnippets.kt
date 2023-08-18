@@ -42,7 +42,9 @@ class CleanArchitectureSnippets {
             .assert {
                 it.containsFunction { function ->
                     function.name == "invoke" && function.isPublicOrDefault && function.hasOperatorModifier
-                } && it.declarationsOf<KoVisibilityModifierProvider>().count() == 1
+                } && it
+                    .declarationsOf<KoVisibilityModifierProvider>()
+                    .count { decl -> decl.hasPublicModifier } == 1
             }
     }
 
