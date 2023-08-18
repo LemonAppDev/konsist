@@ -1,6 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.KoModifier.INTERNAL
+import com.lemonappdev.konsist.api.KoModifier.OPEN
+import com.lemonappdev.konsist.api.KoModifier.PRIVATE
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -79,24 +82,99 @@ class KoClassDeclarationForKoClassProviderTest {
     }
 
     @Test
-    fun `contains-classes`() {
+    fun `count-classes`() {
         // given
-        val sut = getSnippetFile("contains-classes")
+        val sut = getSnippetFile("count-classes")
             .classes()
             .first()
 
         // then
         assertSoftly(sut) {
-            numClasses() shouldBeEqualTo 1
-            numClasses(includeNested = true) shouldBeEqualTo 2
-            numClasses(includeLocal = true) shouldBeEqualTo 2
-            numClasses(includeNested = true, includeLocal = true) shouldBeEqualTo 3
-            containsClass("SampleClass") shouldBeEqualTo true
-            containsClass("SampleNestedClass", includeNested = false) shouldBeEqualTo false
-            containsClass("SampleNestedClass", includeNested = true) shouldBeEqualTo true
-            containsClass("SampleLocalClass", includeLocal = false) shouldBeEqualTo false
-            containsClass("SampleLocalClass", includeLocal = true) shouldBeEqualTo true
-            containsClass("NonExisting") shouldBeEqualTo false
+            countClasses(includeNested = true, includeLocal = true) shouldBeEqualTo 3
+            countClasses(includeNested = true, includeLocal = false) shouldBeEqualTo 2
+            countClasses(includeNested = false, includeLocal = true) shouldBeEqualTo 2
+            countClasses(includeNested = false, includeLocal = false) shouldBeEqualTo 1
+            countClasses { it.hasPrivateModifier } shouldBeEqualTo 1
+            countClasses(includeNested = true, includeLocal = true) { it.hasPrivateModifier } shouldBeEqualTo 2
+            countClasses { it.name == "SampleClass" && it.hasInternalModifier } shouldBeEqualTo 0
+        }
+    }
+
+    @Test
+    fun `contains-classes-with-specified-conditions`() {
+        // given
+        val sut = getSnippetFile("contains-classes-with-specified-conditions")
+            .classes()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            containsClass { it.name == "SampleClass" && it.hasPrivateModifier } shouldBeEqualTo true
+            containsClass { it.name == "SampleClass" && it.hasModifiers(PRIVATE, OPEN) } shouldBeEqualTo true
+            containsClass { it.name == "SampleClass" && it.hasPublicModifier } shouldBeEqualTo false
+            containsClass { it.name == "SampleClass" && it.hasModifiers(INTERNAL, PRIVATE) } shouldBeEqualTo false
+            containsClass(
+                includeNested = false,
+                includeLocal = true,
+            ) { it.name == "SampleLocalClass" } shouldBeEqualTo true
+            containsClass(
+                includeNested = false,
+                includeLocal = false,
+            ) { it.name == "SampleLocalClass" } shouldBeEqualTo false
+            containsClass(
+                includeNested = false,
+                includeLocal = true,
+            ) { it.name == "SampleOtherClass" } shouldBeEqualTo false
+            containsClass(
+                includeNested = true,
+                includeLocal = false,
+            ) { it.name == "SampleNestedClass" && it.hasPrivateModifier } shouldBeEqualTo true
+            containsClass(
+                includeNested = false,
+                includeLocal = false,
+            ) { it.name == "SampleNestedClass" && it.hasPrivateModifier } shouldBeEqualTo false
+            containsClass(
+                includeNested = true,
+                includeLocal = false,
+            ) { it.name == "SampleNestedClass" && it.hasOpenModifier } shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `contains-classes-with-specified-regex`() {
+        // given
+        val regex1 = Regex("[a-zA-Z]+")
+        val regex2 = Regex("[0-9]+")
+        val sut = getSnippetFile("contains-classes-with-specified-regex")
+            .classes()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            containsClass(
+                includeNested = false,
+                includeLocal = false,
+            ) { it.name.matches(regex1) } shouldBeEqualTo true
+            containsClass(
+                includeNested = false,
+                includeLocal = true,
+            ) { it.name.matches(regex1) } shouldBeEqualTo true
+            containsClass(
+                includeNested = true,
+                includeLocal = false,
+            ) { it.name.matches(regex1) } shouldBeEqualTo true
+            containsClass(
+                includeNested = false,
+                includeLocal = false,
+            ) { it.name.matches(regex2) } shouldBeEqualTo false
+            containsClass(
+                includeNested = false,
+                includeLocal = true,
+            ) { it.name.matches(regex2) } shouldBeEqualTo false
+            containsClass(
+                includeNested = true,
+                includeLocal = false,
+            ) { it.name.matches(regex2) } shouldBeEqualTo false
         }
     }
 

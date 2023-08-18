@@ -1,8 +1,8 @@
 class SampleTopLevelClass {
     init {
-        class SampleClass {
+        open class SampleClass {
 
-            inner class SampleNestedClass
+            open inner class SampleNestedClass
         }
 
         fun sampleFunction() {

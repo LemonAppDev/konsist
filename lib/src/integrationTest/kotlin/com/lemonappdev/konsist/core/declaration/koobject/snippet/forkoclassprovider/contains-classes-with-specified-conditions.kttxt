@@ -1,7 +1,7 @@
 object SampleObject {
-    class SampleClass {
+    private open class SampleClass {
 
-        inner class SampleNestedClass
+        private inner class SampleNestedClass
     }
 
     fun sampleFunction() {
