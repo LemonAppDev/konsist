@@ -13,7 +13,7 @@ import com.lemonappdev.konsist.api.provider.KoHasTestProvider
 fun <T : KoHasTestProvider> List<T>.withTest(
     testFileNameSuffix: String = "Test",
     moduleName: String? = null,
-    sourceSetName: String? = null
+    sourceSetName: String? = null,
 ): List<T> = filter { it.hasTest(testFileNameSuffix, moduleName, sourceSetName) }
 
 /**
@@ -27,5 +27,5 @@ fun <T : KoHasTestProvider> List<T>.withTest(
 fun <T : KoHasTestProvider> List<T>.withoutTest(
     testFileNameSuffix: String = "Test",
     moduleName: String? = null,
-    sourceSetName: String? = null
+    sourceSetName: String? = null,
 ): List<T> = filterNot { it.hasTest(testFileNameSuffix, moduleName, sourceSetName) }

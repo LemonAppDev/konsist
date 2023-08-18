@@ -17,7 +17,7 @@ internal interface KoReceiverTypeProviderCore :
         get() = ReceiverUtil.getReceiverType(
             getTypeReferences(),
             ktCallableDeclaration.isExtensionDeclaration(),
-            this
+            this,
         )
 
     override fun hasReceiverType(name: String?): Boolean = ReceiverUtil.hasReceiverType(receiverType, name)
