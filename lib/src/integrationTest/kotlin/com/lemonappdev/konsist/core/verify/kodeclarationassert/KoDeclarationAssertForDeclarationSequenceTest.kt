@@ -328,7 +328,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsLocalProperty("otherProperty") }
     }
 
     @Test
@@ -342,7 +342,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsLocalProperty("otherProperty") }
     }
 
     @Test
@@ -356,7 +356,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsLocalProperty("otherProperty") }
     }
 
     @Test
@@ -370,7 +370,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsLocalProperty("otherProperty") }
     }
 
     @Test

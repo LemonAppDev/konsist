@@ -65,17 +65,6 @@ internal object KoDeclarationProviderCoreUtil {
                 getKoDeclarations(declarations, includeNested, includeLocal)
             }
 
-            is KtAnonymousInitializer -> {
-                declarations = ktElement
-                    .body
-                    ?.children
-                    ?.filterIsInstance<KtDeclaration>()
-                    ?.mapNotNull { getInstanceOfKtDeclaration(it, containingDeclaration) }
-                    ?: emptyList()
-
-                getKoDeclarations(declarations, includeNested, includeLocal)
-            }
-
             else -> emptyList()
         }
     }

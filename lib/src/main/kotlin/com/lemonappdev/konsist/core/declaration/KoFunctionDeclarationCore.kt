@@ -124,8 +124,7 @@ internal class KoFunctionDeclarationCore private constructor(
             }
     }
 
-    override val localDeclarations: List<KoBaseDeclaration>
-        get() = localDeclarationsHelper
+    override val localDeclarations: List<KoBaseDeclaration> by lazy { localDeclarationsHelper }
 
     override fun toString(): String {
         return locationWithText
