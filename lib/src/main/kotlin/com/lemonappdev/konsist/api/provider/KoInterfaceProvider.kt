@@ -34,7 +34,7 @@ interface KoInterfaceProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested interfaces in the count (optional, default is `false`).
      * @return The number of interfaces in the declaration.
      */
-    fun countInterfaces(includeNested: Boolean = false): Int
+    fun numInterfaces(includeNested: Boolean = false): Int
 
     /**
      * Gets the number of interfaces that satisfies the specified predicate present in the declaration.

@@ -39,7 +39,7 @@ interface KoPropertyProvider : KoBaseProvider {
      * @param includeLocal Specifies whether to include local properties in the count (optional, default is `false`).
      * @return The number of properties in the declaration.
      */
-    fun countProperties(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+    fun numProperties(includeNested: Boolean = false, includeLocal: Boolean = false): Int
 
     /**
      * Gets the number of properties that satisfies the specified predicate present in the declaration.
