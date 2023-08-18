@@ -29,7 +29,8 @@ class KoDeclarationAssertForProviderSequenceTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'provider-assert-test-method-name' has failed. Invalid declarations (2)") ?: throw e
+            e.message?.shouldContain("Assert 'provider-assert-test-method-name' has failed. Invalid declarations (2)")
+                ?: throw e
         }
     }
 
@@ -275,7 +276,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -288,7 +289,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -301,7 +302,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -314,7 +315,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -327,7 +328,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -340,7 +341,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -355,7 +356,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -368,7 +369,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -381,7 +382,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -394,7 +395,7 @@ class KoDeclarationAssertForProviderSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test

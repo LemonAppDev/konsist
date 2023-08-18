@@ -8,15 +8,22 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
     override fun properties(
         includeNested: Boolean,
         includeLocal: Boolean,
-    ): List<KoPropertyDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
+    ): List<KoPropertyDeclaration> =
+        KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
 
     override fun containsProperty(
-        name: String,
         includeNested: Boolean,
         includeLocal: Boolean,
+        predicate: (KoPropertyDeclaration) -> Boolean,
     ): Boolean =
-        properties(includeNested, includeLocal).any { it.name == name }
+        properties(includeNested, includeLocal).any { predicate(it) }
 
-    override fun numProperties(includeNested: Boolean, includeLocal: Boolean): Int =
+    override fun countProperties(includeNested: Boolean, includeLocal: Boolean): Int =
         properties(includeNested, includeLocal).size
+
+    override fun countProperties(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+        predicate: (KoPropertyDeclaration) -> Boolean,
+    ): Int = properties(includeNested, includeLocal).filter { predicate(it) }.size
 }

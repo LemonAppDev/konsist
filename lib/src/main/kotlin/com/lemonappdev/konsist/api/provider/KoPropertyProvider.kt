@@ -19,17 +19,17 @@ interface KoPropertyProvider : KoBaseProvider {
     ): List<KoPropertyDeclaration>
 
     /**
-     * Checks whether the declaration contains a property with the specified name.
+     * Checks whether the declaration contains a property that satisfies the specified predicate.
      *
-     * @param name The name of the property to check.
      * @param includeNested Specifies whether to include nested properties in the check (optional, default is `false`).
      * @param includeLocal Specifies whether to include local properties in the check (optional, default is `false`).
-     * @return `true` if the declaration contains a property with the specified name, `false` otherwise.
+     * @param predicate The predicate function to determine if a property satisfies a condition.
+     * @return `true` if the declaration contains a property with the specified predicate, `false` otherwise.
      */
     fun containsProperty(
-        name: String,
         includeNested: Boolean = false,
         includeLocal: Boolean = false,
+        predicate: (KoPropertyDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -39,5 +39,19 @@ interface KoPropertyProvider : KoBaseProvider {
      * @param includeLocal Specifies whether to include local properties in the count (optional, default is `false`).
      * @return The number of properties in the declaration.
      */
-    fun numProperties(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+    fun countProperties(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+
+    /**
+     * Gets the number of properties that satisfies the specified predicate present in the declaration.
+     *
+     * @param includeNested Specifies whether to include nested properties in the count (optional, default is `false`).
+     * @param includeLocal Specifies whether to include local properties in the count (optional, default is `false`).
+     * @param predicate The predicate function to determine if a property satisfies a condition.
+     * @return The number of properties in the declaration.
+     */
+    fun countProperties(
+        includeNested: Boolean = false,
+        includeLocal: Boolean = false,
+        predicate: (KoPropertyDeclaration) -> Boolean,
+    ): Int
 }

@@ -22,7 +22,8 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
+            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' has failed. Invalid declarations (1)")
+                ?: throw e
         }
     }
 
@@ -37,7 +38,8 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' has failed. Invalid files (1)") ?: throw e
+            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' has failed. Invalid files (1)")
+                ?: throw e
         }
     }
 
@@ -328,7 +330,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -342,7 +344,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -356,7 +358,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -370,7 +372,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty("otherProperty") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
