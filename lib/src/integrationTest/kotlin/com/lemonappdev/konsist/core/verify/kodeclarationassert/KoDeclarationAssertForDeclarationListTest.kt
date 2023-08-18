@@ -22,7 +22,8 @@ class KoDeclarationAssertForDeclarationListTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' has failed. Invalid declarations (1)") ?: throw e
+            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' has failed. Invalid declarations (1)")
+                ?: throw e
         }
     }
 
@@ -36,7 +37,8 @@ class KoDeclarationAssertForDeclarationListTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' has failed. Invalid files (1)") ?: throw e
+            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' has failed. Invalid files (1)")
+                ?: throw e
         }
     }
 
@@ -53,7 +55,7 @@ class KoDeclarationAssertForDeclarationListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assert' method."
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assert' method."
     }
 
     @Test
@@ -69,7 +71,7 @@ class KoDeclarationAssertForDeclarationListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
     }
 
     @Test
@@ -357,7 +359,11 @@ class KoDeclarationAssertForDeclarationListTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .properties(includeNested = true, includeLocal = true)
+                .classes()
+                .first()
+                .initBlocks
+                .first()
+                .localProperties
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -368,7 +374,11 @@ class KoDeclarationAssertForDeclarationListTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .properties(includeNested = true)
+                .classes()
+                .first()
+                .initBlocks
+                .first()
+                .localProperties
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -381,7 +391,11 @@ class KoDeclarationAssertForDeclarationListTest {
             getSnippetFile(
                 "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
             )
-                .properties(includeNested = true, includeLocal = true)
+                .classes()
+                .first()
+                .initBlocks
+                .first()
+                .localProperties
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -392,7 +406,11 @@ class KoDeclarationAssertForDeclarationListTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .properties(includeNested = true)
+                .classes()
+                .first()
+                .initBlocks
+                .first()
+                .localProperties
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -403,7 +421,11 @@ class KoDeclarationAssertForDeclarationListTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .properties(includeNested = true, includeLocal = true)
+                .classes()
+                .first()
+                .initBlocks
+                .first()
+                .localProperties
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -414,7 +436,11 @@ class KoDeclarationAssertForDeclarationListTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .properties(includeNested = true)
+                .classes()
+                .first()
+                .initBlocks
+                .first()
+                .localProperties
 
         // then
         sut.assert { it.name.endsWith("Text") }
