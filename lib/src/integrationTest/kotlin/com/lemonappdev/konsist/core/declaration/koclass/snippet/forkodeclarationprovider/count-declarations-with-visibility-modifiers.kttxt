@@ -1,0 +1,11 @@
+open class SampleTopLevelClass {
+    val sampleDefaultProperty = ""
+
+    public fun samplePublicFunction() {}
+
+    private class SamplePrivateClass
+
+    internal interface SampleInternalInterface
+
+    protected object SampleProtectedObject
+}

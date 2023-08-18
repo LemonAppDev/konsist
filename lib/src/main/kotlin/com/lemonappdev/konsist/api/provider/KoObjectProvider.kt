@@ -34,7 +34,7 @@ interface KoObjectProvider : KoBaseProvider {
      * @param includeNested Specifies whether to include nested objects in the count (optional, default is `false`).
      * @return The number of objects in the declaration.
      */
-    fun countObjects(includeNested: Boolean = false): Int
+    fun numObjects(includeNested: Boolean = false): Int
 
     /**
      * Gets the number of objects that satisfies the specified predicate present in the declaration.

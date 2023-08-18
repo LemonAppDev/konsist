@@ -18,7 +18,7 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
     ): Boolean =
         classes(includeNested, includeLocal).any { predicate(it) }
 
-    override fun countClasses(includeNested: Boolean, includeLocal: Boolean): Int =
+    override fun numClasses(includeNested: Boolean, includeLocal: Boolean): Int =
         classes(includeNested, includeLocal).size
 
     override fun countClasses(

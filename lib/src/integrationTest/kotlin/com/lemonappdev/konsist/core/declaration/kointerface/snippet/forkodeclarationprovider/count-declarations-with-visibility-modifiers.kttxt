@@ -1,0 +1,7 @@
+interface SampleTopLevelInterface {
+    val sampleDefaultProperty: String
+
+    public fun samplePublicFunction() {}
+
+    private class SamplePrivateClass
+}
