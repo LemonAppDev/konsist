@@ -13,27 +13,27 @@ fun <T : KoAnnotationProvider> List<T>.withAnnotations(): List<T> = filter { it.
 /**
  * List containing elements with all annotations.
  *
- * @param annotation The annotation to include.
- * @param annotations The annotations to include.
+ * @param name The annotation name to include.
+ * @param names The annotation name(s) to include.
  * @return A list containing elements with all the specified annotations.
  */
 fun <T : KoAnnotationProvider> List<T>.withAllAnnotations(
-    annotation: String,
-    vararg annotations: String,
+    name: String,
+    vararg names: String,
 ): List<T> = filter {
-    it.hasAnnotations(annotation, *annotations)
+    it.hasAnnotations(name, *names)
 }
 
 /**
  * List containing elements with some annotations.
  *
- * @param annotation The annotation to include.
- * @param annotations The annotations to include.
+ * @param name The annotation name to include.
+ * @param names The annotation name(s) to include.
  * @return A list containing elements with at least one of the specified annotations.
  */
-fun <T : KoAnnotationProvider> List<T>.withSomeAnnotations(annotation: String, vararg annotations: String): List<T> =
+fun <T : KoAnnotationProvider> List<T>.withSomeAnnotations(name: String, vararg names: String): List<T> =
     filter {
-        it.hasAnnotations(annotation) || annotations.any { annotation -> it.hasAnnotations(annotation) }
+        it.hasAnnotations(name) || names.any { annotation -> it.hasAnnotations(annotation) }
     }
 
 /**
@@ -46,30 +46,30 @@ fun <T : KoAnnotationProvider> List<T>.withoutAnnotations(): List<T> = filterNot
 /**
  * List containing elements without all the specified annotations.
  *
- * @param annotation The annotation to exclude.
- * @param annotations The annotations to exclude.
+ * @param name The annotation name to exclude.
+ * @param names The annotation name(s) to exclude.
  * @return A list containing elements without any of the specified annotations.
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotations(
-    annotation: String,
-    vararg annotations: String,
+    name: String,
+    vararg names: String,
 ): List<T> = filterNot {
-    it.hasAnnotations(annotation, *annotations)
+    it.hasAnnotations(name, *names)
 }
 
 /**
  * List containing elements without some annotations.
  *
- * @param annotation The annotation to exclude.
- * @param annotations The annotations to exclude.
+ * @param name The annotation name to exclude.
+ * @param names The annotation name(s) to exclude.
  * @return A list containing elements without at least one of the specified annotations.
  */
 fun <T : KoAnnotationProvider> List<T>.withoutSomeAnnotations(
-    annotation: String,
-    vararg annotations: String,
+    name: String,
+    vararg names: String,
 ): List<T> = filter {
-    !it.hasAnnotations(annotation) && if (annotations.isNotEmpty()) {
-        annotations.any { annotation -> !it.hasAnnotations(annotation) }
+    !it.hasAnnotations(name) && if (names.isNotEmpty()) {
+        names.any { annotation -> !it.hasAnnotations(annotation) }
     } else {
         true
     }
@@ -78,56 +78,56 @@ fun <T : KoAnnotationProvider> List<T>.withoutSomeAnnotations(
 /**
  * List containing elements with all annotations of type.
  *
- * @param annotation The Kotlin class representing annotation to include.
- * @param annotations The Kotlin classes representing annotations to include.
+ * @param kClass The Kotlin class representing annotation to include.
+ * @param kClasses The Kotlin classes representing annotations to include.
  * @return A list containing elements with all the specified annotations.
  */
 fun <T : KoAnnotationProvider> List<T>.withAllAnnotationsOf(
-    annotation: KClass<*>,
-    vararg annotations: KClass<*>,
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
 ): List<T> =
-    filter { it.hasAnnotationsOf(annotation, *annotations) }
+    filter { it.hasAnnotationsOf(kClass, *kClasses) }
 
 /**
  * List containing elements with some annotations of type.
  *
- * @param annotation The Kotlin class representing annotation to include.
- * @param annotations The Kotlin classes representing annotations to include.
+ * @param kClass The Kotlin class representing annotation to include.
+ * @param kClasses The Kotlin classes representing annotations to include.
  * @return A list containing elements with at least one of the specified the annotations.
  */
 fun <T : KoAnnotationProvider> List<T>.withSomeAnnotationsOf(
-    annotation: KClass<*>,
-    vararg annotations: KClass<*>,
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
 ): List<T> = filter {
-    it.hasAnnotationsOf(annotation) || annotations.any { annotation -> it.hasAnnotationsOf(annotation) }
+    it.hasAnnotationsOf(kClass) || kClasses.any { annotation -> it.hasAnnotationsOf(annotation) }
 }
 
 /**
  * List containing elements without specified annotations.
  *
- * @param annotation The Kotlin class representing annotation to exclude.
- * @param annotations The Kotlin classes representing annotations to exclude.
+ * @param kClass The Kotlin class representing annotation to exclude.
+ * @param kClasses The Kotlin classes representing annotations to exclude.
  * @return A list containing elements without any of the specified annotations.
  */
 fun <T : KoAnnotationProvider> List<T>.withoutAllAnnotationsOf(
-    annotation: KClass<*>,
-    vararg annotations: KClass<*>,
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
 ): List<T> =
-    filterNot { it.hasAnnotationsOf(annotation, *annotations) }
+    filterNot { it.hasAnnotationsOf(kClass, *kClasses) }
 
 /**
  * List containing elements without some annotations.
  *
- * @param annotation The Kotlin class representing annotation to exclude.
- * @param annotations The Kotlin classes representing annotations to exclude.
+ * @param kClass The Kotlin class representing annotation to exclude.
+ * @param kClasses The Kotlin classes representing annotations to exclude.
  * @return A list containing elements without at least one of the specified annotations.
  */
 fun <T : KoAnnotationProvider> List<T>.withoutSomeAnnotationsOf(
-    annotation: KClass<*>,
-    vararg annotations: KClass<*>,
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
 ): List<T> = filter {
-    !it.hasAnnotationsOf(annotation) && if (annotations.isNotEmpty()) {
-        annotations.any { annotation -> !it.hasAnnotationsOf(annotation) }
+    !it.hasAnnotationsOf(kClass) && if (kClasses.isNotEmpty()) {
+        kClasses.any { annotation -> !it.hasAnnotationsOf(annotation) }
     } else {
         true
     }

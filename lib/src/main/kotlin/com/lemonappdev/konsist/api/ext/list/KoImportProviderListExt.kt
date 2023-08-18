@@ -12,23 +12,23 @@ fun <T : KoImportProvider> List<T>.withImports(): List<T> = filter { it.hasImpor
 /**
  * List containing elements with all specified imports.
  *
- * @param import The import to include.
- * @param imports The import(s) to include.
+ * @param name The import name to include.
+ * @param names The import name(s) to include.
  * @return A list containing elements with the specified import(s).
  */
-fun <T : KoImportProvider> List<T>.withAllImports(import: String, vararg imports: String): List<T> = filter {
-    it.hasImports(import, *imports)
+fun <T : KoImportProvider> List<T>.withAllImports(name: String, vararg names: String): List<T> = filter {
+    it.hasImports(name, *names)
 }
 
 /**
  * List containing elements with some imports.
  *
- * @param import The import to include.
- * @param imports The imports to include.
+ * @param name The import name to include.
+ * @param names The import name(s) to include.
  * @return A list containing elements with at least one of the specified import(s).
  */
-fun <T : KoImportProvider> List<T>.withSomeImports(import: String, vararg imports: String): List<T> = filter {
-    it.hasImports(import) || imports.any { import -> it.hasImports(import) }
+fun <T : KoImportProvider> List<T>.withSomeImports(name: String, vararg names: String): List<T> = filter {
+    it.hasImports(name) || names.any { import -> it.hasImports(import) }
 }
 
 /**
@@ -41,24 +41,24 @@ fun <T : KoImportProvider> List<T>.withoutImports(): List<T> = filterNot { it.ha
 /**
  * List containing elements without all specified imports.
  *
- * @param import The import to exclude.
- * @param imports The import(s) to exclude.
+ * @param name The import name to exclude.
+ * @param names The import name(s) to exclude.
  * @return A list containing elements without specified import(s).
  */
-fun <T : KoImportProvider> List<T>.withoutAllImports(import: String, vararg imports: String): List<T> = filterNot {
-    it.hasImports(import, *imports)
+fun <T : KoImportProvider> List<T>.withoutAllImports(name: String, vararg names: String): List<T> = filterNot {
+    it.hasImports(name, *names)
 }
 
 /**
  * List containing elements without some imports.
  *
- * @param import The import to exclude.
- * @param imports The imports to exclude.
+ * @param name The import name to exclude.
+ * @param names The import name(s) to exclude.
  * @return A list containing elements without at least one of the specified import(s).
  */
-fun <T : KoImportProvider> List<T>.withoutSomeImports(import: String, vararg imports: String): List<T> = filter {
-    !it.hasImports(import) && if (imports.isNotEmpty()) {
-        imports.any { import -> !it.hasImports(import) }
+fun <T : KoImportProvider> List<T>.withoutSomeImports(name: String, vararg names: String): List<T> = filter {
+    !it.hasImports(name) && if (names.isNotEmpty()) {
+        names.any { import -> !it.hasImports(import) }
     } else {
         true
     }

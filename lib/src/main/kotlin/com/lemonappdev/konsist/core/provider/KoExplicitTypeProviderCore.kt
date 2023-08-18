@@ -19,8 +19,8 @@ internal interface KoExplicitTypeProviderCore :
         .children
         .filterIsInstance<KtTypeReference>()
 
-    override fun hasExplicitType(type: String?): Boolean = when (type) {
+    override fun hasExplicitType(name: String?): Boolean = when (name) {
         null -> this.explicitType != null
-        else -> this.explicitType?.name == type
+        else -> this.explicitType?.name == name
     }
 }
