@@ -5,11 +5,11 @@ import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 /**
  * An interface representing a Kotlin declaration that provides access to the explicit type information.
  */
-interface KoExplicitTypeProvider : KoBaseProvider {
+interface KoPropertyTypeProvider : KoBaseProvider {
     /**
      * Declaration explicit type.
      */
-    val explicitType: KoTypeDeclaration?
+    val type: KoTypeDeclaration?
 
     /**
      * Whatever declaration has an explicit type.
@@ -17,5 +17,5 @@ interface KoExplicitTypeProvider : KoBaseProvider {
      * @param name the type name to check for (optional).
      * @return `true` if the declaration has the specified type (or any type if [name] is `null`), `false` otherwise.
      */
-    fun hasExplicitType(name: String? = null): Boolean
+    fun hasType(name: String? = null): Boolean
 }

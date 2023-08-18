@@ -11,7 +11,7 @@ class KoTypeDeclarationForKoContainingFileProviderTest {
         val sut = getSnippetFile("type-containing-file")
             .properties()
             .first()
-            .explicitType
+            .type
 
         // then
         sut

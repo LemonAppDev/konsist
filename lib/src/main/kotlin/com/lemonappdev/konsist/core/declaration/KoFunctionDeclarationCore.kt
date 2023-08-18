@@ -10,7 +10,7 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
-import com.lemonappdev.konsist.core.provider.KoExplicitReturnTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoReturnTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoImplementationProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalClassProviderCore
@@ -58,7 +58,7 @@ internal class KoFunctionDeclarationCore private constructor(
     KoAnnotationProviderCore,
     KoContainingFileProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
-    KoExplicitReturnTypeProviderCore,
+    KoReturnTypeProviderCore,
     KoImplementationProviderCore,
     KoKDocProviderCore,
     KoLocalClassProviderCore,

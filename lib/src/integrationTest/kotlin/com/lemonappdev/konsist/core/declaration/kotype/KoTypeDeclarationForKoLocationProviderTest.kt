@@ -12,7 +12,7 @@ class KoTypeDeclarationForKoLocationProviderTest {
         val sut = getSnippetFile("type-location-with-single-digit")
             .properties()
             .first()
-            .explicitType
+            .type
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:1:21"
@@ -24,7 +24,7 @@ class KoTypeDeclarationForKoLocationProviderTest {
         val sut = getSnippetFile("type-location-with-double-digit")
             .properties(includeNested = true)
             .first()
-            .explicitType
+            .type
 
         // then
         sut?.location shouldBeEqualTo "${sut?.path}:10:57"
@@ -36,13 +36,13 @@ class KoTypeDeclarationForKoLocationProviderTest {
         val projectPath = getSnippetFile("type-location-with-text")
             .properties()
             .first()
-            .explicitType
+            .type
             ?.projectPath
 
         val sut = getSnippetFile("type-location-with-text")
             .properties()
             .first()
-            .explicitType
+            .type
 
         // then
         val declaration = "Declaration:\nString"

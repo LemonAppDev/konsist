@@ -12,7 +12,7 @@ class KoTypeDeclarationForKoPathProviderTest {
         val sut = getSnippetFile("type-file-path")
             .properties()
             .first()
-            .explicitType
+            .type
 
         // then
         assertSoftly(sut?.path) {
@@ -27,7 +27,7 @@ class KoTypeDeclarationForKoPathProviderTest {
         val sut = getSnippetFile("type-project-file-path")
             .properties()
             .first()
-            .explicitType
+            .type
 
         // then
         sut
@@ -44,7 +44,7 @@ class KoTypeDeclarationForKoPathProviderTest {
         val sut = getSnippetFile("type-reside-in-file-path")
             .properties()
             .first()
-            .explicitType
+            .type
 
         // then
         assertSoftly(sut) {
@@ -61,7 +61,7 @@ class KoTypeDeclarationForKoPathProviderTest {
         val sut = getSnippetFile("type-reside-in-project-file-path")
             .properties()
             .first()
-            .explicitType
+            .type
 
         // then
         assertSoftly(sut) {

@@ -11,7 +11,7 @@ class KoTypeDeclarationTest {
         val sut = getSnippetFile("type-to-string")
             .properties()
             .first()
-            .explicitType
+            .type
 
         // then
         sut.toString() shouldBeEqualTo sut?.locationWithText
