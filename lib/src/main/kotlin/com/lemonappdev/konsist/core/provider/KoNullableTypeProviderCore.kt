@@ -1,9 +1,9 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.provider.KoNullableProvider
+import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
 import org.jetbrains.kotlin.psi.KtTypeReference
 
-internal interface KoNullableProviderCore : KoNullableProvider, KoBaseProviderCore {
+internal interface KoNullableTypeProviderCore : KoNullableTypeProvider, KoBaseProviderCore {
     val ktTypeReference: KtTypeReference
 
     override val isNullable: Boolean
