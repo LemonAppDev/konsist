@@ -6,41 +6,41 @@ import kotlin.reflect.KClass
 /**
  * List containing elements with receiver type.
  *
- * @param types The receiver type(s) to include.
- * @return A list containing elements with the specified receiver type(s) (or any receiver type if [types] is empty).
+ * @param names The receiver type name(s) to include.
+ * @return A list containing elements with the specified receiver type(s) (or any receiver type if [names] is empty).
  */
-fun <T : KoReceiverTypeProvider> List<T>.withReceiverType(vararg types: String): List<T> = filter {
+fun <T : KoReceiverTypeProvider> List<T>.withReceiverType(vararg names: String): List<T> = filter {
     when {
-        types.isEmpty() -> it.hasReceiverType()
-        else -> types.any { type -> it.hasReceiverType(type) }
+        names.isEmpty() -> it.hasReceiverType()
+        else -> names.any { type -> it.hasReceiverType(type) }
     }
 }
 
 /**
  * List containing elements without receiver type.
  *
- * @param types The receiver type(s) to exclude.
- * @return A list containing elements without specified receiver type(s) (or none receiver type if [types] is empty).
+ * @param names The receiver type name(s) to exclude.
+ * @return A list containing elements without specified receiver type(s) (or none receiver type if [names] is empty).
  */
-fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(vararg types: String): List<T> = filter {
+fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(vararg names: String): List<T> = filter {
     when {
-        types.isEmpty() -> !it.hasReceiverType()
-        else -> types.none { type -> it.hasReceiverType(type) }
+        names.isEmpty() -> !it.hasReceiverType()
+        else -> names.none { type -> it.hasReceiverType(type) }
     }
 }
 
 /**
  * List containing elements with receiver type.
  *
- * @param type The Kotlin class representing the receiver type to include.
- * @param types The Kotlin class(es) representing the receiver type(s) to include.
+ * @param kClass The Kotlin class representing the receiver type to include.
+ * @param kClasses The Kotlin class(es) representing the receiver type(s) to include.
  * @return A list containing elements with the receiver type of the specified Kotlin class(es).
  */
-fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
+fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.hasReceiverType(type.simpleName) ||
-            if (types.isNotEmpty()) {
-                types.any { kClass -> it.hasReceiverType(kClass.simpleName) }
+        it.hasReceiverType(kClass.simpleName) ||
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass -> it.hasReceiverType(kClass.simpleName) }
             } else {
                 false
             }
@@ -49,15 +49,15 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(type: KClass<*>, var
 /**
  * List containing elements without receiver type.
  *
- * @param type The Kotlin class representing the receiver type to exclude.
- * @param types The Kotlin class(es) representing the receiver type(s) to exclude.
+ * @param kClass The Kotlin class representing the receiver type to exclude.
+ * @param kClasses The Kotlin class(es) representing the receiver type(s) to exclude.
  * @return A list containing elements without receiver type of the specified Kotlin class(es).
  */
-fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(type: KClass<*>, vararg types: KClass<*>): List<T> =
+fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        !it.hasReceiverType(type.simpleName) &&
-            if (types.isNotEmpty()) {
-                types.none { kClass -> it.hasReceiverType(kClass.simpleName) }
+        !it.hasReceiverType(kClass.simpleName) &&
+            if (kClasses.isNotEmpty()) {
+                kClasses.none { kClass -> it.hasReceiverType(kClass.simpleName) }
             } else {
                 true
             }
