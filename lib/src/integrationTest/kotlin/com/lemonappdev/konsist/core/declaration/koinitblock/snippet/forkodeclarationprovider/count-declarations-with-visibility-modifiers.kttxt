@@ -1,7 +1,0 @@
-class SampleTopLevelClass {
-    init {
-        val sampleLocalProperty = ""
-
-        class SampleLocalClass
-    }
-}

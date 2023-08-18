@@ -1,5 +1,5 @@
 class SampleClass {
     init {
-        val sampleProperty = ""
+        fun sampleLocalFunction() { }
     }
 }

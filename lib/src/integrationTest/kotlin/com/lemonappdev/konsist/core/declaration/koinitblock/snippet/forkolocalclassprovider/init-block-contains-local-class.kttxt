@@ -1,5 +1,5 @@
 class SampleClass {
     init {
-        println("")
+        class SampleLocalClass
     }
 }

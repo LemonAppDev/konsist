@@ -312,7 +312,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assert { it.containsLocalProperty("otherProperty") }
     }
 
     @Test
@@ -325,7 +325,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assert { it.containsLocalProperty("otherProperty") }
     }
 
     @Test
@@ -338,7 +338,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assert { it.containsLocalProperty("otherProperty") }
     }
 
     @Test
@@ -351,7 +351,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assert { it.containsLocalProperty("otherProperty") }
     }
 
     @Test
@@ -359,7 +359,11 @@ class KoDeclarationAssertForDeclarationListTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .properties(includeNested = true, includeLocal = true)
+                .classes()
+                .first()
+                .initBlocks
+                .first()
+                .localProperties
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -370,7 +374,11 @@ class KoDeclarationAssertForDeclarationListTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .properties(includeNested = true)
+                .classes()
+                .first()
+                .initBlocks
+                .first()
+                .localProperties
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -383,7 +391,11 @@ class KoDeclarationAssertForDeclarationListTest {
             getSnippetFile(
                 "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
             )
-                .properties(includeNested = true, includeLocal = true)
+                .classes()
+                .first()
+                .initBlocks
+                .first()
+                .localProperties
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -394,7 +406,11 @@ class KoDeclarationAssertForDeclarationListTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .properties(includeNested = true)
+                .classes()
+                .first()
+                .initBlocks
+                .first()
+                .localProperties
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -405,7 +421,11 @@ class KoDeclarationAssertForDeclarationListTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .properties(includeNested = true, includeLocal = true)
+                .classes()
+                .first()
+                .initBlocks
+                .first()
+                .localProperties
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -416,7 +436,11 @@ class KoDeclarationAssertForDeclarationListTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .properties(includeNested = true)
+                .classes()
+                .first()
+                .initBlocks
+                .first()
+                .localProperties
 
         // then
         sut.assert { it.name.endsWith("Text") }
