@@ -7,11 +7,11 @@ import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
  *
  * @return A list containing elements with the generic types.
  */
-fun <T : KoGenericTypeProvider> List<T>.withGenericType(): List<KoGenericTypeProvider> = filter { it.isGenericType }
+fun <T : KoGenericTypeProvider> List<T>.withGenericType(): List<T> = filter { it.isGenericType }
 
 /**
  * List containing elements without generic type.
  *
  * @return A list containing elements without the generic types.
  */
-fun <T : KoGenericTypeProvider> List<T>.withoutGenericType(): List<KoGenericTypeProvider> = filterNot { it.isGenericType }
+fun <T : KoGenericTypeProvider> List<T>.withoutGenericType(): List<T> = filterNot { it.isGenericType }

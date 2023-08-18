@@ -5,11 +5,11 @@ import com.lemonappdev.konsist.api.provider.KoExplicitReturnTypeProvider
 import com.lemonappdev.konsist.core.util.ReceiverUtil
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtTypeReference
+import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 
 internal interface KoExplicitReturnTypeProviderCore :
     KoExplicitReturnTypeProvider,
     KoContainingDeclarationProviderCore,
-    KoExtensionProviderCore,
     KoBaseProviderCore {
     val ktFunction: KtFunction
 
@@ -18,7 +18,7 @@ internal interface KoExplicitReturnTypeProviderCore :
         .filterIsInstance<KtTypeReference>()
 
     override val explicitReturnType: KoTypeDeclaration?
-        get() = ReceiverUtil.getType(getTypeReferences(), isExtension, this)
+        get() = ReceiverUtil.getType(getTypeReferences(), ktFunction.isExtensionDeclaration(), this)
 
     override val hasExplicitReturnType: Boolean
         get() = ktFunction.hasDeclaredReturnType()
