@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.provider
 import com.lemonappdev.konsist.api.declaration.KoParentInterfaceDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentInterfaceProvider
 import com.lemonappdev.konsist.core.declaration.KoParentInterfaceDeclarationCore
-import org.jetbrains.kotlin.psi.KtClass
+import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
 
@@ -11,15 +11,15 @@ internal interface KoParentInterfaceProviderCore :
     KoContainingDeclarationProviderCore,
     KoParentInterfaceProvider,
     KoBaseProviderCore {
-    val ktClass: KtClass
+    val ktClassOrObject: KtClassOrObject
     override val parentInterfaces: List<KoParentInterfaceDeclaration>
         get() {
-            val interfaces = ktClass
+            val interfaces = ktClassOrObject
                 .getSuperTypeList()
                 ?.children
                 ?.filterIsInstance<KtSuperTypeEntry>() ?: emptyList()
 
-            val delegations = ktClass
+            val delegations = ktClassOrObject
                 .getSuperTypeList()
                 ?.children
                 ?.filterIsInstance<KtDelegatedSuperTypeEntry>() ?: emptyList()
