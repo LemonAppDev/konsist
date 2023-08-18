@@ -15,7 +15,6 @@ import com.lemonappdev.konsist.core.provider.KoLocalPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
-import org.jetbrains.kotlin.ir.types.impl.IrErrorClassImpl.declarations
 import org.jetbrains.kotlin.psi.KtAnonymousInitializer
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtDeclaration
