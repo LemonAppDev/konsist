@@ -128,10 +128,10 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            countDeclarations() shouldBeEqualTo 2
-            countDeclarations(includeNested = true) shouldBeEqualTo 3
-            countDeclarations(includeLocal = true) shouldBeEqualTo 3
-            countDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
+            numDeclarations() shouldBeEqualTo 2
+            numDeclarations(includeNested = true) shouldBeEqualTo 3
+            numDeclarations(includeLocal = true) shouldBeEqualTo 3
+            numDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
             countDeclarations {
                 (it as? KoOpenModifierProvider)?.hasOpenModifier ?: false
             } shouldBeEqualTo 1
@@ -141,6 +141,26 @@ class KoInitBlockDeclarationForKoDeclarationProviderTest {
             countDeclarations {
                 (it as? KoVisibilityModifierProvider)?.hasInternalModifier ?: false
             } shouldBeEqualTo 0
+        }
+    }
+
+    @Test
+    fun `count-declarations-with-visibility-modifiers`() {
+        // given
+        val sut = getSnippetFile("count-declarations-with-visibility-modifiers")
+            .classes()
+            .first()
+            .initBlocks
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            numDeclarations() shouldBeEqualTo 2
+            numPublic() shouldBeEqualTo 0
+            numPublicOrDefault() shouldBeEqualTo 0
+            numPrivate() shouldBeEqualTo 0
+            numProtected() shouldBeEqualTo 0
+            numInternal() shouldBeEqualTo 0
         }
     }
 

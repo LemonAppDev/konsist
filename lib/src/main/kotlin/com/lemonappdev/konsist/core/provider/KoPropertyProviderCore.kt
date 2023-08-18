@@ -18,7 +18,7 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
     ): Boolean =
         properties(includeNested, includeLocal).any { predicate(it) }
 
-    override fun countProperties(includeNested: Boolean, includeLocal: Boolean): Int =
+    override fun numProperties(includeNested: Boolean, includeLocal: Boolean): Int =
         properties(includeNested, includeLocal).size
 
     override fun countProperties(

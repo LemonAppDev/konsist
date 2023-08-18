@@ -90,10 +90,10 @@ class KoClassDeclarationForKoPropertyProviderTest {
 
         // then
         assertSoftly(sut) {
-            countProperties(includeNested = true, includeLocal = true) shouldBeEqualTo 3
-            countProperties(includeNested = true, includeLocal = false) shouldBeEqualTo 2
-            countProperties(includeNested = false, includeLocal = true) shouldBeEqualTo 2
-            countProperties(includeNested = false, includeLocal = false) shouldBeEqualTo 1
+            numProperties(includeNested = true, includeLocal = true) shouldBeEqualTo 3
+            numProperties(includeNested = true, includeLocal = false) shouldBeEqualTo 2
+            numProperties(includeNested = false, includeLocal = true) shouldBeEqualTo 2
+            numProperties(includeNested = false, includeLocal = false) shouldBeEqualTo 1
             countProperties { it.hasInternalModifier } shouldBeEqualTo 1
             countProperties(includeNested = true, includeLocal = true) { it.hasInternalModifier } shouldBeEqualTo 2
             countProperties { it.name == "sampleProperty" && it.hasPrivateModifier } shouldBeEqualTo 0

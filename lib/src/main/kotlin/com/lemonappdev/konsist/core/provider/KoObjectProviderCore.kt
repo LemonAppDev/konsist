@@ -14,7 +14,7 @@ internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProvide
         predicate: (KoObjectDeclaration) -> Boolean,
     ): Boolean = objects(includeNested).any { predicate(it) }
 
-    override fun countObjects(includeNested: Boolean): Int = objects(includeNested).size
+    override fun numObjects(includeNested: Boolean): Int = objects(includeNested).size
 
     override fun countObjects(
         includeNested: Boolean,

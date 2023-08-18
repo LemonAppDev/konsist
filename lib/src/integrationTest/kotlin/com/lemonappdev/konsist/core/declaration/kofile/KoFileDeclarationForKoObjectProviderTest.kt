@@ -59,8 +59,8 @@ class KoFileDeclarationForKoObjectProviderTest {
 
         // then
         assertSoftly(sut) {
-            countObjects(includeNested = true) shouldBeEqualTo 2
-            countObjects(includeNested = false) shouldBeEqualTo 1
+            numObjects(includeNested = true) shouldBeEqualTo 2
+            numObjects(includeNested = false) shouldBeEqualTo 1
             countObjects { it.hasPrivateModifier } shouldBeEqualTo 1
             countObjects(includeNested = true) { it.hasPrivateModifier } shouldBeEqualTo 2
             countObjects { it.hasInternalModifier } shouldBeEqualTo 0
