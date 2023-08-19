@@ -6,8 +6,6 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.ext.list.withAllAnnotationsOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParentClass
-import com.lemonappdev.konsist.api.ext.provider.declarationsOf
-import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.api.verify.assert
 import org.springframework.stereotype.Repository
 
@@ -40,11 +38,13 @@ class CleanArchitectureSnippets {
             .classes()
             .withNameEndingWith("UseCase")
             .assert {
-                it.containsFunction { function ->
+                val hasSingleInvokeOperatorMethod = it.containsFunction { function ->
                     function.name == "invoke" && function.isPublicOrDefault && function.hasOperatorModifier
-                } && it
-                    .declarationsOf<KoVisibilityModifierProvider>()
-                    .count { decl -> decl.hasPublicModifier } == 1
+                }
+
+                val hasSinglePublicDeclaration = it.numPublic() == 1
+
+                hasSingleInvokeOperatorMethod && hasSinglePublicDeclaration
             }
     }
 
