@@ -7,7 +7,7 @@
 
 Konsist is a library that guards the consistency of [Kotlin](https://kotlinlang.org/) projects by promoting the
 standardization of the Kotlin codebase. It enforces coding conventions and project architecture. Konsist
-tests are written in Kotlin and can be easily integrated with popular testing frameworks such as
+tests are written in Kotlin and can be easily integrated with popular testing frameworks such as 
 [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/).
 
 Konsist API reflects the structure of Kotlin code. Konsist guards are written in form of unit tests:
