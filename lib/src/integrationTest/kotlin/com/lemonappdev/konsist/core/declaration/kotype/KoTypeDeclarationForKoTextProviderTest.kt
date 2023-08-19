@@ -11,7 +11,7 @@ class KoTypeDeclarationForKoTextProviderTest {
         val sut = getSnippetFile("type-text")
             .properties()
             .first()
-            .explicitType
+            .type
 
         // then
         sut
