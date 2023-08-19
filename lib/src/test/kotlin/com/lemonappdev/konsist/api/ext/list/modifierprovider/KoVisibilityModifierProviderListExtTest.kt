@@ -48,10 +48,10 @@ class KoVisibilityModifierProviderListExtTest {
     fun `withPublicOrDefaultModifier() returns declaration with public or default modifier`() {
         // given
         val declaration1: KoVisibilityModifierProvider = mockk {
-            every { isPublicOrDefault } returns true
+            every { hasPublicOrDefaultModifier } returns true
         }
         val declaration2: KoVisibilityModifierProvider = mockk {
-            every { isPublicOrDefault } returns false
+            every { hasPublicOrDefaultModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -66,10 +66,10 @@ class KoVisibilityModifierProviderListExtTest {
     fun `withoutPublicOrDefaultModifier() returns declaration without public or default modifier`() {
         // given
         val declaration1: KoVisibilityModifierProvider = mockk {
-            every { isPublicOrDefault } returns true
+            every { hasPublicOrDefaultModifier } returns true
         }
         val declaration2: KoVisibilityModifierProvider = mockk {
-            every { isPublicOrDefault } returns false
+            every { hasPublicOrDefaultModifier } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
