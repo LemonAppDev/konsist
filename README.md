@@ -52,7 +52,7 @@ fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() 
 
 # Getting Started
 
-See [Konsist documentation](http://docs.konsist.lemonappdev.com/) for getting started guide and 
+See [Konsist documentation](http://docs.konsist.lemonappdev.com/) for quick start guide and 
 [more examples](https://docs.konsist.lemonappdev.com/inspiration/snippets).
 
 ## Contributing
