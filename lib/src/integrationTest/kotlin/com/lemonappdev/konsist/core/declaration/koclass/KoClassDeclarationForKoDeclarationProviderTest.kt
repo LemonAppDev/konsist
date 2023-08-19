@@ -166,11 +166,11 @@ class KoClassDeclarationForKoDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             numDeclarations() shouldBeEqualTo 5
-            numPublic() shouldBeEqualTo 1
-            numPublicOrDefault() shouldBeEqualTo 2
-            numPrivate() shouldBeEqualTo 1
-            numProtected() shouldBeEqualTo 1
-            numInternal() shouldBeEqualTo 1
+            numPublicDeclarations() shouldBeEqualTo 1
+            numPublicOrDefaultDeclarations() shouldBeEqualTo 2
+            numPrivateDeclarations() shouldBeEqualTo 1
+            numProtectedDeclarations() shouldBeEqualTo 1
+            numInternalDeclarations() shouldBeEqualTo 1
         }
     }
 

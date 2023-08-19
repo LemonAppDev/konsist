@@ -62,7 +62,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `false`).
      * @return The number of declarations in the declaration.
      */
-    fun numPublic(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+    fun numPublicDeclarations(includeNested: Boolean = false, includeLocal: Boolean = false): Int
 
     /**
      * Gets the number of declarations with public or default visibility modifier present in the declaration.
@@ -71,7 +71,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `false`).
      * @return The number of declarations in the declaration.
      */
-    fun numPublicOrDefault(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+    fun numPublicOrDefaultDeclarations(includeNested: Boolean = false, includeLocal: Boolean = false): Int
 
     /**
      * Gets the number of declarations with private visibility modifier present in the declaration.
@@ -80,7 +80,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `false`).
      * @return The number of declarations in the declaration.
      */
-    fun numPrivate(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+    fun numPrivateDeclarations(includeNested: Boolean = false, includeLocal: Boolean = false): Int
 
     /**
      * Gets the number of declarations with protected visibility modifier present in the declaration.
@@ -89,7 +89,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `false`).
      * @return The number of declarations in the declaration.
      */
-    fun numProtected(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+    fun numProtectedDeclarations(includeNested: Boolean = false, includeLocal: Boolean = false): Int
 
     /**
      * Gets the number of declarations with internal visibility modifier present in the declaration.
@@ -98,5 +98,5 @@ interface KoDeclarationProvider : KoBaseProvider {
      * @param includeLocal Specifies whether to include local declarations in the count (optional, default is `false`).
      * @return The number of declarations in the declaration.
      */
-    fun numInternal(includeNested: Boolean = false, includeLocal: Boolean = false): Int
+    fun numInternalDeclarations(includeNested: Boolean = false, includeLocal: Boolean = false): Int
 }
