@@ -7,11 +7,51 @@
 
 Konsist is a library that guards the consistency of [Kotlin](https://kotlinlang.org/) projects by promoting the
 standardization of the Kotlin codebase. It enforces coding conventions and project architecture. Konsist
-tests are written in Kotlin and can be easily integrated with popular testing frameworks such as 
+tests are written in Kotlin and can be easily integrated with popular testing frameworks such as
 [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/).
 
-See [documentation](http://docs.konsist.lemonappdev.com/) for getting started guide, 
-[Konsist test snippets](https://docs.konsist.lemonappdev.com/inspiration/snippets) and more details.
+Konsist API reflects the structure of Kotlin code. Konsist guards are written in form of unit tests:
+
+# Examples
+
+## General Kotlin Check
+
+```kotlin
+@Test
+fun `classes with 'UseCase' suffix should reside in 'usecase' package`() {
+    Konsist.scopeFromProject()
+        .classes()
+        .withNameEndingWith("UseCase")
+        .assert { it.resideInPackage("..usecase..") }
+}
+```
+
+## Android Specific Check
+
+```kotlin
+fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
+    Konsist.scopeFromProject()
+        .classes()
+        .withParentClassOf(ViewModel::class)
+        .assert { it.name.endsWith("ViewModel") }
+}
+```
+
+## Spring Specific Check
+
+```kotlin
+@Test
+fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() {
+    Konsist
+        .scopeFromProject()
+        .interfaces()
+        .withAllAnnotationsOf(Repository::class)
+        .assert { it.hasNameEndingWith("Repository") }
+}
+```
+
+See [Konsist documentation](http://docs.konsist.lemonappdev.com/) for getting started guide and 
+[more examples](https://docs.konsist.lemonappdev.com/inspiration/snippets).
 
 ## Contributing
 
