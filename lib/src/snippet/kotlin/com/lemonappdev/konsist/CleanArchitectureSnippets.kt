@@ -38,9 +38,13 @@ class CleanArchitectureSnippets {
             .classes()
             .withNameEndingWith("UseCase")
             .assert {
-                it.numDeclarations() == 1 && it.containsFunction { function ->
+                val hasSingleInvokeOperatorMethod = it.containsFunction { function ->
                     function.name == "invoke" && function.isPublicOrDefault && function.hasOperatorModifier
                 }
+
+                val hasSinglePublicDeclaration = it.numPublic() == 1
+
+                hasSingleInvokeOperatorMethod && hasSinglePublicDeclaration
             }
     }
 
