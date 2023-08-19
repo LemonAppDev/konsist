@@ -21,14 +21,14 @@ fun <T : KoVisibilityModifierProvider> List<T>.withoutPublicModifier(): List<T> 
  *
  * @return A list containing elements with the `public` or no visibility modifier..
  */
-fun <T : KoVisibilityModifierProvider> List<T>.withPublicOrDefaultModifier(): List<T> = filter { it.isPublicOrDefault }
+fun <T : KoVisibilityModifierProvider> List<T>.withPublicOrDefaultModifier(): List<T> = filter { it.hasPublicOrDefaultModifier }
 
 /**
  * List containing elements without `public` or no visibility modifier.
  *
  * @return A list containing elements without the `public` or no visibility modifier..
  */
-fun <T : KoVisibilityModifierProvider> List<T>.withoutPublicOrDefaultModifier(): List<T> = filterNot { it.isPublicOrDefault }
+fun <T : KoVisibilityModifierProvider> List<T>.withoutPublicOrDefaultModifier(): List<T> = filterNot { it.hasPublicOrDefaultModifier }
 
 /**
  * List containing elements with the `private` modifier.

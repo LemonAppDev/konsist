@@ -14,7 +14,7 @@ interface KoVisibilityModifierProvider : KoBaseProvider, KoModifierProvider {
     /**
      * Whether the declaration has public or no visibility modifier.
      */
-    val isPublicOrDefault: Boolean
+    val hasPublicOrDefaultModifier: Boolean
 
     /**
      * Whether the declaration has private modifier.

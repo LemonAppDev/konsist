@@ -31,7 +31,7 @@ internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProv
     override fun numPublicOrDefaultDeclarations(includeNested: Boolean, includeLocal: Boolean): Int =
         declarations(includeNested, includeLocal)
             .filterIsInstance<KoVisibilityModifierProvider>()
-            .count { it.isPublicOrDefault }
+            .count { it.hasPublicOrDefaultModifier }
 
     override fun numPrivateDeclarations(includeNested: Boolean, includeLocal: Boolean): Int =
         declarations(includeNested, includeLocal)

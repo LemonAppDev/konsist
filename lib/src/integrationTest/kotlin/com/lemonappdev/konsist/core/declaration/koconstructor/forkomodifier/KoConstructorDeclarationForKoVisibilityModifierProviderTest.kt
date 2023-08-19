@@ -18,7 +18,7 @@ class KoConstructorDeclarationForKoVisibilityModifierProviderTest {
         // then
         assertSoftly(sut) {
             hasPublicModifier shouldBeEqualTo false
-            isPublicOrDefault shouldBeEqualTo true
+            hasPublicOrDefaultModifier shouldBeEqualTo true
             hasPrivateModifier shouldBeEqualTo false
             hasProtectedModifier shouldBeEqualTo false
             hasInternalModifier shouldBeEqualTo false
@@ -49,7 +49,7 @@ class KoConstructorDeclarationForKoVisibilityModifierProviderTest {
 
         // then
         assertSoftly(sut) {
-            isPublicOrDefault shouldBeEqualTo true
+            hasPublicOrDefaultModifier shouldBeEqualTo true
             hasPublicModifier shouldBeEqualTo false
         }
     }
