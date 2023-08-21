@@ -43,11 +43,17 @@ class DeclarationKonsistTest {
     }
 
     @Test
-    fun `none function2 return type has the 'Impl' suffix`() {
+    fun `includeNested parameter is always before includeLocal parameter`() {
         declarationPackageScope
-            .classes(includeNested = true)
-            .first()
-            .name
+            .functions(includeNested = true, includeLocal = true)
+            .assert {
+                val includeNestedParameter =
+                    it.parameters.indexOfFirst { parameter -> parameter.name == "includeNested" }
+                val includeLocalParameter =
+                    it.parameters.indexOfFirst { parameter -> parameter.name == "includeLocal" }
+
+                includeNestedParameter <= includeLocalParameter || (includeNestedParameter != -1 && includeLocalParameter == -1)
+            }
     }
 
     companion object {
