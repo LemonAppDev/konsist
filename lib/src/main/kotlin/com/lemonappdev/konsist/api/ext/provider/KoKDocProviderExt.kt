@@ -15,8 +15,8 @@ import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
  * @return `true` if the declaration has a valid KDoc with the RETURN tag, `false` otherwise.
  */
 fun <T> T.hasValidReturnTypeKDoc(): Boolean
-        where T : KoReturnTypeProvider,
-              T : KoKDocProvider = if (returnType != null && returnType?.name != "Unit") {
+    where T : KoReturnTypeProvider,
+          T : KoKDocProvider = if (returnType != null && returnType?.name != "Unit") {
     kDoc?.hasTags(KoKDocTag.RETURN) == true
 } else {
     true
@@ -28,8 +28,8 @@ fun <T> T.hasValidReturnTypeKDoc(): Boolean
  * @return `true` if the declaration has a valid KDoc with the RECEIVER tag, `false` otherwise.
  */
 fun <T> T.hasValidReceiverTypeKDoc(): Boolean
-        where T : KoReceiverTypeProvider,
-              T : KoKDocProvider = if (receiverType != null) {
+    where T : KoReceiverTypeProvider,
+          T : KoKDocProvider = if (receiverType != null) {
     kDoc?.hasTags(KoKDocTag.RECEIVER) == true
 } else {
     true
@@ -41,8 +41,8 @@ fun <T> T.hasValidReceiverTypeKDoc(): Boolean
  * @return `true` if the declaration has a valid KDoc with the PARAM tag, `false` otherwise.
  */
 fun <T> T.hasValidParameterKDoc(): Boolean
-        where T : KoParametersProvider,
-              T : KoKDocProvider = if (parameters.isNotEmpty()) {
+    where T : KoParametersProvider,
+          T : KoKDocProvider = if (parameters.isNotEmpty()) {
     parameters.count() == kDoc?.paramTags?.count() && parameters.map { it.name } == kDoc?.paramTags?.map { it.value }
 } else {
     true
@@ -54,14 +54,14 @@ fun <T> T.hasValidParameterKDoc(): Boolean
  * @return `true` if the declaration has a valid KDoc with the PARAM tag, `false` otherwise.
  */
 fun <T> T.hasValidConstructorParameterKDoc(): Boolean
-        where T : KoConstructorProvider,
-              T : KoPrimaryConstructorProvider,
-              T : KoSecondaryConstructorsProvider,
-              T : KoKDocProvider = if (constructors.isNotEmpty()) {
+    where T : KoConstructorProvider,
+          T : KoPrimaryConstructorProvider,
+          T : KoSecondaryConstructorsProvider,
+          T : KoKDocProvider = if (constructors.isNotEmpty()) {
     val parameters = primaryConstructor?.parameters
     parameters?.count() == kDoc?.paramTags?.count() &&
-            parameters?.map { it.name } == kDoc?.paramTags?.map { it.value } &&
-            secondaryConstructors.all { it.hasValidParameterKDoc() }
+        parameters?.map { it.name } == kDoc?.paramTags?.map { it.value } &&
+        secondaryConstructors.all { it.hasValidParameterKDoc() }
 } else {
     true
 }

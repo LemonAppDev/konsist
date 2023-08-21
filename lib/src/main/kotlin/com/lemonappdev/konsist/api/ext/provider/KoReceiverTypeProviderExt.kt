@@ -1,7 +1,5 @@
 package com.lemonappdev.konsist.api.ext.provider
 
-import com.lemonappdev.konsist.api.KoKDocTag
-import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 
 /**

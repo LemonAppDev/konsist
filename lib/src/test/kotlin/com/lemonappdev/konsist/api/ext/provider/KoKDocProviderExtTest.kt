@@ -332,10 +332,10 @@ class KoKDocProviderExtTest {
             every { name } returns "value2"
         }
         val primaryConstructorDeclaration: KoPrimaryConstructorDeclaration = mockk {
-            every { parameters } returns  listOf(parameter1, parameter2)
+            every { parameters } returns listOf(parameter1, parameter2)
         }
         val secondaryConstructorDeclaration: KoSecondaryConstructorDeclaration = mockk {
-            every { hasValidParameterKDoc() } returns  true
+            every { hasValidParameterKDoc() } returns true
         }
         val kDocDeclaration: KoKDocDeclaration = mockk {
             every { paramTags } returns listOf(tag1, tag2)
@@ -408,10 +408,10 @@ class KoKDocProviderExtTest {
             every { name } returns "value2"
         }
         val primaryConstructorDeclaration: KoPrimaryConstructorDeclaration = mockk {
-            every { parameters } returns  listOf(parameter1, parameter2)
+            every { parameters } returns listOf(parameter1, parameter2)
         }
         val secondaryConstructorDeclaration: KoSecondaryConstructorDeclaration = mockk {
-            every { hasValidParameterKDoc() } returns  true
+            every { hasValidParameterKDoc() } returns true
         }
         val kDocDeclaration: KoKDocDeclaration = mockk {
             every { paramTags } returns listOf(tag1, tag2)
@@ -443,10 +443,10 @@ class KoKDocProviderExtTest {
             every { name } returns "value1"
         }
         val primaryConstructorDeclaration: KoPrimaryConstructorDeclaration = mockk {
-            every { parameters } returns  listOf(parameter1)
+            every { parameters } returns listOf(parameter1)
         }
         val secondaryConstructorDeclaration: KoSecondaryConstructorDeclaration = mockk {
-            every { hasValidParameterKDoc() } returns  true
+            every { hasValidParameterKDoc() } returns true
         }
         val kDocDeclaration: KoKDocDeclaration = mockk {
             every { paramTags } returns listOf(tag1, tag2)
