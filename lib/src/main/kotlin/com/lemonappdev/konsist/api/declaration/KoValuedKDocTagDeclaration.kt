@@ -5,4 +5,4 @@ import com.lemonappdev.konsist.api.provider.KoKDocTagValueProvider
 /**
  * Represents a documentation tag
  */
-interface KoValuedKDocTagDeclaration : KoKDocTagDeclaration , KoKDocTagValueProvider
+interface KoValuedKDocTagDeclaration : KoKDocTagDeclaration, KoKDocTagValueProvider
