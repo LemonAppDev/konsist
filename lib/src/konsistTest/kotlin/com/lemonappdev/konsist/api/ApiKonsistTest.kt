@@ -29,6 +29,20 @@ class ApiKonsistTest {
             .assert { it.hasValidParameterKDoc() && it.hasValidReturnTypeKDoc() }
     }
 
+    @Test
+    fun `includeNested parameter is always before includeLocal parameter`() {
+        apiPackageScope
+            .functions(includeNested = true, includeLocal = true)
+            .assert {
+                val includeNestedParameter =
+                    it.parameters.indexOfFirst { parameter -> parameter.name == "includeNested" }
+                val includeLocalParameter =
+                    it.parameters.indexOfFirst { parameter -> parameter.name == "includeLocal" }
+
+                includeNestedParameter <= includeLocalParameter || (includeNestedParameter != -1 && includeLocalParameter == -1)
+            }
+    }
+
     companion object {
         val apiPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.api..", sourceSetName = "main")
     }
