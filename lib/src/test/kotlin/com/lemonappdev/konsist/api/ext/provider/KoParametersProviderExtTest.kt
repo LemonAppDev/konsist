@@ -11,7 +11,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoParametersProviderExtTest {
-    private interface SampleTestDeclaration: KoParametersProvider, KoKDocProvider
+    private interface SampleTestDeclaration : KoParametersProvider, KoKDocProvider
 
     @Test
     fun `hasValidParameterKDoc() returns true when declaration has no parameters`() {

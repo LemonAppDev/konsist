@@ -10,7 +10,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoReceiverTypeProviderExtTest {
-    private interface SampleTestDeclaration: KoReceiverTypeProvider, KoKDocProvider
+    private interface SampleTestDeclaration : KoReceiverTypeProvider, KoKDocProvider
 
     @Test
     fun `hasValidReceiverTypeKDoc() returns true when declaration has no receiver`() {

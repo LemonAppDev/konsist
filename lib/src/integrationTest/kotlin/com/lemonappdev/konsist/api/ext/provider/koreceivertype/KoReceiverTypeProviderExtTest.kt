@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.api.ext.provider.koreceivertype
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.ext.provider.hasReceiverTypeOf
-import com.lemonappdev.konsist.api.ext.provider.hasValidReceiverTypeKDoc
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import org.amshove.kluent.assertSoftly

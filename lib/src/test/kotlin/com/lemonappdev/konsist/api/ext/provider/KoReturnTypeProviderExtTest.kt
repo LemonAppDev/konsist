@@ -10,7 +10,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoReturnTypeProviderExtTest {
-    private interface SampleTestDeclaration: KoReturnTypeProvider, KoKDocProvider
+    private interface SampleTestDeclaration : KoReturnTypeProvider, KoKDocProvider
 
     @Test
     fun `hasValidReturnTypeKDoc() returns true when declaration has no return type`() {

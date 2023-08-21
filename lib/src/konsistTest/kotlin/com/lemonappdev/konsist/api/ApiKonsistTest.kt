@@ -1,7 +1,5 @@
 package com.lemonappdev.konsist.api
 
-import com.lemonappdev.konsist.api.KoKDocTag.PARAM
-import com.lemonappdev.konsist.api.KoKDocTag.RETURN
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidParameterKDoc
 import com.lemonappdev.konsist.api.ext.provider.hasValidReturnTypeKDoc
