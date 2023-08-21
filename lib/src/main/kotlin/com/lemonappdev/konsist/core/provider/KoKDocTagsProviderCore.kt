@@ -22,7 +22,7 @@ internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCo
             val tagsWithName = tagsAsStringList
                 .filterNot { it == "@" }
                 .flatMap { regex.findAll(it) }
-                .mapNotNull { KoKDocTag.values().firstOrNull { tag -> tag.type == it.value } }
+                .mapNotNull { KoKDocTag.entries.firstOrNull { tag -> tag.type == it.value } }
                 .zip(tagsAsStringList)
 
             val tagsGroupingByValued = tagsWithName.groupBy { it.first.isValued }
