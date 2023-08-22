@@ -312,7 +312,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsLocalProperty("otherProperty") }
+        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty"} }
     }
 
     @Test
@@ -325,7 +325,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsLocalProperty("otherProperty") }
+        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty"} }
     }
 
     @Test
@@ -338,7 +338,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsLocalProperty("otherProperty") }
+        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty"} }
     }
 
     @Test
@@ -351,7 +351,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsLocalProperty("otherProperty") }
+        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty"} }
     }
 
     @Test
