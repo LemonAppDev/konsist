@@ -17,10 +17,18 @@ interface KoLocalClassProvider : KoBaseProvider {
     val numLocalClasses: Int
 
     /**
+     * Gets the number of local classes that satisfies the specified predicate present in the declaration.
+     *
+     * @param predicate The predicate function to determine if a local class satisfies a condition.
+     * @return The number of local classes in the declaration.
+     */
+    fun countLocalClasses(predicate: (KoClassDeclaration) -> Boolean): Int
+
+    /**
      * Checks whether the declaration contains a local class with the specified name.
      *
-     * @param name The name of the local class to check.
-     * @return `true` if the declaration contains a local class with the specified name, `false` otherwise.
+     * @param predicate The predicate function to determine if a local class satisfies a condition.
+     * @return `true` if the declaration contains a local class with the specified predicate, `false` otherwise.
      */
-    fun containsLocalClass(name: String): Boolean
+    fun containsLocalClass(predicate: (KoClassDeclaration) -> Boolean): Boolean
 }
