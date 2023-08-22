@@ -24,5 +24,5 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         includeNested: Boolean,
         includeLocal: Boolean,
         predicate: (KoFunctionDeclaration) -> Boolean,
-    ): Int = functions(includeNested, includeLocal).filter { predicate(it) }.size
+    ): Int = functions(includeNested, includeLocal).count { predicate(it) }
 }
