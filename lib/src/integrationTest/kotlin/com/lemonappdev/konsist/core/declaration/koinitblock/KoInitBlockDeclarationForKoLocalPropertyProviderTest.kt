@@ -19,7 +19,7 @@ class KoInitBlockDeclarationForKoLocalPropertyProviderTest {
         assertSoftly(sut) {
             numLocalProperties shouldBeEqualTo 0
             countLocalProperties { it.name == "sampleLocalProperty" } shouldBeEqualTo 0
-            containsLocalProperty { it.name == "sampleLocalProperty"} shouldBeEqualTo false
+            containsLocalProperty { it.name == "sampleLocalProperty" } shouldBeEqualTo false
             localProperties shouldBeEqualTo emptyList()
         }
     }
@@ -37,8 +37,8 @@ class KoInitBlockDeclarationForKoLocalPropertyProviderTest {
         assertSoftly(sut) {
             numLocalProperties shouldBeEqualTo 2
             countLocalProperties { it.name == "sampleLocalProperty1" } shouldBeEqualTo 1
-            containsLocalProperty { it.name == "sampleLocalProperty1"} shouldBeEqualTo true
-            containsLocalProperty { it.name == "otherLocalProperty"} shouldBeEqualTo false
+            containsLocalProperty { it.name == "sampleLocalProperty1" } shouldBeEqualTo true
+            containsLocalProperty { it.name == "otherLocalProperty" } shouldBeEqualTo false
             localProperties
                 .map { it.name }
                 .shouldBeEqualTo(listOf("sampleLocalProperty1", "sampleLocalProperty2"))

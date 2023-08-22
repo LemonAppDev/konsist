@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 
 /**
  * An interface representing a Kotlin declaration that provides information about local declarations.

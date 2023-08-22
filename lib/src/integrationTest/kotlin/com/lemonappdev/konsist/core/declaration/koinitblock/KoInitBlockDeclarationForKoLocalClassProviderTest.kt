@@ -37,8 +37,8 @@ class KoInitBlockDeclarationForKoLocalClassProviderTest {
         assertSoftly(sut) {
             numLocalClasses shouldBeEqualTo 2
             countLocalClasses { it.name == "SampleLocalClass1" } shouldBeEqualTo 1
-            containsLocalClass { it.name == "SampleLocalClass1"} shouldBeEqualTo true
-            containsLocalClass { it.name == "OtherClass"} shouldBeEqualTo false
+            containsLocalClass { it.name == "SampleLocalClass1" } shouldBeEqualTo true
+            containsLocalClass { it.name == "OtherClass" } shouldBeEqualTo false
             localClasses
                 .map { it.name }
                 .shouldBeEqualTo(listOf("SampleLocalClass1", "SampleLocalClass2"))

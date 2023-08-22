@@ -1,10 +1,11 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
 
-internal interface KoLocalFunctionProviderCore : KoLocalFunctionProvider, KoLocalDeclarationProviderCore,
+internal interface KoLocalFunctionProviderCore :
+    KoLocalFunctionProvider,
+    KoLocalDeclarationProviderCore,
     KoBaseProviderCore {
     override val localFunctions: List<KoFunctionDeclaration>
         get() = localDeclarations.filterIsInstance<KoFunctionDeclaration>()

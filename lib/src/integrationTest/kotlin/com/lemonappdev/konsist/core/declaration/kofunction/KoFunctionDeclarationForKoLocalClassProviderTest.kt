@@ -33,11 +33,11 @@ class KoFunctionDeclarationForKoLocalClassProviderTest {
         assertSoftly(sut) {
             numLocalClasses shouldBeEqualTo 2
             countLocalClasses { it.name == "SampleClass1" } shouldBeEqualTo 1
-            containsLocalClass { it.name == "SampleClass1"} shouldBeEqualTo true
-            containsLocalClass { it.name == "OtherClass"} shouldBeEqualTo false
+            containsLocalClass { it.name == "SampleClass1" } shouldBeEqualTo true
+            containsLocalClass { it.name == "OtherClass" } shouldBeEqualTo false
             localClasses
                 .map { it.name }
-                .shouldBeEqualTo(listOf("SampleClass1", "SampleClass2" ))
+                .shouldBeEqualTo(listOf("SampleClass1", "SampleClass2"))
         }
     }
 

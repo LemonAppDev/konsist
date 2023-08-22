@@ -1,10 +1,11 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoLocalPropertyProvider
 
-internal interface KoLocalPropertyProviderCore : KoLocalPropertyProvider, KoLocalDeclarationProviderCore,
+internal interface KoLocalPropertyProviderCore :
+    KoLocalPropertyProvider,
+    KoLocalDeclarationProviderCore,
     KoBaseProviderCore {
     override val localProperties: List<KoPropertyDeclaration>
         get() = localDeclarations.filterIsInstance<KoPropertyDeclaration>()
