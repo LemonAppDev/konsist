@@ -25,5 +25,5 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         includeNested: Boolean,
         includeLocal: Boolean,
         predicate: (KoClassDeclaration) -> Boolean,
-    ): Int = classes(includeNested, includeLocal).filter { predicate(it) }.size
+    ): Int = classes(includeNested, includeLocal).count { predicate(it) }
 }

@@ -17,10 +17,9 @@ class KoFunctionDeclarationForKoLocalDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             numLocalDeclarations shouldBeEqualTo 0
-            containsLocalDeclaration("sampleLocalProperty") shouldBeEqualTo false
-            localDeclarations
-                .filterIsInstance<KoNameProvider>()
-                .shouldBeEqualTo(emptyList())
+            countLocalClasses { it.name == "sampleOtherDeclaration" } shouldBeEqualTo 0
+            containsLocalDeclaration { (it as KoNameProvider).name == "sampleLocalProperty" } shouldBeEqualTo false
+            localDeclarations shouldBeEqualTo emptyList()
         }
     }
 
@@ -34,10 +33,11 @@ class KoFunctionDeclarationForKoLocalDeclarationProviderTest {
         // then
         assertSoftly(sut) {
             numLocalDeclarations shouldBeEqualTo 3
-            containsLocalDeclaration("sampleLocalProperty") shouldBeEqualTo true
-            containsLocalDeclaration("sampleLocalFunction") shouldBeEqualTo true
-            containsLocalDeclaration("SampleLocalClass") shouldBeEqualTo true
-            containsLocalDeclaration("sampleOtherDeclaration") shouldBeEqualTo false
+            countLocalDeclarations { (it as KoNameProvider).hasNameStartingWith("sampleLocal") } shouldBeEqualTo 2
+            containsLocalDeclaration { (it as KoNameProvider).name == "sampleLocalProperty" } shouldBeEqualTo true
+            containsLocalDeclaration { (it as KoNameProvider).name == "sampleLocalFunction" } shouldBeEqualTo true
+            containsLocalDeclaration { (it as KoNameProvider).name == "SampleLocalClass" } shouldBeEqualTo true
+            containsLocalDeclaration { (it as KoNameProvider).name == "sampleOtherDeclaration" } shouldBeEqualTo false
             localDeclarations
                 .filterIsInstance<KoNameProvider>()
                 .map { it.name }

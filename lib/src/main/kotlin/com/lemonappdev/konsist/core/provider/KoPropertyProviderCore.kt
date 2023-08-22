@@ -25,5 +25,5 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
         includeNested: Boolean,
         includeLocal: Boolean,
         predicate: (KoPropertyDeclaration) -> Boolean,
-    ): Int = properties(includeNested, includeLocal).filter { predicate(it) }.size
+    ): Int = properties(includeNested, includeLocal).count { predicate(it) }
 }
