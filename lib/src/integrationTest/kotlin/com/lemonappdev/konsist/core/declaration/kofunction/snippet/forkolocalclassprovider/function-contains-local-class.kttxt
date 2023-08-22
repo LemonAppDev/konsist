@@ -1,3 +1,5 @@
 fun sampleFunction() {
-    class SampleClass
+    class SampleClass1
+
+    class SampleClass2
 }
