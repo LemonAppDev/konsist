@@ -1,11 +1,8 @@
 package com.lemonappdev.konsist.api.declaration
 
+import com.lemonappdev.konsist.api.provider.KoKDocTagValueProvider
+
 /**
  * Represents a documentation tag
  */
-interface KoValuedKDocTagDeclaration : KoKDocTagDeclaration {
-    /**
-     * The value of the tag
-     */
-    val value: String
-}
+interface KoValuedKDocTagDeclaration : KoKDocTagDeclaration, KoKDocTagValueProvider
