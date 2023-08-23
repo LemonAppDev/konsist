@@ -55,7 +55,11 @@ fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() 
 See [Konsist documentation](http://docs.konsist.lemonappdev.com/) for quick start guide and 
 [more examples](https://docs.konsist.lemonappdev.com/inspiration/snippets).
 
-## Contributing
+# Articles
+
+- [Introducing Konsist: A Cutting-Edge Kotlin Linter](https://blog.kotlin-academy.com/introducing-konsist-a-cutting-edge-kotlin-linter-d3ab916a5461)
+
+# Contributing
 
 Please be sure to review Konsist's [contributing guidelines](https://docs.konsist.lemonappdev.com/help/contributing)
 to learn how to support the project.
