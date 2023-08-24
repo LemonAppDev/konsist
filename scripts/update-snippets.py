@@ -51,4 +51,3 @@ for filename in os.listdir(source_folder_path):
     if filename.endswith("Snippets.kt"):
         kt_path = os.path.join(source_folder_path, filename)
         copy_content(kt_path, destination_folder_path)
-
