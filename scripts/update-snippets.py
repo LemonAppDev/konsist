@@ -60,6 +60,7 @@ def copy_content(source_path, destination_folder):
 
         # Construct the paths for source and destination
         destination_path = os.path.join(destination_folder, destination_filename)
+        print(destination_path)
 
         with open(source_path, "r") as source_file:
             content = source_file.read()
