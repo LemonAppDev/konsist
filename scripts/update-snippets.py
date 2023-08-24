@@ -88,6 +88,6 @@ destination_folder_path = updated_script_directory + "/konsist-documentatio/insp
 # Iterate through all .kt files in the source folder
 for filename in os.listdir(source_folder_path):
     if filename.endswith("Snippets.kt"):
-        kt_path = source_folder_path + filename
+        kt_path = os.path.join(source_folder_path, filename)
         copy_content(kt_path, destination_folder_path)
 
