@@ -5,6 +5,7 @@ script_path = os.path.abspath(__file__)
 
 # Get the directory containing the script
 script_directory = os.path.dirname(script_path)
+print(script_directory)
 
  # Paths to the source and destination folders
 source_folder_path = script_directory + "/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
