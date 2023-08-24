@@ -8,7 +8,7 @@ print(script_path)
 script_directory = os.path.dirname(script_path)
 print(script_directory)
 
-updated_script_directory = script_directory.removesuffix("/konsist/konsist/scripts")
+updated_script_directory = script_directory.removesuffix("/konsist/scripts")
 
  # Paths to the source and destination folders
 source_folder_path = updated_script_directory + "/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
