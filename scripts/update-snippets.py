@@ -61,11 +61,11 @@ def copy_content(source_path, destination_folder):
         # Construct the paths for source and destination
         destination_path = os.path.join(destination_folder, destination_filename)
 
-        with open(source_path, "r") as source_file:
-            content = source_file.read()
-            text = upd_file_text(content)
-            with open(destination_path, "w") as destination_file:
-                destination_file.write(text)
+#         with open(source_path, "r") as source_file:
+#             content = source_file.read()
+#             text = upd_file_text(content)
+#             with open(destination_path, "w") as destination_file:
+#                 destination_file.write(text)
     except Exception as e:
         print(f"Error copying content: {e}")
 
