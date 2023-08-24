@@ -9,7 +9,7 @@ def replace_capitals_with_dash_and_lowercase(input_string):
     modified_string = re.sub(r'[A-Z]', replace, input_string)
 
     # Change the suffix from .kt to .md
-    modified_string = modified_string.replace('.kt', '.md')
+    modified_string = modified_string.removeprefix("-")
 
     return modified_string
 
