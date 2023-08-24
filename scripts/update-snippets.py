@@ -20,16 +20,16 @@ def upd_file_text(txt):
         def replace(match):
             return ' ' + match.group(0)
 
-        # Replace capital letters with a dash and lowercase letter
+        # Replace capital letters with a blank space
         modified_string = re.sub(r'[A-Z]', replace, input_string)
 
         return "# " + modified_string + "\n\n"
 
-    # to nam daje format nazwa klasy
+    # formatting: # class name
     file_name = txt.split("class ")[1].split(" {")[0]
     upd_file_name = replace_capitals_with_blank_space(file_name)
 
-    # to nam daje format nazwa klasy +. tekst
+    # formatting: function test body
     list = txt.removesuffix("}\n").split("fun ")
     list.pop(0)
 
@@ -46,7 +46,6 @@ def upd_file_text(txt):
         text += "## " + name + "\n\n```kotlin\n@Test\nfun " + element + "```\n\n"
 
     return upd_file_name + text
-
     # trzeba usunąć w function body \t oraz we wszystkich oprócz ostatniego pustą linię
 
 
@@ -62,8 +61,6 @@ def copy_content(source_path, destination_folder):
 
         # Construct the paths for source and destination
         destination_path = os.path.join(destination_folder, destination_filename)
-
-
 
         with open(source_path, "r") as source_file:
             content = source_file.read()
