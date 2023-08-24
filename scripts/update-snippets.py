@@ -7,9 +7,11 @@ script_path = os.path.abspath(__file__)
 script_directory = os.path.dirname(script_path)
 print(script_directory)
 
+updated_script_directory = script_directory.removesuffix("/konsist/konsist/scripts")
+
  # Paths to the source and destination folders
-source_folder_path = script_directory + "/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
-destination_folder_path = script_directory + "/konsist-documentation/inspiration/snippets"
+source_folder_path = updated_script_directory + "/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
+destination_folder_path = updated_script_directory + "/konsist-documentatio/inspiration/snippets"
 
 # Function to copy content from source file to destination file
 def copy_content(source_path, destination_path):
