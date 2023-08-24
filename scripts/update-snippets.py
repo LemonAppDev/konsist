@@ -1,4 +1,5 @@
-import os, re
+import os
+import re
 
 def replace_capitals_with_dash_and_lowercase(input_string):
     def replace(match):
@@ -68,6 +69,10 @@ def copy_content(source_path, destination_folder):
     except Exception as e:
         print(f"Error copying content: {e}")
 
+
+
+
+
 # Get the path of the current script
 script_path = os.path.abspath(__file__)
 
@@ -80,9 +85,9 @@ updated_script_directory = script_directory.removesuffix("/konsist/scripts")
 source_folder_path = updated_script_directory + "/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
 destination_folder_path = updated_script_directory + "/konsist-documentatio/inspiration/snippets"
 
-# # Iterate through all .kt files in the source folder
-# for filename in os.listdir(source_folder_path):
-#     if filename.endswith("Snippets.kt"):
-#         kt_path = os.path.join(source_folder_path, filename)
-#         copy_content(kt_path, destination_folder_path)
+# Iterate through all .kt files in the source folder
+for filename in os.listdir(source_folder_path):
+    if filename.endswith("Snippets.kt"):
+        kt_path = source_folder_path + filename
+        copy_content(kt_path, destination_folder_path)
 
