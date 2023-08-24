@@ -44,7 +44,7 @@ updated_script_directory = script_directory.removesuffix("/konsist/scripts")
 
  # Paths to the source and destination folders
 source_folder_path = updated_script_directory + "/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
-destination_folder_path = updated_script_directory + "/konsist-documentatio/inspiration/snippets"
+destination_folder_path = updated_script_directory.removesuffix("/konsist") + "/konsist-documentatio/inspiration/snippets"
 
 # Iterate through all .kt files in the source folder
 for filename in os.listdir(source_folder_path):
