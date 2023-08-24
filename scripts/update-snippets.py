@@ -1,8 +1,18 @@
 import os
+import re
 
-# Function to transform file name from first format to second format
-def transform_filename(filename):
-    return filename.lower().replace(" ", "-").replace("snippets.kt", "snippets.md")
+def replace_capitals_with_dash_and_lowercase(input_string):
+    def replace(match):
+        return '-' + match.group(0).lower()
+
+    # Replace capital letters with a dash and lowercase letter
+    modified_string = re.sub(r'[A-Z]', replace, input_string)
+
+    # Change the suffix from .kt to .md
+    modified_string = modified_string.replace('.kt', '.md')
+
+    return modified_string
+
 
 # Function to copy content from source file to destination file
 def copy_content(source_path, destination_folder):
@@ -12,7 +22,7 @@ def copy_content(source_path, destination_folder):
         source_filename_without_extension = os.path.splitext(source_filename)[0]
 
         # Transform the source file name to match the destination format
-        destination_filename = transform_filename(source_filename_without_extension)
+        destination_filename = replace_capitals_with_dash_and_lowercase(source_filename_without_extension)
 
         # Construct the paths for source and destination
         destination_path = os.path.join(destination_folder, destination_filename)
@@ -41,3 +51,4 @@ for filename in os.listdir(source_folder_path):
     if filename.endswith("Snippets.kt"):
         kt_path = os.path.join(source_folder_path, filename)
         copy_content(kt_path, destination_folder_path)
+
