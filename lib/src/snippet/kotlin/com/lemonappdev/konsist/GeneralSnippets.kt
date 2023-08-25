@@ -17,13 +17,15 @@ import javax.inject.Inject
 
 class GeneralSnippets {
     fun `no empty files allowed`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .files
             .assertNot { it.text.isEmpty() }
     }
 
     fun `no field should have 'm' prefix`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .classes()
             .properties()
             .assertNot {
@@ -33,20 +35,23 @@ class GeneralSnippets {
     }
 
     fun `no class should use field injection`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .classes()
             .properties()
             .assertNot { it.hasAnnotationOf<Inject>() }
     }
 
     fun `no class should use Java util logging`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .files
             .assertNot { it.hasImports("java.util.logging..") }
     }
 
     fun `every constructor parameter has name derived from parameter type`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .classes()
             .flatMap { it.constructors }
             .flatMap { it.parameters }
@@ -57,7 +62,8 @@ class GeneralSnippets {
     }
 
     fun `every class constructor has alphabetically ordered parameters`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .classes()
             .flatMap { it.constructors }
             .assert {
@@ -68,13 +74,15 @@ class GeneralSnippets {
     }
 
     fun `package name must match file path`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .packages
             .assert { it.hasMatchingPath }
     }
 
     fun `properties are declared before functions`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .classes()
             .assert {
                 val lastKoPropertyDeclarationIndex = it
@@ -90,7 +98,8 @@ class GeneralSnippets {
     }
 
     fun `companion object is the last declaration in the class`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .classes()
             .assert {
                 val companionObjectIndex = it
@@ -106,13 +115,15 @@ class GeneralSnippets {
     }
 
     fun `no wildcard imports allowed`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .imports
             .assertNot { it.isWildcard }
     }
 
     fun `every value class has parameter named 'value'`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .classes()
             .withValueModifier()
             .mapNotNull { it.primaryConstructor }
@@ -120,7 +131,8 @@ class GeneralSnippets {
     }
 
     fun `forbid the usage of 'forbiddenString' in file`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .files
             .assertNot { it.text.contains("forbiddenString") }
     }

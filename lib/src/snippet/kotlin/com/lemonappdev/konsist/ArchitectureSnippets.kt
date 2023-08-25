@@ -19,7 +19,8 @@ class ArchitectureSnippets {
     }
 
     fun `every file in module reside in module specific package`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .files
             .assert { it.packagee?.fullyQualifiedName?.startsWith(it.moduleName) }
     }
