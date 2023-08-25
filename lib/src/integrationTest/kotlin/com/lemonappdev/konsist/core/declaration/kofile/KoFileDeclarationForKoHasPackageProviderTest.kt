@@ -7,6 +7,28 @@ import org.junit.jupiter.api.Test
 
 class KoFileDeclarationForKoHasPackageProviderTest {
     @Test
+    fun `file-has-matching-package`() {
+        // given
+        val sut = getSnippetFile("file-has-matching-package")
+            .files
+            .first()
+
+        // then
+        sut.hasMatchingPackage shouldBeEqualTo true
+    }
+
+    @Test
+    fun `file-has-not-matching-package`() {
+        // given
+        val sut = getSnippetFile("file-has-not-matching-package")
+            .files
+            .first()
+
+        // then
+        sut.hasMatchingPackage shouldBeEqualTo false
+    }
+
+    @Test
     fun `file-has-no-package`() {
         // given
         val sut = getSnippetFile("file-has-no-package")
