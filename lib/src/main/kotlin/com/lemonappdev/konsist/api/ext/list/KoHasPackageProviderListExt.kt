@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoHasPackageProvider
-import com.lemonappdev.konsist.api.provider.KoPackageMatchingPathProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 
 /**

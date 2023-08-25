@@ -7,7 +7,7 @@ interface KoHasPackageProvider : KoBaseProvider {
     /**
      * Whether the declaration has matching package.
      */
-    val hasMatchingPackage : Boolean
+    val hasMatchingPackage: Boolean
 
     /**
      * Whether the declaration has package.
