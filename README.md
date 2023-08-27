@@ -29,6 +29,7 @@ fun `classes with 'UseCase' suffix should reside in 'usecase' package`() {
 ## Android Specific Check
 
 ```kotlin
+@Test
 fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
     Konsist.scopeFromProject()
         .classes()
