@@ -14,7 +14,7 @@ def upd_file_text(txt):
 
     for element in list:
         function_name_as_heading = element.split("`")[1]
-        words = function_name_as_heading.split(" ")
+        words = function_name_as_heading.replace("'", "`").split(" ")
         words = map(lambda capitalize: capitalize.replace(capitalize, capitalize[0].upper() + capitalize[1:]), words)
 
         function_text = element.split("{", maxsplit = 1)
