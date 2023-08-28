@@ -2,6 +2,7 @@ import os
 import re
 import subprocess
 import datetime
+import math
 
 def replace_capitals_with_dash_and_lowercase(input_string):
     def replace(match):
@@ -23,31 +24,54 @@ def upd_file_text(txt):
         # Replace capital letters with a blank space
         modified_string = re.sub(r'[A-Z]', replace, input_string)
 
-        return "# " + modified_string + "\n\n"
+        return "#" + modified_string + "\n\n"
 
     # formatting: # class name
     file_name = txt.split("class ")[1].split(" {")[0]
     upd_file_name = replace_capitals_with_blank_space(file_name)
 
-    # formatting: function test body
-    list = txt.removesuffix("}\n").split("fun ")
+    # formatting: function text body
+    x = txt.removesuffix("}\n") + "\n\t"
+    list = x.split("fun ")
     list.pop(0)
 
     text = ""
 
     for element in list:
-        function_name = element.split("`")[1]
-        words = function_name.split(" ")
+        function_name_as_heading = element.split("`")[1]
+        words = function_name_as_heading.split(" ")
         words = map(lambda capitalize: capitalize.replace(capitalize, capitalize[0].upper() + capitalize[1:]), words)
 
-        body = element
+        function_text = element.split("{", maxsplit = 1)
+        function_name = function_text[0]
+
+        function_body = function_text[1].removeprefix("\n")
+
+        # Split the input text into lines
+        lines = function_body.split('\n')
+
+        # Initialize variables
+        formatted_lines = []
+
+        # Iterate through lines
+        for line in lines:
+            if line.strip():  # Ignore empty lines
+                indentation = len(line) - len(line.lstrip())
+
+                number = indentation - 4*(math.floor(indentation / 4) - 1)
+                formatted_lines.append(line[number:])
+
+            else:
+                # Preserve empty lines
+                formatted_lines.append(line)
+
+        # Reconstruct the formatted text
+        formatted_text = '\n'.join(formatted_lines[:-1])
 
         name = " ".join(words)
-        text += "## " + name + "\n\n```kotlin\n@Test\nfun " + element + "```\n\n"
+        text += "## " + name + "\n\n```kotlin\n@Test\nfun " + function_name + "{\n" + formatted_text + "```\n\n"
 
     return upd_file_name + text
-    # trzeba usunąć w function body \t oraz we wszystkich oprócz ostatniego pustą linię
-
 
 # Function to copy content from source file to destination file
 def copy_content(source_path, destination_folder):
@@ -85,9 +109,13 @@ formatted_date = current_date.strftime("%Y-%m-%d")
 
 new_branch_name = formatted_date + "-update-snippet-code"
 
-# Run the git checkout -b command
-command = ["git", "checkout", "-b", new_branch_name]
-subprocess.run(command, check=True)
+# Check if the branch exists
+try:
+    # If the branch exists, switch to it, do something, and push to origin main
+    subprocess.run(["git", "checkout", new_branch_name], check=True)
+except subprocess.CalledProcessError:
+    # If the branch doesn't exist, create it
+    subprocess.run(["git", "checkout", "-b", new_branch_name], check=True)
 
 # Iterate through all .kt files in the source folder
 for filename in os.listdir(expanded_source_directory):
@@ -108,5 +136,5 @@ subprocess.run(commit_command, check=True)
 command = ["git", "push", "origin", new_branch_name]
 subprocess.run(command, check=True)
 
-prTitle = "Update snippet code from" + formatted_date
+prTitle = "Update snippet code from " + formatted_date
 os.system("gh pr create --title '" + prTitle + "' --body '""'")
