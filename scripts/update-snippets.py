@@ -58,6 +58,8 @@ def copy_content(source_kt_path, source_md_path, destination_folder):
 
         with open(source_md_path, "r") as source_file:
             md_content = source_file.read()
+            if md_content.splitlines()[-1] != "":
+                md_content += "\n"
 
         with open(source_kt_path, "r") as source_file:
             kt_content = source_file.read()
