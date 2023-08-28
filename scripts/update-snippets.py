@@ -44,7 +44,7 @@ def upd_file_text(txt):
         formatted_text = '\n'.join(formatted_lines[:-1])
 
         name = " ".join(words)
-        text += "## Snippet " + name + "\n\n```kotlin\n@Test\nfun " + function_name + "{\n" + formatted_text + "```\n\n"
+        text += "## Snippet " + str(list.index(element) + 1) +  ": " + name + "\n\n```kotlin\n@Test\nfun " + function_name + "{\n" + formatted_text + "```\n\n"
 
     return text
 
