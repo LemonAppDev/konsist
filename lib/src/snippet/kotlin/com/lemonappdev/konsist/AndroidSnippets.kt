@@ -8,14 +8,16 @@ import com.lemonappdev.konsist.api.verify.assertNot
 
 class AndroidSnippets {
     fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .classes()
             .withParentClassOf(ViewModel::class)
             .assert { it.name.endsWith("ViewModel") }
     }
 
     fun `no class should use Android util logging`() {
-        Konsist.scopeFromProject()
+        Konsist
+            .scopeFromProject()
             .files
             .assertNot { it.hasImports("android.util.Log") }
     }

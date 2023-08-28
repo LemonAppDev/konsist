@@ -1,2 +1,2 @@
-fun Int.sampleFunction {
+fun Int.sampleFunction() {
 }

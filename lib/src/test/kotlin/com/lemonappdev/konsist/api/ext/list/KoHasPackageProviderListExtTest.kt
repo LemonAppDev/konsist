@@ -12,6 +12,42 @@ class KoHasPackageProviderListExtTest {
     private interface SampleTestDeclaration : KoPackageProvider, KoHasPackageProvider
 
     @Test
+    fun `withMatchingPackage() returns declaration which has matching package`() {
+        // given
+        val declaration1: KoHasPackageProvider = mockk {
+            every { hasMatchingPackage } returns true
+        }
+        val declaration2: KoHasPackageProvider = mockk {
+            every { hasMatchingPackage } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withMatchingPackage()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutMatchingPackage() returns declaration which has not matching package`() {
+        // given
+        val declaration1: KoHasPackageProvider = mockk {
+            every { hasMatchingPackage } returns true
+        }
+        val declaration2: KoHasPackageProvider = mockk {
+            every { hasMatchingPackage } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutMatchingPackage()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withPackage() returns declaration with any package`() {
         // given
         val declaration1: SampleTestDeclaration = mockk {
