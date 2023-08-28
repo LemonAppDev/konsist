@@ -4,44 +4,7 @@ import subprocess
 import datetime
 import math
 
-def replace_capitals_with_dash_and_lowercase(input_string):
-    def replace(match):
-        return '-' + match.group(0).lower()
-
-    # Replace capital letters with a dash and lowercase letter
-    modified_string = re.sub(r'[A-Z]', replace, input_string)
-
-    # Change the suffix from .kt to .md
-    modified_string = modified_string.removeprefix("-") + ".md"
-
-    return modified_string
-
 def upd_file_text(txt):
-    def replace_capitals_with_blank_space(input_string):
-        def replace(match):
-            return ' ' + match.group(0)
-
-        # Replace capital letters with a blank space
-        modified_string = re.sub(r'[A-Z]', replace, input_string)
-
-        if modified_string == " Android Snippets":
-            android_text = """
-        Konsist can be used to guard the consistency of the [Android](https://www.android.com/) project.&#x20;
-
-        {% hint style="info" %}
-        The [android-showcase](https://github.com/igorwojda/android-showcase) project contains set of kotnsist tests.
-        {% endhint %}"""
-            text = modified_string + android_text
-        if modified_string == " Spring Snippets":
-            spring_text = "\nKonsist can be used to guard the consistency of the [Spring](https://spring.io/) project."
-            text = modified_string + spring_text
-
-        return "#" + modified_string + "\n\n"
-
-    # formatting: # class name
-    file_name = txt.split("class ")[1].split(" {")[0]
-    upd_file_name = replace_capitals_with_blank_space(file_name)
-
     # formatting: function text body
     x = txt.removesuffix("}\n") + "\n\t"
     list = x.split("fun ")
@@ -81,36 +44,39 @@ def upd_file_text(txt):
         formatted_text = '\n'.join(formatted_lines[:-1])
 
         name = " ".join(words)
-        text += "## " + name + "\n\n```kotlin\n@Test\nfun " + function_name + "{\n" + formatted_text + "```\n\n"
+        text += "## Snippet " + name + "\n\n```kotlin\n@Test\nfun " + function_name + "{\n" + formatted_text + "```\n\n"
 
-    return upd_file_name + text
+    return text
 
 # Function to copy content from source file to destination file
-def copy_content(source_path, destination_folder):
+def copy_content(source_kt_path, source_md_path, destination_folder):
     try:
-        # Extract the source file name without extension
-        source_filename = os.path.basename(source_path)
-        source_filename_without_extension = os.path.splitext(source_filename)[0]
-
-        # Transform the source file name to match the destination format
-        destination_filename = replace_capitals_with_dash_and_lowercase(source_filename_without_extension)
+        filename_md = os.path.basename(source_md_path)
 
         # Construct the paths for source and destination
-        destination_path = os.path.join(destination_folder, destination_filename)
+        destination_path = os.path.join(destination_folder, filename_md)
 
-        with open(source_path, "r") as source_file:
-            content = source_file.read()
-            text = upd_file_text(content)
-            with open(destination_path, "w") as destination_file:
-                destination_file.write(text)
+        with open(source_md_path, "r") as source_file:
+            md_content = source_file.read()
+
+        with open(source_kt_path, "r") as source_file:
+            kt_content = source_file.read()
+            kt_text = upd_file_text(kt_content)
+
+
+        with open(destination_path, "w") as destination_file:
+            destination_file.write(md_content+kt_text)
+
     except Exception as e:
         print(f"Error copying content: {e}")
 
 # Directory path
-source_directory = "~/IdeaProjects/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
+source_kt_directory = "~/IdeaProjects/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
+source_md_directory = "~/IdeaProjects/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist/md"
 destination_directory = "~/IdeaProjects/konsist-documentation/inspiration/snippets"
 
-expanded_source_directory = os.path.expanduser(source_directory)
+expanded_source_md_directory = os.path.expanduser(source_md_directory)
+expanded_source_kt_directory = os.path.expanduser(source_kt_directory)
 expanded_destination_directory = os.path.expanduser(destination_directory)
 
  # Change the current working directory
@@ -129,11 +95,15 @@ except subprocess.CalledProcessError:
     # If the branch doesn't exist, create it
     subprocess.run(["git", "checkout", "-b", new_branch_name], check=True)
 
-# Iterate through all .kt files in the source folder
-for filename in os.listdir(expanded_source_directory):
-    if filename.endswith("Snippets.kt"):
-        kt_path = os.path.join(expanded_source_directory, filename)
-        copy_content(kt_path, expanded_destination_directory)
+# Iterate through all .md files in the source folder
+for filename_md in os.listdir(expanded_source_md_directory):
+    if filename_md.endswith("snippets.md"):
+        prefix = filename_md.split("-")[0]
+        for filename_kt in os.listdir(expanded_source_kt_directory):
+            if prefix in filename_kt.lower():
+                kt_path = os.path.join(expanded_source_kt_directory, filename_kt)
+                md_path = os.path.join(expanded_source_md_directory, filename_md)
+                copy_content(kt_path, md_path, expanded_destination_directory)
 
 # Run git add command
 add_command = ["git", "add", "."]
