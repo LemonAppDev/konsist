@@ -1,5 +1,7 @@
 class SampleClass {
     init {
-        class SampleLocalClass
+        class SampleLocalClass1
+
+        class SampleLocalClass2
     }
 }

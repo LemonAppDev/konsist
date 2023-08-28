@@ -21,7 +21,7 @@ internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProv
         includeNested: Boolean,
         includeLocal: Boolean,
         predicate: (KoBaseDeclaration) -> Boolean,
-    ): Int = declarations(includeNested, includeLocal).filter { predicate(it) }.size
+    ): Int = declarations(includeNested, includeLocal).count { predicate(it) }
 
     override fun numPublicDeclarations(includeNested: Boolean, includeLocal: Boolean): Int =
         declarations(includeNested, includeLocal)

@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.verify
 
+import com.intellij.openapi.util.text.StringUtil.substringBeforeLast
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
@@ -72,14 +73,18 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
 
 private fun checkIfDeclarationIsAnnotatedWithSuppress(declaration: KoBaseProvider, testMethodName: String): Boolean =
     if (declaration is KoAnnotationProvider) {
-        checkIfSuppressed(declaration, testMethodName) || checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
+        checkIfSuppressed(declaration, testMethodName) || checkIfParentIsAnnotatedWithSuppress(
+            declaration,
+            testMethodName,
+        )
     } else {
         checkIfParentIsAnnotatedWithSuppress(declaration, testMethodName)
     }
 
 private fun checkIfParentIsAnnotatedWithSuppress(declaration: KoBaseProvider, testMethodName: String): Boolean =
     if (declaration is KoContainingDeclarationProvider) {
-        declaration.containingDeclaration?.let { checkIfDeclarationIsAnnotatedWithSuppress(it, testMethodName) } ?: false
+        declaration.containingDeclaration?.let { checkIfDeclarationIsAnnotatedWithSuppress(it, testMethodName) }
+            ?: false
     } else {
         false
     }
@@ -101,7 +106,12 @@ private fun checkIfSuppressed(item: KoAnnotationProvider, testMethodName: String
     return annotationParameter.any { it == testMethodName } || annotationParameter.any { it == "konsist.$testMethodName" }
 }
 
-private fun getResult(items: List<*>, result: Map<Boolean?, List<Any>>, positiveCheck: Boolean, testMethodName: String) {
+private fun getResult(
+    items: List<*>,
+    result: Map<Boolean?, List<Any>>,
+    positiveCheck: Boolean,
+    testMethodName: String,
+) {
     val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
 
     if (!allChecksPassed) {
@@ -114,12 +124,16 @@ private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String):
     var types = ""
     val failedDeclarationsMessage = failedItems.joinToString("\n") {
         val konsistDeclarationClassNamePrefix = "Ko"
+        val konsistDeclarationClassNameSuffix = "Core"
 
         when (it) {
             is KoFileDeclaration -> {
                 types = "files"
                 val name = it.name
-                val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
+                val declarationType = it::class
+                    .simpleName
+                    ?.substringAfter(konsistDeclarationClassNamePrefix)
+                    ?.substringBeforeLast(konsistDeclarationClassNameSuffix)
 
                 "${it.path} ($name $declarationType)"
             }
@@ -127,7 +141,10 @@ private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String):
             is KoBaseProvider -> {
                 types = "declarations"
                 val name = (it as? KoNameProvider)?.name
-                val declarationType = it::class.simpleName?.substringAfter(konsistDeclarationClassNamePrefix)
+                val declarationType = it::class
+                    .simpleName
+                    ?.substringAfter(konsistDeclarationClassNamePrefix)
+                    ?.substringBeforeLast(konsistDeclarationClassNameSuffix)
 
                 "${(it as? KoLocationProvider)?.location} ($name $declarationType)"
             }

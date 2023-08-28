@@ -10,5 +10,9 @@ internal interface KoLocalClassProviderCore : KoLocalClassProvider, KoLocalDecla
     override val numLocalClasses: Int
         get() = localClasses.size
 
-    override fun containsLocalClass(name: String): Boolean = localClasses.any { it.name == name }
+    override fun countLocalClasses(predicate: (KoClassDeclaration) -> Boolean): Int =
+        localClasses.count { predicate(it) }
+
+    override fun containsLocalClass(predicate: (KoClassDeclaration) -> Boolean): Boolean =
+        localClasses.any { predicate(it) }
 }

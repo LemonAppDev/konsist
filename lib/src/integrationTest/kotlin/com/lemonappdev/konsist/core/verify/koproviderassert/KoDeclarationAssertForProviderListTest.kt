@@ -28,7 +28,25 @@ class KoDeclarationAssertForProviderListTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'provider-assert-test-method-name' has failed. Invalid declarations (2)") ?: throw e
+            e.message?.shouldContain("Assert 'provider-assert-test-method-name' has failed. Invalid declarations (2)")
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `provider-assert-displaying-correct-failed-declaration-type`() {
+        // given
+        val sut = getSnippetFile("provider-assert-displaying-correct-failed-declaration-type")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+
+        // then
+        try {
+            sut.assert { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("(SampleClass ClassDeclaration)")
+                ?: throw e
         }
     }
 

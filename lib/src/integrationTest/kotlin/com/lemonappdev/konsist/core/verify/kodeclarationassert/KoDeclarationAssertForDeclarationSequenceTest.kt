@@ -42,6 +42,38 @@ class KoDeclarationAssertForDeclarationSequenceTest {
     }
 
     @Test
+    fun `declaration-assert-displaying-correct-failed-declaration-type`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-displaying-correct-failed-declaration-type")
+            .classes()
+            .asSequence()
+
+        // then
+        try {
+            sut.assert { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("(SampleClass ClassDeclaration)")
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `file-declaration-assert-displaying-correct-failed-declaration-type`() {
+        // given
+        val sut = getSnippetFile("file-declaration-assert-displaying-correct-failed-declaration-type")
+            .files
+            .asSequence()
+
+        // then
+        try {
+            sut.assert { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("(file-declaration-assert-displaying-correct-failed-declaration-type FileDeclaration)")
+                ?: throw e
+        }
+    }
+
+    @Test
     fun `declaration-assert-fails-when-declaration-list-is-empty`() {
         // given
         val sut = getSnippetFile("declaration-assert-fails-when-declaration-list-is-empty")
@@ -328,7 +360,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsLocalProperty("otherProperty") }
+        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -342,7 +374,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsLocalProperty("otherProperty") }
+        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -356,7 +388,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsLocalProperty("otherProperty") }
+        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -370,7 +402,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsLocalProperty("otherProperty") }
+        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test

@@ -10,9 +10,11 @@ standardization of the Kotlin codebase. It enforces coding conventions and proje
 tests are written in Kotlin and can be easily integrated with popular testing frameworks such as 
 [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/).
 
-Konsist API reflects the structure of Kotlin code. Konsist guards are written in form of unit tests:
+See [Konsist documentation](http://docs.konsist.lemonappdev.com/) for more information.
 
 # Examples
+
+Konsist API reflects the structure of Kotlin code. Konsist guards are written in form of unit tests.
 
 ## General Kotlin Check
 
@@ -29,6 +31,7 @@ fun `classes with 'UseCase' suffix should reside in 'usecase' package`() {
 ## Android Specific Check
 
 ```kotlin
+@Test
 fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
     Konsist.scopeFromProject()
         .classes()
@@ -52,10 +55,14 @@ fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() 
 
 # Getting Started
 
-See [Konsist documentation](http://docs.konsist.lemonappdev.com/) for quick start guide and 
-[more examples](https://docs.konsist.lemonappdev.com/inspiration/snippets).
+See [Konsist Getting Started](https://docs.konsist.lemonappdev.com/getting-started/gettingstarted) for quick start page
+guide and [Snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) page for more examples.
 
-## Contributing
+## Articles
+
+- [Introducing Konsist: A Cutting-Edge Kotlin Linter](https://blog.kotlin-academy.com/introducing-konsist-a-cutting-edge-kotlin-linter-d3ab916a5461)
+
+# Contributing
 
 Please be sure to review Konsist's [contributing guidelines](https://docs.konsist.lemonappdev.com/help/contributing)
 to learn how to support the project.
