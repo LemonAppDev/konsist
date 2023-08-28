@@ -38,6 +38,21 @@ class KoClassDeclarationForKoParentClassProviderTest {
     }
 
     @Test
+    fun `generic-class-has-parent-class-and-interfaces`() {
+        // given
+        val sut = getSnippetFile("generic-class-has-parent-class-and-interfaces")
+            .classes()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            parentClass?.name shouldBeEqualTo "SampleParentClass"
+            hasParentClass() shouldBeEqualTo true
+            hasParentClass("SampleParentClass") shouldBeEqualTo true
+        }
+    }
+
+    @Test
     fun `class-has-parent-class-and-interfaces`() {
         // given
         val sut = getSnippetFile("class-has-parent-class-and-interfaces")
