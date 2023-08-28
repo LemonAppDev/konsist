@@ -32,7 +32,7 @@ fun <T : KoPropertyTypeProvider> List<T>.withoutType(vararg names: String): List
 /**
  * List containing elements with type of.
  *
- * @param kClasses The Kotlin class representing the type to include.
+ * @param kClass The Kotlin class representing the type to include.
  * @param kClasses The Kotlin class(es) representing the type(s) to include.
  * @return A list containing elements with the type of the specified Kotlin class(es).
  */
@@ -49,7 +49,7 @@ fun <T : KoPropertyTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kC
 /**
  * List containing elements without type of.
  *
- * @param kClasses The Kotlin class representing the type to exclude.
+ * @param kClass The Kotlin class representing the type to exclude.
  * @param kClasses The Kotlin class(es) representing the type(s) to exclude.
  * @return A list containing elements without type of the specified Kotlin class(es).
  */
