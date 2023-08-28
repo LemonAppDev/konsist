@@ -45,6 +45,28 @@ class KoClassDeclarationForKoParentProviderTest {
         }
     }
 
+    @Test
+    fun `class-has-java-parents`() {
+        // given
+        val sut = getSnippetFile("class-has-java-parents")
+            .classes()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            parents.map { it.name } shouldBeEqualTo listOf(
+                "SampleJavaParentClass",
+                "SampleJavaParentInterface",
+            )
+            numParents shouldBeEqualTo 2
+            hasParents() shouldBeEqualTo true
+            hasParents("SampleJavaParentClass") shouldBeEqualTo true
+            hasParents("OtherInterface") shouldBeEqualTo false
+            hasParents("SampleJavaParentClass", "SampleJavaParentInterface") shouldBeEqualTo true
+            hasParents("SampleJavaParentClass", "SampleJavaParentInterface", "OtherInterface") shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koclass/snippet/forkoparentprovider/", fileName)
 }

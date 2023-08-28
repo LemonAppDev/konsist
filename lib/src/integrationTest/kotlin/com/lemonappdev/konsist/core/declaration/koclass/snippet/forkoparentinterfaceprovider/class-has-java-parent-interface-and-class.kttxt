@@ -1,0 +1,12 @@
+import com.lemonappdev.konsist.testdata.SampleJavaParentInterface
+import com.lemonappdev.konsist.testdata.SampleType1
+import com.lemonappdev.konsist.testdata.SampleType2
+
+interface SampleKotlinParentInterface
+
+open class SampleKotlinParentClass
+
+class SampleClass<VIEW_STATE : SampleType1, NOTIFICATION : SampleType2> :
+    SampleJavaParentInterface,
+    SampleKotlinParentInterface,
+    SampleKotlinParentClass()
