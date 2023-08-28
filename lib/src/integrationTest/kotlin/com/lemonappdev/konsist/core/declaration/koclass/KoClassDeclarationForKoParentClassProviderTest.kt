@@ -42,7 +42,7 @@ class KoClassDeclarationForKoParentClassProviderTest {
         // given
         val sut = getSnippetFile("generic-class-has-parent-class-and-interfaces")
             .classes()
-            .first()
+            .first { it.name == "SampleClass" }
 
         // then
         assertSoftly(sut) {
