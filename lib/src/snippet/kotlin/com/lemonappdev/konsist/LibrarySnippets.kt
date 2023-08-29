@@ -2,7 +2,11 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
+import com.lemonappdev.konsist.api.ext.provider.hasValidParameterKDoc
+import com.lemonappdev.konsist.api.ext.provider.hasValidReceiverTypeKDoc
+import com.lemonappdev.konsist.api.ext.provider.hasValidReturnTypeKDoc
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.verify.assert
 
 class LibrarySnippets {
@@ -11,6 +15,24 @@ class LibrarySnippets {
             .scopeFromPackage("..api..")
             .declarationsOf<KoKDocProvider>(includeNested = true)
             .assert { it.hasKDoc }
+    }
+
+    fun `every function with parameters has a param tags`() {
+        Konsist.scopeFromPackage("..api..")
+            .functions(includeNested = true)
+            .assert { it.hasValidParameterKDoc() }
+    }
+
+    fun `every function with return value has a return tag`() {
+        Konsist.scopeFromPackage("..api..")
+            .functions(includeNested = true)
+            .assert { it.hasValidReturnTypeKDoc() }
+    }
+
+    fun `every extension has a receiver tag`() {
+        Konsist.scopeFromPackage("..api..")
+            .declarationsOf<KoReceiverTypeProvider>()
+            .assert { it.hasValidReceiverTypeKDoc() }
     }
 
     fun `every public function in api package must have explicit return type`() {
