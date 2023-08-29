@@ -21,12 +21,13 @@
 
 1. Create `release-vx.y.z` branch
 2. Update version in `gradle.properties` file and starter projects (`sample/starter-projects`)
-4. Merge release branch to `main`
-5. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
-6. Create a [new release](https://github.com/LemonAppDev/konsist/releases/new)
+3. Merge release branch to `main`
+4. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
+5. Create a [new release](https://github.com/LemonAppDev/konsist/releases/new)
     1. set `vx.y.z` as tag version
     2. set `vx.y.z` as release title
-7. Update version in the Konsist [Quick Starte](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) page 
+6. Update version in the Konsist [Quick Starte](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) page 
+7. Run `python3 ~/IdeaProjects/konsist/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
 
 ## Sonatype
 
