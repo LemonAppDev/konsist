@@ -13,8 +13,8 @@ import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 fun <T : KoConstructorProvider> T.hasValidConstructorParameterKDoc(): Boolean = if (constructors.isNotEmpty()) {
     val parameters = (this as? KoPrimaryConstructorProvider)?.primaryConstructor?.parameters
     parameters?.count() == (this as? KoKDocProvider)?.kDoc?.paramTags?.count() &&
-            parameters?.map { it.name } == (this as? KoKDocProvider)?.kDoc?.paramTags?.map { it.value } &&
-            (this as? KoSecondaryConstructorsProvider)?.secondaryConstructors?.all { it.hasValidParameterKDoc() } ?: false
+        parameters?.map { it.name } == (this as? KoKDocProvider)?.kDoc?.paramTags?.map { it.value } &&
+        (this as? KoSecondaryConstructorsProvider)?.secondaryConstructors?.all { it.hasValidParameterKDoc() } ?: false
 } else {
     true
 }

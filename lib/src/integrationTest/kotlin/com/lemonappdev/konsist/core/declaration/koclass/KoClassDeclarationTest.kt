@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.provider.hasValidConstructorParameterKDoc
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 

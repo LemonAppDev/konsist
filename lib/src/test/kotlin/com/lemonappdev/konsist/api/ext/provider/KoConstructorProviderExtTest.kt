@@ -25,6 +25,7 @@ class KoConstructorProviderExtTest {
         KoConstructorProvider,
         KoPrimaryConstructorProvider,
         KoSecondaryConstructorsProvider
+
     @Test
     fun `hasValidConstructorParameterKDoc() returns false when declaration not implement KoKDocProvider`() {
         // given
