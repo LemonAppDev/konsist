@@ -6,31 +6,31 @@ import org.junit.jupiter.api.Test
 
 class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
-    fun `class-fully-qualified-name`() {
+    fun `parent-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("class-fully-qualified-name")
+        val sut = getSnippetFile("parent-fully-qualified-name")
             .classes()
             .first()
             .parents
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass"
+        sut.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleClass"
     }
 
     @Test
-    fun `class-fully-qualified-name-without-package`() {
+    fun `parent-fully-qualified-name-without-import`() {
         // given
-        val sut = getSnippetFile("class-fully-qualified-name-without-package")
+        val sut = getSnippetFile("parent-fully-qualified-name-without-import")
             .classes()
             .first()
             .parents
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleClass"
+        sut.fullyQualifiedName shouldBeEqualTo ""
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparent/snippet/forkodeclarationfullyqualifiednameprovider/", fileName)
+        getSnippetKoScope("core/declaration/koparent/snippet/forkofullyqualifiednameprovider/", fileName)
 }
