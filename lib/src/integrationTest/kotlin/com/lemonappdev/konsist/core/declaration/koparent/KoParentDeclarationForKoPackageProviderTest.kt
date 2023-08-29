@@ -1,17 +1,17 @@
-package com.lemonappdev.konsist.core.declaration.koconstructor
+package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoConstructorDeclarationForKoPackageProviderTest {
+class KoParentDeclarationForKoPackageProviderTest {
     @Test
-    fun `constructor-is-not-in-package`() {
+    fun `parent-is-not-in-package`() {
         // given
-        val sut = getSnippetFile("constructor-is-not-in-package")
+        val sut = getSnippetFile("parent-is-not-in-package")
             .classes()
             .first()
-            .constructors
+            .parents
             .first()
 
         // then
@@ -19,12 +19,12 @@ class KoConstructorDeclarationForKoPackageProviderTest {
     }
 
     @Test
-    fun `constructor-is-in-package`() {
+    fun `parent-is-in-package`() {
         // given
-        val sut = getSnippetFile("constructor-is-in-package")
+        val sut = getSnippetFile("parent-is-in-package")
             .classes()
             .first()
-            .constructors
+            .parents
             .first()
 
         // then
@@ -32,5 +32,5 @@ class KoConstructorDeclarationForKoPackageProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koconstructor/snippet/forkopackageprovider/", fileName)
+        getSnippetKoScope("core/declaration/koparent/snippet/forkopackageprovider/", fileName)
 }
