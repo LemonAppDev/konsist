@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.api
 
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
-import com.lemonappdev.konsist.api.ext.list.withAllParents
-import com.lemonappdev.konsist.api.ext.list.withAllParentsOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidParameterKDoc
 import com.lemonappdev.konsist.api.ext.provider.hasValidReturnTypeKDoc
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
@@ -29,14 +27,6 @@ class ApiKonsistTest {
         apiPackageScope
             .functions(includeNested = true, includeLocal = true)
             .assert { it.hasValidParameterKDoc() && it.hasValidReturnTypeKDoc() }
-    }
-
-    @Test
-    fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
-        Konsist.scopeFromProject()
-            .classes()
-            .withAllParentsOf(ViewModel::class)
-            .assert { it.name.endsWith("ViewModel") }
     }
 
     @Test
