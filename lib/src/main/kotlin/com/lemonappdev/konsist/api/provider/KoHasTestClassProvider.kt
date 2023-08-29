@@ -15,6 +15,6 @@ interface KoHasTestClassProvider : KoBaseProvider {
     fun hasTestClass(
         testFileNameSuffix: String = "Test",
         moduleName: String? = null,
-        sourceSetName: String? = null
+        sourceSetName: String? = null,
     ): Boolean
 }
