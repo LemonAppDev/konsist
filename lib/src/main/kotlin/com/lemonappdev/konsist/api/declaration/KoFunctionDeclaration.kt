@@ -10,7 +10,6 @@ import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
-import com.lemonappdev.konsist.api.provider.KoLocalPropertyProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
@@ -18,6 +17,7 @@ import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoReturnStatementsProvider
 import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
@@ -51,7 +51,6 @@ interface KoFunctionDeclaration :
     KoLocalClassProvider,
     KoLocalDeclarationProvider,
     KoLocalFunctionProvider,
-    KoLocalPropertyProvider,
     KoLocationProvider,
     KoModifierProvider,
     KoNameProvider,
@@ -63,6 +62,7 @@ interface KoFunctionDeclaration :
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTopLevelProvider,
+    KoReturnStatementsProvider,
     KoVisibilityModifierProvider,
     KoOperatorModifierProvider,
     KoInlineModifierProvider,

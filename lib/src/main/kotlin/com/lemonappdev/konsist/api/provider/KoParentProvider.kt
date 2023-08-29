@@ -7,7 +7,8 @@ import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
  */
 interface KoParentProvider : KoBaseProvider {
     /**
-     * The parents (parent class and parent interfaces) of the declaration.
+     * The parents (parent class and parent interfaces) defined directly in the Kotlin file.
+     * Does not include parents defined in other files such as parent of the parent.
      */
     val parents: List<KoParentDeclaration>
 
@@ -17,7 +18,8 @@ interface KoParentProvider : KoBaseProvider {
     val numParents: Int
 
     /**
-     * Whatever class has parents (parent class and parent interfaces).
+     * Whatever class has parents (parent class and parent interfaces) defined directly in the Kotlin file.
+     * Does not include parents defined in other files such as parent of the parent.
      *
      * @param names the names of the parents to check.
      * @return `true` if the class has parents with the specified names (or any parent if [names] is empty), `false` otherwise.
