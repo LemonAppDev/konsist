@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
+import com.lemonappdev.konsist.api.ext.provider.hasValidParameterKDoc
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -111,6 +112,16 @@ internal class KoClassDeclarationCore private constructor(
     ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktClass, includeNested, includeLocal, this)
 
+    override fun hasValidConstructorParameterKDoc(): Boolean =
+        if (constructors.isNotEmpty()) {
+            val parameters = primaryConstructor?.parameters
+            parameters?.count() == kDoc?.paramTags?.count() &&
+                    parameters?.map { it.name } == kDoc?.paramTags?.map { it.value } &&
+                    secondaryConstructors.all { it.hasValidParameterKDoc() }
+        } else {
+            true
+        }
+
     override fun toString(): String {
         return locationWithText
     }
@@ -118,7 +129,10 @@ internal class KoClassDeclarationCore private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoClassDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktClass: KtClass, containingDeclaration: KoContainingDeclarationProvider): KoClassDeclaration =
+        internal fun getInstance(
+            ktClass: KtClass,
+            containingDeclaration: KoContainingDeclarationProvider
+        ): KoClassDeclaration =
             cache.getOrCreateInstance(ktClass, containingDeclaration) {
                 KoClassDeclarationCore(ktClass, containingDeclaration)
             }

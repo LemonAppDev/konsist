@@ -90,4 +90,11 @@ interface KoClassDeclaration :
      * @return a string representing the class.
      */
     override fun toString(): String
+
+    /**
+     * Whether class has a valid KDoc with a PARAM tag.
+     *
+     * @return `true` if the class has a valid KDoc with the PARAM tag, `false` otherwise.
+     */
+    fun hasValidConstructorParameterKDoc(): Boolean
 }
