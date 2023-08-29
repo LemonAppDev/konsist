@@ -1,6 +1,6 @@
 class SampleClassText {
     init {
         @Suppress("assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-        val sampleProperty = 6
+        fun sampleFunction() {}
     }
 }
