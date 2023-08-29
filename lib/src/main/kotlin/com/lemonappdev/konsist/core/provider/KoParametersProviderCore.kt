@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.core.declaration.KoParameterDeclarationCore
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
@@ -8,6 +9,7 @@ import org.jetbrains.kotlin.psi.KtCallableDeclaration
 internal interface KoParametersProviderCore :
     KoParametersProvider,
     KoContainingDeclarationProviderCore,
+    KoKDocProviderCore,
     KoBaseProviderCore {
     val ktCallableDeclaration: KtCallableDeclaration
     override val parameters: List<KoParameterDeclaration>
