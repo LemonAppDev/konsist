@@ -8,19 +8,6 @@ import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 
 /**
- * Whether declaration has a valid KDoc with a RETURN tag.
- *
- * @return `true` if the declaration has a valid KDoc with the RETURN tag, `false` otherwise.
- */
-fun <T> T.hasValidReturnTypeKDoc(): Boolean
-    where T : KoReturnTypeProvider,
-          T : KoKDocProvider = if (returnType != null && returnType?.name != "Unit") {
-    kDoc?.hasTags(KoKDocTag.RETURN) == true
-} else {
-    true
-}
-
-/**
  * Whether declaration has a valid KDoc with a PARAM tag.
  *
  * @return `true` if the declaration has a valid KDoc with the PARAM tag, `false` otherwise.

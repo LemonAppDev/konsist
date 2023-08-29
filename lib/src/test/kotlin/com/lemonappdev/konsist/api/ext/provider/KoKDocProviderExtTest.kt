@@ -18,9 +18,6 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoKDocProviderExtTest {
-    private interface SampleTestReturnTypeDeclaration :
-        KoReturnTypeProvider,
-        KoKDocProvider
 
     private interface SampleTestParametersDeclaration :
         KoParametersProvider,
@@ -30,83 +27,6 @@ class KoKDocProviderExtTest {
         KoPrimaryConstructorProvider,
         KoSecondaryConstructorsProvider,
         KoKDocProvider
-
-    @Test
-    fun `hasValidReturnTypeKDoc() returns true when declaration has no return type`() {
-        // given
-        val declaration: SampleTestReturnTypeDeclaration = mockk {
-            every { returnType } returns null
-        }
-
-        // when
-        val sut = declaration.hasValidReturnTypeKDoc()
-
-        // then
-        sut shouldBeEqualTo true
-    }
-
-    @Test
-    fun `hasValidReturnTypeKDoc() returns true when declaration has Unit return type`() {
-        // given
-        val declaration: SampleTestReturnTypeDeclaration = mockk {
-            every { returnType } returns mockk()
-            every { returnType?.name } returns "Unit"
-        }
-
-        // when
-        val sut = declaration.hasValidReturnTypeKDoc()
-
-        // then
-        sut shouldBeEqualTo true
-    }
-
-    @Test
-    fun `hasValidReturnTypeKDoc() calls hasTags method`() {
-        // given
-        val declaration: SampleTestReturnTypeDeclaration = mockk {
-            every { returnType } returns mockk()
-            every { returnType?.name } returns "Boolean"
-            every { kDoc?.hasTags(KoKDocTag.RETURN) } returns true
-        }
-
-        // when
-        declaration.hasValidReturnTypeKDoc()
-
-        // then
-        verify { declaration.kDoc?.hasTags(KoKDocTag.RETURN) }
-    }
-
-    @Test
-    fun `hasValidReturnTypeKDoc() returns true when declaration has valid return type kdoc`() {
-        // given
-        val declaration: SampleTestReturnTypeDeclaration = mockk {
-            every { returnType } returns mockk()
-            every { returnType?.name } returns "Boolean"
-            every { kDoc?.hasTags(KoKDocTag.RETURN) } returns true
-        }
-
-        // when
-        val sut = declaration.hasValidReturnTypeKDoc()
-
-        // then
-        sut shouldBeEqualTo true
-    }
-
-    @Test
-    fun `hasValidReturnTypeKDoc() returns false when declaration has no valid return type kdoc`() {
-        // given
-        val declaration: SampleTestReturnTypeDeclaration = mockk {
-            every { returnType } returns mockk()
-            every { returnType?.name } returns "Boolean"
-            every { kDoc?.hasTags(KoKDocTag.RETURN) } returns false
-        }
-
-        // when
-        val sut = declaration.hasValidReturnTypeKDoc()
-
-        // then
-        sut shouldBeEqualTo false
-    }
 
     @Test
     fun `hasValidParameterKDoc() returns true when declaration has no parameters`() {
