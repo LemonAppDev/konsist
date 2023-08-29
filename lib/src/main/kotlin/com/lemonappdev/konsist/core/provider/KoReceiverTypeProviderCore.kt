@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 internal interface KoReceiverTypeProviderCore :
     KoReceiverTypeProvider,
     KoContainingDeclarationProviderCore,
+    KoKDocProviderCore,
     KoBaseProviderCore {
     val ktCallableDeclaration: KtCallableDeclaration
 

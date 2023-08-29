@@ -118,7 +118,10 @@ internal class KoClassDeclarationCore private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoClassDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktClass: KtClass, containingDeclaration: KoContainingDeclarationProvider): KoClassDeclaration =
+        internal fun getInstance(
+            ktClass: KtClass,
+            containingDeclaration: KoContainingDeclarationProvider,
+        ): KoClassDeclaration =
             cache.getOrCreateInstance(ktClass, containingDeclaration) {
                 KoClassDeclarationCore(ktClass, containingDeclaration)
             }

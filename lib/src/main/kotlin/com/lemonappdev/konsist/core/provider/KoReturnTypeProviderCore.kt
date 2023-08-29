@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 internal interface KoReturnTypeProviderCore :
     KoReturnTypeProvider,
     KoContainingDeclarationProviderCore,
+    KoKDocProviderCore,
     KoBaseProviderCore {
     val ktFunction: KtFunction
 
