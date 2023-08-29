@@ -10,7 +10,7 @@ import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvide
 import com.lemonappdev.konsist.api.verify.assert
 import com.lemonappdev.konsist.api.verify.assertNot
 
-class TestingSnippets {
+class TestSnippets {
     fun `every class has test`() {
         Konsist
             .scopeFromProduction()
