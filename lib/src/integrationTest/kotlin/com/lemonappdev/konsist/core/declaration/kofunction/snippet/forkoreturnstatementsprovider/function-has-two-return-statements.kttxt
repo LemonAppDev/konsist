@@ -1,0 +1,7 @@
+fun sampleFunction(): String {
+    if (true) {
+        return "sample text 1"
+    } else {
+        return "sample text 2"
+    }
+}
