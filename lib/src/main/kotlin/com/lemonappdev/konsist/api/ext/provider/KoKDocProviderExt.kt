@@ -22,19 +22,6 @@ fun <T> T.hasValidReturnTypeKDoc(): Boolean
 }
 
 /**
- * Whether declaration has a valid KDoc with a RECEIVER tag.
- *
- * @return `true` if the declaration has a valid KDoc with the RECEIVER tag, `false` otherwise.
- */
-fun <T> T.hasValidReceiverTypeKDoc(): Boolean
-    where T : KoReceiverTypeProvider,
-          T : KoKDocProvider = if (receiverType != null) {
-    kDoc?.hasTags(KoKDocTag.RECEIVER) == true
-} else {
-    true
-}
-
-/**
  * Whether declaration has a valid KDoc with a PARAM tag.
  *
  * @return `true` if the declaration has a valid KDoc with the PARAM tag, `false` otherwise.
