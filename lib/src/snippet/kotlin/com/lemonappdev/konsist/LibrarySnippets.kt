@@ -29,21 +29,10 @@ class LibrarySnippets {
             .assert { it.hasValidReturnTypeKDoc() }
     }
 
-    fun `option 1 - every extension has a receiver tag`() {
-        val scope1 = Konsist.scopeFromPackage("..api..")
-            .functions(includeNested = true, includeLocal = true)
-
-        val scope2 = Konsist.scopeFromPackage("..api..")
-            .properties(includeNested = true, includeLocal = true)
-
-        (scope1 + scope2)
-            .assert { it.hasValidReceiverTypeKDoc() }
-    }
-
-    fun `option 2 - every extension has a receiver tag`() {
+    fun `every extension has a receiver tag`() {
         Konsist.scopeFromPackage("..api..")
             .declarationsOf<KoReceiverTypeProvider>()
-            .assert { it is KoKDocProvider && it.hasValidReceiverTypeKDoc() }
+            .assert { it.hasValidReceiverTypeKDoc() }
     }
 
     fun `every public function in api package must have explicit return type`() {
