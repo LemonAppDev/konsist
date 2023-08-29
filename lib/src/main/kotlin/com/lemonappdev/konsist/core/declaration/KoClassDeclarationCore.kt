@@ -112,16 +112,6 @@ internal class KoClassDeclarationCore private constructor(
     ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktClass, includeNested, includeLocal, this)
 
-    override fun hasValidConstructorParameterKDoc(): Boolean =
-        if (constructors.isNotEmpty()) {
-            val parameters = primaryConstructor?.parameters
-            parameters?.count() == kDoc?.paramTags?.count() &&
-                parameters?.map { it.name } == kDoc?.paramTags?.map { it.value } &&
-                secondaryConstructors.all { it.hasValidParameterKDoc() }
-        } else {
-            true
-        }
-
     override fun toString(): String {
         return locationWithText
     }
