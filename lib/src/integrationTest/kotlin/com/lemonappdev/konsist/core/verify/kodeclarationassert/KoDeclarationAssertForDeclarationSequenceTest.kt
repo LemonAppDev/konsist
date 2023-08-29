@@ -360,7 +360,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty" } }
+        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -374,7 +374,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty" } }
+        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -388,7 +388,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty" } }
+        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -402,7 +402,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty" } }
+        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -414,7 +414,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .first()
                 .initBlocks
                 .first()
-                .localProperties
+                .localFunctions
                 .asSequence()
 
         // then
@@ -430,7 +430,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .first()
                 .initBlocks
                 .first()
-                .localProperties
+                .localFunctions
                 .asSequence()
 
         // then
@@ -448,7 +448,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .first()
                 .initBlocks
                 .first()
-                .localProperties
+                .localFunctions
                 .asSequence()
 
         // then
@@ -464,7 +464,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .first()
                 .initBlocks
                 .first()
-                .localProperties
+                .localFunctions
                 .asSequence()
 
         // then
@@ -480,7 +480,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .first()
                 .initBlocks
                 .first()
-                .localProperties
+                .localFunctions
                 .asSequence()
 
         // then
@@ -496,7 +496,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 .first()
                 .initBlocks
                 .first()
-                .localProperties
+                .localFunctions
                 .asSequence()
 
         // then
