@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.api.ext.provider
 import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
-import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

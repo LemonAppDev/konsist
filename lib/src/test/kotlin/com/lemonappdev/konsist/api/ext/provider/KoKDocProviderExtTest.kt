@@ -1,19 +1,15 @@
 package com.lemonappdev.konsist.api.ext.provider
 
-import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
-import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
-import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 

@@ -9,8 +9,8 @@ import com.lemonappdev.konsist.api.provider.KoParametersProvider
  * @return `true` if the declaration has a valid KDoc with the PARAM tag, `false` otherwise.
  */
 fun <T : KoParametersProvider> T.hasValidParameterKDoc(): Boolean = if (parameters.isNotEmpty()) {
-    parameters.count() == (this as? KoKDocProvider)?.kDoc?.paramTags?.count()
-            && parameters.map { it.name } == kDoc?.paramTags?.map { it.value }
+    parameters.count() == (this as? KoKDocProvider)?.kDoc?.paramTags?.count() &&
+        parameters.map { it.name } == kDoc?.paramTags?.map { it.value }
 } else {
     true
 }
