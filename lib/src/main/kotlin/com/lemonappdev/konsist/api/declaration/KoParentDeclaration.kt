@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
-import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 
 /**
  * Represents a Kotlin parent declaration.
