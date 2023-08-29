@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class KoClassDeclarationForKoHasTestProviderTest {
+class KoClassDeclarationForKoHasTestClassProviderTest {
     @Test
     fun `class-with-test-with-default-parameters`() {
         // given
@@ -18,7 +18,7 @@ class KoClassDeclarationForKoHasTestProviderTest {
             .first()
 
         // then
-        sut.hasTest() shouldBeEqualTo true
+        sut.hasTestClass() shouldBeEqualTo true
     }
 
     @Test
@@ -30,7 +30,7 @@ class KoClassDeclarationForKoHasTestProviderTest {
             .first()
 
         // then
-        sut.hasTest() shouldBeEqualTo false
+        sut.hasTestClass() shouldBeEqualTo false
     }
 
     @Test
@@ -42,7 +42,7 @@ class KoClassDeclarationForKoHasTestProviderTest {
             .first { it.name == "LibClass" }
 
         // then
-        sut.hasTest("Spec") shouldBeEqualTo true
+        sut.hasTestClass("Spec") shouldBeEqualTo true
     }
 
     @Test
@@ -54,7 +54,7 @@ class KoClassDeclarationForKoHasTestProviderTest {
             .first()
 
         // then
-        sut.hasTest("Spec") shouldBeEqualTo false
+        sut.hasTestClass("Spec") shouldBeEqualTo false
     }
 
     @ParameterizedTest
@@ -71,7 +71,7 @@ class KoClassDeclarationForKoHasTestProviderTest {
             .first()
 
         // then
-        sut.hasTest(moduleName = moduleName, sourceSetName = sourceSetName) shouldBeEqualTo value
+        sut.hasTestClass(moduleName = moduleName, sourceSetName = sourceSetName) shouldBeEqualTo value
     }
 
     companion object {
