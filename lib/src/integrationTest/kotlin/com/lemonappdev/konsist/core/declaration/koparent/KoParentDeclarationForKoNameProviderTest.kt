@@ -11,10 +11,11 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut = getSnippetFile("class-with-parent-class")
             .classes()
             .first()
-            .parentClass
+            .parents
+            .first()
 
         // then
-        sut?.name shouldBeEqualTo "SampleSuperClass"
+        sut.name shouldBeEqualTo "SampleSuperClass"
     }
 
     @Test
@@ -23,10 +24,11 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut = getSnippetFile("class-with-generic-parent-class")
             .classes()
             .first()
-            .parentClass
+            .parents
+            .first()
 
         // then
-        sut?.name shouldBeEqualTo "SampleGenericSuperClass"
+        sut.name shouldBeEqualTo "SampleGenericSuperClass"
     }
 
     @Test
@@ -35,10 +37,11 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut = getSnippetFile("class-with-parametrized-parent-class")
             .classes()
             .first()
-            .parentClass
+            .parents
+            .first()
 
         // then
-        sut?.name shouldBeEqualTo "SampleParametrizedSuperClass"
+        sut.name shouldBeEqualTo "SampleParametrizedSuperClass"
     }
 
     @Test
@@ -47,10 +50,11 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut = getSnippetFile("class-with-parametrized-and-generic-parent-class")
             .classes()
             .first()
-            .parentClass
+            .parents
+            .first()
 
         // then
-        sut?.name shouldBeEqualTo "SampleParametrizedSuperClass"
+        sut.name shouldBeEqualTo "SampleParametrizedSuperClass"
     }
 
     @Test
@@ -59,7 +63,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut = getSnippetFile("class-with-parent-interface")
             .classes()
             .first()
-            .parentInterfaces
+            .parents
             .first()
 
         // then
@@ -72,7 +76,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut = getSnippetFile("class-with-generic-parent-interface")
             .classes()
             .first()
-            .parentInterfaces
+            .parents
             .first()
 
         // then
@@ -85,7 +89,7 @@ class KoParentDeclarationForKoNameProviderTest {
         val sut = getSnippetFile("class-with-parent-by-delegation")
             .classes()
             .first()
-            .parentInterfaces
+            .parents
             .first()
 
         // then
