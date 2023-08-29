@@ -1,7 +1,7 @@
 @file:Suppress("assert-suppress-by-name-at-file-level-when-it-is-not-KoAnnotationProvider")
 
-class SampleClassWithoutOtherProperty {
+class SampleClassWithoutOtherFunction {
     init {
-        val sampleProperty = 6
+        fun sampleFunction() {}
     }
 }

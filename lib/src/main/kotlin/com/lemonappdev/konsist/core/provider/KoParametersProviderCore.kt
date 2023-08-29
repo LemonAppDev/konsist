@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.psi.KtCallableDeclaration
 internal interface KoParametersProviderCore :
     KoParametersProvider,
     KoContainingDeclarationProviderCore,
+    KoKDocProviderCore,
     KoBaseProviderCore {
     val ktCallableDeclaration: KtCallableDeclaration
     override val parameters: List<KoParameterDeclaration>

@@ -342,7 +342,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty" } }
+        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -355,7 +355,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty" } }
+        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -368,7 +368,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty" } }
+        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -381,7 +381,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsLocalProperty { property -> property.name == "otherProperty" } }
+        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -393,7 +393,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .first()
                 .initBlocks
                 .first()
-                .localProperties
+                .localFunctions
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -408,7 +408,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .first()
                 .initBlocks
                 .first()
-                .localProperties
+                .localFunctions
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -425,7 +425,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .first()
                 .initBlocks
                 .first()
-                .localProperties
+                .localFunctions
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -440,7 +440,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .first()
                 .initBlocks
                 .first()
-                .localProperties
+                .localFunctions
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -455,7 +455,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .first()
                 .initBlocks
                 .first()
-                .localProperties
+                .localFunctions
 
         // then
         sut.assert { it.name.endsWith("Text") }
@@ -470,7 +470,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 .first()
                 .initBlocks
                 .first()
-                .localProperties
+                .localFunctions
 
         // then
         sut.assert { it.name.endsWith("Text") }

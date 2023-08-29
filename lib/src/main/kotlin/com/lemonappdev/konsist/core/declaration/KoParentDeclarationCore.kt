@@ -2,7 +2,11 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
@@ -10,13 +14,14 @@ import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal interface KoParentDeclarationCore :
+internal class KoParentDeclarationCore private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
     KoParentDeclaration,
     KoBaseProviderCore,
+    KoContainingFileProviderCore,
+    KoFullyQualifiedNameProviderCore,
     KoNameProviderCore,
     KoLocationProviderCore,
     KoPathProviderCore {
-    val ktSuperTypeListEntry: KtSuperTypeListEntry
 
     override val psiElement: PsiElement
         get() = ktSuperTypeListEntry
@@ -38,4 +43,28 @@ internal interface KoParentDeclarationCore :
             .replace(Regex("<.*|\\(.*"), "")
             .replace(EndOfLine.UNIX.value, " ")
             .substringBefore(" by")
+
+    override val fullyQualifiedName: String by lazy {
+        containingFile
+            .imports
+            .firstOrNull { it.text.endsWith(".$name") }
+            ?.name ?: ""
+    }
+
+    override fun toString(): String {
+        return locationWithText
+    }
+
+    internal companion object {
+        private val cache: KoDeclarationCache<KoParentDeclaration> = KoDeclarationCache()
+
+        internal fun getInstance(
+            ktSuperTypeListEntry: KtSuperTypeListEntry,
+            containingDeclaration: KoContainingDeclarationProvider,
+        ): KoParentDeclaration =
+            cache.getOrCreateInstance(
+                ktSuperTypeListEntry,
+                containingDeclaration,
+            ) { KoParentDeclarationCore(ktSuperTypeListEntry) }
+    }
 }
