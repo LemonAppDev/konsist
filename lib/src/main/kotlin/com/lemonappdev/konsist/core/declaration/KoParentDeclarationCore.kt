@@ -5,6 +5,8 @@ import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
@@ -15,6 +17,8 @@ import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 internal class KoParentDeclarationCore private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
     KoParentDeclaration,
     KoBaseProviderCore,
+    KoContainingFileProviderCore,
+    KoFullyQualifiedNameProviderCore,
     KoNameProviderCore,
     KoLocationProviderCore,
     KoPathProviderCore {
@@ -39,6 +43,13 @@ internal class KoParentDeclarationCore private constructor(private val ktSuperTy
             .replace(Regex("<.*|\\(.*"), "")
             .replace(EndOfLine.UNIX.value, " ")
             .substringBefore(" by")
+
+    override val fullyQualifiedName: String by lazy {
+        containingFile
+            .imports
+            .firstOrNull { it.text.endsWith(".$name") }
+            ?.name ?: ""
+    }
 
     override fun toString(): String {
         return locationWithText
