@@ -1,9 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kotypealias
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoTypeAliasDeclarationForKoPackageProviderTest {
@@ -26,10 +24,7 @@ class KoTypeAliasDeclarationForKoPackageProviderTest {
             .first()
 
         // then
-        assertSoftly(sut) {
-            packagee shouldNotBeEqualTo null
-            packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
-        }
+        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
     }
 
     private fun getSnippetFile(fileName: String) =

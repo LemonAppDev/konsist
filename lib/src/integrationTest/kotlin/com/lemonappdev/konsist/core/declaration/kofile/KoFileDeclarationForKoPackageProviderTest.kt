@@ -1,9 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoFileDeclarationForKoPackageProviderTest {
@@ -26,10 +24,7 @@ class KoFileDeclarationForKoPackageProviderTest {
             .first()
 
         // then
-        assertSoftly(sut) {
-            packagee shouldNotBeEqualTo null
-            packagee?.name shouldBeEqualTo "samplepackage"
-        }
+        sut.packagee?.name shouldBeEqualTo "samplepackage"
     }
 
     private fun getSnippetFile(fileName: String) = getSnippetKoScope(
