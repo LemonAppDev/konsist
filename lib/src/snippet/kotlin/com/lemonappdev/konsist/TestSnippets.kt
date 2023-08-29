@@ -15,7 +15,7 @@ class TestSnippets {
         Konsist
             .scopeFromProduction()
             .classes()
-            .assert { it.hasTest() }
+            .assert { it.hasTestClass() }
     }
 
     fun `every class - except data and value class - has test`() {
@@ -23,7 +23,7 @@ class TestSnippets {
             .scopeFromProduction()
             .classes()
             .withoutSomeModifiers(KoModifier.DATA, KoModifier.VALUE)
-            .assert { it.hasTest() }
+            .assert { it.hasTestClass() }
     }
 
     fun `test classes should have test subject named sut`() {

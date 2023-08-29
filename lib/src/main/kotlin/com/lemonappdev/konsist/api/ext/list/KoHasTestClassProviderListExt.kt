@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.provider.KoHasTestProvider
+import com.lemonappdev.konsist.api.provider.KoHasTestClassProvider
 
 /**
  * List containing elements with a test.
@@ -10,11 +10,11 @@ import com.lemonappdev.konsist.api.provider.KoHasTestProvider
  * @param sourceSetName      the name of the source set to check (optional).
  * @return A list containing elements with a test.
  */
-fun <T : KoHasTestProvider> List<T>.withTest(
+fun <T : KoHasTestClassProvider> List<T>.withTestClass(
     testFileNameSuffix: String = "Test",
     moduleName: String? = null,
     sourceSetName: String? = null,
-): List<T> = filter { it.hasTest(testFileNameSuffix, moduleName, sourceSetName) }
+): List<T> = filter { it.hasTestClass(testFileNameSuffix, moduleName, sourceSetName) }
 
 /**
  * List containing elements without a test.
@@ -24,8 +24,8 @@ fun <T : KoHasTestProvider> List<T>.withTest(
  * @param sourceSetName      the name of the source set to check (optional).
  * @return A list containing elements without a test.
  */
-fun <T : KoHasTestProvider> List<T>.withoutTest(
+fun <T : KoHasTestClassProvider> List<T>.withoutTestClass(
     testFileNameSuffix: String = "Test",
     moduleName: String? = null,
     sourceSetName: String? = null,
-): List<T> = filterNot { it.hasTest(testFileNameSuffix, moduleName, sourceSetName) }
+): List<T> = filterNot { it.hasTestClass(testFileNameSuffix, moduleName, sourceSetName) }
