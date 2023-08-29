@@ -1,0 +1,8 @@
+class SampleClass : SampleParentClass, SampleInterface {
+    constructor() : super()
+    constructor(sampleProperty: Int)
+}
+
+open class SampleParentClass
+
+interface SampleInterface

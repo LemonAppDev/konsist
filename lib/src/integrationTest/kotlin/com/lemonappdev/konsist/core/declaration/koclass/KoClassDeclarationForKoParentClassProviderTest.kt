@@ -68,6 +68,24 @@ class KoClassDeclarationForKoParentClassProviderTest {
         }
     }
 
+    @Test
+    fun `class-has-parent-class-without-constructor-invocation`() {
+        // given
+        val sut = getSnippetFile("class-has-parent-class-without-constructor-invocation")
+            .classes()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            parentClass?.name shouldBeEqualTo "SampleParentClass"
+            hasParentClass() shouldBeEqualTo true
+            hasParentClass("SampleParentClass") shouldBeEqualTo true
+            hasParentClass("OtherClass") shouldBeEqualTo false
+
+            hasParentInterfaces("SampleParentClass") shouldBeEqualTo false
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koclass/snippet/forkoparentclassprovider/", fileName)
 }

@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.core.declaration.KoParentInterfaceDeclarationCore
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtSuperTypeEntry
-import kotlin.reflect.jvm.internal.impl.load.java.structure.JavaClass
 
 internal interface KoParentInterfaceProviderCore :
     KoContainingDeclarationProviderCore,
@@ -19,7 +18,6 @@ internal interface KoParentInterfaceProviderCore :
                 .getSuperTypeList()
                 ?.children
                 ?.filterIsInstance<KtSuperTypeEntry>()
-                ?.filterNot { it is JavaClass }
                 ?: emptyList()
 
             val delegations = ktClassOrObject
