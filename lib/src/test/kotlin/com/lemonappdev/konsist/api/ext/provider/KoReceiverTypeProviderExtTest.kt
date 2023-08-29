@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.api.ext.provider
 import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
+import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -13,6 +14,20 @@ class KoReceiverTypeProviderExtTest {
     private interface SampleTestReceiverTypeDeclaration :
         KoReceiverTypeProvider,
         KoKDocProvider
+
+    @Test
+    fun `hasValidReceiverTypeKDoc() returns false when declaration not implement KoKDocProvider`() {
+        // given
+        val declaration: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns mockk()
+        }
+
+        // when
+        val sut = declaration.hasValidReceiverTypeKDoc()
+
+        // then
+        sut shouldBeEqualTo false
+    }
 
     @Test
     fun `hasValidReceiverTypeKDoc() returns true when declaration has no receiver`() {

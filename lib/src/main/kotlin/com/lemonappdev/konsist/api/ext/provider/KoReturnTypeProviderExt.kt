@@ -11,7 +11,7 @@ import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
  */
 fun <T : KoReturnTypeProvider> T.hasValidReturnTypeKDoc(): Boolean =
     if (returnType != null && returnType?.name != "Unit") {
-        (this as KoKDocProvider).kDoc?.hasTags(KoKDocTag.RETURN) == true
+        (this as? KoKDocProvider)?.kDoc?.hasTags(KoKDocTag.RETURN) == true
     } else {
         true
     }

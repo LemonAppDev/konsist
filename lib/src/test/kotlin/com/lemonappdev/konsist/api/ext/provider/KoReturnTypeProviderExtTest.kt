@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.ext.provider
 
 import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import io.mockk.every
 import io.mockk.mockk
@@ -13,6 +14,21 @@ class KoReturnTypeProviderExtTest {
     private interface SampleTestReturnTypeDeclaration :
         KoReturnTypeProvider,
         KoKDocProvider
+
+    @Test
+    fun `hasValidReturnTypeKDoc() returns false when declaration not implement KoKDocProvider`() {
+        // given
+        val declaration: KoReturnTypeProvider = mockk {
+            every { returnType } returns mockk()
+            every { returnType?.name } returns "Boolean"
+        }
+
+        // when
+        val sut = declaration.hasValidReturnTypeKDoc()
+
+        // then
+        sut shouldBeEqualTo false
+    }
 
     @Test
     fun `hasValidReturnTypeKDoc() returns true when declaration has no return type`() {
