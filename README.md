@@ -35,7 +35,7 @@ fun `classes with 'UseCase' suffix should reside in 'usecase' package`() {
 fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
     Konsist.scopeFromProject()
         .classes()
-        .withParentClassOf(ViewModel::class)
+        .withAllParentsOf(ViewModel::class)
         .assert { it.name.endsWith("ViewModel") }
 }
 ```
