@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
  * @param names The package names to include.
  * @return A list containing elements that reside in any of the specified packages (or any package if [names] is empty).
  */
-fun <T: KoResideInOrOutsidePackageProvider> List<T>.withPackage(vararg names: String): List<T>  = filter {
+fun <T : KoResideInOrOutsidePackageProvider> List<T>.withPackage(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> (it as? KoPackageProvider)?.packagee != null
         else -> names.any { packagee -> it.resideInPackage(packagee) }
@@ -22,7 +22,7 @@ fun <T: KoResideInOrOutsidePackageProvider> List<T>.withPackage(vararg names: St
  * @param names The package names to exclude.
  * @return A list containing elements that don't reside in any of the specified packages (or none package if [names] is empty).
  */
-fun <T: KoResideInOrOutsidePackageProvider> List<T>.withoutPackage(vararg names: String): List<T> = filter {
+fun <T : KoResideInOrOutsidePackageProvider> List<T>.withoutPackage(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> (it as? KoPackageProvider)?.packagee == null
         else -> names.all { packagee -> it.resideOutsidePackage(packagee) }
