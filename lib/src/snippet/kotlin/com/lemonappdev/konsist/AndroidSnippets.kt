@@ -2,7 +2,7 @@ package com.lemonappdev.konsist
 
 import androidx.lifecycle.ViewModel
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.withParentClassOf
+import com.lemonappdev.konsist.api.ext.list.withAllParentsOf
 import com.lemonappdev.konsist.api.verify.assert
 import com.lemonappdev.konsist.api.verify.assertNot
 
@@ -11,7 +11,7 @@ class AndroidSnippets {
         Konsist
             .scopeFromProject()
             .classes()
-            .withParentClassOf(ViewModel::class)
+            .withAllParentsOf(ViewModel::class)
             .assert { it.name.endsWith("ViewModel") }
     }
 
