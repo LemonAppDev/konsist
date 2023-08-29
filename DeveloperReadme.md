@@ -27,7 +27,8 @@
     1. set `vx.y.z` as tag version
     2. set `vx.y.z` as release title
 6. Update version in the Konsist [Quick Starte](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) page 
-7. Run `python3 ~/IdeaProjects/konsist/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
+7. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
+8. Merge above PR
 
 ## Sonatype
 
