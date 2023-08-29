@@ -6,9 +6,9 @@ import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 
 /**
- * Whether class has a valid KDoc with a PARAM tag.
+ * Whether declaration has a valid KDoc with a PARAM tag.
  *
- * @return `true` if the class has a valid KDoc with the PARAM tag, `false` otherwise.
+ * @return `true` if the declaration has a valid KDoc with the PARAM tag, `false` otherwise.
  */
 fun <T : KoConstructorProvider> T.hasValidConstructorParameterKDoc(): Boolean = if (constructors.isNotEmpty()) {
     val parameters = (this as? KoPrimaryConstructorProvider)?.primaryConstructor?.parameters
