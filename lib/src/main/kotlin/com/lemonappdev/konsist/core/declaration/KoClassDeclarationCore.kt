@@ -116,8 +116,8 @@ internal class KoClassDeclarationCore private constructor(
         if (constructors.isNotEmpty()) {
             val parameters = primaryConstructor?.parameters
             parameters?.count() == kDoc?.paramTags?.count() &&
-                    parameters?.map { it.name } == kDoc?.paramTags?.map { it.value } &&
-                    secondaryConstructors.all { it.hasValidParameterKDoc() }
+                parameters?.map { it.name } == kDoc?.paramTags?.map { it.value } &&
+                secondaryConstructors.all { it.hasValidParameterKDoc() }
         } else {
             true
         }
@@ -131,7 +131,7 @@ internal class KoClassDeclarationCore private constructor(
 
         internal fun getInstance(
             ktClass: KtClass,
-            containingDeclaration: KoContainingDeclarationProvider
+            containingDeclaration: KoContainingDeclarationProvider,
         ): KoClassDeclaration =
             cache.getOrCreateInstance(ktClass, containingDeclaration) {
                 KoClassDeclarationCore(ktClass, containingDeclaration)

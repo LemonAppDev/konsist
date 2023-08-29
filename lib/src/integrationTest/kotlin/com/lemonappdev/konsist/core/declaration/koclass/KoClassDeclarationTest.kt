@@ -43,7 +43,7 @@ class KoClassDeclarationTest {
         // given
         val sut =
             getSnippetFile(
-                "class-has-no-valid-constructor-parameter-kdoc-when-secondary-constructor-has-no-valid-param-kdoc"
+                "class-has-no-valid-constructor-parameter-kdoc-when-secondary-constructor-has-no-valid-param-kdoc",
             )
                 .classes()
                 .first()
@@ -69,7 +69,7 @@ class KoClassDeclarationTest {
         // given
         val sut =
             getSnippetFile(
-                "class-has-no-valid-constructor-parameter-kdoc-when-the-number-of-parameters-and-tags-is-different"
+                "class-has-no-valid-constructor-parameter-kdoc-when-the-number-of-parameters-and-tags-is-different",
             )
                 .classes()
                 .first()
