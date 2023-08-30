@@ -11,6 +11,7 @@ internal interface KoParametersProviderCore :
     KoKDocProviderCore,
     KoBaseProviderCore {
     val ktCallableDeclaration: KtCallableDeclaration
+
     override val parameters: List<KoParameterDeclaration>
         get() = ktCallableDeclaration
             .valueParameters
