@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoReturnStatementsProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -18,6 +19,7 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoReturnStatementsProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
@@ -61,6 +63,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KoPathProviderCore,
     KoReceiverTypeProviderCore,
     KoResideInOrOutsidePackageProviderCore,
+    KoReturnStatementsProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
     KoVisibilityModifierProviderCore,
