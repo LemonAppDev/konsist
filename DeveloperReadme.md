@@ -29,6 +29,7 @@
 6. Update version in the Konsist [Quick Starte](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) page 
 7. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
 8. Merge above PR
+9. Drop message on [Konsist Channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) in Kotlin Slack
 
 ## Sonatype
 
