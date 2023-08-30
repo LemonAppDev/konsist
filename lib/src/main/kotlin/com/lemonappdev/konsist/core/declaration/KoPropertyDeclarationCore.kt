@@ -45,9 +45,17 @@ import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.hasBody
 
 internal class KoPropertyDeclarationCore private constructor(
-    // Property is described as `KtProperty` inside, but this type doesn't describe situation when property
-    // is declared at constructor
-    // e.g. `class SampleClass(val sampleProperty: String)`
+    /*
+    KtProperty - property defined as member (inside class/object/interface body) e.g.
+    class SampleClass() {
+        val sampleProperty: String
+    }
+
+    KtParameter - property defined inside constructor e.g.
+    class SampleClass(val sampleProperty: String)
+
+    KtCallableDeclaration - common parent for KtProperty and KtParameter
+     */
     override val ktCallableDeclaration: KtCallableDeclaration,
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
@@ -108,7 +116,7 @@ internal class KoPropertyDeclarationCore private constructor(
     override val hasValModifier: Boolean by lazy {
         when (ktCallableDeclaration) {
             is KtProperty -> !ktCallableDeclaration.isVar
-            is KtParameter -> ktCallableDeclaration.text.contains("val ")
+            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "val"
             else -> false
         }
     }
@@ -116,7 +124,7 @@ internal class KoPropertyDeclarationCore private constructor(
     override val hasVarModifier: Boolean by lazy {
         when (ktCallableDeclaration) {
             is KtProperty -> ktCallableDeclaration.isVar
-            is KtParameter -> ktCallableDeclaration.text.contains("var ")
+            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"
             else -> false
         }
     }
