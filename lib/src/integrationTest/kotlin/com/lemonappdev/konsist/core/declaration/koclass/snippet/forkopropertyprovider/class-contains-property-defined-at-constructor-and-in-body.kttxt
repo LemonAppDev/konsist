@@ -1,0 +1,3 @@
+class SampleClass(val sampleProperty1: Int, sampleParameter: Int) {
+    val sampleProperty2 = ""
+}
