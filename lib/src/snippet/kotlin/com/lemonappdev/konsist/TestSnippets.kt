@@ -5,10 +5,14 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.declarations
 import com.lemonappdev.konsist.api.ext.list.functions
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutSomeModifiers
+import com.lemonappdev.konsist.api.ext.list.withoutSomeAnnotationsOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.api.verify.assert
 import com.lemonappdev.konsist.api.verify.assertNot
+import org.junit.jupiter.api.RepeatedTest
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
 
 class TestSnippets {
     fun `every class has test`() {
@@ -46,14 +50,7 @@ class TestSnippets {
             .classes()
             .declarations()
             .filterIsInstance<KoAnnotationProvider>()
-            .filterNot {
-                it.annotations.any { annotation ->
-                    annotation
-                        .name
-                        .lowercase()
-                        .contains("test")
-                }
-            }
+            .withoutSomeAnnotationsOf(Test::class, ParameterizedTest::class, RepeatedTest::class)
             .filterIsInstance<KoVisibilityModifierProvider>()
             .assert { it.hasPrivateModifier }
     }
