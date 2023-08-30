@@ -65,6 +65,20 @@ interface KoPropertyDeclaration :
     KoExpectModifierProvider,
     KoConstModifierProvider {
     /**
+     * Whether property is defined in constructor (true) or not (false).
+     *
+     * e.g.
+     * ```
+     * val topLevelProperty = "" // isConstructorDefined == false
+     *
+     * class SampleClass(val constructorProperty: Int) { // isConstructorDefined == true
+     *      val bodyProperty = "" // isConstructorDefined == false
+     * }
+     * ```
+     */
+    val isConstructorDefined: Boolean
+
+    /**
      * String representing the property.
      *
      * @return a string representing the property.

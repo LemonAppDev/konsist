@@ -1,8 +1,10 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -37,11 +39,24 @@ import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
+import org.jetbrains.kotlin.psi.psiUtil.hasBody
 
 internal class KoPropertyDeclarationCore private constructor(
-    override val ktProperty: KtProperty,
+    /*
+    KtProperty - property defined as member (inside class/object/interface body) e.g.
+    class SampleClass() {
+        val sampleProperty: String
+    }
+
+    KtParameter - property defined inside constructor e.g.
+    class SampleClass(val sampleProperty: String)
+
+    KtCallableDeclaration - common parent for KtProperty and KtParameter
+     */
+    override val ktCallableDeclaration: KtCallableDeclaration,
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) :
     KoPropertyDeclaration,
@@ -74,31 +89,55 @@ internal class KoPropertyDeclarationCore private constructor(
     KoActualModifierProviderCore,
     KoExpectModifierProviderCore,
     KoConstModifierProviderCore {
-    override val ktAnnotated: KtAnnotated by lazy { ktProperty }
+    override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
 
-    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktProperty }
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
 
-    override val ktCallableDeclaration: KtCallableDeclaration by lazy { ktProperty }
+    override val psiElement: PsiElement by lazy { ktCallableDeclaration }
 
-    override val psiElement: PsiElement by lazy { ktProperty }
+    override val ktElement: KtElement by lazy { ktCallableDeclaration }
 
-    override val ktElement: KtElement by lazy { ktProperty }
-
-    override val hasImplementation: Boolean = ktProperty.hasBody()
+    override val hasImplementation: Boolean = ktCallableDeclaration.hasBody()
 
     override val delegateName: String? by lazy {
-        ktProperty
-            .delegateExpression
-            ?.text
-            ?.replace(EndOfLine.UNIX.value, " ")
-            ?.substringAfter("by ")
-            ?.substringBefore("{")
-            ?.removeSuffix(" ")
+        if (ktCallableDeclaration is KtProperty) {
+            ktCallableDeclaration
+                .delegateExpression
+                ?.text
+                ?.replace(EndOfLine.UNIX.value, " ")
+                ?.substringAfter("by ")
+                ?.substringBefore("{")
+                ?.removeSuffix(" ")
+        } else {
+            null
+        }
     }
 
-    override val hasValModifier: Boolean by lazy { !ktProperty.isVar }
+    override val hasValModifier: Boolean by lazy {
+        when (ktCallableDeclaration) {
+            is KtProperty -> !ktCallableDeclaration.isVar
+            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "val"
+            else -> false
+        }
+    }
 
-    override val hasVarModifier: Boolean by lazy { ktProperty.isVar }
+    override val hasVarModifier: Boolean by lazy {
+        when (ktCallableDeclaration) {
+            is KtProperty -> ktCallableDeclaration.isVar
+            is KtParameter -> ktCallableDeclaration.valOrVarKeyword?.text == "var"
+            else -> false
+        }
+    }
+
+    override val kDoc: KoKDocDeclaration? by lazy {
+        if (ktCallableDeclaration is KtParameter) {
+            (containingDeclaration as? KoKDocProvider)?.kDoc
+        } else {
+            super<KoKDocProviderCore>.kDoc
+        }
+    }
+
+    override val isConstructorDefined: Boolean by lazy { ktCallableDeclaration is KtParameter }
 
     override fun toString(): String {
         return locationWithText
@@ -107,9 +146,12 @@ internal class KoPropertyDeclarationCore private constructor(
     internal companion object {
         private val cache: KoDeclarationCache<KoPropertyDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktProperty: KtProperty, containingDeclaration: KoContainingDeclarationProvider): KoPropertyDeclaration =
-            cache.getOrCreateInstance(ktProperty, containingDeclaration) {
-                KoPropertyDeclarationCore(ktProperty, containingDeclaration)
+        internal fun getInstance(
+            ktCallableDeclaration: KtCallableDeclaration,
+            containingDeclaration: KoContainingDeclarationProvider,
+        ): KoPropertyDeclaration =
+            cache.getOrCreateInstance(ktCallableDeclaration, containingDeclaration) {
+                KoPropertyDeclarationCore(ktCallableDeclaration, containingDeclaration)
             }
     }
 }

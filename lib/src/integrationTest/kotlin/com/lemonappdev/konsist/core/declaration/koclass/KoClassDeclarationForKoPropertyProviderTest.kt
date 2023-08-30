@@ -178,6 +178,32 @@ class KoClassDeclarationForKoPropertyProviderTest {
         }
     }
 
+    @Test
+    fun `class-contains-property-defined-at-constructor`() {
+        // given
+        val sut = getSnippetFile("class-contains-property-defined-at-constructor")
+            .classes()
+            .first()
+
+        // then
+        sut.properties()
+            .map { it.name }
+            .shouldBeEqualTo(listOf("sampleProperty"))
+    }
+
+    @Test
+    fun `class-contains-property-defined-at-constructor-and-in-body`() {
+        // given
+        val sut = getSnippetFile("class-contains-property-defined-at-constructor-and-in-body")
+            .classes()
+            .first()
+
+        // then
+        sut.properties()
+            .map { it.name }
+            .shouldBeEqualTo(listOf("sampleProperty1", "sampleProperty2"))
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koclass/snippet/forkopropertyprovider/", fileName)
 }

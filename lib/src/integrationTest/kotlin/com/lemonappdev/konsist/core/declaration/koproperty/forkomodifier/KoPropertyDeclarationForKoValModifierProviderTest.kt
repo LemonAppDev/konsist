@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koproperty.forkomodifier
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.ext.list.properties
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -20,6 +21,30 @@ class KoPropertyDeclarationForKoValModifierProviderTest {
     fun `property-has-val-modifier`() {
         // given
         val sut = getSnippetFile("property-has-val-modifier")
+            .properties()
+            .first()
+
+        // then
+        sut.hasValModifier shouldBeEqualTo true
+    }
+
+    @Test
+    fun `property-defined-in-constructor-has-no-val-modifier`() {
+        // given
+        val sut = getSnippetFile("property-defined-in-constructor-has-no-val-modifier")
+            .classes()
+            .properties()
+            .first()
+
+        // then
+        sut.hasValModifier shouldBeEqualTo false
+    }
+
+    @Test
+    fun `property-defined-in-constructor-has-val-modifier`() {
+        // given
+        val sut = getSnippetFile("property-defined-in-constructor-has-val-modifier")
+            .classes()
             .properties()
             .first()
 

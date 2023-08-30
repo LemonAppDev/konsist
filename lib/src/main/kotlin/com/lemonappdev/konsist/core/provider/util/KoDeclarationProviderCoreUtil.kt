@@ -58,6 +58,19 @@ internal object KoDeclarationProviderCoreUtil {
                 getKoDeclarations(declarations, includeNested, includeLocal)
             }
 
+            is KtClass -> {
+                val propertiesFromConstructor = ktElement
+                    .primaryConstructorParameters
+                    .filter { it.hasValOrVar() }
+                    .map { KoPropertyDeclarationCore.getInstance(it, containingDeclaration) }
+
+                declarations = ktElement
+                    .declarations
+                    .mapNotNull { getInstanceOfKtDeclaration(it, containingDeclaration) }
+
+                getKoDeclarations(propertiesFromConstructor + declarations, includeNested, includeLocal)
+            }
+
             is KtDeclarationContainer -> {
                 declarations = ktElement
                     .declarations
