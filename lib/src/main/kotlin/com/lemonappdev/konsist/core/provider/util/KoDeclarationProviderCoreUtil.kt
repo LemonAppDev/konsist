@@ -68,7 +68,7 @@ internal object KoDeclarationProviderCoreUtil {
                     .declarations
                     .mapNotNull { getInstanceOfKtDeclaration(it, containingDeclaration) }
 
-                getKoDeclarations(propertiesFromConstructor+declarations, includeNested, includeLocal)
+                getKoDeclarations(propertiesFromConstructor + declarations, includeNested, includeLocal)
             }
 
             is KtDeclarationContainer -> {

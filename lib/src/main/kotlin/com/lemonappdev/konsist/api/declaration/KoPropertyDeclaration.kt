@@ -79,7 +79,7 @@ interface KoPropertyDeclaration :
     val isConstructorDefined: Boolean
 
     /**
-    * String representing the property.
+     * String representing the property.
      *
      * @return a string representing the property.
      */

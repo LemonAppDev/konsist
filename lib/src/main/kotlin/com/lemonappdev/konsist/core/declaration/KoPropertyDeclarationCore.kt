@@ -122,7 +122,7 @@ internal class KoPropertyDeclarationCore private constructor(
     }
 
     override val kDoc: KoKDocDeclaration? by lazy {
-        if(ktCallableDeclaration is KtParameter) {
+        if (ktCallableDeclaration is KtParameter) {
             (containingDeclaration as? KoKDocProvider)?.kDoc
         } else {
             super<KoKDocProviderCore>.kDoc
@@ -140,7 +140,7 @@ internal class KoPropertyDeclarationCore private constructor(
 
         internal fun getInstance(
             ktCallableDeclaration: KtCallableDeclaration,
-            containingDeclaration: KoContainingDeclarationProvider
+            containingDeclaration: KoContainingDeclarationProvider,
         ): KoPropertyDeclaration =
             cache.getOrCreateInstance(ktCallableDeclaration, containingDeclaration) {
                 KoPropertyDeclarationCore(ktCallableDeclaration, containingDeclaration)
