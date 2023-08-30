@@ -1,8 +1,10 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -116,6 +118,14 @@ internal class KoPropertyDeclarationCore private constructor(
             is KtProperty -> ktCallableDeclaration.isVar
             is KtParameter -> ktCallableDeclaration.text.contains("var ")
             else -> false
+        }
+    }
+
+    override val kDoc: KoKDocDeclaration? by lazy {
+        if(ktCallableDeclaration is KtParameter) {
+            (containingDeclaration as? KoKDocProvider)?.kDoc
+        } else {
+            super<KoKDocProviderCore>.kDoc
         }
     }
 
