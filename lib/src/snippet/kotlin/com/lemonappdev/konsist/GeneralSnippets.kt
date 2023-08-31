@@ -74,7 +74,7 @@ class GeneralSnippets {
                     obj.hasModifiers(KoModifier.COMPANION)
                 }
 
-                companionObject != null && it.declarations().last()== companionObject
+                companionObject != null && it.declarations().last() == companionObject
             }
     }
 
@@ -87,7 +87,7 @@ class GeneralSnippets {
                     obj.hasModifiers(KoModifier.COMPANION)
                 }
 
-                if(companionObjects.isEmpty()) {
+                if (companionObjects.isEmpty()) {
                     return@assert true
                 }
 
