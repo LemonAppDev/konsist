@@ -13,5 +13,5 @@ fun <T : KoReturnTypeProvider> T.hasValidKDocReturnTag(): Boolean =
     if (returnType != null && returnType?.name != "Unit") {
         (this as? KoKDocProvider)?.kDoc?.hasTags(KoKDocTag.RETURN) == true
     } else {
-        (this as? KoKDocProvider)?.kDoc?.hasTags(KoKDocTag.RETURN) == false
+        (this as? KoKDocProvider)?.kDoc?.returnTag == null
     }

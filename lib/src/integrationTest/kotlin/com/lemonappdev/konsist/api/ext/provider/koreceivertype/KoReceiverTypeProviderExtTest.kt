@@ -4,7 +4,9 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.ext.provider.hasReceiverTypeOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReceiverTag
+import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
+import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -62,6 +64,17 @@ class KoReceiverTypeProviderExtTest {
     }
 
     @Test
+    fun `declaration-with-receiver-has-no-kdoc`() {
+        // given
+        val sut = getSnippetFile("declaration-with-receiver-has-no-kdoc")
+            .declarationsOf<KoReceiverTypeProvider>()
+            .first()
+
+        // then
+        sut.hasValidKDocReceiverTag() shouldBeEqualTo false
+    }
+
+    @Test
     fun `declaration-without-receiver-has-valid-kdoc-receiver-tag`() {
         // given
         val sut = getSnippetFile("declaration-without-receiver-has-valid-kdoc-receiver-tag")
@@ -81,6 +94,17 @@ class KoReceiverTypeProviderExtTest {
 
         // then
         sut.hasValidKDocReceiverTag() shouldBeEqualTo false
+    }
+
+    @Test
+    fun `declaration-without-receiver-has-no-kdoc`() {
+        // given
+        val sut = getSnippetFile("declaration-without-receiver-has-no-kdoc")
+            .declarationsOf<KoReceiverTypeProvider>()
+            .first()
+
+        // then
+        sut.hasValidKDocReceiverTag() shouldBeEqualTo true
     }
 
     private fun getSnippetFile(fileName: String) =
