@@ -1,0 +1,7 @@
+/**
+ * Sample description
+ *
+ * @param sampleParameter1
+ * @param sampleParameter2
+ */
+class SampleClass(sampleParameter1: Int)
