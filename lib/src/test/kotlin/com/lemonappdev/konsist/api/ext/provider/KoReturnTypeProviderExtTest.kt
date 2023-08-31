@@ -30,35 +30,6 @@ class KoReturnTypeProviderExtTest {
     }
 
     @Test
-    fun `hasValidKDocReturnTag() returns true when declaration has no return type`() {
-        // given
-        val declaration: SampleTestReturnTypeDeclaration = mockk {
-            every { returnType } returns null
-        }
-
-        // when
-        val sut = declaration.hasValidKDocReturnTag()
-
-        // then
-        sut shouldBeEqualTo true
-    }
-
-    @Test
-    fun `hasValidKDocReturnTag() returns true when declaration has Unit return type`() {
-        // given
-        val declaration: SampleTestReturnTypeDeclaration = mockk {
-            every { returnType } returns mockk()
-            every { returnType?.name } returns "Unit"
-        }
-
-        // when
-        val sut = declaration.hasValidKDocReturnTag()
-
-        // then
-        sut shouldBeEqualTo true
-    }
-
-    @Test
     fun `hasValidKDocReturnTag() calls hasTags method`() {
         // given
         val declaration: SampleTestReturnTypeDeclaration = mockk {
@@ -72,37 +43,5 @@ class KoReturnTypeProviderExtTest {
 
         // then
         verify { declaration.kDoc?.hasTags(KoKDocTag.RETURN) }
-    }
-
-    @Test
-    fun `hasValidKDocReturnTag() returns true when declaration has valid return type kdoc`() {
-        // given
-        val declaration: SampleTestReturnTypeDeclaration = mockk {
-            every { returnType } returns mockk()
-            every { returnType?.name } returns "Boolean"
-            every { kDoc?.hasTags(KoKDocTag.RETURN) } returns true
-        }
-
-        // when
-        val sut = declaration.hasValidKDocReturnTag()
-
-        // then
-        sut shouldBeEqualTo true
-    }
-
-    @Test
-    fun `hasValidKDocReturnTag() returns false when declaration has no valid return type kdoc`() {
-        // given
-        val declaration: SampleTestReturnTypeDeclaration = mockk {
-            every { returnType } returns mockk()
-            every { returnType?.name } returns "Boolean"
-            every { kDoc?.hasTags(KoKDocTag.RETURN) } returns false
-        }
-
-        // when
-        val sut = declaration.hasValidKDocReturnTag()
-
-        // then
-        sut shouldBeEqualTo false
     }
 }

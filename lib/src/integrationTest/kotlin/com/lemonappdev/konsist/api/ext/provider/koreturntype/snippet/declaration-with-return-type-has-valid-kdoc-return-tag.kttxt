@@ -1,0 +1,6 @@
+/**
+ * Sample description
+ *
+ * @return sample description
+ */
+fun sampleFunction(): String = ""
