@@ -44,9 +44,7 @@ class CleanArchitectureSnippets {
                     function.name == "invoke" && function.hasPublicOrDefaultModifier && function.hasOperatorModifier
                 }
 
-                val hasSinglePublicDeclaration = it.numPublicOrDefaultDeclarations() == 1
-
-                hasSingleInvokeOperatorMethod && hasSinglePublicDeclaration
+                hasSingleInvokeOperatorMethod && it.numPublicOrDefaultDeclarations() == 1
             }
     }
 
