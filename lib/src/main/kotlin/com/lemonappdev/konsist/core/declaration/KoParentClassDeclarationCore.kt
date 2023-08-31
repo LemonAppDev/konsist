@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentClassDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -16,8 +16,9 @@ import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal open class KoParentDeclarationCore private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
-    KoParentDeclaration,
+@Deprecated("Will be removed in v1.0.0")
+internal class KoParentClassDeclarationCore private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
+    KoParentClassDeclaration,
     KoBaseProviderCore,
     KoContainingFileProviderCore,
     KoFullyQualifiedNameProviderCore,
@@ -26,12 +27,17 @@ internal open class KoParentDeclarationCore private constructor(private val ktSu
     KoPackageDeclarationProviderCore,
     KoPathProviderCore,
     KoResideInOrOutsidePackageProviderCore {
-
     override val psiElement: PsiElement
         get() = ktSuperTypeListEntry
-
     override val ktElement: KtElement
         get() = ktSuperTypeListEntry
+
+    override val fullyQualifiedName: String by lazy {
+        containingFile
+            .imports
+            .firstOrNull { it.text.endsWith(".$name") }
+            ?.name ?: ""
+    }
 
     override val name: String
         get() = ktSuperTypeListEntry
@@ -48,27 +54,21 @@ internal open class KoParentDeclarationCore private constructor(private val ktSu
             .replace(EndOfLine.UNIX.value, " ")
             .substringBefore(" by")
 
-    override val fullyQualifiedName: String by lazy {
-        containingFile
-            .imports
-            .firstOrNull { it.text.endsWith(".$name") }
-            ?.name ?: ""
-    }
-
     override fun toString(): String {
         return locationWithText
     }
 
     internal companion object {
-        private val cache: KoDeclarationCache<KoParentDeclaration> = KoDeclarationCache()
+        private val cache: KoDeclarationCache<KoParentClassDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(
             ktSuperTypeListEntry: KtSuperTypeListEntry,
             containingDeclaration: KoContainingDeclarationProvider,
-        ): KoParentDeclaration =
-            cache.getOrCreateInstance(
-                ktSuperTypeListEntry,
-                containingDeclaration,
-            ) { KoParentDeclarationCore(ktSuperTypeListEntry) }
+        ): KoParentClassDeclaration =
+            cache.getOrCreateInstance(ktSuperTypeListEntry, containingDeclaration) {
+                KoParentClassDeclarationCore(
+                    ktSuperTypeListEntry,
+                )
+            }
     }
 }
