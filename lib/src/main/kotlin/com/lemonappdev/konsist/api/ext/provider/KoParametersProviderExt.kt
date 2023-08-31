@@ -11,11 +11,14 @@ import com.lemonappdev.konsist.api.provider.KoParametersProvider
  * @return `true` if the declaration has a valid KDoc with the PARAM tag, `false` otherwise.
  */
 fun <T : KoParametersProvider> T.hasValidKDocParamTags(): Boolean =
-    if (parameters.isNotEmpty() && this !is KoPrimaryConstructorDeclaration) {
-        parameters.count() == (this as? KoKDocProvider)?.kDoc?.paramTags?.count() &&
-            parameters.map { it.name } == kDoc?.paramTags?.map { it.value }
-    } else if (parameters.isNotEmpty() && this is KoPrimaryConstructorDeclaration) {
-        (containingDeclaration as? KoConstructorProvider)?.hasValidKDocParamTags() ?: true
+    if (parameters.isNotEmpty()) {
+        val kDoc = when (this) {
+            is KoPrimaryConstructorDeclaration -> (containingDeclaration as? KoKDocProvider)?.kDoc
+            is KoKDocProvider -> kDoc
+            else -> null
+        }
+
+        parameters.count() == kDoc?.paramTags?.count() && parameters.map { it.name } == kDoc.paramTags.map { it.value }
     } else {
         true
     }
