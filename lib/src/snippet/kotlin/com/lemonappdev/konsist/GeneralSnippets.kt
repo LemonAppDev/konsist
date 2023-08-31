@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.ext.list.indexOfFirstInstance
 import com.lemonappdev.konsist.api.ext.list.indexOfLastInstance
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withValueModifier
 import com.lemonappdev.konsist.api.ext.list.properties
+import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.verify.assert
 import com.lemonappdev.konsist.api.verify.assertNot
@@ -15,6 +16,14 @@ import java.util.*
 import javax.inject.Inject
 
 class GeneralSnippets {
+    fun `classes in 'ext' package must have name ending with 'Ext'`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .withPackage("..ext..")
+            .assert { it.hasNameEndingWith("Ext") }
+    }
+
     fun `no empty files allowed`() {
         Konsist
             .scopeFromProject()
