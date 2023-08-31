@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
  *
  * @return `true` if the declaration has a valid KDoc with the RETURN tag, `false` otherwise.
  */
-fun <T : KoReturnTypeProvider> T.hasValidReturnTypeKDoc(): Boolean =
+fun <T : KoReturnTypeProvider> T.hasValidKDocReturnTag(): Boolean =
     if (returnType != null && returnType?.name != "Unit") {
         (this as? KoKDocProvider)?.kDoc?.hasTags(KoKDocTag.RETURN) == true
     } else {

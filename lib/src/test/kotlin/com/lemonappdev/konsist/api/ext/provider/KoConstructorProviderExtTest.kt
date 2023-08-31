@@ -57,7 +57,7 @@ class KoConstructorProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidConstructorParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo false
@@ -71,7 +71,7 @@ class KoConstructorProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidConstructorParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo true
@@ -115,7 +115,7 @@ class KoConstructorProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidConstructorParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo true
@@ -160,7 +160,7 @@ class KoConstructorProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidConstructorParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo false
@@ -179,7 +179,7 @@ class KoConstructorProviderExtTest {
             every { parameters } returns listOf(parameter1)
         }
         val secondaryConstructorDeclaration: KoSecondaryConstructorDeclaration = mockk {
-            every { hasValidParameterKDoc() } returns true
+            every { hasValidKDocParamTags() } returns true
         }
         val kDocDeclaration: KoKDocDeclaration = mockk {
             every { paramTags } returns listOf(tag1)
@@ -192,7 +192,7 @@ class KoConstructorProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidConstructorParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo false
@@ -214,7 +214,7 @@ class KoConstructorProviderExtTest {
             every { parameters } returns listOf(parameter1)
         }
         val secondaryConstructorDeclaration: KoSecondaryConstructorDeclaration = mockk {
-            every { hasValidParameterKDoc() } returns true
+            every { hasValidKDocParamTags() } returns true
         }
         val kDocDeclaration: KoKDocDeclaration = mockk {
             every { paramTags } returns listOf(tag1, tag2)
@@ -227,7 +227,7 @@ class KoConstructorProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidConstructorParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo false
@@ -243,7 +243,7 @@ class KoConstructorProviderExtTest {
             every { parameters } returns listOf(parameter)
         }
         val secondaryConstructorDeclaration: KoSecondaryConstructorDeclaration = mockk {
-            every { hasValidParameterKDoc() } returns true
+            every { hasValidKDocParamTags() } returns true
         }
         val kDocDeclaration: KoKDocDeclaration = mockk {
             every { paramTags } returns emptyList()
@@ -256,7 +256,7 @@ class KoConstructorProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidConstructorParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo false

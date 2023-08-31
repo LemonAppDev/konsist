@@ -16,7 +16,7 @@ class KoParametersProviderExtTest {
         KoKDocProvider
 
     @Test
-    fun `hasValidParameterKDoc() returns false when declaration not implement KoKDocProvider`() {
+    fun `hasValidKDocParamTags() returns false when declaration not implement KoKDocProvider`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
@@ -31,28 +31,28 @@ class KoParametersProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo false
     }
 
     @Test
-    fun `hasValidParameterKDoc() returns true when declaration has no parameters`() {
+    fun `hasValidKDocParamTags() returns true when declaration has no parameters`() {
         // given
         val declaration: SampleTestParametersDeclaration = mockk {
             every { parameters } returns emptyList()
         }
 
         // when
-        val sut = declaration.hasValidParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo true
     }
 
     @Test
-    fun `hasValidParameterKDoc() returns true when declaration has valid param kdoc`() {
+    fun `hasValidKDocParamTags() returns true when declaration has valid param kdoc`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
@@ -77,14 +77,14 @@ class KoParametersProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo true
     }
 
     @Test
-    fun `hasValidParameterKDoc() returns false when declaration parameters have other names than param tags`() {
+    fun `hasValidKDocParamTags() returns false when declaration parameters have other names than param tags`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
@@ -110,14 +110,14 @@ class KoParametersProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo false
     }
 
     @Test
-    fun `hasValidParameterKDoc() returns false when declaration has fewer parameters than param tags`() {
+    fun `hasValidKDocParamTags() returns false when declaration has fewer parameters than param tags`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
@@ -139,14 +139,14 @@ class KoParametersProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo false
     }
 
     @Test
-    fun `hasValidParameterKDoc() returns false when declaration has more parameters than param tags`() {
+    fun `hasValidKDocParamTags() returns false when declaration has more parameters than param tags`() {
         // given
         val parameter: KoParameterDeclaration = mockk {
             every { name } returns "name1"
@@ -160,7 +160,7 @@ class KoParametersProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidParameterKDoc()
+        val sut = declaration.hasValidKDocParamTags()
 
         // then
         sut shouldBeEqualTo false
