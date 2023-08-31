@@ -5,13 +5,10 @@ import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
-import com.lemonappdev.konsist.api.provider.KoConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
-import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -47,7 +44,7 @@ class KoParametersProviderExtTest {
         We cannot verify calling containingDeclaration.hasValidKDocParamTags() because it is a generic function
         and mockk goes deeper into that function. So we test a result of calling
         containingDeclaration.hasValidKDocParamTags()
-        */
+         */
         sut shouldBeEqualTo true
     }
 

@@ -2,10 +2,8 @@ package com.lemonappdev.konsist.api.ext.provider
 
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoConstructorProvider
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
-import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 
 /**
  * Whether declaration has a valid KDoc with a PARAM tag.
@@ -15,9 +13,9 @@ import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 fun <T : KoParametersProvider> T.hasValidKDocParamTags(): Boolean =
     if (parameters.isNotEmpty() && this !is KoPrimaryConstructorDeclaration) {
         parameters.count() == (this as? KoKDocProvider)?.kDoc?.paramTags?.count() &&
-                parameters.map { it.name } == kDoc?.paramTags?.map { it.value }
+            parameters.map { it.name } == kDoc?.paramTags?.map { it.value }
     } else if (parameters.isNotEmpty() && this is KoPrimaryConstructorDeclaration) {
-         (containingDeclaration as? KoConstructorProvider)?.hasValidKDocParamTags() ?: true
+        (containingDeclaration as? KoConstructorProvider)?.hasValidKDocParamTags() ?: true
     } else {
         true
     }
