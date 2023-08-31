@@ -13,6 +13,7 @@ internal interface KoParentInterfaceProviderCore :
     KoParentInterfaceProvider,
     KoBaseProviderCore {
     val ktClassOrObject: KtClassOrObject
+
     @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("parents"))
     override val parentInterfaces: List<KoParentInterfaceDeclaration>
         get() {

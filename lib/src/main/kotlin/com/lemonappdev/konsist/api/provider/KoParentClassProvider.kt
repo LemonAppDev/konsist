@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.declaration.KoParentClassDeclaration
  * An interface representing a Kotlin declaration that provides access to its parent class.
  */
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("KoParentProvider"))
-
 interface KoParentClassProvider : KoBaseProvider {
     /**
      * The parent class of the declaration.

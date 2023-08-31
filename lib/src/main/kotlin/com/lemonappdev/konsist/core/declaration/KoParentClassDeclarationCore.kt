@@ -67,7 +67,7 @@ internal class KoParentClassDeclarationCore private constructor(private val ktSu
         ): KoParentClassDeclaration =
             cache.getOrCreateInstance(ktSuperTypeListEntry, containingDeclaration) {
                 KoParentClassDeclarationCore(
-                    ktSuperTypeListEntry
+                    ktSuperTypeListEntry,
                 )
             }
     }
