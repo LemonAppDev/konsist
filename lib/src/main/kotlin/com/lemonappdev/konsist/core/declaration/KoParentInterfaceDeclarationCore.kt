@@ -1,11 +1,12 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParentInterfaceDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
@@ -13,11 +14,14 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
+import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
-internal open class KoParentDeclarationCore private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
-    KoParentDeclaration,
+@Deprecated("Will be removed in v1.0.0")
+internal class KoParentInterfaceDeclarationCore private constructor(private val ktSuperTypeListEntry: KtSuperTypeListEntry) :
+    KoParentInterfaceDeclaration,
+    KoDelegateProviderCore,
     KoBaseProviderCore,
     KoContainingFileProviderCore,
     KoFullyQualifiedNameProviderCore,
@@ -26,12 +30,17 @@ internal open class KoParentDeclarationCore private constructor(private val ktSu
     KoPackageDeclarationProviderCore,
     KoPathProviderCore,
     KoResideInOrOutsidePackageProviderCore {
-
     override val psiElement: PsiElement
         get() = ktSuperTypeListEntry
-
     override val ktElement: KtElement
         get() = ktSuperTypeListEntry
+
+    override val fullyQualifiedName: String by lazy {
+        containingFile
+            .imports
+            .firstOrNull { it.text.endsWith(".$name") }
+            ?.name ?: ""
+    }
 
     override val name: String
         get() = ktSuperTypeListEntry
@@ -48,27 +57,29 @@ internal open class KoParentDeclarationCore private constructor(private val ktSu
             .replace(EndOfLine.UNIX.value, " ")
             .substringBefore(" by")
 
-    override val fullyQualifiedName: String by lazy {
-        containingFile
-            .imports
-            .firstOrNull { it.text.endsWith(".$name") }
-            ?.name ?: ""
-    }
+    override val delegateName: String?
+        get() = if (ktSuperTypeListEntry is KtDelegatedSuperTypeEntry) {
+            ktSuperTypeListEntry
+                .delegateExpression
+                ?.text
+        } else {
+            null
+        }
 
     override fun toString(): String {
         return locationWithText
     }
 
     internal companion object {
-        private val cache: KoDeclarationCache<KoParentDeclaration> = KoDeclarationCache()
+        private val cache: KoDeclarationCache<KoParentInterfaceDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(
             ktSuperTypeListEntry: KtSuperTypeListEntry,
             containingDeclaration: KoContainingDeclarationProvider,
-        ): KoParentDeclaration =
+        ): KoParentInterfaceDeclaration =
             cache.getOrCreateInstance(
                 ktSuperTypeListEntry,
                 containingDeclaration,
-            ) { KoParentDeclarationCore(ktSuperTypeListEntry) }
+            ) { KoParentInterfaceDeclarationCore(ktSuperTypeListEntry) }
     }
 }
