@@ -24,37 +24,21 @@ class GeneralSnippets {
             .assert { it.hasNameEndingWith("Ext") }
     }
 
-    fun `no empty files allowed`() {
-        Konsist
-            .scopeFromProject()
-            .files
-            .assertNot { it.text.isEmpty() }
-    }
-
-    fun `no field should have 'm' prefix`() {
+    fun `properties are declared before functions`() {
         Konsist
             .scopeFromProject()
             .classes()
-            .properties()
-            .assertNot {
-                val secondCharacterIsUppercase = it.name.getOrNull(1)?.isUpperCase() ?: false
-                it.name.startsWith('m') && secondCharacterIsUppercase
+            .assert {
+                val lastKoPropertyDeclarationIndex = it
+                    .declarations()
+                    .indexOfLastInstance<KoPropertyDeclaration>()
+
+                val firstKoFunctionDeclarationIndex = it
+                    .declarations()
+                    .indexOfFirstInstance<KoFunctionDeclaration>()
+
+                lastKoPropertyDeclarationIndex <= firstKoFunctionDeclarationIndex
             }
-    }
-
-    fun `no class should use field injection`() {
-        Konsist
-            .scopeFromProject()
-            .classes()
-            .properties()
-            .assertNot { it.hasAnnotationOf<Inject>() }
-    }
-
-    fun `no class should use Java util logging`() {
-        Konsist
-            .scopeFromProject()
-            .files
-            .assertNot { it.hasImports("java.util.logging..") }
     }
 
     fun `every constructor parameter has name derived from parameter type`() {
@@ -78,30 +62,6 @@ class GeneralSnippets {
                 val names = it.parameters.map { parameter -> parameter.name }
                 val sortedNames = names.sorted()
                 names == sortedNames
-            }
-    }
-
-    fun `package name must match file path`() {
-        Konsist
-            .scopeFromProject()
-            .packages
-            .assert { it.hasMatchingPath }
-    }
-
-    fun `properties are declared before functions`() {
-        Konsist
-            .scopeFromProject()
-            .classes()
-            .assert {
-                val lastKoPropertyDeclarationIndex = it
-                    .declarations()
-                    .indexOfLastInstance<KoPropertyDeclaration>()
-
-                val firstKoFunctionDeclarationIndex = it
-                    .declarations()
-                    .indexOfFirstInstance<KoFunctionDeclaration>()
-
-                lastKoPropertyDeclarationIndex <= firstKoFunctionDeclarationIndex
             }
     }
 
@@ -135,13 +95,6 @@ class GeneralSnippets {
             }
     }
 
-    fun `no wildcard imports allowed`() {
-        Konsist
-            .scopeFromProject()
-            .imports
-            .assertNot { it.isWildcard }
-    }
-
     fun `every value class has parameter named 'value'`() {
         Konsist
             .scopeFromProject()
@@ -149,6 +102,53 @@ class GeneralSnippets {
             .withValueModifier()
             .mapNotNull { it.primaryConstructor }
             .assert { it.hasParameterNamed("value") }
+    }
+
+    fun `no empty files allowed`() {
+        Konsist
+            .scopeFromProject()
+            .files
+            .assertNot { it.text.isEmpty() }
+    }
+
+    fun `no field should have 'm' prefix`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .properties()
+            .assertNot {
+                val secondCharacterIsUppercase = it.name.getOrNull(1)?.isUpperCase() ?: false
+                it.name.startsWith('m') && secondCharacterIsUppercase
+            }
+    }
+
+    fun `no class should use field injection`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .properties()
+            .assertNot { it.hasAnnotationOf<Inject>() }
+    }
+
+    fun `no class should use Java util logging`() {
+        Konsist
+            .scopeFromProject()
+            .files
+            .assertNot { it.hasImports("java.util.logging..") }
+    }
+
+    fun `package name must match file path`() {
+        Konsist
+            .scopeFromProject()
+            .packages
+            .assert { it.hasMatchingPath }
+    }
+
+    fun `no wildcard imports allowed`() {
+        Konsist
+            .scopeFromProject()
+            .imports
+            .assertNot { it.isWildcard }
     }
 
     fun `forbid the usage of 'forbiddenString' in file`() {
