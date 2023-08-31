@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.api
 
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
-import com.lemonappdev.konsist.api.ext.provider.hasValidParameterKDoc
-import com.lemonappdev.konsist.api.ext.provider.hasValidReturnTypeKDoc
+import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
+import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.verify.assert
 import org.junit.jupiter.api.Test
@@ -26,7 +26,7 @@ class ApiKonsistTest {
     fun `every api function has valid KDoc`() {
         apiPackageScope
             .functions(includeNested = true, includeLocal = true)
-            .assert { it.hasValidParameterKDoc() && it.hasValidReturnTypeKDoc() }
+            .assert { it.hasValidKDocParamTags() && it.hasValidKDocReturnTag() }
     }
 
     @Test

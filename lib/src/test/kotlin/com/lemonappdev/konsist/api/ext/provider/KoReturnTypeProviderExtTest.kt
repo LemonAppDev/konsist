@@ -15,7 +15,7 @@ class KoReturnTypeProviderExtTest {
         KoKDocProvider
 
     @Test
-    fun `hasValidReturnTypeKDoc() returns false when declaration not implement KoKDocProvider`() {
+    fun `hasValidKDocReturnTag() returns false when declaration not implement KoKDocProvider`() {
         // given
         val declaration: KoReturnTypeProvider = mockk {
             every { returnType } returns mockk()
@@ -23,28 +23,28 @@ class KoReturnTypeProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidReturnTypeKDoc()
+        val sut = declaration.hasValidKDocReturnTag()
 
         // then
         sut shouldBeEqualTo false
     }
 
     @Test
-    fun `hasValidReturnTypeKDoc() returns true when declaration has no return type`() {
+    fun `hasValidKDocReturnTag() returns true when declaration has no return type`() {
         // given
         val declaration: SampleTestReturnTypeDeclaration = mockk {
             every { returnType } returns null
         }
 
         // when
-        val sut = declaration.hasValidReturnTypeKDoc()
+        val sut = declaration.hasValidKDocReturnTag()
 
         // then
         sut shouldBeEqualTo true
     }
 
     @Test
-    fun `hasValidReturnTypeKDoc() returns true when declaration has Unit return type`() {
+    fun `hasValidKDocReturnTag() returns true when declaration has Unit return type`() {
         // given
         val declaration: SampleTestReturnTypeDeclaration = mockk {
             every { returnType } returns mockk()
@@ -52,14 +52,14 @@ class KoReturnTypeProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidReturnTypeKDoc()
+        val sut = declaration.hasValidKDocReturnTag()
 
         // then
         sut shouldBeEqualTo true
     }
 
     @Test
-    fun `hasValidReturnTypeKDoc() calls hasTags method`() {
+    fun `hasValidKDocReturnTag() calls hasTags method`() {
         // given
         val declaration: SampleTestReturnTypeDeclaration = mockk {
             every { returnType } returns mockk()
@@ -68,14 +68,14 @@ class KoReturnTypeProviderExtTest {
         }
 
         // when
-        declaration.hasValidReturnTypeKDoc()
+        declaration.hasValidKDocReturnTag()
 
         // then
         verify { declaration.kDoc?.hasTags(KoKDocTag.RETURN) }
     }
 
     @Test
-    fun `hasValidReturnTypeKDoc() returns true when declaration has valid return type kdoc`() {
+    fun `hasValidKDocReturnTag() returns true when declaration has valid return type kdoc`() {
         // given
         val declaration: SampleTestReturnTypeDeclaration = mockk {
             every { returnType } returns mockk()
@@ -84,14 +84,14 @@ class KoReturnTypeProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidReturnTypeKDoc()
+        val sut = declaration.hasValidKDocReturnTag()
 
         // then
         sut shouldBeEqualTo true
     }
 
     @Test
-    fun `hasValidReturnTypeKDoc() returns false when declaration has no valid return type kdoc`() {
+    fun `hasValidKDocReturnTag() returns false when declaration has no valid return type kdoc`() {
         // given
         val declaration: SampleTestReturnTypeDeclaration = mockk {
             every { returnType } returns mockk()
@@ -100,7 +100,7 @@ class KoReturnTypeProviderExtTest {
         }
 
         // when
-        val sut = declaration.hasValidReturnTypeKDoc()
+        val sut = declaration.hasValidKDocReturnTag()
 
         // then
         sut shouldBeEqualTo false

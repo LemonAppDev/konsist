@@ -16,7 +16,7 @@ inline fun <reified T> KoReceiverTypeProvider.hasReceiverTypeOf(): Boolean = T::
  *
  * @return `true` if the declaration has a valid KDoc with the RECEIVER tag, `false` otherwise.
  */
-fun <T : KoReceiverTypeProvider> T.hasValidReceiverTypeKDoc(): Boolean = if (receiverType != null) {
+fun <T : KoReceiverTypeProvider> T.hasValidKDocReceiverTag(): Boolean = if (receiverType != null) {
     (this as? KoKDocProvider)?.kDoc?.hasTags(KoKDocTag.RECEIVER) == true
 } else {
     true

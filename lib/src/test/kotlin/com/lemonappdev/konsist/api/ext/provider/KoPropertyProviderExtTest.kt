@@ -1,58 +1,58 @@
 package com.lemonappdev.konsist.api.ext.provider
 
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
-import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
-import com.lemonappdev.konsist.api.provider.KoParametersProvider
+import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoParametersProviderExtTest {
-    private interface SampleTestParametersDeclaration :
-        KoParametersProvider,
+class KoPropertyProviderExtTest {
+    private interface SampleTestPropertyDeclaration :
+        KoPropertyProvider,
         KoKDocProvider
 
     @Test
-    fun `hasValidKDocParamTags() returns false when declaration not implement KoKDocProvider`() {
+    fun `hasValidKDocPropertyTags() returns false when declaration not implement KoKDocProvider`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
-        val parameter1: KoParameterDeclaration = mockk {
+        val property1: KoPropertyDeclaration = mockk {
             every { name } returns name1
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val property2: KoPropertyDeclaration = mockk {
             every { name } returns name2
         }
-        val declaration: KoParametersProvider = mockk {
-            every { parameters } returns listOf(parameter1, parameter2)
+        val declaration: KoPropertyProvider = mockk {
+            every { properties() } returns listOf(property1, property2)
         }
 
         // when
-        val sut = declaration.hasValidKDocParamTags()
+        val sut = declaration.hasValidKDocPropertyTags()
 
         // then
         sut shouldBeEqualTo false
     }
 
     @Test
-    fun `hasValidKDocParamTags() returns true when declaration has no parameters`() {
+    fun `hasValidKDocPropertyTags() returns true when declaration has no properties`() {
         // given
-        val declaration: SampleTestParametersDeclaration = mockk {
-            every { parameters } returns emptyList()
+        val declaration: SampleTestPropertyDeclaration = mockk {
+            every { properties() } returns emptyList()
         }
 
         // when
-        val sut = declaration.hasValidKDocParamTags()
+        val sut = declaration.hasValidKDocPropertyTags()
 
         // then
         sut shouldBeEqualTo true
     }
 
     @Test
-    fun `hasValidKDocParamTags() returns true when declaration has valid param kdoc`() {
+    fun `hasValidKDocPropertyTags() returns true when declaration has valid property kdoc`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
@@ -62,29 +62,29 @@ class KoParametersProviderExtTest {
         val tag2: KoValuedKDocTagDeclaration = mockk {
             every { value } returns name2
         }
-        val parameter1: KoParameterDeclaration = mockk {
+        val property1: KoPropertyDeclaration = mockk {
             every { name } returns name1
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val property2: KoPropertyDeclaration = mockk {
             every { name } returns name2
         }
         val kDocDeclaration: KoKDocDeclaration = mockk {
-            every { paramTags } returns listOf(tag1, tag2)
+            every { propertyTags } returns listOf(tag1, tag2)
         }
-        val declaration: SampleTestParametersDeclaration = mockk {
+        val declaration: SampleTestPropertyDeclaration = mockk {
             every { kDoc } returns kDocDeclaration
-            every { parameters } returns listOf(parameter1, parameter2)
+            every { properties() } returns listOf(property1, property2)
         }
 
         // when
-        val sut = declaration.hasValidKDocParamTags()
+        val sut = declaration.hasValidKDocPropertyTags()
 
         // then
         sut shouldBeEqualTo true
     }
 
     @Test
-    fun `hasValidKDocParamTags() returns false when declaration parameters have other names than param tags`() {
+    fun `hasValidKDocPropertyTags() returns false when declaration properties have other names than property tags`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
@@ -95,29 +95,29 @@ class KoParametersProviderExtTest {
         val tag2: KoValuedKDocTagDeclaration = mockk {
             every { value } returns name2
         }
-        val parameter1: KoParameterDeclaration = mockk {
+        val property1: KoPropertyDeclaration = mockk {
             every { name } returns incorrectName
         }
-        val parameter2: KoParameterDeclaration = mockk {
+        val property2: KoPropertyDeclaration = mockk {
             every { name } returns name2
         }
         val kDocDeclaration: KoKDocDeclaration = mockk {
-            every { paramTags } returns listOf(tag1, tag2)
+            every { propertyTags } returns listOf(tag1, tag2)
         }
-        val declaration: SampleTestParametersDeclaration = mockk {
+        val declaration: SampleTestPropertyDeclaration = mockk {
             every { kDoc } returns kDocDeclaration
-            every { parameters } returns listOf(parameter1, parameter2)
+            every { properties() } returns listOf(property1, property2)
         }
 
         // when
-        val sut = declaration.hasValidKDocParamTags()
+        val sut = declaration.hasValidKDocPropertyTags()
 
         // then
         sut shouldBeEqualTo false
     }
 
     @Test
-    fun `hasValidKDocParamTags() returns false when declaration has fewer parameters than param tags`() {
+    fun `hasValidKDocPropertyTags() returns false when declaration has fewer properties than property tags`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
@@ -127,40 +127,40 @@ class KoParametersProviderExtTest {
         val tag2: KoValuedKDocTagDeclaration = mockk {
             every { value } returns name2
         }
-        val parameter1: KoParameterDeclaration = mockk {
+        val property1: KoPropertyDeclaration = mockk {
             every { name } returns name1
         }
         val kDocDeclaration: KoKDocDeclaration = mockk {
-            every { paramTags } returns listOf(tag1, tag2)
+            every { propertyTags } returns listOf(tag1, tag2)
         }
-        val declaration: SampleTestParametersDeclaration = mockk {
+        val declaration: SampleTestPropertyDeclaration = mockk {
             every { kDoc } returns kDocDeclaration
-            every { parameters } returns listOf(parameter1)
+            every { properties() } returns listOf(property1)
         }
 
         // when
-        val sut = declaration.hasValidKDocParamTags()
+        val sut = declaration.hasValidKDocPropertyTags()
 
         // then
         sut shouldBeEqualTo false
     }
 
     @Test
-    fun `hasValidKDocParamTags() returns false when declaration has more parameters than param tags`() {
+    fun `hasValidKDocPropertyTags() returns false when declaration has more properties than property tags`() {
         // given
-        val parameter: KoParameterDeclaration = mockk {
+        val property: KoPropertyDeclaration = mockk {
             every { name } returns "name1"
         }
         val kDocDeclaration: KoKDocDeclaration = mockk {
-            every { paramTags } returns emptyList()
+            every { propertyTags } returns emptyList()
         }
-        val declaration: SampleTestParametersDeclaration = mockk {
+        val declaration: SampleTestPropertyDeclaration = mockk {
             every { kDoc } returns kDocDeclaration
-            every { parameters } returns listOf(parameter)
+            every { properties() } returns listOf(property)
         }
 
         // when
-        val sut = declaration.hasValidKDocParamTags()
+        val sut = declaration.hasValidKDocPropertyTags()
 
         // then
         sut shouldBeEqualTo false
