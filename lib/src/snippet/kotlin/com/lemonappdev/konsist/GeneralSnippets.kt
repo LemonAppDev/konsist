@@ -3,7 +3,6 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
-import com.lemonappdev.konsist.api.declaration.KoObjectDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.ext.list.indexOfFirstInstance
 import com.lemonappdev.konsist.api.ext.list.indexOfLastInstance
@@ -97,20 +96,33 @@ class GeneralSnippets {
             }
     }
 
-    fun `companion object is the last declaration in the class`() {
+    fun `companion object is last declaration in the class`() {
         Konsist
             .scopeFromProject()
             .classes()
             .assert {
-                val companionObjectIndex = it
-                    .declarations()
-                    .indexOfLast { declaration ->
-                        declaration is KoObjectDeclaration && declaration.hasModifiers(KoModifier.COMPANION)
-                    }
+                val companionObject = it.objects().lastOrNull { obj ->
+                    obj.hasModifiers(KoModifier.COMPANION)
+                }
 
-                val lastIndex = it.numDeclarations() - 1
+                companionObject != null && it.declarations().last()== companionObject
+            }
+    }
 
-                companionObjectIndex == lastIndex || companionObjectIndex == -1
+    fun `companion objects are last declarations in the class`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .assert {
+                val companionObjects = it.objects().filter { obj ->
+                    obj.hasModifiers(KoModifier.COMPANION)
+                }
+
+                if(companionObjects.isEmpty()) {
+                    return@assert true
+                }
+
+                it.declarations().takeLast(companionObjects.size) == companionObjects
             }
     }
 
