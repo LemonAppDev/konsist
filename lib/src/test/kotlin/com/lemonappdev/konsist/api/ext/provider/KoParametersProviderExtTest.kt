@@ -1,12 +1,17 @@
 package com.lemonappdev.konsist.api.ext.provider
 
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
+import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
+import com.lemonappdev.konsist.api.provider.KoConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
+import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -14,6 +19,37 @@ class KoParametersProviderExtTest {
     private interface SampleTestParametersDeclaration :
         KoParametersProvider,
         KoKDocProvider
+
+    @Test
+    fun ` when declaration is KoPrimaryConstructorDeclaration calls KoConstructorProvider's hasValidKDocParamTags`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val parameter1: KoParameterDeclaration = mockk {
+            every { name } returns name1
+        }
+        val parameter2: KoParameterDeclaration = mockk {
+            every { name } returns name2
+        }
+        val containingClass: KoClassDeclaration = mockk {
+            every { constructors } returns emptyList()
+        }
+        val declaration: KoPrimaryConstructorDeclaration = mockk {
+            every { parameters } returns listOf(parameter1, parameter2)
+            every { containingDeclaration } returns containingClass
+        }
+
+        // when
+        val sut = declaration.hasValidKDocParamTags()
+
+        // then
+        /*
+        We cannot verify calling containingDeclaration.hasValidKDocParamTags() because it is a generic function
+        and mockk goes deeper into that function. So we test a result of calling
+        containingDeclaration.hasValidKDocParamTags()
+        */
+        sut shouldBeEqualTo true
+    }
 
     @Test
     fun `hasValidKDocParamTags() returns false when declaration not implement KoKDocProvider`() {
