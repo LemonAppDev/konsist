@@ -18,7 +18,7 @@ class KoParametersProviderExtTest {
         KoKDocProvider
 
     @Test
-    fun ` when declaration is KoPrimaryConstructorDeclaration calls KoConstructorProvider's hasValidKDocParamTags`() {
+    fun `calls KoConstructorProvider's hasValidKDocParamTags when declaration is KoPrimaryConstructorDeclaration`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
