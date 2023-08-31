@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.ext.provider
 
+import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 
@@ -10,7 +11,7 @@ import com.lemonappdev.konsist.api.provider.KoPropertyProvider
  */
 fun <T : KoPropertyProvider> T.hasValidKDocPropertyTags(): Boolean = if (properties().isNotEmpty()) {
     (properties().count() == (this as? KoKDocProvider)?.kDoc?.propertyTags?.count()) &&
-        (properties().map { it.name } == kDoc?.propertyTags?.map { it.value })
+        (properties().map { it.name }.sorted() == kDoc?.propertyTags?.map { it.value }?.sorted())
 } else {
-    true
+    (this as? KoKDocProvider)?.kDoc?.propertyTags?.isEmpty() ?: true
 }

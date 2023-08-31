@@ -1,0 +1,8 @@
+/**
+ * Sample description
+ *
+ * @property sampleConstructorProperty
+ */
+class SampleClass(val sampleConstructorProperty: Int) {
+    val sampleBodyProperty = ""
+}
