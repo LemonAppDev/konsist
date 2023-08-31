@@ -16,10 +16,10 @@ import java.util.*
 import javax.inject.Inject
 
 class GeneralSnippets {
-    fun `classes in 'ext' package must have name ending with 'Ext'`() {
+    fun `files in 'ext' package must have name ending with 'Ext'`() {
         Konsist
             .scopeFromProject()
-            .classes()
+            .files
             .withPackage("..ext..")
             .assert { it.hasNameEndingWith("Ext") }
     }
