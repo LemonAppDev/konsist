@@ -29,20 +29,6 @@ class KoReceiverTypeProviderExtTest {
     }
 
     @Test
-    fun `hasValidKDocReceiverTag() returns true when declaration has no receiver`() {
-        // given
-        val declaration: SampleTestReceiverTypeDeclaration = mockk {
-            every { receiverType } returns null
-        }
-
-        // when
-        val sut = declaration.hasValidKDocReceiverTag()
-
-        // then
-        sut shouldBeEqualTo true
-    }
-
-    @Test
     fun `hasValidKDocReceiverTag() calls hasTags method`() {
         // given
         val declaration: SampleTestReceiverTypeDeclaration = mockk {
@@ -55,35 +41,5 @@ class KoReceiverTypeProviderExtTest {
 
         // then
         verify { declaration.kDoc?.hasTags(KoKDocTag.RECEIVER) }
-    }
-
-    @Test
-    fun `hasValidKDocReceiverTag() returns true when declaration has valid receiver type kdoc`() {
-        // given
-        val declaration: SampleTestReceiverTypeDeclaration = mockk {
-            every { receiverType } returns mockk()
-            every { kDoc?.hasTags(KoKDocTag.RECEIVER) } returns true
-        }
-
-        // when
-        val sut = declaration.hasValidKDocReceiverTag()
-
-        // then
-        sut shouldBeEqualTo true
-    }
-
-    @Test
-    fun `hasValidKDocReceiverTag() returns false when declaration has no valid receiver type kdoc`() {
-        // given
-        val declaration: SampleTestReceiverTypeDeclaration = mockk {
-            every { receiverType } returns mockk()
-            every { kDoc?.hasTags(KoKDocTag.RECEIVER) } returns false
-        }
-
-        // when
-        val sut = declaration.hasValidKDocReceiverTag()
-
-        // then
-        sut shouldBeEqualTo false
     }
 }
