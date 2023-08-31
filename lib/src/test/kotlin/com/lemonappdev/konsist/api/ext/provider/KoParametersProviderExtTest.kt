@@ -18,38 +18,7 @@ class KoParametersProviderExtTest {
         KoKDocProvider
 
     @Test
-    fun `calls KoConstructorProvider's hasValidKDocParamTags when declaration is KoPrimaryConstructorDeclaration`() {
-        // given
-        val name1 = "name1"
-        val name2 = "name2"
-        val parameter1: KoParameterDeclaration = mockk {
-            every { name } returns name1
-        }
-        val parameter2: KoParameterDeclaration = mockk {
-            every { name } returns name2
-        }
-        val containingClass: KoClassDeclaration = mockk {
-            every { constructors } returns emptyList()
-        }
-        val declaration: KoPrimaryConstructorDeclaration = mockk {
-            every { parameters } returns listOf(parameter1, parameter2)
-            every { containingDeclaration } returns containingClass
-        }
-
-        // when
-        val sut = declaration.hasValidKDocParamTags()
-
-        // then
-        /*
-        We cannot verify calling containingDeclaration.hasValidKDocParamTags() because it is a generic function
-        and mockk goes deeper into that function. So we test a result of calling
-        containingDeclaration.hasValidKDocParamTags()
-         */
-        sut shouldBeEqualTo true
-    }
-
-    @Test
-    fun `hasValidKDocParamTags() returns false when declaration not implement KoKDocProvider`() {
+    fun `hasValidKDocParamTags() returns false when declaration is not KoPrimaryConstructorDeclaration and KoKDocProvider`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
@@ -85,7 +54,42 @@ class KoParametersProviderExtTest {
     }
 
     @Test
-    fun `hasValidKDocParamTags() returns true when declaration has valid param kdoc`() {
+    fun `hasValidKDocParamTags() returns true when declaration is KoPrimaryConstructorDeclaration and has valid param kdoc`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val tag1: KoValuedKDocTagDeclaration = mockk {
+            every { value } returns name1
+        }
+        val tag2: KoValuedKDocTagDeclaration = mockk {
+            every { value } returns name2
+        }
+        val parameter1: KoParameterDeclaration = mockk {
+            every { name } returns name1
+        }
+        val parameter2: KoParameterDeclaration = mockk {
+            every { name } returns name2
+        }
+        val kDocDeclaration: KoKDocDeclaration = mockk {
+            every { paramTags } returns listOf(tag1, tag2)
+        }
+        val containingClass: KoClassDeclaration = mockk {
+            every { kDoc } returns kDocDeclaration
+        }
+        val declaration: KoPrimaryConstructorDeclaration = mockk {
+            every { parameters } returns listOf(parameter1, parameter2)
+            every { containingDeclaration } returns containingClass
+        }
+
+        // when
+        val sut = declaration.hasValidKDocParamTags()
+
+        // then
+        sut shouldBeEqualTo true
+    }
+
+    @Test
+    fun `hasValidKDocParamTags() returns true when declaration implements KoKDocProvider and has valid param kdoc`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
