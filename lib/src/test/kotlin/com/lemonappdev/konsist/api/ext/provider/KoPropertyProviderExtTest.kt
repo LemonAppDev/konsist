@@ -1,9 +1,6 @@
 package com.lemonappdev.konsist.api.ext.provider
 
-import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
-import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
-import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import io.mockk.every
 import io.mockk.mockk

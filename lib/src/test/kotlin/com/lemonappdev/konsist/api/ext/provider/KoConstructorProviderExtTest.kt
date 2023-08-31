@@ -2,9 +2,7 @@ package com.lemonappdev.konsist.api.ext.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
-import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoConstructorProvider
-import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
