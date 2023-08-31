@@ -26,6 +26,30 @@ class KoPropertyProviderExtTest {
     }
 
     @Test
+    fun `declaration-with-properties-has-other-names-for-property-and-tag`() {
+        // given
+        val sut = getSnippetFile("declaration-with-properties-has-other-names-for-property-and-tag")
+            .declarationsOf<KoPropertyProvider>()
+            .filterNot { it is KoFileDeclaration }
+            .first()
+
+        // then
+        sut.hasValidKDocPropertyTags() shouldBeEqualTo false
+    }
+
+    @Test
+    fun `declaration-with-properties-has-double-property-tag-for-property`() {
+        // given
+        val sut = getSnippetFile("declaration-with-properties-has-double-property-tag-for-property")
+            .declarationsOf<KoPropertyProvider>()
+            .filterNot { it is KoFileDeclaration }
+            .first()
+
+        // then
+        sut.hasValidKDocPropertyTags() shouldBeEqualTo false
+    }
+
+    @Test
     fun `declaration-with-properties-has-more-properties-than-tags`() {
         // given
         val sut = getSnippetFile("declaration-with-properties-has-more-properties-than-tags")
