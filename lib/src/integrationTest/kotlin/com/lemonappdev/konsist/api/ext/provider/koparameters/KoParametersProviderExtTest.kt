@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.ext.provider.hasReceiverTypeOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReceiverTag
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
+import com.lemonappdev.konsist.api.provider.KoConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import org.amshove.kluent.assertSoftly
