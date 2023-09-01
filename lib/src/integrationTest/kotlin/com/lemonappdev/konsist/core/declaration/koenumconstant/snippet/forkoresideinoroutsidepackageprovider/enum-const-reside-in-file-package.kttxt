@@ -1,0 +1,5 @@
+package com.samplepackage
+
+enum class SampleClass {
+    SAMPLE_CONSTANT_1
+}

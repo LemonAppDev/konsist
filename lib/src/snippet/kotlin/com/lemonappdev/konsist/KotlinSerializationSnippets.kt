@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.list.enumConstants
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withEnumModifier
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.withSomeAnnotationsOf
 import com.lemonappdev.konsist.api.verify.assert
@@ -17,5 +19,14 @@ class KotlinSerializationSnippets {
             .assert {
                 it.hasAnnotationsOf(SerialName::class)
             }
+    }
+
+    fun `enum classes annotated with Serializable have all enum constants annotated with SerialName`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .withEnumModifier()
+            .withSomeAnnotationsOf(Serializable::class)
+            .enumConstants
+            .assert { it.hasAnnotationsOf(SerialName::class) }
     }
 }

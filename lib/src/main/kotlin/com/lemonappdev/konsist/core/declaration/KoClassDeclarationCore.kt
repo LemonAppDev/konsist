@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoEnumConstantProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoHasTestClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoHasTestProviderCore
@@ -61,6 +62,7 @@ internal class KoClassDeclarationCore private constructor(
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoClassProviderCore,
+    KoEnumConstantProviderCore,
     KoConstructorProviderCore,
     KoContainingFileProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
