@@ -4,9 +4,11 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
+import com.lemonappdev.konsist.api.ext.list.constructors
 import com.lemonappdev.konsist.api.ext.list.indexOfFirstInstance
 import com.lemonappdev.konsist.api.ext.list.indexOfLastInstance
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withValueModifier
+import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
@@ -45,8 +47,8 @@ class GeneralSnippets {
         Konsist
             .scopeFromProject()
             .classes()
-            .flatMap { it.constructors }
-            .flatMap { it.parameters }
+            .constructors
+            .parameters
             .assert {
                 val nameTitleCase = it.name.replaceFirstChar { char -> char.titlecase(Locale.getDefault()) }
                 nameTitleCase == it.type.sourceType
@@ -57,7 +59,7 @@ class GeneralSnippets {
         Konsist
             .scopeFromProject()
             .classes()
-            .flatMap { it.constructors }
+            .constructors
             .assert {
                 val names = it.parameters.map { parameter -> parameter.name }
                 val sortedNames = names.sorted()

@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.ext.provider.koannotation
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.ext.list.secondaryConstructors
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
@@ -119,7 +120,6 @@ class KoAnnotationProviderExtTest {
         // given
         val sut = getSnippetFile("secondary-constructor-has-two-annotations-of-type")
             .classes()
-            .first()
             .secondaryConstructors
             .first()
 
@@ -136,7 +136,6 @@ class KoAnnotationProviderExtTest {
         // given
         val sut = getSnippetFile("secondary-constructor-has-suppress-annotation-without-import")
             .classes()
-            .first()
             .secondaryConstructors
             .first()
 

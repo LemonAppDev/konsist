@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -10,7 +11,6 @@ class KoParentDeclarationForKoResideInOrOutsidePackageProviderTest {
         // given
         val sut = getSnippetFile("parent-not-reside-in-file-package")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -23,7 +23,6 @@ class KoParentDeclarationForKoResideInOrOutsidePackageProviderTest {
         // given
         val sut = getSnippetFile("parent-reside-in-file-package")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -36,7 +35,6 @@ class KoParentDeclarationForKoResideInOrOutsidePackageProviderTest {
         // given
         val sut = getSnippetFile("parent-not-reside-outside-file-package")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -49,7 +47,6 @@ class KoParentDeclarationForKoResideInOrOutsidePackageProviderTest {
         // given
         val sut = getSnippetFile("parent-reside-outside-file-package")
             .classes()
-            .first()
             .parents
             .first()
 

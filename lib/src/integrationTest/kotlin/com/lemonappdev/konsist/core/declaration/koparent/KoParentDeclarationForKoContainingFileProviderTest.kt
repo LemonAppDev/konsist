@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -10,7 +11,6 @@ class KoParentDeclarationForKoContainingFileProviderTest {
         // given
         val sut = getSnippetFile("parent-containing-file")
             .classes()
-            .first()
             .parents
             .first()
 

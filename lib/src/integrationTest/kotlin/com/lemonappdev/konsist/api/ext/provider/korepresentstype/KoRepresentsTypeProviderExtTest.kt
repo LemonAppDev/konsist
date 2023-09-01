@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.api.ext.provider.korepresentstype
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.annotations
+import com.lemonappdev.konsist.api.ext.list.parameters
 import com.lemonappdev.konsist.api.ext.provider.representsTypeOf
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
@@ -22,7 +24,6 @@ class KoRepresentsTypeProviderExtTest {
         // given
         val sut = getSnippetFile("parameter-represents-type-of-type")
             .functions()
-            .first()
             .parameters
             .first()
 
@@ -35,7 +36,6 @@ class KoRepresentsTypeProviderExtTest {
         // given
         val sut = getSnippetFile("annotation-represents-type")
             .functions()
-            .first()
             .annotations
             .first()
 
@@ -51,7 +51,6 @@ class KoRepresentsTypeProviderExtTest {
         // given
         val sut = getSnippetFile("annotation-represents-type-without-import")
             .functions()
-            .first()
             .annotations
             .first()
 

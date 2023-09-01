@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koinitblock
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.initBlocks
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -11,7 +12,6 @@ class KoInitBlockDeclarationForKoLocalClassProviderTest {
         // given
         val sut = getSnippetFile("init-block-contains-no-local-classes")
             .classes()
-            .first()
             .initBlocks
             .first()
 
@@ -29,7 +29,6 @@ class KoInitBlockDeclarationForKoLocalClassProviderTest {
         // given
         val sut = getSnippetFile("init-block-contains-local-class")
             .classes()
-            .first()
             .initBlocks
             .first()
 

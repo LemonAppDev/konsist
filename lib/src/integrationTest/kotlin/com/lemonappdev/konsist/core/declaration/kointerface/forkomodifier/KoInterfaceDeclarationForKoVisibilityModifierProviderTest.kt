@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kointerface.forkomodifier
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.interfaces
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -64,7 +65,7 @@ class KoInterfaceDeclarationForKoVisibilityModifierProviderTest {
         // given
         val sut = getSnippetFile("interface-has-protected-modifier")
             .classes()
-            .flatMap { it.interfaces() }
+            .interfaces()
             .first()
 
         // then

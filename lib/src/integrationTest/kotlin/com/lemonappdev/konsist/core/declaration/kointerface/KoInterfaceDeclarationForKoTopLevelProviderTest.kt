@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kointerface
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.interfaces
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -10,7 +11,7 @@ class KoInterfaceDeclarationForKoTopLevelProviderTest {
         // given
         val sut = getSnippetFile("interface-is-not-top-level")
             .classes()
-            .flatMap { it.interfaces() }
+            .interfaces()
             .first()
 
         // then
