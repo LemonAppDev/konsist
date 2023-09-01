@@ -1,0 +1,3 @@
+class SampleClass(sampleParameter: Int) {
+    fun sampleFunction() {}
+}

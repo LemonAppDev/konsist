@@ -1,0 +1,6 @@
+/**
+ * Sample description
+ *
+ * @param otherParameter
+ */
+fun sampleFunction(sampleParameter: Int) {}

@@ -17,7 +17,7 @@ fun <T : KoParametersProvider> T.hasValidKDocParamTags(): Boolean =
             else -> null
         }
 
-        parameters.count() == kDoc?.paramTags?.count() && parameters.map { it.name } == kDoc.paramTags.map { it.value }
+        parameters.map { it.name }.sorted() == kDoc?.paramTags?.map { it.value }?.sorted()
     } else {
-        true
+        (this as? KoKDocProvider)?.kDoc?.paramTags?.isEmpty() ?: true
     }

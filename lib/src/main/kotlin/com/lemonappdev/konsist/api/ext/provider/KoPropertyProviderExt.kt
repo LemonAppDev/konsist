@@ -9,8 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoPropertyProvider
  * @return `true` if the declaration has a valid KDoc with the PROPERTY tag, `false` otherwise.
  */
 fun <T : KoPropertyProvider> T.hasValidKDocPropertyTags(): Boolean = if (properties().isNotEmpty()) {
-    (properties().count() == (this as? KoKDocProvider)?.kDoc?.propertyTags?.count()) &&
-        (properties().map { it.name } == kDoc?.propertyTags?.map { it.value })
+    (properties().map { it.name }.sorted() == (this as? KoKDocProvider)?.kDoc?.propertyTags?.map { it.value }?.sorted())
 } else {
-    true
+    (this as? KoKDocProvider)?.kDoc?.propertyTags?.isEmpty() ?: true
 }

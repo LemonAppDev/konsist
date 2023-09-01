@@ -1,0 +1,7 @@
+/**
+ * Sample description
+ *
+ * @property sampleProperty1
+ * @property sampleProperty2
+ */
+class SampleClass(val samplerProperty: Int)

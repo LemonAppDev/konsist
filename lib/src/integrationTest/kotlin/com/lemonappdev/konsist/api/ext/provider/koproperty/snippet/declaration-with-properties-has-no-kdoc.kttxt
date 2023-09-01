@@ -1,0 +1,3 @@
+class SampleClass(val sampleConstructorProperty: Int) {
+    val sampleBodyProperty = ""
+}

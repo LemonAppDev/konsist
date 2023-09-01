@@ -1,0 +1,6 @@
+/**
+ * Sample description
+ */
+class SampleClass(sampleParameter: Int) {
+    fun sampleFunction() {}
+}
