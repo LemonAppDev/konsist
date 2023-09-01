@@ -26,6 +26,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.KoEnumNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoHasTestClassProviderCore
@@ -71,22 +72,21 @@ import org.jetbrains.kotlin.psi.KtEnumEntry
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoEnumConstDeclarationCore private constructor(
-    private val ktEnumEntry: KtEnumEntry,
+    override val ktEnumEntry: KtEnumEntry,
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) : KoEnumConstDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoContainingFileProviderCore,
+    KoEnumNameProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
     KoPackageProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
-    KoDeclarationFullyQualifiedNameProviderCore, // this? or general?
-    KoPackageDeclarationProviderCore, // this? or general?
-    KoConstantProviderCore,
-//    KoRepresentsTypeProviderCore,
+    KoDeclarationFullyQualifiedNameProviderCore,
+    KoPackageDeclarationProviderCore,
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore {
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktEnumEntry }
@@ -96,8 +96,6 @@ internal class KoEnumConstDeclarationCore private constructor(
     override val psiElement: PsiElement by lazy { ktEnumEntry }
 
     override val ktElement: KtElement by lazy { ktEnumEntry }
-
-    override val ktClass: KtClass by lazy { ktEnumEntry }
 
     override fun toString(): String {
         return locationWithText

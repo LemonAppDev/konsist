@@ -6,9 +6,12 @@ import com.lemonappdev.konsist.api.provider.KoConstantProvider
 import com.lemonappdev.konsist.core.declaration.KoEnumConstDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationCore
 import org.jetbrains.kotlin.psi.KtClass
+import org.jetbrains.kotlin.psi.KtClassBody
 import org.jetbrains.kotlin.psi.KtEnumEntry
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTypeAlias
+import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
+import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 internal interface KoConstantProviderCore : KoConstantProvider, KoBaseProviderCore, KoContainingDeclarationProviderCore {
     val ktClass: KtClass
@@ -16,8 +19,10 @@ internal interface KoConstantProviderCore : KoConstantProvider, KoBaseProviderCo
     override val constants: List<KoEnumConstDeclaration>
         get() = ktClass
             .children
-            .filterIsInstance<KtEnumEntry>()
-            .map { KoEnumConstDeclarationCore.getInstance(it, this) }
+            .firstIsInstanceOrNull<KtClassBody>()
+            ?.children
+            ?.filterIsInstance<KtEnumEntry>()
+            ?.map { KoEnumConstDeclarationCore.getInstance(it, this) } ?: emptyList()
 
     override val numConstants: Int
         get() = constants.size
