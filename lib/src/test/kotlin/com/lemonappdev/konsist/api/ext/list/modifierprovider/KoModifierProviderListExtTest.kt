@@ -3,9 +3,6 @@ package com.lemonappdev.konsist.api.ext.list.modifierprovider
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
-import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
-import com.lemonappdev.konsist.api.ext.list.imports
-import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import io.mockk.every
 import io.mockk.mockk

@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
-import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoConstructorProvider
 
 /**

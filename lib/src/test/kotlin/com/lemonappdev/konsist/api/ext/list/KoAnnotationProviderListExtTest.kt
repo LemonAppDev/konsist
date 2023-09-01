@@ -2,8 +2,6 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
-import com.lemonappdev.konsist.api.provider.KoClassProvider
-import com.lemonappdev.konsist.core.declaration.KoClassDeclarationCore
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import io.mockk.every

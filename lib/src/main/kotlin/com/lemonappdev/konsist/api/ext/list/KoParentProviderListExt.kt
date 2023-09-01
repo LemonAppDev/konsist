@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
-import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import kotlin.reflect.KClass
 

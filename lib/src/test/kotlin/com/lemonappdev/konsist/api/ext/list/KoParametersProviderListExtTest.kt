@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
-import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import io.mockk.every
 import io.mockk.mockk
