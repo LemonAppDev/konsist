@@ -1,0 +1,6 @@
+enum class SampleClass {
+    /**
+     * Sample KDoc
+     */
+    SAMPLE_CONSTANT_1
+}

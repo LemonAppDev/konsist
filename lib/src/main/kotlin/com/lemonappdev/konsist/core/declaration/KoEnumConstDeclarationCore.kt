@@ -82,7 +82,6 @@ internal class KoEnumConstDeclarationCore private constructor(
     KoKDocProviderCore,
     KoLocationProviderCore,
     KoNameProviderCore,
-    KoPackageProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
