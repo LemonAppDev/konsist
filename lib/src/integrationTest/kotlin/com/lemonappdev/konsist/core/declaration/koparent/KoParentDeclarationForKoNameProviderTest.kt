@@ -96,6 +96,21 @@ class KoParentDeclarationForKoNameProviderTest {
         sut.name shouldBeEqualTo "SampleSuperInterface"
     }
 
+    @Test
+    fun `class-with-multiline-parent`() {
+        // given
+        val sut = getSnippetFile("class-with-multiline-parent")
+            .classes()
+            .first()
+            .parents
+            .first()
+
+        // then
+        sut
+            .name
+            .shouldBeEqualTo("SomeParentClass")
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koparent/snippet/forkonameprovider/", fileName)
 }
