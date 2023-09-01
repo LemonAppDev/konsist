@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoEnumConstDeclaration
-import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 
 /**
  * An interface representing a Kotlin declaration that provides access to type aliases.
