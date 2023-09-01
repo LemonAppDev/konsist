@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
 import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 import io.mockk.every
 import io.mockk.mockk
@@ -7,6 +8,30 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoTypeAliasProviderListExtTest {
+    @Test
+    fun `typeAliases returns type aliases from all declarations`() {
+        // given
+        val typeAlias1: KoTypeAliasDeclaration = mockk()
+        val typeAlias2: KoTypeAliasDeclaration = mockk()
+        val typeAlias3: KoTypeAliasDeclaration = mockk()
+        val declaration1: KoTypeAliasProvider = mockk {
+            every { typeAliases } returns listOf(typeAlias1, typeAlias2)
+        }
+        val declaration2: KoTypeAliasProvider = mockk {
+            every { typeAliases } returns listOf(typeAlias3)
+        }
+        val declaration3: KoTypeAliasProvider = mockk {
+            every { typeAliases } returns emptyList()
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.typeAliases
+
+        // then
+        sut shouldBeEqualTo listOf(typeAlias1, typeAlias2, typeAlias3)
+    }
+
     @Test
     fun `withTypeAlias() returns declaration with typealias`() {
         // given

@@ -1,7 +1,14 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import kotlin.reflect.KClass
+
+/**
+ * List containing annotation declarations.
+ */
+val <T : KoAnnotationProvider> List<T>.annotations: List<KoAnnotationDeclaration>
+    get() = flatMap { it.annotations }
 
 /**
  * List containing elements with any annotation.

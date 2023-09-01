@@ -1,8 +1,8 @@
 package com.lemonappdev.konsist.core
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.withReturnType
-import com.lemonappdev.konsist.api.ext.list.withType
+import com.lemonappdev.konsist.api.ext.list.returnTypes
+import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.verify.assert
 import com.lemonappdev.konsist.api.verify.assertNot
@@ -28,8 +28,7 @@ class DeclarationKonsistTest {
     fun `none function return type has the 'Impl' suffix`() {
         declarationPackageScope
             .functions(includeNested = true)
-            .withReturnType()
-            .mapNotNull { it.returnType }
+            .returnTypes
             .assertNot { it.sourceType.endsWith("Impl") }
     }
 
@@ -37,8 +36,7 @@ class DeclarationKonsistTest {
     fun `none property type has the 'Impl' suffix`() {
         declarationPackageScope
             .properties(includeNested = true)
-            .withType()
-            .mapNotNull { it.type }
+            .types
             .assertNot { it.sourceType.endsWith("Impl") }
     }
 

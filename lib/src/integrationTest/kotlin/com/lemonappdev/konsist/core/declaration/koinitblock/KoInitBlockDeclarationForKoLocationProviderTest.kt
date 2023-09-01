@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koinitblock
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.initBlocks
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -11,7 +12,6 @@ class KoInitBlockDeclarationForKoLocationProviderTest {
         // given
         val sut = getSnippetFile("init-block-location-with-single-digit")
             .classes()
-            .first()
             .initBlocks
             .first()
 
@@ -24,14 +24,12 @@ class KoInitBlockDeclarationForKoLocationProviderTest {
         // given
         val projectPath = getSnippetFile("init-block-location-with-text")
             .classes()
-            .first()
             .initBlocks
             .first()
             .projectPath
 
         val sut = getSnippetFile("init-block-location-with-text")
             .classes()
-            .first()
             .initBlocks
             .first()
 

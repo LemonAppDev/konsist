@@ -6,6 +6,12 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 
 /**
+ * List containing modifiers.
+ */
+val <T : KoModifierProvider> List<T>.modifiers: List<KoModifier>
+    get() = flatMap { it.modifiers }
+
+/**
  * List containing elements with any specified modifier.
  *
  * @return A list containing elements with any modifier.

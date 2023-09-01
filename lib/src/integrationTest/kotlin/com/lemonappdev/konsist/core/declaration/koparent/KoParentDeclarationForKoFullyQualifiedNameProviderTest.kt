@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -10,7 +11,6 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
         // given
         val sut = getSnippetFile("parent-fully-qualified-name")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -23,7 +23,6 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
         // given
         val sut = getSnippetFile("parent-fully-qualified-name-without-import")
             .classes()
-            .first()
             .parents
             .first()
 

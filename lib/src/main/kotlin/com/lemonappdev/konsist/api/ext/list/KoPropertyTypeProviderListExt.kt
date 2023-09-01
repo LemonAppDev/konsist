@@ -1,7 +1,14 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoPropertyTypeProvider
 import kotlin.reflect.KClass
+
+/**
+ * List containing type declarations.
+ */
+val <T : KoPropertyTypeProvider> List<T>.types: List<KoTypeDeclaration>
+    get() = mapNotNull { it.type }
 
 /**
  * List containing elements with type.

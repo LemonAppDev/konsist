@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koobject
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.objects
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -10,7 +11,7 @@ class KoObjectDeclarationForKoTopLevelProviderTest {
         // given
         val sut = getSnippetFile("object-is-not-top-level")
             .classes()
-            .flatMap { it.objects() }
+            .objects()
             .first()
 
         // then

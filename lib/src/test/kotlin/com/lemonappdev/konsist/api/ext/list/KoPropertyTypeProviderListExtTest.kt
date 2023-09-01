@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoPropertyTypeProvider
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
@@ -9,6 +10,29 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoPropertyTypeProviderListExtTest {
+    @Test
+    fun `types returns types from all declarations`() {
+        // given
+        val type1: KoTypeDeclaration = mockk()
+        val type2: KoTypeDeclaration = mockk()
+        val declaration1: KoPropertyTypeProvider = mockk {
+            every { type } returns type1
+        }
+        val declaration2: KoPropertyTypeProvider = mockk {
+            every { type } returns type2
+        }
+        val declaration3: KoPropertyTypeProvider = mockk {
+            every { type } returns null
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.types
+
+        // then
+        sut shouldBeEqualTo listOf(type1, type2)
+    }
+
     @Test
     fun `withType() returns declaration with any type`() {
         // given

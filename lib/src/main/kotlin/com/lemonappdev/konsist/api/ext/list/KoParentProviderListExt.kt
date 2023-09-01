@@ -1,7 +1,14 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoParentProvider
 import kotlin.reflect.KClass
+
+/**
+ * List containing parent declarations.
+ */
+val <T : KoParentProvider> List<T>.parents: List<KoParentDeclaration>
+    get() = flatMap { it.parents }
 
 /**
  * List containing elements with class or interface parent.

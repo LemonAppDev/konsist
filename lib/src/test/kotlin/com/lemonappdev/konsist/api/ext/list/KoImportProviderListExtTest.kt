@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.provider.KoImportProvider
 import io.mockk.every
 import io.mockk.mockk
@@ -8,6 +9,30 @@ import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
 class KoImportProviderListExtTest {
+    @Test
+    fun `imports returns imports from all declarations`() {
+        // given
+        val import1: KoImportDeclaration = mockk()
+        val import2: KoImportDeclaration = mockk()
+        val import3: KoImportDeclaration = mockk()
+        val declaration1: KoImportProvider = mockk {
+            every { imports } returns listOf(import1, import2)
+        }
+        val declaration2: KoImportProvider = mockk {
+            every { imports } returns listOf(import3)
+        }
+        val declaration3: KoImportProvider = mockk {
+            every { imports } returns emptyList()
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.imports
+
+        // then
+        sut shouldBeEqualTo listOf(import1, import2, import3)
+    }
+
     @Test
     fun `withImports() returns declaration with any import`() {
         // given

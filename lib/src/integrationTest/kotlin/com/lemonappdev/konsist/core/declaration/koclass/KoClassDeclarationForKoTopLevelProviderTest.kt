@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koclass
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.classes
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -9,9 +10,8 @@ class KoClassDeclarationForKoTopLevelProviderTest {
     fun `class-is-not-top-level`() {
         // given
         val sut = getSnippetFile("class-is-not-top-level")
-            .classes()
-            .flatMap { it.classes() }
-            .first()
+            .classes(includeNested = true)
+            .first { it.name == "SampleNestedClass" }
 
         // then
         sut.isTopLevel shouldBeEqualTo false

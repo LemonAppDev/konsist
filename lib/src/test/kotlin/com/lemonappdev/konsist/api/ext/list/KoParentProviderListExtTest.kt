@@ -12,6 +12,30 @@ import org.junit.jupiter.api.Test
 @Suppress("detekt.LargeClass")
 class KoParentProviderListExtTest {
     @Test
+    fun `parents returns parents from all declarations`() {
+        // given
+        val parent1: KoParentDeclaration = mockk()
+        val parent2: KoParentDeclaration = mockk()
+        val parent3: KoParentDeclaration = mockk()
+        val declaration1: KoParentProvider = mockk {
+            every { parents } returns listOf(parent1, parent2)
+        }
+        val declaration2: KoParentProvider = mockk {
+            every { parents } returns listOf(parent3)
+        }
+        val declaration3: KoParentProvider = mockk {
+            every { parents } returns emptyList()
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.parents
+
+        // then
+        sut shouldBeEqualTo listOf(parent1, parent2, parent3)
+    }
+
+    @Test
     fun `withParents() returns declaration with any parent`() {
         // given
         val declaration1: KoParentProvider = mockk {

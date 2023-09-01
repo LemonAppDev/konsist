@@ -1,7 +1,14 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import kotlin.reflect.KClass
+
+/**
+ * List containing return type declarations.
+ */
+val <T : KoReturnTypeProvider> List<T>.returnTypes: List<KoTypeDeclaration>
+    get() = mapNotNull { it.returnType }
 
 /**
  * List containing elements with return type.

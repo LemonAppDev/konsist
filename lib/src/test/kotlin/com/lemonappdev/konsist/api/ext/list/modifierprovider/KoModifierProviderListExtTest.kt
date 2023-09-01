@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list.modifierprovider
 
+import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
@@ -10,6 +11,30 @@ import org.junit.jupiter.api.Test
 
 @Suppress("detekt.LargeClass")
 class KoModifierProviderListExtTest {
+    @Test
+    fun `modifiers returns modifiers from all declarations`() {
+        // given
+        val modifier1: KoModifier = mockk()
+        val modifier2: KoModifier = mockk()
+        val modifier3: KoModifier = mockk()
+        val declaration1: KoModifierProvider = mockk {
+            every { modifiers } returns listOf(modifier1, modifier2)
+        }
+        val declaration2: KoModifierProvider = mockk {
+            every { modifiers } returns listOf(modifier3)
+        }
+        val declaration3: KoModifierProvider = mockk {
+            every { modifiers } returns emptyList()
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.modifiers
+
+        // then
+        sut shouldBeEqualTo listOf(modifier1, modifier2, modifier3)
+    }
+
     @Test
     fun `withModifiers() returns declaration with modifier`() {
         // given

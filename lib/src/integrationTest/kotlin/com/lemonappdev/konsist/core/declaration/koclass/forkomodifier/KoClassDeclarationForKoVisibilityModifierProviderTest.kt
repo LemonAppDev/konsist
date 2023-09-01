@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koclass.forkomodifier
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.classes
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -63,9 +64,8 @@ class KoClassDeclarationForKoVisibilityModifierProviderTest {
     fun `protected-class`() {
         // given
         val sut = getSnippetFile("protected-class")
-            .classes()
-            .flatMap { it.classes() }
-            .first()
+            .classes(includeNested = true)
+            .first { it.name == "SampleClass" }
 
         // then
         sut.hasProtectedModifier shouldBeEqualTo true

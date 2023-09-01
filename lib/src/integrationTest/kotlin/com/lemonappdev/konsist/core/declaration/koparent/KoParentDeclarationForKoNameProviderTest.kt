@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -10,7 +11,6 @@ class KoParentDeclarationForKoNameProviderTest {
         // given
         val sut = getSnippetFile("class-with-parent-class")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -23,7 +23,6 @@ class KoParentDeclarationForKoNameProviderTest {
         // given
         val sut = getSnippetFile("class-with-generic-parent-class")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -36,7 +35,6 @@ class KoParentDeclarationForKoNameProviderTest {
         // given
         val sut = getSnippetFile("class-with-parametrized-parent-class")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -49,7 +47,6 @@ class KoParentDeclarationForKoNameProviderTest {
         // given
         val sut = getSnippetFile("class-with-parametrized-and-generic-parent-class")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -62,7 +59,6 @@ class KoParentDeclarationForKoNameProviderTest {
         // given
         val sut = getSnippetFile("class-with-parent-interface")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -75,7 +71,6 @@ class KoParentDeclarationForKoNameProviderTest {
         // given
         val sut = getSnippetFile("class-with-generic-parent-interface")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -88,7 +83,6 @@ class KoParentDeclarationForKoNameProviderTest {
         // given
         val sut = getSnippetFile("class-with-parent-by-delegation")
             .classes()
-            .first()
             .parents
             .first()
 

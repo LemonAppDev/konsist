@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koparent
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -11,7 +12,6 @@ class KoParentDeclarationForKoPathProviderTest {
         // given
         val sut = getSnippetFile("parent-file-path")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -27,7 +27,6 @@ class KoParentDeclarationForKoPathProviderTest {
         // given
         val sut = getSnippetFile("parent-project-file-path")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -45,7 +44,6 @@ class KoParentDeclarationForKoPathProviderTest {
         // given
         val sut = getSnippetFile("parent-reside-in-file-path")
             .classes()
-            .first()
             .parents
             .first()
 
@@ -63,7 +61,6 @@ class KoParentDeclarationForKoPathProviderTest {
         // given
         val sut = getSnippetFile("parent-reside-in-project-file-path")
             .classes()
-            .first()
             .parents
             .first()
 

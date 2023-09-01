@@ -1,7 +1,14 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import kotlin.reflect.KClass
+
+/**
+ * List containing receiver type declarations.
+ */
+val <T : KoReceiverTypeProvider> List<T>.receiverTypes: List<KoTypeDeclaration>
+    get() = mapNotNull { it.receiverType }
 
 /**
  * List containing elements with receiver type.

@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.verify.kodeclarationassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.ext.list.initBlocks
+import com.lemonappdev.konsist.api.ext.list.localFunctions
 import com.lemonappdev.konsist.api.ext.list.withPrimaryConstructor
 import com.lemonappdev.konsist.api.verify.assert
 import com.lemonappdev.konsist.api.verify.assertNot
@@ -338,7 +340,6 @@ class KoDeclarationAssertForDeclarationListTest {
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
                 .classes()
-                .first()
                 .initBlocks
 
         // then
@@ -351,7 +352,6 @@ class KoDeclarationAssertForDeclarationListTest {
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
                 .classes()
-                .first()
                 .initBlocks
 
         // then
@@ -364,7 +364,6 @@ class KoDeclarationAssertForDeclarationListTest {
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider")
                 .classes()
-                .first()
                 .initBlocks
 
         // then
@@ -377,7 +376,6 @@ class KoDeclarationAssertForDeclarationListTest {
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-not-KoAnnotationProvider")
                 .classes()
-                .first()
                 .initBlocks
 
         // then
@@ -390,9 +388,7 @@ class KoDeclarationAssertForDeclarationListTest {
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .classes()
-                .first()
                 .initBlocks
-                .first()
                 .localFunctions
 
         // then
@@ -405,9 +401,7 @@ class KoDeclarationAssertForDeclarationListTest {
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .classes()
-                .first()
                 .initBlocks
-                .first()
                 .localFunctions
 
         // then
@@ -422,9 +416,7 @@ class KoDeclarationAssertForDeclarationListTest {
                 "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
             )
                 .classes()
-                .first()
                 .initBlocks
-                .first()
                 .localFunctions
 
         // then
@@ -437,9 +429,7 @@ class KoDeclarationAssertForDeclarationListTest {
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .classes()
-                .first()
                 .initBlocks
-                .first()
                 .localFunctions
 
         // then
@@ -452,9 +442,7 @@ class KoDeclarationAssertForDeclarationListTest {
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .classes()
-                .first()
                 .initBlocks
-                .first()
                 .localFunctions
 
         // then
@@ -467,9 +455,7 @@ class KoDeclarationAssertForDeclarationListTest {
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .classes()
-                .first()
                 .initBlocks
-                .first()
                 .localFunctions
 
         // then

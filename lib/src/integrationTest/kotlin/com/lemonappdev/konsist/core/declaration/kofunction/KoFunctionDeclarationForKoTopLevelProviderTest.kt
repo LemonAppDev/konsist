@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kofunction
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.functions
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -10,7 +11,7 @@ class KoFunctionDeclarationForKoTopLevelProviderTest {
         // given
         val sut = getSnippetFile("function-is-not-top-level")
             .classes()
-            .flatMap { it.functions() }
+            .functions()
             .first()
 
         // then

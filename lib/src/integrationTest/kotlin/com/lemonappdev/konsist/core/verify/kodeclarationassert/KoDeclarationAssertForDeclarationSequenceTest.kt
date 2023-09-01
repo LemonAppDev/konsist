@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.verify.kodeclarationassert
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import com.lemonappdev.konsist.api.ext.list.initBlocks
+import com.lemonappdev.konsist.api.ext.list.localFunctions
 import com.lemonappdev.konsist.api.verify.assert
 import com.lemonappdev.konsist.api.verify.assertNot
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
@@ -355,7 +357,6 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
                 .classes()
-                .first()
                 .initBlocks
                 .asSequence()
 
@@ -369,7 +370,6 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
                 .classes()
-                .first()
                 .initBlocks
                 .asSequence()
 
@@ -383,7 +383,6 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider")
                 .classes()
-                .first()
                 .initBlocks
                 .asSequence()
 
@@ -397,7 +396,6 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-not-KoAnnotationProvider")
                 .classes()
-                .first()
                 .initBlocks
                 .asSequence()
 
@@ -411,9 +409,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .classes()
-                .first()
                 .initBlocks
-                .first()
                 .localFunctions
                 .asSequence()
 
@@ -427,9 +423,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .classes()
-                .first()
                 .initBlocks
-                .first()
                 .localFunctions
                 .asSequence()
 
@@ -445,9 +439,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
                 "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
             )
                 .classes()
-                .first()
                 .initBlocks
-                .first()
                 .localFunctions
                 .asSequence()
 
@@ -461,9 +453,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .classes()
-                .first()
                 .initBlocks
-                .first()
                 .localFunctions
                 .asSequence()
 
@@ -477,9 +467,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .classes()
-                .first()
                 .initBlocks
-                .first()
                 .localFunctions
                 .asSequence()
 
@@ -493,9 +481,7 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .classes()
-                .first()
                 .initBlocks
-                .first()
                 .localFunctions
                 .asSequence()
 
