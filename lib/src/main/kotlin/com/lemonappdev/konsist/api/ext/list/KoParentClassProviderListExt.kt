@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
  * @param names The name(s) of the parent class to include.
  * @return A list containing elements that have the specified parent class (or any parent class if [names] is empty).
  */
-@Deprecated("Will be removed in v1.0.0. Replace with `withSomeParents` if you pass any parameter, `withParents` otherwise.")
+@Deprecated("Will be removed in v1.0.0. Replace with `withAllParents` if you pass any parameter, `withParents` otherwise.")
 fun <T : KoParentClassProvider> List<T>.withParentClass(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> it.hasParentClass()
@@ -38,7 +38,7 @@ fun <T : KoParentClassProvider> List<T>.withoutParentClass(vararg names: String)
  * @param kClasses The Kotlin declarations representing the parent class to include.
  * @return A list containing elements that have the parent class of the specified type(s).
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withSomeParentsOf"))
+@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withAllParentsOf"))
 fun <T : KoParentClassProvider> List<T>.withParentClassOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.hasParentClass(kClass.simpleName) ||
