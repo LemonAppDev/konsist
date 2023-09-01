@@ -7,6 +7,9 @@ import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoEnumNameProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
+import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
+import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
@@ -25,6 +28,9 @@ interface KoEnumConstantDeclaration :
     KoEnumNameProvider,
     KoFullyQualifiedNameProvider,
     KoKDocProvider,
+    KoLocalClassProvider,
+    KoLocalDeclarationProvider,
+    KoLocalFunctionProvider,
     KoLocationProvider,
     KoNameProvider,
     KoPackageProvider,
