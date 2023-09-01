@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.koenumconst
+package com.lemonappdev.konsist.core.declaration.koconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.assertSoftly
@@ -6,7 +6,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoEnumConstDeclarationForKoKDocProviderTest {
+class KoConstantDeclarationForKoKDocProviderTest {
     @Test
     fun `enum-const-without-kdoc`() {
         // given
@@ -56,5 +56,5 @@ class KoEnumConstDeclarationForKoKDocProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koenumconst/snippet/forkokdocprovider/", fileName)
+        getSnippetKoScope("core/declaration/koconstant/snippet/forkokdocprovider/", fileName)
 }

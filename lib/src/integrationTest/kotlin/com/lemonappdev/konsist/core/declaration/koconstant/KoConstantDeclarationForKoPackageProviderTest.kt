@@ -1,10 +1,10 @@
-package com.lemonappdev.konsist.core.declaration.koenumconst
+package com.lemonappdev.konsist.core.declaration.koconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoEnumConstDeclarationForKoPackageProviderTest {
+class KoConstantDeclarationForKoPackageProviderTest {
     @Test
     fun `enum-const-is-not-in-package`() {
         // given
@@ -32,5 +32,5 @@ class KoEnumConstDeclarationForKoPackageProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koenumconst/snippet/forkopackageprovider/", fileName)
+        getSnippetKoScope("core/declaration/koconstant/snippet/forkopackageprovider/", fileName)
 }

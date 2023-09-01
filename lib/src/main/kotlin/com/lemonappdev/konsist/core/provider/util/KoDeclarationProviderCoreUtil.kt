@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoClassDeclarationCore
-import com.lemonappdev.konsist.core.declaration.KoEnumConstDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoConstantDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoFunctionDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoInitBlockDeclarationCore
@@ -167,7 +167,7 @@ internal object KoDeclarationProviderCoreUtil {
         ktDeclaration: KtDeclaration,
         containingDeclaration: KoContainingDeclarationProvider,
     ): KoBaseDeclaration? = when {
-        ktDeclaration is KtEnumEntry -> KoEnumConstDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+        ktDeclaration is KtEnumEntry -> KoConstantDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationCore.getInstance(
             ktDeclaration,

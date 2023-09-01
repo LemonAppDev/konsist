@@ -1,11 +1,11 @@
-package com.lemonappdev.konsist.core.declaration.koenumconst
+package com.lemonappdev.konsist.core.declaration.koconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoEnumConstDeclarationForKoPathProviderTest {
+class KoConstantDeclarationForKoPathProviderTest {
     @Test
     fun `enum-const-file-path`() {
         // given
@@ -18,7 +18,7 @@ class KoEnumConstDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koenumconst/snippet/forkopathprovider/enum-const-file-path.kt") shouldBeEqualTo true
+            endsWith("koconstant/snippet/forkopathprovider/enum-const-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -35,7 +35,7 @@ class KoEnumConstDeclarationForKoPathProviderTest {
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koenumconst/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koconstant/snippet/" +
                     "forkopathprovider/enum-const-project-file-path.kt",
             )
     }
@@ -52,9 +52,9 @@ class KoEnumConstDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koenumconst/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koenumconst..enum-const-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koenumconst/snippet/", true) shouldBeEqualTo false
+            resideInPath("..koconstant/snippet..", true) shouldBeEqualTo true
+            resideInPath("..koconstant..enum-const-reside-in-file-path.kt", true) shouldBeEqualTo true
+            resideInPath("koconstant/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -70,12 +70,12 @@ class KoEnumConstDeclarationForKoPathProviderTest {
         // then
         assertSoftly(sut) {
             resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koenumconst/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koenumconst..enum-const-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koenumconst/snippet/", false) shouldBeEqualTo false
+            resideInPath("..koconstant/snippet..", false) shouldBeEqualTo true
+            resideInPath("..koconstant..enum-const-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            resideInPath("koconstant/snippet/", false) shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koenumconst/snippet/forkopathprovider/", fileName)
+        getSnippetKoScope("core/declaration/koconstant/snippet/forkopathprovider/", fileName)
 }

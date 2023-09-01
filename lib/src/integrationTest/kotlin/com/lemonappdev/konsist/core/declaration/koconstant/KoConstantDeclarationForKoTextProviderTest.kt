@@ -1,10 +1,10 @@
-package com.lemonappdev.konsist.core.declaration.koenumconst
+package com.lemonappdev.konsist.core.declaration.koconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoEnumConstDeclarationForKoTextProviderTest {
+class KoConstantDeclarationForKoTextProviderTest {
     @Test
     fun `enum-const-text`() {
         // given
@@ -19,5 +19,5 @@ class KoEnumConstDeclarationForKoTextProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koenumconst/snippet/forkotextprovider/", fileName)
+        getSnippetKoScope("core/declaration/koconstant/snippet/forkotextprovider/", fileName)
 }

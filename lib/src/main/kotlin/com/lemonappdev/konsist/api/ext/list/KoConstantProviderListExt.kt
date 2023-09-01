@@ -1,12 +1,12 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoEnumConstDeclaration
+import com.lemonappdev.konsist.api.declaration.KoConstantDeclaration
 import com.lemonappdev.konsist.api.provider.KoConstantProvider
 
 /**
  * List containing enum constant declarations.
  */
-val <T : KoConstantProvider> List<T>.constants: List<KoEnumConstDeclaration>
+val <T : KoConstantProvider> List<T>.constants: List<KoConstantDeclaration>
     get() = flatMap { it.constants }
 
 /**

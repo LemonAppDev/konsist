@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
-import com.lemonappdev.konsist.api.declaration.KoEnumConstDeclaration
+import com.lemonappdev.konsist.api.declaration.KoConstantDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtEnumEntry
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-internal class KoEnumConstDeclarationCore private constructor(
+internal class KoConstantDeclarationCore private constructor(
     override val ktEnumEntry: KtEnumEntry,
     override val containingDeclaration: KoContainingDeclarationProvider,
-) : KoEnumConstDeclaration,
+) : KoConstantDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
     KoContainingFileProviderCore,
@@ -52,14 +52,14 @@ internal class KoEnumConstDeclarationCore private constructor(
     }
 
     internal companion object {
-        private val cache: KoDeclarationCache<KoEnumConstDeclaration> = KoDeclarationCache()
+        private val cache: KoDeclarationCache<KoConstantDeclaration> = KoDeclarationCache()
 
         internal fun getInstance(
             ktEnumEntry: KtEnumEntry,
             containingDeclaration: KoContainingDeclarationProvider,
-        ): KoEnumConstDeclaration =
+        ): KoConstantDeclaration =
             cache.getOrCreateInstance(ktEnumEntry, containingDeclaration) {
-                KoEnumConstDeclarationCore(ktEnumEntry, containingDeclaration)
+                KoConstantDeclarationCore(ktEnumEntry, containingDeclaration)
             }
     }
 }

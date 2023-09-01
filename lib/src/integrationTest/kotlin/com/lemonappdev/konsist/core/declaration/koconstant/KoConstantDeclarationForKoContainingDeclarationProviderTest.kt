@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.koenumconst
+package com.lemonappdev.konsist.core.declaration.koconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.provider.KoNameProvider
@@ -7,7 +7,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoEnumConstDeclarationForKoContainingDeclarationProviderTest {
+class KoConstantDeclarationForKoContainingDeclarationProviderTest {
     @Test
     fun `enum-const-containing-declaration`() {
         // given
@@ -25,5 +25,5 @@ class KoEnumConstDeclarationForKoContainingDeclarationProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koenumconst/snippet/forkocontainingdeclarationprovider/", fileName)
+        getSnippetKoScope("core/declaration/koconstant/snippet/forkocontainingdeclarationprovider/", fileName)
 }

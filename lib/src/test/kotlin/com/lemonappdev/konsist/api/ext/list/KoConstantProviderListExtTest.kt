@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoEnumConstDeclaration
+import com.lemonappdev.konsist.api.declaration.KoConstantDeclaration
 import com.lemonappdev.konsist.api.provider.KoConstantProvider
 import io.mockk.every
 import io.mockk.mockk
@@ -11,9 +11,9 @@ class KoConstantProviderListExtTest {
     @Test
     fun `constants returns constants from all declarations`() {
         // given
-        val constants1: KoEnumConstDeclaration = mockk()
-        val constants2: KoEnumConstDeclaration = mockk()
-        val constants3: KoEnumConstDeclaration = mockk()
+        val constants1: KoConstantDeclaration = mockk()
+        val constants2: KoConstantDeclaration = mockk()
+        val constants3: KoConstantDeclaration = mockk()
         val declaration1: KoConstantProvider = mockk {
             every { constants } returns listOf(constants1, constants2)
         }

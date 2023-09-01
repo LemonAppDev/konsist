@@ -1,6 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
-import com.lemonappdev.konsist.api.declaration.KoEnumConstDeclaration
+import com.lemonappdev.konsist.api.declaration.KoConstantDeclaration
 
 /**
  * An interface representing a Kotlin declaration that provides access to type aliases.
@@ -10,7 +10,7 @@ interface KoConstantProvider : KoBaseProvider {
     /**
      * List of enum constants.
      */
-    val constants: List<KoEnumConstDeclaration>
+    val constants: List<KoConstantDeclaration>
 
     /**
      * The number of enum constants.
