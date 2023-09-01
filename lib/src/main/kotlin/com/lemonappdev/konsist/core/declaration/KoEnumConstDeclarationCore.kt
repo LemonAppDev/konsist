@@ -20,6 +20,7 @@ import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoClassProviderCore
+import com.lemonappdev.konsist.core.provider.KoConstantProviderCore
 import com.lemonappdev.konsist.core.provider.KoConstructorProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -84,6 +85,7 @@ internal class KoEnumConstDeclarationCore private constructor(
     KoPathProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore, // this? or general?
     KoPackageDeclarationProviderCore, // this? or general?
+    KoConstantProviderCore,
 //    KoRepresentsTypeProviderCore,
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore {
@@ -94,6 +96,8 @@ internal class KoEnumConstDeclarationCore private constructor(
     override val psiElement: PsiElement by lazy { ktEnumEntry }
 
     override val ktElement: KtElement by lazy { ktEnumEntry }
+
+    override val ktClass: KtClass by lazy { ktEnumEntry }
 
     override fun toString(): String {
         return locationWithText
