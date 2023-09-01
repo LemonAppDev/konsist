@@ -1,5 +1,7 @@
 package com.lemonappdev.konsist.testdata
 
+open class SampleParentClass
+
 class SampleClass
 
 class SampleClass1

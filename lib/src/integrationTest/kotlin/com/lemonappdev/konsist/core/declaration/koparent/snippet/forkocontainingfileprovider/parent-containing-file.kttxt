@@ -1,3 +1,3 @@
-import com.lemonappdev.konsist.testdata.SampleClass
+import com.lemonappdev.konsist.testdata.SampleParentClass
 
-class SampleBaseClass: SampleClass
+class SampleClass: SampleParentClass()
