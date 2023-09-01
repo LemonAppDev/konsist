@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
@@ -9,6 +10,29 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoReceiverTypeProviderListExtTest {
+    @Test
+    fun `receiverTypes returns receiver types from all declarations`() {
+        // given
+        val receiverType1: KoTypeDeclaration = mockk()
+        val receiverType2: KoTypeDeclaration = mockk()
+        val declaration1: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns receiverType1
+        }
+        val declaration2: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns receiverType2
+        }
+        val declaration3: KoReceiverTypeProvider = mockk {
+            every { receiverType } returns null
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.receiverTypes
+
+        // then
+        sut shouldBeEqualTo listOf(receiverType1, receiverType2)
+    }
+
     @Test
     fun `withReceiverType() returns declaration with any receiver`() {
         // given

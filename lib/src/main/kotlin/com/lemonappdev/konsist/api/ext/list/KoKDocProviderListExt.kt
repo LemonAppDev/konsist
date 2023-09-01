@@ -1,7 +1,14 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.KoKDocTag
+import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
+
+/**
+ * List containing KDoc declarations.
+ */
+val <T : KoKDocProvider> List<T>.kDocs: List<KoKDocDeclaration>
+    get() = mapNotNull { it.kDoc }
 
 /**
  * List containing elements with KDoc.

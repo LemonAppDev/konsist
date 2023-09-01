@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
@@ -9,6 +10,29 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoReturnTypeProviderListExtTest {
+    @Test
+    fun `returnTypes returns return types from all declarations`() {
+        // given
+        val returnType1: KoTypeDeclaration = mockk()
+        val returnType2: KoTypeDeclaration = mockk()
+        val declaration1: KoReturnTypeProvider = mockk {
+            every { returnType } returns returnType1
+        }
+        val declaration2: KoReturnTypeProvider = mockk {
+            every { returnType } returns returnType2
+        }
+        val declaration3: KoReturnTypeProvider = mockk {
+            every { returnType } returns null
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.returnTypes
+
+        // then
+        sut shouldBeEqualTo listOf(returnType1, returnType2)
+    }
+
     @Test
     fun `withReturnType() returns declaration with any return type`() {
         // given

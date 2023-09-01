@@ -1,6 +1,13 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoPrimaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
+
+/**
+ * List containing primary constructor declarations.
+ */
+val <T : KoPrimaryConstructorProvider> List<T>.primaryConstructors: List<KoPrimaryConstructorDeclaration>
+    get() = mapNotNull { it.primaryConstructor }
 
 /**
  * List containing elements that have primary constructor.
