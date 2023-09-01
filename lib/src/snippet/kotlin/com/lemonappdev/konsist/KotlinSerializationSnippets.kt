@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.constants
+import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withEnumModifier
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.withSomeAnnotationsOf
@@ -26,7 +26,7 @@ class KotlinSerializationSnippets {
             .classes()
             .withEnumModifier()
             .withSomeAnnotationsOf(Serializable::class)
-            .constants
+            .enumConstants
             .assert { it.hasAnnotationsOf(SerialName::class) }
     }
 }

@@ -1,24 +1,24 @@
-package com.lemonappdev.konsist.core.declaration.koconstant
+package com.lemonappdev.konsist.core.declaration.koenumconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoConstantDeclarationForKoPathProviderTest {
+class KoEnumConstantDeclarationForKoPathProviderTest {
     @Test
     fun `enum-const-file-path`() {
         // given
         val sut = getSnippetFile("enum-const-file-path")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
         assertSoftly(sut.path) {
             startsWith("//") shouldBeEqualTo false
-            endsWith("koconstant/snippet/forkopathprovider/enum-const-file-path.kt") shouldBeEqualTo true
+            endsWith("koenumconstant/snippet/forkopathprovider/enum-const-file-path.kt") shouldBeEqualTo true
         }
     }
 
@@ -28,14 +28,14 @@ class KoConstantDeclarationForKoPathProviderTest {
         val sut = getSnippetFile("enum-const-project-file-path")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
         sut
             .projectPath
             .shouldBeEqualTo(
-                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koconstant/snippet/" +
+                "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koenumconstant/snippet/" +
                     "forkopathprovider/enum-const-project-file-path.kt",
             )
     }
@@ -46,15 +46,15 @@ class KoConstantDeclarationForKoPathProviderTest {
         val sut = getSnippetFile("enum-const-reside-in-file-path")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
         assertSoftly(sut) {
             resideInPath("..snippet..", true) shouldBeEqualTo true
-            resideInPath("..koconstant/snippet..", true) shouldBeEqualTo true
-            resideInPath("..koconstant..enum-const-reside-in-file-path.kt", true) shouldBeEqualTo true
-            resideInPath("koconstant/snippet/", true) shouldBeEqualTo false
+            resideInPath("..koenumconstant/snippet..", true) shouldBeEqualTo true
+            resideInPath("..koenumconstant..enum-const-reside-in-file-path.kt", true) shouldBeEqualTo true
+            resideInPath("koenumconstant/snippet/", true) shouldBeEqualTo false
         }
     }
 
@@ -64,18 +64,18 @@ class KoConstantDeclarationForKoPathProviderTest {
         val sut = getSnippetFile("enum-const-reside-in-project-file-path")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
         assertSoftly(sut) {
             resideInPath("..snippet..", false) shouldBeEqualTo true
-            resideInPath("..koconstant/snippet..", false) shouldBeEqualTo true
-            resideInPath("..koconstant..enum-const-reside-in-project-file-path.kt", false) shouldBeEqualTo true
-            resideInPath("koconstant/snippet/", false) shouldBeEqualTo false
+            resideInPath("..koenumconstant/snippet..", false) shouldBeEqualTo true
+            resideInPath("..koenumconstant..enum-const-reside-in-project-file-path.kt", false) shouldBeEqualTo true
+            resideInPath("koenumconstant/snippet/", false) shouldBeEqualTo false
         }
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koconstant/snippet/forkopathprovider/", fileName)
+        getSnippetKoScope("core/declaration/koenumconstant/snippet/forkopathprovider/", fileName)
 }

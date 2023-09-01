@@ -1,17 +1,17 @@
-package com.lemonappdev.konsist.core.declaration.koconstant
+package com.lemonappdev.konsist.core.declaration.koenumconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoConstantDeclarationForKoPackageProviderTest {
+class KoEnumConstantDeclarationForKoPackageProviderTest {
     @Test
     fun `enum-const-is-not-in-package`() {
         // given
         val sut = getSnippetFile("enum-const-is-not-in-package")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -24,7 +24,7 @@ class KoConstantDeclarationForKoPackageProviderTest {
         val sut = getSnippetFile("enum-const-is-in-package")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -32,5 +32,5 @@ class KoConstantDeclarationForKoPackageProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koconstant/snippet/forkopackageprovider/", fileName)
+        getSnippetKoScope("core/declaration/koenumconstant/snippet/forkopackageprovider/", fileName)
 }

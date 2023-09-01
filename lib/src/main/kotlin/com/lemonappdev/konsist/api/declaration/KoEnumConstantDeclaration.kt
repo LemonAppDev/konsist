@@ -17,7 +17,7 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
 /**
  * Represents a Kotlin enum const declaration.
  */
-interface KoConstantDeclaration :
+interface KoEnumConstantDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,

@@ -1,17 +1,17 @@
-package com.lemonappdev.konsist.core.declaration.koconstant
+package com.lemonappdev.konsist.core.declaration.koenumconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoConstantDeclarationForKoResideInOrOutsidePackageProviderTest {
+class KoEnumConstantDeclarationForKoResideInOrOutsidePackageProviderTest {
     @Test
     fun `enum-const-not-reside-in-file-package`() {
         // given
         val sut = getSnippetFile("enum-const-not-reside-in-file-package")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -24,7 +24,7 @@ class KoConstantDeclarationForKoResideInOrOutsidePackageProviderTest {
         val sut = getSnippetFile("enum-const-reside-in-file-package")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -37,7 +37,7 @@ class KoConstantDeclarationForKoResideInOrOutsidePackageProviderTest {
         val sut = getSnippetFile("enum-const-not-reside-outside-file-package")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -50,7 +50,7 @@ class KoConstantDeclarationForKoResideInOrOutsidePackageProviderTest {
         val sut = getSnippetFile("enum-const-reside-outside-file-package")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -58,5 +58,5 @@ class KoConstantDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koconstant/snippet/forkoresideinoroutsidepackageprovider/", fileName)
+        getSnippetKoScope("core/declaration/koenumconstant/snippet/forkoresideinoroutsidepackageprovider/", fileName)
 }

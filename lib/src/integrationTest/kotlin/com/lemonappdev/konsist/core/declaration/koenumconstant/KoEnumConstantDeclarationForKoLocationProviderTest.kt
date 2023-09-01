@@ -1,18 +1,18 @@
-package com.lemonappdev.konsist.core.declaration.koconstant
+package com.lemonappdev.konsist.core.declaration.koenumconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoConstantDeclarationForKoLocationProviderTest {
+class KoEnumConstantDeclarationForKoLocationProviderTest {
     @Test
     fun `enum-const-location-with-single-digit`() {
         // given
         val sut = getSnippetFile("enum-const-location-with-single-digit")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -25,14 +25,14 @@ class KoConstantDeclarationForKoLocationProviderTest {
         val projectPath = getSnippetFile("enum-const-location-with-text")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
             .projectPath
 
         val sut = getSnippetFile("enum-const-location-with-text")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -45,5 +45,5 @@ class KoConstantDeclarationForKoLocationProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koconstant/snippet/forkolocationprovider/", fileName)
+        getSnippetKoScope("core/declaration/koenumconstant/snippet/forkolocationprovider/", fileName)
 }

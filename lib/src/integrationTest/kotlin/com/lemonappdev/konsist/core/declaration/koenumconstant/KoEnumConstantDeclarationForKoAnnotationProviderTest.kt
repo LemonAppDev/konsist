@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.core.declaration.koconstant
+package com.lemonappdev.konsist.core.declaration.koenumconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
@@ -8,14 +8,14 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoConstantDeclarationForKoAnnotationProviderTest {
+class KoEnumConstantDeclarationForKoAnnotationProviderTest {
     @Test
     fun `enum-const-has-no-annotation`() {
         // given
         val sut = getSnippetFile("enum-const-has-no-annotation")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -32,7 +32,7 @@ class KoConstantDeclarationForKoAnnotationProviderTest {
         val sut = getSnippetFile("enum-const-has-annotation")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -53,7 +53,7 @@ class KoConstantDeclarationForKoAnnotationProviderTest {
         val sut = getSnippetFile("enum-const-has-two-annotations")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -78,7 +78,7 @@ class KoConstantDeclarationForKoAnnotationProviderTest {
         val sut = getSnippetFile("enum-const-has-suppress-annotation-without-import")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -89,5 +89,5 @@ class KoConstantDeclarationForKoAnnotationProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koconstant/snippet/forannotationprovider/", fileName)
+        getSnippetKoScope("core/declaration/koenumconstant/snippet/forannotationprovider/", fileName)
 }

@@ -1,20 +1,20 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoConstantDeclaration
-import com.lemonappdev.konsist.api.provider.KoConstantProvider
+import com.lemonappdev.konsist.api.declaration.KoEnumConstantDeclaration
+import com.lemonappdev.konsist.api.provider.KoEnumConstantProvider
 
 /**
  * List containing enum constant declarations.
  */
-val <T : KoConstantProvider> List<T>.constants: List<KoConstantDeclaration>
-    get() = flatMap { it.constants }
+val <T : KoEnumConstantProvider> List<T>.enumConstants: List<KoEnumConstantDeclaration>
+    get() = flatMap { it.enumConstants }
 
 /**
  * List containing elements with any enum constant.
  *
  * @return A list containing elements with any enum constant.
  */
-fun <T : KoConstantProvider> List<T>.withConstants(): List<T> = filter { it.hasConstants() }
+fun <T : KoEnumConstantProvider> List<T>.withEnumConstants(): List<T> = filter { it.hasEnumConstants() }
 
 /**
  * List containing elements with all specified enum constants.
@@ -23,8 +23,8 @@ fun <T : KoConstantProvider> List<T>.withConstants(): List<T> = filter { it.hasC
  * @param names The enum constant name(s) to include.
  * @return A list containing elements with the specified enum constant(s).
  */
-fun <T : KoConstantProvider> List<T>.withAllConstants(name: String, vararg names: String): List<T> = filter {
-    it.hasConstants(name, *names)
+fun <T : KoEnumConstantProvider> List<T>.withAllEnumConstants(name: String, vararg names: String): List<T> = filter {
+    it.hasEnumConstants(name, *names)
 }
 
 /**
@@ -34,8 +34,8 @@ fun <T : KoConstantProvider> List<T>.withAllConstants(name: String, vararg names
  * @param names The enum constant name(s) to include.
  * @return A list containing elements with at least one of the specified enum constant(s).
  */
-fun <T : KoConstantProvider> List<T>.withSomeConstants(name: String, vararg names: String): List<T> = filter {
-    it.hasConstants(name) || names.any { constant -> it.hasConstants(constant) }
+fun <T : KoEnumConstantProvider> List<T>.withSomeEnumConstants(name: String, vararg names: String): List<T> = filter {
+    it.hasEnumConstants(name) || names.any { constant -> it.hasEnumConstants(constant) }
 }
 
 /**
@@ -43,7 +43,7 @@ fun <T : KoConstantProvider> List<T>.withSomeConstants(name: String, vararg name
  *
  * @return A list containing elements with no enum constant.
  */
-fun <T : KoConstantProvider> List<T>.withoutConstants(): List<T> = filterNot { it.hasConstants() }
+fun <T : KoEnumConstantProvider> List<T>.withoutEnumConstants(): List<T> = filterNot { it.hasEnumConstants() }
 
 /**
  * List containing elements without all specified enum constants.
@@ -52,8 +52,8 @@ fun <T : KoConstantProvider> List<T>.withoutConstants(): List<T> = filterNot { i
  * @param names The enum constant name(s) to exclude.
  * @return A list containing elements without specified enum constant(s).
  */
-fun <T : KoConstantProvider> List<T>.withoutAllConstants(name: String, vararg names: String): List<T> = filterNot {
-    it.hasConstants(name, *names)
+fun <T : KoEnumConstantProvider> List<T>.withoutAllEnumConstants(name: String, vararg names: String): List<T> = filterNot {
+    it.hasEnumConstants(name, *names)
 }
 
 /**
@@ -63,9 +63,9 @@ fun <T : KoConstantProvider> List<T>.withoutAllConstants(name: String, vararg na
  * @param names The enum constant name(s) to exclude.
  * @return A list containing elements without at least one of the specified enum constant(s).
  */
-fun <T : KoConstantProvider> List<T>.withoutSomeConstants(name: String, vararg names: String): List<T> = filter {
-    !it.hasConstants(name) && if (names.isNotEmpty()) {
-        names.any { constant -> !it.hasConstants(constant) }
+fun <T : KoEnumConstantProvider> List<T>.withoutSomeEnumConstants(name: String, vararg names: String): List<T> = filter {
+    !it.hasEnumConstants(name) && if (names.isNotEmpty()) {
+        names.any { constant -> !it.hasEnumConstants(constant) }
     } else {
         true
     }

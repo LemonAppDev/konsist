@@ -1,17 +1,17 @@
-package com.lemonappdev.konsist.core.declaration.koconstant
+package com.lemonappdev.konsist.core.declaration.koenumconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoConstantDeclarationForKoContainingFileProviderTest {
+class KoEnumConstantDeclarationForKoContainingFileProviderTest {
     @Test
     fun `enum-const-containing-file`() {
         // given
         val sut = getSnippetFile("enum-const-containing-file")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -23,5 +23,5 @@ class KoConstantDeclarationForKoContainingFileProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koconstant/snippet/forkocontainingfileprovider/", fileName)
+        getSnippetKoScope("core/declaration/koenumconstant/snippet/forkocontainingfileprovider/", fileName)
 }

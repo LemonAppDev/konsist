@@ -5,7 +5,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoClassDeclarationForKoConstantProviderTest {
+class KoClassDeclarationForKoEnumConstantProviderTest {
     @Test
     fun `class-has-no-constant`() {
         // given
@@ -15,10 +15,10 @@ class KoClassDeclarationForKoConstantProviderTest {
 
         // then
         assertSoftly(sut) {
-            constants shouldBeEqualTo emptyList()
-            numConstants shouldBeEqualTo 0
-            hasConstants() shouldBeEqualTo false
-            hasConstants("SAMPLE_CONSTANT") shouldBeEqualTo false
+            enumConstants shouldBeEqualTo emptyList()
+            numEnumConstants shouldBeEqualTo 0
+            hasEnumConstants() shouldBeEqualTo false
+            hasEnumConstants("SAMPLE_CONSTANT") shouldBeEqualTo false
         }
     }
 
@@ -30,7 +30,7 @@ class KoClassDeclarationForKoConstantProviderTest {
             .first()
 
         // then
-        sut.constants.map { it.name } shouldBeEqualTo listOf("SAMPLE_CONSTANT")
+        sut.enumConstants.map { it.name } shouldBeEqualTo listOf("SAMPLE_CONSTANT")
     }
 
     @Test
@@ -42,13 +42,13 @@ class KoClassDeclarationForKoConstantProviderTest {
 
         // then
         assertSoftly(sut) {
-            numConstants shouldBeEqualTo 2
-            hasConstants() shouldBeEqualTo true
-            hasConstants("SAMPLE_CONSTANT_1") shouldBeEqualTo true
-            hasConstants("SAMPLE_CONSTANT_1", "SAMPLE_CONSTANT_2") shouldBeEqualTo true
-            hasConstants("OTHER_CONSTANT_1") shouldBeEqualTo false
+            numEnumConstants shouldBeEqualTo 2
+            hasEnumConstants() shouldBeEqualTo true
+            hasEnumConstants("SAMPLE_CONSTANT_1") shouldBeEqualTo true
+            hasEnumConstants("SAMPLE_CONSTANT_1", "SAMPLE_CONSTANT_2") shouldBeEqualTo true
+            hasEnumConstants("OTHER_CONSTANT_1") shouldBeEqualTo false
         }
     }
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koclass/snippet/forkoconstantprovider/", fileName)
+        getSnippetKoScope("core/declaration/koclass/snippet/forkoenumconstantprovider/", fileName)
 }

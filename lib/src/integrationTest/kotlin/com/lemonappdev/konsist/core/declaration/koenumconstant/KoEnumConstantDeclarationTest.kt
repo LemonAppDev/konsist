@@ -1,17 +1,17 @@
-package com.lemonappdev.konsist.core.declaration.koconstant
+package com.lemonappdev.konsist.core.declaration.koenumconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoConstantDeclarationTest {
+class KoEnumConstantDeclarationTest {
     @Test
     fun `enum-const-to-string`() {
         // given
         val sut = getSnippetFile("enum-const-to-string")
             .classes()
             .first()
-            .constants
+            .enumConstants
             .first()
 
         // then
@@ -19,5 +19,5 @@ class KoConstantDeclarationTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/declaration/koconstant/snippet/forgeneral/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/declaration/koenumconstant/snippet/forgeneral/", fileName)
 }
