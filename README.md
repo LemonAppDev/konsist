@@ -62,7 +62,7 @@ guide and [Snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) p
 
 - [Introducing Konsist: A Cutting-Edge Kotlin Linter](https://blog.kotlin-academy.com/introducing-konsist-a-cutting-edge-kotlin-linter-d3ab916a5461)
 
-# Community & Support
+## Community & Support
 
 Start the [discussion here on GitHub](https://github.com/LemonAppDev/konsist/discussions) or 
 use [#konsist channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) at kotlinlang Slack Workspace.
@@ -72,6 +72,6 @@ use [#konsist channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) at kot
 Please be sure to review Konsist [contributing guidelines](https://docs.konsist.lemonappdev.com/help/contributing)
 to learn how to support the project.
 
-## Licence
+# Licence
 
 Konsist is distributed under the terms of the Apache License (Version 2.0). See [LICENSE.md](LICENSE) for details.
