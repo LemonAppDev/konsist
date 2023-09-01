@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.ext.list.indexOfFirstInstance
 import com.lemonappdev.konsist.api.ext.list.indexOfLastInstance
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withValueModifier
 import com.lemonappdev.konsist.api.ext.list.parameters
+import com.lemonappdev.konsist.api.ext.list.primaryConstructors
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.api.ext.provider.hasAnnotationOf
@@ -102,7 +103,7 @@ class GeneralSnippets {
             .scopeFromProject()
             .classes()
             .withValueModifier()
-            .mapNotNull { it.primaryConstructor }
+            .primaryConstructors
             .assert { it.hasParameterNamed("value") }
     }
 
