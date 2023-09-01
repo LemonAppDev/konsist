@@ -44,6 +44,7 @@ internal open class KoParentDeclarationCore private constructor(private val ktSu
              * Foo<UiState, Action> -> Foo
              * Foo<UiState, Action>(Loading) -> Foo
              */
+            .replace("\n", "")
             .replace(Regex("<.*|\\(.*"), "")
             .replace(EndOfLine.UNIX.value, " ")
             .substringBefore(" by")
