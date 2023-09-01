@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
+import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import io.mockk.every
 import io.mockk.mockk
@@ -8,6 +9,30 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoParametersProviderListExtTest {
+    @Test
+    fun `parameters returns parameters from all declarations`() {
+        // given
+        val parameter1: KoParameterDeclaration = mockk()
+        val parameter2: KoParameterDeclaration = mockk()
+        val parameter3: KoParameterDeclaration = mockk()
+        val declaration1: KoParametersProvider = mockk {
+            every { parameters } returns listOf(parameter1, parameter2)
+        }
+        val declaration2: KoParametersProvider = mockk {
+            every { parameters } returns listOf(parameter3)
+        }
+        val declaration3: KoParametersProvider = mockk {
+            every { parameters } returns emptyList()
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.parameters
+
+        // then
+        sut shouldBeEqualTo listOf(parameter1, parameter2, parameter3)
+    }
+
     @Test
     fun `withParameters() returns declaration with any parameter`() {
         // given

@@ -1,6 +1,9 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoClassProvider
+import com.lemonappdev.konsist.core.declaration.KoClassDeclarationCore
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import io.mockk.every
@@ -9,6 +12,30 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoAnnotationProviderListExtTest {
+    @Test
+    fun `annotations returns annotations from all declarations`() {
+        // given
+        val annotation1: KoAnnotationDeclaration = mockk()
+        val annotation2: KoAnnotationDeclaration = mockk()
+        val annotation3: KoAnnotationDeclaration = mockk()
+        val declaration1: KoAnnotationProvider = mockk {
+            every { annotations } returns listOf(annotation1, annotation2)
+        }
+        val declaration2: KoAnnotationProvider = mockk {
+            every { annotations } returns listOf(annotation3)
+        }
+        val declaration3: KoAnnotationProvider = mockk {
+            every { annotations } returns emptyList()
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.annotations
+
+        // then
+        sut shouldBeEqualTo listOf(annotation1, annotation2, annotation3)
+    }
+
     @Test
     fun `withAnnotations() returns declaration with any annotation`() {
         // given

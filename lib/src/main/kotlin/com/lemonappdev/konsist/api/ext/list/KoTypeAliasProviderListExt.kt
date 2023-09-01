@@ -1,6 +1,15 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
+import com.lemonappdev.konsist.api.declaration.KoTypeAliasDeclaration
+import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
+
+/**
+ * List containing type alias declarations.
+ */
+val <T : KoTypeAliasProvider> List<T>.typeAliases: List<KoTypeAliasDeclaration>
+    get() = flatMap { it.typeAliases }
 
 /**
  * List containing elements with any type alias.

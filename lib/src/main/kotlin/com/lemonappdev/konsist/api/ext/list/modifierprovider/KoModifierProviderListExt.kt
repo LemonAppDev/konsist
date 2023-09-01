@@ -3,7 +3,15 @@
 package com.lemonappdev.konsist.api.ext.list.modifierprovider
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
+
+/**
+ * List containing modifiers.
+ */
+val <T : KoModifierProvider> List<T>.modifiers: List<KoModifier>
+    get() = flatMap { it.modifiers }
 
 /**
  * List containing elements with any specified modifier.

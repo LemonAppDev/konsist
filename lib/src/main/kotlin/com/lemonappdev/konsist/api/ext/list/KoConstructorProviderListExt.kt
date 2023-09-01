@@ -1,6 +1,15 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoConstructorProvider
+
+/**
+ * List containing constructor declarations.
+ */
+val <T : KoConstructorProvider> List<T>.constructors: List<KoConstructorDeclaration>
+    get() = flatMap { it.constructors }
 
 /**
  * List containing elements with constructor.

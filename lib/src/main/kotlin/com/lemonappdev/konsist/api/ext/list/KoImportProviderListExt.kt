@@ -1,6 +1,15 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.provider.KoConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoImportProvider
+
+/**
+ * List containing import declarations.
+ */
+val <T : KoImportProvider> List<T>.imports: List<KoImportDeclaration>
+    get() = flatMap { it.imports }
 
 /**
  * List containing elements with any import.

@@ -1,6 +1,15 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
+import com.lemonappdev.konsist.api.provider.KoParentProvider
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
+
+/**
+ * List containing secondary constructor declarations.
+ */
+val <T : KoSecondaryConstructorsProvider> List<T>.secondaryConstructors: List<KoSecondaryConstructorDeclaration>
+    get() = flatMap { it.secondaryConstructors }
 
 /**
  * List containing elements that have secondary constructors.

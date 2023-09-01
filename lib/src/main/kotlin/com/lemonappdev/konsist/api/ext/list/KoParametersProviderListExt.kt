@@ -1,6 +1,15 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
+import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
+import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
+
+/**
+ * List containing parameter declarations.
+ */
+val <T : KoParametersProvider> List<T>.parameters: List<KoParameterDeclaration>
+    get() = flatMap { it.parameters }
 
 /**
  * List containing elements with any parameter.
