@@ -6,12 +6,27 @@ import org.junit.jupiter.api.Test
 
 class KoArgumentDeclarationTest {
     @Test
-    fun `argument-to-string`() {
+    fun `argument-in-enum-const-to-string`() {
         // given
-        val sut = getSnippetFile("argument-to-string")
+        val sut = getSnippetFile("argument-in-enum-const-to-string")
             .classes()
             .first()
             .enumConstants
+            .first()
+            .arguments
+            .first()
+
+        // then
+        sut.toString() shouldBeEqualTo sut.locationWithText
+    }
+
+    @Test
+    fun `argument-in-annotation-to-string`() {
+        // given
+        val sut = getSnippetFile("argument-in-annotation-to-string")
+            .functions()
+            .first()
+            .annotations
             .first()
             .arguments
             .first()

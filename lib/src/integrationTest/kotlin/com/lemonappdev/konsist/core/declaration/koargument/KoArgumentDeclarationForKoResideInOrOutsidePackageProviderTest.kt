@@ -6,12 +6,14 @@ import org.junit.jupiter.api.Test
 
 class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
     @Test
-    fun `argument-not-reside-in-file-package`() {
+    fun `argument-in-enum-const-not-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("argument-not-reside-in-file-package")
+        val sut = getSnippetFile("argument-in-enum-const-not-reside-in-file-package")
             .classes()
             .first()
             .enumConstants
+            .first()
+            .arguments
             .first()
 
         // then
@@ -19,12 +21,14 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     @Test
-    fun `argument-reside-in-file-package`() {
+    fun `argument-in-enum-const-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("argument-reside-in-file-package")
+        val sut = getSnippetFile("argument-in-enum-const-reside-in-file-package")
             .classes()
             .first()
             .enumConstants
+            .first()
+            .arguments
             .first()
 
         // then
@@ -32,12 +36,14 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     @Test
-    fun `argument-not-reside-outside-file-package`() {
+    fun `argument-in-enum-const-not-reside-outside-file-package`() {
         // given
-        val sut = getSnippetFile("argument-not-reside-outside-file-package")
+        val sut = getSnippetFile("argument-in-enum-const-not-reside-outside-file-package")
             .classes()
             .first()
             .enumConstants
+            .first()
+            .arguments
             .first()
 
         // then
@@ -45,12 +51,74 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     @Test
-    fun `argument-reside-outside-file-package`() {
+    fun `argument-in-enum-const-reside-outside-file-package`() {
         // given
-        val sut = getSnippetFile("argument-reside-outside-file-package")
+        val sut = getSnippetFile("argument-in-enum-const-reside-outside-file-package")
             .classes()
             .first()
             .enumConstants
+            .first()
+            .arguments
+            .first()
+
+        // then
+        sut.resideOutsidePackage("com") shouldBeEqualTo true
+    }
+
+    @Test
+    fun `argument-in-annotation-not-reside-in-file-package`() {
+        // given
+        val sut = getSnippetFile("argument-in-annotation-not-reside-in-file-package")
+            .functions()
+            .first()
+            .annotations
+            .first()
+            .arguments
+            .first()
+
+        // then
+        sut.resideInPackage("com") shouldBeEqualTo false
+    }
+
+    @Test
+    fun `argument-in-annotation-reside-in-file-package`() {
+        // given
+        val sut = getSnippetFile("argument-in-annotation-reside-in-file-package")
+            .functions()
+            .first()
+            .annotations
+            .first()
+            .arguments
+            .first()
+
+        // then
+        sut.resideInPackage("com..") shouldBeEqualTo true
+    }
+
+    @Test
+    fun `argument-in-annotation-not-reside-outside-file-package`() {
+        // given
+        val sut = getSnippetFile("argument-in-annotation-not-reside-outside-file-package")
+            .functions()
+            .first()
+            .annotations
+            .first()
+            .arguments
+            .first()
+
+        // then
+        sut.resideOutsidePackage("com..") shouldBeEqualTo false
+    }
+
+    @Test
+    fun `argument-in-annotation-reside-outside-file-package`() {
+        // given
+        val sut = getSnippetFile("argument-in-annotation-reside-outside-file-package")
+            .functions()
+            .first()
+            .annotations
+            .first()
+            .arguments
             .first()
 
         // then

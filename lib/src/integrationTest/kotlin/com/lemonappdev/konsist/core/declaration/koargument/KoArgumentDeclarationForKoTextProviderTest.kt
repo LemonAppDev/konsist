@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 
 class KoArgumentDeclarationForKoTextProviderTest {
     @Test
-    fun `argument-text`() {
+    fun `argument-in-enum-const-text`() {
         // given
-        val sut = getSnippetFile("argument-text")
+        val sut = getSnippetFile("argument-in-enum-const-text")
             .classes()
             .first()
             .enumConstants
@@ -18,6 +18,21 @@ class KoArgumentDeclarationForKoTextProviderTest {
 
         // then
         sut.text shouldBeEqualTo "sampleArgument = 0"
+    }
+
+    @Test
+    fun `argument-in-annotation-text`() {
+        // given
+        val sut = getSnippetFile("argument-in-annotation-text")
+            .functions()
+            .first()
+            .annotations
+            .first()
+            .arguments
+            .first()
+
+        // then
+        sut.text shouldBeEqualTo "sampleParameter = \"text\""
     }
 
     private fun getSnippetFile(fileName: String) =

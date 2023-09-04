@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 
 class KoArgumentDeclarationForKoPackageProviderTest {
     @Test
-    fun `argument-is-not-in-package`() {
+    fun `argument-in-enum-const-is-not-in-package`() {
         // given
-        val sut = getSnippetFile("argument-is-not-in-package")
+        val sut = getSnippetFile("argument-in-enum-const-is-not-in-package")
             .classes()
             .first()
             .enumConstants
@@ -21,12 +21,42 @@ class KoArgumentDeclarationForKoPackageProviderTest {
     }
 
     @Test
-    fun `argument-is-in-package`() {
+    fun `argument-in-enum-const-is-in-package`() {
         // given
-        val sut = getSnippetFile("argument-is-in-package")
+        val sut = getSnippetFile("argument-in-enum-const-is-in-package")
             .classes()
             .first()
             .enumConstants
+            .first()
+            .arguments
+            .first()
+
+        // then
+        sut.packagee?.fullyQualifiedName shouldBeEqualTo "com.samplepackage"
+    }
+
+    @Test
+    fun `argument-in-annotation-is-not-in-package`() {
+        // given
+        val sut = getSnippetFile("argument-in-annotation-is-not-in-package")
+            .functions()
+            .first()
+            .annotations
+            .first()
+            .arguments
+            .first()
+
+        // then
+        sut.packagee shouldBeEqualTo null
+    }
+
+    @Test
+    fun `argument-in-annotation-is-in-package`() {
+        // given
+        val sut = getSnippetFile("argument-in-annotation-is-in-package")
+            .functions()
+            .first()
+            .annotations
             .first()
             .arguments
             .first()

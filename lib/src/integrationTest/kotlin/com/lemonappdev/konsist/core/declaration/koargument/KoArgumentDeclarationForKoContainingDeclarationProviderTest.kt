@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test
 
 class KoArgumentDeclarationForKoContainingDeclarationProviderTest {
     @Test
-    fun `argument-containing-declaration`() {
+    fun `argument-in-enum-const-containing-declaration`() {
         // given
-        val sut = getSnippetFile("argument-containing-declaration")
+        val sut = getSnippetFile("argument-in-enum-const-containing-declaration")
             .classes()
             .first()
             .enumConstants
@@ -21,6 +21,21 @@ class KoArgumentDeclarationForKoContainingDeclarationProviderTest {
 
         // then
             (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SAMPLE_CONSTANT"
+    }
+
+    @Test
+    fun `argument-in-annotation-containing-declaration`() {
+        // given
+        val sut = getSnippetFile("argument-in-annotation-containing-declaration")
+            .functions()
+            .first()
+            .annotations
+            .first()
+            .arguments
+            .first()
+
+        // then
+        (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleAnnotationWithParameter"
     }
 
     private fun getSnippetFile(fileName: String) =
