@@ -1,10 +1,8 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.provider.KoArgumentNameProvider
-import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtStringTemplateExpression
 import org.jetbrains.kotlin.psi.KtValueArgument
-import org.jetbrains.kotlin.psi.KtValueArgumentName
 
 internal interface KoArgumentNameProviderCore : KoArgumentNameProvider, KoBaseProviderCore {
     val ktValueArgument: KtValueArgument
@@ -24,7 +22,6 @@ internal interface KoArgumentNameProviderCore : KoArgumentNameProvider, KoBasePr
                     .children
                     .first()
                     .text
-
             } else if (expression != null) {
                 expression.text
             } else {

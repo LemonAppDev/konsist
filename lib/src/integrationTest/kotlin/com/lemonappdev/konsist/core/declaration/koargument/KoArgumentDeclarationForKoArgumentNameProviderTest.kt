@@ -19,7 +19,7 @@ class KoArgumentDeclarationForKoArgumentNameProviderTest {
             .first()
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             value shouldBeEqualTo "0"
             argumentName shouldBeEqualTo null
         }
@@ -35,7 +35,7 @@ class KoArgumentDeclarationForKoArgumentNameProviderTest {
             .first()
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             value shouldBeEqualTo "0"
             argumentName shouldBeEqualTo "sampleArgument"
         }
@@ -51,7 +51,7 @@ class KoArgumentDeclarationForKoArgumentNameProviderTest {
             .first()
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             value shouldBeEqualTo "text"
             argumentName shouldBeEqualTo null
         }
@@ -67,7 +67,7 @@ class KoArgumentDeclarationForKoArgumentNameProviderTest {
             .first()
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             value shouldBeEqualTo "text"
             argumentName shouldBeEqualTo "sampleParameter"
         }

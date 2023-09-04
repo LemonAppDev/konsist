@@ -5,9 +5,7 @@ import com.lemonappdev.konsist.api.ext.list.annotations
 import com.lemonappdev.konsist.api.ext.list.arguments
 import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.provider.KoNameProvider
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoArgumentDeclarationForKoContainingDeclarationProviderTest {
@@ -21,7 +19,7 @@ class KoArgumentDeclarationForKoContainingDeclarationProviderTest {
             .first()
 
         // then
-            (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SAMPLE_CONSTANT"
+        (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SAMPLE_CONSTANT"
     }
 
     @Test

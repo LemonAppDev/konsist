@@ -109,7 +109,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
             .projectPath
             .shouldBeEqualTo(
                 "/lib/src/integrationTest/kotlin/com/lemonappdev/konsist/core/declaration/koargument/snippet/" +
-                        "forkopathprovider/argument-in-annotation-project-file-path.kt",
+                    "forkopathprovider/argument-in-annotation-project-file-path.kt",
             )
     }
 
