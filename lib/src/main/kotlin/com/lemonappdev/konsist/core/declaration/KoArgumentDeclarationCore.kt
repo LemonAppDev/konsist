@@ -4,7 +4,7 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
-import com.lemonappdev.konsist.core.provider.KoArgumentNameProviderCore
+import com.lemonappdev.konsist.core.provider.KoArgumentPropertiesProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -21,7 +21,7 @@ internal class KoArgumentDeclarationCore private constructor(
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) : KoArgumentDeclaration,
     KoBaseProviderCore,
-    KoArgumentNameProviderCore,
+    KoArgumentPropertiesProviderCore,
     KoContainingFileProviderCore,
     KoLocationProviderCore,
     KoContainingDeclarationProviderCore,

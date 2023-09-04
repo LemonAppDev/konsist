@@ -1,10 +1,10 @@
 package com.lemonappdev.konsist.api.provider
 
 /**
- * An interface representing a Kotlin declaration that provides access to argument names.
+ * An interface representing a Kotlin declaration that provides access to argument properties.
  *
  */
-interface KoArgumentNameProvider : KoBaseProvider {
+interface KoArgumentPropertiesProvider : KoBaseProvider {
     /**
      * The argument name.
      */

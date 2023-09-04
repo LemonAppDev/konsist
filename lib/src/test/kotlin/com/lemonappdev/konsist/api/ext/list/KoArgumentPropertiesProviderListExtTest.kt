@@ -1,21 +1,21 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.provider.KoArgumentNameProvider
+import com.lemonappdev.konsist.api.provider.KoArgumentPropertiesProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoArgumentNameProviderListExtTest {
+class KoArgumentPropertiesProviderListExtTest {
     @Test
     fun `withArgumentName() returns declaration with given argument name`() {
         // given
         val argumentName1 = "name1"
         val argumentName2 = "name2"
-        val declaration1: KoArgumentNameProvider = mockk {
+        val declaration1: KoArgumentPropertiesProvider = mockk {
             every { argumentName } returns argumentName1
         }
-        val declaration2: KoArgumentNameProvider = mockk {
+        val declaration2: KoArgumentPropertiesProvider = mockk {
             every { argumentName } returns argumentName2
         }
         val declarations = listOf(declaration1, declaration2)
@@ -33,13 +33,13 @@ class KoArgumentNameProviderListExtTest {
         val argumentName1 = "name1"
         val argumentName2 = "name2"
         val argumentName3 = "name3"
-        val declaration1: KoArgumentNameProvider = mockk {
+        val declaration1: KoArgumentPropertiesProvider = mockk {
             every { argumentName } returns argumentName1
         }
-        val declaration2: KoArgumentNameProvider = mockk {
+        val declaration2: KoArgumentPropertiesProvider = mockk {
             every { argumentName } returns argumentName2
         }
-        val declaration3: KoArgumentNameProvider = mockk {
+        val declaration3: KoArgumentPropertiesProvider = mockk {
             every { argumentName } returns argumentName3
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
@@ -56,10 +56,10 @@ class KoArgumentNameProviderListExtTest {
         // given
         val argumentName1 = "name1"
         val argumentName2 = "name2"
-        val declaration1: KoArgumentNameProvider = mockk {
+        val declaration1: KoArgumentPropertiesProvider = mockk {
             every { argumentName } returns argumentName1
         }
-        val declaration2: KoArgumentNameProvider = mockk {
+        val declaration2: KoArgumentPropertiesProvider = mockk {
             every { argumentName } returns argumentName2
         }
         val declarations = listOf(declaration1, declaration2)
@@ -77,13 +77,13 @@ class KoArgumentNameProviderListExtTest {
         val argumentName1 = "name1"
         val argumentName2 = "name2"
         val argumentName3 = "name3"
-        val declaration1: KoArgumentNameProvider = mockk {
+        val declaration1: KoArgumentPropertiesProvider = mockk {
             every { argumentName } returns argumentName1
         }
-        val declaration2: KoArgumentNameProvider = mockk {
+        val declaration2: KoArgumentPropertiesProvider = mockk {
             every { argumentName } returns argumentName2
         }
-        val declaration3: KoArgumentNameProvider = mockk {
+        val declaration3: KoArgumentPropertiesProvider = mockk {
             every { argumentName } returns argumentName3
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
@@ -100,10 +100,10 @@ class KoArgumentNameProviderListExtTest {
         // given
         val value1 = "value1"
         val value2 = "value2"
-        val declaration1: KoArgumentNameProvider = mockk {
+        val declaration1: KoArgumentPropertiesProvider = mockk {
             every { value } returns value1
         }
-        val declaration2: KoArgumentNameProvider = mockk {
+        val declaration2: KoArgumentPropertiesProvider = mockk {
             every { value } returns value2
         }
         val declarations = listOf(declaration1, declaration2)
@@ -121,13 +121,13 @@ class KoArgumentNameProviderListExtTest {
         val value1 = "value1"
         val value2 = "value2"
         val value3 = "value3"
-        val declaration1: KoArgumentNameProvider = mockk {
+        val declaration1: KoArgumentPropertiesProvider = mockk {
             every { value } returns value1
         }
-        val declaration2: KoArgumentNameProvider = mockk {
+        val declaration2: KoArgumentPropertiesProvider = mockk {
             every { value } returns value2
         }
-        val declaration3: KoArgumentNameProvider = mockk {
+        val declaration3: KoArgumentPropertiesProvider = mockk {
             every { value } returns value3
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
@@ -144,10 +144,10 @@ class KoArgumentNameProviderListExtTest {
         // given
         val value1 = "value1"
         val value2 = "value2"
-        val declaration1: KoArgumentNameProvider = mockk {
+        val declaration1: KoArgumentPropertiesProvider = mockk {
             every { value } returns value1
         }
-        val declaration2: KoArgumentNameProvider = mockk {
+        val declaration2: KoArgumentPropertiesProvider = mockk {
             every { value } returns value2
         }
         val declarations = listOf(declaration1, declaration2)
@@ -165,13 +165,13 @@ class KoArgumentNameProviderListExtTest {
         val value1 = "value1"
         val value2 = "value2"
         val value3 = "value3"
-        val declaration1: KoArgumentNameProvider = mockk {
+        val declaration1: KoArgumentPropertiesProvider = mockk {
             every { value } returns value1
         }
-        val declaration2: KoArgumentNameProvider = mockk {
+        val declaration2: KoArgumentPropertiesProvider = mockk {
             every { value } returns value2
         }
-        val declaration3: KoArgumentNameProvider = mockk {
+        val declaration3: KoArgumentPropertiesProvider = mockk {
             every { value } returns value3
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
