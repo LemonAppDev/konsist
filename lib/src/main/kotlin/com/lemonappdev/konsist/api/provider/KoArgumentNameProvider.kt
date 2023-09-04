@@ -5,7 +5,13 @@ package com.lemonappdev.konsist.api.provider
  *
  */
 interface KoArgumentNameProvider : KoBaseProvider {
+    /**
+     * The argument name.
+     */
     val argumentName: String?
 
+    /**
+     * The value of argument.
+     */
     val value: String
 }
