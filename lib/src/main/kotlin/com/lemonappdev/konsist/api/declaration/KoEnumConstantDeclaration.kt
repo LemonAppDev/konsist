@@ -19,7 +19,7 @@ import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 
 /**
- * Represents a Kotlin enum const declaration.
+ * Represents a Kotlin enum constant declaration.
  */
 interface KoEnumConstantDeclaration :
     KoBaseDeclaration,
@@ -41,9 +41,9 @@ interface KoEnumConstantDeclaration :
     KoResideInOrOutsidePackageProvider,
     KoTextProvider {
     /**
-     * String representing the class.
+     * String representing the enum constant.
      *
-     * @return a string representing the class.
+     * @return a string representing the enum constant.
      */
     override fun toString(): String
 }
