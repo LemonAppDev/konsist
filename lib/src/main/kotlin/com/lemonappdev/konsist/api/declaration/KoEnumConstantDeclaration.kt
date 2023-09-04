@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoArgumentProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
@@ -24,6 +25,7 @@ interface KoEnumConstantDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
+    KoArgumentProvider,
     KoContainingFileProvider,
     KoEnumNameProvider,
     KoFullyQualifiedNameProvider,

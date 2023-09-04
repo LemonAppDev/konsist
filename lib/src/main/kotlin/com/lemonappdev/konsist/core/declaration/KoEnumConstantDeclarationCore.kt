@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.api.declaration.KoEnumConstantDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
+import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -33,6 +34,7 @@ internal class KoEnumConstantDeclarationCore private constructor(
 ) : KoEnumConstantDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
+    KoArgumentProviderCore,
     KoContainingFileProviderCore,
     KoEnumNameProviderCore,
     KoKDocProviderCore,
