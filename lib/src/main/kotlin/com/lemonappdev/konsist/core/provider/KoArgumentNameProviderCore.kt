@@ -17,9 +17,7 @@ internal interface KoArgumentNameProviderCore : KoArgumentNameProvider, KoBasePr
     override val value: String
         get() {
             val expression = ktValueArgument
-                .children
-                .filterIsInstance<KtExpression>()
-                .first()
+                .getArgumentExpression()
 
             return if (expression is KtStringTemplateExpression) {
                 expression
@@ -27,8 +25,10 @@ internal interface KoArgumentNameProviderCore : KoArgumentNameProvider, KoBasePr
                     .first()
                     .text
 
-            } else {
+            } else if (expression != null) {
                 expression.text
+            } else {
+                ""
             }
         }
 }

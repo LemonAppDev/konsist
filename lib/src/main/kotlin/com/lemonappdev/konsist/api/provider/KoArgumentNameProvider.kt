@@ -7,9 +7,6 @@ import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
  *
  */
 interface KoArgumentNameProvider : KoBaseProvider {
-    // ToDo: Add `parameterName`
-//    val parameterName: String
-
     val argumentName: String?
 
     val value: String
