@@ -14,20 +14,6 @@ import org.jetbrains.kotlin.psi.KtValueArgumentList
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 internal interface KoArgumentProviderCore : KoArgumentProvider, KoBaseProviderCore, KoContainingDeclarationProviderCore {
-    val ktEnumEntry: KtEnumEntry
-
-    override val arguments: List<KoArgumentDeclaration>
-        get() = ktEnumEntry
-            .initializerList
-            ?.initializers
-            ?.first()
-            ?.children
-            ?.filterIsInstance<KtValueArgumentList>()
-            ?.first()
-            ?.children
-            ?.filterIsInstance<KtValueArgument>()
-            ?.map { KoArgumentDeclarationCore.getInstance(it, this) } ?: emptyList()
-
     override val numArguments: Int
         get() = arguments.size
 
