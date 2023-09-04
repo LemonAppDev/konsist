@@ -1,4 +1,3 @@
 package kotlinx.coroutines.flow
 
-class Flow {
-}
+class Flow
