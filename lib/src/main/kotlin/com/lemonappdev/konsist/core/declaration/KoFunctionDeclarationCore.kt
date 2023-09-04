@@ -39,12 +39,11 @@ import com.lemonappdev.konsist.core.provider.modifier.KoSuspendModifierProviderC
 import com.lemonappdev.konsist.core.provider.modifier.KoTailrecModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
-import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunction
-import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 @Suppress("detekt.TooManyFunctions")
@@ -99,28 +98,13 @@ internal class KoFunctionDeclarationCore private constructor(
 
     override val hasImplementation: Boolean = ktFunction.hasBody()
 
-    private val localDeclarationsHelper: List<KoBaseDeclaration> by lazy {
-        val psiChildren = ktFunction
+    override val localDeclarations: List<KoBaseDeclaration> by lazy {
+        val psiElements = ktFunction
             .bodyBlockExpression
             ?.children
-            ?.toList()
-            ?: emptyList()
 
-        psiChildren
-            .mapNotNull {
-                if (it is KtClass && !it.isInterface()) {
-                    KoClassDeclarationCore.getInstance(it, this)
-                } else if (it is KtFunction) {
-                    getInstance(it, this)
-                } else if (it is KtProperty) {
-                    KoPropertyDeclarationCore.getInstance(it, this)
-                } else {
-                    null
-                }
-            }
+        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
-
-    override val localDeclarations: List<KoBaseDeclaration> by lazy { localDeclarationsHelper }
 
     override fun toString(): String {
         return locationWithText
