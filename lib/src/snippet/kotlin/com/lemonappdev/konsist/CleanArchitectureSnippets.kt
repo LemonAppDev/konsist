@@ -26,7 +26,7 @@ class CleanArchitectureSnippets {
             }
     }
 
-    fun `classes with 'UseCase' suffix should reside in 'domain' and 'usecase' packages`() {
+    fun `classes with 'UseCase' suffix should reside in 'domain' and 'usecase' package`() {
         Konsist
             .scopeFromProject()
             .classes()
@@ -34,7 +34,7 @@ class CleanArchitectureSnippets {
             .assert { it.resideInPackage("..domain..usecase..") }
     }
 
-    fun `classes with 'UseCase' suffix should have single public method named 'invoke'`() {
+    fun `classes with 'UseCase' suffix should have single 'public operator' method named 'invoke'`() {
         Konsist
             .scopeFromProject()
             .classes()
