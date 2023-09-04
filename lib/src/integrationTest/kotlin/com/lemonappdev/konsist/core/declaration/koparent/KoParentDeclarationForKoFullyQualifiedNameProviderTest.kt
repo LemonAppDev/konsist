@@ -27,7 +27,7 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo ""
+        sut.fullyQualifiedName shouldBeEqualTo "SampleParentClass"
     }
 
     private fun getSnippetFile(fileName: String) =

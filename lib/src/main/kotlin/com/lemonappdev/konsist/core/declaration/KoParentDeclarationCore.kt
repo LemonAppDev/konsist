@@ -53,7 +53,7 @@ internal open class KoParentDeclarationCore private constructor(private val ktSu
         containingFile
             .imports
             .firstOrNull { it.text.endsWith(".$name") }
-            ?.name ?: ""
+            ?.name ?: name
     }
 
     override fun toString(): String {

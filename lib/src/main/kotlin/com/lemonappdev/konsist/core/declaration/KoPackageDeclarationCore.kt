@@ -34,7 +34,7 @@ internal class KoPackageDeclarationCore private constructor(private val ktPackag
         if (ktPackageDirective.fqName != FqName.ROOT) {
             ktPackageDirective.fqName.toString()
         } else {
-            ""
+            name
         }
     }
 
