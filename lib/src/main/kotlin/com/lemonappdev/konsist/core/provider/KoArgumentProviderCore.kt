@@ -30,4 +30,6 @@ internal interface KoArgumentProviderCore : KoArgumentProvider, KoBaseProviderCo
 
     override val numArguments: Int
         get() = arguments.size
+
+    override fun hasArguments(): Boolean = arguments.isNotEmpty()
 }

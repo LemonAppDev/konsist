@@ -17,13 +17,10 @@ interface KoArgumentProvider : KoBaseProvider {
      */
     val numArguments: Int
 
-    // Todo: how implement this??? Names? Or other property???
-//    /**
-//     * Whether the declaration has arguments.
-//     *
-//     * @param names the names of the arguments to check.
-//     * @return `true` if the declaration has arguments with the specified names (or any constant if [names] is empty),
-//     * `false` otherwise.
-//     */
-//    fun hasArguments(vararg names: String): Boolean
+    /**
+     * Whether the declaration has arguments.
+     *
+     * @return `true` if the declaration has any argument, `false` otherwise.
+     */
+    fun hasArguments(): Boolean
 }
