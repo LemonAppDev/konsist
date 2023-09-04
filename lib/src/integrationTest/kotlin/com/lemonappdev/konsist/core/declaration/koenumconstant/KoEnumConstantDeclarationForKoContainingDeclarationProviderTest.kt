@@ -18,10 +18,7 @@ class KoEnumConstantDeclarationForKoContainingDeclarationProviderTest {
             .first()
 
         // then
-        assertSoftly(sut) {
-            containingDeclaration shouldNotBeEqualTo null
-            (containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleClass"
-        }
+            (sut.containingDeclaration as KoNameProvider).name shouldBeEqualTo "SampleClass"
     }
 
     private fun getSnippetFile(fileName: String) =

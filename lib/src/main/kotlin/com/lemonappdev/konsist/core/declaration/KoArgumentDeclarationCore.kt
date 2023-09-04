@@ -44,7 +44,6 @@ internal class KoArgumentDeclarationCore private constructor(
     KoLocationProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
-//    KoDeclarationFullyQualifiedNameProviderCore,
     KoPackageDeclarationProviderCore,
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore {

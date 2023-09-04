@@ -26,7 +26,6 @@ interface KoArgumentDeclaration :
     KoBaseProvider,
     KoArgumentNameProvider,
     KoContainingFileProvider,
-//    KoFullyQualifiedNameProvider,
     KoLocationProvider,
     KoPackageProvider,
     KoContainingDeclarationProvider,
