@@ -53,6 +53,27 @@ fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() 
 }
 ```
 
+## Architecture Layers Check
+
+```kotlin
+@Test
+fun `clean architecture layers have correct dependencies`() {
+    Konsist
+        .scopeFromProduction()
+        .assertArchitecture {
+            // Define layers
+            val domain = Layer("Domain", "com.myapp.domain..")
+            val presentation = Layer("Presentation", "com.myapp.presentation..")
+            val data = Layer("Data", "com.myapp.data..")
+
+            // Define architecture assertions
+            domain.dependsOnNothing()
+            presentation.dependsOn(domain)
+            data.dependsOn(domain)
+        }
+}
+```
+
 # Getting Started
 
 See [Konsist Getting Started](https://docs.konsist.lemonappdev.com/getting-started/gettingstarted) for quick start page
