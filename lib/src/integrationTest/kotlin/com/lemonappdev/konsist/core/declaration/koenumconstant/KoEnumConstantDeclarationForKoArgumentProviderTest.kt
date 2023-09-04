@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koenumconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.enumConstants
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -11,7 +12,6 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
         // given
         val sut = getSnippetFile("enum-const-without-arguments")
             .classes()
-            .first()
             .enumConstants
             .first()
 
@@ -28,7 +28,6 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
         // given
         val sut = getSnippetFile("enum-const-with-constructor-invocation-without-arguments")
             .classes()
-            .first()
             .enumConstants
             .first()
 
@@ -45,7 +44,6 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
         // given
         val sut = getSnippetFile("enum-const-with-one-argument")
             .classes()
-            .first()
             .enumConstants
             .first()
 
@@ -62,7 +60,6 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
         // given
         val sut = getSnippetFile("enum-const-with-two-arguments")
             .classes()
-            .first()
             .enumConstants
             .first()
 

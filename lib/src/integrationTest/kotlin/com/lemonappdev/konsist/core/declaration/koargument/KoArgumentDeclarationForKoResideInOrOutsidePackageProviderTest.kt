@@ -1,6 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.koargument
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.annotations
+import com.lemonappdev.konsist.api.ext.list.arguments
+import com.lemonappdev.konsist.api.ext.list.enumConstants
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -10,9 +13,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
         // given
         val sut = getSnippetFile("argument-in-enum-const-not-reside-in-file-package")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -25,9 +26,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
         // given
         val sut = getSnippetFile("argument-in-enum-const-reside-in-file-package")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -40,9 +39,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
         // given
         val sut = getSnippetFile("argument-in-enum-const-not-reside-outside-file-package")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -55,9 +52,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
         // given
         val sut = getSnippetFile("argument-in-enum-const-reside-outside-file-package")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -70,9 +65,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
         // given
         val sut = getSnippetFile("argument-in-annotation-not-reside-in-file-package")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 
@@ -85,9 +78,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
         // given
         val sut = getSnippetFile("argument-in-annotation-reside-in-file-package")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 
@@ -100,9 +91,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
         // given
         val sut = getSnippetFile("argument-in-annotation-not-reside-outside-file-package")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 
@@ -115,9 +104,7 @@ class KoArgumentDeclarationForKoResideInOrOutsidePackageProviderTest {
         // given
         val sut = getSnippetFile("argument-in-annotation-reside-outside-file-package")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 

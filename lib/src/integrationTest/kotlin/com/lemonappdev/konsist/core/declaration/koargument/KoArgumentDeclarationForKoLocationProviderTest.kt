@@ -1,6 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.koargument
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.annotations
+import com.lemonappdev.konsist.api.ext.list.arguments
+import com.lemonappdev.konsist.api.ext.list.enumConstants
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -11,9 +14,7 @@ class KoArgumentDeclarationForKoLocationProviderTest {
         // given
         val sut = getSnippetFile("argument-in-enum-const-location-with-single-digit")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -26,18 +27,14 @@ class KoArgumentDeclarationForKoLocationProviderTest {
         // given
         val projectPath = getSnippetFile("argument-in-enum-const-location-with-text")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
             .projectPath
 
         val sut = getSnippetFile("argument-in-enum-const-location-with-text")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -55,9 +52,7 @@ class KoArgumentDeclarationForKoLocationProviderTest {
         // given
         val sut = getSnippetFile("argument-in-annotation-location-with-single-digit")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 
@@ -70,18 +65,14 @@ class KoArgumentDeclarationForKoLocationProviderTest {
         // given
         val projectPath = getSnippetFile("argument-in-annotation-location-with-text")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
             .projectPath
 
         val sut = getSnippetFile("argument-in-annotation-location-with-text")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 

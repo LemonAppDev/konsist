@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koannotation
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.annotations
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -11,7 +12,6 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
         // given
         val sut = getSnippetFile("annotation-without-arguments")
             .functions()
-            .first()
             .annotations
             .first()
 
@@ -28,7 +28,6 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
         // given
         val sut = getSnippetFile("annotation-with-constructor-invocation-without-arguments")
             .functions()
-            .first()
             .annotations
             .first()
 
@@ -45,7 +44,6 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
         // given
         val sut = getSnippetFile("annotation-with-one-argument")
             .functions()
-            .first()
             .annotations
             .first()
 
@@ -62,7 +60,6 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
         // given
         val sut = getSnippetFile("annotation-with-two-arguments")
             .functions()
-            .first()
             .annotations
             .first()
 

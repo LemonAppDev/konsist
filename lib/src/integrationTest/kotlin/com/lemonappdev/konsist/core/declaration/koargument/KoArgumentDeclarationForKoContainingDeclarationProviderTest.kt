@@ -1,6 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.koargument
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.annotations
+import com.lemonappdev.konsist.api.ext.list.arguments
+import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -13,9 +16,7 @@ class KoArgumentDeclarationForKoContainingDeclarationProviderTest {
         // given
         val sut = getSnippetFile("argument-in-enum-const-containing-declaration")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -28,9 +29,7 @@ class KoArgumentDeclarationForKoContainingDeclarationProviderTest {
         // given
         val sut = getSnippetFile("argument-in-annotation-containing-declaration")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 

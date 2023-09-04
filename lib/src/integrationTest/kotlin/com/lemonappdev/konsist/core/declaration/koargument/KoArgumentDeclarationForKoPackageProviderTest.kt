@@ -1,6 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.koargument
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.annotations
+import com.lemonappdev.konsist.api.ext.list.arguments
+import com.lemonappdev.konsist.api.ext.list.enumConstants
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -10,9 +13,7 @@ class KoArgumentDeclarationForKoPackageProviderTest {
         // given
         val sut = getSnippetFile("argument-in-enum-const-is-not-in-package")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -25,9 +26,7 @@ class KoArgumentDeclarationForKoPackageProviderTest {
         // given
         val sut = getSnippetFile("argument-in-enum-const-is-in-package")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -40,9 +39,7 @@ class KoArgumentDeclarationForKoPackageProviderTest {
         // given
         val sut = getSnippetFile("argument-in-annotation-is-not-in-package")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 
@@ -55,9 +52,7 @@ class KoArgumentDeclarationForKoPackageProviderTest {
         // given
         val sut = getSnippetFile("argument-in-annotation-is-in-package")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 

@@ -1,6 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.koargument
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.ext.list.annotations
+import com.lemonappdev.konsist.api.ext.list.arguments
+import com.lemonappdev.konsist.api.ext.list.enumConstants
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -11,9 +14,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
         // given
         val sut = getSnippetFile("argument-in-enum-const-file-path")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -29,9 +30,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
         // given
         val sut = getSnippetFile("argument-in-enum-const-project-file-path")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -49,9 +48,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
         // given
         val sut = getSnippetFile("argument-in-enum-const-reside-in-file-path")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -69,9 +66,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
         // given
         val sut = getSnippetFile("argument-in-enum-const-reside-in-project-file-path")
             .classes()
-            .first()
             .enumConstants
-            .first()
             .arguments
             .first()
 
@@ -89,9 +84,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
         // given
         val sut = getSnippetFile("argument-in-annotation-file-path")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 
@@ -107,9 +100,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
         // given
         val sut = getSnippetFile("argument-in-annotation-project-file-path")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 
@@ -127,9 +118,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
         // given
         val sut = getSnippetFile("argument-in-annotation-reside-in-file-path")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 
@@ -147,9 +136,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
         // given
         val sut = getSnippetFile("argument-in-annotation-reside-in-project-file-path")
             .functions()
-            .first()
             .annotations
-            .first()
             .arguments
             .first()
 
