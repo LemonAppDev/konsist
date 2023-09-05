@@ -6,6 +6,8 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  * Print the elements.
  *
  * @param prefix An optional string to be printed before each element. Default is an empty string.
+ * @param predicate An optional function that generates the string representation of each element.
+ *                  Default is null, which means the default `toString` method is used.
  * @return The original list of elements.
  */
 fun <T : KoBaseProvider> List<T>.print(prefix: String = "", predicate: ((T) -> String)? = null): List<T> {
