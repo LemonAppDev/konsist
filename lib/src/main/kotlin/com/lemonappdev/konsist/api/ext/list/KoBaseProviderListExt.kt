@@ -8,8 +8,14 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  * @param prefix An optional string to be printed before each element. Default is an empty string.
  * @return The original list of elements.
  */
-fun <T : KoBaseProvider> List<T>.print(prefix: String = ""): List<T> {
+fun <T : KoBaseProvider> List<T>.print(prefix: String = "", predicate: ((T) -> String)? = null): List<T> {
     println(prefix)
-    forEach { println(it.toString()) }
+    forEach {
+        if (predicate == null) {
+            println(it.toString())
+        } else {
+            println(predicate(it))
+        }
+    }
     return this
 }
