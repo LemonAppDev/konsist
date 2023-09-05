@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 
 class KoParentDeclarationForKoResideInOrOutsidePackageProviderTest {
     @Test
-    fun `parent-not-reside-in-file-package`() {
+    fun `parent-of-class-not-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("parent-not-reside-in-file-package")
+        val sut = getSnippetFile("parent-of-class-not-reside-in-file-package")
             .classes()
             .parents
             .first()
@@ -19,9 +19,9 @@ class KoParentDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     @Test
-    fun `parent-reside-in-file-package`() {
+    fun `parent-of-class-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("parent-reside-in-file-package")
+        val sut = getSnippetFile("parent-of-class-reside-in-file-package")
             .classes()
             .parents
             .first()
@@ -31,9 +31,9 @@ class KoParentDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     @Test
-    fun `parent-not-reside-outside-file-package`() {
+    fun `parent-of-class-not-reside-outside-file-package`() {
         // given
-        val sut = getSnippetFile("parent-not-reside-outside-file-package")
+        val sut = getSnippetFile("parent-of-class-not-reside-outside-file-package")
             .classes()
             .parents
             .first()
@@ -43,10 +43,106 @@ class KoParentDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     @Test
-    fun `parent-reside-outside-file-package`() {
+    fun `parent-of-class-reside-outside-file-package`() {
         // given
-        val sut = getSnippetFile("parent-reside-outside-file-package")
+        val sut = getSnippetFile("parent-of-class-reside-outside-file-package")
             .classes()
+            .parents
+            .first()
+
+        // then
+        sut.resideOutsidePackage("com") shouldBeEqualTo true
+    }
+
+    @Test
+    fun `parent-of-interface-not-reside-in-file-package`() {
+        // given
+        val sut = getSnippetFile("parent-of-interface-not-reside-in-file-package")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut.resideInPackage("com") shouldBeEqualTo false
+    }
+
+    @Test
+    fun `parent-of-interface-reside-in-file-package`() {
+        // given
+        val sut = getSnippetFile("parent-of-interface-reside-in-file-package")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut.resideInPackage("com..") shouldBeEqualTo true
+    }
+
+    @Test
+    fun `parent-of-interface-not-reside-outside-file-package`() {
+        // given
+        val sut = getSnippetFile("parent-of-interface-not-reside-outside-file-package")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut.resideOutsidePackage("com..") shouldBeEqualTo false
+    }
+
+    @Test
+    fun `parent-of-interface-reside-outside-file-package`() {
+        // given
+        val sut = getSnippetFile("parent-of-interface-reside-outside-file-package")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut.resideOutsidePackage("com") shouldBeEqualTo true
+    }
+
+    @Test
+    fun `parent-of-object-not-reside-in-file-package`() {
+        // given
+        val sut = getSnippetFile("parent-of-object-not-reside-in-file-package")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.resideInPackage("com") shouldBeEqualTo false
+    }
+
+    @Test
+    fun `parent-of-object-reside-in-file-package`() {
+        // given
+        val sut = getSnippetFile("parent-of-object-reside-in-file-package")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.resideInPackage("com..") shouldBeEqualTo true
+    }
+
+    @Test
+    fun `parent-of-object-not-reside-outside-file-package`() {
+        // given
+        val sut = getSnippetFile("parent-of-object-not-reside-outside-file-package")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.resideOutsidePackage("com..") shouldBeEqualTo false
+    }
+
+    @Test
+    fun `parent-of-object-reside-outside-file-package`() {
+        // given
+        val sut = getSnippetFile("parent-of-object-reside-outside-file-package")
+            .objects()
             .parents
             .first()
 
