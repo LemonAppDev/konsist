@@ -72,10 +72,10 @@ internal class KoEnumConstantDeclarationCore private constructor(
         get() = ktEnumEntry
             .initializerList
             ?.initializers
-            ?.first()
+            ?.firstOrNull()
             ?.children
             ?.filterIsInstance<KtValueArgumentList>()
-            ?.first()
+            ?.firstOrNull()
             ?.children
             ?.filterIsInstance<KtValueArgument>()
             ?.map { KoArgumentDeclarationCore.getInstance(it, this) } ?: emptyList()
