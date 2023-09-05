@@ -21,13 +21,9 @@ body:
     id: describe-problem
     attributes:
       label: Describe the problem
-      description: 'Place a Konsist test here and Kotlin code snippet to help us reproduce the problem.'
+      description: 'Place a Konsist test and a Kotlin code snippet below to help us reproduce the problem. For example: "I am writing this Konsist test to test this Kotlin code:"'
     validations:
       required: true
-    value: |
-        I'm writing this Konsist test:
-        
-        To test this Kotlin code:
 
   - type: textarea
     id: actual-behaviour
