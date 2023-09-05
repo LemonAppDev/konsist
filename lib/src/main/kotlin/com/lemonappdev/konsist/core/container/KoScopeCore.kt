@@ -81,8 +81,8 @@ class KoScopeCore(
         .toList()
         .joinToString("\n") { it.path }
 
-    override fun print() {
-        println(toString())
+    override fun print(prefix: String) {
+        println(prefix + toString())
     }
 
     override fun equals(other: Any?): Boolean = other is KoScope && files.toList() == other.files.toList()

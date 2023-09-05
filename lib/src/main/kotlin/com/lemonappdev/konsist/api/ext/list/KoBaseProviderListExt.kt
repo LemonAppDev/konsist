@@ -5,9 +5,11 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 /**
  * Print the elements.
  *
+ * @param prefix An optional string to be printed before each element. Default is an empty string.
  * @return The original list of elements.
  */
-fun <T : KoBaseProvider> List<T>.print(): List<T> {
+fun <T : KoBaseProvider> List<T>.print(prefix: String = ""): List<T> {
+    println(prefix)
     forEach { println(it.toString()) }
     return this
 }

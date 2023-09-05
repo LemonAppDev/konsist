@@ -11,6 +11,8 @@ interface KoTextProvider : KoBaseProvider {
 
     /**
      * Print declaration.
+     *
+     * @param prefix An optional string to be printed before the declaration content. Default is an empty string.
      */
-    fun print(): Unit
+    fun print(prefix: String = ""): Unit
 }
