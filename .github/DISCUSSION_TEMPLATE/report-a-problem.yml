@@ -21,8 +21,13 @@ body:
     id: describe-problem
     attributes:
       label: Describe the problem
+      description: 'Place a Konsist test here and Kotlin code snippet to help us reproduce the problem.'
     validations:
       required: true
+    value: |
+        I'm writing this Konsist test:
+        
+        To test this Kotlin code:
 
   - type: textarea
     id: actual-behaviour
@@ -40,16 +45,5 @@ body:
     validations:
       required: true
 
-  - type: textarea
-    id:  code-snippet
-    attributes:
-      label: Relevant code snippet.
-      description: 'You can place a Konsist test here and simplified Kotlin files to help us reproduce the problem.'
-      value: |
-        ```kotlin
-        Copy/paste the code snippet here, between the starting and ending backticks
-        ```
-
-        </details>
     validations:
       required: false
