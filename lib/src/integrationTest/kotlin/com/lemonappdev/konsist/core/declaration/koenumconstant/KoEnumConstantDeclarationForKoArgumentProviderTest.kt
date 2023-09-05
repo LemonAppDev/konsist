@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.declaration.koenumconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
-import com.lemonappdev.konsist.api.ext.list.annotations
 import com.lemonappdev.konsist.api.ext.list.enumConstants
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -83,7 +82,7 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
         // then
         assertSoftly(sut) {
             arguments.map { it.value } shouldBeEqualTo listOf(
-                "\"\"\"first line\n    second line\"\"\""
+                "\"\"\"first line\n    second line\"\"\"",
             )
             numArguments shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true
