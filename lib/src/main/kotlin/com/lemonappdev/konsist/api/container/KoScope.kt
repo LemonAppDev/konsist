@@ -157,8 +157,11 @@ interface KoScope {
 
     /**
      * Print the scope.
+     *
+     * @param prefix An optional string to be printed before the scope content. Default is an empty string.
+     *
      */
-    fun print(): Unit
+    fun print(prefix: String = ""): Unit
 
     /**
      * Indicates whether some other object is "equal to" this one.
