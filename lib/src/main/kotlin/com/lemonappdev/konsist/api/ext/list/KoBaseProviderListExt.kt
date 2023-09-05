@@ -14,10 +14,10 @@ fun <T : KoBaseProvider> List<T>.print(prefix: String? = null, predicate: ((T) -
     prefix?.let { println(it) }
 
     forEach {
-        if (predicate == null) {
-            println(it.toString())
-        } else {
+        if (predicate != null) {
             println(predicate(it))
+        } else {
+            it.print()
         }
     }
     return this
