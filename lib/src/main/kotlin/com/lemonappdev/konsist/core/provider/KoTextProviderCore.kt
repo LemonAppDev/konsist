@@ -9,11 +9,4 @@ internal interface KoTextProviderCore : KoTextProvider, KoBaseProviderCore {
 
     override val text: String
         get() = psiElement.text
-
-    override fun print(prefix: String?) {
-        prefix?.let { println(it) }
-
-        val text = if (this is KoNameProvider) name else toString()
-        println(text)
-    }
 }

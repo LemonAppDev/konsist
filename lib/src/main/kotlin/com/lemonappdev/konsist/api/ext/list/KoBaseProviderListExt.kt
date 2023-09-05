@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoTextProvider
 
 /**
  * Print the elements.
@@ -17,10 +17,8 @@ fun <T : KoBaseProvider> List<T>.print(prefix: String? = null, predicate: ((T) -
     forEach {
         if (predicate != null) {
             println(predicate(it))
-        } else if (it is KoNameProvider) {
-            println(it.name)
         } else {
-            println(toString())
+            it.print()
         }
     }
     return this
