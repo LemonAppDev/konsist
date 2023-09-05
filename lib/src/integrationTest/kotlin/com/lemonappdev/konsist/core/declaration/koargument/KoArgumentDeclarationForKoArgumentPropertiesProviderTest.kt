@@ -74,5 +74,5 @@ class KoArgumentDeclarationForKoArgumentPropertiesProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koargument/snippet/forkoargumentnameprovider/", fileName)
+        getSnippetKoScope("core/declaration/koargument/snippet/forkoargumentpropertiesprovider/", fileName)
 }
