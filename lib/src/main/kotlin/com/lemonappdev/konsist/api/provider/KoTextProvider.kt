@@ -12,7 +12,7 @@ interface KoTextProvider : KoBaseProvider {
     /**
      * Print declaration.
      *
-     * @param prefix An optional string to be printed before the declaration content. Default is an empty string.
+     * @param prefix An optional string to be printed before the declaration content. Default is null.
      */
-    fun print(prefix: String = ""): Unit
+    fun print(prefix: String? = null): Unit
 }
