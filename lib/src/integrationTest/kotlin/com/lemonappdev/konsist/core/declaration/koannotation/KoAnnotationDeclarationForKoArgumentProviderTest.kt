@@ -49,7 +49,7 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            arguments.map { it.value } shouldBeEqualTo listOf("text")
+            arguments.map { it.value } shouldBeEqualTo listOf("\"text\"")
             numArguments shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true
         }
@@ -65,8 +65,26 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            arguments.map { it.value } shouldBeEqualTo listOf("text", "true")
+            arguments.map { it.value } shouldBeEqualTo listOf("\"text\"", "true")
             numArguments shouldBeEqualTo 2
+            hasArguments() shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `annotation-with-multiline-string-argument`() {
+        // given
+        val sut = getSnippetFile("annotation-with-multiline-string-argument")
+            .functions()
+            .annotations
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            arguments.map { it.value } shouldBeEqualTo listOf(
+                "\"\"\"first line\n    second line\"\"\""
+            )
+            numArguments shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true
         }
     }

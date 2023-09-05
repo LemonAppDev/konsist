@@ -13,19 +13,7 @@ internal interface KoArgumentPropertiesProviderCore : KoArgumentPropertiesProvid
             ?.text
 
     override val value: String
-        get() {
-            val expression = ktValueArgument
+        get() = ktValueArgument
                 .getArgumentExpression()
-
-            return if (expression is KtStringTemplateExpression) {
-                expression
-                    .children
-                    .first()
-                    .text
-            } else if (expression != null) {
-                expression.text
-            } else {
-                ""
-            }
-        }
+                ?.text ?: ""
 }

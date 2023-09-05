@@ -52,7 +52,7 @@ class KoArgumentDeclarationForKoArgumentPropertiesProviderTest {
 
         // then
         assertSoftly(sut) {
-            value shouldBeEqualTo "text"
+            value shouldBeEqualTo "\"text\""
             argumentName shouldBeEqualTo null
         }
     }
@@ -68,7 +68,7 @@ class KoArgumentDeclarationForKoArgumentPropertiesProviderTest {
 
         // then
         assertSoftly(sut) {
-            value shouldBeEqualTo "text"
+            value shouldBeEqualTo "\"text\""
             argumentName shouldBeEqualTo "sampleParameter"
         }
     }
