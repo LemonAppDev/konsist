@@ -63,8 +63,7 @@ class KoScopeCore(
     ): List<KoPropertyDeclaration> =
         koFiles.flatMap { it.properties(includeNested, includeLocal) }
 
-    override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope =
-        KoScopeCore(koFiles.filter { predicate(it) })
+    override fun slice(predicate: (KoFileDeclaration) -> Boolean): KoScope = KoScopeCore(koFiles.filter { predicate(it) })
 
     override operator fun plus(scope: KoScope): KoScope = KoScopeCore(files + scope.files)
 
@@ -83,7 +82,7 @@ class KoScopeCore(
         .joinToString("\n") { it.path }
 
     override fun print(prefix: String) {
-        files.forEach { println(prefix + it.path) }
+        println(prefix + toString())
     }
 
     override fun equals(other: Any?): Boolean = other is KoScope && files.toList() == other.files.toList()

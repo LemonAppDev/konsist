@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  * @return The original list of elements.
  */
 fun <T : KoBaseProvider> List<T>.print(prefix: String = ""): List<T> {
-    forEach { println(prefix + it.toString()) }
+    println(prefix)
+    forEach { println(it.toString()) }
     return this
 }
