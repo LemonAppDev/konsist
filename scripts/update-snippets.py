@@ -40,7 +40,7 @@ def format_snippet_text(file_text):
         # Reconstruct the function body text
         formatted_text = '\n'.join(formatted_lines[:-1])
 
-        text += "##" + str(function_list.index(element) + 1) +  ": " + function_name_as_heading + "\n\n```kotlin\n@Test\nfun " + function_name_as_snippet_body + "{\n" + formatted_text + "```\n\n"
+        text += "## Snippet " + str(function_list.index(element) + 1) +  ": " + function_name_as_heading + "\n\n```kotlin\n@Test\nfun " + function_name_as_snippet_body + "{\n" + formatted_text + "```\n\n"
 
     return text
 
