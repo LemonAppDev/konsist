@@ -36,7 +36,7 @@ internal class KoAnnotationDeclarationCore private constructor(
         containingFile
             .imports
             .firstOrNull { it.text.endsWith(".$name") }
-            ?.name ?: ""
+            ?.name ?: name
     }
 
     override fun toString(): String {

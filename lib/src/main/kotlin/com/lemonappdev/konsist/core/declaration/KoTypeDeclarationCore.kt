@@ -48,7 +48,7 @@ internal class KoTypeDeclarationCore private constructor(
         containingFile
             .imports
             .map { it.name }
-            .firstOrNull { it.contains(sourceType) } ?: ""
+            .firstOrNull { it.contains(sourceType) } ?: name
     }
 
     override fun toString(): String {
