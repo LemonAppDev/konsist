@@ -44,6 +44,3 @@ body:
       description: 'Describe the expected behavior.'
     validations:
       required: true
-
-    validations:
-      required: false
