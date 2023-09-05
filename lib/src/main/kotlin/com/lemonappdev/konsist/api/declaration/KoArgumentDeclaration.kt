@@ -1,10 +1,11 @@
 package com.lemonappdev.konsist.api.declaration
 
-import com.lemonappdev.konsist.api.provider.KoArgumentPropertiesProvider
+import com.lemonappdev.konsist.api.provider.KoValueProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
@@ -16,9 +17,10 @@ import com.lemonappdev.konsist.api.provider.KoTextProvider
 interface KoArgumentDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
-    KoArgumentPropertiesProvider,
+    KoValueProvider,
     KoContainingFileProvider,
     KoLocationProvider,
+    KoNameProvider,
     KoPackageProvider,
     KoContainingDeclarationProvider,
     KoPathProvider,
