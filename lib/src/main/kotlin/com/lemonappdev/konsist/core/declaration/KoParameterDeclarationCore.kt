@@ -16,6 +16,7 @@ import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTypeProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoCrossInlineModifierProviderCore
@@ -51,6 +52,7 @@ internal class KoParameterDeclarationCore private constructor(
     KoPathProviderCore,
     KoRepresentsTypeProviderCore,
     KoResideInPackageProviderCore,
+KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
     KoTypeProviderCore,
     KoVisibilityModifierProviderCore,
@@ -80,6 +82,24 @@ internal class KoParameterDeclarationCore private constructor(
     override val hasValModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "val" }
 
     override val hasVarModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
+
+    /*
+    1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
+    (the second one is deprecated) - with the same methods, so we must override this and choose which implementation
+    this method should have. After removing deprecated provider in v1.0.0 it will be unnecessary.
+    */
+    override fun resideInPackage(name: String): Boolean {
+        return super<KoResideInPackageProviderCore>.resideInPackage(name)
+    }
+
+    /*
+    1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
+    (the second one is deprecated) - with the same methods, so we must override this and choose which implementation
+    this method should have. After removing deprecated provider in v1.0.0 it will be unnecessary.
+    */
+    override fun resideOutsidePackage(name: String): Boolean {
+        return super<KoResideInPackageProviderCore>.resideOutsidePackage(name)
+    }
 
     override fun toString(): String {
         return locationWithText

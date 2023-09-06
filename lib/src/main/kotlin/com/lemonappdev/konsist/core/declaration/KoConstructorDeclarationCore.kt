@@ -10,6 +10,7 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
@@ -32,6 +33,7 @@ internal interface KoConstructorDeclarationCore :
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoResideInPackageProviderCore,
+KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
     KoVisibilityModifierProviderCore {
     val ktConstructor: KtConstructor<*>
@@ -50,4 +52,22 @@ internal interface KoConstructorDeclarationCore :
 
     override val ktElement: KtElement
         get() = ktConstructor
+
+    /*
+    1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
+    (the second one is deprecated) - with the same methods, so we must override this and choose which implementation
+    this method should have. After removing deprecated provider in v1.0.0 it will be unnecessary.
+    */
+    override fun resideInPackage(name: String): Boolean {
+        return super<KoResideInPackageProviderCore>.resideInPackage(name)
+    }
+
+    /*
+    1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
+    (the second one is deprecated) - with the same methods, so we must override this and choose which implementation
+    this method should have. After removing deprecated provider in v1.0.0 it will be unnecessary.
+    */
+    override fun resideOutsidePackage(name: String): Boolean {
+        return super<KoResideInPackageProviderCore>.resideOutsidePackage(name)
+    }
 }
