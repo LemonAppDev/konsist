@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoConstructorProvider
 
@@ -13,4 +14,7 @@ internal interface KoConstructorProviderCore :
 
     override val numConstructors: Int
         get() = constructors.size
+
+    override fun countConstructors(predicate: (KoConstructorDeclaration) -> Boolean): Int =
+        constructors.count { predicate(it) }
 }

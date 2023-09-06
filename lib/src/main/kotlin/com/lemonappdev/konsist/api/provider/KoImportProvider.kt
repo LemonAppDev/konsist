@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 
 /**
@@ -15,6 +16,14 @@ interface KoImportProvider : KoBaseProvider {
      * The number of imports.
      */
     val numImports: Int
+
+    /**
+     * Gets the number of imports that satisfies the specified predicate present in the declaration.
+     *
+     * @param predicate The predicate function to determine if an import satisfies a condition.
+     * @return The number of imports in the declaration.
+     */
+    fun countImports(predicate: (KoImportDeclaration) -> Boolean): Int
 
     /**
      * Whether the declaration has imports.

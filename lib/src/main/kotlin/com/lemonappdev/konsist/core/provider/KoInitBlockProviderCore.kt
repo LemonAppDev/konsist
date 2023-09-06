@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
 import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
 import com.lemonappdev.konsist.core.declaration.KoInitBlockDeclarationCore
@@ -31,4 +32,7 @@ internal interface KoInitBlockProviderCore :
 
     override val hasInitBlocks: Boolean
         get() = initBlocks.isNotEmpty()
+
+    override fun countInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): Int =
+        initBlocks.count { predicate(it) }
 }

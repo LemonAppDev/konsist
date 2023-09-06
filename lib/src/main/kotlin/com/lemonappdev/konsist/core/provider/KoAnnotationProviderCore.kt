@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoEnumConstantDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.core.declaration.KoAnnotationDeclarationCore
 import org.jetbrains.kotlin.psi.KtAnnotated
@@ -19,6 +20,9 @@ internal interface KoAnnotationProviderCore :
 
     override val numAnnotations: Int
         get() = annotations.size
+
+    override fun countAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Int =
+        annotations.count { predicate(it) }
 
     override fun hasAnnotations(vararg names: String): Boolean = when {
         names.isEmpty() -> annotations.isNotEmpty()

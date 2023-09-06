@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationCore
@@ -26,6 +27,9 @@ internal interface KoImportProviderCore : KoImportProvider, KoContainingDeclarat
 
     override val numImports: Int
         get() = imports.size
+
+    override fun countImports(predicate: (KoImportDeclaration) -> Boolean): Int =
+        imports.count { predicate(it) }
 
     override fun hasImports(vararg names: String): Boolean = when {
         names.isEmpty() -> imports.isNotEmpty()

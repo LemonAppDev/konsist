@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import kotlin.reflect.KClass
 
 /**
@@ -16,6 +17,14 @@ interface KoAnnotationProvider : KoBaseProvider {
      * The number of annotations.
      */
     val numAnnotations: Int
+
+    /**
+     * Gets the number of annotations that satisfies the specified predicate present in the declaration.
+     *
+     * @param predicate The predicate function to determine if an annotation satisfies a condition.
+     * @return The number of annotations in the declaration.
+     */
+    fun countAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Int
 
     /**
      * Whether the declaration has annotations.

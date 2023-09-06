@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import com.lemonappdev.konsist.core.declaration.KoSecondaryConstructorDeclarationCore
@@ -22,4 +23,7 @@ internal interface KoSecondaryConstructorsProviderCore :
 
     override val hasSecondaryConstructors: Boolean
         get() = ktClass.hasSecondaryConstructors()
+
+    override fun countSecondaryConstructors(predicate: (KoSecondaryConstructorDeclaration) -> Boolean): Int =
+        secondaryConstructors.count { predicate(it) }
 }

@@ -8,7 +8,8 @@ import org.jetbrains.kotlin.psi.KtClassBody
 import org.jetbrains.kotlin.psi.KtEnumEntry
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal interface KoEnumConstantProviderCore : KoEnumConstantProvider, KoBaseProviderCore, KoContainingDeclarationProviderCore {
+internal interface KoEnumConstantProviderCore : KoEnumConstantProvider, KoBaseProviderCore,
+    KoContainingDeclarationProviderCore {
     val ktClass: KtClass
 
     override val enumConstants: List<KoEnumConstantDeclaration>
@@ -21,6 +22,9 @@ internal interface KoEnumConstantProviderCore : KoEnumConstantProvider, KoBasePr
 
     override val numEnumConstants: Int
         get() = enumConstants.size
+
+    override fun countEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Int =
+        enumConstants.count { predicate(it) }
 
     override fun hasEnumConstants(vararg names: String): Boolean = when {
         names.isEmpty() -> enumConstants.isNotEmpty()

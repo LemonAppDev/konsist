@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
 
 /**
@@ -15,4 +16,12 @@ interface KoConstructorProvider : KoBaseProvider {
      * The number of constructors.
      */
     val numConstructors: Int
+
+    /**
+     * Gets the number of constructors that satisfies the specified predicate present in the declaration.
+     *
+     * @param predicate The predicate function to determine if a constructor satisfies a condition.
+     * @return The number of constructors in the declaration.
+     */
+    fun countConstructors(predicate: (KoConstructorDeclaration) -> Boolean): Int
 }

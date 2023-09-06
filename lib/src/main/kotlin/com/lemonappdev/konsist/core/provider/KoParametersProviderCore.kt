@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParameterDeclaration
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.core.declaration.KoParameterDeclarationCore
@@ -19,6 +20,9 @@ internal interface KoParametersProviderCore :
 
     override val numParameters: Int
         get() = parameters.size
+
+    override fun countParameters(predicate: (KoParameterDeclaration) -> Boolean): Int =
+        parameters.count { predicate(it) }
 
     override fun hasParameterNamed(name: String): Boolean = parameters.any { it.name == name }
 }

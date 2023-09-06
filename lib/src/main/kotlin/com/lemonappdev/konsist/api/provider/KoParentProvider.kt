@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 
 /**
@@ -16,6 +17,14 @@ interface KoParentProvider : KoBaseProvider {
      * The number of parents.
      */
     val numParents: Int
+
+    /**
+     * Gets the number of parents that satisfies the specified predicate present in the declaration.
+     *
+     * @param predicate The predicate function to determine if an parent satisfies a condition.
+     * @return The number of parents in the declaration.
+     */
+    fun countParents(predicate: (KoParentDeclaration) -> Boolean): Int
 
     /**
      * Whatever class has parents (parent class and parent interfaces) defined directly in the Kotlin file.
