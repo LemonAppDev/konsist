@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.provider
 
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
-import com.lemonappdev.konsist.api.provider.KoConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 
 /**
