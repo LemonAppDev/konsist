@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
  *
  * @param prefix An optional string to be printed before each element. Default is null.
  * @param predicate An optional function that generates the string representation of each element.
- *                  Default is null, which means the default `toString` method is used.
+ *                  If predicate is not provided (default is `null`), the function uses `toString` method.
  * @return The original list of elements.
  */
 fun <T : KoBaseProvider> List<T>.print(prefix: String? = null, predicate: ((T) -> String)? = null): List<T> {

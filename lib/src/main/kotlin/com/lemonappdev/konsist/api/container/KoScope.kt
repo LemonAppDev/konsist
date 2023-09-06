@@ -159,6 +159,8 @@ interface KoScope {
      * Print the scope.
      *
      * @param prefix An optional string to be printed before the scope content. Default is null.
+     * @param predicate An optional function that generates the string representation of the scope.
+     *                  If predicate is not provided (default is `null`), the function uses `toString` method.
      * @return The original scope.
      */
     fun print(prefix: String? = null, predicate: ((KoScope) -> String)? = null): KoScope
