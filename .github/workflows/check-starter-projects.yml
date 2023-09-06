@@ -17,8 +17,6 @@ jobs:
     name: Konsist Starter Android Gradle Groovy Junit 4
     continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -51,8 +49,6 @@ jobs:
     name: Konsist Starter Android Gradle Groovy Junit 5
     continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -85,8 +81,6 @@ jobs:
     name: Konsist Starter Android Gradle Kotlin Junit 4
     continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -119,8 +113,6 @@ jobs:
     name: Konsist Starter Android Gradle Kotlin Junit 5
     continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -153,8 +145,6 @@ jobs:
     name: Konsist Starter Spring Gradle Groovy Junit 5
     continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -187,8 +177,6 @@ jobs:
     name: Konsist Starter Spring Gradle Groovy Junit 5
     continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -221,8 +209,6 @@ jobs:
     name: Konsist Starter Spring Maven Junit 5
     continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
