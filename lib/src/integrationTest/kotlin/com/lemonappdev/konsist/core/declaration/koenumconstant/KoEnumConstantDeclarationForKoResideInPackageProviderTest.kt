@@ -1,17 +1,17 @@
-package com.lemonappdev.konsist.core.declaration.koconstructor
+package com.lemonappdev.konsist.core.declaration.koenumconstant
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoConstructorDeclarationForKoResideInOrOutsidePackageProviderTest {
+class KoEnumConstantDeclarationForKoResideInPackageProviderTest {
     @Test
-    fun `constructor-not-reside-in-file-package`() {
+    fun `enum-const-not-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("constructor-not-reside-in-file-package")
+        val sut = getSnippetFile("enum-const-not-reside-in-file-package")
             .classes()
             .first()
-            .constructors
+            .enumConstants
             .first()
 
         // then
@@ -19,12 +19,12 @@ class KoConstructorDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     @Test
-    fun `constructor-reside-in-file-package`() {
+    fun `enum-const-reside-in-file-package`() {
         // given
-        val sut = getSnippetFile("constructor-reside-in-file-package")
+        val sut = getSnippetFile("enum-const-reside-in-file-package")
             .classes()
             .first()
-            .constructors
+            .enumConstants
             .first()
 
         // then
@@ -32,12 +32,12 @@ class KoConstructorDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     @Test
-    fun `constructor-not-reside-outside-file-package`() {
+    fun `enum-const-not-reside-outside-file-package`() {
         // given
-        val sut = getSnippetFile("constructor-not-reside-outside-file-package")
+        val sut = getSnippetFile("enum-const-not-reside-outside-file-package")
             .classes()
             .first()
-            .constructors
+            .enumConstants
             .first()
 
         // then
@@ -45,12 +45,12 @@ class KoConstructorDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     @Test
-    fun `constructor-reside-outside-file-package`() {
+    fun `enum-const-reside-outside-file-package`() {
         // given
-        val sut = getSnippetFile("constructor-reside-outside-file-package")
+        val sut = getSnippetFile("enum-const-reside-outside-file-package")
             .classes()
             .first()
-            .constructors
+            .enumConstants
             .first()
 
         // then
@@ -58,5 +58,5 @@ class KoConstructorDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koconstructor/snippet/forkoresideinoroutsidepackageprovider/", fileName)
+        getSnippetKoScope("core/declaration/koenumconstant/snippet/forkoresideinpackageprovider/", fileName)
 }

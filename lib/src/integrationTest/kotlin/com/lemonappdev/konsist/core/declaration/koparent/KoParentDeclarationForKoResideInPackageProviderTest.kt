@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.ext.list.parents
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoParentDeclarationForKoResideInOrOutsidePackageProviderTest {
+class KoParentDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `parent-of-class-not-reside-in-file-package`() {
         // given
@@ -151,5 +151,5 @@ class KoParentDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koparent/snippet/forkoresideinoroutsidepackageprovider/", fileName)
+        getSnippetKoScope("core/declaration/koparent/snippet/forkoresideinpackageprovider/", fileName)
 }

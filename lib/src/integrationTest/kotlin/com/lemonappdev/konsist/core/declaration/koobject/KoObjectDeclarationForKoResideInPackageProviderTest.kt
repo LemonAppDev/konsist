@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoObjectDeclarationForKoResideInOrOutsidePackageProviderTest {
+class KoObjectDeclarationForKoResideInPackageProviderTest {
     @Test
     fun `object-not-reside-in-file-package`() {
         // given
@@ -50,5 +50,5 @@ class KoObjectDeclarationForKoResideInOrOutsidePackageProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/koobject/snippet/forkoresideinoroutsidepackageprovider/", fileName)
+        getSnippetKoScope("core/declaration/koobject/snippet/forkoresideinpackageprovider/", fileName)
 }
