@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.provider.modifier
 
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -39,6 +40,9 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
 
     override val numModifiers: Int
         get() = modifiers.size
+
+    override fun countModifiers(predicate: (KoModifier) -> Boolean): Int =
+        modifiers.count { predicate(it) }
 
     override fun hasModifiers(vararg koModifiers: KoModifier): Boolean = when {
         koModifiers.isEmpty() -> modifiers.isNotEmpty()
