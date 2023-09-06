@@ -1,15 +1,14 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
-import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-@Deprecated("Will be removed in v1.0.0")
-class KoResideInOrOutsidePackageProviderListExtTest {
-    private interface SampleTestDeclaration : KoPackageProvider, KoResideInOrOutsidePackageProvider
+class KoResideInPackageProviderListExtTest {
+    private interface SampleTestDeclaration : KoPackageProvider, KoResideInPackageProvider
 
     @Test
     fun `withPackage() returns declaration reside in any package`() {
