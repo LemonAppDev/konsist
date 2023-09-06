@@ -10,8 +10,8 @@ import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
-import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoActualModifierProvider
@@ -35,7 +35,7 @@ interface KoTypeAliasDeclaration :
     KoContainingDeclarationProvider,
     KoPathProvider,
     KoResideInPackageProvider,
-KoResideInOrOutsidePackageProvider,
+    KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTypeProvider,
     KoVisibilityModifierProvider,
