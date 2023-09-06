@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
-import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
@@ -31,7 +31,7 @@ internal interface KoConstructorDeclarationCore :
     KoParametersProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
-    KoResideInOrOutsidePackageProviderCore,
+    KoResideInPackageProviderCore,
     KoTextProviderCore,
     KoVisibilityModifierProviderCore {
     val ktConstructor: KtConstructor<*>

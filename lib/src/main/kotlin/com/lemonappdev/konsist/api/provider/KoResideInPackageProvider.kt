@@ -3,8 +3,7 @@ package com.lemonappdev.konsist.api.provider
 /**
  * An interface representing a Kotlin declaration that provides information about whether it resides in or outside a package.
  */
-@Deprecated("Will be removed in v1.0.0", ReplaceWith("KoResideInPackageProvider"))
-interface KoResideInOrOutsidePackageProvider : KoBaseProvider {
+interface KoResideInPackageProvider : KoBaseProvider {
     /**
      * Whether the declaration resides in a package.
      *

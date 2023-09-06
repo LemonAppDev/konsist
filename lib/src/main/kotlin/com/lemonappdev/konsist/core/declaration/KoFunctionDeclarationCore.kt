@@ -20,7 +20,7 @@ import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
-import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoReturnTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
@@ -70,7 +70,7 @@ internal class KoFunctionDeclarationCore private constructor(
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoReceiverTypeProviderCore,
-    KoResideInOrOutsidePackageProviderCore,
+    KoResideInPackageProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
     KoVisibilityModifierProviderCore,

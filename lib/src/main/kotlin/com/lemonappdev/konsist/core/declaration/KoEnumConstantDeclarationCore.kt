@@ -18,7 +18,7 @@ import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
-import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
@@ -45,7 +45,7 @@ internal class KoEnumConstantDeclarationCore private constructor(
     KoPathProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoPackageDeclarationProviderCore,
-    KoResideInOrOutsidePackageProviderCore,
+    KoResideInPackageProviderCore,
     KoTextProviderCore {
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktEnumEntry }
 
