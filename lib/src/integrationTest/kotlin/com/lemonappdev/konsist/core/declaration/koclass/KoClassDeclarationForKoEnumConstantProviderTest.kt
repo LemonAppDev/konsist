@@ -17,6 +17,7 @@ class KoClassDeclarationForKoEnumConstantProviderTest {
         assertSoftly(sut) {
             enumConstants shouldBeEqualTo emptyList()
             numEnumConstants shouldBeEqualTo 0
+            countEnumConstants { it.hasNameStartingWith("SAMPLE") } shouldBeEqualTo 0
             hasEnumConstants() shouldBeEqualTo false
             hasEnumConstants("SAMPLE_CONSTANT") shouldBeEqualTo false
         }
@@ -43,6 +44,8 @@ class KoClassDeclarationForKoEnumConstantProviderTest {
         // then
         assertSoftly(sut) {
             numEnumConstants shouldBeEqualTo 2
+            countEnumConstants { it.hasNameStartingWith("SAMPLE") } shouldBeEqualTo 2
+            countEnumConstants { it.name == "SAMPLE_CONSTANT_1" } shouldBeEqualTo 1
             hasEnumConstants() shouldBeEqualTo true
             hasEnumConstants("SAMPLE_CONSTANT_1") shouldBeEqualTo true
             hasEnumConstants("SAMPLE_CONSTANT_1", "SAMPLE_CONSTANT_2") shouldBeEqualTo true

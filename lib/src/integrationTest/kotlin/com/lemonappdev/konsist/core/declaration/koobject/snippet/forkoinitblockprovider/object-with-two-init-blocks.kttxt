@@ -4,6 +4,8 @@ object SampleObject {
     }
 
     init {
+        fun localFunction() {}
+
         println("Sample text")
     }
 }

@@ -17,6 +17,7 @@ class KoFileDeclarationForKoImportProviderTest {
         assertSoftly(sut) {
             imports.isEmpty() shouldBeEqualTo true
             numImports shouldBeEqualTo 0
+            countImports { it.name == "com.lemonappdev.konsist.testdata.OtherImport" } shouldBeEqualTo 0
             hasImports() shouldBeEqualTo false
             hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
         }
@@ -51,6 +52,8 @@ class KoFileDeclarationForKoImportProviderTest {
         // then
         assertSoftly(sut) {
             numImports shouldBeEqualTo 2
+            countImports { it.hasNameStartingWith("com.lemonappdev") } shouldBeEqualTo 2
+            countImports { it.name == "com.lemonappdev.konsist.testdata.SampleType" } shouldBeEqualTo 1
             hasImports() shouldBeEqualTo true
             hasImports("com..") shouldBeEqualTo true
             hasImports("com..", "..testdata..") shouldBeEqualTo true
