@@ -9,10 +9,15 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
  *
  * @param prefix An optional string to be printed before the declaration content. Default is null.
  */
-fun <T : KoBaseProvider> T.print(prefix: String? = null): T {
+fun <T : KoBaseProvider> T.print(prefix: String? = null, predicate: ((T) -> String)? = null): T {
     prefix?.let { println(it) }
 
-    val text = if (this is KoNameProvider && name != "") name else toString()
-    println(text)
+    if (predicate != null) {
+        println(predicate(this))
+    } else {
+        val text = if (this is KoNameProvider && name != "") name else toString()
+        println(text)
+    }
+
     return this
 }

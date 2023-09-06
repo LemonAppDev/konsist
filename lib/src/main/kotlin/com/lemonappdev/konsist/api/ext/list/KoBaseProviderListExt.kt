@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.ext.provider.print
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 
 /**
@@ -13,12 +14,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 fun <T : KoBaseProvider> List<T>.print(prefix: String? = null, predicate: ((T) -> String)? = null): List<T> {
     prefix?.let { println(it) }
 
-    forEach {
-        if (predicate != null) {
-            println(predicate(it))
-        } else {
-            it.print()
-        }
-    }
+    forEach { it.print(predicate = predicate) }
+
     return this
 }

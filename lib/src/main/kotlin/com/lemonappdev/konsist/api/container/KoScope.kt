@@ -161,7 +161,7 @@ interface KoScope {
      * @param prefix An optional string to be printed before the scope content. Default is null.
      * @return The original scope.
      */
-    fun print(prefix: String? = null): KoScope
+    fun print(prefix: String? = null, predicate: ((KoScope) -> String)? = null): KoScope
 
     /**
      * Indicates whether some other object is "equal to" this one.
