@@ -89,7 +89,7 @@ internal class KoInterfaceDeclarationCore private constructor(
     ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktClass, includeNested, includeLocal, this)
 
-   override fun toString(): String = name
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoInterfaceDeclaration> = KoDeclarationCache()

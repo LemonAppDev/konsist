@@ -139,7 +139,7 @@ internal class KoPropertyDeclarationCore private constructor(
 
     override val isConstructorDefined: Boolean by lazy { ktCallableDeclaration is KtParameter }
 
-   override fun toString(): String = name
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoPropertyDeclaration> = KoDeclarationCache()

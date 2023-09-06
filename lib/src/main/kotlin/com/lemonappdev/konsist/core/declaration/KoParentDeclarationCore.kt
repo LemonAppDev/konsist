@@ -56,7 +56,7 @@ internal open class KoParentDeclarationCore private constructor(private val ktSu
             ?.name ?: name
     }
 
-   override fun toString(): String = name
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoParentDeclaration> = KoDeclarationCache()

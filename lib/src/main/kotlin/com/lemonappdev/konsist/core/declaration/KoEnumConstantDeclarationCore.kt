@@ -63,7 +63,7 @@ internal class KoEnumConstantDeclarationCore private constructor(
         KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
 
-   override fun toString(): String = name
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoEnumConstantDeclaration> = KoDeclarationCache()

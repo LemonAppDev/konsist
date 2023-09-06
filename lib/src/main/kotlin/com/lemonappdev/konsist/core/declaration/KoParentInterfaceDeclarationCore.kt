@@ -66,7 +66,7 @@ internal class KoParentInterfaceDeclarationCore private constructor(private val 
             null
         }
 
-   override fun toString(): String = name
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoParentInterfaceDeclaration> = KoDeclarationCache()
