@@ -11,9 +11,8 @@ import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
  */
 @Deprecated(
     "Will be removed in v1.0.0. Change receiver types to KoResideInPackageProvider",
-    ReplaceWith("withPackage")
+    ReplaceWith("withPackage"),
 )
-
 fun <T : KoResideInOrOutsidePackageProvider> List<T>.withPackage(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> (it as? KoPackageProvider)?.packagee != null
@@ -29,7 +28,7 @@ fun <T : KoResideInOrOutsidePackageProvider> List<T>.withPackage(vararg names: S
  */
 @Deprecated(
     "Will be removed in v1.0.0. Change receiver types to KoResideInPackageProvider",
-    ReplaceWith("withoutPackage")
+    ReplaceWith("withoutPackage"),
 )
 fun <T : KoResideInOrOutsidePackageProvider> List<T>.withoutPackage(vararg names: String): List<T> = filter {
     when {
