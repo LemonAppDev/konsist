@@ -2,6 +2,7 @@ package com.sample.domain
 
 class SampleUseCase {
     fun invoke(): String {
-        return "Hello World!"
+        val world = "World"
+        return "Hello $world!"
     }
 }
