@@ -18,6 +18,14 @@ interface KoEnumConstantProvider : KoBaseProvider {
     val numEnumConstants: Int
 
     /**
+     * Gets the number of enum constants that satisfies the specified predicate present in the declaration.
+     *
+     * @param predicate The predicate function to determine if an enum constant satisfies a condition.
+     * @return The number of enum constants in the declaration.
+     */
+    fun countEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Int
+
+    /**
      * Whether the declaration has enum constants.
      *
      * @param names the names of the enum constants to check.

@@ -18,6 +18,14 @@ interface KoParentProvider : KoBaseProvider {
     val numParents: Int
 
     /**
+     * Gets the number of parents that satisfies the specified predicate present in the declaration.
+     *
+     * @param predicate The predicate function to determine if an parent satisfies a condition.
+     * @return The number of parents in the declaration.
+     */
+    fun countParents(predicate: (KoParentDeclaration) -> Boolean): Int
+
+    /**
      * Whatever class has parents (parent class and parent interfaces) defined directly in the Kotlin file.
      * Does not include parents defined in other files such as parent of the parent.
      *

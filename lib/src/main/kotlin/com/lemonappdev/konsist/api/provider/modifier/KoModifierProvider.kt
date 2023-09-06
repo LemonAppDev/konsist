@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 /**
  * An interface representing a Kotlin declaration that provides access to its modifiers.
  */
-@Suppress("detekt.TooManyFunctions")
 interface KoModifierProvider : KoBaseProvider {
     /**
      * List of modifiers.
@@ -17,6 +16,14 @@ interface KoModifierProvider : KoBaseProvider {
      * The number of modifiers.
      */
     val numModifiers: Int
+
+    /**
+     * Gets the number of modifiers that satisfies the specified predicate present in the declaration.
+     *
+     * @param predicate The predicate function to determine if a modifier satisfies a condition.
+     * @return The number of modifiers in the declaration.
+     */
+    fun countModifiers(predicate: (KoModifier) -> Boolean): Int
 
     /**
      * Whether the declaration has modifiers.
