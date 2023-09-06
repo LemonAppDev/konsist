@@ -63,9 +63,7 @@ internal class KoTypeAliasDeclarationCore private constructor(
             ?: throw KoInternalException("Type alias has no type", koBaseProvider = this)
     }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+   override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoTypeAliasDeclaration> = KoDeclarationCache()

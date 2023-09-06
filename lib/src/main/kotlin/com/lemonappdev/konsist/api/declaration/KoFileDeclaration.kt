@@ -57,11 +57,4 @@ interface KoFileDeclaration :
      * @return the hash code value.
      */
     override fun hashCode(): Int
-
-    /**
-     * String representing the file.
-     *
-     * @return a string representing the file.
-     */
-    override fun toString(): String
 }

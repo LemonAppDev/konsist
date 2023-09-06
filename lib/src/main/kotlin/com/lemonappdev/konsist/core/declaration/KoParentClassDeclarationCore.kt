@@ -54,9 +54,7 @@ internal class KoParentClassDeclarationCore private constructor(private val ktSu
             .replace(EndOfLine.UNIX.value, " ")
             .substringBefore(" by")
 
-    override fun toString(): String {
-        return locationWithText
-    }
+   override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoParentClassDeclaration> = KoDeclarationCache()

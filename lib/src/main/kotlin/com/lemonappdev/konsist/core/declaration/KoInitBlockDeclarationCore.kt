@@ -44,9 +44,7 @@ internal class KoInitBlockDeclarationCore private constructor(
         KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+   override fun toString(): String = locationWithText
 
     internal companion object {
         private val cache: KoDeclarationCache<KoInitBlockDeclaration> = KoDeclarationCache()

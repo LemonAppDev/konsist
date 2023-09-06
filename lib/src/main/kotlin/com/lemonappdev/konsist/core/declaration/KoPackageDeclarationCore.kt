@@ -38,9 +38,7 @@ internal class KoPackageDeclarationCore private constructor(private val ktPackag
         }
     }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+   override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoPackageDeclaration> = KoDeclarationCache()

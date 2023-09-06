@@ -23,11 +23,4 @@ interface KoInitBlockDeclaration :
     KoLocationProvider,
     KoContainingDeclarationProvider,
     KoPathProvider,
-    KoTextProvider {
-    /**
-     * String representing the init block.
-     *
-     * @return a string representing the init block.
-     */
-    override fun toString(): String
-}
+    KoTextProvider
