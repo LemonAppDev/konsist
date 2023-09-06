@@ -2,10 +2,7 @@ package com.lemonappdev.konsist.core.declaration.koproperty
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.ext.list.properties
-import com.lemonappdev.konsist.api.provider.KoNameProvider
-import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldNotBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoPropertyDeclarationForKoConstructorDefinedProviderTest {
