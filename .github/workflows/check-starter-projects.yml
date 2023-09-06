@@ -37,11 +37,6 @@ jobs:
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
-          -Pkonsist.releaseTarget=local
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
-          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/settings.gradle
@@ -76,11 +71,6 @@ jobs:
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
-          -Pkonsist.releaseTarget=local
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
-          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-5/settings.gradle
@@ -115,11 +105,6 @@ jobs:
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
-          -Pkonsist.releaseTarget=local
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
-          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-4/settings.gradle.kts
@@ -154,11 +139,6 @@ jobs:
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
-          -Pkonsist.releaseTarget=local
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
-          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-5/settings.gradle.kts
@@ -193,11 +173,6 @@ jobs:
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
-          -Pkonsist.releaseTarget=local
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
-          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-spring-gradle-kotlin-junit-5/build.gradle.kts
@@ -232,11 +207,6 @@ jobs:
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
-          -Pkonsist.releaseTarget=local
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
-          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-spring-gradle-groovy-junit-5/build.gradle
@@ -271,11 +241,6 @@ jobs:
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
           ./gradlew publishToMavenLocal
-          -Pkonsist.releaseTarget=local
-          -Pkonsist.signingKey='${{secrets.GPG_SIGNING_KEY_BASE_64}}'
-          -Pkonsist.signingPassword='${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}'
-          -Pkonsist.ossrhUsername='${{secrets.OSSRH_USERNAME}}'
-          -Pkonsist.ossrhPassword='${{secrets.OSSRH_PASSWORD}}'
 
       - name: Add Maven Local Repository
         run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-spring-maven-junit5/pom.xml
