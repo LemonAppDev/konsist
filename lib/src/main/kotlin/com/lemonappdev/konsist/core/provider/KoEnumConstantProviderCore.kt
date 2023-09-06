@@ -8,7 +8,9 @@ import org.jetbrains.kotlin.psi.KtClassBody
 import org.jetbrains.kotlin.psi.KtEnumEntry
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-internal interface KoEnumConstantProviderCore : KoEnumConstantProvider, KoBaseProviderCore,
+internal interface KoEnumConstantProviderCore :
+    KoEnumConstantProvider,
+    KoBaseProviderCore,
     KoContainingDeclarationProviderCore {
     val ktClass: KtClass
 

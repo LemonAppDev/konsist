@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.provider.KoImportProvider
 import com.lemonappdev.konsist.core.declaration.KoImportDeclarationCore
