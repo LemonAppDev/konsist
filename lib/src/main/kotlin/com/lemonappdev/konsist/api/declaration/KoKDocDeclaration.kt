@@ -15,11 +15,4 @@ interface KoKDocDeclaration :
     KoKDocTagsProvider,
     KoTextProvider,
     KoLocationProvider,
-    KoPathProvider {
-    /**
-     * String representing the kDoc.
-     *
-     * @return a string representing the kDoc.
-     */
-    override fun toString(): String
-}
+    KoPathProvider
