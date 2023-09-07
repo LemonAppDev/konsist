@@ -12,7 +12,7 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         KoDeclarationProviderCoreUtil.getKoDeclarations(
             declarations(includeNested = false, includeLocal = false),
             includeNested,
-            includeLocal
+            includeLocal,
         )
 
     override fun containsFunction(

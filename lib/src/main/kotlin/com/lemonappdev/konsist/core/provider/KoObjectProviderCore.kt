@@ -9,7 +9,7 @@ internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProvide
         includeNested: Boolean,
     ): List<KoObjectDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(
         declarations(includeNested = false, includeLocal = false),
-        includeNested
+        includeNested,
     )
 
     override fun containsObject(

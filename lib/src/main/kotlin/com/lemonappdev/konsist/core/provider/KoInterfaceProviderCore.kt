@@ -10,7 +10,7 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
     ): List<KoInterfaceDeclaration> =
         KoDeclarationProviderCoreUtil.getKoDeclarations(
             declarations(includeNested = false, includeLocal = false),
-            includeNested
+            includeNested,
         )
 
     override fun containsInterface(

@@ -12,7 +12,7 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         KoDeclarationProviderCoreUtil.getKoDeclarations(
             declarations(includeNested = false, includeLocal = false),
             includeNested,
-            includeLocal
+            includeLocal,
         )
 
     override fun containsClass(
