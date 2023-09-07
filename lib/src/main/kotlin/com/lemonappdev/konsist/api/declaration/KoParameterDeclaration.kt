@@ -47,11 +47,4 @@ interface KoParameterDeclaration :
     KoValModifierProvider,
     KoVarArgModifierProvider,
     KoNoInlineModifierProvider,
-    KoCrossInlineModifierProvider {
-    /**
-     * String representing the parameter.
-     *
-     * @return a string representing the parameter.
-     */
-    override fun toString(): String
-}
+    KoCrossInlineModifierProvider

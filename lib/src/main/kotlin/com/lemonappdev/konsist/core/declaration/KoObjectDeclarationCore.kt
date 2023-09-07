@@ -97,9 +97,7 @@ internal class KoObjectDeclarationCore(
     ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktObjectDeclaration, includeNested, includeLocal, this)
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoObjectDeclaration> = KoDeclarationCache()

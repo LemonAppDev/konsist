@@ -40,4 +40,6 @@ internal class KoKDocDeclarationCore(private val kDocElement: KDocElement) :
                 }
         }
     }
+
+    override fun toString(): String = text
 }

@@ -14,7 +14,7 @@ class KoTypeDeclarationTest {
             .type
 
         // then
-        sut.toString() shouldBeEqualTo sut?.locationWithText
+        sut.toString() shouldBeEqualTo "String"
     }
 
     private fun getSnippetFile(fileName: String) =

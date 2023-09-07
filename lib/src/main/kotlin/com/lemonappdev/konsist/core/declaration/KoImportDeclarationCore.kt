@@ -31,9 +31,7 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
 
     override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoImportDeclaration> = KoDeclarationCache()
