@@ -80,9 +80,7 @@ internal class KoEnumConstantDeclarationCore private constructor(
             ?.filterIsInstance<KtValueArgument>()
             ?.map { KoArgumentDeclarationCore.getInstance(it, this) } ?: emptyList()
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoEnumConstantDeclaration> = KoDeclarationCache()

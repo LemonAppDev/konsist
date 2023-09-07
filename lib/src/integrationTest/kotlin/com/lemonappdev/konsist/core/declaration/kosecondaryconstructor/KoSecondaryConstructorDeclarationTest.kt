@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.kosecondaryconstructor
 
 import com.lemonappdev.konsist.TestSnippetProvider
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -15,7 +16,11 @@ class KoSecondaryConstructorDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo sut.locationWithText
+        val declaration = "Declaration:\nconstructor(): this(6)"
+        assertSoftly(sut.toString()) {
+            startsWith("Location: /") shouldBeEqualTo true
+            endsWith(declaration) shouldBeEqualTo true
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

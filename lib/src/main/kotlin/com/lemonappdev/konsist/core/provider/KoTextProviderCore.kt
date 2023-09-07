@@ -8,8 +8,4 @@ internal interface KoTextProviderCore : KoTextProvider, KoBaseProviderCore {
 
     override val text: String
         get() = psiElement.text
-
-    override fun print(prefix: String) {
-        kotlin.io.print(prefix + toString())
-    }
 }

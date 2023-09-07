@@ -8,6 +8,46 @@ import org.junit.jupiter.api.Test
 
 class KoNameProviderListExtTest {
     @Test
+    fun `withName() returns declaration with any name`() {
+        // given
+        val name1 = "sampleName"
+        val name2 = ""
+        val declaration1: KoNameProvider = mockk {
+            every { name } returns name1
+        }
+        val declaration2: KoNameProvider = mockk {
+            every { name } returns name2
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withName()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutName() returns declaration without name`() {
+        // given
+        val name1 = "sampleName"
+        val name2 = ""
+        val declaration1: KoNameProvider = mockk {
+            every { name } returns name1
+        }
+        val declaration2: KoNameProvider = mockk {
+            every { name } returns name2
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutName()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withName() returns declaration with given name`() {
         // given
         val name1 = "sampleName1"

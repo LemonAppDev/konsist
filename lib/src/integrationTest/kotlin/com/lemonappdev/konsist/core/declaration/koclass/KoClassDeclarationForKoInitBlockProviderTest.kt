@@ -18,6 +18,7 @@ class KoClassDeclarationForKoInitBlockProviderTest {
         assertSoftly(sut) {
             initBlocks shouldBeEqualTo emptyList()
             numInitBlocks shouldBeEqualTo 0
+            countInitBlocks { it.localFunctions.isEmpty() } shouldBeEqualTo 0
             hasInitBlocks shouldBeEqualTo false
         }
     }
@@ -33,6 +34,7 @@ class KoClassDeclarationForKoInitBlockProviderTest {
         assertSoftly(sut) {
             initBlocks shouldNotBeEqualTo emptyList()
             numInitBlocks shouldBeEqualTo 1
+            countInitBlocks { it.localFunctions.isEmpty() } shouldBeEqualTo 1
             hasInitBlocks shouldBeEqualTo true
         }
     }
@@ -48,6 +50,8 @@ class KoClassDeclarationForKoInitBlockProviderTest {
         assertSoftly(sut) {
             initBlocks shouldNotBeEqualTo emptyList()
             numInitBlocks shouldBeEqualTo 2
+            countInitBlocks { it.localDeclarations.isNotEmpty() } shouldBeEqualTo 2
+            countInitBlocks { it.localFunctions.isNotEmpty() } shouldBeEqualTo 1
             hasInitBlocks shouldBeEqualTo true
         }
     }

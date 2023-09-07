@@ -39,11 +39,4 @@ interface KoEnumConstantDeclaration :
     KoContainingDeclarationProvider,
     KoPathProvider,
     KoResideInOrOutsidePackageProvider,
-    KoTextProvider {
-    /**
-     * String representing the enum constant.
-     *
-     * @return a string representing the enum constant.
-     */
-    override fun toString(): String
-}
+    KoTextProvider

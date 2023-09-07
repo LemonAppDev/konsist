@@ -61,11 +61,4 @@ interface KoInterfaceDeclaration :
     KoActualModifierProvider,
     KoExpectModifierProvider,
     KoFunModifierProvider,
-    KoSealedModifierProvider {
-    /**
-     * String representing the interface.
-     *
-     * @return a string representing the interface.
-     */
-    override fun toString(): String
-}
+    KoSealedModifierProvider
