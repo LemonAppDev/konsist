@@ -4,11 +4,11 @@ import com.lemonappdev.konsist.api.provider.KoSourceAndAliasTypeProvider
 import kotlin.reflect.KClass
 
 /**
- * List containing elements with source type of.
+ * List containing declarations with source type of.
  *
  * @param kClass The Kotlin class representing the source type to include.
  * @param kClasses The Kotlin classes representing the source types to include.
- * @return A list containing elements with the source type matching any of the specified types.
+ * @return A list containing declarations with the source type matching any of the specified types.
  */
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
@@ -21,11 +21,11 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceTypeOf(kClass: KClass<*
     }
 
 /**
- * List containing elements without source type of.
+ * List containing declarations without source type of.
  *
  * @param kClass The Kotlin class representing the source type to exclude.
  * @param kClasses The Kotlin classes representing the source types to exclude.
- * @return A list containing elements without source type matching any of the specified types.
+ * @return A list containing declarations without source type matching any of the specified types.
  */
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
@@ -38,33 +38,33 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceTypeOf(kClass: KClas
     }
 
 /**
- * List containing elements with source type.
+ * List containing declarations with source type.
  *
  * @param name The source type name to include.
  * @param names The source type name(s) to include.
- * @return A list containing elements with the specified source types.
+ * @return A list containing declarations with the specified source types.
  */
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withSourceType(name: String, vararg names: String): List<T> = filter {
     it.sourceType == name || names.any { type -> it.sourceType == type }
 }
 
 /**
- * List containing elements without source type.
+ * List containing declarations without source type.
  *
  * @param name The source type name to exclude.
  * @param names The source type name(s) to exclude.
- * @return A list containing elements without specified source types.
+ * @return A list containing declarations without specified source types.
  */
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutSourceType(name: String, vararg names: String): List<T> = filter {
     it.sourceType != name && names.none { type -> it.sourceType == type }
 }
 
 /**
- * List containing elements with alias type of.
+ * List containing declarations with alias type of.
  *
  * @param kClass The Kotlin class representing the alias type to include
  * @param kClasses The Kotlin classes representing the alias type to include.
- * @return A list containing elements with the alias type matching any of the specified types.
+ * @return A list containing declarations with the alias type matching any of the specified types.
  */
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
@@ -80,11 +80,11 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasTypeOf(kClass: KClass<*>
     }
 
 /**
- * List containing elements without alias type of.
+ * List containing declarations without alias type of.
  *
  * @param kClass The Kotlin class representing the alias type to exclude.
  * @param kClasses The Kotlin classes representing the alias type to exclude.
- * @return A list containing elements without alias type matching any of the specified types.
+ * @return A list containing declarations without alias type matching any of the specified types.
  */
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutAliasTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filterNot {
@@ -100,10 +100,10 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutAliasTypeOf(kClass: KClass
     }
 
 /**
- * List containing elements with alias type.
+ * List containing declarations with alias type.
  *
  * @param names The alias type names to include.
- * @return A list containing elements with an alias type matching any of the specified names
+ * @return A list containing declarations with an alias type matching any of the specified names
  * (or any alias type if [names] is empty).
  */
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasType(vararg names: String): List<T> = filter {
@@ -114,10 +114,10 @@ fun <T : KoSourceAndAliasTypeProvider> List<T>.withAliasType(vararg names: Strin
 }
 
 /**
- * List containing elements without alias type.
+ * List containing declarations without alias type.
  *
  * @param names The alias type names to exclude.
- * @return A list containing elements without an alias type matching any of the specified names
+ * @return A list containing declarations without an alias type matching any of the specified names
  * (or none alias type if [names] is empty).
  */
 fun <T : KoSourceAndAliasTypeProvider> List<T>.withoutAliasType(vararg names: String): List<T> = filter {

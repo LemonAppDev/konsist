@@ -4,12 +4,12 @@ import com.lemonappdev.konsist.api.ext.provider.print
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 
 /**
- * Print the elements.
+ * Print the declarations.
  *
- * @param prefix An optional string to be printed before each element. Default is null.
- * @param predicate An optional function that generates the string representation of each element.
+ * @param prefix An optional string to be printed before each declaration. Default is null.
+ * @param predicate An optional function that generates the string representation of each declaration.
  *                  If predicate is not provided (default is `null`), the function uses `toString` method.
- * @return The original list of elements.
+ * @return The original list of declarations.
  */
 fun <T : KoBaseProvider> List<T>.print(prefix: String? = null, predicate: ((T) -> String)? = null): List<T> {
     prefix?.let { println(it) }

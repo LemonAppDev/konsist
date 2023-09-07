@@ -11,59 +11,59 @@ val <T : KoParentProvider> List<T>.parents: List<KoParentDeclaration>
     get() = flatMap { it.parents }
 
 /**
- * List containing elements with class or interface parent.
+ * List containing declarations with class or interface parent.
  *
- * @return A list containing elements with class or interface parent.
+ * @return A list containing declarations with class or interface parent.
  */
 fun <T : KoParentProvider> List<T>.withParents(): List<T> = filter { it.hasParents() }
 
 /**
- * List containing elements with all specified parents.
+ * List containing declarations with all specified parents.
  *
  * @param name The name of the parent to include.
  * @param names The name(s) of the parent(s) to include.
- * @return A list containing elements with all specified parent(s).
+ * @return A list containing declarations with all specified parent(s).
  */
 fun <T : KoParentProvider> List<T>.withAllParents(name: String, vararg names: String): List<T> = filter {
     it.hasParents(name, *names)
 }
 
 /**
- * List containing elements with some parents.
+ * List containing declarations with some parents.
  *
  * @param name The name of the parent to include.
  * @param names The names of the parents to include.
- * @return A list containing elements with at least one of the specified parent(s).
+ * @return A list containing declarations with at least one of the specified parent(s).
  */
 fun <T : KoParentProvider> List<T>.withSomeParents(name: String, vararg names: String): List<T> = filter {
     it.hasParents(name) || names.any { name -> it.hasParents(name) }
 }
 
 /**
- * List containing elements with no parent - class does not extend any class and does not implement any interface.
+ * List containing declarations with no parent - class does not extend any class and does not implement any interface.
  *
- * @return A list containing elements with no parent - class does not extend any class and does not implement any
+ * @return A list containing declarations with no parent - class does not extend any class and does not implement any
  * interface.
  */
 fun <T : KoParentProvider> List<T>.withoutParents(): List<T> = filterNot { it.hasParents() }
 
 /**
- * List containing elements without all specified parents.
+ * List containing declarations without all specified parents.
  *
  * @param name The name of the parent to exclude.
  * @param names The name(s) of the parent(s) to exclude.
- * @return A list containing elements without all specified parent(s).
+ * @return A list containing declarations without all specified parent(s).
  */
 fun <T : KoParentProvider> List<T>.withoutAllParents(name: String, vararg names: String): List<T> = filter {
     !it.hasParents(name, *names)
 }
 
 /**
- * List containing elements without some parents represented by name.
+ * List containing declarations without some parents represented by name.
  *
  * @param name The name of the parent to exclude.
  * @param names The names of the parents to exclude.
- * @return A list containing elements without at least one of the specified parent(s).
+ * @return A list containing declarations without at least one of the specified parent(s).
  */
 fun <T : KoParentProvider> List<T>.withoutSomeParents(name: String, vararg names: String): List<T> = filter {
     !it.hasParents(name) && if (names.isNotEmpty()) {
@@ -74,11 +74,11 @@ fun <T : KoParentProvider> List<T>.withoutSomeParents(name: String, vararg names
 }
 
 /**
- * List containing elements with named parents.
+ * List containing declarations with named parents.
  *
  * @param kClass The Kotlin class representing the parent to include.
  * @param kClasses The Kotlin declarations representing the parents to include.
- * @return A list containing elements with the parents of the specified type(s).
+ * @return A list containing declarations with the parents of the specified type(s).
  */
 fun <T : KoParentProvider> List<T>.withAllParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
@@ -91,11 +91,11 @@ fun <T : KoParentProvider> List<T>.withAllParentsOf(kClass: KClass<*>, vararg kC
     }
 
 /**
- * List containing elements with some named parents.
+ * List containing declarations with some named parents.
  *
  * @param kClass The Kotlin class representing the parent to include.
  * @param kClasses The Kotlin declarations representing the parents to include.
- * @return A list containing elements with at least one of the specified parent(s).
+ * @return A list containing declarations with at least one of the specified parent(s).
  */
 fun <T : KoParentProvider> List<T>.withSomeParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
@@ -108,11 +108,11 @@ fun <T : KoParentProvider> List<T>.withSomeParentsOf(kClass: KClass<*>, vararg k
     }
 
 /**
- * List containing elements without named parents.
+ * List containing declarations without named parents.
  *
  * @param kClass The Kotlin class representing the parent to exclude.
  * @param kClasses The Kotlin declarations representing the parents to exclude.
- * @return A list containing elements without parents of the specified type(s).
+ * @return A list containing declarations without parents of the specified type(s).
  */
 fun <T : KoParentProvider> List<T>.withoutAllParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
@@ -125,11 +125,11 @@ fun <T : KoParentProvider> List<T>.withoutAllParentsOf(kClass: KClass<*>, vararg
     }
 
 /**
- * List containing elements without some named parents.
+ * List containing declarations without some named parents.
  *
  * @param kClass The Kotlin class representing the parent to exclude.
  * @param kClasses The Kotlin declarations representing the parents to exclude.
- * @return A list containing elements without at least one of the specified parent(s).
+ * @return A list containing declarations without at least one of the specified parent(s).
  */
 fun <T : KoParentProvider> List<T>.withoutSomeParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
