@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 
 class KoPropertyDeclarationForKoConstructorDefinedProviderTest {
     @Test
-    fun `property-is-constructor-defined`() {
+    fun `property-is-defined-in-constructor`() {
         // given
-        val sut = getSnippetFile("property-is-constructor-defined")
+        val sut = getSnippetFile("property-is-defined-in-constructor")
             .classes()
             .properties()
             .first()
@@ -19,9 +19,9 @@ class KoPropertyDeclarationForKoConstructorDefinedProviderTest {
     }
 
     @Test
-    fun `property-is-not-constructor-defined`() {
+    fun `property-is-defined-in-body`() {
         // given
-        val sut = getSnippetFile("property-is-not-constructor-defined")
+        val sut = getSnippetFile("property-is-defined-in-body")
             .classes()
             .properties()
             .first()
