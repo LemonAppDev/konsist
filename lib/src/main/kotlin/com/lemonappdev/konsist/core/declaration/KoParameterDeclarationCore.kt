@@ -81,9 +81,7 @@ internal class KoParameterDeclarationCore private constructor(
 
     override val hasVarModifier: Boolean by lazy { ktParameter.valOrVarKeyword?.text == "var" }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoParameterDeclaration> = KoDeclarationCache()

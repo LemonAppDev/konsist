@@ -139,9 +139,7 @@ internal class KoPropertyDeclarationCore private constructor(
         }
     }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoPropertyDeclaration> = KoDeclarationCache()

@@ -61,11 +61,4 @@ interface KoObjectDeclaration :
     KoTopLevelProvider,
     KoVisibilityModifierProvider,
     KoDataModifierProvider,
-    KoCompanionModifierProvider {
-    /**
-     * String representing the object.
-     *
-     * @return a string representing the object.
-     */
-    override fun toString(): String
-}
+    KoCompanionModifierProvider

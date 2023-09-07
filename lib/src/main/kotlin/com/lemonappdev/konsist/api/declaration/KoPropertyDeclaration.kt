@@ -65,11 +65,4 @@ interface KoPropertyDeclaration :
     KoFinalModifierProvider,
     KoActualModifierProvider,
     KoExpectModifierProvider,
-    KoConstModifierProvider {
-    /**
-     * String representing the property.
-     *
-     * @return a string representing the property.
-     */
-    override fun toString(): String
-}
+    KoConstModifierProvider

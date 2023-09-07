@@ -14,7 +14,7 @@ class KoPropertyDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo sut.locationWithText
+        sut.toString() shouldBeEqualTo "sampleProperty"
     }
 
     private fun getSnippetFile(fileName: String) =

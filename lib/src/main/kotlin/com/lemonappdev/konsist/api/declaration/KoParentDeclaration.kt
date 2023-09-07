@@ -21,11 +21,4 @@ interface KoParentDeclaration :
     KoLocationProvider,
     KoPackageProvider,
     KoPathProvider,
-    KoResideInOrOutsidePackageProvider {
-    /**
-     * String representing the parent.
-     *
-     * @return a string representing the parent.
-     */
-    override fun toString(): String
-}
+    KoResideInOrOutsidePackageProvider
