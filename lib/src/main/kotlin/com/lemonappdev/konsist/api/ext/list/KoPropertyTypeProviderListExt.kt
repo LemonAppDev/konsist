@@ -38,19 +38,33 @@ fun <T : KoPropertyTypeProvider> List<T>.withoutType(vararg names: String): List
     }
 }
 
-fun <T : KoPropertyTypeProvider> List<T>.withType(predicate: ((KoTypeDeclaration) -> Boolean)? = null) = filter {
-    when (predicate) {
-        null -> it.hasType()
-        else -> it.type?.let { type -> predicate(type) } ?: false
+/**
+ * List containing declarations with the specified type.
+ *
+ * @param predicate The predicate function to determine if a declaration type satisfies a condition.
+ * @return A list containing declarations with the specified type (or any type if [predicate] is null).
+ */
+fun <T : KoPropertyTypeProvider> List<T>.withType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
+    filter {
+        when (predicate) {
+            null -> it.hasType()
+            else -> it.type?.let { type -> predicate(type) } ?: false
+        }
     }
-}
 
-fun <T : KoPropertyTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclaration) -> Boolean)? = null) = filterNot {
-    when (predicate) {
-        null -> it.hasType()
-        else -> it.type?.let { type -> predicate(type) } ?: false
+/**
+ * List containing declarations without the specified type.
+ *
+ * @param predicate The predicate function to determine if a declaration type satisfies a condition.
+ * @return A list containing declarations without the specified type (or none type if [predicate] is null).
+ */
+fun <T : KoPropertyTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
+    filterNot {
+        when (predicate) {
+            null -> it.hasType()
+            else -> it.type?.let { type -> predicate(type) } ?: false
+        }
     }
-}
 
 /**
  * List containing declarations with type of.
