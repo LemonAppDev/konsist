@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoConstructorDefinedProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoDelegateProvider
@@ -37,6 +38,7 @@ interface KoPropertyDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
+    KoConstructorDefinedProvider,
     KoContainingFileProvider,
     KoDelegateProvider,
     KoPropertyTypeProvider,
@@ -63,25 +65,4 @@ interface KoPropertyDeclaration :
     KoFinalModifierProvider,
     KoActualModifierProvider,
     KoExpectModifierProvider,
-    KoConstModifierProvider {
-    /**
-     * Whether property is defined in constructor (true) or not (false).
-     *
-     * e.g.
-     * ```
-     * val topLevelProperty = "" // isConstructorDefined == false
-     *
-     * class SampleClass(val constructorProperty: Int) { // isConstructorDefined == true
-     *      val bodyProperty = "" // isConstructorDefined == false
-     * }
-     * ```
-     */
-    val isConstructorDefined: Boolean
-
-    /**
-     * String representing the property.
-     *
-     * @return a string representing the property.
-     */
-    override fun toString(): String
-}
+    KoConstModifierProvider

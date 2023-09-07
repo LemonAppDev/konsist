@@ -7,7 +7,7 @@
 
 Konsist is a library that guards the consistency of [Kotlin](https://kotlinlang.org/) projects by promoting the
 standardization of the Kotlin codebase. It enforces coding conventions and project architecture. Konsist
-tests are written in Kotlin and can be easily integrated with popular testing frameworks such as
+tests are written in Kotlin and can be easily integrated with popular testing frameworks such as 
 [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/).
 
 See [Konsist documentation](http://docs.konsist.lemonappdev.com/) for more information.
@@ -90,7 +90,7 @@ guide and [Snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) p
 
 ### Community & Support
 
-Start the [discussion here on GitHub](https://github.com/LemonAppDev/konsist/discussions) or
+Start the [discussion here on GitHub](https://github.com/LemonAppDev/konsist/discussions) or 
 use [#konsist channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) at kotlinlang Slack Workspace.
 
 ## Contributing

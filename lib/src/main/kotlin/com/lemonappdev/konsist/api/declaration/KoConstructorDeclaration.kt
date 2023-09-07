@@ -29,11 +29,4 @@ interface KoConstructorDeclaration :
     KoPathProvider,
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
-    KoVisibilityModifierProvider {
-    /**
-     * String representing the constructor.
-     *
-     * @return a string representing the constructor.
-     */
-    override fun toString(): String
-}
+    KoVisibilityModifierProvider

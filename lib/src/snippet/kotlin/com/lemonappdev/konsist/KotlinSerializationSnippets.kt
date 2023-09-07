@@ -10,7 +10,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 class KotlinSerializationSnippets {
-    fun `classes annotated with Serializable have all properties annotated with SerialName`() {
+    fun `classes annotated with 'Serializable' have all properties annotated with 'SerialName'`() {
         Konsist
             .scopeFromProject()
             .classes()
@@ -21,7 +21,7 @@ class KotlinSerializationSnippets {
             }
     }
 
-    fun `enum classes annotated with Serializable have all enum constants annotated with SerialName`() {
+    fun `enum classes annotated with 'Serializable' have all enum constants annotated with 'SerialName'`() {
         Konsist.scopeFromProject()
             .classes()
             .withEnumModifier()

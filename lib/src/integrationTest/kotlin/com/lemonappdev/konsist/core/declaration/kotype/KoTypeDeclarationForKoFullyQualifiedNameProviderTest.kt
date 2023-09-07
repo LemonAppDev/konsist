@@ -35,8 +35,8 @@ class KoTypeDeclarationForKoFullyQualifiedNameProviderTest {
         fun provideValues() = listOf(
             arguments("simple-type", "com.lemonappdev.konsist.testdata.SampleType"),
             arguments("simple-nullable-type", "com.lemonappdev.konsist.testdata.SampleType"),
-            arguments("simple-list-type", ""),
-            arguments("simple-nullable-list-type", ""),
+            arguments("simple-list-type", "List<SampleType?>"),
+            arguments("simple-nullable-list-type", "List<SampleType?>?"),
             arguments("import-alias", "com.lemonappdev.konsist.testdata.SampleType"),
             arguments("nullable-import-alias", "com.lemonappdev.konsist.testdata.SampleType"),
         )

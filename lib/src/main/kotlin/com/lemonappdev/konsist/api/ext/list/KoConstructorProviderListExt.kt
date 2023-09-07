@@ -10,15 +10,15 @@ val <T : KoConstructorProvider> List<T>.constructors: List<KoConstructorDeclarat
     get() = flatMap { it.constructors }
 
 /**
- * List containing elements with constructor.
+ * List containing declarations with constructor.
  *
- * @return A list containing elements with the constructor.
+ * @return A list containing declarations with the constructor.
  */
 fun <T : KoConstructorProvider> List<T>.withConstructor(): List<T> = filterNot { it.numConstructors == 0 }
 
 /**
- * List containing elements without constructor.
+ * List containing declarations without constructor.
  *
- * @return A list containing elements without the constructor.
+ * @return A list containing declarations without the constructor.
  */
 fun <T : KoConstructorProvider> List<T>.withoutConstructor(): List<T> = filter { it.numConstructors == 0 }

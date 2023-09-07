@@ -17,6 +17,14 @@ interface KoImportProvider : KoBaseProvider {
     val numImports: Int
 
     /**
+     * Gets the number of imports that satisfies the specified predicate present in the declaration.
+     *
+     * @param predicate The predicate function to determine if an import satisfies a condition.
+     * @return The number of imports in the declaration.
+     */
+    fun countImports(predicate: (KoImportDeclaration) -> Boolean): Int
+
+    /**
      * Whether the declaration has imports.
      *
      * @param names the names of the imports to check.

@@ -48,12 +48,10 @@ internal class KoTypeDeclarationCore private constructor(
         containingFile
             .imports
             .map { it.name }
-            .firstOrNull { it.contains(sourceType) } ?: ""
+            .firstOrNull { it.contains(sourceType) } ?: name
     }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()

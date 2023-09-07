@@ -3,10 +3,10 @@ package com.lemonappdev.konsist.api.ext.list
 import com.lemonappdev.konsist.api.provider.KoDelegateProvider
 
 /**
- * List containing elements with delegate with given name.
+ * List containing declarations with delegate with given name.
  *
  * @param names The delegate names to include.
- * @return A list containing elements with the specified delegate name(s) (or any delegate if [names] is empty).
+ * @return A list containing declarations with the specified delegate name(s) (or any delegate if [names] is empty).
  */
 fun <T : KoDelegateProvider> List<T>.withDelegate(vararg names: String): List<T> = filter {
     when {
@@ -16,10 +16,10 @@ fun <T : KoDelegateProvider> List<T>.withDelegate(vararg names: String): List<T>
 }
 
 /**
- * List containing elements without delegate with given name.
+ * List containing declarations without delegate with given name.
  *
  * @param names The delegate names to exclude.
- * @return A list containing elements without the specified delegate name(s) (or none delegate if [names] is empty).
+ * @return A list containing declarations without the specified delegate name(s) (or none delegate if [names] is empty).
  */
 fun <T : KoDelegateProvider> List<T>.withoutDelegate(vararg names: String): List<T> = filter {
     when {

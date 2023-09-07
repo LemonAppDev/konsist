@@ -105,6 +105,117 @@ class KoParentDeclarationForKoNameProviderTest {
             .shouldBeEqualTo("SomeParentClass")
     }
 
+    @Test
+    fun `interface-with-parent-interface`() {
+        // given
+        val sut = getSnippetFile("interface-with-parent-interface")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut.name shouldBeEqualTo "SampleSuperInterface"
+    }
+
+    @Test
+    fun `interface-with-generic-parent-interface`() {
+        // given
+        val sut = getSnippetFile("interface-with-generic-parent-interface")
+            .interfaces()
+            .parents
+            .first()
+
+        // then
+        sut.name shouldBeEqualTo "SampleGenericSuperInterface"
+    }
+
+    @Test
+    fun `object-with-parent-class`() {
+        // given
+        val sut = getSnippetFile("object-with-parent-class")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.name shouldBeEqualTo "SampleSuperClass"
+    }
+
+    @Test
+    fun `object-with-generic-parent-class`() {
+        // given
+        val sut = getSnippetFile("object-with-generic-parent-class")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.name shouldBeEqualTo "SampleGenericSuperClass"
+    }
+
+    @Test
+    fun `object-with-parametrized-parent-class`() {
+        // given
+        val sut = getSnippetFile("object-with-parametrized-parent-class")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.name shouldBeEqualTo "SampleParametrizedSuperClass"
+    }
+
+    @Test
+    fun `object-with-parametrized-and-generic-parent-class`() {
+        // given
+        val sut = getSnippetFile("object-with-parametrized-and-generic-parent-class")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.name shouldBeEqualTo "SampleParametrizedSuperClass"
+    }
+
+    @Test
+    fun `object-with-parent-interface`() {
+        // given
+        val sut = getSnippetFile("object-with-parent-interface")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.name shouldBeEqualTo "SampleSuperInterface"
+    }
+
+    @Test
+    fun `object-with-generic-parent-interface`() {
+        // given
+        val sut = getSnippetFile("object-with-generic-parent-interface")
+            .objects()
+            .parents
+            .first()
+
+        // then
+        sut.name shouldBeEqualTo "SampleGenericSuperInterface"
+    }
+
+    @Test
+    fun `object-with-multiline-parent`() {
+        // given
+        val sut = getSnippetFile("object-with-multiline-parent")
+            .objects()
+            .first()
+            .parents
+            .first()
+
+        // then
+        sut
+            .name
+            .shouldBeEqualTo("SomeParentClass")
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/koparent/snippet/forkonameprovider/", fileName)
 }

@@ -25,6 +25,7 @@ class KoClassDeclarationForKoModifierProviderTest {
         assertSoftly(sut) {
             modifiers shouldBeEqualTo emptyList()
             numModifiers shouldBeEqualTo 0
+            countModifiers { it.type == "private" } shouldBeEqualTo 0
             hasModifiers() shouldBeEqualTo false
             hasModifiers(OPEN) shouldBeEqualTo false
             hasModifiers(OPEN, DATA) shouldBeEqualTo false
@@ -42,6 +43,7 @@ class KoClassDeclarationForKoModifierProviderTest {
         assertSoftly(sut) {
             hasModifiers() shouldBeEqualTo true
             numModifiers shouldBeEqualTo 2
+            countModifiers { it.type == "private" } shouldBeEqualTo 1
             hasModifiers(PRIVATE) shouldBeEqualTo true
             hasModifiers(OPEN) shouldBeEqualTo true
             hasModifiers(PROTECTED) shouldBeEqualTo false

@@ -16,7 +16,7 @@ class KoParameterDeclarationTest {
             ?.first()
 
         // then
-        sut.toString() shouldBeEqualTo sut?.locationWithText
+        sut.toString() shouldBeEqualTo "sampleParameter"
     }
 
     private fun getSnippetFile(fileName: String) =

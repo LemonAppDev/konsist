@@ -20,6 +20,9 @@ internal interface KoAnnotationProviderCore :
     override val numAnnotations: Int
         get() = annotations.size
 
+    override fun countAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Int =
+        annotations.count { predicate(it) }
+
     override fun hasAnnotations(vararg names: String): Boolean = when {
         names.isEmpty() -> annotations.isNotEmpty()
         else -> names.all {

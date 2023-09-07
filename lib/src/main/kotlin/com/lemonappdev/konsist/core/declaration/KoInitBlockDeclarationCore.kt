@@ -14,12 +14,9 @@ import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnonymousInitializer
-import org.jetbrains.kotlin.psi.KtClass
-import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtFunction
-import org.jetbrains.kotlin.psi.KtProperty
 
 internal class KoInitBlockDeclarationCore private constructor(
     private val ktAnonymousInitializer: KtAnonymousInitializer,
@@ -39,32 +36,15 @@ internal class KoInitBlockDeclarationCore private constructor(
 
     override val ktElement: KtElement by lazy { ktAnonymousInitializer }
 
-    private val localDeclarationsHelper: List<KoBaseDeclaration> by lazy {
-        val declarations = ktAnonymousInitializer
+    override val localDeclarations: List<KoBaseDeclaration> by lazy {
+        val psiElements = ktAnonymousInitializer
             .body
             ?.children
-            ?.filterIsInstance<KtDeclaration>()
-            ?: emptyList()
 
-        declarations
-            .mapNotNull {
-                if (it is KtClass && !it.isInterface()) {
-                    KoClassDeclarationCore.getInstance(it, this)
-                } else if (it is KtFunction) {
-                    KoFunctionDeclarationCore.getInstance(it, this)
-                } else if (it is KtProperty) {
-                    KoPropertyDeclarationCore.getInstance(it, this)
-                } else {
-                    null
-                }
-            }
+        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
 
-    override val localDeclarations: List<KoBaseDeclaration> by lazy { localDeclarationsHelper }
-
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = locationWithText
 
     internal companion object {
         private val cache: KoDeclarationCache<KoInitBlockDeclaration> = KoDeclarationCache()

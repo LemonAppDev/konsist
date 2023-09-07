@@ -1,3 +1,0 @@
-class SampleBaseClass: SampleClass()
-
-open class SampleClass
