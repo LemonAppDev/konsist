@@ -33,16 +33,13 @@ class ArchitectureSnippets {
                 module -> package name:
                 feature_meal_planner -> mealplanner
                 feature_caloric_calculator -> caloriccalculator
-                */
+                 */
                 val featurePackageName = it
                     .moduleName
                     .removePrefix("feature_")
                     .replace("_", "")
 
-                it.hasPackage("com.myapp.${featurePackageName}..")
+                it.hasPackage("com.myapp.$featurePackageName..")
             }
     }
 }
-
-
-
