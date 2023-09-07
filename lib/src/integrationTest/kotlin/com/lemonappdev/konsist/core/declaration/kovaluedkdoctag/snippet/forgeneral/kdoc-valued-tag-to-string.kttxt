@@ -1,0 +1,7 @@
+/**
+ * This is a sample kdoc.
+ *
+ * @param sampleParameter sample text
+ */
+fun sampleFunction(sampleParameter: Int){
+}
