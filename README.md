@@ -10,7 +10,26 @@ standardization of the Kotlin codebase. It enforces coding conventions and proje
 tests are written in Kotlin and can be easily integrated with popular testing frameworks such as 
 [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/).
 
-See [Konsist documentation](http://docs.konsist.lemonappdev.com/) for more information.
+## Dependencies
+
+```kotlin
+// Gradle Kotlin:
+testImplementation("com.lemonappdev:konsist:0.11.0")
+
+// Gradle Groovy:
+testImplementation "com.lemonappdev:konsist:0.11.0"
+
+// Maven:
+<dependency>
+    <groupId>com.lemonappdev</groupId>
+    <artifactId>konsist</artifactId>
+    <version>0.11.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+Check the [Konsist documentation](https://docs.konsist.lemonappdev.com/) to learn more about Konsist and take a 
+look at [getting started guide](https://docs.konsist.lemonappdev.com/getting-started/gettingstarted).
 
 ## Examples
 
