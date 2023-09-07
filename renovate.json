@@ -4,12 +4,6 @@
     "config:base"
   ],
   "baseBranches": ["develop"],
-  "branches": [
-    {
-      "branchName": "main",
-      "enabled": false
-    }
-  ],
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
