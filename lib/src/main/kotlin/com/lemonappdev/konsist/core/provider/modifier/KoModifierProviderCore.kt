@@ -40,6 +40,9 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
     override val numModifiers: Int
         get() = modifiers.size
 
+    override fun countModifiers(predicate: (KoModifier) -> Boolean): Int =
+        modifiers.count { predicate(it) }
+
     override fun hasModifiers(vararg koModifiers: KoModifier): Boolean = when {
         koModifiers.isEmpty() -> modifiers.isNotEmpty()
         else -> modifiers.containsAll(koModifiers.toList())

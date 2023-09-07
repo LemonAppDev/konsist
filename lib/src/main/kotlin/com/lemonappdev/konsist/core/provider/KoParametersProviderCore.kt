@@ -20,5 +20,8 @@ internal interface KoParametersProviderCore :
     override val numParameters: Int
         get() = parameters.size
 
+    override fun countParameters(predicate: (KoParameterDeclaration) -> Boolean): Int =
+        parameters.count { predicate(it) }
+
     override fun hasParameterNamed(name: String): Boolean = parameters.any { it.name == name }
 }

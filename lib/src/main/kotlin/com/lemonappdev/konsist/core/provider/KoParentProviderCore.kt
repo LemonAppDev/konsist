@@ -23,6 +23,9 @@ internal interface KoParentProviderCore :
     override val numParents: Int
         get() = parents.size
 
+    override fun countParents(predicate: (KoParentDeclaration) -> Boolean): Int =
+        parents.count { predicate(it) }
+
     override fun hasParents(vararg names: String): Boolean = when {
         names.isEmpty() -> parents.isNotEmpty()
         else -> names.all {

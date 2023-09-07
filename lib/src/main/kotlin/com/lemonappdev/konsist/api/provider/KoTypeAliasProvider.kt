@@ -18,6 +18,14 @@ interface KoTypeAliasProvider : KoBaseProvider {
     val numTypeAliases: Int
 
     /**
+     * Gets the number of type aliases that satisfies the specified predicate present in the declaration.
+     *
+     * @param predicate The predicate function to determine if a type alias satisfies a condition.
+     * @return The number of type aliases in the declaration.
+     */
+    fun countTypeAliases(predicate: (KoTypeAliasDeclaration) -> Boolean): Int
+
+    /**
      * Whether the declaration has type aliases.
      *
      * @param names the names of the type aliases to check.

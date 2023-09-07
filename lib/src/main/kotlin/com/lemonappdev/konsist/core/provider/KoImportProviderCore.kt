@@ -27,6 +27,9 @@ internal interface KoImportProviderCore : KoImportProvider, KoContainingDeclarat
     override val numImports: Int
         get() = imports.size
 
+    override fun countImports(predicate: (KoImportDeclaration) -> Boolean): Int =
+        imports.count { predicate(it) }
+
     override fun hasImports(vararg names: String): Boolean = when {
         names.isEmpty() -> imports.isNotEmpty()
         else -> names.all {

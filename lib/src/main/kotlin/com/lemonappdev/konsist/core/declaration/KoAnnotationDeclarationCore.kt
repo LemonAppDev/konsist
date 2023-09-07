@@ -39,9 +39,7 @@ internal class KoAnnotationDeclarationCore private constructor(
             ?.name ?: name
     }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoAnnotationDeclaration> = KoDeclarationCache()

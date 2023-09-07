@@ -18,6 +18,7 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
         assertSoftly(sut) {
             secondaryConstructors.isEmpty() shouldBeEqualTo true
             numSecondaryConstructors shouldBeEqualTo 0
+            countSecondaryConstructors { it.hasPublicModifier } shouldBeEqualTo 0
             hasSecondaryConstructors shouldBeEqualTo false
         }
     }
@@ -33,6 +34,8 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
         assertSoftly(sut) {
             secondaryConstructors.isNotEmpty() shouldBeEqualTo true
             numSecondaryConstructors shouldBeEqualTo 1
+            countSecondaryConstructors { it.hasPrivateModifier } shouldBeEqualTo 1
+            countSecondaryConstructors { it.hasPublicModifier } shouldBeEqualTo 0
             hasSecondaryConstructors shouldBeEqualTo true
         }
     }
@@ -48,6 +51,8 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
         assertSoftly(sut) {
             secondaryConstructors shouldHaveSize 1
             numSecondaryConstructors shouldBeEqualTo 1
+            countSecondaryConstructors { it.hasPublicOrDefaultModifier } shouldBeEqualTo 1
+            countSecondaryConstructors { it.hasPublicModifier } shouldBeEqualTo 0
             hasSecondaryConstructors shouldBeEqualTo true
         }
     }
