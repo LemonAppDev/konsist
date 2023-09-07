@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoConstructorDefinedProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
@@ -62,6 +63,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KoPropertyDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
+    KoConstructorDefinedProviderCore,
     KoContainingFileProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoDelegateProviderCore,
@@ -136,8 +138,6 @@ internal class KoPropertyDeclarationCore private constructor(
             super<KoKDocProviderCore>.kDoc
         }
     }
-
-    override val isConstructorDefined: Boolean by lazy { ktCallableDeclaration is KtParameter }
 
     override fun toString(): String = name
 

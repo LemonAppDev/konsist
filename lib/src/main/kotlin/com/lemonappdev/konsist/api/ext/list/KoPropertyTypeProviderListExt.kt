@@ -11,10 +11,10 @@ val <T : KoPropertyTypeProvider> List<T>.types: List<KoTypeDeclaration>
     get() = mapNotNull { it.type }
 
 /**
- * List containing elements with type.
+ * List containing declarations with type.
  *
  * @param names The type name(s) to include.
- * @return A list containing elements with the specified type (or any type if [names] is empty).
+ * @return A list containing declarations with the specified type (or any type if [names] is empty).
  */
 fun <T : KoPropertyTypeProvider> List<T>.withType(vararg names: String): List<T> = filter {
     when {
@@ -24,10 +24,10 @@ fun <T : KoPropertyTypeProvider> List<T>.withType(vararg names: String): List<T>
 }
 
 /**
- * List containing elements without type.
+ * List containing declarations without type.
  *
  * @param names The type name(s) to exclude.
- * @return A list containing elements without specified type (or none type if [names] is empty).
+ * @return A list containing declarations without specified type (or none type if [names] is empty).
  */
 fun <T : KoPropertyTypeProvider> List<T>.withoutType(vararg names: String): List<T> = filter {
     when {
@@ -37,11 +37,11 @@ fun <T : KoPropertyTypeProvider> List<T>.withoutType(vararg names: String): List
 }
 
 /**
- * List containing elements with type of.
+ * List containing declarations with type of.
  *
  * @param kClass The Kotlin class representing the type to include.
  * @param kClasses The Kotlin class(es) representing the type(s) to include.
- * @return A list containing elements with the type of the specified Kotlin class(es).
+ * @return A list containing declarations with the type of the specified Kotlin class(es).
  */
 fun <T : KoPropertyTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
@@ -54,11 +54,11 @@ fun <T : KoPropertyTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kC
     }
 
 /**
- * List containing elements without type of.
+ * List containing declarations without type of.
  *
  * @param kClass The Kotlin class representing the type to exclude.
  * @param kClasses The Kotlin class(es) representing the type(s) to exclude.
- * @return A list containing elements without type of the specified Kotlin class(es).
+ * @return A list containing declarations without type of the specified Kotlin class(es).
  */
 fun <T : KoPropertyTypeProvider> List<T>.withoutTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {

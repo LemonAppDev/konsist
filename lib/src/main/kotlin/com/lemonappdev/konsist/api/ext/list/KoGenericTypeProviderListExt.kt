@@ -3,15 +3,15 @@ package com.lemonappdev.konsist.api.ext.list
 import com.lemonappdev.konsist.api.provider.KoGenericTypeProvider
 
 /**
- * List containing elements with generic type.
+ * List containing declarations with generic type.
  *
- * @return A list containing elements with the generic types.
+ * @return A list containing declarations with the generic types.
  */
 fun <T : KoGenericTypeProvider> List<T>.withGenericType(): List<T> = filter { it.isGenericType }
 
 /**
- * List containing elements without generic type.
+ * List containing declarations without generic type.
  *
- * @return A list containing elements without the generic types.
+ * @return A list containing declarations without the generic types.
  */
 fun <T : KoGenericTypeProvider> List<T>.withoutGenericType(): List<T> = filterNot { it.isGenericType }
