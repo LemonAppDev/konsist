@@ -22,4 +22,7 @@ internal interface KoSecondaryConstructorsProviderCore :
 
     override val hasSecondaryConstructors: Boolean
         get() = ktClass.hasSecondaryConstructors()
+
+    override fun countSecondaryConstructors(predicate: (KoSecondaryConstructorDeclaration) -> Boolean): Int =
+        secondaryConstructors.count { predicate(it) }
 }

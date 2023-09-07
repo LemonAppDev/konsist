@@ -31,4 +31,7 @@ internal interface KoInitBlockProviderCore :
 
     override val hasInitBlocks: Boolean
         get() = initBlocks.isNotEmpty()
+
+    override fun countInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): Int =
+        initBlocks.count { predicate(it) }
 }

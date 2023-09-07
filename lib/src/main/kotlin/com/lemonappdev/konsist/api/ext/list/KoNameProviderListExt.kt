@@ -3,25 +3,29 @@ package com.lemonappdev.konsist.api.ext.list
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 
 /**
- * List containing declarations with any of the specified names.
+ * List containing declarations with name.
  *
- * @param name The name to include.
- * @param names The names to include.
- * @return A list containing declarations with the specified names.
+ * @param names The name(s) to include.
+ * @return A list containing declarations with the specified names (or any name if [names] is empty).
  */
-fun <T : KoNameProvider> List<T>.withName(name: String, vararg names: String): List<T> = filter {
-    it.name == name || names.any { name -> it.name == name }
+fun <T : KoNameProvider> List<T>.withName(vararg names: String): List<T> = filter {
+    when {
+        names.isEmpty() -> it.name != ""
+        else -> names.any { name -> it.name == name }
+    }
 }
 
 /**
- * List containing declarations without any of the specified names.
+ * List containing declarations without name.
  *
- * @param name The name to exclude.
- * @param names The names to exclude.
- * @return A list containing declarations without the specified names.
+ * @param names The name(s) to exclude.
+ * @return A list containing declarations without the specified names (or none name if [names] is empty).
  */
-fun <T : KoNameProvider> List<T>.withoutName(name: String, vararg names: String): List<T> = filter {
-    it.name != name && names.none { name -> it.name == name }
+fun <T : KoNameProvider> List<T>.withoutName(vararg names: String): List<T> = filter {
+    when {
+        names.isEmpty() -> it.name == ""
+        else -> names.none { name -> it.name == name }
+    }
 }
 
 /**
