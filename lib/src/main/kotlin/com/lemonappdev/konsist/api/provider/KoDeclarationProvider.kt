@@ -14,8 +14,8 @@ interface KoDeclarationProvider : KoBaseProvider {
      * @return a list of [KoBaseDeclaration] representing the declarations in the declaration.
      */
     fun declarations(
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
     ): List<KoBaseDeclaration>
 
     /**

@@ -17,7 +17,7 @@ class KoFileDeclarationForKoInterfaceProviderTest {
             .first()
 
         // then
-        sut.interfaces(includeNested = true) shouldBeEqualTo emptyList()
+        sut.interfaces() shouldBeEqualTo emptyList()
     }
 
     @Test

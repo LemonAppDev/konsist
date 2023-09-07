@@ -92,7 +92,7 @@ internal object KoDeclarationProviderCoreUtil {
         var result = if (includeNested) {
             declarations.flatMap {
                 when (it) {
-                    is KoDeclarationProvider -> listOf(it) + it.declarations(includeNested = true)
+                    is KoDeclarationProvider -> listOf(it) + it.declarations(includeNested = true, includeLocal = false)
                     else -> listOf(it)
                 }
             }
@@ -129,7 +129,7 @@ internal object KoDeclarationProviderCoreUtil {
     fun nestedDeclarations(koNamedDeclarations: List<KoBaseDeclaration>): List<KoBaseDeclaration> {
         return koNamedDeclarations.flatMap {
             when (it) {
-                is KoDeclarationProvider -> it.declarations(includeNested = true)
+                is KoDeclarationProvider -> it.declarations(includeNested = true, includeLocal = false)
                 else -> emptyList()
             }
         }
