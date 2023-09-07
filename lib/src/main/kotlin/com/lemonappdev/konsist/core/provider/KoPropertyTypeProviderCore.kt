@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.core.util.ReceiverUtil
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
+import kotlin.reflect.KClass
 
 internal interface KoPropertyTypeProviderCore :
     KoPropertyTypeProvider,
@@ -19,8 +20,14 @@ internal interface KoPropertyTypeProviderCore :
         .children
         .filterIsInstance<KtTypeReference>()
 
-    override fun hasType(name: String?): Boolean = when (name) {
-        null -> this.type != null
-        else -> this.type?.name == name
-    }
+    @Deprecated("Will be removed in v1.0.0", ReplaceWith("KoHasTestClassProvider"))
+    override fun hasType(name: String): Boolean = this.type?.name == name
+
+    override fun hasType(predicate: ((KoTypeDeclaration) -> Boolean)?): Boolean =
+        when (predicate) {
+            null -> type != null
+            else -> type?.let { predicate(it) } ?: false
+        }
+
+    override fun hasTypeOf(kClass: KClass<*>): Boolean = kClass.simpleName == type?.name
 }
