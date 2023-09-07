@@ -52,6 +52,35 @@ class KoPropertyTypeProviderListExtTest {
     }
 
     @Test
+    fun `withType{} returns declaration which satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val type1: KoTypeDeclaration = mockk {
+            every { name } returns name1
+        }
+        val type2: KoTypeDeclaration = mockk {
+            every { name } returns name2
+        }
+        val declaration1: KoPropertyTypeProvider = mockk {
+            every { type } returns type1
+        }
+        val declaration2: KoPropertyTypeProvider = mockk {
+            every { type } returns type2
+        }
+        val declaration3: KoPropertyTypeProvider = mockk {
+            every { type } returns null
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withType { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withType(name) returns declarations with one of given types`() {
         // given
         val typeName1 = "SampleType1"
@@ -93,6 +122,35 @@ class KoPropertyTypeProviderListExtTest {
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutType){} returns declarations which not satisfy predicate`() {
+        // given
+        val name1 = "name1"
+        val name2 = "name2"
+        val type1: KoTypeDeclaration = mockk {
+            every { name } returns name1
+        }
+        val type2: KoTypeDeclaration = mockk {
+            every { name } returns name2
+        }
+        val declaration1: KoPropertyTypeProvider = mockk {
+            every { type } returns type1
+        }
+        val declaration2: KoPropertyTypeProvider = mockk {
+            every { type } returns type2
+        }
+        val declaration3: KoPropertyTypeProvider = mockk {
+            every { type } returns null
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutType { it.name == name1 }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2, declaration3)
     }
 
     @Test
