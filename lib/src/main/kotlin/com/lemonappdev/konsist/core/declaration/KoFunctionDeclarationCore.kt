@@ -47,7 +47,6 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-@Suppress("detekt.TooManyFunctions")
 internal class KoFunctionDeclarationCore private constructor(
     override val ktFunction: KtFunction,
     override val containingDeclaration: KoContainingDeclarationProvider,
@@ -126,9 +125,7 @@ internal class KoFunctionDeclarationCore private constructor(
         return super<KoResideInPackageProviderCore>.resideOutsidePackage(name)
     }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
 

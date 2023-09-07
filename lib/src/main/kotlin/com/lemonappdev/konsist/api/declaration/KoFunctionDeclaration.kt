@@ -75,11 +75,4 @@ interface KoFunctionDeclaration :
     KoFinalModifierProvider,
     KoAbstractModifierProvider,
     KoActualModifierProvider,
-    KoExpectModifierProvider {
-    /**
-     * String representing the function.
-     *
-     * @return a string representing the function.
-     */
-    override fun toString(): String
-}
+    KoExpectModifierProvider

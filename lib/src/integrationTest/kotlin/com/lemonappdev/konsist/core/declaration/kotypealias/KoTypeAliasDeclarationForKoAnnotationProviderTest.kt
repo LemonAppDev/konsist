@@ -20,6 +20,7 @@ class KoTypeAliasDeclarationForKoAnnotationProviderTest {
         assertSoftly(sut) {
             annotations shouldBeEqualTo emptyList()
             numAnnotations shouldBeEqualTo 0
+            countAnnotations { it.name == "NonExistingAnnotation" } shouldBeEqualTo 0
             hasAnnotations() shouldBeEqualTo false
         }
     }
@@ -34,6 +35,8 @@ class KoTypeAliasDeclarationForKoAnnotationProviderTest {
         // then
         assertSoftly(sut) {
             numAnnotations shouldBeEqualTo 1
+            countAnnotations { it.name == "SampleAnnotation" } shouldBeEqualTo 1
+            countAnnotations { it.name == "NonExistingAnnotation" } shouldBeEqualTo 0
             hasAnnotations("SampleAnnotation") shouldBeEqualTo true
             hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
             hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
@@ -53,6 +56,8 @@ class KoTypeAliasDeclarationForKoAnnotationProviderTest {
         // then
         assertSoftly(sut) {
             numAnnotations shouldBeEqualTo 2
+            countAnnotations { it.hasNameStartingWith("Sample") } shouldBeEqualTo 2
+            countAnnotations { it.name == "SampleAnnotation1" } shouldBeEqualTo 1
             hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
             hasAnnotations("SampleAnnotation2") shouldBeEqualTo true
             hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false

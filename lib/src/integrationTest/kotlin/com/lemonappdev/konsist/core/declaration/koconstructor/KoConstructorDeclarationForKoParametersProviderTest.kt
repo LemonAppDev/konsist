@@ -19,6 +19,7 @@ class KoConstructorDeclarationForKoParametersProviderTest {
         assertSoftly(sut) {
             parameters shouldBeEqualTo emptyList()
             numParameters shouldBeEqualTo 0
+            countParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo 0
         }
     }
 
@@ -35,6 +36,7 @@ class KoConstructorDeclarationForKoParametersProviderTest {
         assertSoftly(sut) {
             parameters.size shouldBeEqualTo 1
             numParameters shouldBeEqualTo 1
+            countParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo 1
             parameters.first().name shouldBeEqualTo "sampleParameter"
         }
     }

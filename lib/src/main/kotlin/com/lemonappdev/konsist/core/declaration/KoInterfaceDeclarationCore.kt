@@ -109,9 +109,7 @@ internal class KoInterfaceDeclarationCore private constructor(
         return super<KoResideInPackageProviderCore>.resideOutsidePackage(name)
     }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoInterfaceDeclaration> = KoDeclarationCache()

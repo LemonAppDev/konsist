@@ -79,11 +79,4 @@ interface KoPropertyDeclaration :
      * ```
      */
     val isConstructorDefined: Boolean
-
-    /**
-     * String representing the property.
-     *
-     * @return a string representing the property.
-     */
-    override fun toString(): String
 }
