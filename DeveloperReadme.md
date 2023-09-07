@@ -28,7 +28,7 @@
 7. Create a [new GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
     1. set `vx.y.z` as tag version
     2. set `vx.y.z` as release title
-8. Update Konsist version in the Konsist [Quick Starte](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) page 
+8. Update Konsist version in the Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) page 
 9. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
 10. Merge above PR
 11. Notify community
