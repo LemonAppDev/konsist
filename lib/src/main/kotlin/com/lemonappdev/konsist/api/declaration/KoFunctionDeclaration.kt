@@ -17,6 +17,7 @@ import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
@@ -58,6 +59,7 @@ interface KoFunctionDeclaration :
     KoContainingDeclarationProvider,
     KoPathProvider,
     KoReceiverTypeProvider,
+    KoResideInPackageProvider,
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTopLevelProvider,

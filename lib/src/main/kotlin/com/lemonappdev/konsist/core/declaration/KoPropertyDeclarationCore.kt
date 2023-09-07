@@ -21,6 +21,7 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
@@ -77,6 +78,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
     KoReceiverTypeProviderCore,
+    KoResideInPackageProviderCore,
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
@@ -137,6 +139,24 @@ internal class KoPropertyDeclarationCore private constructor(
         } else {
             super<KoKDocProviderCore>.kDoc
         }
+    }
+
+    /*
+    1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
+    (the second one is deprecated) - with the same methods, so we must override this and choose which implementation
+    this method should have. After removing deprecated provider in v1.0.0 it will be unnecessary.
+     */
+    override fun resideInPackage(name: String): Boolean {
+        return super<KoResideInPackageProviderCore>.resideInPackage(name)
+    }
+
+    /*
+    1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
+    (the second one is deprecated) - with the same methods, so we must override this and choose which implementation
+    this method should have. After removing deprecated provider in v1.0.0 it will be unnecessary.
+     */
+    override fun resideOutsidePackage(name: String): Boolean {
+        return super<KoResideInPackageProviderCore>.resideOutsidePackage(name)
     }
 
     override fun toString(): String = name
