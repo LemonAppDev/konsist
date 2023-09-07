@@ -140,14 +140,14 @@ class KoInterfaceDeclarationForKoDeclarationProviderTest {
 
         // then
         assertSoftly(sut) {
-            numDeclarations() shouldBeEqualTo 2
-            numDeclarations(includeNested = true) shouldBeEqualTo 3
-            numDeclarations(includeLocal = true) shouldBeEqualTo 3
-            numDeclarations(includeNested = true, includeLocal = true) shouldBeEqualTo 4
-            countDeclarations {
+            numDeclarations(includeNested = false, includeLocal = false) shouldBeEqualTo 2
+            numDeclarations(includeLocal = false) shouldBeEqualTo 3
+            numDeclarations(includeNested = false) shouldBeEqualTo 3
+            numDeclarations() shouldBeEqualTo 4
+            countDeclarations(includeNested = false, includeLocal = false) {
                 (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
             } shouldBeEqualTo 2
-            countDeclarations(includeNested = true, includeLocal = true) {
+            countDeclarations {
                 (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
             } shouldBeEqualTo 3
             countDeclarations {
