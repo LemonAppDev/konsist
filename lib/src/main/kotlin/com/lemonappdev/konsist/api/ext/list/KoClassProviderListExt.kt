@@ -11,6 +11,6 @@ import com.lemonappdev.konsist.api.provider.KoClassProvider
  * @return A list containing class declarations.
  */
 fun <T : KoClassProvider> List<T>.classes(
-    includeNested: Boolean = false,
-    includeLocal: Boolean = false,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
 ): List<KoClassDeclaration> = flatMap { it.classes(includeNested, includeLocal) }
