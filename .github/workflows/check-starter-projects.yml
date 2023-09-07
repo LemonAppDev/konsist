@@ -4,13 +4,15 @@ on:
   schedule:
     # Runs every day At 00:00 UTC
     - cron:  '0 0 * * *'
-  push:
-    branches:
-      - 'release-*'
+#  push:
+#    branches:
+#      - 'release-*'
+#  pull_request:
+#    types: [ opened, synchronize ]
+#    branches:
+#      - 'release-*'
   pull_request:
     types: [ opened, synchronize ]
-    branches:
-      - 'release-*'
 
 jobs:
   konsist-starter-android-gradle-groovy-junit-4:
@@ -43,7 +45,7 @@ jobs:
         run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/konsistTest/build.gradle
 
       - name: Run Konsist Test
-        run: cd samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/ && ./gradlew konsistTest:test
+        run: cd samples/starter-projects/konsist-starter-android-gradle-groovy-junit-4/ && ./gradlew konsist_test:test
 
   konsist-starter-android-gradle-groovy-junit-5:
     name: Konsist Starter Android Gradle Groovy Junit 5
@@ -75,7 +77,7 @@ jobs:
         run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-junit-5/konsistTest/build.gradle
 
       - name: Run Konsist Test
-        run: cd samples/starter-projects/konsist-starter-android-gradle-groovy-junit-5/ && ./gradlew konsistTest:test
+        run: cd samples/starter-projects/konsist-starter-android-gradle-groovy-junit-5/ && ./gradlew konsist_test:test
 
   konsist-starter-android-gradle-kotlin-junit-4:
     name: Konsist Starter Android Gradle Kotlin Junit 4
@@ -107,7 +109,7 @@ jobs:
         run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-4/konsistTest/build.gradle.kts
 
       - name: Run Konsist Test
-        run: cd samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-4/ && ./gradlew konsistTest:test
+        run: cd samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-4/ && ./gradlew konsist_test:test
 
   konsist-starter-android-gradle-kotlin-junit-5:
     name: Konsist Starter Android Gradle Kotlin Junit 5
@@ -139,7 +141,7 @@ jobs:
         run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-5/konsistTest/build.gradle.kts
 
       - name: Run Konsist Test
-        run: cd samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-5/ && ./gradlew konsistTest:test
+        run: cd samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-5/ && ./gradlew konsist_test:test
 
   konsist-starter-spring-gradle-kotlin-junit-5:
     name: Konsist Starter Spring Gradle Groovy Junit 5
