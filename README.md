@@ -93,10 +93,7 @@ fun `clean architecture layers have correct dependencies`() {
 }
 ```
 
-## Getting Started
-
-See [Konsist Getting Started](https://docs.konsist.lemonappdev.com/getting-started/gettingstarted) for quick start page
-guide and [Snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) page for more examples.
+Check out our [snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) page for a feast of examples!
 
 ### Articles
 
