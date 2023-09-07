@@ -5,7 +5,6 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
-    implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.compiler)
 
     testImplementation(libs.junitJupiterEngine)

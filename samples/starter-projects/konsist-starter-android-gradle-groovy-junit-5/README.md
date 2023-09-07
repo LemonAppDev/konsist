@@ -1,8 +1,16 @@
 # Konsist Sample
 
-This a Konsist sample is configured using Spring Gradle-Groovy, and Junit 4. Other samples are located [here](..). 
+This a Konsist sample is configured using [Gradle](https://docs.gradle.org/current/userguide/userguide.html),
+[Groovy](https://groovy-lang.org/) (build script language),
+and [Junit 5](https://junit.org/junit4/). 
 
-The [SampleKonsistTest.kt](konsistTest/src/test/java/com/sample/SampleKonsistTest.kt) class is placed in `konsistTest`
+Other samples are located [here](..).
+
+The [SampleKonsistTest.kt](konsist_test/src/test/java/com/sample/SampleKonsistTest.kt) class containing Konsist Test is placed in `konsistTest`
 module.
 
-To run test use IDE UI or run `./gradlew konsistTest:test` (konsist tests) or `./gradlew test` (all tests) command.
+To run tests use IDE UI or run gradle commands:
+- `./gradlew konsist_test:test` - run tests in `konsist_test` module
+- `./gradlew test  -x konsist_test:test` - all tests except tests in `konsist_test` module
+
+See [Isolate Konsist tests](https://docs.konsist.lemonappdev.com/advanced/isolate-konsist-tests).

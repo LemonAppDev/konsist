@@ -18,6 +18,14 @@ interface KoAnnotationProvider : KoBaseProvider {
     val numAnnotations: Int
 
     /**
+     * Gets the number of annotations that satisfies the specified predicate present in the declaration.
+     *
+     * @param predicate The predicate function to determine if an annotation satisfies a condition.
+     * @return The number of annotations in the declaration.
+     */
+    fun countAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Int
+
+    /**
      * Whether the declaration has annotations.
      *
      * @param names the annotation names to check. It can be either a simple name or a fully qualified name.

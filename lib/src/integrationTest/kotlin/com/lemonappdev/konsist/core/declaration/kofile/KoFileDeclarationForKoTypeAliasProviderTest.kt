@@ -17,6 +17,7 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
         assertSoftly(sut) {
             typeAliases shouldBeEqualTo emptyList()
             numTypeAliases shouldBeEqualTo 0
+            countTypeAliases { it.hasPrivateModifier } shouldBeEqualTo 0
             hasTypeAliases() shouldBeEqualTo false
             hasTypeAliases("SampleTypeAlias") shouldBeEqualTo false
         }
@@ -46,6 +47,8 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
         // then
         assertSoftly(sut) {
             numTypeAliases shouldBeEqualTo 2
+            countTypeAliases { it.hasNameStartingWith("Sample") } shouldBeEqualTo 2
+            countTypeAliases { it.name == "SampleTypeAlias1" } shouldBeEqualTo 1
             hasTypeAliases() shouldBeEqualTo true
             hasTypeAliases("SampleTypeAlias1") shouldBeEqualTo true
             hasTypeAliases("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo true

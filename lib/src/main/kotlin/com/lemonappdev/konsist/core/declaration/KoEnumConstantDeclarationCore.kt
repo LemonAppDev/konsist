@@ -21,13 +21,10 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
-import org.jetbrains.kotlin.psi.KtClass
-import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtEnumEntry
-import org.jetbrains.kotlin.psi.KtFunction
-import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoEnumConstantDeclarationCore private constructor(
@@ -58,32 +55,15 @@ internal class KoEnumConstantDeclarationCore private constructor(
 
     override val ktElement: KtElement by lazy { ktEnumEntry }
 
-    private val localDeclarationsHelper: List<KoBaseDeclaration> by lazy {
-        val declarations = ktEnumEntry
+    override val localDeclarations: List<KoBaseDeclaration> by lazy {
+        val psiElements = ktEnumEntry
             .body
             ?.children
-            ?.filterIsInstance<KtDeclaration>()
-            ?: emptyList()
 
-        declarations
-            .mapNotNull {
-                if (it is KtClass && !it.isInterface()) {
-                    KoClassDeclarationCore.getInstance(it, this)
-                } else if (it is KtFunction) {
-                    KoFunctionDeclarationCore.getInstance(it, this)
-                } else if (it is KtProperty) {
-                    KoPropertyDeclarationCore.getInstance(it, this)
-                } else {
-                    null
-                }
-            }
+        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
 
-    override val localDeclarations: List<KoBaseDeclaration> by lazy { localDeclarationsHelper }
-
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoEnumConstantDeclaration> = KoDeclarationCache()

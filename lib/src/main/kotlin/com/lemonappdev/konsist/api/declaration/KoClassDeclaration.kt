@@ -91,11 +91,4 @@ interface KoClassDeclaration :
     KoExpectModifierProvider,
     KoAbstractModifierProvider,
     KoOpenModifierProvider,
-    KoFinalModifierProvider {
-    /**
-     * String representing the class.
-     *
-     * @return a string representing the class.
-     */
-    override fun toString(): String
-}
+    KoFinalModifierProvider

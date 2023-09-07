@@ -11,10 +11,10 @@ val <T : KoReturnTypeProvider> List<T>.returnTypes: List<KoTypeDeclaration>
     get() = mapNotNull { it.returnType }
 
 /**
- * List containing elements with return type.
+ * List containing declarations with return type.
  *
  * @param names The return type name(s) to include.
- * @return A list containing elements with the specified return type(s) (or any return type if [names] is empty).
+ * @return A list containing declarations with the specified return type(s) (or any return type if [names] is empty).
  */
 fun <T : KoReturnTypeProvider> List<T>.withReturnType(vararg names: String): List<T> = filter {
     when {
@@ -24,10 +24,10 @@ fun <T : KoReturnTypeProvider> List<T>.withReturnType(vararg names: String): Lis
 }
 
 /**
- * List containing elements without return type.
+ * List containing declarations without return type.
  *
  * @param names The return type name(s) to exclude.
- * @return A list containing elements without specified return type(s) (or none return type if [names] is empty).
+ * @return A list containing declarations without specified return type(s) (or none return type if [names] is empty).
  */
 fun <T : KoReturnTypeProvider> List<T>.withoutReturnType(vararg names: String): List<T> = filter {
     when {
@@ -37,11 +37,11 @@ fun <T : KoReturnTypeProvider> List<T>.withoutReturnType(vararg names: String): 
 }
 
 /**
- * List containing elements with return type.
+ * List containing declarations with return type.
  *
  * @param kClass The Kotlin class representing the return type to include.
  * @param kClasses The Kotlin class(es) representing the return type(s) to include.
- * @return A list containing elements with the return type of the specified Kotlin class(es).
+ * @return A list containing declarations with the return type of the specified Kotlin class(es).
  */
 fun <T : KoReturnTypeProvider> List<T>.withReturnTypeOf(
     kClass: KClass<*>,
@@ -56,11 +56,11 @@ fun <T : KoReturnTypeProvider> List<T>.withReturnTypeOf(
 }
 
 /**
- * List containing elements without return type.
+ * List containing declarations without return type.
  *
  * @param kClass The Kotlin class representing the return type to exclude.
  * @param kClasses The Kotlin class(es) representing the return type(s) to exclude.
- * @return A list containing elements without return type of the specified Kotlin class(es).
+ * @return A list containing declarations without return type of the specified Kotlin class(es).
  */
 fun <T : KoReturnTypeProvider> List<T>.withoutReturnTypeOf(
     kClass: KClass<*>,

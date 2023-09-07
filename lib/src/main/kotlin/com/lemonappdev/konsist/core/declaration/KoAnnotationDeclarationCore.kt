@@ -36,12 +36,10 @@ internal class KoAnnotationDeclarationCore private constructor(
         containingFile
             .imports
             .firstOrNull { it.text.endsWith(".$name") }
-            ?.name ?: ""
+            ?.name ?: name
     }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoAnnotationDeclaration> = KoDeclarationCache()

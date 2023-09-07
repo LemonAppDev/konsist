@@ -37,11 +37,4 @@ interface KoTypeAliasDeclaration :
     KoTextProvider,
     KoTypeProvider,
     KoVisibilityModifierProvider,
-    KoActualModifierProvider {
-    /**
-     * String representing the type alias.
-     *
-     * @return a string representing the type alias.
-     */
-    override fun toString(): String
-}
+    KoActualModifierProvider

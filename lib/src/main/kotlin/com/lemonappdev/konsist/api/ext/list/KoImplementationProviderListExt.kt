@@ -3,15 +3,15 @@ package com.lemonappdev.konsist.api.ext.list
 import com.lemonappdev.konsist.api.provider.KoImplementationProvider
 
 /**
- * List containing elements that have implementation.
+ * List containing declarations that have implementation.
  *
- * @return A list containing elements with the implementation.
+ * @return A list containing declarations with the implementation.
  */
 fun <T : KoImplementationProvider> List<T>.withImplementation(): List<T> = filter { it.hasImplementation }
 
 /**
- * List containing elements without implementation.
+ * List containing declarations without implementation.
  *
- * @return A list containing elements without the implementation.
+ * @return A list containing declarations without the implementation.
  */
 fun <T : KoImplementationProvider> List<T>.withoutImplementation(): List<T> = filterNot { it.hasImplementation }

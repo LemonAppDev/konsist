@@ -13,7 +13,7 @@ class KoObjectDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo sut.locationWithText
+        sut.toString() shouldBeEqualTo "SampleObject"
     }
 
     private fun getSnippetFile(fileName: String) =
