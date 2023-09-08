@@ -24,4 +24,22 @@ class ArchitectureSnippets {
             .files
             .assert { it.packagee?.fullyQualifiedName?.startsWith(it.moduleName) }
     }
+
+    fun `files reside in package that is derived from module name`() {
+        Konsist.scopeFromProduction()
+            .files
+            .assert {
+                /*
+                module -> package name:
+                feature_meal_planner -> mealplanner
+                feature_caloric_calculator -> caloriccalculator
+                 */
+                val featurePackageName = it
+                    .moduleName
+                    .removePrefix("feature_")
+                    .replace("_", "")
+
+                it.hasPackage("com.myapp.$featurePackageName..")
+            }
+    }
 }
