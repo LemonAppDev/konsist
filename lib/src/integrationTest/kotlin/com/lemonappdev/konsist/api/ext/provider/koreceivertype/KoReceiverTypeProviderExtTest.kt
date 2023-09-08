@@ -12,6 +12,20 @@ import org.junit.jupiter.api.Test
 
 class KoReceiverTypeProviderExtTest {
     @Test
+    fun `declaration-has-no-receiver-type`() {
+        // given
+        val sut = getSnippetFile("declaration-has-no-receiver-type")
+            .declarationsOf<KoReceiverTypeProvider>()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasReceiverTypeOf<Int>() shouldBeEqualTo false
+            hasReceiverTypeOf<SampleClass>() shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `declaration-has-receiver-with-simple-type`() {
         // given
         val sut = getSnippetFile("declaration-has-receiver-with-simple-type")
