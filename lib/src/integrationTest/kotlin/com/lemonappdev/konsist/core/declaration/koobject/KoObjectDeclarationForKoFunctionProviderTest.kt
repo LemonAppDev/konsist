@@ -93,8 +93,8 @@ class KoObjectDeclarationForKoFunctionProviderTest {
             numFunctions(includeNested = true, includeLocal = false) shouldBeEqualTo 2
             numFunctions(includeNested = false, includeLocal = true) shouldBeEqualTo 2
             numFunctions(includeNested = false, includeLocal = false) shouldBeEqualTo 1
-            countFunctions { it.hasPrivateModifier } shouldBeEqualTo 1
-            countFunctions(includeNested = true, includeLocal = true) { it.hasPrivateModifier } shouldBeEqualTo 2
+            countFunctions(includeNested = false, includeLocal = false) { it.hasPrivateModifier } shouldBeEqualTo 1
+            countFunctions { it.hasPrivateModifier } shouldBeEqualTo 2
             countFunctions { it.name == "sampleFunction" && it.hasSuspendModifier } shouldBeEqualTo 0
         }
     }

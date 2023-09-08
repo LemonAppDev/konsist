@@ -10,5 +10,5 @@ import com.lemonappdev.konsist.api.provider.KoObjectProvider
  * @return A list containing object declarations.
  */
 fun <T : KoObjectProvider> List<T>.objects(
-    includeNested: Boolean = false,
+    includeNested: Boolean = true,
 ): List<KoObjectDeclaration> = flatMap { it.objects(includeNested) }

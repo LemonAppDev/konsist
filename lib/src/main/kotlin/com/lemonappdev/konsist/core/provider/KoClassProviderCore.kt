@@ -9,7 +9,11 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         includeNested: Boolean,
         includeLocal: Boolean,
     ): List<KoClassDeclaration> =
-        KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
+        KoDeclarationProviderCoreUtil.getKoDeclarations(
+            declarations(includeNested = false, includeLocal = false),
+            includeNested,
+            includeLocal,
+        )
 
     override fun containsClass(
         includeNested: Boolean,
