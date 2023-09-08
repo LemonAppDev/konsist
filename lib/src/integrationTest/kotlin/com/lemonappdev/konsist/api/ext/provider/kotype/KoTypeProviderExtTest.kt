@@ -2,8 +2,6 @@ package com.lemonappdev.konsist.api.ext.provider.kotype
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
-import com.lemonappdev.konsist.api.provider.KoParametersProvider
-import com.lemonappdev.konsist.api.provider.KoPropertyTypeProvider
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import com.lemonappdev.konsist.testdata.SampleType

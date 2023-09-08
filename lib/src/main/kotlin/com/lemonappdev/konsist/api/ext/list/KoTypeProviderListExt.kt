@@ -10,7 +10,6 @@ import kotlin.reflect.KClass
 val <T : KoTypeProvider> List<T>.types: List<KoTypeDeclaration>
     get() = map { it.type }
 
-
 /**
  * List containing declarations with the specified type.
  *
@@ -39,11 +38,11 @@ fun <T : KoTypeProvider> List<T>.withoutType(predicate: (KoTypeDeclaration) -> B
 fun <T : KoTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.hasTypeOf(kClass) ||
-                if (kClasses.isNotEmpty()) {
-                    kClasses.any { kClass -> it.hasTypeOf(kClass) }
-                } else {
-                    false
-                }
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass -> it.hasTypeOf(kClass) }
+            } else {
+                false
+            }
     }
 
 /**
@@ -56,9 +55,9 @@ fun <T : KoTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kClasses: 
 fun <T : KoTypeProvider> List<T>.withoutTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filterNot {
         it.hasTypeOf(kClass) ||
-                if (kClasses.isNotEmpty()) {
-                    kClasses.any { kClass -> it.hasTypeOf(kClass) }
-                } else {
-                    false
-                }
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass -> it.hasTypeOf(kClass) }
+            } else {
+                false
+            }
     }
