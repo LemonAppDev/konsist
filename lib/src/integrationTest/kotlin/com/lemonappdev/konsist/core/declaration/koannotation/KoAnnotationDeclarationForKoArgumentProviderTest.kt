@@ -49,7 +49,7 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            arguments.map { it.value } shouldBeEqualTo listOf("\"text\"")
+            arguments.map { it.value } shouldBeEqualTo listOf("text")
             numArguments shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true
         }
@@ -65,7 +65,7 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
 
         // then
         assertSoftly(sut) {
-            arguments.map { it.value } shouldBeEqualTo listOf("\"text\"", "true")
+            arguments.map { it.value } shouldBeEqualTo listOf("text", "true")
             numArguments shouldBeEqualTo 2
             hasArguments() shouldBeEqualTo true
         }
@@ -82,7 +82,7 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
         // then
         assertSoftly(sut) {
             arguments.map { it.value } shouldBeEqualTo listOf(
-                "\"\"\"first line\n    second line\"\"\"",
+                "first line\n    second line",
             )
             numArguments shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true

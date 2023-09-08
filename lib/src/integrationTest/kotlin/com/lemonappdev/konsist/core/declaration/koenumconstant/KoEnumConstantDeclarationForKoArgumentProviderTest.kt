@@ -82,7 +82,7 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
         // then
         assertSoftly(sut) {
             arguments.map { it.value } shouldBeEqualTo listOf(
-                "\"\"\"first line\n    second line\"\"\"",
+                "first line\n    second line",
             )
             numArguments shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true

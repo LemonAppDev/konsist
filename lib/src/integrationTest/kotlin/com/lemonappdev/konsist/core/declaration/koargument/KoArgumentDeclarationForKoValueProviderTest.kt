@@ -35,6 +35,19 @@ class KoArgumentDeclarationForKoValueProviderTest {
     }
 
     @Test
+    fun `argument-in-enum-const-with-multiline-string-argument`() {
+        // given
+        val sut = getSnippetFile("argument-in-enum-const-with-multiline-string-argument")
+            .classes()
+            .enumConstants
+            .arguments
+            .first()
+
+        // then
+        sut.value shouldBeEqualTo "first line\n    second line"
+    }
+
+    @Test
     fun `argument-in-annotation-with-value-and-without-argument-name`() {
         // given
         val sut = getSnippetFile("argument-in-annotation-with-value-and-without-argument-name")
@@ -44,7 +57,7 @@ class KoArgumentDeclarationForKoValueProviderTest {
             .first()
 
         // then
-        sut.value shouldBeEqualTo "\"text\""
+        sut.value shouldBeEqualTo "text"
     }
 
     @Test
@@ -57,7 +70,20 @@ class KoArgumentDeclarationForKoValueProviderTest {
             .first()
 
         // then
-        sut.value shouldBeEqualTo "\"text\""
+        sut.value shouldBeEqualTo "text"
+    }
+
+    @Test
+    fun `argument-in-annotation-with-multiline-string-argument`() {
+        // given
+        val sut = getSnippetFile("argument-in-annotation-with-multiline-string-argument")
+            .functions()
+            .annotations
+            .arguments
+            .first()
+
+        // then
+        sut.value shouldBeEqualTo "first line\n    second line"
     }
 
     private fun getSnippetFile(fileName: String) =

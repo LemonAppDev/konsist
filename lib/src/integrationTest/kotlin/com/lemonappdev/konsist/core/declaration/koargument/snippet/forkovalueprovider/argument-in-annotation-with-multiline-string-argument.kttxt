@@ -1,0 +1,6 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotationWithParameter
+
+@SampleAnnotationWithParameter(sampleParameter = """first line
+    second line""")
+fun sampleFunction() {
+}
