@@ -6,13 +6,13 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 /**
  * The declarations of type [T] present in the scope.
  *
- * @param includeNested specifies whether to include nested declarations, by default `false`.
- * @param includeLocal specifies whether to include local declarations, by default `false`.
+ * @param includeNested specifies whether to include nested declarations, by default `true`.
+ * @param includeLocal specifies whether to include local declarations, by default `true`.
  * @return A list of declarations of type [T] present in the scope.
  */
 inline fun <reified T : KoBaseProvider> KoScope.declarationsOf(
-    includeNested: Boolean = false,
-    includeLocal: Boolean = false,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
 ): List<T> =
     declarations(includeNested, includeLocal)
         .filterIsInstance<T>()

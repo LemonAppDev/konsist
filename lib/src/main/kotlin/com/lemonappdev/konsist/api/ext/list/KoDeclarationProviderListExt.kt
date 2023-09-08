@@ -11,6 +11,6 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
  * @return A list containing all declarations.
  */
 fun <T : KoDeclarationProvider> List<T>.declarations(
-    includeNested: Boolean = false,
-    includeLocal: Boolean = false,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
 ): List<KoBaseDeclaration> = flatMap { it.declarations(includeNested, includeLocal) }

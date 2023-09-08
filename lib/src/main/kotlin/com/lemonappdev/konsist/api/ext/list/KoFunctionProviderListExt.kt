@@ -11,6 +11,6 @@ import com.lemonappdev.konsist.api.provider.KoFunctionProvider
  * @return A list containing function declarations.
  */
 fun <T : KoFunctionProvider> List<T>.functions(
-    includeNested: Boolean = false,
-    includeLocal: Boolean = false,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
 ): List<KoFunctionDeclaration> = flatMap { it.functions(includeNested, includeLocal) }

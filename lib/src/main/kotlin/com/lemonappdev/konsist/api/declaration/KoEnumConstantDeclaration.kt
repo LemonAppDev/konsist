@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoArgumentProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
@@ -19,12 +20,13 @@ import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 
 /**
- * Represents a Kotlin enum const declaration.
+ * Represents a Kotlin enum constant declaration.
  */
 interface KoEnumConstantDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
+    KoArgumentProvider,
     KoContainingFileProvider,
     KoEnumNameProvider,
     KoFullyQualifiedNameProvider,

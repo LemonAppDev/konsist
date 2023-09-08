@@ -9,7 +9,11 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
         includeNested: Boolean,
         includeLocal: Boolean,
     ): List<KoPropertyDeclaration> =
-        KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested, includeLocal)
+        KoDeclarationProviderCoreUtil.getKoDeclarations(
+            declarations(includeNested = false, includeLocal = false),
+            includeNested,
+            includeLocal,
+        )
 
     override fun containsProperty(
         includeNested: Boolean,

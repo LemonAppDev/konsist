@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
+import com.lemonappdev.konsist.api.ext.provider.hasReceiverTypeOf
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import kotlin.reflect.KClass
 
@@ -16,6 +17,7 @@ val <T : KoReceiverTypeProvider> List<T>.receiverTypes: List<KoTypeDeclaration>
  * @param names The receiver type name(s) to include.
  * @return A list containing declarations with the specified receiver type(s) (or any receiver type if [names] is empty).
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("withReceiverType { it.name == ... }"))
 fun <T : KoReceiverTypeProvider> List<T>.withReceiverType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> it.hasReceiverType()
@@ -29,12 +31,41 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverType(vararg names: String):
  * @param names The receiver type name(s) to exclude.
  * @return A list containing declarations without specified receiver type(s) (or none receiver type if [names] is empty).
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutReceiverType { it.name != ... }"))
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> !it.hasReceiverType()
         else -> names.none { type -> it.hasReceiverType(type) }
     }
 }
+
+/**
+ * List containing declarations with the specified receiver type.
+ *
+ * @param predicate The predicate function to determine if a declaration receiver type satisfies a condition.
+ * @return A list containing declarations with the specified receiver type (or any receiver type if [predicate] is null).
+ */
+fun <T : KoReceiverTypeProvider> List<T>.withReceiverType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
+    filter {
+        when (predicate) {
+            null -> it.hasReceiverType()
+            else -> it.receiverType?.let { receiverType -> predicate(receiverType) } ?: false
+        }
+    }
+
+/**
+ * List containing declarations without the specified receiver type.
+ *
+ * @param predicate The predicate function to determine if a declaration receiver type satisfies a condition.
+ * @return A list containing declarations without the specified receiver type (or none receiver type if [predicate] is null).
+ */
+fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
+    filterNot {
+        when (predicate) {
+            null -> it.hasReceiverType()
+            else -> it.receiverType?.let { receiverType -> predicate(receiverType) } ?: false
+        }
+    }
 
 /**
  * List containing declarations with receiver type.
@@ -45,9 +76,9 @@ fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(vararg names: Strin
  */
 fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.hasReceiverType(kClass.simpleName) ||
+        it.hasReceiverTypeOf(kClass) ||
             if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.hasReceiverType(kClass.simpleName) }
+                kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
             } else {
                 false
             }
@@ -61,11 +92,11 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClass: KClass<*>, v
  * @return A list containing declarations without receiver type of the specified Kotlin class(es).
  */
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
-    filter {
-        !it.hasReceiverType(kClass.simpleName) &&
+    filterNot {
+        it.hasReceiverTypeOf(kClass) ||
             if (kClasses.isNotEmpty()) {
-                kClasses.none { kClass -> it.hasReceiverType(kClass.simpleName) }
+                kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
             } else {
-                true
+                false
             }
     }

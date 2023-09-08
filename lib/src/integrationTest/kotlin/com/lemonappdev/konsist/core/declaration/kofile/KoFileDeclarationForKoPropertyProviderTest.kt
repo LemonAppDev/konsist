@@ -94,8 +94,8 @@ class KoFileDeclarationForKoPropertyProviderTest {
             numProperties(includeNested = true, includeLocal = false) shouldBeEqualTo 2
             numProperties(includeNested = false, includeLocal = true) shouldBeEqualTo 2
             numProperties(includeNested = false, includeLocal = false) shouldBeEqualTo 1
-            countProperties { it.hasInternalModifier } shouldBeEqualTo 1
-            countProperties(includeNested = true, includeLocal = true) { it.hasInternalModifier } shouldBeEqualTo 2
+            countProperties(includeNested = false, includeLocal = false) { it.hasInternalModifier } shouldBeEqualTo 1
+            countProperties { it.hasInternalModifier } shouldBeEqualTo 2
             countProperties { it.name == "sampleProperty" && it.hasPrivateModifier } shouldBeEqualTo 0
         }
     }

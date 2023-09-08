@@ -2,8 +2,10 @@ package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
+import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
+import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
@@ -14,11 +16,14 @@ import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtValueArgument
+import org.jetbrains.kotlin.psi.KtValueArgumentList
 
 internal class KoAnnotationDeclarationCore private constructor(
     private val ktAnnotationEntry: KtAnnotationEntry,
 ) : KoAnnotationDeclaration,
     KoBaseProviderCore,
+    KoArgumentProviderCore,
     KoContainingFileProviderCore,
     KoFullyQualifiedNameProviderCore,
     KoLocationProviderCore,
@@ -37,6 +42,16 @@ internal class KoAnnotationDeclarationCore private constructor(
             .imports
             .firstOrNull { it.text.endsWith(".$name") }
             ?.name ?: name
+    }
+
+    override val arguments: List<KoArgumentDeclaration> by lazy {
+        ktAnnotationEntry
+            .children
+            .filterIsInstance<KtValueArgumentList>()
+            .firstOrNull()
+            ?.children
+            ?.filterIsInstance<KtValueArgument>()
+            ?.map { KoArgumentDeclarationCore.getInstance(it, this) } ?: emptyList()
     }
 
     override fun toString(): String = name

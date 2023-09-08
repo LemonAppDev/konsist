@@ -12,7 +12,7 @@ class DeclarationKonsistTest {
     @Test
     fun `every function has explicit return type declaration`() {
         declarationPackageScope
-            .functions(includeNested = true)
+            .functions()
             .withoutName("print")
             .assert { it.hasReturnType }
     }
@@ -20,14 +20,14 @@ class DeclarationKonsistTest {
     @Test
     fun `every property has explicit type declaration`() {
         declarationPackageScope
-            .properties(includeNested = true)
+            .properties()
             .assert { it.hasType() }
     }
 
     @Test
     fun `none function return type has the 'Impl' suffix`() {
         declarationPackageScope
-            .functions(includeNested = true)
+            .functions()
             .returnTypes
             .assertNot { it.sourceType.endsWith("Impl") }
     }
@@ -35,7 +35,7 @@ class DeclarationKonsistTest {
     @Test
     fun `none property type has the 'Impl' suffix`() {
         declarationPackageScope
-            .properties(includeNested = true)
+            .properties()
             .types
             .assertNot { it.sourceType.endsWith("Impl") }
     }
@@ -43,7 +43,7 @@ class DeclarationKonsistTest {
     @Test
     fun `includeNested parameter is always before includeLocal parameter`() {
         declarationPackageScope
-            .functions(includeNested = true, includeLocal = true)
+            .functions()
             .assert {
                 val includeNestedParameter =
                     it.parameters.indexOfFirst { parameter -> parameter.name == "includeNested" }

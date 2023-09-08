@@ -10,5 +10,5 @@ import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
  * @return A list containing interface declarations.
  */
 fun <T : KoInterfaceProvider> List<T>.interfaces(
-    includeNested: Boolean = false,
+    includeNested: Boolean = true,
 ): List<KoInterfaceDeclaration> = flatMap { it.interfaces(includeNested) }
