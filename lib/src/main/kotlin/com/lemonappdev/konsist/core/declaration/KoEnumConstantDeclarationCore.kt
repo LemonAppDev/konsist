@@ -1,11 +1,13 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoEnumConstantDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
+import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -27,6 +29,8 @@ import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtEnumEntry
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
+import org.jetbrains.kotlin.psi.KtValueArgument
+import org.jetbrains.kotlin.psi.KtValueArgumentList
 
 internal class KoEnumConstantDeclarationCore private constructor(
     override val ktEnumEntry: KtEnumEntry,
@@ -34,6 +38,7 @@ internal class KoEnumConstantDeclarationCore private constructor(
 ) : KoEnumConstantDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
+    KoArgumentProviderCore,
     KoContainingFileProviderCore,
     KoEnumNameProviderCore,
     KoKDocProviderCore,
@@ -64,6 +69,18 @@ internal class KoEnumConstantDeclarationCore private constructor(
 
         KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
+
+    override val arguments: List<KoArgumentDeclaration>
+        get() = ktEnumEntry
+            .initializerList
+            ?.initializers
+            ?.firstOrNull()
+            ?.children
+            ?.filterIsInstance<KtValueArgumentList>()
+            ?.firstOrNull()
+            ?.children
+            ?.filterIsInstance<KtValueArgument>()
+            ?.map { KoArgumentDeclarationCore.getInstance(it, this) } ?: emptyList()
 
     /*
     1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
