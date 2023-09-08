@@ -1,0 +1,6 @@
+interface SampleInterface
+
+/**
+ * This is a sample class that demonstrates the usage of KDoc.
+ */
+class SampleClass

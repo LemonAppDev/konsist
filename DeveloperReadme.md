@@ -20,19 +20,21 @@
 ## Release
 
 1. Create `release-vx.y.z` branch
-2. Update version in `gradle.properties` file and starter projects (`sample/starter-projects`) and create PR to `main`.
-3. Merge release branch to `main`
-4. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
-5. Create a [new GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
+2. Update version in [gradle.properties](gradle.properties) file
+3. Update version in [README.md](README.md) file
+4. Update version in starter projects (`sample/starter-projects`) and create PR to `main`.
+5. Merge release branch to `main`
+6. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
+7. Create a [new GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
     1. set `vx.y.z` as tag version
     2. set `vx.y.z` as release title
-6. Update Konsist version in the Konsist [Quick Starte](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) page 
-7. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
-8. Merge above PR
-9. Notify community
-10.   Message on [Konsist Channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) in Kotlin Slack
-11.   Tweet
-12.   Linkedin
+8. Update Konsist version in the Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) page 
+9. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
+10. Merge above PR
+11. Notify community
+12. Message on [Konsist Channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) in Kotlin Slack
+13. Tweet
+14. Linkedin
 
 ## Sonatype
 

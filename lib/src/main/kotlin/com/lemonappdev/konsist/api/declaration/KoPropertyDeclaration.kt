@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
+import com.lemonappdev.konsist.api.provider.KoConstructorDefinedProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoDelegateProvider
@@ -15,6 +16,7 @@ import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyTypeProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
@@ -37,6 +39,7 @@ interface KoPropertyDeclaration :
     KoBaseDeclaration,
     KoBaseProvider,
     KoAnnotationProvider,
+    KoConstructorDefinedProvider,
     KoContainingFileProvider,
     KoDelegateProvider,
     KoPropertyTypeProvider,
@@ -50,6 +53,7 @@ interface KoPropertyDeclaration :
     KoContainingDeclarationProvider,
     KoPathProvider,
     KoReceiverTypeProvider,
+    KoResideInPackageProvider,
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTopLevelProvider,
@@ -63,18 +67,4 @@ interface KoPropertyDeclaration :
     KoFinalModifierProvider,
     KoActualModifierProvider,
     KoExpectModifierProvider,
-    KoConstModifierProvider {
-    /**
-     * Whether property is defined in constructor (true) or not (false).
-     *
-     * e.g.
-     * ```
-     * val topLevelProperty = "" // isConstructorDefined == false
-     *
-     * class SampleClass(val constructorProperty: Int) { // isConstructorDefined == true
-     *      val bodyProperty = "" // isConstructorDefined == false
-     * }
-     * ```
-     */
-    val isConstructorDefined: Boolean
-}
+    KoConstModifierProvider
