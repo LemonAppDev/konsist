@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import kotlin.reflect.KClass
 
@@ -77,11 +76,11 @@ fun <T : KoReturnTypeProvider> List<T>.withoutReturnType(predicate: ((KoTypeDecl
 fun <T : KoReturnTypeProvider> List<T>.withReturnTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.hasReturnTypeOf(kClass) ||
-                if (kClasses.isNotEmpty()) {
-                    kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
-                } else {
-                    false
-                }
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
+            } else {
+                false
+            }
     }
 
 /**
@@ -94,9 +93,9 @@ fun <T : KoReturnTypeProvider> List<T>.withReturnTypeOf(kClass: KClass<*>, varar
 fun <T : KoReturnTypeProvider> List<T>.withoutReturnTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filterNot {
         it.hasReturnTypeOf(kClass) ||
-                if (kClasses.isNotEmpty()) {
-                    kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
-                } else {
-                    false
-                }
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass -> it.hasReturnTypeOf(kClass) }
+            } else {
+                false
+            }
     }

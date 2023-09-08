@@ -2,10 +2,8 @@ package com.lemonappdev.konsist.api.ext.provider.koreturntype
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
-import com.lemonappdev.konsist.api.ext.provider.hasReceiverTypeOf
 import com.lemonappdev.konsist.api.ext.provider.hasReturnTypeOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
-import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import com.lemonappdev.konsist.testdata.SampleClass
 import org.amshove.kluent.assertSoftly
