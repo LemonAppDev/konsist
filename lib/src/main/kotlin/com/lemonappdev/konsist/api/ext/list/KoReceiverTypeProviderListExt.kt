@@ -94,11 +94,11 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClass: KClass<*>, v
  * @return A list containing declarations without receiver type of the specified Kotlin class(es).
  */
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
-    filter {
-        !it.hasReceiverTypeOf(kClass) &&
-            if (kClasses.isNotEmpty()) {
-                kClasses.none { kClass -> it.hasReceiverTypeOf(kClass) }
-            } else {
-                true
-            }
+    filterNot {
+        it.hasReceiverTypeOf(kClass) ||
+                if (kClasses.isNotEmpty()) {
+                    kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
+                } else {
+                    false
+                }
     }

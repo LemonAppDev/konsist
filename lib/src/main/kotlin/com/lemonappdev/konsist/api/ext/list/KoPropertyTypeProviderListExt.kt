@@ -91,11 +91,11 @@ fun <T : KoPropertyTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kC
  * @return A list containing declarations without type of the specified Kotlin class(es).
  */
 fun <T : KoPropertyTypeProvider> List<T>.withoutTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
-    filter {
-        it.hasTypeOf(kClass) &&
-            if (kClasses.isNotEmpty()) {
-                kClasses.none { kClass -> it.hasTypeOf(kClass) }
-            } else {
-                true
-            }
+    filterNot {
+        it.hasTypeOf(kClass) ||
+                if (kClasses.isNotEmpty()) {
+                    kClasses.any { kClass -> it.hasTypeOf(kClass) }
+                } else {
+                    false
+                }
     }
