@@ -75,9 +75,9 @@ fun <T : KoPropertyTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclarat
  */
 fun <T : KoPropertyTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.type?.name == kClass.simpleName ||
+        it.hasTypeOf(kClass) ||
             if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.type?.name == kClass.simpleName }
+                kClasses.any { kClass -> it.hasTypeOf(kClass) }
             } else {
                 false
             }
@@ -92,9 +92,9 @@ fun <T : KoPropertyTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kC
  */
 fun <T : KoPropertyTypeProvider> List<T>.withoutTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.type?.name != kClass.simpleName &&
+        it.hasTypeOf(kClass) &&
             if (kClasses.isNotEmpty()) {
-                kClasses.none { kClass -> it.type?.name == kClass.simpleName }
+                kClasses.none { kClass -> it.hasTypeOf(kClass) }
             } else {
                 true
             }

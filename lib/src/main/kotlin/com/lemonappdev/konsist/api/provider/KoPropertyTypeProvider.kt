@@ -15,8 +15,8 @@ interface KoPropertyTypeProvider : KoBaseProvider {
     /**
      * Whatever declaration has a type.
      *
-     * @param name the type name to check for (optional).
-     * @return `true` if the declaration has the specified type (or any type if [name] is `null`), `false` otherwise.
+     * @param name the type name to check for.
+     * @return `true` if the declaration has the specified type, `false` otherwise.
      */
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasType { it.name == name }"))
     fun hasType(name: String): Boolean
