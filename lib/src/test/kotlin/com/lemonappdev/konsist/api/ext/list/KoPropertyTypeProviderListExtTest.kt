@@ -125,7 +125,7 @@ class KoPropertyTypeProviderListExtTest {
     }
 
     @Test
-    fun `withoutType){} returns declarations which not satisfy predicate`() {
+    fun `withoutType{} returns declarations which not satisfy predicate`() {
         // given
         val name1 = "name1"
         val name2 = "name2"
@@ -182,13 +182,11 @@ class KoPropertyTypeProviderListExtTest {
     @Test
     fun `withTypeOf(KClass) returns declaration with given return type`() {
         // given
-        val typeName1 = "SampleType1"
-        val typeName2 = "SampleType2"
         val declaration1: KoPropertyTypeProvider = mockk {
-            every { type?.name } returns typeName1
+            every { hasTypeOf(SampleType1::class) } returns true
         }
         val declaration2: KoPropertyTypeProvider = mockk {
-            every { type?.name } returns typeName2
+            every { hasTypeOf(SampleType1::class) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -202,17 +200,17 @@ class KoPropertyTypeProviderListExtTest {
     @Test
     fun `withTypeOf(KClass) returns declarations with one of given return types`() {
         // given
-        val typeName1 = "SampleType1"
-        val typeName2 = "SampleType2"
-        val typeName3 = "SampleType3"
         val declaration1: KoPropertyTypeProvider = mockk {
-            every { type?.name } returns typeName1
+            every { hasTypeOf(SampleType1::class) } returns true
+            every { hasTypeOf(SampleType2::class) } returns false
         }
         val declaration2: KoPropertyTypeProvider = mockk {
-            every { type?.name } returns typeName2
+            every { hasTypeOf(SampleType1::class) } returns false
+            every { hasTypeOf(SampleType2::class) } returns true
         }
         val declaration3: KoPropertyTypeProvider = mockk {
-            every { type?.name } returns typeName3
+            every { hasTypeOf(SampleType1::class) } returns false
+            every { hasTypeOf(SampleType2::class) } returns false
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
@@ -226,13 +224,11 @@ class KoPropertyTypeProviderListExtTest {
     @Test
     fun `withoutTypeOf(KClass) returns declaration without given return type`() {
         // given
-        val typeName1 = "SampleType1"
-        val typeName2 = "SampleType2"
         val declaration1: KoPropertyTypeProvider = mockk {
-            every { type?.name } returns typeName1
+            every { hasTypeOf(SampleType1::class) } returns true
         }
         val declaration2: KoPropertyTypeProvider = mockk {
-            every { type?.name } returns typeName2
+            every { hasTypeOf(SampleType1::class) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -246,17 +242,17 @@ class KoPropertyTypeProviderListExtTest {
     @Test
     fun `withoutTypeOf(KClass) returns declaration without any of given return types`() {
         // given
-        val typeName1 = "SampleType1"
-        val typeName2 = "SampleType2"
-        val typeName3 = "SampleType3"
         val declaration1: KoPropertyTypeProvider = mockk {
-            every { type?.name } returns typeName1
+            every { hasTypeOf(SampleType1::class) } returns true
+            every { hasTypeOf(SampleType2::class) } returns false
         }
         val declaration2: KoPropertyTypeProvider = mockk {
-            every { type?.name } returns typeName2
+            every { hasTypeOf(SampleType1::class) } returns false
+            every { hasTypeOf(SampleType2::class) } returns true
         }
         val declaration3: KoPropertyTypeProvider = mockk {
-            every { type?.name } returns typeName3
+            every { hasTypeOf(SampleType1::class) } returns false
+            every { hasTypeOf(SampleType2::class) } returns false
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
 
