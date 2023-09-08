@@ -16,6 +16,7 @@ val <T : KoPropertyTypeProvider> List<T>.types: List<KoTypeDeclaration>
  * @param names The type name(s) to include.
  * @return A list containing declarations with the specified type (or any type if [names] is empty).
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("withType { it.name == ... }"))
 fun <T : KoPropertyTypeProvider> List<T>.withType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> it.hasType()
@@ -29,12 +30,41 @@ fun <T : KoPropertyTypeProvider> List<T>.withType(vararg names: String): List<T>
  * @param names The type name(s) to exclude.
  * @return A list containing declarations without specified type (or none type if [names] is empty).
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutType { it.name != ... }"))
 fun <T : KoPropertyTypeProvider> List<T>.withoutType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> !it.hasType()
         else -> names.none { type -> it.hasType(type) }
     }
 }
+
+/**
+ * List containing declarations with the specified type.
+ *
+ * @param predicate The predicate function to determine if a declaration type satisfies a condition.
+ * @return A list containing declarations with the specified type (or any type if [predicate] is null).
+ */
+fun <T : KoPropertyTypeProvider> List<T>.withType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
+    filter {
+        when (predicate) {
+            null -> it.hasType()
+            else -> it.type?.let { type -> predicate(type) } ?: false
+        }
+    }
+
+/**
+ * List containing declarations without the specified type.
+ *
+ * @param predicate The predicate function to determine if a declaration type satisfies a condition.
+ * @return A list containing declarations without the specified type (or none type if [predicate] is null).
+ */
+fun <T : KoPropertyTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
+    filterNot {
+        when (predicate) {
+            null -> it.hasType()
+            else -> it.type?.let { type -> predicate(type) } ?: false
+        }
+    }
 
 /**
  * List containing declarations with type of.

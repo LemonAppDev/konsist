@@ -54,7 +54,17 @@ class DeclarationKonsistTest {
             }
     }
 
+    @Test
+    fun `every declaration overrides toString()`() {
+        declarationPackageScope
+            .classes()
+            .assert {
+                it.containsFunction { function -> function.name == "toString" }
+            }
+    }
+
     companion object {
-        val declarationPackageScope = Konsist.scopeFromPackage("com.lemonappdev.konsist.core.declaration..", sourceSetName = "main")
+        val declarationPackageScope =
+            Konsist.scopeFromPackage("com.lemonappdev.konsist.core.declaration..", sourceSetName = "main")
     }
 }

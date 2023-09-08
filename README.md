@@ -10,7 +10,26 @@ standardization of the Kotlin codebase. It enforces coding conventions and proje
 tests are written in Kotlin and can be easily integrated with popular testing frameworks such as 
 [JUnit4](https://junit.org/junit4/), [JUnit5](https://junit.org/junit5/).
 
-See [Konsist documentation](http://docs.konsist.lemonappdev.com/) for more information.
+## Dependencies
+
+```kotlin
+// Gradle Kotlin:
+testImplementation("com.lemonappdev:konsist:0.11.0")
+
+// Gradle Groovy:
+testImplementation "com.lemonappdev:konsist:0.11.0"
+
+// Maven:
+<dependency>
+    <groupId>com.lemonappdev</groupId>
+    <artifactId>konsist</artifactId>
+    <version>0.11.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+Check the [Konsist documentation](https://docs.konsist.lemonappdev.com/) to learn more about Konsist and take a 
+look at [getting started guide](https://docs.konsist.lemonappdev.com/getting-started/gettingstarted).
 
 ## Examples
 
@@ -74,17 +93,14 @@ fun `clean architecture layers have correct dependencies`() {
 }
 ```
 
-## Getting Started
-
-See [Konsist Getting Started](https://docs.konsist.lemonappdev.com/getting-started/gettingstarted) for quick start page
-guide and [Snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) page for more examples.
+Check out our [snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) page for a feast of examples!
 
 ### Articles
 
 - [Introducing Konsist: A Cutting-Edge Kotlin Linter](https://blog.kotlin-academy.com/introducing-konsist-a-cutting-edge-kotlin-linter-d3ab916a5461)
 - [Refactoring Multi-Module Kotlin Project With Konsist](https://medium.com/p/f0de0de59a3d)
 
-### ## Star History
+### Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=LemonAppDev/konsist&type=Date)](https://star-history.com/#LemonAppDev/konsist&Date)
 
