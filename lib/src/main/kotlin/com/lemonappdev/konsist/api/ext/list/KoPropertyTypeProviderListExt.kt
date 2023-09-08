@@ -93,9 +93,9 @@ fun <T : KoPropertyTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kC
 fun <T : KoPropertyTypeProvider> List<T>.withoutTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filterNot {
         it.hasTypeOf(kClass) ||
-                if (kClasses.isNotEmpty()) {
-                    kClasses.any { kClass -> it.hasTypeOf(kClass) }
-                } else {
-                    false
-                }
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass -> it.hasTypeOf(kClass) }
+            } else {
+                false
+            }
     }

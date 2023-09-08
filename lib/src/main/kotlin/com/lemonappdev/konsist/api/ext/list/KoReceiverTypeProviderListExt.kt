@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.ext.provider.hasReceiverTypeOf
-import com.lemonappdev.konsist.api.provider.KoPropertyTypeProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import kotlin.reflect.KClass
 
@@ -33,7 +32,6 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverType(vararg names: String):
  * @return A list containing declarations without specified receiver type(s) (or none receiver type if [names] is empty).
  */
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutReceiverType { it.name != ... }"))
-
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> !it.hasReceiverType()
@@ -96,9 +94,9 @@ fun <T : KoReceiverTypeProvider> List<T>.withReceiverTypeOf(kClass: KClass<*>, v
 fun <T : KoReceiverTypeProvider> List<T>.withoutReceiverTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filterNot {
         it.hasReceiverTypeOf(kClass) ||
-                if (kClasses.isNotEmpty()) {
-                    kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
-                } else {
-                    false
-                }
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass -> it.hasReceiverTypeOf(kClass) }
+            } else {
+                false
+            }
     }

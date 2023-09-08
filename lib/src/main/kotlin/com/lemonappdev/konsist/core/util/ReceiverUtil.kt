@@ -25,7 +25,7 @@ object ReceiverUtil {
 
     /*
     1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.
-    */
+     */
     internal fun getReceiverType(
         types: List<KtTypeReference>,
         isExtension: Boolean,
@@ -42,7 +42,7 @@ object ReceiverUtil {
 
     /*
     1.0.0 CleanUp - When we remove KoReceiverTypeProviderCore.hasReceiverType it will be unused.
-    */
+     */
     internal fun hasReceiverType(receiverType: KoTypeDeclaration?, name: String?): Boolean = when (name) {
         null -> receiverType != null
         else -> receiverType?.name == name
