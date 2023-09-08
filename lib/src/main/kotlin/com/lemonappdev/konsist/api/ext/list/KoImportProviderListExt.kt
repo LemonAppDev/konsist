@@ -17,12 +17,33 @@ val <T : KoImportProvider> List<T>.imports: List<KoImportDeclaration>
 fun <T : KoImportProvider> List<T>.withImports(): List<T> = filter { it.hasImports() }
 
 /**
+ * List containing declarations that have all imports satisfies a condition.
+ *
+ * @param predicate The predicate function to determine if a declaration import satisfies a condition.
+ * @return A list containing declarations with the specified import(s).
+ */
+fun <T : KoImportProvider> List<T>.withAllImports(predicate: (KoImportDeclaration) -> Boolean): List<T> = filter {
+    it.hasAllImports(predicate)
+}
+
+/**
+ * List containing declarations that have import satisfies a condition.
+ *
+ * @param predicate The predicate function to determine if a declaration import satisfies a condition.
+ * @return A list containing declarations with the specified import(s).
+ */
+fun <T : KoImportProvider> List<T>.withImport(predicate: (KoImportDeclaration) -> Boolean): List<T> = filter {
+    it.hasImport(predicate)
+}
+
+/**
  * List containing declarations with all specified imports.
  *
  * @param name The import name to include.
  * @param names The import name(s) to include.
  * @return A list containing declarations with the specified import(s).
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("withAllImports { it.name == ... }"))
 fun <T : KoImportProvider> List<T>.withAllImports(name: String, vararg names: String): List<T> = filter {
     it.hasImports(name, *names)
 }
@@ -34,6 +55,7 @@ fun <T : KoImportProvider> List<T>.withAllImports(name: String, vararg names: St
  * @param names The import name(s) to include.
  * @return A list containing declarations with at least one of the specified import(s).
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("withImport { it.name == ... }"))
 fun <T : KoImportProvider> List<T>.withSomeImports(name: String, vararg names: String): List<T> = filter {
     it.hasImports(name) || names.any { import -> it.hasImports(import) }
 }
@@ -46,12 +68,33 @@ fun <T : KoImportProvider> List<T>.withSomeImports(name: String, vararg names: S
 fun <T : KoImportProvider> List<T>.withoutImports(): List<T> = filterNot { it.hasImports() }
 
 /**
+ * List containing declarations that have all imports satisfies a condition.
+ *
+ * @param predicate The predicate function to determine if a declaration import satisfies a condition.
+ * @return A list containing declarations with the specified import(s).
+ */
+fun <T : KoImportProvider> List<T>.withoutAllImports(predicate: (KoImportDeclaration) -> Boolean): List<T> = filterNot {
+    it.hasAllImports(predicate)
+}
+
+/**
+ * List containing declarations that have import satisfies a condition.
+ *
+ * @param predicate The predicate function to determine if a declaration import satisfies a condition.
+ * @return A list containing declarations with the specified import(s).
+ */
+fun <T : KoImportProvider> List<T>.withoutImport(predicate: (KoImportDeclaration) -> Boolean): List<T> = filterNot {
+    it.hasImport(predicate)
+}
+
+/**
  * List containing declarations without all specified imports.
  *
  * @param name The import name to exclude.
  * @param names The import name(s) to exclude.
  * @return A list containing declarations without specified import(s).
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutAllImports { it.name == ... }"))
 fun <T : KoImportProvider> List<T>.withoutAllImports(name: String, vararg names: String): List<T> = filterNot {
     it.hasImports(name, *names)
 }
@@ -63,6 +106,7 @@ fun <T : KoImportProvider> List<T>.withoutAllImports(name: String, vararg names:
  * @param names The import name(s) to exclude.
  * @return A list containing declarations without at least one of the specified import(s).
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutImport { it.name == ... }"))
 fun <T : KoImportProvider> List<T>.withoutSomeImports(name: String, vararg names: String): List<T> = filter {
     !it.hasImports(name) && if (names.isNotEmpty()) {
         names.any { import -> !it.hasImports(import) }

@@ -70,6 +70,25 @@ class KoImportProviderListExtTest {
     }
 
     @Test
+    fun `withAllImports{} returns declaration with all imports satisfy predicate`() {
+        // given
+        val suffix = "name"
+        val declaration1: KoImportProvider = mockk {
+            every { hasAllImports { it.hasNameEndingWith(suffix) } } returns true
+        }
+        val declaration2: KoImportProvider = mockk {
+            every { hasAllImports { it.hasNameEndingWith(suffix) } } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllImports { it.hasNameEndingWith(suffix) }
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
     fun `withAllImports(String) returns declaration with all of given imports`() {
         // given
         val import1 = "SampleImport1"
