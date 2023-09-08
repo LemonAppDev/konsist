@@ -5,4 +5,4 @@ import com.lemonappdev.konsist.api.provider.KoPropertyTypeProvider
  *
  * @return `true` if the declaration has type with the specified KClass name, `false` otherwise.
  */
-inline fun <reified T> KoPropertyTypeProvider.hasTypeOf(): Boolean = T::class.simpleName == type?.name
+inline fun <reified T> KoPropertyTypeProvider.hasTypeOf(): Boolean = hasTypeOf(T::class)

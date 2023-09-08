@@ -39,7 +39,7 @@ class LibrarySnippets {
         Konsist
             .scopeFromPackage("..api..")
             .functions()
-            .assert { it.hasReturnType }
+            .assert { it.hasReturnType() }
     }
 
     fun `every public property in api package must have specify type explicitly`() {

@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
  *
  * @return `true` if the declaration has receiver type with the specified KClass name, `false` otherwise.
  */
-inline fun <reified T> KoReceiverTypeProvider.hasReceiverTypeOf(): Boolean = T::class.simpleName == receiverType?.name
+inline fun <reified T> KoReceiverTypeProvider.hasReceiverTypeOf(): Boolean = hasReceiverTypeOf(T::class)
 
 /**
  * Whether declaration has a valid KDoc with a RECEIVER tag.
