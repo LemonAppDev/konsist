@@ -1,9 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.provider.KoConstructorProvider
-import com.lemonappdev.konsist.api.provider.KoImportProvider
 
 /**
  * List containing constructor declarations.
