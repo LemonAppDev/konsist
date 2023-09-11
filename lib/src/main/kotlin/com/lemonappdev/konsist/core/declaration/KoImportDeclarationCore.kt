@@ -8,6 +8,7 @@ import com.lemonappdev.konsist.core.provider.KoAliasProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoMatchesProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
@@ -21,6 +22,7 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
     KoAliasProviderCore,
     KoContainingFileProviderCore,
     KoLocationProviderCore,
+    KoMatchesProviderCore,
     KoNameProviderCore,
     KoPathProviderCore,
     KoTextProviderCore,
