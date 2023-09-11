@@ -45,8 +45,10 @@ class KoDeclarationAssertForProviderListTest {
         try {
             sut.assert(message) { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'provider-assert-error-with-custom-message' has failed." +
-                    "\n$message\nInvalid declarations (2)")
+            e.message?.shouldContain(
+                "Assert 'provider-assert-error-with-custom-message' has failed." +
+                    "\n$message\nInvalid declarations (2)",
+            )
                 ?: throw e
         }
     }

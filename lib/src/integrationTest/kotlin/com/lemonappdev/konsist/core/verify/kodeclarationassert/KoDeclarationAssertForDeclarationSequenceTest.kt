@@ -55,8 +55,10 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         try {
             sut.assert(message) { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'declaration-assert-error-with-custom-message' has failed." +
-                    "\n$message\nInvalid declarations (1)")
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-error-with-custom-message' has failed." +
+                    "\n$message\nInvalid declarations (1)",
+            )
                 ?: throw e
         }
     }
@@ -73,8 +75,10 @@ class KoDeclarationAssertForDeclarationSequenceTest {
         try {
             sut.assert(message) { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'file-declaration-assert-error-with-custom-message' has failed." +
-                    "\n$message\nInvalid files (1)")
+            e.message?.shouldContain(
+                "Assert 'file-declaration-assert-error-with-custom-message' has failed." +
+                    "\n$message\nInvalid files (1)",
+            )
                 ?: throw e
         }
     }
