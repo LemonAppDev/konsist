@@ -22,7 +22,8 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
             countArguments { it.value == "text" } shouldBeEqualTo 0
             hasArguments() shouldBeEqualTo false
             hasArgument { it.value == "text" } shouldBeEqualTo false
-            hasAllArguments { it.value == "text" } shouldBeEqualTo true        }
+            hasAllArguments { it.value == "text" } shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -40,7 +41,8 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
             countArguments { it.value == "text" } shouldBeEqualTo 0
             hasArguments() shouldBeEqualTo false
             hasArgument { it.value == "text" } shouldBeEqualTo false
-            hasAllArguments { it.value == "text" } shouldBeEqualTo true        }
+            hasAllArguments { it.value == "text" } shouldBeEqualTo true
+        }
     }
 
     @Test
@@ -61,7 +63,8 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
             hasArgument { it.value == "0" } shouldBeEqualTo true
             hasArgument { it.value == "1" } shouldBeEqualTo false
             hasAllArguments { it.value == "0" } shouldBeEqualTo true
-            hasAllArguments { it.value == "1" } shouldBeEqualTo false        }
+            hasAllArguments { it.value == "1" } shouldBeEqualTo false
+        }
     }
 
     @Test
@@ -82,7 +85,8 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
             hasArgument { it.value == "0" } shouldBeEqualTo true
             hasArgument { it.value == "1" } shouldBeEqualTo false
             hasAllArguments { it.value.startsWith("fal") || it.value == "0" } shouldBeEqualTo true
-            hasAllArguments { it.value.startsWith("k") } shouldBeEqualTo false        }
+            hasAllArguments { it.value.startsWith("k") } shouldBeEqualTo false
+        }
     }
 
     @Test

@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 
 /**
  * An interface representing a Kotlin declaration that provides access to arguments.
