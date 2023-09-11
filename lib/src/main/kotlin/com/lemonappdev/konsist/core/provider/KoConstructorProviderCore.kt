@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.provider.KoConstructorProvider
 
 internal interface KoConstructorProviderCore :
@@ -16,4 +17,11 @@ internal interface KoConstructorProviderCore :
 
     override fun countConstructors(predicate: (KoConstructorDeclaration) -> Boolean): Int =
         constructors.count { predicate(it) }
+
+    override fun hasConstructors(): Boolean = constructors.isNotEmpty()
+
+    override fun hasConstructor(predicate: (KoConstructorDeclaration) -> Boolean): Boolean = constructors.any(predicate)
+
+    override fun hasAllConstructors(predicate: (KoConstructorDeclaration) -> Boolean): Boolean =
+        constructors.all(predicate)
 }
