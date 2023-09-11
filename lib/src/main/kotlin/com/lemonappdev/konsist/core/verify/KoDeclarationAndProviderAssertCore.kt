@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.verify
 
-import com.intellij.openapi.util.text.StringUtil.substringBeforeLast
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
@@ -13,11 +12,19 @@ import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-internal fun <E : KoBaseProvider> List<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
+internal fun <E : KoBaseProvider> List<E>.assert(
+    additionalMessage: String? = null,
+    function: (E) -> Boolean?,
+    positiveCheck: Boolean,
+) {
     var lastDeclaration: KoBaseProvider? = null
 
     try {
-        val testMethodName = getTestMethodNameFromFifthIndex()
+        val testMethodName = if (additionalMessage != null) {
+            getTestMethodNameFromFifthIndex()
+        } else {
+            getTestMethodNameFromSixthIndex()
+        }
 
         checkIfLocalListIsEmpty(this, getTestMethodNameFromFourthIndex())
 
@@ -32,7 +39,7 @@ internal fun <E : KoBaseProvider> List<E>.assert(function: (E) -> Boolean?, posi
             }
         }
 
-        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName)
+        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
@@ -111,16 +118,17 @@ private fun getResult(
     result: Map<Boolean?, List<Any>>,
     positiveCheck: Boolean,
     testMethodName: String,
+    additionalMessage: String?,
 ) {
     val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
 
     if (!allChecksPassed) {
         val failedItems = result[!positiveCheck] ?: emptyList()
-        throw KoCheckFailedException(getCheckFailedMessage(failedItems, testMethodName))
+        throw KoCheckFailedException(getCheckFailedMessage(failedItems, testMethodName, additionalMessage))
     }
 }
 
-private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String): String {
+private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String, additionalMessage: String?): String {
     var types = ""
     val failedDeclarationsMessage = failedItems.joinToString("\n") {
         val konsistDeclarationClassNamePrefix = "Ko"
@@ -155,5 +163,6 @@ private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String):
         }
     }
 
-    return "Assert '$testMethodName' has failed. Invalid $types (${failedItems.size}):\n$failedDeclarationsMessage"
+    val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
+    return "Assert '$testMethodName' has failed.${customMessage}Invalid $types (${failedItems.size}):\n$failedDeclarationsMessage"
 }

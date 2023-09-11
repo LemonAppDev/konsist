@@ -35,6 +35,27 @@ class KoDeclarationAssertForProviderSequenceTest {
     }
 
     @Test
+    fun `provider-assert-error-with-custom-message`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("provider-assert-error-with-custom-message")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
+
+        // then
+        try {
+            sut.assert(message) { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'provider-assert-error-with-custom-message' has failed." +
+                    "\n$message\nInvalid declarations (2)",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
     fun `provider-assert-fails-when-declaration-list-is-empty`() {
         // given
         val sut = getSnippetFile("provider-assert-fails-when-declaration-list-is-empty")

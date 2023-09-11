@@ -44,6 +44,46 @@ class KoDeclarationAssertForDeclarationSequenceTest {
     }
 
     @Test
+    fun `declaration-assert-error-with-custom-message`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("declaration-assert-error-with-custom-message")
+            .classes()
+            .asSequence()
+
+        // then
+        try {
+            sut.assert(message) { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-error-with-custom-message' has failed." +
+                    "\n$message\nInvalid declarations (1)",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `file-declaration-assert-error-with-custom-message`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message")
+            .files
+            .asSequence()
+
+        // then
+        try {
+            sut.assert(message) { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'file-declaration-assert-error-with-custom-message' has failed." +
+                    "\n$message\nInvalid files (1)",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
     fun `declaration-assert-displaying-correct-failed-declaration-type`() {
         // given
         val sut = getSnippetFile("declaration-assert-displaying-correct-failed-declaration-type")
