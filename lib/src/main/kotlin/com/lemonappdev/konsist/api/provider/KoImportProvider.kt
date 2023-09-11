@@ -51,6 +51,10 @@ interface KoImportProvider : KoBaseProvider {
     /**
      * Whether the declaration has all imports with the specified predicate.
      *
+     * Note that if the imports contains no elements, the function returns `true` because there are no elements in it
+     * that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     *
      * @param predicate The predicate function to determine if an import satisfies a condition.
      * @return `true` if the declaration has all imports with the specified predicate, `false` otherwise.
      */

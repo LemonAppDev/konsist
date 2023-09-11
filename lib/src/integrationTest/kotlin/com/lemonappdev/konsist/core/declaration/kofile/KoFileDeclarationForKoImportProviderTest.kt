@@ -20,7 +20,7 @@ class KoFileDeclarationForKoImportProviderTest {
             countImports { it.name == "com.lemonappdev.konsist.testdata.OtherImport" } shouldBeEqualTo 0
             hasImports() shouldBeEqualTo false
             hasImport { it.name == "com.lemonappdev.konsist.testdata.OtherImport" } shouldBeEqualTo false
-            hasAllImports { it.hasNameStartingWith("com.lemonappdev.") } shouldBeEqualTo false
+            hasAllImports { it.hasNameStartingWith("com.lemonappdev.") } shouldBeEqualTo true
             hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
         }
     }
