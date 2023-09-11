@@ -17,7 +17,7 @@ val <T : KoImportProvider> List<T>.imports: List<KoImportDeclaration>
 fun <T : KoImportProvider> List<T>.withImports(): List<T> = filter { it.hasImports() }
 
 /**
- * List containing declarations that have all imports satisfies a condition.
+ * List containing declarations whose imports all satisfy the predicate.
  *
  * @param predicate The predicate function to determine if a declaration import satisfies a condition.
  * @return A list containing declarations with the specified import(s).
@@ -27,7 +27,7 @@ fun <T : KoImportProvider> List<T>.withAllImports(predicate: (KoImportDeclaratio
 }
 
 /**
- * List containing declarations that have import satisfies a condition.
+ * List containing declarations that have import that satisfies a condition.
  *
  * @param predicate The predicate function to determine if a declaration import satisfies a condition.
  * @return A list containing declarations with the specified import(s).
@@ -68,17 +68,17 @@ fun <T : KoImportProvider> List<T>.withSomeImports(name: String, vararg names: S
 fun <T : KoImportProvider> List<T>.withoutImports(): List<T> = filterNot { it.hasImports() }
 
 /**
- * List containing declarations that have all imports satisfies a condition.
+ * List containing declarations for which all imports not satisfy the condition.
  *
  * @param predicate The predicate function to determine if a declaration import satisfies a condition.
- * @return A list containing declarations with the specified import(s).
+ * @return A list containing declarations without the specified import(s).
  */
 fun <T : KoImportProvider> List<T>.withoutAllImports(predicate: (KoImportDeclaration) -> Boolean): List<T> = filterNot {
     it.hasAllImports(predicate)
 }
 
 /**
- * List containing declarations that have import satisfies a condition.
+ * List containing declarations that have at least one import which not satisfies a condition.
  *
  * @param predicate The predicate function to determine if a declaration import satisfies a condition.
  * @return A list containing declarations with the specified import(s).
