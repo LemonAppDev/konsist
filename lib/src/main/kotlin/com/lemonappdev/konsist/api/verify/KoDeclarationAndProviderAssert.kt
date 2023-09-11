@@ -9,8 +9,8 @@ import com.lemonappdev.konsist.core.verify.assert
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
-fun <E : KoBaseProvider> List<E>.assert(function: (E) -> Boolean?): Unit {
-    assert(function, positiveCheck = true)
+fun <E : KoBaseProvider> List<E>.assert(message: String? = null, function: (E) -> Boolean?): Unit {
+    assert(message, function, positiveCheck = true)
 }
 
 /**
@@ -19,8 +19,8 @@ fun <E : KoBaseProvider> List<E>.assert(function: (E) -> Boolean?): Unit {
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
-fun <E : KoBaseProvider> List<E>.assertNot(function: (E) -> Boolean?): Unit {
-    assert(function, positiveCheck = false)
+fun <E : KoBaseProvider> List<E>.assertNot(message: String? = null, function: (E) -> Boolean?): Unit {
+    assert(message, function, positiveCheck = false)
 }
 
 /**
@@ -29,8 +29,8 @@ fun <E : KoBaseProvider> List<E>.assertNot(function: (E) -> Boolean?): Unit {
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
-fun <E : KoBaseProvider> Sequence<E>.assert(function: (E) -> Boolean?): Unit {
-    this.toList().assert(function, true)
+fun <E : KoBaseProvider> Sequence<E>.assert(message: String? = null, function: (E) -> Boolean?): Unit {
+    this.toList().assert(message, function, true)
 }
 
 /**
@@ -39,6 +39,6 @@ fun <E : KoBaseProvider> Sequence<E>.assert(function: (E) -> Boolean?): Unit {
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
-fun <E : KoBaseProvider> Sequence<E>.assertNot(function: (E) -> Boolean?): Unit {
-    this.toList().assert(function, false)
+fun <E : KoBaseProvider> Sequence<E>.assertNot(message: String? = null, function: (E) -> Boolean?): Unit {
+    this.toList().assert(message, function, false)
 }

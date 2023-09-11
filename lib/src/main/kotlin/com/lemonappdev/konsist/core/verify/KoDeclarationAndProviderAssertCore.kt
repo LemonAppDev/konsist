@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.verify
 
-import com.intellij.openapi.util.text.StringUtil.substringBeforeLast
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
@@ -13,11 +12,20 @@ import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-internal fun <E : KoBaseProvider> List<E>.assert(function: (E) -> Boolean?, positiveCheck: Boolean) {
+internal fun <E : KoBaseProvider> List<E>.assert(
+    message: String? = null,
+    function: (E) -> Boolean?,
+    positiveCheck: Boolean
+) {
     var lastDeclaration: KoBaseProvider? = null
 
     try {
-        val testMethodName = getTestMethodNameFromFifthIndex()
+        val testMethodName = if (message != null) {
+            getTestMethodNameFromFifthIndex()
+        }
+        else {
+            getTestMethodNameFromSixthIndex()
+        }
 
         checkIfLocalListIsEmpty(this, getTestMethodNameFromFourthIndex())
 
@@ -32,7 +40,7 @@ internal fun <E : KoBaseProvider> List<E>.assert(function: (E) -> Boolean?, posi
             }
         }
 
-        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName)
+        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, message)
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
@@ -44,7 +52,7 @@ private fun checkIfLocalListIsEmpty(localList: List<*>, testMethodName: String) 
     if (localList.isEmpty()) {
         throw KoPreconditionFailedException(
             "Declaration list is empty. Please make sure that list of declarations contain items " +
-                "before calling the '$testMethodName' method.",
+                    "before calling the '$testMethodName' method.",
         )
     }
 }
@@ -56,11 +64,11 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                (
-                    it.name == "Suppress" &&
-                        it.text.contains("\"konsist.$testMethodName\"") ||
-                        it.text.contains("\"$testMethodName\"")
-                    )
+                    (
+                            it.name == "Suppress" &&
+                                    it.text.contains("\"konsist.$testMethodName\"") ||
+                                    it.text.contains("\"$testMethodName\"")
+                            )
         }
         .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it, testMethodName) }
 
@@ -111,16 +119,17 @@ private fun getResult(
     result: Map<Boolean?, List<Any>>,
     positiveCheck: Boolean,
     testMethodName: String,
+    message: String?,
 ) {
     val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
 
     if (!allChecksPassed) {
         val failedItems = result[!positiveCheck] ?: emptyList()
-        throw KoCheckFailedException(getCheckFailedMessage(failedItems, testMethodName))
+        throw KoCheckFailedException(getCheckFailedMessage(failedItems, testMethodName, message))
     }
 }
 
-private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String): String {
+private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String, message: String?): String {
     var types = ""
     val failedDeclarationsMessage = failedItems.joinToString("\n") {
         val konsistDeclarationClassNamePrefix = "Ko"
@@ -155,5 +164,6 @@ private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String):
         }
     }
 
-    return "Assert '$testMethodName' has failed. Invalid $types (${failedItems.size}):\n$failedDeclarationsMessage"
+    val customMessage = if (message != null) "\n${message}\n" else " "
+    return "Assert '$testMethodName' has failed.${customMessage}Invalid $types (${failedItems.size}):\n$failedDeclarationsMessage"
 }
