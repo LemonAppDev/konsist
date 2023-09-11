@@ -6,47 +6,47 @@ import com.lemonappdev.konsist.core.verify.assert
 /**
  * Asserts that all elements in the list match the specified predicate.
  *
- * @param message An optional message to provide additional context when the assertion fails.
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
-fun <E : KoBaseProvider> List<E>.assert(message: String? = null, function: (E) -> Boolean?): Unit {
-    assert(message, function, positiveCheck = true)
+fun <E : KoBaseProvider> List<E>.assert(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
+    assert(additionalMessage, function, positiveCheck = true)
 }
 
 /**
  * Asserts that no elements in the list match the specified predicate.
  *
- * @param message An optional message to provide additional context when the assertion fails.
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
-fun <E : KoBaseProvider> List<E>.assertNot(message: String? = null, function: (E) -> Boolean?): Unit {
-    assert(message, function, positiveCheck = false)
+fun <E : KoBaseProvider> List<E>.assertNot(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
+    assert(additionalMessage, function, positiveCheck = false)
 }
 
 /**
  * Asserts that all elements in the sequence match the specified predicate.
  *
- * @param message An optional message to provide additional context when the assertion fails.
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
-fun <E : KoBaseProvider> Sequence<E>.assert(message: String? = null, function: (E) -> Boolean?): Unit {
-    this.toList().assert(message, function, true)
+fun <E : KoBaseProvider> Sequence<E>.assert(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
+    this.toList().assert(additionalMessage, function, true)
 }
 
 /**
  * Asserts that no elements in the sequence match the specified predicate.
  *
- * @param message An optional message to provide additional context when the assertion fails.
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
-fun <E : KoBaseProvider> Sequence<E>.assertNot(message: String? = null, function: (E) -> Boolean?): Unit {
-    this.toList().assert(message, function, false)
+fun <E : KoBaseProvider> Sequence<E>.assertNot(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
+    this.toList().assert(additionalMessage, function, false)
 }

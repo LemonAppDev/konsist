@@ -13,14 +13,14 @@ import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 internal fun <E : KoBaseProvider> List<E>.assert(
-    message: String? = null,
+    additionalMessage: String? = null,
     function: (E) -> Boolean?,
     positiveCheck: Boolean,
 ) {
     var lastDeclaration: KoBaseProvider? = null
 
     try {
-        val testMethodName = if (message != null) {
+        val testMethodName = if (additionalMessage != null) {
             getTestMethodNameFromFifthIndex()
         } else {
             getTestMethodNameFromSixthIndex()
@@ -39,7 +39,7 @@ internal fun <E : KoBaseProvider> List<E>.assert(
             }
         }
 
-        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, message)
+        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
@@ -118,17 +118,17 @@ private fun getResult(
     result: Map<Boolean?, List<Any>>,
     positiveCheck: Boolean,
     testMethodName: String,
-    message: String?,
+    additionalMessage: String?,
 ) {
     val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
 
     if (!allChecksPassed) {
         val failedItems = result[!positiveCheck] ?: emptyList()
-        throw KoCheckFailedException(getCheckFailedMessage(failedItems, testMethodName, message))
+        throw KoCheckFailedException(getCheckFailedMessage(failedItems, testMethodName, additionalMessage))
     }
 }
 
-private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String, message: String?): String {
+private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String, additionalMessage: String?): String {
     var types = ""
     val failedDeclarationsMessage = failedItems.joinToString("\n") {
         val konsistDeclarationClassNamePrefix = "Ko"
@@ -163,6 +163,6 @@ private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String, 
         }
     }
 
-    val customMessage = if (message != null) "\n${message}\n" else " "
+    val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
     return "Assert '$testMethodName' has failed.${customMessage}Invalid $types (${failedItems.size}):\n$failedDeclarationsMessage"
 }
