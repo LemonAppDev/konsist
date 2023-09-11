@@ -36,10 +36,10 @@ class KoConstructorProviderListExtTest {
     fun `withConstructor() returns declaration with constructor`() {
         // given
         val declaration1: KoConstructorProvider = mockk {
-            every { numConstructors } returns 1
+            every { hasConstructors() } returns true
         }
         val declaration2: KoConstructorProvider = mockk {
-            every { numConstructors } returns 0
+            every { hasConstructors() } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -54,15 +54,91 @@ class KoConstructorProviderListExtTest {
     fun `withoutConstructor() returns declaration without constructor`() {
         // given
         val declaration1: KoConstructorProvider = mockk {
-            every { numConstructors } returns 1
+            every { hasConstructors() } returns true
         }
         val declaration2: KoConstructorProvider = mockk {
-            every { numConstructors } returns 0
+            every { hasConstructors() } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutConstructor()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withAllConstructors{} returns declaration with all constructors satisfy predicate`() {
+        // given
+        val predicate: (KoConstructorDeclaration) -> Boolean = { it.hasPrivateModifier }
+        val declaration1: KoConstructorProvider = mockk {
+            every { hasAllConstructors(predicate) } returns true
+        }
+        val declaration2: KoConstructorProvider = mockk {
+            every { hasAllConstructors(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllConstructors(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withConstructor{} returns declaration with constructor which satisfy predicate`() {
+        // given
+        val predicate: (KoConstructorDeclaration) -> Boolean = { it.hasPrivateModifier }
+        val declaration1: KoConstructorProvider = mockk {
+            every { hasConstructor(predicate) } returns true
+        }
+        val declaration2: KoConstructorProvider = mockk {
+            every { hasConstructor(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withConstructor(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutAllConstructors{} returns declaration with all constructors which not satisfy predicate`() {
+        // given
+        val predicate: (KoConstructorDeclaration) -> Boolean = { it.hasPrivateModifier }
+        val declaration1: KoConstructorProvider = mockk {
+            every { hasAllConstructors(predicate) } returns true
+        }
+        val declaration2: KoConstructorProvider = mockk {
+            every { hasAllConstructors(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllConstructors(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutConstructor{} returns declaration without constructor which satisfy predicate`() {
+        // given
+        val predicate: (KoConstructorDeclaration) -> Boolean = { it.hasPrivateModifier }
+        val declaration1: KoConstructorProvider = mockk {
+            every { hasConstructor(predicate) } returns true
+        }
+        val declaration2: KoConstructorProvider = mockk {
+            every { hasConstructor(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutConstructor(predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)
