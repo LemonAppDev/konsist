@@ -107,8 +107,7 @@ Check out our [snippet](https://docs.konsist.lemonappdev.com/inspiration/snippet
 
 ### Community & Support
 
-Start the [discussion here on GitHub](https://github.com/LemonAppDev/konsist/discussions) or 
-use [#konsist channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) at kotlinlang Slack Workspace.
+Use [#konsist channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) at kotlinlang Slack Workspace (preferred) or start [GitHub discussion](https://github.com/LemonAppDev/konsist/discussions).
 
 ## Contributing
 
