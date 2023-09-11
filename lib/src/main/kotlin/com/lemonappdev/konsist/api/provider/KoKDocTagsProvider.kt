@@ -24,17 +24,17 @@ interface KoKDocTagsProvider : KoBaseProvider {
     val paramTags: List<KoValuedKDocTagDeclaration>
 
     /**
-     * List of `@return` tags.
+     * The `@return` tag.
      */
     val returnTag: KoKDocTagDeclaration?
 
     /**
-     * List of `@constructor` tags.
+     * The `@constructor` tag.
      */
     val constructorTag: KoKDocTagDeclaration?
 
     /**
-     * List of `@receiver` tags.
+     * The `@receiver` tag.
      */
     val receiverTag: KoKDocTagDeclaration?
 
@@ -69,27 +69,27 @@ interface KoKDocTagsProvider : KoBaseProvider {
     val authorTags: List<KoKDocTagDeclaration>
 
     /**
-     * List of `@since` tags.
+     * The `@since` tag.
      */
     val sinceTag: KoKDocTagDeclaration?
 
     /**
-     * List of `@suppress` tags.
+     * The `@suppress` tag.
      */
     val suppressTag: KoKDocTagDeclaration?
 
     /**
-     * List of `@version` tags.
+     * The `@version` tag.
      */
     val versionTag: KoKDocTagDeclaration?
 
     /**
-     * List of `@propertySetter` tags.
+     * The `@propertySetter` tag.
      */
     val propertySetterTag: KoKDocTagDeclaration?
 
     /**
-     * List of `@propertyGetter` tags.
+     * The `@propertyGetter` tag.
      */
     val propertyGetterTag: KoKDocTagDeclaration?
 
