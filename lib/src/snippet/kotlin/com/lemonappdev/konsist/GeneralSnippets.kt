@@ -40,7 +40,11 @@ class GeneralSnippets {
                     .declarations()
                     .indexOfFirstInstance<KoFunctionDeclaration>()
 
-                lastKoPropertyDeclarationIndex <= firstKoFunctionDeclarationIndex
+                if (lastKoPropertyDeclarationIndex != -1 && firstKoFunctionDeclarationIndex != -1) {
+                    lastKoPropertyDeclarationIndex < firstKoFunctionDeclarationIndex
+                } else {
+                    true
+                }
             }
     }
 
