@@ -28,10 +28,22 @@ internal interface KoEnumConstantProviderCore :
     override fun countEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Int =
         enumConstants.count { predicate(it) }
 
+    @Deprecated(
+        "Will be removed in v1.0.0",
+        replaceWith = ReplaceWith("hasEnumConstant { it.name == ... } && hasEnumConstant { it.name == ... } ..."),
+    )
     override fun hasEnumConstants(vararg names: String): Boolean = when {
         names.isEmpty() -> enumConstants.isNotEmpty()
         else -> names.all {
             enumConstants.any { constant -> constant.name == it }
         }
     }
+
+    override fun hasEnumConstants(): Boolean = enumConstants.isNotEmpty()
+
+    override fun hasEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean =
+        enumConstants.any(predicate)
+
+    override fun hasAllEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean =
+        enumConstants.all(predicate)
 }

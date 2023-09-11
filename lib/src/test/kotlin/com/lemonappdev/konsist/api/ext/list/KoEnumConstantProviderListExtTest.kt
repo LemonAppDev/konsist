@@ -69,6 +69,86 @@ class KoEnumConstantProviderListExtTest {
     }
 
     @Test
+    fun `withAllEnumConstants{} returns declaration with all enum constants satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (KoEnumConstantDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val declaration1: KoEnumConstantProvider = mockk {
+            every { hasAllEnumConstants(predicate) } returns true
+        }
+        val declaration2: KoEnumConstantProvider = mockk {
+            every { hasAllEnumConstants(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllEnumConstants(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withEnumConstant{} returns declaration with enum constant which satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (KoEnumConstantDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val declaration1: KoEnumConstantProvider = mockk {
+            every { hasEnumConstant(predicate) } returns true
+        }
+        val declaration2: KoEnumConstantProvider = mockk {
+            every { hasEnumConstant(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withEnumConstant(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutAllEnumConstants{} returns declaration with all enum constants which not satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (KoEnumConstantDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val declaration1: KoEnumConstantProvider = mockk {
+            every { hasAllEnumConstants(predicate) } returns true
+        }
+        val declaration2: KoEnumConstantProvider = mockk {
+            every { hasAllEnumConstants(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllEnumConstants(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutEnumConstant{} returns declaration without enum constant which satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (KoEnumConstantDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val declaration1: KoEnumConstantProvider = mockk {
+            every { hasEnumConstant(predicate) } returns true
+        }
+        val declaration2: KoEnumConstantProvider = mockk {
+            every { hasEnumConstant(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutEnumConstant(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllEnumConstants(String) returns declaration with all of given constants`() {
         // given
         val constant1 = "SampleConstant1"
