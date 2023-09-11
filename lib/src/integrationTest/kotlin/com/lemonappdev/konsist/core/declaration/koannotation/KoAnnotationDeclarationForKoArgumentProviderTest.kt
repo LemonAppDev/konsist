@@ -19,7 +19,10 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
         assertSoftly(sut) {
             arguments shouldBeEqualTo emptyList()
             numArguments shouldBeEqualTo 0
+            countArguments { it.value == "text" } shouldBeEqualTo 0
             hasArguments() shouldBeEqualTo false
+            hasArgument { it.value == "text" } shouldBeEqualTo false
+            hasAllArguments { it.value == "text" } shouldBeEqualTo true
         }
     }
 
@@ -35,7 +38,10 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
         assertSoftly(sut) {
             arguments shouldBeEqualTo emptyList()
             numArguments shouldBeEqualTo 0
+            countArguments { it.value == "text" } shouldBeEqualTo 0
             hasArguments() shouldBeEqualTo false
+            hasArgument { it.value == "text" } shouldBeEqualTo false
+            hasAllArguments { it.value == "text" } shouldBeEqualTo true
         }
     }
 
@@ -51,7 +57,13 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
         assertSoftly(sut) {
             arguments.map { it.value } shouldBeEqualTo listOf("text")
             numArguments shouldBeEqualTo 1
+            countArguments { it.value == "text" } shouldBeEqualTo 1
+            countArguments { it.value == "other" } shouldBeEqualTo 0
             hasArguments() shouldBeEqualTo true
+            hasArgument { it.value == "text" } shouldBeEqualTo true
+            hasArgument { it.value == "other" } shouldBeEqualTo false
+            hasAllArguments { it.value == "text" } shouldBeEqualTo true
+            hasAllArguments { it.value == "other" } shouldBeEqualTo false
         }
     }
 
@@ -67,7 +79,13 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
         assertSoftly(sut) {
             arguments.map { it.value } shouldBeEqualTo listOf("text", "true")
             numArguments shouldBeEqualTo 2
+            countArguments { it.value.startsWith("t") } shouldBeEqualTo 2
+            countArguments { it.value == "text" } shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true
+            hasArgument { it.value == "text" } shouldBeEqualTo true
+            hasArgument { it.value == "other" } shouldBeEqualTo false
+            hasAllArguments { it.value.startsWith("t") } shouldBeEqualTo true
+            hasAllArguments { it.value.startsWith("k") } shouldBeEqualTo false
         }
     }
 
