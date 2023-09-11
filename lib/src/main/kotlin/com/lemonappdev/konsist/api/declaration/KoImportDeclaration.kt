@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.api.provider.KoAliasProvider
 import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoMatchesProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
@@ -18,6 +19,7 @@ interface KoImportDeclaration :
     KoAliasProvider,
     KoContainingFileProvider,
     KoLocationProvider,
+    KoMatchesProvider,
     KoNameProvider,
     KoPathProvider,
     KoTextProvider,
