@@ -14,7 +14,7 @@ class KoImportDeclarationForKoMatchesProviderTest {
             .first()
 
         // then
-        assertSoftly (sut) {
+        assertSoftly(sut) {
             matches("com..") shouldBeEqualTo true
             matches("com") shouldBeEqualTo false
             matches("..testdata..") shouldBeEqualTo true

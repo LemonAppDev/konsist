@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.api.provider
 /**
  * An interface representing a Kotlin declaration that provides information about whether it matches a specified element.
  */
-interface KoMatchesProvider: KoBaseProvider {
+interface KoMatchesProvider : KoBaseProvider {
     /**
      *  Whether the given [element] matches to declaration.
      *
