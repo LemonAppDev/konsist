@@ -19,7 +19,10 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
         assertSoftly(sut) {
             arguments shouldBeEqualTo emptyList()
             numArguments shouldBeEqualTo 0
+            countArguments { it.value == "text" } shouldBeEqualTo 0
             hasArguments() shouldBeEqualTo false
+            hasArgument { it.value == "text" } shouldBeEqualTo false
+            hasAllArguments { it.value == "text" } shouldBeEqualTo true
         }
     }
 
@@ -35,7 +38,10 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
         assertSoftly(sut) {
             arguments shouldBeEqualTo emptyList()
             numArguments shouldBeEqualTo 0
+            countArguments { it.value == "text" } shouldBeEqualTo 0
             hasArguments() shouldBeEqualTo false
+            hasArgument { it.value == "text" } shouldBeEqualTo false
+            hasAllArguments { it.value == "text" } shouldBeEqualTo true
         }
     }
 
@@ -51,7 +57,13 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
         assertSoftly(sut) {
             arguments.map { it.value } shouldBeEqualTo listOf("0")
             numArguments shouldBeEqualTo 1
+            countArguments { it.value == "0" } shouldBeEqualTo 1
+            countArguments { it.value == "1" } shouldBeEqualTo 0
             hasArguments() shouldBeEqualTo true
+            hasArgument { it.value == "0" } shouldBeEqualTo true
+            hasArgument { it.value == "1" } shouldBeEqualTo false
+            hasAllArguments { it.value == "0" } shouldBeEqualTo true
+            hasAllArguments { it.value == "1" } shouldBeEqualTo false
         }
     }
 
@@ -67,7 +79,13 @@ class KoEnumConstantDeclarationForKoArgumentProviderTest {
         assertSoftly(sut) {
             arguments.map { it.value } shouldBeEqualTo listOf("0", "false")
             numArguments shouldBeEqualTo 2
+            countArguments { it.value.startsWith("fal") || it.value == "0" } shouldBeEqualTo 2
+            countArguments { it.value == "0" } shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true
+            hasArgument { it.value == "0" } shouldBeEqualTo true
+            hasArgument { it.value == "1" } shouldBeEqualTo false
+            hasAllArguments { it.value.startsWith("fal") || it.value == "0" } shouldBeEqualTo true
+            hasAllArguments { it.value.startsWith("k") } shouldBeEqualTo false
         }
     }
 
