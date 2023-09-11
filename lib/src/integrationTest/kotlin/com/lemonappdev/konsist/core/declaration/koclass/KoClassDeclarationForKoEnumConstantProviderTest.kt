@@ -19,6 +19,8 @@ class KoClassDeclarationForKoEnumConstantProviderTest {
             numEnumConstants shouldBeEqualTo 0
             countEnumConstants { it.hasNameStartingWith("SAMPLE") } shouldBeEqualTo 0
             hasEnumConstants() shouldBeEqualTo false
+            hasEnumConstant { it.hasNameStartingWith("SAMPLE") } shouldBeEqualTo false
+            hasAllEnumConstants { it.hasNameStartingWith("SAMPLE") } shouldBeEqualTo true
             hasEnumConstants("SAMPLE_CONSTANT") shouldBeEqualTo false
         }
     }
@@ -47,6 +49,10 @@ class KoClassDeclarationForKoEnumConstantProviderTest {
             countEnumConstants { it.hasNameStartingWith("SAMPLE") } shouldBeEqualTo 2
             countEnumConstants { it.name == "SAMPLE_CONSTANT_1" } shouldBeEqualTo 1
             hasEnumConstants() shouldBeEqualTo true
+            hasEnumConstant { it.name == "SAMPLE_CONSTANT_1" } shouldBeEqualTo true
+            hasEnumConstant { it.name == "OTHER_CONSTANT_1" } shouldBeEqualTo false
+            hasAllEnumConstants { it.name == "SAMPLE_CONSTANT_1" } shouldBeEqualTo false
+            hasAllEnumConstants { it.hasNameStartingWith("SAMPLE") } shouldBeEqualTo true
             hasEnumConstants("SAMPLE_CONSTANT_1") shouldBeEqualTo true
             hasEnumConstants("SAMPLE_CONSTANT_1", "SAMPLE_CONSTANT_2") shouldBeEqualTo true
             hasEnumConstants("OTHER_CONSTANT_1") shouldBeEqualTo false

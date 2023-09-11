@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoEnumConstantDeclaration
+import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.provider.KoEnumConstantProvider
 import com.lemonappdev.konsist.core.declaration.KoEnumConstantDeclarationCore
 import org.jetbrains.kotlin.psi.KtClass
@@ -34,4 +35,12 @@ internal interface KoEnumConstantProviderCore :
             enumConstants.any { constant -> constant.name == it }
         }
     }
+
+    override fun hasEnumConstants(): Boolean = enumConstants.isNotEmpty()
+
+    override fun hasEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean =
+        enumConstants.any(predicate)
+
+    override fun hasAllEnumConstants(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean =
+        enumConstants.all(predicate)
 }

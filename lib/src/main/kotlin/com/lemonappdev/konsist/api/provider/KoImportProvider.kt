@@ -30,7 +30,10 @@ interface KoImportProvider : KoBaseProvider {
      * @param names the names of the imports to check.
      * @return `true` if the declaration has imports with the specified names (or any import if [names] is empty), `false` otherwise.
      */
-    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasAllImports { it.name == ... }"))
+    @Deprecated(
+        "Will be removed in v1.0.0",
+        ReplaceWith("hasImport { it.name == ... } && hasImport { it.name == ... } ...")
+    )
     fun hasImports(vararg names: String): Boolean
 
     /**
