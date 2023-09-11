@@ -34,7 +34,7 @@ interface KoEnumConstantProvider : KoBaseProvider {
      */
     @Deprecated(
         "Will be removed in v1.0.0",
-        ReplaceWith("hasEnumConstant { it.name == ... } && hasEnumConstant { it.name == ... } ...")
+        ReplaceWith("hasEnumConstant { it.name == ... } && hasEnumConstant { it.name == ... } ..."),
     )
     fun hasEnumConstants(vararg names: String): Boolean
 

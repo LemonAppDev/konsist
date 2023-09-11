@@ -32,7 +32,7 @@ interface KoImportProvider : KoBaseProvider {
      */
     @Deprecated(
         "Will be removed in v1.0.0",
-        ReplaceWith("hasImport { it.name == ... } && hasImport { it.name == ... } ...")
+        ReplaceWith("hasImport { it.name == ... } && hasImport { it.name == ... } ..."),
     )
     fun hasImports(vararg names: String): Boolean
 

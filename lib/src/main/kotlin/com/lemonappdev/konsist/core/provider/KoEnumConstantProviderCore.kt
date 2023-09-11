@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoEnumConstantDeclaration
-import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.provider.KoEnumConstantProvider
 import com.lemonappdev.konsist.core.declaration.KoEnumConstantDeclarationCore
 import org.jetbrains.kotlin.psi.KtClass
@@ -31,7 +30,7 @@ internal interface KoEnumConstantProviderCore :
 
     @Deprecated(
         "Will be removed in v1.0.0",
-        replaceWith = ReplaceWith("hasEnumConstant { it.name == ... } && hasEnumConstant { it.name == ... } ...")
+        replaceWith = ReplaceWith("hasEnumConstant { it.name == ... } && hasEnumConstant { it.name == ... } ..."),
     )
     override fun hasEnumConstants(vararg names: String): Boolean = when {
         names.isEmpty() -> enumConstants.isNotEmpty()
