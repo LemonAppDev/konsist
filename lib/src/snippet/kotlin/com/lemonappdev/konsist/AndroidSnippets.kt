@@ -40,6 +40,6 @@ class AndroidSnippets {
         Konsist
             .scopeFromProject()
             .files
-            .assertNot { it.hasImports("android.util.Log") }
+            .assertNot { it.hasImport { import -> import.name == "android.util.Log" } }
     }
 }

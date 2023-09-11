@@ -70,6 +70,86 @@ class KoImportProviderListExtTest {
     }
 
     @Test
+    fun `withAllImports{} returns declaration with all imports satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (KoImportDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val declaration1: KoImportProvider = mockk {
+            every { hasAllImports(predicate) } returns true
+        }
+        val declaration2: KoImportProvider = mockk {
+            every { hasAllImports(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllImports(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withImport{} returns declaration with import which satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (KoImportDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val declaration1: KoImportProvider = mockk {
+            every { hasImport(predicate) } returns true
+        }
+        val declaration2: KoImportProvider = mockk {
+            every { hasImport(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withImport(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutAllImports{} returns declaration with all imports which not satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (KoImportDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val declaration1: KoImportProvider = mockk {
+            every { hasAllImports(predicate) } returns true
+        }
+        val declaration2: KoImportProvider = mockk {
+            every { hasAllImports(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllImports(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withoutImport{} returns declaration without import which satisfy predicate`() {
+        // given
+        val suffix = "Name"
+        val predicate: (KoImportDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
+        val declaration1: KoImportProvider = mockk {
+            every { hasImport(predicate) } returns true
+        }
+        val declaration2: KoImportProvider = mockk {
+            every { hasImport(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutImport(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllImports(String) returns declaration with all of given imports`() {
         // given
         val import1 = "SampleImport1"

@@ -19,6 +19,8 @@ class KoFileDeclarationForKoImportProviderTest {
             numImports shouldBeEqualTo 0
             countImports { it.name == "com.lemonappdev.konsist.testdata.OtherImport" } shouldBeEqualTo 0
             hasImports() shouldBeEqualTo false
+            hasImport { it.name == "com.lemonappdev.konsist.testdata.OtherImport" } shouldBeEqualTo false
+            hasAllImports { it.hasNameStartingWith("com.lemonappdev.") } shouldBeEqualTo true
             hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
         }
     }
@@ -55,11 +57,15 @@ class KoFileDeclarationForKoImportProviderTest {
             countImports { it.hasNameStartingWith("com.lemonappdev") } shouldBeEqualTo 2
             countImports { it.name == "com.lemonappdev.konsist.testdata.SampleType" } shouldBeEqualTo 1
             hasImports() shouldBeEqualTo true
+            hasImport { it.name == "com.lemonappdev.konsist.testdata.SampleType" } shouldBeEqualTo true
+            hasImport { it.name == "com.lemonappdev.konsist.testdata.OtherType" } shouldBeEqualTo false
+            hasAllImports { it.hasNameStartingWith("com.lemonappdev.") } shouldBeEqualTo true
+            hasAllImports { it.hasNameStartingWith("com.other.") } shouldBeEqualTo false
             hasImports("com..") shouldBeEqualTo true
             hasImports("com..", "..testdata..") shouldBeEqualTo true
             hasImports("com") shouldBeEqualTo false
             hasImports("com", "..testdata..") shouldBeEqualTo false
-            hasImports("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo true
+            hasImports("com.lemonappdev..testdata.SampleType") shouldBeEqualTo true
             hasImports("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
         }
     }
