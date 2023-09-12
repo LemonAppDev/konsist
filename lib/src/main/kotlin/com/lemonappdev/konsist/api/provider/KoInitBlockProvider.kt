@@ -31,7 +31,7 @@ interface KoInitBlockProvider : KoBaseProvider {
     fun countInitBlocks(predicate: (KoInitBlockDeclaration) -> Boolean): Int
 
     /**
-     * Whatever declaration has init block defined.
+     * Whatever declaration has init blocks.
      *
      * @return `true` if the declaration has init block, `false` otherwise.
      */
