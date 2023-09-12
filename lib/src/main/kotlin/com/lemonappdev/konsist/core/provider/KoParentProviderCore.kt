@@ -26,7 +26,7 @@ internal interface KoParentProviderCore :
     override fun countParents(predicate: (KoParentDeclaration) -> Boolean): Int =
         parents.count { predicate(it) }
 
-    @Deprecated("Will be removed in v1.0.0")
+    @Deprecated("Will be removed in v1.0.0.", ReplaceWith("hasParentsWithAllNames(*names)"))
     override fun hasParents(vararg names: String): Boolean = when {
         names.isEmpty() -> parents.isNotEmpty()
         else -> names.all {
