@@ -94,5 +94,3 @@ class KoFunctionDeclarationForKoParametersProviderTest {
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/declaration/kofunction/snippet/forkoparametersprovider/", fileName)
 }
-fun sampleFunction(sampleParameter1: Int, sampleParameter2: Int) {
-}

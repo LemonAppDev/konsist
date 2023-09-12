@@ -170,7 +170,6 @@ fun <T : KoParametersProvider> List<T>.withSomeParameters(name: String, vararg n
             """,
     ReplaceWith("withoutParameterNamed/withoutAllParametersNamed"),
 )
-
 fun <T : KoParametersProvider> List<T>.withoutAllParameters(name: String, vararg names: String): List<T> = filter {
     !it.hasParameterNamed(name) && names.none { name -> it.hasParameterNamed(name) }
 }
