@@ -19,22 +19,22 @@
 
 ## Release
 
-1. Create `release-vx.y.z` branch
-2. Update version in [gradle.properties](gradle.properties) file
-3. Update version in [README.md](README.md) file
-4. Update version in starter projects (`sample/starter-projects`) and create PR to `main`.
-5. Merge release branch to `main`
-6. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
-7. Create a [new GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
+1. Merge `main` to `develop`
+2. Create `release-vx.y.z` branch
+3. Merge `release-vx.y.z` branch to `main`
+4. Test Starter projects (`sample/starter-projects`) and create PR to `main`.
+5. Update Konsist version
+   1. [gradle.properties](gradle.properties) file
+   2. [README.md](README.md) file
+6. Open Release PR and wait for all checks to pass
+7. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
+8. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
     1. set `vx.y.z` as tag version
     2. set `vx.y.z` as release title
-8. Update Konsist version in the Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) page 
-9. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
-10. Merge above PR
-11. Notify community
-12. Message on [Konsist Channel](https://kotlinlang.slack.com/archives/C05QG9FD6KS) in Kotlin Slack
-13. Tweet
-14. Linkedin
+9. Update Konsist version in the Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) docs page 
+10. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
+11. Merge release PR
+12. Notify the community
 
 ## Sonatype
 
@@ -139,3 +139,13 @@ E.g. In `KoClassDeclaration`:
 - `withSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
 - `withoutAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
 - `withoutSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
+
+## Build Errors
+
+Error
+```
+No matching variant of project :buildSrc was found. The consumer was configured to find a library for use during runtime, compatible with Java 17, packaged as a jar,
+```
+
+Fix
+Change Gradle version `File -> Settings -> Build, Execution, Deployment -> Build Tools -> Gradle`
