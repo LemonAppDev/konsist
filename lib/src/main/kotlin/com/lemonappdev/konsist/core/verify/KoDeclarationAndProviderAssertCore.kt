@@ -164,5 +164,6 @@ private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String, 
     }
 
     val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
-    return "Assert '$testMethodName' was violated (${failedItems.size} times).${customMessage}Invalid $types:\n$failedDeclarationsMessage"
+    val times = if (failedItems.size == 1) "time" else "times"
+    return "Assert '$testMethodName' was violated (${failedItems.size} $times).${customMessage}Invalid $types:\n$failedDeclarationsMessage"
 }
