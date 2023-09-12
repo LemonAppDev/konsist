@@ -28,7 +28,7 @@ class KoDeclarationAssertForProviderListTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'provider-assert-test-method-name' has failed. Invalid declarations (2)")
+            e.message?.shouldContain("Assert 'provider-assert-test-method-name' was violated (2 times)")
                 ?: throw e
         }
     }
@@ -46,8 +46,8 @@ class KoDeclarationAssertForProviderListTest {
             sut.assert(message) { false }
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'provider-assert-error-with-custom-message' has failed." +
-                    "\n$message\nInvalid declarations (2)",
+                "Assert 'provider-assert-error-with-custom-message' was violated (2 times)." +
+                    "\n$message\nInvalid declarations:",
             )
                 ?: throw e
         }
