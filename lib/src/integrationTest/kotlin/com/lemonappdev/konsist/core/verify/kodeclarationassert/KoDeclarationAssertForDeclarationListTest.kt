@@ -24,7 +24,7 @@ class KoDeclarationAssertForDeclarationListTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' was violated (1 times)")
+            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' was violated (1 time)")
                 ?: throw e
         }
     }
@@ -39,7 +39,7 @@ class KoDeclarationAssertForDeclarationListTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' was violated (1 times)")
+            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' was violated (1 time)")
                 ?: throw e
         }
     }
@@ -56,7 +56,7 @@ class KoDeclarationAssertForDeclarationListTest {
             sut.assert(message) { false }
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-error-with-custom-message' was violated (1 times)." +
+                "Assert 'declaration-assert-error-with-custom-message' was violated (1 time)." +
                     "\n$message\nInvalid declarations",
             )
                 ?: throw e
@@ -75,7 +75,7 @@ class KoDeclarationAssertForDeclarationListTest {
             sut.assert(message) { false }
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'file-declaration-assert-error-with-custom-message' was violated (1 times)." +
+                "Assert 'file-declaration-assert-error-with-custom-message' was violated (1 time)." +
                     "\n$message\nInvalid files:",
             )
                 ?: throw e
