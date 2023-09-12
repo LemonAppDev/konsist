@@ -207,7 +207,13 @@ fun <T : KoParentProvider> List<T>.withoutSomeParentsOf(kClass: KClass<*>, varar
  * @param names The name(s) of the parent(s) to include.
  * @return A list containing declarations with all specified parent(s).
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withAllParentsNamed(*names)"))
+@Deprecated(
+    """
+            Will be removed in v1.0.0. 
+            If you passed one argument - replace with `withParentNamed`, otherwise with `withAllParentsNamed`.
+            """,
+    ReplaceWith("withParentNamed/withAllParentsNamed")
+)
 fun <T : KoParentProvider> List<T>.withAllParents(name: String, vararg names: String): List<T> = filter {
     it.hasParents(name, *names)
 }
@@ -231,7 +237,13 @@ fun <T : KoParentProvider> List<T>.withSomeParents(name: String, vararg names: S
  * @param names The name(s) of the parent(s) to exclude.
  * @return A list containing declarations without all specified parent(s).
  */
-@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutAllParentsNamed(*names"))
+@Deprecated(
+    """
+            Will be removed in v1.0.0. 
+            If you passed one argument - replace with `withoutParentNamed`, otherwise with `withoutAllParentsNamed`.
+            """,
+    ReplaceWith("withoutParentNamed/withoutAllParentsNamed")
+)
 fun <T : KoParentProvider> List<T>.withoutAllParents(name: String, vararg names: String): List<T> = filter {
     !it.hasParents(name, *names)
 }
