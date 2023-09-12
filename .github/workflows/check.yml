@@ -151,8 +151,6 @@ jobs:
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
-          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
-          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
 
       - name: Run Integration Test
         run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
@@ -176,8 +174,6 @@ jobs:
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
-          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
-          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
 
       - name: Run Integration Test
         run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
@@ -199,8 +195,6 @@ jobs:
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
-          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
-          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
 
       - name: Run Root Integration Test
         run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
@@ -227,8 +221,6 @@ jobs:
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
-          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
-          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
 
       - name: Run Root Integration Test
         run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew integrationTest
@@ -262,8 +254,6 @@ jobs:
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
-          -P konsist.signingKey=${{secrets.GPG_SIGNING_KEY_BASE_64}}
-          -P konsist.signingPassword=${{secrets.GPG_SIGNING_PASSWORD_BASE_64}}
 
       - name: List Artifacts
         run: ls -R ~/.m2/repository/
