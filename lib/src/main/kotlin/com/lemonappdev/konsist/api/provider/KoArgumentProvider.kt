@@ -33,11 +33,11 @@ interface KoArgumentProvider : KoBaseProvider {
     fun hasArguments(): Boolean
 
     /**
-    * Determines whether the declaration has at least one argument whose name matches any of the specified names.
-    *
-    * @param names the names of the arguments to check.
-    * @return `true` if there is a matching declaration, `false` otherwise.
-    */
+     * Determines whether the declaration has at least one argument whose name matches any of the specified names.
+     *
+     * @param names the names of the arguments to check.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
     fun hasArgumentWithName(vararg names: String): Boolean
 
     /**
