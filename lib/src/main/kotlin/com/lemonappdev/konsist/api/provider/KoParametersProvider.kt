@@ -30,5 +30,45 @@ interface KoParametersProvider : KoBaseProvider {
      * @param name the name of the parameter to check.
      * @return `true` if the declaration has a parameter with the specified name, `false` otherwise.
      */
+    @Deprecated("Will be removed in v1.0.0.", ReplaceWith("hasParameterWithName(name)"))
     fun hasParameterNamed(name: String): Boolean
+
+    /**
+     * Whatever declaration has any parameter.
+     *
+     * @return `true` if the declaration has any parameter, `false` otherwise.
+     */
+    fun hasParameters(): Boolean
+
+    /**
+     * Determines whether the declaration has at least one parameter whose name matches any of the specified names.
+     *
+     * @param names the names of the parameters to check.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasParameterWithName(vararg names: String): Boolean
+
+    /**
+     * Determines whether the declaration has parameters with all the specified names.
+     *
+     * @param names The names of the parameters to check.
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasParametersWithAllNames(vararg names: String): Boolean
+
+    /**
+     * Determines whether the declaration has at least one parameter that satisfies the provided predicate.
+     *
+     * @param predicate A function that defines the condition to be met by a parameter declaration.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasParameter(predicate: (KoParameterDeclaration) -> Boolean): Boolean
+
+    /**
+     * Determines whether the declaration has all parameters that satisfy the provided predicate.
+     *
+     * @param predicate A function that defines the condition to be met by parameter declarations.
+     * @return `true` if all parameter declarations satisfy the predicate, `false` otherwise.
+     */
+    fun hasAllParameters(predicate: (KoParameterDeclaration) -> Boolean): Boolean
 }

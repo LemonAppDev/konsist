@@ -23,5 +23,20 @@ internal interface KoParametersProviderCore :
     override fun countParameters(predicate: (KoParameterDeclaration) -> Boolean): Int =
         parameters.count { predicate(it) }
 
+    @Deprecated("Will be removed in v1.0.0.", replaceWith = ReplaceWith("hasParameterWithName(name)"))
     override fun hasParameterNamed(name: String): Boolean = parameters.any { it.name == name }
+
+    override fun hasParameters(): Boolean = parameters.isNotEmpty()
+
+    override fun hasParameterWithName(vararg names: String): Boolean = names.any {
+        parameters.any { parameter -> it == parameter.name }
+    }
+
+    override fun hasParametersWithAllNames(vararg names: String): Boolean = names.all {
+        parameters.any { parameter -> it == parameter.name }
+    }
+
+    override fun hasParameter(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters.any(predicate)
+
+    override fun hasAllParameters(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters.all(predicate)
 }

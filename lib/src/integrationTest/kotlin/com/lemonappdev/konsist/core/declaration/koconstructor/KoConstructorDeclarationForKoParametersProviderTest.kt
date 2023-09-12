@@ -20,13 +20,18 @@ class KoConstructorDeclarationForKoParametersProviderTest {
             parameters shouldBeEqualTo emptyList()
             numParameters shouldBeEqualTo 0
             countParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo 0
+            hasParameters() shouldBeEqualTo false
+            hasParameterWithName("sampleParameter") shouldBeEqualTo false
+            hasParametersWithAllNames("sampleParameter1", "sampleParameter2") shouldBeEqualTo false
+            hasParameter { it.hasPublicModifier } shouldBeEqualTo false
+            hasAllParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
         }
     }
 
     @Test
-    fun `constructor-contains-parameter`() {
+    fun `constructor-contains-one-parameter`() {
         // given
-        val sut = getSnippetFile("constructor-contains-parameter")
+        val sut = getSnippetFile("constructor-contains-one-parameter")
             .classes()
             .first()
             .constructors
@@ -37,7 +42,44 @@ class KoConstructorDeclarationForKoParametersProviderTest {
             parameters.size shouldBeEqualTo 1
             numParameters shouldBeEqualTo 1
             countParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo 1
-            parameters.first().name shouldBeEqualTo "sampleParameter"
+            hasParameters() shouldBeEqualTo true
+            hasParameterWithName("sampleParameter") shouldBeEqualTo true
+            hasParameterWithName("otherParameter") shouldBeEqualTo false
+            hasParameterWithName("sampleParameter", "otherParameter") shouldBeEqualTo true
+            hasParametersWithAllNames("sampleParameter") shouldBeEqualTo true
+            hasParametersWithAllNames("sampleParameter", "otherParameter") shouldBeEqualTo false
+            hasParameter { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
+            hasParameter { it.hasPublicModifier } shouldBeEqualTo false
+            hasAllParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `constructor-contains-two-parameters`() {
+        // given
+        val sut = getSnippetFile("constructor-contains-two-parameters")
+            .classes()
+            .first()
+            .constructors
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            parameters.size shouldBeEqualTo 2
+            numParameters shouldBeEqualTo 2
+            countParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo 2
+            countParameters { it.hasTypeOf(Int::class) } shouldBeEqualTo 1
+            hasParameters() shouldBeEqualTo true
+            hasParameterWithName("sampleParameter1") shouldBeEqualTo true
+            hasParameterWithName("otherParameter") shouldBeEqualTo false
+            hasParameterWithName("sampleParameter1", "otherName") shouldBeEqualTo true
+            hasParametersWithAllNames("sampleParameter1") shouldBeEqualTo true
+            hasParametersWithAllNames("sampleParameter1", "sampleParameter2") shouldBeEqualTo true
+            hasParametersWithAllNames("sampleParameter1", "otherParameter") shouldBeEqualTo false
+            hasParameter { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
+            hasParameter { it.hasTypeOf(Int::class) } shouldBeEqualTo true
+            hasAllParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
+            hasAllParameters { it.hasTypeOf(Int::class) } shouldBeEqualTo false
         }
     }
 
