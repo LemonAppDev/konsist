@@ -36,7 +36,7 @@ interface KoParentProvider : KoBaseProvider {
         """
             Will be removed in v1.0.0. 
             If you passed one argument - replace with `hasParentWithName`, otherwise with `hasParentsWithAllNames`.
-            """
+            """,
     )
     fun hasParents(vararg names: String): Boolean
 

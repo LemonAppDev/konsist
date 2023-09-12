@@ -1,3 +1,5 @@
+@file:Suppress("detekt.TooManyFunctions")
+
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
@@ -138,11 +140,11 @@ fun <T : KoParentProvider> List<T>.withoutParents(predicate: (List<KoParentDecla
 fun <T : KoParentProvider> List<T>.withAllParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.parents.any { parent -> parent.name == kClass.simpleName } &&
-                kClasses.all { kClass ->
-                    it
-                        .parents
-                        .any { parent -> parent.name == kClass.simpleName }
-                }
+            kClasses.all { kClass ->
+                it
+                    .parents
+                    .any { parent -> parent.name == kClass.simpleName }
+            }
     }
 
 /**
@@ -155,11 +157,11 @@ fun <T : KoParentProvider> List<T>.withAllParentsOf(kClass: KClass<*>, vararg kC
 fun <T : KoParentProvider> List<T>.withSomeParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.parents.any { parent -> parent.name == kClass.simpleName } ||
-                kClasses.any { kClass ->
-                    it
-                        .parents
-                        .any { parent -> parent.name == kClass.simpleName }
-                }
+            kClasses.any { kClass ->
+                it
+                    .parents
+                    .any { parent -> parent.name == kClass.simpleName }
+            }
     }
 
 /**
@@ -172,11 +174,11 @@ fun <T : KoParentProvider> List<T>.withSomeParentsOf(kClass: KClass<*>, vararg k
 fun <T : KoParentProvider> List<T>.withoutAllParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.parents.none { parent -> parent.name == kClass.simpleName } &&
-                kClasses.none { kClass ->
-                    it
-                        .parents
-                        .any { parent -> parent.name == kClass.simpleName }
-                }
+            kClasses.none { kClass ->
+                it
+                    .parents
+                    .any { parent -> parent.name == kClass.simpleName }
+            }
     }
 
 /**
@@ -189,15 +191,15 @@ fun <T : KoParentProvider> List<T>.withoutAllParentsOf(kClass: KClass<*>, vararg
 fun <T : KoParentProvider> List<T>.withoutSomeParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.parents.none { parent -> parent.name == kClass.simpleName } &&
-                if (kClasses.isNotEmpty()) {
-                    kClasses.any { kClass ->
-                        it
-                            .parents
-                            .none { parent -> parent.name == kClass.simpleName }
-                    }
-                } else {
-                    true
+            if (kClasses.isNotEmpty()) {
+                kClasses.any { kClass ->
+                    it
+                        .parents
+                        .none { parent -> parent.name == kClass.simpleName }
                 }
+            } else {
+                true
+            }
     }
 
 /**
@@ -212,7 +214,7 @@ fun <T : KoParentProvider> List<T>.withoutSomeParentsOf(kClass: KClass<*>, varar
             Will be removed in v1.0.0. 
             If you passed one argument - replace with `withParentNamed`, otherwise with `withAllParentsNamed`.
             """,
-    ReplaceWith("withParentNamed/withAllParentsNamed")
+    ReplaceWith("withParentNamed/withAllParentsNamed"),
 )
 fun <T : KoParentProvider> List<T>.withAllParents(name: String, vararg names: String): List<T> = filter {
     it.hasParents(name, *names)
@@ -242,7 +244,7 @@ fun <T : KoParentProvider> List<T>.withSomeParents(name: String, vararg names: S
             Will be removed in v1.0.0. 
             If you passed one argument - replace with `withoutParentNamed`, otherwise with `withoutAllParentsNamed`.
             """,
-    ReplaceWith("withoutParentNamed/withoutAllParentsNamed")
+    ReplaceWith("withoutParentNamed/withoutAllParentsNamed"),
 )
 fun <T : KoParentProvider> List<T>.withoutAllParents(name: String, vararg names: String): List<T> = filter {
     !it.hasParents(name, *names)
