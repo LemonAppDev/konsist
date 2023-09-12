@@ -26,22 +26,60 @@ interface KoParentProvider : KoBaseProvider {
     fun countParents(predicate: (KoParentDeclaration) -> Boolean): Int
 
     /**
-     * Whatever class has parents (parent class and parent interfaces) defined directly in the Kotlin file.
+     * Whatever declaration has parents (parent class and parent interfaces) defined directly in the Kotlin file.
      * Does not include parents defined in other files such as parent of the parent.
      *
      * @param names the names of the parents to check.
-     * @return `true` if the class has parents with the specified names (or any parent if [names] is empty), `false` otherwise.
+     * @return `true` if the declaration has parents with the specified names (or any parent if [names] is empty), `false` otherwise.
      */
     @Deprecated("Will be removed in v1.0.0.", ReplaceWith("hasParentsWithAllNames(*names)"))
     fun hasParents(vararg names: String): Boolean
 
+    /**
+     * Whatever declaration has any parent (parent class and parent interfaces) defined directly in the Kotlin file.
+     * Does not include parents defined in other files such as parent of the parent.
+     *
+     * @return `true` if the declaration has any parent, `false` otherwise.
+     */
     fun hasParents(): Boolean
 
+    /**
+     * Determines whether the declaration has at least one parent (parent class and parent interfaces) defined directly
+     * in the Kotlin file whose name matches any of the specified names.
+     * This method does not include parents defined in other files, such as parents of the parent.
+     *
+     * @param names the names of the parents to check.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
     fun hasParentWithName(vararg names: String): Boolean
 
+    /**
+     * Determines whether the declaration has parents (parent classes and parent interfaces) defined directly in the Kotlin
+     * file with all the specified names.
+     * This method does not include parents defined in other files, such as parents of the parent.
+     *
+     * @param names The names of the parents to check.
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
     fun hasParentsWithAllNames(vararg names: String): Boolean
 
+    /**
+     * Determines whether the declaration has at least one parent (parent class or parent interface) defined directly
+     * in the Kotlin file that satisfies the provided predicate.
+     * This method does not include parents defined in other files, such as parents of the parent.
+     *
+     * @param predicate A function that defines the condition to be met by a parent declaration.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
     fun hasParent(predicate: (KoParentDeclaration) -> Boolean): Boolean
 
+    /**
+     * Determines whether the declaration has all parents (parent classes and parent interfaces) defined directly
+     * in the Kotlin file that satisfy the provided predicate.
+     * This method does not include parents defined in other files, such as parents of the parent.
+     *
+     * @param predicate A function that defines the condition to be met by parent declarations.
+     * @return `true` if all parent declarations satisfy the predicate, `false` otherwise.
+     */
     fun hasAllParents(predicate: (KoParentDeclaration) -> Boolean): Boolean
 }
