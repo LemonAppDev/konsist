@@ -26,10 +26,25 @@ internal interface KoParentProviderCore :
     override fun countParents(predicate: (KoParentDeclaration) -> Boolean): Int =
         parents.count { predicate(it) }
 
+    @Deprecated("Will be removed in v1.0.0")
     override fun hasParents(vararg names: String): Boolean = when {
         names.isEmpty() -> parents.isNotEmpty()
         else -> names.all {
             parents.any { parent -> it == parent.name }
         }
     }
+
+    override fun hasParents(): Boolean = parents.isNotEmpty()
+
+    override fun hasParentWithName(vararg names: String): Boolean = names.any {
+        parents.any { parent -> it == parent.name }
+    }
+
+    override fun hasParentsWithAllNames(vararg names: String): Boolean = names.all {
+        parents.any { parent -> it == parent.name }
+    }
+
+    override fun hasParent(predicate: (KoParentDeclaration) -> Boolean): Boolean = parents.any(predicate)
+
+    override fun hasAllParents(predicate: (KoParentDeclaration) -> Boolean): Boolean = parents.all(predicate)
 }

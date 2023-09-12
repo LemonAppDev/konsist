@@ -32,5 +32,16 @@ interface KoParentProvider : KoBaseProvider {
      * @param names the names of the parents to check.
      * @return `true` if the class has parents with the specified names (or any parent if [names] is empty), `false` otherwise.
      */
+    @Deprecated("Will be removed in v1.0.0.", ReplaceWith("hasParentsWithAllNames(*names)"))
     fun hasParents(vararg names: String): Boolean
+
+    fun hasParents(): Boolean
+
+    fun hasParentWithName(vararg names: String): Boolean
+
+    fun hasParentsWithAllNames(vararg names: String): Boolean
+
+    fun hasParent(predicate: (KoParentDeclaration) -> Boolean): Boolean
+
+    fun hasAllParents(predicate: (KoParentDeclaration) -> Boolean): Boolean
 }
