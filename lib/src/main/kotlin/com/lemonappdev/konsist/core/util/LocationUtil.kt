@@ -1,7 +1,19 @@
 package com.lemonappdev.konsist.core.util
 
 object LocationUtil {
-    internal const val WILD_CARD_SYNTAX = ".."
+
+    /**
+     *  Regex to match packages names ending with (2) dots '.' at the end.
+     *
+     *   (?:) = non-capturing group.
+     *    ^   = Matches the beginning of the string.
+     *    \w  = Matches any word char (alpha & underscore).
+     *    +   = Match 1 or more of the preceding token.
+     *    |   = OR
+     *  \.{2} = escaped char '.' (dot) appearing 2 times
+     *    $   = Matches end of string
+     */
+    internal const val REGEX_PACKAGE_NAME_END_TWO_DOTS = "(?:^\\w+|\\w+\\.\\w+)+\\.{2}\$"
 
     /**
      * Use '..' as a wildcard for any number of characters.

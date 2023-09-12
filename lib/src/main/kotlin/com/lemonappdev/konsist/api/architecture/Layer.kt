@@ -13,7 +13,8 @@ import com.lemonappdev.konsist.core.util.LocationUtil
  */
 data class Layer(internal val name: String, internal val definedBy: String) {
     init {
-        if (!definedBy.endsWith(LocationUtil.WILD_CARD_SYNTAX)) {
+        val pattern = Regex(pattern = LocationUtil.REGEX_PACKAGE_NAME_END_TWO_DOTS)
+        if (!definedBy.matches(pattern)) {
             throw KoPreconditionFailedException("Layer $name must be defined by package ending with '..'. Now: $definedBy .")
         }
     }
