@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
-import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
 import com.lemonappdev.konsist.core.declaration.KoInitBlockDeclarationCore
 import org.jetbrains.kotlin.psi.KtClassOrObject
