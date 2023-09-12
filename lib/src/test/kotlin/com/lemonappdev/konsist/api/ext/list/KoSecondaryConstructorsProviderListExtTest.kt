@@ -1,15 +1,12 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoInitBlockDeclaration
 import com.lemonappdev.konsist.api.declaration.KoSecondaryConstructorDeclaration
-import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
 import com.lemonappdev.konsist.api.provider.KoSecondaryConstructorsProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-@Suppress("detekt.LargeClass")
 class KoSecondaryConstructorsProviderListExtTest {
     @Test
     fun `secondaryConstructors returns secondary constructors from all declarations`() {

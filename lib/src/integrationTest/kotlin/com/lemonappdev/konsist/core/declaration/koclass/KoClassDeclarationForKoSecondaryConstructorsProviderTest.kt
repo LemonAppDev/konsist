@@ -60,11 +60,11 @@ class KoClassDeclarationForKoSecondaryConstructorsProviderTest {
             secondaryConstructors.isNotEmpty() shouldBeEqualTo true
             numSecondaryConstructors shouldBeEqualTo 2
             countSecondaryConstructors { it.hasPublicModifier } shouldBeEqualTo 1
-            countSecondaryConstructors { it.hasPublicOrDefaultModifier} shouldBeEqualTo 2
+            countSecondaryConstructors { it.hasPublicOrDefaultModifier } shouldBeEqualTo 2
             hasSecondaryConstructors() shouldBeEqualTo true
             hasSecondaryConstructor { it.hasPublicModifier } shouldBeEqualTo true
-            hasSecondaryConstructor { it.hasPrivateModifier} shouldBeEqualTo false
-            hasAllSecondaryConstructors { it.hasPublicOrDefaultModifier} shouldBeEqualTo true
+            hasSecondaryConstructor { it.hasPrivateModifier } shouldBeEqualTo false
+            hasAllSecondaryConstructors { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
             hasAllSecondaryConstructors { it.hasPublicModifier } shouldBeEqualTo false
         }
     }
