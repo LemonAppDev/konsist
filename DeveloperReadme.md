@@ -139,3 +139,13 @@ E.g. In `KoClassDeclaration`:
 - `withSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
 - `withoutAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
 - `withoutSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
+
+## Build Errors
+
+Error
+```
+No matching variant of project :buildSrc was found. The consumer was configured to find a library for use during runtime, compatible with Java 17, packaged as a jar,
+```
+
+Fix
+Change Gradle version `File -> Settings -> Build, Execution, Deployment -> Build Tools -> Gradle`
