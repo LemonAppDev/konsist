@@ -1,5 +1,3 @@
-@file:Suppress("detekt.TooManyFunctions")
-
 package com.lemonappdev.konsist.api.ext.list.modifierprovider
 
 import com.lemonappdev.konsist.api.KoModifier
@@ -19,33 +17,21 @@ val <T : KoModifierProvider> List<T>.modifiers: List<KoModifier>
 fun <T : KoModifierProvider> List<T>.withModifiers(): List<T> = filter { it.hasModifiers() }
 
 /**
+ * List containing declarations with no modifier.
+ *
+ * @return A list containing declarations with no modifier.
+ */
+fun <T : KoModifierProvider> List<T>.withoutModifiers(): List<T> = filterNot { it.hasModifiers() }
+
+/**
  * List containing declarations with all the specified modifiers.
  *
  * @param modifier The modifier to include.
  * @param modifiers The modifiers to include.
  * @return A list containing declarations with all the specified modifiers.
  */
-fun <T : KoModifierProvider> List<T>.withAllModifiers(modifier: KoModifier, vararg modifiers: KoModifier): List<T> = filter {
-    it.hasModifiers(modifier, *modifiers)
-}
-
-/**
- * List containing declarations with some modifiers.
- *
- * @param modifier The modifier to include.
- * @param modifiers The modifiers to include.
- * @return A list containing declarations with at least one of the specified modifiers.
- */
-fun <T : KoModifierProvider> List<T>.withSomeModifiers(modifier: KoModifier, vararg modifiers: KoModifier): List<T> = filter {
-    it.hasModifiers(modifier) || modifiers.any { modifier -> it.hasModifiers(modifier) }
-}
-
-/**
- * List containing declarations with no modifier.
- *
- * @return A list containing declarations with no modifier.
- */
-fun <T : KoModifierProvider> List<T>.withoutModifiers(): List<T> = filterNot { it.hasModifiers() }
+fun <T : KoModifierProvider> List<T>.withModifier(modifier: KoModifier, vararg modifiers: KoModifier): List<T> =
+    filter { it.hasModifier(modifier, *modifiers) }
 
 /**
  * List containing declarations without all specified modifiers.
@@ -54,9 +40,41 @@ fun <T : KoModifierProvider> List<T>.withoutModifiers(): List<T> = filterNot { i
  * @param modifiers The modifiers to exclude.
  * @return A list containing declarations without all the specified modifiers.
  */
-fun <T : KoModifierProvider> List<T>.withoutAllModifiers(modifier: KoModifier, vararg modifiers: KoModifier): List<T> = filterNot {
-    it.hasModifiers(modifier, *modifiers)
-}
+fun <T : KoModifierProvider> List<T>.withoutModifier(modifier: KoModifier, vararg modifiers: KoModifier): List<T> =
+    filterNot { it.hasModifier(modifier, *modifiers) }
+
+/**
+ * List containing declarations with all the specified modifiers.
+ *
+ * @param modifier The modifier to include.
+ * @param modifiers The modifiers to include.
+ * @return A list containing declarations with all the specified modifiers.
+ */
+fun <T : KoModifierProvider> List<T>.withAllModifiers(modifier: KoModifier, vararg modifiers: KoModifier): List<T> =
+    filter { it.hasAllModifiers(modifier, *modifiers) }
+
+/**
+ * List containing declarations without all specified modifiers.
+ *
+ * @param modifier The modifier to exclude.
+ * @param modifiers The modifiers to exclude.
+ * @return A list containing declarations without all the specified modifiers.
+ */
+fun <T : KoModifierProvider> List<T>.withoutAllModifiers(modifier: KoModifier, vararg modifiers: KoModifier): List<T> =
+    filterNot { it.hasAllModifiers(modifier, *modifiers) }
+
+/**
+ * List containing declarations with some modifiers.
+ *
+ * @param modifier The modifier to include.
+ * @param modifiers The modifiers to include.
+ * @return A list containing declarations with at least one of the specified modifiers.
+ */
+@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withModifier(modifier, modifiers)"))
+fun <T : KoModifierProvider> List<T>.withSomeModifiers(modifier: KoModifier, vararg modifiers: KoModifier): List<T> =
+    filter {
+        it.hasModifiers(modifier) || modifiers.any { modifier -> it.hasModifiers(modifier) }
+    }
 
 /**
  * List containing declarations without some modifiers.
@@ -65,10 +83,12 @@ fun <T : KoModifierProvider> List<T>.withoutAllModifiers(modifier: KoModifier, v
  * @param modifiers The modifiers to exclude.
  * @return A list containing declarations without at least one of the specified modifiers.
  */
-fun <T : KoModifierProvider> List<T>.withoutSomeModifiers(modifier: KoModifier, vararg modifiers: KoModifier): List<T> = filter {
-    !it.hasModifiers(modifier) && if (modifiers.isNotEmpty()) {
-        modifiers.any { modifier -> !it.hasModifiers(modifier) }
-    } else {
-        true
+@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutModifier(modifier, modifiers)"))
+fun <T : KoModifierProvider> List<T>.withoutSomeModifiers(modifier: KoModifier, vararg modifiers: KoModifier): List<T> =
+    filter {
+        !it.hasModifiers(modifier) && if (modifiers.isNotEmpty()) {
+            modifiers.any { modifier -> !it.hasModifiers(modifier) }
+        } else {
+            true
+        }
     }
-}

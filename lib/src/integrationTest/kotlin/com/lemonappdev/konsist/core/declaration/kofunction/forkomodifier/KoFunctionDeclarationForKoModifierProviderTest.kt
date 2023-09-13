@@ -2,8 +2,10 @@ package com.lemonappdev.konsist.core.declaration.kofunction.forkomodifier
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier
+import com.lemonappdev.konsist.api.KoModifier.DATA
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PROTECTED
+import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import com.lemonappdev.konsist.api.KoModifier.SUSPEND
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -24,10 +26,13 @@ class KoFunctionDeclarationForKoModifierProviderTest {
         assertSoftly(sut) {
             modifiers shouldBeEqualTo emptyList()
             numModifiers shouldBeEqualTo 0
-            countModifiers { it.type == "private" } shouldBeEqualTo 0
             hasModifiers() shouldBeEqualTo false
+            hasModifier(OPEN) shouldBeEqualTo false
+            hasModifier(OPEN, DATA) shouldBeEqualTo false
+            hasAllModifiers(OPEN) shouldBeEqualTo false
+            hasAllModifiers(OPEN, DATA) shouldBeEqualTo false
             hasModifiers(OPEN) shouldBeEqualTo false
-            hasModifiers(OPEN, KoModifier.DATA) shouldBeEqualTo false
+            hasModifiers(OPEN, DATA) shouldBeEqualTo false
         }
     }
 
@@ -41,8 +46,14 @@ class KoFunctionDeclarationForKoModifierProviderTest {
         // then
         assertSoftly(sut) {
             numModifiers shouldBeEqualTo 2
-            countModifiers { it.type == "protected" } shouldBeEqualTo 1
             hasModifiers() shouldBeEqualTo true
+            hasModifier(PROTECTED) shouldBeEqualTo true
+            hasModifier(PUBLIC) shouldBeEqualTo false
+            hasModifier(PROTECTED, SUSPEND) shouldBeEqualTo true
+            hasAllModifiers(PROTECTED) shouldBeEqualTo true
+            hasAllModifiers(PUBLIC) shouldBeEqualTo false
+            hasAllModifiers(PROTECTED, OPEN) shouldBeEqualTo false
+            hasAllModifiers(PROTECTED, SUSPEND) shouldBeEqualTo true
             hasModifiers(PROTECTED) shouldBeEqualTo true
             hasModifiers(SUSPEND) shouldBeEqualTo true
             hasModifiers(OPEN) shouldBeEqualTo false

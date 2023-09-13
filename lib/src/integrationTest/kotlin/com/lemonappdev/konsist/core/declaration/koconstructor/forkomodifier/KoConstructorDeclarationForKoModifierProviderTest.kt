@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoModifier.DATA
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
+import com.lemonappdev.konsist.api.KoModifier.PROTECTED
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -25,8 +26,11 @@ class KoConstructorDeclarationForKoModifierProviderTest {
         assertSoftly(sut) {
             modifiers shouldBeEqualTo emptyList()
             numModifiers shouldBeEqualTo 0
-            countModifiers { it.type == "private" } shouldBeEqualTo 0
             hasModifiers() shouldBeEqualTo false
+            hasModifier(OPEN) shouldBeEqualTo false
+            hasModifier(OPEN, DATA) shouldBeEqualTo false
+            hasAllModifiers(OPEN) shouldBeEqualTo false
+            hasAllModifiers(OPEN, DATA) shouldBeEqualTo false
             hasModifiers(OPEN) shouldBeEqualTo false
             hasModifiers(OPEN, DATA) shouldBeEqualTo false
         }
@@ -46,7 +50,12 @@ class KoConstructorDeclarationForKoModifierProviderTest {
         assertSoftly(sut) {
             modifiers shouldBeEqualTo listOf(PRIVATE)
             numModifiers shouldBeEqualTo 1
-            countModifiers { it.type == "private" } shouldBeEqualTo 1
+            hasModifier(PRIVATE) shouldBeEqualTo true
+            hasModifier(PROTECTED) shouldBeEqualTo false
+            hasModifier(PRIVATE, DATA) shouldBeEqualTo true
+            hasAllModifiers(PRIVATE) shouldBeEqualTo true
+            hasAllModifiers(PROTECTED) shouldBeEqualTo false
+            hasAllModifiers(PRIVATE, DATA) shouldBeEqualTo false
         }
     }
 
