@@ -9,10 +9,10 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class Architecture5Test {
-    private val layer = Layer("EmptyLayer", "com/lemonappdev/konsist/assertarchitecture/architecture5/project/emptylayer..")
+    private val layer = Layer("EmptyLayer", "com.lemonappdev.konsist.assertarchitecture.architecture5.project.emptylayer..")
     private val scope =
         Konsist.scopeFromPackage("com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project")
-
+    
     @Test
     fun `throws exception when layer contains no files`() {
         // when
