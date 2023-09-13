@@ -56,14 +56,14 @@ class KoParameterDeclarationForKoAnnotationProviderTest {
             it?.hasAnnotationWithName("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
             it?.hasAnnotationWithName(
                 "com.lemonappdev.konsist.testdata.SampleAnnotation",
-                "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
+                "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
             ).shouldBeEqualTo(true)
             it?.hasAnnotationsWithAllNames("SampleAnnotation") shouldBeEqualTo true
             it?.hasAnnotationsWithAllNames("SampleAnnotation", "OtherAnnotation") shouldBeEqualTo false
             it?.hasAnnotationsWithAllNames("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
             it?.hasAnnotationsWithAllNames(
                 "com.lemonappdev.konsist.testdata.SampleAnnotation",
-                "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
+                "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
             ).shouldBeEqualTo(false)
             it?.hasAnnotation { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             it?.hasAnnotation { it.hasNameStartingWith("Other") } shouldBeEqualTo false
@@ -100,7 +100,7 @@ class KoParameterDeclarationForKoAnnotationProviderTest {
             it?.hasAnnotationWithName("com.lemonappdev.konsist.testdata.NonExistingAnnotation") shouldBeEqualTo false
             it?.hasAnnotationWithName(
                 "com.lemonappdev.konsist.testdata.SampleAnnotation1",
-                "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
+                "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
             ).shouldBeEqualTo(true)
             it?.hasAnnotationsWithAllNames("SampleAnnotation1") shouldBeEqualTo true
             it?.hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo true
@@ -108,11 +108,11 @@ class KoParameterDeclarationForKoAnnotationProviderTest {
             it?.hasAnnotationsWithAllNames("com.lemonappdev.konsist.testdata.SampleAnnotation1") shouldBeEqualTo true
             it?.hasAnnotationsWithAllNames(
                 "com.lemonappdev.konsist.testdata.SampleAnnotation1",
-                "com.lemonappdev.konsist.testdata.NonExistingAnnotation"
+                "com.lemonappdev.konsist.testdata.NonExistingAnnotation",
             ).shouldBeEqualTo(false)
             it?.hasAnnotationsWithAllNames(
                 "com.lemonappdev.konsist.testdata.SampleAnnotation1",
-                "com.lemonappdev.konsist.testdata.SampleAnnotation2"
+                "com.lemonappdev.konsist.testdata.SampleAnnotation2",
             ).shouldBeEqualTo(true)
             it?.hasAnnotation { it.name == "SampleAnnotation1" } shouldBeEqualTo true
             it?.hasAnnotation { it.name == "OtherAnnotation1" } shouldBeEqualTo false
