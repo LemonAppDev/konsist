@@ -31,8 +31,10 @@ interface KoImportProvider : KoBaseProvider {
      * @return `true` if the declaration has imports with the specified names (or any import if [names] is empty), `false` otherwise.
      */
     @Deprecated(
-        "Will be removed in v1.0.0",
-        ReplaceWith("hasImport { it.name == ... } && hasImport { it.name == ... } ..."),
+        """
+            Will be removed in v1.0.0. 
+            If you passed one argument - replace with `hasImportWithName`, otherwise with `hasImportsWithAllNames`.
+            """,
     )
     fun hasImports(vararg names: String): Boolean
 
@@ -42,6 +44,22 @@ interface KoImportProvider : KoBaseProvider {
      * @return `true` if the declaration has any import, `false` otherwise.
      */
     fun hasImports(): Boolean
+
+    /**
+     * Determines whether the declaration has at least one import whose name matches any of the specified names.
+     *
+     * @param names the names of the imports to check.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasImportWithName(vararg names: String): Boolean
+
+    /**
+     * Determines whether the declaration has imports with all the specified names.
+     *
+     * @param names The names of the imports to check.
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasImportsWithAllNames(vararg names: String): Boolean
 
     /**
      * Whether the declaration has any import with the specified predicate.
