@@ -36,6 +36,12 @@ internal interface KoAnnotationProviderCore :
         }
     }
 
+    @Deprecated(
+        """
+            Will be removed in v1.0.0. 
+            If you passed one argument - replace with `hasAnnotationOf`, otherwise with `hasAllAnnotationsOf`.
+            """,
+    )
     override fun hasAnnotationsOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
         checkIfAnnotated(name) && names.all { checkIfAnnotated(it) }
 
@@ -62,4 +68,10 @@ internal interface KoAnnotationProviderCore :
 
     override fun hasAllAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Boolean =
         annotations.all(predicate)
+
+    override fun hasAnnotationOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
+        checkIfAnnotated(name) || names.any { checkIfAnnotated(it) }
+
+    override fun hasAllAnnotationsOf(name: KClass<*>, vararg names: KClass<*>): Boolean =
+        checkIfAnnotated(name) && names.all { checkIfAnnotated(it) }
 }
