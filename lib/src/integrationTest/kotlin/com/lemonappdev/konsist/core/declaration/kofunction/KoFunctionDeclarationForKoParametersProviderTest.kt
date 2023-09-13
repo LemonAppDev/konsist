@@ -17,12 +17,12 @@ class KoFunctionDeclarationForKoParametersProviderTest {
         assertSoftly(sut) {
             parameters shouldBeEqualTo emptyList()
             numParameters shouldBeEqualTo 0
-            countParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo 0
+            countParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo 0
             hasParameters() shouldBeEqualTo false
             hasParameterWithName("sampleParameter") shouldBeEqualTo false
             hasParametersWithAllNames("sampleParameter1", "sampleParameter2") shouldBeEqualTo false
-            hasParameter { it.hasPublicModifier } shouldBeEqualTo false
-            hasAllParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
+            hasParameter { it.hasNameStartingWith("other") } shouldBeEqualTo false
+            hasAllParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo true
         }
     }
 
@@ -37,16 +37,16 @@ class KoFunctionDeclarationForKoParametersProviderTest {
         assertSoftly(sut) {
             parameters.size shouldBeEqualTo 1
             numParameters shouldBeEqualTo 1
-            countParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo 1
+            countParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo 1
             hasParameters() shouldBeEqualTo true
             hasParameterWithName("sampleParameter") shouldBeEqualTo true
             hasParameterWithName("otherParameter") shouldBeEqualTo false
             hasParameterWithName("sampleParameter", "otherParameter") shouldBeEqualTo true
             hasParametersWithAllNames("sampleParameter") shouldBeEqualTo true
             hasParametersWithAllNames("sampleParameter", "otherParameter") shouldBeEqualTo false
-            hasParameter { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
-            hasParameter { it.hasPublicModifier } shouldBeEqualTo false
-            hasAllParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
+            hasParameter { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasParameter { it.hasNameStartingWith("other") } shouldBeEqualTo false
+            hasAllParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo true
         }
     }
 
@@ -61,7 +61,7 @@ class KoFunctionDeclarationForKoParametersProviderTest {
         assertSoftly(sut) {
             parameters.size shouldBeEqualTo 2
             numParameters shouldBeEqualTo 2
-            countParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo 2
+            countParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo 2
             countParameters { it.hasTypeOf(Int::class) } shouldBeEqualTo 1
             hasParameters() shouldBeEqualTo true
             hasParameterWithName("sampleParameter1") shouldBeEqualTo true
@@ -70,9 +70,9 @@ class KoFunctionDeclarationForKoParametersProviderTest {
             hasParametersWithAllNames("sampleParameter1") shouldBeEqualTo true
             hasParametersWithAllNames("sampleParameter1", "sampleParameter2") shouldBeEqualTo true
             hasParametersWithAllNames("sampleParameter1", "otherParameter") shouldBeEqualTo false
-            hasParameter { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
+            hasParameter { it.hasNameStartingWith("sample") } shouldBeEqualTo true
             hasParameter { it.hasTypeOf(Int::class) } shouldBeEqualTo true
-            hasAllParameters { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
+            hasAllParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo true
             hasAllParameters { it.hasTypeOf(Int::class) } shouldBeEqualTo false
         }
     }
