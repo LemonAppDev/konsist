@@ -19,7 +19,11 @@ class KoObjectDeclarationForKoParentProviderTest {
             numParents shouldBeEqualTo 0
             countParents { it.name == "SampleParentClass" } shouldBeEqualTo 0
             hasParents() shouldBeEqualTo false
-            hasParents("SampleClass") shouldBeEqualTo false
+            hasParentWithName("SampleParentClass") shouldBeEqualTo false
+            hasParentsWithAllNames("SampleParentClass", "SampleParentInterface") shouldBeEqualTo false
+            hasParent { it.name == "SampleParentClass" } shouldBeEqualTo false
+            hasAllParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasParents("SampleParentClass") shouldBeEqualTo false
         }
     }
 
@@ -41,6 +45,18 @@ class KoObjectDeclarationForKoParentProviderTest {
             countParents { it.name == "SampleParentClass" } shouldBeEqualTo 1
             countParents { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 2
             hasParents() shouldBeEqualTo true
+            hasParentWithName("SampleParentClass") shouldBeEqualTo true
+            hasParentWithName("OtherInterface") shouldBeEqualTo false
+            hasParentWithName("SampleParentClass", "OtherInterface") shouldBeEqualTo true
+            hasParentsWithAllNames("SampleParentClass") shouldBeEqualTo true
+            hasParentsWithAllNames("OtherInterface") shouldBeEqualTo false
+            hasParentsWithAllNames("SampleParentClass", "SampleParentInterface1") shouldBeEqualTo true
+            hasParentsWithAllNames("SampleParentClass", "OtherInterface") shouldBeEqualTo false
+            hasParent { it.name == "SampleParentClass" } shouldBeEqualTo true
+            hasParent { it.name == "OtherClass" } shouldBeEqualTo false
+            hasAllParents { it.name == "SampleParentClass" } shouldBeEqualTo false
+            hasAllParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllParents { it.hasNameStartingWith("Other") } shouldBeEqualTo false
             hasParents("SampleParentClass") shouldBeEqualTo true
             hasParents("OtherInterface") shouldBeEqualTo false
             hasParents("SampleParentClass", "SampleParentInterface1") shouldBeEqualTo true

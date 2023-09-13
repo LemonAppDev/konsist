@@ -17,9 +17,13 @@ class KoInterfaceDeclarationForKoParentProviderTest {
         assertSoftly(sut) {
             parents shouldBeEqualTo emptyList()
             numParents shouldBeEqualTo 0
-            countParents { it.name == "SampleParentClass" } shouldBeEqualTo 0
+            countParents { it.name == "SampleParentInterface" } shouldBeEqualTo 0
             hasParents() shouldBeEqualTo false
-            hasParents("SampleInterface") shouldBeEqualTo false
+            hasParentWithName("SampleParentInterface") shouldBeEqualTo false
+            hasParentsWithAllNames("SampleParentInterface1", "SampleParentInterface2") shouldBeEqualTo false
+            hasParent { it.name == "SampleParentInterface" } shouldBeEqualTo false
+            hasAllParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasParents("SampleParentInterface") shouldBeEqualTo false
         }
     }
 
@@ -37,6 +41,18 @@ class KoInterfaceDeclarationForKoParentProviderTest {
             countParents { it.name == "SampleParentInterface1" } shouldBeEqualTo 1
             countParents { it.hasNameStartingWith("SampleParentInterface") } shouldBeEqualTo 2
             hasParents() shouldBeEqualTo true
+            hasParentWithName("SampleParentInterface1") shouldBeEqualTo true
+            hasParentWithName("OtherInterface") shouldBeEqualTo false
+            hasParentWithName("SampleParentInterface1", "OtherInterface") shouldBeEqualTo true
+            hasParentsWithAllNames("SampleParentInterface1") shouldBeEqualTo true
+            hasParentsWithAllNames("OtherInterface") shouldBeEqualTo false
+            hasParentsWithAllNames("SampleParentInterface1", "SampleParentInterface2") shouldBeEqualTo true
+            hasParentsWithAllNames("SampleParentInterface1", "OtherInterface") shouldBeEqualTo false
+            hasParent { it.name == "SampleParentInterface1" } shouldBeEqualTo true
+            hasParent { it.name == "OtherInterface" } shouldBeEqualTo false
+            hasAllParents { it.name == "SampleParentInterface1" } shouldBeEqualTo false
+            hasAllParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllParents { it.hasNameStartingWith("Other") } shouldBeEqualTo false
             hasParents("SampleParentInterface1") shouldBeEqualTo true
             hasParents("OtherInterface") shouldBeEqualTo false
             hasParents("SampleParentInterface1", "SampleParentInterface2") shouldBeEqualTo true
