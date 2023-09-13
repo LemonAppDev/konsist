@@ -40,9 +40,6 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
     override val numModifiers: Int
         get() = modifiers.size
 
-    override fun countModifiers(predicate: (KoModifier) -> Boolean): Int =
-        modifiers.count { predicate(it) }
-
     @Deprecated(
         """
             Will be removed in v1.0.0. 
