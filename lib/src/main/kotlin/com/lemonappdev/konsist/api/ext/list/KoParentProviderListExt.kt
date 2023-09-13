@@ -131,21 +131,50 @@ fun <T : KoParentProvider> List<T>.withoutParents(predicate: (List<KoParentDecla
     filterNot { predicate(it.parents) }
 
 /**
- * List containing declarations with named parents.
+ * List containing declarations that have at least one parent of the specified `KClass` type.
  *
- * @param kClass The Kotlin class representing the parent to include.
- * @param kClasses The Kotlin declarations representing the parents to include.
- * @return A list containing declarations with the parents of the specified type(s).
+ * @param kClass The Kotlin class representing parent to include.
+ * @param kClasses The Kotlin classes representing parents to include.
+ * @return A list containing declarations with at least one parent of the specified `KClass` type.
+ */
+fun <T : KoParentProvider> List<T>.withParentOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> =
+    filter { it.hasParentOf(kClass, *kClasses) }
+
+/**
+ * List containing declarations without any parent of the specified `KClass` type.
+ *
+ * @param kClass The Kotlin class representing parent to exclude.
+ * @param kClasses The Kotlin classes representing parents to exclude.
+ * @return A list containing declarations without any of the specified parents.
+ */
+fun <T : KoParentProvider> List<T>.withoutParentOf(
+    kClass: KClass<*>,
+    vararg kClasses: KClass<*>,
+): List<T> =
+    filterNot { it.hasParentOf(kClass, *kClasses) }
+
+/**
+ * List containing declarations that have all parents of the specified `KClass` type.
+ *
+ * @param kClass The Kotlin class representing parent to include.
+ * @param kClasses The Kotlin classes representing parents to include.
+ * @return A list containing declarations that have all parents of the specified `KClass` type.
  */
 fun <T : KoParentProvider> List<T>.withAllParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
-    filter {
-        it.parents.any { parent -> parent.name == kClass.simpleName } &&
-            kClasses.all { kClass ->
-                it
-                    .parents
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
-    }
+    filter { it.hasAllParentsOf(kClass, *kClasses) }
+
+/**
+ * List containing declarations without all specified `KClass` type parents.
+ *
+ * @param kClass The Kotlin class representing parent to exclude.
+ * @param kClasses The Kotlin classes representing parents to exclude.
+ * @return A list containing declarations without all specified `KClass` type parents.
+ */
+fun <T : KoParentProvider> List<T>.withoutAllParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
+    filterNot { it.hasAllParentsOf(kClass, *kClasses) }
 
 /**
  * List containing declarations with some named parents.
@@ -154,27 +183,11 @@ fun <T : KoParentProvider> List<T>.withAllParentsOf(kClass: KClass<*>, vararg kC
  * @param kClasses The Kotlin declarations representing the parents to include.
  * @return A list containing declarations with at least one of the specified parent(s).
  */
+@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withParentOf(*kClasses"))
 fun <T : KoParentProvider> List<T>.withSomeParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.parents.any { parent -> parent.name == kClass.simpleName } ||
             kClasses.any { kClass ->
-                it
-                    .parents
-                    .any { parent -> parent.name == kClass.simpleName }
-            }
-    }
-
-/**
- * List containing declarations without named parents.
- *
- * @param kClass The Kotlin class representing the parent to exclude.
- * @param kClasses The Kotlin declarations representing the parents to exclude.
- * @return A list containing declarations without parents of the specified type(s).
- */
-fun <T : KoParentProvider> List<T>.withoutAllParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
-    filter {
-        it.parents.none { parent -> parent.name == kClass.simpleName } &&
-            kClasses.none { kClass ->
                 it
                     .parents
                     .any { parent -> parent.name == kClass.simpleName }
@@ -188,6 +201,7 @@ fun <T : KoParentProvider> List<T>.withoutAllParentsOf(kClass: KClass<*>, vararg
  * @param kClasses The Kotlin declarations representing the parents to exclude.
  * @return A list containing declarations without at least one of the specified parent(s).
  */
+@Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutParentOf(*kClasses"))
 fun <T : KoParentProvider> List<T>.withoutSomeParentsOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
         it.parents.none { parent -> parent.name == kClass.simpleName } &&
