@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.core.declaration.koparameter.forkomodifier
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.DATA
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
@@ -27,6 +28,10 @@ class KoParameterDeclarationForKoModifierProviderTest {
             it?.numModifiers shouldBeEqualTo 0
             it?.countModifiers { modifier -> modifier.type == "private" } shouldBeEqualTo 0
             it?.hasModifiers() shouldBeEqualTo false
+            it?.hasModifier(OPEN) shouldBeEqualTo false
+            it?.hasModifier(OPEN, DATA) shouldBeEqualTo false
+            it?.hasAllModifiers(OPEN) shouldBeEqualTo false
+            it?.hasAllModifiers(OPEN, DATA) shouldBeEqualTo false
             it?.hasModifiers(OPEN) shouldBeEqualTo false
             it?.hasModifiers(OPEN, DATA) shouldBeEqualTo false
         }
@@ -48,6 +53,12 @@ class KoParameterDeclarationForKoModifierProviderTest {
             it?.numModifiers shouldBeEqualTo 1
             it?.countModifiers { modifier -> modifier.type == "public" } shouldBeEqualTo 1
             it?.hasModifiers() shouldBeEqualTo true
+            it?.hasModifier(PUBLIC) shouldBeEqualTo true
+            it?.hasModifier(DATA) shouldBeEqualTo false
+            it?.hasModifier(PUBLIC, DATA) shouldBeEqualTo true
+            it?.hasAllModifiers(PUBLIC) shouldBeEqualTo true
+            it?.hasAllModifiers(DATA) shouldBeEqualTo false
+            it?.hasAllModifiers(PUBLIC, DATA) shouldBeEqualTo false
             it?.hasModifiers(PUBLIC) shouldBeEqualTo true
             it?.hasModifiers(PRIVATE) shouldBeEqualTo false
             it?.hasModifiers(PUBLIC, PRIVATE) shouldBeEqualTo false
