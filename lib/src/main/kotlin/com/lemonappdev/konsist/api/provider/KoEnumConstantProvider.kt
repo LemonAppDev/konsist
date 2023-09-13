@@ -33,8 +33,10 @@ interface KoEnumConstantProvider : KoBaseProvider {
      * `false` otherwise.
      */
     @Deprecated(
-        "Will be removed in v1.0.0",
-        ReplaceWith("hasEnumConstant { it.name == ... } && hasEnumConstant { it.name == ... } ..."),
+        """
+            Will be removed in v1.0.0. 
+            If you passed one argument - replace with `hasEnumConstantWithName`, otherwise with `hasEnumConstantsWithAllNames`.
+            """,
     )
     fun hasEnumConstants(vararg names: String): Boolean
 
@@ -46,10 +48,26 @@ interface KoEnumConstantProvider : KoBaseProvider {
     fun hasEnumConstants(): Boolean
 
     /**
-     * Whether the declaration has any enum constant with the specified predicate.
+     * Determines whether the declaration has at least one enum constant whose name matches any of the specified names.
      *
-     * @param predicate The predicate function to determine if an enum constant satisfies a condition.
-     * @return `true` if the declaration has enum constants with the specified predicate, `false` otherwise.
+     * @param names the names of the enum constants to check.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasEnumConstantWithName(vararg names: String): Boolean
+
+    /**
+     * Determines whether the declaration has enum constants with all the specified names.
+     *
+     * @param names The names of the enum constants to check.
+     * @return `true` if there are declarations with all the specified names, `false` otherwise.
+     */
+    fun hasEnumConstantsWithAllNames(vararg names: String): Boolean
+
+    /**
+     * Determines whether the declaration has at least one enum constant that satisfies the provided predicate.
+     *
+     * @param predicate A function that defines the condition to be met by an enum constant declaration.
+     * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasEnumConstant(predicate: (KoEnumConstantDeclaration) -> Boolean): Boolean
 
