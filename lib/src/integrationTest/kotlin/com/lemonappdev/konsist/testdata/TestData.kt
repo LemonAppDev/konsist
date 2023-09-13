@@ -50,6 +50,10 @@ interface SampleInterface2
 
 interface SampleParentInterface
 
+interface SampleParentInterface1
+
+interface SampleParentInterface2
+
 object SampleObject
 
 annotation class NonExistingAnnotation
