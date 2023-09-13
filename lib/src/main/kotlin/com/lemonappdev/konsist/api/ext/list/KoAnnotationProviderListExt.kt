@@ -251,6 +251,13 @@ fun <T : KoAnnotationProvider> List<T>.withoutSomeAnnotations(
     }
 }
 
+/**
+ * List containing declarations with some annotations of type.
+ *
+ * @param kClass The Kotlin class representing annotation to include.
+ * @param kClasses The Kotlin classes representing annotations to include.
+ * @return A list containing declarations with at least one of the specified the annotations.
+ */
 @Deprecated("Will be removed in v1.0.0.", ReplaceWith("withAnnotationOf(*kClasses"))
 fun <T : KoAnnotationProvider> List<T>.withSomeAnnotationsOf(
     kClass: KClass<*>,
