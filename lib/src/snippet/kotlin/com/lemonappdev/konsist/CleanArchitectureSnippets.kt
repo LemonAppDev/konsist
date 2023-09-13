@@ -3,7 +3,7 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
-import com.lemonappdev.konsist.api.ext.list.withAllAnnotationsOf
+import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParentNamed
 import com.lemonappdev.konsist.api.verify.assert
@@ -52,7 +52,7 @@ class CleanArchitectureSnippets {
         Konsist
             .scopeFromProject()
             .interfaces()
-            .withAllAnnotationsOf(Repository::class)
+            .withAnnotationOf(Repository::class)
             .assert { it.resideInPackage("..data..") }
     }
 

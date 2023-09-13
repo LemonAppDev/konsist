@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.kofile
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
+import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
 import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.assertSoftly
@@ -26,6 +27,8 @@ class KoFileDeclarationForKoAnnotationProviderTest {
             hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo false
             hasAnnotation { it.hasArguments() } shouldBeEqualTo false
             hasAllAnnotations { it.hasArguments() } shouldBeEqualTo true
+            hasAnnotationOf(SampleAnnotation::class) shouldBeEqualTo false
+            hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo false
             hasAnnotations("SampleAnnotation") shouldBeEqualTo false
             hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo false
         }
@@ -88,6 +91,13 @@ class KoFileDeclarationForKoAnnotationProviderTest {
 
         // then
         assertSoftly(sut) {
+            hasAnnotationOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
             hasAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
             hasAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
             hasAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false

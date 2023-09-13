@@ -4,6 +4,7 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.testdata.NonExistingAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation
 import com.lemonappdev.konsist.testdata.SampleAnnotation1
+import com.lemonappdev.konsist.testdata.SampleAnnotation2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -28,6 +29,8 @@ class KoEnumConstantDeclarationForKoAnnotationProviderTest {
             hasAnnotationsWithAllNames("SampleAnnotation1", "SampleAnnotation2") shouldBeEqualTo false
             hasAnnotation { it.hasArguments() } shouldBeEqualTo false
             hasAllAnnotations { it.hasArguments() } shouldBeEqualTo true
+            hasAnnotationOf(SampleAnnotation::class) shouldBeEqualTo false
+            hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo false
             hasAnnotations("SampleAnnotation") shouldBeEqualTo false
         }
     }
@@ -66,6 +69,12 @@ class KoEnumConstantDeclarationForKoAnnotationProviderTest {
             hasAnnotation { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAnnotation { it.hasNameStartingWith("Other") } shouldBeEqualTo false
             hasAllAnnotations { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAnnotationOf(SampleAnnotation::class) shouldBeEqualTo true
+            hasAnnotationOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationOf(SampleAnnotation::class, NonExistingAnnotation::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(SampleAnnotation::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAllAnnotationsOf(SampleAnnotation::class, NonExistingAnnotation::class) shouldBeEqualTo false
             hasAnnotations("SampleAnnotation") shouldBeEqualTo true
             hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
             hasAnnotations("com.lemonappdev.konsist.testdata.SampleAnnotation") shouldBeEqualTo true
@@ -115,6 +124,13 @@ class KoEnumConstantDeclarationForKoAnnotationProviderTest {
             hasAnnotation { it.name == "OtherAnnotation1" } shouldBeEqualTo false
             hasAllAnnotations { !it.hasArguments() } shouldBeEqualTo true
             hasAllAnnotations { it.hasNameEndingWith("tion1") } shouldBeEqualTo false
+            hasAnnotationOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAnnotationOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAnnotationOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(SampleAnnotation1::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(NonExistingAnnotation::class) shouldBeEqualTo false
+            hasAllAnnotationsOf(SampleAnnotation1::class, SampleAnnotation2::class) shouldBeEqualTo true
+            hasAllAnnotationsOf(SampleAnnotation1::class, NonExistingAnnotation::class) shouldBeEqualTo false
             hasAnnotations("SampleAnnotation1") shouldBeEqualTo true
             hasAnnotations("SampleAnnotation2") shouldBeEqualTo true
             hasAnnotations("NonExistingAnnotation") shouldBeEqualTo false
