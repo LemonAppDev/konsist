@@ -60,6 +60,6 @@ class TestSnippets {
             .scopeFromProject()
             .classes()
             .functions()
-            .assertNot { it.hasAnnotations("org.junit.Test") } // should be only org.junit.jupiter.api.Test
+            .assertNot { it.hasAnnotationWithName("org.junit.Test") } // should be only org.junit.jupiter.api.Test
     }
 }
