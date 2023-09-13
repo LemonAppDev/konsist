@@ -3,7 +3,9 @@ package com.lemonappdev.konsist.api.declaration
 import com.lemonappdev.konsist.api.provider.KoKDocDescriptionProvider
 import com.lemonappdev.konsist.api.provider.KoKDocTagsProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 
 /**
@@ -15,4 +17,6 @@ interface KoKDocDeclaration :
     KoKDocTagsProvider,
     KoTextProvider,
     KoLocationProvider,
-    KoPathProvider
+    KoPathProvider,
+    KoModuleProvider,
+    KoSourceSetProvider

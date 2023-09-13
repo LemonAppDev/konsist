@@ -12,7 +12,9 @@ import com.lemonappdev.konsist.core.provider.KoLocalClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnonymousInitializer
@@ -31,6 +33,8 @@ internal class KoInitBlockDeclarationCore private constructor(
     KoLocationProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
     KoTextProviderCore {
     override val psiElement: PsiElement by lazy { ktAnonymousInitializer }
 

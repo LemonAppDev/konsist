@@ -16,6 +16,7 @@ import com.lemonappdev.konsist.core.provider.KoLocalClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
@@ -23,6 +24,7 @@ import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoReturnTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
@@ -69,6 +71,8 @@ internal class KoFunctionDeclarationCore private constructor(
     KoParametersProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
     KoReceiverTypeProviderCore,
     KoResideInPackageProviderCore,
     KoResideInOrOutsidePackageProviderCore,

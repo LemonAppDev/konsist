@@ -5,7 +5,9 @@ import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.core.provider.KoKDocDescriptionProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocTagsProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
@@ -16,7 +18,9 @@ internal class KoKDocDeclarationCore(private val kDocElement: KDocElement) :
     KoKDocTagsProviderCore,
     KoTextProviderCore,
     KoLocationProviderCore,
-    KoPathProviderCore {
+    KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore {
     override val psiElement: PsiElement by lazy { kDocElement }
 
     override val text: String by lazy {
