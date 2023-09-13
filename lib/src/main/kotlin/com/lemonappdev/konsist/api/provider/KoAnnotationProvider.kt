@@ -47,6 +47,12 @@ interface KoAnnotationProvider : KoBaseProvider {
      * @param names the `KClass` types of the annotations to check.
      * @return `true` if the declaration has annotations of the specified `KClass` types, `false` otherwise.
      */
+    @Deprecated(
+        """
+            Will be removed in v1.0.0. 
+            If you passed one argument - replace with `hasAnnotationOf`, otherwise with `hasAllAnnotationsOf`.
+            """,
+    )
     fun hasAnnotationsOf(name: KClass<*>, vararg names: KClass<*>): Boolean
 
     /**
@@ -87,4 +93,22 @@ interface KoAnnotationProvider : KoBaseProvider {
      * @return `true` if all annotation declarations satisfy the predicate, `false` otherwise.
      */
     fun hasAllAnnotations(predicate: (KoAnnotationDeclaration) -> Boolean): Boolean
+
+    /**
+     * Determines whether the declaration has at least one annotation of the specified `KClass` type.
+     *
+     * @param name the `KClass` type of the annotation to check.
+     * @param names the `KClass` types of the annotations to check.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasAnnotationOf(name: KClass<*>, vararg names: KClass<*>): Boolean
+
+    /**
+     * Determines whether the declaration has annotations with all the specified `KClass` type.
+     *
+     * @param name the `KClass` type of the annotation to check.
+     * @param names the `KClass` types of the annotations to check.
+     * @return `true` if the declaration has annotations of all the specified `KClass` types, `false` otherwise.
+     */
+    fun hasAllAnnotationsOf(name: KClass<*>, vararg names: KClass<*>): Boolean
 }
