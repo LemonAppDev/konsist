@@ -1,0 +1,1 @@
+class SampleClass(val sampleParameter1: Int, val sampleParameter2: String)
