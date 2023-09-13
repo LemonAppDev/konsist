@@ -20,9 +20,18 @@ internal interface KoSecondaryConstructorsProviderCore :
     override val numSecondaryConstructors: Int
         get() = secondaryConstructors.size
 
+    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasSecondaryConstructors()"))
     override val hasSecondaryConstructors: Boolean
         get() = ktClass.hasSecondaryConstructors()
 
     override fun countSecondaryConstructors(predicate: (KoSecondaryConstructorDeclaration) -> Boolean): Int =
         secondaryConstructors.count { predicate(it) }
+
+    override fun hasSecondaryConstructors(): Boolean = secondaryConstructors.isNotEmpty()
+
+    override fun hasSecondaryConstructor(predicate: (KoSecondaryConstructorDeclaration) -> Boolean): Boolean =
+        secondaryConstructors.any(predicate)
+
+    override fun hasAllSecondaryConstructors(predicate: (KoSecondaryConstructorDeclaration) -> Boolean): Boolean =
+        secondaryConstructors.all(predicate)
 }
