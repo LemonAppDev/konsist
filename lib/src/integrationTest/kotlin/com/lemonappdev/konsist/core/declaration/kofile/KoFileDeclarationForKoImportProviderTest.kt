@@ -22,7 +22,7 @@ class KoFileDeclarationForKoImportProviderTest {
             hasImportWithName("com.lemonappdev.konsist.testdata.OtherImport") shouldBeEqualTo false
             hasImportsWithAllNames(
                 "com.lemonappdev.konsist.testdata.SampleClass",
-                "com.lemonappdev.konsist.testdata.SampleType"
+                "com.lemonappdev.konsist.testdata.SampleType",
             ).shouldBeEqualTo(false)
             hasImport { it.name == "com.lemonappdev.konsist.testdata.OtherImport" } shouldBeEqualTo false
             hasAllImports { it.hasNameStartingWith("com.lemonappdev.") } shouldBeEqualTo true
@@ -47,12 +47,12 @@ class KoFileDeclarationForKoImportProviderTest {
             hasImportWithName("com.lemonappdev.konsist.testdata.SampleClass") shouldBeEqualTo false
             hasImportWithName(
                 "com.lemonappdev.konsist.testdata.SampleClass",
-                "com.lemonappdev.konsist.testdata.SampleType"
+                "com.lemonappdev.konsist.testdata.SampleType",
             ).shouldBeEqualTo(true)
             hasImportsWithAllNames("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo true
             hasImportsWithAllNames(
                 "com.lemonappdev.konsist.testdata.SampleClass",
-                "com.lemonappdev.konsist.testdata.SampleType"
+                "com.lemonappdev.konsist.testdata.SampleType",
             ).shouldBeEqualTo(false)
             hasImport { it.hasNameStartingWith("com.lemonappdev.") } shouldBeEqualTo true
             hasImport { it.name == "com.lemonappdev.konsist.testdata.SampleClass" } shouldBeEqualTo false
@@ -79,11 +79,11 @@ class KoFileDeclarationForKoImportProviderTest {
             hasImportsWithAllNames("com.lemonappdev.konsist.testdata.SampleType") shouldBeEqualTo true
             hasImportsWithAllNames(
                 "com.lemonappdev.konsist.testdata.SampleType",
-                "com.lemonappdev.konsist.testdata.SampleAnnotation"
+                "com.lemonappdev.konsist.testdata.SampleAnnotation",
             ).shouldBeEqualTo(true)
             hasImportsWithAllNames(
                 "com.lemonappdev.konsist.testdata.SampleType",
-                "com.lemonappdev.konsist.testdata.SampleClass"
+                "com.lemonappdev.konsist.testdata.SampleClass",
             ).shouldBeEqualTo(false)
             hasImport { it.name == "com.lemonappdev.konsist.testdata.SampleType" } shouldBeEqualTo true
             hasImport { it.name == "com.lemonappdev.konsist.testdata.OtherType" } shouldBeEqualTo false
