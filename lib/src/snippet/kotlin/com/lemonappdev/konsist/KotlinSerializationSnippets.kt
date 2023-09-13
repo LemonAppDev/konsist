@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withEnumModifier
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
-import com.lemonappdev.konsist.api.ext.list.withSomeAnnotationsOf
 import com.lemonappdev.konsist.api.verify.assert
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
