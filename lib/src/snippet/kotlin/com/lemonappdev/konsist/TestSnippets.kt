@@ -5,9 +5,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.declarations
 import com.lemonappdev.konsist.api.ext.list.functions
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
-import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutSomeModifiers
 import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
-import com.lemonappdev.konsist.api.ext.list.withoutSomeAnnotationsOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.api.verify.assert
