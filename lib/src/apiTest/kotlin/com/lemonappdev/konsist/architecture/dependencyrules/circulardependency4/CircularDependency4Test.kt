@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 
 class CircularDependency4Test {
     @Test
-    fun `circular dependency 4`() {
+    fun `circular dependency 5`() {
         // given
         val layer1 = Layer("layer1", "layer1..")
         val layer2 = Layer("layer2", "layer2..")
@@ -19,19 +19,20 @@ class CircularDependency4Test {
         // when
         val sut = {
             architecture {
-                layer1.dependsOn(layer2)
-                layer2.dependsOn(layer3)
-                layer3.dependsOn(layer1, layer4)
+                layer1.dependsOn(layer2, layer3)
+                layer2.dependsOn(layer4)
+                layer3.dependsOn(layer4)
+                layer4.dependsOn(layer1)
             }
         }
 
         // then
         sut shouldThrow KoPreconditionFailedException::class withMessage """
             Illegal circular dependencies:
-            Layer layer3 -->
+            Layer layer4 -->
             Layer layer1 -->
             Layer layer2 -->
-            Layer layer3.
+            Layer layer4.
         """.trimIndent()
     }
 }

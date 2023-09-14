@@ -1,11 +1,11 @@
-# Circular dependency 3
+# Circular dependency 1
 
 Test scenario with circular dependency:
 
 ```mermaid
 %%{init: {'theme': 'forest'}}%%
 flowchart LR
-    Layer1 --> Layer2 
+    Layer1 --> Layer2
     Layer2 --> Layer3
-    Layer3 --> Layer1 & Layer4
+    Layer3 --> Layer1
 ```
