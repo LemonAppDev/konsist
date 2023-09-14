@@ -86,6 +86,10 @@ interface KoParentProvider : KoBaseProvider {
      * in the Kotlin file that satisfy the provided predicate.
      * This method does not include parents defined in other files, such as parents of the parent.
      *
+     * Note that if the parents contains no elements, the function returns `true` because there are no elements in it
+     * that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     *
      * @param predicate A function that defines the condition to be met by parent declarations.
      * @return `true` if all parent declarations satisfy the predicate, `false` otherwise.
      */

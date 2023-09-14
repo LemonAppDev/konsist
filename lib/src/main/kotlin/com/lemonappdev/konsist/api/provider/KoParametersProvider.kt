@@ -69,6 +69,10 @@ interface KoParametersProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all parameters that satisfy the provided predicate.
      *
+     * Note that if the parameters contains no elements, the function returns `true` because there are no elements in it
+     * that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     *
      * @param predicate A function that defines the condition to be met by parameter declarations.
      * @return `true` if all parameter declarations satisfy the predicate, `false` otherwise.
      */

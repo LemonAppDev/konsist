@@ -48,6 +48,10 @@ interface KoInitBlockProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has all init blocks that satisfy the provided predicate.
      *
+     * Note that if the init blocks contains no elements, the function returns `true` because there are no elements in it
+     * that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     *
      * @param predicate A function that defines the condition to be met by init block declarations.
      * @return `true` if all init block declarations satisfy the predicate, `false` otherwise.
      */
