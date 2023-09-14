@@ -1,0 +1,3 @@
+package com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.presentation
+
+class PresentationFirstClass
