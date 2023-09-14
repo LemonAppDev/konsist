@@ -24,6 +24,8 @@ enum class AppEnumClassTest {
     APP_CONSTANT
 }
 
-fun appFunctionTest()
+fun appFunctionTest() {
+    println("some text")
+}
 
 typealias appTypeAliasTest = String
