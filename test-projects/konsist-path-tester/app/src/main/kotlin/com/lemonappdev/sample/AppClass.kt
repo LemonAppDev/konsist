@@ -6,7 +6,7 @@ import com.lemonappdev.sample.AppClass
  * App KDoc
  */
 @Suppress("app_argument")
-class AppClass(appParameter: String) : AppInterface {
+class AppClass(val appParameter: String) : AppInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
@@ -24,6 +24,8 @@ enum class AppEnumClass {
     APP_CONSTANT
 }
 
-fun appFunction() {}
+fun appFunction() {
+    println("some text")
+}
 
 typealias appTypeAlias = String

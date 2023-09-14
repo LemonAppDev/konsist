@@ -33,6 +33,7 @@ class KoScopeFromSourceSetTest {
         )
     }
 
+    @Suppress("detekt.LongMethod")
     @Test
     fun `scopeFromSourceSet for integrationTest source set`() {
         // given

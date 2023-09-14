@@ -12,6 +12,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoScopeFromModuleTest {
+    @Suppress("detekt.LongMethod")
     @Test
     fun `scopeFromModule for app module`() {
         // given
@@ -115,6 +116,7 @@ class KoScopeFromModuleTest {
         )
     }
 
+    @Suppress("detekt.LongMethod")
     @Test
     fun `scopeFromModule for app and data modules`() {
         // given

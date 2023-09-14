@@ -6,7 +6,7 @@ import com.lemonappdev.sample.LibClass
  * Lib KDoc
  */
 @Suppress("lib_argument")
-class LibClass(libParameter: String) : LibInterface {
+class LibClass(val libParameter: String) : LibInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
@@ -24,6 +24,8 @@ enum class LibEnumClass {
     APP_CONSTANT
 }
 
-fun libFunction() {}
+fun libFunction() {
+    println("some text")
+}
 
 typealias libTypeAlias = String

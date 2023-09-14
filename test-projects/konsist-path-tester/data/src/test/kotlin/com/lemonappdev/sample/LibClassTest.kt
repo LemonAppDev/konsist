@@ -6,7 +6,7 @@ import com.lemonappdev.sample.LibClassTest
  * Lib KDoc Test
  */
 @Suppress("lib_argument_test")
-class LibClassTest(libParameterTest: String) : LibInterfaceTest {
+class LibClassTest(val libParameterTest: String) : LibInterfaceTest {
     constructor(otherParameterTest: Int) : this(otherParameterTest.toString())
 
     init {
@@ -24,6 +24,8 @@ enum class LibEnumClassTest {
     APP_CONSTANT
 }
 
-fun libFunctionTest() {}
+fun libFunctionTest() {
+    println("some text")
+}
 
 typealias libTypeAliasTest = String

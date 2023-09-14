@@ -13,6 +13,7 @@ import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoScopeFromProjectTest {
+    @Suppress("detekt.LongMethod")
     @Test
     fun `scopeFromProject ignoreBuildConfig true`() {
         // given
@@ -88,6 +89,7 @@ class KoScopeFromProjectTest {
         )
     }
 
+    @Suppress("detekt.LongMethod")
     @Test
     fun `scopeFromProject ignoreBuildConfig false`() {
         // given
@@ -221,6 +223,7 @@ class KoScopeFromProjectTest {
         )
     }
 
+    @Suppress("detekt.LongMethod")
     @Test
     fun `scopeFromProject for integrationTest source set`() {
         // given
@@ -319,6 +322,7 @@ class KoScopeFromProjectTest {
         )
     }
 
+    @Suppress("detekt.LongMethod")
     @Test
     fun `scopeFromProject for app module and integrationTest source set`() {
         // given

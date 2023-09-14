@@ -6,7 +6,7 @@ import com.lemonappdev.sample.AppClassTest
  * App KDoc Test
  */
 @Suppress("app_argument_test")
-class AppClassTest(appParameterTest: String) : AppInterfaceTest {
+class AppClassTest(val appParameterTest: String) : AppInterfaceTest {
     constructor(otherParameterTest: Int) : this(otherParameterTest.toString())
 
     init {
@@ -24,6 +24,6 @@ enum class AppEnumClassTest {
     APP_CONSTANT
 }
 
-fun appFunctionTest() {}
+fun appFunctionTest()
 
 typealias appTypeAliasTest = String

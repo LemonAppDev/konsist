@@ -6,7 +6,7 @@ import com.lemonappdev.sample.src.RootSrcClass
  * Root Src KDoc
  */
 @Suppress("root_src_argument")
-class RootSrcClass(rootParameter: String) : RootSrcInterface {
+class RootSrcClass(val rootParameter: String) : RootSrcInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
@@ -24,6 +24,8 @@ enum class RootSrcEnumClass {
     APP_CONSTANT
 }
 
-fun rootSrcFunction() {}
+fun rootSrcFunction() {
+    println("some text")
+}
 
 typealias rootSrcTypeAlias = String

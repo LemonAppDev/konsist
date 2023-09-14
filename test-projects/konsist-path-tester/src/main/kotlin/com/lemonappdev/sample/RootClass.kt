@@ -6,7 +6,7 @@ import com.lemonappdev.sample.RootClass
  * Root KDoc
  */
 @Suppress("root_argument")
-class RootClass(rootParameter: String) : RootInterface {
+class RootClass(val rootParameter: String) : RootInterface {
     constructor(otherParameter: Int) : this(otherParameter.toString())
 
     init {
@@ -24,6 +24,8 @@ enum class RootEnumClass {
     APP_CONSTANT
 }
 
-fun rootFunction() {}
+fun rootFunction() {
+    println("some text")
+}
 
 typealias rootTypeAlias = String

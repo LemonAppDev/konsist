@@ -11,6 +11,7 @@ import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoScopeFromTest {
+    @Suppress("detekt.LongMethod")
     @Test
     fun `scopeFromTest`() {
         // given
@@ -89,6 +90,7 @@ class KoScopeFromTest {
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
+    @Suppress("detekt.LongMethod")
     @Test
     fun `scopeFromTest, integrationTest source set`() {
         // given
@@ -171,6 +173,7 @@ class KoScopeFromTest {
         )
     }
 
+    @Suppress("detekt.LongMethod")
     @Test
     fun `scopeFromTest, app module`() {
         // given
@@ -246,6 +249,7 @@ class KoScopeFromTest {
         func shouldThrow IllegalArgumentException::class withMessage message
     }
 
+    @Suppress("detekt.LongMethod")
     @Test
     fun `scopeFromTest, app module, integrationTest source set`() {
         // given
