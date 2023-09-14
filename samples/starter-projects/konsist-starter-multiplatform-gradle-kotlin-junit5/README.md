@@ -18,7 +18,8 @@ and [Junit 5](https://junit.org/junit5/).
 
 Other samples are located [here](..).
 
-The [SampleKonsistTest.kt](konsist_test/src/test/java/com/sample/SampleKonsistTest.kt) class containing Konsist Test is placed in `konsistTest`
+The [SampleKonsistTest.kt](src/jvmTest/kotlin/com/sample/SampleKonsistTest.kt) class containing Konsist Test is placed 
+in `konsistTest`
 module.
 
 To run tests use IDE UI or run gradle commands:

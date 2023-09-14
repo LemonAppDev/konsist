@@ -12,7 +12,6 @@ external interface WelcomeProps : Props {
     var name: String
 }
 
-@Suppress("detekt.MagicNumber")
 val Welcome = FC<WelcomeProps> { props ->
     var name by useState(props.name)
     div {

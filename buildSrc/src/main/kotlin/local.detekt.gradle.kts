@@ -35,7 +35,13 @@ configure(listOf(detektCheck, detektApply)) {
         // Runs detekt for all files in the Gradle project and all subprojects without
         // a need to configure detekt plugin in every subproject.
         include("**/*.kt", "**/*.kts")
-        exclude("**/resources/**", "**/build/**", "**/generated/**")
+        exclude(
+            "**/resources/**",
+            "**/build/**",
+            "**/target/**",
+            "**/generated/**",
+            "**/samples/starter-projects/konsist-starter-multiplatform-gradle-kotlin-junit5**"
+        )
 
         reports {
             html.required.set(true)
