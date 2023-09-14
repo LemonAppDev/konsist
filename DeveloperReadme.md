@@ -21,13 +21,13 @@
 
 1. Merge `main` to `develop`
 2. Create `release-vx.y.z` branch
-3. Merge `release-vx.y.z` branch to `main`
-4. Test Starter projects (`sample/starter-projects`) and create PR to `main`.
-5. Update Konsist version
+3. Test Starter projects (`sample/starter-projects`) using local artifact and create PR to `main`.
+4. Update Konsist version
    1. [gradle.properties](gradle.properties) file
    2. [README.md](README.md) file
-6. Open Release PR and wait for all checks to pass
-7. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
+5. Open Release PR and wait for all checks to pass
+6. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
+7. Merge `release-vx.y.z` branch to `main`
 8. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
     1. set `vx.y.z` as tag version
     2. set `vx.y.z` as release title
