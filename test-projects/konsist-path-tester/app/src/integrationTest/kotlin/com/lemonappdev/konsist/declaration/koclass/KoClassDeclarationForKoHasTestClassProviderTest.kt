@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.declaration.koclassdeclaration
+package com.lemonappdev.konsist.declaration.koclass
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.helper.ext.toOsSeparator

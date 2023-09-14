@@ -5,9 +5,11 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 /**
  * Represents a Kotlin annotation.
@@ -21,5 +23,7 @@ interface KoAnnotationDeclaration :
     KoLocationProvider,
     KoNameProvider,
     KoPathProvider,
+    KoModuleProvider,
+    KoSourceSetProvider,
     KoRepresentsTypeProvider,
     KoTextProvider

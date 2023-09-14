@@ -1,6 +1,7 @@
-package com.lemonappdev.konsist.declaration.kofiledeclaration
+package com.lemonappdev.konsist.declaration.koenumconstant
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appIntegrationTestSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
@@ -11,13 +12,14 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileForKoSourceSetProviderTest {
+class KoEnumConstantForKoSourceSetProviderTest {
     @Test
     fun `source set name is 'main' in app module`() {
         // given
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
-            .files
+            .classes()
+            .enumConstants
             .first()
 
         // then
@@ -33,7 +35,8 @@ class KoFileForKoSourceSetProviderTest {
         // given
         val sut = Konsist
             .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/sample/AppClassTest.kt".toOsSeparator())
-            .files
+            .classes()
+            .enumConstants
             .first()
 
         // then
@@ -49,7 +52,8 @@ class KoFileForKoSourceSetProviderTest {
         // given
         val sut = Konsist
             .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
-            .files
+            .classes()
+            .enumConstants
             .first()
 
         // then
@@ -65,7 +69,8 @@ class KoFileForKoSourceSetProviderTest {
         // given
         val sut = Konsist
             .scopeFromFile("$dataTestSourceSetProjectDirectory/sample/LibClassTest.kt".toOsSeparator())
-            .files
+            .classes()
+            .enumConstants
             .first()
 
         // then
@@ -81,7 +86,8 @@ class KoFileForKoSourceSetProviderTest {
         // given
         val sut = Konsist
             .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
-            .files
+            .classes()
+            .enumConstants
             .first()
 
         // then
@@ -97,7 +103,8 @@ class KoFileForKoSourceSetProviderTest {
         // given
         val sut = Konsist
             .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/src/RootSrcClass.kt".toOsSeparator())
-            .files
+            .classes()
+            .enumConstants
             .first()
 
         // then

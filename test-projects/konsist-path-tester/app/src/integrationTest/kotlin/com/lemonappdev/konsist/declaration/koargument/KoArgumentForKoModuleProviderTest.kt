@@ -1,6 +1,8 @@
-package com.lemonappdev.konsist.declaration.kofiledeclaration
+package com.lemonappdev.konsist.declaration.koargument
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.list.annotations
+import com.lemonappdev.konsist.api.ext.list.arguments
 import com.lemonappdev.konsist.helper.ext.toOsSeparator
 import com.lemonappdev.konsist.helper.util.PathProvider.appMainSourceSetProjectDirectory
 import com.lemonappdev.konsist.helper.util.PathProvider.dataMainSourceSetProjectDirectory
@@ -9,7 +11,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFileForKoModuleProviderTest {
+class KoArgumentForKoModuleProviderTest {
     private val app = "app"
     private val data = "data"
     private val root = "root"
@@ -19,7 +21,9 @@ class KoFileForKoModuleProviderTest {
         // given
         val sut = Konsist
             .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
-            .files
+            .classes()
+            .annotations
+            .arguments
             .first()
 
         // then
@@ -35,7 +39,9 @@ class KoFileForKoModuleProviderTest {
         // given
         val sut = Konsist
             .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
-            .files
+            .classes()
+            .annotations
+            .arguments
             .first()
 
         // then
@@ -51,7 +57,9 @@ class KoFileForKoModuleProviderTest {
         // given
         val sut = Konsist
             .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
-            .files
+            .classes()
+            .annotations
+            .arguments
             .first()
 
         // then
