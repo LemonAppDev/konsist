@@ -15,12 +15,20 @@ internal interface KoArgumentProviderCore :
 
     override fun hasArguments(): Boolean = arguments.isNotEmpty()
 
-    override fun hasArgumentWithName(vararg names: String): Boolean = names.any {
-        arguments.any { argument -> it == argument.name }
+    override fun hasArgumentWithName(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.any {
+            arguments.any { argument -> it == argument.name }
+        }
     }
 
-    override fun hasArgumentsWithAllNames(vararg names: String): Boolean = names.all {
-        arguments.any { argument -> it == argument.name }
+    override fun hasArgumentsWithAllNames(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.all {
+            arguments.any { argument -> it == argument.name }
+        }
     }
 
     override fun hasArgument(predicate: (KoArgumentDeclaration) -> Boolean): Boolean = arguments.any(predicate)

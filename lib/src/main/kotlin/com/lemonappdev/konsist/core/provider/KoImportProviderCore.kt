@@ -45,12 +45,20 @@ internal interface KoImportProviderCore : KoImportProvider, KoContainingDeclarat
 
     override fun hasImports(): Boolean = imports.isNotEmpty()
 
-    override fun hasImportWithName(vararg names: String): Boolean = names.any {
-        imports.any { import -> it == import.name }
+    override fun hasImportWithName(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.any {
+            imports.any { import -> it == import.name }
+        }
     }
 
-    override fun hasImportsWithAllNames(vararg names: String): Boolean = names.all {
-        imports.any { import -> it == import.name }
+    override fun hasImportsWithAllNames(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.all {
+            imports.any { import -> it == import.name }
+        }
     }
 
     override fun hasImport(predicate: (KoImportDeclaration) -> Boolean): Boolean = imports.any(predicate)

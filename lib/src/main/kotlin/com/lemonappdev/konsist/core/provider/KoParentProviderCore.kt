@@ -37,12 +37,20 @@ internal interface KoParentProviderCore :
 
     override fun hasParents(): Boolean = parents.isNotEmpty()
 
-    override fun hasParentWithName(vararg names: String): Boolean = names.any {
-        parents.any { parent -> it == parent.name }
+    override fun hasParentWithName(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.any {
+            parents.any { parent -> it == parent.name }
+        }
     }
 
-    override fun hasParentsWithAllNames(vararg names: String): Boolean = names.all {
-        parents.any { parent -> it == parent.name }
+    override fun hasParentsWithAllNames(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.all {
+            parents.any { parent -> it == parent.name }
+        }
     }
 
     override fun hasParent(predicate: (KoParentDeclaration) -> Boolean): Boolean = parents.any(predicate)

@@ -56,12 +56,20 @@ internal interface KoAnnotationProviderCore :
 
     override fun hasAnnotations(): Boolean = annotations.isNotEmpty()
 
-    override fun hasAnnotationWithName(vararg names: String): Boolean = names.any {
-        annotations.any { annotation -> annotation.representsType(it) }
+    override fun hasAnnotationWithName(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.any {
+            annotations.any { annotation -> annotation.representsType(it) }
+        }
     }
 
-    override fun hasAnnotationsWithAllNames(vararg names: String): Boolean = names.all {
-        annotations.any { annotation -> annotation.representsType(it) }
+    override fun hasAnnotationsWithAllNames(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.all {
+            annotations.any { annotation -> annotation.representsType(it) }
+        }
     }
 
     override fun hasAnnotation(predicate: (KoAnnotationDeclaration) -> Boolean): Boolean = annotations.any(predicate)

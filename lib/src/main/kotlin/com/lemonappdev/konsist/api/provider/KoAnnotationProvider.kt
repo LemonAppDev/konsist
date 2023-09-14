@@ -65,18 +65,20 @@ interface KoAnnotationProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one annotation whose name matches any of the specified names.
      *
+     * @param name the name of the annotations to check. It can be either a simple name or a fully qualified name.
      * @param names the names of the annotations to check. It can be either a simple name or a fully qualified name.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasAnnotationWithName(vararg names: String): Boolean
+    fun hasAnnotationWithName(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has annotations with all the specified names.
      *
+     * @param name the name of the annotations to check. It can be either a simple name or a fully qualified name.
      * @param names The names of the annotations to check. It can be either a simple name or a fully qualified name.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasAnnotationsWithAllNames(vararg names: String): Boolean
+    fun hasAnnotationsWithAllNames(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has at least one annotation that satisfies the provided predicate.

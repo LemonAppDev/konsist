@@ -54,20 +54,22 @@ interface KoParentProvider : KoBaseProvider {
      * in the Kotlin file whose name matches any of the specified names.
      * This method does not include parents defined in other files, such as parents of the parent.
      *
+     * @param name the name of the parent to check.
      * @param names the names of the parents to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParentWithName(vararg names: String): Boolean
+    fun hasParentWithName(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has parents (parent classes and parent interfaces) defined directly in the Kotlin
      * file with all the specified names.
      * This method does not include parents defined in other files, such as parents of the parent.
      *
+     * @param name The name of the parent to check.
      * @param names The names of the parents to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasParentsWithAllNames(vararg names: String): Boolean
+    fun hasParentsWithAllNames(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has at least one parent (parent class or parent interface) defined directly
