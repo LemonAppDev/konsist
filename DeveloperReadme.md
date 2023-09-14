@@ -23,20 +23,20 @@
 2. Create `release-vx.y.z` branch from `develop`
 3. Open Release PR and wait for all checks to pass
 4. Release local artifact and test 3rd party projects using local artifact
-   1. [Android-showcase](https://github.com/igorwojda/android-showcase)
-   2. Mango (internal)
-   3. [CleanArchitectureForAndroid](https://github.com/EranBoudjnah/CleanArchitectureForAndroid)
+    1. [Android-showcase](https://github.com/igorwojda/android-showcase)
+    2. Mango (internal)
+    3. [CleanArchitectureForAndroid](https://github.com/EranBoudjnah/CleanArchitectureForAndroid)
 5. Update Konsist version
-   1. [gradle.properties](gradle.properties) file
-   2. [README.md](README.md) file
-6. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
-7. Merge `release-vx.y.z` branch to `main`
-8. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
+    1. [gradle.properties](gradle.properties) file
+    2. [README.md](README.md) file
+6. Merge `release-vx.y.z` branch to `main`
+7. Switch to `main` branch
+8. Run `./gradlew publish -Pkonsist.releaseTarget=release` to publish to release repository
+9. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
     1. set `vx.y.z` as tag version
     2. set `vx.y.z` as release title
-9. Update Konsist version in the Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) docs page 
-10. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
-11. Merge release PR to `develop`
+10. Update Konsist version in the Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) docs page
+11. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
 12. Merge `main` to develop (`release` will have some changes)
 13. Update version on `develop` (to next one)
 14. Notify the community
