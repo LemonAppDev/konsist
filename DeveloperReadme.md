@@ -20,7 +20,7 @@
 ## Release
 
 1. Merge `main` to `develop`
-2. Create `release-vx.y.z` branch
+2. Create `release-vx.y.z` branch from `develop`
 3. Open Release PR and wait for all checks to pass
 4. Release local artifact and test 3rd party projects using local artifact
    1. [Android-showcase](https://github.com/igorwojda/android-showcase)
