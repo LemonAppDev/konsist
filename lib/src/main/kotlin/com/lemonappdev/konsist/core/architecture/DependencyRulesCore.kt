@@ -79,7 +79,7 @@ class DependencyRulesCore : DependencyRules {
             checkCircularDependenciesHelper(layer, it, emptyList(), emptyList())
         }
 
-        val notEmpty = allLayers.firstOrNull { it.isNotEmpty() }
+        val notEmpty = allLayers.firstOrNull { it.size > 2 }
 
         if (notEmpty != null) {
             val layerName = layer.name
