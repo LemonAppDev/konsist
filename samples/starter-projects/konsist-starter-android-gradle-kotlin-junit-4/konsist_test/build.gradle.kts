@@ -34,5 +34,5 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
 
     testImplementation("junit:junit:4.13.2")
-    testImplementation("com.lemonappdev:konsist:0.11.0")
+    testImplementation("com.lemonappdev:konsist:0.12.0")
 }
