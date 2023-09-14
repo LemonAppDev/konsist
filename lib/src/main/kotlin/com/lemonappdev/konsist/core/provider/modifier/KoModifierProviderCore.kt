@@ -24,10 +24,10 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
                 // and with angle brackets
                 // e.g. @SampleAnnotation<String, Int>
                 !it.contains('<') &&
-                        !it.contains('>') &&
-                        !it.contains(')') &&
-                        !it.contains('@') &&
-                        it.isNotBlank()
+                    !it.contains('>') &&
+                    !it.contains(')') &&
+                    !it.contains('@') &&
+                    it.isNotBlank()
             }
             ?.map {
                 KoModifier
