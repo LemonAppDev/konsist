@@ -1,6 +1,9 @@
 package com.lemonappdev.konsist.core.declaration.kointerface
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.testdata.SampleParentClass
+import com.lemonappdev.konsist.testdata.SampleParentInterface1
+import com.lemonappdev.konsist.testdata.SampleParentInterface2
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -23,6 +26,8 @@ class KoInterfaceDeclarationForKoParentProviderTest {
             hasParentsWithAllNames("SampleParentInterface1", "SampleParentInterface2") shouldBeEqualTo false
             hasParent { it.name == "SampleParentInterface" } shouldBeEqualTo false
             hasAllParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasParentOf(SampleParentInterface1::class) shouldBeEqualTo false
+            hasAllParentsOf(SampleParentInterface1::class, SampleParentInterface2::class) shouldBeEqualTo false
             hasParents("SampleParentInterface") shouldBeEqualTo false
         }
     }
@@ -53,6 +58,11 @@ class KoInterfaceDeclarationForKoParentProviderTest {
             hasAllParents { it.name == "SampleParentInterface1" } shouldBeEqualTo false
             hasAllParents { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
             hasAllParents { it.hasNameStartingWith("Other") } shouldBeEqualTo false
+            hasParentOf(SampleParentInterface1::class) shouldBeEqualTo true
+            hasParentOf(SampleParentInterface1::class, SampleParentClass::class) shouldBeEqualTo true
+            hasAllParentsOf(SampleParentInterface1::class) shouldBeEqualTo true
+            hasAllParentsOf(SampleParentInterface1::class, SampleParentClass::class) shouldBeEqualTo false
+            hasAllParentsOf(SampleParentInterface1::class, SampleParentInterface2::class) shouldBeEqualTo true
             hasParents("SampleParentInterface1") shouldBeEqualTo true
             hasParents("OtherInterface") shouldBeEqualTo false
             hasParents("SampleParentInterface1", "SampleParentInterface2") shouldBeEqualTo true

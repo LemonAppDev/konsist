@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.provider
 
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
+import kotlin.reflect.KClass
 
 /**
  * An interface representing a Kotlin declaration that provides access to its parent declarations.
@@ -87,4 +88,22 @@ interface KoParentProvider : KoBaseProvider {
      * @return `true` if all parent declarations satisfy the predicate, `false` otherwise.
      */
     fun hasAllParents(predicate: (KoParentDeclaration) -> Boolean): Boolean
+
+    /**
+     * Determines whether the declaration has at least one parent of the specified `KClass` type.
+     *
+     * @param name the `KClass` type of the parent to check.
+     * @param names the `KClass` types of the parents to check.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasParentOf(name: KClass<*>, vararg names: KClass<*>): Boolean
+
+    /**
+     * Determines whether the declaration has parents with all the specified `KClass` type.
+     *
+     * @param name the `KClass` type of the parent to check.
+     * @param names the `KClass` types of the parents to check.
+     * @return `true` if the declaration has parents of all the specified `KClass` types, `false` otherwise.
+     */
+    fun hasAllParentsOf(name: KClass<*>, vararg names: KClass<*>): Boolean
 }
