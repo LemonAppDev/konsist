@@ -28,12 +28,20 @@ internal interface KoParametersProviderCore :
 
     override fun hasParameters(): Boolean = parameters.isNotEmpty()
 
-    override fun hasParameterWithName(vararg names: String): Boolean = names.any {
-        parameters.any { parameter -> it == parameter.name }
+    override fun hasParameterWithName(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.any {
+            parameters.any { parameter -> it == parameter.name }
+        }
     }
 
-    override fun hasParametersWithAllNames(vararg names: String): Boolean = names.all {
-        parameters.any { parameter -> it == parameter.name }
+    override fun hasParametersWithAllNames(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.all {
+            parameters.any { parameter -> it == parameter.name }
+        }
     }
 
     override fun hasParameter(predicate: (KoParameterDeclaration) -> Boolean): Boolean = parameters.any(predicate)

@@ -50,18 +50,20 @@ interface KoTypeAliasProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one type alias whose name matches any of the specified names.
      *
+     * @param name the name of the type alias to check.
      * @param names the names of the type aliases to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasTypeAliasWithName(vararg names: String): Boolean
+    fun hasTypeAliasWithName(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has type aliases with all the specified names.
      *
+     * @param name The name of the type alias to check.
      * @param names The names of the type aliases to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasTypeAliasesWithAllNames(vararg names: String): Boolean
+    fun hasTypeAliasesWithAllNames(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has at least one type alias that satisfies the provided predicate.
@@ -73,6 +75,10 @@ interface KoTypeAliasProvider : KoBaseProvider {
 
     /**
      * Determines whether the declaration has all type aliases that satisfy the provided predicate.
+     *
+     * Note that if the type aliases contains no elements, the function returns `true` because there are no elements in
+     * it that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
      * @param predicate A function that defines the condition to be met by type alias declarations.
      * @return `true` if all type alias declarations satisfy the predicate, `false` otherwise.

@@ -53,8 +53,12 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
 
     override fun hasModifiers(): Boolean = modifiers.isNotEmpty()
 
-    override fun hasModifier(vararg modifiers: KoModifier): Boolean =
-        modifiers.any { this.modifiers.any { modifier -> modifier == it } }
+    override fun hasModifier(modifier: KoModifier, vararg modifiers: KoModifier): Boolean {
+        val givenModifiers = modifiers.toList() + modifier
 
-    override fun hasAllModifiers(vararg modifiers: KoModifier): Boolean = this.modifiers.containsAll(modifiers.toList())
+        return givenModifiers.any { this.modifiers.any { modifier -> modifier == it } }
+    }
+
+    override fun hasAllModifiers(modifier: KoModifier, vararg modifiers: KoModifier): Boolean =
+        this.modifiers.containsAll(modifiers.toList() + modifier)
 }

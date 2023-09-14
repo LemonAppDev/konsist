@@ -43,18 +43,20 @@ interface KoParametersProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one parameter whose name matches any of the specified names.
      *
+     * @param name the name of the parameter to check.
      * @param names the names of the parameters to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasParameterWithName(vararg names: String): Boolean
+    fun hasParameterWithName(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has parameters with all the specified names.
      *
+     * @param name The name of the parameter to check.
      * @param names The names of the parameters to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasParametersWithAllNames(vararg names: String): Boolean
+    fun hasParametersWithAllNames(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has at least one parameter that satisfies the provided predicate.
@@ -66,6 +68,10 @@ interface KoParametersProvider : KoBaseProvider {
 
     /**
      * Determines whether the declaration has all parameters that satisfy the provided predicate.
+     *
+     * Note that if the parameters contains no elements, the function returns `true` because there are no elements in it
+     * that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
      * @param predicate A function that defines the condition to be met by parameter declarations.
      * @return `true` if all parameter declarations satisfy the predicate, `false` otherwise.

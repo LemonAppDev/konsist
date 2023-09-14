@@ -65,18 +65,20 @@ interface KoAnnotationProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one annotation whose name matches any of the specified names.
      *
+     * @param name the name of the annotations to check. It can be either a simple name or a fully qualified name.
      * @param names the names of the annotations to check. It can be either a simple name or a fully qualified name.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasAnnotationWithName(vararg names: String): Boolean
+    fun hasAnnotationWithName(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has annotations with all the specified names.
      *
+     * @param name the name of the annotations to check. It can be either a simple name or a fully qualified name.
      * @param names The names of the annotations to check. It can be either a simple name or a fully qualified name.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasAnnotationsWithAllNames(vararg names: String): Boolean
+    fun hasAnnotationsWithAllNames(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has at least one annotation that satisfies the provided predicate.
@@ -88,6 +90,10 @@ interface KoAnnotationProvider : KoBaseProvider {
 
     /**
      * Determines whether the declaration has all annotations that satisfy the provided predicate.
+     *
+     * Note that if the annotations contains no elements, the function returns `true` because there are no elements in it
+     * that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
      * @param predicate A function that defines the condition to be met by annotation declarations.
      * @return `true` if all annotation declarations satisfy the predicate, `false` otherwise.

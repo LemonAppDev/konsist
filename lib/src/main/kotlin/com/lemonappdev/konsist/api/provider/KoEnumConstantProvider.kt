@@ -50,18 +50,20 @@ interface KoEnumConstantProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one enum constant whose name matches any of the specified names.
      *
+     * @param name the name of the enum constant to check.
      * @param names the names of the enum constants to check.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
-    fun hasEnumConstantWithName(vararg names: String): Boolean
+    fun hasEnumConstantWithName(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has enum constants with all the specified names.
      *
+     * @param name The name of the enum constant to check.
      * @param names The names of the enum constants to check.
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
-    fun hasEnumConstantsWithAllNames(vararg names: String): Boolean
+    fun hasEnumConstantsWithAllNames(name: String, vararg names: String): Boolean
 
     /**
      * Determines whether the declaration has at least one enum constant that satisfies the provided predicate.
