@@ -21,7 +21,6 @@ import com.lemonappdev.konsist.api.provider.modifier.KoNoInlineModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoValModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVarArgModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVarModifierProvider
-import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
 /**
  * Represents a Kotlin parameter declaration.
@@ -44,7 +43,6 @@ interface KoParameterDeclaration :
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTypeProvider,
-    KoVisibilityModifierProvider,
     KoVarModifierProvider,
     KoValModifierProvider,
     KoVarArgModifierProvider,

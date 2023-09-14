@@ -25,7 +25,6 @@ import com.lemonappdev.konsist.core.provider.modifier.KoNoInlineModifierProvider
 import com.lemonappdev.konsist.core.provider.modifier.KoValModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarArgModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
-import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
@@ -55,7 +54,6 @@ internal class KoParameterDeclarationCore private constructor(
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
     KoTypeProviderCore,
-    KoVisibilityModifierProviderCore,
     KoVarModifierProviderCore,
     KoValModifierProviderCore,
     KoVarArgModifierProviderCore,
