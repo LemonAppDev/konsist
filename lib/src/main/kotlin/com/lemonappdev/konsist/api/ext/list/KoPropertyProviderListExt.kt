@@ -11,6 +11,6 @@ import com.lemonappdev.konsist.api.provider.KoPropertyProvider
  * @return A list containing property declarations.
  */
 fun <T : KoPropertyProvider> List<T>.properties(
-    includeNested: Boolean = false,
-    includeLocal: Boolean = false,
+    includeNested: Boolean = true,
+    includeLocal: Boolean = true,
 ): List<KoPropertyDeclaration> = flatMap { it.properties(includeNested, includeLocal) }

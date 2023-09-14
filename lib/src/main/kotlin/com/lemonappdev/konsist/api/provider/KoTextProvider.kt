@@ -8,9 +8,4 @@ interface KoTextProvider : KoBaseProvider {
      * Text of the declaration.
      */
     val text: String
-
-    /**
-     * Print declaration.
-     */
-    fun print(): Unit
 }

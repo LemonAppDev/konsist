@@ -2,12 +2,57 @@ package com.lemonappdev.konsist.api.ext.provider.koreturntype
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
+import com.lemonappdev.konsist.api.ext.provider.hasReturnTypeOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
+import com.lemonappdev.konsist.testdata.SampleClass
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
 class KoReturnTypeProviderExtTest {
+    @Test
+    fun `declaration-has-no-return-type`() {
+        // given
+        val sut = getSnippetFile("declaration-has-no-return-type")
+            .declarationsOf<KoReturnTypeProvider>()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasReturnTypeOf<String>() shouldBeEqualTo false
+            hasReturnTypeOf<SampleClass>() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `declaration-has-return-type-with-simple-type`() {
+        // given
+        val sut = getSnippetFile("declaration-has-return-type-with-simple-type")
+            .declarationsOf<KoReturnTypeProvider>()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasReturnTypeOf<String>() shouldBeEqualTo true
+            hasReturnTypeOf<Int>() shouldBeEqualTo false
+        }
+    }
+
+    @Test
+    fun `declaration-has-return-type-with-complex-type`() {
+        // given
+        val sut = getSnippetFile("declaration-has-return-type-with-complex-type")
+            .declarationsOf<KoReturnTypeProvider>()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasReturnTypeOf<SampleClass>() shouldBeEqualTo true
+            hasReturnTypeOf<Int>() shouldBeEqualTo false
+        }
+    }
+
     @Test
     fun `declaration-with-return-type-has-valid-kdoc-return-tag`() {
         // given

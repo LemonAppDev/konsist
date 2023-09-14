@@ -48,6 +48,12 @@ interface SampleInterface1
 
 interface SampleInterface2
 
+interface SampleParentInterface
+
+interface SampleParentInterface1
+
+interface SampleParentInterface2
+
 object SampleObject
 
 annotation class NonExistingAnnotation
@@ -90,6 +96,8 @@ annotation class SampleAnnotation2
     AnnotationTarget.TYPEALIAS,
 )
 annotation class SampleAnnotationWithParameter(val sampleParameter: String)
+
+annotation class SampleAnnotationWithParameters(val sampleParameter1: String, val sampleParameter2: Boolean)
 
 @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.TYPEALIAS)
 annotation class SampleAnnotationWithAngleBrackets<T, U>

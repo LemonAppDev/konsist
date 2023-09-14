@@ -27,6 +27,10 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
             modifiers shouldBeEqualTo emptyList()
             numModifiers shouldBeEqualTo 0
             hasModifiers() shouldBeEqualTo false
+            hasModifier(OPEN) shouldBeEqualTo false
+            hasModifier(OPEN, DATA) shouldBeEqualTo false
+            hasAllModifiers(OPEN) shouldBeEqualTo false
+            hasAllModifiers(OPEN, DATA) shouldBeEqualTo false
             hasModifiers(OPEN) shouldBeEqualTo false
             hasModifiers(OPEN, DATA) shouldBeEqualTo false
             hasActualModifier shouldBeEqualTo false
@@ -46,6 +50,13 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
         assertSoftly(sut) {
             numModifiers shouldBeEqualTo 2
             hasModifiers() shouldBeEqualTo true
+            hasModifier(PUBLIC) shouldBeEqualTo true
+            hasModifier(PROTECTED) shouldBeEqualTo false
+            hasModifier(PUBLIC, DATA) shouldBeEqualTo true
+            hasAllModifiers(PUBLIC) shouldBeEqualTo true
+            hasAllModifiers(PROTECTED) shouldBeEqualTo false
+            hasAllModifiers(PUBLIC, DATA) shouldBeEqualTo false
+            hasAllModifiers(PUBLIC, ABSTRACT) shouldBeEqualTo true
             hasModifiers(PUBLIC) shouldBeEqualTo true
             hasModifiers(ABSTRACT) shouldBeEqualTo true
             hasModifiers(PROTECTED) shouldBeEqualTo false

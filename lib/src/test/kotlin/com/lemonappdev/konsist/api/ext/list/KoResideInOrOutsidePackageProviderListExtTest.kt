@@ -7,6 +7,9 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
+/*
+1.0.0 CleanUp - After removing deprecated KoResideInOrOutsidePackageProvider in v1.0.0 this class will be unnecessary.
+ */
 class KoResideInOrOutsidePackageProviderListExtTest {
     private interface SampleTestDeclaration : KoPackageProvider, KoResideInOrOutsidePackageProvider
 

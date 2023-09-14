@@ -17,13 +17,19 @@ class KoFunctionDeclarationForKoParametersProviderTest {
         assertSoftly(sut) {
             parameters shouldBeEqualTo emptyList()
             numParameters shouldBeEqualTo 0
+            countParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo 0
+            hasParameters() shouldBeEqualTo false
+            hasParameterWithName("sampleParameter") shouldBeEqualTo false
+            hasParametersWithAllNames("sampleParameter1", "sampleParameter2") shouldBeEqualTo false
+            hasParameter { it.hasNameStartingWith("other") } shouldBeEqualTo false
+            hasAllParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo true
         }
     }
 
     @Test
-    fun `function-contains-parameter`() {
+    fun `function-contains-one-parameter`() {
         // given
-        val sut = getSnippetFile("function-contains-parameter")
+        val sut = getSnippetFile("function-contains-one-parameter")
             .functions()
             .first()
 
@@ -31,7 +37,43 @@ class KoFunctionDeclarationForKoParametersProviderTest {
         assertSoftly(sut) {
             parameters.size shouldBeEqualTo 1
             numParameters shouldBeEqualTo 1
-            parameters.first().name shouldBeEqualTo "sampleParameter"
+            countParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo 1
+            hasParameters() shouldBeEqualTo true
+            hasParameterWithName("sampleParameter") shouldBeEqualTo true
+            hasParameterWithName("otherParameter") shouldBeEqualTo false
+            hasParameterWithName("sampleParameter", "otherParameter") shouldBeEqualTo true
+            hasParametersWithAllNames("sampleParameter") shouldBeEqualTo true
+            hasParametersWithAllNames("sampleParameter", "otherParameter") shouldBeEqualTo false
+            hasParameter { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasParameter { it.hasNameStartingWith("other") } shouldBeEqualTo false
+            hasAllParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `function-contains-two-parameters`() {
+        // given
+        val sut = getSnippetFile("function-contains-two-parameters")
+            .functions()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            parameters.size shouldBeEqualTo 2
+            numParameters shouldBeEqualTo 2
+            countParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo 2
+            countParameters { it.hasTypeOf(Int::class) } shouldBeEqualTo 1
+            hasParameters() shouldBeEqualTo true
+            hasParameterWithName("sampleParameter1") shouldBeEqualTo true
+            hasParameterWithName("otherParameter") shouldBeEqualTo false
+            hasParameterWithName("sampleParameter1", "otherName") shouldBeEqualTo true
+            hasParametersWithAllNames("sampleParameter1") shouldBeEqualTo true
+            hasParametersWithAllNames("sampleParameter1", "sampleParameter2") shouldBeEqualTo true
+            hasParametersWithAllNames("sampleParameter1", "otherParameter") shouldBeEqualTo false
+            hasParameter { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasParameter { it.hasTypeOf(Int::class) } shouldBeEqualTo true
+            hasAllParameters { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasAllParameters { it.hasTypeOf(Int::class) } shouldBeEqualTo false
         }
     }
 

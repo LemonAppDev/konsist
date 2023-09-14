@@ -4,8 +4,8 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.declarations
 import com.lemonappdev.konsist.api.ext.list.functions
-import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutSomeModifiers
-import com.lemonappdev.konsist.api.ext.list.withoutSomeAnnotationsOf
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
+import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.api.verify.assert
@@ -26,7 +26,7 @@ class TestSnippets {
         Konsist
             .scopeFromProduction()
             .classes()
-            .withoutSomeModifiers(KoModifier.DATA, KoModifier.VALUE)
+            .withoutModifier(KoModifier.DATA, KoModifier.VALUE)
             .assert { it.hasTestClass() }
     }
 
@@ -50,7 +50,7 @@ class TestSnippets {
             .classes()
             .declarations()
             .filterIsInstance<KoAnnotationProvider>()
-            .withoutSomeAnnotationsOf(Test::class, ParameterizedTest::class, RepeatedTest::class)
+            .withoutAnnotationOf(Test::class, ParameterizedTest::class, RepeatedTest::class)
             .filterIsInstance<KoVisibilityModifierProvider>()
             .assert { it.hasPrivateModifier }
     }
@@ -60,6 +60,6 @@ class TestSnippets {
             .scopeFromProject()
             .classes()
             .functions()
-            .assertNot { it.hasAnnotations("org.junit.Test") } // should be only org.junit.jupiter.api.Test
+            .assertNot { it.hasAnnotationWithName("org.junit.Test") } // should be only org.junit.jupiter.api.Test
     }
 }

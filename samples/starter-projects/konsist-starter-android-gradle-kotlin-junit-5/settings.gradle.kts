@@ -12,8 +12,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        mavenLocal()
     }
 }
 
 rootProject.name = "konsist-starter-android-gradle-kotlin-junit-5"
-include(":app", ":konsistTest")
+include(":app", ":konsist_test")

@@ -13,7 +13,7 @@ class KoFunctionDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo sut.locationWithText
+        sut.toString() shouldBeEqualTo "sampleFunction"
     }
 
     private fun getSnippetFile(fileName: String) =

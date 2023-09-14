@@ -10,10 +10,12 @@ import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoKotlinTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoNullableTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceAndAliasTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -31,6 +33,8 @@ internal class KoTypeDeclarationCore private constructor(
     KoNameProviderCore,
     KoNullableTypeProviderCore,
     KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
     KoSourceAndAliasTypeProviderCore,
     KoTextProviderCore {
     override val psiElement: PsiElement by lazy { ktTypeReference }
@@ -48,12 +52,10 @@ internal class KoTypeDeclarationCore private constructor(
         containingFile
             .imports
             .map { it.name }
-            .firstOrNull { it.contains(sourceType) } ?: ""
+            .firstOrNull { it.contains(sourceType) } ?: name
     }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoTypeDeclaration> = KoDeclarationCache()

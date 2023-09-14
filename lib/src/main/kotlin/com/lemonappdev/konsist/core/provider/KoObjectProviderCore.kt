@@ -7,7 +7,10 @@ import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
 internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProviderCore, KoBaseProviderCore {
     override fun objects(
         includeNested: Boolean,
-    ): List<KoObjectDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(declarations(), includeNested)
+    ): List<KoObjectDeclaration> = KoDeclarationProviderCoreUtil.getKoDeclarations(
+        declarations(includeNested = false, includeLocal = false),
+        includeNested,
+    )
 
     override fun containsObject(
         includeNested: Boolean,

@@ -8,8 +8,11 @@ import com.lemonappdev.konsist.core.provider.KoAliasProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoMatchesProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoWildcardProviderCore
 import org.jetbrains.kotlin.psi.KtElement
@@ -21,8 +24,11 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
     KoAliasProviderCore,
     KoContainingFileProviderCore,
     KoLocationProviderCore,
+    KoMatchesProviderCore,
     KoNameProviderCore,
     KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
     KoTextProviderCore,
     KoWildcardProviderCore {
     override val psiElement: PsiElement by lazy { ktImportDirective }
@@ -31,9 +37,7 @@ internal class KoImportDeclarationCore private constructor(override val ktImport
 
     override val name: String by lazy { ktImportDirective.importPath?.fqName.toString() }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoImportDeclaration> = KoDeclarationCache()

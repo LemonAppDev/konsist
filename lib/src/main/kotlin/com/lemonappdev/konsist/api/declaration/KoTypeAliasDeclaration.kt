@@ -7,10 +7,13 @@ import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTypeProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoActualModifierProvider
@@ -33,15 +36,11 @@ interface KoTypeAliasDeclaration :
     KoPackageProvider,
     KoContainingDeclarationProvider,
     KoPathProvider,
+    KoModuleProvider,
+    KoSourceSetProvider,
+    KoResideInPackageProvider,
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTypeProvider,
     KoVisibilityModifierProvider,
-    KoActualModifierProvider {
-    /**
-     * String representing the type alias.
-     *
-     * @return a string representing the type alias.
-     */
-    override fun toString(): String
-}
+    KoActualModifierProvider

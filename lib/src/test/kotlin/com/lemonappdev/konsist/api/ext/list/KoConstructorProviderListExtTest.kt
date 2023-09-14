@@ -36,10 +36,10 @@ class KoConstructorProviderListExtTest {
     fun `withConstructor() returns declaration with constructor`() {
         // given
         val declaration1: KoConstructorProvider = mockk {
-            every { numConstructors } returns 1
+            every { hasConstructors() } returns true
         }
         val declaration2: KoConstructorProvider = mockk {
-            every { numConstructors } returns 0
+            every { hasConstructors() } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -54,15 +54,149 @@ class KoConstructorProviderListExtTest {
     fun `withoutConstructor() returns declaration without constructor`() {
         // given
         val declaration1: KoConstructorProvider = mockk {
-            every { numConstructors } returns 1
+            every { hasConstructors() } returns true
         }
         val declaration2: KoConstructorProvider = mockk {
-            every { numConstructors } returns 0
+            every { hasConstructors() } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
         // when
         val sut = declarations.withoutConstructor()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withConstructor{} returns declaration with constructor which satisfy predicate`() {
+        // given
+        val predicate: (KoConstructorDeclaration) -> Boolean = { it.hasPrivateModifier }
+        val declaration1: KoConstructorProvider = mockk {
+            every { hasConstructor(predicate) } returns true
+        }
+        val declaration2: KoConstructorProvider = mockk {
+            every { hasConstructor(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withConstructor(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutConstructor{} returns declaration without constructor which satisfy predicate`() {
+        // given
+        val predicate: (KoConstructorDeclaration) -> Boolean = { it.hasPrivateModifier }
+        val declaration1: KoConstructorProvider = mockk {
+            every { hasConstructor(predicate) } returns true
+        }
+        val declaration2: KoConstructorProvider = mockk {
+            every { hasConstructor(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutConstructor(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withAllConstructors{} returns declaration with all constructors satisfy predicate`() {
+        // given
+        val predicate: (KoConstructorDeclaration) -> Boolean = { it.hasPrivateModifier }
+        val declaration1: KoConstructorProvider = mockk {
+            every { hasAllConstructors(predicate) } returns true
+        }
+        val declaration2: KoConstructorProvider = mockk {
+            every { hasAllConstructors(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withAllConstructors(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutAllConstructors{} returns declaration with all constructors which not satisfy predicate`() {
+        // given
+        val predicate: (KoConstructorDeclaration) -> Boolean = { it.hasPrivateModifier }
+        val declaration1: KoConstructorProvider = mockk {
+            every { hasAllConstructors(predicate) } returns true
+        }
+        val declaration2: KoConstructorProvider = mockk {
+            every { hasAllConstructors(predicate) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutAllConstructors(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
+    fun `withConstructors{} returns declaration with constructors which satisfy predicate`() {
+        // given
+        val predicate: (List<KoConstructorDeclaration>) -> Boolean =
+            { it.all { constructor -> constructor.hasPrivateModifier } }
+        val constructor1: KoConstructorDeclaration = mockk {
+            every { hasPrivateModifier } returns true
+        }
+        val constructor2: KoConstructorDeclaration = mockk {
+            every { hasPrivateModifier } returns false
+        }
+        val declaration1: KoConstructorProvider = mockk {
+            every { constructors } returns listOf(constructor1)
+        }
+        val declaration2: KoConstructorProvider = mockk {
+            every { constructors } returns listOf(constructor2)
+        }
+        val declaration3: KoConstructorProvider = mockk {
+            every { constructors } returns emptyList()
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withConstructors(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1, declaration3)
+    }
+
+    @Test
+    fun `withoutConstructors{} returns declaration without constructors which satisfy predicate`() {
+        // given
+        val predicate: (List<KoConstructorDeclaration>) -> Boolean =
+            { it.all { constructor -> constructor.hasPrivateModifier } }
+        val constructor1: KoConstructorDeclaration = mockk {
+            every { hasPrivateModifier } returns true
+        }
+        val constructor2: KoConstructorDeclaration = mockk {
+            every { hasPrivateModifier } returns false
+        }
+        val declaration1: KoConstructorProvider = mockk {
+            every { constructors } returns listOf(constructor1)
+        }
+        val declaration2: KoConstructorProvider = mockk {
+            every { constructors } returns listOf(constructor2)
+        }
+        val declaration3: KoConstructorProvider = mockk {
+            every { constructors } returns emptyList()
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
+
+        // when
+        val sut = declarations.withoutConstructors(predicate)
 
         // then
         sut shouldBeEqualTo listOf(declaration2)

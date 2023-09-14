@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.KoModifier.DATA
 import com.lemonappdev.konsist.api.KoModifier.OPEN
 import com.lemonappdev.konsist.api.KoModifier.PRIVATE
+import com.lemonappdev.konsist.api.KoModifier.PUBLIC
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -25,6 +26,10 @@ class KoObjectDeclarationForKoModifierProviderTest {
             modifiers shouldBeEqualTo emptyList()
             numModifiers shouldBeEqualTo 0
             hasModifiers() shouldBeEqualTo false
+            hasModifier(OPEN) shouldBeEqualTo false
+            hasModifier(OPEN, DATA) shouldBeEqualTo false
+            hasAllModifiers(OPEN) shouldBeEqualTo false
+            hasAllModifiers(OPEN, DATA) shouldBeEqualTo false
             hasModifiers(OPEN) shouldBeEqualTo false
             hasModifiers(OPEN, DATA) shouldBeEqualTo false
             hasDataModifier shouldBeEqualTo false
@@ -42,6 +47,13 @@ class KoObjectDeclarationForKoModifierProviderTest {
         // then
         assertSoftly(sut) {
             numModifiers shouldBeEqualTo 2
+            hasModifier(DATA) shouldBeEqualTo true
+            hasModifier(PUBLIC) shouldBeEqualTo false
+            hasModifier(DATA, PUBLIC) shouldBeEqualTo true
+            hasAllModifiers(DATA) shouldBeEqualTo true
+            hasAllModifiers(PUBLIC) shouldBeEqualTo false
+            hasAllModifiers(DATA, PUBLIC) shouldBeEqualTo false
+            hasAllModifiers(DATA, PRIVATE) shouldBeEqualTo true
             hasModifiers() shouldBeEqualTo true
             hasModifiers(PRIVATE) shouldBeEqualTo true
             hasModifiers(DATA) shouldBeEqualTo true

@@ -9,7 +9,6 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-@Suppress("detekt.LargeClass")
 class KoModifierProviderListExtTest {
     @Test
     fun `modifiers returns modifiers from all declarations`() {
@@ -72,15 +71,55 @@ class KoModifierProviderListExtTest {
     }
 
     @Test
+    fun `withModifier(String) returns declaration with all of given modifiers`() {
+        // given
+        val modifier1 = PROTECTED
+        val modifier2 = OPEN
+        val declaration1: KoModifierProvider = mockk {
+            every { hasModifier(modifier1, modifier2) } returns true
+        }
+        val declaration2: KoModifierProvider = mockk {
+            every { hasModifier(modifier1, modifier2) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withModifier(modifier1, modifier2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutModifier(String) returns declaration without any of given modifiers`() {
+        // given
+        val modifier1 = PROTECTED
+        val modifier2 = OPEN
+        val declaration1: KoModifierProvider = mockk {
+            every { hasModifier(modifier1, modifier2) } returns true
+        }
+        val declaration2: KoModifierProvider = mockk {
+            every { hasModifier(modifier1, modifier2) } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutModifier(modifier1, modifier2)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withAllModifiers(String) returns declaration with all of given modifiers`() {
         // given
         val modifier1 = PROTECTED
         val modifier2 = OPEN
         val declaration1: KoModifierProvider = mockk {
-            every { hasModifiers(modifier1, modifier2) } returns true
+            every { hasAllModifiers(modifier1, modifier2) } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasModifiers(modifier1, modifier2) } returns false
+            every { hasAllModifiers(modifier1, modifier2) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 
@@ -97,10 +136,10 @@ class KoModifierProviderListExtTest {
         val modifier1 = PROTECTED
         val modifier2 = OPEN
         val declaration1: KoModifierProvider = mockk {
-            every { hasModifiers(modifier1, modifier2) } returns true
+            every { hasAllModifiers(modifier1, modifier2) } returns true
         }
         val declaration2: KoModifierProvider = mockk {
-            every { hasModifiers(modifier1, modifier2) } returns false
+            every { hasAllModifiers(modifier1, modifier2) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
 

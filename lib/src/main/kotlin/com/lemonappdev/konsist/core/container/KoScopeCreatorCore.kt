@@ -46,7 +46,7 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         ignoreBuildConfig: Boolean = true,
     ): List<KoFileDeclaration> {
         val localProjectKotlinFiles = projectKotlinFiles
-            .filterNot { isBuildPath(it.path.toMacOsSeparator()) }
+            .filterNot { isBuildToolPath(it.path.toMacOsSeparator()) }
             .let {
                 if (ignoreBuildConfig) {
                     it.filterNot { file -> file.isBuildConfigFile() }
@@ -130,13 +130,25 @@ internal class KoScopeCreatorCore : KoScopeCreator {
     }
 
     /**
-     * Determines if the given path is a build directory "build" for Gradle and "target" for Maven.
+     *
+     * Determines whether the provided path corresponds to a directory created by a build tool (Gradle, Maven)
      */
-    private fun isBuildPath(path: String): Boolean {
+    private fun isBuildToolPath(path: String): Boolean {
+        return isBuildOrTargetPath(path) || isDotGradlePath(path)
+    }
+
+    /**
+     * Determines if the given path is a build directory "build" for Gradle and "target" for Maven.
+     *
+     * Maven target directory and the Gradle build directory are used to store the results of the build process,
+     * such as compiled code and packaged artifacts. The specific names ("target" for Maven and "build" for Gradle)
+     * are conventions established by each build tool to organize and manage these files. Developers working with
+     * these tools need to be aware of these directories to locate and work with the output of their builds.
+     */
+    private fun isBuildOrTargetPath(path: String): Boolean {
         val gradleBuildDirectoryName = "build"
         val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$gradleBuildDirectoryName/.*".toMacOsSeparator())
-        val gradleModuleBuildDirectoryRegex =
-            Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
+        val gradleModuleBuildDirectoryRegex = Regex("$projectRootPath/.+/$gradleBuildDirectoryName/.*".toMacOsSeparator())
 
         val mavenBuildDirectoryName = "target"
         val mavenRootBuildDirectoryRegex = Regex("$projectRootPath/$mavenBuildDirectoryName/.*".toMacOsSeparator())
@@ -146,6 +158,22 @@ internal class KoScopeCreatorCore : KoScopeCreator {
             path.matches(gradleModuleBuildDirectoryRegex) ||
             path.matches(mavenRootBuildDirectoryRegex) ||
             path.matches(mavenModuleBuildDirectoryRegex)
+    }
+
+    /**
+     * Determines if the given path is a directory ".gradle".
+     * This directory is not intended to store project files however Gradle can cache some Kotlin files there
+     * (.gradle/caches directory).
+     *
+     * The .gradle directory is a directory created and used by the Gradle build tool. It stores various files and
+     * caches related to the build process, including the Gradle Wrapper scripts, dependency caches, and build-related
+     * metadata. This directory helps improve the efficiency of Gradle builds by storing and managing essential
+     * information and artifacts.
+     */
+    private fun isDotGradlePath(path: String): Boolean {
+        val dotGradleBuildDirectoryName = ".gradle"
+        val gradleRootBuildDirectoryRegex = Regex("$projectRootPath/$dotGradleBuildDirectoryName/.*".toMacOsSeparator())
+        return path.matches(gradleRootBuildDirectoryRegex)
     }
 
     private fun isTestSourceSet(name: String): Boolean {

@@ -7,7 +7,9 @@ import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 
 /**
@@ -23,11 +25,6 @@ interface KoInitBlockDeclaration :
     KoLocationProvider,
     KoContainingDeclarationProvider,
     KoPathProvider,
-    KoTextProvider {
-    /**
-     * String representing the init block.
-     *
-     * @return a string representing the init block.
-     */
-    override fun toString(): String
-}
+    KoModuleProvider,
+    KoSourceSetProvider,
+    KoTextProvider

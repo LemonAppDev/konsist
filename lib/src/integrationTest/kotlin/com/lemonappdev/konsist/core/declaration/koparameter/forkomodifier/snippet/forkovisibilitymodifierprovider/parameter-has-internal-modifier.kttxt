@@ -1,3 +1,0 @@
-import com.lemonappdev.konsist.testdata.SampleType
-
-class SampleClass(internal val sampleParameter: SampleType)

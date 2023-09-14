@@ -11,11 +11,12 @@ val <T : KoPropertyTypeProvider> List<T>.types: List<KoTypeDeclaration>
     get() = mapNotNull { it.type }
 
 /**
- * List containing elements with type.
+ * List containing declarations with type.
  *
  * @param names The type name(s) to include.
- * @return A list containing elements with the specified type (or any type if [names] is empty).
+ * @return A list containing declarations with the specified type (or any type if [names] is empty).
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("withType { it.name == ... }"))
 fun <T : KoPropertyTypeProvider> List<T>.withType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> it.hasType()
@@ -24,11 +25,12 @@ fun <T : KoPropertyTypeProvider> List<T>.withType(vararg names: String): List<T>
 }
 
 /**
- * List containing elements without type.
+ * List containing declarations without type.
  *
  * @param names The type name(s) to exclude.
- * @return A list containing elements without specified type (or none type if [names] is empty).
+ * @return A list containing declarations without specified type (or none type if [names] is empty).
  */
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("withoutType { it.name != ... }"))
 fun <T : KoPropertyTypeProvider> List<T>.withoutType(vararg names: String): List<T> = filter {
     when {
         names.isEmpty() -> !it.hasType()
@@ -37,35 +39,63 @@ fun <T : KoPropertyTypeProvider> List<T>.withoutType(vararg names: String): List
 }
 
 /**
- * List containing elements with type of.
+ * List containing declarations with the specified type.
+ *
+ * @param predicate The predicate function to determine if a declaration type satisfies a condition.
+ * @return A list containing declarations with the specified type (or any type if [predicate] is null).
+ */
+fun <T : KoPropertyTypeProvider> List<T>.withType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
+    filter {
+        when (predicate) {
+            null -> it.hasType()
+            else -> it.type?.let { type -> predicate(type) } ?: false
+        }
+    }
+
+/**
+ * List containing declarations without the specified type.
+ *
+ * @param predicate The predicate function to determine if a declaration type satisfies a condition.
+ * @return A list containing declarations without the specified type (or none type if [predicate] is null).
+ */
+fun <T : KoPropertyTypeProvider> List<T>.withoutType(predicate: ((KoTypeDeclaration) -> Boolean)? = null): List<T> =
+    filterNot {
+        when (predicate) {
+            null -> it.hasType()
+            else -> it.type?.let { type -> predicate(type) } ?: false
+        }
+    }
+
+/**
+ * List containing declarations with type of.
  *
  * @param kClass The Kotlin class representing the type to include.
  * @param kClasses The Kotlin class(es) representing the type(s) to include.
- * @return A list containing elements with the type of the specified Kotlin class(es).
+ * @return A list containing declarations with the type of the specified Kotlin class(es).
  */
 fun <T : KoPropertyTypeProvider> List<T>.withTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
     filter {
-        it.type?.name == kClass.simpleName ||
+        it.hasTypeOf(kClass) ||
             if (kClasses.isNotEmpty()) {
-                kClasses.any { kClass -> it.type?.name == kClass.simpleName }
+                kClasses.any { kClass -> it.hasTypeOf(kClass) }
             } else {
                 false
             }
     }
 
 /**
- * List containing elements without type of.
+ * List containing declarations without type of.
  *
  * @param kClass The Kotlin class representing the type to exclude.
  * @param kClasses The Kotlin class(es) representing the type(s) to exclude.
- * @return A list containing elements without type of the specified Kotlin class(es).
+ * @return A list containing declarations without type of the specified Kotlin class(es).
  */
 fun <T : KoPropertyTypeProvider> List<T>.withoutTypeOf(kClass: KClass<*>, vararg kClasses: KClass<*>): List<T> =
-    filter {
-        it.type?.name != kClass.simpleName &&
+    filterNot {
+        it.hasTypeOf(kClass) ||
             if (kClasses.isNotEmpty()) {
-                kClasses.none { kClass -> it.type?.name == kClass.simpleName }
+                kClasses.any { kClass -> it.hasTypeOf(kClass) }
             } else {
-                true
+                false
             }
     }

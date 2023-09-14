@@ -93,8 +93,8 @@ class KoInterfaceDeclarationForKoPropertyProviderTest {
             numProperties(includeNested = true, includeLocal = false) shouldBeEqualTo 2
             numProperties(includeNested = false, includeLocal = true) shouldBeEqualTo 2
             numProperties(includeNested = false, includeLocal = false) shouldBeEqualTo 1
-            countProperties { it.hasValModifier } shouldBeEqualTo 1
-            countProperties(includeNested = true, includeLocal = true) { it.hasValModifier } shouldBeEqualTo 3
+            countProperties(includeNested = false, includeLocal = false) { it.hasValModifier } shouldBeEqualTo 1
+            countProperties { it.hasValModifier } shouldBeEqualTo 3
             countProperties { it.name == "sampleProperty" && it.hasVarModifier } shouldBeEqualTo 0
         }
     }

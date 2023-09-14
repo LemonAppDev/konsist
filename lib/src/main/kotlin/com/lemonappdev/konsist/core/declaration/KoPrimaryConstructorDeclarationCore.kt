@@ -14,9 +14,7 @@ internal class KoPrimaryConstructorDeclarationCore private constructor(
     KoConstructorDeclarationCore {
     override val ktConstructor: KtConstructor<*> by lazy { ktPrimaryConstructor }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = locationWithText
 
     internal companion object {
         private val cache: KoDeclarationCache<KoPrimaryConstructorDeclaration> = KoDeclarationCache()

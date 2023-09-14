@@ -45,69 +45,69 @@ interface KoScope {
     /**
      * The classes present in the scope.
      *
-     * @param includeNested specifies whether to include nested classes, by default `false`.
-     * @param includeLocal specifies whether to include local classes, by default `false`.
+     * @param includeNested specifies whether to include nested classes, by default `true`.
+     * @param includeLocal specifies whether to include local classes, by default `true`.
      * @return a list of [KoClassDeclaration] representing the classes in the scope.
      */
     fun classes(
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
     ): List<KoClassDeclaration>
 
     /**
      * The interfaces present in the scope.
      *
-     * @param includeNested specifies whether to include nested interfaces, by default `false`.
+     * @param includeNested specifies whether to include nested interfaces, by default `true`.
      * @return a list of [KoInterfaceDeclaration] representing the interfaces in the scope.
      */
     fun interfaces(
-        includeNested: Boolean = false,
+        includeNested: Boolean = true,
     ): List<KoInterfaceDeclaration>
 
     /**
      * The objects present in the scope.
      *
-     * @param includeNested specifies whether to include nested objects, by default `false`.
+     * @param includeNested specifies whether to include nested objects, by default `true`.
      * @return a list of [KoObjectDeclaration] representing the objects in the scope.
      */
     fun objects(
-        includeNested: Boolean = false,
+        includeNested: Boolean = true,
     ): List<KoObjectDeclaration>
 
     /**
      * The functions present in the scope.
      *
-     * @param includeNested specifies whether to include nested functions, by default `false`.
-     * @param includeLocal specifies whether to include local functions, by default `false`.
+     * @param includeNested specifies whether to include nested functions, by default `true`.
+     * @param includeLocal specifies whether to include local functions, by default `true`.
      * @return a list of [KoFunctionDeclaration] representing the functions in the scope.
      */
     fun functions(
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
     ): List<KoFunctionDeclaration>
 
     /**
      * The declarations present in the scope.
      *
-     * @param includeNested specifies whether to include nested declarations, by default `false`.
-     * @param includeLocal specifies whether to include local declarations, by default `false`.
+     * @param includeNested specifies whether to include nested declarations, by default `true`.
+     * @param includeLocal specifies whether to include local declarations, by default `true`.
      * @return a list of [KoBaseDeclaration] representing the declarations in the scope.
      */
     fun declarations(
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
     ): List<KoBaseDeclaration>
 
     /**
      * The properties present in the scope.
      *
-     * @param includeNested specifies whether to include nested properties, by default `false`.
-     * @param includeLocal specifies whether to include local properties, by default `false`.
+     * @param includeNested specifies whether to include nested properties, by default `true`.
+     * @param includeLocal specifies whether to include local properties, by default `true`.
      * @return a list of [KoPropertyDeclaration] representing the properties in the scope.
      */
     fun properties(
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
     ): List<KoPropertyDeclaration>
 
     /**
@@ -157,14 +157,19 @@ interface KoScope {
 
     /**
      * Print the scope.
+     *
+     * @param prefix An optional string to be printed before the scope content. Default is null.
+     * @param predicate An optional function that generates the string representation of the scope.
+     *                  If predicate is not provided (default is `null`), the function uses `toString` method.
+     * @return The original scope.
      */
-    fun print(): Unit
+    fun print(prefix: String? = null, predicate: ((KoScope) -> String)? = null): KoScope
 
     /**
      * Indicates whether some other object is "equal to" this one.
      *
      * @param other the object to compare.
-     * @return `true` if the objects are equal, `false` otherwise.
+     * @return `true` if the objects are equal, `true` otherwise.
      */
     override fun equals(other: Any?): Boolean
 

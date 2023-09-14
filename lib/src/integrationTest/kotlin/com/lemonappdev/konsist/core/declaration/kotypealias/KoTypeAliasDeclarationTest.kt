@@ -13,7 +13,7 @@ class KoTypeAliasDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo sut.locationWithText
+        sut.toString() shouldBeEqualTo "SampleTypeAlias"
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -24,7 +24,7 @@ class KoDeclarationAssertForDeclarationListTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' has failed. Invalid declarations (1)")
+            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' was violated (1 time)")
                 ?: throw e
         }
     }
@@ -39,7 +39,45 @@ class KoDeclarationAssertForDeclarationListTest {
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' has failed. Invalid files (1)")
+            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' was violated (1 time)")
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `declaration-assert-error-with-custom-message`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("declaration-assert-error-with-custom-message")
+            .classes()
+
+        // then
+        try {
+            sut.assert(message) { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-error-with-custom-message' was violated (1 time)." +
+                    "\n$message\nInvalid declarations",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `file-declaration-assert-error-with-custom-message`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message")
+            .files
+
+        // then
+        try {
+            sut.assert(message) { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'file-declaration-assert-error-with-custom-message' was violated (1 time)." +
+                    "\n$message\nInvalid files:",
+            )
                 ?: throw e
         }
     }

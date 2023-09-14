@@ -1,0 +1,7 @@
+class SampleClass {
+    public constructor() {
+    }
+
+    constructor(sampleParameter: Int): this() {
+    }
+}

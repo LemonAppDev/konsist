@@ -17,6 +17,8 @@ class KoPropertyDeclarationForKoPropertyTypeProviderTest {
         assertSoftly(sut) {
             type shouldBeEqualTo null
             hasType() shouldBeEqualTo false
+            hasType { it.name == "String" } shouldBeEqualTo false
+            hasTypeOf(String::class) shouldBeEqualTo false
             hasType("String") shouldBeEqualTo false
         }
     }
@@ -32,6 +34,10 @@ class KoPropertyDeclarationForKoPropertyTypeProviderTest {
         assertSoftly(sut) {
             type?.name shouldBeEqualTo "String"
             hasType() shouldBeEqualTo true
+            hasType { it.name == "String" } shouldBeEqualTo true
+            hasType { it.name == "Int" } shouldBeEqualTo false
+            hasTypeOf(String::class) shouldBeEqualTo true
+            hasTypeOf(Int::class) shouldBeEqualTo false
             hasType("String") shouldBeEqualTo true
             hasType("Int") shouldBeEqualTo false
         }

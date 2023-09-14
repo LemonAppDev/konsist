@@ -8,9 +8,11 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPackageMatchingPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtElement
@@ -25,6 +27,8 @@ internal class KoPackageDeclarationCore private constructor(private val ktPackag
     KoNameProviderCore,
     KoPackageMatchingPathProviderCore,
     KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
     KoTextProviderCore {
     override val psiElement: PsiElement by lazy { ktPackageDirective }
 
@@ -34,13 +38,11 @@ internal class KoPackageDeclarationCore private constructor(private val ktPackag
         if (ktPackageDirective.fqName != FqName.ROOT) {
             ktPackageDirective.fqName.toString()
         } else {
-            ""
+            name
         }
     }
 
-    override fun toString(): String {
-        return locationWithText
-    }
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoPackageDeclaration> = KoDeclarationCache()

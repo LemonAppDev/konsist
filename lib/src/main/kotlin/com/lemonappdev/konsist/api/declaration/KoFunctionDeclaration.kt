@@ -11,13 +11,16 @@ import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
 import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoParametersProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
@@ -57,7 +60,10 @@ interface KoFunctionDeclaration :
     KoParametersProvider,
     KoContainingDeclarationProvider,
     KoPathProvider,
+    KoModuleProvider,
+    KoSourceSetProvider,
     KoReceiverTypeProvider,
+    KoResideInPackageProvider,
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTopLevelProvider,
@@ -73,11 +79,4 @@ interface KoFunctionDeclaration :
     KoFinalModifierProvider,
     KoAbstractModifierProvider,
     KoActualModifierProvider,
-    KoExpectModifierProvider {
-    /**
-     * String representing the function.
-     *
-     * @return a string representing the function.
-     */
-    override fun toString(): String
-}
+    KoExpectModifierProvider

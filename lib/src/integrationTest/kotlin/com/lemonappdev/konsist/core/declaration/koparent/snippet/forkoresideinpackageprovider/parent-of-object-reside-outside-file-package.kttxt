@@ -1,0 +1,3 @@
+interface SampleSuperInterface
+
+object SampleObject: SampleSuperInterface

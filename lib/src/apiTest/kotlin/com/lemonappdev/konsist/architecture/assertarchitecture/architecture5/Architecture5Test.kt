@@ -1,48 +1,84 @@
 package com.lemonappdev.konsist.architecture.assertarchitecture.architecture5
 
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
-import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
+import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class Architecture5Test {
-    private val layer = Layer("EmptyLayer", "com/lemonappdev/konsist/assertarchitecture/architecture5/project/emptylayer..")
-    private val scope =
-        Konsist.scopeFromPackage("com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project")
+    private val presentation =
+        Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.presentation..")
+    private val application =
+        Layer("Application", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.application..")
+    private val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.domain..")
+    private val infrastructure =
+        Layer("Infrastructure", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.infrastructure..")
+    private val scope = Konsist.scopeFromDirectory(
+        "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture5/project",
+    )
 
     @Test
-    fun `throws exception when layer contains no files`() {
-        // when
-        val func = {
-            scope.assertArchitecture { layer.dependsOnNothing() }
-        }
-
+    fun `passes when good dependency is set`() {
         // then
-        func shouldThrow KoPreconditionFailedException::class withMessage "Layer EmptyLayer doesn't contain any files."
+        scope
+            .assertArchitecture {
+                presentation.dependsOn(application)
+                application.dependsOn(domain, infrastructure)
+                domain.dependsOn(infrastructure)
+                infrastructure.dependsOnNothing()
+            }
     }
 
     @Test
-    fun `throws exception when architecture contains no layers`() {
-        // when
-        val func = {
-            scope.assertArchitecture { }
+    fun `passes when good dependency is set and architecture is passed as parameter`() {
+        // given
+        val architecture = architecture {
+            presentation.dependsOn(application)
+            application.dependsOn(domain, infrastructure)
+            domain.dependsOn(infrastructure)
+            infrastructure.dependsOnNothing()
         }
 
         // then
-        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
+        scope
+            .assertArchitecture(architecture)
     }
 
     @Test
-    fun `throws exception when architecture contains no dependencies`() {
-        // when
-        val func = {
-            scope.assertArchitecture { layer }
+    fun `fails when bad dependency is set`() {
+        // given
+        val sut = {
+            scope
+                .assertArchitecture {
+                    presentation.dependsOn(application, infrastructure)
+                    application.dependsOn(infrastructure)
+                    domain.dependsOn(infrastructure)
+                    infrastructure.dependsOnNothing()
+                }
         }
 
         // then
-        func shouldThrow KoPreconditionFailedException::class withMessage "Architecture doesn't contain layers or dependencies."
+        sut shouldThrow KoCheckFailedException::class
+    }
+
+    @Test
+    fun `fails when bad dependency is set and architecture is passed as parameter`() {
+        // given
+        val architecture = architecture {
+            presentation.dependsOn(application, infrastructure)
+            application.dependsOn(infrastructure)
+            domain.dependsOn(infrastructure)
+            infrastructure.dependsOnNothing()
+        }
+
+        val sut = {
+            scope.assertArchitecture(architecture)
+        }
+
+        // then
+        sut shouldThrow KoCheckFailedException::class
     }
 }

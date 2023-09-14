@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.core.declaration.koinitblock
 
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.initBlocks
+import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
@@ -15,7 +16,10 @@ class KoInitBlockDeclarationTest {
             .first()
 
         // then
-        sut.toString() shouldBeEqualTo sut.locationWithText
+        assertSoftly(sut.toString()) {
+            startsWith("Location: /") shouldBeEqualTo true
+            contains("println(\"\")") shouldBeEqualTo true
+        }
     }
 
     private fun getSnippetFile(fileName: String) =

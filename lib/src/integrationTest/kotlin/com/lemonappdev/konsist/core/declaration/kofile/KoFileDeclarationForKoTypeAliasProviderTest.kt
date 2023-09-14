@@ -17,36 +17,63 @@ class KoFileDeclarationForKoTypeAliasProviderTest {
         assertSoftly(sut) {
             typeAliases shouldBeEqualTo emptyList()
             numTypeAliases shouldBeEqualTo 0
+            countTypeAliases { it.hasPrivateModifier } shouldBeEqualTo 0
             hasTypeAliases() shouldBeEqualTo false
+            hasTypeAliasWithName("SampleTypeAlias") shouldBeEqualTo false
+            hasTypeAliasesWithAllNames("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo false
+            hasTypeAlias { it.hasPublicModifier } shouldBeEqualTo false
+            hasAllTypeAliases { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
             hasTypeAliases("SampleTypeAlias") shouldBeEqualTo false
         }
     }
 
     @Test
-    fun `file-contains-typealias`() {
+    fun `file-has-one-typealias`() {
         // given
-        val sut = getSnippetFile("file-contains-typealias")
+        val sut = getSnippetFile("file-has-one-typealias")
             .files
             .first()
 
         // then
-        assertSoftly(sut.typeAliases.first()) {
-            name shouldBeEqualTo "SampleTypeAlias"
-            type.sourceType shouldBeEqualTo "() -> Int"
+        assertSoftly(sut) {
+            typeAliases.size shouldBeEqualTo 1
+            numTypeAliases shouldBeEqualTo 1
+            countTypeAliases { it.hasPublicOrDefaultModifier } shouldBeEqualTo 1
+            hasTypeAliases() shouldBeEqualTo true
+            hasTypeAliasWithName("SampleTypeAlias") shouldBeEqualTo true
+            hasTypeAliasWithName("otherTypeAlias") shouldBeEqualTo false
+            hasTypeAliasWithName("SampleTypeAlias", "otherTypeAlias") shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("SampleTypeAlias") shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("SampleTypeAlias", "otherTypeAlias") shouldBeEqualTo false
+            hasTypeAlias { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
+            hasTypeAlias { it.hasPublicModifier } shouldBeEqualTo false
+            hasAllTypeAliases { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
         }
     }
 
     @Test
-    fun `file-has-typealiases`() {
+    fun `file-has-two-typealiases`() {
         // given
-        val sut = getSnippetFile("file-has-typealiases")
+        val sut = getSnippetFile("file-has-two-typealiases")
             .files
             .first()
 
         // then
         assertSoftly(sut) {
             numTypeAliases shouldBeEqualTo 2
+            countTypeAliases { it.hasNameStartingWith("Sample") } shouldBeEqualTo 2
+            countTypeAliases { it.name == "SampleTypeAlias1" } shouldBeEqualTo 1
             hasTypeAliases() shouldBeEqualTo true
+            hasTypeAliasWithName("SampleTypeAlias1") shouldBeEqualTo true
+            hasTypeAliasWithName("otherTypeAlias") shouldBeEqualTo false
+            hasTypeAliasWithName("SampleTypeAlias1", "otherName") shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("SampleTypeAlias1") shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo true
+            hasTypeAliasesWithAllNames("SampleTypeAlias1", "otherTypeAlias") shouldBeEqualTo false
+            hasTypeAlias { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
+            hasTypeAlias { it.hasPublicModifier } shouldBeEqualTo true
+            hasAllTypeAliases { it.hasPublicOrDefaultModifier } shouldBeEqualTo true
+            hasAllTypeAliases { it.hasPublicModifier } shouldBeEqualTo false
             hasTypeAliases("SampleTypeAlias1") shouldBeEqualTo true
             hasTypeAliases("SampleTypeAlias1", "SampleTypeAlias2") shouldBeEqualTo true
             hasTypeAliases("OtherTypeAlias") shouldBeEqualTo false

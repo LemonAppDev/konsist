@@ -1,0 +1,4 @@
+package com.samplepackage
+enum class SampleClass(sampleParameter: Int) {
+    SAMPLE_CONSTANT(0)
+}

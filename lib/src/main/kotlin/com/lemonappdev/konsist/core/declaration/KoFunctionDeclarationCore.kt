@@ -16,12 +16,15 @@ import com.lemonappdev.konsist.core.provider.KoLocalClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoParametersProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoReceiverTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoReturnTypeProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
@@ -39,15 +42,13 @@ import com.lemonappdev.konsist.core.provider.modifier.KoSuspendModifierProviderC
 import com.lemonappdev.konsist.core.provider.modifier.KoTailrecModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
+import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
-import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunction
-import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
-@Suppress("detekt.TooManyFunctions")
 internal class KoFunctionDeclarationCore private constructor(
     override val ktFunction: KtFunction,
     override val containingDeclaration: KoContainingDeclarationProvider,
@@ -70,7 +71,10 @@ internal class KoFunctionDeclarationCore private constructor(
     KoParametersProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
     KoReceiverTypeProviderCore,
+    KoResideInPackageProviderCore,
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
@@ -99,32 +103,33 @@ internal class KoFunctionDeclarationCore private constructor(
 
     override val hasImplementation: Boolean = ktFunction.hasBody()
 
-    private val localDeclarationsHelper: List<KoBaseDeclaration> by lazy {
-        val psiChildren = ktFunction
+    override val localDeclarations: List<KoBaseDeclaration> by lazy {
+        val psiElements = ktFunction
             .bodyBlockExpression
             ?.children
-            ?.toList()
-            ?: emptyList()
 
-        psiChildren
-            .mapNotNull {
-                if (it is KtClass && !it.isInterface()) {
-                    KoClassDeclarationCore.getInstance(it, this)
-                } else if (it is KtFunction) {
-                    getInstance(it, this)
-                } else if (it is KtProperty) {
-                    KoPropertyDeclarationCore.getInstance(it, this)
-                } else {
-                    null
-                }
-            }
+        KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
 
-    override val localDeclarations: List<KoBaseDeclaration> by lazy { localDeclarationsHelper }
-
-    override fun toString(): String {
-        return locationWithText
+    /*
+    1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
+    (the second one is deprecated) - with the same methods, so we must override this and choose which implementation
+    this method should have. After removing deprecated provider in v1.0.0 it will be unnecessary.
+     */
+    override fun resideInPackage(name: String): Boolean {
+        return super<KoResideInPackageProviderCore>.resideInPackage(name)
     }
+
+    /*
+    1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
+    (the second one is deprecated) - with the same methods, so we must override this and choose which implementation
+    this method should have. After removing deprecated provider in v1.0.0 it will be unnecessary.
+     */
+    override fun resideOutsidePackage(name: String): Boolean {
+        return super<KoResideInPackageProviderCore>.resideOutsidePackage(name)
+    }
+
+    override fun toString(): String = name
 
     internal companion object {
 

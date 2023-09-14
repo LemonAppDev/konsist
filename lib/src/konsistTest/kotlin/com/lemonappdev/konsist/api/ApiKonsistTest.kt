@@ -11,28 +11,28 @@ class ApiKonsistTest {
     @Test
     fun `every api declaration has kdoc`() {
         apiPackageScope
-            .declarationsOf<KoKDocProvider>(includeNested = true)
+            .declarationsOf<KoKDocProvider>()
             .assert { it.hasKDoc }
     }
 
     @Test
     fun `every api declaration has explicit return type`() {
         apiPackageScope
-            .functions(includeNested = true)
-            .assert { it.hasReturnType }
+            .functions()
+            .assert { it.hasReturnType() }
     }
 
     @Test
     fun `every api function has valid KDoc`() {
         apiPackageScope
-            .functions(includeNested = true, includeLocal = true)
+            .functions()
             .assert { it.hasValidKDocParamTags() && it.hasValidKDocReturnTag() }
     }
 
     @Test
     fun `includeNested parameter is always before includeLocal parameter`() {
         apiPackageScope
-            .functions(includeNested = true, includeLocal = true)
+            .functions()
             .assert {
                 val includeNestedParameter =
                     it.parameters.indexOfFirst { parameter -> parameter.name == "includeNested" }

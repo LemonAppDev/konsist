@@ -12,6 +12,7 @@ import com.lemonappdev.konsist.api.provider.KoInitBlockProvider
 import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
+import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoObjectProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
@@ -22,6 +23,8 @@ import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.provider.KoRepresentsTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
+import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoCompanionModifierProvider
@@ -54,18 +57,14 @@ interface KoObjectDeclaration :
     KoParentClassProvider,
     KoParentInterfaceProvider,
     KoPathProvider,
+    KoModuleProvider,
+    KoSourceSetProvider,
     KoPropertyProvider,
     KoRepresentsTypeProvider,
+    KoResideInPackageProvider,
     KoResideInOrOutsidePackageProvider,
     KoTextProvider,
     KoTopLevelProvider,
     KoVisibilityModifierProvider,
     KoDataModifierProvider,
-    KoCompanionModifierProvider {
-    /**
-     * String representing the object.
-     *
-     * @return a string representing the object.
-     */
-    override fun toString(): String
-}
+    KoCompanionModifierProvider

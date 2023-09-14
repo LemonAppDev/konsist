@@ -28,7 +28,7 @@ class KoAnnotationDeclarationForKoFullyQualifiedNameProviderTest {
             .first()
 
         // then
-        sut.fullyQualifiedName shouldBeEqualTo ""
+        sut.fullyQualifiedName shouldBeEqualTo "SampleAnnotationWithoutImport"
     }
 
     private fun getSnippetFile(fileName: String) =

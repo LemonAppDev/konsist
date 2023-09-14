@@ -37,8 +37,8 @@ import org.jetbrains.kotlin.psi.KtTypeAlias
 internal object KoDeclarationProviderCoreUtil {
     inline fun <reified T : KoBaseDeclaration> getKoDeclarations(
         ktElement: KtElement,
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
         containingDeclaration: KoContainingDeclarationProvider,
     ): List<T> {
         val declarations: List<KoBaseDeclaration>
@@ -86,13 +86,13 @@ internal object KoDeclarationProviderCoreUtil {
 
     inline fun <reified T : KoBaseDeclaration> getKoDeclarations(
         declarations: List<KoBaseDeclaration>,
-        includeNested: Boolean = false,
-        includeLocal: Boolean = false,
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
     ): List<T> {
         var result = if (includeNested) {
             declarations.flatMap {
                 when (it) {
-                    is KoDeclarationProvider -> listOf(it) + it.declarations(includeNested = true)
+                    is KoDeclarationProvider -> listOf(it) + it.declarations(includeNested = true, includeLocal = false)
                     else -> listOf(it)
                 }
             }
@@ -129,7 +129,7 @@ internal object KoDeclarationProviderCoreUtil {
     fun nestedDeclarations(koNamedDeclarations: List<KoBaseDeclaration>): List<KoBaseDeclaration> {
         return koNamedDeclarations.flatMap {
             when (it) {
-                is KoDeclarationProvider -> it.declarations(includeNested = true)
+                is KoDeclarationProvider -> it.declarations(includeNested = true, includeLocal = false)
                 else -> emptyList()
             }
         }

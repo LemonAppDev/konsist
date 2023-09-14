@@ -18,6 +18,10 @@ class KoClassDeclarationForKoConstructorProviderTest {
         assertSoftly(sut) {
             constructors shouldBeEqualTo emptyList()
             numConstructors shouldBeEqualTo 0
+            countConstructors { it.hasModifiers() } shouldBeEqualTo 0
+            hasConstructors() shouldBeEqualTo false
+            hasConstructor { it.hasModifiers() } shouldBeEqualTo false
+            hasAllConstructors { it.hasModifiers() } shouldBeEqualTo true
         }
     }
 
@@ -32,6 +36,13 @@ class KoClassDeclarationForKoConstructorProviderTest {
         assertSoftly(sut) {
             constructors shouldNotBeEqualTo emptyList()
             numConstructors shouldBeEqualTo 3
+            countConstructors { it.hasPublicOrDefaultModifier } shouldBeEqualTo 3
+            countConstructors { it.hasPublicModifier } shouldBeEqualTo 1
+            hasConstructors() shouldBeEqualTo true
+            hasConstructor { it.hasPublicModifier } shouldBeEqualTo true
+            hasConstructor { it.hasPrivateModifier } shouldBeEqualTo false
+            hasAllConstructors { it.hasParameterNamed("sampleProperty1") } shouldBeEqualTo true
+            hasAllConstructors { it.hasPublicModifier } shouldBeEqualTo false
         }
     }
 

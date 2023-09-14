@@ -1,6 +1,8 @@
 package com.lemonappdev.konsist.core.declaration.koparameter
 
 import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
+import com.lemonappdev.konsist.testdata.SampleType
+import net.bytebuddy.matcher.ElementMatchers.hasType
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
@@ -17,12 +19,12 @@ class KoParameterDeclarationForKoTypeProviderTest {
             ?.first()
 
         // then
-        assertSoftly(sut?.type) {
-            it?.sourceType shouldBeEqualTo "SampleType"
-            it?.aliasType shouldBeEqualTo null
-            it?.name shouldBeEqualTo "SampleType"
-            it?.isAlias shouldBeEqualTo false
-            it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        assertSoftly(sut) {
+            it?.type?.name shouldBeEqualTo "SampleType"
+            it?.hasType { type -> type.name == "SampleType" } shouldBeEqualTo true
+            it?.hasType { type -> type.name == "Int" } shouldBeEqualTo false
+            it?.hasTypeOf(SampleType::class) shouldBeEqualTo true
+            it?.hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
 
@@ -37,12 +39,12 @@ class KoParameterDeclarationForKoTypeProviderTest {
             ?.first()
 
         // then
-        assertSoftly(sut?.type) {
-            it?.sourceType shouldBeEqualTo "SampleType"
-            it?.aliasType shouldBeEqualTo "ImportAlias"
-            it?.name shouldBeEqualTo "ImportAlias"
-            it?.isAlias shouldBeEqualTo true
-            it?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleType"
+        assertSoftly(sut) {
+            it?.type?.name shouldBeEqualTo "ImportAlias"
+            it?.hasType { type -> type.name == "ImportAlias" } shouldBeEqualTo true
+            it?.hasType { type -> type.name == "Int" } shouldBeEqualTo false
+            it?.hasTypeOf(SampleType::class) shouldBeEqualTo false
+            it?.hasTypeOf(Int::class) shouldBeEqualTo false
         }
     }
 

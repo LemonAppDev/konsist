@@ -16,6 +16,7 @@ import com.lemonappdev.konsist.core.provider.KoFunctionProviderCore
 import com.lemonappdev.konsist.core.provider.KoInterfaceProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
+import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoObjectProviderCore
 import com.lemonappdev.konsist.core.provider.KoParentInterfaceProviderCore
@@ -24,6 +25,8 @@ import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
+import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCore
@@ -61,10 +64,13 @@ internal class KoInterfaceDeclarationCore private constructor(
     KoPackageDeclarationProviderCore,
     KoContainingDeclarationProviderCore,
     KoPathProviderCore,
+    KoModuleProviderCore,
+    KoSourceSetProviderCore,
     KoParentProviderCore,
     KoParentInterfaceProviderCore,
     KoPropertyProviderCore,
     KoRepresentsTypeProviderCore,
+    KoResideInPackageProviderCore,
     KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
@@ -89,14 +95,33 @@ internal class KoInterfaceDeclarationCore private constructor(
     ): List<KoBaseDeclaration> = KoDeclarationProviderCoreUtil
         .getKoDeclarations(ktClass, includeNested, includeLocal, this)
 
-    override fun toString(): String {
-        return locationWithText
+    /*
+    1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
+    (the second one is deprecated) - with the same methods, so we must override this and choose which implementation
+    this method should have. After removing deprecated provider in v1.0.0 it will be unnecessary.
+     */
+    override fun resideInPackage(name: String): Boolean {
+        return super<KoResideInPackageProviderCore>.resideInPackage(name)
     }
+
+    /*
+    1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
+    (the second one is deprecated) - with the same methods, so we must override this and choose which implementation
+    this method should have. After removing deprecated provider in v1.0.0 it will be unnecessary.
+     */
+    override fun resideOutsidePackage(name: String): Boolean {
+        return super<KoResideInPackageProviderCore>.resideOutsidePackage(name)
+    }
+
+    override fun toString(): String = name
 
     internal companion object {
         private val cache: KoDeclarationCache<KoInterfaceDeclaration> = KoDeclarationCache()
 
-        internal fun getInstance(ktClass: KtClass, containingDeclaration: KoContainingDeclarationProvider): KoInterfaceDeclaration =
+        internal fun getInstance(
+            ktClass: KtClass,
+            containingDeclaration: KoContainingDeclarationProvider,
+        ): KoInterfaceDeclaration =
             cache.getOrCreateInstance(ktClass, containingDeclaration) {
                 KoInterfaceDeclarationCore(ktClass, containingDeclaration)
             }

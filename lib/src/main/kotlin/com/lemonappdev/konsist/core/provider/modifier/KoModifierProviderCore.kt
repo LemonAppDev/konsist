@@ -40,8 +40,25 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
     override val numModifiers: Int
         get() = modifiers.size
 
+    @Deprecated(
+        """
+            Will be removed in v1.0.0. 
+            If you passed one argument - replace with `hasModifier`, otherwise with `hasAllModifiers`.
+            """,
+    )
     override fun hasModifiers(vararg koModifiers: KoModifier): Boolean = when {
         koModifiers.isEmpty() -> modifiers.isNotEmpty()
         else -> modifiers.containsAll(koModifiers.toList())
     }
+
+    override fun hasModifiers(): Boolean = modifiers.isNotEmpty()
+
+    override fun hasModifier(modifier: KoModifier, vararg modifiers: KoModifier): Boolean {
+        val givenModifiers = modifiers.toList() + modifier
+
+        return givenModifiers.any { this.modifiers.any { modifier -> modifier == it } }
+    }
+
+    override fun hasAllModifiers(modifier: KoModifier, vararg modifiers: KoModifier): Boolean =
+        this.modifiers.containsAll(modifiers.toList() + modifier)
 }

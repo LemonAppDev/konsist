@@ -3,9 +3,9 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
-import com.lemonappdev.konsist.api.ext.list.withAllAnnotationsOf
-import com.lemonappdev.konsist.api.ext.list.withAllParents
+import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
+import com.lemonappdev.konsist.api.ext.list.withParentNamed
 import com.lemonappdev.konsist.api.verify.assert
 import org.springframework.stereotype.Repository
 
@@ -26,7 +26,7 @@ class CleanArchitectureSnippets {
             }
     }
 
-    fun `classes with 'UseCase' suffix should reside in 'domain' and 'usecase' packages`() {
+    fun `classes with 'UseCase' suffix should reside in 'domain' and 'usecase' package`() {
         Konsist
             .scopeFromProject()
             .classes()
@@ -34,7 +34,7 @@ class CleanArchitectureSnippets {
             .assert { it.resideInPackage("..domain..usecase..") }
     }
 
-    fun `classes with 'UseCase' suffix should have single public method named 'invoke'`() {
+    fun `classes with 'UseCase' suffix should have single 'public operator' method named 'invoke'`() {
         Konsist
             .scopeFromProject()
             .classes()
@@ -52,7 +52,7 @@ class CleanArchitectureSnippets {
         Konsist
             .scopeFromProject()
             .interfaces()
-            .withAllAnnotationsOf(Repository::class)
+            .withAnnotationOf(Repository::class)
             .assert { it.resideInPackage("..data..") }
     }
 
@@ -60,7 +60,7 @@ class CleanArchitectureSnippets {
         Konsist
             .scopeFromProduction()
             .classes()
-            .withAllParents("UseCase")
+            .withParentNamed("UseCase")
             .assert { it.hasTestClass() }
     }
 }

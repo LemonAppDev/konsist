@@ -40,7 +40,11 @@ class GeneralSnippets {
                     .declarations()
                     .indexOfFirstInstance<KoFunctionDeclaration>()
 
-                lastKoPropertyDeclarationIndex <= firstKoFunctionDeclarationIndex
+                if (lastKoPropertyDeclarationIndex != -1 && firstKoFunctionDeclarationIndex != -1) {
+                    lastKoPropertyDeclarationIndex < firstKoFunctionDeclarationIndex
+                } else {
+                    true
+                }
             }
     }
 
@@ -137,7 +141,7 @@ class GeneralSnippets {
         Konsist
             .scopeFromProject()
             .files
-            .assertNot { it.hasImports("java.util.logging..") }
+            .assertNot { it.hasImport { import -> import.name == "java.util.logging.." } }
     }
 
     fun `package name must match file path`() {
