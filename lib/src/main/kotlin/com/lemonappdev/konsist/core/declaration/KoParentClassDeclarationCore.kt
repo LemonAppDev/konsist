@@ -11,7 +11,6 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
-import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
@@ -31,8 +30,7 @@ internal class KoParentClassDeclarationCore private constructor(private val ktSu
     KoPathProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoResideInPackageProviderCore,
-    KoResideInOrOutsidePackageProviderCore {
+    KoResideInPackageProviderCore {
     override val psiElement: PsiElement
         get() = ktSuperTypeListEntry
     override val ktElement: KtElement
@@ -59,24 +57,6 @@ internal class KoParentClassDeclarationCore private constructor(private val ktSu
             .replace(Regex("<.*|\\(.*"), "")
             .replace(EndOfLine.UNIX.value, " ")
             .substringBefore(" by")
-
-    /*
-    1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
-    (the second one is deprecated) - with the same methods, so we must override this and choose which implementation
-    this method should have. After removing deprecated provider in v1.0.0 it will be unnecessary.
-     */
-    override fun resideInPackage(name: String): Boolean {
-        return super<KoResideInPackageProviderCore>.resideInPackage(name)
-    }
-
-    /*
-    1.0.0 CleanUp - Now declaration implements two providers - KoResideInPackageProvider and KoResideInOrOutsidePackageProvider
-    (the second one is deprecated) - with the same methods, so we must override this and choose which implementation
-    this method should have. After removing deprecated provider in v1.0.0 it will be unnecessary.
-     */
-    override fun resideOutsidePackage(name: String): Boolean {
-        return super<KoResideInPackageProviderCore>.resideOutsidePackage(name)
-    }
 
     override fun toString(): String = name
 

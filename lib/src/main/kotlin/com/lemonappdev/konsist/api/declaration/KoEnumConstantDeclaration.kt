@@ -16,7 +16,6 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPackageProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
-import com.lemonappdev.konsist.api.provider.KoResideInOrOutsidePackageProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
@@ -44,5 +43,4 @@ interface KoEnumConstantDeclaration :
     KoModuleProvider,
     KoSourceSetProvider,
     KoResideInPackageProvider,
-    KoResideInOrOutsidePackageProvider,
     KoTextProvider
