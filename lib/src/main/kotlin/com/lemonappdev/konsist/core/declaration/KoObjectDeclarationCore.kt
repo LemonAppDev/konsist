@@ -26,7 +26,6 @@ import com.lemonappdev.konsist.core.provider.KoParentProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoPropertyProviderCore
 import com.lemonappdev.konsist.core.provider.KoRepresentsTypeProviderCore
-import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
@@ -73,7 +72,6 @@ internal class KoObjectDeclarationCore(
     KoPropertyProviderCore,
     KoRepresentsTypeProviderCore,
     KoResideInPackageProviderCore,
-    KoResideInOrOutsidePackageProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
     KoVisibilityModifierProviderCore,

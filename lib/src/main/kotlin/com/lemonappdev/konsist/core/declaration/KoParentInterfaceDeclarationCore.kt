@@ -12,7 +12,6 @@ import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
-import com.lemonappdev.konsist.core.provider.KoResideInOrOutsidePackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoResideInPackageProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
@@ -34,8 +33,7 @@ internal class KoParentInterfaceDeclarationCore private constructor(private val 
     KoPathProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoResideInPackageProviderCore,
-    KoResideInOrOutsidePackageProviderCore {
+    KoResideInPackageProviderCore {
     override val psiElement: PsiElement
         get() = ktSuperTypeListEntry
     override val ktElement: KtElement
