@@ -56,15 +56,13 @@ internal fun <E : KoBaseProvider> List<E>.assert(
     additionalMessage: String? = null,
     function: (E) -> Boolean?,
     positiveCheck: Boolean,
+    suppressName: String? = null
 ) {
     var lastDeclaration: KoBaseProvider? = null
 
     try {
-        val testMethodName = if (additionalMessage != null) {
-            getTestMethodNameFromFifthIndex()
-        } else {
-            getTestMethodNameFromSixthIndex()
-        }
+        val testMethodName: String =
+            getTestMethodName(additionalMessage = additionalMessage, suppressName = suppressName)
 
         checkIfLocalListIsEmpty(this, getTestMethodNameFromFourthIndex())
 

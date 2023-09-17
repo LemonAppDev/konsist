@@ -661,6 +661,19 @@ class KoDeclarationAssertOnListTest {
         sut.assertTrue { it.name.endsWith("suppress") }
     }
 
+    @Test
+    fun `assert-suppress-with-suppress-name-parameter`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-with-suppress-name-parameter")
+                .functions(includeNested = true)
+
+        // then
+        sut.assert(suppressName = "konsist.assert-suppress-with-suppress-name-parameter") {
+            it.name.endsWith("Kotest")
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationassert/snippet/", fileName)
 }
