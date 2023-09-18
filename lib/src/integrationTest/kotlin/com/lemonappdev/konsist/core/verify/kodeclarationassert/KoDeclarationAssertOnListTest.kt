@@ -3,8 +3,8 @@ package com.lemonappdev.konsist.core.verify.kodeclarationassert
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.localFunctions
-import com.lemonappdev.konsist.api.verify.assert
-import com.lemonappdev.konsist.api.verify.assertNot
+import com.lemonappdev.konsist.api.verify.assertFalse
+import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldContain
@@ -21,7 +21,7 @@ class KoDeclarationAssertOnListTest {
 
         // then
         try {
-            sut.assert { false }
+            sut.assertTrue { false }
         } catch (e: Exception) {
             e.message?.shouldContain("Assert 'declaration-assert-test-method-name' was violated (1 time)")
                 ?: throw e
@@ -36,7 +36,7 @@ class KoDeclarationAssertOnListTest {
 
         // then
         try {
-            sut.assert { false }
+            sut.assertTrue { false }
         } catch (e: Exception) {
             e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' was violated (1 time)")
                 ?: throw e
@@ -52,7 +52,7 @@ class KoDeclarationAssertOnListTest {
 
         // then
         try {
-            sut.assert(message) { false }
+            sut.assertTrue(additionalMessage = message) { false }
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-error-with-custom-message' was violated (1 time)." +
@@ -71,7 +71,7 @@ class KoDeclarationAssertOnListTest {
 
         // then
         try {
-            sut.assert(message) { false }
+            sut.assertTrue(additionalMessage = message) { false }
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'file-declaration-assert-error-with-custom-message' was violated (1 time)." +
@@ -89,7 +89,7 @@ class KoDeclarationAssertOnListTest {
 
         // then
         try {
-            sut.assert { false }
+            sut.assertTrue { false }
         } catch (e: Exception) {
             e.message?.shouldContain("(SampleClass ClassDeclaration)")
                 ?: throw e
@@ -104,7 +104,7 @@ class KoDeclarationAssertOnListTest {
 
         // then
         try {
-            sut.assert { false }
+            sut.assertTrue { false }
         } catch (e: Exception) {
             e.message?.shouldContain("(file-declaration-assert-displaying-correct-failed-declaration-type FileDeclaration)")
                 ?: throw e
@@ -112,35 +112,55 @@ class KoDeclarationAssertOnListTest {
     }
 
     @Test
-    fun `declaration-assert-fails-when-declaration-list-is-empty`() {
+    fun `declaration-assert-passes-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("declaration-assert-fails-when-declaration-list-is-empty")
+        val sut = getSnippetFile("declaration-assert-passes-when-declaration-list-is-empty")
             .classes()
 
         // when
-        val func = {
-            sut.assert { true }
-        }
-
-        // then
-        func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assert' method."
+        sut.assertTrue { true }
     }
 
     @Test
-    fun `declaration-assert-not-fails-when-declaration-list-is-empty`() {
+    fun `declaration-assert-false-passes-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("declaration-assert-not-fails-when-declaration-list-is-empty")
+        val sut = getSnippetFile("declaration-assert-false-passes-when-declaration-list-is-empty")
+            .classes()
+
+        // when
+        sut.assertFalse { false }
+    }
+
+    @Test
+    fun `declaration-assert-strict-fails-when-declaration-list-is-empty`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-strict-fails-when-declaration-list-is-empty")
             .classes()
 
         // when
         val func = {
-            sut.assertNot { false }
+            sut.assertTrue(strict = true) { true }
         }
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
+    }
+
+    @Test
+    fun `declaration-assert-false-strict-fails-when-declaration-list-is-empty`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-false-strict-fails-when-declaration-list-is-empty")
+            .classes()
+
+        // when
+        val func = {
+            sut.assertFalse(strict = true) { false }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
     }
 
     @Test
@@ -150,7 +170,7 @@ class KoDeclarationAssertOnListTest {
             .classes()
 
         // then
-        sut.assert { it.name == "SampleClass" }
+        sut.assertTrue { it.name == "SampleClass" }
     }
 
     @Test
@@ -161,7 +181,7 @@ class KoDeclarationAssertOnListTest {
 
         // when
         val func = {
-            sut.assert { it.name == "OtherName" }
+            sut.assertTrue { it.name == "OtherName" }
         }
 
         // then
@@ -169,26 +189,26 @@ class KoDeclarationAssertOnListTest {
     }
 
     @Test
-    fun `assert-not-passes`() {
+    fun `assert-false-passes`() {
         // given
-        val sut = getSnippetFile("assert-not-passes")
+        val sut = getSnippetFile("assert-false-passes")
             .classes()
 
         // then
-        sut.assertNot {
+        sut.assertFalse {
             it.name == "OtherName"
         }
     }
 
     @Test
-    fun `assert-not-fails`() {
+    fun `assert-false-fails`() {
         // given
-        val sut = getSnippetFile("assert-not-fails")
+        val sut = getSnippetFile("assert-false-fails")
             .classes()
 
         // when
         val func = {
-            sut.assertNot {
+            sut.assertFalse {
                 it.name == "SampleClass"
             }
         }
@@ -204,7 +224,7 @@ class KoDeclarationAssertOnListTest {
             .files
 
         // then
-        sut.assert { it.name == "assert-passes-on-declarations-which-items-have-null-parent" }
+        sut.assertTrue { it.name == "assert-passes-on-declarations-which-items-have-null-parent" }
     }
 
     @Test
@@ -215,7 +235,7 @@ class KoDeclarationAssertOnListTest {
 
         // when
         val func = {
-            sut.assert { it.name == "OtherName" }
+            sut.assertTrue { it.name == "OtherName" }
         }
 
         // then
@@ -223,27 +243,27 @@ class KoDeclarationAssertOnListTest {
     }
 
     @Test
-    fun `assert-not-passes-on-declarations-which-items-have-null-parent`() {
+    fun `assert-false-passes-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut = getSnippetFile("assert-not-passes-on-declarations-which-items-have-null-parent")
+        val sut = getSnippetFile("assert-false-passes-on-declarations-which-items-have-null-parent")
             .files
 
         // then
-        sut.assertNot {
+        sut.assertFalse {
             it.name == "OtherName"
         }
     }
 
     @Test
-    fun `assert-not-fails-on-declarations-which-items-have-null-parent`() {
+    fun `assert-false-fails-on-declarations-which-items-have-null-parent`() {
         // given
-        val sut = getSnippetFile("assert-not-fails-on-declarations-which-items-have-null-parent")
+        val sut = getSnippetFile("assert-false-fails-on-declarations-which-items-have-null-parent")
             .files
 
         // when
         val func = {
-            sut.assertNot {
-                it.name == "assert-not-fails-on-declarations-which-items-have-null-parent"
+            sut.assertFalse {
+                it.name == "assert-false-fails-on-declarations-which-items-have-null-parent"
             }
         }
 
@@ -258,7 +278,7 @@ class KoDeclarationAssertOnListTest {
             .classes()
 
         // then
-        sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
+        sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
     }
 
     @Test
@@ -269,7 +289,7 @@ class KoDeclarationAssertOnListTest {
 
         // when
         val func = {
-            sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
+            sut.assertTrue { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
         }
 
         // then
@@ -277,24 +297,24 @@ class KoDeclarationAssertOnListTest {
     }
 
     @Test
-    fun `assert-not-passes-when-expression-is-nullable`() {
+    fun `assert-false-passes-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-not-passes-when-expression-is-nullable")
+        val sut = getSnippetFile("assert-false-passes-when-expression-is-nullable")
             .classes()
 
         // then
-        sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") }
+        sut.assertFalse { it.primaryConstructor?.hasParameterWithName("otherParameter") }
     }
 
     @Test
-    fun `assert-not-fails-when-expression-is-nullable`() {
+    fun `assert-false-fails-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-not-fails-when-expression-is-nullable")
+        val sut = getSnippetFile("assert-false-fails-when-expression-is-nullable")
             .classes()
 
         // when
         val func = {
-            sut.assertNot { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
+            sut.assertFalse { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
         }
 
         // then
@@ -309,7 +329,7 @@ class KoDeclarationAssertOnListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -320,7 +340,7 @@ class KoDeclarationAssertOnListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -331,7 +351,7 @@ class KoDeclarationAssertOnListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -342,7 +362,7 @@ class KoDeclarationAssertOnListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -353,7 +373,7 @@ class KoDeclarationAssertOnListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -364,7 +384,7 @@ class KoDeclarationAssertOnListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -376,7 +396,7 @@ class KoDeclarationAssertOnListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue { it.containsLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -388,7 +408,7 @@ class KoDeclarationAssertOnListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue { it.containsLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -400,7 +420,7 @@ class KoDeclarationAssertOnListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue { it.containsLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -412,7 +432,7 @@ class KoDeclarationAssertOnListTest {
                 .initBlocks
 
         // then
-        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue { it.containsLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -425,7 +445,7 @@ class KoDeclarationAssertOnListTest {
                 .localFunctions
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -438,7 +458,7 @@ class KoDeclarationAssertOnListTest {
                 .localFunctions
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -453,7 +473,7 @@ class KoDeclarationAssertOnListTest {
                 .localFunctions
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -466,7 +486,7 @@ class KoDeclarationAssertOnListTest {
                 .localFunctions
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -479,7 +499,7 @@ class KoDeclarationAssertOnListTest {
                 .localFunctions
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -492,7 +512,7 @@ class KoDeclarationAssertOnListTest {
                 .localFunctions
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -503,7 +523,7 @@ class KoDeclarationAssertOnListTest {
                 .functions(includeNested = true)
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assertTrue { it.name.endsWith("Text") }
     }
 
     @Test
@@ -516,7 +536,7 @@ class KoDeclarationAssertOnListTest {
             .files
 
         // then
-        sut.assert { it.name.endsWith("suppress") }
+        sut.assertTrue { it.name.endsWith("suppress") }
     }
 
     @Test
@@ -529,7 +549,7 @@ class KoDeclarationAssertOnListTest {
             .files
 
         // then
-        sut.assert { it.name.endsWith("suppress") }
+        sut.assertTrue { it.name.endsWith("suppress") }
     }
 
     @Test
@@ -542,7 +562,7 @@ class KoDeclarationAssertOnListTest {
             .files
 
         // then
-        sut.assert { it.name.endsWith("suppress") }
+        sut.assertTrue { it.name.endsWith("suppress") }
     }
 
     private fun getSnippetFile(fileName: String) =

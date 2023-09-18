@@ -1,0 +1,9 @@
+@file:Suppress("konsist.assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+
+package com.lemonappdev.konsist.core.verify.kodeclarationassert.deprecatedsnippet
+
+class SampleClassWithoutOtherFunction {
+    init {
+        fun sampleFunction() {}
+    }
+}

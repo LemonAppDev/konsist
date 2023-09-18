@@ -13,6 +13,45 @@ import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
 internal fun <E : KoBaseProvider> List<E>.assert(
+    strict: Boolean,
+    additionalMessage: String?,
+    function: (E) -> Boolean?,
+    positiveCheck: Boolean,
+) {
+    var lastDeclaration: KoBaseProvider? = null
+
+    try {
+        val testMethodName = if (additionalMessage != null) {
+            getTestMethodNameFromSixthIndex()
+        } else {
+            getTestMethodNameFromSixthIndex()
+        }
+
+        if (strict) {
+            checkIfLocalListIsEmpty(this, getTestMethodNameFromFourthIndex())
+        }
+
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this, testMethodName)
+
+        val result = notSuppressedDeclarations.groupBy {
+            lastDeclaration = it
+            if (function(it) == null) {
+                positiveCheck
+            } else {
+                function(it)
+            }
+        }
+
+        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
+    } catch (e: KoException) {
+        throw e
+    } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
+        throw KoInternalException(e.message.orEmpty(), e, lastDeclaration)
+    }
+}
+
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("assert"))
+internal fun <E : KoBaseProvider> List<E>.assert(
     additionalMessage: String? = null,
     function: (E) -> Boolean?,
     positiveCheck: Boolean,
@@ -51,7 +90,7 @@ private fun checkIfLocalListIsEmpty(localList: List<*>, testMethodName: String) 
     if (localList.isEmpty()) {
         throw KoPreconditionFailedException(
             "Declaration list is empty. Please make sure that list of declarations contain items " +
-                "before calling the '$testMethodName' method.",
+                    "before calling the '$testMethodName' method.",
         )
     }
 }
@@ -63,11 +102,11 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                (
-                    it.name == "Suppress" &&
-                        it.text.contains("\"konsist.$testMethodName\"") ||
-                        it.text.contains("\"$testMethodName\"")
-                    )
+                    (
+                            it.name == "Suppress" &&
+                                    it.text.contains("\"konsist.$testMethodName\"") ||
+                                    it.text.contains("\"$testMethodName\"")
+                            )
         }
         .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it, testMethodName) }
 

@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParentNamed
-import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertTrue
 import org.springframework.stereotype.Repository
 
 class CleanArchitectureSnippets {
@@ -31,7 +31,7 @@ class CleanArchitectureSnippets {
             .scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
-            .assert { it.resideInPackage("..domain..usecase..") }
+            .assertTrue { it.resideInPackage("..domain..usecase..") }
     }
 
     fun `classes with 'UseCase' suffix should have single 'public operator' method named 'invoke'`() {
@@ -39,7 +39,7 @@ class CleanArchitectureSnippets {
             .scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
-            .assert {
+            .assertTrue {
                 val hasSingleInvokeOperatorMethod = it.containsFunction { function ->
                     function.name == "invoke" && function.hasPublicOrDefaultModifier && function.hasOperatorModifier
                 }
@@ -53,7 +53,7 @@ class CleanArchitectureSnippets {
             .scopeFromProject()
             .interfaces()
             .withAnnotationOf(Repository::class)
-            .assert { it.resideInPackage("..data..") }
+            .assertTrue { it.resideInPackage("..data..") }
     }
 
     fun `every UseCase class has test`() {
@@ -61,6 +61,6 @@ class CleanArchitectureSnippets {
             .scopeFromProduction()
             .classes()
             .withParentNamed("UseCase")
-            .assert { it.hasTestClass() }
+            .assertTrue { it.hasTestClass() }
     }
 }
