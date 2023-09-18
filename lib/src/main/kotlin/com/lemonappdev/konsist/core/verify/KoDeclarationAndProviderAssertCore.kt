@@ -21,11 +21,12 @@ internal fun <E : KoBaseProvider> List<E>.assert(
     var lastDeclaration: KoBaseProvider? = null
 
     try {
-        val testMethodName = if (additionalMessage != null) {
-            getTestMethodNameFromSixthIndex()
-        } else {
-            getTestMethodNameFromSixthIndex()
-        }
+        val testMethodName = Thread
+            .currentThread()
+            .stackTrace
+            .map { it.methodName }
+            .takeWhile { it != "invoke0" }
+            .last()
 
         if (strict) {
             checkIfLocalListIsEmpty(this, getTestMethodNameFromFourthIndex())
