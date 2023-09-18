@@ -59,7 +59,7 @@ class ApiKonsistTest {
             .interfaces()
             .withoutName(
                 "KoKDocTagsProvider",
-                "KoParentInterfaceProvider"
+                "KoParentInterfaceProvider",
             ) // remove after merge https://lemonappdev.atlassian.net/browse/KON-456 and release v.1.0.0
             .withoutNameStartingWith("KoLocal") // remove after merge https://lemonappdev.atlassian.net/browse/KON-416
             .filter {
@@ -79,7 +79,7 @@ class ApiKonsistTest {
             .interfaces()
             .withoutName(
                 "KoKDocTagsProvider",
-                "KoParentInterfaceProvider"
+                "KoParentInterfaceProvider",
             ) // remove after merge https://lemonappdev.atlassian.net/browse/KON-456 and release v.1.0.0
             .withoutNameStartingWith("KoLocal") // remove after merge https://lemonappdev.atlassian.net/browse/KON-416
             .filter {
@@ -108,8 +108,8 @@ class ApiKonsistTest {
             .interfaces()
 
         private fun <T> T.hasCorrectMethods(isExtension: Boolean): Boolean
-                where T : KoPropertyProvider,
-                      T : KoFunctionProvider {
+            where T : KoPropertyProvider,
+                  T : KoFunctionProvider {
             val property = properties()
                 .first { property ->
                     property.type?.hasNameStartingWith("List<Ko") ?: false
@@ -138,65 +138,79 @@ class ApiKonsistTest {
                 ?.hasParentWithName("KoNameProvider") ?: false
 
             return if (isExtension) {
-                if (declarationName == "KoModifier") {
-                    hasModifiersFunctions(singularName, pluralName, "with")
-                            && hasModifiersFunctions(singularName, pluralName, "without")
-                } else if (hasKoNameProvider) {
-                    hasBasicFunctions(singularName, pluralName, "with")
-                            && hasNamedFunctionsForExt(singularName, pluralName, "with")
-                            && hasBasicFunctions(singularName, pluralName, "without")
-                            && hasNamedFunctionsForExt(singularName, pluralName, "without")
-                } else {
-                    hasBasicFunctions(singularName, pluralName, "with")
-                            && hasBasicFunctions(singularName, pluralName, "without")
-                }
+                checkForExtensions(declarationName, singularName, pluralName, hasKoNameProvider)
             } else {
-                if (declarationName == "KoModifier") {
-                    hasModifiersFunctions(singularName, pluralName, "has")
-                } else if (hasKoNameProvider) {
-                    hasBasicFunctions(singularName, pluralName, "has") &&
-                            hasNamedFunctions(singularName, pluralName)
-                } else {
-                    hasBasicFunctions(singularName, pluralName, "has")
-                }
+                checkForProviders(declarationName, singularName, pluralName, hasKoNameProvider)
             }
+        }
+
+        private fun KoFunctionProvider.checkForExtensions(
+            declarationName: String?,
+            singularName: String,
+            pluralName: String,
+            hasKoNameProvider: Boolean,
+        ): Boolean = if (declarationName == "KoModifier") {
+            hasModifiersFunctions(singularName, pluralName, "with") &&
+                hasModifiersFunctions(singularName, pluralName, "without")
+        } else if (hasKoNameProvider) {
+            hasBasicFunctions(singularName, pluralName, "with") &&
+                hasNamedFunctionsForExt(singularName, pluralName, "with") &&
+                hasBasicFunctions(singularName, pluralName, "without") &&
+                hasNamedFunctionsForExt(singularName, pluralName, "without")
+        } else {
+            hasBasicFunctions(singularName, pluralName, "with") &&
+                hasBasicFunctions(singularName, pluralName, "without")
+        }
+
+        private fun KoFunctionProvider.checkForProviders(
+            declarationName: String?,
+            singularName: String,
+            pluralName: String,
+            hasKoNameProvider: Boolean,
+        ): Boolean = if (declarationName == "KoModifier") {
+            hasModifiersFunctions(singularName, pluralName, "has")
+        } else if (hasKoNameProvider) {
+            hasBasicFunctions(singularName, pluralName, "has") &&
+                hasNamedFunctions(singularName, pluralName)
+        } else {
+            hasBasicFunctions(singularName, pluralName, "has")
         }
 
         private fun KoFunctionProvider.hasModifiersFunctions(
             singularName: String,
             pluralName: String,
-            prefix: String
+            prefix: String,
         ): Boolean =
             containsFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
-                    containsFunction { function ->
-                        function.name == "${prefix}$singularName" && function.hasParametersWithAllNames(
-                            "modifier",
-                            "modifiers",
-                        )
-                    } &&
-                    containsFunction { function ->
-                        function.name == "${prefix}All$pluralName" && function.hasParametersWithAllNames(
-                            "modifier",
-                            "modifiers",
-                        )
-                    }
+                containsFunction { function ->
+                    function.name == "${prefix}$singularName" && function.hasParametersWithAllNames(
+                        "modifier",
+                        "modifiers",
+                    )
+                } &&
+                containsFunction { function ->
+                    function.name == "${prefix}All$pluralName" && function.hasParametersWithAllNames(
+                        "modifier",
+                        "modifiers",
+                    )
+                }
 
         private fun KoFunctionProvider.hasBasicFunctions(
             singularName: String,
             pluralName: String,
-            prefix: String
+            prefix: String,
         ): Boolean {
             return containsFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
-                    containsFunction { function ->
-                        function.name == "${prefix}$singularName" && function.hasParameterWithName(
-                            "predicate"
-                        )
-                    } &&
-                    containsFunction { function ->
-                        function.name == "${prefix}All$pluralName" && function.hasParameterWithName(
-                            "predicate"
-                        )
-                    }
+                containsFunction { function ->
+                    function.name == "${prefix}$singularName" && function.hasParameterWithName(
+                        "predicate",
+                    )
+                } &&
+                containsFunction { function ->
+                    function.name == "${prefix}All$pluralName" && function.hasParameterWithName(
+                        "predicate",
+                    )
+                }
         }
 
         private fun KoFunctionProvider.hasNamedFunctions(singularName: String, pluralName: String): Boolean =
@@ -209,7 +223,7 @@ class ApiKonsistTest {
         private fun KoFunctionProvider.hasNamedFunctionsForExt(
             singularName: String,
             pluralName: String,
-            prefix: String
+            prefix: String,
         ): Boolean =
             containsFunction { function ->
                 function.name == "$prefix${singularName}Named" && function.hasParametersWithAllNames("name", "names")
