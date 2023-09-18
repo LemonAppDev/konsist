@@ -1,3 +1,4 @@
+@file:Suppress("konsist.every provider containing property with list of declarations type has correct extensions")
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoConstructorDeclaration
