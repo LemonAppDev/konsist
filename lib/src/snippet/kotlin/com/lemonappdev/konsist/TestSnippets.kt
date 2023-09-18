@@ -8,8 +8,8 @@ import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
 import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
-import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.api.verify.assertFalse
+import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest

@@ -91,7 +91,7 @@ private fun checkIfLocalListIsEmpty(localList: List<*>, testMethodName: String) 
     if (localList.isEmpty()) {
         throw KoPreconditionFailedException(
             "Declaration list is empty. Please make sure that list of declarations contain items " +
-                    "before calling the '$testMethodName' method.",
+                "before calling the '$testMethodName' method.",
         )
     }
 }
@@ -103,11 +103,11 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                    (
-                            it.name == "Suppress" &&
-                                    it.text.contains("\"konsist.$testMethodName\"") ||
-                                    it.text.contains("\"$testMethodName\"")
-                            )
+                (
+                    it.name == "Suppress" &&
+                        it.text.contains("\"konsist.$testMethodName\"") ||
+                        it.text.contains("\"$testMethodName\"")
+                    )
         }
         .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it, testMethodName) }
 

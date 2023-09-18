@@ -144,7 +144,7 @@ class KoDeclarationAssertOnListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
     }
 
     @Test
@@ -160,7 +160,7 @@ class KoDeclarationAssertOnListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
     }
 
     @Test

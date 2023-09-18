@@ -13,7 +13,7 @@ import com.lemonappdev.konsist.core.verify.assert
  */
 fun <E : KoBaseProvider> E.assertTrue(
     additionalMessage: String? = null,
-    function: (E) -> Boolean?
+    function: (E) -> Boolean?,
 ): Unit {
     listOf(this).assert(false, additionalMessage, function, positiveCheck = true)
 }
@@ -28,7 +28,7 @@ fun <E : KoBaseProvider> E.assertTrue(
  */
 fun <E : KoBaseProvider> E.assertFalse(
     additionalMessage: String? = null,
-    function: (E) -> Boolean?
+    function: (E) -> Boolean?,
 ): Unit {
     listOf(this).assert(false, additionalMessage, function, positiveCheck = false)
 }
@@ -49,7 +49,7 @@ fun <E : KoBaseProvider> E.assertFalse(
 fun <E : KoBaseProvider> List<E>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    function: (E) -> Boolean?
+    function: (E) -> Boolean?,
 ): Unit {
     assert(strict, additionalMessage, function, positiveCheck = true)
 }
@@ -70,7 +70,7 @@ fun <E : KoBaseProvider> List<E>.assertTrue(
 fun <E : KoBaseProvider> List<E>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    function: (E) -> Boolean?
+    function: (E) -> Boolean?,
 ): Unit {
     assert(strict, additionalMessage, function, positiveCheck = false)
 }
@@ -91,7 +91,7 @@ fun <E : KoBaseProvider> List<E>.assertFalse(
 fun <E : KoBaseProvider> Sequence<E>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    function: (E) -> Boolean?
+    function: (E) -> Boolean?,
 ): Unit {
     this.toList().assert(strict, additionalMessage, function, true)
 }
@@ -112,7 +112,7 @@ fun <E : KoBaseProvider> Sequence<E>.assertTrue(
 fun <E : KoBaseProvider> Sequence<E>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    function: (E) -> Boolean?
+    function: (E) -> Boolean?,
 ): Unit {
     this.toList().assert(strict, additionalMessage, function, false)
 }

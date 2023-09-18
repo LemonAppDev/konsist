@@ -123,7 +123,7 @@ class KoDeclarationAssertOnSequenceTest {
             .asSequence()
 
         // when
-            sut.assertTrue { true }
+        sut.assertTrue { true }
     }
 
     @Test
@@ -134,7 +134,7 @@ class KoDeclarationAssertOnSequenceTest {
             .asSequence()
 
         // when
-            sut.assertFalse { false }
+        sut.assertFalse { false }
     }
 
     @Test

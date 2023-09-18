@@ -5,9 +5,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.properties
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParentOf
-import com.lemonappdev.konsist.api.verify.assert
 import com.lemonappdev.konsist.api.verify.assertFalse
-import com.lemonappdev.konsist.api.verify.assertNot
 import com.lemonappdev.konsist.api.verify.assertTrue
 
 class AndroidSnippets {

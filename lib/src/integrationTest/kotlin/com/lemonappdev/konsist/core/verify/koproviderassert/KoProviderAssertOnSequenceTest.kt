@@ -7,8 +7,8 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
-import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.api.verify.assertFalse
+import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldContain
@@ -49,7 +49,7 @@ class KoProviderAssertOnSequenceTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-error-with-custom-message' was violated (2 times)." +
-                        "\n$message\nInvalid declarations:",
+                    "\n$message\nInvalid declarations:",
             )
                 ?: throw e
         }
@@ -97,7 +97,7 @@ class KoProviderAssertOnSequenceTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
     }
 
     @Test
@@ -116,7 +116,7 @@ class KoProviderAssertOnSequenceTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
     }
 
     @Test
