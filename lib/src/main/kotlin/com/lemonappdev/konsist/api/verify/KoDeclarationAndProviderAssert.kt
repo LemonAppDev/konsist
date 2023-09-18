@@ -12,11 +12,10 @@ import com.lemonappdev.konsist.core.verify.assert
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
 fun <E : KoBaseProvider> E.assertTrue(
-    strict: Boolean = false,
     additionalMessage: String? = null,
     function: (E) -> Boolean?
 ): Unit {
-    listOf(this).assert(strict, additionalMessage, function, positiveCheck = true)
+    listOf(this).assert(false, additionalMessage, function, positiveCheck = true)
 }
 
 /**
@@ -28,16 +27,20 @@ fun <E : KoBaseProvider> E.assertTrue(
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
 fun <E : KoBaseProvider> E.assertFalse(
-    strict: Boolean = false,
     additionalMessage: String? = null,
     function: (E) -> Boolean?
 ): Unit {
-    listOf(this).assert(strict, additionalMessage, function, positiveCheck = false)
+    listOf(this).assert(false, additionalMessage, function, positiveCheck = false)
 }
 
 /**
  * Asserts that all elements in the list match the specified predicate.
  *
+ * @param strict A flag indicating whether strict checking should be enabled.
+ *               If set to `true`, an assertion error will be thrown if the list is empty,
+ *               which can be helpful for debugging.
+ *               If set to `false`, the method will pass successfully when called on an empty list.
+ *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
@@ -54,6 +57,11 @@ fun <E : KoBaseProvider> List<E>.assertTrue(
 /**
  * Asserts that no elements in the list match the specified predicate.
  *
+ * @param strict A flag indicating whether strict checking should be enabled.
+ *               If set to `true`, an assertion error will be thrown if the list is empty,
+ *               which can be helpful for debugging.
+ *               If set to `false`, the method will pass successfully when called on an empty list.
+ *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
@@ -70,6 +78,11 @@ fun <E : KoBaseProvider> List<E>.assertFalse(
 /**
  * Asserts that all elements in the sequence match the specified predicate.
  *
+ * @param strict A flag indicating whether strict checking should be enabled.
+ *               If set to `true`, an assertion error will be thrown if the sequence is empty,
+ *               which can be helpful for debugging.
+ *               If set to `false`, the method will pass successfully when called on an empty sequence.
+ *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
@@ -86,6 +99,11 @@ fun <E : KoBaseProvider> Sequence<E>.assertTrue(
 /**
  * Asserts that no elements in the sequence match the specified predicate.
  *
+ * @param strict A flag indicating whether strict checking should be enabled.
+ *               If set to `true`, an assertion error will be thrown if the sequence is empty,
+ *               which can be helpful for debugging.
+ *               If set to `false`, the method will pass successfully when called on an empty sequence.
+ *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
@@ -98,7 +116,6 @@ fun <E : KoBaseProvider> Sequence<E>.assertFalse(
 ): Unit {
     this.toList().assert(strict, additionalMessage, function, false)
 }
-
 
 /**
  * Asserts that element match the specified predicate.
