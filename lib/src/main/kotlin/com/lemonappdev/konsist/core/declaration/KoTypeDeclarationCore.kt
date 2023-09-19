@@ -4,10 +4,8 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
-import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
@@ -80,7 +78,7 @@ internal class KoTypeDeclarationCore private constructor(
         ): KoTypeDeclaration =
             cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
                 KoTypeDeclarationCore(
-                    ktTypeReference
+                    ktTypeReference,
                 )
             }
     }

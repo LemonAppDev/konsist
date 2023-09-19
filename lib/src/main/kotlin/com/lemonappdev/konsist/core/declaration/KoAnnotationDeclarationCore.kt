@@ -50,7 +50,7 @@ internal class KoAnnotationDeclarationCore private constructor(
 
         val isInFile = containingFile
             .declarations()
-            .filterNot { it is KoAnnotationDeclaration}
+            .filterNot { it is KoAnnotationDeclaration }
             .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
             .firstOrNull { it.contains(name) }
 
