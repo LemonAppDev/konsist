@@ -4,6 +4,7 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoArgumentDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoArgumentProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
@@ -42,10 +43,25 @@ internal class KoAnnotationDeclarationCore private constructor(
     override val name: String by lazy { ktAnnotationEntry.shortName.toString() }
 
     override val fullyQualifiedName: String by lazy {
-        containingFile
+        val isInImports = containingFile
             .imports
-            .firstOrNull { it.text.endsWith(".$name") }
-            ?.name ?: name
+            .map { it.name }
+            .firstOrNull { it.contains(name) }
+
+        val isInFile = containingFile
+            .declarations()
+            .filterNot { it is KoAnnotationDeclaration}
+            .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
+            .firstOrNull { it.contains(name) }
+
+        val packagee = containingFile.packagee?.fullyQualifiedName
+
+        return@lazy when {
+            isInImports != null -> isInImports
+            isInFile != null -> isInFile
+            packagee != null -> "$packagee.$name"
+            else -> name
+        }
     }
 
     override val arguments: List<KoArgumentDeclaration> by lazy {
