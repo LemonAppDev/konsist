@@ -31,10 +31,10 @@ def compile_test_data():
         subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         print(f"An error occurred while running the command:\n{e.stderr}")
-        print("compile TestData.jar (FAILED)")
+        print("compile TestData.jar FAILED")
         error_occurred = True
     else:
-        print("compile TestData.jar (PASSED)")
+        print("compile TestData.jar PASSED")
         error_occurred = False
 
 def create_build_dir():
@@ -81,9 +81,9 @@ def compile_kotlin_file(file_path):
     message = "compile " + os.path.basename(file_path)
 
     if error_occurred_local:
-        return (message, "(FAILED)")
+        return (message, "FAILED")
     else:
-        return (message, "(PASSED)")
+        return (message, "PASSED")
 
 def compile_snippets():
     global error_occurred
@@ -104,7 +104,7 @@ def compile_snippets():
             file_name, result = future.result()
             percentage_completed = (processed_files / total_files) * 100
             print(f"{file_name} {result} - {percentage_completed:.2f}% completed")
-            if result == "(FAILED)":
+            if result == "FAILED":
                 error_occurred = True
 
 def clean():
