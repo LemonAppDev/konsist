@@ -15,7 +15,12 @@ project_root = os.path.dirname(script_dir)
 build_dir = os.path.join(project_root, "build", "snippet-test")
 test_data_jar_file_path = build_dir + "/testData.jar"
 
-# Methods =+============================================================================================================
+# Methods =============================================================================================================
+
+# New function to print and immediately flush the output
+def print_and_flush(message):
+    print(message)
+    sys.stdout.flush()
 
 def compile_test_data():
     global error_occurred
@@ -30,12 +35,11 @@ def compile_test_data():
     try:
         subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
-        print(f"An error occurred while running the command:\n{e.stderr}")
-        print("compile TestData.jar FAILED")
+        print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
+        print_and_flush("compile TestData.jar FAILED")
         error_occurred = True
     else:
-        print("compile TestData.jar PASSED")
-        error_occurred = False
+        print_and_flush("compile TestData.jar PASSED")
 
 def create_build_dir():
     if not os.path.exists(build_dir):
@@ -77,6 +81,8 @@ def compile_kotlin_file(file_path):
         subprocess.run(snippet_command, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         error_occurred_local = True
+        # Print the error message when compilation fails
+        print_and_flush(e.stderr)
 
     message = "compile " + os.path.basename(file_path)
 
@@ -103,7 +109,7 @@ def compile_snippets():
             processed_files += 1
             file_name, result = future.result()
             percentage_completed = (processed_files / total_files) * 100
-            print(f"{file_name} {result} - {percentage_completed:.2f}% completed")
+            print_and_flush(f"{file_name} {result} - {percentage_completed:.2f}% completed")
             if result == "FAILED":
                 error_occurred = True
 
