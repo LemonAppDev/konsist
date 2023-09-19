@@ -60,7 +60,7 @@ class ApiKonsistTest {
             .withoutName(
                 "KoKDocTagsProvider",
                 "KoParentInterfaceProvider",
-            ) // remove after merge https://lemonappdev.atlassian.net/browse/KON-456 and release v.1.0.0
+            ) // remove after merge https://lemonappdev.atlassian.net/browse/KON-456 and release v1.0.0
             .withoutNameStartingWith("KoLocal") // remove after merge https://lemonappdev.atlassian.net/browse/KON-416
             .filter {
                 it.containsProperty { property ->
@@ -80,7 +80,7 @@ class ApiKonsistTest {
             .withoutName(
                 "KoKDocTagsProvider",
                 "KoParentInterfaceProvider",
-            ) // remove after merge https://lemonappdev.atlassian.net/browse/KON-456 and release v.1.0.0
+            ) // remove after merge https://lemonappdev.atlassian.net/browse/KON-456 and release v1.0.0
             .withoutNameStartingWith("KoLocal") // remove after merge https://lemonappdev.atlassian.net/browse/KON-416
             .filter {
                 it.containsProperty { property ->
