@@ -1,0 +1,5 @@
+interface SampleInterface {
+    class SampleBaseClass : SampleParentClass()
+
+    open class SampleParentClass
+}

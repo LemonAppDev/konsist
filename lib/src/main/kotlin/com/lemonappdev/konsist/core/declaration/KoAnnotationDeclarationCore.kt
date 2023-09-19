@@ -54,12 +54,9 @@ internal class KoAnnotationDeclarationCore private constructor(
             .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
             .firstOrNull { it.contains(name) }
 
-        val packagee = containingFile.packagee?.fullyQualifiedName
-
         return@lazy when {
             isInImports != null -> isInImports
             isInFile != null -> isInFile
-            packagee != null -> "$packagee.$name"
             else -> name
         }
     }

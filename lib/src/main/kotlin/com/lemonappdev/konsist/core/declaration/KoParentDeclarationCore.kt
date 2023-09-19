@@ -1,8 +1,10 @@
 package com.lemonappdev.konsist.core.declaration
 
 import com.intellij.psi.PsiElement
+import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
@@ -54,10 +56,21 @@ internal open class KoParentDeclarationCore private constructor(private val ktSu
             .substringBefore(" by")
 
     override val fullyQualifiedName: String by lazy {
-        containingFile
+        val isInImports = containingFile
             .imports
-            .firstOrNull { it.text.endsWith(".$name") }
-            ?.name ?: name
+            .map { it.name }
+            .firstOrNull { it.contains(name) }
+
+        val isInFile = containingFile
+            .declarations()
+            .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
+            .firstOrNull { it.contains(name) }
+
+        return@lazy when {
+            isInImports != null -> isInImports
+            isInFile != null -> isInFile
+            else -> name
+        }
     }
 
     override fun toString(): String = name

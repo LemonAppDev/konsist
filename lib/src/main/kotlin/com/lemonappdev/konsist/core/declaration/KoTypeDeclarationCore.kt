@@ -62,12 +62,9 @@ internal class KoTypeDeclarationCore private constructor(
             .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
             .firstOrNull { it.contains(sourceType) }
 
-        val packagee = containingFile.packagee?.fullyQualifiedName
-
         return@lazy when {
             isInImports != null -> isInImports
             isInFile != null -> isInFile + if (isNullable) "?" else ""
-            packagee != null -> "$packagee.$name"
             else -> name
         }
     }
