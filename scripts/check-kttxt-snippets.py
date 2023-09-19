@@ -4,6 +4,7 @@ import sys
 import os
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import multiprocessing
+import tempfile
 
 multiprocessing.set_start_method('fork')
 
@@ -17,7 +18,6 @@ test_data_jar_file_path = build_dir + "/testData.jar"
 
 # Methods =============================================================================================================
 
-# New function to print and immediately flush the output
 def print_and_flush(message):
     print(message)
     sys.stdout.flush()
@@ -67,13 +67,16 @@ def compile_kotlin_file(file_path):
     if "actual" in file_content or "expect" in file_content:
         return (os.path.basename(file_path), "SKIPPED")
 
+    # Create a temporary directory for the kotlinc output
+    temp_dir = tempfile.mkdtemp()
+
     # Create and run kotlinc command which verifies valid Kotlin code
     snippet_command = [
         "kotlinc",
         "-cp",
         test_data_jar_file_path,
         "-nowarn",
-        "-d", os.devnull,
+        "-d", temp_dir,
         file_path
     ]
 
@@ -84,12 +87,16 @@ def compile_kotlin_file(file_path):
         # Print the error message when compilation fails
         print_and_flush(e.stderr)
 
+    # Clean up the temporary directory
+    shutil.rmtree(temp_dir)
+
     message = "compile " + os.path.basename(file_path)
 
     if error_occurred_local:
         return (message, "FAILED")
     else:
         return (message, "PASSED")
+
 
 def compile_snippets():
     global error_occurred
