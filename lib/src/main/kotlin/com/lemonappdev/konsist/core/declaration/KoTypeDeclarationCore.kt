@@ -3,8 +3,11 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoGenericTypeProviderCore
@@ -49,10 +52,24 @@ internal class KoTypeDeclarationCore private constructor(
     }
 
     override val fullyQualifiedName: String by lazy {
-        containingFile
+        val isInImports = containingFile
             .imports
             .map { it.name }
-            .firstOrNull { it.contains(sourceType) } ?: name
+            .firstOrNull { it.contains(sourceType) }
+
+        val isInFile = containingFile
+            .declarations()
+            .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
+            .firstOrNull { it.contains(sourceType) }
+
+        val packagee = containingFile.packagee?.fullyQualifiedName
+
+        return@lazy when {
+            isInImports != null -> isInImports
+            isInFile != null -> isInFile + if (isNullable) "?" else ""
+            packagee != null -> "$packagee.$name"
+            else -> name
+        }
     }
 
     override fun toString(): String = name
@@ -64,6 +81,10 @@ internal class KoTypeDeclarationCore private constructor(
             ktTypeReference: KtTypeReference,
             containingDeclaration: KoContainingDeclarationProvider,
         ): KoTypeDeclaration =
-            cache.getOrCreateInstance(ktTypeReference, containingDeclaration) { KoTypeDeclarationCore(ktTypeReference) }
+            cache.getOrCreateInstance(ktTypeReference, containingDeclaration) {
+                KoTypeDeclarationCore(
+                    ktTypeReference
+                )
+            }
     }
 }
