@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.core.provider.KoKDocDescriptionProviderCore
-import com.lemonappdev.konsist.core.provider.tag.KoKDocTagsProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
@@ -22,6 +21,7 @@ import com.lemonappdev.konsist.core.provider.tag.KoKDocSampleTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocSeeTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocSinceTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocSuppressTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocTagsProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocThrowsTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocVersionTagProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine

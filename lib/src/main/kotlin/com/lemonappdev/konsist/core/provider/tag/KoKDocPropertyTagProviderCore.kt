@@ -5,7 +5,9 @@ import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.tag.KoKDocPropertyTagProvider
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 
-internal interface KoKDocPropertyTagProviderCore: KoBaseProviderCore, KoKDocPropertyTagProvider,
+internal interface KoKDocPropertyTagProviderCore :
+    KoBaseProviderCore,
+    KoKDocPropertyTagProvider,
     KoKDocTagsProviderCore {
     override val propertyTags: List<KoValuedKDocTagDeclaration>
         get() = tags.filter { it.name == KoKDocTag.PROPERTY }

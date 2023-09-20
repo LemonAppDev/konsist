@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.tag.KoKDocThrowsTagProvider
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 
-internal interface KoKDocThrowsTagProviderCore: KoBaseProviderCore, KoKDocThrowsTagProvider, KoKDocTagsProviderCore {
+internal interface KoKDocThrowsTagProviderCore : KoBaseProviderCore, KoKDocThrowsTagProvider, KoKDocTagsProviderCore {
     override val throwsTags: List<KoValuedKDocTagDeclaration>
         get() = tags.filter { it.name == KoKDocTag.THROWS }
             .map { it as KoValuedKDocTagDeclaration }

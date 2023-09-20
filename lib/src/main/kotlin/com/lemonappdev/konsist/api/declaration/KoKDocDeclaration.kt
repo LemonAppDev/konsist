@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.declaration
 
 import com.lemonappdev.konsist.api.provider.KoKDocDescriptionProvider
-import com.lemonappdev.konsist.api.provider.tag.KoKDocTagsProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
@@ -20,6 +19,7 @@ import com.lemonappdev.konsist.api.provider.tag.KoKDocSampleTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocSeeTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocSinceTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocSuppressTagProvider
+import com.lemonappdev.konsist.api.provider.tag.KoKDocTagsProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocThrowsTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocVersionTagProvider
 

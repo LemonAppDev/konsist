@@ -44,7 +44,7 @@ internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCo
         """
         Will be removed in v1.0.0. 
         If you passed one argument - replace with `hasTag`, otherwise with `hasAllTags`.
-       """
+       """,
     )
     override fun hasTags(vararg tags: KoKDocTag): Boolean = when {
         tags.isEmpty() -> {

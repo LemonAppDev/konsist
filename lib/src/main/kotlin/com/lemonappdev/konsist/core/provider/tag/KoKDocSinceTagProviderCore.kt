@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.tag.KoKDocSinceTagProvider
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 
-internal interface KoKDocSinceTagProviderCore: KoBaseProviderCore, KoKDocSinceTagProvider, KoKDocTagsProviderCore {
+internal interface KoKDocSinceTagProviderCore : KoBaseProviderCore, KoKDocSinceTagProvider, KoKDocTagsProviderCore {
     override val sinceTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.SINCE }
 }

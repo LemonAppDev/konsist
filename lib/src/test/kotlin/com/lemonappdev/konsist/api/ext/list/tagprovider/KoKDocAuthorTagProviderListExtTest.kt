@@ -1,15 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list.tagprovider
 
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
-import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
-import com.lemonappdev.konsist.api.ext.list.tagprovider.authorTags
-import com.lemonappdev.konsist.api.ext.list.tagprovider.exceptionTags
-import com.lemonappdev.konsist.api.ext.list.tagprovider.paramTags
-import com.lemonappdev.konsist.api.ext.list.tagprovider.propertyTags
-import com.lemonappdev.konsist.api.ext.list.tagprovider.sampleTags
-import com.lemonappdev.konsist.api.ext.list.tagprovider.seeTags
-import com.lemonappdev.konsist.api.ext.list.tagprovider.tags
-import com.lemonappdev.konsist.api.ext.list.tagprovider.throwsTags
 import com.lemonappdev.konsist.api.provider.tag.KoKDocAuthorTagProvider
 import io.mockk.every
 import io.mockk.mockk
