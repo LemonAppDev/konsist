@@ -6,6 +6,8 @@ import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
+import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
+import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
@@ -51,7 +53,7 @@ class KoProviderAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-error-with-custom-message' was violated (1 time)." +
-                    "\n$message\nInvalid declarations:",
+                        "\n$message\nInvalid declarations:",
             )
                 ?: throw e
         }
@@ -95,6 +97,68 @@ class KoProviderAssertOnSingleElementTest {
             e.message?.shouldContain("(SampleClass ClassDeclaration)")
                 ?: throw e
         }
+    }
+
+    @Test
+    fun `provider-assert-passes-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("provider-assert-passes-when-declaration-list-has-only-nulls")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .firstOrNull { it is KoTypeAliasProvider }
+
+        // when
+        sut.assertTrue { true }
+    }
+
+    @Test
+    fun `provider-assert-false-passes-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("provider-assert-false-passes-when-declaration-list-has-only-nulls")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .firstOrNull { it is KoTypeAliasProvider }
+
+        // when
+        sut.assertFalse { false }
+    }
+
+    @Test
+    fun `provider-assert-strict-fails-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("provider-assert-strict-fails-when-declaration-list-has-only-nulls")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .firstOrNull { it is KoTypeAliasProvider }
+
+        // when
+        val func = {
+            sut.assertTrue(strict = true) { true }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Method 'assertTrue' was called on a null value. Please ensure that the declaration is not null before " +
+                "calling this method."
+    }
+
+    @Test
+    fun `provider-assert-false-strict-fails-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("provider-assert-false-strict-fails-when-declaration-list-has-only-nulls")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .firstOrNull { it is KoTypeAliasProvider }
+
+        // when
+        val func = {
+            sut.assertFalse(strict = true) { false }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Method 'assertFalse' was called on a null value. Please ensure that the declaration is not null before " +
+                "calling this method."
     }
 
     @Test
