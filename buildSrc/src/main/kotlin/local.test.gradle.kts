@@ -3,6 +3,10 @@ plugins {
     id("com.adarshr.test-logger")
 }
 
+testlogger {
+    theme 'mocha'
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 
