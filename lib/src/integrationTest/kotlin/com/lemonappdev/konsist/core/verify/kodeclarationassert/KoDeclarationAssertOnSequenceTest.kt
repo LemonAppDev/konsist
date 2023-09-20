@@ -24,7 +24,8 @@ class KoDeclarationAssertOnSequenceTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' was violated (1 time)") ?: throw e
+            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' was violated (1 time)")
+                ?: throw e
         }
     }
 
@@ -39,7 +40,8 @@ class KoDeclarationAssertOnSequenceTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' was violated (1 time)") ?: throw e
+            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' was violated (1 time)")
+                ?: throw e
         }
     }
 
@@ -77,7 +79,7 @@ class KoDeclarationAssertOnSequenceTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
-                        "\n$message\nInvalid declarations",
+                    "\n$message\nInvalid declarations",
             )
                 ?: throw e
         }
@@ -117,7 +119,7 @@ class KoDeclarationAssertOnSequenceTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'file-declaration-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
-                        "\n$message\nInvalid files:",
+                    "\n$message\nInvalid files:",
             )
                 ?: throw e
         }
@@ -250,7 +252,8 @@ class KoDeclarationAssertOnSequenceTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list contains only null elements. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
+            "Declaration list contains only null elements. Please make sure that list of declarations contain items" +
+            " before calling the 'assertTrue' method."
     }
 
     @Test
@@ -268,7 +271,8 @@ class KoDeclarationAssertOnSequenceTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list contains only null elements. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
+            "Declaration list contains only null elements. Please make sure that list of declarations contain items" +
+            " before calling the 'assertFalse' method."
     }
 
     @Test

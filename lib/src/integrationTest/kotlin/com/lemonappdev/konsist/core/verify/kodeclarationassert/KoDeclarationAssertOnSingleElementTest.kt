@@ -59,7 +59,7 @@ class KoDeclarationAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-error-with-custom-message' was violated (1 time)." +
-                        "\n$message\nInvalid declarations",
+                    "\n$message\nInvalid declarations",
             )
                 ?: throw e
         }
@@ -79,7 +79,7 @@ class KoDeclarationAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
-                        "\n$message\nInvalid declarations",
+                    "\n$message\nInvalid declarations",
             )
                 ?: throw e
         }
@@ -99,7 +99,7 @@ class KoDeclarationAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'file-declaration-assert-error-with-custom-message' was violated (1 time)." +
-                        "\n$message\nInvalid files:",
+                    "\n$message\nInvalid files:",
             )
                 ?: throw e
         }
@@ -119,7 +119,7 @@ class KoDeclarationAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'file-declaration-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
-                        "\n$message\nInvalid files:",
+                    "\n$message\nInvalid files:",
             )
                 ?: throw e
         }
@@ -196,8 +196,8 @@ class KoDeclarationAssertOnSingleElementTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Method 'assertTrue' was called on a null value. Please ensure that the declaration is not null before " +
-                "calling this method."
+            "Method 'assertTrue' was called on a null value. Please ensure that the declaration is not null before " +
+            "calling this method."
     }
 
     @Test
@@ -215,8 +215,8 @@ class KoDeclarationAssertOnSingleElementTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Method 'assertFalse' was called on a null value. Please ensure that the declaration is not null before " +
-                "calling this method."
+            "Method 'assertFalse' was called on a null value. Please ensure that the declaration is not null before " +
+            "calling this method."
     }
 
     @Test

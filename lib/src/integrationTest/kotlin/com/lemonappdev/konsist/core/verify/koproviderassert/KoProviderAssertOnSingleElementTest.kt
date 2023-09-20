@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
-import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.verify.assertFalse
@@ -53,7 +52,7 @@ class KoProviderAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-error-with-custom-message' was violated (1 time)." +
-                        "\n$message\nInvalid declarations:",
+                    "\n$message\nInvalid declarations:",
             )
                 ?: throw e
         }
@@ -75,7 +74,7 @@ class KoProviderAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
-                        "\n$message\nInvalid declarations:",
+                    "\n$message\nInvalid declarations:",
             )
                 ?: throw e
         }
@@ -138,8 +137,8 @@ class KoProviderAssertOnSingleElementTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Method 'assertTrue' was called on a null value. Please ensure that the declaration is not null before " +
-                "calling this method."
+            "Method 'assertTrue' was called on a null value. Please ensure that the declaration is not null before " +
+            "calling this method."
     }
 
     @Test
@@ -157,8 +156,8 @@ class KoProviderAssertOnSingleElementTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Method 'assertFalse' was called on a null value. Please ensure that the declaration is not null before " +
-                "calling this method."
+            "Method 'assertFalse' was called on a null value. Please ensure that the declaration is not null before " +
+            "calling this method."
     }
 
     @Test

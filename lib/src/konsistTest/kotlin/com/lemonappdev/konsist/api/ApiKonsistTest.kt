@@ -11,8 +11,8 @@ import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
-import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
+import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 import java.util.*
 

@@ -56,7 +56,7 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-error-with-custom-message' was violated (1 time)." +
-                        "\n$message\nInvalid declarations",
+                    "\n$message\nInvalid declarations",
             )
                 ?: throw e
         }
@@ -75,7 +75,7 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
-                        "\n$message\nInvalid declarations",
+                    "\n$message\nInvalid declarations",
             )
                 ?: throw e
         }
@@ -94,7 +94,7 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'file-declaration-assert-error-with-custom-message' was violated (1 time)." +
-                        "\n$message\nInvalid files:",
+                    "\n$message\nInvalid files:",
             )
                 ?: throw e
         }
@@ -113,7 +113,7 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'file-declaration-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
-                        "\n$message\nInvalid files:",
+                    "\n$message\nInvalid files:",
             )
                 ?: throw e
         }
@@ -182,7 +182,7 @@ class KoDeclarationAssertOnListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
     }
 
     @Test
@@ -198,7 +198,7 @@ class KoDeclarationAssertOnListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
     }
 
     @Test
@@ -237,7 +237,8 @@ class KoDeclarationAssertOnListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list contains only null elements. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
+            "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
+            "before calling the 'assertTrue' method."
     }
 
     @Test
@@ -254,7 +255,8 @@ class KoDeclarationAssertOnListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-                "Declaration list contains only null elements. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
+            "Declaration list contains only null elements. Please make sure that list of declarations contain items" +
+            " before calling the 'assertFalse' method."
     }
 
     @Test

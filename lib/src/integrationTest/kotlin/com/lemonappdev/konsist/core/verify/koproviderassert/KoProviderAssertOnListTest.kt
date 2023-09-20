@@ -67,7 +67,7 @@ class KoProviderAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-error-with-custom-message-and-strict-set-to-true' was violated (2 times)." +
-                        "\n$message\nInvalid declarations:",
+                    "\n$message\nInvalid declarations:",
             )
                 ?: throw e
         }
