@@ -49,7 +49,7 @@ fun <E : KoBaseProvider> E?.assertFalse(
  * Asserts that all elements in the list match the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
- *               If set to `true`, an assertion error will be thrown if the list is empty,
+ *               If set to `true`, an assertion error will be thrown if the list is empty or contains only null values,
  *               which can be helpful for debugging.
  *               If set to `false`, the method will pass successfully when called on an empty list.
  *               By default, false.
@@ -70,7 +70,7 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
  * Asserts that no elements in the list match the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
- *               If set to `true`, an assertion error will be thrown if the list is empty,
+ *               If set to `true`, an assertion error will be thrown if the list is empty or contains only null values,
  *               which can be helpful for debugging.
  *               If set to `false`, the method will pass successfully when called on an empty list.
  *               By default, false.
@@ -91,7 +91,7 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
  * Asserts that all elements in the sequence match the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
- *               If set to `true`, an assertion error will be thrown if the sequence is empty,
+ *               If set to `true`, an assertion error will be thrown if the sequence is empty or contains only null values,
  *               which can be helpful for debugging.
  *               If set to `false`, the method will pass successfully when called on an empty sequence.
  *               By default, false.
@@ -112,7 +112,7 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
  * Asserts that no elements in the sequence match the specified predicate.
  *
  * @param strict A flag indicating whether strict checking should be enabled.
- *               If set to `true`, an assertion error will be thrown if the sequence is empty,
+ *               If set to `true`, an assertion error will be thrown if the sequence is empty or contains only null values,
  *               which can be helpful for debugging.
  *               If set to `false`, the method will pass successfully when called on an empty sequence.
  *               By default, false.
