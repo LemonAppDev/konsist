@@ -6,8 +6,8 @@ on:
     - cron:  '0 0 * * *'
   pull_request:
     types: [ opened, synchronize ]
-#    branches:
-#      - 'release-*'
+    branches:
+      - 'release-*'
 
 jobs:
   check-kttxt-snippets:
