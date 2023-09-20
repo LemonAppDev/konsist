@@ -67,7 +67,7 @@ def compile_kotlin_file(file_path):
     if "actual" in file_content or "expect" in file_content:
         return (os.path.basename(file_path), "SKIPPED")
 
-    # Create a temporary directory for the kotlinc output
+    # Create a temporary directory for the kotlinc output (compiled files are not saved to real disk)
     temp_dir = tempfile.mkdtemp()
 
     # Create and run kotlinc command which verifies valid Kotlin code
