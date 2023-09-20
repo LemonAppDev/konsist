@@ -67,7 +67,7 @@ class ApiKonsistTest {
                     property.type?.hasNameStartingWith("List<Ko") ?: false
                 }
             } // change this lines to .withProperty { } (after https://lemonappdev.atlassian.net/browse/KON-416)
-            .assert {
+            .assertTrue {
                 it.hasCorrectMethods(false)
             }
     }
@@ -95,7 +95,7 @@ class ApiKonsistTest {
             .filter {
                 providers.any { providerName -> it.hasNameContaining(providerName) }
             } // change this lines to .withProperty { } (after https://lemonappdev.atlassian.net/browse/KON-416)
-            .assert {
+            .assertTrue {
                 it.hasCorrectMethods(true)
             }
     }

@@ -6,31 +6,43 @@ import com.lemonappdev.konsist.core.verify.assert
 /**
  * Asserts that element match the specified predicate.
  *
+ * @param strict A flag indicating whether strict checking should be enabled.
+ *               If set to `true`, an assertion error will be thrown if assert is called on null,
+ *               which can be helpful for debugging.
+ *               If set to `false`, the method will pass successfully when called on null.
+ *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
-fun <E : KoBaseProvider> E.assertTrue(
+fun <E : KoBaseProvider> E?.assertTrue(
+    strict: Boolean = false,
     additionalMessage: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    listOf(this).assert(false, additionalMessage, function, positiveCheck = true)
+    listOf(this).assert(strict, additionalMessage, function, positiveCheck = true)
 }
 
 /**
  * Asserts that element not match the specified predicate.
  *
+ * @param strict A flag indicating whether strict checking should be enabled.
+ *               If set to `true`, an assertion error will be thrown if assert is called on null,
+ *               which can be helpful for debugging.
+ *               If set to `false`, the method will pass successfully when called on null.
+ *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
-fun <E : KoBaseProvider> E.assertFalse(
+fun <E : KoBaseProvider> E?.assertFalse(
+    strict: Boolean = false,
     additionalMessage: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    listOf(this).assert(false, additionalMessage, function, positiveCheck = false)
+    listOf(this).assert(strict, additionalMessage, function, positiveCheck = false)
 }
 
 /**
@@ -46,7 +58,7 @@ fun <E : KoBaseProvider> E.assertFalse(
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
-fun <E : KoBaseProvider> List<E>.assertTrue(
+fun <E : KoBaseProvider> List<E?>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
     function: (E) -> Boolean?,
@@ -67,7 +79,7 @@ fun <E : KoBaseProvider> List<E>.assertTrue(
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
-fun <E : KoBaseProvider> List<E>.assertFalse(
+fun <E : KoBaseProvider> List<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
     function: (E) -> Boolean?,
@@ -88,7 +100,7 @@ fun <E : KoBaseProvider> List<E>.assertFalse(
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
-fun <E : KoBaseProvider> Sequence<E>.assertTrue(
+fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
     function: (E) -> Boolean?,
@@ -109,7 +121,7 @@ fun <E : KoBaseProvider> Sequence<E>.assertTrue(
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
-fun <E : KoBaseProvider> Sequence<E>.assertFalse(
+fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
     function: (E) -> Boolean?,

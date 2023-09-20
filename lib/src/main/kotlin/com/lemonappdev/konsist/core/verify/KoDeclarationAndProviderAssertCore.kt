@@ -12,7 +12,7 @@ import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
-internal fun <E : KoBaseProvider> List<E>.assert(
+internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
     function: (E) -> Boolean?,
@@ -28,19 +28,18 @@ internal fun <E : KoBaseProvider> List<E>.assert(
             .takeWhile { it != "invoke0" }
             .last()
 
+        val assertMethodName = getTestMethodNameFromFourthIndex()
+
         if (strict) {
-            checkIfLocalListIsEmpty(this, getTestMethodNameFromFourthIndex())
+            checkIfLocalListIsEmpty(this, assertMethodName)
+            checkIfLocalListHasOnlyNullElements(this, assertMethodName)
         }
 
-        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this, testMethodName)
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), testMethodName)
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
-            if (function(it) == null) {
-                positiveCheck
-            } else {
-                function(it)
-            }
+            function(it) ?: positiveCheck
         }
 
         getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
@@ -83,11 +82,26 @@ internal fun <E : KoBaseProvider> List<E>.assert(
     }
 }
 
-private fun checkIfLocalListIsEmpty(localList: List<*>, testMethodName: String) {
+fun checkIfLocalListHasOnlyNullElements(localList: List<*>, testMethodName: String) {
+    val hasOnlyNUllElements = localList.all { it == null }
+    if (hasOnlyNUllElements && (localList.size > 1)) {
+        throw KoPreconditionFailedException(
+            "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
+                    "before calling the '$testMethodName' method.",
+        )
+    } else if (hasOnlyNUllElements && (localList.size == 1)) {
+        throw KoPreconditionFailedException(
+            "Method '$testMethodName' was called on a null value. Please ensure that the declaration is not null before " +
+                    "calling this method.",
+        )
+    }
+}
+
+fun checkIfLocalListIsEmpty(localList: List<*>, testMethodName: String) {
     if (localList.isEmpty()) {
         throw KoPreconditionFailedException(
             "Declaration list is empty. Please make sure that list of declarations contain items " +
-                "before calling the '$testMethodName' method.",
+                    "before calling the '$testMethodName' method.",
         )
     }
 }
@@ -99,11 +113,11 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                (
-                    it.name == "Suppress" &&
-                        it.text.contains("\"konsist.$testMethodName\"") ||
-                        it.text.contains("\"$testMethodName\"")
-                    )
+                    (
+                            it.name == "Suppress" &&
+                                    it.text.contains("\"konsist.$testMethodName\"") ||
+                                    it.text.contains("\"$testMethodName\"")
+                            )
         }
         .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it, testMethodName) }
 
