@@ -43,7 +43,7 @@ fun `classes with 'UseCase' suffix should reside in 'usecase' package`() {
     Konsist.scopeFromProject()
         .classes()
         .withNameEndingWith("UseCase")
-        .assert { it.resideInPackage("..usecase..") }
+        .assertTrue { it.resideInPackage("..usecase..") }
 }
 ```
 
@@ -55,7 +55,7 @@ fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
     Konsist.scopeFromProject()
         .classes()
         .withAllParentsOf(ViewModel::class)
-        .assert { it.name.endsWith("ViewModel") }
+        .assertTrue { it.name.endsWith("ViewModel") }
 }
 ```
 
@@ -68,7 +68,7 @@ fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() 
         .scopeFromProject()
         .interfaces()
         .withAllAnnotationsOf(Repository::class)
-        .assert { it.hasNameEndingWith("Repository") }
+        .assertTrue { it.hasNameEndingWith("Repository") }
 }
 ```
 
