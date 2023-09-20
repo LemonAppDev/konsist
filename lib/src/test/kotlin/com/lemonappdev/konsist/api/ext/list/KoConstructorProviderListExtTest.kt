@@ -33,6 +33,42 @@ class KoConstructorProviderListExtTest {
     }
 
     @Test
+    fun `withConstructors() returns declaration with constructor`() {
+        // given
+        val declaration1: KoConstructorProvider = mockk {
+            every { hasConstructors() } returns true
+        }
+        val declaration2: KoConstructorProvider = mockk {
+            every { hasConstructors() } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withConstructors()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutConstructors() returns declaration without constructor`() {
+        // given
+        val declaration1: KoConstructorProvider = mockk {
+            every { hasConstructors() } returns true
+        }
+        val declaration2: KoConstructorProvider = mockk {
+            every { hasConstructors() } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutConstructors()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withConstructor() returns declaration with constructor`() {
         // given
         val declaration1: KoConstructorProvider = mockk {
