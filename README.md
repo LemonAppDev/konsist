@@ -59,6 +59,30 @@ fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
 }
 ```
 
+### Android Specific Check With Specific Module
+
+```kotlin
+@Test
+fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
+    Konsist.scopeFromModule("app")
+        .classes()
+        .withAllParentsOf(ViewModel::class)
+        .assert { it.name.endsWith("ViewModel") }
+}
+```
+
+### Android Specific Check With Nested Module
+
+```kotlin
+@Test
+fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
+    Konsist.scopeFromModule("feature/home")
+        .classes()
+        .withAllParentsOf(ViewModel::class)
+        .assert { it.name.endsWith("ViewModel") }
+}
+```
+
 ### Spring Specific Check
 
 ```kotlin
