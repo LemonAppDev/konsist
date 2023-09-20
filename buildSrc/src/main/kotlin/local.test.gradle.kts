@@ -3,10 +3,6 @@ plugins {
     id("com.adarshr.test-logger")
 }
 
-testlogger {
-    theme 'mocha'
-}
-
 tasks.withType<Test> {
     useJUnitPlatform()
 
@@ -15,4 +11,8 @@ tasks.withType<Test> {
         "junit.jupiter.execution.parallel.enabled" to "true",
         "junit.jupiter.execution.parallel.mode.default " to "concurrent",
     )
+}
+
+testlogger {
+    theme 'mocha'
 }
