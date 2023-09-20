@@ -1,3 +1,5 @@
+import com.adarshr.gradle.testlogger.theme.ThemeType
+
 plugins {
     id("org.gradle.jvm-test-suite")
     id("com.adarshr.test-logger")
@@ -14,5 +16,5 @@ tasks.withType<Test> {
 }
 
 testlogger {
-    theme = "mocha"
+    theme = ThemeType.MOCHA
 }
