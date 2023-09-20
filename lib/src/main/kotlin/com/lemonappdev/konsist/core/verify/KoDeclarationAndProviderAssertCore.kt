@@ -72,11 +72,7 @@ internal fun <E : KoBaseProvider> List<E>.assert(
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
-            if (function(it) == null) {
-                positiveCheck
-            } else {
-                function(it)
-            }
+            function(it) ?: positiveCheck
         }
 
         getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
@@ -155,7 +151,7 @@ private fun checkIfSuppressed(item: KoAnnotationProvider, testMethodName: String
 
 private fun getResult(
     items: List<*>,
-    result: Map<Boolean?, List<Any>>,
+    result: Map<Boolean, List<Any>>,
     positiveCheck: Boolean,
     testMethodName: String,
     additionalMessage: String?,
