@@ -5,11 +5,11 @@ import os
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import multiprocessing
 import tempfile
+import time
 
 multiprocessing.set_start_method('fork')
 
 # Variables ============================================================================================================
-
 error_occurred = False
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
@@ -41,6 +41,8 @@ def compile_test_data():
     else:
         print_and_flush("compile TestData.jar PASSED")
 
+    print()
+
 def create_build_dir():
     if not os.path.exists(build_dir):
         os.makedirs(build_dir)
@@ -63,14 +65,11 @@ def compile_kotlin_file(file_path):
     with open(file_path, 'r') as file:
         file_content = file.read()
 
-    # Ignore multiplatform snippets
     if "actual" in file_content or "expect" in file_content:
         return (os.path.basename(file_path), "SKIPPED")
 
-    # Create a temporary directory for the kotlinc output (compiled files are not saved to real disk)
     temp_dir = tempfile.mkdtemp()
 
-    # Create and run kotlinc command which verifies valid Kotlin code
     snippet_command = [
         "kotlinc",
         "-cp",
@@ -84,10 +83,8 @@ def compile_kotlin_file(file_path):
         subprocess.run(snippet_command, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         error_occurred_local = True
-        # Print the error message when compilation fails
         print_and_flush(e.stderr)
 
-    # Clean up the temporary directory
     shutil.rmtree(temp_dir)
 
     message = "compile " + os.path.basename(file_path)
@@ -96,7 +93,6 @@ def compile_kotlin_file(file_path):
         return (message, "FAILED")
     else:
         return (message, "PASSED")
-
 
 def compile_snippets():
     global error_occurred
@@ -120,22 +116,35 @@ def compile_snippets():
             if result == "FAILED":
                 error_occurred = True
 
+    return total_files
+
 def clean():
     shutil.rmtree(build_dir)
     subprocess.run(["git", "clean", "-f"])
 
 # Script ===============================================================================================================
 
+start_time = time.time()  # Capture the start time
+
 compile_test_data()
 create_build_dir()
 copy_and_kttxt_files_and_change_extension_to_kt()
 
+num_tests = 0
 if __name__ == '__main__':
-    compile_snippets()
+    num_tests = compile_snippets()
 
 clean()
 
+end_time = time.time()  # Capture the end time to calculate the duration
+duration = end_time - start_time
+
+print()
+
 if error_occurred:
+    print_and_flush(f"FAILURE: Executed {num_tests} tests in {duration:.2f}s")
     sys.exit(1)
 else:
+
+    print_and_flush(f"SUCCESS: Executed {num_tests} tests in {duration:.2f}s")
     sys.exit(0)
