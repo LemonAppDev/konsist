@@ -14,5 +14,5 @@ tasks.withType<Test> {
 }
 
 testlogger {
-    theme "mocha"
+    theme = "mocha"
 }
