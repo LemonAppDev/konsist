@@ -49,23 +49,7 @@ internal class KoTypeDeclarationCore private constructor(
         }
     }
 
-    override val fullyQualifiedName: String by lazy {
-        val isInImports = containingFile
-            .imports
-            .map { it.name }
-            .firstOrNull { it.contains(sourceType) }
-
-        val isInFile = containingFile
-            .declarations()
-            .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
-            .firstOrNull { it.contains(sourceType) }
-
-        return@lazy when {
-            isInImports != null -> isInImports
-            isInFile != null -> isInFile + if (isNullable) "?" else ""
-            else -> name
-        }
-    }
+    override val textUsedToFqn: String by lazy { sourceType }
 
     override fun toString(): String = name
 

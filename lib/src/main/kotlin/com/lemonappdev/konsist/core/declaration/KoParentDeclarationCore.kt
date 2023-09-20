@@ -54,24 +54,6 @@ internal open class KoParentDeclarationCore private constructor(private val ktSu
             .replace(EndOfLine.UNIX.value, " ")
             .substringBefore(" by")
 
-    override val fullyQualifiedName: String by lazy {
-        val isInImports = containingFile
-            .imports
-            .map { it.name }
-            .firstOrNull { it.contains(name) }
-
-        val isInFile = containingFile
-            .declarations()
-            .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
-            .firstOrNull { it.contains(name) }
-
-        return@lazy when {
-            isInImports != null -> isInImports
-            isInFile != null -> isInFile
-            else -> name
-        }
-    }
-
     override fun toString(): String = name
 
     internal companion object {

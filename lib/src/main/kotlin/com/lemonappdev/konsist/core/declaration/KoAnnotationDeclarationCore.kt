@@ -42,25 +42,6 @@ internal class KoAnnotationDeclarationCore private constructor(
 
     override val name: String by lazy { ktAnnotationEntry.shortName.toString() }
 
-    override val fullyQualifiedName: String by lazy {
-        val isInImports = containingFile
-            .imports
-            .map { it.name }
-            .firstOrNull { it.contains(name) }
-
-        val isInFile = containingFile
-            .declarations()
-            .filterNot { it is KoAnnotationDeclaration }
-            .mapNotNull { (it as? KoFullyQualifiedNameProvider)?.fullyQualifiedName }
-            .firstOrNull { it.contains(name) }
-
-        return@lazy when {
-            isInImports != null -> isInImports
-            isInFile != null -> isInFile
-            else -> name
-        }
-    }
-
     override val arguments: List<KoArgumentDeclaration> by lazy {
         ktAnnotationEntry
             .children
