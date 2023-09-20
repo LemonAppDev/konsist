@@ -54,6 +54,26 @@ class KoProviderAssertOnListTest {
     }
 
     @Test
+    fun `provider-assert-error-with-custom-message-and-strict-set-to-true`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("provider-assert-error-with-custom-message-and-strict-set-to-true")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+
+        // then
+        try {
+            sut.assertTrue(strict = true, additionalMessage = message) { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'provider-assert-error-with-custom-message-and-strict-set-to-true' was violated (2 times)." +
+                        "\n$message\nInvalid declarations:",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
     fun `provider-assert-displaying-correct-failed-declaration-type`() {
         // given
         val sut = getSnippetFile("provider-assert-displaying-correct-failed-declaration-type")

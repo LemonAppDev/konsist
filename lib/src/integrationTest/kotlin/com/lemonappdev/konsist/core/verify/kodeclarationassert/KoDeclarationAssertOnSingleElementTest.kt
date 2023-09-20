@@ -6,8 +6,10 @@ import com.lemonappdev.konsist.api.ext.list.localFunctions
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
+import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoDeclarationAssertOnSingleElementTest {
@@ -57,7 +59,27 @@ class KoDeclarationAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-error-with-custom-message' was violated (1 time)." +
-                    "\n$message\nInvalid declarations",
+                        "\n$message\nInvalid declarations",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `declaration-assert-error-with-custom-message-and-strict-set-to-true`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("declaration-assert-error-with-custom-message-and-strict-set-to-true")
+            .classes()
+            .first()
+
+        // then
+        try {
+            sut.assertTrue(strict = true, additionalMessage = message) { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
+                        "\n$message\nInvalid declarations",
             )
                 ?: throw e
         }
@@ -77,7 +99,27 @@ class KoDeclarationAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'file-declaration-assert-error-with-custom-message' was violated (1 time)." +
-                    "\n$message\nInvalid files:",
+                        "\n$message\nInvalid files:",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `file-declaration-assert-error-with-custom-message-and-strict-set-to-true`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message-and-strict-set-to-true")
+            .files
+            .first()
+
+        // then
+        try {
+            sut.assertTrue(strict = true, additionalMessage = message) { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'file-declaration-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
+                        "\n$message\nInvalid files:",
             )
                 ?: throw e
         }
@@ -113,6 +155,68 @@ class KoDeclarationAssertOnSingleElementTest {
             e.message?.shouldContain("(file-declaration-assert-displaying-correct-failed-declaration-type FileDeclaration)")
                 ?: throw e
         }
+    }
+
+    @Test
+    fun `declaration-assert-passes-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-passes-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
+            .first()
+
+        // when
+        sut.assertTrue { true }
+    }
+
+    @Test
+    fun `declaration-assert-false-passes-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-false-passes-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
+            .first()
+
+        // when
+        sut.assertFalse { false }
+    }
+
+    @Test
+    fun `declaration-assert-strict-fails-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-strict-fails-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
+            .first()
+
+        // when
+        val func = {
+            sut.assertTrue(strict = true) { true }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Method 'assertTrue' was called on a null value. Please ensure that the declaration is not null before " +
+                "calling this method."
+    }
+
+    @Test
+    fun `declaration-assert-false-strict-fails-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-false-strict-fails-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
+            .first()
+
+        // when
+        val func = {
+            sut.assertFalse(strict = true) { false }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Method 'assertFalse' was called on a null value. Please ensure that the declaration is not null before " +
+                "calling this method."
     }
 
     @Test

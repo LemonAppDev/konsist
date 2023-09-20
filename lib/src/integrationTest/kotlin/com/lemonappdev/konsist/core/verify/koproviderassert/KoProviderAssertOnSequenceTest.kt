@@ -49,7 +49,28 @@ class KoProviderAssertOnSequenceTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-error-with-custom-message' was violated (2 times)." +
-                    "\n$message\nInvalid declarations:",
+                        "\n$message\nInvalid declarations:",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `provider-assert-error-with-custom-message-and-strict-set-to-true`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("provider-assert-error-with-custom-message-and-strict-set-to-true")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
+
+        // then
+        try {
+            sut.assertTrue(strict = true, additionalMessage = message) { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'provider-assert-error-with-custom-message-and-strict-set-to-true' was violated (2 times)." +
+                        "\n$message\nInvalid declarations:",
             )
                 ?: throw e
         }
@@ -97,7 +118,7 @@ class KoProviderAssertOnSequenceTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
     }
 
     @Test
@@ -116,7 +137,7 @@ class KoProviderAssertOnSequenceTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
     }
 
     @Test

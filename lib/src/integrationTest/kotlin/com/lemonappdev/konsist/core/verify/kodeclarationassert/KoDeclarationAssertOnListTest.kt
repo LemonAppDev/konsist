@@ -56,7 +56,26 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-error-with-custom-message' was violated (1 time)." +
-                    "\n$message\nInvalid declarations",
+                        "\n$message\nInvalid declarations",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `declaration-assert-error-with-custom-message-and-strict-set-to-true`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("declaration-assert-error-with-custom-message-and-strict-set-to-true")
+            .classes()
+
+        // then
+        try {
+            sut.assertTrue(strict = true, additionalMessage = message) { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
+                        "\n$message\nInvalid declarations",
             )
                 ?: throw e
         }
@@ -75,7 +94,26 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'file-declaration-assert-error-with-custom-message' was violated (1 time)." +
-                    "\n$message\nInvalid files:",
+                        "\n$message\nInvalid files:",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `file-declaration-assert-error-with-custom-message-and-strict-set-to-true`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message-and-strict-set-to-true")
+            .files
+
+        // then
+        try {
+            sut.assertTrue(strict = true, additionalMessage = message) { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'file-declaration-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
+                        "\n$message\nInvalid files:",
             )
                 ?: throw e
         }
@@ -144,7 +182,7 @@ class KoDeclarationAssertOnListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
     }
 
     @Test
@@ -160,7 +198,63 @@ class KoDeclarationAssertOnListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
+    }
+
+    @Test
+    fun `declaration-assert-passes-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-passes-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
+
+        // when
+        sut.assertTrue { true }
+    }
+
+    @Test
+    fun `declaration-assert-false-passes-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-false-passes-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
+
+        // when
+        sut.assertFalse { false }
+    }
+
+    @Test
+    fun `declaration-assert-strict-fails-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-strict-fails-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
+
+        // when
+        val func = {
+            sut.assertTrue(strict = true) { true }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Declaration list contains only null elements. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
+    }
+
+    @Test
+    fun `declaration-assert-false-strict-fails-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-false-strict-fails-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
+
+        // when
+        val func = {
+            sut.assertFalse(strict = true) { false }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Declaration list contains only null elements. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
     }
 
     @Test
