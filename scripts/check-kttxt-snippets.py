@@ -15,6 +15,8 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
 build_dir = os.path.join(project_root, "build", "snippet-test")
 test_data_jar_file_path = build_dir + "/testData.jar"
+success = "SUCCESS"
+failed = "FAILED"
 
 # Methods =============================================================================================================
 
@@ -36,10 +38,10 @@ def compile_test_data():
         subprocess.run(command_converting_testdata_to_jar, check=True, text=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         print_and_flush(f"An error occurred while running the command:\n{e.stderr}")
-        print_and_flush("compile TestData.jar FAILED")
+        print_and_flush("compile TestData.jar " + failed)
         error_occurred = True
     else:
-        print_and_flush("compile TestData.jar PASSED")
+        print_and_flush("compile TestData.jar " + success)
 
     print()
 
@@ -90,9 +92,9 @@ def compile_kotlin_file(file_path):
     message = "compile " + os.path.basename(file_path)
 
     if error_occurred_local:
-        return (message, "FAILED")
+        return (message, failed)
     else:
-        return (message, "PASSED")
+        return (message, success)
 
 def compile_snippets():
     global error_occurred
@@ -142,9 +144,9 @@ duration = end_time - start_time
 print()
 
 if error_occurred:
-    print_and_flush(f"FAILURE: Executed {num_tests} tests in {duration:.2f}s")
+    print_and_flush(f"{failed}: Executed {num_tests} tests in {duration:.2f}s")
     sys.exit(1)
 else:
 
-    print_and_flush(f"SUCCESS: Executed {num_tests} tests in {duration:.2f}s")
+    print_and_flush(f"{success}: Executed {num_tests} tests in {duration:.2f}s")
     sys.exit(0)
