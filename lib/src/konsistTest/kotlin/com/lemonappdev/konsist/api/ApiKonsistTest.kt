@@ -55,10 +55,7 @@ class ApiKonsistTest {
         Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
             .interfaces()
-            .withoutName(
-                "KoKDocTagsProvider",
-                "KoParentInterfaceProvider",
-            ) // remove after merge https://lemonappdev.atlassian.net/browse/KON-456 and release v1.0.0
+            .withoutName("KoParentInterfaceProvider") // remove after release v1.0.0
             .withoutNameStartingWith("KoLocal") // remove after merge https://lemonappdev.atlassian.net/browse/KON-416
             .filter {
                 it.containsProperty { property ->
@@ -75,10 +72,7 @@ class ApiKonsistTest {
         val providers = Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
             .interfaces()
-            .withoutName(
-                "KoKDocTagsProvider",
-                "KoParentInterfaceProvider",
-            ) // remove after merge https://lemonappdev.atlassian.net/browse/KON-456 and release v1.0.0
+            .withoutName("KoParentInterfaceProvider") // remove after release v1.0.0
             .withoutNameStartingWith("KoLocal") // remove after merge https://lemonappdev.atlassian.net/browse/KON-416
             .filter {
                 it.containsProperty { property ->

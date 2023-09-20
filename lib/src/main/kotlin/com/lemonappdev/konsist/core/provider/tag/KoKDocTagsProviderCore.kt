@@ -1,11 +1,13 @@
-package com.lemonappdev.konsist.core.provider
+package com.lemonappdev.konsist.core.provider.tag
 
 import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
-import com.lemonappdev.konsist.api.provider.KoKDocTagsProvider
+import com.lemonappdev.konsist.api.provider.tag.KoKDocTagsProvider
 import com.lemonappdev.konsist.core.declaration.KoKDocTagDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoValuedKDocTagDeclarationCore
+import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
 import java.util.*
 
@@ -38,57 +40,12 @@ internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCo
     override val numTags: Int
         get() = tags.size
 
-    override val paramTags: List<KoValuedKDocTagDeclaration>
-        get() = tags.filter { it.name == KoKDocTag.PARAM }
-            .map { it as KoValuedKDocTagDeclaration }
-
-    override val returnTag: KoKDocTagDeclaration?
-        get() = tags.firstOrNull { it.name == KoKDocTag.RETURN }
-
-    override val constructorTag: KoKDocTagDeclaration?
-        get() = tags.firstOrNull { it.name == KoKDocTag.CONSTRUCTOR }
-
-    override val receiverTag: KoKDocTagDeclaration?
-        get() = tags.firstOrNull { it.name == KoKDocTag.RECEIVER }
-
-    override val propertyTags: List<KoValuedKDocTagDeclaration>
-        get() = tags.filter { it.name == KoKDocTag.PROPERTY }
-            .map { it as KoValuedKDocTagDeclaration }
-
-    override val throwsTags: List<KoValuedKDocTagDeclaration>
-        get() = tags.filter { it.name == KoKDocTag.THROWS }
-            .map { it as KoValuedKDocTagDeclaration }
-
-    override val exceptionTags: List<KoValuedKDocTagDeclaration>
-        get() = tags.filter { it.name == KoKDocTag.EXCEPTION }
-            .map { it as KoValuedKDocTagDeclaration }
-
-    override val sampleTags: List<KoValuedKDocTagDeclaration>
-        get() = tags.filter { it.name == KoKDocTag.SAMPLE }
-            .map { it as KoValuedKDocTagDeclaration }
-
-    override val seeTags: List<KoValuedKDocTagDeclaration>
-        get() = tags.filter { it.name == KoKDocTag.SEE }
-            .map { it as KoValuedKDocTagDeclaration }
-
-    override val authorTags: List<KoKDocTagDeclaration>
-        get() = tags.filter { it.name == KoKDocTag.AUTHOR }
-
-    override val sinceTag: KoKDocTagDeclaration?
-        get() = tags.firstOrNull { it.name == KoKDocTag.SINCE }
-
-    override val suppressTag: KoKDocTagDeclaration?
-        get() = tags.firstOrNull { it.name == KoKDocTag.SUPPRESS }
-
-    override val versionTag: KoKDocTagDeclaration?
-        get() = tags.firstOrNull { it.name == KoKDocTag.VERSION }
-
-    override val propertySetterTag: KoKDocTagDeclaration?
-        get() = tags.firstOrNull { it.name == KoKDocTag.PROPERTY_SETTER }
-
-    override val propertyGetterTag: KoKDocTagDeclaration?
-        get() = tags.firstOrNull { it.name == KoKDocTag.PROPERTY_GETTER }
-
+    @Deprecated(
+        """
+        Will be removed in v1.0.0. 
+        If you passed one argument - replace with `hasTag`, otherwise with `hasAllTags`.
+       """
+    )
     override fun hasTags(vararg tags: KoKDocTag): Boolean = when {
         tags.isEmpty() -> {
             this.tags.isNotEmpty()
@@ -102,6 +59,17 @@ internal interface KoKDocTagsProviderCore : KoKDocTagsProvider, KoTextProviderCo
             }
         }
     }
+
+    override fun hasTags(): Boolean = tags.isNotEmpty()
+
+    override fun hasTag(tag: KoKDocTag, vararg tags: KoKDocTag): Boolean {
+        val givenKoKDocTags = tags.toList() + tag
+
+        return givenKoKDocTags.any { this.tags.any { tag -> tag.name == it } }
+    }
+
+    override fun hasAllTags(tag: KoKDocTag, vararg tags: KoKDocTag): Boolean =
+        this.tags.map { it.name }.containsAll(tags.toList() + tag)
 
     private fun parseToValuedTag(koKDocTag: KoKDocTag, sentence: String): KoValuedKDocTagDeclaration {
         val parsed = sentence.split(" ")

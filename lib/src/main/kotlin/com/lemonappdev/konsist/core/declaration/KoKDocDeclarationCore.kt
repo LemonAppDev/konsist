@@ -3,12 +3,27 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.core.provider.KoKDocDescriptionProviderCore
-import com.lemonappdev.konsist.core.provider.KoKDocTagsProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocTagsProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocAuthorTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocConstructorTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocExceptionTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocParamTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocPropertyGetterTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocPropertySetterTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocPropertyTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocReceiverTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocReturnTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocSampleTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocSeeTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocSinceTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocSuppressTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocThrowsTagProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocVersionTagProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 
@@ -20,7 +35,22 @@ internal class KoKDocDeclarationCore(private val kDocElement: KDocElement) :
     KoLocationProviderCore,
     KoPathProviderCore,
     KoModuleProviderCore,
-    KoSourceSetProviderCore {
+    KoSourceSetProviderCore,
+    KoKDocAuthorTagProviderCore,
+    KoKDocReceiverTagProviderCore,
+    KoKDocReturnTagProviderCore,
+    KoKDocParamTagProviderCore,
+    KoKDocSeeTagProviderCore,
+    KoKDocSampleTagProviderCore,
+    KoKDocPropertyTagProviderCore,
+    KoKDocPropertyGetterTagProviderCore,
+    KoKDocVersionTagProviderCore,
+    KoKDocThrowsTagProviderCore,
+    KoKDocSuppressTagProviderCore,
+    KoKDocExceptionTagProviderCore,
+    KoKDocPropertySetterTagProviderCore,
+    KoKDocConstructorTagProviderCore,
+    KoKDocSinceTagProviderCore {
     override val psiElement: PsiElement by lazy { kDocElement }
 
     override val text: String by lazy {
