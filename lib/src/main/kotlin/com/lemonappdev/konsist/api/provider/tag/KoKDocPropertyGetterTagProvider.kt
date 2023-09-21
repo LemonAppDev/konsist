@@ -11,4 +11,11 @@ interface KoKDocPropertyGetterTagProvider : KoBaseProvider {
      * The `@propertyGetter` tag.
      */
     val propertyGetterTag: KoKDocTagDeclaration?
+
+    /**
+     * Whatever the declaration has property getter tag.
+     *
+     * @return `true` if the declaration has property getter tag, `false` otherwise.
+     */
+    fun hasPropertyGetterTag(): Boolean
 }

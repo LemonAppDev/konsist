@@ -11,4 +11,11 @@ interface KoKDocVersionTagProvider : KoBaseProvider {
      * The `@version` tag.
      */
     val versionTag: KoKDocTagDeclaration?
+
+    /**
+     * Whatever the declaration has version tag.
+     *
+     * @return `true` if the declaration has version tag, `false` otherwise.
+     */
+    fun hasVersionTag(): Boolean
 }

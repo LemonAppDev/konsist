@@ -8,7 +8,9 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 internal interface KoKDocConstructorTagProviderCore :
     KoBaseProviderCore,
     KoKDocConstructorTagProvider,
-    KoKDocTagsProviderCore {
+    KoKDocTagProviderCore {
     override val constructorTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.CONSTRUCTOR }
+
+    override fun hasConstructorTag(): Boolean = constructorTag != null
 }

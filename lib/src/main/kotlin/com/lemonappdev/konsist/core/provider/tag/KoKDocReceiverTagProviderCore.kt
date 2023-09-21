@@ -8,7 +8,9 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 internal interface KoKDocReceiverTagProviderCore :
     KoBaseProviderCore,
     KoKDocReceiverTagProvider,
-    KoKDocTagsProviderCore {
+    KoKDocTagProviderCore {
     override val receiverTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.RECEIVER }
+
+    override fun hasReceiverTag(): Boolean = receiverTag != null
 }

@@ -11,4 +11,11 @@ interface KoKDocReturnTagProvider : KoBaseProvider {
      * The `@return` tag.
      */
     val returnTag: KoKDocTagDeclaration?
+
+    /**
+     * Whatever the declaration has return tag.
+     *
+     * @return `true` if the declaration has return tag, `false` otherwise.
+     */
+    fun hasReturnTag(): Boolean
 }

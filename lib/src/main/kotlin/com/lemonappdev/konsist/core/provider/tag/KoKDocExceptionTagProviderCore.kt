@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 internal interface KoKDocExceptionTagProviderCore :
     KoBaseProviderCore,
     KoKDocExceptionTagProvider,
-    KoKDocTagsProviderCore {
+    KoKDocTagProviderCore {
     override val exceptionTags: List<KoValuedKDocTagDeclaration>
         get() = tags.filter { it.name == KoKDocTag.EXCEPTION }
             .map { it as KoValuedKDocTagDeclaration }

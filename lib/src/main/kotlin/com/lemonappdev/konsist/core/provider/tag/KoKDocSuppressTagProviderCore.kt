@@ -8,7 +8,9 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 internal interface KoKDocSuppressTagProviderCore :
     KoBaseProviderCore,
     KoKDocSuppressTagProvider,
-    KoKDocTagsProviderCore {
+    KoKDocTagProviderCore {
     override val suppressTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.SUPPRESS }
+
+    override fun hasSuppressTag(): Boolean = suppressTag != null
 }

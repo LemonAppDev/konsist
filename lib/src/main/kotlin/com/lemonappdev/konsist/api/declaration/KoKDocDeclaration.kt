@@ -19,7 +19,7 @@ import com.lemonappdev.konsist.api.provider.tag.KoKDocSampleTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocSeeTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocSinceTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocSuppressTagProvider
-import com.lemonappdev.konsist.api.provider.tag.KoKDocTagsProvider
+import com.lemonappdev.konsist.api.provider.tag.KoKDocTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocThrowsTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocVersionTagProvider
 
@@ -29,7 +29,7 @@ import com.lemonappdev.konsist.api.provider.tag.KoKDocVersionTagProvider
 interface KoKDocDeclaration :
     KoBaseDeclaration,
     KoKDocDescriptionProvider,
-    KoKDocTagsProvider,
+    KoKDocTagProvider,
     KoTextProvider,
     KoLocationProvider,
     KoPathProvider,

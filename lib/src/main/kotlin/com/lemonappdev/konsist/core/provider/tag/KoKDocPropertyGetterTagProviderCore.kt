@@ -8,7 +8,9 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 internal interface KoKDocPropertyGetterTagProviderCore :
     KoBaseProviderCore,
     KoKDocPropertyGetterTagProvider,
-    KoKDocTagsProviderCore {
+    KoKDocTagProviderCore {
     override val propertyGetterTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.PROPERTY_GETTER }
+
+    override fun hasPropertyGetterTag(): Boolean = propertyGetterTag != null
 }

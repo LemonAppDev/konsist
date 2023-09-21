@@ -21,7 +21,7 @@ import com.lemonappdev.konsist.core.provider.tag.KoKDocSampleTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocSeeTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocSinceTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocSuppressTagProviderCore
-import com.lemonappdev.konsist.core.provider.tag.KoKDocTagsProviderCore
+import com.lemonappdev.konsist.core.provider.tag.KoKDocTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocThrowsTagProviderCore
 import com.lemonappdev.konsist.core.provider.tag.KoKDocVersionTagProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.kdoc.psi.api.KDocElement
 internal class KoKDocDeclarationCore(private val kDocElement: KDocElement) :
     KoKDocDeclaration,
     KoKDocDescriptionProviderCore,
-    KoKDocTagsProviderCore,
+    KoKDocTagProviderCore,
     KoTextProviderCore,
     KoLocationProviderCore,
     KoPathProviderCore,

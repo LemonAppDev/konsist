@@ -11,4 +11,11 @@ interface KoKDocSinceTagProvider : KoBaseProvider {
      * The `@since` tag.
      */
     val sinceTag: KoKDocTagDeclaration?
+
+    /**
+     * Whatever the declaration has since tag.
+     *
+     * @return `true` if the declaration has since tag, `false` otherwise.
+     */
+    fun hasSinceTag(): Boolean
 }
