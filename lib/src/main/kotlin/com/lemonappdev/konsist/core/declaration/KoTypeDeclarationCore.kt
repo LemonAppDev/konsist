@@ -48,7 +48,7 @@ internal class KoTypeDeclarationCore private constructor(
         }
     }
 
-    override val textUsedToFqn: String by lazy { sourceType }
+    override val textUsedToFqn: String by lazy { sourceType.substringBefore("<") }
 
     override fun toString(): String = name
 

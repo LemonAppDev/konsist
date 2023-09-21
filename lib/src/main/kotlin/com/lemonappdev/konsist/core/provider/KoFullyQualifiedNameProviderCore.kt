@@ -33,6 +33,6 @@ internal interface KoFullyQualifiedNameProviderCore :
                     .firstOrNull { it.contains(textUsedToFqn) }
             }
 
-            return fqn ?: name
+            return fqn ?: textUsedToFqn
         }
 }
