@@ -2,6 +2,7 @@ package com.lemonappdev.konsist.api
 
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.ext.list.withoutName
+import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
 import com.lemonappdev.konsist.api.ext.list.withoutNameStartingWith
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
@@ -55,11 +56,9 @@ class ApiKonsistTest {
         Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
             .interfaces()
-            .withoutName(
-                "KoKDocTagsProvider",
-                "KoParentInterfaceProvider",
-            ) // remove after merge https://lemonappdev.atlassian.net/browse/KON-456 and release v1.0.0
+            .withoutName("KoParentInterfaceProvider") // remove after release v1.0.0
             .withoutNameStartingWith("KoLocal") // remove after merge https://lemonappdev.atlassian.net/browse/KON-416
+            .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
             .filter {
                 it.containsProperty { property ->
                     property.type?.hasNameStartingWith("List<Ko") ?: false
@@ -75,11 +74,9 @@ class ApiKonsistTest {
         val providers = Konsist
             .scopeFromPackage("com.lemonappdev.konsist.api.provider..", sourceSetName = "main")
             .interfaces()
-            .withoutName(
-                "KoKDocTagsProvider",
-                "KoParentInterfaceProvider",
-            ) // remove after merge https://lemonappdev.atlassian.net/browse/KON-456 and release v1.0.0
+            .withoutName("KoParentInterfaceProvider") // remove after release v1.0.0
             .withoutNameStartingWith("KoLocal") // remove after merge https://lemonappdev.atlassian.net/browse/KON-416
+            .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
             .filter {
                 it.containsProperty { property ->
                     property.type?.hasNameStartingWith("List<Ko") ?: false
@@ -145,8 +142,11 @@ class ApiKonsistTest {
         pluralName: String,
         hasKoNameProvider: Boolean,
     ): Boolean = if (declarationName == "KoModifier") {
-        hasModifiersFunctions(singularName, pluralName, "with") &&
-            hasModifiersFunctions(singularName, pluralName, "without")
+        hasExceptionFunctions(singularName, pluralName, "with") &&
+            hasExceptionFunctions(singularName, pluralName, "without")
+    } else if (declarationName == "KoKDocTagDeclaration") {
+        hasExceptionFunctions("Tag", "Tags", "with") &&
+            hasExceptionFunctions("Tag", "Tags", "without")
     } else if (hasKoNameProvider) {
         hasBasicFunctions(singularName, pluralName, "with") &&
             hasNamedFunctionsForExt(singularName, pluralName, "with") &&
@@ -163,7 +163,9 @@ class ApiKonsistTest {
         pluralName: String,
         hasKoNameProvider: Boolean,
     ): Boolean = if (declarationName == "KoModifier") {
-        hasModifiersFunctions(singularName, pluralName, "has")
+        hasExceptionFunctions(singularName, pluralName, "has")
+    } else if (declarationName == "KoKDocTagDeclaration") {
+        hasExceptionFunctions("Tag", "Tags", "has")
     } else if (hasKoNameProvider) {
         hasBasicFunctions(singularName, pluralName, "has") &&
             hasNamedFunctions(singularName, pluralName)
@@ -171,7 +173,7 @@ class ApiKonsistTest {
         hasBasicFunctions(singularName, pluralName, "has")
     }
 
-    private fun KoFunctionProvider.hasModifiersFunctions(
+    private fun KoFunctionProvider.hasExceptionFunctions(
         singularName: String,
         pluralName: String,
         prefix: String,
@@ -179,14 +181,14 @@ class ApiKonsistTest {
         containsFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
             containsFunction { function ->
                 function.name == "${prefix}$singularName" && function.hasParametersWithAllNames(
-                    "modifier",
-                    "modifiers",
+                    singularName.lowercase(),
+                    pluralName.lowercase(),
                 )
             } &&
             containsFunction { function ->
                 function.name == "${prefix}All$pluralName" && function.hasParametersWithAllNames(
-                    "modifier",
-                    "modifiers",
+                    singularName.lowercase(),
+                    pluralName.lowercase(),
                 )
             }
 
