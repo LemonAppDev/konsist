@@ -142,7 +142,7 @@ class KoNameProviderListExtTest {
         val name2 = "sampleName2"
         val prefix = "sample"
         val suffix = "1"
-        val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix)}
+        val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix) }
         val declaration1: KoNameProvider = mockk {
             every { name } returns name1
         }
@@ -165,7 +165,7 @@ class KoNameProviderListExtTest {
         val name2 = "sampleName2"
         val prefix = "sample"
         val suffix = "1"
-        val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix)}
+        val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix) }
         val declaration1: KoNameProvider = mockk {
             every { name } returns name1
         }

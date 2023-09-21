@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoParentDeclaration
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 
 /**
