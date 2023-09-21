@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list.tagprovider
 
-import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
 import com.lemonappdev.konsist.api.provider.tag.KoKDocVersionTagProvider
-import com.lemonappdev.konsist.api.provider.tag.KoKDocTagProvider
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo

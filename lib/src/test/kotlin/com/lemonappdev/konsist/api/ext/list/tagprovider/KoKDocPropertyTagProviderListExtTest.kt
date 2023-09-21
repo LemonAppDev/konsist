@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list.tagprovider
 
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
-import com.lemonappdev.konsist.api.provider.tag.KoKDocAuthorTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocPropertyTagProvider
 import io.mockk.every
 import io.mockk.mockk

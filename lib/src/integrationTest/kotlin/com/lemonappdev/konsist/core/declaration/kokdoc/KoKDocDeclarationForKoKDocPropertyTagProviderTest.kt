@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.TestSnippetProvider.getSnippetKoScope
 import com.lemonappdev.konsist.api.KoKDocTag.PROPERTY
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
-import org.amshove.kluent.shouldHaveSize
 import org.junit.jupiter.api.Test
 
 class KoKDocDeclarationForKoKDocPropertyTagProviderTest {

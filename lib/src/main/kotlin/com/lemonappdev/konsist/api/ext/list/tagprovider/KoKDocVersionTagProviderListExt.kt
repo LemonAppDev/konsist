@@ -1,8 +1,5 @@
 package com.lemonappdev.konsist.api.ext.list.tagprovider
 
-import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
-import com.lemonappdev.konsist.api.provider.tag.KoKDocSinceTagProvider
-import com.lemonappdev.konsist.api.provider.tag.KoKDocTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocVersionTagProvider
 
 /**

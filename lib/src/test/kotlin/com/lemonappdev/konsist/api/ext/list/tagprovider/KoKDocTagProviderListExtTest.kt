@@ -1,19 +1,8 @@
 package com.lemonappdev.konsist.api.ext.list.tagprovider
 
 import com.lemonappdev.konsist.api.KoKDocTag
-import com.lemonappdev.konsist.api.declaration.KoKDocDeclaration
 import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
-import com.lemonappdev.konsist.api.ext.list.kDocs
-import com.lemonappdev.konsist.api.ext.list.withKDoc
-import com.lemonappdev.konsist.api.ext.list.withKDocWithAllTags
-import com.lemonappdev.konsist.api.ext.list.withKDocWithSomeTags
-import com.lemonappdev.konsist.api.ext.list.withKDocWithTags
-import com.lemonappdev.konsist.api.ext.list.withoutKDoc
-import com.lemonappdev.konsist.api.ext.list.withoutKDocWithAllTags
-import com.lemonappdev.konsist.api.ext.list.withoutKDocWithSomeTags
-import com.lemonappdev.konsist.api.ext.list.withoutKDocWithTags
 import com.lemonappdev.konsist.api.provider.tag.KoKDocTagProvider
-import com.lemonappdev.konsist.core.declaration.KoKDocDeclarationCore
 import io.mockk.every
 import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo

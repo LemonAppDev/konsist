@@ -1,9 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list.tagprovider
 
-import com.lemonappdev.konsist.api.declaration.KoKDocTagDeclaration
-import com.lemonappdev.konsist.api.provider.tag.KoKDocSinceTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocSuppressTagProvider
-import com.lemonappdev.konsist.api.provider.tag.KoKDocTagProvider
 
 /**
  * List containing declarations with suppress tag.

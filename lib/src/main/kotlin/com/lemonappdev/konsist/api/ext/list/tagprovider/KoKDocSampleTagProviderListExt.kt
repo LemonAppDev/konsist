@@ -1,9 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list.tagprovider
 
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
-import com.lemonappdev.konsist.api.provider.tag.KoKDocAuthorTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocSampleTagProvider
-import com.lemonappdev.konsist.api.provider.tag.KoKDocTagProvider
 
 /**
  * List containing sample tags.
