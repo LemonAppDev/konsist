@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list.tagprovider
 
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
+import com.lemonappdev.konsist.api.provider.tag.KoKDocAuthorTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocThrowsTagProvider
 import io.mockk.every
 import io.mockk.mockk
@@ -30,5 +31,41 @@ class KoKDocThrowsTagProviderListExtTest {
 
         // then
         sut shouldBeEqualTo listOf(tag1, tag2, tag3)
+    }
+
+    @Test
+    fun `withThrowsTags() returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocThrowsTagProvider = mockk {
+            every { hasThrowsTags } returns true
+        }
+        val declaration2: KoKDocThrowsTagProvider = mockk {
+            every { hasThrowsTags } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withThrowsTags()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutThrowsTags() returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocThrowsTagProvider = mockk {
+            every { hasThrowsTags } returns true
+        }
+        val declaration2: KoKDocThrowsTagProvider = mockk {
+            every { hasThrowsTags } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutThrowsTags()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
     }
 }

@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list.tagprovider
 
 import com.lemonappdev.konsist.api.declaration.KoValuedKDocTagDeclaration
+import com.lemonappdev.konsist.api.provider.tag.KoKDocAuthorTagProvider
 import com.lemonappdev.konsist.api.provider.tag.KoKDocSeeTagProvider
 import io.mockk.every
 import io.mockk.mockk
@@ -30,5 +31,41 @@ class KoKDocSeeTagProviderListExtTest {
 
         // then
         sut shouldBeEqualTo listOf(tag1, tag2, tag3)
+    }
+
+    @Test
+    fun `withSeeTags() returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocSeeTagProvider = mockk {
+            every { hasSeeTags } returns true
+        }
+        val declaration2: KoKDocSeeTagProvider = mockk {
+            every { hasSeeTags } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withSeeTags()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutSeeTags() returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocSeeTagProvider = mockk {
+            every { hasSeeTags } returns true
+        }
+        val declaration2: KoKDocSeeTagProvider = mockk {
+            every { hasSeeTags } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutSeeTags()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
     }
 }

@@ -31,4 +31,40 @@ class KoKDocExceptionTagProviderListExtTest {
         // then
         sut shouldBeEqualTo listOf(tag1, tag2, tag3)
     }
+
+    @Test
+    fun `withExceptionTags() returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocExceptionTagProvider = mockk {
+            every { hasExceptionTags } returns true
+        }
+        val declaration2: KoKDocExceptionTagProvider = mockk {
+            every { hasExceptionTags } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withExceptionTags()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutExceptionTags() returns declaration with any tag`() {
+        // given
+        val declaration1: KoKDocExceptionTagProvider = mockk {
+            every { hasExceptionTags } returns true
+        }
+        val declaration2: KoKDocExceptionTagProvider = mockk {
+            every { hasExceptionTags } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutExceptionTags()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
 }
