@@ -17,7 +17,7 @@ class KoEnumConstantForKoSourceSetProviderTest {
     fun `source set name is 'main' in app module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFiles("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
             .classes()
             .enumConstants
             .first()
@@ -34,7 +34,7 @@ class KoEnumConstantForKoSourceSetProviderTest {
     fun `source set name is 'integrationTest' in app module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/sample/AppClassTest.kt".toOsSeparator())
+            .scopeFromFiles("$appIntegrationTestSourceSetProjectDirectory/sample/AppClassTest.kt".toOsSeparator())
             .classes()
             .enumConstants
             .first()
@@ -51,7 +51,7 @@ class KoEnumConstantForKoSourceSetProviderTest {
     fun `source set name is 'main' in data module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
+            .scopeFromFiles("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
             .classes()
             .enumConstants
             .first()
@@ -68,7 +68,7 @@ class KoEnumConstantForKoSourceSetProviderTest {
     fun `source set name is 'test' in data module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$dataTestSourceSetProjectDirectory/sample/LibClassTest.kt".toOsSeparator())
+            .scopeFromFiles("$dataTestSourceSetProjectDirectory/sample/LibClassTest.kt".toOsSeparator())
             .classes()
             .enumConstants
             .first()
@@ -85,7 +85,7 @@ class KoEnumConstantForKoSourceSetProviderTest {
     fun `source set name is 'main' in root module`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
+            .scopeFromFiles("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
             .classes()
             .enumConstants
             .first()
@@ -102,7 +102,7 @@ class KoEnumConstantForKoSourceSetProviderTest {
     fun `source set name is 'main' in root module with double src package`() {
         // given
         val sut = Konsist
-            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/src/RootSrcClass.kt".toOsSeparator())
+            .scopeFromFiles("$rootMainSourceSetProjectDirectory/sample/src/RootSrcClass.kt".toOsSeparator())
             .classes()
             .enumConstants
             .first()

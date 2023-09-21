@@ -101,8 +101,26 @@ interface KoScopeCreator {
     /**
      * Returns a [KoScope] of a given file.
      *
-     * @param path The path relative to the project root directory
+     * @param path The path relative to the project root directory.
      * @return a [KoScope] of a given file.
      */
+    @Deprecated("Will be removed in v1.0.0", ReplaceWith("scopeFromFiles(path)"))
     fun scopeFromFile(path: String): KoScope
+
+    /**
+     * Returns a [KoScope] of a given file.
+     *
+     * @param path The path relative to the project root directory.
+     * @param paths The path(s) relative to the project root directory
+     * @return a [KoScope] of a given file.
+     */
+    fun scopeFromFiles(path: String, vararg paths: String): KoScope
+
+    /**
+     * Returns a [KoScope] of a given files.
+     *
+     * @param paths The list of paths relative to the project root directory.
+     * @return a [KoScope] of a given files.
+     */
+    fun scopeFromFiles(paths: List<String>): KoScope
 }
