@@ -132,7 +132,6 @@ internal class KoScopeCreatorCore : KoScopeCreator {
             }
             .map { it.toKoFile() }
 
-
         return KoScopeCore(koFiles)
     }
 
