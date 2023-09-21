@@ -33,11 +33,11 @@ class GeneralSnippets {
             .classes()
             .assert {
                 val lastKoPropertyDeclarationIndex = it
-                    .declarations()
+                    .declarations(includeNested = false, includeLocal = false)
                     .indexOfLastInstance<KoPropertyDeclaration>()
 
                 val firstKoFunctionDeclarationIndex = it
-                    .declarations()
+                    .declarations(includeNested = false, includeLocal = false)
                     .indexOfFirstInstance<KoFunctionDeclaration>()
 
                 if (lastKoPropertyDeclarationIndex != -1 && firstKoFunctionDeclarationIndex != -1) {
@@ -77,11 +77,15 @@ class GeneralSnippets {
             .scopeFromProject()
             .classes()
             .assert {
-                val companionObject = it.objects().lastOrNull { obj ->
-                    obj.hasModifiers(KoModifier.COMPANION)
+                val companionObject = it.objects(includeNested = false).lastOrNull { obj ->
+                    obj.hasModifier(KoModifier.COMPANION)
                 }
 
-                companionObject != null && it.declarations().last() == companionObject
+                if (companionObject != null) {
+                    it.declarations(includeNested = false, includeLocal = false).last() == companionObject
+                } else {
+                    true
+                }
             }
     }
 
