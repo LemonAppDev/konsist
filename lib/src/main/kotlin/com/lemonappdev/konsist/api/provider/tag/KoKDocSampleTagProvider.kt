@@ -19,8 +19,6 @@ interface KoKDocSampleTagProvider : KoBaseProvider {
 
     /**
      * Whatever the declaration has sample tags.
-     *
-     * @return `true` if the declaration has sample tag, `false` otherwise.
      */
-    fun hasSampleTags(): Boolean
+    val hasSampleTags: Boolean
 }

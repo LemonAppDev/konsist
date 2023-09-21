@@ -23,7 +23,7 @@ class KoKDocDeclarationForKoKDocVersionTagProviderTest {
         // then
         assertSoftly(sut) {
             it?.versionTag shouldBeEqualTo null
-            it?.hasVersionTag() shouldBeEqualTo false
+            it?.hasVersionTag shouldBeEqualTo false
         }
     }
 
@@ -46,7 +46,7 @@ class KoKDocDeclarationForKoKDocVersionTagProviderTest {
         assertSoftly(sut) {
             it?.versionTag?.name shouldBeEqualTo VERSION
             it?.versionTag?.description shouldBeEqualTo "1.2.3"
-            it?.hasVersionTag() shouldBeEqualTo true
+            it?.hasVersionTag shouldBeEqualTo true
         }
     }
 

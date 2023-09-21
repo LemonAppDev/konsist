@@ -12,5 +12,6 @@ internal interface KoKDocReceiverTagProviderCore :
     override val receiverTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.RECEIVER }
 
-    override fun hasReceiverTag(): Boolean = receiverTag != null
+    override val hasReceiverTag: Boolean
+        get() = receiverTag != null
 }

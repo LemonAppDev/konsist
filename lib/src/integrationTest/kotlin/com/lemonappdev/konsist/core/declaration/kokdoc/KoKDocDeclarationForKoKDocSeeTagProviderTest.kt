@@ -25,7 +25,7 @@ class KoKDocDeclarationForKoKDocSeeTagProviderTest {
         assertSoftly(sut) {
             it?.seeTags shouldBeEqualTo emptyList()
             it?.numSeeTags shouldBeEqualTo 0
-            it?.hasSeeTags() shouldBeEqualTo false
+            it?.hasSeeTags shouldBeEqualTo false
         }
     }
 
@@ -53,7 +53,7 @@ class KoKDocDeclarationForKoKDocSeeTagProviderTest {
             it?.seeTags?.get(1)?.name shouldBeEqualTo SEE
             it?.seeTags?.get(1)?.value shouldBeEqualTo "AnotherClass2"
             it?.seeTags?.get(1)?.description shouldBeEqualTo ""
-            it?.hasSeeTags() shouldBeEqualTo true
+            it?.hasSeeTags shouldBeEqualTo true
         }
     }
 

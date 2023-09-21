@@ -13,5 +13,6 @@ internal interface KoKDocThrowsTagProviderCore : KoBaseProviderCore, KoKDocThrow
     override val numThrowsTags: Int
         get() = throwsTags.size
 
-    override fun hasThrowsTags(): Boolean = throwsTags.isNotEmpty()
+    override val hasThrowsTags: Boolean
+        get() = throwsTags.isNotEmpty()
 }

@@ -19,8 +19,6 @@ interface KoKDocPropertyTagProvider : KoBaseProvider {
 
     /**
      * Whatever the declaration has property tags.
-     *
-     * @return `true` if the declaration has property tag, `false` otherwise.
      */
-    fun hasPropertyTags(): Boolean
+    val hasPropertyTags: Boolean
 }

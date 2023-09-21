@@ -19,8 +19,6 @@ interface KoKDocParamTagProvider : KoBaseProvider {
 
     /**
      * Whatever the declaration has param tags.
-     *
-     * @return `true` if the declaration has param tag, `false` otherwise.
      */
-    fun hasParamTags(): Boolean
+    val hasParamTags: Boolean
 }

@@ -12,5 +12,6 @@ internal interface KoKDocAuthorTagProviderCore : KoBaseProviderCore, KoKDocAutho
     override val numAuthorTags: Int
         get() = authorTags.size
 
-    override fun hasAuthorTags(): Boolean = authorTags.isNotEmpty()
+    override val hasAuthorTags: Boolean
+        get() = authorTags.isNotEmpty()
 }

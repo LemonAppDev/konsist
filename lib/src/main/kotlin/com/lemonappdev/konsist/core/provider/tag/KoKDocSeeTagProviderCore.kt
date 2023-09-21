@@ -13,5 +13,6 @@ internal interface KoKDocSeeTagProviderCore : KoBaseProviderCore, KoKDocSeeTagPr
     override val numSeeTags: Int
         get() = seeTags.size
 
-    override fun hasSeeTags(): Boolean = seeTags.isNotEmpty()
+    override val hasSeeTags: Boolean
+        get() = seeTags.isNotEmpty()
 }

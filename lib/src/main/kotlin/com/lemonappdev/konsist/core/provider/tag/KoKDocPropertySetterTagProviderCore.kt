@@ -12,5 +12,6 @@ internal interface KoKDocPropertySetterTagProviderCore :
     override val propertySetterTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.PROPERTY_SETTER }
 
-    override fun hasPropertySetterTag(): Boolean = propertySetterTag != null
+    override val hasPropertySetterTag: Boolean
+        get() = propertySetterTag != null
 }

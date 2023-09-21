@@ -9,5 +9,6 @@ internal interface KoKDocVersionTagProviderCore : KoBaseProviderCore, KoKDocVers
     override val versionTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.VERSION }
 
-    override fun hasVersionTag(): Boolean = versionTag != null
+    override val hasVersionTag: Boolean
+        get() = versionTag != null
 }

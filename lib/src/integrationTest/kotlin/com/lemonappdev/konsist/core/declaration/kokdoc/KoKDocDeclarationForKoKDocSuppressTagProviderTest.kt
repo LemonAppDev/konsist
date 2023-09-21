@@ -23,7 +23,7 @@ class KoKDocDeclarationForKoKDocSuppressTagProviderTest {
         // then
         assertSoftly(sut) {
             it?.suppressTag shouldBeEqualTo null
-            it?.hasSuppressTag() shouldBeEqualTo false
+            it?.hasSuppressTag shouldBeEqualTo false
         }
     }
 
@@ -46,7 +46,7 @@ class KoKDocDeclarationForKoKDocSuppressTagProviderTest {
         assertSoftly(sut) {
             it?.suppressTag?.name shouldBeEqualTo SUPPRESS
             it?.suppressTag?.description shouldBeEqualTo "UnusedPrivateMember"
-            it?.hasSuppressTag() shouldBeEqualTo true
+            it?.hasSuppressTag shouldBeEqualTo true
         }
     }
 

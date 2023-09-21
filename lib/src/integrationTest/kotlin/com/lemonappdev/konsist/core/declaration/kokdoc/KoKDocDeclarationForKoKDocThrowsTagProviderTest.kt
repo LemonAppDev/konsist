@@ -25,7 +25,7 @@ class KoKDocDeclarationForKoKDocThrowsTagProviderTest {
         assertSoftly(sut) {
             it?.throwsTags shouldBeEqualTo emptyList()
             it?.numThrowsTags shouldBeEqualTo 0
-            it?.hasThrowsTags() shouldBeEqualTo false
+            it?.hasThrowsTags shouldBeEqualTo false
         }
     }
 
@@ -50,7 +50,7 @@ class KoKDocDeclarationForKoKDocThrowsTagProviderTest {
             it?.throwsTags?.get(0)?.name shouldBeEqualTo THROWS
             it?.throwsTags?.get(0)?.value shouldBeEqualTo "IllegalArgumentException"
             it?.throwsTags?.get(0)?.description shouldBeEqualTo "First sample description"
-            it?.hasThrowsTags() shouldBeEqualTo true
+            it?.hasThrowsTags shouldBeEqualTo true
         }
     }
 

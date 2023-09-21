@@ -9,5 +9,6 @@ internal interface KoKDocReturnTagProviderCore : KoBaseProviderCore, KoKDocRetur
     override val returnTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.RETURN }
 
-    override fun hasReturnTag(): Boolean = returnTag != null
+    override val hasReturnTag: Boolean
+        get() = returnTag != null
 }

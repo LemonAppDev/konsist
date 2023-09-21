@@ -14,8 +14,6 @@ interface KoKDocConstructorTagProvider : KoBaseProvider {
 
     /**
      * Whatever the declaration has constructor tag.
-     *
-     * @return `true` if the declaration has constructor tag, `false` otherwise.
      */
-    fun hasConstructorTag(): Boolean
+    val hasConstructorTag: Boolean
 }

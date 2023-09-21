@@ -18,7 +18,7 @@ class KoKDocDeclarationForKoKDocReturnTagProviderTest {
         // then
         assertSoftly(sut) {
             it?.returnTag shouldBeEqualTo null
-            it?.hasReturnTag() shouldBeEqualTo false
+            it?.hasReturnTag shouldBeEqualTo false
         }
     }
 
@@ -34,7 +34,7 @@ class KoKDocDeclarationForKoKDocReturnTagProviderTest {
         assertSoftly(sut) {
             it?.returnTag?.name shouldBeEqualTo RETURN
             it?.returnTag?.description shouldBeEqualTo "The result of the computation."
-            it?.hasReturnTag() shouldBeEqualTo true
+            it?.hasReturnTag shouldBeEqualTo true
         }
     }
 

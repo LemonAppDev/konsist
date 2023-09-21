@@ -16,5 +16,6 @@ internal interface KoKDocPropertyTagProviderCore :
     override val numPropertyTags: Int
         get() = propertyTags.size
 
-    override fun hasPropertyTags(): Boolean = propertyTags.isNotEmpty()
+    override val hasPropertyTags: Boolean
+        get() = propertyTags.isNotEmpty()
 }

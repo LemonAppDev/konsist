@@ -9,5 +9,6 @@ internal interface KoKDocSinceTagProviderCore : KoBaseProviderCore, KoKDocSinceT
     override val sinceTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.SINCE }
 
-    override fun hasSinceTag(): Boolean = sinceTag != null
+    override val hasSinceTag: Boolean
+        get() = sinceTag != null
 }

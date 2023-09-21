@@ -23,7 +23,7 @@ class KoKDocDeclarationForKoKDocSinceTagProviderTest {
         // then
         assertSoftly(sut) {
             it?.sinceTag shouldBeEqualTo null
-            it?.hasSinceTag() shouldBeEqualTo false
+            it?.hasSinceTag shouldBeEqualTo false
         }
     }
 
@@ -46,7 +46,7 @@ class KoKDocDeclarationForKoKDocSinceTagProviderTest {
         assertSoftly(sut) {
             it?.sinceTag?.name shouldBeEqualTo SINCE
             it?.sinceTag?.description shouldBeEqualTo "1.0.0"
-            it?.hasSinceTag() shouldBeEqualTo true
+            it?.hasSinceTag shouldBeEqualTo true
         }
     }
 

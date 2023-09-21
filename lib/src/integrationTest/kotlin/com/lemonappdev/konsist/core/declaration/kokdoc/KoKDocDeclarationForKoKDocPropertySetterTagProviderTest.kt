@@ -18,7 +18,7 @@ class KoKDocDeclarationForKoKDocPropertySetterTagProviderTest {
         // then
         assertSoftly(sut) {
             it?.propertySetterTag shouldBeEqualTo null
-            it?.hasPropertySetterTag() shouldBeEqualTo false
+            it?.hasPropertySetterTag shouldBeEqualTo false
         }
     }
 
@@ -34,7 +34,7 @@ class KoKDocDeclarationForKoKDocPropertySetterTagProviderTest {
         assertSoftly(sut) {
             it?.propertySetterTag?.name shouldBeEqualTo PROPERTY_SETTER
             it?.propertySetterTag?.description shouldBeEqualTo "Sets the value of the [name] property."
-            it?.hasPropertySetterTag() shouldBeEqualTo true
+            it?.hasPropertySetterTag shouldBeEqualTo true
         }
     }
 

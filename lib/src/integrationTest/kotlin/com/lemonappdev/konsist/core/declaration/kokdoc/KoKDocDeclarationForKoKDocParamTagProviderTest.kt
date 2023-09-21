@@ -25,7 +25,7 @@ class KoKDocDeclarationForKoKDocParamTagProviderTest {
         assertSoftly(sut) {
             it?.paramTags shouldBeEqualTo emptyList()
             it?.numParamTags shouldBeEqualTo 0
-            it?.hasParamTags() shouldBeEqualTo false
+            it?.hasParamTags shouldBeEqualTo false
         }
     }
 
@@ -58,7 +58,7 @@ class KoKDocDeclarationForKoKDocParamTagProviderTest {
             it?.paramTags?.get(1)?.name shouldBeEqualTo PARAM
             it?.paramTags?.get(1)?.value shouldBeEqualTo value2
             it?.paramTags?.get(1)?.description shouldBeEqualTo description2
-            it?.hasParamTags() shouldBeEqualTo true
+            it?.hasParamTags shouldBeEqualTo true
         }
     }
 

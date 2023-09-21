@@ -19,8 +19,6 @@ interface KoKDocThrowsTagProvider : KoBaseProvider {
 
     /**
      * Whatever the declaration has throws tags.
-     *
-     * @return `true` if the declaration has throws tag, `false` otherwise.
      */
-    fun hasThrowsTags(): Boolean
+    val hasThrowsTags: Boolean
 }

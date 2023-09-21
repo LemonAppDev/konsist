@@ -25,7 +25,7 @@ class KoKDocDeclarationForKoKDocSampleTagProviderTest {
         assertSoftly(sut) {
             it?.sampleTags shouldBeEqualTo emptyList()
             it?.numSampleTags shouldBeEqualTo 0
-            it?.hasSampleTags() shouldBeEqualTo false
+            it?.hasSampleTags shouldBeEqualTo false
         }
     }
 
@@ -53,7 +53,7 @@ class KoKDocDeclarationForKoKDocSampleTagProviderTest {
             it?.sampleTags?.get(1)?.name shouldBeEqualTo SAMPLE
             it?.sampleTags?.get(1)?.value shouldBeEqualTo "SampleClass.sampleProperty"
             it?.sampleTags?.get(1)?.description shouldBeEqualTo ""
-            it?.hasSampleTags() shouldBeEqualTo true
+            it?.hasSampleTags shouldBeEqualTo true
         }
     }
 

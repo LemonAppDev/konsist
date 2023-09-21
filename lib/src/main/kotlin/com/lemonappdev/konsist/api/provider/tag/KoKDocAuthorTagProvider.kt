@@ -19,8 +19,6 @@ interface KoKDocAuthorTagProvider : KoBaseProvider {
 
     /**
      * Whatever the declaration has author tags.
-     *
-     * @return `true` if the declaration has author tag, `false` otherwise.
      */
-    fun hasAuthorTags(): Boolean
+    val hasAuthorTags: Boolean
 }

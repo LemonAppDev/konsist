@@ -13,5 +13,6 @@ internal interface KoKDocParamTagProviderCore : KoBaseProviderCore, KoKDocParamT
     override val numParamTags: Int
         get() = paramTags.size
 
-    override fun hasParamTags(): Boolean = paramTags.isNotEmpty()
+    override val hasParamTags: Boolean
+        get() = paramTags.isNotEmpty()
 }

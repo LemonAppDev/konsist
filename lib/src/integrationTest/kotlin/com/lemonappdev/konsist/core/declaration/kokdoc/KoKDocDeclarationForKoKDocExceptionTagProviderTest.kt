@@ -25,7 +25,7 @@ class KoKDocDeclarationForKoKDocExceptionTagProviderTest {
         assertSoftly(sut) {
             it?.exceptionTags shouldBeEqualTo emptyList()
             it?.numExceptionTags shouldBeEqualTo 0
-            it?.hasExceptionTags() shouldBeEqualTo false
+            it?.hasExceptionTags shouldBeEqualTo false
         }
     }
 
@@ -50,7 +50,7 @@ class KoKDocDeclarationForKoKDocExceptionTagProviderTest {
             it?.exceptionTags?.get(0)?.name shouldBeEqualTo EXCEPTION
             it?.exceptionTags?.get(0)?.value shouldBeEqualTo "NullPointerException"
             it?.exceptionTags?.get(0)?.description shouldBeEqualTo "Second sample description"
-            it?.hasExceptionTags() shouldBeEqualTo true
+            it?.hasExceptionTags shouldBeEqualTo true
         }
     }
 

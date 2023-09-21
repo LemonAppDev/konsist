@@ -12,5 +12,6 @@ internal interface KoKDocSuppressTagProviderCore :
     override val suppressTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.SUPPRESS }
 
-    override fun hasSuppressTag(): Boolean = suppressTag != null
+    override val hasSuppressTag: Boolean
+        get() = suppressTag != null
 }

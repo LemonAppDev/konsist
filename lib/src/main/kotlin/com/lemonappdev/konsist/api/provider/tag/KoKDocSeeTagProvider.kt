@@ -19,8 +19,6 @@ interface KoKDocSeeTagProvider : KoBaseProvider {
 
     /**
      * Whatever the declaration has see tags.
-     *
-     * @return `true` if the declaration has see tag, `false` otherwise.
      */
-    fun hasSeeTags(): Boolean
+    val hasSeeTags: Boolean
 }

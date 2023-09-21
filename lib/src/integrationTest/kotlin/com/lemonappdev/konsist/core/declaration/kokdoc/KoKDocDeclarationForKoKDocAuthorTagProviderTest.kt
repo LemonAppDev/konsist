@@ -26,7 +26,7 @@ class KoKDocDeclarationForKoKDocAuthorTagProviderTest {
         assertSoftly(sut) {
             it?.authorTags shouldBeEqualTo emptyList()
             it?.numAuthorTags shouldBeEqualTo 0
-            it?.hasAuthorTags() shouldBeEqualTo false
+            it?.hasAuthorTags shouldBeEqualTo false
         }
     }
 
@@ -52,7 +52,7 @@ class KoKDocDeclarationForKoKDocAuthorTagProviderTest {
             it?.authorTags?.get(0)?.description shouldBeEqualTo "Author1"
             it?.authorTags?.get(1)?.name shouldBeEqualTo AUTHOR
             it?.authorTags?.get(1)?.description shouldBeEqualTo "Author2"
-            it?.hasAuthorTags()  shouldBeEqualTo true
+            it?.hasAuthorTags  shouldBeEqualTo true
         }
     }
 

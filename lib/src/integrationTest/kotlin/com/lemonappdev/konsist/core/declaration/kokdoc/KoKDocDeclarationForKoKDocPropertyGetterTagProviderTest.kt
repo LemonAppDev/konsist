@@ -18,7 +18,7 @@ class KoKDocDeclarationForKoKDocPropertyGetterTagProviderTest {
         // then
         assertSoftly(sut) {
             it?.propertyGetterTag shouldBeEqualTo null
-            it?.hasPropertyGetterTag() shouldBeEqualTo false
+            it?.hasPropertyGetterTag shouldBeEqualTo false
         }
     }
 
@@ -34,7 +34,7 @@ class KoKDocDeclarationForKoKDocPropertyGetterTagProviderTest {
         assertSoftly(sut) {
             it?.propertyGetterTag?.name shouldBeEqualTo PROPERTY_GETTER
             it?.propertyGetterTag?.description shouldBeEqualTo "Retrieves the value of the [name] property."
-            it?.hasPropertyGetterTag() shouldBeEqualTo true
+            it?.hasPropertyGetterTag shouldBeEqualTo true
         }
     }
 

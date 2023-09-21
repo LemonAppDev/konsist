@@ -16,5 +16,6 @@ internal interface KoKDocExceptionTagProviderCore :
     override val numExceptionTags: Int
         get() = exceptionTags.size
 
-    override fun hasExceptionTags(): Boolean = exceptionTags.isNotEmpty()
+    override val hasExceptionTags: Boolean
+        get() = exceptionTags.isNotEmpty()
 }

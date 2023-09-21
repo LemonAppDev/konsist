@@ -13,5 +13,6 @@ internal interface KoKDocSampleTagProviderCore : KoBaseProviderCore, KoKDocSampl
     override val numSampleTags: Int
         get() = sampleTags.size
 
-    override fun hasSampleTags(): Boolean = sampleTags.isNotEmpty()
+    override val hasSampleTags: Boolean
+        get() = sampleTags.isNotEmpty()
 }

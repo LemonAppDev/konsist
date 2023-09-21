@@ -19,8 +19,6 @@ interface KoKDocExceptionTagProvider : KoBaseProvider {
 
     /**
      * Whatever the declaration has exception tags.
-     *
-     * @return `true` if the declaration has exception tag, `false` otherwise.
      */
-    fun hasExceptionTags(): Boolean
+    val hasExceptionTags: Boolean
 }

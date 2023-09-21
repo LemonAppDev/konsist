@@ -12,5 +12,6 @@ internal interface KoKDocConstructorTagProviderCore :
     override val constructorTag: KoKDocTagDeclaration?
         get() = tags.firstOrNull { it.name == KoKDocTag.CONSTRUCTOR }
 
-    override fun hasConstructorTag(): Boolean = constructorTag != null
+    override val hasConstructorTag: Boolean
+        get() = constructorTag != null
 }
