@@ -35,8 +35,9 @@ private fun getTestMethodNameWithStackWalker(index: Int): String =
         }
         .methodName
 
-@Deprecated(message = "Using StackWalker",
-    replaceWith = ReplaceWith("getTestMethodNameWithStackWalker")
+@Deprecated(
+    message = "Using StackWalker",
+    replaceWith = ReplaceWith("getTestMethodNameWithStackWalker"),
 )
 @Suppress("UnusedPrivateMember")
 private fun getTestMethodName(index: Int): String = Thread.currentThread().stackTrace[index].methodName
