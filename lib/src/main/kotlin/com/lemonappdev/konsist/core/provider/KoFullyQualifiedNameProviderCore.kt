@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoAnnotationDeclaration
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.api.provider.KoNullableTypeProvider
 
 internal interface KoFullyQualifiedNameProviderCore :
     KoFullyQualifiedNameProvider,
@@ -19,7 +18,7 @@ internal interface KoFullyQualifiedNameProviderCore :
                 .map { it.name }
                 .firstOrNull { it.contains(textUsedToFqn) }
 
-            if(fqn == null){
+            if (fqn == null) {
                 fqn = containingFile
                     .declarations()
                     .filterNot {
