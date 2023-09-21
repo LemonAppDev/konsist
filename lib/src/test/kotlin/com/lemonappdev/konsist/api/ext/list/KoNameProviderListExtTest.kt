@@ -136,6 +136,52 @@ class KoNameProviderListExtTest {
     }
 
     @Test
+    fun `withName{predicate} returns declaration with name matching to predicate`() {
+        // given
+        val name1 = "sampleName1"
+        val name2 = "sampleName2"
+        val prefix = "sample"
+        val suffix = "1"
+        val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix)}
+        val declaration1: KoNameProvider = mockk {
+            every { name } returns name1
+        }
+        val declaration2: KoNameProvider = mockk {
+            every { name } returns name2
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withName(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutName{predicate} returns declaration without name matching to predicate`() {
+        // given
+        val name1 = "sampleName1"
+        val name2 = "sampleName2"
+        val prefix = "sample"
+        val suffix = "1"
+        val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix)}
+        val declaration1: KoNameProvider = mockk {
+            every { name } returns name1
+        }
+        val declaration2: KoNameProvider = mockk {
+            every { name } returns name2
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutName(predicate)
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withNameStartingWith() returns declaration which names starts with given prefix`() {
         // given
         val prefix = "prefix"
