@@ -64,7 +64,6 @@ class ApiKonsistTest {
                     property.type?.hasNameStartingWith("List<Ko") ?: false
                 }
             } // change this lines to .withProperty { } (after https://lemonappdev.atlassian.net/browse/KON-416)
-            .first { it.name == "KoKDocTagProvider" }
             .assert {
                 it.hasCorrectMethods(false)
             }
