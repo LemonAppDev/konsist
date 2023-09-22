@@ -19,7 +19,7 @@ class KoConstructorForKoSourceSetProviderTest {
     fun `source set name is 'main' in app module`() {
         // given
         val sut = Konsist
-            .scopeFromFiles("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
             .classes()
             .constructors
             .first()
@@ -36,7 +36,7 @@ class KoConstructorForKoSourceSetProviderTest {
     fun `source set name is 'integrationTest' in app module`() {
         // given
         val sut = Konsist
-            .scopeFromFiles("$appIntegrationTestSourceSetProjectDirectory/sample/AppClassTest.kt".toOsSeparator())
+            .scopeFromFile("$appIntegrationTestSourceSetProjectDirectory/sample/AppClassTest.kt".toOsSeparator())
             .classes()
             .constructors
             .first()
@@ -53,7 +53,7 @@ class KoConstructorForKoSourceSetProviderTest {
     fun `source set name is 'main' in data module`() {
         // given
         val sut = Konsist
-            .scopeFromFiles("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
+            .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
             .classes()
             .constructors
             .first()
@@ -70,7 +70,7 @@ class KoConstructorForKoSourceSetProviderTest {
     fun `source set name is 'test' in data module`() {
         // given
         val sut = Konsist
-            .scopeFromFiles("$dataTestSourceSetProjectDirectory/sample/LibClassTest.kt".toOsSeparator())
+            .scopeFromFile("$dataTestSourceSetProjectDirectory/sample/LibClassTest.kt".toOsSeparator())
             .classes()
             .constructors
             .first()
@@ -87,7 +87,7 @@ class KoConstructorForKoSourceSetProviderTest {
     fun `source set name is 'main' in root module`() {
         // given
         val sut = Konsist
-            .scopeFromFiles("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
             .classes()
             .constructors
             .first()
@@ -104,7 +104,7 @@ class KoConstructorForKoSourceSetProviderTest {
     fun `source set name is 'main' in root module with double src package`() {
         // given
         val sut = Konsist
-            .scopeFromFiles("$rootMainSourceSetProjectDirectory/sample/src/RootSrcClass.kt".toOsSeparator())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/src/RootSrcClass.kt".toOsSeparator())
             .classes()
             .constructors
             .first()

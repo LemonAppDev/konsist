@@ -19,7 +19,7 @@ class KoAnnotationForKoModuleProviderTest {
     fun `module name is 'app'`() {
         // given
         val sut = Konsist
-            .scopeFromFiles("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile("$appMainSourceSetProjectDirectory/sample/AppClass.kt".toOsSeparator())
             .classes()
             .annotations
             .first()
@@ -36,7 +36,7 @@ class KoAnnotationForKoModuleProviderTest {
     fun `module name is 'data'`() {
         // given
         val sut = Konsist
-            .scopeFromFiles("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
+            .scopeFromFile("$dataMainSourceSetProjectDirectory/sample/LibClass.kt".toOsSeparator())
             .classes()
             .annotations
             .first()
@@ -53,7 +53,7 @@ class KoAnnotationForKoModuleProviderTest {
     fun `module name is 'root'`() {
         // given
         val sut = Konsist
-            .scopeFromFiles("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
+            .scopeFromFile("$rootMainSourceSetProjectDirectory/sample/RootClass.kt".toOsSeparator())
             .classes()
             .annotations
             .first()
