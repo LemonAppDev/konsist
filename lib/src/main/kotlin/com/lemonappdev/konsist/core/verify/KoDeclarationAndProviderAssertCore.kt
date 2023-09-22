@@ -39,7 +39,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
 
         val methodNameOrSuppressName = suppressName ?: testMethodName
 
-        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), methodNameOrSuppressName)
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), testMethodName)
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
@@ -59,12 +59,15 @@ internal fun <E : KoBaseProvider> List<E>.assert(
     additionalMessage: String? = null,
     function: (E) -> Boolean?,
     positiveCheck: Boolean,
-    suppressName: String? = null,
 ) {
     var lastDeclaration: KoBaseProvider? = null
 
     try {
-        val testMethodName: String = suppressName ?: getTestMethodNameFromSixthIndex()
+        val testMethodName = if (additionalMessage != null) {
+            getTestMethodNameFromFifthIndex()
+        } else {
+            getTestMethodNameFromSixthIndex()
+        }
 
         checkIfLocalListIsEmpty(this, getTestMethodNameFromFourthIndex())
 

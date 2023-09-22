@@ -13,9 +13,9 @@ import com.lemonappdev.konsist.core.verify.assert
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional test method name coming obtained from different context
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
- * @param suppressName An optional test method name coming obtained from different context
  */
 fun <E : KoBaseProvider> E?.assertTrue(
     strict: Boolean = false,
@@ -36,6 +36,7 @@ fun <E : KoBaseProvider> E?.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional test method name coming obtained from different context
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
@@ -58,6 +59,7 @@ fun <E : KoBaseProvider> E?.assertFalse(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional test method name coming obtained from different context
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
@@ -80,6 +82,7 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional test method name coming obtained from different context
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
@@ -102,6 +105,7 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional test method name coming obtained from different context
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
@@ -124,6 +128,7 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional test method name coming obtained from different context
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
@@ -156,7 +161,6 @@ fun <E : KoBaseProvider> E.assert(additionalMessage: String? = null, function: (
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
- * @param suppressName An optional test method name coming obtained from different context
  */
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("assertFalse"))
 fun <E : KoBaseProvider> E.assertNot(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
@@ -170,7 +174,6 @@ fun <E : KoBaseProvider> E.assertNot(additionalMessage: String? = null, function
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
- * @param suppressName An optional test method name coming obtained from different context
  */
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("assertTrue"))
 fun <E : KoBaseProvider> List<E>.assert(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
@@ -184,7 +187,6 @@ fun <E : KoBaseProvider> List<E>.assert(additionalMessage: String? = null, funct
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
- * @param suppressName An optional test method name coming obtained from different context
  */
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("assertFalse"))
 fun <E : KoBaseProvider> List<E>.assertNot(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
@@ -198,7 +200,6 @@ fun <E : KoBaseProvider> List<E>.assertNot(additionalMessage: String? = null, fu
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
- * @param suppressName An optional test method name coming obtained from different context
  */
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("assertTrue"))
 fun <E : KoBaseProvider> Sequence<E>.assert(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
@@ -212,7 +213,6 @@ fun <E : KoBaseProvider> Sequence<E>.assert(additionalMessage: String? = null, f
  *                This message will be included in the assertion error if the assertion fails.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
- * @param suppressName An optional test method name coming obtained from different context
  */
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("assertFalse"))
 fun <E : KoBaseProvider> Sequence<E>.assertNot(additionalMessage: String? = null, function: (E) -> Boolean?): Unit {
