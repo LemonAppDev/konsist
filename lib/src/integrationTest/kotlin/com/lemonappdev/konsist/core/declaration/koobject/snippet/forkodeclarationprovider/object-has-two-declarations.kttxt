@@ -1,0 +1,6 @@
+object SampleObject {
+    val sampleProperty = ""
+
+    fun sampleFunction() {
+    }
+}

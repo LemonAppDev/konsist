@@ -26,6 +26,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      * @param predicate The predicate function to determine if a declaration satisfies a condition.
      * @return `true` if the declaration contains a declaration that satisfies the specified predicate, `true` otherwise.
      */
+    @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasDeclaration()"))
     fun containsDeclaration(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
@@ -99,4 +100,42 @@ interface KoDeclarationProvider : KoBaseProvider {
      * @return The number of declarations in the declaration.
      */
     fun numInternalDeclarations(includeNested: Boolean = true, includeLocal: Boolean = true): Int
+
+    /**
+     * Whether the declaration has declarations.
+     *
+     * @return `true` if the declaration has any declaration, `false` otherwise.
+     */
+    fun hasDeclarations(
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has at least one declaration that satisfies the provided predicate.
+     *
+     * @param predicate A function that defines the condition to be met by a declaration declaration.
+     * @return `true` if there is a matching declaration, `false` otherwise.
+     */
+    fun hasDeclaration(
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
+        predicate: (KoBaseDeclaration) -> Boolean
+    ): Boolean
+
+    /**
+     * Determines whether the declaration has all declarations that satisfy the provided predicate.
+     *
+     * Note that if the declarations contains no elements, the function returns `true` because there are no elements in it
+     * that do not match the predicate. See a more detailed explanation of this logic concept in
+     * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
+     *
+     * @param predicate A function that defines the condition to be met by declaration declarations.
+     * @return `true` if all declaration declarations satisfy the predicate, `false` otherwise.
+     */
+    fun hasAllDeclarations(
+        includeNested: Boolean = true,
+        includeLocal: Boolean = true,
+        predicate: (KoBaseDeclaration) -> Boolean
+    ): Boolean
 }
