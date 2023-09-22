@@ -44,7 +44,7 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         val givenNames = names.toList() + name
 
         return givenNames.any {
-            classes(includeNested, includeLocal).any { klass -> it == klass.name }
+            classes(includeNested, includeLocal).any { koClass -> it == koClass.name }
         }
     }
 
@@ -57,7 +57,7 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         val givenNames = names.toList() + name
 
         return givenNames.all {
-            classes(includeNested, includeLocal).any { klass -> it == klass.name }
+            classes(includeNested, includeLocal).any { koClass -> it == koClass.name }
         }
     }
 

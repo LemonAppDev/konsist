@@ -39,7 +39,7 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
         val givenNames = names.toList() + name
 
         return givenNames.any {
-            interfaces(includeNested).any { interfacee -> it == interfacee.name }
+            interfaces(includeNested).any { koInterface -> it == koInterface.name }
         }
     }
 
@@ -51,7 +51,7 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
         val givenNames = names.toList() + name
 
         return givenNames.all {
-            interfaces(includeNested).any { interfacee -> it == interfacee.name }
+            interfaces(includeNested).any { koInterface -> it == koInterface.name }
         }
     }
 

@@ -12,6 +12,7 @@ internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProvide
         includeNested,
     )
 
+    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasObject()"))
     override fun containsObject(
         includeNested: Boolean,
         predicate: (KoObjectDeclaration) -> Boolean,
@@ -23,4 +24,41 @@ internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProvide
         includeNested: Boolean,
         predicate: (KoObjectDeclaration) -> Boolean,
     ): Int = objects(includeNested).count { predicate(it) }
+
+    override fun hasObjects(includeNested: Boolean): Boolean =
+        objects(includeNested).isNotEmpty()
+
+    override fun hasObjectWithName(
+        name: String,
+        vararg names: String,
+        includeNested: Boolean,
+    ): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.any {
+            objects(includeNested).any { koObject -> it == koObject.name }
+        }
+    }
+
+    override fun hasObjectsWithAllNames(
+        name: String,
+        vararg names: String,
+        includeNested: Boolean,
+    ): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.all {
+            objects(includeNested).any { koObject -> it == koObject.name }
+        }
+    }
+
+    override fun hasObject(
+        includeNested: Boolean,
+        predicate: (KoObjectDeclaration) -> Boolean
+    ): Boolean = objects(includeNested).any(predicate)
+
+    override fun hasAllObjects(
+        includeNested: Boolean,
+        predicate: (KoObjectDeclaration) -> Boolean
+    ): Boolean = objects(includeNested).all(predicate)
 }
