@@ -53,13 +53,6 @@ internal open class KoParentDeclarationCore private constructor(private val ktSu
             .replace(EndOfLine.UNIX.value, " ")
             .substringBefore(" by")
 
-    override val fullyQualifiedName: String by lazy {
-        containingFile
-            .imports
-            .firstOrNull { it.text.endsWith(".$name") }
-            ?.name ?: name
-    }
-
     override fun toString(): String = name
 
     internal companion object {

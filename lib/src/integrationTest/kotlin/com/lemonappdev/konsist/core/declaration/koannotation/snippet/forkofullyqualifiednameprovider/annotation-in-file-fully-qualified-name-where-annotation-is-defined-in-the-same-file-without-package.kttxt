@@ -1,0 +1,4 @@
+@file:SampleAnnotation
+
+@Target(AnnotationTarget.FILE)
+annotation class SampleAnnotation
