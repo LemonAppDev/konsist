@@ -21,12 +21,13 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     var lastDeclaration: KoBaseProvider? = null
 
     try {
-        val testMethodName = Thread
-            .currentThread()
-            .stackTrace
-            .map { it.methodName }
-            .takeWhile { it != "invoke0" }
-            .last()
+        val fifthIndexMethodName = getTestMethodNameFromFifthIndex()
+
+        val testMethodName = if (fifthIndexMethodName.contains("\$default")) {
+            getTestMethodNameFromSixthIndex()
+        } else {
+            fifthIndexMethodName
+        }
 
         val assertMethodName = getTestMethodNameFromFourthIndex()
 
