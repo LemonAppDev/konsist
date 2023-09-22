@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.architecture.assertarchitecture.architecture5
+package com.lemonappdev.konsist.architecture.assertarchitecture.architecture7
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
@@ -9,13 +9,6 @@ import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
 class Architecture7Test {
-    private val adapter =
-        Layer("Adapter", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.adapter..")
-    private val common =
-        Layer("common", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.common..")
-    private val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.domain..")
-    private val port =
-        Layer("Port", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.port..")
     private val scope = Konsist.scopeFromDirectory(
         "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture7/project",
     )
@@ -25,6 +18,14 @@ class Architecture7Test {
         // then
         scope
             .assertArchitecture {
+                val adapter =
+                    Layer("Adapter", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.adapter..")
+                val common =
+                    Layer("common", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.common..")
+                val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.domain..")
+                val port =
+                    Layer("Port", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.port..")
+
                 port.dependsOn(domain)
                 adapter.dependsOn(port)
                 adapter.dependsOn(common)
