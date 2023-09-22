@@ -70,7 +70,7 @@ fun <T : KoArgumentProvider> List<T>.withoutAllArgumentsNamed(name: String, vara
 /**
  * List containing declarations that have at least one argument satisfying the provided predicate.
  *
- * @param predicate A function that defines the condition to be met by a argument declaration.
+ * @param predicate A function that defines the condition to be met by an argument declaration.
  * @return A list containing declarations with at least one argument satisfying the predicate.
  */
 fun <T : KoArgumentProvider> List<T>.withArgument(predicate: (KoArgumentDeclaration) -> Boolean): List<T> = filter {
@@ -80,7 +80,7 @@ fun <T : KoArgumentProvider> List<T>.withArgument(predicate: (KoArgumentDeclarat
 /**
  * List containing declarations that not have argument satisfying the provided predicate.
  *
- * @param predicate A function that defines the condition to be met by a argument declaration.
+ * @param predicate A function that defines the condition to be met by an argument declaration.
  * @return A list containing declarations without argument satisfying the provided predicate.
  */
 fun <T : KoArgumentProvider> List<T>.withoutArgument(predicate: (KoArgumentDeclaration) -> Boolean): List<T> =
