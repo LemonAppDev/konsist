@@ -9,7 +9,7 @@ import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
-import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 import java.util.*
 
@@ -20,28 +20,28 @@ class ApiKonsistTest {
     fun `every api declaration has kdoc`() {
         apiPackageScope
             .declarationsOf<KoKDocProvider>()
-            .assert { it.hasKDoc }
+            .assertTrue { it.hasKDoc }
     }
 
     @Test
     fun `every api declaration has explicit return type`() {
         apiPackageScope
             .functions()
-            .assert { it.hasReturnType() }
+            .assertTrue { it.hasReturnType() }
     }
 
     @Test
     fun `every api function has valid KDoc`() {
         apiPackageScope
             .functions()
-            .assert { it.hasValidKDocParamTags() && it.hasValidKDocReturnTag() }
+            .assertTrue { it.hasValidKDocParamTags() && it.hasValidKDocReturnTag() }
     }
 
     @Test
     fun `includeNested parameter is always before includeLocal parameter`() {
         apiPackageScope
             .functions()
-            .assert {
+            .assertTrue {
                 val includeNestedParameter =
                     it.parameters.indexOfFirst { parameter -> parameter.name == "includeNested" }
                 val includeLocalParameter =
@@ -64,7 +64,7 @@ class ApiKonsistTest {
                     property.type?.hasNameStartingWith("List<Ko") ?: false
                 }
             } // change this lines to .withProperty { } (after https://lemonappdev.atlassian.net/browse/KON-416)
-            .assert {
+            .assertTrue {
                 it.hasCorrectMethods(false)
             }
     }
@@ -90,7 +90,7 @@ class ApiKonsistTest {
             .filter {
                 providers.any { providerName -> it.hasNameContaining(providerName) }
             } // change this lines to .withProperty { } (after https://lemonappdev.atlassian.net/browse/KON-416)
-            .assert {
+            .assertTrue {
                 it.hasCorrectMethods(true)
             }
     }

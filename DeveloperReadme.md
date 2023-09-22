@@ -131,3 +131,16 @@ No matching variant of project :buildSrc was found. The consumer was configured 
 
 Fix
 Change Gradle version `File -> Settings -> Build, Execution, Deployment -> Build Tools -> Gradle`
+
+## Assert method - test method name
+
+We take the test method name from `Thread.currentThread().stackTrace[index].methodName` which has a different behavior 
+due to the way `assert` is called (depending on whether we use default parameters values or not in the `assertTrue` 
+or `assertFalse` method).
+
+- If we don't use any of the default parameters (we set them directly) the stack trace looks like this:
+![Pasted Graphic 3.png](..%2F..%2FLibrary%2FGroup%20Containers%2Fgroup.com.apple.notes%2FAccounts%2FLocalAccount%2FMedia%2FC395A466-A547-4F90-8315-48F28F039D5D%2FPasted%20Graphic%203.png)
+  So the test method name is at the fourth index.
+- If we use any parameter with a default value (we don't set any of them directly) the stack trace looks like this:
+![Pasted Graphic 2.png](..%2F..%2FLibrary%2FGroup%20Containers%2Fgroup.com.apple.notes%2FAccounts%2FLocalAccount%2FMedia%2F8EBEB1ED-C419-4899-8B2D-76297AE0A8AE%2FPasted%20Graphic%202.png)
+  So the test method name is at the fifth index.

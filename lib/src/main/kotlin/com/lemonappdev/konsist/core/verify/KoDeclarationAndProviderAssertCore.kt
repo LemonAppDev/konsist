@@ -12,6 +12,46 @@ import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 
+internal fun <E : KoBaseProvider> List<E?>.assert(
+    strict: Boolean,
+    additionalMessage: String?,
+    function: (E) -> Boolean?,
+    positiveCheck: Boolean,
+) {
+    var lastDeclaration: KoBaseProvider? = null
+
+    try {
+        val fifthIndexMethodName = getTestMethodNameFromFifthIndex()
+
+        val testMethodName = if (fifthIndexMethodName.contains("\$default")) {
+            getTestMethodNameFromSixthIndex()
+        } else {
+            fifthIndexMethodName
+        }
+
+        val assertMethodName = getTestMethodNameFromFourthIndex()
+
+        if (strict) {
+            checkIfLocalListIsEmpty(this, assertMethodName)
+            checkIfLocalListHasOnlyNullElements(this, assertMethodName)
+        }
+
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), testMethodName)
+
+        val result = notSuppressedDeclarations.groupBy {
+            lastDeclaration = it
+            function(it) ?: positiveCheck
+        }
+
+        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
+    } catch (e: KoException) {
+        throw e
+    } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
+        throw KoInternalException(e.message.orEmpty(), e, lastDeclaration)
+    }
+}
+
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("assert"))
 internal fun <E : KoBaseProvider> List<E>.assert(
     additionalMessage: String? = null,
     function: (E) -> Boolean?,
@@ -43,7 +83,22 @@ internal fun <E : KoBaseProvider> List<E>.assert(
     }
 }
 
-private fun checkIfLocalListIsEmpty(localList: List<*>, testMethodName: String) {
+fun checkIfLocalListHasOnlyNullElements(localList: List<*>, testMethodName: String) {
+    val hasOnlyNUllElements = localList.all { it == null }
+    if (hasOnlyNUllElements && (localList.size > 1)) {
+        throw KoPreconditionFailedException(
+            "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
+                "before calling the '$testMethodName' method.",
+        )
+    } else if (hasOnlyNUllElements && (localList.size == 1)) {
+        throw KoPreconditionFailedException(
+            "Method '$testMethodName' was called on a null value. Please ensure that the declaration is not null before " +
+                "calling this method.",
+        )
+    }
+}
+
+fun checkIfLocalListIsEmpty(localList: List<*>, testMethodName: String) {
     if (localList.isEmpty()) {
         throw KoPreconditionFailedException(
             "Declaration list is empty. Please make sure that list of declarations contain items " +

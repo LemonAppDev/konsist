@@ -7,8 +7,8 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
-import com.lemonappdev.konsist.api.verify.assert
-import com.lemonappdev.konsist.api.verify.assertNot
+import com.lemonappdev.konsist.api.verify.assertFalse
+import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldContain
@@ -16,7 +16,7 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class KoDeclarationAssertOnSequenceTest {
+class KoProviderAssertOnSequenceTest {
     @Test
     fun `provider-assert-test-method-name`() {
         // given
@@ -27,7 +27,7 @@ class KoDeclarationAssertOnSequenceTest {
 
         // then
         try {
-            sut.assert { false }
+            sut.assertTrue { false }
         } catch (e: Exception) {
             e.message?.shouldContain("Assert 'provider-assert-test-method-name' was violated (2 times)")
                 ?: throw e
@@ -45,7 +45,7 @@ class KoDeclarationAssertOnSequenceTest {
 
         // then
         try {
-            sut.assert(message) { false }
+            sut.assertTrue(additionalMessage = message) { false }
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-error-with-custom-message' was violated (2 times)." +
@@ -56,28 +56,56 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `provider-assert-fails-when-declaration-list-is-empty`() {
+    fun `provider-assert-error-with-custom-message-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("provider-assert-fails-when-declaration-list-is-empty")
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("provider-assert-error-with-custom-message-and-strict-set-to-true")
             .declarations()
-            .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoNameProvider>()
             .asSequence()
 
-        // when
-        val func = {
-            sut.assert { true }
-        }
-
         // then
-        func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assert' method."
+        try {
+            sut.assertTrue(strict = true, additionalMessage = message) { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'provider-assert-error-with-custom-message-and-strict-set-to-true' was violated (2 times)." +
+                    "\n$message\nInvalid declarations:",
+            )
+                ?: throw e
+        }
     }
 
     @Test
-    fun `provider-assert-not-fails-when-declaration-list-is-empty`() {
+    fun `provider-assert-passes-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("provider-assert-not-fails-when-declaration-list-is-empty")
+        val sut = getSnippetFile("provider-assert-passes-when-declaration-list-is-empty")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
+
+        // when
+        sut.assertTrue { true }
+    }
+
+    @Test
+    fun `provider-assert-false-passes-when-declaration-list-is-empty`() {
+        // given
+        val sut = getSnippetFile("provider-assert-false-passes-when-declaration-list-is-empty")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
+
+        // when
+        sut.assertFalse { false }
+    }
+
+    @Test
+    fun `provider-assert-strict-fails-when-declaration-list-is-empty`() {
+        // given
+        val sut = getSnippetFile("provider-assert-strict-fails-when-declaration-list-is-empty")
             .declarations()
             .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoNameProvider>()
@@ -85,12 +113,31 @@ class KoDeclarationAssertOnSequenceTest {
 
         // when
         val func = {
-            sut.assertNot { false }
+            sut.assertTrue(strict = true) { true }
         }
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNot' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
+    }
+
+    @Test
+    fun `provider-assert-false-strict-fails-when-declaration-list-is-empty`() {
+        // given
+        val sut = getSnippetFile("provider-assert-false-strict-fails-when-declaration-list-is-empty")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
+
+        // when
+        val func = {
+            sut.assertFalse(strict = true) { false }
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
     }
 
     @Test
@@ -102,7 +149,7 @@ class KoDeclarationAssertOnSequenceTest {
             .asSequence()
 
         // then
-        sut.assert { it.hasAnnotations() }
+        sut.assertTrue { it.hasAnnotations() }
     }
 
     @Test
@@ -115,7 +162,7 @@ class KoDeclarationAssertOnSequenceTest {
 
         // when
         val func = {
-            sut.assert { it.hasAnnotations() }
+            sut.assertTrue { it.hasAnnotations() }
         }
 
         // then
@@ -123,28 +170,28 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-not-passes`() {
+    fun `assert-false-passes`() {
         // given
-        val sut = getSnippetFile("assert-not-passes")
+        val sut = getSnippetFile("assert-false-passes")
             .declarations()
             .filterIsInstance<KoAnnotationProvider>()
             .asSequence()
 
         // then
-        sut.assertNot { it.hasAnnotations() }
+        sut.assertFalse { it.hasAnnotations() }
     }
 
     @Test
-    fun `assert-not-fails`() {
+    fun `assert-false-fails`() {
         // given
-        val sut = getSnippetFile("assert-not-fails")
+        val sut = getSnippetFile("assert-false-fails")
             .declarations()
             .filterIsInstance<KoAnnotationProvider>()
             .asSequence()
 
         // when
         val func = {
-            sut.assertNot { it.hasAnnotations() }
+            sut.assertFalse { it.hasAnnotations() }
         }
 
         // then
@@ -160,7 +207,7 @@ class KoDeclarationAssertOnSequenceTest {
             .asSequence()
 
         // then
-        sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
+        sut.assertTrue { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
     }
 
     @Test
@@ -173,7 +220,7 @@ class KoDeclarationAssertOnSequenceTest {
 
         // when
         val func = {
-            sut.assert { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
+            sut.assertTrue { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
         }
 
         // then
@@ -181,28 +228,28 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-not-passes-when-expression-is-nullable`() {
+    fun `assert-false-passes-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-not-passes-when-expression-is-nullable")
+        val sut = getSnippetFile("assert-false-passes-when-expression-is-nullable")
             .declarations()
             .filterIsInstance<KoPrimaryConstructorProvider>()
             .asSequence()
 
         // then
-        sut.assertNot { it.primaryConstructor?.hasParameterNamed("otherParameter") }
+        sut.assertFalse { it.primaryConstructor?.hasParameterNamed("otherParameter") }
     }
 
     @Test
-    fun `assert-not-fails-when-expression-is-nullable`() {
+    fun `assert-false-fails-when-expression-is-nullable`() {
         // given
-        val sut = getSnippetFile("assert-not-fails-when-expression-is-nullable")
+        val sut = getSnippetFile("assert-false-fails-when-expression-is-nullable")
             .declarations()
             .filterIsInstance<KoPrimaryConstructorProvider>()
             .asSequence()
 
         // when
         val func = {
-            sut.assertNot { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
+            sut.assertFalse { it.primaryConstructor?.hasParameterNamed("sampleParameter") }
         }
 
         // then
@@ -219,7 +266,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.hasModifiers() }
+        sut.assertTrue { it.hasModifiers() }
     }
 
     @Test
@@ -232,7 +279,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.hasModifiers() }
+        sut.assertTrue { it.hasModifiers() }
     }
 
     @Test
@@ -245,7 +292,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.hasModifiers() }
+        sut.assertTrue { it.hasModifiers() }
     }
 
     @Test
@@ -258,7 +305,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.hasModifiers() }
+        sut.assertTrue { it.hasModifiers() }
     }
 
     @Test
@@ -271,7 +318,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.hasModifiers() }
+        sut.assertTrue { it.hasModifiers() }
     }
 
     @Test
@@ -284,7 +331,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.hasModifiers() }
+        sut.assertTrue { it.hasModifiers() }
     }
 
     @Test
@@ -297,7 +344,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -310,7 +357,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -323,7 +370,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -336,7 +383,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -349,7 +396,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -362,7 +409,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -377,7 +424,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -390,7 +437,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -403,7 +450,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -416,7 +463,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -429,7 +476,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert { it.hasModifiers() }
+        sut.assertTrue { it.hasModifiers() }
     }
 
     private fun getSnippetFile(fileName: String) =
