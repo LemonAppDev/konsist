@@ -55,29 +55,6 @@
 
 - `./gradlew dokkaHtml` - generate KDocs in `./lib/build/dokka/html/index.html`
 
-## Layers
-
-Below is a diagram of the layers of the `konsist` library:
-
-```mermaid
-%%{init: {'theme': 'forest'}}%%
-flowchart LR
-    subgraph Konsist
-        direction TB
-        direction LR
-        Api --> Core
-    end
-    Client --> Konsist
-```
-
-## Custom Source Sets
-
-- `apiTest` - tests multiple classes together
-- `integrationTest` - test each class in separation 
-- `konsistTest` - tests using `konsist` library using `konsist` library code
-- `snippets` - contain code snippets, written as tests, but lacking `@Test` annotation, so they will no te executed
-- `test` - unit tests with mocks (tests using `mockk` library)
-
 # Naming Conventions
 
 If we create extensions with `vararg` for a property in a declaration class we must check its return type.

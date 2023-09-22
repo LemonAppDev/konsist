@@ -9,6 +9,9 @@ import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 
 class DeclarationKonsistTest {
+    private val declarationPackageScope =
+        Konsist.scopeFromPackage("com.lemonappdev.konsist.core.declaration..", sourceSetName = "main")
+
     @Test
     fun `every function has explicit return type declaration`() {
         declarationPackageScope
@@ -61,10 +64,5 @@ class DeclarationKonsistTest {
             .assertTrue {
                 it.containsFunction { function -> function.name == "toString" }
             }
-    }
-
-    companion object {
-        val declarationPackageScope =
-            Konsist.scopeFromPackage("com.lemonappdev.konsist.core.declaration..", sourceSetName = "main")
     }
 }

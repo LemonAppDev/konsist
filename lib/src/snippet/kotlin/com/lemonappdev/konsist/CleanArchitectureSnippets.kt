@@ -44,7 +44,7 @@ class CleanArchitectureSnippets {
                     function.name == "invoke" && function.hasPublicOrDefaultModifier && function.hasOperatorModifier
                 }
 
-                hasSingleInvokeOperatorMethod && it.numPublicOrDefaultDeclarations() == 1
+                hasSingleInvokeOperatorMethod && it.countFunctions { item -> item.hasPublicOrDefaultModifier } == 1
             }
     }
 
