@@ -47,6 +47,7 @@ class KoScopeFromSourceSetTest {
                 "$appIntegrationTestSourceSetDirectory/konsist/container/KoScopeTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromDirectoryTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromFileTest.kt",
+                "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromFilesTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromModuleTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromPackageTest.kt",
                 "$appIntegrationTestSourceSetDirectory/konsist/container/from/KoScopeFromProductionTest.kt",

@@ -117,12 +117,9 @@ internal class KoScopeCreatorCore : KoScopeCreator {
         return KoScopeCore(files)
     }
 
-    @Deprecated("Use scopeFromFiles instead", ReplaceWith("scopeFromFiles(path)"))
-    override fun scopeFromFile(path: String): KoScope = scopeFromFiles(listOf(path))
+    override fun scopeFromFile(path: String, vararg paths: String): KoScope = scopeFromFiles(setOf(path) + paths)
 
-    override fun scopeFromFiles(path: String, vararg paths: String): KoScope = scopeFromFiles(listOf(path) + paths)
-
-    override fun scopeFromFiles(paths: List<String>): KoScope {
+    override fun scopeFromFiles(paths: Set<String>): KoScope {
         val koFiles = paths
             .map { getAbsolutePath(it) }
             .map { File(it) }

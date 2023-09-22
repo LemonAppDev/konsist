@@ -10,16 +10,16 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class KoScopeFromFileTest {
+class KoScopeFromFilesTest {
 
     @Test
     fun `scopeFromFile`() {
         // given
-        val sut = Konsist
-            .scopeFromFile(
-                "/app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toOsSeparator(),
-                "/app/src/main/kotlin/com/lemonappdev/sample/data/AppDataClass.kt".toOsSeparator()
-            )
+        val files = setOf(
+            "/app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toOsSeparator(),
+            "/app/src/main/kotlin/com/lemonappdev/sample/data/AppDataClass.kt".toOsSeparator()
+        )
+        val sut = Konsist.scopeFromFiles(files)
             .mapToFilePaths()
 
         // then
@@ -27,8 +27,7 @@ class KoScopeFromFileTest {
             listOf(
                 "$appMainSourceSetDirectory/sample/AppClass.kt",
                 "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
-
-                ).toOsSeparator(),
+            ).toOsSeparator(),
         )
     }
 
