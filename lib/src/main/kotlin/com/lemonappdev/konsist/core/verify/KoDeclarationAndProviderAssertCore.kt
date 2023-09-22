@@ -15,6 +15,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
+    suppressName: String?,
     function: (E) -> Boolean?,
     positiveCheck: Boolean,
 ) {
@@ -36,7 +37,9 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
             checkIfLocalListHasOnlyNullElements(this, assertMethodName)
         }
 
-        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), testMethodName)
+        val methodNameOrSuppressName = suppressName ?: testMethodName
+
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), methodNameOrSuppressName)
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
@@ -56,13 +59,12 @@ internal fun <E : KoBaseProvider> List<E>.assert(
     additionalMessage: String? = null,
     function: (E) -> Boolean?,
     positiveCheck: Boolean,
-    suppressName: String? = null
+    suppressName: String? = null,
 ) {
     var lastDeclaration: KoBaseProvider? = null
 
     try {
-        val testMethodName: String =
-            getTestMethodName(additionalMessage = additionalMessage, suppressName = suppressName)
+        val testMethodName: String = suppressName ?: getTestMethodNameFromSixthIndex()
 
         checkIfLocalListIsEmpty(this, getTestMethodNameFromFourthIndex())
 

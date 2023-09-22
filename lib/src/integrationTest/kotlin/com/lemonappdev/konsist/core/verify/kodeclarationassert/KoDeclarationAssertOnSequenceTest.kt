@@ -718,7 +718,7 @@ class KoDeclarationAssertOnSequenceTest {
                 .asSequence()
 
         // then
-        sut.assert(suppressName = "konsist.assert-suppress-with-suppress-name-parameter") {
+        sut.assertTrue(suppressName = "konsist.assert-suppress-with-suppress-name-parameter") {
             it.name.endsWith("Kotest")
         }
     }

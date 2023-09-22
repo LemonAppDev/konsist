@@ -20,9 +20,10 @@ import com.lemonappdev.konsist.core.verify.assert
 fun <E : KoBaseProvider> E?.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
+    suppressName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    listOf(this).assert(strict, additionalMessage, function, positiveCheck = true)
+    listOf(this).assert(strict, additionalMessage, suppressName, function, positiveCheck = true)
 }
 
 /**
@@ -41,9 +42,10 @@ fun <E : KoBaseProvider> E?.assertTrue(
 fun <E : KoBaseProvider> E?.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
+    suppressName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    listOf(this).assert(strict, additionalMessage, function, positiveCheck = false)
+    listOf(this).assert(strict, additionalMessage, suppressName, function, positiveCheck = false)
 }
 
 /**
@@ -62,9 +64,10 @@ fun <E : KoBaseProvider> E?.assertFalse(
 fun <E : KoBaseProvider> List<E?>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
+    suppressName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    assert(strict, additionalMessage, function, positiveCheck = true)
+    assert(strict, additionalMessage, suppressName, function, positiveCheck = true)
 }
 
 /**
@@ -83,9 +86,10 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
 fun <E : KoBaseProvider> List<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
+    suppressName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    assert(strict, additionalMessage, function, positiveCheck = false)
+    assert(strict, additionalMessage, suppressName, function, positiveCheck = false)
 }
 
 /**
@@ -104,9 +108,10 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
 fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
+    suppressName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    this.toList().assert(strict, additionalMessage, function, true)
+    this.toList().assert(strict, additionalMessage, suppressName, function, true)
 }
 
 /**
@@ -125,9 +130,10 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
 fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
+    suppressName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    this.toList().assert(strict, additionalMessage, function, false)
+    this.toList().assert(strict, additionalMessage, suppressName, function, false)
 }
 
 /**
