@@ -39,7 +39,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
 
         val methodNameOrSuppressName = suppressName ?: testMethodName
 
-        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), testMethodName)
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), methodNameOrSuppressName)
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
