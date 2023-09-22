@@ -92,7 +92,7 @@ interface KoObjectProvider : KoBaseProvider {
      */
     fun hasObject(
         includeNested: Boolean = true,
-        predicate: (KoObjectDeclaration) -> Boolean
+        predicate: (KoObjectDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -107,6 +107,6 @@ interface KoObjectProvider : KoBaseProvider {
      */
     fun hasAllObjects(
         includeNested: Boolean = true,
-        predicate: (KoObjectDeclaration) -> Boolean
+        predicate: (KoObjectDeclaration) -> Boolean,
     ): Boolean
 }

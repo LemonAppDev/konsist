@@ -38,7 +38,7 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         name: String,
         vararg names: String,
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ): Boolean {
         val givenNames = names.toList() + name
 
@@ -51,7 +51,7 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         name: String,
         vararg names: String,
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ): Boolean {
         val givenNames = names.toList() + name
 
@@ -63,12 +63,12 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
     override fun hasFunction(
         includeNested: Boolean,
         includeLocal: Boolean,
-        predicate: (KoFunctionDeclaration) -> Boolean
+        predicate: (KoFunctionDeclaration) -> Boolean,
     ): Boolean = functions(includeNested, includeLocal).any(predicate)
 
     override fun hasAllFunctions(
         includeNested: Boolean,
         includeLocal: Boolean,
-        predicate: (KoFunctionDeclaration) -> Boolean
+        predicate: (KoFunctionDeclaration) -> Boolean,
     ): Boolean = functions(includeNested, includeLocal).all(predicate)
 }

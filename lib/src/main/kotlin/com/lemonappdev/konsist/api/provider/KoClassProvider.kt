@@ -77,7 +77,7 @@ interface KoClassProvider : KoBaseProvider {
         name: String,
         vararg names: String,
         includeNested: Boolean = true,
-        includeLocal: Boolean = true
+        includeLocal: Boolean = true,
     ): Boolean
 
     /**
@@ -103,7 +103,7 @@ interface KoClassProvider : KoBaseProvider {
     fun hasClass(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
-        predicate: (KoClassDeclaration) -> Boolean
+        predicate: (KoClassDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -119,6 +119,6 @@ interface KoClassProvider : KoBaseProvider {
     fun hasAllClasses(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
-        predicate: (KoClassDeclaration) -> Boolean
+        predicate: (KoClassDeclaration) -> Boolean,
     ): Boolean
 }

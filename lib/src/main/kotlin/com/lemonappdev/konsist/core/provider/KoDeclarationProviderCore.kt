@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
-import com.lemonappdev.konsist.api.declaration.KoPropertyDeclaration
 import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
@@ -56,12 +55,12 @@ internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProv
     override fun hasDeclaration(
         includeNested: Boolean,
         includeLocal: Boolean,
-        predicate: (KoBaseDeclaration) -> Boolean
+        predicate: (KoBaseDeclaration) -> Boolean,
     ): Boolean = declarations(includeNested, includeLocal).any(predicate)
 
     override fun hasAllDeclarations(
         includeNested: Boolean,
         includeLocal: Boolean,
-        predicate: (KoBaseDeclaration) -> Boolean
+        predicate: (KoBaseDeclaration) -> Boolean,
     ): Boolean = declarations(includeNested, includeLocal).all(predicate)
 }

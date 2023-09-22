@@ -92,7 +92,7 @@ interface KoInterfaceProvider : KoBaseProvider {
      */
     fun hasInterface(
         includeNested: Boolean = true,
-        predicate: (KoInterfaceDeclaration) -> Boolean
+        predicate: (KoInterfaceDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -107,6 +107,6 @@ interface KoInterfaceProvider : KoBaseProvider {
      */
     fun hasAllInterfaces(
         includeNested: Boolean = true,
-        predicate: (KoInterfaceDeclaration) -> Boolean
+        predicate: (KoInterfaceDeclaration) -> Boolean,
     ): Boolean
 }

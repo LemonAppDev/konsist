@@ -98,7 +98,7 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
  */
 fun <T : KoObjectProvider> List<T>.withObject(
     includeNested: Boolean = true,
-    predicate: (KoObjectDeclaration) -> Boolean
+    predicate: (KoObjectDeclaration) -> Boolean,
 ): List<T> = filter {
     it.hasObject(includeNested, predicate)
 }
@@ -111,7 +111,7 @@ fun <T : KoObjectProvider> List<T>.withObject(
  */
 fun <T : KoObjectProvider> List<T>.withoutObject(
     includeNested: Boolean = true,
-    predicate: (KoObjectDeclaration) -> Boolean
+    predicate: (KoObjectDeclaration) -> Boolean,
 ): List<T> =
     filterNot { it.hasObject(includeNested, predicate) }
 
@@ -123,7 +123,7 @@ fun <T : KoObjectProvider> List<T>.withoutObject(
  */
 fun <T : KoObjectProvider> List<T>.withAllObjects(
     includeNested: Boolean = true,
-    predicate: (KoObjectDeclaration) -> Boolean
+    predicate: (KoObjectDeclaration) -> Boolean,
 ): List<T> =
     filter {
         it.hasAllObjects(includeNested, predicate)
@@ -137,7 +137,7 @@ fun <T : KoObjectProvider> List<T>.withAllObjects(
  */
 fun <T : KoObjectProvider> List<T>.withoutAllObjects(
     includeNested: Boolean = true,
-    predicate: (KoObjectDeclaration) -> Boolean
+    predicate: (KoObjectDeclaration) -> Boolean,
 ): List<T> =
     filterNot { it.hasAllObjects(includeNested, predicate) }
 
@@ -149,7 +149,7 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjects(
  */
 fun <T : KoObjectProvider> List<T>.withObjects(
     includeNested: Boolean = true,
-    predicate: (List<KoObjectDeclaration>) -> Boolean
+    predicate: (List<KoObjectDeclaration>) -> Boolean,
 ): List<T> =
     filter { predicate(it.objects(includeNested)) }
 
@@ -161,6 +161,6 @@ fun <T : KoObjectProvider> List<T>.withObjects(
  */
 fun <T : KoObjectProvider> List<T>.withoutObjects(
     includeNested: Boolean = true,
-    predicate: (List<KoObjectDeclaration>) -> Boolean
+    predicate: (List<KoObjectDeclaration>) -> Boolean,
 ): List<T> =
     filterNot { predicate(it.objects(includeNested)) }

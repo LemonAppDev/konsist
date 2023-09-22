@@ -39,7 +39,7 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         name: String,
         vararg names: String,
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ): Boolean {
         val givenNames = names.toList() + name
 
@@ -52,7 +52,7 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
         name: String,
         vararg names: String,
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ): Boolean {
         val givenNames = names.toList() + name
 
@@ -64,12 +64,12 @@ internal interface KoClassProviderCore : KoClassProvider, KoDeclarationProviderC
     override fun hasClass(
         includeNested: Boolean,
         includeLocal: Boolean,
-        predicate: (KoClassDeclaration) -> Boolean
+        predicate: (KoClassDeclaration) -> Boolean,
     ): Boolean = classes(includeNested, includeLocal).any(predicate)
 
     override fun hasAllClasses(
         includeNested: Boolean,
         includeLocal: Boolean,
-        predicate: (KoClassDeclaration) -> Boolean
+        predicate: (KoClassDeclaration) -> Boolean,
     ): Boolean = classes(includeNested, includeLocal).all(predicate)
 }

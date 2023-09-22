@@ -77,7 +77,7 @@ interface KoFunctionProvider : KoBaseProvider {
         name: String,
         vararg names: String,
         includeNested: Boolean = true,
-        includeLocal: Boolean = true
+        includeLocal: Boolean = true,
     ): Boolean
 
     /**
@@ -103,7 +103,7 @@ interface KoFunctionProvider : KoBaseProvider {
     fun hasFunction(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
-        predicate: (KoFunctionDeclaration) -> Boolean
+        predicate: (KoFunctionDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -119,6 +119,6 @@ interface KoFunctionProvider : KoBaseProvider {
     fun hasAllFunctions(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
-        predicate: (KoFunctionDeclaration) -> Boolean
+        predicate: (KoFunctionDeclaration) -> Boolean,
     ): Boolean
 }

@@ -54,11 +54,11 @@ internal interface KoObjectProviderCore : KoObjectProvider, KoDeclarationProvide
 
     override fun hasObject(
         includeNested: Boolean,
-        predicate: (KoObjectDeclaration) -> Boolean
+        predicate: (KoObjectDeclaration) -> Boolean,
     ): Boolean = objects(includeNested).any(predicate)
 
     override fun hasAllObjects(
         includeNested: Boolean,
-        predicate: (KoObjectDeclaration) -> Boolean
+        predicate: (KoObjectDeclaration) -> Boolean,
     ): Boolean = objects(includeNested).all(predicate)
 }

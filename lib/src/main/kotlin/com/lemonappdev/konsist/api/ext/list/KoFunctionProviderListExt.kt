@@ -42,7 +42,7 @@ fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-    includeLocal: Boolean = true
+    includeLocal: Boolean = true,
 ): List<T> = filter {
     it.hasFunctionWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
 }
@@ -58,7 +58,7 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-    includeLocal: Boolean = true
+    includeLocal: Boolean = true,
 ): List<T> = filterNot {
     it.hasFunctionWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
 }
@@ -74,7 +74,7 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-    includeLocal: Boolean = true
+    includeLocal: Boolean = true,
 ): List<T> = filter {
     it.hasFunctionsWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
 }
@@ -90,7 +90,7 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-    includeLocal: Boolean = true
+    includeLocal: Boolean = true,
 ): List<T> =
     filterNot {
         it.hasFunctionsWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
@@ -105,7 +105,7 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
 fun <T : KoFunctionProvider> List<T>.withFunction(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (KoFunctionDeclaration) -> Boolean
+    predicate: (KoFunctionDeclaration) -> Boolean,
 ): List<T> = filter {
     it.hasFunction(includeNested, includeLocal, predicate)
 }
@@ -119,7 +119,7 @@ fun <T : KoFunctionProvider> List<T>.withFunction(
 fun <T : KoFunctionProvider> List<T>.withoutFunction(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (KoFunctionDeclaration) -> Boolean
+    predicate: (KoFunctionDeclaration) -> Boolean,
 ): List<T> =
     filterNot { it.hasFunction(includeNested, includeLocal, predicate) }
 
@@ -132,7 +132,7 @@ fun <T : KoFunctionProvider> List<T>.withoutFunction(
 fun <T : KoFunctionProvider> List<T>.withAllFunctions(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (KoFunctionDeclaration) -> Boolean
+    predicate: (KoFunctionDeclaration) -> Boolean,
 ): List<T> =
     filter {
         it.hasAllFunctions(includeNested, includeLocal, predicate)
@@ -147,7 +147,7 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctions(
 fun <T : KoFunctionProvider> List<T>.withoutAllFunctions(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (KoFunctionDeclaration) -> Boolean
+    predicate: (KoFunctionDeclaration) -> Boolean,
 ): List<T> =
     filterNot { it.hasAllFunctions(includeNested, includeLocal, predicate) }
 
@@ -160,7 +160,7 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctions(
 fun <T : KoFunctionProvider> List<T>.withFunctions(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (List<KoFunctionDeclaration>) -> Boolean
+    predicate: (List<KoFunctionDeclaration>) -> Boolean,
 ): List<T> =
     filter { predicate(it.functions(includeNested, includeLocal)) }
 
@@ -173,6 +173,6 @@ fun <T : KoFunctionProvider> List<T>.withFunctions(
 fun <T : KoFunctionProvider> List<T>.withoutFunctions(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (List<KoFunctionDeclaration>) -> Boolean
+    predicate: (List<KoFunctionDeclaration>) -> Boolean,
 ): List<T> =
     filterNot { predicate(it.functions(includeNested, includeLocal)) }

@@ -120,7 +120,7 @@ interface KoDeclarationProvider : KoBaseProvider {
     fun hasDeclaration(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
-        predicate: (KoBaseDeclaration) -> Boolean
+        predicate: (KoBaseDeclaration) -> Boolean,
     ): Boolean
 
     /**
@@ -136,6 +136,6 @@ interface KoDeclarationProvider : KoBaseProvider {
     fun hasAllDeclarations(
         includeNested: Boolean = true,
         includeLocal: Boolean = true,
-        predicate: (KoBaseDeclaration) -> Boolean
+        predicate: (KoBaseDeclaration) -> Boolean,
     ): Boolean
 }

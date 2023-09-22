@@ -42,7 +42,7 @@ fun <T : KoClassProvider> List<T>.withClassNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-    includeLocal: Boolean = true
+    includeLocal: Boolean = true,
 ): List<T> = filter {
     it.hasClassWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
 }
@@ -58,7 +58,7 @@ fun <T : KoClassProvider> List<T>.withoutClassNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-    includeLocal: Boolean = true
+    includeLocal: Boolean = true,
 ): List<T> = filterNot {
     it.hasClassWithName(name, *names, includeNested = includeNested, includeLocal = includeLocal)
 }
@@ -74,7 +74,7 @@ fun <T : KoClassProvider> List<T>.withAllClassesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-    includeLocal: Boolean = true
+    includeLocal: Boolean = true,
 ): List<T> = filter {
     it.hasClassesWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
 }
@@ -90,7 +90,7 @@ fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
     name: String,
     vararg names: String,
     includeNested: Boolean = true,
-    includeLocal: Boolean = true
+    includeLocal: Boolean = true,
 ): List<T> =
     filterNot {
         it.hasClassesWithAllNames(name, *names, includeNested = includeNested, includeLocal = includeLocal)
@@ -105,7 +105,7 @@ fun <T : KoClassProvider> List<T>.withoutAllClassesNamed(
 fun <T : KoClassProvider> List<T>.withClass(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (KoClassDeclaration) -> Boolean
+    predicate: (KoClassDeclaration) -> Boolean,
 ): List<T> = filter {
     it.hasClass(includeNested, includeLocal, predicate)
 }
@@ -119,7 +119,7 @@ fun <T : KoClassProvider> List<T>.withClass(
 fun <T : KoClassProvider> List<T>.withoutClass(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (KoClassDeclaration) -> Boolean
+    predicate: (KoClassDeclaration) -> Boolean,
 ): List<T> =
     filterNot { it.hasClass(includeNested, includeLocal, predicate) }
 
@@ -132,7 +132,7 @@ fun <T : KoClassProvider> List<T>.withoutClass(
 fun <T : KoClassProvider> List<T>.withAllClasses(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (KoClassDeclaration) -> Boolean
+    predicate: (KoClassDeclaration) -> Boolean,
 ): List<T> =
     filter {
         it.hasAllClasses(includeNested, includeLocal, predicate)
@@ -147,7 +147,7 @@ fun <T : KoClassProvider> List<T>.withAllClasses(
 fun <T : KoClassProvider> List<T>.withoutAllClasses(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (KoClassDeclaration) -> Boolean
+    predicate: (KoClassDeclaration) -> Boolean,
 ): List<T> =
     filterNot { it.hasAllClasses(includeNested, includeLocal, predicate) }
 
@@ -160,7 +160,7 @@ fun <T : KoClassProvider> List<T>.withoutAllClasses(
 fun <T : KoClassProvider> List<T>.withClasses(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (List<KoClassDeclaration>) -> Boolean
+    predicate: (List<KoClassDeclaration>) -> Boolean,
 ): List<T> =
     filter { predicate(it.classes(includeNested, includeLocal)) }
 
@@ -173,6 +173,6 @@ fun <T : KoClassProvider> List<T>.withClasses(
 fun <T : KoClassProvider> List<T>.withoutClasses(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (List<KoClassDeclaration>) -> Boolean
+    predicate: (List<KoClassDeclaration>) -> Boolean,
 ): List<T> =
     filterNot { predicate(it.classes(includeNested, includeLocal)) }

@@ -39,7 +39,7 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
         name: String,
         vararg names: String,
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ): Boolean {
         val givenNames = names.toList() + name
 
@@ -52,7 +52,7 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
         name: String,
         vararg names: String,
         includeNested: Boolean,
-        includeLocal: Boolean
+        includeLocal: Boolean,
     ): Boolean {
         val givenNames = names.toList() + name
 
@@ -64,12 +64,12 @@ internal interface KoPropertyProviderCore : KoPropertyProvider, KoDeclarationPro
     override fun hasProperty(
         includeNested: Boolean,
         includeLocal: Boolean,
-        predicate: (KoPropertyDeclaration) -> Boolean
+        predicate: (KoPropertyDeclaration) -> Boolean,
     ): Boolean = properties(includeNested, includeLocal).any(predicate)
 
     override fun hasAllProperties(
         includeNested: Boolean,
         includeLocal: Boolean,
-        predicate: (KoPropertyDeclaration) -> Boolean
+        predicate: (KoPropertyDeclaration) -> Boolean,
     ): Boolean = properties(includeNested, includeLocal).all(predicate)
 }

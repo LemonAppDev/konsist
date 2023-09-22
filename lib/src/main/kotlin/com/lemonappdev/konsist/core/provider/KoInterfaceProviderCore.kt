@@ -1,6 +1,5 @@
 package com.lemonappdev.konsist.core.provider
 
-import com.lemonappdev.konsist.api.declaration.KoFunctionDeclaration
 import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
 import com.lemonappdev.konsist.api.provider.KoInterfaceProvider
 import com.lemonappdev.konsist.core.provider.util.KoDeclarationProviderCoreUtil
@@ -57,11 +56,11 @@ internal interface KoInterfaceProviderCore : KoInterfaceProvider, KoDeclarationP
 
     override fun hasInterface(
         includeNested: Boolean,
-        predicate: (KoInterfaceDeclaration) -> Boolean
+        predicate: (KoInterfaceDeclaration) -> Boolean,
     ): Boolean = interfaces(includeNested).any(predicate)
 
     override fun hasAllInterfaces(
         includeNested: Boolean,
-        predicate: (KoInterfaceDeclaration) -> Boolean
+        predicate: (KoInterfaceDeclaration) -> Boolean,
     ): Boolean = interfaces(includeNested).all(predicate)
 }

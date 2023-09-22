@@ -98,7 +98,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfacesNamed(
  */
 fun <T : KoInterfaceProvider> List<T>.withInterface(
     includeNested: Boolean = true,
-    predicate: (KoInterfaceDeclaration) -> Boolean
+    predicate: (KoInterfaceDeclaration) -> Boolean,
 ): List<T> = filter {
     it.hasInterface(includeNested, predicate)
 }
@@ -111,7 +111,7 @@ fun <T : KoInterfaceProvider> List<T>.withInterface(
  */
 fun <T : KoInterfaceProvider> List<T>.withoutInterface(
     includeNested: Boolean = true,
-    predicate: (KoInterfaceDeclaration) -> Boolean
+    predicate: (KoInterfaceDeclaration) -> Boolean,
 ): List<T> =
     filterNot { it.hasInterface(includeNested, predicate) }
 
@@ -123,7 +123,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutInterface(
  */
 fun <T : KoInterfaceProvider> List<T>.withAllInterfaces(
     includeNested: Boolean = true,
-    predicate: (KoInterfaceDeclaration) -> Boolean
+    predicate: (KoInterfaceDeclaration) -> Boolean,
 ): List<T> =
     filter {
         it.hasAllInterfaces(includeNested, predicate)
@@ -137,7 +137,7 @@ fun <T : KoInterfaceProvider> List<T>.withAllInterfaces(
  */
 fun <T : KoInterfaceProvider> List<T>.withoutAllInterfaces(
     includeNested: Boolean = true,
-    predicate: (KoInterfaceDeclaration) -> Boolean
+    predicate: (KoInterfaceDeclaration) -> Boolean,
 ): List<T> =
     filterNot { it.hasAllInterfaces(includeNested, predicate) }
 
@@ -149,7 +149,7 @@ fun <T : KoInterfaceProvider> List<T>.withoutAllInterfaces(
  */
 fun <T : KoInterfaceProvider> List<T>.withInterfaces(
     includeNested: Boolean = true,
-    predicate: (List<KoInterfaceDeclaration>) -> Boolean
+    predicate: (List<KoInterfaceDeclaration>) -> Boolean,
 ): List<T> =
     filter { predicate(it.interfaces(includeNested)) }
 
@@ -161,6 +161,6 @@ fun <T : KoInterfaceProvider> List<T>.withInterfaces(
  */
 fun <T : KoInterfaceProvider> List<T>.withoutInterfaces(
     includeNested: Boolean = true,
-    predicate: (List<KoInterfaceDeclaration>) -> Boolean
+    predicate: (List<KoInterfaceDeclaration>) -> Boolean,
 ): List<T> =
     filterNot { predicate(it.interfaces(includeNested)) }

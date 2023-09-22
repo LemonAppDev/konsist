@@ -15,7 +15,6 @@ fun <T : KoDeclarationProvider> List<T>.declarations(
     includeLocal: Boolean = true,
 ): List<KoBaseDeclaration> = flatMap { it.declarations(includeNested, includeLocal) }
 
-
 /**
  * List containing declarations with any declaration.
  *
@@ -41,7 +40,7 @@ fun <T : KoDeclarationProvider> List<T>.withoutDeclarations(includeNested: Boole
 fun <T : KoDeclarationProvider> List<T>.withDeclaration(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (KoBaseDeclaration) -> Boolean
+    predicate: (KoBaseDeclaration) -> Boolean,
 ): List<T> = filter {
     it.hasDeclaration(includeNested, includeLocal, predicate)
 }
@@ -55,7 +54,7 @@ fun <T : KoDeclarationProvider> List<T>.withDeclaration(
 fun <T : KoDeclarationProvider> List<T>.withoutDeclaration(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (KoBaseDeclaration) -> Boolean
+    predicate: (KoBaseDeclaration) -> Boolean,
 ): List<T> =
     filterNot { it.hasDeclaration(includeNested, includeLocal, predicate) }
 
@@ -68,7 +67,7 @@ fun <T : KoDeclarationProvider> List<T>.withoutDeclaration(
 fun <T : KoDeclarationProvider> List<T>.withAllDeclarations(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (KoBaseDeclaration) -> Boolean
+    predicate: (KoBaseDeclaration) -> Boolean,
 ): List<T> =
     filter {
         it.hasAllDeclarations(includeNested, includeLocal, predicate)
@@ -83,7 +82,7 @@ fun <T : KoDeclarationProvider> List<T>.withAllDeclarations(
 fun <T : KoDeclarationProvider> List<T>.withoutAllDeclarations(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (KoBaseDeclaration) -> Boolean
+    predicate: (KoBaseDeclaration) -> Boolean,
 ): List<T> =
     filterNot { it.hasAllDeclarations(includeNested, includeLocal, predicate) }
 
@@ -96,7 +95,7 @@ fun <T : KoDeclarationProvider> List<T>.withoutAllDeclarations(
 fun <T : KoDeclarationProvider> List<T>.withDeclarations(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (List<KoBaseDeclaration>) -> Boolean
+    predicate: (List<KoBaseDeclaration>) -> Boolean,
 ): List<T> =
     filter { predicate(it.declarations(includeNested, includeLocal)) }
 
@@ -109,6 +108,6 @@ fun <T : KoDeclarationProvider> List<T>.withDeclarations(
 fun <T : KoDeclarationProvider> List<T>.withoutDeclarations(
     includeNested: Boolean = true,
     includeLocal: Boolean = true,
-    predicate: (List<KoBaseDeclaration>) -> Boolean
+    predicate: (List<KoBaseDeclaration>) -> Boolean,
 ): List<T> =
     filterNot { predicate(it.declarations(includeNested, includeLocal)) }
