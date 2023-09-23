@@ -37,16 +37,16 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
             checkIfLocalListHasOnlyNullElements(this, assertMethodName)
         }
 
-        val methodNameOrSuppressName = suppressName ?: testMethodName
+        val methodOrSuppressName = suppressName ?: testMethodName
 
-        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), methodNameOrSuppressName)
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), methodOrSuppressName)
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
             function(it) ?: positiveCheck
         }
 
-        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
+        getResult(notSuppressedDeclarations, result, positiveCheck, methodOrSuppressName, additionalMessage)
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
