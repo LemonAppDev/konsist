@@ -77,6 +77,38 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-android-gradle-groovy-junit-5/ && ./gradlew konsist_test:test
 
+  konsist-starter-android-gradle-groovy-kotest:
+    name: Konsist Starter Android Gradle Groovy koTest
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4 # v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.3'
+
+      - name: Publish Konsist Artifact To Local Maven Repository
+        run: >
+          ./gradlew publishToMavenLocal
+
+      - name: Add Maven Local Repository
+        run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-android-gradle-groovy-kotest/settings.gradle
+
+      - name: Replace Konsist Version
+        run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-android-gradle-groovy-kotest/konsist_test/build.gradle
+
+      - name: Run Konsist Test
+        run: cd samples/starter-projects/konsist-starter-android-gradle-groovy-kotest/ && ./gradlew konsist_test:test
+
   konsist-starter-android-gradle-kotlin-junit-4:
     name: Konsist Starter Android Gradle Kotlin Junit 4
     continue-on-error: true
@@ -141,6 +173,38 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-android-gradle-kotlin-junit-5/ && ./gradlew konsist_test:test
 
+  konsist-starter-android-gradle-kotlin-kotest:
+    name: Konsist Starter Android Gradle Kotlin KoTest
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4 # v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.3'
+
+      - name: Publish Konsist Artifact To Local Maven Repository
+        run: >
+          ./gradlew publishToMavenLocal
+
+      - name: Add Maven Local Repository
+        run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-android-gradle-kotlin-konsist/settings.gradle.kts
+
+      - name: Replace Konsist Version
+        run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-android-gradle-kotlin-konsist/konsist_test/build.gradle.kts
+
+      - name: Run Konsist Test
+        run: cd samples/starter-projects/konsist-starter-android-gradle-kotlin-konsist/ && ./gradlew konsist_test:test
+
   konsist-starter-spring-gradle-kotlin-junit-5:
     name: Konsist Starter Spring Gradle Groovy Junit 5
     continue-on-error: true
@@ -172,6 +236,38 @@ jobs:
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-spring-gradle-kotlin-junit-5/ && ./gradlew konsistTest
+
+  konsist-starter-spring-gradle-kotlin-kotest:
+    name: Konsist Starter Spring Gradle Groovy KoTest
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4 # v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.3'
+
+      - name: Publish Konsist Artifact To Local Maven Repository
+        run: >
+          ./gradlew publishToMavenLocal
+
+      - name: Add Maven Local Repository
+        run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-spring-gradle-kotlin-kotest/build.gradle.kts
+
+      - name: Replace Konsist Version
+        run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-spring-gradle-kotlin-kotest/build.gradle.kts
+
+      - name: Run Konsist Test
+        run: cd samples/starter-projects/konsist-starter-spring-gradle-kotlin-kotest/ && ./gradlew konsistTest
 
   konsist-starter-spring-gradle-groovy-junit-5:
     name: Konsist Starter Spring Gradle Groovy Junit 5
@@ -205,6 +301,39 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-spring-gradle-groovy-junit-5/ && ./gradlew konsistTest
 
+
+  konsist-starter-spring-gradle-groovy-kotest:
+    name: Konsist Starter Spring Gradle Groovy KoTest
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4 # v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.3'
+
+      - name: Publish Konsist Artifact To Local Maven Repository
+        run: >
+          ./gradlew publishToMavenLocal
+
+      - name: Add Maven Local Repository
+        run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-spring-gradle-groovy-kotest/build.gradle
+
+      - name: Replace Konsist Version
+        run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-spring-gradle-groovy-kotest/build.gradle
+
+      - name: Run Konsist Test
+        run: cd samples/starter-projects/konsist-starter-spring-gradle-groovy-kotest/ && ./gradlew konsistTest
+
   konsist-starter-spring-maven-junit5:
     name: Konsist Starter Spring Maven Junit 5
     continue-on-error: true
@@ -237,6 +366,39 @@ jobs:
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-spring-maven-junit5/ && mvn test
 
+
+  konsist-starter-spring-maven-kotest:
+    name: Konsist Starter Spring Maven KoTest
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4 # v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.3'
+
+      - name: Publish Konsist Artifact To Local Maven Repository
+        run: >
+          ./gradlew publishToMavenLocal
+
+      - name: Add Maven Local Repository
+        run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-spring-maven-kotest/pom.xml
+
+      - name: Replace Konsist Version
+        run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-spring-maven-kotest/pom.xml
+
+      - name: Run Konsist Test
+        run: cd samples/starter-projects/konsist-starter-spring-maven-kotest/ && mvn test
+
   konsist-starter-multiplatform-gradle-kotlin-junit5:
     name: Konsist Starter Spring Gradle Groovy Junit 5
     continue-on-error: true
@@ -268,3 +430,36 @@ jobs:
 
       - name: Run Konsist Test
         run: cd samples/starter-projects/konsist-starter-multiplatform-gradle-kotlin-junit5/ && ./gradlew test
+
+
+  konsist-starter-multiplatform-gradle-kotlin-kotest:
+    name: Konsist Starter Spring Gradle Groovy KoTest
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4 # v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.3'
+
+      - name: Publish Konsist Artifact To Local Maven Repository
+        run: >
+          ./gradlew publishToMavenLocal
+
+      - name: Add Maven Local Repository
+        run: python3 scripts/replace-konsist-version/add-maven-local-repository-to-config-file.py samples/starter-projects/konsist-starter-multiplatform-gradle-kotlin-kotest/build.gradle.kts
+
+      - name: Replace Konsist Version
+        run: python3 scripts/replace-konsist-version/replace-konsist-version-gradle-groovy.py samples/starter-projects/konsist-starter-multiplatform-gradle-kotlin-kotest/build.gradle.kts
+
+      - name: Run Konsist Test
+        run: cd samples/starter-projects/konsist-starter-multiplatform-gradle-kotlin-kotest/ && ./gradlew test

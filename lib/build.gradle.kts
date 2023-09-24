@@ -23,6 +23,7 @@ testing {
         dependencies {
             testImplementation(libs.junitJupiterEngine)
             testImplementation(libs.junitJupiterParams)
+            testImplementation(libs.koTest)
         }
 
         register("integrationTest", JvmTestSuite::class) {
