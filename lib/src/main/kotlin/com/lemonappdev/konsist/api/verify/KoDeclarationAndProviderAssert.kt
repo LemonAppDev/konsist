@@ -13,7 +13,8 @@ import com.lemonappdev.konsist.core.verify.assert
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional test method name coming obtained from different context
+ * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
+ *                however for koTest framework it hase to be manually specified to allow suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
@@ -36,7 +37,8 @@ fun <E : KoBaseProvider> E?.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional test method name coming obtained from different context
+ * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
+ *                however for koTest framework it hase to be manually specified to allow suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
@@ -59,7 +61,8 @@ fun <E : KoBaseProvider> E?.assertFalse(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional test method name coming obtained from different context
+ * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
+ *                however for koTest framework it hase to be manually specified to allow suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
@@ -82,7 +85,8 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional test method name coming obtained from different context
+ * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
+ *                however for koTest framework it hase to be manually specified to allow suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
@@ -105,7 +109,8 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional test method name coming obtained from different context
+ * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
+ *                however for koTest framework it hase to be manually specified to allow suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
@@ -128,7 +133,8 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional test method name coming obtained from different context
+ * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
+ *                however for koTest framework it hase to be manually specified to allow suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
