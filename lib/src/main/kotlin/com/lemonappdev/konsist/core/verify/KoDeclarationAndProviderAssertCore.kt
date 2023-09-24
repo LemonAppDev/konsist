@@ -37,16 +37,16 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
             checkIfLocalListHasOnlyNullElements(this, assertMethodName)
         }
 
-        val methodOrSuppressName = suppressName ?: testMethodName
+        val localSuppressName = suppressName ?: testMethodName
 
-        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), methodOrSuppressName)
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), localSuppressName)
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
             function(it) ?: positiveCheck
         }
 
-        getResult(notSuppressedDeclarations, result, positiveCheck, methodOrSuppressName, additionalMessage)
+        getResult(notSuppressedDeclarations, result, positiveCheck, localSuppressName, additionalMessage)
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
@@ -110,7 +110,7 @@ fun checkIfLocalListIsEmpty(localList: List<*>, testMethodName: String) {
     }
 }
 
-private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>, testMethodName: String): List<E> {
+private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>, suppressName: String): List<E> {
     val declarations: MutableMap<E, Boolean> = mutableMapOf()
 
     // First we need to exclude (if exist) file suppress test annotation
@@ -119,11 +119,11 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
             it is KoAnnotationDeclaration &&
                 (
                     it.name == "Suppress" &&
-                        it.text.contains("\"konsist.$testMethodName\"") ||
-                        it.text.contains("\"$testMethodName\"")
+                        it.text.contains("\"konsist.$suppressName\"") ||
+                        it.text.contains("\"$suppressName\"")
                     )
         }
-        .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it, testMethodName) }
+        .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it, suppressName) }
 
     val withoutSuppress = mutableListOf<E>()
 
@@ -171,18 +171,18 @@ private fun getResult(
     items: List<*>,
     result: Map<Boolean, List<Any>>,
     positiveCheck: Boolean,
-    testMethodName: String,
+    suppressName: String,
     additionalMessage: String?,
 ) {
     val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
 
     if (!allChecksPassed) {
         val failedItems = result[!positiveCheck] ?: emptyList()
-        throw KoCheckFailedException(getCheckFailedMessage(failedItems, testMethodName, additionalMessage))
+        throw KoCheckFailedException(getCheckFailedMessage(failedItems, suppressName, additionalMessage))
     }
 }
 
-private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String, additionalMessage: String?): String {
+private fun getCheckFailedMessage(failedItems: List<*>, suppressName: String, additionalMessage: String?): String {
     var types = ""
     val failedDeclarationsMessage = failedItems.joinToString("\n") {
         val konsistDeclarationClassNamePrefix = "Ko"
@@ -219,5 +219,6 @@ private fun getCheckFailedMessage(failedItems: List<*>, testMethodName: String, 
 
     val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
     val times = if (failedItems.size == 1) "time" else "times"
-    return "Assert '$testMethodName' was violated (${failedItems.size} $times).${customMessage}Invalid $types:\n$failedDeclarationsMessage"
+
+    return "Assert '$suppressName' was violated (${failedItems.size} $times).${customMessage}Invalid $types:\n$failedDeclarationsMessage"
 }
