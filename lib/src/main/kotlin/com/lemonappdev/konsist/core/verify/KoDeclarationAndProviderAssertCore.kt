@@ -15,6 +15,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
+    suppressName: String?,
     function: (E) -> Boolean?,
     positiveCheck: Boolean,
 ) {
@@ -36,14 +37,16 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
             checkIfLocalListHasOnlyNullElements(this, assertMethodName)
         }
 
-        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), testMethodName)
+        val methodOrSuppressName = suppressName ?: testMethodName
+
+        val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), methodOrSuppressName)
 
         val result = notSuppressedDeclarations.groupBy {
             lastDeclaration = it
             function(it) ?: positiveCheck
         }
 
-        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
+        getResult(notSuppressedDeclarations, result, positiveCheck, methodOrSuppressName, additionalMessage)
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {

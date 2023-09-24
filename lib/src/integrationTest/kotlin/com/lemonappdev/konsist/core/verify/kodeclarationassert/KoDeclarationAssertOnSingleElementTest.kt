@@ -557,6 +557,20 @@ class KoDeclarationAssertOnSingleElementTest {
         sut.assertTrue { it.name.endsWith("Text") }
     }
 
+    @Test
+    fun `assert-suppress-with-suppress-name-parameter`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-with-suppress-name-parameter")
+                .functions(includeNested = true)
+                .first()
+
+        // then
+        sut.assertTrue(suppressName = "konsist.assert-suppress-with-suppress-name-parameter") {
+            it.name.endsWith("Kotest")
+        }
+    }
+
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationassert/snippet/", fileName)
 }

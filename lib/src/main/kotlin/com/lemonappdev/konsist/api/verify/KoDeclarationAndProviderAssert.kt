@@ -13,15 +13,17 @@ import com.lemonappdev.konsist.core.verify.assert
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional test method name coming obtained from different context
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
 fun <E : KoBaseProvider> E?.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
+    suppressName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    listOf(this).assert(strict, additionalMessage, function, positiveCheck = true)
+    listOf(this).assert(strict, additionalMessage, suppressName, function, positiveCheck = true)
 }
 
 /**
@@ -34,15 +36,17 @@ fun <E : KoBaseProvider> E?.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional test method name coming obtained from different context
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
 fun <E : KoBaseProvider> E?.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
+    suppressName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    listOf(this).assert(strict, additionalMessage, function, positiveCheck = false)
+    listOf(this).assert(strict, additionalMessage, suppressName, function, positiveCheck = false)
 }
 
 /**
@@ -55,15 +59,17 @@ fun <E : KoBaseProvider> E?.assertFalse(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional test method name coming obtained from different context
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
 fun <E : KoBaseProvider> List<E?>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
+    suppressName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    assert(strict, additionalMessage, function, positiveCheck = true)
+    assert(strict, additionalMessage, suppressName, function, positiveCheck = true)
 }
 
 /**
@@ -76,15 +82,17 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional test method name coming obtained from different context
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
 fun <E : KoBaseProvider> List<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
+    suppressName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    assert(strict, additionalMessage, function, positiveCheck = false)
+    assert(strict, additionalMessage, suppressName, function, positiveCheck = false)
 }
 
 /**
@@ -97,15 +105,17 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional test method name coming obtained from different context
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
+    suppressName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    this.toList().assert(strict, additionalMessage, function, true)
+    this.toList().assert(strict, additionalMessage, suppressName, function, true)
 }
 
 /**
@@ -118,15 +128,17 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional test method name coming obtained from different context
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
+    suppressName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    this.toList().assert(strict, additionalMessage, function, false)
+    this.toList().assert(strict, additionalMessage, suppressName, function, false)
 }
 
 /**
