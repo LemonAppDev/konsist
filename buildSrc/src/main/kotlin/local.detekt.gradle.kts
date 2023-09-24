@@ -40,7 +40,7 @@ configure(listOf(detektCheck, detektApply)) {
             "**/build/**",
             "**/target/**",
             "**/generated/**",
-            "**/samples/starter-projects/konsist-starter-multiplatform-gradle-kotlin-junit5**"
+            "**/samples/starter-projects/konsist-starter-multiplatform-**",
         )
 
         reports {
