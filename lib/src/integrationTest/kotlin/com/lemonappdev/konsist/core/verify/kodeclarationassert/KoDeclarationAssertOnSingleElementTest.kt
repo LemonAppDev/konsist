@@ -336,10 +336,10 @@ class KoDeclarationAssertOnSingleElementTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
                 .classes(includeNested = true)
                 .last()
 
@@ -360,10 +360,10 @@ class KoDeclarationAssertOnSingleElementTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
                 .classes(includeNested = true)
                 .last()
 
@@ -384,10 +384,10 @@ class KoDeclarationAssertOnSingleElementTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
                 .classes(includeNested = true)
                 .last()
 
@@ -408,10 +408,10 @@ class KoDeclarationAssertOnSingleElementTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
                 .classes()
                 .initBlocks
                 .first()
@@ -434,10 +434,10 @@ class KoDeclarationAssertOnSingleElementTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-file-level-when-it-is-not-KoAnnotationProvider`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-file-level-when-it-is-not-KoAnnotationProvider")
                 .classes()
                 .initBlocks
                 .first()
@@ -460,10 +460,10 @@ class KoDeclarationAssertOnSingleElementTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .classes()
                 .initBlocks
                 .localFunctions
@@ -488,11 +488,11 @@ class KoDeclarationAssertOnSingleElementTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
         // given
         val sut =
             getSnippetFile(
-                "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
+                "assert-suppress-by-konsist-dot-name-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
             )
                 .classes()
                 .initBlocks
@@ -518,10 +518,10 @@ class KoDeclarationAssertOnSingleElementTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .classes()
                 .initBlocks
                 .localFunctions

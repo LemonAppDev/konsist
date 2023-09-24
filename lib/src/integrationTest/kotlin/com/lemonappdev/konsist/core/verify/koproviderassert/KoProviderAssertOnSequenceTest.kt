@@ -257,10 +257,10 @@ class KoProviderAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
                 .declarations(includeNested = true)
                 .filterIsInstance<KoModifierProvider>()
                 .asSequence()
@@ -283,10 +283,10 @@ class KoProviderAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
                 .declarations(includeNested = true)
                 .filterIsInstance<KoModifierProvider>()
                 .asSequence()
@@ -309,10 +309,10 @@ class KoProviderAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
                 .declarations(includeNested = true)
                 .filterIsInstance<KoModifierProvider>()
                 .asSequence()
@@ -335,10 +335,10 @@ class KoProviderAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
                 .declarations(includeNested = true)
                 .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
@@ -361,10 +361,10 @@ class KoProviderAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-file-level-when-it-is-not-KoAnnotationProvider`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-file-level-when-it-is-not-KoAnnotationProvider")
                 .declarations(includeNested = true)
                 .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
@@ -387,10 +387,10 @@ class KoProviderAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .declarations(includeNested = true)
                 .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
@@ -413,11 +413,11 @@ class KoProviderAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
         // given
         val sut =
             getSnippetFile(
-                "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
+                "assert-suppress-by-konsist-dot-name-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
             )
                 .declarations(includeNested = true)
                 .filterIsInstance<KoPropertyProvider>()
@@ -441,10 +441,10 @@ class KoProviderAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+    fun `assert-suppress-by-konsist-dot-name-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
         // given
         val sut =
-            getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+            getSnippetFile("assert-suppress-by-konsist-dot-name-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .declarations(includeNested = true)
                 .filterIsInstance<KoPropertyProvider>()
                 .asSequence()

@@ -1,0 +1,5 @@
+@file:Suppress("konsist.assert-suppress-by-konsist-dot-name-and-name-on-declarations-which-items-have-null-parent")
+
+package com.lemonappdev.konsist.core.verify.kodeclarationassert.deprecatedsnippet
+
+class SampleClass

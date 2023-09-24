@@ -1,5 +1,0 @@
-@file:Suppress("konsist.assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
-
-class SampleClassWithoutModifier {
-    fun sampleFunctionWithoutModifier(){}
-}
