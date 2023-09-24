@@ -46,7 +46,7 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
             If you passed one argument - replace with `hasModifier`, otherwise with `hasAllModifiers`.
             """,
     )
-    override fun hasModifiers(vararg koModifiers: KoModifier): Boolean = when {
+    override fun hasModifier(vararg koModifiers: KoModifier): Boolean = when {
         koModifiers.isEmpty() -> modifiers.isNotEmpty()
         else -> modifiers.containsAll(koModifiers.toList())
     }

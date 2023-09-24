@@ -30,8 +30,8 @@ class KoParameterDeclarationForKoModifierProviderTest {
             it?.hasModifier(OPEN, DATA) shouldBeEqualTo false
             it?.hasAllModifiers(OPEN) shouldBeEqualTo false
             it?.hasAllModifiers(OPEN, DATA) shouldBeEqualTo false
-            it?.hasModifiers(OPEN) shouldBeEqualTo false
-            it?.hasModifiers(OPEN, DATA) shouldBeEqualTo false
+            it?.hasModifiersHHH(OPEN) shouldBeEqualTo false
+            it?.hasModifiersHHH(OPEN, DATA) shouldBeEqualTo false
         }
     }
 
@@ -56,9 +56,9 @@ class KoParameterDeclarationForKoModifierProviderTest {
             it?.hasAllModifiers(PUBLIC) shouldBeEqualTo true
             it?.hasAllModifiers(DATA) shouldBeEqualTo false
             it?.hasAllModifiers(PUBLIC, DATA) shouldBeEqualTo false
-            it?.hasModifiers(PUBLIC) shouldBeEqualTo true
-            it?.hasModifiers(PRIVATE) shouldBeEqualTo false
-            it?.hasModifiers(PUBLIC, PRIVATE) shouldBeEqualTo false
+            it?.hasModifiersHHH(PUBLIC) shouldBeEqualTo true
+            it?.hasModifiersHHH(PRIVATE) shouldBeEqualTo false
+            it?.hasModifiersHHH(PUBLIC, PRIVATE) shouldBeEqualTo false
         }
     }
 

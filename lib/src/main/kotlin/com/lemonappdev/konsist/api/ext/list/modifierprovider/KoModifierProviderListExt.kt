@@ -73,7 +73,7 @@ fun <T : KoModifierProvider> List<T>.withoutAllModifiers(modifier: KoModifier, v
 @Deprecated("Will be removed in v1.0.0.", ReplaceWith("withModifier(modifier, modifiers)"))
 fun <T : KoModifierProvider> List<T>.withSomeModifiers(modifier: KoModifier, vararg modifiers: KoModifier): List<T> =
     filter {
-        it.hasModifiers(modifier) || modifiers.any { modifier -> it.hasModifiers(modifier) }
+        it.hasModifiersHHH(modifier) || modifiers.any { modifier -> it.hasModifiersHHH(modifier) }
     }
 
 /**
@@ -86,8 +86,8 @@ fun <T : KoModifierProvider> List<T>.withSomeModifiers(modifier: KoModifier, var
 @Deprecated("Will be removed in v1.0.0.", ReplaceWith("withoutModifier(modifier, modifiers)"))
 fun <T : KoModifierProvider> List<T>.withoutSomeModifiers(modifier: KoModifier, vararg modifiers: KoModifier): List<T> =
     filter {
-        !it.hasModifiers(modifier) && if (modifiers.isNotEmpty()) {
-            modifiers.any { modifier -> !it.hasModifiers(modifier) }
+        !it.hasModifiersHHH(modifier) && if (modifiers.isNotEmpty()) {
+            modifiers.any { modifier -> !it.hasModifiersHHH(modifier) }
         } else {
             true
         }

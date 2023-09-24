@@ -95,7 +95,7 @@ class GeneralSnippets {
             .classes()
             .assertTrue {
                 val companionObjects = it.objects().filter { obj ->
-                    obj.hasModifiers(KoModifier.COMPANION)
+                    obj.hasModifiersHHH(KoModifier.COMPANION)
                 }
 
                 if (companionObjects.isEmpty()) {

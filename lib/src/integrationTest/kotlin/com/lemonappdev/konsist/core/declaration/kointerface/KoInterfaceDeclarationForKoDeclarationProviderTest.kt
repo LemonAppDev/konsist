@@ -187,13 +187,13 @@ class KoInterfaceDeclarationForKoDeclarationProviderTest {
                 (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
             } shouldBeEqualTo true
             containsDeclaration {
-                (it as? KoModifierProvider)?.hasModifiers(PRIVATE, OPEN) ?: false
+                (it as? KoModifierProvider)?.hasModifiersHHH(PRIVATE, OPEN) ?: false
             } shouldBeEqualTo true
             containsDeclaration {
                 (it as? KoVisibilityModifierProvider)?.hasInternalModifier ?: false
             } shouldBeEqualTo false
             containsDeclaration {
-                (it as? KoModifierProvider)?.hasModifiers(INTERNAL, PRIVATE) ?: false
+                (it as? KoModifierProvider)?.hasModifiersHHH(INTERNAL, PRIVATE) ?: false
             } shouldBeEqualTo false
             containsDeclaration(
                 includeNested = false,

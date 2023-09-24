@@ -108,7 +108,7 @@ class KoInterfaceDeclarationForKoFunctionProviderTest {
         // then
         assertSoftly(sut) {
             containsFunction { it.name == "sampleFunction" && it.hasPublicModifier } shouldBeEqualTo true
-            containsFunction { it.name == "sampleFunction" && it.hasModifiers(PUBLIC, OPEN) } shouldBeEqualTo false
+            containsFunction { it.name == "sampleFunction" && it.hasModifiersHHH(PUBLIC, OPEN) } shouldBeEqualTo false
             containsFunction(
                 includeNested = false,
                 includeLocal = true,

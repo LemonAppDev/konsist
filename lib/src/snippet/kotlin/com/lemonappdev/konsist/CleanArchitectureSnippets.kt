@@ -31,7 +31,7 @@ class CleanArchitectureSnippets {
             .scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
-            .assertTrue { it.resideInPackage("..domain..usecase..") }
+            .assertTrue { it.hasDataModifier }
     }
 
     fun `classes with 'UseCase' suffix should have single 'public operator' method named 'invoke'`() {

@@ -110,9 +110,9 @@ class KoClassDeclarationForKoClassProviderTest {
         // then
         assertSoftly(sut) {
             containsClass { it.name == "SampleClass" && it.hasPrivateModifier } shouldBeEqualTo true
-            containsClass { it.name == "SampleClass" && it.hasModifiers(PRIVATE, OPEN) } shouldBeEqualTo true
+            containsClass { it.name == "SampleClass" && it.hasModifiersHHH(PRIVATE, OPEN) } shouldBeEqualTo true
             containsClass { it.name == "SampleClass" && it.hasPublicModifier } shouldBeEqualTo false
-            containsClass { it.name == "SampleClass" && it.hasModifiers(INTERNAL, PRIVATE) } shouldBeEqualTo false
+            containsClass { it.name == "SampleClass" && it.hasModifiersHHH(INTERNAL, PRIVATE) } shouldBeEqualTo false
             containsClass(
                 includeNested = false,
                 includeLocal = true,

@@ -77,9 +77,9 @@ class KoFileDeclarationForKoInterfaceProviderTest {
         // then
         assertSoftly(sut) {
             containsInterface { it.name == "SampleInterface" && it.hasPrivateModifier } shouldBeEqualTo true
-            containsInterface { it.name == "SampleInterface" && it.hasModifiers(PRIVATE, ABSTRACT) } shouldBeEqualTo true
+            containsInterface { it.name == "SampleInterface" && it.hasModifiersHHH(PRIVATE, ABSTRACT) } shouldBeEqualTo true
             containsInterface { it.name == "SampleInterface" && it.hasPublicModifier } shouldBeEqualTo false
-            containsInterface { it.name == "SampleInterface" && it.hasModifiers(INTERNAL, PRIVATE) } shouldBeEqualTo false
+            containsInterface { it.name == "SampleInterface" && it.hasModifiersHHH(INTERNAL, PRIVATE) } shouldBeEqualTo false
             containsInterface(includeNested = true) { it.name == "SampleNestedInterface" && it.hasPrivateModifier } shouldBeEqualTo true
             containsInterface(includeNested = false) { it.name == "SampleNestedInterface" && it.hasPrivateModifier } shouldBeEqualTo false
             containsInterface(includeNested = true) { it.name == "SampleNestedInterface" && it.hasActualModifier } shouldBeEqualTo false

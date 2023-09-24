@@ -110,7 +110,7 @@ class KoInterfaceDeclarationForKoPropertyProviderTest {
         assertSoftly(sut) {
             containsProperty { it.name == "sampleProperty" && it.hasAbstractModifier } shouldBeEqualTo true
             containsProperty { it.name == "sampleProperty" && it.hasPublicModifier } shouldBeEqualTo false
-            containsProperty { it.name == "sampleProperty" && it.hasModifiers(ABSTRACT, PRIVATE) } shouldBeEqualTo false
+            containsProperty { it.name == "sampleProperty" && it.hasModifiersHHH(ABSTRACT, PRIVATE) } shouldBeEqualTo false
             containsProperty(
                 includeNested = false,
                 includeLocal = true,

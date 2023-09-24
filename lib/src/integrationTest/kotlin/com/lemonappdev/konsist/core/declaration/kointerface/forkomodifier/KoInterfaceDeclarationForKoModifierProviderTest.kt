@@ -31,8 +31,8 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
             hasModifier(OPEN, DATA) shouldBeEqualTo false
             hasAllModifiers(OPEN) shouldBeEqualTo false
             hasAllModifiers(OPEN, DATA) shouldBeEqualTo false
-            hasModifiers(OPEN) shouldBeEqualTo false
-            hasModifiers(OPEN, DATA) shouldBeEqualTo false
+            hasModifiersHHH(OPEN) shouldBeEqualTo false
+            hasModifiersHHH(OPEN, DATA) shouldBeEqualTo false
             hasActualModifier shouldBeEqualTo false
             hasExpectModifier shouldBeEqualTo false
             hasFunModifier shouldBeEqualTo false
@@ -57,13 +57,13 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
             hasAllModifiers(PROTECTED) shouldBeEqualTo false
             hasAllModifiers(PUBLIC, DATA) shouldBeEqualTo false
             hasAllModifiers(PUBLIC, ABSTRACT) shouldBeEqualTo true
-            hasModifiers(PUBLIC) shouldBeEqualTo true
-            hasModifiers(ABSTRACT) shouldBeEqualTo true
-            hasModifiers(PROTECTED) shouldBeEqualTo false
-            hasModifiers(PUBLIC, ABSTRACT) shouldBeEqualTo true
-            hasModifiers(ABSTRACT, PUBLIC) shouldBeEqualTo true
-            hasModifiers(PROTECTED, ABSTRACT) shouldBeEqualTo false
-            hasModifiers(PROTECTED, ABSTRACT, PUBLIC) shouldBeEqualTo false
+            hasModifiersHHH(PUBLIC) shouldBeEqualTo true
+            hasModifiersHHH(ABSTRACT) shouldBeEqualTo true
+            hasModifiersHHH(PROTECTED) shouldBeEqualTo false
+            hasModifiersHHH(PUBLIC, ABSTRACT) shouldBeEqualTo true
+            hasModifiersHHH(ABSTRACT, PUBLIC) shouldBeEqualTo true
+            hasModifiersHHH(PROTECTED, ABSTRACT) shouldBeEqualTo false
+            hasModifiersHHH(PROTECTED, ABSTRACT, PUBLIC) shouldBeEqualTo false
         }
     }
 

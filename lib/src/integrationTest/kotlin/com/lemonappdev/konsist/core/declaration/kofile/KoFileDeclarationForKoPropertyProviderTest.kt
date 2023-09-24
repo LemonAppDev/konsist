@@ -113,13 +113,13 @@ class KoFileDeclarationForKoPropertyProviderTest {
                 it.name == "sampleProperty" && it.hasInternalModifier
             } shouldBeEqualTo true
             containsProperty {
-                it.name == "sampleProperty" && it.hasModifiers(INTERNAL, CONST)
+                it.name == "sampleProperty" && it.hasModifiersHHH(INTERNAL, CONST)
             } shouldBeEqualTo true
             containsProperty {
                 it.name == "sampleProperty" && it.hasPublicModifier
             } shouldBeEqualTo false
             containsProperty {
-                it.name == "sampleProperty" && it.hasModifiers(INTERNAL, PRIVATE)
+                it.name == "sampleProperty" && it.hasModifiersHHH(INTERNAL, PRIVATE)
             } shouldBeEqualTo false
             containsProperty(
                 includeNested = false,

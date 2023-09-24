@@ -71,13 +71,13 @@ class KoFileDeclarationForKoDeclarationProviderTest {
                 (it as? KoVisibilityModifierProvider)?.hasInternalModifier ?: false
             } shouldBeEqualTo true
             containsDeclaration {
-                (it as? KoModifierProvider)?.hasModifiers(INTERNAL, OPEN) ?: false
+                (it as? KoModifierProvider)?.hasModifiersHHH(INTERNAL, OPEN) ?: false
             } shouldBeEqualTo true
             containsDeclaration {
                 (it as? KoVisibilityModifierProvider)?.hasPrivateModifier ?: false
             } shouldBeEqualTo false
             containsDeclaration {
-                (it as? KoModifierProvider)?.hasModifiers(INTERNAL, PRIVATE) ?: false
+                (it as? KoModifierProvider)?.hasModifiersHHH(INTERNAL, PRIVATE) ?: false
             } shouldBeEqualTo false
             containsDeclaration(
                 includeNested = false,

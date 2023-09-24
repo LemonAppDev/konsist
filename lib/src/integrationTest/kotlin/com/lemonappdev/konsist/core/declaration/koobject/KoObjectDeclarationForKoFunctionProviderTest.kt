@@ -109,9 +109,9 @@ class KoObjectDeclarationForKoFunctionProviderTest {
         // then
         assertSoftly(sut) {
             containsFunction { it.name == "sampleFunction" && it.hasInternalModifier } shouldBeEqualTo true
-            containsFunction { it.name == "sampleFunction" && it.hasModifiers(INTERNAL, FINAL) } shouldBeEqualTo true
+            containsFunction { it.name == "sampleFunction" && it.hasModifiersHHH(INTERNAL, FINAL) } shouldBeEqualTo true
             containsFunction { it.name == "sampleFunction" && it.hasPrivateModifier } shouldBeEqualTo false
-            containsFunction { it.name == "sampleFunction" && it.hasModifiers(INTERNAL, PRIVATE) } shouldBeEqualTo false
+            containsFunction { it.name == "sampleFunction" && it.hasModifiersHHH(INTERNAL, PRIVATE) } shouldBeEqualTo false
             containsFunction(
                 includeNested = false,
                 includeLocal = true,

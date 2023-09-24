@@ -80,13 +80,13 @@ class KoFileDeclarationForKoObjectProviderTest {
                 it.name == "SampleObject" && it.hasPrivateModifier
             } shouldBeEqualTo true
             containsObject {
-                it.name == "SampleObject" && it.hasModifiers(PRIVATE, DATA)
+                it.name == "SampleObject" && it.hasModifiersHHH(PRIVATE, DATA)
             } shouldBeEqualTo true
             containsObject {
                 it.name == "SampleObject" && it.hasPublicModifier
             } shouldBeEqualTo false
             containsObject {
-                it.name == "SampleObject" && it.hasModifiers(INTERNAL, PRIVATE)
+                it.name == "SampleObject" && it.hasModifiersHHH(INTERNAL, PRIVATE)
             } shouldBeEqualTo false
             containsObject(includeNested = true) { it.name == "SampleNestedObject" && it.hasPrivateModifier } shouldBeEqualTo true
             containsObject(includeNested = false) { it.name == "SampleNestedObject" && it.hasPrivateModifier } shouldBeEqualTo false

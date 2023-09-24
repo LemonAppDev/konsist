@@ -30,8 +30,8 @@ class KoPropertyDeclarationForKoModifierProviderTest {
             hasModifier(OPEN, DATA) shouldBeEqualTo false
             hasAllModifiers(OPEN) shouldBeEqualTo false
             hasAllModifiers(OPEN, DATA) shouldBeEqualTo false
-            hasModifiers(OPEN) shouldBeEqualTo false
-            hasModifiers(OPEN, DATA) shouldBeEqualTo false
+            hasModifiersHHH(OPEN) shouldBeEqualTo false
+            hasModifiersHHH(OPEN, DATA) shouldBeEqualTo false
         }
     }
 
@@ -53,13 +53,13 @@ class KoPropertyDeclarationForKoModifierProviderTest {
             hasAllModifiers(DATA) shouldBeEqualTo false
             hasAllModifiers(OPEN, DATA) shouldBeEqualTo false
             hasAllModifiers(OPEN, PROTECTED) shouldBeEqualTo true
-            hasModifiers(PROTECTED) shouldBeEqualTo true
-            hasModifiers(OPEN) shouldBeEqualTo true
-            hasModifiers(FINAL) shouldBeEqualTo false
-            hasModifiers(PROTECTED, OPEN) shouldBeEqualTo true
-            hasModifiers(OPEN, PROTECTED) shouldBeEqualTo true
-            hasModifiers(PROTECTED, FINAL) shouldBeEqualTo false
-            hasModifiers(FINAL, OPEN, PROTECTED) shouldBeEqualTo false
+            hasModifiersHHH(PROTECTED) shouldBeEqualTo true
+            hasModifiersHHH(OPEN) shouldBeEqualTo true
+            hasModifiersHHH(FINAL) shouldBeEqualTo false
+            hasModifiersHHH(PROTECTED, OPEN) shouldBeEqualTo true
+            hasModifiersHHH(OPEN, PROTECTED) shouldBeEqualTo true
+            hasModifiersHHH(PROTECTED, FINAL) shouldBeEqualTo false
+            hasModifiersHHH(FINAL, OPEN, PROTECTED) shouldBeEqualTo false
         }
     }
 
