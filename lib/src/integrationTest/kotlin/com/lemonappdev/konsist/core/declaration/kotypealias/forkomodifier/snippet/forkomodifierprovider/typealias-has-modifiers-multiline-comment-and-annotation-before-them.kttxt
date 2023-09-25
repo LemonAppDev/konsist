@@ -1,0 +1,9 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+
+@SampleAnnotation
+/*
+ Some comment
+ */
+private typealias SampleTypeAlias = (Boolean) -> Int
+
+class SampleClass(val sampleProperty: SampleTypeAlias)

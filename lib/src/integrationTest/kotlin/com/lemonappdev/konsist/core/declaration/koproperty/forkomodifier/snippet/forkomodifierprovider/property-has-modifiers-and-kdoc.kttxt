@@ -1,0 +1,6 @@
+open class SampleClass {
+    /**
+     * Some comment
+     */
+    protected open val sampleProperty: Boolean = true
+}

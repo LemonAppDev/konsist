@@ -1,0 +1,6 @@
+/**
+ * Some comment
+ */
+private data object SampleObject {
+}
+

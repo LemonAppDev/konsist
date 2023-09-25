@@ -92,6 +92,11 @@ class KoObjectDeclarationForKoModifierProviderTest {
             arguments("object-has-modifiers-annotation-and-comment", listOf(PRIVATE, DATA)),
             arguments("object-has-modifiers-and-annotations", listOf(PRIVATE, DATA)),
             arguments("object-has-modifiers-and-annotation-with-angle-brackets", listOf(PRIVATE, DATA)),
+            arguments("object-has-modifiers-and-kdoc", listOf(PRIVATE, DATA)),
+            arguments("object-has-modifiers-kdoc-and-annotation-before-them", listOf(PRIVATE, DATA)),
+            arguments("object-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PRIVATE, DATA)),
+            arguments("object-has-modifiers-and-comment-before-them", listOf(PRIVATE, DATA)),
+            arguments("object-has-modifiers-and-comment-after-them", listOf(PRIVATE, DATA)),
         )
     }
 }

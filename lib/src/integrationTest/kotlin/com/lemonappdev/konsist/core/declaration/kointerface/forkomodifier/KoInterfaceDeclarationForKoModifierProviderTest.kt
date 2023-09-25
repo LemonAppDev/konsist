@@ -94,6 +94,11 @@ class KoInterfaceDeclarationForKoModifierProviderTest {
             arguments("interface-has-modifiers-annotation-and-comment", listOf(PUBLIC, ABSTRACT)),
             arguments("interface-has-modifiers-and-annotations", listOf(PUBLIC, ABSTRACT)),
             arguments("interface-has-modifiers-and-annotation-with-angle-brackets", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-and-kdoc", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-kdoc-and-annotation-before-them", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-and-comment-before-them", listOf(PUBLIC, ABSTRACT)),
+            arguments("interface-has-modifiers-and-comment-after-them", listOf(PUBLIC, ABSTRACT)),
         )
     }
 }
