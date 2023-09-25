@@ -9,7 +9,8 @@ on:
     branches:
       - 'release-*'
       - 'renovate*'
-
+    paths:
+      - 'samples/starter-projects/**'
 jobs:
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
