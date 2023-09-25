@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform") version "1.9.10"
-    id("io.kotest.multiplatform") version "5.7.2"
     application
 }
 
@@ -50,7 +49,6 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation("com.lemonappdev:konsist:0.12.1")
-                implementation("io.kotest:kotest-runner-junit5:5.7.2")
             }
         }
 
