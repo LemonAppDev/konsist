@@ -43,7 +43,7 @@ interface KoLocalDeclarationProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one local declaration that satisfies the provided predicate.
      *
-     * @param predicate A function that defines the condition to be met by a local declaration declaration.
+     * @param predicate A function that defines the condition to be met by a local declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasLocalDeclaration(predicate: (KoBaseDeclaration) -> Boolean): Boolean
@@ -55,8 +55,8 @@ interface KoLocalDeclarationProvider : KoBaseProvider {
      * that do not match the predicate. See a more detailed explanation of this logic concept in
      * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
-     * @param predicate A function that defines the condition to be met by local declaration declarations.
-     * @return `true` if all local declaration declarations satisfy the predicate, `false` otherwise.
+     * @param predicate A function that defines the condition to be met by local declarations.
+     * @return `true` if all local declarations satisfy the predicate, `false` otherwise.
      */
     fun hasAllLocalDeclarations(predicate: (KoBaseDeclaration) -> Boolean): Boolean
 }
