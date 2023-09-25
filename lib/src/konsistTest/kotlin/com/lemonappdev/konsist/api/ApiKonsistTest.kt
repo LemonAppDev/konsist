@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api
 
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
+import com.lemonappdev.konsist.api.ext.list.withProperty
 import com.lemonappdev.konsist.api.ext.list.withoutName
 import com.lemonappdev.konsist.api.ext.list.withoutNameMatching
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocParamTags
@@ -57,11 +58,11 @@ class ApiKonsistTest {
             .interfaces()
             .withoutName("KoParentInterfaceProvider") // remove after release v1.0.0
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
-            .filter {
-                it.containsProperty { property ->
-                    property.type?.hasNameStartingWith("List<Ko") ?: false
+            .withProperty { property ->
+                property.hasType { type ->
+                    type.hasNameStartingWith("List<Ko")
                 }
-            } // change this lines to .withProperty { } (after https://lemonappdev.atlassian.net/browse/KON-416)
+            }
             .assertTrue {
                 it.hasCorrectMethods(false)
             }
@@ -74,11 +75,11 @@ class ApiKonsistTest {
             .interfaces()
             .withoutName("KoParentInterfaceProvider") // remove after release v1.0.0
             .withoutNameMatching(Regex("\\bKoKDoc[A-Za-z]+TagProvider\\b")) // exclude providers like KoKDocXTagProvider
-            .filter {
-                it.containsProperty { property ->
-                    property.type?.hasNameStartingWith("List<Ko") ?: false
+            .withProperty { property ->
+                property.hasType { type ->
+                    type.hasNameStartingWith("List<Ko")
                 }
-            } // change this lines to .withProperty { } (after https://lemonappdev.atlassian.net/browse/KON-416)
+            }
             .map { it.name }
 
         Konsist
@@ -86,7 +87,7 @@ class ApiKonsistTest {
             .files
             .filter {
                 providers.any { providerName -> it.hasNameContaining(providerName) }
-            } // change this lines to .withProperty { } (after https://lemonappdev.atlassian.net/browse/KON-416)
+            }
             .assertTrue {
                 it.hasCorrectMethods(true)
             }
@@ -97,14 +98,14 @@ class ApiKonsistTest {
         .interfaces()
 
     private fun <T> T.hasCorrectMethods(isExtension: Boolean): Boolean
-        where T : KoPropertyProvider,
-              T : KoFunctionProvider {
+            where T : KoPropertyProvider,
+                  T : KoFunctionProvider {
         val property = properties()
             .first { property ->
-                property.hasType { type -> type.hasNameStartingWith("List<Ko") }
+                property.hasType { type ->
+                    type.hasNameStartingWith("List<Ko")
+                }
             }
-
-        hasProperty { it.type?.hasNameStartingWith("List<Ko") ?: false }
 
         val declarationName = property
             .type
@@ -114,7 +115,6 @@ class ApiKonsistTest {
 
         // We distinguish singularName and pluralName due to different variations of words,
         // e.g. import -> imports (suffix - "s") , but class -> classes (suffix - "es")
-
         val singularName = declarationName
             ?.removePrefix("Ko")
             ?.removeSuffix("Declaration")
@@ -142,18 +142,32 @@ class ApiKonsistTest {
         hasKoNameProvider: Boolean,
     ): Boolean = if (declarationName == "KoModifier") {
         hasExceptionFunctions(singularName, pluralName, "with") &&
-            hasExceptionFunctions(singularName, pluralName, "without")
+                hasExceptionFunctions(singularName, pluralName, "without")
     } else if (declarationName == "KoKDocTagDeclaration") {
         hasExceptionFunctions("Tag", "Tags", "with") &&
-            hasExceptionFunctions("Tag", "Tags", "without")
+                hasExceptionFunctions("Tag", "Tags", "without")
+    } else if (declarationName == "KoFunctionDeclaration" || declarationName == "KoClassDeclaration") {
+        (hasBasicFunctions(singularName, pluralName, "with") &&
+                hasNamedFunctionsForExt(singularName, pluralName, "with") &&
+                hasBasicFunctions(singularName, pluralName, "without") &&
+                hasNamedFunctionsForExt(singularName, pluralName, "without")) ||
+                (hasBasicFunctions("Local$singularName", pluralName, "with") &&
+                        hasNamedFunctionsForExt("Local$singularName", pluralName, "with") &&
+                        hasBasicFunctions("Local$singularName", pluralName, "without") &&
+                        hasNamedFunctionsForExt("Local$singularName", pluralName, "without"))
+    } else if (declarationName == "KoBaseDeclaration") {
+        (hasBasicFunctions("Declaration", pluralName, "with") &&
+                hasBasicFunctions("Declaration", pluralName, "without")) ||
+                (hasBasicFunctions("LocalDeclaration", pluralName, "with") &&
+                        hasBasicFunctions("LocalDeclaration", pluralName, "without"))
     } else if (hasKoNameProvider) {
         hasBasicFunctions(singularName, pluralName, "with") &&
-            hasNamedFunctionsForExt(singularName, pluralName, "with") &&
-            hasBasicFunctions(singularName, pluralName, "without") &&
-            hasNamedFunctionsForExt(singularName, pluralName, "without")
+                hasNamedFunctionsForExt(singularName, pluralName, "with") &&
+                hasBasicFunctions(singularName, pluralName, "without") &&
+                hasNamedFunctionsForExt(singularName, pluralName, "without")
     } else {
         hasBasicFunctions(singularName, pluralName, "with") &&
-            hasBasicFunctions(singularName, pluralName, "without")
+                hasBasicFunctions(singularName, pluralName, "without")
     }
 
     private fun KoFunctionProvider.checkForProviders(
@@ -165,9 +179,17 @@ class ApiKonsistTest {
         hasExceptionFunctions(singularName, pluralName, "has")
     } else if (declarationName == "KoKDocTagDeclaration") {
         hasExceptionFunctions("Tag", "Tags", "has")
+    } else if (declarationName == "KoFunctionDeclaration" || declarationName == "KoClassDeclaration") {
+        (hasBasicFunctions(singularName, pluralName, "has") &&
+                hasNamedFunctions(singularName, pluralName)) ||
+                (hasBasicFunctions("Local$singularName", pluralName, "has") &&
+                        hasNamedFunctions("Local$singularName", pluralName))
+    } else if (declarationName == "KoBaseDeclaration") {
+        hasBasicFunctions("Declaration", pluralName, "has")
+                || hasBasicFunctions("LocalDeclaration", pluralName, "has")
     } else if (hasKoNameProvider) {
         hasBasicFunctions(singularName, pluralName, "has") &&
-            hasNamedFunctions(singularName, pluralName)
+                hasNamedFunctions(singularName, pluralName)
     } else {
         hasBasicFunctions(singularName, pluralName, "has")
     }
@@ -177,42 +199,42 @@ class ApiKonsistTest {
         pluralName: String,
         prefix: String,
     ): Boolean =
-        containsFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
-            containsFunction { function ->
-                function.name == "${prefix}$singularName" && function.hasParametersWithAllNames(
-                    singularName.lowercase(),
-                    pluralName.lowercase(),
-                )
-            } &&
-            containsFunction { function ->
-                function.name == "${prefix}All$pluralName" && function.hasParametersWithAllNames(
-                    singularName.lowercase(),
-                    pluralName.lowercase(),
-                )
-            }
+        hasFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
+                hasFunction { function ->
+                    function.name == "${prefix}$singularName" && function.hasParametersWithAllNames(
+                        singularName.lowercase(),
+                        pluralName.lowercase(),
+                    )
+                } &&
+                hasFunction { function ->
+                    function.name == "${prefix}All$pluralName" && function.hasParametersWithAllNames(
+                        singularName.lowercase(),
+                        pluralName.lowercase(),
+                    )
+                }
 
     private fun KoFunctionProvider.hasBasicFunctions(
         singularName: String,
         pluralName: String,
         prefix: String,
     ): Boolean {
-        return containsFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
-            containsFunction { function ->
-                function.name == "${prefix}$singularName" && function.hasParameterWithName(
-                    "predicate",
-                )
-            } &&
-            containsFunction { function ->
-                function.name == "${prefix}All$pluralName" && function.hasParameterWithName(
-                    "predicate",
-                )
-            }
+        return hasFunction { function -> function.name == "${prefix}$pluralName" && !function.hasParameters() } &&
+                hasFunction { function ->
+                    function.name == "${prefix}$singularName" && function.hasParameterWithName(
+                        "predicate",
+                    )
+                } &&
+                hasFunction { function ->
+                    function.name == "${prefix}All$pluralName" && function.hasParameterWithName(
+                        "predicate",
+                    )
+                }
     }
 
     private fun KoFunctionProvider.hasNamedFunctions(singularName: String, pluralName: String): Boolean =
-        containsFunction { function ->
+        hasFunction { function ->
             function.name == "has${singularName}WithName" && function.hasParametersWithAllNames("name", "names")
-        } && containsFunction { function ->
+        } && hasFunction { function ->
             function.name == "has${pluralName}WithAllNames" && function.hasParametersWithAllNames("name", "names")
         }
 
@@ -221,9 +243,9 @@ class ApiKonsistTest {
         pluralName: String,
         prefix: String,
     ): Boolean =
-        containsFunction { function ->
+        hasFunction { function ->
             function.name == "$prefix${singularName}Named" && function.hasParametersWithAllNames("name", "names")
-        } && containsFunction { function ->
+        } && hasFunction { function ->
             function.name == "${prefix}All${pluralName}Named" && function.hasParametersWithAllNames("name", "names")
         }
 }
