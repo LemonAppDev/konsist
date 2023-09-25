@@ -123,12 +123,13 @@ class DependencyRulesCore : DependencyRules {
                 )
             }
 
-            lists.firstOrNull { it.last() == null } ?: emptyList()
+            lists.firstOrNull { it.isNotEmpty() && it.last() == null } ?: emptyList()
         }
     }
 
     private fun checkIfLayerHasTheSameValuesAsOtherLayer(vararg layers: Layer) {
-        val list = allLayers
+        val list: MutableList<Layer> = allLayers.toMutableList()
+
         layers.forEach {
             val similarLayer = list.firstOrNull { layerAlreadyDefined ->
                 it != layerAlreadyDefined && (layerAlreadyDefined.name == it.name || layerAlreadyDefined.definedBy == it.definedBy)
