@@ -42,7 +42,7 @@ fun <T : KoPropertyProvider> List<T>.withoutProperties(includeNested: Boolean = 
  * @param names The names of additional properties to include.
  * @param includeNested Whether to include nested properties.
  * @param includeLocal Whether to include local properties.
- * @return A list containing declarations with at least one of the specified property(s).
+ * @return A list containing declarations with at least one of the specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withPropertyNamed(
     name: String,
@@ -75,10 +75,10 @@ fun <T : KoPropertyProvider> List<T>.withoutPropertyNamed(
  * List containing declarations that have all specified properties.
  *
  * @param name The name of the property to include.
- * @param names The name(s) of the property(s) to include.
+ * @param names The name(s) of the properties to include.
  * @param includeNested Whether to include nested properties.
  * @param includeLocal Whether to include local properties.
- * @return A list containing declarations with all specified property(s).
+ * @return A list containing declarations with all specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
     name: String,
@@ -93,10 +93,10 @@ fun <T : KoPropertyProvider> List<T>.withAllPropertiesNamed(
  * List containing declarations without all specified properties.
  *
  * @param name The name of the property to exclude.
- * @param names The name(s) of the property(s) to exclude.
+ * @param names The name(s) of the properties to exclude.
  * @param includeNested Whether to include nested properties.
  * @param includeLocal Whether to include local properties.
- * @return A list containing declarations without all specified property(s).
+ * @return A list containing declarations without all specified properties.
  */
 fun <T : KoPropertyProvider> List<T>.withoutAllPropertiesNamed(
     name: String,
