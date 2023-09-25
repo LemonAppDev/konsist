@@ -62,14 +62,17 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
 
     private fun String.isCommentLine(): Boolean = trim().startsWith("//")
 
+    // E.g. "private open" splits to listOf("private", "open")
     private fun List<String>.splitTextToSeparateDeclarations(): List<String> = flatMap { it.split(" ") }
 
     private fun List<String>.takeOnlyModifiers(): List<String> = takeLastWhile {
-        // We filter this way because this list contains modifiers and annotations,
-        // and we need to exclude all annotations especially with blank spaces
-        // e.g. @SampleAnnotation(parameter = "sample parameter")
-        // and with angle brackets
-        // e.g. @SampleAnnotation<String, Int>
+        /*
+        We filter this way because this list contains modifiers and annotations,
+        and we need to exclude all annotations especially with blank spaces
+        e.g. @SampleAnnotation(parameter = "sample parameter")
+        and with angle brackets
+        e.g. @SampleAnnotation<String, Int>
+         */
         !it.contains('<') &&
             !it.contains('>') &&
             !it.contains(')') &&
