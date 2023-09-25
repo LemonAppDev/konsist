@@ -14,16 +14,16 @@ tests are written in Kotlin and can be easily integrated with popular testing fr
 
 ```kotlin
 // Gradle Kotlin:
-testImplementation("com.lemonappdev:konsist:0.12.1")
+testImplementation("com.lemonappdev:konsist:0.12.2")
 
 // Gradle Groovy:
-testImplementation "com.lemonappdev:konsist:0.12.1"
+testImplementation "com.lemonappdev:konsist:0.12.2"
 
 // Maven:
 <dependency>
     <groupId>com.lemonappdev</groupId>
     <artifactId>konsist</artifactId>
-    <version>0.12.1</version>
+    <version>0.12.2</version>
     <scope>test</scope>
 </dependency>
 ```

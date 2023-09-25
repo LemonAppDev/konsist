@@ -1,0 +1,9 @@
+import com.lemonappdev.konsist.testdata.SampleAnnotation
+
+open class SampleClass {
+    @SampleAnnotation
+    /*
+     Some comment
+     */
+    protected open val sampleProperty: Boolean = true
+}
