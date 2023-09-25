@@ -59,6 +59,8 @@ interface KoFunctionProvider : KoBaseProvider {
     /**
      * Whether the declaration has functions.
      *
+     * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
      * @return `true` if the declaration has any function, `false` otherwise.
      */
     fun hasFunctions(
@@ -71,6 +73,8 @@ interface KoFunctionProvider : KoBaseProvider {
      *
      * @param name the name of the function to check.
      * @param names the names of the functions to check.
+     * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasFunctionWithName(
@@ -85,6 +89,8 @@ interface KoFunctionProvider : KoBaseProvider {
      *
      * @param name The name of the function to check.
      * @param names The names of the functions to check.
+     * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasFunctionsWithAllNames(
@@ -97,6 +103,8 @@ interface KoFunctionProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one function that satisfies the provided predicate.
      *
+     * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
      * @param predicate A function that defines the condition to be met by a function declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -113,6 +121,8 @@ interface KoFunctionProvider : KoBaseProvider {
      * that do not match the predicate. See a more detailed explanation of this logic concept in
      * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
+     * @param includeNested Specifies whether to include nested functions in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local functions in the check (optional, default is `true`).
      * @param predicate A function that defines the condition to be met by function declarations.
      * @return `true` if all function declarations satisfy the predicate, `false` otherwise.
      */

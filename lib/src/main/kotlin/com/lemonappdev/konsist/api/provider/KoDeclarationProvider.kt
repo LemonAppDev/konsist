@@ -104,6 +104,8 @@ interface KoDeclarationProvider : KoBaseProvider {
     /**
      * Whether the declaration has declarations.
      *
+     * @param includeNested Specifies whether to include nested declarations in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local declarations in the check (optional, default is `true`).
      * @return `true` if the declaration has any declaration, `false` otherwise.
      */
     fun hasDeclarations(
@@ -114,6 +116,8 @@ interface KoDeclarationProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one declaration that satisfies the provided predicate.
      *
+     * @param includeNested Specifies whether to include nested declarations in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local declarations in the check (optional, default is `true`).
      * @param predicate A function that defines the condition to be met by a declaration declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -130,6 +134,8 @@ interface KoDeclarationProvider : KoBaseProvider {
      * that do not match the predicate. See a more detailed explanation of this logic concept in
      * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
+     * @param includeNested Specifies whether to include nested declarations in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local declarations in the check (optional, default is `true`).
      * @param predicate A function that defines the condition to be met by declaration declarations.
      * @return `true` if all declaration declarations satisfy the predicate, `false` otherwise.
      */

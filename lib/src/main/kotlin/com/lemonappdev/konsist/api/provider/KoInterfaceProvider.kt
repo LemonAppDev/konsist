@@ -52,6 +52,7 @@ interface KoInterfaceProvider : KoBaseProvider {
     /**
      * Whether the declaration has interfaces.
      *
+     * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
      * @return `true` if the declaration has any interface, `false` otherwise.
      */
     fun hasInterfaces(
@@ -63,6 +64,7 @@ interface KoInterfaceProvider : KoBaseProvider {
      *
      * @param name the name of the interface to check.
      * @param names the names of the interfaces to check.
+     * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasInterfaceWithName(
@@ -76,6 +78,7 @@ interface KoInterfaceProvider : KoBaseProvider {
      *
      * @param name The name of the interface to check.
      * @param names The names of the interfaces to check.
+     * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasInterfacesWithAllNames(
@@ -87,6 +90,7 @@ interface KoInterfaceProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one interface that satisfies the provided predicate.
      *
+     * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
      * @param predicate An interface that defines the condition to be met by a interface declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -102,6 +106,7 @@ interface KoInterfaceProvider : KoBaseProvider {
      * that do not match the predicate. See a more detailed explanation of this logic concept in
      * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
+     * @param includeNested Specifies whether to include nested interfaces in the check (optional, default is `true`).
      * @param predicate An interface that defines the condition to be met by interface declarations.
      * @return `true` if all interface declarations satisfy the predicate, `false` otherwise.
      */

@@ -59,6 +59,8 @@ interface KoPropertyProvider : KoBaseProvider {
     /**
      * Whether the declaration has properties.
      *
+     * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local properties in the check (optional, default is `true`).
      * @return `true` if the declaration has any property, `false` otherwise.
      */
     fun hasProperties(
@@ -71,6 +73,8 @@ interface KoPropertyProvider : KoBaseProvider {
      *
      * @param name the name of the property to check.
      * @param names the names of the properties to check.
+     * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local properties in the check (optional, default is `true`).
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasPropertyWithName(
@@ -85,6 +89,8 @@ interface KoPropertyProvider : KoBaseProvider {
      *
      * @param name The name of the property to check.
      * @param names The names of the properties to check.
+     * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local properties in the check (optional, default is `true`).
      * @return `true` if there are declarations with all the specified names, `false` otherwise.
      */
     fun hasPropertiesWithAllNames(
@@ -97,6 +103,8 @@ interface KoPropertyProvider : KoBaseProvider {
     /**
      * Determines whether the declaration has at least one property that satisfies the provided predicate.
      *
+     * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local properties in the check (optional, default is `true`).
      * @param predicate A function that defines the condition to be met by a property declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
@@ -113,6 +121,8 @@ interface KoPropertyProvider : KoBaseProvider {
      * that do not match the predicate. See a more detailed explanation of this logic concept in
      * ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth) article.
      *
+     * @param includeNested Specifies whether to include nested properties in the check (optional, default is `true`).
+     * @param includeLocal Specifies whether to include local properties in the check (optional, default is `true`).
      * @param predicate A function that defines the condition to be met by property declarations.
      * @return `true` if all property declarations satisfy the predicate, `false` otherwise.
      */
