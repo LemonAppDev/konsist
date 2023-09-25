@@ -16,7 +16,7 @@ jobs:
     name: Konsist Starter Android Gradle Groovy Junit 4
     continue-on-error: true
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate-')
+    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
