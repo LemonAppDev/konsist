@@ -6,8 +6,6 @@ on:
     - cron:  '0 0 * * *'
   pull_request:
     types: [ opened, synchronize ]
-    paths:
-      - 'samples/starter-projects/**'
 jobs:
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
