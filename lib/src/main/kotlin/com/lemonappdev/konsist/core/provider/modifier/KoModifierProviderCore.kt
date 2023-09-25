@@ -14,21 +14,14 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
         get() = ktTypeParameterListOwner
             .modifierList
             ?.text
+            ?.removeMultilineComments()
             ?.split(EndOfLine.UNIX.value)
-            ?.map { it.substringBefore("//") }
-            ?.flatMap { it.split(" ") }
-            ?.takeLastWhile {
-                // We filter this way because this list contains modifiers and annotations,
-                // and we need to exclude all annotations especially with blank spaces
-                // e.g. @SampleAnnotation(parameter = "sample parameter")
-                // and with angle brackets
-                // e.g. @SampleAnnotation<String, Int>
-                !it.contains('<') &&
-                    !it.contains('>') &&
-                    !it.contains(')') &&
-                    !it.contains('@') &&
-                    it.isNotBlank()
-            }
+            ?.map { it.ignoreCommentsOnTheSameLineAsModifiers() }
+            ?.filterNot { it.isBlank() }
+            ?.filterNot { it.isCommentLine() }
+            ?.filterNot { it.isKDocLine() }
+            ?.splitTextToSeparateDeclarations()
+            ?.takeOnlyModifiers()
             ?.map {
                 KoModifier
                     .entries
@@ -61,4 +54,40 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
 
     override fun hasAllModifiers(modifier: KoModifier, vararg modifiers: KoModifier): Boolean =
         this.modifiers.containsAll(modifiers.toList() + modifier)
+
+    private fun String.isKDocLine(): Boolean {
+        val trimmed = trim()
+        return trimmed.startsWith("/*") || trimmed.startsWith("*/") || trimmed.startsWith("*")
+    }
+
+    private fun String.isCommentLine(): Boolean = trim().startsWith("//")
+
+    // E.g. "private open" splits to listOf("private", "open")
+    private fun List<String>.splitTextToSeparateDeclarations(): List<String> = flatMap { it.split(" ") }
+
+    private fun List<String>.takeOnlyModifiers(): List<String> = takeLastWhile {
+        /*
+        We filter this way because this list contains modifiers and annotations,
+        and we need to exclude all annotations especially with blank spaces
+        e.g. @SampleAnnotation(parameter = "sample parameter")
+        and with angle brackets
+        e.g. @SampleAnnotation<String, Int>
+         */
+        !it.contains('<') &&
+            !it.contains('>') &&
+            !it.contains(')') &&
+            !it.contains('@') &&
+            it.isNotBlank()
+    }
+
+    private fun String.removeMultilineComments(): String = substringAfter("*/")
+
+    /*
+    This method avoid situations when comment is in the same line as modifiers:
+    ```
+    private open // sample comment
+    class SampleClass
+    ```
+     */
+    private fun String.ignoreCommentsOnTheSameLineAsModifiers(): String = substringBefore("//")
 }

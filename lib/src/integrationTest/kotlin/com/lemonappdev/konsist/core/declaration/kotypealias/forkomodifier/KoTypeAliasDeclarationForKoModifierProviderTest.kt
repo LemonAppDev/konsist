@@ -72,6 +72,11 @@ class KoTypeAliasDeclarationForKoModifierProviderTest {
             arguments("typealias-has-modifiers-annotation-and-comment"),
             arguments("typealias-has-modifiers-and-annotations"),
             arguments("typealias-has-modifiers-and-annotation-with-angle-brackets"),
+            arguments("typealias-has-modifiers-and-kdoc"),
+            arguments("typealias-has-modifiers-kdoc-and-annotation-before-them"),
+            arguments("typealias-has-modifiers-multiline-comment-and-annotation-before-them"),
+            arguments("typealias-has-modifiers-and-comment-before-them"),
+            arguments("typealias-has-modifiers-and-comment-after-them"),
         )
     }
 }

@@ -93,6 +93,11 @@ class KoPropertyDeclarationForKoModifierProviderTest {
             arguments("property-has-modifiers-annotation-and-comment", listOf(PROTECTED, OPEN)),
             arguments("property-has-modifiers-and-annotations", listOf(PROTECTED, OPEN)),
             arguments("property-has-modifiers-and-annotation-with-angle-brackets", listOf(PROTECTED, OPEN)),
+            arguments("property-has-modifiers-and-kdoc", listOf(PROTECTED, OPEN)),
+            arguments("property-has-modifiers-kdoc-and-annotation-before-them", listOf(PROTECTED, OPEN)),
+            arguments("property-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PROTECTED, OPEN)),
+            arguments("property-has-modifiers-and-comment-before-them", listOf(PROTECTED, OPEN)),
+            arguments("property-has-modifiers-and-comment-after-them", listOf(PROTECTED, OPEN)),
         )
     }
 }

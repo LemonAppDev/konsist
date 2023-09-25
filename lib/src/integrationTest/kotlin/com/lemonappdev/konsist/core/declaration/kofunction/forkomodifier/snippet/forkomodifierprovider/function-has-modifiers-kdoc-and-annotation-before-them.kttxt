@@ -2,6 +2,9 @@ import com.lemonappdev.konsist.testdata.SampleAnnotation
 
 class SampleClass {
     @SampleAnnotation
+    /**
+     * Some comment
+     */
     protected open fun invoke() {
     }
 }

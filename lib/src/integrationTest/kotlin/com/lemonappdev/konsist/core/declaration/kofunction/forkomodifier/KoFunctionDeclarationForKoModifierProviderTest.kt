@@ -92,6 +92,11 @@ class KoFunctionDeclarationForKoModifierProviderTest {
             arguments("function-has-modifiers-annotation-and-comment", listOf(PROTECTED, OPEN)),
             arguments("function-has-modifiers-and-annotations", listOf(PROTECTED, OPEN)),
             arguments("function-has-modifiers-and-annotation-with-angle-brackets", listOf(PROTECTED, OPEN)),
+            arguments("function-has-modifiers-and-kdoc", listOf(PROTECTED, OPEN)),
+            arguments("function-has-modifiers-kdoc-and-annotation-before-them", listOf(PROTECTED, OPEN)),
+            arguments("function-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PROTECTED, OPEN)),
+            arguments("function-has-modifiers-and-comment-before-them", listOf(PROTECTED, OPEN)),
+            arguments("function-has-modifiers-and-comment-after-them", listOf(PROTECTED, OPEN)),
         )
     }
 }

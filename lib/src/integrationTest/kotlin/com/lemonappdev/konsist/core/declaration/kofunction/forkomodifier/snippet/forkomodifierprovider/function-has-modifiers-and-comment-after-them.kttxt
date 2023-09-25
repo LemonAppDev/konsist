@@ -1,0 +1,5 @@
+class SampleClass {
+    protected open // Some comment
+    fun invoke() {
+    }
+}
