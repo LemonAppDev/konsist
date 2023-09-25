@@ -11,6 +11,7 @@ on:
       - 'renovate*'
     paths:
       - 'samples/starter-projects/**'
+      - '.github/workflows/check-starter-projects.yml'
 jobs:
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
