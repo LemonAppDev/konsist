@@ -6,8 +6,8 @@ import com.lemonappdev.konsist.api.provider.KoFunctionProvider
 /**
  * List containing function declarations.
  *
- * @param includeNested Whether to include nested declarations.
- * @param includeLocal Whether to include local declarations.
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @return A list containing function declarations.
  */
 fun <T : KoFunctionProvider> List<T>.functions(
@@ -18,6 +18,8 @@ fun <T : KoFunctionProvider> List<T>.functions(
 /**
  * List containing declarations with any function.
  *
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @return A list containing declarations with any function.
  */
 fun <T : KoFunctionProvider> List<T>.withFunctions(includeNested: Boolean = true, includeLocal: Boolean = true): List<T> =
@@ -26,6 +28,8 @@ fun <T : KoFunctionProvider> List<T>.withFunctions(includeNested: Boolean = true
 /**
  * List containing declarations with no functions.
  *
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @return A list containing declarations with no functions.
  */
 fun <T : KoFunctionProvider> List<T>.withoutFunctions(includeNested: Boolean = true, includeLocal: Boolean = true): List<T> =
@@ -36,6 +40,8 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctions(includeNested: Boolean = t
  *
  * @param name The name of the function to include.
  * @param names The names of additional functions to include.
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @return A list containing declarations with at least one of the specified function(s).
  */
 fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
@@ -52,6 +58,8 @@ fun <T : KoFunctionProvider> List<T>.withFunctionNamed(
  *
  * @param name The name of the function to exclude.
  * @param names The names of additional functions to exclude.
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @return A list containing declarations without any of specified functions.
  */
 fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
@@ -68,6 +76,8 @@ fun <T : KoFunctionProvider> List<T>.withoutFunctionNamed(
  *
  * @param name The name of the function to include.
  * @param names The name(s) of the function(s) to include.
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @return A list containing declarations with all specified function(s).
  */
 fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
@@ -84,6 +94,8 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctionsNamed(
  *
  * @param name The name of the function to exclude.
  * @param names The name(s) of the function(s) to exclude.
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @return A list containing declarations without all specified function(s).
  */
 fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
@@ -99,6 +111,8 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctionsNamed(
 /**
  * List containing declarations that have at least one function satisfying the provided predicate.
  *
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @param predicate A function that defines the condition to be met by a function declaration.
  * @return A list containing declarations with at least one function satisfying the predicate.
  */
@@ -113,6 +127,8 @@ fun <T : KoFunctionProvider> List<T>.withFunction(
 /**
  * List containing declarations that not have function satisfying the provided predicate.
  *
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @param predicate A function that defines the condition to be met by a function declaration.
  * @return A list containing declarations without function satisfying the provided predicate.
  */
@@ -126,6 +142,8 @@ fun <T : KoFunctionProvider> List<T>.withoutFunction(
 /**
  * List containing declarations that have all functions satisfying the provided predicate.
  *
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @param predicate A function that defines the condition to be met by all function declarations.
  * @return A filtered list containing declarations with all functions satisfying the predicate.
  */
@@ -141,6 +159,8 @@ fun <T : KoFunctionProvider> List<T>.withAllFunctions(
 /**
  * List containing declarations that have at least one function not satisfying the provided predicate.
  *
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @param predicate A function that defines the condition to be met by all function declarations.
  * @return A list containing declarations that have at least one function not satisfying the provided predicate.
  */
@@ -154,6 +174,8 @@ fun <T : KoFunctionProvider> List<T>.withoutAllFunctions(
 /**
  * List containing declarations with function declarations satisfying the predicate.
  *
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @param predicate A function that defines the condition to be met by the list of function declarations.
  * @return A list containing declarations with function declarations satisfying the predicate.
  */
@@ -167,6 +189,8 @@ fun <T : KoFunctionProvider> List<T>.withFunctions(
 /**
  * List containing declarations without function declarations satisfying the predicate.
  *
+ * @param includeNested Whether to include nested functions.
+ * @param includeLocal Whether to include local functions.
  * @param predicate A function that defines the condition to be met by the list of function declarations.
  * @return A list containing declarations without function declarations satisfying the predicate.
  */

@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.provider.KoObjectProvider
 /**
  * List containing object declarations.
  *
- * @param includeNested Whether to include nested declarations.
+ * @param includeNested Whether to include nested objects.
  * @return A list containing object declarations.
  */
 fun <T : KoObjectProvider> List<T>.objects(
@@ -16,6 +16,7 @@ fun <T : KoObjectProvider> List<T>.objects(
 /**
  * List containing declarations with any object.
  *
+ * @param includeNested Whether to include nested objects.
  * @return A list containing declarations with any object.
  */
 fun <T : KoObjectProvider> List<T>.withObjects(includeNested: Boolean = true): List<T> =
@@ -24,6 +25,7 @@ fun <T : KoObjectProvider> List<T>.withObjects(includeNested: Boolean = true): L
 /**
  * List containing declarations with no objects.
  *
+ * @param includeNested Whether to include nested objects.
  * @return A list containing declarations with no objects.
  */
 fun <T : KoObjectProvider> List<T>.withoutObjects(includeNested: Boolean = true): List<T> =
@@ -34,6 +36,7 @@ fun <T : KoObjectProvider> List<T>.withoutObjects(includeNested: Boolean = true)
  *
  * @param name The name of the object to include.
  * @param names The names of additional objects to include.
+ * @param includeNested Whether to include nested objects.
  * @return A list containing declarations with at least one of the specified object(s).
  */
 fun <T : KoObjectProvider> List<T>.withObjectNamed(
@@ -49,6 +52,7 @@ fun <T : KoObjectProvider> List<T>.withObjectNamed(
  *
  * @param name The name of the object to exclude.
  * @param names The names of additional objects to exclude.
+ * @param includeNested Whether to include nested objects.
  * @return A list containing declarations without any of specified objects.
  */
 fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
@@ -64,6 +68,7 @@ fun <T : KoObjectProvider> List<T>.withoutObjectNamed(
  *
  * @param name The name of the object to include.
  * @param names The name(s) of the object(s) to include.
+ * @param includeNested Whether to include nested objects.
  * @return A list containing declarations with all specified object(s).
  */
 fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
@@ -79,6 +84,7 @@ fun <T : KoObjectProvider> List<T>.withAllObjectsNamed(
  *
  * @param name The name of the object to exclude.
  * @param names The name(s) of the object(s) to exclude.
+ * @param includeNested Whether to include nested objects.
  * @return A list containing declarations without all specified object(s).
  */
 fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
@@ -93,6 +99,7 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjectsNamed(
 /**
  * List containing declarations that have at least one object satisfying the provided predicate.
  *
+ * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by an object declaration.
  * @return A list containing declarations with at least one object satisfying the predicate.
  */
@@ -106,6 +113,7 @@ fun <T : KoObjectProvider> List<T>.withObject(
 /**
  * List containing declarations that not have object satisfying the provided predicate.
  *
+ * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by an object declaration.
  * @return A list containing declarations without object satisfying the provided predicate.
  */
@@ -118,6 +126,7 @@ fun <T : KoObjectProvider> List<T>.withoutObject(
 /**
  * List containing declarations that have all objects satisfying the provided predicate.
  *
+ * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by all object declarations.
  * @return A filtered list containing declarations with all objects satisfying the predicate.
  */
@@ -132,6 +141,7 @@ fun <T : KoObjectProvider> List<T>.withAllObjects(
 /**
  * List containing declarations that have at least one object not satisfying the provided predicate.
  *
+ * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by all object declarations.
  * @return A list containing declarations that have at least one object not satisfying the provided predicate.
  */
@@ -144,6 +154,7 @@ fun <T : KoObjectProvider> List<T>.withoutAllObjects(
 /**
  * List containing declarations with object declarations satisfying the predicate.
  *
+ * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by the list of object declarations.
  * @return A list containing declarations with object declarations satisfying the predicate.
  */
@@ -156,6 +167,7 @@ fun <T : KoObjectProvider> List<T>.withObjects(
 /**
  * List containing declarations without object declarations satisfying the predicate.
  *
+ * @param includeNested Whether to include nested objects.
  * @param predicate A function that defines the condition to be met by the list of object declarations.
  * @return A list containing declarations without object declarations satisfying the predicate.
  */
