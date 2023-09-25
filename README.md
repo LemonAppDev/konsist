@@ -68,7 +68,7 @@ fun `interfaces with 'Repository' annotation should have 'Repository' suffix`() 
         .scopeFromProject()
         .interfaces()
         .withAllAnnotationsOf(Repository::class)
-        .assertTrue { it.hasNameEndingWith("Repository") }
+        .assertTrue {  it.hasNameEndingWith("Repository") }
 }
 ```
 
