@@ -6,13 +6,12 @@ on:
     - cron:  '0 0 * * *'
   pull_request:
     types: [ opened, synchronize ]
-    branches:
-      - 'release-*'
 
 jobs:
   check-kttxt-snippets:
     name: Check kttxt Snippets
     runs-on: ubuntu-latest
+    if: startsWith(github.head_ref, 'release-')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
