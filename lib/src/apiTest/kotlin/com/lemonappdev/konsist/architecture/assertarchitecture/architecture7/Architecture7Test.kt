@@ -9,15 +9,8 @@ import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
 class Architecture7Test {
-    private val presentation =
-        Layer("Presentation", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.presentation..")
-    private val application =
-        Layer("Application", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.application..")
-    private val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.domain..")
-    private val infrastructure =
-        Layer("Infrastructure", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.infrastructure..")
     private val scope = Konsist.scopeFromDirectory(
-        "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture5/project",
+        "lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture7/project",
     )
 
     @Test
@@ -25,60 +18,19 @@ class Architecture7Test {
         // then
         scope
             .assertArchitecture {
-                presentation.dependsOn(application)
-                application.dependsOn(domain, infrastructure)
-                domain.dependsOn(infrastructure)
-                infrastructure.dependsOnNothing()
+                val adapter =
+                    Layer("Adapter", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.adapter..")
+                val common =
+                    Layer("Common", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.common..")
+                val domain = Layer("Domain", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.domain..")
+                val port =
+                    Layer("Port", "com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.port..")
+
+                domain.dependsOn(common)
+                adapter.dependsOn(common)
+                port.dependsOn(domain, common)
+                adapter.dependsOn(port)
+                common.dependsOnNothing()
             }
-    }
-
-    @Test
-    fun `passes when good dependency is set and architecture is passed as parameter`() {
-        // given
-        val architecture = architecture {
-            presentation.dependsOn(application)
-            application.dependsOn(domain, infrastructure)
-            domain.dependsOn(infrastructure)
-            infrastructure.dependsOnNothing()
-        }
-
-        // then
-        scope
-            .assertArchitecture(architecture)
-    }
-
-    @Test
-    fun `fails when bad dependency is set`() {
-        // given
-        val sut = {
-            scope
-                .assertArchitecture {
-                    presentation.dependsOn(application, infrastructure)
-                    application.dependsOn(infrastructure)
-                    domain.dependsOn(infrastructure)
-                    infrastructure.dependsOnNothing()
-                }
-        }
-
-        // then
-        sut shouldThrow KoCheckFailedException::class
-    }
-
-    @Test
-    fun `fails when bad dependency is set and architecture is passed as parameter`() {
-        // given
-        val architecture = architecture {
-            presentation.dependsOn(application, infrastructure)
-            application.dependsOn(infrastructure)
-            domain.dependsOn(infrastructure)
-            infrastructure.dependsOnNothing()
-        }
-
-        val sut = {
-            scope.assertArchitecture(architecture)
-        }
-
-        // then
-        sut shouldThrow KoCheckFailedException::class
     }
 }

@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.domain.sample
+package com.lemonappdev.konsist.architecture.assertarchitecture.architecture7.project.domain.sample
 
 import com.lemonappdev.konsist.architecture.assertarchitecture.architecture5.project.domain.DomainFirstClass
 

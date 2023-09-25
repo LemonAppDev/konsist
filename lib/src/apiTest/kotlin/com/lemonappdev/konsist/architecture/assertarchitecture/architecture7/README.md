@@ -1,13 +1,13 @@
 # Architecture 7
 
-Test scenario where `Presentation` depends on `Application`, `Application` depends on `Domain` and `Infrastructure`,
-`Domain` depends on `Infrastructure`:
-
+Test scenario where `Adapter` depends on `Common` and `Port`, `Port` depends on `Domain` and `Common`, `Domain`
+depends on `Common`, `Common` depends on nothing:
 
 ```mermaid
 %%{init: {'theme': 'forest'}}%%
 flowchart LR
-    Presentation --> Application
-    Application & Domain --> Infrastructure
-    Application --> Domain
+    Domain --> Common
+    Adapter --> Common
+    Port --> Domain & Common
+    Adapter --> Port
 ```
