@@ -91,7 +91,6 @@ class KoClassDeclarationForKoModifierProviderTest {
             arguments("class-has-modifiers-annotation-and-comment", listOf(PRIVATE, OPEN)),
             arguments("class-has-modifiers-and-annotations", listOf(PRIVATE, OPEN)),
             arguments("class-has-modifiers-and-annotation-with-angle-brackets", listOf(PRIVATE, OPEN)),
-
             arguments("class-has-modifiers-and-kdoc", listOf(PRIVATE, OPEN)),
             arguments("class-has-modifiers-kdoc-and-annotation-before-them", listOf(PRIVATE, OPEN)),
             arguments("class-has-modifiers-multiline-comment-and-annotation-before-them", listOf(PRIVATE, OPEN)),
