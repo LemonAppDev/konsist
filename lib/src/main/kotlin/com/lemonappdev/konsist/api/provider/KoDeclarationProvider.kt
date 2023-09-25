@@ -118,7 +118,7 @@ interface KoDeclarationProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested declarations in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the check (optional, default is `true`).
-     * @param predicate A function that defines the condition to be met by a declaration declaration.
+     * @param predicate A function that defines the condition to be met by a declaration.
      * @return `true` if there is a matching declaration, `false` otherwise.
      */
     fun hasDeclaration(
@@ -136,8 +136,8 @@ interface KoDeclarationProvider : KoBaseProvider {
      *
      * @param includeNested Specifies whether to include nested declarations in the check (optional, default is `true`).
      * @param includeLocal Specifies whether to include local declarations in the check (optional, default is `true`).
-     * @param predicate A function that defines the condition to be met by declaration declarations.
-     * @return `true` if all declaration declarations satisfy the predicate, `false` otherwise.
+     * @param predicate A function that defines the condition to be met by declarations.
+     * @return `true` if all declarations satisfy the predicate, `false` otherwise.
      */
     fun hasAllDeclarations(
         includeNested: Boolean = true,
