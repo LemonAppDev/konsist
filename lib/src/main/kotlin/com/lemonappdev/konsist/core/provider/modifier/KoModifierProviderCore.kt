@@ -71,20 +71,20 @@ internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCo
         // and with angle brackets
         // e.g. @SampleAnnotation<String, Int>
         !it.contains('<') &&
-                !it.contains('>') &&
-                !it.contains(')') &&
-                !it.contains('@') &&
-                it.isNotBlank()
+            !it.contains('>') &&
+            !it.contains(')') &&
+            !it.contains('@') &&
+            it.isNotBlank()
     }
 
     private fun String.removeMultilineComments(): String = substringAfter("*/")
 
-    /* 
+    /*
     This method avoid situations when comment is in the same line as modifiers:
     ```
     private open // sample comment
     class SampleClass
     ```
-    */
+     */
     private fun String.ignoreCommentsOnTheSameLineAsModifiers(): String = substringBefore("//")
 }
