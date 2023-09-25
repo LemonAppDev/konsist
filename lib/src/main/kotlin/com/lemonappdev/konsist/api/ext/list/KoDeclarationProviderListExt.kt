@@ -24,7 +24,7 @@ fun <T : KoDeclarationProvider> List<T>.declarations(
  */
 fun <T : KoDeclarationProvider> List<T>.withDeclarations(
     includeNested: Boolean = true,
-    includeLocal: Boolean = true
+    includeLocal: Boolean = true,
 ): List<T> =
     filter { it.hasDeclarations(includeNested, includeLocal) }
 
@@ -37,7 +37,7 @@ fun <T : KoDeclarationProvider> List<T>.withDeclarations(
  */
 fun <T : KoDeclarationProvider> List<T>.withoutDeclarations(
     includeNested: Boolean = true,
-    includeLocal: Boolean = true
+    includeLocal: Boolean = true,
 ): List<T> =
     filterNot { it.hasDeclarations(includeNested, includeLocal) }
 
