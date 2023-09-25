@@ -89,23 +89,6 @@ class GeneralSnippets {
             }
     }
 
-    fun `companion objects are last declarations in the class`() {
-        Konsist
-            .scopeFromProject()
-            .classes()
-            .assertTrue {
-                val companionObjects = it.objects().filter { obj ->
-                    obj.hasModifiers(KoModifier.COMPANION)
-                }
-
-                if (companionObjects.isEmpty()) {
-                    return@assertTrue true
-                }
-
-                it.declarations().takeLast(companionObjects.size) == companionObjects
-            }
-    }
-
     fun `every value class has parameter named 'value'`() {
         Konsist
             .scopeFromProject()
