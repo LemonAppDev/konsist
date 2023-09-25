@@ -17,7 +17,7 @@ class KotlinSerializationSnippets {
             .withAnnotationOf(Serializable::class)
             .properties()
             .assertTrue {
-                it.hasAnnotationsOf(SerialName::class)
+                it.hasAnnotationOf(SerialName::class)
             }
     }
 
@@ -27,6 +27,6 @@ class KotlinSerializationSnippets {
             .withEnumModifier()
             .withAnnotationOf(Serializable::class)
             .enumConstants
-            .assertTrue { it.hasAnnotationsOf(SerialName::class) }
+            .assertTrue { it.hasAnnotationOf(SerialName::class) }
     }
 }
