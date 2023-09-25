@@ -19,27 +19,33 @@
 
 ## Hotfix Release
 
-1. Create `hotfix-...` branch from `main`
+1. Create `KON-XXX-hotfix-...` branch from `main`
 2. Fix the bug and open PR targeting `mian`
 3. Merge the PR
 4. Create `release-vx.y.z` branch from `main`
 5. Update Konsist version
     1. [gradle.properties](gradle.properties) file
     2. [README.md](README.md) file
-6. Open the release PR targeting `main` and wait for all checks to pass 
+6. Open the release PR targeting `main` and wait for all checks to pass
 7. Merge PR
 8. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version
 9. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
     1. set `vx.y.z` as tag version
     2. set `vx.y.z` as release title
-10. Update Konsist version in the Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) docs page
+10. Update Konsist version in the
+    Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/getting-started)
+    docs page
 11. (If needed) Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
-12. Merge `main` to develop
+12. Merge `main` to `develop`
+13. Notify devs who have reported the issue (community link in original ticket)
+
+Respond
+fix starter link
 
 ## Production Release
 
 1. Merge `main` to `develop`
-2. Create `release-vx.y.z` branch from `develop` 
+2. Create `release-vx.y.z` branch from `develop`
 3. Open PR targeting `main`
 4. Update Konsist version
     1. [gradle.properties](gradle.properties) file
@@ -54,10 +60,13 @@
 9. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
     1. set `vx.y.z` as tag version
     2. set `vx.y.z` as release title
-10. Update Konsist version in the Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted) docs page 
+10. Update Konsist version in the
+    Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/gettingstarted)
+    docs page
 11. Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
 12. Merge `main` to develop (`release` will have version changed)
-13. Notify the community
+13. Notify the community about the release
+14. Notify devs who have reported the issue or asked for the ne feature (community link in original ticket)
 
 ## Sonatype
 
