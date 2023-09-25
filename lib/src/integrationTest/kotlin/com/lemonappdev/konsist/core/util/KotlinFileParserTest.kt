@@ -1,7 +1,6 @@
 package com.lemonappdev.konsist.core.util
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.verify.assert
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 
