@@ -427,7 +427,7 @@ jobs:
 
 
   konsist-starter-multiplatform-gradle-kotlin-kotest:
-    name: Konsist Starter Spring Gradle Groovy KoTest
+    name: Konsist Starter Multiplatform Gradle KoTest
     runs-on: ubuntu-latest
     if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
