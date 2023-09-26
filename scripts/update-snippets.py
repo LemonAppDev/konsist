@@ -117,7 +117,9 @@ def copy_content(source_kt_path, source_md_path, destination_folder):
         kt_content = read_file(source_kt_path)
         kt_text = format_snippet_text(kt_content)
 
-        write_file(destination_path, new_md_content + kt_text)
+        content = new_md_content + kt_text
+
+        write_file(destination_path, content)
 
     except Exception as e:
         print(f"Error copying content: {e}")
@@ -138,7 +140,7 @@ current_date = datetime.datetime.now().date()
 formatted_date = current_date.strftime("%Y-%m-%d")
 
 # Create a new branch name
-new_branch_name = "test3"
+new_branch_name = "test4"
 
 # Check if the branch exists
 create_git_branch(new_branch_name)
@@ -150,7 +152,7 @@ for filename_md in os.listdir(expanded_source_directory):
     if filename_md.endswith("snippets.md"):
         prefix = filename_md.split("-")[0]
         for filename_kt in os.listdir(expanded_source_directory):
-            if prefix in filename_kt.lower() and not filename_kt.lower().endswith("md"):
+            if filename_kt.lower().startswith(prefix) and filename_kt.lower().endswith("kt"):
                 kt_path = os.path.join(expanded_source_directory, filename_kt)
                 md_path = os.path.join(expanded_source_directory, filename_md)
                 copy_content(kt_path, md_path, expanded_destination_directory)
