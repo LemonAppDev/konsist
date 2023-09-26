@@ -2,11 +2,11 @@ import os
 import xml.etree.ElementTree as ET
 import argparse
 
-def insert_maven_local(file_name):
-    _, extension = os.path.splitext(file_name)
+def insert_maven_local(file_path):
+    _, extension = os.path.splitext(file_path)
 
     if extension in ['.gradle', '.kts']:
-        with open(file_name, 'r') as file:
+        with open(file_path, 'r') as file:
             lines = file.readlines()
 
         new_lines = []
@@ -22,10 +22,10 @@ def insert_maven_local(file_name):
         if not found:
             print("No line found containing 'mavenCentral()'")
 
-        with open(file_name, 'w') as file:
+        with open(file_path, 'w') as file:
             file.writelines(new_lines)
     elif extension == '.xml':
-        tree = ET.parse(file_name)
+        tree = ET.parse(file_path)
         root = tree.getroot()
 
         # Namespace map to handle namespaces in pom.xml
@@ -45,9 +45,11 @@ def insert_maven_local(file_name):
         url = ET.SubElement(repository, 'url')
         url.text = 'file://${user.home}/.m2/repository'
 
-        tree.write(file_name)
+        tree.write(file_path)
     else:
         print(f"Unsupported file extension: {extension}")
+
+    print(f"Konsist repository added to {file_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

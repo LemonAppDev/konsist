@@ -33,9 +33,11 @@ jobs:
     name: Check kttxt Snippets
     runs-on: ubuntu-latest
     needs: get-github-context
-    if: needs.get-github-context.outputs.target_branch == 'main'
+    if: |
+      needs.get-github-context.outputs.target_branch == 'main' &&
+      contains(needs.get-github-context.outputs.all_changed_files, '.kttxt')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
