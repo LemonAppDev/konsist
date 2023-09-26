@@ -95,7 +95,7 @@ class GeneralSnippets {
             .classes()
             .withValueModifier()
             .primaryConstructors
-            .assertTrue { it.hasParameterNamed("value") }
+            .assertTrue { it.hasParameterWithName("value") }
     }
 
     fun `no empty files allowed`() {

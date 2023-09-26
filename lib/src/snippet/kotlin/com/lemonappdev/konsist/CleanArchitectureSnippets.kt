@@ -40,7 +40,7 @@ class CleanArchitectureSnippets {
             .classes()
             .withNameEndingWith("UseCase")
             .assertTrue {
-                val hasSingleInvokeOperatorMethod = it.containsFunction { function ->
+                val hasSingleInvokeOperatorMethod = it.hasFunction { function ->
                     function.name == "invoke" && function.hasPublicOrDefaultModifier && function.hasOperatorModifier
                 }
 
