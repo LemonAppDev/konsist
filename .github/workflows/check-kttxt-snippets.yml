@@ -13,7 +13,7 @@ jobs:
     if: startsWith(github.head_ref, 'release-')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
