@@ -9,3 +9,7 @@ plugins {
 repositories {
     mavenCentral()
 }
+
+kotlin {
+    jvmToolchain(19)
+}

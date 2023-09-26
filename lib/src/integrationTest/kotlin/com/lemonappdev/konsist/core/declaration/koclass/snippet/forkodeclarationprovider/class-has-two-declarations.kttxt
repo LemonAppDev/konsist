@@ -1,0 +1,6 @@
+class SampleClass {
+    val sampleProperty = ""
+
+    fun sampleFunction() {
+    }
+}

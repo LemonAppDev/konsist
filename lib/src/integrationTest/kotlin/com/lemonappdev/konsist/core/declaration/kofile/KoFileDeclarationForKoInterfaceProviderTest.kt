@@ -10,14 +10,43 @@ import org.junit.jupiter.api.Test
 
 class KoFileDeclarationForKoInterfaceProviderTest {
     @Test
-    fun `file-contains-no-interfaces`() {
+    fun `file-has-no-interfaces`() {
         // given
-        val sut = getSnippetFile("file-contains-no-interfaces")
+        val sut = getSnippetFile("file-has-no-interfaces")
             .files
             .first()
 
         // then
-        sut.interfaces() shouldBeEqualTo emptyList()
+        assertSoftly(sut) {
+            interfaces() shouldBeEqualTo emptyList()
+            hasInterfaces() shouldBeEqualTo false
+            hasInterfaceWithName("SampleInterface") shouldBeEqualTo false
+            hasInterfacesWithAllNames("SampleInterface1", "SampleInterface2") shouldBeEqualTo false
+            hasInterface { it.name == "SampleInterface" } shouldBeEqualTo false
+            hasAllInterfaces { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `file-has-two-interfaces`() {
+        // given
+        val sut = getSnippetFile("file-has-two-interfaces")
+            .files
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasInterfaces() shouldBeEqualTo true
+            hasInterfaceWithName("SampleInterface1") shouldBeEqualTo true
+            hasInterfaceWithName("SampleInterface1", "OtherInterface") shouldBeEqualTo true
+            hasInterfacesWithAllNames("SampleInterface1") shouldBeEqualTo true
+            hasInterfacesWithAllNames("SampleInterface1", "SampleInterface2") shouldBeEqualTo true
+            hasInterfacesWithAllNames("SampleInterface1", "OtherInterface") shouldBeEqualTo false
+            hasInterface { it.name == "SampleInterface1" } shouldBeEqualTo true
+            hasInterface { it.hasNameEndingWith("Interface1") } shouldBeEqualTo true
+            hasAllInterfaces { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllInterfaces { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
+        }
     }
 
     @Test
