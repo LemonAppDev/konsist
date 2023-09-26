@@ -7,6 +7,7 @@ import sys
 # Get the absolute path to the parent directory
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(parent_dir)
+from get_konsist_snapshot_version import get_konsist_snapshot_version
 
 def replace_version(file_name):
     with open(file_name, 'r') as file:
