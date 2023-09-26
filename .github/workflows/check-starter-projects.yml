@@ -13,8 +13,6 @@ jobs:
       - name: Get branch name
         id: branch-name
         uses: tj-actions/branch-names@v7
-
-      - name: List Branches
         run : |
           echo PR branch: ${{ steps.branch-name.outputs.current_branch }}
           echo target branch: ${{ steps.branch-name.outputs.base_ref_branch }}
@@ -23,8 +21,6 @@ jobs:
       - name: Changed Files
         id: changed-files
         uses: tj-actions/changed-files@v39.2.0
-
-      - name: List Branches
         run: |
           echo Changed files: ${{ steps.branch-name.outputs.all_changed_files }}
 
