@@ -80,8 +80,8 @@ def read_file(file_path):
 
 # Write content to a file
 def write_file(file_path, content):
-    with open(file_path, "w") as destination_file:
-        destination_file.write(content)
+    with open(file_path, "w") as new_file:
+        new_file.write(content)
 
 # Add a missing line at the end of a Markdown file
 def add_missing_line_to_md(md_content):
@@ -89,6 +89,20 @@ def add_missing_line_to_md(md_content):
         return md_content + "\n"
     else:
         return md_content
+
+def remove_files_from_directory_except_readme(directory_path):
+    try:
+        # List all files in the directory
+        files = os.listdir(directory_path)
+
+        # Iterate through the files and remove them, except "README.md"
+        for file_name in files:
+            if file_name.lower() != "readme.md":
+                file_path = os.path.join(directory_path, file_name)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 # Copy content from source .kt and .md files to a destination file
 def copy_content(source_kt_path, source_md_path, destination_folder):
@@ -128,12 +142,14 @@ new_branch_name = formatted_date + "-update-snippet-code"
 # Check if the branch exists
 create_git_branch(new_branch_name)
 
+remove_files_from_directory_except_readme(expanded_destination_directory)
+
 # Iterate through all .md and .kt files in the source folder and copy them content
 for filename_md in os.listdir(expanded_source_directory):
     if filename_md.endswith("snippets.md"):
         prefix = filename_md.split("-")[0]
         for filename_kt in os.listdir(expanded_source_directory):
-            if prefix in filename_kt.lower():
+            if prefix in filename_kt.lower() and not filename_kt.lower().endswith("md"):
                 kt_path = os.path.join(expanded_source_directory, filename_kt)
                 md_path = os.path.join(expanded_source_directory, filename_md)
                 copy_content(kt_path, md_path, expanded_destination_directory)
