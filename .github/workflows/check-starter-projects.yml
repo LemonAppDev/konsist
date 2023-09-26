@@ -31,7 +31,7 @@ jobs:
 
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
-      target_branch: ${{ steps.branch-name.outputs.base_ref_branch }}
+      base_ref_branch: ${{ steps.branch-name.outputs.base_ref_branch }}
       default_branch: ${{ steps.branch-name.outputs.default_branch }}
       all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
 
