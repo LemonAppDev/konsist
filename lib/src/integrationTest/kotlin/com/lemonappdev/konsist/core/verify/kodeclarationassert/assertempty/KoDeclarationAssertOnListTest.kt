@@ -3,6 +3,7 @@ package com.lemonappdev.konsist.core.verify.kodeclarationassert.assertempty
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.localFunctions
+import com.lemonappdev.konsist.api.ext.list.withName
 import com.lemonappdev.konsist.api.verify.assertNotEmpty
 import com.lemonappdev.konsist.api.verify.assertEmpty
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
@@ -44,10 +45,10 @@ class KoDeclarationAssertOnListTest {
     }
 
     @Test
-    fun `declaration-assert-error-with-custom-message`() {
+    fun `declaration-assert-empty-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-error-with-custom-message")
+        val sut = getSnippetFile("declaration-assert-empty-error-with-custom-message")
             .classes()
 
         // then
@@ -55,7 +56,7 @@ class KoDeclarationAssertOnListTest {
             sut.assertEmpty(additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-error-with-custom-message' failed. Declaration list is not empty." +
+                "Assert 'declaration-assert-empty-error-with-custom-message' failed. Declaration list is not empty." +
                         "\n$message",
             )
                 ?: throw e
@@ -63,10 +64,10 @@ class KoDeclarationAssertOnListTest {
     }
 
     @Test
-    fun `declaration-assert-error-with-custom-message-and-strict-set-to-true`() {
+    fun `declaration-assert-empty-error-with-custom-message-and-strict-set-to-true`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-error-with-custom-message-and-strict-set-to-true")
+        val sut = getSnippetFile("declaration-assert-empty-error-with-custom-message-and-strict-set-to-true")
             .classes()
 
         // then
@@ -74,7 +75,7 @@ class KoDeclarationAssertOnListTest {
             sut.assertEmpty(strict = true, additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-error-with-custom-message-and-strict-set-to-true' failed. Declaration list is not empty." +
+                "Assert 'declaration-assert-empty-error-with-custom-message-and-strict-set-to-true' failed. Declaration list is not empty." +
                         "\n$message",
             )
                 ?: throw e
@@ -82,10 +83,10 @@ class KoDeclarationAssertOnListTest {
     }
 
     @Test
-    fun `file-declaration-assert-error-with-custom-message`() {
+    fun `file-declaration-assert-empty-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message")
+        val sut = getSnippetFile("file-declaration-assert-empty-error-with-custom-message")
             .files
 
         // then
@@ -93,7 +94,7 @@ class KoDeclarationAssertOnListTest {
             sut.assertEmpty(additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'file-declaration-assert-error-with-custom-message' failed. Declaration list is not empty." +
+                "Assert 'file-declaration-assert-empty-error-with-custom-message' failed. Declaration list is not empty." +
                         "\n$message",
             )
                 ?: throw e
@@ -101,10 +102,10 @@ class KoDeclarationAssertOnListTest {
     }
 
     @Test
-    fun `file-declaration-assert-error-with-custom-message-and-strict-set-to-true`() {
+    fun `file-declaration-assert-empty-error-with-custom-message-and-strict-set-to-true`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message-and-strict-set-to-true")
+        val sut = getSnippetFile("file-declaration-assert-empty-error-with-custom-message-and-strict-set-to-true")
             .files
 
         // then
@@ -112,567 +113,196 @@ class KoDeclarationAssertOnListTest {
             sut.assertEmpty(strict = true, additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'file-declaration-assert-error-with-custom-message-and-strict-set-to-true' failed. Declaration list is not empty." +
+                "Assert 'file-declaration-assert-empty-error-with-custom-message-and-strict-set-to-true' failed. Declaration list is not empty." +
                         "\n$message",
             )
                 ?: throw e
         }
     }
 
-//    @Test
-//    fun `declaration-assert-displaying-correct-failed-declaration-type`() {
-//        // given
-//        val sut = getSnippetFile("declaration-assert-displaying-correct-failed-declaration-type")
-//            .classes()
-//
-//        // then
-//        try {
-//            sut.assertEmpty { false }
-//        } catch (e: Exception) {
-//            e.message?.shouldContain("(SampleClass ClassDeclaration)")
-//                ?: throw e
-//        }
-//    }
-//
-//    @Test
-//    fun `file-declaration-assert-displaying-correct-failed-declaration-type`() {
-//        // given
-//        val sut = getSnippetFile("file-declaration-assert-displaying-correct-failed-declaration-type")
-//            .files
-//
-//        // then
-//        try {
-//            sut.assertEmpty { false }
-//        } catch (e: Exception) {
-//            e.message?.shouldContain("(file-declaration-assert-displaying-correct-failed-declaration-type FileDeclaration)")
-//                ?: throw e
-//        }
-//    }
-//
-//    @Test
-//    fun `declaration-assert-passes-when-declaration-list-is-empty`() {
-//        // given
-//        val sut = getSnippetFile("declaration-assert-passes-when-declaration-list-is-empty")
-//            .classes()
-//
-//        // when
-//        sut.assertEmpty { true }
-//    }
-//
-//    @Test
-//    fun `declaration-assert-false-passes-when-declaration-list-is-empty`() {
-//        // given
-//        val sut = getSnippetFile("declaration-assert-false-passes-when-declaration-list-is-empty")
-//            .classes()
-//
-//        // when
-//        sut.assertNotEmpty { false }
-//    }
-//
-//    @Test
-//    fun `declaration-assert-strict-fails-when-declaration-list-is-empty`() {
-//        // given
-//        val sut = getSnippetFile("declaration-assert-strict-fails-when-declaration-list-is-empty")
-//            .classes()
-//
-//        // when
-//        val func = {
-//            sut.assertEmpty(strict = true) { true }
-//        }
-//
-//        // then
-//        func shouldThrow KoPreconditionFailedException::class withMessage
-//            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertEmpty' method."
-//    }
-//
-//    @Test
-//    fun `declaration-assert-false-strict-fails-when-declaration-list-is-empty`() {
-//        // given
-//        val sut = getSnippetFile("declaration-assert-false-strict-fails-when-declaration-list-is-empty")
-//            .classes()
-//
-//        // when
-//        val func = {
-//            sut.assertNotEmpty(strict = true) { false }
-//        }
-//
-//        // then
-//        func shouldThrow KoPreconditionFailedException::class withMessage
-//            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertNotEmpty' method."
-//    }
-//
-//    @Test
-//    fun `declaration-assert-passes-when-declaration-list-has-only-nulls`() {
-//        // given
-//        val sut = getSnippetFile("declaration-assert-passes-when-declaration-list-has-only-nulls")
-//            .classes()
-//            .map { it.primaryConstructor }
-//
-//        // when
-//        sut.assertEmpty { true }
-//    }
-//
-//    @Test
-//    fun `declaration-assert-false-passes-when-declaration-list-has-only-nulls`() {
-//        // given
-//        val sut = getSnippetFile("declaration-assert-false-passes-when-declaration-list-has-only-nulls")
-//            .classes()
-//            .map { it.primaryConstructor }
-//
-//        // when
-//        sut.assertNotEmpty { false }
-//    }
-//
-//    @Test
-//    fun `declaration-assert-strict-fails-when-declaration-list-has-only-nulls`() {
-//        // given
-//        val sut = getSnippetFile("declaration-assert-strict-fails-when-declaration-list-has-only-nulls")
-//            .classes()
-//            .map { it.primaryConstructor }
-//
-//        // when
-//        val func = {
-//            sut.assertEmpty(strict = true) { true }
-//        }
-//
-//        // then
-//        func shouldThrow KoPreconditionFailedException::class withMessage
-//            "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
-//            "before calling the 'assertEmpty' method."
-//    }
-//
-//    @Test
-//    fun `declaration-assert-false-strict-fails-when-declaration-list-has-only-nulls`() {
-//        // given
-//        val sut = getSnippetFile("declaration-assert-false-strict-fails-when-declaration-list-has-only-nulls")
-//            .classes()
-//            .map { it.primaryConstructor }
-//
-//        // when
-//        val func = {
-//            sut.assertNotEmpty(strict = true) { false }
-//        }
-//
-//        // then
-//        func shouldThrow KoPreconditionFailedException::class withMessage
-//            "Declaration list contains only null elements. Please make sure that list of declarations contain items" +
-//            " before calling the 'assertNotEmpty' method."
-//    }
-//
-//    @Test
-//    fun `assert-passes`() {
-//        // given
-//        val sut = getSnippetFile("assert-passes")
-//            .classes()
-//
-//        // then
-//        sut.assertEmpty { it.name == "SampleClass" }
-//    }
-//
-//    @Test
-//    fun `assert-fails`() {
-//        // given
-//        val sut = getSnippetFile("assert-fails")
-//            .classes()
-//
-//        // when
-//        val func = {
-//            sut.assertEmpty { it.name == "OtherName" }
-//        }
-//
-//        // then
-//        func shouldThrow KoCheckFailedException::class
-//    }
-//
-//    @Test
-//    fun `assert-false-passes`() {
-//        // given
-//        val sut = getSnippetFile("assert-false-passes")
-//            .classes()
-//
-//        // then
-//        sut.assertNotEmpty {
-//            it.name == "OtherName"
-//        }
-//    }
-//
-//    @Test
-//    fun `assert-false-fails`() {
-//        // given
-//        val sut = getSnippetFile("assert-false-fails")
-//            .classes()
-//
-//        // when
-//        val func = {
-//            sut.assertNotEmpty {
-//                it.name == "SampleClass"
-//            }
-//        }
-//
-//        // then
-//        func shouldThrow KoCheckFailedException::class
-//    }
-//
-//    @Test
-//    fun `assert-passes-on-declarations-which-items-have-null-parent`() {
-//        // given
-//        val sut = getSnippetFile("assert-passes-on-declarations-which-items-have-null-parent")
-//            .files
-//
-//        // then
-//        sut.assertEmpty { it.name == "assert-passes-on-declarations-which-items-have-null-parent" }
-//    }
-//
-//    @Test
-//    fun `assert-fails-on-declarations-which-items-have-null-parent`() {
-//        // given
-//        val sut = getSnippetFile("assert-fails-on-declarations-which-items-have-null-parent")
-//            .files
-//
-//        // when
-//        val func = {
-//            sut.assertEmpty { it.name == "OtherName" }
-//        }
-//
-//        // then
-//        func shouldThrow KoCheckFailedException::class
-//    }
-//
-//    @Test
-//    fun `assert-false-passes-on-declarations-which-items-have-null-parent`() {
-//        // given
-//        val sut = getSnippetFile("assert-false-passes-on-declarations-which-items-have-null-parent")
-//            .files
-//
-//        // then
-//        sut.assertNotEmpty {
-//            it.name == "OtherName"
-//        }
-//    }
-//
-//    @Test
-//    fun `assert-false-fails-on-declarations-which-items-have-null-parent`() {
-//        // given
-//        val sut = getSnippetFile("assert-false-fails-on-declarations-which-items-have-null-parent")
-//            .files
-//
-//        // when
-//        val func = {
-//            sut.assertNotEmpty {
-//                it.name == "assert-false-fails-on-declarations-which-items-have-null-parent"
-//            }
-//        }
-//
-//        // then
-//        func shouldThrow KoCheckFailedException::class
-//    }
-//
-//    @Test
-//    fun `assert-passes-when-expression-is-nullable`() {
-//        // given
-//        val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
-//            .classes()
-//
-//        // then
-//        sut.assertEmpty { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
-//    }
-//
-//    @Test
-//    fun `assert-fails-when-expression-is-nullable`() {
-//        // given
-//        val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
-//            .classes()
-//
-//        // when
-//        val func = {
-//            sut.assertEmpty { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
-//        }
-//
-//        // then
-//        func shouldThrow KoCheckFailedException::class
-//    }
-//
-//    @Test
-//    fun `assert-false-passes-when-expression-is-nullable`() {
-//        // given
-//        val sut = getSnippetFile("assert-false-passes-when-expression-is-nullable")
-//            .classes()
-//
-//        // then
-//        sut.assertNotEmpty { it.primaryConstructor?.hasParameterWithName("otherParameter") }
-//    }
-//
-//    @Test
-//    fun `assert-false-fails-when-expression-is-nullable`() {
-//        // given
-//        val sut = getSnippetFile("assert-false-fails-when-expression-is-nullable")
-//            .classes()
-//
-//        // when
-//        val func = {
-//            sut.assertNotEmpty { it.primaryConstructor?.hasParameterWithName("sampleParameter") }
-//        }
-//
-//        // then
-//        func shouldThrow KoCheckFailedException::class
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
-//                .classes(includeNested = true)
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-name-at-file-level-when-all-declarations-are-KoAnnotationProvider`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
-//                .classes(includeNested = true)
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
-//                .classes(includeNested = true)
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
-//                .classes(includeNested = true)
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-konsist-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
-//                .classes(includeNested = true)
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
-//                .classes(includeNested = true)
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
-//                .classes()
-//                .initBlocks
-//
-//        // then
-//        sut.assertEmpty { it.containsLocalFunction { function -> function.name == "otherFunction" } }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
-//                .classes()
-//                .initBlocks
-//
-//        // then
-//        sut.assertEmpty { it.containsLocalFunction { function -> function.name == "otherFunction" } }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider")
-//                .classes()
-//                .initBlocks
-//
-//        // then
-//        sut.assertEmpty { it.containsLocalFunction { function -> function.name == "otherFunction" } }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-name-at-file-level-when-it-is-not-KoAnnotationProvider`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-not-KoAnnotationProvider")
-//                .classes()
-//                .initBlocks
-//
-//        // then
-//        sut.assertEmpty { it.containsLocalFunction { function -> function.name == "otherFunction" } }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-//                .classes()
-//                .initBlocks
-//                .localFunctions
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-//                .classes()
-//                .initBlocks
-//                .localFunctions
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
-//        // given
-//        val sut =
-//            getSnippetFile(
-//                "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
-//            )
-//                .classes()
-//                .initBlocks
-//                .localFunctions
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-//                .classes()
-//                .initBlocks
-//                .localFunctions
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-//                .classes()
-//                .initBlocks
-//                .localFunctions
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-//                .classes()
-//                .initBlocks
-//                .localFunctions
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-with-few-parameters`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-with-few-parameters")
-//                .functions(includeNested = true)
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("Text") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-konsist-and-name-on-declarations-which-items-have-null-parent`() {
-//        // given
-//        val scope1 = getSnippetFile("assert-suppress-by-konsist-and-name-on-declarations-which-items-have-null-parent")
-//        val scope2 = getSnippetFile("file-without-suppress")
-//
-//        val sut = (scope1 + scope2)
-//            .files
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("suppress") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-by-name-on-declarations-which-items-have-null-parent`() {
-//        // given
-//        val scope1 = getSnippetFile("assert-suppress-by-name-on-declarations-which-items-have-null-parent")
-//        val scope2 = getSnippetFile("file-without-suppress")
-//
-//        val sut = (scope1 + scope2)
-//            .files
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("suppress") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-with-few-parameters-on-declarations-which-items-have-null-parent`() {
-//        // given
-//        val scope1 = getSnippetFile("assert-suppress-with-few-parameters-on-declarations-which-items-have-null-parent")
-//        val scope2 = getSnippetFile("file-without-suppress")
-//
-//        val sut = (scope1 + scope2)
-//            .files
-//
-//        // then
-//        sut.assertEmpty { it.name.endsWith("suppress") }
-//    }
-//
-//    @Test
-//    fun `assert-suppress-with-suppress-name-parameter`() {
-//        // given
-//        val sut =
-//            getSnippetFile("assert-suppress-with-suppress-name-parameter")
-//                .functions(includeNested = true)
-//
-//        // then
-//        sut.assertEmpty(suppressName = "konsist.assert-suppress-with-suppress-name-parameter") {
-//            it.name.endsWith("Kotest")
-//        }
-//    }
+    @Test
+    fun `declaration-assert-not-empty-error-with-custom-message`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("declaration-assert-not-empty-error-with-custom-message")
+            .interfaces()
+
+        // then
+        try {
+            sut.assertNotEmpty(additionalMessage = message)
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-not-empty-error-with-custom-message' failed. Declaration list is empty." +
+                        "\n$message",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true")
+            .interfaces()
+
+        // then
+        try {
+            sut.assertNotEmpty(strict = true, additionalMessage = message)
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true' failed. Declaration list is empty." +
+                        "\n$message",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `file-declaration-assert-not-empty-error-with-custom-message`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("file-declaration-assert-not-empty-error-with-custom-message")
+            .files
+            .withName("sample-file-name")
+
+        // then
+        try {
+            sut.assertNotEmpty(additionalMessage = message)
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'file-declaration-assert-not-empty-error-with-custom-message' failed. Declaration list is empty." +
+                        "\n$message",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `file-declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true`() {
+        // given
+        val message = "CUSTOM ASSERT MESSAGE"
+        val sut = getSnippetFile("file-declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true")
+            .files
+            .withName("sample-file-name")
+
+        // then
+        try {
+            sut.assertNotEmpty(strict = true, additionalMessage = message)
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'file-declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true' failed. Declaration list is empty." +
+                        "\n$message",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `assert-empty-passes-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("assert-empty-passes-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
+
+        // then
+        sut.assertEmpty()
+    }
+
+    @Test
+    fun `assert-not-empty-fails-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("assert-not-empty-fails-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
+
+        // when
+        val func = { sut.assertNotEmpty() }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
+                "before calling the 'assertEmpty' method."
+    }
+
+    @Test
+    fun `assert-empty-strict-fails-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("assert-empty-strict-fails-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
+
+        // when
+        val func = {
+            sut.assertEmpty(strict = true)
+        }
+
+        // then
+        func shouldThrow KoPreconditionFailedException::class withMessage
+                "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
+                "before calling the 'assertEmpty' method."
+    }
+
+    @Test
+    fun `assert-not-empty-strict-passes-when-declaration-list-has-only-nulls`() {
+        // given
+        val sut = getSnippetFile("assert-not-empty-strict-passes-when-declaration-list-has-only-nulls")
+            .classes()
+            .map { it.primaryConstructor }
+
+        // then
+        sut.assertNotEmpty(strict = true)
+    }
+
+    @Test
+    fun `assert-empty-passes-when-declaration-list-is-empty`() {
+        // given
+        val sut = getSnippetFile("assert-empty-passes-when-declaration-list-is-empty")
+            .interfaces()
+
+        // then
+        sut.assertEmpty()
+    }
+
+    @Test
+    fun `assert-empty-fails-when-declaration-list-is-not-empty`() {
+        // given
+        val sut = getSnippetFile("assert-empty-fails-when-declaration-list-is-not-empty")
+            .classes()
+
+        // when
+        val func = {
+            sut.assertEmpty()
+        }
+
+        // then
+        func shouldThrow KoCheckFailedException::class
+    }
+
+    @Test
+    fun `assert-not-empty-passes-when-declaration-list-is-not-empty`() {
+        // given
+        val sut = getSnippetFile("assert-not-empty-passes-when-declaration-list-is-not-empty")
+            .classes()
+
+        // then
+        sut.assertNotEmpty()
+    }
+
+    @Test
+    fun `assert-not-empty-fails-when-declaration-list-is-empty`() {
+        // given
+        val sut = getSnippetFile("assert-not-empty-fails-when-declaration-list-is-empty")
+            .interfaces()
+
+        // when
+        val func = {
+            sut.assertEmpty()
+        }
+
+        // then
+        func shouldThrow KoCheckFailedException::class
+    }
 
     private fun getSnippetFile(fileName: String) =
         TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationassert/assertempty/snippet/", fileName)
