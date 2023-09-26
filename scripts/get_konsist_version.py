@@ -13,4 +13,5 @@ def get_konsist_version():
                 return line.split('=')[1].strip() + "-SNAPSHOT"
     return None
 
-print(get_konsist_version())
+if __name__ == "__main__":
+    print(f'Konsist version: {get_konsist_version()}')

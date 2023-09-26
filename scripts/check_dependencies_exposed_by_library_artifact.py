@@ -1,17 +1,9 @@
 # Script used to verify that the library artifact only exposes dependencies from org.jetbrains.kotlin.
-
 import os
 import sys
 import xml.etree.ElementTree as ET
-import subprocess
-
-def call_get_konsist_version_script():
-    current_script_path = os.path.abspath(__file__)
-    current_script_directory = os.path.dirname(current_script_path)
-    script_file = current_script_directory + "/get-konsist-version.py"
-
-    result = subprocess.run(['python3', script_file], stdout=subprocess.PIPE, check=True)
-    return result.stdout.decode().strip()
+from get_artifact_path import get_artifact_path
+from get_konsist_version import get_konsist_version
 
 def check_dependencies(file_path):
     try:
@@ -22,10 +14,10 @@ def check_dependencies(file_path):
         for dependency in root.findall(".//mvn:dependency", ns):
             group_id = dependency.find('mvn:groupId', ns)
             if group_id is not None and group_id.text != 'org.jetbrains.kotlin':
-                print(f'Invalid dependency: {group_id.text}')
+                print(f'ERROR Invalid dependency: {group_id.text}')
                 return 1
 
-        print('All dependencies are from org.jetbrains.kotlin')
+        print('OK - All dependencies are from org.jetbrains.kotlin')
         return 0
 
     except ET.ParseError as e:
@@ -36,7 +28,7 @@ def check_dependencies(file_path):
         return 1
 
 if __name__ == "__main__":
-    konsist_version = call_get_konsist_version_script()
-    pom_path = "/home/runner/.m2/repository/com/lemonappdev/konsist/" + konsist_version + "/konsist-" + konsist_version + ".pom"
+    konsist_version = get_konsist_version()
+    pom_path = get_artifact_path("pom")
     print(pom_path)
     sys.exit(check_dependencies(pom_path))
