@@ -266,6 +266,11 @@ jobs:
           name: konsist.jar
           path: lib/build/libs/lib.jar
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: konsist.jar
+          path: /home/runner/.m2/repository/com/lemonappdev/konsist/0.12.2-SNAPSHOT/konsist-0.12.2-SNAPSHOT.jar
+
       - name: Check dependencies exposed by the library artifact
         run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
 
