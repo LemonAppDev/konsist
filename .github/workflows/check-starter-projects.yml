@@ -273,7 +273,7 @@ jobs:
         run: cd samples/starter-projects/konsist-starter-android-gradle-kotlin-kotest/ && ./gradlew konsist_test:test
 
   konsist-starter-spring-gradle-kotlin-junit-5:
-    name: Konsist Starter Spring Gradle Groovy Junit 5
+    name: Konsist Starter Spring Gradle Kotlin Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
