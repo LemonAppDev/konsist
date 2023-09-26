@@ -3,6 +3,7 @@
 on:
   pull_request:
     types: [ opened, synchronize ]
+
 jobs:
   echo:
     name: Konsist Starter Android Gradle Groovy Junit 4
@@ -23,11 +24,6 @@ jobs:
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
     runs-on: ubuntu-latest
-    if: |
-      startsWith(steps.branch-name.outputs.current_branch, 'release/') || 
-      startsWith(steps.branch-name.outputs.current_branch, 'renovate/') ||
-      steps.branch-name.outputs.base_ref_branch == 'main' ||
-      contains(github.event .pull_request .head .ref, 'samples/starter-projects/')
     steps:
       - name: checkout
         uses: actions/checkout@v4
