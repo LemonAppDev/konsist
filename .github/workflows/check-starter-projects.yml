@@ -5,11 +5,7 @@ on:
     types: [ opened, synchronize ]
     branches:
       - 'release/*'
-      - 'renovate/*'
   push:
-    branches:
-      - 'release/*'
-      - 'renovate/*'
     paths:
       - 'samples/starter-projects/**'
 jobs:
