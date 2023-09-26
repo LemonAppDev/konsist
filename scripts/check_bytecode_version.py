@@ -17,6 +17,8 @@ def main():
     desired_java_version = "8"
     desired_bytecode_version = "52"
 
+    print(f"Verify in all classes in {jar_path} are compiled to bytecode {desired_bytecode_version} (Java {desired_java_version})")
+
     # Create a temporary directory
     temp_dir = tempfile.mkdtemp()
 
@@ -34,7 +36,7 @@ def main():
                         print(f"Error: {file_path} has bytecode version {version} which doesn't match desired version {desired_bytecode_version}")
                         sys.exit(1)
 
-        print(f"All class files have the desired bytecode version(Java version: {desired_java_version}, Bytecode version: {desired_bytecode_version}).")
+        print(f"All classed in {file_path} have correct bytecode")
     finally:
         # Clean up the temporary directory
         shutil.rmtree(temp_dir)
