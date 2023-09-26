@@ -13,12 +13,13 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class KoDeclarationAssertOnListTest {
+class KoDeclarationAssertOnSequenceTest {
     @Test
     fun `declaration-assert-test-method-name`() {
         // given
         val sut = getSnippetFile("declaration-assert-test-method-name")
             .classes()
+            .asSequence()
 
         // then
         try {
@@ -34,6 +35,7 @@ class KoDeclarationAssertOnListTest {
         // given
         val sut = getSnippetFile("file-declaration-assert-test-method-name")
             .files
+            .asSequence()
 
         // then
         try {
@@ -50,6 +52,7 @@ class KoDeclarationAssertOnListTest {
         val message = "CUSTOM ASSERT MESSAGE"
         val sut = getSnippetFile("declaration-assert-empty-error-with-custom-message")
             .classes()
+            .asSequence()
 
         // then
         try {
@@ -69,6 +72,7 @@ class KoDeclarationAssertOnListTest {
         val message = "CUSTOM ASSERT MESSAGE"
         val sut = getSnippetFile("declaration-assert-empty-error-with-custom-message-and-strict-set-to-true")
             .classes()
+            .asSequence()
 
         // then
         try {
@@ -88,6 +92,7 @@ class KoDeclarationAssertOnListTest {
         val message = "CUSTOM ASSERT MESSAGE"
         val sut = getSnippetFile("file-declaration-assert-empty-error-with-custom-message")
             .files
+            .asSequence()
 
         // then
         try {
@@ -107,6 +112,7 @@ class KoDeclarationAssertOnListTest {
         val message = "CUSTOM ASSERT MESSAGE"
         val sut = getSnippetFile("file-declaration-assert-empty-error-with-custom-message-and-strict-set-to-true")
             .files
+            .asSequence()
 
         // then
         try {
@@ -126,6 +132,7 @@ class KoDeclarationAssertOnListTest {
         val message = "CUSTOM ASSERT MESSAGE"
         val sut = getSnippetFile("declaration-assert-not-empty-error-with-custom-message")
             .interfaces()
+            .asSequence()
 
         // then
         try {
@@ -145,6 +152,7 @@ class KoDeclarationAssertOnListTest {
         val message = "CUSTOM ASSERT MESSAGE"
         val sut = getSnippetFile("declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true")
             .interfaces()
+            .asSequence()
 
         // then
         try {
@@ -165,6 +173,7 @@ class KoDeclarationAssertOnListTest {
         val sut = getSnippetFile("file-declaration-assert-not-empty-error-with-custom-message")
             .files
             .withName("sample-file-name")
+            .asSequence()
 
         // then
         try {
@@ -185,6 +194,7 @@ class KoDeclarationAssertOnListTest {
         val sut = getSnippetFile("file-declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true")
             .files
             .withName("sample-file-name")
+            .asSequence()
 
         // then
         try {
@@ -204,6 +214,7 @@ class KoDeclarationAssertOnListTest {
         val sut = getSnippetFile("assert-empty-passes-when-declaration-list-has-only-nulls")
             .classes()
             .map { it.primaryConstructor }
+            .asSequence()
 
         // then
         sut.assertEmpty()
@@ -215,6 +226,7 @@ class KoDeclarationAssertOnListTest {
         val sut = getSnippetFile("assert-not-empty-fails-when-declaration-list-has-only-nulls")
             .classes()
             .map { it.primaryConstructor }
+            .asSequence()
 
         // when
         val func = { sut.assertNotEmpty() }
@@ -229,6 +241,7 @@ class KoDeclarationAssertOnListTest {
         val sut = getSnippetFile("assert-empty-strict-fails-when-declaration-list-has-only-nulls")
             .classes()
             .map { it.primaryConstructor }
+            .asSequence()
 
         // when
         val func = {
@@ -236,7 +249,7 @@ class KoDeclarationAssertOnListTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoCheckFailedException::class 
     }
 
     @Test
@@ -245,6 +258,7 @@ class KoDeclarationAssertOnListTest {
         val sut = getSnippetFile("assert-not-empty-strict-passes-when-declaration-list-has-only-nulls")
             .classes()
             .map { it.primaryConstructor }
+            .asSequence()
 
         // then
         sut.assertNotEmpty(strict = true)
@@ -255,6 +269,7 @@ class KoDeclarationAssertOnListTest {
         // given
         val sut = getSnippetFile("assert-empty-passes-when-declaration-list-is-empty")
             .interfaces()
+            .asSequence()
 
         // then
         sut.assertEmpty()
@@ -265,6 +280,7 @@ class KoDeclarationAssertOnListTest {
         // given
         val sut = getSnippetFile("assert-empty-fails-when-declaration-list-is-not-empty")
             .classes()
+            .asSequence()
 
         // when
         val func = {
@@ -280,6 +296,7 @@ class KoDeclarationAssertOnListTest {
         // given
         val sut = getSnippetFile("assert-not-empty-passes-when-declaration-list-is-not-empty")
             .classes()
+            .asSequence()
 
         // then
         sut.assertNotEmpty()
@@ -290,6 +307,7 @@ class KoDeclarationAssertOnListTest {
         // given
         val sut = getSnippetFile("assert-not-empty-fails-when-declaration-list-is-empty")
             .interfaces()
+            .asSequence()
 
         // when
         val func = {

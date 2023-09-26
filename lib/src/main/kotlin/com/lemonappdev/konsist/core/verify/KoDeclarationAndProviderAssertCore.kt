@@ -69,13 +69,9 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
             fifthIndexMethodName
         }
 
-        val assertMethodName = getTestMethodNameFromFourthIndex()
+        val items = if(strict) this else this.filterNotNull()
 
-        if (strict) {
-            checkIfLocalListHasOnlyNullElements(this, assertMethodName)
-        }
-
-        getEmptyResult(this, additionalMessage, isEmpty, testMethodName)
+        getEmptyResult(items, additionalMessage, isEmpty, testMethodName)
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
