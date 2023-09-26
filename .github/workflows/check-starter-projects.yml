@@ -34,6 +34,7 @@ jobs:
       base_ref_branch: ${{ steps.branch-name.outputs.base_ref_branch }}
       default_branch: ${{ steps.branch-name.outputs.default_branch }}
       all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
+      head_commit_message: ${{ github.event.head_commit.message }}
 
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
@@ -43,7 +44,8 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
+      contains(needs.get-github-context.outputs.head_commit_message, 'starter') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
