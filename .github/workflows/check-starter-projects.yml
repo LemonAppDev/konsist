@@ -270,7 +270,7 @@ jobs:
         run: python3 scripts/replace-konsist-version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-android-gradle-kotlin-konsist/konsist_test/build.gradle.kts
 
       - name: Run Konsist Test
-        run: cd samples/starter-projects/konsist-starter-android-gradle-kotlin-konsist/ && ./gradlew konsist_test:test
+        run: cd samples/starter-projects/konsist-starter-android-gradle-kotlin-kotest/ && ./gradlew konsist_test:test
 
   konsist-starter-spring-gradle-kotlin-junit-5:
     name: Konsist Starter Spring Gradle Groovy Junit 5
