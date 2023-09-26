@@ -150,13 +150,13 @@ fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
 fun <E : KoBaseProvider> E?.assertEmpty(
     additionalMessage: String? = null,
 ): Unit {
-    listOf(this).assert(false, additionalMessage, true)
+    listOf(this).assert(true, additionalMessage, true)
 }
 
 fun <E : KoBaseProvider> E?.assertNotEmpty(
     additionalMessage: String? = null,
 ): Unit {
-    listOf(this).assert(false, additionalMessage, false)
+    listOf(this).assert(true, additionalMessage, false)
 }
 
 fun <E : KoBaseProvider> List<E?>.assertEmpty(
