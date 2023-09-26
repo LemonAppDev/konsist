@@ -30,6 +30,11 @@ def replace_version(file_name):
     print(f"Konsist version replaced in {file_path}")
 
 if __name__ == "__main__":
+    print("Current Directory:", os.getcwd())
+    print("System Path:", sys.path)
+    print("System Absolute Path:", os.path.abspath)
+    print("Joined Path:", os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
     parser = argparse.ArgumentParser()
     parser.add_argument("file_path", help="The path to the file to be modified.")
     args = parser.parse_args()
