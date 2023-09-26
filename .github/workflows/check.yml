@@ -9,224 +9,224 @@ on:
 
 jobs:
 # ======================================= Run Tests =========================================================
-#  konsist-junit-test:
-#    name: Konsist JUnit Test
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 19
-#          distribution: 'zulu'
-#
-#      - name: JUnit Test
-#        run: ./gradlew :lib:test
-#
-#      - uses: actions/upload-artifact@v3
-#        with:
-#          name: junit-test-report
-#          path: ./lib/build/test-results/test/
-#
-#  konsist-konsist-test:
-#    name: Konsist Konsist Test
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 19
-#          distribution: 'zulu'
-#
-#      - name: Konsist Test
-#        run: ./gradlew lib:konsistTest
-#
-#      - uses: actions/upload-artifact@v3
-#        with:
-#          name: konsist-test-report
-#          path: ./lib/build/test-results/konsistTest/
-#
-#  konsist-integration-test:
-#    name: Konsist Integration Test
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 19
-#          distribution: 'zulu'
-#
-#      - name: Integration Test
-#        run: ./gradlew lib:integrationTest
-#
-#      - uses: actions/upload-artifact@v3
-#        with:
-#          name: integration-test-report
-#          path: ./lib/build/test-results/integrationTest/
-#
-#  api-test:
-#    name: Konsist Api Test
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 19
-#          distribution: 'zulu'
-#
-#      - name: Api Test
-#        run: ./gradlew lib:apiTest
-#
-#      - uses: actions/upload-artifact@v3
-#        with:
-#          name: api-test-report
-#          path: ./lib/build/test-results/apiTest/
-#
-## ======================================= Run Linters =========================================================
-#
-#  konsist-spotless:
-#    name: Konsist Spotless
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 19
-#          distribution: 'zulu'
-#
-#      - name: Spotless
-#        run: ./gradlew spotlessCheck
-#
-#  konsist-detekt:
-#    name: Konsist Detekt
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 19
-#          distribution: 'zulu'
-#
-#      - name: Detekt
-#        run: ./gradlew detektCheck
-#
-#      - uses: actions/upload-artifact@v3
-#        with:
-#          name: detekt-report
-#          path: ./**/build/reports/detekt/detekt.*
-#
-## ======================================= Check Paths =======================================
-#
-#  path-tester-project-ubuntu:
-#    name: Path Tester Project Ubuntu
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 19
-#          distribution: 'zulu'
-#
-#      - name: Publish
-#        run: >
-#          ./gradlew publishToMavenLocal
-#          -P konsist.releaseTarget=local
-#
-#      - name: Run Integration Test
-#        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
-#
-#  path-tester-project-windows:
-#    name: Path Tester Project Windows
-#    runs-on: windows-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: |
-#            8
-#            19
-#          distribution: 'zulu'
-#
-#      - name: Publish
-#        run: >
-#          ./gradlew publishToMavenLocal
-#          -P konsist.releaseTarget=local
-#
-#      - name: Run Integration Test
-#        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
-#
-#  root-path-gradle-tester-ubuntu:
-#    name: Root Path Tester Gradle Ubuntu
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 19
-#          distribution: 'zulu'
-#
-#      - name: Publish
-#        run: >
-#          ./gradlew publishToMavenLocal
-#          -P konsist.releaseTarget=local
-#
-#      - name: Run Root Integration Test
-#        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
-#
-#      - name: Run App Integration Test
-#        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
-#
-#  root-path-gradle-tester-windows:
-#    name: Root Path Tester Gradle Windows
-#    runs-on: windows-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: |
-#            8
-#            19
-#          distribution: 'zulu'
-#
-#      - name: Publish
-#        run: >
-#          ./gradlew publishToMavenLocal
-#          -P konsist.releaseTarget=local
-#
-#      - name: Run Root Integration Test
-#        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew integrationTest
-#
-#      - name: Run App Integration Test
-#        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
+  konsist-junit-test:
+    name: Konsist JUnit Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: JUnit Test
+        run: ./gradlew :lib:test
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: junit-test-report
+          path: ./lib/build/test-results/test/
+
+  konsist-konsist-test:
+    name: Konsist Konsist Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Konsist Test
+        run: ./gradlew lib:konsistTest
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: konsist-test-report
+          path: ./lib/build/test-results/konsistTest/
+
+  konsist-integration-test:
+    name: Konsist Integration Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Integration Test
+        run: ./gradlew lib:integrationTest
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: integration-test-report
+          path: ./lib/build/test-results/integrationTest/
+
+  api-test:
+    name: Konsist Api Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Api Test
+        run: ./gradlew lib:apiTest
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: api-test-report
+          path: ./lib/build/test-results/apiTest/
+
+# ======================================= Run Linters =========================================================
+
+  konsist-spotless:
+    name: Konsist Spotless
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Spotless
+        run: ./gradlew spotlessCheck
+
+  konsist-detekt:
+    name: Konsist Detekt
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Detekt
+        run: ./gradlew detektCheck
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: detekt-report
+          path: ./**/build/reports/detekt/detekt.*
+
+# ======================================= Check Paths =======================================
+
+  path-tester-project-ubuntu:
+    name: Path Tester Project Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+
+  path-tester-project-windows:
+    name: Path Tester Project Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: |
+            8
+            19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Integration Test
+        run: cd test-projects/konsist-path-tester/ && ./gradlew integrationTest
+
+  root-path-gradle-tester-ubuntu:
+    name: Root Path Tester Gradle Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Root Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects/konsist-root-path-gradle-tester/ && ./gradlew app:integrationTest
+
+  root-path-gradle-tester-windows:
+    name: Root Path Tester Gradle Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: |
+            8
+            19
+          distribution: 'zulu'
+
+      - name: Publish
+        run: >
+          ./gradlew publishToMavenLocal
+          -P konsist.releaseTarget=local
+
+      - name: Run Root Integration Test
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew integrationTest
+
+      - name: Run App Integration Test
+        run: cd test-projects\konsist-root-path-gradle-tester\ && ./gradlew app:integrationTest
 
 # ======================================= Library Artifact =========================================================
   konsist-artifact-check:
@@ -279,23 +279,23 @@ jobs:
 
 # ======================================= Other =========================================================
 
-#  konsist-dokka:
-#    name: Konsist Dokka
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 19
-#          distribution: 'zulu'
-#
-#      - name: Dokka Generate Html Doc
-#        run: ./gradlew lib:dokkaHtml
-#
-#      - uses: actions/upload-artifact@v3
-#        with:
-#          name: dokka-html-doc.jar
-#          path: ./lib/build/dokka/*
+  konsist-dokka:
+    name: Konsist Dokka
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 19
+          distribution: 'zulu'
+
+      - name: Dokka Generate Html Doc
+        run: ./gradlew lib:dokkaHtml
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dokka-html-doc.jar
+          path: ./lib/build/dokka/*
