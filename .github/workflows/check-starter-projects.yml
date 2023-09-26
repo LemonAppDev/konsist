@@ -53,7 +53,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -89,8 +89,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -126,8 +127,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -163,8 +165,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -200,8 +203,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -237,8 +241,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -274,8 +279,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -311,8 +317,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -348,8 +355,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -386,8 +394,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -423,8 +432,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -461,8 +471,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -498,8 +509,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -536,8 +548,9 @@ jobs:
     if: |
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
-      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
     steps:
       - name: checkout
         uses: actions/checkout@v4
