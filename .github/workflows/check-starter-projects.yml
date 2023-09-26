@@ -503,7 +503,7 @@ jobs:
         run: cd samples/starter-projects/konsist-starter-spring-maven-kotest/ && mvn test
 
   konsist-starter-multiplatform-gradle-kotlin-junit5:
-    name: Konsist Starter Spring Gradle Groovy Junit 5
+    name: Konsist Starter Multiplatform Gradle Kotlin Junit 5
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
@@ -542,7 +542,7 @@ jobs:
 
 
   konsist-starter-multiplatform-gradle-kotlin-kotest:
-    name: Konsist Starter Spring Gradle Kotlin KoTest
+    name: Konsist Starter Multiplatform Gradle Kotlin KoTest
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
