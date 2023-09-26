@@ -13,10 +13,6 @@ dependencies {
     testImplementation(libs.kluent)
 }
 
-kotlin {
-    jvmToolchain(19)
-}
-
 @Suppress("UnstableApiUsage")
 testing {
     suites {

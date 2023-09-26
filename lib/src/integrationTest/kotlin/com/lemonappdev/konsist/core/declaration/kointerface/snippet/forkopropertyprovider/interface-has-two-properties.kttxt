@@ -1,0 +1,5 @@
+interface SampleInterface {
+    val sampleProperty1: String
+
+    var sampleProperty2: Int
+}

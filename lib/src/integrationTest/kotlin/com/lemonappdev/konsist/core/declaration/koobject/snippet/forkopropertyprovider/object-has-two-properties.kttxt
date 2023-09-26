@@ -1,0 +1,5 @@
+object SampleObject {
+    val sampleProperty1 = ""
+
+    var sampleProperty2 = 0
+}

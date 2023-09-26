@@ -10,14 +10,43 @@ import org.junit.jupiter.api.Test
 
 class KoObjectDeclarationForKoPropertyProviderTest {
     @Test
-    fun `object-contains-no-properties`() {
+    fun `object-has-no-properties`() {
         // given
-        val sut = getSnippetFile("object-contains-no-properties")
+        val sut = getSnippetFile("object-has-no-properties")
             .objects()
             .first()
 
         // then
-        sut.properties(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
+        assertSoftly(sut) {
+            properties() shouldBeEqualTo emptyList()
+            hasProperties() shouldBeEqualTo false
+            hasPropertyWithName("sampleProperty") shouldBeEqualTo false
+            hasPropertiesWithAllNames("sampleProperty1", "sampleProperty2") shouldBeEqualTo false
+            hasProperty { it.name == "sampleProperty" } shouldBeEqualTo false
+            hasAllProperties { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `object-has-two-properties`() {
+        // given
+        val sut = getSnippetFile("object-has-two-properties")
+            .objects()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasProperties() shouldBeEqualTo true
+            hasPropertyWithName("sampleProperty1") shouldBeEqualTo true
+            hasPropertyWithName("sampleProperty1", "otherProperty") shouldBeEqualTo true
+            hasPropertiesWithAllNames("sampleProperty1") shouldBeEqualTo true
+            hasPropertiesWithAllNames("sampleProperty1", "sampleProperty2") shouldBeEqualTo true
+            hasPropertiesWithAllNames("sampleProperty1", "otherProperty") shouldBeEqualTo false
+            hasProperty { it.name == "sampleProperty1" } shouldBeEqualTo true
+            hasProperty { it.hasNameEndingWith("Property1") } shouldBeEqualTo true
+            hasAllProperties { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasAllProperties { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
+        }
     }
 
     @Test
