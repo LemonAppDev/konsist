@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.sample'
-    compileSdk34
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.sample"
         minSdk 24
-        targetSdk34
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
