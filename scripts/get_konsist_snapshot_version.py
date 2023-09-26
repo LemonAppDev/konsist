@@ -16,4 +16,4 @@ def get_konsist_snapshot_version():
     return None
 
 if __name__ == "__main__":
-    print(f'Konsist version: {get_konsist_snapshot_version()}')
+    print(f'Konsist snapshot version: {get_konsist_snapshot_version()}')

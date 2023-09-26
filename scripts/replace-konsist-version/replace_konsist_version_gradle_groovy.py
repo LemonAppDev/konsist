@@ -4,8 +4,9 @@ import argparse
 import subprocess
 import sys
 
-sys.path.append('../')  # Add the parent directory to the sys.path
-from get_konsist_snapshot_version import get_konsist_snapshot_version
+# Get the absolute path to the parent directory
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(parent_dir)
 
 def replace_version(file_name):
     with open(file_name, 'r') as file:
@@ -26,9 +27,10 @@ def replace_version(file_name):
     with open(file_name, 'w') as file:
         file.write(new_content)
 
+    print(f"Konsist version replaced in {file_path}")
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("file_path", help="The path to the file to be modified.")
     args = parser.parse_args()
-
     replace_version(args.file_path)
