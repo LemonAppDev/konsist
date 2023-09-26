@@ -1,9 +1,12 @@
 import sys
 import subprocess
 import os
-import tempfile
 import shutil
 from get_artifact_path import get_artifact_path
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(script_dir)
+build_dir = os.path.join(project_root, "build", "check-bytecode-version")
 
 def get_bytecode_version(class_file):
     result = subprocess.run(["javap", "-verbose", class_file], capture_output=True, text=True)
@@ -19,15 +22,12 @@ def main():
 
     print(f"Verify in all classes in {jar_path} are compiled to bytecode {desired_bytecode_version} (Java {desired_java_version})")
 
-    # Create a temporary directory
-    temp_dir = tempfile.mkdtemp()
-
     try:
         # Unzip the jar file to the temporary directory
-        subprocess.run(["unzip", "-qq", jar_path, "-d", temp_dir], check=True)
+        subprocess.run(["unzip", "-qq", jar_path, "-d", build_dir], check=True)
 
         # Walk the directory to find all .class files
-        for root, _, files in os.walk(temp_dir):
+        for root, _, files in os.walk(build_dir):
             for file in files:
                 if file.endswith(".class"):
                     file_path = os.path.join(root, file)
@@ -39,7 +39,7 @@ def main():
         print(f"All classed in {file_path} have correct bytecode")
     finally:
         # Clean up the temporary directory
-        shutil.rmtree(temp_dir)
+        shutil.rmtree(build_dir)
 
 if __name__ == "__main__":
     main()

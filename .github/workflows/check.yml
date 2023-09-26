@@ -261,16 +261,16 @@ jobs:
       - name: List "lib.jar" content
         run: jar tf lib/build/libs/lib.jar
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: konsist.jar
+          path: lib/build/libs/lib.jar
+
       - name: Check dependencies exposed by the library artifact
         run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
 
       - name: Check Bytecode version
         run: python3 scripts/check_bytecode_version.py
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: konsist.jar
-          path: lib/build/libs/lib.jar
 
 # ======================================= Other =========================================================
 
