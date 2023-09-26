@@ -29,6 +29,14 @@ jobs:
           echo Changed files: 
           echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
 
+      - name: Echo Condition
+        run: |
+          1: ${{ startsWith(needs.get-github-context.outputs.current_branch, 'release/') }}
+          2. ${{ startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') }}
+          3. ${{ contains(needs.get-github-context.outputs.current_branch, 'starter-projects') }}
+          4. ${{ needs.get-github-context.outputs.target_branch == 'main' }}
+          5. ${{ contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') }}
+
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
       base_ref_branch: ${{ steps.branch-name.outputs.base_ref_branch }}
