@@ -45,7 +45,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/') ||
-      contains(needs.get-github-context.outputs.head_commit_message, 'starter') ||
+      contains(needs.get-github-context.outputs.head_commit_message, 'starter')
     steps:
       - name: checkout
         uses: actions/checkout@v4
