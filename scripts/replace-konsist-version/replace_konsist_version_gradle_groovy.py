@@ -9,12 +9,12 @@ parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(parent_dir)
 from get_konsist_snapshot_version import get_konsist_snapshot_version
 
-def replace_version(file_name):
+def replace_version(file_path):
     with open(file_name, 'r') as file:
         content = file.read()
 
     konsist_snapshot_version = get_konsist_snapshot_version()
-    if file_name.endswith(".gradle") or file_name.endswith(".kts"):
+    if file_name.endswith(".gradle") or file_path.endswith(".kts"):
         # pattern for gradle files
         pattern = r"(com\.lemonappdev:konsist:)([\d\.]*(-SNAPSHOT)?)"
         replacement = r"\g<1>" + konsist_snapshot_version
@@ -25,7 +25,7 @@ def replace_version(file_name):
 
     new_content = re.sub(pattern, replacement, content)
 
-    with open(file_name, 'w') as file:
+    with open(file_path, 'w') as file:
         file.write(new_content)
 
     print(f"Konsist version replaced in {file_path}")
