@@ -32,14 +32,20 @@ def main():
         subprocess.run(["unzip", "-qq", jar_path, "-d", build_dir], check=True)
 
         # Walk the directory to find all .class files
+        valid = true
         for root, _, files in os.walk(build_dir):
             for file in files:
                 if file.endswith(".class"):
                     file_path = os.path.join(root, file)
                     version = get_bytecode_version(file_path)
                     if version != desired_bytecode_version:
-                        print(f"Error: {file_path} has bytecode version {version} which doesn't match desired version {desired_bytecode_version}")
-                        sys.exit(1)
+                        print(f"ERROR {file_path} has bytecode version {version} which doesn't match desired version {desired_bytecode_version}")
+                        valid = false
+                    else:
+                        print(f"OK {file_path} has correct bytecode version {version}")
+
+        if(valid == false):
+            sys.exit(1)
 
         print(f"All classed in {file_path} have correct bytecode")
     finally:

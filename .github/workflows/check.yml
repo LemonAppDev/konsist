@@ -255,7 +255,7 @@ jobs:
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
 
-      - name: List artifacts
+      - name: List ~/.m2/repository/ artifacts
         run: ls -R ~/.m2/repository/
 
 #      - name: List "lib.jar" content
