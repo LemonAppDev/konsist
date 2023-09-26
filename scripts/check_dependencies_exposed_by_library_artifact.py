@@ -2,15 +2,8 @@
 import os
 import sys
 import xml.etree.ElementTree as ET
+from get_artifact_path import get_artifact_path
 from get_konsist_version import get_konsist_version
-
-def call_get_konsist_version_script():
-    current_script_path = os.path.abspath(__file__)
-    current_script_directory = os.path.dirname(current_script_path)
-    script_file = current_script_directory + "/get-konsist-version.py"
-
-    result = subprocess.run(['python3', script_file], stdout=subprocess.PIPE, check=True)
-    return result.stdout.decode().strip()
 
 def check_dependencies(file_path):
     try:
@@ -36,6 +29,6 @@ def check_dependencies(file_path):
 
 if __name__ == "__main__":
     konsist_version = get_konsist_version()
-    pom_path = os.path.expanduser("~/.m2/repository/com/lemonappdev/konsist/" + konsist_version + "/konsist-" + konsist_version + ".pom")
+    pom_path = get_artifact_path("pom")
     print(pom_path)
     sys.exit(check_dependencies(pom_path))

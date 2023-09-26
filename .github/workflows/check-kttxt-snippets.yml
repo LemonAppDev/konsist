@@ -45,4 +45,4 @@ jobs:
           distribution: 'zulu'
 
       - name: Check kttxt Snippets
-        run: python3 scripts/check-kttxt-snippets.py
+        run: python3 scripts/check_kttxt_snippets.py

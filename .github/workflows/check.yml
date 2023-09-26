@@ -262,10 +262,10 @@ jobs:
         run: jar tf lib/build/libs/lib.jar
 
       - name: Check Dependencies Exposed By The Library Artifact
-        run: python3 scripts/check-dependencies-exposed-by-library-artifact.py
+        run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
 
       - name: Check Dependencies Exposed By The Library Artifact
-        run: python3 scripts/check-dependencies-exposed-by-library-artifact.py
+        run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
 
       - uses: actions/upload-artifact@v3
         with:
