@@ -147,6 +147,46 @@ fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
     this.toList().assert(strict, additionalMessage, suppressName, function, false)
 }
 
+fun <E : KoBaseProvider> E?.assertEmpty(
+    additionalMessage: String? = null,
+): Unit {
+    listOf(this).assert(false, additionalMessage, true)
+}
+
+fun <E : KoBaseProvider> E?.assertNotEmpty(
+    additionalMessage: String? = null,
+): Unit {
+    listOf(this).assert(false, additionalMessage, false)
+}
+
+fun <E : KoBaseProvider> List<E?>.assertEmpty(
+    strict: Boolean = false,
+    additionalMessage: String? = null,
+): Unit {
+    assert(strict, additionalMessage, true)
+}
+
+fun <E : KoBaseProvider> List<E?>.assertNotEmpty(
+    strict: Boolean = false,
+    additionalMessage: String? = null,
+): Unit {
+    assert(strict, additionalMessage, false)
+}
+
+fun <E : KoBaseProvider> Sequence<E?>.assertEmpty(
+    strict: Boolean = false,
+    additionalMessage: String? = null,
+): Unit {
+    this.toList().assert(strict, additionalMessage, true)
+}
+
+fun <E : KoBaseProvider> Sequence<E?>.assertNotEmpty(
+    strict: Boolean = false,
+    additionalMessage: String? = null,
+): Unit {
+    this.toList().assert(strict, additionalMessage, false)
+}
+
 /**
  * Asserts that element match the specified predicate.
  *

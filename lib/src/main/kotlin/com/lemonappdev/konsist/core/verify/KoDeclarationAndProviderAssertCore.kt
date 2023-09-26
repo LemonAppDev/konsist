@@ -54,6 +54,35 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     }
 }
 
+internal fun <E : KoBaseProvider> List<E?>.assert(
+    strict: Boolean,
+    additionalMessage: String?,
+    isEmpty: Boolean,
+) {
+
+    try {
+        val fifthIndexMethodName = getTestMethodNameFromFifthIndex()
+
+        val testMethodName = if (fifthIndexMethodName.contains("\$default")) {
+            getTestMethodNameFromSixthIndex()
+        } else {
+            fifthIndexMethodName
+        }
+
+        val assertMethodName = getTestMethodNameFromFourthIndex()
+
+        if (strict) {
+            checkIfLocalListHasOnlyNullElements(this, assertMethodName)
+        }
+
+        getEmptyResult(this, additionalMessage, isEmpty, testMethodName)
+    } catch (e: KoException) {
+        throw e
+    } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
+        throw KoInternalException(e.message.orEmpty(), e)
+    }
+}
+
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("assert"))
 internal fun <E : KoBaseProvider> List<E>.assert(
     additionalMessage: String? = null,
@@ -91,12 +120,12 @@ fun checkIfLocalListHasOnlyNullElements(localList: List<*>, testMethodName: Stri
     if (hasOnlyNUllElements && (localList.size > 1)) {
         throw KoPreconditionFailedException(
             "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
-                "before calling the '$testMethodName' method.",
+                    "before calling the '$testMethodName' method.",
         )
     } else if (hasOnlyNUllElements && (localList.size == 1)) {
         throw KoPreconditionFailedException(
             "Method '$testMethodName' was called on a null value. Please ensure that the declaration is not null before " +
-                "calling this method.",
+                    "calling this method.",
         )
     }
 }
@@ -105,7 +134,7 @@ fun checkIfLocalListIsEmpty(localList: List<*>, testMethodName: String) {
     if (localList.isEmpty()) {
         throw KoPreconditionFailedException(
             "Declaration list is empty. Please make sure that list of declarations contain items " +
-                "before calling the '$testMethodName' method.",
+                    "before calling the '$testMethodName' method.",
         )
     }
 }
@@ -117,11 +146,11 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                (
-                    it.name == "Suppress" &&
-                        it.text.contains("\"konsist.$suppressName\"") ||
-                        it.text.contains("\"$suppressName\"")
-                    )
+                    (
+                            it.name == "Suppress" &&
+                                    it.text.contains("\"konsist.$suppressName\"") ||
+                                    it.text.contains("\"$suppressName\"")
+                            )
         }
         .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it, suppressName) }
 
@@ -221,4 +250,28 @@ private fun getCheckFailedMessage(failedItems: List<*>, suppressName: String, ad
     val times = if (failedItems.size == 1) "time" else "times"
 
     return "Assert '$suppressName' was violated (${failedItems.size} $times).${customMessage}Invalid $types:\n$failedDeclarationsMessage"
+}
+
+private fun getEmptyResult(
+    items: List<*>,
+    additionalMessage: String?,
+    isEmpty: Boolean,
+    testMethodName: String,
+) {
+    val itemsListIsEmpty = items.isEmpty()
+    val itemsHasOnlyOneNullElement = items.size == 1 && items.all { it == null }
+
+    val meetsTheConditions = itemsListIsEmpty || itemsHasOnlyOneNullElement
+
+    if (isEmpty != meetsTheConditions) {
+        val negation = if (isEmpty) " not" else ""
+        val customMessage = if (additionalMessage != null) "\n${additionalMessage}" else ""
+
+        val message = "Assert '$testMethodName' failed. " + if (isEmpty != itemsListIsEmpty) {
+            "Declaration list is$negation empty."
+        } else {
+            "Declaration has$negation null value."
+        } + customMessage
+        throw KoCheckFailedException(message)
+    }
 }
