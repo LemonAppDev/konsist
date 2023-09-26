@@ -250,21 +250,21 @@ jobs:
       - name: Assemble
         run: ./gradlew lib:assemble
 
-      - name: List ~/.m2/repository/ artifacts
-        run: ls -R ~/.m2/repository/
-
       - name: List "lib.jar" content
         run: jar tf lib/build/libs/lib.jar
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: konsist.jar
-          path: lib/build/libs/lib.jar
 
       - name: Publish
         run: >
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
+
+      - name: List artifacts
+        run: ls -R ~/.m2/repository/
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: konsist.jar
+          path: lib/build/libs/lib.jar
 
       - uses: actions/upload-artifact@v3
         with:
