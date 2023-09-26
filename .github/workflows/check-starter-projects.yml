@@ -8,31 +8,26 @@ jobs:
     name: Konsist Starter Android Gradle Groovy Junit 4
     runs-on: ubuntu-latest
     steps:
+      # steps.branch-name.outputs.default_branch // default branch: main
+      # steps.branch-name.outputs.base_ref_branch // target branch: develop
+      # steps.branch-name.outputs.current_branch // PR branch name: xxx
       - name: Get branch name
         id: branch-name
         uses: tj-actions/branch-names@v7
 
-
+      # steps.changed-files.outputs.all_changed_files // All Changed Filed
       - name: Changed Files
         id: changed-files
         uses: tj-actions/changed-files@v39.2.0
 
-      - name: List Changed Files
-        run: |
-            echo "All Added files:"
-            echo "${{ steps.changed-files.outputs.added_files }}"
-            echo "All Changed files:"
-            echo "${{ steps.changed-files.outputs.all_changed_files }}"
-
-  # steps.branch-name.outputs.default_branch // main
-  # steps.branch-name.outputs.base_ref_branch // develop (target branch)
-  # steps.branch-name.outputs.current_branch // PR branch name
-
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'release') || startsWith(github.ref, 'renovate')
-    # || contains(github.event .pull_request .head .ref, 'samples/starter-projects/')
+    if: |
+      startsWith(steps.branch-name.outputs.current_branch, 'release/') || 
+      startsWith(steps.branch-name.outputs.current_branch, 'renovate/') ||
+      steps.branch-name.outputs.base_ref_branch == 'main' ||
+      contains(github.event .pull_request .head .ref, 'samples/starter-projects/')
     steps:
       - name: checkout
         uses: actions/checkout@v4
