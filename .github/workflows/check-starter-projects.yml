@@ -3,19 +3,50 @@ name: Check Starter Projects
 on:
   pull_request:
     types: [ opened, synchronize ]
-    branches:
-      - 'release/*'
-      - 'renovate/*'
-  push:
-    paths:
-      - 'samples/starter-projects/**'
+
 jobs:
+  get-github-context:
+    name: Get Branches And Changed Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v7
+
+      - name: List Branches
+        run: |
+          echo current branch: ${{ steps.branch-name.outputs.current_branch }}
+          echo target branch: ${{ steps.branch-name.outputs.base_ref_branch }}
+          echo default branch: ${{ steps.branch-name.outputs.default_branch }}
+
+      - name: Get Changed Files
+        id: changed-files
+        uses: tj-actions/changed-files@v39.2.0
+
+      - name: List Changed Files
+        run: |
+          echo Changed files: 
+          echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
+
+    outputs:
+      current_branch: ${{ steps.branch-name.outputs.current_branch }}
+      base_ref_branch: ${{ steps.branch-name.outputs.base_ref_branch }}
+      default_branch: ${{ steps.branch-name.outputs.default_branch }}
+      all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
+
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -43,10 +74,16 @@ jobs:
 
   konsist-starter-android-gradle-groovy-junit-5:
     name: Konsist Starter Android Gradle Groovy Junit 5
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -74,10 +111,16 @@ jobs:
 
   konsist-starter-android-gradle-groovy-kotest:
     name: Konsist Starter Android Gradle Groovy koTest
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -105,10 +148,16 @@ jobs:
 
   konsist-starter-android-gradle-kotlin-junit-4:
     name: Konsist Starter Android Gradle Kotlin Junit 4
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -136,10 +185,16 @@ jobs:
 
   konsist-starter-android-gradle-kotlin-junit-5:
     name: Konsist Starter Android Gradle Kotlin Junit 5
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -167,10 +222,16 @@ jobs:
 
   konsist-starter-android-gradle-kotlin-kotest:
     name: Konsist Starter Android Gradle Kotlin KoTest
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -198,10 +259,16 @@ jobs:
 
   konsist-starter-spring-gradle-kotlin-junit-5:
     name: Konsist Starter Spring Gradle Groovy Junit 5
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -229,10 +296,16 @@ jobs:
 
   konsist-starter-spring-gradle-kotlin-kotest:
     name: Konsist Starter Spring Gradle Groovy KoTest
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -260,10 +333,16 @@ jobs:
 
   konsist-starter-spring-gradle-groovy-junit-5:
     name: Konsist Starter Spring Gradle Groovy Junit 5
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -292,10 +371,16 @@ jobs:
 
   konsist-starter-spring-gradle-groovy-kotest:
     name: Konsist Starter Spring Gradle Groovy KoTest
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -323,10 +408,16 @@ jobs:
 
   konsist-starter-spring-maven-junit5:
     name: Konsist Starter Spring Maven Junit 5
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -355,10 +446,16 @@ jobs:
 
   konsist-starter-spring-maven-kotest:
     name: Konsist Starter Spring Maven KoTest
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -386,10 +483,16 @@ jobs:
 
   konsist-starter-multiplatform-gradle-kotlin-junit5:
     name: Konsist Starter Spring Gradle Groovy Junit 5
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -418,10 +521,16 @@ jobs:
 
   konsist-starter-multiplatform-gradle-kotlin-kotest:
     name: Konsist Starter Spring Gradle Kotlin KoTest
+    needs: get-github-context
     runs-on: ubuntu-latest
+    if: |
+      startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+      startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+      needs.get-github-context.outputs.target_branch == 'main' ||
+      contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
-        uses: actions/checkout@v4 # v4
+        uses: actions/checkout@v4
 
       - name: Set up JDK
         uses: actions/setup-java@v3
