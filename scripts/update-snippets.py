@@ -62,7 +62,7 @@ def create_git_branch(branch_name):
     try:
         subprocess.run(["git", "checkout", branch_name], check=True)
     except subprocess.CalledProcessError:
-        subprocess.run(["git", "checkout", "-b", branch_name], check=True)
+        subprocess.run(["git", "checkout", "-b", branch_name, "main"], check=True)
 
 def push_changes(branch_name):
     subprocess.run(["git", "add", "."], check=True)
@@ -86,7 +86,8 @@ def write_file(file_path, content):
 # Add a missing line at the end of a Markdown file
 def add_missing_line_to_md(md_content):
     if md_content.splitlines()[-1] != "":
-        return md_content + "\n"
+        new_md_content = md_content + "\n"
+        return new_md_content
     else:
         return md_content
 
@@ -111,12 +112,12 @@ def copy_content(source_kt_path, source_md_path, destination_folder):
         destination_path = construct_destination_path(destination_folder, filename_md)
 
         md_content = read_file(source_md_path)
-        md_content = add_missing_line_to_md(md_content)
+        new_md_content = add_missing_line_to_md(md_content)
 
         kt_content = read_file(source_kt_path)
         kt_text = format_snippet_text(kt_content)
 
-        write_file(destination_path, md_content + kt_text)
+        write_file(destination_path, new_md_content + kt_text)
 
     except Exception as e:
         print(f"Error copying content: {e}")
@@ -137,7 +138,7 @@ current_date = datetime.datetime.now().date()
 formatted_date = current_date.strftime("%Y-%m-%d")
 
 # Create a new branch name
-new_branch_name = formatted_date + "-update-snippet-code"
+new_branch_name = "test3"
 
 # Check if the branch exists
 create_git_branch(new_branch_name)
