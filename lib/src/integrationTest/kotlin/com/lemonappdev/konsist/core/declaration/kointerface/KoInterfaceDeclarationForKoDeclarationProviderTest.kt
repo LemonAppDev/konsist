@@ -13,14 +13,36 @@ import org.junit.jupiter.api.Test
 
 class KoInterfaceDeclarationForKoDeclarationProviderTest {
     @Test
-    fun `interface-contains-no-declarations`() {
+    fun `interface-has-no-declarations`() {
         // given
-        val sut = getSnippetFile("interface-contains-no-declarations")
+        val sut = getSnippetFile("interface-has-no-declarations")
             .interfaces()
             .first()
 
         // then
-        sut.declarations(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
+        assertSoftly(sut) {
+            declarations() shouldBeEqualTo emptyList()
+            hasDeclarations() shouldBeEqualTo false
+            hasDeclaration { (it as KoNameProvider).name == "sampleProperty" } shouldBeEqualTo false
+            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `interface-has-two-declarations`() {
+        // given
+        val sut = getSnippetFile("interface-has-two-declarations")
+            .interfaces()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasDeclarations() shouldBeEqualTo true
+            hasDeclaration { (it as KoNameProvider).name == "sampleProperty" } shouldBeEqualTo true
+            hasDeclaration { (it as KoNameProvider).hasNameEndingWith("Property") } shouldBeEqualTo true
+            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasAllDeclarations { (it as KoNameProvider).hasNameEndingWith("Class1") } shouldBeEqualTo false
+        }
     }
 
     @Test

@@ -10,17 +10,17 @@ internal interface KoVisibilityModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasPublicModifier: Boolean
-        get() = hasModifiers(KoModifier.PUBLIC)
+        get() = hasModifier(KoModifier.PUBLIC)
 
     override val hasPublicOrDefaultModifier: Boolean
         get() = ktTypeParameterListOwner.isPublic
 
     override val hasPrivateModifier: Boolean
-        get() = hasModifiers(KoModifier.PRIVATE)
+        get() = hasModifier(KoModifier.PRIVATE)
 
     override val hasProtectedModifier: Boolean
-        get() = hasModifiers(KoModifier.PROTECTED)
+        get() = hasModifier(KoModifier.PROTECTED)
 
     override val hasInternalModifier: Boolean
-        get() = hasModifiers(KoModifier.INTERNAL)
+        get() = hasModifier(KoModifier.INTERNAL)
 }

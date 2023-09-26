@@ -9,5 +9,5 @@ internal interface KoSealedModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasSealedModifier: Boolean
-        get() = hasModifiers(KoModifier.SEALED)
+        get() = hasModifier(KoModifier.SEALED)
 }

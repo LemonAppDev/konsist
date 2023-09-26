@@ -9,5 +9,5 @@ internal interface KoDataModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasDataModifier: Boolean
-        get() = hasModifiers(KoModifier.DATA)
+        get() = hasModifier(KoModifier.DATA)
 }

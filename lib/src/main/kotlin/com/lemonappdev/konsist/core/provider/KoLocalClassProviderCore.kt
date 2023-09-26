@@ -13,6 +13,29 @@ internal interface KoLocalClassProviderCore : KoLocalClassProvider, KoLocalDecla
     override fun countLocalClasses(predicate: (KoClassDeclaration) -> Boolean): Int =
         localClasses.count { predicate(it) }
 
+    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasLocalClass()"))
     override fun containsLocalClass(predicate: (KoClassDeclaration) -> Boolean): Boolean =
         localClasses.any { predicate(it) }
+
+    override fun hasLocalClasses(): Boolean = localClasses.isNotEmpty()
+
+    override fun hasLocalClassWithName(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.any {
+            localClasses.any { localClass -> it == localClass.name }
+        }
+    }
+
+    override fun hasLocalClassesWithAllNames(name: String, vararg names: String): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.all {
+            localClasses.any { localClass -> it == localClass.name }
+        }
+    }
+
+    override fun hasLocalClass(predicate: (KoClassDeclaration) -> Boolean): Boolean = localClasses.any(predicate)
+
+    override fun hasAllLocalClasses(predicate: (KoClassDeclaration) -> Boolean): Boolean = localClasses.all(predicate)
 }
