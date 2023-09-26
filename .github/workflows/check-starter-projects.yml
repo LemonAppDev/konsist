@@ -1,7 +1,14 @@
 name: Check Starter Projects
 
 on:
-  workflow_call:
+  pull_request:
+    types: [ opened, synchronize ]
+    branches:
+      - 'release*'
+      - 'renovate*'
+  pull_request:
+    paths:
+      - 'samples/starter-projects/**'
 
 jobs:
   konsist-starter-android-gradle-groovy-junit-4:
