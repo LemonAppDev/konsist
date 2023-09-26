@@ -18,10 +18,10 @@ jobs:
 
       - name: List Changed Files
         run: |
-            echo "All Modified files:"
-            echo "${{ steps.changed-files.outputs.all_modified_files }}"
-            echo "All Modified directories:"
-            echo "${{ steps.changed-files.outputs.all_modified_directories }}"
+            echo "All Added files:"
+            echo "${{ steps.changed-files.outputs.added_files }}"
+            echo "All Changed files:"
+            echo "${{ steps.changed-files.outputs.all_changed_files }}"
 
   # steps.branch-name.outputs.default_branch // main
   # steps.branch-name.outputs.base_ref_branch // develop (target branch)
