@@ -114,28 +114,35 @@ def remove_files_from_directory_except_readme(directory_path):
                 file_path = os.path.join(directory_path, file_name)
                 if os.path.isfile(file_path):
                     os.remove(file_path)
-        print(os.listdir(directory_path))
     except Exception as e:
         print(f"An error occurred: {e}")
 
 # Copy content from source .kt and .md files to a destination file
-def copy_content(source_kt_path, source_md_path, destination_folder):
-    try:
-        filename_md = os.path.basename(source_md_path)
-        destination_path = construct_destination_path(destination_folder, filename_md)
+def copy_content(expanded_source_directory):
+    # Iterate through all .md and .kt files in the source folder and copy them content
+    for filename_md in os.listdir(expanded_source_directory):
+        if filename_md.endswith("snippets.md"):
+            prefix = filename_md.split("-")[0]
+            for filename_kt in os.listdir(expanded_source_directory):
+                if filename_kt.lower().startswith(prefix) and filename_kt.lower().endswith("kt"):
+                    kt_path = os.path.join(expanded_source_directory, filename_kt)
+                    md_path = os.path.join(expanded_source_directory, filename_md)
+                    try:
+                        filename_md = os.path.basename(md_path)
+                        destination_path = construct_destination_path(expanded_destination_directory, filename_md)
 
-        md_content = read_file(source_md_path)
-        new_md_content = add_empty_line_to_md_file(md_content)
+                        md_content = read_file(md_path)
+                        new_md_content = add_empty_line_to_md_file(md_content)
 
-        kt_content = read_file(source_kt_path)
-        kt_text = format_snippet_text(kt_content)
+                        kt_content = read_file(kt_path)
+                        kt_text = format_snippet_text(kt_content)
 
-        content = new_md_content + kt_text
+                        content = new_md_content + kt_text
 
-        write_file(destination_path, content)
+                        write_file(destination_path, content)
 
-    except Exception as e:
-        print(f"Error copying content: {e}")
+                    except Exception as e:
+                        print(f"Error copying content: {e}")
 
 def create_pr():
     prTitle = "Update snippet code from " + get_current_date()
@@ -150,15 +157,7 @@ create_git_branch()
 
 remove_files_from_directory_except_readme(expanded_destination_directory)
 
-# Iterate through all .md and .kt files in the source folder and copy them content
-for filename_md in os.listdir(expanded_source_directory):
-    if filename_md.endswith("snippets.md"):
-        prefix = filename_md.split("-")[0]
-        for filename_kt in os.listdir(expanded_source_directory):
-            if filename_kt.lower().startswith(prefix) and filename_kt.lower().endswith("kt"):
-                kt_path = os.path.join(expanded_source_directory, filename_kt)
-                md_path = os.path.join(expanded_source_directory, filename_md)
-                copy_content(kt_path, md_path, expanded_destination_directory)
+copy_content(expanded_source_directory)
 
 # Commit and push changes
 push_changes()
