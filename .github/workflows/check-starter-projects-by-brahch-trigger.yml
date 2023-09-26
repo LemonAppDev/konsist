@@ -1,0 +1,13 @@
+name: Check Starter Projects (By Branch Trigger)
+
+on:
+  pull_request:
+    types: [ opened, synchronize ]
+    branches:
+      - 'release*'
+      - 'renovate*'
+
+jobs:
+  konsist-starter-android-gradle-groovy-junit-4:
+    name: Konsist Starter Android Gradle Groovy Junit 4
+    uses: .github/workflows/check-starter-projects.yml
