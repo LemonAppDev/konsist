@@ -25,7 +25,7 @@ def main():
     desired_java_version = "8"
     desired_bytecode_version = "52"
 
-    print(f"Verify in all classes in {jar_path} are compiled to bytecode {desired_bytecode_version} (Java {desired_java_version})")
+    print(f"Verify if all classes in {jar_path} are compiled to bytecode {desired_bytecode_version} (Java {desired_java_version})")
 
     try:
         # Unzip the jar file to the temporary directory
@@ -39,13 +39,8 @@ def main():
                     file_path = os.path.join(root, file)
                     version = get_bytecode_version(file_path)
                     if version != desired_bytecode_version:
-                        print(f"ERROR {file_path} has bytecode version {version} which doesn't match desired version {desired_bytecode_version}")
-                        valid = false
-                    else:
-                        print(f"OK {file_path} has correct bytecode version {version}")
-
-        if(valid == false):
-            sys.exit(1)
+                        print(f"ERROR {jar_path} has incorrect bytecode version {version}")
+                        sys.exit(1)
 
         print(f"All classed in {file_path} have correct bytecode")
     finally:
