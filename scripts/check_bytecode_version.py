@@ -12,10 +12,6 @@ def get_bytecode_version(class_file):
             return line.split(":")[-1].strip()
 
 def main():
-    if len(sys.argv) != 3:
-        print("Usage: script.py <path_to_jar> <desired_bytecode_version>")
-        sys.exit(1)
-
     jar_path = get_artifact_path("jar")
     # Java 8 == bytecode version 52.0 (defined in the local.javalibrary.gradle.kts)
     desired_bytecode_version = "52"
