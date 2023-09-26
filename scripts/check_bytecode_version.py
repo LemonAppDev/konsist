@@ -11,7 +11,7 @@ build_dir = os.path.join(project_root, "build", "check-bytecode-version")
 # Ensure the directory exists
 os.makedirs(build_dir, exist_ok=True)
 
-print("build_dir", build_dir")
+print("build_dir", build_dir)
 
 def get_bytecode_version(class_file):
     result = subprocess.run(["javap", "-verbose", class_file], capture_output=True, text=True)
