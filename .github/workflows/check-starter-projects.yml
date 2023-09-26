@@ -260,10 +260,10 @@ jobs:
           python-version: '3.11.3'
 
       - name: Add Maven Local Repository
-        run: python3 scripts/replace-konsist-version/add_maven_local_repository_to_config_file.py samples/starter-projects/konsist-starter-android-gradle-kotlin-konsist/settings.gradle
+        run: python3 scripts/replace-konsist-version/add_maven_local_repository_to_config_file.py samples/starter-projects/konsist-starter-android-gradle-kotlin-kotest/settings.gradle
 
       - name: Replace Konsist Version
-        run: python3 scripts/replace-konsist-version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-android-gradle-kotlin-konsist/konsist_test/build.gradle
+        run: python3 scripts/replace-konsist-version/replace_konsist_version_gradle_groovy.py samples/starter-projects/konsist-starter-android-gradle-kotlin-kotest/konsist_test/build.gradle
 
       - name: Publish Konsist Artifact To Local Maven Repository
         run: >
