@@ -454,5 +454,5 @@ class DeprecatedKoDeclarationAssertOnSingleElementTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationassert/deprecated/deprecatedsnippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationassert/deprecated/snippet/", fileName)
 }

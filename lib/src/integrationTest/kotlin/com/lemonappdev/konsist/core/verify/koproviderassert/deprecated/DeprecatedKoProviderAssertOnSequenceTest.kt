@@ -1,8 +1,12 @@
-package com.lemonappdev.konsist.core.verify.kodeclarationassert.deprecated
+package com.lemonappdev.konsist.core.verify.koproviderassert.deprecated
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.initBlocks
-import com.lemonappdev.konsist.api.ext.list.localFunctions
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
+import com.lemonappdev.konsist.api.provider.KoPropertyProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.verify.assert
 import com.lemonappdev.konsist.api.verify.assertNot
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
@@ -12,43 +16,31 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class DeprecatedKoDeclarationAssertOnSequenceTest {
+class DeprecatedKoProviderAssertOnSequenceTest {
     @Test
-    fun `declaration-assert-test-method-name`() {
+    fun `provider-assert-test-method-name`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name")
-            .classes()
+        val sut = getSnippetFile("provider-assert-test-method-name")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
             .asSequence()
 
         // then
         try {
             sut.assert { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' was violated (1 time)") ?: throw e
+            e.message?.shouldContain("Assert 'provider-assert-test-method-name' was violated (2 times)")
+                ?: throw e
         }
     }
 
     @Test
-    fun `file-declaration-assert-test-method-name`() {
-        // given
-        val sut = getSnippetFile("file-declaration-assert-test-method-name")
-            .files
-            .asSequence()
-
-        // then
-        try {
-            sut.assert { false }
-        } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' was violated (1 time)") ?: throw e
-        }
-    }
-
-    @Test
-    fun `declaration-assert-error-with-custom-message`() {
+    fun `provider-assert-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-error-with-custom-message")
-            .classes()
+        val sut = getSnippetFile("provider-assert-error-with-custom-message")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
             .asSequence()
 
         // then
@@ -56,7 +48,7 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
             sut.assert(message) { false }
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-error-with-custom-message' was violated (1 time)." +
+                "Assert 'provider-assert-error-with-custom-message' was violated (2 times)." +
                     "\n$message\nInvalid declarations:",
             )
                 ?: throw e
@@ -64,62 +56,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `file-declaration-assert-error-with-custom-message`() {
+    fun `provider-assert-fails-when-declaration-list-is-empty`() {
         // given
-        val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("file-declaration-assert-error-with-custom-message")
-            .files
-            .asSequence()
-
-        // then
-        try {
-            sut.assert(message) { false }
-        } catch (e: Exception) {
-            e.message?.shouldContain(
-                "Assert 'file-declaration-assert-error-with-custom-message' was violated (1 time)." +
-                    "\n$message\nInvalid files:",
-            )
-                ?: throw e
-        }
-    }
-
-    @Test
-    fun `declaration-assert-displaying-correct-failed-declaration-type`() {
-        // given
-        val sut = getSnippetFile("declaration-assert-displaying-correct-failed-declaration-type")
-            .classes()
-            .asSequence()
-
-        // then
-        try {
-            sut.assert { false }
-        } catch (e: Exception) {
-            e.message?.shouldContain("(SampleClass ClassDeclaration)")
-                ?: throw e
-        }
-    }
-
-    @Test
-    fun `file-declaration-assert-displaying-correct-failed-declaration-type`() {
-        // given
-        val sut = getSnippetFile("file-declaration-assert-displaying-correct-failed-declaration-type")
-            .files
-            .asSequence()
-
-        // then
-        try {
-            sut.assert { false }
-        } catch (e: Exception) {
-            e.message?.shouldContain("(file-declaration-assert-displaying-correct-failed-declaration-type FileDeclaration)")
-                ?: throw e
-        }
-    }
-
-    @Test
-    fun `declaration-assert-fails-when-declaration-list-is-empty`() {
-        // given
-        val sut = getSnippetFile("declaration-assert-fails-when-declaration-list-is-empty")
-            .classes()
+        val sut = getSnippetFile("provider-assert-fails-when-declaration-list-is-empty")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
             .asSequence()
 
         // when
@@ -133,10 +75,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `declaration-assert-not-fails-when-declaration-list-is-empty`() {
+    fun `provider-assert-not-fails-when-declaration-list-is-empty`() {
         // given
-        val sut = getSnippetFile("declaration-assert-not-fails-when-declaration-list-is-empty")
-            .classes()
+        val sut = getSnippetFile("provider-assert-not-fails-when-declaration-list-is-empty")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
             .asSequence()
 
         // when
@@ -153,23 +97,25 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     fun `assert-passes`() {
         // given
         val sut = getSnippetFile("assert-passes")
-            .classes()
+            .declarations()
+            .filterIsInstance<KoAnnotationProvider>()
             .asSequence()
 
         // then
-        sut.assert { it.name == "SampleClass" }
+        sut.assert { it.hasAnnotations() }
     }
 
     @Test
     fun `assert-fails`() {
         // given
         val sut = getSnippetFile("assert-fails")
-            .classes()
+            .declarations()
+            .filterIsInstance<KoAnnotationProvider>()
             .asSequence()
 
         // when
         val func = {
-            sut.assert { it.name == "OtherName" }
+            sut.assert { it.hasAnnotations() }
         }
 
         // then
@@ -180,85 +126,25 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     fun `assert-not-passes`() {
         // given
         val sut = getSnippetFile("assert-not-passes")
-            .classes()
+            .declarations()
+            .filterIsInstance<KoAnnotationProvider>()
             .asSequence()
 
         // then
-        sut.assertNot {
-            it.name == "OtherName"
-        }
+        sut.assertNot { it.hasAnnotations() }
     }
 
     @Test
     fun `assert-not-fails`() {
         // given
         val sut = getSnippetFile("assert-not-fails")
-            .classes()
+            .declarations()
+            .filterIsInstance<KoAnnotationProvider>()
             .asSequence()
 
         // when
         val func = {
-            sut.assertNot {
-                it.name == "SampleClass"
-            }
-        }
-
-        // then
-        func shouldThrow KoCheckFailedException::class
-    }
-
-    @Test
-    fun `assert-passes-on-declarations-which-items-have-null-parent`() {
-        // given
-        val sut = getSnippetFile("assert-passes-on-declarations-which-items-have-null-parent")
-            .files
-            .asSequence()
-
-        // then
-        sut.assert { it.name == "assert-passes-on-declarations-which-items-have-null-parent" }
-    }
-
-    @Test
-    fun `assert-fails-on-declarations-which-items-have-null-parent`() {
-        // given
-        val sut = getSnippetFile("assert-fails-on-declarations-which-items-have-null-parent")
-            .files
-            .asSequence()
-
-        // when
-        val func = {
-            sut.assert { it.name == "OtherName" }
-        }
-
-        // then
-        func shouldThrow KoCheckFailedException::class
-    }
-
-    @Test
-    fun `assert-not-passes-on-declarations-which-items-have-null-parent`() {
-        // given
-        val sut = getSnippetFile("assert-not-passes-on-declarations-which-items-have-null-parent")
-            .files
-            .asSequence()
-
-        // then
-        sut.assertNot {
-            it.name == "OtherName"
-        }
-    }
-
-    @Test
-    fun `assert-not-fails-on-declarations-which-items-have-null-parent`() {
-        // given
-        val sut = getSnippetFile("assert-not-fails-on-declarations-which-items-have-null-parent")
-            .files
-            .asSequence()
-
-        // when
-        val func = {
-            sut.assertNot {
-                it.name == "assert-not-fails-on-declarations-which-items-have-null-parent"
-            }
+            sut.assertNot { it.hasAnnotations() }
         }
 
         // then
@@ -269,7 +155,8 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     fun `assert-passes-when-expression-is-nullable`() {
         // given
         val sut = getSnippetFile("assert-passes-when-expression-is-nullable")
-            .classes()
+            .declarations()
+            .filterIsInstance<KoPrimaryConstructorProvider>()
             .asSequence()
 
         // then
@@ -280,7 +167,8 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     fun `assert-fails-when-expression-is-nullable`() {
         // given
         val sut = getSnippetFile("assert-fails-when-expression-is-nullable")
-            .classes()
+            .declarations()
+            .filterIsInstance<KoPrimaryConstructorProvider>()
             .asSequence()
 
         // when
@@ -296,7 +184,8 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     fun `assert-not-passes-when-expression-is-nullable`() {
         // given
         val sut = getSnippetFile("assert-not-passes-when-expression-is-nullable")
-            .classes()
+            .declarations()
+            .filterIsInstance<KoPrimaryConstructorProvider>()
             .asSequence()
 
         // then
@@ -307,7 +196,8 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
     fun `assert-not-fails-when-expression-is-nullable`() {
         // given
         val sut = getSnippetFile("assert-not-fails-when-expression-is-nullable")
-            .classes()
+            .declarations()
+            .filterIsInstance<KoPrimaryConstructorProvider>()
             .asSequence()
 
         // when
@@ -324,11 +214,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
-                .classes(includeNested = true)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assert { it.hasModifiers() }
     }
 
     @Test
@@ -336,11 +227,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
-                .classes(includeNested = true)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assert { it.hasModifiers() }
     }
 
     @Test
@@ -348,11 +240,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
-                .classes(includeNested = true)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assert { it.hasModifiers() }
     }
 
     @Test
@@ -360,11 +253,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
-                .classes(includeNested = true)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assert { it.hasModifiers() }
     }
 
     @Test
@@ -372,11 +266,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
-                .classes(includeNested = true)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assert { it.hasModifiers() }
     }
 
     @Test
@@ -384,11 +279,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
-                .classes(includeNested = true)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assert { it.hasModifiers() }
     }
 
     @Test
@@ -396,12 +292,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
-                .classes()
-                .initBlocks
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -409,12 +305,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
-                .classes()
-                .initBlocks
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -422,12 +318,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider")
-                .classes()
-                .initBlocks
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -435,12 +331,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-not-KoAnnotationProvider")
-                .classes()
-                .initBlocks
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -448,13 +344,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .classes()
-                .initBlocks
-                .localFunctions
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -462,13 +357,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .classes()
-                .initBlocks
-                .localFunctions
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -478,13 +372,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
             getSnippetFile(
                 "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
             )
-                .classes()
-                .initBlocks
-                .localFunctions
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -492,13 +385,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .classes()
-                .initBlocks
-                .localFunctions
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -506,13 +398,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .classes()
-                .initBlocks
-                .localFunctions
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -520,13 +411,12 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .classes()
-                .initBlocks
-                .localFunctions
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
+        sut.assert { it.containsProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -534,55 +424,14 @@ class DeprecatedKoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-with-few-parameters")
-                .functions(includeNested = true)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
                 .asSequence()
 
         // then
-        sut.assert { it.name.endsWith("Text") }
-    }
-
-    @Test
-    fun `assert-suppress-by-konsist-and-name-on-declarations-which-items-have-null-parent`() {
-        // given
-        val scope1 = getSnippetFile("assert-suppress-by-konsist-and-name-on-declarations-which-items-have-null-parent")
-        val scope2 = getSnippetFile("file-without-suppress")
-
-        val sut = (scope1 + scope2)
-            .files
-            .asSequence()
-
-        // then
-        sut.assert { it.name.endsWith("suppress") }
-    }
-
-    @Test
-    fun `assert-suppress-by-name-on-declarations-which-items-have-null-parent`() {
-        // given
-        val scope1 = getSnippetFile("assert-suppress-by-name-on-declarations-which-items-have-null-parent")
-        val scope2 = getSnippetFile("file-without-suppress")
-
-        val sut = (scope1 + scope2)
-            .files
-            .asSequence()
-
-        // then
-        sut.assert { it.name.endsWith("suppress") }
-    }
-
-    @Test
-    fun `assert-suppress-with-few-parameters-on-declarations-which-items-have-null-parent`() {
-        // given
-        val scope1 = getSnippetFile("assert-suppress-with-few-parameters-on-declarations-which-items-have-null-parent")
-        val scope2 = getSnippetFile("file-without-suppress")
-
-        val sut = (scope1 + scope2)
-            .files
-            .asSequence()
-
-        // then
-        sut.assert { it.name.endsWith("suppress") }
+        sut.assert { it.hasModifiers() }
     }
 
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationassert/deprecated/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/verify/koproviderassert/deprecated/snippet/", fileName)
 }

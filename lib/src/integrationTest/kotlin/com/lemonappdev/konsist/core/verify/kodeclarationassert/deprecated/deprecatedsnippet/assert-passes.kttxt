@@ -1,6 +1,0 @@
-package com.lemonappdev.konsist.core.verify.kodeclarationassert.deprecated.deprecatedsnippet
-
-import com.lemonappdev.konsist.testdata.SampleAnnotation
-
-@SampleAnnotation
-class SampleClass

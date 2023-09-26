@@ -1,0 +1,7 @@
+package com.lemonappdev.konsist.core.verify.kodeclarationassert.deprecated.snippet
+
+class SampleClassText {
+    @Suppress("detekt.someRule", "konsist.assert-suppress-with-few-parameters")
+    fun sampleFunctionWithIncorrectSuffix() {
+    }
+}
