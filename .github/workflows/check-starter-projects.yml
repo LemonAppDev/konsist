@@ -5,6 +5,7 @@ on:
     types: [ opened, synchronize ]
     branches:
       - 'release/*'
+      - 'renovate/*'
   push:
     paths:
       - 'samples/starter-projects/**'
@@ -416,7 +417,7 @@ jobs:
 
 
   konsist-starter-multiplatform-gradle-kotlin-kotest:
-    name: Konsist Starter Spring Gradle Groovy KoTest
+    name: Konsist Starter Spring Gradle Kotlin KoTest
     runs-on: ubuntu-latest
     steps:
       - name: checkout
