@@ -268,7 +268,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: konsist.jar
+          name: konsist-0.12.2-SNAPSHOT.jar
           path: /home/runner/.m2/repository/com/lemonappdev/konsist/0.12.2-SNAPSHOT/konsist-0.12.2-SNAPSHOT.jar
 
       - name: Check dependencies exposed by the library artifact
