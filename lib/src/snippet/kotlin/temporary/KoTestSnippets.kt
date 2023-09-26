@@ -1,4 +1,4 @@
-package com.lemonappdev.konsist
+package temporary
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
