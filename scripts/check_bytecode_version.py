@@ -34,8 +34,7 @@ def main():
                     file_path = os.path.join(root, file)
                     version = get_bytecode_version(file_path)
                     if version != desired_bytecode_version:
-                        print(f"Error: {file_path} has bytecode version {version} which doesn't match desired version
-                         {desired_bytecode_version}")
+                        print(f"Error: {file_path} has bytecode version {version} which doesn't match desired version {desired_bytecode_version}")
                         sys.exit(1)
 
         print("All class files match the desired bytecode version!")
