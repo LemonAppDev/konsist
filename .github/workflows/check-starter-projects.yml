@@ -40,7 +40,7 @@ jobs:
     needs: get-github-context
     runs-on: ubuntu-latest
     if: |
-        startsWith(needs.get-github-context.outputs.current_branch, 'release/')
+        startsWith(needs.get-github-context.outputs.current_branch, 'release2/')
 #        startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
 #        needs.get-github-context.outputs.target_branch == 'main' ||
 #        contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
