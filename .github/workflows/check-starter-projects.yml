@@ -16,7 +16,7 @@ jobs:
 
       - name: List Branches
         run : |
-          echo PR branch: ${{ steps.branch-name.outputs.current_branch }}
+          echo current branch: ${{ steps.branch-name.outputs.current_branch }}
           echo target branch: ${{ steps.branch-name.outputs.base_ref_branch }}
           echo default branch: ${{ steps.branch-name.outputs.default_branch }}
 
@@ -26,7 +26,8 @@ jobs:
 
       - name: List Changed Files
         run: |
-          echo Changed files: ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
+          echo Changed files: 
+          echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
 
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
@@ -44,6 +45,13 @@ jobs:
 #        needs.get-github-context.outputs.target_branch == 'main' ||
 #        contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
+      - name: List Branches
+        run: |
+          echo PR branch: ${{ needs.get-github-context.outputs.current_branch }}
+          echo target branch: ${{ needs.get-github-context.outputs.base_ref_branch }}
+          echo default branch: ${{ needs.get-github-context.outputs.default_branch }}
+          echo changed files: ${{ needs.get-github-context.outputs.all_changed_files }}
+
       - name: checkout
         uses: actions/checkout@v4
 
