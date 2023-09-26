@@ -7,7 +7,7 @@ plugins {
 android {
     namespace = "com.sample"
 
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 26
@@ -22,12 +22,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_9
+        targetCompatibility = JavaVersion.VERSION_1_9
     }
 
     kotlin {
-        jvmToolchain(8)
+        jvmToolchain(9)
     }
 }
 
