@@ -20,13 +20,13 @@ jobs:
           echo target branch: ${{ steps.branch-name.outputs.base_ref_branch }}
           echo default branch: ${{ steps.branch-name.outputs.default_branch }}
 
-      - name: Changed Files
+      - name: Get Changed Files
         id: changed-files
         uses: tj-actions/changed-files@v39.2.0
 
-      - name: List Branches
+      - name: List Changed Files
         run: |
-          echo Changed files: ${{ steps.branch-name.outputs.all_changed_files }}
+          echo Changed files: ${{ steps.changed-files.outputs.all_changed_files }}
 
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
