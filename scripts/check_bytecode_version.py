@@ -22,6 +22,7 @@ def get_bytecode_version(class_file):
 def main():
     jar_path = get_artifact_path("jar")
     # Java 8 == bytecode version 52.0 (defined in the local.javalibrary.gradle.kts)
+    # https://javaalmanac.io/bytecode/versions/
     desired_java_version = "8"
     desired_bytecode_version = "52"
 
