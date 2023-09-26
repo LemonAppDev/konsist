@@ -69,6 +69,7 @@ def get_current_date():
     return current_date.strftime("%Y-%m-%d")
 
 branch_name = get_current_date() + "-update-snippet-code"
+
 def create_git_branch():
     try:
         subprocess.run(["git", "checkout", branch_name], check=True)
@@ -113,6 +114,7 @@ def remove_files_from_directory_except_readme(directory_path):
                 file_path = os.path.join(directory_path, file_name)
                 if os.path.isfile(file_path):
                     os.remove(file_path)
+        print(os.listdir(directory_path))
     except Exception as e:
         print(f"An error occurred: {e}")
 
