@@ -13,7 +13,7 @@ jobs:
     name: Konsist JUnit Test
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -34,7 +34,7 @@ jobs:
     name: Konsist Konsist Test
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -55,7 +55,7 @@ jobs:
     name: Konsist Integration Test
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -76,7 +76,7 @@ jobs:
     name: Api Test
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -99,7 +99,7 @@ jobs:
     name: Konsist Spotless
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -115,7 +115,7 @@ jobs:
     name: Konsist Detekt
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -138,7 +138,7 @@ jobs:
     name: Path Tester Project Ubuntu
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -159,7 +159,7 @@ jobs:
     name: Path Tester Project Windows
     runs-on: windows-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -182,7 +182,7 @@ jobs:
     name: Root Path Tester Gradle Ubuntu
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -206,7 +206,7 @@ jobs:
     name: Root Path Tester Gradle Windows
     runs-on: windows-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -233,7 +233,7 @@ jobs:
     name: Konsist Artifact Check
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -255,13 +255,13 @@ jobs:
           ./gradlew publishToMavenLocal
           -P konsist.releaseTarget=local
 
-      - name: List Artifacts
+      - name: List artifacts
         run: ls -R ~/.m2/repository/
 
-      - name: Show "lib.jar" content
+      - name: List "lib.jar" content
         run: jar tf lib/build/libs/lib.jar
 
-      - name: Check Dependencies Exposed By The Library Artifact
+      - name: Check dependencies exposed by the library artifact
         run: python3 scripts/check_dependencies_exposed_by_library_artifact.py
 
       - name: Check Bytecode version
@@ -278,7 +278,7 @@ jobs:
     name: Konsist Dokka
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK

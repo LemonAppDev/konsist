@@ -35,7 +35,7 @@ jobs:
     needs: get-github-context
     if: needs.get-github-context.outputs.target_branch == 'main'
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK

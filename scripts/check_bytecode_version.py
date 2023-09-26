@@ -14,6 +14,7 @@ def get_bytecode_version(class_file):
 def main():
     jar_path = get_artifact_path("jar")
     # Java 8 == bytecode version 52.0 (defined in the local.javalibrary.gradle.kts)
+    desired_java_version = "8"
     desired_bytecode_version = "52"
 
     # Create a temporary directory
@@ -33,7 +34,7 @@ def main():
                         print(f"Error: {file_path} has bytecode version {version} which doesn't match desired version {desired_bytecode_version}")
                         sys.exit(1)
 
-        print("All class files match the desired bytecode version!")
+        print(f"All class files have the desired bytecode version(Java version: {desired_java_version}, Bytecode version: {desired_bytecode_version}).")
     finally:
         # Clean up the temporary directory
         shutil.rmtree(temp_dir)

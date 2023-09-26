@@ -55,7 +55,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -93,7 +93,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -131,7 +131,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -169,7 +169,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -207,7 +207,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -245,7 +245,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -283,7 +283,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -321,7 +321,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -359,7 +359,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -398,7 +398,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -436,7 +436,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -475,7 +475,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -513,7 +513,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -552,7 +552,7 @@ jobs:
       needs.get-github-context.outputs.target_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
