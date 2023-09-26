@@ -2,27 +2,24 @@ import os
 import re
 import argparse
 import subprocess
+import sys
 
-def call_get_konsist_version_script():
-    current_script_path = os.path.abspath(__file__)
-    current_script_directory = os.path.dirname(current_script_path)
-    script_file = current_script_directory + "/../get-konsist-version.py"
+sys.path.append('../')  # Add the parent directory to the sys.path
+from get_konsist_snapshot_version import get_konsist_snapshot_version
 
-    result = subprocess.run(['python3', script_file], stdout=subprocess.PIPE, check=True)
-    return result.stdout.decode().strip()
-
-def replace_version(file_name, new_version):
+def replace_version(file_name):
     with open(file_name, 'r') as file:
         content = file.read()
 
+    konsist_snapshot_version = get_konsist_snapshot_version()
     if file_name.endswith(".gradle") or file_name.endswith(".kts"):
         # pattern for gradle files
         pattern = r"(com\.lemonappdev:konsist:)([\d\.]*(-SNAPSHOT)?)"
-        replacement = r"\g<1>" + new_version
+        replacement = r"\g<1>" + konsist_snapshot_version
     else:
         # pattern for pom.xml
         pattern = r"(<groupId>com\.lemonappdev</groupId>\s*<artifactId>konsist</artifactId>\s*<version>)([\d\.]*(-SNAPSHOT)?)(</version>)"
-        replacement = r"\g<1>" + new_version + r"\g<4>"
+        replacement = r"\g<1>" + konsist_snapshot_version + r"\g<4>"
 
     new_content = re.sub(pattern, replacement, content)
 
@@ -34,4 +31,4 @@ if __name__ == "__main__":
     parser.add_argument("file_path", help="The path to the file to be modified.")
     args = parser.parse_args()
 
-    replace_version(args.file_path, call_get_konsist_version_script())
+    replace_version(args.file_path)

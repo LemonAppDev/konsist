@@ -3,7 +3,7 @@ import os
 import sys
 import xml.etree.ElementTree as ET
 from get_artifact_path import get_artifact_path
-from get_konsist_version import get_konsist_version
+from get_konsist_snapshot_version import get_konsist_snapshot_version
 
 def check_dependencies(file_path):
     try:
@@ -28,7 +28,7 @@ def check_dependencies(file_path):
         return 1
 
 if __name__ == "__main__":
-    konsist_version = get_konsist_version()
+    konsist_version = get_konsist_snapshot_version()
     pom_path = get_artifact_path("pom")
     print(pom_path)
     sys.exit(check_dependencies(pom_path))
