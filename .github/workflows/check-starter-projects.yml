@@ -1,18 +1,17 @@
 name: Check Starter Projects
 
 on:
-  schedule:
-    # Runs every day At 00:00 UTC
-    - cron:  '0 0 * * *'
   pull_request:
     types: [ opened, synchronize ]
+    branches:
+      - 'release/*'
+  push:
     paths:
       - 'samples/starter-projects/**'
 jobs:
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -44,7 +43,6 @@ jobs:
   konsist-starter-android-gradle-groovy-junit-5:
     name: Konsist Starter Android Gradle Groovy Junit 5
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -76,7 +74,6 @@ jobs:
   konsist-starter-android-gradle-groovy-kotest:
     name: Konsist Starter Android Gradle Groovy koTest
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -108,7 +105,6 @@ jobs:
   konsist-starter-android-gradle-kotlin-junit-4:
     name: Konsist Starter Android Gradle Kotlin Junit 4
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -140,7 +136,6 @@ jobs:
   konsist-starter-android-gradle-kotlin-junit-5:
     name: Konsist Starter Android Gradle Kotlin Junit 5
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -172,7 +167,6 @@ jobs:
   konsist-starter-android-gradle-kotlin-kotest:
     name: Konsist Starter Android Gradle Kotlin KoTest
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -204,7 +198,6 @@ jobs:
   konsist-starter-spring-gradle-kotlin-junit-5:
     name: Konsist Starter Spring Gradle Groovy Junit 5
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -236,7 +229,6 @@ jobs:
   konsist-starter-spring-gradle-kotlin-kotest:
     name: Konsist Starter Spring Gradle Groovy KoTest
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -268,7 +260,6 @@ jobs:
   konsist-starter-spring-gradle-groovy-junit-5:
     name: Konsist Starter Spring Gradle Groovy Junit 5
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -301,7 +292,6 @@ jobs:
   konsist-starter-spring-gradle-groovy-kotest:
     name: Konsist Starter Spring Gradle Groovy KoTest
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -333,7 +323,6 @@ jobs:
   konsist-starter-spring-maven-junit5:
     name: Konsist Starter Spring Maven Junit 5
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -366,7 +355,6 @@ jobs:
   konsist-starter-spring-maven-kotest:
     name: Konsist Starter Spring Maven KoTest
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -398,7 +386,6 @@ jobs:
   konsist-starter-multiplatform-gradle-kotlin-junit5:
     name: Konsist Starter Spring Gradle Groovy Junit 5
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
@@ -431,7 +418,6 @@ jobs:
   konsist-starter-multiplatform-gradle-kotlin-kotest:
     name: Konsist Starter Spring Gradle Groovy KoTest
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-') || startsWith(github.head_ref, 'renovate')
     steps:
       - name: checkout
         uses: actions/checkout@v4 # v4
