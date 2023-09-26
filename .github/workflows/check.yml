@@ -247,8 +247,8 @@ jobs:
         with:
           python-version: '3.11.3'
 
-      - name: Assemble
-        run: ./gradlew lib:assemble
+#      - name: Assemble
+#        run: ./gradlew lib:assemble
 
       - name: Publish
         run: >
@@ -258,8 +258,8 @@ jobs:
       - name: List artifacts
         run: ls -R ~/.m2/repository/
 
-      - name: List "lib.jar" content
-        run: jar tf lib/build/libs/lib.jar
+#      - name: List "lib.jar" content
+#        run: jar tf lib/build/libs/lib.jar
 
       - uses: actions/upload-artifact@v3
         with:
