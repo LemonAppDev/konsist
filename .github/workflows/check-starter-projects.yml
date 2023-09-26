@@ -27,19 +27,6 @@ jobs:
         run: |
           echo Changed files: ${{ steps.branch-name.outputs.all_changed_files }}
 
-  get-changed-files:
-    name: Get Changed Files
-    runs-on: ubuntu-latest
-    steps:
-      # steps.branch-name.outputs.default_branch // default branch: main
-      # steps.branch-name.outputs.base_ref_branch // target branch: develop
-      # steps.branch-name.outputs.current_branch // PR branch name: xxx
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v7
-
-
-
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
     runs-on: ubuntu-latest
