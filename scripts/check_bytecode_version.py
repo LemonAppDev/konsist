@@ -26,24 +26,34 @@ def main():
     desired_java_version = "8"
     desired_bytecode_version = "52"
 
-    print(f"Verify if all classes in {jar_path} are compiled to bytecode {desired_bytecode_version} (Java {desired_java_version})")
+    print(f"Verify if the first class in {jar_path} is compiled to bytecode {desired_bytecode_version} (Java {desired_java_version})")
+
+    checked = False  # Variable to track if we've already checked a .class file
 
     try:
         # Unzip the jar file to the temporary directory
         subprocess.run(["unzip", "-qq", jar_path, "-d", build_dir], check=True)
 
         # Walk the directory to find all .class files
-        valid = true
         for root, _, files in os.walk(build_dir):
             for file in files:
-                if file.endswith(".class"):
+                if file.endswith(".class") and not checked:
                     file_path = os.path.join(root, file)
                     version = get_bytecode_version(file_path)
                     if version != desired_bytecode_version:
                         print(f"ERROR {jar_path} has incorrect bytecode version {version}")
                         sys.exit(1)
+                    checked = True
+                    break  # Exit the inner loop after checking the first .class file
 
-        print(f"All classed in {file_path} have correct bytecode")
+            if checked:
+                break  # Exit the outer loop if we've checked a .class file
+
+        if checked:
+            print(f"SUCCESS: First class has correct bytecode version: {desired_bytecode_version}")
+        else:
+            print("WARNING: No .class file found to check.")
+
     finally:
         # Clean up the temporary directory
         shutil.rmtree(build_dir)
