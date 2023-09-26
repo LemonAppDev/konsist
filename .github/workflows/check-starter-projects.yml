@@ -29,7 +29,7 @@ jobs:
           echo Changed files: 
           echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
 
-      - name: Echo Condition
+      - name: Echo Run Condition (any true to run)
         run: |
           echo Current branch starts with "release/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'release/') }}
           echo Current branch starts with "renovate/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'renovate/') }}
