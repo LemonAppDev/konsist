@@ -19,10 +19,10 @@
 
 ## Hotfix Release
 
-1. Create `KON-XXX-hotfix-...` branch from `main`
+1. Create `hotfix/KON-XXX-...` branch from `main`
 2. Fix the bug and open PR targeting `mian`
 3. Merge the PR
-4. Create `release-vx.y.z` branch from `main`
+4. Create `release/vx.y.z` branch from `main`
 5. Update Konsist version
     1. [gradle.properties](gradle.properties) file
     2. [README.md](README.md) file
@@ -45,7 +45,7 @@ fix starter link
 ## Production Release
 
 1. Merge `main` to `develop`
-2. Create `release-vx.y.z` branch from `develop`
+2. Create `release/vx.y.z` branch from `develop`
 3. Open PR targeting `main`
 4. Update Konsist version
     1. [gradle.properties](gradle.properties) file
