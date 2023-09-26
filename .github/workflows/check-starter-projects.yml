@@ -39,18 +39,18 @@ jobs:
     name: Konsist Starter Android Gradle Groovy Junit 4
     needs: get-github-context
     runs-on: ubuntu-latest
-#    if: |
-#        startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+    if: |
+        startsWith(needs.get-github-context.outputs.current_branch, 'release/')
 #        startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
 #        needs.get-github-context.outputs.target_branch == 'main' ||
 #        contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
-      - name: List Branches
-        run: |
-          echo PR branch: ${{ needs.get-github-context.outputs.current_branch }}
-          echo target branch: ${{ needs.get-github-context.outputs.base_ref_branch }}
-          echo default branch: ${{ needs.get-github-context.outputs.default_branch }}
-          echo changed files: ${{ needs.get-github-context.outputs.all_changed_files }}
+#      - name: List Branches
+#        run: |
+#          echo PR branch: ${{ needs.get-github-context.outputs.current_branch }}
+#          echo target branch: ${{ needs.get-github-context.outputs.base_ref_branch }}
+#          echo default branch: ${{ needs.get-github-context.outputs.default_branch }}
+#          echo changed files: ${{ needs.get-github-context.outputs.all_changed_files }}
 
       - name: checkout
         uses: actions/checkout@v4
