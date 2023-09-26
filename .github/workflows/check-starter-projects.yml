@@ -5,9 +5,16 @@ on:
     types: [ opened, synchronize ]
 
 jobs:
-  get-branches:
+  get-github-context:
     name: Get Branches And Changed Files
     runs-on: ubuntu-latest
+
+    outputs:
+      current_branch: ${{ steps.branch-name.outputs.current_branch }}
+      target_branch: ${{ steps.branch-name.outputs.base_ref_branch }}
+      default_branch: ${{ steps.branch-name.outputs.default_branch }}
+      all_changed_files: ${{ steps.changed-files.outputs.all_changed_files }}
+
     steps:
       - name: Get branch name
         id: branch-name
@@ -15,7 +22,7 @@ jobs:
 
       - name: List Branches
         run : |
-          echo PR branch name: ${{ steps.branch-name.outputs.current_branch }}
+          echo PR branch: ${{ steps.branch-name.outputs.current_branch }}
           echo target branch: ${{ steps.branch-name.outputs.base_ref_branch }}
           echo default branch: ${{ steps.branch-name.outputs.default_branch }}
 
@@ -27,14 +34,16 @@ jobs:
         run: |
           echo Changed files: ${{ steps.branch-name.outputs.all_changed_files }}
 
+
   konsist-starter-android-gradle-groovy-junit-4:
     name: Konsist Starter Android Gradle Groovy Junit 4
+    needs: get-github-context
     runs-on: ubuntu-latest
-#    if: |
-#        startsWith(steps.branch-name.outputs.current_branch, 'release/') ||
-#        startsWith(steps.branch-name.outputs.current_branch, 'renovate/') ||
-#        steps.branch-name.outputs.base_ref_branch == 'main' ||
-#        contains(github.event .pull_request .head .ref, 'samples/starter-projects/')
+    if: |
+        startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
+        startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
+        needs.get-github-context.outputs.target_branch == 'main' ||
+        contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: checkout
         uses: actions/checkout@v4
