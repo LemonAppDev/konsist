@@ -1,16 +1,40 @@
-name: Check Snippet Valid Code
+name: Check Snippet kttxt Snippets
 
 on:
   pull_request:
       types: [ opened, synchronize ]
-      branches:
-        - 'release/*'
 
 jobs:
+  get-github-context:
+    name: Get Branches And Changed Files
+    needs: get-github-context
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v7
+
+      - name: List Branches
+        run: |
+          echo current branch: ${{ steps.branch-name.outputs.current_branch }}
+          echo target branch: ${{ steps.branch-name.outputs.base_ref_branch }}
+          echo default branch: ${{ steps.branch-name.outputs.default_branch }}
+
+      - name: Get Changed Files
+        id: changed-files
+        uses: tj-actions/changed-files@v39.2.0
+
+      - name: List Changed Files
+        run: |
+          echo Changed files: 
+          echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
+
   check-kttxt-snippets:
     name: Check kttxt Snippets
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'release-')
+    needs: get-github-context
+    if: needs.get-github-context.outputs.target_branch == 'main'
     steps:
       - name: checkout
         uses: actions/checkout@v4
