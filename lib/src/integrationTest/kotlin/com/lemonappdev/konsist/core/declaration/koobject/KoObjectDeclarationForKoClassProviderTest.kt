@@ -10,14 +10,43 @@ import org.junit.jupiter.api.Test
 
 class KoObjectDeclarationForKoClassProviderTest {
     @Test
-    fun `object-contains-no-classes`() {
+    fun `object-has-no-classes`() {
         // given
-        val sut = getSnippetFile("object-contains-no-classes")
+        val sut = getSnippetFile("object-has-no-classes")
             .objects()
             .first()
 
         // then
-        sut.classes(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
+        assertSoftly(sut) {
+            classes() shouldBeEqualTo emptyList()
+            hasClasses() shouldBeEqualTo false
+            hasClassWithName("SampleClass") shouldBeEqualTo false
+            hasClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo false
+            hasClass { it.name == "SampleClass" } shouldBeEqualTo false
+            hasAllClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `object-has-two-classes`() {
+        // given
+        val sut = getSnippetFile("object-has-two-classes")
+            .objects()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasClasses() shouldBeEqualTo true
+            hasClassWithName("SampleClass1") shouldBeEqualTo true
+            hasClassWithName("SampleClass1", "OtherClass") shouldBeEqualTo true
+            hasClassesWithAllNames("SampleClass1") shouldBeEqualTo true
+            hasClassesWithAllNames("SampleClass1", "SampleClass2") shouldBeEqualTo true
+            hasClassesWithAllNames("SampleClass1", "OtherClass") shouldBeEqualTo false
+            hasClass { it.name == "SampleClass1" } shouldBeEqualTo true
+            hasClass { it.hasNameEndingWith("Class1") } shouldBeEqualTo true
+            hasAllClasses { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
+            hasAllClasses { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
+        }
     }
 
     @Test

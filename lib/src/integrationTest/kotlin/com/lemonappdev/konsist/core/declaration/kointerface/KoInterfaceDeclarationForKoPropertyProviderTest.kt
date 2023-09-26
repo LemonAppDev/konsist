@@ -10,14 +10,43 @@ import org.junit.jupiter.api.Test
 
 class KoInterfaceDeclarationForKoPropertyProviderTest {
     @Test
-    fun `interface-contains-no-properties`() {
+    fun `interface-has-no-properties`() {
         // given
-        val sut = getSnippetFile("interface-contains-no-properties")
+        val sut = getSnippetFile("interface-has-no-properties")
             .interfaces()
             .first()
 
         // then
-        sut.properties(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
+        assertSoftly(sut) {
+            properties() shouldBeEqualTo emptyList()
+            hasProperties() shouldBeEqualTo false
+            hasPropertyWithName("sampleProperty") shouldBeEqualTo false
+            hasPropertiesWithAllNames("sampleProperty1", "sampleProperty2") shouldBeEqualTo false
+            hasProperty { it.name == "sampleProperty" } shouldBeEqualTo false
+            hasAllProperties { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+        }
+    }
+
+    @Test
+    fun `interface-has-two-properties`() {
+        // given
+        val sut = getSnippetFile("interface-has-two-properties")
+            .interfaces()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasProperties() shouldBeEqualTo true
+            hasPropertyWithName("sampleProperty1") shouldBeEqualTo true
+            hasPropertyWithName("sampleProperty1", "otherProperty") shouldBeEqualTo true
+            hasPropertiesWithAllNames("sampleProperty1") shouldBeEqualTo true
+            hasPropertiesWithAllNames("sampleProperty1", "sampleProperty2") shouldBeEqualTo true
+            hasPropertiesWithAllNames("sampleProperty1", "otherProperty") shouldBeEqualTo false
+            hasProperty { it.name == "sampleProperty1" } shouldBeEqualTo true
+            hasProperty { it.hasNameEndingWith("Property1") } shouldBeEqualTo true
+            hasAllProperties { it.hasNameStartingWith("sample") } shouldBeEqualTo true
+            hasAllProperties { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
+        }
     }
 
     @Test
