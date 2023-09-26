@@ -58,10 +58,6 @@ def format_snippet_text(file_text):
 
     return text
 
-def construct_destination_path(destination_folder, filename_md):
-    return os.path.join(destination_folder, filename_md)
-
-
 def create_git_branch(branch_name):
     try:
         subprocess.run(["git", "checkout", branch_name], check=True)
@@ -73,41 +69,50 @@ def push_changes(branch_name):
     subprocess.run(["git", "commit", "-m", "Upd snippet code at docs"], check=True)
     subprocess.run(["git", "push", "origin", branch_name], check=True)
 
-# Function to copy content from source file to destination file
+# Construct the paths for destination
+def construct_destination_path(destination_folder, filename_md):
+    return os.path.join(destination_folder, filename_md)
+
+# Read content from a file
+def read_file(file_path):
+    with open(file_path, "r") as source_file:
+        return source_file.read()
+
+# Write content to a file
+def write_file(file_path, content):
+    with open(file_path, "w") as destination_file:
+        destination_file.write(content)
+
+# Add a missing line at the end of a Markdown file
+def add_missing_line_to_md(md_content):
+    if md_content.splitlines()[-1] != "":
+        return md_content + "\n"
+    else:
+        return md_content
+
+# Copy content from source .kt and .md files to a destination file
 def copy_content(source_kt_path, source_md_path, destination_folder):
     try:
         filename_md = os.path.basename(source_md_path)
-
-        # Construct the paths for destination
         destination_path = construct_destination_path(destination_folder, filename_md)
 
-        # Read text of .md file
-        with open(source_md_path, "r") as source_file:
-            md_content = source_file.read()
-            # Check if .md file ends with empty line - if not add missing line
-            if md_content.splitlines()[-1] != "":
-                md_content += "\n"
+        md_content = read_file(source_md_path)
+        md_content = add_missing_line_to_md(md_content)
 
-        # Read text of .kt file
-        with open(source_kt_path, "r") as source_file:
-            kt_content = source_file.read()
-            kt_text = format_snippet_text(kt_content)
+        kt_content = read_file(source_kt_path)
+        kt_text = format_snippet_text(kt_content)
 
-        # Add text of .md and .kt file to destination file
-        with open(destination_path, "w") as destination_file:
-            destination_file.write(md_content+kt_text)
+        write_file(destination_path, md_content + kt_text)
 
     except Exception as e:
-        print(f"Error copying content: {e} ")
+        print(f"Error copying content: {e}")
 
 # Directories
-source_kt_directory = "~/IdeaProjects/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
-source_md_directory = "~/IdeaProjects/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist/md"
+source_directory = "~/IdeaProjects/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
 destination_directory = "~/IdeaProjects/konsist-documentation/inspiration/snippets"
 
 # Expand user paths
-expanded_source_md_directory = os.path.expanduser(source_md_directory)
-expanded_source_kt_directory = os.path.expanduser(source_kt_directory)
+expanded_source_directory = os.path.expanduser(source_directory)
 expanded_destination_directory = os.path.expanduser(destination_directory)
 
  # Change the current working directory
@@ -124,13 +129,13 @@ new_branch_name = formatted_date + "-update-snippet-code"
 create_git_branch(new_branch_name)
 
 # Iterate through all .md and .kt files in the source folder and copy them content
-for filename_md in os.listdir(expanded_source_md_directory):
+for filename_md in os.listdir(expanded_source_directory):
     if filename_md.endswith("snippets.md"):
         prefix = filename_md.split("-")[0]
-        for filename_kt in os.listdir(expanded_source_kt_directory):
+        for filename_kt in os.listdir(expanded_source_directory):
             if prefix in filename_kt.lower():
-                kt_path = os.path.join(expanded_source_kt_directory, filename_kt)
-                md_path = os.path.join(expanded_source_md_directory, filename_md)
+                kt_path = os.path.join(expanded_source_directory, filename_kt)
+                md_path = os.path.join(expanded_source_directory, filename_md)
                 copy_content(kt_path, md_path, expanded_destination_directory)
 
 # Run git add command
