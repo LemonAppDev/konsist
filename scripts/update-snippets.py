@@ -2,8 +2,14 @@ import os
 import subprocess
 import datetime
 import math
-
 # Variables ============================================================================================================
+# Directories
+source_directory = "~/IdeaProjects/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
+destination_directory = "~/IdeaProjects/konsist-documentation/inspiration/snippets"
+
+# Expand user paths
+expanded_source_directory = os.path.expanduser(source_directory)
+expanded_destination_directory = os.path.expanduser(destination_directory)
 
 # Methods ==============================================================================================================
 def split_text_to_function_list(file_text):
@@ -58,13 +64,18 @@ def format_snippet_text(file_text):
 
     return text
 
-def create_git_branch(branch_name):
+def get_current_date():
+    current_date = datetime.datetime.now().date()
+    return current_date.strftime("%Y-%m-%d")
+
+branch_name = get_current_date() + "-update-snippet-code"
+def create_git_branch():
     try:
         subprocess.run(["git", "checkout", branch_name], check=True)
     except subprocess.CalledProcessError:
         subprocess.run(["git", "checkout", "-b", branch_name, "main"], check=True)
 
-def push_changes(branch_name):
+def push_changes():
     subprocess.run(["git", "add", "."], check=True)
     subprocess.run(["git", "commit", "-m", "Upd snippet code at docs"], check=True)
     subprocess.run(["git", "push", "origin", branch_name], check=True)
@@ -84,7 +95,7 @@ def write_file(file_path, content):
         new_file.write(content)
 
 # Add a missing line at the end of a Markdown file
-def add_missing_line_to_md(md_content):
+def add_empty_line_to_md_file(md_content):
     if md_content.splitlines()[-1] != "":
         new_md_content = md_content + "\n"
         return new_md_content
@@ -112,7 +123,7 @@ def copy_content(source_kt_path, source_md_path, destination_folder):
         destination_path = construct_destination_path(destination_folder, filename_md)
 
         md_content = read_file(source_md_path)
-        new_md_content = add_missing_line_to_md(md_content)
+        new_md_content = add_empty_line_to_md_file(md_content)
 
         kt_content = read_file(source_kt_path)
         kt_text = format_snippet_text(kt_content)
@@ -124,26 +135,16 @@ def copy_content(source_kt_path, source_md_path, destination_folder):
     except Exception as e:
         print(f"Error copying content: {e}")
 
-# Directories
-source_directory = "~/IdeaProjects/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
-destination_directory = "~/IdeaProjects/konsist-documentation/inspiration/snippets"
+def create_pr():
+    prTitle = "Update snippet code from " + get_current_date()
+    os.system("gh pr create --title '" + prTitle + "' --body '""'")
 
-# Expand user paths
-expanded_source_directory = os.path.expanduser(source_directory)
-expanded_destination_directory = os.path.expanduser(destination_directory)
+# Script ===============================================================================================================
 
  # Change the current working directory
 os.chdir(expanded_destination_directory)
 
-# Get the current date
-current_date = datetime.datetime.now().date()
-formatted_date = current_date.strftime("%Y-%m-%d")
-
-# Create a new branch name
-new_branch_name = "test4"
-
-# Check if the branch exists
-create_git_branch(new_branch_name)
+create_git_branch()
 
 remove_files_from_directory_except_readme(expanded_destination_directory)
 
@@ -157,10 +158,8 @@ for filename_md in os.listdir(expanded_source_directory):
                 md_path = os.path.join(expanded_source_directory, filename_md)
                 copy_content(kt_path, md_path, expanded_destination_directory)
 
-# Run git add command
 # Commit and push changes
-push_changes(new_branch_name)
+push_changes()
 
 # Create a pull request
-prTitle = "Update snippet code from " + formatted_date
-os.system("gh pr create --title '" + prTitle + "' --body '""'")
+create_pr()
