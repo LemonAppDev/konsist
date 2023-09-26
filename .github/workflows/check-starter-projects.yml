@@ -26,7 +26,7 @@ jobs:
 
       - name: List Changed Files
         run: |
-          echo Changed files: ${{ steps.changed-files.outputs.all_changed_files }}
+          echo Changed files: ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n'
 
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
