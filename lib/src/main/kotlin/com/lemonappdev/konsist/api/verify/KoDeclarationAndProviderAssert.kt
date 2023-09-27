@@ -194,7 +194,7 @@ fun <E : KoBaseProvider> List<E?>.assertNotEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
 ): Unit {
-    assert(strict, additionalMessage,  isEmptyOrNull = false, onSingleElement = false)
+    assert(strict, additionalMessage, isEmptyOrNull = false, onSingleElement = false)
 }
 
 /**
@@ -207,7 +207,7 @@ fun <E : KoBaseProvider> Sequence<E?>.assertEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
 ): Unit {
-    this.toList().assert(strict, additionalMessage,  isEmptyOrNull = true, onSingleElement = false)
+    this.toList().assert(strict, additionalMessage, isEmptyOrNull = true, onSingleElement = false)
 }
 
 /**
@@ -220,7 +220,7 @@ fun <E : KoBaseProvider> Sequence<E?>.assertNotEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
 ): Unit {
-    this.toList().assert(strict, additionalMessage,  isEmptyOrNull = false, onSingleElement = false)
+    this.toList().assert(strict, additionalMessage, isEmptyOrNull = false, onSingleElement = false)
 }
 
 /**

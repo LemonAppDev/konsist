@@ -58,9 +58,8 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
     isEmptyOrNull: Boolean,
-    onSingleElement: Boolean
+    onSingleElement: Boolean,
 ) {
-
     try {
         val fifthIndexMethodName = getTestMethodNameFromFifthIndex()
 
@@ -121,12 +120,12 @@ fun checkIfLocalListHasOnlyNullElements(localList: List<*>, testMethodName: Stri
     if (hasOnlyNUllElements && (localList.size > 1)) {
         throw KoPreconditionFailedException(
             "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
-                    "before calling the '$testMethodName' method.",
+                "before calling the '$testMethodName' method.",
         )
     } else if (hasOnlyNUllElements && (localList.size == 1)) {
         throw KoPreconditionFailedException(
             "Method '$testMethodName' was called on a null value. Please ensure that the declaration is not null before " +
-                    "calling this method.",
+                "calling this method.",
         )
     }
 }
@@ -135,7 +134,7 @@ fun checkIfLocalListIsEmpty(localList: List<*>, testMethodName: String) {
     if (localList.isEmpty()) {
         throw KoPreconditionFailedException(
             "Declaration list is empty. Please make sure that list of declarations contain items " +
-                    "before calling the '$testMethodName' method.",
+                "before calling the '$testMethodName' method.",
         )
     }
 }
@@ -147,11 +146,11 @@ private fun <E : KoBaseProvider> checkIfAnnotatedWithSuppress(localList: List<E>
     localList
         .filterNot {
             it is KoAnnotationDeclaration &&
-                    (
-                            it.name == "Suppress" &&
-                                    it.text.contains("\"konsist.$suppressName\"") ||
-                                    it.text.contains("\"$suppressName\"")
-                            )
+                (
+                    it.name == "Suppress" &&
+                        it.text.contains("\"konsist.$suppressName\"") ||
+                        it.text.contains("\"$suppressName\"")
+                    )
         }
         .forEach { declarations[it] = checkIfDeclarationIsAnnotatedWithSuppress(it, suppressName) }
 
@@ -275,7 +274,9 @@ private fun getEmptyResult(
             if (otherValues.isNotEmpty()) text += "values:\n$otherValues"
 
             "$text."
-        } else ""
+        } else {
+            ""
+        }
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
         val message = "Assert '$testMethodName' failed.${customMessage}Declaration list is$negation empty.$values"

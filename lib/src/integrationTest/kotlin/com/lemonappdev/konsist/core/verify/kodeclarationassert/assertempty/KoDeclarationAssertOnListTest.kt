@@ -1,16 +1,11 @@
 package com.lemonappdev.konsist.core.verify.kodeclarationassert.assertempty
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.initBlocks
-import com.lemonappdev.konsist.api.ext.list.localFunctions
-import com.lemonappdev.konsist.api.ext.list.withName
-import com.lemonappdev.konsist.api.verify.assertNotEmpty
 import com.lemonappdev.konsist.api.verify.assertEmpty
+import com.lemonappdev.konsist.api.verify.assertNotEmpty
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
-import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
-import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
 class KoDeclarationAssertOnListTest {
@@ -42,7 +37,7 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-on-list-containing-one-null-value' failed. " +
-                        "Declaration list is not empty. It contains 1 null value."
+                    "Declaration list is not empty. It contains 1 null value.",
             )
                 ?: throw e
         }
@@ -61,7 +56,7 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-on-list-containing-two-null-values' failed. " +
-                        "Declaration list is not empty. It contains 2 null values."
+                    "Declaration list is not empty. It contains 2 null values.",
             )
                 ?: throw e
         }
@@ -79,7 +74,7 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-on-list-containing-non-null-values' failed. " +
-                        "Declaration list is not empty. It contains values:\nSampleClass1,\nSampleClass2."
+                    "Declaration list is not empty. It contains values:\nSampleClass1,\nSampleClass2.",
             )
                 ?: throw e
         }
@@ -98,7 +93,7 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-on-list-containing-null-and-non-null-values' failed. " +
-                        "Declaration list is not empty. It contains 1 null value and values:\nInt."
+                    "Declaration list is not empty. It contains 1 null value and values:\nInt.",
             )
                 ?: throw e
         }
@@ -117,7 +112,7 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-with-custom-message' failed.\n$message\n" +
-                        "Declaration list is not empty. It contains values:\nSampleClass."
+                    "Declaration list is not empty. It contains values:\nSampleClass.",
             )
                 ?: throw e
         }
@@ -136,7 +131,7 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
-                        "Declaration list is not empty. It contains values:\nSampleClass."
+                    "Declaration list is not empty. It contains values:\nSampleClass.",
             )
                 ?: throw e
         }
@@ -155,7 +150,7 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-not-empty-error-with-custom-message' failed.\n" +
-                        "$message\nDeclaration list is empty."
+                    "$message\nDeclaration list is empty.",
             )
                 ?: throw e
         }
@@ -174,7 +169,7 @@ class KoDeclarationAssertOnListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true' failed.\n" +
-                        "$message\nDeclaration list is empty."
+                    "$message\nDeclaration list is empty.",
             )
                 ?: throw e
         }

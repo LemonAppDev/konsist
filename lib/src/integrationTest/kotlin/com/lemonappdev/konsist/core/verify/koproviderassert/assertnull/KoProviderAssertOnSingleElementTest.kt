@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
-import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import com.lemonappdev.konsist.api.verify.assertNotNull
 import com.lemonappdev.konsist.api.verify.assertNull
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
@@ -46,7 +45,7 @@ class KoProviderAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert `provider-assert-null-error-with-custom-message` failed.\n" +
-                        "$message\nDeclaration has not null value: SampleClass."
+                    "$message\nDeclaration has not null value: SampleClass.",
             )
                 ?: throw e
         }
@@ -68,7 +67,7 @@ class KoProviderAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert `provider-assert-not-null-error-with-custom-message` failed.\n" +
-                        "$message\nDeclaration has null value."
+                    "$message\nDeclaration has null value.",
             )
                 ?: throw e
         }
