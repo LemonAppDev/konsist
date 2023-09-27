@@ -18,7 +18,6 @@ class KoProviderAssertOnSingleElementTest {
         // given
         val sut = getSnippetFile("provider-assert-test-method-name")
             .declarations()
-            .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoNameProvider>()
             .firstOrNull()
 
@@ -37,7 +36,6 @@ class KoProviderAssertOnSingleElementTest {
         val message = "CUSTOM ASSERT MESSAGE"
         val sut = getSnippetFile("provider-assert-null-error-with-custom-message")
             .declarations()
-            .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoNameProvider>()
             .firstOrNull()
 
@@ -91,7 +89,6 @@ class KoProviderAssertOnSingleElementTest {
         // given
         val sut = getSnippetFile("assert-null-fails-when-item-has-not-null-value")
             .declarations()
-            .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoNameProvider>()
             .firstOrNull()
 
@@ -122,7 +119,6 @@ class KoProviderAssertOnSingleElementTest {
         // given
         val sut = getSnippetFile("assert-not-null-passes-when-item-has-not-null-value")
             .declarations()
-            .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoNameProvider>()
             .firstOrNull()
 
