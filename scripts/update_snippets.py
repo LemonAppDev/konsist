@@ -199,8 +199,8 @@ def copy_content(expanded_source_directory):
                         print(f"Error copying content: {e}")
 
 def create_pr():
-    prTitle = "Update snippet code from " + get_current_date()
-    os.system("gh pr create --title '" + prTitle + "' --body '""'")
+    pr_title = "Update snippet code from " + get_current_date()
+    os.system("gh pr create --title '" + pr_title + "' --body '""'")
 
 # Script ===============================================================================================================
 
