@@ -2,6 +2,8 @@ import os
 import subprocess
 import datetime
 import math
+import re
+
 # Variables ============================================================================================================
 # Directories
 source_directory = "~/IdeaProjects/konsist/lib/src/snippet/kotlin/com/lemonappdev/konsist"
@@ -18,14 +20,39 @@ def split_text_to_function_list(file_text):
     function_list.pop(0)
     return function_list
 
-def format_heading_text(element):
+def split_text_to_classes_list(file_text):
+    function_list = file_text.split("class ")[2:]
+    return function_list
+
+def capitalize_first_letter(word):
+    if len(word) == 0:
+        return word
+    else:
+        return word[0].upper() + word[1:]
+
+def capitalize_all_first_letters(text):
+    words = map(lambda capitalize: capitalize.replace(capitalize, capitalize[0].upper() + capitalize[1:]), text)
+    return " ".join(words)
+
+def split_words_by_capital(word):
+    # Use regular expression to split words by capital letters
+    words = re.findall(r'[A-Z][a-z]*', word)
+    return ' '.join(words)
+
+def format_heading_function_text(element):
     # Format function name as heading - capitalize letters and replace ''' into '`'
     function_name_as_heading = element.split("`")[1]
     function_name_words = function_name_as_heading.replace("'", "`").split(" ")
-    function_name_words = map(lambda capitalize: capitalize.replace(capitalize, capitalize[0].upper() + capitalize[1:]), function_name_words)
-    return " ".join(function_name_words)
+    function_name_words = capitalize_all_first_letters(function_name_words)
+    return "".join(function_name_words)
 
-def split_snippet_text(element):
+def format_heading_class_text(element):
+    # Format function name as heading - split class name to separate words and capitalize letters
+    text = capitalize_first_letter(element)
+    words = split_words_by_capital(text.split(" ")[0])
+    return words
+
+def split_function_snippet_text(element):
     snippet_parts = element.split("{", maxsplit=1)
     snippet_name = snippet_parts[0]
     function_body = snippet_parts[1].removeprefix("\n")
@@ -37,18 +64,18 @@ def remove_tabs(line, formatted_lines):
         number = indentation - 4*(math.floor(indentation / 4) - 1)
         formatted_lines.append(line[number:])
     else:
-         # Preserve empty lines
-         formatted_lines.append(line)
+        # Preserve empty lines
+        formatted_lines.append(line)
     return formatted_lines
 
 # Function to format the snippet text
-def format_snippet_text(file_text):
+def format_function_snippet_text(file_text):
     function_list = split_text_to_function_list(file_text)
     text = ""
 
     for element in function_list:
-        heading = format_heading_text(element)
-        snippet_name, function_body = split_snippet_text(element)
+        heading = format_heading_function_text(element)
+        snippet_name, function_body = split_function_snippet_text(element)
 
         function_body_lines = function_body.split('\n')
         formatted_lines = []
@@ -61,6 +88,29 @@ def format_snippet_text(file_text):
         formatted_text = '\n'.join(formatted_lines[:-1])
 
         text += "## " + str(function_list.index(element) + 1) +  ". " + heading + "\n\n```kotlin\n@Test\nfun " + snippet_name + "{\n" + formatted_text + "```\n\n"
+
+    return text
+
+def format_class_snippet_text(file_text):
+    class_list = split_text_to_classes_list(file_text)
+    text = ""
+
+    for element in class_list:
+        heading = format_heading_class_text(element)
+        class_body = "class " + element
+
+        class_body_lines = class_body.split('\n')
+
+        formatted_lines = [class_body_lines[0]]
+
+        # Iterate through lines to remove unnecessary tabs
+        for line in class_body_lines[1:]:
+            formatted_lines = remove_tabs(line, formatted_lines)
+
+        # Reconstruct the class body text
+        formatted_text = '\n'.join(formatted_lines[:-1])
+
+        text += "## " + str(class_list.index(element) + 1) +  ". " + heading + "\n\n```kotlin\n" + formatted_text + "```\n\n"
 
     return text
 
@@ -135,7 +185,11 @@ def copy_content(expanded_source_directory):
                         new_md_content = add_empty_line_to_md_file(md_content)
 
                         kt_content = read_file(kt_path)
-                        kt_text = format_snippet_text(kt_content)
+
+                        if "io.kotest" in kt_content:
+                            kt_text = format_class_snippet_text(kt_content)
+                        else:
+                            kt_text = format_function_snippet_text(kt_content)
 
                         content = new_md_content + kt_text
 
@@ -150,7 +204,7 @@ def create_pr():
 
 # Script ===============================================================================================================
 
- # Change the current working directory
+# Change the current working directory
 os.chdir(expanded_destination_directory)
 
 create_git_branch()
@@ -161,6 +215,6 @@ copy_content(expanded_source_directory)
 
 # Commit and push changes
 push_changes()
-
-# Create a pull request
+#
+# # Create a pull request
 create_pr()
