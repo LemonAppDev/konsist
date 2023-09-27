@@ -84,7 +84,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
 
             getEmptyResult(items, additionalMessage, isEmptyOrNull, testMethodName)
         } else {
-            getNullResult(notSuppressedDeclarations, additionalMessage, isEmptyOrNull, testMethodName)
+            getNullResult(notSuppressedDeclarations.firstOrNull(), additionalMessage, isEmptyOrNull, testMethodName)
         }
     } catch (e: KoException) {
         throw e
@@ -295,17 +295,17 @@ private fun getEmptyResult(
 }
 
 private fun getNullResult(
-    items: List<*>,
+    item: Any?,
     additionalMessage: String?,
     isNull: Boolean,
     testMethodName: String,
 ) {
-    val itemsHasOnlyOneNullElement = items.size == 1 && items.all { it == null }
+    val itemIsNull = item == null
 
-    if (isNull != itemsHasOnlyOneNullElement) {
+    if (isNull != itemIsNull) {
         val negation = if (isNull) " not" else ""
-        val value = if (isNull) ": " + items.first().toString() else ""
-        val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else ""
+        val value = if (isNull) ": " + item.toString() else ""
+        val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
         val message = "Assert `$testMethodName` failed.${customMessage}Declaration has$negation null value$value."
         throw KoCheckFailedException(message)
