@@ -9,8 +9,9 @@
 
 ## Publish To Maven Repository
 
-- Publish Local: `./gradlew publishToMavenLocal -Pkonsist.releaseTarget=local` publish to local `~/.m2/repository`
-- Publish Snapshot `./gradlew publish -Pkonsist.releaseTarget=snapshot` publish to
+- Publish Local Snapshot: `./gradlew publishToMavenLocal -Pkonsist.releaseTarget=local` publish to local 
+- `~/.m2/repository`
+- Publish Public Snapshot `./gradlew publish -Pkonsist.releaseTarget=snapshot` publish to
   [snapshot repository](https://s01.oss.sonatype.org/content/repositories/snapshots/com/lemonappdev/konsist/)
 - Publish Release `./gradlew publish -Pkonsist.releaseTarget=release` publish to
   [release repository](https://s01.oss.sonatype.org/content/repositories/releases/com/lemonappdev/konsist/). This

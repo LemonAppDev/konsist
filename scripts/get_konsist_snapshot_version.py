@@ -1,6 +1,6 @@
 import os
 
-def get_konsist_version():
+def get_konsist_snapshot_version():
     current_script_path = os.path.abspath(__file__)
     current_script_directory = os.path.dirname(current_script_path)
     project_root_directory = os.path.dirname(current_script_directory)
@@ -10,7 +10,10 @@ def get_konsist_version():
     with open(gradle_properties_path, 'r') as file:
         for line in file:
             if line.startswith('konsist.version'):
-                return line.split('=')[1].strip() + "-SNAPSHOT"
+                konsist_version = line.split('=')[1].strip() + "-SNAPSHOT"
+                print(f"Konsist version: {konsist_version}")
+                return konsist_version
     return None
 
-print(get_konsist_version())
+if __name__ == "__main__":
+    print(f'Konsist snapshot version: {get_konsist_snapshot_version()}')

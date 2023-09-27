@@ -7,7 +7,7 @@ plugins {
 android {
     namespace = "com.sample"
 
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 26
@@ -36,5 +36,5 @@ dependencies {
 
     testImplementation("io.kotest:kotest-runner-junit5:5.7.2")
 
-    testImplementation("com.lemonappdev:konsist:0.12.1")
+    testImplementation("com.lemonappdev:konsist:0.12.2")
 }

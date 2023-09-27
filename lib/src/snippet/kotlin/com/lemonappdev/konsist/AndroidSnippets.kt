@@ -24,7 +24,7 @@ class AndroidSnippets {
             .withParentOf(ViewModel::class)
             .properties()
             .assertTrue {
-                it.hasPublicOrDefaultModifier && it.hasType("kotlinx.coroutines.flow.Flow")
+                it.hasPublicOrDefaultModifier && it.hasType { type -> type.name == "kotlinx.coroutines.flow.Flow" }
             }
     }
 

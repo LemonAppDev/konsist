@@ -43,20 +43,20 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-server-netty:2.3.4")
                 implementation("io.ktor:ktor-server-html-builder-jvm:2.3.4")
-                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.9.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.10.0")
             }
         }
         val jvmTest by getting {
             dependencies {
-                implementation("com.lemonappdev:konsist:0.12.1")
+                implementation("com.lemonappdev:konsist:0.12.2")
             }
         }
 
         val jsMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.627")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.627")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.11.1-pre.627")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.346")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.346")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.9.3-pre.346")
             }
         }
         val jsTest by getting

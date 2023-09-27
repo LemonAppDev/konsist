@@ -17,6 +17,10 @@ build/
 # VS Code #
 .vscode/
 
+# Python cache
+__pycache__/
+*.pyc
+
 # Operating System Files
 **/.DS_Store
 Thumbs.db
