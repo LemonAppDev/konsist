@@ -38,8 +38,8 @@ class KoDeclarationAssertOnSingleElementTest {
             sut.assertNull(additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert `declaration-assert-null-error-with-custom-message` failed. Declaration has not null value." +
-                        "\n$message",
+                "Assert `declaration-assert-null-error-with-custom-message` failed.\n" +
+                        "$message\nDeclaration has not null value: SampleClass."
             )
                 ?: throw e
         }
@@ -59,8 +59,8 @@ class KoDeclarationAssertOnSingleElementTest {
             sut.assertNotNull(additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert `declaration-assert-not-null-error-with-custom-message` failed. Declaration has null value." +
-                        "\n$message",
+                "Assert `declaration-assert-not-null-error-with-custom-message` failed.\n" +
+                        "$message\nDeclaration has null value."
             )
                 ?: throw e
         }

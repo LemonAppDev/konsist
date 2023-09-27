@@ -40,6 +40,7 @@ class KoProviderAssertOnSequenceTest {
         val message = "CUSTOM ASSERT MESSAGE"
         val sut = getSnippetFile("provider-assert-empty-error-with-custom-message")
             .declarations()
+            .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoNameProvider>()
             .asSequence()
 
@@ -48,8 +49,8 @@ class KoProviderAssertOnSequenceTest {
             sut.assertEmpty(additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'provider-assert-empty-error-with-custom-message' failed. Declaration list is not empty." +
-                        "\n$message",
+                "Assert 'provider-assert-empty-error-with-custom-message' failed.\n$message\n" +
+                        "Declaration list is not empty. It contains values:\nSampleClass."
             )
                 ?: throw e
         }
@@ -61,6 +62,7 @@ class KoProviderAssertOnSequenceTest {
         val message = "CUSTOM ASSERT MESSAGE"
         val sut = getSnippetFile("provider-assert-empty-error-with-custom-message-and-strict-set-to-true")
             .declarations()
+            .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoNameProvider>()
             .asSequence()
 
@@ -69,8 +71,8 @@ class KoProviderAssertOnSequenceTest {
             sut.assertEmpty(strict = true, additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'provider-assert-empty-error-with-custom-message-and-strict-set-to-true' failed. Declaration list is not empty." +
-                        "\n$message",
+                "Assert 'provider-assert-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
+                        "Declaration list is not empty. It contains values:\nSampleClass."
             )
                 ?: throw e
         }
@@ -90,8 +92,8 @@ class KoProviderAssertOnSequenceTest {
             sut.assertNotEmpty(additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'provider-assert-not-empty-error-with-custom-message' failed. Declaration list is empty." +
-                        "\n$message",
+                "Assert 'provider-assert-not-empty-error-with-custom-message' failed.\n$message\n" +
+                        "Declaration list is empty."
             )
                 ?: throw e
         }
@@ -111,8 +113,8 @@ class KoProviderAssertOnSequenceTest {
             sut.assertNotEmpty(strict = true, additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'provider-assert-not-empty-error-with-custom-message-and-strict-set-to-true' failed. Declaration list is empty." +
-                        "\n$message",
+                "Assert 'provider-assert-not-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
+                        "Declaration list is empty."
             )
                 ?: throw e
         }

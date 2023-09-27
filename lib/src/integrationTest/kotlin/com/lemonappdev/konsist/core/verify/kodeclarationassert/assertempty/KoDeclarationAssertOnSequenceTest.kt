@@ -43,8 +43,8 @@ class KoDeclarationAssertOnSequenceTest {
             sut.assertEmpty(additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-empty-error-with-custom-message' failed. Declaration list is not empty." +
-                        "\n$message",
+                "Assert 'declaration-assert-empty-error-with-custom-message' failed.\n$message\n" +
+                        "Declaration list is not empty. It contains values:\nSampleClass."
             )
                 ?: throw e
         }
@@ -63,8 +63,8 @@ class KoDeclarationAssertOnSequenceTest {
             sut.assertEmpty(strict = true, additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-empty-error-with-custom-message-and-strict-set-to-true' failed. Declaration list is not empty." +
-                        "\n$message",
+                "Assert 'declaration-assert-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
+                        "Declaration list is not empty. It contains values:\nSampleClass."
             )
                 ?: throw e
         }
@@ -83,8 +83,8 @@ class KoDeclarationAssertOnSequenceTest {
             sut.assertNotEmpty(additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-not-empty-error-with-custom-message' failed. Declaration list is empty." +
-                        "\n$message",
+                "Assert 'declaration-assert-not-empty-error-with-custom-message' failed.\n" +
+                        "$message\nDeclaration list is empty."
             )
                 ?: throw e
         }
@@ -103,8 +103,8 @@ class KoDeclarationAssertOnSequenceTest {
             sut.assertNotEmpty(strict = true, additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true' failed. Declaration list is empty." +
-                        "\n$message",
+                "Assert 'declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true' failed.\n" +
+                        "$message\nDeclaration list is empty."
             )
                 ?: throw e
         }

@@ -70,7 +70,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
             fifthIndexMethodName
         }
 
-        if(!onSingleElement) {
+        if (!onSingleElement) {
             val items = if (strict) this.filterNotNull() else this
 
             getEmptyResult(items, additionalMessage, isEmptyOrNull, testMethodName)
@@ -263,9 +263,21 @@ private fun getEmptyResult(
 
     if (isEmpty != itemsListIsEmpty) {
         val negation = if (isEmpty) " not" else ""
-        val customMessage = if (additionalMessage != null) "\n${additionalMessage}" else ""
+        val values = if (isEmpty) {
+            val nullCount = items.count { it == null }
+            val nullValues = if(nullCount > 0 ) "$nullCount null values " else ""
+            val otherValues = items.filterNotNull().joinToString(",\n", prefix = "values:\n")
 
-        val message = "Assert '$testMethodName' failed. Declaration list is$negation empty.$customMessage"
+            var text = " It contains "
+            if(nullValues.isNotEmpty()) text += nullValues
+            if(nullValues.isNotEmpty() && otherValues.isNotEmpty()) text += "and "
+            if(otherValues.isNotEmpty()) text += otherValues
+
+            "$text."
+        } else ""
+        val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else ""
+
+        val message = "Assert '$testMethodName' failed.${customMessage}Declaration list is$negation empty.$values"
         throw KoCheckFailedException(message)
     }
 }
@@ -280,9 +292,10 @@ private fun getNullResult(
 
     if (isNull != itemsHasOnlyOneNullElement) {
         val negation = if (isNull) " not" else ""
-        val customMessage = if (additionalMessage != null) "\n${additionalMessage}" else ""
+        val value = if (isNull) ": " + items.first().toString() else ""
+        val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else ""
 
-        val message = "Assert `$testMethodName` failed. Declaration has$negation null value.$customMessage"
+        val message = "Assert `$testMethodName` failed.${customMessage}Declaration has$negation null value$value."
         throw KoCheckFailedException(message)
     }
 }

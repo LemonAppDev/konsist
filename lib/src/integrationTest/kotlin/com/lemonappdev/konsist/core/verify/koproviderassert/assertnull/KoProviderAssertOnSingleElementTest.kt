@@ -36,6 +36,7 @@ class KoProviderAssertOnSingleElementTest {
         val message = "CUSTOM ASSERT MESSAGE"
         val sut = getSnippetFile("provider-assert-null-error-with-custom-message")
             .declarations()
+            .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoNameProvider>()
             .firstOrNull()
 
@@ -44,8 +45,8 @@ class KoProviderAssertOnSingleElementTest {
             sut.assertNull(additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert `provider-assert-null-error-with-custom-message` failed. Declaration has not null value." +
-                        "\n$message",
+                "Assert `provider-assert-null-error-with-custom-message` failed.\n" +
+                        "$message\nDeclaration has not null value: SampleClass."
             )
                 ?: throw e
         }
@@ -57,6 +58,7 @@ class KoProviderAssertOnSingleElementTest {
         val message = "CUSTOM ASSERT MESSAGE"
         val sut = getSnippetFile("provider-assert-not-null-error-with-custom-message")
             .declarations()
+            .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoKotlinTypeProvider>()
             .firstOrNull()
 
@@ -65,8 +67,8 @@ class KoProviderAssertOnSingleElementTest {
             sut.assertNotNull(additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert `provider-assert-not-null-error-with-custom-message` failed. Declaration has null value." +
-                        "\n$message",
+                "Assert `provider-assert-not-null-error-with-custom-message` failed.\n" +
+                        "$message\nDeclaration has null value."
             )
                 ?: throw e
         }
