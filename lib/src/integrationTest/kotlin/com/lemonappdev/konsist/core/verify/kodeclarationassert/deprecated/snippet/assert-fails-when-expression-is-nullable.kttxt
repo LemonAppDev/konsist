@@ -1,0 +1,5 @@
+package com.lemonappdev.konsist.core.verify.kodeclarationassert.deprecated.snippet
+
+class SampleClass1(val otherParameter: String)
+
+class SampleClass2
