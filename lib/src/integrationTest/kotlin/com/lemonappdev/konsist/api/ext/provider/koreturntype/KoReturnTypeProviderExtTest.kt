@@ -5,6 +5,7 @@ import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.ext.provider.hasReturnTypeOf
 import com.lemonappdev.konsist.api.ext.provider.hasValidKDocReturnTag
 import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
+import com.lemonappdev.konsist.api.verify.assert
 import com.lemonappdev.konsist.testdata.SampleClass
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -23,6 +24,14 @@ class KoReturnTypeProviderExtTest {
             hasReturnTypeOf<String>() shouldBeEqualTo false
             hasReturnTypeOf<SampleClass>() shouldBeEqualTo false
         }
+    }
+
+    @Test
+    fun fails() {
+        val sut = getSnippetFile("declaration-has-no-return-type")
+            .functions()
+            .filter { it.name == "uniqueTestFunction" }
+            .assert { it.text.contains("return") }
     }
 
     @Test
