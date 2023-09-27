@@ -3,7 +3,10 @@ package com.lemonappdev.konsist.core.verify.koproviderassert.assertnull
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.ext.list.declarations
+import com.lemonappdev.konsist.api.ext.list.localDeclarations
+import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
+import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
@@ -270,8 +273,10 @@ class KoProviderAssertOnSingleElementTest {
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .declarations(includeNested = true)
-                .filterIsInstance<KoPropertyProvider>()
-                .lastOrNull()
+                .filterIsInstance<KoLocalDeclarationProvider>()
+                .localDeclarations
+                .filterIsInstance<KoLocalDeclarationProvider>()
+                .last()
 
         // then
         sut.assertNull()
@@ -283,8 +288,10 @@ class KoProviderAssertOnSingleElementTest {
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
                 .declarations(includeNested = true)
-                .filterIsInstance<KoPropertyProvider>()
-                .lastOrNull()
+                .filterIsInstance<KoLocalDeclarationProvider>()
+                .localDeclarations
+                .filterIsInstance<KoLocalDeclarationProvider>()
+                .last()
 
         // then
         sut.assertNull()
