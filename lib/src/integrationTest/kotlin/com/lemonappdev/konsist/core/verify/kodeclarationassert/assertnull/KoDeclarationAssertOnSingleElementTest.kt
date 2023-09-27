@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.ext.list.initBlocks
 import com.lemonappdev.konsist.api.ext.list.localFunctions
 import com.lemonappdev.konsist.api.verify.assertNotNull
 import com.lemonappdev.konsist.api.verify.assertNull
-import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow

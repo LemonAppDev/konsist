@@ -4,7 +4,6 @@ import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.ext.list.declarations
 import com.lemonappdev.konsist.api.ext.list.localDeclarations
-import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
@@ -12,9 +11,7 @@ import com.lemonappdev.konsist.api.provider.KoPropertyProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.verify.assertNotNull
 import com.lemonappdev.konsist.api.verify.assertNull
-import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
-import io.kotest.assertions.print.print
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
@@ -53,7 +50,7 @@ class KoProviderAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert `provider-assert-null-error-with-custom-message` failed.\n" +
-                        "$message\nDeclaration has not null value: SampleClass.",
+                    "$message\nDeclaration has not null value: SampleClass.",
             )
                 ?: throw e
         }
@@ -75,7 +72,7 @@ class KoProviderAssertOnSingleElementTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert `provider-assert-not-null-error-with-custom-message` failed.\n" +
-                        "$message\nDeclaration has null value.",
+                    "$message\nDeclaration has null value.",
             )
                 ?: throw e
         }

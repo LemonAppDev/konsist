@@ -49,7 +49,7 @@ class KoProviderAssertOnSequenceTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-on-list-containing-one-null-value' failed. " +
-                        "Declaration list is not empty. It contains 1 null value.",
+                    "Declaration list is not empty. It contains 1 null value.",
             )
                 ?: throw e
         }
@@ -69,7 +69,7 @@ class KoProviderAssertOnSequenceTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-on-list-containing-two-null-values' failed. " +
-                        "Declaration list is not empty. It contains 2 null values.",
+                    "Declaration list is not empty. It contains 2 null values.",
             )
                 ?: throw e
         }
@@ -90,7 +90,7 @@ class KoProviderAssertOnSequenceTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-on-list-containing-non-null-values' failed. " +
-                        "Declaration list is not empty. It contains values:\nSampleClass1,\nSampleClass2.",
+                    "Declaration list is not empty. It contains values:\nSampleClass1,\nSampleClass2.",
             )
                 ?: throw e
         }
@@ -111,7 +111,7 @@ class KoProviderAssertOnSequenceTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-on-list-containing-null-and-non-null-values' failed. " +
-                        "Declaration list is not empty. It contains 1 null value and values:\nsampleFunction.",
+                    "Declaration list is not empty. It contains 1 null value and values:\nsampleFunction.",
             )
                 ?: throw e
         }
@@ -133,7 +133,7 @@ class KoProviderAssertOnSequenceTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-with-custom-message' failed.\n$message\n" +
-                        "Declaration list is not empty. It contains values:\nSampleClass.",
+                    "Declaration list is not empty. It contains values:\nSampleClass.",
             )
                 ?: throw e
         }
@@ -155,7 +155,7 @@ class KoProviderAssertOnSequenceTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
-                        "Declaration list is not empty. It contains values:\nSampleClass.",
+                    "Declaration list is not empty. It contains values:\nSampleClass.",
             )
                 ?: throw e
         }
@@ -176,7 +176,7 @@ class KoProviderAssertOnSequenceTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-not-empty-error-with-custom-message' failed.\n$message\n" +
-                        "Declaration list is empty.",
+                    "Declaration list is empty.",
             )
                 ?: throw e
         }
@@ -197,7 +197,7 @@ class KoProviderAssertOnSequenceTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'provider-assert-not-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
-                        "Declaration list is empty.",
+                    "Declaration list is empty.",
             )
                 ?: throw e
         }

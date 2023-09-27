@@ -349,11 +349,6 @@ class KoDeclarationAssertOnSequenceTest {
         func shouldThrow KoCheckFailedException::class
     }
 
-
-
-
-
-
     @Test
     fun `assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider`() {
         // given
