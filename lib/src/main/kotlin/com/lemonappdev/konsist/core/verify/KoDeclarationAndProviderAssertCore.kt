@@ -265,17 +265,18 @@ private fun getEmptyResult(
         val negation = if (isEmpty) " not" else ""
         val values = if (isEmpty) {
             val nullCount = items.count { it == null }
-            val nullValues = if(nullCount > 0 ) "$nullCount null values " else ""
-            val otherValues = items.filterNotNull().joinToString(",\n", prefix = "values:\n")
+            val nullValues =
+                if (nullCount == 1) "$nullCount null value" else if (nullCount > 1) "$nullCount null values" else ""
+            val otherValues = items.filterNotNull().joinToString(",\n")
 
             var text = " It contains "
-            if(nullValues.isNotEmpty()) text += nullValues
-            if(nullValues.isNotEmpty() && otherValues.isNotEmpty()) text += "and "
-            if(otherValues.isNotEmpty()) text += otherValues
+            if (nullValues.isNotEmpty()) text += nullValues
+            if (nullValues.isNotEmpty() && otherValues.isNotEmpty()) text += " and "
+            if (otherValues.isNotEmpty()) text += "values:\n$otherValues"
 
             "$text."
         } else ""
-        val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else ""
+        val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
         val message = "Assert '$testMethodName' failed.${customMessage}Declaration list is$negation empty.$values"
         throw KoCheckFailedException(message)

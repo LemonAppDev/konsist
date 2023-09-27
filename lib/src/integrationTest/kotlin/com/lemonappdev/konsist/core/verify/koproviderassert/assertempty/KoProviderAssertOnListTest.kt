@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.ext.list.localFunctions
 import com.lemonappdev.konsist.api.ext.list.withName
 import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import com.lemonappdev.konsist.api.verify.assertNotEmpty
 import com.lemonappdev.konsist.api.verify.assertEmpty
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
@@ -29,6 +30,85 @@ class KoProviderAssertOnListTest {
             sut.assertEmpty()
         } catch (e: Exception) {
             e.message?.shouldContain("Assert 'provider-assert-test-method-name' failed.")
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `provider-assert-empty-error-on-list-containing-one-null-value`() {
+        // given
+        val sut = getSnippetFile("provider-assert-empty-error-on-list-containing-one-null-value")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .map { it as? KoKotlinTypeProvider }
+
+        // then
+        try {
+            sut.assertEmpty()
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'provider-assert-empty-error-on-list-containing-one-null-value' failed. " +
+                        "Declaration list is not empty. It contains 1 null value."
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `provider-assert-empty-error-on-list-containing-two-null-values`() {
+        // given
+        val sut = getSnippetFile("provider-assert-empty-error-on-list-containing-two-null-values")
+            .declarations()
+            .map { it as? KoKotlinTypeProvider }
+
+        // then
+        try {
+            sut.assertEmpty()
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'provider-assert-empty-error-on-list-containing-two-null-values' failed. " +
+                        "Declaration list is not empty. It contains 2 null values."
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `provider-assert-empty-error-on-list-containing-non-null-values`() {
+        // given
+        val sut = getSnippetFile("provider-assert-empty-error-on-list-containing-non-null-values")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+
+        // then
+        try {
+            sut.assertEmpty()
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'provider-assert-empty-error-on-list-containing-non-null-values' failed. " +
+                        "Declaration list is not empty. It contains values:\nSampleClass1,\nSampleClass2."
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `provider-assert-empty-error-on-list-containing-null-and-non-null-values`() {
+        // given
+        val sut = getSnippetFile("provider-assert-empty-error-on-list-containing-null-and-non-null-values")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .map { it as? KoReturnTypeProvider }
+
+        // then
+        try {
+            sut.assertEmpty()
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'provider-assert-empty-error-on-list-containing-null-and-non-null-values' failed. " +
+                        "Declaration list is not empty. It contains 1 null value and values:\nsampleFunction."
+            )
                 ?: throw e
         }
     }

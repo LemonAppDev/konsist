@@ -30,6 +30,81 @@ class KoDeclarationAssertOnListTest {
     }
 
     @Test
+    fun `declaration-assert-empty-error-on-list-containing-one-null-value`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-empty-error-on-list-containing-one-null-value")
+            .classes()
+            .map { it.primaryConstructor }
+
+        // then
+        try {
+            sut.assertEmpty()
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-empty-error-on-list-containing-one-null-value' failed. " +
+                        "Declaration list is not empty. It contains 1 null value."
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `declaration-assert-empty-error-on-list-containing-two-null-values`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-empty-error-on-list-containing-two-null-values")
+            .classes()
+            .map { it.primaryConstructor }
+
+        // then
+        try {
+            sut.assertEmpty()
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-empty-error-on-list-containing-two-null-values' failed. " +
+                        "Declaration list is not empty. It contains 2 null values."
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `declaration-assert-empty-error-on-list-containing-non-null-values`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-empty-error-on-list-containing-non-null-values")
+            .classes()
+
+        // then
+        try {
+            sut.assertEmpty()
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-empty-error-on-list-containing-non-null-values' failed. " +
+                        "Declaration list is not empty. It contains values:\nSampleClass1,\nSampleClass2."
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `declaration-assert-empty-error-on-list-containing-null-and-non-null-values`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-empty-error-on-list-containing-null-and-non-null-values")
+            .functions()
+            .map { it.returnType }
+
+        // then
+        try {
+            sut.assertEmpty()
+        } catch (e: Exception) {
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-empty-error-on-list-containing-null-and-non-null-values' failed. " +
+                        "Declaration list is not empty. It contains 1 null value and values:\nInt."
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
     fun `declaration-assert-empty-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
