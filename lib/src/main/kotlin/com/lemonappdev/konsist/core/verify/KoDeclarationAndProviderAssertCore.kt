@@ -57,7 +57,8 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
-    isEmpty: Boolean,
+    isEmptyOrNull: Boolean,
+    onSingleElement: Boolean
 ) {
 
     try {
@@ -69,9 +70,13 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
             fifthIndexMethodName
         }
 
-        val items = if(strict) this else this.filterNotNull()
+        if(!onSingleElement) {
+            val items = if (strict) this.filterNotNull() else this
 
-        getEmptyResult(items, additionalMessage, isEmpty, testMethodName)
+            getEmptyResult(items, additionalMessage, isEmptyOrNull, testMethodName)
+        } else {
+            getNullResult(this, additionalMessage, isEmptyOrNull, testMethodName)
+        }
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
@@ -255,19 +260,29 @@ private fun getEmptyResult(
     testMethodName: String,
 ) {
     val itemsListIsEmpty = items.isEmpty()
-    val itemsHasOnlyOneNullElement = items.size == 1 && items.all { it == null }
 
-    val meetsTheConditions = itemsListIsEmpty || itemsHasOnlyOneNullElement
-
-    if (isEmpty != meetsTheConditions) {
+    if (isEmpty != itemsListIsEmpty) {
         val negation = if (isEmpty) " not" else ""
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}" else ""
 
-        val message = "Assert '$testMethodName' failed. " + if (isEmpty != itemsListIsEmpty) {
-            "Declaration list is$negation empty."
-        } else {
-            "Declaration has$negation null value."
-        } + customMessage
+        val message = "Assert '$testMethodName' failed. Declaration list is$negation empty.$customMessage"
+        throw KoCheckFailedException(message)
+    }
+}
+
+private fun getNullResult(
+    items: List<*>,
+    additionalMessage: String?,
+    isNull: Boolean,
+    testMethodName: String,
+) {
+    val itemsHasOnlyOneNullElement = items.size == 1 && items.all { it == null }
+
+    if (isNull != itemsHasOnlyOneNullElement) {
+        val negation = if (isNull) " not" else ""
+        val customMessage = if (additionalMessage != null) "\n${additionalMessage}" else ""
+
+        val message = "Assert `$testMethodName` failed. Declaration has$negation null value.$customMessage"
         throw KoCheckFailedException(message)
     }
 }
