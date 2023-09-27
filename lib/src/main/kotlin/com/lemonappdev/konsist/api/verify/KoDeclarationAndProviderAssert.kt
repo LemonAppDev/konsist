@@ -147,22 +147,36 @@ fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
     this.toList().assert(strict, additionalMessage, suppressName, function, false)
 }
 
-
-
-
-
+/**
+ * Asserts that element has `null` value.
+ *
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
+ *                          This message will be included in the assertion error if the assertion fails.
+ */
 fun <E : KoBaseProvider> E?.assertNull(
     additionalMessage: String? = null,
 ): Unit {
     listOf(this).assert(true, additionalMessage, isEmptyOrNull = true, onSingleElement = true)
 }
 
+/**
+ * Asserts that element has not `null` value.
+ *
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
+ *                          This message will be included in the assertion error if the assertion fails.
+ */
 fun <E : KoBaseProvider> E?.assertNotNull(
     additionalMessage: String? = null,
 ): Unit {
     listOf(this).assert(true, additionalMessage, isEmptyOrNull = false, onSingleElement = true)
 }
 
+/**
+ * Asserts that the list is empty.
+ *
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
+ *                         This message will be included in the assertion error if the assertion fails.
+ */
 fun <E : KoBaseProvider> List<E?>.assertEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
@@ -170,6 +184,12 @@ fun <E : KoBaseProvider> List<E?>.assertEmpty(
     assert(strict, additionalMessage, isEmptyOrNull = true, onSingleElement = false)
 }
 
+/**
+ * Asserts that the list is not empty.
+ *
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
+ *                         This message will be included in the assertion error if the assertion fails.
+ */
 fun <E : KoBaseProvider> List<E?>.assertNotEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
@@ -177,6 +197,12 @@ fun <E : KoBaseProvider> List<E?>.assertNotEmpty(
     assert(strict, additionalMessage,  isEmptyOrNull = false, onSingleElement = false)
 }
 
+/**
+ * Asserts that the sequence is empty.
+ *
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
+ *                         This message will be included in the assertion error if the assertion fails.
+ */
 fun <E : KoBaseProvider> Sequence<E?>.assertEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
@@ -184,17 +210,18 @@ fun <E : KoBaseProvider> Sequence<E?>.assertEmpty(
     this.toList().assert(strict, additionalMessage,  isEmptyOrNull = true, onSingleElement = false)
 }
 
+/**
+ * Asserts that the sequence is not empty.
+ *
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
+ *                         This message will be included in the assertion error if the assertion fails.
+ */
 fun <E : KoBaseProvider> Sequence<E?>.assertNotEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
 ): Unit {
     this.toList().assert(strict, additionalMessage,  isEmptyOrNull = false, onSingleElement = false)
 }
-
-
-
-
-
 
 /**
  * Asserts that element match the specified predicate.
