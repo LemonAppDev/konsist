@@ -1,4 +1,4 @@
-![Konsist](misc/page-konsist-logo.png)
+![Konsist](misc/konsist-logo/logo.png)
 ==========
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)

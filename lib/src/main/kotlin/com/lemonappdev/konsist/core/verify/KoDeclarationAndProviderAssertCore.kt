@@ -54,6 +54,45 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     }
 }
 
+internal fun <E : KoBaseProvider> List<E?>.assert(
+    strict: Boolean,
+    additionalMessage: String?,
+    suppressName: String?,
+    isEmptyOrNull: Boolean,
+    onSingleElement: Boolean,
+) {
+    try {
+        val fifthIndexMethodName = getTestMethodNameFromFifthIndex()
+
+        val testMethodName = if (fifthIndexMethodName.contains("\$default")) {
+            getTestMethodNameFromSixthIndex()
+        } else {
+            fifthIndexMethodName
+        }
+
+        val localSuppressName = suppressName ?: testMethodName
+
+        val declarationWithoutNull = filterNotNull()
+
+        val suppressedDeclarations =
+            declarationWithoutNull - checkIfAnnotatedWithSuppress(declarationWithoutNull, localSuppressName).toSet()
+
+        val notSuppressedDeclarations = this - suppressedDeclarations.toSet()
+
+        if (!onSingleElement) {
+            val items = if (strict) notSuppressedDeclarations.filterNotNull() else notSuppressedDeclarations
+
+            getEmptyResult(items, additionalMessage, isEmptyOrNull, testMethodName)
+        } else {
+            getNullResult(notSuppressedDeclarations.firstOrNull(), additionalMessage, isEmptyOrNull, testMethodName)
+        }
+    } catch (e: KoException) {
+        throw e
+    } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
+        throw KoInternalException(e.message.orEmpty(), e)
+    }
+}
+
 @Deprecated("Will be removed in v1.0.0", ReplaceWith("assert"))
 internal fun <E : KoBaseProvider> List<E>.assert(
     additionalMessage: String? = null,
@@ -221,4 +260,54 @@ private fun getCheckFailedMessage(failedItems: List<*>, suppressName: String, ad
     val times = if (failedItems.size == 1) "time" else "times"
 
     return "Assert '$suppressName' was violated (${failedItems.size} $times).${customMessage}Invalid $types:\n$failedDeclarationsMessage"
+}
+
+private fun getEmptyResult(
+    items: List<*>,
+    additionalMessage: String?,
+    isEmpty: Boolean,
+    testMethodName: String,
+) {
+    val itemsListIsEmpty = items.isEmpty()
+
+    if (isEmpty != itemsListIsEmpty) {
+        val negation = if (isEmpty) " not" else ""
+        val values = if (isEmpty) {
+            val nullCount = items.count { it == null }
+            val nullValues =
+                if (nullCount == 1) "$nullCount null value" else if (nullCount > 1) "$nullCount null values" else ""
+            val otherValues = items.filterNotNull().joinToString(",\n")
+
+            var text = " It contains "
+            if (nullValues.isNotEmpty()) text += nullValues
+            if (nullValues.isNotEmpty() && otherValues.isNotEmpty()) text += " and "
+            if (otherValues.isNotEmpty()) text += "values:\n$otherValues"
+
+            "$text."
+        } else {
+            ""
+        }
+        val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
+
+        val message = "Assert '$testMethodName' failed.${customMessage}Declaration list is$negation empty.$values"
+        throw KoCheckFailedException(message)
+    }
+}
+
+private fun getNullResult(
+    item: Any?,
+    additionalMessage: String?,
+    isNull: Boolean,
+    testMethodName: String,
+) {
+    val itemIsNull = item == null
+
+    if (isNull != itemIsNull) {
+        val negation = if (isNull) " not" else ""
+        val value = if (isNull) ": " + item.toString() else ""
+        val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
+
+        val message = "Assert `$testMethodName` failed.${customMessage}Declaration has$negation null value$value."
+        throw KoCheckFailedException(message)
+    }
 }

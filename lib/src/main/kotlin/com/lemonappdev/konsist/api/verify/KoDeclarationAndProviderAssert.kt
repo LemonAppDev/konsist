@@ -148,6 +148,120 @@ fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
 }
 
 /**
+ * Asserts that the element has `null` value.
+ *
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
+ *                          This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
+ *                     however for koTest framework it hase to be manually specified to allow suppression.
+ */
+fun <E : KoBaseProvider> E?.assertNull(
+    additionalMessage: String? = null,
+    suppressName: String? = null,
+): Unit {
+    listOf(this).assert(true, additionalMessage, suppressName, isEmptyOrNull = true, onSingleElement = true)
+}
+
+/**
+ * Asserts that the element has not `null` value.
+ *
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
+ *                          This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
+ *                     however for koTest framework it hase to be manually specified to allow suppression.
+ */
+fun <E : KoBaseProvider> E?.assertNotNull(
+    additionalMessage: String? = null,
+    suppressName: String? = null,
+): Unit {
+    listOf(this).assert(true, additionalMessage, suppressName, isEmptyOrNull = false, onSingleElement = true)
+}
+
+/**
+ * Asserts that the list is empty.
+ *
+ * @param strict A flag indicating whether strict checking should be enabled.
+ *               If set to `true`, the assertion will pass if the list is empty or contains only null values.
+ *               If set to `false`, null values are treated as regular elements and the assertion will pass if the list
+ *               is completely empty.
+ *               By default, false.
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
+ *                         This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
+ *                     however for koTest framework it hase to be manually specified to allow suppression.
+ */
+fun <E : KoBaseProvider> List<E?>.assertEmpty(
+    strict: Boolean = false,
+    additionalMessage: String? = null,
+    suppressName: String? = null,
+): Unit {
+    assert(strict, additionalMessage, suppressName, isEmptyOrNull = true, onSingleElement = false)
+}
+
+/**
+ * Asserts that the list is not empty.
+ *
+ * @param strict A flag indicating whether strict checking should be enabled.
+ *               If set to `true`, the assertion will fail if the list is empty or contains only null values.
+ *               If set to `false`, null values are treated as regular elements and the assertion will fail if the list
+ *               is completely empty.
+ *               By default, false.
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
+ *                         This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
+ *                     however for koTest framework it hase to be manually specified to allow suppression.
+ */
+fun <E : KoBaseProvider> List<E?>.assertNotEmpty(
+    strict: Boolean = false,
+    additionalMessage: String? = null,
+    suppressName: String? = null,
+): Unit {
+    assert(strict, additionalMessage, suppressName, isEmptyOrNull = false, onSingleElement = false)
+}
+
+/**
+ * Asserts that the sequence is empty.
+ *
+ * @param strict A flag indicating whether strict checking should be enabled.
+ *               If set to `true`, the assertion will pass if the sequence is empty or contains only null values.
+ *               If set to `false`, null values are treated as regular elements and the assertion will pass if the sequence
+ *               is completely empty.
+ *               By default, false.
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
+ *                         This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
+ *                     however for koTest framework it hase to be manually specified to allow suppression.
+ */
+fun <E : KoBaseProvider> Sequence<E?>.assertEmpty(
+    strict: Boolean = false,
+    additionalMessage: String? = null,
+    suppressName: String? = null,
+): Unit {
+    this.toList().assert(strict, additionalMessage, suppressName, isEmptyOrNull = true, onSingleElement = false)
+}
+
+/**
+ * Asserts that the sequence is not empty.
+ *
+ * @param strict A flag indicating whether strict checking should be enabled.
+ *               If set to `true`, the assertion will fail if the sequence is empty or contains only null values.
+ *               If set to `false`, null values are treated as regular elements and the assertion will fail if the sequence
+ *               is completely empty.
+ *               By default, false.
+ * @param additionalMessage An optional message to provide additional context when the assertion fails.
+ *                         This message will be included in the assertion error if the assertion fails.
+ * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
+ *                     however for koTest framework it hase to be manually specified to allow suppression.
+ */
+fun <E : KoBaseProvider> Sequence<E?>.assertNotEmpty(
+    strict: Boolean = false,
+    additionalMessage: String? = null,
+    suppressName: String? = null,
+): Unit {
+    this.toList().assert(strict, additionalMessage, suppressName, isEmptyOrNull = false, onSingleElement = false)
+}
+
+/**
  * Asserts that element match the specified predicate.
  *
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
