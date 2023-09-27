@@ -10,6 +10,7 @@ import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
+@Deprecated("Will be removed in v1.0.0")
 class DeprecatedKoDeclarationAssertOnSingleElementTest {
     @Test
     fun `declaration-assert-test-method-name`() {
