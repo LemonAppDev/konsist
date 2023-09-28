@@ -1,0 +1,5 @@
+open class SampleClassWithModifier {
+    @Suppress("suppress-text")
+    fun sampleFunctionWithoutModifier() {
+    }
+}
