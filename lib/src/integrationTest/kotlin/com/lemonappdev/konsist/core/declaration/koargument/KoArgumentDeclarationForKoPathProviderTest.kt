@@ -26,7 +26,7 @@ class KoArgumentDeclarationForKoPathProviderTest {
     }
 
     @Test
-    fun `argument-in-enum-const-project-file-path2`() {
+    fun `argument-in-enum-const-project-file-path3`() {
         // given
         val sut = getSnippetFile("argument-in-enum-const-project-file-path")
             .classes()
