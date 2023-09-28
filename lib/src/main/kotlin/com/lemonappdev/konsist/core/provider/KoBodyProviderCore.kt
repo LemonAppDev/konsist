@@ -7,7 +7,7 @@ internal interface KoBodyProviderCore : KoBodyProvider, KoBaseProviderCore {
     val ktDeclarationWithBody: KtDeclarationWithBody
 
     override val hasBlockBody: Boolean
-        get() =  ktDeclarationWithBody.hasBlockBody()
+        get() = ktDeclarationWithBody.hasBlockBody()
 
     override val hasExpressionBody: Boolean
         get() = !hasBlockBody
