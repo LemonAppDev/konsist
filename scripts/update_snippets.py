@@ -156,9 +156,16 @@ def add_empty_line_to_md_file(md_content):
     else:
         return md_content
 
-def remove_files_except_readme(directory_path):
+def remove_files_recursively_except_readme(directory_path):
     try:
-        os.remove(directory_path)
+        # List all files and directories in the current directory
+        for root, dirs, files in os.walk(directory_path):
+            for file_name in files:
+                if file_name.lower() != "readme.md":  # Skip "README.md"
+                    file_path = os.path.join(root, file_name)
+                    os.remove(file_path)
+
+        print(f"All files within {directory_path} and its subdirectories, except 'README.md', have been removed.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
@@ -181,8 +188,6 @@ def copy_content(expanded_source_directory, expanded_destination_directory):
                                 path = expanded_destination_directory + "/" + filename_md
                             else:
                                 path = expanded_destination_directory + directory + "/" + filename_md
-
-                            remove_files_except_readme(path)
 
                             destination_path = construct_destination_path(path, filename_md)
 
@@ -213,6 +218,8 @@ def create_pr():
 os.chdir(expanded_destination_directory)
 
 create_git_branch()
+
+remove_files_recursively_except_readme(expanded_destination_directory)
 
 copy_content(expanded_source_directory, expanded_destination_directory)
 
