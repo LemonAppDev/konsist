@@ -177,7 +177,7 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assertTrue { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -190,7 +190,7 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assertTrue { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -205,7 +205,7 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue(suppressName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -220,7 +220,7 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue(suppressName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -233,7 +233,7 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assertTrue { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -246,7 +246,7 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
                 .asSequence()
 
         // then
-        sut.assertTrue { it.containsLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -260,7 +260,7 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
 
         // then
         sut.assertTrue(suppressName = "suppress-text") {
-            it.containsLocalFunction { function -> function.name == "otherFunction" }
+            it.hasLocalFunction { function -> function.name == "otherFunction" }
         }
     }
 
@@ -275,7 +275,7 @@ class SuppressAssertTrueOnDeclarationSequenceTest {
 
         // then
         sut.assertTrue(suppressName = "suppress-text") {
-            it.containsLocalFunction { function -> function.name == "otherFunction" }
+            it.hasLocalFunction { function -> function.name == "otherFunction" }
         }
     }
 
