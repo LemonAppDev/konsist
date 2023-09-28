@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.provider
 
 /**
- * An interface representing a Kotlin declaration that provides an information whether it body.
+ * An interface representing a Kotlin declaration that provides an information about the body.
  */
 interface KoBodyProvider : KoBaseProvider {
     /**
