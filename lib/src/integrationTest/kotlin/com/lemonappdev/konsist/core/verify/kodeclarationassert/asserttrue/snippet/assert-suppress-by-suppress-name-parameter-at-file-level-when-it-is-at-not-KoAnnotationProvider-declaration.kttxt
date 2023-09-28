@@ -1,0 +1,7 @@
+@file:Suppress("suppress-text")
+
+class SampleClassWithoutOtherFunction {
+    init {
+        fun sampleFunction() {}
+    }
+}
