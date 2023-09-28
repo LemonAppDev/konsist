@@ -12,7 +12,7 @@ import org.amshove.kluent.shouldThrow
 import org.amshove.kluent.withMessage
 import org.junit.jupiter.api.Test
 
-class KoDeclarationAssertOnSequenceTest {
+class AssertTrueOnDeclarationSequenceTest {
     @Test
     fun `declaration-assert-test-method-name`() {
         // given

@@ -16,7 +16,7 @@ import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
-class KoProviderAssertOnListTest {
+class AssertEmptyOnProviderListTest {
     @Test
     fun `provider-assert-test-method-name`() {
         // given

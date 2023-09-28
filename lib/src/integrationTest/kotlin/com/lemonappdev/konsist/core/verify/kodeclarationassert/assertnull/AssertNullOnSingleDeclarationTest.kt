@@ -10,7 +10,7 @@ import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
-class KoDeclarationAssertOnSingleElementTest {
+class AssertNullOnSingleDeclarationTest {
     @Test
     fun `declaration-assert-test-method-name`() {
         // given

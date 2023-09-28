@@ -1,9 +1,14 @@
-package com.lemonappdev.konsist.core.verify.kodeclarationassert.assertempty
+package com.lemonappdev.konsist.core.verify.koproviderassert.assertempty
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.classes
-import com.lemonappdev.konsist.api.ext.list.initBlocks
-import com.lemonappdev.konsist.api.ext.list.localFunctions
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
+import com.lemonappdev.konsist.api.ext.list.localDeclarations
+import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
+import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
+import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.api.provider.KoPropertyProvider
+import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.api.verify.assertEmpty
 import com.lemonappdev.konsist.api.verify.assertNotEmpty
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
@@ -11,29 +16,31 @@ import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
 
-class KoDeclarationAssertOnSequenceTest {
+class AssertEmptyOnProviderSequenceTest {
     @Test
-    fun `declaration-assert-test-method-name`() {
+    fun `provider-assert-test-method-name`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name")
-            .classes()
+        val sut = getSnippetFile("provider-assert-test-method-name")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
             .asSequence()
 
         // then
         try {
             sut.assertEmpty()
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' failed.")
+            e.message?.shouldContain("Assert 'provider-assert-test-method-name' failed.")
                 ?: throw e
         }
     }
 
     @Test
-    fun `declaration-assert-empty-error-on-list-containing-one-null-value`() {
+    fun `provider-assert-empty-error-on-list-containing-one-null-value`() {
         // given
-        val sut = getSnippetFile("declaration-assert-empty-error-on-list-containing-one-null-value")
-            .classes()
-            .map { it.primaryConstructor }
+        val sut = getSnippetFile("provider-assert-empty-error-on-list-containing-one-null-value")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .map { it as? KoKotlinTypeProvider }
             .asSequence()
 
         // then
@@ -41,7 +48,7 @@ class KoDeclarationAssertOnSequenceTest {
             sut.assertEmpty()
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-empty-error-on-list-containing-one-null-value' failed. " +
+                "Assert 'provider-assert-empty-error-on-list-containing-one-null-value' failed. " +
                     "Declaration list is not empty. It contains 1 null value.",
             )
                 ?: throw e
@@ -49,11 +56,11 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `declaration-assert-empty-error-on-list-containing-two-null-values`() {
+    fun `provider-assert-empty-error-on-list-containing-two-null-values`() {
         // given
-        val sut = getSnippetFile("declaration-assert-empty-error-on-list-containing-two-null-values")
-            .classes()
-            .map { it.primaryConstructor }
+        val sut = getSnippetFile("provider-assert-empty-error-on-list-containing-two-null-values")
+            .declarations()
+            .map { it as? KoKotlinTypeProvider }
             .asSequence()
 
         // then
@@ -61,7 +68,7 @@ class KoDeclarationAssertOnSequenceTest {
             sut.assertEmpty()
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-empty-error-on-list-containing-two-null-values' failed. " +
+                "Assert 'provider-assert-empty-error-on-list-containing-two-null-values' failed. " +
                     "Declaration list is not empty. It contains 2 null values.",
             )
                 ?: throw e
@@ -69,10 +76,12 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `declaration-assert-empty-error-on-list-containing-non-null-values`() {
+    fun `provider-assert-empty-error-on-list-containing-non-null-values`() {
         // given
-        val sut = getSnippetFile("declaration-assert-empty-error-on-list-containing-non-null-values")
-            .classes()
+        val sut = getSnippetFile("provider-assert-empty-error-on-list-containing-non-null-values")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
             .asSequence()
 
         // then
@@ -80,7 +89,7 @@ class KoDeclarationAssertOnSequenceTest {
             sut.assertEmpty()
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-empty-error-on-list-containing-non-null-values' failed. " +
+                "Assert 'provider-assert-empty-error-on-list-containing-non-null-values' failed. " +
                     "Declaration list is not empty. It contains values:\nSampleClass1,\nSampleClass2.",
             )
                 ?: throw e
@@ -88,11 +97,12 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `declaration-assert-empty-error-on-list-containing-null-and-non-null-values`() {
+    fun `provider-assert-empty-error-on-list-containing-null-and-non-null-values`() {
         // given
-        val sut = getSnippetFile("declaration-assert-empty-error-on-list-containing-null-and-non-null-values")
-            .functions()
-            .map { it.returnType }
+        val sut = getSnippetFile("provider-assert-empty-error-on-list-containing-null-and-non-null-values")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .map { it as? KoReturnTypeProvider }
             .asSequence()
 
         // then
@@ -100,19 +110,21 @@ class KoDeclarationAssertOnSequenceTest {
             sut.assertEmpty()
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-empty-error-on-list-containing-null-and-non-null-values' failed. " +
-                    "Declaration list is not empty. It contains 1 null value and values:\nInt.",
+                "Assert 'provider-assert-empty-error-on-list-containing-null-and-non-null-values' failed. " +
+                    "Declaration list is not empty. It contains 1 null value and values:\nsampleFunction.",
             )
                 ?: throw e
         }
     }
 
     @Test
-    fun `declaration-assert-empty-error-with-custom-message`() {
+    fun `provider-assert-empty-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-empty-error-with-custom-message")
-            .classes()
+        val sut = getSnippetFile("provider-assert-empty-error-with-custom-message")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
             .asSequence()
 
         // then
@@ -120,7 +132,7 @@ class KoDeclarationAssertOnSequenceTest {
             sut.assertEmpty(additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-empty-error-with-custom-message' failed.\n$message\n" +
+                "Assert 'provider-assert-empty-error-with-custom-message' failed.\n$message\n" +
                     "Declaration list is not empty. It contains values:\nSampleClass.",
             )
                 ?: throw e
@@ -128,11 +140,13 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `declaration-assert-empty-error-with-custom-message-and-strict-set-to-true`() {
+    fun `provider-assert-empty-error-with-custom-message-and-strict-set-to-true`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-empty-error-with-custom-message-and-strict-set-to-true")
-            .classes()
+        val sut = getSnippetFile("provider-assert-empty-error-with-custom-message-and-strict-set-to-true")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
             .asSequence()
 
         // then
@@ -140,7 +154,7 @@ class KoDeclarationAssertOnSequenceTest {
             sut.assertEmpty(strict = true, additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
+                "Assert 'provider-assert-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
                     "Declaration list is not empty. It contains values:\nSampleClass.",
             )
                 ?: throw e
@@ -148,11 +162,12 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `declaration-assert-not-empty-error-with-custom-message`() {
+    fun `provider-assert-not-empty-error-with-custom-message`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-not-empty-error-with-custom-message")
-            .interfaces()
+        val sut = getSnippetFile("provider-assert-not-empty-error-with-custom-message")
+            .declarations()
+            .filterIsInstance<KoKotlinTypeProvider>()
             .asSequence()
 
         // then
@@ -160,19 +175,20 @@ class KoDeclarationAssertOnSequenceTest {
             sut.assertNotEmpty(additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-not-empty-error-with-custom-message' failed.\n" +
-                    "$message\nDeclaration list is empty.",
+                "Assert 'provider-assert-not-empty-error-with-custom-message' failed.\n$message\n" +
+                    "Declaration list is empty.",
             )
                 ?: throw e
         }
     }
 
     @Test
-    fun `declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true`() {
+    fun `provider-assert-not-empty-error-with-custom-message-and-strict-set-to-true`() {
         // given
         val message = "CUSTOM ASSERT MESSAGE"
-        val sut = getSnippetFile("declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true")
-            .interfaces()
+        val sut = getSnippetFile("provider-assert-not-empty-error-with-custom-message-and-strict-set-to-true")
+            .declarations()
+            .filterIsInstance<KoKotlinTypeProvider>()
             .asSequence()
 
         // then
@@ -180,18 +196,19 @@ class KoDeclarationAssertOnSequenceTest {
             sut.assertNotEmpty(strict = true, additionalMessage = message)
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true' failed.\n" +
-                    "$message\nDeclaration list is empty.",
+                "Assert 'provider-assert-not-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
+                    "Declaration list is empty.",
             )
                 ?: throw e
         }
     }
 
     @Test
-    fun `assert-empty-passes-when-declaration-list-is-empty`() {
+    fun `assert-empty-passes-when-item-list-is-empty`() {
         // given
-        val sut = getSnippetFile("assert-empty-passes-when-declaration-list-is-empty")
-            .interfaces()
+        val sut = getSnippetFile("assert-empty-passes-when-item-list-is-empty")
+            .declarations()
+            .filterIsInstance<KoKotlinTypeProvider>()
             .asSequence()
 
         // then
@@ -199,10 +216,11 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-empty-fails-when-declaration-list-has-item`() {
+    fun `assert-empty-fails-when-item-list-has-item`() {
         // given
-        val sut = getSnippetFile("assert-empty-fails-when-declaration-list-has-item")
-            .classes()
+        val sut = getSnippetFile("assert-empty-fails-when-item-list-has-item")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
             .asSequence()
 
         // when
@@ -215,25 +233,28 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-empty-fails-when-declaration-list-has-only-nulls`() {
+    fun `assert-empty-fails-when-item-list-has-only-nulls`() {
         // given
-        val sut = getSnippetFile("assert-empty-fails-when-declaration-list-has-only-nulls")
-            .classes()
-            .map { it.primaryConstructor }
+        val sut = getSnippetFile("assert-empty-fails-when-item-list-has-only-nulls")
+            .declarations()
+            .map { it as? KoKotlinTypeProvider }
             .asSequence()
 
         // when
-        val func = { sut.assertEmpty() }
+        val func = {
+            sut.assertEmpty()
+        }
 
         // then
         func shouldThrow KoCheckFailedException::class
     }
 
     @Test
-    fun `assert-empty-passes-when-declaration-list-is-empty-and-strict-set-to-true`() {
+    fun `assert-empty-passes-when-item-list-is-empty-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("assert-empty-passes-when-declaration-list-is-empty-and-strict-set-to-true")
-            .interfaces()
+        val sut = getSnippetFile("assert-empty-passes-when-item-list-is-empty-and-strict-set-to-true")
+            .declarations()
+            .filterIsInstance<KoKotlinTypeProvider>()
             .asSequence()
 
         // then
@@ -241,10 +262,11 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-empty-fails-when-declaration-list-has-item-and-strict-set-to-true`() {
+    fun `assert-empty-fails-when-item-list-has-item-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("assert-empty-fails-when-declaration-list-has-item-and-strict-set-to-true")
-            .classes()
+        val sut = getSnippetFile("assert-empty-fails-when-item-list-has-item-and-strict-set-to-true")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
             .asSequence()
 
         // when
@@ -255,11 +277,11 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-empty-passes-when-declaration-list-has-only-nulls-and-strict-set-to-true`() {
+    fun `assert-empty-passes-when-item-list-has-only-nulls-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("assert-empty-passes-when-declaration-list-has-only-nulls-and-strict-set-to-true")
-            .classes()
-            .map { it.primaryConstructor }
+        val sut = getSnippetFile("assert-empty-passes-when-item-list-has-only-nulls-and-strict-set-to-true")
+            .declarations()
+            .map { it as? KoKotlinTypeProvider }
             .asSequence()
 
         // then
@@ -267,10 +289,11 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-not-empty-passes-when-declaration-list-has-item`() {
+    fun `assert-not-empty-passes-when-item-list-has-item`() {
         // given
-        val sut = getSnippetFile("assert-not-empty-passes-when-declaration-list-has-item")
-            .classes()
+        val sut = getSnippetFile("assert-not-empty-passes-when-item-list-has-item")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
             .asSequence()
 
         // then
@@ -278,10 +301,11 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-not-empty-fails-when-declaration-list-is-empty`() {
+    fun `assert-not-empty-fails-when-item-list-is-empty`() {
         // given
-        val sut = getSnippetFile("assert-not-empty-fails-when-declaration-list-is-empty")
-            .interfaces()
+        val sut = getSnippetFile("assert-not-empty-fails-when-item-list-is-empty")
+            .declarations()
+            .filterIsInstance<KoKotlinTypeProvider>()
             .asSequence()
 
         // when
@@ -294,11 +318,11 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-not-empty-passes-when-declaration-list-has-only-nulls`() {
+    fun `assert-not-empty-passes-when-item-list-has-only-nulls`() {
         // given
-        val sut = getSnippetFile("assert-not-empty-passes-when-declaration-list-has-only-nulls")
-            .classes()
-            .map { it.primaryConstructor }
+        val sut = getSnippetFile("assert-not-empty-passes-when-item-list-has-only-nulls")
+            .declarations()
+            .map { it as? KoKotlinTypeProvider }
             .asSequence()
 
         // then
@@ -306,10 +330,11 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-not-empty-passes-when-declaration-list-has-item-and-strict-set-to-true`() {
+    fun `assert-not-empty-passes-when-item-list-has-item-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("assert-not-empty-passes-when-declaration-list-has-item-and-strict-set-to-true")
-            .classes()
+        val sut = getSnippetFile("assert-not-empty-passes-when-item-list-has-item-and-strict-set-to-true")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
             .asSequence()
 
         // then
@@ -317,10 +342,11 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-not-empty-fails-when-declaration-list-is-empty-and-strict-set-to-true`() {
+    fun `assert-not-empty-fails-when-item-list-is-empty-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("assert-not-empty-fails-when-declaration-list-is-empty-and-strict-set-to-true")
-            .interfaces()
+        val sut = getSnippetFile("assert-not-empty-fails-when-item-list-is-empty-and-strict-set-to-true")
+            .declarations()
+            .filterIsInstance<KoKotlinTypeProvider>()
             .asSequence()
 
         // when
@@ -333,11 +359,11 @@ class KoDeclarationAssertOnSequenceTest {
     }
 
     @Test
-    fun `assert-not-empty-fails-when-declaration-list-has-only-nulls-and-strict-set-to-true`() {
+    fun `assert-not-empty-fails-when-item-list-has-only-nulls-and-strict-set-to-true`() {
         // given
-        val sut = getSnippetFile("assert-not-empty-fails-when-declaration-list-has-only-nulls-and-strict-set-to-true")
-            .classes()
-            .map { it.primaryConstructor }
+        val sut = getSnippetFile("assert-not-empty-fails-when-item-list-has-only-nulls-and-strict-set-to-true")
+            .declarations()
+            .map { it as? KoKotlinTypeProvider }
             .asSequence()
 
         // when
@@ -354,7 +380,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
-                .classes(includeNested = true)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
                 .asSequence()
 
         // then
@@ -366,7 +393,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
-                .classes(includeNested = true)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
                 .asSequence()
 
         // then
@@ -378,7 +406,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
-                .classes(includeNested = true)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
                 .asSequence()
 
         // then
@@ -390,7 +419,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
-                .classes(includeNested = true)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
                 .asSequence()
 
         // then
@@ -402,8 +432,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
-                .classes()
-                .classes()
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
                 .asSequence()
 
         // then
@@ -415,8 +445,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
-                .classes()
-                .classes()
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
                 .asSequence()
 
         // then
@@ -428,8 +458,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
-                .classes()
-                .initBlocks
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
                 .asSequence()
 
         // then
@@ -441,8 +471,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
-                .classes()
-                .initBlocks
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
                 .asSequence()
 
         // then
@@ -454,9 +484,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider")
-                .classes()
-                .initBlocks
-                .asSequence()
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
 
         // then
         sut.assertEmpty()
@@ -467,9 +496,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-not-KoAnnotationProvider")
-                .classes()
-                .initBlocks
-                .asSequence()
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
 
         // then
         sut.assertEmpty()
@@ -480,9 +508,10 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .classes()
-                .initBlocks
-                .localFunctions
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
+                .localDeclarations
+                .filterIsInstance<KoLocalDeclarationProvider>()
                 .asSequence()
 
         // then
@@ -494,9 +523,10 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .classes()
-                .initBlocks
-                .localFunctions
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
+                .localDeclarations
+                .filterIsInstance<KoLocalDeclarationProvider>()
                 .asSequence()
 
         // then
@@ -510,9 +540,8 @@ class KoDeclarationAssertOnSequenceTest {
             getSnippetFile(
                 "assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
             )
-                .classes()
-                .initBlocks
-                .localFunctions
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
                 .asSequence()
 
         // then
@@ -524,9 +553,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .classes()
-                .initBlocks
-                .localFunctions
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
                 .asSequence()
 
         // then
@@ -538,10 +566,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-konsist-and-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .classes()
-                .initBlocks
-                .localFunctions
-                .asSequence()
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
 
         // then
         sut.assertEmpty()
@@ -552,10 +578,8 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-by-name-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
-                .classes()
-                .initBlocks
-                .localFunctions
-                .asSequence()
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
 
         // then
         sut.assertEmpty()
@@ -566,25 +590,14 @@ class KoDeclarationAssertOnSequenceTest {
         // given
         val sut =
             getSnippetFile("assert-suppress-with-few-parameters")
-                .functions(includeNested = true)
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
                 .asSequence()
 
         // then
         sut.assertEmpty()
     }
 
-    @Test
-    fun `assert-suppress-with-suppress-name-parameter`() {
-        // given
-        val sut =
-            getSnippetFile("assert-suppress-with-suppress-name-parameter")
-                .functions(includeNested = true)
-                .asSequence()
-
-        // then
-        sut.assertEmpty(suppressName = "konsist.assert-suppress-with-suppress-name-parameter")
-    }
-
     private fun getSnippetFile(fileName: String) =
-        TestSnippetProvider.getSnippetKoScope("core/verify/kodeclarationassert/assertempty/snippet/", fileName)
+        TestSnippetProvider.getSnippetKoScope("core/verify/koproviderassert/assertempty/snippet/", fileName)
 }
