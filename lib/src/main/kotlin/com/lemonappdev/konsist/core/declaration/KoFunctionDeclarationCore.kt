@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoAnnotationProviderCore
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
+import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
@@ -44,6 +45,7 @@ import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProvid
 import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
+import org.jetbrains.kotlin.psi.KtDeclarationWithBody
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -55,6 +57,7 @@ internal class KoFunctionDeclarationCore private constructor(
     KoFunctionDeclaration,
     KoBaseProviderCore,
     KoAnnotationProviderCore,
+    KoBodyProviderCore,
     KoContainingFileProviderCore,
     KoDeclarationFullyQualifiedNameProviderCore,
     KoReturnTypeProviderCore,
@@ -98,6 +101,8 @@ internal class KoFunctionDeclarationCore private constructor(
     override val psiElement: PsiElement by lazy { ktFunction }
 
     override val ktElement: KtElement by lazy { ktFunction }
+
+    override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktFunction }
 
     override val hasImplementation: Boolean = ktFunction.hasBody()
 
