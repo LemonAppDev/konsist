@@ -142,6 +142,9 @@ def read_file(file_path):
 
 # Write content to a file
 def write_file(file_path, content):
+    # Ensure the directory exists; create it if it doesn't
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
     with open(file_path, "w") as new_file:
         new_file.write(content)
 
@@ -153,50 +156,52 @@ def add_empty_line_to_md_file(md_content):
     else:
         return md_content
 
-def remove_files_from_directory_except_readme(directory_path):
+def remove_files_except_readme(directory_path):
     try:
-        # List all files in the directory
-        files = os.listdir(directory_path)
-
-        # Iterate through the files and remove them, except "README.md"
-        for file_name in files:
-            if file_name.lower() != "readme.md":
-                file_path = os.path.join(directory_path, file_name)
-                if os.path.isfile(file_path):
-                    os.remove(file_path)
+        os.remove(directory_path)
     except Exception as e:
         print(f"An error occurred: {e}")
 
 # Copy content from source .kt and .md files to a destination file
-def copy_content(expanded_source_directory):
+def copy_content(expanded_source_directory, expanded_destination_directory):
     # Iterate through all .md and .kt files in the source folder and copy them content
-    for filename_md in os.listdir(expanded_source_directory):
-        if filename_md.endswith("snippets.md"):
-            prefix = filename_md.split("-")[0]
-            for filename_kt in os.listdir(expanded_source_directory):
-                if filename_kt.lower().startswith(prefix) and filename_kt.lower().endswith("kt"):
-                    kt_path = os.path.join(expanded_source_directory, filename_kt)
-                    md_path = os.path.join(expanded_source_directory, filename_md)
-                    try:
-                        filename_md = os.path.basename(md_path)
-                        destination_path = construct_destination_path(expanded_destination_directory, filename_md)
+    for root, dirs, files in os.walk(expanded_source_directory):
+        for filename_md in files:
+            if filename_md.endswith("snippets.md"):
+                prefix = filename_md.split("-")[0]
+                for filename_kt in files:
+                    if filename_kt.lower().startswith(prefix) and filename_kt.lower().endswith("kt"):
+                        kt_path = os.path.join(root, filename_kt)
+                        md_path = os.path.join(root, filename_md)
 
-                        md_content = read_file(md_path)
-                        new_md_content = add_empty_line_to_md_file(md_content)
+                        try:
+                            directory = root.split(expanded_source_directory)[1]
 
-                        kt_content = read_file(kt_path)
+                            if len(directory) == 0:
+                                path = expanded_destination_directory + "/" + filename_md
+                            else:
+                                path = expanded_destination_directory + directory + "/" + filename_md
 
-                        if "io.kotest" in kt_content:
-                            kt_text = format_class_snippet_text(kt_content)
-                        else:
-                            kt_text = format_function_snippet_text(kt_content)
+                            remove_files_except_readme(path)
 
-                        content = new_md_content + kt_text
+                            destination_path = construct_destination_path(path, filename_md)
 
-                        write_file(destination_path, content)
+                            md_content = read_file(md_path)
+                            new_md_content = add_empty_line_to_md_file(md_content)
 
-                    except Exception as e:
-                        print(f"Error copying content: {e}")
+                            kt_content = read_file(kt_path)
+
+                            if "io.kotest" in kt_content:
+                                kt_text = format_class_snippet_text(kt_content)
+                            else:
+                                kt_text = format_function_snippet_text(kt_content)
+
+                            content = new_md_content + kt_text
+
+                            write_file(destination_path, content)
+
+                        except Exception as e:
+                            print(f"Error copying content: {e}")
 
 def create_pr():
     pr_title = "Update snippet code from " + get_current_date()
@@ -209,9 +214,7 @@ os.chdir(expanded_destination_directory)
 
 create_git_branch()
 
-remove_files_from_directory_except_readme(expanded_destination_directory)
-
-copy_content(expanded_source_directory)
+copy_content(expanded_source_directory, expanded_destination_directory)
 
 # Commit and push changes
 push_changes()
