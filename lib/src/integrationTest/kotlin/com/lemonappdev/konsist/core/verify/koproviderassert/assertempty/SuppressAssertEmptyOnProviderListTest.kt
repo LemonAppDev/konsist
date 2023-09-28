@@ -42,6 +42,30 @@ class SuppressAssertEmptyOnProviderListTest {
     }
 
     @Test
+    fun `assert-suppress-by-konsist-and-parameter-at-file-level-when-all-declarations-are-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-parameter-at-file-level-when-all-declarations-are-KoAnnotationProvider")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
+    fun `assert-suppress-by-parameter-at-file-level-when-all-declarations-are-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-parameter-at-file-level-when-all-declarations-are-KoAnnotationProvider")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
     fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider`() {
         // given
         val sut =
@@ -63,6 +87,30 @@ class SuppressAssertEmptyOnProviderListTest {
 
         // then
         sut.assertEmpty()
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-parameter-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-parameter-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
+    fun `assert-suppress-by-parameter-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-parameter-at-declaration-parent-level-when-all-declarations-are-KoAnnotationProvider")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoModifierProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
     }
 
     @Test
@@ -90,6 +138,30 @@ class SuppressAssertEmptyOnProviderListTest {
     }
 
     @Test
+    fun `assert-suppress-by-konsist-and-parameter-at-declaration-level-when-all-declarations-are-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-parameter-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
+    fun `assert-suppress-by-parameter-at-declaration-level-when-all-declarations-are-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-parameter-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
     fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider`() {
         // given
         val sut =
@@ -114,6 +186,30 @@ class SuppressAssertEmptyOnProviderListTest {
     }
 
     @Test
+    fun `assert-suppress-by-konsist-and-parameter-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-parameter-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
+    fun `assert-suppress-by-parameter-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-parameter-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
     fun `assert-suppress-by-konsist-and-name-at-file-level-when-it-is-not-KoAnnotationProvider`() {
         // given
         val sut =
@@ -135,6 +231,30 @@ class SuppressAssertEmptyOnProviderListTest {
 
         // then
         sut.assertEmpty()
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-parameter-at-file-level-when-it-is-not-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-parameter-at-file-level-when-it-is-not-KoAnnotationProvider")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
+    fun `assert-suppress-by-parameter-at-file-level-when-it-is-not-KoAnnotationProvider`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-parameter-at-file-level-when-it-is-not-KoAnnotationProvider")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
     }
 
     @Test
@@ -166,6 +286,34 @@ class SuppressAssertEmptyOnProviderListTest {
     }
 
     @Test
+    fun `assert-suppress-by-konsist-and-parameter-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-parameter-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
+                .localDeclarations
+                .filterIsInstance<KoLocalDeclarationProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
+    fun `assert-suppress-by-parameter-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-parameter-at-declaration-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
+                .localDeclarations
+                .filterIsInstance<KoLocalDeclarationProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
     fun `assert-suppress-by-konsist-and-name-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
         // given
         val sut =
@@ -189,6 +337,32 @@ class SuppressAssertEmptyOnProviderListTest {
 
         // then
         sut.assertEmpty()
+    }
+
+    @Test
+    fun `assert-suppress-by-konsist-and-parameter-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+        // given
+        val sut =
+            getSnippetFile(
+                "assert-suppress-by-konsist-and-parameter-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration",
+            )
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
+    fun `assert-suppress-by-parameter-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-parameter-at-declaration-parent-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
     }
 
     @Test
@@ -216,6 +390,30 @@ class SuppressAssertEmptyOnProviderListTest {
     }
 
     @Test
+    fun `assert-suppress-by-konsist-and-parameter-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-konsist-and-parameter-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
+    fun `assert-suppress-by-parameter-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-parameter-at-file-level-when-it-is-at-not-KoAnnotationProvider-declaration")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoPropertyProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
+    }
+
+    @Test
     fun `assert-suppress-with-few-parameters`() {
         // given
         val sut =
@@ -225,6 +423,18 @@ class SuppressAssertEmptyOnProviderListTest {
 
         // then
         sut.assertEmpty()
+    }
+
+    @Test
+    fun `assert-suppress-by-parameter-with-few-parameters`() {
+        // given
+        val sut =
+            getSnippetFile("assert-suppress-by-parameter-with-few-parameters")
+                .declarations(includeNested = true)
+                .filterIsInstance<KoLocalDeclarationProvider>()
+
+        // then
+        sut.assertEmpty(suppressName = "suppress-text")
     }
 
     private fun getSnippetFile(fileName: String) =
