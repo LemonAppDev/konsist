@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.core.verify.kodeclarationassert.asserttrue
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.initBlocks
-import com.lemonappdev.konsist.api.ext.list.localFunctions
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException

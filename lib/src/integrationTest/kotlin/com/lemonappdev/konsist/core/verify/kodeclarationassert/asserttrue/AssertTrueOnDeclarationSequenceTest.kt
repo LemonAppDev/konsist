@@ -1,8 +1,6 @@
 package com.lemonappdev.konsist.core.verify.kodeclarationassert.asserttrue
 
 import com.lemonappdev.konsist.TestSnippetProvider
-import com.lemonappdev.konsist.api.ext.list.initBlocks
-import com.lemonappdev.konsist.api.ext.list.localFunctions
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
@@ -193,7 +191,8 @@ class AssertTrueOnDeclarationSequenceTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling " +
+            "the 'assertTrue' method."
     }
 
     @Test
@@ -210,7 +209,8 @@ class AssertTrueOnDeclarationSequenceTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
+            "Declaration list is empty. Please make sure that list of declarations contain items before calling " +
+            "the 'assertFalse' method."
     }
 
     @Test
