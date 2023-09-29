@@ -22,7 +22,7 @@ interface KoReturnTypeProvider : KoBaseProvider {
      *
      *    Example:
      *    ```kotlin
-     *    fun sampleFunction { "some text" } // Returns false
+     *    fun sampleFunction() { "some text" } // Returns false
      *    ```
      *
      * 2) If the declaration has an expression body, [hasReturnValue] always returns `true`.
