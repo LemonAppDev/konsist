@@ -34,6 +34,42 @@ class KoReturnTypeProviderListExtTest {
     }
 
     @Test
+    fun `withReturnValue() returns declaration with return value other than Unit type`() {
+        // given
+        val declaration1: KoReturnTypeProvider = mockk {
+            every { hasReturnValue } returns true
+        }
+        val declaration2: KoReturnTypeProvider = mockk {
+            every { hasReturnValue } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withReturnValue()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration1)
+    }
+
+    @Test
+    fun `withoutReturnValue() returns declaration with Unit return value`() {
+        // given
+        val declaration1: KoReturnTypeProvider = mockk {
+            every { hasReturnValue } returns true
+        }
+        val declaration2: KoReturnTypeProvider = mockk {
+            every { hasReturnValue } returns false
+        }
+        val declarations = listOf(declaration1, declaration2)
+
+        // when
+        val sut = declarations.withoutReturnValue()
+
+        // then
+        sut shouldBeEqualTo listOf(declaration2)
+    }
+
+    @Test
     fun `withReturnType() returns declaration with any return type`() {
         // given
         val declaration1: KoReturnTypeProvider = mockk {
