@@ -1,5 +1,6 @@
 package com.lemonappdev.konsist
 
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.properties
@@ -8,7 +9,6 @@ import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.ext.list.withParentOf
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
-import com.sun.tools.javac.code.Preview
 
 class AndroidSnippets {
     fun `classes extending 'ViewModel' should have 'ViewModel' suffix`() {
@@ -45,7 +45,7 @@ class AndroidSnippets {
             .assertFalse { it.hasImport { import -> import.name == "android.util.Log" } }
     }
 
-    fun `All JetPack previews contain 'Preview' in method name`() {
+    fun `All JetPack Compose previews contain 'Preview' in method name`() {
         Konsist
             .scopeFromProject()
             .functions()
