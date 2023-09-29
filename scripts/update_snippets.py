@@ -141,9 +141,9 @@ def read_file(file_path):
         return source_file.read()
 
 # Write content to a file
-def write_file(file_path, content):
+def write_file(directory, file_path, content):
     # Ensure the directory exists; create it if it doesn't
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    os.makedirs(os.path.dirname(directory), exist_ok=True)
 
     with open(file_path, "w") as new_file:
         new_file.write(content)
@@ -185,9 +185,9 @@ def copy_content(expanded_source_directory, expanded_destination_directory):
                             directory = root.split(expanded_source_directory)[1]
 
                             if len(directory) == 0:
-                                path = expanded_destination_directory + "/" + filename_md
+                                path = expanded_destination_directory + "/"
                             else:
-                                path = expanded_destination_directory + directory + "/" + filename_md
+                                path = expanded_destination_directory + directory + "/"
 
                             destination_path = construct_destination_path(path, filename_md)
 
@@ -203,12 +203,12 @@ def copy_content(expanded_source_directory, expanded_destination_directory):
 
                             content = new_md_content + kt_text
 
-                            write_file(destination_path, content)
+                            write_file(path, destination_path, content)
 
                         except Exception as e:
                             print(f"Error copying content: {e}")
 
-def create_pr():
+def create_and_merge_pr():
     pr_title = "Update snippet code from " + get_current_date()
     os.system("gh pr create --title '" + pr_title + "' --body '""'")
 
@@ -225,6 +225,6 @@ copy_content(expanded_source_directory, expanded_destination_directory)
 
 # Commit and push changes
 push_changes()
-#
-# # Create a pull request
-create_pr()
+
+# Create a pull request
+create_and_merge_pr()
