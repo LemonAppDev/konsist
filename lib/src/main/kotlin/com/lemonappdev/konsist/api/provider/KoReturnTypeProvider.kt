@@ -13,7 +13,26 @@ interface KoReturnTypeProvider : KoBaseProvider {
     val returnType: KoTypeDeclaration?
 
     /**
-     * Whether declaration has a return value other than `Unit`.
+     * Indicates whether a declaration has a non-`Unit` return value.
+     *
+     * If a declaration explicitly specifies a return type, [hasReturnValue] returns true only if the declared type is not `Unit`.
+     *
+     * For declarations without an explicit return type:
+     * 1) If the declaration has a block body, [hasReturnValue] always returns `false`.
+     *
+     *    Example:
+     *    ```kotlin
+     *    fun sampleFunction { "some text" } // Returns false
+     *    ```
+     *
+     * 2) If the declaration has an expression body, [hasReturnValue] always returns `true`.
+     *
+     *    Examples:
+     *    ```kotlin
+     *    fun sampleFunction1() = SampleClass()  // Returns true
+     *
+     *    fun sampleFunction2() = println("some text") // Returns true, even though it returns an `Unit`
+     *    ```
      */
     val hasReturnValue: Boolean
 
