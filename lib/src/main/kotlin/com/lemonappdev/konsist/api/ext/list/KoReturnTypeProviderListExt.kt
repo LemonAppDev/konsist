@@ -2,7 +2,6 @@ package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
 import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
-import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
 import kotlin.reflect.KClass
 
 /**
@@ -52,7 +51,6 @@ fun <T : KoReturnTypeProvider> List<T>.withReturnValue(): List<T> = filter { it.
  * @return A list containing declarations with the `Unit` return value.
  */
 fun <T : KoReturnTypeProvider> List<T>.withoutReturnValue(): List<T> = filterNot { it.hasReturnValue }
-
 
 /**
  * List containing declarations with the specified return type.

@@ -34,7 +34,7 @@ internal interface KoReturnTypeProviderCore :
             1) fun sampleFunction1() = println("some text") // returns Unit
             2) fun sampleFunction2() = SampleClass() // returns SampleClass,
             so we always return true.
-            */
+             */
             true
         }
 
