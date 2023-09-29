@@ -211,6 +211,7 @@ def copy_content(expanded_source_directory, expanded_destination_directory):
 def create_and_merge_pr():
     pr_title = "Update snippet code from " + get_current_date()
     os.system("gh pr create --title '" + pr_title + "' --body '""'")
+    os.system("gh pr merge --merge --delete-branch")
 
 # Script ===============================================================================================================
 
@@ -226,5 +227,5 @@ copy_content(expanded_source_directory, expanded_destination_directory)
 # Commit and push changes
 push_changes()
 
-# Create a pull request
+# Create and merge a pull request
 create_and_merge_pr()
