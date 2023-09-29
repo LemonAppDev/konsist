@@ -6,6 +6,7 @@ import com.lemonappdev.konsist.core.util.ReceiverUtil
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
+import sun.reflect.generics.tree.ReturnType
 import kotlin.reflect.KClass
 
 internal interface KoReturnTypeProviderCore :
@@ -21,6 +22,16 @@ internal interface KoReturnTypeProviderCore :
 
     override val returnType: KoTypeDeclaration?
         get() = ReceiverUtil.getType(getTypeReferences(), ktFunction.isExtensionDeclaration(), this)
+
+    override val hasReturnValue: Boolean
+        get() {
+            val hasBlockBody = ktFunction.hasBlockBody()
+            return if(!hasBlockBody) {
+                ktFunction.children.filterIsInstance<ReturnType>().isNotEmpty()
+            } else {
+                returnType?.name != "Unit"
+            }
+        }
 
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReturnType()"))
     override val hasReturnType: Boolean

@@ -13,6 +13,11 @@ interface KoReturnTypeProvider : KoBaseProvider {
     val returnType: KoTypeDeclaration?
 
     /**
+     * Whether declaration has a return value other than `Unit`.
+     */
+    val hasReturnValue: Boolean
+
+    /**
      * Whether this declaration has a return type.
      */
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReturnType()"))
