@@ -22,6 +22,22 @@ internal interface KoReturnTypeProviderCore :
     override val returnType: KoTypeDeclaration?
         get() = ReceiverUtil.getType(getTypeReferences(), ktFunction.isExtensionDeclaration(), this)
 
+    override val hasReturnValue: Boolean
+        get() = if (returnType != null) {
+            returnType?.name != "Unit"
+        } else if (ktFunction.hasBlockBody()) {
+            // Every function with block body and without declared type returns Unit
+            false
+        } else {
+            /*
+            We have no way of distinguishing between:
+            1) fun sampleFunction1() = println("some text") // returns Unit
+            2) fun sampleFunction2() = SampleClass() // returns SampleClass,
+            so we always return true.
+             */
+            true
+        }
+
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReturnType()"))
     override val hasReturnType: Boolean
         get() = ktFunction.hasDeclaredReturnType()
