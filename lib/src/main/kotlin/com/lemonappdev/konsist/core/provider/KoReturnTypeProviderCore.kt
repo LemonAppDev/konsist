@@ -6,7 +6,6 @@ import com.lemonappdev.konsist.core.util.ReceiverUtil
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
-import sun.reflect.generics.tree.ReturnType
 import kotlin.reflect.KClass
 
 internal interface KoReturnTypeProviderCore :
@@ -24,13 +23,19 @@ internal interface KoReturnTypeProviderCore :
         get() = ReceiverUtil.getType(getTypeReferences(), ktFunction.isExtensionDeclaration(), this)
 
     override val hasReturnValue: Boolean
-        get() {
-            val hasBlockBody = ktFunction.hasBlockBody()
-            return if(!hasBlockBody) {
-                ktFunction.children.filterIsInstance<ReturnType>().isNotEmpty()
-            } else {
-                returnType?.name != "Unit"
-            }
+        get() = if (returnType != null) {
+            returnType?.name != "Unit"
+        } else if (ktFunction.hasBlockBody()) {
+            // Every function with block body and without declared type returns Unit
+            false
+        } else {
+            /*
+            We have no way of distinguishing between:
+            1) fun sampleFunction1() = println("some text") // returns Unit
+            2) fun sampleFunction2() = SampleClass() // returns SampleClass,
+            so we always return true.
+            */
+            true
         }
 
     @Deprecated("Will be removed in v1.0.0", ReplaceWith("hasReturnType()"))
