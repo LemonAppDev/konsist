@@ -15,24 +15,25 @@ interface KoReturnTypeProvider : KoBaseProvider {
     /**
      * Indicates whether a declaration has a non-`Unit` return value.
      *
-     * If a declaration explicitly specifies a return type, [hasReturnValue] returns true only if the declared type is not `Unit`.
+     * - If a declaration explicitly specifies a return type, [hasReturnValue] returns true only if the declared type is not `Unit`.
      *
-     * For declarations without an explicit return type:
-     * 1) If the declaration has a block body, [hasReturnValue] always returns `false`.
+     * - For declarations without an explicit return type:
+     *      1) If the declaration has a block body, [hasReturnValue] always returns `false`.
      *
-     *    Example:
-     *    ```kotlin
-     *    fun sampleFunction() { "some text" } // Returns false
-     *    ```
+     *          Example:
+     *          ```kotlin
+     *          fun sampleFunction() { "some text" } // hasReturnValue == false
+     *          ```
      *
-     * 2) If the declaration has an expression body, [hasReturnValue] always returns `true`.
+     *      2) If the declaration has an expression body, [hasReturnValue] always returns `true`.
      *
-     *    Examples:
-     *    ```kotlin
-     *    fun sampleFunction1() = SampleClass()  // Returns true
+     *          Examples:
+     *          ```kotlin
+     *          fun sampleFunction1() = SampleClass()  // hasReturnValue == true
      *
-     *    fun sampleFunction2() = println("some text") // Returns true, even though it returns an `Unit`
-     *    ```
+     *          fun sampleFunction2() = println("some text") // hasReturnValue == true, because Konsist is not able to
+     *                                                       // determine value of the "println("some text")" expression
+     *       ```
      */
     val hasReturnValue: Boolean
 
