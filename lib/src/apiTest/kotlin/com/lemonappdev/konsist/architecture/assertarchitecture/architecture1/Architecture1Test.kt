@@ -14,9 +14,20 @@ class Architecture1Test {
         Konsist.scopeFromDirectory("lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture/architecture1/project")
 
     @Test
-    fun `passes when dependency is set that layers are independent`() {
+    fun `passes when dependency is set that layers are independent (scope)`() {
         // then
         scope
+            .assertArchitecture {
+                domain.dependsOnNothing()
+                presentation.dependsOnNothing()
+            }
+    }
+
+    @Test
+    fun `passes when dependency is set that layers are independent (files)`() {
+        // then
+        scope
+            .files
             .assertArchitecture {
                 domain.dependsOnNothing()
                 presentation.dependsOnNothing()

@@ -1,9 +1,11 @@
 package com.lemonappdev.konsist.core.verify
 
 import com.lemonappdev.konsist.api.architecture.Layer
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.api.declaration.KoImportDeclaration
 import com.lemonappdev.konsist.api.ext.list.withPackage
 import com.lemonappdev.konsist.core.architecture.DependencyRulesCore
+import com.lemonappdev.konsist.core.architecture.KoArchitectureFiles
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
 import com.lemonappdev.konsist.core.architecture.Status
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
@@ -12,66 +14,84 @@ import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.util.LocationUtil
 
+private fun validateAllLayersAreValid(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore) {
+    val isAllLayersValid = dependencyRules.allLayers
+        .all {
+            files
+                .withPackage(it.definedBy)
+                .isNotEmpty()
+        }
+
+    if (!isAllLayersValid) {
+        val layer = dependencyRules
+            .allLayers
+            .first {
+                files
+                    .withPackage(it.definedBy)
+                    .isEmpty()
+            }
+        throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
+    }
+}
+
+private fun validateLayersOnDependencyRules(dependencyRules: DependencyRulesCore) {
+    if (dependencyRules.allLayers.isEmpty()) {
+        throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")
+    }
+}
+
+private fun validateLayersContainingFailedFiles(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore) {
+    val failedFiles = mutableListOf<FailedFiles>()
+
+    dependencyRules
+        .dependencies
+        .forEach { (layer, layers) ->
+            val otherLayers = (dependencyRules.allLayers - layers)
+
+            files
+                .withPackage(layer.definedBy)
+                .onEach {
+                    otherLayers.forEach { otherLayer ->
+                        val imports = it.imports.filter { import ->
+                            LocationUtil.resideInLocation(otherLayer.definedBy, import.name)
+                        }
+
+                        if (imports.isNotEmpty()) {
+                            failedFiles += FailedFiles(it.path, layer, otherLayer.name, imports)
+                        }
+                    }
+                }
+        }
+
+    if (failedFiles.isNotEmpty()) {
+        throw KoCheckFailedException(
+            getCheckFailedMessages(
+                failedFiles.distinct(),
+                dependencyRules.dependencies,
+                dependencyRules.statuses,
+            ),
+        )
+    }
+}
+
+private fun validateLayers(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore) {
+    validateLayersOnDependencyRules(dependencyRules = dependencyRules)
+    validateAllLayersAreValid(files = files, dependencyRules = dependencyRules)
+    validateLayersContainingFailedFiles(files = files, dependencyRules = dependencyRules)
+}
+
+internal fun KoArchitectureFiles.assert() {
+    val dependencyRules = this.dependencyRules as DependencyRulesCore
+    validateLayers(this.files, dependencyRules)
+}
+
 @Suppress("detekt.ThrowsCount")
 internal fun KoArchitectureScope.assert() {
     try {
         val files = this.koScope.files
         val dependencyRules = this.dependencyRules as DependencyRulesCore
-
-        if (dependencyRules.allLayers.isEmpty()) {
-            throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")
-        }
-
-        val isAllLayersValid = dependencyRules.allLayers
-            .all {
-                files
-                    .withPackage(it.definedBy)
-                    .isNotEmpty()
-            }
-
-        if (!isAllLayersValid) {
-            val layer = dependencyRules
-                .allLayers
-                .first {
-                    files
-                        .withPackage(it.definedBy)
-                        .isEmpty()
-                }
-            throw KoPreconditionFailedException("Layer ${layer.name} doesn't contain any files.")
-        }
-
-        val failedFiles = mutableListOf<FailedFiles>()
-
-        dependencyRules
-            .dependencies
-            .forEach { (layer, layers) ->
-                val otherLayers = (dependencyRules.allLayers - layers)
-
-                files
-                    .withPackage(layer.definedBy)
-                    .onEach {
-                        otherLayers.forEach { otherLayer ->
-                            val imports = it.imports.filter { import ->
-                                LocationUtil.resideInLocation(otherLayer.definedBy, import.name)
-                            }
-
-                            if (imports.isNotEmpty()) {
-                                failedFiles += FailedFiles(it.path, layer, otherLayer.name, imports)
-                            }
-                        }
-                    }
-            }
-
-        if (failedFiles.isNotEmpty()) {
-            throw KoCheckFailedException(
-                getCheckFailedMessages(
-                    failedFiles.distinct(),
-                    dependencyRules.dependencies,
-                    dependencyRules.statuses,
-                ),
-            )
-        }
-    } catch (e: KoException) {
+        validateLayers(files, dependencyRules)
+     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
         throw KoInternalException(e.message.orEmpty(), e)
