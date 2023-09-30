@@ -22,10 +22,6 @@ class JUnitSnippets {
             .scopeFromProject()
             .classes()
             .functions()
-            .assertFalse {
-                it.annotations.any {
-                    annotation -> annotation.fullyQualifiedName == "org.junit.Test"
-                }
-            }
+            .assertFalse { it.hasAnnotationWithName("org.junit.Test") }
     }
 }
