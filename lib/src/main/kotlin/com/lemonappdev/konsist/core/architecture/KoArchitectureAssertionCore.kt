@@ -26,10 +26,12 @@ class KoArchitectureAssertionCore : KoArchitectureAssertion {
         KoArchitectureFiles(dependencies, this).assert()
     }
 
-
     override fun architecture(dependencies: DependencyRules.() -> Unit): DependencyRules =
         instanceDependencyRules(dependencies = dependencies)
 
+    /**
+     * Obtain the dependency rules from dependencies literal function
+     */
     private fun instanceDependencyRules(dependencies: DependencyRules.() -> Unit): DependencyRules {
         val dependencyRules = DependencyRulesCore()
         dependencies(dependencyRules)

@@ -35,7 +35,7 @@ class Architecture1Test {
     }
 
     @Test
-    fun `passes when dependency is set that layers are independent when architecture is passed as parameter`() {
+    fun `passes when dependency is set that layers are independent when architecture is passed as parameter (scope)`() {
         // given
         val koArchitecture = architecture {
             domain.dependsOnNothing()
@@ -44,5 +44,17 @@ class Architecture1Test {
 
         // then
         scope.assertArchitecture(koArchitecture)
+    }
+
+    @Test
+    fun `passes when dependency is set that layers are independent when architecture is passed as parameter (files)`() {
+        // given
+        val koArchitecture = architecture {
+            domain.dependsOnNothing()
+            presentation.dependsOnNothing()
+        }
+
+        // then
+        scope.files.assertArchitecture(koArchitecture)
     }
 }
