@@ -23,7 +23,7 @@ class Architecture2Test {
     )
 
     @Test
-    fun `passes when dependency is set that presentation layer is depend on domain layer`() {
+    fun `passes when dependency is set that presentation layer is depend on domain layer (scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -33,7 +33,18 @@ class Architecture2Test {
     }
 
     @Test
-    fun `passes when dependency is set that presentation layer is depend on domain layer and architecture is passed as parameter`() {
+    fun `passes when dependency is set that presentation layer is depend on domain layer (files)`() {
+        // then
+        scope
+            .files
+            .assertArchitecture {
+                domain.dependsOnNothing()
+                presentation.dependsOn(domain)
+            }
+    }
+
+    @Test
+    fun `passes when dependency is set that presentation layer is depend on domain layer and architecture is passed as parameter (scope)`() {
         // given
         val architecture = architecture {
             domain.dependsOnNothing()
@@ -45,7 +56,19 @@ class Architecture2Test {
     }
 
     @Test
-    fun `fails when dependency is set that domain layer is depend on presentation layer`() {
+    fun `passes when dependency is set that presentation layer is depend on domain layer and architecture is passed as parameter (files)`() {
+        // given
+        val architecture = architecture {
+            domain.dependsOnNothing()
+            presentation.dependsOn(domain)
+        }
+
+        // then
+        scope.files.assertArchitecture(architecture)
+    }
+
+    @Test
+    fun `fails when dependency is set that domain layer is depend on presentation layer (scope)`() {
         // then
         try {
             scope.assertArchitecture {
@@ -67,7 +90,29 @@ class Architecture2Test {
     }
 
     @Test
-    fun `fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter`() {
+    fun `fails when dependency is set that domain layer is depend on presentation layer (files)`() {
+        // then
+        try {
+            scope.files.assertArchitecture {
+                presentation.dependsOnNothing()
+                domain.dependsOn(presentation)
+            }
+        } catch (e: KoCheckFailedException) {
+            e.message?.shouldBeEqualTo(
+                "'fails when dependency is set that domain layer is depend on presentation layer' test has failed.\n" +
+                        "Presentation depends on nothing assertion failure:\n" +
+                        "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture" +
+                        "/architecture2/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
+                        "depends on Domain layer, imports:\n" +
+                        "\tcom.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain." +
+                        "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+            ) ?: throw e
+        }
+    }
+
+    @Test
+    fun `fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter (scope)`() {
         // given
         val architecture = architecture {
             presentation.dependsOnNothing()
@@ -88,6 +133,32 @@ class Architecture2Test {
                     "\tcom.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain." +
                     "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
                     "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt:3:1)",
+            ) ?: throw e
+        }
+    }
+
+    @Test
+    fun `fails when dependency is set that domain layer is depend on presentation layer and architecture is passed as parameter (files)`() {
+        // given
+        val architecture = architecture {
+            presentation.dependsOnNothing()
+            domain.dependsOn(presentation)
+        }
+
+        // then
+        try {
+            scope.files.assertArchitecture(architecture)
+        } catch (e: KoCheckFailedException) {
+            e.message?.shouldBeEqualTo(
+                "'fails when dependency is set that domain layer is depend on presentation layer and " +
+                        "architecture is passed as parameter' test has failed.\n" +
+                        "Presentation depends on nothing assertion failure:\n" +
+                        "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture" +
+                        "/architecture2/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
+                        "depends on Domain layer, imports:\n" +
+                        "\tcom.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain." +
+                        "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt:3:1)",
             ) ?: throw e
         }
     }

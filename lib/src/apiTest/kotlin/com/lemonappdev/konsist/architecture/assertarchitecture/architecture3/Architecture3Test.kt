@@ -19,7 +19,7 @@ class Architecture3Test {
     )
 
     @Test
-    fun `passes when dependency is set that presentation and domain layers are dependent on each other`() {
+    fun `passes when dependency is set that presentation and domain layers are dependent on each other (scope)`() {
         // then
         scope
             .assertArchitecture {
@@ -29,7 +29,18 @@ class Architecture3Test {
     }
 
     @Test
-    fun `passes when dependency is set that two layers are dependent on each other and architecture is passed as parameter`() {
+    fun `passes when dependency is set that presentation and domain layers are dependent on each other (files)`() {
+        // then
+        scope
+            .files
+            .assertArchitecture {
+                domain.dependsOn(presentation)
+                presentation.dependsOn(domain)
+            }
+    }
+
+    @Test
+    fun `passes when dependency is set that two layers are dependent on each other and architecture is passed as parameter (scope)`() {
         // given
         val architecture = architecture {
             domain.dependsOn(presentation)
@@ -38,5 +49,17 @@ class Architecture3Test {
 
         // then
         scope.assertArchitecture(architecture)
+    }
+
+    @Test
+    fun `passes when dependency is set that two layers are dependent on each other and architecture is passed as parameter (files)`() {
+        // given
+        val architecture = architecture {
+            domain.dependsOn(presentation)
+            presentation.dependsOn(domain)
+        }
+
+        // then
+        scope.files.assertArchitecture(architecture)
     }
 }
