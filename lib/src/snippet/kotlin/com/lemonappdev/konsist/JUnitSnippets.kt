@@ -23,8 +23,8 @@ class JUnitSnippets {
             .classes()
             .functions()
             .assertFalse {
-                it.annotations.any {
-                    annotation -> annotation.fullyQualifiedName == "org.junit.Test"
+                it.annotations.any { annotation ->
+                    annotation.fullyQualifiedName == "org.junit.Test"
                 }
             }
     }
