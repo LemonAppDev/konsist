@@ -41,7 +41,7 @@ internal fun KoArchitectureFiles.assert(): Unit {
 }
 
 @Suppress("detekt.ThrowsCount")
-internal fun KoArchitectureScope.assert(): Unit{
+internal fun KoArchitectureScope.assert(): Unit {
     try {
         val files = this.koScope.files
         val dependencyRules = this.dependencyRules as DependencyRulesCore

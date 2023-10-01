@@ -127,7 +127,7 @@ class Architecture4Test {
         } catch (e: KoCheckFailedException) {
             assertSoftly {
                 e.message?.shouldContain(
-                    "'fails when bad dependency is set and architecture is passed as parameter (scope)' test has failed.\n"
+                    "'fails when bad dependency is set and architecture is passed as parameter (scope)' test has failed.\n",
                 )
                 e.message?.shouldContain("Presentation depends on Data assertion failure:\n")
             }
@@ -151,7 +151,7 @@ class Architecture4Test {
         } catch (e: KoCheckFailedException) {
             assertSoftly {
                 e.message?.shouldContain(
-                    "'fails when bad dependency is set and architecture is passed as parameter (files)' test has failed.\n"
+                    "'fails when bad dependency is set and architecture is passed as parameter (files)' test has failed.\n",
                 )
                 e.message?.shouldContain("Presentation depends on Data assertion failure:\n")
             }
