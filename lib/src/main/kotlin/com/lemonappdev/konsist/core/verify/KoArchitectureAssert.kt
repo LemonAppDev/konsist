@@ -14,16 +14,52 @@ import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.util.LocationUtil
 
+@Suppress("detekt.ThrowsCount")
 internal fun KoArchitectureFiles.assert(): Unit {
-    val dependencyRules = this.dependencyRules as DependencyRulesCore
-    validateLayers(this.files, dependencyRules)
+    try {
+        val dependencyRules = this.dependencyRules as DependencyRulesCore
+
+        validateLayersOnDependencyRules(dependencyRules = dependencyRules)
+        validateAllLayersAreValid(files = this.files, dependencyRules = dependencyRules)
+
+        val failedFiles = validateLayersContainingFailedFiles(this.files, dependencyRules)
+
+        if (failedFiles.isNotEmpty()) {
+            throw KoCheckFailedException(
+                getCheckFailedMessages(
+                    failedFiles.distinct(),
+                    dependencyRules.dependencies,
+                    dependencyRules.statuses,
+                ),
+            )
+        }
+    } catch (e: KoException) {
+        throw e
+    } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
+        throw KoInternalException(e.message.orEmpty(), e)
+    }
 }
 
-internal fun KoArchitectureScope.assert(): Unit {
+@Suppress("detekt.ThrowsCount")
+internal fun KoArchitectureScope.assert(): Unit{
     try {
         val files = this.koScope.files
         val dependencyRules = this.dependencyRules as DependencyRulesCore
-        validateLayers(files, dependencyRules)
+
+        validateLayersOnDependencyRules(dependencyRules = dependencyRules)
+        validateAllLayersAreValid(files = files, dependencyRules = dependencyRules)
+
+        val failedFiles = validateLayersContainingFailedFiles(files = files, dependencyRules = dependencyRules)
+
+        if (failedFiles.isNotEmpty()) {
+            throw KoCheckFailedException(
+                getCheckFailedMessages(
+                    failedFiles.distinct(),
+                    dependencyRules.dependencies,
+                    dependencyRules.statuses,
+                ),
+            )
+        }
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
@@ -75,12 +111,12 @@ private fun validateLayersOnDependencyRules(dependencyRules: DependencyRulesCore
 /**
  * Validate layers do not contain [FailedFiles]
  *
- * * @param files within the scope
+ * @param files within the scope
  * @param dependencyRules dependencies of the architecture.
  *
- * @throws KoCheckFailedException contains [FailedFiles]
+ * @return List<FailedFiles>
  */
-private fun validateLayersContainingFailedFiles(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore): Unit {
+private fun validateLayersContainingFailedFiles(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore): List<FailedFiles> {
     val failedFiles = mutableListOf<FailedFiles>()
 
     dependencyRules
@@ -102,22 +138,7 @@ private fun validateLayersContainingFailedFiles(files: List<KoFileDeclaration>, 
                     }
                 }
         }
-
-    if (failedFiles.isNotEmpty()) {
-        throw KoCheckFailedException(
-            getCheckFailedMessages(
-                failedFiles = failedFiles.distinct(),
-                dependencies = dependencyRules.dependencies,
-                statuses = dependencyRules.statuses,
-            ),
-        )
-    }
-}
-
-private fun validateLayers(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore): Unit {
-    validateLayersOnDependencyRules(dependencyRules = dependencyRules)
-    validateAllLayersAreValid(files = files, dependencyRules = dependencyRules)
-    validateLayersContainingFailedFiles(files = files, dependencyRules = dependencyRules)
+    return failedFiles
 }
 
 private data class FailedFiles(
