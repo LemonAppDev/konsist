@@ -60,6 +60,8 @@ class Architecture3Test {
         }
 
         // then
-        scope.files.assertArchitecture(architecture)
+        scope
+            .files
+            .assertArchitecture(architecture)
     }
 }

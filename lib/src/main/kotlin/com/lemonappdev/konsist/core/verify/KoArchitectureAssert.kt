@@ -14,17 +14,17 @@ import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import com.lemonappdev.konsist.core.util.LocationUtil
 
-internal fun KoArchitectureFiles.assert() {
+internal fun KoArchitectureFiles.assert(): Unit {
     val dependencyRules = this.dependencyRules as DependencyRulesCore
     validateLayers(this.files, dependencyRules)
 }
 
-internal fun KoArchitectureScope.assert() {
+internal fun KoArchitectureScope.assert(): Unit {
     try {
         val files = this.koScope.files
         val dependencyRules = this.dependencyRules as DependencyRulesCore
         validateLayers(files, dependencyRules)
-     } catch (e: KoException) {
+    } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
         throw KoInternalException(e.message.orEmpty(), e)
@@ -39,7 +39,7 @@ internal fun KoArchitectureScope.assert() {
  *
  * @throws KoPreconditionFailedException Layers do not contain files
  */
-private fun validateAllLayersAreValid(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore) {
+private fun validateAllLayersAreValid(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore): Unit {
     val isAllLayersValid = dependencyRules.allLayers
         .all {
             files
@@ -66,7 +66,7 @@ private fun validateAllLayersAreValid(files: List<KoFileDeclaration>, dependency
  *
  * @throws KoPreconditionFailedException Architecture doesn't contain layers or dependencies
  */
-private fun validateLayersOnDependencyRules(dependencyRules: DependencyRulesCore) {
+private fun validateLayersOnDependencyRules(dependencyRules: DependencyRulesCore): Unit {
     if (dependencyRules.allLayers.isEmpty()) {
         throw KoPreconditionFailedException("Architecture doesn't contain layers or dependencies.")
     }
@@ -80,7 +80,7 @@ private fun validateLayersOnDependencyRules(dependencyRules: DependencyRulesCore
  *
  * @throws KoCheckFailedException contains [FailedFiles]
  */
-private fun validateLayersContainingFailedFiles(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore) {
+private fun validateLayersContainingFailedFiles(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore): Unit {
     val failedFiles = mutableListOf<FailedFiles>()
 
     dependencyRules
@@ -114,7 +114,7 @@ private fun validateLayersContainingFailedFiles(files: List<KoFileDeclaration>, 
     }
 }
 
-private fun validateLayers(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore) {
+private fun validateLayers(files: List<KoFileDeclaration>, dependencyRules: DependencyRulesCore): Unit {
     validateLayersOnDependencyRules(dependencyRules = dependencyRules)
     validateAllLayersAreValid(files = files, dependencyRules = dependencyRules)
     validateLayersContainingFailedFiles(files = files, dependencyRules = dependencyRules)

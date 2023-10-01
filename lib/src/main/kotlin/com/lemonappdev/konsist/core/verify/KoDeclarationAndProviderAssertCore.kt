@@ -212,7 +212,7 @@ private fun getResult(
     positiveCheck: Boolean,
     suppressName: String,
     additionalMessage: String?,
-) {
+): Unit {
     val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
 
     if (!allChecksPassed) {

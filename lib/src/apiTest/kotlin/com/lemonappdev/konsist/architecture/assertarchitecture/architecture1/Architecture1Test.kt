@@ -55,6 +55,8 @@ class Architecture1Test {
         }
 
         // then
-        scope.files.assertArchitecture(koArchitecture)
+        scope
+            .files
+            .assertArchitecture(koArchitecture)
     }
 }

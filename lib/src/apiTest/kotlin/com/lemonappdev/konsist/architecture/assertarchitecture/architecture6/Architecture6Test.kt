@@ -28,7 +28,9 @@ class Architecture6Test {
     fun `throws exception when layer contains no files (files)`() {
         // when
         val func = {
-            scope.files.assertArchitecture { layer.dependsOnNothing() }
+            scope
+                .files
+                .assertArchitecture { layer.dependsOnNothing() }
         }
 
         // then
@@ -50,7 +52,9 @@ class Architecture6Test {
     fun `throws exception when architecture contains no layers (files)`() {
         // when
         val func = {
-            scope.files.assertArchitecture { }
+            scope
+                .files
+                .assertArchitecture { }
         }
 
         // then
@@ -72,7 +76,9 @@ class Architecture6Test {
     fun `throws exception when architecture contains no dependencies (files)`() {
         // when
         val func = {
-            scope.files.assertArchitecture { layer }
+            scope
+                .files
+                .assertArchitecture { layer }
         }
 
         // then

@@ -29,14 +29,14 @@ interface KoArchitectureAssertion {
      * @param dependencies The function literal with receiver [DependencyRules] that allows configuring the dependencies
      * of the architecture.
      */
-    fun List<KoFileDeclaration>.assertArchitecture(dependencies: DependencyRules.() -> Unit)
+    fun List<KoFileDeclaration>.assertArchitecture(dependencies: DependencyRules.() -> Unit): Unit
 
     /**
      * Asserts the architecture (using files declared within the [KoScope]) with the specified [dependencies].
      *
      * @param dependencies The [DependencyRules] instance representing the configured dependencies of the architecture.
      */
-    fun List<KoFileDeclaration>.assertArchitecture(dependencies: DependencyRules)
+    fun List<KoFileDeclaration>.assertArchitecture(dependencies: DependencyRules): Unit
 
     /**
      * Creates and returns a [DependencyRules] instance representing the configured dependencies of the architecture,

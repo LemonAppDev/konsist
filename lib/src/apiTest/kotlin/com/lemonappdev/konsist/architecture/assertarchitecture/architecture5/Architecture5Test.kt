@@ -140,7 +140,9 @@ class Architecture5Test {
         }
 
         val sut = {
-            scope.files.assertArchitecture(architecture)
+            scope
+                .files
+                .assertArchitecture(architecture)
         }
 
         // then
