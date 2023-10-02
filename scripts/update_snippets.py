@@ -142,6 +142,11 @@ def read_file(file_path):
 
 # Write content to a file
 def write_file(directory, file_path, content):
+    if os.path.exists(directory):
+        print(f"The directory '{directory}' exists.")
+    else:
+        print(f"The directory '{directory}' does not exist.")
+
     # Ensure the directory exists; create it if it doesn't
     os.makedirs(os.path.dirname(directory), exist_ok=True)
 
