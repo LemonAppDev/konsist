@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.api.provider.KoModuleProvider
 import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
+import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
 /**
  * Represents a Kotlin getter declaration.
@@ -23,4 +24,5 @@ interface KoGetterDeclaration :
     KoPathProvider,
     KoModuleProvider,
     KoSourceSetProvider,
-    KoTextProvider
+    KoTextProvider,
+    KoVisibilityModifierProvider

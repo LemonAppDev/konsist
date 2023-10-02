@@ -13,9 +13,14 @@ import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
 import com.lemonappdev.konsist.core.provider.KoPathProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
+import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import org.jetbrains.kotlin.psi.KtDeclarationWithBody
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtPropertyAccessor
+import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
+import org.jetbrains.kotlin.psi.psiUtil.isProtected
+import org.jetbrains.kotlin.psi.psiUtil.isPublic
 
 internal class KoGetterDeclarationCore private constructor(
     private val ktPropertyAccessor: KtPropertyAccessor,
@@ -30,12 +35,16 @@ internal class KoGetterDeclarationCore private constructor(
     KoPathProviderCore,
     KoModuleProviderCore,
     KoSourceSetProviderCore,
-    KoTextProviderCore {
+    KoTextProviderCore,
+    KoVisibilityModifierProviderCore {
     override val ktElement: KtElement by lazy { ktPropertyAccessor }
 
     override val psiElement: PsiElement by lazy { ktPropertyAccessor }
 
     override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktPropertyAccessor }
+
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktPropertyAccessor }
+
     override fun toString(): String = locationWithText
 
     internal companion object {

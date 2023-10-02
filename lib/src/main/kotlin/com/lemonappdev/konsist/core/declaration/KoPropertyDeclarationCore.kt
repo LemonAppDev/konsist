@@ -43,6 +43,7 @@ import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -98,6 +99,8 @@ internal class KoPropertyDeclarationCore private constructor(
     KoConstModifierProviderCore,
     KoGetterProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
+
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
 

@@ -48,6 +48,7 @@ import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtDeclarationWithBody
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunction
+import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoFunctionDeclarationCore private constructor(
@@ -93,6 +94,8 @@ internal class KoFunctionDeclarationCore private constructor(
     KoActualModifierProviderCore,
     KoExpectModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
+
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
 
