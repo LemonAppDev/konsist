@@ -3,7 +3,6 @@ package com.lemonappdev.konsist.core.declaration
 import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoGetterDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
-import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
@@ -20,9 +19,6 @@ import org.jetbrains.kotlin.psi.KtDeclarationWithBody
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtPropertyAccessor
-import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
-import org.jetbrains.kotlin.psi.psiUtil.isProtected
-import org.jetbrains.kotlin.psi.psiUtil.isPublic
 
 internal class KoGetterDeclarationCore private constructor(
     private val ktPropertyAccessor: KtPropertyAccessor,
