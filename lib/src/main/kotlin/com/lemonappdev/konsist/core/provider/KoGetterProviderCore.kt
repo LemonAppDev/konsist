@@ -1,13 +1,10 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoGetterDeclaration
-import com.lemonappdev.konsist.api.provider.KoBodyProvider
 import com.lemonappdev.konsist.api.provider.KoGetterProvider
 import com.lemonappdev.konsist.core.declaration.KoGetterDeclarationCore
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
-import org.jetbrains.kotlin.psi.KtDeclarationWithBody
 import org.jetbrains.kotlin.psi.KtPropertyAccessor
-import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 internal interface KoGetterProviderCore : KoGetterProvider, KoBaseProviderCore, KoContainingDeclarationProviderCore {
     val ktCallableDeclaration: KtCallableDeclaration

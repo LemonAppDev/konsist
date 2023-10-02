@@ -45,10 +45,8 @@ import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtProperty
-import org.jetbrains.kotlin.psi.KtPropertyAccessor
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.hasBody
-import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 internal class KoPropertyDeclarationCore private constructor(
     /*
