@@ -1,0 +1,5 @@
+val sampleProperty: String
+    get() {
+        // Your code here
+        return ""
+    }
