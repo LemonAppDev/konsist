@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.verify.kodeclarationassert.assertnull
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.verify.assertNotNull
 import com.lemonappdev.konsist.api.verify.assertNull
-import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
@@ -90,7 +90,7 @@ class AssertNullOnSingleDeclarationTest {
         val func = { sut.assertNull() }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -105,7 +105,7 @@ class AssertNullOnSingleDeclarationTest {
         val func = { sut.assertNotNull() }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test

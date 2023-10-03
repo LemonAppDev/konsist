@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
 import com.lemonappdev.konsist.api.verify.assertEmpty
 import com.lemonappdev.konsist.api.verify.assertNotEmpty
-import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
@@ -214,7 +214,7 @@ class AssertEmptyOnProviderListTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -230,7 +230,7 @@ class AssertEmptyOnProviderListTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -255,7 +255,7 @@ class AssertEmptyOnProviderListTest {
         val func = { sut.assertEmpty(strict = true) }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -293,7 +293,7 @@ class AssertEmptyOnProviderListTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -331,7 +331,7 @@ class AssertEmptyOnProviderListTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -347,7 +347,7 @@ class AssertEmptyOnProviderListTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -7,7 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoKotlinTypeProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
 import com.lemonappdev.konsist.api.verify.assertNotNull
 import com.lemonappdev.konsist.api.verify.assertNull
-import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
 import org.junit.jupiter.api.Test
@@ -98,7 +98,7 @@ class AssertNullOnSingleProviderTest {
         val func = { sut.assertNull() }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -113,7 +113,7 @@ class AssertNullOnSingleProviderTest {
         val func = { sut.assertNotNull() }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
