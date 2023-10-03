@@ -16,6 +16,7 @@ import com.lemonappdev.konsist.core.declaration.KoInterfaceDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoObjectDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoPackageDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoPropertyDeclarationCore
+import com.lemonappdev.konsist.core.declaration.KoSecondaryConstructorDeclarationCore
 import com.lemonappdev.konsist.core.declaration.KoTypeAliasDeclarationCore
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtAnonymousInitializer
@@ -32,6 +33,7 @@ import org.jetbrains.kotlin.psi.KtImportList
 import org.jetbrains.kotlin.psi.KtObjectDeclaration
 import org.jetbrains.kotlin.psi.KtPackageDirective
 import org.jetbrains.kotlin.psi.KtProperty
+import org.jetbrains.kotlin.psi.KtSecondaryConstructor
 import org.jetbrains.kotlin.psi.KtTypeAlias
 
 internal object KoDeclarationProviderCoreUtil {
@@ -168,6 +170,7 @@ internal object KoDeclarationProviderCoreUtil {
         containingDeclaration: KoContainingDeclarationProvider,
     ): KoBaseDeclaration? = when {
         ktDeclaration is KtEnumEntry -> KoEnumConstantDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
+        ktDeclaration is KtSecondaryConstructor -> KoSecondaryConstructorDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtClass && !ktDeclaration.isInterface() -> KoClassDeclarationCore.getInstance(ktDeclaration, containingDeclaration)
         ktDeclaration is KtClass && ktDeclaration.isInterface() -> KoInterfaceDeclarationCore.getInstance(
             ktDeclaration,
