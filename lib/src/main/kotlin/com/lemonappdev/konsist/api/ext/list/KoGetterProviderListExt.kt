@@ -1,6 +1,13 @@
 package com.lemonappdev.konsist.api.ext.list
 
+import com.lemonappdev.konsist.api.declaration.KoGetterDeclaration
 import com.lemonappdev.konsist.api.provider.KoGetterProvider
+
+/**
+ * List containing getter declarations.
+ */
+val <T : KoGetterProvider> List<T>.getters: List<KoGetterDeclaration>
+    get() = mapNotNull { it.getter }
 
 /**
  * List containing declarations with getter.
