@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.api.provider.KoPrimaryConstructorProvider
 import com.lemonappdev.konsist.api.provider.KoTypeAliasProvider
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
-import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
@@ -186,7 +186,7 @@ class AssertTrueOnSingleProviderTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -217,7 +217,7 @@ class AssertTrueOnSingleProviderTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -246,7 +246,7 @@ class AssertTrueOnSingleProviderTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -275,7 +275,7 @@ class AssertTrueOnSingleProviderTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     private fun getSnippetFile(fileName: String) =

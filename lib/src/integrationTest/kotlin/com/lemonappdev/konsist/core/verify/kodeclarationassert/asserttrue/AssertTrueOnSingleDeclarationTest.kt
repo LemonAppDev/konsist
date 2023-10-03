@@ -3,7 +3,7 @@ package com.lemonappdev.konsist.core.verify.kodeclarationassert.asserttrue
 import com.lemonappdev.konsist.TestSnippetProvider
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
-import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldThrow
@@ -241,7 +241,7 @@ class AssertTrueOnSingleDeclarationTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -272,7 +272,7 @@ class AssertTrueOnSingleDeclarationTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -299,7 +299,7 @@ class AssertTrueOnSingleDeclarationTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     @Test
@@ -330,7 +330,7 @@ class AssertTrueOnSingleDeclarationTest {
         }
 
         // then
-        func shouldThrow KoCheckFailedException::class
+        func shouldThrow KoAssertionFailedException::class
     }
 
     private fun getSnippetFile(fileName: String) =
