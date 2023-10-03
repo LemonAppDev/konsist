@@ -48,7 +48,7 @@ class KoGetterDeclarationForKoLocalFunctionProviderTest {
             it?.hasLocalFunctionsWithAllNames("sampleLocalFunction1", "otherLocalFunction") shouldBeEqualTo false
             it?.hasLocalFunction { function -> function.name == "sampleLocalFunction1" } shouldBeEqualTo true
             it?.hasLocalFunction { function -> function.name == "otherLocalFunction" } shouldBeEqualTo false
-            it?.hasAllLocalFunctions { function
+            it?.hasAllLocalFunctions { function,
                 ->
                 function.name.endsWith("2") || function.name == "sampleLocalFunction1"
             }.shouldBeEqualTo(true)

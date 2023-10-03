@@ -4,9 +4,6 @@ import com.intellij.psi.PsiElement
 import com.lemonappdev.konsist.api.declaration.KoBaseDeclaration
 import com.lemonappdev.konsist.api.declaration.KoGetterDeclaration
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoLocalClassProvider
-import com.lemonappdev.konsist.api.provider.KoLocalDeclarationProvider
-import com.lemonappdev.konsist.api.provider.KoLocalFunctionProvider
 import com.lemonappdev.konsist.core.cache.KoDeclarationCache
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoBodyProviderCore

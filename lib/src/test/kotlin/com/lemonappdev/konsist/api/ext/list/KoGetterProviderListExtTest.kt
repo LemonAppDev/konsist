@@ -1,9 +1,6 @@
 package com.lemonappdev.konsist.api.ext.list
 
-import com.lemonappdev.konsist.api.declaration.KoClassDeclaration
 import com.lemonappdev.konsist.api.declaration.KoGetterDeclaration
-import com.lemonappdev.konsist.api.declaration.KoInterfaceDeclaration
-import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoGetterProvider
 import io.mockk.every
 import io.mockk.mockk
