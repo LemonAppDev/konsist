@@ -1,15 +1,15 @@
 package com.lemonappdev.konsist.core.provider
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
+import com.lemonappdev.konsist.api.provider.KoReturnProvider
 import com.lemonappdev.konsist.core.util.ReceiverUtil
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtTypeReference
 import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import kotlin.reflect.KClass
 
-internal interface KoReturnTypeProviderCore :
-    KoReturnTypeProvider,
+internal interface KoReturnProviderCore :
+    KoReturnProvider,
     KoContainingDeclarationProviderCore,
     KoKDocProviderCore,
     KoBaseProviderCore {

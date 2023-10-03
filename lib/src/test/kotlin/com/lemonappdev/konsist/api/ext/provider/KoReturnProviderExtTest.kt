@@ -2,22 +2,22 @@ package com.lemonappdev.konsist.api.ext.provider
 
 import com.lemonappdev.konsist.api.KoKDocTag
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
-import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
+import com.lemonappdev.konsist.api.provider.KoReturnProvider
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoReturnTypeProviderExtTest {
-    private interface SampleTestReturnTypeDeclaration :
-        KoReturnTypeProvider,
+class KoReturnProviderExtTest {
+    private interface SampleTestReturnDeclaration :
+        KoReturnProvider,
         KoKDocProvider
 
     @Test
     fun `hasValidKDocReturnTag() returns false when declaration not implement KoKDocProvider`() {
         // given
-        val declaration: KoReturnTypeProvider = mockk {
+        val declaration: KoReturnProvider = mockk {
             every { returnType } returns mockk()
             every { returnType?.name } returns "Boolean"
         }
@@ -32,7 +32,7 @@ class KoReturnTypeProviderExtTest {
     @Test
     fun `hasValidKDocReturnTag() calls hasTags method`() {
         // given
-        val declaration: SampleTestReturnTypeDeclaration = mockk {
+        val declaration: SampleTestReturnDeclaration = mockk {
             every { returnType } returns mockk()
             every { returnType?.name } returns "Boolean"
             every { kDoc?.hasTags(KoKDocTag.RETURN) } returns true
