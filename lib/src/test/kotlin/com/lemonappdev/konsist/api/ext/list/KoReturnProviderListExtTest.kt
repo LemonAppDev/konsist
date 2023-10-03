@@ -1,7 +1,7 @@
 package com.lemonappdev.konsist.api.ext.list
 
 import com.lemonappdev.konsist.api.declaration.KoTypeDeclaration
-import com.lemonappdev.konsist.api.provider.KoReturnTypeProvider
+import com.lemonappdev.konsist.api.provider.KoReturnProvider
 import com.lemonappdev.konsist.testdata.SampleType1
 import com.lemonappdev.konsist.testdata.SampleType2
 import io.mockk.every
@@ -9,19 +9,19 @@ import io.mockk.mockk
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoReturnTypeProviderListExtTest {
+class KoReturnProviderListExtTest {
     @Test
     fun `returnTypes returns return types from all declarations`() {
         // given
         val returnType1: KoTypeDeclaration = mockk()
         val returnType2: KoTypeDeclaration = mockk()
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { returnType } returns returnType1
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { returnType } returns returnType2
         }
-        val declaration3: KoReturnTypeProvider = mockk {
+        val declaration3: KoReturnProvider = mockk {
             every { returnType } returns null
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
@@ -36,10 +36,10 @@ class KoReturnTypeProviderListExtTest {
     @Test
     fun `withReturnValue() returns declaration with return value other than Unit type`() {
         // given
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { hasReturnValue } returns true
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { hasReturnValue } returns false
         }
         val declarations = listOf(declaration1, declaration2)
@@ -54,10 +54,10 @@ class KoReturnTypeProviderListExtTest {
     @Test
     fun `withoutReturnValue() returns declaration with Unit return value`() {
         // given
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { hasReturnValue } returns true
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { hasReturnValue } returns false
         }
         val declarations = listOf(declaration1, declaration2)
@@ -72,10 +72,10 @@ class KoReturnTypeProviderListExtTest {
     @Test
     fun `withReturnType() returns declaration with any return type`() {
         // given
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { hasReturnType() } returns true
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { hasReturnType() } returns false
         }
         val declarations = listOf(declaration1, declaration2)
@@ -98,13 +98,13 @@ class KoReturnTypeProviderListExtTest {
         val type2: KoTypeDeclaration = mockk {
             every { name } returns name2
         }
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { returnType } returns type1
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { returnType } returns type2
         }
-        val declaration3: KoReturnTypeProvider = mockk {
+        val declaration3: KoReturnProvider = mockk {
             every { returnType } returns null
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
@@ -122,13 +122,13 @@ class KoReturnTypeProviderListExtTest {
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val typeName3 = "SampleType3"
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { returnType?.name } returns typeName1
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { returnType?.name } returns typeName2
         }
-        val declaration3: KoReturnTypeProvider = mockk {
+        val declaration3: KoReturnProvider = mockk {
             every { returnType?.name } returns typeName3
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
@@ -143,10 +143,10 @@ class KoReturnTypeProviderListExtTest {
     @Test
     fun `withoutReturnType() returns declaration without any return type`() {
         // given
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { hasReturnType() } returns true
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { hasReturnType() } returns false
         }
         val declarations = listOf(declaration1, declaration2)
@@ -169,13 +169,13 @@ class KoReturnTypeProviderListExtTest {
         val type2: KoTypeDeclaration = mockk {
             every { name } returns name2
         }
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { returnType } returns type1
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { returnType } returns type2
         }
-        val declaration3: KoReturnTypeProvider = mockk {
+        val declaration3: KoReturnProvider = mockk {
             every { returnType } returns null
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
@@ -193,13 +193,13 @@ class KoReturnTypeProviderListExtTest {
         val typeName1 = "SampleType1"
         val typeName2 = "SampleType2"
         val typeName3 = "SampleType3"
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { returnType?.name } returns typeName1
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { returnType?.name } returns typeName2
         }
-        val declaration3: KoReturnTypeProvider = mockk {
+        val declaration3: KoReturnProvider = mockk {
             every { returnType?.name } returns typeName3
         }
         val declarations = listOf(declaration1, declaration2, declaration3)
@@ -214,10 +214,10 @@ class KoReturnTypeProviderListExtTest {
     @Test
     fun `withReturnTypeOf(KClass) returns declarations with given return types`() {
         // given
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { hasReturnTypeOf(SampleType1::class) } returns true
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { hasReturnTypeOf(SampleType1::class) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
@@ -232,15 +232,15 @@ class KoReturnTypeProviderListExtTest {
     @Test
     fun `withReturnTypeOf(KClass) returns declarations with one of given return types`() {
         // given
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { hasReturnTypeOf(SampleType1::class) } returns true
             every { hasReturnTypeOf(SampleType2::class) } returns false
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { hasReturnTypeOf(SampleType1::class) } returns false
             every { hasReturnTypeOf(SampleType2::class) } returns true
         }
-        val declaration3: KoReturnTypeProvider = mockk {
+        val declaration3: KoReturnProvider = mockk {
             every { hasReturnTypeOf(SampleType1::class) } returns false
             every { hasReturnTypeOf(SampleType2::class) } returns false
         }
@@ -256,10 +256,10 @@ class KoReturnTypeProviderListExtTest {
     @Test
     fun `withoutReturnTypeOf(KClass) returns declaration without given return type`() {
         // given
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { hasReturnTypeOf(SampleType1::class) } returns true
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { hasReturnTypeOf(SampleType1::class) } returns false
         }
         val declarations = listOf(declaration1, declaration2)
@@ -274,15 +274,15 @@ class KoReturnTypeProviderListExtTest {
     @Test
     fun `withoutReturnTypeOf(KClass) returns declaration without any of given return types`() {
         // given
-        val declaration1: KoReturnTypeProvider = mockk {
+        val declaration1: KoReturnProvider = mockk {
             every { hasReturnTypeOf(SampleType1::class) } returns true
             every { hasReturnTypeOf(SampleType2::class) } returns false
         }
-        val declaration2: KoReturnTypeProvider = mockk {
+        val declaration2: KoReturnProvider = mockk {
             every { hasReturnTypeOf(SampleType1::class) } returns false
             every { hasReturnTypeOf(SampleType2::class) } returns true
         }
-        val declaration3: KoReturnTypeProvider = mockk {
+        val declaration3: KoReturnProvider = mockk {
             every { hasReturnTypeOf(SampleType1::class) } returns false
             every { hasReturnTypeOf(SampleType2::class) } returns false
         }

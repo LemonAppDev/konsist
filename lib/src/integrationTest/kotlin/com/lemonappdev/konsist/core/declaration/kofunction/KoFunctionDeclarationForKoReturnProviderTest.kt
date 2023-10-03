@@ -6,7 +6,7 @@ import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.jupiter.api.Test
 
-class KoFunctionDeclarationForKoReturnTypeProviderTest {
+class KoFunctionDeclarationForKoReturnProviderTest {
     @Test
     fun `function-not-return-type`() {
         // given
@@ -176,5 +176,5 @@ class KoFunctionDeclarationForKoReturnTypeProviderTest {
     }
 
     private fun getSnippetFile(fileName: String) =
-        getSnippetKoScope("core/declaration/kofunction/snippet/forkoreturntypeprovider/", fileName)
+        getSnippetKoScope("core/declaration/kofunction/snippet/forkoreturnprovider/", fileName)
 }
