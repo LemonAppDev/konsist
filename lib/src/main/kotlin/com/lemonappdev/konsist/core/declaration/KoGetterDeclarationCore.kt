@@ -60,6 +60,8 @@ internal class KoGetterDeclarationCore private constructor(
         KoLocalDeclarationProviderCoreUtil.getKoLocalDeclarations(psiElements, this)
     }
 
+    override val hasPublicOrDefaultModifier: Boolean by lazy { !(hasPrivateModifier || hasProtectedModifier || hasInternalModifier) }
+
     override fun toString(): String = locationWithText
 
     internal companion object {
