@@ -1,6 +1,7 @@
 package com.lemonappdev.konsist.api.architecture
 
 import com.lemonappdev.konsist.api.container.KoScope
+import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 
 /**
  * An interface for asserting a KoArchitecture with its associated dependencies and configurations.
@@ -20,6 +21,22 @@ interface KoArchitectureAssertion {
      * @param dependencies The [DependencyRules] instance representing the configured dependencies of the architecture.
      */
     fun KoScope.assertArchitecture(dependencies: DependencyRules): Unit
+
+    /**
+     * Asserts the architecture (using files declared within the [KoScope]) with the specified [dependencies]
+     * defined as a function literal with receiver [DependencyRules].
+     *
+     * @param dependencies The function literal with receiver [DependencyRules] that allows configuring the dependencies
+     * of the architecture.
+     */
+    fun List<KoFileDeclaration>.assertArchitecture(dependencies: DependencyRules.() -> Unit): Unit
+
+    /**
+     * Asserts the architecture (using files declared within the [KoScope]) with the specified [dependencies].
+     *
+     * @param dependencies The [DependencyRules] instance representing the configured dependencies of the architecture.
+     */
+    fun List<KoFileDeclaration>.assertArchitecture(dependencies: DependencyRules): Unit
 
     /**
      * Creates and returns a [DependencyRules] instance representing the configured dependencies of the architecture,
