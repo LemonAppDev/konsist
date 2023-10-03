@@ -1,4 +1,6 @@
 val sampleProperty: String
     get() {
+        val sampleProperty = 0
+
         return ""
     }
