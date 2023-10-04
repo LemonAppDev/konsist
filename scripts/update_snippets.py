@@ -135,7 +135,7 @@ def get_current_date():
     return current_date.strftime("%Y-%m-%d")
 
 
-branch_name = "test-1"
+branch_name = get_current_date() + "-update-snippet-code"
 
 
 def create_git_branch():
