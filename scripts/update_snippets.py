@@ -242,10 +242,7 @@ def complete_summary_file(root, file_text):
 
     name_without_tab = snippet_name.strip()
 
-    print(name_without_tab)
-    print(name_without_tab in file_content)
-
-    if name_without_tab in file_content:
+    if not name_without_tab in file_content:
         text = "* [Snippets](inspiration/snippets/README.md)"
 
         # Find the position where you want to insert the new text
