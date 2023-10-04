@@ -5,7 +5,9 @@ import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architectu
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import io.kotest.assertions.throwables.shouldThrow
 import org.amshove.kluent.assertSoftly
+import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContain
 import org.junit.jupiter.api.Test
 
@@ -76,26 +78,27 @@ class Architecture4Test {
 
     @Test
     fun `fails when bad dependency is set (scope)`() {
-        // then
-        try {
+        // when
+        val sut = shouldThrow<KoCheckFailedException> {
             scope
                 .assertArchitecture {
                     data.dependsOnNothing()
                     presentation.dependsOn(data)
                     domain.dependsOn(data)
                 }
-        } catch (e: KoCheckFailedException) {
-            assertSoftly {
-                e.message?.shouldContain("'fails when bad dependency is set (scope)' test has failed.\n")
-                e.message?.shouldContain("Presentation depends on Data assertion failure:\n")
-            }
+        }
+
+        // then
+        assertSoftly(sut) {
+            message?.shouldContain("'fails when bad dependency is set (scope)' test has failed.\n")
+            message?.shouldContain("Presentation depends on Data assertion failure:\n")
         }
     }
 
     @Test
     fun `fails when bad dependency is set (files)`() {
-        // then
-        try {
+        // when
+        val sut = shouldThrow<KoCheckFailedException> {
             scope
                 .files
                 .assertArchitecture {
@@ -103,11 +106,12 @@ class Architecture4Test {
                     presentation.dependsOn(data)
                     domain.dependsOn(data)
                 }
-        } catch (e: KoCheckFailedException) {
-            assertSoftly {
-                e.message?.shouldContain("'fails when bad dependency is set (files)' test has failed.\n")
-                e.message?.shouldContain("Presentation depends on Data assertion failure:\n")
-            }
+        }
+
+        // then
+        assertSoftly(sut) {
+            message?.shouldContain("'fails when bad dependency is set (files)' test has failed.\n")
+            message?.shouldContain("Presentation depends on Data assertion failure:\n")
         }
     }
 
@@ -120,17 +124,18 @@ class Architecture4Test {
             domain.dependsOn(data)
         }
 
-        // then
-        try {
+        // when
+        val sut = shouldThrow<KoCheckFailedException> {
             scope
                 .assertArchitecture(architecture)
-        } catch (e: KoCheckFailedException) {
-            assertSoftly {
-                e.message?.shouldContain(
-                    "'fails when bad dependency is set and architecture is passed as parameter (scope)' test has failed.\n",
-                )
-                e.message?.shouldContain("Presentation depends on Data assertion failure:\n")
-            }
+        }
+
+        // then
+        assertSoftly(sut) {
+            message?.shouldContain(
+                "'fails when bad dependency is set and architecture is passed as parameter (scope)' test has failed.\n",
+            )
+            message?.shouldContain("Presentation depends on Data assertion failure:\n")
         }
     }
 
@@ -143,18 +148,19 @@ class Architecture4Test {
             domain.dependsOn(data)
         }
 
-        // then
-        try {
+        // when
+        val sut = shouldThrow<KoCheckFailedException> {
             scope
                 .files
                 .assertArchitecture(architecture)
-        } catch (e: KoCheckFailedException) {
-            assertSoftly {
-                e.message?.shouldContain(
-                    "'fails when bad dependency is set and architecture is passed as parameter (files)' test has failed.\n",
-                )
-                e.message?.shouldContain("Presentation depends on Data assertion failure:\n")
-            }
+        }
+
+        // then
+        assertSoftly(sut) {
+            message?.shouldContain(
+                "'fails when bad dependency is set and architecture is passed as parameter (files)' test has failed.\n",
+            )
+            message?.shouldContain("Presentation depends on Data assertion failure:\n")
         }
     }
 }
