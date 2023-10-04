@@ -15,6 +15,7 @@ expanded_source_directory = os.path.expanduser(source_directory)
 expanded_destination_directory = os.path.expanduser(destination_directory)
 expanded_summary_path = os.path.expanduser(summary_path)
 
+
 # Methods ==============================================================================================================
 def split_text_to_function_list(file_text):
     text_without_suffix = file_text.removesuffix("}\n") + "\n\t"
@@ -134,7 +135,7 @@ def get_current_date():
     return current_date.strftime("%Y-%m-%d")
 
 
-branch_name = get_current_date() + "-update-snippet-code"
+branch_name = "test-1"
 
 
 def create_git_branch():
@@ -142,12 +143,6 @@ def create_git_branch():
         subprocess.run(["git", "checkout", branch_name], check=True)
     except subprocess.CalledProcessError:
         subprocess.run(["git", "checkout", "-b", branch_name, "main"], check=True)
-
-
-def push_changes():
-    subprocess.run(["git", "add", "."], check=True)
-    subprocess.run(["git", "commit", "-m", "Upd snippet code at docs"], check=True)
-    subprocess.run(["git", "push", "origin", branch_name], check=True)
 
 
 # Construct the paths for destination
@@ -183,6 +178,7 @@ def add_empty_line_to_md_file(md_content):
     else:
         return md_content
 
+
 def files_from_destination_directory():
     try:
         # List all files and directories in the current directory
@@ -192,6 +188,7 @@ def files_from_destination_directory():
                     return file_name, root
     except Exception as e:
         print(f"An error occurred: {e}")
+
 
 def remove_files_recursively_except_readme(directory_path):
     try:
@@ -203,6 +200,7 @@ def remove_files_recursively_except_readme(directory_path):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+
 # Copy content from source .kt and .md files to a destination file
 def get_helper_root(root):
     try:
@@ -212,9 +210,11 @@ def get_helper_root(root):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+
 def number_of_packages(root):
     num = len(root.split("/"))
-    return num - 2
+    return num - 3
+
 
 def snippet_name_to_summary(root, file_text):
     try:
@@ -225,13 +225,42 @@ def snippet_name_to_summary(root, file_text):
         helper_root = root.split("inspiration/snippets")[1]
 
         # add blank spaces
-        num = number_of_packages(root)
+        num = number_of_packages(root) * 2
         blank_space = " "
 
         return blank_space * num + first_line + "(inspiration/snippets" + helper_root + ")"
 
     except Exception as e:
         print(f"An error occurred: {e}")
+
+
+def add_blank_spaces():
+    with open(expanded_summary_path, "r") as file:
+        file_content = file.read()
+
+    text = "* [Snippets](inspiration/snippets/README.md)"
+
+    # Search for the search term substring
+    match = re.search(re.escape(text), file_content)
+
+    if match:
+        # Get the starting position of the match
+        start_pos = match.start()
+
+        # Find the line containing the match
+        line_start = file_content.rfind('\n', 0, start_pos) + 1
+        line_end = file_content.find('\n', start_pos)
+
+        # Extract the line containing the match
+        line = file_content[line_start:line_end]
+
+        # Count the number of blank spaces before the match
+        num_spaces = len(re.match(r'\s*', line).group())
+
+        return num_spaces + 2
+    else:
+        return -1  # Search term not found
+
 
 def complete_summary_file(root, file_text):
     # Read the existing content of the file
@@ -248,7 +277,6 @@ def complete_summary_file(root, file_text):
         # Find the position where you want to insert the new text
         insertion_point = file_content.find(text)
 
-
         if insertion_point != -1:
             # Find the end of the line where insertion_point is found
             end_of_line = file_content.find('\n', insertion_point)
@@ -256,10 +284,11 @@ def complete_summary_file(root, file_text):
             # If the end_of_line is found, insert the new text after it
             if end_of_line != -1:
                 modified_content = (
-                        file_content[:end_of_line+1]
+                        file_content[:end_of_line + 1]
+                        + " " * add_blank_spaces()
                         + snippet_name
                         + "\n"
-                        + file_content[end_of_line+1:]
+                        + file_content[end_of_line + 1:]
                 )
 
                 # Write the modified content back to the file
@@ -308,10 +337,16 @@ def copy_content(expanded_source_directory, expanded_destination_directory):
                             print(f"Error copying content: {e}")
 
 
+def push_changes():
+    subprocess.run(["git", "add", "."], check=True)
+    subprocess.run(["git", "commit", "-m", "Upd snippet code at docs"], check=True)
+    subprocess.run(["git", "push", "origin", branch_name], check=True)
+
+
 def create_and_merge_pr():
     pr_title = "Update snippet code from " + get_current_date()
     os.system("gh pr create --title '" + pr_title + "' --body '""'")
-    os.system("gh pr merge --merge --delete-branch")
+    # os.system("gh pr merge --merge --delete-branch")
 
 
 # Script ===============================================================================================================
@@ -326,7 +361,7 @@ remove_files_recursively_except_readme(expanded_destination_directory)
 copy_content(expanded_source_directory, expanded_destination_directory)
 
 # Commit and push changes
-# push_changes()
+push_changes()
 
 # Create and merge a pull request
-# create_and_merge_pr()
+create_and_merge_pr()
