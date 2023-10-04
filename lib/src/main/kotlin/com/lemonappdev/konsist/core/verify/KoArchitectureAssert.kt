@@ -8,7 +8,7 @@ import com.lemonappdev.konsist.core.architecture.DependencyRulesCore
 import com.lemonappdev.konsist.core.architecture.KoArchitectureFiles
 import com.lemonappdev.konsist.core.architecture.KoArchitectureScope
 import com.lemonappdev.konsist.core.architecture.Status
-import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
@@ -25,7 +25,7 @@ internal fun KoArchitectureFiles.assert(): Unit {
         val failedFiles = validateLayersContainingFailedFiles(this.files, dependencyRules)
 
         if (failedFiles.isNotEmpty()) {
-            throw KoCheckFailedException(
+            throw KoAssertionFailedException(
                 getCheckFailedMessages(
                     failedFiles.distinct(),
                     dependencyRules.dependencies,
@@ -52,7 +52,7 @@ internal fun KoArchitectureScope.assert(): Unit {
         val failedFiles = validateLayersContainingFailedFiles(files = files, dependencyRules = dependencyRules)
 
         if (failedFiles.isNotEmpty()) {
-            throw KoCheckFailedException(
+            throw KoAssertionFailedException(
                 getCheckFailedMessages(
                     failedFiles.distinct(),
                     dependencyRules.dependencies,

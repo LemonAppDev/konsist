@@ -40,6 +40,7 @@ testing {
             dependencies {
                 implementation(project(":lib")) // Konsist
                 implementation(libs.kluent)
+                implementation(libs.koTest)
             }
         }
 
