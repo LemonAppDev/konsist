@@ -22,7 +22,7 @@ class AssertEmptyOnDeclarationSequenceTest {
             sut.assertEmpty()
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-test-method-name-derived-from-junit-method-name' failed."
+                "Assert 'declaration-assert-test-method-name-derived-from-junit-method-name' failed.",
             )
                 ?: throw e
         }

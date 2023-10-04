@@ -68,10 +68,10 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
 
         val testMethodName = testName
             ?: if (fifthIndexMethodName.contains("\$default")) {
-            getTestMethodNameFromSixthIndex()
-        } else {
-            fifthIndexMethodName
-        }
+                getTestMethodNameFromSixthIndex()
+            } else {
+                fifthIndexMethodName
+            }
 
         val localSuppressName = testName ?: testMethodName
 

@@ -63,7 +63,7 @@ class AssertNullOnSingleProviderTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert `provider-assert-null-error-with-custom-message` failed.\n" +
-                        "$message\nDeclaration has not null value: SampleClass.",
+                    "$message\nDeclaration has not null value: SampleClass.",
             )
                 ?: throw e
         }
@@ -85,7 +85,7 @@ class AssertNullOnSingleProviderTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert `provider-assert-not-null-error-with-custom-message` failed.\n" +
-                        "$message\nDeclaration has null value.",
+                    "$message\nDeclaration has null value.",
             )
                 ?: throw e
         }

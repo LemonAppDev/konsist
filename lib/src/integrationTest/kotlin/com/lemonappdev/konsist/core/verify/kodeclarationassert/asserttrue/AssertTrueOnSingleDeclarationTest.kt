@@ -23,7 +23,7 @@ class AssertTrueOnSingleDeclarationTest {
             sut.assertTrue { false }
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-test-method-name-derived-from-junit-method-name' was violated (1 time)"
+                "Assert 'declaration-assert-test-method-name-derived-from-junit-method-name' was violated (1 time)",
             )
                 ?: throw e
         }
@@ -57,7 +57,7 @@ class AssertTrueOnSingleDeclarationTest {
             sut.assertTrue { false }
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'file-declaration-assert-test-method-name-derived-from-junit-method-name' was violated (1 time)"
+                "Assert 'file-declaration-assert-test-method-name-derived-from-junit-method-name' was violated (1 time)",
             )
                 ?: throw e
         }

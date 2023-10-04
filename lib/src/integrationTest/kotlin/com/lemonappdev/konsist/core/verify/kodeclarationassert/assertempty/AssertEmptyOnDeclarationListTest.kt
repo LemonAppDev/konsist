@@ -21,7 +21,7 @@ class AssertEmptyOnDeclarationListTest {
             sut.assertEmpty()
         } catch (e: Exception) {
             e.message?.shouldContain(
-                "Assert 'declaration-assert-test-method-name-derived-from-junit-method-name' failed."
+                "Assert 'declaration-assert-test-method-name-derived-from-junit-method-name' failed.",
             )
                 ?: throw e
         }
@@ -55,7 +55,7 @@ class AssertEmptyOnDeclarationListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-on-list-containing-one-null-value' failed. " +
-                        "Declaration list is not empty. It contains 1 null value.",
+                    "Declaration list is not empty. It contains 1 null value.",
             )
                 ?: throw e
         }
@@ -74,7 +74,7 @@ class AssertEmptyOnDeclarationListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-on-list-containing-two-null-values' failed. " +
-                        "Declaration list is not empty. It contains 2 null values.",
+                    "Declaration list is not empty. It contains 2 null values.",
             )
                 ?: throw e
         }
@@ -92,7 +92,7 @@ class AssertEmptyOnDeclarationListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-on-list-containing-non-null-values' failed. " +
-                        "Declaration list is not empty. It contains values:\nSampleClass1,\nSampleClass2.",
+                    "Declaration list is not empty. It contains values:\nSampleClass1,\nSampleClass2.",
             )
                 ?: throw e
         }
@@ -111,7 +111,7 @@ class AssertEmptyOnDeclarationListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-on-list-containing-null-and-non-null-values' failed. " +
-                        "Declaration list is not empty. It contains 1 null value and values:\nInt.",
+                    "Declaration list is not empty. It contains 1 null value and values:\nInt.",
             )
                 ?: throw e
         }
@@ -130,7 +130,7 @@ class AssertEmptyOnDeclarationListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-with-custom-message' failed.\n$message\n" +
-                        "Declaration list is not empty. It contains values:\nSampleClass.",
+                    "Declaration list is not empty. It contains values:\nSampleClass.",
             )
                 ?: throw e
         }
@@ -149,7 +149,7 @@ class AssertEmptyOnDeclarationListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-empty-error-with-custom-message-and-strict-set-to-true' failed.\n$message\n" +
-                        "Declaration list is not empty. It contains values:\nSampleClass.",
+                    "Declaration list is not empty. It contains values:\nSampleClass.",
             )
                 ?: throw e
         }
@@ -168,7 +168,7 @@ class AssertEmptyOnDeclarationListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-not-empty-error-with-custom-message' failed.\n" +
-                        "$message\nDeclaration list is empty.",
+                    "$message\nDeclaration list is empty.",
             )
                 ?: throw e
         }
@@ -187,7 +187,7 @@ class AssertEmptyOnDeclarationListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-not-empty-error-with-custom-message-and-strict-set-to-true' failed.\n" +
-                        "$message\nDeclaration list is empty.",
+                    "$message\nDeclaration list is empty.",
             )
                 ?: throw e
         }
