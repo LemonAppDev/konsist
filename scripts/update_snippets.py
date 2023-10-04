@@ -15,7 +15,6 @@ expanded_source_directory = os.path.expanduser(source_directory)
 expanded_destination_directory = os.path.expanduser(destination_directory)
 expanded_summary_path = os.path.expanduser(summary_path)
 
-
 # Methods ==============================================================================================================
 def split_text_to_function_list(file_text):
     text_without_suffix = file_text.removesuffix("}\n") + "\n\t"
@@ -184,106 +183,91 @@ def add_empty_line_to_md_file(md_content):
     else:
         return md_content
 
+def files_from_destination_directory():
+    try:
+        # List all files and directories in the current directory
+        for root, dirs, files in os.walk(expanded_destination_directory):
+            for file_name in files:
+                if file_name.lower() != "readme.md":  # Skip "README.md"
+                    return file_name, root
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 def remove_files_recursively_except_readme(directory_path):
     try:
-        # List all files and directories in the current directory
-        for root, dirs, files in os.walk(directory_path):
-            for file_name in files:
-                if file_name.lower() != "readme.md":  # Skip "README.md"
-                    file_path = os.path.join(root, file_name)
-                    os.remove(file_path)
+        file_name, root = files_from_destination_directory()
+        file_path = os.path.join(root, file_name)
+        os.remove(file_path)
 
         print(f"All files within {directory_path} and its subdirectories, except 'README.md', have been removed.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
-
 # Copy content from source .kt and .md files to a destination file
-def get_helper_root(directory_path):
+def get_helper_root(root):
     try:
-        # List all files and directories in the current directory
-        for root, dirs, files in os.walk(directory_path):
-            for file_name in files:
-                if file_name.lower() != "readme.md":  # Skip "README.md"
-                    text = root.split("inspiration/snippets")[1]
-                    return "inspiration/snippets" + text
+        text = root.split("inspiration/snippets")[1]
+        return "inspiration/snippets" + text
 
     except Exception as e:
         print(f"An error occurred: {e}")
-
 
 def number_of_packages(root):
     num = len(root.split("/"))
     return num - 2
 
-
-def snippet_name_to_summary(path):
+def snippet_name_to_summary(root, file_text):
     try:
-        # List all files and directories in the current directory
-        for root, dirs, files in os.walk(path):
-            for file_name in files:
-                if file_name.lower() != "readme.md":  # Skip "README.md"
-                    # get snippet file
-                    file_path = os.path.join(root, file_name)
-                    file_text = read_file(file_path)
-                    first_line = file_text.split("\n")[0]
-                    first_line = "* [" + first_line.removeprefix("#").strip() + "]"
+        first_line = file_text.split("\n")[0]
+        first_line = "* [" + first_line.removeprefix("#").strip() + "]"
 
-                    # get short path to file
-                    helper_root = root.split("inspiration/snippets")[1] + "/"
+        # get short path to file
+        helper_root = root.split("inspiration/snippets")[1]
 
-                    # add blank spaces
-                    num = number_of_packages(root)
-                    blank_space = " "
+        # add blank spaces
+        num = number_of_packages(root)
+        blank_space = " "
 
-                    return blank_space * num + first_line + "(inspiration/snippets" + helper_root + file_name + ")"
+        return blank_space * num + first_line + "(inspiration/snippets" + helper_root + ")"
 
     except Exception as e:
         print(f"An error occurred: {e}")
 
-x = snippet_name_to_summary(expanded_destination_directory)
-
-def complete_summary_file():
+def complete_summary_file(root, file_text):
     # Read the existing content of the file
     with open(expanded_summary_path, "r") as file:
         file_content = file.read()
 
-    text = "* [Snippets](inspiration/snippets/README.md)"
+    snippet_name = snippet_name_to_summary(root, file_text)
 
-    # Find the position where you want to insert the new text
-    insertion_point = file_content.find(text)
+    name_without_tab = snippet_name.strip()
 
-    if insertion_point != -1:
-        # Find the end of the line where insertion_point is found
-        end_of_line = file_content.find('\n', insertion_point)
+    print(name_without_tab)
+    print(name_without_tab in file_content)
 
-        # If the end_of_line is found, insert the new text after it
-        if end_of_line != -1:
-            modified_content = (
-                    file_content[:end_of_line+1]
-                    + x
-                    + "\n"
-                    + file_content[end_of_line+1:]
-            )
+    if name_without_tab in file_content:
+        text = "* [Snippets](inspiration/snippets/README.md)"
 
-            # Write the modified content back to the file
-            with open(expanded_summary_path, "w") as file:
-                file.write(modified_content)
-    #
-    # if insertion_point != -1:
-    #     # Insert the new text after the target line
-    #     modified_content = (
-    #             file_content[:insertion_point]
-    #             + text
-    #              + "\n"
-    #             + snippet_name_to_summary(expanded_destination_directory)
-    #             + file_content[insertion_point:]
-    #     )
-    #
-    #     # Write the modified content back to the file
-    #     with open(expanded_summary_path, "w") as file:
-    #         file.write(modified_content)
+        # Find the position where you want to insert the new text
+        insertion_point = file_content.find(text)
+
+
+        if insertion_point != -1:
+            # Find the end of the line where insertion_point is found
+            end_of_line = file_content.find('\n', insertion_point)
+
+            # If the end_of_line is found, insert the new text after it
+            if end_of_line != -1:
+                modified_content = (
+                        file_content[:end_of_line+1]
+                        + snippet_name
+                        + "\n"
+                        + file_content[end_of_line+1:]
+                )
+
+                # Write the modified content back to the file
+                with open(expanded_summary_path, "w") as file:
+                    file.write(modified_content)
 
 
 def copy_content(expanded_source_directory, expanded_destination_directory):
@@ -322,6 +306,7 @@ def copy_content(expanded_source_directory, expanded_destination_directory):
 
                             write_file(path, destination_path, content)
 
+                            complete_summary_file(get_helper_root(destination_path), content)
                         except Exception as e:
                             print(f"Error copying content: {e}")
 
@@ -334,24 +319,17 @@ def create_and_merge_pr():
 
 # Script ===============================================================================================================
 
-# # Change the current working directory
-# os.chdir(expanded_destination_directory)
-#
-# create_git_branch()
-#
-# remove_files_recursively_except_readme(expanded_destination_directory)
-#
-# copy_content(expanded_source_directory, expanded_destination_directory)
-#
+# Change the current working directory
+os.chdir(expanded_destination_directory)
 
-complete_summary_file()
+create_git_branch()
 
+remove_files_recursively_except_readme(expanded_destination_directory)
+
+copy_content(expanded_source_directory, expanded_destination_directory)
 
 # Commit and push changes
 # push_changes()
 
 # Create and merge a pull request
 # create_and_merge_pr()
-
-
-
