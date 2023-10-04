@@ -7,6 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoBaseProvider
 import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoNameProvider
+import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.exception.KoCheckFailedException
 import com.lemonappdev.konsist.core.exception.KoException
 import com.lemonappdev.konsist.core.exception.KoInternalException
@@ -117,7 +118,7 @@ internal fun <E : KoBaseProvider> List<E>.assert(
             function(it) ?: positiveCheck
         }
 
-        getResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
+        deprecatedGetResult(notSuppressedDeclarations, result, positiveCheck, testMethodName, additionalMessage)
     } catch (e: KoException) {
         throw e
     } catch (@Suppress("detekt.TooGenericExceptionCaught") e: Exception) {
@@ -212,7 +213,23 @@ private fun getResult(
     positiveCheck: Boolean,
     suppressName: String,
     additionalMessage: String?,
-) {
+): Unit {
+    val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
+
+    if (!allChecksPassed) {
+        val failedItems = result[!positiveCheck] ?: emptyList()
+        throw KoAssertionFailedException(getCheckFailedMessage(failedItems, suppressName, additionalMessage))
+    }
+}
+
+@Deprecated("Will be removed in v1.0.0", ReplaceWith("getResult()"))
+private fun deprecatedGetResult(
+    items: List<*>,
+    result: Map<Boolean, List<Any>>,
+    positiveCheck: Boolean,
+    suppressName: String,
+    additionalMessage: String?,
+): Unit {
     val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
 
     if (!allChecksPassed) {
@@ -290,7 +307,7 @@ private fun getEmptyResult(
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
         val message = "Assert '$testMethodName' failed.${customMessage}Declaration list is$negation empty.$values"
-        throw KoCheckFailedException(message)
+        throw KoAssertionFailedException(message)
     }
 }
 
@@ -308,6 +325,6 @@ private fun getNullResult(
         val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
 
         val message = "Assert `$testMethodName` failed.${customMessage}Declaration has$negation null value$value."
-        throw KoCheckFailedException(message)
+        throw KoAssertionFailedException(message)
     }
 }

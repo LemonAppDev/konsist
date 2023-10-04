@@ -1,0 +1,4 @@
+class SampleClassText {
+    @Suppress("konsist.suppress-text")
+    class SampleClassWithIncorrectSuffix
+}

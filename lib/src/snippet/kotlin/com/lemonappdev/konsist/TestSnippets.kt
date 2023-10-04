@@ -3,12 +3,10 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.declarations
-import com.lemonappdev.konsist.api.ext.list.functions
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
 import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
-import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.Test
@@ -53,13 +51,5 @@ class TestSnippets {
             .withoutAnnotationOf(Test::class, ParameterizedTest::class, RepeatedTest::class)
             .filterIsInstance<KoVisibilityModifierProvider>()
             .assertTrue { it.hasPrivateModifier }
-    }
-
-    fun `don't use JUnit4 Test annotation`() {
-        Konsist
-            .scopeFromProject()
-            .classes()
-            .functions()
-            .assertFalse { it.hasAnnotationWithName("org.junit.Test") } // should be only org.junit.jupiter.api.Test
     }
 }
