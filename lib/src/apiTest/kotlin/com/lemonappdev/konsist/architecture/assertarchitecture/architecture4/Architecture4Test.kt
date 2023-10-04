@@ -7,7 +7,6 @@ import com.lemonappdev.konsist.api.architecture.Layer
 import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import io.kotest.assertions.throwables.shouldThrow
 import org.amshove.kluent.assertSoftly
-import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldContain
 import org.junit.jupiter.api.Test
 

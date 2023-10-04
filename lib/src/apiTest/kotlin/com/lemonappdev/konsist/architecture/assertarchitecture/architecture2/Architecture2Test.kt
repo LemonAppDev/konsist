@@ -85,14 +85,14 @@ class Architecture2Test {
             .message
             .shouldBeEqualTo(
                 "'fails when dependency is set that domain layer is depend on presentation layer (scope)' " +
-                        "test has failed.\n" +
-                        "Presentation depends on nothing assertion failure:\n" +
-                        "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture" +
-                        "/architecture2/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                        "depends on Domain layer, imports:\n" +
-                        "\tcom.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain." +
-                        "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt:3:1)"
+                    "test has failed.\n" +
+                    "Presentation depends on nothing assertion failure:\n" +
+                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture" +
+                    "/architecture2/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
+                    "depends on Domain layer, imports:\n" +
+                    "\tcom.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain." +
+                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                    "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt:3:1)",
             )
     }
 
@@ -113,14 +113,14 @@ class Architecture2Test {
             .message
             .shouldBeEqualTo(
                 "'fails when dependency is set that domain layer is depend on presentation layer (files)' " +
-                        "test has failed.\n" +
-                        "Presentation depends on nothing assertion failure:\n" +
-                        "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture" +
-                        "/architecture2/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                        "depends on Domain layer, imports:\n" +
-                        "\tcom.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain." +
-                        "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt:3:1)"
+                    "test has failed.\n" +
+                    "Presentation depends on nothing assertion failure:\n" +
+                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture" +
+                    "/architecture2/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
+                    "depends on Domain layer, imports:\n" +
+                    "\tcom.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain." +
+                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                    "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt:3:1)",
             )
     }
 
@@ -143,14 +143,14 @@ class Architecture2Test {
             .message
             .shouldBeEqualTo(
                 "'fails when dependency is set that domain layer is depend on presentation layer and architecture " +
-                        "is passed as parameter (scope)' test has failed.\n" +
-                        "Presentation depends on nothing assertion failure:\n" +
-                        "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture" +
-                        "/architecture2/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                        "depends on Domain layer, imports:\n" +
-                        "\tcom.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain." +
-                        "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt:3:1)"
+                    "is passed as parameter (scope)' test has failed.\n" +
+                    "Presentation depends on nothing assertion failure:\n" +
+                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture" +
+                    "/architecture2/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
+                    "depends on Domain layer, imports:\n" +
+                    "\tcom.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain." +
+                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                    "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt:3:1)",
             )
     }
 
@@ -175,14 +175,14 @@ class Architecture2Test {
             .message
             .shouldBeEqualTo(
                 "'fails when dependency is set that domain layer is depend on presentation layer and architecture " +
-                        "is passed as parameter (files)' test has failed.\n" +
-                        "Presentation depends on nothing assertion failure:\n" +
-                        "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture" +
-                        "/architecture2/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
-                        "depends on Domain layer, imports:\n" +
-                        "\tcom.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain." +
-                        "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
-                        "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt:3:1)"
+                    "is passed as parameter (files)' test has failed.\n" +
+                    "Presentation depends on nothing assertion failure:\n" +
+                    "A file $rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/assertarchitecture" +
+                    "/architecture2/project/presentation/sample/PresentationThirdClass.kt in a Presentation layer " +
+                    "depends on Domain layer, imports:\n" +
+                    "\tcom.lemonappdev.konsist.architecture.assertarchitecture.architecture2.project.domain." +
+                    "DomainFirstClass ($rootPath/lib/src/apiTest/kotlin/com/lemonappdev/konsist/architecture/" +
+                    "assertarchitecture/architecture2/project/presentation/sample/PresentationThirdClass.kt:3:1)",
             )
     }
 }
