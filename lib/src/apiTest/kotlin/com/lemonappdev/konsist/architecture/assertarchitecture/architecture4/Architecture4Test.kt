@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
-import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import io.kotest.assertions.throwables.shouldThrow
 import org.amshove.kluent.assertSoftly
 import org.amshove.kluent.shouldBeEqualTo
@@ -79,7 +79,7 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set (scope)`() {
         // when
-        val sut = shouldThrow<KoCheckFailedException> {
+        val sut = shouldThrow<KoAssertionFailedException> {
             scope
                 .assertArchitecture {
                     data.dependsOnNothing()
@@ -98,7 +98,7 @@ class Architecture4Test {
     @Test
     fun `fails when bad dependency is set (files)`() {
         // when
-        val sut = shouldThrow<KoCheckFailedException> {
+        val sut = shouldThrow<KoAssertionFailedException> {
             scope
                 .files
                 .assertArchitecture {
@@ -125,7 +125,7 @@ class Architecture4Test {
         }
 
         // when
-        val sut = shouldThrow<KoCheckFailedException> {
+        val sut = shouldThrow<KoAssertionFailedException> {
             scope
                 .assertArchitecture(architecture)
         }
@@ -149,7 +149,7 @@ class Architecture4Test {
         }
 
         // when
-        val sut = shouldThrow<KoCheckFailedException> {
+        val sut = shouldThrow<KoAssertionFailedException> {
             scope
                 .files
                 .assertArchitecture(architecture)

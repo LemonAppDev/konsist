@@ -4,7 +4,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.architecture
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
-import com.lemonappdev.konsist.core.exception.KoCheckFailedException
+import com.lemonappdev.konsist.core.exception.KoAssertionFailedException
 import com.lemonappdev.konsist.core.filesystem.PathProvider
 import io.kotest.assertions.throwables.shouldThrow
 import org.amshove.kluent.shouldBeEqualTo
@@ -73,7 +73,7 @@ class Architecture2Test {
     @Test
     fun `fails when dependency is set that domain layer is depend on presentation layer (scope)`() {
         // when
-        val sut = shouldThrow<KoCheckFailedException> {
+        val sut = shouldThrow<KoAssertionFailedException> {
             scope.assertArchitecture {
                 presentation.dependsOnNothing()
                 domain.dependsOn(presentation)
@@ -99,7 +99,7 @@ class Architecture2Test {
     @Test
     fun `fails when dependency is set that domain layer is depend on presentation layer (files)`() {
         // when
-        val sut = shouldThrow<KoCheckFailedException> {
+        val sut = shouldThrow<KoAssertionFailedException> {
             scope
                 .files
                 .assertArchitecture {
@@ -134,7 +134,7 @@ class Architecture2Test {
         }
 
         // when
-        val sut = shouldThrow<KoCheckFailedException> {
+        val sut = shouldThrow<KoAssertionFailedException> {
             scope.assertArchitecture(architecture)
         }
 
@@ -164,7 +164,7 @@ class Architecture2Test {
         }
 
         // when
-        val sut = shouldThrow<KoCheckFailedException> {
+        val sut = shouldThrow<KoAssertionFailedException> {
             scope
                 .files
                 .assertArchitecture(architecture)
