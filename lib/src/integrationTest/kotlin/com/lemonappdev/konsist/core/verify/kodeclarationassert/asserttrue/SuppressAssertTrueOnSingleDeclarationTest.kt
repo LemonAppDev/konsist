@@ -42,7 +42,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .last()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -54,7 +54,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .last()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -92,7 +92,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .last()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -104,7 +104,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .last()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -140,7 +140,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .last()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -152,7 +152,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .last()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -191,7 +191,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue(testName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -204,7 +204,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue(testName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -243,7 +243,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue(testName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -256,7 +256,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue(testName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -300,7 +300,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -314,7 +314,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -360,7 +360,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -374,7 +374,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -416,7 +416,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -430,7 +430,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -454,7 +454,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -466,7 +466,7 @@ class SuppressAssertTrueOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "konsist.assert-suppress-with-suppress-name-parameter") {
+        sut.assertTrue(testName = "konsist.assert-suppress-with-suppress-name-parameter") {
             it.name.endsWith("Kotest")
         }
     }

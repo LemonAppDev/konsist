@@ -42,7 +42,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoModifierProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -54,7 +54,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoModifierProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -92,7 +92,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoModifierProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -104,7 +104,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoModifierProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -140,7 +140,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoLocalDeclarationProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -152,7 +152,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoLocalDeclarationProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -188,7 +188,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoLocalDeclarationProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -200,7 +200,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoLocalDeclarationProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -236,7 +236,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -248,7 +248,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -292,7 +292,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoLocalDeclarationProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -306,7 +306,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoLocalDeclarationProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -346,7 +346,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoLocalDeclarationProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -358,7 +358,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoLocalDeclarationProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -394,7 +394,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -406,7 +406,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoPropertyProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -430,7 +430,7 @@ class SuppressAssertEmptyOnProviderListTest {
                 .filterIsInstance<KoLocalDeclarationProvider>()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -40,7 +40,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -52,7 +52,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -90,7 +90,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -102,7 +102,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -138,7 +138,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -150,7 +150,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -189,7 +189,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -202,7 +202,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -241,7 +241,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -254,7 +254,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -298,7 +298,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -312,7 +312,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -358,7 +358,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -372,7 +372,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -414,7 +414,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -428,7 +428,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -452,7 +452,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -464,7 +464,7 @@ class SuppressAssertNullOnSingleDeclarationTest {
                 .first()
 
         // then
-        sut.assertNull(suppressName = "konsist.assert-suppress-with-suppress-name-parameter")
+        sut.assertNull(testName = "konsist.assert-suppress-with-suppress-name-parameter")
     }
 
     private fun getSnippetFile(fileName: String) =

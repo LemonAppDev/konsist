@@ -43,7 +43,7 @@ class SuppressAssertTrueOnSingleProviderTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasModifiers() }
+        sut.assertTrue(testName = "suppress-text") { it.hasModifiers() }
     }
 
     @Test
@@ -56,7 +56,7 @@ class SuppressAssertTrueOnSingleProviderTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasModifiers() }
+        sut.assertTrue(testName = "suppress-text") { it.hasModifiers() }
     }
 
     @Test
@@ -97,7 +97,7 @@ class SuppressAssertTrueOnSingleProviderTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasModifiers() }
+        sut.assertTrue(testName = "suppress-text") { it.hasModifiers() }
     }
 
     @Test
@@ -110,7 +110,7 @@ class SuppressAssertTrueOnSingleProviderTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasModifiers() }
+        sut.assertTrue(testName = "suppress-text") { it.hasModifiers() }
     }
 
     @Test
@@ -253,7 +253,7 @@ class SuppressAssertTrueOnSingleProviderTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue(testName = "suppress-text") { it.hasProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -266,7 +266,7 @@ class SuppressAssertTrueOnSingleProviderTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue(testName = "suppress-text") { it.hasProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -415,7 +415,7 @@ class SuppressAssertTrueOnSingleProviderTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue(testName = "suppress-text") { it.hasProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test
@@ -428,7 +428,7 @@ class SuppressAssertTrueOnSingleProviderTest {
                 .first()
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasProperty { property -> property.name == "otherProperty" } }
+        sut.assertTrue(testName = "suppress-text") { it.hasProperty { property -> property.name == "otherProperty" } }
     }
 
     @Test

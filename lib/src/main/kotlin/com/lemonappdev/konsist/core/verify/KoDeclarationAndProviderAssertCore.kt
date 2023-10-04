@@ -16,7 +16,7 @@ import com.lemonappdev.konsist.core.exception.KoPreconditionFailedException
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
-    suppressName: String?,
+    testName: String?,
     function: (E) -> Boolean?,
     positiveCheck: Boolean,
 ) {
@@ -38,7 +38,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
             checkIfLocalListHasOnlyNullElements(this, assertMethodName)
         }
 
-        val localSuppressName = suppressName ?: testMethodName
+        val localSuppressName = testName ?: testMethodName
 
         val notSuppressedDeclarations = checkIfAnnotatedWithSuppress(this.filterNotNull(), localSuppressName)
 
@@ -58,7 +58,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
 internal fun <E : KoBaseProvider> List<E?>.assert(
     strict: Boolean,
     additionalMessage: String?,
-    suppressName: String?,
+    testName: String?,
     isEmptyOrNull: Boolean,
     onSingleElement: Boolean,
 ) {
@@ -71,7 +71,7 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
             fifthIndexMethodName
         }
 
-        val localSuppressName = suppressName ?: testMethodName
+        val localSuppressName = testName ?: testMethodName
 
         val declarationWithoutNull = filterNotNull()
 
@@ -211,14 +211,14 @@ private fun getResult(
     items: List<*>,
     result: Map<Boolean, List<Any>>,
     positiveCheck: Boolean,
-    suppressName: String,
+    testName: String,
     additionalMessage: String?,
 ): Unit {
     val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
 
     if (!allChecksPassed) {
         val failedItems = result[!positiveCheck] ?: emptyList()
-        throw KoAssertionFailedException(getCheckFailedMessage(failedItems, suppressName, additionalMessage))
+        throw KoAssertionFailedException(getCheckFailedMessage(failedItems, testName, additionalMessage))
     }
 }
 
@@ -227,18 +227,18 @@ private fun deprecatedGetResult(
     items: List<*>,
     result: Map<Boolean, List<Any>>,
     positiveCheck: Boolean,
-    suppressName: String,
+    testName: String,
     additionalMessage: String?,
 ): Unit {
     val allChecksPassed = (result[positiveCheck]?.size ?: 0) == items.size
 
     if (!allChecksPassed) {
         val failedItems = result[!positiveCheck] ?: emptyList()
-        throw KoCheckFailedException(getCheckFailedMessage(failedItems, suppressName, additionalMessage))
+        throw KoCheckFailedException(getCheckFailedMessage(failedItems, testName, additionalMessage))
     }
 }
 
-private fun getCheckFailedMessage(failedItems: List<*>, suppressName: String, additionalMessage: String?): String {
+private fun getCheckFailedMessage(failedItems: List<*>, testName: String, additionalMessage: String?): String {
     var types = ""
     val failedDeclarationsMessage = failedItems.joinToString("\n") {
         val konsistDeclarationClassNamePrefix = "Ko"
@@ -276,7 +276,7 @@ private fun getCheckFailedMessage(failedItems: List<*>, suppressName: String, ad
     val customMessage = if (additionalMessage != null) "\n${additionalMessage}\n" else " "
     val times = if (failedItems.size == 1) "time" else "times"
 
-    return "Assert '$suppressName' was violated (${failedItems.size} $times).${customMessage}Invalid $types:\n$failedDeclarationsMessage"
+    return "Assert '$testName' was violated (${failedItems.size} $times).${customMessage}Invalid $types:\n$failedDeclarationsMessage"
 }
 
 private fun getEmptyResult(
