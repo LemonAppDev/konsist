@@ -142,41 +142,19 @@ class ApiKonsistTest {
         pluralName: String,
         hasKoNameProvider: Boolean,
     ): Boolean = if (declarationName == "KoModifier") {
-        hasExceptionFunctions(singularName, pluralName, "with") &&
-            hasExceptionFunctions(singularName, pluralName, "without")
+        checkForExceptions(singularName, pluralName, true)
     } else if (declarationName == "KoKDocTagDeclaration") {
-        hasExceptionFunctions("Tag", "Tags", "with") &&
-            hasExceptionFunctions("Tag", "Tags", "without")
+        checkForExceptions("Tag", "Tags", true)
     } else if (declarationName == "KoFunctionDeclaration" || declarationName == "KoClassDeclaration") {
-        (
-            hasBasicFunctions(singularName, pluralName, "with") &&
-                hasNamedFunctionsForExt(singularName, pluralName, "with") &&
-                hasBasicFunctions(singularName, pluralName, "without") &&
-                hasNamedFunctionsForExt(singularName, pluralName, "without")
-            ) ||
-            (
-                hasBasicFunctions("Local$singularName", pluralName, "with") &&
-                    hasNamedFunctionsForExt("Local$singularName", pluralName, "with") &&
-                    hasBasicFunctions("Local$singularName", pluralName, "without") &&
-                    hasNamedFunctionsForExt("Local$singularName", pluralName, "without")
-                )
+        checkForFunctionWithName(singularName, pluralName, true) ||
+            checkForFunctionWithName("Local$singularName", pluralName, true)
     } else if (declarationName == "KoBaseDeclaration") {
-        (
-            hasBasicFunctions("Declaration", pluralName, "with") &&
-                hasBasicFunctions("Declaration", pluralName, "without")
-            ) ||
-            (
-                hasBasicFunctions("LocalDeclaration", pluralName, "with") &&
-                    hasBasicFunctions("LocalDeclaration", pluralName, "without")
-                )
+        checkForFunctionWithoutName(singularName, pluralName, true) ||
+            checkForFunctionWithoutName("LocalDeclaration", pluralName, true)
     } else if (hasKoNameProvider) {
-        hasBasicFunctions(singularName, pluralName, "with") &&
-            hasNamedFunctionsForExt(singularName, pluralName, "with") &&
-            hasBasicFunctions(singularName, pluralName, "without") &&
-            hasNamedFunctionsForExt(singularName, pluralName, "without")
+        checkForFunctionWithName(singularName, pluralName, true)
     } else {
-        hasBasicFunctions(singularName, pluralName, "with") &&
-            hasBasicFunctions(singularName, pluralName, "without")
+        checkForFunctionWithoutName(singularName, pluralName, true)
     }
 
     private fun KoFunctionProvider.checkForProviders(
@@ -185,26 +163,19 @@ class ApiKonsistTest {
         pluralName: String,
         hasKoNameProvider: Boolean,
     ): Boolean = if (declarationName == "KoModifier") {
-        hasExceptionFunctions(singularName, pluralName, "has")
+        checkForExceptions(singularName, pluralName, false)
     } else if (declarationName == "KoKDocTagDeclaration") {
-        hasExceptionFunctions("Tag", "Tags", "has")
+        checkForExceptions("Tag", "Tags", false)
     } else if (declarationName == "KoFunctionDeclaration" || declarationName == "KoClassDeclaration") {
-        (
-            hasBasicFunctions(singularName, pluralName, "has") &&
-                hasNamedFunctions(singularName, pluralName)
-            ) ||
-            (
-                hasBasicFunctions("Local$singularName", pluralName, "has") &&
-                    hasNamedFunctions("Local$singularName", pluralName)
-                )
+        checkForFunctionWithName(singularName, pluralName, false) ||
+            checkForFunctionWithName("Local$singularName", pluralName, false)
     } else if (declarationName == "KoBaseDeclaration") {
-        hasBasicFunctions("Declaration", pluralName, "has") ||
-            hasBasicFunctions("LocalDeclaration", pluralName, "has")
+        checkForFunctionWithoutName("Declaration", pluralName, false) ||
+            checkForFunctionWithoutName("LocalDeclaration", pluralName, false)
     } else if (hasKoNameProvider) {
-        hasBasicFunctions(singularName, pluralName, "has") &&
-            hasNamedFunctions(singularName, pluralName)
+        checkForFunctionWithName(singularName, pluralName, false)
     } else {
-        hasBasicFunctions(singularName, pluralName, "has")
+        checkForFunctionWithoutName(singularName, pluralName, false)
     }
 
     private fun KoFunctionProvider.hasExceptionFunctions(
@@ -261,4 +232,39 @@ class ApiKonsistTest {
         } && hasFunction { function ->
             function.name == "${prefix}All${pluralName}Named" && function.hasParametersWithAllNames("name", "names")
         }
+
+    private fun KoFunctionProvider.checkForExceptions(
+        singularName: String,
+        pluralName: String,
+        isExtension: Boolean,
+    ): Boolean = if (isExtension) {
+        hasExceptionFunctions(singularName, pluralName, "with") &&
+            hasExceptionFunctions(singularName, pluralName, "without")
+    } else {
+        hasExceptionFunctions(singularName, pluralName, "has")
+    }
+
+    private fun KoFunctionProvider.checkForFunctionWithName(
+        singularName: String,
+        pluralName: String,
+        isExtension: Boolean,
+    ): Boolean = if (isExtension) {
+        hasBasicFunctions(singularName, pluralName, "with") &&
+            hasNamedFunctionsForExt(singularName, pluralName, "with") &&
+            hasBasicFunctions(singularName, pluralName, "without") &&
+            hasNamedFunctionsForExt(singularName, pluralName, "without")
+    } else {
+        hasBasicFunctions(singularName, pluralName, "has") && hasNamedFunctions(singularName, pluralName)
+    }
+
+    private fun KoFunctionProvider.checkForFunctionWithoutName(
+        singularName: String,
+        pluralName: String,
+        isExtension: Boolean,
+    ): Boolean = if (isExtension) {
+        hasBasicFunctions(singularName, pluralName, "with") &&
+            hasBasicFunctions(singularName, pluralName, "without")
+    } else {
+        hasBasicFunctions(singularName, pluralName, "has")
+    }
 }
