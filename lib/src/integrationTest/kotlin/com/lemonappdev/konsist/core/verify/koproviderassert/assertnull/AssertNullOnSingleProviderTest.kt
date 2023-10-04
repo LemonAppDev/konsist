@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Test
 
 class AssertNullOnSingleProviderTest {
     @Test
-    fun `provider-assert-test-method-name`() {
+    fun `provider-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("provider-assert-test-method-name")
+        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-junit-method-name")
             .declarations()
             .filterIsInstance<KoNameProvider>()
             .firstOrNull()
@@ -25,7 +25,24 @@ class AssertNullOnSingleProviderTest {
         try {
             sut.assertNull()
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert `provider-assert-test-method-name` failed.")
+            e.message?.shouldContain("Assert `provider-assert-test-method-name-derived-from-junit-method-name` failed.")
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `provider-assert-test-method-name-derived-from-test-name-parameter`() {
+        // given
+        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-test-name-parameter")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+            .firstOrNull()
+
+        // then
+        try {
+            sut.assertNull(testName = "sample test")
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert `sample test` failed.")
                 ?: throw e
         }
     }
@@ -46,7 +63,7 @@ class AssertNullOnSingleProviderTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert `provider-assert-null-error-with-custom-message` failed.\n" +
-                    "$message\nDeclaration has not null value: SampleClass.",
+                        "$message\nDeclaration has not null value: SampleClass.",
             )
                 ?: throw e
         }
@@ -68,7 +85,7 @@ class AssertNullOnSingleProviderTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert `provider-assert-not-null-error-with-custom-message` failed.\n" +
-                    "$message\nDeclaration has null value.",
+                        "$message\nDeclaration has null value.",
             )
                 ?: throw e
         }

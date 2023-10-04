@@ -12,31 +12,65 @@ import org.junit.jupiter.api.Test
 
 class AssertTrueOnDeclarationListTest {
     @Test
-    fun `declaration-assert-test-method-name`() {
+    fun `declaration-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name")
+        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-junit-method-name")
             .classes()
 
         // then
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' was violated (1 time)")
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-test-method-name-derived-from-junit-method-name' was violated (1 time)"
+            )
                 ?: throw e
         }
     }
 
     @Test
-    fun `file-declaration-assert-test-method-name`() {
+    fun `declaration-assert-test-method-name-derived-from-test-name-parameter`() {
         // given
-        val sut = getSnippetFile("file-declaration-assert-test-method-name")
+        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-test-name-parameter")
+            .classes()
+
+        // then
+        try {
+            sut.assertTrue(testName = "sample test") { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert 'sample test' was violated (1 time)")
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `file-declaration-assert-test-method-name-derived-from-junit-method-name`() {
+        // given
+        val sut = getSnippetFile("file-declaration-assert-test-method-name-derived-from-junit-method-name")
             .files
 
         // then
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' was violated (1 time)")
+            e.message?.shouldContain(
+                "Assert 'file-declaration-assert-test-method-name-derived-from-junit-method-name' was violated (1 time)"
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `file-declaration-assert-test-method-name-derived-from-test-name-parameter`() {
+        // given
+        val sut = getSnippetFile("file-declaration-assert-test-method-name-derived-from-test-name-parameter")
+            .files
+
+        // then
+        try {
+            sut.assertTrue(testName = "sample test") { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert 'sample test' was violated (1 time)")
                 ?: throw e
         }
     }
@@ -54,7 +88,7 @@ class AssertTrueOnDeclarationListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-error-with-custom-message' was violated (1 time)." +
-                    "\n$message\nInvalid declarations",
+                        "\n$message\nInvalid declarations",
             )
                 ?: throw e
         }
@@ -73,7 +107,7 @@ class AssertTrueOnDeclarationListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'declaration-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
-                    "\n$message\nInvalid declarations",
+                        "\n$message\nInvalid declarations",
             )
                 ?: throw e
         }
@@ -92,7 +126,7 @@ class AssertTrueOnDeclarationListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'file-declaration-assert-error-with-custom-message' was violated (1 time)." +
-                    "\n$message\nInvalid files:",
+                        "\n$message\nInvalid files:",
             )
                 ?: throw e
         }
@@ -111,7 +145,7 @@ class AssertTrueOnDeclarationListTest {
         } catch (e: Exception) {
             e.message?.shouldContain(
                 "Assert 'file-declaration-assert-error-with-custom-message-and-strict-set-to-true' was violated (1 time)." +
-                    "\n$message\nInvalid files:",
+                        "\n$message\nInvalid files:",
             )
                 ?: throw e
         }
@@ -180,7 +214,7 @@ class AssertTrueOnDeclarationListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertTrue' method."
     }
 
     @Test
@@ -196,7 +230,7 @@ class AssertTrueOnDeclarationListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
+                "Declaration list is empty. Please make sure that list of declarations contain items before calling the 'assertFalse' method."
     }
 
     @Test
@@ -235,8 +269,8 @@ class AssertTrueOnDeclarationListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
-            "before calling the 'assertTrue' method."
+                "Declaration list contains only null elements. Please make sure that list of declarations contain items " +
+                "before calling the 'assertTrue' method."
     }
 
     @Test
@@ -253,8 +287,8 @@ class AssertTrueOnDeclarationListTest {
 
         // then
         func shouldThrow KoPreconditionFailedException::class withMessage
-            "Declaration list contains only null elements. Please make sure that list of declarations contain items" +
-            " before calling the 'assertFalse' method."
+                "Declaration list contains only null elements. Please make sure that list of declarations contain items" +
+                " before calling the 'assertFalse' method."
     }
 
     @Test

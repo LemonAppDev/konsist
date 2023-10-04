@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Test
 
 class AssertEmptyOnProviderSequenceTest {
     @Test
-    fun `provider-assert-test-method-name`() {
+    fun `provider-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("provider-assert-test-method-name")
+        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-junit-method-name")
             .declarations()
             .filterIsInstance<KoNameProvider>()
             .asSequence()
@@ -25,7 +25,24 @@ class AssertEmptyOnProviderSequenceTest {
         try {
             sut.assertEmpty()
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'provider-assert-test-method-name' failed.")
+            e.message?.shouldContain("Assert 'provider-assert-test-method-name-derived-from-junit-method-name' failed.")
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `provider-assert-test-method-name-derived-from-test-name-parameter`() {
+        // given
+        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-test-name-parameter")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+            .asSequence()
+
+        // then
+        try {
+            sut.assertEmpty(testName = "sample test")
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert 'sample test' failed.")
                 ?: throw e
         }
     }

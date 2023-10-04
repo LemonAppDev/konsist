@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test
 
 class AssertTrueOnSingleDeclarationTest {
     @Test
-    fun `declaration-assert-test-method-name`() {
+    fun `declaration-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name")
+        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-junit-method-name")
             .classes()
             .first()
 
@@ -22,15 +22,33 @@ class AssertTrueOnSingleDeclarationTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' was violated (1 time)")
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-test-method-name-derived-from-junit-method-name' was violated (1 time)"
+            )
                 ?: throw e
         }
     }
 
     @Test
-    fun `file-declaration-assert-test-method-name`() {
+    fun `declaration-assert-test-method-name-derived-from-test-name-parameter`() {
         // given
-        val sut = getSnippetFile("file-declaration-assert-test-method-name")
+        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-test-name-parameter")
+            .classes()
+            .first()
+
+        // then
+        try {
+            sut.assertTrue(testName = "sample test") { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert 'sample test' was violated (1 time)")
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `file-declaration-assert-test-method-name-derived-from-junit-method-name`() {
+        // given
+        val sut = getSnippetFile("file-declaration-assert-test-method-name-derived-from-junit-method-name")
             .files
             .first()
 
@@ -38,7 +56,25 @@ class AssertTrueOnSingleDeclarationTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'file-declaration-assert-test-method-name' was violated (1 time)")
+            e.message?.shouldContain(
+                "Assert 'file-declaration-assert-test-method-name-derived-from-junit-method-name' was violated (1 time)"
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `file-declaration-assert-test-method-name-derived-from-test-name-parameter`() {
+        // given
+        val sut = getSnippetFile("file-declaration-assert-test-method-name-derived-from-test-name-parameter")
+            .files
+            .first()
+
+        // then
+        try {
+            sut.assertTrue(testName = "sample test") { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert 'sample test' was violated (1 time)")
                 ?: throw e
         }
     }

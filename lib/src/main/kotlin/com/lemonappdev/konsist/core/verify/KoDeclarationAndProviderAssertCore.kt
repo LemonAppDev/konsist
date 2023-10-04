@@ -25,11 +25,12 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     try {
         val fifthIndexMethodName = getTestMethodNameFromFifthIndex()
 
-        val testMethodName = if (fifthIndexMethodName.contains("\$default")) {
-            getTestMethodNameFromSixthIndex()
-        } else {
-            fifthIndexMethodName
-        }
+        val testMethodName = testName
+            ?: if (fifthIndexMethodName.contains("\$default")) {
+                getTestMethodNameFromSixthIndex()
+            } else {
+                fifthIndexMethodName
+            }
 
         val assertMethodName = getTestMethodNameFromFourthIndex()
 
@@ -65,7 +66,8 @@ internal fun <E : KoBaseProvider> List<E?>.assert(
     try {
         val fifthIndexMethodName = getTestMethodNameFromFifthIndex()
 
-        val testMethodName = if (fifthIndexMethodName.contains("\$default")) {
+        val testMethodName = testName
+            ?: if (fifthIndexMethodName.contains("\$default")) {
             getTestMethodNameFromSixthIndex()
         } else {
             fifthIndexMethodName

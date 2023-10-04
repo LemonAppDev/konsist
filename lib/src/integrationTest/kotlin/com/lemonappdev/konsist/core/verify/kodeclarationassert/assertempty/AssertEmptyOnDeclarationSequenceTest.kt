@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test
 
 class AssertEmptyOnDeclarationSequenceTest {
     @Test
-    fun `declaration-assert-test-method-name`() {
+    fun `declaration-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name")
+        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-junit-method-name")
             .classes()
             .asSequence()
 
@@ -21,7 +21,25 @@ class AssertEmptyOnDeclarationSequenceTest {
         try {
             sut.assertEmpty()
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'declaration-assert-test-method-name' failed.")
+            e.message?.shouldContain(
+                "Assert 'declaration-assert-test-method-name-derived-from-junit-method-name' failed."
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `declaration-assert-test-method-name-derived-from-test-name-parameter`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-test-name-parameter")
+            .classes()
+            .asSequence()
+
+        // then
+        try {
+            sut.assertEmpty(testName = "sample test")
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert 'sample test' failed.")
                 ?: throw e
         }
     }

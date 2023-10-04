@@ -17,9 +17,9 @@ import org.junit.jupiter.api.Test
 
 class AssertTrueOnSingleProviderTest {
     @Test
-    fun `provider-assert-test-method-name`() {
+    fun `provider-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("provider-assert-test-method-name")
+        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-junit-method-name")
             .declarations()
             .filterNot { it is KoFileDeclaration }
             .filterIsInstance<KoNameProvider>()
@@ -29,7 +29,25 @@ class AssertTrueOnSingleProviderTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'provider-assert-test-method-name' was violated (1 time)")
+            e.message?.shouldContain("Assert 'provider-assert-test-method-name-derived-from-junit-method-name' was violated (1 time)")
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `provider-assert-test-method-name-derived-from-test-name-parameter`() {
+        // given
+        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-test-name-parameter")
+            .declarations()
+            .filterNot { it is KoFileDeclaration }
+            .filterIsInstance<KoNameProvider>()
+            .first()
+
+        // then
+        try {
+            sut.assertTrue(testName = "sample test") { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert 'sample test' was violated (1 time)")
                 ?: throw e
         }
     }
