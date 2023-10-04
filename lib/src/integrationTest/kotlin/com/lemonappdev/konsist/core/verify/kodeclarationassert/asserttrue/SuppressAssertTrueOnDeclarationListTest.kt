@@ -37,7 +37,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -48,7 +48,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -83,7 +83,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -94,7 +94,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -127,7 +127,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -138,7 +138,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -174,7 +174,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue(testName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -186,7 +186,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue(testName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -222,7 +222,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue(testName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -234,7 +234,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
+        sut.assertTrue(testName = "suppress-text") { it.hasLocalFunction { function -> function.name == "otherFunction" } }
     }
 
     @Test
@@ -275,7 +275,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .localFunctions
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -288,7 +288,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .localFunctions
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -331,7 +331,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .localFunctions
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -344,7 +344,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .localFunctions
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -383,7 +383,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .localFunctions
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -396,7 +396,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .localFunctions
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -418,7 +418,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .functions(includeNested = true)
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("Text") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("Text") }
     }
 
     @Test
@@ -457,7 +457,7 @@ class SuppressAssertTrueOnDeclarationListTest {
             .files
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("suppress") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("suppress") }
     }
 
     @Test
@@ -470,7 +470,7 @@ class SuppressAssertTrueOnDeclarationListTest {
             .files
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("suppress") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("suppress") }
     }
 
     @Test
@@ -496,7 +496,7 @@ class SuppressAssertTrueOnDeclarationListTest {
             .files
 
         // then
-        sut.assertTrue(suppressName = "suppress-text") { it.name.endsWith("suppress") }
+        sut.assertTrue(testName = "suppress-text") { it.name.endsWith("suppress") }
     }
 
     @Test
@@ -507,7 +507,7 @@ class SuppressAssertTrueOnDeclarationListTest {
                 .functions(includeNested = true)
 
         // then
-        sut.assertTrue(suppressName = "konsist.assert-suppress-with-suppress-name-parameter") {
+        sut.assertTrue(testName = "konsist.assert-suppress-with-suppress-name-parameter") {
             it.name.endsWith("Kotest")
         }
     }

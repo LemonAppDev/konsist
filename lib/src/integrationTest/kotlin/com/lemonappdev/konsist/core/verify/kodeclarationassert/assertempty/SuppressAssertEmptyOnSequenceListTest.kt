@@ -41,7 +41,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -53,7 +53,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -91,7 +91,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -103,7 +103,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -142,7 +142,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -155,7 +155,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -194,7 +194,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -207,7 +207,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -246,7 +246,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -259,7 +259,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -303,7 +303,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -317,7 +317,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -363,7 +363,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -377,7 +377,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -419,7 +419,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -433,7 +433,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -457,7 +457,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -469,7 +469,7 @@ class SuppressAssertEmptyOnSequenceListTest {
                 .asSequence()
 
         // then
-        sut.assertEmpty(suppressName = "konsist.assert-suppress-with-suppress-name-parameter")
+        sut.assertEmpty(testName = "konsist.assert-suppress-with-suppress-name-parameter")
     }
 
     private fun getSnippetFile(fileName: String) =

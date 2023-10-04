@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test
 
 class AssertTrueOnProviderListTest {
     @Test
-    fun `provider-assert-test-method-name`() {
+    fun `provider-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("provider-assert-test-method-name")
+        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-junit-method-name")
             .declarations()
             .filterIsInstance<KoNameProvider>()
 
@@ -26,7 +26,23 @@ class AssertTrueOnProviderListTest {
         try {
             sut.assertTrue { false }
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert 'provider-assert-test-method-name' was violated (2 times)")
+            e.message?.shouldContain("Assert 'provider-assert-test-method-name-derived-from-junit-method-name' was violated (2 times)")
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `provider-assert-test-method-name-derived-from-test-name-parameter`() {
+        // given
+        val sut = getSnippetFile("provider-assert-test-method-name-derived-from-test-name-parameter")
+            .declarations()
+            .filterIsInstance<KoNameProvider>()
+
+        // then
+        try {
+            sut.assertTrue(testName = "sample test") { false }
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert 'sample test' was violated (2 times)")
                 ?: throw e
         }
     }

@@ -46,7 +46,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -59,7 +59,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -100,7 +100,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -113,7 +113,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -155,7 +155,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -169,7 +169,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -208,7 +208,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -221,7 +221,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -260,7 +260,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -273,7 +273,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -320,7 +320,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -335,7 +335,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -378,7 +378,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -391,7 +391,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -430,7 +430,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -443,7 +443,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     @Test
@@ -471,7 +471,7 @@ class SuppressAssertNullOnSingleProviderTest {
                 .last()
 
         // then
-        sut.assertNull(suppressName = "suppress-text")
+        sut.assertNull(testName = "suppress-text")
     }
 
     private fun getSnippetFile(fileName: String) =

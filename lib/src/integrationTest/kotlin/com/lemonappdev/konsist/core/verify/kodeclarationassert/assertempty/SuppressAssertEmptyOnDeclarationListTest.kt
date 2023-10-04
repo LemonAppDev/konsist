@@ -38,7 +38,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -49,7 +49,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -84,7 +84,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -95,7 +95,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .classes(includeNested = true)
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -131,7 +131,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .classes()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -143,7 +143,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .classes()
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -179,7 +179,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -191,7 +191,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -227,7 +227,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -239,7 +239,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .initBlocks
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -280,7 +280,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .localFunctions
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -293,7 +293,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .localFunctions
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -336,7 +336,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .localFunctions
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -349,7 +349,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .localFunctions
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -388,7 +388,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .localFunctions
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -401,7 +401,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .localFunctions
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -423,7 +423,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .functions(includeNested = true)
 
         // then
-        sut.assertEmpty(suppressName = "suppress-text")
+        sut.assertEmpty(testName = "suppress-text")
     }
 
     @Test
@@ -434,7 +434,7 @@ class SuppressAssertEmptyOnDeclarationListTest {
                 .functions(includeNested = true)
 
         // then
-        sut.assertEmpty(suppressName = "konsist.assert-suppress-with-suppress-name-parameter")
+        sut.assertEmpty(testName = "konsist.assert-suppress-with-suppress-name-parameter")
     }
 
     private fun getSnippetFile(fileName: String) =

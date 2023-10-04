@@ -13,18 +13,19 @@ import com.lemonappdev.konsist.core.verify.assert
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
- *                however for koTest framework it hase to be manually specified to allow suppression.
+ * @param testName An optional test name recommended for `KoTest` tests. By default, test name is derived from JUnit method name,
+ *                 however for koTest framework it must be manually specified to be displayed in error messages
+ *                 and enable suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
 fun <E : KoBaseProvider> E?.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    suppressName: String? = null,
+    testName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    listOf(this).assert(strict, additionalMessage, suppressName, function, positiveCheck = true)
+    listOf(this).assert(strict, additionalMessage, testName, function, positiveCheck = true)
 }
 
 /**
@@ -37,18 +38,19 @@ fun <E : KoBaseProvider> E?.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
- *                however for koTest framework it hase to be manually specified to allow suppression.
+ * @param testName An optional test name recommended for `KoTest` tests. By default, test name is derived from JUnit method name,
+ *                 however for koTest framework it must be manually specified to be displayed in error messages
+ *                 and enable suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
 fun <E : KoBaseProvider> E?.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    suppressName: String? = null,
+    testName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    listOf(this).assert(strict, additionalMessage, suppressName, function, positiveCheck = false)
+    listOf(this).assert(strict, additionalMessage, testName, function, positiveCheck = false)
 }
 
 /**
@@ -61,18 +63,19 @@ fun <E : KoBaseProvider> E?.assertFalse(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
- *                however for koTest framework it hase to be manually specified to allow suppression.
+ * @param testName An optional test name recommended for `KoTest` tests. By default, test name is derived from JUnit method name,
+ *                 however for koTest framework it must be manually specified to be displayed in error messages
+ *                 and enable suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
 fun <E : KoBaseProvider> List<E?>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    suppressName: String? = null,
+    testName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    assert(strict, additionalMessage, suppressName, function, positiveCheck = true)
+    assert(strict, additionalMessage, testName, function, positiveCheck = true)
 }
 
 /**
@@ -85,18 +88,19 @@ fun <E : KoBaseProvider> List<E?>.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
- *                however for koTest framework it hase to be manually specified to allow suppression.
+ * @param testName An optional test name recommended for `KoTest` tests. By default, test name is derived from JUnit method name,
+ *                 however for koTest framework it must be manually specified to be displayed in error messages
+ *                 and enable suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
 fun <E : KoBaseProvider> List<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    suppressName: String? = null,
+    testName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    assert(strict, additionalMessage, suppressName, function, positiveCheck = false)
+    assert(strict, additionalMessage, testName, function, positiveCheck = false)
 }
 
 /**
@@ -109,18 +113,19 @@ fun <E : KoBaseProvider> List<E?>.assertFalse(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
- *                however for koTest framework it hase to be manually specified to allow suppression.
+ * @param testName An optional test name recommended for `KoTest` tests. By default, test name is derived from JUnit method name,
+ *                 however for koTest framework it must be manually specified to be displayed in error messages
+ *                 and enable suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered valid; otherwise, it's considered invalid.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    suppressName: String? = null,
+    testName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    this.toList().assert(strict, additionalMessage, suppressName, function, true)
+    this.toList().assert(strict, additionalMessage, testName, function, true)
 }
 
 /**
@@ -133,18 +138,19 @@ fun <E : KoBaseProvider> Sequence<E?>.assertTrue(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
- *                however for koTest framework it hase to be manually specified to allow suppression.
+ * @param testName An optional test name recommended for `KoTest` tests. By default, test name is derived from JUnit method name,
+ *                 however for koTest framework it must be manually specified to be displayed in error messages
+ *                 and enable suppression.
  * @param function The predicate function that takes an element of type [E] and returns a [Boolean] value.
  *                If the function returns `true`, the element is considered invalid; otherwise, it's considered valid.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    suppressName: String? = null,
+    testName: String? = null,
     function: (E) -> Boolean?,
 ): Unit {
-    this.toList().assert(strict, additionalMessage, suppressName, function, false)
+    this.toList().assert(strict, additionalMessage, testName, function, false)
 }
 
 /**
@@ -152,14 +158,15 @@ fun <E : KoBaseProvider> Sequence<E?>.assertFalse(
  *
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                          This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
- *                     however for koTest framework it hase to be manually specified to allow suppression.
+ * @param testName An optional test name recommended for `KoTest` tests. By default, test name is derived from JUnit method name,
+ *                 however for koTest framework it must be manually specified to be displayed in error messages
+ *                 and enable suppression.
  */
 fun <E : KoBaseProvider> E?.assertNull(
     additionalMessage: String? = null,
-    suppressName: String? = null,
+    testName: String? = null,
 ): Unit {
-    listOf(this).assert(true, additionalMessage, suppressName, isEmptyOrNull = true, onSingleElement = true)
+    listOf(this).assert(true, additionalMessage, testName, isEmptyOrNull = true, onSingleElement = true)
 }
 
 /**
@@ -167,14 +174,15 @@ fun <E : KoBaseProvider> E?.assertNull(
  *
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                          This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
- *                     however for koTest framework it hase to be manually specified to allow suppression.
+ * @param testName An optional test name recommended for `KoTest` tests. By default, test name is derived from JUnit method name,
+ *                 however for koTest framework it must be manually specified to be displayed in error messages
+ *                 and enable suppression.
  */
 fun <E : KoBaseProvider> E?.assertNotNull(
     additionalMessage: String? = null,
-    suppressName: String? = null,
+    testName: String? = null,
 ): Unit {
-    listOf(this).assert(true, additionalMessage, suppressName, isEmptyOrNull = false, onSingleElement = true)
+    listOf(this).assert(true, additionalMessage, testName, isEmptyOrNull = false, onSingleElement = true)
 }
 
 /**
@@ -187,15 +195,16 @@ fun <E : KoBaseProvider> E?.assertNotNull(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                         This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
- *                     however for koTest framework it hase to be manually specified to allow suppression.
+ * @param testName An optional test name recommended for `KoTest` tests. By default, test name is derived from JUnit method name,
+ *                 however for koTest framework it must be manually specified to be displayed in error messages
+ *                 and enable suppression.
  */
 fun <E : KoBaseProvider> List<E?>.assertEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    suppressName: String? = null,
+    testName: String? = null,
 ): Unit {
-    assert(strict, additionalMessage, suppressName, isEmptyOrNull = true, onSingleElement = false)
+    assert(strict, additionalMessage, testName, isEmptyOrNull = true, onSingleElement = false)
 }
 
 /**
@@ -208,15 +217,16 @@ fun <E : KoBaseProvider> List<E?>.assertEmpty(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                         This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
- *                     however for koTest framework it hase to be manually specified to allow suppression.
+ * @param testName An optional test name recommended for `KoTest` tests. By default, test name is derived from JUnit method name,
+ *                 however for koTest framework it must be manually specified to be displayed in error messages
+ *                 and enable suppression.
  */
 fun <E : KoBaseProvider> List<E?>.assertNotEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    suppressName: String? = null,
+    testName: String? = null,
 ): Unit {
-    assert(strict, additionalMessage, suppressName, isEmptyOrNull = false, onSingleElement = false)
+    assert(strict, additionalMessage, testName, isEmptyOrNull = false, onSingleElement = false)
 }
 
 /**
@@ -229,15 +239,16 @@ fun <E : KoBaseProvider> List<E?>.assertNotEmpty(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                         This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
- *                     however for koTest framework it hase to be manually specified to allow suppression.
+ * @param testName An optional test name recommended for `KoTest` tests. By default, test name is derived from JUnit method name,
+ *                 however for koTest framework it must be manually specified to be displayed in error messages
+ *                 and enable suppression.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    suppressName: String? = null,
+    testName: String? = null,
 ): Unit {
-    this.toList().assert(strict, additionalMessage, suppressName, isEmptyOrNull = true, onSingleElement = false)
+    this.toList().assert(strict, additionalMessage, testName, isEmptyOrNull = true, onSingleElement = false)
 }
 
 /**
@@ -250,15 +261,16 @@ fun <E : KoBaseProvider> Sequence<E?>.assertEmpty(
  *               By default, false.
  * @param additionalMessage An optional message to provide additional context when the assertion fails.
  *                         This message will be included in the assertion error if the assertion fails.
- * @param suppressName An optional suppress name. By default, suppress name is derived from JUnit method name,
- *                     however for koTest framework it hase to be manually specified to allow suppression.
+ * @param testName An optional test name recommended for `KoTest` tests. By default, test name is derived from JUnit method name,
+ *                 however for koTest framework it must be manually specified to be displayed in error messages
+ *                 and enable suppression.
  */
 fun <E : KoBaseProvider> Sequence<E?>.assertNotEmpty(
     strict: Boolean = false,
     additionalMessage: String? = null,
-    suppressName: String? = null,
+    testName: String? = null,
 ): Unit {
-    this.toList().assert(strict, additionalMessage, suppressName, isEmptyOrNull = false, onSingleElement = false)
+    this.toList().assert(strict, additionalMessage, testName, isEmptyOrNull = false, onSingleElement = false)
 }
 
 /**

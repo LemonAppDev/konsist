@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test
 
 class AssertNullOnSingleDeclarationTest {
     @Test
-    fun `declaration-assert-test-method-name`() {
+    fun `declaration-assert-test-method-name-derived-from-junit-method-name`() {
         // given
-        val sut = getSnippetFile("declaration-assert-test-method-name")
+        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-junit-method-name")
             .classes()
             .first()
 
@@ -20,7 +20,25 @@ class AssertNullOnSingleDeclarationTest {
         try {
             sut.assertNull()
         } catch (e: Exception) {
-            e.message?.shouldContain("Assert `declaration-assert-test-method-name` failed.")
+            e.message?.shouldContain(
+                "Assert `declaration-assert-test-method-name-derived-from-junit-method-name` failed.",
+            )
+                ?: throw e
+        }
+    }
+
+    @Test
+    fun `declaration-assert-test-method-name-derived-from-test-name-parameter`() {
+        // given
+        val sut = getSnippetFile("declaration-assert-test-method-name-derived-from-test-name-parameter")
+            .classes()
+            .first()
+
+        // then
+        try {
+            sut.assertNull(testName = "sample test")
+        } catch (e: Exception) {
+            e.message?.shouldContain("Assert `sample test` failed.")
                 ?: throw e
         }
     }
