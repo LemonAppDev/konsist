@@ -1,0 +1,10 @@
+var sampleProperty: String = "text"
+    set(value) {
+        val sampleLocalProperty: Boolean = true
+
+        fun sampleLocalFunction() { }
+
+        class SampleLocalClass
+
+        if (true) field = value
+    }
