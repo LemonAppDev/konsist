@@ -16,7 +16,8 @@ class LibClassTest(val libParameterTest: String) : LibInterfaceTest {
 
 interface LibInterfaceTest
 
-val libPropertyTest: LibClassTest = LibClassTest("lib value test")
+val libPropertyTest: LibClassTest
+    get() = LibClassTest("lib value test")
 
 object LibObjectTest
 

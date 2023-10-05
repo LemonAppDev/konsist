@@ -13,6 +13,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
+import com.lemonappdev.konsist.core.provider.KoGetterProviderCore
 import com.lemonappdev.konsist.core.provider.KoImplementationProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
@@ -42,6 +43,7 @@ import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
@@ -94,8 +96,11 @@ internal class KoPropertyDeclarationCore private constructor(
     KoFinalModifierProviderCore,
     KoActualModifierProviderCore,
     KoExpectModifierProviderCore,
-    KoConstModifierProviderCore {
+    KoConstModifierProviderCore,
+    KoGetterProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktCallableDeclaration }
+
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktCallableDeclaration }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktCallableDeclaration }
 

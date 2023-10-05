@@ -5,13 +5,13 @@ import com.lemonappdev.konsist.api.provider.modifier.KoModifierProvider
 import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.util.EndOfLine
-import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
+import org.jetbrains.kotlin.psi.KtModifierListOwner
 
 internal interface KoModifierProviderCore : KoModifierProvider, KoBaseProviderCore {
-    val ktTypeParameterListOwner: KtTypeParameterListOwner
+    val ktModifierListOwner: KtModifierListOwner
 
     override val modifiers: List<KoModifier>
-        get() = ktTypeParameterListOwner
+        get() = ktModifierListOwner
             .modifierList
             ?.text
             ?.removeMultilineComments()

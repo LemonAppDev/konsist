@@ -29,6 +29,7 @@ import com.lemonappdev.konsist.core.provider.modifier.KoVarModifierProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.KtTypeReference
@@ -62,6 +63,8 @@ internal class KoParameterDeclarationCore private constructor(
     KoNoInlineModifierProviderCore,
     KoCrossInlineModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktParameter }
+
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktParameter }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktParameter }
 
