@@ -14,7 +14,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoGetterProviderCore
-import com.lemonappdev.konsist.core.provider.KoImplementationProviderCore
+import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -43,12 +43,12 @@ import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProvid
 import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
+import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
-import org.jetbrains.kotlin.psi.psiUtil.hasBody
 
 internal class KoPropertyDeclarationCore private constructor(
     /*
@@ -73,7 +73,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KoDeclarationFullyQualifiedNameProviderCore,
     KoDelegateProviderCore,
     KoPropertyTypeProviderCore,
-    KoImplementationProviderCore,
+    KoInitializerProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
     KoModifierProviderCore,
@@ -110,7 +110,7 @@ internal class KoPropertyDeclarationCore private constructor(
 
     override val ktElement: KtElement by lazy { ktCallableDeclaration }
 
-    override val hasImplementation: Boolean = ktCallableDeclaration.hasBody()
+    override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
 
     override val delegateName: String? by lazy {
         if (ktCallableDeclaration is KtProperty) {

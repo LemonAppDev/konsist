@@ -1,0 +1,4 @@
+val sampleProperty: Int
+    get() {
+        return 6
+    }

@@ -9,6 +9,7 @@ import com.lemonappdev.konsist.core.provider.KoBaseProviderCore
 import com.lemonappdev.konsist.core.provider.KoBodyProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
+import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalClassProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalDeclarationProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocalFunctionProviderCore
@@ -20,6 +21,7 @@ import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoVisibilityModifierProviderCore
 import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
+import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtDeclarationWithBody
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
@@ -34,6 +36,7 @@ internal class KoGetterDeclarationCore private constructor(
     KoBodyProviderCore,
     KoContainingDeclarationProviderCore,
     KoContainingFileProviderCore,
+    KoInitializerProviderCore,
     KoLocalClassProviderCore,
     KoLocalDeclarationProviderCore,
     KoLocalFunctionProviderCore,
@@ -52,6 +55,8 @@ internal class KoGetterDeclarationCore private constructor(
 
     override val ktModifierListOwner: KtModifierListOwner by lazy { ktPropertyAccessor }
 
+    override val ktDeclaration: KtDeclaration by lazy { ktPropertyAccessor }
+
     override val localDeclarations: List<KoBaseDeclaration> by lazy {
         val psiElements = ktPropertyAccessor
             .bodyBlockExpression
@@ -61,6 +66,8 @@ internal class KoGetterDeclarationCore private constructor(
     }
 
     override val hasPublicOrDefaultModifier: Boolean by lazy { !(hasPrivateModifier || hasProtectedModifier || hasInternalModifier) }
+
+    override val isInitialized: Boolean by lazy { hasExpressionBody || hasBlockBody }
 
     override fun toString(): String = locationWithText
 
