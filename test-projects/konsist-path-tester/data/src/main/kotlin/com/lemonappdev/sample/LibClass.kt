@@ -16,8 +16,9 @@ class LibClass(val libParameter: String) : LibInterface {
 
 interface LibInterface
 
-val libProperty: LibClass
+var libProperty: LibClass = LibClass("")
     get() = LibClass("lib value")
+    private set
 
 object LibObject
 

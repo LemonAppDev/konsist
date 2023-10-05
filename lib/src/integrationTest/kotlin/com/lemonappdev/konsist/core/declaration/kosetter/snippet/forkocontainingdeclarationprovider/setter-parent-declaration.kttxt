@@ -1,0 +1,4 @@
+var sampleProperty: String = "text"
+    set(value) {
+        if (true) field = value
+    }

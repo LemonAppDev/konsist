@@ -16,8 +16,9 @@ class AppClass(val appParameter: String) : AppInterface {
 
 interface AppInterface
 
-val appProperty: AppClass
+var appProperty: AppClass = AppClass("")
     get() = AppClass("app value")
+    private set
 
 object AppObject
 
