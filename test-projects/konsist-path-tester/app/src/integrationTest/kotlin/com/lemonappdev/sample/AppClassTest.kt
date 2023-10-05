@@ -16,8 +16,9 @@ class AppClassTest(val appParameterTest: String) : AppInterfaceTest {
 
 interface AppInterfaceTest
 
-val appPropertyTest: AppClassTest
+var appPropertyTest: AppClassTest = AppClassTest("")
     get() = AppClassTest("app value test")
+    private set
 
 object AppObjectTest
 
