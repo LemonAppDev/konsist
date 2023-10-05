@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test
 
 class KoPropertyDeclarationForKoInitializerProviderTest {
     @Test
-    fun `property-inside-interface-is-initialized-in-block-body`() {
+    fun `property-is-initialized-in-default-getter`() {
         // given
-        val sut = getSnippetFile("property-inside-interface-is-initialized-in-block-body")
-            .properties(includeNested = true)
+        val sut = getSnippetFile("property-is-initialized-in-default-getter")
+            .properties()
             .first()
 
         // then
@@ -17,10 +17,21 @@ class KoPropertyDeclarationForKoInitializerProviderTest {
     }
 
     @Test
-    fun `property-inside-interface-is-initialized-in-expression-body`() {
+    fun `property-is-initialized-in-getter-block-body`() {
         // given
-        val sut = getSnippetFile("property-inside-interface-is-initialized-in-expression-body")
-            .properties(includeNested = true)
+        val sut = getSnippetFile("property-is-initialized-in-getter-block-body")
+            .properties()
+            .first()
+
+        // then
+        sut.isInitialized shouldBeEqualTo true
+    }
+
+    @Test
+    fun `property-is-initialized-in-getter-expression-body`() {
+        // given
+        val sut = getSnippetFile("property-is-initialized-in-getter-expression-body")
+            .properties()
             .first()
 
         // then
@@ -31,7 +42,7 @@ class KoPropertyDeclarationForKoInitializerProviderTest {
     fun `property-inside-interface-is-not-initialized`() {
         // given
         val sut = getSnippetFile("property-inside-interface-is-not-initialized")
-            .properties(includeNested = true)
+            .properties()
             .first()
 
         // then

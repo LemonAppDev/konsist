@@ -43,6 +43,7 @@ import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProvid
 import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
+import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
@@ -110,7 +111,7 @@ internal class KoPropertyDeclarationCore private constructor(
 
     override val ktElement: KtElement by lazy { ktCallableDeclaration }
 
-    override val isInitialized: Boolean = ktCallableDeclaration.hasBody()
+    override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
 
     override val delegateName: String? by lazy {
         if (ktCallableDeclaration is KtProperty) {

@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test
 
 class KoFunctionDeclarationForKoInitializerProviderTest {
     @Test
-    fun `function-inside-interface-is-initialized-in-block-body`() {
+    fun `function-is-initialized-in-block-body`() {
         // given
-        val sut = getSnippetFile("function-inside-interface-is-initialized-in-block-body")
+        val sut = getSnippetFile("function-is-initialized-in-block-body")
             .functions(includeNested = true)
             .first()
 
@@ -17,9 +17,9 @@ class KoFunctionDeclarationForKoInitializerProviderTest {
     }
 
     @Test
-    fun `function-inside-interface-is-initialized-in-expression-body`() {
+    fun `function-is-initialized-in-expression-body`() {
         // given
-        val sut = getSnippetFile("function-inside-interface-is-initialized-in-expression-body")
+        val sut = getSnippetFile("function-is-initialized-in-expression-body")
             .functions(includeNested = true)
             .first()
 

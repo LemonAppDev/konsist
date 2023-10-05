@@ -45,6 +45,7 @@ import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProvid
 import com.lemonappdev.konsist.core.provider.util.KoLocalDeclarationProviderCoreUtil
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
+import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtDeclarationWithBody
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunction
@@ -107,7 +108,7 @@ internal class KoFunctionDeclarationCore private constructor(
 
     override val ktDeclarationWithBody: KtDeclarationWithBody by lazy { ktFunction }
 
-    override val isInitialized: Boolean = ktFunction.hasBody()
+    override val ktDeclaration: KtDeclaration by lazy { ktFunction }
 
     override val localDeclarations: List<KoBaseDeclaration> by lazy {
         val psiElements = ktFunction
