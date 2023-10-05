@@ -8,5 +8,13 @@ interface KoValueProvider : KoBaseProvider {
     /**
      * The value of declaration.
      */
-    val value: String
+    val value: String?
+
+    /**
+     * Whether the declaration ha the value.
+     *
+     * @param value the value to check (optional).
+     * @return `true` if the declaration has the specified value (or any value if [value] is `null`), `false` otherwise.
+     */
+    fun hasValue(value: String? = null): Boolean
 }

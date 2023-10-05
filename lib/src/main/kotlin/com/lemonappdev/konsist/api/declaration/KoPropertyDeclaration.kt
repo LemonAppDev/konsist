@@ -22,6 +22,7 @@ import com.lemonappdev.konsist.api.provider.KoSetterProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
+import com.lemonappdev.konsist.api.provider.KoValueProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoActualModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoConstModifierProvider
@@ -61,6 +62,7 @@ interface KoPropertyDeclaration :
     KoResideInPackageProvider,
     KoTextProvider,
     KoTopLevelProvider,
+    KoValueProvider,
     KoVisibilityModifierProvider,
     KoValModifierProvider,
     KoVarModifierProvider,

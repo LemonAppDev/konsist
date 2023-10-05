@@ -27,6 +27,7 @@ import com.lemonappdev.konsist.core.provider.KoSetterProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.KoValueProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoConstModifierProviderCore
@@ -44,10 +45,12 @@ import com.lemonappdev.konsist.core.util.EndOfLine
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
+import org.jetbrains.kotlin.psi.KtValueArgument
 import org.jetbrains.kotlin.psi.psiUtil.hasBody
 
 internal class KoPropertyDeclarationCore private constructor(
@@ -87,6 +90,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KoResideInPackageProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
+    KoValueProviderCore,
     KoVisibilityModifierProviderCore,
     KoValModifierProviderCore,
     KoVarModifierProviderCore,
@@ -109,6 +113,8 @@ internal class KoPropertyDeclarationCore private constructor(
     override val psiElement: PsiElement by lazy { ktCallableDeclaration }
 
     override val ktElement: KtElement by lazy { ktCallableDeclaration }
+
+    override val ktExpression: KtExpression by lazy { ktCallableDeclaration }
 
     override val hasImplementation: Boolean = ktCallableDeclaration.hasBody()
 
