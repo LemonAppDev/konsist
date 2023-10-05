@@ -7,6 +7,21 @@ import org.junit.jupiter.api.Test
 
 class KoSetterDeclarationForKoBodyProviderTest {
     @Test
+    fun `setter-has-no-body`() {
+        // given
+        val sut = getSnippetFile("setter-has-no-body")
+            .properties()
+            .first()
+            .setter
+
+        // then
+        assertSoftly(sut) {
+            it?.hasExpressionBody shouldBeEqualTo false
+            it?.hasBlockBody shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `setter-has-expression-body`() {
         // given
         val sut = getSnippetFile("setter-has-expression-body")

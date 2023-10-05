@@ -1,0 +1,2 @@
+var sampleProperty: String = "text"
+    private set

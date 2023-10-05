@@ -8,6 +8,20 @@ import org.junit.jupiter.api.Test
 
 class KoFunctionDeclarationForKoBodyProviderTest {
     @Test
+    fun `function-has-no-body`() {
+        // given
+        val sut = getSnippetFile("function-has-no-body")
+            .functions()
+            .first()
+
+        // then
+        assertSoftly(sut) {
+            hasExpressionBody shouldBeEqualTo false
+            hasBlockBody shouldBeEqualTo false
+        }
+    }
+
+    @Test
     fun `function-has-expression-body`() {
         // given
         val sut = getSnippetFile("function-has-expression-body")
