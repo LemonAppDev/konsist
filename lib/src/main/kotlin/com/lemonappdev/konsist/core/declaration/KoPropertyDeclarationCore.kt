@@ -14,7 +14,7 @@ import com.lemonappdev.konsist.core.provider.KoContainingFileProviderCore
 import com.lemonappdev.konsist.core.provider.KoDeclarationFullyQualifiedNameProviderCore
 import com.lemonappdev.konsist.core.provider.KoDelegateProviderCore
 import com.lemonappdev.konsist.core.provider.KoGetterProviderCore
-import com.lemonappdev.konsist.core.provider.KoImplementationProviderCore
+import com.lemonappdev.konsist.core.provider.KoInitializerProviderCore
 import com.lemonappdev.konsist.core.provider.KoKDocProviderCore
 import com.lemonappdev.konsist.core.provider.KoLocationProviderCore
 import com.lemonappdev.konsist.core.provider.KoModuleProviderCore
@@ -73,7 +73,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KoDeclarationFullyQualifiedNameProviderCore,
     KoDelegateProviderCore,
     KoPropertyTypeProviderCore,
-    KoImplementationProviderCore,
+    KoInitializerProviderCore,
     KoKDocProviderCore,
     KoLocationProviderCore,
     KoModifierProviderCore,
@@ -110,7 +110,7 @@ internal class KoPropertyDeclarationCore private constructor(
 
     override val ktElement: KtElement by lazy { ktCallableDeclaration }
 
-    override val hasImplementation: Boolean = ktCallableDeclaration.hasBody()
+    override val isInitialized: Boolean = ktCallableDeclaration.hasBody()
 
     override val delegateName: String? by lazy {
         if (ktCallableDeclaration is KtProperty) {
