@@ -1,0 +1,5 @@
+var sampleProperty: Int = 0
+    get() = 1
+    set(value) {
+        field + 2 + value
+    }
