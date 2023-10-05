@@ -49,7 +49,6 @@ import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
-import org.jetbrains.kotlin.psi.psiUtil.hasBody
 
 internal class KoPropertyDeclarationCore private constructor(
     /*

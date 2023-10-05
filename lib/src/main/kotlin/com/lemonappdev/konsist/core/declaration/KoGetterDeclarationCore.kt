@@ -26,7 +26,6 @@ import org.jetbrains.kotlin.psi.KtDeclarationWithBody
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtPropertyAccessor
-import org.jetbrains.kotlin.psi.psiUtil.hasBody
 
 internal class KoGetterDeclarationCore private constructor(
     private val ktPropertyAccessor: KtPropertyAccessor,
