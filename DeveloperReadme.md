@@ -83,72 +83,137 @@ fix starter link
 
 - `./gradlew dokkaHtml` - generate KDocs in `./lib/build/dokka/html/index.html`
 
-# Naming Conventions
+## Naming Conventions
 
-If we create extensions with `vararg` for a property in a declaration class we must check its return type.
+### Naming Conventions For Providers With Property With `List<KoXDeclaration>` Type
 
-## Singular return type
+We have three options:
+- `KoXDeclaration` not implements `KoNameProvider`  (e.g. `KoBaseDeclaration`, `KoInitBlockDeclaration`)
+- `KoXDeclaration` implements `KoNameProvider`(so it has access to `name` property, e.g. `KoClassDeclaration`,
+  `KoFunctionDeclaration`)
+- some exceptions, like: `KoKDocTagDeclaration`, `KoModifier` etc. 
 
-We have two options: this type always exist (like name or path) or is optional (like package or parent class).
-In both cases create two extensions:
+#### Option 1: `KoXDeclaration` not implements `KoNameProvider`
+In provider with property with type `List<KoXDeclaration>` where `KoXDeclaration` not implements `KoNameProvider` we create:
+- properties
+  - with prefix `num` and the name of the X item in the plural number
+    - Specifies how many items there are.
+- functions
+  - with prefix `count` and the name of the X item in the plural number with `predicate` lambda parameter
+    - Specifies how many items satisfies given predicate.
+  - with prefix `has` and the name of the X item in the plural number
+    - Specifies whether declaration has any item.
+  - with prefix `has` and the name of the X item in the singular number with `predicate` lambda parameter
+      - Specifies whether declaration has at least one item that satisfies given predicate.
+  - with prefix `hasAll` and the name of the X item in the plural number with `predicate` lambda parameter
+      - Specifies whether declaration has all items that satisfies given predicate.
 
-- with prefix 'with' and the name of the property in the singular number
-    - Such extension filters all objects in which this property complies with one of the given conditions
-- with prefix 'without' and the name of the property in the singular number
-    - Such extension filters all objects in which this property not complies with any of the given conditions
+#### Option 2: `KoXDeclaration` implements `KoNameProvider`
+In provider with property with type `List<KoXDeclaration>` where `KoXDeclaration` implements `KoNameProvider` we create 
+all properties and functions from the `Option 1` and also:
+- functions
+  - with prefix `has`, the name of the X item in the singular number and suffix `WithName` and with 
+  parameters: `(name: String, vararg names: String)`
+    - Specifies whether the declaration has at least one item whose name matches any of the specified names
+  - with prefix `has` and the name of the X item in the plural number and suffix `WithAllNames` and with 
+  parameters: `(name: String, vararg names: String)`
+    - Specifies whether the declaration has items with all the specified names
 
-### Type always exist
-E.g. In `KoClassDeclaration`, the `name` property returns `String` (singular - it's one object),
+#### Option 3: Some exceptions, like `KoModifierProvider` or `KoKDocTagProvider`
+In this option we have providers for which it makes no sense to pass `predicate` lambda parameter, especially if the
+list contains enum values. Instead of passing lambda parameter, we pass concrete enums. 
+- properties
+    - with prefix `num` and the name of the X item in the plural number
+        - Specifies how many items there are.
+- functions
+    - with prefix `has` and the name of the X item in the plural number
+        - Specifies whether declaration has any item.
+    - with prefix `has` and the name of the X item in the singular number with 
+  parameters: `(koXDeclaration: KoXDeclaration, vararg koXDeclarations: KoXDeclaration)`
+        - Specifies whether declaration has at least one specified item.
+    - with prefix `hasAll` and the name of the X item in the plural number with
+      parameters: `(koXDeclaration: KoXDeclaration, vararg koXDeclarations: KoXDeclaration)`
+        - Specifies whether declaration has all specified items.
+
+### Naming Conventions For List Extensions When Provider Has Property With `List<KoXDeclaration>` Type
+We have the same three options like above. 
+
+#### Option 1: `KoXDeclaration` not implements `KoNameProvider`
+For providers with property with type `List<KoXDeclaration>` where `KoXDeclaration` not implements `KoNameProvider` we 
+create extensions:
+- properties
+  - with the name of the X item in the plural number
+    - Mapping declaration to its items. 
+- functions
+  - with prefix `with/without` and the name of the X item in the plural number
+    - Filtering declarations with/without any item.
+  - with prefix `with/without` and the name of the X item in the singular number with `predicate` lambda parameter 
+  (to lambda we pass `KoXDeclaration`)
+    - Filtering declarations that have at least one/ not have item satisfying the provided predicate.
+  - with prefix `withAll/withoutAll` and the name of the X item in the plural number with `predicate` lambda parameter
+    (to lambda we pass `KoXDeclaration`)
+    - Filtering declarations that have all/have at least one item satisfying the provided predicate.
+  - with prefix `with/without` and the name of the X item in the plural number with `predicate` lambda parameter 
+  (to lambda we pass `List<KoXDeclaration>`)
+    - Filtering declarations with/without items satisfying the provided predicate.
+
+#### Option 2: `KoXDeclaration` implements `KoNameProvider`
+For providers with property with type `List<KoXDeclaration>` where `KoXDeclaration` implements `KoNameProvider` we create
+all properties and functions extensions from the `Option 1` and also:
+- functions
+  - with prefix `with/without`, the name of the X item in the singular number and suffix `Named` and with
+    parameters: `(name: String, vararg names: String)`
+    - Filtering declarations that have at least one/ not have item with the specified name(s)
+  - with prefix `withAll/withoutAll` and the name of the X item in the plural number and suffix `Named` and with
+    parameters: `(name: String, vararg names: String)`
+    - Filtering declarations that have all/ not have any items with the specified name(s)
+
+#### Option 3: Some exceptions, like `KoModifierProvider` or `KoKDocTagProvider`
+For such providers we create extensions:
+- properties
+  - with the name of the X item in the plural number
+    - Mapping declaration to its items.
+- functions
+  - with prefix `with/without` and the name of the X item in the plural number
+    - Filtering declarations with/without any item.
+  - with prefix `with/without`, the name of the X item in the singular number with
+  parameters: `(koXDeclaration: KoXDeclaration, vararg koXDeclarations: KoXDeclaration)`
+    - Filtering declarations that have at least one/not have the specified item
+  - with prefix `withAll/withoutAll`, the name of the X item in the plural number with
+    parameters: `(koXDeclaration: KoXDeclaration, vararg koXDeclarations: KoXDeclaration)`
+      - Filtering declarations that have all/not have any the specified item
+
+### Naming Conventions For List Extensions When Provider Has Property With `KoXDeclaration` Type
+Examples of such providers: `KoTypeProvider`, `KoReturnTypeProvider`. 
+We create extensions:
+- properties
+  - with the name of the X item in the plural number
+    - Mapping declaration to its item.
+- functions
+  - with prefix `with/without` and the name of the property in the singular number with `predicate` lambda parameter
+    - Filtering declarations that have/ not have item satisfying the provided predicate.
+
+### Naming Conventions For List Extensions When Provider Has Property With Other Singular Type
+#### Type always exist
+E.g. In `KoNameProvider`, the `name` property returns `String` (singular - it's one object),
 so we create two extensions:
 - `withName(name: String, vararg names: String)`
 - `withoutName(name: String, vararg names: String)`
 
-### Type is optional
-E.g. In `KoClassDeclaration`, the `parentClass` property returns `KoParentDeclaration` (singular - it's one object), 
+and if it makes sense:
+- `withName(predicate: (String) -> Boolean)`
+- `withoutName(predicate: (String) -> Boolean)`
+
+#### Type is optional
+E.g. In `KoAliasProvider`, the `alias` property returns `String?` (singular - it's one object: 
+`String` or null ), 
 so we create two extensions:
-    - `withParentClass(vararg names: String)`
-    - `withoutParentClass(vararg names: String)`
+- `withAlias(vararg names: String)`
+- `withoutAlias(vararg names: String)`
 
-The difference is that in the first case we force passing the parameter, in the second it is optional.
+#### The difference is that in the first case we force passing the parameter, in the second it is optional.
 
-## Return type is a list of objects
-
-Create six extensions:
-- with prefix 'with' and the name of the property in the plural number
-  - Such extension filters all objects in which this property complies with any condition
-- with prefix 'withAll' and the name of the property in the plural number
-  - Such extension filters all objects in which this property complies with all the given conditions
-- with prefix 'withSome' and the name of the property in the plural number
-  - Such extension filters all objects in which this property complies with at least one of the given conditions
-- with prefix 'without' and the name of the property in the plural number
-    - Such extension filters all objects in which this property not complies with any condition
-- with prefix 'withoutAll' and the name of the property in the plural number
-  - Such extension filters all objects in which this property not complies with all the given conditions
-- with prefix 'withoutSome' and the name of the property in the plural number
-    - Such extension filters all objects in which this property not complies with at least one of the given conditions
-
-E.g. In `KoClassDeclaration`, the `parentInterfaces` property returns `List<KoParentDeclaration>` (plural - it's list 
-of objects), so we create three extensions:
-- `withParentInterfaces()`
-- `withAllParentInterfaces(name: String, vararg names: String)`
-- `withSomeParentInterfaces(name: String, vararg names: String)`
-- `withoutParentInterfaces()`
-- `withoutAllParentInterfaces(name: String, vararg names: String)`
-- `withoutSomeParentInterfaces(name: String, vararg names: String)`
-
-Note that there are no parameters with the `with` and `without` prefixes, and in other cases we force the parameter 
-to be passed.
-
-## If parameters of extensions is of KClass type, then extension must have suffix 'Of'.
-
-E.g. In `KoClassDeclaration`:
-- `withParentClassOf(vararg names: KClass<*>)`
-- `withoutParentClassOf(vararg names: KClass<*>)`
-
-- `withAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
-- `withSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
-- `withoutAllParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
-- `withoutSomeParentInterfacesOf(name: KClass<*>, vararg names: KClass<*>)`
+### If parameters of extensions is of `KClass` type, then we create analogous extensions like for providers not implementing `KoNameProvider` but with suffix `Of`!
 
 ## Build Errors
 
