@@ -88,9 +88,9 @@ fix starter link
 ### Naming Conventions For Providers With Property With `List<KoXDeclaration>` Type
 
 We have three options:
-- `KoXDeclaration` not implements `KoNameProvider` (so it has access to `name` property, e.g. `KoClassDeclaration`,
-`KoFunctionDeclaration`)
-- `KoXDeclaration` implements `KoNameProvider` (e.g. `KoBaseDeclaration`, `KoInitBlockDeclaration`)
+- `KoXDeclaration` not implements `KoNameProvider`  (e.g. `KoBaseDeclaration`, `KoInitBlockDeclaration`)
+- `KoXDeclaration` implements `KoNameProvider`(so it has access to `name` property, e.g. `KoClassDeclaration`,
+  `KoFunctionDeclaration`)
 - some exceptions, like: `KoKDocTagDeclaration`, `KoModifier` etc. 
 
 #### Option 1: `KoXDeclaration` not implements `KoNameProvider`
@@ -102,11 +102,11 @@ In provider with property with type `List<KoXDeclaration>` where `KoXDeclaration
   - with prefix `count` and the name of the X item in the plural number with `predicate` lambda parameter
     - Specifies how many items satisfies given predicate.
   - with prefix `has` and the name of the X item in the plural number
-    - Specifies whether declaration has any X items.
+    - Specifies whether declaration has any item.
   - with prefix `has` and the name of the X item in the singular number with `predicate` lambda parameter
-      - Specifies whether declaration has at least one X item that satisfies given predicate.
+      - Specifies whether declaration has at least one item that satisfies given predicate.
   - with prefix `hasAll` and the name of the X item in the plural number with `predicate` lambda parameter
-      - Specifies whether declaration has all X items that satisfies given predicate.
+      - Specifies whether declaration has all items that satisfies given predicate.
 
 #### Option 2: `KoXDeclaration` implements `KoNameProvider`
 In provider with property with type `List<KoXDeclaration>` where `KoXDeclaration` implements `KoNameProvider` we create 
@@ -114,10 +114,10 @@ all properties and functions from the `Option 1` and also:
 - functions
   - with prefix `has`, the name of the X item in the singular number and suffix `WithName` and with 
   parameters: `(name: String, vararg names: String)`
-    - Specifies whether the declaration has at least one X item whose name matches any of the specified names
+    - Specifies whether the declaration has at least one item whose name matches any of the specified names
   - with prefix `has` and the name of the X item in the plural number and suffix `WithAllNames` and with 
   parameters: `(name: String, vararg names: String)`
-    - Specifies whether the declaration has X items with all the specified names
+    - Specifies whether the declaration has items with all the specified names
 
 #### Option 3: Some exceptions, like `KoModifierProvider` or `KoKDocTagProvider`
 In this option we have providers for which it makes no sense to pass `predicate` lambda parameter, especially if the
@@ -126,16 +126,14 @@ list contains enum values. Instead of passing lambda parameter, we pass concrete
     - with prefix `num` and the name of the X item in the plural number
         - Specifies how many items there are.
 - functions
-    - with prefix `count` and the name of the X item in the plural number with `predicate` lambda parameter
-        - Specifies how many items satisfies given predicate.
     - with prefix `has` and the name of the X item in the plural number
-        - Specifies whether declaration has any X items.
+        - Specifies whether declaration has any item.
     - with prefix `has` and the name of the X item in the singular number with 
   parameters: `(koXDeclaration: KoXDeclaration, vararg koXDeclarations: KoXDeclaration)`
-        - Specifies whether declaration has at least one specified X item.
+        - Specifies whether declaration has at least one specified item.
     - with prefix `hasAll` and the name of the X item in the plural number with
       parameters: `(koXDeclaration: KoXDeclaration, vararg koXDeclarations: KoXDeclaration)`
-        - Specifies whether declaration has all specified X items.
+        - Specifies whether declaration has all specified items.
 
 ### Naming Conventions For List Extensions When Provider Has Property With `List<KoXDeclaration>` Type
 We have the same three options like above. 
@@ -145,19 +143,19 @@ For providers with property with type `List<KoXDeclaration>` where `KoXDeclarati
 create extensions:
 - properties
   - with the name of the X item in the plural number
-    - Mapping declaration to its X items. 
+    - Mapping declaration to its items. 
 - functions
   - with prefix `with/without` and the name of the X item in the plural number
-    - Filtering declarations with/without any X item.
+    - Filtering declarations with/without any item.
   - with prefix `with/without` and the name of the X item in the singular number with `predicate` lambda parameter 
   (to lambda we pass `KoXDeclaration`)
-    - Filtering declarations that have at least one/ not have X item satisfying the provided predicate.
+    - Filtering declarations that have at least one/ not have item satisfying the provided predicate.
   - with prefix `withAll/withoutAll` and the name of the X item in the plural number with `predicate` lambda parameter
     (to lambda we pass `KoXDeclaration`)
-    - Filtering declarations that have all/have at least one X item satisfying the provided predicate.
+    - Filtering declarations that have all/have at least one item satisfying the provided predicate.
   - with prefix `with/without` and the name of the X item in the plural number with `predicate` lambda parameter 
   (to lambda we pass `List<KoXDeclaration>`)
-    - Filtering declarations with/without X items satisfying the provided predicate.
+    - Filtering declarations with/without items satisfying the provided predicate.
 
 #### Option 2: `KoXDeclaration` implements `KoNameProvider`
 For providers with property with type `List<KoXDeclaration>` where `KoXDeclaration` implements `KoNameProvider` we create
@@ -165,51 +163,57 @@ all properties and functions extensions from the `Option 1` and also:
 - functions
   - with prefix `with/without`, the name of the X item in the singular number and suffix `Named` and with
     parameters: `(name: String, vararg names: String)`
-    - Filtering declarations that have at least one/ not have X item with the specified name(s)
-  - with prefix `withAll/withoutAll` and the name of the X item in the plural number and suffix `Names` and with
+    - Filtering declarations that have at least one/ not have item with the specified name(s)
+  - with prefix `withAll/withoutAll` and the name of the X item in the plural number and suffix `Named` and with
     parameters: `(name: String, vararg names: String)`
-    - Filtering declarations that have all/ not have any X items with the specified name(s)
+    - Filtering declarations that have all/ not have any items with the specified name(s)
 
 #### Option 3: Some exceptions, like `KoModifierProvider` or `KoKDocTagProvider`
 For such providers we create extensions:
 - properties
   - with the name of the X item in the plural number
-    - Mapping declaration to its X items.
+    - Mapping declaration to its items.
 - functions
   - with prefix `with/without` and the name of the X item in the plural number
-    - Filtering declarations with/without any X item.
+    - Filtering declarations with/without any item.
   - with prefix `with/without`, the name of the X item in the singular number with
   parameters: `(koXDeclaration: KoXDeclaration, vararg koXDeclarations: KoXDeclaration)`
-    - Filtering declarations that have at least one/not have the specified X item
+    - Filtering declarations that have at least one/not have the specified item
   - with prefix `withAll/withoutAll`, the name of the X item in the plural number with
     parameters: `(koXDeclaration: KoXDeclaration, vararg koXDeclarations: KoXDeclaration)`
-      - Filtering declarations that have all/not have any the specified X item
+      - Filtering declarations that have all/not have any the specified item
 
 ### Naming Conventions For List Extensions When Provider Has Property With `KoXDeclaration` Type
+Examples of such providers: `KoTypeProvider`, `KoReturnTypeProvider`. 
 We create extensions:
 - properties
   - with the name of the X item in the plural number
-    - Mapping declaration to its X item.
+    - Mapping declaration to its item.
 - functions
   - with prefix `with/without` and the name of the property in the singular number with `predicate` lambda parameter
-    - Filtering declarations that have/ not have X item satisfying the provided predicate.
+    - Filtering declarations that have/ not have item satisfying the provided predicate.
 
 ### Naming Conventions For List Extensions When Provider Has Property With Other Singular Type
 #### Type always exist
-E.g. In `KoClassDeclaration`, the `name` property returns `String` (singular - it's one object),
+E.g. In `KoNameProvider`, the `name` property returns `String` (singular - it's one object),
 so we create two extensions:
 - `withName(name: String, vararg names: String)`
 - `withoutName(name: String, vararg names: String)`
 
+and if it makes sense:
+- `withName(predicate: (String) -> Boolean)`
+- `withoutName(predicate: (String) -> Boolean)`
+
 #### Type is optional
-E.g. In `KoClassDeclaration`, the `package` property returns `KoParentDeclaration` (singular - it's one object), 
+E.g. In `KoAliasProvider`, the `alias` property returns `String?` (singular - it's one object: 
+`String` or null ), 
 so we create two extensions:
-- `withPackage(vararg packages: String)`
-- `withoutPackage(vararg packages: String)`
+- `withAlias(vararg names: String)`
+- `withoutAlias(vararg names: String)`
 
-The difference is that in the first case we force passing the parameter, in the second it is optional.
+#### The difference is that in the first case we force passing the parameter, in the second it is optional.
 
-### If parameters of extensions is of KClass type, then extension must have suffix 'Of'!
+### If parameters of extensions is of `KClass` type, then we create analogous extensions like for providers not implementing `KoNameProvider` but with suffix `Of`!
 
 ## Build Errors
 
