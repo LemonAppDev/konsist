@@ -102,20 +102,23 @@ class KoValueProviderListExtTest {
         val value2 = "sampleValue2"
         val prefix = "sample"
         val suffix = "1"
-        val predicate: (String?) -> Boolean = { it?.startsWith(prefix) ?: false && it?.endsWith(suffix) ?: false }
+        val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix) }
         val declaration1: KoValueProvider = mockk {
             every { value } returns value1
         }
         val declaration2: KoValueProvider = mockk {
             every { value } returns value2
         }
-        val declarations = listOf(declaration1, declaration2)
+        val declaration3: KoValueProvider = mockk {
+            every { value } returns null
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
         val sut = declarations.withValue(predicate)
 
         // then
-        sut shouldBeEqualTo listOf(declaration1)
+        sut shouldBeEqualTo listOf(declaration1, declaration3)
     }
 
     @Test
@@ -125,19 +128,22 @@ class KoValueProviderListExtTest {
         val value2 = "sampleValue2"
         val prefix = "sample"
         val suffix = "1"
-        val predicate: (String?) -> Boolean = { it?.startsWith(prefix) ?: false && it?.endsWith(suffix) ?: false }
+        val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix) }
         val declaration1: KoValueProvider = mockk {
             every { value } returns value1
         }
         val declaration2: KoValueProvider = mockk {
             every { value } returns value2
         }
-        val declarations = listOf(declaration1, declaration2)
+        val declaration3: KoValueProvider = mockk {
+            every { value } returns null
+        }
+        val declarations = listOf(declaration1, declaration2, declaration3)
 
         // when
         val sut = declarations.withoutValue(predicate)
 
         // then
-        sut shouldBeEqualTo listOf(declaration2)
+        sut shouldBeEqualTo listOf(declaration2, declaration3)
     }
 }

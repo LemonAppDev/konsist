@@ -34,7 +34,9 @@ fun <T : KoValueProvider> List<T>.withoutValue(vararg values: String): List<T> =
  * @param predicate A function that defines the condition to be met by a declaration value.
  * @return A list containing declarations with the value matching the provided predicate.
  */
-fun <T : KoValueProvider> List<T>.withValue(predicate: (String?) -> Boolean): List<T> = filter { predicate(it.value) }
+fun <T : KoValueProvider> List<T>.withValue(predicate: (String) -> Boolean): List<T> = filter {
+    it.value?.let(predicate) ?: true
+}
 
 /**
  * List containing declarations that don't have a value matching the provided predicate.
@@ -42,5 +44,6 @@ fun <T : KoValueProvider> List<T>.withValue(predicate: (String?) -> Boolean): Li
  * @param predicate A function that defines the condition to be met by a declaration value.
  * @return A list containing declarations without the value matching the provided predicate.
  */
-fun <T : KoValueProvider> List<T>.withoutValue(predicate: (String?) -> Boolean): List<T> =
-    filterNot { predicate(it.value) }
+fun <T : KoValueProvider> List<T>.withoutValue(predicate: (String) -> Boolean): List<T> = filterNot {
+    it.value?.let(predicate) ?: false
+}
