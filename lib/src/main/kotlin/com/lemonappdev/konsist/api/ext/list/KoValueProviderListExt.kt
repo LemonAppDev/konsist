@@ -23,8 +23,8 @@ fun <T : KoValueProvider> List<T>.withValue(vararg values: String): List<T> = fi
  */
 fun <T : KoValueProvider> List<T>.withoutValue(vararg values: String): List<T> = filter {
     when {
-        values.isEmpty() ->  !it.hasValue()
-        else -> values.none { value ->  it.hasValue(value) }
+        values.isEmpty() -> !it.hasValue()
+        else -> values.none { value -> it.hasValue(value) }
     }
 }
 
