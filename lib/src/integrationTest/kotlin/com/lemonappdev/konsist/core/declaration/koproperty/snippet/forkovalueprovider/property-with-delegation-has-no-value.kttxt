@@ -1,1 +1,3 @@
-val sampleProperty by lazy { }
+val sampleProperty by lazy {
+    val x = 0
+}

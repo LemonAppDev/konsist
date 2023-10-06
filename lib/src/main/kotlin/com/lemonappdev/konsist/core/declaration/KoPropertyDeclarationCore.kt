@@ -50,8 +50,10 @@ import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtProperty
+import org.jetbrains.kotlin.psi.KtPropertyAccessor
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import org.jetbrains.kotlin.psi.psiUtil.hasBody
+import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 
 internal class KoPropertyDeclarationCore private constructor(
     /*
@@ -116,7 +118,13 @@ internal class KoPropertyDeclarationCore private constructor(
 
     override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
 
-    override val ktExpression: KtExpression by lazy { ktCallableDeclaration }
+    override val ktExpression: KtExpression? by lazy {
+        ktCallableDeclaration
+            .children
+            .filterNot { it is KtPropertyAccessor }
+            .filterIsInstance<KtExpression>()
+            .firstOrNull()
+    }
 
     override val delegateName: String? by lazy {
         if (ktCallableDeclaration is KtProperty) {

@@ -50,7 +50,7 @@ class KoPropertyDeclarationForKoValueProviderTest {
         // then
         assertSoftly(sut) {
             value shouldBeEqualTo "0"
-            hasValue() shouldBeEqualTo false
+            hasValue() shouldBeEqualTo true
             hasValue("0") shouldBeEqualTo true
             hasValue("10") shouldBeEqualTo false
         }
