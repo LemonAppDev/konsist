@@ -1,0 +1,2 @@
+val sampleProperty: String = ""
+    get
