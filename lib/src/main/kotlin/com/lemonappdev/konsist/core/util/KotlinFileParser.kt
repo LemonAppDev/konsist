@@ -31,6 +31,7 @@ object KotlinFileParser {
         PsiManager.getInstance(project)
     }
 
+    @Suppress("detekt.TooGenericExceptionCaught")
     private fun getKtFile(file: File): KtFile {
         require(file.isKotlinFile || file.isKotlinSnippetFile) { "File must be a Kotlin file" }
 
