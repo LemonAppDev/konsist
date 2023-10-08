@@ -5,6 +5,7 @@ import com.intellij.psi.PsiManager
 import com.intellij.testFramework.LightVirtualFile
 import com.lemonappdev.konsist.api.declaration.KoFileDeclaration
 import com.lemonappdev.konsist.core.declaration.KoFileDeclarationCore
+import com.lemonappdev.konsist.core.exception.KoInternalException
 import com.lemonappdev.konsist.core.ext.isKotlinFile
 import com.lemonappdev.konsist.core.ext.isKotlinSnippetFile
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
@@ -33,15 +34,19 @@ object KotlinFileParser {
     private fun getKtFile(file: File): KtFile {
         require(file.isKotlinFile || file.isKotlinSnippetFile) { "File must be a Kotlin file" }
 
-        val text = file
-            .readText()
-            .replace(Regex(EndOfLine.WINDOWS.value), EndOfLine.UNIX.value)
+        try {
+            val fileContent = file
+                .readText()
+                .replace(Regex(EndOfLine.WINDOWS.value), EndOfLine.UNIX.value)
 
-        // Tests are using code snippets with txt extension that is messing up with Kotlin file parsing
-        val filePath = file.path.replace(KOTLIN_SNIPPET_FILE_EXTENSION, KOTLIN_FILE_EXTENSION)
-        val lightVirtualFile = LightVirtualFile(filePath, KotlinFileType.INSTANCE, text)
-        val psiFile = psiManager.findFile(lightVirtualFile)
-        return psiFile as KtFile
+            // Tests are using code snippets with txt extension that is messing up with Kotlin file parsing
+            val filePath = file.path.replace(KOTLIN_SNIPPET_FILE_EXTENSION, KOTLIN_FILE_EXTENSION)
+            val lightVirtualFile = LightVirtualFile(filePath, KotlinFileType.INSTANCE, fileContent)
+            val psiFile = psiManager.findFile(lightVirtualFile)
+            return psiFile as KtFile
+        } catch (e: Exception) {
+            throw KoInternalException("Failed to parse Kotlin file: ${file.path}", e)
+        }
     }
 
     fun getKoFile(file: File): KoFileDeclaration {
