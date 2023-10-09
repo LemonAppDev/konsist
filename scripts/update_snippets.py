@@ -15,6 +15,9 @@ expanded_source_directory = os.path.expanduser(source_directory)
 expanded_destination_directory = os.path.expanduser(destination_directory)
 expanded_summary_path = os.path.expanduser(summary_path)
 
+# Branches
+main_branch = "main"
+
 
 # Methods ==============================================================================================================
 def split_text_to_function_list(file_text):
@@ -336,6 +339,19 @@ def copy_content(expanded_source_directory, expanded_destination_directory):
                         except Exception as e:
                             print(f"Error copying content: {e}")
 
+def commit_changed_files_and_switch_to_main():
+    try:
+        subprocess.run(["git", "status"], check=True)
+        subprocess.run(["git", "add", "."], check=True)
+        subprocess.run(["git", "commit", "-m", "Commit modified files"], check=True)
+        subprocess.run(["git", "checkout", main_branch], check=True)
+    except subprocess.CalledProcessError:
+        subprocess.run(["git", "checkout", main_branch], check=True)
+
+def pull_the_newest_version():
+    subprocess.run(["git", "fetch", "origin", main_branch], check=True)
+    subprocess.run(["git", "pull", "origin", main_branch], check=True)
+
 
 def push_changes():
     subprocess.run(["git", "add", "."], check=True)
@@ -354,6 +370,10 @@ def create_and_merge_pr():
 # Change the current working directory
 os.chdir(expanded_destination_directory)
 
+commit_changed_files_and_switch_to_main()
+
+pull_the_newest_version()
+
 create_git_branch()
 
 remove_files_recursively_except_readme(expanded_destination_directory)
@@ -363,5 +383,5 @@ copy_content(expanded_source_directory, expanded_destination_directory)
 # Commit and push changes
 push_changes()
 
-# Create and merge a pull request
+# # Create and merge a pull request
 create_and_merge_pr()
