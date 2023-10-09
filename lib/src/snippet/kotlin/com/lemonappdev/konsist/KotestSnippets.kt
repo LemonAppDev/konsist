@@ -5,14 +5,14 @@ import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.verify.assertTrue
 import io.kotest.core.spec.style.FreeSpec
 
-class KoTestSnippets {
+class KotestSnippets {
     class UseCaseTest : FreeSpec({
         "UseCase has test class" {
             Konsist
                 .scopeFromProject()
                 .classes()
                 .withNameEndingWith("UseCase")
-                .assertTrue { it.hasTestClass() }
+                .assertTrue(testName = this.testCase.name.testName) { it.hasTestClass() }
         }
     })
 
@@ -23,10 +23,10 @@ class KoTestSnippets {
             .withNameEndingWith("UseCase")
             .forEach { useCase ->
                 "${useCase.name} should have test" {
-                    useCase.assertTrue { it.hasTestClass() }
+                    useCase.assertTrue(testName = this.testCase.name.testName) { it.hasTestClass() }
                 }
                 "${useCase.name} should reside in ..domain..usecase.. package" {
-                    useCase.assertTrue { it.resideInPackage("..domain..usecase..") }
+                    useCase.assertTrue(testName = this.testCase.name.testName) { it.resideInPackage("..domain..usecase..") }
                 }
                 "${useCase.name} should ..." {
                     // another Konsist assert
