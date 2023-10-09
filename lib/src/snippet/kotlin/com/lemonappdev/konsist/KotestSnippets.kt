@@ -5,7 +5,7 @@ import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.verify.assertTrue
 import io.kotest.core.spec.style.FreeSpec
 
-class KoTestSnippets {
+class KotestSnippets {
     class UseCaseTest : FreeSpec({
         "UseCase has test class" {
             Konsist
