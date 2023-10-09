@@ -35,7 +35,7 @@ fun <T : KoValueProvider> List<T>.withoutValue(vararg values: String): List<T> =
  * @return A list containing declarations with the value matching the provided predicate.
  */
 fun <T : KoValueProvider> List<T>.withValue(predicate: (String) -> Boolean): List<T> = filter {
-    it.value?.let(predicate) ?: true
+    it.value?.let(predicate) ?: false
 }
 
 /**

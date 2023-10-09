@@ -98,11 +98,9 @@ class KoValueProviderListExtTest {
     @Test
     fun `withValue{predicate} returns declaration with value matching to predicate`() {
         // given
-        val value1 = "sampleValue1"
-        val value2 = "sampleValue2"
-        val prefix = "sample"
-        val suffix = "1"
-        val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix) }
+        val value1 = "value1"
+        val value2 = "value2"
+        val predicate: (String) -> Boolean = { it == value1 }
         val declaration1: KoValueProvider = mockk {
             every { value } returns value1
         }
@@ -118,17 +116,15 @@ class KoValueProviderListExtTest {
         val sut = declarations.withValue(predicate)
 
         // then
-        sut shouldBeEqualTo listOf(declaration1, declaration3)
+        sut shouldBeEqualTo listOf(declaration1)
     }
 
     @Test
     fun `withoutValue{predicate} returns declaration without value matching to predicate`() {
         // given
-        val value1 = "sampleValue1"
-        val value2 = "sampleValue2"
-        val prefix = "sample"
-        val suffix = "1"
-        val predicate: (String) -> Boolean = { it.startsWith(prefix) && it.endsWith(suffix) }
+        val value1 = "value1"
+        val value2 = "value2"
+        val predicate: (String) -> Boolean = { it == value1 }
         val declaration1: KoValueProvider = mockk {
             every { value } returns value1
         }
