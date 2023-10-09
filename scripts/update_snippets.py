@@ -383,5 +383,5 @@ copy_content(expanded_source_directory, expanded_destination_directory)
 # Commit and push changes
 push_changes()
 
-# # Create and merge a pull request
+# Create and merge a pull request
 create_and_merge_pr()
