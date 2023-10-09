@@ -2,7 +2,7 @@ package com.sample
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.withAllAnnotationsOf
-import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
@@ -13,6 +13,6 @@ class SampleKonsistTest {
             .scopeFromProject()
             .classes()
             .withAllAnnotationsOf(SpringBootApplication::class)
-            .assert { it.name.endsWith("SpringBootApplication") }
+            .assertTrue { it.name.endsWith("SpringBootApplication") }
     }
 }

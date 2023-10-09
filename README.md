@@ -92,7 +92,7 @@ fun `clean architecture layers have correct dependencies`() {
         }
 }
 ```
-
+    
 Check out our [snippet](https://docs.konsist.lemonappdev.com/inspiration/snippets) page for a feast of examples!
 
 ### Articles
