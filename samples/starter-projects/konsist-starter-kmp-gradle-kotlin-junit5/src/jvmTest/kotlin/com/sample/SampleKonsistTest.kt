@@ -2,7 +2,7 @@ package com.sample
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
-import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 
 class SampleKonsistTest {
@@ -12,6 +12,6 @@ class SampleKonsistTest {
             .scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
-            .assert { it.resideInPackage("..domain..") }
+            .assertTrue { it.resideInPackage("..domain..") }
     }
 }
