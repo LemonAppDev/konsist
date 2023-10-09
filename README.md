@@ -97,6 +97,7 @@ Check out our [snippet](https://docs.konsist.lemonappdev.com/inspiration/snippet
 ### Articles
 
 - [Introducing Konsist: A Cutting-Edge Kotlin Linter](https://blog.kotlin-academy.com/introducing-konsist-a-cutting-edge-kotlin-linter-d3ab916a5461)
+- [Konsist: First experience with the new linter for Kotlin](https://proandroiddev.com/konsist-first-experience-with-the-new-linter-for-kotlin-9153b0e7e2c3)
 - [Refactoring Multi-Module Kotlin Project With Konsist](https://proandroiddev.com/refactoring-multi-module-kotlin-project-with-konsist-f0de0de59a3d)
 - [ArchUnit vs. Konsist. Why Did We Need Another Kotlin Linter?](https://proandroiddev.com/archunit-vs-konsist-why-did-we-need-another-linter-972c4ff2622d)
 - [Protect Kotlin Project Architecture Using Konsist](https://proandroiddev.com/protect-kotlin-project-architecture-using-konsist-3bfbe1ad0eea)
