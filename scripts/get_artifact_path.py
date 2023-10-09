@@ -10,5 +10,5 @@ def get_artifact_path(extension):
     return artifact_path
 
 if __name__ == "__main__":
-    print(f'jar file_path path: {get_jar_artifact_path()}')
-    print(f'pom file_path path: {get_pom_artifact_path()}')
+    print(f'jar file_path path: {get_artifact_path("jar")}')
+    print(f'pom file_path path: {get_artifact_path("pom")}')
