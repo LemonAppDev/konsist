@@ -3,7 +3,7 @@ package com.sample
 import androidx.appcompat.app.AppCompatActivity
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.withAllParentsOf
-import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertTrue
 import io.kotest.core.spec.style.FreeSpec
 import org.junit.jupiter.api.Test
 
@@ -13,6 +13,6 @@ class SampleKonsistTest : FreeSpec({
             .scopeFromProject()
             .classes()
             .withAllParentsOf(AppCompatActivity::class)
-            .assert { it.name.endsWith("Activity") }
+            .assertTrue { it.name.endsWith("Activity") }
     }
 })
