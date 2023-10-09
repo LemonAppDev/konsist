@@ -12,7 +12,7 @@ class SampleKonsistTest : FreeSpec({
             .scopeFromProject()
             .classes()
             .withAllAnnotationsOf(SpringBootApplication::class)
-            .assert { it.name.endsWith("SpringBootApplication") }
+            .assertTrue { it.name.endsWith("SpringBootApplication") }
     }
 })
 

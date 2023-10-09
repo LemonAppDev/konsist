@@ -12,6 +12,6 @@ class SampleKonsistTest {
             .scopeFromProject()
             .classes()
             .withNameEndingWith("UseCase")
-            .assert { it.resideInPackage("..domain..") }
+            .assertTrue { it.resideInPackage("..domain..") }
     }
 }

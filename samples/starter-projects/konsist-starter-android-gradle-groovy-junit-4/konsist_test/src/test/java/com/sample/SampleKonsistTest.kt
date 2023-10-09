@@ -13,6 +13,6 @@ class SampleKonsistTest {
             .scopeFromProject()
             .classes()
             .withAllParentsOf(AppCompatActivity::class)
-            .assert { it.name.endsWith("Activity") }
+            .assertTrue { it.name.endsWith("Activity") }
     }
 }
