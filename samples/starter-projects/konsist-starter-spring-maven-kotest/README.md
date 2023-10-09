@@ -1,6 +1,6 @@
 # Konsist Sample
 
-This a Konsist sample is configured using [Maven](https://maven.apache.org),
+This a [Konsist](https://github.com/LemonAppDev/konsist) sample is configured using [Maven](https://maven.apache.org),
 [Spring](https://spring.io/),
 and [KoTest](https://kotest.io).
 

@@ -1,6 +1,7 @@
 # Konsist Sample
 
-This a Konsist sample is configured using [Gradle](https://docs.gradle.org/current/userguide/userguide.html),
+This a [Konsist](https://github.com/LemonAppDev/konsist) sample is configured 
+using [Gradle](https://docs.gradle.org/current/userguide/userguide.html),
 [Kotlin](https://kotlinlang.org/) (build script language), 
 [Spring](https://spring.io/),
 and [Junit 5](https://junit.org/junit5/).
@@ -19,3 +20,4 @@ To run tests use IDE UI or run gradle commands:
 See:
 - [Isolate Konsist tests](https://docs.konsist.lemonappdev.com/advanced/isolate-konsist-tests)
 - [Dynamic Konsist tests](https://docs.konsist.lemonappdev.com/advanced/dynamic-konsist-tests)
+    

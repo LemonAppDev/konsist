@@ -1,6 +1,6 @@
 # Konsist Sample
 
-This a Konsist sample is configured using [Gradle](https://docs.gradle.org/current/userguide/userguide.html),
+This a [Konsist](https://github.com/LemonAppDev/konsist) sample is configured using [Gradle](https://docs.gradle.org/current/userguide/userguide.html),
 [Groovy](https://groovy-lang.org/) (build script language),
 and [KoTest](https://kotest.io/).
 
