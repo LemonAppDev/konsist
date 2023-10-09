@@ -27,7 +27,7 @@ jobs:
       - name: Echo Run Condition (any true to run)
         run: |
           echo Base ref branch is "main": ${{ steps.branch-name.outputs.base_ref_branch == 'main' }}
-          echo Changed .kttxt files: ${{  contains(steps.branch-name.outputs.all_changed_files, '.kttxt') }}
+          echo Changed .kttxt files: ${{  contains(steps.changed-files.outputs.all_changed_files, '.kttxt') }}
 
       - name: Echo List Changed Files
         run: |

@@ -35,7 +35,7 @@ jobs:
           echo Current branch starts with "renovate/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'renovate/') }}
           echo Current branch contains "starter-projects": ${{ contains(steps.branch-name.outputs.current_branch, 'starter-projects') }}
           echo Base ref branch is "main": ${{ steps.branch-name.outputs.base_ref_branch == 'main' }}
-          echo Changed files in the "samples/starter-projects/" directory: ${{ contains(steps.branch-name.outputs.all_changed_files, 'samples/starter-projects/') }}
+          echo Changed files in the "samples/starter-projects/" directory: ${{ contains(steps.changed-files.outputs.all_changed_files, 'samples/starter-projects/') }}
 
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
