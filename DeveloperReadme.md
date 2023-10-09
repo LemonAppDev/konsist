@@ -29,16 +29,17 @@
     2. [README.md](README.md) file
 6. Open the release PR targeting `main` and wait for all checks to pass
 7. Merge PR
-8. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version
-9. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
-    1. set `vx.y.z` as tag version
-    2. set `vx.y.z` as release title
-10. Update Konsist version in the
+8. Switch to the `main` branch and pull changes
+9. Run `./gradlew publish -Pkonsist.releaseTarget=release` on the `main` branch to release a new version
+10. Create a new [GitHub release](https://github.com/LemonAppDev/konsist/releases/new)
+     1. set `vx.y.z` as tag version
+     2. set `vx.y.z` as release title
+11. Update Konsist version in the
     Konsist [Quick Start](https://app.gitbook.com/o/PQj191UX5M2C2XxCZuYO/s/RYeSMx6WDKivnwWx7PdP/getting-started/getting-started)
     docs page
-11. (If needed) Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
-12. Merge `main` to `develop`
-13. Notify devs who have reported the issue (community link in original ticket)
+12. (If needed) Run `/scripts/update-snippets.py` snippet to generate PR with updated snippets for Konsist Documentation
+13. Merge `main` to `develop`
+14. Notify devs who have reported the issue (community link in original ticket)
 
 Respond
 fix starter link

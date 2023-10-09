@@ -17,7 +17,7 @@ jobs:
       - name: List Branches
         run: |
           echo current branch: ${{ steps.branch-name.outputs.current_branch }}
-          echo target branch: ${{ steps.branch-name.outputs.base_ref_branch }}
+          echo base ref branch: ${{ steps.branch-name.outputs.base_ref_branch }}
           echo default branch: ${{ steps.branch-name.outputs.default_branch }}
 
       - name: Get Changed Files
@@ -34,8 +34,8 @@ jobs:
           echo Current branch starts with "release/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'release/') }}
           echo Current branch starts with "renovate/": ${{ startsWith(steps.branch-name.outputs.current_branch, 'renovate/') }}
           echo Current branch contains "starter-projects": ${{ contains(steps.branch-name.outputs.current_branch, 'starter-projects') }}
-          echo Target branch is "main": ${{ steps.branch-name.outputs.target_branch == 'main' }}
-          echo Changed files in the "samples/starter-projects/" directory: ${{ contains(steps.branch-name .outputs.all_changed_files, 'samples/starter-projects/') }}
+          echo Base ref branch is "main": ${{ steps.branch-name.outputs.base_ref_branch == 'main' }}
+          echo Changed files in the "samples/starter-projects/" directory: ${{ contains(steps.changed-files.outputs.all_changed_files, 'samples/starter-projects/') }}
 
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
@@ -52,7 +52,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -90,7 +90,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -128,7 +128,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -166,7 +166,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -204,7 +204,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -242,7 +242,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -280,7 +280,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -318,7 +318,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -356,7 +356,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -395,7 +395,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -433,7 +433,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -472,7 +472,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -510,7 +510,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
@@ -549,7 +549,7 @@ jobs:
       startsWith(needs.get-github-context.outputs.current_branch, 'release/') ||
       startsWith(needs.get-github-context.outputs.current_branch, 'renovate/') ||
       contains(needs.get-github-context.outputs.current_branch, 'starter-projects') ||
-      needs.get-github-context.outputs.target_branch == 'main' ||
+      needs.get-github-context.outputs.base_ref_branch == 'main' ||
       contains(needs.get-github-context.outputs.all_changed_files, 'samples/starter-projects/')
     steps:
       - name: Checkout
