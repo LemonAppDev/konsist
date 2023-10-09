@@ -1,0 +1,5 @@
+class SampleClassText {
+    @Suppress("konsist.suppress-text")
+    fun sampleFunctionWithIncorrectSuffix() {
+    }
+}

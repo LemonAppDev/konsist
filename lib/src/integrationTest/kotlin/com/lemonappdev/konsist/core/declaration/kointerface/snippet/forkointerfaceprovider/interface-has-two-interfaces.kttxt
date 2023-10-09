@@ -1,0 +1,5 @@
+interface SampleTopLevelInterface {
+    interface SampleInterface1
+
+    interface SampleInterface2
+}

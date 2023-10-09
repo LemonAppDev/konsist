@@ -9,5 +9,5 @@ internal interface KoEnumModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasEnumModifier: Boolean
-        get() = hasModifiers(KoModifier.ENUM)
+        get() = hasModifier(KoModifier.ENUM)
 }

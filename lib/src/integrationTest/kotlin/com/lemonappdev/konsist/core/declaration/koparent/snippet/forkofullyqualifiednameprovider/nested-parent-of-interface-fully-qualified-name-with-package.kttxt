@@ -1,0 +1,7 @@
+package com.samplepackage
+
+class SampleClass {
+    interface SampleInterface: SampleParentInterface
+
+    interface SampleParentInterface
+}

@@ -1,0 +1,2 @@
+var sampleProperty: String = "text"
+    set(value) = println(value)

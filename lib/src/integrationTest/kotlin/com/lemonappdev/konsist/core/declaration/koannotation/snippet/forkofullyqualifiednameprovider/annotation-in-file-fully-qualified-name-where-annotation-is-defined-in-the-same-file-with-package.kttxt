@@ -1,0 +1,6 @@
+@file:SampleAnnotation
+
+package com.samplepackage
+
+@Target(AnnotationTarget.FILE)
+annotation class SampleAnnotation

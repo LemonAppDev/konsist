@@ -1,0 +1,6 @@
+@Suppress("assert-suppress-by-name-at-declaration-parent-level-when-it-is-not-KoAnnotationProvider")
+class SampleClassWithoutOtherFunction {
+    init {
+        fun sampleFunction() {}
+    }
+}

@@ -27,6 +27,28 @@ class KoFunctionDeclarationForKoFullyQualifiedNameProviderTest {
         sut.fullyQualifiedName shouldBeEqualTo "sampleFunction"
     }
 
+    @Test
+    fun `nested-function-fully-qualified-name`() {
+        // given
+        val sut = getSnippetFile("nested-function-fully-qualified-name")
+            .functions()
+            .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass.sampleFunction"
+    }
+
+    @Test
+    fun `nested-function-fully-qualified-name-without-package`() {
+        // given
+        val sut = getSnippetFile("nested-function-fully-qualified-name-without-package")
+            .functions()
+            .first()
+
+        // then
+        sut.fullyQualifiedName shouldBeEqualTo "SampleClass.sampleFunction"
+    }
+
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/kofunction/snippet/forkodeclarationfullyqualifiednameprovider/", fileName)
 }

@@ -1,0 +1,2 @@
+internal val sampleProperty: String
+    internal get() = ""

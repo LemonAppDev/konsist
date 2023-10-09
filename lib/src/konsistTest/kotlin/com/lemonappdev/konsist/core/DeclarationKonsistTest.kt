@@ -4,24 +4,27 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.returnTypes
 import com.lemonappdev.konsist.api.ext.list.types
 import com.lemonappdev.konsist.api.ext.list.withoutName
-import com.lemonappdev.konsist.api.verify.assert
-import com.lemonappdev.konsist.api.verify.assertNot
+import com.lemonappdev.konsist.api.verify.assertFalse
+import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.Test
 
 class DeclarationKonsistTest {
+    private val declarationPackageScope =
+        Konsist.scopeFromPackage("com.lemonappdev.konsist.core.declaration..", sourceSetName = "main")
+
     @Test
     fun `every function has explicit return type declaration`() {
         declarationPackageScope
             .functions()
             .withoutName("print")
-            .assert { it.hasReturnType() }
+            .assertTrue { it.hasReturnType() }
     }
 
     @Test
     fun `every property has explicit type declaration`() {
         declarationPackageScope
             .properties()
-            .assert { it.hasType() }
+            .assertTrue { it.hasType() }
     }
 
     @Test
@@ -29,7 +32,7 @@ class DeclarationKonsistTest {
         declarationPackageScope
             .functions()
             .returnTypes
-            .assertNot { it.sourceType.endsWith("Impl") }
+            .assertFalse { it.sourceType.endsWith("Impl") }
     }
 
     @Test
@@ -37,14 +40,14 @@ class DeclarationKonsistTest {
         declarationPackageScope
             .properties()
             .types
-            .assertNot { it.sourceType.endsWith("Impl") }
+            .assertFalse { it.sourceType.endsWith("Impl") }
     }
 
     @Test
     fun `includeNested parameter is always before includeLocal parameter`() {
         declarationPackageScope
             .functions()
-            .assert {
+            .assertTrue {
                 val includeNestedParameter =
                     it.parameters.indexOfFirst { parameter -> parameter.name == "includeNested" }
                 val includeLocalParameter =
@@ -58,13 +61,8 @@ class DeclarationKonsistTest {
     fun `every declaration overrides toString()`() {
         declarationPackageScope
             .classes()
-            .assert {
+            .assertTrue {
                 it.containsFunction { function -> function.name == "toString" }
             }
-    }
-
-    companion object {
-        val declarationPackageScope =
-            Konsist.scopeFromPackage("com.lemonappdev.konsist.core.declaration..", sourceSetName = "main")
     }
 }

@@ -3,13 +3,11 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.KoModifier
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.declarations
-import com.lemonappdev.konsist.api.ext.list.functions
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutModifier
 import com.lemonappdev.konsist.api.ext.list.withoutAnnotationOf
 import com.lemonappdev.konsist.api.provider.KoAnnotationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
-import com.lemonappdev.konsist.api.verify.assert
-import com.lemonappdev.konsist.api.verify.assertNot
+import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -19,7 +17,7 @@ class TestSnippets {
         Konsist
             .scopeFromProduction()
             .classes()
-            .assert { it.hasTestClass() }
+            .assertTrue { it.hasTestClass() }
     }
 
     fun `every class - except data and value class - has test`() {
@@ -27,14 +25,14 @@ class TestSnippets {
             .scopeFromProduction()
             .classes()
             .withoutModifier(KoModifier.DATA, KoModifier.VALUE)
-            .assert { it.hasTestClass() }
+            .assertTrue { it.hasTestClass() }
     }
 
     fun `test classes should have test subject named sut`() {
         Konsist
             .scopeFromTest()
             .classes()
-            .assert {
+            .assertTrue {
                 val type = it.name.removeSuffix("Test")
                 val sut = it
                     .properties()
@@ -52,14 +50,6 @@ class TestSnippets {
             .filterIsInstance<KoAnnotationProvider>()
             .withoutAnnotationOf(Test::class, ParameterizedTest::class, RepeatedTest::class)
             .filterIsInstance<KoVisibilityModifierProvider>()
-            .assert { it.hasPrivateModifier }
-    }
-
-    fun `don't use JUnit4 Test annotation`() {
-        Konsist
-            .scopeFromProject()
-            .classes()
-            .functions()
-            .assertNot { it.hasAnnotationWithName("org.junit.Test") } // should be only org.junit.jupiter.api.Test
+            .assertTrue { it.hasPrivateModifier }
     }
 }

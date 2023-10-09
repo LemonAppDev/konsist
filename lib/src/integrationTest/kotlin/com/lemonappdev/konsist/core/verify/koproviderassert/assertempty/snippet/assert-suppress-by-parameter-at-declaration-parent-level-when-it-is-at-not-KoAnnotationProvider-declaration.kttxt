@@ -1,0 +1,8 @@
+val otherProperty = ""
+
+@Suppress("suppress-text")
+class SampleClassWithoutOtherProperty {
+    init {
+        val sampleProperty = 6
+    }
+}

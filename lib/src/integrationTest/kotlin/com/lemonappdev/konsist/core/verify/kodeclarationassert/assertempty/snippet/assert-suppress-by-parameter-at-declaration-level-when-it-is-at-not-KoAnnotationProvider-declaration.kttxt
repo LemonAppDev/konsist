@@ -1,0 +1,6 @@
+class SampleClassText {
+    init {
+        @Suppress("suppress-text")
+        fun sampleFunction() {}
+    }
+}

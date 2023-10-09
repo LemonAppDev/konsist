@@ -15,6 +15,7 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
             includeLocal,
         )
 
+    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasFunction()"))
     override fun containsFunction(
         includeNested: Boolean,
         includeLocal: Boolean,
@@ -29,4 +30,45 @@ internal interface KoFunctionProviderCore : KoFunctionProvider, KoDeclarationPro
         includeLocal: Boolean,
         predicate: (KoFunctionDeclaration) -> Boolean,
     ): Int = functions(includeNested, includeLocal).count { predicate(it) }
+
+    override fun hasFunctions(includeNested: Boolean, includeLocal: Boolean): Boolean =
+        functions(includeNested, includeLocal).isNotEmpty()
+
+    override fun hasFunctionWithName(
+        name: String,
+        vararg names: String,
+        includeNested: Boolean,
+        includeLocal: Boolean,
+    ): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.any {
+            functions(includeNested, includeLocal).any { function -> it == function.name }
+        }
+    }
+
+    override fun hasFunctionsWithAllNames(
+        name: String,
+        vararg names: String,
+        includeNested: Boolean,
+        includeLocal: Boolean,
+    ): Boolean {
+        val givenNames = names.toList() + name
+
+        return givenNames.all {
+            functions(includeNested, includeLocal).any { function -> it == function.name }
+        }
+    }
+
+    override fun hasFunction(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+        predicate: (KoFunctionDeclaration) -> Boolean,
+    ): Boolean = functions(includeNested, includeLocal).any(predicate)
+
+    override fun hasAllFunctions(
+        includeNested: Boolean,
+        includeLocal: Boolean,
+        predicate: (KoFunctionDeclaration) -> Boolean,
+    ): Boolean = functions(includeNested, includeLocal).all(predicate)
 }
