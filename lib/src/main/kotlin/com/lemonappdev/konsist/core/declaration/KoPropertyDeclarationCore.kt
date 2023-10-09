@@ -27,6 +27,7 @@ import com.lemonappdev.konsist.core.provider.KoSetterProviderCore
 import com.lemonappdev.konsist.core.provider.KoSourceSetProviderCore
 import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoTopLevelProviderCore
+import com.lemonappdev.konsist.core.provider.KoValueProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoAbstractModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoActualModifierProviderCore
 import com.lemonappdev.konsist.core.provider.modifier.KoConstModifierProviderCore
@@ -45,9 +46,11 @@ import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtCallableDeclaration
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.psi.KtProperty
+import org.jetbrains.kotlin.psi.KtPropertyAccessor
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoPropertyDeclarationCore private constructor(
@@ -87,6 +90,7 @@ internal class KoPropertyDeclarationCore private constructor(
     KoResideInPackageProviderCore,
     KoTextProviderCore,
     KoTopLevelProviderCore,
+    KoValueProviderCore,
     KoVisibilityModifierProviderCore,
     KoValModifierProviderCore,
     KoVarModifierProviderCore,
@@ -111,6 +115,14 @@ internal class KoPropertyDeclarationCore private constructor(
     override val ktElement: KtElement by lazy { ktCallableDeclaration }
 
     override val ktDeclaration: KtDeclaration by lazy { ktCallableDeclaration }
+
+    override val ktExpression: KtExpression? by lazy {
+        ktCallableDeclaration
+            .children
+            .filterNot { it is KtPropertyAccessor }
+            .filterIsInstance<KtExpression>()
+            .firstOrNull()
+    }
 
     override val delegateName: String? by lazy {
         if (ktCallableDeclaration is KtProperty) {

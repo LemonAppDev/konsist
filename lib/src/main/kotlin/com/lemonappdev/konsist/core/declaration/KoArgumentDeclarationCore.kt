@@ -17,10 +17,11 @@ import com.lemonappdev.konsist.core.provider.KoTextProviderCore
 import com.lemonappdev.konsist.core.provider.KoValueProviderCore
 import com.lemonappdev.konsist.core.provider.packagee.KoPackageDeclarationProviderCore
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtValueArgument
 
 internal class KoArgumentDeclarationCore private constructor(
-    override val ktValueArgument: KtValueArgument,
+    private val ktValueArgument: KtValueArgument,
     override val containingDeclaration: KoContainingDeclarationProvider,
 ) : KoArgumentDeclaration,
     KoBaseProviderCore,
@@ -38,6 +39,8 @@ internal class KoArgumentDeclarationCore private constructor(
     override val psiElement: PsiElement by lazy { ktValueArgument }
 
     override val ktElement: KtElement by lazy { ktValueArgument }
+
+    override val ktExpression: KtExpression? by lazy { ktValueArgument.getArgumentExpression() }
 
     override val name: String
         get() = ktValueArgument
