@@ -1,8 +1,8 @@
 plugins {
-    id("org.springframework.boot") version "3.2.2"
-    id("io.spring.dependency-management") version "1.1.4"
-    kotlin("jvm") version "1.9.23"
-    kotlin("plugin.spring") version "1.9.23"
+    id("org.springframework.boot") version "3.1.4"
+    id("io.spring.dependency-management") version "1.1.3"
+    kotlin("jvm") version "1.9.10"
+    kotlin("plugin.spring") version "1.9.10"
     `jvm-test-suite`
 }
 
@@ -25,12 +25,7 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(21)
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    jvmToolchain(19)
 }
 
 tasks.withType<Test> {
@@ -46,9 +41,6 @@ testing {
 
                 // Add Konsist dependency
                 implementation("com.lemonappdev:konsist:0.13.0")
-
-                // Add junit-jupiter-params dependency (required for dynamic Tests)
-                implementation("org.junit.jupiter:junit-jupiter-params:5.10.2")
             }
         }
     }
