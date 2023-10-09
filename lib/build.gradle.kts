@@ -23,31 +23,28 @@ testing {
 
         register("integrationTest", JvmTestSuite::class) {
             dependencies {
-                implementation(project(":lib")) // Konsist
+                implementation(project(":lib"))
                 implementation(libs.mockk)
                 implementation(libs.kluent)
-                implementation(libs.koTest)
             }
         }
 
         register("konsistTest", JvmTestSuite::class) {
             dependencies {
-                implementation(project(":lib")) // Konsist
+                implementation(project(":lib"))
             }
         }
 
         register("apiTest", JvmTestSuite::class) {
             dependencies {
-                implementation(project(":lib")) // Konsist
+                implementation(project(":lib"))
                 implementation(libs.kluent)
-                implementation(libs.koTest)
             }
         }
 
         register("snippet", JvmTestSuite::class) {
             dependencies {
-                implementation(project(":lib")) // Konsist
-                implementation(libs.koTest)
+                implementation(project(":lib"))
             }
         }
     }

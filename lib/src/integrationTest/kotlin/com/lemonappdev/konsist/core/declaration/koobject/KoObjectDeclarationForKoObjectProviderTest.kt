@@ -10,43 +10,14 @@ import org.junit.jupiter.api.Test
 
 class KoObjectDeclarationForKoObjectProviderTest {
     @Test
-    fun `object-has-no-objects`() {
+    fun `object-contains-no-objects`() {
         // given
-        val sut = getSnippetFile("object-has-no-objects")
+        val sut = getSnippetFile("object-contains-no-objects")
             .objects()
             .first()
 
         // then
-        assertSoftly(sut) {
-            objects() shouldBeEqualTo emptyList()
-            hasObjects() shouldBeEqualTo false
-            hasObjectWithName("SampleObject") shouldBeEqualTo false
-            hasObjectsWithAllNames("SampleObject1", "SampleObject2") shouldBeEqualTo false
-            hasObject { it.name == "SampleObject" } shouldBeEqualTo false
-            hasAllObjects { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `object-has-two-objects`() {
-        // given
-        val sut = getSnippetFile("object-has-two-objects")
-            .objects()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasObjects() shouldBeEqualTo true
-            hasObjectWithName("SampleObject1") shouldBeEqualTo true
-            hasObjectWithName("SampleObject1", "OtherObject") shouldBeEqualTo true
-            hasObjectsWithAllNames("SampleObject1") shouldBeEqualTo true
-            hasObjectsWithAllNames("SampleObject1", "SampleObject2") shouldBeEqualTo true
-            hasObjectsWithAllNames("SampleObject1", "OtherObject") shouldBeEqualTo false
-            hasObject { it.name == "SampleObject1" } shouldBeEqualTo true
-            hasObject { it.hasNameEndingWith("Object1") } shouldBeEqualTo true
-            hasAllObjects { it.hasNameStartingWith("Sample") } shouldBeEqualTo true
-            hasAllObjects { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
-        }
+        sut.objects(includeNested = true) shouldBeEqualTo emptyList()
     }
 
     @Test

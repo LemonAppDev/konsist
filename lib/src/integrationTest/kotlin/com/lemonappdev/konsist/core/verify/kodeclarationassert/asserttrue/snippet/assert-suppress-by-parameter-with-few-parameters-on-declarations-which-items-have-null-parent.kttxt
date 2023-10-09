@@ -1,3 +1,0 @@
-@file:Suppress("detekt.someRule", "konsist.suppress-text")
-
-class SampleClass

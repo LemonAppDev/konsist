@@ -1,4 +1,0 @@
-var sampleProperty: String = "text"
-    public set(value) {
-        if (true) field = value
-    }

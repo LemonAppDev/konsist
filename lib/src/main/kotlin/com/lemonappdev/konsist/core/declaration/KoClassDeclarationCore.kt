@@ -55,7 +55,6 @@ import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoClassDeclarationCore private constructor(
@@ -107,8 +106,6 @@ internal class KoClassDeclarationCore private constructor(
     KoAbstractModifierProviderCore,
     KoOpenModifierProviderCore,
     KoFinalModifierProviderCore {
-
-    override val ktModifierListOwner: KtModifierListOwner by lazy { ktClass }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
 

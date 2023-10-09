@@ -9,5 +9,5 @@ internal interface KoVarArgModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasVarArgModifier: Boolean
-        get() = hasModifier(KoModifier.VARARG)
+        get() = hasModifiers(KoModifier.VARARG)
 }

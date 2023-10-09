@@ -16,9 +16,7 @@ class RootSrcClass(val rootParameter: String) : RootSrcInterface {
 
 interface RootSrcInterface
 
-var rootSrcProperty: RootSrcClass = RootSrcClass("")
-    get() = RootSrcClass("root src value")
-    private set
+val rootSrcProperty: RootSrcClass = RootSrcClass("root src value")
 
 object RootSrcObject
 

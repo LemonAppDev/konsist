@@ -1,5 +1,0 @@
-@file:Suppress("assert-suppress-by-name-at-file-level-when-all-declarations-are-KoAnnotationProvider")
-
-class SampleClassWithoutModifier {
-    fun sampleFunctionWithoutModifier(){}
-}

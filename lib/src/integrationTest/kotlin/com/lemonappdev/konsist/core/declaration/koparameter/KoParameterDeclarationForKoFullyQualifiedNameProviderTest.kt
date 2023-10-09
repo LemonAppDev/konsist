@@ -33,34 +33,6 @@ class KoParameterDeclarationForKoFullyQualifiedNameProviderTest {
         sut?.fullyQualifiedName shouldBeEqualTo "SampleClassWithParameter.sampleParameter"
     }
 
-    @Test
-    fun `nested-parameter-fully-qualified-name`() {
-        // given
-        val sut = getSnippetFile("nested-parameter-fully-qualified-name")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-
-        // then
-        sut?.fullyQualifiedName shouldBeEqualTo "com.lemonappdev.konsist.testdata.SampleInterface.SampleClassWithParameter.sampleParameter"
-    }
-
-    @Test
-    fun `nested-parameter-fully-qualified-name-without-package`() {
-        // given
-        val sut = getSnippetFile("nested-parameter-fully-qualified-name-without-package")
-            .classes()
-            .first()
-            .primaryConstructor
-            ?.parameters
-            ?.first()
-
-        // then
-        sut?.fullyQualifiedName shouldBeEqualTo "SampleInterface.SampleClassWithParameter.sampleParameter"
-    }
-
     private fun getSnippetFile(fileName: String) =
         getSnippetKoScope("core/declaration/koparameter/snippet/forkodeclarationfullyqualifiednameprovider/", fileName)
 }

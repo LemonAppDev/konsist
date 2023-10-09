@@ -1,6 +1,4 @@
-open class SampleTopLevelClass() {
-    constructor(sampleParameter: Int): this()
-
+open class SampleTopLevelClass {
     val sampleDefaultProperty = ""
 
     public fun samplePublicFunction() {}

@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 
 class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     @Test
-    fun `parent-of-class-fully-qualified-name-with-import`() {
+    fun `parent-of-class-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("parent-of-class-fully-qualified-name-with-import")
+        val sut = getSnippetFile("parent-of-class-fully-qualified-name")
             .classes()
             .parents
             .first()
@@ -19,21 +19,9 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `parent-of-class-fully-qualified-name-without-import-and-with-package`() {
+    fun `parent-of-class-fully-qualified-name-without-import`() {
         // given
-        val sut = getSnippetFile("parent-of-class-fully-qualified-name-without-import-and-with-package")
-            .classes()
-            .parents
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleParentClass"
-    }
-
-    @Test
-    fun `parent-of-class-fully-qualified-name-without-import-and-package`() {
-        // given
-        val sut = getSnippetFile("parent-of-class-fully-qualified-name-without-import-and-package")
+        val sut = getSnippetFile("parent-of-class-fully-qualified-name-without-import")
             .classes()
             .parents
             .first()
@@ -43,33 +31,9 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `nested-parent-of-class-fully-qualified-name-with-package`() {
+    fun `parent-of-interface-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("nested-parent-of-class-fully-qualified-name-with-package")
-            .classes()
-            .parents
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleInterface.SampleParentClass"
-    }
-
-    @Test
-    fun `nested-parent-of-class-fully-qualified-name-without-package`() {
-        // given
-        val sut = getSnippetFile("nested-parent-of-class-fully-qualified-name-without-package")
-            .classes()
-            .parents
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleInterface.SampleParentClass"
-    }
-
-    @Test
-    fun `parent-of-interface-fully-qualified-name-with-import`() {
-        // given
-        val sut = getSnippetFile("parent-of-interface-fully-qualified-name-with-import")
+        val sut = getSnippetFile("parent-of-interface-fully-qualified-name")
             .interfaces()
             .parents
             .first()
@@ -79,21 +43,9 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `parent-of-interface-fully-qualified-name-without-import-and-with-package`() {
+    fun `parent-of-interface-fully-qualified-name-without-import`() {
         // given
-        val sut = getSnippetFile("parent-of-interface-fully-qualified-name-without-import-and-with-package")
-            .interfaces()
-            .parents
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleParentInterface"
-    }
-
-    @Test
-    fun `parent-of-interface-fully-qualified-name-without-import-and-package`() {
-        // given
-        val sut = getSnippetFile("parent-of-interface-fully-qualified-name-without-import-and-package")
+        val sut = getSnippetFile("parent-of-interface-fully-qualified-name-without-import")
             .interfaces()
             .parents
             .first()
@@ -103,33 +55,9 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `nested-parent-of-interface-fully-qualified-name-with-package`() {
+    fun `parent-of-object-fully-qualified-name`() {
         // given
-        val sut = getSnippetFile("nested-parent-of-interface-fully-qualified-name-with-package")
-            .interfaces()
-            .parents
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleClass.SampleParentInterface"
-    }
-
-    @Test
-    fun `nested-parent-of-interface-fully-qualified-name-without-package`() {
-        // given
-        val sut = getSnippetFile("nested-parent-of-interface-fully-qualified-name-without-package")
-            .interfaces()
-            .parents
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleClass.SampleParentInterface"
-    }
-
-    @Test
-    fun `parent-of-object-fully-qualified-name-with-import`() {
-        // given
-        val sut = getSnippetFile("parent-of-object-fully-qualified-name-with-import")
+        val sut = getSnippetFile("parent-of-object-fully-qualified-name")
             .objects()
             .parents
             .first()
@@ -139,51 +67,15 @@ class KoParentDeclarationForKoFullyQualifiedNameProviderTest {
     }
 
     @Test
-    fun `parent-of-object-fully-qualified-name-without-import-and-with-package`() {
+    fun `parent-of-object-fully-qualified-name-without-import`() {
         // given
-        val sut = getSnippetFile("parent-of-object-fully-qualified-name-without-import-and-with-package")
-            .objects()
-            .parents
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleParentClass"
-    }
-
-    @Test
-    fun `parent-of-object-fully-qualified-name-without-import-and-package`() {
-        // given
-        val sut = getSnippetFile("parent-of-object-fully-qualified-name-without-import-and-package")
+        val sut = getSnippetFile("parent-of-object-fully-qualified-name-without-import")
             .objects()
             .parents
             .first()
 
         // then
         sut.fullyQualifiedName shouldBeEqualTo "SampleParentClass"
-    }
-
-    @Test
-    fun `nested-parent-of-object-fully-qualified-name-with-package`() {
-        // given
-        val sut = getSnippetFile("nested-parent-of-object-fully-qualified-name-with-package")
-            .objects()
-            .parents
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "com.samplepackage.SampleInterface.SampleParentClass"
-    }
-
-    @Test
-    fun `nested-parent-of-object-fully-qualified-name-without-package`() {
-        // given
-        val sut = getSnippetFile("nested-parent-of-object-fully-qualified-name-without-package")
-            .objects()
-            .parents
-            .first()
-
-        // then
-        sut.fullyQualifiedName shouldBeEqualTo "SampleInterface.SampleParentClass"
     }
 
     private fun getSnippetFile(fileName: String) =

@@ -1,5 +1,0 @@
-package com.samplepackage
-
-interface SampleInterface: SampleParentInterface
-
-interface SampleParentInterface

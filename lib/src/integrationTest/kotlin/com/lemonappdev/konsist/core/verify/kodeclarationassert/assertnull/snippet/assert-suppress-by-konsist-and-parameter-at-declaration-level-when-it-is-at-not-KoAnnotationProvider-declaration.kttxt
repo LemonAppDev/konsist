@@ -1,6 +1,0 @@
-class SampleClassText {
-    init {
-        @Suppress("konsist.suppress-text")
-        fun sampleFunction() {}
-    }
-}

@@ -9,5 +9,5 @@ internal interface KoAnnotationModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasAnnotationModifier: Boolean
-        get() = hasModifier(KoModifier.ANNOTATION)
+        get() = hasModifiers(KoModifier.ANNOTATION)
 }

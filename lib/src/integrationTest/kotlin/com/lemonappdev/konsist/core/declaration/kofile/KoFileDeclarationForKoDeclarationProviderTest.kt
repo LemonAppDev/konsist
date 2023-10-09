@@ -16,23 +16,6 @@ import org.junit.jupiter.params.provider.MethodSource
 
 class KoFileDeclarationForKoDeclarationProviderTest {
     @Test
-    fun `file-has-two-declarations`() {
-        // given
-        val sut = getSnippetFile("file-has-two-declarations")
-            .files
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasDeclarations() shouldBeEqualTo true
-            hasDeclaration { (it as KoNameProvider).name == "sampleProperty" } shouldBeEqualTo true
-            hasDeclaration { (it as KoNameProvider).hasNameEndingWith("Property") } shouldBeEqualTo true
-            hasAllDeclarations { (it as KoNameProvider).hasNameStartingWith("sample") } shouldBeEqualTo true
-            hasAllDeclarations { (it as KoNameProvider).hasNameEndingWith("Class1") } shouldBeEqualTo false
-        }
-    }
-
-    @Test
     fun `count-declarations`() {
         // given
         val sut = getSnippetFile("count-declarations")

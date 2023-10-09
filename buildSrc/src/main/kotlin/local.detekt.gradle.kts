@@ -1,5 +1,4 @@
 import io.gitlab.arturbosch.detekt.Detekt
-import org.gradle.kotlin.dsl.registering
 
 plugins {
     id("io.gitlab.arturbosch.detekt")
@@ -41,7 +40,7 @@ configure(listOf(detektCheck, detektApply)) {
             "**/build/**",
             "**/target/**",
             "**/generated/**",
-            "**/samples/starter-projects/konsist-starter-kmp-**",
+            "**/samples/starter-projects/konsist-starter-multiplatform-gradle-kotlin-junit5**"
         )
 
         reports {

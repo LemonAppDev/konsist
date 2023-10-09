@@ -9,5 +9,5 @@ internal interface KoTailrecModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasTailrecModifier: Boolean
-        get() = hasModifier(KoModifier.TAILREC)
+        get() = hasModifiers(KoModifier.TAILREC)
 }

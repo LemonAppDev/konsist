@@ -5,7 +5,6 @@ import com.lemonappdev.konsist.api.provider.KoDeclarationProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 
 internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProviderCore {
-    @Deprecated("Will be removed in v1.0.0", replaceWith = ReplaceWith("hasDeclaration()"))
     override fun containsDeclaration(
         includeNested: Boolean,
         includeLocal: Boolean,
@@ -48,19 +47,4 @@ internal interface KoDeclarationProviderCore : KoDeclarationProvider, KoBaseProv
         declarations(includeNested, includeLocal)
             .filterIsInstance<KoVisibilityModifierProvider>()
             .count { it.hasInternalModifier }
-
-    override fun hasDeclarations(includeNested: Boolean, includeLocal: Boolean): Boolean =
-        declarations(includeNested, includeLocal).isNotEmpty()
-
-    override fun hasDeclaration(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-        predicate: (KoBaseDeclaration) -> Boolean,
-    ): Boolean = declarations(includeNested, includeLocal).any(predicate)
-
-    override fun hasAllDeclarations(
-        includeNested: Boolean,
-        includeLocal: Boolean,
-        predicate: (KoBaseDeclaration) -> Boolean,
-    ): Boolean = declarations(includeNested, includeLocal).all(predicate)
 }

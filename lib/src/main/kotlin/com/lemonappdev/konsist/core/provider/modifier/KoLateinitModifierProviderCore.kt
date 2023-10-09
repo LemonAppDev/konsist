@@ -9,5 +9,5 @@ internal interface KoLateinitModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasLateinitModifier: Boolean
-        get() = hasModifier(KoModifier.LATEINIT)
+        get() = hasModifiers(KoModifier.LATEINIT)
 }

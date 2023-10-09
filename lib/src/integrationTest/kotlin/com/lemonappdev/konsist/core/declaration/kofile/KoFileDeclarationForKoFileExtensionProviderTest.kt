@@ -14,8 +14,7 @@ class KoFileDeclarationForKoFileExtensionProviderTest {
             .first()
 
         // then
-        // The snippet file has '.kttxt' extension, but in name we have '.kt'
-        // because KotlinFileParser replace the first one into second one
+        // The snippet file has '.kttxt' extension, but in name we have '.kt' because KotlinFileParser replace the first one into second one
         sut.extension shouldBeEqualTo "kt"
     }
 
@@ -27,8 +26,7 @@ class KoFileDeclarationForKoFileExtensionProviderTest {
             .first()
 
         // then
-        // The snippet file has '.kttxt' extension, but in name we have '.kt'
-        // because KotlinFileParser replace the first one into second one
+        // The snippet file has '.kttxt' extension, but in name we have '.kt' because KotlinFileParser replace the first one into second one
         sut.nameWithExtension shouldBeEqualTo "file-name-with-extension.kt"
     }
 

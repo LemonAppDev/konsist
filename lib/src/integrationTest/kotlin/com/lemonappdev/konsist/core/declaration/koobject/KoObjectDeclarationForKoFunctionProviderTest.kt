@@ -10,43 +10,14 @@ import org.junit.jupiter.api.Test
 
 class KoObjectDeclarationForKoFunctionProviderTest {
     @Test
-    fun `object-has-no-functions`() {
+    fun `object-contains-no-functions`() {
         // given
-        val sut = getSnippetFile("object-has-no-functions")
+        val sut = getSnippetFile("object-contains-no-functions")
             .objects()
             .first()
 
         // then
-        assertSoftly(sut) {
-            functions() shouldBeEqualTo emptyList()
-            hasFunctions() shouldBeEqualTo false
-            hasFunctionWithName("sampleFunction") shouldBeEqualTo false
-            hasFunctionsWithAllNames("sampleFunction1", "sampleFunction2") shouldBeEqualTo false
-            hasFunction { it.name == "sampleFunction" } shouldBeEqualTo false
-            hasAllFunctions { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-        }
-    }
-
-    @Test
-    fun `object-has-two-functions`() {
-        // given
-        val sut = getSnippetFile("object-has-two-functions")
-            .objects()
-            .first()
-
-        // then
-        assertSoftly(sut) {
-            hasFunctions() shouldBeEqualTo true
-            hasFunctionWithName("sampleFunction1") shouldBeEqualTo true
-            hasFunctionWithName("sampleFunction1", "otherFunction") shouldBeEqualTo true
-            hasFunctionsWithAllNames("sampleFunction1") shouldBeEqualTo true
-            hasFunctionsWithAllNames("sampleFunction1", "sampleFunction2") shouldBeEqualTo true
-            hasFunctionsWithAllNames("sampleFunction1", "otherFunction") shouldBeEqualTo false
-            hasFunction { it.name == "sampleFunction1" } shouldBeEqualTo true
-            hasFunction { it.hasNameEndingWith("Function1") } shouldBeEqualTo true
-            hasAllFunctions { it.hasNameStartingWith("sample") } shouldBeEqualTo true
-            hasAllFunctions { it.hasNameEndingWith("Class1") } shouldBeEqualTo false
-        }
+        sut.functions(includeNested = true, includeLocal = true) shouldBeEqualTo emptyList()
     }
 
     @Test

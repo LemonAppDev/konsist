@@ -2,7 +2,7 @@ package com.lemonappdev.konsist
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
-import com.lemonappdev.konsist.api.verify.assertTrue
+import com.lemonappdev.konsist.api.verify.assert
 import org.springframework.stereotype.Repository
 import org.springframework.web.bind.annotation.RestController
 
@@ -12,7 +12,7 @@ class SpringSnippets {
             .scopeFromProject()
             .interfaces()
             .withAnnotationOf(Repository::class)
-            .assertTrue { it.hasNameEndingWith("Repository") }
+            .assert { it.hasNameEndingWith("Repository") }
     }
 
     fun `classes with 'RestController' annotation should have 'Controller' suffix`() {
@@ -20,7 +20,7 @@ class SpringSnippets {
             .scopeFromProject()
             .classes()
             .withAnnotationOf(RestController::class)
-            .assertTrue { it.hasNameEndingWith("Controller") }
+            .assert { it.hasNameEndingWith("Controller") }
     }
 
     fun `classes with 'RestController' annotation should reside in 'controller' package`() {
@@ -28,6 +28,6 @@ class SpringSnippets {
             .scopeFromProject()
             .classes()
             .withAnnotationOf(RestController::class)
-            .assertTrue { it.resideInPackage("..controller..") }
+            .assert { it.resideInPackage("..controller..") }
     }
 }

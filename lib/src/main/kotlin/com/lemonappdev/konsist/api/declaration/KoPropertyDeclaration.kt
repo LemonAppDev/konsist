@@ -7,8 +7,7 @@ import com.lemonappdev.konsist.api.provider.KoContainingDeclarationProvider
 import com.lemonappdev.konsist.api.provider.KoContainingFileProvider
 import com.lemonappdev.konsist.api.provider.KoDelegateProvider
 import com.lemonappdev.konsist.api.provider.KoFullyQualifiedNameProvider
-import com.lemonappdev.konsist.api.provider.KoGetterProvider
-import com.lemonappdev.konsist.api.provider.KoInitializerProvider
+import com.lemonappdev.konsist.api.provider.KoImplementationProvider
 import com.lemonappdev.konsist.api.provider.KoKDocProvider
 import com.lemonappdev.konsist.api.provider.KoLocationProvider
 import com.lemonappdev.konsist.api.provider.KoModuleProvider
@@ -18,11 +17,9 @@ import com.lemonappdev.konsist.api.provider.KoPathProvider
 import com.lemonappdev.konsist.api.provider.KoPropertyTypeProvider
 import com.lemonappdev.konsist.api.provider.KoReceiverTypeProvider
 import com.lemonappdev.konsist.api.provider.KoResideInPackageProvider
-import com.lemonappdev.konsist.api.provider.KoSetterProvider
 import com.lemonappdev.konsist.api.provider.KoSourceSetProvider
 import com.lemonappdev.konsist.api.provider.KoTextProvider
 import com.lemonappdev.konsist.api.provider.KoTopLevelProvider
-import com.lemonappdev.konsist.api.provider.KoValueProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoAbstractModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoActualModifierProvider
 import com.lemonappdev.konsist.api.provider.modifier.KoConstModifierProvider
@@ -48,7 +45,7 @@ interface KoPropertyDeclaration :
     KoDelegateProvider,
     KoPropertyTypeProvider,
     KoFullyQualifiedNameProvider,
-    KoInitializerProvider,
+    KoImplementationProvider,
     KoKDocProvider,
     KoLocationProvider,
     KoModifierProvider,
@@ -62,7 +59,6 @@ interface KoPropertyDeclaration :
     KoResideInPackageProvider,
     KoTextProvider,
     KoTopLevelProvider,
-    KoValueProvider,
     KoVisibilityModifierProvider,
     KoValModifierProvider,
     KoVarModifierProvider,
@@ -73,6 +69,4 @@ interface KoPropertyDeclaration :
     KoFinalModifierProvider,
     KoActualModifierProvider,
     KoExpectModifierProvider,
-    KoConstModifierProvider,
-    KoGetterProvider,
-    KoSetterProvider
+    KoConstModifierProvider

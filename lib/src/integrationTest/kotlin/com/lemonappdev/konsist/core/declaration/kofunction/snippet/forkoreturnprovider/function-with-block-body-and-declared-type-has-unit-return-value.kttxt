@@ -1,3 +1,0 @@
-fun sampleFunction(): Unit {
-    println("some text")
-}

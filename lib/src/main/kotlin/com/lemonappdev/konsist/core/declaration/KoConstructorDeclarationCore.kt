@@ -43,7 +43,7 @@ internal interface KoConstructorDeclarationCore :
     override val ktAnnotated: KtAnnotated
         get() = ktConstructor
 
-    override val ktModifierListOwner: KtTypeParameterListOwner
+    override val ktTypeParameterListOwner: KtTypeParameterListOwner
         get() = ktConstructor
 
     override val ktCallableDeclaration: KtCallableDeclaration

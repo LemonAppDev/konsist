@@ -1,7 +1,0 @@
-package com.samplepackage
-
-interface SampleInterface {
-    enum class SampleClass {
-        SAMPLE_CONSTANT_1
-    }
-}

@@ -9,5 +9,5 @@ internal interface KoExpectModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasExpectModifier: Boolean
-        get() = hasModifier(KoModifier.EXPECT)
+        get() = hasModifiers(KoModifier.EXPECT)
 }
