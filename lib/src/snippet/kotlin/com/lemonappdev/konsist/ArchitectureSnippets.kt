@@ -3,7 +3,7 @@ package com.lemonappdev.konsist
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.architecture.KoArchitectureCreator.assertArchitecture
 import com.lemonappdev.konsist.api.architecture.Layer
-import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertTrue
 
 class ArchitectureSnippets {
     fun `2 layer architecture has correct dependencies`() {
@@ -28,13 +28,13 @@ class ArchitectureSnippets {
         Konsist
             .scopeFromProject()
             .files
-            .assert { it.packagee?.fullyQualifiedName?.startsWith(it.moduleName) }
+            .assertTrue { it.packagee?.fullyQualifiedName?.startsWith(it.moduleName) }
     }
 
     fun `files reside in package that is derived from module name`() {
         Konsist.scopeFromProduction()
             .files
-            .assert {
+            .assertTrue {
                 /*
                 module -> package name:
                 feature_meal_planner -> mealplanner

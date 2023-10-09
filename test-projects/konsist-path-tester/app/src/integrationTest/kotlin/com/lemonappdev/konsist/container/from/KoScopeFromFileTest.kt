@@ -16,12 +16,19 @@ class KoScopeFromFileTest {
     fun `scopeFromFile`() {
         // given
         val sut = Konsist
-            .scopeFromFile("/app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toOsSeparator())
+            .scopeFromFile(
+                "/app/src/main/kotlin/com/lemonappdev/sample/AppClass.kt".toOsSeparator(),
+                "/app/src/main/kotlin/com/lemonappdev/sample/data/AppDataClass.kt".toOsSeparator()
+            )
             .mapToFilePaths()
 
         // then
         sut.shouldBeEqualTo(
-            listOf("$appMainSourceSetDirectory/sample/AppClass.kt").toOsSeparator(),
+            listOf(
+                "$appMainSourceSetDirectory/sample/AppClass.kt",
+                "$appMainSourceSetDirectory/sample/data/AppDataClass.kt",
+
+                ).toOsSeparator(),
         )
     }
 

@@ -1,0 +1,4 @@
+val sampleProperty = ""
+
+fun sampleFunction() {
+}

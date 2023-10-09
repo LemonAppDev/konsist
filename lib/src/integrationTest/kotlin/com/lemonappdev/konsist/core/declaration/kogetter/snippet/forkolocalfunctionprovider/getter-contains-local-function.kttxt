@@ -1,0 +1,12 @@
+import kotlin.String
+
+val sampleProperty: String
+    get() {
+        fun sampleLocalFunction1() {
+        }
+
+        fun sampleLocalFunction2() {
+        }
+
+        return ""
+    }

@@ -225,7 +225,7 @@ class KoArgumentProviderListExtTest {
     }
 
     @Test
-    fun `withArgument{} returns declaration with import which satisfy predicate`() {
+    fun `withArgument{} returns declaration with argument which satisfy predicate`() {
         // given
         val suffix = "Name"
         val predicate: (KoArgumentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
@@ -245,7 +245,7 @@ class KoArgumentProviderListExtTest {
     }
 
     @Test
-    fun `withoutArgument{} returns declaration without import which satisfy predicate`() {
+    fun `withoutArgument{} returns declaration without argument which satisfy predicate`() {
         // given
         val suffix = "Name"
         val predicate: (KoArgumentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
@@ -265,7 +265,7 @@ class KoArgumentProviderListExtTest {
     }
 
     @Test
-    fun `withAllArguments{} returns declaration with all imports satisfy predicate`() {
+    fun `withAllArguments{} returns declaration with all arguments satisfy predicate`() {
         // given
         val suffix = "Name"
         val predicate: (KoArgumentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }
@@ -285,7 +285,7 @@ class KoArgumentProviderListExtTest {
     }
 
     @Test
-    fun `withoutAllArguments{} returns declaration with all imports which not satisfy predicate`() {
+    fun `withoutAllArguments{} returns declaration with all arguments which not satisfy predicate`() {
         // given
         val suffix = "Name"
         val predicate: (KoArgumentDeclaration) -> Boolean = { it.hasNameEndingWith(suffix) }

@@ -1,0 +1,5 @@
+class SampleClassKotest {
+    @Suppress("konsist.assert-suppress-with-suppress-name-parameter")
+    fun sampleFunctionFromKotest() {
+    }
+}

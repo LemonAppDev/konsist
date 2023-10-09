@@ -9,5 +9,5 @@ internal interface KoInlineModifierProviderCore :
     KoBaseProviderCore,
     KoModifierProviderCore {
     override val hasInlineModifier: Boolean
-        get() = hasModifiers(KoModifier.INLINE)
+        get() = hasModifier(KoModifier.INLINE)
 }

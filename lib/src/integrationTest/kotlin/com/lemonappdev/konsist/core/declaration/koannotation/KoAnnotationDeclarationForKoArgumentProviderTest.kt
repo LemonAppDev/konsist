@@ -88,7 +88,7 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
         assertSoftly(sut) {
             arguments.map { it.value } shouldBeEqualTo listOf("text", "true")
             numArguments shouldBeEqualTo 2
-            countArguments { it.value.startsWith("t") } shouldBeEqualTo 2
+            countArguments { it.value?.startsWith("t") ?: false } shouldBeEqualTo 2
             countArguments { it.value == "text" } shouldBeEqualTo 1
             hasArguments() shouldBeEqualTo true
             hasArgumentWithName("sampleParameter1") shouldBeEqualTo true
@@ -99,8 +99,8 @@ class KoAnnotationDeclarationForKoArgumentProviderTest {
             hasArgumentsWithAllNames("sampleParameter1", "otherParameter") shouldBeEqualTo false
             hasArgument { it.value == "text" } shouldBeEqualTo true
             hasArgument { it.value == "other" } shouldBeEqualTo false
-            hasAllArguments { it.value.startsWith("t") } shouldBeEqualTo true
-            hasAllArguments { it.value.startsWith("k") } shouldBeEqualTo false
+            hasAllArguments { it.value?.startsWith("t") ?: false } shouldBeEqualTo true
+            hasAllArguments { it.value?.startsWith("k") ?: false } shouldBeEqualTo false
         }
     }
 

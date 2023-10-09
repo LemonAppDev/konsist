@@ -1,0 +1,4 @@
+open class SampleClass{
+    protected val sampleProperty: Boolean
+        protected get() = true
+}

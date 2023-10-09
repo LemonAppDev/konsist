@@ -16,7 +16,9 @@ class DependencyRulesCore : DependencyRules {
         checkStatusOfLayer(false, this, layer, *layers)
         checkCircularDependencies(this, layer, *layers)
 
-        allLayers = (allLayers + this + layer + layers).toMutableList()
+        allLayers = (allLayers + this + layer + layers)
+            .distinct()
+            .toMutableList()
 
         dependencies[this] = (dependencies.getOrDefault(this, setOf(this))) + layer + layers
         statuses[this] = Status.DEPEND_ON_LAYER
@@ -35,7 +37,9 @@ class DependencyRulesCore : DependencyRules {
         checkIfLayerHasTheSameValuesAsOtherLayer(this)
         checkStatusOfLayer(true, this)
 
-        allLayers += this
+        allLayers = (allLayers + this)
+            .distinct()
+            .toMutableList()
         dependencies[this] = setOf(this)
         statuses[this] = Status.DEPENDENT_ON_NOTHING
     }
@@ -75,9 +79,10 @@ class DependencyRulesCore : DependencyRules {
     }
 
     private fun checkCircularDependencies(layer: Layer, vararg layers: Layer) {
-        val allLayers = layers.map {
-            checkCircularDependenciesHelper(layer, it, emptyList(), emptyList())
-        }
+        val allLayers = layers
+            .map { checkCircularDependenciesHelper(layer, it, emptyList(), emptyList()) }
+            .distinct()
+            .toMutableList()
 
         val notEmpty = allLayers.firstOrNull { it.size > 2 }
 
@@ -128,7 +133,9 @@ class DependencyRulesCore : DependencyRules {
     }
 
     private fun checkIfLayerHasTheSameValuesAsOtherLayer(vararg layers: Layer) {
-        val list: MutableList<Layer> = allLayers.toMutableList()
+        val list: MutableList<Layer> = allLayers
+            .distinct()
+            .toMutableList()
 
         layers.forEach {
             val similarLayer = list.firstOrNull { layerAlreadyDefined ->

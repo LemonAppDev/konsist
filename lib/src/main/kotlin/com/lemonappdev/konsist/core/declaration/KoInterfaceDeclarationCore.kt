@@ -40,6 +40,7 @@ import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtClass
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtModifierListOwner
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class KoInterfaceDeclarationCore private constructor(
@@ -78,6 +79,8 @@ internal class KoInterfaceDeclarationCore private constructor(
     KoFunModifierProviderCore,
     KoSealedModifierProviderCore {
     override val ktAnnotated: KtAnnotated by lazy { ktClass }
+
+    override val ktModifierListOwner: KtModifierListOwner by lazy { ktClass }
 
     override val ktTypeParameterListOwner: KtTypeParameterListOwner by lazy { ktClass }
 

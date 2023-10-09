@@ -1,0 +1,4 @@
+class SampleClassText {
+    @Suppress("suppress-text")
+    class SampleClassWithIncorrectSuffix
+}

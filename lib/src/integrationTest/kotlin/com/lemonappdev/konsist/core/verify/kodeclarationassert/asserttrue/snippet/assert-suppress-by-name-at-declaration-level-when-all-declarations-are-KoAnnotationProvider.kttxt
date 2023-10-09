@@ -1,0 +1,4 @@
+class SampleClassText {
+    @Suppress("assert-suppress-by-name-at-declaration-level-when-all-declarations-are-KoAnnotationProvider")
+    class SampleClassWithIncorrectSuffix
+}

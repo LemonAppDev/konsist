@@ -1,4 +1,5 @@
-class SampleTopLevelClass {
+class SampleTopLevelClass() {
+    constructor(sampleParameter: Int): this()
     private class SampleNestedClass {
 
         private val sampleNestedProperty = ""
